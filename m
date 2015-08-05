@@ -1,42 +1,42 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9D30BE00AB2; Tue,  4 Aug 2015 18:03:43 -0700 (PDT)
+	id C5C36E00AB4; Tue,  4 Aug 2015 19:24:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17F3EE00A97
-	for <meta-ti@yoctoproject.org>; Tue,  4 Aug 2015 18:03:40 -0700 (PDT)
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CC7BE00AA2
+	for <meta-ti@yoctoproject.org>; Tue,  4 Aug 2015 19:24:05 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7513dlB005741
-	for <meta-ti@yoctoproject.org>; Tue, 4 Aug 2015 20:03:39 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7513dU1001159
-	for <meta-ti@yoctoproject.org>; Tue, 4 Aug 2015 20:03:39 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 4 Aug 2015 20:03:39 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t7513d4r001129	for <meta-ti@yoctoproject.org>;
-	Tue, 4 Aug 2015 20:03:39 -0500
-Date: Tue, 4 Aug 2015 21:03:39 -0400
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t752O4ID013944
+	for <meta-ti@yoctoproject.org>; Tue, 4 Aug 2015 21:24:04 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t752O403008688
+	for <meta-ti@yoctoproject.org>; Tue, 4 Aug 2015 21:24:04 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 4 Aug 2015 21:24:04 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t752O4Kr010469;
+	Tue, 4 Aug 2015 21:24:04 -0500
+Date: Tue, 4 Aug 2015 22:23:48 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1999148388.833.1438736619166.JavaMail.jenkins@puget>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150805022348.GU1040@edge>
+References: <1436274269-31734-1-git-send-email-j-stiffler@ti.com>
+	<55B79DB4.8070404@ti.com> <20150728191435.GK1040@edge>
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-08-04_21-00-51
+In-Reply-To: <20150728191435.GK1040@edge>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] ti-xdctools: Add version 3.31.02.38.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,207 +49,209 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2015 01:03:43 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_832_491279008.1438736619165"
+X-List-Received-Date: Wed, 05 Aug 2015 02:24:09 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-------=_Part_832_491279008.1438736619165
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Jake,
 
-<html>
-<head>
-<title>
-Status for 08/04/15
-</title>
-</head>
-<body>
+Will you resubmit this one with the necessary flags?
 
-<h2>Status for 08/04/15</h2>
-
-<h2>BUILD_ID: build-2015-08-04_21-02-02</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+-- 
+Denys
 
 
-------=_Part_832_491279008.1438736619165--
+On Tue, Jul 28, 2015 at 03:14:36PM -0400, Denys Dmytriyenko wrote:
+> I was holding it together with bios update patches.
+> 
+> BTW, this patch will also benefit from -C --find-copies-harder flags, as it 
+> moves majority of code from one file to another, basically clobbering the 
+> patch with unnecessary duplication in additions and deletions.
+> 
+> -- 
+> Denys
+> 
+> 
+> On Tue, Jul 28, 2015 at 11:20:20AM -0400, Jacob Stiffler wrote:
+> > Ping.
+> > 
+> > On 7/7/2015 9:04 AM, Jacob Stiffler wrote:
+> > >* This version adheres to the new "core" package format.
+> > >* Add the version-indepedent include file for the core packages
+> > >* Extract common information between the core and legacy packages
+> > >   into the ti-xdctools-common.inc file.
+> > >
+> > >Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> > >---
+> > >  recipes-ti/devtools/ti-xdctools-common.inc    |   54 +++++++++++++++++++++++++
+> > >  recipes-ti/devtools/ti-xdctools-core.inc      |    5 +++
+> > >  recipes-ti/devtools/ti-xdctools.inc           |   54 +------------------------
+> > >  recipes-ti/devtools/ti-xdctools_3.31.02.38.bb |    9 +++++
+> > >  4 files changed, 69 insertions(+), 53 deletions(-)
+> > >  create mode 100644 recipes-ti/devtools/ti-xdctools-common.inc
+> > >  create mode 100644 recipes-ti/devtools/ti-xdctools-core.inc
+> > >  create mode 100644 recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
+> > >
+> > >diff --git a/recipes-ti/devtools/ti-xdctools-common.inc b/recipes-ti/devtools/ti-xdctools-common.inc
+> > >new file mode 100644
+> > >index 0000000..2d5f2d7
+> > >--- /dev/null
+> > >+++ b/recipes-ti/devtools/ti-xdctools-common.inc
+> > >@@ -0,0 +1,54 @@
+> > >+DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
+> > >+HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
+> > >+SECTION = "devel"
+> > >+LICENSE = "BSD & GPLv2"
+> > >+
+> > >+require recipes-ti/includes/ti-paths.inc
+> > >+require recipes-ti/includes/ti-staging.inc
+> > >+
+> > >+do_install() {
+> > >+    install -d ${D}${XDC_INSTALL_DIR_RECIPE}
+> > >+    cp -pPrf ${S}/* ${D}${XDC_INSTALL_DIR_RECIPE}
+> > >+}
+> > >+
+> > >+INSANE_SKIP_${PN} = "installed-vs-shipped"
+> > >+
+> > >+# Prevent internal libs from getting picked up
+> > >+PRIVATE_LIBS = " \
+> > >+libncdb.so \
+> > >+libcdb.so \
+> > >+libjavaplugin_oji.so \
+> > >+libjavaplugin_jni.so \
+> > >+libjsound.so \
+> > >+libinstrument.so \
+> > >+libjawt.so \
+> > >+libzip.so \
+> > >+libjava_crw_demo.so \
+> > >+libjavaplugin_nscp_gcc29.so \
+> > >+libhprof.so \
+> > >+libcmm.so \
+> > >+libjdwp.so \
+> > >+libmlib_image.so \
+> > >+libjpeg.so \
+> > >+libverify.so \
+> > >+libjavaplugin_nscp.so \
+> > >+libmanagement.so \
+> > >+libunpack.so \
+> > >+librmi.so \
+> > >+libJdbcOdbc.so \
+> > >+libawt.so \
+> > >+libnet.so \
+> > >+libjaas_unix.so \
+> > >+libnio.so \
+> > >+libdcpr.so \
+> > >+libioser12.so \
+> > >+libjsoundalsa.so \
+> > >+libjava.so \
+> > >+libfontmanager.so \
+> > >+libdt_socket.so \
+> > >+libmawt.so \
+> > >+libjvm.so \
+> > >+libhpi.so \
+> > >+lib.so \
+> > >+libcairo.so.2 \
+> > >+"
+> > >diff --git a/recipes-ti/devtools/ti-xdctools-core.inc b/recipes-ti/devtools/ti-xdctools-core.inc
+> > >new file mode 100644
+> > >index 0000000..47f73b6
+> > >--- /dev/null
+> > >+++ b/recipes-ti/devtools/ti-xdctools-core.inc
+> > >@@ -0,0 +1,5 @@
+> > >+require ti-xdctools-common.inc
+> > >+
+> > >+S = "${WORKDIR}/xdctools_${PV}_core"
+> > >+
+> > >+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${PV}/exports/xdccore/xdctools_${PV}_core_linux.zip;name=xdczip"
+> > >diff --git a/recipes-ti/devtools/ti-xdctools.inc b/recipes-ti/devtools/ti-xdctools.inc
+> > >index 547a555..1415f83 100644
+> > >--- a/recipes-ti/devtools/ti-xdctools.inc
+> > >+++ b/recipes-ti/devtools/ti-xdctools.inc
+> > >@@ -1,10 +1,4 @@
+> > >-DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
+> > >-HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
+> > >-SECTION = "devel"
+> > >-LICENSE = "BSD & GPLv2"
+> > >-
+> > >-require ../includes/ti-paths.inc
+> > >-require ../includes/ti-staging.inc
+> > >+require ti-xdctools-common.inc
+> > >  require ../includes/ti-eula-unpack.inc
+> > >  S = "${WORKDIR}/xdctools_${PV}"
+> > >@@ -14,49 +8,3 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rt
+> > >  BINFILE="xdctools_setuplinux_${PV}.bin"
+> > >  TI_BIN_UNPK_CMDS="Y:workdir:Y"
+> > >  TI_BIN_UNPK_WDEXT="/ti"
+> > >-
+> > >-do_install() {
+> > >-    install -d ${D}${XDC_INSTALL_DIR_RECIPE}
+> > >-    cp -pPrf ${S}/* ${D}${XDC_INSTALL_DIR_RECIPE}
+> > >-}
+> > >-
+> > >-# Prevent internal libs from getting picked up
+> > >-PRIVATE_LIBS = " \
+> > >-libncdb.so \
+> > >-libcdb.so \
+> > >-libjavaplugin_oji.so \
+> > >-libjavaplugin_jni.so \
+> > >-libjsound.so \
+> > >-libinstrument.so \
+> > >-libjawt.so \
+> > >-libzip.so \
+> > >-libjava_crw_demo.so \
+> > >-libjavaplugin_nscp_gcc29.so \
+> > >-libhprof.so \
+> > >-libcmm.so \
+> > >-libjdwp.so \
+> > >-libmlib_image.so \
+> > >-libjpeg.so \
+> > >-libverify.so \
+> > >-libjavaplugin_nscp.so \
+> > >-libmanagement.so \
+> > >-libunpack.so \
+> > >-librmi.so \
+> > >-libJdbcOdbc.so \
+> > >-libawt.so \
+> > >-libnet.so \
+> > >-libjaas_unix.so \
+> > >-libnio.so \
+> > >-libdcpr.so \
+> > >-libioser12.so \
+> > >-libjsoundalsa.so \
+> > >-libjava.so \
+> > >-libfontmanager.so \
+> > >-libdt_socket.so \
+> > >-libmawt.so \
+> > >-libjvm.so \
+> > >-libhpi.so \
+> > >-lib.so \
+> > >-libcairo.so.2 \
+> > >-"
+> > >-
+> > >diff --git a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
+> > >new file mode 100644
+> > >index 0000000..5e970ee
+> > >--- /dev/null
+> > >+++ b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
+> > >@@ -0,0 +1,9 @@
+> > >+require ti-xdctools-core.inc
+> > >+
+> > >+PV = "3_31_02_38"
+> > >+PR = "r0"
+> > >+
+> > >+LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=9dbb0095cdb8b35508b344aa4f1de333"
+> > >+
+> > >+SRC_URI[xdczip.md5sum] = "c76b3d90c3e25d199765557e393d165b"
+> > >+SRC_URI[xdczip.sha256sum] = "c0e1f6911f2294bfb76471fac1a0ceac3e89c7eb1300f84d2571bf78cb62a7d2"
+> > 
+> > -- 
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
