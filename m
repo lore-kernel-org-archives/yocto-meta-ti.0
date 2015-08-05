@@ -1,42 +1,27 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C5C36E00AB4; Tue,  4 Aug 2015 19:24:09 -0700 (PDT)
+	id 0AE3BE00AC8; Tue,  4 Aug 2015 19:24:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CC7BE00AA2
-	for <meta-ti@yoctoproject.org>; Tue,  4 Aug 2015 19:24:05 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t752O4ID013944
-	for <meta-ti@yoctoproject.org>; Tue, 4 Aug 2015 21:24:04 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t752O403008688
-	for <meta-ti@yoctoproject.org>; Tue, 4 Aug 2015 21:24:04 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 4 Aug 2015 21:24:04 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t752O4Kr010469;
-	Tue, 4 Aug 2015 21:24:04 -0500
-Date: Tue, 4 Aug 2015 22:23:48 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <20150805022348.GU1040@edge>
-References: <1436274269-31734-1-git-send-email-j-stiffler@ti.com>
-	<55B79DB4.8070404@ti.com> <20150728191435.GK1040@edge>
-MIME-Version: 1.0
-In-Reply-To: <20150728191435.GK1040@edge>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ti-xdctools: Add version 3.31.02.38.
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+	*  2.5 TO_NO_BRKTS_PCNT To: misformatted + percentage
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7BB7E00AB2
+	for <meta-ti@yoctoproject.org>; Tue,  4 Aug 2015 19:24:48 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C5FE752A94; Wed,  5 Aug 2015 02:24:46 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150805022446.C5FE752A94@arago-project.org>
+Date: Wed,  5 Aug 2015 02:24:46 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : ti-cgt6x: Upgrade to version 8.0.3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,209 +34,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2015 02:24:09 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 05 Aug 2015 02:24:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Jake,
+Module: meta-ti
+Branch: daisy
+Commit: 524e33b66b9b1145da378fce7a1ffebf987108c3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=524e33b66b9b1145da378fce7a1ffebf987108c3
 
-Will you resubmit this one with the necessary flags?
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Aug  4 20:13:32 2015 +0000
 
--- 
-Denys
+ti-cgt6x: Upgrade to version 8.0.3
 
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-On Tue, Jul 28, 2015 at 03:14:36PM -0400, Denys Dmytriyenko wrote:
-> I was holding it together with bios update patches.
-> 
-> BTW, this patch will also benefit from -C --find-copies-harder flags, as it 
-> moves majority of code from one file to another, basically clobbering the 
-> patch with unnecessary duplication in additions and deletions.
-> 
-> -- 
-> Denys
-> 
-> 
-> On Tue, Jul 28, 2015 at 11:20:20AM -0400, Jacob Stiffler wrote:
-> > Ping.
-> > 
-> > On 7/7/2015 9:04 AM, Jacob Stiffler wrote:
-> > >* This version adheres to the new "core" package format.
-> > >* Add the version-indepedent include file for the core packages
-> > >* Extract common information between the core and legacy packages
-> > >   into the ti-xdctools-common.inc file.
-> > >
-> > >Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> > >---
-> > >  recipes-ti/devtools/ti-xdctools-common.inc    |   54 +++++++++++++++++++++++++
-> > >  recipes-ti/devtools/ti-xdctools-core.inc      |    5 +++
-> > >  recipes-ti/devtools/ti-xdctools.inc           |   54 +------------------------
-> > >  recipes-ti/devtools/ti-xdctools_3.31.02.38.bb |    9 +++++
-> > >  4 files changed, 69 insertions(+), 53 deletions(-)
-> > >  create mode 100644 recipes-ti/devtools/ti-xdctools-common.inc
-> > >  create mode 100644 recipes-ti/devtools/ti-xdctools-core.inc
-> > >  create mode 100644 recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-> > >
-> > >diff --git a/recipes-ti/devtools/ti-xdctools-common.inc b/recipes-ti/devtools/ti-xdctools-common.inc
-> > >new file mode 100644
-> > >index 0000000..2d5f2d7
-> > >--- /dev/null
-> > >+++ b/recipes-ti/devtools/ti-xdctools-common.inc
-> > >@@ -0,0 +1,54 @@
-> > >+DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
-> > >+HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
-> > >+SECTION = "devel"
-> > >+LICENSE = "BSD & GPLv2"
-> > >+
-> > >+require recipes-ti/includes/ti-paths.inc
-> > >+require recipes-ti/includes/ti-staging.inc
-> > >+
-> > >+do_install() {
-> > >+    install -d ${D}${XDC_INSTALL_DIR_RECIPE}
-> > >+    cp -pPrf ${S}/* ${D}${XDC_INSTALL_DIR_RECIPE}
-> > >+}
-> > >+
-> > >+INSANE_SKIP_${PN} = "installed-vs-shipped"
-> > >+
-> > >+# Prevent internal libs from getting picked up
-> > >+PRIVATE_LIBS = " \
-> > >+libncdb.so \
-> > >+libcdb.so \
-> > >+libjavaplugin_oji.so \
-> > >+libjavaplugin_jni.so \
-> > >+libjsound.so \
-> > >+libinstrument.so \
-> > >+libjawt.so \
-> > >+libzip.so \
-> > >+libjava_crw_demo.so \
-> > >+libjavaplugin_nscp_gcc29.so \
-> > >+libhprof.so \
-> > >+libcmm.so \
-> > >+libjdwp.so \
-> > >+libmlib_image.so \
-> > >+libjpeg.so \
-> > >+libverify.so \
-> > >+libjavaplugin_nscp.so \
-> > >+libmanagement.so \
-> > >+libunpack.so \
-> > >+librmi.so \
-> > >+libJdbcOdbc.so \
-> > >+libawt.so \
-> > >+libnet.so \
-> > >+libjaas_unix.so \
-> > >+libnio.so \
-> > >+libdcpr.so \
-> > >+libioser12.so \
-> > >+libjsoundalsa.so \
-> > >+libjava.so \
-> > >+libfontmanager.so \
-> > >+libdt_socket.so \
-> > >+libmawt.so \
-> > >+libjvm.so \
-> > >+libhpi.so \
-> > >+lib.so \
-> > >+libcairo.so.2 \
-> > >+"
-> > >diff --git a/recipes-ti/devtools/ti-xdctools-core.inc b/recipes-ti/devtools/ti-xdctools-core.inc
-> > >new file mode 100644
-> > >index 0000000..47f73b6
-> > >--- /dev/null
-> > >+++ b/recipes-ti/devtools/ti-xdctools-core.inc
-> > >@@ -0,0 +1,5 @@
-> > >+require ti-xdctools-common.inc
-> > >+
-> > >+S = "${WORKDIR}/xdctools_${PV}_core"
-> > >+
-> > >+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${PV}/exports/xdccore/xdctools_${PV}_core_linux.zip;name=xdczip"
-> > >diff --git a/recipes-ti/devtools/ti-xdctools.inc b/recipes-ti/devtools/ti-xdctools.inc
-> > >index 547a555..1415f83 100644
-> > >--- a/recipes-ti/devtools/ti-xdctools.inc
-> > >+++ b/recipes-ti/devtools/ti-xdctools.inc
-> > >@@ -1,10 +1,4 @@
-> > >-DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
-> > >-HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
-> > >-SECTION = "devel"
-> > >-LICENSE = "BSD & GPLv2"
-> > >-
-> > >-require ../includes/ti-paths.inc
-> > >-require ../includes/ti-staging.inc
-> > >+require ti-xdctools-common.inc
-> > >  require ../includes/ti-eula-unpack.inc
-> > >  S = "${WORKDIR}/xdctools_${PV}"
-> > >@@ -14,49 +8,3 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rt
-> > >  BINFILE="xdctools_setuplinux_${PV}.bin"
-> > >  TI_BIN_UNPK_CMDS="Y:workdir:Y"
-> > >  TI_BIN_UNPK_WDEXT="/ti"
-> > >-
-> > >-do_install() {
-> > >-    install -d ${D}${XDC_INSTALL_DIR_RECIPE}
-> > >-    cp -pPrf ${S}/* ${D}${XDC_INSTALL_DIR_RECIPE}
-> > >-}
-> > >-
-> > >-# Prevent internal libs from getting picked up
-> > >-PRIVATE_LIBS = " \
-> > >-libncdb.so \
-> > >-libcdb.so \
-> > >-libjavaplugin_oji.so \
-> > >-libjavaplugin_jni.so \
-> > >-libjsound.so \
-> > >-libinstrument.so \
-> > >-libjawt.so \
-> > >-libzip.so \
-> > >-libjava_crw_demo.so \
-> > >-libjavaplugin_nscp_gcc29.so \
-> > >-libhprof.so \
-> > >-libcmm.so \
-> > >-libjdwp.so \
-> > >-libmlib_image.so \
-> > >-libjpeg.so \
-> > >-libverify.so \
-> > >-libjavaplugin_nscp.so \
-> > >-libmanagement.so \
-> > >-libunpack.so \
-> > >-librmi.so \
-> > >-libJdbcOdbc.so \
-> > >-libawt.so \
-> > >-libnet.so \
-> > >-libjaas_unix.so \
-> > >-libnio.so \
-> > >-libdcpr.so \
-> > >-libioser12.so \
-> > >-libjsoundalsa.so \
-> > >-libjava.so \
-> > >-libfontmanager.so \
-> > >-libdt_socket.so \
-> > >-libmawt.so \
-> > >-libjvm.so \
-> > >-libhpi.so \
-> > >-lib.so \
-> > >-libcairo.so.2 \
-> > >-"
-> > >-
-> > >diff --git a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-> > >new file mode 100644
-> > >index 0000000..5e970ee
-> > >--- /dev/null
-> > >+++ b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-> > >@@ -0,0 +1,9 @@
-> > >+require ti-xdctools-core.inc
-> > >+
-> > >+PV = "3_31_02_38"
-> > >+PR = "r0"
-> > >+
-> > >+LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=9dbb0095cdb8b35508b344aa4f1de333"
-> > >+
-> > >+SRC_URI[xdczip.md5sum] = "c76b3d90c3e25d199765557e393d165b"
-> > >+SRC_URI[xdczip.sha256sum] = "c0e1f6911f2294bfb76471fac1a0ceac3e89c7eb1300f84d2571bf78cb62a7d2"
-> > 
-> > -- 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+---
+
+ .../{ti-cgt6x_8.0.0.bb => ti-cgt6x_8.0.3.bb}       |   13 +++++++------
+ 1 files changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb b/recipes-ti/devtools/ti-cgt6x_8.0.3.bb
+similarity index 88%
+rename from recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+rename to recipes-ti/devtools/ti-cgt6x_8.0.3.bb
+index 2353ebd..23866d1 100644
+--- a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
++++ b/recipes-ti/devtools/ti-cgt6x_8.0.3.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/LICENSE.txt;md5=b6311962635a4f1563
+ LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
+ 
+ PE = "1"
+-PR = "r1"
+ 
+ require ../includes/ti-unpack.inc
+ 
+@@ -36,13 +35,13 @@ TI_BIN_UNPK_CMDS = ""
+ BINFILE_class-target = "ti_cgt_c6000_${PV}_armlinuxa8hf_busybox_installer.sh"
+ BINFILE_NAME_class-target = "cgt6x_arm_installer"
+ 
+-SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/Production/${PV}/${BINFILE};name=${BINFILE_NAME}"
++SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/${PV}/${BINFILE};name=${BINFILE_NAME}"
+ 
+-SRC_URI[cgt6x_x86_installer.md5sum] = "ff83845672090bf0a669bba7b0cadf56"
+-SRC_URI[cgt6x_x86_installer.sha256sum] = "297f77a00b211b3c4afa23afe7319e98b2400b5d2eb0f8c8cfe3ef7d7aa4d709"
++SRC_URI[cgt6x_x86_installer.md5sum] = "cac177c3b94bf308d5198230739639b4"
++SRC_URI[cgt6x_x86_installer.sha256sum] = "9c9ebab9f29cfd55f7df1df888ede66da3c2ccc0440d602ef34564305f02b9fb"
+ 
+-SRC_URI[cgt6x_arm_installer.md5sum] = "13961e5a1da4c310ea8c8707ab981fff"
+-SRC_URI[cgt6x_arm_installer.sha256sum] = "cb24ae05baffbd44d6dedba68743be09fd883e04403e069c437c486533d8fffb"
++SRC_URI[cgt6x_arm_installer.md5sum] = "7966f5ad2f055c3462ac6c3c13453ed7"
++SRC_URI[cgt6x_arm_installer.sha256sum] = "f435f886610fc7df585a6ef898494e621b3bfa17f20658436f5e63af86a9a987"
+ 
+ do_install() {
+     install -d ${D}${bindir}
+@@ -110,4 +109,6 @@ FILES_${PN} += "${datadir}/ti/*"
+ 
+ FILES_${PN}-dbg += "${datadir}/ti/cgt-c6x/bin/.debug"
+ 
++INSANE_SKIP_${PN} += "staticdev"
++
+ BBCLASSEXTEND = "native nativesdk"
+
 
