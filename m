@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 413EEE00AA2; Tue,  4 Aug 2015 19:24:53 -0700 (PDT)
+	id 430FFE00AB7; Tue,  4 Aug 2015 19:24:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BCF08E00AB7
-	for <meta-ti@yoctoproject.org>; Tue,  4 Aug 2015 19:24:49 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA8EAE00AB4
+	for <meta-ti@yoctoproject.org>; Tue,  4 Aug 2015 19:24:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 778CE52ABA; Wed,  5 Aug 2015 02:24:48 +0000 (UTC)
+	id 56CAE52AB8; Wed,  5 Aug 2015 02:24:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150805022448.778CE52ABA@arago-project.org>
-Date: Wed,  5 Aug 2015 02:24:48 +0000 (UTC)
+Message-Id: <20150805022447.56CAE52AB8@arago-project.org>
+Date: Wed,  5 Aug 2015 02:24:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : ti-sysbios: Update version to 6.41.04.54
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 05 Aug 2015 02:24:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 40aaf1f96890db20e35c6a7e66fea4243d987d75
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=40aaf1f96890db20e35c6a7e66fea4243d987d75
+Branch: fido
+Commit: e74df5d6247304657a3705a11a44718b91de970c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e74df5d6247304657a3705a11a44718b91de970c
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Tue Aug  4 21:17:10 2015 +0000
