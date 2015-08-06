@@ -1,42 +1,49 @@
-Return-Path: <denys@ti.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2174E00A71; Wed,  5 Aug 2015 18:04:05 -0700 (PDT)
+	id D99AEE00A73; Wed,  5 Aug 2015 19:47:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (ankur.tyagi85[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.218.51 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 515C0E009D7
-	for <meta-ti@yoctoproject.org>; Wed,  5 Aug 2015 18:04:01 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t76140SM012141
-	for <meta-ti@yoctoproject.org>; Wed, 5 Aug 2015 20:04:00 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t76140Aa006414
-	for <meta-ti@yoctoproject.org>; Wed, 5 Aug 2015 20:04:00 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 5 Aug 2015 20:03:59 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t7613xVs006268	for <meta-ti@yoctoproject.org>;
-	Wed, 5 Aug 2015 20:03:59 -0500
-Date: Wed, 5 Aug 2015 21:03:59 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <825916460.841.1438823039478.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
+	[209.85.218.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 87AAFE00A53
+	for <meta-ti@yoctoproject.org>; Wed,  5 Aug 2015 19:47:25 -0700 (PDT)
+Received: by oio137 with SMTP id 137so29447063oio.0
+	for <meta-ti@yoctoproject.org>; Wed, 05 Aug 2015 19:47:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=hxf2jF8vPVoBmt5O353gdohLRJkzhviUxztjQL6eEmo=;
+	b=vnm3NMcYnXVDfpf6+3REGPxw0lraC8hqsTxYL8Jc52VogkTp1EyMg3nigpdWSgmH6Y
+	cr15NxZmAk91+gZw3rH5igkGZ/nCQdhYkrOB8MuPBaTL0tNGKseYXwwtVhfapsBXoE4P
+	u7dNT7/lT3++2a3DTp9mygq2bGv3hi1Yg510ZHIN4V0ajNog6C8UWXRG5NUxHZF2npou
+	H+qdht1rUVo8aC/njazDqrWabqtAYeFghH3vORZMEVaJPymgJp1D00N/UIn5NGdqaL8d
+	mR6z4mKnmrKNTikKxvgXpkjlVlbiK3xz/mLBdEX79rFO/+8TNP+zpS0m8GsxaFjhV0V3
+	uRDg==
+X-Received: by 10.202.206.84 with SMTP id e81mr10738935oig.132.1438829244426; 
+	Wed, 05 Aug 2015 19:47:24 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-08-05_21-00-51
+Received: by 10.202.93.69 with HTTP; Wed, 5 Aug 2015 19:47:04 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Thu, 6 Aug 2015 14:47:04 +1200
+Message-ID: <CADySD0F4suq9YcgUy8HqzH6cYs1j4RZtmwfNTSvWTd+f872LKA@mail.gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: omap3-sgx-modules-5.01.01.xx ONLY supports hardfp mode for now
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,207 +56,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 01:04:05 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_840_1404531812.1438823039476"
+X-List-Received-Date: Thu, 06 Aug 2015 02:47:28 -0000
+Content-Type: multipart/alternative; boundary=001a113ad99c01b0f9051c9b8a29
 
-------=_Part_840_1404531812.1438823039476
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a113ad99c01b0f9051c9b8a29
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 08/05/15
-</title>
-</head>
-<body>
+Hi,
 
-<h2>Status for 08/05/15</h2>
+I am using TI AM335x-EVM kit and while building image using
+"arago-daisy-config.txt", I saw this warning :
 
-<h2>BUILD_ID: build-2015-08-05_21-02-01</h2>
+omap3-sgx-modules-5.01.01.02 ONLY supports hardfp mode for now
+omap3-sgx-modules-5.01.01.01 ONLY supports hardfp mode for now
 
-<h2>Clean Build: false</h2>
+and TUNE_FEATUREis "vfp"
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+Does that mean GPU is not getting used anymore ?
+I am using QT5 with eglfs platform and need GPU support for performance.
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+Please clarify the situation.
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+Thanks
+Ankur
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+--001a113ad99c01b0f9051c9b8a29
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-</body>
-</html>
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:georgia,=
+serif;font-size:small;color:#333399">Hi,</div><div class=3D"gmail_default" =
+style=3D"font-family:georgia,serif;font-size:small;color:#333399"><br></div=
+><div class=3D"gmail_default" style=3D"font-family:georgia,serif;font-size:=
+small;color:#333399">I am using TI AM335x-EVM kit and while building image =
+using &quot;arago-daisy-config.txt&quot;, I saw this warning :</div><div cl=
+ass=3D"gmail_default" style=3D"font-family:georgia,serif;font-size:small;co=
+lor:#333399"><br></div><div class=3D"gmail_default" style=3D"font-family:ge=
+orgia,serif;font-size:small;color:#333399">omap3-sgx-modules-5.01.01.02 ONL=
+Y supports hardfp mode for now<br></div><div class=3D"gmail_default" style=
+=3D"font-family:georgia,serif;font-size:small;color:#333399">omap3-sgx-modu=
+les-5.01.01.01 ONLY supports hardfp mode for now</div><div class=3D"gmail_d=
+efault" style=3D"font-family:georgia,serif;font-size:small;color:#333399"><=
+br></div><div class=3D"gmail_default" style=3D"font-family:georgia,serif;fo=
+nt-size:small;color:#333399">and TUNE_FEATUREis &quot;vfp&quot;</div><div c=
+lass=3D"gmail_default" style=3D"font-family:georgia,serif;font-size:small;c=
+olor:#333399"><br></div><div class=3D"gmail_default" style=3D"font-family:g=
+eorgia,serif;font-size:small;color:#333399">Does that mean GPU is not getti=
+ng used anymore ?</div><div class=3D"gmail_default" style=3D"font-family:ge=
+orgia,serif;font-size:small;color:#333399">I am using QT5 with eglfs platfo=
+rm and need GPU support for performance.</div><div class=3D"gmail_default" =
+style=3D"font-family:georgia,serif;font-size:small;color:#333399"><br></div=
+><div class=3D"gmail_default" style=3D"font-family:georgia,serif;font-size:=
+small;color:#333399">Please clarify the situation.</div><div class=3D"gmail=
+_default" style=3D"font-family:georgia,serif;font-size:small;color:#333399"=
+><br></div><div class=3D"gmail_default" style=3D"font-family:georgia,serif;=
+font-size:small;color:#333399">Thanks</div><div class=3D"gmail_default" sty=
+le=3D"font-family:georgia,serif;font-size:small;color:#333399">Ankur</div>
+</div>
 
-
-------=_Part_840_1404531812.1438823039476--
+--001a113ad99c01b0f9051c9b8a29--
