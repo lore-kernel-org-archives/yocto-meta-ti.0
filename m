@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 32F52E00A7D; Fri,  7 Aug 2015 14:47:19 -0700 (PDT)
+	id 33D6AE00A5B; Fri,  7 Aug 2015 14:47:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0BA46E00A5B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0CF07E00A6C
 	for <meta-ti@yoctoproject.org>; Fri,  7 Aug 2015 14:47:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5D4AD52A21; Fri,  7 Aug 2015 21:47:11 +0000 (UTC)
+	id 62D8C52987; Fri,  7 Aug 2015 21:47:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150807214711.5D4AD52A21@arago-project.org>
+Message-Id: <20150807214711.62D8C52987@arago-project.org>
 Date: Fri,  7 Aug 2015 21:47:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging, keystone.inc: update, add keystone support to staging kernel
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 07 Aug 2015 21:47:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: ed6de54533fc13faad9996df912a2f07fc78be2e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed6de54533fc13faad9996df912a2f07fc78be2e
+Branch: fido
+Commit: 0223434735e1d3dc289379ef15c6ab0c1d75cb0e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0223434735e1d3dc289379ef15c6ab0c1d75cb0e
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Aug  8 03:12:12 2015 +0000
