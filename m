@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3379AE00A71; Fri,  7 Aug 2015 14:12:41 -0700 (PDT)
+	id 32F52E00A7D; Fri,  7 Aug 2015 14:47:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.23 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07139E00A5B
-	for <meta-ti@yoctoproject.org>; Fri,  7 Aug 2015 14:12:36 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173023.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NSQ00KBIDKCKG40@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 07 Aug 2015 16:12:17 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
-	a=sozttTNsAAAA:8	a=58weLiRpcdHt3V6m1-kA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C7892161B47;	Fri,
-	7 Aug 2015 17:12:12 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0BA46E00A5B
+	for <meta-ti@yoctoproject.org>; Fri,  7 Aug 2015 14:47:11 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 5D4AD52A21; Fri,  7 Aug 2015 21:47:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 07 Aug 2015 17:12:12 -0400
-Message-id: <1438981932-12002-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [fido/master][PATCH] linux-ti-staging, keystone.inc: update, add keystone support to staging kernel
+Message-Id: <20150807214711.5D4AD52A21@arago-project.org>
+Date: Fri,  7 Aug 2015 21:47:11 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging, keystone.inc: update, add keystone support to staging kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,19 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Aug 2015 21:12:41 -0000
+X-List-Received-Date: Fri, 07 Aug 2015 21:47:19 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: ed6de54533fc13faad9996df912a2f07fc78be2e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed6de54533fc13faad9996df912a2f07fc78be2e
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Aug  8 03:12:12 2015 +0000
+
+linux-ti-staging, keystone.inc: update, add keystone support to staging kernel
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/machine/include/keystone.inc                             |  6 +++---
- .../linux/linux-ti-staging-4.1/keystone/configs/systest       |  1 +
- recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig  |  1 +
- recipes-kernel/linux/linux-ti-staging_4.1.bb                  | 11 +++++++----
+
+ conf/machine/include/keystone.inc                  |    6 +++---
+ .../linux-ti-staging-4.1/keystone/configs/systest  |    1 +
+ .../linux/linux-ti-staging-4.1/keystone/defconfig  |    1 +
+ recipes-kernel/linux/linux-ti-staging_4.1.bb       |   11 +++++++----
  4 files changed, 12 insertions(+), 7 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-ti-staging-4.1/keystone/configs/systest
- create mode 100644 recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig
 
 diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
 index 820fe12..7920447 100644
@@ -127,7 +124,5 @@ index 67fba2c..f912d57 100644
  PR = "${MACHINE_KERNEL_PR}"
  
  KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-2.2.0
 
 
