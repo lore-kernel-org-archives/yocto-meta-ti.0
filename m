@@ -1,50 +1,42 @@
-Return-Path: <srinivasan.rns@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 238E1E00A7D; Sat,  8 Aug 2015 02:18:14 -0700 (PDT)
+	id E44A6E009BC; Sat,  8 Aug 2015 18:03:46 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (srinivasan.rns[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.178 listed in list.dnswl.org]
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D602CE0099A
-	for <meta-ti@yoctoproject.org>; Sat,  8 Aug 2015 02:18:10 -0700 (PDT)
-Received: by ioeg141 with SMTP id g141so131809215ioe.3
-	for <meta-ti@yoctoproject.org>; Sat, 08 Aug 2015 02:18:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=dnEV+AU8DJr8/YU191iPETLh0pkBcqI8fs2QQ1/C2kU=;
-	b=mWH8kNT/Q5nMuUXUSvKIJAMu83HTWI80sb/B/xol7j3qfjTzeow6BfM/mksC1+6ihn
-	oFsu1K/+WcBwZNP1QIt8g6oYYZbocg5Id7ChaNxoSf9Yu+xREYjArmPFN6cjbyHIDGBz
-	n/jZfXZ5GAJVMk+NSnVHRRNTciJ8PN3mJSjRsL4tFsy5y0onI/jh4bqniBAZFJZHmqSI
-	IQpbAGPcyA6mVv0YFbJrad2uWaq3bUOsjwohf60GLg0MCdFUisLY0+OPVxvko7VGNZPa
-	76sf2aJOdwZtxk4uf9/92i+lu52OTYc956O9MuXUG0qyDW9/0itkcTNxIee4E2+bukGx
-	Mdag==
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6749EE003D7
+	for <meta-ti@yoctoproject.org>; Sat,  8 Aug 2015 18:03:41 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7913e5Y003394
+	for <meta-ti@yoctoproject.org>; Sat, 8 Aug 2015 20:03:40 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7913eLb020307
+	for <meta-ti@yoctoproject.org>; Sat, 8 Aug 2015 20:03:40 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Sat, 8 Aug 2015 20:03:40 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t7913eZ0007190	for <meta-ti@yoctoproject.org>;
+	Sat, 8 Aug 2015 20:03:40 -0500
+Date: Sat, 8 Aug 2015 21:03:40 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1264939816.861.1439082220285.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.107.170.212 with SMTP id g81mr11749985ioj.79.1439025489709; 
-	Sat, 08 Aug 2015 02:18:09 -0700 (PDT)
-Received: by 10.36.64.142 with HTTP; Sat, 8 Aug 2015 02:18:09 -0700 (PDT)
-Date: Sat, 8 Aug 2015 14:48:09 +0530
-Message-ID: <CAFsTbWc-hJV7M5zWhQbxAkM3v3zihxNAPvBBuA=Wj+76_qdtKw@mail.gmail.com>
-From: srinivasan <srinivasan.rns@gmail.com>
-To: meta-ti@yoctoproject.org, meta-arago@arago-project.org, 
-	"srinivasan.s" <srinivasan.s@tataelxsi.co.in>
-Subject: Alsa related configuration & libraries from ti sdk 7 to ti sdk 8
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-08-08_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,147 +49,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Aug 2015 09:18:14 -0000
-Content-Type: multipart/alternative; boundary=001a11425b70231046051cc93bec
+X-List-Received-Date: Sun, 09 Aug 2015 01:03:47 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_860_1951682642.1439082220270"
 
---001a11425b70231046051cc93bec
-Content-Type: text/plain; charset=UTF-8
+------=_Part_860_1951682642.1439082220270
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Dear Meta Ti community,
+<html>
+<head>
+<title>
+Status for 08/08/15
+</title>
+</head>
+<body>
 
-Am trying to run the voip calls with ti sdk 8 BSP's it doesn't work
-consistently
+<h2>Status for 08/08/15</h2>
 
-But when I move *ti sdk 8 kernel with ti sdk 7 rootfs, *it works
-consistently
+<h2>BUILD_ID: build-2015-08-08_21-02-01</h2>
 
-Now am planning to replace all the alsa related configuration files &
-libraries with ti sdk 7 rootfs in ti sdk 8 rootfs
+<h2>Clean Build: false</h2>
 
-Could anybody please let me know what are all alsa related stuffs that can
-be replaced from ti sdk 7 to ti sdk 8 rootfs
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-Could anybody please list the names of alsa related configurations & the
-names of the libraries (along with their paths) & anyother alsa related
-stuffs in rootfs that can be moved from ti sdk 7 to ti sdk 8
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
-In order to get voip calls working consistently
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
-Could anybody please provide any inputs w.r.t the above query ie., am
-planning to copy all audio & alsa related configuration from ti sdk 7
-rootfs to ti sdk 8 rootfs
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
-*Could you please let me know is there any thing apart from the below needs
-to copied (audio/alsa related) from ti sdk 7 rootfs to ti sdk 8 rootfs*
+</body>
+</html>
 
-1. AlSA configuration files
 
-usr/share/alsa
-
-2.
-/usr/lib/libasound.la
-
-/usr/lib/libasound.so
-
-/usr/lib/alsa-lib/smixer/smixer-ac97.la
-
-/usr/lib/alsa-lib/smixer/smixer-ac97.so
-
-/usr/lib/alsa-lib/smixer/smixer-hda.la
-
-/usr/lib/alsa-lib/smixer/smixer-hda.so
-
-/usr/lib/alsa-lib/smixer/smixer-sbase.la
-
-/usr/lib/alsa-lib/smixer/smixer-sbase.so
-
-Kindly do the needful as early as possible
-
-Awaiting for your replies
-
-Many Thanks in advance
-
---001a11425b70231046051cc93bec
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><p style=3D"margin:0px 0px 1.5em;line-height:1.35em;font-s=
-ize:14px;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetic=
-a,Arial,sans-serif">Dear Meta Ti=C2=A0community,</p><p style=3D"margin:1.5e=
-m 0px;line-height:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#3=
-9;Source Sans Pro&#39;,Helvetica,Arial,sans-serif">Am trying to run the voi=
-p calls with ti sdk 8 BSP&#39;s it doesn&#39;t work consistently</p><p styl=
-e=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px;color:rgb(85,85,85)=
-;font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,sans-serif">But when=
- I move=C2=A0<b>ti sdk 8 kernel with ti sdk 7 rootfs,=C2=A0</b>it works con=
-sistently</p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px=
-;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,=
-sans-serif">Now am planning to replace all the alsa related configuration f=
-iles &amp; libraries with ti sdk 7 rootfs in ti sdk 8 rootfs</p><p style=3D=
-"margin:1.5em 0px;line-height:1.35em;font-size:14px;color:rgb(85,85,85);fon=
-t-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,sans-serif">Could anybod=
-y please let me know what are all alsa related stuffs that can be replaced =
-from ti sdk 7 to ti sdk 8 rootfs</p><p style=3D"margin:1.5em 0px;line-heigh=
-t:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans Pr=
-o&#39;,Helvetica,Arial,sans-serif">Could anybody please list the names of a=
-lsa related configurations &amp; the names of the libraries (along with the=
-ir paths) &amp; anyother alsa related stuffs in rootfs that can be moved fr=
-om ti sdk 7 to ti sdk 8</p><p style=3D"margin:1.5em 0px;line-height:1.35em;=
-font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,He=
-lvetica,Arial,sans-serif"><span style=3D"line-height:1.35em">In order to ge=
-t voip calls working consistently</span><br></p><p style=3D"margin:1.5em 0p=
-x;line-height:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;So=
-urce Sans Pro&#39;,Helvetica,Arial,sans-serif"><span style=3D"font-size:12p=
-x">Could anybody please provide any inputs w.r.t the above query ie., am pl=
-anning to copy all audio &amp; alsa related configuration from ti sdk 7 roo=
-tfs to ti sdk 8 rootfs</span></p><p style=3D"margin:1.5em 0px;line-height:1=
-.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#=
-39;,Helvetica,Arial,sans-serif"><b>Could you please let me know is there an=
-y thing apart from the below needs to copied (audio/alsa related) from ti s=
-dk 7 rootfs to ti sdk 8 rootfs</b></p><p style=3D"margin:1.5em 0px;line-hei=
-ght:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans =
-Pro&#39;,Helvetica,Arial,sans-serif"></p><p style=3D"margin:1.5em 0px;line-=
-height:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sa=
-ns Pro&#39;,Helvetica,Arial,sans-serif">1. AlSA configuration files</p><p s=
-tyle=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px;color:rgb(85,85,=
-85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,sans-serif">usr/s=
-hare/alsa</p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px=
-;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,=
-sans-serif"></p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:1=
-4px;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Ari=
-al,sans-serif">2.=C2=A0<br>/usr/lib/<a href=3D"http://libasound.la">libasou=
-nd.la</a></p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px=
-;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,=
-sans-serif">/usr/lib/libasound.so</p><p style=3D"margin:1.5em 0px;line-heig=
-ht:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans P=
-ro&#39;,Helvetica,Arial,sans-serif">/usr/lib/alsa-lib/smixer/<a href=3D"htt=
-p://smixer-ac97.la">smixer-ac97.la</a></p><p style=3D"margin:1.5em 0px;line=
--height:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source S=
-ans Pro&#39;,Helvetica,Arial,sans-serif">/usr/lib/alsa-lib/smixer/smixer-ac=
-97.so</p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px;col=
-or:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,sans=
--serif">/usr/lib/alsa-lib/smixer/<a href=3D"http://smixer-hda.la">smixer-hd=
-a.la</a></p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px;=
-color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,s=
-ans-serif">/usr/lib/alsa-lib/smixer/smixer-hda.so</p><p style=3D"margin:1.5=
-em 0px;line-height:1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#=
-39;Source Sans Pro&#39;,Helvetica,Arial,sans-serif">/usr/lib/alsa-lib/smixe=
-r/<a href=3D"http://smixer-sbase.la">smixer-sbase.la</a></p><p style=3D"mar=
-gin:1.5em 0px;line-height:1.35em;font-size:14px;color:rgb(85,85,85);font-fa=
-mily:&#39;Source Sans Pro&#39;,Helvetica,Arial,sans-serif">/usr/lib/alsa-li=
-b/smixer/smixer-sbase.so</p><p style=3D"margin:1.5em 0px;line-height:1.35em=
-;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,H=
-elvetica,Arial,sans-serif"></p><p style=3D"margin:1.5em 0px;line-height:1.3=
-5em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39=
-;,Helvetica,Arial,sans-serif"></p><p style=3D"margin:1.5em 0px;line-height:=
-1.35em;font-size:14px;color:rgb(85,85,85);font-family:&#39;Source Sans Pro&=
-#39;,Helvetica,Arial,sans-serif">Kindly do the needful as early as possible=
-</p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px;color:rg=
-b(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,sans-seri=
-f">Awaiting for your replies</p><p style=3D"margin-top:0px;margin-bottom:0p=
-x;color:rgb(0,0,0);font-family:Calibri,Arial,Helvetica,sans-serif;font-size=
-:16px"></p><p style=3D"margin:1.5em 0px;line-height:1.35em;font-size:14px;c=
-olor:rgb(85,85,85);font-family:&#39;Source Sans Pro&#39;,Helvetica,Arial,sa=
-ns-serif">Many Thanks in advance</p></div>
-
---001a11425b70231046051cc93bec--
+------=_Part_860_1951682642.1439082220270--
