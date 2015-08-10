@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 701E2E00ACF; Mon, 10 Aug 2015 10:56:37 -0700 (PDT)
+	id EAC92E00A90; Mon, 10 Aug 2015 11:54:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D276BE00A7D
-	for <meta-ti@yoctoproject.org>; Mon, 10 Aug 2015 10:56:32 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 8D9A452A61; Mon, 10 Aug 2015 17:56:32 +0000 (UTC)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.25 listed in list.dnswl.org]
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C60E9E00A7D
+	for <meta-ti@yoctoproject.org>; Mon, 10 Aug 2015 11:54:44 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173025.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NSV008Z9R6C2M10@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 10 Aug 2015 13:54:17 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
+	a=sozttTNsAAAA:8	a=ts29Bc1tJi4Rltub79QA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 157BD161B6C;	Mon,
+	10 Aug 2015 14:54:12 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20150810175632.8D9A452A61@arago-project.org>
-Date: Mon, 10 Aug 2015 17:56:32 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with latest merges
+Date: Mon, 10 Aug 2015 14:54:11 -0400
+Message-id: <1439232851-3036-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [master/fido][PATCH] cuia: don't call clean from do_compile, do_configure takes care of that
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +45,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2015 17:56:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 10 Aug 2015 18:54:50 -0000
 
-Module: meta-ti
-Branch: fido
-Commit: 45483f74326b1007c804f41fe33d5569995c7cfe
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=45483f74326b1007c804f41fe33d5569995c7cfe
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Aug 10 23:48:56 2015 +0000
-
-linux-ti-staging: update with latest merges
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/cuia/cuia_1.0.0.13.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index f912d57..87ed365 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -50,11 +50,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/cuia/cuia_1.0.0.13.bb b/recipes-bsp/cuia/cuia_1.0.0.13.bb
+index 42154d2..a9024d2 100644
+--- a/recipes-bsp/cuia/cuia_1.0.0.13.bb
++++ b/recipes-bsp/cuia/cuia_1.0.0.13.bb
+@@ -13,7 +13,6 @@ S = "${WORKDIR}/cuia_${CUIA_PV}${CUIA_PVExtra}"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ do_compile () {
+ 	cd ${S}
+-	oe_runmake clean
+ 	oe_runmake all
+ }
  
--SRCREV = "fcd02dfa3a0aeec916697c15ff7652e445733950"
-+SRCREV = "c3b46ef249a8d40552d0754dbe0e1f86a10c25c5"
- PV = "4.1.4+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-- 
+2.2.0
 
 
