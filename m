@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B24FAE00A81; Mon, 10 Aug 2015 10:10:24 -0700 (PDT)
+	id 206E6E00A7D; Mon, 10 Aug 2015 10:14:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05440E00A7B
-	for <meta-ti@yoctoproject.org>; Mon, 10 Aug 2015 10:10:21 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B435E009C3
+	for <meta-ti@yoctoproject.org>; Mon, 10 Aug 2015 10:14:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EBE3052A86; Mon, 10 Aug 2015 17:10:20 +0000 (UTC)
+	id 1953E52A96; Mon, 10 Aug 2015 17:14:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150810171020.EBE3052A86@arago-project.org>
-Date: Mon, 10 Aug 2015 17:10:20 +0000 (UTC)
+Message-Id: <20150810171427.1953E52A96@arago-project.org>
+Date: Mon, 10 Aug 2015 17:14:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : ti-xdctools: Add version 3.31.02.38.
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,16 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2015 17:10:24 -0000
+X-List-Received-Date: Mon, 10 Aug 2015 17:14:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 616ac8954257c76d77cedf17988bd7336f1272c1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=616ac8954257c76d77cedf17988bd7336f1272c1
+Branch: fido
+Commit: cc7d795b0828a8c56a35f8628f7d5daa2a4d7cd6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cc7d795b0828a8c56a35f8628f7d5daa2a4d7cd6
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jul  7 19:04:29 2015 +0000
+Date:   Wed Aug  5 17:04:29 2015 +0000
 
 ti-xdctools: Add version 3.31.02.38.
 
