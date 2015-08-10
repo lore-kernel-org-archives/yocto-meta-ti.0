@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D4FDEE00A7D; Mon, 10 Aug 2015 10:49:05 -0700 (PDT)
+	id 80011E00A84; Mon, 10 Aug 2015 10:56:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2AFF3E009C3
-	for <meta-ti@yoctoproject.org>; Mon, 10 Aug 2015 10:49:00 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NSV003SHO5K0SE0@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 10 Aug 2015 12:48:57 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
-	a=sozttTNsAAAA:8	a=lNLbqB1nbMv5Kq3l_bEA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 56706161B50;	Mon,
-	10 Aug 2015 13:48:56 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A656E00A7B
+	for <meta-ti@yoctoproject.org>; Mon, 10 Aug 2015 10:56:25 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 10C9D52A61; Mon, 10 Aug 2015 17:56:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 10 Aug 2015 13:48:56 -0400
-Message-id: <1439228936-18066-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] linux-ti-staging: update with latest merges
+Message-Id: <20150810175625.10C9D52A61@arago-project.org>
+Date: Mon, 10 Aug 2015 17:56:25 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update with latest merges
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2015 17:49:05 -0000
+X-List-Received-Date: Mon, 10 Aug 2015 17:56:28 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 65eff2515a7d8fd4bb1f69c1d5d517a7bd4086b7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=65eff2515a7d8fd4bb1f69c1d5d517a7bd4086b7
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Aug 10 23:48:56 2015 +0000
+
+linux-ti-staging: update with latest merges
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/linux-ti-staging_4.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
 index f912d57..87ed365 100644
@@ -72,7 +71,5 @@ index f912d57..87ed365 100644
  PR = "${MACHINE_KERNEL_PR}"
  
  KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-2.2.0
 
 
