@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AF672E00A5B; Tue, 11 Aug 2015 20:33:35 -0700 (PDT)
+	id D203EE00A92; Tue, 11 Aug 2015 20:33:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01DDDE00947
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03EE5E009C3
 	for <meta-ti@yoctoproject.org>; Tue, 11 Aug 2015 20:33:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A719552A67; Wed, 12 Aug 2015 03:33:27 +0000 (UTC)
+	id 9109152A7D; Wed, 12 Aug 2015 03:33:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150812033327.A719552A67@arago-project.org>
+Message-Id: <20150812033327.9109152A7D@arago-project.org>
 Date: Wed, 12 Aug 2015 03:33:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : cuia: revert to clean in do_compile, disable automatic in do_configure
+Subject: Denys Dmytriyenko : kselftests: add 4.1 version of Kernel Selftest suite
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,44 +33,117 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 03:33:35 -0000
+X-List-Received-Date: Wed, 12 Aug 2015 03:33:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f8feacf2d2a2e8948a5aeac109f3f2e8deaf7255
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f8feacf2d2a2e8948a5aeac109f3f2e8deaf7255
+Commit: f55ca0fc55ce72ea5b55527f6a2c67a989b7740d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f55ca0fc55ce72ea5b55527f6a2c67a989b7740d
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Aug 12 06:13:22 2015 +0000
+Date:   Wed Aug 12 05:28:58 2015 +0000
 
-cuia: revert to clean in do_compile, disable automatic in do_configure
-
-Need to unconditionally clean the sources before building the first time,
-due to wrong binaries present. But calling clean twice also causes failure.
+kselftests: add 4.1 version of Kernel Selftest suite
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cuia/cuia_1.0.0.13.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ recipes-kernel/kselftests/kselftests_4.1.bb |   86 +++++++++++++++++++++++++++
+ 1 files changed, 86 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/cuia/cuia_1.0.0.13.bb b/recipes-bsp/cuia/cuia_1.0.0.13.bb
-index a9024d2..e048f6a 100644
---- a/recipes-bsp/cuia/cuia_1.0.0.13.bb
-+++ b/recipes-bsp/cuia/cuia_1.0.0.13.bb
-@@ -11,8 +11,11 @@ SRC_URI[cuia.sha256sum] = "f16d138a9146fdc7d52cba77bd30596da65835f6ffe4092baf2b3
- 
- S = "${WORKDIR}/cuia_${CUIA_PV}${CUIA_PVExtra}"
- 
-+CLEANBROKEN = "1"
+diff --git a/recipes-kernel/kselftests/kselftests_4.1.bb b/recipes-kernel/kselftests/kselftests_4.1.bb
+new file mode 100644
+index 0000000..d917fb5
+--- /dev/null
++++ b/recipes-kernel/kselftests/kselftests_4.1.bb
+@@ -0,0 +1,86 @@
++SUMMARY = "Linux Kernel Selftests"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 +
- do_compile () {
- 	cd ${S}
-+	oe_runmake clean
- 	oe_runmake all
- }
- 
++SRC_URI = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz"
++
++SRC_URI[md5sum] = "fe9dc0f6729f36400ea81aa41d614c37"
++SRC_URI[sha256sum] = "caf51f085aac1e1cea4d00dbbf3093ead07b551fc07b31b2a989c05f8ea72d9f"
++
++S = "${WORKDIR}/linux-${PV}"
++
++DEPENDS = "virtual/kernel popt"
++
++inherit kernel-arch
++
++TARGETS = "cpu-hotplug efivarfs exec firmware ftrace kcmp memfd memory-hotplug \
++	mount mqueue net ptrace size sysctl timers user vm"
++
++# Arch specific tests
++TARGETS_append_x86 = " breakpoints ipc x86"
++TARGETS_append_x86-64 = " breakpoints ipc x86"
++TARGETS_append_powerpc = " powerpc"
++TARGETS_append_powerpc64 = " powerpc"
++
++EXTRA_OEMAKE += "-C tools/testing/selftests TARGETS="${TARGETS}" INSTALL_PATH=${D}${bindir}/kselftests CC="${CC}""
++
++# Their Makefiles are so sloppy, let's clean up a bit
++do_configure () {
++	sed "s|^CC := .*||g" -i ${S}/tools/testing/selftests/lib.mk
++	sed "s|^CC = .*||g" -i ${S}/tools/testing/selftests/timers/Makefile
++	sed "s|^CC = .*||g" -i ${S}/tools/testing/selftests/memfd/Makefile
++	sed "s|^CC := .*||g" -i ${S}/tools/testing/selftests/powerpc/switch_endian/Makefile
++	sed "s|gcc|\$(CC)|g" -i ${S}/tools/testing/selftests/breakpoints/Makefile
++	sed "s|^LDFLAGS += -lrt -lpthread|LDLIBS += -lrt -lpthread|g" -i ${S}/tools/testing/selftests/timers/Makefile
++}
++
++do_compile () {
++	oe_runmake
++}
++
++do_install () {
++	oe_runmake install
++}
++
++PACKAGE_BEFORE_PN = "${PN}-breakpoints ${PN}-cpu-hotplug ${PN}-efivarfs ${PN}-exec ${PN}-firmware ${PN}-ftrace \
++	${PN}-ipc ${PN}-kcmp ${PN}-memfd ${PN}-memory-hotplug ${PN}-mount ${PN}-mqueue ${PN}-net ${PN}-powerpc \
++	${PN}-ptrace ${PN}-size ${PN}-sysctl ${PN}-timers ${PN}-user ${PN}-vm ${PN}-x86"
++
++FILES_${PN}-breakpoints = "${bindir}/kselftests/breakpoints"
++FILES_${PN}-cpu-hotplug = "${bindir}/kselftests/cpu-hotplug"
++FILES_${PN}-efivarfs = "${bindir}/kselftests/efivarfs"
++FILES_${PN}-exec = "${bindir}/kselftests/exec"
++FILES_${PN}-firmware = "${bindir}/kselftests/firmware"
++FILES_${PN}-ftrace = "${bindir}/kselftests/ftrace"
++FILES_${PN}-ipc = "${bindir}/kselftests/ipc"
++FILES_${PN}-kcmp = "${bindir}/kselftests/kcmp"
++FILES_${PN}-memfd = "${bindir}/kselftests/memfd"
++FILES_${PN}-memory-hotplug = "${bindir}/kselftests/memory-hotplug"
++FILES_${PN}-mount = "${bindir}/kselftests/mount"
++FILES_${PN}-mqueue = "${bindir}/kselftests/mqueue"
++FILES_${PN}-net = "${bindir}/kselftests/net"
++FILES_${PN}-powerpc = "${bindir}/kselftests/powerpc"
++FILES_${PN}-ptrace = "${bindir}/kselftests/ptrace"
++FILES_${PN}-size = "${bindir}/kselftests/size"
++FILES_${PN}-sysctl = "${bindir}/kselftests/sysctl"
++FILES_${PN}-timers = "${bindir}/kselftests/timers"
++FILES_${PN}-user = "${bindir}/kselftests/user"
++FILES_${PN}-vm = "${bindir}/kselftests/vm"
++FILES_${PN}-x86 = "${bindir}/kselftests/x86"
++FILES_${PN}-dbg += "${bindir}/kselftests/*/.debug"
++
++RDEPENDS_${PN}-cpu-hotplug += "bash"
++RDEPENDS_${PN}-efivarfs += "bash"
++RDEPENDS_${PN}-memory-hotplug += "bash"
++RDEPENDS_${PN}-net += "bash"
++RDEPENDS_${PN}-vm += "bash"
++RDEPENDS_${PN} += "bash ${PN}-cpu-hotplug ${PN}-efivarfs ${PN}-exec ${PN}-firmware ${PN}-ftrace ${PN}-ipc \
++	${PN}-kcmp ${PN}-memfd ${PN}-memory-hotplug ${PN}-mount ${PN}-mqueue ${PN}-net ${PN}-ptrace \
++	${PN}-size ${PN}-sysctl ${PN}-timers ${PN}-user ${PN}-vm"
++
++RDEPENDS_${PN}_append_x86 = " ${PN}-breakpoints ${PN}-ipc ${PN}-x86"
++RDEPENDS_${PN}_append_x86-64 = " ${PN}-breakpoints ${PN}-ipc ${PN}-x86"
++RDEPENDS_${PN}_append_powerpc = " ${PN}-powerpc"
++RDEPENDS_${PN}_append_powerpc64 = " ${PN}-powerpc"
++
++INSANE_SKIP_${PN} = "already-stripped"
 
 
