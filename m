@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A14A3E009C3; Tue, 11 Aug 2015 17:13:47 -0700 (PDT)
+	id AD474E00A7D; Tue, 11 Aug 2015 20:33:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.17 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41451E007B1
-	for <meta-ti@yoctoproject.org>; Tue, 11 Aug 2015 17:13:41 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173017.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NSY00ATY0MBASM0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 11 Aug 2015 19:13:23 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
-	a=sozttTNsAAAA:8	a=3eCaaMhoVjIs6Cyxu6kA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 350BA161B72;	Tue,
-	11 Aug 2015 20:13:23 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05E43E00A3B
+	for <meta-ti@yoctoproject.org>; Tue, 11 Aug 2015 20:33:32 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id D65DA52A91; Wed, 12 Aug 2015 03:33:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 11 Aug 2015 20:13:22 -0400
-Message-id: <1439338402-20616-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [master/fido][PATCH] cuia: revert to clean in do_compile, disable automatic in do_configure
+Message-Id: <20150812033331.D65DA52A91@arago-project.org>
+Date: Wed, 12 Aug 2015 03:33:31 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : cuia: revert to clean in do_compile, disable automatic in do_configure
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,17 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 00:13:47 -0000
+X-List-Received-Date: Wed, 12 Aug 2015 03:33:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: fido
+Commit: ae3fe72bdf7620511ff07cab2539fa0ad408df81
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ae3fe72bdf7620511ff07cab2539fa0ad408df81
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Aug 12 06:13:22 2015 +0000
+
+cuia: revert to clean in do_compile, disable automatic in do_configure
 
 Need to unconditionally clean the sources before building the first time,
 due to wrong binaries present. But calling clean twice also causes failure.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/cuia/cuia_1.0.0.13.bb | 3 +++
- 1 file changed, 3 insertions(+)
+
+ recipes-bsp/cuia/cuia_1.0.0.13.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-bsp/cuia/cuia_1.0.0.13.bb b/recipes-bsp/cuia/cuia_1.0.0.13.bb
 index a9024d2..e048f6a 100644
@@ -73,7 +72,5 @@ index a9024d2..e048f6a 100644
  	oe_runmake all
  }
  
--- 
-2.2.0
 
 
