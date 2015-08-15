@@ -1,41 +1,42 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E27E0E00A7B; Fri, 14 Aug 2015 17:50:12 -0700 (PDT)
+	id 7A8B3E00A7B; Fri, 14 Aug 2015 18:24:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
 	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 661EFE00A70
-	for <meta-ti@yoctoproject.org>; Fri, 14 Aug 2015 17:50:01 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1450CE00A70
+	for <meta-ti@yoctoproject.org>; Fri, 14 Aug 2015 18:24:32 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7F0nv1Z027247;
-	Fri, 14 Aug 2015 19:49:57 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7F0nvha017865;
-	Fri, 14 Aug 2015 19:49:57 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 14 Aug 2015 19:49:57 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7F0nvwq029393;
-	Fri, 14 Aug 2015 19:49:57 -0500
-Date: Fri, 14 Aug 2015 20:49:41 -0400
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7F1OV8n013266
+	for <meta-ti@yoctoproject.org>; Fri, 14 Aug 2015 20:24:31 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7F1OVLG009663
+	for <meta-ti@yoctoproject.org>; Fri, 14 Aug 2015 20:24:31 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 14 Aug 2015 20:24:31 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t7F1OViZ028145	for <meta-ti@yoctoproject.org>; Fri, 14 Aug 2015 20:24:31
+	-0500
+Date: Fri, 14 Aug 2015 21:24:30 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Benjamin Bimmermann <b.bimmermann@yahoo.de>
-Message-ID: <20150815004941.GA6542@edge>
-References: <2001756708.5081859.1439599310946.JavaMail.yahoo@mail.yahoo.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1306473447.913.1439601870919.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <2001756708.5081859.1439599310946.JavaMail.yahoo@mail.yahoo.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: libgles-omap3 error | BeagleBoneBlack | sgx-omap.h: No such file or directory
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-08-14_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,144 +49,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2015 00:50:13 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 15 Aug 2015 01:24:36 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_912_962593014.1439601870918"
 
-Benjamin,
+------=_Part_912_962593014.1439601870918
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Version 5.1.1.2 of libgles-omap3 only builds and works against version 3.14 of 
-linux-ti-staging kernel in meta-ti. The corresponding update to libgles-omap3 
-to build against 4.1 kernel hasn't been released yet.
+<html>
+<head>
+<title>
+Status for 08/14/15
+</title>
+</head>
+<body>
 
--- 
-Denys
+<h2>Status for 08/14/15</h2>
+
+<h2>BUILD_ID: build-2015-08-14_21-01-59</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-On Sat, Aug 15, 2015 at 12:41:50AM +0000, Benjamin Bimmermann wrote:
-> Hello,
-> i like to build the libgles-omap3 for the BeagleBoneBlack, but i get the error : 
-> sgx-omap.h: No such file or directory
-> |  #include <linux/platform_data/sgx-omap.h>.
-> I try to create QT5 for the BeagleboneBlack. I have found and work on this tutorial:http://www.embarcados.com.br/beaglebone-black-qt5-yocto-parte-1/Code: https://bitbucket.org/embarcados/meta-embarcados/src
-> 
-> He has the error in part2 of the tutorial and say that i must make :bitbake -c cleansstate libgles-omap3bitbake libgles-omap3
-> but that not solve the Problem. Every Time I get this Error.
-> I have only change the bblayer.conf and the local.conf file. All other Files are from git and I have not change anything.
-> I hope you can help me.
-> 
-> 
-> 
-> ---------------------------------------------------------------------------------------------------------------------------
-> My bblayer.conf:LCONF_VERSION = "6"
-> BBPATH = "${TOPDIR}"
-> BBFILES ?= ""
-> BBLAYERS ?= " \
->           ${HOME}/bbb/meta-embarcados \
->           ${HOME}/bbb/meta-embarcados/meta-bbb \
->           ${HOME}/bbb/meta-ti \
->           ${HOME}/poky-fido/meta-qt5 \
->           ${HOME}/poky-fido/meta-openembedded/meta-oe \
->           ${HOME}/poky-fido/meta-openembedded/meta-ruby \
->           ${HOME}/poky-fido/meta-openembedded/meta-perl \
->           ${HOME}/poky-fido/meta-openembedded/meta-efl \
->           ${HOME}/poky-fido/meta-openembedded/meta-multimedia \
->           ${HOME}/poky-fido/meta \
->           ${HOME}/poky-fido/meta-yocto \ "
-> BBLAYERS_NON_REMOVABLE ?= " \
->          ${HOME}/poky-fido/meta \
->          ${HOME}/poky-fido/meta-yocto \
->   "
-> ---------------------------------------------------------------------------------------------------------------------------
-> My local.conf:BB_NUMBER_THREADS = "7"
-> PARALLEL_MAKE = "-j7"
-> LICENSE_FLAGS_WHITELIST = "commercial"
-> MACHINE = "beaglebone"
-> DISTRO = "poky"
-> PACKAGE_CLASSES = "package_deb"
-> EXTRA_IMAGE_FEATURES = "debug-tweaks"
-> CONF_VERSION = "1"
-> DISTRO_FEATURES_remove = "x11 wayland"
-> BBMASK = "meta-embarcados/recipes-browser/chromium/chromium_%.bbappend"
-> 
-> ---------------------------------------------------------------------------------------------------------------------------
-> And the complete LOG:
-> PC@PC:~/bbb/build_spain$ bitbake libgles-omap3
-> WARNING: Host distribution "Ubuntu-15.04" has not been validated with this version of the build system; you may possibly experience unexpected failures. It is recommended that you use a tested distribution.
-> Parsing recipes: 100% |######################################################################################################################################################################| Time: 00:00:29
-> Parsing of 1788 .bb files complete (0 cached, 1788 parsed). 2296 targets, 351 skipped, 1 masked, 0 errors.
-> NOTE: Resolving any missing task queue dependencies
-> 
-> Build Configuration:
-> BB_VERSION        = "1.26.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "Ubuntu-15.04"
-> TARGET_SYS        = "arm-poky-linux-gnueabi"
-> MACHINE           = "beaglebone"
-> DISTRO            = "poky"
-> DISTRO_VERSION    = "1.8"
-> TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard cortexa8"
-> TARGET_FPU        = "vfp-neon"
-> meta-embarcados   
-> meta-bbb          = "fido:dfb2e27bf26b109fc6ccb3bc91924fb3bb24f655"
-> meta-ti           = "fido:a666b94e9c676711f1389c0628e6c883ef20d5b3"
-> meta-qt5          = "fido:fc026381545650e10fdd488d5b2a3b2d78f87793"
-> meta-oe           
-> meta-ruby         
-> meta-perl         
-> meta-efl          
-> meta-multimedia   = "fido:10d3c8f85280a0bf867a8e4f84bcda81c290d28e"
-> meta              
-> meta-yocto        = "fido:08d32590411568e7bf11612ac695a6e9c6df6286"
-> 
-> NOTE: Preparing RunQueue
-> NOTE: Executing SetScene Tasks
-> NOTE: Executing RunQueue Tasks
-> ERROR: Function failed: do_compile (log file is located at /home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/temp/log.do_compile.25613)
-> ERROR: Logfile of failure stored in: /home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/temp/log.do_compile.25613
-> Log data follows:
-> | DEBUG: Executing shell function do_compile
-> | NOTE: make -j7 -e MAKEFLAGS= KERNEL_SRC=/home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-source KERNEL_PATH=/home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-source KERNEL_VERSION=4.1.5 CC=arm-poky-linux-gnueabi-gcc  -mno-thumb-interwork -marm LD=arm-poky-linux-gnueabi-ld.bfd   AR=arm-poky-linux-gnueabi-ar  O=/home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-build-artifacts BUILD=release TI_PLATFORM=ti335x SUPPORT_XORG=
-> | make -C /home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-source M=`pwd`
-> | make[1]: Entering directory '/home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-source'
-> | make[2]: Entering directory '/home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-build-artifacts'
-> |   CC [M]  /home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.o
-> | /home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.c:51:42: fatal error: linux/platform_data/sgx-omap.h: No such file or directory
-> |  #include <linux/platform_data/sgx-omap.h>
-> |                                           ^
-> | compilation terminated.
-> | /home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-source/scripts/Makefile.build:258: recipe for target '/home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.o' failed
-> | make[3]: *** [/home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.o] Error 1
-> | /home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-source/Makefile:1384: recipe for target '_module_/home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/Graphics_SDK_5_01_01_02/GFX_Linux_KM' failed
-> | make[2]: *** [_module_/home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/Graphics_SDK_5_01_01_02/GFX_Linux_KM] Error 2
-> | make[2]: Leaving directory '/home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-build-artifacts'
-> | Makefile:146: recipe for target 'sub-make' failed
-> | make[1]: *** [sub-make] Error 2
-> | make[1]: Leaving directory '/home/PC/bbb/build_spain/tmp/work-shared/beaglebone/kernel-source'
-> | Makefile:478: recipe for target 'all' failed
-> | make: *** [all] Error 2
-> | ERROR: oe_runmake failed
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_compile (log file is located at /home/PC/bbb/build_spain/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/temp/log.do_compile.25613)
-> ERROR: Task 119 (/home/PC/bbb/meta-ti/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb, do_compile) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 731 tasks of which 720 didn't need to be rerun and 1 failed.
-> Waiting for 0 running tasks to finish:
-> 
-> Summary: 1 task failed:
->   /home/PC/bbb/meta-ti/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb, do_compile
-> Summary: There was 1 WARNING message shown.
-> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> PC@PC:~/bbb/build_spain
-> 
-> ---------------------------------------------------------------------------------------------------------------------------
-> 
-> Thank you for your Time and I hope you can help me.Have a nice day.
-
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
-
+------=_Part_912_962593014.1439601870918--
