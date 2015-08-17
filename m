@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E7C3CE00ACC; Mon, 17 Aug 2015 10:36:17 -0700 (PDT)
+	id 62922E00AC1; Mon, 17 Aug 2015 10:36:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 926E7E00AB9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05D8FE00AB9
 	for <meta-ti@yoctoproject.org>; Mon, 17 Aug 2015 10:36:17 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1766052A95; Mon, 17 Aug 2015 17:36:17 +0000 (UTC)
+	id 5CE3C52AA2; Mon, 17 Aug 2015 17:36:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150817173617.1766052A95@arago-project.org>
-Date: Mon, 17 Aug 2015 17:36:16 +0000 (UTC)
+Message-Id: <20150817173617.5CE3C52AA2@arago-project.org>
+Date: Mon, 17 Aug 2015 17:36:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.1.6
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with recent fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,40 +33,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2015 17:36:18 -0000
+X-List-Received-Date: Mon, 17 Aug 2015 17:36:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 62b20e28715818e27d4eecf64683682d47b67886
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=62b20e28715818e27d4eecf64683682d47b67886
+Commit: 6ded549f22ba6769a5a9ce7023f6017802304df3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6ded549f22ba6769a5a9ce7023f6017802304df3
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Aug 17 22:58:23 2015 +0000
+Date:   Mon Aug 17 22:58:24 2015 +0000
 
-linux-ti-staging: update to 4.1.6
+u-boot-ti-staging: update with recent fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 4792c3e..2c41e25 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -50,8 +50,8 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index f0bb731..a928ef0 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
--SRCREV = "5e2798477b3eb6f13d945eb853b4d7c6f7ef1f93"
--PV = "4.1.5+git${SRCPV}"
-+SRCREV = "b4e89e6e40668e097863d991b16876118727b604"
-+PV = "4.1.6+git${SRCPV}"
+-PR = "r3"
++PR = "r4"
+ PV_append = "+git${SRCPV}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "a3d5de9966cc417c221077eaa61ce03b6cb7c8f3"
++SRCREV = "e22bd9012ff5785bb1a595721c39a63c2ae78896"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
