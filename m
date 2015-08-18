@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5A869E00AD5; Tue, 18 Aug 2015 16:35:44 -0700 (PDT)
+	id D2691E00AD7; Tue, 18 Aug 2015 16:36:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.25 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DBDDE00ABC
-	for <meta-ti@yoctoproject.org>; Tue, 18 Aug 2015 16:35:40 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173025.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NTA001SZXIN7U80@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 18 Aug 2015 18:35:16 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
-	a=sozttTNsAAAA:8	a=lNLbqB1nbMv5Kq3l_bEA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 9C266161B76;	Tue,
-	18 Aug 2015 19:35:11 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F271EE00ABC
+	for <meta-ti@yoctoproject.org>; Tue, 18 Aug 2015 16:36:56 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 432A152A8F; Tue, 18 Aug 2015 23:36:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 18 Aug 2015 19:35:11 -0400
-Message-id: <1439940911-7418-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] linux-ti-staging: update with rpmsg and platform merges
+Message-Id: <20150818233656.432A152A8F@arago-project.org>
+Date: Tue, 18 Aug 2015 23:36:56 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update with rpmsg and platform merges
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 23:35:44 -0000
+X-List-Received-Date: Tue, 18 Aug 2015 23:36:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 914f44a3f605b0b39e2a9e807b2ba98d01acc0d4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=914f44a3f605b0b39e2a9e807b2ba98d01acc0d4
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Aug 19 05:35:11 2015 +0000
+
+linux-ti-staging: update with rpmsg and platform merges
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/linux-ti-staging_4.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
 index 2c41e25..ec2d1bd 100644
@@ -72,7 +71,5 @@ index 2c41e25..ec2d1bd 100644
  PR = "${MACHINE_KERNEL_PR}"
  
  KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-2.2.0
 
 
