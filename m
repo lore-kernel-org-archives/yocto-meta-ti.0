@@ -1,44 +1,67 @@
-Return-Path: <denys@ti.com>
+Return-Path: <b.bimmermann@yahoo.de>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 243E5E00AE0; Tue, 18 Aug 2015 19:53:41 -0700 (PDT)
+	id AD7E1E00AE0; Wed, 19 Aug 2015 02:49:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (b.bimmermann[at]yahoo.de)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [98.138.120.233 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F30B7E00ADB
-	for <meta-ti@yoctoproject.org>; Tue, 18 Aug 2015 19:53:36 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7J2radr003280
-	for <meta-ti@yoctoproject.org>; Tue, 18 Aug 2015 21:53:36 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7J2raXt002547
-	for <meta-ti@yoctoproject.org>; Tue, 18 Aug 2015 21:53:36 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 18 Aug 2015 21:53:35 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t7J2rZ9K005027;	Tue, 18 Aug 2015 21:53:35 -0500
-Date: Tue, 18 Aug 2015 22:53:35 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <2055757230.941.1439952815222.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from nm43-vm9.bullet.mail.ne1.yahoo.com
+	(nm43-vm9.bullet.mail.ne1.yahoo.com [98.138.120.233])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5028AE00A3C
+	for <meta-ti@yoctoproject.org>; Wed, 19 Aug 2015 02:49:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.de; s=s2048;
+	t=1439977747; bh=LJkzdkOcU5WFlh4iUnBpbgu7Rf+sF98lX/Z4v/kODtk=;
+	h=Date:From:Reply-To:To:In-Reply-To:References:Subject:From:Subject;
+	b=hwQ4CogG5Wi6nTksj8oZVrDl8i8ZBp+pezJ64MwdHSdr9K9W3QLn84f8VCLTvnUuMJFZA0kzAInITk1W92pREFdgEupnVk3YiCBsSLS2PvI1cyZdP7gC9JOKCC+lQzrngqjrYCAc3I8OOHsVMB3pppegyyKf/Be8j8nuPM5AegrM0e3ltCQU/51A2Pn0Rz68zlElY8m8vyxUmZ49cs7TN5u30PXGVfSzS8tqPaOrE0gW81oU5l4sax2RSehaJqBDeBRQDjqQ+VnOSVSNabyJUwPNKvuUIRXrYlmcylSSmlBbBLEFHGlUZZPrZCaS3Ws6g53Z3M0Tk4ip2N1Z1l4WRQ==
+Received: from [127.0.0.1] by nm43.bullet.mail.ne1.yahoo.com with NNFMP;
+	19 Aug 2015 09:49:07 -0000
+Received: from [98.138.226.180] by nm43.bullet.mail.ne1.yahoo.com with NNFMP;
+	19 Aug 2015 09:46:25 -0000
+Received: from [212.82.98.49] by tm15.bullet.mail.ne1.yahoo.com with NNFMP;
+	19 Aug 2015 09:46:25 -0000
+Received: from [212.82.98.83] by tm2.bullet.mail.ir2.yahoo.com with NNFMP;
+	19 Aug 2015 09:46:25 -0000
+Received: from [127.0.0.1] by omp1020.mail.ir2.yahoo.com with NNFMP;
+	19 Aug 2015 09:46:25 -0000
+X-Yahoo-Newman-Property: ymail-4
+X-Yahoo-Newman-Id: 307847.52497.bm@omp1020.mail.ir2.yahoo.com
+X-YMail-OSG: tjpI8iYVM1m40VxIOibLZbqJYj3e2Y5Hn4JqYQAuA.E94V_O0PjUp.5POg0hq.a
+	6UvPa0OVexnfUujoOfnzbDDBktvMOpA9I_5xNc_HnU5W0objKPkR.srqvuxxvFkVsmlLLdvamyB7
+	vhDdsBF320cMKTyqerW_1eoHQNAbBUnpDf4ytu3fEwtbYeUjYaTtA445Qre532fgua.adjTNw1WW
+	T.N6jZfDEz0eSVnkFQ6tNMbU0iZKiUMtFJRUBrVdZLK29Pb2oJ3Ni1Z86X0GUWSiFNGYMtOZz7j2
+	tzub7MtgX2zd1v8Vkh6_Ut.Y0JzKCB00_TreyOyrFQ3uGiuuqtbZhq3l42lZKQ7FShrjhyORVzSv
+	k5Z_HlKTfBRdbnox7iP9at5TYxx4PnVOMOZTAqeGQ0j2xQNCUy0arT6xui3CZLZbVlLXH0eR_yae
+	Y7kFn7vpyamMONjMD.DepNsE0ZPt5.xBb134pN9cWRwFESZU__w6rCC145h_eKu0JIUv_fissfHh
+	M1_FndH8eBuwLv4G0kCw-
+Received: by 217.12.9.14; Wed, 19 Aug 2015 09:46:24 +0000 
+Date: Wed, 19 Aug 2015 09:46:24 +0000 (UTC)
+From: Benjamin Bimmermann <b.bimmermann@yahoo.de>
+To: Denys Dmytriyenko <denys@ti.com>, 
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Message-ID: <2062145486.7469712.1439977584428.JavaMail.yahoo@mail.yahoo.com>
+In-Reply-To: <20150818221434.GH6542@edge>
+References: <20150818221434.GH6542@edge>
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-08-18_21-00-51
+Subject: Re: libgles-omap3 error | BeagleBoneBlack | sgx-omap.h: No such file or directory
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: Benjamin Bimmermann <b.bimmermann@yahoo.de>
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -48,207 +71,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2015 02:53:41 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_940_522899344.1439952815217"
+X-List-Received-Date: Wed, 19 Aug 2015 09:49:11 -0000
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_7469711_1732819589.1439977584426"
 
-------=_Part_940_522899344.1439952815217
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+------=_Part_7469711_1732819589.1439977584426
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<title>
-Status for 08/18/15
-</title>
-</head>
-<body>
-
-<h2>Status for 08/18/15</h2>
-
-<h2>BUILD_ID: build-2015-08-18_21-02-18</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Thank you,
+now my last question for this Topic:
+When will this new version for 4.1 be realese ?
+This mounth ? This year? Is there a date approximate date?
+Is it possible to be involved in the programming of the libgles-omap3 drive=
+r ?=C2=A0=20
 
 
-------=_Part_940_522899344.1439952815217--
+------=_Part_7469711_1732819589.1439977584426
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><body><div style=3D"color:#000; background-color:#fff; font-family:ti=
+mes new roman, new york, times, serif;font-size:16px"><div id=3D"yui_3_16_0=
+_1_1439976820126_10974"><span>Thank you,</span></div><div id=3D"yui_3_16_0_=
+1_1439976820126_7447"><span></span><br></div><div id=3D"yui_3_16_0_1_143997=
+6820126_10126" dir=3D"ltr"><span id=3D"yui_3_16_0_1_1439976820126_10125">no=
+w my last question for this Topic:</span></div><div id=3D"yui_3_16_0_1_1439=
+976820126_11001" dir=3D"ltr"><span></span><br></div><div id=3D"yui_3_16_0_1=
+_1439976820126_6772" dir=3D"ltr"><span id=3D"yui_3_16_0_1_1439976820126_677=
+1">When will this new version for 4.1 be realese ?<br>This mounth ? This ye=
+ar? Is there a date approximate date?</span></div><span id=3D"yui_3_16_0_1_=
+1439976820126_6768"><div id=3D"yiv0155454588yui_3_16_0_1_1439736393909_2061=
+3" dir=3D"ltr"><br></div><div id=3D"yui_3_16_0_1_1439976820126_11000" dir=
+=3D"ltr">Is it possible to be involved in the programming of the libgles-om=
+ap3 driver ?</div></span>&nbsp; <br><div class=3D"qtdSeparateBR" id=3D"yui_=
+3_16_0_1_1439976820126_12377"><br></div>     </div></body></html>
+
+------=_Part_7469711_1732819589.1439977584426--
