@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 918DDE00A6C; Wed, 19 Aug 2015 17:55:53 -0700 (PDT)
+	id 93741E0096A; Wed, 19 Aug 2015 17:55:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,12 +14,12 @@ X-Spam-HAM-Report: * 1.7 URIBL_BLACK Contains an URL listed in the URIBL
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B297EE0096A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B37A9E00985
 	for <meta-ti@yoctoproject.org>; Wed, 19 Aug 2015 17:55:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8181752987; Thu, 20 Aug 2015 00:55:47 +0000 (UTC)
+	id 8D5FB52A14; Thu, 20 Aug 2015 00:55:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150820005547.8181752987@arago-project.org>
+Message-Id: <20150820005547.8D5FB52A14@arago-project.org>
 Date: Thu, 20 Aug 2015 00:55:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ti-ipc: fix build when STAGING_KERNEL_DIR != STAGING_KERNEL_BUILDDIR
@@ -39,9 +39,9 @@ X-List-Received-Date: Thu, 20 Aug 2015 00:55:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3d31d82b334ea0e608dbee3b2d5d1cde85eaa10c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3d31d82b334ea0e608dbee3b2d5d1cde85eaa10c
+Branch: fido
+Commit: 25660ccc23acd07c7bec8189b5abe91deeaf5ce9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=25660ccc23acd07c7bec8189b5abe91deeaf5ce9
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Aug 20 06:53:05 2015 +0000
