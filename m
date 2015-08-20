@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 770E2E00947; Wed, 19 Aug 2015 17:55:51 -0700 (PDT)
+	id 75D5DE009CC; Wed, 19 Aug 2015 17:55:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2AFBE0097F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1EB6E00947
 	for <meta-ti@yoctoproject.org>; Wed, 19 Aug 2015 17:55:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 77748529AC; Thu, 20 Aug 2015 00:55:47 +0000 (UTC)
+	id 6346C52A08; Thu, 20 Aug 2015 00:55:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150820005547.77748529AC@arago-project.org>
+Message-Id: <20150820005547.6346C52A08@arago-project.org>
 Date: Thu, 20 Aug 2015 00:55:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Molfetta, Stephen : tiipclad-daemon.sh: Enabling GateMP support
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 20 Aug 2015 00:55:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 781e7e00c4ba8e968cbd8e82e98edb0b7a5f2659
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=781e7e00c4ba8e968cbd8e82e98edb0b7a5f2659
+Branch: fido
+Commit: 1f5416bab25f04af4d051beb6b6fc6504c4533d5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1f5416bab25f04af4d051beb6b6fc6504c4533d5
 
 Author: Molfetta, Stephen <sjmolfetta@ti.com>
 Date:   Wed Aug 19 03:51:06 2015 +0000
