@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BC430E00B9D; Mon, 24 Aug 2015 11:36:39 -0700 (PDT)
+	id BAF39E00BE2; Mon, 24 Aug 2015 11:36:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE95EE00927
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1223E00B9D
 	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 11:36:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0BC6652AB5; Mon, 24 Aug 2015 18:36:36 +0000 (UTC)
+	id 3EA1A52AB6; Mon, 24 Aug 2015 18:36:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150824183637.0BC6652AB5@arago-project.org>
-Date: Mon, 24 Aug 2015 18:36:36 +0000 (UTC)
+Message-Id: <20150824183637.3EA1A52AB6@arago-project.org>
+Date: Mon, 24 Aug 2015 18:36:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: bump rev, add interim GFX patches for J6/AM5
+Subject: Denys Dmytriyenko : u-boot-ti-staging: bump rev with dra7 fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,25 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 49903e58ad0ce3db550ffbefbe4cb321500c7797
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=49903e58ad0ce3db550ffbefbe4cb321500c7797
+Commit: 42a6ca5e68ba389673324868432c8a5d7b630bfe
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=42a6ca5e68ba389673324868432c8a5d7b630bfe
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Aug 24 23:50:12 2015 +0000
+Date:   Tue Aug 25 00:29:19 2015 +0000
 
-linux-ti-staging: bump rev, add interim GFX patches for J6/AM5
+u-boot-ti-staging: bump rev with dra7 fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...0001-DT-gpu-add-binding-for-TI-SGX-driver.patch |   49 ++
- ...02-ARM-dts-DRA7xx-add-gpu-interface-clock.patch |   34 ++
- ...-dts-DRA7xx-add-device-tree-entry-for-SGX.patch |   35 ++
- .../0004-arm-dra7xx-Add-gpu-hwmod-data.patch       |  115 ++++
- .../0005-drm-omap-Add-omapdrm-plugin-API.patch     |  585 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti-staging_4.1.bb       |   12 +-
- 6 files changed, 828 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=49903e58ad0ce3db550ffbefbe4cb321500c7797
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index a928ef0..459e9bf 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ 
+-PR = "r4"
++PR = "r5"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "e22bd9012ff5785bb1a595721c39a63c2ae78896"
++SRCREV = "69c789f385de7672f1e849c03baee40fa7d1ec44"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+
 
