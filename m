@@ -1,52 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 97E9CE00BBC; Mon, 24 Aug 2015 10:56:36 -0700 (PDT)
+	id 2FAA0E00BBC; Mon, 24 Aug 2015 11:21:00 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F21F0E00927
-	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 10:56:33 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7OHuW1T010148
-	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 12:56:32 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7OHuWZ4016939
-	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 12:56:32 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 24 Aug 2015 12:56:32 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7OHuWcY030133	for
-	<meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 12:56:32 -0500
-Resent-From: Denys Dmytriyenko <denys@ti.com>
-Resent-Date: Mon, 24 Aug 2015 13:56:16 -0400
-Resent-Message-ID: <20150824175616.GT6542@edge>
-Resent-To: <meta-ti@yoctoproject.org>
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 6 Aug 2015 13:56:34 -0500
-Received: from bangubntigfx (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t76IuX50030404;
-	Thu, 6 Aug 2015 13:56:33 -0500
-Received: from anand by bangubntigfx with local (Exim 4.72)	(envelope-from
-	<anand@bangubntigfx>)	id 1ZNQE8-0000Ki-T8;
-	Fri, 07 Aug 2015 00:19:16 +0530
-From: Anand Balagopalakrishnan <anandb@ti.com>
-To: <denys@ti.com>, <meta-ti@yoctoproject.org>
-Message-ID: <1438886878-1165-3-git-send-email-anandb@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1438886878-1165-1-git-send-email-anandb@ti.com>
-References: <1438886878-1165-1-git-send-email-anandb@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] omap5-sgx-ddk-um-linux: update SGX user mode binaries to latest version
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C46DBE00BAE
+	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 11:20:57 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 8F71452A28; Mon, 24 Aug 2015 18:20:56 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150824182056.8F71452A28@arago-project.org>
+Date: Mon, 24 Aug 2015 18:20:56 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : cmem: Bump SRCREV to fix build with GCC 4.9 and Linux 4.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,39 +33,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-Date: Mon, 24 Aug 2015 17:56:36 -0000
-X-Original-Date: Fri, 7 Aug 2015 00:17:58 +0530
-X-List-Received-Date: Mon, 24 Aug 2015 17:56:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Aug 2015 18:21:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Fix for SGX HW recovery issue when Weston EGL clients are killed
+Module: meta-ti
+Branch: fido
+Commit: 7bb1f36fad2170104db0266f9ffd342dd4b16610
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7bb1f36fad2170104db0266f9ffd342dd4b16610
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Fri Aug 21 19:41:05 2015 +0000
+
+cmem: Bump SRCREV to fix build with GCC 4.9 and Linux 4.1
+
+* Changes retain compatibility with older tolchain and kernl.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index 2f3f6aa..3b17a0d 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -3,10 +3,12 @@ HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
- LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
+ recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
+ recipes-bsp/cmem/cmem.inc        |    8 ++++----
+ recipes-bsp/cmem/cmem_git.bb     |    2 +-
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
+index b36eb09..6b2303c 100644
+--- a/recipes-bsp/cmem/cmem-mod_git.bb
++++ b/recipes-bsp/cmem/cmem-mod_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
+ include cmem.inc
  
--SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
--SRCREV = "b6e57ccf36fc8c36d988246bc7510f0dec42d991"
-+BRANCH = "omap5/next"
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
  
--PR = "r7"
-+SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "4ac0dba02717a7d7196f0b38b1fd6366f5b04ca7"
-+
-+PR = "r8"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ inherit module
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index 23e5f2e..0d3e918 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -3,11 +3,11 @@ HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
  
- RREPLACES_${PN} = "libegl libgles1 libgles2"
--- 
-1.7.9.5
+-BRANCH ?= "master"
+-# This corresponds to version 4.10.01.02
+-SRCREV = "a51d9770021fd16c97fc59b320286a3fa43278bc"
++BRANCH ?= "lu-next"
++# This corresponds to version 4.10.02.03
++SRCREV = "d47ac635699da6bee6daff31b87b0123e13af4ac"
+ 
+-PV = "4.10.01.02+git${SRCPV}"
++PV = "4.10.02.03+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ 
+diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
+index b30029d..bab9238 100644
+--- a/recipes-bsp/cmem/cmem_git.bb
++++ b/recipes-bsp/cmem/cmem_git.bb
+@@ -4,7 +4,7 @@ include cmem.inc
+ 
+ RDEPENDS_${PN} = "cmem-mod"
+ 
+-PR = "r1"
++PR = "r0"
+ 
+ PACKAGES =+ "${PN}-test"
+ 
 
 
