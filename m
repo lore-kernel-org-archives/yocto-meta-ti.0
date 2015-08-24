@@ -1,40 +1,28 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BFA28E00BD5; Mon, 24 Aug 2015 12:18:08 -0700 (PDT)
+	id DF92BE00BD5; Mon, 24 Aug 2015 12:20:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, RCVD_IN_DNSWL_NONE, 
-	URI_HEX autolearn=no version=3.3.1
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [206.46.173.23 listed in list.dnswl.org]
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04F85E00927
-	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 12:18:04 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173023.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NTL004GPPL3PXR0@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 24 Aug 2015 14:17:28 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
-	a=sozttTNsAAAA:8	a=RvbfonYq2gIfyQmQbz0A:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C5BC0161BA6;	Mon,
-	24 Aug 2015 15:17:27 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9466E00927
+	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 12:20:46 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id ADCC152A1C; Mon, 24 Aug 2015 19:20:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 24 Aug 2015 15:17:27 -0400
-Message-id: <1440443847-22043-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] omapdrm-pvr/omap5-sgx-ddk-um-linux: update due to branch shuffle
+Message-Id: <20150824192045.ADCC152A1C@arago-project.org>
+Date: Mon, 24 Aug 2015 19:20:45 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : omapdrm-pvr/omap5-sgx-ddk-um-linux: update due to branch shuffle
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,14 +35,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 19:18:08 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 19:20:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 40d2c2ee8a0f47636a419060a0a38796c520ef1d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=40d2c2ee8a0f47636a419060a0a38796c520ef1d
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Aug 25 01:17:27 2015 +0000
+
+omapdrm-pvr/omap5-sgx-ddk-um-linux: update due to branch shuffle
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb      | 6 +++---
- recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb | 6 +++---
+
+ .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    6 +++---
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    6 +++---
  2 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
@@ -100,7 +99,5 @@ index 6babb57..c29b91d 100644
  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
  RREPLACES_${PN} = "libegl libgles1 libgles2"
--- 
-2.2.0
 
 
