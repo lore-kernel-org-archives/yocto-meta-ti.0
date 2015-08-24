@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8FFA4E00BE7; Mon, 24 Aug 2015 11:34:09 -0700 (PDT)
+	id 8C62CE00BEA; Mon, 24 Aug 2015 11:34:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1D7CEE00BBC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1FE8FE00BE7
 	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 11:34:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 599BA52AB6; Mon, 24 Aug 2015 18:34:03 +0000 (UTC)
+	id 0AD3652A9D; Mon, 24 Aug 2015 18:34:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150824183403.599BA52AB6@arago-project.org>
-Date: Mon, 24 Aug 2015 18:34:03 +0000 (UTC)
+Message-Id: <20150824183403.0AD3652A9D@arago-project.org>
+Date: Mon, 24 Aug 2015 18:34:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: update SGX user mode binaries to latest version
+Subject: Denys Dmytriyenko : u-boot-ti-staging: bump rev with dra7 fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9f19b1f20d9de774114078193b65c5d603fbdf2f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9f19b1f20d9de774114078193b65c5d603fbdf2f
+Commit: c59f4a7d99ad3a556655d09c5d30263fd9ae721e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c59f4a7d99ad3a556655d09c5d30263fd9ae721e
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Fri Aug  7 00:47:58 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Aug 25 00:29:19 2015 +0000
 
-omap5-sgx-ddk-um-linux: update SGX user mode binaries to latest version
+u-boot-ti-staging: bump rev with dra7 fixes
 
-* Fix for SGX HW recovery issue when Weston EGL clients are killed
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index 83dfb1d..6babb57 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -3,10 +3,12 @@ HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
- LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index a928ef0..459e9bf 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
--SRCREV = "b6e57ccf36fc8c36d988246bc7510f0dec42d991"
-+BRANCH = "omap5/next"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
--PR = "r7"
-+SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "4ac0dba02717a7d7196f0b38b1fd6366f5b04ca7"
-+
-+PR = "r8"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+-PR = "r4"
++PR = "r5"
+ PV_append = "+git${SRCPV}"
  
- RREPLACES_${PN} = "libegl libgles1 libgles2"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "e22bd9012ff5785bb1a595721c39a63c2ae78896"
++SRCREV = "69c789f385de7672f1e849c03baee40fa7d1ec44"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
