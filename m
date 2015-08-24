@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 60ECEE00BAB; Mon, 24 Aug 2015 12:39:50 -0700 (PDT)
+	id B0A8AE00BD5; Mon, 24 Aug 2015 12:50:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,29 +12,31 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 044C5E00927
-	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 12:39:46 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FBA5E00927
+	for <meta-ti@yoctoproject.org>; Mon, 24 Aug 2015 12:50:36 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7OJdhNK023561;
-	Mon, 24 Aug 2015 14:39:43 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7OJdh0V020551;
-	Mon, 24 Aug 2015 14:39:43 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 24 Aug 2015 14:39:43 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7OJoXi0024682;
+	Mon, 24 Aug 2015 14:50:33 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7OJoXIo013543;
+	Mon, 24 Aug 2015 14:50:33 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 24 Aug 2015 14:50:33 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7OJdgZ8028238;
-	Mon, 24 Aug 2015 14:39:42 -0500
-Date: Mon, 24 Aug 2015 15:39:27 -0400
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7OJoWBv016293;
+	Mon, 24 Aug 2015 14:50:33 -0500
+Date: Mon, 24 Aug 2015 15:50:17 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Benjamin Bimmermann <b.bimmermann@yahoo.de>
-Message-ID: <20150824193926.GX6542@edge>
+To: Robert Nelson <robertcnelson@gmail.com>
+Message-ID: <20150824195017.GY6542@edge>
 References: <20150818221434.GH6542@edge>
 	<2062145486.7469712.1439977584428.JavaMail.yahoo@mail.yahoo.com>
-	<20150824192548.GV6542@edge>
+	<CAOCHtYjt6i2WpvrtfBE7sTkWi-xW-UN=-z42F6BGXwGijcfPBg@mail.gmail.com>
+	<20150824193527.GW6542@edge>
+	<CAOCHtYiNgvSgz3p2zC+AdGevGaOEQ98qqFvw6HDQW+rhsd05Kg@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20150824192548.GV6542@edge>
+In-Reply-To: <CAOCHtYiNgvSgz3p2zC+AdGevGaOEQ98qqFvw6HDQW+rhsd05Kg@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: libgles-omap3 error | BeagleBoneBlack | sgx-omap.h: No such file or directory
@@ -50,25 +52,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 19:39:50 -0000
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 24 Aug 2015 19:50:40 -0000
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Mon, Aug 24, 2015 at 03:25:48PM -0400, Denys Dmytriyenko wrote:
-> On Wed, Aug 19, 2015 at 09:46:24AM +0000, Benjamin Bimmermann wrote:
-> > Thank you,
-> > now my last question for this Topic:
-> > When will this new version for 4.1 be realese ?
-> > This mounth ? This year? Is there a date approximate date?
-> > Is it possible to be involved in the programming of the libgles-omap3 driver ?  
+On Mon, Aug 24, 2015 at 02:38:55PM -0500, Robert Nelson wrote:
+> Hi Denys
 > 
-> This work is coming within next few weeks and it will be a replacement for 
-> libgles-omap3.
+> >> Why wait?
+> >>
+> >> Just patch the kernel yourself..
+> >>
+> >> https://github.com/RobertCNelson/ti-linux-kernel-dev/tree/ti-linux-4.1.y/patches/sgx
+> >
+> > Thanks, Robert,
+> >
+> > I see you've taken our old patches we used on 3.14... We are currently working
+> > on replacing the old libgles-omap3 graphics stack with a different version and
+> > Wayland support. Hoping to get it ready soon...
+> 
+> Yeap, those are from 3.14.x, for the classic 5.01.01.02 release. We
+> have a few bb.org users who have been using that successfully on
+> 4.1.x-ti & mainline 4.1.x/4.2.x kernel's..
+> 
+> can't wait for a wayland release for the am335x. ;)
 
-BTW, if you need this for production, I would suggest staying with 3.14 for 
-now, as 4.1 and the replacement graphics support in it are rather new and may 
-be a bit unstable in the beginning...
+Yeah, it needs proper DRM support for that, which the old libgles/5.1.1.2 
+didn't have. Unfortunately, am335x may have limited support in the beginning, 
+which should be addressed in the coming months, as far as I know.
 
 -- 
 Denys
