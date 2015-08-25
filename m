@@ -1,38 +1,39 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 59C00E003D9; Tue, 25 Aug 2015 06:54:53 -0700 (PDT)
+	id 872DEE00C12; Tue, 25 Aug 2015 13:11:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F03CCE003D9
-	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 06:54:48 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7PDsmwT013914
-	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 08:54:48 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7PDsmvB017013
-	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 08:54:48 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 25 Aug 2015 08:54:47 -0500
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t7PDslih023214;	Tue, 25 Aug 2015 08:54:47 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 25 Aug 2015 09:54:46 -0400
-Message-ID: <1440510886-6744-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] boot-monitor: Update to new version 15.07
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 52A34E00A92
+	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 13:11:51 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NTN009ZEMR6A3O0@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 25 Aug 2015 15:11:35 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
+	a=sozttTNsAAAA:8	a=5udYdwPwXYFjzW4gafsA:9 a=8aPmYHAHpVh4r-Cv:21
+	a=rDKgNHT5F8RvFR2o:21
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id E5EDD161BAB;	Tue,
+	25 Aug 2015 16:11:29 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 25 Aug 2015 16:11:29 -0400
+Message-id: <1440533489-14437-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] machines: bump max_leb_cnt to fit larger images
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,37 +46,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 13:54:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Aug 2015 20:11:53 -0000
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/am335x-evm.conf | 2 +-
+ conf/machine/am437x-evm.conf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index 4ad8448..c353488 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -8,14 +8,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index bbb5d83..571cbec 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -24,7 +24,7 @@ SERIAL_CONSOLE = "115200 ttyO0"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4200"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4400"
  
- PV = "2.0+git${SRCPV}"
--PR = "r3"
-+PR = "r4"
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 15e5f53..04f0571 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -24,7 +24,7 @@ SERIAL_CONSOLE = "115200 ttyO0"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1918"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
  
- BRANCH = "master"
- 
- S = "${WORKDIR}/git"
- 
--#Tag "K2_BM_14.09"
--SRCREV = "4b0287a3fa9c7a25c75bbe3a54f4ac2a92dc0aaa"
-+#Tag "K2_BM_15.07"
-+SRCREV = "62d198687a34a9df375c1686d75ad4f85515dcf9"
- 
- BOOT_MONITOR_BINARY ?= "skern.bin"
- BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
 -- 
-1.7.9.5
+2.2.0
 
 
