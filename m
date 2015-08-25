@@ -1,39 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 872DEE00C12; Tue, 25 Aug 2015 13:11:53 -0700 (PDT)
+	id E7964E00C31; Tue, 25 Aug 2015 13:54:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 52A34E00A92
-	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 13:11:51 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NTN009ZEMR6A3O0@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 25 Aug 2015 15:11:35 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
-	a=sozttTNsAAAA:8	a=5udYdwPwXYFjzW4gafsA:9 a=8aPmYHAHpVh4r-Cv:21
-	a=rDKgNHT5F8RvFR2o:21
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id E5EDD161BAB;	Tue,
-	25 Aug 2015 16:11:29 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5741FE00BE0
+	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 13:54:05 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 255D4529FA; Tue, 25 Aug 2015 20:54:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 25 Aug 2015 16:11:29 -0400
-Message-id: <1440533489-14437-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] machines: bump max_leb_cnt to fit larger images
+Message-Id: <20150825205405.255D4529FA@arago-project.org>
+Date: Tue, 25 Aug 2015 20:54:04 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : machines: bump max_leb_cnt to fit larger images
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 20:11:53 -0000
+X-List-Received-Date: Tue, 25 Aug 2015 20:54:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: d8cba916f310305fd116b455c0c04975cf6f5b7b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d8cba916f310305fd116b455c0c04975cf6f5b7b
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Aug 26 02:11:29 2015 +0000
+
+machines: bump max_leb_cnt to fit larger images
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/machine/am335x-evm.conf | 2 +-
- conf/machine/am437x-evm.conf | 2 +-
+
+ conf/machine/am335x-evm.conf |    2 +-
+ conf/machine/am437x-evm.conf |    2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
@@ -82,7 +80,5 @@ index 15e5f53..04f0571 100644
  
  # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
  # from dmesg:
--- 
-2.2.0
 
 
