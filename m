@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 62CFBE00B3A; Thu, 27 Aug 2015 12:59:24 -0700 (PDT)
+	id D51BAE00C8F; Thu, 27 Aug 2015 12:59:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A754E00B3A
-	for <meta-ti@yoctoproject.org>; Thu, 27 Aug 2015 12:59:20 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99560E00B6C
+	for <meta-ti@yoctoproject.org>; Thu, 27 Aug 2015 12:59:22 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0C33B52A9D; Thu, 27 Aug 2015 19:59:19 +0000 (UTC)
+	id 822EE52AA4; Thu, 27 Aug 2015 19:59:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150827195919.0C33B52A9D@arago-project.org>
-Date: Thu, 27 Aug 2015 19:59:19 +0000 (UTC)
+Message-Id: <20150827195921.822EE52AA4@arago-project.org>
+Date: Thu, 27 Aug 2015 19:59:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: bump rev, update J6/ AM5 GFX patches to rev3
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 19:59:24 -0000
+X-List-Received-Date: Thu, 27 Aug 2015 19:59:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b5be811d51b61c2d10f54f9c52152cff37c04f2c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b5be811d51b61c2d10f54f9c52152cff37c04f2c
+Branch: fido
+Commit: 9a42de5977610873e52301a94ed24225ca7ab3ef
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9a42de5977610873e52301a94ed24225ca7ab3ef
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Aug 28 01:44:29 2015 +0000
@@ -58,5 +58,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-kernel/linux/linux-ti-staging_4.1.bb       |   11 ++---
  6 files changed, 52 insertions(+), 112 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=b5be811d51b61c2d10f54f9c52152cff37c04f2c
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=9a42de5977610873e52301a94ed24225ca7ab3ef
 
