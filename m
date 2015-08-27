@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 523C4E0097F; Tue, 25 Aug 2015 18:24:02 -0700 (PDT)
+	id 2D10AE00BC6; Wed, 26 Aug 2015 18:05:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,35 +8,35 @@ X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E6B3E006D2
-	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 18:23:57 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D3111E009F3
+	for <meta-ti@yoctoproject.org>; Wed, 26 Aug 2015 18:05:47 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7Q1NuKN007764
-	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 20:23:56 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7Q1Nucp018972
-	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 20:23:56 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 25 Aug 2015 20:23:56 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7R15lLf030584
+	for <meta-ti@yoctoproject.org>; Wed, 26 Aug 2015 20:05:47 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7R15lbm003344
+	for <meta-ti@yoctoproject.org>; Wed, 26 Aug 2015 20:05:47 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 26 Aug 2015 20:05:46 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t7Q1NuJE008042	for <meta-ti@yoctoproject.org>; Tue, 25 Aug 2015 20:23:56
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t7R15kC4008480	for <meta-ti@yoctoproject.org>; Wed, 26 Aug 2015 20:05:46
 	-0500
-Date: Tue, 25 Aug 2015 21:23:55 -0400
+Date: Wed, 26 Aug 2015 21:05:46 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1119080566.39.1440552236038.JavaMail.jenkins@puget>
+Message-ID: <468259036.47.1440637546679.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-08-25_21-01-41
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-08-26_21-01-41
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,25 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 01:24:02 -0000
+X-List-Received-Date: Thu, 27 Aug 2015 01:05:52 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_38_1570398828.1440552235995"
+	boundary="----=_Part_46_1071533654.1440637546676"
 
-------=_Part_38_1570398828.1440552235995
+------=_Part_46_1071533654.1440637546676
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 08/25/15
+Status for 08/26/15
 </title>
 </head>
 <body>
 
-<h2>Status for 08/25/15</h2>
+<h2>Status for 08/26/15</h2>
 
-<h2>BUILD_ID: build-2015-08-25_21-03-03</h2>
+<h2>BUILD_ID: build-2015-08-26_21-02-51</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -113,7 +113,7 @@ Status for 08/25/15
     </tr>
     <tr>
         <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
         <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
@@ -123,7 +123,7 @@ Status for 08/25/15
     </tr>
     <tr>
         <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
         <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
@@ -138,7 +138,7 @@ Status for 08/25/15
     </tr>
     <tr>
         <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
         <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
@@ -148,7 +148,7 @@ Status for 08/25/15
     </tr>
     <tr>
         <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
         <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
@@ -252,4 +252,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_38_1570398828.1440552235995--
+------=_Part_46_1071533654.1440637546676--
