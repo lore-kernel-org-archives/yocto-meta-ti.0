@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D51BAE00C8F; Thu, 27 Aug 2015 12:59:26 -0700 (PDT)
+	id D8363E00C8A; Thu, 27 Aug 2015 12:59:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99560E00B6C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF6DAE00C0A
 	for <meta-ti@yoctoproject.org>; Thu, 27 Aug 2015 12:59:22 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 822EE52AA4; Thu, 27 Aug 2015 19:59:21 +0000 (UTC)
+	id A2DAB52AB4; Thu, 27 Aug 2015 19:59:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150827195921.822EE52AA4@arago-project.org>
+Message-Id: <20150827195921.A2DAB52AB4@arago-project.org>
 Date: Thu, 27 Aug 2015 19:59:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: bump rev, update J6/ AM5 GFX patches to rev3
+Subject: Denys Dmytriyenko : u-boot-ti-staging: bump rev
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,25 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 9a42de5977610873e52301a94ed24225ca7ab3ef
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9a42de5977610873e52301a94ed24225ca7ab3ef
+Commit: 83503704f720a585fff2e0c4211b2d23b3616e2f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=83503704f720a585fff2e0c4211b2d23b3616e2f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 28 01:44:29 2015 +0000
+Date:   Fri Aug 28 01:57:39 2015 +0000
 
-linux-ti-staging: bump rev, update J6/AM5 GFX patches to rev3
+u-boot-ti-staging: bump rev
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...0001-DT-gpu-add-binding-for-TI-SGX-driver.patch |   25 ++++++-----
- ...dts-DRA7xx-add-device-tree-entry-for-SGX.patch} |   24 +++++-----
- ...02-ARM-dts-DRA7xx-add-gpu-interface-clock.patch |   34 --------------
- ...ch => 0003-arm-dra7xx-Add-gpu-hwmod-data.patch} |   48 ++++----------------
- ... => 0004-drm-omap-Add-omapdrm-plugin-API.patch} |   22 +++++-----
- recipes-kernel/linux/linux-ti-staging_4.1.bb       |   11 ++---
- 6 files changed, 52 insertions(+), 112 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=9a42de5977610873e52301a94ed24225ca7ab3ef
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index 459e9bf..25f4782 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ 
+-PR = "r5"
++PR = "r6"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "69c789f385de7672f1e849c03baee40fa7d1ec44"
++SRCREV = "5e31eb59f03a424371c605448b6bbc2f93da787b"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+
 
