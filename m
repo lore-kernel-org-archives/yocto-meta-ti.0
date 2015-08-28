@@ -1,39 +1,38 @@
-Return-Path: <denis@denix.org>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5AEABE00B4D; Fri, 28 Aug 2015 13:08:50 -0700 (PDT)
+	id 4DAE6E00B7C; Fri, 28 Aug 2015 14:07:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, RCVD_IN_DNSWL_NONE, 
-	URI_HEX autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.17 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B017E005B1
-	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 13:08:48 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173017.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NTT00DE56M8CW50@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 28 Aug 2015 15:08:32 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=uRRa74qj2VoA:10 a=sozttTNsAAAA:8
-	a=3mWQM2cXNNKfrSMtT-AA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 09D88161BB6;	Fri,
-	28 Aug 2015 16:08:32 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Fri, 28 Aug 2015 16:08:31 -0400
-Message-id: <1440792511-30293-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH v2] omapdrm-pvr: add AM3 and AM4 which use null_window DRM
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12B45E00ABC
+	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 14:07:39 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t7SL7cga020370
+	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 16:07:38 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t7SL7cL5019421
+	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 16:07:38 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 28 Aug 2015 16:07:37 -0500
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t7SL7b4A026920;	Fri, 28 Aug 2015 16:07:37 -0500
+From: Hongmei Gou <h-gou@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 28 Aug 2015 17:07:32 -0400
+Message-ID: <1440796052-10282-1-git-send-email-h-gou@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH v2] omap5-sgx-ddk-um-linux: add AM3 and AM4, and pvr-init to initialization
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,67 +45,132 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2015 20:08:50 -0000
+X-List-Received-Date: Fri, 28 Aug 2015 21:07:44 -0000
+Content-Type: text/plain
 
-From: "Gou, Hongmei" <h-gou@ti.com>
-
-Bumped driver revs to match latest kernel patches.
+* Add AM3 and AM4 which use null_windown DRM
+* Add pvr-init to /etc/init.d
 
 Signed-off-by: Hongmei Gou <h-gou@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     | 26 +++++++++++++++++-----
- 1 file changed, 21 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-index e2d01cd..0978b43 100644
---- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-@@ -5,22 +5,38 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
- 
- inherit module
- 
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+v2 changes:
+1) Use 8 as the initialization number for pvr-init, since pvr-init needs to be done before starting weston which uses number 9
+2) Create empty powervr.ini as the default, and place ti33x and ti43x specific ones in their corresponding directories
+
+---
+ .../libgles/omap5-sgx-ddk-um-linux/powervr.ini     |  0
+ .../libgles/omap5-sgx-ddk-um-linux/rc.pvr          | 17 +++++++++++++
+ .../omap5-sgx-ddk-um-linux/ti33x/powervr.ini       |  3 +++
+ .../omap5-sgx-ddk-um-linux/ti43x/powervr.ini       |  3 +++
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     | 29 +++++++++++++++++++---
+ 5 files changed, 49 insertions(+), 3 deletions(-)
+ create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux/powervr.ini
+ create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux/rc.pvr
+ create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
+ create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
+
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/powervr.ini b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/powervr.ini
+new file mode 100644
+index 0000000..e69de29
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/rc.pvr b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/rc.pvr
+new file mode 100644
+index 0000000..2711d6b
+--- /dev/null
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/rc.pvr
+@@ -0,0 +1,17 @@
++#!/bin/bash
 +
- MACHINE_KERNEL_PR_append = "h"
- PR = "${MACHINE_KERNEL_PR}"
++case "$1" in
++  start)
++
++  echo "Initializing the graphics driver ..."
++  pvrsrvinit
++
++  ;;
++  stop)
++    # Nothing to be done.
++  ;;
++  *)
++    echo "Usage: $0 {start|stop}"
++    exit 1
++  ;;
++esac
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
+new file mode 100644
+index 0000000..0657ab8
+--- /dev/null
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
+@@ -0,0 +1,3 @@
++[default]
++WindowSystem=null_libdrm.so
++DisableHWTQTextureUpload=1
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
+new file mode 100644
+index 0000000..0657ab8
+--- /dev/null
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
+@@ -0,0 +1,3 @@
++[default]
++WindowSystem=null_libdrm.so
++DisableHWTQTextureUpload=1
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index c29b91d..a97f88b 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -3,12 +3,23 @@ HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
  
--BRANCH = "dra7/k4.1"
+-BRANCH = "master"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+BRANCH_omap-a15 = "dra7/k4.1"
++BRANCH_omap-a15 = "master"
 +BRANCH_ti33x = "am4/k4.1"
 +BRANCH_ti43x = "am4/k4.1"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
++SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
++SRCREV_ti33x    = "c30d4b35701e1b88d58a9ae713b2e679298d1a37"
++SRCREV_ti43x    = "c30d4b35701e1b88d58a9ae713b2e679298d1a37"
++
++INITSCRIPT_NAME = "pvr-init"
++INITSCRIPT_PARAMS = "defaults 8"
++
++inherit update-rc.d
+ 
+-PR = "r9"
++PR = "r10"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ 
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
+@@ -17,13 +28,25 @@ RREPLACES_${PN}-dbg = "libegl-dbg"
+ 
  S = "${WORKDIR}/git"
  
--SRCREV = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
-+SRCREV_omap-a15 = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
-+SRCREV_ti33x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
-+SRCREV_ti43x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
++SRC_URI_append = " \
++    file://rc.pvr \
++    file://powervr.ini \
++"
 +
-+PVR_NULLDRM_ti33x = "1"
-+PVR_NULLDRM_ti43x = "1"
-+PVR_NULLDRM_omap-a15 = "0"
+ do_install () {
+     oe_runmake install DESTDIR=${D}
++    install -d ${D}${sysconfdir}/init.d
++    install -m 0755 ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
 +
-+EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" PVR_NULLDRM=${PVR_NULLDRM}'
- 
--EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
-+DEVICE_SUB_DIR_omap-a15 = "omap5430"
-+DEVICE_SUB_DIR_ti33x = "omap335x"
-+DEVICE_SUB_DIR_ti43x = "omap437x"
- 
- do_compile_prepend() {
--    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap5430_linux
-+    cd ${S}/eurasia_km/eurasiacon/build/linux2/${DEVICE_SUB_DIR}_linux
++    install -d ${D}${sysconfdir}
++    install -m 0644 ${WORKDIR}/powervr.ini ${D}${sysconfdir}/
  }
  
- do_install() {
--    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
-+    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_${DEVICE_SUB_DIR}_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
- }
+ FILES_${PN} =  "${bindir}/*"
+ FILES_${PN} += " ${libdir}/*"
+ FILES_${PN} +=  "${includedir}/* /usr/share/sgx-lib/"
++FILES_${PN} += "${sysconfdir}/init.d/pvr-init"
++FILES_${PN} += "${sysconfdir}/powervr.ini"
+ 
+ INHIBIT_PACKAGE_STRIP = "1"
+ 
 -- 
-2.2.0
+1.9.1
 
 
