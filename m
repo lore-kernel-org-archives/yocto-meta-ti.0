@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CBB16E00C6B; Fri, 28 Aug 2015 09:31:16 -0700 (PDT)
+	id 5AEABE00B4D; Fri, 28 Aug 2015 13:08:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, RCVD_IN_DNSWL_NONE, 
+	URI_HEX autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.17 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2F37E00C27
-	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 09:31:11 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id DB75C52A62; Fri, 28 Aug 2015 16:31:10 +0000 (UTC)
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B017E005B1
+	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 13:08:48 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173017.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NTT00DE56M8CW50@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 28 Aug 2015 15:08:32 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=uRRa74qj2VoA:10 a=sozttTNsAAAA:8
+	a=3mWQM2cXNNKfrSMtT-AA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 09D88161BB6;	Fri,
+	28 Aug 2015 16:08:32 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20150828163110.DB75C52A62@arago-project.org>
-Date: Fri, 28 Aug 2015 16:31:10 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Gou, Hongmei : am437x-evm: bump max_leb_cnt to fit larger image
+Date: Fri, 28 Aug 2015 16:08:31 -0400
+Message-id: <1440792511-30293-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH v2] omapdrm-pvr: add AM3 and AM4 which use null_window DRM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,39 +46,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2015 16:31:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 28 Aug 2015 20:08:50 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 241739c16b9c7d0ac52504ac7735a70de966943d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=241739c16b9c7d0ac52504ac7735a70de966943d
+From: "Gou, Hongmei" <h-gou@ti.com>
 
-Author: Gou, Hongmei <h-gou@ti.com>
-Date:   Fri Aug 28 09:26:49 2015 +0000
-
-am437x-evm: bump max_leb_cnt to fit larger image
+Bumped driver revs to match latest kernel patches.
 
 Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     | 26 +++++++++++++++++-----
+ 1 file changed, 21 insertions(+), 5 deletions(-)
 
- conf/machine/am437x-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 04f0571..9ff8944 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -24,7 +24,7 @@ SERIAL_CONSOLE = "115200 ttyO0"
- # UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 994 LEBs
--MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2200"
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+index e2d01cd..0978b43 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+@@ -5,22 +5,38 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
  
- # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # from dmesg:
+ inherit module
+ 
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
++
+ MACHINE_KERNEL_PR_append = "h"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+-BRANCH = "dra7/k4.1"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++BRANCH_omap-a15 = "dra7/k4.1"
++BRANCH_ti33x = "am4/k4.1"
++BRANCH_ti43x = "am4/k4.1"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
++SRCREV_omap-a15 = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
++SRCREV_ti33x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
++SRCREV_ti43x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
++
++PVR_NULLDRM_ti33x = "1"
++PVR_NULLDRM_ti43x = "1"
++PVR_NULLDRM_omap-a15 = "0"
++
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" PVR_NULLDRM=${PVR_NULLDRM}'
+ 
+-EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
++DEVICE_SUB_DIR_omap-a15 = "omap5430"
++DEVICE_SUB_DIR_ti33x = "omap335x"
++DEVICE_SUB_DIR_ti43x = "omap437x"
+ 
+ do_compile_prepend() {
+-    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap5430_linux
++    cd ${S}/eurasia_km/eurasiacon/build/linux2/${DEVICE_SUB_DIR}_linux
+ }
+ 
+ do_install() {
+-    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_${DEVICE_SUB_DIR}_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
+-- 
+2.2.0
 
 
