@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CC7A9E00C45; Fri, 28 Aug 2015 09:31:16 -0700 (PDT)
+	id CBB16E00C6B; Fri, 28 Aug 2015 09:31:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE748E00AF6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2F37E00C27
 	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 09:31:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 70FC2529B5; Fri, 28 Aug 2015 16:31:10 +0000 (UTC)
+	id DB75C52A62; Fri, 28 Aug 2015 16:31:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150828163110.70FC2529B5@arago-project.org>
-Date: Fri, 28 Aug 2015 16:31:09 +0000 (UTC)
+Message-Id: <20150828163110.DB75C52A62@arago-project.org>
+Date: Fri, 28 Aug 2015 16:31:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omapdrm-pvr: bump rev to match v3 of corresponding kernel patches
+Subject: Gou, Hongmei : am437x-evm: bump max_leb_cnt to fit larger image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,43 +37,35 @@ X-List-Received-Date: Fri, 28 Aug 2015 16:31:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: fb4f6941d3f6af57a0202df8997596073c9f5b69
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fb4f6941d3f6af57a0202df8997596073c9f5b69
+Branch: master
+Commit: 241739c16b9c7d0ac52504ac7735a70de966943d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=241739c16b9c7d0ac52504ac7735a70de966943d
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 28 22:01:59 2015 +0000
+Author: Gou, Hongmei <h-gou@ti.com>
+Date:   Fri Aug 28 09:26:49 2015 +0000
 
-omapdrm-pvr: bump rev to match v3 of corresponding kernel patches
+am437x-evm: bump max_leb_cnt to fit larger image
 
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/am437x-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-index 665c3de..e2d01cd 100644
---- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 04f0571..9ff8944 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -24,7 +24,7 @@ SERIAL_CONSOLE = "115200 ttyO0"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2200"
  
- inherit module
- 
--MACHINE_KERNEL_PR_append = "g"
-+MACHINE_KERNEL_PR_append = "h"
- PR = "${MACHINE_KERNEL_PR}"
- 
- BRANCH = "dra7/k4.1"
-@@ -13,7 +13,7 @@ BRANCH = "dra7/k4.1"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
- 
--SRCREV = "333ef031a98c0abdd49b6cfac61fbdd8c1d88518"
-+SRCREV = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
- 
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
- 
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
 
 
