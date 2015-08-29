@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0AF6EE00CAF; Fri, 28 Aug 2015 17:04:35 -0700 (PDT)
+	id 1287DE00CAD; Fri, 28 Aug 2015 17:04:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 122BDE00CAC
-	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:04:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 816A7E00CAE
+	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:04:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 022A952A62; Sat, 29 Aug 2015 00:04:29 +0000 (UTC)
+	id B2FA552AB6; Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150829000430.022A952A62@arago-project.org>
-Date: Sat, 29 Aug 2015 00:04:29 +0000 (UTC)
+Message-Id: <20150829000430.B2FA552AB6@arago-project.org>
+Date: Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : omapdrm-pvr: add AM3 and AM4 which use null_window DRM
 X-BeenThere: meta-ti@yoctoproject.org
@@ -39,9 +39,9 @@ X-List-Received-Date: Sat, 29 Aug 2015 00:04:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 2b585314cc76895a1481ad22f16d95d0837d7c17
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2b585314cc76895a1481ad22f16d95d0837d7c17
+Branch: fido
+Commit: cd24ef18557329695bc9242e810c7388833a2f1b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cd24ef18557329695bc9242e810c7388833a2f1b
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Sat Aug 29 02:08:31 2015 +0000
