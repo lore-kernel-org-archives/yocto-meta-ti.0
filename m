@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ED8B6E00CB4; Fri, 28 Aug 2015 17:04:34 -0700 (PDT)
+	id 0AF6EE00CAF; Fri, 28 Aug 2015 17:04:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 13555E00CAD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 122BDE00CAC
 	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:04:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D837352A19; Sat, 29 Aug 2015 00:04:29 +0000 (UTC)
+	id 022A952A62; Sat, 29 Aug 2015 00:04:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150829000429.D837352A19@arago-project.org>
+Message-Id: <20150829000430.022A952A62@arago-project.org>
 Date: Sat, 29 Aug 2015 00:04:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: bump rev, update GFX patches w/ AM3/ AM4 support
+Subject: Gou, Hongmei : omapdrm-pvr: add AM3 and AM4 which use null_window DRM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,28 +40,71 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 71d8398e9168c6c943c7b914fbd17f38ce50f83c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=71d8398e9168c6c943c7b914fbd17f38ce50f83c
+Commit: 2b585314cc76895a1481ad22f16d95d0837d7c17
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2b585314cc76895a1481ad22f16d95d0837d7c17
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 29 03:25:07 2015 +0000
+Author: Gou, Hongmei <h-gou@ti.com>
+Date:   Sat Aug 29 02:08:31 2015 +0000
 
-linux-ti-staging: bump rev, update GFX patches w/ AM3/AM4 support
+omapdrm-pvr: add AM3 and AM4 which use null_window DRM
 
+Bumped driver revs to match latest kernel patches.
+
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...0001-DT-gpu-add-binding-for-TI-SGX-driver.patch |    4 +-
- ...-dts-DRA7xx-add-device-tree-entry-for-SGX.patch |    4 +-
- .../0003-arm-dra7xx-Add-gpu-hwmod-data.patch       |    4 +-
- .../0004-drm-omap-Add-omapdrm-plugin-API.patch     |    4 +-
- ...cache-flush-management-symbols-when-MULTI.patch |   36 +++++
- .../0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch  |  150 ++++++++++++++++++++
- .../0007-ARM-dts-am437x-add-DT-node-for-gpu.patch  |  102 +++++++++++++
- ...se-pdata-quirks-for-sgx-deassert_hardrese.patch |   96 +++++++++++++
- recipes-kernel/linux/linux-ti-staging_4.1.bb       |   27 ++--
- 9 files changed, 408 insertions(+), 19 deletions(-)
+ .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |   26 ++++++++++++++++----
+ 1 files changed, 21 insertions(+), 5 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=71d8398e9168c6c943c7b914fbd17f38ce50f83c
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+index e2d01cd..0978b43 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+@@ -5,22 +5,38 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
+ 
+ inherit module
+ 
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
++
+ MACHINE_KERNEL_PR_append = "h"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+-BRANCH = "dra7/k4.1"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++BRANCH_omap-a15 = "dra7/k4.1"
++BRANCH_ti33x = "am4/k4.1"
++BRANCH_ti43x = "am4/k4.1"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
++SRCREV_omap-a15 = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
++SRCREV_ti33x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
++SRCREV_ti43x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
++
++PVR_NULLDRM_ti33x = "1"
++PVR_NULLDRM_ti43x = "1"
++PVR_NULLDRM_omap-a15 = "0"
++
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" PVR_NULLDRM=${PVR_NULLDRM}'
+ 
+-EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
++DEVICE_SUB_DIR_omap-a15 = "omap5430"
++DEVICE_SUB_DIR_ti33x = "omap335x"
++DEVICE_SUB_DIR_ti43x = "omap437x"
+ 
+ do_compile_prepend() {
+-    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap5430_linux
++    cd ${S}/eurasia_km/eurasiacon/build/linux2/${DEVICE_SUB_DIR}_linux
+ }
+ 
+ do_install() {
+-    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_${DEVICE_SUB_DIR}_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
+
 
