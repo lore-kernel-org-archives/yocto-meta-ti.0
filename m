@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 599E4E00CB5; Fri, 28 Aug 2015 17:04:34 -0700 (PDT)
+	id 5CAD5E00B72; Fri, 28 Aug 2015 17:04:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10F8CE00CA6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FBF1E00B72
 	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:04:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2204752A67; Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
+	id 395A952A97; Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150829000430.2204752A67@arago-project.org>
+Message-Id: <20150829000430.395A952A97@arago-project.org>
 Date: Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Gou, Hongmei : libdrm: add ti33x and ti43x to COMPATIBLE_MACHINE
+Subject: Gou, Hongmei : am335x-evm: bump max_leb_cnt to fit larger image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 62fe901541cd5ec269bcb962499fde040146e414
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=62fe901541cd5ec269bcb962499fde040146e414
+Commit: 243a8245cacf5ba2b487393d7f2771a35ff83a56
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=243a8245cacf5ba2b487393d7f2771a35ff83a56
 
 Author: Gou, Hongmei <h-gou@ti.com>
-Date:   Fri Aug 28 09:16:09 2015 +0000
+Date:   Sat Aug 29 03:15:42 2015 +0000
 
-libdrm: add ti33x and ti43x to COMPATIBLE_MACHINE
+am335x-evm: bump max_leb_cnt to fit larger image
 
 Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/drm/libdrm_2.4.41.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/am335x-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
-index 0150632..dc1fbe1 100644
---- a/recipes-graphics/drm/libdrm_2.4.41.bb
-+++ b/recipes-graphics/drm/libdrm_2.4.41.bb
-@@ -2,7 +2,7 @@ require recipes-graphics/drm/libdrm.inc
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 571cbec..08daa8e 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -24,7 +24,7 @@ SERIAL_CONSOLE = "115200 ttyO0"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4400"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4600"
  
- FILESEXTRAPATHS_append := ":${COREBASE}/meta/recipes-graphics/drm/libdrm"
- 
--COMPATIBLE_MACHINE = "omap-a15"
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
- 
- DEFAULT_PREFERENCE = "-1"
- 
-@@ -15,6 +15,6 @@ SRC_URI += "file://installtests-ti.patch \
-             file://GNU_SOURCE_definition.patch \
-            "
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- S = "${WORKDIR}/git"
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
 
 
