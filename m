@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5CAD5E00B72; Fri, 28 Aug 2015 17:04:34 -0700 (PDT)
+	id EA47DE00CB5; Fri, 28 Aug 2015 17:04:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FBF1E00B72
-	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:04:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 82443E00CAF
+	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:04:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 395A952A97; Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
+	id E724D52AB9; Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150829000430.395A952A97@arago-project.org>
+Message-Id: <20150829000430.E724D52AB9@arago-project.org>
 Date: Sat, 29 Aug 2015 00:04:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : am335x-evm: bump max_leb_cnt to fit larger image
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2015 00:04:34 -0000
+X-List-Received-Date: Sat, 29 Aug 2015 00:04:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 243a8245cacf5ba2b487393d7f2771a35ff83a56
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=243a8245cacf5ba2b487393d7f2771a35ff83a56
+Branch: fido
+Commit: 9287e819faebf4a3cdad74db73da3a8e1e1b6dd2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9287e819faebf4a3cdad74db73da3a8e1e1b6dd2
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Sat Aug 29 03:15:42 2015 +0000
