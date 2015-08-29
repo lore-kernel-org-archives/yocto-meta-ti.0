@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 46E84E00CA5; Fri, 28 Aug 2015 17:42:12 -0700 (PDT)
+	id 47CD1E00C93; Fri, 28 Aug 2015 17:42:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E62CAE00CAC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE961E00CA6
 	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:42:05 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A646C5299C; Sat, 29 Aug 2015 00:42:05 +0000 (UTC)
+	id 9800552A67; Sat, 29 Aug 2015 00:42:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150829004205.A646C5299C@arago-project.org>
+Message-Id: <20150829004205.9800552A67@arago-project.org>
 Date: Sat, 29 Aug 2015 00:42:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : boot-monitor: Update to new version 15.07
+Subject: Sam Nelson : u-boot-keystone: Update to new version 2013_01_15.07_01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: e3ebd913daeb10915664b5be265cdd57c54c034d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e3ebd913daeb10915664b5be265cdd57c54c034d
+Commit: 43f20398a19ffb87969726e788b603d2a3e93cd0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=43f20398a19ffb87969726e788b603d2a3e93cd0
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Aug 25 19:54:46 2015 +0000
+Date:   Tue Aug 25 19:28:39 2015 +0000
 
-boot-monitor: Update to new version 15.07
+u-boot-keystone: Update to new version 2013_01_15.07_01
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    6 +++---
+ recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index 4ad8448..c353488 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -8,14 +8,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+index 80f4c34..e4387fc 100644
+--- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
++++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+@@ -4,11 +4,11 @@ DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
  
- PV = "2.0+git${SRCPV}"
--PR = "r3"
-+PR = "r4"
+ COMPATIBLE_MACHINE = "keystone"
  
+-PR = "r5"
++PR = "r6"
+ PV_append = "+git${SRCPV}"
+ 
+-# Tag "K2_UBOOT_2013_01_14.09"
+-SRCREV = "f9bc365551ff8c685bf6134d795576713fec0917"
++# Tag "K2_UBOOT_2013_01_15.07_01"
++SRCREV = "5eaedcc4c2bca0ed971ee46694df7edc0cfa36cf"
  BRANCH = "master"
  
- S = "${WORKDIR}/git"
- 
--#Tag "K2_BM_14.09"
--SRCREV = "4b0287a3fa9c7a25c75bbe3a54f4ac2a92dc0aaa"
-+#Tag "K2_BM_15.07"
-+SRCREV = "62d198687a34a9df375c1686d75ad4f85515dcf9"
- 
- BOOT_MONITOR_BINARY ?= "skern.bin"
- BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
+ SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
 
 
