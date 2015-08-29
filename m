@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7CD05E00C82; Fri, 28 Aug 2015 17:41:56 -0700 (PDT)
+	id 7E999E00C80; Fri, 28 Aug 2015 17:41:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B39FBE00AD7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1AE3E009B8
 	for <meta-ti@yoctoproject.org>; Fri, 28 Aug 2015 17:41:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9011352A67; Sat, 29 Aug 2015 00:41:52 +0000 (UTC)
+	id 7EBA952A65; Sat, 29 Aug 2015 00:41:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150829004152.9011352A67@arago-project.org>
+Message-Id: <20150829004152.7EBA952A65@arago-project.org>
 Date: Sat, 29 Aug 2015 00:41:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : u-boot-keystone: Update to new version 2013_01_15.07_01
+Subject: Sam Nelson : linux-keystone: update to new version 3.10.72_15.08
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +38,70 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: ba7c4b9b9898f660fe6cf55ea1ea9634c55d7617
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ba7c4b9b9898f660fe6cf55ea1ea9634c55d7617
+Commit: 001cce1e78a293edd2d2e5f48eb9ebcd0ca9634c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=001cce1e78a293edd2d2e5f48eb9ebcd0ca9634c
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Aug 25 19:28:39 2015 +0000
+Date:   Tue Aug 25 19:23:38 2015 +0000
 
-u-boot-keystone: Update to new version 2013_01_15.07_01
+linux-keystone: update to new version 3.10.72_15.08
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-keystone-rt_3.10.bb |    6 +++---
+ recipes-kernel/linux/linux-keystone_3.10.bb    |    6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-index 80f4c34..e4387fc 100644
---- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-@@ -4,11 +4,11 @@ DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
+diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
+index 51e18d3..b914c52 100644
+--- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
+@@ -10,7 +10,7 @@ inherit kernel
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
  
- COMPATIBLE_MACHINE = "keystone"
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "e"
+ PR = "${MACHINE_KERNEL_PR}"
  
--PR = "r5"
-+PR = "r6"
- PV_append = "+git${SRCPV}"
+ KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
+@@ -19,8 +19,8 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
  
--# Tag "K2_UBOOT_2013_01_14.09"
--SRCREV = "f9bc365551ff8c685bf6134d795576713fec0917"
-+# Tag "K2_UBOOT_2013_01_15.07_01"
-+SRCREV = "5eaedcc4c2bca0ed971ee46694df7edc0cfa36cf"
- BRANCH = "master"
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
  
- SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
+-#This commit corresponds to "K2_RT_LINUX_03.10.72_15.##"
+-SRCREV = "d607d75a2de99b3723cf9a2ba56f839debbee3c8"
++#This commit corresponds to "K2_RT_LINUX_03.10.72_15.08"
++SRCREV = "dfe5ac2e9d7dba93fad48ca761933503dbdecae2"
+ PV = "3.10.72+git${SRCPV}"
+ 
+ BRANCH = "v3.10.72/master-rt"
+diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
+index 01573ca..85eecb6 100644
+--- a/recipes-kernel/linux/linux-keystone_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone_3.10.bb
+@@ -10,7 +10,7 @@ inherit kernel
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+ 
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "e"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
+@@ -19,8 +19,8 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
+ 
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ 
+-#This commit corresponds to "K2_LINUX_03.10.72_15.##"
+-SRCREV = "b9bad8fccc5f9c6bcd78363982b3249a15f193fb"
++#This commit corresponds to "K2_LINUX_03.10.72_15.08"
++SRCREV = "ca334dedb5c234b1602d991d9b330360a5bc97ad"
+ PV = "3.10.72+git${SRCPV}"
+ 
+ BRANCH = "v3.10.72/master"
 
 
