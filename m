@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1ABD2E00AC1; Mon, 31 Aug 2015 09:37:43 -0700 (PDT)
+	id 38BC5E00AB0; Mon, 31 Aug 2015 09:37:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 693F2E0071C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69405E00A9A
 	for <meta-ti@yoctoproject.org>; Mon, 31 Aug 2015 09:37:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1CEC65297D; Mon, 31 Aug 2015 16:37:36 +0000 (UTC)
+	id 1583452A47; Mon, 31 Aug 2015 16:37:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150831163736.1CEC65297D@arago-project.org>
+Message-Id: <20150831163736.1583452A47@arago-project.org>
 Date: Mon, 31 Aug 2015 16:37:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : layer.conf: add omapdrm-pvr and omap5-sgx-ddk-um-linux to ABI safe list
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 31 Aug 2015 16:37:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 1a9fd1a2225dc62a6565a545975965ad20e952fb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1a9fd1a2225dc62a6565a545975965ad20e952fb
+Branch: master
+Commit: 387a462eea090baaee5049e26e66a20a89b9b053
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=387a462eea090baaee5049e26e66a20a89b9b053
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Aug 31 22:31:39 2015 +0000
