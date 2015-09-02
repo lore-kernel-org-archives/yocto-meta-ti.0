@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 20389E00A3C; Wed,  2 Sep 2015 06:47:09 -0700 (PDT)
+	id 5DE59E00D61; Wed,  2 Sep 2015 13:04:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00ADBE00CB2
-	for <meta-ti@yoctoproject.org>; Wed,  2 Sep 2015 06:46:53 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 93EDE52094; Wed,  2 Sep 2015 13:46:53 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150902134653.93EDE52094@arago-project.org>
-Date: Wed,  2 Sep 2015 13:46:53 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-module-drv: Update to new version 1.0.2.3
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F213E00A99
+	for <meta-ti@yoctoproject.org>; Wed,  2 Sep 2015 13:04:46 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t82K4jLw004015
+	for <meta-ti@yoctoproject.org>; Wed, 2 Sep 2015 15:04:45 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t82K4jOZ006101
+	for <meta-ti@yoctoproject.org>; Wed, 2 Sep 2015 15:04:45 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 2 Sep 2015 15:04:45 -0500
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t82K4gMe003449;	Wed, 2 Sep 2015 15:04:43 -0500
+From: Hongmei Gou <h-gou@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 2 Sep 2015 16:04:30 -0400
+Message-ID: <1441224270-14258-1-git-send-email-h-gou@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] ti-osal: add the latest version of 1.24.00.09
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,97 +45,83 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2015 13:47:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 02 Sep 2015 20:04:48 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: daisy
-Commit: 090b02a104924886afd0fa79be7b5d08eebf071f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=090b02a104924886afd0fa79be7b5d08eebf071f
+* ti-osal is added for building dspdce-fw and ipumm-fw in Yocto
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Sep  1 07:34:54 2015 +0000
-
-uio-module-drv: Update to new version 1.0.2.3
-
-- Also add test code recipe for uio-module-drv
-- Common part of recipe moved to uio-module-drv.inc
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
 ---
+ recipes-ti/includes/ti-paths.inc      |  2 ++
+ recipes-ti/osal/ti-osal.inc           | 21 +++++++++++++++++++++
+ recipes-ti/osal/ti-osal_1.24.00.09.bb |  9 +++++++++
+ 3 files changed, 32 insertions(+)
+ create mode 100644 recipes-ti/osal/ti-osal.inc
+ create mode 100644 recipes-ti/osal/ti-osal_1.24.00.09.bb
 
- .../uio-module-drv/uio-module-drv-test_git.bb      |   16 ++++++++++++++++
- recipes-bsp/uio-module-drv/uio-module-drv.inc      |   10 ++++++++++
- recipes-bsp/uio-module-drv/uio-module-drv_git.bb   |   13 ++-----------
- 3 files changed, 28 insertions(+), 11 deletions(-)
-
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index b902cbb..bd80fa1 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -44,6 +44,7 @@ export VICPLIB_INSTALL_DIR_RECIPE    = "${installdir}/ti-vicplib-tree"
+ export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
+ export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
+ export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
++export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ 
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -78,6 +79,7 @@ export UIA_INSTALL_DIR        = "${STAGING_DIR_TARGET}${UIA_INSTALL_DIR_RECIPE}"
+ export XDAIS_INSTALL_DIR      = "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE}"
+ export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
+ export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
++export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
+diff --git a/recipes-ti/osal/ti-osal.inc b/recipes-ti/osal/ti-osal.inc
 new file mode 100644
-index 0000000..1080a91
+index 0000000..09ee883
 --- /dev/null
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Test code for user space IO (UIO) driver"
++++ b/recipes-ti/osal/ti-osal.inc
+@@ -0,0 +1,21 @@
++DESCRIPTION = "TI Operating System Abstraction Library (OSAL)"
++HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/osal"
++LICENSE = "BSD & EPL"
++SECTION = "devel"
 +
-+include uio-module-drv.inc
-+PV = "1.0.2.3"
++require ../includes/ti-paths.inc
++require ../includes/ti-staging.inc
 +
-+COMPATIBLE_MACHINE = "keystone"
-+RDEPENDS_${PN} = "uio-module-drv"
++S = "${WORKDIR}/osal_${PV}"
 +
-+do_compile() {
-+	oe_runmake -C ${S} test
-+}
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/osal/${PV}/exports/osal_${PV}.tar.gz;name=osaltarball"
 +
 +do_install() {
-+	install -d ${D}${bindir}/
-+	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
++    install -d ${D}${OSAL_INSTALL_DIR_RECIPE}
++    cp -pPrf ${S}/* ${D}${OSAL_INSTALL_DIR_RECIPE}
 +}
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
++
++INSANE_SKIP_${PN}-dev = "staticdev"
++
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${OSAL_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/osal/ti-osal_1.24.00.09.bb b/recipes-ti/osal/ti-osal_1.24.00.09.bb
 new file mode 100644
-index 0000000..567f7f6
+index 0000000..226458b
 --- /dev/null
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-@@ -0,0 +1,10 @@
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
++++ b/recipes-ti/osal/ti-osal_1.24.00.09.bb
+@@ -0,0 +1,9 @@
++require ti-osal.inc
 +
-+BRANCH = "master"
-+# This corresponds to version 01.00.02.03
-+SRCREV = "634a0c64763c5cd7840e2d439d0ee900455584c8"
++PV = "1_24_00_09"
++PR = "r0"
 +
-+SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
++LIC_FILES_CHKSUM = "file://osal_${PV}_Manifest.html;md5=c110191994d011cee4cd02189ed3c9f4"
 +
-+S = "${WORKDIR}/git"
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-index b247527..d75fda2 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-@@ -1,21 +1,12 @@
- DESCRIPTION="User space IO (UIO) driver for on-chip modules"
- 
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
--
--BRANCH ?= "master"
--# This corresponds to version 01.00.02.01
--SRCREV = "c1988446e3364af4df7cd877e6536f0c6647d7bb"
--PV = "1.0.2.1+git${SRCPV}"
--
--SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
-+include uio-module-drv.inc
-+PV = "1.0.2.3+git${SRCPV}"
- 
- # This package builds a kernel module, use kernel PR as base and append a local
- MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
--S = "${WORKDIR}/git"
--
- module_auto_load_uio-module-drv = "uio-module-drv"
- 
- inherit module
++SRC_URI[osaltarball.md5sum] = "a7ea85447fa0ff0f786d527a52fa6e8b"
++SRC_URI[osaltarball.sha256sum] = "d14f1f43c8a7965e86add69bd813cea56ea7e38abeb55de3fdcdaf4a69f19bf3"
+-- 
+1.9.1
 
 
