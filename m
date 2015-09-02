@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B237CE00C7D; Wed,  2 Sep 2015 06:45:59 -0700 (PDT)
+	id B456BE00C7C; Wed,  2 Sep 2015 06:45:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57F0DE00A3C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55D2AE009C3
 	for <meta-ti@yoctoproject.org>; Wed,  2 Sep 2015 06:45:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3BB8A52A1C; Wed,  2 Sep 2015 13:45:55 +0000 (UTC)
+	id 304F152094; Wed,  2 Sep 2015 13:45:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150902134555.3BB8A52A1C@arago-project.org>
+Message-Id: <20150902134555.304F152094@arago-project.org>
 Date: Wed,  2 Sep 2015 13:45:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-module-drv: Update to new version 1.0.2.3
+Subject: Denys Dmytriyenko : linux-ti-staging: update with latest changes, add new DTBs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,92 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9c6635c26561265f7ae3038e368e224c68cf4d45
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c6635c26561265f7ae3038e368e224c68cf4d45
+Commit: 6b02dab85cb0eceabab6baf7ebcc218f69d3c7c0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6b02dab85cb0eceabab6baf7ebcc218f69d3c7c0
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Sep  1 07:34:54 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Sep  1 20:53:38 2015 +0000
 
-uio-module-drv: Update to new version 1.0.2.3
+linux-ti-staging: update with latest changes, add new DTBs
 
-- Also add test code recipe for uio-module-drv
-- Common part of recipe moved to uio-module-drv.inc
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../uio-module-drv/uio-module-drv-test_git.bb      |   16 ++++++++++++++++
- recipes-bsp/uio-module-drv/uio-module-drv.inc      |   10 ++++++++++
- recipes-bsp/uio-module-drv/uio-module-drv_git.bb   |   13 ++-----------
- 3 files changed, 28 insertions(+), 11 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-new file mode 100644
-index 0000000..1080a91
---- /dev/null
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Test code for user space IO (UIO) driver"
-+
-+include uio-module-drv.inc
-+PV = "1.0.2.3"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+RDEPENDS_${PN} = "uio-module-drv"
-+
-+do_compile() {
-+	oe_runmake -C ${S} test
-+}
-+
-+do_install() {
-+	install -d ${D}${bindir}/
-+	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
-+}
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-new file mode 100644
-index 0000000..567f7f6
---- /dev/null
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-@@ -0,0 +1,10 @@
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
-+
-+BRANCH = "master"
-+# This corresponds to version 01.00.02.03
-+SRCREV = "634a0c64763c5cd7840e2d439d0ee900455584c8"
-+
-+SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-index b247527..d75fda2 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-@@ -1,21 +1,12 @@
- DESCRIPTION="User space IO (UIO) driver for on-chip modules"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index e67cc15..36f0323 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -31,7 +31,7 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
+ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb"
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+-KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra72-evm.dtb"
++KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
+ KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-evm.dtb"
+ KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
+ KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
+@@ -50,11 +50,11 @@ S = "${WORKDIR}/git"
  
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
--
--BRANCH ?= "master"
--# This corresponds to version 01.00.02.01
--SRCREV = "c1988446e3364af4df7cd877e6536f0c6647d7bb"
--PV = "1.0.2.1+git${SRCPV}"
--
--SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
-+include uio-module-drv.inc
-+PV = "1.0.2.3+git${SRCPV}"
+ BRANCH = "ti-lsk-linux-4.1.y"
  
- # This package builds a kernel module, use kernel PR as base and append a local
- MACHINE_KERNEL_PR_append = "b"
+-SRCREV = "20d5e1664b054e8775f4023d65f16b2a1efc8dda"
++SRCREV = "babcc95b3b74f099c63cae31abf403edf6154c0b"
+ PV = "4.1.6+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "e"
++MACHINE_KERNEL_PR_append = "f"
  PR = "${MACHINE_KERNEL_PR}"
  
--S = "${WORKDIR}/git"
--
- module_auto_load_uio-module-drv = "uio-module-drv"
- 
- inherit module
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
