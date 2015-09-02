@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9FDFCE00C7D; Wed,  2 Sep 2015 06:46:00 -0700 (PDT)
+	id C3848E00CAE; Wed,  2 Sep 2015 06:46:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5922BE00C79
-	for <meta-ti@yoctoproject.org>; Wed,  2 Sep 2015 06:45:55 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18104E00CB3
+	for <meta-ti@yoctoproject.org>; Wed,  2 Sep 2015 06:46:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1491552A14; Wed,  2 Sep 2015 13:45:54 +0000 (UTC)
+	id B836C529D2; Wed,  2 Sep 2015 13:46:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150902134555.1491552A14@arago-project.org>
-Date: Wed,  2 Sep 2015 13:45:54 +0000 (UTC)
+Message-Id: <20150902134625.B836C529D2@arago-project.org>
+Date: Wed,  2 Sep 2015 13:46:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Karthik Ramanan : ipumm-fw: update to 3.00.08.02
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2015 13:46:00 -0000
+X-List-Received-Date: Wed, 02 Sep 2015 13:46:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 000fc8922a99bf55d9e82b2c4f49451f2250e409
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=000fc8922a99bf55d9e82b2c4f49451f2250e409
+Branch: fido
+Commit: 404eb49c6252c2c25c1d2c035cbe7307670b89aa
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=404eb49c6252c2c25c1d2c035cbe7307670b89aa
 
 Author: Karthik Ramanan <a0393906@ti.com>
 Date:   Mon Aug 31 15:24:33 2015 +0000
