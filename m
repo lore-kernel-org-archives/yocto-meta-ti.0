@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BAD93E00BBC; Fri,  4 Sep 2015 13:07:07 -0700 (PDT)
+	id BBA44E00C67; Fri,  4 Sep 2015 13:13:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.17 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 924FBE00AE4
-	for <meta-ti@yoctoproject.org>; Fri,  4 Sep 2015 13:07:05 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173017.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NU600FHS57S3X70@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 04 Sep 2015 15:07:04 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
-	a=PmkLh0T9h0TAP35X7OQA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 4D4D1161BD2;	Fri,
-	4 Sep 2015 16:07:04 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4DF5E00AE4
+	for <meta-ti@yoctoproject.org>; Fri,  4 Sep 2015 13:13:50 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C471552A67; Fri,  4 Sep 2015 20:13:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 04 Sep 2015 16:07:03 -0400
-Message-id: <1441397223-23790-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] linux-ti-staging: SGX patches went into kernel, drop them locally
+Message-Id: <20150904201349.C471552A67@arago-project.org>
+Date: Fri,  4 Sep 2015 20:13:49 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : u-boot-ti-staging, keystone: update with latest fixes, switch keystone over
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,51 +33,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2015 20:07:07 -0000
+X-List-Received-Date: Fri, 04 Sep 2015 20:13:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: a56d68804c2a895c3c496f3fa1e0ed038b257a22
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a56d68804c2a895c3c496f3fa1e0ed038b257a22
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Sep  5 01:40:41 2015 +0000
+
+u-boot-ti-staging, keystone: update with latest fixes, switch keystone over
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging_4.1.bb | 17 ++---------------
- 1 file changed, 2 insertions(+), 15 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 4ecab8e..a423ca7 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -50,11 +50,11 @@ S = "${WORKDIR}/git"
+---
+
+ conf/machine/include/keystone.inc               |    4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 7920447..c541241 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -5,8 +5,8 @@ DEFAULTTUNE ?= "cortexa15thf-neon"
+ require conf/machine/include/tune-cortexa15.inc
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-keystone"
+-PREFERRED_PROVIDER_u-boot = "u-boot-keystone"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
++PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
  
--SRCREV = "1d476946dc0c881868ffd78cd2be30740ce0dea1"
-+SRCREV = "3adfb503c87468c448ee30191511184fb0c65dd0"
- PV = "4.1.6+git${SRCPV}"
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r9"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index 25f4782..677112a 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "g"
-+MACHINE_KERNEL_PR_append = "h"
- PR = "${MACHINE_KERNEL_PR}"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-@@ -70,16 +70,3 @@ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
- KERNEL_GIT_PROTOCOL = "git"
- SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-             file://defconfig"
--
--GFX_PATCHES =  "file://0005-arm-Export-cache-flush-management-symbols-when-MULTI.patch \
--                file://0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch \
--                file://0007-ARM-dts-am437x-add-DT-node-for-gpu.patch \
--                file://0008-ARM-OMAP2-Use-pdata-quirks-for-sgx-deassert_hardrese.patch"
--
--SRC_URI_append_omap-a15 = " ${GFX_PATCHES} file://sgx.cfg"
--SRC_URI_append_ti33x = " ${GFX_PATCHES} file://sgx.cfg"
--SRC_URI_append_ti43x = " ${GFX_PATCHES} file://sgx.cfg"
--
--KERNEL_CONFIG_FRAGMENTS_append_omap-a15 = " ${WORKDIR}/sgx.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/sgx.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/sgx.cfg"
--- 
-2.2.0
+-PR = "r6"
++PR = "r7"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "5e31eb59f03a424371c605448b6bbc2f93da787b"
++SRCREV = "3ec018bb44bca64873c934be87c182e5fea0290b"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
