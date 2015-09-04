@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1A13EE00D5C; Fri,  4 Sep 2015 13:13:56 -0700 (PDT)
+	id C8C7AE00CD3; Fri,  4 Sep 2015 13:14:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7801E00C30
-	for <meta-ti@yoctoproject.org>; Fri,  4 Sep 2015 13:13:50 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 13459E00AE4
+	for <meta-ti@yoctoproject.org>; Fri,  4 Sep 2015 13:14:42 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F1E2F52A87; Fri,  4 Sep 2015 20:13:49 +0000 (UTC)
+	id BBCB552A67; Fri,  4 Sep 2015 20:14:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150904201349.F1E2F52A87@arago-project.org>
-Date: Fri,  4 Sep 2015 20:13:49 +0000 (UTC)
+Message-Id: <20150904201441.BBCB552A67@arago-project.org>
+Date: Fri,  4 Sep 2015 20:14:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: SGX patches went into kernel, drop them locally
+Subject: Denys Dmytriyenko : u-boot-ti-staging, keystone: update with latest fixes, switch keystone over
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,60 +33,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2015 20:13:56 -0000
+X-List-Received-Date: Fri, 04 Sep 2015 20:14:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 008e80c27f3103685a642dd0bbc9647aedb8e3f6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=008e80c27f3103685a642dd0bbc9647aedb8e3f6
+Branch: fido
+Commit: 471cdec1269045b8e27835c7f28ee01af74ee7ed
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=471cdec1269045b8e27835c7f28ee01af74ee7ed
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Sep  5 02:07:03 2015 +0000
+Date:   Sat Sep  5 01:40:41 2015 +0000
 
-linux-ti-staging: SGX patches went into kernel, drop them locally
+u-boot-ti-staging, keystone: update with latest fixes, switch keystone over
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |   17 ++---------------
- 1 files changed, 2 insertions(+), 15 deletions(-)
+ conf/machine/include/keystone.inc               |    4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 4ecab8e..a423ca7 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -50,11 +50,11 @@ S = "${WORKDIR}/git"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 7920447..c541241 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -5,8 +5,8 @@ DEFAULTTUNE ?= "cortexa15thf-neon"
+ require conf/machine/include/tune-cortexa15.inc
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-keystone"
+-PREFERRED_PROVIDER_u-boot = "u-boot-keystone"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
++PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
  
--SRCREV = "1d476946dc0c881868ffd78cd2be30740ce0dea1"
-+SRCREV = "3adfb503c87468c448ee30191511184fb0c65dd0"
- PV = "4.1.6+git${SRCPV}"
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r9"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index 25f4782..677112a 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "g"
-+MACHINE_KERNEL_PR_append = "h"
- PR = "${MACHINE_KERNEL_PR}"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-@@ -70,16 +70,3 @@ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
- KERNEL_GIT_PROTOCOL = "git"
- SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-             file://defconfig"
--
--GFX_PATCHES =  "file://0005-arm-Export-cache-flush-management-symbols-when-MULTI.patch \
--                file://0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch \
--                file://0007-ARM-dts-am437x-add-DT-node-for-gpu.patch \
--                file://0008-ARM-OMAP2-Use-pdata-quirks-for-sgx-deassert_hardrese.patch"
--
--SRC_URI_append_omap-a15 = " ${GFX_PATCHES} file://sgx.cfg"
--SRC_URI_append_ti33x = " ${GFX_PATCHES} file://sgx.cfg"
--SRC_URI_append_ti43x = " ${GFX_PATCHES} file://sgx.cfg"
--
--KERNEL_CONFIG_FRAGMENTS_append_omap-a15 = " ${WORKDIR}/sgx.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/sgx.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/sgx.cfg"
+-PR = "r6"
++PR = "r7"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "5e31eb59f03a424371c605448b6bbc2f93da787b"
++SRCREV = "3ec018bb44bca64873c934be87c182e5fea0290b"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
