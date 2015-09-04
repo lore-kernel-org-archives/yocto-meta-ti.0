@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 252A4E00CA9; Thu,  3 Sep 2015 21:51:21 -0700 (PDT)
+	id 26536E00939; Thu,  3 Sep 2015 21:51:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 022C7E00939
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03841E00A81
 	for <meta-ti@yoctoproject.org>; Thu,  3 Sep 2015 21:51:15 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B2C90529F0; Fri,  4 Sep 2015 04:51:14 +0000 (UTC)
+	id EE41D529D2; Fri,  4 Sep 2015 04:51:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150904045114.B2C90529F0@arago-project.org>
+Message-Id: <20150904045114.EE41D529D2@arago-project.org>
 Date: Fri,  4 Sep 2015 04:51:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update with latest merges, first 4 SGX patches upstreamed
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 04 Sep 2015 04:51:21 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 2076be96334a953f36f595778d3aa9b60577e195
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2076be96334a953f36f595778d3aa9b60577e195
+Branch: fido
+Commit: 06f0a01c8debed686a50a0ac60d477f831b5fac5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=06f0a01c8debed686a50a0ac60d477f831b5fac5
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Sep  4 02:16:18 2015 +0000
@@ -57,5 +57,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-kernel/linux/linux-ti-staging_4.1.bb       |   10 +-
  5 files changed, 3 insertions(+), 766 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=2076be96334a953f36f595778d3aa9b60577e195
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=06f0a01c8debed686a50a0ac60d477f831b5fac5
 
