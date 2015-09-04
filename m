@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8E383E00BFF; Thu,  3 Sep 2015 21:59:18 -0700 (PDT)
+	id 2FCE7E00A81; Thu,  3 Sep 2015 21:59:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD6A0E00A81
-	for <meta-ti@yoctoproject.org>; Thu,  3 Sep 2015 21:59:14 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9261DE00A81
+	for <meta-ti@yoctoproject.org>; Thu,  3 Sep 2015 21:59:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 72A78529F0; Fri,  4 Sep 2015 04:59:13 +0000 (UTC)
+	id 4A82A529F0; Fri,  4 Sep 2015 04:59:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150904045913.72A78529F0@arago-project.org>
-Date: Fri,  4 Sep 2015 04:59:13 +0000 (UTC)
+Message-Id: <20150904045934.4A82A529F0@arago-project.org>
+Date: Fri,  4 Sep 2015 04:59:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update with latest merges, first 4 SGX patches upstreamed
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2015 04:59:18 -0000
+X-List-Received-Date: Fri, 04 Sep 2015 04:59:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 9a673a7ee219bd103e48df05e35bc55d6b2bfbd0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9a673a7ee219bd103e48df05e35bc55d6b2bfbd0
+Branch: fido
+Commit: a854519df8cc1cdc77ef6af2d211cefe5c20ff79
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a854519df8cc1cdc77ef6af2d211cefe5c20ff79
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Sep  4 10:53:54 2015 +0000
@@ -58,5 +58,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-kernel/linux/linux-ti-staging_4.1.bb       |   25 +-
  6 files changed, 14 insertions(+), 771 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=9a673a7ee219bd103e48df05e35bc55d6b2bfbd0
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=a854519df8cc1cdc77ef6af2d211cefe5c20ff79
 
