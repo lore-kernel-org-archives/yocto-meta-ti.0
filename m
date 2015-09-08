@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 24853E00D14; Tue,  8 Sep 2015 14:29:45 -0700 (PDT)
+	id 9CB2BE00C09; Tue,  8 Sep 2015 14:42:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C5BEE00B99
-	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 14:29:39 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D61E752A7D; Tue,  8 Sep 2015 21:29:37 +0000 (UTC)
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 47269E00B6D
+	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 14:42:22 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NUD001UROAET2J0@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 08 Sep 2015 16:42:19 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
+	a=i0qd_v1WZK1U20nDbU4A:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id A0E22161BDE;	Tue,
+	8 Sep 2015 17:42:14 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908212937.D61E752A7D@arago-project.org>
-Date: Tue,  8 Sep 2015 21:29:37 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : boot-monitor: also package resulting skern file into / boot
+Date: Tue, 08 Sep 2015 17:42:13 -0400
+Message-id: <1441748533-15368-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] omap5-sgx-ddk-um-linux: explicitly specify RDEPENDS on libdrm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,68 +45,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 21:29:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Sep 2015 21:42:26 -0000
 
-Module: meta-ti
-Branch: fido
-Commit: 8f3e07ca27cd2ef5c7fbe4ffd9e64886ee58ad08
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f3e07ca27cd2ef5c7fbe4ffd9e64886ee58ad08
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep  9 00:40:45 2015 +0000
-
-boot-monitor: also package resulting skern file into /boot
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |   17 ++++++++++++-----
- 1 files changed, 12 insertions(+), 5 deletions(-)
-
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index c353488..d64cba7 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index 55fa33a..cd01d6f 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -22,6 +22,8 @@ inherit update-rc.d
+ PR = "r11"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
- PV = "2.0+git${SRCPV}"
--PR = "r4"
-+PR = "r5"
- 
- BRANCH = "master"
- 
-@@ -24,6 +24,10 @@ FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURE
- 
- EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}" LD="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}""
- 
-+FILES_${PN} = "/boot"
++RDEPENDS_${PN} += "libdrm"
 +
-+inherit deploy
-+
- do_compile () {
- 	unset LDFLAGS
- 	unset CFLAGS
-@@ -31,11 +35,14 @@ do_compile () {
- 	oe_runmake ${BOOT_MONITOR_MAKE_TARGET}
- }
- 
--inherit deploy
--
--addtask deploy before do_build after do_compile
-+do_install () {
-+	install -d ${D}/boot
-+	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAGE}
-+}
- 
- do_deploy () {
- 	install -d ${DEPLOYDIR}
--	install ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
-+	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
- }
-+
-+addtask deploy before do_build after do_compile
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
+ RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
+ RREPLACES_${PN}-dbg = "libegl-dbg"
+-- 
+2.2.0
 
 
