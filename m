@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 65F94E00C9C; Tue,  8 Sep 2015 08:58:03 -0700 (PDT)
+	id 69209E00CBC; Tue,  8 Sep 2015 08:58:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0B62E00CCE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB5A4E00CAE
 	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 08:57:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 81FC952A7D; Tue,  8 Sep 2015 15:57:58 +0000 (UTC)
+	id 7042F529D7; Tue,  8 Sep 2015 15:57:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908155758.81FC952A7D@arago-project.org>
+Message-Id: <20150908155758.7042F529D7@arago-project.org>
 Date: Tue,  8 Sep 2015 15:57:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : amx3-cm3: update PM firmware, still version 191
+Subject: Gou, Hongmei : omap5-sgx-ddk-um-linux: Bump SRCREV for am4/k4.1 branch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: c4257f27b1a12730b234743e7f49489e27262274
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c4257f27b1a12730b234743e7f49489e27262274
+Commit: 5564c09fac7dfd58b7d48e8896bf970848392e75
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5564c09fac7dfd58b7d48e8896bf970848392e75
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep  8 20:43:03 2015 +0000
+Author: Gou, Hongmei <h-gou@ti.com>
+Date:   Tue Sep  8 20:32:40 2015 +0000
 
-amx3-cm3: update PM firmware, still version 191
+omap5-sgx-ddk-um-linux: Bump SRCREV for am4/k4.1 branch
 
+* Get changes for adding softlinks for libGLES_CM.so.1 and libGLESv2.so.1
+
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb |    6 +++---
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index d322530..80ca045 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -4,10 +4,10 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index a97f88b..55fa33a 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -11,15 +11,15 @@ BRANCH_ti43x = "am4/k4.1"
  
- PV = "1.9.1"
--PR = "r0"
-+PR = "r1"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+ SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
+-SRCREV_ti33x    = "c30d4b35701e1b88d58a9ae713b2e679298d1a37"
+-SRCREV_ti43x    = "c30d4b35701e1b88d58a9ae713b2e679298d1a37"
++SRCREV_ti33x    = "188575c7ba16c00a15499ed88a126af2506fdba5"
++SRCREV_ti43x    = "188575c7ba16c00a15499ed88a126af2506fdba5"
  
--SRCREV = "277eef8611e260a5d73a9e3773fff8f767fe2b01"
--BRANCH ?= "next-upstream"
-+SRCREV = "730f0695ca2dda65abcff5763e8f108517bc0d43"
-+BRANCH ?= "ti-v4.1.y"
+ INITSCRIPT_NAME = "pvr-init"
+ INITSCRIPT_PARAMS = "defaults 8"
  
- SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
+ inherit update-rc.d
  
+-PR = "r10"
++PR = "r11"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ 
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
 
 
