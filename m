@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 34648E00CDC; Tue,  8 Sep 2015 08:58:01 -0700 (PDT)
+	id 37B0FE00CD6; Tue,  8 Sep 2015 08:58:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F189BE00B6D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2CA5E00C71
 	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 08:57:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2BC2552A7F; Tue,  8 Sep 2015 15:57:55 +0000 (UTC)
+	id 173E052A7D; Tue,  8 Sep 2015 15:57:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908155755.2BC2552A7F@arago-project.org>
+Message-Id: <20150908155755.173E052A7D@arago-project.org>
 Date: Tue,  8 Sep 2015 15:57:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : amx3-cm3: update PM firmware, still version 191
+Subject: Gou, Hongmei : omapdrm-pvr: Bump SRCREV for am4/k4.1 branch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +40,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 58fa9e04463c189a235d715e866ac13d607d6e90
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58fa9e04463c189a235d715e866ac13d607d6e90
+Commit: fa435c1983ab06d40325d9ababee010feb25d87b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fa435c1983ab06d40325d9ababee010feb25d87b
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep  8 20:43:03 2015 +0000
+Author: Gou, Hongmei <h-gou@ti.com>
+Date:   Tue Sep  8 20:38:35 2015 +0000
 
-amx3-cm3: update PM firmware, still version 191
+omapdrm-pvr: Bump SRCREV for am4/k4.1 branch
 
+* Sync up with the current kernel code
+
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index d322530..80ca045 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -4,10 +4,10 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+index 0978b43..15ccb54 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+@@ -20,8 +20,8 @@ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch
+ S = "${WORKDIR}/git"
  
- PV = "1.9.1"
--PR = "r0"
-+PR = "r1"
+ SRCREV_omap-a15 = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
+-SRCREV_ti33x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
+-SRCREV_ti43x = "696eaf6cff0e4ab6abedc3ff639ec158f8a6177f"
++SRCREV_ti33x = "ad7c4fa37897b59b6d9ddabb9aba03fd515ffa29"
++SRCREV_ti43x = "ad7c4fa37897b59b6d9ddabb9aba03fd515ffa29"
  
--SRCREV = "277eef8611e260a5d73a9e3773fff8f767fe2b01"
--BRANCH ?= "next-upstream"
-+SRCREV = "730f0695ca2dda65abcff5763e8f108517bc0d43"
-+BRANCH ?= "ti-v4.1.y"
- 
- SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
- 
+ PVR_NULLDRM_ti33x = "1"
+ PVR_NULLDRM_ti43x = "1"
 
 
