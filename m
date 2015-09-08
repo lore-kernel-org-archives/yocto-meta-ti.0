@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7ECD4E00D42; Tue,  8 Sep 2015 15:36:48 -0700 (PDT)
+	id 80E25E00B81; Tue,  8 Sep 2015 15:36:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BB98E00C7F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B49CE00B87
 	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 15:36:45 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9C61452A7D; Tue,  8 Sep 2015 22:36:44 +0000 (UTC)
+	id BA6BC52A02; Tue,  8 Sep 2015 22:36:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908223644.9C61452A7D@arago-project.org>
+Message-Id: <20150908223644.BA6BC52A02@arago-project.org>
 Date: Tue,  8 Sep 2015 22:36:44 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : ti-osal: add the latest version of 1.24.00.09
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 08 Sep 2015 22:36:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: ea7341db403d29e9a3203b32727ea1d81cc2779a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ea7341db403d29e9a3203b32727ea1d81cc2779a
+Branch: master
+Commit: 0b3a26ca45b0ce88805e04baab151cabb99c7e83
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0b3a26ca45b0ce88805e04baab151cabb99c7e83
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Thu Sep  3 02:04:30 2015 +0000
