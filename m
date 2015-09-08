@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A7E94E00C05; Tue,  8 Sep 2015 14:42:26 -0700 (PDT)
+	id C2E38E00CB0; Tue,  8 Sep 2015 14:57:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 680FCE00B99
-	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 14:42:25 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NUD00MIDOALGNK0@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 08 Sep 2015 16:42:22 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
-	a=kOkXgNpPMkWqY6lXCHUA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C771D161BDE;	Tue,
-	8 Sep 2015 17:42:21 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A12BAE00B6D
+	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 14:57:27 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id ACD9152A02; Tue,  8 Sep 2015 21:57:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 08 Sep 2015 17:42:21 -0400
-Message-id: <1441748541-15433-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] linux-ti-staging: for keystone RDEPENDS on boot-monitor
+Message-Id: <20150908215726.ACD9152A02@arago-project.org>
+Date: Tue,  8 Sep 2015 21:57:26 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : libdrm: remove unused patch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,39 +33,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 21:42:26 -0000
+X-List-Received-Date: Tue, 08 Sep 2015 21:57:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 5c129778bdcc8e07ace47460a98cfb22aba701a7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5c129778bdcc8e07ace47460a98cfb22aba701a7
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Aug 31 22:21:32 2015 +0000
+
+libdrm: remove unused patch
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging_4.1.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index c1ca9c7..16b30a7 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -25,6 +25,9 @@ RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
- # on the target file system.
- RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+---
+
+ recipes-graphics/drm/libdrm_2.4.41.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
+index dc1fbe1..86a660e 100644
+--- a/recipes-graphics/drm/libdrm_2.4.41.bb
++++ b/recipes-graphics/drm/libdrm_2.4.41.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://git.ti.com/glsdk/libdrm.git;protocol=git"
+ SRCREV = "3cb5405084111193cedb8796d259b56560b088f0"
  
-+# Install boot-monitor skern file into /boot dir of rootfs
-+RDEPENDS_kernel-base_append_keystone = " boot-monitor"
-+
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
-@@ -54,7 +57,7 @@ SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
- PV = "4.1.6+git${SRCPV}"
+ SRC_URI += "file://installtests-ti.patch \
+-            file://GNU_SOURCE_definition.patch \
+            "
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "i"
-+MACHINE_KERNEL_PR_append = "j"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-2.2.0
+ PR = "${INC_PR}.2"
 
 
