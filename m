@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B6659E00CE9; Tue,  8 Sep 2015 08:58:00 -0700 (PDT)
+	id 34648E00CDC; Tue,  8 Sep 2015 08:58:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01119E00C9A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F189BE00B6D
 	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 08:57:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 42026529D7; Tue,  8 Sep 2015 15:57:55 +0000 (UTC)
+	id 2BC2552A7F; Tue,  8 Sep 2015 15:57:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908155755.42026529D7@arago-project.org>
+Message-Id: <20150908155755.2BC2552A7F@arago-project.org>
 Date: Tue,  8 Sep 2015 15:57:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with latest connectivity changes
+Subject: Denys Dmytriyenko : amx3-cm3: update PM firmware, still version 191
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +33,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 15:58:00 -0000
+X-List-Received-Date: Tue, 08 Sep 2015 15:58:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: deca190cc85b7fc97a7355b1a099ba3ebd81547d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=deca190cc85b7fc97a7355b1a099ba3ebd81547d
+Commit: 58fa9e04463c189a235d715e866ac13d607d6e90
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58fa9e04463c189a235d715e866ac13d607d6e90
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep  8 20:55:11 2015 +0000
+Date:   Tue Sep  8 20:43:03 2015 +0000
 
-linux-ti-staging: update with latest connectivity changes
+amx3-cm3: update PM firmware, still version 191
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index a423ca7..c1ca9c7 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -50,11 +50,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+index d322530..80ca045 100644
+--- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
++++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+@@ -4,10 +4,10 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ PV = "1.9.1"
+-PR = "r0"
++PR = "r1"
  
--SRCREV = "3adfb503c87468c448ee30191511184fb0c65dd0"
-+SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
- PV = "4.1.6+git${SRCPV}"
+-SRCREV = "277eef8611e260a5d73a9e3773fff8f767fe2b01"
+-BRANCH ?= "next-upstream"
++SRCREV = "730f0695ca2dda65abcff5763e8f108517bc0d43"
++BRANCH ?= "ti-v4.1.y"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "h"
-+MACHINE_KERNEL_PR_append = "i"
- PR = "${MACHINE_KERNEL_PR}"
+ SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
