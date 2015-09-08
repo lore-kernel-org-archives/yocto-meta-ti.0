@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 21426E00D3D; Tue,  8 Sep 2015 14:29:45 -0700 (PDT)
+	id 24853E00D14; Tue,  8 Sep 2015 14:29:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B266E00B87
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C5BEE00B99
 	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 14:29:39 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6F08152A02; Tue,  8 Sep 2015 21:29:38 +0000 (UTC)
+	id D61E752A7D; Tue,  8 Sep 2015 21:29:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908212938.6F08152A02@arago-project.org>
-Date: Tue,  8 Sep 2015 21:29:38 +0000 (UTC)
+Message-Id: <20150908212937.D61E752A7D@arago-project.org>
+Date: Tue,  8 Sep 2015 21:29:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : boot-monitor: also package resulting skern file into / boot
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 08 Sep 2015 21:29:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a2c60cc3d50a17911d54c94b0f223995033ef4ff
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a2c60cc3d50a17911d54c94b0f223995033ef4ff
+Branch: fido
+Commit: 8f3e07ca27cd2ef5c7fbe4ffd9e64886ee58ad08
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f3e07ca27cd2ef5c7fbe4ffd9e64886ee58ad08
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Sep  9 00:40:45 2015 +0000
