@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1BA16E00B89; Tue,  8 Sep 2015 07:43:43 -0700 (PDT)
+	id D46D3E00CAC; Tue,  8 Sep 2015 07:55:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,31 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
+	*      [206.46.173.19 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9937E00B5A
-	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 07:43:37 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0D07E00B52
+	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 07:55:36 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NUD000K94VR6B30@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 08 Sep 2015 09:43:13 -0500 (CDT)
+	with ESMTPSA id <0NUD009U85FZIJ60@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 08 Sep 2015 09:55:36 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
-	a=0EEtO-AaOsL-nq0t6JsA:9
+	a=lNLbqB1nbMv5Kq3l_bEA:9
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 54908161BDA;	Tue,
-	8 Sep 2015 10:43:03 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id A412B161BDA;	Tue,
+	8 Sep 2015 10:55:11 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Tue, 08 Sep 2015 10:43:03 -0400
-Message-id: <1441723383-26869-1-git-send-email-denis@denix.org>
+Date: Tue, 08 Sep 2015 10:55:11 -0400
+Message-id: <1441724111-11330-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] amx3-cm3: update PM firmware, still version 191
+Subject: [PATCH] linux-ti-staging: update with latest connectivity changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,33 +45,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 14:43:43 -0000
+X-List-Received-Date: Tue, 08 Sep 2015 14:55:42 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index d322530..80ca045 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -4,10 +4,10 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index a423ca7..c1ca9c7 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -50,11 +50,11 @@ S = "${WORKDIR}/git"
  
- PV = "1.9.1"
--PR = "r0"
-+PR = "r1"
+ BRANCH = "ti-lsk-linux-4.1.y"
  
--SRCREV = "277eef8611e260a5d73a9e3773fff8f767fe2b01"
--BRANCH ?= "next-upstream"
-+SRCREV = "730f0695ca2dda65abcff5763e8f108517bc0d43"
-+BRANCH ?= "ti-v4.1.y"
+-SRCREV = "3adfb503c87468c448ee30191511184fb0c65dd0"
++SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
+ PV = "4.1.6+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "h"
++MACHINE_KERNEL_PR_append = "i"
+ PR = "${MACHINE_KERNEL_PR}"
  
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 -- 
 2.2.0
 
