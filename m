@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4D2C0E00D52; Tue,  8 Sep 2015 15:46:51 -0700 (PDT)
+	id 7C1C3E00B87; Tue,  8 Sep 2015 15:46:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E404E00B68
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54420E00B87
 	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 15:46:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C8EA252979; Tue,  8 Sep 2015 22:46:26 +0000 (UTC)
+	id D696B5209B; Tue,  8 Sep 2015 22:46:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908224626.C8EA252979@arago-project.org>
+Message-Id: <20150908224626.D696B5209B@arago-project.org>
 Date: Tue,  8 Sep 2015 22:46:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap5-sgx-ddk-um-linux: explicitly specify RDEPENDS on libdrm
+Subject: Denys Dmytriyenko : linux-ti-staging: for keystone RDEPENDS on boot-monitor
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,33 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: e302edf4d7c3cb01128a7d1af77fef791a2a8ca0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e302edf4d7c3cb01128a7d1af77fef791a2a8ca0
+Commit: 046186bc6de2e69f83f4d1e87f0300eb0a5dbf25
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=046186bc6de2e69f83f4d1e87f0300eb0a5dbf25
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep  9 03:42:13 2015 +0000
+Date:   Wed Sep  9 03:42:21 2015 +0000
 
-omap5-sgx-ddk-um-linux: explicitly specify RDEPENDS on libdrm
+linux-ti-staging: for keystone RDEPENDS on boot-monitor
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index 55fa33a..cd01d6f 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -22,6 +22,8 @@ inherit update-rc.d
- PR = "r11"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index c1ca9c7..16b30a7 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -25,6 +25,9 @@ RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
+ # on the target file system.
+ RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
  
-+RDEPENDS_${PN} += "libdrm"
++# Install boot-monitor skern file into /boot dir of rootfs
++RDEPENDS_kernel-base_append_keystone = " boot-monitor"
 +
- RREPLACES_${PN} = "libegl libgles1 libgles2"
- RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
- RREPLACES_${PN}-dbg = "libegl-dbg"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+@@ -54,7 +57,7 @@ SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
+ PV = "4.1.6+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "i"
++MACHINE_KERNEL_PR_append = "j"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
