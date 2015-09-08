@@ -1,41 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 28671E00B87; Tue,  8 Sep 2015 15:44:53 -0700 (PDT)
+	id 221EEE00C11; Tue,  8 Sep 2015 15:46:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A21B8E00C11
-	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 15:44:17 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t88MiH6G031409
-	for <meta-ti@yoctoproject.org>; Tue, 8 Sep 2015 17:44:17 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t88MiHNR010088
-	for <meta-ti@yoctoproject.org>; Tue, 8 Sep 2015 17:44:17 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 8 Sep 2015 17:44:10 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t88MiGkN016743;
-	Tue, 8 Sep 2015 17:44:16 -0500
-Date: Tue, 8 Sep 2015 18:44:01 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Hongmei Gou <h-gou@ti.com>
-Message-ID: <20150908224401.GH4305@edge>
-References: <1441228144-26221-1-git-send-email-h-gou@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1441228144-26221-1-git-send-email-h-gou@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ti-codec-engine: update to version 3.24.00.08
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70919E00B68
+	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 15:46:23 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 283A652979; Tue,  8 Sep 2015 22:46:23 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150908224623.283A652979@arago-project.org>
+Date: Tue,  8 Sep 2015 22:46:23 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: for keystone RDEPENDS on boot-monitor
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,63 +33,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 22:44:53 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Sep 2015 22:46:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Same here - pushed to master/fido
+Module: meta-ti
+Branch: master
+Commit: dc515ca85e19ac79aa5ad3821b7456c605864a9a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dc515ca85e19ac79aa5ad3821b7456c605864a9a
 
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Sep  9 03:42:21 2015 +0000
 
-On Wed, Sep 02, 2015 at 05:09:04PM -0400, Hongmei Gou wrote:
-> * version update and install/stage the source tree w/o compiling examples
-> 
-> Signed-off-by: Hongmei Gou <h-gou@ti.com>
-> ---
->  .../codec-engine/ti-codec-engine_3.24.00.08.bb     | 29 ++++++++++++++++++++++
->  1 file changed, 29 insertions(+)
->  create mode 100644 recipes-ti/codec-engine/ti-codec-engine_3.24.00.08.bb
-> 
-> diff --git a/recipes-ti/codec-engine/ti-codec-engine_3.24.00.08.bb b/recipes-ti/codec-engine/ti-codec-engine_3.24.00.08.bb
-> new file mode 100644
-> index 0000000..06a7ce1
-> --- /dev/null
-> +++ b/recipes-ti/codec-engine/ti-codec-engine_3.24.00.08.bb
-> @@ -0,0 +1,29 @@
-> +DESCRIPTION = "Codec Engine for TI ARM/DSP processors"
-> +HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ce"
-> +SECTION = "devel"
-> +LICENSE = "BSD"
-> +
-> +require recipes-ti/includes/ti-paths.inc
-> +require recipes-ti/includes/ti-staging.inc
-> +
-> +PV = "3_24_00_08"
-> +PR = "r0"
-> +
-> +LIC_FILES_CHKSUM = "file://codec_engine_${PV}_Manifest.html;md5=de7d9c2594a6f3868e42a33b6a748ce7"
-> +
-> +SRC_URI[cetarball.md5sum] = "d66a8ccbd6cdfe9f735af9f4a07e2b9b"
-> +SRC_URI[cetarball.sha256sum] = "ed7b7399903bbf76af06ee6457836f344ad75b903618339bae82b3967f27ffa1"
-> +
-> +S = "${WORKDIR}/codec_engine_${PV}"
-> +
-> +SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ce/${PV}/exports/codec_engine_${PV},lite.tar.gz;name=cetarball "
-> +
-> +do_install() {
-> +
-> +        # Install/Stage the Source Tree
-> +        install -d ${D}${CE_INSTALL_DIR_RECIPE}
-> +        cp -pPrf ${S}/* ${D}${CE_INSTALL_DIR_RECIPE}
-> +}
-> +
-> +ALLOW_EMPTY_${PN} = "1"
-> +FILES_${PN}-dev += "${CE_INSTALL_DIR_RECIPE}"
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+linux-ti-staging: for keystone RDEPENDS on boot-monitor
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index c1ca9c7..16b30a7 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -25,6 +25,9 @@ RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
+ # on the target file system.
+ RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+ 
++# Install boot-monitor skern file into /boot dir of rootfs
++RDEPENDS_kernel-base_append_keystone = " boot-monitor"
++
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+@@ -54,7 +57,7 @@ SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
+ PV = "4.1.6+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "i"
++MACHINE_KERNEL_PR_append = "j"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+
 
