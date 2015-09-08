@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C3664E00C11; Tue,  8 Sep 2015 15:43:41 -0700 (PDT)
+	id 1A44DE00D0B; Tue,  8 Sep 2015 15:43:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A11D9E00B68
-	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 15:43:38 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2E59E00B87
+	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 15:43:42 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3F29352979; Tue,  8 Sep 2015 22:43:38 +0000 (UTC)
+	id 6206052979; Tue,  8 Sep 2015 22:43:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150908224338.3F29352979@arago-project.org>
-Date: Tue,  8 Sep 2015 22:43:38 +0000 (UTC)
+Message-Id: <20150908224342.6206052979@arago-project.org>
+Date: Tue,  8 Sep 2015 22:43:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : ti-codec-engine: update to version 3.24.00.08
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 22:43:41 -0000
+X-List-Received-Date: Tue, 08 Sep 2015 22:43:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: eaf9466cf2ce9e05bf00809cb7c6892d49c418a7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eaf9466cf2ce9e05bf00809cb7c6892d49c418a7
+Branch: fido
+Commit: 9d259fe1f5eb34ccd817b66445162c1606f6f3ce
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9d259fe1f5eb34ccd817b66445162c1606f6f3ce
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Thu Sep  3 03:09:04 2015 +0000
