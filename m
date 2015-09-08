@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9CB2BE00C09; Tue,  8 Sep 2015 14:42:26 -0700 (PDT)
+	id A7E94E00C05; Tue,  8 Sep 2015 14:42:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,26 +13,26 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
 	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 47269E00B6D
-	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 14:42:22 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 680FCE00B99
+	for <meta-ti@yoctoproject.org>; Tue,  8 Sep 2015 14:42:25 -0700 (PDT)
 Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NUD001UROAET2J0@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 08 Sep 2015 16:42:19 -0500 (CDT)
+	with ESMTPSA id <0NUD00MIDOALGNK0@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 08 Sep 2015 16:42:22 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
-	a=i0qd_v1WZK1U20nDbU4A:9
+	a=kOkXgNpPMkWqY6lXCHUA:9
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id A0E22161BDE;	Tue,
-	8 Sep 2015 17:42:14 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id C771D161BDE;	Tue,
+	8 Sep 2015 17:42:21 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Tue, 08 Sep 2015 17:42:13 -0400
-Message-id: <1441748533-15368-1-git-send-email-denis@denix.org>
+Date: Tue, 08 Sep 2015 17:42:21 -0400
+Message-id: <1441748541-15433-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] omap5-sgx-ddk-um-linux: explicitly specify RDEPENDS on libdrm
+Subject: [PATCH] linux-ti-staging: for keystone RDEPENDS on boot-monitor
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,22 +51,32 @@ From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index 55fa33a..cd01d6f 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -22,6 +22,8 @@ inherit update-rc.d
- PR = "r11"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index c1ca9c7..16b30a7 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -25,6 +25,9 @@ RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
+ # on the target file system.
+ RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
  
-+RDEPENDS_${PN} += "libdrm"
++# Install boot-monitor skern file into /boot dir of rootfs
++RDEPENDS_kernel-base_append_keystone = " boot-monitor"
 +
- RREPLACES_${PN} = "libegl libgles1 libgles2"
- RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
- RREPLACES_${PN}-dbg = "libegl-dbg"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+@@ -54,7 +57,7 @@ SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
+ PV = "4.1.6+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "i"
++MACHINE_KERNEL_PR_append = "j"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 -- 
 2.2.0
 
