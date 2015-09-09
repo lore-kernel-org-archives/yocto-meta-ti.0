@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0EC09E00C1A; Wed,  9 Sep 2015 10:22:47 -0700 (PDT)
+	id 10C81E00C1A; Wed,  9 Sep 2015 10:22:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,33 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.23 listed in list.dnswl.org]
+	*      [206.46.173.19 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A173E00B23
-	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 10:22:40 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173023.mailsrvcs.net
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1958E00B6C
+	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 10:22:52 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NUF00J4H6XA6160@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 09 Sep 2015 12:22:27 -0500 (CDT)
+	with ESMTPSA id <0NUF00EZ06XA8280@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 09 Sep 2015 12:22:32 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
-	a=lNLbqB1nbMv5Kq3l_bEA:9
+	a=ztGQagcx57n3yV9kHsAA:9
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 1151D161BCB;	Wed,
+	by gandalf.denix.org (Postfix) with ESMTP id 1E293161BDB;	Wed,
 	9 Sep 2015 13:22:22 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 09 Sep 2015 13:22:20 -0400
-Message-id: <1441819341-1118-1-git-send-email-denis@denix.org>
+Date: Wed, 09 Sep 2015 13:22:21 -0400
+Message-id: <1441819341-1118-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-Subject: [PATCH 1/2] linux-ti-staging: update with latest platform fixes
+In-reply-to: <1441819341-1118-1-git-send-email-denis@denix.org>
+References: <1441819341-1118-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] u-boot-ti-staging: update with latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,33 +47,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2015 17:22:47 -0000
+X-List-Received-Date: Wed, 09 Sep 2015 17:22:58 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_4.1.bb | 4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 16b30a7..1461e2e 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -53,11 +53,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index 1b62889..946a5e1 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
--SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
-+SRCREV = "a7db74ef69c8a444b5b0c225d0bbb1f628481863"
- PV = "4.1.6+git${SRCPV}"
+-PR = "r7"
++PR = "r8"
+ PV_append = "+git${SRCPV}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "j"
-+MACHINE_KERNEL_PR_append = "k"
- PR = "${MACHINE_KERNEL_PR}"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "3ec018bb44bca64873c934be87c182e5fea0290b"
++SRCREV = "77cfbf9a111a25188eb8583f49c2429d9b83d08d"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 -- 
 2.2.0
 
