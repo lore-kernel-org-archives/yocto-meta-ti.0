@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 873C8E00D9D; Wed,  9 Sep 2015 13:09:35 -0700 (PDT)
+	id BCD12E00DA1; Wed,  9 Sep 2015 13:09:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C064E00D7B
-	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 13:09:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99905E00DA0
+	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 13:09:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F026152A6D; Wed,  9 Sep 2015 20:09:29 +0000 (UTC)
+	id 2291252A94; Wed,  9 Sep 2015 20:09:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150909200929.F026152A6D@arago-project.org>
-Date: Wed,  9 Sep 2015 20:09:29 +0000 (UTC)
+Message-Id: <20150909200930.2291252A94@arago-project.org>
+Date: Wed,  9 Sep 2015 20:09:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : vpe-tests: resolve conflict with vpdma-fw
+Subject: Denys Dmytriyenko : linux-ti-staging: update with latest platform fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +33,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2015 20:09:35 -0000
+X-List-Received-Date: Wed, 09 Sep 2015 20:09:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: fcf175de9490cbfa03ad843138cbc2ab878c7513
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fcf175de9490cbfa03ad843138cbc2ab878c7513
+Branch: master
+Commit: 434570893e8a3a9a3bda28070aa2f7ba7a80b81e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=434570893e8a3a9a3bda28070aa2f7ba7a80b81e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep 10 01:54:47 2015 +0000
+Date:   Wed Sep  9 23:22:20 2015 +0000
 
-vpe-tests: resolve conflict with vpdma-fw
+linux-ti-staging: update with latest platform fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/vpe-tests/vpe-tests_git.bb |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/vpe-tests/vpe-tests_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-index 776bda5..951544b 100644
---- a/recipes-bsp/vpe-tests/vpe-tests_git.bb
-+++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-@@ -3,9 +3,9 @@ DESCRIPTION = "VPE test program"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 16b30a7..1461e2e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -53,11 +53,11 @@ S = "${WORKDIR}/git"
  
--DEPENDS = "virtual/kernel"
-+DEPENDS = "virtual/kernel vpdma-fw"
+ BRANCH = "ti-lsk-linux-4.1.y"
  
--PR = "r2"
-+PR = "r3"
+-SRCREV = "72c971cc113833c7a1f22a3c0ac3260f3a9a3378"
++SRCREV = "a7db74ef69c8a444b5b0c225d0bbb1f628481863"
+ PV = "4.1.6+git${SRCPV}"
  
- COMPATIBLE_MACHINE = "dra7xx"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "j"
++MACHINE_KERNEL_PR_append = "k"
+ PR = "${MACHINE_KERNEL_PR}"
  
-@@ -25,4 +25,6 @@ EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${FLOAT
- 
- do_install() {
-     oe_runmake DESTDIR="${D}" install
-+    rm -rf ${D}${base_libdir}/firmware/vpdma-*.bin
-+    rmdir -p ${D}${base_libdir}/firmware || true
- }
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
