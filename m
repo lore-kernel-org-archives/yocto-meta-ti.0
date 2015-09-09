@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 86072E00D7B; Wed,  9 Sep 2015 13:09:35 -0700 (PDT)
+	id 82AF8E00D43; Wed,  9 Sep 2015 13:09:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D3E8E00D90
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2ABF8E00D43
 	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 13:09:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DD861529D7; Wed,  9 Sep 2015 20:09:29 +0000 (UTC)
+	id 9E4AC52979; Wed,  9 Sep 2015 20:09:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150909200929.DD861529D7@arago-project.org>
+Message-Id: <20150909200929.9E4AC52979@arago-project.org>
 Date: Wed,  9 Sep 2015 20:09:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : boot-monitor: adjust resulting skern name to be SOC specific, not machine specific
+Subject: Jacob Stiffler : cmem-mod: update for changed module autoload syntax.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 411adbe48c6d567395ce8f824af1b5a9246e5d42
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=411adbe48c6d567395ce8f824af1b5a9246e5d42
+Commit: 8d0189bd1b847b89f4276c70aa9d3b8f70defbc4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8d0189bd1b847b89f4276c70aa9d3b8f70defbc4
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep 10 01:53:51 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Wed Sep  9 18:32:23 2015 +0000
 
-boot-monitor: adjust resulting skern name to be SOC specific, not machine specific
+cmem-mod: update for changed module autoload syntax.
 
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    9 ++++-----
- 1 files changed, 4 insertions(+), 5 deletions(-)
+ recipes-bsp/cmem/cmem-mod_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index d64cba7..5780195 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
+index 6b2303c..d36816b 100644
+--- a/recipes-bsp/cmem/cmem-mod_git.bb
++++ b/recipes-bsp/cmem/cmem-mod_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
+ include cmem.inc
  
- PV = "2.0+git${SRCPV}"
--PR = "r5"
-+PR = "r6"
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
- BRANCH = "master"
+ inherit module
+@@ -11,4 +11,4 @@ inherit module
+ EXTRA_OEMAKE += '-f lu.mak KERNEL_INSTALL_DIR="${STAGING_KERNEL_DIR}" TOOLCHAIN_PREFIX="${TOOLCHAIN_PREFIX}" EXEC_DIR="${D}/lib/modules/${KERNEL_VERSION}/extra"'
+ MAKE_TARGETS = "module"
  
-@@ -17,8 +17,7 @@ S = "${WORKDIR}/git"
- #Tag "K2_BM_15.07"
- SRCREV = "62d198687a34a9df375c1686d75ad4f85515dcf9"
- 
--BOOT_MONITOR_BINARY ?= "skern.bin"
--BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
-+BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
- 
- FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
- 
-@@ -37,12 +36,12 @@ do_compile () {
- 
- do_install () {
- 	install -d ${D}/boot
--	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAGE}
-+	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${D}/boot/
- }
- 
- do_deploy () {
- 	install -d ${DEPLOYDIR}
--	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
-+	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${DEPLOYDIR}/
- }
- 
- addtask deploy before do_build after do_compile
+-module_autoload_cmemk = "cmemk"
++KERNEL_MODULE_AUTOLOAD += "cmemk"
 
 
