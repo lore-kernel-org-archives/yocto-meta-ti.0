@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4D206E00C2C; Wed,  9 Sep 2015 13:09:34 -0700 (PDT)
+	id 7F379E00DA8; Wed,  9 Sep 2015 13:09:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 297E2E00D23
-	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 13:09:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96590E00D98
+	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 13:09:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D6D29529AC; Wed,  9 Sep 2015 20:09:29 +0000 (UTC)
+	id 48EA152A9E; Wed,  9 Sep 2015 20:09:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150909200929.D6D29529AC@arago-project.org>
-Date: Wed,  9 Sep 2015 20:09:29 +0000 (UTC)
+Message-Id: <20150909200930.48EA152A9E@arago-project.org>
+Date: Wed,  9 Sep 2015 20:09:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with latest fixes
+Subject: Denys Dmytriyenko : boot-monitor: adjust resulting skern name to be SOC specific, not machine specific
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +33,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2015 20:09:34 -0000
+X-List-Received-Date: Wed, 09 Sep 2015 20:09:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 94a36401bc5aea6293bce8f242867b50a6c0e1df
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=94a36401bc5aea6293bce8f242867b50a6c0e1df
+Branch: master
+Commit: 6e8a0b2b3c68f73bd1c81a6e02121ce57ad890e7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e8a0b2b3c68f73bd1c81a6e02121ce57ad890e7
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep  9 23:22:21 2015 +0000
+Date:   Thu Sep 10 01:53:51 2015 +0000
 
-u-boot-ti-staging: update with latest fixes
+boot-monitor: adjust resulting skern name to be SOC specific, not machine specific
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/boot-monitor/boot-monitor_git.bb |    9 ++++-----
+ 1 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index 1b62889..946a5e1 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index d64cba7..5780195 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ PV = "2.0+git${SRCPV}"
+-PR = "r5"
++PR = "r6"
  
--PR = "r7"
-+PR = "r8"
- PV_append = "+git${SRCPV}"
+ BRANCH = "master"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+@@ -17,8 +17,7 @@ S = "${WORKDIR}/git"
+ #Tag "K2_BM_15.07"
+ SRCREV = "62d198687a34a9df375c1686d75ad4f85515dcf9"
  
- BRANCH ?= "ti-u-boot-2015.07"
+-BOOT_MONITOR_BINARY ?= "skern.bin"
+-BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
++BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
  
--SRCREV = "3ec018bb44bca64873c934be87c182e5fea0290b"
-+SRCREV = "77cfbf9a111a25188eb8583f49c2429d9b83d08d"
+ FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
  
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+@@ -37,12 +36,12 @@ do_compile () {
+ 
+ do_install () {
+ 	install -d ${D}/boot
+-	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAGE}
++	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${D}/boot/
+ }
+ 
+ do_deploy () {
+ 	install -d ${DEPLOYDIR}
+-	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
++	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${DEPLOYDIR}/
+ }
+ 
+ addtask deploy before do_build after do_compile
 
 
