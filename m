@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 10C81E00C1A; Wed,  9 Sep 2015 10:22:58 -0700 (PDT)
+	id 4B416E00D6F; Wed,  9 Sep 2015 12:54:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,28 +13,26 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
 	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1958E00B6C
-	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 10:22:52 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11E76E00B56
+	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 12:54:02 -0700 (PDT)
 Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NUF00EZ06XA8280@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 09 Sep 2015 12:22:32 -0500 (CDT)
+	with ESMTPSA id <0NUF007LXDXR6L30@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 09 Sep 2015 14:53:52 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
-	a=ztGQagcx57n3yV9kHsAA:9
+	a=MWasmiWa1T6kSNiiLNoA:9
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 1E293161BDB;	Wed,
-	9 Sep 2015 13:22:22 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 85B3B161BE4;	Wed,
+	9 Sep 2015 15:53:51 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 09 Sep 2015 13:22:21 -0400
-Message-id: <1441819341-1118-2-git-send-email-denis@denix.org>
+Date: Wed, 09 Sep 2015 15:53:51 -0400
+Message-id: <1441828431-18423-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-In-reply-to: <1441819341-1118-1-git-send-email-denis@denix.org>
-References: <1441819341-1118-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] u-boot-ti-staging: update with latest fixes
+Subject: [PATCH] boot-monitor: adjust resulting skern name to be SOC specific, not machine specific
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,36 +45,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2015 17:22:58 -0000
+X-List-Received-Date: Wed, 09 Sep 2015 19:54:06 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/boot-monitor/boot-monitor_git.bb | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index 1b62889..946a5e1 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index d64cba7..5780195 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ PV = "2.0+git${SRCPV}"
+-PR = "r5"
++PR = "r6"
  
--PR = "r7"
-+PR = "r8"
- PV_append = "+git${SRCPV}"
+ BRANCH = "master"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+@@ -17,8 +17,7 @@ S = "${WORKDIR}/git"
+ #Tag "K2_BM_15.07"
+ SRCREV = "62d198687a34a9df375c1686d75ad4f85515dcf9"
  
- BRANCH ?= "ti-u-boot-2015.07"
+-BOOT_MONITOR_BINARY ?= "skern.bin"
+-BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
++BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
  
--SRCREV = "3ec018bb44bca64873c934be87c182e5fea0290b"
-+SRCREV = "77cfbf9a111a25188eb8583f49c2429d9b83d08d"
+ FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
  
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+@@ -37,12 +36,12 @@ do_compile () {
+ 
+ do_install () {
+ 	install -d ${D}/boot
+-	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAGE}
++	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${D}/boot/
+ }
+ 
+ do_deploy () {
+ 	install -d ${DEPLOYDIR}
+-	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
++	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${DEPLOYDIR}/
+ }
+ 
+ addtask deploy before do_build after do_compile
 -- 
 2.2.0
 
