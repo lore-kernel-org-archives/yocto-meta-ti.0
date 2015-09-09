@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7F379E00DA8; Wed,  9 Sep 2015 13:09:35 -0700 (PDT)
+	id 807D2E00DA3; Wed,  9 Sep 2015 13:09:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96590E00D98
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97312E00D9D
 	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 13:09:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 48EA152A9E; Wed,  9 Sep 2015 20:09:30 +0000 (UTC)
+	id 5F3A052A9F; Wed,  9 Sep 2015 20:09:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150909200930.48EA152A9E@arago-project.org>
+Message-Id: <20150909200930.5F3A052A9F@arago-project.org>
 Date: Wed,  9 Sep 2015 20:09:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : boot-monitor: adjust resulting skern name to be SOC specific, not machine specific
+Subject: Denys Dmytriyenko : vpe-tests: resolve conflict with vpdma-fw
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 6e8a0b2b3c68f73bd1c81a6e02121ce57ad890e7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e8a0b2b3c68f73bd1c81a6e02121ce57ad890e7
+Commit: 2abd8f8540075d35abde870c99b6fd36070e7cd6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2abd8f8540075d35abde870c99b6fd36070e7cd6
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep 10 01:53:51 2015 +0000
+Date:   Thu Sep 10 01:54:47 2015 +0000
 
-boot-monitor: adjust resulting skern name to be SOC specific, not machine specific
+vpe-tests: resolve conflict with vpdma-fw
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    9 ++++-----
- 1 files changed, 4 insertions(+), 5 deletions(-)
+ recipes-bsp/vpe-tests/vpe-tests_git.bb |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index d64cba7..5780195 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-bsp/vpe-tests/vpe-tests_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
+index 776bda5..951544b 100644
+--- a/recipes-bsp/vpe-tests/vpe-tests_git.bb
++++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
+@@ -3,9 +3,9 @@ DESCRIPTION = "VPE test program"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
  
- PV = "2.0+git${SRCPV}"
--PR = "r5"
-+PR = "r6"
+-DEPENDS = "virtual/kernel"
++DEPENDS = "virtual/kernel vpdma-fw"
  
- BRANCH = "master"
+-PR = "r2"
++PR = "r3"
  
-@@ -17,8 +17,7 @@ S = "${WORKDIR}/git"
- #Tag "K2_BM_15.07"
- SRCREV = "62d198687a34a9df375c1686d75ad4f85515dcf9"
+ COMPATIBLE_MACHINE = "dra7xx"
  
--BOOT_MONITOR_BINARY ?= "skern.bin"
--BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
-+BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
+@@ -25,4 +25,6 @@ EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${FLOAT
  
- FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
- 
-@@ -37,12 +36,12 @@ do_compile () {
- 
- do_install () {
- 	install -d ${D}/boot
--	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAGE}
-+	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${D}/boot/
+ do_install() {
+     oe_runmake DESTDIR="${D}" install
++    rm -rf ${D}${base_libdir}/firmware/vpdma-*.bin
++    rmdir -p ${D}${base_libdir}/firmware || true
  }
- 
- do_deploy () {
- 	install -d ${DEPLOYDIR}
--	install -m 0644 ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
-+	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${DEPLOYDIR}/
- }
- 
- addtask deploy before do_build after do_compile
 
 
