@@ -1,6 +1,6 @@
 Return-Path: <kbaker@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 85B3EE00DE2; Mon, 31 Aug 2015 13:00:22 -0700 (PDT)
+	id C03DBE00C62; Thu, 10 Sep 2015 08:30:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,9 +9,6 @@ X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	mail provider *      (kbaker[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.169 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
@@ -20,30 +17,33 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 91590E00CF6
-	for <meta-ti@yoctoproject.org>; Mon, 31 Aug 2015 13:00:18 -0700 (PDT)
-Received: by iods203 with SMTP id s203so171268165iod.0
-	for <meta-ti@yoctoproject.org>; Mon, 31 Aug 2015 13:00:18 -0700 (PDT)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.180 listed in list.dnswl.org]
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
+	[209.85.223.180])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F263E00AE0
+	for <meta-ti@yoctoproject.org>; Thu, 10 Sep 2015 08:30:10 -0700 (PDT)
+Received: by iofb144 with SMTP id b144so65308203iof.1
+	for <meta-ti@yoctoproject.org>; Thu, 10 Sep 2015 08:30:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=zTUdFBBa3/zJP/oA9YcFYyCCB0+Hg01rIhi6kZbwYZ8=;
-	b=nq47SFTTWYDOV3pVBYlmoyxVPy9nVeLcKsTUaVoFfJLYYT/sqDPTIrd+s5BS9ux5yO
-	AXVltbOdtI11XHof8LKqI58oX9NtJQ+srPjMeUTg8XPUuxqllZNn00pC3YOJ8C9HEb2D
-	mV3Oe6IjhMtMkclV0xmw7KtGUdBTEbN/iVOUy1C87ete63MhONZZgQXvHBfzH6x3V4bK
-	ZKOcg0ZYlXDFi1czRfB1chav2C+ckS+Vc4F5QD1Y1V3Lh88XxuJ0x2b4x4Af+Um8NQhi
-	bb8lWefOcOuLOueQlzSytEr/PUM3+ZX+fV51RY8VAi5pLWGsiah9dzn0+JU6pHrDuefB
-	eHFA==
-X-Received: by 10.107.9.24 with SMTP id j24mr24867082ioi.26.1441051218094;
-	Mon, 31 Aug 2015 13:00:18 -0700 (PDT)
+	bh=E9o3OwCfISlMGpy3bbD8lAJGy3aYJcG0nkNLv6+5PZ4=;
+	b=VI9GYEro/Mcv/CETFJ9yVz9YkqfJTDoQaV7NupxqF5dtwlXywAjfmnRoOw/Zid2cNn
+	rhKq2x/c1KtVhPmTXLqVT+iVCXbhEgAc7xggJ/1P2mqTqivrev5AeSS3WC27VSfmpxSc
+	d+Q7ark8zhBX3HhuVbgia04OdP0G/hmhsR+ArE4GLXfcF+OiHc3AAys0HcMJS0RNuyIJ
+	zN5jLVIuckStKtQHV2HNbjZ2X+l8cOSxL1thfiRpmyHRTeo5LyklgdnA952ziGmA617k
+	Ktt0TqK34IbX8VbRjR0bEEPCO9JGLNLMl9/kkANxlDbv5KptpvizIdjDvZI9Crv8Yxks
+	t8Yw==
+X-Received: by 10.107.136.87 with SMTP id k84mr61063459iod.26.1441899009535;
+	Thu, 10 Sep 2015 08:30:09 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.64.173.195 with HTTP; Mon, 31 Aug 2015 12:59:58 -0700 (PDT)
+Received: by 10.64.176.161 with HTTP; Thu, 10 Sep 2015 08:29:50 -0700 (PDT)
 From: Kevin Baker <kbaker@gmail.com>
-Message-ID: <CA+NaiT_=wXG=bT6VEsJgib7OHkSHvA40M2Jsc9GAgeK7Tm0Zkw@mail.gmail.com>
-To: meta-ti@yoctoproject.org
+Message-ID: <CA+NaiT9raNghAp4Gjd2SyUXq7CVRakybeDjVKXxA1WuZ_1=PBQ@mail.gmail.com>
+To: meta-ti@yoctoproject.org, denys@ti.com
 X-Mailman-Approved-At: Fri, 23 Dec 2016 15:51:53 -0800
-Subject: SUPPORT_XORG in powervr-drivers omap3-sgx-modules?
+Subject: Xorg driver in powervr-drivers omap3-sgx-modules?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,12 +56,12 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-Date: Mon, 31 Aug 2015 20:00:22 -0000
-X-Original-Date: Mon, 31 Aug 2015 14:59:58 -0500
-X-List-Received-Date: Mon, 31 Aug 2015 20:00:22 -0000
-Content-Type: multipart/alternative; boundary=001a113f9836f53339051ea0e1cf
+Date: Thu, 10 Sep 2015 15:30:13 -0000
+X-Original-Date: Thu, 10 Sep 2015 10:29:50 -0500
+X-List-Received-Date: Thu, 10 Sep 2015 15:30:13 -0000
+Content-Type: multipart/alternative; boundary=001a113ec5fe43f469051f6646b1
 
---001a113f9836f53339051ea0e1cf
+--001a113ec5fe43f469051f6646b1
 Content-Type: text/plain; charset=UTF-8
 
 Hi,
@@ -78,16 +78,17 @@ We are using an am335x with sgx530, kernel 3.14.
 Thanks,
 Kevin
 
---001a113f9836f53339051ea0e1cf
+--001a113ec5fe43f469051f6646b1
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div><div>Hi,<br><br></div>I noticed the Xorg drivers were=
-n&#39;t building with <a href=3D"http://omap3-sgx-modules_5.01.01.02.bb">om=
-ap3-sgx-modules_5.01.01.02.bb</a>. I tried adding the flag SUPPORT_XORG =3D=
- 1 in a bbappend, but get a compile error when building.<br><br></div><div>=
-Is there another way that the drivers are supposed to be built? Or is the S=
-UPPORT_XORG flag not supported?<br><br>We are using an am335x with sgx530, =
-kernel 3.14.<br><br></div><div>Thanks,<br></div><div>Kevin<br></div></div>
+<div dir=3D"ltr"><div><div>Hi,<br><br></div>I noticed the <span class=3D"">=
+Xorg</span> drivers weren&#39;t building with <a href=3D"http://omap3-sgx-m=
+odules_5.01.01.02.bb">omap3-sgx-modules_5.01.01.02.bb</a>. I tried adding t=
+he flag <span class=3D"">SUPPORT_XORG</span> =3D 1 in a bbappend, but get a=
+ compile error when building.<br><br></div><div>Is there another way that t=
+he drivers are supposed to be built? Or is the <span class=3D"">SUPPORT_XOR=
+G</span> flag not supported?<br><br>We are using an am335x with sgx530, ker=
+nel 3.14.<br><br></div><div>Thanks,<br></div>Kevin</div>
 
---001a113f9836f53339051ea0e1cf--
+--001a113ec5fe43f469051f6646b1--
