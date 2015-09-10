@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 74BF0E00CE1; Wed,  9 Sep 2015 22:20:12 -0700 (PDT)
+	id BD511E00CE1; Wed,  9 Sep 2015 22:22:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.25 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D158E00B6D
-	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 22:20:07 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173025.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NUG009504525KS0@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 10 Sep 2015 00:19:51 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=MtGvkDue c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=ff-B7xzCdYMA:10 a=sozttTNsAAAA:8
-	a=jWE4kmD3mm3xFum5r1sA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 73CFE161BF3;	Thu,
-	10 Sep 2015 01:19:50 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BD93E00B6D
+	for <meta-ti@yoctoproject.org>; Wed,  9 Sep 2015 22:22:13 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C100C52979; Thu, 10 Sep 2015 05:22:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Thu, 10 Sep 2015 01:19:49 -0400
-Message-id: <1441862389-12037-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] kselftests: ipc tests are machine-specific, don't blindly put in main RDEPENDS
+Message-Id: <20150910052212.C100C52979@arago-project.org>
+Date: Thu, 10 Sep 2015 05:22:12 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : kselftests: ipc tests are machine-specific, don' t blindly put in main RDEPENDS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 05:20:12 -0000
+X-List-Received-Date: Thu, 10 Sep 2015 05:22:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: fido
+Commit: a6e2f499dc87d15a73cbe57372292f8837a7b2eb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a6e2f499dc87d15a73cbe57372292f8837a7b2eb
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Sep 10 11:19:49 2015 +0000
+
+kselftests: ipc tests are machine-specific, don't blindly put in main RDEPENDS
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/kselftests/kselftests_4.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+
+ recipes-kernel/kselftests/kselftests_4.1.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/recipes-kernel/kselftests/kselftests_4.1.bb b/recipes-kernel/kselftests/kselftests_4.1.bb
 index d917fb5..38cb76b 100644
@@ -67,7 +66,5 @@ index d917fb5..38cb76b 100644
  	${PN}-kcmp ${PN}-memfd ${PN}-memory-hotplug ${PN}-mount ${PN}-mqueue ${PN}-net ${PN}-ptrace \
  	${PN}-size ${PN}-sysctl ${PN}-timers ${PN}-user ${PN}-vm"
  
--- 
-2.2.0
 
 
