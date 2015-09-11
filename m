@@ -1,45 +1,61 @@
-Return-Path: <denys@ti.com>
+Return-Path: <b.bimmermann@yahoo.de>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A7889E00D1D; Thu, 10 Sep 2015 18:16:38 -0700 (PDT)
+	id 4A48CE00CF5; Fri, 11 Sep 2015 02:05:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (b.bimmermann[at]yahoo.de)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [212.82.96.229 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B41E0E00BB6
-	for <meta-ti@yoctoproject.org>; Thu, 10 Sep 2015 18:16:35 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t8B1GZ9F020306
-	for <meta-ti@yoctoproject.org>; Thu, 10 Sep 2015 20:16:35 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t8B1GZiq026491
-	for <meta-ti@yoctoproject.org>; Thu, 10 Sep 2015 20:16:35 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 10 Sep 2015 20:16:25 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t8B1GYSQ004864	for <meta-ti@yoctoproject.org>; Thu, 10 Sep 2015 20:16:35
-	-0500
-Date: Thu, 10 Sep 2015 21:16:34 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <305960522.181.1441934194806.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from nm18-vm5.bullet.mail.ir2.yahoo.com
+	(nm18-vm5.bullet.mail.ir2.yahoo.com [212.82.96.229])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F74EE00B85
+	for <meta-ti@yoctoproject.org>; Fri, 11 Sep 2015 02:05:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.de; s=s2048;
+	t=1441962345; bh=KspzUrQEO58EC3GMFYSn5StSBwIUGeFCbgRZ7MeRN0E=;
+	h=Date:From:Reply-To:To:Subject:From:Subject;
+	b=OwtUwKH9sU548cCaduRXVNktxbde0YcDTVNGc8eGyuI6CPoXWt3ie4CCunEWgekkUj5S0CMvtbM3Z96dMk7KP9Iih7/Hvf56NVXjH4kbGUw6zjJaK0UxCJm2Y9txaW7054X3Zv40ijTaYMfwp5J70XoFIb646ZfE9VoEeFKRCB7xRQF3Kaq0COnwwZ0l6Ny/bIfWMuVmIokKoa6eS2srDI7K7jqnUe0ist2CmDHALKFvW3XR3SpwwwD5YLUbhEI5Wa42z373IZy7RufjstARRl8MkAGOHnazCnGYc8S9OoOy0UXRK1BjdCc18OhyYIsEmmcGn4jIB84fnKA34SxQ8Q==
+Received: from [212.82.98.125] by nm18.bullet.mail.ir2.yahoo.com with NNFMP;
+	11 Sep 2015 09:05:45 -0000
+Received: from [212.82.98.98] by tm18.bullet.mail.ir2.yahoo.com with NNFMP;
+	11 Sep 2015 09:05:45 -0000
+Received: from [127.0.0.1] by omp1035.mail.ir2.yahoo.com with NNFMP;
+	11 Sep 2015 09:05:45 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 226035.56093.bm@omp1035.mail.ir2.yahoo.com
+X-YMail-OSG: tYgLIhMVM1nhJzm8mrj8g77_5XZuX_9ZvkNb9EEh85SZEYfyK0vAHKSCGaVHGhv
+	_jtQCCOmFwZsNMwhZ8xAClX0IybLoIM2YhAngTw10DrjuctMzLt3nBYFba4w6NLS1gdFiJUKmbs3
+	IK7TVPxv2R9EorP5NMcfO_JBBHbc3o0R5OppiUVfzE0FtC9Qw8HFlc90X4JR14fA_kr7pQ9tpN3I
+	B6H.S1n43DlYTijEsiYgMjH6xYGefERdGcbx0QFFIuANUow0vMBBm39Z.6ECC96Q5mC2h6z9V_8d
+	rE8XX3QOrpV3DP.ua1fpOXNGX1fCPwZy_MgkDFkEdZNgDEU.7XgK7F6VjvosAp6qn_GHOGXBQEoF
+	7Djb6qOINWATyOZcaoTZeS554NtAe2iQ1hZ0tvQPdHUiEDkRDXhR7QHW1hnhcdJlnygkHrLeUsgy
+	wZ_3Iy9L1KlEF9d6wdjFBcuCGZ4th18Mu0E3HHTQxWWX7AcjAqotbVMjJNZ7q8r40rBk.VH3XLwO
+	na18QI2makktqn70eHGqAs6iMNYLuTxppNhjwYirV9Ybk_IFw
+Received: by 212.82.98.123; Fri, 11 Sep 2015 09:05:44 +0000 
+Date: Fri, 11 Sep 2015 09:05:42 +0000 (UTC)
+From: Benjamin Bimmermann <b.bimmermann@yahoo.de>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, 
+	Denys Dmytriyenko <denys@ti.com>
+Message-ID: <431866311.1106194.1441962342645.JavaMail.yahoo@mail.yahoo.com>
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-09-10_21-01-41
+Subject: Graphics_SDK_setuplinux_hardfp_5_01_01_02.bin | checksum mismatch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: Benjamin Bimmermann <b.bimmermann@yahoo.de>
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -49,207 +65,107 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2015 01:16:38 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_180_1118927843.1441934194803"
+X-List-Received-Date: Fri, 11 Sep 2015 09:05:51 -0000
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_1106193_1765318567.1441962342642"
 
-------=_Part_180_1118927843.1441934194803
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+------=_Part_1106193_1765318567.1441962342642
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<title>
-Status for 09/10/15
-</title>
-</head>
-<body>
+Hello,
+I have a checksum mismatch. Have you upgrade to a new Version without chang=
+e the checksum ?
+Second question : If you have update the omap3, has omap3 now Wayland suppo=
+rt and is omap3 now ready for the Kernel 4.1.X ?
+Have a nice day.
 
-<h2>Status for 09/10/15</h2>
+log :
+WARNING: Renaming DIR/build_new/downloads/Graphics_SDK_setuplinux_hardfp_5_=
+01_01_02.bin to DIR/build_new/downloads/Graphics_SDK_setuplinux_hardfp_5_01=
+_01_02.bin_bad-checksum_e71bc0d68048f5f9f17c6ec899e3c9f4
+ERROR: Fetcher failure for URL: 'http://software-dl.ti.com/dsps/dsps_public=
+_sw/gfxsdk/5_01_01_02/exports/Graphics_SDK_setuplinux_hardfp_5_01_01_02.bin=
+'. Checksum mismatch!
+File: 'DIR/build_new/downloads/Graphics_SDK_setuplinux_hardfp_5_01_01_02.bi=
+n' has md5 checksum e71bc0d68048f5f9f17c6ec899e3c9f4 when 94bcb31ea7eb50df1=
+dfa4037055b638e was expected
+File: 'DIR/build_new/downloads/Graphics_SDK_setuplinux_hardfp_5_01_01_02.bi=
+n' has sha256 checksum e72e1eb512cb66a5390b675a90228a762d026e71fa1bb2f11f23=
+5d9198645277 when 54641222cdb49b03f996cbd6412de227198d9e084f5647d706bbf4217=
+e8cdb07 was expected
+If this change is expected (e.g. you have upgraded to a new version without=
+ updating the checksums) then you can use these lines within the recipe:
+SRC_URI[md5sum] =3D "e71bc0d68048f5f9f17c6ec899e3c9f4"
+SRC_URI[sha256sum] =3D "e72e1eb512cb66a5390b675a90228a762d026e71fa1bb2f11f2=
+35d9198645277"
+Otherwise you should retry the download and/or check with upstream to deter=
+mine if the file has become corrupted or otherwise unexpectedly modified.
 
-<h2>BUILD_ID: build-2015-09-10_21-02-48</h2>
+ERROR: Function failed: Fetcher failure for URL: 'http://software-dl.ti.com=
+/dsps/dsps_public_sw/gfxsdk/5_01_01_02/exports/Graphics_SDK_setuplinux_hard=
+fp_5_01_01_02.bin'. Unable to fetch URL from any source.
+ERROR: Logfile of failure stored in: DIR/build_new/tmp/work/beaglebone-poky=
+-linux-gnueabi/omap3-sgx-modules/5.01.01.02-r22b/temp/log.do_fetch.22324
+ERROR: Task 2918 (DIR/meta-ti/recipes-bsp/powervr-drivers/omap3-sgx-modules=
+_5.01.01.02.bb, do_fetch) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1146 tasks of which 0 didn't need to be reru=
+n and 1 failed.
+Waiting for 0 running tasks to finish:
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Summary: 1 task failed:
+=C2=A0 DIR/meta-ti/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02=
+.bb, do_fetch
 
 
-------=_Part_180_1118927843.1441934194803--
+------=_Part_1106193_1765318567.1441962342642
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><body><div style=3D"color:#000; background-color:#fff; font-family:ti=
+mes new roman, new york, times, serif;font-size:16px"><div id=3D"yui_3_16_0=
+_1_1441961927026_2673">Hello,</div><div id=3D"yui_3_16_0_1_1441961927026_29=
+78" dir=3D"ltr"><br></div><div id=3D"yui_3_16_0_1_1441961927026_2979" dir=
+=3D"ltr">I have a checksum mismatch. Have you upgrade to a new Version with=
+out change the checksum ?</div><div id=3D"yui_3_16_0_1_1441961927026_2915" =
+dir=3D"ltr"><br></div><div id=3D"yui_3_16_0_1_1441961927026_3100" dir=3D"lt=
+r">Second question : If you have update the omap3, has omap3 now Wayland su=
+pport and is omap3 now ready for the Kernel 4.1.X ?</div><div id=3D"yui_3_1=
+6_0_1_1441961927026_3151" dir=3D"ltr"><br></div><div id=3D"yui_3_16_0_1_144=
+1961927026_3152" dir=3D"ltr">Have a nice day.<br></div><div id=3D"yui_3_16_=
+0_1_1441961927026_3101" dir=3D"ltr"><br></div><div id=3D"yui_3_16_0_1_14419=
+61927026_2929" dir=3D"ltr">log :</div><div id=3D"yui_3_16_0_1_1441961927026=
+_2980" dir=3D"ltr"><br></div><div id=3D"yui_3_16_0_1_1441961927026_2981" di=
+r=3D"ltr">WARNING: Renaming DIR/build_new/downloads/Graphics_SDK_setuplinux=
+_hardfp_5_01_01_02.bin to DIR/build_new/downloads/Graphics_SDK_setuplinux_h=
+ardfp_5_01_01_02.bin_bad-checksum_e71bc0d68048f5f9f17c6ec899e3c9f4<br class=
+=3D"">ERROR: Fetcher failure for URL: 'http://software-dl.ti.com/dsps/dsps_=
+public_sw/gfxsdk/5_01_01_02/exports/Graphics_SDK_setuplinux_hardfp_5_01_01_=
+02.bin'. Checksum mismatch!<br class=3D"">File: 'DIR/build_new/downloads/Gr=
+aphics_SDK_setuplinux_hardfp_5_01_01_02.bin' has md5 checksum e71bc0d68048f=
+5f9f17c6ec899e3c9f4 when 94bcb31ea7eb50df1dfa4037055b638e was expected<br c=
+lass=3D"">File: 'DIR/build_new/downloads/Graphics_SDK_setuplinux_hardfp_5_0=
+1_01_02.bin' has sha256 checksum e72e1eb512cb66a5390b675a90228a762d026e71fa=
+1bb2f11f235d9198645277 when 54641222cdb49b03f996cbd6412de227198d9e084f5647d=
+706bbf4217e8cdb07 was expected<br class=3D"">If this change is expected (e.=
+g. you have upgraded to a new version without updating the checksums) then =
+you can use these lines within the recipe:<br class=3D"">SRC_URI[md5sum] =
+=3D "e71bc0d68048f5f9f17c6ec899e3c9f4"<br class=3D"">SRC_URI[sha256sum] =3D=
+ "e72e1eb512cb66a5390b675a90228a762d026e71fa1bb2f11f235d9198645277"<br clas=
+s=3D"">Otherwise you should retry the download and/or check with upstream t=
+o determine if the file has become corrupted or otherwise unexpectedly modi=
+fied.<br class=3D""><br class=3D"">ERROR: Function failed: Fetcher failure =
+for URL: 'http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/5_01_01_02/e=
+xports/Graphics_SDK_setuplinux_hardfp_5_01_01_02.bin'. Unable to fetch URL =
+from any source.<br class=3D"">ERROR: Logfile of failure stored in: DIR/bui=
+ld_new/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-=
+r22b/temp/log.do_fetch.22324<br class=3D"">ERROR: Task 2918 (DIR/meta-ti/re=
+cipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb, do_fetch) failed=
+ with exit code '1'<br class=3D"">NOTE: Tasks Summary: Attempted 1146 tasks=
+ of which 0 didn't need to be rerun and 1 failed.<br class=3D"">Waiting for=
+ 0 running tasks to finish:<br class=3D""><br class=3D"">Summary: 1 task fa=
+iled:<br class=3D"">&nbsp; DIR/meta-ti/recipes-bsp/powervr-drivers/omap3-sg=
+x-modules_5.01.01.02.bb, do_fetch<br></div><div id=3D"yui_3_16_0_1_14419619=
+27026_2916" dir=3D"ltr"><br></div></div></body></html>
+
+------=_Part_1106193_1765318567.1441962342642--
