@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E0EE1E00D48; Fri, 11 Sep 2015 12:53:34 -0700 (PDT)
+	id E8C8DE00D40; Fri, 11 Sep 2015 12:53:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD16BE00AD2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD7C9E00B68
 	for <meta-ti@yoctoproject.org>; Fri, 11 Sep 2015 12:53:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3F3BF529C8; Fri, 11 Sep 2015 19:53:30 +0000 (UTC)
+	id 3AE3752A99; Fri, 11 Sep 2015 19:53:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150911195330.3F3BF529C8@arago-project.org>
-Date: Fri, 11 Sep 2015 19:53:30 +0000 (UTC)
+Message-Id: <20150911195330.3AE3752A99@arago-project.org>
+Date: Fri, 11 Sep 2015 19:53:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : debugss-module-drv: Fix build issue with fido
+Subject: Jacob Stiffler : gdbserverproxy-module-drv: Fix build issue with fido
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,29 +37,29 @@ X-List-Received-Date: Fri, 11 Sep 2015 19:53:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: aa08a44357c1c34d9fae0837fab2e65f385d3c85
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aa08a44357c1c34d9fae0837fab2e65f385d3c85
+Branch: fido
+Commit: d37758556b498f060b9b1b37b30776fb0e4a17c4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d37758556b498f060b9b1b37b30776fb0e4a17c4
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Sep 10 17:58:40 2015 +0000
+Date:   Thu Sep 10 17:58:41 2015 +0000
 
-debugss-module-drv: Fix build issue with fido
+gdbserverproxy-module-drv: Fix build issue with fido
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/debugss-module-drv_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../gdbc6x/gdbserverproxy-module-drv_git.bb        |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
-index 052ae4b..6856d60 100644
---- a/recipes-bsp/dsptop/debugss-module-drv_git.bb
-+++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+diff --git a/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb b/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
+index 4dedb83..77a29ec 100644
+--- a/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
++++ b/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
 @@ -3,7 +3,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=75859989545e37968a99b631ef42722e"
  
  # This package builds a kernel module, use kernel PR as base and append a local
 -MACHINE_KERNEL_PR_append = "a"
@@ -71,10 +71,16 @@ index 052ae4b..6856d60 100644
  PLATFORM_dra7xx = "DRA7xx_PLATFORM"
  PLATFORM_keystone = "KEYSTONE_PLATFORM"
  
--EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}'"
-+EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}' KVERSION=${KERNEL_VERSION} KERNEL_SRC=${STAGING_KERNEL_DIR}"
+-EXTRA_OEMAKE = "PLATFORM=${PLATFORM}"
++EXTRA_OEMAKE = "PLATFORM=${PLATFORM} KVERSION=${KERNEL_VERSION} KERNEL_SRC=${STAGING_KERNEL_DIR}"
  
- COMPATIBLE_MACHINE = "dra7xx|keystone"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ # The following is to prevent an unused configure.ac from erroneously
+ # triggering the QA check for gettext.
+@@ -29,4 +29,4 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ include gdbc6x.inc
+ 
+-module_autoload_gdbserverproxy = "gdbserverproxy"
++KERNEL_MODULE_AUTOLOAD += "gdbserverproxy"
 
 
