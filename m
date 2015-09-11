@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A599FE00D03; Fri, 11 Sep 2015 13:45:15 -0700 (PDT)
+	id A72F5E00CF8; Fri, 11 Sep 2015 13:45:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD455E00B18
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF38FE00BB9
 	for <meta-ti@yoctoproject.org>; Fri, 11 Sep 2015 13:45:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2823852A71; Fri, 11 Sep 2015 20:45:08 +0000 (UTC)
+	id 3B81652A99; Fri, 11 Sep 2015 20:45:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150911204508.2823852A71@arago-project.org>
+Message-Id: <20150911204508.3B81652A99@arago-project.org>
 Date: Fri, 11 Sep 2015 20:45:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with WAKEUP2 touchscreen fix
+Subject: Denys Dmytriyenko : linux-ti-staging: update with latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ef3318a712b8c0369225d9f79c71cf45ab4cea19
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ef3318a712b8c0369225d9f79c71cf45ab4cea19
+Commit: e5c48026583d696893d49acea40b7cd632f9b394
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e5c48026583d696893d49acea40b7cd632f9b394
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Sep 12 02:42:35 2015 +0000
+Date:   Sat Sep 12 02:42:36 2015 +0000
 
-u-boot-ti-staging: update with WAKEUP2 touchscreen fix
+linux-ti-staging: update with latest fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index 946a5e1..0dcc292 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 1461e2e..91a31e5 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -53,11 +53,11 @@ S = "${WORKDIR}/git"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ BRANCH = "ti-lsk-linux-4.1.y"
  
--PR = "r8"
-+PR = "r9"
- PV_append = "+git${SRCPV}"
+-SRCREV = "a7db74ef69c8a444b5b0c225d0bbb1f628481863"
++SRCREV = "e746c9053f82d370ab5fc73227ea6bb5ba7c6fd4"
+ PV = "4.1.6+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "k"
++MACHINE_KERNEL_PR_append = "l"
+ PR = "${MACHINE_KERNEL_PR}"
  
- BRANCH ?= "ti-u-boot-2015.07"
- 
--SRCREV = "77cfbf9a111a25188eb8583f49c2429d9b83d08d"
-+SRCREV = "b5a8694cf6a0f2ac504e16e3068b967f3ecc8700"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
