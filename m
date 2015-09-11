@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E8C8DE00D40; Fri, 11 Sep 2015 12:53:34 -0700 (PDT)
+	id B30CCE00D0D; Fri, 11 Sep 2015 12:53:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD7C9E00B68
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BECFFE00D0D
 	for <meta-ti@yoctoproject.org>; Fri, 11 Sep 2015 12:53:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3AE3752A99; Fri, 11 Sep 2015 19:53:29 +0000 (UTC)
+	id 36684529C7; Fri, 11 Sep 2015 19:53:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150911195330.3AE3752A99@arago-project.org>
-Date: Fri, 11 Sep 2015 19:53:29 +0000 (UTC)
+Message-Id: <20150911195330.36684529C7@arago-project.org>
+Date: Fri, 11 Sep 2015 19:53:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : gdbserverproxy-module-drv: Fix build issue with fido
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2015 19:53:35 -0000
+X-List-Received-Date: Fri, 11 Sep 2015 19:53:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: d37758556b498f060b9b1b37b30776fb0e4a17c4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d37758556b498f060b9b1b37b30776fb0e4a17c4
+Branch: master
+Commit: d5697a352909a0146fe2a3931d6ed9ce44f95d95
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d5697a352909a0146fe2a3931d6ed9ce44f95d95
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Thu Sep 10 17:58:41 2015 +0000
