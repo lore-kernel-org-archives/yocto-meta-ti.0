@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 30D22E00D6E; Wed, 16 Sep 2015 18:32:01 -0700 (PDT)
+	id 5FBE7E00D5E; Wed, 16 Sep 2015 18:32:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94925E00D4E
-	for <meta-ti@yoctoproject.org>; Wed, 16 Sep 2015 18:31:57 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2557CE00D70
+	for <meta-ti@yoctoproject.org>; Wed, 16 Sep 2015 18:31:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0A15F52AB1; Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
+	id 3022952AB2; Thu, 17 Sep 2015 01:31:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150917013156.0A15F52AB1@arago-project.org>
-Date: Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
+Message-Id: <20150917013156.3022952AB2@arago-project.org>
+Date: Thu, 17 Sep 2015 01:31:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ipc: Bump version to 3.40.01.08
+Subject: Jacob Stiffler : ti-sysbios: Bump version to 6.42.02.29
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,84 +33,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2015 01:32:01 -0000
+X-List-Received-Date: Thu, 17 Sep 2015 01:32:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c75165343190c273a58abc3c0735ebe101eebe1c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c75165343190c273a58abc3c0735ebe101eebe1c
+Commit: 7228cbefffbf070bf121b524ccc0dab6c8dd7587
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7228cbefffbf070bf121b524ccc0dab6c8dd7587
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Sep 16 18:15:04 2015 +0000
+Date:   Wed Sep 16 18:15:05 2015 +0000
 
-ti-ipc: Bump version to 3.40.01.08
-
-* This provides a fix for GateMP support.
+ti-sysbios: Bump version to 6.42.02.29
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb |    9 ---------
- recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb |    9 +++++++++
- recipes-ti/ipc/ti-ipc_git.bb             |    8 ++++----
- 3 files changed, 13 insertions(+), 13 deletions(-)
+ recipes-ti/bios/ti-sysbios_6.41.04.54.bb |   12 ------------
+ recipes-ti/bios/ti-sysbios_6.42.02.29.bb |   12 ++++++++++++
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb b/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
+diff --git a/recipes-ti/bios/ti-sysbios_6.41.04.54.bb b/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
 deleted file mode 100644
-index e3f64b7..0000000
---- a/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
+index 1e24fe1..0000000
+--- a/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
 +++ /dev/null
-@@ -1,9 +0,0 @@
--require ti-ipc-rtos.inc
+@@ -1,12 +0,0 @@
+-require ti-sysbios.inc
 -
--PV = "3_36_01_11"
--PR = "r1"
+-PV = "6_41_04_54"
+-PR = "r0"
 -
--LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+-LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=95c3c6050fb23f2755ab75bf76805190"
 -
--SRC_URI[ipczip.md5sum] = "560a75d6291ba1467ab9e328b3f7b995"
--SRC_URI[ipczip.sha256sum] = "ccf339a976a313c9f12cbdd91e74e7e0bc36507086b0cf077a344dcd79b9b273"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+-SRC_URI[sysbiosbin.md5sum] = "cbc53f2b15c2f70e2eaa05c1ed90b8db"
+-SRC_URI[sysbiosbin.sha256sum] = "2b4fcb85af4c0abc46dadc925312b2a28906ec34db9b1500f0c484ee3fcb58cf"
+-
+-TI_BIN_UNPK_CMDS=""
+-TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+diff --git a/recipes-ti/bios/ti-sysbios_6.42.02.29.bb b/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
 new file mode 100644
-index 0000000..7c93695
+index 0000000..1abb496
 --- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
-@@ -0,0 +1,9 @@
-+require ti-ipc-rtos.inc
++++ b/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
+@@ -0,0 +1,12 @@
++require ti-sysbios.inc
 +
-+PV = "3_40_01_08"
++PV = "6_42_02_29"
 +PR = "r0"
 +
-+LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
++LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=ab905941085d55ea207fcb4cdab4f9c3"
 +
-+SRC_URI[ipczip.md5sum] = "738e1d54da9fab94899ad162f1ad78de"
-+SRC_URI[ipczip.sha256sum] = "8cc7d40ad7eab916eae109b355dc7e7876c6ab82e3b40bf5b6bf60474312d6cf"
-diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-index 065d2c6..ac899bf 100644
---- a/recipes-ti/ipc/ti-ipc_git.bb
-+++ b/recipes-ti/ipc/ti-ipc_git.bb
-@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- DEPENDS += "virtual/kernel"
- 
--PV = "3.36.01.11"
-+PV = "3.40.01.08"
- 
--BRANCH = "3.36"
-+BRANCH = "3.40"
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-            file://tiipclad-daemon.sh \
-            file://0001-Add-kernel-build-dir.patch \
-            "
--# Commit corresponds to 3.36.01.11
--SRCREV = "2a4256289d462d93a7e00a6ffb10bd46081a9500"
-+# Commit corresponds to 3.40.01.08
-+SRCREV = "239354b731b77e30a70230ebb54a31a83fc8b12f"
- 
- S = "${WORKDIR}/git"
- 
++SRC_URI[sysbiosbin.md5sum] = "ba470b69d1ffa4a34fd05645f240216c"
++SRC_URI[sysbiosbin.sha256sum] = "eb070642e8ee8e742525599f53ef1547d6f5dded557987550c710ad193d0de31"
++
++TI_BIN_UNPK_CMDS=""
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
 
 
