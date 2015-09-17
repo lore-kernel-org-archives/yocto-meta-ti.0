@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B2DDEE00D9C; Wed, 16 Sep 2015 18:32:00 -0700 (PDT)
+	id B5564E00BC6; Wed, 16 Sep 2015 18:32:00 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92E5EE00C0A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 924E2E00BC6
 	for <meta-ti@yoctoproject.org>; Wed, 16 Sep 2015 18:31:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 94453529FB; Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
+	id D07B252A8B; Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150917013155.94453529FB@arago-project.org>
+Message-Id: <20150917013155.D07B252A8B@arago-project.org>
 Date: Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-sysbios: Bump version to 6.42.02.29
+Subject: Jacob Stiffler : ipumm-fw: Update to 3.00.09.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +38,61 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: a4d0b0e4aac08e6aebcaa9e25688525f5c00b1e5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a4d0b0e4aac08e6aebcaa9e25688525f5c00b1e5
+Commit: 7de413c6fd6a300632104d645d9f3fc48c40ccde
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7de413c6fd6a300632104d645d9f3fc48c40ccde
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Sep 16 18:15:05 2015 +0000
+Date:   Wed Sep 16 19:53:54 2015 +0000
 
-ti-sysbios: Bump version to 6.42.02.29
+ipumm-fw: Update to 3.00.09.01
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/bios/ti-sysbios_6.41.04.54.bb |   12 ------------
- recipes-ti/bios/ti-sysbios_6.42.02.29.bb |   12 ++++++++++++
- 2 files changed, 12 insertions(+), 12 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb |   35 +++++++++++++++++++++++++++
+ 1 files changed, 35 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/bios/ti-sysbios_6.41.04.54.bb b/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
-deleted file mode 100644
-index 1e24fe1..0000000
---- a/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require ti-sysbios.inc
--
--PV = "6_41_04_54"
--PR = "r0"
--
--LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=95c3c6050fb23f2755ab75bf76805190"
--
--SRC_URI[sysbiosbin.md5sum] = "cbc53f2b15c2f70e2eaa05c1ed90b8db"
--SRC_URI[sysbiosbin.sha256sum] = "2b4fcb85af4c0abc46dadc925312b2a28906ec34db9b1500f0c484ee3fcb58cf"
--
--TI_BIN_UNPK_CMDS=""
--TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-diff --git a/recipes-ti/bios/ti-sysbios_6.42.02.29.bb b/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
 new file mode 100644
-index 0000000..1abb496
+index 0000000..f537179
 --- /dev/null
-+++ b/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
-@@ -0,0 +1,12 @@
-+require ti-sysbios.inc
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
+@@ -0,0 +1,35 @@
++python __anonymous() {
++    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
++    if not features:
++        return
++    if "mmip" not in features:
++        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
++}
 +
-+PV = "6_42_02_29"
++DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
++LICENSE = "TI-TSPA"
++
++LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=5803e271087f74d03239d868bebcc2c7"
++
++COMPATIBLE_MACHINE = "dra7xx"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++RDEPENDS_${PN} = " libdce"
++
++SRC_URI = "http://downloads.ti.com/infotainment/esd/jacinto6/glsdk/ipumm/3_00_09_01/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
++
++SRC_URI[md5sum] = "bf15624e26bdef4dbb67b98ccd8b9754"
++SRC_URI[sha256sum] = "e70a38b62e3e4d11d5ce68f0980de4df5256bd597068f179e220fa5afcd065fe"
++
++S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
++
++TARGET = "dra7-ipu2-fw.xem4"
++
++do_install() {
++        mkdir -p ${D}${base_libdir}/firmware
++        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++}
++
++FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
++
 +PR = "r0"
-+
-+LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=ab905941085d55ea207fcb4cdab4f9c3"
-+
-+SRC_URI[sysbiosbin.md5sum] = "ba470b69d1ffa4a34fd05645f240216c"
-+SRC_URI[sysbiosbin.sha256sum] = "eb070642e8ee8e742525599f53ef1547d6f5dded557987550c710ad193d0de31"
-+
-+TI_BIN_UNPK_CMDS=""
-+TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
 
 
