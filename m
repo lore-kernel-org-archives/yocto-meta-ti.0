@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2242EE00D7D; Wed, 16 Sep 2015 18:32:01 -0700 (PDT)
+	id 25367E00D76; Wed, 16 Sep 2015 18:32:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93C8EE00D35
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 95C44E00D5E
 	for <meta-ti@yoctoproject.org>; Wed, 16 Sep 2015 18:31:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3FB6152A5B; Thu, 17 Sep 2015 01:31:54 +0000 (UTC)
+	id AA70652A02; Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150917013155.3FB6152A5B@arago-project.org>
-Date: Thu, 17 Sep 2015 01:31:54 +0000 (UTC)
+Message-Id: <20150917013155.AA70652A02@arago-project.org>
+Date: Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ipc: Bump version to 3.40.01.08
+Subject: Jacob Stiffler : ti-framework-components: Bump version to 3.40.01.04
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,79 +38,52 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 8cfa8a318dbce61df82b679c4db0c60e869afbe7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8cfa8a318dbce61df82b679c4db0c60e869afbe7
+Commit: 2bd512cbf5ae58df6e3d5cd77e7b9ceebd8dd145
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2bd512cbf5ae58df6e3d5cd77e7b9ceebd8dd145
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Sep 16 18:15:04 2015 +0000
+Date:   Wed Sep 16 18:15:06 2015 +0000
 
-ti-ipc: Bump version to 3.40.01.08
-
-* This provides a fix for GateMP support.
+ti-framework-components: Bump version to 3.40.01.04
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb |    9 ---------
- recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb |    9 +++++++++
- recipes-ti/ipc/ti-ipc_git.bb             |    8 ++++----
- 3 files changed, 13 insertions(+), 13 deletions(-)
+ .../ti-framework-components_3.40.00.02.bb          |    9 ---------
+ .../ti-framework-components_3.40.01.04.bb          |    9 +++++++++
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb b/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
+diff --git a/recipes-ti/framework-components/ti-framework-components_3.40.00.02.bb b/recipes-ti/framework-components/ti-framework-components_3.40.00.02.bb
 deleted file mode 100644
-index e3f64b7..0000000
---- a/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
+index 78f764d..0000000
+--- a/recipes-ti/framework-components/ti-framework-components_3.40.00.02.bb
 +++ /dev/null
 @@ -1,9 +0,0 @@
--require ti-ipc-rtos.inc
+-require ti-framework-components.inc
 -
--PV = "3_36_01_11"
+-PV = "3_40_00_02"
 -PR = "r1"
 -
--LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+-LIC_FILES_CHKSUM = "file://framework_components_${PV}_Manifest.html;md5=e3ce0b3e17175b7200f346d0c6dbbcc6"
 -
--SRC_URI[ipczip.md5sum] = "560a75d6291ba1467ab9e328b3f7b995"
--SRC_URI[ipczip.sha256sum] = "ccf339a976a313c9f12cbdd91e74e7e0bc36507086b0cf077a344dcd79b9b273"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+-SRC_URI[fctarball.md5sum] = "f66cb201582e1f407b92501d64738047"
+-SRC_URI[fctarball.sha256sum] = "91b0e571b8760e51e4683b44ce13ff3d2f6deb39b204e09894c30514f10c60db"
+diff --git a/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb b/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb
 new file mode 100644
-index 0000000..7c93695
+index 0000000..61c5a98
 --- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
++++ b/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb
 @@ -0,0 +1,9 @@
-+require ti-ipc-rtos.inc
++require ti-framework-components.inc
 +
-+PV = "3_40_01_08"
++PV = "3_40_01_04"
 +PR = "r0"
 +
-+LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
++LIC_FILES_CHKSUM = "file://framework_components_${PV}_Manifest.html;md5=806c3e4afd3bfbf7e5dc400ed1a0cc3c"
 +
-+SRC_URI[ipczip.md5sum] = "738e1d54da9fab94899ad162f1ad78de"
-+SRC_URI[ipczip.sha256sum] = "8cc7d40ad7eab916eae109b355dc7e7876c6ab82e3b40bf5b6bf60474312d6cf"
-diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-index 065d2c6..ac899bf 100644
---- a/recipes-ti/ipc/ti-ipc_git.bb
-+++ b/recipes-ti/ipc/ti-ipc_git.bb
-@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- DEPENDS += "virtual/kernel"
- 
--PV = "3.36.01.11"
-+PV = "3.40.01.08"
- 
--BRANCH = "3.36"
-+BRANCH = "3.40"
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-            file://tiipclad-daemon.sh \
-            file://0001-Add-kernel-build-dir.patch \
-            "
--# Commit corresponds to 3.36.01.11
--SRCREV = "2a4256289d462d93a7e00a6ffb10bd46081a9500"
-+# Commit corresponds to 3.40.01.08
-+SRCREV = "239354b731b77e30a70230ebb54a31a83fc8b12f"
- 
- S = "${WORKDIR}/git"
- 
++SRC_URI[fctarball.md5sum] = "0e6b61cb6e1ad8b249d64f041c872192"
++SRC_URI[fctarball.sha256sum] = "eb38002092a7fc8f704fe9ea9de7f29108bc2533ba95f184706b2936dd24711c"
 
 
