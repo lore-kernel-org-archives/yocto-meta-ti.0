@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2C203E00D6D; Wed, 16 Sep 2015 18:32:01 -0700 (PDT)
+	id 30D22E00D6E; Wed, 16 Sep 2015 18:32:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2554EE00D6E
-	for <meta-ti@yoctoproject.org>; Wed, 16 Sep 2015 18:31:59 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94925E00D4E
+	for <meta-ti@yoctoproject.org>; Wed, 16 Sep 2015 18:31:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 694F152AB4; Thu, 17 Sep 2015 01:31:56 +0000 (UTC)
+	id 0A15F52AB1; Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150917013156.694F152AB4@arago-project.org>
-Date: Thu, 17 Sep 2015 01:31:56 +0000 (UTC)
+Message-Id: <20150917013156.0A15F52AB1@arago-project.org>
+Date: Thu, 17 Sep 2015 01:31:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ipumm-fw: Update to 3.00.09.01
+Subject: Jacob Stiffler : ti-ipc: Bump version to 3.40.01.08
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,61 +38,79 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b71de915aaffaa59166e6ade6ce201789f71d002
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b71de915aaffaa59166e6ade6ce201789f71d002
+Commit: c75165343190c273a58abc3c0735ebe101eebe1c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c75165343190c273a58abc3c0735ebe101eebe1c
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Sep 16 19:53:54 2015 +0000
+Date:   Wed Sep 16 18:15:04 2015 +0000
 
-ipumm-fw: Update to 3.00.09.01
+ti-ipc: Bump version to 3.40.01.08
 
+* This provides a fix for GateMP support.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb |   35 +++++++++++++++++++++++++++
- 1 files changed, 35 insertions(+), 0 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb |    9 ---------
+ recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb |    9 +++++++++
+ recipes-ti/ipc/ti-ipc_git.bb             |    8 ++++----
+ 3 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb b/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
+deleted file mode 100644
+index e3f64b7..0000000
+--- a/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require ti-ipc-rtos.inc
+-
+-PV = "3_36_01_11"
+-PR = "r1"
+-
+-LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+-
+-SRC_URI[ipczip.md5sum] = "560a75d6291ba1467ab9e328b3f7b995"
+-SRC_URI[ipczip.sha256sum] = "ccf339a976a313c9f12cbdd91e74e7e0bc36507086b0cf077a344dcd79b9b273"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
 new file mode 100644
-index 0000000..f537179
+index 0000000..7c93695
 --- /dev/null
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
-@@ -0,0 +1,35 @@
-+python __anonymous() {
-+    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
-+    if not features:
-+        return
-+    if "mmip" not in features:
-+        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
-+}
++++ b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+@@ -0,0 +1,9 @@
++require ti-ipc-rtos.inc
 +
-+DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
-+LICENSE = "TI-TSPA"
-+
-+LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=5803e271087f74d03239d868bebcc2c7"
-+
-+COMPATIBLE_MACHINE = "dra7xx"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+RDEPENDS_${PN} = " libdce"
-+
-+SRC_URI = "http://downloads.ti.com/infotainment/esd/jacinto6/glsdk/ipumm/3_00_09_01/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
-+
-+SRC_URI[md5sum] = "bf15624e26bdef4dbb67b98ccd8b9754"
-+SRC_URI[sha256sum] = "e70a38b62e3e4d11d5ce68f0980de4df5256bd597068f179e220fa5afcd065fe"
-+
-+S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
-+
-+TARGET = "dra7-ipu2-fw.xem4"
-+
-+do_install() {
-+        mkdir -p ${D}${base_libdir}/firmware
-+        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
-+}
-+
-+FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
-+
++PV = "3_40_01_08"
 +PR = "r0"
++
++LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
++
++SRC_URI[ipczip.md5sum] = "738e1d54da9fab94899ad162f1ad78de"
++SRC_URI[ipczip.sha256sum] = "8cc7d40ad7eab916eae109b355dc7e7876c6ab82e3b40bf5b6bf60474312d6cf"
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index 065d2c6..ac899bf 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+ 
+ DEPENDS += "virtual/kernel"
+ 
+-PV = "3.36.01.11"
++PV = "3.40.01.08"
+ 
+-BRANCH = "3.36"
++BRANCH = "3.40"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            file://0001-Add-kernel-build-dir.patch \
+            "
+-# Commit corresponds to 3.36.01.11
+-SRCREV = "2a4256289d462d93a7e00a6ffb10bd46081a9500"
++# Commit corresponds to 3.40.01.08
++SRCREV = "239354b731b77e30a70230ebb54a31a83fc8b12f"
+ 
+ S = "${WORKDIR}/git"
+ 
 
 
