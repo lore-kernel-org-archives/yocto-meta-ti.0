@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 997A0E00CA0; Fri, 18 Sep 2015 19:51:40 -0700 (PDT)
+	id B6E14E00BE1; Sat, 19 Sep 2015 18:22:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,29 +14,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	high *      trust
 	*      [198.47.26.153 listed in list.dnswl.org]
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5AC3CE006F1
-	for <meta-ti@yoctoproject.org>; Fri, 18 Sep 2015 19:51:36 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t8J2pZWI015637
-	for <meta-ti@yoctoproject.org>; Fri, 18 Sep 2015 21:51:35 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t8J2pZwb019230
-	for <meta-ti@yoctoproject.org>; Fri, 18 Sep 2015 21:51:35 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 18 Sep 2015 21:51:35 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69046E0071C
+	for <meta-ti@yoctoproject.org>; Sat, 19 Sep 2015 18:22:31 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t8K1MUdv025541
+	for <meta-ti@yoctoproject.org>; Sat, 19 Sep 2015 20:22:30 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t8K1MUAC005136
+	for <meta-ti@yoctoproject.org>; Sat, 19 Sep 2015 20:22:30 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Sat, 19 Sep 2015 20:22:31 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t8J2pZKv023929	for <meta-ti@yoctoproject.org>; Fri, 18 Sep 2015 21:51:35
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t8K1MUPZ012551	for <meta-ti@yoctoproject.org>; Sat, 19 Sep 2015 20:22:30
 	-0500
-Date: Fri, 18 Sep 2015 22:51:34 -0400
+Date: Sat, 19 Sep 2015 21:22:30 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1077297482.235.1442631094998.JavaMail.jenkins@puget>
+Message-ID: <568072818.241.1442712150205.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-09-18_21-01-41
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-09-19_21-01-41
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,25 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Sep 2015 02:51:40 -0000
+X-List-Received-Date: Sun, 20 Sep 2015 01:22:35 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_234_1244830308.1442631094997"
+	boundary="----=_Part_240_1925064360.1442712150205"
 
-------=_Part_234_1244830308.1442631094997
+------=_Part_240_1925064360.1442712150205
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 09/18/15
+Status for 09/19/15
 </title>
 </head>
 <body>
 
-<h2>Status for 09/18/15</h2>
+<h2>Status for 09/19/15</h2>
 
-<h2>BUILD_ID: build-2015-09-18_21-02-50</h2>
+<h2>BUILD_ID: build-2015-09-19_21-02-49</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -252,4 +252,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_234_1244830308.1442631094997--
+------=_Part_240_1925064360.1442712150205--
