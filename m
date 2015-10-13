@@ -1,42 +1,53 @@
-Return-Path: <denys@ti.com>
+Return-Path: <joshua.vanderpool@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8B2E7E00B2F; Mon, 12 Oct 2015 19:52:37 -0700 (PDT)
+	id B8ABDE00D99; Tue, 13 Oct 2015 07:37:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HK_RANDOM_FROM,HTML_MESSAGE,
+	RCVD_IN_DNSWL_LOW autolearn=no version=3.3.1
+X-Spam-HAM-Report: *  1.0 HK_RANDOM_FROM From username looks random
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (jdvdt2[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.180 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2FBEBE00A93
-	for <meta-ti@yoctoproject.org>; Mon, 12 Oct 2015 19:52:32 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9D2qVsk022056
-	for <meta-ti@yoctoproject.org>; Mon, 12 Oct 2015 21:52:31 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9D2qVDv012602
-	for <meta-ti@yoctoproject.org>; Mon, 12 Oct 2015 21:52:31 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 12 Oct 2015 21:52:31 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9D2qV5M015326	for <meta-ti@yoctoproject.org>; Mon, 12 Oct 2015 21:52:31
-	-0500
-Date: Mon, 12 Oct 2015 22:52:30 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <2119416966.387.1444704751037.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
+	[209.85.223.180])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68848E006F6
+	for <meta-ti@yoctoproject.org>; Tue, 13 Oct 2015 07:37:02 -0700 (PDT)
+Received: by ioii196 with SMTP id i196so22885116ioi.3
+	for <meta-ti@yoctoproject.org>; Tue, 13 Oct 2015 07:37:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=rG6Bia4xo4F3+0zbHT3h3CIGl8nQjl3eeUzmPru3P7k=;
+	b=L0hGtDTzsyiA6RtwkuhUIsurW1XKGdOoakMRaELzgWPOzDpq7cPnpthCf2VojLbpQ6
+	USnp55neFH9NXtBynGc78Yo3/0moOddfoYGG18u0YtN1q8fungsiqrDyQ/o0XAqivnu3
+	qQox5kGP3W3prjBhqosWzTqoHvM2v+Derujxu2PoCrmZxbFUg7bWzsUsAzvbJbpc7HS1
+	xZdRjbcAVRo76qqhfSYA0DoPBZJY7omxdOfVDEtSxqXbKXcYM0/vF26VyjD0/44TM+P9
+	HyD19Ly6+otrfopungbBMHDLHo+mNrtyPyhRHODpOTRX8zvF/JhjTTtwdo04m7wcfJie
+	JBRQ==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-10-12_21-01-41
+X-Received: by 10.107.46.228 with SMTP id u97mr33322791iou.165.1444747022120; 
+	Tue, 13 Oct 2015 07:37:02 -0700 (PDT)
+Sender: joshua.vanderpool@gmail.com
+Received: by 10.65.14.197 with HTTP; Tue, 13 Oct 2015 07:37:02 -0700 (PDT)
+Received: by 10.65.14.197 with HTTP; Tue, 13 Oct 2015 07:37:02 -0700 (PDT)
+Date: Tue, 13 Oct 2015 10:37:02 -0400
+X-Google-Sender-Auth: VFIXp6q96CWpp3o7mlV7DYrju9Q
+Message-ID: <CAOYMvD3xiJ+r94P5TPDx5y6kAK+LY60Zu2KyHSFJPMZcWxq0JA@mail.gmail.com>
+From: Joshua Vanderpool <jdVdt2@gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: U-boot with TPS659037
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,207 +60,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Oct 2015 02:52:37 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_386_859400663.1444704750963"
+X-List-Received-Date: Tue, 13 Oct 2015 14:37:06 -0000
+Content-Type: multipart/alternative; boundary=001a11c15b500b453a0521fd6175
 
-------=_Part_386_859400663.1444704750963
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11c15b500b453a0521fd6175
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 10/12/15
-</title>
-</head>
-<body>
+This is based of the beagleboard_X15 board.c
 
-<h2>Status for 10/12/15</h2>
+The write to the PMIC to hold power on is limited to a 8 bit address and
+the new PMIC has a longer address.
 
-<h2>BUILD_ID: build-2015-10-12_21-02-49</h2>
+int board_late_init(void)
 
-<h2>Clean Build: false</h2>
+{
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+init_sata(0);
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+/*
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+ * DEV_CTRL.DEV_ON = 1 please - else palmas switches off in 8 seconds
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+ * This is the POWERHOLD-in-Low behavior.
 
-</body>
-</html>
+ */
 
+palmas_i2c_write_u8(TPS65903X_CHIP_P1, 0xA0, 0x1);
 
-------=_Part_386_859400663.1444704750963--
+return 0;
+
+}
+
+We have attempted to use i2c_write and it still seems to not write.
+
+Our current workaround is to have a uenvcmd =i2c mw 0x58 0x1A0 0x1 1  in
+the uEnv.txt to do the i2cwite.
+
+Any suggestions are appreciated
+
+Thanks
+
+-Josh
+
+--001a11c15b500b453a0521fd6175
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<p dir=3D"ltr">This is based of the beagleboard_X15 board.c<br></p>
+<p dir=3D"ltr">The write to the PMIC to hold power on is limited to a 8 bit=
+ address and the new PMIC has a longer address.<br></p>
+<p dir=3D"ltr">int board_late_init(void)	</p>
+<p dir=3D"ltr">{	</p>
+<p dir=3D"ltr">	init_sata(0);</p>
+<p dir=3D"ltr">	</p>
+<p dir=3D"ltr">	/*	</p>
+<p dir=3D"ltr">	=C2=A0* DEV_CTRL.DEV_ON =3D 1 please - else palmas switches=
+ off in 8 seconds</p>
+<p dir=3D"ltr">	=C2=A0* This is the POWERHOLD-in-Low behavior.	</p>
+<p dir=3D"ltr">	=C2=A0*/	</p>
+<p dir=3D"ltr">	palmas_i2c_write_u8(TPS65903X_CHIP_P1, 0xA0, 0x1);	</p>
+<p dir=3D"ltr">	return 0;<br></p>
+<p dir=3D"ltr">}<br></p>
+<p dir=3D"ltr">We have attempted to use i2c_write and it still seems to not=
+ write.<br></p>
+<p dir=3D"ltr">Our current workaround is to have a uenvcmd =3Di2c mw 0x58 0=
+x1A0 0x1 1 =C2=A0in the uEnv.txt to do the i2cwite.<br></p>
+<p dir=3D"ltr">Any suggestions are appreciated<br></p>
+<p dir=3D"ltr">Thanks<br></p>
+<p dir=3D"ltr">-Josh</p>
+
+--001a11c15b500b453a0521fd6175--
