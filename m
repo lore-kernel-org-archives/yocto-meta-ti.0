@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B2189E00AC1; Thu, 15 Oct 2015 05:27:21 -0700 (PDT)
+	id 63608E00AEB; Thu, 15 Oct 2015 06:39:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,36 +8,34 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28BE9E00A49
-	for <meta-ti@yoctoproject.org>; Thu, 15 Oct 2015 05:27:15 -0700 (PDT)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B4B1E00A49
+	for <meta-ti@yoctoproject.org>; Thu, 15 Oct 2015 06:39:40 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9FCRExe021608
-	for <meta-ti@yoctoproject.org>; Thu, 15 Oct 2015 07:27:14 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9FDddSr027847
+	for <meta-ti@yoctoproject.org>; Thu, 15 Oct 2015 08:39:39 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9FCRERI007872
-	for <meta-ti@yoctoproject.org>; Thu, 15 Oct 2015 07:27:14 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9FDdd62025577
+	for <meta-ti@yoctoproject.org>; Thu, 15 Oct 2015 08:39:39 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 15 Oct 2015 07:27:14 -0500
+	Thu, 15 Oct 2015 08:39:39 -0500
 Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9FCRE9P000321;
-	Thu, 15 Oct 2015 07:27:14 -0500
-Message-ID: <561F9BA2.9060307@ti.com>
-Date: Thu, 15 Oct 2015 08:27:14 -0400
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9FDdcYq019909;
+	Thu, 15 Oct 2015 08:39:38 -0500
+Message-ID: <561FAC9A.2060408@ti.com>
+Date: Thu, 15 Oct 2015 09:39:38 -0400
 From: Jacob Stiffler <j-stiffler@ti.com>
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1444396968-19536-1-git-send-email-j-stiffler@ti.com>
-	<20151013170837.GG28164@edge>
-In-Reply-To: <20151013170837.GG28164@edge>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] omap5-sgx-ddk-um-linux: Bump SRCREV and update powervr.ini
+To: Hongmei Gou <h-gou@ti.com>, <meta-ti@yoctoproject.org>
+References: <1443107610-28736-1-git-send-email-h-gou@ti.com>
+In-Reply-To: <1443107610-28736-1-git-send-email-h-gou@ti.com>
+Subject: Re: [PATCH v4] dspdce-fw: add recipe to build dspdce-fw from git source and remove recipe which uses prebuilt firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,107 +48,119 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 12:27:21 -0000
+X-List-Received-Date: Thu, 15 Oct 2015 13:39:43 -0000
 Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
+Can you use "update-alternatives" here?
 
-
-On 10/13/2015 1:08 PM, Denys Dmytriyenko wrote:
-> On Fri, Oct 09, 2015 at 09:22:48AM -0400, Jacob Stiffler wrote:
->> * Latest commit indroduces the following:
->>    - Use updated libUMGegl library with end of call protection
->>    - Add Null-Window DRM FLIP mode support
->>    - Replace null_libdrm.so with libpvrDRMWSEGL.so and
->>      libpvrDRMWSEGL_FRONT.so
->>    - Add EGL API call clear protections at function_table.c
->>    - Supress the OpenDC warning since DC is no longer used.
->>    - Enhance drmModeSetCrtc to take the current configuration if set.
->>
->> * Package *.so libraries in main package since it is the DDK
->>    convention to not create the version suffixed libraries with
->>    symlinks
-> Is it really? The old Graphics SDK and even Graphics DDK for am5 used to do it
-> right. Checking for other GLES implementations also shows proper packaging of
-> .so libs. Maybe this should be fixed to do it right?
-
-The DDK team is having discussions related to fixing this... I can 
-update once I know more information.
-
-Currently, the libraries libpvrDRMWSEGL.so and libpvrDRMWSEGL_FRONT.so 
-are only provided without the version suffix. Therefore, null DRM will 
-not function without this.
-
+On 9/24/2015 11:13 AM, Hongmei Gou wrote:
+> Signed-off-by: Hongmei Gou <h-gou@ti.com>
 >
->> * Update powervr.ini as null_libdrm.so is replaced with
->>    libpvrDRMWSEGL.so and libpvrDRMWSEGL_FRONT.so
->>
->> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
->> ---
->>   recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini | 3 ++-
->>   recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini | 3 ++-
->>   recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb       | 8 +++++---
->>   3 files changed, 9 insertions(+), 5 deletions(-)
->>
->> diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
->> index 0657ab8..5b5608e 100644
->> --- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
->> +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
->> @@ -1,3 +1,4 @@
->>   [default]
->> -WindowSystem=null_libdrm.so
->> +WindowSystem=libpvrDRMWSEGL_FRONT.so
->> +#WindowSystem=libpvrDRMWSEGL.so
->>   DisableHWTQTextureUpload=1
->> diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
->> index 0657ab8..5b5608e 100644
->> --- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
->> +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
->> @@ -1,3 +1,4 @@
->>   [default]
->> -WindowSystem=null_libdrm.so
->> +WindowSystem=libpvrDRMWSEGL_FRONT.so
->> +#WindowSystem=libpvrDRMWSEGL.so
->>   DisableHWTQTextureUpload=1
->> diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
->> index cd01d6f..ed24ada 100644
->> --- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
->> +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
->> @@ -11,15 +11,15 @@ BRANCH_ti43x = "am4/k4.1"
->>   
->>   SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
->>   SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
->> -SRCREV_ti33x    = "188575c7ba16c00a15499ed88a126af2506fdba5"
->> -SRCREV_ti43x    = "188575c7ba16c00a15499ed88a126af2506fdba5"
->> +SRCREV_ti33x    = "e15f1543bab4de9e8927a2c4934addf3fd16ffcb"
->> +SRCREV_ti43x    = "e15f1543bab4de9e8927a2c4934addf3fd16ffcb"
->>   
->>   INITSCRIPT_NAME = "pvr-init"
->>   INITSCRIPT_PARAMS = "defaults 8"
->>   
->>   inherit update-rc.d
->>   
->> -PR = "r11"
->> +PR = "r12"
->>   PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
->>   
->>   RDEPENDS_${PN} += "libdrm"
->> @@ -52,6 +52,8 @@ FILES_${PN} += "${sysconfdir}/powervr.ini"
->>   
->>   INHIBIT_PACKAGE_STRIP = "1"
->>   
->> +FILES_SOLIBSDEV = ""
->> +
->>   INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
->>   
->>   CLEANBROKEN = "1"
->> -- 
->> 1.9.1
->>
->> -- 
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
+> v4 changes:
+> 1) Remove recipe which uses prebuilt firmware
+> 2) Update PV to use version number only, "git+[commit]" is not needed any more
+>
+> ---
+>   recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb | 26 -------------
+>   recipes-bsp/dspdce-fw/dspdce-fw_git.bb        | 56 +++++++++++++++++++++++++++
+>   2 files changed, 56 insertions(+), 26 deletions(-)
+>   delete mode 100644 recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
+>   create mode 100644 recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+>
+> diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
+> deleted file mode 100644
+> index 777c221..0000000
+> --- a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
+> +++ /dev/null
+> @@ -1,26 +0,0 @@
+> -DESCRIPTION = "Firmware for DSP for an example application called copycodectest"
+> -LICENSE = "TI-TSPA"
+> -LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=386d1802eefc2fcf00ab01a5b4556277"
+> -
+> -COMPATIBLE_MACHINE = "dra7xx-evm"
+> -PACKAGE_ARCH = "${MACHINE_ARCH}"
+> -
+> -SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_05/exports/dspdce-${MACHINE}-1.00.00.05.tar.gz;protocol=ftp"
+> -
+> -S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
+> -
+> -SRC_URI[md5sum] = "4f3d5c6ef088019aa4804eaaedc8e949"
+> -SRC_URI[sha256sum] = "8d99c4f149613448a6d72c62a18cc7445c63c687b786658da1762c4e1c03a6a0"
+> -
+> -TARGET = "dra7-dsp1-fw.xe66"
+> -
+> -do_install() {
+> -        mkdir -p ${D}${base_libdir}/firmware
+> -        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
+> -}
+> -
+> -FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+> -
+> -INSANE_SKIP_${PN} = "arch"
+> -
+> -PR = "r1"
+> diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+> new file mode 100644
+> index 0000000..594f330
+> --- /dev/null
+> +++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+> @@ -0,0 +1,56 @@
+> +DESCRIPTION = "Firmware for DSP for an example application called copycodectest"
+> +LICENSE = "TI-TSPA"
+> +LIC_FILES_CHKSUM = "file://src/ti/framework/dce/dce.c;startline=1;endline=31;md5=2c6e9aba6ed75f22b1a2b7544b1c809d"
+> +
+> +COMPATIBLE_MACHINE = "dra7xx"
+> +
+> +SRC_URI = "git://git.ti.com/glsdk/dspdce.git;protocol=git"
+> +
+> +SRCREV = "71e8fbf8e4f91b60680cf18a0c202a222e9ae3ba"
+> +
+> +PV = "1.00.00.06"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +require recipes-ti/includes/ti-paths.inc
+> +require recipes-ti/includes/ti-staging.inc
+> +
+> +PR = "r0"
+> +
+> +DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
+> +
+> +export HWVERSION="ES10"
+> +export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
+> +
+> +export XDCVERSION="ti-xdctools-tree"
+> +export BIOSVERSION="ti-sysbios-tree"
+> +export IPCVERSION="ti-ipc-tree"
+> +export CEVERSION="ti-codec-engine-tree"
+> +export FCVERSION="ti-framework-components-tree"
+> +export XDAISVERSION="ti-xdais-tree"
+> +export OSALVERSION="ti-osal-tree"
+> +
+> +export IPCSRC="${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
+> +export C66XCGTOOLSPATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+> +
+> +do_configure() {
+> +    cd ${S}
+> +    make unconfig
+> +    make vayu_config
+> +}
+> +
+> +do_compile() {
+> +    cd ${S}
+> +    make dspbin
+> +}
+> +
+> +TARGET = "dra7-dsp1-fw.xe66.dce"
+> +
+> +do_install() {
+> +        mkdir -p ${D}${base_libdir}/firmware
+> +        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}
+> +}
+> +
+> +INSANE_SKIP_${PN} = "arch"
+> +
+> +FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
 
 
