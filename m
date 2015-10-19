@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1C7E1E0059B; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
+	id 6376CE0059B; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE8B6E0053A
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:47 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F5ECE006D1
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 82D2952A87; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+	id C5D5F52A97; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211146.82D2952A87@arago-project.org>
+Message-Id: <20151019211146.C5D5F52A97@arago-project.org>
 Date: Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : hplib: Update to new version 1.1.0.6
+Subject: Sam Nelson : pktlib: Update to new version 2.1.0.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,35 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 51424a74ea41855d7f3a21278679a6120da9e333
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51424a74ea41855d7f3a21278679a6120da9e333
+Commit: 795e85e152e6ab25ea0463b4821b3d1728196085
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=795e85e152e6ab25ea0463b4821b3d1728196085
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:18:23 2015 +0000
+Date:   Tue Oct 20 01:33:01 2015 +0000
 
-hplib: Update to new version 1.1.0.6
+pktlib: Update to new version 2.1.0.5
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hplib/hplib.inc |    6 +++---
+ recipes-bsp/pktlib/pktlib_git.bb |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
-index b3a62b8..e4211ee 100644
---- a/recipes-bsp/hplib/hplib.inc
-+++ b/recipes-bsp/hplib/hplib.inc
-@@ -5,6 +5,6 @@ DEVICELIST = "k2h k2k k2l k2e"
+diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
+index aa21974..17e5041 100644
+--- a/recipes-bsp/pktlib/pktlib_git.bb
++++ b/recipes-bsp/pktlib/pktlib_git.bb
+@@ -8,9 +8,9 @@ COMPATIBLE_MACHINE = "keystone"
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/keystone-rtos/pktlib.git;protocol=git;branch=${BRANCH}"
  
--# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.05"
--SRCREV = "97c2ce177c78c0f7a861c8dc9ac10657d85eae36"
--PV = "01.01.00.05+git${SRCPV}"
-+# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.06"
-+SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
-+PV = "01.01.00.06+git${SRCPV}"
+-# Corresponds to DEV.PKTLIB.2.1.0.4
+-SRCREV = "a9aa56afed54b0a04f36d2fdb248cad5dcac6ff6"
+-PV = "2.1.0.4"
++# Corresponds to DEV.PKTLIB.2.1.0.5
++SRCREV = "d757026f3d6a837711f4b44b5ffdefed761fc186"
++PV = "2.1.0.5"
+ 
+ S = "${WORKDIR}/git/ti/runtime/pktlib"
+ 
 
 
