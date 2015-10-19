@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DC350E00343; Mon, 19 Oct 2015 12:12:58 -0700 (PDT)
+	id A4261E0049B; Mon, 19 Oct 2015 12:14:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F17CAE0048C
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 12:12:55 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 2DA4C52A5A; Mon, 19 Oct 2015 19:12:55 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20151019191255.2DA4C52A5A@arago-project.org>
-Date: Mon, 19 Oct 2015 19:12:55 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : rm-lld: Update to new version 2.1.2.0
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1BC4CE00343
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 12:14:51 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9JJEoi1006720
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:14:50 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9JJEoFm007891
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:14:50 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 19 Oct 2015 14:14:50 -0500
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t9JJEmCs012384;	Mon, 19 Oct 2015 14:14:49 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 19 Oct 2015 15:14:47 -0400
+Message-ID: <1445282087-8440-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH] qmss-lld: Update to new version 2.1.0.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +45,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 19:12:58 -0000
-Content-Type: text/plain; charset=UTF-8
-
-Module: meta-ti
-Branch: master
-Commit: a266decde2166d5875e57978cd4d6fd86b9a2083
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a266decde2166d5875e57978cd4d6fd86b9a2083
-
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:11:37 2015 +0000
-
-rm-lld: Update to new version 2.1.2.0
+X-List-Received-Date: Mon, 19 Oct 2015 19:14:52 -0000
+Content-Type: text/plain
 
 -Skip PR
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/qmss-lld/qmss-lld.inc |    7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
- recipes-bsp/rm-lld/rm-lld_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/rm-lld/rm-lld_git.bb b/recipes-bsp/rm-lld/rm-lld_git.bb
-index beac927..8b2806c 100644
---- a/recipes-bsp/rm-lld/rm-lld_git.bb
-+++ b/recipes-bsp/rm-lld/rm-lld_git.bb
-@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/rm/COPYING.txt;md5=dc61631b6536
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index d2eb81b..29ef0ce 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -4,10 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=e8f6789acd
+ BRANCH ="master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/qmss-lld.git;destsuffix=git/ti/drv/qmss;protocol=git;branch=${BRANCH}"
  
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/rm-lld.git;destsuffix=git/ti/drv/rm;protocol=git;branch=${BRANCH}"
--# Below commit ID corresponds to DEV.RM_LLD.02.01.00.08
--SRCREV = "7873d22076b4cb865365bbce20a244121414bb44"
--PV = "02.01.00.08"
-+# Below commit ID corresponds to DEV.RM_LLD.02.01.02.00
-+SRCREV = "b3d711203c6b4cf99fb2f95dc2f4728dfd1b2639"
-+PV = "02.01.02.00"
- PR = "r1"
+-# commit ID corresponding to DEV.QMSS_LLD.02.01.00.10
+-SRCREV = "ffec14248f460b7cf4def4457f9c2335df62618d"
+-PV = "02.01.00.10"
+-PR = "r1"
++# commit ID corresponding to DEV.QMSS_LLD.02.01.00.11
++SRCREV = "2024ab2d411c1a6dd3f5e768a3cb30c2a685f1e4"
++PV = "02.01.00.11"
  
- COMPATIBLE_MACHINE = "keystone"
+ DEVICELIST = "k2h k2k k2l k2e"
+ 
+-- 
+1.7.9.5
 
 
