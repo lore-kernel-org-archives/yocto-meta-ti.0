@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E2902E006D1; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
+	id B2ADEE00AE4; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED5D5E0050E
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:47 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F6D7E006D5
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9D8EB52A8F; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+	id 3C58252AB9; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211146.9D8EB52A8F@arago-project.org>
-Date: Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+Message-Id: <20151019211147.3C58252AB9@arago-project.org>
+Date: Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : hyplnk-lld: Update to new version 2.1.0.5
+Subject: Sam Nelson : engine-pkcs11: Update to new version 1.3.0.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,80 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 21:11:53 -0000
+X-List-Received-Date: Mon, 19 Oct 2015 21:11:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 596a5704a1edb59f03fa18ca4b160dbdd3a2a675
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=596a5704a1edb59f03fa18ca4b160dbdd3a2a675
+Commit: f6e4e9d6fee47610edda19eae7f5956f31e2b429
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f6e4e9d6fee47610edda19eae7f5956f31e2b429
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:24:39 2015 +0000
+Date:   Tue Oct 20 01:42:31 2015 +0000
 
-hyplnk-lld: Update to new version 2.1.0.5
-
-- Remove seperate build for dynamic and static cases
-  Make now creates two test binaries one use dynamic and other using
-  static library
+engine-pkcs11: Update to new version 1.3.0.1
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb |   14 +++-----------
- recipes-bsp/hyplnk-lld/hyplnk-lld.inc         |    7 ++++---
- 2 files changed, 7 insertions(+), 14 deletions(-)
+ recipes-ti/engine-pkcs11/engine-pkcs11_git.bb |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-index 8212c97..c33e2df 100644
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-+++ b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-@@ -2,22 +2,14 @@ include hyplnk-lld.inc
+diff --git a/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb b/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
+index 226beac..bd03449 100644
+--- a/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
++++ b/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
+@@ -7,10 +7,11 @@ inherit autotools pkgconfig
  
- DEPENDS = "common-csl-ip hyplnk-lld"
+ DEPENDS = "openssl libtool libp11"
  
--CHOICELIST = " yes \
--               no  \
--"
--
- do_compile () {
- 	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
- 		HYPLNK_SRC_DIR="${S}"
- 	for device in ${DEVICELIST}
- 	do
--		for choice in ${CHOICELIST}
--		do
--			make -f makefile_armv7 tests examples \
--				PDK_INSTALL_PATH="${STAGING_INCDIR}" \
--				DEVICE="$device" HYPLNK_SRC_DIR="${S}" \
--				USEDYNAMIC_LIB="$choice"
--		done
-+		make -f makefile_armv7 tests examples \
-+			PDK_INSTALL_PATH="${STAGING_INCDIR}" \
-+			DEVICE="$device" HYPLNK_SRC_DIR="${S}"
- 	done
- }
- 
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-index 7f46b7d..70b5d80 100644
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-+++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-@@ -9,10 +9,11 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/${LLDNAME}/COPYING.txt;md5=6233
- 
+-PV = "1.3.0.0"
  BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git;destsuffix=git/ti/drv/${LLDNAME};protocol=git;branch=${BRANCH}"
--# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.02
--SRCREV = "8451586025a0cf561ed9bc6ab70a2cad88a7e95e"
-+FILESPATH_prepend := "${THISDIR}/files"
-+# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.05
-+SRCREV = "ea2a634578626deaa69608a189d5d7e84e5b7127"
+-# Commit corresponds to DEV.ENGINE_PKCS11-01.03.00.00
+-SRCREV = "0b14500b0ea8b37453b6d93aac02278465e7e732"
++
++PV = "1.3.0.1"
++# Commit corresponds to DEV.ENGINE_PKCS11-01.03.00.01
++SRCREV = "56ac060e2245907a442376d586924af26ed7e478"
  
--PV = "2.1.0.2"
-+PV = "2.1.0.5"
- PR = "r1"
- 
- DEVICELIST = " k2h \
+ SRC_URI = "git://git.ti.com/keystone-linux/engine-pkcs11.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
 
 
