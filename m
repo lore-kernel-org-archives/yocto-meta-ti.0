@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DFACFE0071C; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
+	id E085BE00748; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC044E0079D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8428CE00708
 	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E2C8852AC5; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
+	id 5A2A252ABB; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211147.E2C8852AC5@arago-project.org>
+Message-Id: <20151019211147.5A2A252ABB@arago-project.org>
 Date: Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : nwal-lld: Update to new version 2.1.0.8
+Subject: Sam Nelson : ipc/ipc-transport: Update to new version 2.0.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,39 +37,59 @@ X-List-Received-Date: Mon, 19 Oct 2015 21:11:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: c88b680970450fcb5e1a6abfabd825a6ee2e7311
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c88b680970450fcb5e1a6abfabd825a6ee2e7311
+Branch: fido
+Commit: 83560aac5eca951629655fcfda2236a97d5334dc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=83560aac5eca951629655fcfda2236a97d5334dc
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:34:08 2015 +0000
+Date:   Tue Oct 20 01:46:56 2015 +0000
 
-nwal-lld: Update to new version 2.1.0.8
+ipc/ipc-transport: Update to new version 2.0.0.0
+
+- Updates srio and qmss transports
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/ipc/ipc-transport-qmss.inc |    6 +++---
+ recipes-ti/ipc/ipc-transport-srio.inc |    6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-index 2cdc9aa..247bfc0 100644
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
+index 35c2111..64692f2 100644
+--- a/recipes-ti/ipc/ipc-transport-qmss.inc
++++ b/recipes-ti/ipc/ipc-transport-qmss.inc
+@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
  
--# Below commit ID corresponds to "DEV.NWAL.02.01.00.06"
--SRCREV = "a3494c9aaa2808f438d26b2c3b8b091448ffc445"
--PV = "02.01.00.06"
-+# Below commit ID corresponds to "DEV.NWAL.02.01.00.08"
-+SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
-+PV = "02.01.00.08"
+ BRANCH="master"
+ SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
+-# Below commit ID corresponds to DEV.IPC-TRANSPORT.01.00.00.00
+-SRCREV = "b3077467126c84b5d583dc29e13ab221064b687b"
+-PV = "01.00.00.00"
++# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.00
++SRCREV = "e0f99ae7bf3efc8f6a7c415af513b7c4323c5271"
++PV = "02.00.00.00"
  
- BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/nwal"
+ COMPATIBLE_MACHINE = "keystone"
+ 
+diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
+index e286421..08b9768 100644
+--- a/recipes-ti/ipc/ipc-transport-srio.inc
++++ b/recipes-ti/ipc/ipc-transport-srio.inc
+@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+ 
+ BRANCH="master"
+ SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
+-# Below commit ID corresponds to DEV.IPC-TRANSPORT.01.00.00.00
+-SRCREV = "b3077467126c84b5d583dc29e13ab221064b687b"
+-PV = "01.00.00.00"
++# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.00
++SRCREV = "e0f99ae7bf3efc8f6a7c415af513b7c4323c5271"
++PV = "02.00.00.00"
+ 
+ COMPATIBLE_MACHINE = "keystone"
+ 
 
 
