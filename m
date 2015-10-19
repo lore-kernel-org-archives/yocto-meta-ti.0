@@ -1,6 +1,6 @@
-Return-Path: <h-gou@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C7543E0049B; Mon, 19 Oct 2015 14:06:06 -0700 (PDT)
+	id D03E7E0049B; Mon, 19 Oct 2015 14:06:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,34 +12,30 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E34F6E00343
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:06:05 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9JL65LB005047
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 16:06:05 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC2A0E00343
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:06:44 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9JL6irH005320
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 16:06:44 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9JL65Vu031257
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 16:06:05 -0500
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0224.002; Mon, 19 Oct 2015 16:06:05 -0500
-From: "Gou, Hongmei" <h-gou@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "Stiffler, Jacob" <j-stiffler@ti.com>
-Thread-Topic: [meta-ti] [PATCH v4] dspdce-fw: add recipe to build dspdce-fw
-	from git source and remove recipe which uses prebuilt firmware
-Thread-Index: AQHRCp2bNeTz9TO4h0+oom1UdbUaQJ5zTc8Q
-Date: Mon, 19 Oct 2015 21:06:04 +0000
-Message-ID: <2E957F12D11D904590FA9AF86D366BD926AD8D20@DLEE08.ent.ti.com>
-References: <1443107610-28736-1-git-send-email-h-gou@ti.com>
-	<561FAC9A.2060408@ti.com> <20151019184004.GD5620@edge>
-In-Reply-To: <20151019184004.GD5620@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9JL6in1005212
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 16:06:44 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 19 Oct 2015 16:06:44 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9JL6h1s009173;
+	Mon, 19 Oct 2015 16:06:43 -0500
+Date: Mon, 19 Oct 2015 17:06:28 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Sam Nelson <sam.nelson@ti.com>
+Message-ID: <20151019210628.GH5620@edge>
+References: <1445282948-9210-1-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH v4] dspdce-fw: add recipe to build dspdce-fw from git source and remove recipe which uses prebuilt firmware
+In-Reply-To: <1445282948-9210-1-git-send-email-sam.nelson@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] pa-lld: Update to new version 3.0.1.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,163 +48,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 21:06:06 -0000
-Content-Language: en-US
+X-List-Received-Date: Mon, 19 Oct 2015 21:06:45 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-The v5 patch was submitted to use "update-alternatives", and the difference=
- from the old recipe is summarized under "v5 changes".=20
+On Mon, Oct 19, 2015 at 03:29:08PM -0400, Sam Nelson wrote:
+> - Add script to create device independent symbolic link to actual
+>   device library
+> 
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> ---
+>  recipes-bsp/pa-lld/pa-lld.inc    |    6 +++---
+>  recipes-bsp/pa-lld/pa-lld_git.bb |   14 ++++++++++++++
+>  2 files changed, 17 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+> index 7d922fb..b8ade64 100644
+> --- a/recipes-bsp/pa-lld/pa-lld.inc
+> +++ b/recipes-bsp/pa-lld/pa-lld.inc
+> @@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
+>  BRANCH = "master"
+>  SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
+>  
+> -# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.04"
+> -SRCREV = "92de8879be3712af684bd031ca0ed291c05d6050"
+> -PV = "03.00.01.04"
+> +# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
+> +SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
+> +PV = "03.00.01.05"
+>  PR = "r1"
+>  
+>  BASEDIR = "${WORKDIR}/git"
+> diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
+> index 63e34ad..a264be2 100644
+> --- a/recipes-bsp/pa-lld/pa-lld_git.bb
+> +++ b/recipes-bsp/pa-lld/pa-lld_git.bb
+> @@ -4,6 +4,13 @@ DEPENDS = "common-csl-ip rm-lld"
+>  
+>  include pa-lld.inc
+>  
+> +SRC_URI += "file://init_pa.sh"
+> +
+> +inherit update-rc.d
+> +
+> +INITSCRIPT_NAME = "init_pa.sh"
+> +INITSCRIPT_PARAMS = "defaults 10"
+> +
+>  do_compile () {
+>  #   Now build the lld in the updated directory
+>  	make -f makefile_armv7 DEVICE=k2h clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
+> @@ -12,4 +19,11 @@ do_compile () {
+>  
+>  do_install () {
+>  	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
+> +#   Set the generic device library symbolic link
+> +    cd ${D}${libdir}
+> +    ln -sf libpa.so.1.0.0 libpa_device.so.1
+> +    ln -sf libpa_device.so.1 libpa_device.so
 
-The ~50% size change of the v4 patch comes from deleting the old recipe, wh=
-ich was summarized under " v4 changes" in the v4 patch.
+Do this instead of the above 3 lines:
+   ln -sf libpa.so.1.0.0 ${D}${libdir}/libpa_device.so.1
+   ln -sf libpa_device.so.1 ${D}${libdir}/libpa_device.so
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Monday, October 19, 2015 2:40 PM
-> To: Stiffler, Jacob
-> Cc: Gou, Hongmei; meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH v4] dspdce-fw: add recipe to build dspdce-f=
-w
-> from git source and remove recipe which uses prebuilt firmware
->=20
-> Also, please show the difference between the old and the new recipes. You
-> may need to lower the threshold, as it seems the new recipe grew almost
-> 50% in size.
->=20
->=20
-> On Thu, Oct 15, 2015 at 09:39:38AM -0400, Jacob Stiffler wrote:
-> > Can you use "update-alternatives" here?
-> >
-> > On 9/24/2015 11:13 AM, Hongmei Gou wrote:
-> > >Signed-off-by: Hongmei Gou <h-gou@ti.com>
-> > >
-> > >v4 changes:
-> > >1) Remove recipe which uses prebuilt firmware
-> > >2) Update PV to use version number only, "git+[commit]" is not needed
-> any more
-> > >
-> > >---
-> > >  recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb | 26 -------------
-> > >  recipes-bsp/dspdce-fw/dspdce-fw_git.bb        | 56
-> +++++++++++++++++++++++++++
-> > >  2 files changed, 56 insertions(+), 26 deletions(-)
-> > >  delete mode 100644 recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
-> > >  create mode 100644 recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-> > >
-> > >diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb b/recipes-
-> bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
-> > >deleted file mode 100644
-> > >index 777c221..0000000
-> > >--- a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
-> > >+++ /dev/null
-> > >@@ -1,26 +0,0 @@
-> > >-DESCRIPTION =3D "Firmware for DSP for an example application called
-> copycodectest"
-> > >-LICENSE =3D "TI-TSPA"
-> > >-LIC_FILES_CHKSUM =3D "file://DSPDCE-${PV}-
-> Manifest.doc;md5=3D386d1802eefc2fcf00ab01a5b4556277"
-> > >-
-> > >-COMPATIBLE_MACHINE =3D "dra7xx-evm"
-> > >-PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> > >-
-> > >-SRC_URI =3D
-> "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_05/
-> exports/dspdce-${MACHINE}-1.00.00.05.tar.gz;protocol=3Dftp"
-> > >-
-> > >-S =3D "${WORKDIR}/dspdce-${MACHINE}-${PV}"
-> > >-
-> > >-SRC_URI[md5sum] =3D "4f3d5c6ef088019aa4804eaaedc8e949"
-> > >-SRC_URI[sha256sum] =3D
-> "8d99c4f149613448a6d72c62a18cc7445c63c687b786658da1762c4e1c03a6a0"
-> > >-
-> > >-TARGET =3D "dra7-dsp1-fw.xe66"
-> > >-
-> > >-do_install() {
-> > >-        mkdir -p ${D}${base_libdir}/firmware
-> > >-        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARG=
-ET}
-> > >-}
-> > >-
-> > >-FILES_${PN} +=3D "${base_libdir}/firmware/${TARGET}"
-> > >-
-> > >-INSANE_SKIP_${PN} =3D "arch"
-> > >-
-> > >-PR =3D "r1"
-> > >diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-
-> bsp/dspdce-fw/dspdce-fw_git.bb
-> > >new file mode 100644
-> > >index 0000000..594f330
-> > >--- /dev/null
-> > >+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-> > >@@ -0,0 +1,56 @@
-> > >+DESCRIPTION =3D "Firmware for DSP for an example application called
-> copycodectest"
-> > >+LICENSE =3D "TI-TSPA"
-> > >+LIC_FILES_CHKSUM =3D
-> "file://src/ti/framework/dce/dce.c;startline=3D1;endline=3D31;md5=3D2c6e9=
-aba6e
-> d75f22b1a2b7544b1c809d"
-> > >+
-> > >+COMPATIBLE_MACHINE =3D "dra7xx"
-> > >+
-> > >+SRC_URI =3D "git://git.ti.com/glsdk/dspdce.git;protocol=3Dgit"
-> > >+
-> > >+SRCREV =3D "71e8fbf8e4f91b60680cf18a0c202a222e9ae3ba"
-> > >+
-> > >+PV =3D "1.00.00.06"
-> > >+
-> > >+S =3D "${WORKDIR}/git"
-> > >+
-> > >+require recipes-ti/includes/ti-paths.inc
-> > >+require recipes-ti/includes/ti-staging.inc
-> > >+
-> > >+PR =3D "r0"
-> > >+
-> > >+DEPENDS =3D "ti-xdctools ti-sysbios ti-codec-engine ti-framework-
-> components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
-> > >+
-> > >+export HWVERSION=3D"ES10"
-> > >+export BIOSTOOLSROOT=3D"${STAGING_DIR_TARGET}/usr/share/ti"
-> > >+
-> > >+export XDCVERSION=3D"ti-xdctools-tree"
-> > >+export BIOSVERSION=3D"ti-sysbios-tree"
-> > >+export IPCVERSION=3D"ti-ipc-tree"
-> > >+export CEVERSION=3D"ti-codec-engine-tree"
-> > >+export FCVERSION=3D"ti-framework-components-tree"
-> > >+export XDAISVERSION=3D"ti-xdais-tree"
-> > >+export OSALVERSION=3D"ti-osal-tree"
-> > >+
-> > >+export IPCSRC=3D"${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
-> > >+export
-> C66XCGTOOLSPATH=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-> > >+
-> > >+do_configure() {
-> > >+    cd ${S}
-> > >+    make unconfig
-> > >+    make vayu_config
-> > >+}
-> > >+
-> > >+do_compile() {
-> > >+    cd ${S}
-> > >+    make dspbin
-> > >+}
-> > >+
-> > >+TARGET =3D "dra7-dsp1-fw.xe66.dce"
-> > >+
-> > >+do_install() {
-> > >+        mkdir -p ${D}${base_libdir}/firmware
-> > >+        cp ${S}/dra7xx-c66x-dsp.xe66
-> ${D}${base_libdir}/firmware/${TARGET}
-> > >+}
-> > >+
-> > >+INSANE_SKIP_${PN} =3D "arch"
-> > >+
-> > >+FILES_${PN} +=3D "${base_libdir}/firmware/${TARGET}"
-> >
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+BTW, why are the lib names different (libpa vs. libpa_device)?
+
+
+> +#   Copy init scripts
+> +    install -d ${D}${sysconfdir}/init.d/
+> +    install -c -m 755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+>  }
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
