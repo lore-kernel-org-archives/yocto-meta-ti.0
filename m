@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B3B38E00AE9; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
+	id B458EE006D5; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84745E00748
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83F9AE006F6
 	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2821152AB8; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
+	id E8CE852A94; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211147.2821152AB8@arago-project.org>
-Date: Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
+Message-Id: <20151019211146.E8CE852A94@arago-project.org>
+Date: Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new version 2.0.1.10
+Subject: Sam Nelson : srio-lld: Update to new version 2.0.0.13
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 8c96de0ffb5478be976ff178471a6977a6c34a67
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8c96de0ffb5478be976ff178471a6977a6c34a67
+Commit: 887df21be1fdbbe58e9a002337482947061cc7ba
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=887df21be1fdbbe58e9a002337482947061cc7ba
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:39:14 2015 +0000
+Date:   Tue Oct 20 01:34:57 2015 +0000
 
-multiprocmgr: Update to new version 2.0.1.10
+srio-lld: Update to new version 2.0.0.13
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc |    6 +++---
+ recipes-bsp/srio-lld/srio-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index 1d9b326..d9360b5 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -5,9 +5,9 @@ SECTION = "console"
- COMPATIBLE_MACHINE = "keystone"
- 
+diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
+index 75435d9..0f1ee2d 100644
+--- a/recipes-bsp/srio-lld/srio-lld.inc
++++ b/recipes-bsp/srio-lld/srio-lld.inc
+@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/srio/srio_drv.h;beginline=1;end
  BRANCH = "master"
--# The following commits correspond to DEV.MPM-2.00.01.08
--SRCREV = "ae3d5630b7c7ce5a795d56bd58957175402a0d17"
--PV = "2.0.1.8"
-+# The following commits correspond to DEV.MPM-2.00.01.10D
-+SRCREV = "4cb6009d6a3c94cea41ae6155a974e9ca44d982f"
-+PV = "2.0.1.10"
+ SRC_URI = "git://git.ti.com/keystone-rtos/srio-lld.git;destsuffix=git/ti/drv/srio;protocol=git;branch=${BRANCH}"
  
- SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
+-# commit ID corresponding to DEV.SRIO_LLD.02.00.00.12
+-SRCREV = "fb1c484f781bab73e742e4e265c9f7469c8b3350"
+-PV = "02.00.00.12"
++# commit ID corresponding to DEV.SRIO_LLD.02.00.00.13
++SRCREV = "dc49972265afd3ffd3b29ca235b8ca6daf790bd1"
++PV = "02.00.00.13"
+ 
+ DEVICELIST = "k2h k2k"
  
 
 
