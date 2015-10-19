@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1B556E0049B; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
+	id 1BF92E0053A; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC1D5E0049B
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:47 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F40BE005BB
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 92A5F52A8B; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+	id DC64652AB1; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211146.92A5F52A8B@arago-project.org>
+Message-Id: <20151019211146.DC64652AB1@arago-project.org>
 Date: Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : dfe-lld: Update to new version 1.0.0.5
+Subject: Sam Nelson : nwal-lld: Update to new version 2.1.0.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 76d973e239158151deaa447bc94098e542225ee9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=76d973e239158151deaa447bc94098e542225ee9
+Commit: 9d3431844bd43d7b142bebadfde83c143ca5b242
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9d3431844bd43d7b142bebadfde83c143ca5b242
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:19:33 2015 +0000
+Date:   Tue Oct 20 01:34:08 2015 +0000
 
-dfe-lld: Update to new version 1.0.0.5
+nwal-lld: Update to new version 2.1.0.8
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dfe-lld/dfe-lld.inc |    6 +++---
+ recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/dfe-lld/dfe-lld.inc b/recipes-bsp/dfe-lld/dfe-lld.inc
-index 2053c74..f5778d9 100644
---- a/recipes-bsp/dfe-lld/dfe-lld.inc
-+++ b/recipes-bsp/dfe-lld/dfe-lld.inc
-@@ -3,10 +3,10 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=1f4217b705bf98762a302fd720649dcc"
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index 2cdc9aa..247bfc0 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/dfe-lld.git;destsuffix=git/ti/drv/dfe;protocol=git;branch=${BRANCH}"
--# The following commit correspond to DEV.DFE_LLD.01.00.00.04C
--SRCREV = "62da141c1cf6224d24161f0c020091043a3d7c82"
-+# The following commit correspond to DEV.DFE_LLD.01.00.00.05E
-+SRCREV = "42e9df0108d208c92b9d2fee7e8b1b1ab62f4b69"
+ SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
  
--PV = "1.0.0.4"
-+PV = "1.0.0.5"
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.06"
+-SRCREV = "a3494c9aaa2808f438d26b2c3b8b091448ffc445"
+-PV = "02.01.00.06"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.08"
++SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
++PV = "02.01.00.08"
  
- COMPATIBLE_MACHINE = "k2l-evm"
- 
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/nwal"
 
 
