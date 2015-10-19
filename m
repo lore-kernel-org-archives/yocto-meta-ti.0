@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B458EE006D5; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
+	id B4C87E006F1; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83F9AE006F6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8383BE006F1
 	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E8CE852A94; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+	id 4A6FB52ABA; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211146.E8CE852A94@arago-project.org>
-Date: Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+Message-Id: <20151019211147.4A6FB52ABA@arago-project.org>
+Date: Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : srio-lld: Update to new version 2.0.0.13
+Subject: Sam Nelson : netapi: Update commit id of final version of 1.1.0.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 887df21be1fdbbe58e9a002337482947061cc7ba
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=887df21be1fdbbe58e9a002337482947061cc7ba
+Commit: 62b7d7eabe9f30d1e29fec016e15beec30eed8d2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=62b7d7eabe9f30d1e29fec016e15beec30eed8d2
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:34:57 2015 +0000
+Date:   Tue Oct 20 01:44:18 2015 +0000
 
-srio-lld: Update to new version 2.0.0.13
+netapi: Update commit id of final version of 1.1.0.6
+
+- Increment PR to update
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/srio-lld/srio-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/netapi/netapi.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
-index 75435d9..0f1ee2d 100644
---- a/recipes-bsp/srio-lld/srio-lld.inc
-+++ b/recipes-bsp/srio-lld/srio-lld.inc
-@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/srio/srio_drv.h;beginline=1;end
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/srio-lld.git;destsuffix=git/ti/drv/srio;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
+index 0ba4eeb..f7e5393 100644
+--- a/recipes-ti/netapi/netapi.inc
++++ b/recipes-ti/netapi/netapi.inc
+@@ -5,8 +5,9 @@ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
  
--# commit ID corresponding to DEV.SRIO_LLD.02.00.00.12
--SRCREV = "fb1c484f781bab73e742e4e265c9f7469c8b3350"
--PV = "02.00.00.12"
-+# commit ID corresponding to DEV.SRIO_LLD.02.00.00.13
-+SRCREV = "dc49972265afd3ffd3b29ca235b8ca6daf790bd1"
-+PV = "02.00.00.13"
+ # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
+-SRCREV = "42eefef1b4bdc659fc8fc42e8f2bc74a4b155265"
++SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
+ PV = "01.01.00.06"
++PR = "r1"
  
- DEVICELIST = "k2h k2k"
+ DEVICELIST = "k2h k2k k2l k2e"
  
 
 
