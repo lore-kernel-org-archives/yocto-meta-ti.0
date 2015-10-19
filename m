@@ -1,6 +1,6 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B113DE0049B; Mon, 19 Oct 2015 12:31:39 -0700 (PDT)
+	id BD719E0049B; Mon, 19 Oct 2015 12:33:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,31 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E32DEE00343
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 12:31:38 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBA48E00343
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 12:33:04 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9JJVbdV016217
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:31:37 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9JJX31e023595
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:33:03 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9JJVbeH006421
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:31:37 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9JJX3KD011626
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:33:03 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 19 Oct 2015 14:31:37 -0500
+	Mon, 19 Oct 2015 14:33:03 -0500
 Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9JJVbe7019148;	Mon, 19 Oct 2015 14:31:37 -0500
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t9JJX2wr030956;	Mon, 19 Oct 2015 14:33:02 -0500
 From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 19 Oct 2015 15:31:36 -0400
-Message-ID: <1445283096-9288-1-git-send-email-sam.nelson@ti.com>
+Date: Mon, 19 Oct 2015 15:33:01 -0400
+Message-ID: <1445283181-9425-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] sa-lld: Update to new version 3.0.0.11
+Subject: [PATCH] pktlib: Update to new version 2.1.0.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,64 +45,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 19:31:39 -0000
+X-List-Received-Date: Mon, 19 Oct 2015 19:33:06 -0000
 Content-Type: text/plain
-
-- Add device independent symbolic link for dynamic library
-- Add utils to test build
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-bsp/sa-lld/sa-lld-test_git.bb |    2 +-
- recipes-bsp/sa-lld/sa-lld.inc         |    7 +++----
- recipes-bsp/sa-lld/sa-lld_git.bb      |    5 +++++
- 3 files changed, 9 insertions(+), 5 deletions(-)
+ recipes-bsp/pktlib/pktlib_git.bb |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
-index 2069d41..7cb0ac7 100644
---- a/recipes-bsp/sa-lld/sa-lld-test_git.bb
-+++ b/recipes-bsp/sa-lld/sa-lld-test_git.bb
-@@ -15,7 +15,7 @@ do_compile () {
- 		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S}
- 		for choice in ${CHOICELIST}
- 		do
--			make -f makefile_armv7 examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
-+			make -f makefile_armv7 examples utils PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
- 		done
- 	done
- }
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
-index 6dc8566..8066279 100644
---- a/recipes-bsp/sa-lld/sa-lld.inc
-+++ b/recipes-bsp/sa-lld/sa-lld.inc
-@@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a
- 
+diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
+index aa21974..17e5041 100644
+--- a/recipes-bsp/pktlib/pktlib_git.bb
++++ b/recipes-bsp/pktlib/pktlib_git.bb
+@@ -8,9 +8,9 @@ COMPATIBLE_MACHINE = "keystone"
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
--# Following commit DEV.SA_LLD.03.00.00.10
--SRCREV = "533aec7ef0e28c3faff4ee64a861c8935262dc33"
--PV = "03.00.00.10"
--PR = "r1"
-+# Following commit DEV.SA_LLD.03.00.00.11A
-+SRCREV = "bf5b097e868b20d23d386abc34a1902903d7d9ea"
-+PV = "03.00.00.11"
+ SRC_URI = "git://git.ti.com/keystone-rtos/pktlib.git;protocol=git;branch=${BRANCH}"
  
- BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/sa"
-diff --git a/recipes-bsp/sa-lld/sa-lld_git.bb b/recipes-bsp/sa-lld/sa-lld_git.bb
-index f345895..c6ad7be 100644
---- a/recipes-bsp/sa-lld/sa-lld_git.bb
-+++ b/recipes-bsp/sa-lld/sa-lld_git.bb
-@@ -11,4 +11,9 @@ do_compile () {
+-# Corresponds to DEV.PKTLIB.2.1.0.4
+-SRCREV = "a9aa56afed54b0a04f36d2fdb248cad5dcac6ff6"
+-PV = "2.1.0.4"
++# Corresponds to DEV.PKTLIB.2.1.0.5
++SRCREV = "d757026f3d6a837711f4b44b5ffdefed761fc186"
++PV = "2.1.0.5"
  
- do_install () {
- 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-+
-+#   Set the generic device library symbolic link
-+	cd ${D}${libdir}
-+	ln -sf libsa.so.1.0.0 libsa_device.so.1
-+	ln -sf libsa_device.so.1 libsa_device.so
- }
+ S = "${WORKDIR}/git/ti/runtime/pktlib"
+ 
 -- 
 1.7.9.5
 
