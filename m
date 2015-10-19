@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1BF92E0053A; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
+	id 1C7E1E0059B; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F40BE005BB
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE8B6E0053A
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DC64652AB1; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+	id 82D2952A87; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211146.DC64652AB1@arago-project.org>
+Message-Id: <20151019211146.82D2952A87@arago-project.org>
 Date: Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : nwal-lld: Update to new version 2.1.0.8
+Subject: Sam Nelson : hplib: Update to new version 1.1.0.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,35 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 9d3431844bd43d7b142bebadfde83c143ca5b242
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9d3431844bd43d7b142bebadfde83c143ca5b242
+Commit: 51424a74ea41855d7f3a21278679a6120da9e333
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51424a74ea41855d7f3a21278679a6120da9e333
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:34:08 2015 +0000
+Date:   Tue Oct 20 01:18:23 2015 +0000
 
-nwal-lld: Update to new version 2.1.0.8
+hplib: Update to new version 1.1.0.6
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
+ recipes-bsp/hplib/hplib.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-index 2cdc9aa..247bfc0 100644
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
+index b3a62b8..e4211ee 100644
+--- a/recipes-bsp/hplib/hplib.inc
++++ b/recipes-bsp/hplib/hplib.inc
+@@ -5,6 +5,6 @@ DEVICELIST = "k2h k2k k2l k2e"
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
  
--# Below commit ID corresponds to "DEV.NWAL.02.01.00.06"
--SRCREV = "a3494c9aaa2808f438d26b2c3b8b091448ffc445"
--PV = "02.01.00.06"
-+# Below commit ID corresponds to "DEV.NWAL.02.01.00.08"
-+SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
-+PV = "02.01.00.08"
- 
- BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/nwal"
+-# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.05"
+-SRCREV = "97c2ce177c78c0f7a861c8dc9ac10657d85eae36"
+-PV = "01.01.00.05+git${SRCPV}"
++# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.06"
++SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
++PV = "01.01.00.06+git${SRCPV}"
 
 
