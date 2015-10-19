@@ -1,38 +1,26 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0525FE0049B; Mon, 19 Oct 2015 12:11:49 -0700 (PDT)
+	id DB7BEE0053A; Mon, 19 Oct 2015 12:12:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 972BCE00343
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 12:11:43 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9JJBh39005033
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:43 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9JJBhi2015667
-	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:43 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 19 Oct 2015 14:11:42 -0500
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9JJBdgs021251;	Mon, 19 Oct 2015 14:11:40 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 19 Oct 2015 15:11:37 -0400
-Message-ID: <1445281897-8256-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] rm-lld: Update to new version 2.1.2.0
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F153DE00343
+	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 12:12:55 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0FB4F52A08; Mon, 19 Oct 2015 19:12:55 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20151019191255.0FB4F52A08@arago-project.org>
+Date: Mon, 19 Oct 2015 19:12:55 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : rm-lld: Update to new version 2.1.2.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,15 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 19:11:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 19 Oct 2015 19:12:58 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: fido
+Commit: d0246e5453cde66a33e6e542658631e42e6bb4c0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0246e5453cde66a33e6e542658631e42e6bb4c0
+
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Tue Oct 20 01:11:37 2015 +0000
+
+rm-lld: Update to new version 2.1.2.0
 
 -Skip PR
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  recipes-bsp/rm-lld/rm-lld_git.bb |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-bsp/rm-lld/rm-lld_git.bb b/recipes-bsp/rm-lld/rm-lld_git.bb
 index beac927..8b2806c 100644
@@ -72,7 +73,5 @@ index beac927..8b2806c 100644
  PR = "r1"
  
  COMPATIBLE_MACHINE = "keystone"
--- 
-1.7.9.5
 
 
