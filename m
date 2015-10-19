@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E085BE00748; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
+	id E43DCE00708; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8428CE00708
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBF0BE0076A
 	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5A2A252ABB; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
+	id AF15152ABE; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211147.5A2A252ABB@arago-project.org>
+Message-Id: <20151019211147.AF15152ABE@arago-project.org>
 Date: Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ipc/ipc-transport: Update to new version 2.0.0.0
+Subject: Sam Nelson : hyplnk-lld: Update to new version 2.1.0.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,63 +33,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 21:11:54 -0000
+X-List-Received-Date: Mon, 19 Oct 2015 21:11:55 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 83560aac5eca951629655fcfda2236a97d5334dc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=83560aac5eca951629655fcfda2236a97d5334dc
+Branch: master
+Commit: 72deb332ebfa4213da7c5f91619fd4be7d8eb165
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=72deb332ebfa4213da7c5f91619fd4be7d8eb165
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:46:56 2015 +0000
+Date:   Tue Oct 20 01:24:39 2015 +0000
 
-ipc/ipc-transport: Update to new version 2.0.0.0
+hyplnk-lld: Update to new version 2.1.0.5
 
-- Updates srio and qmss transports
+- Remove seperate build for dynamic and static cases
+  Make now creates two test binaries one use dynamic and other using
+  static library
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ipc-transport-qmss.inc |    6 +++---
- recipes-ti/ipc/ipc-transport-srio.inc |    6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb |   14 +++-----------
+ recipes-bsp/hyplnk-lld/hyplnk-lld.inc         |    7 ++++---
+ 2 files changed, 7 insertions(+), 14 deletions(-)
 
-diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
-index 35c2111..64692f2 100644
---- a/recipes-ti/ipc/ipc-transport-qmss.inc
-+++ b/recipes-ti/ipc/ipc-transport-qmss.inc
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
+index 8212c97..c33e2df 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
+@@ -2,22 +2,14 @@ include hyplnk-lld.inc
+ 
+ DEPENDS = "common-csl-ip hyplnk-lld"
+ 
+-CHOICELIST = " yes \
+-               no  \
+-"
+-
+ do_compile () {
+ 	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
+ 		HYPLNK_SRC_DIR="${S}"
+ 	for device in ${DEVICELIST}
+ 	do
+-		for choice in ${CHOICELIST}
+-		do
+-			make -f makefile_armv7 tests examples \
+-				PDK_INSTALL_PATH="${STAGING_INCDIR}" \
+-				DEVICE="$device" HYPLNK_SRC_DIR="${S}" \
+-				USEDYNAMIC_LIB="$choice"
+-		done
++		make -f makefile_armv7 tests examples \
++			PDK_INSTALL_PATH="${STAGING_INCDIR}" \
++			DEVICE="$device" HYPLNK_SRC_DIR="${S}"
+ 	done
+ }
+ 
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+index 7f46b7d..70b5d80 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+@@ -9,10 +9,11 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/${LLDNAME}/COPYING.txt;md5=6233
  
  BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
--# Below commit ID corresponds to DEV.IPC-TRANSPORT.01.00.00.00
--SRCREV = "b3077467126c84b5d583dc29e13ab221064b687b"
--PV = "01.00.00.00"
-+# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.00
-+SRCREV = "e0f99ae7bf3efc8f6a7c415af513b7c4323c5271"
-+PV = "02.00.00.00"
+ SRC_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git;destsuffix=git/ti/drv/${LLDNAME};protocol=git;branch=${BRANCH}"
+-# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.02
+-SRCREV = "8451586025a0cf561ed9bc6ab70a2cad88a7e95e"
++FILESPATH_prepend := "${THISDIR}/files"
++# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.05
++SRCREV = "ea2a634578626deaa69608a189d5d7e84e5b7127"
  
- COMPATIBLE_MACHINE = "keystone"
+-PV = "2.1.0.2"
++PV = "2.1.0.5"
+ PR = "r1"
  
-diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
-index e286421..08b9768 100644
---- a/recipes-ti/ipc/ipc-transport-srio.inc
-+++ b/recipes-ti/ipc/ipc-transport-srio.inc
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
- 
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
--# Below commit ID corresponds to DEV.IPC-TRANSPORT.01.00.00.00
--SRCREV = "b3077467126c84b5d583dc29e13ab221064b687b"
--PV = "01.00.00.00"
-+# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.00
-+SRCREV = "e0f99ae7bf3efc8f6a7c415af513b7c4323c5271"
-+PV = "02.00.00.00"
- 
- COMPATIBLE_MACHINE = "keystone"
- 
+ DEVICELIST = " k2h \
 
 
