@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6376CE0059B; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
+	id 66B1EE0048C; Mon, 19 Oct 2015 14:11:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F5ECE006D1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F6FEE006EA
 	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C5D5F52A97; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
+	id B5D6852A95; Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211146.C5D5F52A97@arago-project.org>
+Message-Id: <20151019211146.B5D6852A95@arago-project.org>
 Date: Mon, 19 Oct 2015 21:11:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : pktlib: Update to new version 2.1.0.5
+Subject: Sam Nelson : iqn2-lld: Update to new version 1.0.0.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 795e85e152e6ab25ea0463b4821b3d1728196085
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=795e85e152e6ab25ea0463b4821b3d1728196085
+Commit: bcbe627ac50e4998b509e6eb17257a884f3ae221
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bcbe627ac50e4998b509e6eb17257a884f3ae221
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:33:01 2015 +0000
+Date:   Tue Oct 20 01:25:51 2015 +0000
 
-pktlib: Update to new version 2.1.0.5
+iqn2-lld: Update to new version 1.0.0.8
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pktlib/pktlib_git.bb |    6 +++---
+ recipes-bsp/iqn2-lld/iqn2-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
-index aa21974..17e5041 100644
---- a/recipes-bsp/pktlib/pktlib_git.bb
-+++ b/recipes-bsp/pktlib/pktlib_git.bb
-@@ -8,9 +8,9 @@ COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-bsp/iqn2-lld/iqn2-lld.inc b/recipes-bsp/iqn2-lld/iqn2-lld.inc
+index fb6886f..812d3f6 100644
+--- a/recipes-bsp/iqn2-lld/iqn2-lld.inc
++++ b/recipes-bsp/iqn2-lld/iqn2-lld.inc
+@@ -3,10 +3,10 @@ LICENSE = "BSD-3-Clause"
+ 
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/pktlib.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/keystone-rtos/iqn2-lld.git;destsuffix=git/ti/drv/iqn2;protocol=git;branch=${BRANCH}"
+-# Following commit corresponds to DEV.IQN_LLD.01.00.00.07A
+-SRCREV = "94017e30c87853e48f6e947186c5075289b190c6"
++# Following commit corresponds to DEV.IQN_LLD.01.00.00.08F
++SRCREV = "29d5358b944f1447c024263f86e8c71784440b99"
  
--# Corresponds to DEV.PKTLIB.2.1.0.4
--SRCREV = "a9aa56afed54b0a04f36d2fdb248cad5dcac6ff6"
--PV = "2.1.0.4"
-+# Corresponds to DEV.PKTLIB.2.1.0.5
-+SRCREV = "d757026f3d6a837711f4b44b5ffdefed761fc186"
-+PV = "2.1.0.5"
+-PV = "1.0.0.7"
++PV = "1.0.0.8"
  
- S = "${WORKDIR}/git/ti/runtime/pktlib"
+ COMPATIBLE_MACHINE = "k2l-evm"
  
 
 
