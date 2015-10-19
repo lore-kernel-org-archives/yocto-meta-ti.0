@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B9DEDE00ADD; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
+	id DFACFE0071C; Mon, 19 Oct 2015 14:11:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84713E0071C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC044E0079D
 	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 14:11:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 156B552AB6; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
+	id E2C8852AC5; Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019211147.156B552AB6@arago-project.org>
+Message-Id: <20151019211147.E2C8852AC5@arago-project.org>
 Date: Mon, 19 Oct 2015 21:11:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update to new version 1.0.8.3
+Subject: Sam Nelson : nwal-lld: Update to new version 2.1.0.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,40 +37,39 @@ X-List-Received-Date: Mon, 19 Oct 2015 21:11:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 8f104fb8f8d689fc9f2fd37ab4cfa75947c93685
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f104fb8f8d689fc9f2fd37ab4cfa75947c93685
+Branch: master
+Commit: c88b680970450fcb5e1a6abfabd825a6ee2e7311
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c88b680970450fcb5e1a6abfabd825a6ee2e7311
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:37:36 2015 +0000
+Date:   Tue Oct 20 01:34:08 2015 +0000
 
-mpm-transport: Update to new version 1.0.8.3
+nwal-lld: Update to new version 2.1.0.8
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |    6 +++---
+ recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index fd68721..752ada5 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -8,10 +8,10 @@ DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld cmem rm-lld qmss-lld cppi
- SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
- 
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index 2cdc9aa..247bfc0 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
  BRANCH = "master"
--# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.07.00A
--SRCREV = "267db40a9c551bd91dbed470d57cd1ed0d9e9141"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.08.03
-+SRCREV = "f6c5426d68c2be832903b6d215370c94e134167f"
+ SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
  
--PV = "1.0.7.0"
-+PV = "1.0.8.3"
- PR = "r1"
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.06"
+-SRCREV = "a3494c9aaa2808f438d26b2c3b8b091448ffc445"
+-PV = "02.01.00.06"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.08"
++SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
++PV = "02.01.00.08"
  
- S = "${WORKDIR}/git"
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/nwal"
 
 
