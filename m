@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DB7BEE0053A; Mon, 19 Oct 2015 12:12:58 -0700 (PDT)
+	id DC350E00343; Mon, 19 Oct 2015 12:12:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F153DE00343
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F17CAE0048C
 	for <meta-ti@yoctoproject.org>; Mon, 19 Oct 2015 12:12:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0FB4F52A08; Mon, 19 Oct 2015 19:12:55 +0000 (UTC)
+	id 2DA4C52A5A; Mon, 19 Oct 2015 19:12:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151019191255.0FB4F52A08@arago-project.org>
+Message-Id: <20151019191255.2DA4C52A5A@arago-project.org>
 Date: Mon, 19 Oct 2015 19:12:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : rm-lld: Update to new version 2.1.2.0
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 19 Oct 2015 19:12:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: d0246e5453cde66a33e6e542658631e42e6bb4c0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0246e5453cde66a33e6e542658631e42e6bb4c0
+Branch: master
+Commit: a266decde2166d5875e57978cd4d6fd86b9a2083
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a266decde2166d5875e57978cd4d6fd86b9a2083
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Tue Oct 20 01:11:37 2015 +0000
