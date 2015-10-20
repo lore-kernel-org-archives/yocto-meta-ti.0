@@ -1,44 +1,52 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <paul.barker.commagility@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 58F9BE006D5; Tue, 20 Oct 2015 09:11:00 -0700 (PDT)
+	id 7E9B1E00843; Tue, 20 Oct 2015 09:54:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.212.182 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58F65E0048C
-	for <meta-ti@yoctoproject.org>; Tue, 20 Oct 2015 09:10:57 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9KGAvWI017404
-	for <meta-ti@yoctoproject.org>; Tue, 20 Oct 2015 11:10:57 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9KGAulI030841
-	for <meta-ti@yoctoproject.org>; Tue, 20 Oct 2015 11:10:57 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.03.0224.002; Tue, 20 Oct 2015 11:10:57 -0500
-From: "Nelson, Sam" <sam.nelson@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH] ti-softhsmv2: Update to new version 1.3.0.4
-Thread-Index: AQHRCqYtvyMnqwBQoEuNakCyr4iKPJ5zo3aAgADlMiA=
-Date: Tue, 20 Oct 2015 16:10:56 +0000
-Message-ID: <4F9216F96E5DF9428610502835A9F49058240523@DLEE11.ent.ti.com>
-References: <1445283698-10019-1-git-send-email-sam.nelson@ti.com>
-	<20151019210941.GJ5620@edge>
-In-Reply-To: <20151019210941.GJ5620@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B87E1E006D5
+	for <meta-ti@yoctoproject.org>; Tue, 20 Oct 2015 09:54:51 -0700 (PDT)
+Received: by wicll6 with SMTP id ll6so54768183wic.0
+	for <meta-ti@yoctoproject.org>; Tue, 20 Oct 2015 09:54:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=date:from:to:cc:subject:message-id:in-reply-to:references
+	:organization:mime-version:content-type:content-transfer-encoding;
+	bh=Mp52TaGSlfQLEExgqqgN5d2S3C0NYju2akBA/wHAzRE=;
+	b=RNFeukZjN2ScqSNBHeNcMR95nDqDQn5fhp6h6CHDOuPJhYaaeAZdgsagEhm1KU4OkJ
+	SPMWILg1UL5WUJ6PDRzmCF7b+Vuy//FunLo3olUzFr586X9GsKyVn/EzAQcJnveZyCLX
+	w9Ptq48EAwOkh9SRdUcVImtcNVyFMJPIYad4HzZ4eusZ5IFdgVAcZ+fEim8R4QuOlCof
+	nHlvUKRxk6m7MWlxidkuP0t6W6d7+dX9k0Fc2mXqKJTC0T4Tbvy9DZhuVlNsqsJ8cSAn
+	cvPVPh8TlsOiLUdM7pNXUkDleyGQ86lfxsPB37IXm6/I5SMfSC1tNpab8DGwbkiGNhW3
+	hqRg==
+X-Received: by 10.180.23.9 with SMTP id i9mr3810707wif.51.1445360090494;
+	Tue, 20 Oct 2015 09:54:50 -0700 (PDT)
+Received: from centos-7 (inno-commagility-ownrouter.lut.ac.uk. [131.231.60.35])
+	by smtp.gmail.com with ESMTPSA id
+	cv1sm20096179wib.18.2015.10.20.09.54.49
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 20 Oct 2015 09:54:49 -0700 (PDT)
+Date: Tue, 20 Oct 2015 17:54:41 +0100
+From: Paul Barker <paul.barker@commagility.com>
+To: Denys Dmytriyenko <denys@ti.com>
+Message-ID: <20151020175441.2adca0cc@centos-7>
+In-Reply-To: <20151019222843.GL5620@edge>
+References: <20151013190042.GA8031@bang.betafive.co.uk>
+	<20151019222843.GL5620@edge>
+Organization: CommAgility Ltd
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] ti-softhsmv2: Update to new version 1.3.0.4
+Cc: meta-ti@yoctoproject.org
+Subject: Re: linux-ti-staging: Error during parsing
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,78 +59,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2015 16:11:00 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 20 Oct 2015 16:54:55 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
+On Mon, 19 Oct 2015 18:28:43 -0400
+Denys Dmytriyenko <denys@ti.com> wrote:
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Monday, October 19, 2015 5:10 PM
-> To: Nelson, Sam
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] ti-softhsmv2: Update to new version 1.3.0.=
-4
->=20
-> On Mon, Oct 19, 2015 at 03:41:38PM -0400, Sam Nelson wrote:
-> > - Update License checksum
->=20
-> Don't take license changes lightly - please confirm the LICENSE field its=
-elf
-> hasn't changed and it's still OSRB approved.
+> On Tue, Oct 13, 2015 at 08:00:42PM +0100, Paul Barker wrote:
+> > Hi,
+> > 
+> > I'm trying to move from dylan forward to fido and ran into a parsing error with
+> > the linux-ti-staging recipe (all versions in the tree). Here's a run through of
+> > what I've done on a Centos 7 host with relevant output included. I'm using the
+> > coresdk-2015.01 tag but there aren't any commits on the fido branch after this.
+> > 
+> > $ git clone http://arago-project.org/git/projects/oe-layersetup.git
+> > 
+> > $ cd oe-layersetup/
+> > 
+> > $ ./oe-layertool-setup.sh -f configs/coresdk/coresdk-2015.01-config.txt
+> > 
+> > $ cd build/
+> > 
+> > $ . conf/setenv
+> > 
+> > $ MACHINE=k2hk-evm bitbake core-image-minimal
+> > NOTE: Started PRServer with DBfile: /home/COMMAGILITY/paul.barker/tmp/oe-layersetup/build/cache/prserv.sqlite3, IP: 127.0.0.1, PORT: 37851, PID: 8637
+> > NOTE: Your conf/bblayers.conf has been automatically updated.
+> > ERROR: ExpansionError during parsing /home/COMMAGILITY/paul.barker/tmp/oe-layersetup/sources/meta-ti/recipes-kernel/linux/linux-ti-staging_4.1.bb: Failure expanding variable SRCPV, expression was ${@bb.fetch2.get_srcrev(d)} which triggered exception Fet
+> > chError: Fetcher failure: The SRCREV_FORMAT variable must be set when multiple SCMs are used.
+> 
+> Hi, Paul,
+> 
+> Quick question - what do you use for a toolchain? By default, coresdk config 
+> you reference above expects pre-built Linaro toolchain (tested with 2015.05) 
+> in your PATH. While it is supposed to give a meaningful error message when it 
+> can't find the expected toolchain, sometimes I've seen it fail and give 
+> absolutely cryptic one instead. Can you please grab the following tarball, 
+> extract it and add it's bin/ dir to your PATH and try again? Thanks.
+> 
+> http://releases.linaro.org/15.05/components/toolchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.tar.xz
+> 
+> BTW, meta-arago allows you to control the toolchain with TOOLCHAIN_TYPE and 
+> TOOLCHAIN_BRAND variables, defaulting to "external" and "linaro"...
+> 
 
-Yes.  The updated text is part of the software manifest approved by OSRB.=20
-The LICENSE field itself does not need to be updated as the new license tex=
-t added is also based on GPLv2.
->=20
->=20
-> > - Skip PR
-> >
-> > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> > ---
-> >  recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |    9 ++++-----
-> >  1 file changed, 4 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/t=
-i-
-> softhsmv2/ti-softhsmv2_git.bb
-> > index 329fbaa..c1e1654 100644
-> > --- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> > +++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> > @@ -1,6 +1,6 @@
-> >  DESCRIPTION =3D "TI softhsmv2 package"
-> >  LICENSE =3D "BSD-2-Clause | BSD-3-Clause | ISC | IBM-License | FSFULLR=
- |
-> Zlib"
-> > -LIC_FILES_CHKSUM =3D
-> "file://LICENSE;md5=3D55144a048ba54f211a1aaa38c7fd2424"
-> > +LIC_FILES_CHKSUM =3D
-> "file://LICENSE;md5=3D664f3daf042b19d634189e709d5d558e"
-> >  SECTION =3D "libs"
-> >
-> >  mntdir =3D "/mnt"
-> > @@ -12,10 +12,9 @@ COMPATIBLE_MACHINE =3D "(tci6614-evm|keystone)"
-> >
-> >  BRANCH=3D"master"
-> >  SRC_URI =3D "git://git.ti.com/keystone-linux/ti-
-> softhsmv2.git;protocol=3Dgit;branch=3D${BRANCH}"
-> > -#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.01
-> > -SRCREV =3D "c79d93ac2a326567a7245dda1b903ef340b5650c"
-> > -PV =3D "1.3.0.1"
-> > -PR =3D "r1"
-> > +#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.04
-> > +SRCREV =3D "c2688afb9373309751e640088705cb739997665d"
-> > +PV =3D "1.3.0.4"
-> >
-> >  S =3D "${WORKDIR}/git"
-> >
-> > --
-> > 1.7.9.5
-> >
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+Denys,
+
+I was using the 15.02-3 release of the Linaro toolchain. I upgraded to 15.05
+and tried again but saw the same error.
+
+Using 'bitbake -e' I've confirmed that TOOLCHAIN_TYPE="external" and
+TOOLCHAIN_BRAND="linaro".
+
+Thanks,
+
+-- 
+Paul Barker
+CommAgility Ltd
 
