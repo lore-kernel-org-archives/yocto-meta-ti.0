@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2638AE00BD5; Thu, 22 Oct 2015 10:01:18 -0700 (PDT)
+	id 0718BE00B1A; Thu, 22 Oct 2015 10:01:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B1F8E00B52
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B0D9E00B1A
 	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 10:01:02 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C07F952A9D; Thu, 22 Oct 2015 17:01:01 +0000 (UTC)
+	id A851252A77; Thu, 22 Oct 2015 17:01:01 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151022170101.C07F952A9D@arago-project.org>
+Message-Id: <20151022170101.A851252A77@arago-project.org>
 Date: Thu, 22 Oct 2015 17:01:01 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : cmem: Bump SRCREV to support LPAE in DT processing
+Subject: Jacob Stiffler : ti-ccsv6-native: Add CCS 6.1.1.00022
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,42 +33,103 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 17:01:18 -0000
+X-List-Received-Date: Thu, 22 Oct 2015 17:01:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 44e55b67814f3f629c770fbe4a22c9a815c5656b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=44e55b67814f3f629c770fbe4a22c9a815c5656b
+Commit: 75e0d5449f85d9a4ab8dffa9d0166343a766ad4d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=75e0d5449f85d9a4ab8dffa9d0166343a766ad4d
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Oct 22 20:57:31 2015 +0000
+Date:   Thu Oct 22 20:49:39 2015 +0000
 
-cmem: Bump SRCREV to support LPAE in DT processing
+ti-ccsv6-native: Add CCS 6.1.1.00022
+
+* Due to licensing, this installer must be downloaded manually and
+  placed into either the downloads directory, or placed on a mirror.
+* Please see http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads
+
+* NOTE: That the Linux off-line installation tarball is the file required.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cmem/cmem.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb |   42 ++++++++++++++++++++
+ recipes-ti/includes/ti-paths.inc                   |    4 ++
+ 2 files changed, 46 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 0d3e918..ddf50a4 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e27
+diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
+new file mode 100644
+index 0000000..c5a4f33
+--- /dev/null
++++ b/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "TI DSP Code Generation Tools"
++HOMEPAGE = "http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads"
++LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
++
++LIC_FILES_CHKSUM = "file://${WORKDIR}/ccsv6/doc/EULA/EULA.doc;md5=24fb8a52ac52d3938b5888362edb295a"
++
++inherit native
++
++require recipes-ti/includes/ti-unpack.inc
++require recipes-ti/includes/ti-staging.inc
++require recipes-ti/includes/ti-paths.inc
++
++TI_CGT_ARM_VERSION = "5.2.5"
++
++SRC_URI = "http://install.source.dir.local/CCS${PV}_linux.tar.gz;name=ccsv6"
++
++S = "${WORKDIR}/CCS${PV}_linux"
++
++BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
++TI_BIN_UNPK_CMDS = ""
++
++SRC_URI[ccsv6.md5sum] = "648d5f41e8a7a93c16d51cd34045ba15"
++SRC_URI[ccsv6.sha256sum] = "b82958a125d5c6bea07cfc12a6f2a77c45e1560217c1aac02194b6e3408c5105"
++
++do_install() {
++    install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
++    cp -r ${WORKDIR}/ccsv6/. ${D}${CCSV6_INSTALL_DIR_RECIPE}
++
++    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
++    cp -r ${WORKDIR}/ccsv6/tools/compiler/ti-cgt-arm_${TI_CGT_ARM_VERSION}/. \
++          ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
++}
++
++FILES_${PN} += "\
++  ${CCSV6_INSTALL_DIR_RECIPE} \
++  ${M4_TOOLCHAIN_INSTALL_DIR_RECIPE} \
++"
++
++INSANE_SKIP_${PN} = "arch libdir ldflags staticdev textrel dev-so"
++
++EXCLUDE_FROM_SHLIBS = "1"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index bd80fa1..d4bbe9e 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -45,6 +45,8 @@ export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
+ export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
+ export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
+ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
++export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
++export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
  
- BRANCH ?= "lu-next"
- # This corresponds to version 4.10.02.03
--SRCREV = "d47ac635699da6bee6daff31b87b0123e13af4ac"
-+SRCREV = "00241c45f810c8b8e4f5ac66c3323fec8e43b621"
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -80,6 +82,8 @@ export XDAIS_INSTALL_DIR      = "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE
+ export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
+ export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
+ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
++export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
++export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
  
--PV = "4.10.02.03+git${SRCPV}"
-+PV = "4.10.02.04+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
 
 
