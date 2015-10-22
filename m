@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DB618E0049B; Thu, 22 Oct 2015 07:57:35 -0700 (PDT)
+	id 4E1F7E00AF9; Thu, 22 Oct 2015 10:00:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5F30FE00343
-	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 07:57:33 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9MEvXhp030114
-	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 09:57:33 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9MEvXS8026031
-	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 09:57:33 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 22 Oct 2015 09:57:33 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9MEvWAO016457;	Thu, 22 Oct 2015 09:57:32 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 22 Oct 2015 10:57:31 -0400
-Message-ID: <1445525851-22749-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] cmem: Bump SRCREV to support LPAE in DT processing
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 427F4E00B01
+	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 10:00:52 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 83B3B52A60; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20151022170051.83B3B52A60@arago-project.org>
+Date: Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : ti-softhsmv2: Update to new version 1.3.0.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,31 +33,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 14:57:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 22 Oct 2015 17:00:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 7beba2b8a292fc868f816a96243c9b36287f804f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7beba2b8a292fc868f816a96243c9b36287f804f
+
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Tue Oct 20 01:41:38 2015 +0000
+
+ti-softhsmv2: Update to new version 1.3.0.4
+
+- Update License checksum
+- Skip PR
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/cmem/cmem.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 0d3e918..ddf50a4 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e27
+ recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |    9 ++++-----
+ 1 files changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
+index 329fbaa..c1e1654 100644
+--- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
++++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "TI softhsmv2 package"
+ LICENSE = "BSD-2-Clause | BSD-3-Clause | ISC | IBM-License | FSFULLR | Zlib"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=55144a048ba54f211a1aaa38c7fd2424"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=664f3daf042b19d634189e709d5d558e"
+ SECTION = "libs"
  
- BRANCH ?= "lu-next"
- # This corresponds to version 4.10.02.03
--SRCREV = "d47ac635699da6bee6daff31b87b0123e13af4ac"
-+SRCREV = "00241c45f810c8b8e4f5ac66c3323fec8e43b621"
+ mntdir = "/mnt"
+@@ -12,10 +12,9 @@ COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
  
--PV = "4.10.02.03+git${SRCPV}"
-+PV = "4.10.02.04+git${SRCPV}"
+ BRANCH="master"
+ SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=${BRANCH}"
+-#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.01
+-SRCREV = "c79d93ac2a326567a7245dda1b903ef340b5650c"
+-PV = "1.3.0.1"
+-PR = "r1"
++#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.04
++SRCREV = "c2688afb9373309751e640088705cb739997665d"
++PV = "1.3.0.4"
  
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
--- 
-1.9.1
 
 
