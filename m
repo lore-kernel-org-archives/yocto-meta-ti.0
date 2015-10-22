@@ -1,38 +1,38 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3453EE00A81; Wed, 21 Oct 2015 21:00:18 -0700 (PDT)
+	id 84758E00A8C; Wed, 21 Oct 2015 21:03:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98B5CE00A73
-	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2015 21:00:15 -0700 (PDT)
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C54FE00A7D
+	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2015 21:03:05 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9M40Fs3032307
-	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2015 23:00:15 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9M40FVY006245
-	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2015 23:00:15 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 21 Oct 2015 23:00:15 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9M434e1032588
+	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2015 23:03:04 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9M434Wp015103
+	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2015 23:03:04 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 21 Oct 2015 23:03:04 -0500
 Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9M40Een022512;	Wed, 21 Oct 2015 23:00:15 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t9M433pQ004401;	Wed, 21 Oct 2015 23:03:03 -0500
 From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 22 Oct 2015 00:00:10 -0400
-Message-ID: <1445486410-29445-1-git-send-email-sam.nelson@ti.com>
+Date: Thu, 22 Oct 2015 00:03:01 -0400
+Message-ID: <1445486581-29720-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH v2] pa-lld: Update to new version 3.0.1.5
+Subject: [PATCH v2] sa-lld: Update to new version 3.0.0.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,68 +45,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 04:00:18 -0000
+X-List-Received-Date: Thu, 22 Oct 2015 04:03:09 -0000
 Content-Type: text/plain
 
-- Add script to create device independent symbolic link to actual
-  device library
+- Add device independent symbolic link for dynamic library
+- Add utils to test build
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 
 ---
-Changes from previous version of patch
+Changes from previous versio of patch
 - Reformatted symbolic link commands
 ---
 ---
- recipes-bsp/pa-lld/pa-lld.inc    |    6 +++---
- recipes-bsp/pa-lld/pa-lld_git.bb |   13 +++++++++++++
- 2 files changed, 16 insertions(+), 3 deletions(-)
+ recipes-bsp/sa-lld/sa-lld-test_git.bb |    2 +-
+ recipes-bsp/sa-lld/sa-lld.inc         |    7 +++----
+ recipes-bsp/sa-lld/sa-lld_git.bb      |    4 ++++
+ 3 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index 7d922fb..b8ade64 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+index 2069d41..7cb0ac7 100644
+--- a/recipes-bsp/sa-lld/sa-lld-test_git.bb
++++ b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+@@ -15,7 +15,7 @@ do_compile () {
+ 		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S}
+ 		for choice in ${CHOICELIST}
+ 		do
+-			make -f makefile_armv7 examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
++			make -f makefile_armv7 examples utils PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
+ 		done
+ 	done
+ }
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+index 6dc8566..8066279 100644
+--- a/recipes-bsp/sa-lld/sa-lld.inc
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a
  
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.04"
--SRCREV = "92de8879be3712af684bd031ca0ed291c05d6050"
--PV = "03.00.01.04"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
-+SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
-+PV = "03.00.01.05"
- PR = "r1"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
+-# Following commit DEV.SA_LLD.03.00.00.10
+-SRCREV = "533aec7ef0e28c3faff4ee64a861c8935262dc33"
+-PV = "03.00.00.10"
+-PR = "r1"
++# Following commit DEV.SA_LLD.03.00.00.11A
++SRCREV = "bf5b097e868b20d23d386abc34a1902903d7d9ea"
++PV = "03.00.00.11"
  
  BASEDIR = "${WORKDIR}/git"
-diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
-index 63e34ad..468113b 100644
---- a/recipes-bsp/pa-lld/pa-lld_git.bb
-+++ b/recipes-bsp/pa-lld/pa-lld_git.bb
-@@ -4,6 +4,13 @@ DEPENDS = "common-csl-ip rm-lld"
- 
- include pa-lld.inc
- 
-+SRC_URI += "file://init_pa.sh"
-+
-+inherit update-rc.d
-+
-+INITSCRIPT_NAME = "init_pa.sh"
-+INITSCRIPT_PARAMS = "defaults 10"
-+
- do_compile () {
- #   Now build the lld in the updated directory
- 	make -f makefile_armv7 DEVICE=k2h clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
-@@ -12,4 +19,10 @@ do_compile () {
+ S = "${BASEDIR}/ti/drv/sa"
+diff --git a/recipes-bsp/sa-lld/sa-lld_git.bb b/recipes-bsp/sa-lld/sa-lld_git.bb
+index f345895..3df2c6c 100644
+--- a/recipes-bsp/sa-lld/sa-lld_git.bb
++++ b/recipes-bsp/sa-lld/sa-lld_git.bb
+@@ -11,4 +11,8 @@ do_compile () {
  
  do_install () {
- 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
+ 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++
 +#   Set the generic device library symbolic link
-+    ln -sf libpa.so.1.0.0 ${D}${libdir}/libpa_device.so.1
-+    ln -sf libpa_device.so.1 ${D}${libdir}/libpa_device.so
-+#   Copy init scripts
-+    install -d ${D}${sysconfdir}/init.d/
-+    install -c -m 755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++	ln -sf libsa.so.1.0.0 ${D}${libdir}/libsa_device.so.1
++	ln -sf libsa_device.so.1 ${D}${libdir}/libsa_device.so
  }
 -- 
 1.7.9.5
