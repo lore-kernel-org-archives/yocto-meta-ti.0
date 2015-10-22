@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A28E7E00B3F; Thu, 22 Oct 2015 10:00:56 -0700 (PDT)
+	id A4EA5E00B27; Thu, 22 Oct 2015 10:00:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACD7BE00B27
-	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 10:00:54 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43B87E00B1A
+	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 10:00:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C5ADE52A9D; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
+	id AF90B52A8B; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151022170051.C5ADE52A9D@arago-project.org>
+Message-Id: <20151022170051.AF90B52A8B@arago-project.org>
 Date: Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : cmem: Bump SRCREV to support LPAE in DT processing
+Subject: Sam Nelson : sa-lld: Update to new version 3.0.0.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,37 +38,70 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b948c9010a109e3bd6e5d7dd5aef6c757465fb43
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b948c9010a109e3bd6e5d7dd5aef6c757465fb43
+Commit: 5ae46649cd82a7c05695a089642eeb51f583627a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5ae46649cd82a7c05695a089642eeb51f583627a
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Oct 22 20:57:31 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Thu Oct 22 10:03:01 2015 +0000
 
-cmem: Bump SRCREV to support LPAE in DT processing
+sa-lld: Update to new version 3.0.0.11
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+- Add device independent symbolic link for dynamic library
+- Add utils to test build
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cmem/cmem.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/sa-lld/sa-lld-test_git.bb |    2 +-
+ recipes-bsp/sa-lld/sa-lld.inc         |    7 +++----
+ recipes-bsp/sa-lld/sa-lld_git.bb      |    4 ++++
+ 3 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 0d3e918..ddf50a4 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e27
+diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+index 2069d41..7cb0ac7 100644
+--- a/recipes-bsp/sa-lld/sa-lld-test_git.bb
++++ b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+@@ -15,7 +15,7 @@ do_compile () {
+ 		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S}
+ 		for choice in ${CHOICELIST}
+ 		do
+-			make -f makefile_armv7 examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
++			make -f makefile_armv7 examples utils PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
+ 		done
+ 	done
+ }
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+index 6dc8566..8066279 100644
+--- a/recipes-bsp/sa-lld/sa-lld.inc
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a
  
- BRANCH ?= "lu-next"
- # This corresponds to version 4.10.02.03
--SRCREV = "d47ac635699da6bee6daff31b87b0123e13af4ac"
-+SRCREV = "00241c45f810c8b8e4f5ac66c3323fec8e43b621"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
+-# Following commit DEV.SA_LLD.03.00.00.10
+-SRCREV = "533aec7ef0e28c3faff4ee64a861c8935262dc33"
+-PV = "03.00.00.10"
+-PR = "r1"
++# Following commit DEV.SA_LLD.03.00.00.11A
++SRCREV = "bf5b097e868b20d23d386abc34a1902903d7d9ea"
++PV = "03.00.00.11"
  
--PV = "4.10.02.03+git${SRCPV}"
-+PV = "4.10.02.04+git${SRCPV}"
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/sa"
+diff --git a/recipes-bsp/sa-lld/sa-lld_git.bb b/recipes-bsp/sa-lld/sa-lld_git.bb
+index f345895..3df2c6c 100644
+--- a/recipes-bsp/sa-lld/sa-lld_git.bb
++++ b/recipes-bsp/sa-lld/sa-lld_git.bb
+@@ -11,4 +11,8 @@ do_compile () {
  
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
+ do_install () {
+ 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++
++#   Set the generic device library symbolic link
++	ln -sf libsa.so.1.0.0 ${D}${libdir}/libsa_device.so.1
++	ln -sf libsa_device.so.1 ${D}${libdir}/libsa_device.so
+ }
 
 
