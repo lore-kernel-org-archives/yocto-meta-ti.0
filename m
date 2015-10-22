@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4CD0CE00B2E; Thu, 22 Oct 2015 10:00:55 -0700 (PDT)
+	id DE721E00B01; Thu, 22 Oct 2015 10:00:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41077E00AF9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44EFDE00B1C
 	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 10:00:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A040452A6D; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
+	id A290A52A77; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151022170051.A040452A6D@arago-project.org>
+Message-Id: <20151022170051.A290A52A77@arago-project.org>
 Date: Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : pa-lld: Update to new version 3.0.1.5
+Subject: Jacob Stiffler : ti-ccsv6-native: Add CCS 6.1.1.00022
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,71 +38,98 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ff68b5f5f4c1101ce207fe3b6708a61bc461177b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff68b5f5f4c1101ce207fe3b6708a61bc461177b
+Commit: ffeefcb8e537d7f26eca186866075667bfac9fa7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ffeefcb8e537d7f26eca186866075667bfac9fa7
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Oct 22 10:00:10 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Thu Oct 22 20:49:39 2015 +0000
 
-pa-lld: Update to new version 3.0.1.5
+ti-ccsv6-native: Add CCS 6.1.1.00022
 
-- Add script to create device independent symbolic link to actual
-  device library
+* Due to licensing, this installer must be downloaded manually and
+  placed into either the downloads directory, or placed on a mirror.
+* Please see http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+* NOTE: That the Linux off-line installation tarball is the file required.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pa-lld/pa-lld.inc    |    6 +++---
- recipes-bsp/pa-lld/pa-lld_git.bb |   13 +++++++++++++
- 2 files changed, 16 insertions(+), 3 deletions(-)
+ recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb |   42 ++++++++++++++++++++
+ recipes-ti/includes/ti-paths.inc                   |    4 ++
+ 2 files changed, 46 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index 7d922fb..b8ade64 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
- 
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.04"
--SRCREV = "92de8879be3712af684bd031ca0ed291c05d6050"
--PV = "03.00.01.04"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
-+SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
-+PV = "03.00.01.05"
- PR = "r1"
- 
- BASEDIR = "${WORKDIR}/git"
-diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
-index 63e34ad..468113b 100644
---- a/recipes-bsp/pa-lld/pa-lld_git.bb
-+++ b/recipes-bsp/pa-lld/pa-lld_git.bb
-@@ -4,6 +4,13 @@ DEPENDS = "common-csl-ip rm-lld"
- 
- include pa-lld.inc
- 
-+SRC_URI += "file://init_pa.sh"
+diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
+new file mode 100644
+index 0000000..c5a4f33
+--- /dev/null
++++ b/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "TI DSP Code Generation Tools"
++HOMEPAGE = "http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads"
++LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
 +
-+inherit update-rc.d
++LIC_FILES_CHKSUM = "file://${WORKDIR}/ccsv6/doc/EULA/EULA.doc;md5=24fb8a52ac52d3938b5888362edb295a"
 +
-+INITSCRIPT_NAME = "init_pa.sh"
-+INITSCRIPT_PARAMS = "defaults 10"
++inherit native
 +
- do_compile () {
- #   Now build the lld in the updated directory
- 	make -f makefile_armv7 DEVICE=k2h clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
-@@ -12,4 +19,10 @@ do_compile () {
++require recipes-ti/includes/ti-unpack.inc
++require recipes-ti/includes/ti-staging.inc
++require recipes-ti/includes/ti-paths.inc
++
++TI_CGT_ARM_VERSION = "5.2.5"
++
++SRC_URI = "http://install.source.dir.local/CCS${PV}_linux.tar.gz;name=ccsv6"
++
++S = "${WORKDIR}/CCS${PV}_linux"
++
++BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
++TI_BIN_UNPK_CMDS = ""
++
++SRC_URI[ccsv6.md5sum] = "648d5f41e8a7a93c16d51cd34045ba15"
++SRC_URI[ccsv6.sha256sum] = "b82958a125d5c6bea07cfc12a6f2a77c45e1560217c1aac02194b6e3408c5105"
++
++do_install() {
++    install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
++    cp -r ${WORKDIR}/ccsv6/. ${D}${CCSV6_INSTALL_DIR_RECIPE}
++
++    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
++    cp -r ${WORKDIR}/ccsv6/tools/compiler/ti-cgt-arm_${TI_CGT_ARM_VERSION}/. \
++          ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
++}
++
++FILES_${PN} += "\
++  ${CCSV6_INSTALL_DIR_RECIPE} \
++  ${M4_TOOLCHAIN_INSTALL_DIR_RECIPE} \
++"
++
++INSANE_SKIP_${PN} = "arch libdir ldflags staticdev textrel dev-so"
++
++EXCLUDE_FROM_SHLIBS = "1"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index bd80fa1..d4bbe9e 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -45,6 +45,8 @@ export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
+ export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
+ export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
+ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
++export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
++export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
  
- do_install () {
- 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-+#   Set the generic device library symbolic link
-+    ln -sf libpa.so.1.0.0 ${D}${libdir}/libpa_device.so.1
-+    ln -sf libpa_device.so.1 ${D}${libdir}/libpa_device.so
-+#   Copy init scripts
-+    install -d ${D}${sysconfdir}/init.d/
-+    install -c -m 755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
- }
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -80,6 +82,8 @@ export XDAIS_INSTALL_DIR      = "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE
+ export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
+ export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
+ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
++export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
++export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
 
 
