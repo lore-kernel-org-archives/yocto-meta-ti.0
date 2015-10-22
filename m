@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4E1F7E00AF9; Thu, 22 Oct 2015 10:00:55 -0700 (PDT)
+	id 4CD0CE00B2E; Thu, 22 Oct 2015 10:00:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 427F4E00B01
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41077E00AF9
 	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 10:00:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 83B3B52A60; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
+	id A040452A6D; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151022170051.83B3B52A60@arago-project.org>
+Message-Id: <20151022170051.A040452A6D@arago-project.org>
 Date: Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-softhsmv2: Update to new version 1.3.0.4
+Subject: Sam Nelson : pa-lld: Update to new version 3.0.1.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,50 +38,71 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 7beba2b8a292fc868f816a96243c9b36287f804f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7beba2b8a292fc868f816a96243c9b36287f804f
+Commit: ff68b5f5f4c1101ce207fe3b6708a61bc461177b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff68b5f5f4c1101ce207fe3b6708a61bc461177b
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 20 01:41:38 2015 +0000
+Date:   Thu Oct 22 10:00:10 2015 +0000
 
-ti-softhsmv2: Update to new version 1.3.0.4
+pa-lld: Update to new version 3.0.1.5
 
-- Update License checksum
-- Skip PR
+- Add script to create device independent symbolic link to actual
+  device library
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |    9 ++++-----
- 1 files changed, 4 insertions(+), 5 deletions(-)
+ recipes-bsp/pa-lld/pa-lld.inc    |    6 +++---
+ recipes-bsp/pa-lld/pa-lld_git.bb |   13 +++++++++++++
+ 2 files changed, 16 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-index 329fbaa..c1e1654 100644
---- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-+++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "TI softhsmv2 package"
- LICENSE = "BSD-2-Clause | BSD-3-Clause | ISC | IBM-License | FSFULLR | Zlib"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=55144a048ba54f211a1aaa38c7fd2424"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=664f3daf042b19d634189e709d5d558e"
- SECTION = "libs"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index 7d922fb..b8ade64 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
  
- mntdir = "/mnt"
-@@ -12,10 +12,9 @@ COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
+-# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.04"
+-SRCREV = "92de8879be3712af684bd031ca0ed291c05d6050"
+-PV = "03.00.01.04"
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
++SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
++PV = "03.00.01.05"
+ PR = "r1"
  
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=${BRANCH}"
--#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.01
--SRCREV = "c79d93ac2a326567a7245dda1b903ef340b5650c"
--PV = "1.3.0.1"
--PR = "r1"
-+#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.04
-+SRCREV = "c2688afb9373309751e640088705cb739997665d"
-+PV = "1.3.0.4"
+ BASEDIR = "${WORKDIR}/git"
+diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
+index 63e34ad..468113b 100644
+--- a/recipes-bsp/pa-lld/pa-lld_git.bb
++++ b/recipes-bsp/pa-lld/pa-lld_git.bb
+@@ -4,6 +4,13 @@ DEPENDS = "common-csl-ip rm-lld"
  
- S = "${WORKDIR}/git"
+ include pa-lld.inc
  
++SRC_URI += "file://init_pa.sh"
++
++inherit update-rc.d
++
++INITSCRIPT_NAME = "init_pa.sh"
++INITSCRIPT_PARAMS = "defaults 10"
++
+ do_compile () {
+ #   Now build the lld in the updated directory
+ 	make -f makefile_armv7 DEVICE=k2h clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
+@@ -12,4 +19,10 @@ do_compile () {
+ 
+ do_install () {
+ 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++#   Set the generic device library symbolic link
++    ln -sf libpa.so.1.0.0 ${D}${libdir}/libpa_device.so.1
++    ln -sf libpa_device.so.1 ${D}${libdir}/libpa_device.so
++#   Copy init scripts
++    install -d ${D}${sysconfdir}/init.d/
++    install -c -m 755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+ }
 
 
