@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DE721E00B01; Thu, 22 Oct 2015 10:00:55 -0700 (PDT)
+	id A12FFE00B44; Thu, 22 Oct 2015 10:00:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44EFDE00B1C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40C38E00AF6
 	for <meta-ti@yoctoproject.org>; Thu, 22 Oct 2015 10:00:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A290A52A77; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
+	id 68ED252A72; Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151022170051.A290A52A77@arago-project.org>
+Message-Id: <20151022170051.68ED252A72@arago-project.org>
 Date: Thu, 22 Oct 2015 17:00:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ccsv6-native: Add CCS 6.1.1.00022
+Subject: Gou, Hongmei : dspdce-fw: update recipe to build dspdce-fw from git source
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,103 +33,126 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 17:00:55 -0000
+X-List-Received-Date: Thu, 22 Oct 2015 17:00:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ffeefcb8e537d7f26eca186866075667bfac9fa7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ffeefcb8e537d7f26eca186866075667bfac9fa7
+Commit: 5f12d9f826344a8a27d9d77a4d1cb614ad4b8f2c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5f12d9f826344a8a27d9d77a4d1cb614ad4b8f2c
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Oct 22 20:49:39 2015 +0000
+Author: Gou, Hongmei <h-gou@ti.com>
+Date:   Tue Oct 20 03:02:25 2015 +0000
 
-ti-ccsv6-native: Add CCS 6.1.1.00022
+dspdce-fw: update recipe to build dspdce-fw from git source
 
-* Due to licensing, this installer must be downloaded manually and
-  placed into either the downloads directory, or placed on a mirror.
-* Please see http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads
-
-* NOTE: That the Linux off-line installation tarball is the file required.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb |   42 ++++++++++++++++++++
- recipes-ti/includes/ti-paths.inc                   |    4 ++
- 2 files changed, 46 insertions(+), 0 deletions(-)
+ recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb |   26 -----------
+ recipes-bsp/dspdce-fw/dspdce-fw_git.bb        |   61 +++++++++++++++++++++++++
+ 2 files changed, 61 insertions(+), 26 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
+deleted file mode 100644
+index 777c221..0000000
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-DESCRIPTION = "Firmware for DSP for an example application called copycodectest"
+-LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=386d1802eefc2fcf00ab01a5b4556277"
+-
+-COMPATIBLE_MACHINE = "dra7xx-evm"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_05/exports/dspdce-${MACHINE}-1.00.00.05.tar.gz;protocol=ftp"
+-
+-S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
+-
+-SRC_URI[md5sum] = "4f3d5c6ef088019aa4804eaaedc8e949"
+-SRC_URI[sha256sum] = "8d99c4f149613448a6d72c62a18cc7445c63c687b786658da1762c4e1c03a6a0"
+-
+-TARGET = "dra7-dsp1-fw.xe66"
+-
+-do_install() {
+-        mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
+-}
+-
+-FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+-
+-INSANE_SKIP_${PN} = "arch"
+-
+-PR = "r1"
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
 new file mode 100644
-index 0000000..c5a4f33
+index 0000000..3beb4fb
 --- /dev/null
-+++ b/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "TI DSP Code Generation Tools"
-+HOMEPAGE = "http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads"
-+LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+@@ -0,0 +1,61 @@
++DESCRIPTION = "Firmware for DSP for an example application called copycodectest"
++LICENSE = "TI-TSPA"
++LIC_FILES_CHKSUM = "file://src/ti/framework/dce/dce.c;startline=1;endline=31;md5=2c6e9aba6ed75f22b1a2b7544b1c809d"
 +
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/ccsv6/doc/EULA/EULA.doc;md5=24fb8a52ac52d3938b5888362edb295a"
++COMPATIBLE_MACHINE = "dra7xx"
 +
-+inherit native
++SRC_URI = "git://git.ti.com/glsdk/dspdce.git;protocol=git"
 +
-+require recipes-ti/includes/ti-unpack.inc
-+require recipes-ti/includes/ti-staging.inc
++SRCREV = "71e8fbf8e4f91b60680cf18a0c202a222e9ae3ba"
++
++PV = "1.00.00.06"
++
++S = "${WORKDIR}/git"
++
 +require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
 +
-+TI_CGT_ARM_VERSION = "5.2.5"
++PR = "r0"
++inherit update-alternatives
 +
-+SRC_URI = "http://install.source.dir.local/CCS${PV}_linux.tar.gz;name=ccsv6"
++DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
 +
-+S = "${WORKDIR}/CCS${PV}_linux"
++export HWVERSION = "ES10"
++export BIOSTOOLSROOT = "${STAGING_DIR_TARGET}/usr/share/ti"
 +
-+BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
-+TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-+TI_BIN_UNPK_CMDS = ""
++export XDCVERSION = "ti-xdctools-tree"
++export BIOSVERSION = "ti-sysbios-tree"
++export IPCVERSION = "ti-ipc-tree"
++export CEVERSION = "ti-codec-engine-tree"
++export FCVERSION = "ti-framework-components-tree"
++export XDAISVERSION = "ti-xdais-tree"
++export OSALVERSION = "ti-osal-tree"
 +
-+SRC_URI[ccsv6.md5sum] = "648d5f41e8a7a93c16d51cd34045ba15"
-+SRC_URI[ccsv6.sha256sum] = "b82958a125d5c6bea07cfc12a6f2a77c45e1560217c1aac02194b6e3408c5105"
++export IPCSRC = "${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
++export C66XCGTOOLSPATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 +
-+do_install() {
-+    install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
-+    cp -r ${WORKDIR}/ccsv6/. ${D}${CCSV6_INSTALL_DIR_RECIPE}
-+
-+    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
-+    cp -r ${WORKDIR}/ccsv6/tools/compiler/ti-cgt-arm_${TI_CGT_ARM_VERSION}/. \
-+          ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
++do_configure() {
++    cd ${S}
++    make unconfig
++    make vayu_config
 +}
 +
-+FILES_${PN} += "\
-+  ${CCSV6_INSTALL_DIR_RECIPE} \
-+  ${M4_TOOLCHAIN_INSTALL_DIR_RECIPE} \
-+"
++do_compile() {
++    cd ${S}
++    make dspbin
++}
 +
-+INSANE_SKIP_${PN} = "arch libdir ldflags staticdev textrel dev-so"
++TARGET = "dra7-dsp1-fw.xe66"
 +
-+EXCLUDE_FROM_SHLIBS = "1"
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index bd80fa1..d4bbe9e 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -45,6 +45,8 @@ export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
- export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
- export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
- export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
-+export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
-+export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
- 
- # This is where the tools will end up in sysroot
- export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
-@@ -80,6 +82,8 @@ export XDAIS_INSTALL_DIR      = "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE
- export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
- export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
- export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
-+export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
-+export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
- 
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
++do_install() {
++        mkdir -p ${D}${base_libdir}/firmware
++        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}
++}
++
++ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
++ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "/lib/firmware/${TARGET}"
++ALTERNATIVE_PRIORITY = "10"
++
++INSANE_SKIP_${PN} = "arch"
++
++FILES_${PN} += "${base_libdir}/firmware/*"
 
 
