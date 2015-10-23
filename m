@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ECC1CE00B36; Fri, 23 Oct 2015 12:36:20 -0700 (PDT)
+	id ED8CEE00B23; Fri, 23 Oct 2015 12:36:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7B29E00B23
-	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2015 12:36:16 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7C53E00B27
+	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2015 12:36:17 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5C24F52A19; Fri, 23 Oct 2015 19:36:16 +0000 (UTC)
+	id 8721E52A27; Fri, 23 Oct 2015 19:36:16 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151023193616.5C24F52A19@arago-project.org>
+Message-Id: <20151023193616.8721E52A27@arago-project.org>
 Date: Fri, 23 Oct 2015 19:36:16 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : aif2-lld: Add low level driver package for keystone2 antenna interface
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 23 Oct 2015 19:36:21 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 44c64fca6ad1fb893c77720919ccce0a2a228409
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=44c64fca6ad1fb893c77720919ccce0a2a228409
+Branch: master
+Commit: 51f0cdc888ad5725b08e5d623b39309029f85c3e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51f0cdc888ad5725b08e5d623b39309029f85c3e
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Fri Oct 23 21:08:56 2015 +0000
