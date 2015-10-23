@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ED8CEE00B23; Fri, 23 Oct 2015 12:36:20 -0700 (PDT)
+	id 6B4B7E00B30; Fri, 23 Oct 2015 12:57:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7C53E00B27
-	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2015 12:36:17 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 8721E52A27; Fri, 23 Oct 2015 19:36:16 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20151023193616.8721E52A27@arago-project.org>
-Date: Fri, 23 Oct 2015 19:36:16 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : aif2-lld: Add low level driver package for keystone2 antenna interface
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56B96E00B23
+	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2015 12:56:57 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9NJuuki007147
+	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2015 14:56:56 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9NJuuIq010697
+	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2015 14:56:56 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 23 Oct 2015 14:56:57 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t9NJuqXO020869;	Fri, 23 Oct 2015 14:56:53 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 23 Oct 2015 15:56:46 -0400
+Message-ID: <1445630206-19599-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH v2] gcc-arm-none-eabi-native: Add GCC baremetal toolchain
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,93 +45,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2015 19:36:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 Oct 2015 19:57:01 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 51f0cdc888ad5725b08e5d623b39309029f85c3e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51f0cdc888ad5725b08e5d623b39309029f85c3e
-
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Oct 23 21:08:56 2015 +0000
-
-aif2-lld: Add low level driver package for keystone2 antenna interface
-
-- Provides low level driver and test binaries for keystone2 antenna
-  interface peripheral
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
+v2 changes:
+* Move patch under recipes-ti
 
- recipes-bsp/aif2-lld/aif2-lld-test_git.bb |   16 ++++++++++++++++
- recipes-bsp/aif2-lld/aif2-lld.inc         |   13 +++++++++++++
- recipes-bsp/aif2-lld/aif2-lld_git.bb      |   15 +++++++++++++++
- 3 files changed, 44 insertions(+), 0 deletions(-)
+ .../devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb | 21 +++++++++++++++++++++
+ recipes-ti/includes/ti-paths.inc                    |  2 ++
+ 2 files changed, 23 insertions(+)
+ create mode 100644 recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb
 
-diff --git a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-new file mode 100755
-index 0000000..2a9de43
+diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb
+new file mode 100644
+index 0000000..971ae48
 --- /dev/null
-+++ b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "TI Antenna Interface peripheral module low level driver test binaries"
++++ b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "Baremetal GCC for ARM"
++LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
 +
-+DEPENDS = "common-csl-ip aif2-lld qmss-lld cppi-lld"
++LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=cba77c7fde3ed13e866b04a2f3d93918"
 +
-+include aif2-lld.inc
++inherit native
++require recipes-ti/includes/ti-paths.inc
 +
-+EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} AIF2_SRC_DIR=${WORKDIR}/git"
++SRC_URI = "https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2;name=gcc-arm-none"
 +
-+do_compile () {
-+    oe_runmake clean DEVICE=k2hk
-+    oe_runmake tests DEVICE=k2hk
++SRC_URI[gcc-arm-none.md5sum] = "acc8c8ff45f8801e2155934214309a87"
++SRC_URI[gcc-arm-none.sha256sum] = "e33d7546de1e02844239c72b3ef5563f472fcd6b4637419d513770ae13f551c0"
++
++S = "${WORKDIR}/gcc-arm-none-eabi-4_8-2014q3"
++
++do_install() {
++    install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
++    cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
 +}
 +
-+do_install () {
-+    oe_runmake installbin DEVICE=k2hk AIF2_SRC_DIR=${WORKDIR}/git INSTALL_BIN_BASE_DIR=${D}/${bindir}
-+}
-diff --git a/recipes-bsp/aif2-lld/aif2-lld.inc b/recipes-bsp/aif2-lld/aif2-lld.inc
-new file mode 100755
-index 0000000..212813c
---- /dev/null
-+++ b/recipes-bsp/aif2-lld/aif2-lld.inc
-@@ -0,0 +1,13 @@
-+LICENSE = "BSD-3-Clause"
-+
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/aif2-lld.git;destsuffix=git/ti/drv/aif2;protocol=git;branch=${BRANCH}"
-+# The following commit correspond to DEV.AIF2LLD.01.02.00.00A
-+SRCREV = "7f394ec9975cd4cef982b11763c882c4c763ddce"
-+
-+PV = "1.2.0.0"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm"
-+
-+S = "${WORKDIR}/git/ti/drv/aif2"
-diff --git a/recipes-bsp/aif2-lld/aif2-lld_git.bb b/recipes-bsp/aif2-lld/aif2-lld_git.bb
-new file mode 100755
-index 0000000..f6e95c2
---- /dev/null
-+++ b/recipes-bsp/aif2-lld/aif2-lld_git.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "Antenna Interface low level driver"
-+
-+DEPENDS = "common-csl-ip qmss-lld cppi-lld"
-+
-+include aif2-lld.inc
-+
-+EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
-+
-+do_compile () {
-+    oe_runmake lib DEVICE=k2hk
-+}
-+
-+do_install () {
-+    oe_runmake install INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-+}
++FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index d4bbe9e..8880591 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -47,6 +47,7 @@ export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
+ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
+ export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
++export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
+ 
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -84,6 +85,7 @@ export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
+ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
+ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+ export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
++export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
+-- 
+1.9.1
 
 
