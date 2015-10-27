@@ -1,41 +1,38 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 22A0DE00A8C; Tue, 27 Oct 2015 07:41:49 -0700 (PDT)
+	id 45FD4E009C3; Tue, 27 Oct 2015 09:05:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1B33E009B8
-	for <meta-ti@yoctoproject.org>; Tue, 27 Oct 2015 07:41:23 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9REfNjQ019262
-	for <meta-ti@yoctoproject.org>; Tue, 27 Oct 2015 09:41:23 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9REfNiG026086
-	for <meta-ti@yoctoproject.org>; Tue, 27 Oct 2015 09:41:23 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 27 Oct 2015 09:41:23 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9REfMMj023422;
-	Tue, 27 Oct 2015 09:41:22 -0500
-Message-ID: <562F8D12.7090407@ti.com>
-Date: Tue, 27 Oct 2015 10:41:22 -0400
-From: Jacob Stiffler <j-stiffler@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18806E00814
+	for <meta-ti@yoctoproject.org>; Tue, 27 Oct 2015 09:05:54 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9RG5rM5032014
+	for <meta-ti@yoctoproject.org>; Tue, 27 Oct 2015 11:05:53 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9RG5rkP024462
+	for <meta-ti@yoctoproject.org>; Tue, 27 Oct 2015 11:05:53 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 27 Oct 2015 11:05:53 -0500
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t9RG5qhs008009;	Tue, 27 Oct 2015 11:05:53 -0500
+From: Hongmei Gou <h-gou@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 27 Oct 2015 12:05:51 -0400
+Message-ID: <1445961951-7182-1-git-send-email-h-gou@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: Sam Nelson <sam.nelson@ti.com>, <meta-ti@yoctoproject.org>
-References: <1445486410-29445-1-git-send-email-sam.nelson@ti.com>
-In-Reply-To: <1445486410-29445-1-git-send-email-sam.nelson@ti.com>
-Subject: Re: [PATCH v2] pa-lld: Update to new version 3.0.1.5
+Subject: [PATCH] ipumm-fw: update recipe to build ipumm-fw from git source
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,75 +45,85 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 14:41:49 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Oct 2015 16:05:58 -0000
+Content-Type: text/plain
 
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
+---
+ recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb | 46 ++++++++++++++++++++++++-----
+ 1 file changed, 38 insertions(+), 8 deletions(-)
 
-
-On 10/22/2015 12:00 AM, Sam Nelson wrote:
-> - Add script to create device independent symbolic link to actual
->    device library
->
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
->
-> ---
-> Changes from previous version of patch
-> - Reformatted symbolic link commands
-> ---
-> ---
->   recipes-bsp/pa-lld/pa-lld.inc    |    6 +++---
->   recipes-bsp/pa-lld/pa-lld_git.bb |   13 +++++++++++++
->   2 files changed, 16 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-> index 7d922fb..b8ade64 100644
-> --- a/recipes-bsp/pa-lld/pa-lld.inc
-> +++ b/recipes-bsp/pa-lld/pa-lld.inc
-> @@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
->   BRANCH = "master"
->   SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
->   
-> -# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.04"
-> -SRCREV = "92de8879be3712af684bd031ca0ed291c05d6050"
-> -PV = "03.00.01.04"
-> +# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
-> +SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
-> +PV = "03.00.01.05"
->   PR = "r1"
->   
->   BASEDIR = "${WORKDIR}/git"
-> diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
-> index 63e34ad..468113b 100644
-> --- a/recipes-bsp/pa-lld/pa-lld_git.bb
-> +++ b/recipes-bsp/pa-lld/pa-lld_git.bb
-> @@ -4,6 +4,13 @@ DEPENDS = "common-csl-ip rm-lld"
->   
->   include pa-lld.inc
->   
-> +SRC_URI += "file://init_pa.sh"
-
-This file does not exist.
-
-> +
-> +inherit update-rc.d
-> +
-> +INITSCRIPT_NAME = "init_pa.sh"
-> +INITSCRIPT_PARAMS = "defaults 10"
-> +
->   do_compile () {
->   #   Now build the lld in the updated directory
->   	make -f makefile_armv7 DEVICE=k2h clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
-> @@ -12,4 +19,10 @@ do_compile () {
->   
->   do_install () {
->   	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-> +#   Set the generic device library symbolic link
-> +    ln -sf libpa.so.1.0.0 ${D}${libdir}/libpa_device.so.1
-> +    ln -sf libpa_device.so.1 ${D}${libdir}/libpa_device.so
-> +#   Copy init scripts
-> +    install -d ${D}${sysconfdir}/init.d/
-> +    install -c -m 755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
->   }
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
+index f537179..8b0dc21 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
+@@ -9,27 +9,57 @@ python __anonymous() {
+ DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+ LICENSE = "TI-TSPA"
+ 
+-LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=5803e271087f74d03239d868bebcc2c7"
++LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=036f6300761559fbc5ce7d06e1ccea5a"
+ 
+ COMPATIBLE_MACHINE = "dra7xx"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ RDEPENDS_${PN} = " libdce"
+ 
+-SRC_URI = "http://downloads.ti.com/infotainment/esd/jacinto6/glsdk/ipumm/3_00_09_01/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
++SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ 
+-SRC_URI[md5sum] = "bf15624e26bdef4dbb67b98ccd8b9754"
+-SRC_URI[sha256sum] = "e70a38b62e3e4d11d5ce68f0980de4df5256bd597068f179e220fa5afcd065fe"
++SRCREV = "7f15373c21a9a98b8881d81c3681c09e858a9d2c"
+ 
+-S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
++S = "${WORKDIR}/git"
++
++PV = "3.00.09.01"
++
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
++
++DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ccsv6-native ti-ipc-rtos"
++
++export HWVERSION="ES10"
++export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
++
++export XDCVERSION="ti-xdctools-tree"
++export BIOSVERSION="ti-sysbios-tree"
++export IPCVERSION="ti-ipc-tree"
++export CEVERSION="ti-codec-engine-tree"
++export FCVERSION="ti-framework-components-tree"
++export XDAISVERSION="ti-xdais-tree"
++
++export TMS470CGTOOLPATH="${M4_TOOLCHAIN_INSTALL_DIR}"
++export IPCSRC="${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
++
++do_configure() {
++    cd ${S}
++    make unconfig
++    make vayu_smp_config
++}
++
++
++do_compile() {
++    cd ${S}
++    make
++}
+ 
+ TARGET = "dra7-ipu2-fw.xem4"
+ 
+ do_install() {
+         mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++        cp ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
+ }
+ 
+ FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+ 
+-PR = "r0"
++PR = "r1"
+-- 
+1.9.1
 
 
