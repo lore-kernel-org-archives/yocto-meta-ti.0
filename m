@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A47C3E007E4; Wed, 28 Oct 2015 13:06:31 -0700 (PDT)
+	id 9FDDFE0088C; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83BE8E0071C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86220E007AE
 	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5C4EB52AB0; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
+	id 06CCA52A5B; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151028200626.5C4EB52AB0@arago-project.org>
+Message-Id: <20151028200626.06CCA52A5B@arago-project.org>
 Date: Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : gcc-arm-none-eabi-native: Add GCC baremetal toolchain
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 20:06:31 -0000
+X-List-Received-Date: Wed, 28 Oct 2015 20:06:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 6a022be98ffc62b8908b60fcf1f16300eb2a0f84
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6a022be98ffc62b8908b60fcf1f16300eb2a0f84
+Branch: fido
+Commit: af7f3df8df4e844bc185235fdb795237c142ba6a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af7f3df8df4e844bc185235fdb795237c142ba6a
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Sat Oct 24 01:56:46 2015 +0000
