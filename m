@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2318E007FE; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
+	id A3781E0049B; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84EC6E00748
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:26 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F4013E007E1
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1918B52A71; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
+	id 7530F52AB1; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151028200626.1918B52A71@arago-project.org>
+Message-Id: <20151028200626.7530F52AB1@arago-project.org>
 Date: Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : pa-lld: Add missing init script
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 28 Oct 2015 20:06:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: a1e9cca6b0da6167c94e2476354e49563614e629
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a1e9cca6b0da6167c94e2476354e49563614e629
+Branch: master
+Commit: e72915d14e56bc66840e5392165d282898e101e2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e72915d14e56bc66840e5392165d282898e101e2
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Wed Oct 28 00:18:09 2015 +0000
