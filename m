@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9FDDFE0088C; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
+	id A0EDBE007AE; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86220E007AE
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:26 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3FB9E007C9
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 06CCA52A5B; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
+	id 80ACD52A2F; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151028200626.06CCA52A5B@arago-project.org>
+Message-Id: <20151028200626.80ACD52A2F@arago-project.org>
 Date: Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : gcc-arm-none-eabi-native: Add GCC baremetal toolchain
+Subject: Jacob Stiffler : am57xx-evm, dra7xx-evm: Increase max_leb_cnt
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,70 +37,49 @@ X-List-Received-Date: Wed, 28 Oct 2015 20:06:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: af7f3df8df4e844bc185235fdb795237c142ba6a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af7f3df8df4e844bc185235fdb795237c142ba6a
+Branch: master
+Commit: 667b451588a9ea2533d63745c81e91071c49ed36
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=667b451588a9ea2533d63745c81e91071c49ed36
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Sat Oct 24 01:56:46 2015 +0000
+Date:   Wed Oct 28 01:06:25 2015 +0000
 
-gcc-arm-none-eabi-native: Add GCC baremetal toolchain
+am57xx-evm,dra7xx-evm: Increase max_leb_cnt
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../gcc-arm-none-eabi-native_4.8.2014q3.bb         |   21 ++++++++++++++++++++
- recipes-ti/includes/ti-paths.inc                   |    2 +
- 2 files changed, 23 insertions(+), 0 deletions(-)
+ conf/machine/am57xx-evm.conf |    2 +-
+ conf/machine/dra7xx-evm.conf |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb
-new file mode 100644
-index 0000000..971ae48
---- /dev/null
-+++ b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Baremetal GCC for ARM"
-+LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
-+
-+LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=cba77c7fde3ed13e866b04a2f3d93918"
-+
-+inherit native
-+require recipes-ti/includes/ti-paths.inc
-+
-+SRC_URI = "https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2;name=gcc-arm-none"
-+
-+SRC_URI[gcc-arm-none.md5sum] = "acc8c8ff45f8801e2155934214309a87"
-+SRC_URI[gcc-arm-none.sha256sum] = "e33d7546de1e02844239c72b3ef5563f472fcd6b4637419d513770ae13f551c0"
-+
-+S = "${WORKDIR}/gcc-arm-none-eabi-4_8-2014q3"
-+
-+do_install() {
-+    install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
-+    cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
-+}
-+
-+FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index d4bbe9e..8880591 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -47,6 +47,7 @@ export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
- export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
- export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
- export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
-+export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index c923174..95d3fc7 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -23,7 +23,7 @@ UBOOT_MACHINE = "beagle_x15_config"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
  
- # This is where the tools will end up in sysroot
- export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
-@@ -84,6 +85,7 @@ export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
- export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
- export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
- export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
-+export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 3b88668..9bfcb5c 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -23,7 +23,7 @@ UBOOT_MACHINE = "dra7xx_evm_config"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
  
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
 
 
