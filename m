@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A407DE00748; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
+	id BA2BFE00985; Wed, 28 Oct 2015 13:06:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8114CE0049B
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:26 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3FD6E007DA
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 42B1F52A8F; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
+	id 9A8DE52AB3; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151028200626.42B1F52A8F@arago-project.org>
+Message-Id: <20151028200626.9A8DE52AB3@arago-project.org>
 Date: Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : ipumm-fw: update recipe to build ipumm-fw from git source
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 20:06:32 -0000
+X-List-Received-Date: Wed, 28 Oct 2015 20:06:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: b1b013c158dc172dbef850511a8a12e963714715
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b1b013c158dc172dbef850511a8a12e963714715
+Branch: master
+Commit: c96067711695a7327ad362eb82af0625002a6a55
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c96067711695a7327ad362eb82af0625002a6a55
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Wed Oct 28 20:52:12 2015 +0000
