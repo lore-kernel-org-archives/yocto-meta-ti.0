@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A0EDBE007AE; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
+	id A2318E007FE; Wed, 28 Oct 2015 13:06:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3FB9E007C9
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84EC6E00748
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 13:06:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 80ACD52A2F; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
+	id 1918B52A71; Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151028200626.80ACD52A2F@arago-project.org>
+Message-Id: <20151028200626.1918B52A71@arago-project.org>
 Date: Wed, 28 Oct 2015 20:06:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : am57xx-evm, dra7xx-evm: Increase max_leb_cnt
+Subject: Sam Nelson : pa-lld: Add missing init script
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,49 +37,78 @@ X-List-Received-Date: Wed, 28 Oct 2015 20:06:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 667b451588a9ea2533d63745c81e91071c49ed36
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=667b451588a9ea2533d63745c81e91071c49ed36
+Branch: fido
+Commit: a1e9cca6b0da6167c94e2476354e49563614e629
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a1e9cca6b0da6167c94e2476354e49563614e629
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Oct 28 01:06:25 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Wed Oct 28 00:18:09 2015 +0000
 
-am57xx-evm,dra7xx-evm: Increase max_leb_cnt
+pa-lld: Add missing init script
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+- The init script is used to create symbolic link to the right
+  device library
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am57xx-evm.conf |    2 +-
- conf/machine/dra7xx-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/pa-lld/files/init_pa.sh |   47 +++++++++++++++++++++++++++++++++++
+ 1 files changed, 47 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index c923174..95d3fc7 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -23,7 +23,7 @@ UBOOT_MACHINE = "beagle_x15_config"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
- 
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 3b88668..9bfcb5c 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -23,7 +23,7 @@ UBOOT_MACHINE = "dra7xx_evm_config"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
- 
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+diff --git a/recipes-bsp/pa-lld/files/init_pa.sh b/recipes-bsp/pa-lld/files/init_pa.sh
+new file mode 100755
+index 0000000..8f80e35
+--- /dev/null
++++ b/recipes-bsp/pa-lld/files/init_pa.sh
+@@ -0,0 +1,47 @@
++#*
++#* Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/
++#*
++#*
++#*  Redistribution and use in source and binary forms, with or without
++#*  modification, are permitted provided that the following conditions
++#*  are met:
++#*
++#*    Redistributions of source code must retain the above copyright
++#*    notice, this list of conditions and the following disclaimer.
++#*
++#*    Redistributions in binary form must reproduce the above copyright
++#*    notice, this list of conditions and the following disclaimer in the
++#*    documentation and/or other materials provided with the
++#*    distribution.
++#*
++#*    Neither the name of Texas Instruments Incorporated nor the names of
++#*    its contributors may be used to endorse or promote products derived
++#*    from this software without specific prior written permission.
++#*
++
++#! /bin/sh
++compatible=$(cat /proc/device-tree/compatible)
++
++cd /usr/lib
++case "$compatible" in
++	*k2hk*)
++		device=k2hk
++		ln -sf libpa.so.1.0.0 libpa_device.so.1
++	;;
++	*k2l*)
++		device=k2l
++		ln -sf libpa2.so.1.0.0 libpa_device.so.1
++	;;
++	*k2e*)
++	device=k2e
++		ln -sf libpa2.so.1.0.0 libpa_device.so.1
++	;;
++	*)
++		device=unknown
++	;;
++esac
++
++if [ $device != unknown ]; then
++	ln -sf libpa_device.so.1 libpa_device.so
++	echo PA library link established for device : $device
++fi
 
 
