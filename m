@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C72CEE00B30; Wed, 28 Oct 2015 07:36:15 -0700 (PDT)
+	id D1D87E00B44; Wed, 28 Oct 2015 07:52:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,31 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 588DDE007FE
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 07:36:09 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9SEa8BY006946
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 09:36:08 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9SEa8bR015275
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 09:36:08 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 28 Oct 2015 09:36:08 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 216B3E00B2E
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 07:52:25 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9SEqPR5014088
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 09:52:25 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9SEqOrv032387
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2015 09:52:25 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 28 Oct 2015 09:52:25 -0500
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9SEa8Nx022422;	Wed, 28 Oct 2015 09:36:08 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
+	t9SEqOKd025176;	Wed, 28 Oct 2015 09:52:24 -0500
+From: Hongmei Gou <h-gou@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 28 Oct 2015 10:36:06 -0400
-Message-ID: <1446042966-13136-1-git-send-email-j-stiffler@ti.com>
+Date: Wed, 28 Oct 2015 10:52:12 -0400
+Message-ID: <1446043932-15789-1-git-send-email-h-gou@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] linux: cmem.inc: Implement way to configure more complex CMEM config
+Subject: [PATCH v2] ipumm-fw: update recipe to build ipumm-fw from git source
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,171 +45,89 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 14:36:15 -0000
+X-List-Received-Date: Wed, 28 Oct 2015 14:52:26 -0000
 Content-Type: text/plain
 
-* Supply the entire cmem.dtsi per machine
-  - Disabled by default
-  - Currently only supported for dra7xx and k2hk-evm
-* Enable by setting RESERVE_CMEM = "1"
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
 ---
- recipes-kernel/linux/cmem.inc                 |  9 +----
- recipes-kernel/linux/files/cmem.dtsi          | 16 +-------
- recipes-kernel/linux/files/dra7xx/cmem.dtsi   | 26 +++++++++++++
- recipes-kernel/linux/files/k2hk-evm/cmem.dtsi | 54 +++++++++++++++++++++++++++
- 4 files changed, 84 insertions(+), 21 deletions(-)
- create mode 100644 recipes-kernel/linux/files/dra7xx/cmem.dtsi
- create mode 100644 recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
+v2 changes:
+* Rename ipumm-fw_3.00.09.01.bb to ipumm-fw_git.bb
+* Use oe_runmake in do_configure and do_compile
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index 742f3c8..fc0bf48 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -1,17 +1,12 @@
- SRC_URI += "file://cmem.dtsi"
+ .../{ipumm-fw_3.00.09.01.bb => ipumm-fw_git.bb}    | 43 ++++++++++++++++++----
+ 1 file changed, 35 insertions(+), 8 deletions(-)
+ rename recipes-bsp/ipumm-fw/{ipumm-fw_3.00.09.01.bb => ipumm-fw_git.bb} (35%)
+
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+similarity index 35%
+rename from recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
+rename to recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index f537179..af53c3c 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.09.01.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -9,27 +9,54 @@ python __anonymous() {
+ DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+ LICENSE = "TI-TSPA"
  
--CMEM_BASE ?= ""
--CMEM_SIZE ?= ""
-+RESERVE_CMEM ?= "0"
+-LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=5803e271087f74d03239d868bebcc2c7"
++LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=036f6300761559fbc5ce7d06e1ccea5a"
  
- do_setup_cmem() {
--    if [ ! -z "${CMEM_BASE}" ]
-+    if [ "${RESERVE_CMEM}" == "1" ]
-     then
-         cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+ COMPATIBLE_MACHINE = "dra7xx"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
--               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
--               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
--
-         for dtb in ${KERNEL_DEVICETREE}
-         do
-             dts=`echo $dtb | sed -e 's|dtb$|dts|'`
-diff --git a/recipes-kernel/linux/files/cmem.dtsi b/recipes-kernel/linux/files/cmem.dtsi
-index 6b1da99..8c62b06 100644
---- a/recipes-kernel/linux/files/cmem.dtsi
-+++ b/recipes-kernel/linux/files/cmem.dtsi
-@@ -1,24 +1,12 @@
- / {
--        reserved-memory {
--                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
--                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
--                        no-map;
--                        status = "okay";
--                };
--        };
--
-         cmem {
-                 compatible = "ti,cmem";
-                 #address-cells = <1>;
-                 #size-cells = <0>;
+ RDEPENDS_${PN} = " libdce"
  
--                status = "okay";
-+		#pool-size-cells = <1>;
+-SRC_URI = "http://downloads.ti.com/infotainment/esd/jacinto6/glsdk/ipumm/3_00_09_01/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
++SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--                cmem_block_0: cmem_block@0 {
--                        reg = <0>;
--                        memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
--                };
-+                status = "disabled";
-         };
+-SRC_URI[md5sum] = "bf15624e26bdef4dbb67b98ccd8b9754"
+-SRC_URI[sha256sum] = "e70a38b62e3e4d11d5ce68f0980de4df5256bd597068f179e220fa5afcd065fe"
++SRCREV = "7f15373c21a9a98b8881d81c3681c09e858a9d2c"
  
- };
-diff --git a/recipes-kernel/linux/files/dra7xx/cmem.dtsi b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-new file mode 100644
-index 0000000..d91faf9
---- /dev/null
-+++ b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-@@ -0,0 +1,26 @@
-+/ {
-+        reserved-memory {
-+                cmem_block_mem_0: cmem_block_mem@a0000000 {
-+                        reg = <0x0 0xa0000000 0x0 0x0a000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
+-S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
++S = "${WORKDIR}/git"
 +
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
++PV = "3.00.09.01"
 +
-+		#pool-size-cells = <2>;
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
 +
-+                status = "okay";
++DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ccsv6-native ti-ipc-rtos"
 +
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x0 0x0a000000>;
-+                };
-+        };
++export HWVERSION="ES10"
++export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
 +
-+};
-diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-new file mode 100644
-index 0000000..7e897ab
---- /dev/null
-+++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-@@ -0,0 +1,54 @@
-+/ {
-+        reserved-memory {
-+                mpm_block_mem_0: mpm_block_mem@820000000 {
-+                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
++export XDCVERSION="ti-xdctools-tree"
++export BIOSVERSION="ti-sysbios-tree"
++export IPCVERSION="ti-ipc-tree"
++export CEVERSION="ti-codec-engine-tree"
++export FCVERSION="ti-framework-components-tree"
++export XDAISVERSION="ti-xdais-tree"
 +
-+                cmem_block_mem_0: cmem_block_mem@829000000 {
-+                        reg = <0x00000008 0x29000000 0x00000000 0x57000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
++export TMS470CGTOOLPATH="${M4_TOOLCHAIN_INSTALL_DIR}"
++export IPCSRC="${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
 +
-+                cmem_block_mem_1: cmem_block_mem@00c100000 {
-+                        reg = <0x00000000 0x0c100000 0x00000000 0x00480000>;
-+                        no-map;
-+                        status = "okay";
-+                };
++do_configure() {
++    oe_runmake unconfig
++    oe_runmake vayu_smp_config
++}
 +
-+                cmem_block_mem_2: cmem_block_mem@822000000 {
-+                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
-+
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+                status = "okay";
-+
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x00000000 0x57000000>;
-+                };
-+
-+                cmem_block_1: cmem_block@1 {
-+                        reg = <1>;
-+                        memory-region = <&cmem_block_mem_1>;
-+                };
-+
-+                cmem_block_2: cmem_block@2 {
-+                        reg = <2>;
-+                        memory-region = <&cmem_block_mem_2>;
-+                };
-+        };
-+
-+};
++do_compile() {
++    oe_runmake
++}
+ 
+ TARGET = "dra7-ipu2-fw.xem4"
+ 
+ do_install() {
+         mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++        cp ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
+ }
+ 
+ FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+ 
+-PR = "r0"
++PR = "r1"
 -- 
 1.9.1
 
