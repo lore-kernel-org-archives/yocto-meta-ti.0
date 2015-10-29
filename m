@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9F85BE00AB0; Thu, 29 Oct 2015 12:40:48 -0700 (PDT)
+	id E12D6E00ABE; Thu, 29 Oct 2015 12:40:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C94BE007FE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7EF3AE009C3
 	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 12:40:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7F5B852A1E; Thu, 29 Oct 2015 19:40:42 +0000 (UTC)
+	id 13EDD52A2F; Thu, 29 Oct 2015 19:40:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151029194042.7F5B852A1E@arago-project.org>
-Date: Thu, 29 Oct 2015 19:40:42 +0000 (UTC)
+Message-Id: <20151029194042.13EDD52A2F@arago-project.org>
+Date: Thu, 29 Oct 2015 19:40:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : pru-icss: Add PRU software package version 4.0.0.0
+Subject: Jacob Stiffler : linux: cmem.inc: Implement way to configure more complex CMEM config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,98 +33,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 19:40:48 -0000
+X-List-Received-Date: Thu, 29 Oct 2015 19:40:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: e4fa22729cae814cb047dab40440055a60357540
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e4fa22729cae814cb047dab40440055a60357540
+Commit: 31e0f4b5aa98481160ea2fb85a51d05b8135cd46
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=31e0f4b5aa98481160ea2fb85a51d05b8135cd46
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Oct 29 22:29:08 2015 +0000
+Date:   Thu Oct 29 18:06:06 2015 +0000
 
-pru-icss: Add PRU software package version 4.0.0.0
+linux: cmem.inc: Implement way to configure more complex CMEM config
+
+* Supply the entire cmem.dtsi per machine
+  - Disabled by default
+  - Currently only supported for dra7xx and k2hk-evm
+* Enable by setting RESERVE_CMEM = "1"
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pru/pru-icss_git.bb |   66 +++++++++++++++++++++++++++++++++++++++
- 1 files changed, 66 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/cmem.inc                 |    9 +---
+ recipes-kernel/linux/files/cmem.dtsi          |   42 +++++++++++++------
+ recipes-kernel/linux/files/dra7xx/cmem.dtsi   |   26 ++++++++++++
+ recipes-kernel/linux/files/k2hk-evm/cmem.dtsi |   54 +++++++++++++++++++++++++
+ 4 files changed, 110 insertions(+), 21 deletions(-)
 
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
+index 742f3c8..fc0bf48 100644
+--- a/recipes-kernel/linux/cmem.inc
++++ b/recipes-kernel/linux/cmem.inc
+@@ -1,17 +1,12 @@
+ SRC_URI += "file://cmem.dtsi"
+ 
+-CMEM_BASE ?= ""
+-CMEM_SIZE ?= ""
++RESERVE_CMEM ?= "0"
+ 
+ do_setup_cmem() {
+-    if [ ! -z "${CMEM_BASE}" ]
++    if [ "${RESERVE_CMEM}" == "1" ]
+     then
+         cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+ 
+-        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
+-               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
+-               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+-
+         for dtb in ${KERNEL_DEVICETREE}
+         do
+             dts=`echo $dtb | sed -e 's|dtb$|dts|'`
+diff --git a/recipes-kernel/linux/files/cmem.dtsi b/recipes-kernel/linux/files/cmem.dtsi
+index 6b1da99..2311986 100644
+--- a/recipes-kernel/linux/files/cmem.dtsi
++++ b/recipes-kernel/linux/files/cmem.dtsi
+@@ -1,24 +1,38 @@
++/*
++ * This is a placeholder for CMEM reserved memory declarations. This
++ * is simply an example and does not actually reserve any memory for
++ * CMEM.
++ *
++ * The commented sections below provide an example for how to provide
++ * a reserved memory region for CMEM to use as a buffer pool.
++ */
+ / {
+-        reserved-memory {
+-                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
+-                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
+-                        no-map;
+-                        status = "okay";
+-                };
+-        };
++/*
++	reserved-memory {
++		cmem_block_mem_0: cmem_block_mem@a0000000 {
++			reg = <0x0 0xa0000000 0x0 0x0a000000>;
++			no-map;
++			status = "okay";
++		};
++	};
++*/
+ 
+-        cmem {
+-                compatible = "ti,cmem";
+-                #address-cells = <1>;
+-                #size-cells = <0>;
++	cmem {
++		compatible = "ti,cmem";
++		#address-cells = <1>;
++		#size-cells = <0>;
+ 
+-                status = "okay";
++		#pool-size-cells = <2>;
++
++		status = "disabled";
++/*
++		status = "okay";
+ 
+                 cmem_block_0: cmem_block@0 {
+                         reg = <0>;
+                         memory-region = <&cmem_block_mem_0>;
+-                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
++                        cmem-buf-pools = <1 0x0 0x0a000000>;
+                 };
++*/
+         };
+-
+ };
+diff --git a/recipes-kernel/linux/files/dra7xx/cmem.dtsi b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
 new file mode 100644
-index 0000000..b756713
+index 0000000..d91faf9
 --- /dev/null
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -0,0 +1,66 @@
-+DESCRIPTION = "Programmable Real-time Unit Software Package"
-+HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
-+LICENSE = "BSD-3-Clause & GPL-2.0 & PD"
++++ b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
+@@ -0,0 +1,26 @@
++/ {
++        reserved-memory {
++                cmem_block_mem_0: cmem_block_mem@a0000000 {
++                        reg = <0x0 0xa0000000 0x0 0x0a000000>;
++                        no-map;
++                        status = "okay";
++                };
++        };
 +
-+LIC_FILES_CHKSUM = "file://PRU-Package-v4.0-Manifest.html;md5=5ea937e4ff2c924a735d42e61ad8cbe3"
++        cmem {
++                compatible = "ti,cmem";
++                #address-cells = <1>;
++                #size-cells = <0>;
 +
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "476289eb7c3a91977bae84aea55c56f3120b48ea"
++		#pool-size-cells = <2>;
 +
-+PV = "4.0.0.0"
-+PR = "r0"
++                status = "okay";
 +
-+require recipes-ti/includes/ti-paths.inc
++                cmem_block_0: cmem_block@0 {
++                        reg = <0>;
++                        memory-region = <&cmem_block_mem_0>;
++                        cmem-buf-pools = <1 0x0 0x0a000000>;
++                };
++        };
 +
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++};
+diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
+new file mode 100644
+index 0000000..7e897ab
+--- /dev/null
++++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
+@@ -0,0 +1,54 @@
++/ {
++        reserved-memory {
++                mpm_block_mem_0: mpm_block_mem@820000000 {
++                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
++                        no-map;
++                        status = "okay";
++                };
 +
-+DEPENDS = "ti-cgt-pru-native"
++                cmem_block_mem_0: cmem_block_mem@829000000 {
++                        reg = <0x00000008 0x29000000 0x00000000 0x57000000>;
++                        no-map;
++                        status = "okay";
++                };
 +
-+S = "${WORKDIR}/git"
++                cmem_block_mem_1: cmem_block_mem@00c100000 {
++                        reg = <0x00000000 0x0c100000 0x00000000 0x00480000>;
++                        no-map;
++                        status = "okay";
++                };
 +
-+export PRU_CGT = "${TI_CGT_PRU_INSTALL_DIR}"
++                cmem_block_mem_2: cmem_block_mem@822000000 {
++                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
++                        no-map;
++                        status = "okay";
++                };
++        };
 +
-+SUBDIRS = "examples pru_cape/pru_fw lib/src labs"
++        cmem {
++                compatible = "ti,cmem";
++                #address-cells = <1>;
++                #size-cells = <0>;
 +
-+do_compile() {
-+    for dir in ${SUBDIRS}
-+    do
-+        make -C ${S}/$dir
-+    done
-+}
++		#pool-size-cells = <2>;
 +
-+do_install_ti33x() {
-+    install -d ${D}/lib/firmware
-+    for i in 0 1
-+    do
-+        install -m 0644 ${S}/examples/am335x/PRU_RPMsg_Echo_Interrupt${i}/gen/PRU_RPMsg_Echo_Interrupt${i}.out \
-+                        ${D}/lib/firmware/am335x-pru${i}-fw
-+    done
-+}
++                status = "okay";
 +
-+do_install_ti43x() {
-+    install -d ${D}/lib/firmware
-+    for i in 0 1
-+    do
-+        install -m 0644 ${S}/examples/am437x/PRU_RPMsg_Echo_Interrupt${i}/gen/PRU_RPMsg_Echo_Interrupt${i}.out \
-+                        ${D}/lib/firmware/am437x-pru1_${i}-fw
-+    done
-+}
++                cmem_block_0: cmem_block@0 {
++                        reg = <0>;
++                        memory-region = <&cmem_block_mem_0>;
++                        cmem-buf-pools = <1 0x00000000 0x57000000>;
++                };
 +
-+do_install_omap-a15() {
-+    install -d ${D}/lib/firmware
-+    for i in 1 2
-+    do
-+        for j in 0 1
-+        do
-+            install -m 0644 ${S}/examples/am572x/PRU_RPMsg_Echo_Interrupt${i}_${j}/gen/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
-+                            ${D}/lib/firmware/am57xx-pru${i}_${j}-fw
-+        done
-+    done
-+}
++                cmem_block_1: cmem_block@1 {
++                        reg = <1>;
++                        memory-region = <&cmem_block_mem_1>;
++                };
 +
-+FILES_${PN} += "/lib/firmware"
++                cmem_block_2: cmem_block@2 {
++                        reg = <2>;
++                        memory-region = <&cmem_block_mem_2>;
++                };
++        };
 +
-+INSANE_SKIP_${PN} = "arch"
++};
 
 
