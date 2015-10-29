@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E12D6E00ABE; Thu, 29 Oct 2015 12:40:50 -0700 (PDT)
+	id E2894E00A26; Thu, 29 Oct 2015 12:40:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7EF3AE009C3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7DC34E00985
 	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 12:40:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 13EDD52A2F; Thu, 29 Oct 2015 19:40:41 +0000 (UTC)
+	id DF2D752A5A; Thu, 29 Oct 2015 19:40:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151029194042.13EDD52A2F@arago-project.org>
-Date: Thu, 29 Oct 2015 19:40:41 +0000 (UTC)
+Message-Id: <20151029194042.DF2D752A5A@arago-project.org>
+Date: Thu, 29 Oct 2015 19:40:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : linux: cmem.inc: Implement way to configure more complex CMEM config
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 29 Oct 2015 19:40:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 31e0f4b5aa98481160ea2fb85a51d05b8135cd46
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=31e0f4b5aa98481160ea2fb85a51d05b8135cd46
+Branch: master
+Commit: 1010d17019ba97d96edfab9f416818cd1b070ee5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1010d17019ba97d96edfab9f416818cd1b070ee5
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Thu Oct 29 18:06:06 2015 +0000
