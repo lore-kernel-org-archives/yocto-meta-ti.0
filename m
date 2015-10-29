@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 139D2E007E1; Thu, 29 Oct 2015 09:29:20 -0700 (PDT)
+	id A02A7E0059B; Thu, 29 Oct 2015 12:40:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD819E0071C
-	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 09:29:14 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9TGTDHu007235
-	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 11:29:13 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9TGTDhT026112
-	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 11:29:13 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 29 Oct 2015 11:29:13 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9TGTDIn010767;	Thu, 29 Oct 2015 11:29:13 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 29 Oct 2015 12:29:08 -0400
-Message-ID: <1446136148-4340-2-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH v3 2/2] pru-icss: Add PRU software package version 4.0.0.0
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A397E0059B
+	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 12:40:43 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 777F152961; Thu, 29 Oct 2015 19:40:41 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20151029194042.777F152961@arago-project.org>
+Date: Thu, 29 Oct 2015 19:40:41 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : ti-cgt-pru: Add version 2.1.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,96 +33,101 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 16:29:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Oct 2015 19:40:48 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: fido
+Commit: fada5c47e6304f8dc0245e53ae51fb4b5bf7112c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fada5c47e6304f8dc0245e53ae51fb4b5bf7112c
+
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Thu Oct 29 22:09:48 2015 +0000
+
+ti-cgt-pru: Add version 2.1.1
+
+* TI PRU Code Generation Tools
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
-v3 changes:
-* Extend COMPATIBLE_MACHINE to SOC_FAMILY
 
-v2 changes:
-* Remove SRCPV from PV, drop BASE_PV
-* Add COMPATIBLE_MACHINES, remove dummy do_install()
-* Use ti-paths.inc's "TI_CGT_PRU_INSTALL_DIR" to get toolchain path
+ recipes-ti/devtools/ti-cgt-pru_2.1.1.bb |   45 +++++++++++++++++++++++++++++++
+ recipes-ti/includes/ti-paths.inc        |    3 ++
+ 2 files changed, 48 insertions(+), 0 deletions(-)
 
- recipes-bsp/pru/pru-icss_git.bb | 66 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
- create mode 100644 recipes-bsp/pru/pru-icss_git.bb
-
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+diff --git a/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb b/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
 new file mode 100644
-index 0000000..b756713
+index 0000000..3cffd24
 --- /dev/null
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -0,0 +1,66 @@
-+DESCRIPTION = "Programmable Real-time Unit Software Package"
-+HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
-+LICENSE = "BSD-3-Clause & GPL-2.0 & PD"
++++ b/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
+@@ -0,0 +1,45 @@
++DESCRIPTION = "TI PRU Code Generation Tools"
++HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
++LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
 +
-+LIC_FILES_CHKSUM = "file://PRU-Package-v4.0-Manifest.html;md5=5ea937e4ff2c924a735d42e61ad8cbe3"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "476289eb7c3a91977bae84aea55c56f3120b48ea"
-+
-+PV = "4.0.0.0"
-+PR = "r0"
++LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
++LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
 +
 +require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-unpack.inc
 +
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++BINFILE = "ti_cgt_pru_${PV}_linux_installer_x86.bin"
++BINFILE_NAME = "cgt-pru-x86"
++TI_BIN_UNPK_ARGS = "--prefix ${S}"
++TI_BIN_UNPK_CMDS = ""
 +
-+DEPENDS = "ti-cgt-pru-native"
++BINFILE_class-target = "ti_cgt_pru_${PV}_armlinuxa8hf_busybox_installer.sh"
++BINFILE_NAME_class-target = "cgt-pru-arm"
 +
-+S = "${WORKDIR}/git"
++SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
 +
-+export PRU_CGT = "${TI_CGT_PRU_INSTALL_DIR}"
++SRC_URI[cgt-pru-x86.md5sum] = "d9923acea12dc41fc975c381804bd5ed"
++SRC_URI[cgt-pru-x86.sha256sum] = "bbea68a6e793156cfb4874777bfd41a32b20172d3a8f61db6aed33a697a58e30"
 +
-+SUBDIRS = "examples pru_cape/pru_fw lib/src labs"
++SRC_URI[cgt-pru-arm.md5sum] = "3b97df4966715bdb50f9a9fc58fe6b24"
++SRC_URI[cgt-pru-arm.sha256sum] = "819a4680296fabf1ae0d4e0184276f8ab5324621d35388026d1b678ea71040c9"
 +
-+do_compile() {
-+    for dir in ${SUBDIRS}
-+    do
-+        make -C ${S}/$dir
-+    done
++do_install() {
++    install -d ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}
++    cp -r ${S}/ti-cgt-pru_${PV}/. \
++          ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}/
 +}
 +
-+do_install_ti33x() {
-+    install -d ${D}/lib/firmware
-+    for i in 0 1
-+    do
-+        install -m 0644 ${S}/examples/am335x/PRU_RPMsg_Echo_Interrupt${i}/gen/PRU_RPMsg_Echo_Interrupt${i}.out \
-+                        ${D}/lib/firmware/am335x-pru${i}-fw
-+    done
++do_install_class-target() {
++    ${WORKDIR}/${BINFILE} --prefix ${D}
 +}
 +
-+do_install_ti43x() {
-+    install -d ${D}/lib/firmware
-+    for i in 0 1
-+    do
-+        install -m 0644 ${S}/examples/am437x/PRU_RPMsg_Echo_Interrupt${i}/gen/PRU_RPMsg_Echo_Interrupt${i}.out \
-+                        ${D}/lib/firmware/am437x-pru1_${i}-fw
-+    done
-+}
++FILES_${PN} += "${datadir}/ti/*"
 +
-+do_install_omap-a15() {
-+    install -d ${D}/lib/firmware
-+    for i in 1 2
-+    do
-+        for j in 0 1
-+        do
-+            install -m 0644 ${S}/examples/am572x/PRU_RPMsg_Echo_Interrupt${i}_${j}/gen/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
-+                            ${D}/lib/firmware/am57xx-pru${i}_${j}-fw
-+        done
-+    done
-+}
++FILES_${PN}-dbg = "${TI_CGT_PRU_INSTALL_DIR_RECIPE}/bin/.debug \
++                   ${TI_CGT_PRU_INSTALL_DIR_RECIPE}/lib/.debug \
++"
 +
-+FILES_${PN} += "/lib/firmware"
++INSANE_SKIP_${PN} += "arch staticdev"
 +
-+INSANE_SKIP_${PN} = "arch"
--- 
-1.9.1
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 8880591..ad4ff78 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -48,6 +48,8 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
+ export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
+ export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
++export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
++
+ 
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -86,6 +88,7 @@ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}
+ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+ export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
+ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
++export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
 
 
