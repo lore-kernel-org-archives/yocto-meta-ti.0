@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E683FE008AE; Thu, 29 Oct 2015 05:06:11 -0700 (PDT)
+	id B2A5EE00AB5; Thu, 29 Oct 2015 05:27:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,31 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA3A8E007E1
-	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 05:06:10 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9TC69gC026080
-	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 07:06:09 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9TC69c9001559
-	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 07:06:09 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 29 Oct 2015 07:06:09 -0500
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94673E00985
+	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 05:27:16 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t9TCRG1L000728
+	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 07:27:16 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t9TCRFh2004058
+	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2015 07:27:16 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 29 Oct 2015 07:27:16 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t9TC68Fm017603;	Thu, 29 Oct 2015 07:06:08 -0500
+	t9TCRFmi024842;	Thu, 29 Oct 2015 07:27:15 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 29 Oct 2015 08:06:06 -0400
-Message-ID: <1446120366-3261-1-git-send-email-j-stiffler@ti.com>
+Date: Thu, 29 Oct 2015 08:27:12 -0400
+Message-ID: <1446121633-4283-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH v2] linux: cmem.inc: Implement way to configure more complex CMEM config
+Subject: [PATCH 1/2] ti-cgt-pru: Add version 2.1.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,197 +45,90 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 12:06:12 -0000
+X-List-Received-Date: Thu, 29 Oct 2015 12:27:41 -0000
 Content-Type: text/plain
 
-* Supply the entire cmem.dtsi per machine
-  - Disabled by default
-  - Currently only supported for dra7xx and k2hk-evm
-* Enable by setting RESERVE_CMEM = "1"
+* Require for integrating the PRU package into the SDK
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-kernel/linux/cmem.inc                 |  9 +----
- recipes-kernel/linux/files/cmem.dtsi          | 42 ++++++++++++++-------
- recipes-kernel/linux/files/dra7xx/cmem.dtsi   | 26 +++++++++++++
- recipes-kernel/linux/files/k2hk-evm/cmem.dtsi | 54 +++++++++++++++++++++++++++
- 4 files changed, 110 insertions(+), 21 deletions(-)
- create mode 100644 recipes-kernel/linux/files/dra7xx/cmem.dtsi
- create mode 100644 recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
+ recipes-ti/devtools/ti-cgt-pru_2.1.1.bb | 45 +++++++++++++++++++++++++++++++++
+ recipes-ti/includes/ti-paths.inc        |  3 +++
+ 2 files changed, 48 insertions(+)
+ create mode 100644 recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index 742f3c8..fc0bf48 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -1,17 +1,12 @@
- SRC_URI += "file://cmem.dtsi"
- 
--CMEM_BASE ?= ""
--CMEM_SIZE ?= ""
-+RESERVE_CMEM ?= "0"
- 
- do_setup_cmem() {
--    if [ ! -z "${CMEM_BASE}" ]
-+    if [ "${RESERVE_CMEM}" == "1" ]
-     then
-         cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
- 
--        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
--               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
--               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
--
-         for dtb in ${KERNEL_DEVICETREE}
-         do
-             dts=`echo $dtb | sed -e 's|dtb$|dts|'`
-diff --git a/recipes-kernel/linux/files/cmem.dtsi b/recipes-kernel/linux/files/cmem.dtsi
-index 6b1da99..2311986 100644
---- a/recipes-kernel/linux/files/cmem.dtsi
-+++ b/recipes-kernel/linux/files/cmem.dtsi
-@@ -1,24 +1,38 @@
-+/*
-+ * This is a placeholder for CMEM reserved memory declarations. This
-+ * is simply an example and does not actually reserve any memory for
-+ * CMEM.
-+ *
-+ * The commented sections below provide an example for how to provide
-+ * a reserved memory region for CMEM to use as a buffer pool.
-+ */
- / {
--        reserved-memory {
--                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
--                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
--                        no-map;
--                        status = "okay";
--                };
--        };
-+/*
-+	reserved-memory {
-+		cmem_block_mem_0: cmem_block_mem@a0000000 {
-+			reg = <0x0 0xa0000000 0x0 0x0a000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+*/
- 
--        cmem {
--                compatible = "ti,cmem";
--                #address-cells = <1>;
--                #size-cells = <0>;
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
- 
--                status = "okay";
-+		#pool-size-cells = <2>;
-+
-+		status = "disabled";
-+/*
-+		status = "okay";
- 
-                 cmem_block_0: cmem_block@0 {
-                         reg = <0>;
-                         memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
-+                        cmem-buf-pools = <1 0x0 0x0a000000>;
-                 };
-+*/
-         };
--
- };
-diff --git a/recipes-kernel/linux/files/dra7xx/cmem.dtsi b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
+diff --git a/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb b/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
 new file mode 100644
-index 0000000..d91faf9
+index 0000000..3cffd24
 --- /dev/null
-+++ b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-@@ -0,0 +1,26 @@
-+/ {
-+        reserved-memory {
-+                cmem_block_mem_0: cmem_block_mem@a0000000 {
-+                        reg = <0x0 0xa0000000 0x0 0x0a000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
++++ b/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
+@@ -0,0 +1,45 @@
++DESCRIPTION = "TI PRU Code Generation Tools"
++HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
++LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
 +
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
++LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
++LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
 +
-+		#pool-size-cells = <2>;
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-unpack.inc
 +
-+                status = "okay";
++BINFILE = "ti_cgt_pru_${PV}_linux_installer_x86.bin"
++BINFILE_NAME = "cgt-pru-x86"
++TI_BIN_UNPK_ARGS = "--prefix ${S}"
++TI_BIN_UNPK_CMDS = ""
 +
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x0 0x0a000000>;
-+                };
-+        };
++BINFILE_class-target = "ti_cgt_pru_${PV}_armlinuxa8hf_busybox_installer.sh"
++BINFILE_NAME_class-target = "cgt-pru-arm"
 +
-+};
-diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-new file mode 100644
-index 0000000..7e897ab
---- /dev/null
-+++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-@@ -0,0 +1,54 @@
-+/ {
-+        reserved-memory {
-+                mpm_block_mem_0: mpm_block_mem@820000000 {
-+                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
++SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
 +
-+                cmem_block_mem_0: cmem_block_mem@829000000 {
-+                        reg = <0x00000008 0x29000000 0x00000000 0x57000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
++SRC_URI[cgt-pru-x86.md5sum] = "d9923acea12dc41fc975c381804bd5ed"
++SRC_URI[cgt-pru-x86.sha256sum] = "bbea68a6e793156cfb4874777bfd41a32b20172d3a8f61db6aed33a697a58e30"
 +
-+                cmem_block_mem_1: cmem_block_mem@00c100000 {
-+                        reg = <0x00000000 0x0c100000 0x00000000 0x00480000>;
-+                        no-map;
-+                        status = "okay";
-+                };
++SRC_URI[cgt-pru-arm.md5sum] = "3b97df4966715bdb50f9a9fc58fe6b24"
++SRC_URI[cgt-pru-arm.sha256sum] = "819a4680296fabf1ae0d4e0184276f8ab5324621d35388026d1b678ea71040c9"
 +
-+                cmem_block_mem_2: cmem_block_mem@822000000 {
-+                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
++do_install() {
++    install -d ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}
++    cp -r ${S}/ti-cgt-pru_${PV}/. \
++          ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}/
++}
 +
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
++do_install_class-target() {
++    ${WORKDIR}/${BINFILE} --prefix ${D}
++}
 +
-+		#pool-size-cells = <2>;
++FILES_${PN} += "${datadir}/ti/*"
 +
-+                status = "okay";
++FILES_${PN}-dbg = "${TI_CGT_PRU_INSTALL_DIR_RECIPE}/bin/.debug \
++                   ${TI_CGT_PRU_INSTALL_DIR_RECIPE}/lib/.debug \
++"
 +
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x00000000 0x57000000>;
-+                };
++INSANE_SKIP_${PN} += "arch staticdev"
 +
-+                cmem_block_1: cmem_block@1 {
-+                        reg = <1>;
-+                        memory-region = <&cmem_block_mem_1>;
-+                };
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 8880591..ad4ff78 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -48,6 +48,8 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
+ export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
+ export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
++export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
 +
-+                cmem_block_2: cmem_block@2 {
-+                        reg = <2>;
-+                        memory-region = <&cmem_block_mem_2>;
-+                };
-+        };
-+
-+};
+ 
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -86,6 +88,7 @@ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}
+ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+ export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
+ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
++export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
 -- 
 1.9.1
 
