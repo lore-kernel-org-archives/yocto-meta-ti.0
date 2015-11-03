@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A66C1E007E4; Tue,  3 Nov 2015 12:57:48 -0800 (PST)
+	id 2887EE00A54; Tue,  3 Nov 2015 12:57:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83912E0088C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84D1AE00A54
 	for <meta-ti@yoctoproject.org>; Tue,  3 Nov 2015 12:57:44 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C637B52A9B; Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
+	id DAD3B52AB1; Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151103205743.C637B52A9B@arago-project.org>
+Message-Id: <20151103205743.DAD3B52AB1@arago-project.org>
 Date: Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-u-boot: update with latest fixes and features
+Subject: Denys Dmytriyenko : k2g-evm: add K2G platform
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +33,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2015 20:57:48 -0000
+X-List-Received-Date: Tue, 03 Nov 2015 20:57:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 2f029bbfe11bba4668b853dfca11bbfc97b11701
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2f029bbfe11bba4668b853dfca11bbfc97b11701
+Commit: 1b4cf4aa9f45f9d771b40544a87824d2c236e6c3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1b4cf4aa9f45f9d771b40544a87824d2c236e6c3
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Oct 31 04:46:30 2015 +0000
+Date:   Sat Oct 31 04:46:31 2015 +0000
 
-ti-u-boot: update with latest fixes and features
+k2g-evm: add K2G platform
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/k2g-evm.conf                    |   30 ++++++++++++++++++++++++++
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    1 +
+ 2 files changed, 31 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index 380f567..f0fd057 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+new file mode 100644
+index 0000000..9c7b4e0
+--- /dev/null
++++ b/conf/machine/k2g-evm.conf
+@@ -0,0 +1,30 @@
++#@TYPE: Machine
++#@NAME: Keystone 2 K2G machine
++#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2G EVM
++
++require conf/machine/include/keystone.inc
++
++UBOOT_MACHINE = "k2g_evm_config"
++
++BOOT_MONITOR_MAKE_TARGET = "k2g"
++
++IMAGE_FSTYPES += "ubi tar.gz cpio"
++
++SERIAL_CONSOLE = "115200 ttyS0"
++
++SYSVINIT_ENABLED_GETTYS = ""
++
++# do ubiattach /dev/ubi_ctrl -m 4
++# From dmesg:
++# UBI: smallest flash I/O unit:    4096
++# UBI: logical eraseblock size:    253952 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1926 LEBs
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
++
++# do ubiattach /dev/ubi_ctrl -m 4
++# from dmesg:
++# UBI: smallest flash I/O unit:    4096
++# UBI: physical eraseblock size:   256 KiB
++# UBI: sub-page size:              4096
++UBINIZE_ARGS = "-m 4096 -p 256KiB -s 4096 -O 4096"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index c8c3f2c..11e7acc 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -43,6 +43,7 @@ KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
+ KERNEL_DEVICETREE_pandaboard = "omap4-panda.dtb omap4-panda-es.dtb"
+ KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
+ KERNEL_DEVICETREE_k2e-evm = "k2e-evm.dtb"
++KERNEL_DEVICETREE_k2g-evm = "k2g-evm.dtb"
+ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
- 
--PR = "r11"
-+PR = "r12"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2015.07"
- 
--SRCREV = "75d995e87f47902b40065982ccbaae7a466d0913"
-+SRCREV = "12cbafb605ea962dfdbf3395ccd7c14f052961cb"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
 
