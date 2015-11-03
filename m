@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2887EE00A54; Tue,  3 Nov 2015 12:57:51 -0800 (PST)
+	id 275FCE00B56; Tue,  3 Nov 2015 12:57:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84D1AE00A54
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86519E00A92
 	for <meta-ti@yoctoproject.org>; Tue,  3 Nov 2015 12:57:44 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DAD3B52AB1; Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
+	id A645552A67; Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151103205743.DAD3B52AB1@arago-project.org>
+Message-Id: <20151103205743.A645552A67@arago-project.org>
 Date: Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : k2g-evm: add K2G platform
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.1.12 with latest merges
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,69 +38,35 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 1b4cf4aa9f45f9d771b40544a87824d2c236e6c3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1b4cf4aa9f45f9d771b40544a87824d2c236e6c3
+Commit: e912995a583b9f01257120de960fb251457d0a50
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e912995a583b9f01257120de960fb251457d0a50
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Oct 31 04:46:31 2015 +0000
+Date:   Sat Oct 31 04:35:54 2015 +0000
 
-k2g-evm: add K2G platform
+linux-ti-staging: update to 4.1.12 with latest merges
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/k2g-evm.conf                    |   30 ++++++++++++++++++++++++++
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    1 +
- 2 files changed, 31 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-new file mode 100644
-index 0000000..9c7b4e0
---- /dev/null
-+++ b/conf/machine/k2g-evm.conf
-@@ -0,0 +1,30 @@
-+#@TYPE: Machine
-+#@NAME: Keystone 2 K2G machine
-+#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2G EVM
-+
-+require conf/machine/include/keystone.inc
-+
-+UBOOT_MACHINE = "k2g_evm_config"
-+
-+BOOT_MONITOR_MAKE_TARGET = "k2g"
-+
-+IMAGE_FSTYPES += "ubi tar.gz cpio"
-+
-+SERIAL_CONSOLE = "115200 ttyS0"
-+
-+SYSVINIT_ENABLED_GETTYS = ""
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# From dmesg:
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: logical eraseblock size:    253952 bytes
-+# from ubiattach stdout:
-+# UBI device number 0, total 1926 LEBs
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# from dmesg:
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: physical eraseblock size:   256 KiB
-+# UBI: sub-page size:              4096
-+UBINIZE_ARGS = "-m 4096 -p 256KiB -s 4096 -O 4096"
 diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index c8c3f2c..11e7acc 100644
+index 3bc43f4..c8c3f2c 100644
 --- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -43,6 +43,7 @@ KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
- KERNEL_DEVICETREE_pandaboard = "omap4-panda.dtb omap4-panda-es.dtb"
- KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
- KERNEL_DEVICETREE_k2e-evm = "k2e-evm.dtb"
-+KERNEL_DEVICETREE_k2g-evm = "k2g-evm.dtb"
- KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
+@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
  
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ BRANCH = "ti-lsk-linux-4.1.y"
+ 
+-SRCREV = "780c47e7ec4e024e9f7224b51234e545697896a5"
+-PV = "4.1.10+git${SRCPV}"
++SRCREV = "8a6bfa3c90407b6588ec58724b0f6c3eefbca8fc"
++PV = "4.1.12+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 
 
