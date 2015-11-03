@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2A918E00A92; Tue,  3 Nov 2015 12:57:51 -0800 (PST)
+	id 686BCE00A92; Tue,  3 Nov 2015 12:57:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F12EEE00B2C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F18ABE00B31
 	for <meta-ti@yoctoproject.org>; Tue,  3 Nov 2015 12:57:45 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4023B52AB4; Tue,  3 Nov 2015 20:57:44 +0000 (UTC)
+	id 1FBB052AB2; Tue,  3 Nov 2015 20:57:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151103205744.4023B52AB4@arago-project.org>
+Message-Id: <20151103205744.1FBB052AB2@arago-project.org>
 Date: Tue,  3 Nov 2015 20:57:44 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.1.12 with latest merges
+Subject: Denys Dmytriyenko : linux-ti-staging: remove unused patches/configs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,35 +38,24 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: bd37f936af17e258d030568fe725cc42c5d18361
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bd37f936af17e258d030568fe725cc42c5d18361
+Commit: d913fef3788faa3e5bbe561e9f9edf0f95dae7d1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d913fef3788faa3e5bbe561e9f9edf0f95dae7d1
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Oct 31 04:35:54 2015 +0000
+Date:   Sat Oct 31 04:35:52 2015 +0000
 
-linux-ti-staging: update to 4.1.12 with latest merges
+linux-ti-staging: remove unused patches/configs
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ ...cache-flush-management-symbols-when-MULTI.patch |   36 -----
+ .../0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch  |  150 --------------------
+ .../0007-ARM-dts-am437x-add-DT-node-for-gpu.patch  |  102 -------------
+ ...se-pdata-quirks-for-sgx-deassert_hardrese.patch |   96 -------------
+ recipes-kernel/linux/linux-ti-staging-4.1/sgx.cfg  |    1 -
+ 5 files changed, 0 insertions(+), 385 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 3bc43f4..c8c3f2c 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.1.y"
- 
--SRCREV = "780c47e7ec4e024e9f7224b51234e545697896a5"
--PV = "4.1.10+git${SRCPV}"
-+SRCREV = "8a6bfa3c90407b6588ec58724b0f6c3eefbca8fc"
-+PV = "4.1.12+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=d913fef3788faa3e5bbe561e9f9edf0f95dae7d1
 
