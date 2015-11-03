@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7B50CE00A81; Sun,  1 Nov 2015 18:23:09 -0800 (PST)
+	id 6E396E00B46; Mon,  2 Nov 2015 18:20:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,29 +14,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	high *      trust
 	*      [192.94.94.41 listed in list.dnswl.org]
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E8F7E009EF
-	for <meta-ti@yoctoproject.org>; Sun,  1 Nov 2015 18:23:05 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA22N4ZB020891
-	for <meta-ti@yoctoproject.org>; Sun, 1 Nov 2015 20:23:04 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9E64E00B31
+	for <meta-ti@yoctoproject.org>; Mon,  2 Nov 2015 18:20:07 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA32K68r026671
+	for <meta-ti@yoctoproject.org>; Mon, 2 Nov 2015 20:20:06 -0600
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA22N4Ni003385
-	for <meta-ti@yoctoproject.org>; Sun, 1 Nov 2015 20:23:04 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA32K6QR013461
+	for <meta-ti@yoctoproject.org>; Mon, 2 Nov 2015 20:20:06 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 1 Nov 2015 20:23:04 -0600
+	Mon, 2 Nov 2015 20:20:06 -0600
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tA22N4mF004043	for <meta-ti@yoctoproject.org>;
-	Sun, 1 Nov 2015 20:23:04 -0600
-Date: Sun, 1 Nov 2015 21:23:03 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	tA32K6gE012572	for <meta-ti@yoctoproject.org>;
+	Mon, 2 Nov 2015 20:20:06 -0600
+Date: Mon, 2 Nov 2015 21:20:06 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <799806925.507.1446430983968.JavaMail.jenkins@puget>
+Message-ID: <1532231020.513.1446517206151.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-11-01_21-01-41
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-11-02_21-01-41
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,25 +49,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2015 02:23:09 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_506_1280718058.1446430983967"
+X-List-Received-Date: Tue, 03 Nov 2015 02:20:10 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_512_46856146.1446517206150"
 
-------=_Part_506_1280718058.1446430983967
+------=_Part_512_46856146.1446517206150
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 11/01/15
+Status for 11/02/15
 </title>
 </head>
 <body>
 
-<h2>Status for 11/01/15</h2>
+<h2>Status for 11/02/15</h2>
 
-<h2>BUILD_ID: build-2015-11-01_21-02-50</h2>
+<h2>BUILD_ID: build-2015-11-02_21-02-50</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -252,4 +251,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_506_1280718058.1446430983967--
+------=_Part_512_46856146.1446517206150--
