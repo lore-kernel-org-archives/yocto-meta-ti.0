@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A5C6CE00B4F; Tue,  3 Nov 2015 12:57:48 -0800 (PST)
+	id A66C1E007E4; Tue,  3 Nov 2015 12:57:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 824F9E007E4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83912E0088C
 	for <meta-ti@yoctoproject.org>; Tue,  3 Nov 2015 12:57:44 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 91A4352A80; Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
+	id C637B52A9B; Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151103205743.91A4352A80@arago-project.org>
+Message-Id: <20151103205743.C637B52A9B@arago-project.org>
 Date: Tue,  3 Nov 2015 20:57:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: remove unused patches/configs
+Subject: Denys Dmytriyenko : ti-u-boot: update with latest fixes and features
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,24 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: c88689f3e4a54cdb9b90c15803874e0d079c7eb7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c88689f3e4a54cdb9b90c15803874e0d079c7eb7
+Commit: 2f029bbfe11bba4668b853dfca11bbfc97b11701
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2f029bbfe11bba4668b853dfca11bbfc97b11701
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Oct 31 04:35:52 2015 +0000
+Date:   Sat Oct 31 04:46:30 2015 +0000
 
-linux-ti-staging: remove unused patches/configs
+ti-u-boot: update with latest fixes and features
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...cache-flush-management-symbols-when-MULTI.patch |   36 -----
- .../0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch  |  150 --------------------
- .../0007-ARM-dts-am437x-add-DT-node-for-gpu.patch  |  102 -------------
- ...se-pdata-quirks-for-sgx-deassert_hardrese.patch |   96 -------------
- recipes-kernel/linux/linux-ti-staging-4.1/sgx.cfg  |    1 -
- 5 files changed, 0 insertions(+), 385 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=c88689f3e4a54cdb9b90c15803874e0d079c7eb7
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index 380f567..f0fd057 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ 
+-PR = "r11"
++PR = "r12"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "75d995e87f47902b40065982ccbaae7a466d0913"
++SRCREV = "12cbafb605ea962dfdbf3395ccd7c14f052961cb"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+
 
