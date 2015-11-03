@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 34773E00B19; Tue,  3 Nov 2015 11:47:48 -0800 (PST)
+	id 499F6E00B01; Tue,  3 Nov 2015 11:47:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,33 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9498CE00B54
-	for <meta-ti@yoctoproject.org>; Tue,  3 Nov 2015 11:47:47 -0800 (PST)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A969CE00A38
+	for <meta-ti@yoctoproject.org>; Tue,  3 Nov 2015 11:47:46 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA3JllOW003146
-	for <meta-ti@yoctoproject.org>; Tue, 3 Nov 2015 13:47:47 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA3Jllpi001898
-	for <meta-ti@yoctoproject.org>; Tue, 3 Nov 2015 13:47:47 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 3 Nov 2015 13:47:47 -0600
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA3JlkT3009108
+	for <meta-ti@yoctoproject.org>; Tue, 3 Nov 2015 13:47:46 -0600
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA3JlkLV001849
+	for <meta-ti@yoctoproject.org>; Tue, 3 Nov 2015 13:47:46 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 3 Nov 2015 13:47:46 -0600
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tA3Jla7O022118;	Tue, 3 Nov 2015 13:47:46 -0600
+	tA3Jla7K022118;	Tue, 3 Nov 2015 13:47:45 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 3 Nov 2015 14:47:30 -0500
-Message-ID: <1446580053-16935-25-git-send-email-j-stiffler@ti.com>
+Date: Tue, 3 Nov 2015 14:47:26 -0500
+Message-ID: <1446580053-16935-21-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1446580053-16935-1-git-send-email-j-stiffler@ti.com>
 References: <1446580053-16935-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 24/27] srio-lld: Clean up recipes
+Subject: [PATCH 20/27] qmss-lld: Only build binaries relevent to the machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,70 +50,155 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Tue, 03 Nov 2015 19:47:48 -0000
 Content-Type: text/plain
 
-* Use INC_PR to track recipe revisions
-* Define variables for GIT SRC_URI parameters
+* Due to this change, the init script is no longer needed
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/srio-lld/srio-lld-test_git.bb |  2 ++
- recipes-bsp/srio-lld/srio-lld.inc         | 14 +++++++++++---
- recipes-bsp/srio-lld/srio-lld_git.bb      |  2 ++
- 3 files changed, 15 insertions(+), 3 deletions(-)
+ recipes-bsp/qmss-lld/files/init_qmss.sh   | 47 -------------------------------
+ recipes-bsp/qmss-lld/qmss-lld-test_git.bb |  3 +-
+ recipes-bsp/qmss-lld/qmss-lld.inc         |  7 ++++-
+ recipes-bsp/qmss-lld/qmss-lld_git.bb      | 23 ++++++---------
+ 4 files changed, 16 insertions(+), 64 deletions(-)
+ delete mode 100755 recipes-bsp/qmss-lld/files/init_qmss.sh
 
-diff --git a/recipes-bsp/srio-lld/srio-lld-test_git.bb b/recipes-bsp/srio-lld/srio-lld-test_git.bb
-index 7cf254e..da3e357 100644
---- a/recipes-bsp/srio-lld/srio-lld-test_git.bb
-+++ b/recipes-bsp/srio-lld/srio-lld-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld srio-lld cmem"
+diff --git a/recipes-bsp/qmss-lld/files/init_qmss.sh b/recipes-bsp/qmss-lld/files/init_qmss.sh
+deleted file mode 100755
+index af69531..0000000
+--- a/recipes-bsp/qmss-lld/files/init_qmss.sh
++++ /dev/null
+@@ -1,47 +0,0 @@
+-#*
+-#* Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/
+-#*
+-#*
+-#*  Redistribution and use in source and binary forms, with or without
+-#*  modification, are permitted provided that the following conditions
+-#*  are met:
+-#*
+-#*    Redistributions of source code must retain the above copyright
+-#*    notice, this list of conditions and the following disclaimer.
+-#*
+-#*    Redistributions in binary form must reproduce the above copyright
+-#*    notice, this list of conditions and the following disclaimer in the
+-#*    documentation and/or other materials provided with the
+-#*    distribution.
+-#*
+-#*    Neither the name of Texas Instruments Incorporated nor the names of
+-#*    its contributors may be used to endorse or promote products derived
+-#*    from this software without specific prior written permission.
+-#*
+-
+-#! /bin/sh
+-compatible=$(cat /proc/device-tree/compatible)
+-
+-cd /usr/lib
+-case "$compatible" in
+-	*k2hk*)
+-		device=k2hk
+-		ln -sf libqmss_k2h.so.1.0.0 libqmss_device.so.1
+-	;;
+-	*k2l*)
+-		device=k2l
+-		ln -sf libqmss_k2l.so.1.0.0 libqmss_device.so.1
+-	;;
+-	*k2e*)
+-		device=k2e
+-		ln -sf libqmss_k2e.so.1.0.0 libqmss_device.so.1
+-	;;
+-	*)
+-		device=unknown
+-	;;
+-esac
+-
+-if [ $device != unknown ]; then
+-	ln -sf libqmss_device.so.1 libqmss_device.so
+-	echo qmss library link established for device : $device
+-fi
+diff --git a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
+index 7c19364..60a35b1 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
++++ b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
+@@ -1,11 +1,10 @@
+ DESCRIPTION = "TI QMSS low level driver unit test and example binaries"
+-COMPATIBLE_MACHINE = "keystone"
  
- include srio-lld.inc
+ DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld"
  
-+PR = "${INC_PR}.0"
-+
+ include qmss-lld.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
  CHOICELIST = "yes no"
  
- do_compile () {
-diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
-index 0f1ee2d..6e51f79 100644
---- a/recipes-bsp/srio-lld/srio-lld.inc
-+++ b/recipes-bsp/srio-lld/srio-lld.inc
-@@ -1,12 +1,20 @@
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index efd681e..1cf9b0b 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -1,6 +1,9 @@
  LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/srio/srio_drv.h;beginline=1;endline=41;md5=469096088e072d883ff7eef301b34093"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
  
--BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/srio-lld.git;destsuffix=git/ti/drv/srio;protocol=git;branch=${BRANCH}"
-+SRIO_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/srio-lld.git"
-+SRIO_LLD_GIT_PROTOCOL = "git"
-+SRIO_LLD_GIT_BRANCH = "master"
-+SRIO_LLD_GIT_DESTSUFFIX = "git/ti/drv/srio"
- 
- # commit ID corresponding to DEV.SRIO_LLD.02.00.00.13
--SRCREV = "dc49972265afd3ffd3b29ca235b8ca6daf790bd1"
-+SRIO_LLD_SRCREV = "dc49972265afd3ffd3b29ca235b8ca6daf790bd1"
++COMPATIBLE_MACHINE = "keystone"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+BRANCH = "${SRIO_LLD_GIT_BRANCH}"
-+SRC_URI = "${SRIO_LLD_GIT_URI};destsuffix=${SRIO_LLD_GIT_DESTSUFFIX};protocol=${SRIO_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${SRIO_LLD_SRCREV}"
-+
- PV = "02.00.00.13"
-+INC_PR = "r1"
+ QMSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/qmss-lld.git"
+ QMSS_LLD_GIT_PROTOCOL = "git"
+ QMSS_LLD_GIT_BRANCH = "master"
+@@ -16,6 +19,8 @@ SRCREV = "${QMSS_LLD_SRCREV}"
+ PV = "02.01.00.11"
+ INC_PR = "r1"
  
- DEVICELIST = "k2h k2k"
+-DEVICELIST = "k2h k2k k2l k2e"
++DEVICELIST_k2hk-evm = "k2h k2k"
++DEVICELIST_k2l-evm = "k2l"
++DEVICELIST_k2e-evm = "k2e"
  
-diff --git a/recipes-bsp/srio-lld/srio-lld_git.bb b/recipes-bsp/srio-lld/srio-lld_git.bb
-index 9ff845b..ba3cc24 100644
---- a/recipes-bsp/srio-lld/srio-lld_git.bb
-+++ b/recipes-bsp/srio-lld/srio-lld_git.bb
-@@ -5,6 +5,8 @@ DEPENDS="common-csl-ip rm-lld cppi-lld"
+ S = "${WORKDIR}/${QMSS_LLD_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld_git.bb b/recipes-bsp/qmss-lld/qmss-lld_git.bb
+index 83c9a7e..813929e 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld_git.bb
++++ b/recipes-bsp/qmss-lld/qmss-lld_git.bb
+@@ -1,18 +1,10 @@
+ DESCRIPTION = "TI QMSS low level driver library"
+-COMPATIBLE_MACHINE = "keystone"
  
- include srio-lld.inc
+ DEPENDS="common-csl-ip rm-lld"
  
-+PR = "${INC_PR}.0"
-+
+ include qmss-lld.inc
+ 
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://init_qmss.sh"
+-
+-inherit update-rc.d
+-
+-INITSCRIPT_NAME = "init_qmss.sh"
+-INITSCRIPT_PARAMS = "defaults 10"
++PR = "${INC_PR}.1"
+ 
  do_compile () {
  #   Now build the lld
- 	oe_runmake clean
+@@ -27,11 +19,14 @@ do_compile () {
+ do_install () {
+     make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
+ 
+-#   Set the generic device library symbolic link to default k2h
++    # Set the generic device library symbolic link to default k2h
+     cd ${D}${libdir}
+-    ln -sf libqmss_k2h.so.1.0.0 libqmss_device.so.1
++
++    # Link only the first device in the list
++    for device in ${DEVICELIST}
++    do
++        ln -sf libqmss_${device}.so.1.0.0 libqmss_device.so.1
++        break
++    done
+     ln -sf libqmss_device.so.1 libqmss_device.so
+-#   Copy init scripts
+-	install -d ${D}${sysconfdir}/init.d/
+-	install -c -m 755 ${WORKDIR}/init_qmss.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+ }
 -- 
 1.9.1
 
