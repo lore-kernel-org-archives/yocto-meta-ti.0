@@ -1,40 +1,42 @@
 Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9C59AE00A7B; Wed,  4 Nov 2015 11:53:23 -0800 (PST)
+	id CE515E00AC1; Wed,  4 Nov 2015 11:53:25 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
+	URI_HEX autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1E69E00A38
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1468FE00A73
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 11:53:20 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA4JrKEI001093
-	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2015 13:53:20 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA4JrKtS003545
-	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2015 13:53:20 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA4JrJ3V027862
+	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2015 13:53:19 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA4JrJMO028315
+	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2015 13:53:19 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
 	Wed, 4 Nov 2015 13:53:20 -0600
 Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tA4JrJwt029455;	Wed, 4 Nov 2015 13:53:19 -0600
+	tA4JrJws029455;	Wed, 4 Nov 2015 13:53:19 -0600
 From: Hongmei Gou <h-gou@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 4 Nov 2015 14:53:15 -0500
-Message-ID: <1446666795-21381-3-git-send-email-h-gou@ti.com>
+Date: Wed, 4 Nov 2015 14:53:14 -0500
+Message-ID: <1446666795-21381-2-git-send-email-h-gou@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1446666795-21381-1-git-send-email-h-gou@ti.com>
 References: <1446666795-21381-1-git-send-email-h-gou@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] omap5-sgx-ddk-um-linux: bump SRCREV and other changes to support wayland/DRM on AM4
+Subject: [PATCH 1/2] omapdrm-pvr: disable PVR_NULLDRM to support DRI_DRM for AM4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,65 +49,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 19:53:23 -0000
+X-List-Received-Date: Wed, 04 Nov 2015 19:53:25 -0000
 Content-Type: text/plain
 
-* Support wayland/DRM mode
-* Remove powervr.ini which is no longer needed
-* Add plugins package to include the necessary .so files
-
-Signed-off-by: Hongmei Gou <h-gou@ti.com>
 ---
- .../libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini           |  3 ---
- recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb    | 10 ++++++++--
- 2 files changed, 8 insertions(+), 5 deletions(-)
- delete mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
+ recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
-deleted file mode 100644
-index 0657ab8..0000000
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
-+++ /dev/null
-@@ -1,3 +0,0 @@
--[default]
--WindowSystem=null_libdrm.so
--DisableHWTQTextureUpload=1
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index cd01d6f..557c442 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -12,14 +12,14 @@ BRANCH_ti43x = "am4/k4.1"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
- SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
- SRCREV_ti33x    = "188575c7ba16c00a15499ed88a126af2506fdba5"
--SRCREV_ti43x    = "188575c7ba16c00a15499ed88a126af2506fdba5"
-+SRCREV_ti43x    = "fdf4c0b594ca142a68aabb4c3f82b75be50b46cc"
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+index 5d5119e..50df3d9 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+@@ -24,7 +24,7 @@ SRCREV_ti33x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
+ SRCREV_ti43x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
  
- INITSCRIPT_NAME = "pvr-init"
- INITSCRIPT_PARAMS = "defaults 8"
+ PVR_NULLDRM_ti33x = "1"
+-PVR_NULLDRM_ti43x = "1"
++PVR_NULLDRM_ti43x = "0"
+ PVR_NULLDRM_omap-a15 = "0"
  
- inherit update-rc.d
- 
--PR = "r11"
-+PR = "r12"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RDEPENDS_${PN} += "libdrm"
-@@ -50,8 +50,14 @@ FILES_${PN} +=  "${includedir}/* /usr/share/sgx-lib/"
- FILES_${PN} += "${sysconfdir}/init.d/pvr-init"
- FILES_${PN} += "${sysconfdir}/powervr.ini"
- 
-+PACKAGES =+ "${PN}-plugins"
-+FILES_${PN}-plugins = ""
-+FILES_${PN}-plugins_ti43x = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libpvrws_WAYLAND.so ${libdir}/libpvrws_KMS.so "
-+RDEPENDS_${PN} += "${PN}-plugins"
-+
- INHIBIT_PACKAGE_STRIP = "1"
- 
- INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-+INSANE_SKIP_${PN}-plugins = "dev-so"
- 
- CLEANBROKEN = "1"
+ EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" PVR_NULLDRM=${PVR_NULLDRM}'
 -- 
 1.9.1
 
