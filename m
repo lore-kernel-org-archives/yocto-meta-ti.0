@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AB143E00B4A; Wed,  4 Nov 2015 06:58:02 -0800 (PST)
+	id D21B7E00B56; Wed,  4 Nov 2015 06:58:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8710EE00A73
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 896A5E00AD8
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:57:59 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 01AAF52A94; Wed,  4 Nov 2015 14:57:58 +0000 (UTC)
+	id E1A6052A8B; Wed,  4 Nov 2015 14:57:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145759.01AAF52A94@arago-project.org>
+Message-Id: <20151104145758.E1A6052A8B@arago-project.org>
 Date: Wed,  4 Nov 2015 14:57:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Clean up recipes
+Subject: Jacob Stiffler : aif2-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,18 +33,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 14:58:02 -0000
+X-List-Received-Date: Wed, 04 Nov 2015 14:58:04 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 1d35681568516e1fcc3cdbc54925983838dac03a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1d35681568516e1fcc3cdbc54925983838dac03a
+Commit: c41839b3aa3bd39eb48288b81427a0fa5d1699e7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c41839b3aa3bd39eb48288b81427a0fa5d1699e7
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:08 2015 +0000
+Date:   Wed Nov  4 01:47:07 2015 +0000
 
-common-csl-ip: Clean up recipes
+aif2-lld: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,80 +54,67 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../common-csl-ip/common-csl-ip-rtos_git.bb        |    6 +++---
- recipes-bsp/common-csl-ip/common-csl-ip.inc        |   19 ++++++++++++++-----
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb     |    4 +---
- 3 files changed, 18 insertions(+), 11 deletions(-)
+ recipes-bsp/aif2-lld/aif2-lld-test_git.bb |    2 ++
+ recipes-bsp/aif2-lld/aif2-lld.inc         |   17 +++++++++++++----
+ recipes-bsp/aif2-lld/aif2-lld_git.bb      |    2 ++
+ 3 files changed, 17 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-index c1fb566..f8dc1ba 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -1,13 +1,13 @@
- require common-csl-ip.inc
+diff --git a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
+index 2a9de43..9180b95 100755
+--- a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
++++ b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip aif2-lld qmss-lld cppi-lld"
+ 
+ include aif2-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} AIF2_SRC_DIR=${WORKDIR}/git"
  
--PR = "r1"
--
- DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
+ do_compile () {
+diff --git a/recipes-bsp/aif2-lld/aif2-lld.inc b/recipes-bsp/aif2-lld/aif2-lld.inc
+index 212813c..cd1e169 100755
+--- a/recipes-bsp/aif2-lld/aif2-lld.inc
++++ b/recipes-bsp/aif2-lld/aif2-lld.inc
+@@ -1,13 +1,22 @@
+ LICENSE = "BSD-3-Clause"
  
--S = "${WORKDIR}/ti/csl"
-+CSL_GIT_DESTSUFFIX = "git/ti/csl"
- 
- export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
- export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 6355165..74abab0 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -5,13 +5,22 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- COMPATIBLE_MACHINE = "keystone|dra7xx"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--BRANCH="master"
--BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
-+INC_PR = "r4"
- 
--SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH};destsuffix=${S}"
-+CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-+CSL_GIT_PROTOCOL ="git"
-+CSL_GIT_BRANCH = "master"
-+CSL_GIT_BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
-+CSL_GIT_DESTSUFFIX = "git"
- 
- # commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.01.00A
--SRCREV = "17bb083f0d5ed4ad6f38c991210a6a8e9aaf9c56"
-+CSL_SRCREV = "17bb083f0d5ed4ad6f38c991210a6a8e9aaf9c56"
- 
- # commit ID corresponds to PROCESSOR-SDK-ALPHA-1
--SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
-+CSL_SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/aif2-lld.git;destsuffix=git/ti/drv/aif2;protocol=git;branch=${BRANCH}"
 +
-+BRANCH="${CSL_GIT_BRANCH}"
-+SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
-+SRCREV = "${CSL_SRCREV}"
++AIF2_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/aif2-lld.git"
++AIF2_LLD_GIT_PROTOCOL = "git"
++AIF2_LLD_GIT_BRANCH = "master"
++AIF2_LLD_GIT_DESTSUFFIX = "git/ti/drv/aif2"
 +
-+S = "${WORKDIR}/${CSL_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index 8f622a5..77f7858 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -1,11 +1,9 @@
- require common-csl-ip.inc
+ # The following commit correspond to DEV.AIF2LLD.01.02.00.00A
+-SRCREV = "7f394ec9975cd4cef982b11763c882c4c763ddce"
++AIF2_LLD_SRCREV = "7f394ec9975cd4cef982b11763c882c4c763ddce"
++
++BRANCH = "${AIF2_LLD_GIT_BRANCH}"
++SRC_URI = "${AIF2_LLD_GIT_URI};destsuffix=${AIF2_LLD_GIT_DESTSUFFIX};protocol=${AIF2_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${AIF2_LLD_SRCREV}"
  
--PR = "r3"
+ PV = "1.2.0.0"
++INC_PR = "r1"
+ 
+ COMPATIBLE_MACHINE = "k2hk-evm"
+ 
+-S = "${WORKDIR}/git/ti/drv/aif2"
++S = "${WORKDIR}/${AIF2_LLD_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/aif2-lld/aif2-lld_git.bb b/recipes-bsp/aif2-lld/aif2-lld_git.bb
+index f6e95c2..f310b17 100755
+--- a/recipes-bsp/aif2-lld/aif2-lld_git.bb
++++ b/recipes-bsp/aif2-lld/aif2-lld_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip qmss-lld cppi-lld"
+ 
+ include aif2-lld.inc
+ 
 +PR = "${INC_PR}.0"
++
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
  
- ALLOW_EMPTY_${PN} = "1"
- 
--S = "${WORKDIR}/git"
--
- do_install () {
-     install -d ${D}${includedir}/ti/csl
-     find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
+ do_compile () {
 
 
