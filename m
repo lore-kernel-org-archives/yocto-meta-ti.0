@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9AFD9E00B58; Wed,  4 Nov 2015 07:00:21 -0800 (PST)
+	id A08C6E00B19; Wed,  4 Nov 2015 07:00:21 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00457E008AE
-	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:00:01 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B4D5E00B2C
+	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:00:02 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9A66952AA7; Wed,  4 Nov 2015 15:00:01 +0000 (UTC)
+	id D52AF52AB1; Wed,  4 Nov 2015 15:00:01 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150001.9A66952AA7@arago-project.org>
+Message-Id: <20151104150001.D52AF52AB1@arago-project.org>
 Date: Wed,  4 Nov 2015 15:00:01 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : mmap-lld: Clean up recipes
+Subject: Jacob Stiffler : nwal-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ba5a045f85afc3e510170a038ef4d55bce505bd7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ba5a045f85afc3e510170a038ef4d55bce505bd7
+Commit: c4ef4c75a648e44fc0dc447117206a632fa6a7c4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c4ef4c75a648e44fc0dc447117206a632fa6a7c4
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:18 2015 +0000
+Date:   Wed Nov  4 01:47:20 2015 +0000
 
-mmap-lld: Clean up recipes
+nwal-lld: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,63 +54,62 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/mmap-lld/mmap-lld-test_git.bb |    2 ++
- recipes-bsp/mmap-lld/mmap-lld.inc         |   15 +++++++++++----
- recipes-bsp/mmap-lld/mmap-lld_git.bb      |    2 ++
- 3 files changed, 15 insertions(+), 4 deletions(-)
+ recipes-bsp/nwal-lld/nwal-lld-test_git.bb |    2 ++
+ recipes-bsp/nwal-lld/nwal-lld.inc         |   13 ++++++++++---
+ recipes-bsp/nwal-lld/nwal-lld_git.bb      |    2 ++
+ 3 files changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-index 41e46f7..0617376 100644
---- a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-+++ b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-@@ -1,6 +1,8 @@
- DESCRIPTION = "TI KEYSTONE MMAP driver test binaries "
- include mmap-lld.inc
+diff --git a/recipes-bsp/nwal-lld/nwal-lld-test_git.bb b/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
+index 3813df9..79528a0 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
++++ b/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib nwal-lld"
+ 
+ include nwal-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- DEPENDS="common-csl-ip mmap-lld"
- RDEPENDS_${PN}="uio-module-drv"
+ EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
  
-diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-lld/mmap-lld.inc
-index a5158d5..cde0fec 100644
---- a/recipes-bsp/mmap-lld/mmap-lld.inc
-+++ b/recipes-bsp/mmap-lld/mmap-lld.inc
-@@ -4,12 +4,19 @@ COMPATIBLE_MACHINE = "keystone"
+ do_compile () {
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index 247bfc0..c4ccdbd 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -3,12 +3,19 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=b7982a377c680ad71ca2fb
  
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b3315b8190036fe1c6a8263d02e15606"
+ COMPATIBLE_MACHINE = "keystone"
  
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git;destsuffix=git/ti/runtime/mmap;protocol=git;branch=${BRANCH}"
-+MMAP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git"
-+MMAP_LLD_GIT_PROTOCOL = "git"
-+MMAP_LLD_GIT_BRANCH = "master"
-+MMAP_LLD_GIT_DESTSUFFIX = "git/ti/runtime/mmap"
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
++NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
++NWAL_LLD_GIT_PROTOCOL = "git"
++NWAL_LLD_GIT_BRANCH = "master"
+ 
+ # Below commit ID corresponds to "DEV.NWAL.02.01.00.08"
+-SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
++NWAL_LLD_SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
 +
- # Commit correspond to DEV.MMAP.02.00.00.04
--SRCREV = "306895eb2d5decd14a760e70d273946958ff716f"
-+MMAP_LLD_SRCREV = "306895eb2d5decd14a760e70d273946958ff716f"
++BRANCH = "${NWAL_LLD_GIT_BRANCH}"
++SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${NWAL_LLD_SRCREV}"
 +
-+BRANCH="${MMAP_LLD_GIT_BRANCH}"
-+SRC_URI = "${MMAP_LLD_GIT_URI};destsuffix=${MMAP_LLD_GIT_DESTSUFFIX};protocol=${MMAP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${MMAP_LLD_SRCREV}"
+ PV = "02.01.00.08"
++INC_PR = "r1"
  
- PV = "2.0.0.4"
--PR = "r1"
-+INC_PR = "r2"
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/nwal"
+diff --git a/recipes-bsp/nwal-lld/nwal-lld_git.bb b/recipes-bsp/nwal-lld/nwal-lld_git.bb
+index da09730..a9690ca 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld_git.bb
++++ b/recipes-bsp/nwal-lld/nwal-lld_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib"
  
- S = "${WORKDIR}/git/ti/runtime/mmap"
-diff --git a/recipes-bsp/mmap-lld/mmap-lld_git.bb b/recipes-bsp/mmap-lld/mmap-lld_git.bb
-index 3a56a62..1cfc90f 100644
---- a/recipes-bsp/mmap-lld/mmap-lld_git.bb
-+++ b/recipes-bsp/mmap-lld/mmap-lld_git.bb
-@@ -1,6 +1,8 @@
- DESCRIPTION = "TI KEYSTONE mmap driver using Keystone MPAX Programming"
- include mmap-lld.inc
+ include nwal-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- DEPENDS="common-csl-ip"
+ EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
  
  do_compile () {
 
