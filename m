@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 02470E00B28; Wed,  4 Nov 2015 06:58:05 -0800 (PST)
+	id 02F00E00B2E; Wed,  4 Nov 2015 06:58:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22FE7E00B2E
-	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:01 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7B5FE00B05
+	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:00 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DE6FA52AB8; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
+	id 9FF4D52AB6; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145759.DE6FA52AB8@arago-project.org>
+Message-Id: <20151104145759.9FF4D52AB6@arago-project.org>
 Date: Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Clean up recipes
+Subject: Jacob Stiffler : hyplnk-lld: Only build binaries relevent to the machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,97 +37,145 @@ X-List-Received-Date: Wed, 04 Nov 2015 14:58:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 6042df4426cd1aebe3462f34ed82185983ed0449
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6042df4426cd1aebe3462f34ed82185983ed0449
+Branch: fido
+Commit: 01372176e7d6f3401464f971926ae436af590135
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=01372176e7d6f3401464f971926ae436af590135
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:08 2015 +0000
+Date:   Wed Nov  4 01:47:16 2015 +0000
 
-common-csl-ip: Clean up recipes
+hyplnk-lld: Only build binaries relevent to the machine
 
-* Use INC_PR to track recipe revisions
-* Define variables for GIT SRC_URI parameters
+* Due to this change, the init script is no longer needed
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../common-csl-ip/common-csl-ip-rtos_git.bb        |    6 +++---
- recipes-bsp/common-csl-ip/common-csl-ip.inc        |   19 ++++++++++++++-----
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb     |    4 +---
- 3 files changed, 18 insertions(+), 11 deletions(-)
+ recipes-bsp/hyplnk-lld/files/init_hyplnk.sh |   43 ---------------------------
+ recipes-bsp/hyplnk-lld/hyplnk-lld.inc       |    9 ++---
+ recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb    |   24 ++++++---------
+ 3 files changed, 14 insertions(+), 62 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-index c1fb566..f8dc1ba 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -1,13 +1,13 @@
- require common-csl-ip.inc
- 
-+PR = "${INC_PR}.0"
-+
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
- 
--PR = "r1"
+diff --git a/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh b/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
+deleted file mode 100755
+index d6795f1..0000000
+--- a/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
++++ /dev/null
+@@ -1,43 +0,0 @@
+-#*
+-#* Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/
+-#*
+-#*
+-#*  Redistribution and use in source and binary forms, with or without
+-#*  modification, are permitted provided that the following conditions
+-#*  are met:
+-#*
+-#*    Redistributions of source code must retain the above copyright
+-#*    notice, this list of conditions and the following disclaimer.
+-#*
+-#*    Redistributions in binary form must reproduce the above copyright
+-#*    notice, this list of conditions and the following disclaimer in the
+-#*    documentation and/or other materials provided with the
+-#*    distribution.
+-#*
+-#*    Neither the name of Texas Instruments Incorporated nor the names of
+-#*    its contributors may be used to endorse or promote products derived
+-#*    from this software without specific prior written permission.
+-#*
 -
- DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
- 
--S = "${WORKDIR}/ti/csl"
-+CSL_GIT_DESTSUFFIX = "git/ti/csl"
- 
- export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
- export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 6355165..74abab0 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -5,13 +5,22 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- COMPATIBLE_MACHINE = "keystone|dra7xx"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--BRANCH="master"
--BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
-+INC_PR = "r4"
- 
--SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH};destsuffix=${S}"
-+CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-+CSL_GIT_PROTOCOL ="git"
-+CSL_GIT_BRANCH = "master"
-+CSL_GIT_BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
-+CSL_GIT_DESTSUFFIX = "git"
- 
- # commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.01.00A
--SRCREV = "17bb083f0d5ed4ad6f38c991210a6a8e9aaf9c56"
-+CSL_SRCREV = "17bb083f0d5ed4ad6f38c991210a6a8e9aaf9c56"
- 
- # commit ID corresponds to PROCESSOR-SDK-ALPHA-1
--SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
-+CSL_SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
-+
-+BRANCH="${CSL_GIT_BRANCH}"
-+SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
-+SRCREV = "${CSL_SRCREV}"
-+
-+S = "${WORKDIR}/${CSL_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index 8f622a5..77f7858 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -1,11 +1,9 @@
- require common-csl-ip.inc
- 
--PR = "r3"
-+PR = "${INC_PR}.0"
- 
- ALLOW_EMPTY_${PN} = "1"
- 
--S = "${WORKDIR}/git"
+-#! /bin/sh
+-compatible=$(cat /proc/device-tree/compatible)
 -
- do_install () {
-     install -d ${D}${includedir}/ti/csl
-     find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
+-cd /usr/lib
+-case "$compatible" in
+-	*k2hk*)
+-		device=k2hk
+-		ln -sf libhyplnk_k2h.so.1.0.0 libhyplnk_device.so.1
+-	;;
+-	*k2e*)
+-		device=k2e
+-		ln -sf libhyplnk_k2e.so.1.0.0 libhyplnk_device.so.1
+-	;;
+-	*)
+-		device=unknown
+-	;;
+-esac
+-
+-if [ $device != unknown ]; then
+-	ln -sf libhyplnk_device.so.1 libhyplnk_device.so
+-	echo hyplnk library link established for device : $device
+-fi
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+index 09fec45..ecd68e9 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+@@ -1,7 +1,8 @@
+ DESCRIPTION = "TI Hyperlink Low Level Driver"
+ LICENSE = "BSD-3-Clause"
+ 
+-COMPATIBLE_MACHINE = "keystone"
++COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ LLDNAME="hyplnk"
+ 
+@@ -22,9 +23,7 @@ SRCREV = "${HYPLNK_SRCREV}"
+ PV = "2.1.0.5"
+ INC_PR = "r2"
+ 
+-DEVICELIST = " k2h \
+-               k2k \
+-               k2e \
+-"
++DEVICELIST_k2hk-evm = "k2h k2k"
++DEVICELIST_k2e-evm  = "k2e"
+ 
+ S = "${WORKDIR}/${HYPLNK_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
+index e20ad1f..8ef3c82 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
+@@ -1,16 +1,9 @@
+ include hyplnk-lld.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ DEPENDS = "common-csl-ip"
+ 
+-SRC_URI += "file://init_hyplnk.sh"
+-
+-inherit update-rc.d
+-
+-INITSCRIPT_NAME = "init_hyplnk.sh"
+-INITSCRIPT_PARAMS = "defaults 10"
+-
+ do_compile () {
+ 	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
+ 		HYPLNK_SRC_DIR="${S}"
+@@ -25,12 +18,15 @@ do_install () {
+ 	make -f makefile_armv7 install PDK_INSTALL_PATH="${STAGING_INCDIR}" \
+ 		INSTALL_INC_BASE_DIR="${D}/${includedir}" \
+ 		INSTALL_LIB_BASE_DIR="${D}${libdir}" HYPLNK_SRC_DIR="${S}"
+-#   Set the generic device library symbolic link to default k2h
++
++	# Set the generic device library symbolic link to default k2h
+ 	cd ${D}${libdir}
+-	ln -sf libhyplnk_k2h.so.1.0.0 libhyplnk_device.so.1
+-	ln -sf libhyplnk_device.so.1 libhyplnk_device.so
+-#   Copy init scripts
+-	install -d ${D}${sysconfdir}/init.d/
+-	install -c -m 755 ${WORKDIR}/init_hyplnk.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+ 
++	# Link only the first device in the list
++	for device in ${DEVICELIST}
++	do
++		ln -sf libhyplnk_${device}.so.1.0.0 libhyplnk_device.so.1
++		break
++	done
++	ln -sf libhyplnk_device.so.1 libhyplnk_device.so
+ }
 
 
