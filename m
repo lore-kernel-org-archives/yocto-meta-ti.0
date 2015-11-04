@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 61DCEE00B28; Wed,  4 Nov 2015 06:58:06 -0800 (PST)
+	id 62A3AE00B0B; Wed,  4 Nov 2015 06:58:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D6D8E00B3D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2FEC6E00B43
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:01 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4288C52ABD; Wed,  4 Nov 2015 14:58:00 +0000 (UTC)
+	id 5856552ABE; Wed,  4 Nov 2015 14:58:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145800.4288C52ABD@arago-project.org>
+Message-Id: <20151104145800.5856552ABE@arago-project.org>
 Date: Wed,  4 Nov 2015 14:58:00 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : hplib: Clean up recipes
+Subject: Jacob Stiffler : hplib: Only build binaries relevent to the machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,76 +38,36 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 20f7def0e4a9af82455b92a534fa83bd1cc09b6c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=20f7def0e4a9af82455b92a534fa83bd1cc09b6c
+Commit: d5627fa3d74046850099421522e307fdd0ab9363
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d5627fa3d74046850099421522e307fdd0ab9363
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:13 2015 +0000
+Date:   Wed Nov  4 01:47:14 2015 +0000
 
-hplib: Clean up recipes
-
-* Use INC_PR to track recipe revisions
-* Define variables for GIT SRC_URI parameters
+hplib: Only build binaries relevent to the machine
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hplib/hplib-test_git.bb |    2 ++
- recipes-bsp/hplib/hplib.inc         |   13 ++++++++++---
- recipes-bsp/hplib/hplib_git.bb      |    2 ++
- 3 files changed, 14 insertions(+), 3 deletions(-)
+ recipes-bsp/hplib/hplib.inc |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib-test_git.bb b/recipes-bsp/hplib/hplib-test_git.bb
-index 574fa2a..4ba79db 100644
---- a/recipes-bsp/hplib/hplib-test_git.bb
-+++ b/recipes-bsp/hplib/hplib-test_git.bb
-@@ -6,6 +6,8 @@ DEPENDS = "common-csl-ip qmss-lld sa-lld pktlib hplib"
- 
- include hplib.inc
- 
-+PR = "${INC_PR}.0"
-+
- CHOICELIST = "yes no"
- 
- S = "${WORKDIR}/git/ti/runtime/hplib"
 diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
-index e4211ee..7ed47a5 100644
+index 7ed47a5..e5fe567 100644
 --- a/recipes-bsp/hplib/hplib.inc
 +++ b/recipes-bsp/hplib/hplib.inc
-@@ -2,9 +2,16 @@ COMPATIBLE_MACHINE = "keystone"
+@@ -1,6 +1,9 @@
+ COMPATIBLE_MACHINE = "keystone"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- DEVICELIST = "k2h k2k k2l k2e"
+-DEVICELIST = "k2h k2k k2l k2e"
++DEVICELIST_k2hk-evm = "k2h k2k"
++DEVICELIST_k2l-evm  = "k2l"
++DEVICELIST_k2e-evm  = "k2e"
  
--BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
-+HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
-+HPLIB_GIT_PROTOCOL = "git"
-+HPLIB_GIT_BRANCH = "master"
- 
- # Below Commit ID corresponds to "DEV.HPLIB.01.01.00.06"
--SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
-+HPLIB_SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
-+
-+BRANCH = "${HPLIB_GIT_BRANCH}"
-+SRC_URI = "${HPLIB_GIT_URI};protocol=${HPLIB_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${HPLIB_SRCREV}"
-+
- PV = "01.01.00.06+git${SRCPV}"
-+INC_PR = "r1"
-diff --git a/recipes-bsp/hplib/hplib_git.bb b/recipes-bsp/hplib/hplib_git.bb
-index da8853b..1423de5 100644
---- a/recipes-bsp/hplib/hplib_git.bb
-+++ b/recipes-bsp/hplib/hplib_git.bb
-@@ -7,6 +7,8 @@ RDEPENDS_${PN} = "hplib-mod"
- 
- include hplib.inc
- 
-+PR = "${INC_PR}.0"
-+
- CHOICELIST = "yes no"
- 
- S = "${WORKDIR}/git/ti/runtime/hplib"
+ HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
+ HPLIB_GIT_PROTOCOL = "git"
 
 
