@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C1691E00C2B; Wed,  4 Nov 2015 07:00:39 -0800 (PST)
+	id C2508E00B63; Wed,  4 Nov 2015 07:00:39 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0659E00B63
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9256E00AD8
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:00:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9FFA352AB1; Wed,  4 Nov 2015 15:00:04 +0000 (UTC)
+	id 68CAC52A94; Wed,  4 Nov 2015 15:00:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150004.9FFA352AB1@arago-project.org>
+Message-Id: <20151104150004.68CAC52A94@arago-project.org>
 Date: Wed,  4 Nov 2015 15:00:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : nwal-lld: Clean up recipes
+Subject: Jacob Stiffler : iqn2-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 4cc69636cd272311c6bd5173945ea297941706da
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4cc69636cd272311c6bd5173945ea297941706da
+Commit: a892deb197318003ce325a34bc9e9729cf88f36f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a892deb197318003ce325a34bc9e9729cf88f36f
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:20 2015 +0000
+Date:   Wed Nov  4 01:47:17 2015 +0000
 
-nwal-lld: Clean up recipes
+iqn2-lld: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,62 +54,65 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld-test_git.bb |    2 ++
- recipes-bsp/nwal-lld/nwal-lld.inc         |   13 ++++++++++---
- recipes-bsp/nwal-lld/nwal-lld_git.bb      |    2 ++
- 3 files changed, 14 insertions(+), 3 deletions(-)
+ recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb |    2 ++
+ recipes-bsp/iqn2-lld/iqn2-lld.inc         |   16 ++++++++++++----
+ recipes-bsp/iqn2-lld/iqn2-lld_git.bb      |    2 ++
+ 3 files changed, 16 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld-test_git.bb b/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
-index 3813df9..79528a0 100644
---- a/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
-+++ b/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib nwal-lld"
+diff --git a/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb b/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
+index f1aa9e4..f276c4b 100644
+--- a/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
++++ b/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip iqn2-lld dfe-lld"
  
- include nwal-lld.inc
+ include iqn2-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} IQN2_SRC_DIR=${WORKDIR}/git"
  
  do_compile () {
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-index 247bfc0..c4ccdbd 100644
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -3,12 +3,19 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=b7982a377c680ad71ca2fb
- 
- COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-bsp/iqn2-lld/iqn2-lld.inc b/recipes-bsp/iqn2-lld/iqn2-lld.inc
+index 812d3f6..4a43a26 100644
+--- a/recipes-bsp/iqn2-lld/iqn2-lld.inc
++++ b/recipes-bsp/iqn2-lld/iqn2-lld.inc
+@@ -1,13 +1,21 @@
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
+ LICENSE = "BSD-3-Clause"
  
 -BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
-+NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
-+NWAL_LLD_GIT_PROTOCOL = "git"
-+NWAL_LLD_GIT_BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/iqn2-lld.git;destsuffix=git/ti/drv/iqn2;protocol=git;branch=${BRANCH}"
++IQN2_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/iqn2-lld.git"
++IQN2_LLD_GIT_PROTOCOL = "git"
++IQN2_LLD_GIT_BRANCH = "master"
++IQN2_LLD_GIT_DESTSUFFIX = "git/ti/drv/iqn2"
++
+ # Following commit corresponds to DEV.IQN_LLD.01.00.00.08F
+-SRCREV = "29d5358b944f1447c024263f86e8c71784440b99"
++IQN2_LLD_SRCREV = "29d5358b944f1447c024263f86e8c71784440b99"
++
++BRANCH = "${IQN2_LLD_GIT_BRANCH}"
++SRC_URI = "${IQN2_LLD_GIT_URI};destsuffix=${IQN2_LLD_GIT_DESTSUFFIX};protocol=${IQN2_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${IQN2_LLD_SRCREV}"
  
- # Below commit ID corresponds to "DEV.NWAL.02.01.00.08"
--SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
-+NWAL_LLD_SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
-+
-+BRANCH = "${NWAL_LLD_GIT_BRANCH}"
-+SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${NWAL_LLD_SRCREV}"
-+
- PV = "02.01.00.08"
+ PV = "1.0.0.8"
 +INC_PR = "r1"
  
- BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/nwal"
-diff --git a/recipes-bsp/nwal-lld/nwal-lld_git.bb b/recipes-bsp/nwal-lld/nwal-lld_git.bb
-index da09730..a9690ca 100644
---- a/recipes-bsp/nwal-lld/nwal-lld_git.bb
-+++ b/recipes-bsp/nwal-lld/nwal-lld_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib"
+ COMPATIBLE_MACHINE = "k2l-evm"
  
- include nwal-lld.inc
+-S = "${WORKDIR}/git/ti/drv/iqn2"
++S = "${WORKDIR}/${IQN2_LLD_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/iqn2-lld/iqn2-lld_git.bb b/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
+index 19ffc05..4e68116 100644
+--- a/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
++++ b/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip"
+ 
+ include iqn2-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
  
  do_compile () {
 
