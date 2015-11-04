@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C3132E00C25; Wed,  4 Nov 2015 07:00:39 -0800 (PST)
+	id C390CE00B37; Wed,  4 Nov 2015 07:00:39 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCB47E00B28
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1784E00B88
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:00:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 797FB52AA7; Wed,  4 Nov 2015 15:00:04 +0000 (UTC)
+	id C5CE352AB3; Wed,  4 Nov 2015 15:00:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150004.797FB52AA7@arago-project.org>
+Message-Id: <20151104150004.C5CE352AB3@arago-project.org>
 Date: Wed,  4 Nov 2015 15:00:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : mmap-lld: Clean up recipes
+Subject: Jacob Stiffler : pa-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 35b3abe71af31d8b62e7717a9502cc50853a6f9b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=35b3abe71af31d8b62e7717a9502cc50853a6f9b
+Commit: 353d40c2c7fbfdcec8edf4892dcfada012b4028f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=353d40c2c7fbfdcec8edf4892dcfada012b4028f
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:18 2015 +0000
+Date:   Wed Nov  4 01:47:22 2015 +0000
 
-mmap-lld: Clean up recipes
+pa-lld: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,64 +54,66 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/mmap-lld/mmap-lld-test_git.bb |    2 ++
- recipes-bsp/mmap-lld/mmap-lld.inc         |   15 +++++++++++----
- recipes-bsp/mmap-lld/mmap-lld_git.bb      |    2 ++
- 3 files changed, 15 insertions(+), 4 deletions(-)
+ recipes-bsp/pa-lld/pa-lld-test_git.bb |    2 ++
+ recipes-bsp/pa-lld/pa-lld.inc         |   18 ++++++++++++------
+ recipes-bsp/pa-lld/pa-lld_git.bb      |    2 ++
+ 3 files changed, 16 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-index 41e46f7..0617376 100644
---- a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-+++ b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-@@ -1,6 +1,8 @@
- DESCRIPTION = "TI KEYSTONE MMAP driver test binaries "
- include mmap-lld.inc
+diff --git a/recipes-bsp/pa-lld/pa-lld-test_git.bb b/recipes-bsp/pa-lld/pa-lld-test_git.bb
+index b70dadd..0fb6f07 100644
+--- a/recipes-bsp/pa-lld/pa-lld-test_git.bb
++++ b/recipes-bsp/pa-lld/pa-lld-test_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip pa-lld cppi-lld qmss-lld sa-lld"
+ 
+ include pa-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- DEPENDS="common-csl-ip mmap-lld"
- RDEPENDS_${PN}="uio-module-drv"
+ DEVICELIST = "k2h k2k k2l k2e"
  
-diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-lld/mmap-lld.inc
-index a5158d5..cde0fec 100644
---- a/recipes-bsp/mmap-lld/mmap-lld.inc
-+++ b/recipes-bsp/mmap-lld/mmap-lld.inc
-@@ -4,12 +4,19 @@ COMPATIBLE_MACHINE = "keystone"
+ CHOICELIST = "yes no"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index b8ade64..58f0f42 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -3,13 +3,19 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/pa/COPYING.txt;md5=e8f6789acdcd
  
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b3315b8190036fe1c6a8263d02e15606"
+ COMPATIBLE_MACHINE = "keystone"
  
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git;destsuffix=git/ti/runtime/mmap;protocol=git;branch=${BRANCH}"
-+MMAP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git"
-+MMAP_LLD_GIT_PROTOCOL = "git"
-+MMAP_LLD_GIT_BRANCH = "master"
-+MMAP_LLD_GIT_DESTSUFFIX = "git/ti/runtime/mmap"
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
++PA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pa-lld.git"
++PA_LLD_GIT_PROTOCOL = "git"
++PA_LLD_GIT_BRANCH = "master"
++PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+ 
+ # Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
+-SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
++PA_LLD_SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
 +
- # Commit correspond to DEV.MMAP.02.00.00.04
--SRCREV = "306895eb2d5decd14a760e70d273946958ff716f"
-+MMAP_LLD_SRCREV = "306895eb2d5decd14a760e70d273946958ff716f"
++BRANCH = "${PA_LLD_GIT_BRANCH}"
++SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${PA_LLD_SRCREV}"
 +
-+BRANCH="${MMAP_LLD_GIT_BRANCH}"
-+SRC_URI = "${MMAP_LLD_GIT_URI};destsuffix=${MMAP_LLD_GIT_DESTSUFFIX};protocol=${MMAP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${MMAP_LLD_SRCREV}"
- 
- PV = "2.0.0.4"
+ PV = "03.00.01.05"
 -PR = "r1"
 +INC_PR = "r2"
  
- S = "${WORKDIR}/git/ti/runtime/mmap"
-diff --git a/recipes-bsp/mmap-lld/mmap-lld_git.bb b/recipes-bsp/mmap-lld/mmap-lld_git.bb
-index 3a56a62..1cfc90f 100644
---- a/recipes-bsp/mmap-lld/mmap-lld_git.bb
-+++ b/recipes-bsp/mmap-lld/mmap-lld_git.bb
-@@ -1,6 +1,8 @@
- DESCRIPTION = "TI KEYSTONE mmap driver using Keystone MPAX Programming"
- include mmap-lld.inc
+-BASEDIR = "${WORKDIR}/git"
+-S = "${BASEDIR}/ti/drv/pa"
++S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
+index 468113b..0cb3bc5 100644
+--- a/recipes-bsp/pa-lld/pa-lld_git.bb
++++ b/recipes-bsp/pa-lld/pa-lld_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld"
+ 
+ include pa-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- DEPENDS="common-csl-ip"
+ SRC_URI += "file://init_pa.sh"
  
- do_compile () {
+ inherit update-rc.d
 
 
