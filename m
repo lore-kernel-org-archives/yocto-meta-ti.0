@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 62A3AE00B0B; Wed,  4 Nov 2015 06:58:06 -0800 (PST)
+	id 69182E00B2C; Wed,  4 Nov 2015 06:58:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2FEC6E00B43
-	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:01 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23B76E00B2F
+	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:00 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5856552ABE; Wed,  4 Nov 2015 14:58:00 +0000 (UTC)
+	id EECC352AB9; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145800.5856552ABE@arago-project.org>
-Date: Wed,  4 Nov 2015 14:58:00 +0000 (UTC)
+Message-Id: <20151104145759.EECC352AB9@arago-project.org>
+Date: Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : hplib: Only build binaries relevent to the machine
+Subject: Jacob Stiffler : cppi-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,36 +38,83 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d5627fa3d74046850099421522e307fdd0ab9363
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d5627fa3d74046850099421522e307fdd0ab9363
+Commit: 2801ef9ce5fc3846e61c99e16b39f553e65c632d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2801ef9ce5fc3846e61c99e16b39f553e65c632d
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:14 2015 +0000
+Date:   Wed Nov  4 01:47:09 2015 +0000
 
-hplib: Only build binaries relevent to the machine
+cppi-lld: Clean up recipes
+
+* Use INC_PR to track recipe revisions
+* Define variables for GIT SRC_URI parameters
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hplib/hplib.inc |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+ recipes-bsp/cppi-lld/cppi-lld-test_git.bb |    2 ++
+ recipes-bsp/cppi-lld/cppi-lld.inc         |   17 ++++++++++++-----
+ recipes-bsp/cppi-lld/cppi-lld_git.bb      |    2 ++
+ 3 files changed, 16 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
-index 7ed47a5..e5fe567 100644
---- a/recipes-bsp/hplib/hplib.inc
-+++ b/recipes-bsp/hplib/hplib.inc
-@@ -1,6 +1,9 @@
- COMPATIBLE_MACHINE = "keystone"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
+index 871546e..8f4856a 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
++++ b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld cppi-lld qmss-lld"
  
--DEVICELIST = "k2h k2k k2l k2e"
-+DEVICELIST_k2hk-evm = "k2h k2k"
-+DEVICELIST_k2l-evm  = "k2l"
-+DEVICELIST_k2e-evm  = "k2e"
+ include cppi-lld.inc
  
- HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
- HPLIB_GIT_PROTOCOL = "git"
++PR = "${INC_PR}.0"
++
+ CHOICELIST = "yes no"
+ 
+ do_compile () {
+diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
+index 21c8fe0..ae81a3f 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld.inc
++++ b/recipes-bsp/cppi-lld/cppi-lld.inc
+@@ -1,14 +1,21 @@
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/cppi/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
+ 
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git;destsuffix=git/ti/drv/cppi;protocol=git;branch=${BRANCH}"
++CPPI_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git"
++CPPI_LLD_GIT_PROTOCOL = "git"
++CPPI_LLD_GIT_BRANCH = "master"
++CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
+ 
+ # Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.10"
+-SRCREV = "97c537fa544a78e83512db3499a49d0bd86fad32"
++CPPI_LLD_SRCREV = "97c537fa544a78e83512db3499a49d0bd86fad32"
++
++BRANCH = "${CPPI_LLD_GIT_BRANCH}"
++SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${CPPI_LLD_SRCREV}"
+ PV = "02.01.00.10"
++INC_PR = "r1"
+ 
+ DEVICELIST = "k2h k2k k2l k2e"
+ 
+-BASEDIR = "${WORKDIR}/git"
+-S = "${BASEDIR}/ti/drv/cppi"
++S = "${WORKDIR}/${CPPI_LLD_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld_git.bb b/recipes-bsp/cppi-lld/cppi-lld_git.bb
+index cd419f6..169e0fc 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld_git.bb
++++ b/recipes-bsp/cppi-lld/cppi-lld_git.bb
+@@ -5,6 +5,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld"
+ 
+ include cppi-lld.inc
+ 
++PR = "${INC_PR}.0"
++
+ SRC_URI += "file://init_cppi.sh"
+ 
+ inherit update-rc.d
 
 
