@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 44841E00BE6; Wed,  4 Nov 2015 07:04:28 -0800 (PST)
+	id 46FECE00B43; Wed,  4 Nov 2015 07:04:28 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2AC1E00C0A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE69BE00C09
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:03:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B5EE652A94; Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
+	id A1CFE52AB3; Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150357.B5EE652A94@arago-project.org>
+Message-Id: <20151104150357.A1CFE52AB3@arago-project.org>
 Date: Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : traceframework: Only build binaries relevent to the machine
+Subject: Jacob Stiffler : traceframework: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,51 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 1761eb924d34e73fdf34badfbd470a793ecfc383
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1761eb924d34e73fdf34badfbd470a793ecfc383
+Commit: 1e4986ff3b40d2e03e9c4c2f6a0fccc9704b5c9a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e4986ff3b40d2e03e9c4c2f6a0fccc9704b5c9a
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:33 2015 +0000
+Date:   Wed Nov  4 01:47:32 2015 +0000
 
-traceframework: Only build binaries relevent to the machine
+traceframework: Clean up recipes
+
+* Define variables for GIT SRC_URI parameters
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/traceframework/traceframework_git.bb |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
+ recipes-bsp/traceframework/traceframework_git.bb |   14 +++++++++++---
+ 1 files changed, 11 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
-index 6ca9b9a..7a40291 100644
+index 50989af..6ca9b9a 100644
 --- a/recipes-bsp/traceframework/traceframework_git.bb
 +++ b/recipes-bsp/traceframework/traceframework_git.bb
-@@ -15,14 +15,17 @@ SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX}
- SRCREV = "${TRACEFRAMEWORK_SRCREV}"
+@@ -2,12 +2,20 @@ DESCRIPTION = "TI Trace Framework library"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/instrumentation/traceframework/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
  
+-BRANCH="master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/traceframework.git;destsuffix=git/ti/instrumentation/traceframework;protocol=git;branch=${BRANCH}"
++TRACEFRAMEWORK_GIT_URI = "git://git.ti.com/keystone-rtos/traceframework.git"
++TRACEFRAMEWORK_GIT_PROTOCOL = "git"
++TRACEFRAMEWORK_GIT_BRANCH = "master"
++TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
+ 
+ # Below commit ID corresponds to DEV.TFWK-01.01.01.07
+-SRCREV = "8d9c0e3a5bcb43aad98a794c31f42b652c6b3b53"
++TRACEFRAMEWORK_SRCREV = "8d9c0e3a5bcb43aad98a794c31f42b652c6b3b53"
++
++BRANCH="${TRACEFRAMEWORK_GIT_BRANCH}"
++SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${TRACEFRAMEWORK_SRCREV}"
++
  PV = "01.01.01.07"
--PR = "r1"
-+PR = "r2"
++PR = "r1"
  
  COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
  DEPENDS = "cuia"
- 
- DEVICELIST = ""
- DEVICELIST_append_tci6614-evm = "c6614"
--DEVICELIST_append_keystone    = "k2k k2h k2e k2l"
-+DEVICELIST_append_k2hk-evm    = "k2k k2h"
-+DEVICELIST_append_k2e-evm     = "k2e"
-+DEVICELIST_append_k2l-evm     = "k2l"
- 
- PACKAGES =+ "${PN}-test"
- 
 
 
