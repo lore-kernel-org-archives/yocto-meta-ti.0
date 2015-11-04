@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A1CB2E00B4C; Wed,  4 Nov 2015 07:00:38 -0800 (PST)
+	id D82E3E00B4C; Wed,  4 Nov 2015 07:00:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7728E00B4C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A08CE00B31
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:00:02 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 887B452AB2; Wed,  4 Nov 2015 15:00:02 +0000 (UTC)
+	id 4927E52AA7; Wed,  4 Nov 2015 15:00:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150002.887B452AB2@arago-project.org>
+Message-Id: <20151104150002.4927E52AA7@arago-project.org>
 Date: Wed,  4 Nov 2015 15:00:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : qmss-lld: Only build binaries relevent to the machine
+Subject: Jacob Stiffler : pa-lld: Only build binaries relevent to the machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f01c8007f58d268bd0dd2a6b2c8b140b8c11913e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f01c8007f58d268bd0dd2a6b2c8b140b8c11913e
+Commit: bb3b5d10f0c16d807dc6e8451955c33e50f59bb4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bb3b5d10f0c16d807dc6e8451955c33e50f59bb4
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:26 2015 +0000
+Date:   Wed Nov  4 01:47:23 2015 +0000
 
-qmss-lld: Only build binaries relevent to the machine
+pa-lld: Only build binaries relevent to the machine
 
 * Due to this change, the init script is no longer needed
 
@@ -53,16 +53,16 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/qmss-lld/files/init_qmss.sh   |   47 -----------------------------
- recipes-bsp/qmss-lld/qmss-lld-test_git.bb |    3 +-
- recipes-bsp/qmss-lld/qmss-lld.inc         |    7 ++++-
- recipes-bsp/qmss-lld/qmss-lld_git.bb      |   23 +++++--------
- 4 files changed, 16 insertions(+), 64 deletions(-)
+ recipes-bsp/pa-lld/files/init_pa.sh   |   47 ---------------------------------
+ recipes-bsp/pa-lld/pa-lld-test_git.bb |    4 +--
+ recipes-bsp/pa-lld/pa-lld.inc         |    9 ++++++
+ recipes-bsp/pa-lld/pa-lld_git.bb      |   21 +++++----------
+ 4 files changed, 17 insertions(+), 64 deletions(-)
 
-diff --git a/recipes-bsp/qmss-lld/files/init_qmss.sh b/recipes-bsp/qmss-lld/files/init_qmss.sh
+diff --git a/recipes-bsp/pa-lld/files/init_pa.sh b/recipes-bsp/pa-lld/files/init_pa.sh
 deleted file mode 100755
-index af69531..0000000
---- a/recipes-bsp/qmss-lld/files/init_qmss.sh
+index 8f80e35..0000000
+--- a/recipes-bsp/pa-lld/files/init_pa.sh
 +++ /dev/null
 @@ -1,47 +0,0 @@
 -#*
@@ -93,15 +93,15 @@ index af69531..0000000
 -case "$compatible" in
 -	*k2hk*)
 -		device=k2hk
--		ln -sf libqmss_k2h.so.1.0.0 libqmss_device.so.1
+-		ln -sf libpa.so.1.0.0 libpa_device.so.1
 -	;;
 -	*k2l*)
 -		device=k2l
--		ln -sf libqmss_k2l.so.1.0.0 libqmss_device.so.1
+-		ln -sf libpa2.so.1.0.0 libpa_device.so.1
 -	;;
 -	*k2e*)
--		device=k2e
--		ln -sf libqmss_k2e.so.1.0.0 libqmss_device.so.1
+-	device=k2e
+-		ln -sf libpa2.so.1.0.0 libpa_device.so.1
 -	;;
 -	*)
 -		device=unknown
@@ -109,93 +109,86 @@ index af69531..0000000
 -esac
 -
 -if [ $device != unknown ]; then
--	ln -sf libqmss_device.so.1 libqmss_device.so
--	echo qmss library link established for device : $device
+-	ln -sf libpa_device.so.1 libpa_device.so
+-	echo PA library link established for device : $device
 -fi
-diff --git a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
-index 7c19364..60a35b1 100644
---- a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
-+++ b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
-@@ -1,11 +1,10 @@
- DESCRIPTION = "TI QMSS low level driver unit test and example binaries"
--COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-bsp/pa-lld/pa-lld-test_git.bb b/recipes-bsp/pa-lld/pa-lld-test_git.bb
+index 0fb6f07..62ec122 100644
+--- a/recipes-bsp/pa-lld/pa-lld-test_git.bb
++++ b/recipes-bsp/pa-lld/pa-lld-test_git.bb
+@@ -4,9 +4,7 @@ DEPENDS = "common-csl-ip pa-lld cppi-lld qmss-lld sa-lld"
  
- DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld"
- 
- include qmss-lld.inc
+ include pa-lld.inc
  
 -PR = "${INC_PR}.0"
+-
+-DEVICELIST = "k2h k2k k2l k2e"
 +PR = "${INC_PR}.1"
  
  CHOICELIST = "yes no"
  
-diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
-index efd681e..1cf9b0b 100644
---- a/recipes-bsp/qmss-lld/qmss-lld.inc
-+++ b/recipes-bsp/qmss-lld/qmss-lld.inc
-@@ -1,6 +1,9 @@
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index 58f0f42..082d59d 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -2,6 +2,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/pa/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
  
-+COMPATIBLE_MACHINE = "keystone"
+ COMPATIBLE_MACHINE = "keystone"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
- QMSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/qmss-lld.git"
- QMSS_LLD_GIT_PROTOCOL = "git"
- QMSS_LLD_GIT_BRANCH = "master"
-@@ -16,6 +19,8 @@ SRCREV = "${QMSS_LLD_SRCREV}"
- PV = "02.01.00.11"
- INC_PR = "r1"
  
--DEVICELIST = "k2h k2k k2l k2e"
+ PA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pa-lld.git"
+ PA_LLD_GIT_PROTOCOL = "git"
+@@ -19,3 +20,11 @@ PV = "03.00.01.05"
+ INC_PR = "r2"
+ 
+ S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
++
 +DEVICELIST_k2hk-evm = "k2h k2k"
 +DEVICELIST_k2l-evm = "k2l"
 +DEVICELIST_k2e-evm = "k2e"
++
++LIBPA_k2hk-evm = "libpa"
++LIBPA_k2e-evm = "libpa2"
++LIBPA_k2l-evm = "libpa2"
+diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
+index 0cb3bc5..501ee2d 100644
+--- a/recipes-bsp/pa-lld/pa-lld_git.bb
++++ b/recipes-bsp/pa-lld/pa-lld_git.bb
+@@ -4,27 +4,20 @@ DEPENDS = "common-csl-ip rm-lld"
  
- S = "${WORKDIR}/${QMSS_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/qmss-lld/qmss-lld_git.bb b/recipes-bsp/qmss-lld/qmss-lld_git.bb
-index 83c9a7e..813929e 100644
---- a/recipes-bsp/qmss-lld/qmss-lld_git.bb
-+++ b/recipes-bsp/qmss-lld/qmss-lld_git.bb
-@@ -1,18 +1,10 @@
- DESCRIPTION = "TI QMSS low level driver library"
--COMPATIBLE_MACHINE = "keystone"
- 
- DEPENDS="common-csl-ip rm-lld"
- 
- include qmss-lld.inc
+ include pa-lld.inc
  
 -PR = "${INC_PR}.0"
 -
--SRC_URI += "file://init_qmss.sh"
+-SRC_URI += "file://init_pa.sh"
 -
 -inherit update-rc.d
 -
--INITSCRIPT_NAME = "init_qmss.sh"
+-INITSCRIPT_NAME = "init_pa.sh"
 -INITSCRIPT_PARAMS = "defaults 10"
 +PR = "${INC_PR}.1"
  
  do_compile () {
- #   Now build the lld
-@@ -27,11 +19,14 @@ do_compile () {
- do_install () {
-     make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
- 
--#   Set the generic device library symbolic link to default k2h
-+    # Set the generic device library symbolic link to default k2h
-     cd ${D}${libdir}
--    ln -sf libqmss_k2h.so.1.0.0 libqmss_device.so.1
-+
-+    # Link only the first device in the list
+ #   Now build the lld in the updated directory
+-	make -f makefile_armv7 DEVICE=k2h clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
+-	make -f makefile_armv7 DEVICE=k2l lib PDK_INSTALL_PATH=${STAGING_INCDIR}
 +    for device in ${DEVICELIST}
 +    do
-+        ln -sf libqmss_${device}.so.1.0.0 libqmss_device.so.1
-+        break
++        make -f makefile_armv7 DEVICE=$device lib PDK_INSTALL_PATH=${STAGING_INCDIR}
 +    done
-     ln -sf libqmss_device.so.1 libqmss_device.so
+ }
+ 
+ do_install () {
+ 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++
+ #   Set the generic device library symbolic link
+-    ln -sf libpa.so.1.0.0 ${D}${libdir}/libpa_device.so.1
++    ln -sf ${LIBPA}.so.1.0.0 ${D}${libdir}/libpa_device.so.1
+     ln -sf libpa_device.so.1 ${D}${libdir}/libpa_device.so
 -#   Copy init scripts
--	install -d ${D}${sysconfdir}/init.d/
--	install -c -m 755 ${WORKDIR}/init_qmss.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+-    install -d ${D}${sysconfdir}/init.d/
+-    install -c -m 755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
  }
 
 
