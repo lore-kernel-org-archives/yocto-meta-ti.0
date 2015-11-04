@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7CFACE00BE1; Wed,  4 Nov 2015 07:00:37 -0800 (PST)
+	id 9FD0BE00C08; Wed,  4 Nov 2015 07:00:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 82BE5E00B2F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5B93E00B4F
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:00:02 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2688852A94; Wed,  4 Nov 2015 15:00:02 +0000 (UTC)
+	id 7483252AB1; Wed,  4 Nov 2015 15:00:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150002.2688852A94@arago-project.org>
+Message-Id: <20151104150002.7483252AB1@arago-project.org>
 Date: Wed,  4 Nov 2015 15:00:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : pa-lld: Clean up recipes
+Subject: Jacob Stiffler : qmss-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,18 +33,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 15:00:37 -0000
+X-List-Received-Date: Wed, 04 Nov 2015 15:00:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 51c651cf8c7d8ec33ab6b50feee41680fbb87281
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51c651cf8c7d8ec33ab6b50feee41680fbb87281
+Commit: c252c773147b650727819a3a6e60be0111ad6e0f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c252c773147b650727819a3a6e60be0111ad6e0f
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:22 2015 +0000
+Date:   Wed Nov  4 01:47:25 2015 +0000
 
-pa-lld: Clean up recipes
+qmss-lld: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,66 +54,66 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pa-lld/pa-lld-test_git.bb |    2 ++
- recipes-bsp/pa-lld/pa-lld.inc         |   18 ++++++++++++------
- recipes-bsp/pa-lld/pa-lld_git.bb      |    2 ++
- 3 files changed, 16 insertions(+), 6 deletions(-)
+ recipes-bsp/qmss-lld/qmss-lld-test_git.bb |    2 ++
+ recipes-bsp/qmss-lld/qmss-lld.inc         |   17 ++++++++++++-----
+ recipes-bsp/qmss-lld/qmss-lld_git.bb      |    1 +
+ 3 files changed, 15 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld-test_git.bb b/recipes-bsp/pa-lld/pa-lld-test_git.bb
-index b70dadd..0fb6f07 100644
---- a/recipes-bsp/pa-lld/pa-lld-test_git.bb
-+++ b/recipes-bsp/pa-lld/pa-lld-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip pa-lld cppi-lld qmss-lld sa-lld"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
+index 438d840..7c19364 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
++++ b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
+@@ -5,6 +5,8 @@ DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld"
  
- include pa-lld.inc
+ include qmss-lld.inc
  
 +PR = "${INC_PR}.0"
 +
+ CHOICELIST = "yes no"
+ 
+ do_compile () {
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index 29ef0ce..efd681e 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -1,14 +1,21 @@
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
+ 
+-BRANCH ="master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/qmss-lld.git;destsuffix=git/ti/drv/qmss;protocol=git;branch=${BRANCH}"
++QMSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/qmss-lld.git"
++QMSS_LLD_GIT_PROTOCOL = "git"
++QMSS_LLD_GIT_BRANCH = "master"
++QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
+ 
+ # commit ID corresponding to DEV.QMSS_LLD.02.01.00.11
+-SRCREV = "2024ab2d411c1a6dd3f5e768a3cb30c2a685f1e4"
++QMSS_LLD_SRCREV = "2024ab2d411c1a6dd3f5e768a3cb30c2a685f1e4"
++
++BRANCH ="${QMSS_LLD_GIT_BRANCH}"
++SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${QMSS_LLD_SRCREV}"
++
+ PV = "02.01.00.11"
++INC_PR = "r1"
+ 
  DEVICELIST = "k2h k2k k2l k2e"
  
- CHOICELIST = "yes no"
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index b8ade64..58f0f42 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -3,13 +3,19 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/pa/COPYING.txt;md5=e8f6789acdcd
- 
- COMPATIBLE_MACHINE = "keystone"
- 
--BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
-+PA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pa-lld.git"
-+PA_LLD_GIT_PROTOCOL = "git"
-+PA_LLD_GIT_BRANCH = "master"
-+PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
- 
- # Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
--SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
-+PA_LLD_SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
-+
-+BRANCH = "${PA_LLD_GIT_BRANCH}"
-+SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${PA_LLD_SRCREV}"
-+
- PV = "03.00.01.05"
--PR = "r1"
-+INC_PR = "r2"
- 
 -BASEDIR = "${WORKDIR}/git"
--S = "${BASEDIR}/ti/drv/pa"
-+S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
-index 468113b..0cb3bc5 100644
---- a/recipes-bsp/pa-lld/pa-lld_git.bb
-+++ b/recipes-bsp/pa-lld/pa-lld_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld"
+-S = "${BASEDIR}/ti/drv/qmss"
++S = "${WORKDIR}/${QMSS_LLD_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld_git.bb b/recipes-bsp/qmss-lld/qmss-lld_git.bb
+index 38b0762..83c9a7e 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld_git.bb
++++ b/recipes-bsp/qmss-lld/qmss-lld_git.bb
+@@ -5,6 +5,7 @@ DEPENDS="common-csl-ip rm-lld"
  
- include pa-lld.inc
+ include qmss-lld.inc
  
 +PR = "${INC_PR}.0"
-+
- SRC_URI += "file://init_pa.sh"
  
- inherit update-rc.d
+ SRC_URI += "file://init_qmss.sh"
+ 
 
 
