@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A96FCE00B4C; Wed,  4 Nov 2015 06:58:02 -0800 (PST)
+	id AB143E00B4A; Wed,  4 Nov 2015 06:58:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85E03E009D9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8710EE00A73
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:57:59 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1ADA452AA7; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
+	id 01AAF52A94; Wed,  4 Nov 2015 14:57:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145759.1ADA452AA7@arago-project.org>
-Date: Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
+Message-Id: <20151104145759.01AAF52A94@arago-project.org>
+Date: Wed,  4 Nov 2015 14:57:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : cppi-lld: Clean up recipes
+Subject: Jacob Stiffler : common-csl-ip: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 282cf48c3073966695a59b541ff0280fe361a282
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=282cf48c3073966695a59b541ff0280fe361a282
+Commit: 1d35681568516e1fcc3cdbc54925983838dac03a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1d35681568516e1fcc3cdbc54925983838dac03a
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:09 2015 +0000
+Date:   Wed Nov  4 01:47:08 2015 +0000
 
-cppi-lld: Clean up recipes
+common-csl-ip: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,67 +54,80 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cppi-lld/cppi-lld-test_git.bb |    2 ++
- recipes-bsp/cppi-lld/cppi-lld.inc         |   17 ++++++++++++-----
- recipes-bsp/cppi-lld/cppi-lld_git.bb      |    2 ++
- 3 files changed, 16 insertions(+), 5 deletions(-)
+ .../common-csl-ip/common-csl-ip-rtos_git.bb        |    6 +++---
+ recipes-bsp/common-csl-ip/common-csl-ip.inc        |   19 ++++++++++++++-----
+ recipes-bsp/common-csl-ip/common-csl-ip_git.bb     |    4 +---
+ 3 files changed, 18 insertions(+), 11 deletions(-)
 
-diff --git a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-index 871546e..8f4856a 100644
---- a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-+++ b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld cppi-lld qmss-lld"
- 
- include cppi-lld.inc
- 
-+PR = "${INC_PR}.0"
-+
- CHOICELIST = "yes no"
- 
- do_compile () {
-diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
-index 21c8fe0..ae81a3f 100644
---- a/recipes-bsp/cppi-lld/cppi-lld.inc
-+++ b/recipes-bsp/cppi-lld/cppi-lld.inc
-@@ -1,14 +1,21 @@
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/cppi/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
- 
--BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git;destsuffix=git/ti/drv/cppi;protocol=git;branch=${BRANCH}"
-+CPPI_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git"
-+CPPI_LLD_GIT_PROTOCOL = "git"
-+CPPI_LLD_GIT_BRANCH = "master"
-+CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
- 
- # Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.10"
--SRCREV = "97c537fa544a78e83512db3499a49d0bd86fad32"
-+CPPI_LLD_SRCREV = "97c537fa544a78e83512db3499a49d0bd86fad32"
-+
-+BRANCH = "${CPPI_LLD_GIT_BRANCH}"
-+SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+
-+SRCREV = "${CPPI_LLD_SRCREV}"
- PV = "02.01.00.10"
-+INC_PR = "r1"
- 
- DEVICELIST = "k2h k2k k2l k2e"
- 
--BASEDIR = "${WORKDIR}/git"
--S = "${BASEDIR}/ti/drv/cppi"
-+S = "${WORKDIR}/${CPPI_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/cppi-lld/cppi-lld_git.bb b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-index cd419f6..169e0fc 100644
---- a/recipes-bsp/cppi-lld/cppi-lld_git.bb
-+++ b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-@@ -5,6 +5,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld"
- 
- include cppi-lld.inc
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+index c1fb566..f8dc1ba 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
++++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+@@ -1,13 +1,13 @@
+ require common-csl-ip.inc
  
 +PR = "${INC_PR}.0"
 +
- SRC_URI += "file://init_cppi.sh"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
  
- inherit update-rc.d
+-PR = "r1"
+-
+ DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
+ 
+-S = "${WORKDIR}/ti/csl"
++CSL_GIT_DESTSUFFIX = "git/ti/csl"
+ 
+ export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
+ export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index 6355165..74abab0 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -5,13 +5,22 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+ COMPATIBLE_MACHINE = "keystone|dra7xx"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-BRANCH="master"
+-BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
++INC_PR = "r4"
+ 
+-SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH};destsuffix=${S}"
++CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
++CSL_GIT_PROTOCOL ="git"
++CSL_GIT_BRANCH = "master"
++CSL_GIT_BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
++CSL_GIT_DESTSUFFIX = "git"
+ 
+ # commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.01.00A
+-SRCREV = "17bb083f0d5ed4ad6f38c991210a6a8e9aaf9c56"
++CSL_SRCREV = "17bb083f0d5ed4ad6f38c991210a6a8e9aaf9c56"
+ 
+ # commit ID corresponds to PROCESSOR-SDK-ALPHA-1
+-SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
++CSL_SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
++
++BRANCH="${CSL_GIT_BRANCH}"
++SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
++SRCREV = "${CSL_SRCREV}"
++
++S = "${WORKDIR}/${CSL_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
+index 8f622a5..77f7858 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
++++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
+@@ -1,11 +1,9 @@
+ require common-csl-ip.inc
+ 
+-PR = "r3"
++PR = "${INC_PR}.0"
+ 
+ ALLOW_EMPTY_${PN} = "1"
+ 
+-S = "${WORKDIR}/git"
+-
+ do_install () {
+     install -d ${D}${includedir}/ti/csl
+     find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
 
 
