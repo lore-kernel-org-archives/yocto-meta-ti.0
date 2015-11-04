@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 23E79E00C00; Wed,  4 Nov 2015 07:04:27 -0800 (PST)
+	id 2E35FE00C05; Wed,  4 Nov 2015 07:04:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 936EAE00C00
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A61EDE00BDA
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:03:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4366652A94; Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
+	id 53F1152AA7; Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150357.4366652A94@arago-project.org>
+Message-Id: <20151104150357.53F1152AA7@arago-project.org>
 Date: Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : rm-lld: Clean up recipes
+Subject: Jacob Stiffler : sa-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,14 +38,15 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 593e269a73195e7a7a8a1b882eba671396d84adf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=593e269a73195e7a7a8a1b882eba671396d84adf
+Commit: 3c6b9a7dc3b27c64fac37975fc9c53563bfb8ee5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c6b9a7dc3b27c64fac37975fc9c53563bfb8ee5
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:27 2015 +0000
+Date:   Wed Nov  4 01:47:28 2015 +0000
 
-rm-lld: Clean up recipes
+sa-lld: Clean up recipes
 
+* Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
@@ -53,37 +54,65 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/rm-lld/rm-lld_git.bb |   16 ++++++++++++----
- 1 files changed, 12 insertions(+), 4 deletions(-)
+ recipes-bsp/sa-lld/sa-lld-test_git.bb |    2 ++
+ recipes-bsp/sa-lld/sa-lld.inc         |   18 +++++++++++++-----
+ recipes-bsp/sa-lld/sa-lld_git.bb      |    2 ++
+ 3 files changed, 17 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/rm-lld/rm-lld_git.bb b/recipes-bsp/rm-lld/rm-lld_git.bb
-index 8b2806c..d6cb62b 100644
---- a/recipes-bsp/rm-lld/rm-lld_git.bb
-+++ b/recipes-bsp/rm-lld/rm-lld_git.bb
-@@ -2,12 +2,20 @@ DESCRIPTION = "TI Resource Manager Low Level Driver"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/rm/COPYING.txt;md5=dc61631b65360e6beb73b6c337800afc"
+diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+index 7cb0ac7..4f74ab6 100644
+--- a/recipes-bsp/sa-lld/sa-lld-test_git.bb
++++ b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip cppi-lld qmss-lld pa-lld sa-lld"
  
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-rtos/rm-lld.git;destsuffix=git/ti/drv/rm;protocol=git;branch=${BRANCH}"
-+RM_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/rm-lld.git"
-+RM_LLD_GIT_PROTOCOL = "git"
-+RM_LLD_GIT_BRANCH = "master"
-+RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
-+
- # Below commit ID corresponds to DEV.RM_LLD.02.01.02.00
--SRCREV = "b3d711203c6b4cf99fb2f95dc2f4728dfd1b2639"
-+RM_LLD_SRCREV = "b3d711203c6b4cf99fb2f95dc2f4728dfd1b2639"
-+
-+BRANCH = "${RM_LLD_GIT_BRANCH}"
-+SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${RM_LLD_SRCREV}"
-+
- PV = "02.01.02.00"
--PR = "r1"
-+PR = "r2"
+ include sa-lld.inc
  
- COMPATIBLE_MACHINE = "keystone"
++PR = "${INC_PR}.0"
++
+ DEVICELIST = "k2h k2k k2l k2e"
  
+ CHOICELIST = "no yes"
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+index 8066279..47584b6 100644
+--- a/recipes-bsp/sa-lld/sa-lld.inc
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -3,11 +3,19 @@ COMPATIBLE_MACHINE = "keystone"
+ 
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a9569e129ebdf20e732dd"
+ 
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
++SA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/sa-lld.git"
++SA_LLD_GIT_PROTOCOL = "git"
++SA_LLD_GIT_BRANCH = "master"
++SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
++
+ # Following commit DEV.SA_LLD.03.00.00.11A
+-SRCREV = "bf5b097e868b20d23d386abc34a1902903d7d9ea"
++SA_LLD_SRCREV = "bf5b097e868b20d23d386abc34a1902903d7d9ea"
++
++BRANCH = "${SA_LLD_GIT_BRANCH}"
++SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${SA_LLD_SRCREV}"
++
+ PV = "03.00.00.11"
++INC_PR = "r1"
+ 
+-BASEDIR = "${WORKDIR}/git"
+-S = "${BASEDIR}/ti/drv/sa"
++S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/sa-lld/sa-lld_git.bb b/recipes-bsp/sa-lld/sa-lld_git.bb
+index 3df2c6c..1cab6db 100644
+--- a/recipes-bsp/sa-lld/sa-lld_git.bb
++++ b/recipes-bsp/sa-lld/sa-lld_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip"
+ 
+ include sa-lld.inc
+ 
++PR = "${INC_PR}.0"
++
+ do_compile () {
+ #   Now build the lld in the updated directory
+ 	make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
 
 
