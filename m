@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 00185E00B52; Wed,  4 Nov 2015 06:58:05 -0800 (PST)
+	id 014E0E00B0B; Wed,  4 Nov 2015 06:58:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22D77E00B2C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8922E00B0B
 	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:00 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CB70D52AB7; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
+	id 68BEF52AB3; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145759.CB70D52AB7@arago-project.org>
+Message-Id: <20151104145759.68BEF52AB3@arago-project.org>
 Date: Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : aif2-lld: Clean up recipes
+Subject: Jacob Stiffler : hplib: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,14 +37,14 @@ X-List-Received-Date: Wed, 04 Nov 2015 14:58:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 51cf2fad408c71f78b17441266ccc3b0f24cadf9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51cf2fad408c71f78b17441266ccc3b0f24cadf9
+Branch: fido
+Commit: b53c46e035e9aaa9b51daba6f5d4afb42ccf1341
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b53c46e035e9aaa9b51daba6f5d4afb42ccf1341
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:07 2015 +0000
+Date:   Wed Nov  4 01:47:13 2015 +0000
 
-aif2-lld: Clean up recipes
+hplib: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,67 +54,60 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/aif2-lld/aif2-lld-test_git.bb |    2 ++
- recipes-bsp/aif2-lld/aif2-lld.inc         |   17 +++++++++++++----
- recipes-bsp/aif2-lld/aif2-lld_git.bb      |    2 ++
- 3 files changed, 17 insertions(+), 4 deletions(-)
+ recipes-bsp/hplib/hplib-test_git.bb |    2 ++
+ recipes-bsp/hplib/hplib.inc         |   13 ++++++++++---
+ recipes-bsp/hplib/hplib_git.bb      |    2 ++
+ 3 files changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-index 2a9de43..9180b95 100755
---- a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-+++ b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip aif2-lld qmss-lld cppi-lld"
+diff --git a/recipes-bsp/hplib/hplib-test_git.bb b/recipes-bsp/hplib/hplib-test_git.bb
+index 574fa2a..4ba79db 100644
+--- a/recipes-bsp/hplib/hplib-test_git.bb
++++ b/recipes-bsp/hplib/hplib-test_git.bb
+@@ -6,6 +6,8 @@ DEPENDS = "common-csl-ip qmss-lld sa-lld pktlib hplib"
  
- include aif2-lld.inc
+ include hplib.inc
  
 +PR = "${INC_PR}.0"
 +
- EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} AIF2_SRC_DIR=${WORKDIR}/git"
+ CHOICELIST = "yes no"
  
- do_compile () {
-diff --git a/recipes-bsp/aif2-lld/aif2-lld.inc b/recipes-bsp/aif2-lld/aif2-lld.inc
-index 212813c..cd1e169 100755
---- a/recipes-bsp/aif2-lld/aif2-lld.inc
-+++ b/recipes-bsp/aif2-lld/aif2-lld.inc
-@@ -1,13 +1,22 @@
- LICENSE = "BSD-3-Clause"
+ S = "${WORKDIR}/git/ti/runtime/hplib"
+diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
+index e4211ee..7ed47a5 100644
+--- a/recipes-bsp/hplib/hplib.inc
++++ b/recipes-bsp/hplib/hplib.inc
+@@ -2,9 +2,16 @@ COMPATIBLE_MACHINE = "keystone"
  
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
+ DEVICELIST = "k2h k2k k2l k2e"
+ 
 -BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/aif2-lld.git;destsuffix=git/ti/drv/aif2;protocol=git;branch=${BRANCH}"
-+
-+AIF2_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/aif2-lld.git"
-+AIF2_LLD_GIT_PROTOCOL = "git"
-+AIF2_LLD_GIT_BRANCH = "master"
-+AIF2_LLD_GIT_DESTSUFFIX = "git/ti/drv/aif2"
-+
- # The following commit correspond to DEV.AIF2LLD.01.02.00.00A
--SRCREV = "7f394ec9975cd4cef982b11763c882c4c763ddce"
-+AIF2_LLD_SRCREV = "7f394ec9975cd4cef982b11763c882c4c763ddce"
-+
-+BRANCH = "${AIF2_LLD_GIT_BRANCH}"
-+SRC_URI = "${AIF2_LLD_GIT_URI};destsuffix=${AIF2_LLD_GIT_DESTSUFFIX};protocol=${AIF2_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${AIF2_LLD_SRCREV}"
+-SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
++HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
++HPLIB_GIT_PROTOCOL = "git"
++HPLIB_GIT_BRANCH = "master"
  
- PV = "1.2.0.0"
+ # Below Commit ID corresponds to "DEV.HPLIB.01.01.00.06"
+-SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
++HPLIB_SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
++
++BRANCH = "${HPLIB_GIT_BRANCH}"
++SRC_URI = "${HPLIB_GIT_URI};protocol=${HPLIB_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${HPLIB_SRCREV}"
++
+ PV = "01.01.00.06+git${SRCPV}"
 +INC_PR = "r1"
+diff --git a/recipes-bsp/hplib/hplib_git.bb b/recipes-bsp/hplib/hplib_git.bb
+index da8853b..1423de5 100644
+--- a/recipes-bsp/hplib/hplib_git.bb
++++ b/recipes-bsp/hplib/hplib_git.bb
+@@ -7,6 +7,8 @@ RDEPENDS_${PN} = "hplib-mod"
  
- COMPATIBLE_MACHINE = "k2hk-evm"
- 
--S = "${WORKDIR}/git/ti/drv/aif2"
-+S = "${WORKDIR}/${AIF2_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/aif2-lld/aif2-lld_git.bb b/recipes-bsp/aif2-lld/aif2-lld_git.bb
-index f6e95c2..f310b17 100755
---- a/recipes-bsp/aif2-lld/aif2-lld_git.bb
-+++ b/recipes-bsp/aif2-lld/aif2-lld_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip qmss-lld cppi-lld"
- 
- include aif2-lld.inc
+ include hplib.inc
  
 +PR = "${INC_PR}.0"
 +
- EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ CHOICELIST = "yes no"
  
- do_compile () {
+ S = "${WORKDIR}/git/ti/runtime/hplib"
 
 
