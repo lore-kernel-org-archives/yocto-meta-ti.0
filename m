@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D21B7E00B56; Wed,  4 Nov 2015 06:58:04 -0800 (PST)
+	id D2E9CE008AE; Wed,  4 Nov 2015 06:58:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 896A5E00AD8
-	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:57:59 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8932E00B19
+	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:00 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E1A6052A8B; Wed,  4 Nov 2015 14:57:58 +0000 (UTC)
+	id 8D3E252AB5; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145758.E1A6052A8B@arago-project.org>
-Date: Wed,  4 Nov 2015 14:57:58 +0000 (UTC)
+Message-Id: <20151104145759.8D3E252AB5@arago-project.org>
+Date: Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : aif2-lld: Clean up recipes
+Subject: Jacob Stiffler : hyplnk-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: c41839b3aa3bd39eb48288b81427a0fa5d1699e7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c41839b3aa3bd39eb48288b81427a0fa5d1699e7
+Commit: 740fd7f424a4c8bf90a40fc5132f91d45d136697
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=740fd7f424a4c8bf90a40fc5132f91d45d136697
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:07 2015 +0000
+Date:   Wed Nov  4 01:47:15 2015 +0000
 
-aif2-lld: Clean up recipes
+hyplnk-lld: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,67 +54,73 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/aif2-lld/aif2-lld-test_git.bb |    2 ++
- recipes-bsp/aif2-lld/aif2-lld.inc         |   17 +++++++++++++----
- recipes-bsp/aif2-lld/aif2-lld_git.bb      |    2 ++
- 3 files changed, 17 insertions(+), 4 deletions(-)
+ recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb |    2 ++
+ recipes-bsp/hyplnk-lld/hyplnk-lld.inc         |   21 +++++++++++++--------
+ recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb      |    2 ++
+ 3 files changed, 17 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-index 2a9de43..9180b95 100755
---- a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-+++ b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip aif2-lld qmss-lld cppi-lld"
- 
- include aif2-lld.inc
- 
-+PR = "${INC_PR}.0"
-+
- EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} AIF2_SRC_DIR=${WORKDIR}/git"
- 
- do_compile () {
-diff --git a/recipes-bsp/aif2-lld/aif2-lld.inc b/recipes-bsp/aif2-lld/aif2-lld.inc
-index 212813c..cd1e169 100755
---- a/recipes-bsp/aif2-lld/aif2-lld.inc
-+++ b/recipes-bsp/aif2-lld/aif2-lld.inc
-@@ -1,13 +1,22 @@
- LICENSE = "BSD-3-Clause"
- 
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
--BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/aif2-lld.git;destsuffix=git/ti/drv/aif2;protocol=git;branch=${BRANCH}"
-+
-+AIF2_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/aif2-lld.git"
-+AIF2_LLD_GIT_PROTOCOL = "git"
-+AIF2_LLD_GIT_BRANCH = "master"
-+AIF2_LLD_GIT_DESTSUFFIX = "git/ti/drv/aif2"
-+
- # The following commit correspond to DEV.AIF2LLD.01.02.00.00A
--SRCREV = "7f394ec9975cd4cef982b11763c882c4c763ddce"
-+AIF2_LLD_SRCREV = "7f394ec9975cd4cef982b11763c882c4c763ddce"
-+
-+BRANCH = "${AIF2_LLD_GIT_BRANCH}"
-+SRC_URI = "${AIF2_LLD_GIT_URI};destsuffix=${AIF2_LLD_GIT_DESTSUFFIX};protocol=${AIF2_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${AIF2_LLD_SRCREV}"
- 
- PV = "1.2.0.0"
-+INC_PR = "r1"
- 
- COMPATIBLE_MACHINE = "k2hk-evm"
- 
--S = "${WORKDIR}/git/ti/drv/aif2"
-+S = "${WORKDIR}/${AIF2_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/aif2-lld/aif2-lld_git.bb b/recipes-bsp/aif2-lld/aif2-lld_git.bb
-index f6e95c2..f310b17 100755
---- a/recipes-bsp/aif2-lld/aif2-lld_git.bb
-+++ b/recipes-bsp/aif2-lld/aif2-lld_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip qmss-lld cppi-lld"
- 
- include aif2-lld.inc
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
+index c33e2df..31b69c2 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
+@@ -1,5 +1,7 @@
+ include hyplnk-lld.inc
  
 +PR = "${INC_PR}.0"
 +
- EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ DEPENDS = "common-csl-ip hyplnk-lld"
  
  do_compile () {
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+index 70b5d80..09fec45 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+@@ -5,21 +5,26 @@ COMPATIBLE_MACHINE = "keystone"
+ 
+ LLDNAME="hyplnk"
+ 
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/${LLDNAME}/COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/${HYPLNK_GIT_DESTSUFFIX}/COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
++
++HYPLNK_GIT_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git"
++HYPLNK_GIT_PROTOCOL = "git"
++HYPLNK_GIT_BRANCH = "master"
++HYPLNK_GIT_DESTSUFFIX = "git/ti/drv/${LLDNAME}"
+ 
+-BRANCH="master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git;destsuffix=git/ti/drv/${LLDNAME};protocol=git;branch=${BRANCH}"
+-FILESPATH_prepend := "${THISDIR}/files"
+ # Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.05
+-SRCREV = "ea2a634578626deaa69608a189d5d7e84e5b7127"
++HYPLNK_SRCREV = "ea2a634578626deaa69608a189d5d7e84e5b7127"
++
++BRANCH="${HYPLNK_GIT_BRANCH}"
++SRC_URI = "${HYPLNK_GIT_URI};destsuffix=${HYPLNK_GIT_DESTSUFFIX};protocol=${HYPLNK_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${HYPLNK_SRCREV}"
+ 
+ PV = "2.1.0.5"
+-PR = "r1"
++INC_PR = "r2"
+ 
+ DEVICELIST = " k2h \
+                k2k \
+                k2e \
+ "
+ 
+-BASEDIR = "${WORKDIR}/git"
+-S = "${BASEDIR}/ti/drv/${LLDNAME}"
++S = "${WORKDIR}/${HYPLNK_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
+index 8be072c..e20ad1f 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
+@@ -1,5 +1,7 @@
+ include hyplnk-lld.inc
+ 
++PR = "${INC_PR}.0"
++
+ DEPENDS = "common-csl-ip"
+ 
+ SRC_URI += "file://init_hyplnk.sh"
 
 
