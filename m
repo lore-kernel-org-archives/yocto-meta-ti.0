@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 108C3E00C4B; Wed,  4 Nov 2015 07:04:27 -0800 (PST)
+	id 17722E00C02; Wed,  4 Nov 2015 07:04:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9FC9AE00C05
-	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:03:54 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B826DE00BEC
+	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 07:03:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0829A52AB2; Wed,  4 Nov 2015 15:03:54 +0000 (UTC)
+	id 6D04E52AB0; Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104150354.0829A52AB2@arago-project.org>
-Date: Wed,  4 Nov 2015 15:03:54 +0000 (UTC)
+Message-Id: <20151104150357.6D04E52AB0@arago-project.org>
+Date: Wed,  4 Nov 2015 15:03:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : srio-lld: Only compatible with k2hk-evm
+Subject: Jacob Stiffler : sa-lld-test: Only build binaries relevent to the machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,66 +37,42 @@ X-List-Received-Date: Wed, 04 Nov 2015 15:04:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 327559a0a53cae4afdcfaa280026873b0a25563a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=327559a0a53cae4afdcfaa280026873b0a25563a
+Branch: fido
+Commit: 685dfa91d3dc09e5c907491650a15ad9b16e60ca
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=685dfa91d3dc09e5c907491650a15ad9b16e60ca
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:31 2015 +0000
+Date:   Wed Nov  4 01:47:29 2015 +0000
 
-srio-lld: Only compatible with k2hk-evm
+sa-lld-test: Only build binaries relevent to the machine
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/srio-lld/srio-lld-test_git.bb |    1 -
- recipes-bsp/srio-lld/srio-lld.inc         |    4 +++-
- recipes-bsp/srio-lld/srio-lld_git.bb      |    1 -
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/sa-lld/sa-lld-test_git.bb |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/srio-lld/srio-lld-test_git.bb b/recipes-bsp/srio-lld/srio-lld-test_git.bb
-index da3e357..6495a12 100644
---- a/recipes-bsp/srio-lld/srio-lld-test_git.bb
-+++ b/recipes-bsp/srio-lld/srio-lld-test_git.bb
-@@ -1,5 +1,4 @@
- DESCRIPTION = "TI SRIO peripheral low level driver unit test and example binaries"
--COMPATIBLE_MACHINE = "keystone"
- DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld srio-lld cmem"
+diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+index 4f74ab6..eeab6ff 100644
+--- a/recipes-bsp/sa-lld/sa-lld-test_git.bb
++++ b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+@@ -4,9 +4,13 @@ DEPENDS = "common-csl-ip cppi-lld qmss-lld pa-lld sa-lld"
  
- include srio-lld.inc
-diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
-index 6e51f79..2172a13 100644
---- a/recipes-bsp/srio-lld/srio-lld.inc
-+++ b/recipes-bsp/srio-lld/srio-lld.inc
-@@ -1,6 +1,8 @@
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/srio/srio_drv.h;beginline=1;endline=41;md5=469096088e072d883ff7eef301b34093"
+ include sa-lld.inc
  
-+COMPATIBLE_MACHINE = "k2hk-evm"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+-DEVICELIST = "k2h k2k k2l k2e"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
- SRIO_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/srio-lld.git"
- SRIO_LLD_GIT_PROTOCOL = "git"
- SRIO_LLD_GIT_BRANCH = "master"
-@@ -14,7 +16,7 @@ SRC_URI = "${SRIO_LLD_GIT_URI};destsuffix=${SRIO_LLD_GIT_DESTSUFFIX};protocol=${
- SRCREV = "${SRIO_LLD_SRCREV}"
++DEVICELIST_k2hk-evm = "k2h k2k"
++DEVICELIST_k2l-evm  = "k2l"
++DEVICELIST_k2e-evm  = "k2e"
  
- PV = "02.00.00.13"
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- DEVICELIST = "k2h k2k"
- 
-diff --git a/recipes-bsp/srio-lld/srio-lld_git.bb b/recipes-bsp/srio-lld/srio-lld_git.bb
-index ba3cc24..48e7633 100644
---- a/recipes-bsp/srio-lld/srio-lld_git.bb
-+++ b/recipes-bsp/srio-lld/srio-lld_git.bb
-@@ -1,5 +1,4 @@
- DESCRIPTION = "TI SRIO peripheral low level driver"
--COMPATIBLE_MACHINE = "keystone"
- 
- DEPENDS="common-csl-ip rm-lld cppi-lld"
+ CHOICELIST = "no yes"
  
 
 
