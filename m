@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 69182E00B2C; Wed,  4 Nov 2015 06:58:06 -0800 (PST)
+	id 7FFF6E00B0B; Wed,  4 Nov 2015 06:58:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23B76E00B2F
-	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:00 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EB32E00B3F
+	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2015 06:58:01 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EECC352AB9; Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
+	id 30F6B52ABC; Wed,  4 Nov 2015 14:58:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151104145759.EECC352AB9@arago-project.org>
-Date: Wed,  4 Nov 2015 14:57:59 +0000 (UTC)
+Message-Id: <20151104145800.30F6B52ABC@arago-project.org>
+Date: Wed,  4 Nov 2015 14:58:00 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : cppi-lld: Clean up recipes
+Subject: Jacob Stiffler : edma3-lld: Clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2801ef9ce5fc3846e61c99e16b39f553e65c632d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2801ef9ce5fc3846e61c99e16b39f553e65c632d
+Commit: 4aaf561265664aa08072428c47827403f5fc6cfd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4aaf561265664aa08072428c47827403f5fc6cfd
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Nov  4 01:47:09 2015 +0000
+Date:   Wed Nov  4 01:47:12 2015 +0000
 
-cppi-lld: Clean up recipes
+edma3-lld: Clean up recipes
 
 * Use INC_PR to track recipe revisions
 * Define variables for GIT SRC_URI parameters
@@ -54,67 +54,59 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cppi-lld/cppi-lld-test_git.bb |    2 ++
- recipes-bsp/cppi-lld/cppi-lld.inc         |   17 ++++++++++++-----
- recipes-bsp/cppi-lld/cppi-lld_git.bb      |    2 ++
- 3 files changed, 16 insertions(+), 5 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    2 +-
+ recipes-bsp/edma3-lld/edma3-lld.inc         |   13 ++++++++++---
+ recipes-bsp/edma3-lld/edma3-lld_git.bb      |    2 +-
+ 3 files changed, 12 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-index 871546e..8f4856a 100644
---- a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-+++ b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "common-csl-ip rm-lld cppi-lld qmss-lld"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index a4e0df6..4ebfd16 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -2,7 +2,7 @@ require edma3-lld.inc
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
  
- include cppi-lld.inc
- 
+-PR = "r1"
 +PR = "${INC_PR}.0"
-+
- CHOICELIST = "yes no"
  
- do_compile () {
-diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
-index 21c8fe0..ae81a3f 100644
---- a/recipes-bsp/cppi-lld/cppi-lld.inc
-+++ b/recipes-bsp/cppi-lld/cppi-lld.inc
-@@ -1,14 +1,21 @@
+ DEPENDS = "ti-cgt6x-native ti-sysbios ti-xdctools"
+ 
+diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+index 28c49e3..8dc80f7 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld.inc
++++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+@@ -2,9 +2,16 @@ DESCRIPTION = "TI EDMA3 low level driver and test code"
  LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/cppi/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
  
 -BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git;destsuffix=git/ti/drv/cppi;protocol=git;branch=${BRANCH}"
-+CPPI_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git"
-+CPPI_LLD_GIT_PROTOCOL = "git"
-+CPPI_LLD_GIT_BRANCH = "master"
-+CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
- 
- # Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.10"
--SRCREV = "97c537fa544a78e83512db3499a49d0bd86fad32"
-+CPPI_LLD_SRCREV = "97c537fa544a78e83512db3499a49d0bd86fad32"
+-SRC_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git;protocol=git;branch=${BRANCH}"
++EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
++EDMA3_LLD_GIT_PROTOCOL = "git"
++EDMA3_LLD_GIT_BRANCH = "master"
 +
-+BRANCH = "${CPPI_LLD_GIT_BRANCH}"
-+SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ # The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_21_RC1
+-SRCREV = "562cba36ccd53e89e6979e99a58374513b543f93"
++EDMA3_LLD_SRCREV = "562cba36ccd53e89e6979e99a58374513b543f93"
 +
-+SRCREV = "${CPPI_LLD_SRCREV}"
- PV = "02.01.00.10"
-+INC_PR = "r1"
++BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
++SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${EDMA3_LLD_SRCREV}"
  
- DEVICELIST = "k2h k2k k2l k2e"
+ PV = "2.12.01.21"
++INC_PR = "r2"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+index 913dd3e..ec6ca47 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+@@ -1,6 +1,6 @@
+ require edma3-lld.inc
  
--BASEDIR = "${WORKDIR}/git"
--S = "${BASEDIR}/ti/drv/cppi"
-+S = "${WORKDIR}/${CPPI_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/cppi-lld/cppi-lld_git.bb b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-index cd419f6..169e0fc 100644
---- a/recipes-bsp/cppi-lld/cppi-lld_git.bb
-+++ b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-@@ -5,6 +5,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld"
- 
- include cppi-lld.inc
- 
+-PR = "r0"
 +PR = "${INC_PR}.0"
-+
- SRC_URI += "file://init_cppi.sh"
  
- inherit update-rc.d
+ COMPATIBLE_MACHINE = "keystone"
+ 
 
 
