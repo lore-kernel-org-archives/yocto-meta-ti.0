@@ -1,46 +1,42 @@
-Return-Path: <h-gou@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 46DFEE007D5; Fri,  6 Nov 2015 13:56:43 -0800 (PST)
+	id 59A48E00A7D; Fri,  6 Nov 2015 18:23:28 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
 	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0189E0071C
-	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2015 13:56:41 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA6Luepu002865
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2015 15:56:40 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA6LueUO009155
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2015 15:56:40 -0600
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.03.0224.002; Fri, 6 Nov 2015 15:56:40 -0600
-From: "Gou, Hongmei" <h-gou@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH 2/2] omap5-sgx-ddk-um-linux: bump SRCREV and
-	other changes to support wayland/DRM on AM4
-Thread-Index: AQHRGABM5ieFk/ib30etU02dGNAoUZ6Pi5MQ
-Date: Fri, 6 Nov 2015 21:56:40 +0000
-Message-ID: <2E957F12D11D904590FA9AF86D366BD926AEC545@DLEE08.ent.ti.com>
-References: <1446666795-21381-1-git-send-email-h-gou@ti.com>
-	<1446666795-21381-3-git-send-email-h-gou@ti.com>
-	<20151105192913.GP25957@edge>
-In-Reply-To: <20151105192913.GP25957@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 087BBE00A26
+	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2015 18:23:22 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA72NLgN019178
+	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2015 20:23:21 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA72NLY0001046
+	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2015 20:23:21 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 6 Nov 2015 20:23:21 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	tA72NLla002441	for <meta-ti@yoctoproject.org>;
+	Fri, 6 Nov 2015 20:23:21 -0600
+Date: Fri, 6 Nov 2015 21:23:20 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1904740723.545.1446863000913.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 2/2] omap5-sgx-ddk-um-linux: bump SRCREV and other changes to support wayland/DRM on AM4
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-11-06_21-01-41
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,104 +49,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2015 21:56:43 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 07 Nov 2015 02:23:28 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_544_480795991.1446863000912"
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Thursday, November 05, 2015 2:29 PM
-> To: Gou, Hongmei
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH 2/2] omap5-sgx-ddk-um-linux: bump SRCREV
-> and other changes to support wayland/DRM on AM4
->=20
-> On Wed, Nov 04, 2015 at 02:53:15PM -0500, Hongmei Gou wrote:
-> > * Support wayland/DRM mode
-> > * Remove powervr.ini which is no longer needed
-> > * Add plugins package to include the necessary .so files
-> >
-> > Signed-off-by: Hongmei Gou <h-gou@ti.com>
-> > ---
-> >  .../libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini           |  3 --=
--
-> >  recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb    | 10
-> ++++++++--
-> >  2 files changed, 8 insertions(+), 5 deletions(-)  delete mode 100644
-> > recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
-> >
-> > diff --git
-> > a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
-> > b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
-> > deleted file mode 100644
-> > index 0657ab8..0000000
-> > ---
-> > a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti43x/powervr.ini
-> > +++ /dev/null
-> > @@ -1,3 +0,0 @@
-> > -[default]
-> > -WindowSystem=3Dnull_libdrm.so
-> > -DisableHWTQTextureUpload=3D1
-> > diff --git
-> > a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > index cd01d6f..557c442 100644
-> > --- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > @@ -12,14 +12,14 @@ BRANCH_ti43x =3D "am4/k4.1"
-> >  SRC_URI =3D "git://git.ti.com/graphics/omap5-sgx-ddk-um-
-> linux.git;protocol=3Dgit;branch=3D${BRANCH}"
-> >  SRCREV_omap-a15 =3D "d63cd6469fff610317a8e1c986f227bb3e7922f6"
-> >  SRCREV_ti33x    =3D "188575c7ba16c00a15499ed88a126af2506fdba5"
-> > -SRCREV_ti43x    =3D "188575c7ba16c00a15499ed88a126af2506fdba5"
-> > +SRCREV_ti43x    =3D "fdf4c0b594ca142a68aabb4c3f82b75be50b46cc"
-> >
-> >  INITSCRIPT_NAME =3D "pvr-init"
-> >  INITSCRIPT_PARAMS =3D "defaults 8"
-> >
-> >  inherit update-rc.d
-> >
-> > -PR =3D "r11"
-> > +PR =3D "r12"
-> >  PROVIDES +=3D "virtual/egl virtual/libgles1 virtual/libgles2"
-> >
-> >  RDEPENDS_${PN} +=3D "libdrm"
-> > @@ -50,8 +50,14 @@ FILES_${PN} +=3D  "${includedir}/* /usr/share/sgx-li=
-b/"
-> >  FILES_${PN} +=3D "${sysconfdir}/init.d/pvr-init"
-> >  FILES_${PN} +=3D "${sysconfdir}/powervr.ini"
-> >
-> > +PACKAGES =3D+ "${PN}-plugins"
-> > +FILES_${PN}-plugins =3D ""
->=20
-> Quick question - have you tried other platforms, like am5, to see if they
-> complain about empty ${PN}-plugins package? You may need to set
-> ALLOW_EMPTY_${PN}-plugins =3D "1", if it causes problems.
+------=_Part_544_480795991.1446863000912
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Thanks for the suggestion. "ALLOW_EMPTY_${PN}-plugins =3D "1"" is indeed ne=
-eded for am5. We have submitted the v2 patch with the suggested change.
+<html>
+<head>
+<title>
+Status for 11/06/15
+</title>
+</head>
+<body>
 
->=20
->=20
-> > +FILES_${PN}-plugins_ti43x =3D "${libdir}/libsrv_init.so ${libdir}/libs=
-rv_um.so
-> ${libdir}/libglslcompiler.so ${libdir}/libpvrws_WAYLAND.so
-> ${libdir}/libpvrws_KMS.so "
-> > +RDEPENDS_${PN} +=3D "${PN}-plugins"
-> > +
-> >  INHIBIT_PACKAGE_STRIP =3D "1"
-> >
-> >  INSANE_SKIP_${PN} +=3D "dev-so ldflags useless-rpaths"
-> > +INSANE_SKIP_${PN}-plugins =3D "dev-so"
-> >
-> >  CLEANBROKEN =3D "1"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+<h2>Status for 11/06/15</h2>
 
+<h2>BUILD_ID: build-2015-11-06_21-02-51</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_544_480795991.1446863000912--
