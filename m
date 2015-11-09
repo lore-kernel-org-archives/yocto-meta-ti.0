@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3B96BE00A9A; Mon,  9 Nov 2015 11:34:11 -0800 (PST)
+	id 40539E00A92; Mon,  9 Nov 2015 11:34:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A46ABE008A2
-	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:07 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B9E3E00927
+	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:08 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 074BF52AA7; Mon,  9 Nov 2015 19:34:06 +0000 (UTC)
+	id C4EB152AB8; Mon,  9 Nov 2015 19:34:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151109193407.074BF52AA7@arago-project.org>
-Date: Mon,  9 Nov 2015 19:34:06 +0000 (UTC)
+Message-Id: <20151109193407.C4EB152AB8@arago-project.org>
+Date: Mon,  9 Nov 2015 19:34:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest
+Subject: Jacob Stiffler : linux: cmem: k2hk-evm: Reduce reserved memory
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 62c61b925f73837c18f706fd5dd321d258bfde7b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=62c61b925f73837c18f706fd5dd321d258bfde7b
+Commit: 6e76e3476d2117ecefc79f56ee8c557154fcd58a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e76e3476d2117ecefc79f56ee8c557154fcd58a
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Nov  9 04:43:51 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Mon Nov  9 23:09:22 2015 +0000
 
-linux-ti-staging: update to the latest
+linux: cmem: k2hk-evm: Reduce reserved memory
 
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
+ recipes-kernel/linux/files/k2hk-evm/cmem.dtsi |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 11e7acc..6e64b8b 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -54,11 +54,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
+index 7e897ab..98e9e7c 100644
+--- a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
++++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
+@@ -7,7 +7,7 @@
+                 };
  
- BRANCH = "ti-lsk-linux-4.1.y"
+                 cmem_block_mem_0: cmem_block_mem@829000000 {
+-                        reg = <0x00000008 0x29000000 0x00000000 0x57000000>;
++                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
+                         no-map;
+                         status = "okay";
+                 };
+@@ -37,7 +37,7 @@
+                 cmem_block_0: cmem_block@0 {
+                         reg = <0>;
+                         memory-region = <&cmem_block_mem_0>;
+-                        cmem-buf-pools = <1 0x00000000 0x57000000>;
++                        cmem-buf-pools = <1 0x00000000 0x17000000>;
+                 };
  
--SRCREV = "8a6bfa3c90407b6588ec58724b0f6c3eefbca8fc"
-+SRCREV = "b9280daf1340ca5a21271d560df522215e7f2d73"
- PV = "4.1.12+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+                 cmem_block_1: cmem_block@1 {
 
 
