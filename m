@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C608E00927; Mon,  9 Nov 2015 11:34:11 -0800 (PST)
+	id 5F9C8E00A92; Mon,  9 Nov 2015 11:34:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57202E00957
-	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:08 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA9EBE008D2
+	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:07 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0C5AF52A5A; Mon,  9 Nov 2015 19:34:07 +0000 (UTC)
+	id 85DA252AB7; Mon,  9 Nov 2015 19:34:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151109193408.0C5AF52A5A@arago-project.org>
+Message-Id: <20151109193407.85DA252AB7@arago-project.org>
 Date: Mon,  9 Nov 2015 19:34:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : multi-kernel: don' t fail removing symlinks when config or commit changes
+Subject: Denys Dmytriyenko : linux-ti-staging-rt: introduce RT version of staging kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,35 +38,63 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 48b7390d3b560a5492154b0379b945929bb0f1c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=48b7390d3b560a5492154b0379b945929bb0f1c8
+Commit: 23391d519f88d8d27104ca90b5e02303fec1d319
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=23391d519f88d8d27104ca90b5e02303fec1d319
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Nov  9 23:19:03 2015 +0000
+Date:   Mon Nov  9 04:43:52 2015 +0000
 
-multi-kernel: don't fail removing symlinks when config or commit changes
+linux-ti-staging-rt: introduce RT version of staging kernel
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/multi-kernel.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../linux/linux-ti-staging-rt-4.1/configs/systest  |    1 +
+ .../linux/linux-ti-staging-rt-4.1/defconfig        |    1 +
+ .../keystone/configs/systest                       |    1 +
+ .../linux-ti-staging-rt-4.1/keystone/defconfig     |    1 +
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb    |    5 +++++
+ 5 files changed, 9 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
-index 64701ed..0b7de91 100644
---- a/recipes-kernel/linux/multi-kernel.inc
-+++ b/recipes-kernel/linux/multi-kernel.inc
-@@ -84,8 +84,8 @@ do_compileconfigs () {
-             do_install
- 
-             # Remove unused symlinks specific to configname
--            rm "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/build"
--            rm "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/source"
-+            rm -f "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/build"
-+            rm -f "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/source"
-             # In case no modules were installed, remove empty dirs
-             rmdir --ignore-fail-on-non-empty "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/kernel"
-             rmdir --ignore-fail-on-non-empty "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/configs/systest b/recipes-kernel/linux/linux-ti-staging-rt-4.1/configs/systest
+new file mode 100644
+index 0000000..28b995e
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/configs/systest
+@@ -0,0 +1 @@
++use-combined-config=ti_config_fragments/rt_system_test_defconfig_fragment
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
+new file mode 100644
+index 0000000..2091fca
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
+@@ -0,0 +1 @@
++use-combined-config=ti_config_fragments/rt_defconfig_fragment
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/configs/systest b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/configs/systest
+new file mode 100644
+index 0000000..68cfc25
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/configs/systest
+@@ -0,0 +1 @@
++use-combined-config=ti_config_fragments/multi_core_system_test_defconfig_fragment
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
+new file mode 100644
+index 0000000..470cf11
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
+@@ -0,0 +1 @@
++use-combined-config=ti_config_fragments/multi_core_defconfig_fragment
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+new file mode 100644
+index 0000000..82e3bc7
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -0,0 +1,5 @@
++require linux-ti-staging_4.1.bb
++
++BRANCH = "ti-rt-linux-4.1.y"
++
++SRCREV = "c6d2ee60de8003e5491ab131307570581529029f"
 
 
