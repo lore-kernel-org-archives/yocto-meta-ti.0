@@ -1,38 +1,38 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F387EE00803; Mon,  9 Nov 2015 09:09:27 -0800 (PST)
+	id E655CE00803; Mon,  9 Nov 2015 09:19:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BD6AE007C9
-	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 09:09:25 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id tA9H9Oid012594
-	for <meta-ti@yoctoproject.org>; Mon, 9 Nov 2015 11:09:25 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tA9H9OnN007735
-	for <meta-ti@yoctoproject.org>; Mon, 9 Nov 2015 11:09:24 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 9 Nov 2015 11:09:24 -0600
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tA9H9OuI031598;	Mon, 9 Nov 2015 11:09:24 -0600
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 9 Nov 2015 12:09:22 -0500
-Message-ID: <1447088962-9815-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] linux: cmem: k2hk-evm: Reduce reserved memory
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC4AEE007C9
+	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 09:19:37 -0800 (PST)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NXK0038S5FRBM60@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 09 Nov 2015 11:19:04 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=qtqOOiqGOCEA:10 a=sozttTNsAAAA:8
+	a=MHww2-gYTvL2n0Cw6EYA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 6FF36161CEC;	Mon,
+	9 Nov 2015 12:19:03 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 09 Nov 2015 12:19:03 -0500
+Message-id: <1447089543-21239-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] multi-kernel: don't fail removing symlinks when config or commit changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,37 +45,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2015 17:09:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Nov 2015 17:19:41 -0000
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/files/k2hk-evm/cmem.dtsi | 4 ++--
+ recipes-kernel/linux/multi-kernel.inc | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-index 7e897ab..98e9e7c 100644
---- a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-@@ -7,7 +7,7 @@
-                 };
+diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
+index 64701ed..0b7de91 100644
+--- a/recipes-kernel/linux/multi-kernel.inc
++++ b/recipes-kernel/linux/multi-kernel.inc
+@@ -84,8 +84,8 @@ do_compileconfigs () {
+             do_install
  
-                 cmem_block_mem_0: cmem_block_mem@829000000 {
--                        reg = <0x00000008 0x29000000 0x00000000 0x57000000>;
-+                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
-                         no-map;
-                         status = "okay";
-                 };
-@@ -37,7 +37,7 @@
-                 cmem_block_0: cmem_block@0 {
-                         reg = <0>;
-                         memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x00000000 0x57000000>;
-+                        cmem-buf-pools = <1 0x00000000 0x17000000>;
-                 };
- 
-                 cmem_block_1: cmem_block@1 {
+             # Remove unused symlinks specific to configname
+-            rm "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/build"
+-            rm "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/source"
++            rm -f "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/build"
++            rm -f "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/source"
+             # In case no modules were installed, remove empty dirs
+             rmdir --ignore-fail-on-non-empty "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/kernel"
+             rmdir --ignore-fail-on-non-empty "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)"
 -- 
-1.9.1
+2.2.0
 
 
