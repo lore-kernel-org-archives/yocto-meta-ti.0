@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0ADB9E00957; Mon,  9 Nov 2015 11:34:12 -0800 (PST)
+	id 09399E00927; Mon,  9 Nov 2015 11:34:12 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0947FE00A70
-	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:10 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94681E009EF
+	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:09 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8FDD152AB7; Mon,  9 Nov 2015 19:34:09 +0000 (UTC)
+	id 61E3E52AA7; Mon,  9 Nov 2015 19:34:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151109193409.8FDD152AB7@arago-project.org>
+Message-Id: <20151109193409.61E3E52AA7@arago-project.org>
 Date: Mon,  9 Nov 2015 19:34:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging-rt: introduce RT version of staging kernel
+Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,63 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a32043d538f796071fdfa4dba2c98db627a4a4a0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a32043d538f796071fdfa4dba2c98db627a4a4a0
+Commit: 0c900b8df37eaf9b237ecaf5b77a4cf5819ce6af
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0c900b8df37eaf9b237ecaf5b77a4cf5819ce6af
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Nov  9 04:43:52 2015 +0000
+Date:   Mon Nov  9 04:43:51 2015 +0000
 
-linux-ti-staging-rt: introduce RT version of staging kernel
+linux-ti-staging: update to the latest
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti-staging-rt-4.1/configs/systest  |    1 +
- .../linux/linux-ti-staging-rt-4.1/defconfig        |    1 +
- .../keystone/configs/systest                       |    1 +
- .../linux-ti-staging-rt-4.1/keystone/defconfig     |    1 +
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb    |    5 +++++
- 5 files changed, 9 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/configs/systest b/recipes-kernel/linux/linux-ti-staging-rt-4.1/configs/systest
-new file mode 100644
-index 0000000..28b995e
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/configs/systest
-@@ -0,0 +1 @@
-+use-combined-config=ti_config_fragments/rt_system_test_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
-new file mode 100644
-index 0000000..2091fca
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
-@@ -0,0 +1 @@
-+use-combined-config=ti_config_fragments/rt_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/configs/systest b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/configs/systest
-new file mode 100644
-index 0000000..68cfc25
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/configs/systest
-@@ -0,0 +1 @@
-+use-combined-config=ti_config_fragments/multi_core_system_test_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
-new file mode 100644
-index 0000000..470cf11
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
-@@ -0,0 +1 @@
-+use-combined-config=ti_config_fragments/multi_core_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-new file mode 100644
-index 0000000..82e3bc7
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -0,0 +1,5 @@
-+require linux-ti-staging_4.1.bb
-+
-+BRANCH = "ti-rt-linux-4.1.y"
-+
-+SRCREV = "c6d2ee60de8003e5491ab131307570581529029f"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 11e7acc..6e64b8b 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -54,11 +54,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.1.y"
+ 
+-SRCREV = "8a6bfa3c90407b6588ec58724b0f6c3eefbca8fc"
++SRCREV = "b9280daf1340ca5a21271d560df522215e7f2d73"
+ PV = "4.1.12+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
