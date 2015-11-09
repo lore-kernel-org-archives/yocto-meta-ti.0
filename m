@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0DBB1E00978; Mon,  9 Nov 2015 11:34:12 -0800 (PST)
+	id 0CEEFE008D2; Mon,  9 Nov 2015 11:34:12 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF0ABE00A26
-	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:09 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DFA5E00A7D
+	for <meta-ti@yoctoproject.org>; Mon,  9 Nov 2015 11:34:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BE86952A5A; Mon,  9 Nov 2015 19:34:09 +0000 (UTC)
+	id E5A8A52A88; Mon,  9 Nov 2015 19:34:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151109193409.BE86952A5A@arago-project.org>
+Message-Id: <20151109193409.E5A8A52A88@arago-project.org>
 Date: Mon,  9 Nov 2015 19:34:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : linux: cmem: k2hk-evm: Reduce reserved memory
+Subject: Denys Dmytriyenko : multi-kernel: don' t fail removing symlinks when config or commit changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,35 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 7f96040e3a6e7e664ea23673953d9666cfcdc050
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f96040e3a6e7e664ea23673953d9666cfcdc050
+Commit: 634f676c8e7ce4e88fd5248b12e319b18f0ccd19
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=634f676c8e7ce4e88fd5248b12e319b18f0ccd19
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Nov  9 23:09:22 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Nov  9 23:19:03 2015 +0000
 
-linux: cmem: k2hk-evm: Reduce reserved memory
+multi-kernel: don't fail removing symlinks when config or commit changes
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/files/k2hk-evm/cmem.dtsi |    4 ++--
+ recipes-kernel/linux/multi-kernel.inc |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-index 7e897ab..98e9e7c 100644
---- a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-@@ -7,7 +7,7 @@
-                 };
+diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
+index 64701ed..0b7de91 100644
+--- a/recipes-kernel/linux/multi-kernel.inc
++++ b/recipes-kernel/linux/multi-kernel.inc
+@@ -84,8 +84,8 @@ do_compileconfigs () {
+             do_install
  
-                 cmem_block_mem_0: cmem_block_mem@829000000 {
--                        reg = <0x00000008 0x29000000 0x00000000 0x57000000>;
-+                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
-                         no-map;
-                         status = "okay";
-                 };
-@@ -37,7 +37,7 @@
-                 cmem_block_0: cmem_block@0 {
-                         reg = <0>;
-                         memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x00000000 0x57000000>;
-+                        cmem-buf-pools = <1 0x00000000 0x17000000>;
-                 };
- 
-                 cmem_block_1: cmem_block@1 {
+             # Remove unused symlinks specific to configname
+-            rm "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/build"
+-            rm "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/source"
++            rm -f "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/build"
++            rm -f "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/source"
+             # In case no modules were installed, remove empty dirs
+             rmdir --ignore-fail-on-non-empty "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)/kernel"
+             rmdir --ignore-fail-on-non-empty "${D}/lib/modules/$(cut -d\" -f2 ${B}/include/generated/utsrelease.h)"
 
 
