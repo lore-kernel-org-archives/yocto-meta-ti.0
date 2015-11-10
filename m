@@ -1,43 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CC148E00BAB; Tue, 10 Nov 2015 07:46:35 -0800 (PST)
+	id C11C1E00473; Tue, 10 Nov 2015 10:52:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C508E00ADB
-	for <meta-ti@yoctoproject.org>; Tue, 10 Nov 2015 07:46:33 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id tAAFkX7f027751
-	for <meta-ti@yoctoproject.org>; Tue, 10 Nov 2015 09:46:33 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAAFkXXQ021389
-	for <meta-ti@yoctoproject.org>; Tue, 10 Nov 2015 09:46:33 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 10 Nov 2015 09:46:33 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAAFkWrE030216;
-	Tue, 10 Nov 2015 09:46:33 -0600
-Date: Tue, 10 Nov 2015 10:46:17 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Gou, Hongmei" <h-gou@ti.com>
-Message-ID: <20151110154617.GA3272@edge>
-References: <1446680984-26212-1-git-send-email-h-gou@ti.com>
-	<20151109190252.GV25957@edge>
-	<2E957F12D11D904590FA9AF86D366BD926AEE0B7@DLEE08.ent.ti.com>
-MIME-Version: 1.0
-In-Reply-To: <2E957F12D11D904590FA9AF86D366BD926AEE0B7@DLEE08.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] omap5-sgx-ddk-um-linux: bump SRCREV and update powervr.ini and .so inclusion for AM3
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [206.46.173.25 listed in list.dnswl.org]
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93B62E00343
+	for <meta-ti@yoctoproject.org>; Tue, 10 Nov 2015 10:52:02 -0800 (PST)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173025.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NXM000RD4CTAF30@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 10 Nov 2015 12:51:08 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=qtqOOiqGOCEA:10 a=sozttTNsAAAA:8
+	a=Gb0LvP4lQJUKMwJ9OU4A:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 11DE9161CEC;	Tue,
+	10 Nov 2015 13:50:53 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 10 Nov 2015 13:50:52 -0500
+Message-id: <1447181452-20618-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] u-boot-ti-staging: update to the latest, change am57/x15 defconfig name
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,100 +45,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2015 15:46:35 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Nov 2015 18:52:05 -0000
 
-Thanks, pushed.
+From: Denys Dmytriyenko <denys@ti.com>
 
-On Mon, Nov 09, 2015 at 05:50:38PM -0500, Gou, Hongmei wrote:
-> The patch is rebased and submitted.
-> 
-> > -----Original Message-----
-> > From: Dmytriyenko, Denys
-> > Sent: Monday, November 09, 2015 2:03 PM
-> > To: Gou, Hongmei
-> > Cc: meta-ti@yoctoproject.org
-> > Subject: Re: [meta-ti] [PATCH] omap5-sgx-ddk-um-linux: bump SRCREV and
-> > update powervr.ini and .so inclusion for AM3
-> > 
-> > This would need to be rebased due to v2 of previous patch.
-> > 
-> > 
-> > On Wed, Nov 04, 2015 at 06:49:44PM -0500, Hongmei Gou wrote:
-> > > * Bump SRCREV for DRM FLIP mode support, and update powervr.ini
-> > correspondingly
-> > > * Add plugins package to include the necessary .so files
-> > >
-> > > Signed-off-by: Hongmei Gou <h-gou@ti.com>
-> > > ---
-> > >  recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini | 3
-> > ++-
-> > >  recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb       | 7 ++++-
-> > --
-> > >  2 files changed, 6 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-
-> > linux/ti33x/powervr.ini b/recipes-graphics/libgles/omap5-sgx-ddk-um-
-> > linux/ti33x/powervr.ini
-> > > index 0657ab8..5b5608e 100644
-> > > --- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
-> > > +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux/ti33x/powervr.ini
-> > > @@ -1,3 +1,4 @@
-> > >  [default]
-> > > -WindowSystem=null_libdrm.so
-> > > +WindowSystem=libpvrDRMWSEGL_FRONT.so
-> > > +#WindowSystem=libpvrDRMWSEGL.so
-> > >  DisableHWTQTextureUpload=1
-> > > diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > > index 557c442..b8a0445 100644
-> > > --- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > > +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-> > > @@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-
-> > DDK-UM-Manifest.doc;md5=360d293d
-> > >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > >
-> > >  BRANCH_omap-a15 = "master"
-> > > -BRANCH_ti33x = "am4/k4.1"
-> > > +BRANCH_ti33x = "am3/k4.1"
-> > >  BRANCH_ti43x = "am4/k4.1"
-> > >
-> > >  SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-
-> > linux.git;protocol=git;branch=${BRANCH}"
-> > >  SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
-> > > -SRCREV_ti33x    = "188575c7ba16c00a15499ed88a126af2506fdba5"
-> > > +SRCREV_ti33x    = "b535b96043ae2206e0c3d24b66599ca0fbe706d3"
-> > >  SRCREV_ti43x    = "fdf4c0b594ca142a68aabb4c3f82b75be50b46cc"
-> > >
-> > >  INITSCRIPT_NAME = "pvr-init"
-> > > @@ -19,7 +19,7 @@ INITSCRIPT_PARAMS = "defaults 8"
-> > >
-> > >  inherit update-rc.d
-> > >
-> > > -PR = "r12"
-> > > +PR = "r13"
-> > >  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
-> > >
-> > >  RDEPENDS_${PN} += "libdrm"
-> > > @@ -53,6 +53,7 @@ FILES_${PN} += "${sysconfdir}/powervr.ini"
-> > >  PACKAGES =+ "${PN}-plugins"
-> > >  FILES_${PN}-plugins = ""
-> > >  FILES_${PN}-plugins_ti43x = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so
-> > ${libdir}/libglslcompiler.so ${libdir}/libpvrws_WAYLAND.so
-> > ${libdir}/libpvrws_KMS.so "
-> > > +FILES_${PN}-plugins_ti33x = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so
-> > ${libdir}/libglslcompiler.so ${libdir}/libpvrDRMWSEGL.so
-> > ${libdir}/libpvrDRMWSEGL_FRONT.so "
-> > >  RDEPENDS_${PN} += "${PN}-plugins"
-> > >
-> > >  INHIBIT_PACKAGE_STRIP = "1"
-> > > --
-> > > 1.9.1
-> > >
-> > > --
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/machine/am57xx-evm.conf                    | 2 +-
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 95d3fc7..8d5d5cc 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -10,7 +10,7 @@ IMAGE_FSTYPES += "ubi tar.gz"
+ 
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+-UBOOT_MACHINE = "beagle_x15_config"
++UBOOT_MACHINE = "am57xx_evm_config"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+ # in your kernel port may require changes in these variables.  For more
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index f0fd057..13d05fe 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ 
+-PR = "r12"
++PR = "r13"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "12cbafb605ea962dfdbf3395ccd7c14f052961cb"
++SRCREV = "f3171e0a0d41bc79f819a1b85563ef7c643bf59b"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+-- 
+2.2.0
+
 
