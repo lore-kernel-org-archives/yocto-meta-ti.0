@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C363AE00B94; Tue, 10 Nov 2015 07:45:41 -0800 (PST)
+	id 96C5EE00BDC; Tue, 10 Nov 2015 07:46:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA2FCE00ADB
-	for <meta-ti@yoctoproject.org>; Tue, 10 Nov 2015 07:45:38 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79804E00AF2
+	for <meta-ti@yoctoproject.org>; Tue, 10 Nov 2015 07:46:01 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0223252A42; Tue, 10 Nov 2015 15:45:37 +0000 (UTC)
+	id 34D8252A42; Tue, 10 Nov 2015 15:46:01 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151110154538.0223252A42@arago-project.org>
-Date: Tue, 10 Nov 2015 15:45:37 +0000 (UTC)
+Message-Id: <20151110154601.34D8252A42@arago-project.org>
+Date: Tue, 10 Nov 2015 15:46:01 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : omap5-sgx-ddk-um-linux: bump SRCREV and update powervr. ini and .so inclusion for AM3
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2015 15:45:41 -0000
+X-List-Received-Date: Tue, 10 Nov 2015 15:46:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: cd3fcb02fc02897e3c771e274f6af2ddfb44014b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cd3fcb02fc02897e3c771e274f6af2ddfb44014b
+Branch: fido
+Commit: f7bc271ca635e912298fab03cece6640643448f9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f7bc271ca635e912298fab03cece6640643448f9
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Tue Nov 10 04:49:25 2015 +0000
