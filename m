@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BCBF7E00C2A; Thu, 12 Nov 2015 05:15:43 -0800 (PST)
+	id BC294E00C30; Thu, 12 Nov 2015 05:15:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5395DE00C2E
-	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2015 05:15:36 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C2E93E00C30
+	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2015 05:15:38 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 11F1C52AC3; Thu, 12 Nov 2015 13:15:36 +0000 (UTC)
+	id 388F452AC5; Thu, 12 Nov 2015 13:15:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151112131536.11F1C52AC3@arago-project.org>
+Message-Id: <20151112131536.388F452AC5@arago-project.org>
 Date: Thu, 12 Nov 2015 13:15:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.1.13, add am571-idk DTB
+Subject: Denys Dmytriyenko : ti-ipc: update to 3.41.00.02-eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,64 +38,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d69c4241c63429e8121946075f96df8febc02a79
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d69c4241c63429e8121946075f96df8febc02a79
+Commit: f5721982b14fefc337d227b1e9cb330a05f096f7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f5721982b14fefc337d227b1e9cb330a05f096f7
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Nov 12 08:04:37 2015 +0000
+Date:   Thu Nov 12 08:04:39 2015 +0000
 
-linux-ti-staging: update to 4.1.13, add am571-idk DTB
+ti-ipc: update to 3.41.00.02-eng
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    6 +++++-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    8 ++++----
- 2 files changed, 9 insertions(+), 5 deletions(-)
+ recipes-ti/ipc/ti-ipc_git.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 82e3bc7..35c4910 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -1,5 +1,9 @@
- require linux-ti-staging_4.1.bb
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index ac899bf..e1432e0 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
  
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
-+
- BRANCH = "ti-rt-linux-4.1.y"
+ DEPENDS += "virtual/kernel"
  
--SRCREV = "c6d2ee60de8003e5491ab131307570581529029f"
-+SRCREV = "689b0790980be1cc3eb84e435c1bc87cd1e91458"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 6e64b8b..afaa25c 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -35,7 +35,7 @@ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
- KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
--KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-evm.dtb am572x-idk.dtb"
-+KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-evm.dtb am572x-idk.dtb am571x-idk.dtb"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
- KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
-@@ -54,11 +54,11 @@ S = "${WORKDIR}/git"
+-PV = "3.40.01.08"
++PV = "3.41.00.02"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+-BRANCH = "3.40"
++BRANCH = "ipc-next"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            file://0001-Add-kernel-build-dir.patch \
+            "
+-# Commit corresponds to 3.40.01.08
+-SRCREV = "239354b731b77e30a70230ebb54a31a83fc8b12f"
++# Commit corresponds to 3.41.00.02-eng
++SRCREV = "b34c8ada4ed243cd52e504bf2c6fb3451dc730f8"
  
--SRCREV = "b9280daf1340ca5a21271d560df522215e7f2d73"
--PV = "4.1.12+git${SRCPV}"
-+SRCREV = "e7ce6b9cdee62083862c3d86853819d871f853de"
-+PV = "4.1.13+git${SRCPV}"
+ S = "${WORKDIR}/git"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
