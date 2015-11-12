@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F0A01E00C5D; Thu, 12 Nov 2015 06:20:26 -0800 (PST)
+	id 034DDE00C5B; Thu, 12 Nov 2015 13:24:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40864E00C55
-	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2015 06:20:01 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 80F2B52AC3; Thu, 12 Nov 2015 14:20:00 +0000 (UTC)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D05CDE00C54
+	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2015 13:23:54 -0800 (PST)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NXQ00M2J0RL39U0@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 12 Nov 2015 15:23:45 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=qtqOOiqGOCEA:10 a=sozttTNsAAAA:8
+	a=pImDBxTM9eZ8YWJjh58A:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 15B17161D05;	Thu,
+	12 Nov 2015 16:23:45 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20151112142000.80F2B52AC3@arago-project.org>
-Date: Thu, 12 Nov 2015 14:20:00 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-ipc: add k2g platform variables
+Date: Thu, 12 Nov 2015 16:23:44 -0500
+Message-id: <1447363424-3582-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] HACK: ti-ipc: temporarily use k2e variables for k2g platform
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +45,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 14:20:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Nov 2015 21:24:00 -0000
 
-Module: meta-ti
-Branch: fido
-Commit: a03cf927e888d451c1aa8abd5ae782ec45c698c9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a03cf927e888d451c1aa8abd5ae782ec45c698c9
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Nov 12 20:17:17 2015 +0000
-
-ti-ipc: add k2g platform variables
+Full support is not yet available, but should unblock k2g builds
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
-
- recipes-ti/ipc/ti-ipc_git.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes-ti/ipc/ti-ipc_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-index e1432e0..c2ecf57 100644
+index c2ecf57..a6b6a90 100644
 --- a/recipes-ti/ipc/ti-ipc_git.bb
 +++ b/recipes-ti/ipc/ti-ipc_git.bb
-@@ -26,6 +26,7 @@ PLATFORM_dra7xx = "DRA7XX"
+@@ -26,7 +26,7 @@ PLATFORM_dra7xx = "DRA7XX"
  PLATFORM_k2hk-evm = "TCI6638"
  PLATFORM_k2l-evm = "TCI6630"
  PLATFORM_k2e-evm = "66AK2E"
-+PLATFORM_k2g-evm = "66AK2G"
+-PLATFORM_k2g-evm = "66AK2G"
++PLATFORM_k2g-evm = "66AK2E"
  
  DAEMON = "UNKNOWN"
  DAEMON_omap5-evm = "lad_omap54xx_smp"
-@@ -33,6 +34,7 @@ DAEMON_dra7xx = "lad_dra7xx"
+@@ -34,7 +34,7 @@ DAEMON_dra7xx = "lad_dra7xx"
  DAEMON_k2hk-evm = "lad_tci6638"
  DAEMON_k2l-evm = "lad_tci6630"
  DAEMON_k2e-evm = "lad_66ak2e"
-+DAEMON_k2g-evm = "lad_66ak2g"
+-DAEMON_k2g-evm = "lad_66ak2g"
++DAEMON_k2g-evm = "lad_66ak2e"
  
  inherit autotools-brokensep pkgconfig update-rc.d
  
+-- 
+2.2.0
 
 
