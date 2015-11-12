@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8BF26E00C32; Thu, 12 Nov 2015 05:15:41 -0800 (PST)
+	id 8D1C6E00C31; Thu, 12 Nov 2015 05:15:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4ECAFE00C1B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4FFA0E00C25
 	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2015 05:15:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EB75752AC1; Thu, 12 Nov 2015 13:15:35 +0000 (UTC)
+	id DC50452A6D; Thu, 12 Nov 2015 13:15:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151112131535.EB75752AC1@arago-project.org>
+Message-Id: <20151112131535.DC50452A6D@arago-project.org>
 Date: Thu, 12 Nov 2015 13:15:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-ipc: update to 3.41.00.02-eng
+Subject: Denys Dmytriyenko : kselftests: make machine-specific due to kernel-specific conditionals
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,44 +38,33 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: dc0eb8df656d8bba910ea174da2cc458ee1b740e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dc0eb8df656d8bba910ea174da2cc458ee1b740e
+Commit: 24f3bd7059201b884b00308fc00becb576344f62
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24f3bd7059201b884b00308fc00becb576344f62
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Nov 12 08:04:39 2015 +0000
+Date:   Thu Nov 12 08:04:38 2015 +0000
 
-ti-ipc: update to 3.41.00.02-eng
+kselftests: make machine-specific due to kernel-specific conditionals
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-kernel/kselftests/kselftests_4.1.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-index ac899bf..e1432e0 100644
---- a/recipes-ti/ipc/ti-ipc_git.bb
-+++ b/recipes-ti/ipc/ti-ipc_git.bb
-@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+diff --git a/recipes-kernel/kselftests/kselftests_4.1.bb b/recipes-kernel/kselftests/kselftests_4.1.bb
+index 38cb76b..2dced11 100644
+--- a/recipes-kernel/kselftests/kselftests_4.1.bb
++++ b/recipes-kernel/kselftests/kselftests_4.1.bb
+@@ -9,6 +9,8 @@ SRC_URI[sha256sum] = "caf51f085aac1e1cea4d00dbbf3093ead07b551fc07b31b2a989c05f8e
  
- DEPENDS += "virtual/kernel"
+ S = "${WORKDIR}/linux-${PV}"
  
--PV = "3.40.01.08"
-+PV = "3.41.00.02"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
+ DEPENDS = "virtual/kernel popt"
  
--BRANCH = "3.40"
-+BRANCH = "ipc-next"
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-            file://tiipclad-daemon.sh \
-            file://0001-Add-kernel-build-dir.patch \
-            "
--# Commit corresponds to 3.40.01.08
--SRCREV = "239354b731b77e30a70230ebb54a31a83fc8b12f"
-+# Commit corresponds to 3.41.00.02-eng
-+SRCREV = "b34c8ada4ed243cd52e504bf2c6fb3451dc730f8"
- 
- S = "${WORKDIR}/git"
- 
+ inherit kernel-arch
 
 
