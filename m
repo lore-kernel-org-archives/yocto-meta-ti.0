@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4A9EAE00C61; Thu, 12 Nov 2015 14:35:56 -0800 (PST)
+	id 4B4A3E00C56; Thu, 12 Nov 2015 14:35:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A21CE00C56
-	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2015 14:35:51 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2B93AE00C58
+	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2015 14:35:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0C9FE52ACD; Thu, 12 Nov 2015 22:35:50 +0000 (UTC)
+	id B38D652AD0; Thu, 12 Nov 2015 22:35:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151112223551.0C9FE52ACD@arago-project.org>
-Date: Thu, 12 Nov 2015 22:35:50 +0000 (UTC)
+Message-Id: <20151112223551.B38D652AD0@arago-project.org>
+Date: Thu, 12 Nov 2015 22:35:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : HACK: ti-ipc: temporarily use k2e variables for k2g platform
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 12 Nov 2015 22:35:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: f6fd332ad50d5303c6b1dad2d35079642b0ca893
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f6fd332ad50d5303c6b1dad2d35079642b0ca893
+Branch: master
+Commit: 3b55cafa6c60a307bcfcc82f38b73ee642a5c174
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3b55cafa6c60a307bcfcc82f38b73ee642a5c174
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Nov 13 03:23:44 2015 +0000
