@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 22480E007C3; Wed, 11 Nov 2015 18:04:52 -0800 (PST)
+	id 413B5E006F3; Wed, 11 Nov 2015 18:04:52 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,28 +13,28 @@ X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
 	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 02977E0049B
-	for <meta-ti@yoctoproject.org>; Wed, 11 Nov 2015 18:04:46 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DA1CE005B7
+	for <meta-ti@yoctoproject.org>; Wed, 11 Nov 2015 18:04:49 -0800 (PST)
 Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NXO00BZGJ3SUF90@vms173019.mailsrvcs.net> for
+	with ESMTPSA id <0NXO00BZHJ3SUF90@vms173019.mailsrvcs.net> for
 	meta-ti@yoctoproject.org; Wed, 11 Nov 2015 20:04:40 -0600 (CST)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=qtqOOiqGOCEA:10 a=sozttTNsAAAA:8
-	a=xejpMw4v_WMwpW67jmkA:9
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=eIhxMilvRf8A:10 a=qtqOOiqGOCEA:10
+	a=sozttTNsAAAA:8	a=vyFQFkZqqdnf2NspWiUA:9
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 05365161D0B;	Wed,
+	by gandalf.denix.org (Postfix) with ESMTP id 102AC161D0C;	Wed,
 	11 Nov 2015 21:04:40 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 11 Nov 2015 21:04:38 -0500
-Message-id: <1447293879-4110-2-git-send-email-denis@denix.org>
+Date: Wed, 11 Nov 2015 21:04:39 -0500
+Message-id: <1447293879-4110-3-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
 In-reply-to: <1447293879-4110-1-git-send-email-denis@denix.org>
 References: <1447293879-4110-1-git-send-email-denis@denix.org>
-Subject: [PATCH] kselftests: make machine-specific due to kernel-specific conditionals
+Subject: [PATCH] ti-ipc: update to 3.41.00.02-eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,22 +53,33 @@ From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/kselftests/kselftests_4.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-ti/ipc/ti-ipc_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/kselftests/kselftests_4.1.bb b/recipes-kernel/kselftests/kselftests_4.1.bb
-index 38cb76b..2dced11 100644
---- a/recipes-kernel/kselftests/kselftests_4.1.bb
-+++ b/recipes-kernel/kselftests/kselftests_4.1.bb
-@@ -9,6 +9,8 @@ SRC_URI[sha256sum] = "caf51f085aac1e1cea4d00dbbf3093ead07b551fc07b31b2a989c05f8e
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index ac899bf..e1432e0 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
  
- S = "${WORKDIR}/linux-${PV}"
+ DEPENDS += "virtual/kernel"
  
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
- DEPENDS = "virtual/kernel popt"
+-PV = "3.40.01.08"
++PV = "3.41.00.02"
  
- inherit kernel-arch
+-BRANCH = "3.40"
++BRANCH = "ipc-next"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            file://0001-Add-kernel-build-dir.patch \
+            "
+-# Commit corresponds to 3.40.01.08
+-SRCREV = "239354b731b77e30a70230ebb54a31a83fc8b12f"
++# Commit corresponds to 3.41.00.02-eng
++SRCREV = "b34c8ada4ed243cd52e504bf2c6fb3451dc730f8"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.2.0
 
