@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0DB6CE00B2E; Fri, 13 Nov 2015 22:23:35 -0800 (PST)
+	id 0E78AE00AEE; Fri, 13 Nov 2015 22:23:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,12 +13,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.0 TO_NO_BRKTS_DYNIP To: lacks brackets and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5C61E00AD9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E487EE00AB7
 	for <meta-ti@yoctoproject.org>; Fri, 13 Nov 2015 22:23:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E2E0D52AD6; Sat, 14 Nov 2015 06:23:30 +0000 (UTC)
+	id 86CBB52AD5; Sat, 14 Nov 2015 06:23:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151114062330.E2E0D52AD6@arago-project.org>
+Message-Id: <20151114062330.86CBB52AD5@arago-project.org>
 Date: Sat, 14 Nov 2015 06:23:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : cppi, qmss, traceframework: set sane defaults when platform is not defined
@@ -38,9 +38,9 @@ X-List-Received-Date: Sat, 14 Nov 2015 06:23:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a31a7a6e71b742f32401aec4bf54951352361c2b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a31a7a6e71b742f32401aec4bf54951352361c2b
+Branch: fido
+Commit: 610d0ecdc1b42bb9b0428db387093cad73cdbdd9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=610d0ecdc1b42bb9b0428db387093cad73cdbdd9
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Nov 14 11:26:30 2015 +0000
