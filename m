@@ -1,27 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B3C56E007C9; Sun, 15 Nov 2015 22:18:44 -0800 (PST)
+	id 49B13E0086A; Mon, 16 Nov 2015 21:37:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	TO_NO_BRKTS_DYNIP autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-	*  0.4 TO_NO_BRKTS_DYNIP To: lacks brackets and dynamic rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 625FFE007C9
-	for <meta-ti@yoctoproject.org>; Sun, 15 Nov 2015 22:18:41 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D63AB52A9B; Mon, 16 Nov 2015 06:18:40 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20151116061840.D63AB52A9B@arago-project.org>
-Date: Mon, 16 Nov 2015 06:18:40 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : traceframework: overwrite instead of append to DEVICELIST var
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F33FE00803
+	for <meta-ti@yoctoproject.org>; Mon, 16 Nov 2015 21:37:47 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tAH5bklS032096
+	for <meta-ti@yoctoproject.org>; Mon, 16 Nov 2015 23:37:46 -0600
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAH5bkBD006615
+	for <meta-ti@yoctoproject.org>; Mon, 16 Nov 2015 23:37:46 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 16 Nov 2015 23:37:47 -0600
+Received: from ares-ubuntu2.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	tAH5bkE2023069;	Mon, 16 Nov 2015 23:37:46 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 17 Nov 2015 00:37:43 -0500
+Message-ID: <1447738663-32314-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] ti-ipc-rtos: Update to new version of IPC 3.41.0.3_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,52 +45,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2015 06:18:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 Nov 2015 05:37:53 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: fido
-Commit: 2210ae2cdacc22105b76c5fa45957ebec104f1c6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2210ae2cdacc22105b76c5fa45957ebec104f1c6
+- Update to new version of IPC 3.41.0.3_eng
+- Add recipe to build ti-ipc-rtos from git repo
+- Remove K2G hack
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Nov 16 10:27:21 2015 +0000
-
-traceframework: overwrite instead of append to DEVICELIST var
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
+ recipes-ti/ipc/ti-ipc-rtos.inc           |  9 +++--
+ recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb |  9 -----
+ recipes-ti/ipc/ti-ipc-rtos_git.bb        | 62 ++++++++++++++++++++++++++++++++
+ recipes-ti/ipc/ti-ipc_git.bb             | 10 +++---
+ 4 files changed, 74 insertions(+), 16 deletions(-)
+ delete mode 100644 recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+ create mode 100644 recipes-ti/ipc/ti-ipc-rtos_git.bb
 
- recipes-bsp/traceframework/traceframework_git.bb |   10 +++++-----
- 1 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
-index d6b5023..31818c6 100644
---- a/recipes-bsp/traceframework/traceframework_git.bb
-+++ b/recipes-bsp/traceframework/traceframework_git.bb
-@@ -15,17 +15,17 @@ SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX}
- SRCREV = "${TRACEFRAMEWORK_SRCREV}"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index d14c756..56adcc8 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -6,9 +6,14 @@ LICENSE = "BSD"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
  
- PV = "01.01.01.07"
--PR = "r3"
-+PR = "r4"
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_${PV}.zip;name=ipczip"
++BRANCH = "ipc-next"
  
- COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- DEPENDS = "cuia"
+-S = "${WORKDIR}/ipc_${PV}"
++SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
++
++#Corresponds to 3.41.00.03_eng
++SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
++
++S = "${WORKDIR}/git"
  
- DEVICELIST = "k2k k2h k2e k2l"
--DEVICELIST_append_tci6614-evm = "c6614"
--DEVICELIST_append_k2hk-evm    = "k2k k2h"
--DEVICELIST_append_k2e-evm     = "k2e"
--DEVICELIST_append_k2l-evm     = "k2l"
-+DEVICELIST_tci6614-evm = "c6614"
-+DEVICELIST_k2hk-evm    = "k2k k2h"
-+DEVICELIST_k2e-evm     = "k2e"
-+DEVICELIST_k2l-evm     = "k2l"
+ do_install() {
+     install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+deleted file mode 100644
+index 7c93695..0000000
+--- a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require ti-ipc-rtos.inc
+-
+-PV = "3_40_01_08"
+-PR = "r0"
+-
+-LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+-
+-SRC_URI[ipczip.md5sum] = "738e1d54da9fab94899ad162f1ad78de"
+-SRC_URI[ipczip.sha256sum] = "8cc7d40ad7eab916eae109b355dc7e7876c6ab82e3b40bf5b6bf60474312d6cf"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+new file mode 100644
+index 0000000..d78bd63
+--- /dev/null
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -0,0 +1,62 @@
++require recipes-ti/ipc/ti-ipc-rtos.inc
++require recipes-ti/includes/ti-paths-append.inc
++
++PV = "3_41_00_03_eng"
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
++
++SRC_URI[ipczip.md5sum] = "738e1d54da9fab94899ad162f1ad78de"
++SRC_URI[ipczip.sha256sum] = "8cc7d40ad7eab916eae109b355dc7e7876c6ab82e3b40bf5b6bf60474312d6cf"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PLATFORM = "UNKNOWN"
++PLATFORM_omap5-evm = "OMAP54XX"
++PLATFORM_dra7xx = "DRA7XX"
++PLATFORM_k2hk-evm = "TCI6638"
++PLATFORM_k2l-evm = "TCI6630"
++PLATFORM_k2e-evm = "66AK2E"
++PLATFORM_k2g-evm = "66AK2G"
++
++DEPENDS += "ti-cgt6x-native ti-xdctools ti-sysbios"
++
++IPC_TARGETS = ""
++IPC_TARGETS_omap-a15 = "\
++    gnu.targets.arm.A15F="${A15_TOOLCHAIN_INSTALL_DIR}" \
++    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++    ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
++    ti.targets.arm.elf.M4F="${M4_TOOLCHAIN_INSTALL_DIR}" \
++"
++
++IPC_TARGETS_keystone = " \
++    gnu.targets.arm.A15F="${A15_TOOLCHAIN_INSTALL_DIR}" \
++    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++"
++
++EXTRA_OEMAKE = "\
++    PLATFORM=${PLATFORM} \
++    XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
++    BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
++    ${IPC_TARGETS} \
++"
++
++do_compile() {
++  oe_runmake -f ipc-bios.mak clean
++  oe_runmake -f ipc-bios.mak all
++}
++
++do_compile_append() {
++  sourceipk_do_create_srcipk
++}
++
++do_install_append() {
++    install -d ${D}${libdir}/firmware
++    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${libdir}/firmware/
++}
++
++PACKAGES =+ "${PN}-fw"
++FILES_${PN}-fw = "${libdir}/firmware/*"
++
++INSANE_SKIP_${PN}-fw += "arch"
++INSANE_SKIP_${PN}-dev += "arch"
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index a6b6a90..00e05f8 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
  
- PACKAGES =+ "${PN}-test"
+ DEPENDS += "virtual/kernel"
  
+-PV = "3.41.00.02"
++PV = "3.41.00.03_eng"
+ 
+ BRANCH = "ipc-next"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            file://0001-Add-kernel-build-dir.patch \
+            "
+-# Commit corresponds to 3.41.00.02-eng
+-SRCREV = "b34c8ada4ed243cd52e504bf2c6fb3451dc730f8"
++# Commit corresponds to 3.41.00.03-eng
++SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -26,7 +26,7 @@ PLATFORM_dra7xx = "DRA7XX"
+ PLATFORM_k2hk-evm = "TCI6638"
+ PLATFORM_k2l-evm = "TCI6630"
+ PLATFORM_k2e-evm = "66AK2E"
+-PLATFORM_k2g-evm = "66AK2E"
++PLATFORM_k2g-evm = "66AK2G"
+ 
+ DAEMON = "UNKNOWN"
+ DAEMON_omap5-evm = "lad_omap54xx_smp"
+@@ -34,7 +34,7 @@ DAEMON_dra7xx = "lad_dra7xx"
+ DAEMON_k2hk-evm = "lad_tci6638"
+ DAEMON_k2l-evm = "lad_tci6630"
+ DAEMON_k2e-evm = "lad_66ak2e"
+-DAEMON_k2g-evm = "lad_66ak2e"
++DAEMON_k2g-evm = "lad_66ak2g"
+ 
+ inherit autotools-brokensep pkgconfig update-rc.d
+ 
+-- 
+1.9.1
 
 
