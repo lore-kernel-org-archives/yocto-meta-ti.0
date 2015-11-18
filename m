@@ -1,41 +1,44 @@
-Return-Path: <Fahad_Arslan@mentor.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 72018E00B52; Wed, 18 Nov 2015 07:16:36 -0800 (PST)
+	id 719D5E00B44; Wed, 18 Nov 2015 07:30:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [192.94.38.131 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0306E00B19
-	for <meta-ti@yoctoproject.org>; Wed, 18 Nov 2015 07:16:34 -0800 (PST)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-03.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1Zz4TJ-0006jP-Mn from Fahad_Arslan@mentor.com 
-	for meta-ti@yoctoproject.org; Wed, 18 Nov 2015 07:16:33 -0800
-Received: from EU-MBX-02.mgc.mentorg.com ([169.254.3.69]) by
-	SVR-IES-FEM-03.mgc.mentorg.com ([137.202.0.108]) with mapi id
-	14.03.0224.002; Wed, 18 Nov 2015 15:16:26 +0000
-From: "Arslan, Fahad" <Fahad_Arslan@mentor.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: unrecognized config options --enable-kms
-	--enable-install-test-programs warning
-Thread-Index: AdEiE6z9aAxPfzdeTAeJnd1+fsLqww==
-Date: Wed, 18 Nov 2015 15:16:26 +0000
-Message-ID: <2B9C97B395470A40B9E9E5D469BCD9FA176F95FE@EU-MBX-02.mgc.mentorg.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.202.0.69]
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C280E00B19
+	for <meta-ti@yoctoproject.org>; Wed, 18 Nov 2015 07:30:42 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id tAIFUfvh024559
+	for <meta-ti@yoctoproject.org>; Wed, 18 Nov 2015 09:30:41 -0600
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAIFUfBl020823
+	for <meta-ti@yoctoproject.org>; Wed, 18 Nov 2015 09:30:41 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 18 Nov 2015 09:30:41 -0600
+Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAIFUfcU025831;
+	Wed, 18 Nov 2015 09:30:41 -0600
+Message-ID: <564C999F.6030901@ti.com>
+Date: Wed, 18 Nov 2015 10:30:39 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-Subject: unrecognized config options --enable-kms --enable-install-test-programs warning
+To: "Nelson, Sam" <sam.nelson@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+References: <1447797979-10356-1-git-send-email-sam.nelson@ti.com>
+	<564C7600.8050209@ti.com> <564C7F56.7080901@ti.com>
+	<4F9216F96E5DF9428610502835A9F4905826FAEA@DLEE11.ent.ti.com>
+In-Reply-To: <4F9216F96E5DF9428610502835A9F4905826FAEA@DLEE11.ent.ti.com>
+Subject: Re: [PATCH v4] ipc: ti-ipc, ti-ipc-rtos: Update to new version of IPC 3.41.0.3_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,58 +51,255 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2015 15:16:36 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_2B9C97B395470A40B9E9E5D469BCD9FA176F95FEEUMBX02mgcmento_"
+X-List-Received-Date: Wed, 18 Nov 2015 15:30:51 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---_000_2B9C97B395470A40B9E9E5D469BCD9FA176F95FEEUMBX02mgcmento_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
 
-I'm getting following warning while baking libdrm (meta-ti/recipes-graphics=
-/drm/libdrm_2.4.41.bb):
+On 11/18/2015 10:08 AM, Nelson, Sam wrote:
+>
+>> -----Original Message-----
+>> From: Stiffler, Jacob
+>> Sent: Wednesday, November 18, 2015 8:39 AM
+>> To: Nelson, Sam; meta-ti@yoctoproject.org
+>> Subject: Re: [meta-ti] [PATCH v4] ipc: ti-ipc, ti-ipc-rtos: Update to new version
+>> of IPC 3.41.0.3_eng
+>>
+>>
+>>
+>> On 11/18/2015 7:58 AM, Jacob Stiffler wrote:
+>>>
+>>> On 11/17/2015 5:06 PM, Sam Nelson wrote:
+>>>> - Update to new version of IPC 3.41.0.3_eng
+>>>> - Add recipe to build ti-ipc-rtos from git repo
+>>>> - Remove K2G hack
+>>>>
+>>>> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+>>>>
+>>>> ---
+>>>> Changes from the previous version of the patch
+>>>> - Removed redundant platform definitions
+>>>> ---
+>>>> ---
+>>>>    recipes-ti/ipc/ti-ipc-rtos.inc           | 19 ------------
+>>>>    recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb |  9 ------
+>>>>    recipes-ti/ipc/ti-ipc-rtos_git.bb        | 51
+>>>> ++++++++++++++++++++++++++++++++
+>>>>    recipes-ti/ipc/ti-ipc.inc                | 26 ++++++++++++++++
+>>>>    recipes-ti/ipc/ti-ipc_git.bb             | 27 +++--------------
+>>>>    5 files changed, 81 insertions(+), 51 deletions(-)
+>>>>    delete mode 100644 recipes-ti/ipc/ti-ipc-rtos.inc
+>>> Other layers use this file. Do we want to keep it, or should those
+>>> layers make a copy of it?
+>>>
+>>>>    delete mode 100644 recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+>>>>    create mode 100644 recipes-ti/ipc/ti-ipc-rtos_git.bb
+>>>>    create mode 100644 recipes-ti/ipc/ti-ipc.inc
+>>>>
+>>>> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc
+>>>> b/recipes-ti/ipc/ti-ipc-rtos.inc deleted file mode 100644 index
+>>>> d14c756..0000000
+>>>> --- a/recipes-ti/ipc/ti-ipc-rtos.inc
+>>>> +++ /dev/null
+>>>> @@ -1,19 +0,0 @@
+>>>> -DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for
+>>>> Uni- and Multi- Processor Configurations)"
+>>>> -HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+>>>> -
+>>>> -LICENSE = "BSD"
+>>>> -
+>>>> -require recipes-ti/includes/ti-paths.inc -require
+>>>> recipes-ti/includes/ti-staging.inc
+>>>> -
+>>>> -SRC_URI =
+>>>> "http://software-
+>> dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc
+>> _${PV}.zip;name=ipczip"
+>>>> -
+>>>> -S = "${WORKDIR}/ipc_${PV}"
+>>>> -
+>>>> -do_install() {
+>>>> -    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+>>>> -    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+>>>> -}
+>>>> -
+>>>> -ALLOW_EMPTY_${PN} = "1"
+>>>> -FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
+>>>> diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+>>>> b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+>>>> deleted file mode 100644
+>>>> index 7c93695..0000000
+>>>> --- a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
+>>>> +++ /dev/null
+>>>> @@ -1,9 +0,0 @@
+>>>> -require ti-ipc-rtos.inc
+>>>> -
+>>>> -PV = "3_40_01_08"
+>>>> -PR = "r0"
+>>>> -
+>>>> -LIC_FILES_CHKSUM =
+>>>> "file://${S}/ipc-
+>> linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec7925
+>> 5"
+>>>> -
+>>>> -SRC_URI[ipczip.md5sum] = "738e1d54da9fab94899ad162f1ad78de"
+>>>> -SRC_URI[ipczip.sha256sum] =
+>>>>
+>> "8cc7d40ad7eab916eae109b355dc7e7876c6ab82e3b40bf5b6bf60474312d6cf
+>> "
+>>>> diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb
+>>>> b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+>>>> new file mode 100644
+>>>> index 0000000..aaea3f7
+>>>> --- /dev/null
+>>>> +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+>>>> @@ -0,0 +1,51 @@
+>>>> +require recipes-ti/includes/ti-paths.inc require
+>>>> +recipes-ti/includes/ti-staging.inc
+>>>> +require ti-ipc.inc
+>>>> +
+>>>> +DEPENDS += "ti-cgt6x-native ti-xdctools ti-sysbios"
+>>>> +
+>>>> +PACKAGES =+ "${PN}-fw"
+>>>> +FILES_${PN}-fw = "${libdir}/firmware/*"
+>>>> +FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
+>>>> +
+>>>> +INSANE_SKIP_${PN}-fw += "arch"
+>>>> +INSANE_SKIP_${PN}-dev += "arch"
+>>>> +
+>>>> +ALLOW_EMPTY_${PN} = "1"
+>>>> +
+>>>> +IPC_TARGETS = ""
+>>>> +IPC_TARGETS_omap-a15 = "\
+>>>> +    gnu.targets.arm.A15F="${A15_TOOLCHAIN_INSTALL_DIR}" \
+>>>> +ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+>>>> +    ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
+>>>> +    ti.targets.arm.elf.M4F="${M4_TOOLCHAIN_INSTALL_DIR}" \ "
+>>>> +
+>>> If you are building for the baremetal A15 and M4, you need to add
+>>> gcc-arm-none-eabi-native and ti-ccsv6-native to the dependencies.
+>>>
+>>>> +IPC_TARGETS_keystone = " \
+>>>> +    gnu.targets.arm.A15F="${A15_TOOLCHAIN_INSTALL_DIR}" \
+>>>> +ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \ "
+>>>> +
+>>>> +EXTRA_OEMAKE = "\
+>>>> +    PLATFORM=${PLATFORM} \
+>>>> +    XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+>>>> +    BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
+>>>> +    ${IPC_TARGETS} \
+>>>> +"
+>>>> +
+>>>> +do_compile() {
+>>>> +  oe_runmake -f ipc-bios.mak clean
+>>>> +  oe_runmake -f ipc-bios.mak all
+>> I just checked with how we were doing this internally, and we were only
+>> building the libs. Do we also want to make the tests also?
+> Yes. Tests are needed as well for testing. Is there an issue?
 
-WARNING: QA Issue: libdrm: configure was passed unrecognised options:  [unk=
-nown-configure-option]
+It increases the build time, so I just wanted to make sure this was 
+intentional.
 
-Shouldn't we update EXTRA_OECONF to exclude --enable-kms and --enable-insta=
-ll-test-programs?
+>>>> +}
+>>>> +
+>>>> +do_compile_append() {
+>>>> +  sourceipk_do_create_srcipk
+>>>> +}
+>>>> +
+>>>> +do_install() {
+>>>> +    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+>>>> +    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+>>>> +
+>>>> +    install -d ${D}${libdir}/firmware
+>>>> +    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {}
+>>>> ${D}${libdir}/firmware/
+>>>> +}
+>>>> diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+>>>> new file mode 100644 index 0000000..325fbc4
+>>>> --- /dev/null
+>>>> +++ b/recipes-ti/ipc/ti-ipc.inc
+>>>> @@ -0,0 +1,26 @@
+>>>> +DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for
+>>>> Uni- and Multi- Processor Configurations)"
+>>>> +HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+>>>> +
+>>>> +LICENSE = "BSD"
+>>>> +LIC_FILES_CHKSUM =
+>>>> "file://${S}/ipc-
+>> linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec7925
+>> 5"
+>>>> +
+>>>> +BRANCH = "ipc-next"
+>>>> +
+>>>> +SRC_URI =
+>>>> "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
+>>>> +
+>>>> +#Corresponds to 3.41.00.03_eng
+>>>> +SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
+>>>> +
+>>>> +S = "${WORKDIR}/git"
+>>>> +PV = "3.41.00.03"
+>>>> +PR = "r1"
+>>> Can you use "INC_PR"?
+>>>
+>>>> +
+>>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>>>> +
+>>>> +PLATFORM = "UNKNOWN"
+>>>> +PLATFORM_omap5-evm = "OMAP54XX"
+>>>> +PLATFORM_dra7xx = "DRA7XX"
+>>>> +PLATFORM_k2hk-evm = "TCI6638"
+>>>> +PLATFORM_k2l-evm = "TCI6630"
+>>>> +PLATFORM_k2e-evm = "66AK2E"
+>>>> +PLATFORM_k2g-evm = "66AK2G"
+>>>> diff --git a/recipes-ti/ipc/ti-ipc_git.bb
+>>>> b/recipes-ti/ipc/ti-ipc_git.bb index a6b6a90..070247b 100644
+>>>> --- a/recipes-ti/ipc/ti-ipc_git.bb
+>>>> +++ b/recipes-ti/ipc/ti-ipc_git.bb
+>>>> @@ -1,32 +1,13 @@
+>>>>    DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for
+>>>> Uni- and Multi- Processor Configurations)"
+>>>> HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+>>>>    -LICENSE = "BSD"
+>>>> -LIC_FILES_CHKSUM =
+>>>> "file://${S}/ipc-
+>> linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec7925
+>> 5"
+>>>> +require ti-ipc.inc
+>>>>      DEPENDS += "virtual/kernel"
+>>>>    -PV = "3.41.00.02"
+>>>> -
+>>>> -BRANCH = "ipc-next"
+>>>> -SRC_URI =
+>>>> "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+>>>> -           file://tiipclad-daemon.sh \
+>>>> -           file://0001-Add-kernel-build-dir.patch \
+>>>> +SRC_URI += "file://tiipclad-daemon.sh \
+>>>> +            file://0001-Add-kernel-build-dir.patch \
+>>>>               "
+>>>> -# Commit corresponds to 3.41.00.02-eng -SRCREV =
+>>>> "b34c8ada4ed243cd52e504bf2c6fb3451dc730f8"
+>>>> -
+>>>> -S = "${WORKDIR}/git"
+>>>> -
+>>>> -PACKAGE_ARCH = "${MACHINE_ARCH}"
+>>>> -
+>>>> -PLATFORM = "UNKNOWN"
+>>>> -PLATFORM_omap5-evm = "OMAP54XX"
+>>>> -PLATFORM_dra7xx = "DRA7XX"
+>>>> -PLATFORM_k2hk-evm = "TCI6638"
+>>>> -PLATFORM_k2l-evm = "TCI6630"
+>>>> -PLATFORM_k2e-evm = "66AK2E"
+>>>> -PLATFORM_k2g-evm = "66AK2E"
+>>>>      DAEMON = "UNKNOWN"
+>>>>    DAEMON_omap5-evm = "lad_omap54xx_smp"
+>>>> @@ -34,7 +15,7 @@ DAEMON_dra7xx = "lad_dra7xx"
+>>>>    DAEMON_k2hk-evm = "lad_tci6638"
+>>>>    DAEMON_k2l-evm = "lad_tci6630"
+>>>>    DAEMON_k2e-evm = "lad_66ak2e"
+>>>> -DAEMON_k2g-evm = "lad_66ak2e"
+>>>> +DAEMON_k2g-evm = "lad_66ak2g"
+>>>>      inherit autotools-brokensep pkgconfig update-rc.d
 
-Thanks,
-Fahad
 
---_000_2B9C97B395470A40B9E9E5D469BCD9FA176F95FEEUMBX02mgcmento_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html dir=3D"ltr">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style id=3D"owaParaStyle" type=3D"text/css">P {margin-top:0;margin-bottom:=
-0;}</style>
-</head>
-<body ocsi=3D"0" fpstyle=3D"1">
-<div style=3D"direction: ltr;font-family: Tahoma;color: #000000;font-size: =
-10pt;">Hi,
-<br>
-<br>
-I'm getting following warning while baking libdrm (meta-ti/recipes-graphics=
-/drm/libdrm_2.4.41.bb):<br>
-<br>
-WARNING: QA Issue: libdrm: configure was passed unrecognised options:&nbsp;=
- [unknown-configure-option]<br>
-<br>
-Shouldn't we update EXTRA_OECONF to exclude --enable-kms and --enable-insta=
-ll-test-programs?<br>
-<br>
-Thanks,<br>
-Fahad<br>
-</div>
-</body>
-</html>
-
---_000_2B9C97B395470A40B9E9E5D469BCD9FA176F95FEEUMBX02mgcmento_--
