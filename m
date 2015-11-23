@@ -1,41 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5B573E00AD7; Sun, 22 Nov 2015 20:14:42 -0800 (PST)
+	id 32DC1E00B37; Mon, 23 Nov 2015 07:29:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E16D2E00AC5
-	for <meta-ti@yoctoproject.org>; Sun, 22 Nov 2015 20:14:38 -0800 (PST)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7962EE00AF9
+	for <meta-ti@yoctoproject.org>; Mon, 23 Nov 2015 07:29:56 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tAN4Eb8F006275
-	for <meta-ti@yoctoproject.org>; Sun, 22 Nov 2015 22:14:37 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAN4EbvZ020947
-	for <meta-ti@yoctoproject.org>; Sun, 22 Nov 2015 22:14:37 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 22 Nov 2015 22:14:37 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAN4EbBA014022;
-	Sun, 22 Nov 2015 22:14:37 -0600
-Date: Sun, 22 Nov 2015 23:14:21 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20151123041421.GK18230@edge>
-References: <1447991699-23623-1-git-send-email-sam.nelson@ti.com>
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tANFTtXP007134
+	for <meta-ti@yoctoproject.org>; Mon, 23 Nov 2015 09:29:55 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tANFTtw9001756
+	for <meta-ti@yoctoproject.org>; Mon, 23 Nov 2015 09:29:55 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 23 Nov 2015 09:29:55 -0600
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	tANFTtW6023211;	Mon, 23 Nov 2015 09:29:55 -0600
+From: Hongmei Gou <h-gou@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 23 Nov 2015 10:29:50 -0500
+Message-ID: <1448292590-30429-1-git-send-email-h-gou@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1447991699-23623-1-git-send-email-sam.nelson@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v6] ipc: ti-ipc, ti-ipc-rtos: Update to new version of IPC 3.41.0.3_eng
+Subject: [PATCH] dsplib-c66x: add version 3.4.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,301 +45,89 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2015 04:14:42 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Nov 2015 15:29:59 -0000
+Content-Type: text/plain
 
-Now it fails with this error:
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
+---
+ recipes-ti/dsplib/dsplib-c66x.inc        | 29 +++++++++++++++++++++++++++++
+ recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb |  9 +++++++++
+ recipes-ti/includes/ti-paths.inc         |  2 ++
+ 3 files changed, 40 insertions(+)
+ create mode 100644 recipes-ti/dsplib/dsplib-c66x.inc
+ create mode 100644 recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
 
+diff --git a/recipes-ti/dsplib/dsplib-c66x.inc b/recipes-ti/dsplib/dsplib-c66x.inc
+new file mode 100644
+index 0000000..f87bd24
+--- /dev/null
++++ b/recipes-ti/dsplib/dsplib-c66x.inc
+@@ -0,0 +1,29 @@
++DESCRIPTION = "DSPLIB contains optimized general-purpose signal-processing routines for TI DSPs"
++HOMEPAGE = "http://www.ti.com/tool/sprc265"
++SECTION = "devel"
++LICENSE = "BSD-3-Clause"
++
++require ../includes/ti-paths.inc
++require ../includes/ti-staging.inc
++require ../includes/ti-unpack.inc
++
++COMPATIBLE_MACHINE = "omap-a15|keystone|c66x"
++
++SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/dsplib/${PV}/exports/${BINFILE};name=dsplib"
++
++BINFILE = "dsplib_c66x_${PV}_Linux.bin"
++TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
++TI_BIN_UNPK_CMDS = ""
++
++do_install() {
++    install -d ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
++    cp -pPrf ${S}/* ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
++}
++
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${DSPLIB_C66_INSTALL_DIR_RECIPE}"
++
++INSANE_SKIP_${PN}-dev = "arch"
++
++CREATE_SRCIPK = "1"
++SRCIPK_INSTALL_DIR = "dsplib_c66x_${PV}"
+diff --git a/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb b/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
+new file mode 100644
+index 0000000..f1273f3
+--- /dev/null
++++ b/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
+@@ -0,0 +1,9 @@
++require dsplib-c66x.inc
++
++PV = "3_4_0_0"
++PR = "r1"
++
++LIC_FILES_CHKSUM = "file://packages/ti/dsplib/dsplib.h;beginline=9;endline=35;md5=17733f9e1100f8a628512f47c4bf676a"
++
++SRC_URI[dsplib.md5sum] = "66785604729c153dcad5282097dee8bf"
++SRC_URI[dsplib.sha256sum] = "e88909b6271ce6c4c62e2ab90181b7adb36c7f28f5c52836668eb35888785ce8"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index ad4ff78..37feb93 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -49,6 +49,7 @@ export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
+ export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
+ export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
+ export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
++export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
+ 
+ 
+ # This is where the tools will end up in sysroot
+@@ -89,6 +90,7 @@ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTAL
+ export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
+ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
+ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
++export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
+-- 
+1.9.1
 
-DEBUG: Executing shell function do_compile
-NOTE: make -j 12 PLATFORM=DRA7XX XDC_INSTALL_DIR=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-xdctools-tree BIOS_INSTALL_DIR=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree gnu.targets.arm.A15F=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/gcc-arm-none-eabi ti.targets.elf.C66=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/cgt-c6x ti.targets.arm.elf.M4=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/ti-cgt-arm ti.targets.arm.elf.M4F=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/ti-cgt-arm -f ipc-bios.mak clean
-cleaning ipc packages ...
-making clean: Sun Nov 22 06:06:32 EST 2015 ...
-======== clean [./packages/ti/deh] ========
-======== clean [./packages/ti/grcm] ========
-making package.mak (because of package.bld) in order to clean ...
-js: "/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree/packages/gnu/targets/arm/ITarget.xs", line 63: Error: Directory '/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/gcc-arm-none-eabi/bin' cannot be found. Ensure that rootDir for the A15F target is set correctly in '/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/ti-ipc-rtos/3.41.00.03-r0.0/git/ipc-bios.bld'.
-    "/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree/packages/gnu/targets/_utils.xs", line 31
-    "/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree/packages/gnu/targets/ITarget.xs", line 164
-make[1]: *** Deleting file `package.mak'
-======== clean [./packages/ti/ipc] ========
-======== clean [./packages/ti/ipc/family/omap54xx] ========
-======== clean [./packages/ti/ipc/family/omapl138] ========
-======== clean [./packages/ti/ipc/family/tci6614] ========
-======== clean [./packages/ti/ipc/family/tci6638] ========
-======== clean [./packages/ti/ipc/family/vayu] ========
-======== clean [./packages/ti/ipc/ipcmgr] ========
-======== clean [./packages/ti/ipc/mm] ========
-======== clean [./packages/ti/ipc/namesrv] ========
-======== clean [./packages/ti/ipc/remoteproc] ========
-======== clean [./packages/ti/ipc/rpmsg] ========
-======== clean [./packages/ti/ipc/tests] ========
-======== clean [./packages/ti/ipc/transports] ========
-======== clean [./packages/ti/pm] ========
-======== clean [./packages/ti/sdo/ipc] ========
-======== clean [./packages/ti/sdo/ipc/family] ========
-======== clean [./packages/ti/sdo/ipc/family/arctic] ========
-======== clean [./packages/ti/sdo/ipc/family/c647x] ========
-======== clean [./packages/ti/sdo/ipc/family/c6a8149] ========
-======== clean [./packages/ti/sdo/ipc/family/da830] ========
-======== clean [./packages/ti/sdo/ipc/family/dm6446] ========
-======== clean [./packages/ti/sdo/ipc/family/omap3530] ========
-======== clean [./packages/ti/sdo/ipc/family/omap4430] ========
-======== clean [./packages/ti/sdo/ipc/family/tci663x] ========
-======== clean [./packages/ti/sdo/ipc/family/tda3xx] ========
-======== clean [./packages/ti/sdo/ipc/family/ti81xx] ========
-======== clean [./packages/ti/sdo/ipc/family/vayu] ========
-======== clean [./packages/ti/sdo/ipc/gates] ========
-======== clean [./packages/ti/sdo/ipc/heaps] ========
-======== clean [./packages/ti/sdo/ipc/interfaces] ========
-======== clean [./packages/ti/sdo/ipc/notifyDrivers] ========
-======== clean [./packages/ti/sdo/ipc/nsremote] ========
-======== clean [./packages/ti/sdo/ipc/transports] ========
-======== clean [./packages/ti/sdo/utils] ========
-======== clean [./packages/ti/srvmgr] ========
-======== clean [./packages/ti/srvmgr/omaprpc] ========
-======== clean [./packages/ti/srvmgr/omx] ========
-======== clean [./packages/ti/trace] ========
-cleaning complete: Sun Nov 22 06:06:53 EST 2015.
-NOTE: make -j 12 PLATFORM=DRA7XX XDC_INSTALL_DIR=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-xdctools-tree BIOS_INSTALL_DIR=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree gnu.targets.arm.A15F=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/gcc-arm-none-eabi ti.targets.elf.C66=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/cgt-c6x ti.targets.arm.elf.M4=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/ti-cgt-arm ti.targets.arm.elf.M4F=/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/ti-cgt-arm -f ipc-bios.mak all
-building ipc packages ...
-making all: Sun Nov 22 06:06:53 EST 2015 ...
-======== .interfaces [./packages/ti/deh/] ========
-making package.mak (because of package.bld) ...
-generating interfaces for package ti.deh (because package/package.xdc.inc is older than package.xdc) ...
-    translating Deh
-    translating StackDbg
-    translating Watchdog
-======== .interfaces [./packages/ti/grcm/] ========
-making package.mak (because of package.bld) ...
-js: "/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree/packages/gnu/targets/arm/ITarget.xs", line 63: Error: Directory '/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/share/ti/gcc-arm-none-eabi/bin' cannot be found. Ensure that rootDir for the A15F target is set correctly in '/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/ti-ipc-rtos/3.41.00.03-r0.0/git/ipc-bios.bld'.
-    "/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree/packages/gnu/targets/_utils.xs", line 31
-    "/home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/ti/ti-sysbios-tree/packages/gnu/targets/ITarget.xs", line 164
-make[1]: *** Deleting file `package.mak'
-make[1]: *** No rule to make target `package.mak', needed by `.interfaces'.  Stop.
-gmake: *** [packages/ti/grcm/,.interfaces] Error 2
-make: *** [all] Error 2
-ERROR: oe_runmake failed
-WARNING: /home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/ti-ipc-rtos/3.41.00.03-r0.0/temp/run.do_compile.10937:1 exit 1 from
-  exit 1
-ERROR: Function failed: do_compile (log file is located at /home/jenkins/tisdk-build-fido-rt/build-CORTEX_1/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/ti-ipc-rtos/3.41.00.03-r0.0/temp/log.do_compile.10937)
-
-
-On Thu, Nov 19, 2015 at 10:54:59PM -0500, Sam Nelson wrote:
-> - Update to new version of IPC: 3.41.0.3_eng
-> - Add recipe to build ti-ipc-rtos from git repo
-> - Remove K2G hack
-> 
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> 
-> ---
-> Changes from the previous version of the patch
-> - Fix dependency of according to platform
-> - Moved -f ipc-bios.make to EXTRA_OE_MAKE
-> ---
-> ---
->  recipes-ti/ipc/ti-ipc-rtos.inc           | 19 -----------
->  recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb |  9 ------
->  recipes-ti/ipc/ti-ipc-rtos_git.bb        | 55 ++++++++++++++++++++++++++++++++
->  recipes-ti/ipc/ti-ipc.inc                | 26 +++++++++++++++
->  recipes-ti/ipc/ti-ipc_git.bb             | 29 ++++-------------
->  5 files changed, 87 insertions(+), 51 deletions(-)
->  delete mode 100644 recipes-ti/ipc/ti-ipc-rtos.inc
->  delete mode 100644 recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
->  create mode 100644 recipes-ti/ipc/ti-ipc-rtos_git.bb
->  create mode 100644 recipes-ti/ipc/ti-ipc.inc
-> 
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-> deleted file mode 100644
-> index d14c756..0000000
-> --- a/recipes-ti/ipc/ti-ipc-rtos.inc
-> +++ /dev/null
-> @@ -1,19 +0,0 @@
-> -DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-> -HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
-> -
-> -LICENSE = "BSD"
-> -
-> -require recipes-ti/includes/ti-paths.inc
-> -require recipes-ti/includes/ti-staging.inc
-> -
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_${PV}.zip;name=ipczip"
-> -
-> -S = "${WORKDIR}/ipc_${PV}"
-> -
-> -do_install() {
-> -    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-> -    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
-> -}
-> -
-> -ALLOW_EMPTY_${PN} = "1"
-> -FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb b/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
-> deleted file mode 100644
-> index 7c93695..0000000
-> --- a/recipes-ti/ipc/ti-ipc-rtos_3.40.01.08.bb
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -require ti-ipc-rtos.inc
-> -
-> -PV = "3_40_01_08"
-> -PR = "r0"
-> -
-> -LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
-> -
-> -SRC_URI[ipczip.md5sum] = "738e1d54da9fab94899ad162f1ad78de"
-> -SRC_URI[ipczip.sha256sum] = "8cc7d40ad7eab916eae109b355dc7e7876c6ab82e3b40bf5b6bf60474312d6cf"
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-> new file mode 100644
-> index 0000000..2e9dba1
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-> @@ -0,0 +1,55 @@
-> +require recipes-ti/includes/ti-paths.inc
-> +require recipes-ti/includes/ti-staging.inc
-> +require ti-ipc.inc
-> +
-> +PR = "${INC_PR}.0"
-> +
-> +DEPENDS = "ti-xdctools ti-sysbios"
-> +DEPENDS_append_keystone += "ti-cgt6x-native gcc-arm-none-eabi-native"
-> +DEPENDS_append_omap-15 += "ti-cgt6x-native ti-ccsv6-native gcc-arm-none-eabi-native"
-> +
-> +PACKAGES =+ "${PN}-fw"
-> +FILES_${PN}-fw = "${libdir}/firmware/*"
-> +FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
-> +
-> +INSANE_SKIP_${PN}-fw += "arch"
-> +INSANE_SKIP_${PN}-dev += "arch"
-> +
-> +ALLOW_EMPTY_${PN} = "1"
-> +
-> +IPC_TARGETS = ""
-> +IPC_TARGETS_omap-a15 = "\
-> +    gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
-> +    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-> +    ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
-> +    ti.targets.arm.elf.M4F="${M4_TOOLCHAIN_INSTALL_DIR}" \
-> +"
-> +
-> +IPC_TARGETS_keystone = " \
-> +    gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
-> +    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-> +"
-> +
-> +EXTRA_OEMAKE = "\
-> +    PLATFORM=${PLATFORM} \
-> +    XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
-> +    BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
-> +    ${IPC_TARGETS} -f ipc-bios.mak\
-> +"
-> +
-> +do_compile() {
-> +  oe_runmake clean
-> +  oe_runmake all
-> +}
-> +
-> +do_compile_append() {
-> +  sourceipk_do_create_srcipk
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-> +    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
-> +
-> +    install -d ${D}${libdir}/firmware
-> +    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${libdir}/firmware/
-> +}
-> diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-> new file mode 100644
-> index 0000000..d41796d
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-ipc.inc
-> @@ -0,0 +1,26 @@
-> +DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-> +HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
-> +
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
-> +
-> +BRANCH = "ipc-next"
-> +
-> +SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
-> +
-> +#Corresponds to 3.41.00.03_eng
-> +SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
-> +
-> +S = "${WORKDIR}/git"
-> +PV = "3.41.00.03"
-> +INC_PR = "r0"
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +PLATFORM = "UNKNOWN"
-> +PLATFORM_omap5-evm = "OMAP54XX"
-> +PLATFORM_dra7xx = "DRA7XX"
-> +PLATFORM_k2hk-evm = "TCI6638"
-> +PLATFORM_k2l-evm = "TCI6630"
-> +PLATFORM_k2e-evm = "66AK2E"
-> +PLATFORM_k2g-evm = "66AK2G"
-> diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-> index a6b6a90..f98df66 100644
-> --- a/recipes-ti/ipc/ti-ipc_git.bb
-> +++ b/recipes-ti/ipc/ti-ipc_git.bb
-> @@ -1,32 +1,15 @@
->  DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
->  HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
->  
-> -LICENSE = "BSD"
-> -LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
-> +require ti-ipc.inc
->  
-> -DEPENDS += "virtual/kernel"
-> +PR = "${INC_PR}.0"
->  
-> -PV = "3.41.00.02"
-> +DEPENDS += "virtual/kernel"
->  
-> -BRANCH = "ipc-next"
-> -SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-> -           file://tiipclad-daemon.sh \
-> -           file://0001-Add-kernel-build-dir.patch \
-> +SRC_URI += "file://tiipclad-daemon.sh \
-> +            file://0001-Add-kernel-build-dir.patch \
->             "
-> -# Commit corresponds to 3.41.00.02-eng
-> -SRCREV = "b34c8ada4ed243cd52e504bf2c6fb3451dc730f8"
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -PACKAGE_ARCH = "${MACHINE_ARCH}"
-> -
-> -PLATFORM = "UNKNOWN"
-> -PLATFORM_omap5-evm = "OMAP54XX"
-> -PLATFORM_dra7xx = "DRA7XX"
-> -PLATFORM_k2hk-evm = "TCI6638"
-> -PLATFORM_k2l-evm = "TCI6630"
-> -PLATFORM_k2e-evm = "66AK2E"
-> -PLATFORM_k2g-evm = "66AK2E"
->  
->  DAEMON = "UNKNOWN"
->  DAEMON_omap5-evm = "lad_omap54xx_smp"
-> @@ -34,7 +17,7 @@ DAEMON_dra7xx = "lad_dra7xx"
->  DAEMON_k2hk-evm = "lad_tci6638"
->  DAEMON_k2l-evm = "lad_tci6630"
->  DAEMON_k2e-evm = "lad_66ak2e"
-> -DAEMON_k2g-evm = "lad_66ak2e"
-> +DAEMON_k2g-evm = "lad_66ak2g"
->  
->  inherit autotools-brokensep pkgconfig update-rc.d
->  
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
