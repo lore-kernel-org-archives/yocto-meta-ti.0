@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 564E9E00B58; Tue, 24 Nov 2015 10:15:51 -0800 (PST)
+	id 576C8E00B44; Tue, 24 Nov 2015 10:15:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60F0BE00B44
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6232AE00B45
 	for <meta-ti@yoctoproject.org>; Tue, 24 Nov 2015 10:15:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 732A652976; Tue, 24 Nov 2015 18:15:46 +0000 (UTC)
+	id 63FCD52A52; Tue, 24 Nov 2015 18:15:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151124181546.732A652976@arago-project.org>
+Message-Id: <20151124181546.63FCD52A52@arago-project.org>
 Date: Tue, 24 Nov 2015 18:15:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ipc-rtos: Fix omap-a15 DEPENDS
+Subject: Eric Ruei : omap5-sgx-ddk-um-linux: bump SRCREV of ti33x for configuration variable DefaultPixelFormat support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: bc7dad24ef9c92604e53ad1d3b6f6af54369ccb6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bc7dad24ef9c92604e53ad1d3b6f6af54369ccb6
+Commit: 9c3254ecb66b69ac3edf3e9e4ccc18e45f5be77b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c3254ecb66b69ac3edf3e9e4ccc18e45f5be77b
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Nov 24 04:35:46 2015 +0000
+Author: Eric Ruei <a0850410@uda0850410>
+Date:   Mon Nov 23 23:31:51 2015 +0000
 
-ti-ipc-rtos: Fix omap-a15 DEPENDS
+omap5-sgx-ddk-um-linux: bump SRCREV of ti33x for configuration variable DefaultPixelFormat support
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+    * DefaultPixelFormat is used to set the default EGL pixel format
+
+Signed-off-by: Eric Ruei <a0850410@uda0850410>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_git.bb |   11 ++++++++---
- 1 files changed, 8 insertions(+), 3 deletions(-)
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 2e9dba1..a452dcf 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -2,11 +2,16 @@ require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
- require ti-ipc.inc
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index a3a4e6d..8b032e3 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -11,7 +11,7 @@ BRANCH_ti43x = "am4/k4.1"
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+ SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
+-SRCREV_ti33x    = "b535b96043ae2206e0c3d24b66599ca0fbe706d3"
++SRCREV_ti33x    = "84ae5444c7cbc3f4c65a226b9fea62d4a513f3e0"
+ SRCREV_ti43x    = "fdf4c0b594ca142a68aabb4c3f82b75be50b46cc"
  
- DEPENDS = "ti-xdctools ti-sysbios"
--DEPENDS_append_keystone += "ti-cgt6x-native gcc-arm-none-eabi-native"
--DEPENDS_append_omap-15 += "ti-cgt6x-native ti-ccsv6-native gcc-arm-none-eabi-native"
-+DEPENDS_append_keystone = " ti-cgt6x-native \
-+                            gcc-arm-none-eabi-native \
-+"
-+DEPENDS_append_omap-a15 = " ti-cgt6x-native \
-+                            ti-ccsv6-native \
-+                            gcc-arm-none-eabi-native \
-+"
+ INITSCRIPT_NAME = "pvr-init"
+@@ -19,7 +19,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- PACKAGES =+ "${PN}-fw"
- FILES_${PN}-fw = "${libdir}/firmware/*"
+ inherit update-rc.d
+ 
+-PR = "r13"
++PR = "r14"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ 
+ RDEPENDS_${PN} += "libdrm"
 
 
