@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0D689E00B5A; Tue, 24 Nov 2015 14:45:07 -0800 (PST)
+	id 0E871E00B58; Tue, 24 Nov 2015 14:45:07 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9BEEE00B45
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DAFE5E00B46
 	for <meta-ti@yoctoproject.org>; Tue, 24 Nov 2015 14:44:56 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1E857529FC; Tue, 24 Nov 2015 22:44:56 +0000 (UTC)
+	id 2FF5D52976; Tue, 24 Nov 2015 22:44:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151124224456.1E857529FC@arago-project.org>
+Message-Id: <20151124224456.2FF5D52976@arago-project.org>
 Date: Tue, 24 Nov 2015 22:44:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : pmmc-fw: add initial PMMC firmware binary
+Subject: Denys Dmytriyenko : qmss-pdsp-fw: add initial QMSS PDSP firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9f5af2f7d16f9ccfd9844327946bc94d495b4d89
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9f5af2f7d16f9ccfd9844327946bc94d495b4d89
+Commit: 4fd966bcd5c6feb05546c791ef2a6f27d60d82dd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4fd966bcd5c6feb05546c791ef2a6f27d60d82dd
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Nov 25 03:17:14 2015 +0000
+Date:   Wed Nov 25 03:17:23 2015 +0000
 
-pmmc-fw: add initial PMMC firmware binary
+qmss-pdsp-fw: add initial QMSS PDSP firmware
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pmmc-fw/pmmc-fw_git.bb |   37 ++++++++++++++++++++++++++++++++++++
- 1 files changed, 37 insertions(+), 0 deletions(-)
+ recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb |   29 ++++++++++++++++++++++++++
+ 1 files changed, 29 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/pmmc-fw/pmmc-fw_git.bb b/recipes-bsp/pmmc-fw/pmmc-fw_git.bb
+diff --git a/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb b/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
 new file mode 100644
-index 0000000..8d86234
+index 0000000..dfff22e
 --- /dev/null
-+++ b/recipes-bsp/pmmc-fw/pmmc-fw_git.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION = "PMMC firmware"
++++ b/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "QMSS PDSP firmware"
 +
 +LICENSE = "TI-TFL"
 +LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
 +
-+PV = "0.1.0.63"
++PV = "1.0.0.9"
 +PR = "r0"
 +
 +CLEANBROKEN = "1"
 +
-+COMPATIBLE_MACHINE = "k2g-evm"
++COMPATIBLE_MACHINE = "keystone"
 +
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
@@ -79,22 +79,14 @@ index 0000000..8d86234
 +SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
 +
 +S = "${WORKDIR}/git"
-+TARGET = "pmmc-firmware.bin"
++ORIGIN = "ks2_qmss_pdsp_acc48_k2_le_1_0_0_9.bin"
++TARGET = "ks2_qmss_pdsp_acc48.bin"
 +
 +do_install() {
-+	install -d ${D}/boot
-+	install -m 0644 ${S}/ti-keystone/${TARGET} ${D}/boot/${TARGET}
++	install -d ${D}${base_libdir}/firmware
++	install -m 0644 ${S}/ti-keystone/${ORIGIN} ${D}${base_libdir}/firmware/${TARGET}
 +}
 +
-+FILES_${PN} = "/boot"
-+
-+inherit deploy
-+
-+do_deploy () {
-+	install -d ${DEPLOYDIR}
-+	install -m 0644 ${S}/ti-keystone/${TARGET} ${DEPLOYDIR}/${TARGET}
-+}
-+
-+addtask deploy before do_build after do_compile
++FILES_${PN} = "${base_libdir}/firmware"
 
 
