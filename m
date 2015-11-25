@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DA5E8E009EF; Wed, 25 Nov 2015 13:54:16 -0800 (PST)
+	id DBC83E007C9; Wed, 25 Nov 2015 13:54:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E819DE0088C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6E94E007C9
 	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 13:54:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9235452A22; Wed, 25 Nov 2015 21:54:10 +0000 (UTC)
+	id 8B55052A52; Wed, 25 Nov 2015 21:54:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151125215410.9235452A22@arago-project.org>
+Message-Id: <20151125215410.8B55052A52@arago-project.org>
 Date: Wed, 25 Nov 2015 21:54:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : linux-ti-staging: k2g-evm: Add pmmc-fw as dependency
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 25 Nov 2015 21:54:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e6ff1dfa3d6cad5782aa1c2d46426a6ee19c98e5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e6ff1dfa3d6cad5782aa1c2d46426a6ee19c98e5
+Branch: fido
+Commit: b88e9db0d10a0528913d3ec06ed8b679cc31c940
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b88e9db0d10a0528913d3ec06ed8b679cc31c940
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Thu Nov 26 02:31:15 2015 +0000
