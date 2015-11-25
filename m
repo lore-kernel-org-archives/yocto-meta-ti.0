@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4BCB6E00985; Wed, 25 Nov 2015 12:31:22 -0800 (PST)
+	id DA5E8E009EF; Wed, 25 Nov 2015 13:54:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12C82E007C9
-	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 12:31:18 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tAPKVHIj002756
-	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 14:31:17 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAPKVHQ3018963
-	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 14:31:17 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 25 Nov 2015 14:31:17 -0600
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tAPKVHjl020181;	Wed, 25 Nov 2015 14:31:17 -0600
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 25 Nov 2015 15:31:15 -0500
-Message-ID: <1448483475-24903-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] linux-ti-staging: k2g-evm: Add pmmc-fw as dependency
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E819DE0088C
+	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 13:54:10 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9235452A22; Wed, 25 Nov 2015 21:54:10 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20151125215410.9235452A22@arago-project.org>
+Date: Wed, 25 Nov 2015 21:54:10 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : linux-ti-staging: k2g-evm: Add pmmc-fw as dependency
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,13 +33,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2015 20:31:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 25 Nov 2015 21:54:16 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: e6ff1dfa3d6cad5782aa1c2d46426a6ee19c98e5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e6ff1dfa3d6cad5782aa1c2d46426a6ee19c98e5
+
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Thu Nov 26 02:31:15 2015 +0000
+
+linux-ti-staging: k2g-evm: Add pmmc-fw as dependency
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/linux-ti-staging_4.1.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
 index afaa25c..ef953f9 100644
@@ -76,7 +77,5 @@ index afaa25c..ef953f9 100644
  PR = "${MACHINE_KERNEL_PR}"
  
  KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-1.9.1
 
 
