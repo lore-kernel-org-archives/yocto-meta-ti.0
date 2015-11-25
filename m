@@ -1,49 +1,43 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 264DEE00A4F; Wed, 25 Nov 2015 15:16:22 -0800 (PST)
+	id 2B87CE00A4F; Wed, 25 Nov 2015 15:17:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
+	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28A84E0088C
-	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 15:16:20 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tAPNGKTb010502
-	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 17:16:20 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAPNGKsI030667
-	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 17:16:20 -0600
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0224.002; Wed, 25 Nov 2015 17:16:19 -0600
-From: "Nelson, Sam" <sam.nelson@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH 1/2] mpm-transport: Update to new version
-	2.0.0.0
-Thread-Index: AQHRJ82qC7vLaY1rm0KNQRtgtTQCI56tsuKA//+f6GCAAGb4gP//nPrAgABm2QD//6ChcA==
-Date: Wed, 25 Nov 2015 23:16:19 +0000
-Message-ID: <4F9216F96E5DF9428610502835A9F4905828C2F9@DLEE11.ent.ti.com>
-References: <1448489243-26741-1-git-send-email-sam.nelson@ti.com>
-	<20151125221639.GE28188@edge>
-	<4F9216F96E5DF9428610502835A9F4905828C245@DLEE11.ent.ti.com>
-	<20151125224115.GF28188@edge>
-	<4F9216F96E5DF9428610502835A9F4905828C27A@DLEE11.ent.ti.com>
-	<20151125225456.GG28188@edge>
-In-Reply-To: <20151125225456.GG28188@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98090E0088C
+	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 15:17:05 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tAPNH55m012997
+	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 17:17:05 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAPNH5fi023322
+	for <meta-ti@yoctoproject.org>; Wed, 25 Nov 2015 17:17:05 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 25 Nov 2015 17:17:04 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id tAPNH4h4001331;
+	Wed, 25 Nov 2015 17:17:04 -0600
+Date: Wed, 25 Nov 2015 18:16:49 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Eric Ruei <e-ruei1@ti.com>
+Message-ID: <20151125231648.GI28188@edge>
+References: <1448492021-887-1-git-send-email-e-ruei1@ti.com>
+	<1448492021-887-2-git-send-email-e-ruei1@ti.com>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/2] mpm-transport: Update to new version 2.0.0.0
+In-Reply-To: <1448492021-887-2-git-send-email-e-ruei1@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 1/2] omapdrm_pvr: Define PVR_NULLDRM based on the availability of SGX
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,158 +50,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2015 23:16:22 -0000
-Content-Language: en-US
+X-List-Received-Date: Wed, 25 Nov 2015 23:17:08 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+On Wed, Nov 25, 2015 at 05:53:40PM -0500, Eric Ruei wrote:
+> From: Eric Ruei <a0850410@uda0850410>
+
+BTW, fix your gitconfig
 
 
-
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Wednesday, November 25, 2015 5:55 PM
-> To: Nelson, Sam
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH 1/2] mpm-transport: Update to new version
-> 2.0.0.0
->=20
-> On Wed, Nov 25, 2015 at 05:47:53PM -0500, Nelson, Sam wrote:
-> >
-> >
-> > > -----Original Message-----
-> > > From: Dmytriyenko, Denys
-> > > Sent: Wednesday, November 25, 2015 5:41 PM
-> > > To: Nelson, Sam
-> > > Cc: meta-ti@yoctoproject.org
-> > > Subject: Re: [meta-ti] [PATCH 1/2] mpm-transport: Update to new
-> > > version
-> > > 2.0.0.0
-> > >
-> > > On Wed, Nov 25, 2015 at 05:33:54PM -0500, Nelson, Sam wrote:
-> > > >
-> > > >
-> > > > > -----Original Message-----
-> > > > > From: Dmytriyenko, Denys
-> > > > > Sent: Wednesday, November 25, 2015 5:17 PM
-> > > > > To: Nelson, Sam
-> > > > > Cc: meta-ti@yoctoproject.org
-> > > > > Subject: Re: [meta-ti] [PATCH 1/2] mpm-transport: Update to new
-> > > > > version
-> > > > > 2.0.0.0
-> > > > >
-> > > > > On Wed, Nov 25, 2015 at 05:07:22PM -0500, Sam Nelson wrote:
-> > > > > > - Updates to work with kernel version 4.1 and other uio driver
-> > > > > > changes
-> > > > > > - Making the package machine specific and hence the
-> > > > > > dependencies according to the platform is updated
-> > > > > > - Add use of oe_runmake instead of direct call to make
-> > > > > >
-> > > > > > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> > > > > > ---
-> > > > > >  recipes-ti/mpm-transport/mpm-transport_git.bb | 30
-> > > > > > ++++++++++++++++-----------
-> > > > > >  1 file changed, 18 insertions(+), 12 deletions(-)
-> > > > > >
-> > > > > > diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb
-> > > > > > b/recipes-ti/mpm-transport/mpm-transport_git.bb
-> > > > > > index 752ada5..cc211ce 100644
-> > > > > > --- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-> > > > > > +++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-> > > > > > @@ -3,16 +3,27 @@ HOMEPAGE =3D
-> > > > > > "http://git.ti.com/cgit/cgit.cgi/keystone-
-> > > > > linux/mpm-transport.git"
-> > > > > >  LICENSE =3D "BSD-3-Clause & MIT"
-> > > > > >  LIC_FILES_CHKSUM =3D
-> > > > > "file://LICENSE.txt;md5=3D122b7757f366f3f6fe11988715258fc9"
-> > > > > >  COMPATIBLE_MACHINE =3D "keystone"
-> > > > > > -DEPENDS =3D "common-csl-ip hyplnk-lld edma3-lld mmap-lld cmem
-> > > > > > rm-lld
-> > > > > qmss-lld cppi-lld srio-lld"
-> > > > > > +
-> > > > > > +DEPENDS =3D "common-csl-ip edma3-lld mmap-lld cmem rm-lld
-> > > > > > +qmss-lld
-> > > > > cppi-lld uio-module-drv syslog-ng"
-> > > > >
-> > > > > http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-b
-> > > > > sp/m
-> > > > > map-
-> > > > > lld/mmap-lld.inc?h=3Dfido#n3
-> > > > > Will fail for k2l and k2g...
-> > > > The mmap-lld recipes need to be updated to build for k2l and k2g.
-> > > > My
-> > > understanding is same drivers should work.
-> > >
-> > > Well, at least the test part has only k/h/e devices in the list:
-> > >
-> > > http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-bsp/m
-> > > map-
-> > > lld/mmap-lld-test_git.bb?h=3Dfido#n11
-> > Test part may need update per device. Currently hope this is not a show
-> stopper.
->=20
-> So, are you saying mmap-lld can lax the restrictions in the same version?=
- Or
-> do you mean a new version is required?
->=20
-Same version can work.=20
->=20
-> > > > > > +DEPENDS_append_k2hk-evm +=3D "hyplnk-lld srio-lld"
-> > > > > > +DEPENDS_append_k2e-evm +=3D "hyplnk-lld"
-> > > > > > +
-> > > > > > +RDEPENDS_${PN} =3D "syslog-ng"
-> > > > > > +
-> > > > > > +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> > > > > >
-> > > > > >  SRC_URI =3D "git://git.ti.com/keystone-linux/mpm-
-> > > > > transport.git;protocol=3Dgit;branch=3D${BRANCH}"
-> > > > > >
-> > > > > > -BRANCH =3D "master"
-> > > > > > -# This commit corresponds to tag DEV.MPM-TRANSPORT-
-> 01.00.08.03
-> > > > > > -SRCREV =3D "f6c5426d68c2be832903b6d215370c94e134167f"
-> > > > > > +BRANCH =3D "linux41"
-> > > > > > +# This commit corresponds to tag DEV.MPM-TRANSPORT-
-> > > > > 02.00.00.00_ENG
-> > > > > > +SRCREV =3D "892e93238b7f9f480ddceb7ade042026a4d178bd"
-> > > > > >
-> > > > > > -PV =3D "1.0.8.3"
-> > > > > > -PR =3D "r1"
-> > > > > > +PV =3D "2.0.0.0"
-> > > > > > +PR =3D "r0"
-> > > > > > +
-> > > > > > +EXTRA_OEMAKE =3D "PDK_INSTALL_PATH=3D${STAGING_INCDIR}"
-> > > > > > +EXTRA_OEMAKE_append_k2hk-evm +=3D "HYPLNK_TRANSPORT=3Dtrue
-> > > > > SRIO_TRANSPORT=3Dtrue"
-> > > > > > +EXTRA_OEMAKE_append_k2e-evm +=3D "HYPLNK_TRANSPORT=3Dtrue"
-> > > > > >
-> > > > > >  S =3D "${WORKDIR}/git"
-> > > > > >
-> > > > > > @@ -25,13 +36,8 @@ FILES_${PN}-test =3D
-> > > > > "${bindir}/mpm_transport_test.out \
-> > > > > >
-> > > > > 	${bindir}/mpm_transport_qmss_arm_mt.out \
-> > > > > >
-> > > > > 	${bindir}/mpm_transport_srio_arm_mt.out"
-> > > > > >
-> > > > > > -do_compile () {
-> > > > > > -	cd ${S}
-> > > > > > -	make PDK_INSTALL_PATH=3D${STAGING_INCDIR}
-> > > > > > -}
-> > > > > > -
-> > > > > >  do_install() {
-> > > > > > -	make installbin BASE_DIR=3D${S}
-> > > > > INSTALL_BIN_BASE_DIR=3D${D}/${bindir}
-> > > > > > +	oe_runmake installbin BASE_DIR=3D${S}
-> > > > > > +INSTALL_BIN_BASE_DIR=3D${D}/${bindir}
-> > > > > >
-> > > > > >  	install -d ${D}${includedir}/
-> > > > > >  	install -c -m 755 ${S}/include/* ${D}${includedir}/
-> > > > > > --
-> > > > > > 1.9.1
-> > > > > >
-> > > > > > --
-> > > > > > _______________________________________________
-> > > > > > meta-ti mailing list
-> > > > > > meta-ti@yoctoproject.org
-> > > > > > https://lists.yoctoproject.org/listinfo/meta-ti
+> Enable non-SGX build for AM3/AM4:
+> For ti43x, set PVR_NULLDRM to 1 only if SGX is not included at MACHINE_FEATURES.
+> Note: For ti33x, PVR_NULLDRM is always set to 1 becasue only nullDRM is 
+> supported.
+> 
+> 
+> Signed-off-by: Eric Ruei <a0850410@uda0850410>
+> ---
+>  recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+> index 50df3d9..da4ab74 100644
+> --- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+> +++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+> @@ -24,7 +24,7 @@ SRCREV_ti33x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
+>  SRCREV_ti43x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
+>  
+>  PVR_NULLDRM_ti33x = "1"
+> -PVR_NULLDRM_ti43x = "0"
+> +PVR_NULLDRM_ti43x = "${@base_contains('MACHINE_FEATURES', 'sgx', '0', '1', d)}"
+>  PVR_NULLDRM_omap-a15 = "0"
+>  
+>  EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" PVR_NULLDRM=${PVR_NULLDRM}'
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
