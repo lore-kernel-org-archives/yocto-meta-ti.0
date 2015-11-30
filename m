@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0E137E00A81; Mon, 30 Nov 2015 13:46:26 -0800 (PST)
+	id 0F145E007C9; Mon, 30 Nov 2015 13:46:26 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1295E007D5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0722E007C9
 	for <meta-ti@yoctoproject.org>; Mon, 30 Nov 2015 13:46:21 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 850DD52A72; Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
+	id 59FC552A6D; Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151130214620.850DD52A72@arago-project.org>
+Message-Id: <20151130214620.59FC552A6D@arago-project.org>
 Date: Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new version 3.0.0.0
+Subject: Sam Nelson : mpm-transport: Update to new version 2.0.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,79 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 74a8f307643805b75131a331b8b07a34b2936758
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=74a8f307643805b75131a331b8b07a34b2936758
+Commit: da694aaaaee42b2a16719a9fadcc97cea26b8d94
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=da694aaaaee42b2a16719a9fadcc97cea26b8d94
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Nov 26 04:07:23 2015 +0000
+Date:   Thu Nov 26 04:07:22 2015 +0000
 
-multiprocmgr: Update to new version 3.0.0.0
+mpm-transport: Update to new version 2.0.0.0
 
-- Update to work with kernel version 4.1 and also other uio driver
-changes.
+- Updates to work with kernel version 4.1 and other uio driver changes
+- Making the package machine specific and hence the dependencies
+according to the platform is updated
+- Add use of oe_runmake instead of direct call to make
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |   30 +++++++++++++++----------
+ 1 files changed, 18 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index d9360b5..94fa707 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
- SECTION = "console"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 752ada5..cc211ce 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -3,16 +3,27 @@ HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/mpm-transport.git"
+ LICENSE = "BSD-3-Clause & MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=122b7757f366f3f6fe11988715258fc9"
  COMPATIBLE_MACHINE = "keystone"
+-DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld cmem rm-lld qmss-lld cppi-lld srio-lld"
++
++DEPENDS = "common-csl-ip edma3-lld mmap-lld cmem rm-lld qmss-lld cppi-lld uio-module-drv syslog-ng"
++DEPENDS_append_k2hk-evm += "hyplnk-lld srio-lld"
++DEPENDS_append_k2e-evm += "hyplnk-lld"
++
++RDEPENDS_${PN} = "syslog-ng"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
  
 -BRANCH = "master"
--# The following commits correspond to DEV.MPM-2.00.01.10D
--SRCREV = "4cb6009d6a3c94cea41ae6155a974e9ca44d982f"
--PV = "2.0.1.10"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.08.03
+-SRCREV = "f6c5426d68c2be832903b6d215370c94e134167f"
 +BRANCH = "linux41"
-+# The following commits correspond to DEV.MPM-3.00.00.00_ENG
-+SRCREV = "158e7d419662b482a089fb66ecdfced1104654ae"
-+PV = "3.0.0.0"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.00_ENG
++SRCREV = "892e93238b7f9f480ddceb7ade042026a4d178bd"
  
- SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
+-PV = "1.0.8.3"
+-PR = "r1"
++PV = "2.0.0.0"
++PR = "r0"
++
++EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
++EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
++EXTRA_OEMAKE_append_k2e-evm += "HYPLNK_TRANSPORT=true"
  
+ S = "${WORKDIR}/git"
+ 
+@@ -25,13 +36,8 @@ FILES_${PN}-test = "${bindir}/mpm_transport_test.out \
+ 					${bindir}/mpm_transport_qmss_arm_mt.out \
+ 					${bindir}/mpm_transport_srio_arm_mt.out"
+ 
+-do_compile () {
+-	cd ${S}
+-	make PDK_INSTALL_PATH=${STAGING_INCDIR}
+-}
+-
+ do_install() {
+-	make installbin BASE_DIR=${S} INSTALL_BIN_BASE_DIR=${D}/${bindir}
++	oe_runmake installbin BASE_DIR=${S} INSTALL_BIN_BASE_DIR=${D}/${bindir}
+ 
+ 	install -d ${D}${includedir}/
+ 	install -c -m 755 ${S}/include/* ${D}${includedir}/
 
 
