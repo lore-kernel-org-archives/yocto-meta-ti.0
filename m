@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3D0E0E00888; Mon, 30 Nov 2015 13:46:29 -0800 (PST)
+	id 4D76FE00AB5; Mon, 30 Nov 2015 13:46:31 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E268E009EF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E186E009D7
 	for <meta-ti@yoctoproject.org>; Mon, 30 Nov 2015 13:46:23 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1868152ABB; Mon, 30 Nov 2015 21:46:21 +0000 (UTC)
+	id 0A65452ABA; Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151130214621.1868152ABB@arago-project.org>
-Date: Mon, 30 Nov 2015 21:46:21 +0000 (UTC)
+Message-Id: <20151130214621.0A65452ABA@arago-project.org>
+Date: Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-module-drv: Update to new version 2.0.0.0_eng
+Subject: Denys Dmytriyenko : mpm-transport: fix syntax for appending dependencies
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,69 +33,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Nov 2015 21:46:29 -0000
+X-List-Received-Date: Mon, 30 Nov 2015 21:46:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 77c46bc3170892cc55d5f92e0ab00c2920ef9097
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=77c46bc3170892cc55d5f92e0ab00c2920ef9097
+Commit: 46f20bb8d4352f102f38de327ec7b38d521ee3a9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=46f20bb8d4352f102f38de327ec7b38d521ee3a9
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Dec  1 00:40:45 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Dec  1 00:18:42 2015 +0000
 
-uio-module-drv: Update to new version 2.0.0.0_eng
+mpm-transport: fix syntax for appending dependencies
 
-- Update to eng release 2.0.0.0
-- Added install append for new API header file
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/uio-module-drv/uio-module-drv.inc    |    6 +++---
- recipes-bsp/uio-module-drv/uio-module-drv_git.bb |    7 ++++++-
- 2 files changed, 9 insertions(+), 4 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-index 567f7f6..ed34a8a 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-@@ -1,9 +1,9 @@
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index cc211ce..7d86196 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=122b7757f366f3f6fe11988715258fc9"
+ COMPATIBLE_MACHINE = "keystone"
  
--BRANCH = "master"
--# This corresponds to version 01.00.02.03
--SRCREV = "634a0c64763c5cd7840e2d439d0ee900455584c8"
-+BRANCH = "linux4.1"
-+# This corresponds to version 02.00.00.00_eng
-+SRCREV = "6a7eda36e390658593a5b8d87b0f00beb3997240"
+ DEPENDS = "common-csl-ip edma3-lld mmap-lld cmem rm-lld qmss-lld cppi-lld uio-module-drv syslog-ng"
+-DEPENDS_append_k2hk-evm += "hyplnk-lld srio-lld"
+-DEPENDS_append_k2e-evm += "hyplnk-lld"
++DEPENDS_append_k2hk-evm = " hyplnk-lld srio-lld"
++DEPENDS_append_k2e-evm = " hyplnk-lld"
  
- SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
+ RDEPENDS_${PN} = "syslog-ng"
  
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-index d75fda2..445dc1c 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION="User space IO (UIO) driver for on-chip modules"
+@@ -19,7 +19,7 @@ BRANCH = "linux41"
+ SRCREV = "892e93238b7f9f480ddceb7ade042026a4d178bd"
  
- include uio-module-drv.inc
--PV = "1.0.2.3+git${SRCPV}"
-+PV = "2.0.0.0+git${SRCPV}"
+ PV = "2.0.0.0"
+-PR = "r0"
++PR = "r1"
  
- # This package builds a kernel module, use kernel PR as base and append a local
- MACHINE_KERNEL_PR_append = "b"
-@@ -10,3 +10,8 @@ PR = "${MACHINE_KERNEL_PR}"
- module_auto_load_uio-module-drv = "uio-module-drv"
- 
- inherit module
-+
-+do_install_append () {
-+    install -d ${D}${includedir}
-+    cp *.h ${D}${includedir}
-+}
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
 
 
