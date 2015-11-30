@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 03481E00748; Mon, 30 Nov 2015 09:06:35 -0800 (PST)
+	id 04EF4E005B7; Mon, 30 Nov 2015 09:06:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28A3BE005B3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 276BDE00457
 	for <meta-ti@yoctoproject.org>; Mon, 30 Nov 2015 09:06:29 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E478B52A6D; Mon, 30 Nov 2015 17:06:28 +0000 (UTC)
+	id CEDD952A44; Mon, 30 Nov 2015 17:06:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151130170628.E478B52A6D@arago-project.org>
+Message-Id: <20151130170628.CEDD952A44@arago-project.org>
 Date: Mon, 30 Nov 2015 17:06:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : omap5-evm: bump max_leb_cnt once more
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 30 Nov 2015 17:06:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 7a5b3add4289870e7b06de09150baf528272a29a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7a5b3add4289870e7b06de09150baf528272a29a
+Branch: fido
+Commit: d25a4c46236fab8c6ba345d59e1001f517eab51b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d25a4c46236fab8c6ba345d59e1001f517eab51b
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Nov 30 12:05:41 2015 -0500
