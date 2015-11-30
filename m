@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EC70AE00AA8; Mon, 30 Nov 2015 13:46:28 -0800 (PST)
+	id EDEFBE00978; Mon, 30 Nov 2015 13:46:28 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D5F0E00978
-	for <meta-ti@yoctoproject.org>; Mon, 30 Nov 2015 13:46:23 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3441E008C8
+	for <meta-ti@yoctoproject.org>; Mon, 30 Nov 2015 13:46:21 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E6C2752A78; Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
+	id 708395299A; Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151130214620.E6C2752A78@arago-project.org>
+Message-Id: <20151130214620.708395299A@arago-project.org>
 Date: Mon, 30 Nov 2015 21:46:20 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new version 3.0.0.0
+Subject: Denys Dmytriyenko : mmap-lld: mark as compatible with all Keystone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,44 +37,41 @@ X-List-Received-Date: Mon, 30 Nov 2015 21:46:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b2eabd892abd76a0688210cbd801ad0c0414c237
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b2eabd892abd76a0688210cbd801ad0c0414c237
+Branch: fido
+Commit: 5d415ab70903e5ab17e28025de1e7ac171f4d9d6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5d415ab70903e5ab17e28025de1e7ac171f4d9d6
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Nov 26 04:07:23 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Dec  1 00:18:41 2015 +0000
 
-multiprocmgr: Update to new version 3.0.0.0
+mmap-lld: mark as compatible with all Keystone
 
-- Update to work with kernel version 4.1 and also other uio driver
-changes.
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/mmap-lld/mmap-lld.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index d9360b5..94fa707 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
- SECTION = "console"
- COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-lld/mmap-lld.inc
+index 3dfc93c..9a6a4a5 100644
+--- a/recipes-bsp/mmap-lld/mmap-lld.inc
++++ b/recipes-bsp/mmap-lld/mmap-lld.inc
+@@ -1,6 +1,6 @@
+ LICENSE = "BSD-3-Clause"
  
--BRANCH = "master"
--# The following commits correspond to DEV.MPM-2.00.01.10D
--SRCREV = "4cb6009d6a3c94cea41ae6155a974e9ca44d982f"
--PV = "2.0.1.10"
-+BRANCH = "linux41"
-+# The following commits correspond to DEV.MPM-3.00.00.00_ENG
-+SRCREV = "158e7d419662b482a089fb66ecdfced1104654ae"
-+PV = "3.0.0.0"
+-COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm"
++COMPATIBLE_MACHINE = "keystone"
  
- SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b3315b8190036fe1c6a8263d02e15606"
  
+@@ -17,6 +17,6 @@ SRC_URI = "${MMAP_LLD_GIT_URI};destsuffix=${MMAP_LLD_GIT_DESTSUFFIX};protocol=${
+ SRCREV = "${MMAP_LLD_SRCREV}"
+ 
+ PV = "2.0.0.4"
+-INC_PR = "r3"
++INC_PR = "r4"
+ 
+ S = "${WORKDIR}/git/ti/runtime/mmap"
 
 
