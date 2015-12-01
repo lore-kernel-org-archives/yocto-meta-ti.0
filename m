@@ -1,41 +1,26 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EF9FBE00AF2; Tue,  1 Dec 2015 07:40:03 -0800 (PST)
+	id 61465E00B01; Tue,  1 Dec 2015 12:44:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CDF0E00ADF
-	for <meta-ti@yoctoproject.org>; Tue,  1 Dec 2015 07:39:59 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id tB1FdwwP003651
-	for <meta-ti@yoctoproject.org>; Tue, 1 Dec 2015 09:39:59 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tB1Fdwi8018146
-	for <meta-ti@yoctoproject.org>; Tue, 1 Dec 2015 09:39:58 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 1 Dec 2015 09:39:58 -0600
-Received: from uda0850410.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tB1FdvOj027913	for <meta-ti@yoctoproject.org>;
-	Tue, 1 Dec 2015 09:39:58 -0600
-From: Eric Ruei <e-ruei1@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 1 Dec 2015 10:39:50 -0500
-Message-ID: <1448984390-21457-3-git-send-email-e-ruei1@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1448984390-21457-1-git-send-email-e-ruei1@ti.com>
-References: <1448984390-21457-1-git-send-email-e-ruei1@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH V2 2/2] omap5-sgx-ddk-um-linux: Configure DDK UM based on the availability of SGX
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C289E00AE4
+	for <meta-ti@yoctoproject.org>; Tue,  1 Dec 2015 12:44:32 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id AD4B752A22; Tue,  1 Dec 2015 20:44:31 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20151201204431.AD4B752A22@arago-project.org>
+Date: Tue,  1 Dec 2015 20:44:31 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : pa-lld: set sane defaults when platform is not defined
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,69 +33,107 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2015 15:40:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 01 Dec 2015 20:44:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Eric Ruei <a0850410@uda0850410>
+Module: meta-ti
+Branch: fido
+Commit: 7a5f0d251dbefa3758f9691c23033187f635ecf7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7a5f0d251dbefa3758f9691c23033187f635ecf7
 
-Enable non-SGX build for AM3/AM4:
-- Remove SGX init support if SGX is not included at MACHINE_FEATURES.
-- For ti43x: Select DDK UM libaries based on whether SGX is available
-             NullDRM libraries if SGX is not available
-             DRM/Wayland libraries if SGX is available
-             Select plugin lists based on whether SGX is available
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Dec  1 11:25:56 2015 +0000
 
-Note: The nullDRM DDK libraries are still required for QT5 library and
-      application build for the non-SGX build, however, the SGX related
-      APIs will not be invoked at the software rendering mode.
+pa-lld: set sane defaults when platform is not defined
 
-Signed-off-by: Eric Ruei <a0850410@uda0850410>
+Also fix this build error:
+| makefile_armv7:27: *** missing separator.  Stop.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb             | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index 8b032e3..0aefb33 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -7,12 +7,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ ...akefile_armv7-fix-missing-separator-error.patch |   30 ++++++++++++++++++++
+ recipes-bsp/pa-lld/pa-lld.inc                      |    7 +++-
+ recipes-bsp/pa-lld/pa-lld_git.bb                   |    2 +-
+ 3 files changed, 36 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch b/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch
+new file mode 100644
+index 0000000..2ff41d3
+--- /dev/null
++++ b/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch
+@@ -0,0 +1,30 @@
++From 60a938e6902c7cb8bec34abbc5a3723c8094d728 Mon Sep 17 00:00:00 2001
++From: Denys Dmytriyenko <denys@ti.com>
++Date: Tue, 1 Dec 2015 00:00:00 -0500
++Subject: [PATCH] makefile_armv7: fix missing separator error
++
++Doesn't seem to work in all versions of Make, fails like this:
++makefile_armv7:27: *** missing separator.  Stop.
++
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++---
++ makefile_armv7 | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git a/makefile_armv7 b/makefile_armv7
++index a2bc4f6..1ae6e0a 100644
++--- a/makefile_armv7
+++++ b/makefile_armv7
++@@ -24,9 +24,6 @@ else
++     export LLD_NAME=pa
++ endif        
++ 
++-echo DEVICE=$(DEVICE)
++-echo LLD_NAME=$(LLD_NAME)
++-
++ # Output for prebuilt generated libraries
++ export ARMV7LIBDIR ?= ./lib
++ export ARMV7OBJDIR ?= ./obj/$(DEVICE)
++-- 
++2.2.0
++
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index 082d59d..396278d 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -13,18 +13,21 @@ PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+ PA_LLD_SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
  
- BRANCH_omap-a15 = "master"
- BRANCH_ti33x = "am3/k4.1"
--BRANCH_ti43x = "am4/k4.1"
-+BRANCH_ti43x = "${@base_contains('MACHINE_FEATURES', 'sgx', 'am4/k4.1', 'am3/k4.1', d)}"
+ BRANCH = "${PA_LLD_GIT_BRANCH}"
+-SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
++            file://0001-makefile_armv7-fix-missing-separator-error.patch"
+ SRCREV = "${PA_LLD_SRCREV}"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
- SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
- SRCREV_ti33x    = "84ae5444c7cbc3f4c65a226b9fea62d4a513f3e0"
--SRCREV_ti43x    = "fdf4c0b594ca142a68aabb4c3f82b75be50b46cc"
-+SRCREV_ti43x    = "${@base_contains('MACHINE_FEATURES', 'sgx', 'fdf4c0b594ca142a68aabb4c3f82b75be50b46cc', '84ae5444c7cbc3f4c65a226b9fea62d4a513f3e0', d)}"
+ PV = "03.00.01.05"
+-INC_PR = "r2"
++INC_PR = "r3"
  
- INITSCRIPT_NAME = "pvr-init"
- INITSCRIPT_PARAMS = "defaults 8"
-@@ -44,15 +44,17 @@ do_install () {
-     install -m 0644 ${WORKDIR}/powervr.ini ${D}${sysconfdir}/
+ S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+ 
++DEVICELIST = "k2h k2k k2l k2e"
+ DEVICELIST_k2hk-evm = "k2h k2k"
+ DEVICELIST_k2l-evm = "k2l"
+ DEVICELIST_k2e-evm = "k2e"
+ 
++LIBPA = "libpa"
+ LIBPA_k2hk-evm = "libpa"
+ LIBPA_k2e-evm = "libpa2"
+ LIBPA_k2l-evm = "libpa2"
+diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
+index 501ee2d..f6de5b1 100644
+--- a/recipes-bsp/pa-lld/pa-lld_git.bb
++++ b/recipes-bsp/pa-lld/pa-lld_git.bb
+@@ -10,7 +10,7 @@ do_compile () {
+ #   Now build the lld in the updated directory
+     for device in ${DEVICELIST}
+     do
+-        make -f makefile_armv7 DEVICE=$device lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++        make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device"
+     done
  }
  
--FILES_${PN} =  "${bindir}/*"
-+FILES_${PN} =  "${@base_contains('MACHINE_FEATURES', 'sgx', '${bindir}/*', '', d)}"
- FILES_${PN} += " ${libdir}/*"
- FILES_${PN} +=  "${includedir}/* /usr/share/sgx-lib/"
--FILES_${PN} += "${sysconfdir}/init.d/pvr-init"
--FILES_${PN} += "${sysconfdir}/powervr.ini"
-+FILES_${PN} += "${@base_contains('MACHINE_FEATURES', 'sgx', '${sysconfdir}/init.d/pvr-init', '', d)}"
-+FILES_${PN} += "${@base_contains('MACHINE_FEATURES', 'sgx', '${sysconfdir}/powervr.ini', '', d)}"
- 
- PACKAGES =+ "${PN}-plugins"
-+SGX_PLUGINS_FILES_NULLDRM = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libpvrDRMWSEGL.so ${libdir}/libpvrDRMWSEGL_FRONT.so "
-+SGX_PLUGINS_FILES_DRM = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libpvrws_WAYLAND.so ${libdir}/libpvrws_KMS.so "
- FILES_${PN}-plugins = ""
--FILES_${PN}-plugins_ti43x = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libpvrws_WAYLAND.so ${libdir}/libpvrws_KMS.so "
-+FILES_${PN}-plugins_ti43x = "${@base_contains('MACHINE_FEATURES', 'sgx', SGX_PLUGINS_FILES_DRM, SGX_PLUGINS_FILES_NULLDRM, d)}"
- FILES_${PN}-plugins_ti33x = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libpvrDRMWSEGL.so ${libdir}/libpvrDRMWSEGL_FRONT.so "
- RDEPENDS_${PN} += "${PN}-plugins"
- 
--- 
-1.9.1
 
 
