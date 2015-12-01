@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 61465E00B01; Tue,  1 Dec 2015 12:44:41 -0800 (PST)
+	id 61FDCE00ADF; Tue,  1 Dec 2015 12:44:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C289E00AE4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AF3AE00ADF
 	for <meta-ti@yoctoproject.org>; Tue,  1 Dec 2015 12:44:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AD4B752A22; Tue,  1 Dec 2015 20:44:31 +0000 (UTC)
+	id B55A752997; Tue,  1 Dec 2015 20:44:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151201204431.AD4B752A22@arago-project.org>
+Message-Id: <20151201204431.B55A752997@arago-project.org>
 Date: Tue,  1 Dec 2015 20:44:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : pa-lld: set sane defaults when platform is not defined
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 01 Dec 2015 20:44:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 7a5f0d251dbefa3758f9691c23033187f635ecf7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7a5f0d251dbefa3758f9691c23033187f635ecf7
+Branch: master
+Commit: 8195b22cb136a91d32151ef932de0958a931361c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8195b22cb136a91d32151ef932de0958a931361c
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Dec  1 11:25:56 2015 +0000
