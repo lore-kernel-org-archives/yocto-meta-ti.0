@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 957DAE002F9; Tue,  1 Dec 2015 19:06:28 -0800 (PST)
+	id 29971E00349; Wed,  2 Dec 2015 10:36:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4C81E002F9
-	for <meta-ti@yoctoproject.org>; Tue,  1 Dec 2015 19:06:24 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6C20D52A19; Wed,  2 Dec 2015 03:06:24 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20151202030624.6C20D52A19@arago-project.org>
-Date: Wed,  2 Dec 2015 03:06:24 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jason Reeder : pru-icss: bump SRCREV and PV due to bug fixes
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5D50E002F9
+	for <meta-ti@yoctoproject.org>; Wed,  2 Dec 2015 10:36:31 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id tB2IaUPZ020800
+	for <meta-ti@yoctoproject.org>; Wed, 2 Dec 2015 12:36:30 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tB2IaUvu020594
+	for <meta-ti@yoctoproject.org>; Wed, 2 Dec 2015 12:36:30 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 2 Dec 2015 12:36:29 -0600
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	tB2IaTNS005645;	Wed, 2 Dec 2015 12:36:29 -0600
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 2 Dec 2015 13:36:27 -0500
+Message-ID: <1449081388-3366-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH 1/2] ipumm-fw: Bump SRCREV for build fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +45,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2015 03:06:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 02 Dec 2015 18:36:35 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: fido
-Commit: cecc3caa85f07b1d5e1f37d03aa1452131f07a0e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cecc3caa85f07b1d5e1f37d03aa1452131f07a0e
+* fix issue where ipumm-fw would rebuild dependencies
 
-Author: Jason Reeder <jreeder@ti.com>
-Date:   Tue Dec  1 05:17:14 2015 +0000
-
-pru-icss: bump SRCREV and PV due to bug fixes
-
-Due to bug fixes and updates the package version is being
-incremented to 4.0.1. The commit ID is also being updated
-to reflect these changes.
-
-Signed-off-by: Jason Reeder <jreeder@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-bsp/pru/pru-icss_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-index 802521b..30bb3c3 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -8,9 +8,9 @@ inherit update-alternatives
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index af53c3c..b54306c 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,7 +17,7 @@ RDEPENDS_${PN} = " libdce"
  
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
--SRCREV = "476289eb7c3a91977bae84aea55c56f3120b48ea"
-+SRCREV = "c21ff82cf0a8864a66505be88be1d579a66a983a"
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--PV = "4.0.0.0"
-+PV = "4.0.1"
- PR = "r1"
+-SRCREV = "7f15373c21a9a98b8881d81c3681c09e858a9d2c"
++SRCREV = "486aa14f700783dbee63a0d81fb2e57d27a286e6"
  
- require recipes-ti/includes/ti-paths.inc
+ S = "${WORKDIR}/git"
+ 
+@@ -59,4 +59,4 @@ do_install() {
+ 
+ FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+ 
+-PR = "r1"
++PR = "r2"
+-- 
+1.9.1
 
 
