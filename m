@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 836ECE007B1; Thu,  3 Dec 2015 10:30:41 -0800 (PST)
+	id 84EAFE005B3; Thu,  3 Dec 2015 10:30:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45ABDE00406
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45A71E00349
 	for <meta-ti@yoctoproject.org>; Thu,  3 Dec 2015 10:30:39 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3C56352A48; Thu,  3 Dec 2015 18:30:39 +0000 (UTC)
+	id 865A952A2A; Thu,  3 Dec 2015 18:30:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151203183039.3C56352A48@arago-project.org>
-Date: Thu,  3 Dec 2015 18:30:39 +0000 (UTC)
+Message-Id: <20151203183038.865A952A2A@arago-project.org>
+Date: Thu,  3 Dec 2015 18:30:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : dsplib-c66x: add version 3.4.0.0
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 03 Dec 2015 18:30:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3cb73c27e6a5e98eaeaadcd97da9cab3a2d8d770
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3cb73c27e6a5e98eaeaadcd97da9cab3a2d8d770
+Branch: fido
+Commit: 47d16a7911291d1468f258201d92abebca51585c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=47d16a7911291d1468f258201d92abebca51585c
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Thu Dec  3 02:50:47 2015 +0000
