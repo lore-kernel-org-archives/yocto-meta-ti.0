@@ -1,44 +1,26 @@
-Return-Path: <h-gou@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C3E95E008E5; Thu,  3 Dec 2015 07:23:44 -0800 (PST)
+	id DF7A2E00947; Thu,  3 Dec 2015 07:43:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E494E00888
-	for <meta-ti@yoctoproject.org>; Thu,  3 Dec 2015 07:23:37 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tB3FNbK1005085
-	for <meta-ti@yoctoproject.org>; Thu, 3 Dec 2015 09:23:37 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tB3FNagZ009976
-	for <meta-ti@yoctoproject.org>; Thu, 3 Dec 2015 09:23:37 -0600
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0224.002; Thu, 3 Dec 2015 09:23:36 -0600
-From: "Gou, Hongmei" <h-gou@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti]  [PATCH v3] dsplib-c66x: add version 3.4.0.0
-Thread-Index: AQHRLUtfY4haPE/dfUKuNV5iLVoNjZ65Yhiw
-Date: Thu, 3 Dec 2015 15:23:37 +0000
-Message-ID: <2E957F12D11D904590FA9AF86D366BD926B13D95@DLEE08.ent.ti.com>
-References: <1449089447-2567-1-git-send-email-h-gou@ti.com>
-	<20151202214935.GM6264@edge>
-In-Reply-To: <20151202214935.GM6264@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH v3] dsplib-c66x: add version 3.4.0.0
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE5B8E00888
+	for <meta-ti@yoctoproject.org>; Thu,  3 Dec 2015 07:43:21 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0484152A2A; Thu,  3 Dec 2015 15:43:21 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20151203154321.0484152A2A@arago-project.org>
+Date: Thu,  3 Dec 2015 15:43:20 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: remove outdated 3.12 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,130 +33,241 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Dec 2015 15:23:44 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 03 Dec 2015 15:43:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-I will make similar changes and submit v2 patch for mathlib and imglib afte=
-r this one for dsplib is accepted.
+Module: meta-ti
+Branch: fido
+Commit: 3d117e3cbcc3caf8a7b35424c547f4970b6bddbf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3d117e3cbcc3caf8a7b35424c547f4970b6bddbf
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Wednesday, December 02, 2015 4:50 PM
-> To: Gou, Hongmei
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH v3] dsplib-c66x: add version 3.4.0.0
->=20
-> And what about the other 2 - mathlib and imglib?
->=20
-> On Wed, Dec 02, 2015 at 03:50:47PM -0500, Hongmei Gou wrote:
-> > Signed-off-by: Hongmei Gou <h-gou@ti.com>
-> > ---
-> > v3 changes:
-> > * Remove c66x from COMPATIBLE_MACHINE
-> > * Remove SRCIPK
-> >
-> >  recipes-ti/dsplib/dsplib-c66x.inc        | 26 ++++++++++++++++++++++++=
-++
-> >  recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb |  9 +++++++++
-> >  recipes-ti/includes/ti-paths.inc         |  2 ++
-> >  3 files changed, 37 insertions(+)
-> >  create mode 100644 recipes-ti/dsplib/dsplib-c66x.inc  create mode
-> > 100644 recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
-> >
-> > diff --git a/recipes-ti/dsplib/dsplib-c66x.inc
-> > b/recipes-ti/dsplib/dsplib-c66x.inc
-> > new file mode 100644
-> > index 0000000..31acc1e
-> > --- /dev/null
-> > +++ b/recipes-ti/dsplib/dsplib-c66x.inc
-> > @@ -0,0 +1,26 @@
-> > +DESCRIPTION =3D "DSPLIB contains optimized general-purpose signal-
-> processing routines for TI DSPs"
-> > +HOMEPAGE =3D "http://www.ti.com/tool/sprc265"
-> > +SECTION =3D "devel"
-> > +LICENSE =3D "BSD-3-Clause"
-> > +
-> > +require ../includes/ti-paths.inc
-> > +require ../includes/ti-staging.inc
-> > +require ../includes/ti-unpack.inc
-> > +
-> > +COMPATIBLE_MACHINE =3D "omap-a15|keystone"
-> > +
-> > +SRC_URI =3D "http://software-
-> dl.ti.com/sdoemb/sdoemb_public_sw/dsplib/${PV}/exports/${BINFILE};nam
-> e=3Ddsplib"
-> > +
-> > +BINFILE =3D "dsplib_c66x_${PV}_Linux.bin"
-> > +TI_BIN_UNPK_ARGS =3D "--mode silent --prefix ${S}"
-> > +TI_BIN_UNPK_CMDS =3D ""
-> > +
-> > +do_install() {
-> > +    install -d ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
-> > +    cp -pPrf ${S}/* ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
-> > +}
-> > +
-> > +ALLOW_EMPTY_${PN} =3D "1"
-> > +FILES_${PN}-dev +=3D "${DSPLIB_C66_INSTALL_DIR_RECIPE}"
-> > +
-> > +INSANE_SKIP_${PN}-dev =3D "arch"
-> > diff --git a/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
-> > b/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
-> > new file mode 100644
-> > index 0000000..f1273f3
-> > --- /dev/null
-> > +++ b/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
-> > @@ -0,0 +1,9 @@
-> > +require dsplib-c66x.inc
-> > +
-> > +PV =3D "3_4_0_0"
-> > +PR =3D "r1"
-> > +
-> > +LIC_FILES_CHKSUM =3D
-> "file://packages/ti/dsplib/dsplib.h;beginline=3D9;endline=3D35;md5=3D1773=
-3f9e110
-> 0f8a628512f47c4bf676a"
-> > +
-> > +SRC_URI[dsplib.md5sum] =3D "66785604729c153dcad5282097dee8bf"
-> > +SRC_URI[dsplib.sha256sum] =3D
-> "e88909b6271ce6c4c62e2ab90181b7adb36c7f28f5c52836668eb35888785ce8"
-> > diff --git a/recipes-ti/includes/ti-paths.inc
-> > b/recipes-ti/includes/ti-paths.inc
-> > index ad4ff78..37feb93 100644
-> > --- a/recipes-ti/includes/ti-paths.inc
-> > +++ b/recipes-ti/includes/ti-paths.inc
-> > @@ -49,6 +49,7 @@ export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    =3D
-> "${installdir}/ti-cgt-arm"
-> >  export CCSV6_INSTALL_DIR_RECIPE           =3D "${installdir}/ccsv6"
-> >  export GCC_ARM_NONE_TOOLCHAIN_RECIPE      =3D "${installdir}/gcc-arm-
-> none-eabi"
-> >  export TI_CGT_PRU_INSTALL_DIR_RECIPE      =3D "${installdir}/cgt-pru"
-> > +export DSPLIB_C66_INSTALL_DIR_RECIPE      =3D "${installdir}/ti-dsplib=
--c66x-
-> tree"
-> >
-> >
-> >  # This is where the tools will end up in sysroot
-> > @@ -89,6 +90,7 @@ export M4_TOOLCHAIN_INSTALL_DIR    =3D
-> "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTAL
-> >  export CCSV6_INSTALL_DIR           =3D
-> "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
-> >  export GCC_ARM_NONE_TOOLCHAIN      =3D
-> "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
-> >  export TI_CGT_PRU_INSTALL_DIR      =3D
-> "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
-> > +export DSPLIB_C66_INSTALL_DIR      =3D
-> "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
-> >
-> >  DSPSUFFIX_omapl137 =3D "x674"
-> >  DSPSUFFIX_omapl138 =3D "x674"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Dec  3 10:42:26 2015 -0500
+
+linux-ti-staging: remove outdated 3.12 version
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ ...ge-ARM-config-omap-Disable-SMP-for-AM335x.patch |   45 --------------
+ .../linux/linux-ti-staging-3.12/baseport.cfg       |    8 ---
+ .../linux/linux-ti-staging-3.12/connectivity.cfg   |   14 -----
+ .../linux/linux-ti-staging-3.12/defconfig          |    1 -
+ recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg |   18 ------
+ .../linux/linux-ti-staging-3.12/systest.cfg        |   20 ------
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      |   62 --------------------
+ 7 files changed, 0 insertions(+), 168 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch b/recipes-kernel/linux/linux-ti-staging-3.12/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
+deleted file mode 100644
+index a389e5c..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.12/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-From bd9c0b09db8798815cb577f82beebf7e6c03edcd Mon Sep 17 00:00:00 2001
+-From: Santosh Shilimkar <santosh.shilimkar@ti.com>
+-Date: Thu, 13 Feb 2014 08:52:41 -0500
+-Subject: [PATCH] Not-for-merge: ARM: config: omap: Disable SMP for AM335x
+- build
+-
+-SMP and SMP_ON_UP introduces some extra barriers and code many fast paths
+-including kernel lock functions.
+-
+-Performance sensitive usecases like networking gets impacted because of this.
+-In typical production kernel which is targeted for single core device
+-like AM335x family, you don't want to take this hit.
+-
+-Ideally one should just create a device specific config feed as done by all
+-typical distro's. Other option is to apply this specifically during build
+-time using recipe.
+-
+-Whichever option, one definitely don't want this overhead for performance
+-critical usecases.
+-
+-Disabling SMP in the build introduces one warining in cpuidle44xx.c driver
+-and fix is included in the series
+-
+-Signed-off-by: Santosh Shilimkar <santosh.shilimkar@ti.com>
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- arch/arm/configs/omap2plus_defconfig | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/arch/arm/configs/omap2plus_defconfig b/arch/arm/configs/omap2plus_defconfig
+-index ff579a7..25217e3 100644
+---- a/arch/arm/configs/omap2plus_defconfig
+-+++ b/arch/arm/configs/omap2plus_defconfig
+-@@ -36,8 +36,6 @@ CONFIG_OMAP4_ERRATA_I688=y
+- CONFIG_ARM_THUMBEE=y
+- CONFIG_ARM_ERRATA_411920=y
+- CONFIG_PCIE_DRA7XX=y
+--CONFIG_SMP=y
+--CONFIG_NR_CPUS=2
+- CONFIG_CMA=y
+- CONFIG_PREEMPT_VOLUNTARY=y
+- CONFIG_LEDS=y
+--- 
+-1.8.3.2
+-
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/baseport.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/baseport.cfg
+deleted file mode 100644
+index 8dc24af..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.12/baseport.cfg
++++ /dev/null
+@@ -1,8 +0,0 @@
+-##################################################
+-# Baseport Config Options
+-##################################################
+-CONFIG_CRYPTO_HW=y
+-CONFIG_CRYPTO_DEV_OMAP_AES=y
+-CONFIG_CRYPTO_DEV_OMAP_SHAM=y
+-CONFIG_CRYPTO_TEST=m
+-CONFIG_CRYPTO_MANAGER_DISABLE_TESTS=n
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/connectivity.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/connectivity.cfg
+deleted file mode 100644
+index bf18dae..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.12/connectivity.cfg
++++ /dev/null
+@@ -1,14 +0,0 @@
+-##################################################
+-# Connectivity Configs
+-##################################################
+-CONFIG_MTD_NAND_OMAP_BCH=y
+-CONFIG_MTD_TESTS=m
+-CONFIG_SPI_SPIDEV=y
+-CONFIG_USB_TEST=m
+-CONFIG_USB_ACM=y
+-CONFIG_USB_SERIAL_PL2303=y
+-CONFIG_USB_PRINTER=y
+-CONFIG_USB_NET_AX8817X=y
+-CONFIG_USB_G_MULTI=m
+-CONFIG_USB_G_MULTI_RNDIS=y
+-CONFIG_USB_G_MULTI_CDC=y
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/defconfig b/recipes-kernel/linux/linux-ti-staging-3.12/defconfig
+deleted file mode 100644
+index 926b35a..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.12/defconfig
++++ /dev/null
+@@ -1 +0,0 @@
+-use-kernel-config=omap2plus_defconfig
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg
+deleted file mode 100644
+index 645dfdf..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg
++++ /dev/null
+@@ -1,18 +0,0 @@
+-##################################################
+-# IPC config options
+-##################################################
+-CONFIG_IOMMU_API=y
+-CONFIG_IOMMU_SUPPORT=y
+-CONFIG_OF_IOMMU=y
+-CONFIG_OMAP_IOMMU=y
+-CONFIG_OMAP_IOVMM=y
+-CONFIG_OMAP_IOMMU_DEBUG=y
+-CONFIG_VIRTIO=m
+-CONFIG_RPMSG=m
+-CONFIG_RPMSG_RPC=m
+-CONFIG_REMOTEPROC=m
+-CONFIG_OMAP_REMOTEPROC=m
+-CONFIG_OMAP_REMOTEPROC_IPU=y
+-CONFIG_OMAP_REMOTEPROC_DSP=y
+-CONFIG_OMAP_REMOTEPROC_IPU1=y
+-CONFIG_OMAP_REMOTEPROC_DSP2=y
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg
+deleted file mode 100644
+index e21602f..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg
++++ /dev/null
+@@ -1,20 +0,0 @@
+-##################################################
+-# Systest config options
+-##################################################
+-CONFIG_DEBUG_SPINLOCK=y
+-CONFIG_DEBUG_MUTEXES=y
+-CONFIG_DEBUG_KMEMLEAK=y
+-CONFIG_DEVKMEM=y
+-CONFIG_HAVE_DEBUG_KMEMLEAK=y
+-CONFIG_DEBUG_KMEMLEAK_EARLY_LOG_SIZE=400
+-CONFIG_DEBUG_KMEMLEAK_TEST=n
+-CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF=n
+-CONFIG_DEBUG_LOCK_ALLOC=y
+-CONFIG_DEBUG_INFO=y
+-CONFIG_DEBUG_FS=y
+-CONFIG_DEBUG_KERNEL=y
+-CONFIG_PM_DEBUG=y
+-CONFIG_DEBUG_GPIO=y
+-CONFIG_USB_DEBUG=y
+-CONFIG_SND_DEBUG=y
+-CONFIG_RTC_DEBUG=y
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+deleted file mode 100644
+index dd68b8e..0000000
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ /dev/null
+@@ -1,62 +0,0 @@
+-SECTION = "kernel"
+-DESCRIPTION = "Linux kernel for TI devices"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+-
+-inherit kernel
+-
+-require recipes-kernel/linux/linux-dtb.inc
+-require recipes-kernel/linux/setup-defconfig.inc
+-
+-# Look in the generic major.minor directory for files
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.12:"
+-
+-# Pull in the devicetree files into the rootfs
+-RDEPENDS_kernel-base += "kernel-devicetree"
+-
+-# Add a run-time dependency for the PM firmware to be installed
+-# on the target file system.
+-RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
+-RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
+-
+-# Add a run-time dependency for the VPE VPDMA firmware to be installed
+-# on the target file system.
+-RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+-
+-# Default is to package all dtb files for ti33x devices unless building
+-# for the specific beaglebone machine.
+-KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+-KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
+-KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+-KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+-KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb"
+-
+-KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+-
+-S = "${WORKDIR}/git"
+-
+-BRANCH = "ti-linux-3.12.y"
+-
+-SRCREV = "68f449afccf6d1fb6b38bddfc3a40d9e97b53bdf"
+-PV = "3.12.30+git${SRCPV}"
+-
+-# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
+-PR = "${MACHINE_KERNEL_PR}"
+-
+-KERNEL_CONFIG_FRAGMENTS = "${WORKDIR}/baseport.cfg ${WORKDIR}/connectivity.cfg \
+-                           ${WORKDIR}/ipc.cfg"
+-
+-SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+-           file://defconfig \
+-           file://baseport.cfg \
+-           file://connectivity.cfg \
+-           file://ipc.cfg \
+-           file://systest.cfg \
+-          "
+-
+-# Disable SMP in defconfig on single-core platforms to reduce overhead
+-SRC_URI_append_ti33x = "file://0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
+-SRC_URI_append_ti43x = "file://0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
+
 
