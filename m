@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DF7A2E00947; Thu,  3 Dec 2015 07:43:23 -0800 (PST)
+	id E0230E00888; Thu,  3 Dec 2015 07:43:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE5B8E00888
-	for <meta-ti@yoctoproject.org>; Thu,  3 Dec 2015 07:43:21 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6DD8BE0088C
+	for <meta-ti@yoctoproject.org>; Thu,  3 Dec 2015 07:43:22 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0484152A2A; Thu,  3 Dec 2015 15:43:21 +0000 (UTC)
+	id B0EF152A5A; Thu,  3 Dec 2015 15:43:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151203154321.0484152A2A@arago-project.org>
-Date: Thu,  3 Dec 2015 15:43:20 +0000 (UTC)
+Message-Id: <20151203154321.B0EF152A5A@arago-project.org>
+Date: Thu,  3 Dec 2015 15:43:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: remove outdated 3.12 version
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 03 Dec 2015 15:43:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 3d117e3cbcc3caf8a7b35424c547f4970b6bddbf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3d117e3cbcc3caf8a7b35424c547f4970b6bddbf
+Branch: master
+Commit: 163786e74a8d15f4828be06e5fcf7b0591f7fa32
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=163786e74a8d15f4828be06e5fcf7b0591f7fa32
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Dec  3 10:42:26 2015 -0500
