@@ -1,39 +1,40 @@
-Return-Path: <denis@denix.org>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1A4C1E009EA; Fri,  4 Dec 2015 14:15:48 -0800 (PST)
+	id E4E28E0097F; Fri,  4 Dec 2015 14:37:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
+X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
+	URI_HEX autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6EEAE009C3
-	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 14:15:46 -0800 (PST)
-Received: from gandalf.denix.org ([100.15.86.14]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPSA id <0NYU00MIFTTJFB30@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 04 Dec 2015 16:15:20 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=xDJgBcBrK5EN9DJ6g74wNQ==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=wUQvQvOEmiQA:10 a=sozttTNsAAAA:8
-	a=XOvPbShjPtnFwsL_N28A:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id BD8F0161D3A;	Fri,
-	4 Dec 2015 17:15:19 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Fri, 04 Dec 2015 17:15:17 -0500
-Message-id: <1449267317-27742-3-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-In-reply-to: <1449267317-27742-1-git-send-email-denis@denix.org>
-References: <1449267317-27742-1-git-send-email-denis@denix.org>
-Subject: [PATCH 3/3] linux-ti-staging-rt: update to the latest rev
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37FE0E00948
+	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 14:37:13 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tB4MbD5B009118
+	for <meta-ti@yoctoproject.org>; Fri, 4 Dec 2015 16:37:13 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tB4MbD2g024269
+	for <meta-ti@yoctoproject.org>; Fri, 4 Dec 2015 16:37:13 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 4 Dec 2015 16:37:12 -0600
+Received: from uda0850410.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	tB4MbC2X023887	for <meta-ti@yoctoproject.org>;
+	Fri, 4 Dec 2015 16:37:12 -0600
+From: Eric Ruei <e-ruei1@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 4 Dec 2015 17:37:08 -0500
+Message-ID: <1449268628-32308-1-git-send-email-e-ruei1@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] omapdrm-pvr:Bump SRCREV of ti33x and ti43x to pick up the latest DDK KM fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,26 +47,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2015 22:15:48 -0000
+X-List-Received-Date: Fri, 04 Dec 2015 22:37:15 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 35c4910..6f6938a 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+index 50df3d9..7683dbf 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+@@ -20,8 +20,8 @@ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch
+ S = "${WORKDIR}/git"
  
- BRANCH = "ti-rt-linux-4.1.y"
+ SRCREV_omap-a15 = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
+-SRCREV_ti33x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
+-SRCREV_ti43x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
++SRCREV_ti33x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
++SRCREV_ti43x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
  
--SRCREV = "689b0790980be1cc3eb84e435c1bc87cd1e91458"
-+SRCREV = "b1ba8cd730f594e276a0cf92a4fe2bf5d4ad2c40"
+ PVR_NULLDRM_ti33x = "1"
+ PVR_NULLDRM_ti43x = "0"
 -- 
-2.2.0
+1.9.1
 
 
