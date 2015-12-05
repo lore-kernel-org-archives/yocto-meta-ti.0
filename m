@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EEEC4E009BD; Fri,  4 Dec 2015 19:12:14 -0800 (PST)
+	id F03EEE009C3; Fri,  4 Dec 2015 19:12:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB722E009C3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9639E00956
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0312352ABE; Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
+	id 7EB9852ABB; Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.0312352ABE@arago-project.org>
+Message-Id: <20151205031209.7EB9852ABB@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging-rt: update to the latest rev
+Subject: Sam Nelson : mpm-transport: Change file permissions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,30 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: e80e415dd7379ce2140fd18c84fc8e748e49c5ea
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e80e415dd7379ce2140fd18c84fc8e748e49c5ea
+Commit: d3a9812e4c1fb16954d2452b93cb3cac926a28ff
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d3a9812e4c1fb16954d2452b93cb3cac926a28ff
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec  5 04:15:17 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Dec  4 22:55:09 2015 +0000
 
-linux-ti-staging-rt: update to the latest rev
+mpm-transport: Change file permissions
 
+- Remove executable permission for json and include files.
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 35c4910..2d20d4c 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 7d86196..812ae04 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -40,11 +40,11 @@ do_install() {
+ 	oe_runmake installbin BASE_DIR=${S} INSTALL_BIN_BASE_DIR=${D}/${bindir}
  
- BRANCH = "ti-rt-linux-4.1.y"
+ 	install -d ${D}${includedir}/
+-	install -c -m 755 ${S}/include/* ${D}${includedir}/
++	install -c -m 644 ${S}/include/* ${D}${includedir}/
  
--SRCREV = "689b0790980be1cc3eb84e435c1bc87cd1e91458"
-+SRCREV = "83a502a2d33fb047566f154be3f881809ab75514"
+ 	install -d ${D}${libdir}/
+ 	cp  -a ${S}/lib/* ${D}${libdir}/
+ 
+ 	install -d ${D}${sysconfdir}/mpm/
+-	install -c -m 755 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
++	install -c -m 644 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
+ }
 
 
