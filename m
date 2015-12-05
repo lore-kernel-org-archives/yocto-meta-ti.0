@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EDB6BE00A73; Fri,  4 Dec 2015 19:12:14 -0800 (PST)
+	id EEEC4E009BD; Fri,  4 Dec 2015 19:12:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BAD9CE009BD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB722E009C3
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C9D2C52ABD; Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
+	id 0312352ABE; Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031209.C9D2C52ABD@arago-project.org>
+Message-Id: <20151205031210.0312352ABE@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest, rename pmmc-fw to ti-sci-fw
+Subject: Denys Dmytriyenko : linux-ti-staging-rt: update to the latest rev
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,49 +38,30 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 163555182edb967c38400630bf1347bbbd078a20
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=163555182edb967c38400630bf1347bbbd078a20
+Commit: e80e415dd7379ce2140fd18c84fc8e748e49c5ea
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e80e415dd7379ce2140fd18c84fc8e748e49c5ea
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec  5 04:15:16 2015 +0000
+Date:   Sat Dec  5 04:15:17 2015 +0000
 
-linux-ti-staging: update to the latest, rename pmmc-fw to ti-sci-fw
+linux-ti-staging-rt: update to the latest rev
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index ef953f9..fab0c2a 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -28,8 +28,8 @@ RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
- # Install boot-monitor skern file into /boot dir of rootfs
- RDEPENDS_kernel-base_append_keystone = " boot-monitor"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+index 35c4910..2d20d4c 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
  
--# Install pmmc-fw into /boot dir of rootfs
--RDEPENDS_kernel-base_append_k2g-evm = " pmmc-fw"
-+# Install ti-sci-fw into /boot dir of rootfs
-+RDEPENDS_kernel-base_append_k2g-evm = " ti-sci-fw"
+ BRANCH = "ti-rt-linux-4.1.y"
  
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -57,11 +57,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.1.y"
- 
--SRCREV = "e7ce6b9cdee62083862c3d86853819d871f853de"
-+SRCREV = "f0f52afb60f57f31c099dc849c6757fea5664e89"
- PV = "4.1.13+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-SRCREV = "689b0790980be1cc3eb84e435c1bc87cd1e91458"
++SRCREV = "83a502a2d33fb047566f154be3f881809ab75514"
 
 
