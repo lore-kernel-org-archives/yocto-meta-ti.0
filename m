@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3D7ACE00956; Fri,  4 Dec 2015 19:12:15 -0800 (PST)
+	id 3E13CE009F3; Fri,  4 Dec 2015 19:12:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9F407E009FC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EF3DE009F3
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A0F4B52AC7; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
+	id 65B1C52AC4; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.A0F4B52AC7@arago-project.org>
+Message-Id: <20151205031210.65B1C52AC4@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging-rt: update to the latest rev
+Subject: Sam Nelson : ti-ipc: Update to new version 3.41.00.06_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,30 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2174d649c2dd4d4ec0083068e15278074e5b0c7b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2174d649c2dd4d4ec0083068e15278074e5b0c7b
+Commit: 8e8618fb00fb63214a2a78c6f878c6e30fc62ded
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8e8618fb00fb63214a2a78c6f878c6e30fc62ded
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec  5 04:15:17 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Sat Dec  5 03:20:23 2015 +0000
 
-linux-ti-staging-rt: update to the latest rev
+ti-ipc: Update to new version 3.41.00.06_eng
 
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-ti/ipc/ti-ipc.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 35c4910..2d20d4c 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index d41796d..b29ac5b 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,11 +8,11 @@ BRANCH = "ipc-next"
  
- BRANCH = "ti-rt-linux-4.1.y"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "689b0790980be1cc3eb84e435c1bc87cd1e91458"
-+SRCREV = "83a502a2d33fb047566f154be3f881809ab75514"
+-#Corresponds to 3.41.00.03_eng
+-SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
++#Corresponds to 3.41.00.06_eng
++SRCREV = "795af8b9cec28bd6cdd1f00df1b9084b2a285cce"
+ 
+ S = "${WORKDIR}/git"
+-PV = "3.41.00.03"
++PV = "3.41.00.06"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
