@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EFBFCE00956; Fri,  4 Dec 2015 19:12:14 -0800 (PST)
+	id 38D33E00A73; Fri,  4 Dec 2015 19:12:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69057E009EA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1DB9E00A18
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2DFF852AC1; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
+	id BEB7052AC9; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.2DFF852AC1@arago-project.org>
+Message-Id: <20151205031210.BEB7052AC9@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : multiprocmgr: Update to new version 3.0.0.1_eng
@@ -37,9 +37,9 @@ X-List-Received-Date: Sat, 05 Dec 2015 03:12:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: e19d18cc494d3c9dfb96fc0a5eb34c8f140e73ac
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e19d18cc494d3c9dfb96fc0a5eb34c8f140e73ac
+Branch: master
+Commit: 3e02323dd2b49aaeac3bcb526ed971ba27c09158
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e02323dd2b49aaeac3bcb526ed971ba27c09158
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Sat Dec  5 07:58:26 2015 +0000
