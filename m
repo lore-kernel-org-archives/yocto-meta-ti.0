@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 12739E00A39; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
+	id 1DC84E009AD; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC262E009C5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA2B7E009AD
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8C1FB52A34; Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
+	id AD4AC52ABC; Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031209.8C1FB52A34@arago-project.org>
+Message-Id: <20151205031209.AD4AC52ABC@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update to new version 3.41.00.06_eng
+Subject: Denys Dmytriyenko : ti-sci-fw: rename PMMC firmware to TI SCI and update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +39,55 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 372d3d4c80a5aaea56931078d11c408a3cb1ba3c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=372d3d4c80a5aaea56931078d11c408a3cb1ba3c
+Commit: 27f4b790ddfbc3a37c5578b3a0e40692cea1257a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=27f4b790ddfbc3a37c5578b3a0e40692cea1257a
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Dec  5 03:20:23 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Dec  5 04:15:15 2015 +0000
 
-ti-ipc: Update to new version 3.41.00.06_eng
+ti-sci-fw: rename PMMC firmware to TI SCI and update to the latest
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../pmmc-fw_git.bb => ti-sci-fw/ti-sci-fw_git.bb}  |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index d41796d..b29ac5b 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,11 +8,11 @@ BRANCH = "ipc-next"
+diff --git a/recipes-bsp/pmmc-fw/pmmc-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+similarity index 82%
+rename from recipes-bsp/pmmc-fw/pmmc-fw_git.bb
+rename to recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 8d86234..4294c6b 100644
+--- a/recipes-bsp/pmmc-fw/pmmc-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -1,9 +1,9 @@
+-DESCRIPTION = "PMMC firmware"
++DESCRIPTION = "TI SCI firmware"
  
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
  
--#Corresponds to 3.41.00.03_eng
--SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
-+#Corresponds to 3.41.00.06_eng
-+SRCREV = "795af8b9cec28bd6cdd1f00df1b9084b2a285cce"
+-PV = "0.1.0.63"
++PV = "0.1.0.70"
+ PR = "r0"
  
- S = "${WORKDIR}/git"
--PV = "3.41.00.03"
-+PV = "3.41.00.06"
- INC_PR = "r0"
+ CLEANBROKEN = "1"
+@@ -12,13 +12,13 @@ COMPATIBLE_MACHINE = "k2g-evm"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "474abaf61ef4778df84b74c4a50f740149b38115"
++SRCREV = "a5b1c3d043fef5869eaa937276976c0e3e23b966"
+ BRANCH ?= "master"
+ 
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+ 
+ S = "${WORKDIR}/git"
+-TARGET = "pmmc-firmware.bin"
++TARGET = "ti-sci-firmware-k2g.bin"
+ 
+ do_install() {
+ 	install -d ${D}/boot
 
 
