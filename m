@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 38D33E00A73; Fri,  4 Dec 2015 19:12:15 -0800 (PST)
+	id 3CB4FE009C3; Fri,  4 Dec 2015 19:12:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1DB9E00A18
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EF91E009F5
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BEB7052AC9; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
+	id 8E1EC52AC6; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.BEB7052AC9@arago-project.org>
+Message-Id: <20151205031210.8E1EC52AC6@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new version 3.0.0.1_eng
+Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest, rename pmmc-fw to ti-sci-fw
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,49 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 3e02323dd2b49aaeac3bcb526ed971ba27c09158
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e02323dd2b49aaeac3bcb526ed971ba27c09158
+Commit: 03017243a4c88cdf70d0f85aec4b80f9342e6473
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=03017243a4c88cdf70d0f85aec4b80f9342e6473
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Dec  5 07:58:26 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Dec  5 04:15:16 2015 +0000
 
-multiprocmgr: Update to new version 3.0.0.1_eng
+linux-ti-staging: update to the latest, rename pmmc-fw to ti-sci-fw
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index 94fa707..f875396 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -5,9 +5,9 @@ SECTION = "console"
- COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index ef953f9..fab0c2a 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -28,8 +28,8 @@ RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+ # Install boot-monitor skern file into /boot dir of rootfs
+ RDEPENDS_kernel-base_append_keystone = " boot-monitor"
  
- BRANCH = "linux41"
--# The following commits correspond to DEV.MPM-3.00.00.00_ENG
--SRCREV = "158e7d419662b482a089fb66ecdfced1104654ae"
--PV = "3.0.0.0"
-+# The following commits correspond to DEV.MPM-3.00.00.01_ENG
-+SRCREV = "c1c245814b835509b99d144b52e00316665ac477"
-+PV = "3.0.0.1"
+-# Install pmmc-fw into /boot dir of rootfs
+-RDEPENDS_kernel-base_append_k2g-evm = " pmmc-fw"
++# Install ti-sci-fw into /boot dir of rootfs
++RDEPENDS_kernel-base_append_k2g-evm = " ti-sci-fw"
  
- SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+@@ -57,11 +57,11 @@ S = "${WORKDIR}/git"
  
+ BRANCH = "ti-lsk-linux-4.1.y"
+ 
+-SRCREV = "e7ce6b9cdee62083862c3d86853819d871f853de"
++SRCREV = "f0f52afb60f57f31c099dc849c6757fea5664e89"
+ PV = "4.1.13+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
