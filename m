@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3E13CE009F3; Fri,  4 Dec 2015 19:12:15 -0800 (PST)
+	id 49A33E00AAB; Fri,  4 Dec 2015 19:12:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EF3DE009F3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A84B6E00A04
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 65B1C52AC4; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
+	id 3ED3452AC2; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.65B1C52AC4@arago-project.org>
+Message-Id: <20151205031210.3ED3452AC2@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update to new version 3.41.00.06_eng
+Subject: Denys Dmytriyenko : dspdce-fw: fix alternatives handling
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +33,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Dec 2015 03:12:15 -0000
+X-List-Received-Date: Sat, 05 Dec 2015 03:12:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 8e8618fb00fb63214a2a78c6f878c6e30fc62ded
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8e8618fb00fb63214a2a78c6f878c6e30fc62ded
+Branch: fido
+Commit: 2903335d81642ebea78fd2225bacd0896552d053
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2903335d81642ebea78fd2225bacd0896552d053
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Dec  5 03:20:23 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Dec  5 08:22:53 2015 +0000
 
-ti-ipc: Update to new version 3.41.00.06_eng
+dspdce-fw: fix alternatives handling
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index d41796d..b29ac5b 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,11 +8,11 @@ BRANCH = "ipc-next"
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+index cf4c34c..6c6bb2a 100644
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
  
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
+-PR = "r1"
++PR = "r2"
+ inherit update-alternatives
  
--#Corresponds to 3.41.00.03_eng
--SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
-+#Corresponds to 3.41.00.06_eng
-+SRCREV = "795af8b9cec28bd6cdd1f00df1b9084b2a285cce"
+ DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
+@@ -49,11 +49,12 @@ TARGET = "dra7-dsp1-fw.xe66"
  
- S = "${WORKDIR}/git"
--PV = "3.41.00.03"
-+PV = "3.41.00.06"
- INC_PR = "r0"
+ do_install() {
+         mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}
++        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
+ }
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
+-ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "/lib/firmware/${TARGET}"
++ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}"
++ALTERNATIVE_TARGET[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}.${BPN}"
+ ALTERNATIVE_PRIORITY = "10"
+ 
+ INSANE_SKIP_${PN} = "arch"
 
 
