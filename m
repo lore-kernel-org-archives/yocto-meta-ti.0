@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F0627E009C5; Fri,  4 Dec 2015 19:25:10 -0800 (PST)
+	id 18A18E00956; Fri,  4 Dec 2015 19:25:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75CCCE009C3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 72336E00956
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:25:05 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7FD9F52ABD; Sat,  5 Dec 2015 03:25:05 +0000 (UTC)
+	id 20C0152ABC; Sat,  5 Dec 2015 03:25:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205032505.7FD9F52ABD@arago-project.org>
+Message-Id: <20151205032505.20C0152ABC@arago-project.org>
 Date: Sat,  5 Dec 2015 03:25:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Gou, Hongmei : imglib-c66x: add version 3.1.1.0
+Subject: Gou, Hongmei : mathlib-c66x: add version 3.1.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,32 +38,52 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a757f12b9d944266bc18a98ccddf22607c30b369
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a757f12b9d944266bc18a98ccddf22607c30b369
+Commit: 9e1e9d0a87c76cd7d9dfc17ba3bce09bb4669cbf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9e1e9d0a87c76cd7d9dfc17ba3bce09bb4669cbf
 
 Author: Gou, Hongmei <h-gou@ti.com>
-Date:   Fri Dec  4 01:21:57 2015 +0000
+Date:   Fri Dec  4 01:08:27 2015 +0000
 
-imglib-c66x: add version 3.1.1.0
+mathlib-c66x: add version 3.1.1.0
 
 Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/imglib/imglib-c66x.inc        |   29 +++++++++++++++++++++++++++++
- recipes-ti/imglib/imglib-c66x_3.1.1.0.bb |    9 +++++++++
- recipes-ti/includes/ti-paths.inc         |    2 ++
- 3 files changed, 40 insertions(+), 0 deletions(-)
+ recipes-ti/includes/ti-paths.inc           |    2 ++
+ recipes-ti/mathlib/mathlib-c66x.inc        |   28 ++++++++++++++++++++++++++++
+ recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb |    9 +++++++++
+ 3 files changed, 39 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/imglib/imglib-c66x.inc b/recipes-ti/imglib/imglib-c66x.inc
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 37feb93..7d2211a 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -50,6 +50,7 @@ export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
+ export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
+ export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
+ export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
++export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
+ 
+ 
+ # This is where the tools will end up in sysroot
+@@ -91,6 +92,7 @@ export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_R
+ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
+ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
+ export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
++export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
+diff --git a/recipes-ti/mathlib/mathlib-c66x.inc b/recipes-ti/mathlib/mathlib-c66x.inc
 new file mode 100644
-index 0000000..3c76ad5
+index 0000000..1511337
 --- /dev/null
-+++ b/recipes-ti/imglib/imglib-c66x.inc
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "IMGLIB contains optimized general-purpose image/video processing routines for TI DSPs"
-+HOMEPAGE = "http://www.ti.com/tool/sprc264"
++++ b/recipes-ti/mathlib/mathlib-c66x.inc
+@@ -0,0 +1,28 @@
++DESCRIPTION = "MATHLIB contains optimized general-purpose signal-processing routines for TI DSPs"
++HOMEPAGE = "http://www.ti.com/tool/mathlib"
 +SECTION = "devel"
 +LICENSE = "BSD-3-Clause"
 +
@@ -73,58 +93,37 @@ index 0000000..3c76ad5
 +
 +COMPATIBLE_MACHINE = "omap-a15|keystone"
 +
-+SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/imglib/${PV}/exports/${BINFILE};name=imglib"
++SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/mathlib/${PV}/exports/${BINFILE};name=mathlib"
 +
-+S = "${WORKDIR}/imglib-c66x-${PV}"
++S = "${WORKDIR}/mathlib-c66x-${PV}"
 +
-+BINFILE = "imglib_c66x_${PV}_Linux.bin"
++BINFILE = "mathlib_c66x_${PV}_Linux.bin"
 +TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
 +TI_BIN_UNPK_CMDS = ""
 +
 +do_install() {
-+    install -d ${D}${IMGLIB_C66_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${IMGLIB_C66_INSTALL_DIR_RECIPE}
++    install -d ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
++    cp -pPrf ${S}/* ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
 +}
 +
 +ALLOW_EMPTY_${PN} = "1"
-+FILES_${PN}-dev += "${IMGLIB_C66_INSTALL_DIR_RECIPE}"
++FILES_${PN}-dev += "${MATHLIB_C66_INSTALL_DIR_RECIPE}"
 +
-+RDEPENDS_${PN}-dev += "perl"
 +INSANE_SKIP_${PN}-dev = "arch"
-diff --git a/recipes-ti/imglib/imglib-c66x_3.1.1.0.bb b/recipes-ti/imglib/imglib-c66x_3.1.1.0.bb
+diff --git a/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb b/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
 new file mode 100644
-index 0000000..e614352
+index 0000000..50746fb
 --- /dev/null
-+++ b/recipes-ti/imglib/imglib-c66x_3.1.1.0.bb
++++ b/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
 @@ -0,0 +1,9 @@
-+require imglib-c66x.inc
++require mathlib-c66x.inc
 +
 +PV = "3_1_1_0"
 +PR = "r1"
 +
-+LIC_FILES_CHKSUM = "file://packages/ti/imglib/src/common/IMG_profile.h;beginline=1;endline=35;md5=a21fc16da34b650ce33a9a7143908667"
++LIC_FILES_CHKSUM = "file://packages/ti/mathlib/mathlib.h;beginline=9;endline=35;md5=954ed7074e987be574989f985f1897db"
 +
-+SRC_URI[imglib.md5sum] = "9d64f213e040899048446df5055deeca"
-+SRC_URI[imglib.sha256sum] = "f3153e51530f26cfc638efca7ca6ae1bbaf7736daf287fc972592372a676ed21"
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 7d2211a..2f253a0 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -51,6 +51,7 @@ export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
- export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
- export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
- export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
-+export IMGLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-imglib-c66x-tree"
- 
- 
- # This is where the tools will end up in sysroot
-@@ -93,6 +94,7 @@ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCH
- export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
- export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
- export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
-+export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
- 
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
++SRC_URI[mathlib.md5sum] = "f3c9ad06dfcea780b5362c57a4bc48b8"
++SRC_URI[mathlib.sha256sum] = "85df897c94e8768e9a1f186c21702ed3887d39cda6dc67cb4580fa3f083e8925"
 
 
