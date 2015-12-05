@@ -1,37 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7178BE009AD; Fri,  4 Dec 2015 18:22:59 -0800 (PST)
+	id 12739E00A39; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.25 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A209E00948
-	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 18:22:55 -0800 (PST)
-Received: from gandalf.denix.org ([100.15.86.14]) by vms173025.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPSA id <0NYV002BX5A6AD10@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 04 Dec 2015 20:22:55 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=xDJgBcBrK5EN9DJ6g74wNQ==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=wUQvQvOEmiQA:10 a=sozttTNsAAAA:8
-	a=TKWfU4-Fe_D3_wOOFd4A:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 36DB7161D36;	Fri,
-	4 Dec 2015 21:22:54 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC262E009C5
+	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:10 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 8C1FB52A34; Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 04 Dec 2015 21:22:53 -0500
-Message-id: <1449282173-13323-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] dspdce-fw: fix alternatives handling
+Message-Id: <20151205031209.8C1FB52A34@arago-project.org>
+Date: Sat,  5 Dec 2015 03:12:09 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : ti-ipc: Update to new version 3.41.00.06_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,44 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Dec 2015 02:22:59 -0000
+X-List-Received-Date: Sat, 05 Dec 2015 03:12:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: fido
+Commit: 372d3d4c80a5aaea56931078d11c408a3cb1ba3c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=372d3d4c80a5aaea56931078d11c408a3cb1ba3c
 
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Sat Dec  5 03:20:23 2015 +0000
+
+ti-ipc: Update to new version 3.41.00.06_eng
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index cf4c34c..6c6bb2a 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+---
+
+ recipes-ti/ipc/ti-ipc.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index d41796d..b29ac5b 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,11 +8,11 @@ BRANCH = "ipc-next"
  
--PR = "r1"
-+PR = "r2"
- inherit update-alternatives
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
  
- DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
-@@ -49,11 +49,12 @@ TARGET = "dra7-dsp1-fw.xe66"
+-#Corresponds to 3.41.00.03_eng
+-SRCREV = "354db7d3b6aa397e6ab4b86fdbd312746fd46a07"
++#Corresponds to 3.41.00.06_eng
++SRCREV = "795af8b9cec28bd6cdd1f00df1b9084b2a285cce"
  
- do_install() {
-         mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}
-+        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
- }
+ S = "${WORKDIR}/git"
+-PV = "3.41.00.03"
++PV = "3.41.00.06"
+ INC_PR = "r0"
  
- ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
--ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "/lib/firmware/${TARGET}"
-+ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}"
-+ALTERNATIVE_TARGET[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}.${BPN}"
- ALTERNATIVE_PRIORITY = "10"
- 
- INSANE_SKIP_${PN} = "arch"
--- 
-2.2.0
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
