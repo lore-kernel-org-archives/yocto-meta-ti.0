@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4BB66E00A04; Fri,  4 Dec 2015 19:12:17 -0800 (PST)
+	id 4E8CBE00A5C; Fri,  4 Dec 2015 19:12:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1EFB7E00A5C
-	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 205E7E00A71
+	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:14 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1E1D652A80; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
+	id CDCA652ACA; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.1E1D652A80@arago-project.org>
+Message-Id: <20151205031210.CDCA652ACA@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: e-ruei1@ti.com : omapdrm-pvr: Bump SRCREV of ti33x and ti43x to pick up the latest DDK KM fix
+Subject: Denys Dmytriyenko : dspdce-fw: fix alternatives handling
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,37 +37,49 @@ X-List-Received-Date: Sat, 05 Dec 2015 03:12:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 14acfd3059f7a96d3397916aa250ee0d258fbeee
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14acfd3059f7a96d3397916aa250ee0d258fbeee
+Branch: master
+Commit: 8a1736037d7e85e473073ded667e065d46912419
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8a1736037d7e85e473073ded667e065d46912419
 
-Author: e-ruei1@ti.com <e-ruei1@ti.com>
-Date:   Sat Dec  5 04:37:08 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Dec  5 08:22:53 2015 +0000
 
-omapdrm-pvr:Bump SRCREV of ti33x and ti43x to pick up the latest DDK KM fix
+dspdce-fw: fix alternatives handling
 
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-index 50df3d9..7683dbf 100644
---- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-@@ -20,8 +20,8 @@ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch
- S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+index cf4c34c..6c6bb2a 100644
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
  
- SRCREV_omap-a15 = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
--SRCREV_ti33x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
--SRCREV_ti43x = "2b7523d07a13ab704a24a7664749551f4a13ed32"
-+SRCREV_ti33x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
-+SRCREV_ti43x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
+-PR = "r1"
++PR = "r2"
+ inherit update-alternatives
  
- PVR_NULLDRM_ti33x = "1"
- PVR_NULLDRM_ti43x = "0"
+ DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
+@@ -49,11 +49,12 @@ TARGET = "dra7-dsp1-fw.xe66"
+ 
+ do_install() {
+         mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}
++        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
+ }
+ 
+ ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
+-ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "/lib/firmware/${TARGET}"
++ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}"
++ALTERNATIVE_TARGET[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}.${BPN}"
+ ALTERNATIVE_PRIORITY = "10"
+ 
+ INSANE_SKIP_${PN} = "arch"
 
 
