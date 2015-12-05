@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4B29DE00A4F; Fri,  4 Dec 2015 19:12:17 -0800 (PST)
+	id 4BB66E00A04; Fri,  4 Dec 2015 19:12:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,12 +14,12 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1ED22E00A4F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1EFB7E00A5C
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AC99B52AC8; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
+	id 1E1D652A80; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.AC99B52AC8@arago-project.org>
+Message-Id: <20151205031210.1E1D652A80@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: e-ruei1@ti.com : omapdrm-pvr: Bump SRCREV of ti33x and ti43x to pick up the latest DDK KM fix
@@ -39,9 +39,9 @@ X-List-Received-Date: Sat, 05 Dec 2015 03:12:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b5f84f1b1b016f3d0c513eee528efe204a33a6bf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b5f84f1b1b016f3d0c513eee528efe204a33a6bf
+Branch: fido
+Commit: 14acfd3059f7a96d3397916aa250ee0d258fbeee
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14acfd3059f7a96d3397916aa250ee0d258fbeee
 
 Author: e-ruei1@ti.com <e-ruei1@ti.com>
 Date:   Sat Dec  5 04:37:08 2015 +0000
