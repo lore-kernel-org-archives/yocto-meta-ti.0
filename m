@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 49A33E00AAB; Fri,  4 Dec 2015 19:12:16 -0800 (PST)
+	id 49DD7E00AB5; Fri,  4 Dec 2015 19:12:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A84B6E00A04
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E706E009BD
 	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:12:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3ED3452AC2; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
+	id 52E7452AC3; Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205031210.3ED3452AC2@arago-project.org>
+Message-Id: <20151205031210.52E7452AC3@arago-project.org>
 Date: Sat,  5 Dec 2015 03:12:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : dspdce-fw: fix alternatives handling
+Subject: Sam Nelson : mpm-transport: Change file permissions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,53 +33,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Dec 2015 03:12:16 -0000
+X-List-Received-Date: Sat, 05 Dec 2015 03:12:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 2903335d81642ebea78fd2225bacd0896552d053
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2903335d81642ebea78fd2225bacd0896552d053
+Branch: master
+Commit: 5ea65eceb4d81a5c9a192216819bec8223a979cf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5ea65eceb4d81a5c9a192216819bec8223a979cf
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec  5 08:22:53 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Dec  4 22:55:09 2015 +0000
 
-dspdce-fw: fix alternatives handling
+mpm-transport: Change file permissions
 
+- Remove executable permission for json and include files.
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index cf4c34c..6c6bb2a 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 7d86196..812ae04 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -40,11 +40,11 @@ do_install() {
+ 	oe_runmake installbin BASE_DIR=${S} INSTALL_BIN_BASE_DIR=${D}/${bindir}
  
--PR = "r1"
-+PR = "r2"
- inherit update-alternatives
+ 	install -d ${D}${includedir}/
+-	install -c -m 755 ${S}/include/* ${D}${includedir}/
++	install -c -m 644 ${S}/include/* ${D}${includedir}/
  
- DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
-@@ -49,11 +49,12 @@ TARGET = "dra7-dsp1-fw.xe66"
+ 	install -d ${D}${libdir}/
+ 	cp  -a ${S}/lib/* ${D}${libdir}/
  
- do_install() {
-         mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}
-+        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
+ 	install -d ${D}${sysconfdir}/mpm/
+-	install -c -m 755 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
++	install -c -m 644 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
  }
- 
- ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
--ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "/lib/firmware/${TARGET}"
-+ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}"
-+ALTERNATIVE_TARGET[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/${TARGET}.${BPN}"
- ALTERNATIVE_PRIORITY = "10"
- 
- INSANE_SKIP_${PN} = "arch"
 
 
