@@ -1,37 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AAB7BE009D7; Mon,  7 Dec 2015 20:08:00 -0800 (PST)
+	id 387D1E009D7; Mon,  7 Dec 2015 20:16:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.25 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC643E006F3
-	for <meta-ti@yoctoproject.org>; Mon,  7 Dec 2015 20:07:56 -0800 (PST)
-Received: from gandalf.denix.org ([100.15.86.14]) by vms173025.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPSA id <0NZ000E64U4O6F50@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 07 Dec 2015 22:07:39 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=xDJgBcBrK5EN9DJ6g74wNQ==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=wUQvQvOEmiQA:10 a=sozttTNsAAAA:8
-	a=wnXv_xtyrOLBZ0IJ53UA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 378DC161D38;	Mon,
-	7 Dec 2015 23:07:36 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 179ECE0079A
+	for <meta-ti@yoctoproject.org>; Mon,  7 Dec 2015 20:15:58 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 995BC52A0D; Tue,  8 Dec 2015 04:15:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 07 Dec 2015 23:07:35 -0500
-Message-id: <1449547655-31414-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] layer.conf: add ti-rpc-rtos to ABI safe list
+Message-Id: <20151208041557.995BC52A0D@arago-project.org>
+Date: Tue,  8 Dec 2015 04:15:57 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : layer.conf: add ti-rpc-rtos to ABI safe list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Dec 2015 04:08:00 -0000
+X-List-Received-Date: Tue, 08 Dec 2015 04:16:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: ffbe1edbf1a51ad9e20ac50652d60ce914f4c109
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ffbe1edbf1a51ad9e20ac50652d60ce914f4c109
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Dec  8 10:07:35 2015 +0000
+
+layer.conf: add ti-rpc-rtos to ABI safe list
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/layer.conf | 1 +
- 1 file changed, 1 insertion(+)
+
+ conf/layer.conf |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
 diff --git a/conf/layer.conf b/conf/layer.conf
 index 51da372..1172503 100644
@@ -65,7 +65,5 @@ index 51da372..1172503 100644
      cmem-mod \
      hplib-mod \
      gdbserverproxy-module-drv \
--- 
-2.2.0
 
 
