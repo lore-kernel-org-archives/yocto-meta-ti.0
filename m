@@ -1,26 +1,37 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 18A18E00956; Fri,  4 Dec 2015 19:25:10 -0800 (PST)
+	id AAB7BE009D7; Mon,  7 Dec 2015 20:08:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.25 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 72336E00956
-	for <meta-ti@yoctoproject.org>; Fri,  4 Dec 2015 19:25:05 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 20C0152ABC; Sat,  5 Dec 2015 03:25:05 +0000 (UTC)
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC643E006F3
+	for <meta-ti@yoctoproject.org>; Mon,  7 Dec 2015 20:07:56 -0800 (PST)
+Received: from gandalf.denix.org ([100.15.86.14]) by vms173025.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPSA id <0NZ000E64U4O6F50@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 07 Dec 2015 22:07:39 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=xDJgBcBrK5EN9DJ6g74wNQ==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=wUQvQvOEmiQA:10 a=sozttTNsAAAA:8
+	a=wnXv_xtyrOLBZ0IJ53UA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 378DC161D38;	Mon,
+	7 Dec 2015 23:07:36 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20151205032505.20C0152ABC@arago-project.org>
-Date: Sat,  5 Dec 2015 03:25:05 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Gou, Hongmei : mathlib-c66x: add version 3.1.1.0
+Date: Mon, 07 Dec 2015 23:07:35 -0500
+Message-id: <1449547655-31414-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] layer.conf: add ti-rpc-rtos to ABI safe list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,97 +44,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Dec 2015 03:25:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Dec 2015 04:08:00 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 9e1e9d0a87c76cd7d9dfc17ba3bce09bb4669cbf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9e1e9d0a87c76cd7d9dfc17ba3bce09bb4669cbf
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Gou, Hongmei <h-gou@ti.com>
-Date:   Fri Dec  4 01:08:27 2015 +0000
-
-mathlib-c66x: add version 3.1.1.0
-
-Signed-off-by: Hongmei Gou <h-gou@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
- recipes-ti/includes/ti-paths.inc           |    2 ++
- recipes-ti/mathlib/mathlib-c66x.inc        |   28 ++++++++++++++++++++++++++++
- recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb |    9 +++++++++
- 3 files changed, 39 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 37feb93..7d2211a 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -50,6 +50,7 @@ export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
- export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
- export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
- export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
-+export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
- 
- 
- # This is where the tools will end up in sysroot
-@@ -91,6 +92,7 @@ export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_R
- export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
- export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
- export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
-+export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
- 
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
-diff --git a/recipes-ti/mathlib/mathlib-c66x.inc b/recipes-ti/mathlib/mathlib-c66x.inc
-new file mode 100644
-index 0000000..1511337
---- /dev/null
-+++ b/recipes-ti/mathlib/mathlib-c66x.inc
-@@ -0,0 +1,28 @@
-+DESCRIPTION = "MATHLIB contains optimized general-purpose signal-processing routines for TI DSPs"
-+HOMEPAGE = "http://www.ti.com/tool/mathlib"
-+SECTION = "devel"
-+LICENSE = "BSD-3-Clause"
-+
-+require ../includes/ti-paths.inc
-+require ../includes/ti-staging.inc
-+require ../includes/ti-unpack.inc
-+
-+COMPATIBLE_MACHINE = "omap-a15|keystone"
-+
-+SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/mathlib/${PV}/exports/${BINFILE};name=mathlib"
-+
-+S = "${WORKDIR}/mathlib-c66x-${PV}"
-+
-+BINFILE = "mathlib_c66x_${PV}_Linux.bin"
-+TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
-+TI_BIN_UNPK_CMDS = ""
-+
-+do_install() {
-+    install -d ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
-+}
-+
-+ALLOW_EMPTY_${PN} = "1"
-+FILES_${PN}-dev += "${MATHLIB_C66_INSTALL_DIR_RECIPE}"
-+
-+INSANE_SKIP_${PN}-dev = "arch"
-diff --git a/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb b/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
-new file mode 100644
-index 0000000..50746fb
---- /dev/null
-+++ b/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
-@@ -0,0 +1,9 @@
-+require mathlib-c66x.inc
-+
-+PV = "3_1_1_0"
-+PR = "r1"
-+
-+LIC_FILES_CHKSUM = "file://packages/ti/mathlib/mathlib.h;beginline=9;endline=35;md5=954ed7074e987be574989f985f1897db"
-+
-+SRC_URI[mathlib.md5sum] = "f3c9ad06dfcea780b5362c57a4bc48b8"
-+SRC_URI[mathlib.sha256sum] = "85df897c94e8768e9a1f186c21702ed3887d39cda6dc67cb4580fa3f083e8925"
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 51da372..1172503 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -14,6 +14,7 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+     omapdrm-pvr \
+     omap5-sgx-ddk-um-linux \
+     ti-ipc \
++    ti-ipc-rtos \
+     cmem-mod \
+     hplib-mod \
+     gdbserverproxy-module-drv \
+-- 
+2.2.0
 
 
