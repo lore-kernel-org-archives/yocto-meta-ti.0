@@ -1,17 +1,17 @@
 Return-Path: <jdvdt2@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5EBDEE00BEA; Wed,  9 Dec 2015 03:23:31 -0800 (PST)
+	id 52880E00B0B; Wed,  9 Dec 2015 03:43:21 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (jdvdt2[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.213.53 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.213.44 listed in list.dnswl.org]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (jdvdt2[at]gmail.com)
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
@@ -20,31 +20,32 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-vk0-f53.google.com (mail-vk0-f53.google.com
-	[209.85.213.53])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CB44E00AB9
-	for <meta-ti@yoctoproject.org>; Wed,  9 Dec 2015 03:23:26 -0800 (PST)
-Received: by vkha189 with SMTP id a189so41762971vkh.2
-	for <meta-ti@yoctoproject.org>; Wed, 09 Dec 2015 03:23:26 -0800 (PST)
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
+	[209.85.213.44])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1C62E009D7
+	for <meta-ti@yoctoproject.org>; Wed,  9 Dec 2015 03:43:17 -0800 (PST)
+Received: by vkay187 with SMTP id y187so42201968vka.3
+	for <meta-ti@yoctoproject.org>; Wed, 09 Dec 2015 03:43:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=yXw4iGDRFyze0vEVJ3cH6Fh4jgRLGVCyxOzEkQOjI48=;
-	b=FaG81PfgUp9lWNKxKMb08R/0DF5PqrzCz0IuOsDbLqZt7rab9CKhfAP+z23Y7cMrw/
-	Wm8HbCthfrdQH3HHl+5+J5/MI/ajd3GOfEp1PSlE9mRmA3SEDtq9vc3l6OIXp/k4Wfvj
-	O1NkT/oY6FVdChSy72/HhmMzSQbkuq4Gd5ZKEQR2FBRhNwW1urOrd1iau2JyoL1MaPbl
-	WEPSy9TWShocjBDQXv+N2lX6cGA6wpXysdzfnFPBjj9i2hf9VvCr/9sbz8HHFYx4VuQS
-	IVXtFJxjHjp+nFObvMXUfi3XJqGORSq89b1ZeUQcsasya/8g+Ujd3bL/TcabT6M1bK+6
-	QZXQ==
+	bh=DhtwU9s4E442xkeFu6xEYJyTDfqfhv0PBlh0Igo0BtA=;
+	b=ciqs0CWyBLPuLEgq9+XT2waoDSUHToyxO+3TFX4911X5/WzOfm5/rV+vDtoScpgiyX
+	+L/XRCGB+cquiIzbjLjTyI5AgZIOnB97Uw4BKzXC9zAnl5Mw263zNlQ4h3t1+lll1V5N
+	OWStdj3fbBQFR3+UH6OXQLCCPNT6LJ7pCu1TDuv0CEkq0t2PE7HFMC01KBtA/APCbNe8
+	v+Zxi9EHgZE4hmnV3FB19r6UIQx+bWaNmqbrR9WSyLDZRUTFCyAn2QYGrWs19dPYWFuh
+	TmdrLuAlTpNOmtP3xIBZ3qoU+V/AJ111VpwXHHTx5NQLR6/pwR9fZWmeFXgTUQqUEjsk
+	ir+g==
 MIME-Version: 1.0
-X-Received: by 10.31.153.11 with SMTP id b11mr4100001vke.127.1449660205873;
-	Wed, 09 Dec 2015 03:23:25 -0800 (PST)
-Received: by 10.31.93.69 with HTTP; Wed, 9 Dec 2015 03:23:25 -0800 (PST)
-In-Reply-To: <20151208200147.GA15136@edge>
+X-Received: by 10.31.171.83 with SMTP id u80mr4165026vke.104.1449661396693;
+	Wed, 09 Dec 2015 03:43:16 -0800 (PST)
+Received: by 10.31.93.69 with HTTP; Wed, 9 Dec 2015 03:43:16 -0800 (PST)
+In-Reply-To: <CAAjA2MLo2=j_+mT1v5te8CwPks234xBOC6UG4v=+jTNZgDt2KQ@mail.gmail.com>
 References: <CAOYMvD1FdJsUM21hAp8_umo-+qzG9srWAW9B-ZgtCt7wQxhK8w@mail.gmail.com>
 	<20151208200147.GA15136@edge>
-Date: Wed, 9 Dec 2015 06:23:25 -0500
-Message-ID: <CAAjA2MLo2=j_+mT1v5te8CwPks234xBOC6UG4v=+jTNZgDt2KQ@mail.gmail.com>
+	<CAAjA2MLo2=j_+mT1v5te8CwPks234xBOC6UG4v=+jTNZgDt2KQ@mail.gmail.com>
+Date: Wed, 9 Dec 2015 06:43:16 -0500
+Message-ID: <CAAjA2MLJNwVsGcg6=Bp+YjieV+hT+q-u5GoZNaegdx_ktTEMzQ@mail.gmail.com>
 From: Joshua Vanderpool <jdvdt2@gmail.com>
 To: Denys Dmytriyenko <denys@ti.com>
 Cc: meta-ti@yoctoproject.org
@@ -61,312 +62,347 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2015 11:23:31 -0000
-Content-Type: multipart/alternative; boundary=001a1140fe589dbed0052675513e
+X-List-Received-Date: Wed, 09 Dec 2015 11:43:21 -0000
+Content-Type: multipart/alternative; boundary=001a114391e49846a4052675984d
 
---001a1140fe589dbed0052675513e
+--001a114391e49846a4052675984d
 Content-Type: text/plain; charset=UTF-8
 
-The host is a 64 bit Ubuntu 14.04LTS machine.
+wget
+http://releases.linaro.org/15.05/components/toolchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.tar.xz
 
-I am using the 2013 version of the toolchain as found on the wiki.
-Could the toolchain be built by the meta-linaro layer, removing the need
-for the external toolchain?
+tar xf gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.tar.xz
+
+export
+PATH=$HOME/gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf/bin:$PATH
+
+This allows the configure now the build is proceeding. Sorry i did not know
+the switch to 2015.05.
+
+Until the next hurdle:-)
 
 Josh
 
-On Tue, Dec 8, 2015 at 3:01 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+On Wed, Dec 9, 2015 at 6:23 AM, Joshua Vanderpool <jdvdt2@gmail.com> wrote:
 
-> What is your host machine and Linux distro?
+> The host is a 64 bit Ubuntu 14.04LTS machine.
 >
-> Also, which version of Linaro toolchain do you use? (with Fido we've
-> switched
-> to Linaro 2015.05 release, but I think the Wiki hasn't been updated yet)
+> I am using the 2013 version of the toolchain as found on the wiki.
+> Could the toolchain be built by the meta-linaro layer, removing the need
+> for the external toolchain?
 >
-> --
-> Denys
+> Josh
 >
+> On Tue, Dec 8, 2015 at 3:01 PM, Denys Dmytriyenko <denys@ti.com> wrote:
 >
-> On Tue, Dec 08, 2015 at 02:10:55PM -0500, Joshua Vanderpool wrote:
-> > I have used the instructions found here
-> > http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment
-> >
-> > To setup a arago build of the am57xx-evm as a starting point.  I then
-> > ./oe-layertool-setup.sh -f configs/arago-fido-config.txt
-> >
-> > I assumed that this had support for the am57xx, however i have been
-> > unsuccessful to build the core-image-minimal.
-> >
-> > I am using the compiler as stated in the wiki.
-> >
-> > once i get a build working then i have to add in my custom layers for the
-> > board i designed.
-> > I would like to know the layers i should use to have the best video
-> support
-> > at qt5 will be used and the video ports on the AM57xx.
-> >
-> > Thanks for any support and your time.
-> >
-> > Warning this is the output:
-> >
-> > jvanderpool@jvanderpool-workstation:~/dev/tisdk/build$
-> MACHINE=am57xx-evm
-> > bitbake core-image-minimal
-> > NOTE: Started PRServer with DBfile:
-> > /home/jvanderpool/dev/tisdk/build/cache/prserv.sqlite3, IP: 127.0.0.1,
-> > PORT: 45120, PID: 13826
-> > NOTE: Your conf/bblayers.conf has been automatically updated.
-> > NOTE: INCLUDING gnutls as buildable despite INCOMPATIBLE_LICENSE because
-> it
-> > has been whitelisted###        | ETA:  00:00:06
-> > Parsing recipes: 100%
-> >
-> |####################################################################################|
-> > Time: 00:01:15
-> > Parsing of 2084 .bb files complete (0 cached, 2084 parsed). 2613 targets,
-> > 376 skipped, 0 masked, 0 errors.
-> > NOTE: Resolving any missing task queue dependencies
-> >
-> > Build Configuration:
-> > BB_VERSION        = "1.26.0"
-> > BUILD_SYS         = "x86_64-linux"
-> > NATIVELSBSTRING   = "Ubuntu-14.04"
-> > TARGET_SYS        = "arm-linux-gnueabi"
-> > MACHINE           = "am57xx-evm"
-> > DISTRO            = "arago"
-> > DISTRO_VERSION    = "2015.11"
-> > TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard
-> > cortexa15"
-> > TARGET_FPU        = "vfp-neon"
-> > meta-arago-distro
-> > meta-arago-extras = "master:0b4f6cf573446ee854c1b128aac59210e45d708b"
-> > meta-qt5          = "jethro:0454fb083c38f2155a8be3b61930ad1ddf995695"
-> > meta-networking
-> > meta-ruby
-> > meta-python
-> > meta-oe           = "fido:df2f700d66bace65f5d802225232d01cf511fe81"
-> > meta-ti           = "fido:bc10ffc2e4637a3c0cc020b686c93e92c93ee756"
-> > meta-linaro-toolchain = "fido:08a46787862966f2236c5a9b3eb4d4ec68263593"
-> > meta              = "fido:f0873b83d693af4a103999160d67fcf25c7eedc1"
-> >
-> > NOTE: Preparing RunQueue
-> > NOTE: Executing SetScene Tasks
-> > NOTE: Executing RunQueue Tasks
-> > WARNING: Failed to fetch URL
-> > http://www.openssl.org/source/openssl-1.0.2d.tar.gz, attempting MIRRORS
-> if
-> > available
-> > ERROR: Function failed: do_configure (log file is located at
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.32265)
-> > ERROR: Logfile of failure stored in:
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.32265
-> > Log data follows:
-> > | DEBUG: Executing python function sysroot_cleansstate
-> > | DEBUG: Python function sysroot_cleansstate finished
-> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'arm-32',
-> > 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
-> 'common']
-> > | DEBUG: Executing shell function autotools_preconfigure
-> > | DEBUG: Shell function autotools_preconfigure finished
-> > | DEBUG: Executing python function autotools_copy_aclocals
-> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'arm-32',
-> > 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
-> 'common']
-> > | DEBUG: Python function autotools_copy_aclocals finished
-> > | DEBUG: Executing shell function do_configure
-> > | automake (GNU automake) 1.15
-> > | Copyright (C) 2014 Free Software Foundation, Inc.
-> > | License GPLv2+: GNU GPL version 2 or later <
-> > http://gnu.org/licenses/gpl-2.0.html>
-> > | This is free software: you are free to change and redistribute it.
-> > | There is NO WARRANTY, to the extent permitted by law.
-> > |
-> > | Written by Tom Tromey <tromey@redhat.com>
-> > |        and Alexandre Duret-Lutz <adl@gnu.org>.
-> > | AUTOV is 1
-> > | NOTE: Executing ACLOCAL="aclocal
-> >
-> --system-acdir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/build/aclocal-copy/"
-> > autoreconf --verbose --install --force --exclude=libtoolize -I
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
-> > -I
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
-> > | autoreconf: Entering directory `.'
-> > | autoreconf: configure.ac: not using Gettext
-> > | autoreconf: running: aclocal
-> >
-> --system-acdir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/build/aclocal-copy/
-> > -I
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
-> > -I
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
-> > -I
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
-> > -I
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
-> > --force -I m4
-> > | autoreconf: configure.ac: tracing
-> > | autoreconf: running:
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/autoconf
-> >
-> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
-> >
-> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
-> > --force
-> > | autoreconf: running:
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/autoheader
-> >
-> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
-> >
-> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
-> > --force
-> > | autoreconf: running: automake --add-missing --copy --force-missing
-> > | autoreconf: running: gnu-configize
-> > | autoreconf: Leaving directory `.'
-> > | NOTE: Running
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/configure
-> >  --build=x86_64-linux  --host=arm-linux-gnueabi
-> > --target=arm-linux-gnueabi  --prefix=/usr
-> >  --exec_prefix=/usr  --bindir=/usr/bin  --sbindir=/usr/sbin
-> > --libexecdir=/usr/lib/libtool
-> >
-> --datadir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share
-> >  --sysconfdir=/etc  --sharedstatedir=/com  --localstatedir=/var
-> > --libdir=/usr/lib
-> >  --includedir=/usr/include  --oldincludedir=/usr/include
-> >
-> --infodir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/info
-> >
-> --mandir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/man
-> >  --disable-silent-rules  --disable-dependency-tracking
-> >
-> --with-libtool-sysroot=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm
-> > | configure: loading site script
-> >
-> /home/jvanderpool/dev/tisdk/sources/meta-openembedded/meta-oe/site/endian-little
-> > | configure: loading site script
-> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/endian-little
-> > | configure: loading site script
-> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/arm-common
-> > | configure: loading site script
-> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/arm-32
-> > | configure: loading site script
-> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/common-linux
-> > | configure: loading site script
-> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/common-glibc
-> > | configure: loading site script
-> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/arm-linux
-> > | configure: loading site script
-> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/common
-> > | ## ------------------------- ##
-> > | ## Configuring libtool 2.4.6 ##
-> > | ## ------------------------- ##
-> > |
-> > | checking for GNU M4 that supports accurate traces...
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/m4
-> > | checking whether
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/m4
-> > accepts --gnu... yes
-> > | checking how m4 supports trace files... --debugfile
-> > | checking for a BSD-compatible install... /usr/bin/install -c
-> > | checking whether build environment is sane... yes
-> > | checking for arm-linux-gnueabi-strip... arm-linux-gnueabihf-strip
-> > | checking for a thread-safe mkdir -p... /bin/mkdir -p
-> > | checking for gawk... gawk
-> > | checking whether make sets $(MAKE)... yes
-> > | checking whether make supports nested variables... yes
-> > | checking whether make supports nested variables... (cached) yes
-> > | checking build system type... x86_64-pc-linux-gnu
-> > | checking host system type... arm-unknown-linux-gnueabi
-> > | configure: autobuild project... GNU Libtool
-> > | configure: autobuild revision... 2.4.6
-> > | configure: autobuild hostname... jvanderpool-workstation
-> > | configure: autobuild mode... default
-> > | configure: autobuild timestamp... 20151208T160947Z
-> > | checking for arm-linux-gnueabi-gcc... arm-linux-gnueabihf-gcc
-> >  -march=armv7-a -marm  -mthumb-interwork -mfloat-abi=hard -mfpu=neon
-> > -mtune=cortex-a15
-> >
-> --sysroot=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm
-> > | checking whether the C compiler works... no
-> > | configure: error: in
-> >
-> `/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/build':
-> > | configure: error: C compiler cannot create executables
-> > | See `config.log' for more details
-> > | Configure failed. The contents of all config.log files follows to aid
-> > debugging
-> > | ERROR: oe_runconf failed
-> > | WARNING:
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/run.do_configure.32265:1
-> > exit 1 from
-> > |   exit 1
-> > | ERROR: Function failed: do_configure (log file is located at
-> >
-> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.32265)
-> > ERROR: Task 414
-> >
-> (/home/jvanderpool/dev/tisdk/sources/oe-core/meta/recipes-devtools/libtool/
-> > libtool-cross_2.4.6.bb, do_configure) failed with exit code '1'
-> > NOTE: Tasks Summary: Attempted 330 tasks of which 0 didn't need to be
-> rerun
-> > and 1 failed.
-> > NOTE: Writing buildhistory
-> > Waiting for 0 running tasks to finish:
-> >
-> > *** Please tell me who you are.
-> >
-> > Run
-> >
-> >   git config --global user.email "you@example.com"
-> >   git config --global user.name "Your Name"
-> >
-> > to set your account's default identity.
-> > Omit --global to set the identity only in this repository.
-> >
-> > fatal: unable to auto-detect email address (got
-> > 'jvanderpool@jvanderpool-workstation.(none)')
-> >
-> > Summary: 1 task failed:
-> >
->  /home/jvanderpool/dev/tisdk/sources/oe-core/meta/recipes-devtools/libtool/
-> > libtool-cross_2.4.6.bb, do_configure
->
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
->
+>> What is your host machine and Linux distro?
+>>
+>> Also, which version of Linaro toolchain do you use? (with Fido we've
+>> switched
+>> to Linaro 2015.05 release, but I think the Wiki hasn't been updated yet)
+>>
+>> --
+>> Denys
+>>
+>>
+>> On Tue, Dec 08, 2015 at 02:10:55PM -0500, Joshua Vanderpool wrote:
+>> > I have used the instructions found here
+>> > http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment
+>> >
+>> > To setup a arago build of the am57xx-evm as a starting point.  I then
+>> > ./oe-layertool-setup.sh -f configs/arago-fido-config.txt
+>> >
+>> > I assumed that this had support for the am57xx, however i have been
+>> > unsuccessful to build the core-image-minimal.
+>> >
+>> > I am using the compiler as stated in the wiki.
+>> >
+>> > once i get a build working then i have to add in my custom layers for
+>> the
+>> > board i designed.
+>> > I would like to know the layers i should use to have the best video
+>> support
+>> > at qt5 will be used and the video ports on the AM57xx.
+>> >
+>> > Thanks for any support and your time.
+>> >
+>> > Warning this is the output:
+>> >
+>> > jvanderpool@jvanderpool-workstation:~/dev/tisdk/build$
+>> MACHINE=am57xx-evm
+>> > bitbake core-image-minimal
+>> > NOTE: Started PRServer with DBfile:
+>> > /home/jvanderpool/dev/tisdk/build/cache/prserv.sqlite3, IP: 127.0.0.1,
+>> > PORT: 45120, PID: 13826
+>> > NOTE: Your conf/bblayers.conf has been automatically updated.
+>> > NOTE: INCLUDING gnutls as buildable despite INCOMPATIBLE_LICENSE
+>> because it
+>> > has been whitelisted###        | ETA:  00:00:06
+>> > Parsing recipes: 100%
+>> >
+>> |####################################################################################|
+>> > Time: 00:01:15
+>> > Parsing of 2084 .bb files complete (0 cached, 2084 parsed). 2613
+>> targets,
+>> > 376 skipped, 0 masked, 0 errors.
+>> > NOTE: Resolving any missing task queue dependencies
+>> >
+>> > Build Configuration:
+>> > BB_VERSION        = "1.26.0"
+>> > BUILD_SYS         = "x86_64-linux"
+>> > NATIVELSBSTRING   = "Ubuntu-14.04"
+>> > TARGET_SYS        = "arm-linux-gnueabi"
+>> > MACHINE           = "am57xx-evm"
+>> > DISTRO            = "arago"
+>> > DISTRO_VERSION    = "2015.11"
+>> > TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard
+>> > cortexa15"
+>> > TARGET_FPU        = "vfp-neon"
+>> > meta-arago-distro
+>> > meta-arago-extras = "master:0b4f6cf573446ee854c1b128aac59210e45d708b"
+>> > meta-qt5          = "jethro:0454fb083c38f2155a8be3b61930ad1ddf995695"
+>> > meta-networking
+>> > meta-ruby
+>> > meta-python
+>> > meta-oe           = "fido:df2f700d66bace65f5d802225232d01cf511fe81"
+>> > meta-ti           = "fido:bc10ffc2e4637a3c0cc020b686c93e92c93ee756"
+>> > meta-linaro-toolchain = "fido:08a46787862966f2236c5a9b3eb4d4ec68263593"
+>> > meta              = "fido:f0873b83d693af4a103999160d67fcf25c7eedc1"
+>> >
+>> > NOTE: Preparing RunQueue
+>> > NOTE: Executing SetScene Tasks
+>> > NOTE: Executing RunQueue Tasks
+>> > WARNING: Failed to fetch URL
+>> > http://www.openssl.org/source/openssl-1.0.2d.tar.gz, attempting
+>> MIRRORS if
+>> > available
+>> > ERROR: Function failed: do_configure (log file is located at
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.32265)
+>> > ERROR: Logfile of failure stored in:
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.32265
+>> > Log data follows:
+>> > | DEBUG: Executing python function sysroot_cleansstate
+>> > | DEBUG: Python function sysroot_cleansstate finished
+>> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'arm-32',
+>> > 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
+>> 'common']
+>> > | DEBUG: Executing shell function autotools_preconfigure
+>> > | DEBUG: Shell function autotools_preconfigure finished
+>> > | DEBUG: Executing python function autotools_copy_aclocals
+>> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'arm-32',
+>> > 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
+>> 'common']
+>> > | DEBUG: Python function autotools_copy_aclocals finished
+>> > | DEBUG: Executing shell function do_configure
+>> > | automake (GNU automake) 1.15
+>> > | Copyright (C) 2014 Free Software Foundation, Inc.
+>> > | License GPLv2+: GNU GPL version 2 or later <
+>> > http://gnu.org/licenses/gpl-2.0.html>
+>> > | This is free software: you are free to change and redistribute it.
+>> > | There is NO WARRANTY, to the extent permitted by law.
+>> > |
+>> > | Written by Tom Tromey <tromey@redhat.com>
+>> > |        and Alexandre Duret-Lutz <adl@gnu.org>.
+>> > | AUTOV is 1
+>> > | NOTE: Executing ACLOCAL="aclocal
+>> >
+>> --system-acdir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/build/aclocal-copy/"
+>> > autoreconf --verbose --install --force --exclude=libtoolize -I
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
+>> > -I
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
+>> > | autoreconf: Entering directory `.'
+>> > | autoreconf: configure.ac: not using Gettext
+>> > | autoreconf: running: aclocal
+>> >
+>> --system-acdir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/build/aclocal-copy/
+>> > -I
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
+>> > -I
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
+>> > -I
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
+>> > -I
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
+>> > --force -I m4
+>> > | autoreconf: configure.ac: tracing
+>> > | autoreconf: running:
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/autoconf
+>> >
+>> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
+>> >
+>> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
+>> > --force
+>> > | autoreconf: running:
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/autoheader
+>> >
+>> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/m4/
+>> >
+>> --include=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/tests/
+>> > --force
+>> > | autoreconf: running: automake --add-missing --copy --force-missing
+>> > | autoreconf: running: gnu-configize
+>> > | autoreconf: Leaving directory `.'
+>> > | NOTE: Running
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/libtool-2.4.6/configure
+>> >  --build=x86_64-linux  --host=arm-linux-gnueabi
+>> > --target=arm-linux-gnueabi  --prefix=/usr
+>> >  --exec_prefix=/usr  --bindir=/usr/bin  --sbindir=/usr/sbin
+>> > --libexecdir=/usr/lib/libtool
+>> >
+>> --datadir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share
+>> >  --sysconfdir=/etc  --sharedstatedir=/com  --localstatedir=/var
+>> > --libdir=/usr/lib
+>> >  --includedir=/usr/include  --oldincludedir=/usr/include
+>> >
+>> --infodir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/info
+>> >
+>> --mandir=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/share/man
+>> >  --disable-silent-rules  --disable-dependency-tracking
+>> >
+>> --with-libtool-sysroot=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm
+>> > | configure: loading site script
+>> >
+>> /home/jvanderpool/dev/tisdk/sources/meta-openembedded/meta-oe/site/endian-little
+>> > | configure: loading site script
+>> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/endian-little
+>> > | configure: loading site script
+>> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/arm-common
+>> > | configure: loading site script
+>> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/arm-32
+>> > | configure: loading site script
+>> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/common-linux
+>> > | configure: loading site script
+>> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/common-glibc
+>> > | configure: loading site script
+>> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/arm-linux
+>> > | configure: loading site script
+>> > /home/jvanderpool/dev/tisdk/sources/oe-core/meta/site/common
+>> > | ## ------------------------- ##
+>> > | ## Configuring libtool 2.4.6 ##
+>> > | ## ------------------------- ##
+>> > |
+>> > | checking for GNU M4 that supports accurate traces...
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/m4
+>> > | checking whether
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/m4
+>> > accepts --gnu... yes
+>> > | checking how m4 supports trace files... --debugfile
+>> > | checking for a BSD-compatible install... /usr/bin/install -c
+>> > | checking whether build environment is sane... yes
+>> > | checking for arm-linux-gnueabi-strip... arm-linux-gnueabihf-strip
+>> > | checking for a thread-safe mkdir -p... /bin/mkdir -p
+>> > | checking for gawk... gawk
+>> > | checking whether make sets $(MAKE)... yes
+>> > | checking whether make supports nested variables... yes
+>> > | checking whether make supports nested variables... (cached) yes
+>> > | checking build system type... x86_64-pc-linux-gnu
+>> > | checking host system type... arm-unknown-linux-gnueabi
+>> > | configure: autobuild project... GNU Libtool
+>> > | configure: autobuild revision... 2.4.6
+>> > | configure: autobuild hostname... jvanderpool-workstation
+>> > | configure: autobuild mode... default
+>> > | configure: autobuild timestamp... 20151208T160947Z
+>> > | checking for arm-linux-gnueabi-gcc... arm-linux-gnueabihf-gcc
+>> >  -march=armv7-a -marm  -mthumb-interwork -mfloat-abi=hard -mfpu=neon
+>> > -mtune=cortex-a15
+>> >
+>> --sysroot=/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm
+>> > | checking whether the C compiler works... no
+>> > | configure: error: in
+>> >
+>> `/home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/build':
+>> > | configure: error: C compiler cannot create executables
+>> > | See `config.log' for more details
+>> > | Configure failed. The contents of all config.log files follows to aid
+>> > debugging
+>> > | ERROR: oe_runconf failed
+>> > | WARNING:
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/run.do_configure.32265:1
+>> > exit 1 from
+>> > |   exit 1
+>> > | ERROR: Function failed: do_configure (log file is located at
+>> >
+>> /home/jvanderpool/dev/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.32265)
+>> > ERROR: Task 414
+>> >
+>> (/home/jvanderpool/dev/tisdk/sources/oe-core/meta/recipes-devtools/libtool/
+>> > libtool-cross_2.4.6.bb, do_configure) failed with exit code '1'
+>> > NOTE: Tasks Summary: Attempted 330 tasks of which 0 didn't need to be
+>> rerun
+>> > and 1 failed.
+>> > NOTE: Writing buildhistory
+>> > Waiting for 0 running tasks to finish:
+>> >
+>> > *** Please tell me who you are.
+>> >
+>> > Run
+>> >
+>> >   git config --global user.email "you@example.com"
+>> >   git config --global user.name "Your Name"
+>> >
+>> > to set your account's default identity.
+>> > Omit --global to set the identity only in this repository.
+>> >
+>> > fatal: unable to auto-detect email address (got
+>> > 'jvanderpool@jvanderpool-workstation.(none)')
+>> >
+>> > Summary: 1 task failed:
+>> >
+>>  /home/jvanderpool/dev/tisdk/sources/oe-core/meta/recipes-devtools/libtool/
+>> > libtool-cross_2.4.6.bb, do_configure
+>>
+>> > --
+>> > _______________________________________________
+>> > meta-ti mailing list
+>> > meta-ti@yoctoproject.org
+>> > https://lists.yoctoproject.org/listinfo/meta-ti
+>>
+>>
 >
 
---001a1140fe589dbed0052675513e
+--001a114391e49846a4052675984d
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">The host is a 64 bit Ubuntu 14.04LTS machine.<div><br></di=
-v><div>I am using the 2013 version of the toolchain as found on the wiki.</=
-div><div>Could the toolchain be built by the meta-linaro layer, removing th=
-e need for the external toolchain?</div><div><br></div><div>Josh</div></div=
-><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">On Tue, Dec 8, 2=
-015 at 3:01 PM, Denys Dmytriyenko <span dir=3D"ltr">&lt;<a href=3D"mailto:d=
-enys@ti.com" target=3D"_blank">denys@ti.com</a>&gt;</span> wrote:<br><block=
-quote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc=
- solid;padding-left:1ex">What is your host machine and Linux distro?<br>
+<div dir=3D"ltr"><div>wget <a href=3D"http://releases.linaro.org/15.05/comp=
+onents/toolchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-2015.05-x86_64=
+_arm-linux-gnueabihf.tar.xz">http://releases.linaro.org/15.05/components/to=
+olchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-2015.05-x86_64_arm-linu=
+x-gnueabihf.tar.xz</a></div><div><br></div><div>tar xf gcc-linaro-4.9-2015.=
+05-x86_64_arm-linux-gnueabihf.tar.xz=C2=A0<br></div><div><br></div><div>exp=
+ort PATH=3D$HOME/gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf/bin:$PAT=
+H</div><div><br></div><div>This allows the configure now the build is proce=
+eding. Sorry i did not know the switch to 2015.05.</div><div><br></div><div=
+>Until the next hurdle:-)</div><div><br></div><div>Josh</div></div><div cla=
+ss=3D"gmail_extra"><br><div class=3D"gmail_quote">On Wed, Dec 9, 2015 at 6:=
+23 AM, Joshua Vanderpool <span dir=3D"ltr">&lt;<a href=3D"mailto:jdvdt2@gma=
+il.com" target=3D"_blank">jdvdt2@gmail.com</a>&gt;</span> wrote:<br><blockq=
+uote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc =
+solid;padding-left:1ex"><div dir=3D"ltr">The host is a 64 bit Ubuntu 14.04L=
+TS machine.<div><br></div><div>I am using the 2013 version of the toolchain=
+ as found on the wiki.</div><div>Could the toolchain be built by the meta-l=
+inaro layer, removing the need for the external toolchain?</div><div><br></=
+div><div>Josh</div></div><div class=3D"HOEnZb"><div class=3D"h5"><div class=
+=3D"gmail_extra"><br><div class=3D"gmail_quote">On Tue, Dec 8, 2015 at 3:01=
+ PM, Denys Dmytriyenko <span dir=3D"ltr">&lt;<a href=3D"mailto:denys@ti.com=
+" target=3D"_blank">denys@ti.com</a>&gt;</span> wrote:<br><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex">What is your host machine and Linux distro?<br>
 <br>
 Also, which version of Linaro toolchain do you use? (with Fido we&#39;ve sw=
 itched<br>
@@ -375,7 +411,7 @@ to Linaro 2015.05 release, but I think the Wiki hasn&#39;t been updated yet=
 <br>
 --<br>
 Denys<br>
-<div class=3D"HOEnZb"><div class=3D"h5"><br>
+<div><div><br>
 <br>
 On Tue, Dec 08, 2015 at 02:10:55PM -0500, Joshua Vanderpool wrote:<br>
 &gt; I have used the instructions found here<br>
@@ -499,10 +535,10 @@ rget=3D"_blank">http://gnu.org/licenses/gpl-2.0.html</a>&gt;<br>
 r>
 &gt; | There is NO WARRANTY, to the extent permitted by law.<br>
 &gt; |<br>
-&gt; | Written by Tom Tromey &lt;<a href=3D"mailto:tromey@redhat.com">trome=
-y@redhat.com</a>&gt;<br>
+&gt; | Written by Tom Tromey &lt;<a href=3D"mailto:tromey@redhat.com" targe=
+t=3D"_blank">tromey@redhat.com</a>&gt;<br>
 &gt; |=C2=A0 =C2=A0 =C2=A0 =C2=A0 and Alexandre Duret-Lutz &lt;<a href=3D"m=
-ailto:adl@gnu.org">adl@gnu.org</a>&gt;.<br>
+ailto:adl@gnu.org" target=3D"_blank">adl@gnu.org</a>&gt;.<br>
 &gt; | AUTOV is 1<br>
 &gt; | NOTE: Executing ACLOCAL=3D&quot;aclocal<br>
 &gt; --system-acdir=3D/home/jvanderpool/dev/tisdk/build/arago-tmp-external-=
@@ -679,7 +715,7 @@ tool/<br>
 &gt; Run<br>
 &gt;<br>
 &gt;=C2=A0 =C2=A0git config --global user.email &quot;<a href=3D"mailto:you=
-@example.com">you@example.com</a>&quot;<br>
+@example.com" target=3D"_blank">you@example.com</a>&quot;<br>
 &gt;=C2=A0 =C2=A0git config --global <a href=3D"http://user.name" rel=3D"no=
 referrer" target=3D"_blank">user.name</a> &quot;Your Name&quot;<br>
 &gt;<br>
@@ -695,15 +731,16 @@ evtools/libtool/<br>
 &gt; <a href=3D"http://libtool-cross_2.4.6.bb" rel=3D"noreferrer" target=3D=
 "_blank">libtool-cross_2.4.6.bb</a>, do_configure<br>
 <br>
-</div></div><span class=3D"HOEnZb"><font color=3D"#888888">&gt; --<br>
+</div></div><span><font color=3D"#888888">&gt; --<br>
 &gt; _______________________________________________<br>
 &gt; meta-ti mailing list<br>
-&gt; <a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</=
-a><br>
+&gt; <a href=3D"mailto:meta-ti@yoctoproject.org" target=3D"_blank">meta-ti@=
+yoctoproject.org</a><br>
 &gt; <a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" rel=3D"nor=
 eferrer" target=3D"_blank">https://lists.yoctoproject.org/listinfo/meta-ti<=
 /a><br>
 <br>
 </font></span></blockquote></div><br></div>
+</div></div></blockquote></div><br></div>
 
---001a1140fe589dbed0052675513e--
+--001a114391e49846a4052675984d--
