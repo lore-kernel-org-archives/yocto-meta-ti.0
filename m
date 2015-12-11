@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 61040E00AB9; Fri, 11 Dec 2015 10:49:44 -0800 (PST)
+	id 635FDE00A9B; Fri, 11 Dec 2015 10:49:44 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7B4DE007D5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7B80E008C4
 	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2015 10:49:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 22CBF52A78; Fri, 11 Dec 2015 18:49:40 +0000 (UTC)
+	id 3A00C52A7F; Fri, 11 Dec 2015 18:49:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151211184940.22CBF52A78@arago-project.org>
+Message-Id: <20151211184940.3A00C52A7F@arago-project.org>
 Date: Fri, 11 Dec 2015 18:49:40 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : layer.conf: add mpm-transport to safe ABI list
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 11 Dec 2015 18:49:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 8c9d4ad5931c5b9a73a9898087a13b79a93976f9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8c9d4ad5931c5b9a73a9898087a13b79a93976f9
+Branch: master
+Commit: c2023a7c251b1f466f3f29d1cc8320c9519b1be3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c2023a7c251b1f466f3f29d1cc8320c9519b1be3
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Dec 12 00:32:32 2015 +0000
