@@ -1,40 +1,37 @@
-Return-Path: <anandb@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8FCC6E00BD2; Fri, 11 Dec 2015 01:20:00 -0800 (PST)
+	id 4E6C4E00BDC; Fri, 11 Dec 2015 10:33:07 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E9DFE00BC1
-	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2015 01:19:58 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tBB9JwxS032670
-	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2015 03:19:58 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBB9JwF2000628
-	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2015 03:19:58 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 11 Dec 2015 03:19:58 -0600
-Received: from tigfxsrv.india.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tBB9JeV6027069;	Fri, 11 Dec 2015 03:19:57 -0600
-From: Anand Balagopalakrishnan <anandb@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 11 Dec 2015 14:49:18 +0530
-Message-ID: <1449825558-1294-3-git-send-email-anandb@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1449825558-1294-1-git-send-email-anandb@ti.com>
-References: <1449825558-1294-1-git-send-email-anandb@ti.com>
-MIME-Version: 1.0
-Subject: [SGX AM57x/DRA7xx 2/2] omap5-sgx-ddk-um-linux: bump SRCREV for AM57x/DRA7xx to the latest DDK UM
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF704E00BB7
+	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2015 10:33:05 -0800 (PST)
+Received: from gandalf.denix.org ([100.15.86.14]) by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPSA id <0NZ7001YBI69BE40@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 11 Dec 2015 12:32:49 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=xDJgBcBrK5EN9DJ6g74wNQ==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=wUQvQvOEmiQA:10 a=sozttTNsAAAA:8
+	a=a0uY9MT2IuxvlifAPCsA:9	a=B5hXdKNk63QA:10
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id BA9EA161D47;	Fri,
+	11 Dec 2015 13:32:33 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Fri, 11 Dec 2015 13:32:32 -0500
+Message-id: <1449858752-24124-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] layer.conf: add mpm-transport to safe ABI list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,33 +44,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2015 09:20:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Dec 2015 18:33:07 -0000
 
-* Resolve SGX HWrecovery when Wayland OpenGLES clients are killed
-* Enable screenshots in Weston
-* Resolve SGX HWrecovery with glmark2 benchmark
-* Resolve rendering issues with half float textures
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index 8b032e3..dfd22d0 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -10,7 +10,7 @@ BRANCH_ti33x = "am3/k4.1"
- BRANCH_ti43x = "am4/k4.1"
- 
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV_omap-a15 = "d63cd6469fff610317a8e1c986f227bb3e7922f6"
-+SRCREV_omap-a15 = "b6801bf89e00d69893c2957455bbeb3195c0ed52"
- SRCREV_ti33x    = "84ae5444c7cbc3f4c65a226b9fea62d4a513f3e0"
- SRCREV_ti43x    = "fdf4c0b594ca142a68aabb4c3f82b75be50b46cc"
- 
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 1172503..f5bf3ec 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -20,4 +20,5 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+     gdbserverproxy-module-drv \
+     debugss-module-drv \
+     uio-module-drv \
++    mpm-transport \
+ "
 -- 
-1.7.9.5
+2.2.0
 
 
