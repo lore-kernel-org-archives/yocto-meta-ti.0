@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9DED4E007D3; Tue, 15 Dec 2015 08:59:57 -0800 (PST)
+	id 9E615E00ABE; Tue, 15 Dec 2015 08:59:57 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 258FBE00ABE
-	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:59:53 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D7C8E00546
+	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:59:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8CA3F52A2A; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
+	id 03F4252A3C; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151215165952.8CA3F52A2A@arago-project.org>
+Message-Id: <20151215165953.03F4252A3C@arago-project.org>
 Date: Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new version 3.0.0.2
+Subject: Jacob Stiffler : ti-ipc-rtos: Install firmware to /lib/firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,41 +37,56 @@ X-List-Received-Date: Tue, 15 Dec 2015 16:59:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 3929e5fafb8e3572d0f2c0cd2ca01938f0afcf97
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3929e5fafb8e3572d0f2c0cd2ca01938f0afcf97
+Branch: master
+Commit: aa5ff5293aa486a62d9d2b7faff87d39f5ebbddb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aa5ff5293aa486a62d9d2b7faff87d39f5ebbddb
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Dec 15 20:11:46 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Dec 15 21:12:02 2015 +0000
 
-multiprocmgr: Update to new version 3.0.0.2
+ti-ipc-rtos: Install firmware to /lib/firmware
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+* By default libdir = /usr/lib and base_libdir = /lib
+* Therefore install firmware to ${base_libdir}/firmware
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc |    8 ++++----
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index f875396..ebe2eee 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
- SECTION = "console"
- COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index a452dcf..5fb83d0 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -2,7 +2,7 @@ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ require ti-ipc.inc
  
--BRANCH = "linux41"
--# The following commits correspond to DEV.MPM-3.00.00.01_ENG
--SRCREV = "c1c245814b835509b99d144b52e00316665ac477"
--PV = "3.0.0.1"
-+BRANCH = "master"
-+# The following commits correspond to DEV.MPM-3.00.00.02
-+SRCREV = "319c6cfe15054df08eb70cbedc99a88dd5a06cda"
-+PV = "3.0.0.2"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
  
- SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
+ DEPENDS = "ti-xdctools ti-sysbios"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+@@ -14,7 +14,7 @@ DEPENDS_append_omap-a15 = " ti-cgt6x-native \
+ "
  
+ PACKAGES =+ "${PN}-fw"
+-FILES_${PN}-fw = "${libdir}/firmware/*"
++FILES_${PN}-fw = "${base_libdir}/firmware/*"
+ FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
+ 
+ INSANE_SKIP_${PN}-fw += "arch"
+@@ -55,6 +55,6 @@ do_install() {
+     install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+ 
+-    install -d ${D}${libdir}/firmware
+-    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${libdir}/firmware/
++    install -d ${D}${base_libdir}/firmware
++    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+ }
 
 
