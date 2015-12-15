@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E16C2E00BD0; Tue, 15 Dec 2015 08:59:56 -0800 (PST)
+	id E2B1FE007D3; Tue, 15 Dec 2015 08:59:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23D50E007D3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23FECE00AA8
 	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:59:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5D3EC529FC; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
+	id 73D8152A19; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151215165952.5D3EC529FC@arago-project.org>
+Message-Id: <20151215165952.73D8152A19@arago-project.org>
 Date: Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update branch and information for IPC GA release
+Subject: Sam Nelson : mpm-transport: Update to new version 2.0.0.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 89a92575f67a1f801e3138774f8d51a24ab79203
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=89a92575f67a1f801e3138774f8d51a24ab79203
+Commit: c17405f25e974a5c6384a20d76bc92465767ad51
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c17405f25e974a5c6384a20d76bc92465767ad51
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Dec 15 17:56:10 2015 +0000
+Date:   Tue Dec 15 20:11:25 2015 +0000
 
-ti-ipc: Update branch and information for IPC GA release
-
-- Commit id is perserved from previous eng version
+mpm-transport: Update to new version 2.0.0.1
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 4cdb25c..94a1657 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -4,15 +4,15 @@ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 812ae04..beb744c 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -14,12 +14,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--BRANCH = "ipc-next"
-+BRANCH = "3.41"
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
  
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
+-BRANCH = "linux41"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.00_ENG
+-SRCREV = "892e93238b7f9f480ddceb7ade042026a4d178bd"
++BRANCH = "master"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.01
++SRCREV = "7220df9263a57629a564afb3f99f6f7fb33e40d6"
  
--#Corresponds to 3.41.00.07_eng
-+#Corresponds to 3.41.00.08
- SRCREV = "7370abce2e3f2a09fd4b057fbbf9e7d3d029c0df"
+-PV = "2.0.0.0"
+-PR = "r1"
++PV = "2.0.0.1"
++PR = "r0"
  
- S = "${WORKDIR}/git"
--PV = "3.41.00.07"
-+PV = "3.41.00.08"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
 
 
