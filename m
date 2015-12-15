@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C3861E00BE9; Tue, 15 Dec 2015 08:59:59 -0800 (PST)
+	id C55DFE00BB5; Tue, 15 Dec 2015 08:59:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E2C3E00BB5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E2B2E00B66
 	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:59:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F1EB852A68; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
+	id D1E3F52A48; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151215165952.F1EB852A68@arago-project.org>
+Message-Id: <20151215165952.D1E3F52A48@arago-project.org>
 Date: Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new version 3.0.0.2
+Subject: Sam Nelson : mpm-transport: Update to new version 2.0.0.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 7ab0b57b8f3f658e9b736bbe6cc7aed9cb7fbfc2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7ab0b57b8f3f658e9b736bbe6cc7aed9cb7fbfc2
+Commit: 683234582930d2da2679c297a846377532946794
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=683234582930d2da2679c297a846377532946794
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Dec 15 20:11:46 2015 +0000
+Date:   Tue Dec 15 20:11:25 2015 +0000
 
-multiprocmgr: Update to new version 3.0.0.2
+mpm-transport: Update to new version 2.0.0.1
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index f875396..ebe2eee 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
- SECTION = "console"
- COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 812ae04..beb744c 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -14,12 +14,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
  
 -BRANCH = "linux41"
--# The following commits correspond to DEV.MPM-3.00.00.01_ENG
--SRCREV = "c1c245814b835509b99d144b52e00316665ac477"
--PV = "3.0.0.1"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.00_ENG
+-SRCREV = "892e93238b7f9f480ddceb7ade042026a4d178bd"
 +BRANCH = "master"
-+# The following commits correspond to DEV.MPM-3.00.00.02
-+SRCREV = "319c6cfe15054df08eb70cbedc99a88dd5a06cda"
-+PV = "3.0.0.2"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.01
++SRCREV = "7220df9263a57629a564afb3f99f6f7fb33e40d6"
  
- SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
+-PV = "2.0.0.0"
+-PR = "r1"
++PV = "2.0.0.1"
++PR = "r0"
  
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
 
 
