@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2F842E0088B; Tue, 15 Dec 2015 08:09:27 -0800 (PST)
+	id D831DE00B67; Tue, 15 Dec 2015 08:16:46 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,34 +8,41 @@ X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
 	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCB64E00546
-	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:09:20 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tBFG9KuT025038
-	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 10:09:20 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBFG9J1V017636
-	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 10:09:20 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 15 Dec 2015 10:09:19 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBFG9JFE019475;
-	Tue, 15 Dec 2015 10:09:19 -0600
-Date: Tue, 15 Dec 2015 11:09:04 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Anand Balagopalakrishnan <anandb@ti.com>
-Message-ID: <20151215160903.GF23133@edge>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 87852E00546
+	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:16:42 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id tBFGGgRK011542
+	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 10:16:42 -0600
+Received: from dbdlxv05.itg.ti.com (dbdlxv05.itg.ti.com [172.24.171.60])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBFGGfuW002052
+	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 10:16:41 -0600
+Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBFGGcxK021643
+	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 21:46:39 +0530
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
+	14.03.0224.002; Tue, 15 Dec 2015 21:46:38 +0530
+From: "Balagopalakrishnan, Anand" <anandb@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [SGX AM57x/DRA7xx 0/2] Update SGX graphics recipes
+	for AM57x/DRA7xx to latest version
+Thread-Index: AQHRM/USR4YWjOHPXUO8MxVva7mQj57L4bgAgABeIJA=
+Date: Tue, 15 Dec 2015 16:16:38 +0000
+Message-ID: <05CF4794C98B244ABDC620C10903762273164C23@DBDE04.ent.ti.com>
 References: <1449825558-1294-1-git-send-email-anandb@ti.com>
+	<20151215160903.GF23133@edge>
+In-Reply-To: <20151215160903.GF23133@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-In-Reply-To: <1449825558-1294-1-git-send-email-anandb@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [SGX AM57x/DRA7xx 0/2] Update SGX graphics recipes for AM57x/DRA7xx to latest version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -49,50 +56,70 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2015 16:09:27 -0000
+X-List-Received-Date: Tue, 15 Dec 2015 16:16:46 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Denys,
+
+Yes. I have validated this on 2015 LTS kernel / u-boot. Only the filesystem=
+ was based on 2014 LTS.
+
+Regards,
+Anand
+
+-----Original Message-----
+From: Dmytriyenko, Denys=20
+Sent: Tuesday, December 15, 2015 9:39 PM
+To: Balagopalakrishnan, Anand
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [SGX AM57x/DRA7xx 0/2] Update SGX graphics recipes f=
+or AM57x/DRA7xx to latest version
 
 On Fri, Dec 11, 2015 at 02:49:16PM +0530, Anand Balagopalakrishnan wrote:
 > Update SGX UM / KM to latest version for AM57x/DRA7xx
-> 
+>=20
 > The changes involved have been tested against 4.1 kernel (commit -
 > 03066ae73fc380e3ea9da8cba63591a135b33b71) with GLSDK 7.02 GA /
-> 2014 LTS file system. The Yocto recipes have not been verified on 2015 LTS.
+> 2014 LTS file system. The Yocto recipes have not been verified on 2015 LT=
+S.
 
-Is this for 2015.02? Considering that is hasn't been validated on 2015LTS and 
-that we are just days away from the release, this seems risky to push at this 
-time...
+Is this for 2015.02? Considering that is hasn't been validated on 2015LTS a=
+nd that we are just days away from the release, this seems risky to push at=
+ this time...
 
--- 
+--
 Denys
 
 
 > Summary of changes
-> ==================
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 > UM:
 > - Enable screenshot capture in Weston
-> - Resolve SGX HW recovery when Wayland OpenGLES clients are abruptly terminated
+> - Resolve SGX HW recovery when Wayland OpenGLES clients are abruptly term=
+inated
 > - Resolve SGX HW recovery with glmark2 benchmark application
 > - Resolve rendering issue with half float textures
-> 
+>=20
 > KM:
 > - Fix access to freed memory
-> - Fix GEM handle memory leak when Wayland client exit and Weston continues to run
-> 
+> - Fix GEM handle memory leak when Wayland client exit and Weston continue=
+s to run
+>=20
 > Anand Balagopalakrishnan (2):
 >   omapdrm-pvr: bump SRCREV for AM57x/DRA7xx
 >   omap5-sgx-ddk-um-linux: bump SRCREV for AM57x/DRA7xx to the latest
 >     DDK UM
-> 
+>=20
 >  .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    2 +-
 >  .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    2 +-
 >  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> -- 
+>=20
+> --=20
 > 1.7.9.5
-> 
-> -- 
+>=20
+> --=20
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
