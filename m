@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9C104E00B46; Tue, 15 Dec 2015 08:59:57 -0800 (PST)
+	id 9D66BE00546; Tue, 15 Dec 2015 08:59:57 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27ED0E00AFD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26B8FE00AF4
 	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:59:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9D25F52961; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
+	id C15B152A41; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151215165952.9D25F52961@arago-project.org>
+Message-Id: <20151215165952.C15B152A41@arago-project.org>
 Date: Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ipc-rtos: Install firmware to /lib/firmware
+Subject: Sam Nelson : ti-ipc: Update branch and information for IPC GA release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,56 +37,47 @@ X-List-Received-Date: Tue, 15 Dec 2015 16:59:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 1483d58d5aa131b2ab38865de1e49527d9c856ba
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1483d58d5aa131b2ab38865de1e49527d9c856ba
+Branch: master
+Commit: 252265119d092c1a73299dcfff66f680392b2f28
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=252265119d092c1a73299dcfff66f680392b2f28
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Dec 15 21:12:02 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Tue Dec 15 17:56:10 2015 +0000
 
-ti-ipc-rtos: Install firmware to /lib/firmware
+ti-ipc: Update branch and information for IPC GA release
 
-* By default libdir = /usr/lib and base_libdir = /lib
-* Therefore install firmware to ${base_libdir}/firmware
+- Commit id is perserved from previous eng version
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/ipc/ti-ipc.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index a452dcf..5fb83d0 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -2,7 +2,7 @@ require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
- require ti-ipc.inc
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 4cdb25c..94a1657 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -4,15 +4,15 @@ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
  
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
+-BRANCH = "ipc-next"
++BRANCH = "3.41"
  
- DEPENDS = "ti-xdctools ti-sysbios"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-@@ -14,7 +14,7 @@ DEPENDS_append_omap-a15 = " ti-cgt6x-native \
- "
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
  
- PACKAGES =+ "${PN}-fw"
--FILES_${PN}-fw = "${libdir}/firmware/*"
-+FILES_${PN}-fw = "${base_libdir}/firmware/*"
- FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
+-#Corresponds to 3.41.00.07_eng
++#Corresponds to 3.41.00.08
+ SRCREV = "7370abce2e3f2a09fd4b057fbbf9e7d3d029c0df"
  
- INSANE_SKIP_${PN}-fw += "arch"
-@@ -55,6 +55,6 @@ do_install() {
-     install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-     cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+ S = "${WORKDIR}/git"
+-PV = "3.41.00.07"
++PV = "3.41.00.08"
+ INC_PR = "r0"
  
--    install -d ${D}${libdir}/firmware
--    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${libdir}/firmware/
-+    install -d ${D}${base_libdir}/firmware
-+    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
- }
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
