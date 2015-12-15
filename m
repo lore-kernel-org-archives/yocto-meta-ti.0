@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E2B1FE007D3; Tue, 15 Dec 2015 08:59:56 -0800 (PST)
+	id 9C104E00B46; Tue, 15 Dec 2015 08:59:57 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23FECE00AA8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27ED0E00AFD
 	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 08:59:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 73D8152A19; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
+	id 9D25F52961; Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151215165952.73D8152A19@arago-project.org>
+Message-Id: <20151215165952.9D25F52961@arago-project.org>
 Date: Tue, 15 Dec 2015 16:59:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update to new version 2.0.0.1
+Subject: Jacob Stiffler : ti-ipc-rtos: Install firmware to /lib/firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,55 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: c17405f25e974a5c6384a20d76bc92465767ad51
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c17405f25e974a5c6384a20d76bc92465767ad51
+Commit: 1483d58d5aa131b2ab38865de1e49527d9c856ba
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1483d58d5aa131b2ab38865de1e49527d9c856ba
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Dec 15 20:11:25 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Dec 15 21:12:02 2015 +0000
 
-mpm-transport: Update to new version 2.0.0.1
+ti-ipc-rtos: Install firmware to /lib/firmware
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+* By default libdir = /usr/lib and base_libdir = /lib
+* Therefore install firmware to ${base_libdir}/firmware
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |   10 +++++-----
- 1 files changed, 5 insertions(+), 5 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index 812ae04..beb744c 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -14,12 +14,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index a452dcf..5fb83d0 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -2,7 +2,7 @@ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ require ti-ipc.inc
  
- SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
  
--BRANCH = "linux41"
--# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.00_ENG
--SRCREV = "892e93238b7f9f480ddceb7ade042026a4d178bd"
-+BRANCH = "master"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.01
-+SRCREV = "7220df9263a57629a564afb3f99f6f7fb33e40d6"
+ DEPENDS = "ti-xdctools ti-sysbios"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+@@ -14,7 +14,7 @@ DEPENDS_append_omap-a15 = " ti-cgt6x-native \
+ "
  
--PV = "2.0.0.0"
--PR = "r1"
-+PV = "2.0.0.1"
-+PR = "r0"
+ PACKAGES =+ "${PN}-fw"
+-FILES_${PN}-fw = "${libdir}/firmware/*"
++FILES_${PN}-fw = "${base_libdir}/firmware/*"
+ FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
  
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
- EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+ INSANE_SKIP_${PN}-fw += "arch"
+@@ -55,6 +55,6 @@ do_install() {
+     install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+ 
+-    install -d ${D}${libdir}/firmware
+-    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${libdir}/firmware/
++    install -d ${D}${base_libdir}/firmware
++    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+ }
 
 
