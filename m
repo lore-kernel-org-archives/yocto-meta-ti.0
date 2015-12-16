@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3E1D4E00B01; Tue, 15 Dec 2015 19:19:46 -0800 (PST)
+	id 3EC2DE007D3; Tue, 15 Dec 2015 19:19:46 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F541E00888
-	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 19:19:41 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DC38E007D3
+	for <meta-ti@yoctoproject.org>; Tue, 15 Dec 2015 19:19:42 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 682D3529FC; Wed, 16 Dec 2015 03:19:41 +0000 (UTC)
+	id A2BA452A2A; Wed, 16 Dec 2015 03:19:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151216031941.682D3529FC@arago-project.org>
+Message-Id: <20151216031941.A2BA452A2A@arago-project.org>
 Date: Wed, 16 Dec 2015 03:19:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: add LCD DTBs for AM5 IDK platforms
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 16 Dec 2015 03:19:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: b7d57fa23e147f18ba84e703689e29a50f867dac
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b7d57fa23e147f18ba84e703689e29a50f867dac
+Branch: master
+Commit: f360a7127df5c316625c3c70092de6801f2c1ada
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f360a7127df5c316625c3c70092de6801f2c1ada
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Dec 16 04:54:36 2015 +0000
