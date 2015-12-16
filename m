@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D9711E009C3; Wed, 16 Dec 2015 09:45:14 -0800 (PST)
+	id 9BDD6E00AA6; Wed, 16 Dec 2015 10:24:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,32 +12,35 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61696E00404
-	for <meta-ti@yoctoproject.org>; Wed, 16 Dec 2015 09:45:08 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1AD7CE00404
+	for <meta-ti@yoctoproject.org>; Wed, 16 Dec 2015 10:24:46 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tBGHj7vK004159;
-	Wed, 16 Dec 2015 11:45:07 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBGHj7rb027956;
-	Wed, 16 Dec 2015 11:45:07 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 16 Dec 2015 11:45:07 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBGHj6he013994;
-	Wed, 16 Dec 2015 11:45:07 -0600
-Date: Wed, 16 Dec 2015 12:44:51 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Aymeric Dumaz <aymericdumaz@gmail.com>
-Message-ID: <20151216174450.GH27464@edge>
-References: <CAESSzZyP2JX1yYwgvp=BHFmja9qOPzA+_k9F3Z8GSfON2pRvmw@mail.gmail.com>
-	<20151215194902.GD27464@edge>
-	<CAESSzZzUhzzCxMWQP_OUOG1BMpBFc+BRzB3y1d97F-VL9sqnUg@mail.gmail.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id tBGIOg1K007724;
+	Wed, 16 Dec 2015 12:24:42 -0600
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBGIOgC3007135;
+	Wed, 16 Dec 2015 12:24:42 -0600
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.03.0224.002; Wed, 16 Dec 2015 12:24:42 -0600
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>,
+	=?iso-8859-1?Q?Stefan_M=FCller-Klieser?= <s.mueller-klieser@phytec.de>
+Thread-Topic: [meta-ti] [PATCH] linux-ti-staging: Work around to avoid race
+	condition with external module
+Thread-Index: AQHRNmVCQXTEPs/wKUCVZb/uRNp27J7Kx48AgAHcugCAAUtJ8A==
+Date: Wed, 16 Dec 2015 18:24:42 +0000
+Message-ID: <4F9216F96E5DF9428610502835A9F490582B7EC1@DLEE11.ent.ti.com>
+References: <1450093668-30879-1-git-send-email-sam.nelson@ti.com>
+	<566EB0CE.5030706@phytec.de> <20151215163253.GG23133@edge>
+In-Reply-To: <20151215163253.GG23133@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-In-Reply-To: <CAESSzZzUhzzCxMWQP_OUOG1BMpBFc+BRzB3y1d97F-VL9sqnUg@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: Cannot compile omapdrm-pvr for A15
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] linux-ti-staging: Work around to avoid race condition with external module
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,189 +53,92 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2015 17:45:14 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 Dec 2015 18:24:50 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 15, 2015 at 12:40:30PM -0800, Aymeric Dumaz wrote:
-> 2015-12-15 11:49 GMT-08:00 Denys Dmytriyenko <denys@ti.com>:
-> > On Tue, Dec 15, 2015 at 11:41:10AM -0800, Aymeric Dumaz wrote:
-> >> Hello,
-> >>
-> >> I am trying to create an image with Qt5 for my BeagleBoard X15. I set
-> >> up the build environment as explained in the Arago wiki, and add that
-> >> my local.conf:
-> >>
-> >> IMAGE_INSTALL_append = " kernel-modules omap5-sgx-ddk-um-linux
-> >> omapdrm-pvr libgbm libdrm libdrm-omap qtbase qtbase-plugins
-> >> qtbase-fonts qtquick1 qtquick1-qmlplugins kmscube"
-> >>
-> >> But when it tries to compile omapdrm-pvr, it prints the following
-> >> errors (same if I try with the OMAP5432 uEVM).
-> >>
-> >> I am missing something?
-> >> Regards
+Ok. I will go ahead send an update to the one affected module to take care =
+of the other part.
+With regards,
+Sam
+
+> -----Original Message-----
+> From: Dmytriyenko, Denys
+> Sent: Tuesday, December 15, 2015 11:33 AM
+> To: Stefan M=FCller-Klieser
+> Cc: Nelson, Sam; meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH] linux-ti-staging: Work around to avoid rac=
+e
+> condition with external module
+>=20
+> Stefan,
+>=20
+> Yes, indeed, thanks.
+>=20
+>=20
+> Sam,
+>=20
+> You only picked up part of the fix:
+> http://cgit.openembedded.org/openembedded-
+> core/commit/?id=3Dafcea61e8eb39234d336c706fdfd4680dea7c060
+>=20
+> I don't want to overlay the entire module-base.bbclass, so I guess for ou=
+r
+> problematic out-of-tree modules we can just add this to their recipes:
+>=20
+> do_configure[depends] +=3D "virtual/kernel:do_compile_kernelmodules"
+>=20
+> --
+> Denys
+>=20
+>=20
+> On Mon, Dec 14, 2015 at 01:06:38PM +0100, Stefan M=FCller-Klieser wrote:
+> > Hi,
 > >
-> > I see that you are using Daisy branch and 3.14 kernel. Make sure you build
-> > against linux-ti-staging_3.14 kernel, as it is specifically patches with
-> > necessary SGX API (like omap_gem_* symbols below).
-> 
-> Thank you for your answer.
-> I did a "cleansstate virtual/kernel" and rebuild omapdrm-pvr, which
-> triggered the kernel to be rebuilt too.
-> It is the correct version
-> (linux-ti-staging-3.14.49+gitAUTOINC+e9cd4cc819-r7a-arago2), but
-> omapdrm-pvr fails with the same errors.
-
-Aymeric,
-
-We've moved on to Fido setup with 4.1 kernel some time back and I personally 
-haven't tried Daisy/3.14 recently. Can you try Fido/4.1 as well?
-
-
-Karthik,
-
-Were you still using Daisy with 3.14 kernel? Have you had any issues with 
-omapdrm-pvr?
-
--- 
-Denys
-
-
-> >> $ MACHINE=am57xx-evm bitbake omapdrm-pvr
-> >> NOTE: Started PRServer with DBfile: /tisdk/build/cache/prserv.sqlite3,
-> >> IP: 127.0.0.1, PORT: 40922, PID: 19820
-> >> Loading cache: 100%
-> >> |########################################################| ETA:
-> >> 00:00:00
-> >> Loaded 2270 entries from dependency cache.
-> >> Parsing recipes: 100%
-> >> |######################################################| Time:
-> >> 00:00:00
-> >> Parsing of 1827 .bb files complete (1826 cached, 1 parsed). 2270
-> >> targets, 212 skipped, 0 masked, 0 errors.
-> >> WARNING: No recipes available for:
-> >>   /tisdk/sources/meta-arago/meta-arago-distro/recipes-connectivity/openssl/openssl_1.0.1m.bbappend
-> >> NOTE: Resolving any missing task queue dependencies
-> >>
-> >> Build Configuration:
-> >> BB_VERSION        = "1.26.0"
-> >> BUILD_SYS         = "x86_64-linux"
-> >> NATIVELSBSTRING   = "Ubuntu-12.04"
-> >> TARGET_SYS        = "arm-linux-gnueabi"
-> >> MACHINE           = "am57xx-evm"
-> >> DISTRO            = "arago"
-> >> DISTRO_VERSION    = "2015.05"
-> >> TUNE_FEATURES     = "armv7a vfp thumb neon callconvention-hard cortexa15"
-> >> TARGET_FPU        = "vfp-neon"
-> >> meta-arago-distro
-> >> meta-arago-extras = "daisy:dc89e06d2a64f33d9e9662e6f7fe1f8466ff167c"
-> >> meta-qt5          = "(nobranch):17eb158c6d2cd290b054b5bd54311aa44a02d04d"
-> >> toolchain-layer
-> >> meta-networking
-> >> meta-ruby
-> >> meta-oe           = "daisy:d3d14d3fcca7fcde362cf0b31411dc4eea6d20aa"
-> >> meta-ti           = "daisy:090b02a104924886afd0fa79be7b5d08eebf071f"
-> >> meta-linaro-toolchain = "daisy:06008235ca752fea678953e85adaa29a491d246b"
-> >> meta              = "daisy:e1a2540227250d854d5bba278634bcc9e7572cda"
-> >>
-> >> NOTE: Preparing RunQueue
-> >> NOTE: Executing SetScene Tasks
-> >> NOTE: Executing RunQueue Tasks
-> >> ERROR: Function failed: do_compile (log file is located at
-> >> /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/temp/log.do_compile.19911)
-> >> ERROR: Logfile of failure stored in:
-> >> /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/temp/log.do_compile.19911
-> >> Log data follows:
-> >> | DEBUG: Executing shell function do_compile
-> >> | NOTE: make -j 8 -e MAKEFLAGS=
-> >> KERNELDIR=/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/src/kernel
-> >> KERNEL_PATH=/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/src/kernel
-> >> KERNEL_SRC=/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/src/kernel
-> >> KERNEL_VERSION=3.14.49-ge9cd4cc CC=arm-linux-gnueabihf-gcc
-> >> -mno-thumb-interwork -marm LD=arm-linux-gnueabihf-ld.bfd
-> >> AR=arm-linux-gnueabihf-ar
-> >> | ../config/core.mk:419: $(KERNELDIR)/vmlinux does not exist. Kbuild may fail.
-> >> |   CC [M]  /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.o
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> >> In function 'create_gem_wrapper':
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:480:2:
-> >> error: implicit declaration of function 'omap_gem_new_ext'
-> >> [-Werror=implicit-function-declaration]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:480:2:
-> >> error: return makes pointer from integer without a cast [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> >> In function 'MMapVOpenExt':
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1370:2:
-> >> error: implicit declaration of function 'omap_gem_priv'
-> >> [-Werror=implicit-function-declaration]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1370:15:
-> >> error: initialization makes pointer from integer without a cast
-> >> [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> >> In function 'MMapVCloseExt':
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1384:15:
-> >> error: initialization makes pointer from integer without a cast
-> >> [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> >> In function 'PVRMMapExt':
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1442:2:
-> >> error: implicit declaration of function 'omap_gem_set_priv'
-> >> [-Werror=implicit-function-declaration]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> >> At top level:
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1473:15:
-> >> error: variable 'gem_ops' has initializer but incomplete type
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1474:3:
-> >> error: unknown field 'open' specified in initializer
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1474:3:
-> >> error: excess elements in struct initializer [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1474:3:
-> >> error: (near initialization for 'gem_ops') [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1475:3:
-> >> error: unknown field 'close' specified in initializer
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1475:3:
-> >> error: excess elements in struct initializer [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1475:3:
-> >> error: (near initialization for 'gem_ops') [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1476:3:
-> >> error: unknown field 'mmap' specified in initializer
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1476:3:
-> >> error: excess elements in struct initializer [-Werror]
-> >> | /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1476:3:
-> >> error: (near initialization for 'gem_ops') [-Werror]
-> >> | cc1: all warnings being treated as errors
-> >> | make[3]: *** [/tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.o]
-> >> Error 1
-> >> | make[2]: *** [_module_/tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild]
-> >> Error 2
-> >> | make[1]: *** [kbuild] Error 2
-> >> | make: *** [build] Error 2
-> >> | ERROR: oe_runmake failed
-> >> | WARNING: exit code 1 from a shell command.
-> >> | ERROR: Function failed: do_compile (log file is located at
-> >> /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/temp/log.do_compile.19911)
-> >> ERROR: Task 8 (/tisdk/sources/meta-ti/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb,
-> >> do_compile) failed with exit code '1'
-> >> NOTE: Tasks Summary: Attempted 406 tasks of which 403 didn't need to
-> >> be rerun and 1 failed.
-> >> NOTE: Writing buildhistory
-> >> Waiting for 0 running tasks to finish:
-> >>
-> >> Summary: 1 task failed:
-> >>   /tisdk/sources/meta-ti/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb,
-> >> do_compile
-> >> Summary: There was 1 WARNING message shown.
-> >> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> >> --
-> >> _______________________________________________
-> >> meta-ti mailing list
-> >> meta-ti@yoctoproject.org
-> >> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
-> 
-> 
-> -- 
-> Aymeric Dumaz
-> Epita 2014
+> > this work around introduces another race condition, as you have to make
+> > sure every external module recipe depends on
+> > do_compile_kernelmodules, and not shared_workdir.
+> >
+> > Regards,
+> > Stefan
+> >
+> >
+> > On 14.12.2015 12:47, Sam Nelson wrote:
+> > >- Currently there is an issue with compiling external kernel module
+> > >which depends on symbols from another kernel module which is part of t=
+he
+> > >list of modules configured to be built as modules in the default confi=
+g.
+> > >- This work around allows to avoid the issue by copying the module
+> > >symbols to the kernel directory after making the kernel modules build.
+> > >- This issue is already fixed in oe-core: master branch as of date
+> > >- This is just work around before updating to latest oe-core
+> > >
+> > >Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> > >---
+> > >  recipes-kernel/linux/linux-ti-staging_3.14.bb | 4 ++++
+> > >  1 file changed, 4 insertions(+)
+> > >
+> > >diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-
+> kernel/linux/linux-ti-staging_3.14.bb
+> > >index 54530e4..88950ae 100644
+> > >--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
+> > >+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+> > >@@ -65,3 +65,7 @@ KERNEL_GIT_PROTOCOL =3D "git"
+> > >  SRC_URI +=3D
+> "${KERNEL_GIT_URI};protocol=3D${KERNEL_GIT_PROTOCOL};branch=3D${BRANCH}
+> \
+> > >              file://defconfig \
+> > >             "
+> > >+
+> > >+do_compile_kernelmodules_append() {
+> > >+	cp Module.symvers ${STAGING_KERNEL_BUILDDIR}/
+> > >+}
+> > >
+> > --
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
