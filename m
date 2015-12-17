@@ -1,46 +1,49 @@
-Return-Path: <denys@ti.com>
+Return-Path: <jdvdt2@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1763CE00BE3; Wed, 16 Dec 2015 12:22:18 -0800 (PST)
+	id 68D38E00C1C; Thu, 17 Dec 2015 05:41:47 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (jdvdt2[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.213.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B8B3E002F9
-	for <meta-ti@yoctoproject.org>; Wed, 16 Dec 2015 12:22:13 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id tBGKMCPA021081;
-	Wed, 16 Dec 2015 14:22:12 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBGKMCD8001903;
-	Wed, 16 Dec 2015 14:22:12 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 16 Dec 2015 14:22:12 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBGKMCID002251;
-	Wed, 16 Dec 2015 14:22:12 -0600
-Date: Wed, 16 Dec 2015 15:21:56 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Joshua Vanderpool <jdvdt2@gmail.com>
-Message-ID: <20151216202156.GI27464@edge>
-References: <CAESSzZyP2JX1yYwgvp=BHFmja9qOPzA+_k9F3Z8GSfON2pRvmw@mail.gmail.com>
-	<20151215194902.GD27464@edge>
-	<CAESSzZzUhzzCxMWQP_OUOG1BMpBFc+BRzB3y1d97F-VL9sqnUg@mail.gmail.com>
-	<20151216174450.GH27464@edge>
-	<CAESSzZwMzHbxR+BLMaNV=ciMps=-ogsJ_+xYFpS=mjirT-_iLw@mail.gmail.com>
-	<CAAjA2M+ukzZuS=q6+Vhwrba9Axc7NXXChn4F42KzakR8RDXREw@mail.gmail.com>
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
+	[209.85.213.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 625ADE005B7
+	for <meta-ti@yoctoproject.org>; Thu, 17 Dec 2015 05:41:44 -0800 (PST)
+Received: by mail-vk0-f41.google.com with SMTP id a189so46419417vkh.2
+	for <meta-ti@yoctoproject.org>; Thu, 17 Dec 2015 05:41:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=fwnVfz67y/M76XUoKRie9EjewO3r7y/Xf7sfoIpMd/c=;
+	b=YOt4d/RtA/3A723mNqSzX/DeA5wrACPpYj0+pxRv7NZunG6vSp7y6ZHuMU2PZrElZk
+	0fokMX8BQ18JgpZSnsz3+/jBzlZnG5GU1AJ/+pDBFOdFEhWKJoc7DAvfkeEygw/wrBIX
+	pXV0paguOumIZ/x5NXkUdZzQV6xg5W3z+O78zu7bpxbO2SVQ7C66JRXnr4BuJkEPeL4D
+	lu59FvHZ0qKhZBw+DyuiJKaJmGHJnz5CI1O4s/FrURF/6EYIxz2yGFZHLeAJyz1QqEk1
+	E7H2feKSnZdIEcT0UzY8KdcwgDLCdSIZoR1i77xdagxWSQpXbANacTWb8wXNDv3NmixR
+	CH6A==
 MIME-Version: 1.0
-In-Reply-To: <CAAjA2M+ukzZuS=q6+Vhwrba9Axc7NXXChn4F42KzakR8RDXREw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: Cannot compile omapdrm-pvr for A15
+X-Received: by 10.31.49.147 with SMTP id x141mr38721542vkx.1.1450359703368;
+	Thu, 17 Dec 2015 05:41:43 -0800 (PST)
+Received: by 10.31.93.69 with HTTP; Thu, 17 Dec 2015 05:41:43 -0800 (PST)
+Date: Thu, 17 Dec 2015 08:41:43 -0500
+Message-ID: <CAAjA2MK=K-iL1-t-=O=h6YmmaOZPj=mdk=zEsCUbaKz1M6d=mQ@mail.gmail.com>
+From: Joshua Vanderpool <jdvdt2@gmail.com>
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: u-boot update to support TPS650937
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,360 +56,150 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2015 20:22:18 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Dec 2015 13:41:47 -0000
+X-Groupsio-MsgNum: 7704
+Content-Type: multipart/mixed; boundary=001a11438346eac5be0527182e0b
 
-On Wed, Dec 16, 2015 at 03:10:05PM -0500, Joshua Vanderpool wrote:
-> Aymeric,
-> 
-> They have switched to the 2015 linaro toolchain.
-> 
-> $ wget
-> http://releases.linaro.org/15.05/components/toolchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.tar.xz
-> 
-> $ tar xf gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.tar.xz
-> 
-> $ export
-> PATH=$HOME/gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf/bin:$PATH
-> 
-> Also make sure to have dos2unix installed or the build of the omapdrm will
-> fail as well.
-> 
-> I am sure the wiki will be updated soon.
+--001a11438346eac5be0527182e0b
+Content-Type: multipart/alternative; boundary=001a11438346eac5b80527182e09
 
-Yes, the Wiki has been updated to reflect Fido and Linaro 2015.05 toolchain.
+--001a11438346eac5b80527182e09
+Content-Type: text/plain; charset=UTF-8
 
--- 
-Denys
+I do not know how best to incorporate this update for use in the TI
+mainline but this is the patches we used for our design to make it work.
+This update is needed to write to the DEV_CTRL.DEV_ON register at 0x1A0
+which to write to needed to be byte swapped for the the proper write to the
+register.
 
+Josh
 
-> On Wed, Dec 16, 2015 at 2:40 PM, Aymeric Dumaz <aymeric.dumaz@gmail.com>
-> wrote:
-> 
-> > 2015-12-16 9:44 GMT-08:00 Denys Dmytriyenko <denys@ti.com>:
-> > > On Tue, Dec 15, 2015 at 12:40:30PM -0800, Aymeric Dumaz wrote:
-> > >> 2015-12-15 11:49 GMT-08:00 Denys Dmytriyenko <denys@ti.com>:
-> > >> > On Tue, Dec 15, 2015 at 11:41:10AM -0800, Aymeric Dumaz wrote:
-> > >> >> Hello,
-> > >> >>
-> > >> >> I am trying to create an image with Qt5 for my BeagleBoard X15. I set
-> > >> >> up the build environment as explained in the Arago wiki, and add that
-> > >> >> my local.conf:
-> > >> >>
-> > >> >> IMAGE_INSTALL_append = " kernel-modules omap5-sgx-ddk-um-linux
-> > >> >> omapdrm-pvr libgbm libdrm libdrm-omap qtbase qtbase-plugins
-> > >> >> qtbase-fonts qtquick1 qtquick1-qmlplugins kmscube"
-> > >> >>
-> > >> >> But when it tries to compile omapdrm-pvr, it prints the following
-> > >> >> errors (same if I try with the OMAP5432 uEVM).
-> > >> >>
-> > >> >> I am missing something?
-> > >> >> Regards
-> > >> >
-> > >> > I see that you are using Daisy branch and 3.14 kernel. Make sure you
-> > build
-> > >> > against linux-ti-staging_3.14 kernel, as it is specifically patches
-> > with
-> > >> > necessary SGX API (like omap_gem_* symbols below).
-> > >>
-> > >> Thank you for your answer.
-> > >> I did a "cleansstate virtual/kernel" and rebuild omapdrm-pvr, which
-> > >> triggered the kernel to be rebuilt too.
-> > >> It is the correct version
-> > >> (linux-ti-staging-3.14.49+gitAUTOINC+e9cd4cc819-r7a-arago2), but
-> > >> omapdrm-pvr fails with the same errors.
-> > >
-> > > Aymeric,
-> > >
-> > > We've moved on to Fido setup with 4.1 kernel some time back and I
-> > personally
-> > > haven't tried Daisy/3.14 recently. Can you try Fido/4.1 as well?
-> >
-> > My bad, I followed the "Setting Up Build Environment" wiki page.
-> > I tried with Fido (configs/arago-fido-config.txt), but I have some
-> > issues with the toolchain now; I tried the 2013.10 version but it has
-> > the same problems.
-> > Should I use another toolchain?
-> >
-> > |
-> > /linaro_toolchain/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/../lib/gcc/arm-linux-gnueabihf/4.7.3/../../../../arm-linux-gnueabihf/bin/ld:
-> > cannot find ../../lib/libc.so.6
-> > | collect2: error: ld returned 1 exit status
-> > | make: *** [example] Error 1
-> > | make: *** Waiting for unfinished jobs....
-> > |
-> > /linaro_toolchain/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/../lib/gcc/arm-linux-gnueabihf/4.7.3/../../../../arm-linux-gnueabihf/bin/ld:
-> > cannot find ../../lib/libc.so.6
-> > | collect2: error: ld returned 1 exit status
-> > | make: *** [minigzip] Error 1
-> > |
-> > /linaro_toolchain/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/../lib/gcc/arm-linux-gnueabihf/4.7.3/../../../../arm-linux-gnueabihf/bin/ld:
-> > cannot find ../../lib/libc.so.6
-> > | collect2: error: ld returned 1 exit status
-> > | make: *** [example64] Error 1
-> > |
-> > /linaro_toolchain/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/../lib/gcc/arm-linux-gnueabihf/4.7.3/../../../../arm-linux-gnueabihf/bin/ld:
-> > cannot find ../../lib/libc.so.6
-> > | collect2: error: ld returned 1 exit status
-> > | make: *** [minigzip64] Error 1
-> > | ERROR: oe_runmake failed
-> > | WARNING: exit code 1 from a shell command.
-> > | ERROR: Function failed: do_compile (log file is located at
-> >
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/zlib/1.2.8-r0/temp/log.do_compile.22964)
-> > ERROR: Task 894
-> > (/tisdk/sources/oe-core/meta/recipes-core/zlib/zlib_1.2.8.bb,
-> > do_compile) failed with exit code '1'
-> > ERROR: Function failed: do_configure (log file is located at
-> >
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.18450)
-> > ERROR: Logfile of failure stored in:
-> >
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.18450
-> >
-> > [...]
-> >
-> > | ## ------------------------- ##
-> > | ## Configuring libtool 2.4.6 ##
-> > | ## ------------------------- ##
-> > |
-> > | checking for GNU M4 that supports accurate traces...
-> >
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/m4
-> > | checking whether
-> >
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/x86_64-linux/usr/bin/m4
-> > accepts --gnu... yes
-> > | checking how m4 supports trace files... --debugfile
-> > | checking for a BSD-compatible install... /usr/bin/install -c
-> > | checking whether build environment is sane... yes
-> > | checking for arm-linux-gnueabi-strip... arm-linux-gnueabihf-strip
-> > | checking for a thread-safe mkdir -p... /bin/mkdir -p
-> > | checking for gawk... gawk
-> > | checking whether make sets $(MAKE)... yes
-> > | checking whether make supports nested variables... yes
-> > | checking whether make supports nested variables... (cached) yes
-> > | checking build system type... x86_64-pc-linux-gnu
-> > | checking host system type... arm-unknown-linux-gnueabi
-> > | configure: autobuild project... GNU Libtool
-> > | configure: autobuild revision... 2.4.6
-> > | configure: autobuild hostname... ubuntu_precise
-> > | configure: autobuild mode... default
-> > | configure: autobuild timestamp... 20151216T191217Z
-> > | checking for arm-linux-gnueabi-gcc... arm-linux-gnueabihf-gcc
-> > -march=armv7-a -marm  -mthumb-interwork -mfloat-abi=hard -mfpu=neon
-> > -mtune=cortex-a15
-> >
-> > --sysroot=/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm
-> > | checking whether the C compiler works... no
-> > | configure: error: in
-> >
-> > `/tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/build':
-> > | configure: error: C compiler cannot create executables
-> > | See `config.log' for more details
-> > | Configure failed. The contents of all config.log files follows to
-> > aid debugging
-> > | ERROR: oe_runconf failed
-> > | WARNING: exit code 1 from a shell command.
-> > | ERROR: Function failed: do_configure (log file is located at
-> >
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/cortexa15hf-vfp-neon-linux-gnueabi/libtool-cross/2.4.6-r0/temp/log.do_configure.18450)
-> > ERROR: Task 530
-> > (/tisdk/sources/oe-core/meta/recipes-devtools/libtool/
-> > libtool-cross_2.4.6.bb,
-> > do_configure) failed with exit code '1'
-> >
-> >
-> > >
-> > > Karthik,
-> > >
-> > > Were you still using Daisy with 3.14 kernel? Have you had any issues with
-> > > omapdrm-pvr?
-> > >
-> > > --
-> > > Denys
-> > >
-> > >
-> > >> >> $ MACHINE=am57xx-evm bitbake omapdrm-pvr
-> > >> >> NOTE: Started PRServer with DBfile:
-> > /tisdk/build/cache/prserv.sqlite3,
-> > >> >> IP: 127.0.0.1, PORT: 40922, PID: 19820
-> > >> >> Loading cache: 100%
-> > >> >> |########################################################| ETA:
-> > >> >> 00:00:00
-> > >> >> Loaded 2270 entries from dependency cache.
-> > >> >> Parsing recipes: 100%
-> > >> >> |######################################################| Time:
-> > >> >> 00:00:00
-> > >> >> Parsing of 1827 .bb files complete (1826 cached, 1 parsed). 2270
-> > >> >> targets, 212 skipped, 0 masked, 0 errors.
-> > >> >> WARNING: No recipes available for:
-> > >> >>
-> >  /tisdk/sources/meta-arago/meta-arago-distro/recipes-connectivity/openssl/openssl_1.0.1m.bbappend
-> > >> >> NOTE: Resolving any missing task queue dependencies
-> > >> >>
-> > >> >> Build Configuration:
-> > >> >> BB_VERSION        = "1.26.0"
-> > >> >> BUILD_SYS         = "x86_64-linux"
-> > >> >> NATIVELSBSTRING   = "Ubuntu-12.04"
-> > >> >> TARGET_SYS        = "arm-linux-gnueabi"
-> > >> >> MACHINE           = "am57xx-evm"
-> > >> >> DISTRO            = "arago"
-> > >> >> DISTRO_VERSION    = "2015.05"
-> > >> >> TUNE_FEATURES     = "armv7a vfp thumb neon callconvention-hard
-> > cortexa15"
-> > >> >> TARGET_FPU        = "vfp-neon"
-> > >> >> meta-arago-distro
-> > >> >> meta-arago-extras = "daisy:dc89e06d2a64f33d9e9662e6f7fe1f8466ff167c"
-> > >> >> meta-qt5          =
-> > "(nobranch):17eb158c6d2cd290b054b5bd54311aa44a02d04d"
-> > >> >> toolchain-layer
-> > >> >> meta-networking
-> > >> >> meta-ruby
-> > >> >> meta-oe           = "daisy:d3d14d3fcca7fcde362cf0b31411dc4eea6d20aa"
-> > >> >> meta-ti           = "daisy:090b02a104924886afd0fa79be7b5d08eebf071f"
-> > >> >> meta-linaro-toolchain =
-> > "daisy:06008235ca752fea678953e85adaa29a491d246b"
-> > >> >> meta              = "daisy:e1a2540227250d854d5bba278634bcc9e7572cda"
-> > >> >>
-> > >> >> NOTE: Preparing RunQueue
-> > >> >> NOTE: Executing SetScene Tasks
-> > >> >> NOTE: Executing RunQueue Tasks
-> > >> >> ERROR: Function failed: do_compile (log file is located at
-> > >> >>
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/temp/log.do_compile.19911)
-> > >> >> ERROR: Logfile of failure stored in:
-> > >> >>
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/temp/log.do_compile.19911
-> > >> >> Log data follows:
-> > >> >> | DEBUG: Executing shell function do_compile
-> > >> >> | NOTE: make -j 8 -e MAKEFLAGS=
-> > >> >>
-> > KERNELDIR=/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/src/kernel
-> > >> >>
-> > KERNEL_PATH=/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/src/kernel
-> > >> >>
-> > KERNEL_SRC=/tisdk/build/arago-tmp-external-linaro-toolchain/sysroots/am57xx-evm/usr/src/kernel
-> > >> >> KERNEL_VERSION=3.14.49-ge9cd4cc CC=arm-linux-gnueabihf-gcc
-> > >> >> -mno-thumb-interwork -marm LD=arm-linux-gnueabihf-ld.bfd
-> > >> >> AR=arm-linux-gnueabihf-ar
-> > >> >> | ../config/core.mk:419: $(KERNELDIR)/vmlinux does not exist.
-> > Kbuild may fail.
-> > >> >> |   CC [M]
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.o
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> > >> >> In function 'create_gem_wrapper':
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:480:2:
-> > >> >> error: implicit declaration of function 'omap_gem_new_ext'
-> > >> >> [-Werror=implicit-function-declaration]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:480:2:
-> > >> >> error: return makes pointer from integer without a cast [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> > >> >> In function 'MMapVOpenExt':
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1370:2:
-> > >> >> error: implicit declaration of function 'omap_gem_priv'
-> > >> >> [-Werror=implicit-function-declaration]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1370:15:
-> > >> >> error: initialization makes pointer from integer without a cast
-> > >> >> [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> > >> >> In function 'MMapVCloseExt':
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1384:15:
-> > >> >> error: initialization makes pointer from integer without a cast
-> > >> >> [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> > >> >> In function 'PVRMMapExt':
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1442:2:
-> > >> >> error: implicit declaration of function 'omap_gem_set_priv'
-> > >> >> [-Werror=implicit-function-declaration]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:
-> > >> >> At top level:
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1473:15:
-> > >> >> error: variable 'gem_ops' has initializer but incomplete type
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1474:3:
-> > >> >> error: unknown field 'open' specified in initializer
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1474:3:
-> > >> >> error: excess elements in struct initializer [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1474:3:
-> > >> >> error: (near initialization for 'gem_ops') [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1475:3:
-> > >> >> error: unknown field 'close' specified in initializer
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1475:3:
-> > >> >> error: excess elements in struct initializer [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1475:3:
-> > >> >> error: (near initialization for 'gem_ops') [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1476:3:
-> > >> >> error: unknown field 'mmap' specified in initializer
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1476:3:
-> > >> >> error: excess elements in struct initializer [-Werror]
-> > >> >> |
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.c:1476:3:
-> > >> >> error: (near initialization for 'gem_ops') [-Werror]
-> > >> >> | cc1: all warnings being treated as errors
-> > >> >> | make[3]: ***
-> > [/tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/services4/srvkm/env/linux/mmap.o]
-> > >> >> Error 1
-> > >> >> | make[2]: ***
-> > [_module_/tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/git/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild]
-> > >> >> Error 2
-> > >> >> | make[1]: *** [kbuild] Error 2
-> > >> >> | make: *** [build] Error 2
-> > >> >> | ERROR: oe_runmake failed
-> > >> >> | WARNING: exit code 1 from a shell command.
-> > >> >> | ERROR: Function failed: do_compile (log file is located at
-> > >> >>
-> > /tisdk/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/omapdrm-pvr/1.9.2253347-r7k/temp/log.do_compile.19911)
-> > >> >> ERROR: Task 8 (/tisdk/sources/meta-ti/recipes-bsp/powervr-drivers/
-> > omapdrm-pvr_1.9.2253347.bb,
-> > >> >> do_compile) failed with exit code '1'
-> > >> >> NOTE: Tasks Summary: Attempted 406 tasks of which 403 didn't need to
-> > >> >> be rerun and 1 failed.
-> > >> >> NOTE: Writing buildhistory
-> > >> >> Waiting for 0 running tasks to finish:
-> > >> >>
-> > >> >> Summary: 1 task failed:
-> > >> >>   /tisdk/sources/meta-ti/recipes-bsp/powervr-drivers/
-> > omapdrm-pvr_1.9.2253347.bb,
-> > >> >> do_compile
-> > >> >> Summary: There was 1 WARNING message shown.
-> > >> >> Summary: There was 1 ERROR message shown, returning a non-zero exit
-> > code.
-> > >> >> --
-> > >> >> _______________________________________________
-> > >> >> meta-ti mailing list
-> > >> >> meta-ti@yoctoproject.org
-> > >> >> https://lists.yoctoproject.org/listinfo/meta-ti
-> > >>
-> > >>
-> > >>
-> > >> --
-> > >> Aymeric Dumaz
-> > >> Epita 2014
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> >
+--001a11438346eac5b80527182e09
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">I do not know how best to incorporate this update for use =
+in the TI mainline but this is the patches we used for our design to make i=
+t work.=C2=A0 This update is needed to write to the=C2=A0DEV_CTRL.DEV_ON re=
+gister at 0x1A0 which to write to needed to be byte swapped for the the pro=
+per write to the register.<div><br></div><div>Josh</div></div>
+
+--001a11438346eac5b80527182e09--
+
+--001a11438346eac5be0527182e0b
+Content-Type: text/x-patch; charset=US-ASCII; name="palmas.patch"
+Content-Disposition: attachment; filename="palmas.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_iiaag1kv0
+
+LS0tIGdpdC9pbmNsdWRlL3BhbG1hcy5oCTIwMTUtMTAtMTQgMTM6MzY6NTAuNTg5NjUwMTQxIC0w
+NDAwCisrKyBnaXQvaW5jbHVkZS9wYWxtYXNfY29weS5oCTIwMTUtMTAtMTQgMTM6Mzk6MDAuMjc3
+NjQ5Mzg5IC0wNDAwCkBAIC0xMTgsNiArMTE4LDExIEBAIHN0YXRpYyBpbmxpbmUgaW50IHBhbG1h
+c19pMmNfcmVhZF91OCh1OAogCXJldHVybiBpMmNfcmVhZChjaGlwX25vLCByZWcsIDEsIHZhbCwg
+MSk7CiB9CiAKK3N0YXRpYyBpbmxpbmUgaW50IHBhbG1hc19pMmNfd3JpdGVfdTE2KHU4IGNoaXBf
+bm8sIHUxNiByZWcsIHU4IHZhbCkKK3sKKwlyZXR1cm4gaTJjX3dyaXRlKGNoaXBfbm8sIHJlZywg
+MiwgJnZhbCwgMSk7Cit9CisKIHZvaWQgcGFsbWFzX2luaXRfc2V0dGluZ3Modm9pZCk7CiBpbnQg
+cGFsbWFzX21tYzFfcG93ZXJvbl9sZG8odm9pZCk7CiBpbnQgdHdsNjAzeF9tbWMxX3NldF9sZG85
+KHU4IHZzZWwpOwo=
+
+--001a11438346eac5be0527182e0b
+Content-Type: text/x-patch; charset=US-ASCII; name="raymond_gdm.patch"
+Content-Disposition: attachment; filename="raymond_gdm.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_iiaag7d11
+
+SW5kZXg6IGdpdC9pbmNsdWRlL2NvbmZpZ3MvcmF5bW9uZF9nZG0uaAo9PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci0tLSAv
+ZGV2L251bGwKKysrIGdpdC9pbmNsdWRlL2NvbmZpZ3MvcmF5bW9uZF9nZG0uaApAQCAtMCwwICsx
+LDY2IEBACisvKgorICogKEMpIENvcHlyaWdodCAyMDE0CisgKiBUZXhhcyBJbnN0cnVtZW50cyBJ
+bmNvcnBvcmF0ZWQuCisgKiBGZWxpcGUgQmFsYmkgPGJhbGJpQHRpLmNvbT4KKyAqCisgKiBDb25m
+aWd1cmF0aW9uIHNldHRpbmdzIGZvciB0aGUgVEkgQmVhZ2xlIHgxNSBib2FyZC4KKyAqIFNlZSB0
+aV9vbWFwNV9jb21tb24uaCBmb3Igb21hcDUgY29tbW9uIHNldHRpbmdzLgorICoKKyAqIFNQRFgt
+TGljZW5zZS1JZGVudGlmaWVyOglHUEwtMi4wKworICovCisKKyNpZm5kZWYgX19DT05GSUdfUkFZ
+TU9ORF9HRE1fSAorI2RlZmluZSBfX0NPTkZJR19SQVlNT05EX0dETV9ICisKKyNkZWZpbmUgQ09O
+RklHX0FNNTdYWAorCisjaWZkZWYgQ09ORklHX1NQTF9CVUlMRAorI2RlZmluZSBDT05GSUdfSU9E
+RUxBWV9SRUNBTElCUkFUSU9OCisjZW5kaWYKKworI2RlZmluZSBDT05GSUdfTlJfRFJBTV9CQU5L
+UwkJMgorCisjZGVmaW5lIENPTkZJR19FTlZfU0laRQkJCSg2NCA8PCAxMCkKKyNkZWZpbmUgQ09O
+RklHX0VOVl9JU19JTl9GQVQKKyNkZWZpbmUgRkFUX0VOVl9JTlRFUkZBQ0UJCSJtbWMiCisjZGVm
+aW5lIEZBVF9FTlZfREVWSUNFX0FORF9QQVJUCQkiMDoxIgorI2RlZmluZSBGQVRfRU5WX0ZJTEUJ
+CQkidWJvb3QuZW52IgorCisjZGVmaW5lIENPTkZJR19DTURfU0FWRUVOVgorCisjZGVmaW5lIENP
+TlNPTEVERVYJCQkidHR5TzIiCisjZGVmaW5lIENPTkZJR19TWVNfTlMxNjU1MF9DT00xCQlVQVJU
+MV9CQVNFCS8qIEJhc2UgRVZNIGhhcyBVQVJUMCAqLworI2RlZmluZSBDT05GSUdfU1lTX05TMTY1
+NTBfQ09NMgkJVUFSVDJfQkFTRQkvKiBVQVJUMiAqLworI2RlZmluZSBDT05GSUdfU1lTX05TMTY1
+NTBfQ09NMwkJVUFSVDNfQkFTRQkvKiBVQVJUMyAqLworI2RlZmluZSBDT05GSUdfQkFVRFJBVEUJ
+CQkxMTUyMDAKKworI2RlZmluZSBDT05GSUdfU1lTX09NQVBfQUJFX1NZU0NLCisKKy8qIERlZmlu
+ZSB0aGUgZGVmYXVsdCBHUFQgdGFibGUgZm9yIGVNTUMgKi8KKyNkZWZpbmUgUEFSVFNfREVGQVVM
+VCBcCisJInV1aWRfZGlzaz0ke3V1aWRfZ3B0X2Rpc2t9OyIgXAorCSJuYW1lPXJvb3RmcyxzdGFy
+dD0yTWlCLHNpemU9LSx1dWlkPSR7dXVpZF9ncHRfcm9vdGZzfSIKKworI2luY2x1ZGUgPGNvbmZp
+Z3MvdGlfb21hcDVfY29tbW9uLmg+CisKKy8qIEVuaGFuY2Ugb3VyIGVNTUMgc3VwcG9ydCAvIGV4
+cGVyaWVuY2UuICovCisjZGVmaW5lIENPTkZJR19DTURfR1BUCisjZGVmaW5lIENPTkZJR19FRklf
+UEFSVElUSU9OCisjZGVmaW5lIENPTkZJR19QQVJUSVRJT05fVVVJRFMKKyNkZWZpbmUgQ09ORklH
+X0NNRF9QQVJUCisKKyNkZWZpbmUgQ09ORklHX1NVUFBPUlRfRU1NQ19CT09UCisKKy8qIFVTQiB4
+SENJIEhPU1QgKi8KKyNkZWZpbmUgQ09ORklHX0NNRF9VU0IKKyNkZWZpbmUgQ09ORklHX1VTQl9E
+V0MzCisjZGVmaW5lIENPTkZJR19VU0JfSE9TVAorI2RlZmluZSBDT05GSUdfVVNCX1hIQ0kKKyNk
+ZWZpbmUgQ09ORklHX1VTQl9YSENJX09NQVAKKyNkZWZpbmUgQ09ORklHX1VTQl9TVE9SQUdFCisj
+ZGVmaW5lIENPTkZJR19TWVNfVVNCX1hIQ0lfTUFYX1JPT1RfUE9SVFMgMQorCisjZGVmaW5lIENP
+TkZJR19PTUFQX1VTQl9QSFkKKyNkZWZpbmUgQ09ORklHX09NQVBfVVNCM1BIWTFfSE9TVAorCisj
+ZW5kaWYgLyogX19DT05GSUdfQkVBR0xFX1g1X0ggKi8KSW5kZXg6IGdpdC9pbmNsdWRlL2NvbmZp
+Z3MvdGlfb21hcDVfY29tbW9uLmgKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQotLS0gZ2l0Lm9yaWcvaW5jbHVkZS9jb25m
+aWdzL3RpX29tYXA1X2NvbW1vbi5oCisrKyBnaXQvaW5jbHVkZS9jb25maWdzL3RpX29tYXA1X2Nv
+bW1vbi5oCkBAIC05Nyw2ICs5Nyw0MCBAQAogI2RlZmluZSBOQU5EQk9PVAogI2VuZGlmCiAKKyNk
+ZWZpbmUgQ09ORklHX0NNRF9TRVRFWFBSCisKKyNkZWZpbmUgRU1NQ19QQVJUUyBcCisJInV1aWRf
+Z3B0X2Rpc2s9IiBcCisJImRmMzM1YjgzLWI2OWItNDczMS1hYTZkLThmMTYxYzhkZWEwMlwwIiBc
+CisJInV1aWRfZ3B0X3Jvb3Rmcz0iIFwKKwkiZWEwMGZlZDMtYmYxZS00ZTU4LTk2YzItY2E1NDg4
+ZTYwODYzXDAiIFwKKwkidXVpZF9ncHRfZGF0YT0iIFwKKwkiYmEwMGZlZDMtYmYxZS00ZTU4LTk2
+YzItY2E1NDg4ZTYwODY0XDAiIFwKKwkidXVpZF9ncHRfYm9vdD0iIFwKKwkiYmEwMGZlZDMtYmYx
+ZS00ZTU4LTk2YzItY2E1NDg4ZTYwODY1XDAiIFwKKwkicGFydGl0aW9ucz0iIFwKKwkidXVpZF9k
+aXNrPSR7dXVpZF9ncHRfZGlza307bmFtZT1ib290LHN0YXJ0PTJNaUIsdXVpZD0ke3V1aWRfZ3B0
+X2Jvb3R9LHNpemU9MTAwTWlCO25hbWU9cm9vdGZzLHNpemU9MTgwME1pQix1dWlkPSR7dXVpZF9n
+cHRfcm9vdGZzfTtuYW1lPWRhdGEsc2l6ZT0tLHV1aWQ9JHt1dWlkX2dwdF9kYXRhfVwwIgorCisj
+ZGVmaW5lIEVNTUNfVVBEQVRFIFwKKwkiZW1tY191cGRhdGU9IiBcCisJImdwdCB3cml0ZSBtbWMg
+MSAke3BhcnRpdGlvbnN9OyIgXAorCSJtbWMgZGV2IDA7IiBcCisJIm1tYyByZXNjYW47IiBcCisJ
+Im1tYyBkZXYgMTsiIFwKKwkibG9hZCBtbWMgMDoxICR7bG9hZGFkZHJ9IE1MTzsiIFwKKwkibW1j
+IHdyaXRlICR7bG9hZGFkZHJ9IDB4MTAwIDB4MTAwOyIgXAorCSJtbWMgd3JpdGUgJHtsb2FkYWRk
+cn0gMHgyMDAgMHgxMDA7IiBcCisJImxvYWQgbW1jIDA6MSAke2xvYWRhZGRyfSB1LWJvb3QuaW1n
+OyIgXAorCSJtbWMgd3JpdGUgJHtsb2FkYWRkcn0gMHgzMDAgMHg0MDA7IiBcCisJImxvYWQgbW1j
+IDA6MiAke2xvYWRhZGRyfSBib290LmZhdDsiIFwKKwkic2V0ZXhwciBjb3VudCAweCR7ZmlsZXNp
+emV9ICsgMHgyMDA7IiBcCisJInNldGV4cHIgY291bnQgMHgke2NvdW50fSAvIDB4MjAwOyIgXAor
+CSJtbWMgd3JpdGUgJHtsb2FkYWRkcn0gMHgxMDAwIDB4JHtjb3VudH07IiBcCisJImxvYWQgbW1j
+IDA6MiAke2xvYWRhZGRyfSByb290ZnMuZXh0NDsiIFwKKwkic2V0ZXhwciBjb3VudCAweCR7Zmls
+ZXNpemV9ICsgMHgyMDA7IiBcCisJInNldGV4cHIgY291bnQgMHgke2NvdW50fSAvIDB4MjAwOyIg
+XAorCSJtbWMgd3JpdGUgJHtsb2FkYWRkcn0gMHgzMzAwMCAweCR7Y291bnR9XDAiCisKICNkZWZp
+bmUgREZVX0FMVF9JTkZPX01NQyBcCiAJImRmdV9hbHRfaW5mb19tbWM9IiBcCiAJImJvb3QgcGFy
+dCAwIDE7IiBcCkBAIC0xNDMsNyArMTY3LDcgQEAKIAlERUZBVUxUX0xJTlVYX0JPT1RfRU5WIFwK
+IAkiY29uc29sZT0iIENPTlNPTEVERVYgIiwxMTUyMDBuOFwwIiBcCiAJImZkdGZpbGU9dW5kZWZp
+bmVkXDAiIFwKLQkiYm9vdHBhcnQ9MDoyXDAiIFwKKwkiYm9vdHBhcnQ9MToxXDAiIFwKIAkiYm9v
+dGRpcj0vYm9vdFwwIiBcCiAJImJvb3RmaWxlPXpJbWFnZVwwIiBcCiAJInVzYnR0eT1jZGNfYWNt
+XDAiIFwKQEAgLTE1MSw3ICsxNzUsNyBAQAogCSJwYXJ0aXRpb25zPSIgUEFSVFNfREVGQVVMVCAi
+XDAiIFwKIAkib3B0YXJncz1cMCIgXAogCSJtbWNkZXY9MFwwIiBcCi0JIm1tY3Jvb3Q9L2Rldi9t
+bWNibGswcDIgcndcMCIgXAorCSJtbWNyb290PVBBUlRVVUlEPWQzZmUwMGVhLTFlYmYtNTg0ZS05
+NmMyLWNhNTQ4OGU2MDg2MyByb1wwIiBcCiAJIm1tY3Jvb3Rmc3R5cGU9ZXh0NCByb290d2FpdFww
+IiBcCiAJIm1tY2FyZ3M9c2V0ZW52IGJvb3RhcmdzIGNvbnNvbGU9JHtjb25zb2xlfSAiIFwKIAkJ
+IiR7b3B0YXJnc30gIiBcCkBAIC0xNjcsNyArMTkxLDcgQEAKIAkiYm9vdHNjcmlwdD1lY2hvIFJ1
+bm5pbmcgYm9vdHNjcmlwdCBmcm9tIG1tYyR7bW1jZGV2fSAuLi47ICIgXAogCQkic291cmNlICR7
+bG9hZGFkZHJ9XDAiIFwKIAkiYm9vdGVudj11RW52LnR4dFwwIiBcCi0JImxvYWRib290ZW52PWZh
+dGxvYWQgbW1jICR7bW1jZGV2fSAke2xvYWRhZGRyfSAke2Jvb3RlbnZ9XDAiIFwKKwkibG9hZGJv
+b3RlbnY9bG9hZCBtbWMgJHtib290cGFydH0gJHtsb2FkYWRkcn0gJHtib290ZW52fVwwIiBcCiAJ
+ImltcG9ydGJvb3RlbnY9ZWNobyBJbXBvcnRpbmcgZW52aXJvbm1lbnQgZnJvbSBtbWMke21tY2Rl
+dn0gLi4uOyAiIFwKIAkJImVudiBpbXBvcnQgLXQgJHtsb2FkYWRkcn0gJHtmaWxlc2l6ZX1cMCIg
+XAogCSJsb2FkaW1hZ2U9bG9hZCBtbWMgJHtib290cGFydH0gJHtsb2FkYWRkcn0gJHtib290ZGly
+fS8ke2Jvb3RmaWxlfVwwIiBcCkBAIC0yMDUsMTggKzIyOSwyNSBAQAogCQkJInNldGVudiBmZHRm
+aWxlIGRyYTcyLWV2bS5kdGI7IGZpOyIgXAogCQkiaWYgdGVzdCAkYm9hcmRfbmFtZSA9IGJlYWds
+ZV94MTU7IHRoZW4gIiBcCiAJCQkic2V0ZW52IGZkdGZpbGUgYW01N3h4LWJlYWdsZS14MTUuZHRi
+OyBmaTsiIFwKKwkJImlmIHRlc3QgJGJvYXJkX25hbWUgPSByYXltb25kX2dkbTsgdGhlbiAiIFwK
+KwkJCSJpZiBncGlvIGlucHV0IDU4OyB0aGVuICIgXAorCQkJCSJzZXRlbnYgZmR0ZmlsZSBhbTU3
+eHgtcmF5bW9uZC1nZG0uZHRiOyIgXAorCQkJImVsc2Ugc2V0ZW52IGZkdGZpbGUgYW01N3h4LXJh
+eW1vbmQtZ2RtLWxjZDIuZHRiOyBmaTsiIFwKKwkJImZpOyIgXAogCQkiaWYgdGVzdCAkZmR0Zmls
+ZSA9IHVuZGVmaW5lZDsgdGhlbiAiIFwKIAkJCSJlY2hvIFdBUk5JTkc6IENvdWxkIG5vdCBkZXRl
+cm1pbmUgZGV2aWNlIHRyZWUgdG8gdXNlOyBmaTsgXDAiIFwKIAkibG9hZGZkdD1sb2FkIG1tYyAk
+e2Jvb3RwYXJ0fSAke2ZkdGFkZHJ9ICR7Ym9vdGRpcn0vJHtmZHRmaWxlfTtcMCIgXAogCU5BTkRB
+UkdTIFwKIAlERlVBUkdTIFwKKwlFTU1DX1BBUlRTIFwKKwlFTU1DX1VQREFURSBcCiAKICNkZWZp
+bmUgQ09ORklHX0JPT1RDT01NQU5EIFwKIAkicnVuIGZpbmRmZHQ7ICIgXAogCSJydW4gbW1jYm9v
+dDsiIFwKIAkic2V0ZW52IG1tY2RldiAxOyAiIFwKLQkic2V0ZW52IGJvb3RwYXJ0IDE6MjsgIiBc
+Ci0JInNldGVudiBtbWNyb290IC9kZXYvbW1jYmxrMHAyIHJ3OyAiIFwKKwkic2V0ZW52IGJvb3Rw
+YXJ0IDE6MTsgIiBcCisJInNldGVudiBtbWNyb290IFBBUlRVVUlEPWQzZmUwMGVhLTFlYmYtNTg0
+ZS05NmMyLWNhNTQ4OGU2MDg2MyBybzsgIiBcCiAJInJ1biBtbWNib290OyIgXAogCU5BTkRCT09U
+IFwKIAo=
+
+--001a11438346eac5be0527182e0b--
