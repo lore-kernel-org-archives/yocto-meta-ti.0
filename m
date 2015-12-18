@@ -1,41 +1,26 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 792BBE00BDA; Fri, 18 Dec 2015 05:58:17 -0800 (PST)
+	id 74F43E00BDA; Fri, 18 Dec 2015 11:21:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37131E00AB9
-	for <meta-ti@yoctoproject.org>; Fri, 18 Dec 2015 05:58:13 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id tBIDwC5g026789
-	for <meta-ti@yoctoproject.org>; Fri, 18 Dec 2015 07:58:12 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id tBIDwCt1008112
-	for <meta-ti@yoctoproject.org>; Fri, 18 Dec 2015 07:58:12 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 18 Dec 2015 07:58:11 -0600
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	tBIDwCuA023048;	Fri, 18 Dec 2015 07:58:12 -0600
-Received: from localhost (a0272616local.am.dhcp.ti.com [172.22.176.145])	by
-	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	tBIDwB917468; Fri, 18 Dec 2015 07:58:11 -0600 (CST)
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 18 Dec 2015 07:58:18 -0600
-Message-ID: <1450447098-22234-1-git-send-email-dmurphy@ti.com>
-X-Mailer: git-send-email 2.7.0.rc1
-MIME-Version: 1.0
-Subject: [PATCH] boot-monitor: Update commit sha for boot monitor
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1F91E0078A
+	for <meta-ti@yoctoproject.org>; Fri, 18 Dec 2015 11:21:06 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 33A8252A6D; Fri, 18 Dec 2015 19:21:06 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20151218192106.33A8252A6D@arago-project.org>
+Date: Fri, 18 Dec 2015 19:21:06 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Dan Murphy : boot-monitor: Update commit sha for boot monitor
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,16 +33,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 13:58:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 Dec 2015 19:21:11 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: 1ddf4bb564363a3305577664967c00976de8b291
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1ddf4bb564363a3305577664967c00976de8b291
+
+Author: Dan Murphy <dmurphy@ti.com>
+Date:   Fri Dec 18 19:58:18 2015 +0000
+
+boot-monitor: Update commit sha for boot monitor
 
 Update the commit sha to the latest commit for
 the boot monitor and uptick the rev as well
+The update contains non-critical build fixes
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/boot-monitor/boot-monitor_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+
+ recipes-bsp/boot-monitor/boot-monitor_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
 index 081e605..e532f21 100644
@@ -79,7 +78,5 @@ index 081e605..e532f21 100644
  
  BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
  
--- 
-2.7.0.rc1
 
 
