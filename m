@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7F3D6E00CFA; Tue, 22 Dec 2015 08:34:14 -0800 (PST)
+	id 81216E00CBC; Tue, 22 Dec 2015 08:34:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5715EE00825
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5863DE00C74
 	for <meta-ti@yoctoproject.org>; Tue, 22 Dec 2015 08:34:08 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 552BA52AD3; Tue, 22 Dec 2015 16:34:08 +0000 (UTC)
+	id 7BEF452AD4; Tue, 22 Dec 2015 16:34:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151222163408.552BA52AD3@arago-project.org>
+Message-Id: <20151222163408.7BEF452AD4@arago-project.org>
 Date: Tue, 22 Dec 2015 16:34:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : serdes-fw: add SerDes firmware images for Keystone
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 22 Dec 2015 16:34:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: c5a3170d766cb4ea476171ee72d868242dcb6348
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5a3170d766cb4ea476171ee72d868242dcb6348
+Branch: master
+Commit: 5ae74e827cf5dac06a097b9bdbbd89a5bb5a622f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5ae74e827cf5dac06a097b9bdbbd89a5bb5a622f
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Dec 18 16:20:48 2015 -0500
