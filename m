@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 81216E00CBC; Tue, 22 Dec 2015 08:34:14 -0800 (PST)
+	id 7D677E00B45; Wed, 23 Dec 2015 13:46:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5863DE00C74
-	for <meta-ti@yoctoproject.org>; Tue, 22 Dec 2015 08:34:08 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A390E007C9
+	for <meta-ti@yoctoproject.org>; Wed, 23 Dec 2015 13:46:03 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7BEF452AD4; Tue, 22 Dec 2015 16:34:08 +0000 (UTC)
+	id CBBBD52A30; Wed, 23 Dec 2015 21:46:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20151222163408.7BEF452AD4@arago-project.org>
-Date: Tue, 22 Dec 2015 16:34:08 +0000 (UTC)
+Message-Id: <20151223214602.CBBBD52A30@arago-project.org>
+Date: Wed, 23 Dec 2015 21:46:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : serdes-fw: add SerDes firmware images for Keystone
+Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest and add deps for serdes fw
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,67 +33,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2015 16:34:14 -0000
+X-List-Received-Date: Wed, 23 Dec 2015 21:46:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 5ae74e827cf5dac06a097b9bdbbd89a5bb5a622f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5ae74e827cf5dac06a097b9bdbbd89a5bb5a622f
+Commit: 22f32bf1597167dc55cff325ec87e3e11cd3b2c7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=22f32bf1597167dc55cff325ec87e3e11cd3b2c7
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Dec 18 16:20:48 2015 -0500
+Date:   Fri Dec 18 16:25:04 2015 -0500
 
-serdes-fw: add SerDes firmware images for Keystone
+linux-ti-staging: update to the latest and add deps for serdes fw
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/serdes-fw/serdes-fw_git.bb |   36 ++++++++++++++++++++++++++++++++
- 1 files changed, 36 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/serdes-fw/serdes-fw_git.bb b/recipes-bsp/serdes-fw/serdes-fw_git.bb
-new file mode 100644
-index 0000000..2564cec
---- /dev/null
-+++ b/recipes-bsp/serdes-fw/serdes-fw_git.bb
-@@ -0,0 +1,36 @@
-+DESCRIPTION = "SerDes firmware for Keystone PCIe and 1/10GigE"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index e764324..5adfb33 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -31,6 +31,9 @@ RDEPENDS_kernel-base_append_keystone = " boot-monitor"
+ # Install ti-sci-fw into /boot dir of rootfs
+ RDEPENDS_kernel-base_append_k2g-evm = " ti-sci-fw"
+ 
++# Add run-time dependency for SerDes firmware to the rootfs
++RDEPENDS_kernel-base_append_keystone = " serdes-fw"
 +
-+LICENSE = "TI-TFL"
-+LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
-+
-+PV = "1.0.0"
-+PR = "r0"
-+
-+CLEANBROKEN = "1"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+SRCREV = "8756d98081e1011a1334b0769f13ffb31d3b41bd"
-+BRANCH ?= "ti-linux-firmware-4.1.y"
-+
-+SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-+ORIGINPCIE = "ks2_pcie_serdes_1.0.0.bin"
-+ORIGINGBE = "ks2_gbe_serdes_1.0.0.bin"
-+ORIGINXGBE = "ks2_xgbe_serdes_1.0.0.bin"
-+
-+TARGETPCIE = "ks2_pcie_serdes.bin"
-+TARGETGBE = "ks2_gbe_serdes.bin"
-+TARGETXGBE = "ks2_xgbe_serdes.bin"
-+
-+do_install() {
-+	install -d ${D}${base_libdir}/firmware
-+	install -m 0644 ${S}/ti-keystone/${ORIGINPCIE} ${D}${base_libdir}/firmware/${TARGETPCIE}
-+	install -m 0644 ${S}/ti-keystone/${ORIGINGBE} ${D}${base_libdir}/firmware/${TARGETGBE}
-+	install -m 0644 ${S}/ti-keystone/${ORIGINXGBE} ${D}${base_libdir}/firmware/${TARGETXGBE}
-+}
-+
-+FILES_${PN} = "${base_libdir}/firmware"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+@@ -57,11 +60,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.1.y"
+ 
+-SRCREV = "f0f52afb60f57f31c099dc849c6757fea5664e89"
++SRCREV = "0f37ee50e2b263eb5941d91ef6da7d4ca51f7488"
+ PV = "4.1.13+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "e"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
