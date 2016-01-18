@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6FE18E008A5; Mon, 18 Jan 2016 10:40:08 -0800 (PST)
+	id 26FFDE008BB; Mon, 18 Jan 2016 10:40:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 48185E0088C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46E92E0088B
 	for <meta-ti@yoctoproject.org>; Mon, 18 Jan 2016 10:40:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B1FE152993; Mon, 18 Jan 2016 18:40:03 +0000 (UTC)
+	id 5A267529C9; Mon, 18 Jan 2016 18:40:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160118184003.B1FE152993@arago-project.org>
+Message-Id: <20160118184003.5A267529C9@arago-project.org>
 Date: Mon, 18 Jan 2016 18:40:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2016 18:40:08 -0000
+X-List-Received-Date: Mon, 18 Jan 2016 18:40:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 6efdb527f41be5f9c819c3998c1c28ee0c633375
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6efdb527f41be5f9c819c3998c1c28ee0c633375
+Branch: fido
+Commit: 9293d342d3b28015dac006e9262d2094dfb7e34a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9293d342d3b28015dac006e9262d2094dfb7e34a
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Jan 18 23:23:41 2016 +0000
