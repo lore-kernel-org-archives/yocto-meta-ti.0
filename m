@@ -1,28 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C1D99E0088B; Mon, 18 Jan 2016 09:44:51 -0800 (PST)
+	id F1B95E0088B; Mon, 18 Jan 2016 10:24:24 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A865E0088B
-	for <meta-ti@yoctoproject.org>; Mon, 18 Jan 2016 09:44:49 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 1D9A5529B5; Mon, 18 Jan 2016 17:44:49 +0000 (UTC)
+	*      [score: 0.0001]
+X-Greylist: delayed 3612 seconds by postgrey-1.32 at yocto-www;
+	Mon, 18 Jan 2016 10:24:17 PST
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B47E9E007F2
+	for <meta-ti@yoctoproject.org>; Mon, 18 Jan 2016 10:24:17 -0800 (PST)
+Received: from gandalf.denix.org ([100.15.86.14]) by vms173017.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPSA id <0O1500DRUSBI3QB0@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 18 Jan 2016 11:23:42 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=xDJgBcBrK5EN9DJ6g74wNQ==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=7aQ_Q-yQQ-AA:10 a=sozttTNsAAAA:8
+	a=ztGQagcx57n3yV9kHsAA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 304F6161E00;	Mon,
+	18 Jan 2016 12:23:42 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160118174449.1D9A5529B5@arago-project.org>
-Date: Mon, 18 Jan 2016 17:44:49 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : omapdrm-pvr: bump SRCREV for AM57x/DRA7xx
+Date: Mon, 18 Jan 2016 12:23:41 -0500
+Message-id: <1453137821-22622-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+In-reply-to: <1453137821-22622-1-git-send-email-denis@denix.org>
+References: <1453137821-22622-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] u-boot-ti-staging: update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,42 +48,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2016 17:44:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Jan 2016 18:24:25 -0000
 
-Module: meta-ti
-Branch: fido
-Commit: 4f965783dfc74be0286320549534782fe423ad81
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f965783dfc74be0286320549534782fe423ad81
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Fri Dec 11 15:19:17 2015 +0000
-
-omapdrm-pvr: bump SRCREV for AM57x/DRA7xx
-
-* Fix use of freed GEM object
-* Disable debug options in release build
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-index 7683dbf..4552fe1 100644
---- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-@@ -19,7 +19,7 @@ BRANCH_ti43x = "am4/k4.1"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index f06db7b..ea745af 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--SRCREV_omap-a15 = "e06c0a4e11401534b938b9a7b1c3f27a65db871f"
-+SRCREV_omap-a15 = "c53a5dfb9f4d5612c372ec8e252cb13a731c9c10"
- SRCREV_ti33x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
- SRCREV_ti43x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
+-PR = "r15"
++PR = "r16"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "5922e09363b1449ba558fd1dfcd527c71119d0ee"
++SRCREV = "2b4b6fb691ac84b14de27b8bc01ab18f7c157558"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+-- 
+2.2.0
 
 
