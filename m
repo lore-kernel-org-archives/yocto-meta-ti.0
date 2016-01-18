@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 26FFDE008BB; Mon, 18 Jan 2016 10:40:09 -0800 (PST)
+	id 2A51FE008A5; Mon, 18 Jan 2016 10:40:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46E92E0088B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45BA1E00803
 	for <meta-ti@yoctoproject.org>; Mon, 18 Jan 2016 10:40:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5A267529C9; Mon, 18 Jan 2016 18:40:03 +0000 (UTC)
+	id A19B8529EA; Mon, 18 Jan 2016 18:40:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160118184003.5A267529C9@arago-project.org>
+Message-Id: <20160118184003.A19B8529EA@arago-project.org>
 Date: Mon, 18 Jan 2016 18:40:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.1.15 and latest merges
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,42 +37,47 @@ X-List-Received-Date: Mon, 18 Jan 2016 18:40:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 9293d342d3b28015dac006e9262d2094dfb7e34a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9293d342d3b28015dac006e9262d2094dfb7e34a
+Branch: master
+Commit: c2897c9989579a15d10761a3fb8f01e61a398bf8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c2897c9989579a15d10761a3fb8f01e61a398bf8
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Jan 18 23:23:41 2016 +0000
+Date:   Mon Jan 18 23:23:40 2016 +0000
 
-u-boot-ti-staging: update to the latest
+linux-ti-staging: update to 4.1.15 and latest merges
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index f06db7b..ea745af 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+index 7cd9779..ae958de 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ BRANCH = "ti-rt-linux-4.1.y"
  
--PR = "r15"
-+PR = "r16"
- PV_append = "+git${SRCPV}"
+-SRCREV = "485229578c4a744ff066a739770ff22f4d5948d9"
++SRCREV = "e1438117e08a772a560d4f4226c889d5fe48e4fd"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 5adfb33..a6615aa 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -60,8 +60,8 @@ S = "${WORKDIR}/git"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ BRANCH = "ti-lsk-linux-4.1.y"
  
- BRANCH ?= "ti-u-boot-2015.07"
+-SRCREV = "0f37ee50e2b263eb5941d91ef6da7d4ca51f7488"
+-PV = "4.1.13+git${SRCPV}"
++SRCREV = "e1438117e08a772a560d4f4226c889d5fe48e4fd"
++PV = "4.1.15+git${SRCPV}"
  
--SRCREV = "5922e09363b1449ba558fd1dfcd527c71119d0ee"
-+SRCREV = "2b4b6fb691ac84b14de27b8bc01ab18f7c157558"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "e"
 
 
