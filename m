@@ -1,42 +1,44 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BC807E00B37; Tue, 19 Jan 2016 11:13:22 -0800 (PST)
+	id 5DBEDE00B36; Tue, 19 Jan 2016 12:05:47 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,DEAR_SOMETHING,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
+	*  2.0 DEAR_SOMETHING BODY: Contains 'Dear (something)'
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAA70E00AAF
-	for <meta-ti@yoctoproject.org>; Tue, 19 Jan 2016 11:13:20 -0800 (PST)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0CE1CE00A92
+	for <meta-ti@yoctoproject.org>; Tue, 19 Jan 2016 12:05:43 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0JJDIG9007595;
-	Tue, 19 Jan 2016 13:13:18 -0600
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0JK5fqF007403;
+	Tue, 19 Jan 2016 14:05:41 -0600
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0JJDI2u012934;
-	Tue, 19 Jan 2016 13:13:18 -0600
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0JK5fHw000969;
+	Tue, 19 Jan 2016 14:05:41 -0600
 Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 19 Jan 2016 13:13:17 -0600
+	Tue, 19 Jan 2016 14:05:40 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0JJDHQS002650;
-	Tue, 19 Jan 2016 13:13:17 -0600
-Date: Tue, 19 Jan 2016 14:13:01 -0500
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0JK5eOf019075;
+	Tue, 19 Jan 2016 14:05:40 -0600
+Date: Tue, 19 Jan 2016 15:05:24 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20160119191301.GF4223@edge>
-References: <1453218687-30012-1-git-send-email-paul.barker@commagility.com>
-	<D9EE8563-6AA4-47D5-9CFE-6638C32B5658@gmail.com>
+To: <winiston@futuraautomation.com>
+Message-ID: <20160119200524.GG4223@edge>
+References: <010D464DD7F94DAB8203AA5BF850771E@RD3>
+	<CAMKF1sqNBo_a-TCoNE7qULy_JdGaDp7Kx8QqotYa0M_UpUV6zQ@mail.gmail.com>
+	<B0C19B9E19864092A51969B8122A1C7E@RD3>
 MIME-Version: 1.0
-In-Reply-To: <D9EE8563-6AA4-47D5-9CFE-6638C32B5658@gmail.com>
+In-Reply-To: <B0C19B9E19864092A51969B8122A1C7E@RD3>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ti-softhsmv2: Use target includes for zlib and openssl
+Cc: yocto texas <meta-ti@yoctoproject.org>
+Subject: Re: Regarding Texas AM437x with yocto project
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,62 +51,83 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2016 19:13:22 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Tue, 19 Jan 2016 20:05:47 -0000
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Tue, Jan 19, 2016 at 11:01:37AM -0800, Khem Raj wrote:
+You'd need to add meta-ti layer into your OpenEmbedded/Yocto Project setup and 
+build for am437x-evm machine.
+
+-- 
+Denys
+
+
+On Tue, Jan 19, 2016 at 05:21:03PM +0530, winiston@futuraautomation.com wrote:
+> Dear Khem Raj,
+> Thanks for your mail. I followed the yocto project documentation.
+> Now I am able to build the embedded linux for x86 system using poky
+> 14.0.
+> But I want  to build embedded linux for ARM based AM437x (Texas
+> ).How do I use AM437x 's BSP and uboot  for this build ?. What are
+> the changes needs to be done?
 > 
-> > On Jan 19, 2016, at 7:51 AM, Paul Barker <paul.barker@commagility.com> wrote:
-> > 
-> > ti-softhsmv2 needs to look at the target include directories instead of the host
-> > include directories for zlib and openssl header files.
-> > 
-> > Signed-off-by: Paul Barker <paul.barker@commagility.com>
-> > ---
-> > recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb | 5 ++++-
-> > 1 file changed, 4 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> > index c1e1654..dd51309 100644
-> > --- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> > +++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> > @@ -21,7 +21,10 @@ S = "${WORKDIR}/git"
-> > CFLAGS += " -mno-unaligned-access"
-> > CPPFLAGS += " -mno-unaligned-access"
-> > 
-> > -EXTRA_OECONF += "--with-zlib=${STAGING_DIR_HOST}/usr"
-> > +EXTRA_OECONF += " \
-> > +    --with-zlib=${STAGING_DIR_TARGET}/usr \
-> > +    --with-openssl=${STAGING_DIR_TARGET}/usr \
-> > +    “
+> System configuration :
+> Host System   :  Ubuntu 14.04.3
+> Target system           : AM437x ( TI based)
+> Note : I have downloaded AM437x  BSP from TI website. I have the
+> uboot for the same. How do II  make use of it?
 > 
-> you know there is STAGING_EXECPREFIXDIR, may be better suited here ?
-
-From bitbake.conf:
-
-STAGING_EXECPREFIXDIR = "${STAGING_DIR_HOST}${exec_prefix}"
-
-
-> > INITSCRIPT_NAME = "softhsm-daemon.sh"
-> > INITSCRIPT_PARAMS = "defaults 10"
-> > --
-> > 1.9.1
-> > 
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
 > 
-
-
-
+> Regards,
+> Winiston.P
+> Futura Automation Pvt Ltd.
+> 
+> Ph :91-80-28375290 / 28375295
+> Fax :91-80-28375291
+> -----Original Message----- From: Khem Raj
+> Sent: Tuesday, January 19, 2016 11:12 AM
+> To: winiston@futuraautomation.com
+> Cc: yocto texas
+> Subject: Re: [meta-ti] Regarding Texas AM437x with yocto project
+> 
+> On Mon, Jan 18, 2016 at 8:38 PM,  <winiston@futuraautomation.com> wrote:
+> >Dear Sir/Madam,
+> >
+> >I plan to use Yocto project in our new project. Our development system is
+> >Texas based AM437X.  I am new to yocto project. How do I start the
+> >project?
+> >Note : We are keen to develop embedded linux with navit
+> >(Navigation software
+> >).
+> >
+> 
+> There are good documentation and tutorials
+> 
+> e.g.
+> 
+> https://www.yoctoproject.org/documentation
+> https://www.yoctoproject.org/tools-resources/videos
+> https://www.yoctoproject.org/tools-resources/training
+> https://www.yoctoproject.org/tools-resources/presentations
+> 
+> >Regards,
+> >Winiston.P
+> >Futura Automation Pvt Ltd.
+> >
+> >Ph :91-80-28375290 / 28375295
+> >Fax :91-80-28375291
+> >
+> >
+> >--
+> >_______________________________________________
+> >meta-ti mailing list
+> >meta-ti@yoctoproject.org
+> >https://lists.yoctoproject.org/listinfo/meta-ti
+> >
+> 
 > -- 
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
-
 
