@@ -1,42 +1,65 @@
-Return-Path: <denys@ti.com>
+Return-Path: <robertcnelson@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1C368E0079A; Thu, 21 Jan 2016 12:49:04 -0800 (PST)
+	id 130B3E007D9; Thu, 21 Jan 2016 14:04:03 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (robertcnelson[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.170 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACEC0E0045F
-	for <meta-ti@yoctoproject.org>; Thu, 21 Jan 2016 12:49:02 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0LKmTRA002320;
-	Thu, 21 Jan 2016 14:48:29 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0LKmTTB012241;
-	Thu, 21 Jan 2016 14:48:29 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 21 Jan 2016 14:48:29 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0LKmS3B031438;
-	Thu, 21 Jan 2016 14:48:29 -0600
-Date: Thu, 21 Jan 2016 15:48:13 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Troy Benjegerdes <hozer@hozed.org>
-Message-ID: <20160121204813.GD11314@edge>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
+	[209.85.223.170])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57B10E0079A
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jan 2016 14:03:59 -0800 (PST)
+Received: by mail-io0-f170.google.com with SMTP id 77so69219045ioc.2
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jan 2016 14:03:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=Pi7oij99o9BFkzccbR0gIh+gtgI0sGDV04s3g/K1rSU=;
+	b=UvRbkDsWVnLMCLJaBxL1gczP9nJni0679zEQAYYRBZew3BEiJwsLHUwcZ9+kmoxlFJ
+	ZZ7kCt6Q6ZqDlOYpnlm0c7Y6NtCEtXdUPZJ5JWVWnVvaR844UaNWjXWPr3CPA3+q4lYe
+	K+3tNs4KmkPNHJtTSwRKiJksYaQN31c/4xCt3tbRS3etQ9iEPlTHN1OaPVZoX0HLt6G/
+	2LFZJJDkikasesD5gLPyMY4svxYGsoG4wZ+G5tSKzwHIMxyOGzXyFUNuRfoy9YzWZHXs
+	eofEK9a4qxqjHWkF703O7aygpbrOz9QhVcWHTgG+r90UFrmzuVnYUGkbbwiOsX2mLdT5
+	gYKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=Pi7oij99o9BFkzccbR0gIh+gtgI0sGDV04s3g/K1rSU=;
+	b=beL1bYX2hvn7UthyaFTyqR1NaLtUj9/Zf5CHEXWyvQzj6BvLbWCrDmlcI0XGcTatQl
+	bqjdQbehNPu+ZrXQlAHGJeqgE/HpvqB76+KXQmauUMjCPPay7OjYAjjBSWSRIdCEr9Tq
+	M7jyu5FI9vsW334ZsncOKtObMsJBZlDjWpqpd8jvExRH4/2JZFylxr5JNfzeTk1RJudb
+	Od8969VA9jKtck863fGN2ZG0CWTJ2+ZVOFiW81Wi28pJCzbypc+Ufc/bWuXuBODdR1zG
+	p1JT6GXjMdnosNyB5+kfdm02Lm3l641t44OJBP3mjeU3tMP4GGd0+cEgPExlxkomVjSZ
+	6T4Q==
+X-Gm-Message-State: AG10YOSEWKuSGKg33s03YgVw0fEYGApbOf3CtfHiXu8tWETfCeAS5J1jXHQaeM4r3XJiwIB7Vjh8IKjijLJztw==
+X-Received: by 10.107.32.2 with SMTP id g2mr174595iog.39.1453413839164; Thu,
+	21 Jan 2016 14:03:59 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.44.3 with HTTP; Thu, 21 Jan 2016 14:03:29 -0800 (PST)
+In-Reply-To: <20160121204813.GD11314@edge>
 References: <20160116063631.GB10881@nl.grid.coop> <20160118164615.GC4223@edge>
 	<20160118200507.GE10881@nl.grid.coop> <20160119190808.GE4223@edge>
-	<20160121015830.GA4311@nl.grid.coop>
-MIME-Version: 1.0
-In-Reply-To: <20160121015830.GA4311@nl.grid.coop>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
+	<20160121015830.GA4311@nl.grid.coop> <20160121204813.GD11314@edge>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 21 Jan 2016 16:03:29 -0600
+Message-ID: <CAOCHtYgzATUz5ESXTN3RaATbw+pbN8hQ3WKZ5tMAs2cVDCh_Hw@mail.gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: regression tests for am3517-evm machine?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -50,58 +73,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2016 20:49:04 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 21 Jan 2016 22:04:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jan 20, 2016 at 07:58:30PM -0600, Troy Benjegerdes wrote:
-> On Tue, Jan 19, 2016 at 02:08:08PM -0500, Denys Dmytriyenko wrote:
-> > On Mon, Jan 18, 2016 at 02:05:07PM -0600, Troy Benjegerdes wrote:
-> > > On Mon, Jan 18, 2016 at 11:46:15AM -0500, Denys Dmytriyenko wrote:
-> > > > On Sat, Jan 16, 2016 at 12:36:31AM -0600, Troy Benjegerdes wrote:
-> > > > > Are there any regression tests and/or recent builds of a 3.1x or 4.x series
-> > > > > kernel on an am3517 eval board? The original 'supported' TI SDKs were all
-> > > > > of the 2.6.x series, and it seems like somewhere along the way something
-> > > > > broke, and I'm trying to figure out what it was.
-> > > > 
-> > > > Do you have any specifics for the breakage?
-> > > > 
-> > > > -- 
-> > > > Denys
-> > > 
-> > > The kernel stops after discovering the MMC, but before mounting the 
-> > > filesystem:
-> > > 
-> > > [    2.446441] Key type dns_resolver registered
-> > > [    2.461151] voltdm_scale: No voltage scale API registered for vdd_mpu_iva
-> > > [    2.468444] voltdm_scale: No voltage scale API registered for vdd_core
-> > > [    2.479156] PM: no software I/O chain control; some wakeups may be lost
-> > > [    2.486816] ThumbEE CPU extension supported.
-> > > [    2.491363] Registering SWP/SWPB emulation handler
-> > > [    2.503784] regulator-dummy: incomplete constraints, leaving on
-> > > [    2.516876] davinci_emac davinci_emac.0: using random MAC addr: 9e:53:0c:1a:23:3
-> > > [    2.622650] Waiting for root device /dev/mmcblk0p2...
-> > > [    2.629638] mmc0: new high speed SDHC card at address aaaa
-> > > [    2.641143] mmcblk0: mmc0:aaaa SU04G 3.69 GiB 
-> > 
-> > Looks like it did not recognize the partitions on the MMC, hence waiting for 
-> > the second partition /dev/mmcblk0p2 to become available to mount root from.
-> 
-> Didn't 3.x kernels start requiring a device tree somewhere along the line?
-> 
-> I know the Beaglebone uses a device tree, but I can't seem to manage find
-> all the right pieces to build a working u-boot for am3517-evm that can 
-> properly pass it off to the kernel, at least with the Legacy image format(s).
+>> Didn't 3.x kernels start requiring a device tree somewhere along the line?
+>>
+>> I know the Beaglebone uses a device tree, but I can't seem to manage find
+>> all the right pieces to build a working u-boot for am3517-evm that can
+>> properly pass it off to the kernel, at least with the Legacy image format(s).
+>
+> Well, am3517 is one of the legacy platforms and I don't believe it was ever
+> converted to use device tree...
 
-Well, am3517 is one of the legacy platforms and I don't believe it was ever 
-converted to use device tree...
+Looks like it should atleast boot to mmc rootfs..
+
+https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/arch/arm/boot/dts/am3517-evm.dts
+
+Regards,
 
 -- 
-Denys
-
-
-> So speaking of which, what prevents us from using the CONFIG_OF_CONTROL
-> options in u-boot so we could have the same u-boot binary work on both a
-> beaglebone and an am3517 based platform, provided you have the right device
-> trees for each board?
+Robert Nelson
+https://rcn-ee.com/
 
