@@ -1,69 +1,42 @@
-Return-Path: <winiston@futuraautomation.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 94BE5E00903; Fri, 22 Jan 2016 01:34:48 -0800 (PST)
+	id 95B26E00A92; Fri, 22 Jan 2016 20:38:37 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=5.0 tests=BAYES_00,DEAR_SOMETHING,
-	DKIM_SIGNED,DKIM_VALID,RCVD_IN_DNSWL_LOW,STOX_REPLY_TYPE autolearn=no
-	version=3.3.1
-X-Spam-HAM-Report: *  0.4 STOX_REPLY_TYPE STOX_REPLY_TYPE
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.192.181 listed in list.dnswl.org]
-	*  2.0 DEAR_SOMETHING BODY: Contains 'Dear (something)'
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
-	[209.85.192.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73774E00803
-	for <meta-ti@yoctoproject.org>; Fri, 22 Jan 2016 01:34:43 -0800 (PST)
-Received: by mail-pf0-f181.google.com with SMTP id n128so39317660pfn.3
-	for <meta-ti@yoctoproject.org>; Fri, 22 Jan 2016 01:34:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=futuraautomation-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:from:to:cc:subject:date:mime-version:content-type
-	:content-transfer-encoding:importance;
-	bh=6X9/7W/GtP9CEYbzFD1nm2DmWOmY2j+3NHK11x29Kf0=;
-	b=ZgmRmIFndL3xPa6yNcaBu4yn32sonU1iVKZm+5dXyjhLLwu+S6tUpSKLGMP6P1wFT3
-	WGW3ZLNLDvsq1IrDZodP1Nup914LqhAAjrZmRUU0a87qOCf1HFpK8R68VuLUU5YKuucN
-	qyItxCK2XyltchkTdhO4EowyUC7vuTwPGzeVJsa+IpDSQaE/Ienr0SPxYTmw98vtQ1MZ
-	HsX+w6Y5hXDYF7rG9gkOD7cvt9RuN/kpPu7ei9AvYmPqevKq7AF5ULNiW21IpBYHsZhb
-	xp0lVW5yqLfQwMxb8Lj1dUXtFWMCWLD9St6nn9LziVH0UABAbYtnULGsJ4OsSHhHpOcn
-	jRKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:from:to:cc:subject:date:mime-version
-	:content-type:content-transfer-encoding:importance;
-	bh=6X9/7W/GtP9CEYbzFD1nm2DmWOmY2j+3NHK11x29Kf0=;
-	b=lnV9ybdo98AFEcIKx6SuR3qZ1W1iDqqHbXNpLHdHjPH8+DlXirPf1J6AciTYoTjzZt
-	I1m1ZpLnwQ0bsRSO4pm6lknV4Jt4qgjVeEqck2zTZEy3Y8FEvdbh3iz9XNAdGbG2RZA+
-	7dky6VSaHTF+Igqjr3DSDsBI2dflu3PJEyQChiUElUx3+FoeOcgwSYyRKMMjjUrT0/kr
-	k3T6jpHSJedXuU2NGePZ0AxS+3XSEUlvga5NWhgC5WFYrt2NdHwBboIwZgF2NxgFdaYz
-	lJAnM6IhH0eClM9Qwy+O/4KGAqr6q+vYKWckBIK1LtEp4XjKeQ265HTZHiNUY+gtFOCN
-	DOkA==
-X-Gm-Message-State: AG10YOR/LIVfbPFDgkLl/9ikHyvPwLLmKM5qsSmKKiIzAz1i60ulg+708I98bDAh2wdNZg==
-X-Received: by 10.98.79.4 with SMTP id d4mr2925409pfb.46.1453455283542;
-	Fri, 22 Jan 2016 01:34:43 -0800 (PST)
-Received: from RD3 ([59.99.236.185])
-	by smtp.gmail.com with ESMTPSA id sy5sm8329533pac.5.2016.01.22.01.34.40
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Jan 2016 01:34:42 -0800 (PST)
-Message-ID: <658BC03B3C98427EAF63EC34CDF954A2@RD3>
-From: <winiston@futuraautomation.com>
-To: "Denys Dmytriyenko" <denys@ti.com>
-Date: Fri, 22 Jan 2016 15:09:05 +0530
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6B80E009EA
+	for <meta-ti@yoctoproject.org>; Fri, 22 Jan 2016 20:38:32 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0N4cVHj014373
+	for <meta-ti@yoctoproject.org>; Fri, 22 Jan 2016 22:38:31 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0N4cVEu025966
+	for <meta-ti@yoctoproject.org>; Fri, 22 Jan 2016 22:38:31 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 22 Jan 2016 22:38:30 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u0N4cUkk013792	for <meta-ti@yoctoproject.org>; Fri, 22 Jan 2016 22:38:31
+	-0600
+Date: Fri, 22 Jan 2016 23:38:30 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1166455764.333.1453523910762.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Priority: 1
-X-MSMail-Priority: High
-Importance: High
-X-Mailer: Microsoft Windows Live Mail 15.4.3555.308
-X-MimeOLE: Produced By Microsoft MimeOLE V15.4.3555.308
-Cc: yocto texas <meta-ti@yoctoproject.org>
-Subject: Re: Regarding Texas AM437x with yocto project
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2016-01-22_23-03-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -76,116 +49,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 09:34:48 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=original
+X-List-Received-Date: Sat, 23 Jan 2016 04:38:37 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_332_936774503.1453523910761"
+
+------=_Part_332_936774503.1453523910761
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Dear,
+<html>
+<head>
+<title>
+Status for 01/22/16
+</title>
+</head>
+<body>
 
-I tried to build default yocto image for x86 processor using poky. I used 
-the command (bitbake core-image-minimal ) to build the image after 
-initialize
-the build environment (source oe-init-build-env) . It started 
-building/downloading the image and stopped in 1004 th package .
-Please find the attached document for referrence. What could be the reason 
-to stop?
-It is not downloading the package.I waited for more than 2 hours. My 
-internet connection is still working
-properly. How do I build the image?
+<h2>Status for 01/22/16</h2>
 
-I am waiting your reply.
+<h2>BUILD_ID: build-2016-01-22_23-04-19</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-Regards,
-Winiston.P
-Futura Automation Pvt Ltd.
-
-Ph :91-80-28375290 / 28375295
-Fax :91-80-28375291
------Original Message----- 
-From: Denys Dmytriyenko
-Sent: Wednesday, January 20, 2016 1:35 AM
-To: winiston@futuraautomation.com
-Cc: Khem Raj ; yocto texas
-Subject: Re: [meta-ti] Regarding Texas AM437x with yocto project
-
-You'd need to add meta-ti layer into your OpenEmbedded/Yocto Project setup
-and
-build for am437x-evm machine.
-
--- 
-Denys
-
-
-On Tue, Jan 19, 2016 at 05:21:03PM +0530, winiston@futuraautomation.com
-wrote:
-> Dear Khem Raj,
-> Thanks for your mail. I followed the yocto project documentation.
-> Now I am able to build the embedded linux for x86 system using poky
-> 14.0.
-> But I want  to build embedded linux for ARM based AM437x (Texas
-> ).How do I use AM437x 's BSP and uboot  for this build ?. What are
-> the changes needs to be done?
->
-> System configuration :
-> Host System   :  Ubuntu 14.04.3
-> Target system           : AM437x ( TI based)
-> Note : I have downloaded AM437x  BSP from TI website. I have the
-> uboot for the same. How do II  make use of it?
->
->
-> Regards,
-> Winiston.P
-> Futura Automation Pvt Ltd.
->
-> Ph :91-80-28375290 / 28375295
-> Fax :91-80-28375291
-> -----Original Message----- From: Khem Raj
-> Sent: Tuesday, January 19, 2016 11:12 AM
-> To: winiston@futuraautomation.com
-> Cc: yocto texas
-> Subject: Re: [meta-ti] Regarding Texas AM437x with yocto project
->
-> On Mon, Jan 18, 2016 at 8:38 PM,  <winiston@futuraautomation.com> wrote:
-> >Dear Sir/Madam,
-> >
-> >I plan to use Yocto project in our new project. Our development system is
-> >Texas based AM437X.  I am new to yocto project. How do I start the
-> >project?
-> >Note : We are keen to develop embedded linux with navit
-> >(Navigation software
-> >).
-> >
->
-> There are good documentation and tutorials
->
-> e.g.
->
-> https://www.yoctoproject.org/documentation
-> https://www.yoctoproject.org/tools-resources/videos
-> https://www.yoctoproject.org/tools-resources/training
-> https://www.yoctoproject.org/tools-resources/presentations
->
-> >Regards,
-> >Winiston.P
-> >Futura Automation Pvt Ltd.
-> >
-> >Ph :91-80-28375290 / 28375295
-> >Fax :91-80-28375291
-> >
-> >
-> >--
-> >_______________________________________________
-> >meta-ti mailing list
-> >meta-ti@yoctoproject.org
-> >https://lists.yoctoproject.org/listinfo/meta-ti
-> >
->
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti 
-
-
+------=_Part_332_936774503.1453523910761--
