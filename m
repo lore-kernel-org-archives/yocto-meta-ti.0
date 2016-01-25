@@ -1,42 +1,67 @@
-Return-Path: <denys@ti.com>
+Return-Path: <winiston@futuraautomation.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 82444E00BE6; Sun, 24 Jan 2016 19:51:03 -0800 (PST)
+	id 3AD02E00BD0; Mon, 25 Jan 2016 01:28:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.220.48 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
+	*      [score: 0.0001]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6AFE3E00BE1
-	for <meta-ti@yoctoproject.org>; Sun, 24 Jan 2016 19:51:00 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0P3p062010957
-	for <meta-ti@yoctoproject.org>; Sun, 24 Jan 2016 21:51:00 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0P3oxp3004940
-	for <meta-ti@yoctoproject.org>; Sun, 24 Jan 2016 21:51:00 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 24 Jan 2016 21:50:59 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u0P3ox8S014970	for <meta-ti@yoctoproject.org>; Sun, 24 Jan 2016 21:50:59
-	-0600
-Date: Sun, 24 Jan 2016 22:50:58 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <168526685.345.1453693859091.JavaMail.jenkins@puget>
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB2A8E00B44
+	for <meta-ti@yoctoproject.org>; Mon, 25 Jan 2016 01:28:02 -0800 (PST)
+Received: by mail-pa0-f48.google.com with SMTP id uo6so79740806pac.1
+	for <meta-ti@yoctoproject.org>; Mon, 25 Jan 2016 01:28:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=futuraautomation-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:from:to:subject:date:mime-version:content-type
+	:importance:disposition-notification-to;
+	bh=M4IFFgGf9j1zwvEMcwuZV3k3OYzJqkyWZzg9Xph8wo0=;
+	b=iWLwgQaV1TBYw/08eZ+lh+tHeSsqNSUAQ/cgYLvRPoiylCnJKOrjGwyrh/VuqWGdLV
+	q+oYPeheHx8O4roCMnz0m7QtUSBLeDudmXXT2NZP/XcKOU19EBWonj3vqlmhWIIhmT1L
+	gTvqqtgtcz5jgVMHZLa/KCJ0+Fw1T2CZaJljYQ1ZOxbb0aA35IKEkB0A4HMqBjAibd0H
+	dZ1zDgwDst6uZTX3LcytWLJU57+K6Y8YhMj3YtaT7oZM0iYAfK5wliTn2dWNG0j/mz0s
+	cgN6qCHAH2fgnm0AJEL5VZIagWUpnFc+Eojts9w2EMxTdoWu7KfmzBUkPXP3j/fkOneK
+	Zxfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:from:to:subject:date:mime-version
+	:content-type:importance:disposition-notification-to;
+	bh=M4IFFgGf9j1zwvEMcwuZV3k3OYzJqkyWZzg9Xph8wo0=;
+	b=BaUa8t8eb0bUn/379rg3Ue5kiaKIQrbR9oXQdPxmnz36MNSR6WLN2QL8Uwn+KP/h/C
+	wccGQBxPC1t3UiHPiCxKMlsxQZQw4CYh1jIfqnFDmwwxbLbdDSTJCnO8YF30XtwYiXv5
+	mSdiIx8xQNIVB/4LuOhg2HYJkHAAj0Mu512LVtV/fFNXXG40PE4SMUSfqz1E2AkgbMqD
+	Z0HI30Ic7cmkqSfklP3be47bM7ovkykX3f7LI++2q7+5QdueTBxDAi75gNpFgMUO50GV
+	KvygPo+D6sfQYsQtVRZ8OKjiwJpc4LQg5P0ziHh8lsE/lOiHbLNfEg080YJyqReN5dUI
+	EM9w==
+X-Gm-Message-State: AG10YOR6V4Jgx+gMjsAVjv/2KugJg8Dm4ptAemXvpOq53/wj7OLuDVRAC+Cey8XF0xJkuw==
+X-Received: by 10.67.6.1 with SMTP id cq1mr24149805pad.78.1453714081581;
+	Mon, 25 Jan 2016 01:28:01 -0800 (PST)
+Received: from RD3 ([59.99.236.185]) by smtp.gmail.com with ESMTPSA id
+	tp6sm15134646pab.25.2016.01.25.01.27.58
+	for <meta-ti@yoctoproject.org>
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 25 Jan 2016 01:28:00 -0800 (PST)
+Message-ID: <7A144FD2E22B42C29D1455BA473BACE1@RD3>
+From: <winiston@futuraautomation.com>
+To: "yocto texas" <meta-ti@yoctoproject.org>
+Date: Mon, 25 Jan 2016 15:02:18 +0530
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2016-01-24_21-00-32
+X-Priority: 1
+X-MSMail-Priority: High
+Importance: High
+X-Mailer: Microsoft Windows Live Mail 15.4.3555.308
+X-MimeOLE: Produced By Microsoft MimeOLE V15.4.3555.308
+Subject: Build Error for AM437x-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,207 +74,125 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2016 03:51:03 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_344_708640021.1453693858862"
+X-List-Received-Date: Mon, 25 Jan 2016 09:28:04 -0000
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_000_004C_01D15781.62448370"
 
-------=_Part_344_708640021.1453693858862
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+------=_NextPart_000_004C_01D15781.62448370
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<title>
-Status for 01/24/16
-</title>
-</head>
-<body>
+Dear ,
 
-<h2>Status for 01/24/16</h2>
+I built default yocto image for qemux86 processor using poky. I used the =
+bitbake core-image-minimal command to build the image. It has been built =
+successfully.=20
+Now I made the following changes to build for AM437x evm.
 
-<h2>BUILD_ID: build-2016-01-24_21-01-45</h2>
+1. Edited   ~/poky/build/conf/bblayers.conf   file as follows
 
-<h2>Clean Build: false</h2>
+BBFILES ?=3D =E2=80=9C=E2=80=9D
+BBLAYERS =3D =E2=80=9C \
+/home/winiston/poky/meta \
+/home/winiston/poky/meta-yocto \
+/home/winiston/poky/meta-ti \
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+Note :  meta-ti  resides in the poky folder.
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+2.Edited  ~/poky/build/conf/local.conf  file. The MACHINE variable  =
+changed from MACHINE ??=3D =E2=80=9Cqemux86=E2=80=9D  to  MACHINE ??=3D =
+"am437x-evm"
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+After making above two changes, I executed bitbake core-image-minimal =
+command from terminal window. It gives the following error
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+ERROR: ParseError at =
+/home/winiston/poky/meta-ti/recipes-graphics/drm/libdrm_2.4.41.bb:1: =
+Could not include required file recipes-graphics/drm/libdrm.inc
 
-</body>
-</html>
+Summary: There was 1 ERROR message shown, returning a non-zero exit =
+code.
+winiston@winiston-VirtualBox:~/poky/build$=20
 
+What could be the reason of this error? How do I solve this error?
 
-------=_Part_344_708640021.1453693858862--
+Regards,
+Winiston.P
+Futura Automation Pvt Ltd.
+
+Ph :91-80-28375290 / 28375295
+Fax :91-80-28375291
+
+------=_NextPart_000_004C_01D15781.62448370
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><HEAD></HEAD>
+<BODY dir=3Dltr>
+<DIV dir=3Dltr>
+<DIV style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: #000000">
+<DIV>Dear ,</DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=3D"Times New Roman">I built default yocto image for =
+qemux86=20
+processor using poky. I used the <FONT color=3D#0000ff>bitbake=20
+core-image-minimal</FONT> command to build the image. It has been built=20
+successfully. </FONT></DIV>
+<DIV><FONT face=3D"Times New Roman">Now I made the following changes to =
+build for=20
+AM437x evm.</FONT></DIV>
+<DIV><FONT face=3D"Times New Roman"></FONT>&nbsp;</DIV>
+<DIV><FONT face=3D"Times New Roman">1. Edited&nbsp;&nbsp; <FONT=20
+color=3D#0000ff>~/poky/build/conf/bblayers.conf</FONT>&nbsp;&nbsp; file =
+as=20
+follows</FONT></DIV>
+<DIV><FONT face=3D"Times New Roman"></FONT>&nbsp;</DIV>
+<DIV>BBFILES ?=3D =E2=80=9C=E2=80=9D</DIV>
+<DIV>BBLAYERS =3D =E2=80=9C \</DIV>
+<DIV>/home/winiston/poky/meta \</DIV>
+<DIV>/home/winiston/poky/meta-yocto \</DIV>
+<DIV><FONT color=3D#0000ff>/home/winiston/poky/meta-ti \</FONT></DIV>
+<DIV><FONT face=3D"Times New Roman"></FONT>&nbsp;</DIV>
+<DIV><FONT face=3D"Times New Roman">Note :&nbsp; <FONT=20
+color=3D#0000ff>meta-ti</FONT>&nbsp; resides in the poky =
+folder.</FONT></DIV>
+<DIV><FONT face=3D"Times New Roman"></FONT>&nbsp;</DIV>
+<DIV><FONT face=3D"Times New Roman">2.Edited </FONT>&nbsp;<FONT=20
+color=3D#0000ff>~/poky/build/conf/local.conf&nbsp; </FONT>file. The =
+MACHINE=20
+variable&nbsp; changed from <FONT color=3D#0000ff>MACHINE ??=3D=20
+=E2=80=9Cqemux86=E2=80=9D</FONT>&nbsp; to&nbsp; <FONT =
+color=3D#0000ff>MACHINE ??=3D=20
+"am437x-evm"</FONT></DIV><FONT face=3D"Times New Roman"></FONT>
+<DIV><BR>After making above two changes, I executed <FONT=20
+face=3D"Times New Roman"><FONT color=3D#0000ff>bitbake =
+core-image-minimal</FONT>=20
+command from terminal window. It gives the following error</FONT></DIV>
+<DIV><FONT face=3D"Times New Roman"></FONT>&nbsp;</DIV>
+<DIV><STRONG><FONT color=3D#0000ff>ERROR: ParseError at=20
+/home/winiston/poky/meta-ti/recipes-graphics/drm/libdrm_2.4.41.bb:1: =
+Could not=20
+include required file =
+recipes-graphics/drm/libdrm.inc</FONT></STRONG></DIV>
+<DIV><STRONG><FONT color=3D#0000ff></FONT></STRONG>&nbsp;</DIV>
+<DIV><STRONG><FONT color=3D#0000ff>Summary: There was 1 ERROR message =
+shown,=20
+returning a non-zero exit code.</FONT></STRONG></DIV>
+<DIV><STRONG><FONT color=3D#0000ff><A=20
+href=3D"mailto:winiston@winiston-VirtualBox:~/poky/build$">winiston@winis=
+ton-VirtualBox:~/poky/build$</A></FONT></STRONG>=20
+</DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT color=3D#ff0000>What could be the reason of this error? How =
+do I solve=20
+this error?</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV=20
+style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: =
+#000000">Regards,<BR>Winiston.P<BR>Futura=20
+Automation Pvt Ltd.<BR><BR>Ph :91-80-28375290 / 28375295<BR>Fax=20
+:91-80-28375291<BR></DIV></DIV></DIV></BODY></HTML>
+
+------=_NextPart_000_004C_01D15781.62448370--
