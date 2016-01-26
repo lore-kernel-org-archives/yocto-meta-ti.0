@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6C81E00C05; Tue, 26 Jan 2016 13:02:27 -0800 (PST)
+	id A7EBEE00C00; Tue, 26 Jan 2016 13:02:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED4BFE00BFD
-	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 13:02:22 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 497B5E00BFE
+	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 13:02:26 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E052B529C2; Tue, 26 Jan 2016 21:02:21 +0000 (UTC)
+	id A0127529C9; Tue, 26 Jan 2016 21:02:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160126210221.E052B529C2@arago-project.org>
-Date: Tue, 26 Jan 2016 21:02:21 +0000 (UTC)
+Message-Id: <20160126210225.A0127529C9@arago-project.org>
+Date: Tue, 26 Jan 2016 21:02:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: add runtime dependency on NETCP PA firmware
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 26 Jan 2016 21:02:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: d3977448e5ba20540cd97ef41bdcd9a97ffe6d8c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d3977448e5ba20540cd97ef41bdcd9a97ffe6d8c
+Branch: fido
+Commit: 40f87d651719c91dc02e4d8d381b52127442718c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=40f87d651719c91dc02e4d8d381b52127442718c
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Jan 27 02:56:37 2016 +0000
