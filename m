@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 54D67E00C06; Tue, 26 Jan 2016 12:18:52 -0800 (PST)
+	id 55A87E00BFD; Tue, 26 Jan 2016 12:18:52 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 29F75E00BFE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 289D6E00BFD
 	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 12:18:49 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 66E09529CF; Tue, 26 Jan 2016 20:18:49 +0000 (UTC)
+	id 7EA89529C2; Tue, 26 Jan 2016 20:18:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160126201849.66E09529CF@arago-project.org>
+Message-Id: <20160126201849.7EA89529C2@arago-project.org>
 Date: Tue, 26 Jan 2016 20:18:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : netcp-pa-fw: add initial version 1.0.0
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 26 Jan 2016 20:18:52 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 237e708d0504b13073a2db5ae6b4a6c6877d07b1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=237e708d0504b13073a2db5ae6b4a6c6877d07b1
+Branch: master
+Commit: 950d5467a616ca9a951fd3fb7c48147d12f4da1b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=950d5467a616ca9a951fd3fb7c48147d12f4da1b
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Jan 26 23:33:32 2016 +0000
