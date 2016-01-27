@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3F222E00C10; Wed, 27 Jan 2016 12:54:58 -0800 (PST)
+	id 41140E00AB5; Wed, 27 Jan 2016 12:54:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF213E00AB5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF1B7E00A7D
 	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D84FA52A56; Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
+	id E774F52A5B; Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205448.D84FA52A56@arago-project.org>
+Message-Id: <20160127205448.E774F52A5B@arago-project.org>
 Date: Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : rm-lld: Bump version to 02.02.00.00
+Subject: Jacob Stiffler : rm-lld-rtos: Add RTOS package of the RM LLD
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 591979edf7f4be8e5baee169c9ce6f24cfcb95c5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=591979edf7f4be8e5baee169c9ce6f24cfcb95c5
+Commit: ba3396dfde8f69fe5ddde8c20f2de6c9157ea59b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ba3396dfde8f69fe5ddde8c20f2de6c9157ea59b
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Jan 27 03:16:44 2016 +0000
+Date:   Wed Jan 27 03:16:45 2016 +0000
 
-rm-lld: Bump version to 02.02.00.00
+rm-lld-rtos: Add RTOS package of the RM LLD
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/rm-lld/rm-lld.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/rm-lld/rm-lld-rtos_git.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
-index 5b3b981..be71761 100644
---- a/recipes-bsp/rm-lld/rm-lld.inc
-+++ b/recipes-bsp/rm-lld/rm-lld.inc
-@@ -7,15 +7,15 @@ RM_LLD_GIT_PROTOCOL = "git"
- RM_LLD_GIT_BRANCH = "master"
- RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
- 
--# Below commit ID corresponds to DEV.RM_LLD.02.01.02.00
--RM_LLD_SRCREV = "b3d711203c6b4cf99fb2f95dc2f4728dfd1b2639"
-+# Below commit ID corresponds to DEV.RM_LLD.02.02.00.00
-+RM_LLD_SRCREV = "48fc05bf1835f76760da4341a4c551398aeeb7cd"
- 
- BRANCH = "${RM_LLD_GIT_BRANCH}"
- SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${RM_LLD_SRCREV}"
- 
--PV = "02.01.02.00"
--INC_PR = "r3"
-+PV = "02.02.00.00"
-+INC_PR = "r0"
- 
- COMPATIBLE_MACHINE = "keystone"
- 
+diff --git a/recipes-bsp/rm-lld/rm-lld-rtos_git.bb b/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
+new file mode 100644
+index 0000000..fed9445
+--- /dev/null
++++ b/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
+@@ -0,0 +1,12 @@
++inherit ti-pdk
++
++require rm-lld.inc
++
++PR = "${INC_PR}.0"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++XDCARGS_k2hk-evm = "k2h k2k"
++XDCARGS_k2e-evm = "k2e"
++XDCARGS_k2l-evm = "k2l"
++XDCARGS_k2g-evm = "k2g"
 
 
