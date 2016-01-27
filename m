@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 402A3E00C05; Wed, 27 Jan 2016 12:54:58 -0800 (PST)
+	id 3F222E00C10; Wed, 27 Jan 2016 12:54:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCAAEE00B3D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF213E00AB5
 	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9789752AAF; Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
+	id D84FA52A56; Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205449.9789752AAF@arago-project.org>
-Date: Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
+Message-Id: <20160127205448.D84FA52A56@arago-project.org>
+Date: Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-cg-xml: Add version 2.41.00
+Subject: Jacob Stiffler : rm-lld: Bump version to 02.02.00.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,85 +37,46 @@ X-List-Received-Date: Wed, 27 Jan 2016 20:54:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 183b1828ed831a9e3d0f817a513cfbcc33186a0d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=183b1828ed831a9e3d0f817a513cfbcc33186a0d
+Branch: fido
+Commit: 591979edf7f4be8e5baee169c9ce6f24cfcb95c5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=591979edf7f4be8e5baee169c9ce6f24cfcb95c5
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Jan 27 03:16:40 2016 +0000
+Date:   Wed Jan 27 03:16:44 2016 +0000
 
-ti-cg-xml: Add version 2.41.00
+rm-lld: Bump version to 02.02.00.00
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/devtools/ti-cg-xml_2.41.00.bb |   36 ++++++++++++++++++++++++++++++
- recipes-ti/includes/ti-paths.inc         |    2 +
- 2 files changed, 38 insertions(+), 0 deletions(-)
+ recipes-bsp/rm-lld/rm-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
-new file mode 100644
-index 0000000..115254e
---- /dev/null
-+++ b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
-@@ -0,0 +1,36 @@
-+DESCRIPTION = "TI CG_XML"
-+HOMEPAGE = "http://software-dl.ti.com/ccs/non-esd/releases/other/applications_packages/cg_xml/index.htm"
-+SECTION = "devel"
-+LICENSE = "BSD"
-+
-+require recipes-ti/includes/ti-paths.inc
-+require recipes-ti/includes/ti-staging.inc
-+require recipes-ti/includes/ti-unpack.inc
-+
-+PV = "2_41_00"
-+
-+S = "${WORKDIR}/cg_xml_${PV}"
-+
-+SRC_URI = "\
-+    http://software-dl.ti.com/ccs/non-esd/releases/other/applications_packages/cg_xml/cg_xml_v${PV}/cg_xml-v${PV}-Linux-x86-Install;name=cgxmlbin_linux \
-+"
-+
-+LIC_FILES_CHKSUM = "file://cg_xml_${PV}_Manifest.pdf;md5=ba23d76ef3d5ec111b03267105c91bd4"
-+
-+SRC_URI[cgxmlbin_linux.md5sum] = "9e421f25f6da455b0155570ce0e62628"
-+SRC_URI[cgxmlbin_linux.sha256sum] = "bbc25f4abe27a8b93bae1d8581c3dee87111c3769c305d086287038ee9038cbf"
-+
-+BINFILE="cg_xml-v${PV}-Linux-x86-Install"
-+TI_BIN_UNPK_CMDS=""
-+TI_BIN_UNPK_ARGS="--prefix ${S} --mode silent"
-+
-+do_install() {
-+    install -d ${D}${CG_XML_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${CG_XML_INSTALL_DIR_RECIPE}
-+}
-+
-+FILES_${PN} += "${CG_XML_INSTALL_DIR_RECIPE}"
-+
-+INSANE_SKIP_${PN} = "arch ldflags"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 2f253a0..4bff921 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -52,6 +52,7 @@ export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
- export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
- export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
- export IMGLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-imglib-c66x-tree"
-+export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
+index 5b3b981..be71761 100644
+--- a/recipes-bsp/rm-lld/rm-lld.inc
++++ b/recipes-bsp/rm-lld/rm-lld.inc
+@@ -7,15 +7,15 @@ RM_LLD_GIT_PROTOCOL = "git"
+ RM_LLD_GIT_BRANCH = "master"
+ RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
  
+-# Below commit ID corresponds to DEV.RM_LLD.02.01.02.00
+-RM_LLD_SRCREV = "b3d711203c6b4cf99fb2f95dc2f4728dfd1b2639"
++# Below commit ID corresponds to DEV.RM_LLD.02.02.00.00
++RM_LLD_SRCREV = "48fc05bf1835f76760da4341a4c551398aeeb7cd"
  
- # This is where the tools will end up in sysroot
-@@ -95,6 +96,7 @@ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_
- export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
- export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
- export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
-+export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIPE}"
+ BRANCH = "${RM_LLD_GIT_BRANCH}"
+ SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${RM_LLD_SRCREV}"
  
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
+-PV = "02.01.02.00"
+-INC_PR = "r3"
++PV = "02.02.00.00"
++INC_PR = "r0"
+ 
+ COMPATIBLE_MACHINE = "keystone"
+ 
 
 
