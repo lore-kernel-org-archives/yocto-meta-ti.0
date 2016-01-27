@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 35B0EE00BDA; Wed, 27 Jan 2016 12:54:56 -0800 (PST)
+	id 3CE15E009EA; Wed, 27 Jan 2016 12:54:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C2EAE0090E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AE12E00852
 	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:51 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C2231529E4; Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
+	id 91ED1529CF; Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205448.C2231529E4@arago-project.org>
+Message-Id: <20160127205448.91ED1529CF@arago-project.org>
 Date: Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : rm-lld: Seperate source info into .inc file
+Subject: Jacob Stiffler : ti-pdk.bbclass: Add class for creating RTOS PDK components
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,91 +38,93 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: ab40312ad3d73538460d6d892a1f315937c96a97
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ab40312ad3d73538460d6d892a1f315937c96a97
+Commit: a1be6f468d9974a290a8ec6c3c9c032378794481
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a1be6f468d9974a290a8ec6c3c9c032378794481
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Jan 27 03:16:43 2016 +0000
+Date:   Wed Jan 27 03:16:41 2016 +0000
 
-rm-lld: Seperate source info into .inc file
+ti-pdk.bbclass: Add class for creating RTOS PDK components
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/rm-lld/rm-lld.inc    |   23 +++++++++++++++++++++++
- recipes-bsp/rm-lld/rm-lld_git.bb |   24 ++----------------------
- 2 files changed, 25 insertions(+), 22 deletions(-)
+ classes/ti-pdk.bbclass |   66 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 66 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
+diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
 new file mode 100644
-index 0000000..5b3b981
+index 0000000..ae76fdf
 --- /dev/null
-+++ b/recipes-bsp/rm-lld/rm-lld.inc
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "TI Resource Manager Low Level Driver"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/rm/COPYING.txt;md5=dc61631b65360e6beb73b6c337800afc"
++++ b/classes/ti-pdk.bbclass
+@@ -0,0 +1,66 @@
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
 +
-+RM_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/rm-lld.git"
-+RM_LLD_GIT_PROTOCOL = "git"
-+RM_LLD_GIT_BRANCH = "master"
-+RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
++inherit perlnative
 +
-+# Below commit ID corresponds to DEV.RM_LLD.02.01.02.00
-+RM_LLD_SRCREV = "b3d711203c6b4cf99fb2f95dc2f4728dfd1b2639"
++DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native"
 +
-+BRANCH = "${RM_LLD_GIT_BRANCH}"
-+SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${RM_LLD_SRCREV}"
++DEPENDS_append_omap-a15 = " ti-cgt6x-native ti-ccsv6-native"
++DEPENDS_append_keystone = " ti-cgt6x-native"
 +
-+PV = "02.01.02.00"
-+INC_PR = "r3"
++S = "${WORKDIR}/git"
++B = "${WORKDIR}/build"
 +
-+COMPATIBLE_MACHINE = "keystone"
++get_build_dir_bash() {
++  if [ -f ${S}/package.xdc ]
++  then
++    grep '^package' ${S}/package.xdc | sed -e 's|\[.*$||' | awk '{ print $2 }' | sed -e 's|\.|/|g'
++  else
++    echo ${S}
++    return 1
++  fi
++}
 +
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/drv/rm"
-diff --git a/recipes-bsp/rm-lld/rm-lld_git.bb b/recipes-bsp/rm-lld/rm-lld_git.bb
-index d6cb62b..659e620 100644
---- a/recipes-bsp/rm-lld/rm-lld_git.bb
-+++ b/recipes-bsp/rm-lld/rm-lld_git.bb
-@@ -1,23 +1,6 @@
--DESCRIPTION = "TI Resource Manager Low Level Driver"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/rm/COPYING.txt;md5=dc61631b65360e6beb73b6c337800afc"
-+require rm-lld.inc
- 
--RM_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/rm-lld.git"
--RM_LLD_GIT_PROTOCOL = "git"
--RM_LLD_GIT_BRANCH = "master"
--RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
--
--# Below commit ID corresponds to DEV.RM_LLD.02.01.02.00
--RM_LLD_SRCREV = "b3d711203c6b4cf99fb2f95dc2f4728dfd1b2639"
--
--BRANCH = "${RM_LLD_GIT_BRANCH}"
--SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
--SRCREV = "${RM_LLD_SRCREV}"
--
--PV = "02.01.02.00"
--PR = "r2"
--
--COMPATIBLE_MACHINE = "keystone"
-+PR = "${INC_PR}.0"
- 
- DEPENDS = "ti-ipc libdaemon"
- 
-@@ -30,9 +13,6 @@ FILES_${PN}-test = "${bindir}/rmDspClientTest.out \
- 
- CHOICELIST = "yes no"
- 
--BASEDIR = "${WORKDIR}/git"
--S = "${BASEDIR}/ti/drv/rm"
--
- do_compile () {
- #   Now build the lld
-     make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR} RM_SRC_DIR=${S}
++export CROSS_TOOL_PRFX="arm-none-eabi-"
++export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
++export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
++export TOOLCHAIN_PATH_A15 = "${GCC_ARM_NONE_TOOLCHAIN}"
++export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
++export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
++
++export ROOTDIR = "${B}"
++export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
++export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
++export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
++
++export XDCPATH = "${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;${PDK_INSTALL_DIR}/packages"
++export SECTTI="perl ${CG_XML_INSTALL_DIR}/ofd/sectti.pl"
++
++PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
++
++do_configure() {
++    BUILD_DIR=${B}/`get_build_dir_bash`
++
++    mkdir -p ${BUILD_DIR}
++    cp -r ${S}/* ${BUILD_DIR}
++    cd ${BUILD_DIR}
++
++    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
++    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
++    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
++    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
++    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
++}
++
++do_compile() {
++    ${XDC_INSTALL_DIR}/xdc clean ${PARALLEL_XDC} -PR .
++    ${XDC_INSTALL_DIR}/xdc all ${PARALLEL_XDC} XDCARGS="${XDCARGS}" ROOTDIR="${ROOTDIR}" -PR .
++    ${XDC_INSTALL_DIR}/xdc release XDCARGS="${XDCARGS}" -PR .
++}
++
++do_install () {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
++    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
++}
++
++FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
 
 
