@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 688D8E0088B; Wed, 27 Jan 2016 10:32:01 -0800 (PST)
+	id D6F67E008F5; Wed, 27 Jan 2016 10:54:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,34 +8,38 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF15CE0079A
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 10:31:59 -0800 (PST)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BF34E0079A
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 10:54:45 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0RIVuMs016939;
-	Wed, 27 Jan 2016 12:31:57 -0600
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0RIsjot031853
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:45 -0600
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0RIVuRg009266;
-	Wed, 27 Jan 2016 12:31:56 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 27 Jan 2016 12:31:56 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0RIVutB016886;
-	Wed, 27 Jan 2016 12:31:56 -0600
-Date: Wed, 27 Jan 2016 13:31:41 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Thomas Perrot <thomas.perrot@tupi.fr>
-Message-ID: <20160127183141.GO11314@edge>
-References: <1453916765-5504-1-git-send-email-thomas.perrot@tupi.fr>
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0RIsjMg029896
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:45 -0600
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0224.002; Wed, 27 Jan 2016 12:54:45 -0600
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] Sam Nelson : linux-ti-staging: Work around to avoid
+	race condition with external module
+Thread-Index: AQHRV9UFnFCxvrhOiEqWEyrWdOpeu58PseEQ
+Date: Wed, 27 Jan 2016 18:54:43 +0000
+Message-ID: <4F9216F96E5DF9428610502835A9F490582E3A28@DLEE11.ent.ti.com>
+References: <20151218010723.30EA852A14@arago-project.org>
+	<20160126010013.GS11314@edge>
+In-Reply-To: <20160126010013.GS11314@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-In-Reply-To: <1453916765-5504-1-git-send-email-thomas.perrot@tupi.fr>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] Correct the name of the variable used to define the size of the logo: GUI_MACHINE_CLASS renamed MACHINE_GUI_CLASS.
+Subject: Re: Sam Nelson : linux-ti-staging: Work around to avoid race condition with external module
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,193 +52,85 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 18:32:01 -0000
+X-List-Received-Date: Wed, 27 Jan 2016 18:54:50 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks! Can you please split the subject into shortlog and the rest of the 
-commit message? Otherwise it's too long to fit in one line.
+Yes, this workaround needs to be copied to 4.1 recipe as well.  (As the pro=
+blem itself will still exist in fido and the issue is not kernel specific)
+With regards,
+Sam
 
-http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-
-
-On Wed, Jan 27, 2016 at 06:46:05PM +0100, Thomas Perrot wrote:
-> Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
-> ---
->  conf/machine/am335x-evm.conf      | 2 +-
->  conf/machine/am3517-evm.conf      | 2 +-
->  conf/machine/am37x-evm.conf       | 2 +-
->  conf/machine/am437x-evm.conf      | 2 +-
->  conf/machine/beagleboard.conf     | 2 +-
->  conf/machine/beaglebone.conf      | 2 +-
->  conf/machine/include/omap-a15.inc | 2 +-
->  conf/machine/include/omap3.inc    | 2 +-
->  conf/machine/include/ti33x.inc    | 2 +-
->  conf/machine/include/ti43x.inc    | 2 +-
->  conf/machine/omap3evm.conf        | 2 +-
->  conf/machine/pandaboard.conf      | 2 +-
->  12 files changed, 12 insertions(+), 12 deletions(-)
-> 
-> diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-> index 08daa8e..55bbf95 100644
-> --- a/conf/machine/am335x-evm.conf
-> +++ b/conf/machine/am335x-evm.conf
-> @@ -6,7 +6,7 @@ require conf/machine/include/ti33x.inc
->  
->  # Use built-in LCD by default
->  XSERVER += "xf86-input-tslib"
-> -GUI_MACHINE_CLASS = "smallscreen"
-> +MACHINE_GUI_CLASS = "smallscreen"
->  MACHINE_FEATURES += "touchscreen"
->  
->  IMAGE_FSTYPES += "ubi tar.gz"
-> diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
-> index 7295c1f..4fef634 100644
-> --- a/conf/machine/am3517-evm.conf
-> +++ b/conf/machine/am3517-evm.conf
-> @@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
->  
->  # Use built-in LCD by default
->  XSERVER += "xf86-input-tslib"
-> -GUI_MACHINE_CLASS = "smallscreen"
-> +MACHINE_GUI_CLASS = "smallscreen"
->  MACHINE_FEATURES += "touchscreen ethernet"
->  
->  IMAGE_FSTYPES += "ubi tar.gz"
-> diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-> index 16ce73c..99adb08 100644
-> --- a/conf/machine/am37x-evm.conf
-> +++ b/conf/machine/am37x-evm.conf
-> @@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
->  
->  # Use built-in LCD by default
->  XSERVER += "xf86-input-tslib"
-> -GUI_MACHINE_CLASS = "smallscreen"
-> +MACHINE_GUI_CLASS = "smallscreen"
->  MACHINE_FEATURES += "touchscreen ethernet"
->  
->  IMAGE_FSTYPES += "ubi tar.gz"
-> diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-> index 9ff8944..7d40aec 100644
-> --- a/conf/machine/am437x-evm.conf
-> +++ b/conf/machine/am437x-evm.conf
-> @@ -6,7 +6,7 @@ require conf/machine/include/ti43x.inc
->  
->  # Use built-in LCD by default
->  XSERVER += "xf86-input-tslib"
-> -GUI_MACHINE_CLASS = "smallscreen"
-> +MACHINE_GUI_CLASS = "smallscreen"
->  MACHINE_FEATURES += "touchscreen"
->  
->  IMAGE_FSTYPES += "ubi tar.gz"
-> diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-> index 32985b3..955961f 100644
-> --- a/conf/machine/beagleboard.conf
-> +++ b/conf/machine/beagleboard.conf
-> @@ -5,7 +5,7 @@
->  require conf/machine/include/omap3.inc
->  
->  # Only has DVI connector for external screen
-> -GUI_MACHINE_CLASS = "bigscreen"
-> +MACHINE_GUI_CLASS = "bigscreen"
->  
->  IMAGE_FSTYPES += "tar.gz ubi"
->  EXTRA_IMAGECMD_jffs2 = "-lnp"
-> diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-> index 8a7e52a..bf3d91e 100644
-> --- a/conf/machine/beaglebone.conf
-> +++ b/conf/machine/beaglebone.conf
-> @@ -5,7 +5,7 @@
->  require conf/machine/include/ti33x.inc
->  
->  # Only has DVI connector for external screen
-> -GUI_MACHINE_CLASS = "bigscreen"
-> +MACHINE_GUI_CLASS = "bigscreen"
->  
->  IMAGE_FSTYPES += "tar.gz"
->  
-> diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-> index 41a2f19..9316998 100644
-> --- a/conf/machine/include/omap-a15.inc
-> +++ b/conf/machine/include/omap-a15.inc
-> @@ -24,7 +24,7 @@ XSERVER = "xserver-xorg \
->             xf86-input-evdev \
->             xf86-video-fbdev"
->  
-> -GUI_MACHINE_CLASS = "smallscreen"
-> +MACHINE_GUI_CLASS = "smallscreen"
->  
->  # Use the expected value of the ubifs filesystem's volume name in the kernel
->  # and u-boot.
-> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-> index 0757b43..f83bfa2 100644
-> --- a/conf/machine/include/omap3.inc
-> +++ b/conf/machine/include/omap3.inc
-> @@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
->             xf86-input-keyboard"
->  
->  # Default to external video, change to smallscreen for built-in LCD
-> -GUI_MACHINE_CLASS = "bigscreen"
-> +MACHINE_GUI_CLASS = "bigscreen"
->  
->  # Increase this everytime you change something in the kernel
->  MACHINE_KERNEL_PR = "r126"
-> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-> index 53f38c9..fa2ead5 100644
-> --- a/conf/machine/include/ti33x.inc
-> +++ b/conf/machine/include/ti33x.inc
-> @@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
->             xf86-input-keyboard"
->  
->  # Default to external video, change to smallscreen for built-in LCD
-> -GUI_MACHINE_CLASS = "bigscreen"
-> +MACHINE_GUI_CLASS = "bigscreen"
->  
->  # Increase this everytime you change something in the kernel
->  MACHINE_KERNEL_PR = "r22"
-> diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-> index 8c5fa2d..a603059 100644
-> --- a/conf/machine/include/ti43x.inc
-> +++ b/conf/machine/include/ti43x.inc
-> @@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
->             xf86-input-keyboard"
->  
->  # Default to external video, change to smallscreen for built-in LCD
-> -GUI_MACHINE_CLASS = "bigscreen"
-> +MACHINE_GUI_CLASS = "bigscreen"
->  
->  # Increase this everytime you change something in the kernel
->  MACHINE_KERNEL_PR = "r3"
-> diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-> index 6bfd808..7051d88 100644
-> --- a/conf/machine/omap3evm.conf
-> +++ b/conf/machine/omap3evm.conf
-> @@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
->  
->  # Use built-in LCD by default
->  XSERVER += "xf86-input-tslib"
-> -GUI_MACHINE_CLASS = "smallscreen"
-> +MACHINE_GUI_CLASS = "smallscreen"
->  MACHINE_FEATURES += "touchscreen ethernet"
->  
->  IMAGE_FSTYPES += "jffs2 tar.gz"
-> diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
-> index 1707f80..99497c1 100644
-> --- a/conf/machine/pandaboard.conf
-> +++ b/conf/machine/pandaboard.conf
-> @@ -4,7 +4,7 @@
->  
->  require conf/machine/include/omap4.inc
->  
-> -GUI_MACHINE_CLASS = "bigscreen"
-> +MACHINE_GUI_CLASS = "bigscreen"
->  
->  IMAGE_FSTYPES += "tar.gz"
->  
-> -- 
-> 2.1.4
-> 
-> -- 
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
+> Sent: Monday, January 25, 2016 8:00 PM
+> To: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] Sam Nelson : linux-ti-staging: Work around to avoi=
+d race
+> condition with external module
+>=20
+> Sam,
+>=20
+> Is this still a problem on 4.1 kernel? Do we need to copy this work aroun=
+d to
+> 4.1 recipe in Fido branch?
+>=20
+>=20
+> On Fri, Dec 18, 2015 at 01:07:23AM +0000, Arago Project git wrote:
+> > Module: meta-ti
+> > Branch: fido
+> > Commit: 4f542c3fe47a8c6be195b3c97fd83efbf930bb70
+> > URL:    http://arago-project.org/git/meta-
+> ti.git?a=3Dcommit;h=3D4f542c3fe47a8c6be195b3c97fd83efbf930bb70
+> >
+> > Author: Sam Nelson <sam.nelson@ti.com>
+> > Date:   Mon Dec 14 17:47:48 2015 +0000
+> >
+> > linux-ti-staging: Work around to avoid race condition with external mod=
+ule
+> >
+> > - Currently there is an issue with compiling external kernel module
+> > which depends on symbols from another kernel module which is part of th=
+e
+> > list of modules configured to be built as modules in the default config=
+.
+> > - This work around allows to avoid the issue by copying the module
+> > symbols to the kernel directory after making the kernel modules build.
+> > - This issue is already fixed in oe-core: master branch as of date
+> > - This is just work around before updating to latest oe-core
+> >
+> > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> >
+> > ---
+> >
+> >  recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++++
+> >  1 files changed, 4 insertions(+), 0 deletions(-)
+> >
+> > diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-
+> kernel/linux/linux-ti-staging_3.14.bb
+> > index 54530e4..88950ae 100644
+> > --- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
+> > +++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+> > @@ -65,3 +65,7 @@ KERNEL_GIT_PROTOCOL =3D "git"
+> >  SRC_URI +=3D
+> "${KERNEL_GIT_URI};protocol=3D${KERNEL_GIT_PROTOCOL};branch=3D${BRANCH}
+> \
+> >              file://defconfig \
+> >             "
+> > +
+> > +do_compile_kernelmodules_append() {
+> > +	cp Module.symvers ${STAGING_KERNEL_BUILDDIR}/
+> > +}
+> >
+> > --
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> --
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
