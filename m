@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 41140E00AB5; Wed, 27 Jan 2016 12:54:58 -0800 (PST)
+	id 41F67E00A7D; Wed, 27 Jan 2016 12:54:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF1B7E00A7D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AEE01E009C3
 	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E774F52A5B; Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
+	id 2B9DB529B5; Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205448.E774F52A5B@arago-project.org>
-Date: Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
+Message-Id: <20160127205449.2B9DB529B5@arago-project.org>
+Date: Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : rm-lld-rtos: Add RTOS package of the RM LLD
+Subject: Jacob Stiffler : cppi-lld: Upgrade version to 2.1.0.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: ba3396dfde8f69fe5ddde8c20f2de6c9157ea59b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ba3396dfde8f69fe5ddde8c20f2de6c9157ea59b
+Commit: 729f8808d50134a327975f6e21e7455ced8023d1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=729f8808d50134a327975f6e21e7455ced8023d1
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Jan 27 03:16:45 2016 +0000
+Date:   Wed Jan 27 03:16:48 2016 +0000
 
-rm-lld-rtos: Add RTOS package of the RM LLD
+cppi-lld: Upgrade version to 2.1.0.11
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/rm-lld/rm-lld-rtos_git.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
+ recipes-bsp/cppi-lld/cppi-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/rm-lld/rm-lld-rtos_git.bb b/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
-new file mode 100644
-index 0000000..fed9445
---- /dev/null
-+++ b/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
-@@ -0,0 +1,12 @@
-+inherit ti-pdk
-+
-+require rm-lld.inc
-+
-+PR = "${INC_PR}.0"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+XDCARGS_k2hk-evm = "k2h k2k"
-+XDCARGS_k2e-evm = "k2e"
-+XDCARGS_k2l-evm = "k2l"
-+XDCARGS_k2g-evm = "k2g"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
+index 6182973..26d0e5c 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld.inc
++++ b/recipes-bsp/cppi-lld/cppi-lld.inc
+@@ -9,15 +9,15 @@ CPPI_LLD_GIT_PROTOCOL = "git"
+ CPPI_LLD_GIT_BRANCH = "master"
+ CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
+ 
+-# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.10"
+-CPPI_LLD_SRCREV = "97c537fa544a78e83512db3499a49d0bd86fad32"
++# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.11"
++CPPI_LLD_SRCREV = "91047a01a6d64d7ffaf650c6ebb280de775af997"
+ 
+ BRANCH = "${CPPI_LLD_GIT_BRANCH}"
+ SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${CPPI_LLD_SRCREV}"
+-PV = "02.01.00.10"
+-INC_PR = "r3"
++PV = "02.01.00.11"
++INC_PR = "r0"
+ 
+ DEVICELIST = "k2h k2k k2l k2e"
+ DEVICELIST_k2hk-evm = "k2h k2k"
 
 
