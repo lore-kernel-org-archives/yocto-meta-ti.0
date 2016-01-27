@@ -1,40 +1,57 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <vomegaz@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5B14FE00C1D; Wed, 27 Jan 2016 05:59:23 -0800 (PST)
+	id 8B699E007B5; Wed, 27 Jan 2016 09:46:25 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [74.125.82.53 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E939CE00C1A
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 05:59:20 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0RDxKgr018337
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 07:59:20 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0RDxKCr026344
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 07:59:20 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 27 Jan 2016 07:59:20 -0600
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u0RDxDB1014465;	Wed, 27 Jan 2016 07:59:20 -0600
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 27 Jan 2016 08:59:09 -0500
-Message-ID: <1453903149-1261-2-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1453903149-1261-1-git-send-email-j-stiffler@ti.com>
-References: <1453903149-1261-1-git-send-email-j-stiffler@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] multiprocmgr-rtos: Add RTOS package for multiprocmgr
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C2D01E0079A
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 09:46:09 -0800 (PST)
+Received: by mail-wm0-f53.google.com with SMTP id n5so38231080wmn.0
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 09:46:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=oRukextCE4GAg9D2JT2zGFAPU1whnNTBZcZ1e2LLtUI=;
+	b=bnsEhSMq4q9Yd1uDAWnb1iuxIqWaq5sWBXK6IJLB6E9OjnUUa79XzEASCqsY4KW0/P
+	HfJtkyWdWNRN8iB0KPFzkO3eih7o1pWyNw0mGRbIUXjOMc85UOGzeGRfwJpx0KMcnZKH
+	/d0+yyxk0kdrZ7q5lUfyOBiC8//sk4jzcFSkhPKuFGgXkNrxwjH3SgSC7B7WNUIqiFwJ
+	Z7yE+GYqVz8kBzhg2ci85qK8jrM6jr2IfI6+dK1SMxu/ULiLdxkH31IP5mmPKMinHs7X
+	t2OpYWK67gXxyu+3wTPoAQyq9rISeA5DPQGJWkXIX7wtoDm+WFkqDyUxQ0mTs7Jbg2B5
+	cL0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=oRukextCE4GAg9D2JT2zGFAPU1whnNTBZcZ1e2LLtUI=;
+	b=RO4LOc+d+SyEtfSSwicY60nqd0aG8jyrlATL8V9ufnMNf65HeCJGo+Uyff1otMsyCB
+	swGlf5GYTUgo7eifLesY5Cz2w9dkVax4e2hxdKC/BW4+/fQrWJPIZFTTuMtERMc95Kxe
+	ztFKPOphOySRasLncyI/poblnhLHkn1oDOCoeBfaXVKZNomoJn6IojmI6Lu2UtOTCfhf
+	TXSLifnlGdI6V1oKUVll0UY3EDsDsX5nVuaJMmbvhHSvMcy4NSqoeb7qRme5cFC+3700
+	DXKFDPgzTDxT7mHwCZeGI69RVHu35qs5joprxERBQt41uaemmW6it0ruEBszckcO+OQM
+	PIIA==
+X-Gm-Message-State: AG10YOSOS9G0JPcOZEddADhaYihFy3y1TdcYPCSQlhyPW2FJOHAZ5tXwQR0QgLahyFbIDQ==
+X-Received: by 10.28.65.85 with SMTP id o82mr33018053wma.23.1453916768593;
+	Wed, 27 Jan 2016 09:46:08 -0800 (PST)
+Received: from sgxcmp131.intra.sigfox.io ([217.114.201.133])
+	by smtp.gmail.com with ESMTPSA id 75sm9346609wmo.22.2016.01.27.09.46.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 27 Jan 2016 09:46:07 -0800 (PST)
+Sender: Thomas PERROT <vomegaz@gmail.com>
+From: Thomas Perrot <thomas.perrot@tupi.fr>
+To: meta-ti@yoctoproject.org
+Date: Wed, 27 Jan 2016 18:46:05 +0100
+Message-Id: <1453916765-5504-1-git-send-email-thomas.perrot@tupi.fr>
+X-Mailer: git-send-email 2.1.4
+Subject: [PATCH] Correct the name of the variable used to define the size of the logo: GUI_MACHINE_CLASS renamed MACHINE_GUI_CLASS.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,71 +64,181 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 13:59:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 27 Jan 2016 17:46:25 -0000
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
 ---
- recipes-ti/includes/ti-paths.inc                 |  2 ++
- recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb | 28 ++++++++++++++++++++++++
- 2 files changed, 30 insertions(+)
- create mode 100644 recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+ conf/machine/am335x-evm.conf      | 2 +-
+ conf/machine/am3517-evm.conf      | 2 +-
+ conf/machine/am37x-evm.conf       | 2 +-
+ conf/machine/am437x-evm.conf      | 2 +-
+ conf/machine/beagleboard.conf     | 2 +-
+ conf/machine/beaglebone.conf      | 2 +-
+ conf/machine/include/omap-a15.inc | 2 +-
+ conf/machine/include/omap3.inc    | 2 +-
+ conf/machine/include/ti33x.inc    | 2 +-
+ conf/machine/include/ti43x.inc    | 2 +-
+ conf/machine/omap3evm.conf        | 2 +-
+ conf/machine/pandaboard.conf      | 2 +-
+ 12 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index b660c11..31427a6 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -54,6 +54,7 @@ export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
- export IMGLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-imglib-c66x-tree"
- export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
- export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
-+export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 08daa8e..55bbf95 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/ti33x.inc
  
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen"
  
- # This is where the tools will end up in sysroot
-@@ -99,6 +100,7 @@ export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL
- export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
- export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIPE}"
- export OMP_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMP_INSTALL_DIR_RECIPE}"
-+export MPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${MPM_INSTALL_DIR_RECIPE}"
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 7295c1f..4fef634 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
  
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
-new file mode 100644
-index 0000000..b3ae720
---- /dev/null
-+++ b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
-@@ -0,0 +1,28 @@
-+DESCRIPTION = "TI Multiproc Manager(RTOS) for KeyStone II"
-+SUMMARY = "Provides download, debug and other utilities for other cores in the SOC like DSP"
-+
-+require recipes-ti/includes/ti-paths.inc
-+require recipes-ti/multiprocmgr/multiprocmgr.inc
-+
-+DEPENDS = "ti-cgt6x-native"
-+
-+PR = "${INC_PR}.0"
-+
-+export LOCAL_SYSROOT="${STAGING_DIR_TARGET}"
-+export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+
-+do_compile() {
-+    make c66x
-+    make test_c66x
-+    sourceipk_do_create_srcipk
-+}
-+
-+do_install() {
-+    install -d ${D}${MPM_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${MPM_INSTALL_DIR_RECIPE}
-+}
-+
-+FILES_${PN}-dev += "${MPM_INSTALL_DIR_RECIPE}"
-+INSANE_SKIP_${PN}-dev = "arch"
-+
-+ALLOW_EMPTY_${PN} = "1"
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen ethernet"
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 16ce73c..99adb08 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
+ 
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen ethernet"
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 9ff8944..7d40aec 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/ti43x.inc
+ 
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen"
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index 32985b3..955961f 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -5,7 +5,7 @@
+ require conf/machine/include/omap3.inc
+ 
+ # Only has DVI connector for external screen
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ IMAGE_FSTYPES += "tar.gz ubi"
+ EXTRA_IMAGECMD_jffs2 = "-lnp"
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index 8a7e52a..bf3d91e 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -5,7 +5,7 @@
+ require conf/machine/include/ti33x.inc
+ 
+ # Only has DVI connector for external screen
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ IMAGE_FSTYPES += "tar.gz"
+ 
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 41a2f19..9316998 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -24,7 +24,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-evdev \
+            xf86-video-fbdev"
+ 
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ 
+ # Use the expected value of the ubifs filesystem's volume name in the kernel
+ # and u-boot.
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 0757b43..f83bfa2 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-keyboard"
+ 
+ # Default to external video, change to smallscreen for built-in LCD
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r126"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 53f38c9..fa2ead5 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-keyboard"
+ 
+ # Default to external video, change to smallscreen for built-in LCD
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r22"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 8c5fa2d..a603059 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-keyboard"
+ 
+ # Default to external video, change to smallscreen for built-in LCD
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r3"
+diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
+index 6bfd808..7051d88 100644
+--- a/conf/machine/omap3evm.conf
++++ b/conf/machine/omap3evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
+ 
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen ethernet"
+ 
+ IMAGE_FSTYPES += "jffs2 tar.gz"
+diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
+index 1707f80..99497c1 100644
+--- a/conf/machine/pandaboard.conf
++++ b/conf/machine/pandaboard.conf
+@@ -4,7 +4,7 @@
+ 
+ require conf/machine/include/omap4.inc
+ 
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ IMAGE_FSTYPES += "tar.gz"
+ 
 -- 
-1.9.1
+2.1.4
 
 
