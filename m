@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 29B58E00BFD; Wed, 27 Jan 2016 12:54:56 -0800 (PST)
+	id 2A545E00948; Wed, 27 Jan 2016 12:54:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE2A1E00948
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AEF5EE009EA
 	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 60D1352AAC; Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
+	id 1730952A7D; Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205449.60D1352AAC@arago-project.org>
+Message-Id: <20160127205449.1730952A7D@arago-project.org>
 Date: Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : gdbc6x: Extend support to keystone SOCs
+Subject: Jacob Stiffler : qmss-lld-rtos: Add RTOS package for QMSS LLD
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: cc621fd2a784a1277a0b65b0e019831a91da11dc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cc621fd2a784a1277a0b65b0e019831a91da11dc
+Commit: 9941f2932474c744f1104e48dbad5efdbb92986f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9941f2932474c744f1104e48dbad5efdbb92986f
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Jan 27 03:16:51 2016 +0000
+Date:   Wed Jan 27 03:16:47 2016 +0000
 
-gdbc6x: Extend support to keystone SOCs
+qmss-lld-rtos: Add RTOS package for QMSS LLD
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-devtools/gdbc6x/gdbc6x.inc |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+ recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-devtools/gdbc6x/gdbc6x.inc b/recipes-devtools/gdbc6x/gdbc6x.inc
-index 8256127..4513a91 100644
---- a/recipes-devtools/gdbc6x/gdbc6x.inc
-+++ b/recipes-devtools/gdbc6x/gdbc6x.inc
-@@ -1,8 +1,13 @@
- # This corresponds to version 1.1.0
- SRCREV = "1ab06f8bcfe7540754558bac331a0312c4b59142"
-+SRCREV_keystone = "913f18db6325e08f634be6dda91f57fb0ec8c838"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb b/recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb
+new file mode 100644
+index 0000000..4dbc591
+--- /dev/null
++++ b/recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb
+@@ -0,0 +1,12 @@
++inherit ti-pdk
 +
- PV = "1.1.0"
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- SRC_URI = "git://git.ti.com/sdo-emu/gdbc6x.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH = "master"
-+BRANCH_keystone = "k2h"
++require qmss-lld.inc
 +
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++PR = "${INC_PR}.0"
++
++DEPENDS_append = " rm-lld-rtos"
++
++XDCARGS_k2hk-evm = "k2h k2k"
++XDCARGS_k2l-evm = "k2l"
++XDCARGS_k2e-evm = "k2e"
++XDCARGS_k2g-evm = "k2g"
 
 
