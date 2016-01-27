@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 999F8E0090E; Wed, 27 Jan 2016 12:57:29 -0800 (PST)
+	id 3796FE00BB6; Wed, 27 Jan 2016 12:57:30 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 712F2E00B89
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:57:18 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A95C6E00B46
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:57:15 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3385D529C9; Wed, 27 Jan 2016 20:57:18 +0000 (UTC)
+	id 8C071529E2; Wed, 27 Jan 2016 20:57:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205718.3385D529C9@arago-project.org>
-Date: Wed, 27 Jan 2016 20:57:18 +0000 (UTC)
+Message-Id: <20160127205715.8C071529E2@arago-project.org>
+Date: Wed, 27 Jan 2016 20:57:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : netcp-sa-fw: add initial version 1.0.0
+Subject: Jacob Stiffler : edma3-lld-rtos: Extend supported SOCs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,60 +33,147 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 20:57:29 -0000
+X-List-Received-Date: Wed, 27 Jan 2016 20:57:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 281183dfa3c700b94708dc65f75963117f468424
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=281183dfa3c700b94708dc65f75963117f468424
+Branch: master
+Commit: cbe0d8c8fd42ff546756c89c330173b00efb5ad1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cbe0d8c8fd42ff546756c89c330173b00efb5ad1
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Jan 27 03:37:20 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Thu Jan 28 00:12:26 2016 +0000
 
-netcp-sa-fw: add initial version 1.0.0
+edma3-lld-rtos: Extend supported SOCs
 
+* Extend support to ti33x and ti43x
+* Fix build for keystone
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb |   29 ++++++++++++++++++++++++++++
- 1 files changed, 29 insertions(+), 0 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |   69 ++++++++++++++++++++++-----
+ 1 files changed, 57 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb b/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
-new file mode 100644
-index 0000000..5f07b92
---- /dev/null
-+++ b/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "NETCP SA firmware for Keystone"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index 4ebfd16..dc39fee 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -4,12 +4,45 @@ require recipes-ti/includes/ti-staging.inc
+ 
+ PR = "${INC_PR}.0"
+ 
+-DEPENDS = "ti-cgt6x-native ti-sysbios ti-xdctools"
++DEPENDS = "ti-sysbios ti-xdctools"
+ 
+-COMPATIBLE_MACHINE = "dra7xx|keystone"
++DEPENDS_append_keystone = " gcc-arm-none-eabi-native ti-cgt6x-native"
++DEPENDS_append_ti33x = " gcc-arm-none-eabi-native"
++DEPENDS_append_ti43x = " gcc-arm-none-eabi-native"
++DEPENDS_append_omap-a15 = " gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
 +
-+LICENSE = "TI-TFL"
-+LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ PLATFORMLIST = ""
++TARGETLIST = ""
 +
-+PV = "1.0.0"
-+PR = "r0"
++PLATFORMLIST_ti33x = " \
++        am335x-evm \
++"
 +
-+CLEANBROKEN = "1"
++TARGETLIST_ti33x = " \
++        a8 \
++"
 +
-+COMPATIBLE_MACHINE = "keystone"
++PLATFORMLIST_ti43x = " \
++        am437x-evm \
++"
 +
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++TARGETLIST_ti43x = " \
++        arm9 \
++"
 +
-+SRCREV = "588f602a21c62f90b1f4318b881c80a1e711317a"
-+BRANCH ?= "ti-linux-firmware-4.1.y"
++PLATFORMLIST_omap-a15 = " \
++        tda2xx-evm \
++"
 +
-+SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++TARGETLIST_omap-a15 = " \
++        66 \
++        a15 \
++        m4 \
++"
 +
-+S = "${WORKDIR}/git"
+ PLATFORMLIST_keystone = " \
+         tci6636k2h-evm \
+         tci6638k2k-evm \
+@@ -17,13 +50,13 @@ PLATFORMLIST_keystone = " \
+         c66ak2e-evm \
+ "
+ 
+-PLATFORMLIST_dra7xx = " \
+-        tda2xx-evm \
+-        dra72x-evm \
+-        am571x-evm \
+-        am572x-evm \
++TARGETLIST_keystone = " \
++        66 \
++        a15 \
+ "
+ 
++FORMAT="ELF"
 +
-+TARGET = "sa_mci.fw"
-+
-+do_install() {
-+	install -d ${D}${base_libdir}/firmware
-+	install -m 0644 ${S}/ti-keystone/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
-+}
-+
-+FILES_${PN} = "${base_libdir}/firmware"
+ S = "${WORKDIR}/git"
+ 
+ PARALLEL_MAKE = ""
+@@ -44,10 +77,17 @@ export CROSSCC="${TARGET_PREFIX}gcc"
+ export CROSSAR="${TARGET_PREFIX}ar"
+ export CROSSLNK="${TARGET_PREFIX}gcc"
+ 
+-
+-EXTRA_OEMAKE += " -C ${S}/packages TARGET=66 FORMAT=ELF"
+-
+ do_configure () {
++    sed -i -e "s|_config.bld|config.bld|g" ${S}/makerules/env.mk
++    sed -i -e "s|^edma3_lld_PATH =.*$|edma3_lld_PATH = ${S}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_M3 =.*$|CODEGEN_PATH_M3 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_M4 =.*$|CODEGEN_PATH_M4 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_A8 =.*$|CODEGEN_PATH_A8 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_A8_GCC =.*$|CODEGEN_PATH_A8_GCC = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_ARM9 =.*$|CODEGEN_PATH_ARM9 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_A9_GCC =.*$|CODEGEN_PATH_A9_GCC = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_A15 =.*$|CODEGEN_PATH_A15 = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
++    sed -i -e "s|^CODEGEN_PATH_A15_GCC =.*$|CODEGEN_PATH_A15_GCC = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
+     sed -i -e "s|^UTILS_INSTALL_DIR =.*$|UTILS_INSTALL_DIR = ${XDC_INSTALL_DIR}|g" ${S}/makerules/env.mk
+     sed -i -e "s|^bios_PATH =.*$|bios_PATH = ${SYSBIOS_INSTALL_DIR}|g" ${S}/makerules/env.mk
+     sed -i -e "s|^xdc_PATH =.*$|xdc_PATH = ${XDC_INSTALL_DIR}|g" ${S}/makerules/env.mk
+@@ -59,10 +99,15 @@ do_configure () {
+ }
+ 
+ do_compile () {
++    cd ${S}/packages
+     for p in ${PLATFORMLIST}
+     do
+-        oe_runmake PLATFORM=${p}
++        for t in ${TARGETLIST}
++        do
++            make PLATFORM=${p} TARGET=${t} FORMAT=${FORMAT}
++        done
+     done
++    sourceipk_do_create_srcipk
+ }
+ 
+ do_install () {
+@@ -70,7 +115,7 @@ do_install () {
+     cp -pPrf ${S}/* ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
+ }
+ 
+-INSANE_SKIP_${PN}-dev = "arch"
++INSANE_SKIP_${PN}-dev = "arch ldflags"
+ 
+ ALLOW_EMPTY_${PN} = "1"
+ FILES_${PN}-dev += "${EDMA3_LLD_INSTALL_DIR_RECIPE}"
 
 
