@@ -1,41 +1,71 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 127FEE00C13; Tue, 26 Jan 2016 20:15:29 -0800 (PST)
+	id 4C1FFE00C13; Tue, 26 Jan 2016 22:06:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (raj.khem[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.160.178 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A9A2E00C10
-	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 20:15:25 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0R4FO4n022604
-	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 22:15:24 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0R4FOUo032476
-	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 22:15:24 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 26 Jan 2016 22:15:24 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u0R4FOLL024501;	Tue, 26 Jan 2016 22:15:24 -0600
-Date: Tue, 26 Jan 2016 23:15:23 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <576626783.359.1453868123911.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2016-01-26_21-20-40
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
+	[209.85.160.178])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8A3AE00C10
+	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 22:06:41 -0800 (PST)
+Received: by mail-yk0-f178.google.com with SMTP id a85so229290232ykb.1
+	for <meta-ti@yoctoproject.org>; Tue, 26 Jan 2016 22:06:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=mh3JMWJCiRorvoXdfT/RcYHV2jCNqezi2bsmCeNMbvw=;
+	b=ya4iMjUKo1zGy52YT6tKzuvOC9QEIVNy17kUszxTK2nAN2+xacZ7o818gMCvdIfrO2
+	GbSwu99LmhW/MfJuGFFy6ZK5He7sYFYbQHVbnrnxfDkgIDoEHBvvGkYkStuEGWqaL/jV
+	WdfSssYzN6/nRtF0R3KIaWID4LJab9InKSRiJSbbGQcTYX4CiKalTlJzDY5mm8bNgQCK
+	TGtfSOfJTC7ZY9pb1XyfvmHlr6nM0MvQLIPyZ4eZbyZLyPsBEhsXMIXa9GaHk6WQpQDd
+	HObVzfQHSYoiMdWKSaY45V6n04BqxRigkRc5ZaQTAUN5JFFJJTZrvZ5oa4dgQ5iM7LQg
+	NqyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:mime-version:content-type:from
+	:in-reply-to:date:cc:message-id:references:to;
+	bh=mh3JMWJCiRorvoXdfT/RcYHV2jCNqezi2bsmCeNMbvw=;
+	b=KiizY6B544E56HRyjsGXFe6oY1pUwt+i8Ut/JvQxwgCWOBVIAN/+HwpuMQvdURnDON
+	mrYd7/ZZQxp5TJ2FtiJG8qn1Vugjc5kd0+JmIKa4EfYU1QC1r4pxPB7jdmbUD64ffskV
+	r9A14Fom6mRruQgfd9SQXkPHp5vZjwRsn0VVxJcvdZSbHLgdy02fsj6gXB0z7J9YmiwB
+	rBTytjuekv9W+T9+U01u9mQPZRkFa6kumCUp6TRO6YGRslHWRLMuCi+RgcpfpouRWnjV
+	gDHbZV4ejqB5j/cpSDjOYhHvbZK7mLVCBXLUXCyyC9LtscsG/PYoH//5IvsOdBNHo+Vt
+	WM1A==
+X-Gm-Message-State: AG10YOQZgqFtrcZGcNBmbugefmOHq0Z7NUMx3eTVPB9f7VNu2ytR8Rvgqye5P5arxEj5UQ==
+X-Received: by 10.13.241.199 with SMTP id a190mr15128335ywf.47.1453874800901; 
+	Tue, 26 Jan 2016 22:06:40 -0800 (PST)
+Received: from [192.168.1.2] (207.sub-70-192-133.myvzw.com. [70.192.133.207])
+	by smtp.gmail.com with ESMTPSA id
+	e6sm3798333ywd.23.2016.01.26.22.06.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 26 Jan 2016 22:06:39 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1453843011-28530-4-git-send-email-j-stiffler@ti.com>
+Date: Wed, 27 Jan 2016 01:06:35 -0500
+Message-Id: <BCDE94FF-91BD-464F-9EC4-D55608450073@gmail.com>
+References: <1453843011-28530-1-git-send-email-j-stiffler@ti.com>
+	<1453843011-28530-4-git-send-email-j-stiffler@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+X-Mailer: Apple Mail (2.3112)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 03/13] ti-pdk.bbclass: Add class for creating RTOS PDK components
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,207 +78,133 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 04:15:29 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_358_1074393771.1453868123725"
+X-List-Received-Date: Wed, 27 Jan 2016 06:06:43 -0000
+X-Groupsio-MsgNum: 7815
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_9CB41D5B-A1DF-48A3-8C53-30943126EEAB";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-------=_Part_358_1074393771.1453868123725
-Content-Type: text/html; charset="UTF-8"
+--Apple-Mail=_9CB41D5B-A1DF-48A3-8C53-30943126EEAB
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+
+> On Jan 26, 2016, at 4:16 PM, Jacob Stiffler <j-stiffler@ti.com> wrote:
+>=20
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+> classes/ti-pdk.bbclass | 66 =
+++++++++++++++++++++++++++++++++++++++++++++++++++
+> 1 file changed, 66 insertions(+)
+> create mode 100644 classes/ti-pdk.bbclass
+>=20
+> diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+> new file mode 100644
+> index 0000000..ae76fdf
+> --- /dev/null
+> +++ b/classes/ti-pdk.bbclass
+> @@ -0,0 +1,66 @@
+> +require recipes-ti/includes/ti-paths.inc
+> +require recipes-ti/includes/ti-staging.inc
+> +
+> +inherit perlnative
+> +
+> +DEPENDS =3D "ti-xdctools ti-cg-xml-native ti-sysbios =
+common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native"
+> +
+> +DEPENDS_append_omap-a15 =3D " ti-cgt6x-native ti-ccsv6-native"
+> +DEPENDS_append_keystone =3D " ti-cgt6x-native"
+> +
+> +S =3D "${WORKDIR}/git"
+> +B =3D "${WORKDIR}/build"
+> +
+> +get_build_dir_bash() {
+> +  if [ -f ${S}/package.xdc ]
+> +  then
+> +    grep '^package' ${S}/package.xdc | sed -e 's|\[.*$||' | awk '{ =
+print $2 }' | sed -e 's|\.|/|g'
+> +  else
+> +    echo ${S}
+> +    return 1
+> +  fi
+> +}
+> +
+> +export CROSS_TOOL_PRFX=3D"arm-none-eabi-"
+> +export TOOLCHAIN_PATH_A8 =3D "${GCC_ARM_NONE_TOOLCHAIN}"
+> +export TOOLCHAIN_PATH_A9 =3D "${GCC_ARM_NONE_TOOLCHAIN}"
+> +export TOOLCHAIN_PATH_A15 =3D "${GCC_ARM_NONE_TOOLCHAIN}=E2=80=9D
+
+Did you try using -ffreestanding option to internal toolchain ?
+
+> +export TOOLCHAIN_PATH_M4 =3D "${M4_TOOLCHAIN_INSTALL_DIR}=E2=80=9D
+> +export C6X_GEN_INSTALL_PATH =3D =
+"${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+> +
+> +export ROOTDIR =3D "${B}"
+> +export BIOS_INSTALL_PATH =3D "${SYSBIOS_INSTALL_DIR}"
+> +export XDC_INSTALL_PATH =3D "${XDC_INSTALL_DIR}"
+> +export PDK_INSTALL_PATH =3D "${PDK_INSTALL_DIR}/packages"
+> +
+> +export XDCPATH =3D =
+"${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;${PDK_INSTALL=
+_DIR}/packages"
+> +export SECTTI=3D"perl ${CG_XML_INSTALL_DIR}/ofd/sectti.pl"
+> +
+> +PARALLEL_XDC =3D "--jobs=3D${BB_NUMBER_THREADS}"
+> +
+> +do_configure() {
+> +    BUILD_DIR=3D${B}/`get_build_dir_bash`
+> +
+> +    mkdir -p ${BUILD_DIR}
+> +    cp -r ${S}/* ${BUILD_DIR}
+> +    cd ${BUILD_DIR}
+> +
+> +    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
+> +    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
+> +    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
+> +    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
+> +    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
+> +}
+> +
+> +do_compile() {
+> +    ${XDC_INSTALL_DIR}/xdc clean ${PARALLEL_XDC} -PR .
+> +    ${XDC_INSTALL_DIR}/xdc all ${PARALLEL_XDC} XDCARGS=3D"${XDCARGS}" =
+ROOTDIR=3D"${ROOTDIR}" -PR .
+> +    ${XDC_INSTALL_DIR}/xdc release XDCARGS=3D"${XDCARGS}" -PR .
+> +}
+> +
+> +do_install () {
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    find -name "*.tar" -exec tar xf {} -C =
+${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
+> +}
+> +
+> +FILES_${PN} +=3D "${PDK_INSTALL_DIR_RECIPE}/packages"
+> --
+> 1.9.1
+>=20
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
+
+--Apple-Mail=_9CB41D5B-A1DF-48A3-8C53-30943126EEAB
 Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
-<html>
-<head>
-<title>
-Status for 01/26/16
-</title>
-</head>
-<body>
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
-<h2>Status for 01/26/16</h2>
+iEYEARECAAYFAlaoXm4ACgkQuwUzVZGdMxS9TgCfeCngVnSjPbctVsSSa+paZRvL
+7kkAniNi9G+4Q8msifWQ+IRc7foiTi2J
+=WkWi
+-----END PGP SIGNATURE-----
 
-<h2>BUILD_ID: build-2016-01-26_21-21-55</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_358_1074393771.1453868123725--
+--Apple-Mail=_9CB41D5B-A1DF-48A3-8C53-30943126EEAB--
