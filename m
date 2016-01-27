@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9A3A0E0079A; Wed, 27 Jan 2016 12:57:29 -0800 (PST)
+	id 999F8E0090E; Wed, 27 Jan 2016 12:57:29 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81C03E00A7D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 712F2E00B89
 	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:57:18 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 469AE529CF; Wed, 27 Jan 2016 20:57:18 +0000 (UTC)
+	id 3385D529C9; Wed, 27 Jan 2016 20:57:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205718.469AE529CF@arago-project.org>
+Message-Id: <20160127205718.3385D529C9@arago-project.org>
 Date: Wed, 27 Jan 2016 20:57:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : edma3-lld: Upgrade version to 2.12.01.22
+Subject: Denys Dmytriyenko : netcp-sa-fw: add initial version 1.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +38,55 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 2440b332f88f81b99ceafbe3eb5101809851caab
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2440b332f88f81b99ceafbe3eb5101809851caab
+Commit: 281183dfa3c700b94708dc65f75963117f468424
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=281183dfa3c700b94708dc65f75963117f468424
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Jan 28 00:12:25 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Jan 27 03:37:20 2016 +0000
 
-edma3-lld: Upgrade version to 2.12.01.22
+netcp-sa-fw: add initial version 1.0.0
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb |   29 ++++++++++++++++++++++++++++
+ 1 files changed, 29 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 8dc80f7..533de83 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -7,11 +7,11 @@ EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
- 
- # The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_21_RC1
--EDMA3_LLD_SRCREV = "562cba36ccd53e89e6979e99a58374513b543f93"
-+EDMA3_LLD_SRCREV = "9a94177958b9269b1b8aeeb2a5d362ca4e64dafa"
- 
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
- 
--PV = "2.12.01.21"
--INC_PR = "r2"
-+PV = "2.12.01.22"
-+INC_PR = "r0"
+diff --git a/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb b/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
+new file mode 100644
+index 0000000..5f07b92
+--- /dev/null
++++ b/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "NETCP SA firmware for Keystone"
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
++
++PV = "1.0.0"
++PR = "r0"
++
++CLEANBROKEN = "1"
++
++COMPATIBLE_MACHINE = "keystone"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SRCREV = "588f602a21c62f90b1f4318b881c80a1e711317a"
++BRANCH ?= "ti-linux-firmware-4.1.y"
++
++SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++TARGET = "sa_mci.fw"
++
++do_install() {
++	install -d ${D}${base_libdir}/firmware
++	install -m 0644 ${S}/ti-keystone/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++}
++
++FILES_${PN} = "${base_libdir}/firmware"
 
 
