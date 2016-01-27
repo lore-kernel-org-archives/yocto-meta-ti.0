@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 56DF9E0090E; Wed, 27 Jan 2016 12:54:56 -0800 (PST)
+	id 402A3E00C05; Wed, 27 Jan 2016 12:54:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D625E00928
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:51 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCAAEE00B3D
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jan 2016 12:54:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B0AE9529E2; Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
+	id 9789752AAF; Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160127205448.B0AE9529E2@arago-project.org>
-Date: Wed, 27 Jan 2016 20:54:48 +0000 (UTC)
+Message-Id: <20160127205449.9789752AAF@arago-project.org>
+Date: Wed, 27 Jan 2016 20:54:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Upgrade to version 3.3.0.1B
+Subject: Jacob Stiffler : ti-cg-xml: Add version 2.41.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,131 +33,89 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 20:54:56 -0000
+X-List-Received-Date: Wed, 27 Jan 2016 20:54:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: ec6b20ae122ee32f5b14fbef643e428ff50e9630
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec6b20ae122ee32f5b14fbef643e428ff50e9630
+Branch: master
+Commit: 183b1828ed831a9e3d0f817a513cfbcc33186a0d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=183b1828ed831a9e3d0f817a513cfbcc33186a0d
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Jan 27 03:16:42 2016 +0000
+Date:   Wed Jan 27 03:16:40 2016 +0000
 
-common-csl-ip: Upgrade to version 3.3.0.1B
-
-* Re-implement common-csl-ip-rtos using the ti-pdk class
+ti-cg-xml: Add version 2.41.00
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../common-csl-ip/common-csl-ip-rtos_git.bb        |   43 +++++++-------------
- recipes-bsp/common-csl-ip/common-csl-ip.inc        |   11 ++---
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb     |    6 +++
- 3 files changed, 25 insertions(+), 35 deletions(-)
+ recipes-ti/devtools/ti-cg-xml_2.41.00.bb |   36 ++++++++++++++++++++++++++++++
+ recipes-ti/includes/ti-paths.inc         |    2 +
+ 2 files changed, 38 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-index f8dc1ba..6f7d3cc 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -1,36 +1,23 @@
- require common-csl-ip.inc
--
- PR = "${INC_PR}.0"
- 
--require recipes-ti/includes/ti-paths.inc
--require recipes-ti/includes/ti-staging.inc
--
--DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
--
--CSL_GIT_DESTSUFFIX = "git/ti/csl"
-+inherit ti-pdk
- 
--export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
--export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
--export XDCPATH="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
-+DEPENDS_remove = "${PN}"
- 
--do_configure() {
--    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
--    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
--    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
--    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
--    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
--}
-+XDCARGS_ti33x = "am335x"
-+XDCARGS_ti43x = "am437x"
-+XDCARGS_omap-a15 = "am571x am572x"
-+XDCARGS_k2hk-evm = "k2h k2k"
-+XDCARGS_k2l-evm = "k2l"
-+XDCARGS_k2e-evm = "k2e"
- 
--do_compile() {
--    ${XDC_INSTALL_DIR}/xdc .make
--    ${XDC_INSTALL_DIR}/xdc clean
--    ${XDC_INSTALL_DIR}/xdc release
--}
-+do_configure_append() {
-+    # Create empty makefile
-+    # If libraries are supported for this device, then this will be overwritten
-+    cat > ${BUILD_DIR}/makefile << __EOF__
-+# Nothing to do
-+all:
- 
--do_install () {
--    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
--    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
-+__EOF__
- }
--
--ALLOW_EMPTY_${PN} = "1"
--FILES_${PN}-dev += "${PDK_INSTALL_DIR_RECIPE}/packages"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 74abab0..c81b0f1 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -5,19 +5,16 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- COMPATIBLE_MACHINE = "keystone|dra7xx"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--INC_PR = "r4"
-+PV = "3.3.0.1B"
-+INC_PR = "r0"
- 
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
- CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
--CSL_GIT_BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
- CSL_GIT_DESTSUFFIX = "git"
- 
--# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.01.00A
--CSL_SRCREV = "17bb083f0d5ed4ad6f38c991210a6a8e9aaf9c56"
--
--# commit ID corresponds to PROCESSOR-SDK-ALPHA-1
--CSL_SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
-+# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.01B
-+CSL_SRCREV = "48bb80a8d5919e17528a21be5d3ea6437dfc0425"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index 77f7858..9ea87d3 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -4,6 +4,12 @@ PR = "${INC_PR}.0"
- 
- ALLOW_EMPTY_${PN} = "1"
- 
-+CLEANBROKEN = "1"
+diff --git a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+new file mode 100644
+index 0000000..115254e
+--- /dev/null
++++ b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+@@ -0,0 +1,36 @@
++DESCRIPTION = "TI CG_XML"
++HOMEPAGE = "http://software-dl.ti.com/ccs/non-esd/releases/other/applications_packages/cg_xml/index.htm"
++SECTION = "devel"
++LICENSE = "BSD"
 +
-+do_compile() {
-+    :
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
++require recipes-ti/includes/ti-unpack.inc
++
++PV = "2_41_00"
++
++S = "${WORKDIR}/cg_xml_${PV}"
++
++SRC_URI = "\
++    http://software-dl.ti.com/ccs/non-esd/releases/other/applications_packages/cg_xml/cg_xml_v${PV}/cg_xml-v${PV}-Linux-x86-Install;name=cgxmlbin_linux \
++"
++
++LIC_FILES_CHKSUM = "file://cg_xml_${PV}_Manifest.pdf;md5=ba23d76ef3d5ec111b03267105c91bd4"
++
++SRC_URI[cgxmlbin_linux.md5sum] = "9e421f25f6da455b0155570ce0e62628"
++SRC_URI[cgxmlbin_linux.sha256sum] = "bbc25f4abe27a8b93bae1d8581c3dee87111c3769c305d086287038ee9038cbf"
++
++BINFILE="cg_xml-v${PV}-Linux-x86-Install"
++TI_BIN_UNPK_CMDS=""
++TI_BIN_UNPK_ARGS="--prefix ${S} --mode silent"
++
++do_install() {
++    install -d ${D}${CG_XML_INSTALL_DIR_RECIPE}
++    cp -pPrf ${S}/* ${D}${CG_XML_INSTALL_DIR_RECIPE}
 +}
 +
- do_install () {
-     install -d ${D}${includedir}/ti/csl
-     find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
++FILES_${PN} += "${CG_XML_INSTALL_DIR_RECIPE}"
++
++INSANE_SKIP_${PN} = "arch ldflags"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 2f253a0..4bff921 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -52,6 +52,7 @@ export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
+ export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
+ export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
+ export IMGLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-imglib-c66x-tree"
++export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+ 
+ 
+ # This is where the tools will end up in sysroot
+@@ -95,6 +96,7 @@ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_
+ export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
+ export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
+ export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
++export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
 
 
