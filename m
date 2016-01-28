@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 16009E00B37; Thu, 28 Jan 2016 10:43:58 -0800 (PST)
+	id DEF70E00C10; Thu, 28 Jan 2016 10:43:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B185E00BB5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63670E00BC6
 	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 10:43:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2436E52AAB; Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
+	id 4DBB852AA8; Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160128184354.2436E52AAB@arago-project.org>
+Message-Id: <20160128184354.4DBB852AA8@arago-project.org>
 Date: Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : pktlib: Upgrade to version 2.1.0.6
+Subject: Jacob Stiffler : srio-lld: Upgrade to version 02.00.00.14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,50 +33,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2016 18:43:58 -0000
+X-List-Received-Date: Thu, 28 Jan 2016 18:43:59 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 09e7d38aad4902b93f1bccd43208dba7e3f74451
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=09e7d38aad4902b93f1bccd43208dba7e3f74451
+Commit: 052e3efc92b0d0ef76ad75520f8855dce0b22f14
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=052e3efc92b0d0ef76ad75520f8855dce0b22f14
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Jan 28 20:41:08 2016 +0000
+Date:   Thu Jan 28 20:41:10 2016 +0000
 
-pktlib: Upgrade to version 2.1.0.6
+srio-lld: Upgrade to version 02.00.00.14
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pktlib/pktlib_git.bb |    8 ++++----
+ recipes-bsp/srio-lld/srio-lld.inc |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
-index 03399cf..9a45340 100644
---- a/recipes-bsp/pktlib/pktlib_git.bb
-+++ b/recipes-bsp/pktlib/pktlib_git.bb
-@@ -9,15 +9,15 @@ PKTLIB_GIT_URI = "git://git.ti.com/keystone-rtos/pktlib.git"
- PKTLIB_GIT_PROTOCOL = "git"
- PKTLIB_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
+index 2172a13..d697fb4 100644
+--- a/recipes-bsp/srio-lld/srio-lld.inc
++++ b/recipes-bsp/srio-lld/srio-lld.inc
+@@ -8,15 +8,15 @@ SRIO_LLD_GIT_PROTOCOL = "git"
+ SRIO_LLD_GIT_BRANCH = "master"
+ SRIO_LLD_GIT_DESTSUFFIX = "git/ti/drv/srio"
  
--# Corresponds to DEV.PKTLIB.2.1.0.5
--PKTLIB_SRCREV = "d757026f3d6a837711f4b44b5ffdefed761fc186"
-+# Corresponds to DEV.PKTLIB.2.1.0.6
-+PKTLIB_SRCREV = "2aa4843d79c344c2d76d0d5d32ecda3d7213d514"
+-# commit ID corresponding to DEV.SRIO_LLD.02.00.00.13
+-SRIO_LLD_SRCREV = "dc49972265afd3ffd3b29ca235b8ca6daf790bd1"
++# commit ID corresponding to DEV.SRIO_LLD.02.00.00.14
++SRIO_LLD_SRCREV = "d22dfe096b5ee6025388943e9eb626f149e6ac55"
  
- BRANCH = "${PKTLIB_GIT_BRANCH}"
- SRC_URI = "${PKTLIB_GIT_URI};protocol=${PKTLIB_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${PKTLIB_SRCREV}"
+ BRANCH = "${SRIO_LLD_GIT_BRANCH}"
+ SRC_URI = "${SRIO_LLD_GIT_URI};destsuffix=${SRIO_LLD_GIT_DESTSUFFIX};protocol=${SRIO_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${SRIO_LLD_SRCREV}"
  
--PV = "2.1.0.5"
--PR = "r1"
-+PV = "2.1.0.6"
-+PR = "r0"
+-PV = "02.00.00.13"
+-INC_PR = "r2"
++PV = "02.00.00.14"
++INC_PR = "r0"
  
- S = "${WORKDIR}/git/ti/runtime/pktlib"
+ DEVICELIST = "k2h k2k"
  
 
 
