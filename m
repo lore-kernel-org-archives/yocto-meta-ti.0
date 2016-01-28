@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EFCA0E00B37; Thu, 28 Jan 2016 10:43:57 -0800 (PST)
+	id 16009E00B37; Thu, 28 Jan 2016 10:43:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A01BE00BAB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B185E00BB5
 	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 10:43:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F2C6B52A94; Thu, 28 Jan 2016 18:43:53 +0000 (UTC)
+	id 2436E52AAB; Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160128184353.F2C6B52A94@arago-project.org>
-Date: Thu, 28 Jan 2016 18:43:53 +0000 (UTC)
+Message-Id: <20160128184354.2436E52AAB@arago-project.org>
+Date: Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : nwal-lld: Upgrade to version 02.01.00.09
+Subject: Jacob Stiffler : pktlib: Upgrade to version 2.1.0.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 144a78d3c8eb696e27fa65bba45bc5b0b140325f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=144a78d3c8eb696e27fa65bba45bc5b0b140325f
+Commit: 09e7d38aad4902b93f1bccd43208dba7e3f74451
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=09e7d38aad4902b93f1bccd43208dba7e3f74451
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Jan 28 20:41:06 2016 +0000
+Date:   Thu Jan 28 20:41:08 2016 +0000
 
-nwal-lld: Upgrade to version 02.01.00.09
+pktlib: Upgrade to version 2.1.0.6
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld.inc |    8 ++++----
+ recipes-bsp/pktlib/pktlib_git.bb |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-index 9a91a6f..d18f7d8 100644
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -8,15 +8,15 @@ NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
- NWAL_LLD_GIT_PROTOCOL = "git"
- NWAL_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
+index 03399cf..9a45340 100644
+--- a/recipes-bsp/pktlib/pktlib_git.bb
++++ b/recipes-bsp/pktlib/pktlib_git.bb
+@@ -9,15 +9,15 @@ PKTLIB_GIT_URI = "git://git.ti.com/keystone-rtos/pktlib.git"
+ PKTLIB_GIT_PROTOCOL = "git"
+ PKTLIB_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.NWAL.02.01.00.08"
--NWAL_LLD_SRCREV = "e6df99e59a848c7afffe90fc9710b7dcb8067c31"
-+# Below commit ID corresponds to "DEV.NWAL.02.01.00.09"
-+NWAL_LLD_SRCREV = "ac1d899e0dbd3709848fbf1d121374e8953a3695"
+-# Corresponds to DEV.PKTLIB.2.1.0.5
+-PKTLIB_SRCREV = "d757026f3d6a837711f4b44b5ffdefed761fc186"
++# Corresponds to DEV.PKTLIB.2.1.0.6
++PKTLIB_SRCREV = "2aa4843d79c344c2d76d0d5d32ecda3d7213d514"
  
- BRANCH = "${NWAL_LLD_GIT_BRANCH}"
- SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${NWAL_LLD_SRCREV}"
+ BRANCH = "${PKTLIB_GIT_BRANCH}"
+ SRC_URI = "${PKTLIB_GIT_URI};protocol=${PKTLIB_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${PKTLIB_SRCREV}"
  
--PV = "02.01.00.08"
--INC_PR = "r2"
-+PV = "02.01.00.09"
-+INC_PR = "r0"
+-PV = "2.1.0.5"
+-PR = "r1"
++PV = "2.1.0.6"
++PR = "r0"
  
- BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/nwal"
+ S = "${WORKDIR}/git/ti/runtime/pktlib"
+ 
 
 
