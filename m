@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 46BA1E00B3D; Thu, 28 Jan 2016 10:44:00 -0800 (PST)
+	id 4FC7DE00BE6; Thu, 28 Jan 2016 10:44:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5BCC7E00BFE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85E74E00BF7
 	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 10:43:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1021B52AB9; Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
+	id 8128152A79; Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160128184354.1021B52AB9@arago-project.org>
+Message-Id: <20160128184354.8128152A79@arago-project.org>
 Date: Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : pa-lld: Upgrade to version 03.00.01.07
+Subject: Jacob Stiffler : uio-module-drv: Add to KERNEL_MODULE_AUTOLOAD
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 1acb5cdb893e21072547d227964724150d11e87e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1acb5cdb893e21072547d227964724150d11e87e
+Commit: 56eeb80d34e86dfb4eb4ed9d60dfa4e65b3d87e6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=56eeb80d34e86dfb4eb4ed9d60dfa4e65b3d87e6
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Jan 28 20:41:07 2016 +0000
+Date:   Thu Jan 28 20:47:10 2016 +0000
 
-pa-lld: Upgrade to version 03.00.01.07
+uio-module-drv: Add to KERNEL_MODULE_AUTOLOAD
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pa-lld/pa-lld.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/uio-module-drv/uio-module-drv_git.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index 396278d..7b09ceb 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -9,16 +9,16 @@ PA_LLD_GIT_PROTOCOL = "git"
- PA_LLD_GIT_BRANCH = "master"
- PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+index e10fdeb..b6d912d 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+@@ -4,7 +4,7 @@ include uio-module-drv.inc
+ PV = "2.0.0.0+git${SRCPV}"
  
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
--PA_LLD_SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.07"
-+PA_LLD_SRCREV = "cad5bc0b422a7ac3c6fa013fc2288447318329a0"
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
+ PR = "${MACHINE_KERNEL_PR}"
  
- BRANCH = "${PA_LLD_GIT_BRANCH}"
- SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
-             file://0001-makefile_armv7-fix-missing-separator-error.patch"
- SRCREV = "${PA_LLD_SRCREV}"
- 
--PV = "03.00.01.05"
--INC_PR = "r3"
-+PV = "03.00.01.07"
-+INC_PR = "r0"
- 
- S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
- 
+ do_configure[depends] += "virtual/kernel:do_compile_kernelmodules"
+@@ -17,3 +17,5 @@ do_install_append () {
+     install -d ${D}${includedir}
+     cp *.h ${D}${includedir}
+ }
++
++KERNEL_MODULE_AUTOLOAD += "uio_module_drv"
 
 
