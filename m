@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 803C8E008F5; Thu, 28 Jan 2016 13:20:57 -0800 (PST)
+	id 49403E008F5; Thu, 28 Jan 2016 13:22:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,31 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92686E00852
-	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 13:20:55 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0SLKs9A009500
-	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 15:20:54 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0SLKshT017646
-	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 15:20:54 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 28 Jan 2016 15:20:54 -0600
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3C50E00803
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 13:22:11 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0SLMA8X015888
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 15:22:10 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0SLMAZH004464
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 15:22:10 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 28 Jan 2016 15:22:10 -0600
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u0SLKrBn004980;	Thu, 28 Jan 2016 15:20:53 -0600
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u0SLM9sS006089;	Thu, 28 Jan 2016 15:22:09 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 28 Jan 2016 16:20:50 -0500
-Message-ID: <1454016050-24525-1-git-send-email-j-stiffler@ti.com>
+Date: Thu, 28 Jan 2016 16:22:07 -0500
+Message-ID: <1454016127-25221-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH v2] linux: cmem: Update reserved CMEM regions
+Subject: [PATCH] ti-staging: Update to include uio device tree entries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,164 +45,389 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2016 21:20:57 -0000
+X-List-Received-Date: Thu, 28 Jan 2016 21:22:13 -0000
 Content-Type: text/plain
 
-* dra7xx:
-  - Increase DDR region required to pass OpenCL conformance
-  - Add OCMC region
-* k2e-evm, k2l-evm:
-  - Add reserved regions for these machines
+- Adds device tree entries for multiple devices that use uio driver
+- These entries are added for k2h, k2l & k2e : keystone2 platforms
 
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
-v2 changes:
-* Add more details to the commit message
+ recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi    |  32 ++++
+ recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi  |  58 +++++++
+ recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi    |  10 ++
+ .../linux/files/keystone/keystone-uio.dtsi         | 186 +++++++++++++++++++++
+ recipes-kernel/linux/linux-ti-staging_4.1.bb       |   3 +-
+ recipes-kernel/linux/ti-uio.inc                    |  24 +++
+ 6 files changed, 312 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
+ create mode 100644 recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi
+ create mode 100644 recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
+ create mode 100644 recipes-kernel/linux/files/keystone/keystone-uio.dtsi
+ create mode 100644 recipes-kernel/linux/ti-uio.inc
 
- recipes-kernel/linux/files/dra7xx/cmem.dtsi  | 20 +++++++++++--
- recipes-kernel/linux/files/k2e-evm/cmem.dtsi | 42 ++++++++++++++++++++++++++++
- recipes-kernel/linux/files/k2l-evm/cmem.dtsi | 42 ++++++++++++++++++++++++++++
- 3 files changed, 101 insertions(+), 3 deletions(-)
- create mode 100644 recipes-kernel/linux/files/k2e-evm/cmem.dtsi
- create mode 100644 recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-
-diff --git a/recipes-kernel/linux/files/dra7xx/cmem.dtsi b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-index d91faf9..c7781c4 100644
---- a/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-+++ b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-@@ -1,10 +1,20 @@
- / {
-         reserved-memory {
-+                #address-cells = <2>;
-+                #size-cells = <2>;
-+                ranges;
-+
-                 cmem_block_mem_0: cmem_block_mem@a0000000 {
--                        reg = <0x0 0xa0000000 0x0 0x0a000000>;
-+                        reg = <0x0 0xa0000000 0x0 0x0c000000>;
-                         no-map;
-                         status = "okay";
-                 };
-+
-+		cmem_block_mem_1_ocmc3: cmem_block_mem@40500000 {
-+			reg = <0x0 0x40500000 0x0 0x100000>;
-+			no-map;
-+			status = "okay";
-+		};
-         };
- 
-         cmem {
-@@ -19,8 +29,12 @@
-                 cmem_block_0: cmem_block@0 {
-                         reg = <0>;
-                         memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x0 0x0a000000>;
-+                        cmem-buf-pools = <1 0x0 0x0c000000>;
-                 };
--        };
- 
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			memory-region = <&cmem_block_mem_1_ocmc3>;
-+		};
-+        };
- };
-diff --git a/recipes-kernel/linux/files/k2e-evm/cmem.dtsi b/recipes-kernel/linux/files/k2e-evm/cmem.dtsi
+diff --git a/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi b/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
 new file mode 100644
-index 0000000..236b0ba
+index 0000000..36f41b0
 --- /dev/null
-+++ b/recipes-kernel/linux/files/k2e-evm/cmem.dtsi
-@@ -0,0 +1,42 @@
++++ b/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
+@@ -0,0 +1,32 @@
 +/ {
-+	reserved-memory {
-+		mpm_block_mem_0: mpm_block_mem@820000000 {
-+			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+			no-map;
-+			status = "okay";
++	soc {
++		uio_hyperlink0: hyperlink0 {
++			compatible = "ti,uio-ti-pdrv";
++			mem  = <0x21400000 0x00001000
++				0x40000000 0x10000000
++				0x0231a000 0x00002000>;
++			clocks = <&clkhyperlink0>;
++			interrupts	= <0 387 0x101>;
++			cfg-params
++			{
++				ti,serdes_refclk_khz = <312500>;
++				ti,serdes_maxserrate_khz = <6250000>;
++				ti,serdes_lanerate = "half";
++				ti,serdes_numlanes = <4>;
++				ti,serdes_c1 = <4 4 4 4>;
++				ti,serdes_c2 = <0 0 0 0>;
++				ti,serdes_cm = <0 0 0 0>;
++				ti,serdes_tx_att = <12 12 12 12>;
++				ti,serdes_tx_vreg = <4 4 4 4>;
++				ti,serdes_rx_att = <11 11 11 11>;
++				ti,serdes_rx_boost = <3 3 3 3>;
++			};
 +		};
-+
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
-+		cmem_block_mem_1: cmem_block_mem@00c100000 {
-+			reg = <0x00000000 0x0c000000 0x00000000 0x00180000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+		status = "okay";
-+
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x1E000000>;
-+		};
-+
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			memory-region = <&cmem_block_mem_1>;
++		uio_srss: srss {
++			compatible = "ti,uio-ti-pdrv";
++			mem  = <0x02330000 0x0000400>;
++			clocks=<&clksr>;
++			interrupts = <0 0x173 0xf01>;
 +		};
 +	};
 +};
-diff --git a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
+diff --git a/recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi b/recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi
 new file mode 100644
-index 0000000..236b0ba
+index 0000000..cabe0b8
 --- /dev/null
-+++ b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-@@ -0,0 +1,42 @@
++++ b/recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi
+@@ -0,0 +1,58 @@
 +/ {
-+	reserved-memory {
-+		mpm_block_mem_0: mpm_block_mem@820000000 {
-+			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+			no-map;
-+			status = "okay";
++	soc {
++		uio_hyperlink0: hyperlink0 {
++			compatible = "ti,uio-module-drv";
++			mem  = <0x21400000 0x00001000
++				0x40000000 0x10000000
++				0x0231a000 0x00002000>;
++			clocks = <&clkhyperlink0>;
++			interrupts	= <0 387 0x101>;
++			cfg-params
++			{
++				ti,serdes_refclk_khz = <312500>;
++				ti,serdes_maxserrate_khz = <6250000>;
++				ti,serdes_lanerate = "half";
++				ti,serdes_numlanes = <4>;
++				ti,serdes_c1 = <4 4 4 4>;
++				ti,serdes_c2 = <0 0 0 0>;
++				ti,serdes_cm = <0 0 0 0>;
++				ti,serdes_tx_att = <12 12 12 12>;
++				ti,serdes_tx_vreg = <4 4 4 4>;
++				ti,serdes_rx_att = <11 11 11 11>;
++				ti,serdes_rx_boost = <3 3 3 3>;
++			};
 +		};
 +
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
-+			no-map;
-+			status = "okay";
++		uio_hyperlink1: hyperlink1 {
++			compatible = "ti,uio-module-drv";
++			mem  = <0x21400000 0x00001000
++				0x28000000 0x08000000
++				0x0231c000 0x00002000>;
++			clocks = <&clkhyperlink1>;
++			interrupts	= <0 388 0x101>;
++			cfg-params
++			{
++				ti,serdes_refclk_khz = <312500>;
++				ti,serdes_maxserrate_khz = <6250000>;
++				ti,serdes_lanerate = "half";
++				ti,serdes_numlanes = <4>;
++				ti,serdes_c1 = <4 4 4 4>;
++				ti,serdes_c2 = <0 0 0 0>;
++				ti,serdes_cm = <0 0 0 0>;
++				ti,serdes_tx_att = <12 12 12 12>;
++				ti,serdes_tx_vreg = <4 4 4 4>;
++				ti,serdes_rx_att = <11 11 11 11>;
++				ti,serdes_rx_boost = <3 3 3 3>;
++			};
 +		};
 +
-+		cmem_block_mem_1: cmem_block_mem@00c100000 {
-+			reg = <0x00000000 0x0c000000 0x00000000 0x00180000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+		status = "okay";
-+
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x1E000000>;
-+		};
-+
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			memory-region = <&cmem_block_mem_1>;
++		uio_srio: srio {
++			compatible = "ti,uio-module-drv";
++			mem  = <0x0232C000 0x00002000
++				0x02900000 0x00040000
++				0x0232C000 0x00002000>;
++			clocks=<&clksrio>;
++			interrupts = <0 154 0xf01>;
 +		};
 +	};
 +};
+diff --git a/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi b/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
+new file mode 100644
+index 0000000..0334483
+--- /dev/null
++++ b/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
+@@ -0,0 +1,10 @@
++/ {
++	soc {
++		uio_srss: srss {
++			compatible = "ti,uio-ti-pdrv";
++			mem  = <0x02330000 0x0000400>;
++			clocks=<&clksr>;
++			interrupts = <0 0x173 0xf01>;
++		};
++	};
++};
+diff --git a/recipes-kernel/linux/files/keystone/keystone-uio.dtsi b/recipes-kernel/linux/files/keystone/keystone-uio.dtsi
+new file mode 100644
+index 0000000..43b183d
+--- /dev/null
++++ b/recipes-kernel/linux/files/keystone/keystone-uio.dtsi
+@@ -0,0 +1,186 @@
++/ {
++	soc {
++		uio_mpax: mpax {
++			compatible = "ti,uio-module-drv";
++			mem  = <0x00bc00000 0x00000a00>;
++		};
++
++		uio_edma3: edma3 {
++			compatible = "ti,uio-module-drv";
++			mem = <0x02700000 0x000C0000>;
++		};
++		uio_secmgr: secmgr {
++			compatible = "ti,uio-module-drv";
++			mem  = <0x002500100 0x00000004>;
++		};
++		uio_qmss: qmss {
++			compatible = "ti,uio-module-drv";
++			mem  = <0x02a00000 0x00100000
++				0x23a00000 0x00200000>;
++		};
++
++		uio_qpend0: qpend0 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 44 0xf04>;
++			interrupt-mode = <1>; /* Interrupt mode oneshot */
++			cfg-params
++			{
++				ti,qm-queue = <662>;
++			};
++		};
++
++		uio_qpend1: qpend1 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 45 0xf04>;
++			interrupt-mode = <1>; /* Interrupt mode oneshot */
++			cfg-params
++			{
++				ti,qm-queue = <663>;
++			};
++		};
++
++		uio_qpend2: qpend2 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 46 0xf04>;
++			interrupt-mode = <1>; /* Interrupt mode oneshot */
++			cfg-params
++			{
++				ti,qm-queue = <664>;
++			};
++		};
++
++		uio_qpend3: qpend3 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 47 0xf04>;
++			interrupt-mode = <1>; /* Interrupt mode oneshot */
++			cfg-params
++			{
++				ti,qm-queue = <665>;
++			};
++		};
++
++		/* The following uio cic2 entries allow access to interupt output
++		 * by the cic2 controller: The actual input event triggering the
++		 * interrupt is assumed to be programmed other drivers
++		 */
++		uio_cic2_out32: cic2_out32 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 451 0xf01>;
++		};
++
++		uio_cic2_out33: cic2_out33 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 452 0xf01>;
++		};
++
++		uio_cic2_out34: cic2_out34 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 453 0xf01>;
++		};
++
++		uio_cic2_out35: cic2_out35 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 454 0xf01>;
++		};
++
++		uio_cic2_out36: cic2_out36 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 455 0xf01>;
++		};
++
++		uio_cic2_out37: cic2_out37 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 456 0xf01>;
++		};
++
++		uio_cic2_out38: cic2_out38 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 457 0xf01>;
++		};
++
++		uio_cic2_out39: cic2_out39 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 458 0xf01>;
++		};
++
++		uio_cic2_out40: cic2_out40 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 459 0xf01>;
++		};
++
++		uio_cic2_out41: cic2_out41 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 460 0xf01>;
++		};
++
++		uio_cic2_out42: cic2_out42 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 461 0xf01>;
++		};
++
++		uio_cic2_out43: cic2_out43 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 462 0xf01>;
++		};
++
++		uio_cic2_out44: cic2_out44 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 463 0xf01>;
++		};
++
++		uio_cic2_out45: cic2_out45 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 464 0xf01>;
++		};
++
++		uio_cic2_out46: cic2_out46 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 465 0xf01>;
++		};
++
++		uio_cic2_out47: cic2_out47 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 466 0xf01>;
++		};
++
++		uio_cic2_out18: cic2_out18 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 467 0xf01>;
++		};
++
++		uio_cic2_out19: cic2_out19 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 468 0xf01>;
++		};
++
++		uio_cic2_out22: cic2_out22 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 469 0xf01>;
++		};
++
++		uio_cic2_out23: cic2_out23 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 470 0xf01>;
++		};
++
++		uio_cic2_out50: cic2_out50 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 471 0xf01>;
++		};
++
++		uio_cic2_out51: cic2_out51 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 472 0xf01>;
++		};
++
++		uio_cic2_out66: cic2_out66 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 473 0xf01>;
++		};
++
++		uio_cic2_out67: cic2_out67 {
++			compatible = "ti,uio-module-drv";
++			interrupts = <0 474 0xf01>;
++		};
++	};
++};
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 59805c6..842ed4e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -8,6 +8,7 @@ inherit kernel
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+ require recipes-kernel/linux/cmem.inc
++require recipes-kernel/linux/ti-uio.inc
+ 
+ # Look in the generic major.minor directory for files
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+@@ -68,7 +69,7 @@ SRCREV = "08ad1740b59cc3aef52a2612b1e807a3e844583c"
+ PV = "4.1.16+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+diff --git a/recipes-kernel/linux/ti-uio.inc b/recipes-kernel/linux/ti-uio.inc
+new file mode 100644
+index 0000000..82cbbce
+--- /dev/null
++++ b/recipes-kernel/linux/ti-uio.inc
+@@ -0,0 +1,24 @@
++SRC_URI_append_keystone += "file://keystone-uio.dtsi"
++SRC_URI_append_k2hk-evm += "file://k2hk-uio.dtsi"
++SRC_URI_append_k2l-evm += "file://k2l-uio.dtsi"
++SRC_URI_append_k2e-evm += "file://k2e-uio.dtsi"
++
++DTSI_LIST = ""
++DTSI_LIST_append_keystone += "keystone-uio.dtsi"
++DTSI_LIST_append_k2hk-evm += "k2hk-uio.dtsi"
++DTSI_LIST_append_k2l-evm += "k2l-uio.dtsi"
++DTSI_LIST_append_k2e-evm += "k2e-uio.dtsi"
++
++do_setup_uio() {
++    for dtsi in ${DTSI_LIST}
++    do
++        cp ${WORKDIR}/${dtsi} ${S}/arch/arm/boot/dts/
++        for dtb in ${KERNEL_DEVICETREE}
++        do
++            dts=`echo $dtb | sed -e 's|dtb$|dts|'`
++            echo "#include \"${dtsi}\"" >> ${S}/arch/arm/boot/dts/$dts
++        done
++    done
++}
++
++do_patch[postfuncs] += "do_setup_uio"
 -- 
 1.9.1
 
