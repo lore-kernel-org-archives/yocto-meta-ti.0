@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 387D9E00B5A; Thu, 28 Jan 2016 06:41:19 -0800 (PST)
+	id 8D53AE00B37; Thu, 28 Jan 2016 06:41:19 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,29 +12,29 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5076E009EA
-	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 06:41:16 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0SEfFKN026718
-	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 08:41:15 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0SEfFMw029323
-	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 08:41:15 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 28 Jan 2016 08:41:15 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A79B7E00AAF
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 06:41:15 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0SEfEQQ026711
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 08:41:14 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0SEfE0G018718
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 08:41:14 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 28 Jan 2016 08:41:14 -0600
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u0SEfDlG029208;	Thu, 28 Jan 2016 08:41:15 -0600
+	u0SEfDlC029208;	Thu, 28 Jan 2016 08:41:14 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 28 Jan 2016 09:41:07 -0500
-Message-ID: <1453992071-23149-8-git-send-email-j-stiffler@ti.com>
+Date: Thu, 28 Jan 2016 09:41:03 -0500
+Message-ID: <1453992071-23149-4-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1453992071-23149-1-git-send-email-j-stiffler@ti.com>
 References: <1453992071-23149-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 07/11] pa-lld: Upgrade to version 03.00.01.07
+Subject: [PATCH 03/11] hyplnk-lld: Bump SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,34 +52,32 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/pa-lld/pa-lld.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/hyplnk-lld/hyplnk-lld.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index 396278d..7b09ceb 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -9,16 +9,16 @@ PA_LLD_GIT_PROTOCOL = "git"
- PA_LLD_GIT_BRANCH = "master"
- PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+index ecd68e9..9f7ac6a 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+@@ -13,15 +13,15 @@ HYPLNK_GIT_PROTOCOL = "git"
+ HYPLNK_GIT_BRANCH = "master"
+ HYPLNK_GIT_DESTSUFFIX = "git/ti/drv/${LLDNAME}"
  
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
--PA_LLD_SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.07"
-+PA_LLD_SRCREV = "cad5bc0b422a7ac3c6fa013fc2288447318329a0"
+-# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.05
+-HYPLNK_SRCREV = "ea2a634578626deaa69608a189d5d7e84e5b7127"
++# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.05A
++HYPLNK_SRCREV = "2acb36a78fee9691a9433f0ce23cf00561123934"
  
- BRANCH = "${PA_LLD_GIT_BRANCH}"
- SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
-             file://0001-makefile_armv7-fix-missing-separator-error.patch"
- SRCREV = "${PA_LLD_SRCREV}"
+ BRANCH="${HYPLNK_GIT_BRANCH}"
+ SRC_URI = "${HYPLNK_GIT_URI};destsuffix=${HYPLNK_GIT_DESTSUFFIX};protocol=${HYPLNK_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${HYPLNK_SRCREV}"
  
--PV = "03.00.01.05"
--INC_PR = "r3"
-+PV = "03.00.01.07"
-+INC_PR = "r0"
+ PV = "2.1.0.5"
+-INC_PR = "r2"
++INC_PR = "r3"
  
- S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
- 
+ DEVICELIST_k2hk-evm = "k2h k2k"
+ DEVICELIST_k2e-evm  = "k2e"
 -- 
 1.9.1
 
