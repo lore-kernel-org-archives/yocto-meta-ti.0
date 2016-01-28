@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1FFAEE00BC6; Thu, 28 Jan 2016 10:44:00 -0800 (PST)
+	id 46BA1E00B3D; Thu, 28 Jan 2016 10:44:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5BF10E00C00
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5BCC7E00BFE
 	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 10:43:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CBEBA52A60; Thu, 28 Jan 2016 18:43:53 +0000 (UTC)
+	id 1021B52AB9; Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160128184353.CBEBA52A60@arago-project.org>
-Date: Thu, 28 Jan 2016 18:43:53 +0000 (UTC)
+Message-Id: <20160128184354.1021B52AB9@arago-project.org>
+Date: Thu, 28 Jan 2016 18:43:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : iqn2-lld: Upgrade to version 1.0.0.10
+Subject: Jacob Stiffler : pa-lld: Upgrade to version 03.00.01.07
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: f5e6bf817f0ad9347e9fcf9839f302509bdebd3f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f5e6bf817f0ad9347e9fcf9839f302509bdebd3f
+Commit: 1acb5cdb893e21072547d227964724150d11e87e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1acb5cdb893e21072547d227964724150d11e87e
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Jan 28 20:41:04 2016 +0000
+Date:   Thu Jan 28 20:41:07 2016 +0000
 
-iqn2-lld: Upgrade to version 1.0.0.10
+pa-lld: Upgrade to version 03.00.01.07
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/iqn2-lld/iqn2-lld.inc |    8 ++++----
+ recipes-bsp/pa-lld/pa-lld.inc |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/iqn2-lld/iqn2-lld.inc b/recipes-bsp/iqn2-lld/iqn2-lld.inc
-index 4a43a26..1d99d41 100644
---- a/recipes-bsp/iqn2-lld/iqn2-lld.inc
-+++ b/recipes-bsp/iqn2-lld/iqn2-lld.inc
-@@ -6,15 +6,15 @@ IQN2_LLD_GIT_PROTOCOL = "git"
- IQN2_LLD_GIT_BRANCH = "master"
- IQN2_LLD_GIT_DESTSUFFIX = "git/ti/drv/iqn2"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index 396278d..7b09ceb 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -9,16 +9,16 @@ PA_LLD_GIT_PROTOCOL = "git"
+ PA_LLD_GIT_BRANCH = "master"
+ PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
  
--# Following commit corresponds to DEV.IQN_LLD.01.00.00.08F
--IQN2_LLD_SRCREV = "29d5358b944f1447c024263f86e8c71784440b99"
-+# Following commit corresponds to DEV.IQN_LLD.01.00.00.10
-+IQN2_LLD_SRCREV = "dfc6bdd3b397b58e234f74eadda6d79ee399e682"
+-# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
+-PA_LLD_SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.07"
++PA_LLD_SRCREV = "cad5bc0b422a7ac3c6fa013fc2288447318329a0"
  
- BRANCH = "${IQN2_LLD_GIT_BRANCH}"
- SRC_URI = "${IQN2_LLD_GIT_URI};destsuffix=${IQN2_LLD_GIT_DESTSUFFIX};protocol=${IQN2_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${IQN2_LLD_SRCREV}"
+ BRANCH = "${PA_LLD_GIT_BRANCH}"
+ SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
+             file://0001-makefile_armv7-fix-missing-separator-error.patch"
+ SRCREV = "${PA_LLD_SRCREV}"
  
--PV = "1.0.0.8"
--INC_PR = "r1"
-+PV = "1.0.0.10"
+-PV = "03.00.01.05"
+-INC_PR = "r3"
++PV = "03.00.01.07"
 +INC_PR = "r0"
  
- COMPATIBLE_MACHINE = "k2l-evm"
+ S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
  
 
 
