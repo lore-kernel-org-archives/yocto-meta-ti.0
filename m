@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2B5C2E00B37; Thu, 28 Jan 2016 10:43:57 -0800 (PST)
+	id 2CAA2E00AEA; Thu, 28 Jan 2016 10:43:57 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0613E00B2E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E03BCE00AEA
 	for <meta-ti@yoctoproject.org>; Thu, 28 Jan 2016 10:43:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8C33B52AAF; Thu, 28 Jan 2016 18:43:50 +0000 (UTC)
+	id 48D7D52AA8; Thu, 28 Jan 2016 18:43:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160128184350.8C33B52AAF@arago-project.org>
+Message-Id: <20160128184350.48D7D52AA8@arago-project.org>
 Date: Thu, 28 Jan 2016 18:43:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : traceframework: Upgrade to version 01.01.01.08
+Subject: Jacob Stiffler : pa-lld: Upgrade to version 03.00.01.07
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 36b78cc4fad01b0a94762c804a2d3982f0a49787
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=36b78cc4fad01b0a94762c804a2d3982f0a49787
+Commit: 691e7d5699983d739bfc78aa688449449b99765c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=691e7d5699983d739bfc78aa688449449b99765c
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Jan 28 20:41:11 2016 +0000
+Date:   Thu Jan 28 20:41:07 2016 +0000
 
-traceframework: Upgrade to version 01.01.01.08
+pa-lld: Upgrade to version 03.00.01.07
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/traceframework/traceframework_git.bb |    8 ++++----
+ recipes-bsp/pa-lld/pa-lld.inc |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
-index 31818c6..298ead4 100644
---- a/recipes-bsp/traceframework/traceframework_git.bb
-+++ b/recipes-bsp/traceframework/traceframework_git.bb
-@@ -7,15 +7,15 @@ TRACEFRAMEWORK_GIT_PROTOCOL = "git"
- TRACEFRAMEWORK_GIT_BRANCH = "master"
- TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index 396278d..7b09ceb 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -9,16 +9,16 @@ PA_LLD_GIT_PROTOCOL = "git"
+ PA_LLD_GIT_BRANCH = "master"
+ PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
  
--# Below commit ID corresponds to DEV.TFWK-01.01.01.07
--TRACEFRAMEWORK_SRCREV = "8d9c0e3a5bcb43aad98a794c31f42b652c6b3b53"
-+# Below commit ID corresponds to DEV.TFWK-01.01.01.08
-+TRACEFRAMEWORK_SRCREV = "4e84c37c456ca62188cc9560d4ebf22452dab01f"
+-# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.05A"
+-PA_LLD_SRCREV = "ae3aa3e80ecf64fe5a16515d134a6bc217220e2e"
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.07"
++PA_LLD_SRCREV = "cad5bc0b422a7ac3c6fa013fc2288447318329a0"
  
- BRANCH="${TRACEFRAMEWORK_GIT_BRANCH}"
- SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${TRACEFRAMEWORK_SRCREV}"
+ BRANCH = "${PA_LLD_GIT_BRANCH}"
+ SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
+             file://0001-makefile_armv7-fix-missing-separator-error.patch"
+ SRCREV = "${PA_LLD_SRCREV}"
  
--PV = "01.01.01.07"
--PR = "r4"
-+PV = "01.01.01.08"
-+PR = "r0"
+-PV = "03.00.01.05"
+-INC_PR = "r3"
++PV = "03.00.01.07"
++INC_PR = "r0"
  
- COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+ 
 
 
