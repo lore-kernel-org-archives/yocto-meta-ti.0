@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DB161E00BC6; Fri, 29 Jan 2016 09:06:54 -0800 (PST)
+	id BB2C8E009C5; Fri, 29 Jan 2016 11:38:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,33 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9CCAE00ADD
-	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 09:06:53 -0800 (PST)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 164E2E0073D
+	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 11:38:13 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0TH6qDH000819
-	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 11:06:52 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0TH6qVw011901
-	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 11:06:52 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 29 Jan 2016 11:06:52 -0600
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0TJcClX000362
+	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 13:38:12 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0TJcCgV027127
+	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 13:38:12 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 29 Jan 2016 13:38:12 -0600
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u0TH6qHW019914;	Fri, 29 Jan 2016 11:06:52 -0600
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u0TJcB3H007471;	Fri, 29 Jan 2016 13:38:12 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 29 Jan 2016 12:06:50 -0500
-Message-ID: <1454087210-29597-1-git-send-email-j-stiffler@ti.com>
+Date: Fri, 29 Jan 2016 14:38:08 -0500
+Message-ID: <1454096288-13840-2-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1454096288-13840-1-git-send-email-j-stiffler@ti.com>
+References: <1454096288-13840-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH] conf: machine: am57xx-evm, dra7xx-evm: Increase max_leb_cnt
+Subject: [PATCH 2/2] netapi: Only build binaries relevent to the machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,44 +47,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2016 17:06:54 -0000
+X-List-Received-Date: Fri, 29 Jan 2016 19:38:14 -0000
 Content-Type: text/plain
-
-* With the addition of the video analytics demo, the filesystem has
-  exceeded size limited by the previous max_leb_cnt.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- conf/machine/am57xx-evm.conf | 2 +-
- conf/machine/dra7xx-evm.conf | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/netapi/netapi-test_git.bb | 4 ++--
+ recipes-ti/netapi/netapi.inc         | 9 +++++++--
+ recipes-ti/netapi/netapi_git.bb      | 4 +---
+ 3 files changed, 10 insertions(+), 7 deletions(-)
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 8d5d5cc..e32b98f 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -23,7 +23,7 @@ UBOOT_MACHINE = "am57xx_evm_config"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 8192"
+diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
+index 1347d34..3b7825c 100644
+--- a/recipes-ti/netapi/netapi-test_git.bb
++++ b/recipes-ti/netapi/netapi-test_git.bb
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "Provides test and application binaries using NETAPI module"
+-COMPATIBLE_MACHINE = "keystone"
++
+ DEPENDS = "netapi ipsecmgr"
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 9bfcb5c..986b8e2 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -23,7 +23,7 @@ UBOOT_MACHINE = "dra7xx_evm_config"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 8192"
+ include netapi.inc
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ 
+diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
+index e497b1a..0e7b04b 100644
+--- a/recipes-ti/netapi/netapi.inc
++++ b/recipes-ti/netapi/netapi.inc
+@@ -1,15 +1,20 @@
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f2307287ca2074"
+ 
++COMPATIBLE_MACHINE = "keystone"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
+ 
+ # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
+ SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
+ PV = "01.01.00.06"
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+-DEVICELIST = "k2h k2k k2l k2e"
++DEVICELIST_k2hk-evm = "k2h k2k"
++DEVICELIST_k2l-evm  = "k2l"
++DEVICELIST_k2e-evm  = "k2e"
+ 
+ CHOICELIST = "yes no"
+ 
+diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
+index 298a86f..4427ecc 100644
+--- a/recipes-ti/netapi/netapi_git.bb
++++ b/recipes-ti/netapi/netapi_git.bb
+@@ -1,12 +1,10 @@
+ DESCRIPTION = "Provides NETAPI module: TI user space network library"
+ 
+-COMPATIBLE_MACHINE = "keystone"
+-
+ DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
+ 
+ include netapi.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ 
 -- 
 1.9.1
 
