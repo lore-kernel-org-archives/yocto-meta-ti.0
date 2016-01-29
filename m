@@ -1,66 +1,42 @@
-Return-Path: <winiston@futuraautomation.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B4C9DE00B9E; Fri, 29 Jan 2016 02:14:53 -0800 (PST)
+	id 3120AE00B9E; Fri, 29 Jan 2016 03:33:32 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [209.85.220.51 listed in list.dnswl.org]
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8720AE00A92
-	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 02:14:50 -0800 (PST)
-Received: by mail-pa0-f51.google.com with SMTP id cy9so39352647pac.0
-	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 02:14:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=futuraautomation-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:from:to:subject:date:mime-version:content-type
-	:importance:disposition-notification-to;
-	bh=0vf3VOmYYm9dyXgbBgzWVlwUxIccI28cLi8WCTzIjaY=;
-	b=OprUDdf1sz0eSFA+e95/O6DxzJwtufJL9FUDQVh6k2TMlubs1KWfYEDqLXP+zFQZNP
-	GzMa8fESx9H/1WJNm+zGvtV0LNAtxTicXL/7laORh5BfC9hI13NaZK2NWf9YSK/qrlds
-	1qUrZZ1MKADtcs9EW55SlFCpMaTa4bDGLVRE4duXpJDBDrWItaGhuR0/rgJw1uI6id0B
-	UbkDL8bD0He3keiEUb3EGifEmOu3HX99eeIPhaO6Lqv570GVjjyUCYJvny++MakBS/oO
-	f5lKskGkRjTdDLtSrPKlUBGOj5yaOayxBAtXkX9tqVB6N/2zefw2iJPqFuqk7469BkoC
-	zPTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:from:to:subject:date:mime-version
-	:content-type:importance:disposition-notification-to;
-	bh=0vf3VOmYYm9dyXgbBgzWVlwUxIccI28cLi8WCTzIjaY=;
-	b=hBk+I1L7+8kVcH66lhHOnFBGxb10hj+AIK1cEe29iSsnyWcSM3gp2e1f4c2kJcc9OV
-	5g7EyMPNcQkzUXbNWG91JSAOV8Pv+k8ZKZnQuh0t1I+Waw49qJ3aTCLkkiL2LOTwCI1i
-	oEzlkXkzAxZ07CFoF2FNvBUQLfCcHvsKjwAmoDyhVYPGirDfDZBc3R2k3lyltvSK1LaN
-	cxBTiHWYsQfpLNACsF0zs3Ju6/cWgH3ydla2AggY5NlLGDcj9Hoz65tLDBpu5TnyItg1
-	0zg0bygfIBp99hIlEVtdMr1APnSHhIVT1NXNdQ0dPyRuyS8dGJ/BqKCdC6t0nm4ZR4G2
-	pxOQ==
-X-Gm-Message-State: AG10YORbZkJ4zBuAfvRoiCzfrHUV7wDbEmiKJQa5vHB+DD/NjwWdwKzEr2rCSnJgDAXTpg==
-X-Received: by 10.66.102.70 with SMTP id fm6mr12158215pab.80.1454062489791;
-	Fri, 29 Jan 2016 02:14:49 -0800 (PST)
-Received: from RD3 ([59.99.236.185]) by smtp.gmail.com with ESMTPSA id
-	o4sm22373764pfa.85.2016.01.29.02.14.46 for <meta-ti@yoctoproject.org>
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Jan 2016 02:14:48 -0800 (PST)
-Message-ID: <32F7239B343B45C78216EBDDA2AC66CA@RD3>
-From: <winiston@futuraautomation.com>
-To: "yocto texas" <meta-ti@yoctoproject.org>
-Date: Fri, 29 Jan 2016 15:49:03 +0530
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8FB8FE00A92
+	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 03:33:26 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u0TBXQQh010445
+	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 05:33:26 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u0TBXP9n026096
+	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 05:33:26 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 29 Jan 2016 05:33:26 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u0TBXP9A003813	for <meta-ti@yoctoproject.org>; Fri, 29 Jan 2016 05:33:25
+	-0600
+Date: Fri, 29 Jan 2016 06:33:25 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <492461532.377.1454067205431.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Priority: 1
-X-MSMail-Priority: High
-Importance: High
-X-Mailer: Microsoft Windows Live Mail 15.4.3555.308
-X-MimeOLE: Produced By Microsoft MimeOLE V15.4.3555.308
-Subject: Error while writing image on sd card
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2016-01-29_06-24-29
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -73,142 +49,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2016 10:14:53 -0000
-Content-Type: multipart/alternative;
-	boundary="----=_NextPart_000_00EC_01D15AAC.940ED5D0"
+X-List-Received-Date: Fri, 29 Jan 2016 11:33:32 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_376_402131463.1454067205430"
 
-------=_NextPart_000_00EC_01D15AAC.940ED5D0
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+------=_Part_376_402131463.1454067205430
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Dear,
+<html>
+<head>
+<title>
+Status for 01/29/16
+</title>
+</head>
+<body>
 
-Host system : Ubuntu 14.04
-Target system :  AM437x-evm
+<h2>Status for 01/29/16</h2>
 
-I tried to write the image on the sd card, It spits out the error.   I =
-am=20
-using  card reader. In the device tree, card reader detects as /dev/sdb=20
-& /dev/sde and  sd card detects as /dev/sde1 , /dev/sde2 & /dev/sde3     =
-.=20
+<h2>BUILD_ID: build-2016-01-29_06-25-45</h2>
 
-Please see the below output for my writing command.
+<h2>Clean Build: false</h2>
 
-winiston@winiston-VirtualBox:~/poky/build$ sudo=20
-$HOME/poky/scripts/contrib/mkefidisk.sh /dev/sde =
-\tmp/deploy/images/am437x-evm/core-image-minimal-am437x-evm.tar.bz2 =
-/dev/sda
-Image details
-    image:=20
-'tmp/deploy/images/am437x-evm/core-image-minimal-am437x-evm.tar.bz2' ->=20
-'core-image-minimal-am437x-evm-20160129065004.rootfs.tar.bz2'
-     size: 2180726 bytes
-modified: 2016-01-29 12:21:04.000000000 +0530
-     type: bzip2 compressed data, block size =3D 900k
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-Device details
-  device: /dev/sde
-  vendor: Multiple
-   model: Flash Reader
-    size: 16088301568 bytes
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
-Prepare EFI image on /dev/sde [y/N]? y
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
-Boot partition size:   20 MB (/dev/sde1)
-ROOTFS partition size: 15264 MB (/dev/sde2)
-Swap partition size:   804 MB (/dev/sde3)
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
-Partitioning installation media (/dev/sde)
-Formatting partitions
-Failed to mount=20
-tmp/deploy/images/am437x-evm/core-image-minimal-am437x-evm.tar.bz2
-Failed to mount rootfs.img
-Preparing boot partition
-Failed to copy vmlinuz
-Failed to copy EFI dir
-No EFI bootloader configuration found
-winiston@winiston-VirtualBox:~/poky/build$
-
-What could be the problem? How do I burn image on sd card?
+</body>
+</html>
 
 
-Regards,
-Winiston.P
-Futura Automation Pvt Ltd.
-
-Ph :91-80-28375290 / 28375295
-Fax :91-80-28375291
-
-------=_NextPart_000_00EC_01D15AAC.940ED5D0
-Content-Type: text/html;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<HTML><HEAD></HEAD>
-<BODY dir=3Dltr>
-<DIV dir=3Dltr>
-<DIV style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: #000000">
-<DIV><FONT face=3D"Times New Roman">Dear,<BR></FONT></DIV>
-<DIV><FONT face=3D"Times New Roman">Host system : Ubuntu =
-14.04</FONT></DIV>
-<DIV><FONT face=3D"Times New Roman">Target system :&nbsp;=20
-AM437x-evm</FONT></DIV><FONT face=3D"Times New Roman">
-<DIV><BR>I tried to write the image on the sd card, It spits out the=20
-error.&nbsp;&nbsp; I am <BR>using&nbsp; card reader. In the device tree, =
-card=20
-reader detects as<FONT color=3D#0000ff> /dev/sdb <BR>&amp; =
-/dev/sde</FONT>=20
-and&nbsp; sd card detects as <FONT color=3D#0000ff>/dev/sde1 , /dev/sde2 =
-&amp;=20
-/dev/sde3</FONT>&nbsp;&nbsp;&nbsp;&nbsp; . </DIV>
-<DIV><BR>Please see the below output for my writing =
-command.<BR><BR></FONT><A=20
-style=3D'href: =
-"mailto:winiston@winiston-VirtualBox:~/poky/build$"'><FONT=20
-face=3D"Times New =
-Roman">winiston@winiston-VirtualBox:~/poky/build$</FONT></A><FONT=20
-face=3D"Times New Roman"> sudo =
-<BR>$HOME/poky/scripts/contrib/mkefidisk.sh=20
-/dev/sde =
-\tmp/deploy/images/am437x-evm/core-image-minimal-am437x-evm.tar.bz2=20
-/dev/sda<BR>Image details<BR>&nbsp;&nbsp;&nbsp; image:=20
-<BR>'tmp/deploy/images/am437x-evm/core-image-minimal-am437x-evm.tar.bz2' =
--&gt;=20
-<BR>'core-image-minimal-am437x-evm-20160129065004.rootfs.tar.bz2'<BR>&nbs=
-p;&nbsp;&nbsp;&nbsp;=20
-size: 2180726 bytes<BR>modified: 2016-01-29 12:21:04.000000000=20
-+0530<BR>&nbsp;&nbsp;&nbsp;&nbsp; type: bzip2 compressed data, block =
-size =3D=20
-900k<BR><BR>Device details<BR>&nbsp; device: /dev/sde<BR>&nbsp; vendor:=20
-Multiple<BR>&nbsp;&nbsp; model: Flash Reader<BR>&nbsp;&nbsp;&nbsp; size: =
-
-16088301568 bytes<BR><BR>Prepare EFI image on /dev/sde [y/N]? =
-y<BR><BR>Boot=20
-partition size:&nbsp;&nbsp; 20 MB (/dev/sde1)<BR>ROOTFS partition size: =
-15264 MB=20
-(/dev/sde2)<BR>Swap partition size:&nbsp;&nbsp; 804 MB=20
-(/dev/sde3)<BR><BR>Partitioning installation media =
-(/dev/sde)<BR>Formatting=20
-partitions<BR>Failed to mount=20
-<BR>tmp/deploy/images/am437x-evm/core-image-minimal-am437x-evm.tar.bz2<BR=
->Failed=20
-to mount rootfs.img<BR>Preparing boot partition<BR>Failed to copy=20
-vmlinuz<BR>Failed to copy EFI dir<BR>No EFI bootloader configuration=20
-found<BR></FONT><A=20
-style=3D'href: =
-"mailto:winiston@winiston-VirtualBox:~/poky/build$"'><FONT=20
-face=3D"Times New =
-Roman">winiston@winiston-VirtualBox:~/poky/build$</FONT></A><BR><BR><FONT=
-=20
-face=3D"Times New Roman">What could be the problem? How do I burn image =
-on sd=20
-card?</FONT><BR></DIV>
-<DIV>&nbsp;</DIV>
-<DIV=20
-style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: =
-#000000">Regards,<BR>Winiston.P<BR>Futura=20
-Automation Pvt Ltd.<BR><BR>Ph :91-80-28375290 / 28375295<BR>Fax=20
-:91-80-28375291<BR></DIV></DIV></DIV></BODY></HTML>
-
-------=_NextPart_000_00EC_01D15AAC.940ED5D0--
+------=_Part_376_402131463.1454067205430--
