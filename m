@@ -1,27 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B9A4FE00A92; Mon,  1 Feb 2016 14:09:07 -0800 (PST)
+	id D2432E00B37; Mon,  1 Feb 2016 14:09:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,LOTS_OF_MONEY,
-	RDNS_DYNAMIC autolearn=no version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
-	*  0.0 LOTS_OF_MONEY Huge... sums of money
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36E38E0073D
-	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:03 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0D67E00852
+	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 05B8D529C7; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
+	id 6D00352A85; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160201220903.05B8D529C7@arago-project.org>
+Message-Id: <20160201220903.6D00352A85@arago-project.org>
 Date: Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : linux-ti-staging: Work around to avoid race condition with external module
+Subject: Jacob Stiffler : dsptop: Bump SRCREV to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,48 +33,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2016 22:09:07 -0000
+X-List-Received-Date: Mon, 01 Feb 2016 22:09:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: a34131462270ed70116d264495e8d13586956b6e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a34131462270ed70116d264495e8d13586956b6e
+Commit: a34942b127187e94fdcfd76cefc19ddacbc95996
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a34942b127187e94fdcfd76cefc19ddacbc95996
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Jan 29 02:29:41 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Feb  2 03:16:45 2016 +0000
 
-linux-ti-staging: Work around to avoid race condition with external module
+dsptop: Bump SRCREV to the latest
 
-Currently there is an issue with compiling external kernel module
-which depends on symbols from another kernel module which is part of the
-list of modules configured to be built as modules in the default config.
-
-This work around allows to avoid the issue by copying the module
-symbols to the kernel directory after making the kernel modules build.
-
-This issue is already fixed in oe-core: master branch as of date
- - this is just work around before updating to latest oe-core
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+ recipes-bsp/dsptop/debugss-module-drv_git.bb |    2 +-
+ recipes-bsp/dsptop/dsptop.inc                |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 59805c6..dfe9a44 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -84,3 +84,7 @@ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
- KERNEL_GIT_PROTOCOL = "git"
- SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-             file://defconfig"
-+
-+do_compile_kernelmodules_append() {
-+	cp Module.symvers ${STAGING_KERNEL_BUILDDIR}/
-+}
+diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+index 6856d60..bf7da44 100644
+--- a/recipes-bsp/dsptop/debugss-module-drv_git.bb
++++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
+ 
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
+ PV_append = "+git${SRCPV}"
+ 
+diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
+index 5897f25..8d23ad0 100644
+--- a/recipes-bsp/dsptop/dsptop.inc
++++ b/recipes-bsp/dsptop/dsptop.inc
+@@ -1,7 +1,7 @@
+ # This corresponds to version 1.2.0
+-SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
++SRCREV = "edf5670075cf6cf42f46654d284f9f78c1c123a1"
+ PV = "1.2.0"
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
+ 
 
 
