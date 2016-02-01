@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 256C4E00B9D; Mon,  1 Feb 2016 14:09:15 -0800 (PST)
+	id 24D2BE00B5C; Mon,  1 Feb 2016 14:09:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E61DCE00912
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6469E00973
 	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BD31952ABA; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
+	id DF0C052ABC; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160201220903.BD31952ABA@arago-project.org>
+Message-Id: <20160201220903.DF0C052ABC@arago-project.org>
 Date: Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : netapi: Use INC_PR
+Subject: Jacob Stiffler : dsptop: Bump SRCREV to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,62 +38,49 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a2abb468cddf97a0b9dd1241616d140bdaa0511d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a2abb468cddf97a0b9dd1241616d140bdaa0511d
+Commit: 1f1a613d752167264abcf01c697e2d77f6055cbc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1f1a613d752167264abcf01c697e2d77f6055cbc
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Sat Jan 30 01:38:07 2016 +0000
+Date:   Tue Feb  2 03:16:45 2016 +0000
 
-netapi: Use INC_PR
+dsptop: Bump SRCREV to the latest
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/netapi/netapi-test_git.bb |    2 ++
- recipes-ti/netapi/netapi.inc         |    2 +-
- recipes-ti/netapi/netapi_git.bb      |    2 ++
- 3 files changed, 5 insertions(+), 1 deletions(-)
+ recipes-bsp/dsptop/debugss-module-drv_git.bb |    2 +-
+ recipes-bsp/dsptop/dsptop.inc                |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
-index 9d49c29..1347d34 100644
---- a/recipes-ti/netapi/netapi-test_git.bb
-+++ b/recipes-ti/netapi/netapi-test_git.bb
-@@ -4,6 +4,8 @@ DEPENDS = "netapi ipsecmgr"
+diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+index 6856d60..bf7da44 100644
+--- a/recipes-bsp/dsptop/debugss-module-drv_git.bb
++++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
  
- include netapi.inc
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
+ PV_append = "+git${SRCPV}"
  
-+PR = "${INC_PR}.0"
-+
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
+index 5897f25..8d23ad0 100644
+--- a/recipes-bsp/dsptop/dsptop.inc
++++ b/recipes-bsp/dsptop/dsptop.inc
+@@ -1,7 +1,7 @@
+ # This corresponds to version 1.2.0
+-SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
++SRCREV = "edf5670075cf6cf42f46654d284f9f78c1c123a1"
+ PV = "1.2.0"
+-INC_PR = "r0"
++INC_PR = "r1"
  
- do_compile () {
-diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-index f7e5393..e497b1a 100644
---- a/recipes-ti/netapi/netapi.inc
-+++ b/recipes-ti/netapi/netapi.inc
-@@ -7,7 +7,7 @@ SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANC
- # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
- SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
- PV = "01.01.00.06"
--PR = "r1"
-+INC_PR = "r2"
+ SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
  
- DEVICELIST = "k2h k2k k2l k2e"
- 
-diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
-index d88e95a..298a86f 100644
---- a/recipes-ti/netapi/netapi_git.bb
-+++ b/recipes-ti/netapi/netapi_git.bb
-@@ -6,6 +6,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
- 
- include netapi.inc
- 
-+PR = "${INC_PR}.0"
-+
- EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
- 
- do_compile () {
 
 
