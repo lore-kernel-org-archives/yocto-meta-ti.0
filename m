@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D2432E00B37; Mon,  1 Feb 2016 14:09:09 -0800 (PST)
+	id D2D65E00AD8; Mon,  1 Feb 2016 14:09:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0D67E00852
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA786E0088B
 	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6D00352A85; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
+	id CC81A52ABB; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160201220903.6D00352A85@arago-project.org>
+Message-Id: <20160201220903.CC81A52ABB@arago-project.org>
 Date: Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : dsptop: Bump SRCREV to the latest
+Subject: Jacob Stiffler : netapi: Only build binaries relevent to the machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,50 +37,86 @@ X-List-Received-Date: Mon, 01 Feb 2016 22:09:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: a34942b127187e94fdcfd76cefc19ddacbc95996
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a34942b127187e94fdcfd76cefc19ddacbc95996
+Branch: master
+Commit: 504c5919e7374cd4e92cfa84d6fba626209e72ed
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=504c5919e7374cd4e92cfa84d6fba626209e72ed
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Feb  2 03:16:45 2016 +0000
+Date:   Sat Jan 30 01:38:08 2016 +0000
 
-dsptop: Bump SRCREV to the latest
+netapi: Only build binaries relevent to the machine
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/debugss-module-drv_git.bb |    2 +-
- recipes-bsp/dsptop/dsptop.inc                |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/netapi/netapi-test_git.bb |    4 ++--
+ recipes-ti/netapi/netapi.inc         |    9 +++++++--
+ recipes-ti/netapi/netapi_git.bb      |    4 +---
+ 3 files changed, 10 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
-index 6856d60..bf7da44 100644
---- a/recipes-bsp/dsptop/debugss-module-drv_git.bb
-+++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
+diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
+index 1347d34..3b7825c 100644
+--- a/recipes-ti/netapi/netapi-test_git.bb
++++ b/recipes-ti/netapi/netapi-test_git.bb
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "Provides test and application binaries using NETAPI module"
+-COMPATIBLE_MACHINE = "keystone"
++
+ DEPENDS = "netapi ipsecmgr"
  
- # This package builds a kernel module, use kernel PR as base and append a local
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- PV_append = "+git${SRCPV}"
+ include netapi.inc
  
-diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
-index 5897f25..8d23ad0 100644
---- a/recipes-bsp/dsptop/dsptop.inc
-+++ b/recipes-bsp/dsptop/dsptop.inc
-@@ -1,7 +1,7 @@
- # This corresponds to version 1.2.0
--SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
-+SRCREV = "edf5670075cf6cf42f46654d284f9f78c1c123a1"
- PV = "1.2.0"
--INC_PR = "r0"
-+INC_PR = "r1"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
- SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ 
+diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
+index e497b1a..0e7b04b 100644
+--- a/recipes-ti/netapi/netapi.inc
++++ b/recipes-ti/netapi/netapi.inc
+@@ -1,15 +1,20 @@
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f2307287ca2074"
+ 
++COMPATIBLE_MACHINE = "keystone"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
+ 
+ # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
+ SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
+ PV = "01.01.00.06"
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+-DEVICELIST = "k2h k2k k2l k2e"
++DEVICELIST_k2hk-evm = "k2h k2k"
++DEVICELIST_k2l-evm  = "k2l"
++DEVICELIST_k2e-evm  = "k2e"
+ 
+ CHOICELIST = "yes no"
+ 
+diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
+index 298a86f..4427ecc 100644
+--- a/recipes-ti/netapi/netapi_git.bb
++++ b/recipes-ti/netapi/netapi_git.bb
+@@ -1,12 +1,10 @@
+ DESCRIPTION = "Provides NETAPI module: TI user space network library"
+ 
+-COMPATIBLE_MACHINE = "keystone"
+-
+ DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
+ 
+ include netapi.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
  
 
 
