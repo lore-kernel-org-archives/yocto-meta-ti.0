@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3C7C2E00912; Mon,  1 Feb 2016 14:09:15 -0800 (PST)
+	id 8BB1AE00BEB; Mon,  1 Feb 2016 14:09:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAE7EE00911
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6383E00929
 	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9E03652AB6; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
+	id F1FB752ABD; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160201220903.9E03652AB6@arago-project.org>
+Message-Id: <20160201220903.F1FB752ABD@arago-project.org>
 Date: Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : linux: cmem: Update reserved CMEM regions
+Subject: Jacob Stiffler : temperature-module-drv: Smart Reflex Sub-System (SRSS) module driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,166 +38,67 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 24005c9e12dbcba53363bf9481ce123a4f7d4090
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24005c9e12dbcba53363bf9481ce123a4f7d4090
+Commit: db523c31f6ee3679706988687c2d17093bda87a1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=db523c31f6ee3679706988687c2d17093bda87a1
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Fri Jan 29 03:20:50 2016 +0000
+Date:   Tue Feb  2 03:16:46 2016 +0000
 
-linux: cmem: Update reserved CMEM regions
-
-* dra7xx:
-  - Increase DDR region required to pass OpenCL conformance
-  - Add OCMC region
-* k2e-evm, k2l-evm:
-  - Add reserved regions for these machines
+temperature-module-drv: Smart Reflex Sub-System (SRSS) module driver
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/files/dra7xx/cmem.dtsi  |   20 ++++++++++--
- recipes-kernel/linux/files/k2e-evm/cmem.dtsi |   42 ++++++++++++++++++++++++++
- recipes-kernel/linux/files/k2l-evm/cmem.dtsi |   42 ++++++++++++++++++++++++++
- 3 files changed, 101 insertions(+), 3 deletions(-)
+ recipes-bsp/dsptop/dsptop_git.bb                 |    3 ++-
+ recipes-bsp/dsptop/temperature-module-drv_git.bb |   18 ++++++++++++++++++
+ 2 files changed, 20 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/files/dra7xx/cmem.dtsi b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-index d91faf9..c7781c4 100644
---- a/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-+++ b/recipes-kernel/linux/files/dra7xx/cmem.dtsi
-@@ -1,10 +1,20 @@
- / {
-         reserved-memory {
-+                #address-cells = <2>;
-+                #size-cells = <2>;
-+                ranges;
-+
-                 cmem_block_mem_0: cmem_block_mem@a0000000 {
--                        reg = <0x0 0xa0000000 0x0 0x0a000000>;
-+                        reg = <0x0 0xa0000000 0x0 0x0c000000>;
-                         no-map;
-                         status = "okay";
-                 };
-+
-+		cmem_block_mem_1_ocmc3: cmem_block_mem@40500000 {
-+			reg = <0x0 0x40500000 0x0 0x100000>;
-+			no-map;
-+			status = "okay";
-+		};
-         };
+diff --git a/recipes-bsp/dsptop/dsptop_git.bb b/recipes-bsp/dsptop/dsptop_git.bb
+index 4b6c729..121dc9b 100644
+--- a/recipes-bsp/dsptop/dsptop_git.bb
++++ b/recipes-bsp/dsptop/dsptop_git.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979
  
-         cmem {
-@@ -19,8 +29,12 @@
-                 cmem_block_0: cmem_block@0 {
-                         reg = <0>;
-                         memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x0 0x0a000000>;
-+                        cmem-buf-pools = <1 0x0 0x0c000000>;
-                 };
--        };
+ DEPENDS = "libulm ncurses"
  
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			memory-region = <&cmem_block_mem_1_ocmc3>;
-+		};
-+        };
- };
-diff --git a/recipes-kernel/linux/files/k2e-evm/cmem.dtsi b/recipes-kernel/linux/files/k2e-evm/cmem.dtsi
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ S = "${WORKDIR}/git/dsptop"
+ 
+@@ -22,6 +22,7 @@ COMPATIBLE_MACHINE = "dra7xx|keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ RDEPENDS_${PN} = "debugss-module-drv"
++RDEPENDS_${PN}_append_keystone = " temperature-module-drv"
+ 
+ include dsptop.inc
+ 
+diff --git a/recipes-bsp/dsptop/temperature-module-drv_git.bb b/recipes-bsp/dsptop/temperature-module-drv_git.bb
 new file mode 100644
-index 0000000..236b0ba
+index 0000000..0bd54c5
 --- /dev/null
-+++ b/recipes-kernel/linux/files/k2e-evm/cmem.dtsi
-@@ -0,0 +1,42 @@
-+/ {
-+	reserved-memory {
-+		mpm_block_mem_0: mpm_block_mem@820000000 {
-+			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+			no-map;
-+			status = "okay";
-+		};
++++ b/recipes-bsp/dsptop/temperature-module-drv_git.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "Smart Reflex Sub-System (SRSS) module driver for Keystone devices"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
 +
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
-+			no-map;
-+			status = "okay";
-+		};
++# This package builds a kernel module, use kernel PR as base and append a local
++MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
++PV_append = "+git${SRCPV}"
 +
-+		cmem_block_mem_1: cmem_block_mem@00c100000 {
-+			reg = <0x00000000 0x0c000000 0x00000000 0x00180000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
++S = "${WORKDIR}/git/temperature_module/temperature-mod"
 +
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
++inherit module
 +
-+		#pool-size-cells = <2>;
++EXTRA_OEMAKE = "KVERSION=${KERNEL_VERSION} KERNEL_SRC=${STAGING_KERNEL_DIR}"
 +
-+		status = "okay";
++COMPATIBLE_MACHINE = "keystone"
 +
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x1E000000>;
-+		};
-+
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			memory-region = <&cmem_block_mem_1>;
-+		};
-+	};
-+};
-diff --git a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-new file mode 100644
-index 0000000..236b0ba
---- /dev/null
-+++ b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-@@ -0,0 +1,42 @@
-+/ {
-+	reserved-memory {
-+		mpm_block_mem_0: mpm_block_mem@820000000 {
-+			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
-+		cmem_block_mem_1: cmem_block_mem@00c100000 {
-+			reg = <0x00000000 0x0c000000 0x00000000 0x00180000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+		status = "okay";
-+
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x1E000000>;
-+		};
-+
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			memory-region = <&cmem_block_mem_1>;
-+		};
-+	};
-+};
++include dsptop.inc
 
 
