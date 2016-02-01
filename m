@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 96952E007F2; Mon,  1 Feb 2016 14:09:10 -0800 (PST)
+	id 256C4E00B9D; Mon,  1 Feb 2016 14:09:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAD9FE008F5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E61DCE00912
 	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7E5A152A86; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
+	id BD31952ABA; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160201220903.7E5A152A86@arago-project.org>
+Message-Id: <20160201220903.BD31952ABA@arago-project.org>
 Date: Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : temperature-module-drv: Smart Reflex Sub-System (SRSS) module driver
+Subject: Jacob Stiffler : netapi: Use INC_PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,72 +33,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2016 22:09:10 -0000
+X-List-Received-Date: Mon, 01 Feb 2016 22:09:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 0923bd9ca55ab9acdb5cab8cd36639bd635caa68
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0923bd9ca55ab9acdb5cab8cd36639bd635caa68
+Branch: master
+Commit: a2abb468cddf97a0b9dd1241616d140bdaa0511d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a2abb468cddf97a0b9dd1241616d140bdaa0511d
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Feb  2 03:16:46 2016 +0000
+Date:   Sat Jan 30 01:38:07 2016 +0000
 
-temperature-module-drv: Smart Reflex Sub-System (SRSS) module driver
+netapi: Use INC_PR
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/dsptop_git.bb                 |    3 ++-
- recipes-bsp/dsptop/temperature-module-drv_git.bb |   18 ++++++++++++++++++
- 2 files changed, 20 insertions(+), 1 deletions(-)
+ recipes-ti/netapi/netapi-test_git.bb |    2 ++
+ recipes-ti/netapi/netapi.inc         |    2 +-
+ recipes-ti/netapi/netapi_git.bb      |    2 ++
+ 3 files changed, 5 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/dsptop_git.bb b/recipes-bsp/dsptop/dsptop_git.bb
-index 4b6c729..121dc9b 100644
---- a/recipes-bsp/dsptop/dsptop_git.bb
-+++ b/recipes-bsp/dsptop/dsptop_git.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979
+diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
+index 9d49c29..1347d34 100644
+--- a/recipes-ti/netapi/netapi-test_git.bb
++++ b/recipes-ti/netapi/netapi-test_git.bb
+@@ -4,6 +4,8 @@ DEPENDS = "netapi ipsecmgr"
  
- DEPENDS = "libulm ncurses"
+ include netapi.inc
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- S = "${WORKDIR}/git/dsptop"
- 
-@@ -22,6 +22,7 @@ COMPATIBLE_MACHINE = "dra7xx|keystone"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- RDEPENDS_${PN} = "debugss-module-drv"
-+RDEPENDS_${PN}_append_keystone = " temperature-module-drv"
- 
- include dsptop.inc
- 
-diff --git a/recipes-bsp/dsptop/temperature-module-drv_git.bb b/recipes-bsp/dsptop/temperature-module-drv_git.bb
-new file mode 100644
-index 0000000..0bd54c5
---- /dev/null
-+++ b/recipes-bsp/dsptop/temperature-module-drv_git.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Smart Reflex Sub-System (SRSS) module driver for Keystone devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
++PR = "${INC_PR}.0"
 +
-+# This package builds a kernel module, use kernel PR as base and append a local
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+PV_append = "+git${SRCPV}"
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ 
+ do_compile () {
+diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
+index f7e5393..e497b1a 100644
+--- a/recipes-ti/netapi/netapi.inc
++++ b/recipes-ti/netapi/netapi.inc
+@@ -7,7 +7,7 @@ SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANC
+ # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
+ SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
+ PV = "01.01.00.06"
+-PR = "r1"
++INC_PR = "r2"
+ 
+ DEVICELIST = "k2h k2k k2l k2e"
+ 
+diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
+index d88e95a..298a86f 100644
+--- a/recipes-ti/netapi/netapi_git.bb
++++ b/recipes-ti/netapi/netapi_git.bb
+@@ -6,6 +6,8 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
+ 
+ include netapi.inc
+ 
++PR = "${INC_PR}.0"
 +
-+S = "${WORKDIR}/git/temperature_module/temperature-mod"
-+
-+inherit module
-+
-+EXTRA_OEMAKE = "KVERSION=${KERNEL_VERSION} KERNEL_SRC=${STAGING_KERNEL_DIR}"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+include dsptop.inc
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ 
+ do_compile () {
 
 
