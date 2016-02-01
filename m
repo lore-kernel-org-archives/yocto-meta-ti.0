@@ -1,42 +1,67 @@
-Return-Path: <denys@ti.com>
+Return-Path: <winiston@futuraautomation.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2005E00BFE; Sun, 31 Jan 2016 19:57:05 -0800 (PST)
+	id 086E4E00BFE; Sun, 31 Jan 2016 20:15:42 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.192.178 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C3A57E00BEF
-	for <meta-ti@yoctoproject.org>; Sun, 31 Jan 2016 19:57:01 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u113v0MP032596
-	for <meta-ti@yoctoproject.org>; Sun, 31 Jan 2016 21:57:00 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u113v0aB026285
-	for <meta-ti@yoctoproject.org>; Sun, 31 Jan 2016 21:57:00 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 31 Jan 2016 21:56:59 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u113uxEl022001	for <meta-ti@yoctoproject.org>; Sun, 31 Jan 2016 21:57:00
-	-0600
-Date: Sun, 31 Jan 2016 22:56:59 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <251885143.397.1454299019691.JavaMail.jenkins@puget>
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-pf0-f178.google.com (mail-pf0-f178.google.com
+	[209.85.192.178])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD7B9E00BEF
+	for <meta-ti@yoctoproject.org>; Sun, 31 Jan 2016 20:15:38 -0800 (PST)
+Received: by mail-pf0-f178.google.com with SMTP id 65so76113806pfd.2
+	for <meta-ti@yoctoproject.org>; Sun, 31 Jan 2016 20:15:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=futuraautomation-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:from:to:subject:date:mime-version:content-type
+	:importance:disposition-notification-to;
+	bh=ruaIKVGmnLVPe5UHW1sVbL3yRIA4CzX58ab25vIQG2w=;
+	b=ulnIlnimuEdwX6b3SWXN6IqyPeUKnhCd+m7GP8fetQD1x8SP0OL3x1GdpK6a5hmosG
+	hfd7JadVMeDg6jv0d0WflqTmgQ8UldIJDpNIP84aKZjKiBAXEkr20cc9S2yv9FksMhJG
+	IHWSrudKq6AIc2uD+fxjGIfUzVOtT6Aa0wu2Z7geWeWOezUmwZZ2YF7a5rrRtAzv17nm
+	vhsfDlmisQBjGvoS8aJlhDDqpoCDl5veN/SIY6S/Ey10sGcAvWTLljkOtY65Mosjywxy
+	PXd13KakBQ5mtbyRjPfik5dgTjIR0oDl7uenX80hyuVcNtZy56qUJgyI7qPnIf0rK4Au
+	Kf4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:from:to:subject:date:mime-version
+	:content-type:importance:disposition-notification-to;
+	bh=ruaIKVGmnLVPe5UHW1sVbL3yRIA4CzX58ab25vIQG2w=;
+	b=SRy7jn4v/QmsoVNoheYfgJUUoabj6xDfb/yePgzEgnHPRFGfIOLB/qzMGEyhgR4tIh
+	Sk8ZmE/gq5CPcVYUtnsIhynHybHSFWJDoHSWH/RirP13lIWaZrangfB9Q+qn14t/z17g
+	3NhWjTMJeqw7H1GBeikQczBhLUpW9XnFg0f3RTNPRYnkGGs5fzT+qY9Tc70/XUWKPQFh
+	VPUJ9vxpFEw1fTB8L6jPpYQtUr3wDgW5Furpt7yu2T7+eUp4b95iZbpNt5/14BfqQwOB
+	tj8LfFwwXxnG0TBfNi+Xq+0D+BQUgonxrAGFZlJFYaQm9LXhawJFLBWMwlvlPPvX1j04
+	xUWQ==
+X-Gm-Message-State: AG10YOQYtyRGqTekLdwvZjY8MzASF5OLLlcOj24i4F3Ee5W7vQ+aJehTeq3fpdDzn32S8A==
+X-Received: by 10.98.73.6 with SMTP id w6mr23418373pfa.82.1454300137663;
+	Sun, 31 Jan 2016 20:15:37 -0800 (PST)
+Received: from RD3 ([59.99.236.185]) by smtp.gmail.com with ESMTPSA id
+	c87sm39102460pfj.41.2016.01.31.20.15.35
+	for <meta-ti@yoctoproject.org>
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 31 Jan 2016 20:15:36 -0800 (PST)
+Message-ID: <F3717D3DA0F34B72A567796CC4DFB882@RD3>
+From: <winiston@futuraautomation.com>
+To: "yocto texas" <meta-ti@yoctoproject.org>
+Date: Mon, 1 Feb 2016 09:49:48 +0530
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2016-01-31_21-00-32
+X-Priority: 1
+X-MSMail-Priority: High
+Importance: High
+X-Mailer: Microsoft Windows Live Mail 15.4.3555.308
+X-MimeOLE: Produced By Microsoft MimeOLE V15.4.3555.308
+Subject: Problem to write core-image-minimal of AM437x-evm on SD card
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,207 +74,91 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2016 03:57:05 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_396_1258580699.1454299019606"
+X-List-Received-Date: Mon, 01 Feb 2016 04:15:42 -0000
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_000_002D_01D15CD5.E3BA93A0"
 
-------=_Part_396_1258580699.1454299019606
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+------=_NextPart_000_002D_01D15CD5.E3BA93A0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<title>
-Status for 01/31/16
-</title>
-</head>
-<body>
+Dear,
 
-<h2>Status for 01/31/16</h2>
+I have successfully built core-minimal image of AM437x-evm using poky. =
+The following files have been created under =
+/tmp/deploy/images/am437x-evm directory.
+  a.. core-image-minimal-am437x-evm.tar.bz2=20
+  b.. core-image-minimal-am437x-evm.tar.gz=20
+  c.. core-image-minimal-am437x-evm-20160127052452.rootfs.tar.gz=20
+  d.. MLO=20
+  e.. MLO-am437x-evm=20
+  f.. u-boot.img=20
+  g.. u-boot-am437x-evm.img=20
+  h.. zImage=20
+  i.. =
+zImage--4.1.15+git0+b7b07f10f6-r3f-am43x-epos-evm-20160127052452.dtb
+and many more files have been created. I wanted to write it on the sd =
+card. How do I copy the images to sd card? I did not find any command to =
+write the image. Kindly help me out to write the image on sd card. I =
+could not go further to develop my project. I would be very thankful if =
+you give me detail procedure to solve this issue.
 
-<h2>BUILD_ID: build-2016-01-31_21-01-44</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Awaiting your valuable reply. Thanking you.
 
 
-------=_Part_396_1258580699.1454299019606--
+Regards,
+Winiston.P
+Futura Automation Pvt Ltd.
+
+Ph :91-80-28375290 / 28375295
+Fax :91-80-28375291
+
+------=_NextPart_000_002D_01D15CD5.E3BA93A0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><HEAD></HEAD>
+<BODY dir=3Dltr>
+<DIV dir=3Dltr>
+<DIV style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: #000000">
+<DIV>Dear,</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>I have successfully built core-minimal image of AM437x-evm using =
+poky. The=20
+following files have been created under /tmp/deploy/images/am437x-evm=20
+directory.</DIV>
+<UL>
+  <LI>core-image-minimal-am437x-evm.tar.bz2=20
+  <LI>core-image-minimal-am437x-evm.tar.gz=20
+  <LI>core-image-minimal-am437x-evm-20160127052452.rootfs.tar.gz=20
+  <LI>MLO=20
+  <LI>MLO-am437x-evm=20
+  <LI>u-boot.img=20
+  <LI>u-boot-am437x-evm.img=20
+  <LI>zImage=20
+  =
+<LI>zImage--4.1.15+git0+b7b07f10f6-r3f-am43x-epos-evm-20160127052452.dtb<=
+/LI></UL>
+<DIV>and many more files have been created.<FONT color=3D#0000ff> I =
+wanted to=20
+write it on the sd card</FONT>. <FONT color=3D#0000ff>How do I copy the =
+images to=20
+sd card?</FONT> I did not find any command to write the image. <FONT=20
+color=3D#0000ff>Kindly help me out to write the image on sd card</FONT>. =
+I could=20
+not go further to develop my project. I would be very thankful if you =
+give me=20
+detail procedure to solve this issue.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>Awaiting your valuable reply. Thanking you.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV=20
+style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: =
+#000000">Regards,<BR>Winiston.P<BR>Futura=20
+Automation Pvt Ltd.<BR><BR>Ph :91-80-28375290 / 28375295<BR>Fax=20
+:91-80-28375291<BR></DIV></DIV></DIV></BODY></HTML>
+
+------=_NextPart_000_002D_01D15CD5.E3BA93A0--
