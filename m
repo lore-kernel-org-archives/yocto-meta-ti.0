@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D6DA3E00852; Mon,  1 Feb 2016 14:09:09 -0800 (PST)
+	id 9599FE007B5; Mon,  1 Feb 2016 14:09:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3953DE007B5
-	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:03 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAC31E008C8
+	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 14:09:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 599EC52A80; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
+	id AD95852AB9; Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160201220903.599EC52A80@arago-project.org>
+Message-Id: <20160201220903.AD95852AB9@arago-project.org>
 Date: Mon,  1 Feb 2016 22:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : netapi: Only build binaries relevent to the machine
+Subject: Jacob Stiffler : conf: machine: am57xx-evm, dra7xx-evm: Increase max_leb_cnt
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,86 +37,52 @@ X-List-Received-Date: Mon, 01 Feb 2016 22:09:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 86d9d577b75143acb21d104e37221fa7bad73e50
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=86d9d577b75143acb21d104e37221fa7bad73e50
+Branch: master
+Commit: 0d7f26f1112e77d652825630fd3c9a6fab46b1cc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0d7f26f1112e77d652825630fd3c9a6fab46b1cc
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Sat Jan 30 01:38:08 2016 +0000
+Date:   Fri Jan 29 23:06:50 2016 +0000
 
-netapi: Only build binaries relevent to the machine
+conf: machine: am57xx-evm, dra7xx-evm: Increase max_leb_cnt
+
+* With the addition of the video analytics demo, the filesystem has
+  exceeded size limited by the previous max_leb_cnt.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/netapi/netapi-test_git.bb |    4 ++--
- recipes-ti/netapi/netapi.inc         |    9 +++++++--
- recipes-ti/netapi/netapi_git.bb      |    4 +---
- 3 files changed, 10 insertions(+), 7 deletions(-)
+ conf/machine/am57xx-evm.conf |    2 +-
+ conf/machine/dra7xx-evm.conf |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
-index 1347d34..3b7825c 100644
---- a/recipes-ti/netapi/netapi-test_git.bb
-+++ b/recipes-ti/netapi/netapi-test_git.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "Provides test and application binaries using NETAPI module"
--COMPATIBLE_MACHINE = "keystone"
-+
- DEPENDS = "netapi ipsecmgr"
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 8d5d5cc..e32b98f 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -23,7 +23,7 @@ UBOOT_MACHINE = "am57xx_evm_config"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 8192"
  
- include netapi.inc
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 9bfcb5c..986b8e2 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -23,7 +23,7 @@ UBOOT_MACHINE = "dra7xx_evm_config"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6400"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 8192"
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
- 
-diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-index e497b1a..0e7b04b 100644
---- a/recipes-ti/netapi/netapi.inc
-+++ b/recipes-ti/netapi/netapi.inc
-@@ -1,15 +1,20 @@
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f2307287ca2074"
- 
-+COMPATIBLE_MACHINE = "keystone"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
- 
- # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
- SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
- PV = "01.01.00.06"
--INC_PR = "r2"
-+INC_PR = "r3"
- 
--DEVICELIST = "k2h k2k k2l k2e"
-+DEVICELIST_k2hk-evm = "k2h k2k"
-+DEVICELIST_k2l-evm  = "k2l"
-+DEVICELIST_k2e-evm  = "k2e"
- 
- CHOICELIST = "yes no"
- 
-diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
-index 298a86f..4427ecc 100644
---- a/recipes-ti/netapi/netapi_git.bb
-+++ b/recipes-ti/netapi/netapi_git.bb
-@@ -1,12 +1,10 @@
- DESCRIPTION = "Provides NETAPI module: TI user space network library"
- 
--COMPATIBLE_MACHINE = "keystone"
--
- DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
- 
- include netapi.inc
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
- 
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
 
 
