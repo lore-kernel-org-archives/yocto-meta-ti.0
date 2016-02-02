@@ -1,45 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <maciej.borzecki@open-rnd.pl>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 28928E00B37; Mon,  1 Feb 2016 23:38:51 -0800 (PST)
+	id 49AA5E00B46; Tue,  2 Feb 2016 00:47:25 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B362BE00AAB
-	for <meta-ti@yoctoproject.org>; Mon,  1 Feb 2016 23:38:46 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u127cj0E020093
-	for <meta-ti@yoctoproject.org>; Tue, 2 Feb 2016 01:38:45 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u127cj2J020515
-	for <meta-ti@yoctoproject.org>; Tue, 2 Feb 2016 01:38:45 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 2 Feb 2016 01:38:44 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u127cias029750	for <meta-ti@yoctoproject.org>;
-	Tue, 2 Feb 2016 01:38:44 -0600
-Date: Tue, 2 Feb 2016 02:38:44 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1678080120.405.1454398724589.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2016-02-02_00-50-17
+X-Greylist: delayed 375 seconds by postgrey-1.32 at yocto-www;
+	Tue, 02 Feb 2016 00:47:20 PST
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C09EE00AD8
+	for <meta-ti@yoctoproject.org>; Tue,  2 Feb 2016 00:47:20 -0800 (PST)
+Received: from comp-006-thk (unknown [31.182.60.238])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 14CD61A6E5B;
+	Tue,  2 Feb 2016 09:41:03 +0100 (CET)
+Message-ID: <1454402462.4337.5.camel@open-rnd.pl>
+From: Maciek Borzecki <maciej.borzecki@open-rnd.pl>
+To: winiston@futuraautomation.com, Khem Raj <raj.khem@gmail.com>
+Date: Tue, 02 Feb 2016 09:41:02 +0100
+In-Reply-To: <0A62DD68742E4A579C4F0ABA4650B8F9@RD3>
+References: <F3717D3DA0F34B72A567796CC4DFB882@RD3>
+	<CAMKF1sop2mXSyhr3Mu3LaLQuc-X=qiUGHnyNkyyb48SHO9+0rg@mail.gmail.com>
+	<0A62DD68742E4A579C4F0ABA4650B8F9@RD3>
+Organization: Open-RnD sp. z o.o.
+X-Mailer: Evolution 3.18.4 (3.18.4-1.fc23) 
+Mime-Version: 1.0
+Cc: yocto texas <meta-ti@yoctoproject.org>
+Subject: Re: Problem to write core-image-minimal of AM437x-evm on SD card
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: maciej.borzecki@open-rnd.pl
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -49,207 +42,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Feb 2016 07:38:51 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_404_1862777098.1454398724586"
+X-List-Received-Date: Tue, 02 Feb 2016 08:47:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-------=_Part_404_1862777098.1454398724586
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+On pon, 2016-02-01 at 17:36 +0530, winiston@futuraautomation.com wrote:
+> Sorry...I am new to yocto project.I could not get "wic". How do I setup wic
+> and "dd" it into sd card. I did not get angstrom script also. where can I
+> get angstrom script ?  can you give the detailed procedure? Is there any
+> related documentation available in yocto website?
+> Now I used "fdisk" command to format sdcard. I am able to copy MLO &
+> u-image.img to BOOT partition. I extracted rootfs to secondary partition
+> using"Ark" software.  But in the secondary partition, the files are not
+> visible. In properties window, it shows the number of files and size of the
+> files. I used that sd card to boot my am437x evm kit. It is not booting.
+> What could be the error? Kindly give me the detailed procedure to copy the
+> image. What are the files I need to copy for core-image-minimal kernel?
+> Note: I am using core-image-minimal
 
-<html>
-<head>
-<title>
-Status for 02/02/16
-</title>
-</head>
-<body>
+An example kickstart is provided by Poky
+(scripts/lib/wic/canned-wks/sdimage-bootpart.wks):
 
-<h2>Status for 02/02/16</h2>
+part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active
+--align 4 --size 16
+part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4
 
-<h2>BUILD_ID: build-2016-02-02_00-51-30</h2>
+This sets up an image with 2 partitions, first one is FAT, aligned to
+4kB, 16MB in size. The second one is ext4 and this is where your rootfs
+will go.
 
-<h2>Clean Build: false</h2>
+To build an image run:
+wic create sdimage-bootpart -e core-image-minimal
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+The boot partition is built by bootimg-partition wic source plugin and
+it uses IMAGE_BOOT_FILES variable to figure out which files need to be
+placed in the partition.  I've added a patch to meta-yocto-bsp to set
+IMAGE_BOOT_FILES so that it was possible to build usable images for
+BeagleBone Black. The change was not added to meta-ti, so you might want
+to set it like this somewhere in your local.conf:
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+IMAGE_BOOT_FILES ?= "u-boot.${UBOOT_SUFFIX} MLO"
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+IIRC there's a number of options for building a bootable image am335x,
+having MLO and uboot in a FAT partition is just one of them. If you
+check the CPU manual there should be some indication on how the build
+process pokes at different locations to find a first stage
+bootloader.
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+-- 
+Maciej Borzęcki
+Senior Software Developer at Open-RnD Sp. z o.o., Poland
+www.open-rnd.pl
+mobile: +48 889 117 365, fax: +48 42 657 9079
 
-</body>
-</html>
+Niniejsza wiadomość wraz z załącznikami może zawierać chronione prawem
+lub poufne informacje i została wysłana wyłącznie do wiadomości i
+użytku osób, do których została zaadresowana. Jeśli wiadomość została
+otrzymana przypadkowo zabrania się jej kopiowania lub rozsyłania do
+osób trzecich. W takim przypadku uprasza się o natychmiastowe
+zniszczenie wiadomości oraz poinformowanie nadawcy o zaistniałej
+sytuacji za pomocą wiadomości zwrotnej. Dziękujemy.
+
+This message, including any attachments hereto, may contain privileged
+or confidential information and is sent solely for the attention and
+use of the intended addressee(s). If you are not an intended addressee,
+you may neither use this message nor copy or deliver it to anyone. In
+such case, you should immediately destroy this message and kindly notify
+the sender by reply email. Thank you.
 
 
-------=_Part_404_1862777098.1454398724586--
+
