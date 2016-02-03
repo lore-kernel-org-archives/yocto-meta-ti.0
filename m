@@ -1,38 +1,41 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 97082E00B89; Tue,  2 Feb 2016 05:32:27 -0800 (PST)
+	id C9B00E00C29; Tue,  2 Feb 2016 19:32:30 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 13B49E00B66
-	for <meta-ti@yoctoproject.org>; Tue,  2 Feb 2016 05:32:23 -0800 (PST)
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BF32E00C1C
+	for <meta-ti@yoctoproject.org>; Tue,  2 Feb 2016 19:32:27 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u12DWMMZ029060
-	for <meta-ti@yoctoproject.org>; Tue, 2 Feb 2016 07:32:22 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u12DWMdL013747
-	for <meta-ti@yoctoproject.org>; Tue, 2 Feb 2016 07:32:22 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 2 Feb 2016 07:32:21 -0600
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u12DWLV5031779;	Tue, 2 Feb 2016 07:32:22 -0600
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 2 Feb 2016 08:32:14 -0500
-Message-ID: <1454419934-20019-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u133WPDM012147
+	for <meta-ti@yoctoproject.org>; Tue, 2 Feb 2016 21:32:25 -0600
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u133WPra022940
+	for <meta-ti@yoctoproject.org>; Tue, 2 Feb 2016 21:32:25 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 2 Feb 2016 21:32:25 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u133WPwx014562;	Tue, 2 Feb 2016 21:32:25 -0600
+Date: Tue, 2 Feb 2016 22:32:24 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Message-ID: <1185391745.415.1454470344988.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Subject: [PATCH v2] linux-ti-staging: Update to include uio device tree entries
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2016-02-02_21-00-32
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,398 +48,206 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Feb 2016 13:32:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 03 Feb 2016 03:32:30 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_414_50561242.1454470344986"
 
-- Adds device tree entries for multiple devices that use uio driver
-- These entries are added for k2h, k2l & k2e : keystone2 platforms
+------=_Part_414_50561242.1454470344986
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
----
-v2 changes: 
-* Changed shortlog "ti-staging" to "linux-ti-staging"
-* Removed redundant "+=" from "_append" var
-* Added "ENABLE_TI_UIO_DEVICES" to enable the uio device nodes
+<html>
+<head>
+<title>
+Status for 02/02/16
+</title>
+</head>
+<body>
 
- recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi    |  32 ++++
- recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi  |  58 +++++++
- recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi    |  10 ++
- .../linux/files/keystone/keystone-uio.dtsi         | 186 +++++++++++++++++++++
- recipes-kernel/linux/linux-ti-staging_4.1.bb       |   3 +-
- recipes-kernel/linux/ti-uio.inc                    |  27 +++
- 6 files changed, 315 insertions(+), 1 deletion(-)
- create mode 100644 recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
- create mode 100644 recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi
- create mode 100644 recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
- create mode 100644 recipes-kernel/linux/files/keystone/keystone-uio.dtsi
- create mode 100644 recipes-kernel/linux/ti-uio.inc
+<h2>Status for 02/02/16</h2>
 
-diff --git a/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi b/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
-new file mode 100644
-index 0000000..36f41b0
---- /dev/null
-+++ b/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
-@@ -0,0 +1,32 @@
-+/ {
-+	soc {
-+		uio_hyperlink0: hyperlink0 {
-+			compatible = "ti,uio-ti-pdrv";
-+			mem  = <0x21400000 0x00001000
-+				0x40000000 0x10000000
-+				0x0231a000 0x00002000>;
-+			clocks = <&clkhyperlink0>;
-+			interrupts	= <0 387 0x101>;
-+			cfg-params
-+			{
-+				ti,serdes_refclk_khz = <312500>;
-+				ti,serdes_maxserrate_khz = <6250000>;
-+				ti,serdes_lanerate = "half";
-+				ti,serdes_numlanes = <4>;
-+				ti,serdes_c1 = <4 4 4 4>;
-+				ti,serdes_c2 = <0 0 0 0>;
-+				ti,serdes_cm = <0 0 0 0>;
-+				ti,serdes_tx_att = <12 12 12 12>;
-+				ti,serdes_tx_vreg = <4 4 4 4>;
-+				ti,serdes_rx_att = <11 11 11 11>;
-+				ti,serdes_rx_boost = <3 3 3 3>;
-+			};
-+		};
-+		uio_srss: srss {
-+			compatible = "ti,uio-ti-pdrv";
-+			mem  = <0x02330000 0x0000400>;
-+			clocks=<&clksr>;
-+			interrupts = <0 0x173 0xf01>;
-+		};
-+	};
-+};
-diff --git a/recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi b/recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi
-new file mode 100644
-index 0000000..cabe0b8
---- /dev/null
-+++ b/recipes-kernel/linux/files/k2hk-evm/k2hk-uio.dtsi
-@@ -0,0 +1,58 @@
-+/ {
-+	soc {
-+		uio_hyperlink0: hyperlink0 {
-+			compatible = "ti,uio-module-drv";
-+			mem  = <0x21400000 0x00001000
-+				0x40000000 0x10000000
-+				0x0231a000 0x00002000>;
-+			clocks = <&clkhyperlink0>;
-+			interrupts	= <0 387 0x101>;
-+			cfg-params
-+			{
-+				ti,serdes_refclk_khz = <312500>;
-+				ti,serdes_maxserrate_khz = <6250000>;
-+				ti,serdes_lanerate = "half";
-+				ti,serdes_numlanes = <4>;
-+				ti,serdes_c1 = <4 4 4 4>;
-+				ti,serdes_c2 = <0 0 0 0>;
-+				ti,serdes_cm = <0 0 0 0>;
-+				ti,serdes_tx_att = <12 12 12 12>;
-+				ti,serdes_tx_vreg = <4 4 4 4>;
-+				ti,serdes_rx_att = <11 11 11 11>;
-+				ti,serdes_rx_boost = <3 3 3 3>;
-+			};
-+		};
-+
-+		uio_hyperlink1: hyperlink1 {
-+			compatible = "ti,uio-module-drv";
-+			mem  = <0x21400000 0x00001000
-+				0x28000000 0x08000000
-+				0x0231c000 0x00002000>;
-+			clocks = <&clkhyperlink1>;
-+			interrupts	= <0 388 0x101>;
-+			cfg-params
-+			{
-+				ti,serdes_refclk_khz = <312500>;
-+				ti,serdes_maxserrate_khz = <6250000>;
-+				ti,serdes_lanerate = "half";
-+				ti,serdes_numlanes = <4>;
-+				ti,serdes_c1 = <4 4 4 4>;
-+				ti,serdes_c2 = <0 0 0 0>;
-+				ti,serdes_cm = <0 0 0 0>;
-+				ti,serdes_tx_att = <12 12 12 12>;
-+				ti,serdes_tx_vreg = <4 4 4 4>;
-+				ti,serdes_rx_att = <11 11 11 11>;
-+				ti,serdes_rx_boost = <3 3 3 3>;
-+			};
-+		};
-+
-+		uio_srio: srio {
-+			compatible = "ti,uio-module-drv";
-+			mem  = <0x0232C000 0x00002000
-+				0x02900000 0x00040000
-+				0x0232C000 0x00002000>;
-+			clocks=<&clksrio>;
-+			interrupts = <0 154 0xf01>;
-+		};
-+	};
-+};
-diff --git a/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi b/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
-new file mode 100644
-index 0000000..0334483
---- /dev/null
-+++ b/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
-@@ -0,0 +1,10 @@
-+/ {
-+	soc {
-+		uio_srss: srss {
-+			compatible = "ti,uio-ti-pdrv";
-+			mem  = <0x02330000 0x0000400>;
-+			clocks=<&clksr>;
-+			interrupts = <0 0x173 0xf01>;
-+		};
-+	};
-+};
-diff --git a/recipes-kernel/linux/files/keystone/keystone-uio.dtsi b/recipes-kernel/linux/files/keystone/keystone-uio.dtsi
-new file mode 100644
-index 0000000..43b183d
---- /dev/null
-+++ b/recipes-kernel/linux/files/keystone/keystone-uio.dtsi
-@@ -0,0 +1,186 @@
-+/ {
-+	soc {
-+		uio_mpax: mpax {
-+			compatible = "ti,uio-module-drv";
-+			mem  = <0x00bc00000 0x00000a00>;
-+		};
-+
-+		uio_edma3: edma3 {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x02700000 0x000C0000>;
-+		};
-+		uio_secmgr: secmgr {
-+			compatible = "ti,uio-module-drv";
-+			mem  = <0x002500100 0x00000004>;
-+		};
-+		uio_qmss: qmss {
-+			compatible = "ti,uio-module-drv";
-+			mem  = <0x02a00000 0x00100000
-+				0x23a00000 0x00200000>;
-+		};
-+
-+		uio_qpend0: qpend0 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 44 0xf04>;
-+			interrupt-mode = <1>; /* Interrupt mode oneshot */
-+			cfg-params
-+			{
-+				ti,qm-queue = <662>;
-+			};
-+		};
-+
-+		uio_qpend1: qpend1 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 45 0xf04>;
-+			interrupt-mode = <1>; /* Interrupt mode oneshot */
-+			cfg-params
-+			{
-+				ti,qm-queue = <663>;
-+			};
-+		};
-+
-+		uio_qpend2: qpend2 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 46 0xf04>;
-+			interrupt-mode = <1>; /* Interrupt mode oneshot */
-+			cfg-params
-+			{
-+				ti,qm-queue = <664>;
-+			};
-+		};
-+
-+		uio_qpend3: qpend3 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 47 0xf04>;
-+			interrupt-mode = <1>; /* Interrupt mode oneshot */
-+			cfg-params
-+			{
-+				ti,qm-queue = <665>;
-+			};
-+		};
-+
-+		/* The following uio cic2 entries allow access to interupt output
-+		 * by the cic2 controller: The actual input event triggering the
-+		 * interrupt is assumed to be programmed other drivers
-+		 */
-+		uio_cic2_out32: cic2_out32 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 451 0xf01>;
-+		};
-+
-+		uio_cic2_out33: cic2_out33 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 452 0xf01>;
-+		};
-+
-+		uio_cic2_out34: cic2_out34 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 453 0xf01>;
-+		};
-+
-+		uio_cic2_out35: cic2_out35 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 454 0xf01>;
-+		};
-+
-+		uio_cic2_out36: cic2_out36 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 455 0xf01>;
-+		};
-+
-+		uio_cic2_out37: cic2_out37 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 456 0xf01>;
-+		};
-+
-+		uio_cic2_out38: cic2_out38 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 457 0xf01>;
-+		};
-+
-+		uio_cic2_out39: cic2_out39 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 458 0xf01>;
-+		};
-+
-+		uio_cic2_out40: cic2_out40 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 459 0xf01>;
-+		};
-+
-+		uio_cic2_out41: cic2_out41 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 460 0xf01>;
-+		};
-+
-+		uio_cic2_out42: cic2_out42 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 461 0xf01>;
-+		};
-+
-+		uio_cic2_out43: cic2_out43 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 462 0xf01>;
-+		};
-+
-+		uio_cic2_out44: cic2_out44 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 463 0xf01>;
-+		};
-+
-+		uio_cic2_out45: cic2_out45 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 464 0xf01>;
-+		};
-+
-+		uio_cic2_out46: cic2_out46 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 465 0xf01>;
-+		};
-+
-+		uio_cic2_out47: cic2_out47 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 466 0xf01>;
-+		};
-+
-+		uio_cic2_out18: cic2_out18 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 467 0xf01>;
-+		};
-+
-+		uio_cic2_out19: cic2_out19 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 468 0xf01>;
-+		};
-+
-+		uio_cic2_out22: cic2_out22 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 469 0xf01>;
-+		};
-+
-+		uio_cic2_out23: cic2_out23 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 470 0xf01>;
-+		};
-+
-+		uio_cic2_out50: cic2_out50 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 471 0xf01>;
-+		};
-+
-+		uio_cic2_out51: cic2_out51 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 472 0xf01>;
-+		};
-+
-+		uio_cic2_out66: cic2_out66 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 473 0xf01>;
-+		};
-+
-+		uio_cic2_out67: cic2_out67 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <0 474 0xf01>;
-+		};
-+	};
-+};
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 71f2de9..689a086 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -8,6 +8,7 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/cmem.inc
-+require recipes-kernel/linux/ti-uio.inc
- 
- # Look in the generic major.minor directory for files
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
-@@ -68,7 +69,7 @@ SRCREV = "e4346cf990da13eb936de5e130d8a4baab5c5688"
- PV = "4.1.17+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-diff --git a/recipes-kernel/linux/ti-uio.inc b/recipes-kernel/linux/ti-uio.inc
-new file mode 100644
-index 0000000..776e4a4
---- /dev/null
-+++ b/recipes-kernel/linux/ti-uio.inc
-@@ -0,0 +1,27 @@
-+SRC_URI_append_keystone = " file://keystone-uio.dtsi"
-+SRC_URI_append_k2hk-evm = " file://k2hk-uio.dtsi"
-+SRC_URI_append_k2l-evm = " file://k2l-uio.dtsi"
-+SRC_URI_append_k2e-evm = " file://k2e-uio.dtsi"
-+
-+DTSI_LIST = ""
-+DTSI_LIST_append_keystone = " keystone-uio.dtsi"
-+DTSI_LIST_append_k2hk-evm = " k2hk-uio.dtsi"
-+DTSI_LIST_append_k2l-evm = " k2l-uio.dtsi"
-+DTSI_LIST_append_k2e-evm = " k2e-uio.dtsi"
-+
-+do_setup_uio() {
-+    if [ "${ENABLE_TI_UIO_DEVICES}" == "1" ]
-+    then
-+        for dtsi in ${DTSI_LIST}
-+        do
-+            cp ${WORKDIR}/${dtsi} ${S}/arch/arm/boot/dts/
-+            for dtb in ${KERNEL_DEVICETREE}
-+            do
-+                dts=`echo $dtb | sed -e 's|dtb$|dts|'`
-+                echo "#include \"${dtsi}\"" >> ${S}/arch/arm/boot/dts/$dts
-+            done
-+        done
-+    fi
-+}
-+
-+do_patch[postfuncs] += "do_setup_uio"
--- 
-1.9.1
+<h2>BUILD_ID: build-2016-02-02_21-01-46</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_414_50561242.1454470344986--
