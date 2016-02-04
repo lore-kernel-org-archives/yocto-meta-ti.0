@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EB155E00C69; Wed,  3 Feb 2016 18:07:28 -0800 (PST)
+	id EC506E00C66; Wed,  3 Feb 2016 18:07:28 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D6AFE00C65
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9C3DBE00C61
 	for <meta-ti@yoctoproject.org>; Wed,  3 Feb 2016 18:07:20 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8DA4752ABB; Thu,  4 Feb 2016 02:07:19 +0000 (UTC)
+	id 70C9A52ABA; Thu,  4 Feb 2016 02:07:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160204020719.8DA4752ABB@arago-project.org>
+Message-Id: <20160204020719.70C9A52ABA@arago-project.org>
 Date: Thu,  4 Feb 2016 02:07:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : linux-ti-staging: Update to include uio device tree entries
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 04 Feb 2016 02:07:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 48467358feb2f934296d07093fdb2e28b7149c9e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=48467358feb2f934296d07093fdb2e28b7149c9e
+Branch: fido
+Commit: 22da1f3af3a6e5a6210273fffb6c800d19873f54
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=22da1f3af3a6e5a6210273fffb6c800d19873f54
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Tue Feb  2 19:32:14 2016 +0000
@@ -374,7 +374,7 @@ index 0000000..43b183d
 +	};
 +};
 diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 7fe33ee..3bb2ac6 100644
+index 71f2de9..689a086 100644
 --- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
 @@ -8,6 +8,7 @@ inherit kernel
