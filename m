@@ -1,41 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B7FDBE00D2A; Fri,  5 Feb 2016 11:39:12 -0800 (PST)
+	id 44E3AE00D3C; Fri,  5 Feb 2016 12:19:20 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7241BE00BA4
-	for <meta-ti@yoctoproject.org>; Fri,  5 Feb 2016 11:39:07 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u15Jd6b9002391
-	for <meta-ti@yoctoproject.org>; Fri, 5 Feb 2016 13:39:06 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u15Jd3Qk019283
-	for <meta-ti@yoctoproject.org>; Fri, 5 Feb 2016 13:39:06 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 5 Feb 2016 13:39:03 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u15Jd3ko013092;
-	Fri, 5 Feb 2016 13:39:03 -0600
-Date: Fri, 5 Feb 2016 14:38:48 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20160205193848.GW31480@edge>
-References: <1454700538-7424-1-git-send-email-sam.nelson@ti.com>
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC298E00D2A
+	for <meta-ti@yoctoproject.org>; Fri,  5 Feb 2016 12:19:16 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u15KJF2w005447
+	for <meta-ti@yoctoproject.org>; Fri, 5 Feb 2016 14:19:15 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u15KJFmP031989
+	for <meta-ti@yoctoproject.org>; Fri, 5 Feb 2016 14:19:15 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 5 Feb 2016 14:19:15 -0600
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u15KJERE030840;	Fri, 5 Feb 2016 14:19:14 -0600
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 5 Feb 2016 15:19:13 -0500
+Message-ID: <1454703553-21810-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1454700538-7424-1-git-send-email-sam.nelson@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ti-ipc: Update to new version 3.42.0.0_eng
+Subject: [PATCH] ipc-transport: Extract source info to common inc file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,49 +45,134 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2016 19:39:12 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Feb 2016 20:19:20 -0000
+Content-Type: text/plain
 
-Is it backward-compatible? Will it break any existing IPC uses?
+* Also use new variables to specify the source info so this can be
+  easily overridden and applied to each recipe.
 
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ recipes-ti/ipc/ipc-transport-qmss-test_git.bb |  2 ++
+ recipes-ti/ipc/ipc-transport-qmss.inc         |  8 ++------
+ recipes-ti/ipc/ipc-transport-qmss_git.bb      |  2 ++
+ recipes-ti/ipc/ipc-transport-srio-test_git.bb |  2 ++
+ recipes-ti/ipc/ipc-transport-srio.inc         |  8 ++------
+ recipes-ti/ipc/ipc-transport-srio_git.bb      |  2 ++
+ recipes-ti/ipc/ipc-transport.inc              | 15 +++++++++++++++
+ 7 files changed, 27 insertions(+), 12 deletions(-)
+ create mode 100644 recipes-ti/ipc/ipc-transport.inc
 
-On Fri, Feb 05, 2016 at 02:28:58PM -0500, Sam Nelson wrote:
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> ---
->  recipes-ti/ipc/ti-ipc.inc | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-> index 94a1657..f3b1bff 100644
-> --- a/recipes-ti/ipc/ti-ipc.inc
-> +++ b/recipes-ti/ipc/ti-ipc.inc
-> @@ -4,15 +4,15 @@ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
->  LICENSE = "BSD"
->  LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
->  
-> -BRANCH = "3.41"
-> +BRANCH = "ipc-next"
->  
->  SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
->  
-> -#Corresponds to 3.41.00.08
-> -SRCREV = "7370abce2e3f2a09fd4b057fbbf9e7d3d029c0df"
-> +#Corresponds to 3.42.00.00_eng
-> +SRCREV = "2b47e35ed72170e4e56906fb9ab93dd9ef385a38"
->  
->  S = "${WORKDIR}/git"
-> -PV = "3.41.00.08"
-> +PV = "3.42.00.00"
->  INC_PR = "r0"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb b/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
+index e7c827e..bfedaf5 100644
+--- a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
++++ b/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
+@@ -1,5 +1,7 @@
+ include ipc-transport-qmss.inc
+ 
++PR = "${INC_PR}.0"
++
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ DEPENDS = "ipc-transport-qmss ti-ipc"
+diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
+index 4b74eec..a5c8dc4 100644
+--- a/recipes-ti/ipc/ipc-transport-qmss.inc
++++ b/recipes-ti/ipc/ipc-transport-qmss.inc
+@@ -1,13 +1,9 @@
+ DESCRIPTION = "TI QMSS-Based IPC MessageQ Transport"
+ LICENSE = "BSD-3-Clause"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
++require ipc-transport.inc
+ 
+-BRANCH="master"
+-SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
+-# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
+-SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
+-PV = "02.00.00.01"
++INC_PR_append = ".0"
+ 
+ COMPATIBLE_MACHINE = "keystone"
+ 
+diff --git a/recipes-ti/ipc/ipc-transport-qmss_git.bb b/recipes-ti/ipc/ipc-transport-qmss_git.bb
+index cb77a12..09acbf0 100644
+--- a/recipes-ti/ipc/ipc-transport-qmss_git.bb
++++ b/recipes-ti/ipc/ipc-transport-qmss_git.bb
+@@ -1,5 +1,7 @@
+ include ipc-transport-qmss.inc
+ 
++PR = "${INC_PR}.0"
++
+ DEPENDS = "ti-ipc mpm-transport"
+ 
+ do_compile () {
+diff --git a/recipes-ti/ipc/ipc-transport-srio-test_git.bb b/recipes-ti/ipc/ipc-transport-srio-test_git.bb
+index 866fc35..4e23fb2 100644
+--- a/recipes-ti/ipc/ipc-transport-srio-test_git.bb
++++ b/recipes-ti/ipc/ipc-transport-srio-test_git.bb
+@@ -1,5 +1,7 @@
+ include ipc-transport-srio.inc
+ 
++PR = "${INC_PR}.0"
++
+ DEPENDS = "ipc-transport-srio ipc-transport-qmss ti-ipc"
+ 
+ DEVICELIST = "k2h k2k"
+diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
+index 91e3be1..4b5c305 100644
+--- a/recipes-ti/ipc/ipc-transport-srio.inc
++++ b/recipes-ti/ipc/ipc-transport-srio.inc
+@@ -1,13 +1,9 @@
+ DESCRIPTION = "TI SRIO-Based IPC MessageQ Transport"
+ LICENSE = "BSD-3-Clause"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
++require ipc-transport.inc
+ 
+-BRANCH="master"
+-SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
+-# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
+-SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
+-PV = "02.00.00.01"
++INC_PR_append = ".0"
+ 
+ COMPATIBLE_MACHINE = "k2hk-evm"
+ 
+diff --git a/recipes-ti/ipc/ipc-transport-srio_git.bb b/recipes-ti/ipc/ipc-transport-srio_git.bb
+index 266aa4e..f0586d8 100644
+--- a/recipes-ti/ipc/ipc-transport-srio_git.bb
++++ b/recipes-ti/ipc/ipc-transport-srio_git.bb
+@@ -1,5 +1,7 @@
+ include ipc-transport-srio.inc
+ 
++PR = "${INC_PR}.0"
++
+ DEPENDS = "ti-ipc mpm-transport"
+ 
+ do_compile () {
+diff --git a/recipes-ti/ipc/ipc-transport.inc b/recipes-ti/ipc/ipc-transport.inc
+new file mode 100644
+index 0000000..4ba3670
+--- /dev/null
++++ b/recipes-ti/ipc/ipc-transport.inc
+@@ -0,0 +1,15 @@
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
++
++IPC_TRANSPORT_GIT_URI = "git://git.ti.com/keystone-linux/ipc-transport.git"
++IPC_TRANSPORT_GIT_BRANCH = "master"
++IPC_TRANSPORT_GIT_PROTOCOL = "git"
++
++# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
++IPC_TRANSPORT_SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
++
++BRANCH="${IPC_TRANSPORT_GIT_BRANCH}"
++SRC_URI = "${IPC_TRANSPORT_GIT_URI};protocol=${IPC_TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${IPC_TRANSPORT_SRCREV}"
++PV = "02.00.00.01"
++
++INC_PR = "r1"
+-- 
+1.9.1
+
 
