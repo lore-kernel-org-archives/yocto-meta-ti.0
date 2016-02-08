@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D0DA2E00D95; Mon,  8 Feb 2016 09:30:59 -0800 (PST)
+	id 1CE2AE00D95; Mon,  8 Feb 2016 09:31:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0BFDE00C71
-	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:55 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 395D8E00DA3
+	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 254A652A79; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
+	id E133552AC2; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160208173055.254A652A79@arago-project.org>
+Message-Id: <20160208173055.E133552AC2@arago-project.org>
 Date: Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Thomas Perrot : conf: change GUI_MACHINE_CLASS to MACHINE_GUI_CLASS
+Subject: Denys Dmytriyenko : k2hk-evm: increase max_leb_cnt
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,192 +37,34 @@ X-List-Received-Date: Mon, 08 Feb 2016 17:31:00 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: f9dcfafdfc1adce42986cad647cd57d51ed1d158
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9dcfafdfc1adce42986cad647cd57d51ed1d158
+Branch: master
+Commit: 9ec00aa9413602d9e4f6851d3a246560a46c2542
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9ec00aa9413602d9e4f6851d3a246560a46c2542
 
-Author: Thomas Perrot <thomas.perrot@tupi.fr>
-Date:   Wed Jan 27 23:46:05 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Feb  8 00:03:26 2016 +0000
 
-conf: change GUI_MACHINE_CLASS to MACHINE_GUI_CLASS
+k2hk-evm: increase max_leb_cnt
 
-Correct the name of the variable used to define the size of the logo:
-GUI_MACHINE_CLASS renamed MACHINE_GUI_CLASS.
-
-Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf      |    2 +-
- conf/machine/am3517-evm.conf      |    2 +-
- conf/machine/am37x-evm.conf       |    2 +-
- conf/machine/am437x-evm.conf      |    2 +-
- conf/machine/beagleboard.conf     |    2 +-
- conf/machine/beaglebone.conf      |    2 +-
- conf/machine/include/omap-a15.inc |    2 +-
- conf/machine/include/omap3.inc    |    2 +-
- conf/machine/include/ti33x.inc    |    2 +-
- conf/machine/include/ti43x.inc    |    2 +-
- conf/machine/omap3evm.conf        |    2 +-
- conf/machine/pandaboard.conf      |    2 +-
- 12 files changed, 12 insertions(+), 12 deletions(-)
+ conf/machine/k2hk-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 08daa8e..55bbf95 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/ti33x.inc
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index 0ef6ad0..3c09a7e 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -20,7 +20,7 @@ SYSVINIT_ENABLED_GETTYS = ""
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 3856 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3900"
  
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
-index 7295c1f..4fef634 100644
---- a/conf/machine/am3517-evm.conf
-+++ b/conf/machine/am3517-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
- 
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-index 16ce73c..99adb08 100644
---- a/conf/machine/am37x-evm.conf
-+++ b/conf/machine/am37x-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
- 
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 9ff8944..7d40aec 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/ti43x.inc
- 
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index 32985b3..955961f 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -5,7 +5,7 @@
- require conf/machine/include/omap3.inc
- 
- # Only has DVI connector for external screen
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- IMAGE_FSTYPES += "tar.gz ubi"
- EXTRA_IMAGECMD_jffs2 = "-lnp"
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index 8a7e52a..bf3d91e 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -5,7 +5,7 @@
- require conf/machine/include/ti33x.inc
- 
- # Only has DVI connector for external screen
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- IMAGE_FSTYPES += "tar.gz"
- 
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index 41a2f19..9316998 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -24,7 +24,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-evdev \
-            xf86-video-fbdev"
- 
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- 
- # Use the expected value of the ubifs filesystem's volume name in the kernel
- # and u-boot.
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 0757b43..f83bfa2 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-keyboard"
- 
- # Default to external video, change to smallscreen for built-in LCD
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
- MACHINE_KERNEL_PR = "r126"
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 53f38c9..fa2ead5 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-keyboard"
- 
- # Default to external video, change to smallscreen for built-in LCD
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
- MACHINE_KERNEL_PR = "r22"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index 8c5fa2d..a603059 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-keyboard"
- 
- # Default to external video, change to smallscreen for built-in LCD
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
- MACHINE_KERNEL_PR = "r3"
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index 6bfd808..7051d88 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
- 
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "jffs2 tar.gz"
-diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
-index 1707f80..99497c1 100644
---- a/conf/machine/pandaboard.conf
-+++ b/conf/machine/pandaboard.conf
-@@ -4,7 +4,7 @@
- 
- require conf/machine/include/omap4.inc
- 
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- IMAGE_FSTYPES += "tar.gz"
- 
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # from dmesg:
 
 
