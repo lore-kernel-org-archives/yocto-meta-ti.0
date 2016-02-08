@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6B0CBE00DA7; Mon,  8 Feb 2016 09:30:58 -0800 (PST)
+	id CDFB2E00DA8; Mon,  8 Feb 2016 09:30:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF8D3E00C41
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B46B1E00D98
 	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:55 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1453352A85; Mon,  8 Feb 2016 17:30:54 +0000 (UTC)
+	id 523B752AAE; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160208173055.1453352A85@arago-project.org>
-Date: Mon,  8 Feb 2016 17:30:54 +0000 (UTC)
+Message-Id: <20160208173055.523B752AAE@arago-project.org>
+Date: Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Adam YH Lee : libgles-omap3: fix RPM compatibility by faking hardcoded deps
+Subject: Denys Dmytriyenko : k2hk-evm: increase max_leb_cnt
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,64 +33,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2016 17:30:58 -0000
+X-List-Received-Date: Mon, 08 Feb 2016 17:30:59 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 12c24dbe939a635ad9993a6eb273e0ec65e6fa72
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=12c24dbe939a635ad9993a6eb273e0ec65e6fa72
+Commit: 4930db287c938577b69c73cbbfeabc76cd9b744d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4930db287c938577b69c73cbbfeabc76cd9b744d
 
-Author: Adam YH Lee <adam.yh.lee@gmail.com>
-Date:   Wed Oct 14 00:00:27 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Feb  8 00:03:26 2016 +0000
 
-libgles-omap3: fix RPM compatibility by faking hardcoded deps
+k2hk-evm: increase max_leb_cnt
 
-When RPM is used as the packaging type, rootfs will fail because RPM, by
-design, check for file level dependency. Here one of the shared objects
-(libpvrEWS_REMWSEGL.so) has dependency on ld-linux.so.3 and libews.so.
-
-It is unclear why meta-ti requires ld-linux.so.3, which is a dynamic
-loader for soft-float arch. Hence I fake the existence here.
-
-Signed-off-by: Adam YH Lee <adam.yh.lee@gmail.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/libgles/libgles-omap3-no-x.inc |    9 +++++++++
- 1 files changed, 9 insertions(+), 0 deletions(-)
+ conf/machine/k2hk-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-index 13418ad..7681a26 100644
---- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-@@ -188,6 +188,9 @@ do_install () {
- 	install -d ${D}${sysconfdir}/udev/rules.d
- 	install -m 0644 ${WORKDIR}/99-bufferclass.rules ${D}${sysconfdir}/udev/rules.d/
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index 0ef6ad0..3c09a7e 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -20,7 +20,7 @@ SYSVINIT_ENABLED_GETTYS = ""
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 3856 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3900"
  
-+	touch ${D}${libdir}/ES5.0/ld-linux.so.3
-+	touch ${D}${libdir}/ES5.0/ld-linux.so.3\(GLIBC_2.4\)
-+	cp -pPR ${S}/gfx_rel_es5.x/libews.so ${D}${libdir}/ES5.0/
- }
- 
- PACKAGES =+ "${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-tests"
-@@ -209,6 +212,7 @@ PRIVATE_LIBS_${PN}-es9 = "libGLESv2.so libIMGegl.so libsrv_um.so libpvr2d.so lib
- 
- 
- RPROVIDES_${PN} += "libGLESv2.so libEGL.so libGLES_CM.so libpvr2d.so libIMGegl.so libsrv_init.so libsrv_um.so libsrv_um_dri.so libglslcompiler.so"
-+RPROVIDES_${PN}-es5 += "ld-linux.so.3 ld-linux.so.3(GLIBC_2.4) libews.so"
- 
- PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl"
- FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
-@@ -330,3 +334,8 @@ rm -f $D${sysconfdir}/powervr-esrev
- pkg_postinst_${PN}-linuxfbwsegl() {
- rm -f $D${sysconfdir}/powervr-esrev
- }
-+
-+pkg_postinst_${PN}-es5() {
-+rm -f $D${libdir}/ES5.0/ld-linux.so.3*
-+rm -f $D${libdir}/ES5.0/libews.so
-+}
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # from dmesg:
 
 
