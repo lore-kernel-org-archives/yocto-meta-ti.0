@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D0505E00C71; Mon,  8 Feb 2016 09:30:59 -0800 (PST)
+	id CFADDE00D9A; Mon,  8 Feb 2016 09:30:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B200AE00D95
-	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:55 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24DA3E00D9A
+	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3710452A86; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
+	id 6913B52AB0; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160208173055.3710452A86@arago-project.org>
+Message-Id: <20160208173055.6913B52AB0@arago-project.org>
 Date: Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ipc-transport: Extract source info to common inc file
+Subject: Denys Dmytriyenko : ti-ipc-rtos: also install IPU M4 images
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,139 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 63903ffd3796719ff06459b2501ddc647cbef037
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=63903ffd3796719ff06459b2501ddc647cbef037
+Commit: 5844d9195a0ee42d8260bd07356954c7bfc0d7c7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5844d9195a0ee42d8260bd07356954c7bfc0d7c7
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Sat Feb  6 02:19:13 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Feb  8 00:52:40 2016 +0000
 
-ipc-transport: Extract source info to common inc file
+ti-ipc-rtos: also install IPU M4 images
 
-* Also use new variables to specify the source info so this can be
-  easily overridden and applied to each recipe.
+TODO: do we need to preserve naming/hierarchy for multiple DSP/IPU instances?
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ipc-transport-qmss-test_git.bb |    2 ++
- recipes-ti/ipc/ipc-transport-qmss.inc         |    8 ++------
- recipes-ti/ipc/ipc-transport-qmss_git.bb      |    2 ++
- recipes-ti/ipc/ipc-transport-srio-test_git.bb |    2 ++
- recipes-ti/ipc/ipc-transport-srio.inc         |    8 ++------
- recipes-ti/ipc/ipc-transport-srio_git.bb      |    2 ++
- recipes-ti/ipc/ipc-transport.inc              |   15 +++++++++++++++
- 7 files changed, 27 insertions(+), 12 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb b/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
-index e7c827e..bfedaf5 100644
---- a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-qmss.inc
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 5fb83d0..eff1001 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -2,7 +2,7 @@ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ require ti-ipc.inc
  
-+PR = "${INC_PR}.0"
-+
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
  
- DEPENDS = "ipc-transport-qmss ti-ipc"
-diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
-index 4b74eec..a5c8dc4 100644
---- a/recipes-ti/ipc/ipc-transport-qmss.inc
-+++ b/recipes-ti/ipc/ipc-transport-qmss.inc
-@@ -1,13 +1,9 @@
- DESCRIPTION = "TI QMSS-Based IPC MessageQ Transport"
- LICENSE = "BSD-3-Clause"
+ DEPENDS = "ti-xdctools ti-sysbios"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+@@ -57,4 +57,5 @@ do_install() {
  
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
-+require ipc-transport.inc
- 
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
--# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
--SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
--PV = "02.00.00.01"
-+INC_PR_append = ".0"
- 
- COMPATIBLE_MACHINE = "keystone"
- 
-diff --git a/recipes-ti/ipc/ipc-transport-qmss_git.bb b/recipes-ti/ipc/ipc-transport-qmss_git.bb
-index cb77a12..09acbf0 100644
---- a/recipes-ti/ipc/ipc-transport-qmss_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-qmss_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-qmss.inc
- 
-+PR = "${INC_PR}.0"
-+
- DEPENDS = "ti-ipc mpm-transport"
- 
- do_compile () {
-diff --git a/recipes-ti/ipc/ipc-transport-srio-test_git.bb b/recipes-ti/ipc/ipc-transport-srio-test_git.bb
-index 866fc35..4e23fb2 100644
---- a/recipes-ti/ipc/ipc-transport-srio-test_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-srio-test_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-srio.inc
- 
-+PR = "${INC_PR}.0"
-+
- DEPENDS = "ipc-transport-srio ipc-transport-qmss ti-ipc"
- 
- DEVICELIST = "k2h k2k"
-diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
-index 91e3be1..4b5c305 100644
---- a/recipes-ti/ipc/ipc-transport-srio.inc
-+++ b/recipes-ti/ipc/ipc-transport-srio.inc
-@@ -1,13 +1,9 @@
- DESCRIPTION = "TI SRIO-Based IPC MessageQ Transport"
- LICENSE = "BSD-3-Clause"
- 
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
-+require ipc-transport.inc
- 
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
--# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
--SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
--PV = "02.00.00.01"
-+INC_PR_append = ".0"
- 
- COMPATIBLE_MACHINE = "k2hk-evm"
- 
-diff --git a/recipes-ti/ipc/ipc-transport-srio_git.bb b/recipes-ti/ipc/ipc-transport-srio_git.bb
-index 266aa4e..f0586d8 100644
---- a/recipes-ti/ipc/ipc-transport-srio_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-srio_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-srio.inc
- 
-+PR = "${INC_PR}.0"
-+
- DEPENDS = "ti-ipc mpm-transport"
- 
- do_compile () {
-diff --git a/recipes-ti/ipc/ipc-transport.inc b/recipes-ti/ipc/ipc-transport.inc
-new file mode 100644
-index 0000000..4ba3670
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport.inc
-@@ -0,0 +1,15 @@
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
-+
-+IPC_TRANSPORT_GIT_URI = "git://git.ti.com/keystone-linux/ipc-transport.git"
-+IPC_TRANSPORT_GIT_BRANCH = "master"
-+IPC_TRANSPORT_GIT_PROTOCOL = "git"
-+
-+# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
-+IPC_TRANSPORT_SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
-+
-+BRANCH="${IPC_TRANSPORT_GIT_BRANCH}"
-+SRC_URI = "${IPC_TRANSPORT_GIT_URI};protocol=${IPC_TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${IPC_TRANSPORT_SRCREV}"
-+PV = "02.00.00.01"
-+
-+INC_PR = "r1"
+     install -d ${D}${base_libdir}/firmware
+     find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
++    find . -name "*.xem4" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+ }
 
 
