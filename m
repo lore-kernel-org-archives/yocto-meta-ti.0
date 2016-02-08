@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3D20EE00DAB; Mon,  8 Feb 2016 09:31:04 -0800 (PST)
+	id 7965AE00DAB; Mon,  8 Feb 2016 09:31:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2894AE00DA2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26606E00D9D
 	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CFE1552AC1; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
+	id AA50852ABD; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160208173055.CFE1552AC1@arago-project.org>
+Message-Id: <20160208173055.AA50852ABD@arago-project.org>
 Date: Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ipc-transport: Extract source info to common inc file
+Subject: Thomas Perrot : conf: change GUI_MACHINE_CLASS to MACHINE_GUI_CLASS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,139 +38,191 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d3a7ce8cf388546998673a277eba84d9c7eaa8b8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d3a7ce8cf388546998673a277eba84d9c7eaa8b8
+Commit: 78199584632a7879e1e17831fd97e5f8c8fb40d8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=78199584632a7879e1e17831fd97e5f8c8fb40d8
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Sat Feb  6 02:19:13 2016 +0000
+Author: Thomas Perrot <thomas.perrot@tupi.fr>
+Date:   Wed Jan 27 23:46:05 2016 +0000
 
-ipc-transport: Extract source info to common inc file
+conf: change GUI_MACHINE_CLASS to MACHINE_GUI_CLASS
 
-* Also use new variables to specify the source info so this can be
-  easily overridden and applied to each recipe.
+Correct the name of the variable used to define the size of the logo:
+GUI_MACHINE_CLASS renamed MACHINE_GUI_CLASS.
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ipc-transport-qmss-test_git.bb |    2 ++
- recipes-ti/ipc/ipc-transport-qmss.inc         |    8 ++------
- recipes-ti/ipc/ipc-transport-qmss_git.bb      |    2 ++
- recipes-ti/ipc/ipc-transport-srio-test_git.bb |    2 ++
- recipes-ti/ipc/ipc-transport-srio.inc         |    8 ++------
- recipes-ti/ipc/ipc-transport-srio_git.bb      |    2 ++
- recipes-ti/ipc/ipc-transport.inc              |   15 +++++++++++++++
- 7 files changed, 27 insertions(+), 12 deletions(-)
+ conf/machine/am335x-evm.conf      |    2 +-
+ conf/machine/am3517-evm.conf      |    2 +-
+ conf/machine/am37x-evm.conf       |    2 +-
+ conf/machine/am437x-evm.conf      |    2 +-
+ conf/machine/beagleboard.conf     |    2 +-
+ conf/machine/beaglebone.conf      |    2 +-
+ conf/machine/include/omap-a15.inc |    2 +-
+ conf/machine/include/omap3.inc    |    2 +-
+ conf/machine/include/ti33x.inc    |    2 +-
+ conf/machine/include/ti43x.inc    |    2 +-
+ conf/machine/omap3evm.conf        |    2 +-
+ conf/machine/pandaboard.conf      |    2 +-
+ 12 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb b/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
-index e7c827e..bfedaf5 100644
---- a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-qmss.inc
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 08daa8e..55bbf95 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/ti33x.inc
  
-+PR = "${INC_PR}.0"
-+
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen"
  
- DEPENDS = "ipc-transport-qmss ti-ipc"
-diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
-index 4b74eec..a5c8dc4 100644
---- a/recipes-ti/ipc/ipc-transport-qmss.inc
-+++ b/recipes-ti/ipc/ipc-transport-qmss.inc
-@@ -1,13 +1,9 @@
- DESCRIPTION = "TI QMSS-Based IPC MessageQ Transport"
- LICENSE = "BSD-3-Clause"
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 7295c1f..4fef634 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
  
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
-+require ipc-transport.inc
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen ethernet"
  
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
--# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
--SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
--PV = "02.00.00.01"
-+INC_PR_append = ".0"
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 16ce73c..99adb08 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
  
- COMPATIBLE_MACHINE = "keystone"
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen ethernet"
  
-diff --git a/recipes-ti/ipc/ipc-transport-qmss_git.bb b/recipes-ti/ipc/ipc-transport-qmss_git.bb
-index cb77a12..09acbf0 100644
---- a/recipes-ti/ipc/ipc-transport-qmss_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-qmss_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-qmss.inc
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 9ff8944..7d40aec 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/ti43x.inc
  
-+PR = "${INC_PR}.0"
-+
- DEPENDS = "ti-ipc mpm-transport"
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen"
  
- do_compile () {
-diff --git a/recipes-ti/ipc/ipc-transport-srio-test_git.bb b/recipes-ti/ipc/ipc-transport-srio-test_git.bb
-index 866fc35..4e23fb2 100644
---- a/recipes-ti/ipc/ipc-transport-srio-test_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-srio-test_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-srio.inc
+ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index 32985b3..955961f 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -5,7 +5,7 @@
+ require conf/machine/include/omap3.inc
  
-+PR = "${INC_PR}.0"
-+
- DEPENDS = "ipc-transport-srio ipc-transport-qmss ti-ipc"
+ # Only has DVI connector for external screen
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
  
- DEVICELIST = "k2h k2k"
-diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
-index 91e3be1..4b5c305 100644
---- a/recipes-ti/ipc/ipc-transport-srio.inc
-+++ b/recipes-ti/ipc/ipc-transport-srio.inc
-@@ -1,13 +1,9 @@
- DESCRIPTION = "TI SRIO-Based IPC MessageQ Transport"
- LICENSE = "BSD-3-Clause"
+ IMAGE_FSTYPES += "tar.gz ubi"
+ EXTRA_IMAGECMD_jffs2 = "-lnp"
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index 8a7e52a..bf3d91e 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -5,7 +5,7 @@
+ require conf/machine/include/ti33x.inc
  
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
-+require ipc-transport.inc
+ # Only has DVI connector for external screen
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
  
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-linux/ipc-transport.git;protocol=git;branch=${BRANCH}"
--# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
--SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
--PV = "02.00.00.01"
-+INC_PR_append = ".0"
+ IMAGE_FSTYPES += "tar.gz"
  
- COMPATIBLE_MACHINE = "k2hk-evm"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 41a2f19..9316998 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -24,7 +24,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-evdev \
+            xf86-video-fbdev"
  
-diff --git a/recipes-ti/ipc/ipc-transport-srio_git.bb b/recipes-ti/ipc/ipc-transport-srio_git.bb
-index 266aa4e..f0586d8 100644
---- a/recipes-ti/ipc/ipc-transport-srio_git.bb
-+++ b/recipes-ti/ipc/ipc-transport-srio_git.bb
-@@ -1,5 +1,7 @@
- include ipc-transport-srio.inc
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
  
-+PR = "${INC_PR}.0"
-+
- DEPENDS = "ti-ipc mpm-transport"
+ # Use the expected value of the ubifs filesystem's volume name in the kernel
+ # and u-boot.
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 0757b43..f83bfa2 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-keyboard"
  
- do_compile () {
-diff --git a/recipes-ti/ipc/ipc-transport.inc b/recipes-ti/ipc/ipc-transport.inc
-new file mode 100644
-index 0000000..4ba3670
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport.inc
-@@ -0,0 +1,15 @@
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
-+
-+IPC_TRANSPORT_GIT_URI = "git://git.ti.com/keystone-linux/ipc-transport.git"
-+IPC_TRANSPORT_GIT_BRANCH = "master"
-+IPC_TRANSPORT_GIT_PROTOCOL = "git"
-+
-+# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
-+IPC_TRANSPORT_SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
-+
-+BRANCH="${IPC_TRANSPORT_GIT_BRANCH}"
-+SRC_URI = "${IPC_TRANSPORT_GIT_URI};protocol=${IPC_TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${IPC_TRANSPORT_SRCREV}"
-+PV = "02.00.00.01"
-+
-+INC_PR = "r1"
+ # Default to external video, change to smallscreen for built-in LCD
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r126"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 53f38c9..fa2ead5 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-keyboard"
+ 
+ # Default to external video, change to smallscreen for built-in LCD
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r22"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 8c5fa2d..a603059 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
+            xf86-input-keyboard"
+ 
+ # Default to external video, change to smallscreen for built-in LCD
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r3"
+diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
+index 6bfd808..7051d88 100644
+--- a/conf/machine/omap3evm.conf
++++ b/conf/machine/omap3evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
+ 
+ # Use built-in LCD by default
+ XSERVER += "xf86-input-tslib"
+-GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_FEATURES += "touchscreen ethernet"
+ 
+ IMAGE_FSTYPES += "jffs2 tar.gz"
+diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
+index 1707f80..99497c1 100644
+--- a/conf/machine/pandaboard.conf
++++ b/conf/machine/pandaboard.conf
+@@ -4,7 +4,7 @@
+ 
+ require conf/machine/include/omap4.inc
+ 
+-GUI_MACHINE_CLASS = "bigscreen"
++MACHINE_GUI_CLASS = "bigscreen"
+ 
+ IMAGE_FSTYPES += "tar.gz"
+ 
 
 
