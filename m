@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D2CABE00C3E; Mon,  8 Feb 2016 12:30:49 -0800 (PST)
+	id D228AE00D98; Mon,  8 Feb 2016 12:30:49 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AEA51E00C49
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD623E00C3E
 	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 12:30:45 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A6DC52A5A; Mon,  8 Feb 2016 20:30:43 +0000 (UTC)
+	id 6E41252A72; Mon,  8 Feb 2016 20:30:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160208203043.3A6DC52A5A@arago-project.org>
+Message-Id: <20160208203043.6E41252A72@arago-project.org>
 Date: Mon,  8 Feb 2016 20:30:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jason Reeder : pru-icss: update RPMsg folder names for am437x
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 08 Feb 2016 20:30:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 8a83256f3d12724216453eee438e9a4a1b8acd7a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8a83256f3d12724216453eee438e9a4a1b8acd7a
+Branch: master
+Commit: 1b6b2ecd0c89cfc82414bc5bc7c4f4cc8f446ddf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1b6b2ecd0c89cfc82414bc5bc7c4f4cc8f446ddf
 
 Author: Jason Reeder <jreeder@ti.com>
 Date:   Tue Feb  9 02:02:14 2016 +0000
