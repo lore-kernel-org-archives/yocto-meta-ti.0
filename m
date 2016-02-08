@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7965AE00DAB; Mon,  8 Feb 2016 09:31:04 -0800 (PST)
+	id DE43CE00DA1; Mon,  8 Feb 2016 09:31:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26606E00D9D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4DF35E00DA4
 	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AA50852ABD; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
+	id EFE9E52AC4; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160208173055.AA50852ABD@arago-project.org>
+Message-Id: <20160208173055.EFE9E52AC4@arago-project.org>
 Date: Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Thomas Perrot : conf: change GUI_MACHINE_CLASS to MACHINE_GUI_CLASS
+Subject: Denys Dmytriyenko : ti-ipc-rtos: also install IPU M4 images
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,191 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 78199584632a7879e1e17831fd97e5f8c8fb40d8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=78199584632a7879e1e17831fd97e5f8c8fb40d8
+Commit: fff240c234cd7f8cb73289dc59bf504478586ad4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fff240c234cd7f8cb73289dc59bf504478586ad4
 
-Author: Thomas Perrot <thomas.perrot@tupi.fr>
-Date:   Wed Jan 27 23:46:05 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Feb  8 00:52:40 2016 +0000
 
-conf: change GUI_MACHINE_CLASS to MACHINE_GUI_CLASS
+ti-ipc-rtos: also install IPU M4 images
 
-Correct the name of the variable used to define the size of the logo:
-GUI_MACHINE_CLASS renamed MACHINE_GUI_CLASS.
+TODO: do we need to preserve naming/hierarchy for multiple DSP/IPU instances?
 
-Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf      |    2 +-
- conf/machine/am3517-evm.conf      |    2 +-
- conf/machine/am37x-evm.conf       |    2 +-
- conf/machine/am437x-evm.conf      |    2 +-
- conf/machine/beagleboard.conf     |    2 +-
- conf/machine/beaglebone.conf      |    2 +-
- conf/machine/include/omap-a15.inc |    2 +-
- conf/machine/include/omap3.inc    |    2 +-
- conf/machine/include/ti33x.inc    |    2 +-
- conf/machine/include/ti43x.inc    |    2 +-
- conf/machine/omap3evm.conf        |    2 +-
- conf/machine/pandaboard.conf      |    2 +-
- 12 files changed, 12 insertions(+), 12 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 08daa8e..55bbf95 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/ti33x.inc
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 5fb83d0..eff1001 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -2,7 +2,7 @@ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ require ti-ipc.inc
  
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen"
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
  
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
-index 7295c1f..4fef634 100644
---- a/conf/machine/am3517-evm.conf
-+++ b/conf/machine/am3517-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
+ DEPENDS = "ti-xdctools ti-sysbios"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+@@ -57,4 +57,5 @@ do_install() {
  
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-index 16ce73c..99adb08 100644
---- a/conf/machine/am37x-evm.conf
-+++ b/conf/machine/am37x-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
- 
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 9ff8944..7d40aec 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/ti43x.inc
- 
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index 32985b3..955961f 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -5,7 +5,7 @@
- require conf/machine/include/omap3.inc
- 
- # Only has DVI connector for external screen
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- IMAGE_FSTYPES += "tar.gz ubi"
- EXTRA_IMAGECMD_jffs2 = "-lnp"
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index 8a7e52a..bf3d91e 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -5,7 +5,7 @@
- require conf/machine/include/ti33x.inc
- 
- # Only has DVI connector for external screen
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- IMAGE_FSTYPES += "tar.gz"
- 
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index 41a2f19..9316998 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -24,7 +24,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-evdev \
-            xf86-video-fbdev"
- 
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- 
- # Use the expected value of the ubifs filesystem's volume name in the kernel
- # and u-boot.
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 0757b43..f83bfa2 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-keyboard"
- 
- # Default to external video, change to smallscreen for built-in LCD
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
- MACHINE_KERNEL_PR = "r126"
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 53f38c9..fa2ead5 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-keyboard"
- 
- # Default to external video, change to smallscreen for built-in LCD
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
- MACHINE_KERNEL_PR = "r22"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index 8c5fa2d..a603059 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -14,7 +14,7 @@ XSERVER = "xserver-xorg \
-            xf86-input-keyboard"
- 
- # Default to external video, change to smallscreen for built-in LCD
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
- MACHINE_KERNEL_PR = "r3"
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index 6bfd808..7051d88 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap3.inc
- 
- # Use built-in LCD by default
- XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "jffs2 tar.gz"
-diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
-index 1707f80..99497c1 100644
---- a/conf/machine/pandaboard.conf
-+++ b/conf/machine/pandaboard.conf
-@@ -4,7 +4,7 @@
- 
- require conf/machine/include/omap4.inc
- 
--GUI_MACHINE_CLASS = "bigscreen"
-+MACHINE_GUI_CLASS = "bigscreen"
- 
- IMAGE_FSTYPES += "tar.gz"
- 
+     install -d ${D}${base_libdir}/firmware
+     find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
++    find . -name "*.xem4" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+ }
 
 
