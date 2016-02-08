@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AA4EDE00DA6; Mon,  8 Feb 2016 09:30:57 -0800 (PST)
+	id 6B0CBE00DA7; Mon,  8 Feb 2016 09:30:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B32DAE00D97
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF8D3E00C41
 	for <meta-ti@yoctoproject.org>; Mon,  8 Feb 2016 09:30:55 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3288D52A81; Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
+	id 1453352A85; Mon,  8 Feb 2016 17:30:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160208173055.3288D52A81@arago-project.org>
-Date: Mon,  8 Feb 2016 17:30:55 +0000 (UTC)
+Message-Id: <20160208173055.1453352A85@arago-project.org>
+Date: Mon,  8 Feb 2016 17:30:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update to new version 3.42.0.0_eng
+Subject: Adam YH Lee : libgles-omap3: fix RPM compatibility by faking hardcoded deps
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,50 +33,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2016 17:30:57 -0000
+X-List-Received-Date: Mon, 08 Feb 2016 17:30:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 5b5634f078538fcbe40a36a059627653c8ddb2d1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5b5634f078538fcbe40a36a059627653c8ddb2d1
+Commit: 12c24dbe939a635ad9993a6eb273e0ec65e6fa72
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=12c24dbe939a635ad9993a6eb273e0ec65e6fa72
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Feb  6 01:28:58 2016 +0000
+Author: Adam YH Lee <adam.yh.lee@gmail.com>
+Date:   Wed Oct 14 00:00:27 2015 +0000
 
-ti-ipc: Update to new version 3.42.0.0_eng
+libgles-omap3: fix RPM compatibility by faking hardcoded deps
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+When RPM is used as the packaging type, rootfs will fail because RPM, by
+design, check for file level dependency. Here one of the shared objects
+(libpvrEWS_REMWSEGL.so) has dependency on ld-linux.so.3 and libews.so.
+
+It is unclear why meta-ti requires ld-linux.so.3, which is a dynamic
+loader for soft-float arch. Hence I fake the existence here.
+
+Signed-off-by: Adam YH Lee <adam.yh.lee@gmail.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-graphics/libgles/libgles-omap3-no-x.inc |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 94a1657..f3b1bff 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -4,15 +4,15 @@ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+index 13418ad..7681a26 100644
+--- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
++++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+@@ -188,6 +188,9 @@ do_install () {
+ 	install -d ${D}${sysconfdir}/udev/rules.d
+ 	install -m 0644 ${WORKDIR}/99-bufferclass.rules ${D}${sysconfdir}/udev/rules.d/
  
--BRANCH = "3.41"
-+BRANCH = "ipc-next"
++	touch ${D}${libdir}/ES5.0/ld-linux.so.3
++	touch ${D}${libdir}/ES5.0/ld-linux.so.3\(GLIBC_2.4\)
++	cp -pPR ${S}/gfx_rel_es5.x/libews.so ${D}${libdir}/ES5.0/
+ }
  
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
+ PACKAGES =+ "${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-tests"
+@@ -209,6 +212,7 @@ PRIVATE_LIBS_${PN}-es9 = "libGLESv2.so libIMGegl.so libsrv_um.so libpvr2d.so lib
  
--#Corresponds to 3.41.00.08
--SRCREV = "7370abce2e3f2a09fd4b057fbbf9e7d3d029c0df"
-+#Corresponds to 3.42.00.00_eng
-+SRCREV = "2b47e35ed72170e4e56906fb9ab93dd9ef385a38"
  
- S = "${WORKDIR}/git"
--PV = "3.41.00.08"
-+PV = "3.42.00.00"
- INC_PR = "r0"
+ RPROVIDES_${PN} += "libGLESv2.so libEGL.so libGLES_CM.so libpvr2d.so libIMGegl.so libsrv_init.so libsrv_um.so libsrv_um_dri.so libglslcompiler.so"
++RPROVIDES_${PN}-es5 += "ld-linux.so.3 ld-linux.so.3(GLIBC_2.4) libews.so"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl"
+ FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
+@@ -330,3 +334,8 @@ rm -f $D${sysconfdir}/powervr-esrev
+ pkg_postinst_${PN}-linuxfbwsegl() {
+ rm -f $D${sysconfdir}/powervr-esrev
+ }
++
++pkg_postinst_${PN}-es5() {
++rm -f $D${libdir}/ES5.0/ld-linux.so.3*
++rm -f $D${libdir}/ES5.0/libews.so
++}
 
 
