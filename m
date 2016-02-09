@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EDC0DE00C89; Tue,  9 Feb 2016 12:48:00 -0800 (PST)
+	id 8A56EE00D98; Tue,  9 Feb 2016 12:48:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9F2EE00C89
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD847E00CB9
 	for <meta-ti@yoctoproject.org>; Tue,  9 Feb 2016 12:47:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 484C752996; Tue,  9 Feb 2016 20:47:54 +0000 (UTC)
+	id 83CC352A4B; Tue,  9 Feb 2016 20:47:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160209204754.484C752996@arago-project.org>
+Message-Id: <20160209204754.83CC352A4B@arago-project.org>
 Date: Tue,  9 Feb 2016 20:47:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ompa5-evm.conf: bump max_leb_cnt
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2016 20:48:01 -0000
+X-List-Received-Date: Tue, 09 Feb 2016 20:48:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: ae9e1daa473d7942ba3af4a4abb1652fcaa9494d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ae9e1daa473d7942ba3af4a4abb1652fcaa9494d
+Branch: master
+Commit: c27b74eadb853f1b155533c686224ea66bc6fb3a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c27b74eadb853f1b155533c686224ea66bc6fb3a
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Feb  9 21:27:08 2016 +0000
