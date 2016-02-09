@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 08444E00DB0; Tue,  9 Feb 2016 06:06:41 -0800 (PST)
+	id 08F9BE00DAA; Tue,  9 Feb 2016 06:06:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9528E00CA2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DA8D6E00DA5
 	for <meta-ti@yoctoproject.org>; Tue,  9 Feb 2016 06:06:34 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 40E5E52A76; Tue,  9 Feb 2016 14:06:34 +0000 (UTC)
+	id 63DED52A75; Tue,  9 Feb 2016 14:06:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160209140634.40E5E52A76@arago-project.org>
+Message-Id: <20160209140634.63DED52A75@arago-project.org>
 Date: Tue,  9 Feb 2016 14:06:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : pru-icss: actually bump SRCREV for previous change
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 09 Feb 2016 14:06:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 83dd9f6a9dea4404aac1cee1585a2c4fc64f9021
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=83dd9f6a9dea4404aac1cee1585a2c4fc64f9021
+Branch: master
+Commit: e16e6caf6a035f41c7d4e17f3dcb3e5ba8478be7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e16e6caf6a035f41c7d4e17f3dcb3e5ba8478be7
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Feb  9 12:23:33 2016 +0000
