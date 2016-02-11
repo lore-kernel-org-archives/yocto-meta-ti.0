@@ -1,42 +1,77 @@
-Return-Path: <denys@ti.com>
+Return-Path: <winiston@futuraautomation.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1DD75E00B9C; Thu, 11 Feb 2016 01:37:55 -0800 (PST)
+	id ACC2DE00B9C; Thu, 11 Feb 2016 01:42:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, RCVD_IN_DNSWL_LOW,
+	STOX_REPLY_TYPE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: *  0.4 STOX_REPLY_TYPE STOX_REPLY_TYPE
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.192.174 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6AFCBE00ADD
-	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2016 01:37:51 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u1B9bp6g016569
-	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2016 03:37:51 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u1B9boKB015750
-	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2016 03:37:51 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 11 Feb 2016 03:37:50 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u1B9bobj015440	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2016 03:37:50
-	-0600
-Date: Thu, 11 Feb 2016 04:37:50 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <496870510.475.1455183470452.JavaMail.jenkins@puget>
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
+	[209.85.192.174])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7624BE00ADD
+	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2016 01:42:12 -0800 (PST)
+Received: by mail-pf0-f174.google.com with SMTP id x65so26900111pfb.1
+	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2016 01:42:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=futuraautomation-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:from:to:cc:references:in-reply-to:subject:date
+	:mime-version:content-type:content-transfer-encoding:importance
+	:disposition-notification-to;
+	bh=wrrvUtdSBp3vlgmRKmQaj8zMQ9RZ49T4kn2OcryVEwc=;
+	b=MN6kKtf4FZYFHU9/Ty1FJ5ilCy/g1tfc21jKzKMPv0tJiSoLCO60xSnOvxBMbve/aI
+	CRZ9QPdqJjWoqwp1YSCNZBeHOxT7hyk37ks1z4y7zfKpAc18css4sbBU9v04CTijDJJD
+	QFmNyxV/1Ug0/zmR8W6g3Hj70wGzsHIAKNZXiFjSm0RVM6FoZjyv1bLnxVAOf7mYc4E0
+	9YTV8zKs2W9jWy92aBXVcl1cqk9gwJXFRjjZXwMPqUF13fDnzuEtbOgE1zqBwOHUzHto
+	dtGyQ6waQAkvkmwO8FqgNHB/NFGHOvbn2ijNY4eX/f3HvX1BR0rzXNdvFKL+Zip/8M2W
+	K1rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:from:to:cc:references:in-reply-to
+	:subject:date:mime-version:content-type:content-transfer-encoding
+	:importance:disposition-notification-to;
+	bh=wrrvUtdSBp3vlgmRKmQaj8zMQ9RZ49T4kn2OcryVEwc=;
+	b=WUJ8MGilbdTECUSAoWGGJ+8fhdoEcA7U9BGPf7xdf2YqX74TMd9b28su1NJf3PbMf7
+	iJqpOQ0nOQN8PQAPmUugrxL8qzHsjW2/CK8rE2BsquDXN9Qmls8sY3N+d/aD7OIldo2u
+	lVJmtEqHx3pkgRmjrpYJs4v3K0+P68r1HFFMDU28TSQzCk4Ot2PcMa1UrHB6T6T+nu39
+	l3uppAlytWSvYogghKBg68qAphGFhF4uTqUDQh0HmyYZsWj1MQX3Hlsw6Eo/dwrhjY1P
+	RdBaitucIhjO7DpFYevETB71s8FCsiFWQ7RlHbpd+J1QzT0L1gJT75eeWVQFAC9EbpOO
+	8n6g==
+X-Gm-Message-State: AG10YOSvpgrOdUwObs0LCUMbHF2PZkvBS41VaKiIwR4HjHW3fOanFUbE4HDKJXMi/Aaxjg==
+X-Received: by 10.98.18.215 with SMTP id 84mr65555372pfs.131.1455183731899;
+	Thu, 11 Feb 2016 01:42:11 -0800 (PST)
+Received: from RD3 ([59.99.236.185]) by smtp.gmail.com with ESMTPSA id
+	r26sm10907453pfb.21.2016.02.11.01.42.08
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 11 Feb 2016 01:42:10 -0800 (PST)
+Message-ID: <E3FD66DB97154B088C817E7FA321C392@RD3>
+From: <winiston@futuraautomation.com>
+To: "Anders Darander" <anders@chargestorm.se>
+References: <7A144FD2E22B42C29D1455BA473BACE1@RD3>
+	<CAMKF1spT+uLPxQJvRFjjTxtXN4crg34a4cQw=Q8TJ9iYLLZHCg@mail.gmail.com>
+	<28AA3DBF5F3343948A98AC47A80A2AA7@RD3>
+	<20160128073854.GC7112@ad.chargestorm.se>
+	<A6BAB694CCB64D07B1F044525E64943D@RD3>
+	<20160128105332.GF7112@ad.chargestorm.se>
+In-Reply-To: <20160128105332.GF7112@ad.chargestorm.se>
+Date: Thu, 11 Feb 2016 15:16:11 +0530
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2016-02-11_02-37-48
+X-Priority: 1
+X-MSMail-Priority: High
+Importance: High
+X-Mailer: Microsoft Windows Live Mail 15.4.3555.308
+X-MimeOLE: Produced By Microsoft MimeOLE V15.4.3555.308
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Build Error for AM437x-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,207 +84,88 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2016 09:37:55 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_474_607846527.1455183470451"
-
-------=_Part_474_607846527.1455183470451
-Content-Type: text/html; charset="UTF-8"
+X-List-Received-Date: Thu, 11 Feb 2016 09:42:15 -0000
+Content-Type: text/plain; format=flowed; charset="iso-8859-1";
+	reply-type=original
 Content-Transfer-Encoding: 7bit
 
-<html>
-<head>
-<title>
-Status for 02/11/16
-</title>
-</head>
-<body>
+Dear,
 
-<h2>Status for 02/11/16</h2>
+Thank you very much .Now I am able to build core-image-minimal and 
+qt4e-demo-image. Now the problem is, USB mouse is not working in 
+qt4e-demo-image.
 
-<h2>BUILD_ID: build-2016-02-11_02-39-02</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data/$TISDK_VERSION"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+What could be issue? How do I make usb mouse  to work?
 
 
-------=_Part_474_607846527.1455183470451--
+
+Regards,
+Winiston.P
+Futura Automation Pvt Ltd.
+
+Ph :91-80-28375290 / 28375295
+Fax :91-80-28375291
+-----Original Message----- 
+From: Anders Darander
+Sent: Thursday, January 28, 2016 4:23 PM
+To: winiston@futuraautomation.com
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] Build Error for AM437x-evm
+
+* winiston@futuraautomation.com <winiston@futuraautomation.com> [160128 
+10:00]:
+> -Wstrict-prototypes -Wno-format-security -fno-builtin -ffreestanding  -Os
+> -fno-stack-protector -fno-delete-null-pointer-checks -g -fstack-usage
+> -Wno-format-nonliteral -Werror=date-time -D__ARM__ -Wa,-mimplicit-it=always
+> -mthumb -mthumb-interwork -mabi=aapcs-linux -mword-relocations
+> -mno-unaligned-access -ffunction-sections -fdata-sections -fno-common
+> -ffixed-r9 -msoft-float -pipe -march=armv7-a    -D"KBUILD_STR(s)=#s"
+> -D"KBUILD_BASENAME=KBUILD_STR(xhci_omap)"
+> -D"KBUILD_MODNAME=KBUILD_STR(xhci_omap)" -c -o 
+> drivers/usb/host/xhci-omap.o
+> drivers/usb/host/xhci-omap.c
+> | drivers/usb/host/xhci-omap.c:34:5: error: 'board_usb_init' aliased to
+> external symbol '__board_usb_init'
+> |  int board_usb_init(int index, enum usb_init_type init)
+> |      ^
+
+This is the interesting part! (You could likely have search for error to
+narrow it done).
+
+The issue is a typical when when compiling older code with GCC 5.
+
+Though, I would've thought that building u-boot-2015.07 with jethro was
+working...
+
+Here's a patch for your issue:
+http://lists.denx.de/pipermail/u-boot/2015-October/229099.html
+
+Cheers,
+Anders
+
+> | make[1]: *** [drivers/usb/host/xhci-omap.o] Error 1
+> | make: *** [drivers/usb/host] Error 2
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: oe_runmake failed
+> | ERROR: Function failed: do_compile (log file is located at 
+> /home/winiston/poky/build/tmp/work/am437x_evm-poky-linux-gnueabi/u-boot-ti-staging/2015.07+gitAUTOINC+2b4b6fb691-r16/temp/log.do_compile.23933)
+> ERROR: Task 73
+> (/home/winiston/meta-ti/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb,
+> do_compile) failed with exit code '1'
+> NOTE: Tasks Summary: Attempted 1910 tasks of which 1909 didn't need to be
+> rerun and 1 failed.
+> No currently running tasks (1909 of 2055)
+
+> Summary: 1 task failed:
+>  /home/winiston/meta-ti/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb,
+> do_compile
+> Summary: There were 2 ERROR messages shown, returning a non-zero exit 
+> code.
+> winiston@winiston-VirtualBox:~/poky/build$
+
+
+-- 
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB 
+
+
