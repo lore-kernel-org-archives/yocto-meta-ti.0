@@ -1,26 +1,44 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 43C39E00C9C; Fri, 12 Feb 2016 13:34:04 -0800 (PST)
+	id 7EFC3E00C8F; Fri, 12 Feb 2016 14:01:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.13 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42B45E00C94
-	for <meta-ti@yoctoproject.org>; Fri, 12 Feb 2016 13:33:59 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id AD43152A81; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
+X-Greylist: delayed 3610 seconds by postgrey-1.32 at yocto-www;
+	Fri, 12 Feb 2016 14:01:53 PST
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49CFBE00C0B
+	for <meta-ti@yoctoproject.org>; Fri, 12 Feb 2016 14:01:53 -0800 (PST)
+Received: from vz-proxy-l002.mx.aol.com ([64.236.82.154])
+	by vms173013.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O2G00IJOD2U5380@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 12 Feb 2016 15:01:43 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=Ut/DdBcw22SB5hFy08yqCQ==:117
+	a=eIhxMilvRf8A:10 a=jFJIQSaiL_oA:10	a=sozttTNsAAAA:8
+	a=3eQpwHYDbUnLp1XZdnMA:9
+Received: by 100.15.86.14 with SMTP id 12f44838; Fri, 12 Feb 2016 21:01:43 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id D5C9E161E9D;	Fri,
+	12 Feb 2016 16:01:41 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160212213357.AD43152A81@arago-project.org>
-Date: Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : netcp-pa-fw: update to 3.0.1.8 version
+Date: Fri, 12 Feb 2016 16:01:41 -0500
+Message-id: <1455310901-4243-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+In-reply-to: <1455310901-4243-1-git-send-email-denis@denix.org>
+References: <1455310901-4243-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] netcp-pa-fw: update to 3.0.1.8 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,25 +51,14 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2016 21:34:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 12 Feb 2016 22:01:56 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 6d733273cc290e4db5a2000036b9c60c546164f6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6d733273cc290e4db5a2000036b9c60c546164f6
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 13 02:04:59 2016 +0000
-
-netcp-pa-fw: update to 3.0.1.8 version
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
-
- recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
 index 9fd2541..773ad7a 100644
@@ -84,5 +91,7 @@ index 9fd2541..773ad7a 100644
  	done
  }
  
+-- 
+2.2.0
 
 
