@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0BCF0E00C91; Fri, 12 Feb 2016 13:34:02 -0800 (PST)
+	id 0B046E00C98; Fri, 12 Feb 2016 13:34:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0728E00C91
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D1B1CE00C92
 	for <meta-ti@yoctoproject.org>; Fri, 12 Feb 2016 13:33:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 356DE52A79; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
+	id 7307452A7D; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160212213357.356DE52A79@arago-project.org>
+Message-Id: <20160212213357.7307452A7D@arago-project.org>
 Date: Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with platform, connectivity and A/D merges
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with few more fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,50 +37,42 @@ X-List-Received-Date: Fri, 12 Feb 2016 21:34:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: aa63b454fee105bc4f941371fb1e5327ed26ad87
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aa63b454fee105bc4f941371fb1e5327ed26ad87
+Branch: master
+Commit: 10b611eb197c71ad8f17167fbf6956e916e18ec0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=10b611eb197c71ad8f17167fbf6956e916e18ec0
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 13 00:38:27 2016 +0000
+Date:   Sat Feb 13 00:38:26 2016 +0000
 
-linux-ti-staging: update with platform, connectivity and A/D merges
+u-boot-ti-staging: update with few more fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 2747c93..b83c9db 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index ac65eed..cec53aa 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.1.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
--SRCREV = "beeed3c47260849f4fb465684c906f95a9ecd350"
-+SRCREV = "dae41414135f3424c2cd6c6d03f6df979b94a0ff"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 14a141f..0e6e17f 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -65,11 +65,11 @@ S = "${WORKDIR}/git"
+-PR = "r17"
++PR = "r18"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "016823748902fcafca15b6ea166c126e5afe1176"
-+SRCREV = "40263b4e2d499174013331c8800a2811d39ff8b3"
- PV = "4.1.17+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2015.07"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "d"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "e2a6f4edd83e2767e15bf3b0ac00d54f237a71e1"
++SRCREV = "fd0439094e9bd5dad1b5e52a68dfabf18985e450"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
