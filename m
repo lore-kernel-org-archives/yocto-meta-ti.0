@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0CFD8E00C87; Fri, 12 Feb 2016 13:34:02 -0800 (PST)
+	id 837D9E00C9B; Fri, 12 Feb 2016 13:34:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42ED4E00C96
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42B5AE00C95
 	for <meta-ti@yoctoproject.org>; Fri, 12 Feb 2016 13:33:59 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8771052A7F; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
+	id 9874852A80; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160212213357.8771052A7F@arago-project.org>
+Message-Id: <20160212213357.9874852A80@arago-project.org>
 Date: Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with platform, connectivity and A/D merges
+Subject: Denys Dmytriyenko : ti-sci-fw: update to 0.1.1.1 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,49 +38,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 4e8fd045b6ea25e458921bb4722568b2637c6b0e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4e8fd045b6ea25e458921bb4722568b2637c6b0e
+Commit: 7e492603be1b812d08f55bf573bcfb8014e1e583
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7e492603be1b812d08f55bf573bcfb8014e1e583
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 13 00:38:27 2016 +0000
+Date:   Sat Feb 13 02:04:58 2016 +0000
 
-linux-ti-staging: update with platform, connectivity and A/D merges
+ti-sci-fw: update to 0.1.1.1 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 2747c93..b83c9db 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index dff0712..5526776 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -3,8 +3,8 @@ DESCRIPTION = "TI SCI firmware"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
  
- BRANCH = "ti-rt-linux-4.1.y"
+-PV = "0.1.0.70"
+-PR = "r1"
++PV = "0.1.1.1"
++PR = "r0"
  
--SRCREV = "beeed3c47260849f4fb465684c906f95a9ecd350"
-+SRCREV = "dae41414135f3424c2cd6c6d03f6df979b94a0ff"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index ed7daa6..4a21d45 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -65,11 +65,11 @@ S = "${WORKDIR}/git"
+ CLEANBROKEN = "1"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g-evm"
  
--SRCREV = "016823748902fcafca15b6ea166c126e5afe1176"
-+SRCREV = "40263b4e2d499174013331c8800a2811d39ff8b3"
- PV = "4.1.17+git${SRCPV}"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "d"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "778668c4bb5fe59870e549a4a2820b9f7f90e89e"
++SRCREV = "382de6987b6683555f9c48ae6a2343f246434b38"
+ BRANCH ?= "ti-linux-firmware-4.1.y"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
 
 
