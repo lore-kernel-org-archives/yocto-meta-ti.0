@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2AF51E00C87; Fri, 12 Feb 2016 13:34:01 -0800 (PST)
+	id 2A249E00C98; Fri, 12 Feb 2016 13:34:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCA52E00C0B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CDF74E00C87
 	for <meta-ti@yoctoproject.org>; Fri, 12 Feb 2016 13:33:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4133F529EA; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
+	id 4F77F529C7; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160212213357.4133F529EA@arago-project.org>
+Message-Id: <20160212213357.4F77F529C7@arago-project.org>
 Date: Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-sci-fw: update to 0.1.1.1 version
+Subject: Denys Dmytriyenko : netcp-pa-fw: update to 3.0.1.8 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,44 +38,51 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 35e05628f873b1aa5c826c2129e011dde119bf35
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=35e05628f873b1aa5c826c2129e011dde119bf35
+Commit: 6c65b1b269a61319003e235139474734b6d1ccf3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6c65b1b269a61319003e235139474734b6d1ccf3
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 13 02:04:58 2016 +0000
+Date:   Sat Feb 13 02:04:59 2016 +0000
 
-ti-sci-fw: update to 0.1.1.1 version
+netcp-pa-fw: update to 3.0.1.8 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |    6 +++---
+ recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index dff0712..5526776 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -3,8 +3,8 @@ DESCRIPTION = "TI SCI firmware"
+diff --git a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
+index 9fd2541..773ad7a 100644
+--- a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
++++ b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "NETCP PA firmware for Keystone"
  LICENSE = "TI-TFL"
  LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
  
--PV = "0.1.0.70"
--PR = "r1"
-+PV = "0.1.1.1"
-+PR = "r0"
+-PV = "1.0.0"
++PV = "3.0.1.8"
+ PR = "r0"
  
  CLEANBROKEN = "1"
- 
-@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g-evm"
+@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--SRCREV = "778668c4bb5fe59870e549a4a2820b9f7f90e89e"
-+SRCREV = "382de6987b6683555f9c48ae6a2343f246434b38"
+-SRCREV = "55c708e391c5663a9ef0bb13970f2153f82fba36"
++SRCREV = "dd8db49ed57f8ac448451cc5e54973c71a99faea"
  BRANCH ?= "ti-linux-firmware-4.1.y"
  
  SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+@@ -49,7 +49,7 @@ ks2_pa_pdsp5_pam \
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware
+ 	for f in ${FWBASENAME}; do
+-		install -m 0644 ${S}/ti-keystone/$f-${PV}.bin ${D}${base_libdir}/firmware/$f.bin
++		install -m 0644 ${S}/ti-keystone/$f.bin ${D}${base_libdir}/firmware/$f.bin
+ 	done
+ }
+ 
 
 
