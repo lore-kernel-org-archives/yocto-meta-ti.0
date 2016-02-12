@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2A249E00C98; Fri, 12 Feb 2016 13:34:01 -0800 (PST)
+	id 0BCF0E00C91; Fri, 12 Feb 2016 13:34:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CDF74E00C87
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0728E00C91
 	for <meta-ti@yoctoproject.org>; Fri, 12 Feb 2016 13:33:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4F77F529C7; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
+	id 356DE52A79; Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160212213357.4F77F529C7@arago-project.org>
+Message-Id: <20160212213357.356DE52A79@arago-project.org>
 Date: Fri, 12 Feb 2016 21:33:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : netcp-pa-fw: update to 3.0.1.8 version
+Subject: Denys Dmytriyenko : linux-ti-staging: update with platform, connectivity and A/D merges
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,56 +33,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2016 21:34:01 -0000
+X-List-Received-Date: Fri, 12 Feb 2016 21:34:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 6c65b1b269a61319003e235139474734b6d1ccf3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6c65b1b269a61319003e235139474734b6d1ccf3
+Commit: aa63b454fee105bc4f941371fb1e5327ed26ad87
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aa63b454fee105bc4f941371fb1e5327ed26ad87
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 13 02:04:59 2016 +0000
+Date:   Sat Feb 13 00:38:27 2016 +0000
 
-netcp-pa-fw: update to 3.0.1.8 version
+linux-ti-staging: update with platform, connectivity and A/D merges
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
-index 9fd2541..773ad7a 100644
---- a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
-+++ b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "NETCP PA firmware for Keystone"
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+index 2747c93..b83c9db 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
  
--PV = "1.0.0"
-+PV = "3.0.1.8"
- PR = "r0"
+ BRANCH = "ti-rt-linux-4.1.y"
  
- CLEANBROKEN = "1"
-@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
+-SRCREV = "beeed3c47260849f4fb465684c906f95a9ecd350"
++SRCREV = "dae41414135f3424c2cd6c6d03f6df979b94a0ff"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 14a141f..0e6e17f 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -65,11 +65,11 @@ S = "${WORKDIR}/git"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-lsk-linux-4.1.y"
  
--SRCREV = "55c708e391c5663a9ef0bb13970f2153f82fba36"
-+SRCREV = "dd8db49ed57f8ac448451cc5e54973c71a99faea"
- BRANCH ?= "ti-linux-firmware-4.1.y"
+-SRCREV = "016823748902fcafca15b6ea166c126e5afe1176"
++SRCREV = "40263b4e2d499174013331c8800a2811d39ff8b3"
+ PV = "4.1.17+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-@@ -49,7 +49,7 @@ ks2_pa_pdsp5_pam \
- do_install() {
- 	install -d ${D}${base_libdir}/firmware
- 	for f in ${FWBASENAME}; do
--		install -m 0644 ${S}/ti-keystone/$f-${PV}.bin ${D}${base_libdir}/firmware/$f.bin
-+		install -m 0644 ${S}/ti-keystone/$f.bin ${D}${base_libdir}/firmware/$f.bin
- 	done
- }
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
+ PR = "${MACHINE_KERNEL_PR}"
  
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
