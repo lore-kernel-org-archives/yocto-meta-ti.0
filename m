@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 36A4DE00948; Mon, 15 Feb 2016 14:28:02 -0800 (PST)
+	id 56D5DE0071E; Mon, 15 Feb 2016 14:47:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C933EE00807
-	for <meta-ti@yoctoproject.org>; Mon, 15 Feb 2016 14:27:47 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 9A9A152A8B; Mon, 15 Feb 2016 22:27:47 +0000 (UTC)
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 617BEE00444
+	for <meta-ti@yoctoproject.org>; Mon, 15 Feb 2016 14:47:21 -0800 (PST)
+Received: from vz-proxy-l008.mx.aol.com ([64.236.82.154])
+	by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O2M0084J1YEK710@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 15 Feb 2016 16:47:02 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=Ut/DdBcw22SB5hFy08yqCQ==:117
+	a=jFJIQSaiL_oA:10 a=sozttTNsAAAA:8	a=Z6pEUyKhh6cp7L26gWQA:9
+Received: by 100.15.86.14 with SMTP id 5bf6c42a; Mon, 15 Feb 2016 22:47:02 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id DFE91161EA7;	Mon,
+	15 Feb 2016 17:47:01 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160215222747.9A9A152A8B@arago-project.org>
-Date: Mon, 15 Feb 2016 22:27:47 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : omap5-sgx-ddk-um-linux: Specify COMPATIBLE_MACHINE list
+Date: Mon, 15 Feb 2016 17:47:01 -0500
+Message-id: <1455576421-7496-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] linux-ti-staging: update with latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,50 +46,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2016 22:28:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 15 Feb 2016 22:47:23 -0000
 
-Module: meta-ti
-Branch: fido
-Commit: 88bdd10290ea1dc601e9509b63a08468a3a6e0d1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=88bdd10290ea1dc601e9509b63a08468a3a6e0d1
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Feb 16 01:04:04 2016 +0000
-
-omap5-sgx-ddk-um-linux: Specify COMPATIBLE_MACHINE list
-
-* This is only compatible with ti33x, ti43, and omap-a15 as a SRCREV
-  is only supplied for these SOC families.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.1.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index dfd22d0..0cdab96 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -3,6 +3,7 @@ HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
- LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+index b83c9db..a8cc64e 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
  
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-rt-linux-4.1.y"
  
- BRANCH_omap-a15 = "master"
-@@ -19,7 +20,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+-SRCREV = "dae41414135f3424c2cd6c6d03f6df979b94a0ff"
++SRCREV = "fe2b227e0288c6e2dd27f8f382a831c180ca2d4f"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 0e6e17f..63055bd 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -65,11 +65,11 @@ S = "${WORKDIR}/git"
  
- inherit update-rc.d
+ BRANCH = "ti-lsk-linux-4.1.y"
  
--PR = "r14"
-+PR = "r15"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+-SRCREV = "40263b4e2d499174013331c8800a2811d39ff8b3"
++SRCREV = "3109ca18af7625629e995927e5307f24d1dfc0f2"
+ PV = "4.1.17+git${SRCPV}"
  
- RDEPENDS_${PN} += "libdrm"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "e"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-- 
+2.2.0
 
 
