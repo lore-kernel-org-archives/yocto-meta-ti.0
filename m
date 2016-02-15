@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ADEADE0079A; Mon, 15 Feb 2016 12:31:38 -0800 (PST)
+	id 06016E007DC; Mon, 15 Feb 2016 12:31:44 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,35 +8,33 @@ X-Spam-Status: No, score=-0.7 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
 	RCVD_IN_DNSWL_LOW,URI_HEX autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.17 listed in list.dnswl.org]
+	*      [206.46.173.23 listed in list.dnswl.org]
 	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3708AE006AE
-	for <meta-ti@yoctoproject.org>; Mon, 15 Feb 2016 12:31:35 -0800 (PST)
-Received: from vz-proxy-l003.mx.aol.com ([64.236.82.148])
-	by vms173017.mailsrvcs.net
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E113E0079A
+	for <meta-ti@yoctoproject.org>; Mon, 15 Feb 2016 12:31:40 -0800 (PST)
+Received: from vz-proxy-l004.mx.aol.com ([64.236.82.153])
+	by vms173023.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O2L005AVVO39E50@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 15 Feb 2016 14:31:19 -0600 (CST)
+	2014)) with ESMTPA id <0O2L006W4VO2PTW0@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 15 Feb 2016 14:31:27 -0600 (CST)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
-	a=jFJIQSaiL_oA:10 a=sozttTNsAAAA:8	a=EQWvt9tfZbzlQOAJBBAA:9
-Received: by 100.15.86.14 with SMTP id 4ac70468; Mon, 15 Feb 2016 20:31:19 GMT
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=jFJIQSaiL_oA:10 a=sozttTNsAAAA:8	a=7DQiEtIss1jMj1yzuboA:9
+Received: by 100.15.86.14 with SMTP id 47c82bd8; Mon, 15 Feb 2016 20:31:27 GMT
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 7F29D161E9F;	Mon,
+	by gandalf.denix.org (Postfix) with ESMTP id 7D61C161B15;	Mon,
 	15 Feb 2016 15:31:14 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 15 Feb 2016 15:31:11 -0500
-Message-id: <1455568271-11485-2-git-send-email-denis@denix.org>
+Date: Mon, 15 Feb 2016 15:31:10 -0500
+Message-id: <1455568271-11485-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-In-reply-to: <1455568271-11485-1-git-send-email-denis@denix.org>
-References: <1455568271-11485-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] omap5-sgx-ddk-um-linux: SGX user mode driver v1.14 for all TI SoCs
+Subject: [PATCH 1/2] omapdrm_pvr: SGX kernel mode driver v1.14 for all TI SoCs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,105 +47,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2016 20:31:38 -0000
+X-List-Received-Date: Mon, 15 Feb 2016 20:31:44 -0000
 
 From: Anand Balagopalakrishnan <anandb@ti.com>
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 ---
- ...2.bb => omap5-sgx-ddk-um-linux_1.14.3699939.bb} |   53 ++++++--------------
- 1 file changed, 15 insertions(+), 38 deletions(-)
- copy recipes-graphics/libgles/{omap5-sgx-ddk-um-linux_1.9.0.12.bb => omap5-sgx-ddk-um-linux_1.14.3699939.bb} (26%)
+ ..._1.9.2253347.bb => omapdrm-pvr_1.14.3699939.bb} |   30 +++++++-------------
+ 1 file changed, 11 insertions(+), 19 deletions(-)
+ copy recipes-bsp/powervr-drivers/{omapdrm-pvr_1.9.2253347.bb => omapdrm-pvr_1.14.3699939.bb} (39%)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-similarity index 26%
-copy from recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-copy to recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-index dfd22d0..1d0f09f 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-@@ -1,28 +1,23 @@
--DESCRIPTION = "Userspace libraries for SGX"
--HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
-+DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
-+HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
- LICENSE = "TI-TSPA"
--LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
-+LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.14.3699939.bb
+similarity index 39%
+copy from recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+copy to recipes-bsp/powervr-drivers/omapdrm-pvr_1.14.3699939.bb
+index 4552fe1..e6e4e5d 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.14.3699939.bb
+@@ -1,7 +1,7 @@
+-DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found in the omap5 SoCs"
+-HOMEPAGE = "http://git.ti.com"
++DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found in the TI SoCs"
++HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-linux"
+ LICENSE = "MIT | GPLv2"
+-LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bfc03386bb4d8d9381b79d33898"
++LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=74506d9b8e5edbce66c2747c50fcef12"
+ 
+ inherit module
+ 
+@@ -12,31 +12,23 @@ PR = "${MACHINE_KERNEL_PR}"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--BRANCH_omap-a15 = "master"
--BRANCH_ti33x = "am3/k4.1"
+-BRANCH_omap-a15 = "dra7/k4.1"
+-BRANCH_ti33x = "am4/k4.1"
 -BRANCH_ti43x = "am4/k4.1"
-+BRANCH = "ti-img-sgx/${PV}"
++BRANCH = "ti-img-sgx/${PV}/k4.1"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV_omap-a15 = "b6801bf89e00d69893c2957455bbeb3195c0ed52"
--SRCREV_ti33x    = "84ae5444c7cbc3f4c65a226b9fea62d4a513f3e0"
--SRCREV_ti43x    = "fdf4c0b594ca142a68aabb4c3f82b75be50b46cc"
-+SRCREV = "0e98623e944864f080cd886906b46ea9a5d830e5"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
--INITSCRIPT_NAME = "pvr-init"
--INITSCRIPT_PARAMS = "defaults 8"
+-SRCREV_omap-a15 = "c53a5dfb9f4d5612c372ec8e252cb13a731c9c10"
+-SRCREV_ti33x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
+-SRCREV_ti43x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
++SRCREV = "fed0756f1b8b9d526da2821635c7d742989d47c3"
+ 
+-PVR_NULLDRM_ti33x = "1"
+-PVR_NULLDRM_ti43x = "0"
+-PVR_NULLDRM_omap-a15 = "0"
 +TARGET_PRODUCT_omap-a15 = "jacinto6evm"
 +TARGET_PRODUCT_ti33x = "ti335x"
 +TARGET_PRODUCT_ti43x = "ti437x"
  
--inherit update-rc.d
+-EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" PVR_NULLDRM=${PVR_NULLDRM}'
 -
--PR = "r14"
-+PR = "r2"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+-DEVICE_SUB_DIR_omap-a15 = "omap5430"
+-DEVICE_SUB_DIR_ti33x = "omap335x"
+-DEVICE_SUB_DIR_ti43x = "omap437x"
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
  
--RDEPENDS_${PN} += "libdrm"
-+RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
- 
- RREPLACES_${PN} = "libegl libgles1 libgles2"
- RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-@@ -30,37 +25,19 @@ RREPLACES_${PN}-dbg = "libegl-dbg"
- 
- S = "${WORKDIR}/git"
- 
--SRC_URI_append = " \
--    file://rc.pvr \
--    file://powervr.ini \
--"
--
- do_install () {
--    oe_runmake install DESTDIR=${D}
--    install -d ${D}${sysconfdir}/init.d
--    install -m 0755 ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
--
--    install -d ${D}${sysconfdir}
--    install -m 0644 ${WORKDIR}/powervr.ini ${D}${sysconfdir}/
-+    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
-+    mkdir -p ${D}${libdir}/gbm
-+    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
+ do_compile_prepend() {
+-    cd ${S}/eurasia_km/eurasiacon/build/linux2/${DEVICE_SUB_DIR}_linux
++    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap_linux
  }
  
- FILES_${PN} =  "${bindir}/*"
- FILES_${PN} += " ${libdir}/*"
--FILES_${PN} +=  "${includedir}/* /usr/share/sgx-lib/"
--FILES_${PN} += "${sysconfdir}/init.d/pvr-init"
--FILES_${PN} += "${sysconfdir}/powervr.ini"
--
--PACKAGES =+ "${PN}-plugins"
--FILES_${PN}-plugins = ""
--FILES_${PN}-plugins_ti43x = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libpvrws_WAYLAND.so ${libdir}/libpvrws_KMS.so "
--FILES_${PN}-plugins_ti33x = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libpvrDRMWSEGL.so ${libdir}/libpvrDRMWSEGL_FRONT.so "
--RDEPENDS_${PN} += "${PN}-plugins"
--
--ALLOW_EMPTY_${PN}-plugins = "1"
-+FILES_${PN} +=  "${includedir}/*"
-+FILES_${PN} +=  "${sysconfdir}/*"
- 
- INHIBIT_PACKAGE_STRIP = "1"
- 
- INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
--INSANE_SKIP_${PN}-plugins = "dev-so"
- 
- CLEANBROKEN = "1"
+ do_install() {
+-    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_${DEVICE_SUB_DIR}_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_omap_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
 -- 
 1.7.9.5
 
