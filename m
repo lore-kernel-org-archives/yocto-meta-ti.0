@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A8CFAE00807; Mon, 15 Feb 2016 14:27:25 -0800 (PST)
+	id A9DCEE00838; Mon, 15 Feb 2016 14:27:25 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,15 +14,15 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E837E0071E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FC75E0079A
 	for <meta-ti@yoctoproject.org>; Mon, 15 Feb 2016 14:27:18 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E8B4B52A9B; Mon, 15 Feb 2016 22:27:17 +0000 (UTC)
+	id 693BD52A8B; Mon, 15 Feb 2016 22:27:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160215222717.E8B4B52A9B@arago-project.org>
+Message-Id: <20160215222717.693BD52A8B@arago-project.org>
 Date: Mon, 15 Feb 2016 22:27:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: SGX user mode driver v1. 14 for all TI SoCs
+Subject: Anand Balagopalakrishnan : omapdrm_pvr: SGX kernel mode driver v1. 14 for all TI SoCs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,71 +39,62 @@ X-List-Received-Date: Mon, 15 Feb 2016 22:27:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 9b2781e62bfc9f9b37a8aba5ce387fd7a67ab091
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9b2781e62bfc9f9b37a8aba5ce387fd7a67ab091
+Branch: fido
+Commit: e64d04812d46afaef60483a2c97bb708fff7c42e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e64d04812d46afaef60483a2c97bb708fff7c42e
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Sat Feb 13 20:30:37 2016 +0000
+Date:   Sat Feb 13 20:30:36 2016 +0000
 
-omap5-sgx-ddk-um-linux: SGX user mode driver v1.14 for all TI SoCs
+omapdrm_pvr: SGX kernel mode driver v1.14 for all TI SoCs
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |   43 ++++++++++++++++++++
- 1 files changed, 43 insertions(+), 0 deletions(-)
+ .../powervr-drivers/omapdrm-pvr_1.14.3699939.bb    |   34 ++++++++++++++++++++
+ 1 files changed, 34 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.14.3699939.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.14.3699939.bb
 new file mode 100644
-index 0000000..1d0f09f
+index 0000000..e6e4e5d
 --- /dev/null
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
-+HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
-+LICENSE = "TI-TSPA"
-+LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.14.3699939.bb
+@@ -0,0 +1,34 @@
++DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found in the TI SoCs"
++HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-linux"
++LICENSE = "MIT | GPLv2"
++LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=74506d9b8e5edbce66c2747c50fcef12"
++
++inherit module
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
++
++MACHINE_KERNEL_PR_append = "i"
++PR = "${MACHINE_KERNEL_PR}"
 +
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+BRANCH = "ti-img-sgx/${PV}"
++BRANCH = "ti-img-sgx/${PV}/k4.1"
 +
-+SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "0e98623e944864f080cd886906b46ea9a5d830e5"
++SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
++S = "${WORKDIR}/git"
++
++SRCREV = "fed0756f1b8b9d526da2821635c7d742989d47c3"
 +
 +TARGET_PRODUCT_omap-a15 = "jacinto6evm"
 +TARGET_PRODUCT_ti33x = "ti335x"
 +TARGET_PRODUCT_ti43x = "ti437x"
 +
-+PR = "r2"
-+PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
 +
-+RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
-+
-+RREPLACES_${PN} = "libegl libgles1 libgles2"
-+RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RREPLACES_${PN}-dbg = "libegl-dbg"
-+
-+S = "${WORKDIR}/git"
-+
-+do_install () {
-+    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
-+    mkdir -p ${D}${libdir}/gbm
-+    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
++do_compile_prepend() {
++    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap_linux
 +}
 +
-+FILES_${PN} =  "${bindir}/*"
-+FILES_${PN} += " ${libdir}/*"
-+FILES_${PN} +=  "${includedir}/*"
-+FILES_${PN} +=  "${sysconfdir}/*"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+
-+INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-+
-+CLEANBROKEN = "1"
++do_install() {
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_omap_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
++}
 
 
