@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 904A9E00444; Mon, 15 Feb 2016 14:27:22 -0800 (PST)
+	id A8CFAE00807; Mon, 15 Feb 2016 14:27:25 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,12 +14,12 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D13EE00444
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E837E0071E
 	for <meta-ti@yoctoproject.org>; Mon, 15 Feb 2016 14:27:18 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9F1BB52A86; Mon, 15 Feb 2016 22:27:17 +0000 (UTC)
+	id E8B4B52A9B; Mon, 15 Feb 2016 22:27:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160215222717.9F1BB52A86@arago-project.org>
+Message-Id: <20160215222717.E8B4B52A9B@arago-project.org>
 Date: Mon, 15 Feb 2016 22:27:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: SGX user mode driver v1. 14 for all TI SoCs
@@ -35,13 +35,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2016 22:27:22 -0000
+X-List-Received-Date: Mon, 15 Feb 2016 22:27:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 2ea5fb2aa03cc4be0258cd23f9c79784e3d44ad2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2ea5fb2aa03cc4be0258cd23f9c79784e3d44ad2
+Branch: master
+Commit: 9b2781e62bfc9f9b37a8aba5ce387fd7a67ab091
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9b2781e62bfc9f9b37a8aba5ce387fd7a67ab091
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
 Date:   Sat Feb 13 20:30:37 2016 +0000
