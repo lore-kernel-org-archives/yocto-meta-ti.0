@@ -1,39 +1,38 @@
-Return-Path: <denis@denix.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 901C2E0090E; Tue, 16 Feb 2016 08:30:29 -0800 (PST)
+	id 94907E00A92; Tue, 16 Feb 2016 11:06:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A920E00404
-	for <meta-ti@yoctoproject.org>; Tue, 16 Feb 2016 08:30:27 -0800 (PST)
-Received: from vz-proxy-l005.mx.aol.com ([64.236.82.148])
-	by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O2N00KUVF6JP170@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 16 Feb 2016 10:30:19 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=MtGvkDue c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
-	a=jFJIQSaiL_oA:10 a=sozttTNsAAAA:8	a=N2GkFRJb8CCj-Ql3RYMA:9
-Received: by 100.15.86.14 with SMTP id 6fbf7cc1; Tue, 16 Feb 2016 16:30:19 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 78C56161E9E;	Tue,
-	16 Feb 2016 11:30:18 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Tue, 16 Feb 2016 11:30:17 -0500
-Message-id: <1455640217-28835-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] omap5-evm: increase max_leb_cnt
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67691E009EA
+	for <meta-ti@yoctoproject.org>; Tue, 16 Feb 2016 11:05:58 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u1GJ5vIR005378
+	for <meta-ti@yoctoproject.org>; Tue, 16 Feb 2016 13:05:57 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u1GJ5vF4012650
+	for <meta-ti@yoctoproject.org>; Tue, 16 Feb 2016 13:05:57 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 16 Feb 2016 13:05:57 -0600
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u1GJ5vlO006602;	Tue, 16 Feb 2016 13:05:57 -0600
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 16 Feb 2016 14:05:55 -0500
+Message-ID: <1455649555-24434-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] ti-ipc: Extract SRC info into unique variables
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,29 +45,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Feb 2016 16:30:29 -0000
+X-List-Received-Date: Tue, 16 Feb 2016 19:06:02 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+* This makes it easier to override the source revision for all ti-ipc
+  recipes
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- conf/machine/omap5-evm.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-ti/ipc/ti-ipc.inc | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/conf/machine/omap5-evm.conf b/conf/machine/omap5-evm.conf
-index 3c834cb..2a19e77 100644
---- a/conf/machine/omap5-evm.conf
-+++ b/conf/machine/omap5-evm.conf
-@@ -19,7 +19,7 @@ SERIAL_CONSOLE = "115200 ttyO2"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4200"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4300"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index f3b1bff..a7e1ed9 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -4,16 +4,20 @@ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+-BRANCH = "ipc-next"
+-
+-SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH}"
++TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
++TI_IPC_GIT_PROTOCOL = "git"
++TI_IPC_GIT_BRANCH = "ipc-next"
+ 
+ #Corresponds to 3.42.00.00_eng
+-SRCREV = "2b47e35ed72170e4e56906fb9ab93dd9ef385a38"
++TI_IPC_SRCREV = "2b47e35ed72170e4e56906fb9ab93dd9ef385a38"
++
++BRANCH = "${TI_IPC_GIT_BRANCH}"
++SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${TI_IPC_SRCREV}"
+ 
+ S = "${WORKDIR}/git"
+ PV = "3.42.00.00"
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
 -- 
-2.2.0
+1.9.1
 
 
