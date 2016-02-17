@@ -1,40 +1,28 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F35D7E00BEC; Wed, 17 Feb 2016 13:22:31 -0800 (PST)
+	id AE75EE00BF8; Wed, 17 Feb 2016 13:34:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW,URI_HEX autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.9 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E1DCE00BE8
-	for <meta-ti@yoctoproject.org>; Wed, 17 Feb 2016 13:22:28 -0800 (PST)
-Received: from vz-proxy-l004.mx.aol.com ([64.236.82.153])
-	by vms173009.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O2P00GKLNCLHO40@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 17 Feb 2016 15:21:57 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
-	a=jFJIQSaiL_oA:10 a=sozttTNsAAAA:8	a=ImGI9YP_xKlKK8iGtc4A:9
-Received: by 100.15.86.14 with SMTP id 5ebcc866; Wed, 17 Feb 2016 21:21:57 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 2F0A3161E90;	Wed,
-	17 Feb 2016 16:21:55 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8EA11E00BEB
+	for <meta-ti@yoctoproject.org>; Wed, 17 Feb 2016 13:34:42 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id BC7BE52A97; Wed, 17 Feb 2016 21:34:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Wed, 17 Feb 2016 16:21:54 -0500
-Message-id: <1455744114-5086-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH 1/1] omap5-sgx-ddk-um-linux: bump SRCREV for gl2ext header change
+Message-Id: <20160217213441.BC7BE52A97@arago-project.org>
+Date: Wed, 17 Feb 2016 21:34:41 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: bump SRCREV for gl2ext header change
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,14 +35,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Feb 2016 21:22:32 -0000
+X-List-Received-Date: Wed, 17 Feb 2016 21:34:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Anand Balagopalakrishnan <anandb@ti.com>
+Module: meta-ti
+Branch: fido
+Commit: 19d63fe4e0ab98ed6c848b2b96dca08c9daa6e09
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=19d63fe4e0ab98ed6c848b2b96dca08c9daa6e09
+
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Thu Feb 18 03:21:54 2016 +0000
+
+omap5-sgx-ddk-um-linux: bump SRCREV for gl2ext header change
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
 index 1d0f09f..5ac3f31 100644
@@ -76,7 +76,5 @@ index 1d0f09f..5ac3f31 100644
  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
  RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
--- 
-1.7.9.5
 
 
