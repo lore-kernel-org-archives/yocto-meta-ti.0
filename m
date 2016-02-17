@@ -1,28 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AF1C2E00BE8; Wed, 17 Feb 2016 13:34:48 -0800 (PST)
+	id 821EAE00BF8; Wed, 17 Feb 2016 13:50:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.13 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8CD3BE00BE8
-	for <meta-ti@yoctoproject.org>; Wed, 17 Feb 2016 13:34:42 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id DB97852A99; Wed, 17 Feb 2016 21:34:41 +0000 (UTC)
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 223C0E00BE8
+	for <meta-ti@yoctoproject.org>; Wed, 17 Feb 2016 13:50:37 -0800 (PST)
+Received: from vz-proxy-l005.mx.aol.com ([64.236.82.148])
+	by vms173013.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O2P00276OMT3L70@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 17 Feb 2016 15:49:42 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=MtGvkDue c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
+	a=jFJIQSaiL_oA:10 a=sozttTNsAAAA:8	a=ztGQagcx57n3yV9kHsAA:9
+Received: by 100.15.86.14 with SMTP id 628e9fbc; Wed, 17 Feb 2016 21:49:42 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 70F03161EB0;	Wed,
+	17 Feb 2016 16:49:41 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160217213441.DB97852A99@arago-project.org>
-Date: Wed, 17 Feb 2016 21:34:41 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: bump SRCREV for gl2ext header change
+Date: Wed, 17 Feb 2016 16:49:39 -0500
+Message-id: <1455745780-11703-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH 1/2] u-boot-ti-staging: update with latest merges, including HS support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,46 +46,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Feb 2016 21:34:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Feb 2016 21:50:40 -0000
 
-Module: meta-ti
-Branch: master
-Commit: f23506222633cfa6355d48f793996ddad7cc171d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f23506222633cfa6355d48f793996ddad7cc171d
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Thu Feb 18 03:21:54 2016 +0000
-
-omap5-sgx-ddk-um-linux: bump SRCREV for gl2ext header change
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-index 1d0f09f..5ac3f31 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-@@ -8,13 +8,13 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index cec53aa..304b0ab 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "0e98623e944864f080cd886906b46ea9a5d830e5"
-+SRCREV = "562db8257cc4bf04647e06a8644d73f5d77fe711"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
- TARGET_PRODUCT_ti43x = "ti437x"
+-PR = "r18"
++PR = "r19"
+ PV_append = "+git${SRCPV}"
  
--PR = "r2"
-+PR = "r3"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+ BRANCH ?= "ti-u-boot-2015.07"
+ 
+-SRCREV = "fd0439094e9bd5dad1b5e52a68dfabf18985e450"
++SRCREV = "dca348d604c0117fa7851e3a4a194bedb42b739b"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+-- 
+2.2.0
 
 
