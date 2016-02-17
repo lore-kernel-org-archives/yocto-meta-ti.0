@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AE75EE00BF8; Wed, 17 Feb 2016 13:34:48 -0800 (PST)
+	id AF1C2E00BE8; Wed, 17 Feb 2016 13:34:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,12 +14,12 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8EA11E00BEB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8CD3BE00BE8
 	for <meta-ti@yoctoproject.org>; Wed, 17 Feb 2016 13:34:42 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BC7BE52A97; Wed, 17 Feb 2016 21:34:41 +0000 (UTC)
+	id DB97852A99; Wed, 17 Feb 2016 21:34:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160217213441.BC7BE52A97@arago-project.org>
+Message-Id: <20160217213441.DB97852A99@arago-project.org>
 Date: Wed, 17 Feb 2016 21:34:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: bump SRCREV for gl2ext header change
@@ -39,9 +39,9 @@ X-List-Received-Date: Wed, 17 Feb 2016 21:34:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 19d63fe4e0ab98ed6c848b2b96dca08c9daa6e09
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=19d63fe4e0ab98ed6c848b2b96dca08c9daa6e09
+Branch: master
+Commit: f23506222633cfa6355d48f793996ddad7cc171d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f23506222633cfa6355d48f793996ddad7cc171d
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
 Date:   Thu Feb 18 03:21:54 2016 +0000
