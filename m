@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 42FE5E00C1C; Wed, 17 Feb 2016 20:31:56 -0800 (PST)
+	id 4393CE00C02; Wed, 17 Feb 2016 20:31:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22C77E00C02
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23C52E00C0F
 	for <meta-ti@yoctoproject.org>; Wed, 17 Feb 2016 20:31:51 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3DB1852A8B; Thu, 18 Feb 2016 04:31:51 +0000 (UTC)
+	id 5F3B652A97; Thu, 18 Feb 2016 04:31:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160218043151.3DB1852A8B@arago-project.org>
+Message-Id: <20160218043151.5F3B652A97@arago-project.org>
 Date: Thu, 18 Feb 2016 04:31:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with latest merges, including HS support
+Subject: Denys Dmytriyenko : conf/machine: add initial configs for HS platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: cc68754de9b12724e074f2469a1fbbdc5cf50c49
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cc68754de9b12724e074f2469a1fbbdc5cf50c49
+Commit: 9c821e5b493236342a0bef371b56e5d388c59f2f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c821e5b493236342a0bef371b56e5d388c59f2f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Feb 18 03:49:39 2016 +0000
+Date:   Thu Feb 18 03:49:40 2016 +0000
 
-u-boot-ti-staging: update with latest merges, including HS support
+conf/machine: add initial configs for HS platforms
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/am437x-hs-evm.conf |    7 +++++++
+ conf/machine/dra7xx-hs-evm.conf |    7 +++++++
+ 2 files changed, 14 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index cec53aa..304b0ab 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- 
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
- 
--PR = "r18"
-+PR = "r19"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2015.07"
- 
--SRCREV = "fd0439094e9bd5dad1b5e52a68dfabf18985e450"
-+SRCREV = "dca348d604c0117fa7851e3a4a194bedb42b739b"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+diff --git a/conf/machine/am437x-hs-evm.conf b/conf/machine/am437x-hs-evm.conf
+new file mode 100644
+index 0000000..e8d88a4
+--- /dev/null
++++ b/conf/machine/am437x-hs-evm.conf
+@@ -0,0 +1,7 @@
++#@TYPE: Machine
++#@NAME: AM437x HS EVM
++#@DESCRIPTION: Machine configuration for the TI AM437x HS EVM
++
++require conf/machine/am437x-evm.conf
++
++UBOOT_MACHINE = "am43xx_hs_evm_config"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+new file mode 100644
+index 0000000..a898716
+--- /dev/null
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -0,0 +1,7 @@
++#@TYPE: Machine
++#@NAME: DRA7xx HS EVM
++#@DESCRIPTION: Machine configuration for the TI DRA7xx HS EVM
++
++require conf/machine/dra7xx-evm.conf
++
++UBOOT_MACHINE = "dra7xx_hs_evm_config"
 
 
