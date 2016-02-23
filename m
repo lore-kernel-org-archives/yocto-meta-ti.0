@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5E22BE00D54; Tue, 23 Feb 2016 13:27:20 -0800 (PST)
+	id 5F7A4E00D21; Tue, 23 Feb 2016 13:27:20 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66AADE00D33
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 656A7E00D21
 	for <meta-ti@yoctoproject.org>; Tue, 23 Feb 2016 13:27:18 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D7F7852AC6; Tue, 23 Feb 2016 21:27:17 +0000 (UTC)
+	id 0B72752ACA; Tue, 23 Feb 2016 21:27:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160223212717.D7F7852AC6@arago-project.org>
-Date: Tue, 23 Feb 2016 21:27:17 +0000 (UTC)
+Message-Id: <20160223212718.0B72752ACA@arago-project.org>
+Date: Tue, 23 Feb 2016 21:27:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: add support for DRA7 and AM4 secure devices
+Subject: Denys Dmytriyenko : linux-ti-staging: rdepends on prueth-fw
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,60 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: de30e52040622477b48e6e7ce8ded6b3c761d702
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=de30e52040622477b48e6e7ce8ded6b3c761d702
+Commit: 17857b13d9107f4dfbc83af3a54dd2905791ac13
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=17857b13d9107f4dfbc83af3a54dd2905791ac13
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Feb 23 03:54:22 2016 +0000
+Date:   Tue Feb 23 04:25:33 2016 +0000
 
-u-boot-ti-staging: add support for DRA7 and AM4 secure devices
+linux-ti-staging: rdepends on prueth-fw
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |   15 ++++++++++++++-
- 1 files changed, 14 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index 304b0ab..ed827fc 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 76838f2..8b1ee59 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -39,6 +39,9 @@ RDEPENDS_kernel-base_append_k2hk-evm = " netcp-pa-fw"
+ RDEPENDS_kernel-base_append_k2e-evm = " netcp-pa-fw"
+ RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
- 
--PR = "r19"
-+PR = "r20"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
-@@ -16,6 +16,12 @@ BRANCH ?= "ti-u-boot-2015.07"
- 
- SRCREV = "dca348d604c0117fa7851e3a4a194bedb42b739b"
- 
-+# Support for secure devices - detailed info is in doc/README.ti-secure
-+TI_SECURE_DEV_PKG ?= ""
-+TI_SECURE_DEV_PKG_dra7xx-hs-evm = "${TI_SECURE_DEV_PKG_DRA7}"
-+TI_SECURE_DEV_PKG_am437x-hs-evm = "${TI_SECURE_DEV_PKG_AM4}"
-+export TI_SECURE_DEV_PKG
++# Add run-time dependency for PRU Ethernet firmware to the rootfs
++RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
 +
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+@@ -69,7 +72,7 @@ SRCREV = "f5caecb092f6e8c642101f8c56c3fbb136de7052"
+ PV = "4.1.18+git${SRCPV}"
  
-@@ -36,6 +42,13 @@ UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
- UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
- UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
  
-+do_compile_append_am437x-hs-evm () {
-+	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
-+		rm -rf ${S}/MLO
-+		cp ${S}/u-boot-spl_HS_ISSW ${S}/MLO
-+	fi
-+}
-+
- do_install_append_keystone () {
- 	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
- 	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
