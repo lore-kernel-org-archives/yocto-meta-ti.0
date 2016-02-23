@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 942EEE00D3B; Tue, 23 Feb 2016 13:27:22 -0800 (PST)
+	id 95041E00D47; Tue, 23 Feb 2016 13:27:22 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A473E00D3B
-	for <meta-ti@yoctoproject.org>; Tue, 23 Feb 2016 13:27:18 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF913E00D47
+	for <meta-ti@yoctoproject.org>; Tue, 23 Feb 2016 13:27:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AA6D152AC4; Tue, 23 Feb 2016 21:27:17 +0000 (UTC)
+	id 60C7152AD5; Tue, 23 Feb 2016 21:27:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160223212717.AA6D152AC4@arago-project.org>
-Date: Tue, 23 Feb 2016 21:27:17 +0000 (UTC)
+Message-Id: <20160223212718.60C7152AD5@arago-project.org>
+Date: Tue, 23 Feb 2016 21:27:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with platform merge, new AM5 DTBs
+Subject: Denys Dmytriyenko : prueth-fw: add firmware images for PRU Ethernet on AM57xx
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,59 +37,60 @@ X-List-Received-Date: Tue, 23 Feb 2016 21:27:22 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 168de60d609563fca634006ea73f7fff08f6ed9b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=168de60d609563fca634006ea73f7fff08f6ed9b
+Branch: master
+Commit: c0e9d9f4ca3e3dc78c4bbfd9720dc37342ef3307
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c0e9d9f4ca3e3dc78c4bbfd9720dc37342ef3307
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Feb 22 23:53:54 2016 +0000
+Date:   Tue Feb 23 04:25:32 2016 +0000
 
-linux-ti-staging: update with platform merge, new AM5 DTBs
+prueth-fw: add firmware images for PRU Ethernet on AM57xx
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/prueth-fw/prueth-fw_git.bb |   33 ++++++++++++++++++++++++++++++++
+ 1 files changed, 33 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index a60eff6..0f9d39d 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
- 
- BRANCH = "ti-rt-linux-4.1.y"
- 
--SRCREV = "f80a400887b7c74204c0657d462f75ca1354cb1a"
-+SRCREV = "a52a12de4129f0668bb2c93a8a0d701a7b72ca60"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 1999c2f..76838f2 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -46,7 +46,7 @@ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
- KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
--KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-evm.dtb am572x-idk.dtb am571x-idk.dtb am572x-idk-lcd-osd.dtb am571x-idk-lcd-osd.dtb"
-+KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-beagle-x15-es2plus.dtb am57xx-evm.dtb am57xx-evm-es2plus.dtb am572x-idk.dtb am571x-idk.dtb am572x-idk-lcd-osd.dtb am571x-idk-lcd-osd.dtb"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
- KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
-@@ -65,11 +65,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.1.y"
- 
--SRCREV = "b24a60815e58a7d19d8be88d6af4c37329e933a5"
-+SRCREV = "f5caecb092f6e8c642101f8c56c3fbb136de7052"
- PV = "4.1.18+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+new file mode 100644
+index 0000000..3b760ac
+--- /dev/null
++++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+@@ -0,0 +1,33 @@
++DESCRIPTION = "PRU Ethernet firmware for AM57xx"
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++
++PV = "1.0.0"
++PR = "r0"
++
++CLEANBROKEN = "1"
++
++COMPATIBLE_MACHINE = "am57xx-evm"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SRCREV = "4ead3b8c189f217ee2c01ea3c56ef08d6a517f28"
++BRANCH ?= "ti-linux-firmware-4.1.y"
++
++SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++TARGET = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
++
++do_install() {
++	install -d ${D}${base_libdir}/firmware/ti-pruss
++	for f in ${TARGET}; do
++		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
++	done
++}
++
++FILES_${PN} = "${base_libdir}/firmware"
++
++INSANE_SKIP_${PN} = "arch"
 
 
