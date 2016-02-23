@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 93879E00D38; Tue, 23 Feb 2016 13:27:22 -0800 (PST)
+	id 93016E00D5C; Tue, 23 Feb 2016 13:27:22 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CEE7AE00D3E
-	for <meta-ti@yoctoproject.org>; Tue, 23 Feb 2016 13:27:19 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 691D8E00D38
+	for <meta-ti@yoctoproject.org>; Tue, 23 Feb 2016 13:27:18 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 513A852AD4; Tue, 23 Feb 2016 21:27:18 +0000 (UTC)
+	id EBC8E52AC7; Tue, 23 Feb 2016 21:27:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160223212718.513A852AD4@arago-project.org>
-Date: Tue, 23 Feb 2016 21:27:18 +0000 (UTC)
+Message-Id: <20160223212717.EBC8E52AC7@arago-project.org>
+Date: Tue, 23 Feb 2016 21:27:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: add support for DRA7 and AM4 secure devices
+Subject: Denys Dmytriyenko : prueth-fw: add firmware images for PRU Ethernet on AM57xx
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,61 +37,60 @@ X-List-Received-Date: Tue, 23 Feb 2016 21:27:22 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: d3e3d05baab04a19a1b3f5718a47b3098c55e428
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d3e3d05baab04a19a1b3f5718a47b3098c55e428
+Branch: fido
+Commit: 30ab1cab803a42bb52f13f4e854e98b32831d3e4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=30ab1cab803a42bb52f13f4e854e98b32831d3e4
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Feb 23 03:54:22 2016 +0000
+Date:   Tue Feb 23 04:25:32 2016 +0000
 
-u-boot-ti-staging: add support for DRA7 and AM4 secure devices
+prueth-fw: add firmware images for PRU Ethernet on AM57xx
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |   15 ++++++++++++++-
- 1 files changed, 14 insertions(+), 1 deletions(-)
+ recipes-bsp/prueth-fw/prueth-fw_git.bb |   33 ++++++++++++++++++++++++++++++++
+ 1 files changed, 33 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index 304b0ab..ed827fc 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- 
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
- 
--PR = "r19"
-+PR = "r20"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
-@@ -16,6 +16,12 @@ BRANCH ?= "ti-u-boot-2015.07"
- 
- SRCREV = "dca348d604c0117fa7851e3a4a194bedb42b739b"
- 
-+# Support for secure devices - detailed info is in doc/README.ti-secure
-+TI_SECURE_DEV_PKG ?= ""
-+TI_SECURE_DEV_PKG_dra7xx-hs-evm = "${TI_SECURE_DEV_PKG_DRA7}"
-+TI_SECURE_DEV_PKG_am437x-hs-evm = "${TI_SECURE_DEV_PKG_AM4}"
-+export TI_SECURE_DEV_PKG
+diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+new file mode 100644
+index 0000000..3b760ac
+--- /dev/null
++++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+@@ -0,0 +1,33 @@
++DESCRIPTION = "PRU Ethernet firmware for AM57xx"
 +
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
- 
-@@ -36,6 +42,13 @@ UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
- UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
- UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
- 
-+do_compile_append_am437x-hs-evm () {
-+	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
-+		rm -rf ${S}/MLO
-+		cp ${S}/u-boot-spl_HS_ISSW ${S}/MLO
-+	fi
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++
++PV = "1.0.0"
++PR = "r0"
++
++CLEANBROKEN = "1"
++
++COMPATIBLE_MACHINE = "am57xx-evm"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SRCREV = "4ead3b8c189f217ee2c01ea3c56ef08d6a517f28"
++BRANCH ?= "ti-linux-firmware-4.1.y"
++
++SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++TARGET = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
++
++do_install() {
++	install -d ${D}${base_libdir}/firmware/ti-pruss
++	for f in ${TARGET}; do
++		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
++	done
 +}
 +
- do_install_append_keystone () {
- 	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
- 	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
++FILES_${PN} = "${base_libdir}/firmware"
++
++INSANE_SKIP_${PN} = "arch"
 
 
