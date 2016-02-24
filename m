@@ -1,68 +1,38 @@
-Return-Path: <winiston@futuraautomation.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0452DE00BE6; Wed, 24 Feb 2016 04:46:36 -0800 (PST)
+	id 288FAE00A92; Wed, 24 Feb 2016 13:09:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [209.85.192.175 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB652E00C95
-	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 04:46:31 -0800 (PST)
-Received: by mail-pf0-f175.google.com with SMTP id c10so13039319pfc.2
-	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 04:46:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=futuraautomation-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:from:to:cc:subject:date:mime-version:content-type
-	:importance:disposition-notification-to;
-	bh=16CbCtHUNmwptaLvZmf07zP4SbHx1kYq0GfzU3XNx8c=;
-	b=R5ez7/4TL2y4NIi53u9aN3Xcb2BwHXJjlI3GmuLbyWemyiZmRslPenXDnAk/lT/+W5
-	lZWfpNXyd/Sr97ncIPqC0o/fbzEwYkVL1Gxd2F+eD2lSdPkjSrKGHn6cQbSLrIwZI7ve
-	WE4VGGBq9EsBNOBtc+P4AfLBx/ole1tGGGL+v2FexWkqiEW3mbQOBkXisf5tEI/kB5g5
-	mhf8P+hqdnqqFaiUDv2zxb6lzauuuohwnKOS5ip6WQtrZKLChP5o1yea9QIvyX0TGps5
-	BzUTLrKgx7jBaJL3YyJ3w1yl41uZWpJAamhTA2wts5ZhXmV/zhtV1pxseLK2Pb9pgUIs
-	RSFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:from:to:cc:subject:date:mime-version
-	:content-type:importance:disposition-notification-to;
-	bh=16CbCtHUNmwptaLvZmf07zP4SbHx1kYq0GfzU3XNx8c=;
-	b=m/4Q5cGkQMY/tYGJWtdH+F2q8M0jfqRcmbkQojIdJgfvwJ4Kg3hEjIPW328R3mASdi
-	zCTwz1KzUWtGDkfFa6nM+204WB9EbNJKwOfz2V4N0UpplAhM6+BJexe5gH+XOUQWCdml
-	6hjt+n48gYCXcNi0UD3MKbA3Z4314ovlE3tKLM3rmVuDaF9O5x8IxwzYd3931yvWDYr5
-	XAbYRbkJX5qHe09vEeAOold7YntcNR+sny75Z6rXT8GCy/Prs5s4nJTl3kQqXCQNjWE2
-	rUakUOCSZpk/vuietSdvVPE5Q94LDpCIeL9SNWG5ZK/D+yDUaxsmEddip/AOvZVhcFZ3
-	PGZQ==
-X-Gm-Message-State: AG10YOTPnTC6afkacY7ZCDW6ini2+QTjksGMa9esCXPYOlVQCHD9l8KnKwpUwBKe//cw4g==
-X-Received: by 10.98.40.4 with SMTP id o4mr7925696pfo.76.1456317991071;
-	Wed, 24 Feb 2016 04:46:31 -0800 (PST)
-Received: from RD3 ([59.99.236.185]) by smtp.gmail.com with ESMTPSA id
-	b63sm4978943pfj.25.2016.02.24.04.46.27
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 24 Feb 2016 04:46:29 -0800 (PST)
-Message-ID: <AB28D54196164B23BA942EBCF3204741@RD3>
-From: <winiston@futuraautomation.com>
-To: "OpenEmbedded core" <openembedded-core@lists.openembedded.org>,
-	"Yocto layer" <linux-yocto@yoctoproject.org>
-Date: Wed, 24 Feb 2016 18:20:14 +0530
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 493B6E00920
+	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 13:09:54 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u1OL9s7d029344
+	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 15:09:54 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u1OL9sFr002270
+	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 15:09:54 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 24 Feb 2016 15:09:54 -0600
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u1OL9rKf016752;	Wed, 24 Feb 2016 15:09:53 -0600
+From: Hongmei Gou <h-gou@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 24 Feb 2016 16:09:52 -0500
+Message-ID: <1456348192-7859-1-git-send-email-h-gou@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Priority: 1
-X-MSMail-Priority: High
-Importance: High
-X-Mailer: Microsoft Windows Live Mail 15.4.3555.308
-X-MimeOLE: Produced By Microsoft MimeOLE V15.4.3555.308
-Cc: yocto texas <meta-ti@yoctoproject.org>
-Subject: How to integrate third party application software to yocto image
+Subject: [PATCH] vlib-c66x: add version 3.2.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,70 +45,88 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2016 12:46:36 -0000
-Content-Type: multipart/alternative;
-	boundary="----=_NextPart_000_00D3_01D16F30.01A774C0"
+X-List-Received-Date: Wed, 24 Feb 2016 21:09:56 -0000
+Content-Type: text/plain
 
-------=_NextPart_000_00D3_01D16F30.01A774C0
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
+---
+ recipes-ti/includes/ti-paths.inc     |  2 ++
+ recipes-ti/vlib/vlib-c66x.inc        | 28 ++++++++++++++++++++++++++++
+ recipes-ti/vlib/vlib-c66x_3.2.1.0.bb |  9 +++++++++
+ 3 files changed, 39 insertions(+)
+ create mode 100644 recipes-ti/vlib/vlib-c66x.inc
+ create mode 100644 recipes-ti/vlib/vlib-c66x_3.2.1.0.bb
 
-Hi,
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 31427a6..e7d3e82 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -52,6 +52,7 @@ export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
+ export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
+ export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
+ export IMGLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-imglib-c66x-tree"
++export VLIB_C66_INSTALL_DIR_RECIPE        = "${installdir}/ti-vlib-c66x-tree"
+ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+ export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
+ export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
+@@ -98,6 +99,7 @@ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_
+ export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
+ export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
+ export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
++export VLIB_C66_INSTALL_DIR        = "${STAGING_DIR_TARGET}${VLIB_C66_INSTALL_DIR_RECIPE}"
+ export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIPE}"
+ export OMP_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMP_INSTALL_DIR_RECIPE}"
+ export MPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${MPM_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/vlib/vlib-c66x.inc b/recipes-ti/vlib/vlib-c66x.inc
+new file mode 100644
+index 0000000..2e57347
+--- /dev/null
++++ b/recipes-ti/vlib/vlib-c66x.inc
+@@ -0,0 +1,28 @@
++DESCRIPTION = "TI Vision Library (VLIB) for C66x"
++HOMEPAGE = "http://software-dl.ti.com/libs/vlib/latest/index_FDS.html"
++SECTION = "devel"
++LICENSE = "TI-TSPA & BSD-3-Clause"
++
++require ../includes/ti-paths.inc
++require ../includes/ti-staging.inc
++require ../includes/ti-eula-unpack.inc
++
++COMPATIBLE_MACHINE = "omap-a15|keystone"
++
++SRC_URI = "http://software-dl.ti.com/libs/vlib/${PV}//exports/vlib_c66x_obj_${PV}_Linux.bin;name=vlibbin"
++
++S = "${WORKDIR}/vlib_c66x_${PV}"
++
++BINFILE="vlib_c66x_obj_${PV}_Linux.bin"
++TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
++TI_BIN_UNPK_CMDS=""
++
++do_install() {
++    install -d ${D}${VLIB_C66_INSTALL_DIR_RECIPE}
++    cp -pPrf ${S}/* ${D}${VLIB_C66_INSTALL_DIR_RECIPE}
++}
++
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${VLIB_C66_INSTALL_DIR_RECIPE}"
++
++INSANE_SKIP_${PN}-dev = "installed-vs-shipped arch"
+diff --git a/recipes-ti/vlib/vlib-c66x_3.2.1.0.bb b/recipes-ti/vlib/vlib-c66x_3.2.1.0.bb
+new file mode 100644
+index 0000000..e3742d1
+--- /dev/null
++++ b/recipes-ti/vlib/vlib-c66x_3.2.1.0.bb
+@@ -0,0 +1,9 @@
++require vlib-c66x.inc
++
++PV = "3_2_1_0"
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://docs/VLIB_Software_Manifest.html;md5=75151b04457c8a1ae3c2172ada0eedda"
++
++SRC_URI[vlibbin.md5sum] = "e292fa3f74be60b9110e0ebcc6840fe7"
++SRC_URI[vlibbin.sha256sum] = "05bf16473d60e0252d3a73a7c3d268e540783a226b4bda930e5f6042e7b01bd8"
+-- 
+1.9.1
 
-I can build yocto image for arm based product like AM437x-evm using =
-yocto project. I want to add third party software(Navit) to my image.
 
-How can I add the third party software to my image ?. Can you provide me =
-the steps to integrate third party software with yocto image ?
-
-Note: Navit is a navigation software and it supports arm based product =
-like AM437x.=20
-
-Host system: Ubuntu 14.04
-Target system : AM437x-evm
-
-
-Regards,
-Winiston.P
-Futura Automation Pvt Ltd.
-
-Ph :91-80-28375290 / 28375295
-Fax :91-80-28375291
-
-------=_NextPart_000_00D3_01D16F30.01A774C0
-Content-Type: text/html;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<HTML><HEAD></HEAD>
-<BODY dir=3Dltr>
-<DIV dir=3Dltr>
-<DIV style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: #000000">
-<DIV>Hi,</DIV>
-<DIV>&nbsp;</DIV>
-<DIV>I can build yocto image for arm based product like AM437x-evm using =
-yocto=20
-project. I want to add third party software(Navit) to my image.</DIV>
-<DIV>&nbsp;</DIV>
-<DIV><FONT color=3D#0000ff>How can I add the third party software to my =
-image ?.=20
-Can you provide me the steps to integrate third party software with =
-yocto image=20
-?</FONT></DIV>
-<DIV><FONT color=3D#0000ff></FONT>&nbsp;</DIV>
-<DIV><FONT color=3D#0000ff>Note: Navit is a navigation software and it =
-supports=20
-arm based product like AM437x.</FONT>&nbsp;</DIV>
-<DIV>&nbsp;</DIV>
-<DIV>Host system: Ubuntu 14.04</DIV>
-<DIV>Target system : AM437x-evm</DIV>
-<DIV>&nbsp;</DIV>
-<DIV>&nbsp;</DIV>
-<DIV=20
-style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: =
-#000000">Regards,<BR>Winiston.P<BR>Futura=20
-Automation Pvt Ltd.<BR><BR>Ph :91-80-28375290 / 28375295<BR>Fax=20
-:91-80-28375291<BR></DIV></DIV></DIV></BODY></HTML>
-
-------=_NextPart_000_00D3_01D16F30.01A774C0--
