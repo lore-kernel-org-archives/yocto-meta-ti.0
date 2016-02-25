@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 52949E00BE1; Wed, 24 Feb 2016 16:58:18 -0800 (PST)
+	id 53AFFE009C3; Wed, 24 Feb 2016 16:58:18 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19EEFE009C3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B2D6E00B70
 	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 16:58:14 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5ED8C529E6; Thu, 25 Feb 2016 00:58:13 +0000 (UTC)
+	id 779C252A4F; Thu, 25 Feb 2016 00:58:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160225005813.5ED8C529E6@arago-project.org>
+Message-Id: <20160225005813.779C252A4F@arago-project.org>
 Date: Thu, 25 Feb 2016 00:58:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gou, Hongmei : vlib-c66x: add version 3.2.1.0
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 25 Feb 2016 00:58:18 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 7f66715f09a04f2b4a5cf2a4fc3f366be7f441e9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f66715f09a04f2b4a5cf2a4fc3f366be7f441e9
+Branch: master
+Commit: db838e9feec3937437bb54ff2c1ba94267424d58
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=db838e9feec3937437bb54ff2c1ba94267424d58
 
 Author: Gou, Hongmei <h-gou@ti.com>
 Date:   Thu Feb 25 03:09:52 2016 +0000
