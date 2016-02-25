@@ -1,38 +1,26 @@
-Return-Path: <h-gou@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 288FAE00A92; Wed, 24 Feb 2016 13:09:56 -0800 (PST)
+	id 52949E00BE1; Wed, 24 Feb 2016 16:58:18 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 493B6E00920
-	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 13:09:54 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u1OL9s7d029344
-	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 15:09:54 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u1OL9sFr002270
-	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 15:09:54 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 24 Feb 2016 15:09:54 -0600
-Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u1OL9rKf016752;	Wed, 24 Feb 2016 15:09:53 -0600
-From: Hongmei Gou <h-gou@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 24 Feb 2016 16:09:52 -0500
-Message-ID: <1456348192-7859-1-git-send-email-h-gou@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] vlib-c66x: add version 3.2.1.0
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19EEFE009C3
+	for <meta-ti@yoctoproject.org>; Wed, 24 Feb 2016 16:58:14 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 5ED8C529E6; Thu, 25 Feb 2016 00:58:13 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160225005813.5ED8C529E6@arago-project.org>
+Date: Thu, 25 Feb 2016 00:58:13 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Gou, Hongmei : vlib-c66x: add version 3.2.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,17 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2016 21:09:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Feb 2016 00:58:18 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: fido
+Commit: 7f66715f09a04f2b4a5cf2a4fc3f366be7f441e9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f66715f09a04f2b4a5cf2a4fc3f366be7f441e9
+
+Author: Gou, Hongmei <h-gou@ti.com>
+Date:   Thu Feb 25 03:09:52 2016 +0000
+
+vlib-c66x: add version 3.2.1.0
 
 Signed-off-by: Hongmei Gou <h-gou@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-ti/includes/ti-paths.inc     |  2 ++
- recipes-ti/vlib/vlib-c66x.inc        | 28 ++++++++++++++++++++++++++++
- recipes-ti/vlib/vlib-c66x_3.2.1.0.bb |  9 +++++++++
- 3 files changed, 39 insertions(+)
- create mode 100644 recipes-ti/vlib/vlib-c66x.inc
- create mode 100644 recipes-ti/vlib/vlib-c66x_3.2.1.0.bb
+
+ recipes-ti/includes/ti-paths.inc     |    2 ++
+ recipes-ti/vlib/vlib-c66x.inc        |   28 ++++++++++++++++++++++++++++
+ recipes-ti/vlib/vlib-c66x_3.2.1.0.bb |    9 +++++++++
+ 3 files changed, 39 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
 index 31427a6..e7d3e82 100644
@@ -126,7 +125,5 @@ index 0000000..e3742d1
 +
 +SRC_URI[vlibbin.md5sum] = "e292fa3f74be60b9110e0ebcc6840fe7"
 +SRC_URI[vlibbin.sha256sum] = "05bf16473d60e0252d3a73a7c3d268e540783a226b4bda930e5f6042e7b01bd8"
--- 
-1.9.1
 
 
