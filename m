@@ -1,72 +1,76 @@
-Return-Path: <winiston@futuraautomation.com>
+Return-Path: <anders@chargestorm.se>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 55B91E00D3F; Thu, 25 Feb 2016 21:41:10 -0800 (PST)
+	id E9355E00D58; Fri, 26 Feb 2016 01:33:26 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HTML_MESSAGE autolearn=unavailable version=3.3.1
-X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	DKIM_VALID autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DFC2E00D2D
-	for <meta-ti@yoctoproject.org>; Thu, 25 Feb 2016 21:41:06 -0800 (PST)
-Received: by mail-pa0-f46.google.com with SMTP id ho8so46403602pac.2
-	for <meta-ti@yoctoproject.org>; Thu, 25 Feb 2016 21:41:06 -0800 (PST)
+Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
+	[209.85.215.52])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07489E00D36
+	for <meta-ti@yoctoproject.org>; Fri, 26 Feb 2016 01:33:23 -0800 (PST)
+Received: by mail-lf0-f52.google.com with SMTP id j78so49702072lfb.1
+	for <meta-ti@yoctoproject.org>; Fri, 26 Feb 2016 01:33:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=futuraautomation-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:from:to:cc:references:in-reply-to:subject:date
-	:mime-version:content-type:importance:disposition-notification-to;
-	bh=BJE0DpYvB4X3VRbrM/NIvKuFXFebWW7CUZLS5DLrmmQ=;
-	b=1BsiWIHmTnagNA2uozzFtrpK54JcFnhlQpGiPGn16phUbch7f6fAne5db3g7STcSpO
-	CkGzo0r0FS5ehpHRthPED9rXTVCvUqcslnLEUw1cxN4A7X3Fq8XilQDWBgN8GeQytHBv
-	+Dx3kLH65+84+5WtKwNyLsNypdhXpPYjn8nWES20Q/pu821F+FmFl8Uq3Su7WvcPXSvK
-	X2nwdyFjn0YzIeiSqDBM30HY+GkscmILolYAwKYCACY8zEcHYD7Hkj/hl0vE1O9yV1i/
-	eHJNhUFgwHkHYC4ngJQLnkLkpAYukxAydrUu+AY8KjMsf+INWy1w59d4KQeSGYSPEoEL
-	RoyA==
+	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:organization:user-agent;
+	bh=djPo04z31o1YzEpQlyU81ARTGnhMKDU9iKRi5dlV5K8=;
+	b=xSYKtsQbPXMCjTRDXhoaYKaW1GUb9XfLD0wE19MmKYJTHCJIQFoIFt4pdJatytRjUm
+	tKUHN28pP30WpBxh9YrM9VluPeur967/vpbp6nIWibEuS66FnGcqZ+iWQrkd6Jq4NbsZ
+	NpbrRid6wMXeXCF/hHe3X9BzyrMff++CLHJ3CY2LenLgnYoknfvp6vgJ5A7YTlg0HWVO
+	tgenNrHiEvjnFZl8WNHFnAd2LRXjvUWmRg3PQuzVSCjVk0aqlBS4pMnXPXg7zjfTTZTK
+	Q3THxrTq8yRR9lzNl2bWjWGwFcoCzEM6lWlqnXsEemOu09zsbcB2aOL45Bw2jpw5ZaVX
+	TJDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:from:to:cc:references:in-reply-to
-	:subject:date:mime-version:content-type:importance
-	:disposition-notification-to;
-	bh=BJE0DpYvB4X3VRbrM/NIvKuFXFebWW7CUZLS5DLrmmQ=;
-	b=QXrYnpFgo4tO4Kt40teSZ8CPObImrp9/mFb9ziJYz7nLqFqcOjMdWIB/tdj2a8g5WM
-	pJ6KvU9OYOUA3KpJadJXZdiPc+IUwoH5iyMmZo34UYFfnSfEffh9yGbFnT02hUPNZn8R
-	DH1CTzy1ck9q7rBePJhHljIJAiTN6BenpGBcup6nZ46H2KkW/iEnEce+8z7ePxolHzzv
-	G4xDoUOfScmjKWf9S0Bbp+M1aBTuZZCfQPIfN6IIImCim18oxIAsvWadfcRmRdaC8gzt
-	yzlymk7NR00DC4RNGXo/FLRVAV4sl8s3KhFsoM5myI7h1nZ4kcQQJq3Pzk0uB3PY9xNk
-	E2Sg==
-X-Gm-Message-State: AG10YOTd7z5si38cYasuqA3SpHR5tv6kshEdOj1/jG0hp5Bs445zenQ9ZkDdv/K5uLd0NA==
-X-Received: by 10.66.228.231 with SMTP id sl7mr35181946pac.30.1456465266420;
-	Thu, 25 Feb 2016 21:41:06 -0800 (PST)
-Received: from RD3 ([59.99.236.185]) by smtp.gmail.com with ESMTPSA id
-	r65sm16004574pfa.27.2016.02.25.21.41.02
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 25 Feb 2016 21:41:04 -0800 (PST)
-Message-ID: <E744C7D53BB7428AB0FD15C117627D11@RD3>
-From: <winiston@futuraautomation.com>
-To: "Burton, Ross" <ross.burton@intel.com>
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition
+	:content-transfer-encoding:in-reply-to:organization:user-agent;
+	bh=djPo04z31o1YzEpQlyU81ARTGnhMKDU9iKRi5dlV5K8=;
+	b=R7xjy1VKVoim5lVnpjXIRWNm9AR9Z36EwPXxbcptV+2aKNHMWH0FlGZq5aDv06RdDU
+	3l5igRpkr+yJs2ZQ3bRZfCQXoX7fM5l2Xi8xF4irFyX/glIC1jfNUwrSySRdoH/WBhtH
+	xA8zGWLNes/SPy/isS/j2QOldx7OMr1dGjSbbgd0MnjyzERwru0Bi1UrDK3v9UNRXw2t
+	bGxqZF5qI6TyqlI+L6jfcDaF5KMKaL/BNJGVA3bXk5uqCAezIgHOoJksYAHaaE6hpQnF
+	zE0oVN6p4yMkvnRgLPMYGdUyiirUPQaYzAzeudYNm8F9/6p51QOnCV+KOERkyXgAAWlC
+	fdOg==
+X-Gm-Message-State: AD7BkJKZpdPYj+QYG7hg5XneDzrzg5oo+awyahOeAM6R+Yc8OS1glcCExoqAX36ERMWGsw==
+X-Received: by 10.25.157.79 with SMTP id g76mr240084lfe.93.1456479202132;
+	Fri, 26 Feb 2016 01:33:22 -0800 (PST)
+Received: from ad.chargestorm.se (213-64-219-84-no126.business.telia.com.
+	[213.64.219.84]) by smtp.gmail.com with ESMTPSA id
+	f196sm1715799lfb.49.2016.02.26.01.33.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 26 Feb 2016 01:33:21 -0800 (PST)
+Date: Fri, 26 Feb 2016 10:33:19 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: openembedded-core@lists.openembedded.org,
+	yocto texas <meta-ti@yoctoproject.org>,
+	Yocto layer <linux-yocto@yoctoproject.org>
+Message-ID: <20160226093319.GA4329@ad.chargestorm.se>
+Mail-Followup-To: openembedded-core@lists.openembedded.org,
+	yocto texas <meta-ti@yoctoproject.org>,
+	Yocto layer <linux-yocto@yoctoproject.org>
 References: <AB28D54196164B23BA942EBCF3204741@RD3>
 	<20160224141143.GB2892@mbabyjoh-mobl.fi.intel.com>
 	<2CD39F82881F465AAD78DBB61BCA369E@RD3>
 	<CAJTo0LYMO4C9+rd1NG7mMmn4YfU6vRhuOYni4vvPAugoru=uwA@mail.gmail.com>
-In-Reply-To: <CAJTo0LYMO4C9+rd1NG7mMmn4YfU6vRhuOYni4vvPAugoru=uwA@mail.gmail.com>
-Date: Fri, 26 Feb 2016 11:14:38 +0530
+	<E744C7D53BB7428AB0FD15C117627D11@RD3>
 MIME-Version: 1.0
-X-Priority: 1
-X-MSMail-Priority: High
-Importance: High
-X-Mailer: Microsoft Windows Live Mail 15.4.3555.308
-X-MimeOLE: Produced By Microsoft MimeOLE V15.4.3555.308
-Cc: yocto texas <meta-ti@yoctoproject.org>,
-	"Maxin B. John" <maxin.john@intel.com>,
-	Yocto layer <linux-yocto@yoctoproject.org>,
-	OpenEmbedded core <openembedded-core@lists.openembedded.org>
+In-Reply-To: <E744C7D53BB7428AB0FD15C117627D11@RD3>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Subject: Re: [OE-core] How to integrate third party application software to yocto image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -80,193 +84,60 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2016 05:41:10 -0000
-Content-Type: multipart/alternative;
-	boundary="----=_NextPart_000_00F4_01D17086.E1C381F0"
-
-------=_NextPart_000_00F4_01D17086.E1C381F0
-Content-Type: text/plain;
-	charset="utf-8"
+X-List-Received-Date: Fri, 26 Feb 2016 09:33:27 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Ross,
+Hi,
 
-I copied "recipes-navigation" folder from meta-oe (Open embedded build =
-tree) to "/poky/meta "
+Please, don't top post.
 
-I have appended  in =E2=80=9Cconf/local.conf=E2=80=9D  as given below
+* winiston@futuraautomation.com <winiston@futuraautomation.com> [160226 06:=
+41]:
+> I copied "recipes-navigation" folder from meta-oe (Open embedded build tr=
+ee) to "/poky/meta "
 
-IMAGE_INSTALL_append =3D " navit"
+> I have appended  in =E2=80=9Cconf/local.conf=E2=80=9D  as given below
 
-While creating the image, it spits out the following error,
+> IMAGE_INSTALL_append =3D " navit"
 
-winiston@winiston-VirtualBox:~/poky/build$ bitbake qt4e-demo-image
-Loading cache: 100% |##########################| ETA:  00:00:00
-Loaded 1510 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-ERROR: Nothing RPROVIDES 'navit' (but =
-/home/winiston/poky/meta/recipes-qt/images/qt4e-demo-image.bb RDEPENDS =
-on or otherwise requires it)
-ERROR: navit was skipped: Recipe is blacklisted: bluez5 conflicts with =
-bluez4 and bluez5 is selected in DISTRO_FEATURES
-NOTE: Runtime target 'navit' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['navit']
-ERROR: Required build target 'qt4e-demo-image' has no buildable =
-providers.
-Missing or unbuildable dependency chain was: ['qt4e-demo-image', =
-'navit']
+> While creating the image, it spits out the following error,
 
-Summary: There were 2 ERROR messages shown, returning a non-zero exit =
-code.
-winiston@winiston-VirtualBox:~/poky/build$=20
+> winiston@winiston-VirtualBox:~/poky/build$ bitbake qt4e-demo-image
+> Loading cache: 100% |##########################| ETA:  00:00:00
+> Loaded 1510 entries from dependency cache.
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: Nothing RPROVIDES 'navit' (but /home/winiston/poky/meta/recipes-qt=
+/images/qt4e-demo-image.bb RDEPENDS on or otherwise requires it)
+> ERROR: navit was skipped: Recipe is blacklisted: bluez5 conflicts with bl=
+uez4 and bluez5 is selected in DISTRO_FEATURES
 
-Should I make any other setting to add the =E2=80=9Cnavit=E2=80=9D =
-recipe to my image?  Is this the correct method of copying  =
-"recipes-navigation" folder  to "/poky/meta "  ?
-Kindly help me to resolve this error.
+This is the error. You have bluez5 in your DITRO_FEATURES, and I assume
+that navit requires bluez4? Anywya, it's blacklisted.
 
+> NOTE: Runtime target 'navit' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['navit']
+> ERROR: Required build target 'qt4e-demo-image' has no buildable providers.
+> Missing or unbuildable dependency chain was: ['qt4e-demo-image', 'navit']
 
-Regards,
-Winiston.P
-Futura Automation Pvt Ltd.
+> Summary: There were 2 ERROR messages shown, returning a non-zero exit cod=
+e.
+> winiston@winiston-VirtualBox:~/poky/build$=20
 
-Ph :91-80-28375290 / 28375295
-Fax :91-80-28375291
+> Should I make any other setting to add the =E2=80=9Cnavit=E2=80=9D recipe=
+ to my image?
+> Is this the correct method of copying  "recipes-navigation" folder  to
+> "/poky/meta "  ?=20
 
+Well, it works. If you don't mind the rest of meta-oe, I'd rather add
+that layer to conf/bblayers.conf. That would make it easier to get
+updates to e.g. navit.
 
-From: Burton, Ross=20
-Sent: Thursday, February 25, 2016 6:22 PM
-To: winiston@futuraautomation.com=20
-Cc: Maxin B. John ; yocto texas ; Yocto layer ; OpenEmbedded core=20
-Subject: Re: [OE-core] How to integrate third party application software =
-to yocto image
+Cheers,
+Anders
 
+--=20
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB
 
-On 25 February 2016 at 12:51, <winiston@futuraautomation.com> wrote:
-
-  IMAGE_INSTALL_append =3D " navit_svn"
-
-
-The recipe is called navit, _svn is the version.  Just append " navit".
-
-Ross
-
-------=_NextPart_000_00F4_01D17086.E1C381F0
-Content-Type: text/html;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<HTML><HEAD></HEAD>
-<BODY dir=3Dltr>
-<DIV dir=3Dltr>
-<DIV style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: #000000">
-<DIV>Hi Ross,</DIV>
-<DIV>&nbsp;</DIV>
-<DIV><FONT style=3D'face: "Times' New roman?>I copied =
-"recipes-navigation" folder=20
-from meta-oe (Open embedded build tree) to "/poky/meta "</FONT></DIV>
-<DIV>&nbsp;</DIV>
-<DIV>I have appended&nbsp; in =E2=80=9Cconf/local.conf=E2=80=9D&nbsp; as =
-given below<BR></DIV>
-<DIV>IMAGE_INSTALL_append =3D " navit"</DIV>
-<DIV>&nbsp;</DIV>
-<DIV>While creating the image, it spits out the following error,</DIV>
-<DIV>&nbsp;</DIV>
-<DIV>winiston@winiston-VirtualBox:~/poky/build$ bitbake =
-qt4e-demo-image</DIV>
-<DIV>Loading cache: 100% |##########################| ETA:&nbsp; =
-00:00:00</DIV>
-<DIV>Loaded 1510 entries from dependency cache.</DIV>
-<DIV>NOTE: Resolving any missing task queue dependencies</DIV>
-<DIV>ERROR: Nothing RPROVIDES 'navit' (but=20
-/home/winiston/poky/meta/recipes-qt/images/qt4e-demo-image.bb RDEPENDS =
-on or=20
-otherwise requires it)</DIV>
-<DIV>ERROR: navit was skipped: Recipe is blacklisted: bluez5 conflicts =
-with=20
-bluez4 and bluez5 is selected in DISTRO_FEATURES</DIV>
-<DIV>NOTE: Runtime target 'navit' is unbuildable, removing...</DIV>
-<DIV>Missing or unbuildable dependency chain was: ['navit']</DIV>
-<DIV>ERROR: Required build target 'qt4e-demo-image' has no buildable=20
-providers.</DIV>
-<DIV>Missing or unbuildable dependency chain was: ['qt4e-demo-image',=20
-'navit']</DIV>
-<DIV>&nbsp;</DIV>
-<DIV>Summary: There were 2 ERROR messages shown, returning a non-zero =
-exit=20
-code.</DIV>
-<DIV><A=20
-href=3D"mailto:winiston@winiston-VirtualBox:~/poky/build$">winiston@winis=
-ton-VirtualBox:~/poky/build$</A>=20
-</DIV>
-<DIV>&nbsp;</DIV>
-<DIV><FONT color=3D#0000ff>Should I make any other setting to add the =
-=E2=80=9Cnavit=E2=80=9D=20
-recipe to my image?&nbsp; Is this the correct method of copying&nbsp; =
-<FONT=20
-face=3D"Times New Roman">"recipes-navigation" folder&nbsp; to =
-"/poky/meta "&nbsp;=20
-?</FONT></FONT></DIV>
-<DIV><FONT color=3D#0000ff><FONT face=3D"Times New Roman">Kindly help me =
-to resolve=20
-this error.</FONT></FONT></DIV>
-<DIV>&nbsp;</DIV>
-<DIV>&nbsp;</DIV>
-<DIV=20
-style=3D"FONT-SIZE: 12pt; FONT-FAMILY: 'Calibri'; COLOR: =
-#000000">Regards,<BR>Winiston.P<BR>Futura=20
-Automation Pvt Ltd.<BR><BR>Ph :91-80-28375290 / 28375295<BR>Fax=20
-:91-80-28375291<BR></DIV>
-<DIV=20
-style=3D'FONT-SIZE: small; TEXT-DECORATION: none; FONT-FAMILY: =
-"Calibri"; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
-DISPLAY: inline'>
-<DIV style=3D"FONT: 10pt tahoma">
-<DIV>&nbsp;</DIV>
-<DIV style=3D"BACKGROUND: #f5f5f5">
-<DIV style=3D"font-color: black"><B>From:</B> <A =
-title=3Dross.burton@intel.com=20
-href=3D"mailto:ross.burton@intel.com">Burton, Ross</A> </DIV>
-<DIV><B>Sent:</B> Thursday, February 25, 2016 6:22 PM</DIV>
-<DIV><B>To:</B> <A title=3Dwiniston@futuraautomation.com=20
-href=3D"mailto:winiston@futuraautomation.com">winiston@futuraautomation.c=
-om</A>=20
-</DIV>
-<DIV><B>Cc:</B> <A title=3Dmaxin.john@intel.com=20
-href=3D"mailto:maxin.john@intel.com">Maxin B. John</A> ; <A=20
-title=3Dmeta-ti@yoctoproject.org =
-href=3D"mailto:meta-ti@yoctoproject.org">yocto=20
-texas</A> ; <A title=3Dlinux-yocto@yoctoproject.org=20
-href=3D"mailto:linux-yocto@yoctoproject.org">Yocto layer</A> ; <A=20
-title=3Dopenembedded-core@lists.openembedded.org=20
-href=3D"mailto:openembedded-core@lists.openembedded.org">OpenEmbedded =
-core</A>=20
-</DIV>
-<DIV><B>Subject:</B> Re: [OE-core] How to integrate third party =
-application=20
-software to yocto image</DIV></DIV></DIV>
-<DIV>&nbsp;</DIV></DIV>
-<DIV=20
-style=3D'FONT-SIZE: small; TEXT-DECORATION: none; FONT-FAMILY: =
-"Calibri"; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
-DISPLAY: inline'>
-<DIV dir=3Dltr>
-<DIV class=3Dgmail_extra>
-<DIV>&nbsp;</DIV>
-<DIV class=3Dgmail_quote>On 25 February 2016 at 12:51, <SPAN =
-dir=3Dltr>&lt;<A=20
-href=3D"mailto:winiston@futuraautomation.com"=20
-target=3D_blank>winiston@futuraautomation.com</A>&gt;</SPAN> wrote:<BR>
-<BLOCKQUOTE class=3Dgmail_quote=20
-style=3D"PADDING-LEFT: 1ex; MARGIN: 0px 0px 0px 0.8ex; BORDER-LEFT: #ccc =
-1px solid">
-  <DIV id=3D:dxh class=3Da3s style=3D"OVERFLOW: =
-hidden">IMAGE_INSTALL_append =3D "=20
-  navit_svn"<BR></DIV></BLOCKQUOTE></DIV><BR>The recipe is called navit, =
-_svn is=20
-the version.&nbsp; Just append " navit".</DIV>
-<DIV class=3Dgmail_extra>&nbsp;</DIV>
-<DIV =
-class=3Dgmail_extra>Ross</DIV></DIV></DIV></DIV></DIV></BODY></HTML>
-
-------=_NextPart_000_00F4_01D17086.E1C381F0--
