@@ -1,41 +1,28 @@
-Return-Path: <anandb@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 96DB2E00D29; Sun, 28 Feb 2016 22:40:59 -0800 (PST)
+	id 0AA28E00D59; Mon, 29 Feb 2016 13:16:26 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0BB1E00C72
-	for <meta-ti@yoctoproject.org>; Sun, 28 Feb 2016 22:40:56 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u1T6euUi013034
-	for <meta-ti@yoctoproject.org>; Mon, 29 Feb 2016 00:40:56 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u1T6eu7b007688
-	for <meta-ti@yoctoproject.org>; Mon, 29 Feb 2016 00:40:56 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 29 Feb 2016 00:40:55 -0600
-Received: from uda0876520.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u1T6erBU015838;	Mon, 29 Feb 2016 00:40:55 -0600
-From: Anand Balagopalakrishnan <anandb@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 29 Feb 2016 12:12:38 +0530
-Message-ID: <1456728158-25636-2-git-send-email-anandb@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1456728158-25636-1-git-send-email-anandb@ti.com>
-References: <1456728158-25636-1-git-send-email-anandb@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] omapdrm_pvr: remove version 1.9.2253347 as replaced by 1.14.3699939
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2604E00951
+	for <meta-ti@yoctoproject.org>; Mon, 29 Feb 2016 13:16:22 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 2A07A52A9F; Mon, 29 Feb 2016 21:16:22 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160229211622.2A07A52A9F@arago-project.org>
+Date: Mon, 29 Feb 2016 21:16:22 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Anand Balagopalakrishnan : omapdrm_pvr: remove version 1.9. 2253347 as replaced by 1.14.3699939
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,14 +35,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Feb 2016 06:40:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 29 Feb 2016 21:16:26 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: fido
+Commit: 79614c6d3496458c4f2927820ff10f20d7b85ac6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=79614c6d3496458c4f2927820ff10f20d7b85ac6
+
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Mon Feb 29 12:42:38 2016 +0000
+
+omapdrm_pvr: remove version 1.9.2253347 as replaced by 1.14.3699939
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     | 42 ----------------------
- 1 file changed, 42 deletions(-)
- delete mode 100644 recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+
+ .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |   42 --------------------
+ 1 files changed, 0 insertions(+), 42 deletions(-)
 
 diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
 deleted file mode 100644
@@ -105,7 +104,5 @@ index 4552fe1..0000000
 -do_install() {
 -    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_${DEVICE_SUB_DIR}_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
 -}
--- 
-1.9.1
 
 
