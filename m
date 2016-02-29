@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0D986E00951; Mon, 29 Feb 2016 13:16:26 -0800 (PST)
+	id 0E21CE00A27; Mon, 29 Feb 2016 13:16:26 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,15 +14,15 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0B39E00929
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A543DE00ADD
 	for <meta-ti@yoctoproject.org>; Mon, 29 Feb 2016 13:16:22 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 035D052A87; Mon, 29 Feb 2016 21:16:21 +0000 (UTC)
+	id E854B52A83; Mon, 29 Feb 2016 21:16:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160229211622.035D052A87@arago-project.org>
+Message-Id: <20160229211621.E854B52A83@arago-project.org>
 Date: Mon, 29 Feb 2016 21:16:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: bump SRCREV for bug fixes in Wayland EGL
+Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: register PVR service for autostart on boot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,41 +40,37 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: c8c0ec10d3aedf99ae16e02a53d964469467f877
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c8c0ec10d3aedf99ae16e02a53d964469467f877
+Commit: 5363cc51d03544912b1f89da35fb0dfbda98941a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5363cc51d03544912b1f89da35fb0dfbda98941a
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Mon Feb 29 11:32:17 2016 +0000
+Date:   Mon Feb 29 11:32:16 2016 +0000
 
-omap5-sgx-ddk-um-linux: bump SRCREV for bug fixes in Wayland EGL
+omap5-sgx-ddk-um-linux: register PVR service for autostart on boot
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    7 ++++++-
+ 1 files changed, 6 insertions(+), 1 deletions(-)
 
 diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-index a53902b..d6d457d 100644
+index 5ac3f31..a53902b 100644
 --- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
 +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
- 
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "562db8257cc4bf04647e06a8644d73f5d77fe711"
-+SRCREV = "3a6fbbf28701188e7072a601b8bf78c3d081ef67"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+@@ -14,7 +14,12 @@ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
  TARGET_PRODUCT_ti33x = "ti335x"
-@@ -19,7 +19,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ TARGET_PRODUCT_ti43x = "ti437x"
  
- inherit update-rc.d
- 
--PR = "r4"
-+PR = "r5"
+-PR = "r3"
++INITSCRIPT_NAME = "rc.pvr"
++INITSCRIPT_PARAMS = "defaults 8"
++
++inherit update-rc.d
++
++PR = "r4"
  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
  RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
