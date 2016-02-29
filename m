@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0E21CE00A27; Mon, 29 Feb 2016 13:16:26 -0800 (PST)
+	id 0ECA1E00ADD; Mon, 29 Feb 2016 13:16:26 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A543DE00ADD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4015E00A27
 	for <meta-ti@yoctoproject.org>; Mon, 29 Feb 2016 13:16:22 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E854B52A83; Mon, 29 Feb 2016 21:16:21 +0000 (UTC)
+	id 426AE52AB6; Mon, 29 Feb 2016 21:16:22 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160229211621.E854B52A83@arago-project.org>
-Date: Mon, 29 Feb 2016 21:16:21 +0000 (UTC)
+Message-Id: <20160229211622.426AE52AB6@arago-project.org>
+Date: Mon, 29 Feb 2016 21:16:22 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: register PVR service for autostart on boot
 X-BeenThere: meta-ti@yoctoproject.org
@@ -39,9 +39,9 @@ X-List-Received-Date: Mon, 29 Feb 2016 21:16:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 5363cc51d03544912b1f89da35fb0dfbda98941a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5363cc51d03544912b1f89da35fb0dfbda98941a
+Branch: master
+Commit: 4cdee8256c46c444b61021a1c0f21fc61c875604
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4cdee8256c46c444b61021a1c0f21fc61c875604
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
 Date:   Mon Feb 29 11:32:16 2016 +0000
