@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BE27CE00D4A; Mon, 29 Feb 2016 13:16:27 -0800 (PST)
+	id BFD3FE00CE1; Mon, 29 Feb 2016 13:16:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,15 +14,15 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18BABE00CF3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19725E00D53
 	for <meta-ti@yoctoproject.org>; Mon, 29 Feb 2016 13:16:25 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5D47B52AB7; Mon, 29 Feb 2016 21:16:22 +0000 (UTC)
+	id 8447052AC3; Mon, 29 Feb 2016 21:16:22 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160229211622.5D47B52AB7@arago-project.org>
+Message-Id: <20160229211622.8447052AC3@arago-project.org>
 Date: Mon, 29 Feb 2016 21:16:22 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : omap5-sgx-ddk-um-linux: bump SRCREV for bug fixes in Wayland EGL
+Subject: Anand Balagopalakrishnan : omapdrm_pvr: remove version 1.9. 2253347 as replaced by 1.14.3699939
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,43 +40,69 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 648a2cc05798453c86d0c2de6cefa044e59ae2c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=648a2cc05798453c86d0c2de6cefa044e59ae2c8
+Commit: ecdf9adb4d880636b9eef73ab3b4a0f9ed34060e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ecdf9adb4d880636b9eef73ab3b4a0f9ed34060e
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Mon Feb 29 11:32:17 2016 +0000
+Date:   Mon Feb 29 12:42:38 2016 +0000
 
-omap5-sgx-ddk-um-linux: bump SRCREV for bug fixes in Wayland EGL
+omapdrm_pvr: remove version 1.9.2253347 as replaced by 1.14.3699939
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |   42 --------------------
+ 1 files changed, 0 insertions(+), 42 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-index a53902b..d6d457d 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
- 
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "562db8257cc4bf04647e06a8644d73f5d77fe711"
-+SRCREV = "3a6fbbf28701188e7072a601b8bf78c3d081ef67"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
-@@ -19,7 +19,7 @@ INITSCRIPT_PARAMS = "defaults 8"
- 
- inherit update-rc.d
- 
--PR = "r4"
-+PR = "r5"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+deleted file mode 100644
+index 4552fe1..0000000
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ /dev/null
+@@ -1,42 +0,0 @@
+-DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found in the omap5 SoCs"
+-HOMEPAGE = "http://git.ti.com"
+-LICENSE = "MIT | GPLv2"
+-LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bfc03386bb4d8d9381b79d33898"
+-
+-inherit module
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+-
+-MACHINE_KERNEL_PR_append = "i"
+-PR = "${MACHINE_KERNEL_PR}"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-BRANCH_omap-a15 = "dra7/k4.1"
+-BRANCH_ti33x = "am4/k4.1"
+-BRANCH_ti43x = "am4/k4.1"
+-
+-SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+-S = "${WORKDIR}/git"
+-
+-SRCREV_omap-a15 = "c53a5dfb9f4d5612c372ec8e252cb13a731c9c10"
+-SRCREV_ti33x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
+-SRCREV_ti43x = "f7ae3f68dd6a05f67b15702b823ed15d2c03105d"
+-
+-PVR_NULLDRM_ti33x = "1"
+-PVR_NULLDRM_ti43x = "0"
+-PVR_NULLDRM_omap-a15 = "0"
+-
+-EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" PVR_NULLDRM=${PVR_NULLDRM}'
+-
+-DEVICE_SUB_DIR_omap-a15 = "omap5430"
+-DEVICE_SUB_DIR_ti33x = "omap335x"
+-DEVICE_SUB_DIR_ti43x = "omap437x"
+-
+-do_compile_prepend() {
+-    cd ${S}/eurasia_km/eurasiacon/build/linux2/${DEVICE_SUB_DIR}_linux
+-}
+-
+-do_install() {
+-    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_${DEVICE_SUB_DIR}_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+-}
 
 
