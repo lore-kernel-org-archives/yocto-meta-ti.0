@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C6BAE00CC8; Tue,  1 Mar 2016 15:05:18 -0800 (PST)
+	id 4DBD6E00C9E; Tue,  1 Mar 2016 15:05:18 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 59DACE00C9E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B126E00CAE
 	for <meta-ti@yoctoproject.org>; Tue,  1 Mar 2016 15:05:15 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6597952A4F; Tue,  1 Mar 2016 23:05:15 +0000 (UTC)
+	id 1123E52A26; Tue,  1 Mar 2016 23:05:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160301230515.6597952A4F@arago-project.org>
+Message-Id: <20160301230515.1123E52A26@arago-project.org>
 Date: Tue,  1 Mar 2016 23:05:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : linux: cmem: k2g-evm: Add CMEM regions for k2g-evm
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 01 Mar 2016 23:05:18 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3ceebfaf5f0828a173da66e48a5a562634e79470
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3ceebfaf5f0828a173da66e48a5a562634e79470
+Branch: fido
+Commit: 5c7a2b336cd9282fe03bee5e891a86ba7e6a7794
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5c7a2b336cd9282fe03bee5e891a86ba7e6a7794
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Tue Mar  1 20:59:56 2016 +0000
