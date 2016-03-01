@@ -1,26 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4DBD6E00C9E; Tue,  1 Mar 2016 15:05:18 -0800 (PST)
+	id 09B02E00CC9; Tue,  1 Mar 2016 15:35:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
+	URI_HEX autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B126E00CAE
-	for <meta-ti@yoctoproject.org>; Tue,  1 Mar 2016 15:05:15 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 1123E52A26; Tue,  1 Mar 2016 23:05:15 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160301230515.1123E52A26@arago-project.org>
-Date: Tue,  1 Mar 2016 23:05:15 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : linux: cmem: k2g-evm: Add CMEM regions for k2g-evm
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 830F2E00CAE
+	for <meta-ti@yoctoproject.org>; Tue,  1 Mar 2016 15:35:07 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u21NZ6ve016132
+	for <meta-ti@yoctoproject.org>; Tue, 1 Mar 2016 17:35:06 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u21NZ601028480
+	for <meta-ti@yoctoproject.org>; Tue, 1 Mar 2016 17:35:06 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 1 Mar 2016 17:35:04 -0600
+Received: from uda0850410.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u21NZ4mZ007429	for <meta-ti@yoctoproject.org>;
+	Tue, 1 Mar 2016 17:35:04 -0600
+From: Eric Ruei <e-ruei1@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 1 Mar 2016 18:35:00 -0500
+Message-ID: <1456875300-36018-1-git-send-email-e-ruei1@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] omap5-sgx-ddk-um-linux: Add plugins list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,86 +47,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2016 23:05:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 01 Mar 2016 23:35:10 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: fido
-Commit: 5c7a2b336cd9282fe03bee5e891a86ba7e6a7794
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5c7a2b336cd9282fe03bee5e891a86ba7e6a7794
-
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Mar  1 20:59:56 2016 +0000
-
-linux: cmem: k2g-evm: Add CMEM regions for k2g-evm
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
+ recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
- recipes-kernel/linux/files/k2g-evm/cmem.dtsi |   54 ++++++++++++++++++++++++++
- 1 files changed, 54 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-kernel/linux/files/k2g-evm/cmem.dtsi b/recipes-kernel/linux/files/k2g-evm/cmem.dtsi
-new file mode 100644
-index 0000000..f30bf5b
---- /dev/null
-+++ b/recipes-kernel/linux/files/k2g-evm/cmem.dtsi
-@@ -0,0 +1,54 @@
-+/ {
-+        reserved-memory {
-+                mpm_block_mem_0: mpm_block_mem@820000000 {
-+                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
+index d6d457d..2c534ee 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
+@@ -19,7 +19,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ 
+ inherit update-rc.d
+ 
+-PR = "r5"
++PR = "r6"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ 
+ RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+@@ -41,6 +41,12 @@ FILES_${PN} += " ${libdir}/*"
+ FILES_${PN} +=  "${includedir}/*"
+ FILES_${PN} +=  "${sysconfdir}/*"
+ 
++PACKAGES =+ "${PN}-plugins"
++FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libGLESv2.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
++RDEPENDS_${PN} += "${PN}-plugins"
 +
-+                cmem_block_mem_0: cmem_block_mem@829000000 {
-+                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
++ALLOW_EMPTY_${PN}-plugins = "1"
 +
-+                cmem_block_mem_1: cmem_block_mem@00c000000 {
-+                        reg = <0x00000000 0x0c000000 0x00000000 0x00100000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+
-+                cmem_block_mem_2: cmem_block_mem@822000000 {
-+                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
-+
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+                status = "okay";
-+
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x00000000 0x17000000>;
-+                };
-+
-+                cmem_block_1: cmem_block@1 {
-+                        reg = <1>;
-+                        memory-region = <&cmem_block_mem_1>;
-+                };
-+
-+                cmem_block_2: cmem_block@2 {
-+                        reg = <2>;
-+                        memory-region = <&cmem_block_mem_2>;
-+                };
-+        };
-+
-+};
+ INHIBIT_PACKAGE_STRIP = "1"
+ 
+ INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
+-- 
+1.9.1
 
 
