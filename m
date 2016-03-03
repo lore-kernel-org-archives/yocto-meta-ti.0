@@ -1,38 +1,28 @@
-Return-Path: <sam.nelson@TI.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 85B4AE0079A; Wed,  2 Mar 2016 10:04:36 -0800 (PST)
+	id E5ABFE0092C; Wed,  2 Mar 2016 19:21:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56A8BE00CFE
-	for <meta-ti@yoctoproject.org>; Wed,  2 Mar 2016 10:04:33 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u22I4Wx1031494
-	for <meta-ti@yoctoproject.org>; Wed, 2 Mar 2016 12:04:32 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u22I4WNH022737
-	for <meta-ti@yoctoproject.org>; Wed, 2 Mar 2016 12:04:32 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 2 Mar 2016 12:04:32 -0600
-Received: from ares-ubuntu2.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u22I4W51017809;	Wed, 2 Mar 2016 12:04:32 -0600
-From: Sam Nelson <sam.nelson@TI.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 2 Mar 2016 13:04:31 -0500
-Message-ID: <1456941871-24499-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH v2] ti-ipc: Update to GA version IPC 3.42
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C5EBE008C6
+	for <meta-ti@yoctoproject.org>; Wed,  2 Mar 2016 19:21:04 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 21540529A5; Thu,  3 Mar 2016 03:21:04 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160303032104.21540529A5@arago-project.org>
+Date: Thu,  3 Mar 2016 03:21:04 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: e-ruei1@ti.com : omap5-sgx-ddk-um-linux: Add plugins list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,56 +35,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2016 18:04:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 03 Mar 2016 03:21:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Updated to GA version and commit for IPC 3.42
-Added additional platform for K2HK
+Module: meta-ti
+Branch: master
+Commit: 06153e9c190bc96a1f0897a3041e03bc90c02316
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=06153e9c190bc96a1f0897a3041e03bc90c02316
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Author: e-ruei1@ti.com <e-ruei1@ti.com>
+Date:   Wed Mar  2 05:35:00 2016 +0000
+
+omap5-sgx-ddk-um-linux: Add plugins list
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
-Removed 667x-evm platform
----
----
- recipes-ti/ipc/ti-ipc.inc | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index a7e1ed9..69127aa 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,18 +6,18 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+ .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    8 +++++++-
+ 1 files changed, 7 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
+index d6d457d..3ee0ac7 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
+@@ -19,7 +19,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "ipc-next"
-+TI_IPC_GIT_BRANCH = "3.42"
+ inherit update-rc.d
  
--#Corresponds to 3.42.00.00_eng
--TI_IPC_SRCREV = "2b47e35ed72170e4e56906fb9ab93dd9ef385a38"
-+#Corresponds to 3.42.00.02
-+TI_IPC_SRCREV = "a520969994378fb2629d7dfc25f306c3a711b5bc"
+-PR = "r5"
++PR = "r6"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${TI_IPC_SRCREV}"
+ RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+@@ -41,6 +41,12 @@ FILES_${PN} += " ${libdir}/*"
+ FILES_${PN} +=  "${includedir}/*"
+ FILES_${PN} +=  "${sysconfdir}/*"
  
- S = "${WORKDIR}/git"
--PV = "3.42.00.00"
--INC_PR = "r1"
-+PV = "3.42.00.02"
-+INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
-@@ -28,3 +28,5 @@ PLATFORM_k2hk-evm = "TCI6638"
- PLATFORM_k2l-evm = "TCI6630"
- PLATFORM_k2e-evm = "66AK2E"
- PLATFORM_k2g-evm = "66AK2G"
++PACKAGES =+ "${PN}-plugins"
++FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libGLESv2.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
++RDEPENDS_${PN} += "${PN}-plugins"
 +
-+ALT_PLATFORM_k2hk-evm = "TCI6636"
--- 
-1.9.1
++ALLOW_EMPTY_${PN}-plugins = "1"
++
+ INHIBIT_PACKAGE_STRIP = "1"
+ 
+ INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
 
 
