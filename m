@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 58141E00948; Wed,  2 Mar 2016 19:50:00 -0800 (PST)
+	id 50777E00951; Wed,  2 Mar 2016 19:50:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EDA43E008C6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE449E00920
 	for <meta-ti@yoctoproject.org>; Wed,  2 Mar 2016 19:49:56 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C495A529C0; Thu,  3 Mar 2016 03:49:55 +0000 (UTC)
+	id AE2E4529A5; Thu,  3 Mar 2016 03:49:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160303034955.C495A529C0@arago-project.org>
+Message-Id: <20160303034955.AE2E4529A5@arago-project.org>
 Date: Thu,  3 Mar 2016 03:49:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with latest HS, K2 and AM4 fixes
+Subject: Denys Dmytriyenko : linux-ti-staging: update with platform, connectivity and rpmsg fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,49 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a548f34b08a7f3d3486927cd87ec2b72050ba2b4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a548f34b08a7f3d3486927cd87ec2b72050ba2b4
+Commit: 52a25ddbaae0db6cd7a4d0a70103bbe8560b8000
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=52a25ddbaae0db6cd7a4d0a70103bbe8560b8000
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  2 22:34:12 2016 -0500
+Date:   Thu Mar  3 09:35:07 2016 +0000
 
-u-boot-ti-staging: update with latest HS, K2 and AM4 fixes
+linux-ti-staging: update with platform, connectivity and rpmsg fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index ed827fc..c37636b 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+index 70e4cf7..0d24763 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ BRANCH = "ti-rt-linux-4.1.y"
  
--PR = "r20"
-+PR = "r21"
- PV_append = "+git${SRCPV}"
+-SRCREV = "c4265b98cb248d9c9fd31c8d791ecfc31a735a51"
++SRCREV = "c7a542d5948069c53c901ff948213ab2fab05a64"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 52323c7..b3effa6 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ BRANCH = "ti-lsk-linux-4.1.y"
  
- BRANCH ?= "ti-u-boot-2015.07"
+-SRCREV = "fd5a53328880f80330e3f8a0d7362b8d418faac6"
++SRCREV = "200551353fb466d02da7186b6fed79dcfdf55064"
+ PV = "4.1.18+git${SRCPV}"
  
--SRCREV = "dca348d604c0117fa7851e3a4a194bedb42b739b"
-+SRCREV = "351a81fc59f2861410d96a9d6fe95dd351cfe2e6"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "e"
+ PR = "${MACHINE_KERNEL_PR}"
  
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
