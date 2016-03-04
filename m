@@ -1,26 +1,30 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <dv@pseudoterminal.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 78F60E00CE1; Fri,  4 Mar 2016 09:12:59 -0800 (PST)
+	id E0931E00B89; Fri,  4 Mar 2016 10:34:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94482E00CD8
-	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 09:12:58 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 536BF529E4; Fri,  4 Mar 2016 17:12:58 +0000 (UTC)
+X-Greylist: delayed 355 seconds by postgrey-1.32 at yocto-www;
+	Fri, 04 Mar 2016 10:34:34 PST
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F8E4E00B37
+	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 10:34:34 -0800 (PST)
+Received: from [172.16.1.4] (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 199122C55F
+	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 19:28:37 +0100 (CET)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160304171258.536BF529E4@arago-project.org>
-Date: Fri,  4 Mar 2016 17:12:58 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with latest A/D, connectivity and rpmsg fixes
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Message-ID: <56D9D3D4.5040302@pseudoterminal.org>
+Date: Fri, 4 Mar 2016 19:28:36 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+Subject: Problems with the kernel and udev
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,54 +37,90 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2016 17:12:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Mar 2016 18:34:39 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: fido
-Commit: 5558d1f4bc6bd6d2b27b21a939215e1775646852
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5558d1f4bc6bd6d2b27b21a939215e1775646852
+Hello,
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Mar  4 23:11:08 2016 +0000
+I am trying to build a rootfs for the BeagleBoard-XM Rev.C , and added 
+meta-ti. I am using the master branch of meta-ti, poky, and 
+meta-openembedded.
+But I do run into problems.
 
-linux-ti-staging: update with latest A/D, connectivity and rpmsg fixes
+1) recipes-core/udev/udev_%.bbappend cannot be applied, because oe-core 
+apparently replaced udev with eudev.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+2) The kernel cannot be built. Here are some logs:
 
----
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:145: 
+first defined here
+| arch/arm/mm/context.o: In function `nop_dma_map_area':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:145: 
+multiple definition of `nop_dma_map_area'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:145: 
+first defined here
+| arch/arm/mm/context.o: In function `nop_dma_unmap_area':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:148: 
+multiple definition of `nop_dma_unmap_area'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:148: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_flush_icache_all':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/mm/cache-l2x0.c:600: 
+multiple definition of `nop_flush_icache_all'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/mm/dma-mapping.c:742: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_flush_kern_cache_all':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/mm/cache-l2x0.c:600: 
+multiple definition of `nop_flush_kern_cache_all'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/mm/dma-mapping.c:742: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_flush_kern_cache_louis':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/mm/cache-l2x0.c:600: 
+multiple definition of `nop_flush_kern_cache_louis'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/mm/dma-mapping.c:742: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_flush_user_cache_all':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:136: 
+multiple definition of `nop_flush_user_cache_all'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:136: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_flush_user_cache_range':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:138: 
+multiple definition of `nop_flush_user_cache_range'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:138: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_coherent_kern_range':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:140: 
+multiple definition of `nop_coherent_kern_range'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:140: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_coherent_user_range':
+| 
+/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:142: 
+multiple definition of `nop_coherent_user_range'
+| 
+arch/arm/mm/dma-mapping.o:/home/build/BuildSetups/yocto-master/poky/build/tmp/work-shared/beagleboard/kernel-source/arch/arm/include/asm/glue-cache.h:142: 
+first defined here
+| arch/arm/mm/cache-l2x0.o: In function `nop_flush_kern_dcache_area':
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 0d24763..1c2dc64 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
- 
- BRANCH = "ti-rt-linux-4.1.y"
- 
--SRCREV = "c7a542d5948069c53c901ff948213ab2fab05a64"
-+SRCREV = "141ec2a74c877d996281cb1aef3c7ce3920b637e"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index a25d26b..21eb609 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.1.y"
- 
--SRCREV = "200551353fb466d02da7186b6fed79dcfdf55064"
-+SRCREV = "bbd032bf6c45e07806ce2faece824035ebf13869"
- PV = "4.1.18+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "e"
-+MACHINE_KERNEL_PR_append = "f"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-
+Any ideas?
 
