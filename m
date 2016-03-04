@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EEBFAE00CE4; Fri,  4 Mar 2016 09:12:58 -0800 (PST)
+	id F08ADE00CE1; Fri,  4 Mar 2016 09:12:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 097BAE00CD1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0AC31E00CD7
 	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 09:12:56 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2A48152A2E; Fri,  4 Mar 2016 17:12:55 +0000 (UTC)
+	id 05D2C529E4; Fri,  4 Mar 2016 17:12:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160304171255.2A48152A2E@arago-project.org>
-Date: Fri,  4 Mar 2016 17:12:55 +0000 (UTC)
+Message-Id: <20160304171255.05D2C529E4@arago-project.org>
+Date: Fri,  4 Mar 2016 17:12:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new verison 3.0.1.0
+Subject: Denys Dmytriyenko : linux-ti-staging: update with latest A/D, connectivity and rpmsg fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,49 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 6702fcf9922a05050c8f756f8190ea0bf34f4c6e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6702fcf9922a05050c8f756f8190ea0bf34f4c6e
+Commit: 4586cebb08defc8a1789246711b9b686281db3d6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4586cebb08defc8a1789246711b9b686281db3d6
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Mar  4 04:51:51 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Mar  4 23:11:08 2016 +0000
 
-multiprocmgr: Update to new verison 3.0.1.0
+linux-ti-staging: update with latest A/D, connectivity and rpmsg fixes
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index 122ac0f..915ac7a 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -8,11 +8,11 @@ MULTIPROCMGR_GIT_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git"
- MULTIPROCMGR_GIT_PROTOCOL = "git"
- MULTIPROCMGR_GIT_BRANCH = "master"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+index 0d24763..1c2dc64 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
  
--# The following commits correspond to DEV.MPM-3.00.00.02
--MULTIPROCMGR_SRCREV = "319c6cfe15054df08eb70cbedc99a88dd5a06cda"
-+# The following commits correspond to DEV.MPM-3.00.01.00
-+MULTIPROCMGR_SRCREV = ""
+ BRANCH = "ti-rt-linux-4.1.y"
  
--PV = "3.0.0.2"
--INC_PR = "r2"
-+PV = "3.0.1.0"
-+INC_PR = "r0"
+-SRCREV = "c7a542d5948069c53c901ff948213ab2fab05a64"
++SRCREV = "141ec2a74c877d996281cb1aef3c7ce3920b637e"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index b3effa6..2b2c704 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
  
- BRANCH = "${MULTIPROCMGR_GIT_BRANCH}"
- SRC_URI = "${MULTIPROCMGR_GIT_URI};protocol=${MULTIPROCMGR_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "ti-lsk-linux-4.1.y"
+ 
+-SRCREV = "200551353fb466d02da7186b6fed79dcfdf55064"
++SRCREV = "bbd032bf6c45e07806ce2faece824035ebf13869"
+ PV = "4.1.18+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "e"
++MACHINE_KERNEL_PR_append = "f"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
