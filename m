@@ -1,28 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4BC12E00CD7; Fri,  4 Mar 2016 09:07:52 -0800 (PST)
+	id 5FD9AE00D17; Fri,  4 Mar 2016 09:08:55 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A166E00CD9
-	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 09:07:50 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 1814752AC6; Fri,  4 Mar 2016 17:07:50 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160304170750.1814752AC6@arago-project.org>
-Date: Fri,  4 Mar 2016 17:07:50 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: e-ruei1@ti.com : omap5-sgx-ddk-um-linux: Add INSANE_SKIP list for plugins
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9C3D6E00AB6
+	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 09:08:37 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u24H8aKv020040
+	for <meta-ti@yoctoproject.org>; Fri, 4 Mar 2016 11:08:36 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u24H8aij000480
+	for <meta-ti@yoctoproject.org>; Fri, 4 Mar 2016 11:08:36 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 4 Mar 2016 11:05:39 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u24H5eYA010741;
+	Fri, 4 Mar 2016 11:05:40 -0600
+Date: Fri, 4 Mar 2016 12:05:24 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Sam Nelson <sam.nelson@ti.com>
+Message-ID: <20160304170524.GB7505@edge>
+References: <1457024693-26303-1-git-send-email-sam.nelson@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <1457024693-26303-1-git-send-email-sam.nelson@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] ti-ipc-rtos: Update to include examples, docs etc.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,46 +48,142 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2016 17:07:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Mar 2016 17:08:55 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: fido
-Commit: e3b63eeb7a8b3a5d5c0712c23ce57023e7c2ee12
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e3b63eeb7a8b3a5d5c0712c23ce57023e7c2ee12
+On Thu, Mar 03, 2016 at 12:04:53PM -0500, Sam Nelson wrote:
+> Added procedures and source urls for ipc examples and documentation into
+> src package.
+> Added dependency on doxygen for document creation
+> Added big endian c66 targets
+> 
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> ---
+>  recipes-ti/ipc/ti-ipc-rtos_git.bb | 69 +++++++++++++++++++++++++++++++++++----
+>  1 file changed, 62 insertions(+), 7 deletions(-)
+> 
+> diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> index eff1001..ffa4495 100644
+> --- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> @@ -2,9 +2,19 @@ require recipes-ti/includes/ti-paths.inc
+>  require recipes-ti/includes/ti-staging.inc
+>  require ti-ipc.inc
+>  
+> -PR = "${INC_PR}.3"
+> +SRC_URI += "git://git.ti.com/ipc/ipc-examples.git;destsuffix=git/ipc-examples;protocol=git;branch=master;name=ipc-examples"
+> +# Corresponds to tag: 3.42.00.02
+> +SRCREV_ipc-examples = "d3dc0e0c8da049fd6c76feb222df13c2c944a6aa"
+> +SRC_URI += "git://git.ti.com/ipc/ipc-metadata.git;destsuffix=git/ipc-metadata;protocol=git;branch=master;name=ipc-metadata"
+> +# Corresponds to tag: 3.42.00.02
+> +SRCREV_ipc-metadata = "e9a608608f1e9c0096112d5fcc41bb7af161a97e"
 
-Author: e-ruei1@ti.com <e-ruei1@ti.com>
-Date:   Fri Mar  4 21:21:39 2016 +0000
+Don't you need SRCREV_FORMAT here?
 
-omap5-sgx-ddk-um-linux: Add INSANE_SKIP list for plugins
 
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> -DEPENDS = "ti-xdctools ti-sysbios"
+> +S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+> +S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+> +
+> +PR = "${INC_PR}.0"
+> +
+> +DEPENDS = "ti-xdctools ti-sysbios doxygen-native"
+>  DEPENDS_append_keystone = " ti-cgt6x-native \
+>                              gcc-arm-none-eabi-native \
+>  "
+> @@ -26,6 +36,7 @@ IPC_TARGETS = ""
+>  IPC_TARGETS_omap-a15 = "\
+>      gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
+>      ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+> +    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+>      ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
+>      ti.targets.arm.elf.M4F="${M4_TOOLCHAIN_INSTALL_DIR}" \
+>  "
+> @@ -33,29 +44,73 @@ IPC_TARGETS_omap-a15 = "\
+>  IPC_TARGETS_keystone = " \
+>      gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
+>      ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+> +    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+> +"
+> +
+> +IPC_TARGETS_c66x = " \
+> +    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+> +    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+>  "
+>  
+>  EXTRA_OEMAKE = "\
+>      PLATFORM=${PLATFORM} \
+>      XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+>      BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
+> -    ${IPC_TARGETS} -f ipc-bios.mak\
+> +    ${IPC_TARGETS} \
+>  "
+> +SRCIPK_SRC_DIR = "${D}${IPC_INSTALL_DIR_RECIPE}"
+> +
+> +RELEASE_TYPE = "GA"
+> +RELEASE_SUFFIX = ""
+>  
+>  do_compile() {
+> -  oe_runmake clean
+> -  oe_runmake all
+> +  oe_runmake -f ipc-bios.mak clean
+> +  oe_runmake -f ipc-bios.mak release
+>  }
+>  
+>  do_compile_append() {
+> -  sourceipk_do_create_srcipk
+> +  cd ${S_ipc-metadata}
+> +  oe_runmake .all-files IPC_INSTALL_DIR="${S}" \
+> +    BUILD_HOST_OS="linux" \
+> +    RELEASE_TYPE="${RELEASE_TYPE}"
+> +
+> +  cd ${S_ipc-examples}/src
+> +  oe_runmake .examples \
+> +    IPCTOOLS="${S_ipc-metadata}/src/etc"
+> +
+> +  if [  "${PLATFORM}" != "UNKNOWN" ]; then
+> +    oe_runmake extract HOSTOS="bios" IPC_INSTALL_DIR="${S}"
+> +    oe_runmake extract HOSTOS="linux" IPC_INSTALL_DIR="${S}"
+> +
+> +    if [ ! -z ${ALT_PLATFORM} ]; then
+> +      oe_runmake extract PLATFORM=${ALT_PLATFORM} HOSTOS="bios" IPC_INSTALL_DIR="${S}"
+> +      oe_runmake extract PLATFORM=${ALT_PLATFORM} HOSTOS="linux" IPC_INSTALL_DIR="${S}"
+> +    fi
+> +  fi
+>  }
+>  
+>  do_install() {
+> +    IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
+> +    # Copy docs and other meta files
+>      install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+> -    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+> +    cp -pPrf  ${S_ipc-metadata}/exports/ipc_${IPC_VERSION}/* -d ${D}${IPC_INSTALL_DIR_RECIPE}
+>  
+> +    # Copy example folders corresponding to the platforms
+> +    if [  "${PLATFORM}" != "UNKNOWN" ]; then
+> +      install -d ${D}${IPC_INSTALL_DIR_RECIPE}/examples
+> +      cp -pPf ${S_ipc-examples}/src/examples/*.* ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> +      cp -pPf ${S_ipc-examples}/src/examples/makefile ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> +      cp -pPrf ${S_ipc-examples}/src/examples/${PLATFORM}* ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> +      if [ ! -z ${ALT_PLATFORM} ]; then
+> +        cp -pPrf ${S_ipc-examples}/src/examples/${ALT_PLATFORM}* ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> +      fi
+> +      find ${D}${IPC_INSTALL_DIR_RECIPE}/examples/ -name "*zip" -type f | xargs -I {} rm {}
+> +    fi
+> +
+> +    # Install firmware images
+>      install -d ${D}${base_libdir}/firmware
+>      find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+>      find . -name "*.xem4" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+> +
+> +    sourceipk_do_create_srcipk
 
----
+So, you are creating a source package after the installation and from an 
+install location - rather unorthodox and I can see problems with this. Have 
+you tested it thoroughly and tried to use those sources in the devkit 
+afterwards?
 
- .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-index 3ee0ac7..3a239c0 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-@@ -19,7 +19,7 @@ INITSCRIPT_PARAMS = "defaults 8"
- 
- inherit update-rc.d
- 
--PR = "r6"
-+PR = "r7"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
-@@ -50,5 +50,6 @@ ALLOW_EMPTY_${PN}-plugins = "1"
- INHIBIT_PACKAGE_STRIP = "1"
- 
- INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-+INSANE_SKIP_${PN}-plugins = "dev-so"
- 
- CLEANBROKEN = "1"
-
+-- 
+Denys
 
