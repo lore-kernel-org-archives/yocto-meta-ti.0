@@ -1,6 +1,6 @@
-Return-Path: <jsobota@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5BA8CE00BEA; Fri,  4 Mar 2016 12:52:17 -0800 (PST)
+	id E5D4AE00B89; Fri,  4 Mar 2016 13:45:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,36 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CC807E00BE2
-	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 12:52:15 -0800 (PST)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9AFCFE00B89
+	for <meta-ti@yoctoproject.org>; Fri,  4 Mar 2016 13:44:57 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u24KqEJc030000
-	for <meta-ti@yoctoproject.org>; Fri, 4 Mar 2016 14:52:14 -0600
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u24LivVS001787
+	for <meta-ti@yoctoproject.org>; Fri, 4 Mar 2016 15:44:57 -0600
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u24KqEuX003869
-	for <meta-ti@yoctoproject.org>; Fri, 4 Mar 2016 14:52:14 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 4 Mar 2016 14:52:14 -0600
-Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u24KqDd4005449;	Fri, 4 Mar 2016 14:52:14 -0600
-From: Justin Sobota <jsobota@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 4 Mar 2016 15:52:11 -0500
-Message-ID: <1457124731-13125-2-git-send-email-jsobota@ti.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1457124731-13125-1-git-send-email-jsobota@ti.com>
-References: <1457124731-13125-1-git-send-email-jsobota@ti.com>
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u24LivtM021410
+	for <meta-ti@yoctoproject.org>; Fri, 4 Mar 2016 15:44:57 -0600
+Received: from DFLE09.ent.ti.com ([fe80::7090:147d:b5eb:4c12]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0224.002; Fri, 4 Mar 2016 15:44:56 -0600
+From: "Stiffler, Jacob" <j-stiffler@ti.com>
+To: "Nelson, Sam" <sam.nelson@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH] multiprocmgr: Update to new verison 3.0.1.0
+Thread-Index: AQHRdZ9V9IREvzctRkWC6ItEOMFQ1Z9J0nyg
+Date: Fri, 4 Mar 2016 21:44:56 +0000
+Message-ID: <4B26FB5A64EBA14C87266869E037F95814248BC0@DFLE09.ent.ti.com>
+References: <1457045511-16254-1-git-send-email-sam.nelson@ti.com>
+In-Reply-To: <1457045511-16254-1-git-send-email-sam.nelson@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: [PATCH 2/2] ti-xdctools: Update to verion 3.32.00.06
+Subject: Re: [PATCH] multiprocmgr: Update to new verison 3.0.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,48 +50,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2016 20:52:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 04 Mar 2016 21:45:03 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
----
- recipes-ti/devtools/ti-xdctools_3.31.02.38.bb |    9 ---------
- recipes-ti/devtools/ti-xdctools_3.32.00.06.bb |    9 +++++++++
- 2 files changed, 9 insertions(+), 9 deletions(-)
- delete mode 100644 recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
- create mode 100644 recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+The SRCREV was removed by this patch!
 
-diff --git a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-deleted file mode 100644
-index 5e970ee..0000000
---- a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require ti-xdctools-core.inc
--
--PV = "3_31_02_38"
--PR = "r0"
--
--LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=9dbb0095cdb8b35508b344aa4f1de333"
--
--SRC_URI[xdczip.md5sum] = "c76b3d90c3e25d199765557e393d165b"
--SRC_URI[xdczip.sha256sum] = "c0e1f6911f2294bfb76471fac1a0ceac3e89c7eb1300f84d2571bf78cb62a7d2"
-diff --git a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
-new file mode 100644
-index 0000000..fb0c123
---- /dev/null
-+++ b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
-@@ -0,0 +1,9 @@
-+require recipes-ti/devtools/ti-xdctools-core.inc
-+
-+PV = "3_32_00_06"
-+PR = "r0"
-+
-+LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=732d986a63b648562f3e658b1df43036"
-+
-+SRC_URI[xdczip.md5sum] = "93127f4c2f35d94b6c8e5a52b79c38ae"
-+SRC_URI[xdczip.sha256sum] = "d6f38a7f846ae4b1478554d75fc5f72cf677a1e2f348e214a725d1e849bd39c7"
--- 
-1.7.10.4
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Nelson, Sam
+> Sent: Thursday, March 03, 2016 5:52 PM
+> To: meta-ti@yoctoproject.org
+> Subject: [meta-ti] [PATCH] multiprocmgr: Update to new verison 3.0.1.0
+>=20
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+>=20
+> ---
+> Note:
+> The changes in this version needs corresponding
+> change in kernel version and hence need to be
+> coordinated
+>=20
+> ---
+> ---
+>  recipes-ti/multiprocmgr/multiprocmgr.inc | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-
+> ti/multiprocmgr/multiprocmgr.inc
+> index 122ac0f..915ac7a 100644
+> --- a/recipes-ti/multiprocmgr/multiprocmgr.inc
+> +++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
+> @@ -8,11 +8,11 @@ MULTIPROCMGR_GIT_URI =3D "git://git.ti.com/keystone-
+> linux/multi-proc-manager.git"
+>  MULTIPROCMGR_GIT_PROTOCOL =3D "git"
+>  MULTIPROCMGR_GIT_BRANCH =3D "master"
+>=20
+> -# The following commits correspond to DEV.MPM-3.00.00.02
+> -MULTIPROCMGR_SRCREV =3D "319c6cfe15054df08eb70cbedc99a88dd5a06cda"
+> +# The following commits correspond to DEV.MPM-3.00.01.00
+> +MULTIPROCMGR_SRCREV =3D ""
+^^^^^^^^^^^^
 
+
+>=20
+> -PV =3D "3.0.0.2"
+> -INC_PR =3D "r2"
+> +PV =3D "3.0.1.0"
+> +INC_PR =3D "r0"
+>=20
+>  BRANCH =3D "${MULTIPROCMGR_GIT_BRANCH}"
+>  SRC_URI =3D
+> "${MULTIPROCMGR_GIT_URI};protocol=3D${MULTIPROCMGR_GIT_PROTOCOL};
+> branch=3D${BRANCH}"
+> --
+> 1.9.1
+>=20
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
