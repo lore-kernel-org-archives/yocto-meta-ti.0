@@ -1,40 +1,39 @@
-Return-Path: <jsobota@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2071EE0083D; Mon,  7 Mar 2016 11:58:53 -0800 (PST)
+	id 9D5EBE00848; Mon,  7 Mar 2016 12:24:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.7 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64D66E0083D
-	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 11:58:50 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u27JwncV026888
-	for <meta-ti@yoctoproject.org>; Mon, 7 Mar 2016 13:58:49 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u27JwmBB029192
-	for <meta-ti@yoctoproject.org>; Mon, 7 Mar 2016 13:58:49 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 7 Mar 2016 13:58:49 -0600
-Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u27JwmVc013685;	Mon, 7 Mar 2016 13:58:49 -0600
-From: Justin Sobota <jsobota@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 7 Mar 2016 14:58:46 -0500
-Message-ID: <1457380726-19214-2-git-send-email-jsobota@ti.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1457380726-19214-1-git-send-email-jsobota@ti.com>
-References: <1457380726-19214-1-git-send-email-jsobota@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH v3 2/2] ti-xdctools: Update to verion 3.32.00.06 License checksum calculation now ignores generation date
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF2C0E00803
+	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 12:24:45 -0800 (PST)
+Received: from vz-proxy-l005.mx.aol.com ([64.236.82.148])
+	by vms173007.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O3O00MGQRCIKID0@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 07 Mar 2016 14:24:19 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
+	a=7OsogOcEt9IA:10 a=sozttTNsAAAA:8	a=owABuQrjGiYlg7QJ0YIA:9
+Received: by 100.15.86.14 with SMTP id 72966777; Mon, 07 Mar 2016 20:24:19 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id A4CDE161EFC;	Mon,
+	7 Mar 2016 15:24:18 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 07 Mar 2016 15:24:18 -0500
+Message-id: <1457382258-13697-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] multiprocmgr-test: don't repackage between machines, as only K2 uses it
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,40 +46,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2016 19:58:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 07 Mar 2016 20:24:48 -0000
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
-V3 Changes: Checksum calculation excludes generation date so future version updates won't need checksum update
+ recipes-ti/multiprocmgr/multiprocmgr-test_git.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
- .../{ti-xdctools_3.31.02.38.bb => ti-xdctools_3.32.00.06.bb} |   10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename recipes-ti/devtools/{ti-xdctools_3.31.02.38.bb => ti-xdctools_3.32.00.06.bb} (3%)
-
-diff --git a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
-similarity index 3%
-rename from recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-rename to recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
-index 5e970ee..19bbe5d 100644
---- a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-+++ b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
-@@ -1,9 +1,9 @@
--require ti-xdctools-core.inc
-+require recipes-ti/devtools/ti-xdctools-core.inc
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+index 8605cf1..7ec8796 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+@@ -2,13 +2,16 @@ DESCRIPTION = "TI Multiproc Manager test code"
  
--PV = "3_31_02_38"
-+PV = "3_32_00_06"
- PR = "r0"
+ include multiprocmgr.inc
  
--LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=9dbb0095cdb8b35508b344aa4f1de333"
-+LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=1796f68c3d32d408415f5612f1f60652"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
--SRC_URI[xdczip.md5sum] = "c76b3d90c3e25d199765557e393d165b"
--SRC_URI[xdczip.sha256sum] = "c0e1f6911f2294bfb76471fac1a0ceac3e89c7eb1300f84d2571bf78cb62a7d2"
-+SRC_URI[xdczip.md5sum] = "93127f4c2f35d94b6c8e5a52b79c38ae"
-+SRC_URI[xdczip.sha256sum] = "d6f38a7f846ae4b1478554d75fc5f72cf677a1e2f348e214a725d1e849bd39c7"
+ DEPENDS = "multiprocmgr cmem"
+ RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
+ 
+ CC += "-I${STAGING_KERNEL_DIR}/include"
+ 
++# Assuming the multiprocmgr kernel API is safe
++CC[vardepsexclude] = "STAGING_KERNEL_DIR"
++
+ do_compile() {
+ 	make -C ${S} test
+ }
 -- 
-1.7.10.4
+2.2.0
 
 
