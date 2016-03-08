@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 64797E00894; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id 66138E008C1; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90480E008DB
-	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07FCEE00928
+	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:14 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5C7EC52B00; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+	id C7FDB52AFC; Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013012.5C7EC52B00@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+Message-Id: <20160308013013.C7FDB52AFC@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: update with DLL_CALIB_CTRL fix for AM57xx
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 08 Mar 2016 01:30:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: d77597389c585dd5b228998a72c239d386d4d354
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d77597389c585dd5b228998a72c239d386d4d354
+Branch: master
+Commit: 8a5aceae6cb12554b02f53c849b7a740e3c260c3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8a5aceae6cb12554b02f53c849b7a740e3c260c3
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Mar  8 07:21:47 2016 +0000
