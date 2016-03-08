@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 21100E00951; Tue,  8 Mar 2016 15:44:38 -0800 (PST)
+	id 2C20FE00973; Tue,  8 Mar 2016 15:44:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E30AE00973
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EBE4E009D7
 	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E408352AD0; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+	id 5A64952AD5; Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234429.E408352AD0@arago-project.org>
-Date: Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+Message-Id: <20160308234430.5A64952AD5@arago-project.org>
+Date: Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : edma3-lld-rtos: Point TMS470_CGTOOLS to correct toolchain
+Subject: Denys Dmytriyenko : ipumm-fw: use update-alternatives to manage FW symlink
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,53 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 83e6205c854f2c9034a988e23a2929169319dac2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=83e6205c854f2c9034a988e23a2929169319dac2
+Commit: 771673de5b2a40aed9ef950bb5eb2ed754b1bcfb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=771673de5b2a40aed9ef950bb5eb2ed754b1bcfb
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Mar  8 23:58:09 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Mar  9 04:37:42 2016 +0000
 
-edma3-lld-rtos: Point TMS470_CGTOOLS to correct toolchain
+ipumm-fw: use update-alternatives to manage FW symlink
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |   15 +++++++++++----
+ 1 files changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-index dc39fee..0195173 100644
---- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-@@ -2,7 +2,7 @@ require edma3-lld.inc
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 022d307..f415599 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -26,6 +26,8 @@ PV = "3.00.10.00"
  require recipes-ti/includes/ti-paths.inc
  require recipes-ti/includes/ti-staging.inc
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
++inherit update-alternatives
++
+ DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ccsv6-native ti-ipc-rtos"
  
- DEPENDS = "ti-sysbios ti-xdctools"
+ export HWVERSION="ES10"
+@@ -53,10 +55,15 @@ do_compile() {
+ TARGET = "dra7-ipu2-fw.xem4"
  
-@@ -67,7 +67,7 @@ export CGTOOLS = "${XDCCGROOT}"
- export CGTOOLS_ELF = "${XDCCGROOT}"
- export CODEGEN_PATH_DSP = "${XDCCGROOT}"
- export CODEGEN_PATH_DSPELF = "${XDCCGROOT}"
--export TMS470_CGTOOLS = "${XDCCGROOT}"
-+export TMS470_CGTOOLS = "${M4_TOOLCHAIN_INSTALL_DIR}"
- export UTILS_INSTALL_DIR = "${XDC_INSTALL_DIR}"
- export XDCPATH = "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
- export PATH := "${XDC_INSTALL_DIR}:${PATH}"
+ do_install() {
+-        mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++    install -d ${D}${base_libdir}/firmware
++    install -m 0644 ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}.${BPN}
+ }
+ 
+-FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
++ALTERNATIVE_${PN} = "dra7-ipu2-fw.xem4"
++ALTERNATIVE_LINK_NAME[dra7-ipu2-fw.xem4] = "${base_libdir}/firmware/${TARGET}"
++ALTERNATIVE_TARGET[dra7-ipu2-fw.xem4] = "${base_libdir}/firmware/${TARGET}.${BPN}"
++ALTERNATIVE_PRIORITY = "20"
++
++FILES_${PN} += "${base_libdir}/firmware/*"
+ 
+-PR = "r0"
++PR = "r1"
 
 
