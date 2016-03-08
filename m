@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5DCD4E00848; Tue,  8 Mar 2016 15:44:34 -0800 (PST)
+	id 18811E00B66; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D27BE008DB
-	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:29 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83EE6E00920
+	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8FC2752AA8; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+	id 0D1E652AC1; Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234429.8FC2752AA8@arago-project.org>
+Message-Id: <20160308234430.0D1E652AC1@arago-project.org>
 Date: Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ipumm-fw: update to 3.00.10.00 version
+Subject: Jacob Stiffler : openmp-rtos: Upgrade to version 2.2.1.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,49 +33,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2016 23:44:34 -0000
+X-List-Received-Date: Tue, 08 Mar 2016 23:44:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: b343626fcf5e2c0ba94ba4603e80b2a402a7f3b3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b343626fcf5e2c0ba94ba4603e80b2a402a7f3b3
+Branch: master
+Commit: a78fe1bff3886c5182bf7858daed3b7deb83b44d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a78fe1bff3886c5182bf7858daed3b7deb83b44d
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  9 00:18:12 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Mar  8 23:59:42 2016 +0000
 
-ipumm-fw: update to 3.00.10.00 version
+openmp-rtos: Upgrade to version 2.2.1.1
 
+* Upgrade to obtain the following fixes:
+  - Fix task barrier at end of parallel region with num_threads(1)
+  - Avoid unused QMSS dependency on K2G
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index b54306c..022d307 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,11 +17,11 @@ RDEPENDS_${PN} = " libdce"
- 
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
- 
--SRCREV = "486aa14f700783dbee63a0d81fb2e57d27a286e6"
-+SRCREV = "c579a48d3b201fe276e406add64512eb5e90e75f"
- 
- S = "${WORKDIR}/git"
- 
--PV = "3.00.09.01"
-+PV = "3.00.10.00"
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index 4869686..b0b8d75 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
  
  require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
-@@ -59,4 +59,4 @@ do_install() {
  
- FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+-PV = "2_02_01_00"
++PV = "2_02_01_01"
+ PR = "r0"
  
--PR = "r2"
-+PR = "r0"
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+ SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+ "
+ 
+-SRCREV = "f0fe1ce874734b83dacadfe33dacc862afc8ed00"
++SRCREV = "a6ca36297f784baada08aa1e14fbc9e429a2eab4"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ 
 
 
