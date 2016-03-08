@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D60E3E008C1; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id D7250E008F1; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37313E00AD7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 91F29E008F1
 	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3297B52AFA; Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
+	id A672452B01; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013013.3297B52AFA@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
+Message-Id: <20160308013012.A672452B01@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : prueth-fw: add FW images for AM437x
+Subject: Justin Sobota : ti-sysbios: Update to 6.45.01.29
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,64 +33,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2016 01:30:17 -0000
+X-List-Received-Date: Tue, 08 Mar 2016 01:30:18 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 61384b9c6ddb2d19ab45a69d1a1b80330fc6c146
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=61384b9c6ddb2d19ab45a69d1a1b80330fc6c146
+Commit: ffbd040e0d8fb0e6f8b048df867bf5e2f97a95fa
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ffbd040e0d8fb0e6f8b048df867bf5e2f97a95fa
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  8 07:17:47 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Tue Mar  8 01:58:45 2016 +0000
 
-prueth-fw: add FW images for AM437x
+ti-sysbios: Update to 6.45.01.29
 
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/prueth-fw/prueth-fw_git.bb |   15 +++++++++------
- 1 files changed, 9 insertions(+), 6 deletions(-)
+ recipes-ti/bios/ti-sysbios_6.42.02.29.bb |   12 ------------
+ recipes-ti/bios/ti-sysbios_6.45.01.29.bb |   12 ++++++++++++
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-index 3b760ac..e4970aa 100644
---- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
-+++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-@@ -1,25 +1,28 @@
--DESCRIPTION = "PRU Ethernet firmware for AM57xx"
-+DESCRIPTION = "PRU Ethernet firmware for AM57xx and AM437x"
- 
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
- 
--PV = "1.0.0"
+diff --git a/recipes-ti/bios/ti-sysbios_6.42.02.29.bb b/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
+deleted file mode 100644
+index 1abb496..0000000
+--- a/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require ti-sysbios.inc
+-
+-PV = "6_42_02_29"
 -PR = "r0"
-+PV_am57xx-evm = "1.0.0"
-+PV_am437x-evm = "2.1.2"
+-
+-LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=ab905941085d55ea207fcb4cdab4f9c3"
+-
+-SRC_URI[sysbiosbin.md5sum] = "ba470b69d1ffa4a34fd05645f240216c"
+-SRC_URI[sysbiosbin.sha256sum] = "eb070642e8ee8e742525599f53ef1547d6f5dded557987550c710ad193d0de31"
+-
+-TI_BIN_UNPK_CMDS=""
+-TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+diff --git a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb b/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
+new file mode 100644
+index 0000000..6ab4e27
+--- /dev/null
++++ b/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
+@@ -0,0 +1,12 @@
++require recipes-ti/bios/ti-sysbios.inc
 +
-+PR = "r1"
- 
- CLEANBROKEN = "1"
- 
--COMPATIBLE_MACHINE = "am57xx-evm"
-+COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "4ead3b8c189f217ee2c01ea3c56ef08d6a517f28"
-+SRCREV = "f6c712fd26044d90939ff774f07dfcb951bcefc9"
- BRANCH ?= "ti-linux-firmware-4.1.y"
- 
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
- 
- S = "${WORKDIR}/git"
- 
--TARGET = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
-+TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
-+TARGET_am437x-evm = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
- 
- do_install() {
- 	install -d ${D}${base_libdir}/firmware/ti-pruss
++PV = "6_45_01_29"
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=dbcd89745f1745f24ace8171a96ed493"
++
++SRC_URI[sysbiosbin.md5sum] = "16cf6dc3c5cc9d2b877fa7d81dd12150"
++SRC_URI[sysbiosbin.sha256sum] = "efaf5f1d725f3fd06e45476109b1124c74c16c39c870d12929e071047c3e5a22"
++
++TI_BIN_UNPK_CMDS=""
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
 
 
