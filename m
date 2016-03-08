@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 98F89E00911; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
+	id 9A126E0090E; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84A90E00931
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84A43E0092C
 	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B1CDA52AAE; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+	id EA82952A9F; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234429.B1CDA52AAE@arago-project.org>
+Message-Id: <20160308234429.EA82952A9F@arago-project.org>
 Date: Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ipumm-fw: use update-alternatives to manage FW symlink
+Subject: Jacob Stiffler : HACK: edma3-lld-rtos: Add dependency on all toolchains
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,54 +37,49 @@ X-List-Received-Date: Tue, 08 Mar 2016 23:44:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 289335a1f8ae6237566f98f9053d17dc6c2c0b83
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=289335a1f8ae6237566f98f9053d17dc6c2c0b83
+Branch: master
+Commit: b0f07f5de8594ba689505432ce057ce1f5486f27
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b0f07f5de8594ba689505432ce057ce1f5486f27
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  9 04:37:42 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Mar  8 23:58:10 2016 +0000
 
-ipumm-fw: use update-alternatives to manage FW symlink
+HACK: edma3-lld-rtos: Add dependency on all toolchains
 
+* Despite supporting building of individual targets, there is a
+  dependency on all toolchains even if the coresponding core is not
+  part of a specific platform.
+* This fixes do_configure with ti-xdctools_3.32.00.06 and
+  ti-sysbios_6.45.01.29
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |   15 +++++++++++----
- 1 files changed, 11 insertions(+), 4 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    9 ++-------
+ 1 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 022d307..f415599 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -26,6 +26,8 @@ PV = "3.00.10.00"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index 0195173..b1cedd0 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -2,14 +2,9 @@ require edma3-lld.inc
  require recipes-ti/includes/ti-paths.inc
  require recipes-ti/includes/ti-staging.inc
  
-+inherit update-alternatives
-+
- DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ccsv6-native ti-ipc-rtos"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
  
- export HWVERSION="ES10"
-@@ -53,10 +55,15 @@ do_compile() {
- TARGET = "dra7-ipu2-fw.xem4"
+-DEPENDS = "ti-sysbios ti-xdctools"
+-
+-DEPENDS_append_keystone = " gcc-arm-none-eabi-native ti-cgt6x-native"
+-DEPENDS_append_ti33x = " gcc-arm-none-eabi-native"
+-DEPENDS_append_ti43x = " gcc-arm-none-eabi-native"
+-DEPENDS_append_omap-a15 = " gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
++DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
  
- do_install() {
--        mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
-+    install -d ${D}${base_libdir}/firmware
-+    install -m 0644 ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}.${BPN}
- }
- 
--FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
-+ALTERNATIVE_${PN} = "dra7-ipu2-fw.xem4"
-+ALTERNATIVE_LINK_NAME[dra7-ipu2-fw.xem4] = "${base_libdir}/firmware/${TARGET}"
-+ALTERNATIVE_TARGET[dra7-ipu2-fw.xem4] = "${base_libdir}/firmware/${TARGET}.${BPN}"
-+ALTERNATIVE_PRIORITY = "20"
-+
-+FILES_${PN} += "${base_libdir}/firmware/*"
- 
--PR = "r0"
-+PR = "r1"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
