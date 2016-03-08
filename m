@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 18714E00803; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id 16DD4E00B9C; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0DB03E00894
-	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:12 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84939E008C6
+	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ABAD352AFC; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
+	id CA95352B03; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013011.ABAD352AFC@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
+Message-Id: <20160308013012.CA95352B03@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am335x-evm: add ttyO3 support for ICE variant
+Subject: Denys Dmytriyenko : multiprocmgr-test: don't repackage between machines, as only K2 uses it
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,36 +37,43 @@ X-List-Received-Date: Tue, 08 Mar 2016 01:30:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 49ae50366325067192cded36264448ddafa0f6e9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=49ae50366325067192cded36264448ddafa0f6e9
+Branch: master
+Commit: 088a82454290dcc7e0dbbab5c6f18c0261d8517b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=088a82454290dcc7e0dbbab5c6f18c0261d8517b
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  8 02:51:44 2016 +0000
+Date:   Tue Mar  8 02:24:18 2016 +0000
 
-am335x-evm: add ttyO3 support for ICE variant
+multiprocmgr-test: don't repackage between machines, as only K2 uses it
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes-ti/multiprocmgr/multiprocmgr-test_git.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 55bbf95..9013c7c 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -11,7 +11,9 @@ MACHINE_FEATURES += "touchscreen"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+index 8605cf1..7ec8796 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+@@ -2,13 +2,16 @@ DESCRIPTION = "TI Multiproc Manager test code"
  
- IMAGE_FSTYPES += "ubi tar.gz"
+ include multiprocmgr.inc
  
--SERIAL_CONSOLE = "115200 ttyO0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyO0 115200;ttyO3"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
- # UBI information.  Note that this is board and kernel specific.  Changes
- # in your kernel port may require changes in these variables.  For more
+ DEPENDS = "multiprocmgr cmem"
+ RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
+ 
+ CC += "-I${STAGING_KERNEL_DIR}/include"
+ 
++# Assuming the multiprocmgr kernel API is safe
++CC[vardepsexclude] = "STAGING_KERNEL_DIR"
++
+ do_compile() {
+ 	make -C ${S} test
+ }
 
 
