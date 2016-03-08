@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 05D47E00BC2; Tue,  8 Mar 2016 15:44:38 -0800 (PST)
+	id 0CAF4E00B8B; Tue,  8 Mar 2016 15:44:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84D0BE00948
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E0AEE00951
 	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A75A052AA9; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+	id 3654752AD1; Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234429.A75A052AA9@arago-project.org>
-Date: Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+Message-Id: <20160308234430.3654752AD1@arago-project.org>
+Date: Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : dspdce-fw: replace mkdir/cp with install
+Subject: Denys Dmytriyenko : ipumm-fw: update to 3.00.10.00 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,36 +37,45 @@ X-List-Received-Date: Tue, 08 Mar 2016 23:44:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: d27c37ce34f0ffac7027dee0823e1f82d8df8329
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d27c37ce34f0ffac7027dee0823e1f82d8df8329
+Branch: master
+Commit: 1a04a95a371ac29791ea870154c4e23ea6d3269d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1a04a95a371ac29791ea870154c4e23ea6d3269d
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  9 04:37:41 2016 +0000
+Date:   Wed Mar  9 00:18:12 2016 +0000
 
-dspdce-fw: replace mkdir/cp with install
+ipumm-fw: update to 3.00.10.00 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index 6c6bb2a..3979ce9 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -48,8 +48,8 @@ do_compile() {
- TARGET = "dra7-dsp1-fw.xe66"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index b54306c..022d307 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,11 +17,11 @@ RDEPENDS_${PN} = " libdce"
  
- do_install() {
--        mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
-+    install -d ${D}${base_libdir}/firmware
-+    install -m 0644 ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
- }
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
- ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
+-SRCREV = "486aa14f700783dbee63a0d81fb2e57d27a286e6"
++SRCREV = "c579a48d3b201fe276e406add64512eb5e90e75f"
+ 
+ S = "${WORKDIR}/git"
+ 
+-PV = "3.00.09.01"
++PV = "3.00.10.00"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+@@ -59,4 +59,4 @@ do_install() {
+ 
+ FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+ 
+-PR = "r2"
++PR = "r0"
 
 
