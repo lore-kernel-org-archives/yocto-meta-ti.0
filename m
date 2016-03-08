@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 49C34E00973; Tue,  8 Mar 2016 15:44:38 -0800 (PST)
+	id 6E886E00948; Tue,  8 Mar 2016 15:44:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9ED6BE00A7D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1C57E00A9C
 	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 485AA52AD4; Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
+	id 6BB1052AD3; Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234430.485AA52AD4@arago-project.org>
+Message-Id: <20160308234430.6BB1052AD3@arago-project.org>
 Date: Tue,  8 Mar 2016 23:44:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : dspdce-fw: replace mkdir/cp with install
+Subject: Denys Dmytriyenko : ti-ipc-rtos: preserve FW dir structure, use update-alternatives for test_omx*
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,35 +38,59 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ded818502ed122d495992b14c3c7ab383865869f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ded818502ed122d495992b14c3c7ab383865869f
+Commit: 110f22565fd6ae1a7c42a7c67af8e845d9deba54
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=110f22565fd6ae1a7c42a7c67af8e845d9deba54
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  9 04:37:41 2016 +0000
+Date:   Wed Mar  9 04:37:43 2016 +0000
 
-dspdce-fw: replace mkdir/cp with install
+ti-ipc-rtos: preserve FW dir structure, use update-alternatives for test_omx*
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |   23 +++++++++++++++++++----
+ 1 files changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index 6c6bb2a..3979ce9 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -48,8 +48,8 @@ do_compile() {
- TARGET = "dra7-dsp1-fw.xe66"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index eff1001..4c0fc74 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -2,7 +2,7 @@ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ require ti-ipc.inc
  
- do_install() {
--        mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
-+    install -d ${D}${base_libdir}/firmware
-+    install -m 0644 ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
+ 
+ DEPENDS = "ti-xdctools ti-sysbios"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+@@ -55,7 +55,22 @@ do_install() {
+     install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+ 
+-    install -d ${D}${base_libdir}/firmware
+-    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+-    find . -name "*.xem4" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
++    install -d ${D}${base_libdir}/firmware/ipc
++    cp -pPrf ${S}/packages/ti/ipc/tests/bin/* ${D}${base_libdir}/firmware/ipc
++}
++
++ALTERNATIVE_PRIORITY = "5"
++
++pkg_postinst_${PN}-fw_omap-a15 () {
++	update-alternatives --install /lib/firmware/dra7-dsp1-fw.xe66 dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66 ${ALTERNATIVE_PRIORITY}
++	update-alternatives --install /lib/firmware/dra7-dsp2-fw.xe66 dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66 ${ALTERNATIVE_PRIORITY}
++	update-alternatives --install /lib/firmware/dra7-ipu1-fw.xem4 dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4 ${ALTERNATIVE_PRIORITY}
++	update-alternatives --install /lib/firmware/dra7-ipu2-fw.xem4 dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4 ${ALTERNATIVE_PRIORITY}
++}
++
++pkg_postrm_${PN}-fw_omap-a15 () {
++	update-alternatives --remove dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
++	update-alternatives --remove dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
++	update-alternatives --remove dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
++	update-alternatives --remove dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
  }
- 
- ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
 
 
