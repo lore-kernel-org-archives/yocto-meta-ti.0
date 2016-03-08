@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 19F75E008C1; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id 1A6E2E008C6; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92C3AE00911
-	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0C82AE00803
+	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:11 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1591352AFF; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+	id 6ABDC52AFB; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013012.1591352AFF@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+Message-Id: <20160308013011.6ABDC52AFB@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with connectivity fixes
+Subject: Denys Dmytriyenko : multiprocmgr-test: don't repackage between machines, as only K2 uses it
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,49 +38,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: af891499d923a6df0ccbf307f27863cd774632d4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af891499d923a6df0ccbf307f27863cd774632d4
+Commit: a249500c2e1704f1a5c2e3b92f27586140a29481
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a249500c2e1704f1a5c2e3b92f27586140a29481
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  8 07:21:46 2016 +0000
+Date:   Tue Mar  8 02:24:18 2016 +0000
 
-linux-ti-staging: update with connectivity fixes
+multiprocmgr-test: don't repackage between machines, as only K2 uses it
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/multiprocmgr/multiprocmgr-test_git.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 1c2dc64..f79396b 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+index 8605cf1..7ec8796 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+@@ -2,13 +2,16 @@ DESCRIPTION = "TI Multiproc Manager test code"
  
- BRANCH = "ti-rt-linux-4.1.y"
+ include multiprocmgr.inc
  
--SRCREV = "141ec2a74c877d996281cb1aef3c7ce3920b637e"
-+SRCREV = "448c88c73751423b736aa5fff21e0bd248b5aa9b"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 21eb609..f5d4eae 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ DEPENDS = "multiprocmgr cmem"
+ RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
  
--SRCREV = "bbd032bf6c45e07806ce2faece824035ebf13869"
-+SRCREV = "5b10429ec0d0b02186207936cbae2abb550c04ef"
- PV = "4.1.18+git${SRCPV}"
+ CC += "-I${STAGING_KERNEL_DIR}/include"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "f"
-+MACHINE_KERNEL_PR_append = "g"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
++# Assuming the multiprocmgr kernel API is safe
++CC[vardepsexclude] = "STAGING_KERNEL_DIR"
++
+ do_compile() {
+ 	make -C ${S} test
+ }
 
 
