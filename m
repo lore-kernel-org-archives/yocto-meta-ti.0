@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1A6E2E008C6; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id 64797E00894; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0C82AE00803
-	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:11 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90480E008DB
+	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6ABDC52AFB; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
+	id 5C7EC52B00; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013011.6ABDC52AFB@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
+Message-Id: <20160308013012.5C7EC52B00@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : multiprocmgr-test: don't repackage between machines, as only K2 uses it
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with DLL_CALIB_CTRL fix for AM57xx
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: a249500c2e1704f1a5c2e3b92f27586140a29481
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a249500c2e1704f1a5c2e3b92f27586140a29481
+Commit: d77597389c585dd5b228998a72c239d386d4d354
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d77597389c585dd5b228998a72c239d386d4d354
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  8 02:24:18 2016 +0000
+Date:   Tue Mar  8 07:21:47 2016 +0000
 
-multiprocmgr-test: don't repackage between machines, as only K2 uses it
+u-boot-ti-staging: update with DLL_CALIB_CTRL fix for AM57xx
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr-test_git.bb |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
-index 8605cf1..7ec8796 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
-+++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
-@@ -2,13 +2,16 @@ DESCRIPTION = "TI Multiproc Manager test code"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index c37636b..d96d259 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- include multiprocmgr.inc
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
+-PR = "r21"
++PR = "r22"
+ PV_append = "+git${SRCPV}"
  
- DEPENDS = "multiprocmgr cmem"
- RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- CC += "-I${STAGING_KERNEL_DIR}/include"
+ BRANCH ?= "ti-u-boot-2015.07"
  
-+# Assuming the multiprocmgr kernel API is safe
-+CC[vardepsexclude] = "STAGING_KERNEL_DIR"
-+
- do_compile() {
- 	make -C ${S} test
- }
+-SRCREV = "351a81fc59f2861410d96a9d6fe95dd351cfe2e6"
++SRCREV = "3e0c78c57e67ba8580c5db97e188317136210b4d"
+ 
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
