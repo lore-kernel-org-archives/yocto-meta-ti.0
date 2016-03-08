@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2FE40E00B8C; Mon,  7 Mar 2016 17:30:16 -0800 (PST)
+	id 30E62E006AE; Mon,  7 Mar 2016 17:30:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 094D6E006AE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B40EE0077F
 	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:11 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0F09652AF9; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
+	id 2945552AFA; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013011.0F09652AF9@arago-project.org>
+Message-Id: <20160308013011.2945552AFA@arago-project.org>
 Date: Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : ti-sysbios: Update to 6.45.01.29
+Subject: Justin Sobota : ti-xdctools: Update to verion 3.32.00.06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +38,54 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: d4dc29679f9acddac69119aa9ddedf25b00479c2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d4dc29679f9acddac69119aa9ddedf25b00479c2
+Commit: 32cfffd2568ea9e40adf539dd362d2aadfe1affc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=32cfffd2568ea9e40adf539dd362d2aadfe1affc
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Tue Mar  8 01:58:45 2016 +0000
+Date:   Tue Mar  8 01:58:46 2016 +0000
 
-ti-sysbios: Update to 6.45.01.29
+ti-xdctools: Update to verion 3.32.00.06
+
+License checksum calculation now ignores generation date
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/bios/ti-sysbios_6.42.02.29.bb |   12 ------------
- recipes-ti/bios/ti-sysbios_6.45.01.29.bb |   12 ++++++++++++
- 2 files changed, 12 insertions(+), 12 deletions(-)
+ recipes-ti/devtools/ti-xdctools_3.31.02.38.bb |    9 ---------
+ recipes-ti/devtools/ti-xdctools_3.32.00.06.bb |    9 +++++++++
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/recipes-ti/bios/ti-sysbios_6.42.02.29.bb b/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
+diff --git a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
 deleted file mode 100644
-index 1abb496..0000000
---- a/recipes-ti/bios/ti-sysbios_6.42.02.29.bb
+index 5e970ee..0000000
+--- a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
 +++ /dev/null
-@@ -1,12 +0,0 @@
--require ti-sysbios.inc
+@@ -1,9 +0,0 @@
+-require ti-xdctools-core.inc
 -
--PV = "6_42_02_29"
+-PV = "3_31_02_38"
 -PR = "r0"
 -
--LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=ab905941085d55ea207fcb4cdab4f9c3"
+-LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=9dbb0095cdb8b35508b344aa4f1de333"
 -
--SRC_URI[sysbiosbin.md5sum] = "ba470b69d1ffa4a34fd05645f240216c"
--SRC_URI[sysbiosbin.sha256sum] = "eb070642e8ee8e742525599f53ef1547d6f5dded557987550c710ad193d0de31"
--
--TI_BIN_UNPK_CMDS=""
--TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-diff --git a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb b/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
+-SRC_URI[xdczip.md5sum] = "c76b3d90c3e25d199765557e393d165b"
+-SRC_URI[xdczip.sha256sum] = "c0e1f6911f2294bfb76471fac1a0ceac3e89c7eb1300f84d2571bf78cb62a7d2"
+diff --git a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
 new file mode 100644
-index 0000000..6ab4e27
+index 0000000..19bbe5d
 --- /dev/null
-+++ b/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
-@@ -0,0 +1,12 @@
-+require recipes-ti/bios/ti-sysbios.inc
++++ b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+@@ -0,0 +1,9 @@
++require recipes-ti/devtools/ti-xdctools-core.inc
 +
-+PV = "6_45_01_29"
++PV = "3_32_00_06"
 +PR = "r0"
 +
-+LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=dbcd89745f1745f24ace8171a96ed493"
++LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=1796f68c3d32d408415f5612f1f60652"
 +
-+SRC_URI[sysbiosbin.md5sum] = "16cf6dc3c5cc9d2b877fa7d81dd12150"
-+SRC_URI[sysbiosbin.sha256sum] = "efaf5f1d725f3fd06e45476109b1124c74c16c39c870d12929e071047c3e5a22"
-+
-+TI_BIN_UNPK_CMDS=""
-+TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
++SRC_URI[xdczip.md5sum] = "93127f4c2f35d94b6c8e5a52b79c38ae"
++SRC_URI[xdczip.sha256sum] = "d6f38a7f846ae4b1478554d75fc5f72cf677a1e2f348e214a725d1e849bd39c7"
 
 
