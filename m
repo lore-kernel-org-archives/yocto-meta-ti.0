@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 19302E00920; Tue,  8 Mar 2016 10:18:56 -0800 (PST)
+	id DA81BE008DB; Tue,  8 Mar 2016 14:37:49 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,29 +14,26 @@ X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
 	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 402EAE00720
-	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 10:18:51 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B31B6E00833
+	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 14:37:45 -0800 (PST)
 Received: from vz-proxy-l004.mx.aol.com ([64.236.82.152])
 	by vms173017.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O3Q005FBG6D8E00@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 08 Mar 2016 12:18:28 -0600 (CST)
+	2014)) with ESMTPA id <0O3Q008EWS6WZU70@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 08 Mar 2016 16:37:44 -0600 (CST)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=a3t/a0oOYlYu/nGe1mf8ZA==:117
-	a=eIhxMilvRf8A:10 a=7OsogOcEt9IA:10	a=sozttTNsAAAA:8
-	a=V36oicGgXfJi-8tmMb0A:9
-Received: by 100.15.86.14 with SMTP id 7d1ed050; Tue, 08 Mar 2016 18:18:28 GMT
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=a3t/a0oOYlYu/nGe1mf8ZA==:117
+	a=7OsogOcEt9IA:10 a=sozttTNsAAAA:8	a=-maSNwBTpaiNPkYT4NMA:9
+Received: by 100.15.86.14 with SMTP id 399de3d7; Tue, 08 Mar 2016 22:37:44 GMT
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id E7672161F1C;	Tue,
-	8 Mar 2016 13:18:12 -0500 (EST)
+	by gandalf.denix.org (Postfix) with ESMTP id B2538161EF9;	Tue,
+	8 Mar 2016 17:37:43 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Tue, 08 Mar 2016 13:18:12 -0500
-Message-id: <1457461092-9580-2-git-send-email-denis@denix.org>
+Date: Tue, 08 Mar 2016 17:37:41 -0500
+Message-id: <1457476663-12641-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-In-reply-to: <1457461092-9580-1-git-send-email-denis@denix.org>
-References: <1457461092-9580-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] ipumm-fw: update to 3.00.10.00 version
+Subject: [PATCH 1/3] dspdce-fw: replace mkdir/cp with install
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,39 +46,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2016 18:18:56 -0000
+X-List-Received-Date: Tue, 08 Mar 2016 22:37:49 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/dspdce-fw/dspdce-fw_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index b54306c..022d307 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,11 +17,11 @@ RDEPENDS_${PN} = " libdce"
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+index 6c6bb2a..3979ce9 100644
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+@@ -48,8 +48,8 @@ do_compile() {
+ TARGET = "dra7-dsp1-fw.xe66"
  
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ do_install() {
+-        mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
++    install -d ${D}${base_libdir}/firmware
++    install -m 0644 ${S}/dra7xx-c66x-dsp.xe66 ${D}${base_libdir}/firmware/${TARGET}.${BPN}
+ }
  
--SRCREV = "486aa14f700783dbee63a0d81fb2e57d27a286e6"
-+SRCREV = "c579a48d3b201fe276e406add64512eb5e90e75f"
- 
- S = "${WORKDIR}/git"
- 
--PV = "3.00.09.01"
-+PV = "3.00.10.00"
- 
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
-@@ -59,4 +59,4 @@ do_install() {
- 
- FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
- 
--PR = "r2"
-+PR = "r0"
+ ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66"
 -- 
 2.2.0
 
