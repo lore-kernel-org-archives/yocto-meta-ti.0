@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C5D64E00B6F; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id D5251E00B97; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37742E00B46
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37729E00B37
 	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D914352B04; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+	id ECDDA52AFE; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013012.D914352B04@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+Message-Id: <20160308013011.ECDDA52AFE@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am335x-evm: add ttyO3 support for ICE variant
+Subject: Denys Dmytriyenko : prueth-fw: add FW images for AM437x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,36 +37,60 @@ X-List-Received-Date: Tue, 08 Mar 2016 01:30:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 60d34737a7d2e359d665ed8881bf6af3c115d70b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=60d34737a7d2e359d665ed8881bf6af3c115d70b
+Branch: fido
+Commit: c553f6cc864206c0ffbe63816a6aac215bdba576
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c553f6cc864206c0ffbe63816a6aac215bdba576
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  8 02:51:44 2016 +0000
+Date:   Tue Mar  8 07:17:47 2016 +0000
 
-am335x-evm: add ttyO3 support for ICE variant
+prueth-fw: add FW images for AM437x
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes-bsp/prueth-fw/prueth-fw_git.bb |   15 +++++++++------
+ 1 files changed, 9 insertions(+), 6 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 55bbf95..9013c7c 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -11,7 +11,9 @@ MACHINE_FEATURES += "touchscreen"
+diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+index 3b760ac..e4970aa 100644
+--- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
++++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+@@ -1,25 +1,28 @@
+-DESCRIPTION = "PRU Ethernet firmware for AM57xx"
++DESCRIPTION = "PRU Ethernet firmware for AM57xx and AM437x"
  
- IMAGE_FSTYPES += "ubi tar.gz"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
  
--SERIAL_CONSOLE = "115200 ttyO0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyO0 115200;ttyO3"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+-PV = "1.0.0"
+-PR = "r0"
++PV_am57xx-evm = "1.0.0"
++PV_am437x-evm = "2.1.2"
++
++PR = "r1"
  
- # UBI information.  Note that this is board and kernel specific.  Changes
- # in your kernel port may require changes in these variables.  For more
+ CLEANBROKEN = "1"
+ 
+-COMPATIBLE_MACHINE = "am57xx-evm"
++COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "4ead3b8c189f217ee2c01ea3c56ef08d6a517f28"
++SRCREV = "f6c712fd26044d90939ff774f07dfcb951bcefc9"
+ BRANCH ?= "ti-linux-firmware-4.1.y"
+ 
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+ 
+ S = "${WORKDIR}/git"
+ 
+-TARGET = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
++TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
++TARGET_am437x-evm = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
+ 
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware/ti-pruss
 
 
