@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 16DD4E00B9C; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id 1923EE00894; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84939E008C6
-	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0F40CE008C1
+	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:12 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CA95352B03; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+	id C718652AFD; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013012.CA95352B03@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
+Message-Id: <20160308013011.C718652AFD@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : multiprocmgr-test: don't repackage between machines, as only K2 uses it
+Subject: Denys Dmytriyenko : k2g-evm: add alsa to machine features list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,43 +37,34 @@ X-List-Received-Date: Tue, 08 Mar 2016 01:30:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 088a82454290dcc7e0dbbab5c6f18c0261d8517b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=088a82454290dcc7e0dbbab5c6f18c0261d8517b
+Branch: fido
+Commit: 45a1b62953a38354da45c7e3fde33a873dcac8a6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=45a1b62953a38354da45c7e3fde33a873dcac8a6
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  8 02:24:18 2016 +0000
+Date:   Tue Mar  8 03:18:32 2016 +0000
 
-multiprocmgr-test: don't repackage between machines, as only K2 uses it
+k2g-evm: add alsa to machine features list
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr-test_git.bb |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+ conf/machine/k2g-evm.conf |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
-index 8605cf1..7ec8796 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
-+++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
-@@ -2,13 +2,16 @@ DESCRIPTION = "TI Multiproc Manager test code"
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+index 9c7b4e0..14f286a 100644
+--- a/conf/machine/k2g-evm.conf
++++ b/conf/machine/k2g-evm.conf
+@@ -4,6 +4,8 @@
  
- include multiprocmgr.inc
+ require conf/machine/include/keystone.inc
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- DEPENDS = "multiprocmgr cmem"
- RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
- 
- CC += "-I${STAGING_KERNEL_DIR}/include"
- 
-+# Assuming the multiprocmgr kernel API is safe
-+CC[vardepsexclude] = "STAGING_KERNEL_DIR"
++MACHINE_FEATURES += "alsa"
 +
- do_compile() {
- 	make -C ${S} test
- }
+ UBOOT_MACHINE = "k2g_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2g"
 
 
