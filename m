@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1E35BE00911; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
+	id 1D59CE0090E; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0F9AEE0090E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10C86E00911
 	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:29 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 39FC652A99; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+	id 52D2D52A98; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234429.39FC652A99@arago-project.org>
+Message-Id: <20160308234429.52D2D52A98@arago-project.org>
 Date: Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : edma3-lld-rtos: Point TMS470_CGTOOLS to correct toolchain
+Subject: Jacob Stiffler : HACK: edma3-lld-rtos: Add dependency on all toolchains
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,48 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: ca5d1244fc5b67d9095c315fccdf1efb313b321a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca5d1244fc5b67d9095c315fccdf1efb313b321a
+Commit: 3e9c30612f72d5b5c2a0cbfcd77a4f9bac9cac27
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e9c30612f72d5b5c2a0cbfcd77a4f9bac9cac27
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Mar  8 23:58:09 2016 +0000
+Date:   Tue Mar  8 23:58:10 2016 +0000
 
-edma3-lld-rtos: Point TMS470_CGTOOLS to correct toolchain
+HACK: edma3-lld-rtos: Add dependency on all toolchains
+
+* Despite supporting building of individual targets, there is a
+  dependency on all toolchains even if the coresponding core is not
+  part of a specific platform.
+* This fixes do_configure with ti-xdctools_3.32.00.06 and
+  ti-sysbios_6.45.01.29
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    9 ++-------
+ 1 files changed, 2 insertions(+), 7 deletions(-)
 
 diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-index dc39fee..0195173 100644
+index 0195173..b1cedd0 100644
 --- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
 +++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-@@ -2,7 +2,7 @@ require edma3-lld.inc
+@@ -2,14 +2,9 @@ require edma3-lld.inc
  require recipes-ti/includes/ti-paths.inc
  require recipes-ti/includes/ti-staging.inc
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
  
- DEPENDS = "ti-sysbios ti-xdctools"
+-DEPENDS = "ti-sysbios ti-xdctools"
+-
+-DEPENDS_append_keystone = " gcc-arm-none-eabi-native ti-cgt6x-native"
+-DEPENDS_append_ti33x = " gcc-arm-none-eabi-native"
+-DEPENDS_append_ti43x = " gcc-arm-none-eabi-native"
+-DEPENDS_append_omap-a15 = " gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
++DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
  
-@@ -67,7 +67,7 @@ export CGTOOLS = "${XDCCGROOT}"
- export CGTOOLS_ELF = "${XDCCGROOT}"
- export CODEGEN_PATH_DSP = "${XDCCGROOT}"
- export CODEGEN_PATH_DSPELF = "${XDCCGROOT}"
--export TMS470_CGTOOLS = "${XDCCGROOT}"
-+export TMS470_CGTOOLS = "${M4_TOOLCHAIN_INSTALL_DIR}"
- export UTILS_INSTALL_DIR = "${XDC_INSTALL_DIR}"
- export XDCPATH = "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
- export PATH := "${XDC_INSTALL_DIR}:${PATH}"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
