@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6E1B3E008C6; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id 70DF8E008DB; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D79C0E00920
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 927DEE0090E
 	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8E1BF52AFB; Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
+	id B933052B02; Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013013.8E1BF52AFB@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
+Message-Id: <20160308013012.B933052B02@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with connectivity fixes
+Subject: Justin Sobota : ti-xdctools: Update to verion 3.32.00.06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,49 +38,54 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: fa46db7cf50bd46c92a94bf5b5cd7dd689afa63b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fa46db7cf50bd46c92a94bf5b5cd7dd689afa63b
+Commit: 10d7fc9f0d22166cd912f913d42b5a78a85e6745
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=10d7fc9f0d22166cd912f913d42b5a78a85e6745
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  8 07:21:46 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Tue Mar  8 01:58:46 2016 +0000
 
-linux-ti-staging: update with connectivity fixes
+ti-xdctools: Update to verion 3.32.00.06
 
+License checksum calculation now ignores generation date
+
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/devtools/ti-xdctools_3.31.02.38.bb |    9 ---------
+ recipes-ti/devtools/ti-xdctools_3.32.00.06.bb |    9 +++++++++
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 1c2dc64..f79396b 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
- 
- BRANCH = "ti-rt-linux-4.1.y"
- 
--SRCREV = "141ec2a74c877d996281cb1aef3c7ce3920b637e"
-+SRCREV = "448c88c73751423b736aa5fff21e0bd248b5aa9b"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 2b2c704..90aaa9e 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.1.y"
- 
--SRCREV = "bbd032bf6c45e07806ce2faece824035ebf13869"
-+SRCREV = "5b10429ec0d0b02186207936cbae2abb550c04ef"
- PV = "4.1.18+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "f"
-+MACHINE_KERNEL_PR_append = "g"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+diff --git a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
+deleted file mode 100644
+index 5e970ee..0000000
+--- a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require ti-xdctools-core.inc
+-
+-PV = "3_31_02_38"
+-PR = "r0"
+-
+-LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=9dbb0095cdb8b35508b344aa4f1de333"
+-
+-SRC_URI[xdczip.md5sum] = "c76b3d90c3e25d199765557e393d165b"
+-SRC_URI[xdczip.sha256sum] = "c0e1f6911f2294bfb76471fac1a0ceac3e89c7eb1300f84d2571bf78cb62a7d2"
+diff --git a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+new file mode 100644
+index 0000000..19bbe5d
+--- /dev/null
++++ b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+@@ -0,0 +1,9 @@
++require recipes-ti/devtools/ti-xdctools-core.inc
++
++PV = "3_32_00_06"
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=1796f68c3d32d408415f5612f1f60652"
++
++SRC_URI[xdczip.md5sum] = "93127f4c2f35d94b6c8e5a52b79c38ae"
++SRC_URI[xdczip.sha256sum] = "d6f38a7f846ae4b1478554d75fc5f72cf677a1e2f348e214a725d1e849bd39c7"
 
 
