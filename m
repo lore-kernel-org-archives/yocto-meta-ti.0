@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1D59CE0090E; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
+	id 1EBCAE008E1; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10C86E00911
-	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:29 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 847F5E00928
+	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 52D2D52A98; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+	id C28C852AB6; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234429.52D2D52A98@arago-project.org>
+Message-Id: <20160308234429.C28C852AB6@arago-project.org>
 Date: Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : HACK: edma3-lld-rtos: Add dependency on all toolchains
+Subject: Denys Dmytriyenko : ti-ipc-rtos: preserve FW dir structure, use update-alternatives for test_omx*
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,48 +38,59 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 3e9c30612f72d5b5c2a0cbfcd77a4f9bac9cac27
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e9c30612f72d5b5c2a0cbfcd77a4f9bac9cac27
+Commit: 4234479e12ac0136f91c9003f080c5986bcb3519
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4234479e12ac0136f91c9003f080c5986bcb3519
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Mar  8 23:58:10 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Mar  9 04:37:43 2016 +0000
 
-HACK: edma3-lld-rtos: Add dependency on all toolchains
+ti-ipc-rtos: preserve FW dir structure, use update-alternatives for test_omx*
 
-* Despite supporting building of individual targets, there is a
-  dependency on all toolchains even if the coresponding core is not
-  part of a specific platform.
-* This fixes do_configure with ti-xdctools_3.32.00.06 and
-  ti-sysbios_6.45.01.29
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    9 ++-------
- 1 files changed, 2 insertions(+), 7 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |   23 +++++++++++++++++++----
+ 1 files changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-index 0195173..b1cedd0 100644
---- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-@@ -2,14 +2,9 @@ require edma3-lld.inc
- require recipes-ti/includes/ti-paths.inc
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index eff1001..4c0fc74 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -2,7 +2,7 @@ require recipes-ti/includes/ti-paths.inc
  require recipes-ti/includes/ti-staging.inc
+ require ti-ipc.inc
  
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
  
--DEPENDS = "ti-sysbios ti-xdctools"
--
--DEPENDS_append_keystone = " gcc-arm-none-eabi-native ti-cgt6x-native"
--DEPENDS_append_ti33x = " gcc-arm-none-eabi-native"
--DEPENDS_append_ti43x = " gcc-arm-none-eabi-native"
--DEPENDS_append_omap-a15 = " gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
-+DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
+ DEPENDS = "ti-xdctools ti-sysbios"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+@@ -55,7 +55,22 @@ do_install() {
+     install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
  
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-    install -d ${D}${base_libdir}/firmware
+-    find . -name "*.xe66" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
+-    find . -name "*.xem4" -type f | xargs -I {} install -m 0644 {} ${D}${base_libdir}/firmware/
++    install -d ${D}${base_libdir}/firmware/ipc
++    cp -pPrf ${S}/packages/ti/ipc/tests/bin/* ${D}${base_libdir}/firmware/ipc
++}
++
++ALTERNATIVE_PRIORITY = "5"
++
++pkg_postinst_${PN}-fw_omap-a15 () {
++	update-alternatives --install /lib/firmware/dra7-dsp1-fw.xe66 dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66 ${ALTERNATIVE_PRIORITY}
++	update-alternatives --install /lib/firmware/dra7-dsp2-fw.xe66 dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66 ${ALTERNATIVE_PRIORITY}
++	update-alternatives --install /lib/firmware/dra7-ipu1-fw.xem4 dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4 ${ALTERNATIVE_PRIORITY}
++	update-alternatives --install /lib/firmware/dra7-ipu2-fw.xem4 dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4 ${ALTERNATIVE_PRIORITY}
++}
++
++pkg_postrm_${PN}-fw_omap-a15 () {
++	update-alternatives --remove dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
++	update-alternatives --remove dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
++	update-alternatives --remove dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
++	update-alternatives --remove dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
+ }
 
 
