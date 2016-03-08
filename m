@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1B391E00920; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
+	id 1E35BE00911; Tue,  8 Mar 2016 15:44:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E648E008E1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0F9AEE0090E
 	for <meta-ti@yoctoproject.org>; Tue,  8 Mar 2016 15:44:29 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7865152AA4; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
+	id 39FC652A99; Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308234429.7865152AA4@arago-project.org>
+Message-Id: <20160308234429.39FC652A99@arago-project.org>
 Date: Tue,  8 Mar 2016 23:44:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ipumm-fw: remove old versions
+Subject: Jacob Stiffler : edma3-lld-rtos: Point TMS470_CGTOOLS to correct toolchain
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,143 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: af69d2519826e41b3ca76a73217ad1620994dc16
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af69d2519826e41b3ca76a73217ad1620994dc16
+Commit: ca5d1244fc5b67d9095c315fccdf1efb313b321a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca5d1244fc5b67d9095c315fccdf1efb313b321a
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  9 00:18:11 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Mar  8 23:58:09 2016 +0000
 
-ipumm-fw: remove old versions
+edma3-lld-rtos: Point TMS470_CGTOOLS to correct toolchain
 
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb |   35 ---------------------------
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb |   35 ---------------------------
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb |   33 -------------------------
- 3 files changed, 0 insertions(+), 103 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-deleted file mode 100644
-index 642c94c..0000000
---- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--python __anonymous() {
--    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
--    if not features:
--        return
--    if "mmip" not in features:
--        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
--}
--
--DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
--LICENSE = "TI-TSPA"
--
--LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=39a593dd8fc2a9654c74f679ed329c45"
--
--COMPATIBLE_MACHINE = "omap5-evm"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--RDEPENDS_${PN} = " libdce"
--
--SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_04_02/exports/ipumm-${MACHINE}-${PV}.tar.gz;protocol=http"
--
--SRC_URI[md5sum] = "1572073ebd4f6d127c4e8cf47d270b6a"
--SRC_URI[sha256sum] = "2fdb469f19e3c9984854f5bc82444fca4d7da869f5e645da22ec0d5beaa5cc65"
--
--S = "${WORKDIR}/ipumm-${MACHINE}-${PV}"
--
--TARGET = "ducati-m3-core0.xem3"
--
--do_install() {
--        mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
--}
--
--FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
--
--PR = "r4"
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb
-deleted file mode 100644
-index 576931f..0000000
---- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--python __anonymous() {
--    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
--    if not features:
--        return
--    if "mmip" not in features:
--        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
--}
--
--DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
--LICENSE = "TI-TSPA"
--
--LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=caa45d993ac010abe2fd319f6613bc26"
--
--COMPATIBLE_MACHINE = "dra7xx"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--RDEPENDS_${PN} = " libdce"
--
--SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_07_02/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
--
--SRC_URI[md5sum] = "06aaf4f144d48ca16054e67e40cc7bc3"
--SRC_URI[sha256sum] = "0f07176e313a692a05fa6bfe9f7920b677b0924287121945c6e22b3f4408670c"
--
--S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
--
--TARGET = "dra7-ipu2-fw.xem4"
--
--do_install() {
--        mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
--}
--
--FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
--
--PR = "r5"
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
-deleted file mode 100644
-index 81de45e..0000000
---- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--python __anonymous() {
--    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
--    if not features:
--        return
--    if "mmip" not in features:
--        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
--}
--
--DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
--LICENSE = "TI-TSPA"
--
--LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=57d49afcca8f1be47b1c4e79aa06b3ba"
--
--COMPATIBLE_MACHINE = "dra7xx"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--RDEPENDS_${PN} = "libdce"
--
--SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_08_01/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
--
--SRC_URI[md5sum] = "a1873333e7676ec1b7fcb18fb8b90696"
--SRC_URI[sha256sum] = "d583d827191a3772f496145cbf81747e10e7ed553d4653379576ac891019d7fb"
--
--S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
--
--TARGET = "dra7-ipu2-fw.xem4"
--
--do_install() {
--        mkdir -p ${D}${base_libdir}/firmware
--        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
--}
--
--FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index dc39fee..0195173 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -2,7 +2,7 @@ require edma3-lld.inc
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ DEPENDS = "ti-sysbios ti-xdctools"
+ 
+@@ -67,7 +67,7 @@ export CGTOOLS = "${XDCCGROOT}"
+ export CGTOOLS_ELF = "${XDCCGROOT}"
+ export CODEGEN_PATH_DSP = "${XDCCGROOT}"
+ export CODEGEN_PATH_DSPELF = "${XDCCGROOT}"
+-export TMS470_CGTOOLS = "${XDCCGROOT}"
++export TMS470_CGTOOLS = "${M4_TOOLCHAIN_INSTALL_DIR}"
+ export UTILS_INSTALL_DIR = "${XDC_INSTALL_DIR}"
+ export XDCPATH = "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
+ export PATH := "${XDC_INSTALL_DIR}:${PATH}"
 
 
