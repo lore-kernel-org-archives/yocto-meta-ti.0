@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D5251E00B97; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
+	id D60E3E008C1; Mon,  7 Mar 2016 17:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37729E00B37
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37313E00AD7
 	for <meta-ti@yoctoproject.org>; Mon,  7 Mar 2016 17:30:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ECDDA52AFE; Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
+	id 3297B52AFA; Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160308013011.ECDDA52AFE@arago-project.org>
-Date: Tue,  8 Mar 2016 01:30:11 +0000 (UTC)
+Message-Id: <20160308013013.3297B52AFA@arago-project.org>
+Date: Tue,  8 Mar 2016 01:30:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : prueth-fw: add FW images for AM437x
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 08 Mar 2016 01:30:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: c553f6cc864206c0ffbe63816a6aac215bdba576
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c553f6cc864206c0ffbe63816a6aac215bdba576
+Branch: master
+Commit: 61384b9c6ddb2d19ab45a69d1a1b80330fc6c146
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=61384b9c6ddb2d19ab45a69d1a1b80330fc6c146
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Mar  8 07:17:47 2016 +0000
