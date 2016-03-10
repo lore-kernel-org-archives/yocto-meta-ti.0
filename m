@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 34E50E00C80; Wed,  9 Mar 2016 19:16:50 -0800 (PST)
+	id 37068E00C39; Wed,  9 Mar 2016 19:16:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E40B1E00BFE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5A4AE00C1B
 	for <meta-ti@yoctoproject.org>; Wed,  9 Mar 2016 19:16:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 60DAF529AD; Thu, 10 Mar 2016 03:16:46 +0000 (UTC)
+	id 77191529C2; Thu, 10 Mar 2016 03:16:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160310031646.60DAF529AD@arago-project.org>
+Message-Id: <20160310031646.77191529C2@arago-project.org>
 Date: Thu, 10 Mar 2016 03:16:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am335x: use ttyS to check for actual device, while 8250 is disabled
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 10 Mar 2016 03:16:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 35659fcbfaabbdb459c2510babd84febc971549e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=35659fcbfaabbdb459c2510babd84febc971549e
+Branch: master
+Commit: c56e55b55c2af2d67a08e90bd38e6beaa87261ca
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c56e55b55c2af2d67a08e90bd38e6beaa87261ca
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Mar 10 02:41:58 2016 +0000
