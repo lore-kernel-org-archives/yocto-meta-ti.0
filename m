@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8D8E3E00B9C; Fri, 11 Mar 2016 11:25:47 -0800 (PST)
+	id 92E60E00C02; Fri, 11 Mar 2016 11:25:47 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 764F7E00B9C
-	for <meta-ti@yoctoproject.org>; Fri, 11 Mar 2016 11:25:42 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77843E00B9E
+	for <meta-ti@yoctoproject.org>; Fri, 11 Mar 2016 11:25:43 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 11CA7529D3; Fri, 11 Mar 2016 19:25:41 +0000 (UTC)
+	id 6801E52ABE; Fri, 11 Mar 2016 19:25:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160311192542.11CA7529D3@arago-project.org>
-Date: Fri, 11 Mar 2016 19:25:41 +0000 (UTC)
+Message-Id: <20160311192542.6801E52ABE@arago-project.org>
+Date: Fri, 11 Mar 2016 19:25:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : conf/machine: enable tar.xz images for current machines
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 11 Mar 2016 19:25:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 7cdb10200b3ae3429fcce5fd7a28973df593c8c1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7cdb10200b3ae3429fcce5fd7a28973df593c8c1
+Branch: master
+Commit: 1318500616f8bf52f709577098d840f984d3f2c0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1318500616f8bf52f709577098d840f984d3f2c0
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Mar 12 01:10:14 2016 +0000
