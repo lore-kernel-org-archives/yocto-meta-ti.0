@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1F77FE00BEF; Fri, 11 Mar 2016 11:08:14 -0800 (PST)
+	id BCF5CE00BF4; Fri, 11 Mar 2016 11:08:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED15BE00B9C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F016FE00BE2
 	for <meta-ti@yoctoproject.org>; Fri, 11 Mar 2016 11:08:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 15C7352AC1; Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
+	id 2F20D52AD0; Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160311190809.15C7352AC1@arago-project.org>
+Message-Id: <20160311190809.2F20D52AD0@arago-project.org>
 Date: Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : debugss-module-drv: Add support for k2e-evm
+Subject: Jacob Stiffler : openmp-rtos: Upgrade to 2.2.1.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,57 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 75e1fa3df24dc4d96c9554e789a64826d7721226
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=75e1fa3df24dc4d96c9554e789a64826d7721226
+Commit: 7dfddf6a74541b0eed00aa9864c150625544d296
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7dfddf6a74541b0eed00aa9864c150625544d296
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Fri Mar 11 21:34:42 2016 +0000
+Date:   Sat Mar 12 00:12:10 2016 +0000
 
-debugss-module-drv: Add support for k2e-evm
+openmp-rtos: Upgrade to 2.2.1.2
+
+* The following fix is provided in this upgrade:
+  - Fix K2G .tomp_svNcMem initialization
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/debugss-module-drv_git.bb |    3 ++-
- recipes-bsp/dsptop/dsptop.inc                |    4 ++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
-index bf7da44..60d72d4 100644
---- a/recipes-bsp/dsptop/debugss-module-drv_git.bb
-+++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index b0b8d75..0a16233 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
  
- # This package builds a kernel module, use kernel PR as base and append a local
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "d"
- PR = "${MACHINE_KERNEL_PR}"
- PV_append = "+git${SRCPV}"
+ require recipes-ti/includes/ti-paths.inc
  
-@@ -14,6 +14,7 @@ inherit module
- PLATFORM = ""
- PLATFORM_dra7xx = "DRA7xx_PLATFORM"
- PLATFORM_keystone = "KEYSTONE_PLATFORM"
-+PLATFORM_k2e-evm = "K2E_PLATFORM"
+-PV = "2_02_01_01"
++PV = "2_02_01_02"
+ PR = "r0"
  
- EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}' KVERSION=${KERNEL_VERSION} KERNEL_SRC=${STAGING_KERNEL_DIR}"
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+ SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+ "
  
-diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
-index 8d23ad0..04bf060 100644
---- a/recipes-bsp/dsptop/dsptop.inc
-+++ b/recipes-bsp/dsptop/dsptop.inc
-@@ -1,7 +1,7 @@
- # This corresponds to version 1.2.0
--SRCREV = "edf5670075cf6cf42f46654d284f9f78c1c123a1"
-+SRCREV = "7dca008bec245e4292897e2eea7b2edb0c51cd2b"
- PV = "1.2.0"
--INC_PR = "r1"
-+INC_PR = "r2"
+-SRCREV = "a6ca36297f784baada08aa1e14fbc9e429a2eab4"
++SRCREV = "7003ab350544f98006914d7a5cf834f3e82f5f88"
  
- SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
  
 
 
