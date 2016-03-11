@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1E4D7E00BF4; Fri, 11 Mar 2016 11:08:14 -0800 (PST)
+	id 1F77FE00BEF; Fri, 11 Mar 2016 11:08:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EEDFBE00B9E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED15BE00B9C
 	for <meta-ti@yoctoproject.org>; Fri, 11 Mar 2016 11:08:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 448FD52AD1; Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
+	id 15C7352AC1; Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160311190809.448FD52AD1@arago-project.org>
+Message-Id: <20160311190809.15C7352AC1@arago-project.org>
 Date: Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : debugss-module-drv: Add support for k2e-evm
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 11 Mar 2016 19:08:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e3a356ad4c44bb60773a1c1092a7e13398eef603
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e3a356ad4c44bb60773a1c1092a7e13398eef603
+Branch: fido
+Commit: 75e1fa3df24dc4d96c9554e789a64826d7721226
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=75e1fa3df24dc4d96c9554e789a64826d7721226
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Fri Mar 11 21:34:42 2016 +0000
