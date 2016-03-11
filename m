@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BCF5CE00BF4; Fri, 11 Mar 2016 11:08:14 -0800 (PST)
+	id 0CDDEE00BEF; Fri, 11 Mar 2016 11:08:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F016FE00BE2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F142CE00BEA
 	for <meta-ti@yoctoproject.org>; Fri, 11 Mar 2016 11:08:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2F20D52AD0; Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
+	id 5920252AD2; Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160311190809.2F20D52AD0@arago-project.org>
+Message-Id: <20160311190809.5920252AD2@arago-project.org>
 Date: Fri, 11 Mar 2016 19:08:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : openmp-rtos: Upgrade to 2.2.1.2
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2016 19:08:14 -0000
+X-List-Received-Date: Fri, 11 Mar 2016 19:08:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 7dfddf6a74541b0eed00aa9864c150625544d296
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7dfddf6a74541b0eed00aa9864c150625544d296
+Branch: master
+Commit: 873c090f55ca4dbeaa4bc5ec22a2f113c4f914ad
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=873c090f55ca4dbeaa4bc5ec22a2f113c4f914ad
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Sat Mar 12 00:12:10 2016 +0000
