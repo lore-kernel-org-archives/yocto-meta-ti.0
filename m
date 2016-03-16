@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4B2DDE00AAF; Wed, 16 Mar 2016 12:26:14 -0700 (PDT)
+	id 4BD0FE007D2; Wed, 16 Mar 2016 12:26:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA7D7E0083D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C946DE007D2
 	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 12:26:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3980552A86; Wed, 16 Mar 2016 19:26:11 +0000 (UTC)
+	id 19C8252A7A; Wed, 16 Mar 2016 19:26:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160316192611.3980552A86@arago-project.org>
+Message-Id: <20160316192611.19C8252A7A@arago-project.org>
 Date: Wed, 16 Mar 2016 19:26:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : cmem: Bump SRCREV for keystone fix
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 16 Mar 2016 19:26:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 503a211e8b3aaabf2d8b916d27c3777494a52bde
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=503a211e8b3aaabf2d8b916d27c3777494a52bde
+Branch: fido
+Commit: 4e50591bee82f45aed9cc8c62fd2d030dc4e4d09
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4e50591bee82f45aed9cc8c62fd2d030dc4e4d09
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Thu Mar 17 01:24:04 2016 +0000
