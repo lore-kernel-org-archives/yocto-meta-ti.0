@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4BD0FE007D2; Wed, 16 Mar 2016 12:26:14 -0700 (PDT)
+	id BA416E0086B; Wed, 16 Mar 2016 12:33:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C946DE007D2
-	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 12:26:12 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 19C8252A7A; Wed, 16 Mar 2016 19:26:11 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160316192611.19C8252A7A@arago-project.org>
-Date: Wed, 16 Mar 2016 19:26:11 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : cmem: Bump SRCREV for keystone fix
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56B71E007D2
+	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 12:33:24 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2GJXOPa024236
+	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 14:33:24 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2GJXO7x018739
+	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 14:33:24 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 16 Mar 2016 14:33:23 -0500
+Received: from ares-ubuntu2.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u2GJXN7Y031723;	Wed, 16 Mar 2016 14:33:24 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 16 Mar 2016 15:33:22 -0400
+Message-ID: <1458156802-27817-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH v2] uio: Fix issues with driver reference in uio related dts entries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +45,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2016 19:26:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Mar 2016 19:33:26 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: fido
-Commit: 4e50591bee82f45aed9cc8c62fd2d030dc4e4d09
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4e50591bee82f45aed9cc8c62fd2d030dc4e4d09
+Correct incorrect driver compatibility key. uio driver implemented with
+uio-module-drv for keystone2.
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Mar 17 01:24:04 2016 +0000
-
-cmem: Bump SRCREV for keystone fix
-
-* set dma_pfn_offset for keystone2 devices
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 
 ---
+Changes from previous patch
+- Updated tile and comment on commit
+---
+---
+ recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi | 4 ++--
+ recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- recipes-bsp/cmem/cmem.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index ddf50a4..19d333c 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
- 
- BRANCH ?= "lu-next"
--# This corresponds to version 4.10.02.03
--SRCREV = "00241c45f810c8b8e4f5ac66c3323fec8e43b621"
-+# This corresponds to version 4.10.02.05_eng
-+SRCREV = "8df44102413c2d653341c5b7e6caee882e206d8c"
- 
--PV = "4.10.02.04+git${SRCPV}"
-+PV = "4.10.02.05+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
+diff --git a/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi b/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
+index 36f41b0..052ae97 100644
+--- a/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
++++ b/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
+@@ -1,7 +1,7 @@
+ / {
+ 	soc {
+ 		uio_hyperlink0: hyperlink0 {
+-			compatible = "ti,uio-ti-pdrv";
++			compatible = "ti,uio-module-drv";
+ 			mem  = <0x21400000 0x00001000
+ 				0x40000000 0x10000000
+ 				0x0231a000 0x00002000>;
+@@ -23,7 +23,7 @@
+ 			};
+ 		};
+ 		uio_srss: srss {
+-			compatible = "ti,uio-ti-pdrv";
++			compatible = "ti,uio-module-drv";
+ 			mem  = <0x02330000 0x0000400>;
+ 			clocks=<&clksr>;
+ 			interrupts = <0 0x173 0xf01>;
+diff --git a/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi b/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
+index 0334483..a1b2e07 100644
+--- a/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
++++ b/recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi
+@@ -1,7 +1,7 @@
+ / {
+ 	soc {
+ 		uio_srss: srss {
+-			compatible = "ti,uio-ti-pdrv";
++			compatible = "ti,uio-module-drv";
+ 			mem  = <0x02330000 0x0000400>;
+ 			clocks=<&clksr>;
+ 			interrupts = <0 0x173 0xf01>;
+-- 
+1.9.1
 
 
