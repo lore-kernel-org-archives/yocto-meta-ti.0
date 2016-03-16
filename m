@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 37105E0083D; Wed, 16 Mar 2016 11:41:01 -0700 (PDT)
+	id 448C1E00B8C; Wed, 16 Mar 2016 11:41:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 567A8E007D2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58B2EE00A27
 	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 11:40:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7DEEE52A65; Wed, 16 Mar 2016 18:40:58 +0000 (UTC)
+	id 8DC2152A5F; Wed, 16 Mar 2016 18:40:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160316184058.7DEEE52A65@arago-project.org>
+Message-Id: <20160316184058.8DC2152A5F@arago-project.org>
 Date: Wed, 16 Mar 2016 18:40:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : dsptop: Upgrade to 1.3.0
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2016 18:41:01 -0000
+X-List-Received-Date: Wed, 16 Mar 2016 18:41:04 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 665505e569128b6119424d03027968bd081f7d92
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=665505e569128b6119424d03027968bd081f7d92
+Branch: fido
+Commit: 1ae58a680d16c8850de68c03d569d786586b5473
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1ae58a680d16c8850de68c03d569d786586b5473
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Tue Mar 15 01:09:47 2016 +0000
