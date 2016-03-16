@@ -1,38 +1,26 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BA416E0086B; Wed, 16 Mar 2016 12:33:26 -0700 (PDT)
+	id 05D0AE00A27; Wed, 16 Mar 2016 13:07:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56B71E007D2
-	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 12:33:24 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2GJXOPa024236
-	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 14:33:24 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2GJXO7x018739
-	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 14:33:24 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 16 Mar 2016 14:33:23 -0500
-Received: from ares-ubuntu2.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u2GJXN7Y031723;	Wed, 16 Mar 2016 14:33:24 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 16 Mar 2016 15:33:22 -0400
-Message-ID: <1458156802-27817-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH v2] uio: Fix issues with driver reference in uio related dts entries
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55A2DE007D2
+	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 13:07:15 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id BA8FD52A86; Wed, 16 Mar 2016 20:07:14 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160316200714.BA8FD52A86@arago-project.org>
+Date: Wed, 16 Mar 2016 20:07:14 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : uio: Fix issues with driver reference in uio related dts entries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,21 +33,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2016 19:33:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 16 Mar 2016 20:07:20 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: 30688674caf11ded371c60bb47d818b4bdbf6b9a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=30688674caf11ded371c60bb47d818b4bdbf6b9a
+
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Thu Mar 17 01:33:22 2016 +0000
+
+uio: Fix issues with driver reference in uio related dts entries
 
 Correct incorrect driver compatibility key. uio driver implemented with
 uio-module-drv for keystone2.
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
-Changes from previous patch
-- Updated tile and comment on commit
----
----
- recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi | 4 ++--
- recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi | 2 +-
+
+ recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi |    4 ++--
+ recipes-kernel/linux/files/k2l-evm/k2l-uio.dtsi |    2 +-
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi b/recipes-kernel/linux/files/k2e-evm/k2e-uio.dtsi
@@ -97,7 +93,5 @@ index 0334483..a1b2e07 100644
  			mem  = <0x02330000 0x0000400>;
  			clocks=<&clksr>;
  			interrupts = <0 0x173 0xf01>;
--- 
-1.9.1
 
 
