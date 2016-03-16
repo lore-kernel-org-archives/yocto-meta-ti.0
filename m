@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D30CFE00B46; Wed, 16 Mar 2016 12:10:38 -0700 (PDT)
+	id D0698E00B63; Wed, 16 Mar 2016 12:10:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07054E0086B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1315CE00A27
 	for <meta-ti@yoctoproject.org>; Wed, 16 Mar 2016 12:10:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 22D8452A7A; Wed, 16 Mar 2016 19:10:36 +0000 (UTC)
+	id 36B5B52A86; Wed, 16 Mar 2016 19:10:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160316191036.22D8452A7A@arago-project.org>
+Message-Id: <20160316191036.36B5B52A86@arago-project.org>
 Date: Wed, 16 Mar 2016 19:10:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with latest A/D, platform and connectivity fixes
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with fix for L3 Custom Error on AM4 HS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,49 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 84828c8dd11aec3a8fc022473e5d117275e5303d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=84828c8dd11aec3a8fc022473e5d117275e5303d
+Commit: ecadbb341a260b8cd49209cac3f74f6e9145cd89
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ecadbb341a260b8cd49209cac3f74f6e9145cd89
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Mar 17 01:09:10 2016 +0000
+Date:   Thu Mar 17 01:09:11 2016 +0000
 
-linux-ti-staging: update with latest A/D, platform and connectivity fixes
+u-boot-ti-staging: update with fix for L3 Custom Error on AM4 HS
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 006ec9a..9686316 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index c4cc37f..bac0acc 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.1.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
--SRCREV = "6d0ade6343f01482b46210e9e474f2cac32ff474"
-+SRCREV = "a4248d096e1d94ca6e9223c77735ef7c6551ccff"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index d9ad58a..d041fd3 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
+-PR = "r23"
++PR = "r24"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "d749a0d84da4d2e2e5a093e179e3a993f2848778"
-+SRCREV = "32346b4d29d2405124e084c6a28f8ae0c0d4df6c"
- PV = "4.1.18+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2015.07"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "h"
-+MACHINE_KERNEL_PR_append = "i"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "852c8baf3811d1ee71e0748694e5a6912f7f4d5b"
++SRCREV = "d013f6ec602485f6fd543b0ef712abc8d77ebf07"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
