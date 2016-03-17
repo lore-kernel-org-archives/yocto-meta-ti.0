@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 25818E00C3D; Thu, 17 Mar 2016 13:57:35 -0700 (PDT)
+	id 9D791E00C41; Thu, 17 Mar 2016 13:57:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6291E00C2D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6088E00C2B
 	for <meta-ti@yoctoproject.org>; Thu, 17 Mar 2016 13:57:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BC4D652A85; Thu, 17 Mar 2016 20:57:31 +0000 (UTC)
+	id 7D02552A26; Thu, 17 Mar 2016 20:57:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160317205731.BC4D652A85@arago-project.org>
+Message-Id: <20160317205731.7D02552A26@arago-project.org>
 Date: Thu, 17 Mar 2016 20:57:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update commit id for 2.0.0.1
+Subject: Jason Reeder : pru-icss: bump SRCREV and PV to bring in updates
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,39 +37,42 @@ X-List-Received-Date: Thu, 17 Mar 2016 20:57:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: cdac10783670519ac098d5cae7bceca37a2a0891
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cdac10783670519ac098d5cae7bceca37a2a0891
+Branch: fido
+Commit: f5c304d3650c93923a39507ed6310696b6524a7a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f5c304d3650c93923a39507ed6310696b6524a7a
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Mar 17 20:05:12 2016 +0000
+Author: Jason Reeder <jreeder@ti.com>
+Date:   Thu Mar 17 03:58:30 2016 +0000
 
-mpm-transport: Update commit id for 2.0.0.1
+pru-icss: bump SRCREV and PV to bring in updates
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Due to bug fixes and updates the package version is being
+incremented to 4.0.2. The commit ID is also being updated
+to reflect these changes.
+
+Signed-off-by: Jason Reeder <jreeder@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |    4 ++--
+ recipes-bsp/pru/pru-icss_git.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index beb744c..473de20 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -16,10 +16,10 @@ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch
+diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+index 2d78fa5..075ac27 100644
+--- a/recipes-bsp/pru/pru-icss_git.bb
++++ b/recipes-bsp/pru/pru-icss_git.bb
+@@ -8,9 +8,9 @@ inherit update-alternatives
  
  BRANCH = "master"
- # This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.01
--SRCREV = "7220df9263a57629a564afb3f99f6f7fb33e40d6"
-+SRCREV = "489b669540c5545125ab5d9f3f2cdb5ec5fc09dd"
+ SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "6f42b6006ba7a98c7ad9075424b8f77e8d531ab0"
++SRCREV = "804b548e69ef9fdf44445f6d0968d81cb8a1e7b4"
  
- PV = "2.0.0.1"
--PR = "r0"
-+PR = "r1"
+-PV = "4.0.1"
++PV = "4.0.2"
+ PR = "r2"
  
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
- EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+ require recipes-ti/includes/ti-paths.inc
 
 
