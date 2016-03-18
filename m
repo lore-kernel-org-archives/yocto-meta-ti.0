@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A4AB0E00C3D; Thu, 17 Mar 2016 13:57:35 -0700 (PDT)
+	id 66AC5E00C70; Fri, 18 Mar 2016 05:49:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7954E00C3A
-	for <meta-ti@yoctoproject.org>; Thu, 17 Mar 2016 13:57:32 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id A93C252A7A; Thu, 17 Mar 2016 20:57:31 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160317205731.A93C252A7A@arago-project.org>
-Date: Thu, 17 Mar 2016 20:57:31 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jason Reeder : pru-icss: bump SRCREV and PV to bring in updates
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26048E00C6B
+	for <meta-ti@yoctoproject.org>; Fri, 18 Mar 2016 05:49:33 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2ICnWIC005070
+	for <meta-ti@yoctoproject.org>; Fri, 18 Mar 2016 07:49:32 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2ICnWa3014684
+	for <meta-ti@yoctoproject.org>; Fri, 18 Mar 2016 07:49:32 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 18 Mar 2016 07:49:32 -0500
+Received: from ares-ubuntu2.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u2ICnVt3031256;	Fri, 18 Mar 2016 07:49:31 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 18 Mar 2016 08:49:30 -0400
+Message-ID: <1458305370-30628-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] srio-lld-test: Add explicit dependency on uio-module-drv
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +45,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2016 20:57:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 18 Mar 2016 12:49:38 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 8dcc1c2a854c838cb3258f0486d115775bafc54d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8dcc1c2a854c838cb3258f0486d115775bafc54d
+Test code uses uio driver for mapping peripheral registers and hence the
+addition of dependency.
 
-Author: Jason Reeder <jreeder@ti.com>
-Date:   Thu Mar 17 03:58:30 2016 +0000
-
-pru-icss: bump SRCREV and PV to bring in updates
-
-Due to bug fixes and updates the package version is being
-incremented to 4.0.2. The commit ID is also being updated
-to reflect these changes.
-
-Signed-off-by: Jason Reeder <jreeder@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
+ recipes-bsp/srio-lld/srio-lld-test_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- recipes-bsp/pru/pru-icss_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-index 2d78fa5..075ac27 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -8,9 +8,9 @@ inherit update-alternatives
+diff --git a/recipes-bsp/srio-lld/srio-lld-test_git.bb b/recipes-bsp/srio-lld/srio-lld-test_git.bb
+index 6495a12..d2a0068 100644
+--- a/recipes-bsp/srio-lld/srio-lld-test_git.bb
++++ b/recipes-bsp/srio-lld/srio-lld-test_git.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "TI SRIO peripheral low level driver unit test and example binaries"
+-DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld srio-lld cmem"
++DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld srio-lld cmem uio-module-drv"
  
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
--SRCREV = "6f42b6006ba7a98c7ad9075424b8f77e8d531ab0"
-+SRCREV = "804b548e69ef9fdf44445f6d0968d81cb8a1e7b4"
+ include srio-lld.inc
  
--PV = "4.0.1"
-+PV = "4.0.2"
- PR = "r2"
- 
- require recipes-ti/includes/ti-paths.inc
+-- 
+1.9.1
 
 
