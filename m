@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 26B1BE00CCA; Mon, 21 Mar 2016 08:44:38 -0700 (PDT)
+	id 24EF1E00CCC; Mon, 21 Mar 2016 08:44:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C8CFE00951
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5DC82E00973
 	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 61350529B9; Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
+	id B5AE252A1C; Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160321154433.61350529B9@arago-project.org>
+Message-Id: <20160321154433.B5AE252A1C@arago-project.org>
 Date: Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Upgrade to version 3.3.0.2A
+Subject: Jacob Stiffler : cppi-lld: Upgrade to version 2.1.0.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 819731a317923e4f15a8424333fd964edf58f538
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=819731a317923e4f15a8424333fd964edf58f538
+Commit: 1bdb406fe8f89adb480bae51471825c6b01d45d6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1bdb406fe8f89adb480bae51471825c6b01d45d6
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 21 20:51:04 2016 +0000
+Date:   Mon Mar 21 21:03:54 2016 +0000
 
-common-csl-ip: Upgrade to version 3.3.0.2A
+cppi-lld: Upgrade to version 2.1.0.12
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/cppi-lld/cppi-lld.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index e51dd7b..146cb3e 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,16 +4,16 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
+index 26d0e5c..cee7142 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld.inc
++++ b/recipes-bsp/cppi-lld/cppi-lld.inc
+@@ -9,14 +9,14 @@ CPPI_LLD_GIT_PROTOCOL = "git"
+ CPPI_LLD_GIT_BRANCH = "master"
+ CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+-# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.11"
+-CPPI_LLD_SRCREV = "91047a01a6d64d7ffaf650c6ebb280de775af997"
++# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12"
++CPPI_LLD_SRCREV = "1dc105ad256c49fbd1a92a0a27a27a34dae85e56"
  
--PV = "3.3.0.1B"
--INC_PR = "r1"
-+PV = "3.3.0.2A"
-+INC_PR = "r0"
+ BRANCH = "${CPPI_LLD_GIT_BRANCH}"
+ SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
- CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
+ SRCREV = "${CPPI_LLD_SRCREV}"
+-PV = "02.01.00.11"
++PV = "02.01.00.12"
+ INC_PR = "r0"
  
--# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.01B
--CSL_SRCREV = "48bb80a8d5919e17528a21be5d3ea6437dfc0425"
-+# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02A
-+CSL_SRCREV = "e26dc44be132849d6bcf63b7e9eac744769577dc"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+ DEVICELIST = "k2h k2k k2l k2e"
 
 
