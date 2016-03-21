@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 66657E00CCF; Mon, 21 Mar 2016 08:44:40 -0700 (PDT)
+	id 689D0E00C3C; Mon, 21 Mar 2016 08:44:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 602FAE00C3C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5EF8EE00B45
 	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 79450529E4; Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
+	id 8C222529EA; Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160321154433.79450529E4@arago-project.org>
+Message-Id: <20160321154433.8C222529EA@arago-project.org>
 Date: Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : rm-lld: Upgrade to version 2.2.0.1
+Subject: Jacob Stiffler : qmss-lld: Upgrade to version 2.1.0.14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,83 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 9a45899532581566f96df6ea4338b505d9d977dd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9a45899532581566f96df6ea4338b505d9d977dd
+Commit: 14fe25d6044d9cd65cb36059c052c8a7a54c4b6b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14fe25d6044d9cd65cb36059c052c8a7a54c4b6b
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 21 20:51:05 2016 +0000
+Date:   Mon Mar 21 21:26:59 2016 +0000
 
-rm-lld: Upgrade to version 2.2.0.1
+qmss-lld: Upgrade to version 2.1.0.14
+
+* Update license with TI-TFL license
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/rm-lld/rm-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/qmss-lld/qmss-lld.inc                  |   16 +++++-----------
+ .../qmss-ld-fix-firmware-installation.patch        |   13 -------------
+ 2 files changed, 5 insertions(+), 24 deletions(-)
 
-diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
-index be71761..70d9b5b 100644
---- a/recipes-bsp/rm-lld/rm-lld.inc
-+++ b/recipes-bsp/rm-lld/rm-lld.inc
-@@ -7,14 +7,14 @@ RM_LLD_GIT_PROTOCOL = "git"
- RM_LLD_GIT_BRANCH = "master"
- RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
- 
--# Below commit ID corresponds to DEV.RM_LLD.02.02.00.00
--RM_LLD_SRCREV = "48fc05bf1835f76760da4341a4c551398aeeb7cd"
-+# Below commit ID corresponds to DEV.RM_LLD.02.02.00.01
-+RM_LLD_SRCREV = "841f2df9726f456d6c026c0aa03095699962d048"
- 
- BRANCH = "${RM_LLD_GIT_BRANCH}"
- SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${RM_LLD_SRCREV}"
- 
--PV = "02.02.00.00"
-+PV = "02.02.00.01"
- INC_PR = "r0"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index fae58e1..2395a4d 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -1,5 +1,5 @@
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
++LICENSE = "BSD-3-Clause & TI-TFL"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=cd04fb087063a2a82c4ce61983836871"
  
  COMPATIBLE_MACHINE = "keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -9,14 +9,14 @@ QMSS_LLD_GIT_PROTOCOL = "git"
+ QMSS_LLD_GIT_BRANCH = "master"
+ QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
+ 
+-# commit ID corresponding to DEV.QMSS_LLD.02.01.00.12
+-QMSS_LLD_SRCREV = "6b093515f38c6e4d3a8014903a563a9b89fd7c98"
++# commit ID corresponding to DEV.QMSS_LLD.02.01.00.14
++QMSS_LLD_SRCREV = "4cc3a3f1bcddfc19e2e7d8dd4208ca215e7ecbae"
+ 
+ BRANCH ="${QMSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${QMSS_LLD_SRCREV}"
+ 
+-PV = "02.01.00.12"
++PV = "02.01.00.14"
+ INC_PR = "r0"
+ 
+ DEVICELIST = "k2h k2k k2l k2e"
+@@ -25,9 +25,3 @@ DEVICELIST_k2l-evm = "k2l"
+ DEVICELIST_k2e-evm = "k2e"
+ 
+ S = "${WORKDIR}/${QMSS_LLD_GIT_DESTSUFFIX}"
+-
+-FILESEXTRAPATHS_prepend := "${THISDIR}/qmss-lld:"
+-
+-SRC_URI_append = " \
+-    file://qmss-ld-fix-firmware-installation.patch \
+-"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld/qmss-ld-fix-firmware-installation.patch b/recipes-bsp/qmss-lld/qmss-lld/qmss-ld-fix-firmware-installation.patch
+deleted file mode 100644
+index a48aae1..0000000
+--- a/recipes-bsp/qmss-lld/qmss-lld/qmss-ld-fix-firmware-installation.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-diff --git a/makefile_armv7 b/makefile_armv7
+-index a1fd5c0..d050ace 100644
+---- a/makefile_armv7
+-+++ b/makefile_armv7
+-@@ -117,7 +117,7 @@ install:
+- 	install -d $(INSTALL_LIB_BASE_DIR)
+- 	$(CP) ./*.h                $(INSTALL_INC_BASE_DIR)/ti/drv/qmss
+- 	$(CP) ./include/*.h        $(INSTALL_INC_BASE_DIR)/ti/drv/qmss/include
+--	$(CP) ./firmware/*.h       $(INSTALL_INC_BASE_DIR)/ti/drv/qmss/firmware
+-+	$(CP) -r ./firmware/*      $(INSTALL_INC_BASE_DIR)/ti/drv/qmss/firmware
+- 	$(CP) -r ./device $(INSTALL_INC_BASE_DIR)/ti/drv/qmss/
+- 	@$(CP) -r $(ARMV7LIBDIR)/*.a         $(INSTALL_LIB_BASE_DIR)
+- 	@$(CP) -r $(ARMV7LIBDIR)/*.so        $(INSTALL_LIB_BASE_DIR)
 
 
