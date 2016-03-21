@@ -1,26 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5D1C3E00CA5; Sat, 19 Mar 2016 13:04:12 -0700 (PDT)
+	id 456D5E00CBE; Mon, 21 Mar 2016 07:51:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0FD5E00CA5
-	for <meta-ti@yoctoproject.org>; Sat, 19 Mar 2016 13:04:11 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id EF74D52A1D; Sat, 19 Mar 2016 20:04:10 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160319200410.EF74D52A1D@arago-project.org>
-Date: Sat, 19 Mar 2016 20:04:10 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with latest connectivity fixes
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F26B0E00948
+	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 07:51:17 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2LEpGc5010579
+	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 09:51:16 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2LEpG93024755
+	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 09:51:16 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 21 Mar 2016 09:51:15 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u2LEpFkk000744;	Mon, 21 Mar 2016 09:51:16 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 21 Mar 2016 10:51:04 -0400
+Message-ID: <1458571873-12889-2-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1458571873-12889-1-git-send-email-j-stiffler@ti.com>
+References: <1458571873-12889-1-git-send-email-j-stiffler@ti.com>
+MIME-Version: 1.0
+Subject: [PATCH 01/10] common-csl-ip: Upgrade to version 3.3.0.2A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,54 +47,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Mar 2016 20:04:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Mar 2016 14:51:21 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: fido
-Commit: 4fb04c5c5f707fa29b909ac7c061943b93fb8619
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4fb04c5c5f707fa29b909ac7c061943b93fb8619
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sun Mar 20 02:00:09 2016 +0000
-
-linux-ti-staging: update with latest connectivity fixes
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
+ recipes-bsp/common-csl-ip/common-csl-ip.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-index 9686316..d2c4b28 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index e51dd7b..146cb3e 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,16 +4,16 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
- BRANCH = "ti-rt-linux-4.1.y"
+ COMPATIBLE_MACHINE = "keystone|dra7xx"
  
--SRCREV = "a4248d096e1d94ca6e9223c77735ef7c6551ccff"
-+SRCREV = "b1e14d991256c58d564b50d4d0439521cff27749"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index d041fd3..8efb1c5 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
+-PV = "3.3.0.1B"
+-INC_PR = "r1"
++PV = "3.3.0.2A"
++INC_PR = "r0"
  
- BRANCH = "ti-lsk-linux-4.1.y"
+ CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "master"
+ CSL_GIT_DESTSUFFIX = "git"
  
--SRCREV = "32346b4d29d2405124e084c6a28f8ae0c0d4df6c"
-+SRCREV = "c23eecbb9f1d6f2eef11eebb3281b79fb26ff862"
- PV = "4.1.18+git${SRCPV}"
+-# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.01B
+-CSL_SRCREV = "48bb80a8d5919e17528a21be5d3ea6437dfc0425"
++# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02A
++CSL_SRCREV = "e26dc44be132849d6bcf63b7e9eac744769577dc"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "i"
-+MACHINE_KERNEL_PR_append = "j"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+-- 
+1.9.1
 
 
