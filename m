@@ -1,40 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 78960E00CC0; Mon, 21 Mar 2016 08:27:32 -0700 (PDT)
+	id 26B1BE00CCA; Mon, 21 Mar 2016 08:44:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23F84E00C90
-	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:27:20 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2LFRKLA004328
-	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 10:27:20 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2LFRKt0007733
-	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 10:27:20 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 21 Mar 2016 10:27:19 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u2LFRDM9027129;	Mon, 21 Mar 2016 10:27:19 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 21 Mar 2016 11:27:03 -0400
-Message-ID: <1458574026-24513-7-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1458574026-24513-3-git-send-email-j-stiffler@ti.com>
-References: <1458574026-24513-3-git-send-email-j-stiffler@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH v2 07/10] sa-lld: Upgrade to version 3.0.0.13
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C8CFE00951
+	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:34 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 61350529B9; Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160321154433.61350529B9@arago-project.org>
+Date: Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : common-csl-ip: Upgrade to version 3.3.0.2A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,51 +33,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 15:27:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 21 Mar 2016 15:44:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Update license with TI-TFL license
+Module: meta-ti
+Branch: fido
+Commit: 819731a317923e4f15a8424333fd964edf58f538
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=819731a317923e4f15a8424333fd964edf58f538
+
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Mon Mar 21 20:51:04 2016 +0000
+
+common-csl-ip: Upgrade to version 3.3.0.2A
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
-v2 changes:
-* Fix license: replace '_' with '-'
 
- recipes-bsp/sa-lld/sa-lld.inc | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ recipes-bsp/common-csl-ip/common-csl-ip.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
-index 3746a1e..3e3392b 100644
---- a/recipes-bsp/sa-lld/sa-lld.inc
-+++ b/recipes-bsp/sa-lld/sa-lld.inc
-@@ -1,21 +1,21 @@
--LICENSE = "BSD-3-Clause"
-+LICENSE = "BSD-3-Clause & TI-TFL"
- COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index e51dd7b..146cb3e 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,16 +4,16 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a9569e129ebdf20e732dd"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=cd04fb087063a2a82c4ce61983836871"
+ COMPATIBLE_MACHINE = "keystone|dra7xx"
  
- SA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/sa-lld.git"
- SA_LLD_GIT_PROTOCOL = "git"
- SA_LLD_GIT_BRANCH = "master"
- SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
+-PV = "3.3.0.1B"
+-INC_PR = "r1"
++PV = "3.3.0.2A"
++INC_PR = "r0"
  
--# Following commit DEV.SA_LLD.03.00.00.12
--SA_LLD_SRCREV = "b3bd2741126230b397ca827def5fcf6e6f019574"
-+# Following commit DEV.SA_LLD.03.00.00.13
-+SA_LLD_SRCREV = "ddde4d990482c8f727411a014512bc7959ab2c05"
+ CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "master"
+ CSL_GIT_DESTSUFFIX = "git"
  
- BRANCH = "${SA_LLD_GIT_BRANCH}"
- SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${SA_LLD_SRCREV}"
+-# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.01B
+-CSL_SRCREV = "48bb80a8d5919e17528a21be5d3ea6437dfc0425"
++# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02A
++CSL_SRCREV = "e26dc44be132849d6bcf63b7e9eac744769577dc"
  
--PV = "03.00.00.12"
-+PV = "03.00.00.13"
- INC_PR = "r0"
- 
- S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
--- 
-1.9.1
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 
 
