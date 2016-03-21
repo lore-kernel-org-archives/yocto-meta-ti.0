@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D306E00CA4; Mon, 21 Mar 2016 08:44:44 -0700 (PDT)
+	id 44D70E00CA4; Mon, 21 Mar 2016 08:44:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7506E00CA4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10D37E00CBE
 	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A51F52AB2; Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
+	id 5DEFC52AD9; Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160321154434.3A51F52AB2@arago-project.org>
+Message-Id: <20160321154434.5DEFC52AD9@arago-project.org>
 Date: Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : openmp-rtos: Bump version for hotfix
+Subject: Jacob Stiffler : rm-lld: Upgrade to version 2.2.0.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,46 +37,44 @@ X-List-Received-Date: Mon, 21 Mar 2016 15:44:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: ef1e62144978aac07f220721868032fe12aed448
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ef1e62144978aac07f220721868032fe12aed448
+Branch: master
+Commit: bffc8a32778a7ef34c7cce8dc6064d2057dca39f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bffc8a32778a7ef34c7cce8dc6064d2057dca39f
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 21 20:51:13 2016 +0000
+Date:   Mon Mar 21 20:51:05 2016 +0000
 
-openmp-rtos: Bump version for hotfix
-
-* fix am57x NOLOAD auto-init and omp atomic race bugs
+rm-lld: Upgrade to version 2.2.0.1
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/openmp-rtos/openmp-rtos_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/rm-lld/rm-lld.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-index 0a16233..38e33c8 100644
---- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-+++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
+diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
+index be71761..70d9b5b 100644
+--- a/recipes-bsp/rm-lld/rm-lld.inc
++++ b/recipes-bsp/rm-lld/rm-lld.inc
+@@ -7,14 +7,14 @@ RM_LLD_GIT_PROTOCOL = "git"
+ RM_LLD_GIT_BRANCH = "master"
+ RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
  
- require recipes-ti/includes/ti-paths.inc
+-# Below commit ID corresponds to DEV.RM_LLD.02.02.00.00
+-RM_LLD_SRCREV = "48fc05bf1835f76760da4341a4c551398aeeb7cd"
++# Below commit ID corresponds to DEV.RM_LLD.02.02.00.01
++RM_LLD_SRCREV = "841f2df9726f456d6c026c0aa03095699962d048"
  
--PV = "2_02_01_02"
-+PV = "2_02_01_03"
- PR = "r0"
+ BRANCH = "${RM_LLD_GIT_BRANCH}"
+ SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${RM_LLD_SRCREV}"
  
- OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
-@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
- SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
- "
+-PV = "02.02.00.00"
++PV = "02.02.00.01"
+ INC_PR = "r0"
  
--SRCREV = "7003ab350544f98006914d7a5cf834f3e82f5f88"
-+SRCREV = "9bf371e9618297f8783113bff05995800535c27d"
- 
- LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
- 
+ COMPATIBLE_MACHINE = "keystone"
 
 
