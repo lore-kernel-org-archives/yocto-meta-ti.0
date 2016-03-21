@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8669CE00C3C; Mon, 21 Mar 2016 09:44:25 -0700 (PDT)
+	id 532C3E00973; Mon, 21 Mar 2016 09:44:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19D60E00951
-	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 09:44:22 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2LGiM0F007936
-	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 11:44:22 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2LGiMoK008471
-	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 11:44:22 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 21 Mar 2016 11:44:22 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u2LGiLPg001622;	Mon, 21 Mar 2016 11:44:21 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 21 Mar 2016 12:44:19 -0400
-Message-ID: <1458578659-32434-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] common-csl-ip: Bump SRCREV for fix
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58A5AE00CC6
+	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 09:44:39 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 6A09952A1C; Mon, 21 Mar 2016 16:44:38 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160321164438.6A09952A1C@arago-project.org>
+Date: Mon, 21 Mar 2016 16:44:38 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ti-sci-fw: update to the latest version 0.1.1.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,41 +33,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 16:44:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 21 Mar 2016 16:44:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Definition of PLLC registers in CSL: wrong offset for EMUCNT0/1
+Module: meta-ti
+Branch: master
+Commit: 7e26452bae0b01922509883a4935cfb64f2bfd1f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7e26452bae0b01922509883a4935cfb64f2bfd1f
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Mar 21 22:36:54 2016 +0000
+
+ti-sci-fw: update to the latest version 0.1.1.4
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 146cb3e..6243729 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 5526776..877d510 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "TI SCI firmware"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+-PV = "0.1.1.1"
++PV = "0.1.1.4"
+ PR = "r0"
  
--PV = "3.3.0.2A"
-+PV = "3.3.0.2B"
- INC_PR = "r0"
+ CLEANBROKEN = "1"
+@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g-evm"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02A
--CSL_SRCREV = "e26dc44be132849d6bcf63b7e9eac744769577dc"
-+# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02B
-+CSL_SRCREV = "7fa7fa8a23189dd79921392fd4942a21610ea93c"
+-SRCREV = "382de6987b6683555f9c48ae6a2343f246434b38"
++SRCREV = "11c3f5df2276c542966c32e95289ec49d111a696"
+ BRANCH ?= "ti-linux-firmware-4.1.y"
  
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
--- 
-1.9.1
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
 
 
