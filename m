@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E02BBE00C44; Mon, 21 Mar 2016 08:44:40 -0700 (PDT)
+	id E168AE00B45; Mon, 21 Mar 2016 08:44:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D74D3E00CA2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0C22E00C89
 	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E648952AA4; Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
+	id 254DB52AB1; Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160321154433.E648952AA4@arago-project.org>
-Date: Mon, 21 Mar 2016 15:44:33 +0000 (UTC)
+Message-Id: <20160321154434.254DB52AB1@arago-project.org>
+Date: Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : pa-lld: Upgrade to version 3.0.1.8
+Subject: Jacob Stiffler : traceframework: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,54 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: b4610a6f993e33a9fb069bf967f132f63a91ad08
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4610a6f993e33a9fb069bf967f132f63a91ad08
+Commit: 37eca0341d5cb4584e2c20b3617af37312e04924
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=37eca0341d5cb4584e2c20b3617af37312e04924
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 21 21:27:02 2016 +0000
+Date:   Mon Mar 21 20:51:12 2016 +0000
 
-pa-lld: Upgrade to version 3.0.1.8
+traceframework: Bump SRCREV for fix
 
-* Update license to add TI-TFL license
+* tf:cuiaTest:fixing linker options
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pa-lld/pa-lld.inc |   10 +++++-----
- 1 files changed, 5 insertions(+), 5 deletions(-)
+ recipes-bsp/traceframework/traceframework_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index 7b09ceb..b45d3bc 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -1,5 +1,5 @@
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/pa/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
-+LICENSE = "BSD-3-Clause & TI-TFL"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/pa/COPYING.txt;md5=cd04fb087063a2a82c4ce61983836871"
+diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
+index 298ead4..49a7e95 100644
+--- a/recipes-bsp/traceframework/traceframework_git.bb
++++ b/recipes-bsp/traceframework/traceframework_git.bb
+@@ -7,15 +7,15 @@ TRACEFRAMEWORK_GIT_PROTOCOL = "git"
+ TRACEFRAMEWORK_GIT_BRANCH = "master"
+ TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
  
- COMPATIBLE_MACHINE = "keystone"
+-# Below commit ID corresponds to DEV.TFWK-01.01.01.08
+-TRACEFRAMEWORK_SRCREV = "4e84c37c456ca62188cc9560d4ebf22452dab01f"
++# Below commit ID corresponds to DEV.TFWK-01.01.01.08B
++TRACEFRAMEWORK_SRCREV = "e7a60a71a385337425547e3cac6716998c6a3528"
+ 
+ BRANCH="${TRACEFRAMEWORK_GIT_BRANCH}"
+ SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${TRACEFRAMEWORK_SRCREV}"
+ 
+ PV = "01.01.01.08"
+-PR = "r0"
++PR = "r1"
+ 
+ COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
  PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -9,15 +9,15 @@ PA_LLD_GIT_PROTOCOL = "git"
- PA_LLD_GIT_BRANCH = "master"
- PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
- 
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.07"
--PA_LLD_SRCREV = "cad5bc0b422a7ac3c6fa013fc2288447318329a0"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.08"
-+PA_LLD_SRCREV = "43badac6ff6269e9449fb03fb7af985e61ab723c"
- 
- BRANCH = "${PA_LLD_GIT_BRANCH}"
- SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
-             file://0001-makefile_armv7-fix-missing-separator-error.patch"
- SRCREV = "${PA_LLD_SRCREV}"
- 
--PV = "03.00.01.07"
-+PV = "03.00.01.08"
- INC_PR = "r0"
- 
- S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
 
 
