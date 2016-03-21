@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E168AE00B45; Mon, 21 Mar 2016 08:44:40 -0700 (PDT)
+	id 2C87DE00C44; Mon, 21 Mar 2016 08:44:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0C22E00C89
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10937E00CA6
 	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 254DB52AB1; Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
+	id 8499052AE0; Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160321154434.254DB52AB1@arago-project.org>
+Message-Id: <20160321154434.8499052AE0@arago-project.org>
 Date: Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : traceframework: Bump SRCREV for fix
+Subject: Jacob Stiffler : cppi-lld: Upgrade to version 2.1.0.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,51 +33,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 15:44:40 -0000
+X-List-Received-Date: Mon, 21 Mar 2016 15:44:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 37eca0341d5cb4584e2c20b3617af37312e04924
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=37eca0341d5cb4584e2c20b3617af37312e04924
+Branch: master
+Commit: b4c7f17dec7199e52f3d072250a3ede82de5ce6d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4c7f17dec7199e52f3d072250a3ede82de5ce6d
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 21 20:51:12 2016 +0000
+Date:   Mon Mar 21 21:03:54 2016 +0000
 
-traceframework: Bump SRCREV for fix
-
-* tf:cuiaTest:fixing linker options
+cppi-lld: Upgrade to version 2.1.0.12
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/traceframework/traceframework_git.bb |    6 +++---
+ recipes-bsp/cppi-lld/cppi-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
-index 298ead4..49a7e95 100644
---- a/recipes-bsp/traceframework/traceframework_git.bb
-+++ b/recipes-bsp/traceframework/traceframework_git.bb
-@@ -7,15 +7,15 @@ TRACEFRAMEWORK_GIT_PROTOCOL = "git"
- TRACEFRAMEWORK_GIT_BRANCH = "master"
- TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
+index 26d0e5c..cee7142 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld.inc
++++ b/recipes-bsp/cppi-lld/cppi-lld.inc
+@@ -9,14 +9,14 @@ CPPI_LLD_GIT_PROTOCOL = "git"
+ CPPI_LLD_GIT_BRANCH = "master"
+ CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
  
--# Below commit ID corresponds to DEV.TFWK-01.01.01.08
--TRACEFRAMEWORK_SRCREV = "4e84c37c456ca62188cc9560d4ebf22452dab01f"
-+# Below commit ID corresponds to DEV.TFWK-01.01.01.08B
-+TRACEFRAMEWORK_SRCREV = "e7a60a71a385337425547e3cac6716998c6a3528"
+-# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.11"
+-CPPI_LLD_SRCREV = "91047a01a6d64d7ffaf650c6ebb280de775af997"
++# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12"
++CPPI_LLD_SRCREV = "1dc105ad256c49fbd1a92a0a27a27a34dae85e56"
  
- BRANCH="${TRACEFRAMEWORK_GIT_BRANCH}"
- SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${TRACEFRAMEWORK_SRCREV}"
+ BRANCH = "${CPPI_LLD_GIT_BRANCH}"
+ SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- PV = "01.01.01.08"
--PR = "r0"
-+PR = "r1"
+ SRCREV = "${CPPI_LLD_SRCREV}"
+-PV = "02.01.00.11"
++PV = "02.01.00.12"
+ INC_PR = "r0"
  
- COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ DEVICELIST = "k2h k2k k2l k2e"
 
 
