@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6A054E00CD6; Mon, 21 Mar 2016 08:44:45 -0700 (PDT)
+	id 6B42CE00CC3; Mon, 21 Mar 2016 08:44:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1156EE00CC3
-	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:36 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21443E00CC4
+	for <meta-ti@yoctoproject.org>; Mon, 21 Mar 2016 08:44:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9DDC652AE1; Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
+	id E054852AE9; Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160321154434.9DDC652AE1@arago-project.org>
+Message-Id: <20160321154434.E054852AE9@arago-project.org>
 Date: Mon, 21 Mar 2016 15:44:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : hyplnk-lld: Upgrade to version 2.1.0.6
+Subject: Jacob Stiffler : traceframework: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 60e51f9c00b591d8bc2bd217037741cec06e19c3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=60e51f9c00b591d8bc2bd217037741cec06e19c3
+Commit: cf0e2c35a3771bc29616e304ae2f1392111147f1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cf0e2c35a3771bc29616e304ae2f1392111147f1
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 21 20:51:08 2016 +0000
+Date:   Mon Mar 21 20:51:12 2016 +0000
 
-hyplnk-lld: Upgrade to version 2.1.0.6
+traceframework: Bump SRCREV for fix
+
+* tf:cuiaTest:fixing linker options
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hyplnk-lld/hyplnk-lld.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/traceframework/traceframework_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-index 9f7ac6a..9ab7339 100644
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-+++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-@@ -13,15 +13,15 @@ HYPLNK_GIT_PROTOCOL = "git"
- HYPLNK_GIT_BRANCH = "master"
- HYPLNK_GIT_DESTSUFFIX = "git/ti/drv/${LLDNAME}"
+diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
+index 298ead4..49a7e95 100644
+--- a/recipes-bsp/traceframework/traceframework_git.bb
++++ b/recipes-bsp/traceframework/traceframework_git.bb
+@@ -7,15 +7,15 @@ TRACEFRAMEWORK_GIT_PROTOCOL = "git"
+ TRACEFRAMEWORK_GIT_BRANCH = "master"
+ TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
  
--# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.05A
--HYPLNK_SRCREV = "2acb36a78fee9691a9433f0ce23cf00561123934"
-+# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.06
-+HYPLNK_SRCREV = "a1953ca33114c5a4daca6289a7fb75b201f566d2"
+-# Below commit ID corresponds to DEV.TFWK-01.01.01.08
+-TRACEFRAMEWORK_SRCREV = "4e84c37c456ca62188cc9560d4ebf22452dab01f"
++# Below commit ID corresponds to DEV.TFWK-01.01.01.08B
++TRACEFRAMEWORK_SRCREV = "e7a60a71a385337425547e3cac6716998c6a3528"
  
- BRANCH="${HYPLNK_GIT_BRANCH}"
- SRC_URI = "${HYPLNK_GIT_URI};destsuffix=${HYPLNK_GIT_DESTSUFFIX};protocol=${HYPLNK_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${HYPLNK_SRCREV}"
+ BRANCH="${TRACEFRAMEWORK_GIT_BRANCH}"
+ SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${TRACEFRAMEWORK_SRCREV}"
  
--PV = "2.1.0.5"
--INC_PR = "r3"
-+PV = "2.1.0.6"
-+INC_PR = "r0"
+ PV = "01.01.01.08"
+-PR = "r0"
++PR = "r1"
  
- DEVICELIST_k2hk-evm = "k2h k2k"
- DEVICELIST_k2e-evm  = "k2e"
+ COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
