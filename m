@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2F19FE006CA; Tue, 22 Mar 2016 09:42:53 -0700 (PDT)
+	id 0F5B2E008C6; Tue, 22 Mar 2016 09:43:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,29 +10,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 392C6E0048B
-	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 09:42:49 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2MGglul028156
-	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 11:42:47 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2MGgl6T021566
-	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 11:42:47 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 22 Mar 2016 11:42:47 -0500
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3EA81E0086B
+	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 09:43:02 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2MGh1Aq019129
+	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 11:43:01 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2MGh1Ph031084
+	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 11:43:01 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 22 Mar 2016 11:43:01 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u2MGglrf015115;	Tue, 22 Mar 2016 11:42:47 -0500
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u2MGh1LT013777;	Tue, 22 Mar 2016 11:43:01 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 22 Mar 2016 12:42:43 -0400
-Message-ID: <1458664963-27853-1-git-send-email-j-stiffler@ti.com>
+Date: Tue, 22 Mar 2016 12:42:59 -0400
+Message-ID: <1458664979-27919-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] hplib: Upgrade to version 1.1.0.7
+Subject: [PATCH] nwal-lld: Upgrade to version 2.1.0.10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,39 +45,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 16:42:53 -0000
+X-List-Received-Date: Tue, 22 Mar 2016 16:43:04 -0000
 Content-Type: text/plain
 
-* This version includes the following changes
-  - Port to the 4.1 kernel
-  - Fix the test linker options
+* Fix test linker options
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/hplib/hplib.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/nwal-lld/nwal-lld.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
-index e5fe567..aff38c9 100644
---- a/recipes-bsp/hplib/hplib.inc
-+++ b/recipes-bsp/hplib/hplib.inc
-@@ -9,12 +9,12 @@ HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
- HPLIB_GIT_PROTOCOL = "git"
- HPLIB_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index d18f7d8..eb220f8 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -8,14 +8,14 @@ NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
+ NWAL_LLD_GIT_PROTOCOL = "git"
+ NWAL_LLD_GIT_BRANCH = "master"
  
--# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.06"
--HPLIB_SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
-+# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.07"
-+HPLIB_SRCREV = "74dde26bfcdeb248fae29eb883ac78db89263f9f"
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.09"
+-NWAL_LLD_SRCREV = "ac1d899e0dbd3709848fbf1d121374e8953a3695"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.10"
++NWAL_LLD_SRCREV = "fc14159765777305a234e732b6170d025394250a"
  
- BRANCH = "${HPLIB_GIT_BRANCH}"
- SRC_URI = "${HPLIB_GIT_URI};protocol=${HPLIB_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${HPLIB_SRCREV}"
+ BRANCH = "${NWAL_LLD_GIT_BRANCH}"
+ SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${NWAL_LLD_SRCREV}"
  
--PV = "01.01.00.06+git${SRCPV}"
--INC_PR = "r1"
-+PV = "01.01.00.07+git${SRCPV}"
-+INC_PR = "r0"
+-PV = "02.01.00.09"
++PV = "02.01.00.10"
+ INC_PR = "r0"
+ 
+ BASEDIR = "${WORKDIR}/git"
 -- 
 1.9.1
 
