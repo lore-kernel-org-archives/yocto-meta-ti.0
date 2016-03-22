@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0F3C1E008B4; Tue, 22 Mar 2016 12:14:45 -0700 (PDT)
+	id 90A30E008B4; Tue, 22 Mar 2016 12:14:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F9A9E008C1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 408FAE008EE
 	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 12:14:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7CC6E52AE2; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
+	id 5B54352A90; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160322191437.7CC6E52AE2@arago-project.org>
+Message-Id: <20160322191437.5B54352A90@arago-project.org>
 Date: Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : hplib: Upgrade to version 1.1.0.7
+Subject: Jacob Stiffler : common-csl-ip: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f0692b8a7c125e09b79ec411a045275e910e79b8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f0692b8a7c125e09b79ec411a045275e910e79b8
+Commit: 8c21aea5171e6d9b7e90ff3bcc3b5289410fb56c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8c21aea5171e6d9b7e90ff3bcc3b5289410fb56c
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Mar 22 22:42:43 2016 +0000
+Date:   Mon Mar 21 22:44:19 2016 +0000
 
-hplib: Upgrade to version 1.1.0.7
+common-csl-ip: Bump SRCREV for fix
 
-* This version includes the following changes
-  - Port to the 4.1 kernel
-  - Fix the test linker options
+* Definition of PLLC registers in CSL: wrong offset for EMUCNT0/1
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hplib/hplib.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/common-csl-ip/common-csl-ip.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
-index e5fe567..aff38c9 100644
---- a/recipes-bsp/hplib/hplib.inc
-+++ b/recipes-bsp/hplib/hplib.inc
-@@ -9,12 +9,12 @@ HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
- HPLIB_GIT_PROTOCOL = "git"
- HPLIB_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index 146cb3e..6243729 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
--# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.06"
--HPLIB_SRCREV = "1cbe6a41926c131d9cab63b40d43807c6e56e2fd"
-+# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.07"
-+HPLIB_SRCREV = "74dde26bfcdeb248fae29eb883ac78db89263f9f"
+ COMPATIBLE_MACHINE = "keystone|dra7xx"
  
- BRANCH = "${HPLIB_GIT_BRANCH}"
- SRC_URI = "${HPLIB_GIT_URI};protocol=${HPLIB_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${HPLIB_SRCREV}"
+-PV = "3.3.0.2A"
++PV = "3.3.0.2B"
+ INC_PR = "r0"
  
--PV = "01.01.00.06+git${SRCPV}"
--INC_PR = "r1"
-+PV = "01.01.00.07+git${SRCPV}"
-+INC_PR = "r0"
+ CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "master"
+ CSL_GIT_DESTSUFFIX = "git"
+ 
+-# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02A
+-CSL_SRCREV = "e26dc44be132849d6bcf63b7e9eac744769577dc"
++# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02B
++CSL_SRCREV = "7fa7fa8a23189dd79921392fd4942a21610ea93c"
+ 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 
 
