@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E6368E00929; Tue, 22 Mar 2016 12:14:42 -0700 (PDT)
+	id 0870EE00948; Tue, 22 Mar 2016 12:14:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6AFFE006CA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7EC6E0086B
 	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 12:14:39 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EB87B529E8; Tue, 22 Mar 2016 19:14:36 +0000 (UTC)
+	id 3493E52A80; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160322191436.EB87B529E8@arago-project.org>
-Date: Tue, 22 Mar 2016 19:14:36 +0000 (UTC)
+Message-Id: <20160322191437.3493E52A80@arago-project.org>
+Date: Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : edma3-lld: Upgrade to version 2.12.1. 23 and add k2g-evm support
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with UART1_RTSN pinmux fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,85 +33,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 19:14:43 -0000
+X-List-Received-Date: Tue, 22 Mar 2016 19:14:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: e39016cdd1542980c4dd2203566b952662b6ffcc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e39016cdd1542980c4dd2203566b952662b6ffcc
+Commit: 32072c7e50def3b8d39078bd81be8fd252a620d7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=32072c7e50def3b8d39078bd81be8fd252a620d7
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Mar 22 04:00:45 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Mar 22 14:52:08 2016 -0400
 
-edma3-lld: Upgrade to version 2.12.1.23 and add k2g-evm support
+u-boot-ti-staging: update with UART1_RTSN pinmux fix
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    3 ++-
- recipes-bsp/edma3-lld/edma3-lld.inc         |    6 +++---
- recipes-bsp/edma3-lld/edma3-lld_git.bb      |    2 ++
- 3 files changed, 7 insertions(+), 4 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-index b1cedd0..1f1483e 100644
---- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-@@ -2,7 +2,7 @@ require edma3-lld.inc
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index bac0acc..0634a16 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.0"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
- DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
+-PR = "r24"
++PR = "r25"
+ PV_append = "+git${SRCPV}"
  
-@@ -43,6 +43,7 @@ PLATFORMLIST_keystone = " \
-         tci6638k2k-evm \
-         tci6630k2l-evm \
-         c66ak2e-evm \
-+        tci66ak2g02-evm \
- "
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- TARGETLIST_keystone = " \
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 533de83..ff0ad47 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
+ BRANCH ?= "ti-u-boot-2015.07"
  
--# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_21_RC1
--EDMA3_LLD_SRCREV = "9a94177958b9269b1b8aeeb2a5d362ca4e64dafa"
-+# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_23A
-+EDMA3_LLD_SRCREV = "84c84a82332b30ece3b00f7d769270466ae836e0"
+-SRCREV = "d013f6ec602485f6fd543b0ef712abc8d77ebf07"
++SRCREV = "46c915c96358c426bb1f4dd1e25a9a805d93a24e"
  
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
- 
--PV = "2.12.01.22"
-+PV = "2.12.01.23"
- INC_PR = "r0"
-diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-lld/edma3-lld_git.bb
-index ec6ca47..e197d0b 100644
---- a/recipes-bsp/edma3-lld/edma3-lld_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld_git.bb
-@@ -7,9 +7,11 @@ COMPATIBLE_MACHINE = "keystone"
- DEPENDS = "common-csl-ip"
- 
- PLATFORMLIST = "tci6636k2h-evm \
-+	tci6636k2h-evm \
- 	tci6638k2k-evm \
- 	tci6630k2l-evm \
- 	c66ak2e-evm \
-+	tci66ak2g02-evm \
- 	"
- 
- PACKAGES =+ "${PN}-test"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
