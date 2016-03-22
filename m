@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A802BE008C6; Tue, 22 Mar 2016 12:14:47 -0700 (PDT)
+	id A9287E0090C; Tue, 22 Mar 2016 12:14:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 409D7E0090C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96A38E00920
 	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 12:14:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4842352A81; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
+	id B2A0852AED; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160322191437.4842352A81@arago-project.org>
+Message-Id: <20160322191437.B2A0852AED@arago-project.org>
 Date: Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update with PRU PHY state change fix
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 22 Mar 2016 19:14:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: d61898a2685099bb2a6cbea1b8a01d7cdb7a6ea6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d61898a2685099bb2a6cbea1b8a01d7cdb7a6ea6
+Branch: master
+Commit: d90c889953d5e9be27340d0c13b5b06b326e320b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d90c889953d5e9be27340d0c13b5b06b326e320b
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Mar 22 14:52:53 2016 -0400
@@ -65,7 +65,7 @@ index d2c4b28..5671d45 100644
 -SRCREV = "b1e14d991256c58d564b50d4d0439521cff27749"
 +SRCREV = "3bef1493dbbc61880f09cfda285cd0032a501d41"
 diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 8efb1c5..5d639b1 100644
+index 11afd40..edc8e00 100644
 --- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
 @@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
