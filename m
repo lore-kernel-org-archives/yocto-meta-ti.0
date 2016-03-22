@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 91D60E0086B; Tue, 22 Mar 2016 12:14:45 -0700 (PDT)
+	id A802BE008C6; Tue, 22 Mar 2016 12:14:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40940E008F1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 409D7E0090C
 	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 12:14:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6CA6D52AE1; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
+	id 4842352A81; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160322191437.6CA6D52AE1@arago-project.org>
+Message-Id: <20160322191437.4842352A81@arago-project.org>
 Date: Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : edma3-lld: Upgrade to version 2.12.1. 23 and add k2g-evm support
+Subject: Denys Dmytriyenko : linux-ti-staging: update with PRU PHY state change fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,85 +33,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 19:14:45 -0000
+X-List-Received-Date: Tue, 22 Mar 2016 19:14:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 54cebf1ad8f3f238d5e61d141e7f142b8745a63d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=54cebf1ad8f3f238d5e61d141e7f142b8745a63d
+Branch: fido
+Commit: d61898a2685099bb2a6cbea1b8a01d7cdb7a6ea6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d61898a2685099bb2a6cbea1b8a01d7cdb7a6ea6
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Mar 22 04:00:45 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Mar 22 14:52:53 2016 -0400
 
-edma3-lld: Upgrade to version 2.12.1.23 and add k2g-evm support
+linux-ti-staging: update with PRU PHY state change fix
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    3 ++-
- recipes-bsp/edma3-lld/edma3-lld.inc         |    6 +++---
- recipes-bsp/edma3-lld/edma3-lld_git.bb      |    2 ++
- 3 files changed, 7 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.1.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.1.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-index b1cedd0..1f1483e 100644
---- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-@@ -2,7 +2,7 @@ require edma3-lld.inc
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+index d2c4b28..5671d45 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
  
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.0"
+ BRANCH = "ti-rt-linux-4.1.y"
  
- DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
+-SRCREV = "b1e14d991256c58d564b50d4d0439521cff27749"
++SRCREV = "3bef1493dbbc61880f09cfda285cd0032a501d41"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index 8efb1c5..5d639b1 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -69,11 +69,11 @@ S = "${WORKDIR}/git"
  
-@@ -43,6 +43,7 @@ PLATFORMLIST_keystone = " \
-         tci6638k2k-evm \
-         tci6630k2l-evm \
-         c66ak2e-evm \
-+        tci66ak2g02-evm \
- "
+ BRANCH = "ti-lsk-linux-4.1.y"
  
- TARGETLIST_keystone = " \
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 533de83..ff0ad47 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
+-SRCREV = "c23eecbb9f1d6f2eef11eebb3281b79fb26ff862"
++SRCREV = "6b41ca0b945d73ac8c8318083f79411639836643"
+ PV = "4.1.18+git${SRCPV}"
  
--# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_21_RC1
--EDMA3_LLD_SRCREV = "9a94177958b9269b1b8aeeb2a5d362ca4e64dafa"
-+# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_23A
-+EDMA3_LLD_SRCREV = "84c84a82332b30ece3b00f7d769270466ae836e0"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "j"
++MACHINE_KERNEL_PR_append = "k"
+ PR = "${MACHINE_KERNEL_PR}"
  
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
- 
--PV = "2.12.01.22"
-+PV = "2.12.01.23"
- INC_PR = "r0"
-diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-lld/edma3-lld_git.bb
-index ec6ca47..e197d0b 100644
---- a/recipes-bsp/edma3-lld/edma3-lld_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld_git.bb
-@@ -7,9 +7,11 @@ COMPATIBLE_MACHINE = "keystone"
- DEPENDS = "common-csl-ip"
- 
- PLATFORMLIST = "tci6636k2h-evm \
-+	tci6636k2h-evm \
- 	tci6638k2k-evm \
- 	tci6630k2l-evm \
- 	c66ak2e-evm \
-+	tci66ak2g02-evm \
- 	"
- 
- PACKAGES =+ "${PN}-test"
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
