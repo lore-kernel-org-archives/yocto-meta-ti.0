@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 34411E0086B; Tue, 22 Mar 2016 12:21:08 -0700 (PDT)
+	id 364CBE00863; Tue, 22 Mar 2016 12:21:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C258BE00509
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C3A5CE006CA
 	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 12:21:05 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 917A5529C7; Tue, 22 Mar 2016 19:21:04 +0000 (UTC)
+	id A6DB4529E8; Tue, 22 Mar 2016 19:21:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160322192104.917A5529C7@arago-project.org>
+Message-Id: <20160322192104.A6DB4529E8@arago-project.org>
 Date: Tue, 22 Mar 2016 19:21:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : gdbc6x: Bump SRCREV so that all machines use same branch
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 22 Mar 2016 19:21:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 2317e1f5134b36fcc8d7127a85ed9e08a2d162d4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2317e1f5134b36fcc8d7127a85ed9e08a2d162d4
+Branch: master
+Commit: 491f3bc8a9c801ddfa171dceb2a91c3e555eb376
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=491f3bc8a9c801ddfa171dceb2a91c3e555eb376
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed Mar 23 01:19:29 2016 +0000
