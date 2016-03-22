@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A4A5AE00872; Tue, 22 Mar 2016 13:26:17 -0700 (PDT)
+	id A6343E00509; Tue, 22 Mar 2016 13:26:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5DC6E006CA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4384E00509
 	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 13:26:15 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D78C8529C7; Tue, 22 Mar 2016 20:26:14 +0000 (UTC)
+	id 621EE529AD; Tue, 22 Mar 2016 20:26:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160322202614.D78C8529C7@arago-project.org>
+Message-Id: <20160322202614.621EE529AD@arago-project.org>
 Date: Tue, 22 Mar 2016 20:26:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : pktlib: Upgrade to version 2.1.0.7
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 22 Mar 2016 20:26:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: c38921cd82fdf7d6b296888f1c43da940c6cfeb1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c38921cd82fdf7d6b296888f1c43da940c6cfeb1
+Branch: fido
+Commit: c93678aa08bc0df0f1f36a84afe48723406de58e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c93678aa08bc0df0f1f36a84afe48723406de58e
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed Mar 23 01:58:49 2016 +0000
