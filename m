@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2DCACE0086B; Tue, 22 Mar 2016 12:58:53 -0700 (PDT)
+	id A4A5AE00872; Tue, 22 Mar 2016 13:26:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78F10E006CA
-	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 12:58:52 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2MJwpSk002945
-	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 14:58:51 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2MJwpgY028280
-	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 14:58:51 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 22 Mar 2016 14:58:50 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u2MJwofl002397;	Tue, 22 Mar 2016 14:58:50 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 22 Mar 2016 15:58:49 -0400
-Message-ID: <1458676729-29163-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] pktlib: Upgrade to version 2.1.0.7
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5DC6E006CA
+	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 13:26:15 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id D78C8529C7; Tue, 22 Mar 2016 20:26:14 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160322202614.D78C8529C7@arago-project.org>
+Date: Tue, 22 Mar 2016 20:26:14 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : pktlib: Upgrade to version 2.1.0.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,13 +33,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 19:58:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 22 Mar 2016 20:26:17 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: c38921cd82fdf7d6b296888f1c43da940c6cfeb1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c38921cd82fdf7d6b296888f1c43da940c6cfeb1
+
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Wed Mar 23 01:58:49 2016 +0000
+
+pktlib: Upgrade to version 2.1.0.7
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/pktlib/pktlib_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+
+ recipes-bsp/pktlib/pktlib_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
 index 9a45340..341391e 100644
@@ -75,7 +76,5 @@ index 9a45340..341391e 100644
  PR = "r0"
  
  S = "${WORKDIR}/git/ti/runtime/pktlib"
--- 
-1.9.1
 
 
