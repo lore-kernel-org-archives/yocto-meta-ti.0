@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 90A30E008B4; Tue, 22 Mar 2016 12:14:45 -0700 (PDT)
+	id 91D60E0086B; Tue, 22 Mar 2016 12:14:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 408FAE008EE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40940E008F1
 	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 12:14:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5B54352A90; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
+	id 6CA6D52AE1; Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160322191437.5B54352A90@arago-project.org>
+Message-Id: <20160322191437.6CA6D52AE1@arago-project.org>
 Date: Tue, 22 Mar 2016 19:14:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Bump SRCREV for fix
+Subject: Jacob Stiffler : edma3-lld: Upgrade to version 2.12.1. 23 and add k2g-evm support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,47 +38,80 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 8c21aea5171e6d9b7e90ff3bcc3b5289410fb56c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8c21aea5171e6d9b7e90ff3bcc3b5289410fb56c
+Commit: 54cebf1ad8f3f238d5e61d141e7f142b8745a63d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=54cebf1ad8f3f238d5e61d141e7f142b8745a63d
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 21 22:44:19 2016 +0000
+Date:   Tue Mar 22 04:00:45 2016 +0000
 
-common-csl-ip: Bump SRCREV for fix
-
-* Definition of PLLC registers in CSL: wrong offset for EMUCNT0/1
+edma3-lld: Upgrade to version 2.12.1.23 and add k2g-evm support
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb |    3 ++-
+ recipes-bsp/edma3-lld/edma3-lld.inc         |    6 +++---
+ recipes-bsp/edma3-lld/edma3-lld_git.bb      |    2 ++
+ 3 files changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 146cb3e..6243729 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index b1cedd0..1f1483e 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -2,7 +2,7 @@ require edma3-lld.inc
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.0"
  
--PV = "3.3.0.2A"
-+PV = "3.3.0.2B"
+ DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
+ 
+@@ -43,6 +43,7 @@ PLATFORMLIST_keystone = " \
+         tci6638k2k-evm \
+         tci6630k2l-evm \
+         c66ak2e-evm \
++        tci66ak2g02-evm \
+ "
+ 
+ TARGETLIST_keystone = " \
+diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+index 533de83..ff0ad47 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld.inc
++++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
+ EDMA3_LLD_GIT_PROTOCOL = "git"
+ EDMA3_LLD_GIT_BRANCH = "master"
+ 
+-# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_21_RC1
+-EDMA3_LLD_SRCREV = "9a94177958b9269b1b8aeeb2a5d362ca4e64dafa"
++# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_23A
++EDMA3_LLD_SRCREV = "84c84a82332b30ece3b00f7d769270466ae836e0"
+ 
+ BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
+ SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${EDMA3_LLD_SRCREV}"
+ 
+-PV = "2.12.01.22"
++PV = "2.12.01.23"
  INC_PR = "r0"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+index ec6ca47..e197d0b 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+@@ -7,9 +7,11 @@ COMPATIBLE_MACHINE = "keystone"
+ DEPENDS = "common-csl-ip"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
+ PLATFORMLIST = "tci6636k2h-evm \
++	tci6636k2h-evm \
+ 	tci6638k2k-evm \
+ 	tci6630k2l-evm \
+ 	c66ak2e-evm \
++	tci66ak2g02-evm \
+ 	"
  
--# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02A
--CSL_SRCREV = "e26dc44be132849d6bcf63b7e9eac744769577dc"
-+# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02B
-+CSL_SRCREV = "7fa7fa8a23189dd79921392fd4942a21610ea93c"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+ PACKAGES =+ "${PN}-test"
 
 
