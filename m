@@ -1,26 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6343E00509; Tue, 22 Mar 2016 13:26:17 -0700 (PDT)
+	id A2A96E00C46; Thu, 24 Mar 2016 09:48:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4384E00509
-	for <meta-ti@yoctoproject.org>; Tue, 22 Mar 2016 13:26:15 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 621EE529AD; Tue, 22 Mar 2016 20:26:14 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160322202614.621EE529AD@arago-project.org>
-Date: Tue, 22 Mar 2016 20:26:14 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : pktlib: Upgrade to version 2.1.0.7
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55B7DE00AEA
+	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 09:48:45 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2OGmjwv025509
+	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 11:48:45 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2OGmiwl031549
+	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 11:48:44 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 24 Mar 2016 11:48:44 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u2OGmhsk013865;	Thu, 24 Mar 2016 11:48:44 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 24 Mar 2016 12:48:36 -0400
+Message-ID: <1458838121-2846-3-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1458838121-2846-1-git-send-email-j-stiffler@ti.com>
+References: <1458838121-2846-1-git-send-email-j-stiffler@ti.com>
+MIME-Version: 1.0
+Subject: [PATCH 2/7] cppi-lld: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +47,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 20:26:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 24 Mar 2016 16:48:50 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: fido
-Commit: c93678aa08bc0df0f1f36a84afe48723406de58e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c93678aa08bc0df0f1f36a84afe48723406de58e
-
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Mar 23 01:58:49 2016 +0000
-
-pktlib: Upgrade to version 2.1.0.7
+* Fix linker option for linux example and test binaries
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/cppi-lld/cppi-lld.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- recipes-bsp/pktlib/pktlib_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
-index 9a45340..341391e 100644
---- a/recipes-bsp/pktlib/pktlib_git.bb
-+++ b/recipes-bsp/pktlib/pktlib_git.bb
-@@ -9,14 +9,14 @@ PKTLIB_GIT_URI = "git://git.ti.com/keystone-rtos/pktlib.git"
- PKTLIB_GIT_PROTOCOL = "git"
- PKTLIB_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
+index cee7142..b1f3f41 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld.inc
++++ b/recipes-bsp/cppi-lld/cppi-lld.inc
+@@ -9,15 +9,15 @@ CPPI_LLD_GIT_PROTOCOL = "git"
+ CPPI_LLD_GIT_BRANCH = "master"
+ CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
  
--# Corresponds to DEV.PKTLIB.2.1.0.6
--PKTLIB_SRCREV = "2aa4843d79c344c2d76d0d5d32ecda3d7213d514"
-+# Corresponds to DEV.PKTLIB.2.1.0.7
-+PKTLIB_SRCREV = "22f66931964c25f83d1971f7eb78902d10c17d8a"
+-# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12"
+-CPPI_LLD_SRCREV = "1dc105ad256c49fbd1a92a0a27a27a34dae85e56"
++# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12A"
++CPPI_LLD_SRCREV = "6a1d2891b3de9891dea71a069a261c6368209413"
  
- BRANCH = "${PKTLIB_GIT_BRANCH}"
- SRC_URI = "${PKTLIB_GIT_URI};protocol=${PKTLIB_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${PKTLIB_SRCREV}"
+ BRANCH = "${CPPI_LLD_GIT_BRANCH}"
+ SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
--PV = "2.1.0.6"
-+PV = "2.1.0.7"
- PR = "r0"
+ SRCREV = "${CPPI_LLD_SRCREV}"
+ PV = "02.01.00.12"
+-INC_PR = "r0"
++INC_PR = "r1"
  
- S = "${WORKDIR}/git/ti/runtime/pktlib"
+ DEVICELIST = "k2h k2k k2l k2e"
+ DEVICELIST_k2hk-evm = "k2h k2k"
+-- 
+1.9.1
 
 
