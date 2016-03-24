@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2A96E00C46; Thu, 24 Mar 2016 09:48:50 -0700 (PDT)
+	id B0211E00C45; Thu, 24 Mar 2016 09:48:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,29 +12,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	high *      trust
 	*      [192.94.94.41 listed in list.dnswl.org]
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55B7DE00AEA
-	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 09:48:45 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2OGmjwv025509
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56F4FE00B70
+	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 09:48:46 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2OGmj2o025512
 	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 11:48:45 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2OGmiwl031549
-	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 11:48:44 -0500
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2OGmjGA018762
+	for <meta-ti@yoctoproject.org>; Thu, 24 Mar 2016 11:48:45 -0500
 Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
 	Thu, 24 Mar 2016 11:48:44 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u2OGmhsk013865;	Thu, 24 Mar 2016 11:48:44 -0500
+	u2OGmhsm013865;	Thu, 24 Mar 2016 11:48:45 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 24 Mar 2016 12:48:36 -0400
-Message-ID: <1458838121-2846-3-git-send-email-j-stiffler@ti.com>
+Date: Thu, 24 Mar 2016 12:48:38 -0400
+Message-ID: <1458838121-2846-5-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1458838121-2846-1-git-send-email-j-stiffler@ti.com>
 References: <1458838121-2846-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/7] cppi-lld: Bump SRCREV for fix
+Subject: [PATCH 4/7] qmss-lld: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,27 +54,27 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/cppi-lld/cppi-lld.inc | 6 +++---
+ recipes-bsp/qmss-lld/qmss-lld.inc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
-index cee7142..b1f3f41 100644
---- a/recipes-bsp/cppi-lld/cppi-lld.inc
-+++ b/recipes-bsp/cppi-lld/cppi-lld.inc
-@@ -9,15 +9,15 @@ CPPI_LLD_GIT_PROTOCOL = "git"
- CPPI_LLD_GIT_BRANCH = "master"
- CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index 2395a4d..ed560c8 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -9,15 +9,15 @@ QMSS_LLD_GIT_PROTOCOL = "git"
+ QMSS_LLD_GIT_BRANCH = "master"
+ QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
  
--# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12"
--CPPI_LLD_SRCREV = "1dc105ad256c49fbd1a92a0a27a27a34dae85e56"
-+# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12A"
-+CPPI_LLD_SRCREV = "6a1d2891b3de9891dea71a069a261c6368209413"
+-# commit ID corresponding to DEV.QMSS_LLD.02.01.00.14
+-QMSS_LLD_SRCREV = "4cc3a3f1bcddfc19e2e7d8dd4208ca215e7ecbae"
++# commit ID corresponding to DEV.QMSS_LLD.02.01.00.14A
++QMSS_LLD_SRCREV = "8fc6a846e509d6ad8499e1de68abd912d7947069"
  
- BRANCH = "${CPPI_LLD_GIT_BRANCH}"
- SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH ="${QMSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${QMSS_LLD_SRCREV}"
  
- SRCREV = "${CPPI_LLD_SRCREV}"
- PV = "02.01.00.12"
+ PV = "02.01.00.14"
 -INC_PR = "r0"
 +INC_PR = "r1"
  
