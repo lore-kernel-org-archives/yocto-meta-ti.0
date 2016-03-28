@@ -1,41 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8968DE00BE9; Mon, 28 Mar 2016 11:12:21 -0700 (PDT)
+	id 8A3E5E00AE4; Mon, 28 Mar 2016 14:23:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB78BE0079A
-	for <meta-ti@yoctoproject.org>; Mon, 28 Mar 2016 11:12:16 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u2SICFEf023801
-	for <meta-ti@yoctoproject.org>; Mon, 28 Mar 2016 13:12:15 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2SICF7G027034
-	for <meta-ti@yoctoproject.org>; Mon, 28 Mar 2016 13:12:15 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 28 Mar 2016 13:12:14 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u2SICE4F019368;
-	Mon, 28 Mar 2016 13:12:14 -0500
-Message-ID: <56F973FE.7080506@ti.com>
-Date: Mon, 28 Mar 2016 14:12:14 -0400
-From: Jacob Stiffler <j-stiffler@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
-MIME-Version: 1.0
-To: Justin Sobota <jsobota@ti.com>, <meta-ti@yoctoproject.org>
-References: <1459188448-12123-1-git-send-email-jsobota@ti.com>
-In-Reply-To: <1459188448-12123-1-git-send-email-jsobota@ti.com>
-Subject: Re: [PATCH] ti-ccsv6-native: Upgrade to version 6.1.2.00015
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D4E0E008EE
+	for <meta-ti@yoctoproject.org>; Mon, 28 Mar 2016 14:23:02 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 46D6552A81; Mon, 28 Mar 2016 21:23:01 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160328212301.46D6552A81@arago-project.org>
+Date: Mon, 28 Mar 2016 21:23:01 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Tag ti2015.03 : Denys Dmytriyenko : LCPD Core SDK release ti2015.03
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,36 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2016 18:12:21 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Mar 2016 21:23:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-ACK
+Module: meta-ti
+Branch: refs/tags/ti2015.03
+Tag:    9c38dd07b85ab46c5d9ce1a5a4e2c75878493765
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=9c38dd07b85ab46c5d9ce1a5a4e2c75878493765
 
-On 3/28/2016 2:07 PM, Justin Sobota wrote:
-> Signed-off-by: Justin Sobota <jsobota@ti.com>
-> ---
->   ...-ccsv6-native_6.1.1.00022.bb => ti-ccsv6-native_6.1.2.00015.bb} |    4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename recipes-ti/devtools/{ti-ccsv6-native_6.1.1.00022.bb => ti-ccsv6-native_6.1.2.00015.bb} (89%)
->
-> diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
-> similarity index 89%
-> rename from recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
-> rename to recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
-> index c5a4f33..f533c0d 100644
-> --- a/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
-> +++ b/recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
-> @@ -20,8 +20,8 @@ BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
->   TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
->   TI_BIN_UNPK_CMDS = ""
->   
-> -SRC_URI[ccsv6.md5sum] = "648d5f41e8a7a93c16d51cd34045ba15"
-> -SRC_URI[ccsv6.sha256sum] = "b82958a125d5c6bea07cfc12a6f2a77c45e1560217c1aac02194b6e3408c5105"
-> +SRC_URI[ccsv6.md5sum] = "cfe5a759068809df5b5926dfc9889683"
-> +SRC_URI[ccsv6.sha256sum] = "6c25c046898812dcc72f08af512321bb4c9833ab932e4792560e14c13fbc7dc5"
->   
->   do_install() {
->       install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
+Tagger: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Mar 28 17:22:19 2016 -0400
 
+LCPD Core SDK release ti2015.03
 
