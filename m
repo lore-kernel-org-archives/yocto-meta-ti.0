@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 51473E00C87; Thu, 31 Mar 2016 08:47:28 -0700 (PDT)
+	id AEA3FE00C8D; Thu, 31 Mar 2016 08:47:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=0.4 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  1.3 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6717E00C92
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5DF5E00C89
 	for <meta-ti@yoctoproject.org>; Thu, 31 Mar 2016 08:47:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1686A52AB9; Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
+	id 326A452AE2; Thu, 31 Mar 2016 15:47:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160331154716.1686A52AB9@arago-project.org>
-Date: Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
+Message-Id: <20160331154717.326A452AE2@arago-project.org>
+Date: Thu, 31 Mar 2016 15:47:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : nwal-lld: Bump SRCREV for fix
+Subject: Justin Sobota : ti-ccsv6-native: Upgrade to version 6.1.2.00015
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,48 +38,40 @@ X-List-Received-Date: Thu, 31 Mar 2016 15:47:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 07a53bb22f00bcb72d69541829cd28bd84cc2e69
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=07a53bb22f00bcb72d69541829cd28bd84cc2e69
+Branch: master
+Commit: effb07cd5df305e5ef8351cccf0fbc518891905d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=effb07cd5df305e5ef8351cccf0fbc518891905d
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Mar 24 22:48:40 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Tue Mar 29 00:07:28 2016 +0000
 
-nwal-lld: Bump SRCREV for fix
+ti-ccsv6-native: Upgrade to version 6.1.2.00015
 
-* Update Osal_cache_op_measure to take pointer to a double long to
-  match with the hplib
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ ...1.1.00022.bb => ti-ccsv6-native_6.1.2.00015.bb} |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-index eb220f8..81450ff 100644
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -8,15 +8,15 @@ NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
- NWAL_LLD_GIT_PROTOCOL = "git"
- NWAL_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
+similarity index 89%
+rename from recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
+rename to recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
+index c5a4f33..f533c0d 100644
+--- a/recipes-ti/devtools/ti-ccsv6-native_6.1.1.00022.bb
++++ b/recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
+@@ -20,8 +20,8 @@ BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
+ TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+ TI_BIN_UNPK_CMDS = ""
  
--# Below commit ID corresponds to "DEV.NWAL.02.01.00.10"
--NWAL_LLD_SRCREV = "fc14159765777305a234e732b6170d025394250a"
-+# Below commit ID corresponds to "DEV.NWAL.02.01.00.10A"
-+NWAL_LLD_SRCREV = "e7ed8c5abc4b93b99a5f45699eef8f3b8ca51d1e"
+-SRC_URI[ccsv6.md5sum] = "648d5f41e8a7a93c16d51cd34045ba15"
+-SRC_URI[ccsv6.sha256sum] = "b82958a125d5c6bea07cfc12a6f2a77c45e1560217c1aac02194b6e3408c5105"
++SRC_URI[ccsv6.md5sum] = "cfe5a759068809df5b5926dfc9889683"
++SRC_URI[ccsv6.sha256sum] = "6c25c046898812dcc72f08af512321bb4c9833ab932e4792560e14c13fbc7dc5"
  
- BRANCH = "${NWAL_LLD_GIT_BRANCH}"
- SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${NWAL_LLD_SRCREV}"
- 
- PV = "02.01.00.10"
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/nwal"
+ do_install() {
+     install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
 
 
