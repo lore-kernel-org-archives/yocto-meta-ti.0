@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 501EAE00C9B; Thu, 31 Mar 2016 08:47:28 -0700 (PDT)
+	id 51473E00C87; Thu, 31 Mar 2016 08:47:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4D58E00C8F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6717E00C92
 	for <meta-ti@yoctoproject.org>; Thu, 31 Mar 2016 08:47:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6A4F152AD0; Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
+	id 1686A52AB9; Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160331154716.6A4F152AD0@arago-project.org>
+Message-Id: <20160331154716.1686A52AB9@arago-project.org>
 Date: Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Bump SRCREV for fix
+Subject: Jacob Stiffler : nwal-lld: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,48 +37,48 @@ X-List-Received-Date: Thu, 31 Mar 2016 15:47:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b4ba1e936ec4308090787c3fd5c4aab274fc5483
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4ba1e936ec4308090787c3fd5c4aab274fc5483
+Branch: fido
+Commit: 07a53bb22f00bcb72d69541829cd28bd84cc2e69
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=07a53bb22f00bcb72d69541829cd28bd84cc2e69
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Mar 24 22:48:35 2016 +0000
+Date:   Thu Mar 24 22:48:40 2016 +0000
 
-common-csl-ip: Bump SRCREV for fix
+nwal-lld: Bump SRCREV for fix
 
-* The Klockwork warnings removal change is reverted back.
+* Update Osal_cache_op_measure to take pointer to a double long to
+  match with the hplib
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip.inc |    6 +++---
+ recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 6243729..70d963b 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index eb220f8..81450ff 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -8,15 +8,15 @@ NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
+ NWAL_LLD_GIT_PROTOCOL = "git"
+ NWAL_LLD_GIT_BRANCH = "master"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.10"
+-NWAL_LLD_SRCREV = "fc14159765777305a234e732b6170d025394250a"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.10A"
++NWAL_LLD_SRCREV = "e7ed8c5abc4b93b99a5f45699eef8f3b8ca51d1e"
  
--PV = "3.3.0.2B"
-+PV = "3.3.0.2C"
- INC_PR = "r0"
+ BRANCH = "${NWAL_LLD_GIT_BRANCH}"
+ SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${NWAL_LLD_SRCREV}"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
+ PV = "02.01.00.10"
+-INC_PR = "r0"
++INC_PR = "r1"
  
--# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02B
--CSL_SRCREV = "7fa7fa8a23189dd79921392fd4942a21610ea93c"
-+# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02C
-+CSL_SRCREV = "dc8aac00e86cd434865d750666ac551f2e238263"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/nwal"
 
 
