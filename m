@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5D357E00C80; Thu, 31 Mar 2016 08:47:24 -0700 (PDT)
+	id 67512E00C9A; Thu, 31 Mar 2016 08:47:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B20FE00C80
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BC1EE00C81
 	for <meta-ti@yoctoproject.org>; Thu, 31 Mar 2016 08:47:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 89FB652AD2; Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
+	id ABA1852AD5; Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160331154716.89FB652AD2@arago-project.org>
+Message-Id: <20160331154716.ABA1852AD5@arago-project.org>
 Date: Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : cppi-lld: Bump SRCREV for fix
+Subject: Jacob Stiffler : pa-lld: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,18 +33,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2016 15:47:24 -0000
+X-List-Received-Date: Thu, 31 Mar 2016 15:47:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: cdbd63bb1ac9dd3d68a689e3294e0ff0bc3b9c38
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cdbd63bb1ac9dd3d68a689e3294e0ff0bc3b9c38
+Commit: f9654a93f57026497d7884c182396decfc0ed5e6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9654a93f57026497d7884c182396decfc0ed5e6
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Mar 24 22:48:36 2016 +0000
+Date:   Thu Mar 24 22:48:37 2016 +0000
 
-cppi-lld: Bump SRCREV for fix
+pa-lld: Bump SRCREV for fix
 
 * Fix linker option for linux example and test binaries
 
@@ -53,31 +53,32 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cppi-lld/cppi-lld.inc |    6 +++---
+ recipes-bsp/pa-lld/pa-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
-index cee7142..b1f3f41 100644
---- a/recipes-bsp/cppi-lld/cppi-lld.inc
-+++ b/recipes-bsp/cppi-lld/cppi-lld.inc
-@@ -9,15 +9,15 @@ CPPI_LLD_GIT_PROTOCOL = "git"
- CPPI_LLD_GIT_BRANCH = "master"
- CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index b45d3bc..c083bc2 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -9,8 +9,8 @@ PA_LLD_GIT_PROTOCOL = "git"
+ PA_LLD_GIT_BRANCH = "master"
+ PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
  
--# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12"
--CPPI_LLD_SRCREV = "1dc105ad256c49fbd1a92a0a27a27a34dae85e56"
-+# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12A"
-+CPPI_LLD_SRCREV = "6a1d2891b3de9891dea71a069a261c6368209413"
+-# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.08"
+-PA_LLD_SRCREV = "43badac6ff6269e9449fb03fb7af985e61ab723c"
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.08A"
++PA_LLD_SRCREV = "9294e42fd5763555c28e46b51246bab439fd552e"
  
- BRANCH = "${CPPI_LLD_GIT_BRANCH}"
- SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${PA_LLD_GIT_BRANCH}"
+ SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
+@@ -18,7 +18,7 @@ SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_L
+ SRCREV = "${PA_LLD_SRCREV}"
  
- SRCREV = "${CPPI_LLD_SRCREV}"
- PV = "02.01.00.12"
+ PV = "03.00.01.08"
 -INC_PR = "r0"
 +INC_PR = "r1"
  
- DEVICELIST = "k2h k2k k2l k2e"
- DEVICELIST_k2hk-evm = "k2h k2k"
+ S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+ 
 
 
