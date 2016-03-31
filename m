@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 45886E00C94; Thu, 31 Mar 2016 08:47:22 -0700 (PDT)
+	id 5A552E00C9D; Thu, 31 Mar 2016 08:47:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E59C9E00928
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8282E00C76
 	for <meta-ti@yoctoproject.org>; Thu, 31 Mar 2016 08:47:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BAF6852AB2; Thu, 31 Mar 2016 15:47:15 +0000 (UTC)
+	id C884152A8E; Thu, 31 Mar 2016 15:47:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160331154715.BAF6852AB2@arago-project.org>
+Message-Id: <20160331154715.C884152A8E@arago-project.org>
 Date: Thu, 31 Mar 2016 15:47:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Bump SRCREV for fix
+Subject: Jacob Stiffler : cppi-lld: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,52 +33,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2016 15:47:22 -0000
+X-List-Received-Date: Thu, 31 Mar 2016 15:47:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: a42d298b6267c074cb7729e038d04783d28203df
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a42d298b6267c074cb7729e038d04783d28203df
+Commit: bc83d82ac6576c5745dcce941bd83e75b26dcbf4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bc83d82ac6576c5745dcce941bd83e75b26dcbf4
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Mar 24 22:48:35 2016 +0000
+Date:   Thu Mar 24 22:48:36 2016 +0000
 
-common-csl-ip: Bump SRCREV for fix
+cppi-lld: Bump SRCREV for fix
 
-* The Klockwork warnings removal change is reverted back.
+* Fix linker option for linux example and test binaries
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip.inc |    6 +++---
+ recipes-bsp/cppi-lld/cppi-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 6243729..70d963b 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
+index cee7142..b1f3f41 100644
+--- a/recipes-bsp/cppi-lld/cppi-lld.inc
++++ b/recipes-bsp/cppi-lld/cppi-lld.inc
+@@ -9,15 +9,15 @@ CPPI_LLD_GIT_PROTOCOL = "git"
+ CPPI_LLD_GIT_BRANCH = "master"
+ CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+-# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12"
+-CPPI_LLD_SRCREV = "1dc105ad256c49fbd1a92a0a27a27a34dae85e56"
++# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.12A"
++CPPI_LLD_SRCREV = "6a1d2891b3de9891dea71a069a261c6368209413"
  
--PV = "3.3.0.2B"
-+PV = "3.3.0.2C"
- INC_PR = "r0"
+ BRANCH = "${CPPI_LLD_GIT_BRANCH}"
+ SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
+ SRCREV = "${CPPI_LLD_SRCREV}"
+ PV = "02.01.00.12"
+-INC_PR = "r0"
++INC_PR = "r1"
  
--# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02B
--CSL_SRCREV = "7fa7fa8a23189dd79921392fd4942a21610ea93c"
-+# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02C
-+CSL_SRCREV = "dc8aac00e86cd434865d750666ac551f2e238263"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+ DEVICELIST = "k2h k2k k2l k2e"
+ DEVICELIST_k2hk-evm = "k2h k2k"
 
 
