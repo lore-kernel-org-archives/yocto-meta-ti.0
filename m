@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4331CE00C95; Thu, 31 Mar 2016 08:47:22 -0700 (PDT)
+	id 45886E00C94; Thu, 31 Mar 2016 08:47:22 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E63E8E0092C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E59C9E00928
 	for <meta-ti@yoctoproject.org>; Thu, 31 Mar 2016 08:47:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E2B2F52AB7; Thu, 31 Mar 2016 15:47:15 +0000 (UTC)
+	id BAF6852AB2; Thu, 31 Mar 2016 15:47:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160331154715.E2B2F52AB7@arago-project.org>
+Message-Id: <20160331154715.BAF6852AB2@arago-project.org>
 Date: Thu, 31 Mar 2016 15:47:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : qmss-lld: Bump SRCREV for fix
+Subject: Jacob Stiffler : common-csl-ip: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: b0175fed0c1115551218fd17c6400b2e007c3fb2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b0175fed0c1115551218fd17c6400b2e007c3fb2
+Commit: a42d298b6267c074cb7729e038d04783d28203df
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a42d298b6267c074cb7729e038d04783d28203df
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Mar 24 22:48:38 2016 +0000
+Date:   Thu Mar 24 22:48:35 2016 +0000
 
-qmss-lld: Bump SRCREV for fix
+common-csl-ip: Bump SRCREV for fix
 
-* Fix linker option for linux example and test binaries
+* The Klockwork warnings removal change is reverted back.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/qmss-lld/qmss-lld.inc |    6 +++---
+ recipes-bsp/common-csl-ip/common-csl-ip.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
-index 2395a4d..ed560c8 100644
---- a/recipes-bsp/qmss-lld/qmss-lld.inc
-+++ b/recipes-bsp/qmss-lld/qmss-lld.inc
-@@ -9,15 +9,15 @@ QMSS_LLD_GIT_PROTOCOL = "git"
- QMSS_LLD_GIT_BRANCH = "master"
- QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index 6243729..70d963b 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
--# commit ID corresponding to DEV.QMSS_LLD.02.01.00.14
--QMSS_LLD_SRCREV = "4cc3a3f1bcddfc19e2e7d8dd4208ca215e7ecbae"
-+# commit ID corresponding to DEV.QMSS_LLD.02.01.00.14A
-+QMSS_LLD_SRCREV = "8fc6a846e509d6ad8499e1de68abd912d7947069"
+ COMPATIBLE_MACHINE = "keystone|dra7xx"
  
- BRANCH ="${QMSS_LLD_GIT_BRANCH}"
- SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${QMSS_LLD_SRCREV}"
+-PV = "3.3.0.2B"
++PV = "3.3.0.2C"
+ INC_PR = "r0"
  
- PV = "02.01.00.14"
--INC_PR = "r0"
-+INC_PR = "r1"
+ CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "master"
+ CSL_GIT_DESTSUFFIX = "git"
  
- DEVICELIST = "k2h k2k k2l k2e"
- DEVICELIST_k2hk-evm = "k2h k2k"
+-# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02B
+-CSL_SRCREV = "7fa7fa8a23189dd79921392fd4942a21610ea93c"
++# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02C
++CSL_SRCREV = "dc8aac00e86cd434865d750666ac551f2e238263"
+ 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 
 
