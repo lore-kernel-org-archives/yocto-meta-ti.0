@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C0126E00C86; Thu, 31 Mar 2016 08:47:27 -0700 (PDT)
+	id BE2BCE00C9B; Thu, 31 Mar 2016 08:47:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5051E00C91
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BDA2E00C86
 	for <meta-ti@yoctoproject.org>; Thu, 31 Mar 2016 08:47:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E813B52ADF; Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
+	id 0DFD152AE0; Thu, 31 Mar 2016 15:47:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160331154716.E813B52ADF@arago-project.org>
-Date: Thu, 31 Mar 2016 15:47:16 +0000 (UTC)
+Message-Id: <20160331154717.0DFD152AE0@arago-project.org>
+Date: Thu, 31 Mar 2016 15:47:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : sa-lld: Bump SRCREV for fix
+Subject: Jacob Stiffler : nwal-lld: Bump SRCREV for fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: fbb8f98e2694cff83bde91473d86cc939225abc5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fbb8f98e2694cff83bde91473d86cc939225abc5
+Commit: f98eaf83528ff3f08765850f995c26027c3e8c86
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f98eaf83528ff3f08765850f995c26027c3e8c86
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Mar 24 22:48:39 2016 +0000
+Date:   Thu Mar 24 22:48:40 2016 +0000
 
-sa-lld: Bump SRCREV for fix
+nwal-lld: Bump SRCREV for fix
 
-* Fix linker option for linux example and test binaries
+* Update Osal_cache_op_measure to take pointer to a double long to
+  match with the hplib
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/sa-lld/sa-lld.inc |    6 +++---
+ recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
-index 3e3392b..3c698b6 100644
---- a/recipes-bsp/sa-lld/sa-lld.inc
-+++ b/recipes-bsp/sa-lld/sa-lld.inc
-@@ -8,14 +8,14 @@ SA_LLD_GIT_PROTOCOL = "git"
- SA_LLD_GIT_BRANCH = "master"
- SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index eb220f8..81450ff 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -8,15 +8,15 @@ NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
+ NWAL_LLD_GIT_PROTOCOL = "git"
+ NWAL_LLD_GIT_BRANCH = "master"
  
--# Following commit DEV.SA_LLD.03.00.00.13
--SA_LLD_SRCREV = "ddde4d990482c8f727411a014512bc7959ab2c05"
-+# Following commit DEV.SA_LLD.03.00.00.13A
-+SA_LLD_SRCREV = "5918d9a519789c34368388c49869cb857d6255f7"
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.10"
+-NWAL_LLD_SRCREV = "fc14159765777305a234e732b6170d025394250a"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.10A"
++NWAL_LLD_SRCREV = "e7ed8c5abc4b93b99a5f45699eef8f3b8ca51d1e"
  
- BRANCH = "${SA_LLD_GIT_BRANCH}"
- SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${SA_LLD_SRCREV}"
+ BRANCH = "${NWAL_LLD_GIT_BRANCH}"
+ SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${NWAL_LLD_SRCREV}"
  
- PV = "03.00.00.13"
+ PV = "02.01.00.10"
 -INC_PR = "r0"
 +INC_PR = "r1"
  
- S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/nwal"
 
 
