@@ -1,40 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 28E3DE00CA3; Fri,  1 Apr 2016 12:20:58 -0700 (PDT)
+	id 0D2EFE00C9B; Fri,  1 Apr 2016 12:23:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP,
-	but had no rDNS
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [206.46.173.9 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 13D56E00AD7
-	for <meta-ti@yoctoproject.org>; Fri,  1 Apr 2016 12:20:53 -0700 (PDT)
-Received: from vz-proxy-l002.mx.aol.com ([64.236.82.153])
-	by vms173009.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O4Y001CQZ2DFY50@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 01 Apr 2016 14:20:37 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
-	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=y8WHj_DQv0qotnjlKgkA:9
-Received: by 100.15.86.14 with SMTP id 02572332; Fri, 01 Apr 2016 19:20:37 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C4AED161F56;	Fri,
-	1 Apr 2016 15:20:36 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C045FE00911
+	for <meta-ti@yoctoproject.org>; Fri,  1 Apr 2016 12:23:06 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0938D52976; Fri,  1 Apr 2016 19:23:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 01 Apr 2016 15:20:36 -0400
-Message-id: <1459538436-2414-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] linux-ti-staging: add latest 4.4 version
+Message-Id: <20160401192305.0938D52976@arago-project.org>
+Date: Fri,  1 Apr 2016 19:23:05 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: add latest 4.4 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,31 +33,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 19:20:58 -0000
+X-List-Received-Date: Fri, 01 Apr 2016 19:23:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: c012770e13bd8aacda60d101b4fc4f33b910a3b4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c012770e13bd8aacda60d101b4fc4f33b910a3b4
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Apr  2 01:20:36 2016 +0000
+
+linux-ti-staging: add latest 4.4 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- .../linux/linux-ti-staging-4.4/defconfig           |  1 +
- .../linux/linux-ti-staging-4.4/keystone/defconfig  |  1 +
- .../linux/linux-ti-staging-rt-4.4/defconfig        |  1 +
- .../linux-ti-staging-rt-4.4/keystone/defconfig     |  1 +
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb    |  9 +++
- .../linux/linux-ti-staging-systest-4.4/defconfig   |  1 +
- .../keystone/defconfig                             |  1 +
- .../linux/linux-ti-staging-systest_4.4.bb          |  5 ++
- recipes-kernel/linux/linux-ti-staging_4.4.bb       | 91 ++++++++++++++++++++++
- 9 files changed, 111 insertions(+)
- create mode 100644 recipes-kernel/linux/linux-ti-staging-4.4/defconfig
- create mode 100644 recipes-kernel/linux/linux-ti-staging-4.4/keystone/defconfig
- create mode 100644 recipes-kernel/linux/linux-ti-staging-rt-4.4/defconfig
- create mode 100644 recipes-kernel/linux/linux-ti-staging-rt-4.4/keystone/defconfig
- create mode 100644 recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
- create mode 100644 recipes-kernel/linux/linux-ti-staging-systest-4.4/defconfig
- create mode 100644 recipes-kernel/linux/linux-ti-staging-systest-4.4/keystone/defconfig
- create mode 100644 recipes-kernel/linux/linux-ti-staging-systest_4.4.bb
- create mode 100644 recipes-kernel/linux/linux-ti-staging_4.4.bb
+
+ .../linux/linux-ti-staging-4.4/defconfig           |    1 +
+ .../linux/linux-ti-staging-4.4/keystone/defconfig  |    1 +
+ .../linux/linux-ti-staging-rt-4.4/defconfig        |    1 +
+ .../linux-ti-staging-rt-4.4/keystone/defconfig     |    1 +
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb    |    9 ++
+ .../linux/linux-ti-staging-systest-4.4/defconfig   |    1 +
+ .../keystone/defconfig                             |    1 +
+ .../linux/linux-ti-staging-systest_4.4.bb          |    5 +
+ recipes-kernel/linux/linux-ti-staging_4.4.bb       |   91 ++++++++++++++++++++
+ 9 files changed, 111 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging-4.4/defconfig b/recipes-kernel/linux/linux-ti-staging-4.4/defconfig
 new file mode 100644
@@ -238,7 +226,5 @@ index 0000000..ffd074a
 +KERNEL_GIT_PROTOCOL = "git"
 +SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
 +            file://defconfig"
--- 
-2.2.0
 
 
