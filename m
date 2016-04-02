@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5E37FE00CA5; Fri,  1 Apr 2016 20:41:47 -0700 (PDT)
+	id 6DCC9E00A9C; Fri,  1 Apr 2016 20:41:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1D58E00A9C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1D60E00BB9
 	for <meta-ti@yoctoproject.org>; Fri,  1 Apr 2016 20:41:42 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 231F552976; Sat,  2 Apr 2016 03:41:41 +0000 (UTC)
+	id 383BA52981; Sat,  2 Apr 2016 03:41:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160402034141.231F552976@arago-project.org>
+Message-Id: <20160402034141.383BA52981@arago-project.org>
 Date: Sat,  2 Apr 2016 03:41:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update DBT list for AM4
+Subject: Denys Dmytriyenko : HACK: ti-xdctools, ti-xdais: disable stripping for now
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,33 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 3d61a1932eda7569191b24860d3794c002bf7e12
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3d61a1932eda7569191b24860d3794c002bf7e12
+Commit: 58b9860b511b8d9537c11f374decd32593aacdd6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58b9860b511b8d9537c11f374decd32593aacdd6
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Apr  2 07:21:10 2016 +0000
+Date:   Sat Apr  2 09:40:21 2016 +0000
 
-linux-ti-staging: update DBT list for AM4
+HACK: ti-xdctools, ti-xdais: disable stripping for now
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.4.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-ti/devtools/ti-xdctools_3.32.00.06.bb |    2 ++
+ recipes-ti/xdais/ti-xdais_7.24.00.04.bb       |    2 ++
+ 2 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 8bdec9e..0f8452d 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -46,7 +46,7 @@ RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
--KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
-+KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
- KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-revc.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
+diff --git a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+index 19bbe5d..6db742a 100644
+--- a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
++++ b/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+@@ -1,3 +1,5 @@
++INHIBIT_PACKAGE_STRIP = "1"
++
+ require recipes-ti/devtools/ti-xdctools-core.inc
+ 
+ PV = "3_32_00_06"
+diff --git a/recipes-ti/xdais/ti-xdais_7.24.00.04.bb b/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
+index 8148f73..6c81960 100644
+--- a/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
++++ b/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
+@@ -1,3 +1,5 @@
++INHIBIT_PACKAGE_STRIP = "1"
++
+ require ti-xdais.inc
+ 
+ PV = "7_24_00_04"
 
 
