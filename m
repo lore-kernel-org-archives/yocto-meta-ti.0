@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 86059E00CCC; Fri,  1 Apr 2016 14:36:28 -0700 (PDT)
+	id BC083E00872; Fri,  1 Apr 2016 18:21:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.11 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E071E00C9B
-	for <meta-ti@yoctoproject.org>; Fri,  1 Apr 2016 14:36:18 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 5280752AE9; Fri,  1 Apr 2016 21:36:17 +0000 (UTC)
+Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
+	[206.46.173.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92903E0078E
+	for <meta-ti@yoctoproject.org>; Fri,  1 Apr 2016 18:21:16 -0700 (PDT)
+Received: from vz-proxy-l003.mx.aol.com ([64.236.82.150])
+	by vms173011.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O4Z003C7FRBS050@vms173011.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 01 Apr 2016 20:21:11 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=0tGySW8maceftNfHUCUfCA==:117
+	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=sum2OPTCQWkwUffUPfUA:9
+Received: by 100.15.86.14 with SMTP id 378f19a4; Sat, 02 Apr 2016 01:21:11 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id C135E161F77;	Fri,
+	1 Apr 2016 21:21:10 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160401213617.5280752AE9@arago-project.org>
-Date: Fri,  1 Apr 2016 21:36:17 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging 4.4: add PRU Ethernet FW dependency for AM4
+Date: Fri, 01 Apr 2016 21:21:10 -0400
+Message-id: <1459560070-25250-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] linux-ti-staging: update DBT list for AM4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +46,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 21:36:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 02 Apr 2016 01:21:21 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 083919451b525e15ec7a93333e82eb441a2209c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=083919451b525e15ec7a93333e82eb441a2209c8
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Apr  2 03:17:35 2016 +0000
-
-linux-ti-staging 4.4: add PRU Ethernet FW dependency for AM4
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
-
- recipes-kernel/linux/linux-ti-staging_4.4.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index ffd074a..8bdec9e 100644
+index 8bdec9e..0f8452d 100644
 --- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -41,6 +41,7 @@ RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
- 
- # Add run-time dependency for PRU Ethernet firmware to the rootfs
- RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
- 
+@@ -46,7 +46,7 @@ RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
  # Default is to package all dtb files for ti33x devices unless building
  # for the specific beaglebone machine.
-@@ -73,7 +74,7 @@ SRCREV = "08b8a2e93fac2471992ea3e110a3683a00f39d74"
- PV = "4.4.6+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
+-KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
++KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+ KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-revc.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
+-- 
+2.2.0
 
 
