@@ -1,26 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0E3A5E00E7B; Tue, 12 Apr 2016 14:48:37 -0700 (PDT)
+	id BEAF5E00EBA; Tue, 12 Apr 2016 16:08:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.9 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E02BCE00522
-	for <meta-ti@yoctoproject.org>; Tue, 12 Apr 2016 14:48:32 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6856D52A98; Tue, 12 Apr 2016 21:48:31 +0000 (UTC)
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C24EE00522
+	for <meta-ti@yoctoproject.org>; Tue, 12 Apr 2016 16:08:51 -0700 (PDT)
+Received: from vz-proxy-l008.mx.aol.com ([64.236.82.153])
+	by vms173009.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O5J00DG3MYQQC90@vms173009.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 12 Apr 2016 18:08:51 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=mDV3o1hIAAAA:8
+	a=q2PMpzx2yoqiNGsodZUA:9 a=XN_1ebidA8EA:10
+Received: by 100.15.86.14 with SMTP id 082e199c; Tue, 12 Apr 2016 23:08:50 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 51C33161F9C;	Tue,
+	12 Apr 2016 19:08:50 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160412214831.6856D52A98@arago-project.org>
-Date: Tue, 12 Apr 2016 21:48:31 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.7
+Date: Tue, 12 Apr 2016 19:08:49 -0400
+Message-id: <1460502529-16092-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] iqn2-lld: fix -march gcc flag, as cortex-a15 belongs to armv7ve
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,55 +47,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Apr 2016 21:48:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 12 Apr 2016 23:08:55 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 88264372d0687b645cf93fd96cc8861e3c5356f0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=88264372d0687b645cf93fd96cc8861e3c5356f0
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Apr 13 03:11:58 2016 +0000
-
-linux-ti-staging: update to 4.4.7
+https://gcc.gnu.org/ml/gcc-cvs/2014-01/msg00982.html
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/iqn2-lld/iqn2-lld_git.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 21b4392..af7e352 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/iqn2-lld/iqn2-lld_git.bb b/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
+index 4e68116..40a8ea7 100644
+--- a/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
++++ b/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
+@@ -8,6 +8,10 @@ PR = "${INC_PR}.0"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
  
--SRCREV = "0d355dc80c8c72d048c603c5e23d29a3d018c58b"
-+SRCREV = "01711ca3dbed322591d9e0c2c20eb57afa2110e7"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 0f8452d..4d4c14a 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -70,11 +70,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.4.y"
- 
--SRCREV = "08b8a2e93fac2471992ea3e110a3683a00f39d74"
--PV = "4.4.6+git${SRCPV}"
-+SRCREV = "a4f797e3abb23234fb1fdf6694faaf91822f1a1c"
-+PV = "4.4.7+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
++do_configure () {
++	sed -i -e 's/march=armv7-a/march=armv7ve/' build/armv7/libiqn2_aearmv7.mk
++}
++
+ do_compile () {
+ 	oe_runmake clean
+ 	oe_runmake lib
+-- 
+2.2.0
 
 
