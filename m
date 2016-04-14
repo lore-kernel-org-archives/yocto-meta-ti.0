@@ -1,56 +1,60 @@
-Return-Path: <shoghi@willowglen.asia>
+Return-Path: <phani.gadupudi@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 03D84E00D07; Thu, 14 Apr 2016 00:34:22 -0700 (PDT)
+	id A869EE00C65; Thu, 14 Apr 2016 16:21:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, HTML_MESSAGE, RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [209.85.161.179 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (phani.gadupudi[at]gmail.com)
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-yw0-f179.google.com (mail-yw0-f179.google.com
-	[209.85.161.179])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6AD51E00833
-	for <meta-ti@yoctoproject.org>; Thu, 14 Apr 2016 00:34:19 -0700 (PDT)
-Received: by mail-yw0-f179.google.com with SMTP id d68so95590264ywe.1
-	for <meta-ti@yoctoproject.org>; Thu, 14 Apr 2016 00:34:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=willowglen-asia.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:date:message-id:subject:from:to;
-	bh=Epyq63KlY0GjlCYEL8v1tR7Qjvc1jM4ZizIy3Jyo5KQ=;
-	b=f9Z6+nlwE/92L4Kd4dChOFtu7k82SucKWEXYx0MUTTQZoAe4AQgnNO0uF6uxKFNB2K
-	Y/Q/+RObnHbxyjQVYZf21CISfYRbbNk92hyQQmr1ZXOPRhSAOwY5ETKf9QybUlLd4cF9
-	1fWtE5ug4J7VQbjyWCFw//8lgRJrNqvuqxESFFxB5OwzxIWiKgaAPV5gmAmDOovP64JD
-	6hkUrG0J88OZ61Z6UVTeAn2D8glaq4L6+d2R4bnJIksaFXCueSR2H3rGOk4QfXSC6jHP
-	mTYRLiTWqqKkI1P154rrICMsctH2fG0nyrTlqenD+aLooJvgRcqPyUKDIcgVr7iuiXXj
-	P57A==
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.215.45 listed in list.dnswl.org]
+Received: from mail-lf0-f45.google.com (mail-lf0-f45.google.com
+	[209.85.215.45])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24DBBE007C5
+	for <meta-ti@yoctoproject.org>; Thu, 14 Apr 2016 16:21:48 -0700 (PDT)
+Received: by mail-lf0-f45.google.com with SMTP id g184so126726965lfb.3
+	for <meta-ti@yoctoproject.org>; Thu, 14 Apr 2016 16:21:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=HaDwzDy87Ts62THUUSwiHRsQD6r+mGSHbdta2xUVEbs=;
+	b=h2m0YBepBq5JsVEhRN8B8x2sjtXs9DprSaXC5FoRXJOJh98Lzd5jnY9/ly/FoNXe17
+	rXySIvLoq3XeeVzcquc9T5zlSR7pljBNdpRXLhYnQFi9D8nNEMpPt6n7/cMtSWMBXc0m
+	jOYhma8w0CZMp+Kxd0Yoqj6nXcJTdgbniLlCKOMcLn85a+ygG8swfcZv3ed/0qD94b6g
+	qZl62P2ORVxUX0S9JtPqiuhgSDI0Uog+zGBJitWCnLqI0z4c3EdjGoKCwR0ZJTaWusEU
+	CkTamDoh0lC3tFPA6rFDdbVZUO7+I5FRl2Py5VOvujJjd4eR9s2t63NdDh6Du6jLyaLQ
+	Dl7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
-	bh=Epyq63KlY0GjlCYEL8v1tR7Qjvc1jM4ZizIy3Jyo5KQ=;
-	b=Kqjhv36o/4uhMfrCOyr2OlSEa7omZcW5JYjCE0HDpoClfg20mMDq2eyD/Hvk5WraBX
-	KyttkkKt+zXse3pL5KsjgKG5sAiMKlwKxoDL56Pp37x7mZil6QvHYXFwmrOa4QZ44CgQ
-	+Vxc6sEs3AZIaa52zP4z4AjXh67gNwR5EN3krhca4JqSQP5evmIBAuzQI2P3mv7iDtYq
-	dKg4NbfOJZ9zynVhkc1Ugewr6TnAE0Rlp1o/Fqgxo9RQZFZIXL0lnZmEB5FgVF27ojIN
-	7z3t3bhmEqRPsn5c6nZwuT3aggWIW2ONsrLlLfrmUDdBJzc3rZNqrw1932D4FM2V+NIk
-	QlDw==
-X-Gm-Message-State: AOPr4FV6m7OiLGSYl5i07vjAsO9CJzUBkVo8B3GQDYPBG+UTGeCceqopJdlUbFynnKvHyEw1aEVKiOIB1QjpOg==
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=HaDwzDy87Ts62THUUSwiHRsQD6r+mGSHbdta2xUVEbs=;
+	b=ahpXUvaTB14HF0Udm6v9bJ7EXK/cgIYKTlv0/GiKKvzMCWLuJZLWiRod+3bopTFZjp
+	8hQqwqBVnNk5ujXDVv+WhGO5eH6IPaAPJpen1xEqutjKN1JQsBQiilhDZoqoMkj1mmpC
+	Xb8eU+sJhmNVo9TxDlArqtpeQ2A0CslzcSBobSUE8TpN8m3RQyi3h7LyvIdE6+9NvT82
+	mDaMj52jfe+0tB6kL18E1f1kULYdGjBygCPzujsXPFdcMdjmCV9BIzK8nczB+HbKYOss
+	LEO0MNvUQPUgPh4rxa13T0rduabQ0bgowl9W/3JLrKETG1fpM+RM/GVIzLRnLrhl4/bV
+	hOdw==
+X-Gm-Message-State: AOPr4FVgsqzFyTfME/88HnaNycW3sDFsXak8/RjjDbEMhHYA0ss3A9d1q1KVPZM7qcWBQxIWGYWXZybWkvZNSQ==
+X-Received: by 10.25.170.211 with SMTP id t202mr7295739lfe.7.1460676106888;
+	Thu, 14 Apr 2016 16:21:46 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.37.217.207 with SMTP id q198mr7711762ybg.52.1460619259163;
-	Thu, 14 Apr 2016 00:34:19 -0700 (PDT)
-Received: by 10.129.93.215 with HTTP; Thu, 14 Apr 2016 00:34:19 -0700 (PDT)
-Message-ID: <CAFxUzqhs8+3i6+EM5FWu4d9V-sopT8pTF=BZV_Bj8aZJi3vHOA@mail.gmail.com>
-From: "Shoghi Effendi Narayanasamy (WMSC-HW)" <shoghi@willowglen.asia>
+Received: by 10.25.32.135 with HTTP; Thu, 14 Apr 2016 16:21:07 -0700 (PDT)
+From: Phani Gadupudi <phani.gadupudi@gmail.com>
+Message-ID: <CAGL6b8676nuyUEf20D7nJPpb5sDUqB6_d+8iPrqoy106uCkJtw@mail.gmail.com>
 To: meta-ti@yoctoproject.org
 X-Mailman-Approved-At: Fri, 23 Dec 2016 15:51:53 -0800
-Subject: meta-ti PRU packages + eudev missing recipe issues
+Subject: Beaglebone sato image - Not booting from SD
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -63,131 +67,161 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-Date: Thu, 14 Apr 2016 07:34:22 -0000
-X-Original-Date: Thu, 14 Apr 2016 15:34:19 +0800
-X-List-Received-Date: Thu, 14 Apr 2016 07:34:22 -0000
-Content-Type: multipart/alternative; boundary=001a114fd37618681405306cec0e
+Date: Thu, 14 Apr 2016 23:21:55 -0000
+X-Original-Date: Thu, 14 Apr 2016 19:21:07 -0400
+X-List-Received-Date: Thu, 14 Apr 2016 23:21:55 -0000
+Content-Type: multipart/alternative; boundary=001a114113fe7baddb05307a288c
 
---001a114fd37618681405306cec0e
+--001a114113fe7baddb05307a288c
 Content-Type: text/plain; charset=UTF-8
 
-hi all
+I followed the instructions from
+https://www.yoctoproject.org/downloads/bsps/jethro20/beaglebone and copied
+sato-image to SD card. But the image won't boot.
 
-im using am3359 running on a moduleboard (phytec-phycore), in which i need
-to compile and use the PRUSS package. im using yocto and followed a manual
-to install the the whole meta-ti package as an layer into my yocto source,
-but during executing the bitbake to produce the image i get the below
-error:-
+The problem is not with my board/SD card. I tried on a different set..same
+error pops.
 
-Error: no recipes available for:-
+*Version* : jethro
 
-/opt/PHYTEC_BSPs/yocto_ti/sources/poky/../meta-ti/recipes-core/udev/eudev/eudev_%.bbappend
+*A Note on how I partitioned my SD:*
 
-because of this error i also cant compile the PRU package.
+sudo fdisk -lu /dev/sdb
 
-i cloned the meta-ti into my source folder from here:-
+Disk /dev/sdb: 15.5 GB, 15523119104 bytes
+64 heads, 32 sectors/track, 14804 cylinders, total 30318592 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x000d842d
 
-http://layers.openembedded.org/layerindex/branch/master/layer/meta-ti/
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1   *        2048       67583       32768    c  W95 FAT32 (LBA)
+/dev/sdb2           67584    30318591    15125504   83  Linux
 
-the manual i followed to add meta ti layer:-
+I'm using PL2303 USB-TTL cable to debug.
 
-http://develop.phytec.com/display/PKB/PhyCORE-AM335x+RDK+Linux+Quickstart+PD15.2.x#PhyCORE-AM335xRDKLinuxQuickstartPD15.2.x-AddingPackagestothebuild
+*O/P on the serial console* :
 
-anyway searching in an existing mail archive as below  :-
+U-Boot SPL 2016.01 (Feb 15 2016 - 19:53:09)
+Trying to boot from MMC
+reading args
+spl_load_image_fat_os: error reading image args, err - -1
+reading u-boot.img
+reading u-boot.img
 
- https://lists.yoctoproject.org/pipermail/meta-ti/2016-April/008399.html
+U-Boot 2016.01 (Feb 15 2016 - 19:53:09 -0500)
+       Watchdog enabled
+I2C:   ready
+DRAM:  512 MiB
+NAND:  0 MiB
 
-a user reply the solution as :-
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
 
-{Two things - it was already fixed almost 2 weeks ago, so you seem to
-be using outdated snapshot. Second, use distro that doesn't error out
-on unused
-bbappends...
+*** Error - No Valid Environment Area found
 
-And then again, you are trying to mix/match different branches of layers, so
-you might have some other weird issues down the road.}
+*** Warning - bad CRC, using default environment
 
-my problem is similiar as my BSP is based on dizzy and i cloned the
-meta-ti from master. anyway by reading the existing mail solution i
-still cant understand what to do next?? "*how to make the distro to
-error out on unused bbapends*??"  i just cloned the meta-ti from the
-above address few days ago so im sure it the latest snapshot. My main
-goal finally to enable and use the PRUSS package. thanks all in
-advanced. hope some light in shed on this matter.
+Net:   <ethaddr> not set. Validating first E-fuse MAC
+
+cpsw, usb_ether
+
+=>
 
 
-wtrgds
+Can some one please help me debug this? what are the possible reasons
+for  'Error
+- No Valid Environment Area found'?
 
-shoghi
+Thank you
 
---001a114fd37618681405306cec0e
+--001a114113fe7baddb05307a288c
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><p style=3D"color:rgb(0,0,0);font-family:Arial,Helvetica,s=
-ans-serif;font-size:12px;line-height:18px">hi all</p><p style=3D"color:rgb(=
-0,0,0);font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18=
-px">im using am3359 running on a moduleboard (phytec-phycore), in which i n=
-eed to compile and use the PRUSS package. im using yocto and followed a man=
-ual to install the the whole meta-ti package as an layer into my yocto sour=
-ce, but during executing the bitbake to produce the image i get the below e=
-rror:-</p><p style=3D"color:rgb(0,0,0);font-family:Arial,Helvetica,sans-ser=
-if;font-size:12px;line-height:18px"><span style=3D"color:rgb(255,0,0)">Erro=
-r: no recipes available for:-</span></p><p style=3D"color:rgb(0,0,0);font-f=
-amily:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px"><span sty=
-le=3D"color:rgb(255,0,0)">/opt/PHYTEC_BSPs/yocto_ti/sources/poky/../meta-ti=
-/recipes-core/udev/eudev/eudev_%.bbappend</span></p><p style=3D"color:rgb(0=
-,0,0);font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18p=
-x">because of this error i also cant compile the PRU package.</p><p style=
-=3D"color:rgb(0,0,0);font-family:Arial,Helvetica,sans-serif;font-size:12px;=
-line-height:18px">i cloned the meta-ti into my source folder from here:-=C2=
-=A0</p><p style=3D"color:rgb(0,0,0);font-family:Arial,Helvetica,sans-serif;=
-font-size:12px;line-height:18px"><a href=3D"http://layers.openembedded.org/=
-layerindex/branch/master/layer/meta-ti/" title=3D"meta-ti yocto layer" targ=
-et=3D"_blank">http://layers.openembedded.org/layerindex/branch/master/layer=
-/meta-ti/</a></p><p style=3D"color:rgb(0,0,0);font-family:Arial,Helvetica,s=
-ans-serif;font-size:12px;line-height:18px">the manual i followed to add met=
-a ti layer:-<br></p><p style=3D"font-size:12.8px"><font color=3D"#000000" f=
-ace=3D"Arial, Helvetica, sans-serif"><span style=3D"font-size:12px;line-hei=
-ght:18px"><a href=3D"http://develop.phytec.com/display/PKB/PhyCORE-AM335x+R=
-DK+Linux+Quickstart+PD15.2.x#PhyCORE-AM335xRDKLinuxQuickstartPD15.2.x-Addin=
-gPackagestothebuild" target=3D"_blank">http://develop.phytec.com/display/PK=
-B/PhyCORE-AM335x+RDK+Linux+Quickstart+PD15.2.x#PhyCORE-AM335xRDKLinuxQuicks=
-tartPD15.2.x-AddingPackagestothebuild</a></span></font><br></p><p style=3D"=
-color:rgb(0,0,0);font-family:Arial,Helvetica,sans-serif;font-size:12px;line=
--height:18px"></p><p style=3D""><font color=3D"#000000" face=3D"Arial, Helv=
-etica, sans-serif"><span style=3D"line-height:18px">anyway searching in an =
-existing mail archive as below =C2=A0:-</span></font></p><p style=3D""><fon=
-t color=3D"#000000" face=3D"Arial, Helvetica, sans-serif"><span style=3D"li=
-ne-height:18px">=C2=A0<a href=3D"https://lists.yoctoproject.org/pipermail/m=
-eta-ti/2016-April/008399.html">https://lists.yoctoproject.org/pipermail/met=
-a-ti/2016-April/008399.html</a></span></font></p><p style=3D"color:rgb(0,0,=
-0);line-height:18px"><span style=3D"line-height:normal"><font face=3D"arial=
-, helvetica, sans-serif">a user reply the solution as :-</font></span></p><=
-pre style=3D"white-space:pre-wrap;color:rgb(0,0,0)">{Two things - it was al=
-ready fixed almost 2 weeks ago, so you seem to be using outdated snapshot. =
-Second, use distro that doesn&#39;t error out on unused=20
-bbappends...
+<div dir=3D"ltr"><div style=3D"font-size:12.8px">I followed the instruction=
+s from=C2=A0<a href=3D"https://www.yoctoproject.org/downloads/bsps/jethro20=
+/beaglebone" target=3D"_blank">https://www.yoctoproject.org/downloads/bsps/=
+jethro20/beaglebone</a>=C2=A0and copied sato-image to SD card. But the imag=
+e won&#39;t boot.=C2=A0</div><div style=3D"font-size:12.8px"><br></div><div=
+ style=3D"font-size:12.8px"><div style=3D"font-size:12.8px">The problem is =
+not with my board/SD card. I tried on a different set..same error pops.<br>=
+</div><div><br></div></div><div style=3D"font-size:12.8px"><u>Version</u> :=
+ jethro</div><div style=3D"font-size:12.8px"><br></div><div style=3D"font-s=
+ize:12.8px"><u style=3D"font-size:12.8px">A Note on how I partitioned my SD=
+:</u><br></div><div style=3D"font-size:12.8px"><br></div><div style=3D"font=
+-size:12.8px"><div><font face=3D"courier new, monospace" color=3D"#0000ff">=
+sudo fdisk -lu /dev/sdb</font></div><div><font face=3D"courier new, monospa=
+ce" color=3D"#0000ff"><br></font></div><div><font face=3D"courier new, mono=
+space" color=3D"#0000ff">Disk /dev/sdb: 15.5 GB, 15523119104 bytes</font></=
+div><div><font face=3D"courier new, monospace" color=3D"#0000ff">64 heads, =
+32 sectors/track, 14804 cylinders, total 30318592 sectors</font></div><div>=
+<font face=3D"courier new, monospace" color=3D"#0000ff">Units =3D sectors o=
+f 1 * 512 =3D 512 bytes</font></div><div><font face=3D"courier new, monospa=
+ce" color=3D"#0000ff">Sector size (logical/physical): 512 bytes / 512 bytes=
+</font></div><div><font face=3D"courier new, monospace" color=3D"#0000ff">I=
+/O size (minimum/optimal): 512 bytes / 512 bytes</font></div><div><font fac=
+e=3D"courier new, monospace" color=3D"#0000ff">Disk identifier: 0x000d842d<=
+/font></div><div><font face=3D"courier new, monospace" color=3D"#0000ff"><b=
+r></font></div><div><font face=3D"courier new, monospace" color=3D"#0000ff"=
+>=C2=A0 =C2=A0Device Boot =C2=A0 =C2=A0 =C2=A0Start =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 End =C2=A0 =C2=A0 =C2=A0Blocks =C2=A0 Id =C2=A0System</font></div><d=
+iv><font face=3D"courier new, monospace" color=3D"#0000ff">/dev/sdb1 =C2=A0=
+ * =C2=A0 =C2=A0 =C2=A0 =C2=A02048 =C2=A0 =C2=A0 =C2=A0 67583 =C2=A0 =C2=A0=
+ =C2=A0 32768 =C2=A0 =C2=A0c =C2=A0W95 FAT32 (LBA)</font></div><div><font f=
+ace=3D"courier new, monospace" color=3D"#0000ff">/dev/sdb2 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 67584 =C2=A0 =C2=A030318591 =C2=A0 =C2=A015125504 =C2=
+=A0 83 =C2=A0Linux</font></div></div><div style=3D"font-size:12.8px"><br></=
+div><div style=3D"font-size:12.8px">I&#39;m using PL2303 USB-TTL cable to d=
+ebug.</div><div style=3D"font-size:12.8px"><br></div><div style=3D"font-siz=
+e:12.8px"><u>O/P on the serial console</u>=C2=A0:</div><div style=3D"font-s=
+ize:12.8px"><br></div><div style=3D"font-size:12.8px"><div><font face=3D"co=
+urier new, monospace" color=3D"#0000ff">U-Boot SPL 2016.01 (Feb 15 2016 -=
+=C2=A0<span class=3D"" tabindex=3D"0" style=3D""><span class=3D"" style=3D"=
+">19:53:09</span></span>)</font></div><div><font face=3D"courier new, monos=
+pace" color=3D"#0000ff">Trying to boot from MMC</font></div><div><font face=
+=3D"courier new, monospace" color=3D"#0000ff">reading args</font></div><div=
+><font face=3D"courier new, monospace" color=3D"#0000ff">spl_load_image_fat=
+_os: error reading image args, err - -1</font></div><div><font face=3D"cour=
+ier new, monospace" color=3D"#0000ff">reading u-boot.img</font></div><div><=
+font face=3D"courier new, monospace" color=3D"#0000ff">reading u-boot.img</=
+font></div><div><font face=3D"courier new, monospace" color=3D"#0000ff"><br=
+></font></div><div><span style=3D"color:rgb(0,0,255);font-family:&#39;couri=
+er new&#39;,monospace">U-Boot 2016.01 (Feb 15 2016 - 19:53:09 -0500)</span>=
+</div><div><font face=3D"courier new, monospace" color=3D"#0000ff">=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0Watchdog enabled</font></div><div><font face=3D"courier=
+ new, monospace" color=3D"#0000ff">I2C: =C2=A0 ready</font></div><div><font=
+ face=3D"courier new, monospace" color=3D"#0000ff">DRAM: =C2=A0512 MiB</fon=
+t></div><div><font face=3D"courier new, monospace" color=3D"#0000ff">NAND: =
+=C2=A00 MiB =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0</font></div><div><font face=3D"courier new, mon=
+ospace" color=3D"#0000ff">MMC: =C2=A0 OMAP SD/MMC: 0, OMAP SD/MMC: 1 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0</f=
+ont></div><div><font face=3D"courier new, monospace" color=3D"#0000ff">*** =
+Error - No Valid Environment Area found =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0=C2=A0</font></div><div><font face=3D"courier new, monospa=
+ce" color=3D"#0000ff">*** Warning - bad CRC, using default environment =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0</font></div><div><span style=3D"color:rg=
+b(0,0,255);font-family:&#39;courier new&#39;,monospace;font-size:12.8px">Ne=
+t: =C2=A0 &lt;ethaddr&gt; not set. Validating first E-fuse MAC =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0=C2=A0</span></div><div><font face=3D"courier new, monospace" color=
+=3D"#0000ff">cpsw, usb_ether =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0</font></div><div><font face=3D"courie=
+r new, monospace" color=3D"#0000ff">=3D&gt;=C2=A0</font></div></div><div st=
+yle=3D"font-size:12.8px"><font face=3D"courier new, monospace"><br></font><=
+/div><div style=3D"font-size:12.8px"><br></div><div style=3D"font-size:12.8=
+px">Can some one please help me debug this? what are the possible reasons f=
+or =C2=A0&#39;<span style=3D"color:rgb(0,0,255);font-family:&#39;courier ne=
+w&#39;,monospace">Error - No Valid Environment Area found&#39;?=C2=A0</span=
+></div><div style=3D"font-size:12.8px"><br></div><div style=3D"font-size:12=
+.8px">Thank you</div></div>
 
-And then again, you are trying to mix/match different branches of layers, s=
-o=20
-you might have some other weird issues down the road.}</pre><pre><font face=
-=3D"arial, helvetica, sans-serif"><font color=3D"#000000"><span style=3D"wh=
-ite-space:pre-wrap">my problem is similiar as my BSP is based on dizzy and =
-i cloned the meta-ti from master. anyway by reading the existing mail solut=
-ion i still cant understand what to do next?? &quot;<i>how to make the dist=
-ro to error out on unused bbapends</i>??&quot;  i just cloned the meta-ti f=
-rom the above address few days ago so im sure it the latest snapshot. My ma=
-in goal finally to enable and use the PRUSS package. thanks all in advanced=
-. hope some light in shed on this matter.</span></font></font></pre><pre><f=
-ont face=3D"arial, helvetica, sans-serif"><font color=3D"#000000"><span sty=
-le=3D"white-space:pre-wrap"><br></span></font></font></pre><pre><font face=
-=3D"arial, helvetica, sans-serif"><font color=3D"#000000"><span style=3D"wh=
-ite-space:pre-wrap">wtrgds</span></font></font></pre><pre><font face=3D"ari=
-al, helvetica, sans-serif"><font color=3D"#000000"><span style=3D"white-spa=
-ce:pre-wrap">shoghi</span></font></font></pre><p style=3D"color:rgb(0,0,0);=
-font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px"><br=
-></p><p style=3D"color:rgb(0,0,0);font-family:Arial,Helvetica,sans-serif;fo=
-nt-size:12px;line-height:18px"><br></p></div>
-
---001a114fd37618681405306cec0e--
+--001a114113fe7baddb05307a288c--
