@@ -1,38 +1,40 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <lists@webconect.ch>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 54370E00CBB; Fri, 15 Apr 2016 03:02:44 -0700 (PDT)
+	id BA55FE00E62; Fri, 15 Apr 2016 07:45:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [217.26.49.175 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0214E00CBB
-	for <meta-ti@yoctoproject.org>; Fri, 15 Apr 2016 03:02:18 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3FA2H2t015967
-	for <meta-ti@yoctoproject.org>; Fri, 15 Apr 2016 05:02:17 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3FA2Hoq017184
-	for <meta-ti@yoctoproject.org>; Fri, 15 Apr 2016 05:02:17 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 15 Apr 2016 05:02:17 -0500
-Received: from sditapps09.india.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u3FA2FtK018713;	Fri, 15 Apr 2016 05:02:16 -0500
-From: Karthik Ramanan <a0393906@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 15 Apr 2016 15:32:14 +0530
-Message-ID: <1460714534-4774-1-git-send-email-a0393906@ti.com>
-X-Mailer: git-send-email 1.9.1
+Received: from mxout015.mail.hostpoint.ch (mxout015.mail.hostpoint.ch
+	[217.26.49.175])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAC38E00C49
+	for <meta-ti@yoctoproject.org>; Fri, 15 Apr 2016 07:45:13 -0700 (PDT)
+Received: from [10.0.2.46] (helo=asmtp013.mail.hostpoint.ch)
+	by mxout015.mail.hostpoint.ch with esmtp (Exim 4.84 (FreeBSD))
+	(envelope-from <lists@webconect.ch>)
+	id 1ar4zf-000L7L-Tm; Fri, 15 Apr 2016 16:45:11 +0200
+Received: from 77-58-230-166.dclient.hispeed.ch ([77.58.230.166]
+	helo=webconect.local) by asmtp013.mail.hostpoint.ch with esmtpsa
+	(TLSv1.2:DHE-RSA-AES256-GCM-SHA384:256) (Exim 4.84 (FreeBSD))
+	(envelope-from <lists@webconect.ch>)
+	id 1ar4zf-0007OE-RL; Fri, 15 Apr 2016 16:45:11 +0200
+X-Authenticated-Sender-Id: lists@webconect.ch
+Date: Fri, 15 Apr 2016 16:46:05 +0200
+From: Elias Diem <lists@webconect.ch>
+To: Denys Dmytriyenko <denys@ti.com>
+Message-ID: <20160415144605.GA3517@webconect.local>
+References: <20160410170138.GA3694@webconect.local>
+	<20160410193151.GJ16135@denix.org>
 MIME-Version: 1.0
-Subject: [for master][PATCH] bltsville: Deprecate - no longer supported
+In-Reply-To: <20160410193151.GJ16135@denix.org>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Problem with libdrm.inc or eudev_%.bbappend
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,44 +47,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Apr 2016 10:02:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Apr 2016 14:45:16 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
----
- recipes-graphics/bltsville/bltsville_git.bb | 22 ----------------------
- 1 file changed, 22 deletions(-)
- delete mode 100644 recipes-graphics/bltsville/bltsville_git.bb
+Hi Denys
 
-diff --git a/recipes-graphics/bltsville/bltsville_git.bb b/recipes-graphics/bltsville/bltsville_git.bb
-deleted file mode 100644
-index 776785d..0000000
---- a/recipes-graphics/bltsville/bltsville_git.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION = "Userspace libraries and headers for TI BLTsville implementation"
--HOMEPAGE = "http://omapzoom.org/?p=platform/external/bltsville.git;a=summary"
--LICENSE = "BSD-3-Clause & TI-TSPA"
--LIC_FILES_CHKSUM = "file://COPYING;md5=10a9abb9c5bb19edd83a8cf66eef7148 \
--                    file://ticpu/license;md5=0bb831850a0de80e32a63772d89c6562"
--
--PR = "r3"
--
--SRCREV = "a759bde8a5a6e518dfb8a6e633736a360005498e"
--
--inherit autotools-brokensep pkgconfig
--
--SRC_URI = "git://git.omapzoom.org/platform/external/bltsville.git;protocol=git"
--
--S = "${WORKDIR}/git"
--
--do_configure() {
--	chmod +x autogen.sh
--	./autogen.sh --prefix=${prefix} --with-libtool-sysroot=${STAGING_DIR_TARGET}
--}
--
--FILES_${PN} += "${libdir}/libbltsville_ticpu_license.txt"   
+On 2016-04-10, Denys Dmytriyenko wrote:
+
+>On Sun, Apr 10, 2016 at 07:01:38PM +0200, Elias Diem wrote:
+>> Hi
+>>
+>> I'm trying to build a layer[1] and experience some problems.
+>>
+>> Steps to reproduce:
+>>
+>> - I source `oe-init-build-env` like this:
+>>  $ . /path/to/oe-init-build-env builddir
+>>
+>> - Then inside builddir, I change the two files `local.conf`  and
+>> `bblayers.conf`. These two files are attached.
+>>
+>> - Then I start bitbake as follows:
+>>
+>>  $ bitbake mume-image
+>>
+>>  This will produce the following warning:
+>>
+>>  WARNING: Host distribution "Gentoo" has not been validated with this version of the build system; you may possibly experience unexpected failures. It is recommended that you use a tested distribution.
+>>
+>>  And then it will produce the following error message:
+>>
+>>  ERROR: ParseError at /home/edi/var/yocto/meta-ti/recipes-graphics/drm/libdrm_2.4.41.bb:1: Could not include required file recipes-graphics/drm/libdrm.inc
+>>
+>>  The layer's README[2] tells me to use the branch `fido`  for
+>> meta-ti. Apparently this branch does not contain a  file named
+>> `libdrm.inc`.
+>
+>Well, and it shouldn't - in fido that file comes from oe-core. Looks like you
+>are trying to mix/match different branches, which won't work. If you want
+>fido, you have to use fido across the layers.
+
+Thank you for your reply. This makes sense.
+
+>> - I then change the meta-ti's branch to `master`. This  branch
+>> contains the file `libdrm.inc`. I start bitbake  again:
+>>
+>>  $ bitbake mume-image
+>>
+>>  This will produce a new error:
+>>
+>>  ERROR: No recipes available for:
+>>    /home/edi/var/yocto/meta-ti/recipes-core/udev/eudev_%.bbappend
+>
+>Two things - it was already fixed almost 2 weeks ago, so you seem to be using
+>outdated snapshot. Second, use distro that doesn't error out on unused
+>bbappends...
+>
+>And then again, you are trying to mix/match different branches of layers, so
+>you might have some other weird issues down the road.
+
+I use a workaround for now. I indeed mix the branches. But I 
+delete the recipe `libdrm_2.4.41.bb` because I don't need 
+libdrm.
+
+Maybe I will find a nicer way to solve this problem in the 
+future.
+
 -- 
-1.9.1
+Greetings
+Elias
+
 
 
