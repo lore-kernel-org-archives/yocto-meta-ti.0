@@ -1,29 +1,39 @@
-Return-Path: <daniel.ammann@bytesatwork.ch>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 74E61E00D42; Mon, 18 Apr 2016 02:23:53 -0700 (PDT)
+	id C09EAE00D7D; Mon, 18 Apr 2016 08:29:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bytesatwork.ch (bytesatwork.ch [91.135.72.15])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25BF4E0077F
-	for <meta-ti@yoctoproject.org>; Mon, 18 Apr 2016 02:23:51 -0700 (PDT)
-Received: from [192.168.2.42] (unknown [95.143.48.123])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested) (Authenticated sender: daniel)
-	by bytesatwork.ch (Postfix) with ESMTPSA id 3CF9118000F8
-	for <meta-ti@yoctoproject.org>; Mon, 18 Apr 2016 11:23:44 +0200 (CEST)
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2355E00C44
+	for <meta-ti@yoctoproject.org>; Mon, 18 Apr 2016 08:29:10 -0700 (PDT)
+Received: from vz-proxy-l001.mx.aol.com ([64.236.82.153])
+	by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O5U008505O1NI30@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 18 Apr 2016 10:28:54 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=bZ94BChTKKEEaxevg_YA:9
+Received: by 100.15.86.14 with SMTP id 4b4ae0bb; Mon, 18 Apr 2016 15:28:54 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id ED24F161FA3;	Mon,
+	18 Apr 2016 11:28:48 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-From: Daniel Ammann <daniel.ammann@bytesatwork.ch>
-Message-ID: <5714A737.4030504@bytesatwork.ch>
-Date: Mon, 18 Apr 2016 11:21:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Icedove/38.7.0
-MIME-Version: 1.0
-Subject: omap3-sgx-modules for ti kernel 4.1/4.4?
+Date: Mon, 18 Apr 2016 11:28:48 -0400
+Message-id: <1460993328-18034-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] ti-softhsmv2: stop altering and expanding SELECTED_OPTIMIZATION variable
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,22 +46,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2016 09:23:53 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Apr 2016 15:29:12 -0000
 
-Hi
+From: Denys Dmytriyenko <denys@ti.com>
 
-Is there going to be a new version of the accelerated sgx sdk
-(omap3-sgx-modules_5.01.01.02.bb) that works with ti 4.1 or 4.4 kernel 
-on am335x?
+This var now contains staging paths and by expanding it early, sstate ends up
+churning the package for each machine built.
 
-I think ti 4.1/4.4 kernel will be released for yocto 2.1/krogoth?
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-As far as I can tell the current recipe only works with 3.14 kernel.
-
-Thanks and kind regards
-
-Daniel
+diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
+index a863c3a..ea2eb3f 100644
+--- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
++++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
+@@ -15,6 +15,7 @@ SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=
+ #Following commit corresponds to tag DEV.SOFTHSM-01.03.00.04
+ SRCREV = "c2688afb9373309751e640088705cb739997665d"
+ PV = "1.3.0.4"
++PR = "r1"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -31,9 +32,6 @@ INITSCRIPT_PARAMS = "defaults 10"
+ 
+ inherit update-rc.d
+ 
+-SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-O2", "-O3")}"
+-SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-ggdb2", "")}"
+-
+ FILES_${PN} += "${libdir}/softhsm/lib*.so.* ${mntdir}/*"
+ FILES_${PN}-dbg += "${libdir}/softhsm/.debug"
+ FILES_${PN}-staticdev += "${libdir}/softhsm/*.a "
+-- 
+2.2.0
 
 
