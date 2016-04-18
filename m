@@ -1,39 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C09EAE00D7D; Mon, 18 Apr 2016 08:29:12 -0700 (PDT)
+	id 391F0E00D6D; Mon, 18 Apr 2016 08:31:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2355E00C44
-	for <meta-ti@yoctoproject.org>; Mon, 18 Apr 2016 08:29:10 -0700 (PDT)
-Received: from vz-proxy-l001.mx.aol.com ([64.236.82.153])
-	by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O5U008505O1NI30@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 18 Apr 2016 10:28:54 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
-	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=bZ94BChTKKEEaxevg_YA:9
-Received: by 100.15.86.14 with SMTP id 4b4ae0bb; Mon, 18 Apr 2016 15:28:54 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id ED24F161FA3;	Mon,
-	18 Apr 2016 11:28:48 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 763B4E00C44
+	for <meta-ti@yoctoproject.org>; Mon, 18 Apr 2016 08:31:08 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C0C33529DB; Mon, 18 Apr 2016 15:31:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 18 Apr 2016 11:28:48 -0400
-Message-id: <1460993328-18034-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] ti-softhsmv2: stop altering and expanding SELECTED_OPTIMIZATION variable
+Message-Id: <20160418153107.C0C33529DB@arago-project.org>
+Date: Mon, 18 Apr 2016 15:31:07 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ti-softhsmv2: stop altering and expanding SELECTED_OPTIMIZATION variable
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,17 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2016 15:29:12 -0000
+X-List-Received-Date: Mon, 18 Apr 2016 15:31:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: f7e2920ba3e5d493120d992b366fb0ad382af971
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f7e2920ba3e5d493120d992b366fb0ad382af971
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Apr 18 21:28:48 2016 +0000
+
+ti-softhsmv2: stop altering and expanding SELECTED_OPTIMIZATION variable
 
 This var now contains staging paths and by expanding it early, sstate ends up
 churning the package for each machine built.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+
+ recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
 index a863c3a..ea2eb3f 100644
@@ -80,7 +78,5 @@ index a863c3a..ea2eb3f 100644
  FILES_${PN} += "${libdir}/softhsm/lib*.so.* ${mntdir}/*"
  FILES_${PN}-dbg += "${libdir}/softhsm/.debug"
  FILES_${PN}-staticdev += "${libdir}/softhsm/*.a "
--- 
-2.2.0
 
 
