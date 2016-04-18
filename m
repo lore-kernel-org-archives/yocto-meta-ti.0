@@ -1,26 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 391F0E00D6D; Mon, 18 Apr 2016 08:31:12 -0700 (PDT)
+	id 94190E00D81; Mon, 18 Apr 2016 09:19:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 763B4E00C44
-	for <meta-ti@yoctoproject.org>; Mon, 18 Apr 2016 08:31:08 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id C0C33529DB; Mon, 18 Apr 2016 15:31:07 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160418153107.C0C33529DB@arago-project.org>
-Date: Mon, 18 Apr 2016 15:31:07 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-softhsmv2: stop altering and expanding SELECTED_OPTIMIZATION variable
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56E40E00C1D
+	for <meta-ti@yoctoproject.org>; Mon, 18 Apr 2016 09:19:29 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3IGJJ4G009488;
+	Mon, 18 Apr 2016 11:19:19 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3IGJJiX010048;
+	Mon, 18 Apr 2016 11:19:19 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 18 Apr 2016 11:19:18 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3IGJJkg011734;
+	Mon, 18 Apr 2016 11:19:19 -0500
+Date: Mon, 18 Apr 2016 12:19:03 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Daniel Ammann <daniel.ammann@bytesatwork.ch>
+Message-ID: <20160418161903.GO10048@edge>
+References: <5714A737.4030504@bytesatwork.ch>
+MIME-Version: 1.0
+In-Reply-To: <5714A737.4030504@bytesatwork.ch>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: omap3-sgx-modules for ti kernel 4.1/4.4?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,50 +48,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2016 15:31:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Apr 2016 16:19:33 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: f7e2920ba3e5d493120d992b366fb0ad382af971
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f7e2920ba3e5d493120d992b366fb0ad382af971
+On Mon, Apr 18, 2016 at 11:21:59AM +0200, Daniel Ammann wrote:
+> Hi
+> 
+> Is there going to be a new version of the accelerated sgx sdk
+> (omap3-sgx-modules_5.01.01.02.bb) that works with ti 4.1 or 4.4 kernel 
+> on am335x?
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Apr 18 21:28:48 2016 +0000
+No, omap3-sgx-modules will not be updated, as it has been deprecated and 
+replaced by omapdrm-pvr long time ago.
 
-ti-softhsmv2: stop altering and expanding SELECTED_OPTIMIZATION variable
 
-This var now contains staging paths and by expanding it early, sstate ends up
-churning the package for each machine built.
+> I think ti 4.1/4.4 kernel will be released for yocto 2.1/krogoth?
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+4.1 was released on fido/1.8 and 4.4 will be on krogoth/2.1
 
----
 
- recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |    4 +---
- 1 files changed, 1 insertions(+), 3 deletions(-)
+> As far as I can tell the current recipe only works with 3.14 kernel.
 
-diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-index a863c3a..ea2eb3f 100644
---- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-+++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=
- #Following commit corresponds to tag DEV.SOFTHSM-01.03.00.04
- SRCREV = "c2688afb9373309751e640088705cb739997665d"
- PV = "1.3.0.4"
-+PR = "r1"
- 
- S = "${WORKDIR}/git"
- 
-@@ -31,9 +32,6 @@ INITSCRIPT_PARAMS = "defaults 10"
- 
- inherit update-rc.d
- 
--SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-O2", "-O3")}"
--SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-ggdb2", "")}"
--
- FILES_${PN} += "${libdir}/softhsm/lib*.so.* ${mntdir}/*"
- FILES_${PN}-dbg += "${libdir}/softhsm/.debug"
- FILES_${PN}-staticdev += "${libdir}/softhsm/*.a "
+Yes, since at least 3.18 omapdrm-pvr was the driver used for SGX.
 
+-- 
+Denys
 
