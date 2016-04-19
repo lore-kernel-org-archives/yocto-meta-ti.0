@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9B017E00F0A; Tue, 19 Apr 2016 15:06:04 -0700 (PDT)
+	id A792DE00EF4; Tue, 19 Apr 2016 15:06:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0AC73E00DFD
-	for <meta-ti@yoctoproject.org>; Tue, 19 Apr 2016 15:05:59 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71765E00E79
+	for <meta-ti@yoctoproject.org>; Tue, 19 Apr 2016 15:06:01 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9B13A52A16; Tue, 19 Apr 2016 22:05:58 +0000 (UTC)
+	id CB82B52A57; Tue, 19 Apr 2016 22:05:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160419220558.9B13A52A16@arago-project.org>
+Message-Id: <20160419220558.CB82B52A57@arago-project.org>
 Date: Tue, 19 Apr 2016 22:05:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : pktlib-rtos: Add RTOS package for pktlib
+Subject: Denys Dmytriyenko : eudev: only install omap rules file for TI machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +38,53 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 1061600edebabbe146562a13ba7b744078988cc4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1061600edebabbe146562a13ba7b744078988cc4
+Commit: 161173fd66ecab996b9902f7b635918a6824703b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=161173fd66ecab996b9902f7b635918a6824703b
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Apr 20 03:43:39 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Apr 20 03:47:33 2016 +0000
 
-pktlib-rtos: Add RTOS package for pktlib
+eudev: only install omap rules file for TI machines
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
+Play nice with other BSPs
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pktlib/pktlib-rtos_git.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
+ recipes-core/udev/eudev_%.bbappend |   20 ++++++++++++++++++--
+ 1 files changed, 18 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/pktlib/pktlib-rtos_git.bb b/recipes-bsp/pktlib/pktlib-rtos_git.bb
-new file mode 100644
-index 0000000..0471156
---- /dev/null
-+++ b/recipes-bsp/pktlib/pktlib-rtos_git.bb
-@@ -0,0 +1,13 @@
-+inherit ti-pdk
-+require pktlib.inc
+diff --git a/recipes-core/udev/eudev_%.bbappend b/recipes-core/udev/eudev_%.bbappend
+index fd0d99b..a23d015 100644
+--- a/recipes-core/udev/eudev_%.bbappend
++++ b/recipes-core/udev/eudev_%.bbappend
+@@ -2,8 +2,24 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ 
+ SRC_URI_append = " file://omap-tty.rules"
+ 
+-PR_append = ".0"
++PR_append = ".1"
+ 
+-do_install_append() {
++install_omap_rules() {
+     install -m 0644 ${WORKDIR}/omap-tty.rules ${D}${sysconfdir}/udev/rules.d/
+ }
 +
-+PR = "${INC_PR}.0"
++do_install_append_ti33x() {
++    install_omap_rules
++}
 +
-+DEPENDS_append = " rm-lld-rtos \
-+                   qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+"
++do_install_append_ti43x() {
++    install_omap_rules
++}
 +
-+XDCARGS_k2hk-evm = "k2h k2k"
-+XDCARGS_k2e-evm = "k2e"
-+XDCARGS_k2l-evm = "k2l"
++do_install_append_omap-a15() {
++    install_omap_rules
++}
++
++do_install_append_keystone() {
++    install_omap_rules
++}
 
 
