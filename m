@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C9E00E00DFD; Tue, 19 Apr 2016 15:06:04 -0700 (PDT)
+	id 4B7A9E00E00; Tue, 19 Apr 2016 15:06:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70FD7E00E00
-	for <meta-ti@yoctoproject.org>; Tue, 19 Apr 2016 15:06:01 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 072F9E00C87
+	for <meta-ti@yoctoproject.org>; Tue, 19 Apr 2016 15:05:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B363252A19; Tue, 19 Apr 2016 22:05:58 +0000 (UTC)
+	id 6083152007; Tue, 19 Apr 2016 22:05:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160419220558.B363252A19@arago-project.org>
+Message-Id: <20160419220558.6083152007@arago-project.org>
 Date: Tue, 19 Apr 2016 22:05:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf: update old machines to use linux-ti-staging and u-boot-ti-staging
+Subject: Justin Sobota : traceframework: Clean up recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,93 +33,116 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2016 22:06:04 -0000
+X-List-Received-Date: Tue, 19 Apr 2016 22:06:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 4b74d640a29bfc05a471d72d1e371385a5f8e16f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4b74d640a29bfc05a471d72d1e371385a5f8e16f
+Commit: 4a4cfdb3b2ed20cc1bc99221f64e6f2c1398177f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4a4cfdb3b2ed20cc1bc99221f64e6f2c1398177f
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Apr 20 03:47:32 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Wed Apr 20 02:49:44 2016 +0000
 
-conf: update old machines to use linux-ti-staging and u-boot-ti-staging
+traceframework: Clean up recipe
 
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/davinci.inc |    9 +++++----
- conf/machine/include/omap3.inc   |    9 +++++----
- conf/machine/include/omap4.inc   |    3 ++-
- 3 files changed, 12 insertions(+), 9 deletions(-)
+ recipes-bsp/traceframework/traceframework.inc    |   28 +++++++++++++++++
+ recipes-bsp/traceframework/traceframework_git.bb |   36 ++++-----------------
+ 2 files changed, 35 insertions(+), 29 deletions(-)
 
-diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
-index 9f90f24..59e423d 100644
---- a/conf/machine/include/davinci.inc
-+++ b/conf/machine/include/davinci.inc
-@@ -1,12 +1,13 @@
- require conf/machine/include/tune-arm926ejs.inc
+diff --git a/recipes-bsp/traceframework/traceframework.inc b/recipes-bsp/traceframework/traceframework.inc
+new file mode 100644
+index 0000000..a9a1a96
+--- /dev/null
++++ b/recipes-bsp/traceframework/traceframework.inc
+@@ -0,0 +1,28 @@
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
++
++COMPATIBLE_MACHINE = "tci6614-evm|keystone"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++TRACEFRAMEWORK_GIT_URI = "git://git.ti.com/keystone-rtos/traceframework.git"
++TRACEFRAMEWORK_GIT_PROTOCOL = "git"
++TRACEFRAMEWORK_GIT_BRANCH = "master"
++TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
++
++# Below commit ID corresponds to "DEV.TFWK-01.01.01.08B"
++TRACEFRAMEWORK_SRCREV = "e7a60a71a385337425547e3cac6716998c6a3528"
++
++BRANCH = "${TRACEFRAMEWORK_GIT_BRANCH}"
++SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${TRACEFRAMEWORK_SRCREV}"
++PV = "01.01.01.08"
++INC_PR = "r1"
++
++DEVICELIST = "k2k k2h k2e k2l"
++DEVICELIST_tci6614-evm = "c6614"
++DEVICELIST_k2hk-evm    = "k2k k2h"
++DEVICELIST_k2e-evm     = "k2e"
++DEVICELIST_k2l-evm     = "k2l"
++
++S = "${WORKDIR}/${TRACEFRAMEWORK_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
+index 49a7e95..a3b0d71 100644
+--- a/recipes-bsp/traceframework/traceframework_git.bb
++++ b/recipes-bsp/traceframework/traceframework_git.bb
+@@ -1,39 +1,12 @@
+ DESCRIPTION = "TI Trace Framework library"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/instrumentation/traceframework/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
  
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r53"
-+MACHINE_KERNEL_PR = "r54"
+-TRACEFRAMEWORK_GIT_URI = "git://git.ti.com/keystone-rtos/traceframework.git"
+-TRACEFRAMEWORK_GIT_PROTOCOL = "git"
+-TRACEFRAMEWORK_GIT_BRANCH = "master"
+-TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
+-
+-# Below commit ID corresponds to DEV.TFWK-01.01.01.08B
+-TRACEFRAMEWORK_SRCREV = "e7a60a71a385337425547e3cac6716998c6a3528"
+-
+-BRANCH="${TRACEFRAMEWORK_GIT_BRANCH}"
+-SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
+-SRCREV = "${TRACEFRAMEWORK_SRCREV}"
+-
+-PV = "01.01.01.08"
+-PR = "r1"
+-
+-COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+ DEPENDS = "cuia"
  
--KERNEL_IMAGETYPE = "uImage"
-+KERNEL_IMAGETYPE = "zImage"
+-DEVICELIST = "k2k k2h k2e k2l"
+-DEVICELIST_tci6614-evm = "c6614"
+-DEVICELIST_k2hk-evm    = "k2k k2h"
+-DEVICELIST_k2e-evm     = "k2e"
+-DEVICELIST_k2l-evm     = "k2l"
++include traceframework.inc
  
--PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
--PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+-PACKAGES =+ "${PN}-test"
+-
+-FILES_${PN}-test = "${bindir}/tfw*.out \
+-                    ${bindir}/*.txt"
++PR = "${INC_PR}.0"
  
- UBOOT_MACHINE = "davinci_dvevm_config"
+ BASEDIR = "${WORKDIR}/git"
+-S = "${BASEDIR}/ti/instrumentation/traceframework"
  
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index f83bfa2..3a84140 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -17,13 +17,14 @@ XSERVER = "xserver-xorg \
- MACHINE_GUI_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r126"
-+MACHINE_KERNEL_PR = "r127"
- 
--KERNEL_IMAGETYPE = "uImage"
-+KERNEL_IMAGETYPE = "zImage"
- 
- # Default providers, may need to override for specific machines
--PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
--PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
- 
- UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "omap3_evm_config"
-diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
-index 1657326..deb3316 100644
---- a/conf/machine/include/omap4.inc
-+++ b/conf/machine/include/omap4.inc
-@@ -6,6 +6,7 @@ require conf/machine/include/tune-cortexa9.inc
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
- XSERVER = "xserver-xorg \
-@@ -14,7 +15,7 @@ XSERVER = "xserver-xorg \
-            xf86-video-omap"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r3"
-+MACHINE_KERNEL_PR = "r4"
- 
- KERNEL_IMAGETYPE = "zImage"
- 
+ EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} \
+                  CUIA_INSTALL_DIR=${STAGING_INCDIR} CUIA_LIB_DIR=${STAGING_LIBDIR}"
+@@ -57,3 +30,8 @@ do_install() {
+ 		oe_runmake install DEVICE="$device" TFW_SRC_DIR=${S} TARGET_ROOT_DIR=${D}
+ 	done
+ }
++
++PACKAGES =+ "${PN}-test"
++
++FILES_${PN}-test = "${bindir}/tfw*.out \
++                    ${bindir}/*.txt"
 
 
