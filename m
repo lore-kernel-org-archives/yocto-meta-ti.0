@@ -1,40 +1,38 @@
-Return-Path: <denis@denix.org>
+Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D0148E00DB8; Wed, 20 Apr 2016 11:32:50 -0700 (PDT)
+	id 6FC99E00D0D; Wed, 20 Apr 2016 11:46:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42B9AE00DDD
-	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 11:32:41 -0700 (PDT)
-Received: from vz-proxy-l008.mx.aol.com ([64.236.82.153])
-	by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O5Y00HSX3I5XE70@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 20 Apr 2016 13:32:40 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
-	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=e5mUnYsNAAAA:8
-	a=E8Skk_Ev1_BXAcBIzpUA:9
-Received: by 100.15.86.14 with SMTP id 792554f4; Wed, 20 Apr 2016 18:32:40 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id DB705161FAF;	Wed,
-	20 Apr 2016 14:32:28 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Wed, 20 Apr 2016 14:32:27 -0400
-Message-id: <1461177148-20360-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH 1/2] libdrm: drop outdated custom version, use latest upstream now
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4C73E007D2
+	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 11:46:31 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3KIkUDw001038
+	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 13:46:30 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3KIkUJG023514
+	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 13:46:30 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 20 Apr 2016 13:46:29 -0500
+Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u3KIkTeW009546;	Wed, 20 Apr 2016 13:46:29 -0500
+From: Justin Sobota <jsobota@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 20 Apr 2016 14:46:26 -0400
+Message-ID: <1461177987-495-1-git-send-email-jsobota@ti.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [master/fido][PATCH 1/2] ipc-transport: Clean up recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,145 +45,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 18:32:50 -0000
+X-List-Received-Date: Wed, 20 Apr 2016 18:46:34 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- .../drm/libdrm-2.4.41/installtests-ti.patch        | 46 ----------------------
- recipes-graphics/drm/libdrm.inc                    | 41 -------------------
- recipes-graphics/drm/libdrm_2.4.41.bb              | 19 ---------
- 3 files changed, 106 deletions(-)
- delete mode 100644 recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
- delete mode 100644 recipes-graphics/drm/libdrm.inc
- delete mode 100644 recipes-graphics/drm/libdrm_2.4.41.bb
+ recipes-ti/ipc/ipc-transport-qmss.inc |    4 +++-
+ recipes-ti/ipc/ipc-transport-srio.inc |    4 +++-
+ recipes-ti/ipc/ipc-transport.inc      |   14 ++++++++------
+ 3 files changed, 14 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch b/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
-deleted file mode 100644
-index ba325c0..0000000
---- a/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--tests: also install tests app (adjusted for TI version)
+diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
+index a5c8dc4..7539ef5 100644
+--- a/recipes-ti/ipc/ipc-transport-qmss.inc
++++ b/recipes-ti/ipc/ipc-transport-qmss.inc
+@@ -3,7 +3,9 @@ LICENSE = "BSD-3-Clause"
+ 
+ require ipc-transport.inc
+ 
+-INC_PR_append = ".0"
++PR = "${INC_PR}.1"
++
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+ 
+ COMPATIBLE_MACHINE = "keystone"
+ 
+diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
+index 4b5c305..18b94d1 100644
+--- a/recipes-ti/ipc/ipc-transport-srio.inc
++++ b/recipes-ti/ipc/ipc-transport-srio.inc
+@@ -3,7 +3,9 @@ LICENSE = "BSD-3-Clause"
+ 
+ require ipc-transport.inc
+ 
+-INC_PR_append = ".0"
++PR = "${INC_PR}.1"
++
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+ 
+ COMPATIBLE_MACHINE = "k2hk-evm"
+ 
+diff --git a/recipes-ti/ipc/ipc-transport.inc b/recipes-ti/ipc/ipc-transport.inc
+index 4ba3670..705dfb4 100644
+--- a/recipes-ti/ipc/ipc-transport.inc
++++ b/recipes-ti/ipc/ipc-transport.inc
+@@ -1,15 +1,17 @@
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
++LICENSE = "BSD-3-Clause"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ IPC_TRANSPORT_GIT_URI = "git://git.ti.com/keystone-linux/ipc-transport.git"
+-IPC_TRANSPORT_GIT_BRANCH = "master"
+ IPC_TRANSPORT_GIT_PROTOCOL = "git"
++IPC_TRANSPORT_GIT_BRANCH = "master"
+ 
+-# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
++# Below commit ID corresponds to "DEV.IPC-TRANSPORT.02.00.00.01"
+ IPC_TRANSPORT_SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
+ 
+-BRANCH="${IPC_TRANSPORT_GIT_BRANCH}"
++BRANCH = "${IPC_TRANSPORT_GIT_BRANCH}"
+ SRC_URI = "${IPC_TRANSPORT_GIT_URI};protocol=${IPC_TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
++
+ SRCREV = "${IPC_TRANSPORT_SRCREV}"
+ PV = "02.00.00.01"
 -
--Upstream-Status: Inappropriate [configuration]
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
--
--diff -uNr git-orig/tests/Makefile.am git/tests/Makefile.am
----- git-orig/tests/Makefile.am	2013-08-10 16:26:30.000000000 -0400
--+++ git/tests/Makefile.am	2013-08-10 16:28:53.753855225 -0400
--@@ -6,10 +6,11 @@
-- 
-- LDADD = $(top_builddir)/libdrm.la
-- 
---check_PROGRAMS = \
--+bin_PROGRAMS = \
-- 	dristat \
-- 	drmstat
-- 
--+check_PROGRAMS =
-- dristat_LDADD = $(CLOCK_LIB)
-- 
-- SUBDIRS = modeprint
--diff -uNr git-orig/tests/modeprint/Makefile.am git/tests/modeprint/Makefile.am
----- git-orig/tests/modeprint/Makefile.am	2013-08-10 16:26:30.000000000 -0400
--+++ git/tests/modeprint/Makefile.am	2013-08-10 16:28:53.753855225 -0400
--@@ -2,7 +2,7 @@
-- 	-I$(top_srcdir)/include/drm \
-- 	-I$(top_srcdir)
-- 
---noinst_PROGRAMS = \
--+bin_PROGRAMS = \
-- 	modeprint
-- 
-- modeprint_SOURCES = \
--diff -uNr git-orig/tests/modetest/Makefile.am git/tests/modetest/Makefile.am
----- git-orig/tests/modetest/Makefile.am	2013-08-10 16:26:30.000000000 -0400
--+++ git/tests/modetest/Makefile.am	2013-08-10 16:28:53.753855225 -0400
--@@ -3,7 +3,7 @@
-- 	-I$(top_srcdir)/libkms/ \
-- 	-I$(top_srcdir)
-- 
---noinst_PROGRAMS = \
--+bin_PROGRAMS = \
-- 	modetest
-- 
-- modetest_SOURCES = \
-diff --git a/recipes-graphics/drm/libdrm.inc b/recipes-graphics/drm/libdrm.inc
-deleted file mode 100644
-index d3e1e92..0000000
---- a/recipes-graphics/drm/libdrm.inc
-+++ /dev/null
-@@ -1,41 +0,0 @@
--SUMMARY = "Userspace interface to the kernel DRM services"
--DESCRIPTION = "The runtime library for accessing the kernel DRM services.  DRM \
--stands for \"Direct Rendering Manager\", which is the kernel portion of the \
--\"Direct Rendering Infrastructure\" (DRI).  DRI is required for many hardware \
--accelerated OpenGL drivers."
--HOMEPAGE = "http://dri.freedesktop.org"
--SECTION = "x11/base"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://xf86drm.c;beginline=9;endline=32;md5=c8a3b961af7667c530816761e949dc71"
--SRC_URI = "http://dri.freedesktop.org/libdrm/libdrm-${PV}.tar.bz2"
--PROVIDES = "drm"
--DEPENDS = "libpthread-stubs udev"
--
--# be aware that libdrm_2.4.44.bb ignores this
--INC_PR = "r4"
--
--#libpciaccess is required starting from libdrm 2.4.26
--DEPENDS += " libpciaccess"
--
--inherit autotools pkgconfig
--
--EXTRA_OECONF += "--disable-cairo-tests \
--                 --enable-omap-experimental-api \
--                 --enable-install-test-programs \
--                 --disable-manpages \
--                "
--ALLOW_EMPTY_${PN}-drivers = "1"
--PACKAGES =+ "${PN}-tests ${PN}-drivers ${PN}-radeon ${PN}-nouveau ${PN}-omap \
--             ${PN}-intel ${PN}-exynos ${PN}-kms ${PN}-freedreno"
--
--RRECOMMENDS_${PN}-drivers = "${PN}-radeon ${PN}-nouveau ${PN}-omap ${PN}-intel \
--                             ${PN}-exynos ${PN}-freedreno"
--
--FILES_${PN}-tests = "${bindir}/dr* ${bindir}/mode* ${bindir}/*test"
--FILES_${PN}-radeon = "${libdir}/libdrm_radeon.so.*"
--FILES_${PN}-nouveau = "${libdir}/libdrm_nouveau.so.*"
--FILES_${PN}-omap = "${libdir}/libdrm_omap.so.*"
--FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
--FILES_${PN}-exynos = "${libdir}/libdrm_exynos.so.*"
--FILES_${PN}-kms = "${libdir}/libkms*.so.*"
--FILES_${PN}-freedreno = "${libdir}/libdrm_freedreno.so.*"
-diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
-deleted file mode 100644
-index 86a660e..0000000
---- a/recipes-graphics/drm/libdrm_2.4.41.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--require recipes-graphics/drm/libdrm.inc
--
--FILESEXTRAPATHS_append := ":${COREBASE}/meta/recipes-graphics/drm/libdrm"
--
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
--
--DEFAULT_PREFERENCE = "-1"
--
--EXTRA_OECONF += "--enable-omap-experimental-api --enable-kms"
--
--SRC_URI = "git://git.ti.com/glsdk/libdrm.git;protocol=git"
--SRCREV = "3cb5405084111193cedb8796d259b56560b088f0"
--
--SRC_URI += "file://installtests-ti.patch \
--           "
--
--PR = "${INC_PR}.2"
--
--S = "${WORKDIR}/git"
+-INC_PR = "r1"
++INC_PR = "r2"
 -- 
-2.2.0
+1.7.10.4
 
 
