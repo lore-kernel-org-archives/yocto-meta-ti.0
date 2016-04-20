@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4CB94E00DB8; Wed, 20 Apr 2016 11:32:42 -0700 (PDT)
+	id D0148E00DB8; Wed, 20 Apr 2016 11:32:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,28 +14,27 @@ X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
 	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2779CE00D73
-	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 11:32:40 -0700 (PDT)
-Received: from vz-proxy-l005.mx.aol.com ([64.236.82.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42B9AE00DDD
+	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 11:32:41 -0700 (PDT)
+Received: from vz-proxy-l008.mx.aol.com ([64.236.82.153])
 	by vms173021.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O5Y006703I54B00@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 20 Apr 2016 13:32:39 -0500 (CDT)
+	2014)) with ESMTPA id <0O5Y00HSX3I5XE70@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 20 Apr 2016 13:32:40 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=a3t/a0oOYlYu/nGe1mf8ZA==:117
-	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=eMySOX5jHSl4LbVpDI4A:9
-Received: by 100.15.86.14 with SMTP id 627b7ed9; Wed, 20 Apr 2016 18:32:39 GMT
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=e5mUnYsNAAAA:8
+	a=E8Skk_Ev1_BXAcBIzpUA:9
+Received: by 100.15.86.14 with SMTP id 792554f4; Wed, 20 Apr 2016 18:32:40 GMT
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id DDD78161FB3;	Wed,
+	by gandalf.denix.org (Postfix) with ESMTP id DB705161FAF;	Wed,
 	20 Apr 2016 14:32:28 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 20 Apr 2016 14:32:28 -0400
-Message-id: <1461177148-20360-2-git-send-email-denis@denix.org>
+Date: Wed, 20 Apr 2016 14:32:27 -0400
+Message-id: <1461177148-20360-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-In-reply-to: <1461177148-20360-1-git-send-email-denis@denix.org>
-References: <1461177148-20360-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] libgbm: add latest version 10.0.0 from meta-arago
+Subject: [PATCH 1/2] libdrm: drop outdated custom version, use latest upstream now
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,37 +47,144 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 18:32:42 -0000
+X-List-Received-Date: Wed, 20 Apr 2016 18:32:50 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-graphics/gbm/libgbm_10.0.0.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 recipes-graphics/gbm/libgbm_10.0.0.bb
+ .../drm/libdrm-2.4.41/installtests-ti.patch        | 46 ----------------------
+ recipes-graphics/drm/libdrm.inc                    | 41 -------------------
+ recipes-graphics/drm/libdrm_2.4.41.bb              | 19 ---------
+ 3 files changed, 106 deletions(-)
+ delete mode 100644 recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
+ delete mode 100644 recipes-graphics/drm/libdrm.inc
+ delete mode 100644 recipes-graphics/drm/libdrm_2.4.41.bb
 
-diff --git a/recipes-graphics/gbm/libgbm_10.0.0.bb b/recipes-graphics/gbm/libgbm_10.0.0.bb
-new file mode 100644
-index 0000000..a55074a
---- /dev/null
-+++ b/recipes-graphics/gbm/libgbm_10.0.0.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "Userspace interface for the kernel GBM services."
-+HOMEPAGE = "http://git.ti.com"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://gbm.c;beginline=1;endline=26;md5=b871c7f2f477df29ee4c0ec437b187f7"
-+DEPENDS = "libdrm"
-+
-+inherit autotools pkgconfig
-+
-+BRANCH = "next"
-+
-+SRCREV = "96f37555c7e82a417b02051661377b10e6b3966e"
-+
-+SRC_URI = "git://git.ti.com/glsdk/libgbm.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
+diff --git a/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch b/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
+deleted file mode 100644
+index ba325c0..0000000
+--- a/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-tests: also install tests app (adjusted for TI version)
+-
+-Upstream-Status: Inappropriate [configuration]
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+-
+-diff -uNr git-orig/tests/Makefile.am git/tests/Makefile.am
+---- git-orig/tests/Makefile.am	2013-08-10 16:26:30.000000000 -0400
+-+++ git/tests/Makefile.am	2013-08-10 16:28:53.753855225 -0400
+-@@ -6,10 +6,11 @@
+- 
+- LDADD = $(top_builddir)/libdrm.la
+- 
+--check_PROGRAMS = \
+-+bin_PROGRAMS = \
+- 	dristat \
+- 	drmstat
+- 
+-+check_PROGRAMS =
+- dristat_LDADD = $(CLOCK_LIB)
+- 
+- SUBDIRS = modeprint
+-diff -uNr git-orig/tests/modeprint/Makefile.am git/tests/modeprint/Makefile.am
+---- git-orig/tests/modeprint/Makefile.am	2013-08-10 16:26:30.000000000 -0400
+-+++ git/tests/modeprint/Makefile.am	2013-08-10 16:28:53.753855225 -0400
+-@@ -2,7 +2,7 @@
+- 	-I$(top_srcdir)/include/drm \
+- 	-I$(top_srcdir)
+- 
+--noinst_PROGRAMS = \
+-+bin_PROGRAMS = \
+- 	modeprint
+- 
+- modeprint_SOURCES = \
+-diff -uNr git-orig/tests/modetest/Makefile.am git/tests/modetest/Makefile.am
+---- git-orig/tests/modetest/Makefile.am	2013-08-10 16:26:30.000000000 -0400
+-+++ git/tests/modetest/Makefile.am	2013-08-10 16:28:53.753855225 -0400
+-@@ -3,7 +3,7 @@
+- 	-I$(top_srcdir)/libkms/ \
+- 	-I$(top_srcdir)
+- 
+--noinst_PROGRAMS = \
+-+bin_PROGRAMS = \
+- 	modetest
+- 
+- modetest_SOURCES = \
+diff --git a/recipes-graphics/drm/libdrm.inc b/recipes-graphics/drm/libdrm.inc
+deleted file mode 100644
+index d3e1e92..0000000
+--- a/recipes-graphics/drm/libdrm.inc
++++ /dev/null
+@@ -1,41 +0,0 @@
+-SUMMARY = "Userspace interface to the kernel DRM services"
+-DESCRIPTION = "The runtime library for accessing the kernel DRM services.  DRM \
+-stands for \"Direct Rendering Manager\", which is the kernel portion of the \
+-\"Direct Rendering Infrastructure\" (DRI).  DRI is required for many hardware \
+-accelerated OpenGL drivers."
+-HOMEPAGE = "http://dri.freedesktop.org"
+-SECTION = "x11/base"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://xf86drm.c;beginline=9;endline=32;md5=c8a3b961af7667c530816761e949dc71"
+-SRC_URI = "http://dri.freedesktop.org/libdrm/libdrm-${PV}.tar.bz2"
+-PROVIDES = "drm"
+-DEPENDS = "libpthread-stubs udev"
+-
+-# be aware that libdrm_2.4.44.bb ignores this
+-INC_PR = "r4"
+-
+-#libpciaccess is required starting from libdrm 2.4.26
+-DEPENDS += " libpciaccess"
+-
+-inherit autotools pkgconfig
+-
+-EXTRA_OECONF += "--disable-cairo-tests \
+-                 --enable-omap-experimental-api \
+-                 --enable-install-test-programs \
+-                 --disable-manpages \
+-                "
+-ALLOW_EMPTY_${PN}-drivers = "1"
+-PACKAGES =+ "${PN}-tests ${PN}-drivers ${PN}-radeon ${PN}-nouveau ${PN}-omap \
+-             ${PN}-intel ${PN}-exynos ${PN}-kms ${PN}-freedreno"
+-
+-RRECOMMENDS_${PN}-drivers = "${PN}-radeon ${PN}-nouveau ${PN}-omap ${PN}-intel \
+-                             ${PN}-exynos ${PN}-freedreno"
+-
+-FILES_${PN}-tests = "${bindir}/dr* ${bindir}/mode* ${bindir}/*test"
+-FILES_${PN}-radeon = "${libdir}/libdrm_radeon.so.*"
+-FILES_${PN}-nouveau = "${libdir}/libdrm_nouveau.so.*"
+-FILES_${PN}-omap = "${libdir}/libdrm_omap.so.*"
+-FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+-FILES_${PN}-exynos = "${libdir}/libdrm_exynos.so.*"
+-FILES_${PN}-kms = "${libdir}/libkms*.so.*"
+-FILES_${PN}-freedreno = "${libdir}/libdrm_freedreno.so.*"
+diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
+deleted file mode 100644
+index 86a660e..0000000
+--- a/recipes-graphics/drm/libdrm_2.4.41.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-require recipes-graphics/drm/libdrm.inc
+-
+-FILESEXTRAPATHS_append := ":${COREBASE}/meta/recipes-graphics/drm/libdrm"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-EXTRA_OECONF += "--enable-omap-experimental-api --enable-kms"
+-
+-SRC_URI = "git://git.ti.com/glsdk/libdrm.git;protocol=git"
+-SRCREV = "3cb5405084111193cedb8796d259b56560b088f0"
+-
+-SRC_URI += "file://installtests-ti.patch \
+-           "
+-
+-PR = "${INC_PR}.2"
+-
+-S = "${WORKDIR}/git"
 -- 
 2.2.0
 
