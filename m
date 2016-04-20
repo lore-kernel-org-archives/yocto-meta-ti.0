@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6732AE00EF2; Wed, 20 Apr 2016 13:21:28 -0700 (PDT)
+	id A7140E00EF2; Wed, 20 Apr 2016 13:21:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,31 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99657E00E80
-	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 13:19:47 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3KKJksW003088
-	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 15:19:46 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3KKJkcS020870
-	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 15:19:46 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7FDFE007D2
+	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 13:19:46 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3KKJjmD014257
+	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 15:19:45 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3KKJj1T010600
+	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 15:19:45 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
 	Wed, 20 Apr 2016 15:19:45 -0500
 Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u3KKJixE001456;	Wed, 20 Apr 2016 15:19:46 -0500
+	u3KKJixD001456;	Wed, 20 Apr 2016 15:19:44 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 20 Apr 2016 16:19:43 -0400
-Message-ID: <1461183583-1601-2-git-send-email-jsobota@ti.com>
+Date: Wed, 20 Apr 2016 16:19:42 -0400
+Message-ID: <1461183583-1601-1-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1461183583-1601-1-git-send-email-jsobota@ti.com>
-References: <1461183583-1601-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [master/fido][PATCH V2 2/2] ipc-transport-rtos: Add RTOS packages for IPC transports
+Subject: [master/fido][PATCH V2 1/2] ipc-transport: Clean up recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,104 +50,67 @@ Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-ti/ipc/ipc-transport-common-rtos_git.bb |   23 +++++++++++++++++++++
- recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb   |   25 +++++++++++++++++++++++
- recipes-ti/ipc/ipc-transport-srio-rtos_git.bb   |   24 ++++++++++++++++++++++
- 3 files changed, 72 insertions(+)
- create mode 100644 recipes-ti/ipc/ipc-transport-common-rtos_git.bb
- create mode 100644 recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
- create mode 100644 recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
+ recipes-ti/ipc/ipc-transport-qmss.inc |    4 +++-
+ recipes-ti/ipc/ipc-transport-srio.inc |    4 +++-
+ recipes-ti/ipc/ipc-transport.inc      |   12 ++++++------
+ 3 files changed, 12 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-ti/ipc/ipc-transport-common-rtos_git.bb b/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
-new file mode 100644
-index 0000000..199e84c
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
-@@ -0,0 +1,23 @@
-+require recipes-ti/includes/ti-paths.inc
-+require ipc-transport.inc
+diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
+index a5c8dc4..f029656 100644
+--- a/recipes-ti/ipc/ipc-transport-qmss.inc
++++ b/recipes-ti/ipc/ipc-transport-qmss.inc
+@@ -3,7 +3,9 @@ LICENSE = "BSD-3-Clause"
+ 
+ require ipc-transport.inc
+ 
+-INC_PR_append = ".0"
++INC_PR_append = ".1"
 +
-+PR = "${INC_PR}.1"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+ 
+ COMPATIBLE_MACHINE = "keystone"
+ 
+diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
+index 4b5c305..f73f0f7 100644
+--- a/recipes-ti/ipc/ipc-transport-srio.inc
++++ b/recipes-ti/ipc/ipc-transport-srio.inc
+@@ -3,7 +3,9 @@ LICENSE = "BSD-3-Clause"
+ 
+ require ipc-transport.inc
+ 
+-INC_PR_append = ".0"
++INC_PR_append = ".1"
 +
-+LIC_FILES_CHKSUM = "file://common_src/bench_common.h;beginline=1;endline=31;md5=a6ddfb26d2097041d513e3881f40e4e8"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+ 
+ COMPATIBLE_MACHINE = "k2hk-evm"
+ 
+diff --git a/recipes-ti/ipc/ipc-transport.inc b/recipes-ti/ipc/ipc-transport.inc
+index 4ba3670..f399eed 100644
+--- a/recipes-ti/ipc/ipc-transport.inc
++++ b/recipes-ti/ipc/ipc-transport.inc
+@@ -1,15 +1,15 @@
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
++LICENSE = "BSD-3-Clause"
+ 
+ IPC_TRANSPORT_GIT_URI = "git://git.ti.com/keystone-linux/ipc-transport.git"
+-IPC_TRANSPORT_GIT_BRANCH = "master"
+ IPC_TRANSPORT_GIT_PROTOCOL = "git"
++IPC_TRANSPORT_GIT_BRANCH = "master"
+ 
+-# Below commit ID corresponds to DEV.IPC-TRANSPORT.02.00.00.01
++# Below commit ID corresponds to "DEV.IPC-TRANSPORT.02.00.00.01"
+ IPC_TRANSPORT_SRCREV = "88ea336c584ccec4b2c281cd7f75df9dff6d4edf"
+ 
+-BRANCH="${IPC_TRANSPORT_GIT_BRANCH}"
++BRANCH = "${IPC_TRANSPORT_GIT_BRANCH}"
+ SRC_URI = "${IPC_TRANSPORT_GIT_URI};protocol=${IPC_TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
-+
-+IPC_TRANSPORT_COMMON_DESTSUFFIX = "git/c66/example"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_COMMON_DESTSUFFIX}"
-+
-+do_compile() {
-+    :
-+}
-+
-+do_install () {
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example
-+    cp -r ${S} ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example/*"
-diff --git a/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb b/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
-new file mode 100644
-index 0000000..0631a92
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
-@@ -0,0 +1,25 @@
-+inherit ti-pdk
-+require ipc-transport.inc
-+
-+PR = "${INC_PR}.4"
-+
-+LIC_FILES_CHKSUM = "file://TransportQmss.xdc;beginline=1;endline=35;md5=ad783760d74a4cc5b8d4ad3d8a1f28a2"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+                   ti-ipc-rtos \
-+                   ipc-transport-common-rtos \
-+"
-+
-+IPC_TRANSPORT_QMSS_DESTSUFFIX = "git/c66/qmss"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_QMSS_DESTSUFFIX}"
-+
-+XDCARGS_k2hk-evm = "k2h k2k"
-+XDCARGS_k2e-evm = "k2e"
-+XDCARGS_k2l-evm = "k2l"
-+
-+export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
-+XDCPATH_append = ";${IPC_INSTALL_DIR}/packages"
-diff --git a/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb b/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
-new file mode 100644
-index 0000000..6ea3fb9
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
-@@ -0,0 +1,24 @@
-+inherit ti-pdk
-+require ipc-transport.inc
-+
-+PR = "${INC_PR}.2"
-+
-+LIC_FILES_CHKSUM = "file://TransportSrio.xdc;beginline=1;endline=35;md5=4d466471e4b933a0cc353a46bb546fe7"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+                   srio-lld-rtos \
-+                   ti-ipc-rtos \
-+                   ipc-transport-common-rtos \
-+"
-+
-+IPC_TRANSPORT_SRIO_DESTSUFFIX = "git/c66/srio"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_SRIO_DESTSUFFIX}"
-+
-+XDCARGS_k2hk-evm = "k2h k2k"
-+
-+export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
-+XDCPATH_append = ";${IPC_INSTALL_DIR}/packages"
+ SRCREV = "${IPC_TRANSPORT_SRCREV}"
+ PV = "02.00.00.01"
+-
+-INC_PR = "r1"
++INC_PR = "r2"
 -- 
 1.7.10.4
 
