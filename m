@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B205CE00F2B; Wed, 20 Apr 2016 10:16:56 -0700 (PDT)
+	id F24F9E00F06; Wed, 20 Apr 2016 10:16:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26C59E00EF4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 360E2E00F0B
 	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 10:16:46 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 51DC952A5B; Wed, 20 Apr 2016 17:16:45 +0000 (UTC)
+	id 6714552A65; Wed, 20 Apr 2016 17:16:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160420171645.51DC952A5B@arago-project.org>
+Message-Id: <20160420171645.6714552A65@arago-project.org>
 Date: Wed, 20 Apr 2016 17:16:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : gdbc6x: Bump SRCREV for AM57xx EVM PG2.0
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 17:16:56 -0000
+X-List-Received-Date: Wed, 20 Apr 2016 17:16:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 132c29de6e15963772b69e82ee3c37e0d62bac35
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=132c29de6e15963772b69e82ee3c37e0d62bac35
+Branch: master
+Commit: feea83bfaf4c185f6081860df7e29409f7ebbcb0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=feea83bfaf4c185f6081860df7e29409f7ebbcb0
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed Apr 20 18:40:33 2016 +0000
