@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C1F92E006D3; Wed, 20 Apr 2016 10:16:00 -0700 (PDT)
+	id 51DE6E00EFD; Wed, 20 Apr 2016 10:16:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3127E00D68
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4480E00EE6
 	for <meta-ti@yoctoproject.org>; Wed, 20 Apr 2016 10:15:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 65E6852A83; Wed, 20 Apr 2016 17:15:54 +0000 (UTC)
+	id 40E1F52A65; Wed, 20 Apr 2016 17:15:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160420171554.65E6852A83@arago-project.org>
+Message-Id: <20160420171554.40E1F52A65@arago-project.org>
 Date: Wed, 20 Apr 2016 17:15:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : pktlib-rtos: Add RTOS package for pktlib
+Subject: Justin Sobota : traceframework-rtos: Add RTOS package for Traceframework
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +33,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 17:16:00 -0000
+X-List-Received-Date: Wed, 20 Apr 2016 17:16:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: fe2d43b7242aeafa983cf17afb24198792b6f2d2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fe2d43b7242aeafa983cf17afb24198792b6f2d2
+Commit: 9b20ad7573e4555466c8be58ec17c3faa3221d65
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9b20ad7573e4555466c8be58ec17c3faa3221d65
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Apr 20 03:43:39 2016 +0000
+Date:   Wed Apr 20 02:49:45 2016 +0000
 
-pktlib-rtos: Add RTOS package for pktlib
+traceframework-rtos: Add RTOS package for Traceframework
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pktlib/pktlib-rtos_git.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
+ .../traceframework/traceframework-rtos_git.bb      |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/pktlib/pktlib-rtos_git.bb b/recipes-bsp/pktlib/pktlib-rtos_git.bb
+diff --git a/recipes-bsp/traceframework/traceframework-rtos_git.bb b/recipes-bsp/traceframework/traceframework-rtos_git.bb
 new file mode 100644
-index 0000000..0471156
+index 0000000..32994d3
 --- /dev/null
-+++ b/recipes-bsp/pktlib/pktlib-rtos_git.bb
-@@ -0,0 +1,13 @@
++++ b/recipes-bsp/traceframework/traceframework-rtos_git.bb
+@@ -0,0 +1,10 @@
 +inherit ti-pdk
-+require pktlib.inc
 +
-+PR = "${INC_PR}.0"
++require traceframework.inc
 +
-+DEPENDS_append = " rm-lld-rtos \
-+                   qmss-lld-rtos \
-+                   cppi-lld-rtos \
++PR = "${INC_PR}.1"
++
++DEPENDS_append = " uia \
 +"
 +
-+XDCARGS_k2hk-evm = "k2h k2k"
-+XDCARGS_k2e-evm = "k2e"
-+XDCARGS_k2l-evm = "k2l"
++XDCPATH_append = ";${UIA_INSTALL_DIR}/packages"
 
 
