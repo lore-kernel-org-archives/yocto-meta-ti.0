@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CFE93E00D2F; Tue, 26 Apr 2016 11:55:20 -0700 (PDT)
+	id D0E3DE00D19; Tue, 26 Apr 2016 11:55:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB6B5E00D28
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA370E00D19
 	for <meta-ti@yoctoproject.org>; Tue, 26 Apr 2016 11:55:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F3C34529A5; Tue, 26 Apr 2016 18:55:15 +0000 (UTC)
+	id 137D4529BF; Tue, 26 Apr 2016 18:55:16 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160426185515.F3C34529A5@arago-project.org>
-Date: Tue, 26 Apr 2016 18:55:15 +0000 (UTC)
+Message-Id: <20160426185516.137D4529BF@arago-project.org>
+Date: Tue, 26 Apr 2016 18:55:16 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : ipc-transport-rtos: Add RTOS packages for IPC transports
+Subject: Jacob Stiffler : netapi: clean up recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,113 +38,51 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 701bb5c16f058812604fd2ba87d5675dfdef093a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=701bb5c16f058812604fd2ba87d5675dfdef093a
+Commit: 7ae1abe462d8eafc378f10d2e6f23aeac61fed6c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7ae1abe462d8eafc378f10d2e6f23aeac61fed6c
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Apr 21 02:19:43 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Mon Apr 25 19:08:16 2016 +0000
 
-ipc-transport-rtos: Add RTOS packages for IPC transports
+netapi: clean up recipes
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
+* Define variables to abstract GIT SRC_URI parameters
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ipc-transport-common-rtos_git.bb |   23 +++++++++++++++++++++
- recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb   |   25 +++++++++++++++++++++++
- recipes-ti/ipc/ipc-transport-srio-rtos_git.bb   |   24 ++++++++++++++++++++++
- 3 files changed, 72 insertions(+), 0 deletions(-)
+ recipes-ti/netapi/netapi.inc |   14 ++++++++++----
+ 1 files changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/ipc/ipc-transport-common-rtos_git.bb b/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
-new file mode 100644
-index 0000000..199e84c
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
-@@ -0,0 +1,23 @@
-+require recipes-ti/includes/ti-paths.inc
-+require ipc-transport.inc
+diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
+index d710a22..7ce8f19 100644
+--- a/recipes-ti/netapi/netapi.inc
++++ b/recipes-ti/netapi/netapi.inc
+@@ -9,13 +9,19 @@ DEBIAN_NOAUTONAME_${PN}-dev = "1"
+ DEBIAN_NOAUTONAME_${PN}-dbg = "1"
+ DEBIAN_NOAUTONAME_${PN}-staticdev = "1"
+ 
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
++NETAPI_GIT_URI = "git://git.ti.com/keystone-rtos/netapi.git"
++NETAPI_GIT_PROTOCOL = "git"
++NETAPI_GIT_BRANCH = "master"
+ 
+ # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
+-SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
++NETAPI_SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
 +
-+PR = "${INC_PR}.1"
++BRANCH = "${NETAPI_GIT_BRANCH}"
++SRC_URI = "${NETAPI_GIT_URI};protocol=${NETAPI_GIT_PROTOCOL};branch=${BRANCH}"
++SRCREV = "${NETAPI_SRCREV}"
 +
-+LIC_FILES_CHKSUM = "file://common_src/bench_common.h;beginline=1;endline=31;md5=a6ddfb26d2097041d513e3881f40e4e8"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
-+
-+IPC_TRANSPORT_COMMON_DESTSUFFIX = "git/c66/example"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_COMMON_DESTSUFFIX}"
-+
-+do_compile() {
-+    :
-+}
-+
-+do_install () {
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example
-+    cp -r ${S} ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example/*"
-diff --git a/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb b/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
-new file mode 100644
-index 0000000..0631a92
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
-@@ -0,0 +1,25 @@
-+inherit ti-pdk
-+require ipc-transport.inc
-+
-+PR = "${INC_PR}.4"
-+
-+LIC_FILES_CHKSUM = "file://TransportQmss.xdc;beginline=1;endline=35;md5=ad783760d74a4cc5b8d4ad3d8a1f28a2"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+                   ti-ipc-rtos \
-+                   ipc-transport-common-rtos \
-+"
-+
-+IPC_TRANSPORT_QMSS_DESTSUFFIX = "git/c66/qmss"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_QMSS_DESTSUFFIX}"
-+
-+XDCARGS_k2hk-evm = "k2h k2k"
-+XDCARGS_k2e-evm = "k2e"
-+XDCARGS_k2l-evm = "k2l"
-+
-+export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
-+XDCPATH_append = ";${IPC_INSTALL_DIR}/packages"
-diff --git a/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb b/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
-new file mode 100644
-index 0000000..6ea3fb9
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
-@@ -0,0 +1,24 @@
-+inherit ti-pdk
-+require ipc-transport.inc
-+
-+PR = "${INC_PR}.2"
-+
-+LIC_FILES_CHKSUM = "file://TransportSrio.xdc;beginline=1;endline=35;md5=4d466471e4b933a0cc353a46bb546fe7"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+                   srio-lld-rtos \
-+                   ti-ipc-rtos \
-+                   ipc-transport-common-rtos \
-+"
-+
-+IPC_TRANSPORT_SRIO_DESTSUFFIX = "git/c66/srio"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_SRIO_DESTSUFFIX}"
-+
-+XDCARGS_k2hk-evm = "k2h k2k"
-+
-+export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
-+XDCPATH_append = ";${IPC_INSTALL_DIR}/packages"
+ PV = "01.01.00.06"
+-INC_PR = "r4"
++INC_PR = "r5"
+ 
+ DEVICELIST_k2hk-evm = "k2h k2k"
+ DEVICELIST_k2l-evm  = "k2l"
 
 
