@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 461E0E00D3B; Tue, 26 Apr 2016 11:56:05 -0700 (PDT)
+	id 78714E00948; Wed, 27 Apr 2016 11:19:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E52AEE00D19
-	for <meta-ti@yoctoproject.org>; Tue, 26 Apr 2016 11:56:00 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 0E816529BF; Tue, 26 Apr 2016 18:56:00 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160426185600.0E816529BF@arago-project.org>
-Date: Tue, 26 Apr 2016 18:56:00 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : ipc-transport-rtos: Add RTOS packages for IPC transports
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA53EE00849
+	for <meta-ti@yoctoproject.org>; Wed, 27 Apr 2016 11:19:47 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3RIJlYq008961
+	for <meta-ti@yoctoproject.org>; Wed, 27 Apr 2016 13:19:47 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3RIJkEY011669
+	for <meta-ti@yoctoproject.org>; Wed, 27 Apr 2016 13:19:46 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 27 Apr 2016 13:19:46 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u3RIJkOn003524;	Wed, 27 Apr 2016 13:19:46 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 27 Apr 2016 14:19:45 -0400
+Message-ID: <1461781185-39246-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] cmem: Update to new eng version 4.11.00.00_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,118 +45,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2016 18:56:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 27 Apr 2016 18:19:49 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: fido
-Commit: bc7adf6d7ac984050672adccb8b99e20b141394e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bc7adf6d7ac984050672adccb8b99e20b141394e
+Resolves issues with kernel version 4.4
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Apr 21 02:19:43 2016 +0000
-
-ipc-transport-rtos: Add RTOS packages for IPC transports
-
-Signed-off-by: Justin Sobota <jsobota@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
+ recipes-bsp/cmem/cmem.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- recipes-ti/ipc/ipc-transport-common-rtos_git.bb |   23 +++++++++++++++++++++
- recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb   |   25 +++++++++++++++++++++++
- recipes-ti/ipc/ipc-transport-srio-rtos_git.bb   |   24 ++++++++++++++++++++++
- 3 files changed, 72 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-ti/ipc/ipc-transport-common-rtos_git.bb b/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
-new file mode 100644
-index 0000000..199e84c
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
-@@ -0,0 +1,23 @@
-+require recipes-ti/includes/ti-paths.inc
-+require ipc-transport.inc
-+
-+PR = "${INC_PR}.1"
-+
-+LIC_FILES_CHKSUM = "file://common_src/bench_common.h;beginline=1;endline=31;md5=a6ddfb26d2097041d513e3881f40e4e8"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
-+
-+IPC_TRANSPORT_COMMON_DESTSUFFIX = "git/c66/example"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_COMMON_DESTSUFFIX}"
-+
-+do_compile() {
-+    :
-+}
-+
-+do_install () {
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example
-+    cp -r ${S} ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example/*"
-diff --git a/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb b/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
-new file mode 100644
-index 0000000..0631a92
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
-@@ -0,0 +1,25 @@
-+inherit ti-pdk
-+require ipc-transport.inc
-+
-+PR = "${INC_PR}.4"
-+
-+LIC_FILES_CHKSUM = "file://TransportQmss.xdc;beginline=1;endline=35;md5=ad783760d74a4cc5b8d4ad3d8a1f28a2"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+                   ti-ipc-rtos \
-+                   ipc-transport-common-rtos \
-+"
-+
-+IPC_TRANSPORT_QMSS_DESTSUFFIX = "git/c66/qmss"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_QMSS_DESTSUFFIX}"
-+
-+XDCARGS_k2hk-evm = "k2h k2k"
-+XDCARGS_k2e-evm = "k2e"
-+XDCARGS_k2l-evm = "k2l"
-+
-+export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
-+XDCPATH_append = ";${IPC_INSTALL_DIR}/packages"
-diff --git a/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb b/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
-new file mode 100644
-index 0000000..6ea3fb9
---- /dev/null
-+++ b/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
-@@ -0,0 +1,24 @@
-+inherit ti-pdk
-+require ipc-transport.inc
-+
-+PR = "${INC_PR}.2"
-+
-+LIC_FILES_CHKSUM = "file://TransportSrio.xdc;beginline=1;endline=35;md5=4d466471e4b933a0cc353a46bb546fe7"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+                   srio-lld-rtos \
-+                   ti-ipc-rtos \
-+                   ipc-transport-common-rtos \
-+"
-+
-+IPC_TRANSPORT_SRIO_DESTSUFFIX = "git/c66/srio"
-+
-+S = "${WORKDIR}/${IPC_TRANSPORT_SRIO_DESTSUFFIX}"
-+
-+XDCARGS_k2hk-evm = "k2h k2k"
-+
-+export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
-+XDCPATH_append = ";${IPC_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index 19d333c..413f925 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+ 
+ BRANCH ?= "lu-next"
+-# This corresponds to version 4.10.02.05_eng
+-SRCREV = "8df44102413c2d653341c5b7e6caee882e206d8c"
++# This corresponds to version 4.11.00.00_eng
++SRCREV = "852e97b5584cbdb6aa0fdef02a7c4e245409bcb6"
+ 
+-PV = "4.10.02.05+git${SRCPV}"
++PV = "4.11.00.00+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ 
+-- 
+1.9.1
 
 
