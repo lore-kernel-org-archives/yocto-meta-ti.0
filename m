@@ -1,38 +1,39 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 78714E00948; Wed, 27 Apr 2016 11:19:49 -0700 (PDT)
+	id 5DD94E00C46; Wed, 27 Apr 2016 13:02:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.7 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA53EE00849
-	for <meta-ti@yoctoproject.org>; Wed, 27 Apr 2016 11:19:47 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3RIJlYq008961
-	for <meta-ti@yoctoproject.org>; Wed, 27 Apr 2016 13:19:47 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3RIJkEY011669
-	for <meta-ti@yoctoproject.org>; Wed, 27 Apr 2016 13:19:46 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 27 Apr 2016 13:19:46 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u3RIJkOn003524;	Wed, 27 Apr 2016 13:19:46 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 27 Apr 2016 14:19:45 -0400
-Message-ID: <1461781185-39246-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] cmem: Update to new eng version 4.11.00.00_eng
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50D09E00C41
+	for <meta-ti@yoctoproject.org>; Wed, 27 Apr 2016 13:02:44 -0700 (PDT)
+Received: from vz-proxy-l001.mx.aol.com ([64.236.82.153])
+	by vms173007.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6B00IDF6BRY930@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 27 Apr 2016 15:02:16 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=Z_fOf0HfadaFbtlxHwEA:9
+Received: by 100.15.86.14 with SMTP id 72f9a037; Wed, 27 Apr 2016 20:02:15 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 648E9161FAE;	Wed,
+	27 Apr 2016 16:02:15 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 27 Apr 2016 16:02:15 -0400
+Message-id: <1461787335-10352-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] am335x-evm: handle omap vs. 8250 uart gracefully b/w EVM and IDK
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,35 +46,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2016 18:19:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 27 Apr 2016 20:02:47 -0000
 
-Resolves issues with kernel version 4.4
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/cmem/cmem.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/am335x-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 19d333c..413f925 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index ac643b4..f932f4c 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -12,7 +12,7 @@ MACHINE_FEATURES += "touchscreen"
+ IMAGE_FSTYPES += "ubi tar.gz tar.xz"
  
- BRANCH ?= "lu-next"
--# This corresponds to version 4.10.02.05_eng
--SRCREV = "8df44102413c2d653341c5b7e6caee882e206d8c"
-+# This corresponds to version 4.11.00.00_eng
-+SRCREV = "852e97b5584cbdb6aa0fdef02a7c4e245409bcb6"
+ SERIAL_CONSOLE = ""
+-SERIAL_CONSOLES = "115200;ttyS0 115200;ttyS3"
++SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0 115200;ttyS3 115200;ttyO3"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
  
--PV = "4.10.02.05+git${SRCPV}"
-+PV = "4.11.00.00+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
+ # UBI information.  Note that this is board and kernel specific.  Changes
 -- 
-1.9.1
+2.2.0
 
 
