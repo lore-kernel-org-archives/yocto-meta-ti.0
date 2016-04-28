@@ -1,41 +1,39 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 52DCEE00DD5; Thu, 28 Apr 2016 07:02:02 -0700 (PDT)
+	id BB386E00DD0; Thu, 28 Apr 2016 07:14:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.9 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB760E00DD6
-	for <meta-ti@yoctoproject.org>; Thu, 28 Apr 2016 07:01:51 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u3SE1oiW002462
-	for <meta-ti@yoctoproject.org>; Thu, 28 Apr 2016 09:01:50 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3SE1oUN010153
-	for <meta-ti@yoctoproject.org>; Thu, 28 Apr 2016 09:01:50 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 28 Apr 2016 09:01:50 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u3SE1n46006409;
-	Thu, 28 Apr 2016 09:01:50 -0500
-Date: Thu, 28 Apr 2016 10:01:34 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20160428140133.GI22291@edge>
-References: <1461781185-39246-1-git-send-email-sam.nelson@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1461781185-39246-1-git-send-email-sam.nelson@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] cmem: Update to new eng version 4.11.00.00_eng
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56526E00DCB
+	for <meta-ti@yoctoproject.org>; Thu, 28 Apr 2016 07:14:15 -0700 (PDT)
+Received: from vz-proxy-l007.mx.aol.com ([64.236.82.157])
+	by vms173009.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6C008GTKVMOK40@vms173009.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 28 Apr 2016 09:14:11 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=EDyElNE8DnJcdewKkuvZJw==:117
+	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=MDFdVLQYG8FeA0TxC2gA:9
+Received: by 100.15.86.14 with SMTP id 777d21a8; Thu, 28 Apr 2016 14:14:11 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 53E16161FAE;	Thu,
+	28 Apr 2016 10:14:10 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Thu, 28 Apr 2016 10:14:07 -0400
+Message-id: <1461852849-16127-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH 1/3] linux-ti-staging: update to 4.4.8 and latest domain merges
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,44 +46,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 14:02:02 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 28 Apr 2016 14:14:19 -0000
 
-Does it keep compatibility with 4.1?
+From: Denys Dmytriyenko <denys@ti.com>
 
-On Wed, Apr 27, 2016 at 02:19:45PM -0400, Sam Nelson wrote:
-> Resolves issues with kernel version 4.4
-> 
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> ---
->  recipes-bsp/cmem/cmem.inc | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-> index 19d333c..413f925 100644
-> --- a/recipes-bsp/cmem/cmem.inc
-> +++ b/recipes-bsp/cmem/cmem.inc
-> @@ -4,10 +4,10 @@ LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
->  
->  BRANCH ?= "lu-next"
-> -# This corresponds to version 4.10.02.05_eng
-> -SRCREV = "8df44102413c2d653341c5b7e6caee882e206d8c"
-> +# This corresponds to version 4.11.00.00_eng
-> +SRCREV = "852e97b5584cbdb6aa0fdef02a7c4e245409bcb6"
->  
-> -PV = "4.10.02.05+git${SRCPV}"
-> +PV = "4.11.00.00+git${SRCPV}"
->  
->  SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
->  
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index af7e352..dd999ff 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+ 
+ BRANCH = "ti-rt-linux-4.4.y"
+ 
+-SRCREV = "01711ca3dbed322591d9e0c2c20eb57afa2110e7"
++SRCREV = "ed3375a3d4d0a8cbc1e48811e51fe03521652789"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 4d4c14a..12517e9 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -70,8 +70,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.4.y"
+ 
+-SRCREV = "a4f797e3abb23234fb1fdf6694faaf91822f1a1c"
+-PV = "4.4.7+git${SRCPV}"
++SRCREV = "c789f902e73f46e198dd09c443d7a36473137f33"
++PV = "4.4.8+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
+@@ -79,10 +79,10 @@ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ 
+-# SoC specific config fragments are not enabled yet
+ KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${KERNEL_CONFIG_DIR}/am33xx_only.cfg"
+ KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx_only.cfg"
+ KERNEL_CONFIG_FRAGMENTS_append_dra7xx = " ${KERNEL_CONFIG_DIR}/dra7_only.cfg"
++KERNEL_CONFIG_FRAGMENTS_append_k2g-evm = " ${KERNEL_CONFIG_DIR}/k2g_only.cfg"
+ 
+ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+-- 
+2.2.0
+
 
