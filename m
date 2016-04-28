@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 67090E00E07; Thu, 28 Apr 2016 12:00:54 -0700 (PDT)
+	id A5D8BE00E0A; Thu, 28 Apr 2016 12:00:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32C1DE00E08
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3408FE00E0C
 	for <meta-ti@yoctoproject.org>; Thu, 28 Apr 2016 12:00:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EED3B52A7D; Thu, 28 Apr 2016 19:00:38 +0000 (UTC)
+	id C1285529EF; Thu, 28 Apr 2016 19:00:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160428190038.EED3B52A7D@arago-project.org>
+Message-Id: <20160428190038.C1285529EF@arago-project.org>
 Date: Thu, 28 Apr 2016 19:00:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am335x-evm: bump max_leb_cnt
+Subject: Sam Nelson : cmem: Update to new eng version 4.11.00.00_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,33 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 4f6c54d9448fc757db4b92c7aa8febed7a7f63b8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f6c54d9448fc757db4b92c7aa8febed7a7f63b8
+Commit: 257a370e7aec4a8954e79697deafec2cd7c2301d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=257a370e7aec4a8954e79697deafec2cd7c2301d
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Apr 28 20:00:28 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Thu Apr 28 00:19:45 2016 +0000
 
-am335x-evm: bump max_leb_cnt
+cmem: Update to new eng version 4.11.00.00_eng
 
+Resolves issues with kernel version 4.4
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-bsp/cmem/cmem.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index f932f4c..138cb45 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4600"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4700"
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index 19d333c..413f925 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+ BRANCH ?= "lu-next"
+-# This corresponds to version 4.10.02.05_eng
+-SRCREV = "8df44102413c2d653341c5b7e6caee882e206d8c"
++# This corresponds to version 4.11.00.00_eng
++SRCREV = "852e97b5584cbdb6aa0fdef02a7c4e245409bcb6"
+ 
+-PV = "4.10.02.05+git${SRCPV}"
++PV = "4.11.00.00+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ 
 
 
