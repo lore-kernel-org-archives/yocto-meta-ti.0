@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F7B4E00E0C; Thu, 28 Apr 2016 12:00:55 -0700 (PDT)
+	id D0529E00C51; Fri, 29 Apr 2016 15:15:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D7B1E00E11
-	for <meta-ti@yoctoproject.org>; Thu, 28 Apr 2016 12:00:41 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6318B52A94; Thu, 28 Apr 2016 19:00:39 +0000 (UTC)
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7177E00C41
+	for <meta-ti@yoctoproject.org>; Fri, 29 Apr 2016 15:15:23 -0700 (PDT)
+Received: from vz-proxy-l002.mx.aol.com ([64.236.82.148])
+	by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6F00F6Q1SSTV50@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 29 Apr 2016 17:15:07 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
+	a=kziv93cY1bsA:10 a=sozttTNsAAAA:8	a=YQmRWQ_4xF5TMZ6b-s4A:9
+Received: by 100.15.86.14 with SMTP id 4f9b3a1d; Fri, 29 Apr 2016 22:15:07 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 9F64F161FD0;	Fri,
+	29 Apr 2016 18:14:51 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160428190039.6318B52A94@arago-project.org>
-Date: Thu, 28 Apr 2016 19:00:39 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot: remove outdated versions
+Date: Fri, 29 Apr 2016 18:14:51 -0400
+Message-id: <1461968091-21403-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] eudev: immediately tell kernel that userspace FW loading failed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,233 +46,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 19:00:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 29 Apr 2016 22:15:26 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 398fb120076ab5b3afc9978f80f18dfc2f459331
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=398fb120076ab5b3afc9978f80f18dfc2f459331
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Apr 28 20:14:09 2016 +0000
-
-u-boot: remove outdated versions
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-core/udev/eudev/firmware.rules | 3 +++
+ recipes-core/udev/eudev_%.bbappend     | 7 +++++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-core/udev/eudev/firmware.rules
 
- recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb      |   20 ------
- recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb      |   17 -----
- recipes-bsp/u-boot/u-boot-keystone_2013.01.bb      |   71 --------------------
- recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |   16 -----
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb    |   18 -----
- recipes-bsp/u-boot/u-boot_2014.07.bb               |   25 -------
- 6 files changed, 0 insertions(+), 167 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
-deleted file mode 100644
-index 8f805bc..0000000
---- a/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--require u-boot-ti.inc
--
--DESCRIPTION = "u-boot bootloader for ARM MPU devices"
--
--COMPATIBLE_MACHINE = "ti33x"
--
--DEFAULT_PREFERENCE = "-1"
--
--PR = "r6"
--PV_append = "+git${SRCPV}"
--
--SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
--
--# This version of u-boot is meant for 3.2 kernel which doesn't support device tree.
--BRANCH = "ti-u-boot-2013.01.01-amsdk-06.00.00.00"
--
--SRCREV = "540aa6fbb0c9274bda598f7e8819ed28259cad6b"
--
--# Set the name of the SPL that will built so that it is also packaged with u-boot.
--SPL_BINARY = "MLO"
-diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-deleted file mode 100644
-index 3a22864..0000000
---- a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--require u-boot-ti.inc
--
--DESCRIPTION = "u-boot bootloader for TI devices supported by the GLSDK product"
--
--PR = "r1"
--PV_append = "+git${SRCPV}"
--
--DEFAULT_PREFERENCE = "-1"
--
--SRC_URI = "git://git.omapzoom.org/repo/u-boot.git;protocol=git;branch=${BRANCH}"
--
--BRANCH ?= "p-ti-u-boot-2013.04"
--
--SRCREV = "76447484441a4b8e00840a2bde74e66dbac9e631"
--
--SPL_BINARY = "MLO"
--SPL_UART_BINARY = "u-boot-spl.bin"
-diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-deleted file mode 100644
-index e4387fc..0000000
---- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-+++ /dev/null
-@@ -1,71 +0,0 @@
--require u-boot-ti.inc
--
--DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
--
--COMPATIBLE_MACHINE = "keystone"
--
--PR = "r6"
--PV_append = "+git${SRCPV}"
--
--# Tag "K2_UBOOT_2013_01_15.07_01"
--SRCREV = "5eaedcc4c2bca0ed971ee46694df7edc0cfa36cf"
--BRANCH = "master"
--
--SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
--
--S = "${WORKDIR}/git"
--
--UBOOT_SUFFIX = "bin"
--UBOOT_MAKE_TARGET = "u-boot-spi.gph u-boot-nand.gph"
--
--# SPI NOR Flash binaries
--UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
--UBOOT_SPI_BINARY = "u-boot.img"
--UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
--UBOOT_NAND_GPH_BINARY = "u-boot-nand.gph"
--
--# SPI NOR Flash deployed images
--UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
--UBOOT_SPI_SPL_SYMLINK = "u-boot-spl-${MACHINE}.bin"
--UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
--UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
--UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
--UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
--UBOOT_NAND_GPH_IMAGE = "u-boot-nand-${MACHINE}-${PV}-${PR}.gph"
--UBOOT_NAND_GPH_SYMLINK = "u-boot-nand-${MACHINE}.gph"
--
--do_install_append () {
--	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
--	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
--
--	install ${S}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
--	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
--
--	install ${S}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
--	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
--
--        install ${S}/${UBOOT_NAND_GPH_BINARY} ${D}/boot/${UBOOT_NAND_GPH_IMAGE}
--        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${D}/boot/${UBOOT_NAND_GPH_BINARY}
--}
--
--do_deploy_append () {
--	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
--	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
--	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
--	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
--
--	install ${S}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
--	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
--	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
--	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
--
--	install ${S}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
--	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
--	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
--	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
--
--        install ${S}/${UBOOT_NAND_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_NAND_GPH_IMAGE}
--        rm -f ${UBOOT_NAND_GPH_BINARY} ${UBOOT_NAND_GPH_SYMLINK}
--        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${UBOOT_NAND_GPH_SYMLINK}
--        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${UBOOT_NAND_GPH_BINARY}
--}
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-deleted file mode 100644
-index 821e9ed..0000000
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require u-boot-ti.inc
--
--DESCRIPTION = "u-boot bootloader for TI devices"
--
--PR = "r5"
--PV_append = "+git${SRCPV}"
--
--SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
--
--BRANCH ?= "ti-u-boot-2013.01.01"
--
--# This commit corresponds to ti2013.04.00 release tag
--SRCREV = "7552b4c906b0a50fbc5225dc43ed0192618e9d5d"
--
--SPL_BINARY = "MLO"
--SPL_UART_BINARY = "u-boot-spl.bin"
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-deleted file mode 100644
-index de44faa..0000000
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--require u-boot-ti.inc
--
--DESCRIPTION = "u-boot bootloader for TI devices"
--
--LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
--
--PR = "r8"
--PV_append = "+git${SRCPV}"
--
--SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
--
--BRANCH ?= "ti-u-boot-2013.10"
--
--# Corresponds to tag ti2013.12.01_amsdk-07.01
--SRCREV = "259ff9a577cc66cb40e3cdff3e41628e466f0fef"
--
--SPL_BINARY = "MLO"
--SPL_UART_BINARY = "u-boot-spl.bin"
-diff --git a/recipes-bsp/u-boot/u-boot_2014.07.bb b/recipes-bsp/u-boot/u-boot_2014.07.bb
-deleted file mode 100644
-index 6cd8acd..0000000
---- a/recipes-bsp/u-boot/u-boot_2014.07.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--require u-boot-ti.inc
--
--# DEPEND on dtc-native for mainline u-boot because the mainline u-boot depends
--# on some of the latest syntax constructs for an appended in dtb used for
--# items like secure boot/image signing.
--DEPENDS += "dtc-native"
--
--DESCRIPTION = "Mainline u-boot bootloader"
--
--DEFAULT_PREFERENCE = "-1"
--
--LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
--
--SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
--
--BRANCH ?= "master"
--
--# Corresponds to tag v2014.07
--SRCREV = "524123a70761110c5cf3ccc5f52f6d4da071b959"
--
--SPL_BINARY = "MLO"
--SPL_UART_BINARY = "u-boot-spl.bin"
--
--SPL_BINARY_omapl138 = ""
--SPL_UART_BINARY_omapl138 = ""
+diff --git a/recipes-core/udev/eudev/firmware.rules b/recipes-core/udev/eudev/firmware.rules
+new file mode 100644
+index 0000000..f7a08ce
+--- /dev/null
++++ b/recipes-core/udev/eudev/firmware.rules
+@@ -0,0 +1,3 @@
++# stub for immediately telling the kernel that userspace firmware loading
++# failed; necessary to avoid long timeouts with CONFIG_FW_LOADER_USER_HELPER=y
++SUBSYSTEM=="firmware", ACTION=="add", ATTR{loading}="-1"
+diff --git a/recipes-core/udev/eudev_%.bbappend b/recipes-core/udev/eudev_%.bbappend
+index a23d015..54cbf84 100644
+--- a/recipes-core/udev/eudev_%.bbappend
++++ b/recipes-core/udev/eudev_%.bbappend
+@@ -1,8 +1,11 @@
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ 
+-SRC_URI_append = " file://omap-tty.rules"
++SRC_URI_append = " \
++    file://omap-tty.rules \
++    file://firmware.rules \
++"
+ 
+-PR_append = ".1"
++PR_append = ".2"
+ 
+ install_omap_rules() {
+     install -m 0644 ${WORKDIR}/omap-tty.rules ${D}${sysconfdir}/udev/rules.d/
+-- 
+2.2.0
 
 
