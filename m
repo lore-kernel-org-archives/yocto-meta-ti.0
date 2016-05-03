@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E48A2E00D31; Mon,  2 May 2016 19:19:15 -0700 (PDT)
+	id 6327CE00D28; Mon,  2 May 2016 19:26:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.17 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A750FE00D21
-	for <meta-ti@yoctoproject.org>; Mon,  2 May 2016 19:19:12 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 0663A52A1C; Tue,  3 May 2016 02:19:11 +0000 (UTC)
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3924CE00D21
+	for <meta-ti@yoctoproject.org>; Mon,  2 May 2016 19:26:16 -0700 (PDT)
+Received: from vz-proxy-l003.mx.aol.com ([64.236.82.155])
+	by vms173017.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6K00CE9XFCM270@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 02 May 2016 21:26:00 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=i+tV1o3iWEoTTvx3QNPGxA==:117
+	a=yrkiwgmsf1kA:10 a=sozttTNsAAAA:8	a=SNinqSKQRWfoU53PbUMA:9
+Received: by 100.15.86.14 with SMTP id 600ac2d7; Tue, 03 May 2016 02:26:00 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 1ECCB161FDB;	Mon,
+	2 May 2016 22:26:00 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160503021911.0663A52A1C@arago-project.org>
-Date: Tue,  3 May 2016 02:19:11 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : recipes: replace remaining base_contains with bb.utils. contains
+Date: Mon, 02 May 2016 22:25:59 -0400
+Message-id: <1462242359-5625-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] ti-unpack: update for new Ubuntu 32bit lib packaging
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,80 +46,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2016 02:19:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 May 2016 02:26:20 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 55408800f8842cda8d3b8d32c9b8737a1b5ef7f7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=55408800f8842cda8d3b8d32c9b8737a1b5ef7f7
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue May  3 06:09:26 2016 +0000
-
-recipes: replace remaining base_contains with bb.utils.contains
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-ti/includes/ti-unpack.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    2 +-
- recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb |    2 +-
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb  |    2 +-
- recipes-bsp/vpe-tests/vpe-tests_git.bb       |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index e532f21..baefed4 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -18,7 +18,7 @@ SRCREV = "035329caed63abe7193c855ad5d561ae783b19d7"
+diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
+index c19c78c..9101044 100644
+--- a/recipes-ti/includes/ti-unpack.inc
++++ b/recipes-ti/includes/ti-unpack.inc
+@@ -24,8 +24,8 @@ python ti_bin_do_unpack() {
+     lib32path = '/lib'
+     if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
+         lib32path = '/lib32'
+-    if not os.path.exists('%s/libc.so.6' % lib32path):
+-        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
++    if not os.path.exists('%s/libc.so.6' % lib32path) and not os.path.exists('%s/i386-linux-gnu/libc.so.6' % lib32path):
++        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install libc6:i386' on Ubuntu/Debian")
  
- BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
- 
--FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
-+FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
- 
- EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}" LD="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}""
- 
-diff --git a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
-index 338028f..2f55421 100644
---- a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
-@@ -14,7 +14,7 @@ SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;proto
- 
- S = "${WORKDIR}/git"
- 
--FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
-+FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
- 
- do_compile() {
- 	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}"
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index 9344371..3b64be9 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -13,7 +13,7 @@ SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;proto
- 
- S = "${WORKDIR}/git"
- 
--FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
-+FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
- 
- do_compile() {
- 	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}"
-diff --git a/recipes-bsp/vpe-tests/vpe-tests_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-index 951544b..92c425b 100644
---- a/recipes-bsp/vpe-tests/vpe-tests_git.bb
-+++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-@@ -18,7 +18,7 @@ SRC_URI = "git://git.ti.com/vpe_tests/vpe_tests.git;protocol=git;branch=${BRANCH
- 
- S = "${WORKDIR}/git"
- 
--FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
-+FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
- 
- # The test application needs additional include headers from the kernel
- EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${FLOATABI}" KDIR="${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"'
+     localdata = bb.data.createCopy(d)
+     bb.data.update_data(localdata)
+-- 
+2.2.0
 
 
