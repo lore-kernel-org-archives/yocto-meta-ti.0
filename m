@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EA74EE007EF; Wed,  4 May 2016 09:42:02 -0700 (PDT)
+	id E9832E00870; Wed,  4 May 2016 10:12:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7223E00870
-	for <meta-ti@yoctoproject.org>; Wed,  4 May 2016 09:41:58 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id B3D8A52A7F; Wed,  4 May 2016 16:41:57 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160504164157.B3D8A52A7F@arago-project.org>
-Date: Wed,  4 May 2016 16:41:57 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : eudev: install the new firmware rule
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B042E00791
+	for <meta-ti@yoctoproject.org>; Wed,  4 May 2016 10:12:07 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u44HC7K3004772
+	for <meta-ti@yoctoproject.org>; Wed, 4 May 2016 12:12:07 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u44HC7q1022055
+	for <meta-ti@yoctoproject.org>; Wed, 4 May 2016 12:12:07 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 4 May 2016 12:12:06 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u44HC6uU002376;	Wed, 4 May 2016 12:12:06 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 4 May 2016 13:12:05 -0400
+Message-ID: <1462381925-8787-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [PATCH] openmp-rtos: Add zip-native as a dependency
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,61 +45,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2016 16:42:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 May 2016 17:12:10 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: e9729ddb004b194fd9c4cfd4cc29302adb3da7ab
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e9729ddb004b194fd9c4cfd4cc29302adb3da7ab
+* The openmp-rtos build procedure uses zip to create the release
+  package and is therefore the native zip is required as a dependency
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed May  4 10:38:02 2016 +0000
-
-eudev: install the new firmware rule
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-core/udev/eudev_%.bbappend |   13 +++++++------
- 1 files changed, 7 insertions(+), 6 deletions(-)
-
-diff --git a/recipes-core/udev/eudev_%.bbappend b/recipes-core/udev/eudev_%.bbappend
-index 54cbf84..620500b 100644
---- a/recipes-core/udev/eudev_%.bbappend
-+++ b/recipes-core/udev/eudev_%.bbappend
-@@ -5,24 +5,25 @@ SRC_URI_append = " \
-     file://firmware.rules \
- "
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index 38e33c8..7c781a2 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -5,7 +5,7 @@ LICENSE = "BSD"
+ require recipes-ti/includes/ti-paths.inc
  
--PR_append = ".2"
-+PR_append = ".3"
+ PV = "2_02_01_03"
+-PR = "r0"
++PR = "r1"
  
--install_omap_rules() {
-+install_ti_rules() {
-     install -m 0644 ${WORKDIR}/omap-tty.rules ${D}${sysconfdir}/udev/rules.d/
-+    install -m 0644 ${WORKDIR}/firmware.rules ${D}${sysconfdir}/udev/rules.d/
- }
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+ OPENMP_RTOS_GIT_PROTOCOL = "git"
+@@ -19,7 +19,7 @@ SRCREV = "9bf371e9618297f8783113bff05995800535c27d"
  
- do_install_append_ti33x() {
--    install_omap_rules
-+    install_ti_rules
- }
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
  
- do_install_append_ti43x() {
--    install_omap_rules
-+    install_ti_rules
- }
- 
- do_install_append_omap-a15() {
--    install_omap_rules
-+    install_ti_rules
- }
- 
- do_install_append_keystone() {
--    install_omap_rules
-+    install_ti_rules
- }
+-DEPENDS = "common-csl-ip-rtos ti-xdctools ti-ipc-rtos ti-sysbios ti-cgt6x-native libulm"
++DEPENDS = "common-csl-ip-rtos ti-xdctools ti-ipc-rtos ti-sysbios ti-cgt6x-native libulm zip-native"
+ DEPENDS_append_k2hk-evm = " qmss-lld-rtos cppi-lld-rtos"
+ DEPENDS_append_k2e-evm = " qmss-lld-rtos cppi-lld-rtos"
+ DEPENDS_append_k2l-evm = " qmss-lld-rtos cppi-lld-rtos"
+-- 
+2.7.4
 
 
