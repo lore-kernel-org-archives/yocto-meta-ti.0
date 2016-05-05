@@ -1,41 +1,28 @@
-Return-Path: <anandb@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ABC20E00DEF; Thu,  5 May 2016 07:47:22 -0700 (PDT)
+	id 1592BE00DE9; Thu,  5 May 2016 08:16:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A31DE00DED
-	for <meta-ti@yoctoproject.org>; Thu,  5 May 2016 07:47:18 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u45ElHkh019887
-	for <meta-ti@yoctoproject.org>; Thu, 5 May 2016 09:47:17 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u45ElHvk030724
-	for <meta-ti@yoctoproject.org>; Thu, 5 May 2016 09:47:17 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 5 May 2016 09:47:17 -0500
-Received: from tigfxsrv.india.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u45ElC9I030261;	Thu, 5 May 2016 09:47:16 -0500
-From: Anand Balagopalakrishnan <anandb@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 5 May 2016 20:17:09 +0530
-Message-ID: <1462459629-4450-2-git-send-email-anandb@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1462459629-4450-1-git-send-email-anandb@ti.com>
-References: <1462459629-4450-1-git-send-email-anandb@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] ti-sgx-ddk-km: update srcrev and branch name, bump PR
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA58FE00DE9
+	for <meta-ti@yoctoproject.org>; Thu,  5 May 2016 08:16:30 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 4DACB52AA0; Thu,  5 May 2016 15:16:29 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160505151629.4DACB52AA0@arago-project.org>
+Date: Thu,  5 May 2016 15:16:29 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: update srcrev and bump PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,34 +35,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2016 14:47:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 May 2016 15:16:35 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: ce947bca0eb37234ab77c309d7f308bf84cdcb7e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ce947bca0eb37234ab77c309d7f308bf84cdcb7e
+
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Thu May  5 20:47:08 2016 +0000
+
+ti-sgx-ddk-um: update srcrev and bump PR
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
----
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index 0e99791..18e6801 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -20,12 +20,12 @@ RPROVIDES_${PN} = "omapdrm-pvr"
- RREPLACES_${PN} = "omapdrm-pvr"
- RCONFLICTS_${PN} = "omapdrm-pvr"
+---
+
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index c29b9fe..217a68c 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
--BRANCH = "ti-img-sgx/${PV}/k4.1"
-+BRANCH = "ti-img-sgx/${PV}/k4.4"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "626c4f773b7c704f1d9a55ca80f60a79f809186d"
++SRCREV = "e91d6d37c28ae63c350fff9c91705fd315491093"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
--SRCREV = "fed0756f1b8b9d526da2821635c7d742989d47c3"
-+SRCREV = "c8d280c2842bf4b1fdc63f5efd89595807c0a254"
+ inherit update-rc.d
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
--- 
-1.7.9.5
+-PR = "r8"
++PR = "r9"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ 
+ RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
 
 
