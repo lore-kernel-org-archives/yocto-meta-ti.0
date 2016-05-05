@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6B03E00870; Wed,  4 May 2016 10:41:03 -0700 (PDT)
+	id EF3B6E00DEC; Thu,  5 May 2016 07:47:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
+	URI_HEX autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4A38E007EF
-	for <meta-ti@yoctoproject.org>; Wed,  4 May 2016 10:40:59 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id B0807529E8; Wed,  4 May 2016 17:40:58 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160504174058.B0807529E8@arago-project.org>
-Date: Wed,  4 May 2016 17:40:58 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : machines: configure all used consoles regardless of UART driver
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85AA8E00D9C
+	for <meta-ti@yoctoproject.org>; Thu,  5 May 2016 07:47:14 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u45ElEoO019884
+	for <meta-ti@yoctoproject.org>; Thu, 5 May 2016 09:47:14 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u45ElEv1010787
+	for <meta-ti@yoctoproject.org>; Thu, 5 May 2016 09:47:14 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 5 May 2016 09:47:13 -0500
+Received: from tigfxsrv.india.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u45ElC9H030261;	Thu, 5 May 2016 09:47:12 -0500
+From: Anand Balagopalakrishnan <anandb@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 5 May 2016 20:17:08 +0530
+Message-ID: <1462459629-4450-1-git-send-email-anandb@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH 1/2] ti-sgx-ddk-um: update srcrev and bump PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,136 +46,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2016 17:41:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 05 May 2016 14:47:17 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: d236f27110a27598fa727c09f0bc71a037a0a563
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d236f27110a27598fa727c09f0bc71a037a0a563
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed May  4 23:15:15 2016 +0000
-
-machines: configure all used consoles regardless of UART driver
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 ---
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- conf/machine/am437x-evm.conf |    4 +++-
- conf/machine/am57xx-evm.conf |    4 +++-
- conf/machine/dra7xx-evm.conf |    4 +++-
- conf/machine/k2e-evm.conf    |    4 +++-
- conf/machine/k2g-evm.conf    |    4 +++-
- conf/machine/k2hk-evm.conf   |    4 +++-
- conf/machine/k2l-evm.conf    |    4 +++-
- 7 files changed, 21 insertions(+), 7 deletions(-)
-
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 16f7cd8..e4f237a 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -11,7 +11,9 @@ MACHINE_FEATURES += "touchscreen"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index c29b9fe..217a68c 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- IMAGE_FSTYPES += "ubi tar.gz tar.xz"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "626c4f773b7c704f1d9a55ca80f60a79f809186d"
++SRCREV = "e91d6d37c28ae63c350fff9c91705fd315491093"
  
--SERIAL_CONSOLE = "115200 ttyO0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- # UBI information.  Note that this is board and kernel specific.  Changes
- # in your kernel port may require changes in these variables.  For more
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index cd3adc9..5d6bf09 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -8,7 +8,9 @@ MACHINE_FEATURES += "touchscreen"
+ inherit update-rc.d
  
- IMAGE_FSTYPES += "ubi tar.gz tar.xz"
+-PR = "r8"
++PR = "r9"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
--SERIAL_CONSOLE = "115200 ttyO2"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyS2 115200;ttyO2"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
- UBOOT_MACHINE = "am57xx_evm_config"
- 
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index b1e34ab..03efa19 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -8,7 +8,9 @@ MACHINE_FEATURES += "touchscreen"
- 
- IMAGE_FSTYPES += "ubi tar.gz tar.xz"
- 
--SERIAL_CONSOLE = "115200 ttyO0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
- UBOOT_MACHINE = "dra7xx_evm_config"
- 
-diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-index e531f71..0735357 100644
---- a/conf/machine/k2e-evm.conf
-+++ b/conf/machine/k2e-evm.conf
-@@ -10,7 +10,9 @@ BOOT_MONITOR_MAKE_TARGET = "k2e"
- 
- IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
- 
--SERIAL_CONSOLE = "115200 ttyS0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
- SYSVINIT_ENABLED_GETTYS = ""
- 
-diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-index 00234a4..125a949 100644
---- a/conf/machine/k2g-evm.conf
-+++ b/conf/machine/k2g-evm.conf
-@@ -12,7 +12,9 @@ BOOT_MONITOR_MAKE_TARGET = "k2g"
- 
- IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
- 
--SERIAL_CONSOLE = "115200 ttyS0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
- SYSVINIT_ENABLED_GETTYS = ""
- 
-diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
-index f9954d3..d375b24 100644
---- a/conf/machine/k2hk-evm.conf
-+++ b/conf/machine/k2hk-evm.conf
-@@ -10,7 +10,9 @@ BOOT_MONITOR_MAKE_TARGET = "k2hk"
- 
- IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
- 
--SERIAL_CONSOLE = "115200 ttyS0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
- SYSVINIT_ENABLED_GETTYS = ""
- 
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-index a94be5a..c7b712b 100644
---- a/conf/machine/k2l-evm.conf
-+++ b/conf/machine/k2l-evm.conf
-@@ -10,7 +10,9 @@ BOOT_MONITOR_MAKE_TARGET = "k2l"
- 
- IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
- 
--SERIAL_CONSOLE = "115200 ttyS0"
-+SERIAL_CONSOLE = ""
-+SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
- SYSVINIT_ENABLED_GETTYS = ""
- 
+ RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+-- 
+1.7.9.5
 
 
