@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2C0C7E007E4; Mon,  9 May 2016 09:50:57 -0700 (PDT)
+	id 2D8CAE00736; Mon,  9 May 2016 09:50:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 09EBCE0077E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07E88E00736
 	for <meta-ti@yoctoproject.org>; Mon,  9 May 2016 09:50:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7715F52ACA; Mon,  9 May 2016 16:50:50 +0000 (UTC)
+	id 8ED6052ACB; Mon,  9 May 2016 16:50:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160509165050.7715F52ACA@arago-project.org>
+Message-Id: <20160509165050.8ED6052ACB@arago-project.org>
 Date: Mon,  9 May 2016 16:50:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : prueth-fw: add FW images for am335x
+Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2016.01-rc1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +38,57 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f7c550cdfb6bb5079b34059c5ea44bfedc3c2474
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f7c550cdfb6bb5079b34059c5ea44bfedc3c2474
+Commit: 1fc1e6e5cff90beec8610049b43b1bb53be7f7cd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1fc1e6e5cff90beec8610049b43b1bb53be7f7cd
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon May  9 22:40:18 2016 +0000
+Date:   Mon May  9 22:40:19 2016 +0000
 
-prueth-fw: add FW images for am335x
+linux-ti-staging: update to ti2016.01-rc1
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/prueth-fw/prueth-fw_git.bb |   10 ++++++----
- 1 files changed, 6 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    5 +++--
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-index e4970aa..234fba5 100644
---- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
-+++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-@@ -1,20 +1,21 @@
--DESCRIPTION = "PRU Ethernet firmware for AM57xx and AM437x"
-+DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x and AM335x"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index dd925aa..c1c5b86 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+ BRANCH = "ti-rt-linux-4.4.y"
  
- PV_am57xx-evm = "1.0.0"
- PV_am437x-evm = "2.1.2"
-+PV_am335x-evm = "2.1.2"
+-SRCREV = "ee87bb1741b3e2f05a5ff46b1ad59ca82b8f2514"
++SRCREV = "0997a7f0b943274b71db74f01018c7b7e746eec2"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 5953992..a9b99c0 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -42,6 +42,7 @@ RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
+ # Add run-time dependency for PRU Ethernet firmware to the rootfs
+ RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
+ RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
++RDEPENDS_kernel-base_append_am335x-evm = " prueth-fw"
  
--PR = "r1"
-+PR = "r2"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+@@ -70,11 +71,11 @@ S = "${WORKDIR}/git"
  
- CLEANBROKEN = "1"
+ BRANCH = "ti-lsk-linux-4.4.y"
  
--COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm"
-+COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm|am335x-evm"
+-SRCREV = "89ae5e0da227de05d1c4ce78796a6544895e8b28"
++SRCREV = "ba05e8fda276bd3a1b2ef970a868b229d5184246"
+ PV = "4.4.9+git${SRCPV}"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
--SRCREV = "f6c712fd26044d90939ff774f07dfcb951bcefc9"
-+SRCREV = "4096bf1129c4a707069e685edd44ca64bd51421d"
- BRANCH ?= "ti-linux-firmware-4.1.y"
- 
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-@@ -23,6 +24,7 @@ S = "${WORKDIR}/git"
- 
- TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
- TARGET_am437x-evm = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
-+TARGET_am335x-evm = "am335x-pru0-prueth-fw.elf am335x-pru1-prueth-fw.elf"
- 
- do_install() {
- 	install -d ${D}${base_libdir}/firmware/ti-pruss
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
