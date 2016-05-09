@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D8CAE00736; Mon,  9 May 2016 09:50:57 -0700 (PDT)
+	id 9319FE0077E; Mon,  9 May 2016 09:50:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07E88E00736
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B1B9E007A2
 	for <meta-ti@yoctoproject.org>; Mon,  9 May 2016 09:50:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8ED6052ACB; Mon,  9 May 2016 16:50:50 +0000 (UTC)
+	id A291752ACC; Mon,  9 May 2016 16:50:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160509165050.8ED6052ACB@arago-project.org>
+Message-Id: <20160509165050.A291752ACC@arago-project.org>
 Date: Mon,  9 May 2016 16:50:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2016.01-rc1
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.01-rc1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,57 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 1fc1e6e5cff90beec8610049b43b1bb53be7f7cd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1fc1e6e5cff90beec8610049b43b1bb53be7f7cd
+Commit: ddbb13e225ff8406912f7ac7d0642a38afb5ebe7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ddbb13e225ff8406912f7ac7d0642a38afb5ebe7
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon May  9 22:40:19 2016 +0000
+Date:   Mon May  9 22:40:20 2016 +0000
 
-linux-ti-staging: update to ti2016.01-rc1
+u-boot-ti-staging: update to ti2016.01-rc1
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    5 +++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index dd925aa..c1c5b86 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 333890c..8e5d85e 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--SRCREV = "ee87bb1741b3e2f05a5ff46b1ad59ca82b8f2514"
-+SRCREV = "0997a7f0b943274b71db74f01018c7b7e746eec2"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 5953992..a9b99c0 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -42,6 +42,7 @@ RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
- # Add run-time dependency for PRU Ethernet firmware to the rootfs
- RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
- RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_am335x-evm = " prueth-fw"
+-PR = "r1"
++PR = "r2"
+ PV_append = "+git${SRCPV}"
  
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -70,11 +71,11 @@ S = "${WORKDIR}/git"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ BRANCH ?= "ti-u-boot-2016.05"
  
--SRCREV = "89ae5e0da227de05d1c4ce78796a6544895e8b28"
-+SRCREV = "ba05e8fda276bd3a1b2ef970a868b229d5184246"
- PV = "4.4.9+git${SRCPV}"
+-SRCREV = "67a497ee0a728e840879eb7e5232a9f36c6061de"
++SRCREV = "2aa1cc1a80546ac9b41e70a39cba54e1f157fe78"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
