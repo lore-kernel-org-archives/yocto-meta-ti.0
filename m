@@ -1,39 +1,39 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 30372E00736; Mon,  9 May 2016 09:34:03 -0700 (PDT)
+	id 8F76AE0077E; Mon,  9 May 2016 09:40:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AFE9EE006D8
-	for <meta-ti@yoctoproject.org>; Mon,  9 May 2016 09:33:59 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u49GXwdE017663
-	for <meta-ti@yoctoproject.org>; Mon, 9 May 2016 11:33:58 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u49GXwmg022293
-	for <meta-ti@yoctoproject.org>; Mon, 9 May 2016 11:33:58 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 9 May 2016 11:33:57 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u49GXvKj003292;	Mon, 9 May 2016 11:33:57 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 9 May 2016 12:33:50 -0400
-Message-ID: <1462811630-25842-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [fido][PATCH] omap5-sgx-ddk-um-linux: Add DEPENDS based on REDEPENDS
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9DF18E0071C
+	for <meta-ti@yoctoproject.org>; Mon,  9 May 2016 09:40:42 -0700 (PDT)
+Received: from vz-proxy-l007.mx.aol.com ([64.236.82.157])
+	by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6X00ED24ZA1B90@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 09 May 2016 11:40:23 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=EDyElNE8DnJcdewKkuvZJw==:117
+	a=yrkiwgmsf1kA:10 a=sozttTNsAAAA:8	a=2TjCG__PGJiSiX4drf4A:9
+Received: by 100.15.86.14 with SMTP id 0b35844f; Mon, 09 May 2016 16:40:23 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 9B31D161FF2;	Mon,
+	9 May 2016 12:40:22 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 09 May 2016 12:40:18 -0400
+Message-id: <1462812020-15437-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH 1/3] prueth-fw: add FW images for am335x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,40 +46,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2016 16:34:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 May 2016 16:40:45 -0000
 
-* The omap5-sgx-ddk-um-linux recipe installs pre-built libraries
-* Because of this, the dependencies are given as RDEPENDS as they are
-  not needed for building the recipe
-* However, this may break recipes which depend on
-  omap5-sgx-ddk-um-linux, as the omap5-sgx-ddk-um-linux dependencies
-  may not yet be populated in the sysroot.
-* This resolves the break in the dependency chain by translating the
-  RDEPENDS into a list of DEPENDS
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ recipes-bsp/prueth-fw/prueth-fw_git.bb | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-index a79c61f..a4a00b9 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
-@@ -19,9 +19,10 @@ INITSCRIPT_PARAMS = "defaults 8"
+diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+index e4970aa..234fba5 100644
+--- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
++++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+@@ -1,20 +1,21 @@
+-DESCRIPTION = "PRU Ethernet firmware for AM57xx and AM437x"
++DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x and AM335x"
  
- inherit update-rc.d
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
  
--PR = "r8"
-+PR = "r9"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ PV_am57xx-evm = "1.0.0"
+ PV_am437x-evm = "2.1.2"
++PV_am335x-evm = "2.1.2"
  
-+DEPENDS += "libdrm udev libgbm wayland libffi"
- RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+-PR = "r1"
++PR = "r2"
  
- RREPLACES_${PN} = "libegl libgles1 libgles2"
+ CLEANBROKEN = "1"
+ 
+-COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm"
++COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm|am335x-evm"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "f6c712fd26044d90939ff774f07dfcb951bcefc9"
++SRCREV = "4096bf1129c4a707069e685edd44ca64bd51421d"
+ BRANCH ?= "ti-linux-firmware-4.1.y"
+ 
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+@@ -23,6 +24,7 @@ S = "${WORKDIR}/git"
+ 
+ TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
+ TARGET_am437x-evm = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
++TARGET_am335x-evm = "am335x-pru0-prueth-fw.elf am335x-pru1-prueth-fw.elf"
+ 
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware/ti-pruss
 -- 
-2.7.4
+2.2.0
 
 
