@@ -1,28 +1,65 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <Geoffrey.Parker@Arthrex.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ADE04E00F17; Wed, 11 May 2016 17:58:19 -0700 (PDT)
+	id 4C6E8E007E1; Thu, 12 May 2016 09:18:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, RCVD_IN_DNSWL_NONE, 
+	URI_HEX autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [205.167.78.25 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57F5EE00C65
-	for <meta-ti@yoctoproject.org>; Wed, 11 May 2016 17:58:16 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id A444D52A80; Thu, 12 May 2016 00:58:15 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160512005815.A444D52A80@arago-project.org>
-Date: Thu, 12 May 2016 00:58:15 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-sgx-ddk-um: Add DEPENDS based on REDEPENDS
+X-Greylist: delayed 1092 seconds by postgrey-1.32 at yocto-www;
+	Thu, 12 May 2016 09:18:40 PDT
+Received: from barracuda.arthrex.com (barracuda.arthrex.com [205.167.78.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C89F3E006D8
+	for <meta-ti@yoctoproject.org>; Thu, 12 May 2016 09:18:40 -0700 (PDT)
+X-ASG-Debug-ID: 1463068826-06ac273b0f313a0001-g4O11g
+Received: from INC-S-HUB002.arthrex.local ([10.3.5.25]) by
+	barracuda.arthrex.com with ESMTP id tXp9CbZNM6mHxedh
+	(version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 12 May 2016 12:00:26 -0400 (EDT)
+X-Barracuda-Envelope-From: Geoffrey.Parker@Arthrex.com
+Received: from INC-S-EXC002.arthrex.local ([fe80::516f:372:ad96:26bd]) by
+	INC-S-HUB002.arthrex.local ([::1]) with mapi id 14.03.0181.006;
+	Thu, 12 May 2016 12:00:26 -0400
+From: Geoffrey Parker <Geoffrey.Parker@Arthrex.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [fido][PATCH] omap5-sgx-ddk-um-linux: Add DEPENDS
+	based	on REDEPENDS
+X-ASG-Orig-Subj: [meta-ti] [fido][PATCH] omap5-sgx-ddk-um-linux: Add DEPENDS
+	based on REDEPENDS
+Thread-Index: AdGsZe7oiGPX+4MSSY2PpKJkOk98Aw==
+Date: Thu, 12 May 2016 16:00:25 +0000
+Message-ID: <6C8F632E9A28D54CB9F9FD3A5BCBF90648548926@INC-S-EXC002.arthrex.local>
+Accept-Language: en-US, en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.3.5.18]
+x-exclaimer-md-config: dc7fad0c-fbd7-469c-bbef-97f0fd95268b
+MIME-Version: 1.0
+X-Barracuda-Connect: UNKNOWN[10.3.5.25]
+X-Barracuda-Start-Time: 1463068826
+X-Barracuda-Encrypted: ECDHE-RSA-AES256-SHA
+X-Barracuda-URL: https://10.3.5.33:443/cgi-mod/mark.cgi
+X-Barracuda-Scan-Msg-Size: 1117
+X-Virus-Scanned: by bsmtpd at arthrex.com
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Spam-Score: 0.32
+X-Barracuda-Spam-Status: No, SCORE=0.32 using global scores of TAG_LEVEL=1000.0
+	QUARANTINE_LEVEL=1000.0 KILL_LEVEL=5.0
+	tests=BSF_SC0_MISMATCH_TO, URI_HEX
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.29518
+	Rule breakdown below
+	pts rule name              description
+	---- ----------------------
+	--------------------------------------------------
+	0.00 BSF_SC0_MISMATCH_TO    Envelope rcpt doesn't match header
+	0.32 URI_HEX URI: URI hostname has long hexadecimal sequence
+Subject: [fido][PATCH] omap5-sgx-ddk-um-linux: Add DEPENDS based	on REDEPENDS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,51 +72,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2016 00:58:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 May 2016 16:18:45 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: krogoth
-Commit: 0e804eb4d9f6e43de8753e893ea6b841949e0031
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0e804eb4d9f6e43de8753e893ea6b841949e0031
+Hi Jacob, Denys,
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon May  9 23:34:21 2016 +0000
+I'm having a build issue once I pulled in the the 85810547 commit on the me=
+ta-ti fido branch:
 
-ti-sgx-ddk-um: Add DEPENDS based on REDEPENDS
+ERROR: Nothing PROVIDES 'libgbm' (but /home/geoff/yocto/poky/meta-ti/recipe=
+s-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb DEPENDS on or oth=
+erwise requires it). Close matches:
+  libgxim
+  libsm
+  libqb
+NOTE: Runtime target 'omap5-sgx-ddk-um-linux-dev' is unbuildable, removing.=
+..
+Missing or unbuildable dependency chain was: ['omap5-sgx-ddk-um-linux-dev',=
+ 'libgbm']
+NOTE: Runtime target 'omap5-sgx-ddk-um-linux-plugins' is unbuildable, remov=
+ing...
+Missing or unbuildable dependency chain was: ['omap5-sgx-ddk-um-linux-plugi=
+ns', 'libgbm']
+NOTE: Runtime target 'omap5-sgx-ddk-um-linux' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['omap5-sgx-ddk-um-linux', 'li=
+bgbm']
 
-* The ti-sgx-ddk-um recipe installs pre-built libraries
-* Because of this, the dependencies are given as RDEPENDS as they are
-  not needed for building the recipe
-* However, this may break recipes which depend on ti-sgx-ddk-um, as
-  the ti-sgx-ddk-um dependencies may not yet be populated in the
-  sysroot.
-* This resolves the break in the dependency chain by translating the
-  RDEPENDS into a list of DEPENDS
+Looking at the meta-layer index I can only find libgbm in the meta-ti maste=
+r & krogoth branches.=20
+Our external layers are currently using the Yocto jethro branches except fo=
+r meta-ti (which has=20
+not jethro, so we use fido). We are not quite ready to move to krogoth yet.
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Best Regards,
+Geoff Parker
 
----
-
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 217a68c..80612d6 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -31,9 +31,10 @@ INITSCRIPT_PARAMS = "defaults 8"
- 
- inherit update-rc.d
- 
--PR = "r9"
-+PR = "r10"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
- 
-+DEPENDS += "libdrm udev libgbm wayland libffi"
- RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
- 
- RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-
+This e-mail and any files transmitted with it are the property of Arthrex, =
+Inc. and/or its affiliates, are confidential, and are intended solely for t=
+he use of the individual or entity to whom this e-mail is addressed. If you=
+ are not one of the named recipient(s) or otherwise have reason to believe =
+that you have received this message in error, please notify the sender at 2=
+39-643-5553 and delete this message immediately from your computer. Any oth=
+er use, retention, dissemination forwarding, printing or copying of this e-=
+mail is strictly prohibited. Please note that any views or opinions present=
+ed in this email are solely those of the author and do not necessarily repr=
+esent those of the company. Finally, while Arthrex uses virus protection, t=
+he recipient should check this email and any attachments for the presence o=
+f viruses. The company accepts no liability for any damage caused by any vi=
+rus transmitted by this email.
 
