@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B2535E00F39; Wed, 11 May 2016 17:44:13 -0700 (PDT)
+	id A1F2EE00F17; Wed, 11 May 2016 17:45:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,15 +14,15 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB00EE00F32
-	for <meta-ti@yoctoproject.org>; Wed, 11 May 2016 17:44:11 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D009E00C65
+	for <meta-ti@yoctoproject.org>; Wed, 11 May 2016 17:45:05 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A45D652A80; Thu, 12 May 2016 00:44:10 +0000 (UTC)
+	id 3B38152A80; Thu, 12 May 2016 00:45:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160512004410.A45D652A80@arago-project.org>
-Date: Thu, 12 May 2016 00:44:10 +0000 (UTC)
+Message-Id: <20160512004504.3B38152A80@arago-project.org>
+Date: Thu, 12 May 2016 00:45:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-sgx-ddk-um: Add DEPENDS based on REDEPENDS
+Subject: Jacob Stiffler : omap5-sgx-ddk-um-linux: Add DEPENDS based on REDEPENDS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,25 +35,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2016 00:44:13 -0000
+X-List-Received-Date: Thu, 12 May 2016 00:45:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 0e804eb4d9f6e43de8753e893ea6b841949e0031
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0e804eb4d9f6e43de8753e893ea6b841949e0031
+Branch: fido
+Commit: 85810547e3411fb2516600ccfa0c3419b6368742
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=85810547e3411fb2516600ccfa0c3419b6368742
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon May  9 23:34:21 2016 +0000
+Date:   Mon May  9 22:33:50 2016 +0000
 
-ti-sgx-ddk-um: Add DEPENDS based on REDEPENDS
+omap5-sgx-ddk-um-linux: Add DEPENDS based on REDEPENDS
 
-* The ti-sgx-ddk-um recipe installs pre-built libraries
+* The omap5-sgx-ddk-um-linux recipe installs pre-built libraries
 * Because of this, the dependencies are given as RDEPENDS as they are
   not needed for building the recipe
-* However, this may break recipes which depend on ti-sgx-ddk-um, as
-  the ti-sgx-ddk-um dependencies may not yet be populated in the
-  sysroot.
+* However, this may break recipes which depend on
+  omap5-sgx-ddk-um-linux, as the omap5-sgx-ddk-um-linux dependencies
+  may not yet be populated in the sysroot.
 * This resolves the break in the dependency chain by translating the
   RDEPENDS into a list of DEPENDS
 
@@ -62,24 +62,24 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    3 ++-
+ .../libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb |    3 ++-
  1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 217a68c..80612d6 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -31,9 +31,10 @@ INITSCRIPT_PARAMS = "defaults 8"
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
+index a79c61f..a4a00b9 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.14.3699939.bb
+@@ -19,9 +19,10 @@ INITSCRIPT_PARAMS = "defaults 8"
  
  inherit update-rc.d
  
--PR = "r9"
-+PR = "r10"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+-PR = "r8"
++PR = "r9"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
 +DEPENDS += "libdrm udev libgbm wayland libffi"
  RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
  
- RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
 
 
