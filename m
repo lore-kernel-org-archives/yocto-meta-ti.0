@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 52417E00AD2; Fri, 13 May 2016 11:57:50 -0700 (PDT)
+	id 54150E00B7A; Fri, 13 May 2016 11:57:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24BE1E00AD2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26B1BE00C1E
 	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 11:57:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 21CC0529B9; Fri, 13 May 2016 18:57:42 +0000 (UTC)
+	id 6B3A8529E6; Fri, 13 May 2016 18:57:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160513185742.21CC0529B9@arago-project.org>
+Message-Id: <20160513185742.6B3A8529E6@arago-project.org>
 Date: Fri, 13 May 2016 18:57:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : ti-softhsmv2: bump SRCREV to version to 2.0.0.0
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 13 May 2016 18:57:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 6cc3e56407e281b29172540d4828699b2c391c2f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6cc3e56407e281b29172540d4828699b2c391c2f
+Branch: master
+Commit: 76ba46916797f4cee084c3ba98d50537172a6b7b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=76ba46916797f4cee084c3ba98d50537172a6b7b
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Fri May 13 19:20:35 2016 +0000
