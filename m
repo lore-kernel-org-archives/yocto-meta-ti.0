@@ -1,37 +1,39 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1FB3BE00CC7; Fri, 13 May 2016 06:25:06 -0700 (PDT)
+	id 252ABE00CFA; Fri, 13 May 2016 07:20:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
+	URI_HEX autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 258 seconds by postgrey-1.32 at yocto-www;
-	Fri, 13 May 2016 06:25:02 PDT
-Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1DF8E00CAF
-	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 06:25:02 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 989B1E00CEA
+	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 07:19:59 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u4DDKhv5019589
-	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 08:20:43 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4DDKhUZ030134
-	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 08:20:43 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 13 May 2016 08:20:43 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u4DEJwjj011680
+	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 09:19:58 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4DEJwum023327
+	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 09:19:58 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 13 May 2016 09:19:58 -0500
+Received: from tigfxsrv.india.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u4DDKgVu029243;	Fri, 13 May 2016 08:20:43 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
+	u4DEJu4A013651;	Fri, 13 May 2016 09:19:57 -0500
+From: Anand Balagopalakrishnan <anandb@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 13 May 2016 09:20:35 -0400
-Message-ID: <1463145635-10086-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
+Date: Fri, 13 May 2016 19:49:53 +0530
+Message-ID: <1463149194-8292-1-git-send-email-anandb@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] ti-softhsmv2: bump SRCREV to version to 2.0.0.0
+Subject: [PATCH 1/1] ti-sgx-ddk-um: update srcrev and bump PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,48 +46,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2016 13:25:06 -0000
+X-List-Received-Date: Fri, 13 May 2016 14:20:03 -0000
 Content-Type: text/plain
 
-* License checksum has changed due to an updated date in the LICENSE
-  file
+* rebuild SGX user mode driver with GCC 5.3
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 ---
- recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-index ea2eb3f..7367211 100644
---- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-+++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "TI softhsmv2 package"
- LICENSE = "BSD-2-Clause | BSD-3-Clause | ISC | IBM-License | FSFULLR | Zlib"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=664f3daf042b19d634189e709d5d558e"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=700a883962ccff663f888f3f7221ce8f"
- SECTION = "libs"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 80612d6..0021884 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- mntdir = "/mnt"
-@@ -10,12 +10,12 @@ inherit autotools pkgconfig
- DEPENDS = "openssl libdaemon zlib"
- COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "e91d6d37c28ae63c350fff9c91705fd315491093"
++SRCREV = "8d4ba04a2da59989b21aacca9defdf387e321695"
  
--BRANCH="master"
-+BRANCH="ti-softhsm-rebase"
- SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=${BRANCH}"
--#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.04
--SRCREV = "c2688afb9373309751e640088705cb739997665d"
--PV = "1.3.0.4"
--PR = "r1"
-+#Following commit corresponds to tag DEV.SOFTHSM-02.00.00.00
-+SRCREV = "b0eef602c03583e59c289ba113b64eaa4f5cac13"
-+PV = "2.0.0.0"
-+PR = "r0"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- S = "${WORKDIR}/git"
+ inherit update-rc.d
  
+-PR = "r10"
++PR = "r11"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 -- 
-2.7.4
+1.7.9.5
 
 
