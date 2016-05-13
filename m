@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 55901E00BDE; Fri, 13 May 2016 11:57:50 -0700 (PDT)
+	id 56172E00B5F; Fri, 13 May 2016 11:57:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,12 +14,12 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24F46E00BDE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27E5AE00C52
 	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 11:57:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7ECA552A72; Fri, 13 May 2016 18:57:42 +0000 (UTC)
+	id 39EC9529CA; Fri, 13 May 2016 18:57:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160513185742.7ECA552A72@arago-project.org>
+Message-Id: <20160513185742.39EC9529CA@arago-project.org>
 Date: Fri, 13 May 2016 18:57:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: update srcrev and bump PR
@@ -39,9 +39,9 @@ X-List-Received-Date: Fri, 13 May 2016 18:57:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a6318a5709d371db7864e05791836b8e48ff2c69
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a6318a5709d371db7864e05791836b8e48ff2c69
+Branch: krogoth
+Commit: 3f896e1c52ef0a383559dcab587300489ce92c39
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3f896e1c52ef0a383559dcab587300489ce92c39
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
 Date:   Fri May 13 20:19:53 2016 +0000
