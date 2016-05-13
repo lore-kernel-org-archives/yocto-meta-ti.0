@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 56172E00B5F; Fri, 13 May 2016 11:57:50 -0700 (PDT)
+	id 5B3CEE00C1E; Fri, 13 May 2016 11:57:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27E5AE00C52
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24EE7E00B70
 	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 11:57:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 39EC9529CA; Fri, 13 May 2016 18:57:42 +0000 (UTC)
+	id 50EB3529D0; Fri, 13 May 2016 18:57:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160513185742.39EC9529CA@arago-project.org>
+Message-Id: <20160513185742.50EB3529D0@arago-project.org>
 Date: Fri, 13 May 2016 18:57:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: update srcrev and bump PR
+Subject: Sam Nelson : uio-module-drv: Update to 2.0.0.0 GA version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,45 +38,75 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 3f896e1c52ef0a383559dcab587300489ce92c39
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3f896e1c52ef0a383559dcab587300489ce92c39
+Commit: 7656af805fb763cc4a69a2e8f7d7365940da5c6e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7656af805fb763cc4a69a2e8f7d7365940da5c6e
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Fri May 13 20:19:53 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri May 13 21:32:39 2016 +0000
 
-ti-sgx-ddk-um: update srcrev and bump PR
+uio-module-drv: Update to 2.0.0.0 GA version
 
-* rebuild SGX user mode driver with GCC 5.3
+Reformatted recipes to have one common PV between module and test
+recipes
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../uio-module-drv/uio-module-drv-test_git.bb      |    3 ++-
+ recipes-bsp/uio-module-drv/uio-module-drv.inc      |    6 ++++--
+ recipes-bsp/uio-module-drv/uio-module-drv_git.bb   |    3 +--
+ 3 files changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 80612d6..0021884 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+index 1080a91..3134a03 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+@@ -1,7 +1,8 @@
+ DESCRIPTION = "Test code for user space IO (UIO) driver"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "e91d6d37c28ae63c350fff9c91705fd315491093"
-+SRCREV = "8d4ba04a2da59989b21aacca9defdf387e321695"
+ include uio-module-drv.inc
+-PV = "1.0.2.3"
++
++PR = "r1"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ COMPATIBLE_MACHINE = "keystone"
+ RDEPENDS_${PN} = "uio-module-drv"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+index ed34a8a..161c45b 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
++++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+@@ -1,10 +1,12 @@
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
  
- inherit update-rc.d
+-BRANCH = "linux4.1"
+-# This corresponds to version 02.00.00.00_eng
++BRANCH = "master"
++# This corresponds to version 02.00.00.00
+ SRCREV = "6a7eda36e390658593a5b8d87b0f00beb3997240"
  
--PR = "r10"
-+PR = "r11"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
++PV = "2.0.0.0+git${SRCPV}"
++
+ SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
  
- DEPENDS += "libdrm udev libgbm wayland libffi"
+ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+index 401fdbe..15a7691 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+@@ -1,10 +1,9 @@
+ DESCRIPTION="User space IO (UIO) driver for on-chip modules"
+ 
+ include uio-module-drv.inc
+-PV = "2.0.0.0+git${SRCPV}"
+ 
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ module_auto_load_uio-module-drv = "uio-module-drv"
 
 
