@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5B3CEE00C1E; Fri, 13 May 2016 11:57:50 -0700 (PDT)
+	id 8D0C1E00C9B; Fri, 13 May 2016 11:57:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24EE7E00B70
-	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 11:57:43 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9911DE00CA7
+	for <meta-ti@yoctoproject.org>; Fri, 13 May 2016 11:57:44 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 50EB3529D0; Fri, 13 May 2016 18:57:42 +0000 (UTC)
+	id 92BF552A7D; Fri, 13 May 2016 18:57:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160513185742.50EB3529D0@arago-project.org>
+Message-Id: <20160513185742.92BF552A7D@arago-project.org>
 Date: Fri, 13 May 2016 18:57:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : uio-module-drv: Update to 2.0.0.0 GA version
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2016 18:57:50 -0000
+X-List-Received-Date: Fri, 13 May 2016 18:57:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 7656af805fb763cc4a69a2e8f7d7365940da5c6e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7656af805fb763cc4a69a2e8f7d7365940da5c6e
+Branch: master
+Commit: af64c0cb48acd949928311c1c4b3bddf165de8f7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af64c0cb48acd949928311c1c4b3bddf165de8f7
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Fri May 13 21:32:39 2016 +0000
