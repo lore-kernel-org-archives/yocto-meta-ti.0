@@ -1,43 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 636C1E005BB; Mon, 16 May 2016 09:18:15 -0700 (PDT)
+	id 9BF31E004F1; Mon, 16 May 2016 09:22:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.23 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 3601 seconds by postgrey-1.32 at yocto-www;
-	Mon, 16 May 2016 09:18:13 PDT
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 91D47E004F1
-	for <meta-ti@yoctoproject.org>; Mon, 16 May 2016 09:18:13 -0700 (PDT)
-Received: from vz-proxy-l006.mx.aol.com ([64.236.82.153])
-	by vms173023.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O7900GB4ZTRFP00@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 16 May 2016 10:17:56 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
-	a=yrkiwgmsf1kA:10 a=sozttTNsAAAA:8	a=0UKH5BiQkwmWfwo1rRcA:9
-Received: by 100.15.86.14 with SMTP id 3ae5aeba; Mon, 16 May 2016 15:17:56 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C865316200C;	Mon,
-	16 May 2016 11:17:50 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50475E005BB
+	for <meta-ti@yoctoproject.org>; Mon, 16 May 2016 09:22:36 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9B4B652A04; Mon, 16 May 2016 16:22:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 16 May 2016 11:17:50 -0400
-Message-id: <1463411870-8385-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-In-reply-to: <1463411870-8385-1-git-send-email-denis@denix.org>
-References: <1463411870-8385-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] u-boot-ti-staging: update for ti2016.01-rc2 tag
+Message-Id: <20160516162235.9B4B652A04@arago-project.org>
+Date: Mon, 16 May 2016 16:22:35 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.10 and ti2016. 01-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,37 +33,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2016 16:18:15 -0000
+X-List-Received-Date: Mon, 16 May 2016 16:22:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: krogoth
+Commit: c59c597aae77cd7c0614b894900b8fa77296f75d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c59c597aae77cd7c0614b894900b8fa77296f75d
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon May 16 21:17:49 2016 +0000
+
+linux-ti-staging: update to 4.4.10 and ti2016.01-rc2 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 8e5d85e..4e92298 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+---
+
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index c1c5b86..2cefc70 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ BRANCH = "ti-rt-linux-4.4.y"
  
--PR = "r2"
-+PR = "r3"
- PV_append = "+git${SRCPV}"
+-SRCREV = "0997a7f0b943274b71db74f01018c7b7e746eec2"
++SRCREV = "49af094f0cec5354181c9d919065417ff8207b52"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index a9b99c0..e7d5503 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -71,11 +71,11 @@ S = "${WORKDIR}/git"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ BRANCH = "ti-lsk-linux-4.4.y"
  
- BRANCH ?= "ti-u-boot-2016.05"
+-SRCREV = "ba05e8fda276bd3a1b2ef970a868b229d5184246"
+-PV = "4.4.9+git${SRCPV}"
++SRCREV = "4a9145aa22bd0debc5406559c2b837e8363d9e0b"
++PV = "4.4.10+git${SRCPV}"
  
--SRCREV = "2aa1cc1a80546ac9b41e70a39cba54e1f157fe78"
-+SRCREV = "7fb5dfba06d7338cc1871152708935388d3b80fa"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
  
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
--- 
-2.2.0
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
