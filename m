@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9BF31E004F1; Mon, 16 May 2016 09:22:41 -0700 (PDT)
+	id 9AC56E006D8; Mon, 16 May 2016 09:22:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50475E005BB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CCDDE004F1
 	for <meta-ti@yoctoproject.org>; Mon, 16 May 2016 09:22:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9B4B652A04; Mon, 16 May 2016 16:22:35 +0000 (UTC)
+	id C8342529EF; Mon, 16 May 2016 16:22:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160516162235.9B4B652A04@arago-project.org>
+Message-Id: <20160516162235.C8342529EF@arago-project.org>
 Date: Mon, 16 May 2016 16:22:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.10 and ti2016. 01-rc2 tag
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update for ti2016.01-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,50 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: c59c597aae77cd7c0614b894900b8fa77296f75d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c59c597aae77cd7c0614b894900b8fa77296f75d
+Commit: 8166221b76b223768a005af3992d3edcc452dc82
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8166221b76b223768a005af3992d3edcc452dc82
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon May 16 21:17:49 2016 +0000
+Date:   Mon May 16 21:17:50 2016 +0000
 
-linux-ti-staging: update to 4.4.10 and ti2016.01-rc2 tag
+u-boot-ti-staging: update for ti2016.01-rc2 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index c1c5b86..2cefc70 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 8e5d85e..4e92298 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--SRCREV = "0997a7f0b943274b71db74f01018c7b7e746eec2"
-+SRCREV = "49af094f0cec5354181c9d919065417ff8207b52"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index a9b99c0..e7d5503 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -71,11 +71,11 @@ S = "${WORKDIR}/git"
+-PR = "r2"
++PR = "r3"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "ba05e8fda276bd3a1b2ef970a868b229d5184246"
--PV = "4.4.9+git${SRCPV}"
-+SRCREV = "4a9145aa22bd0debc5406559c2b837e8363d9e0b"
-+PV = "4.4.10+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "2aa1cc1a80546ac9b41e70a39cba54e1f157fe78"
++SRCREV = "7fb5dfba06d7338cc1871152708935388d3b80fa"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
