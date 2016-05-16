@@ -1,39 +1,43 @@
-Return-Path: <denis@denix.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E7C49E00474; Mon, 16 May 2016 08:18:25 -0700 (PDT)
+	id 335C2E005BB; Mon, 16 May 2016 09:05:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.15 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
-	[206.46.173.15])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 522FCE00343
-	for <meta-ti@yoctoproject.org>; Mon, 16 May 2016 08:18:23 -0700 (PDT)
-Received: from vz-proxy-l002.mx.aol.com ([64.236.82.148])
-	by vms173015.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O79002D4ZTR6WA0@vms173015.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 16 May 2016 10:17:51 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
-	a=yrkiwgmsf1kA:10 a=sozttTNsAAAA:8	a=MDFdVLQYG8FeA0TxC2gA:9
-Received: by 100.15.86.14 with SMTP id 22b1b953; Mon, 16 May 2016 15:17:51 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C627C162005;	Mon,
-	16 May 2016 11:17:50 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Mon, 16 May 2016 11:17:49 -0400
-Message-id: <1463411870-8385-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH 1/2] linux-ti-staging: update to 4.4.10 and ti2016.01-rc2 tag
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9673E004F1
+	for <meta-ti@yoctoproject.org>; Mon, 16 May 2016 09:05:21 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u4GG5KxX015662
+	for <meta-ti@yoctoproject.org>; Mon, 16 May 2016 11:05:20 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4GG5KWX008731
+	for <meta-ti@yoctoproject.org>; Mon, 16 May 2016 11:05:20 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 16 May 2016 11:05:20 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4GG5Kqa006102;
+	Mon, 16 May 2016 11:05:20 -0500
+Date: Mon, 16 May 2016 12:05:04 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Nelson, Sam" <sam.nelson@ti.com>
+Message-ID: <20160516160504.GI16188@edge>
+References: <1463368232-52539-1-git-send-email-sam.nelson@ti.com>
+	<20160516033217.GF16188@edge>
+	<4F9216F96E5DF9428610502835A9F490583B8603@DLEE11.ent.ti.com>
+MIME-Version: 1.0
+In-Reply-To: <4F9216F96E5DF9428610502835A9F490583B8603@DLEE11.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] linux-ti-staging: Add new device tree target am572x-idk-pru-excl-uio.dtb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,46 +50,306 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2016 15:18:26 -0000
+X-List-Received-Date: Mon, 16 May 2016 16:05:24 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+On Sun, May 15, 2016 at 11:38:47PM -0400, Nelson, Sam wrote:
+> 
+> 
+> > -----Original Message-----
+> > From: Dmytriyenko, Denys
+> > Sent: Sunday, May 15, 2016 11:32 PM
+> > To: Nelson, Sam
+> > Cc: meta-ti@yoctoproject.org
+> > Subject: Re: [meta-ti] [PATCH] linux-ti-staging: Add new device tree target
+> > am572x-idk-pru-excl-uio.dtb
+> > 
+> > See below.
+> > 
+> > 
+> > On Sun, May 15, 2016 at 11:10:32PM -0400, Sam Nelson wrote:
+> > > This new device tree file is to support pruss with uio based drivers.
+> > > Adds uio entries for pruss susbsystem.
+> > >
+> > > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> > > ---
+> > >  .../linux/files/dra7xx/am572x-pru-uio.dtsi         | 191
+> > +++++++++++++++++++++
+> > >  recipes-kernel/linux/linux-ti-staging_4.4.bb       |   2 +-
+> > >  recipes-kernel/linux/ti-uio.inc                    |  12 ++
+> > >  3 files changed, 204 insertions(+), 1 deletion(-)  create mode 100644
+> > > recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+> > >
+> > > diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+> > > b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+> > > new file mode 100644
+> > > index 0000000..001cbec
+> > > --- /dev/null
+> > > +++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+> > > @@ -0,0 +1,191 @@
+> > > +/ {
+> > > +	ocp {
+> > > +		pruss2_eth {
+> > > +		status = "disabled";
+> > > +		};
+> > > +		uio_pruss1_mem: uio_pruss1_mem {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			ti,hwmods = "pruss1";
+> > > +			mem = <0x4b200000 0x2000>,
+> > > +			      <0x4b202000 0x2000>,
+> > > +			      <0x4b210000 0x8000>,
+> > > +			      <0x4b220000 0x2000>,
+> > > +			      <0x4b226000 0x2000>,
+> > > +			      <0x4b22e000 0x31c>,
+> > > +			      <0x4b232000 0x58>;
+> > > +			mem-names = "dram0", "dram1", "shrdram2", "intc",
+> > "cfg",
+> > > +				    "iep", "mii_rt";
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt0: uio_pruss1_evt0 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 186 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt1: uio_pruss1_evt1 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 187 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt2: uio_pruss1_evt2 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 188 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt3: uio_pruss1_evt3 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 189 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt4: uio_pruss1_evt4 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 190 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt5: uio_pruss1_evt5 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 191 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt6: uio_pruss1_evt6 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 192 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss1_evt7: uio_pruss1_evt7 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 193 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +
+> > > +		uio_pruss1_0_mem: uio_pruss1_0_mem {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			mem = <0x4b234000 0x3000>,
+> > > +			      <0x4b222000 0x400>,
+> > > +			      <0x4b222400 0x100>;
+> > > +			mem-names = "iram", "control", "debug";
+> > > +			status = "okay";
+> > > +		};
+> > > +
+> > > +		uio_pruss1_1_mem: uio_pruss1_1_mem {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			mem = <0x4b238000 0x3000>,
+> > > +			      <0x4b224000 0x400>,
+> > > +			      <0x4b224400 0x100>;
+> > > +			mem-names = "iram", "control", "debug";
+> > > +			status = "okay";
+> > > +		};
+> > > +
+> > > +		uio_pruss1_mdio: uio_pruss1_mdio {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			mem = <0x4b232400 0x90>;
+> > > +			status = "okay";
+> > > +		};
+> > > +
+> > > +		uio_pruss2_mem: uio_pruss2_mem {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			ti,hwmods = "pruss2";
+> > > +			mem = <0x4b280000 0x2000>,
+> > > +			      <0x4b282000 0x2000>,
+> > > +			      <0x4b290000 0x8000>,
+> > > +			      <0x4b2a0000 0x2000>,
+> > > +			      <0x4b2a6000 0x2000>,
+> > > +			      <0x4b2ae000 0x31c>,
+> > > +			      <0x4b2b2000 0x58>;
+> > > +			mem-names = "dram0", "dram1", "shrdram2", "intc",
+> > "cfg",
+> > > +				    "iep", "mii_rt";
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt0: uio_pruss2_evt0 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 196 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt1: uio_pruss2_evt1 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 197 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt2: uio_pruss2_evt2 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 198 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt3: uio_pruss2_evt3 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 199 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt4: uio_pruss2_evt4 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 200 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt5: uio_pruss2_evt5 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 201 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt6: uio_pruss2_evt6 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 202 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_evt7: uio_pruss2_evt7 {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			interrupts = <GIC_SPI 203 IRQ_TYPE_LEVEL_HIGH>;
+> > > +			status = "okay";
+> > > +		};
+> > > +
+> > > +		uio_pruss2_0_mem: uio_pruss2_0_mem {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			mem = <0x4b2b4000 0x3000>,
+> > > +			      <0x4b2a2000 0x400>,
+> > > +			      <0x4b2a2400 0x100>;
+> > > +			mem-names = "iram", "control", "debug";
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_1_mem: uio_pruss2_1_mem {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			mem = <0x4b2b8000 0x3000>,
+> > > +			      <0x4b2a4000 0x400>,
+> > > +			      <0x4b2a4400 0x100>;
+> > > +			mem-names = "iram", "control", "debug";
+> > > +			status = "okay";
+> > > +		};
+> > > +		uio_pruss2_mdio: uio_pruss2_mdio {
+> > > +			compatible = "ti,uio-module-drv";
+> > > +			mem = <0x4b2b2400 0x90>;
+> > > +			mem-names = "mdio";
+> > > +			status = "okay";
+> > > +		};
+> > > +	};
+> > > +};
+> > > +
+> > > +&pruss1 {
+> > > +	status = "disabled";
+> > > +};
+> > > +
+> > > +&pru1_0 {
+> > > +	status = "disabled";
+> > > +};
+> > > +
+> > > +&pru1_1 {
+> > > +	status = "disabled";
+> > > +};
+> > > +
+> > > +&pruss2 {
+> > > +	status = "disabled";
+> > > +};
+> > > +
+> > > +&pru2_0 {
+> > > +	status = "disabled";
+> > > +};
+> > > +
+> > > +&pru2_1 {
+> > > +	status = "disabled";
+> > > +};
+> > > +
+> > > +&pruss2_mdio {
+> > > +	status = "disabled";
+> > > +};
+> > > diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb
+> > > b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+> > > index a9b99c0..620a789 100644
+> > > --- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
+> > > +++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+> > > @@ -52,7 +52,7 @@ KERNEL_DEVICETREE_beaglebone = "am335x-
+> > bone.dtb
+> > > am335x-boneblack.dtb am335x-bone  KERNEL_DEVICETREE_omap5-evm =
+> > "omap5-uevm.dtb"
+> > >  KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb
+> > dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-revc.dtb dra72-evm-lcd-
+> > lg.dtb dra72-evm-lcd-osd.dtb"
+> > >  KERNEL_DEVICETREE_dra7xx-hs-evm = "${KERNEL_DEVICETREE_dra7xx-
+> > evm}"
+> > > -KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-
+> > beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am571x-
+> > idk.dtb am572x-idk.dtb am571x-idk-lcd-osd.dtb am572x-idk-lcd-osd.dtb"
+> > > +KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-
+> > beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am571x-
+> > idk.dtb am572x-idk.dtb am571x-idk-lcd-osd.dtb am572x-idk-lcd-osd.dtb
+> > am572x-idk-pru-excl-uio.dtb"
+> > 
+> > NACK, you are adding it here unconditionally.
+> 
+> Are you expecting this to be conditional to ENABLE_TI_UIO_DEVICES?
+> Please clarify.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    | 6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+The rest of your code is, isn't it?
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index c1c5b86..2cefc70 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
- 
- BRANCH = "ti-rt-linux-4.4.y"
- 
--SRCREV = "0997a7f0b943274b71db74f01018c7b7e746eec2"
-+SRCREV = "49af094f0cec5354181c9d919065417ff8207b52"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index a9b99c0..e7d5503 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -71,11 +71,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.4.y"
- 
--SRCREV = "ba05e8fda276bd3a1b2ef970a868b229d5184246"
--PV = "4.4.9+git${SRCPV}"
-+SRCREV = "4a9145aa22bd0debc5406559c2b837e8363d9e0b"
-+PV = "4.4.10+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-2.2.0
 
+> > >  KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb
+> > omap3-beagle-xm-ab.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-
+> > evm.dtb"
+> > >  KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
+> > >  KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
+> > > diff --git a/recipes-kernel/linux/ti-uio.inc
+> > > b/recipes-kernel/linux/ti-uio.inc index 776e4a4..4764d78 100644
+> > > --- a/recipes-kernel/linux/ti-uio.inc
+> > > +++ b/recipes-kernel/linux/ti-uio.inc
+> > > @@ -2,6 +2,7 @@ SRC_URI_append_keystone = " file://keystone-uio.dtsi"
+> > >  SRC_URI_append_k2hk-evm = " file://k2hk-uio.dtsi"
+> > >  SRC_URI_append_k2l-evm = " file://k2l-uio.dtsi"
+> > >  SRC_URI_append_k2e-evm = " file://k2e-uio.dtsi"
+> > > +SRC_URI_append_am57xx-evm = " file://am572x-pru-uio.dtsi"
+> > >
+> > >  DTSI_LIST = ""
+> > >  DTSI_LIST_append_keystone = " keystone-uio.dtsi"
+> > > @@ -24,4 +25,15 @@ do_setup_uio() {
+> > >      fi
+> > >  }
+> > >
+> > > +do_setup_uio_append_am57xx-evm() {
+> > > +    dts="am572x-idk-pru-excl-uio.dts"
+> > > +    dtsi="am572x-pru-uio.dtsi"
+> > > +    cp ${S}/arch/arm/boot/dts/am572x-idk.dts ${S}/arch/arm/boot/dts/$dts
+> > > +    if [ "${ENABLE_TI_UIO_DEVICES}" == "1" ]
+> > > +    then
+> > > +        cp ${WORKDIR}/${dtsi} ${S}/arch/arm/boot/dts/
+> > > +        echo "#include \"${dtsi}\"" >> ${S}/arch/arm/boot/dts/$dts
+> > > +    fi
+> > > +}
+> > > +
+> > >  do_patch[postfuncs] += "do_setup_uio"
+> > > --
+> > > 1.9.1
+> > >
+> > > --
+> > > _______________________________________________
+> > > meta-ti mailing list
+> > > meta-ti@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/meta-ti
 
