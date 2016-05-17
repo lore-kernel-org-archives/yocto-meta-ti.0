@@ -1,6 +1,6 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EC38EE00DA3; Tue, 17 May 2016 04:54:19 -0700 (PDT)
+	id C9D8FE00DB8; Tue, 17 May 2016 11:39:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,39 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88838E00D0C
-	for <meta-ti@yoctoproject.org>; Tue, 17 May 2016 04:54:15 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B319E00956
+	for <meta-ti@yoctoproject.org>; Tue, 17 May 2016 11:39:46 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u4HBsFkC028449
-	for <meta-ti@yoctoproject.org>; Tue, 17 May 2016 06:54:15 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4HBsFCs023559
-	for <meta-ti@yoctoproject.org>; Tue, 17 May 2016 06:54:15 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 17 May 2016 06:54:14 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u4HBsEqY002744;	Tue, 17 May 2016 06:54:14 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 17 May 2016 07:54:12 -0400
-Message-ID: <1463486052-41551-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u4HIdjQR031592
+	for <meta-ti@yoctoproject.org>; Tue, 17 May 2016 13:39:45 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4HIdjpg020802
+	for <meta-ti@yoctoproject.org>; Tue, 17 May 2016 13:39:45 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.03.0294.000; Tue, 17 May 2016 13:39:45 -0500
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Stiffler, Jacob" <j-stiffler@ti.com>, "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [PATCH] ti-ipc-rtos: Update to include examples and
+	documentation with the package
+Thread-Index: AQHRq68HgKTodyw5oEOij8z7X0kXi5+3jt8AgAAEXgCABeiJkA==
+Date: Tue, 17 May 2016 18:39:45 +0000
+Message-ID: <4F9216F96E5DF9428610502835A9F490583BC4F5@DLEE11.ent.ti.com>
+References: <1462989639-23037-1-git-send-email-sam.nelson@ti.com>
+	<20160513185652.GB16188@edge>
+	<4B26FB5A64EBA14C87266869E037F95814287F9F@DFLE09.ent.ti.com>
+In-Reply-To: <4B26FB5A64EBA14C87266869E037F95814287F9F@DFLE09.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.172.224.222]
 MIME-Version: 1.0
-Subject: [PATCH v3] linux-ti-staging: Add new device tree target am572x-idk-pru-excl-uio.dtb
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] ti-ipc-rtos: Update to include examples and documentation with the package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,263 +53,365 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2016 11:54:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 17 May 2016 18:39:52 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-This new device tree file is to support pruss with uio based drivers
-alone.
-Adds uio entries for pruss susbsystem and disables other drivers
-controlling the same.
-New dtb is added only if ENABLE_TI_UIO_DEVICES is enabled.
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 
----
-Change from previous version of patch
-- Moved dtb add to ti-uio.inc
----
----
- .../linux/files/dra7xx/am572x-pru-uio.dtsi         | 191 +++++++++++++++++++++
- recipes-kernel/linux/ti-uio.inc                    |  15 ++
- 2 files changed, 206 insertions(+)
- create mode 100644 recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+> -----Original Message-----
+> From: Stiffler, Jacob
+> Sent: Friday, May 13, 2016 3:13 PM
+> To: Dmytriyenko, Denys; Nelson, Sam
+> Cc: meta-ti@yoctoproject.org
+> Subject: RE: [meta-ti] [PATCH] ti-ipc-rtos: Update to include examples an=
+d
+> documentation with the package
+>=20
+>=20
+>=20
+> > -----Original Message-----
+> > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> > bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
+> > Sent: Friday, May 13, 2016 2:57 PM
+> > To: Nelson, Sam
+> > Cc: meta-ti@yoctoproject.org
+> > Subject: Re: [meta-ti] [PATCH] ti-ipc-rtos: Update to include examples
+> > and documentation with the package
+> >
+> > Sam,
+> >
+> > Is this v2? You didn't specify changes since v1, so I would have to
+> > dig out the previous submission and check that past comments were
+> addressed.
+> >
+> > Jake,
+> >
+> > Do you have any comments here?
+> >
+> >
+> > On Wed, May 11, 2016 at 02:00:39PM -0400, Sam Nelson wrote:
+> > > Updated to new version 3.42.01.03
+> > > Added procedures and source urls for adding examples and
+> > documentation
+> > > into src package.
+> > > Added dependency on doxygen for document creation Added big endian
+> > > c66 targets Updated uniform formatting
+> > >
+> > > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> > > ---
+> > >  recipes-ti/ipc/ti-ipc-rtos_git.bb | 119
+> > ++++++++++++++++++++++++++++++++------
+> > >  recipes-ti/ipc/ti-ipc.inc         |   6 +-
+> > >  2 files changed, 104 insertions(+), 21 deletions(-)
+> > >
+> > > diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> > > b/recipes-ti/ipc/ti-ipc-
+> > rtos_git.bb
+> > > index 4c0fc74..8fb448f 100644
+> > > --- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> > > +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> > > @@ -2,9 +2,44 @@ require recipes-ti/includes/ti-paths.inc  require
+> > > recipes-ti/includes/ti-staging.inc
+> > >  require ti-ipc.inc
+> > >
+> > > -PR =3D "${INC_PR}.4"
+> > > +TI_IPC_EXAMPLES_GIT_URI =3D "git://git.ti.com/ipc/ipc-examples.git"
+> > > +TI_IPC_EXAMPLES_DEST_SUFFIX =3D "git/ipc-examples"
+> > > +TI_IPC_EXAMPLES_GIT_PROTOCOL =3D "git"
+> > > +TI_IPC_EXAMPLES_GIT_BRANCH =3D "master"
+> > > +TI_IPC_EXAMPLES_NAME =3D "ipc-examples"
+> > >
+> > > -DEPENDS =3D "ti-xdctools ti-sysbios"
+> > > +SRC_URI +=3D "${TI_IPC_EXAMPLES_GIT_URI};\
+> > > +destsuffix=3D${TI_IPC_EXAMPLES_DEST_SUFFIX};\
+> > > +protocol=3D${TI_IPC_EXAMPLES_GIT_PROTOCOL};\
+> > > +branch=3D${TI_IPC_EXAMPLES_GIT_BRANCH};\
+> > > +name=3D${TI_IPC_EXAMPLES_NAME}"
+> > > +
+> > > +TI_IPC_METADATA_GIT_URI =3D "git://git.ti.com/ipc/ipc-metadata.git"
+> > > +TI_IPC_METADATA_DEST_SUFFIX =3D "git/ipc-metadata"
+> > > +TI_IPC_METADATA_GIT_PROTOCOL =3D "git"
+> > > +TI_IPC_METADATA_GIT_BRANCH =3D "master"
+> > > +TI_IPC_METADATA_NAME =3D "ipc-metadata"
+> > > +
+> > > +SRC_URI +=3D "${TI_IPC_METADATA_GIT_URI};\
+> > > +destsuffix=3D${TI_IPC_METADATA_DEST_SUFFIX};\
+> > > +protocol=3D${TI_IPC_METADATA_GIT_PROTOCOL};\
+> > > +branch=3D${TI_IPC_METADATA_GIT_BRANCH};\
+> > > +name=3D${TI_IPC_METADATA_NAME}"
+> > > +
+> > > +# Corresponds to tag: 3.42.01.03
+> > > +SRCREV_ipc-examples =3D
+> "bd4f28bd46467553e6610629ff13b4b5b3ba3af0"
+> > > +
+> > > +# Corresponds to tag: 3.42.01.03
+> > > +SRCREV_ipc-metadata =3D
+> "4d01fe4a7c41d2ce76a62b4325e66753d59b298c"
+> > > +
+> > > +SRCREV_FORMAT =3D "ipc-metadata_ipc-examples"
+>=20
+> I'm not sure about this SRCREV_FORMAT. Should it also contain the main ip=
+c
+> git SRCREV? And is this needed if SRCPV is not in the PV?
 
-diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-new file mode 100644
-index 0000000..577603a
---- /dev/null
-+++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-@@ -0,0 +1,191 @@
-+/ {
-+	ocp {
-+		pruss2_eth {
-+		status = "disabled";
-+		};
-+		uio_pruss1_mem: uio_pruss1_mem {
-+			compatible = "ti,uio-module-drv";
-+			ti,hwmods = "pruss1";
-+			mem = <0x4b200000 0x2000>,
-+			      <0x4b202000 0x2000>,
-+			      <0x4b210000 0x8000>,
-+			      <0x4b220000 0x2000>,
-+			      <0x4b226000 0x2000>,
-+			      <0x4b22e000 0x31c>,
-+			      <0x4b232000 0x58>;
-+			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss1_evt0: uio_pruss1_evt0 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 186 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt1: uio_pruss1_evt1 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 187 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt2: uio_pruss1_evt2 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 188 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt3: uio_pruss1_evt3 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 189 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt4: uio_pruss1_evt4 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 190 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt5: uio_pruss1_evt5 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 191 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt6: uio_pruss1_evt6 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 192 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt7: uio_pruss1_evt7 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 193 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+
-+		uio_pruss1_0_mem: uio_pruss1_0_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b234000 0x3000>,
-+			      <0x4b222000 0x400>,
-+			      <0x4b222400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+
-+		uio_pruss1_1_mem: uio_pruss1_1_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b238000 0x3000>,
-+			      <0x4b224000 0x400>,
-+			      <0x4b224400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+
-+		uio_pruss1_mdio: uio_pruss1_mdio {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b232400 0x90>;
-+			status = "okay";
-+		};
-+
-+		uio_pruss2_mem: uio_pruss2_mem {
-+			compatible = "ti,uio-module-drv";
-+			ti,hwmods = "pruss2";
-+			mem = <0x4b280000 0x2000>,
-+			      <0x4b282000 0x2000>,
-+			      <0x4b290000 0x8000>,
-+			      <0x4b2a0000 0x2000>,
-+			      <0x4b2a6000 0x2000>,
-+			      <0x4b2ae000 0x31c>,
-+			      <0x4b2b2000 0x58>;
-+			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss2_evt0: uio_pruss2_evt0 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 196 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt1: uio_pruss2_evt1 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 197 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt2: uio_pruss2_evt2 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 198 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt3: uio_pruss2_evt3 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 199 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt4: uio_pruss2_evt4 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 200 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt5: uio_pruss2_evt5 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 201 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt6: uio_pruss2_evt6 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 202 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt7: uio_pruss2_evt7 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 203 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+
-+		uio_pruss2_0_mem: uio_pruss2_0_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2b4000 0x3000>,
-+			      <0x4b2a2000 0x400>,
-+			      <0x4b2a2400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+		uio_pruss2_1_mem: uio_pruss2_1_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2b8000 0x3000>,
-+			      <0x4b2a4000 0x400>,
-+			      <0x4b2a4400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+		uio_pruss2_mdio: uio_pruss2_mdio {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2b2400 0x90>;
-+			mem-names = "mdio";
-+			status = "okay";
-+		};
-+	};
-+};
-+
-+&pruss1 {
-+	status = "disabled";
-+};
-+
-+&pru1_0 {
-+	status = "disabled";
-+};
-+
-+&pru1_1 {
-+	status = "disabled";
-+};
-+
-+&pruss2 {
-+	status = "disabled";
-+};
-+
-+&pru2_0 {
-+	status = "disabled";
-+};
-+
-+&pru2_1 {
-+	status = "disabled";
-+};
-+
-+&pruss2_mdio {
-+	status = "disabled";
-+};
-diff --git a/recipes-kernel/linux/ti-uio.inc b/recipes-kernel/linux/ti-uio.inc
-index 776e4a4..f038bc8 100644
---- a/recipes-kernel/linux/ti-uio.inc
-+++ b/recipes-kernel/linux/ti-uio.inc
-@@ -2,6 +2,7 @@ SRC_URI_append_keystone = " file://keystone-uio.dtsi"
- SRC_URI_append_k2hk-evm = " file://k2hk-uio.dtsi"
- SRC_URI_append_k2l-evm = " file://k2l-uio.dtsi"
- SRC_URI_append_k2e-evm = " file://k2e-uio.dtsi"
-+SRC_URI_append_am57xx-evm = " file://am572x-pru-uio.dtsi"
- 
- DTSI_LIST = ""
- DTSI_LIST_append_keystone = " keystone-uio.dtsi"
-@@ -9,6 +10,8 @@ DTSI_LIST_append_k2hk-evm = " k2hk-uio.dtsi"
- DTSI_LIST_append_k2l-evm = " k2l-uio.dtsi"
- DTSI_LIST_append_k2e-evm = " k2e-uio.dtsi"
- 
-+KERNEL_DEVICETREE_append_am57xx-evm = "${@base_conditional("ENABLE_TI_UIO_DEVICES", "1", " am572x-idk-pru-excl-uio.dtb", "", d)}"
-+
- do_setup_uio() {
-     if [ "${ENABLE_TI_UIO_DEVICES}" == "1" ]
-     then
-@@ -24,4 +27,16 @@ do_setup_uio() {
-     fi
- }
- 
-+do_setup_uio_append_am57xx-evm() {
-+
-+    if [ "${ENABLE_TI_UIO_DEVICES}" == "1" ]
-+    then
-+        dts="am572x-idk-pru-excl-uio.dts"
-+        dtsi="am572x-pru-uio.dtsi"
-+        cp ${S}/arch/arm/boot/dts/am572x-idk.dts ${S}/arch/arm/boot/dts/$dts
-+        cp ${WORKDIR}/${dtsi} ${S}/arch/arm/boot/dts/
-+        echo "#include \"${dtsi}\"" >> ${S}/arch/arm/boot/dts/$dts
-+    fi
-+}
-+
- do_patch[postfuncs] += "do_setup_uio"
--- 
-1.9.1
+Look like there is some confusion here. I am also not clear if this is need=
+ed if SRCREV is not used in PV.
 
+>=20
+> > > +
+> > > +S_ipc-examples =3D "${WORKDIR}/git/ipc-examples"
+> > > +S_ipc-metadata =3D "${WORKDIR}/git/ipc-metadata"
+> > > +
+> > > +PR =3D "${INC_PR}.0"
+> > > +
+> > > +DEPENDS =3D "ti-xdctools ti-sysbios doxygen-native"
+> > >  DEPENDS_append_keystone =3D " ti-cgt6x-native \
+> > >                              gcc-arm-none-eabi-native \  "
+> > > @@ -12,6 +47,8 @@ DEPENDS_append_omap-a15 =3D " ti-cgt6x-native \
+> > >                              ti-ccsv6-native \
+> > >                              gcc-arm-none-eabi-native \  "
+> > > +DEPENDS_append_c66x =3D " ti-cgt6x-native \ "
+>=20
+> These c66x machines have not yet been accepted into meta-ti.
+
+Ok. I will remove this for now.
+
+>=20
+> > >
+> > >  PACKAGES =3D+ "${PN}-fw"
+> > >  FILES_${PN}-fw =3D "${base_libdir}/firmware/*"
+> > > @@ -26,6 +63,7 @@ IPC_TARGETS =3D ""
+> > >  IPC_TARGETS_omap-a15 =3D "\
+> > >      gnu.targets.arm.A15F=3D"${GCC_ARM_NONE_TOOLCHAIN}" \
+> > >      ti.targets.elf.C66=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x=
+"
+> > > \
+> > > +
+> > ti.targets.elf.C66_big_endian=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt=
+-
+> > c6x" \
+> > >      ti.targets.arm.elf.M4=3D"${M4_TOOLCHAIN_INSTALL_DIR}" \
+> > >      ti.targets.arm.elf.M4F=3D"${M4_TOOLCHAIN_INSTALL_DIR}" \  "
+> > > @@ -33,18 +71,66 @@ IPC_TARGETS_omap-a15 =3D "\
+> IPC_TARGETS_keystone
+> > > =3D " \
+> > >      gnu.targets.arm.A15F=3D"${GCC_ARM_NONE_TOOLCHAIN}" \
+> > >      ti.targets.elf.C66=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x=
+"
+> > > \
+> > > +
+> > ti.targets.elf.C66_big_endian=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt=
+-
+> > c6x" \
+> > > +"
+> > > +
+> > > +IPC_TARGETS_c66x =3D " \
+> > > +    ti.targets.elf.C66=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x=
+"
+> > > +\
+> > > +
+> > ti.targets.elf.C66_big_endian=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt=
+-
+> > c6x" \
+> > >  "
+> > >
+> > >  EXTRA_OEMAKE =3D "\
+> > >      PLATFORM=3D${PLATFORM} \
+> > >      XDC_INSTALL_DIR=3D"${XDC_INSTALL_DIR}" \
+> > >      BIOS_INSTALL_DIR=3D"${SYSBIOS_INSTALL_DIR}" \
+> > > -    ${IPC_TARGETS} -f ipc-bios.mak\
+> > > +    ${IPC_TARGETS} \
+> > >  "
+> > >
+> > > +RELEASE_TYPE =3D "GA"
+> > > +RELEASE_SUFFIX =3D ""
+> > > +
+> > > +SRCIPK_SRC_DIR =3D "${D}${IPC_INSTALL_DIR_RECIPE}"
+> > > +SRCIPK_INSTALL_DIR =3D "ipc_${@'${PV}'.replace('.',
+> > '_')}${RELEASE_SUFFIX}"
+>=20
+> This already specified in meta-arago's arago-source-ipk.conf?
+
+I don't see anything related ti-ipc-rtos, in the master branch meta-arago: =
+arago-source-ipk.conf.
+Am I missing something?
+
+>=20
+> > > +
+> > >  do_compile() {
+> > > -  oe_runmake clean
+> > > -  oe_runmake all
+> > > +  oe_runmake -f ipc-bios.mak clean
+> > > +  oe_runmake -f ipc-bios.mak release
+> > > +
+> > > +  cd ${S_ipc-metadata}
+> > > +  oe_runmake .all-files IPC_INSTALL_DIR=3D"${S}" \
+> > > +    BUILD_HOST_OS=3D"linux" \
+> > > +    RELEASE_TYPE=3D"${RELEASE_TYPE}"
+> > > +
+> > > +  cd ${S_ipc-examples}/src
+> > > +  oe_runmake .examples \
+> > > +    IPCTOOLS=3D"${S_ipc-metadata}/src/etc"
+> > > +
+> > > +  if [  "${PLATFORM}" !=3D "UNKNOWN" ]; then
+> > > +    oe_runmake extract HOSTOS=3D"bios" IPC_INSTALL_DIR=3D"${S}"
+> > > +    oe_runmake extract HOSTOS=3D"linux" IPC_INSTALL_DIR=3D"${S}"
+> > > +
+> > > +    if [ ! -z ${ALT_PLATFORM} ]; then
+> > > +      oe_runmake extract PLATFORM=3D${ALT_PLATFORM} HOSTOS=3D"bios"
+> > IPC_INSTALL_DIR=3D"${S}"
+> > > +      oe_runmake extract PLATFORM=3D${ALT_PLATFORM} HOSTOS=3D"linux"
+> > IPC_INSTALL_DIR=3D"${S}"
+> > > +    fi
+> > > +  fi
+> > > +
+> > > +  IPC_VERSION=3D`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`  #
+> > > + Copy docs and other meta files  install -d
+> > > + ${D}${IPC_INSTALL_DIR_RECIPE}  cp -pPrf
+> > > + ${S_ipc-metadata}/exports/ipc_${IPC_VERSION}/* -d
+> > ${D}${IPC_INSTALL_DIR_RECIPE}
+> > > +
+> > > +  # Copy example folders corresponding to the platforms  if [
+> > > + "${PLATFORM}" !=3D "UNKNOWN" ]; then
+> > > +    install -d ${D}${IPC_INSTALL_DIR_RECIPE}/examples
+> > > +    cp -pPf ${S_ipc-examples}/src/examples/*.*
+> > ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> > > +    cp -pPf ${S_ipc-examples}/src/examples/makefile
+> > ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> > > +    cp -pPrf ${S_ipc-examples}/src/examples/${PLATFORM}*
+> > ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> > > +    if [ ! -z ${ALT_PLATFORM} ]; then
+> > > +      cp -pPrf ${S_ipc-examples}/src/examples/${ALT_PLATFORM}*
+> > ${D}${IPC_INSTALL_DIR_RECIPE}/examples/
+> > > +    fi
+> > > +    find ${D}${IPC_INSTALL_DIR_RECIPE}/examples/ -name "*zip" -type
+> > > + f |
+> > xargs -I {} rm {}
+> > > +  fi
+>=20
+> Why do all of this installation in the do_compile stage? Should it be in
+> do_install?
+>=20
+
+This is rtos package and everything is that is created is part of the sourc=
+e package.
+Only what goes into file system is in the do_install step.
+
+> > >  }
+> > >
+> > >  do_compile_append() {
+> > > @@ -52,25 +138,22 @@ do_compile_append() {  }
+> > >
+> > >  do_install() {
+> > > -    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+> > > -    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+> > > -
+> > > -    install -d ${D}${base_libdir}/firmware/ipc
+> > > -    cp -pPrf ${S}/packages/ti/ipc/tests/bin/*
+> > ${D}${base_libdir}/firmware/ipc
+> > > +  install -d ${D}${base_libdir}/firmware/ipc  cp -pPrf
+> > > + ${S}/packages/ti/ipc/tests/bin/*
+> > ${D}${base_libdir}/firmware/ipc
+> > >  }
+> > >
+> > >  ALTERNATIVE_PRIORITY =3D "5"
+> > >
+> > >  pkg_postinst_${PN}-fw_omap-a15 () {
+> > > -	update-alternatives --install /lib/firmware/dra7-dsp1-fw.xe66 dra7-
+> > dsp1-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
+> > ${ALTERNATIVE_PRIORITY}
+> > > -	update-alternatives --install /lib/firmware/dra7-dsp2-fw.xe66 dra7-
+> > dsp2-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
+> > ${ALTERNATIVE_PRIORITY}
+> > > -	update-alternatives --install /lib/firmware/dra7-ipu1-fw.xem4 dra7-
+> > ipu1-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
+> > ${ALTERNATIVE_PRIORITY}
+> > > -	update-alternatives --install /lib/firmware/dra7-ipu2-fw.xem4 dra7-
+> > ipu2-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
+> > ${ALTERNATIVE_PRIORITY}
+> > > +  update-alternatives --install /lib/firmware/dra7-dsp1-fw.xe66
+> > > + dra7-
+> > dsp1-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
+> > ${ALTERNATIVE_PRIORITY}
+> > > +  update-alternatives --install /lib/firmware/dra7-dsp2-fw.xe66
+> > > + dra7-
+> > dsp2-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
+> > ${ALTERNATIVE_PRIORITY}
+> > > +  update-alternatives --install /lib/firmware/dra7-ipu1-fw.xem4
+> > > + dra7-
+> > ipu1-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
+> > ${ALTERNATIVE_PRIORITY}
+> > > +  update-alternatives --install /lib/firmware/dra7-ipu2-fw.xem4
+> > > + dra7-
+> > ipu2-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
+> > ${ALTERNATIVE_PRIORITY}
+> > >  }
+> > >
+> > >  pkg_postrm_${PN}-fw_omap-a15 () {
+> > > -	update-alternatives --remove dra7-dsp1-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
+> > > -	update-alternatives --remove dra7-dsp2-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
+> > > -	update-alternatives --remove dra7-ipu1-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
+> > > -	update-alternatives --remove dra7-ipu2-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
+> > > +  update-alternatives --remove dra7-dsp1-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
+> > > +  update-alternatives --remove dra7-dsp2-fw.xe66
+> > ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
+> > > +  update-alternatives --remove dra7-ipu1-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
+> > > +  update-alternatives --remove dra7-ipu2-fw.xem4
+> > ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
+> > >  }
+> > > diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+> > > index 69127aa..9c5dfed 100644
+> > > --- a/recipes-ti/ipc/ti-ipc.inc
+> > > +++ b/recipes-ti/ipc/ti-ipc.inc
+> > > @@ -8,15 +8,15 @@ TI_IPC_GIT_URI =3D "git://git.ti.com/ipc/ipcdev.git=
+"
+> > >  TI_IPC_GIT_PROTOCOL =3D "git"
+> > >  TI_IPC_GIT_BRANCH =3D "3.42"
+> > >
+> > > -#Corresponds to 3.42.00.02
+> > > -TI_IPC_SRCREV =3D "a520969994378fb2629d7dfc25f306c3a711b5bc"
+> > > +#Corresponds to 3.42.01.03
+> > > +TI_IPC_SRCREV =3D "dc6c5082f478225b7fbce4216173e6c5b36100b4"
+> > >
+> > >  BRANCH =3D "${TI_IPC_GIT_BRANCH}"
+> > >  SRC_URI =3D
+> >
+> "${TI_IPC_GIT_URI};protocol=3D${TI_IPC_GIT_PROTOCOL};branch=3D${BRANCH}"
+> > >  SRCREV =3D "${TI_IPC_SRCREV}"
+> > >
+> > >  S =3D "${WORKDIR}/git"
+> > > -PV =3D "3.42.00.02"
+> > > +PV =3D "3.42.01.03"
+> > >  INC_PR =3D "r0"
+> > >
+> > >  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> > > --
+> > > 1.9.1
+> > >
+> > > --
+> > > _______________________________________________
+> > > meta-ti mailing list
+> > > meta-ti@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/meta-ti
+> > --
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
