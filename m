@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CEC2AE00D43; Wed, 18 May 2016 13:51:58 -0700 (PDT)
+	id CFF6DE00CEF; Wed, 18 May 2016 13:51:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 866C2E00D11
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 850BDE00CEF
 	for <meta-ti@yoctoproject.org>; Wed, 18 May 2016 13:51:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6882052AD1; Wed, 18 May 2016 20:51:55 +0000 (UTC)
+	id 502E652AD0; Wed, 18 May 2016 20:51:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160518205155.6882052AD1@arago-project.org>
+Message-Id: <20160518205155.502E652AD0@arago-project.org>
 Date: Wed, 18 May 2016 20:51:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : linux-ti-staging: Add new device tree target am572x-idk-pru-excl-uio.dtb
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 18 May 2016 20:51:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 83d0ad1ba2381d6d61c3eb22cd38a0d711f95c10
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=83d0ad1ba2381d6d61c3eb22cd38a0d711f95c10
+Branch: krogoth
+Commit: 2a8d94c1fa963dfc8c1aa77d9869ad2315fac7db
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2a8d94c1fa963dfc8c1aa77d9869ad2315fac7db
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Tue May 17 17:54:12 2016 +0000
