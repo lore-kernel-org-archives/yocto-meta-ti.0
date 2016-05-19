@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CFF6DE00CEF; Wed, 18 May 2016 13:51:58 -0700 (PDT)
+	id D0FC8E00E69; Thu, 19 May 2016 07:39:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 850BDE00CEF
-	for <meta-ti@yoctoproject.org>; Wed, 18 May 2016 13:51:56 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 502E652AD0; Wed, 18 May 2016 20:51:55 +0000 (UTC)
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB7C7E00E5E
+	for <meta-ti@yoctoproject.org>; Thu, 19 May 2016 07:39:39 -0700 (PDT)
+Received: from vz-proxy-l007.mx.aol.com ([64.236.82.157])
+	by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O7F006YSI19I520@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 19 May 2016 09:39:19 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=MtGvkDue c=1 sm=1 tr=0	a=EDyElNE8DnJcdewKkuvZJw==:117
+	a=yrkiwgmsf1kA:10 a=sozttTNsAAAA:8	a=xLgGdqzeELg7TPObsDkA:9
+Received: by 100.15.86.14 with SMTP id 26e97122; Thu, 19 May 2016 14:39:19 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id E8B7A16200B;	Thu,
+	19 May 2016 10:39:08 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160518205155.502E652AD0@arago-project.org>
-Date: Wed, 18 May 2016 20:51:55 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : linux-ti-staging: Add new device tree target am572x-idk-pru-excl-uio.dtb
+Date: Thu, 19 May 2016 10:39:08 -0400
+Message-id: <1463668748-16920-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] machine: add opencl feature to corresponding platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,268 +46,68 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2016 20:51:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 19 May 2016 14:39:40 -0000
 
-Module: meta-ti
-Branch: krogoth
-Commit: 2a8d94c1fa963dfc8c1aa77d9869ad2315fac7db
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2a8d94c1fa963dfc8c1aa77d9869ad2315fac7db
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue May 17 17:54:12 2016 +0000
-
-linux-ti-staging: Add new device tree target am572x-idk-pru-excl-uio.dtb
-
-This new device tree file is to support pruss with uio based drivers
-alone.
-Adds uio entries for pruss susbsystem and disables other drivers
-controlling the same.
-New dtb is added only if ENABLE_TI_UIO_DEVICES is enabled.
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/include/dra7xx.inc | 2 +-
+ conf/machine/k2e-evm.conf       | 2 ++
+ conf/machine/k2hk-evm.conf      | 2 ++
+ conf/machine/k2l-evm.conf       | 2 ++
+ 4 files changed, 7 insertions(+), 1 deletion(-)
 
- .../linux/files/dra7xx/am572x-pru-uio.dtsi         |  191 ++++++++++++++++++++
- recipes-kernel/linux/ti-uio.inc                    |   15 ++
- 2 files changed, 206 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-new file mode 100644
-index 0000000..577603a
---- /dev/null
-+++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-@@ -0,0 +1,191 @@
-+/ {
-+	ocp {
-+		pruss2_eth {
-+		status = "disabled";
-+		};
-+		uio_pruss1_mem: uio_pruss1_mem {
-+			compatible = "ti,uio-module-drv";
-+			ti,hwmods = "pruss1";
-+			mem = <0x4b200000 0x2000>,
-+			      <0x4b202000 0x2000>,
-+			      <0x4b210000 0x8000>,
-+			      <0x4b220000 0x2000>,
-+			      <0x4b226000 0x2000>,
-+			      <0x4b22e000 0x31c>,
-+			      <0x4b232000 0x58>;
-+			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss1_evt0: uio_pruss1_evt0 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 186 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt1: uio_pruss1_evt1 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 187 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt2: uio_pruss1_evt2 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 188 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt3: uio_pruss1_evt3 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 189 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt4: uio_pruss1_evt4 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 190 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt5: uio_pruss1_evt5 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 191 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt6: uio_pruss1_evt6 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 192 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss1_evt7: uio_pruss1_evt7 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 193 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+
-+		uio_pruss1_0_mem: uio_pruss1_0_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b234000 0x3000>,
-+			      <0x4b222000 0x400>,
-+			      <0x4b222400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+
-+		uio_pruss1_1_mem: uio_pruss1_1_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b238000 0x3000>,
-+			      <0x4b224000 0x400>,
-+			      <0x4b224400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+
-+		uio_pruss1_mdio: uio_pruss1_mdio {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b232400 0x90>;
-+			status = "okay";
-+		};
-+
-+		uio_pruss2_mem: uio_pruss2_mem {
-+			compatible = "ti,uio-module-drv";
-+			ti,hwmods = "pruss2";
-+			mem = <0x4b280000 0x2000>,
-+			      <0x4b282000 0x2000>,
-+			      <0x4b290000 0x8000>,
-+			      <0x4b2a0000 0x2000>,
-+			      <0x4b2a6000 0x2000>,
-+			      <0x4b2ae000 0x31c>,
-+			      <0x4b2b2000 0x58>;
-+			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss2_evt0: uio_pruss2_evt0 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 196 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt1: uio_pruss2_evt1 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 197 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt2: uio_pruss2_evt2 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 198 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt3: uio_pruss2_evt3 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 199 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt4: uio_pruss2_evt4 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 200 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt5: uio_pruss2_evt5 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 201 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt6: uio_pruss2_evt6 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 202 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+		uio_pruss2_evt7: uio_pruss2_evt7 {
-+			compatible = "ti,uio-module-drv";
-+			interrupts = <GIC_SPI 203 IRQ_TYPE_EDGE_RISING>;
-+			status = "okay";
-+		};
-+
-+		uio_pruss2_0_mem: uio_pruss2_0_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2b4000 0x3000>,
-+			      <0x4b2a2000 0x400>,
-+			      <0x4b2a2400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+		uio_pruss2_1_mem: uio_pruss2_1_mem {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2b8000 0x3000>,
-+			      <0x4b2a4000 0x400>,
-+			      <0x4b2a4400 0x100>;
-+			mem-names = "iram", "control", "debug";
-+			status = "okay";
-+		};
-+		uio_pruss2_mdio: uio_pruss2_mdio {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2b2400 0x90>;
-+			mem-names = "mdio";
-+			status = "okay";
-+		};
-+	};
-+};
-+
-+&pruss1 {
-+	status = "disabled";
-+};
-+
-+&pru1_0 {
-+	status = "disabled";
-+};
-+
-+&pru1_1 {
-+	status = "disabled";
-+};
-+
-+&pruss2 {
-+	status = "disabled";
-+};
-+
-+&pru2_0 {
-+	status = "disabled";
-+};
-+
-+&pru2_1 {
-+	status = "disabled";
-+};
-+
-+&pruss2_mdio {
-+	status = "disabled";
-+};
-diff --git a/recipes-kernel/linux/ti-uio.inc b/recipes-kernel/linux/ti-uio.inc
-index 776e4a4..f038bc8 100644
---- a/recipes-kernel/linux/ti-uio.inc
-+++ b/recipes-kernel/linux/ti-uio.inc
-@@ -2,6 +2,7 @@ SRC_URI_append_keystone = " file://keystone-uio.dtsi"
- SRC_URI_append_k2hk-evm = " file://k2hk-uio.dtsi"
- SRC_URI_append_k2l-evm = " file://k2l-uio.dtsi"
- SRC_URI_append_k2e-evm = " file://k2e-uio.dtsi"
-+SRC_URI_append_am57xx-evm = " file://am572x-pru-uio.dtsi"
+diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
+index 857e1b3..42941fd 100644
+--- a/conf/machine/include/dra7xx.inc
++++ b/conf/machine/include/dra7xx.inc
+@@ -1,4 +1,4 @@
+ require conf/machine/include/omap-a15.inc
+ SOC_FAMILY_append = ":dra7xx"
  
- DTSI_LIST = ""
- DTSI_LIST_append_keystone = " keystone-uio.dtsi"
-@@ -9,6 +10,8 @@ DTSI_LIST_append_k2hk-evm = " k2hk-uio.dtsi"
- DTSI_LIST_append_k2l-evm = " k2l-uio.dtsi"
- DTSI_LIST_append_k2e-evm = " k2e-uio.dtsi"
+-MACHINE_FEATURES += "pci"
++MACHINE_FEATURES += "pci opencl"
+diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
+index 0735357..eef9583 100644
+--- a/conf/machine/k2e-evm.conf
++++ b/conf/machine/k2e-evm.conf
+@@ -4,6 +4,8 @@
  
-+KERNEL_DEVICETREE_append_am57xx-evm = "${@base_conditional("ENABLE_TI_UIO_DEVICES", "1", " am572x-idk-pru-excl-uio.dtb", "", d)}"
-+
- do_setup_uio() {
-     if [ "${ENABLE_TI_UIO_DEVICES}" == "1" ]
-     then
-@@ -24,4 +27,16 @@ do_setup_uio() {
-     fi
- }
+ require conf/machine/include/keystone.inc
  
-+do_setup_uio_append_am57xx-evm() {
++MACHINE_FEATURES += "opencl"
 +
-+    if [ "${ENABLE_TI_UIO_DEVICES}" == "1" ]
-+    then
-+        dts="am572x-idk-pru-excl-uio.dts"
-+        dtsi="am572x-pru-uio.dtsi"
-+        cp ${S}/arch/arm/boot/dts/am572x-idk.dts ${S}/arch/arm/boot/dts/$dts
-+        cp ${WORKDIR}/${dtsi} ${S}/arch/arm/boot/dts/
-+        echo "#include \"${dtsi}\"" >> ${S}/arch/arm/boot/dts/$dts
-+    fi
-+}
+ UBOOT_MACHINE = "k2e_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2e"
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index d375b24..4c33f37 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -4,6 +4,8 @@
+ 
+ require conf/machine/include/keystone.inc
+ 
++MACHINE_FEATURES += "opencl"
 +
- do_patch[postfuncs] += "do_setup_uio"
+ UBOOT_MACHINE = "k2hk_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2hk"
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+index c7b712b..cf540f4 100644
+--- a/conf/machine/k2l-evm.conf
++++ b/conf/machine/k2l-evm.conf
+@@ -4,6 +4,8 @@
+ 
+ require conf/machine/include/keystone.inc
+ 
++MACHINE_FEATURES += "opencl"
++
+ UBOOT_MACHINE = "k2l_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2l"
+-- 
+2.2.0
 
 
