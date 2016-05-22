@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 95570E00D7E; Sun, 22 May 2016 09:32:04 -0700 (PDT)
+	id 95E4EE00DE3; Sun, 22 May 2016 09:32:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65ED4E00DE3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6555AE00D7E
 	for <meta-ti@yoctoproject.org>; Sun, 22 May 2016 09:31:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7782C529C2; Sun, 22 May 2016 16:31:55 +0000 (UTC)
+	id 3A137529BF; Sun, 22 May 2016 16:31:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160522163155.7782C529C2@arago-project.org>
+Message-Id: <20160522163155.3A137529BF@arago-project.org>
 Date: Sun, 22 May 2016 16:31:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : machine: add opencl feature to corresponding platforms
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to final 2016.05 and ti2016. 01-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,73 +37,42 @@ X-List-Received-Date: Sun, 22 May 2016 16:32:04 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: fb7e4fb69d884f94a5d55dfb22d840a5155f689f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fb7e4fb69d884f94a5d55dfb22d840a5155f689f
+Branch: krogoth
+Commit: 8599d32a62adbb512fa44256e462975c957fd091
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8599d32a62adbb512fa44256e462975c957fd091
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu May 19 20:39:08 2016 +0000
+Date:   Fri May 20 22:39:10 2016 +0000
 
-machine: add opencl feature to corresponding platforms
+u-boot-ti-staging: update to final 2016.05 and ti2016.01-rc3 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/dra7xx.inc |    2 +-
- conf/machine/k2e-evm.conf       |    2 ++
- conf/machine/k2hk-evm.conf      |    2 ++
- conf/machine/k2l-evm.conf       |    2 ++
- 4 files changed, 7 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
-index 857e1b3..42941fd 100644
---- a/conf/machine/include/dra7xx.inc
-+++ b/conf/machine/include/dra7xx.inc
-@@ -1,4 +1,4 @@
- require conf/machine/include/omap-a15.inc
- SOC_FAMILY_append = ":dra7xx"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 4e92298..ddd5f4b 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--MACHINE_FEATURES += "pci"
-+MACHINE_FEATURES += "pci opencl"
-diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-index 0735357..eef9583 100644
---- a/conf/machine/k2e-evm.conf
-+++ b/conf/machine/k2e-evm.conf
-@@ -4,6 +4,8 @@
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
- require conf/machine/include/keystone.inc
+-PR = "r3"
++PR = "r4"
+ PV_append = "+git${SRCPV}"
  
-+MACHINE_FEATURES += "opencl"
-+
- UBOOT_MACHINE = "k2e_evm_config"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- BOOT_MONITOR_MAKE_TARGET = "k2e"
-diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
-index d375b24..4c33f37 100644
---- a/conf/machine/k2hk-evm.conf
-+++ b/conf/machine/k2hk-evm.conf
-@@ -4,6 +4,8 @@
+ BRANCH ?= "ti-u-boot-2016.05"
  
- require conf/machine/include/keystone.inc
+-SRCREV = "7fb5dfba06d7338cc1871152708935388d3b80fa"
++SRCREV = "c165945d193be510337de656f6564ad0f6ab35a4"
  
-+MACHINE_FEATURES += "opencl"
-+
- UBOOT_MACHINE = "k2hk_evm_config"
- 
- BOOT_MONITOR_MAKE_TARGET = "k2hk"
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-index c7b712b..cf540f4 100644
---- a/conf/machine/k2l-evm.conf
-+++ b/conf/machine/k2l-evm.conf
-@@ -4,6 +4,8 @@
- 
- require conf/machine/include/keystone.inc
- 
-+MACHINE_FEATURES += "opencl"
-+
- UBOOT_MACHINE = "k2l_evm_config"
- 
- BOOT_MONITOR_MAKE_TARGET = "k2l"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
