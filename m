@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 93644E00F9E; Sun, 22 May 2016 09:32:04 -0700 (PDT)
+	id 95570E00D7E; Sun, 22 May 2016 09:32:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64296E00A6D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65ED4E00DE3
 	for <meta-ti@yoctoproject.org>; Sun, 22 May 2016 09:31:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 891A5529C7; Sun, 22 May 2016 16:31:55 +0000 (UTC)
+	id 7782C529C2; Sun, 22 May 2016 16:31:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160522163155.891A5529C7@arago-project.org>
+Message-Id: <20160522163155.7782C529C2@arago-project.org>
 Date: Sun, 22 May 2016 16:31:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.11 and ti2016. 01-rc3 tag
+Subject: Denys Dmytriyenko : machine: add opencl feature to corresponding platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,72 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9d2d43c476238bf792496f3c2ccaa07681e897eb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9d2d43c476238bf792496f3c2ccaa07681e897eb
+Commit: fb7e4fb69d884f94a5d55dfb22d840a5155f689f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fb7e4fb69d884f94a5d55dfb22d840a5155f689f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri May 20 22:39:09 2016 +0000
+Date:   Thu May 19 20:39:08 2016 +0000
 
-linux-ti-staging: update to 4.4.11 and ti2016.01-rc3 tag
+machine: add opencl feature to corresponding platforms
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/include/dra7xx.inc |    2 +-
+ conf/machine/k2e-evm.conf       |    2 ++
+ conf/machine/k2hk-evm.conf      |    2 ++
+ conf/machine/k2l-evm.conf       |    2 ++
+ 4 files changed, 7 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 2cefc70..df7efdc 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
+index 857e1b3..42941fd 100644
+--- a/conf/machine/include/dra7xx.inc
++++ b/conf/machine/include/dra7xx.inc
+@@ -1,4 +1,4 @@
+ require conf/machine/include/omap-a15.inc
+ SOC_FAMILY_append = ":dra7xx"
  
- BRANCH = "ti-rt-linux-4.4.y"
+-MACHINE_FEATURES += "pci"
++MACHINE_FEATURES += "pci opencl"
+diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
+index 0735357..eef9583 100644
+--- a/conf/machine/k2e-evm.conf
++++ b/conf/machine/k2e-evm.conf
+@@ -4,6 +4,8 @@
  
--SRCREV = "49af094f0cec5354181c9d919065417ff8207b52"
-+SRCREV = "df2157fb7ad3a5d435a9445d7b16c16c52a98969"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index e7d5503..a712127 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -71,8 +71,8 @@ S = "${WORKDIR}/git"
+ require conf/machine/include/keystone.inc
  
- BRANCH = "ti-lsk-linux-4.4.y"
++MACHINE_FEATURES += "opencl"
++
+ UBOOT_MACHINE = "k2e_evm_config"
  
--SRCREV = "4a9145aa22bd0debc5406559c2b837e8363d9e0b"
--PV = "4.4.10+git${SRCPV}"
-+SRCREV = "1d85a66844655b0cbd99c00870d77956494c59ab"
-+PV = "4.4.11+git${SRCPV}"
+ BOOT_MONITOR_MAKE_TARGET = "k2e"
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index d375b24..4c33f37 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -4,6 +4,8 @@
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ require conf/machine/include/keystone.inc
+ 
++MACHINE_FEATURES += "opencl"
++
+ UBOOT_MACHINE = "k2hk_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2hk"
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+index c7b712b..cf540f4 100644
+--- a/conf/machine/k2l-evm.conf
++++ b/conf/machine/k2l-evm.conf
+@@ -4,6 +4,8 @@
+ 
+ require conf/machine/include/keystone.inc
+ 
++MACHINE_FEATURES += "opencl"
++
+ UBOOT_MACHINE = "k2l_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2l"
 
 
