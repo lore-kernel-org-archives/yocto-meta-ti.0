@@ -1,40 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CF517E00E0F; Sun, 22 May 2016 20:52:57 -0700 (PDT)
+	id AC688E00E0A; Sun, 22 May 2016 20:59:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.7 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
-	[206.46.173.7])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE6A3E00E07
-	for <meta-ti@yoctoproject.org>; Sun, 22 May 2016 20:52:53 -0700 (PDT)
-Received: from vz-proxy-l003.mx.aol.com ([64.236.82.155])
-	by vms173007.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O7M00J182S39310@vms173007.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 22 May 2016 22:52:52 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=MtGvkDue c=1 sm=1 tr=0	a=i+tV1o3iWEoTTvx3QNPGxA==:117
-	a=yrkiwgmsf1kA:10 a=sozttTNsAAAA:8	a=IEfvOH4UPkHEBT3X4I8A:9
-	a=VEMyjXmlhoG5nC5G:21 a=1P6pK5qFJlTXwWla:21
-Received: by 100.15.86.14 with SMTP id 4b397a3a; Mon, 23 May 2016 03:52:52 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id B447F162012;	Sun,
-	22 May 2016 23:52:51 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE634E00E04
+	for <meta-ti@yoctoproject.org>; Sun, 22 May 2016 20:59:13 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7B966529CB; Mon, 23 May 2016 03:59:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Sun, 22 May 2016 23:52:51 -0400
-Message-id: <1463975571-23409-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] machine: bump max_leb_cnt for am3 and am4 platforms
+Message-Id: <20160523035912.7B966529CB@arago-project.org>
+Date: Mon, 23 May 2016 03:59:12 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : machine: bump max_leb_cnt for am3 and am4 platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2016 03:52:57 -0000
+X-List-Received-Date: Mon, 23 May 2016 03:59:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 27700dc2014c6ec88e46b76fed9f84963c625d0d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=27700dc2014c6ec88e46b76fed9f84963c625d0d
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon May 23 09:52:51 2016 +0000
+
+machine: bump max_leb_cnt for am3 and am4 platforms
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/machine/am335x-evm.conf | 2 +-
- conf/machine/am437x-evm.conf | 2 +-
+
+ conf/machine/am335x-evm.conf |    2 +-
+ conf/machine/am437x-evm.conf |    2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
@@ -83,7 +80,5 @@ index e4f237a..9003535 100644
  
  # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
  # from dmesg:
--- 
-2.2.0
 
 
