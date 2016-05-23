@@ -1,26 +1,35 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7EB78E00E0F; Sun, 22 May 2016 20:59:26 -0700 (PDT)
+	id 0E5D5E00E38; Mon, 23 May 2016 07:18:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE781E00E13
-	for <meta-ti@yoctoproject.org>; Sun, 22 May 2016 20:59:22 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D352C529CB; Mon, 23 May 2016 03:59:21 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160523035921.D352C529CB@arago-project.org>
-Date: Mon, 23 May 2016 03:59:21 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : machine: bump max_leb_cnt for am3 and am4 platforms
+Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9528E00CB0
+	for <meta-ti@yoctoproject.org>; Mon, 23 May 2016 07:18:21 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u4NEIKYw011547
+	for <meta-ti@yoctoproject.org>; Mon, 23 May 2016 09:18:20 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4NEIKHX013575
+	for <meta-ti@yoctoproject.org>; Mon, 23 May 2016 09:18:20 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 23 May 2016 09:18:20 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u4NEIJms020514;	Mon, 23 May 2016 09:18:19 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 23 May 2016 10:18:18 -0400
+Message-ID: <1464013098-46279-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] linux-ti-staging: Update pru uio dtb entries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,52 +42,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2016 03:59:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 May 2016 14:18:26 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: krogoth
-Commit: 2658df443788d304473d9cc666eb2bbc76b59234
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2658df443788d304473d9cc666eb2bbc76b59234
+added additional entries to allow access to ecap and uart regions
+Update Kernel PR to force rebuild
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon May 23 09:52:51 2016 +0000
-
-machine: bump max_leb_cnt for am3 and am4 platforms
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
+ recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi | 8 ++++++--
+ recipes-kernel/linux/linux-ti-staging_4.4.bb          | 2 +-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
- conf/machine/am335x-evm.conf |    2 +-
- conf/machine/am437x-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 138cb45..5b5d48d 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4700"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4900"
+diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+index 577603a..fe21b2f 100644
+--- a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
++++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+@@ -11,10 +11,12 @@
+ 			      <0x4b210000 0x8000>,
+ 			      <0x4b220000 0x2000>,
+ 			      <0x4b226000 0x2000>,
++			      <0x4b228000 0x38>,
+ 			      <0x4b22e000 0x31c>,
++			      <0x4b230000 0x60>,
+ 			      <0x4b232000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "iep", "mii_rt";
++				    "ecap", "iep", "uart", "mii_rt";
+ 			status = "okay";
+ 		};
+ 		uio_pruss1_evt0: uio_pruss1_evt0 {
+@@ -90,10 +92,12 @@
+ 			      <0x4b290000 0x8000>,
+ 			      <0x4b2a0000 0x2000>,
+ 			      <0x4b2a6000 0x2000>,
++			      <0x4b2a8000 0x38>,
+ 			      <0x4b2ae000 0x31c>,
++			      <0x4b2b0000 0x60>,
+ 			      <0x4b2b2000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "iep", "mii_rt";
++				    "ecap", "iep", "uart", "mii_rt";
+ 			status = "okay";
+ 		};
+ 		uio_pruss2_evt0: uio_pruss2_evt0 {
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index a712127..cba9c89 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -75,7 +75,7 @@ SRCREV = "1d85a66844655b0cbd99c00870d77956494c59ab"
+ PV = "4.4.11+git${SRCPV}"
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index e4f237a..9003535 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 994 LEBs
--MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2200"
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2300"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
- # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # from dmesg:
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-- 
+1.9.1
 
 
