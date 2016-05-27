@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6B447E00E02; Thu, 26 May 2016 19:02:26 -0700 (PDT)
+	id 6C3AEE00DE9; Thu, 26 May 2016 19:02:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F245E00DE9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 506EAE00DEA
 	for <meta-ti@yoctoproject.org>; Thu, 26 May 2016 19:02:22 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 604CF52AEA; Fri, 27 May 2016 02:02:21 +0000 (UTC)
+	id 7668152AEB; Fri, 27 May 2016 02:02:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160527020221.604CF52AEA@arago-project.org>
+Message-Id: <20160527020221.7668152AEB@arago-project.org>
 Date: Fri, 27 May 2016 02:02:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : machine: explicitly list ubifs in IMAGE_FSTYPES, so RM_OLD_IMAGE works
+Subject: e-ruei1@ti.com : ti-sgx-ddk-um: update srcrev and bump PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,131 +40,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: b094cd07c1b4d02e2e4223939e1b398dcd817dda
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b094cd07c1b4d02e2e4223939e1b398dcd817dda
+Commit: 2a57c4c76800e34d97a3885239b8fd954b1a1387
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2a57c4c76800e34d97a3885239b8fd954b1a1387
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu May 26 04:19:44 2016 +0000
+Author: e-ruei1@ti.com <e-ruei1@ti.com>
+Date:   Fri May 27 01:33:11 2016 +0000
 
-machine: explicitly list ubifs in IMAGE_FSTYPES, so RM_OLD_IMAGE works
+ti-sgx-ddk-um: update srcrev and bump PR
 
+* bring in the fix of QML overlay display problem
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    2 +-
- conf/machine/am437x-evm.conf |    2 +-
- conf/machine/am57xx-evm.conf |    2 +-
- conf/machine/dra7xx-evm.conf |    2 +-
- conf/machine/k2e-evm.conf    |    2 +-
- conf/machine/k2g-evm.conf    |    2 +-
- conf/machine/k2hk-evm.conf   |    2 +-
- conf/machine/k2l-evm.conf    |    2 +-
- 8 files changed, 8 insertions(+), 8 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 5b5d48d..0936a9c 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -9,7 +9,7 @@ XSERVER += "xf86-input-tslib"
- MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 0021884..e5c5de6 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
--IMAGE_FSTYPES += "ubi tar.gz tar.xz"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "8d4ba04a2da59989b21aacca9defdf387e321695"
++SRCREV = "54ba970e33d3c13f726d7c035f3b5c3dcb74afdc"
  
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0 115200;ttyS3 115200;ttyO3"
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 9003535..4a86e00 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -9,7 +9,7 @@ XSERVER += "xf86-input-tslib"
- MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
--IMAGE_FSTYPES += "ubi tar.gz tar.xz"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz"
+ inherit update-rc.d
  
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 5d6bf09..7dbc088 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/dra7xx.inc
+-PR = "r11"
++PR = "r12"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
- MACHINE_FEATURES += "touchscreen"
- 
--IMAGE_FSTYPES += "ubi tar.gz tar.xz"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz"
- 
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS2 115200;ttyO2"
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 03efa19..6c69683 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/dra7xx.inc
- 
- MACHINE_FEATURES += "touchscreen"
- 
--IMAGE_FSTYPES += "ubi tar.gz tar.xz"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz"
- 
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-index eef9583..a1970e6 100644
---- a/conf/machine/k2e-evm.conf
-+++ b/conf/machine/k2e-evm.conf
-@@ -10,7 +10,7 @@ UBOOT_MACHINE = "k2e_evm_config"
- 
- BOOT_MONITOR_MAKE_TARGET = "k2e"
- 
--IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz cpio"
- 
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-index 860324c..3f0651d 100644
---- a/conf/machine/k2g-evm.conf
-+++ b/conf/machine/k2g-evm.conf
-@@ -10,7 +10,7 @@ UBOOT_MACHINE = "k2g_evm_config"
- 
- BOOT_MONITOR_MAKE_TARGET = "k2g"
- 
--IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz cpio"
- 
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
-index 4c33f37..3c3c957 100644
---- a/conf/machine/k2hk-evm.conf
-+++ b/conf/machine/k2hk-evm.conf
-@@ -10,7 +10,7 @@ UBOOT_MACHINE = "k2hk_evm_config"
- 
- BOOT_MONITOR_MAKE_TARGET = "k2hk"
- 
--IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz cpio"
- 
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-index cf540f4..a5b0706 100644
---- a/conf/machine/k2l-evm.conf
-+++ b/conf/machine/k2l-evm.conf
-@@ -10,7 +10,7 @@ UBOOT_MACHINE = "k2l_evm_config"
- 
- BOOT_MONITOR_MAKE_TARGET = "k2l"
- 
--IMAGE_FSTYPES += "ubi tar.gz tar.xz cpio"
-+IMAGE_FSTYPES += "ubifs ubi tar.gz tar.xz cpio"
- 
- SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
