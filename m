@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6FC01E00E02; Thu, 26 May 2016 19:00:39 -0700 (PDT)
+	id 70D58E00DED; Thu, 26 May 2016 19:00:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37D7CE00DED
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 364D8E00DE9
 	for <meta-ti@yoctoproject.org>; Thu, 26 May 2016 19:00:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A02C752AEB; Fri, 27 May 2016 02:00:31 +0000 (UTC)
+	id 57A5152AE7; Fri, 27 May 2016 02:00:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160527020031.A02C752AEB@arago-project.org>
+Message-Id: <20160527020031.57A5152AE7@arago-project.org>
 Date: Fri, 27 May 2016 02:00:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: e-ruei1@ti.com : ti-sgx-ddk-um: update srcrev and bump PR
+Subject: Jacob Stiffler : k2g-evm: add opencl feature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,45 +38,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 32077fb8f0b06258c9e3994c0649f49409eff41b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=32077fb8f0b06258c9e3994c0649f49409eff41b
+Commit: ad363e71de6c9eced35c9372859aa886718178a7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ad363e71de6c9eced35c9372859aa886718178a7
 
-Author: e-ruei1@ti.com <e-ruei1@ti.com>
-Date:   Fri May 27 01:33:11 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Mon May 23 22:16:28 2016 +0000
 
-ti-sgx-ddk-um: update srcrev and bump PR
+k2g-evm: add opencl feature
 
-* bring in the fix of QML overlay display problem
-
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/k2g-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 0021884..e5c5de6 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+index 125a949..860324c 100644
+--- a/conf/machine/k2g-evm.conf
++++ b/conf/machine/k2g-evm.conf
+@@ -4,7 +4,7 @@
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "8d4ba04a2da59989b21aacca9defdf387e321695"
-+SRCREV = "54ba970e33d3c13f726d7c035f3b5c3dcb74afdc"
+ require conf/machine/include/keystone.inc
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+-MACHINE_FEATURES += "alsa"
++MACHINE_FEATURES += "alsa opencl"
  
- inherit update-rc.d
+ UBOOT_MACHINE = "k2g_evm_config"
  
--PR = "r11"
-+PR = "r12"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
- 
- DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
