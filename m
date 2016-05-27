@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 583B6E00DFA; Thu, 26 May 2016 19:02:24 -0700 (PDT)
+	id 595D3E00DE6; Thu, 26 May 2016 19:02:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28899E00DE6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0DF80E00C2B
 	for <meta-ti@yoctoproject.org>; Thu, 26 May 2016 19:02:22 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4D9A052AE9; Fri, 27 May 2016 02:02:21 +0000 (UTC)
+	id 2EDB752AE8; Fri, 27 May 2016 02:02:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160527020221.4D9A052AE9@arago-project.org>
+Message-Id: <20160527020221.2EDB752AE8@arago-project.org>
 Date: Fri, 27 May 2016 02:02:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : k2g-evm: add opencl feature
+Subject: Sam Nelson : linux-ti-staging: Update pru uio dtb entries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,34 +38,70 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 3f2d7dff0025f10b01bad3af38b70236db456f23
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3f2d7dff0025f10b01bad3af38b70236db456f23
+Commit: d098dfccc1ecc40b6ea78ca9de913e0a80660807
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d098dfccc1ecc40b6ea78ca9de913e0a80660807
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon May 23 22:16:28 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Mon May 23 20:18:18 2016 +0000
 
-k2g-evm: add opencl feature
+linux-ti-staging: Update pru uio dtb entries
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+added additional entries to allow access to ecap and uart regions
+Update Kernel PR to force rebuild
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/k2g-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../linux/files/dra7xx/am572x-pru-uio.dtsi         |    8 ++++++--
+ recipes-kernel/linux/linux-ti-staging_4.4.bb       |    2 +-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-index 125a949..860324c 100644
---- a/conf/machine/k2g-evm.conf
-+++ b/conf/machine/k2g-evm.conf
-@@ -4,7 +4,7 @@
+diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+index 577603a..fe21b2f 100644
+--- a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
++++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+@@ -11,10 +11,12 @@
+ 			      <0x4b210000 0x8000>,
+ 			      <0x4b220000 0x2000>,
+ 			      <0x4b226000 0x2000>,
++			      <0x4b228000 0x38>,
+ 			      <0x4b22e000 0x31c>,
++			      <0x4b230000 0x60>,
+ 			      <0x4b232000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "iep", "mii_rt";
++				    "ecap", "iep", "uart", "mii_rt";
+ 			status = "okay";
+ 		};
+ 		uio_pruss1_evt0: uio_pruss1_evt0 {
+@@ -90,10 +92,12 @@
+ 			      <0x4b290000 0x8000>,
+ 			      <0x4b2a0000 0x2000>,
+ 			      <0x4b2a6000 0x2000>,
++			      <0x4b2a8000 0x38>,
+ 			      <0x4b2ae000 0x31c>,
++			      <0x4b2b0000 0x60>,
+ 			      <0x4b2b2000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "iep", "mii_rt";
++				    "ecap", "iep", "uart", "mii_rt";
+ 			status = "okay";
+ 		};
+ 		uio_pruss2_evt0: uio_pruss2_evt0 {
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index a712127..cba9c89 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -75,7 +75,7 @@ SRCREV = "1d85a66844655b0cbd99c00870d77956494c59ab"
+ PV = "4.4.11+git${SRCPV}"
  
- require conf/machine/include/keystone.inc
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
--MACHINE_FEATURES += "alsa"
-+MACHINE_FEATURES += "alsa opencl"
- 
- UBOOT_MACHINE = "k2g_evm_config"
- 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
