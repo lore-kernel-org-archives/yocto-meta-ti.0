@@ -1,26 +1,35 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E1A16E00DD3; Fri, 27 May 2016 14:19:02 -0700 (PDT)
+	id E8403E00E38; Sat, 28 May 2016 09:00:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39D48E00DE3
-	for <meta-ti@yoctoproject.org>; Fri, 27 May 2016 14:19:00 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 314B3529CA; Fri, 27 May 2016 21:18:59 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160527211859.314B3529CA@arago-project.org>
-Date: Fri, 27 May 2016 21:18:59 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc-rtos: Update to include examples and documentation with the package
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F0ADE009CB
+	for <meta-ti@yoctoproject.org>; Sat, 28 May 2016 09:00:49 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u4SG0mOt032496
+	for <meta-ti@yoctoproject.org>; Sat, 28 May 2016 11:00:48 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u4SG0mIJ011600
+	for <meta-ti@yoctoproject.org>; Sat, 28 May 2016 11:00:48 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Sat, 28 May 2016 11:00:48 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u4SG0mW3015563;	Sat, 28 May 2016 11:00:48 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Sat, 28 May 2016 12:00:45 -0400
+Message-ID: <1464451245-61447-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] ti-ipc: Update to new version 3.43
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,219 +42,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 May 2016 21:19:02 -0000
-Content-Type: text/plain; charset=UTF-8
-
-Module: meta-ti
-Branch: krogoth
-Commit: 55dc15a8f478d3dec851b246ad561cdc72d3568a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=55dc15a8f478d3dec851b246ad561cdc72d3568a
-
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu May 19 23:24:09 2016 +0000
-
-ti-ipc-rtos: Update to include examples and documentation with the package
-
-Updated to new version 3.42.01.03
-Added procedures and source urls for adding examples and documentation
-into src package.
-Added dependency on doxygen for document creation
-Added big endian c66 targets
-Updated uniform formatting
+X-List-Received-Date: Sat, 28 May 2016 16:00:51 -0000
+Content-Type: text/plain
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
-
- recipes-ti/ipc/ti-ipc-rtos_git.bb |  112 +++++++++++++++++++++++++++++++------
- recipes-ti/ipc/ti-ipc.inc         |    8 +-
- 2 files changed, 99 insertions(+), 21 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb | 8 ++++----
+ recipes-ti/ipc/ti-ipc.inc         | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 4c0fc74..497fa95 100644
+index 497fa95..4c82f35 100644
 --- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
 +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -2,9 +2,42 @@ require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
- require ti-ipc.inc
+@@ -26,11 +26,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
--PR = "${INC_PR}.4"
-+TI_IPC_EXAMPLES_GIT_URI = "git://git.ti.com/ipc/ipc-examples.git"
-+TI_IPC_EXAMPLES_DEST_SUFFIX = "git/ipc-examples"
-+TI_IPC_EXAMPLES_GIT_PROTOCOL = "git"
-+TI_IPC_EXAMPLES_GIT_BRANCH = "master"
-+TI_IPC_EXAMPLES_NAME = "ipc-examples"
+-# Corresponds to tag: 3.42.01.03
+-SRCREV_ipc-examples = "bd4f28bd46467553e6610629ff13b4b5b3ba3af0"
++# Corresponds to tag: 3.43.00.01
++SRCREV_ipc-examples = "54df963e83f2fd613f794dc3b1b72c8ed855e0ac"
  
--DEPENDS = "ti-xdctools ti-sysbios"
-+SRC_URI += "${TI_IPC_EXAMPLES_GIT_URI};\
-+destsuffix=${TI_IPC_EXAMPLES_DEST_SUFFIX};\
-+protocol=${TI_IPC_EXAMPLES_GIT_PROTOCOL};\
-+branch=${TI_IPC_EXAMPLES_GIT_BRANCH};\
-+name=${TI_IPC_EXAMPLES_NAME}"
-+
-+TI_IPC_METADATA_GIT_URI = "git://git.ti.com/ipc/ipc-metadata.git"
-+TI_IPC_METADATA_DEST_SUFFIX = "git/ipc-metadata"
-+TI_IPC_METADATA_GIT_PROTOCOL = "git"
-+TI_IPC_METADATA_GIT_BRANCH = "master"
-+TI_IPC_METADATA_NAME = "ipc-metadata"
-+
-+SRC_URI += "${TI_IPC_METADATA_GIT_URI};\
-+destsuffix=${TI_IPC_METADATA_DEST_SUFFIX};\
-+protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
-+branch=${TI_IPC_METADATA_GIT_BRANCH};\
-+name=${TI_IPC_METADATA_NAME}"
-+
-+# Corresponds to tag: 3.42.01.03
-+SRCREV_ipc-examples = "bd4f28bd46467553e6610629ff13b4b5b3ba3af0"
-+
-+# Corresponds to tag: 3.42.01.03
-+SRCREV_ipc-metadata = "4d01fe4a7c41d2ce76a62b4325e66753d59b298c"
-+
-+S_ipc-examples = "${WORKDIR}/git/ipc-examples"
-+S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-+
-+PR = "${INC_PR}.0"
-+
-+DEPENDS = "ti-xdctools ti-sysbios doxygen-native"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
- "
-@@ -26,6 +59,7 @@ IPC_TARGETS = ""
- IPC_TARGETS_omap-a15 = "\
-     gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
-     ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-+    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-     ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
-     ti.targets.arm.elf.M4F="${M4_TOOLCHAIN_INSTALL_DIR}" \
- "
-@@ -33,18 +67,60 @@ IPC_TARGETS_omap-a15 = "\
- IPC_TARGETS_keystone = " \
-     gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
-     ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-+    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
- "
+-# Corresponds to tag: 3.42.01.03
+-SRCREV_ipc-metadata = "4d01fe4a7c41d2ce76a62b4325e66753d59b298c"
++# Corresponds to tag: 3.43.00.01
++SRCREV_ipc-metadata = "8829b3cf2068c87140ac062849c33cd1a21de636"
  
- EXTRA_OEMAKE = "\
-     PLATFORM=${PLATFORM} \
-     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
-     BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
--    ${IPC_TARGETS} -f ipc-bios.mak\
-+    ${IPC_TARGETS} \
- "
- 
-+RELEASE_TYPE = "GA"
-+RELEASE_SUFFIX = ""
-+
-+IPC_PACKAGE_DIR = "${S}/ipc-package"
-+
- do_compile() {
--  oe_runmake clean
--  oe_runmake all
-+  oe_runmake -f ipc-bios.mak clean
-+  oe_runmake -f ipc-bios.mak release
-+
-+  cd ${S_ipc-metadata}
-+  oe_runmake .all-files IPC_INSTALL_DIR="${S}" \
-+    BUILD_HOST_OS="linux" \
-+    RELEASE_TYPE="${RELEASE_TYPE}"
-+
-+  cd ${S_ipc-examples}/src
-+  oe_runmake .examples \
-+    IPCTOOLS="${S_ipc-metadata}/src/etc"
-+
-+  if [  "${PLATFORM}" != "UNKNOWN" ]; then
-+    oe_runmake extract HOSTOS="bios" IPC_INSTALL_DIR="${S}"
-+    oe_runmake extract HOSTOS="linux" IPC_INSTALL_DIR="${S}"
-+
-+    if [ ! -z ${ALT_PLATFORM} ]; then
-+      oe_runmake extract PLATFORM=${ALT_PLATFORM} HOSTOS="bios" IPC_INSTALL_DIR="${S}"
-+      oe_runmake extract PLATFORM=${ALT_PLATFORM} HOSTOS="linux" IPC_INSTALL_DIR="${S}"
-+    fi
-+  fi
-+
-+  IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
-+  install -d ${IPC_PACKAGE_DIR}
-+  # Copy docs and other meta files
-+  cp -pPrf  ${S_ipc-metadata}/exports/ipc_${IPC_VERSION}/* -d ${IPC_PACKAGE_DIR}
-+
-+  # Copy example folders corresponding to the platforms
-+  if [  "${PLATFORM}" != "UNKNOWN" ]; then
-+    install -d ${IPC_PACKAGE_DIR}/examples
-+    cp -pPf ${S_ipc-examples}/src/examples/*.* ${IPC_PACKAGE_DIR}/examples/
-+    cp -pPf ${S_ipc-examples}/src/examples/makefile ${IPC_PACKAGE_DIR}/examples/
-+    cp -pPrf ${S_ipc-examples}/src/examples/${PLATFORM}* ${IPC_PACKAGE_DIR}/examples/
-+    if [ ! -z ${ALT_PLATFORM} ]; then
-+      cp -pPrf ${S_ipc-examples}/src/examples/${ALT_PLATFORM}* ${IPC_PACKAGE_DIR}/examples/
-+    fi
-+    find ${IPC_PACKAGE_DIR}/examples/ -name "*zip" -type f | xargs -I {} rm {}
-+  fi
- }
- 
- do_compile_append() {
-@@ -52,25 +128,27 @@ do_compile_append() {
- }
- 
- do_install() {
--    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
--    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
-+  IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
-+  # Copy docs and other meta files
-+  install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-+  cp -pPrf  ${IPC_PACKAGE_DIR}/* -d ${D}${IPC_INSTALL_DIR_RECIPE}
- 
--    install -d ${D}${base_libdir}/firmware/ipc
--    cp -pPrf ${S}/packages/ti/ipc/tests/bin/* ${D}${base_libdir}/firmware/ipc
-+  install -d ${D}${base_libdir}/firmware/ipc
-+  cp -pPrf ${S}/packages/ti/ipc/tests/bin/* ${D}${base_libdir}/firmware/ipc || true
- }
- 
- ALTERNATIVE_PRIORITY = "5"
- 
- pkg_postinst_${PN}-fw_omap-a15 () {
--	update-alternatives --install /lib/firmware/dra7-dsp1-fw.xe66 dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66 ${ALTERNATIVE_PRIORITY}
--	update-alternatives --install /lib/firmware/dra7-dsp2-fw.xe66 dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66 ${ALTERNATIVE_PRIORITY}
--	update-alternatives --install /lib/firmware/dra7-ipu1-fw.xem4 dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4 ${ALTERNATIVE_PRIORITY}
--	update-alternatives --install /lib/firmware/dra7-ipu2-fw.xem4 dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4 ${ALTERNATIVE_PRIORITY}
-+  update-alternatives --install /lib/firmware/dra7-dsp1-fw.xe66 dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66 ${ALTERNATIVE_PRIORITY}
-+  update-alternatives --install /lib/firmware/dra7-dsp2-fw.xe66 dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66 ${ALTERNATIVE_PRIORITY}
-+  update-alternatives --install /lib/firmware/dra7-ipu1-fw.xem4 dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4 ${ALTERNATIVE_PRIORITY}
-+  update-alternatives --install /lib/firmware/dra7-ipu2-fw.xem4 dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4 ${ALTERNATIVE_PRIORITY}
- }
- 
- pkg_postrm_${PN}-fw_omap-a15 () {
--	update-alternatives --remove dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
--	update-alternatives --remove dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
--	update-alternatives --remove dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
--	update-alternatives --remove dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
-+  update-alternatives --remove dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66
-+  update-alternatives --remove dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66
-+  update-alternatives --remove dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
-+  update-alternatives --remove dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
- }
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
 diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 69127aa..27b360d 100644
+index 27b360d..6e09c3f 100644
 --- a/recipes-ti/ipc/ti-ipc.inc
 +++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,15 +8,15 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.42"
+@@ -6,17 +6,17 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
  
--#Corresponds to 3.42.00.02
--TI_IPC_SRCREV = "a520969994378fb2629d7dfc25f306c3a711b5bc"
-+#Corresponds to 3.42.01.03
-+TI_IPC_SRCREV = "dc6c5082f478225b7fbce4216173e6c5b36100b4"
+ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+-TI_IPC_GIT_BRANCH = "3.42"
++TI_IPC_GIT_BRANCH = "3.43"
+ 
+-#Corresponds to 3.42.01.03
+-TI_IPC_SRCREV = "dc6c5082f478225b7fbce4216173e6c5b36100b4"
++#Corresponds to 3.43.00.01
++TI_IPC_SRCREV = "9e6ebc02c14ed4150dad5d45d8a7e35258bf37ad"
  
  BRANCH = "${TI_IPC_GIT_BRANCH}"
--SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH}"
-+SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
  SRCREV = "${TI_IPC_SRCREV}"
  
  S = "${WORKDIR}/git"
--PV = "3.42.00.02"
-+PV = "3.42.01.03"
+-PV = "3.42.01.03"
++PV = "3.43.00.01"
  INC_PR = "r0"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
+-- 
+1.9.1
 
 
