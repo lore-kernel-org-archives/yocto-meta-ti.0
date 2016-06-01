@@ -1,27 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3DC79E008B8; Wed,  1 Jun 2016 12:47:00 -0700 (PDT)
+	id EFDE3E008B8; Wed,  1 Jun 2016 12:47:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
-	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E77ECE0083D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8BE5E0084A
 	for <meta-ti@yoctoproject.org>; Wed,  1 Jun 2016 12:46:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 349135296F; Wed,  1 Jun 2016 19:46:57 +0000 (UTC)
+	id 7028152996; Wed,  1 Jun 2016 19:46:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160601194657.349135296F@arago-project.org>
+Message-Id: <20160601194657.7028152996@arago-project.org>
 Date: Wed,  1 Jun 2016 19:46:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Ming Wei : ti-ccsv6-native: update to new version 6.1.3.00033
+Subject: Sam Nelson : linux-ti-staging: Update uio entries for am572x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,57 +33,119 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2016 19:47:00 -0000
+X-List-Received-Date: Wed, 01 Jun 2016 19:47:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 213c02d6f3212ff68072012af50ef0728957c8e4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=213c02d6f3212ff68072012af50ef0728957c8e4
+Commit: ee2a4b433bcb44dcd3c41b9c1187473ce2d22985
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ee2a4b433bcb44dcd3c41b9c1187473ce2d22985
 
-Author: Ming Wei <mwei@ti.com>
-Date:   Tue May 24 00:54:17 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Wed Jun  1 10:11:40 2016 +0000
 
-ti-ccsv6-native: update to new version 6.1.3.00033
+linux-ti-staging: Update uio entries for am572x
 
-updated ARM-CGT version and MD5/SHAR256 checksum
+Rearranged memory sections
+Added additional memory section to accomodate required sections more
+than 8
+Incremented PR append for linux-ti-staging
 
-Signed-off-by: Ming Wei <mwei@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...1.2.00015.bb => ti-ccsv6-native_6.1.3.00033.bb} |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../linux/files/dra7xx/am572x-pru-uio.dtsi         |   36 ++++++++++----------
+ recipes-kernel/linux/linux-ti-staging_4.4.bb       |    2 +-
+ 2 files changed, 19 insertions(+), 19 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00033.bb
-old mode 100644
-new mode 100755
-similarity index 87%
-rename from recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
-rename to recipes-ti/devtools/ti-ccsv6-native_6.1.3.00033.bb
-index 270169d..ba0da7d
---- a/recipes-ti/devtools/ti-ccsv6-native_6.1.2.00015.bb
-+++ b/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00033.bb
-@@ -10,7 +10,7 @@ require recipes-ti/includes/ti-unpack.inc
- require recipes-ti/includes/ti-staging.inc
- require recipes-ti/includes/ti-paths.inc
+diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+index fe21b2f..828a0ce 100644
+--- a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
++++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+@@ -11,12 +11,18 @@
+ 			      <0x4b210000 0x8000>,
+ 			      <0x4b220000 0x2000>,
+ 			      <0x4b226000 0x2000>,
+-			      <0x4b228000 0x38>,
+ 			      <0x4b22e000 0x31c>,
+-			      <0x4b230000 0x60>,
+ 			      <0x4b232000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "ecap", "iep", "uart", "mii_rt";
++				    "iep", "mii_rt";
++			status = "okay";
++		};
++		uio_pruss1_mem2: uio_pruss1_mem2 {
++			compatible = "ti,uio-module-drv";
++			mem = <0x4b228000 0x38>,
++			      <0x4b230000 0x60>,
++			      <0x4b232400 0x90>;
++			mem-names = "uart", "ecap", "mdio";
+ 			status = "okay";
+ 		};
+ 		uio_pruss1_evt0: uio_pruss1_evt0 {
+@@ -78,12 +84,6 @@
+ 			status = "okay";
+ 		};
  
--TI_CGT_ARM_VERSION = "5.2.5"
-+TI_CGT_ARM_VERSION = "15.12.1.LTS"
+-		uio_pruss1_mdio: uio_pruss1_mdio {
+-			compatible = "ti,uio-module-drv";
+-			mem = <0x4b232400 0x90>;
+-			status = "okay";
+-		};
+-
+ 		uio_pruss2_mem: uio_pruss2_mem {
+ 			compatible = "ti,uio-module-drv";
+ 			ti,hwmods = "pruss2";
+@@ -92,12 +92,18 @@
+ 			      <0x4b290000 0x8000>,
+ 			      <0x4b2a0000 0x2000>,
+ 			      <0x4b2a6000 0x2000>,
+-			      <0x4b2a8000 0x38>,
+ 			      <0x4b2ae000 0x31c>,
+-			      <0x4b2b0000 0x60>,
+ 			      <0x4b2b2000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "ecap", "iep", "uart", "mii_rt";
++				    "iep", "mii_rt";
++			status = "okay";
++		};
++		uio_pruss2_mem2: uio_pruss2_mem2 {
++			compatible = "ti,uio-module-drv";
++			mem = <0x4b2a8000 0x38>,
++			      <0x4b2b0000 0x60>,
++			      <0x4b2b2400 0x90>;
++			mem-names = "uart", "ecap", "mdio";
+ 			status = "okay";
+ 		};
+ 		uio_pruss2_evt0: uio_pruss2_evt0 {
+@@ -157,12 +163,6 @@
+ 			mem-names = "iram", "control", "debug";
+ 			status = "okay";
+ 		};
+-		uio_pruss2_mdio: uio_pruss2_mdio {
+-			compatible = "ti,uio-module-drv";
+-			mem = <0x4b2b2400 0x90>;
+-			mem-names = "mdio";
+-			status = "okay";
+-		};
+ 	};
+ };
  
- SRC_URI = "http://install.source.dir.local/CCS${PV}_linux.tar.gz;name=ccsv6"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index cba9c89..2ce97e5 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -75,7 +75,7 @@ SRCREV = "1d85a66844655b0cbd99c00870d77956494c59ab"
+ PV = "4.4.11+git${SRCPV}"
  
-@@ -20,8 +20,8 @@ BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
- TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
- TI_BIN_UNPK_CMDS = ""
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
  
--SRC_URI[ccsv6.md5sum] = "cfe5a759068809df5b5926dfc9889683"
--SRC_URI[ccsv6.sha256sum] = "6c25c046898812dcc72f08af512321bb4c9833ab932e4792560e14c13fbc7dc5"
-+SRC_URI[ccsv6.md5sum] = "d95121970f8bcee944bf8b8e576bf3ec"
-+SRC_URI[ccsv6.sha256sum] = "b785f040de8cccbc571923e34303fea92484677845df64a65abee2d3c248fa5b"
- 
- do_install() {
-     install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
