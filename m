@@ -1,38 +1,26 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8E803E00E02; Tue, 31 May 2016 21:11:51 -0700 (PDT)
+	id B39DBE008B8; Wed,  1 Jun 2016 12:46:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39EABE00DED
-	for <meta-ti@yoctoproject.org>; Tue, 31 May 2016 21:11:44 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u514Bdp8029007
-	for <meta-ti@yoctoproject.org>; Tue, 31 May 2016 23:11:39 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u514BhGW004991
-	for <meta-ti@yoctoproject.org>; Tue, 31 May 2016 23:11:43 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 31 May 2016 23:11:43 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u514Bg4A021591;	Tue, 31 May 2016 23:11:43 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 1 Jun 2016 00:11:40 -0400
-Message-ID: <1464754300-31679-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] linux-ti-staging: Update uio entries for am572x
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E644AE00756
+	for <meta-ti@yoctoproject.org>; Wed,  1 Jun 2016 12:46:58 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 47CD352982; Wed,  1 Jun 2016 19:46:57 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160601194657.47CD352982@arago-project.org>
+Date: Wed,  1 Jun 2016 19:46:57 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : ti-ipc: Update to new version 3.43
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,108 +33,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2016 04:11:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 01 Jun 2016 19:46:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Rearranged memory sections
-Added additional memory section to accomodate required sections more
-than 8
-Incremented PR append for linux-ti-staging
+Module: meta-ti
+Branch: master
+Commit: c20b24e9e82c11d7840301c5c88d109fa3f81a7e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c20b24e9e82c11d7840301c5c88d109fa3f81a7e
+
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Sat May 28 22:00:45 2016 +0000
+
+ti-ipc: Update to new version 3.43
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
----
- .../linux/files/dra7xx/am572x-pru-uio.dtsi         | 36 +++++++++++-----------
- recipes-kernel/linux/linux-ti-staging_4.4.bb       |  2 +-
- 2 files changed, 19 insertions(+), 19 deletions(-)
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-index fe21b2f..828a0ce 100644
---- a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-+++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-@@ -11,12 +11,18 @@
- 			      <0x4b210000 0x8000>,
- 			      <0x4b220000 0x2000>,
- 			      <0x4b226000 0x2000>,
--			      <0x4b228000 0x38>,
- 			      <0x4b22e000 0x31c>,
--			      <0x4b230000 0x60>,
- 			      <0x4b232000 0x58>;
- 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
--				    "ecap", "iep", "uart", "mii_rt";
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss1_mem2: uio_pruss1_mem2 {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b228000 0x38>,
-+			      <0x4b230000 0x60>,
-+			      <0x4b232400 0x90>;
-+			mem-names = "uart", "ecap", "mdio";
- 			status = "okay";
- 		};
- 		uio_pruss1_evt0: uio_pruss1_evt0 {
-@@ -78,12 +84,6 @@
- 			status = "okay";
- 		};
+---
+
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
+ recipes-ti/ipc/ti-ipc.inc         |    8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 497fa95..4c82f35 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -26,11 +26,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
--		uio_pruss1_mdio: uio_pruss1_mdio {
--			compatible = "ti,uio-module-drv";
--			mem = <0x4b232400 0x90>;
--			status = "okay";
--		};
--
- 		uio_pruss2_mem: uio_pruss2_mem {
- 			compatible = "ti,uio-module-drv";
- 			ti,hwmods = "pruss2";
-@@ -92,12 +92,18 @@
- 			      <0x4b290000 0x8000>,
- 			      <0x4b2a0000 0x2000>,
- 			      <0x4b2a6000 0x2000>,
--			      <0x4b2a8000 0x38>,
- 			      <0x4b2ae000 0x31c>,
--			      <0x4b2b0000 0x60>,
- 			      <0x4b2b2000 0x58>;
- 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
--				    "ecap", "iep", "uart", "mii_rt";
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss2_mem2: uio_pruss2_mem2 {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2a8000 0x38>,
-+			      <0x4b2b0000 0x60>,
-+			      <0x4b2b2400 0x90>;
-+			mem-names = "uart", "ecap", "mdio";
- 			status = "okay";
- 		};
- 		uio_pruss2_evt0: uio_pruss2_evt0 {
-@@ -157,12 +163,6 @@
- 			mem-names = "iram", "control", "debug";
- 			status = "okay";
- 		};
--		uio_pruss2_mdio: uio_pruss2_mdio {
--			compatible = "ti,uio-module-drv";
--			mem = <0x4b2b2400 0x90>;
--			mem-names = "mdio";
--			status = "okay";
--		};
- 	};
- };
+-# Corresponds to tag: 3.42.01.03
+-SRCREV_ipc-examples = "bd4f28bd46467553e6610629ff13b4b5b3ba3af0"
++# Corresponds to tag: 3.43.00.01
++SRCREV_ipc-examples = "54df963e83f2fd613f794dc3b1b72c8ed855e0ac"
  
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index cba9c89..2ce97e5 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -75,7 +75,7 @@ SRCREV = "1d85a66844655b0cbd99c00870d77956494c59ab"
- PV = "4.4.11+git${SRCPV}"
+-# Corresponds to tag: 3.42.01.03
+-SRCREV_ipc-metadata = "4d01fe4a7c41d2ce76a62b4325e66753d59b298c"
++# Corresponds to tag: 3.43.00.01
++SRCREV_ipc-metadata = "8829b3cf2068c87140ac062849c33cd1a21de636"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 27b360d..6e09c3f 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -6,17 +6,17 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-1.9.1
+ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+-TI_IPC_GIT_BRANCH = "3.42"
++TI_IPC_GIT_BRANCH = "3.43"
+ 
+-#Corresponds to 3.42.01.03
+-TI_IPC_SRCREV = "dc6c5082f478225b7fbce4216173e6c5b36100b4"
++#Corresponds to 3.43.00.01
++TI_IPC_SRCREV = "9e6ebc02c14ed4150dad5d45d8a7e35258bf37ad"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ SRCREV = "${TI_IPC_SRCREV}"
+ 
+ S = "${WORKDIR}/git"
+-PV = "3.42.01.03"
++PV = "3.43.00.01"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
