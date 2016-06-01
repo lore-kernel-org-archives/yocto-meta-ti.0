@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 68B1DE0083D; Wed,  1 Jun 2016 12:48:40 -0700 (PDT)
+	id 8E205E0084A; Wed,  1 Jun 2016 12:48:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8DCBDE008BA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00802E008D2
 	for <meta-ti@yoctoproject.org>; Wed,  1 Jun 2016 12:48:38 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ABA6852982; Wed,  1 Jun 2016 19:48:37 +0000 (UTC)
+	id BC17552090; Wed,  1 Jun 2016 19:48:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160601194837.ABA6852982@arago-project.org>
+Message-Id: <20160601194837.BC17552090@arago-project.org>
 Date: Wed,  1 Jun 2016 19:48:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update to new version 3.43
+Subject: Sam Nelson : linux-ti-staging: Update uio entries for am572x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,68 +38,114 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 3ac974779d7e9d2b098b425a8b8342cc499493c7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3ac974779d7e9d2b098b425a8b8342cc499493c7
+Commit: f43d3806917c060d8b901a6ec31b57b01078a192
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f43d3806917c060d8b901a6ec31b57b01078a192
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat May 28 22:00:45 2016 +0000
+Date:   Wed Jun  1 10:11:40 2016 +0000
 
-ti-ipc: Update to new version 3.43
+linux-ti-staging: Update uio entries for am572x
+
+Rearranged memory sections
+Added additional memory section to accomodate required sections more
+than 8
+Incremented PR append for linux-ti-staging
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
- recipes-ti/ipc/ti-ipc.inc         |    8 ++++----
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ .../linux/files/dra7xx/am572x-pru-uio.dtsi         |   36 ++++++++++----------
+ recipes-kernel/linux/linux-ti-staging_4.4.bb       |    2 +-
+ 2 files changed, 19 insertions(+), 19 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 497fa95..4c82f35 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -26,11 +26,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+index fe21b2f..828a0ce 100644
+--- a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
++++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
+@@ -11,12 +11,18 @@
+ 			      <0x4b210000 0x8000>,
+ 			      <0x4b220000 0x2000>,
+ 			      <0x4b226000 0x2000>,
+-			      <0x4b228000 0x38>,
+ 			      <0x4b22e000 0x31c>,
+-			      <0x4b230000 0x60>,
+ 			      <0x4b232000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "ecap", "iep", "uart", "mii_rt";
++				    "iep", "mii_rt";
++			status = "okay";
++		};
++		uio_pruss1_mem2: uio_pruss1_mem2 {
++			compatible = "ti,uio-module-drv";
++			mem = <0x4b228000 0x38>,
++			      <0x4b230000 0x60>,
++			      <0x4b232400 0x90>;
++			mem-names = "uart", "ecap", "mdio";
+ 			status = "okay";
+ 		};
+ 		uio_pruss1_evt0: uio_pruss1_evt0 {
+@@ -78,12 +84,6 @@
+ 			status = "okay";
+ 		};
  
--# Corresponds to tag: 3.42.01.03
--SRCREV_ipc-examples = "bd4f28bd46467553e6610629ff13b4b5b3ba3af0"
-+# Corresponds to tag: 3.43.00.01
-+SRCREV_ipc-examples = "54df963e83f2fd613f794dc3b1b72c8ed855e0ac"
+-		uio_pruss1_mdio: uio_pruss1_mdio {
+-			compatible = "ti,uio-module-drv";
+-			mem = <0x4b232400 0x90>;
+-			status = "okay";
+-		};
+-
+ 		uio_pruss2_mem: uio_pruss2_mem {
+ 			compatible = "ti,uio-module-drv";
+ 			ti,hwmods = "pruss2";
+@@ -92,12 +92,18 @@
+ 			      <0x4b290000 0x8000>,
+ 			      <0x4b2a0000 0x2000>,
+ 			      <0x4b2a6000 0x2000>,
+-			      <0x4b2a8000 0x38>,
+ 			      <0x4b2ae000 0x31c>,
+-			      <0x4b2b0000 0x60>,
+ 			      <0x4b2b2000 0x58>;
+ 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
+-				    "ecap", "iep", "uart", "mii_rt";
++				    "iep", "mii_rt";
++			status = "okay";
++		};
++		uio_pruss2_mem2: uio_pruss2_mem2 {
++			compatible = "ti,uio-module-drv";
++			mem = <0x4b2a8000 0x38>,
++			      <0x4b2b0000 0x60>,
++			      <0x4b2b2400 0x90>;
++			mem-names = "uart", "ecap", "mdio";
+ 			status = "okay";
+ 		};
+ 		uio_pruss2_evt0: uio_pruss2_evt0 {
+@@ -157,12 +163,6 @@
+ 			mem-names = "iram", "control", "debug";
+ 			status = "okay";
+ 		};
+-		uio_pruss2_mdio: uio_pruss2_mdio {
+-			compatible = "ti,uio-module-drv";
+-			mem = <0x4b2b2400 0x90>;
+-			mem-names = "mdio";
+-			status = "okay";
+-		};
+ 	};
+ };
  
--# Corresponds to tag: 3.42.01.03
--SRCREV_ipc-metadata = "4d01fe4a7c41d2ce76a62b4325e66753d59b298c"
-+# Corresponds to tag: 3.43.00.01
-+SRCREV_ipc-metadata = "8829b3cf2068c87140ac062849c33cd1a21de636"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index cba9c89..2ce97e5 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -75,7 +75,7 @@ SRCREV = "1d85a66844655b0cbd99c00870d77956494c59ab"
+ PV = "4.4.11+git${SRCPV}"
  
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 27b360d..6e09c3f 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,17 +6,17 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
  
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "3.42"
-+TI_IPC_GIT_BRANCH = "3.43"
- 
--#Corresponds to 3.42.01.03
--TI_IPC_SRCREV = "dc6c5082f478225b7fbce4216173e6c5b36100b4"
-+#Corresponds to 3.43.00.01
-+TI_IPC_SRCREV = "9e6ebc02c14ed4150dad5d45d8a7e35258bf37ad"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
- SRCREV = "${TI_IPC_SRCREV}"
- 
- S = "${WORKDIR}/git"
--PV = "3.42.01.03"
-+PV = "3.43.00.01"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
