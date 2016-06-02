@@ -1,39 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1A663E00BDE; Wed,  1 Jun 2016 20:16:45 -0700 (PDT)
+	id 04A0AE00C18; Wed,  1 Jun 2016 20:56:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.13 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3C7AE00BCE
-	for <meta-ti@yoctoproject.org>; Wed,  1 Jun 2016 20:16:41 -0700 (PDT)
-Received: from vz-proxy-m006.mx.aol.com ([64.236.83.10])
-	by vms173013.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O84007KOJRDPQ10@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 01 Jun 2016 22:16:25 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=pKq81LsWol7b8sI3Hpopew==:117
-	a=pD_ry4oyNxEA:10 a=sozttTNsAAAA:8	a=GscoqnuHgEbaftV3j58A:9
-Received: by 100.15.86.14 with SMTP id 150bd5f9; Thu, 02 Jun 2016 03:16:25 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id CEE00162037;	Wed,
-	1 Jun 2016 23:16:24 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0B5DE00BCE
+	for <meta-ti@yoctoproject.org>; Wed,  1 Jun 2016 20:56:01 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9DC0952A93; Thu,  2 Jun 2016 03:56:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Wed, 01 Jun 2016 23:16:24 -0400
-Message-id: <1464837384-32205-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] cm3-pm-firmware: correct license to TI-TSPA
+Message-Id: <20160602035600.9DC0952A93@arago-project.org>
+Date: Thu,  2 Jun 2016 03:56:00 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : cm3-pm-firmware: correct license to TI-TSPA
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,16 +33,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2016 03:16:45 -0000
+X-List-Received-Date: Thu, 02 Jun 2016 03:56:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 58bebcf6b3df2b03997c41ec8356c1ae8ac90bb8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58bebcf6b3df2b03997c41ec8356c1ae8ac90bb8
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Jun  2 09:16:24 2016 +0000
+
+cm3-pm-firmware: correct license to TI-TSPA
 
 It was incorrectly identified as BSD-3-Clause
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb | 2 +-
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb  | 2 +-
+
+ recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb |    2 +-
+ recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb  |    2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
@@ -82,7 +80,5 @@ index 3b64be9..7d4626b 100644
  LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
  
  PV = "1.9.1"
--- 
-2.2.0
 
 
