@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8E205E0084A; Wed,  1 Jun 2016 12:48:40 -0700 (PDT)
+	id 1A663E00BDE; Wed,  1 Jun 2016 20:16:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.13 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00802E008D2
-	for <meta-ti@yoctoproject.org>; Wed,  1 Jun 2016 12:48:38 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id BC17552090; Wed,  1 Jun 2016 19:48:37 +0000 (UTC)
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3C7AE00BCE
+	for <meta-ti@yoctoproject.org>; Wed,  1 Jun 2016 20:16:41 -0700 (PDT)
+Received: from vz-proxy-m006.mx.aol.com ([64.236.83.10])
+	by vms173013.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O84007KOJRDPQ10@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 01 Jun 2016 22:16:25 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=pKq81LsWol7b8sI3Hpopew==:117
+	a=pD_ry4oyNxEA:10 a=sozttTNsAAAA:8	a=GscoqnuHgEbaftV3j58A:9
+Received: by 100.15.86.14 with SMTP id 150bd5f9; Thu, 02 Jun 2016 03:16:25 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id CEE00162037;	Wed,
+	1 Jun 2016 23:16:24 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160601194837.BC17552090@arago-project.org>
-Date: Wed,  1 Jun 2016 19:48:37 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : linux-ti-staging: Update uio entries for am572x
+Date: Wed, 01 Jun 2016 23:16:24 -0400
+Message-id: <1464837384-32205-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] cm3-pm-firmware: correct license to TI-TSPA
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,119 +46,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2016 19:48:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Jun 2016 03:16:45 -0000
 
-Module: meta-ti
-Branch: krogoth
-Commit: f43d3806917c060d8b901a6ec31b57b01078a192
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f43d3806917c060d8b901a6ec31b57b01078a192
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Jun  1 10:11:40 2016 +0000
+It was incorrectly identified as BSD-3-Clause
 
-linux-ti-staging: Update uio entries for am572x
-
-Rearranged memory sections
-Added additional memory section to accomodate required sections more
-than 8
-Incremented PR append for linux-ti-staging
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb | 2 +-
+ recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
- .../linux/files/dra7xx/am572x-pru-uio.dtsi         |   36 ++++++++++----------
- recipes-kernel/linux/linux-ti-staging_4.4.bb       |    2 +-
- 2 files changed, 19 insertions(+), 19 deletions(-)
-
-diff --git a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-index fe21b2f..828a0ce 100644
---- a/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-+++ b/recipes-kernel/linux/files/dra7xx/am572x-pru-uio.dtsi
-@@ -11,12 +11,18 @@
- 			      <0x4b210000 0x8000>,
- 			      <0x4b220000 0x2000>,
- 			      <0x4b226000 0x2000>,
--			      <0x4b228000 0x38>,
- 			      <0x4b22e000 0x31c>,
--			      <0x4b230000 0x60>,
- 			      <0x4b232000 0x58>;
- 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
--				    "ecap", "iep", "uart", "mii_rt";
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss1_mem2: uio_pruss1_mem2 {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b228000 0x38>,
-+			      <0x4b230000 0x60>,
-+			      <0x4b232400 0x90>;
-+			mem-names = "uart", "ecap", "mdio";
- 			status = "okay";
- 		};
- 		uio_pruss1_evt0: uio_pruss1_evt0 {
-@@ -78,12 +84,6 @@
- 			status = "okay";
- 		};
+diff --git a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
+index 2f55421..62aebb9 100644
+--- a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
++++ b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
  
--		uio_pruss1_mdio: uio_pruss1_mdio {
--			compatible = "ti,uio-module-drv";
--			mem = <0x4b232400 0x90>;
--			status = "okay";
--		};
--
- 		uio_pruss2_mem: uio_pruss2_mem {
- 			compatible = "ti,uio-module-drv";
- 			ti,hwmods = "pruss2";
-@@ -92,12 +92,18 @@
- 			      <0x4b290000 0x8000>,
- 			      <0x4b2a0000 0x2000>,
- 			      <0x4b2a6000 0x2000>,
--			      <0x4b2a8000 0x38>,
- 			      <0x4b2ae000 0x31c>,
--			      <0x4b2b0000 0x60>,
- 			      <0x4b2b2000 0x58>;
- 			mem-names = "dram0", "dram1", "shrdram2", "intc", "cfg",
--				    "ecap", "iep", "uart", "mii_rt";
-+				    "iep", "mii_rt";
-+			status = "okay";
-+		};
-+		uio_pruss2_mem2: uio_pruss2_mem2 {
-+			compatible = "ti,uio-module-drv";
-+			mem = <0x4b2a8000 0x38>,
-+			      <0x4b2b0000 0x60>,
-+			      <0x4b2b2400 0x90>;
-+			mem-names = "uart", "ecap", "mdio";
- 			status = "okay";
- 		};
- 		uio_pruss2_evt0: uio_pruss2_evt0 {
-@@ -157,12 +163,6 @@
- 			mem-names = "iram", "control", "debug";
- 			status = "okay";
- 		};
--		uio_pruss2_mdio: uio_pruss2_mdio {
--			compatible = "ti,uio-module-drv";
--			mem = <0x4b2b2400 0x90>;
--			mem-names = "mdio";
--			status = "okay";
--		};
- 	};
- };
+-LICENSE = "BSD-3-Clause"
++LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
  
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index cba9c89..2ce97e5 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -75,7 +75,7 @@ SRCREV = "1d85a66844655b0cbd99c00870d77956494c59ab"
- PV = "4.4.11+git${SRCPV}"
+ PV = "1.9.0"
+diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+index 3b64be9..7d4626b 100644
+--- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
++++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
+-LICENSE = "BSD-3-Clause"
++LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ PV = "1.9.1"
+-- 
+2.2.0
 
 
