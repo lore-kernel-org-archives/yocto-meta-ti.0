@@ -1,42 +1,39 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 38388E00D3C; Thu,  2 Jun 2016 10:07:27 -0700 (PDT)
+	id 14894E00D1B; Thu,  2 Jun 2016 10:21:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
 	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP,
-	but had no rDNS
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [206.46.173.9 listed in list.dnswl.org]
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF889E00D1B
-	for <meta-ti@yoctoproject.org>; Thu,  2 Jun 2016 10:07:24 -0700 (PDT)
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCC53E00D19
+	for <meta-ti@yoctoproject.org>; Thu,  2 Jun 2016 10:21:45 -0700 (PDT)
 Received: from vz-proxy-m007.mx.aol.com ([64.236.83.14])
-	by vms173009.mailsrvcs.net
+	by vms173021.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O85008GKM7W9OA0@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 02 Jun 2016 12:07:09 -0500 (CDT)
+	2014)) with ESMTPA id <0O85002XWMVR8P70@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 02 Jun 2016 12:21:27 -0500 (CDT)
 X-CMAE-Score: 0
 X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=MJxOpqxZADbEbEImuSX/mw==:117
-	a=pD_ry4oyNxEA:10 a=sozttTNsAAAA:8	a=0UKH5BiQkwmWfwo1rRcA:9
-Received: by 100.15.86.14 with SMTP id 3e647d87; Thu, 02 Jun 2016 17:07:09 GMT
+	a=pD_ry4oyNxEA:10 a=sozttTNsAAAA:8	a=xej7oHOq-iqC5Xju4ZQA:9
+Received: by 100.15.86.14 with SMTP id 404d9ec2; Thu, 02 Jun 2016 17:21:27 GMT
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 5105216203C;	Thu,
-	2 Jun 2016 13:07:08 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id B9E78162035;	Thu,
+	2 Jun 2016 13:21:26 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Thu, 02 Jun 2016 13:07:07 -0400
-Message-id: <1464887227-13817-2-git-send-email-denis@denix.org>
+Date: Thu, 02 Jun 2016 13:21:26 -0400
+Message-id: <1464888086-19203-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-In-reply-to: <1464887227-13817-1-git-send-email-denis@denix.org>
-References: <1464887227-13817-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2016.01-rc4 tag
+Subject: [PATCH] ipumm-fw: bump for codec updates and bugfixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,36 +46,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2016 17:07:27 -0000
+X-List-Received-Date: Thu, 02 Jun 2016 17:21:49 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index ddd5f4b..057b5f0 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index f415599..32d51cb 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,11 +17,11 @@ RDEPENDS_${PN} = " libdce"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--PR = "r4"
-+PR = "r5"
- PV_append = "+git${SRCPV}"
+-SRCREV = "c579a48d3b201fe276e406add64512eb5e90e75f"
++SRCREV = "a55e6e7b3a8b6917155f3f7ed6c10ed6170df3e7"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
- BRANCH ?= "ti-u-boot-2016.05"
+-PV = "3.00.10.00"
++PV = "3.00.10.01"
  
--SRCREV = "c165945d193be510337de656f6564ad0f6ab35a4"
-+SRCREV = "b4e185a8c3732f33d519453841f70236b8d29954"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+@@ -66,4 +66,4 @@ ALTERNATIVE_PRIORITY = "20"
  
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+ FILES_${PN} += "${base_libdir}/firmware/*"
+ 
+-PR = "r1"
++PR = "r0"
 -- 
 2.2.0
 
