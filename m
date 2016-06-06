@@ -1,52 +1,69 @@
-Return-Path: <bach@gmx.li>
+Return-Path: <kamaji@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 160CEE0048B; Mon,  6 Jun 2016 11:13:55 -0700 (PDT)
+	id 51B2FE008BC; Mon,  6 Jun 2016 15:38:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,FREEMAIL_FROM,
-	HTML_MESSAGE, MIME_HTML_ONLY,
-	RCVD_IN_DNSWL_LOW autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [212.227.15.19 listed in list.dnswl.org]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (bach[at]gmx.li)
+X-Spam-Status: No, score=-1.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_LOW, URI_HEX autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (kamaji[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.213.48 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5D5EE0043B
-	for <meta-ti@yoctoproject.org>; Mon,  6 Jun 2016 11:13:50 -0700 (PDT)
-Received: from [77.7.131.116] by 3capp-gmx-bs22.server.lan (via HTTP); Mon,
-	6 Jun 2016 20:13:48 +0200
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com
+	[209.85.213.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0643AE0088C
+	for <meta-ti@yoctoproject.org>; Mon,  6 Jun 2016 15:38:44 -0700 (PDT)
+Received: by mail-vk0-f48.google.com with SMTP id d64so95629719vkb.0
+	for <meta-ti@yoctoproject.org>; Mon, 06 Jun 2016 15:38:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=9wCs7foBrTW4gOGWMSJnp2EnxZQBPdwjBOGJ3ov7z0U=;
+	b=UXK/T//4pkmAHCDsv+srm+TWznzi+z9gg3m9JPbVavtmfMHyvKZFFLKCo7x1CktvYr
+	M+g8stUvi8lEywZ9fISHHAEOyFds/GiKqdSIg4reKGsWLtQzrk1zQYRMfuESc8uBk0XI
+	/Yv7xf5YE9EMmwfIMMW0R8C4yRJehFp+5lv01y0PiXZAIMbng7oZs8yyfAjg+iDshQJI
+	xGjsdoLQ02nTeTXttIsIibcTLU+DP9GZNeTDANu47Jt4zVCFW9WOgjqlWW/1+8Ekpx91
+	UEZGWhLaD5XtAkmMvsyvUpqyTCjDTkG+ZeZ2wVgrvQCohDf2o7x4o6IxYG6DtppbXYHT
+	mStg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=9wCs7foBrTW4gOGWMSJnp2EnxZQBPdwjBOGJ3ov7z0U=;
+	b=d8MkPRaBaAgk5ukF1lXNX/Wp1EJvSIXSTqvWG16kDAYiakDXUTP5gz5JdV/k6sgNYW
+	yLoVDJWBqgp4cbcqYFK0IN6Em4TWiBcwaqOSBTNZeYFWWo78s2kLQlCGFbgMeNwTKRIH
+	V19aOu5xMgSY4NoZdtvgJpwUT63AUE9VLaDg8GjMutMnFcrsp8YQ35DYvecQ285JcsF5
+	2EdhTWdqT6Tl7HPZF7RzUhPAwwzoRr0cVX2T90cvLAA/eapwtSck2KvouoZP8BsaoVyr
+	XLpdbLaQgT8G00VBVjAFS9HJ9vajxnK0/p2hstVs5lkFQ4CQ+2WVMe7kF8FTmm+bXP44
+	c+Jw==
+X-Gm-Message-State: ALyK8tJLwF4EY409lHAMqaTmzm9dAaHJq3g7IFnsIaiQNvqeV4ro3TIqRnIcCkene69x0W1R2/fONmxYGaRgnw==
+X-Received: by 10.176.4.49 with SMTP id 46mr1809434uav.32.1465252723603; Mon,
+	06 Jun 2016 15:38:43 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <trinity-563a52aa-9417-4ddf-b16c-ed92ea779005-1465236828412@3capp-gmx-bs22>
-From: "Holger Bach" <bach@gmx.li>
-To: meta-ti@yoctoproject.org
-Date: Mon, 6 Jun 2016 20:13:48 +0200
-Importance: normal
-Sensitivity: Normal
-References: <trinity-6a71124c-bbc1-4d16-b3a8-2d08d357bb0a-1465192767005@3capp-gmx-bs20>
-X-UI-Message-Type: mail
-X-Priority: 3
-X-Provags-ID: V03:K0:bt02HAQolAHdItv4Hd7mpCSdujkEzIMrttYAXOZFqsA
-	GlH7wG6h5c8lQsQPhZmwB79ad3SSiPa/5SrQhbHWlhriAM9qMN
-	fR4jgYmisve7GsJgfjhn3zWhfWjLK797oAzw1XHkx99ic/RCAa
-	jO2hIsf7EFIPFBpkjGKiNQM97wVU10fE5HNcZ6g8tROdxzKVfU
-	vkoRydtIAbYdyjbNFRzV+7RJaBSUe0JzQ5tF9IayBbpQzqUMUx
-	/5WXVpElyD9ViWjnQYJqCw4dhVdWO6ShXnG++JuZYmpPFsTBMu EdSmzA=
-X-UI-Out-Filterresults: notjunk:1;V01:K0:fr36BerHDxU=:lMYAifjxtqzbMRxyp7OOYJ
-	65wIbiU6l2w8bzJch0GWZEsFlOvW6KBcxEGkHHHlEswsW+XNAUTIRcEWE4Ql4tXjRarr/a5K8
-	5ao/KvUXSLCKeN9EgHDJecG8qot1S1RpwJROmz7/vfwte5kLGQHGAT8fMRtDEAinHvTMoaRID
-	RRcUDNUTPPalK7Zi9C/gfMatyqqy61vWrsu3JS0O82lMEnczFrjEEiNFcc/RFMVsDdJm5ET38
-	GMwDyHiqk+ksxg7+pUM/wflRT4fIvv5k/KLy0mbBg/odLHwKcQUtmDDT+TjZC7F84kGM0u9Ky
-	bNeDsuNy2zrq7Q4NOe5plysxu2EXOQWkszUhrExH/3F6hRCPWuaPvxS9atLZgHvo6WhmdzD8h
-	okF1V5Ea5FSr8Mzx5lwf/OxiZtnPfnfktq3d4CrkKF3b6q6vUJ0/UYXgwNn+ShiRYlARfLvyP
-	w786rgQv7uhTKOEn12Gcz6sgr0TnqHhCUsLTGtUhB/rVSBTpPxzKoCfc+LLAGOZ4/mU0/yiM9
-	rXJeq6br9dlaP/riAma7cY=
-Subject: Cannot boot from mmc; dtb-problem?
+References: <CAH5ySac1VscW4vszpXbj4zw5vDZhCovVyxtnLKn59k=8JjVp5Q@mail.gmail.com>
+	<CAH5ySaex5z7G1rKpkXgpnOMnPkFYkL3xQrTp3ZWOcg0jqU_0wQ@mail.gmail.com>
+	<371273705.3403881.1464113612415.JavaMail.yahoo@mail.yahoo.com>
+	<2143110260.3400902.1464114072189.JavaMail.yahoo@mail.yahoo.com>
+	<CAH5ySacKTnMNFR+i3kfsSV0yuO5449o00q1dM0-QSjvn7TRYkA@mail.gmail.com>
+	<2022998705.1230242.1464211451910.JavaMail.yahoo@mail.yahoo.com>
+In-Reply-To: <2022998705.1230242.1464211451910.JavaMail.yahoo@mail.yahoo.com>
+From: Keith Kyzivat <kamaji@gmail.com>
+Date: Mon, 06 Jun 2016 22:38:33 +0000
+Message-ID: <CAH5ySacFPHP7Q+z+Djb7RdS-T+Ez+YTrHv9oaO7xdajJGCPajg@mail.gmail.com>
+To: Benjamin Bimmermann <b.bimmermann@yahoo.de>,
+	Yocto Texas <meta-ti@yoctoproject.org>
+Subject: Re: Rename of omap5-sgx-ddk-um-linux to ti-sgx-ddk-um not complete?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,266 +76,559 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jun 2016 18:13:55 -0000
+X-List-Received-Date: Mon, 06 Jun 2016 22:38:48 -0000
+Content-Type: multipart/alternative; boundary=94eb2c09336218bf600534a3bca4
+
+--94eb2c09336218bf600534a3bca4
+Content-Type: text/plain; charset=UTF-8
+
+Hi Benjamin,
+
+SGX: -- isn't this already enabled from
+meta-ti/conf/machine/include/ti33x.inc, included by
+meta-ti/conf/machine/beaglebone.conf ?:  MACHINE_FEATURES = "kernel26 apm
+usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
+
+You must be referring to going the approach of using the jumpnowtek
+meta-bbb layer that doesn't use meta-ti.  I've been sticking with
+meta-embarcados for the time being - pulling what I can from their master
+branch, and adapting it to work with the krogoth branch...  I might jump
+entirely free of it though and just depend on meta-ti and meta-qt.. for the
+moment it works ok for me.
+
+I see the cleanup you referenced -- haven't tried yet to remove it, but
+makes sense - it's referring to the old outdated/incorrect omap driver.
+
+As for improving performance- just today I pulled latest changes from
+meta-ti and Qt5_CinematicExperience is working well for me now, when before
+it wasn't operating at all.  I think the commit that fixes the issue is
+: 2a57c4c ti-sgx-ddk-um: update srcrev and bump PR
+This commit pulls a newer rev of the kernel graphics module.
+
+Fonts are also fixed now -- previously I found that, while fontconfig was
+built, and fonts were placed on the system, none were loaded when my Qt app
+ran, and thus text fields, buttons, etc were devoid of text.  I'm not
+entirely sure what fixed the font issue -- as I have made a few changes to
+my local.conf that are fontconfig related, but none seemed to correct the
+issue until I did a full rebuild (wiping the tmp dir but keeping same
+sstate dir) - which I did when I pulled the latest meta-ti changes.
+
+Something I can't figure out - that I had working at one point, but no
+longer have working is setting the default platform plugin to 'eglfs'
+instead of 'xcb' (which isn't even built!).
+My guess is I'm using a var that isn't used in krogoth, that was used in
+fido:
+EXTRA_OECONF_append = " -qpa eglfs" in one of  my qtbase_%.bbappend files.
+
+Anyway! Try a rebuild with latest meta-ti, and I think you'll find better
+graphics performance in QML-based applications.
+
+~Keith
+
+On Wed, May 25, 2016 at 5:24 PM Benjamin Bimmermann <b.bimmermann@yahoo.de>
+wrote:
+
+> Hello,
+>
+> first it is good to share informations so maybe the meta-ti devs can fix
+> this.
+>
+> Now to you:
+> I think you are at a ponit where I was about 2 mounth ago. So I will help
+> you if you share later a fix for the Qt5_CinematicExperience.
+>
+> First:
+> I think you try to use:
+> http://www.embarcados.com.br/beaglebone-black-qt5-yocto-parte-1/
+> I think this is to old. You should more fokus and use:
+> http://www.jumpnowtek.com/
+> https://github.com/jumpnow/meta-bbb
+>
+> The Problem with the jumpnow layer is that they don't use the meta-ti
+> layer. So they can not build very good and fast qt5 aps.
+>
+> Second:
+>
+> What you don't need I think :
+> /home/vagrant/yocto/poky/meta-embarcados \
+> RDEPENDS_packagegroup-qt5-machine-related = "\ -
+> ${@base_contains('MACHINE', 'beaglebone', 'libgles-omap3
+> omap3-sgx-modules', '', d)} \ + ${@base_contains('MACHINE', 'beaglebone',
+> 'omap5-sgx-ddk-um-linux', '', d)} \ "
+>
+>
+> ----------------------------------------------------------------------------
+>
+> Third:
+>
+> You must enable SGX in your system and overlay !!!
+>
+> Four :
+>
+> I have better experience with:
+> beaglebone.conf:
+>     require conf/machine/include/ti33x.inc
+>     require conf/machine/include/THE_arago-prefs.inc
+>     UBOOT_MACHINE = "am335x_boneblack_config"
+>     MACHINE_FEATURES += " serial usbhost sgx "
+>     PREFERRED_PROVIDER* (like the last e-mail)
+>
+> Image:
+>
+> IMAGE_INSTALL += " \
+>     ti-sgx-ddk-um \    omapdrm-pvr \
+>    packagegroup-qt5-toolchain-target \   qtmultimedia \   qtmultimedia-dev \   qtmultimedia-mkspecs \ "
+>
+>   local.conf:
+>
+> PACKAGECONFIG_GL_pn-qtbase = "gles2"PACKAGECONFIG_GL_append += " accessibility examples gles2 libs tools"PACKAGECONFIG_append_pn-qtmultimedia = " gstreamer"DISTRO_FEATURES_append = " opengl usbhost sgx"DISTRO_FEATURES_remove = " x11  "
+> RM_OLD_IMAGE = "1"
+> EXTRA_IMAGE_FEATURES = "debug-tweaks tools-debug ssh-server-openssh"
+>
+>
+> I hope I could help and maybe we find a solution for the problem and add
+> this to meta-ti.
+>
+> Have a nice day.
+>
+>
+>
+> Keith Kyzivat <kamaji@gmail.com> schrieb am 17:20 Mittwoch, 25.Mai 2016:
+>
+>
+>
+>
+> Hi Benjamin,
+>
+> Thank you for your config details -- that's gotten me further -- with a
+> working driver, and Qt5_CinematicExperience actually running, bringing up
+> the initial display, cursor showing, and the opening "Curtains" display,
+> but sounds like a similar experience to what you're describing -- driver
+> starting, program starting, but dreadful performance to the point where it
+> doesn't really get beyond the first frame, and emits many FIFO underflow
+> messages.  DMA may be not enabled or is somehow failing?
+>
+> In any case, I'm further, and will continue to research the issue and hack
+> away.  I'll report any progress.
+> Should I keep it off-list, or is it on-topic enough for this mailing list?
+>
+> Anyone have any pointers to what the issue might be?
+>
+> Qt5_CinematicExperience output log:
+> https://gist.github.com/keithel/e4eaf0a44aaa5d060f0578345d05b9b3#file-qt5_cinematicexperience-output
+>
+> You can also find my config in that gist.
+>
+> ~Keith
+>
+> On Tue, May 24, 2016 at 2:21 PM Benjamin Bimmermann <b.bimmermann@yahoo.de>
+> wrote:
+>
+> Hello,
+>
+> I build with Krogoth a QT5.6 Image.
+> I have Include in my Image:
+>
+> IMAGE_INSTALL += " \    ti-sgx-ddk-um \    omapdrm-pvr \"
+>
+> and the config :
+> PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"PREFERRED_PROVIDER_virtual/mesa = "mesa-gl"
+> PREFERRED_PROVIDER_virtual/egl_keystone = "mesa"PREFERRED_PROVIDER_virtual/libgles1_keystone = "mesa"PREFERRED_PROVIDER_virtual/libgles2_keystone = "mesa"
+> PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
+> PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"PREFERRED_VERSION_linux-ti-staging = "4.4%"
+> PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"PREFERRED_PROVIDER_libgbm = "libgbm"PREFERRED_PROVIDER_libgbm-dev = "libgbm-dev"
+>
+>
+> This Image works Ok. Not great. If you build things like :
+> https://github.com/scottellis/tspress
+> It works very well. If you try to build big things like:
+> https://github.com/rzr/qt5-cinematic-experience
+> The driver Starts but and the Programm try to start.
+> You see a mouse Courser and thats it. The Programm doesn't run ok.
+>
+> If you have a solution for that or if we find together for that a solution it would be very nice.
+>
+> Have a nice day.
+>
+>
+>
+>
+> Keith Kyzivat <kamaji@gmail.com> schrieb am 16:48 Dienstag, 24.Mai 2016:
+>
+>
+>
+>
+> Hi Denys,
+>
+> I'm working with the Beaglebone Black Rev C board -- so AM335x-based.
+> What incantation/recipe/package should I be specifying to get the
+> userspace DRI drivers for use with libGLESv2 built into my image? That's
+> been my biggest stumbling block.  Even moving back to Fido I was unable to
+> build an image that includes the userspace graphics support libraries.
+>
+> Ultimately I want to pull in Qt 5.6 and be able to run QML-based apps with
+> the 'eglfs' QPA platform plugin with hardware OpenGLES2 acceleration
+> running over HDMI.
+>
+> Are there any good resources ((e)books, wikis, presentations, etc)  you or
+> anyone else can recommend to fully grasp Yocto/OpenEmbedded?  I've come
+> across a number of presentations, wikis and blog posts that have explained
+> some things, but no comprehensive walkthrough that performs a build and
+> explains all the reasons for the changes.
+>
+> ~Keith
+>
+> On Thu, May 19, 2016 at 7:41 PM Keith Kyzivat <kamaji@gmail.com> wrote:
+>
+> Hi folks,
+>
+> I've been trying to get a beagleboard krogoth build working with working
+> OpenGLES2 DRI drivers in place, and have been failing.
+>
+> I did find out that drivers changed name from libgles-omap3 to
+> ti-sgx-ddk-um - but specifying ti-sgx-ddk-um as my
+> PREFERRED_PROVIDER_virtual/libgles2 fails hard --
+>  -- Nothing RPROVIDES 'ti-sgx-ddk-um'
+>
+> Digging through commits, I found commit c70102c671 -
+> renaming omap5-sgx-ddk-um-linux to ti-sgx-ddk-um.
+>
+> The problem seems to be that these are renamed, but the package names have
+> not changed -- recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> includes:
+>
+> PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2
+> omap5-sgx-ddk-um-linux"
+>
+> Shouldn't this be the following?
+> PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 ti-sgx-ddk-um"
+>
+> And also RPROVIDES, RREPLACES, RCONFLICTS and associated -dev, -dbg
+> packages?
+>
+> Apologies if I'm asking this wrong - I'm pretty new to Yocto/OE and still
+> figuring it all out.
+>
+> ~Keith Kyzivat
+>
+>
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+>
+>
+>
+>
+>
+
+--94eb2c09336218bf600534a3bca4
 Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-<html><head></head><body><div style="font-family: Verdana;font-size: 12.0px;"><div>&nbsp;
-<div>&nbsp;
-<div name="quote" style="margin:10px 5px 5px 10px; padding: 10px 0 10px 10px; border-left:2px solid #C3D9E5; word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
-<div style="margin:0 0 10px 0;"><b>Gesendet:</b>&nbsp;Montag, 06. Juni 2016 um 07:59 Uhr<br/>
-<b>Von:</b>&nbsp;&quot;Holger Bach&quot; &lt;bach@gmx.li&gt;<br/>
-<b>An:</b>&nbsp;meta-ti@yoctoproject.org, denys@ti.com<br/>
-<b>Betreff:</b>&nbsp;Cannot boot from mmc; dtb-problem?</div>
+<div dir=3D"ltr">Hi Benjamin,<div><br></div><div>SGX: -- isn&#39;t this alr=
+eady enabled from meta-ti/conf/machine/include/ti33x.inc, included by meta-=
+ti/conf/machine/beaglebone.conf ?: =C2=A0MACHINE_FEATURES =3D &quot;kernel2=
+6 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx&quot;</div><div>=
+<br></div><div>You must be referring to going the approach of using the jum=
+pnowtek meta-bbb layer that doesn&#39;t use meta-ti.=C2=A0 I&#39;ve been st=
+icking with meta-embarcados for the time being - pulling what I can from th=
+eir master branch, and adapting it to work with the krogoth branch...=C2=A0=
+ I might jump entirely free of it though and just depend on meta-ti and met=
+a-qt.. for the moment it works ok for me.</div><div><br></div><div>I see th=
+e cleanup you referenced -- haven&#39;t tried yet to remove it, but makes s=
+ense - it&#39;s referring to the old outdated/incorrect omap driver.</div><=
+div><br></div><div>As for improving performance- just today I pulled latest=
+ changes from meta-ti and Qt5_CinematicExperience is working well for me no=
+w, when before it wasn&#39;t operating at all.=C2=A0 I think the commit tha=
+t fixes the issue is :=C2=A02a57c4c ti-sgx-ddk-um: update srcrev and bump P=
+R</div><div>This commit pulls a newer rev of the kernel graphics module.</d=
+iv><div><br></div><div>Fonts are also fixed now -- previously I found that,=
+ while fontconfig was built, and fonts were placed on the system, none were=
+ loaded when my Qt app ran, and thus text fields, buttons, etc were devoid =
+of text.=C2=A0 I&#39;m not entirely sure what fixed the font issue -- as I =
+have made a few changes to my local.conf that are fontconfig related, but n=
+one seemed to correct the issue until I did a full rebuild (wiping the tmp =
+dir but keeping same sstate dir) - which I did when I pulled the latest met=
+a-ti changes.</div><div><br></div><div>Something I can&#39;t figure out - t=
+hat I had working at one point, but no longer have working is setting the d=
+efault platform plugin to &#39;eglfs&#39; instead of &#39;xcb&#39; (which i=
+sn&#39;t even built!).</div><div>My guess is I&#39;m using a var that isn&#=
+39;t used in krogoth, that was used in fido:</div><div>EXTRA_OECONF_append =
+=3D &quot; -qpa eglfs&quot; in one of =C2=A0my=C2=A0qtbase_%.bbappend files=
+.<br></div><div><br></div><div>Anyway! Try a rebuild with latest meta-ti, a=
+nd I think you&#39;ll find better graphics performance in QML-based applica=
+tions.</div><div><br></div><div>~Keith</div><div><br><div class=3D"gmail_qu=
+ote"><div dir=3D"ltr">On Wed, May 25, 2016 at 5:24 PM Benjamin Bimmermann &=
+lt;<a href=3D"mailto:b.bimmermann@yahoo.de">b.bimmermann@yahoo.de</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex=
+;border-left:1px #ccc solid;padding-left:1ex"><div><div style=3D"color:#000=
+;background-color:#fff;font-family:times new roman,new york,times,serif;fon=
+t-size:16px"><div><div><div style=3D"color:#000;background-color:#fff;font-=
+family:times new roman,new york,times,serif;font-size:16px">Hello,<div><br =
+clear=3D"none"><span></span></div><div dir=3D"ltr"><span>first it is good t=
+o share informations so maybe the meta-ti devs can fix this.</span></div><d=
+iv dir=3D"ltr"><br clear=3D"none"><span></span></div><div dir=3D"ltr"><span=
+>Now to you:<br clear=3D"none">I think you are at a ponit where I was about=
+ 2 mounth ago. So I will help you if you share later a fix for the </span>Q=
+t5_CinematicExperience.</div><div dir=3D"ltr"><br clear=3D"none"></div><div=
+ dir=3D"ltr">First: <br clear=3D"none"></div><div dir=3D"ltr">I think you t=
+ry to use: <br clear=3D"none"><a rel=3D"nofollow" shape=3D"rect" href=3D"ht=
+tp://www.embarcados.com.br/beaglebone-black-qt5-yocto-parte-1/" target=3D"_=
+blank">http://www.embarcados.com.br/beaglebone-black-qt5-yocto-parte-1/</a>=
+</div><div dir=3D"ltr">I think this is to old. You should more fokus and us=
+e:</div><div dir=3D"ltr"><a rel=3D"nofollow" shape=3D"rect" href=3D"http://=
+www.jumpnowtek.com/" target=3D"_blank">http://www.jumpnowtek.com/</a></div>=
+<div dir=3D"ltr"><a rel=3D"nofollow" shape=3D"rect" href=3D"https://github.=
+com/jumpnow/meta-bbb" target=3D"_blank">https://github.com/jumpnow/meta-bbb=
+</a><br clear=3D"none"></div><div><br clear=3D"none"></div><div><div dir=3D=
+"ltr">The Problem with the jumpnow layer is that they don&#39;t use the met=
+a-ti layer. So they can not build very good and fast qt5 aps.</div><div dir=
+=3D"ltr"><br></div><div dir=3D"ltr">Second:</div><div dir=3D"ltr"><br></div=
+><div dir=3D"ltr">What you don&#39;t need I think :</div><div dir=3D"ltr"> =
+ /home/vagrant/yocto/poky/meta-embarcados \</div><div dir=3D"ltr"> RDEPENDS=
+_packagegroup-qt5-machine-related =3D &quot;\
+     =20
+     =20
+       =20
+        <span>-            ${@base_contains(&#39;MACHINE&#39;, &#39;beagleb=
+one&#39;, &#39;libgles-omap3 omap3-sgx-modules&#39;, &#39;&#39;, d)} \</spa=
+n>
+     =20
+     =20
+       =20
+        <span>+            ${@base_contains(&#39;MACHINE&#39;, &#39;beagleb=
+one&#39;, &#39;omap5-sgx-ddk-um-linux&#39;, &#39;&#39;, d)} \</span>
+     =20
+     =20
+       =20
+                     &quot;</div></div><div dir=3D"ltr"><div><br></div><div=
+>--------------------------------------------------------------------------=
+--<br></div><div><br></div><div>Third:<br></div><div><br></div><div>You mus=
+t enable SGX in your system and overlay !!!<br></div><div><br></div><div>Fo=
+ur :<br></div><div><br clear=3D"none"></div><div>I have better experience w=
+ith:</div><div dir=3D"ltr">beaglebone.conf:</div><div dir=3D"ltr">=C2=A0=C2=
+=A0=C2=A0=C2=A0require conf/machine/include/ti33x.inc<br></div><div dir=3D"=
+ltr">=C2=A0=C2=A0=C2=A0=C2=A0require conf/machine/include/THE_arago-prefs.i=
+nc<a name=3D"m_-5854793508555257093_beaglebone.conf-15"></a></div><div dir=
+=3D"ltr"><a name=3D"m_-5854793508555257093_beaglebone.conf-15">=C2=A0=C2=A0=
+=C2=A0=C2=A0</a>UBOOT_MACHINE =3D &quot;am335x_boneblack_config&quot;<br></=
+div><div dir=3D"ltr">=C2=A0=C2=A0=C2=A0=C2=A0MACHINE_FEATURES +=3D &quot; s=
+erial usbhost sgx &quot;</div><div dir=3D"ltr">=C2=A0=C2=A0=C2=A0 <span>PRE=
+FERRED_PROVIDER* (like the last e-mail)</span></div><div dir=3D"ltr"><br></=
+div><div dir=3D"ltr">Image:</div><pre><span>IMAGE_INSTALL</span> <span>+=3D=
+</span> <span>&quot; \</span><span>   <br>=C2=A0=C2=A0=C2=A0 ti-sgx-ddk-um =
+\</span>
+<a name=3D"m_-5854793508555257093_console-image.bb-26"></a><span>    omapdr=
+m-pvr \</span><br><span>   packagegroup-qt5-toolchain-target \</span>
+<a name=3D"m_-5854793508555257093_qt5-image.bb-47"></a><span>   qtmultimedi=
+a \</span>
+<a name=3D"m_-5854793508555257093_qt5-image.bb-48"></a><span>   qtmultimedi=
+a-dev \</span>
+<a name=3D"m_-5854793508555257093_qt5-image.bb-49"></a><span>   qtmultimedi=
+a-mkspecs \</span> <a name=3D"m_-5854793508555257093_console-image.bb-27"><=
+/a><span>&quot;</span></pre></div><div dir=3D"ltr"><div dir=3D"ltr">=C2=A0 =
+local.conf:
+</div><pre><a name=3D"m_-5854793508555257093_local.conf-32"></a>PACKAGECONF=
+IG_GL_pn-qtbase =3D &quot;gles2&quot;
+<a name=3D"m_-5854793508555257093_local.conf-36"></a>PACKAGECONFIG_GL_appen=
+d +=3D &quot; accessibility examples gles2 libs tools&quot;
+<a name=3D"m_-5854793508555257093_local.conf-37"></a>PACKAGECONFIG_append_p=
+n-qtmultimedia =3D &quot; gstreamer&quot;
+<a name=3D"m_-5854793508555257093_local.conf-38"></a>
+<a name=3D"m_-5854793508555257093_local.conf-42"></a>DISTRO_FEATURES_append=
+ =3D &quot; opengl usbhost sgx&quot;
+<a name=3D"m_-5854793508555257093_local.conf-43"></a>DISTRO_FEATURES_remove=
+ =3D &quot; x11  &quot;
 
-<div name="quoted-content">
-<div style="font-family: Verdana;font-size: 12.0px;">
-<div>Hello,</div>
+<a name=3D"m_-5854793508555257093_local.conf-49"></a>RM_OLD_IMAGE =3D &quot=
+;1&quot;
 
-<div><br/>
-I&#39;m pretty new to yocto and trying to build an image for my beagleboard BB-MB-000 Rev.C4. I am using poky and the meta-ti-layer but i cannot get the rootfs from mmcblk0p2.<br/>
-<br/>
-A workaround was to boot an old anstrom-demo-image from&nbsp;<a href="https://deref-gmx.net/mail/client/dereferrer/?redirectUrl=http%3A%2F%2Fdownloads.angstro" target="_blank">http://downloads.angstro</a>m-distribution.org/demo/beagleboard/<br/>
-<br/>
-and flashing the poky-rootfs to nand. Booting from Nand is working, but device fb0 was not found.<br/>
-<br/>
-Therefore it seems, that the device tree doesn&#39;t fit to the board. I have tried kernel 4.4.7, 4.4.9, 4.4.11 and finally 4.1.18 with the same result. I<br/>
-customized nothing, only build an uImage by bitbake and a core-image-sato.<br/>
-<br/>
-And here comes the output from the boot process with a lot of messages saying that some hardware is disabled:<br/>
-<br/>
-Starting kernel ...<br/>
-&nbsp;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Booting Linux on physical CPU 0x0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Initializing cgroup subsys cpuset<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Initializing cgroup subsys cpu<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Initializing cgroup subsys cpuacct<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Linux version 4.1.18-g6b41ca0b94 (holger@thinkdebian) (gcc<br/>
-version 5.3.0 (GCC) ) #1 SMP PREEMPT Thu Jun 2 22:40:20 CEST 206<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] CPU: ARMv7 Processor [411fc083] revision 3 (ARMv7), cr=10c5387d<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing<br/>
-instruction cache<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Machine model: TI OMAP3 BeagleBoard<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] cma: Reserved 24 MiB at 0x8e000000<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Memory policy: Data cache writeback<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] CPU: All CPU(s) started in SVC mode.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] OMAP3430/3530 ES3.1 (l2cache iva sgx neon isp )<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] PERCPU: Embedded 12 pages/cpu @cfb5c000 s17164 r8192 d23796<br/>
-u49152<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Built 1 zonelists in Zone order, mobility grouping on.&nbsp;&nbsp;Total<br/>
-pages: 64448<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Kernel command line: console=ttyO2,115200n8 root=/dev/mmcblk0p2<br/>
-rootwait rw rootfstype=ext4 mpurate=auto buddy=zippy camer0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] PID hash table entries: 1024 (order: 0, 4096 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Memory: 222560K/260096K available (6455K kernel code, 498K<br/>
-rwdata, 2364K rodata, 376K init, 256K bss, 12960K reserved, 245)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Virtual kernel memory layout:<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&nbsp;&nbsp;: 0xffff0000 - 0xffff1000&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;4 kB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixmap&nbsp;&nbsp;: 0xffc00000 - 0xfff00000&nbsp;&nbsp;&nbsp;(3072 kB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vmalloc : 0xd0800000 - 0xff000000&nbsp;&nbsp;&nbsp;( 744 MB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowmem&nbsp;&nbsp;: 0xc0000000 - 0xd0000000&nbsp;&nbsp;&nbsp;( 256 MB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkmap&nbsp;&nbsp;&nbsp;: 0xbfe00000 - 0xc0000000&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;2 MB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules : 0xbf000000 - 0xbfe00000&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;14 MB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text : 0xc0008000 - 0xc08a5064&nbsp;&nbsp;&nbsp;(8821 kB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.init : 0xc08a6000 - 0xc0904000&nbsp;&nbsp;&nbsp;( 376 kB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.data : 0xc0904000 - 0xc0980970&nbsp;&nbsp;&nbsp;( 499 kB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bss : 0xc0983000 - 0xc09c3030&nbsp;&nbsp;&nbsp;( 257 kB)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Preemptible hierarchical RCU implementation.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;Additional per-CPU info printed with stalls.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000]&nbsp;&nbsp;RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] RCU: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] NR_IRQS:16 nr_irqs:16 16<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] IRQ: Found an INTC at 0xfa200000 (revision 4.0) with 96<br/>
-interrupts<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/500 MHz<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] omap_hwmod: mpu: _wait_target_ready failed: -22<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] omap_hwmod: mpu: cannot be enabled for reset (3)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] OMAP clockevent source: timer12 at 32768 Hz<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] clocksource 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff,<br/>
-max_idle_ns: 58327039986419 ns<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000000] sched_clock: 32 bits at 32kHz, resolution 30517ns, wraps every<br/>
-65535999984741ns<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000030] OMAP clocksource: 32k_counter at 32768 Hz<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000335] Console: colour dummy device 80x30<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000366] WARNING: Your &#39;console=ttyO2&#39; has been replaced by &#39;ttyS2&#39;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000396] This ensures that you still see kernel messages. Please<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000396] update your kernel commandline.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.000427] Calibrating delay loop... 496.43 BogoMIPS (lpj=2482176)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.048370] pid_max: default: 32768 minimum: 301<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.048583] Security Framework initialized<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.048706] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.048706] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.050109] Initializing cgroup subsys blkio<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.050170] Initializing cgroup subsys memory<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.050231] Initializing cgroup subsys devices<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.050262] Initializing cgroup subsys freezer<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.050323] Initializing cgroup subsys perf_event<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.050354] CPU: Testing write buffer coherency: ok<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.051025] CPU0: thread -1, cpu 0, socket -1, mpidr 0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.051177] Setting up static identity map for 0x80008280 - 0x800082f0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.089263] Brought up 1 CPUs<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.089294] SMP: Total of 1 processors activated (496.43 BogoMIPS).<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.089324] CPU: All CPU(s) started in SVC mode.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.090515] devtmpfs: initialized<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.148559] VFP support v0.3: implementor 41 architecture 3 part 30 variant c<br/>
-rev 1<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.188323] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.189453] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.217529] omap_hwmod: mpu: _wait_target_ready failed: -22<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.217559] omap_hwmod: mpu: cannot be enabled for reset (3)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.271850] clocksource jiffies: mask: 0xffffffff max_cycles: 0xffffffff,<br/>
-max_idle_ns: 19112604462750000 ns<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.274993] pinctrl core: initialized pinctrl subsystem<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.277526] NET: Registered protocol family 16<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.283355] DMA: preallocated 256 KiB pool for atomic coherent allocations<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.308044] cpuidle: using governor ladder<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.338165] cpuidle: using governor menu<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.352600] Reprogramming SDRC clock to 332000000 Hz<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.362426] omap_gpio 48310000.gpio: could not find pctldev for node /ocp/l4@<br/>
-48000000/scm@2000/pinmux@a00/pinmux_gpio1_pins, deferringe<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.364471] OMAP GPIO hardware version 2.5<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.375061] irq: no irq domain found for /ocp/l4@48000000/scm@2000/pinmux@30<br/>
-!<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.395874] omap-gpmc 6e000000.gpmc: GPMC revision 5.0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.395904] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.407012] No ATAGs?<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.407073] hw-breakpoint: debug architecture 0x4 unsupported.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.408935] omap4_sram_init:Unable to allocate sram needed to handle errata<br/>
-I688<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.408996] omap4_sram_init:Unable to get sram pool needed to handle errata<br/>
-I688<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.410003] OMAP DMA hardware revision 4.0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.464447] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.472625] omap-iommu 480bd400.mmu: 480bd400.mmu registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.473510] vgaarb: loaded<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.474487] SCSI subsystem initialized<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.478179] omap_i2c 48070000.i2c: bus 0 rev3.3 at 2600 kHz<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.479461] omap_i2c 48072000.i2c: bus 1 rev3.3 at 100 kHz<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.480590] omap_i2c 48060000.i2c: bus 2 rev3.3 at 100 kHz<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.481140] media: Linux media interface: v0.10<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.481292] Linux video capture interface: v2.00<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.481445] pps_core: LinuxPPS API ver. 1 registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.481445] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo<br/>
-Giometti &lt;giometti@linux.it&gt;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.481536] PTP clock support registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.483062] omap-mailbox 48094000.mailbox: omap mailbox rev 0x40<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.483642] Advanced Linux Sound Architecture Driver Initialized.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.485656] Switched to clocksource 32k_counter<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.513519] NET: Registered protocol family 2<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.515014] TCP established hash table entries: 2048 (order: 1, 8192 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.515075] TCP bind hash table entries: 2048 (order: 2, 16384 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.515167] TCP: Hash tables configured (established 2048 bind 2048)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.515319] UDP hash table entries: 256 (order: 1, 8192 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.515380] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.515747] NET: Registered protocol family 1<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.516662] RPC: Registered named UNIX socket transport module.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.516693] RPC: Registered udp transport module.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.516723] RPC: Registered tcp transport module.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.516723] RPC: Registered tcp NFSv4.1 backchannel transport module.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.520629] CPU PMU: Failed to parse /pmu/interrupt-affinity[0]<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.520782] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5<br/>
-counters available<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.527404] futex hash table entries: 256 (order: 2, 16384 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.527587] audit: initializing netlink subsys (disabled)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.527709] audit: type=2000 audit(0.520:1): initialized<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.546203] VFS: Disk quotas dquot_6.6.0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.546691] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.552490] NFS: Registering the id_resolver key type<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.552612] Key type id_resolver registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.552642] Key type id_legacy registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.552795] jffs2: version 2.2. (NAND) (SUMMARY)&nbsp;&nbsp;&#65533;&copy; 2001-2006 Red Hat, Inc.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.557373] NET: Registered protocol family 38<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.557495] io scheduler noop registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.557525] io scheduler deadline registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.557647] io scheduler cfq registered (default)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.560546] pinctrl-single 48002030.pinmux: 284 pins at pa fa002030 size 568<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.561035] pinctrl-single 48002a00.pinmux: 46 pins at pa fa002a00 size 92<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.562072] pinctrl-single 480025d8.pinmux: 18 pins at pa fa0025d8 size 36<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.569366] 48050000.dss supply vdda_video not found, using dummy regulator<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.569641] OMAP DSS rev 2.0<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.570129] omapdss_dss 48050000.dss: bound 48050400.dispc (ops<br/>
-dispc_component_ops)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.570526] omapdss_dss 48050000.dss: bound 48050c00.encoder (ops<br/>
-venc_component_ops)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.577697] Serial: 8250/16550 driver, 10 ports, IRQ sharing enabled<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.586608] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud =<br/>
-3000000) is a 8250<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.588592] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud =<br/>
-3000000) is a 8250<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.590637] console [ttyS2] disabled<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;0.590759] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud =<br/>
-3000000) is a 8250<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.423004] console [ttyS2] enabled<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.428924] [drm] Initialized drm 1.1.0 20060810<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.461090] brd: module loaded<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.477691] loop: module loaded<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.488281] twl 0-0048: PIH (irq 23) chaining IRQs 309..317<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.494079] twl 0-0048: power (irq 314) chaining IRQs 317..324<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.538513] twl4030_gpio twl4030-gpio: gpio (irq 309) chaining IRQs 325..342<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.554199] mtdoops: mtd device (mtddev=name/number) must be supplied<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.563110] nand: device found, Manufacturer ID: 0x2c, Chip ID: 0xba<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.569580] nand: Micron MT29F2G16ABD<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.573303] nand: 256 MiB, SLC, erase size: 128 KiB, page size: 2048, OOB<br/>
-size: 64<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.580963] nand: using OMAP_ECC_HAM1_CODE_HW<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.585418] 5 ofpart partitions found on MTD device 30000000.nand<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.591613] Creating 5 MTD partitions on &quot;30000000.nand&quot;:<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.597106] 0x000000000000-0x000000080000 : &quot;X-Loader&quot;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.605224] 0x000000080000-0x000000260000 : &quot;U-Boot&quot;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.614135] 0x000000260000-0x000000280000 : &quot;U-Boot Env&quot;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.621887] 0x000000280000-0x000000680000 : &quot;Kernel&quot;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.632598] 0x000000680000-0x000010000000 : &quot;Filesystem&quot;<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.864410] mousedev: PS/2 mouse device common for all mice<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.870269] i2c /dev entries driver<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.879669] omap_hsmmc 4809c000.mmc: failed to set clock to 52000000<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.886352] omap_hsmmc: probe of 4809c000.mmc failed with error -22<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.893524] ledtrig-cpu: registered to indicate activity on CPUs<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.905700] oprofile: using arm/armv7<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.910217] Initializing XFRM netlink socket<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.914611] NET: Registered protocol family 17<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.919342] NET: Registered protocol family 15<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.924072] Key type dns_resolver registered<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.928894] omap2_set_init_voltage: unable to find boot up OPP for<br/>
-vdd_mpu_iva<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.936248] omap2_set_init_voltage: unable to set vdd_mpu_iva<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.942047] omap2_set_init_voltage: unable to find boot up OPP for vdd_core<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.949096] omap2_set_init_voltage: unable to set vdd_core<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.956695] cpu cpu0: of_pm_voltdm_notifier_register: Fail calculating<br/>
-voltage latency[975000&lt;-&gt;1350000]:-22<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.967468] cpu cpu0: of_pm_voltdm_notifier_register: Fail calculating<br/>
-voltage latency[975000&lt;-&gt;1350000]:-22<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.980285] ThumbEE CPU extension supported.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.984619] Registering SWP/SWPB emulation handler<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;1.989654] SmartReflex Class3 initialized<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.004669] hctosys: unable to open rtc device (rtc0)<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.010070] sr_init: No PMIC hook to init smartreflex<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.015594] smartreflex smartreflex.0: omap_sr_probe: SmartReflex driver<br/>
-initialized<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.024353] smartreflex smartreflex.1: omap_sr_probe: SmartReflex driver<br/>
-initialized<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.057983] hsusb2_vbus: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.061920] VUSB3V1: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.065429] VUSB1V8: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.069030] VUSB1V5: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.072692] VMMC1: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.076080] VDAC: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.079498] VAUX3: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.082855] pbias_mmc_omap2430: disabling<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.087341] ALSA device list:<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.090332]&nbsp;&nbsp;&nbsp;No soundcards found.<br/>
-[&nbsp;&nbsp;&nbsp;&nbsp;2.096069] Waiting for root device /dev/mmcblk0p2...<br/>
-[&nbsp;&nbsp;133.656372] random: nonblocking pool is initialized<br/>
-<br/>
-Do you have a clue what I&#39;m doing wrong? Or is it really a bug?<br/>
-<br/>
-Thanks.<br/>
-<br/>
-Holger Bach<span>&nbsp;</span></div>
-</div>
-</div>
-</div>
-</div>
-</div></div></body></html>
+<a name=3D"m_-5854793508555257093_local.conf-55"></a>EXTRA_IMAGE_FEATURES =
+=3D &quot;debug-tweaks tools-debug ssh-server-openssh&quot;</pre><div dir=
+=3D"ltr"><br></div><div dir=3D"ltr">I hope I could help and maybe we find a=
+ solution for the problem and add this to meta-ti.</div><div dir=3D"ltr"><b=
+r></div><div dir=3D"ltr">Have a nice day.<br></div></div><div dir=3D"ltr"><=
+br clear=3D"none"></div> <div><br clear=3D"none"><br clear=3D"none"></div><=
+/div></div></div></div></div><div><div style=3D"color:#000;background-color=
+:#fff;font-family:times new roman,new york,times,serif;font-size:16px"><div=
+> <div style=3D"font-family:times new roman,new york,times,serif;font-size:=
+16px"> <div style=3D"font-family:HelveticaNeue,Helvetica Neue,Helvetica,Ari=
+al,Lucida Grande,sans-serif;font-size:16px"> <div dir=3D"ltr"><font face=3D=
+"Arial" size=3D"2"> Keith Kyzivat &lt;<a href=3D"mailto:kamaji@gmail.com" t=
+arget=3D"_blank">kamaji@gmail.com</a>&gt; schrieb am 17:20 Mittwoch, 25.Mai=
+ 2016:<br clear=3D"none"></font></div>  <br clear=3D"none"><br clear=3D"non=
+e"> <div><br><br></div><div><div><div><div><div dir=3D"ltr">Hi Benjamin,<di=
+v><br clear=3D"none"></div><div>Thank you for your config details -- that&#=
+39;s gotten me further -- with a working driver, and Qt5_CinematicExperienc=
+e actually running, bringing up the initial display, cursor showing, and th=
+e opening &quot;Curtains&quot; display, but sounds like a similar experienc=
+e to what you&#39;re describing -- driver starting, program starting, but d=
+readful performance to the point where it doesn&#39;t really get beyond the=
+ first frame, and emits many FIFO underflow messages.=C2=A0 DMA may be not =
+enabled or is somehow failing?</div><div><br clear=3D"none"></div><div>In a=
+ny case, I&#39;m further, and will continue to research the issue and hack =
+away.=C2=A0 I&#39;ll report any progress.</div><div>Should I keep it off-li=
+st, or is it on-topic enough for this mailing list?</div><div><br clear=3D"=
+none"></div><div>Anyone have any pointers to what the issue might be?</div>=
+<div><br clear=3D"none"></div><div>Qt5_CinematicExperience output log:=C2=
+=A0<a rel=3D"nofollow" shape=3D"rect" href=3D"https://gist.github.com/keith=
+el/e4eaf0a44aaa5d060f0578345d05b9b3#file-qt5_cinematicexperience-output" ta=
+rget=3D"_blank">https://gist.github.com/keithel/e4eaf0a44aaa5d060f0578345d0=
+5b9b3#file-qt5_cinematicexperience-output</a></div><div><br clear=3D"none">=
+</div><div>You can also find my config in that gist.</div><div><br clear=3D=
+"none"></div><div>~Keith</div></div><br clear=3D"none"><div><div><div dir=
+=3D"ltr">On Tue, May 24, 2016 at 2:21 PM Benjamin Bimmermann &lt;<a rel=3D"=
+nofollow" shape=3D"rect" href=3D"mailto:b.bimmermann@yahoo.de" target=3D"_b=
+lank">b.bimmermann@yahoo.de</a>&gt; wrote:<br clear=3D"none"></div><blockqu=
+ote style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"=
+><div><div style=3D"color:#000;background-color:#fff;font-family:times new =
+roman,new york,times,serif;font-size:16px"><div><div><div dir=3D"ltr" style=
+=3D"color:#000;background-color:#fff;font-family:times new roman,new york,t=
+imes,serif;font-size:16px"><div><span>Hello,</span></div><div><br clear=3D"=
+none"><span></span></div><div dir=3D"ltr"><div dir=3D"ltr"><span>I build wi=
+th </span>Krogoth a QT5.6 Image.</div><div dir=3D"ltr">I have Include in my=
+ Image:<br clear=3D"none"></div></div><div dir=3D"ltr"></div><pre><span>IMA=
+GE_INSTALL</span> <span>+=3D</span> <span>&quot; </span><span>\</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_console-image.bb-25"></a><span>    ti-sgx-ddk-um \</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_console-image.bb-26"></a><span>    omapdrm-pvr \</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_console-image.bb-27"></a><span>&quot;<br clear=3D"none"><br cl=
+ear=3D"none">and the config :<br clear=3D"none"></span><span>PREFERRED_PROV=
+IDER_virtual</span><span>/</span><span>libgl</span> <span>=3D</span> <span>=
+&quot;mesa-gl&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-8"></a><span>PREFERRED_PROVIDER_virtual</s=
+pan><span>/</span><span>mesa</span> <span>=3D</span> <span>&quot;mesa-gl&qu=
+ot;<br clear=3D"none"></span><span>PREFERRED_PROVIDER_virtual</span><span>/=
+</span><span>egl_keystone</span> <span>=3D</span> <span>&quot;mesa&quot;</s=
+pan>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-22"></a><span>PREFERRED_PROVIDER_virtual</=
+span><span>/</span><span>libgles1_keystone</span> <span>=3D</span> <span>&q=
+uot;mesa&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-23"></a><span>PREFERRED_PROVIDER_virtual</=
+span><span>/</span><span>libgles2_keystone</span> <span>=3D</span> <span>&q=
+uot;mesa&quot;<br clear=3D"none"></span><a rel=3D"nofollow" shape=3D"rect" =
+name=3D"m_-5854793508555257093_m_1444571799623436890_THE_arago-prefs.inc-24=
+"></a><span>PREFERRED_PROVIDER_virtual</span><span>/</span><span>libgl_keys=
+tone</span> <span>=3D</span> <span>&quot;mesa&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-25"></a><span>PREFERRED_PROVIDER_virtual</=
+span><span>/</span><span>mesa_keystone</span> <span>=3D</span> <span>&quot;=
+mesa&quot;<br clear=3D"none"></span><span>PREFERRED_PROVIDER_virtual</span>=
+<span>/</span><span>kernel</span> <span>=3D</span> <span>&quot;linux-ti-sta=
+ging&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-13"></a><span>PREFERRED_VERSION_linux</spa=
+n><span>-</span><span>ti</span><span>-</span><span>staging</span> <span>=3D=
+</span> <span>&quot;4.4%&quot;</span> <br clear=3D"none"><span>PREFERRED_PR=
+OVIDER_virtual</span><span>/</span><span>egl</span> <span>=3D</span> <span>=
+&quot;ti-sgx-ddk-um&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-2"></a><span>PREFERRED_PROVIDER_virtual</s=
+pan><span>/</span><span>libgles1</span> <span>=3D</span> <span>&quot;ti-sgx=
+-ddk-um&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-3"></a><span>PREFERRED_PROVIDER_virtual</s=
+pan><span>/</span><span>libgles2</span> <span>=3D</span> <span>&quot;ti-sgx=
+-ddk-um&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-4"></a><span>PREFERRED_PROVIDER_libgbm</sp=
+an> <span>=3D</span> <span>&quot;libgbm&quot;</span>
+<a rel=3D"nofollow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571=
+799623436890_THE_arago-prefs.inc-5"></a><span>PREFERRED_PROVIDER_libgbm</sp=
+an><span>-</span><span>dev</span> <span>=3D</span> <span>&quot;libgbm-dev&q=
+uot;<br clear=3D"none"><br clear=3D"none"><br clear=3D"none">This Image wor=
+ks Ok. Not great. If you build things like :<br clear=3D"none"><a rel=3D"no=
+follow" shape=3D"rect" href=3D"https://github.com/scottellis/tspress" targe=
+t=3D"_blank">https://github.com/scottellis/tspress</a></span><a rel=3D"nofo=
+llow" shape=3D"rect" name=3D"m_-5854793508555257093_m_1444571799623436890_T=
+HE_arago-prefs.inc-26"></a><br clear=3D"none">It works very well. If you tr=
+y to build big things like:<br clear=3D"none"><a rel=3D"nofollow" shape=3D"=
+rect" href=3D"https://github.com/rzr/qt5-cinematic-experience" target=3D"_b=
+lank">https://github.com/rzr/qt5-cinematic-experience</a><br clear=3D"none"=
+>The driver Starts but and the Programm try to start.<br clear=3D"none">You=
+ see a mouse Courser and thats it. The Programm doesn&#39;t run ok.<br clea=
+r=3D"none"><br clear=3D"none">If you have a solution for that or if we find=
+ together for that a solution it would be very nice.<br clear=3D"none"><br =
+clear=3D"none">Have a nice day.<br clear=3D"none"></pre><div><br clear=3D"n=
+one"></div> <div><br clear=3D"none"><br clear=3D"none"></div></div></div></=
+div><div> <div style=3D"font-family:times new roman,new york,times,serif;fo=
+nt-size:16px"> <div style=3D"font-family:HelveticaNeue,Helvetica Neue,Helve=
+tica,Arial,Lucida Grande,sans-serif;font-size:16px"></div></div></div></div=
+></div><div><div style=3D"color:#000;background-color:#fff;font-family:time=
+s new roman,new york,times,serif;font-size:16px"><div><div style=3D"font-fa=
+mily:times new roman,new york,times,serif;font-size:16px"><div style=3D"fon=
+t-family:HelveticaNeue,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-se=
+rif;font-size:16px"> <div dir=3D"ltr"><font face=3D"Arial" size=3D"2"> Keit=
+h Kyzivat &lt;<a rel=3D"nofollow" shape=3D"rect" href=3D"mailto:kamaji@gmai=
+l.com" target=3D"_blank">kamaji@gmail.com</a>&gt; schrieb am 16:48 Dienstag=
+, 24.Mai 2016:<br clear=3D"none"></font></div>  <br clear=3D"none"><br clea=
+r=3D"none"> </div></div></div></div></div><div><div style=3D"color:#000;bac=
+kground-color:#fff;font-family:times new roman,new york,times,serif;font-si=
+ze:16px"><div><div style=3D"font-family:times new roman,new york,times,seri=
+f;font-size:16px"><div style=3D"font-family:HelveticaNeue,Helvetica Neue,He=
+lvetica,Arial,Lucida Grande,sans-serif;font-size:16px"><div><div><br clear=
+=3D"none"><br clear=3D"none"></div><div><div><div><div dir=3D"ltr">Hi Denys=
+,<div><br clear=3D"none"></div><div>I&#39;m working with the Beaglebone Bla=
+ck Rev C board -- so AM335x-based.</div><div>What incantation/recipe/packag=
+e should I be specifying to get the userspace DRI drivers for use with libG=
+LESv2 built into my image? That&#39;s been my biggest stumbling block.=C2=
+=A0 Even moving back to Fido I was unable to build an image that includes t=
+he userspace graphics support libraries.</div><div><br clear=3D"none"></div=
+><div>Ultimately I want to pull in Qt 5.6 and be able to run QML-based apps=
+ with the &#39;eglfs&#39; QPA platform plugin with hardware OpenGLES2 accel=
+eration running over HDMI.</div><div><br clear=3D"none"></div><div>Are ther=
+e any good resources ((e)books, wikis, presentations, etc) =C2=A0you or any=
+one else can recommend to fully grasp Yocto/OpenEmbedded?=C2=A0 I&#39;ve co=
+me across a number of presentations, wikis and blog posts that have explain=
+ed some things, but no comprehensive walkthrough that performs a build and =
+explains all the reasons for the changes.</div><div><br clear=3D"none"></di=
+v><div>~Keith</div><div><div><br clear=3D"none"><div><div dir=3D"ltr">On Th=
+u, May 19, 2016 at 7:41 PM Keith Kyzivat &lt;<a rel=3D"nofollow" shape=3D"r=
+ect" href=3D"mailto:kamaji@gmail.com" target=3D"_blank">kamaji@gmail.com</a=
+>&gt; wrote:<br clear=3D"none"></div><blockquote style=3D"margin:0 0 0 .8ex=
+;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr">Hi folks,<di=
+v><br clear=3D"none"></div><div>I&#39;ve been trying to get a beagleboard k=
+rogoth build working with working OpenGLES2 DRI drivers in place, and have =
+been failing.</div><div><br clear=3D"none"></div><div>I did find out that d=
+rivers changed name from libgles-omap3 to ti-sgx-ddk-um - but specifying=C2=
+=A0ti-sgx-ddk-um as my PREFERRED_PROVIDER_virtual/libgles2 fails hard --</d=
+iv><div>=C2=A0-- Nothing RPROVIDES &#39;ti-sgx-ddk-um&#39;</div><div><br cl=
+ear=3D"none"></div><div>Digging through commits, I found commit c70102c671 =
+- renaming=C2=A0omap5-sgx-ddk-um-linux to=C2=A0ti-sgx-ddk-um.</div><div><br=
+ clear=3D"none"></div><div>The problem seems to be that these are renamed, =
+but the package names have not changed --=C2=A0recipes-graphics/libgles/<a =
+rel=3D"nofollow" shape=3D"rect" href=3D"http://ti-sgx-ddk-um_1.14.3699939.b=
+b/" target=3D"_blank">ti-sgx-ddk-um_1.14.3699939.bb</a> includes:</div><div=
+><br clear=3D"none"></div><div>PROVIDES +=3D &quot;virtual/egl virtual/libg=
+les1 virtual/libgles2 omap5-sgx-ddk-um-linux&quot;<br clear=3D"none"></div>=
+<div><br clear=3D"none"></div><div>Shouldn&#39;t this be the following?</di=
+v><div>PROVIDES +=3D &quot;virtual/egl virtual/libgles1 virtual/libgles2 ti=
+-sgx-ddk-um&quot;</div><div><br clear=3D"none"></div><div>And also=C2=A0RPR=
+OVIDES, RREPLACES, RCONFLICTS and associated -dev, -dbg packages?</div><div=
+><br clear=3D"none"></div><div>Apologies if I&#39;m asking this wrong - I&#=
+39;m pretty new to Yocto/OE and still figuring it all out.</div></div><div =
+dir=3D"ltr"><div><br clear=3D"none"></div><div>~Keith Kyzivat</div></div></=
+blockquote></div></div></div></div></div></div></div><br clear=3D"none"></d=
+iv></div></div></div></div></div><div><div style=3D"color:#000;background-c=
+olor:#fff;font-family:times new roman,new york,times,serif;font-size:16px">=
+<div><div style=3D"font-family:times new roman,new york,times,serif;font-si=
+ze:16px"><div style=3D"font-family:HelveticaNeue,Helvetica Neue,Helvetica,A=
+rial,Lucida Grande,sans-serif;font-size:16px"><div><div>-- <br clear=3D"non=
+e">_______________________________________________<br clear=3D"none">meta-t=
+i mailing list<br clear=3D"none"><a rel=3D"nofollow" shape=3D"rect" href=3D=
+"mailto:meta-ti@yoctoproject.org" target=3D"_blank">meta-ti@yoctoproject.or=
+g</a><br clear=3D"none"><a rel=3D"nofollow" shape=3D"rect" href=3D"https://=
+lists.yoctoproject.org/listinfo/meta-ti" target=3D"_blank">https://lists.yo=
+ctoproject.org/listinfo/meta-ti</a><br clear=3D"none"></div><br clear=3D"no=
+ne"><br clear=3D"none"></div></div></div></div></div></div></blockquote></d=
+iv></div></div></div><br clear=3D"none"><br clear=3D"none"></div></div>  </=
+div> </div>  </div></div></div></blockquote></div></div></div>
 
+--94eb2c09336218bf600534a3bca4--
