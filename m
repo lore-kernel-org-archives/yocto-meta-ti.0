@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AB352E00C97; Tue,  7 Jun 2016 15:08:33 -0700 (PDT)
+	id ADAC3E00C49; Tue,  7 Jun 2016 15:08:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A622E00C49
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BA8CE00C80
 	for <meta-ti@yoctoproject.org>; Tue,  7 Jun 2016 15:08:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D9E9552A5B; Tue,  7 Jun 2016 22:08:30 +0000 (UTC)
+	id E7178529FD; Tue,  7 Jun 2016 22:08:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160607220830.D9E9552A5B@arago-project.org>
+Message-Id: <20160607220830.E7178529FD@arago-project.org>
 Date: Tue,  7 Jun 2016 22:08:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ipumm-fw: bump for codec updates and bugfixes
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 07 Jun 2016 22:08:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: c0c9802a6842bb28e392a78f0e749801588de739
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c0c9802a6842bb28e392a78f0e749801588de739
+Branch: master
+Commit: 4e14a0a8eeb4cc770f8f210c682e05077a78232c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4e14a0a8eeb4cc770f8f210c682e05077a78232c
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Jun  2 23:21:26 2016 +0000
