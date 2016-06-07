@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ADAC3E00C49; Tue,  7 Jun 2016 15:08:33 -0700 (PDT)
+	id A43DEE00C97; Tue,  7 Jun 2016 15:09:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BA8CE00C80
-	for <meta-ti@yoctoproject.org>; Tue,  7 Jun 2016 15:08:31 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86243E00C81
+	for <meta-ti@yoctoproject.org>; Tue,  7 Jun 2016 15:09:17 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E7178529FD; Tue,  7 Jun 2016 22:08:30 +0000 (UTC)
+	id A695352A5A; Tue,  7 Jun 2016 22:09:16 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160607220830.E7178529FD@arago-project.org>
-Date: Tue,  7 Jun 2016 22:08:30 +0000 (UTC)
+Message-Id: <20160607220916.A695352A5A@arago-project.org>
+Date: Tue,  7 Jun 2016 22:09:16 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ipumm-fw: bump for codec updates and bugfixes
+Subject: Tag ti2016.01 : Denys Dmytriyenko : LCPD Core SDK ti2016.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,49 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2016 22:08:33 -0000
+X-List-Received-Date: Tue, 07 Jun 2016 22:09:18 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 4e14a0a8eeb4cc770f8f210c682e05077a78232c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4e14a0a8eeb4cc770f8f210c682e05077a78232c
+Branch: refs/tags/ti2016.01
+Tag:    0ab90ca84cba1132a31edf763b4c21ce19ca03ee
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=0ab90ca84cba1132a31edf763b4c21ce19ca03ee
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Jun  2 23:21:26 2016 +0000
+Tagger: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Jun  7 18:09:08 2016 -0400
 
-ipumm-fw: bump for codec updates and bugfixes
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index f415599..32d51cb 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,11 +17,11 @@ RDEPENDS_${PN} = " libdce"
- 
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
- 
--SRCREV = "c579a48d3b201fe276e406add64512eb5e90e75f"
-+SRCREV = "a55e6e7b3a8b6917155f3f7ed6c10ed6170df3e7"
- 
- S = "${WORKDIR}/git"
- 
--PV = "3.00.10.00"
-+PV = "3.00.10.01"
- 
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
-@@ -66,4 +66,4 @@ ALTERNATIVE_PRIORITY = "20"
- 
- FILES_${PN} += "${base_libdir}/firmware/*"
- 
--PR = "r1"
-+PR = "r0"
-
+LCPD Core SDK ti2016.01
 
