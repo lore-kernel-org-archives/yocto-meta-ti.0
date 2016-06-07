@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D8AAFE00C8F; Tue,  7 Jun 2016 15:46:10 -0700 (PDT)
+	id DAB16E00C49; Tue,  7 Jun 2016 15:46:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B351AE00C49
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4876E00C65
 	for <meta-ti@yoctoproject.org>; Tue,  7 Jun 2016 15:46:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 917C6529BF; Tue,  7 Jun 2016 22:46:05 +0000 (UTC)
+	id AD382529F3; Tue,  7 Jun 2016 22:46:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160607224605.917C6529BF@arago-project.org>
+Message-Id: <20160607224605.AD382529F3@arago-project.org>
 Date: Tue,  7 Jun 2016 22:46:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : recipes: cleanup
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 07 Jun 2016 22:46:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 145693295920bf1187c1883379cb581f9c3437b9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=145693295920bf1187c1883379cb581f9c3437b9
+Branch: master
+Commit: 727ae199147eed1b461f065b10f43daac4ee5e09
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=727ae199147eed1b461f065b10f43daac4ee5e09
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Jun  7 18:45:09 2016 -0400
