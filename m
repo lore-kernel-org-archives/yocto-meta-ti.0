@@ -1,32 +1,26 @@
-Return-Path: <maciejjo@maciejjo.pl>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 61F4AE00BCE; Tue,  7 Jun 2016 05:39:35 -0700 (PDT)
+	id AB352E00C97; Tue,  7 Jun 2016 15:08:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 304 seconds by postgrey-1.32 at yocto-www;
-	Tue, 07 Jun 2016 05:39:33 PDT
-Received: from fireball.maciejjo.pl (fireball.maciejjo.pl [51.255.199.218])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF800E00B5F
-	for <meta-ti@yoctoproject.org>; Tue,  7 Jun 2016 05:39:33 -0700 (PDT)
-Received: from [10.154.112.29] (unknown [62.159.77.164])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by fireball.maciejjo.pl (Postfix) with ESMTPSA id 0756920CBF
-	for <meta-ti@yoctoproject.org>; Tue,  7 Jun 2016 14:34:26 +0200 (CEST)
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A622E00C49
+	for <meta-ti@yoctoproject.org>; Tue,  7 Jun 2016 15:08:31 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id D9E9552A5B; Tue,  7 Jun 2016 22:08:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-From: Maciej Sobkowski <maciejjo@maciejjo.pl>
-Message-ID: <8038bced-7ae3-e0d2-56f1-f0f3e364b108@maciejjo.pl>
-Date: Tue, 7 Jun 2016 14:34:27 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.1.1
-MIME-Version: 1.0
-Subject: ti-cgt-pru-native fails to build
+Message-Id: <20160607220830.D9E9552A5B@arago-project.org>
+Date: Tue,  7 Jun 2016 22:08:30 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ipumm-fw: bump for codec updates and bugfixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,39 +33,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2016 12:39:35 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Jun 2016 22:08:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi all,
+Module: meta-ti
+Branch: krogoth
+Commit: c0c9802a6842bb28e392a78f0e749801588de739
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c0c9802a6842bb28e392a78f0e749801588de739
 
-I am currently trying to create load for PRU core on Beaglebone Black. I
-have some PASM code I want to compile and copy to root filesystem.
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Jun  2 23:21:26 2016 +0000
 
-I added following directive to my recipe:
+ipumm-fw: bump for codec updates and bugfixes
 
-DEPENDS = "ti-cgt-pru-native"
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-but the build of ti-cgt-pru-native fails with QA errors complaining
-about wrong license files:
+---
 
-ERROR: ti-cgt-pru-native-2.1.1-r0 do_configure: QA Issue: ti-cgt-pru-native: LIC_FILES_CHKSUM points to an invalid file:
-/home/maciejjo/yocto/build-glibc/work/x86_64-linux/ti-cgt-pru-native/2.1.1-r0/ti-cgt-pru-2.1.1/ti-cgt-pru_2.1.1/LICENSE.txt [license-checksum]
-ERROR: ti-cgt-pru-native-2.1.1-r0 do_configure: Fatal QA errors found, failing task.
-ERROR: ti-cgt-pru-native-2.1.1-r0 do_configure: Function failed: do_qa_configure ERROR: Logfile of failure stored in:
-/home/maciejjo/yocto/build-glibc/work/x86_64-linux/ti-cgt-pru-native/2.1.1-r0/temp/log.do_configure.88
-ERROR: Task 1028 (virtual:native:/home/maciejjo/devel/openembedded/project/build/meta-ti/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb,
-do_configure) failed with exit code '1'
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-Are there any additional steps needed to be done before building this
-recipe, or is this an error in file location?
-
-And more importantly, is what I'm trying to do the correct method for
-building PRU applications with meta-ti?
-
-Br,
-
--- 
-Maciej Sobkowski
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index f415599..32d51cb 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,11 +17,11 @@ RDEPENDS_${PN} = " libdce"
+ 
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ 
+-SRCREV = "c579a48d3b201fe276e406add64512eb5e90e75f"
++SRCREV = "a55e6e7b3a8b6917155f3f7ed6c10ed6170df3e7"
+ 
+ S = "${WORKDIR}/git"
+ 
+-PV = "3.00.10.00"
++PV = "3.00.10.01"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+@@ -66,4 +66,4 @@ ALTERNATIVE_PRIORITY = "20"
+ 
+ FILES_${PN} += "${base_libdir}/firmware/*"
+ 
+-PR = "r1"
++PR = "r0"
 
 
