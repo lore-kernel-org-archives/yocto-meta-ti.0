@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 15391E00DE7; Fri, 10 Jun 2016 10:33:24 -0700 (PDT)
+	id 17BD9E00DE2; Fri, 10 Jun 2016 10:33:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2108E00DE3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0D7EE00DE2
 	for <meta-ti@yoctoproject.org>; Fri, 10 Jun 2016 10:33:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D091C52A7A; Fri, 10 Jun 2016 17:33:18 +0000 (UTC)
+	id E824B52A76; Fri, 10 Jun 2016 17:33:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160610173318.D091C52A7A@arago-project.org>
+Message-Id: <20160610173318.E824B52A76@arago-project.org>
 Date: Fri, 10 Jun 2016 17:33:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : libdce: move from meta-arago
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 10 Jun 2016 17:33:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: c51663d849de413e73e06cf8c2c5a9f4d15eaf88
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c51663d849de413e73e06cf8c2c5a9f4d15eaf88
+Branch: master
+Commit: dc6bbf30a4f88200044383f0f45dec64fa9cd60d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dc6bbf30a4f88200044383f0f45dec64fa9cd60d
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Jun  8 05:18:49 2016 +0000
