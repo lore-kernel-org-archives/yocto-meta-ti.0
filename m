@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D9FCDE00AAB; Mon, 20 Jun 2016 13:57:05 -0700 (PDT)
+	id DBF40E00B52; Mon, 20 Jun 2016 13:57:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C6E9E00AAB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C6D5E00AA2
 	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DD34852AC7; Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
+	id F0B3052AC8; Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160620205653.DD34852AC7@arago-project.org>
+Message-Id: <20160620205653.F0B3052AC8@arago-project.org>
 Date: Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-test-pruss: Add recipe to build uio pruss test firmware
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.13, use new defconfig builder
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,57 +33,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2016 20:57:05 -0000
+X-List-Received-Date: Mon, 20 Jun 2016 20:57:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 57c2c15749f87d74cfa62682e86b9e73f6272f21
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=57c2c15749f87d74cfa62682e86b9e73f6272f21
+Commit: 09715125ddfaa131ff64465cab5035e5a3452eda
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=09715125ddfaa131ff64465cab5035e5a3452eda
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Jun 21 00:53:29 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Jun 21 02:05:09 2016 +0000
 
-uio-test-pruss: Add recipe to build uio pruss test firmware
+linux-ti-staging: update to 4.4.13, use new defconfig builder
 
-This firmware images are expected to be used with uio pruss test code
+Convert to using tisdk configs from defconfig_map processed by defconfig_builder.
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/uio-test-pruss/uio-test-pruss_git.bb |   23 +++++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
+ .../linux/linux-ti-staging-4.4/defconfig           |    2 +-
+ .../linux/linux-ti-staging-4.4/dra7xx/defconfig    |    1 +
+ .../linux/linux-ti-staging-4.4/k2g-evm/defconfig   |    1 +
+ .../linux/linux-ti-staging-4.4/keystone/defconfig  |    2 +-
+ .../linux/linux-ti-staging-4.4/ti33x/defconfig     |    1 +
+ .../linux/linux-ti-staging-4.4/ti43x/defconfig     |    1 +
+ .../linux/linux-ti-staging-rt-4.4/defconfig        |    2 +-
+ .../linux/linux-ti-staging-rt-4.4/dra7xx/defconfig |    1 +
+ .../linux-ti-staging-rt-4.4/k2g-evm/defconfig      |    1 +
+ .../linux-ti-staging-rt-4.4/keystone/defconfig     |    2 +-
+ .../linux/linux-ti-staging-rt-4.4/ti33x/defconfig  |    1 +
+ .../linux/linux-ti-staging-rt-4.4/ti43x/defconfig  |    1 +
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb    |    2 +-
+ .../linux/linux-ti-staging-systest-4.4/defconfig   |    2 +-
+ .../linux-ti-staging-systest-4.4/dra7xx/defconfig  |    1 +
+ .../linux-ti-staging-systest-4.4/k2g-evm/defconfig |    1 +
+ .../keystone/defconfig                             |    2 +-
+ .../linux-ti-staging-systest-4.4/ti33x/defconfig   |    1 +
+ .../linux-ti-staging-systest-4.4/ti43x/defconfig   |    1 +
+ recipes-kernel/linux/linux-ti-staging_4.4.bb       |   15 +----
+ recipes-kernel/linux/setup-defconfig.inc           |   66 +++++++++++---------
+ 21 files changed, 58 insertions(+), 49 deletions(-)
 
-diff --git a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-new file mode 100644
-index 0000000..ee8204a
---- /dev/null
-+++ b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Provides test pruss firmware for uio based tests"
-+LICENSE = "BSD-3-Clause"
-+PV = "1.0.0.0"
-+require recipes-ti/includes/ti-paths.inc
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "ti-cgt-pru-native"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git;protocol=git;branch=${BRANCH}"
-+LIC_FILES_CHKSUM = "file://Makefile;startline=1;endline=31;md5=0ee4f2c42eb6b04e37859bb55a18b144"
-+
-+# Corresponds to version 01.00.00.00
-+SRCREV = "f04b91b84331c9a12c897e4eb2836a0a3e3a5fae"
-+
-+COMPATIBLE_MACHINE = "am57xx"
-+EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR}"
-+
-+do_install() {
-+    install -d ${D}${bindir}/
-+    cp -r *.bin ${D}${bindir}/
-+}
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=09715125ddfaa131ff64465cab5035e5a3452eda
 
