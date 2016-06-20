@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E13BFE00B74; Mon, 20 Jun 2016 13:56:59 -0700 (PDT)
+	id E95D9E009F6; Mon, 20 Jun 2016 13:56:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A257AE009CA
-	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:53 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 258C8E009F6
+	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B452152A8E; Mon, 20 Jun 2016 20:56:52 +0000 (UTC)
+	id AD68F52AB2; Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160620205652.B452152A8E@arago-project.org>
-Date: Mon, 20 Jun 2016 20:56:52 +0000 (UTC)
+Message-Id: <20160620205653.AD68F52AB2@arago-project.org>
+Date: Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-module-drv: Update to new version 2.1.0.0
+Subject: Sam Nelson : ti-ipc: Update to new patch version 3.43.01.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,80 +37,58 @@ X-List-Received-Date: Mon, 20 Jun 2016 20:57:00 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 1eae6f96fed1441427ccccd67f58b698f0c335a1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1eae6f96fed1441427ccccd67f58b698f0c335a1
+Branch: master
+Commit: f9897495ca1dda7ef62c301a43ccfa7c283c3ec3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9897495ca1dda7ef62c301a43ccfa7c283c3ec3
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Jun 21 02:04:12 2016 +0000
+Date:   Sat Jun 18 03:44:38 2016 +0000
 
-uio-module-drv: Update to new version 2.1.0.0
+ti-ipc: Update to new patch version 3.43.01.02
 
-One API change in read/write
-Additional test code added
+Only examples and documentation updated
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../uio-module-drv/uio-module-drv-test_git.bb      |   18 +++++++++++++++---
- recipes-bsp/uio-module-drv/uio-module-drv.inc      |    6 +++---
- 2 files changed, 18 insertions(+), 6 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
+ recipes-ti/ipc/ti-ipc.inc         |    2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-index 3134a03..1923b36 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-@@ -2,16 +2,28 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 4c82f35..740de53 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -26,11 +26,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
- include uio-module-drv.inc
+-# Corresponds to tag: 3.43.00.01
+-SRCREV_ipc-examples = "54df963e83f2fd613f794dc3b1b72c8ed855e0ac"
++# Corresponds to tag: 3.43.01.02
++SRCREV_ipc-examples = "c2324cdcda4f6641cade25f95fa30996fb94bca0"
  
--PR = "r1"
-+PR = "r0"
+-# Corresponds to tag: 3.43.00.01
+-SRCREV_ipc-metadata = "8829b3cf2068c87140ac062849c33cd1a21de636"
++# Corresponds to tag: 3.43.01.02
++SRCREV_ipc-metadata = "c3fc63be358c8c9a429366ebf54fe03812671129"
  
--COMPATIBLE_MACHINE = "keystone"
-+COMPATIBLE_MACHINE = "keystone|am57xx-evm"
-+
-+DEVICE_NAME_am57xx-evm = "am57xx"
-+DEVICE_NAME_keystone-evm = "keystone"
- RDEPENDS_${PN} = "uio-module-drv"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 6e09c3f..a74b4c1 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -16,7 +16,7 @@ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};na
+ SRCREV = "${TI_IPC_SRCREV}"
  
- do_compile() {
--	oe_runmake -C ${S} test
-+	oe_runmake -C ${S} test "DEVICE=${DEVICE_NAME}"
- }
+ S = "${WORKDIR}/git"
+-PV = "3.43.00.01"
++PV = "3.43.01.02"
+ INC_PR = "r0"
  
- do_install() {
- 	install -d ${D}${bindir}/
-+	install -c -m 755 ${S}/test/uio_mem_test ${D}${bindir}/.
-+	install -c -m 755 ${S}/test/uio_int_test ${D}${bindir}/.
-+}
-+
-+do_install_append_keystone () {
- 	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
- }
-+
-+do_install_append_am57xx-evm () {
-+	install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
-+}
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-index 161c45b..88eab76 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-@@ -2,10 +2,10 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
- 
- BRANCH = "master"
--# This corresponds to version 02.00.00.00
--SRCREV = "6a7eda36e390658593a5b8d87b0f00beb3997240"
-+# This corresponds to version 02.01.00.00
-+SRCREV = "19761495883bf8fb2670b0929d255135bd295dcb"
- 
--PV = "2.0.0.0+git${SRCPV}"
-+PV = "2.1.0.0+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
- 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
