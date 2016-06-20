@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C58A4E00B54; Mon, 20 Jun 2016 13:56:57 -0700 (PDT)
+	id C7E5BE00984; Mon, 20 Jun 2016 13:56:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A10C5E00984
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9FBE4E0091D
 	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:53 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E4C3D52AA3; Mon, 20 Jun 2016 20:56:52 +0000 (UTC)
+	id 79DD352A82; Mon, 20 Jun 2016 20:56:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160620205652.E4C3D52AA3@arago-project.org>
+Message-Id: <20160620205652.79DD352A82@arago-project.org>
 Date: Mon, 20 Jun 2016 20:56:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update to new version 2.0.1.2
+Subject: Sam Nelson : ti-ipc: Update to new patch version 3.43.01.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,57 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 82a1312883989330c173544f0b149eb5340eb47d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=82a1312883989330c173544f0b149eb5340eb47d
+Commit: eb25debd4941a189104359edefd443b658f10e1d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eb25debd4941a189104359edefd443b658f10e1d
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Jun 21 02:04:13 2016 +0000
+Date:   Sat Jun 18 03:44:38 2016 +0000
 
-mpm-transport: Update to new version 2.0.1.2
+ti-ipc: Update to new patch version 3.43.01.02
 
-- Adapts to API change in uio-module-drv
+Only examples and documentation updated
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
+ recipes-ti/ipc/ti-ipc.inc         |    2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index 473de20..280a5e1 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -15,11 +15,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 4c82f35..740de53 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -26,11 +26,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
- BRANCH = "master"
--# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.01
--SRCREV = "489b669540c5545125ab5d9f3f2cdb5ec5fc09dd"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.01.02
-+SRCREV = "5c1f177b8d5802227dfe7e86fc026620e1e10189"
+-# Corresponds to tag: 3.43.00.01
+-SRCREV_ipc-examples = "54df963e83f2fd613f794dc3b1b72c8ed855e0ac"
++# Corresponds to tag: 3.43.01.02
++SRCREV_ipc-examples = "c2324cdcda4f6641cade25f95fa30996fb94bca0"
  
--PV = "2.0.0.1"
--PR = "r1"
-+PV = "2.0.1.2"
-+PR = "r0"
+-# Corresponds to tag: 3.43.00.01
+-SRCREV_ipc-metadata = "8829b3cf2068c87140ac062849c33cd1a21de636"
++# Corresponds to tag: 3.43.01.02
++SRCREV_ipc-metadata = "c3fc63be358c8c9a429366ebf54fe03812671129"
  
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
- EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 6e09c3f..a74b4c1 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -16,7 +16,7 @@ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};na
+ SRCREV = "${TI_IPC_SRCREV}"
+ 
+ S = "${WORKDIR}/git"
+-PV = "3.43.00.01"
++PV = "3.43.01.02"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
