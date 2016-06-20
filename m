@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 35D0DE009F4; Mon, 20 Jun 2016 13:57:01 -0700 (PDT)
+	id 37212E00A7F; Mon, 20 Jun 2016 13:57:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2DD45E00A7F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2470BE009F4
 	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BD05452AC3; Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
+	id 7412652AA6; Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160620205653.BD05452AC3@arago-project.org>
+Message-Id: <20160620205653.7412652AA6@arago-project.org>
 Date: Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-module-drv: Update to new version 2.1.0.0
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.13, use new defconfig builder
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,80 +37,43 @@ X-List-Received-Date: Mon, 20 Jun 2016 20:57:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: baa05bfea30db2039c686da1c92bd5d7df5f5f3c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=baa05bfea30db2039c686da1c92bd5d7df5f5f3c
+Branch: krogoth
+Commit: f71f4fd821696bd9e16df932d7d22a1819799d87
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f71f4fd821696bd9e16df932d7d22a1819799d87
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Jun 21 02:04:12 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Jun 21 02:05:09 2016 +0000
 
-uio-module-drv: Update to new version 2.1.0.0
+linux-ti-staging: update to 4.4.13, use new defconfig builder
 
-One API change in read/write
-Additional test code added
+Convert to using tisdk configs from defconfig_map processed by defconfig_builder.
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../uio-module-drv/uio-module-drv-test_git.bb      |   18 +++++++++++++++---
- recipes-bsp/uio-module-drv/uio-module-drv.inc      |    6 +++---
- 2 files changed, 18 insertions(+), 6 deletions(-)
+ .../linux/linux-ti-staging-4.4/defconfig           |    2 +-
+ .../linux/linux-ti-staging-4.4/dra7xx/defconfig    |    1 +
+ .../linux/linux-ti-staging-4.4/k2g-evm/defconfig   |    1 +
+ .../linux/linux-ti-staging-4.4/keystone/defconfig  |    2 +-
+ .../linux/linux-ti-staging-4.4/ti33x/defconfig     |    1 +
+ .../linux/linux-ti-staging-4.4/ti43x/defconfig     |    1 +
+ .../linux/linux-ti-staging-rt-4.4/defconfig        |    2 +-
+ .../linux/linux-ti-staging-rt-4.4/dra7xx/defconfig |    1 +
+ .../linux-ti-staging-rt-4.4/k2g-evm/defconfig      |    1 +
+ .../linux-ti-staging-rt-4.4/keystone/defconfig     |    2 +-
+ .../linux/linux-ti-staging-rt-4.4/ti33x/defconfig  |    1 +
+ .../linux/linux-ti-staging-rt-4.4/ti43x/defconfig  |    1 +
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb    |    2 +-
+ .../linux/linux-ti-staging-systest-4.4/defconfig   |    2 +-
+ .../linux-ti-staging-systest-4.4/dra7xx/defconfig  |    1 +
+ .../linux-ti-staging-systest-4.4/k2g-evm/defconfig |    1 +
+ .../keystone/defconfig                             |    2 +-
+ .../linux-ti-staging-systest-4.4/ti33x/defconfig   |    1 +
+ .../linux-ti-staging-systest-4.4/ti43x/defconfig   |    1 +
+ recipes-kernel/linux/linux-ti-staging_4.4.bb       |   15 +----
+ recipes-kernel/linux/setup-defconfig.inc           |   66 +++++++++++---------
+ 21 files changed, 58 insertions(+), 49 deletions(-)
 
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-index 3134a03..1923b36 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-@@ -2,16 +2,28 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
- 
- include uio-module-drv.inc
- 
--PR = "r1"
-+PR = "r0"
- 
--COMPATIBLE_MACHINE = "keystone"
-+COMPATIBLE_MACHINE = "keystone|am57xx-evm"
-+
-+DEVICE_NAME_am57xx-evm = "am57xx"
-+DEVICE_NAME_keystone-evm = "keystone"
- RDEPENDS_${PN} = "uio-module-drv"
- 
- do_compile() {
--	oe_runmake -C ${S} test
-+	oe_runmake -C ${S} test "DEVICE=${DEVICE_NAME}"
- }
- 
- do_install() {
- 	install -d ${D}${bindir}/
-+	install -c -m 755 ${S}/test/uio_mem_test ${D}${bindir}/.
-+	install -c -m 755 ${S}/test/uio_int_test ${D}${bindir}/.
-+}
-+
-+do_install_append_keystone () {
- 	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
- }
-+
-+do_install_append_am57xx-evm () {
-+	install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
-+}
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-index 161c45b..88eab76 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
-@@ -2,10 +2,10 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
- 
- BRANCH = "master"
--# This corresponds to version 02.00.00.00
--SRCREV = "6a7eda36e390658593a5b8d87b0f00beb3997240"
-+# This corresponds to version 02.01.00.00
-+SRCREV = "19761495883bf8fb2670b0929d255135bd295dcb"
- 
--PV = "2.0.0.0+git${SRCPV}"
-+PV = "2.1.0.0+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
- 
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=f71f4fd821696bd9e16df932d7d22a1819799d87
 
