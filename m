@@ -1,35 +1,38 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 42DF6E0091D; Mon, 20 Jun 2016 11:53:36 -0700 (PDT)
+	id 2F8C4E009CB; Mon, 20 Jun 2016 13:04:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3DD1E008BC
-	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 11:53:32 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DA8CCE0091D
+	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:04:16 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5KIrVLP015124
-	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:53:31 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5KK3Z5L013009
+	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 15:03:35 -0500
 Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5KIrVgS020911
-	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:53:31 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5KK4FIO022189
+	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 15:04:15 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 20 Jun 2016 13:53:30 -0500
+	Mon, 20 Jun 2016 15:04:15 -0500
 Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u5KIrVQg012544;	Mon, 20 Jun 2016 13:53:31 -0500
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u5KK4FJC009666;	Mon, 20 Jun 2016 15:04:15 -0500
 From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>, <j-stiffler@ti.com>
-Date: Mon, 20 Jun 2016 14:53:29 -0400
-Message-ID: <1466448809-11227-1-git-send-email-sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 20 Jun 2016 16:04:12 -0400
+Message-ID: <1466453053-11731-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] uio-test-pruss: Add recipe to build uio pruss test firmware
+Subject: [PATCH v2 1/2] uio-module-drv: Update to new version 2.1.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,46 +45,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2016 18:53:36 -0000
+X-List-Received-Date: Mon, 20 Jun 2016 20:04:24 -0000
 Content-Type: text/plain
 
-This firmware images are expected to be used with uio pruss test code
+One API change in read/write
+Additional test code added
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-ti/uio-test-pruss/uio-test-pruss_git.bb | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
+ recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb | 18 +++++++++++++++---
+ recipes-bsp/uio-module-drv/uio-module-drv.inc         |  6 +++---
+ 2 files changed, 18 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-new file mode 100644
-index 0000000..ee8204a
---- /dev/null
-+++ b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Provides test pruss firmware for uio based tests"
-+LICENSE = "BSD-3-Clause"
-+PV = "1.0.0.0"
-+require recipes-ti/includes/ti-paths.inc
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+index 3134a03..1923b36 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+@@ -2,16 +2,28 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
+ 
+ include uio-module-drv.inc
+ 
+-PR = "r1"
++PR = "r0"
+ 
+-COMPATIBLE_MACHINE = "keystone"
++COMPATIBLE_MACHINE = "keystone|am57xx-evm"
 +
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "ti-cgt-pru-native"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git;protocol=git;branch=${BRANCH}"
-+LIC_FILES_CHKSUM = "file://Makefile;startline=1;endline=31;md5=0ee4f2c42eb6b04e37859bb55a18b144"
-+
-+# Corresponds to version 01.00.00.00
-+SRCREV = "f04b91b84331c9a12c897e4eb2836a0a3e3a5fae"
-+
-+COMPATIBLE_MACHINE = "am57xx"
-+EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR}"
-+
-+do_install() {
-+    install -d ${D}${bindir}/
-+    cp -r *.bin ${D}${bindir}/
++DEVICE_NAME_am57xx-evm = "am57xx"
++DEVICE_NAME_keystone-evm = "keystone"
+ RDEPENDS_${PN} = "uio-module-drv"
+ 
+ do_compile() {
+-	oe_runmake -C ${S} test
++	oe_runmake -C ${S} test "DEVICE=${DEVICE_NAME}"
+ }
+ 
+ do_install() {
+ 	install -d ${D}${bindir}/
++	install -c -m 755 ${S}/test/uio_mem_test ${D}${bindir}/.
++	install -c -m 755 ${S}/test/uio_int_test ${D}${bindir}/.
 +}
++
++do_install_append_keystone () {
+ 	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
+ }
++
++do_install_append_am57xx-evm () {
++	install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
++}
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+index 161c45b..88eab76 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
++++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+@@ -2,10 +2,10 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
+ 
+ BRANCH = "master"
+-# This corresponds to version 02.00.00.00
+-SRCREV = "6a7eda36e390658593a5b8d87b0f00beb3997240"
++# This corresponds to version 02.01.00.00
++SRCREV = "19761495883bf8fb2670b0929d255135bd295dcb"
+ 
+-PV = "2.0.0.0+git${SRCPV}"
++PV = "2.1.0.0+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
+ 
 -- 
 1.9.1
 
