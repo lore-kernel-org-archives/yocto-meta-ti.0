@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EDF95E009CA; Mon, 20 Jun 2016 13:56:59 -0700 (PDT)
+	id 35D0DE009F4; Mon, 20 Jun 2016 13:57:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A37D0E009CB
-	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:53 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2DD45E00A7F
+	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:55 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1C35F52AA4; Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
+	id BD05452AC3; Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160620205653.1C35F52AA4@arago-project.org>
+Message-Id: <20160620205653.BD05452AC3@arago-project.org>
 Date: Mon, 20 Jun 2016 20:56:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-test-pruss: Add recipe to build uio pruss test firmware
+Subject: Sam Nelson : uio-module-drv: Update to new version 2.1.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,57 +33,84 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2016 20:57:00 -0000
+X-List-Received-Date: Mon, 20 Jun 2016 20:57:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: cbfd89ceb79d8a390bda673cf4046c63c6370f5f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cbfd89ceb79d8a390bda673cf4046c63c6370f5f
+Branch: master
+Commit: baa05bfea30db2039c686da1c92bd5d7df5f5f3c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=baa05bfea30db2039c686da1c92bd5d7df5f5f3c
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Jun 21 00:53:29 2016 +0000
+Date:   Tue Jun 21 02:04:12 2016 +0000
 
-uio-test-pruss: Add recipe to build uio pruss test firmware
+uio-module-drv: Update to new version 2.1.0.0
 
-This firmware images are expected to be used with uio pruss test code
+One API change in read/write
+Additional test code added
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/uio-test-pruss/uio-test-pruss_git.bb |   23 +++++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
+ .../uio-module-drv/uio-module-drv-test_git.bb      |   18 +++++++++++++++---
+ recipes-bsp/uio-module-drv/uio-module-drv.inc      |    6 +++---
+ 2 files changed, 18 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-new file mode 100644
-index 0000000..ee8204a
---- /dev/null
-+++ b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Provides test pruss firmware for uio based tests"
-+LICENSE = "BSD-3-Clause"
-+PV = "1.0.0.0"
-+require recipes-ti/includes/ti-paths.inc
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+index 3134a03..1923b36 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+@@ -2,16 +2,28 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
+ 
+ include uio-module-drv.inc
+ 
+-PR = "r1"
++PR = "r0"
+ 
+-COMPATIBLE_MACHINE = "keystone"
++COMPATIBLE_MACHINE = "keystone|am57xx-evm"
 +
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "ti-cgt-pru-native"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git;protocol=git;branch=${BRANCH}"
-+LIC_FILES_CHKSUM = "file://Makefile;startline=1;endline=31;md5=0ee4f2c42eb6b04e37859bb55a18b144"
-+
-+# Corresponds to version 01.00.00.00
-+SRCREV = "f04b91b84331c9a12c897e4eb2836a0a3e3a5fae"
-+
-+COMPATIBLE_MACHINE = "am57xx"
-+EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR}"
-+
-+do_install() {
-+    install -d ${D}${bindir}/
-+    cp -r *.bin ${D}${bindir}/
++DEVICE_NAME_am57xx-evm = "am57xx"
++DEVICE_NAME_keystone-evm = "keystone"
+ RDEPENDS_${PN} = "uio-module-drv"
+ 
+ do_compile() {
+-	oe_runmake -C ${S} test
++	oe_runmake -C ${S} test "DEVICE=${DEVICE_NAME}"
+ }
+ 
+ do_install() {
+ 	install -d ${D}${bindir}/
++	install -c -m 755 ${S}/test/uio_mem_test ${D}${bindir}/.
++	install -c -m 755 ${S}/test/uio_int_test ${D}${bindir}/.
 +}
++
++do_install_append_keystone () {
+ 	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
+ }
++
++do_install_append_am57xx-evm () {
++	install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
++}
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+index 161c45b..88eab76 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
++++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+@@ -2,10 +2,10 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
+ 
+ BRANCH = "master"
+-# This corresponds to version 02.00.00.00
+-SRCREV = "6a7eda36e390658593a5b8d87b0f00beb3997240"
++# This corresponds to version 02.01.00.00
++SRCREV = "19761495883bf8fb2670b0929d255135bd295dcb"
+ 
+-PV = "2.0.0.0+git${SRCPV}"
++PV = "2.1.0.0+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
+ 
 
 
