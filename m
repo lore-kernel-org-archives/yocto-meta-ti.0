@@ -1,39 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D7B9BE009CA; Mon, 20 Jun 2016 13:52:05 -0700 (PDT)
+	id C58A4E00B54; Mon, 20 Jun 2016 13:56:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.23 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E703E0091D
-	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:52:02 -0700 (PDT)
-Received: from vz-proxy-m001.mx.aol.com ([64.236.83.14])
-	by vms173023.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O9300A4E8MC9U90@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 20 Jun 2016 15:51:49 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=MJxOpqxZADbEbEImuSX/mw==:117
-	a=pD_ry4oyNxEA:10 a=sozttTNsAAAA:8	a=0UKH5BiQkwmWfwo1rRcA:9
-Received: by 100.15.86.14 with SMTP id 7a9c155c; Mon, 20 Jun 2016 20:51:49 GMT
-Received: from elrond.denix (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 807A9162044;	Mon,
-	20 Jun 2016 16:51:48 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A10C5E00984
+	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 13:56:53 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id E4C3D52AA3; Mon, 20 Jun 2016 20:56:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 20 Jun 2016 16:51:47 -0400
-Message-id: <20160620205147.21312-1-denis@denix.org>
-X-Mailer: git-send-email 2.9.0
-Subject: [PATCH] u-boot-ti-staging: update to ti2016.02-rc1 tag
+Message-Id: <20160620205652.E4C3D52AA3@arago-project.org>
+Date: Mon, 20 Jun 2016 20:56:52 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : mpm-transport: Update to new version 2.0.1.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,37 +33,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2016 20:52:05 -0000
+X-List-Received-Date: Mon, 20 Jun 2016 20:56:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: krogoth
+Commit: 82a1312883989330c173544f0b149eb5340eb47d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=82a1312883989330c173544f0b149eb5340eb47d
 
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Tue Jun 21 02:04:13 2016 +0000
+
+mpm-transport: Update to new version 2.0.1.2
+
+- Adapts to API change in uio-module-drv
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 057b5f0..008cbdd 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+---
+
+ recipes-ti/mpm-transport/mpm-transport_git.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 473de20..280a5e1 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -15,11 +15,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ BRANCH = "master"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.00.01
+-SRCREV = "489b669540c5545125ab5d9f3f2cdb5ec5fc09dd"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.01.02
++SRCREV = "5c1f177b8d5802227dfe7e86fc026620e1e10189"
  
--PR = "r5"
-+PR = "r6"
- PV_append = "+git${SRCPV}"
+-PV = "2.0.0.1"
+-PR = "r1"
++PV = "2.0.1.2"
++PR = "r0"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "b4e185a8c3732f33d519453841f70236b8d29954"
-+SRCREV = "64be2163d8a42b16de72e5ed43ac349178597eca"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
--- 
-2.7.4
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
 
 
