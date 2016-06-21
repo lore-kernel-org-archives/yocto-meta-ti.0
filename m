@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 378A0E00708; Mon, 20 Jun 2016 21:48:48 -0700 (PDT)
+	id 3AA4EE007A2; Mon, 20 Jun 2016 21:48:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5FC2E00708
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6AF6E007A2
 	for <meta-ti@yoctoproject.org>; Mon, 20 Jun 2016 21:48:39 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1C66A52A8E; Tue, 21 Jun 2016 04:48:39 +0000 (UTC)
+	id DAE1352A82; Tue, 21 Jun 2016 04:48:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160621044839.1C66A52A8E@arago-project.org>
-Date: Tue, 21 Jun 2016 04:48:39 +0000 (UTC)
+Message-Id: <20160621044838.DAE1352A82@arago-project.org>
+Date: Tue, 21 Jun 2016 04:48:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : amx3-cm3: update to the latest for am3 ddr fixes
+Subject: Denys Dmytriyenko : netcp-pa-fw: update to version 3.0.1.17
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,37 +37,43 @@ X-List-Received-Date: Tue, 21 Jun 2016 04:48:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 667794c92b1359834c65e39b915bef4e349d584b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=667794c92b1359834c65e39b915bef4e349d584b
+Branch: krogoth
+Commit: 36519bd18fe7294b20f0d0178fc5442308d9360f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=36519bd18fe7294b20f0d0178fc5442308d9360f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Jun 21 04:44:33 2016 +0000
+Date:   Tue Jun 21 04:44:34 2016 +0000
 
-amx3-cm3: update to the latest for am3 ddr fixes
+netcp-pa-fw: update to version 3.0.1.17
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb |    4 ++--
+ recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index 7d4626b..448a5d3 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -4,9 +4,9 @@ LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+diff --git a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
+index 773ad7a..ffa6af2 100644
+--- a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
++++ b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "NETCP PA firmware for Keystone"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
  
- PV = "1.9.1"
--PR = "r2"
-+PR = "r3"
+-PV = "3.0.1.8"
++PV = "3.0.1.17"
+ PR = "r0"
  
--SRCREV = "730f0695ca2dda65abcff5763e8f108517bc0d43"
-+SRCREV = "97c2c32d0bc8ca0254710dcb5df055aa9a569ae6"
- BRANCH ?= "ti-v4.1.y"
+ CLEANBROKEN = "1"
+@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|k2e-evm"
  
- SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH}"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "dd8db49ed57f8ac448451cc5e54973c71a99faea"
++SRCREV = "f43b4f61315e3642e05edb9c58b098f9cc69fdb6"
+ BRANCH ?= "ti-linux-firmware-4.1.y"
+ 
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
 
 
