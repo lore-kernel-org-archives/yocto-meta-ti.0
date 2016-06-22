@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 39449E00AD8; Wed, 22 Jun 2016 08:14:01 -0700 (PDT)
+	id 3BC4AE00A44; Wed, 22 Jun 2016 08:14:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11C68E00A6D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10884E00A44
 	for <meta-ti@yoctoproject.org>; Wed, 22 Jun 2016 08:13:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7B00C52A4F; Wed, 22 Jun 2016 15:13:56 +0000 (UTC)
+	id 6597C52A35; Wed, 22 Jun 2016 15:13:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160622151356.7B00C52A4F@arago-project.org>
+Message-Id: <20160622151356.6597C52A35@arago-project.org>
 Date: Wed, 22 Jun 2016 15:13:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: add support for AM57xx HS platform
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 22 Jun 2016 15:14:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: d2cc0238c33a4835c545cecc7cb7c1511edf53dd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d2cc0238c33a4835c545cecc7cb7c1511edf53dd
+Branch: krogoth
+Commit: 18437aed99cb08d52bb4b256bc8440383ce716b9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=18437aed99cb08d52bb4b256bc8440383ce716b9
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Jun 22 20:49:09 2016 +0000
