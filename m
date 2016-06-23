@@ -1,38 +1,40 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A7EF7E00C55; Thu, 23 Jun 2016 05:48:34 -0700 (PDT)
+	id 034C0E00C5D; Thu, 23 Jun 2016 05:49:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
 	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C6B2E00C4B
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 05:48:31 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5NClg4b006458
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 07:47:42 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5NCmUII028305
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 07:48:30 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 23 Jun 2016 07:48:30 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A47A3E00C55
+	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 05:49:00 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5NCmBjR006730
+	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 07:48:11 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5NCmxWn005292
+	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 07:48:59 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 23 Jun 2016 07:48:59 -0500
 Received: from swubn04.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5NCmS1d024737;
-	Thu, 23 Jun 2016 07:48:29 -0500
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5NCmq9n007685;
+	Thu, 23 Jun 2016 07:48:58 -0500
 From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 23 Jun 2016 18:17:41 +0530
-Message-ID: <1466686061-6326-1-git-send-email-a0393906@ti.com>
+Date: Thu, 23 Jun 2016 18:18:04 +0530
+Message-ID: <1466686084-6369-2-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1466686084-6369-1-git-send-email-a0393906@ti.com>
+References: <1466686084-6369-1-git-send-email-a0393906@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH] libdce: add API for query remote proc information
+Subject: [PATCH 2/2] dspdce-fw: Update SRCREV for adding new API
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,33 +47,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2016 12:48:34 -0000
+X-List-Received-Date: Thu, 23 Jun 2016 12:49:02 -0000
 Content-Type: text/plain
 
-This update contains two main changes:
- * Fix for multimedia playback failure with core dumped
- * New API addition for querying remote proc information
+This API will allow querying remote core information
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- recipes-multimedia/libdce/libdce_3.00.10.01.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-bsp/dspdce-fw/dspdce-fw_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-multimedia/libdce/libdce_3.00.10.01.bb b/recipes-multimedia/libdce/libdce_3.00.10.01.bb
-index aa61cb6..7adb961 100644
---- a/recipes-multimedia/libdce/libdce_3.00.10.01.bb
-+++ b/recipes-multimedia/libdce/libdce_3.00.10.01.bb
-@@ -7,7 +7,9 @@ inherit autotools pkgconfig
- DEPENDS = "libdrm ti-ipc"
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+index 3979ce9..ee00833 100644
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "dra7xx"
  
- SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
--SRCREV = "4e9b02508ac3847df0af5c496a1be7b4ae082ad5"
-+SRCREV = "f83e785d2b98404fed9e3a6264bf4945c65abd12"
+ SRC_URI = "git://git.ti.com/glsdk/dspdce.git;protocol=git"
  
- S = "${WORKDIR}/git"
- EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
-+
-+PR = "r1"
+-SRCREV = "88705fd4584edd1289e4bb50658def936de90433"
++SRCREV = "3b9cea492f23d7dabb9ffa0e69631b858ba8e90a"
+ 
+ PV = "1.00.00.06"
+ 
+@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ 
+-PR = "r2"
++PR = "r3"
+ inherit update-alternatives
+ 
+ DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
 -- 
 1.9.1
 
