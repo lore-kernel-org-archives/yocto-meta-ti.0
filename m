@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5C5F0E00D33; Fri, 24 Jun 2016 07:31:34 -0700 (PDT)
+	id 604FAE00C10; Fri, 24 Jun 2016 07:31:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 365D5E00C10
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37EDDE00D1E
 	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:31:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BA8E052AC3; Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
+	id A4F6652AC2; Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160624143127.BA8E052AC3@arago-project.org>
+Message-Id: <20160624143127.A4F6652AC2@arago-project.org>
 Date: Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm: Update SRCREV for adding new API
+Subject: Karthik Ramanan : libdce: add API for query remote proc information
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: f39872ef3fc710d69f21fdf5c983711ca7227aa8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f39872ef3fc710d69f21fdf5c983711ca7227aa8
+Commit: 980c0fa6d28bac74ea0485df1f598dfe4890c50b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=980c0fa6d28bac74ea0485df1f598dfe4890c50b
 
 Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Jun 23 18:48:03 2016 +0000
+Date:   Thu Jun 23 18:47:41 2016 +0000
 
-ipumm: Update SRCREV for adding new API
+libdce: add API for query remote proc information
 
-This API will allow querying remote core information
+This update contains two main changes:
+ * Fix for multimedia playback failure with core dumped
+ * New API addition for querying remote proc information
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-multimedia/libdce/libdce_3.00.10.01.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 32d51cb..331c25d 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,7 +17,7 @@ RDEPENDS_${PN} = " libdce"
+diff --git a/recipes-multimedia/libdce/libdce_3.00.10.01.bb b/recipes-multimedia/libdce/libdce_3.00.10.01.bb
+index aa61cb6..7adb961 100644
+--- a/recipes-multimedia/libdce/libdce_3.00.10.01.bb
++++ b/recipes-multimedia/libdce/libdce_3.00.10.01.bb
+@@ -7,7 +7,9 @@ inherit autotools pkgconfig
+ DEPENDS = "libdrm ti-ipc"
  
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
- 
--SRCREV = "a55e6e7b3a8b6917155f3f7ed6c10ed6170df3e7"
-+SRCREV = "1627fec802da688fe44c6b0cac43ff811b08f064"
+ SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
+-SRCREV = "4e9b02508ac3847df0af5c496a1be7b4ae082ad5"
++SRCREV = "f83e785d2b98404fed9e3a6264bf4945c65abd12"
  
  S = "${WORKDIR}/git"
- 
-@@ -66,4 +66,4 @@ ALTERNATIVE_PRIORITY = "20"
- 
- FILES_${PN} += "${base_libdir}/firmware/*"
- 
--PR = "r0"
+ EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
++
 +PR = "r1"
 
 
