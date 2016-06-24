@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8C398E00D1F; Fri, 24 Jun 2016 07:31:35 -0700 (PDT)
+	id 8EDC1E00D25; Fri, 24 Jun 2016 07:31:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3BC37E00D25
-	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:31:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5D98E00D26
+	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:31:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 87FFE52AC1; Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
+	id 38B3752AC9; Fri, 24 Jun 2016 14:31:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160624143127.87FFE52AC1@arago-project.org>
-Date: Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
+Message-Id: <20160624143128.38B3752AC9@arago-project.org>
+Date: Fri, 24 Jun 2016 14:31:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-module-drv-test: Updates to fix issues with Keystone platforms
+Subject: Karthik Ramanan : ipumm: Update SRCREV for adding new API
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,45 +37,43 @@ X-List-Received-Date: Fri, 24 Jun 2016 14:31:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: a71da0f8247d7b7d33dec6938b9c8f757600899c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a71da0f8247d7b7d33dec6938b9c8f757600899c
+Branch: master
+Commit: 941fbb4accedaadf6780536f72ff0f504b3a2e53
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=941fbb4accedaadf6780536f72ff0f504b3a2e53
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Jun 21 20:34:50 2016 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Thu Jun 23 18:48:03 2016 +0000
 
-uio-module-drv-test: Updates to fix issues with Keystone platforms
+ipumm: Update SRCREV for adding new API
 
-Made the package machine dependent due to content changes with platform
-Fixed DEVICE_NAME to keystone instead of keystone-evm
+This API will allow querying remote core information
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../uio-module-drv/uio-module-drv-test_git.bb      |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-index 1923b36..fd41b74 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-@@ -2,12 +2,13 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 32d51cb..331c25d 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,7 +17,7 @@ RDEPENDS_${PN} = " libdce"
  
- include uio-module-drv.inc
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ 
+-SRCREV = "a55e6e7b3a8b6917155f3f7ed6c10ed6170df3e7"
++SRCREV = "1627fec802da688fe44c6b0cac43ff811b08f064"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -66,4 +66,4 @@ ALTERNATIVE_PRIORITY = "20"
+ 
+ FILES_${PN} += "${base_libdir}/firmware/*"
  
 -PR = "r0"
 +PR = "r1"
- 
- COMPATIBLE_MACHINE = "keystone|am57xx-evm"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- DEVICE_NAME_am57xx-evm = "am57xx"
--DEVICE_NAME_keystone-evm = "keystone"
-+DEVICE_NAME_keystone = "keystone"
- RDEPENDS_${PN} = "uio-module-drv"
- 
- do_compile() {
 
 
