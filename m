@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F642E00D26; Fri, 24 Jun 2016 07:31:35 -0700 (PDT)
+	id 9E5BDE00D34; Fri, 24 Jun 2016 07:31:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A67C1E00D28
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7EADE00D29
 	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:31:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 26CFC52AC8; Fri, 24 Jun 2016 14:31:28 +0000 (UTC)
+	id 4A23952ACA; Fri, 24 Jun 2016 14:31:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160624143128.26CFC52AC8@arago-project.org>
+Message-Id: <20160624143128.4A23952ACA@arago-project.org>
 Date: Fri, 24 Jun 2016 14:31:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : libdce: add API for query remote proc information
+Subject: Karthik Ramanan : dspdce-fw: Update SRCREV for adding new API
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +33,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2016 14:31:35 -0000
+X-List-Received-Date: Fri, 24 Jun 2016 14:31:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d259985667ba2a37e7fda95d03ae038f18497a50
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d259985667ba2a37e7fda95d03ae038f18497a50
+Commit: 6e6a4d42a281760872e6b382c335444294f7411e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e6a4d42a281760872e6b382c335444294f7411e
 
 Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Jun 23 18:47:41 2016 +0000
+Date:   Thu Jun 23 18:48:04 2016 +0000
 
-libdce: add API for query remote proc information
+dspdce-fw: Update SRCREV for adding new API
 
-This update contains two main changes:
- * Fix for multimedia playback failure with core dumped
- * New API addition for querying remote proc information
+This API will allow querying remote core information
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-multimedia/libdce/libdce_3.00.10.01.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-multimedia/libdce/libdce_3.00.10.01.bb b/recipes-multimedia/libdce/libdce_3.00.10.01.bb
-index aa61cb6..7adb961 100644
---- a/recipes-multimedia/libdce/libdce_3.00.10.01.bb
-+++ b/recipes-multimedia/libdce/libdce_3.00.10.01.bb
-@@ -7,7 +7,9 @@ inherit autotools pkgconfig
- DEPENDS = "libdrm ti-ipc"
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+index 3979ce9..ee00833 100644
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "dra7xx"
  
- SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
--SRCREV = "4e9b02508ac3847df0af5c496a1be7b4ae082ad5"
-+SRCREV = "f83e785d2b98404fed9e3a6264bf4945c65abd12"
+ SRC_URI = "git://git.ti.com/glsdk/dspdce.git;protocol=git"
  
- S = "${WORKDIR}/git"
- EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
-+
-+PR = "r1"
+-SRCREV = "88705fd4584edd1289e4bb50658def936de90433"
++SRCREV = "3b9cea492f23d7dabb9ffa0e69631b858ba8e90a"
+ 
+ PV = "1.00.00.06"
+ 
+@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ 
+-PR = "r2"
++PR = "r3"
+ inherit update-alternatives
+ 
+ DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
 
 
