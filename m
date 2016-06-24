@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9E5BDE00D34; Fri, 24 Jun 2016 07:31:37 -0700 (PDT)
+	id EBCF0E00D25; Fri, 24 Jun 2016 07:43:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7EADE00D29
-	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:31:31 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB869E00C10
+	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:43:38 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4A23952ACA; Fri, 24 Jun 2016 14:31:28 +0000 (UTC)
+	id 3ABAE52A71; Fri, 24 Jun 2016 14:43:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160624143128.4A23952ACA@arago-project.org>
-Date: Fri, 24 Jun 2016 14:31:28 +0000 (UTC)
+Message-Id: <20160624144337.3ABAE52A71@arago-project.org>
+Date: Fri, 24 Jun 2016 14:43:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : dspdce-fw: Update SRCREV for adding new API
+Subject: Tag ti2016.02-rc1 : Denys Dmytriyenko : LCPD Core SDK ti2016.02-rc1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,50 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2016 14:31:37 -0000
+X-List-Received-Date: Fri, 24 Jun 2016 14:43:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 6e6a4d42a281760872e6b382c335444294f7411e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e6a4d42a281760872e6b382c335444294f7411e
+Branch: refs/tags/ti2016.02-rc1
+Tag:    632316bd1997b899dfd8f4bd6e25c56735327f16
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=632316bd1997b899dfd8f4bd6e25c56735327f16
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Jun 23 18:48:04 2016 +0000
+Tagger: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Jun 24 10:43:24 2016 -0400
 
-dspdce-fw: Update SRCREV for adding new API
-
-This API will allow querying remote core information
-
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index 3979ce9..ee00833 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "dra7xx"
- 
- SRC_URI = "git://git.ti.com/glsdk/dspdce.git;protocol=git"
- 
--SRCREV = "88705fd4584edd1289e4bb50658def936de90433"
-+SRCREV = "3b9cea492f23d7dabb9ffa0e69631b858ba8e90a"
- 
- PV = "1.00.00.06"
- 
-@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
- 
--PR = "r2"
-+PR = "r3"
- inherit update-alternatives
- 
- DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
-
+LCPD Core SDK ti2016.02-rc1
 
