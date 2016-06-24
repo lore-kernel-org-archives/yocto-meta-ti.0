@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 87DE3E00D33; Fri, 24 Jun 2016 07:31:35 -0700 (PDT)
+	id 8C398E00D1F; Fri, 24 Jun 2016 07:31:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39468E00D1F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3BC37E00D25
 	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:31:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DE7B752AC6; Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
+	id 87FFE52AC1; Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160624143127.DE7B752AC6@arago-project.org>
+Message-Id: <20160624143127.87FFE52AC1@arago-project.org>
 Date: Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : dspdce-fw: Update SRCREV for adding new API
+Subject: Sam Nelson : uio-module-drv-test: Updates to fix issues with Keystone platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 6e4d479296f703f26aca6086eeaa889cd462c5d3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e4d479296f703f26aca6086eeaa889cd462c5d3
+Commit: a71da0f8247d7b7d33dec6938b9c8f757600899c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a71da0f8247d7b7d33dec6938b9c8f757600899c
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Jun 23 18:48:04 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Tue Jun 21 20:34:50 2016 +0000
 
-dspdce-fw: Update SRCREV for adding new API
+uio-module-drv-test: Updates to fix issues with Keystone platforms
 
-This API will allow querying remote core information
+Made the package machine dependent due to content changes with platform
+Fixed DEVICE_NAME to keystone instead of keystone-evm
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../uio-module-drv/uio-module-drv-test_git.bb      |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index 3979ce9..ee00833 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "dra7xx"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+index 1923b36..fd41b74 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+@@ -2,12 +2,13 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
  
- SRC_URI = "git://git.ti.com/glsdk/dspdce.git;protocol=git"
+ include uio-module-drv.inc
  
--SRCREV = "88705fd4584edd1289e4bb50658def936de90433"
-+SRCREV = "3b9cea492f23d7dabb9ffa0e69631b858ba8e90a"
+-PR = "r0"
++PR = "r1"
  
- PV = "1.00.00.06"
+ COMPATIBLE_MACHINE = "keystone|am57xx-evm"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
  
-@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+ DEVICE_NAME_am57xx-evm = "am57xx"
+-DEVICE_NAME_keystone-evm = "keystone"
++DEVICE_NAME_keystone = "keystone"
+ RDEPENDS_${PN} = "uio-module-drv"
  
--PR = "r2"
-+PR = "r3"
- inherit update-alternatives
- 
- DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
+ do_compile() {
 
 
