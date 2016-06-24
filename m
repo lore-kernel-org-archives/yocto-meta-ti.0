@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 36260E00D23; Fri, 24 Jun 2016 09:06:17 -0700 (PDT)
+	id 3D7F8E00D26; Fri, 24 Jun 2016 09:06:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,34 +8,32 @@ X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
 	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.13 listed in list.dnswl.org]
+	*      [206.46.173.19 listed in list.dnswl.org]
 	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C685CE00C10
-	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 09:06:13 -0700 (PDT)
-Received: from vz-proxy-m008.mx.aol.com ([64.236.83.1])
-	by vms173013.mailsrvcs.net
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E7D9E009D8
+	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 09:06:07 -0700 (PDT)
+Received: from vz-proxy-m007.mx.aol.com ([64.236.83.14])
+	by vms173019.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O9A003HAA1RA510@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 24 Jun 2016 11:05:57 -0500 (CDT)
+	2014)) with ESMTPA id <0O9A000FKA1RVYA0@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 24 Jun 2016 11:05:52 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=IfeYs1eZmZ/JIJO4DN4ZPw==:117
-	a=pD_ry4oyNxEA:10 a=sozttTNsAAAA:8	a=XcAYZOngbdjtTmSQAg4A:9
-Received: by 100.15.86.14 with SMTP id 2f72f45b; Fri, 24 Jun 2016 16:05:57 GMT
+X-CMAE-Analysis: v=2.1 cv=MtGvkDue c=1 sm=1 tr=0	a=MJxOpqxZADbEbEImuSX/mw==:117
+	a=pD_ry4oyNxEA:10 a=sozttTNsAAAA:8	a=0UKH5BiQkwmWfwo1rRcA:9
+Received: by 100.15.86.14 with SMTP id 3c9f9904; Fri, 24 Jun 2016 16:05:52 GMT
 Received: from elrond.denix (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 4B10D162078;	Fri,
+	by gandalf.denix.org (Postfix) with ESMTP id 3E379162069;	Fri,
 	24 Jun 2016 12:05:51 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 24 Jun 2016 12:05:50 -0400
-Message-id: <20160624160550.17678-2-denis@denix.org>
+Date: Fri, 24 Jun 2016 12:05:49 -0400
+Message-id: <20160624160550.17678-1-denis@denix.org>
 X-Mailer: git-send-email 2.9.0
-In-reply-to: <20160624160550.17678-1-denis@denix.org>
-References: <20160624160550.17678-1-denis@denix.org>
-Subject: [PATCH 2/2] linux-ti-staging: update to ti2016.02-rc2 tag, update DTBs
+Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2016.02-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,59 +46,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2016 16:06:17 -0000
+X-List-Received-Date: Fri, 24 Jun 2016 16:06:18 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |  2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    | 11 +++++++----
- 2 files changed, 8 insertions(+), 5 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 03c4ee3..69ce45b 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 9318937..2df30bb 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--SRCREV = "047640ce9624f2d6456e743954761af73527fa91"
-+SRCREV = "15267e879ed4a76c73c40f2e305a20f9d93252ff"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 8c1272c..535a0b5 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -50,9 +50,12 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
- KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-revc.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
-+KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra7-evm-lcd-osd101t2587.dtb dra72-evm.dtb dra72-evm-revc.dtb \
-+                                dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb"
- KERNEL_DEVICETREE_dra7xx-hs-evm = "${KERNEL_DEVICETREE_dra7xx-evm}"
--KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am571x-idk.dtb am572x-idk.dtb am571x-idk-lcd-osd.dtb am572x-idk-lcd-osd.dtb"
-+KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am571x-idk.dtb am572x-idk.dtb \
-+                                am571x-idk-lcd-osd.dtb am572x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb am572x-idk-lcd-osd101t2587.dtb"
-+KERNEL_DEVICETREE_am57xx-hs-evm = "${KERNEL_DEVICETREE_am57xx-evm}"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-beagle-xm-ab.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
- KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
-@@ -69,11 +72,11 @@ S = "${WORKDIR}/git"
+-PR = "r7"
++PR = "r8"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "26c74f51ccb2e7c63bf10defcef646f2cb4a3ea4"
-+SRCREV = "6580f85400b48d55d06f11d6b75c056399123a72"
- PV = "4.4.13+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "64be2163d8a42b16de72e5ed43ac349178597eca"
++SRCREV = "b31e958440b381a4316ebceeb4c8286da4c561db"
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 -- 
 2.9.0
 
