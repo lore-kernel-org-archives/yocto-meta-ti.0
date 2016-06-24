@@ -1,38 +1,26 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BDA52E00D92; Fri, 24 Jun 2016 12:22:44 -0700 (PDT)
+	id B992DE00DA5; Fri, 24 Jun 2016 12:33:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8239EE00D90
-	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 12:22:40 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5OJLl07022015
-	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 14:21:47 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5OJMddV029989
-	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 14:22:40 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 24 Jun 2016 14:22:39 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u5OJMdVf031932;	Fri, 24 Jun 2016 14:22:39 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 24 Jun 2016 15:22:37 -0400
-Message-ID: <1466796157-33292-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH v2] ti-ipc: Update comment on IPC tag
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7199BE00D99
+	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 12:33:31 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C1A1D52ACC; Fri, 24 Jun 2016 19:33:30 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160624193330.C1A1D52ACC@arago-project.org>
+Date: Fri, 24 Jun 2016 19:33:30 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.02-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,35 +33,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2016 19:22:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 24 Jun 2016 19:33:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Updated tag added to ipc dev branch to the same commit id
-to avoid confusion.
+Module: meta-ti
+Branch: master
+Commit: 0131b5e6b5221937ae2e970d014f62ecbe83f976
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0131b5e6b5221937ae2e970d014f62ecbe83f976
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Jun 24 22:05:49 2016 +0000
+
+u-boot-ti-staging: update to ti2016.02-rc2 tag
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
-Removed PR bump
----
----
- recipes-ti/ipc/ti-ipc.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index a74b4c1..03e0b79 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,7 +8,7 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.43"
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 9318937..2df30bb 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--#Corresponds to 3.43.00.01
-+#Corresponds to 3.43.01.02
- TI_IPC_SRCREV = "9e6ebc02c14ed4150dad5d45d8a7e35258bf37ad"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
- BRANCH = "${TI_IPC_GIT_BRANCH}"
--- 
-1.9.1
+-PR = "r7"
++PR = "r8"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2016.05"
+ 
+-SRCREV = "64be2163d8a42b16de72e5ed43ac349178597eca"
++SRCREV = "b31e958440b381a4316ebceeb4c8286da4c561db"
+ 
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
