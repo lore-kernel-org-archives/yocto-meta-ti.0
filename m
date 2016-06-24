@@ -1,37 +1,26 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B6F99E00C55; Thu, 23 Jun 2016 05:50:05 -0700 (PDT)
+	id 5C5F0E00D33; Fri, 24 Jun 2016 07:31:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 67 seconds by postgrey-1.32 at yocto-www;
-	Thu, 23 Jun 2016 05:50:02 PDT
-Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F139E00C4B
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 05:50:02 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5NCmsv5027958
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 07:48:54 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5NCms5m028848
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jun 2016 07:48:54 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 23 Jun 2016 07:48:54 -0500
-Received: from swubn04.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5NCmq9m007685;
-	Thu, 23 Jun 2016 07:48:53 -0500
-From: Karthik Ramanan <a0393906@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 23 Jun 2016 18:18:03 +0530
-Message-ID: <1466686084-6369-1-git-send-email-a0393906@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH 1/2] ipumm: Update SRCREV for adding new API
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 365D5E00C10
+	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 07:31:28 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id BA8E052AC3; Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160624143127.BA8E052AC3@arago-project.org>
+Date: Fri, 24 Jun 2016 14:31:27 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Karthik Ramanan : ipumm: Update SRCREV for adding new API
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,15 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2016 12:50:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 24 Jun 2016 14:31:34 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: krogoth
+Commit: f39872ef3fc710d69f21fdf5c983711ca7227aa8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f39872ef3fc710d69f21fdf5c983711ca7227aa8
+
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Thu Jun 23 18:48:03 2016 +0000
+
+ipumm: Update SRCREV for adding new API
 
 This API will allow querying remote core information
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
 index 32d51cb..331c25d 100644
@@ -73,7 +75,5 @@ index 32d51cb..331c25d 100644
  
 -PR = "r0"
 +PR = "r1"
--- 
-1.9.1
 
 
