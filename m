@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B992DE00DA5; Fri, 24 Jun 2016 12:33:33 -0700 (PDT)
+	id B6A84E00DA7; Fri, 24 Jun 2016 12:33:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7199BE00D99
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E9B8E00AB4
 	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 12:33:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C1A1D52ACC; Fri, 24 Jun 2016 19:33:30 +0000 (UTC)
+	id AC63852ACB; Fri, 24 Jun 2016 19:33:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160624193330.C1A1D52ACC@arago-project.org>
+Message-Id: <20160624193330.AC63852ACB@arago-project.org>
 Date: Fri, 24 Jun 2016 19:33:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.02-rc2 tag
+Subject: Sam Nelson : ti-ipc: Update comment on IPC tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,37 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 0131b5e6b5221937ae2e970d014f62ecbe83f976
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0131b5e6b5221937ae2e970d014f62ecbe83f976
+Commit: c7ac506be8406bb011347e314d6c717c5a46b386
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c7ac506be8406bb011347e314d6c717c5a46b386
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Jun 24 22:05:49 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Sat Jun 25 01:22:37 2016 +0000
 
-u-boot-ti-staging: update to ti2016.02-rc2 tag
+ti-ipc: Update comment on IPC tag
 
+Updated tag added to ipc dev branch to the same commit id
+to avoid confusion.
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/ipc/ti-ipc.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 9318937..2df30bb 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index a74b4c1..03e0b79 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,7 +8,7 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.43"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+-#Corresponds to 3.43.00.01
++#Corresponds to 3.43.01.02
+ TI_IPC_SRCREV = "9e6ebc02c14ed4150dad5d45d8a7e35258bf37ad"
  
--PR = "r7"
-+PR = "r8"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "64be2163d8a42b16de72e5ed43ac349178597eca"
-+SRCREV = "b31e958440b381a4316ebceeb4c8286da4c561db"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
 
 
