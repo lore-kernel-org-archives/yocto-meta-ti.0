@@ -1,40 +1,37 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9A93BE00CE5; Mon, 27 Jun 2016 11:31:24 -0700 (PDT)
+	id 3A182E00CE5; Mon, 27 Jun 2016 11:31:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22860E00CC9
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 11:31:20 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5RIUIZf029749
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 13:30:18 -0500
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 820F7E00CCD
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 11:31:21 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5RIVKnD025606
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 13:31:20 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5RIVJtY028231
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5RIVKis020110
 	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 13:31:20 -0500
 Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 27 Jun 2016 13:31:19 -0500
+	Mon, 27 Jun 2016 13:31:20 -0500
 Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u5RIVICT031505;	Mon, 27 Jun 2016 13:31:19 -0500
+	u5RIVICU031505;	Mon, 27 Jun 2016 13:31:20 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 27 Jun 2016 14:31:05 -0400
-Message-ID: <1467052268-22676-3-git-send-email-jsobota@ti.com>
+Date: Mon, 27 Jun 2016 14:31:06 -0400
+Message-ID: <1467052268-22676-4-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <1467052268-22676-1-git-send-email-jsobota@ti.com>
 References: <1467052268-22676-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [master/krogoth][PATCH 3/6] pa-lld: Bump version
+Subject: [master/krogoth][PATCH 4/6] rm-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,38 +44,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2016 18:31:24 -0000
+X-List-Received-Date: Mon, 27 Jun 2016 18:31:25 -0000
 Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-bsp/pa-lld/pa-lld.inc |    8 ++++----
+ recipes-bsp/rm-lld/rm-lld.inc |    8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index c083bc2..6c51560 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -9,16 +9,16 @@ PA_LLD_GIT_PROTOCOL = "git"
- PA_LLD_GIT_BRANCH = "master"
- PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
+index 70d9b5b..4236fd2 100644
+--- a/recipes-bsp/rm-lld/rm-lld.inc
++++ b/recipes-bsp/rm-lld/rm-lld.inc
+@@ -7,15 +7,15 @@ RM_LLD_GIT_PROTOCOL = "git"
+ RM_LLD_GIT_BRANCH = "master"
+ RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
  
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.08A"
--PA_LLD_SRCREV = "9294e42fd5763555c28e46b51246bab439fd552e"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.12"
-+PA_LLD_SRCREV = "d3f3f5d93d3febc24099974bbc77e67c80a83b1e"
+-# Below commit ID corresponds to DEV.RM_LLD.02.02.00.01
+-RM_LLD_SRCREV = "841f2df9726f456d6c026c0aa03095699962d048"
++# Below commit ID corresponds to "DEV.RM_LLD.02.02.00.02"
++RM_LLD_SRCREV = "6165053f88d1ccb5083f797d24800d5400804647"
  
- BRANCH = "${PA_LLD_GIT_BRANCH}"
- SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
-             file://0001-makefile_armv7-fix-missing-separator-error.patch"
- SRCREV = "${PA_LLD_SRCREV}"
+ BRANCH = "${RM_LLD_GIT_BRANCH}"
+ SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${RM_LLD_SRCREV}"
  
--PV = "03.00.01.08"
--INC_PR = "r1"
-+PV = "03.00.01.12"
-+INC_PR = "r2"
+-PV = "02.02.00.01"
+-INC_PR = "r0"
++PV = "02.02.00.02"
++INC_PR = "r1"
  
- S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+ COMPATIBLE_MACHINE = "keystone"
  
 -- 
 1.7.10.4
