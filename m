@@ -1,26 +1,37 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D48B1E00D9D; Fri, 24 Jun 2016 12:33:35 -0700 (PDT)
+	id B9F74E00997; Mon, 27 Jun 2016 07:34:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76262E00DA3
-	for <meta-ti@yoctoproject.org>; Fri, 24 Jun 2016 12:33:31 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 777E952AC2; Fri, 24 Jun 2016 19:33:30 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160624193330.777E952AC2@arago-project.org>
-Date: Fri, 24 Jun 2016 19:33:30 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update comment on IPC tag
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7EB89E00971
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 07:34:41 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5REYeT3018941
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 09:34:40 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5REYeZC030015
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jun 2016 09:34:40 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 27 Jun 2016 09:34:39 -0500
+Received: from tigfxsrv.india.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u5REYc1I002488;	Mon, 27 Jun 2016 09:34:39 -0500
+From: Anand Balagopalakrishnan <anandb@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 27 Jun 2016 20:04:33 +0530
+Message-ID: <1467038074-1075-1-git-send-email-anandb@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH 1/2] ti-sgx-ddk-um: update srcrev and bump PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,42 +44,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2016 19:33:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Jun 2016 14:34:43 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: krogoth
-Commit: 13df93b1a41f766cd01a55fc8655717297d3e1a2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=13df93b1a41f766cd01a55fc8655717297d3e1a2
-
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Jun 25 01:22:37 2016 +0000
-
-ti-ipc: Update comment on IPC tag
-
-Updated tag added to ipc dev branch to the same commit id
-to avoid confusion.
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 ---
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-ti/ipc/ti-ipc.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index a74b4c1..03e0b79 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,7 +8,7 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.43"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index e5c5de6..b8adde0 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
--#Corresponds to 3.43.00.01
-+#Corresponds to 3.43.01.02
- TI_IPC_SRCREV = "9e6ebc02c14ed4150dad5d45d8a7e35258bf37ad"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "54ba970e33d3c13f726d7c035f3b5c3dcb74afdc"
++SRCREV = "4cdbb6b192fc5cac53695faca3c3f8be16ca871d"
  
- BRANCH = "${TI_IPC_GIT_BRANCH}"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ 
+ inherit update-rc.d
+ 
+-PR = "r12"
++PR = "r13"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
+-- 
+1.7.9.5
 
 
