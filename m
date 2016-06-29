@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6D67E00D79; Wed, 29 Jun 2016 14:12:01 -0700 (PDT)
+	id 58EBBE00D8B; Wed, 29 Jun 2016 14:12:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86AFDE00DA0
-	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:58 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14C00E00D8B
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A24152AC7; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
+	id A112B529A5; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211156.3A24152AC7@arago-project.org>
-Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
+Message-Id: <20160629211155.A112B529A5@arago-project.org>
+Date: Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : dfe-lld: Bump version
+Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: disable active power management
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +35,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jun 2016 21:12:01 -0000
+X-List-Received-Date: Wed, 29 Jun 2016 21:12:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 5a84f7d923b094beca7003e9db568d4b50300b4f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5a84f7d923b094beca7003e9db568d4b50300b4f
+Commit: 542b6d1fc2b2615bba3ca9d46d84098fc523aa03
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=542b6d1fc2b2615bba3ca9d46d84098fc523aa03
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Jun 30 00:52:53 2016 +0000
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Mon Jun 27 20:59:01 2016 +0000
 
-dfe-lld: Bump version
+ti-sgx-ddk-km: disable active power management
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
+Disable active power management in SGX. This will enable host triggered
+suspend-resume for SGX.
+
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dfe-lld/dfe-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/dfe-lld/dfe-lld.inc b/recipes-bsp/dfe-lld/dfe-lld.inc
-index c1d8643..92c6034 100644
---- a/recipes-bsp/dfe-lld/dfe-lld.inc
-+++ b/recipes-bsp/dfe-lld/dfe-lld.inc
-@@ -7,14 +7,14 @@ DFE_LLD_GIT_PROTOCOL = "git"
- DFE_LLD_GIT_BRANCH = "master"
- DFE_LLD_GIT_DESTSUFFIX = "git/ti/drv/dfe"
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+index 18e6801..1ebcb8a 100644
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
--# The following commit correspond to DEV.DFE_LLD.01.00.00.07
--DFE_LLD_SRCREV = "7a85310ee5e406f50a4c118610e07aade7d3cee2"
-+# Below commit ID corresponds to "DEV.DFE_LLD.01.00.00.08"
-+DFE_LLD_SRCREV = "d51482ef18889bbbd8e9cdc207c6fe9e27b1ab03"
+-SRCREV = "c8d280c2842bf4b1fdc63f5efd89595807c0a254"
++SRCREV = "c13efb766a8fc680374ae7affc6df535f823bacb"
  
- BRANCH = "${DFE_LLD_GIT_BRANCH}"
- SRC_URI = "${DFE_LLD_GIT_URI};destsuffix=${DFE_LLD_GIT_DESTSUFFIX};protocol=${DFE_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${DFE_LLD_SRCREV}"
- 
--PV = "1.0.0.7"
-+PV = "1.0.0.8"
- INC_PR = "r0"
- 
- COMPATIBLE_MACHINE = "k2l-evm"
+ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+ TARGET_PRODUCT_ti33x = "ti335x"
 
 
