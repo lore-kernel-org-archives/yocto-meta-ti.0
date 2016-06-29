@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 58EBBE00D8B; Wed, 29 Jun 2016 14:12:02 -0700 (PDT)
+	id 5DF86E00DC8; Wed, 29 Jun 2016 14:12:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14C00E00D8B
-	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:56 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86AE4E00D9C
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A112B529A5; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
+	id 4962B52AC8; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211155.A112B529A5@arago-project.org>
-Date: Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
+Message-Id: <20160629211156.4962B52AC8@arago-project.org>
+Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: disable active power management
+Subject: Jacob Stiffler : ti-ipc-rtos: add dependency on zip-native
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,37 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 542b6d1fc2b2615bba3ca9d46d84098fc523aa03
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=542b6d1fc2b2615bba3ca9d46d84098fc523aa03
+Commit: daed2c1462b1d021177491ade04e87a6f967a787
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=daed2c1462b1d021177491ade04e87a6f967a787
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Mon Jun 27 20:59:01 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Jun 28 23:48:05 2016 +0000
 
-ti-sgx-ddk-km: disable active power management
+ti-ipc-rtos: add dependency on zip-native
 
-Disable active power management in SGX. This will enable host triggered
-suspend-resume for SGX.
+* The zip utility is used during the build
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index 18e6801..1ebcb8a 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 740de53..379dcd0 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -35,9 +35,9 @@ SRCREV_ipc-metadata = "c3fc63be358c8c9a429366ebf54fe03812671129"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
  
--SRCREV = "c8d280c2842bf4b1fdc63f5efd89595807c0a254"
-+SRCREV = "c13efb766a8fc680374ae7affc6df535f823bacb"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
+-DEPENDS = "ti-xdctools ti-sysbios doxygen-native"
++DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+ "
 
 
