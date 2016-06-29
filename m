@@ -1,26 +1,35 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3E6F0E00DEB; Wed, 29 Jun 2016 14:12:08 -0700 (PDT)
+	id E484AE00DC5; Wed, 29 Jun 2016 16:28:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE2C0E00DC2
-	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:58 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 0217152AD5; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160629211157.0217152AD5@arago-project.org>
-Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : dfe-lld: Bump version
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43021E00DB0
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 16:28:37 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u5TNSakt027610
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 18:28:36 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u5TNSaXj031538
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 18:28:36 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 29 Jun 2016 18:28:36 -0500
+Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u5TNSahN023332;	Wed, 29 Jun 2016 18:28:36 -0500
+From: Justin Sobota <jsobota@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 29 Jun 2016 19:28:30 -0400
+Message-ID: <1467242910-17965-1-git-send-email-jsobota@ti.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [master/krogoth][PATCH] edma3-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +42,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jun 2016 21:12:08 -0000
-Content-Type: text/plain; charset=UTF-8
-
-Module: meta-ti
-Branch: master
-Commit: f76dd445ad96f601f4a4b4b7385e7cd30e25c0f0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f76dd445ad96f601f4a4b4b7385e7cd30e25c0f0
-
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Jun 30 00:52:53 2016 +0000
-
-dfe-lld: Bump version
+X-List-Received-Date: Wed, 29 Jun 2016 23:28:39 -0000
+Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- recipes-bsp/dfe-lld/dfe-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/dfe-lld/dfe-lld.inc b/recipes-bsp/dfe-lld/dfe-lld.inc
-index c1d8643..92c6034 100644
---- a/recipes-bsp/dfe-lld/dfe-lld.inc
-+++ b/recipes-bsp/dfe-lld/dfe-lld.inc
-@@ -7,14 +7,14 @@ DFE_LLD_GIT_PROTOCOL = "git"
- DFE_LLD_GIT_BRANCH = "master"
- DFE_LLD_GIT_DESTSUFFIX = "git/ti/drv/dfe"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+index ff0ad47..4de5987 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld.inc
++++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
+ EDMA3_LLD_GIT_PROTOCOL = "git"
+ EDMA3_LLD_GIT_BRANCH = "master"
  
--# The following commit correspond to DEV.DFE_LLD.01.00.00.07
--DFE_LLD_SRCREV = "7a85310ee5e406f50a4c118610e07aade7d3cee2"
-+# Below commit ID corresponds to "DEV.DFE_LLD.01.00.00.08"
-+DFE_LLD_SRCREV = "d51482ef18889bbbd8e9cdc207c6fe9e27b1ab03"
+-# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_23A
+-EDMA3_LLD_SRCREV = "84c84a82332b30ece3b00f7d769270466ae836e0"
++# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_24"
++EDMA3_LLD_SRCREV = "e864a057032b070fc04628bac1345ecef01e2224"
  
- BRANCH = "${DFE_LLD_GIT_BRANCH}"
- SRC_URI = "${DFE_LLD_GIT_URI};destsuffix=${DFE_LLD_GIT_DESTSUFFIX};protocol=${DFE_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${DFE_LLD_SRCREV}"
+ BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
+ SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${EDMA3_LLD_SRCREV}"
  
--PV = "1.0.0.7"
-+PV = "1.0.0.8"
+-PV = "2.12.01.23"
++PV = "2.12.01.24"
  INC_PR = "r0"
- 
- COMPATIBLE_MACHINE = "k2l-evm"
+-- 
+1.7.10.4
 
 
