@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A4C5AE00DC6; Wed, 29 Jun 2016 14:12:01 -0700 (PDT)
+	id A6D67E00D79; Wed, 29 Jun 2016 14:12:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 173B4E00D92
-	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:56 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86AFDE00DA0
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E50E652AA0; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
+	id 3A24152AC7; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211155.E50E652AA0@arago-project.org>
-Date: Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
+Message-Id: <20160629211156.3A24152AC7@arago-project.org>
+Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : pa-lld: Bump version
+Subject: Justin Sobota : dfe-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 8da412de389f0eb47aaac2cf30fc7a9e5e701702
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8da412de389f0eb47aaac2cf30fc7a9e5e701702
+Commit: 5a84f7d923b094beca7003e9db568d4b50300b4f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5a84f7d923b094beca7003e9db568d4b50300b4f
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Tue Jun 28 00:31:05 2016 +0000
+Date:   Thu Jun 30 00:52:53 2016 +0000
 
-pa-lld: Bump version
+dfe-lld: Bump version
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pa-lld/pa-lld.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/dfe-lld/dfe-lld.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index c083bc2..6c51560 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -9,16 +9,16 @@ PA_LLD_GIT_PROTOCOL = "git"
- PA_LLD_GIT_BRANCH = "master"
- PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+diff --git a/recipes-bsp/dfe-lld/dfe-lld.inc b/recipes-bsp/dfe-lld/dfe-lld.inc
+index c1d8643..92c6034 100644
+--- a/recipes-bsp/dfe-lld/dfe-lld.inc
++++ b/recipes-bsp/dfe-lld/dfe-lld.inc
+@@ -7,14 +7,14 @@ DFE_LLD_GIT_PROTOCOL = "git"
+ DFE_LLD_GIT_BRANCH = "master"
+ DFE_LLD_GIT_DESTSUFFIX = "git/ti/drv/dfe"
  
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.08A"
--PA_LLD_SRCREV = "9294e42fd5763555c28e46b51246bab439fd552e"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.12"
-+PA_LLD_SRCREV = "d3f3f5d93d3febc24099974bbc77e67c80a83b1e"
+-# The following commit correspond to DEV.DFE_LLD.01.00.00.07
+-DFE_LLD_SRCREV = "7a85310ee5e406f50a4c118610e07aade7d3cee2"
++# Below commit ID corresponds to "DEV.DFE_LLD.01.00.00.08"
++DFE_LLD_SRCREV = "d51482ef18889bbbd8e9cdc207c6fe9e27b1ab03"
  
- BRANCH = "${PA_LLD_GIT_BRANCH}"
- SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
-             file://0001-makefile_armv7-fix-missing-separator-error.patch"
- SRCREV = "${PA_LLD_SRCREV}"
+ BRANCH = "${DFE_LLD_GIT_BRANCH}"
+ SRC_URI = "${DFE_LLD_GIT_URI};destsuffix=${DFE_LLD_GIT_DESTSUFFIX};protocol=${DFE_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${DFE_LLD_SRCREV}"
  
--PV = "03.00.01.08"
--INC_PR = "r1"
-+PV = "03.00.01.12"
-+INC_PR = "r2"
+-PV = "1.0.0.7"
++PV = "1.0.0.8"
+ INC_PR = "r0"
  
- S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
- 
+ COMPATIBLE_MACHINE = "k2l-evm"
 
 
