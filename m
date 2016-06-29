@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 41949E00D79; Wed, 29 Jun 2016 14:12:01 -0700 (PDT)
+	id A4C5AE00DC6; Wed, 29 Jun 2016 14:12:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 138DAE00D82
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 173B4E00D92
 	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C909252A9F; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
+	id E50E652AA0; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211155.C909252A9F@arago-project.org>
+Message-Id: <20160629211155.E50E652AA0@arago-project.org>
 Date: Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : common-csl-ip: Move to new make infrastructure & Bump version
+Subject: Justin Sobota : pa-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,90 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 5aa6c4eb0a80b09a5f21cfc8babbaf6265a7a14e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5aa6c4eb0a80b09a5f21cfc8babbaf6265a7a14e
+Commit: 8da412de389f0eb47aaac2cf30fc7a9e5e701702
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8da412de389f0eb47aaac2cf30fc7a9e5e701702
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Jun 30 00:57:18 2016 +0000
+Date:   Tue Jun 28 00:31:05 2016 +0000
 
-common-csl-ip: Move to new make infrastructure & Bump version
+pa-lld: Bump version
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
-Tested-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../common-csl-ip/common-csl-ip-rtos_git.bb        |   28 ++++++++-----------
- recipes-bsp/common-csl-ip/common-csl-ip.inc        |    6 ++--
- 2 files changed, 15 insertions(+), 19 deletions(-)
+ recipes-bsp/pa-lld/pa-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-index 43ea2ed..877b230 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -1,5 +1,5 @@
- require common-csl-ip.inc
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index c083bc2..6c51560 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -9,16 +9,16 @@ PA_LLD_GIT_PROTOCOL = "git"
+ PA_LLD_GIT_BRANCH = "master"
+ PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.08A"
+-PA_LLD_SRCREV = "9294e42fd5763555c28e46b51246bab439fd552e"
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.12"
++PA_LLD_SRCREV = "d3f3f5d93d3febc24099974bbc77e67c80a83b1e"
  
-@@ -7,20 +7,16 @@ inherit ti-pdk
+ BRANCH = "${PA_LLD_GIT_BRANCH}"
+ SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
+             file://0001-makefile_armv7-fix-missing-separator-error.patch"
+ SRCREV = "${PA_LLD_SRCREV}"
  
- DEPENDS_remove = "${PN}"
+-PV = "03.00.01.08"
+-INC_PR = "r1"
++PV = "03.00.01.12"
++INC_PR = "r2"
  
--XDCARGS_ti33x = "am335x"
--XDCARGS_ti43x = "am437x"
--XDCARGS_omap-a15 = "am571x am572x"
--XDCARGS_k2hk-evm = "k2h k2k"
--XDCARGS_k2l-evm = "k2l"
--XDCARGS_k2e-evm = "k2e"
--XDCARGS_k2g-evm = "k2g"
-+# Build with make instead of XDC
-+XDCMAKE = "0"
+ S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
  
--do_configure_append() {
--    # Create empty makefile
--    # If libraries are supported for this device, then this will be overwritten
--    cat > ${BUILD_DIR}/makefile << __EOF__
--# Nothing to do
--all:
-+LIMSOCS_ti33x = "am335x"
-+LIMSOCS_ti43x = "am437x"
-+LIMSOCS_omap-a15 = "am571x am572x"
-+LIMSOCS_k2hk-evm = "k2h k2k"
-+LIMSOCS_k2l-evm = "k2l"
-+LIMSOCS_k2e-evm = "k2e"
-+LIMSOCS_k2g-evm = "k2g"
- 
--__EOF__
--}
-+export PDK_CSL_ROOT_PATH ="${WORKDIR}/build"
-+export DEST_ROOT="${S}"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 70d963b..77dfd1b 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- 
- COMPATIBLE_MACHINE = "keystone|dra7xx"
- 
--PV = "3.3.0.2C"
-+PV = "3.3.0.3C"
- INC_PR = "r0"
- 
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
- 
--# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02C
--CSL_SRCREV = "dc8aac00e86cd434865d750666ac551f2e238263"
-+# Below commit ID corresponds to "DEV.CSL_PROCESSOR-SDK.03.03.00.03C"
-+CSL_SRCREV = "ccd8dc29a5edce1a4d6409cb06b460bec6d3ecac"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 
 
