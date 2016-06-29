@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 27C19E00DFB; Wed, 29 Jun 2016 14:12:06 -0700 (PDT)
+	id 29FD8E00DBF; Wed, 29 Jun 2016 14:12:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCCC5E00DC1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB92AE00DBF
 	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 129B052AD6; Wed, 29 Jun 2016 21:11:57 +0000 (UTC)
+	id E50C352AD4; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211157.129B052AD6@arago-project.org>
-Date: Wed, 29 Jun 2016 21:11:57 +0000 (UTC)
+Message-Id: <20160629211156.E50C352AD4@arago-project.org>
+Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ipc-rtos: add dependency on zip-native
+Subject: Justin Sobota : srio-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: de0f143272df3594b4a51ef697398e1a451d3d87
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=de0f143272df3594b4a51ef697398e1a451d3d87
+Commit: 0c88837fc3126d949f0daa6b9b22f1c20f4d37c9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0c88837fc3126d949f0daa6b9b22f1c20f4d37c9
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jun 28 23:48:05 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Tue Jun 28 00:31:08 2016 +0000
 
-ti-ipc-rtos: add dependency on zip-native
+srio-lld: Bump version
 
-* The zip utility is used during the build
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/srio-lld/srio-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 740de53..379dcd0 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -35,9 +35,9 @@ SRCREV_ipc-metadata = "c3fc63be358c8c9a429366ebf54fe03812671129"
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
+index f8ff7b3..7ec2a35 100644
+--- a/recipes-bsp/srio-lld/srio-lld.inc
++++ b/recipes-bsp/srio-lld/srio-lld.inc
+@@ -8,15 +8,15 @@ SRIO_LLD_GIT_PROTOCOL = "git"
+ SRIO_LLD_GIT_BRANCH = "master"
+ SRIO_LLD_GIT_DESTSUFFIX = "git/ti/drv/srio"
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
+-# commit ID corresponding to DEV.SRIO_LLD.02.00.00.15
+-SRIO_LLD_SRCREV = "b773a7d08225c30737abc45ebc92a186bac08797"
++# commit ID corresponding to "DEV.SRIO_LLD.02.00.00.16"
++SRIO_LLD_SRCREV = "70664382b7baf0fc52b3504cc58d6d0d720cc639"
  
--DEPENDS = "ti-xdctools ti-sysbios doxygen-native"
-+DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
- "
+ BRANCH = "${SRIO_LLD_GIT_BRANCH}"
+ SRC_URI = "${SRIO_LLD_GIT_URI};destsuffix=${SRIO_LLD_GIT_DESTSUFFIX};protocol=${SRIO_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${SRIO_LLD_SRCREV}"
+ 
+-PV = "02.00.00.15"
+-INC_PR = "r0"
++PV = "02.00.00.16"
++INC_PR = "r1"
+ 
+ DEVICELIST = "k2h k2k"
+ 
 
 
