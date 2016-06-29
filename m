@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5DF86E00DC8; Wed, 29 Jun 2016 14:12:02 -0700 (PDT)
+	id A0D49E00D9C; Wed, 29 Jun 2016 14:12:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86AE4E00D9C
-	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:58 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15FC5E00D8D
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4962B52AC8; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
+	id B363552A0B; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211156.4962B52AC8@arago-project.org>
-Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
+Message-Id: <20160629211155.B363552A0B@arago-project.org>
+Date: Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ipc-rtos: add dependency on zip-native
+Subject: Justin Sobota : ti-pdk: Add makefile support to ti-pdk. bbclass for RTOS components
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +38,191 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: daed2c1462b1d021177491ade04e87a6f967a787
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=daed2c1462b1d021177491ade04e87a6f967a787
+Commit: 1a4349fb9cd63328d13d9ab42d98ebe17f42893d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1a4349fb9cd63328d13d9ab42d98ebe17f42893d
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jun 28 23:48:05 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Tue Jun 28 00:31:03 2016 +0000
 
-ti-ipc-rtos: add dependency on zip-native
+ti-pdk: Add makefile support to ti-pdk.bbclass for RTOS components
 
-* The zip utility is used during the build
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ classes/ti-pdk.bbclass                           |   59 ++++++++++++++++----
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb |   65 ++++++++++++++++++++++
+ 2 files changed, 112 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 740de53..379dcd0 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -35,9 +35,9 @@ SRCREV_ipc-metadata = "c3fc63be358c8c9a429366ebf54fe03812671129"
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+index ae76fdf..fd7c3e7 100644
+--- a/classes/ti-pdk.bbclass
++++ b/classes/ti-pdk.bbclass
+@@ -3,14 +3,26 @@ require recipes-ti/includes/ti-staging.inc
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
+ inherit perlnative
  
--DEPENDS = "ti-xdctools ti-sysbios doxygen-native"
-+DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
- "
+-DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native"
++DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-pdk-build-rtos"
+ 
+-DEPENDS_append_omap-a15 = " ti-cgt6x-native ti-ccsv6-native"
+-DEPENDS_append_keystone = " ti-cgt6x-native"
++DEPENDS_append_omap-a15 = " ti-ccsv6-native"
++DEPENDS_remove_ti33x = "ti-cgt6x-native"
++DEPENDS_remove_ti43x = "ti-cgt6x-native"
+ 
+ S = "${WORKDIR}/git"
+ B = "${WORKDIR}/build"
+ 
++# HTML hyperlink text
++PDK_COMP_LINK_TEXT ?= ""
++
++DOC_FILE = "API_Documentation_${PN}.html"
++
++create_doc_link () {
++    PDK_COMP_DIR=`get_build_dir_bash`
++
++    echo "<a href=\"${PDK_COMP_DIR}/docs/doxygen/html/index.html\">${PDK_COMP_LINK_TEXT}</a>" >> ${D}${PDK_INSTALL_DIR_RECIPE}/packages/.extras/doc/${DOC_FILE}
++}
++
+ get_build_dir_bash() {
+   if [ -f ${S}/package.xdc ]
+   then
+@@ -36,6 +48,10 @@ export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+ export XDCPATH = "${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;${PDK_INSTALL_DIR}/packages"
+ export SECTTI="perl ${CG_XML_INSTALL_DIR}/ofd/sectti.pl"
+ 
++XDCMAKE ?= "1"
++LIMSOCS ?= ""
++LIMBOARDS ?= ""
++
+ PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
+ 
+ do_configure() {
+@@ -43,24 +59,43 @@ do_configure() {
+ 
+     mkdir -p ${BUILD_DIR}
+     cp -r ${S}/* ${BUILD_DIR}
+-    cd ${BUILD_DIR}
+ 
+-    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
+-    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
+-    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
+-    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
+-    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
++    if [ "${XDCMAKE}" == "1" ]
++    then
++        cd ${BUILD_DIR}
++
++        sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
++        find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
++        find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
++        find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
++        find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
++    fi
+ }
+ 
+ do_compile() {
+-    ${XDC_INSTALL_DIR}/xdc clean ${PARALLEL_XDC} -PR .
+-    ${XDC_INSTALL_DIR}/xdc all ${PARALLEL_XDC} XDCARGS="${XDCARGS}" ROOTDIR="${ROOTDIR}" -PR .
+-    ${XDC_INSTALL_DIR}/xdc release XDCARGS="${XDCARGS}" -PR .
++
++    if [ "${XDCMAKE}" == "1" ]
++    then
++        ${XDC_INSTALL_DIR}/xdc clean ${PARALLEL_XDC} -PR .
++        ${XDC_INSTALL_DIR}/xdc all ${PARALLEL_XDC} XDCARGS="${XDCARGS}" ROOTDIR="${ROOTDIR}" -PR .
++        ${XDC_INSTALL_DIR}/xdc release XDCARGS="${XDCARGS}" -PR .
++    else
++        BUILD_DIR=${B}/`get_build_dir_bash`
++        cd ${BUILD_DIR}
++
++        make release LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
++    fi
+ }
+ 
+ do_install () {
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+     find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
++    
++    if [ "${PDK_COMP_LINK_TEXT}" != "" ]
++    then
++        install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/.extras/doc
++        create_doc_link
++    fi
+ }
+ 
+ FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+new file mode 100644
+index 0000000..3a3ab55
+--- /dev/null
++++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+@@ -0,0 +1,65 @@
++DESCRIPTION = "Package containing PDK makefile infrastructure"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de09f5475185f3fd56de1e310"
++
++require recipes-ti/includes/ti-paths.inc
++
++PV = "01.00.00.00A"
++PR = "r4"
++
++PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
++PDK_BUILD_GIT_PROTOCOL = "git"
++PDK_BUILD_GIT_BRANCH = "master"
++
++# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.00A"
++PDK_BUILD_SRCREV = "8a026319765cc125e2daef709841bb3ce1a8d325"
++
++BRANCH = "${PDK_BUILD_GIT_BRANCH}"
++SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${PDK_BUILD_SRCREV}"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
++
++S = "${WORKDIR}/git/"
++
++CLEANBROKEN = "1"
++
++do_compile() {
++    :
++}
++
++do_install() {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
++    
++    install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
++
++    sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
++        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
++
++    install -m 0755 makerules/build_config.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/common.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/component.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/env.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/platform.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_a8.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_a8_extend.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_a9.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 am571x/config_am571x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
++    install -m 0755 am571x/config_am571x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
++    install -m 0755 am571x/config_am571x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
++    install -m 0755 am571x/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
++    install -m 0755 am572x/config_am572x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
++    install -m 0755 am572x/config_am572x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
++    install -m 0755 am572x/config_am572x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
++    install -m 0755 am572x/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
++}
++
++FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
 
 
