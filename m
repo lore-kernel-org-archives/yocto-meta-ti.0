@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 395A6E00DCA; Wed, 29 Jun 2016 14:12:01 -0700 (PDT)
+	id 41949E00D79; Wed, 29 Jun 2016 14:12:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12568E00D79
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 138DAE00D82
 	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8C2165299F; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
+	id C909252A9F; Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211155.8C2165299F@arago-project.org>
+Message-Id: <20160629211155.C909252A9F@arago-project.org>
 Date: Wed, 29 Jun 2016 21:11:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: disable active power management
+Subject: Justin Sobota : common-csl-ip: Move to new make infrastructure & Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,46 +38,90 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: dc856da7dbe92f5d156fc18069c5b2eb31e88c68
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dc856da7dbe92f5d156fc18069c5b2eb31e88c68
+Commit: 5aa6c4eb0a80b09a5f21cfc8babbaf6265a7a14e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5aa6c4eb0a80b09a5f21cfc8babbaf6265a7a14e
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Mon Jun 27 20:58:52 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Thu Jun 30 00:57:18 2016 +0000
 
-ti-sgx-ddk-um: disable active power management
+common-csl-ip: Move to new make infrastructure & Bump version
 
-Disable active power management in SGX. This will enable host triggered
-suspend-resume for SGX.
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
+Tested-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../common-csl-ip/common-csl-ip-rtos_git.bb        |   28 ++++++++-----------
+ recipes-bsp/common-csl-ip/common-csl-ip.inc        |    6 ++--
+ 2 files changed, 15 insertions(+), 19 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index e5c5de6..b8adde0 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+index 43ea2ed..877b230 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
++++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+@@ -1,5 +1,5 @@
+ require common-csl-ip.inc
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "54ba970e33d3c13f726d7c035f3b5c3dcb74afdc"
-+SRCREV = "4cdbb6b192fc5cac53695faca3c3f8be16ca871d"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+@@ -7,20 +7,16 @@ inherit ti-pdk
  
- inherit update-rc.d
+ DEPENDS_remove = "${PN}"
  
--PR = "r12"
-+PR = "r13"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+-XDCARGS_ti33x = "am335x"
+-XDCARGS_ti43x = "am437x"
+-XDCARGS_omap-a15 = "am571x am572x"
+-XDCARGS_k2hk-evm = "k2h k2k"
+-XDCARGS_k2l-evm = "k2l"
+-XDCARGS_k2e-evm = "k2e"
+-XDCARGS_k2g-evm = "k2g"
++# Build with make instead of XDC
++XDCMAKE = "0"
  
- DEPENDS += "libdrm udev libgbm wayland libffi"
+-do_configure_append() {
+-    # Create empty makefile
+-    # If libraries are supported for this device, then this will be overwritten
+-    cat > ${BUILD_DIR}/makefile << __EOF__
+-# Nothing to do
+-all:
++LIMSOCS_ti33x = "am335x"
++LIMSOCS_ti43x = "am437x"
++LIMSOCS_omap-a15 = "am571x am572x"
++LIMSOCS_k2hk-evm = "k2h k2k"
++LIMSOCS_k2l-evm = "k2l"
++LIMSOCS_k2e-evm = "k2e"
++LIMSOCS_k2g-evm = "k2g"
+ 
+-__EOF__
+-}
++export PDK_CSL_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index 70d963b..77dfd1b 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+ 
+ COMPATIBLE_MACHINE = "keystone|dra7xx"
+ 
+-PV = "3.3.0.2C"
++PV = "3.3.0.3C"
+ INC_PR = "r0"
+ 
+ CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "master"
+ CSL_GIT_DESTSUFFIX = "git"
+ 
+-# commit ID corresponds to DEV.CSL_PROCESSOR-SDK.03.03.00.02C
+-CSL_SRCREV = "dc8aac00e86cd434865d750666ac551f2e238263"
++# Below commit ID corresponds to "DEV.CSL_PROCESSOR-SDK.03.03.00.03C"
++CSL_SRCREV = "ccd8dc29a5edce1a4d6409cb06b460bec6d3ecac"
+ 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 
 
