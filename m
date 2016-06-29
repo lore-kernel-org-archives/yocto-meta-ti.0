@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BC4D2E00DEB; Wed, 29 Jun 2016 14:12:03 -0700 (PDT)
+	id C1265E00D98; Wed, 29 Jun 2016 14:12:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2615E00DA3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 853F6E00D98
 	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 714B752ACD; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
+	id 2705D52AC6; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211156.714B752ACD@arago-project.org>
+Message-Id: <20160629211156.2705D52AC6@arago-project.org>
 Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: disable active power management
+Subject: Justin Sobota : srio-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,47 +37,46 @@ X-List-Received-Date: Wed, 29 Jun 2016 21:12:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: c5bdcc922fc572a242fd325812cee3ee7e35d329
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5bdcc922fc572a242fd325812cee3ee7e35d329
+Branch: krogoth
+Commit: dd8ec293a2cdcb189b641b16570801ac398b0c66
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dd8ec293a2cdcb189b641b16570801ac398b0c66
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Mon Jun 27 20:58:52 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Tue Jun 28 00:31:08 2016 +0000
 
-ti-sgx-ddk-um: disable active power management
+srio-lld: Bump version
 
-Disable active power management in SGX. This will enable host triggered
-suspend-resume for SGX.
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/srio-lld/srio-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index e5c5de6..b8adde0 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
+index f8ff7b3..7ec2a35 100644
+--- a/recipes-bsp/srio-lld/srio-lld.inc
++++ b/recipes-bsp/srio-lld/srio-lld.inc
+@@ -8,15 +8,15 @@ SRIO_LLD_GIT_PROTOCOL = "git"
+ SRIO_LLD_GIT_BRANCH = "master"
+ SRIO_LLD_GIT_DESTSUFFIX = "git/ti/drv/srio"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "54ba970e33d3c13f726d7c035f3b5c3dcb74afdc"
-+SRCREV = "4cdbb6b192fc5cac53695faca3c3f8be16ca871d"
+-# commit ID corresponding to DEV.SRIO_LLD.02.00.00.15
+-SRIO_LLD_SRCREV = "b773a7d08225c30737abc45ebc92a186bac08797"
++# commit ID corresponding to "DEV.SRIO_LLD.02.00.00.16"
++SRIO_LLD_SRCREV = "70664382b7baf0fc52b3504cc58d6d0d720cc639"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ BRANCH = "${SRIO_LLD_GIT_BRANCH}"
+ SRC_URI = "${SRIO_LLD_GIT_URI};destsuffix=${SRIO_LLD_GIT_DESTSUFFIX};protocol=${SRIO_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${SRIO_LLD_SRCREV}"
  
- inherit update-rc.d
+-PV = "02.00.00.15"
+-INC_PR = "r0"
++PV = "02.00.00.16"
++INC_PR = "r1"
  
--PR = "r12"
-+PR = "r13"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ DEVICELIST = "k2h k2k"
  
- DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
