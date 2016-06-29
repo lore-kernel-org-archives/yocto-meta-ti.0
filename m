@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 38723E00E03; Wed, 29 Jun 2016 14:12:08 -0700 (PDT)
+	id 3DE32E00DC4; Wed, 29 Jun 2016 14:12:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 160A7E00DC3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16281E00DC4
 	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 14:11:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 23CAA52AD7; Wed, 29 Jun 2016 21:11:57 +0000 (UTC)
+	id C39DB52AD2; Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160629211157.23CAA52AD7@arago-project.org>
-Date: Wed, 29 Jun 2016 21:11:57 +0000 (UTC)
+Message-Id: <20160629211156.C39DB52AD2@arago-project.org>
+Date: Wed, 29 Jun 2016 21:11:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : openmp-rtos: bump SRCREV to version 2.3.1.0
+Subject: Justin Sobota : rm-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: da853122bcb0fb818cf5cfd9e3ffc5e8d79310df
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=da853122bcb0fb818cf5cfd9e3ffc5e8d79310df
+Commit: 1170edc50358d1d2201762c3dafb1b7c937ced26
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1170edc50358d1d2201762c3dafb1b7c937ced26
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jun 28 23:48:34 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Tue Jun 28 00:31:06 2016 +0000
 
-openmp-rtos: bump SRCREV to version 2.3.1.0
+rm-lld: Bump version
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/openmp-rtos/openmp-rtos_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/rm-lld/rm-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-index 7c781a2..6893179 100644
---- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-+++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-@@ -4,8 +4,8 @@ LICENSE = "BSD"
+diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
+index 70d9b5b..4236fd2 100644
+--- a/recipes-bsp/rm-lld/rm-lld.inc
++++ b/recipes-bsp/rm-lld/rm-lld.inc
+@@ -7,15 +7,15 @@ RM_LLD_GIT_PROTOCOL = "git"
+ RM_LLD_GIT_BRANCH = "master"
+ RM_LLD_GIT_DESTSUFFIX = "git/ti/drv/rm"
  
- require recipes-ti/includes/ti-paths.inc
+-# Below commit ID corresponds to DEV.RM_LLD.02.02.00.01
+-RM_LLD_SRCREV = "841f2df9726f456d6c026c0aa03095699962d048"
++# Below commit ID corresponds to "DEV.RM_LLD.02.02.00.02"
++RM_LLD_SRCREV = "6165053f88d1ccb5083f797d24800d5400804647"
  
--PV = "2_02_01_03"
--PR = "r1"
-+PV = "2_03_01_00"
-+PR = "r0"
+ BRANCH = "${RM_LLD_GIT_BRANCH}"
+ SRC_URI = "${RM_LLD_GIT_URI};destsuffix=${RM_LLD_GIT_DESTSUFFIX};protocol=${RM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${RM_LLD_SRCREV}"
  
- OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
- OPENMP_RTOS_GIT_PROTOCOL = "git"
-@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
- SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
- "
+-PV = "02.02.00.01"
+-INC_PR = "r0"
++PV = "02.02.00.02"
++INC_PR = "r1"
  
--SRCREV = "9bf371e9618297f8783113bff05995800535c27d"
-+SRCREV = "a73b7b5a79a6ca9390388079b09a1cf5795bd7fc"
- 
- LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ COMPATIBLE_MACHINE = "keystone"
  
 
 
