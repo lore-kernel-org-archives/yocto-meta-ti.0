@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4E11CE00E03; Wed, 29 Jun 2016 18:28:30 -0700 (PDT)
+	id 6676BE00E2C; Wed, 29 Jun 2016 19:24:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1BA5E00E01
-	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 18:28:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 177A7E00E2C
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 19:24:19 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4B5B152AC1; Thu, 30 Jun 2016 01:28:27 +0000 (UTC)
+	id 8787F52ACE; Thu, 30 Jun 2016 02:24:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160630012827.4B5B152AC1@arago-project.org>
-Date: Thu, 30 Jun 2016 01:28:27 +0000 (UTC)
+Message-Id: <20160630022418.8787F52ACE@arago-project.org>
+Date: Thu, 30 Jun 2016 02:24:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : uio-test-pruss: correct COMPATIBLE_MACHINE
+Subject: Denys Dmytriyenko : uio-module-drv-test: correct COMPATIBLE_MACHINE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,38 +33,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2016 01:28:30 -0000
+X-List-Received-Date: Thu, 30 Jun 2016 02:24:21 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d2aad25651acceccbe5c0f334181b1a5bf5baaeb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d2aad25651acceccbe5c0f334181b1a5bf5baaeb
+Commit: 55b4ca5ecb8973c666c5c6d6f906b216a4cba86e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=55b4ca5ecb8973c666c5c6d6f906b216a4cba86e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Jun 29 21:27:16 2016 -0400
+Date:   Wed Jun 29 22:23:22 2016 -0400
 
-uio-test-pruss: correct COMPATIBLE_MACHINE
+uio-module-drv-test: correct COMPATIBLE_MACHINE
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/uio-test-pruss/uio-test-pruss_git.bb |    2 +-
+ .../uio-module-drv/uio-module-drv-test_git.bb      |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-index ee8204a..0a82d63 100644
---- a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-+++ b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://Makefile;startline=1;endline=31;md5=0ee4f2c42eb6b04e3
- # Corresponds to version 01.00.00.00
- SRCREV = "f04b91b84331c9a12c897e4eb2836a0a3e3a5fae"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+index fd41b74..197b36f 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+@@ -4,7 +4,7 @@ include uio-module-drv.inc
  
--COMPATIBLE_MACHINE = "am57xx"
-+COMPATIBLE_MACHINE = "omap-a15"
- EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR}"
+ PR = "r1"
  
- do_install() {
+-COMPATIBLE_MACHINE = "keystone|am57xx-evm"
++COMPATIBLE_MACHINE = "keystone|omap-a15"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ DEVICE_NAME_am57xx-evm = "am57xx"
 
 
