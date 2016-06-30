@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4BAEAE00E06; Wed, 29 Jun 2016 18:28:30 -0700 (PDT)
+	id 4E11CE00E03; Wed, 29 Jun 2016 18:28:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0318E00DFE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1BA5E00E01
 	for <meta-ti@yoctoproject.org>; Wed, 29 Jun 2016 18:28:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1B58152AB4; Thu, 30 Jun 2016 01:28:27 +0000 (UTC)
+	id 4B5B152AC1; Thu, 30 Jun 2016 01:28:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160630012827.1B58152AB4@arago-project.org>
+Message-Id: <20160630012827.4B5B152AC1@arago-project.org>
 Date: Thu, 30 Jun 2016 01:28:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : uio-test-pruss: correct COMPATIBLE_MACHINE
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 30 Jun 2016 01:28:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 8a9eb5d97731f3d554470dedd06f06c2e21b276d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8a9eb5d97731f3d554470dedd06f06c2e21b276d
+Branch: master
+Commit: d2aad25651acceccbe5c0f334181b1a5bf5baaeb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d2aad25651acceccbe5c0f334181b1a5bf5baaeb
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Jun 29 21:27:16 2016 -0400
