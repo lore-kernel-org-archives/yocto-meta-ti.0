@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 72FB6E00948; Fri,  1 Jul 2016 10:22:07 -0700 (PDT)
+	id 77C13E00A10; Fri,  1 Jul 2016 14:02:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,33 @@ X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
 	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.7 listed in list.dnswl.org]
+	*      [206.46.173.15 listed in list.dnswl.org]
 	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 3601 seconds by postgrey-1.32 at yocto-www;
-	Fri, 01 Jul 2016 10:21:57 PDT
-Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
-	[206.46.173.7])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2571E006D2
-	for <meta-ti@yoctoproject.org>; Fri,  1 Jul 2016 10:21:57 -0700 (PDT)
-Received: from vz-proxy-m005.mx.aol.com ([64.236.83.15])
-	by vms173007.mailsrvcs.net
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF309E009C9
+	for <meta-ti@yoctoproject.org>; Fri,  1 Jul 2016 14:02:49 -0700 (PDT)
+Received: from vz-proxy-m003.mx.aol.com ([64.236.83.2])
+	by vms173015.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O9N00GPZ9G9OD70@vms173007.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 01 Jul 2016 11:21:46 -0500 (CDT)
+	2014)) with ESMTPA id <0O9N00EWEMG84900@vms173015.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 01 Jul 2016 16:02:33 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=NimJJ1rWho3RDXpqkQh0Zg==:117
-	a=cAmyUtKerLwA:10 a=sozttTNsAAAA:8	a=BqyuWq1cRvuZ3E6wp3YA:9
-Received: by 100.15.86.14 with SMTP id 022d06ca; Fri, 01 Jul 2016 16:21:45 GMT
+X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=EDCZS3Slg7tGr17y9w9vtg==:117
+	a=cAmyUtKerLwA:10 a=sozttTNsAAAA:8	a=MDFdVLQYG8FeA0TxC2gA:9
+Received: by 100.15.86.14 with SMTP id 6ea7bfc9; Fri, 01 Jul 2016 21:02:33 GMT
 Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id EEB9B1620A0;	Fri,  1 Jul 2016 12:21:44 -0400 (EDT)
+	with ESMTP id 9752D1620A1;	Fri,  1 Jul 2016 17:02:32 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 01 Jul 2016 12:21:25 -0400
-Message-id: <1467390085-4725-1-git-send-email-denis@denix.org>
+Date: Fri, 01 Jul 2016 17:02:31 -0400
+Message-id: <1467406951-25734-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [RFC][PATCH] uio-module-drv-test: replace machine override with SOC override
+In-reply-to: <1467406951-25734-1-git-send-email-denis@denix.org>
+References: <1467406951-25734-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] linux-ti-staging: update to ti2016.02-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,45 +47,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jul 2016 17:22:07 -0000
+X-List-Received-Date: Fri, 01 Jul 2016 21:02:52 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-This package is now used for multiple omap-a15 SOCs, having only single machine
-covered in overrides breaks other machines.
-
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-index 197b36f..8303efe 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
-@@ -2,12 +2,12 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index 69ce45b..96cc74c 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
- include uio-module-drv.inc
+ BRANCH = "ti-rt-linux-4.4.y"
  
--PR = "r1"
-+PR = "r2"
+-SRCREV = "15267e879ed4a76c73c40f2e305a20f9d93252ff"
++SRCREV = "52be87b097a0c15af2a6d30ff7743796a07c9da2"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 535a0b5..7ebbd8a 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -72,11 +72,11 @@ S = "${WORKDIR}/git"
  
- COMPATIBLE_MACHINE = "keystone|omap-a15"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-lsk-linux-4.4.y"
  
--DEVICE_NAME_am57xx-evm = "am57xx"
-+DEVICE_NAME_omap-a15 = "am57xx"
- DEVICE_NAME_keystone = "keystone"
- RDEPENDS_${PN} = "uio-module-drv"
+-SRCREV = "6580f85400b48d55d06f11d6b75c056399123a72"
+-PV = "4.4.13+git${SRCPV}"
++SRCREV = "d369caf63f710d0fa8ea501d5201432082999aec"
++PV = "4.4.14+git${SRCPV}"
  
-@@ -25,6 +25,6 @@ do_install_append_keystone () {
- 	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
- }
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
  
--do_install_append_am57xx-evm () {
-+do_install_append_omap-a15 () {
- 	install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
- }
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 -- 
 2.7.4
 
