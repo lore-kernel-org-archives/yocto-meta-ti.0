@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 41B03E00D48; Sun,  3 Jul 2016 19:14:36 -0700 (PDT)
+	id 46B18E00D0C; Sun,  3 Jul 2016 19:14:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 139F8E00D0C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14DF1E00D15
 	for <meta-ti@yoctoproject.org>; Sun,  3 Jul 2016 19:14:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 33606529BF; Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
+	id 74F0B52A72; Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160704021431.33606529BF@arago-project.org>
+Message-Id: <20160704021431.74F0B52A72@arago-project.org>
 Date: Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : edma3-lld: Bump version
+Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2016.02-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,50 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: e03eaff8efbe0c3838f04e02842ad40bf778a760
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e03eaff8efbe0c3838f04e02842ad40bf778a760
+Commit: 79e9297b3bd63f414cfa5125893f7d72b8f590d0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=79e9297b3bd63f414cfa5125893f7d72b8f590d0
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Jun 30 05:28:30 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Jul  2 03:02:31 2016 +0000
 
-edma3-lld: Bump version
+linux-ti-staging: update to ti2016.02-rc3 tag
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index ff0ad47..4de5987 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index 69ce45b..96cc74c 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
--# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_23A
--EDMA3_LLD_SRCREV = "84c84a82332b30ece3b00f7d769270466ae836e0"
-+# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_24"
-+EDMA3_LLD_SRCREV = "e864a057032b070fc04628bac1345ecef01e2224"
+ BRANCH = "ti-rt-linux-4.4.y"
  
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
+-SRCREV = "15267e879ed4a76c73c40f2e305a20f9d93252ff"
++SRCREV = "52be87b097a0c15af2a6d30ff7743796a07c9da2"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 535a0b5..7ebbd8a 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -72,11 +72,11 @@ S = "${WORKDIR}/git"
  
--PV = "2.12.01.23"
-+PV = "2.12.01.24"
- INC_PR = "r0"
+ BRANCH = "ti-lsk-linux-4.4.y"
+ 
+-SRCREV = "6580f85400b48d55d06f11d6b75c056399123a72"
+-PV = "4.4.13+git${SRCPV}"
++SRCREV = "d369caf63f710d0fa8ea501d5201432082999aec"
++PV = "4.4.14+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 
 
