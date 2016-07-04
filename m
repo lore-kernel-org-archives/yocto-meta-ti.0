@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 83CC3E00D15; Sun,  3 Jul 2016 19:14:36 -0700 (PDT)
+	id 89D86E00D1B; Sun,  3 Jul 2016 19:14:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 161FAE00D1B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 178B9E00D26
 	for <meta-ti@yoctoproject.org>; Sun,  3 Jul 2016 19:14:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5B99852A3C; Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
+	id 455BA52A26; Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160704021431.5B99852A3C@arago-project.org>
+Message-Id: <20160704021431.455BA52A26@arago-project.org>
 Date: Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.02-rc3 tag
+Subject: Denys Dmytriyenko : uio-module-drv-test: replace machine override with SOC override
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,50 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 3bf185e2c1d438a29c4b777fc4da55234cd16d04
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3bf185e2c1d438a29c4b777fc4da55234cd16d04
+Commit: 501709c38d02f4f9faf1d61c3d1523c3118c9a19
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=501709c38d02f4f9faf1d61c3d1523c3118c9a19
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Jul  2 03:02:30 2016 +0000
+Date:   Fri Jul  1 22:21:25 2016 +0000
 
-u-boot-ti-staging: update to ti2016.02-rc3 tag
+uio-module-drv-test: replace machine override with SOC override
+
+This package is now used for multiple omap-a15 SOCs, having only single machine
+covered in overrides breaks other machines.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../uio-module-drv/uio-module-drv-test_git.bb      |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 2df30bb..53510c6 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+index 197b36f..8303efe 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+@@ -2,12 +2,12 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ include uio-module-drv.inc
  
--PR = "r8"
-+PR = "r9"
- PV_append = "+git${SRCPV}"
+-PR = "r1"
++PR = "r2"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ COMPATIBLE_MACHINE = "keystone|omap-a15"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- BRANCH ?= "ti-u-boot-2016.05"
+-DEVICE_NAME_am57xx-evm = "am57xx"
++DEVICE_NAME_omap-a15 = "am57xx"
+ DEVICE_NAME_keystone = "keystone"
+ RDEPENDS_${PN} = "uio-module-drv"
  
--SRCREV = "b31e958440b381a4316ebceeb4c8286da4c561db"
-+SRCREV = "b43cf45fec75961d196da4563bd32c0215d2fd58"
+@@ -25,6 +25,6 @@ do_install_append_keystone () {
+ 	install -c -m 755 ${S}/test/uio_cic2_int_multithread_test ${D}${bindir}/.
+ }
  
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+-do_install_append_am57xx-evm () {
++do_install_append_omap-a15 () {
+ 	install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
+ }
 
 
