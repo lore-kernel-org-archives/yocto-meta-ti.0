@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9D1FFE00D15; Sun,  3 Jul 2016 19:14:36 -0700 (PDT)
+	id B1780E00D49; Sun,  3 Jul 2016 19:14:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81861E00D33
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8211EE00D36
 	for <meta-ti@yoctoproject.org>; Sun,  3 Jul 2016 19:14:33 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 10E9A52AAC; Mon,  4 Jul 2016 02:14:32 +0000 (UTC)
+	id F406352AA9; Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160704021432.10E9A52AAC@arago-project.org>
-Date: Mon,  4 Jul 2016 02:14:32 +0000 (UTC)
+Message-Id: <20160704021431.F406352AA9@arago-project.org>
+Date: Mon,  4 Jul 2016 02:14:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2016.02-rc3 tag
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.02-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,55 +33,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2016 02:14:36 -0000
+X-List-Received-Date: Mon, 04 Jul 2016 02:14:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2b475879bf1976ece4004ec5ceaecdbe689a452f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2b475879bf1976ece4004ec5ceaecdbe689a452f
+Commit: e9974fd96b0fa85a87fdbf95339e1ad841cf4868
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e9974fd96b0fa85a87fdbf95339e1ad841cf4868
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Jul  2 03:02:31 2016 +0000
+Date:   Sat Jul  2 03:02:30 2016 +0000
 
-linux-ti-staging: update to ti2016.02-rc3 tag
+u-boot-ti-staging: update to ti2016.02-rc3 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 69ce45b..96cc74c 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 2df30bb..53510c6 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--SRCREV = "15267e879ed4a76c73c40f2e305a20f9d93252ff"
-+SRCREV = "52be87b097a0c15af2a6d30ff7743796a07c9da2"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 535a0b5..7ebbd8a 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -72,11 +72,11 @@ S = "${WORKDIR}/git"
+-PR = "r8"
++PR = "r9"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "6580f85400b48d55d06f11d6b75c056399123a72"
--PV = "4.4.13+git${SRCPV}"
-+SRCREV = "d369caf63f710d0fa8ea501d5201432082999aec"
-+PV = "4.4.14+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "b31e958440b381a4316ebceeb4c8286da4c561db"
++SRCREV = "b43cf45fec75961d196da4563bd32c0215d2fd58"
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
