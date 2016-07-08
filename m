@@ -1,35 +1,38 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C4DBE00E84; Thu,  7 Jul 2016 07:55:57 -0700 (PDT)
+	id 21CD1E00C0F; Fri,  8 Jul 2016 16:42:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 295D7E00CDC
-	for <meta-ti@yoctoproject.org>; Thu,  7 Jul 2016 07:50:44 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u67EohCd005338
-	for <meta-ti@yoctoproject.org>; Thu, 7 Jul 2016 09:50:43 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u67Eohpr009345
-	for <meta-ti@yoctoproject.org>; Thu, 7 Jul 2016 09:50:43 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 7 Jul 2016 09:50:43 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u67EoheK020912;	Thu, 7 Jul 2016 09:50:43 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 7 Jul 2016 10:50:42 -0400
-Message-ID: <1467903042-13008-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] ti-ipc: Update to new version 3.43.01.03
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2EA4E00B7A
+	for <meta-ti@yoctoproject.org>; Fri,  8 Jul 2016 16:42:52 -0700 (PDT)
+Received: from vz-proxy-m006.mx.aol.com ([64.236.83.10])
+	by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0OA0003J7SJ0T880@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 08 Jul 2016 18:42:36 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=pKq81LsWol7b8sI3Hpopew==:117
+	a=cAmyUtKerLwA:10 a=sozttTNsAAAA:8	a=b7jIudLy5X5xvDDMcrUA:9
+Received: by 100.15.86.14 with SMTP id 23576f4c; Fri, 08 Jul 2016 23:42:36 GMT
+Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
+	with ESMTP id 94CFA1620A3;	Fri,  8 Jul 2016 19:42:35 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Fri, 08 Jul 2016 19:42:33 -0400
+Message-id: <1468021354-20601-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH 1/2] u-boot-ti-staging: add HS_X-LOADER images, update to ti2016.02-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,59 +45,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2016 14:55:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 08 Jul 2016 23:42:58 -0000
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-rtos_git.bb | 8 ++++----
- recipes-ti/ipc/ti-ipc.inc         | 6 +++---
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 25 +++++++++++++++++++++++--
+ 1 file changed, 23 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 379dcd0..c9c4714 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -26,11 +26,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 53510c6..f6377de 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--# Corresponds to tag: 3.43.01.02
--SRCREV_ipc-examples = "c2324cdcda4f6641cade25f95fa30996fb94bca0"
-+# Corresponds to tag: 3.43.01.03
-+SRCREV_ipc-examples = "e003640aa2ae8f5d433f6cda2172ecadffb5ac92"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--# Corresponds to tag: 3.43.01.02
--SRCREV_ipc-metadata = "c3fc63be358c8c9a429366ebf54fe03812671129"
-+# Corresponds to tag: 3.43.01.03
-+SRCREV_ipc-metadata = "b6dd82a450d75b9483a7cc9b619a30cf3cc25ae6"
+-PR = "r9"
++PR = "r10"
+ PV_append = "+git${SRCPV}"
  
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 03e0b79..069906b 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,15 +8,15 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.43"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--#Corresponds to 3.43.01.02
--TI_IPC_SRCREV = "9e6ebc02c14ed4150dad5d45d8a7e35258bf37ad"
-+#Corresponds to 3.43.01.03
-+TI_IPC_SRCREV = "eb4e543f60cccf427d47900014bcf9a5ae413cd6"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
- SRCREV = "${TI_IPC_SRCREV}"
+-SRCREV = "b43cf45fec75961d196da4563bd32c0215d2fd58"
++SRCREV = "a4560200fc597109328a6454094fa77516434880"
  
- S = "${WORKDIR}/git"
--PV = "3.43.01.02"
-+PV = "3.43.01.03"
- INC_PR = "r0"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
+@@ -43,6 +43,11 @@ UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
+ UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
+ UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
++# HS XLD
++UBOOT_HS_XLD_BINARY = "u-boot-spl_HS_X-LOADER"
++UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
++UBOOT_HS_XLD_SYMLINK = "u-boot-spl_HS_X-LOADER-${MACHINE}"
++
+ do_compile_append_am437x-hs-evm () {
+ 	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
+ 		rm -rf ${S}/MLO
+@@ -50,6 +55,22 @@ do_compile_append_am437x-hs-evm () {
+ 	fi
+ }
+ 
++do_install_append () {
++	if [ -f ${S}/${UBOOT_HS_XLD_BINARY} ]; then
++		install ${S}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
++	fi
++}
++
++do_deploy_append () {
++	if [ -f ${S}/${UBOOT_HS_XLD_BINARY} ]; then
++		install ${S}/${UBOOT_HS_XLD_BINARY} ${DEPLOYDIR}/${UBOOT_HS_XLD_IMAGE}
++		rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
++	fi
++}
++
+ do_install_append_keystone () {
+ 	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
+ 	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
 -- 
-1.9.1
+2.7.4
 
 
