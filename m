@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F15A8E00CC5; Tue, 12 Jul 2016 07:20:02 -0700 (PDT)
+	id D08C1E00E65; Tue, 12 Jul 2016 13:55:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D2CFE007B7
-	for <meta-ti@yoctoproject.org>; Tue, 12 Jul 2016 07:19:59 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u6CEHu7W001965
-	for <meta-ti@yoctoproject.org>; Tue, 12 Jul 2016 09:17:56 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u6CEJxPA020664
-	for <meta-ti@yoctoproject.org>; Tue, 12 Jul 2016 09:19:59 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 12 Jul 2016 09:19:58 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u6CEJwwL029410;	Tue, 12 Jul 2016 09:19:58 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 12 Jul 2016 10:19:18 -0400
-Message-ID: <1468333158-5337-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [PATCH] vlib-c66x: prevent stripping of binaries due to differnt arch/format
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAA1AE00E50
+	for <meta-ti@yoctoproject.org>; Tue, 12 Jul 2016 13:55:11 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C08C352A35; Tue, 12 Jul 2016 20:55:09 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20160712205509.C08C352A35@arago-project.org>
+Date: Tue, 12 Jul 2016 20:55:09 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: add 2 new DRA7 RevC LCD DTBs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,27 +33,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2016 14:20:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 12 Jul 2016 20:55:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Module: meta-ti
+Branch: krogoth
+Commit: a00cd08b1173400b0afbeaf8891f8fb9c1861ac0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a00cd08b1173400b0afbeaf8891f8fb9c1861ac0
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Jul 12 16:21:24 2016 -0400
+
+linux-ti-staging: add 2 new DRA7 RevC LCD DTBs
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-ti/vlib/vlib-c66x.inc | 3 +++
- 1 file changed, 3 insertions(+)
 
-diff --git a/recipes-ti/vlib/vlib-c66x.inc b/recipes-ti/vlib/vlib-c66x.inc
-index 2e57347..ed35c7f 100644
---- a/recipes-ti/vlib/vlib-c66x.inc
-+++ b/recipes-ti/vlib/vlib-c66x.inc
-@@ -25,4 +25,7 @@ do_install() {
- ALLOW_EMPTY_${PN} = "1"
- FILES_${PN}-dev += "${VLIB_C66_INSTALL_DIR_RECIPE}"
+ recipes-kernel/linux/linux-ti-staging_4.4.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 5bfd6f2..e417473 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -51,7 +51,8 @@ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-gp-evm-hd
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+ KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra7-evm-lcd-osd101t2587.dtb dra72-evm.dtb dra72-evm-revc.dtb \
+-                                dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb"
++                                dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb dra72-evm-revc-lcd-osd101t2045.dtb \
++                                dra72-evm-revc-lcd-osd101t2587.dtb"
+ KERNEL_DEVICETREE_dra7xx-hs-evm = "${KERNEL_DEVICETREE_dra7xx-evm}"
+ KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am571x-idk.dtb am572x-idk.dtb \
+                                 am571x-idk-lcd-osd.dtb am572x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb am572x-idk-lcd-osd101t2587.dtb"
+@@ -76,7 +77,7 @@ SRCREV = "567f0b402313d47144c09e9e71f0df625defad85"
+ PV = "4.4.14+git${SRCPV}"
  
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- INSANE_SKIP_${PN}-dev = "installed-vs-shipped arch"
--- 
-2.7.4
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 
 
