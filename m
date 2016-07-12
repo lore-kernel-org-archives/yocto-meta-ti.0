@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D08C1E00E65; Tue, 12 Jul 2016 13:55:15 -0700 (PDT)
+	id D29D5E00E50; Tue, 12 Jul 2016 13:55:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAA1AE00E50
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC623E00E5D
 	for <meta-ti@yoctoproject.org>; Tue, 12 Jul 2016 13:55:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C08C352A35; Tue, 12 Jul 2016 20:55:09 +0000 (UTC)
+	id D564852A3C; Tue, 12 Jul 2016 20:55:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160712205509.C08C352A35@arago-project.org>
+Message-Id: <20160712205509.D564852A3C@arago-project.org>
 Date: Tue, 12 Jul 2016 20:55:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: add 2 new DRA7 RevC LCD DTBs
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 12 Jul 2016 20:55:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: a00cd08b1173400b0afbeaf8891f8fb9c1861ac0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a00cd08b1173400b0afbeaf8891f8fb9c1861ac0
+Branch: master
+Commit: 543dac569bb64a3b75e549fb17a5ef65d590dc1b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=543dac569bb64a3b75e549fb17a5ef65d590dc1b
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Jul 12 16:21:24 2016 -0400
