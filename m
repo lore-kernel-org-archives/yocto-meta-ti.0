@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 13E92E00D0F; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
+	id 15A0EE00CDC; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6933E00CDC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7C05E00CE5
 	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C3C2552AB8; Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
+	id DF8BB52AC4; Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160720014224.C3C2552AB8@arago-project.org>
+Message-Id: <20160720014224.DF8BB52AC4@arago-project.org>
 Date: Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-framework-components: update to version 3.40.02.07
+Subject: Jacob Stiffler : netapi: Upgrade to version 1.1.0.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,52 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 8dde6049436b51e472a9613a52401647b2a2563a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8dde6049436b51e472a9613a52401647b2a2563a
+Commit: 329a51849d4fb28968e45aac7c049dd0f05a8986
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=329a51849d4fb28968e45aac7c049dd0f05a8986
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jul 12 19:38:50 2016 +0000
+Date:   Tue Jul 12 19:44:52 2016 +0000
 
-ti-framework-components: update to version 3.40.02.07
+netapi: Upgrade to version 1.1.0.7
+
+* update DT path to rxqueue
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../ti-framework-components_3.40.01.04.bb          |    9 ---------
- .../ti-framework-components_3.40.02.07.bb          |    9 +++++++++
- 2 files changed, 9 insertions(+), 9 deletions(-)
+ recipes-ti/netapi/netapi.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb b/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb
-deleted file mode 100644
-index 61c5a98..0000000
---- a/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require ti-framework-components.inc
--
--PV = "3_40_01_04"
--PR = "r0"
--
--LIC_FILES_CHKSUM = "file://framework_components_${PV}_Manifest.html;md5=806c3e4afd3bfbf7e5dc400ed1a0cc3c"
--
--SRC_URI[fctarball.md5sum] = "0e6b61cb6e1ad8b249d64f041c872192"
--SRC_URI[fctarball.sha256sum] = "eb38002092a7fc8f704fe9ea9de7f29108bc2533ba95f184706b2936dd24711c"
-diff --git a/recipes-ti/framework-components/ti-framework-components_3.40.02.07.bb b/recipes-ti/framework-components/ti-framework-components_3.40.02.07.bb
-new file mode 100644
-index 0000000..56c0028
---- /dev/null
-+++ b/recipes-ti/framework-components/ti-framework-components_3.40.02.07.bb
-@@ -0,0 +1,9 @@
-+require ti-framework-components.inc
-+
-+PV = "3_40_02_07"
-+PR = "r0"
-+
-+LIC_FILES_CHKSUM = "file://framework_components_${PV}_Manifest.html;md5=0dd131dd53300f517b14dba8824f8b0a"
-+
-+SRC_URI[fctarball.md5sum] = "36dd2312ea8d70aa2ae0a05a24dbf54e"
-+SRC_URI[fctarball.sha256sum] = "69082a0f86d12c24b39a1293ec35cf8007b850479898d5ae485ec1e8cf2e8c72"
+diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
+index 7ce8f19..3490cb7 100644
+--- a/recipes-ti/netapi/netapi.inc
++++ b/recipes-ti/netapi/netapi.inc
+@@ -13,15 +13,15 @@ NETAPI_GIT_URI = "git://git.ti.com/keystone-rtos/netapi.git"
+ NETAPI_GIT_PROTOCOL = "git"
+ NETAPI_GIT_BRANCH = "master"
+ 
+-# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
+-NETAPI_SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
++# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.07"
++NETAPI_SRCREV = "50026020384737d253668c4be80745a3653106f8"
+ 
+ BRANCH = "${NETAPI_GIT_BRANCH}"
+ SRC_URI = "${NETAPI_GIT_URI};protocol=${NETAPI_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${NETAPI_SRCREV}"
+ 
+-PV = "01.01.00.06"
+-INC_PR = "r5"
++PV = "01.01.00.07"
++INC_PR = "r0"
+ 
+ DEVICELIST_k2hk-evm = "k2h k2k"
+ DEVICELIST_k2l-evm  = "k2l"
 
 
