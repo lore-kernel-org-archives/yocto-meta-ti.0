@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 81E73E00CDC; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
+	id 85254E00D03; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4420E00CD8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9118E00CE8
 	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 832DD52A92; Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
+	id 9FF4D52AB2; Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160720014224.832DD52A92@arago-project.org>
+Message-Id: <20160720014224.9FF4D52AB2@arago-project.org>
 Date: Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: Install map file into the targetfs
+Subject: Jacob Stiffler : hplib: bump SRCREV to version 1.1.0.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,47 +38,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: f0385d19a2aea72566849b20060189ac12c2826f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f0385d19a2aea72566849b20060189ac12c2826f
+Commit: 93a60d991dec6cfb80b0cdeeaaecbb034a7ab45a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=93a60d991dec6cfb80b0cdeeaaecbb034a7ab45a
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Tue Jul 12 12:58:40 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Jul 12 19:23:44 2016 +0000
 
-ipumm-fw: Install map file into the targetfs
+hplib: bump SRCREV to version 1.1.0.8
 
-This will be required to analyze the remoteproc crash related
-issues, whenever it occurs.
+* added performance improvement in find_slots routine to skip full bit
+  map words in search
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes-bsp/hplib/hplib.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 331c25d..3f55847 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -53,10 +53,12 @@ do_compile() {
- }
+diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
+index aff38c9..fcc7191 100644
+--- a/recipes-bsp/hplib/hplib.inc
++++ b/recipes-bsp/hplib/hplib.inc
+@@ -9,12 +9,12 @@ HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
+ HPLIB_GIT_PROTOCOL = "git"
+ HPLIB_GIT_BRANCH = "master"
  
- TARGET = "dra7-ipu2-fw.xem4"
-+TARGET_MAP = "platform/ti/dce/baseimage/package/cfg/out/ipu/release/ipu.xem4.map"
+-# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.07"
+-HPLIB_SRCREV = "74dde26bfcdeb248fae29eb883ac78db89263f9f"
++# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.08"
++HPLIB_SRCREV = "5e9b27854f5d6f9f37a0ed8d7516d4874427cd8b"
  
- do_install() {
-     install -d ${D}${base_libdir}/firmware
-     install -m 0644 ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}.${BPN}
-+    install -m 0644 ${S}/${TARGET_MAP} ${D}${base_libdir}/firmware/${TARGET}.map
- }
+ BRANCH = "${HPLIB_GIT_BRANCH}"
+ SRC_URI = "${HPLIB_GIT_URI};protocol=${HPLIB_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${HPLIB_SRCREV}"
  
- ALTERNATIVE_${PN} = "dra7-ipu2-fw.xem4"
-@@ -66,4 +68,4 @@ ALTERNATIVE_PRIORITY = "20"
- 
- FILES_${PN} += "${base_libdir}/firmware/*"
- 
--PR = "r1"
-+PR = "r2"
+-PV = "01.01.00.07+git${SRCPV}"
++PV = "01.01.00.08+git${SRCPV}"
+ INC_PR = "r0"
 
 
