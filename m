@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9ADCFE00D07; Tue, 19 Jul 2016 18:42:31 -0700 (PDT)
+	id 9E44FE00D05; Tue, 19 Jul 2016 18:42:31 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6636BE00D09
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 662AFE00D05
 	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 68E2952ACF; Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
+	id 3792552ACA; Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160720014225.68E2952ACF@arago-project.org>
+Message-Id: <20160720014225.3792552ACA@arago-project.org>
 Date: Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-framework-components: update to version 3.40.02.07
+Subject: Karthik Ramanan : ipumm-fw: Install map file into the targetfs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,52 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d12c6b3df98712302b486dc776fc44ab6f23d49e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d12c6b3df98712302b486dc776fc44ab6f23d49e
+Commit: 40bfd01824abb9da80d0e54ded36595de84e226c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=40bfd01824abb9da80d0e54ded36595de84e226c
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jul 12 19:38:50 2016 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Tue Jul 12 12:58:40 2016 +0000
 
-ti-framework-components: update to version 3.40.02.07
+ipumm-fw: Install map file into the targetfs
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+This will be required to analyze the remoteproc crash related
+issues, whenever it occurs.
+
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../ti-framework-components_3.40.01.04.bb          |    9 ---------
- .../ti-framework-components_3.40.02.07.bb          |    9 +++++++++
- 2 files changed, 9 insertions(+), 9 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb b/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb
-deleted file mode 100644
-index 61c5a98..0000000
---- a/recipes-ti/framework-components/ti-framework-components_3.40.01.04.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require ti-framework-components.inc
--
--PV = "3_40_01_04"
--PR = "r0"
--
--LIC_FILES_CHKSUM = "file://framework_components_${PV}_Manifest.html;md5=806c3e4afd3bfbf7e5dc400ed1a0cc3c"
--
--SRC_URI[fctarball.md5sum] = "0e6b61cb6e1ad8b249d64f041c872192"
--SRC_URI[fctarball.sha256sum] = "eb38002092a7fc8f704fe9ea9de7f29108bc2533ba95f184706b2936dd24711c"
-diff --git a/recipes-ti/framework-components/ti-framework-components_3.40.02.07.bb b/recipes-ti/framework-components/ti-framework-components_3.40.02.07.bb
-new file mode 100644
-index 0000000..56c0028
---- /dev/null
-+++ b/recipes-ti/framework-components/ti-framework-components_3.40.02.07.bb
-@@ -0,0 +1,9 @@
-+require ti-framework-components.inc
-+
-+PV = "3_40_02_07"
-+PR = "r0"
-+
-+LIC_FILES_CHKSUM = "file://framework_components_${PV}_Manifest.html;md5=0dd131dd53300f517b14dba8824f8b0a"
-+
-+SRC_URI[fctarball.md5sum] = "36dd2312ea8d70aa2ae0a05a24dbf54e"
-+SRC_URI[fctarball.sha256sum] = "69082a0f86d12c24b39a1293ec35cf8007b850479898d5ae485ec1e8cf2e8c72"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 331c25d..3f55847 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -53,10 +53,12 @@ do_compile() {
+ }
+ 
+ TARGET = "dra7-ipu2-fw.xem4"
++TARGET_MAP = "platform/ti/dce/baseimage/package/cfg/out/ipu/release/ipu.xem4.map"
+ 
+ do_install() {
+     install -d ${D}${base_libdir}/firmware
+     install -m 0644 ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}.${BPN}
++    install -m 0644 ${S}/${TARGET_MAP} ${D}${base_libdir}/firmware/${TARGET}.map
+ }
+ 
+ ALTERNATIVE_${PN} = "dra7-ipu2-fw.xem4"
+@@ -66,4 +68,4 @@ ALTERNATIVE_PRIORITY = "20"
+ 
+ FILES_${PN} += "${base_libdir}/firmware/*"
+ 
+-PR = "r1"
++PR = "r2"
 
 
