@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 80035E00CE9; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
+	id 81E73E00CDC; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66229E00D03
-	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:27 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4420E00CD8
+	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8888E52AD1; Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
+	id 832DD52A92; Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160720014225.8888E52AD1@arago-project.org>
-Date: Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
+Message-Id: <20160720014224.832DD52A92@arago-project.org>
+Date: Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : vlib-c66x: prevent stripping of binaries due to differnt arch/format
+Subject: Karthik Ramanan : ipumm-fw: Install map file into the targetfs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,34 +37,48 @@ X-List-Received-Date: Wed, 20 Jul 2016 01:42:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 1d531400a83e5a3dde4810f64dad535af027bf6b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1d531400a83e5a3dde4810f64dad535af027bf6b
+Branch: krogoth
+Commit: f0385d19a2aea72566849b20060189ac12c2826f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f0385d19a2aea72566849b20060189ac12c2826f
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jul 12 20:19:18 2016 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Tue Jul 12 12:58:40 2016 +0000
 
-vlib-c66x: prevent stripping of binaries due to differnt arch/format
+ipumm-fw: Install map file into the targetfs
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+This will be required to analyze the remoteproc crash related
+issues, whenever it occurs.
+
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/vlib/vlib-c66x.inc |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/vlib/vlib-c66x.inc b/recipes-ti/vlib/vlib-c66x.inc
-index 2e57347..ed35c7f 100644
---- a/recipes-ti/vlib/vlib-c66x.inc
-+++ b/recipes-ti/vlib/vlib-c66x.inc
-@@ -25,4 +25,7 @@ do_install() {
- ALLOW_EMPTY_${PN} = "1"
- FILES_${PN}-dev += "${VLIB_C66_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 331c25d..3f55847 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -53,10 +53,12 @@ do_compile() {
+ }
  
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- INSANE_SKIP_${PN}-dev = "installed-vs-shipped arch"
+ TARGET = "dra7-ipu2-fw.xem4"
++TARGET_MAP = "platform/ti/dce/baseimage/package/cfg/out/ipu/release/ipu.xem4.map"
+ 
+ do_install() {
+     install -d ${D}${base_libdir}/firmware
+     install -m 0644 ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}.${BPN}
++    install -m 0644 ${S}/${TARGET_MAP} ${D}${base_libdir}/firmware/${TARGET}.map
+ }
+ 
+ ALTERNATIVE_${PN} = "dra7-ipu2-fw.xem4"
+@@ -66,4 +68,4 @@ ALTERNATIVE_PRIORITY = "20"
+ 
+ FILES_${PN} += "${base_libdir}/firmware/*"
+ 
+-PR = "r1"
++PR = "r2"
 
 
