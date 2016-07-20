@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 15A0EE00CDC; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
+	id 7D212E00CE5; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7C05E00CE5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA459E00CE9
 	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DF8BB52AC4; Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
+	id 06DA052AC9; Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160720014224.DF8BB52AC4@arago-project.org>
-Date: Wed, 20 Jul 2016 01:42:24 +0000 (UTC)
+Message-Id: <20160720014225.06DA052AC9@arago-project.org>
+Date: Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : netapi: Upgrade to version 1.1.0.7
+Subject: Jacob Stiffler : vlib-c66x: prevent stripping of binaries due to differnt arch/format
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,47 +38,33 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 329a51849d4fb28968e45aac7c049dd0f05a8986
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=329a51849d4fb28968e45aac7c049dd0f05a8986
+Commit: 730d197144ed18c75dcf85f8f8ba2953ea30bc5c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=730d197144ed18c75dcf85f8f8ba2953ea30bc5c
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jul 12 19:44:52 2016 +0000
+Date:   Tue Jul 12 20:19:18 2016 +0000
 
-netapi: Upgrade to version 1.1.0.7
-
-* update DT path to rxqueue
+vlib-c66x: prevent stripping of binaries due to differnt arch/format
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/netapi/netapi.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/vlib/vlib-c66x.inc |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-index 7ce8f19..3490cb7 100644
---- a/recipes-ti/netapi/netapi.inc
-+++ b/recipes-ti/netapi/netapi.inc
-@@ -13,15 +13,15 @@ NETAPI_GIT_URI = "git://git.ti.com/keystone-rtos/netapi.git"
- NETAPI_GIT_PROTOCOL = "git"
- NETAPI_GIT_BRANCH = "master"
+diff --git a/recipes-ti/vlib/vlib-c66x.inc b/recipes-ti/vlib/vlib-c66x.inc
+index 2e57347..ed35c7f 100644
+--- a/recipes-ti/vlib/vlib-c66x.inc
++++ b/recipes-ti/vlib/vlib-c66x.inc
+@@ -25,4 +25,7 @@ do_install() {
+ ALLOW_EMPTY_${PN} = "1"
+ FILES_${PN}-dev += "${VLIB_C66_INSTALL_DIR_RECIPE}"
  
--# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
--NETAPI_SRCREV = "8180b61615965954eaaedc26053f9a8939d9a273"
-+# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.07"
-+NETAPI_SRCREV = "50026020384737d253668c4be80745a3653106f8"
- 
- BRANCH = "${NETAPI_GIT_BRANCH}"
- SRC_URI = "${NETAPI_GIT_URI};protocol=${NETAPI_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${NETAPI_SRCREV}"
- 
--PV = "01.01.00.06"
--INC_PR = "r5"
-+PV = "01.01.00.07"
-+INC_PR = "r0"
- 
- DEVICELIST_k2hk-evm = "k2h k2k"
- DEVICELIST_k2l-evm  = "k2l"
++INHIBIT_PACKAGE_STRIP = "1"
++INHIBIT_SYSROOT_STRIP = "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ INSANE_SKIP_${PN}-dev = "installed-vs-shipped arch"
 
 
