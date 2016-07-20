@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7D212E00CE5; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
+	id 80035E00CE9; Tue, 19 Jul 2016 18:42:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA459E00CE9
-	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:25 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66229E00D03
+	for <meta-ti@yoctoproject.org>; Tue, 19 Jul 2016 18:42:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 06DA052AC9; Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
+	id 8888E52AD1; Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160720014225.06DA052AC9@arago-project.org>
+Message-Id: <20160720014225.8888E52AD1@arago-project.org>
 Date: Wed, 20 Jul 2016 01:42:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : vlib-c66x: prevent stripping of binaries due to differnt arch/format
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 20 Jul 2016 01:42:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 730d197144ed18c75dcf85f8f8ba2953ea30bc5c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=730d197144ed18c75dcf85f8f8ba2953ea30bc5c
+Branch: master
+Commit: 1d531400a83e5a3dde4810f64dad535af027bf6b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1d531400a83e5a3dde4810f64dad535af027bf6b
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Tue Jul 12 20:19:18 2016 +0000
