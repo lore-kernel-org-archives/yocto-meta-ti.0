@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 82CFCE009BF; Mon, 25 Jul 2016 11:41:33 -0700 (PDT)
+	id 859C2E0086E; Mon, 25 Jul 2016 11:41:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -13,13 +13,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63D7BE0086E
-	for <meta-ti@yoctoproject.org>; Mon, 25 Jul 2016 11:41:29 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65CAEE00971
+	for <meta-ti@yoctoproject.org>; Mon, 25 Jul 2016 11:41:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 77A64529BD; Mon, 25 Jul 2016 18:41:28 +0000 (UTC)
+	id 688EB52A17; Mon, 25 Jul 2016 18:41:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160725184128.77A64529BD@arago-project.org>
-Date: Mon, 25 Jul 2016 18:41:28 +0000 (UTC)
+Message-Id: <20160725184129.688EB52A17@arago-project.org>
+Date: Mon, 25 Jul 2016 18:41:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Karthik Ramanan : ti-ccsv6-native: update to new version 6.1.3.00034
 X-BeenThere: meta-ti@yoctoproject.org
@@ -38,9 +38,9 @@ X-List-Received-Date: Mon, 25 Jul 2016 18:41:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: f12dde207901a81043f6e04b2cc0e072ef795f53
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f12dde207901a81043f6e04b2cc0e072ef795f53
+Branch: master
+Commit: 1b656bb030aca7e307ace62f1b2d312c02010852
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1b656bb030aca7e307ace62f1b2d312c02010852
 
 Author: Karthik Ramanan <a0393906@ti.com>
 Date:   Mon Jul 25 20:30:28 2016 +0000
