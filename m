@@ -1,27 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 859C2E0086E; Mon, 25 Jul 2016 11:41:33 -0700 (PDT)
+	id 53CD1E00C44; Mon, 25 Jul 2016 16:53:31 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.23 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65CAEE00971
-	for <meta-ti@yoctoproject.org>; Mon, 25 Jul 2016 11:41:30 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 688EB52A17; Mon, 25 Jul 2016 18:41:29 +0000 (UTC)
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 38D54E00C40
+	for <meta-ti@yoctoproject.org>; Mon, 25 Jul 2016 16:53:28 -0700 (PDT)
+Received: from vz-proxy-m006.mx.aol.com ([64.236.83.10])
+	by vms173023.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0OAW003E1ACMG280@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 25 Jul 2016 18:53:23 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=pKq81LsWol7b8sI3Hpopew==:117
+	a=cAmyUtKerLwA:10 a=sozttTNsAAAA:8	a=rJvLH1BknI5sEH4zMOQA:9
+Received: by 100.15.86.14 with SMTP id 7e45711c; Mon, 25 Jul 2016 23:53:22 GMT
+Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
+	with ESMTP id 935EF161B38;	Mon, 25 Jul 2016 19:53:10 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160725184129.688EB52A17@arago-project.org>
-Date: Mon, 25 Jul 2016 18:41:29 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ti-ccsv6-native: update to new version 6.1.3.00034
+Date: Mon, 25 Jul 2016 19:53:09 -0400
+Message-id: <1469490789-10912-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] conf: set lower DEFAULTTUNE across machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,46 +45,107 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jul 2016 18:41:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 25 Jul 2016 23:53:31 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 1b656bb030aca7e307ace62f1b2d312c02010852
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1b656bb030aca7e307ace62f1b2d312c02010852
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Mon Jul 25 20:30:28 2016 +0000
+Set DEFAULTTUNE optimization in BSP from specific Cortex level to more generic
+armv7a, but keep thumb, neon and hard-float options enabled due to numerous BSP
+components requiring them. While enabling additional Cortex optimization might
+gain a tiny performance improvement, it makes binary feeds incompatible between
+A8, A9 and A15 machines, leads to unnecessary rebuilds and hides potential
+packaging or recipe issues. Hence the decision to enable Cortex optimization
+should be left to the Distro.
 
-ti-ccsv6-native: update to new version 6.1.3.00034
-
-updated MD5/SHA256 checksum from the previous recipe
-
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/include/keystone.inc | 2 +-
+ conf/machine/include/omap-a15.inc | 2 +-
+ conf/machine/include/omap3.inc    | 2 +-
+ conf/machine/include/omap4.inc    | 2 +-
+ conf/machine/include/ti33x.inc    | 2 +-
+ conf/machine/include/ti43x.inc    | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
- ...1.3.00033.bb => ti-ccsv6-native_6.1.3.00034.bb} |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00033.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
-similarity index 90%
-rename from recipes-ti/devtools/ti-ccsv6-native_6.1.3.00033.bb
-rename to recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
-index ba0da7d..334c7df 100644
---- a/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00033.bb
-+++ b/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
-@@ -20,8 +20,8 @@ BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
- TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
- TI_BIN_UNPK_CMDS = ""
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 1253312..dd1cbae 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "keystone"
+ require conf/machine/include/soc-family.inc
  
--SRC_URI[ccsv6.md5sum] = "d95121970f8bcee944bf8b8e576bf3ec"
--SRC_URI[ccsv6.sha256sum] = "b785f040de8cccbc571923e34303fea92484677845df64a65abee2d3c248fa5b"
-+SRC_URI[ccsv6.md5sum] = "ceaa5023c1a4b51bc637d3de1a15786b"
-+SRC_URI[ccsv6.sha256sum] = "fb3205a21942da09684c871371513707c841c4fd8d88a62f6a7865b0a86cc492"
+-DEFAULTTUNE ?= "cortexa15thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa15.inc
  
- do_install() {
-     install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 9316998..a434456 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "omap-a15"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa15thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa15.inc
+ 
+ # Increase this everytime you change something in the kernel
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 3a84140..4fe4cb3 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "omap3"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa8thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa8.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index deb3316..5d0ce5e 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "omap4"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa9thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa9.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index fa2ead5..6d1a45b 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "ti33x"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa8thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa8.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index a603059..807a42e 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "ti43x"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa9thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa9.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+-- 
+2.7.4
 
 
