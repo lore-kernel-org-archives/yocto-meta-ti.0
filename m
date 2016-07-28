@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 67D2DE00F31; Wed, 27 Jul 2016 18:36:30 -0700 (PDT)
+	id 74AABE00F2D; Wed, 27 Jul 2016 18:36:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64D80E00F20
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68A19E00F2C
 	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:36:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0839F52A31; Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
+	id 7323652A8C; Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160728013624.0839F52A31@arago-project.org>
+Message-Id: <20160728013624.7323652A8C@arago-project.org>
 Date: Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : conf: set lower DEFAULTTUNE across machines
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 28 Jul 2016 01:36:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 74349360a1f87645a8325db81a06cfc9aabc8eb8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=74349360a1f87645a8325db81a06cfc9aabc8eb8
+Branch: master
+Commit: 6747b4f3451c9a99c3752467aff2030572d8c5fb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6747b4f3451c9a99c3752467aff2030572d8c5fb
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Jul 26 05:53:09 2016 +0000
