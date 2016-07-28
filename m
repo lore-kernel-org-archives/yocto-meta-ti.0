@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 44C49E00F2D; Wed, 27 Jul 2016 18:36:30 -0700 (PDT)
+	id 67D2DE00F31; Wed, 27 Jul 2016 18:36:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D61A1E00F30
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:36:26 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64D80E00F20
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:36:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9CBB052A9C; Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
+	id 0839F52A31; Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160728013624.9CBB052A9C@arago-project.org>
+Message-Id: <20160728013624.0839F52A31@arago-project.org>
 Date: Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4. 16 with latest domain trees merged
+Subject: Denys Dmytriyenko : conf: set lower DEFAULTTUNE across machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,51 +37,112 @@ X-List-Received-Date: Thu, 28 Jul 2016 01:36:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 8faa366e1b33e8251ad959023581252e7c6d9566
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8faa366e1b33e8251ad959023581252e7c6d9566
+Branch: krogoth
+Commit: 74349360a1f87645a8325db81a06cfc9aabc8eb8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=74349360a1f87645a8325db81a06cfc9aabc8eb8
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Jul 28 07:29:51 2016 +0000
+Date:   Tue Jul 26 05:53:09 2016 +0000
 
-linux-ti-staging: update to 4.4.16 with latest domain trees merged
+conf: set lower DEFAULTTUNE across machines
+
+Set DEFAULTTUNE optimization in BSP from specific Cortex level to more generic
+armv7a, but keep thumb, neon and hard-float options enabled due to numerous BSP
+components requiring them. While enabling additional Cortex optimization might
+gain a tiny performance improvement, it makes binary feeds incompatible between
+A8, A9 and A15 machines, leads to unnecessary rebuilds and hides potential
+packaging or recipe issues. Hence the decision to enable Cortex optimization
+should be left to the Distro.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ conf/machine/include/keystone.inc |    2 +-
+ conf/machine/include/omap-a15.inc |    2 +-
+ conf/machine/include/omap3.inc    |    2 +-
+ conf/machine/include/omap4.inc    |    2 +-
+ conf/machine/include/ti33x.inc    |    2 +-
+ conf/machine/include/ti43x.inc    |    2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index b231803..f1bbca1 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 1253312..dd1cbae 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "keystone"
+ require conf/machine/include/soc-family.inc
  
- BRANCH = "ti-rt-linux-4.4.y"
+-DEFAULTTUNE ?= "cortexa15thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa15.inc
  
--SRCREV = "6014914de1fc45671599a0c0871a98953b6edf60"
-+SRCREV = "6c3d70c75d9c8e7e66f5daa13a3b8073ba8e629d"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index e417473..0294af2 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -73,11 +73,11 @@ S = "${WORKDIR}/git"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 9316998..a434456 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "omap-a15"
+ require conf/machine/include/soc-family.inc
  
- BRANCH = "ti-lsk-linux-4.4.y"
+-DEFAULTTUNE ?= "cortexa15thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa15.inc
  
--SRCREV = "567f0b402313d47144c09e9e71f0df625defad85"
--PV = "4.4.14+git${SRCPV}"
-+SRCREV = "cbe129432c2af06741be9e4d1f9d50c32b0d4699"
-+PV = "4.4.16+git${SRCPV}"
+ # Increase this everytime you change something in the kernel
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 3a84140..4fe4cb3 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "omap3"
+ require conf/machine/include/soc-family.inc
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
+-DEFAULTTUNE ?= "cortexa8thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa8.inc
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index deb3316..5d0ce5e 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "omap4"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa9thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa9.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index fa2ead5..6d1a45b 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "ti33x"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa8thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa8.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index a603059..807a42e 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -1,7 +1,7 @@
+ SOC_FAMILY = "ti43x"
+ require conf/machine/include/soc-family.inc
+ 
+-DEFAULTTUNE ?= "cortexa9thf-neon"
++DEFAULTTUNE ?= "armv7athf-neon"
+ require conf/machine/include/tune-cortexa9.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
 
 
