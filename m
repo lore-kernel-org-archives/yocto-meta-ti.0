@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D441CE00F29; Wed, 27 Jul 2016 18:30:11 -0700 (PDT)
+	id 0C32DE00F26; Wed, 27 Jul 2016 18:30:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,31 @@ X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
 	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.9 listed in list.dnswl.org]
+	*      [206.46.173.19 listed in list.dnswl.org]
 	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97622E00F20
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:30:09 -0700 (PDT)
-Received: from vz-proxy-m007.mx.aol.com ([64.236.83.14])
-	by vms173009.mailsrvcs.net
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9C74E00F23
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:30:08 -0700 (PDT)
+Received: from vz-proxy-m004.mx.aol.com ([64.236.83.8])
+	by vms173019.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0OB000AKJ45SUU30@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 27 Jul 2016 20:29:53 -0500 (CDT)
+	2014)) with ESMTPA id <0OB000K5545S4U90@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 27 Jul 2016 20:29:52 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=MJxOpqxZADbEbEImuSX/mw==:117
-	a=cAmyUtKerLwA:10 a=sozttTNsAAAA:8	a=MDFdVLQYG8FeA0TxC2gA:9
-Received: by 100.15.86.14 with SMTP id 06bf1bb5; Thu, 28 Jul 2016 01:29:52 GMT
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=Bcm0RCOkHTZ4We9DUxtllQ==:117
+	a=cAmyUtKerLwA:10 a=sozttTNsAAAA:8	a=0UKH5BiQkwmWfwo1rRcA:9
+Received: by 100.15.86.14 with SMTP id 7fcf4c3e; Thu, 28 Jul 2016 01:29:51 GMT
 Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id 2E83D1620C2;	Wed, 27 Jul 2016 21:29:52 -0400 (EDT)
+	with ESMTP id 226521620C1;	Wed, 27 Jul 2016 21:29:52 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 27 Jul 2016 21:29:51 -0400
-Message-id: <1469669391-15714-2-git-send-email-denis@denix.org>
+Date: Wed, 27 Jul 2016 21:29:50 -0400
+Message-id: <1469669391-15714-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
-In-reply-to: <1469669391-15714-1-git-send-email-denis@denix.org>
-References: <1469669391-15714-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] linux-ti-staging: update to 4.4.16 with latest domain trees merged
+Subject: [PATCH 1/2] u-boot-ti-staging: update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,45 +45,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2016 01:30:11 -0000
+X-List-Received-Date: Thu, 28 Jul 2016 01:30:12 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    | 6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index b231803..f1bbca1 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index f6377de..b633e83 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--SRCREV = "6014914de1fc45671599a0c0871a98953b6edf60"
-+SRCREV = "6c3d70c75d9c8e7e66f5daa13a3b8073ba8e629d"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index e417473..0294af2 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -73,11 +73,11 @@ S = "${WORKDIR}/git"
+-PR = "r10"
++PR = "r11"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "567f0b402313d47144c09e9e71f0df625defad85"
--PV = "4.4.14+git${SRCPV}"
-+SRCREV = "cbe129432c2af06741be9e4d1f9d50c32b0d4699"
-+PV = "4.4.16+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "a4560200fc597109328a6454094fa77516434880"
++SRCREV = "c389a5bbaace49c9ac16a9ff2b2b7b6b2545932e"
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 -- 
 2.7.4
 
