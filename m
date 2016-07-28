@@ -1,26 +1,35 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 74AABE00F2D; Wed, 27 Jul 2016 18:36:30 -0700 (PDT)
+	id D93B4E00CC9; Thu, 28 Jul 2016 06:03:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68A19E00F2C
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:36:25 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 7323652A8C; Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160728013624.7323652A8C@arago-project.org>
-Date: Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf: set lower DEFAULTTUNE across machines
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B701E00CAA
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jul 2016 06:03:04 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u6SD33b9003890
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jul 2016 08:03:03 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u6SD33cF015804
+	for <meta-ti@yoctoproject.org>; Thu, 28 Jul 2016 08:03:03 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 28 Jul 2016 08:03:02 -0500
+Received: from sditapps09.india.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u6SD31jt020114;	Thu, 28 Jul 2016 08:03:02 -0500
+From: Karthik Ramanan <a0393906@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 28 Jul 2016 18:32:59 +0530
+Message-ID: <1469710979-3165-1-git-send-email-a0393906@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] ipumm-fw: bump for multi-instance sync fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,116 +42,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2016 01:36:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 28 Jul 2016 13:03:07 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 6747b4f3451c9a99c3752467aff2030572d8c5fb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6747b4f3451c9a99c3752467aff2030572d8c5fb
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Jul 26 05:53:09 2016 +0000
-
-conf: set lower DEFAULTTUNE across machines
-
-Set DEFAULTTUNE optimization in BSP from specific Cortex level to more generic
-armv7a, but keep thumb, neon and hard-float options enabled due to numerous BSP
-components requiring them. While enabling additional Cortex optimization might
-gain a tiny performance improvement, it makes binary feeds incompatible between
-A8, A9 and A15 machines, leads to unnecessary rebuilds and hides potential
-packaging or recipe issues. Hence the decision to enable Cortex optimization
-should be left to the Distro.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
- conf/machine/include/keystone.inc |    2 +-
- conf/machine/include/omap-a15.inc |    2 +-
- conf/machine/include/omap3.inc    |    2 +-
- conf/machine/include/omap4.inc    |    2 +-
- conf/machine/include/ti33x.inc    |    2 +-
- conf/machine/include/ti43x.inc    |    2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index 1253312..dd1cbae 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -1,7 +1,7 @@
- SOC_FAMILY = "keystone"
- require conf/machine/include/soc-family.inc
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 331c25d..c3044cb 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -9,7 +9,7 @@ python __anonymous() {
+ DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+ LICENSE = "TI-TSPA"
  
--DEFAULTTUNE ?= "cortexa15thf-neon"
-+DEFAULTTUNE ?= "armv7athf-neon"
- require conf/machine/include/tune-cortexa15.inc
+-LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=036f6300761559fbc5ce7d06e1ccea5a"
++LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index 9316998..a434456 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -1,7 +1,7 @@
- SOC_FAMILY = "omap-a15"
- require conf/machine/include/soc-family.inc
+ COMPATIBLE_MACHINE = "dra7xx"
  
--DEFAULTTUNE ?= "cortexa15thf-neon"
-+DEFAULTTUNE ?= "armv7athf-neon"
- require conf/machine/include/tune-cortexa15.inc
+@@ -17,11 +17,12 @@ RDEPENDS_${PN} = " libdce"
  
- # Increase this everytime you change something in the kernel
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 3a84140..4fe4cb3 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -1,7 +1,7 @@
- SOC_FAMILY = "omap3"
- require conf/machine/include/soc-family.inc
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--DEFAULTTUNE ?= "cortexa8thf-neon"
-+DEFAULTTUNE ?= "armv7athf-neon"
- require conf/machine/include/tune-cortexa8.inc
+-SRCREV = "1627fec802da688fe44c6b0cac43ff811b08f064"
++SRCREV = "7c283ebc252223a728cb542dbc10c3ca0ab53e59"
  
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
-index deb3316..5d0ce5e 100644
---- a/conf/machine/include/omap4.inc
-+++ b/conf/machine/include/omap4.inc
-@@ -1,7 +1,7 @@
- SOC_FAMILY = "omap4"
- require conf/machine/include/soc-family.inc
+ S = "${WORKDIR}/git"
  
--DEFAULTTUNE ?= "cortexa9thf-neon"
-+DEFAULTTUNE ?= "armv7athf-neon"
- require conf/machine/include/tune-cortexa9.inc
+-PV = "3.00.10.01"
++PV = "3.00.11.00"
++PR = "r4"
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index fa2ead5..6d1a45b 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -1,7 +1,7 @@
- SOC_FAMILY = "ti33x"
- require conf/machine/include/soc-family.inc
- 
--DEFAULTTUNE ?= "cortexa8thf-neon"
-+DEFAULTTUNE ?= "armv7athf-neon"
- require conf/machine/include/tune-cortexa8.inc
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index a603059..807a42e 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -1,7 +1,7 @@
- SOC_FAMILY = "ti43x"
- require conf/machine/include/soc-family.inc
- 
--DEFAULTTUNE ?= "cortexa9thf-neon"
-+DEFAULTTUNE ?= "armv7athf-neon"
- require conf/machine/include/tune-cortexa9.inc
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+-- 
+1.9.1
 
 
