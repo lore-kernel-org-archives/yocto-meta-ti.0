@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0C32DE00F26; Wed, 27 Jul 2016 18:30:12 -0700 (PDT)
+	id 9AC4CE00F32; Wed, 27 Jul 2016 18:36:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9C74E00F23
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:30:08 -0700 (PDT)
-Received: from vz-proxy-m004.mx.aol.com ([64.236.83.8])
-	by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0OB000K5545S4U90@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 27 Jul 2016 20:29:52 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=Bcm0RCOkHTZ4We9DUxtllQ==:117
-	a=cAmyUtKerLwA:10 a=sozttTNsAAAA:8	a=0UKH5BiQkwmWfwo1rRcA:9
-Received: by 100.15.86.14 with SMTP id 7fcf4c3e; Thu, 28 Jul 2016 01:29:51 GMT
-Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id 226521620C1;	Wed, 27 Jul 2016 21:29:52 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67716E00F26
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jul 2016 18:36:25 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 2278D52A66; Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Wed, 27 Jul 2016 21:29:50 -0400
-Message-id: <1469669391-15714-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH 1/2] u-boot-ti-staging: update to the latest
+Message-Id: <20160728013624.2278D52A66@arago-project.org>
+Date: Thu, 28 Jul 2016 01:36:24 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2016 01:30:12 -0000
+X-List-Received-Date: Thu, 28 Jul 2016 01:36:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: krogoth
+Commit: 721101f9e18e465aebf4ece710efee6cace16cf9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=721101f9e18e465aebf4ece710efee6cace16cf9
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Jul 28 07:29:50 2016 +0000
+
+u-boot-ti-staging: update to the latest
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
 index f6377de..b633e83 100644
@@ -75,7 +74,5 @@ index f6377de..b633e83 100644
  
  # Support for secure devices - detailed info is in doc/README.ti-secure
  TI_SECURE_DEV_PKG ?= ""
--- 
-2.7.4
 
 
