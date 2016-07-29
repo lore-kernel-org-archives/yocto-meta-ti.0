@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ABDE1E00DF1; Fri, 29 Jul 2016 14:52:16 -0700 (PDT)
+	id AD88AE00DDD; Fri, 29 Jul 2016 14:52:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CE57E00DE7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A7B2E00DDD
 	for <meta-ti@yoctoproject.org>; Fri, 29 Jul 2016 14:52:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0250E52AC2; Fri, 29 Jul 2016 21:52:08 +0000 (UTC)
+	id 96E0952AB8; Fri, 29 Jul 2016 21:52:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160729215209.0250E52AC2@arago-project.org>
+Message-Id: <20160729215208.96E0952AB8@arago-project.org>
 Date: Fri, 29 Jul 2016 21:52:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: bump for multi-instance sync fix
+Subject: Karthik Ramanan : ipumm-fw: cleanup recipe for pre-built binary
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,50 +37,63 @@ X-List-Received-Date: Fri, 29 Jul 2016 21:52:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a3eb80a83d6886335619b1ca538ca9d8b72bd502
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a3eb80a83d6886335619b1ca538ca9d8b72bd502
+Branch: krogoth
+Commit: b95136f4d97ffb593f8dbdec47d54528a9e98ba1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b95136f4d97ffb593f8dbdec47d54528a9e98ba1
 
 Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Jul 28 19:02:59 2016 +0000
+Date:   Thu Jul 28 19:05:36 2016 +0000
 
-ipumm-fw: bump for multi-instance sync fix
+ipumm-fw: cleanup recipe for pre-built binary
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.02.bb |   35 ---------------------------
+ 1 files changed, 0 insertions(+), 35 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 3f55847..53b4245 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -9,7 +9,7 @@ python __anonymous() {
- DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
- LICENSE = "TI-TSPA"
- 
--LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=036f6300761559fbc5ce7d06e1ccea5a"
-+LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
- 
- COMPATIBLE_MACHINE = "dra7xx"
- 
-@@ -17,11 +17,12 @@ RDEPENDS_${PN} = " libdce"
- 
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
- 
--SRCREV = "1627fec802da688fe44c6b0cac43ff811b08f064"
-+SRCREV = "7c283ebc252223a728cb542dbc10c3ca0ab53e59"
- 
- S = "${WORKDIR}/git"
- 
--PV = "3.00.10.01"
-+PV = "3.00.11.00"
-+PR = "r4"
- 
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.02.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.02.bb
+deleted file mode 100644
+index 8b077b0..0000000
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.02.bb
++++ /dev/null
+@@ -1,35 +0,0 @@
+-python __anonymous() {
+-    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
+-    if not features:
+-        return
+-    if "mmip" not in features:
+-        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
+-}
+-
+-DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+-LICENSE = "TI-TSPA"
+-
+-LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=81f4b23808c36c9223523f43e35d291c"
+-
+-COMPATIBLE_MACHINE = "dra7xx"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-RDEPENDS_${PN} = " libdce"
+-
+-SRC_URI = "http://downloads.ti.com/infotainment/esd/jacinto6/glsdk/ipumm/3_00_08_02/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
+-
+-SRC_URI[md5sum] = "53f47909c2e2575b188bba9ddc325437"
+-SRC_URI[sha256sum] = "4ac7598bbbb5dd0cd6504906afe0e09d76ba612a3c326e45425e67535e5f2d09"
+-
+-S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
+-
+-TARGET = "dra7-ipu2-fw.xem4"
+-
+-do_install() {
+-        mkdir -p ${D}${base_libdir}/firmware
+-        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
+-}
+-
+-FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+-
+-PR = "r2"
 
 
