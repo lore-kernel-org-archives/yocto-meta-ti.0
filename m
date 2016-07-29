@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A203EE00DF3; Fri, 29 Jul 2016 14:52:13 -0700 (PDT)
+	id A378CE00DD3; Fri, 29 Jul 2016 14:52:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7938BE00DD3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77444E00DC9
 	for <meta-ti@yoctoproject.org>; Fri, 29 Jul 2016 14:52:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7FABC52AB3; Fri, 29 Jul 2016 21:52:08 +0000 (UTC)
+	id BA1CB52AB9; Fri, 29 Jul 2016 21:52:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160729215208.7FABC52AB3@arago-project.org>
+Message-Id: <20160729215208.BA1CB52AB9@arago-project.org>
 Date: Fri, 29 Jul 2016 21:52:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: bump for multi-instance sync fix
+Subject: Denys Dmytriyenko : kselftests: update to 4.4, don' t need to depend on kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,49 +39,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: fe0284cfcdf92fe7485918b2919158e671787e09
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fe0284cfcdf92fe7485918b2919158e671787e09
+Commit: 20e57e16de436d83231a62da8a5074fd3a055937
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=20e57e16de436d83231a62da8a5074fd3a055937
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Jul 28 19:02:59 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Jul 30 00:20:28 2016 +0000
 
-ipumm-fw: bump for multi-instance sync fix
+kselftests: update to 4.4, don't need to depend on kernel
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+ .../{kselftests_4.1.bb => kselftests_4.4.bb}       |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 3f55847..53b4245 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -9,7 +9,7 @@ python __anonymous() {
- DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
- LICENSE = "TI-TSPA"
+diff --git a/recipes-kernel/kselftests/kselftests_4.1.bb b/recipes-kernel/kselftests/kselftests_4.4.bb
+similarity index 95%
+rename from recipes-kernel/kselftests/kselftests_4.1.bb
+rename to recipes-kernel/kselftests/kselftests_4.4.bb
+index 2dced11..3cdf4f1 100644
+--- a/recipes-kernel/kselftests/kselftests_4.1.bb
++++ b/recipes-kernel/kselftests/kselftests_4.4.bb
+@@ -4,14 +4,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
  
--LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=036f6300761559fbc5ce7d06e1ccea5a"
-+LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
+ SRC_URI = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz"
  
- COMPATIBLE_MACHINE = "dra7xx"
+-SRC_URI[md5sum] = "fe9dc0f6729f36400ea81aa41d614c37"
+-SRC_URI[sha256sum] = "caf51f085aac1e1cea4d00dbbf3093ead07b551fc07b31b2a989c05f8ea72d9f"
++SRC_URI[md5sum] = "9a78fa2eb6c68ca5a40ed5af08142599"
++SRC_URI[sha256sum] = "401d7c8fef594999a460d10c72c5a94e9c2e1022f16795ec51746b0d165418b2"
  
-@@ -17,11 +17,12 @@ RDEPENDS_${PN} = " libdce"
+ S = "${WORKDIR}/linux-${PV}"
  
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--SRCREV = "1627fec802da688fe44c6b0cac43ff811b08f064"
-+SRCREV = "7c283ebc252223a728cb542dbc10c3ca0ab53e59"
+-DEPENDS = "virtual/kernel popt"
++DEPENDS = "popt"
  
- S = "${WORKDIR}/git"
+ inherit kernel-arch
  
--PV = "3.00.10.01"
-+PV = "3.00.11.00"
-+PR = "r4"
- 
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
 
 
