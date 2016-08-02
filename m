@@ -1,38 +1,38 @@
-Return-Path: <gary@mlbassoc.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 79D3FE0113F; Mon,  1 Aug 2016 19:19:13 -0700 (PDT)
+	id 89624E00575; Tue,  2 Aug 2016 08:27:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 409 seconds by postgrey-1.32 at yocto-www;
-	Mon, 01 Aug 2016 19:19:10 PDT
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34C0CE00F35
-	for <meta-ti@yoctoproject.org>; Mon,  1 Aug 2016 19:19:10 -0700 (PDT)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 2DCDA68A01A; Tue,  2 Aug 2016 03:12:20 +0100 (BST)
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id 7CF7168A019;
-	Tue,  2 Aug 2016 03:12:19 +0100 (BST)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 3BFC5674043E;
-	Tue,  2 Aug 2016 04:12:19 +0200 (CEST)
-To: meta-ti@yoctoproject.org
-References: <b1415311-95cc-b627-23f0-8de950e8d1a4@xilinx.com>
-	<20160801233449.GI3677@edge>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <fe415fd4-f9c9-faa7-61aa-d0e33d26ac78@mlbassoc.com>
-Date: Tue, 2 Aug 2016 04:12:19 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6E20E0049A
+	for <meta-ti@yoctoproject.org>; Tue,  2 Aug 2016 08:27:50 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u72FNpuI008650
+	for <meta-ti@yoctoproject.org>; Tue, 2 Aug 2016 10:23:51 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u72FRnqc013002
+	for <meta-ti@yoctoproject.org>; Tue, 2 Aug 2016 10:27:49 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 2 Aug 2016 10:27:48 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u72FRmwP022187;	Tue, 2 Aug 2016 10:27:48 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 2 Aug 2016 11:27:47 -0400
+Message-ID: <1470151667-35399-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20160801233449.GI3677@edge>
-Subject: Re: Getting started with meta-ti (beaglebone)
+Subject: [PATCH] ti-ipc-rtos: Cleanup scripts for srcipk generation after compile
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,77 +45,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2016 02:19:13 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Aug 2016 15:27:52 -0000
+Content-Type: text/plain
 
-On 2016-08-02 01:34, Denys Dmytriyenko wrote:
-> On Mon, Aug 01, 2016 at 03:49:37PM -0700, Manjukumar Harthikote Matha wrote:
->> All,
->>
->> I am trying to build for beaglebone but facing some errors on master
->> branch. Maybe I am missing some configuration for the builds, can
->> you please help me out
->>
->> I cloned, poky, meta-openembedded and meta-ti master branch
->>
->> source oe-init-build-env beaglebone
->>
->> Added BBMASK = "meta-ti/recipes-misc" in local.conf
->
-> What's this ^^^ for?
->
->
->> MACHINE=beaglebone bitbake core-image-minimal
->>
->> Gives me an error
->
-> Are those Python3 related errors?
->
->
->> ERROR: Unable to parse /workspaces/manjukum/meta-ti-build/poky/meta-ti/recipes-ti/devtools/ti-cgt6x_6.1.20.bb
->> Traceback (most recent call last):
->>   File
->> "/workspaces/manjukum/meta-ti-build/poky/bitbake/lib/bb/siggen.py",
->> line 151, in SignatureGeneratorOEBasicHash.finalise(fn='/workspaces/manjukum/meta-ti-build/poky/meta-ti/recipes-ti/devtools/ti-cgt6x_6.1.20.bb',
->> d=<bb.data_smart.DataSmart object at 0x7fd9cd6f1b38>, variant=None):
->>              try:
->>     >            taskdeps = self._build_data(fn, d)
->>              except:
->>   File
->> "/workspaces/manjukum/meta-ti-build/poky/bitbake/lib/bb/siggen.py",
->> line 104, in SignatureGeneratorOEBasicHash._build_data(fn='/workspaces/manjukum/meta-ti-build/poky/meta-ti/recipes-ti/devtools/ti-cgt6x_6.1.20.bb',
->> d=<bb.data_smart.DataSmart object at 0x7fd9cd6f1b38>):
->>
->>     >        tasklist, gendeps, lookupcache =
->> bb.data.generate_dependencies(d)
->>
->>   File
->> "/workspaces/manjukum/meta-ti-build/poky/bitbake/lib/bb/data.py",
->> line 438, in generate_dependencies(d=<bb.data_smart.DataSmart object
->> at 0x7fd9cd6f1b38>):
->>                      if dep not in deps:
->>     >                    deps[dep], values[dep] =
->> build_dependencies(dep, keys, shelldeps, varflagsexcl, d)
->>                      newdeps |=  deps[dep]
->>
->> ....
->> ....
->> ='/workspaces/manjukum/meta-ti-build/poky/meta-ti/recipes-ti/devtools/../includes/../includes/ti-unpack.inc'):
->>              code = compile(check_indent(str(node)), filename, "exec",
->>     >                       ast.PyCF_ONLY_AST)
->>
->>   File "/workspaces/manjukum/meta-ti-build/poky/meta-ti/recipes-ti/devtools/../includes/../includes/ti-unpack.inc",
->> line 51
->>     os.chmod(binfile, 0755)
->>                          ^
->> SyntaxError: invalid token
+This avoid issues with double srcipk generation.
+Resolves issues with empty srcipk package, with some latest updates in
+meta-arago.
 
-In python3 this needs to be 0o755
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-rtos_git.bb | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index c9c4714..0213782 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -35,7 +35,7 @@ SRCREV_ipc-metadata = "b6dd82a450d75b9483a7cc9b619a30cf3cc25ae6"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+@@ -82,6 +82,9 @@ RELEASE_SUFFIX = ""
+ 
+ IPC_PACKAGE_DIR = "${S}/ipc-package"
+ 
++deltask do_create_srcipk
++addtask create_srcipk after do_compile before do_install
++
+ do_compile() {
+   oe_runmake -f ipc-bios.mak clean
+   oe_runmake -f ipc-bios.mak release
+@@ -123,10 +126,6 @@ do_compile() {
+   fi
+ }
+ 
+-do_compile_append() {
+-  sourceipk_do_create_srcipk
+-}
+-
+ do_install() {
+   IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
+   # Copy docs and other meta files
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.9.1
+
 
