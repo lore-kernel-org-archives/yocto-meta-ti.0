@@ -1,26 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5D879E00D6C; Tue,  2 Aug 2016 19:59:41 -0700 (PDT)
+	id A4C21E00D47; Wed,  3 Aug 2016 10:28:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3FD7AE00D6C
-	for <meta-ti@yoctoproject.org>; Tue,  2 Aug 2016 19:59:35 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 767D152A3C; Wed,  3 Aug 2016 02:59:34 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160803025934.767D152A3C@arago-project.org>
-Date: Wed,  3 Aug 2016 02:59:34 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2016.03-rc1 tag
+Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E04DE00CE8
+	for <meta-ti@yoctoproject.org>; Wed,  3 Aug 2016 10:28:25 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u73HSBaR019726;
+	Wed, 3 Aug 2016 12:28:11 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u73HSBOQ015537;
+	Wed, 3 Aug 2016 12:28:11 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 3 Aug 2016 12:28:11 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u73HSBWh015307;
+	Wed, 3 Aug 2016 12:28:11 -0500
+Date: Wed, 3 Aug 2016 13:28:10 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Manjukumar Harthikote Matha <manjukumar.harthikote-matha@xilinx.com>
+Message-ID: <20160803172810.GB17623@edge>
+References: <b1415311-95cc-b627-23f0-8de950e8d1a4@xilinx.com>
+	<20160801233449.GI3677@edge>
+	<fe415fd4-f9c9-faa7-61aa-d0e33d26ac78@mlbassoc.com>
+	<72940363-f223-78b1-2b0e-0663fdd4510e@xilinx.com>
+MIME-Version: 1.0
+In-Reply-To: <72940363-f223-78b1-2b0e-0663fdd4510e@xilinx.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org, Gary Thomas <gary@mlbassoc.com>
+Subject: Re: Getting started with meta-ti (beaglebone)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,54 +48,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2016 02:59:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Aug 2016 17:28:30 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: 7917662b001dc0eeba052c4d23fc329a6a1cc552
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7917662b001dc0eeba052c4d23fc329a6a1cc552
+On Tue, Aug 02, 2016 at 11:17:35AM -0700, Manjukumar Harthikote Matha wrote:
+> All,
+> 
+> On 08/01/2016 07:12 PM, Gary Thomas wrote:
+> >On 2016-08-02 01:34, Denys Dmytriyenko wrote:
+> >>On Mon, Aug 01, 2016 at 03:49:37PM -0700, Manjukumar Harthikote Matha
+> >>wrote:
+> >>>All,
+> >>>
+> >>>I am trying to build for beaglebone but facing some errors on master
+> <..>
+> >>>Added BBMASK = "meta-ti/recipes-misc" in local.conf
+> >>
+> >>What's this ^^^ for?
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Aug  3 07:50:05 2016 +0000
+> This is not required, I copied it from a wiki page (getting started
+> on meta-ti)
 
-linux-ti-staging: update to ti2016.03-rc1 tag
+I don't know what that wiki is or how old it is, but there's no recipes-misc 
+in meta-ti... It's not a good idea to collect random outdated tidbits on the 
+Internet and try to get it all working...
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
----
+> >>>MACHINE=beaglebone bitbake core-image-minimal
+> >>>
+> >>>Gives me an error
+> >>
+> >>Are those Python3 related errors?
+> >>
+> <...>>>
+> >>>line 51
+> >>>    os.chmod(binfile, 0755)
+> >>>                         ^
+> >>>SyntaxError: invalid token
+> >
+> >In python3 this needs to be 0o755
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+> Yes this works and fails on a tar extraction command. Another
+> Python3 error, will look into it. For now, I just deleted the
+> extraction block to surpass the error.
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index f1bbca1..4768666 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
- 
- BRANCH = "ti-rt-linux-4.4.y"
- 
--SRCREV = "6c3d70c75d9c8e7e66f5daa13a3b8073ba8e629d"
-+SRCREV = "3ad9429aa90ec7e1d351d1cd228d83b4d622e479"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 0294af2..0200715 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -73,11 +73,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.4.y"
- 
--SRCREV = "cbe129432c2af06741be9e4d1f9d50c32b0d4699"
-+SRCREV = "d30cce5c3821d28006e32d9cbe3ceb70b5c34d99"
- PV = "4.4.16+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+Yeah, that was my other question - why master? There's currently Python3 
+migration going on upstream and meta-ti is slightly behind on this. I'd 
+recommend using krogoth stable release to get your stuff working. You 
+should only be playing with latest master code, especially with several 
+additional layers, only if you really know what you are doing...
 
+-- 
+Denys
 
