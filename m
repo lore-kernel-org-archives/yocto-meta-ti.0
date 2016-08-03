@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D5230E00CE7; Tue,  2 Aug 2016 18:43:59 -0700 (PDT)
+	id D88EDE00CCD; Tue,  2 Aug 2016 18:43:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B286E00CD1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B13DE00CCD
 	for <meta-ti@yoctoproject.org>; Tue,  2 Aug 2016 18:43:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2D1C4529BF; Wed,  3 Aug 2016 01:43:56 +0000 (UTC)
+	id 6A0EE529FF; Wed,  3 Aug 2016 01:43:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160803014356.2D1C4529BF@arago-project.org>
+Message-Id: <20160803014356.6A0EE529FF@arago-project.org>
 Date: Wed,  3 Aug 2016 01:43:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : edma3-lld-rtos, ti-ipc-rtos, multiprocmgr-rtos: remove sneaked in sourceipk calls
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 03 Aug 2016 01:43:59 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: f088a6a6fd50d92e51aac7824ce017acfc52a2e3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f088a6a6fd50d92e51aac7824ce017acfc52a2e3
+Branch: master
+Commit: f420d6ca44a3855b65deaa2abf142f04fd120fb3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f420d6ca44a3855b65deaa2abf142f04fd120fb3
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Aug  2 22:07:31 2016 +0000
