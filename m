@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 465DAE00DDF; Mon,  8 Aug 2016 10:35:40 -0700 (PDT)
+	id 48379E00C86; Mon,  8 Aug 2016 10:35:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBAA6E00CF3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA2CDE00C86
 	for <meta-ti@yoctoproject.org>; Mon,  8 Aug 2016 10:35:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0AF5A529FF; Mon,  8 Aug 2016 17:35:36 +0000 (UTC)
+	id F1489529EC; Mon,  8 Aug 2016 17:35:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160808173536.0AF5A529FF@arago-project.org>
-Date: Mon,  8 Aug 2016 17:35:36 +0000 (UTC)
+Message-Id: <20160808173535.F1489529EC@arago-project.org>
+Date: Mon,  8 Aug 2016 17:35:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Tag ti2016.03-rc2 : Denys Dmytriyenko : LCPD Core SDK ti2016.03-rc2
+Subject: Tag ti2016.03-rc1 : Denys Dmytriyenko : LCPD Core SDK ti2016.03-rc1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,12 +37,12 @@ X-List-Received-Date: Mon, 08 Aug 2016 17:35:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: refs/tags/ti2016.03-rc2
-Tag:    67cc3fb000d515c731b20d9c77e600759a47164e
-URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=67cc3fb000d515c731b20d9c77e600759a47164e
+Branch: refs/tags/ti2016.03-rc1
+Tag:    065ac158e7b298bdb1cd06196d79e792a16698a6
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=065ac158e7b298bdb1cd06196d79e792a16698a6
 
 Tagger: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Aug  8 13:35:22 2016 -0400
+Date:   Mon Aug  8 13:35:14 2016 -0400
 
-LCPD Core SDK ti2016.03-rc2
+LCPD Core SDK ti2016.03-rc1
 
