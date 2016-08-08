@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 74A07E00DE7; Mon,  8 Aug 2016 08:41:09 -0700 (PDT)
+	id CD907E00DED; Mon,  8 Aug 2016 08:41:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,12 +14,12 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 325AEE00D53
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3308AE00DA2
 	for <meta-ti@yoctoproject.org>; Mon,  8 Aug 2016 08:38:42 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4EDCA52A75; Mon,  8 Aug 2016 15:38:41 +0000 (UTC)
+	id 84A6752A9F; Mon,  8 Aug 2016 15:38:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160808153841.4EDCA52A75@arago-project.org>
+Message-Id: <20160808153841.84A6752A9F@arago-project.org>
 Date: Mon,  8 Aug 2016 15:38:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: e-ruei1@ti.com : ti-sgx-ddk-um: Add libPVRScopeServices.so to plugins list
@@ -35,13 +35,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 15:41:09 -0000
+X-List-Received-Date: Mon, 08 Aug 2016 15:41:12 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: d3a9b0c604e10e3f88b74a56ac7d51ac7f7b8be1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d3a9b0c604e10e3f88b74a56ac7d51ac7f7b8be1
+Branch: master
+Commit: f42d5e385db827275e84bd9f04014a72bbdc9569
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f42d5e385db827275e84bd9f04014a72bbdc9569
 
 Author: e-ruei1@ti.com <e-ruei1@ti.com>
 Date:   Sat Aug  6 02:13:37 2016 +0000
