@@ -1,40 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D000CE00DF2; Mon,  8 Aug 2016 11:17:32 -0700 (PDT)
+	id 078C5E00E08; Mon,  8 Aug 2016 11:20:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.17 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 3619 seconds by postgrey-1.32 at yocto-www;
-	Mon, 08 Aug 2016 11:17:28 PDT
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 788BAE00DE6
-	for <meta-ti@yoctoproject.org>; Mon,  8 Aug 2016 11:17:28 -0700 (PDT)
-Received: from vz-proxy-m006.mx.aol.com ([64.236.83.10])
-	by vms173017.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0OBL00JEDPC54ED0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 08 Aug 2016 12:17:04 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=pKq81LsWol7b8sI3Hpopew==:117
-	a=7z1cN_iqozsA:10 a=sozttTNsAAAA:8	a=dppBkL_kf0DZw15ICd0A:9
-Received: by 100.15.86.14 with SMTP id 5557a7bf; Mon, 08 Aug 2016 17:17:04 GMT
-Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id 8AEBB1620CC;	Mon,  8 Aug 2016 13:16:53 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBFA0E00DEA
+	for <meta-ti@yoctoproject.org>; Mon,  8 Aug 2016 11:20:21 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 8DABC5298A; Mon,  8 Aug 2016 18:20:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 08 Aug 2016 13:16:52 -0400
-Message-id: <1470676612-17397-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] linux-ti-staging: update to ti2016.03-rc2 tag
+Message-Id: <20160808182020.8DABC5298A@arago-project.org>
+Date: Mon,  8 Aug 2016 18:20:20 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2016.03-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 18:17:32 -0000
+X-List-Received-Date: Mon, 08 Aug 2016 18:20:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: d811ff93707549a6a5b83299a75cadd99c7d28a0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d811ff93707549a6a5b83299a75cadd99c7d28a0
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Aug  8 23:16:52 2016 +0000
+
+linux-ti-staging: update to ti2016.03-rc2 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    | 4 ++--
+
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
@@ -85,7 +82,5 @@ index 0200715..47d2e44 100644
  PR = "${MACHINE_KERNEL_PR}"
  
  KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
--- 
-2.7.4
 
 
