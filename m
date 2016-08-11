@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7DC04E0113A; Wed, 10 Aug 2016 19:33:29 -0700 (PDT)
+	id 7E7A7E00DBC; Wed, 10 Aug 2016 19:33:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57DE0E00FD4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5763EE00DBC
 	for <meta-ti@yoctoproject.org>; Wed, 10 Aug 2016 19:33:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 959B252ABA; Thu, 11 Aug 2016 02:33:24 +0000 (UTC)
+	id 67EC752AB8; Thu, 11 Aug 2016 02:33:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160811023324.959B252ABA@arago-project.org>
+Message-Id: <20160811023324.67EC752AB8@arago-project.org>
 Date: Thu, 11 Aug 2016 02:33:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am57xx/dra7xx: disable UBI images by default
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 11 Aug 2016 02:33:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: bea4b235a2ef032f8ab9b2875ee4c4ae096b69d7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bea4b235a2ef032f8ab9b2875ee4c4ae096b69d7
+Branch: krogoth
+Commit: 2e0e6b5cb9ecb480ac6a443d82cb800b675308c5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2e0e6b5cb9ecb480ac6a443d82cb800b675308c5
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Aug  9 07:03:46 2016 +0000
