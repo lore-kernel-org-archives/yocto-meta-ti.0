@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 41EC5E00C51; Fri, 12 Aug 2016 17:05:58 -0700 (PDT)
+	id 45C74E00C4D; Fri, 12 Aug 2016 17:05:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E050FE00AD2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E30F0E00C44
 	for <meta-ti@yoctoproject.org>; Fri, 12 Aug 2016 17:05:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C54E952ABA; Sat, 13 Aug 2016 00:05:50 +0000 (UTC)
+	id E9C2952AC0; Sat, 13 Aug 2016 00:05:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160813000550.C54E952ABA@arago-project.org>
+Message-Id: <20160813000550.E9C2952AC0@arago-project.org>
 Date: Sat, 13 Aug 2016 00:05:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : machine/k2*-evm: disable uncompressed cpio by default
@@ -37,9 +37,9 @@ X-List-Received-Date: Sat, 13 Aug 2016 00:05:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 3c9ebcb91ee476c82c0fedc0f21f97620f937e4e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c9ebcb91ee476c82c0fedc0f21f97620f937e4e
+Branch: master
+Commit: 40e6a592838864c60ec5baf1be362735e59ef48a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=40e6a592838864c60ec5baf1be362735e59ef48a
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Aug 13 05:21:31 2016 +0000
