@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 78846E008CE; Tue, 16 Aug 2016 13:26:54 -0700 (PDT)
+	id F0EC2E008CE; Tue, 16 Aug 2016 13:32:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64A8CE006C6
-	for <meta-ti@yoctoproject.org>; Tue, 16 Aug 2016 13:26:50 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CDD13E006C6
+	for <meta-ti@yoctoproject.org>; Tue, 16 Aug 2016 13:32:33 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 623BF529A0; Tue, 16 Aug 2016 20:26:49 +0000 (UTC)
+	id AAF905298A; Tue, 16 Aug 2016 20:32:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160816202649.623BF529A0@arago-project.org>
-Date: Tue, 16 Aug 2016 20:26:49 +0000 (UTC)
+Message-Id: <20160816203232.AAF905298A@arago-project.org>
+Date: Tue, 16 Aug 2016 20:32:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : machines: move TI_SECURE_DEV_PKG and add UBOOT_* vars for fitimage support
+Subject: Tag ti2016.03-rc3 : Denys Dmytriyenko : LCPD Core SDK ti2016.03-rc3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,87 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2016 20:26:54 -0000
+X-List-Received-Date: Tue, 16 Aug 2016 20:32:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 97a255ed774e940c1fb80cbea802ac872210d9c9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=97a255ed774e940c1fb80cbea802ac872210d9c9
+Branch: refs/tags/ti2016.03-rc3
+Tag:    6b68650529e7548f0913922859e3ce413cd0095c
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=6b68650529e7548f0913922859e3ce413cd0095c
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Aug 16 08:05:13 2016 +0000
+Tagger: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Aug 16 16:32:18 2016 -0400
 
-machines: move TI_SECURE_DEV_PKG and add UBOOT_* vars for fitimage support
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- conf/machine/am437x-hs-evm.conf                 |    7 +++++++
- conf/machine/am57xx-hs-evm.conf                 |    7 +++++++
- conf/machine/dra7xx-hs-evm.conf                 |    7 +++++++
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    3 ---
- 4 files changed, 21 insertions(+), 3 deletions(-)
-
-diff --git a/conf/machine/am437x-hs-evm.conf b/conf/machine/am437x-hs-evm.conf
-index e8d88a4..4fb277d 100644
---- a/conf/machine/am437x-hs-evm.conf
-+++ b/conf/machine/am437x-hs-evm.conf
-@@ -5,3 +5,10 @@
- require conf/machine/am437x-evm.conf
- 
- UBOOT_MACHINE = "am43xx_hs_evm_config"
-+
-+UBOOT_ENTRYPOINT = "0x82000000"
-+UBOOT_LOADADDRESS = "0x82000000"
-+UBOOT_RD_LOADADDRESS = "0x84000000"
-+UBOOT_RD_ENTRYPOINT = "0x84000000"
-+
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AM4}"
-diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
-index a375017..bd5a145 100644
---- a/conf/machine/am57xx-hs-evm.conf
-+++ b/conf/machine/am57xx-hs-evm.conf
-@@ -5,3 +5,10 @@
- require conf/machine/am57xx-evm.conf
- 
- UBOOT_MACHINE = "am57xx_hs_evm_config"
-+
-+UBOOT_ENTRYPOINT = "0x82000000"
-+UBOOT_LOADADDRESS = "0x82000000"
-+UBOOT_RD_LOADADDRESS = "0x84000000"
-+UBOOT_RD_ENTRYPOINT = "0x84000000"
-+
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_DRA7}"
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index a898716..537152b 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -5,3 +5,10 @@
- require conf/machine/dra7xx-evm.conf
- 
- UBOOT_MACHINE = "dra7xx_hs_evm_config"
-+
-+UBOOT_ENTRYPOINT = "0x82000000"
-+UBOOT_LOADADDRESS = "0x82000000"
-+UBOOT_RD_LOADADDRESS = "0x84000000"
-+UBOOT_RD_ENTRYPOINT = "0x84000000"
-+
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_DRA7}"
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 699c221..c5a374a 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -18,9 +18,6 @@ SRCREV = "052f3bfd39e212e43fd141a49331107409e4f993"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
--TI_SECURE_DEV_PKG_dra7xx-hs-evm = "${TI_SECURE_DEV_PKG_DRA7}"
--TI_SECURE_DEV_PKG_am57xx-hs-evm = "${TI_SECURE_DEV_PKG_DRA7}"
--TI_SECURE_DEV_PKG_am437x-hs-evm = "${TI_SECURE_DEV_PKG_AM4}"
- export TI_SECURE_DEV_PKG
- 
- SPL_BINARY = "MLO"
-
+LCPD Core SDK ti2016.03-rc3
 
