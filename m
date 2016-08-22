@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 945FFE00EE2; Mon, 22 Aug 2016 11:15:46 -0700 (PDT)
+	id A361BE00EDB; Mon, 22 Aug 2016 11:15:46 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,25 +14,27 @@ X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
 	[206.46.173.7])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA9CDE00ECF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CEAD9E00EC7
 	for <meta-ti@yoctoproject.org>; Mon, 22 Aug 2016 11:15:44 -0700 (PDT)
-Received: from vz-proxy-m008.mx.aol.com ([64.236.83.1])
+Received: from vz-proxy-m001.mx.aol.com ([64.236.83.14])
 	by vms173007.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0OCB00GICPDPYJ90@vms173007.mailsrvcs.net> for
+	2014)) with ESMTPA id <0OCB00D5FPDPTYC0@vms173007.mailsrvcs.net> for
 	meta-ti@yoctoproject.org; Mon, 22 Aug 2016 13:15:26 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=IfeYs1eZmZ/JIJO4DN4ZPw==:117
-	a=7z1cN_iqozsA:10 a=sozttTNsAAAA:8	a=SDxQuzefdekkt2T0m7AA:9
-Received: by 100.15.86.14 with SMTP id 4c7085da; Mon, 22 Aug 2016 18:15:26 GMT
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=MJxOpqxZADbEbEImuSX/mw==:117
+	a=7z1cN_iqozsA:10 a=sozttTNsAAAA:8	a=4W5ZkvKtNJ33r7yLwgMA:9
+Received: by 100.15.86.14 with SMTP id 797c95a9; Mon, 22 Aug 2016 18:15:25 GMT
 Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id 6B5F8162102;	Mon, 22 Aug 2016 14:15:24 -0400 (EDT)
+	with ESMTP id 6F00E162106;	Mon, 22 Aug 2016 14:15:24 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 22 Aug 2016 14:14:58 -0400
-Message-id: <1471889699-5948-1-git-send-email-denis@denix.org>
+Date: Mon, 22 Aug 2016 14:14:59 -0400
+Message-id: <1471889699-5948-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [PATCH 1/2] ti-gc320-driver: recipe for gc320 kernel mode driver
+In-reply-to: <1471889699-5948-1-git-send-email-denis@denix.org>
+References: <1471889699-5948-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] ti-gc320-libs: add recipe for gc320 user lib
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,45 +51,60 @@ X-List-Received-Date: Mon, 22 Aug 2016 18:15:46 -0000
 
 From: Gowtham Tammana <g-tammana@ti.com>
 
-Kernel drivers for the Vivante GC320 chipset found in TI SoCs
+Userspace libraries for GC320 chipset on TI SoCs
 
 Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- .../gc320-drivers/ti-gc320-driver_5.0.11.p7.bb     | 24 ++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+ recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb | 39 ++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+ create mode 100644 recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
 
-diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
 new file mode 100644
-index 0000000..9344e30
+index 0000000..45c8d51
 --- /dev/null
-+++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Kernel drivers for the Vivante GC320 chipset found in TI SoCs"
-+HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-driver"
-+LICENSE = "MIT | GPLv2"
-+LIC_FILES_CHKSUM = "file://../LICENSE;md5=78d9818a51b9a8e9bb89dea418bac297"
++++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+@@ -0,0 +1,39 @@
++DESCRIPTION = "Userspace libraries for GC320 chipset on TI SoCs"
++HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-libs"
++LICENSE = "TI-TSPA"
++LIC_FILES_CHKSUM = "file://Manifest.html;md5=4d759c4e533af6aaeff2af7f405697c2"
 +
-+inherit module
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
++CLEANBROKEN = "1"
 +
-+# Need to branch out with ${PV} var
-+BRANCH = "ti-${PV}-k4.4"
++BRANCH = "ti-${PV}"
 +
-+SRCREV = "7a2b06ad1df46a274336f7ae0e24a9d67e72cd66"
++SRC_URI = "git://git.ti.com/graphics/ti-gc320-libs.git;protocol=git;branch=${BRANCH}"
++SRCREV = "ab0ca5bff345f6c13807fea3c4acabf5f2b9b10a"
 +
-+SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}"
-+S = "${WORKDIR}/git/src"
++# There's only hardfp version available
++python __anonymous() {
++    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
++    if not tunes:
++        return
++    pkgn = bb.data.getVar("PN", d, 1)
++    pkgv = bb.data.getVar("PV", d, 1)
++    if "callconvention-hard" not in tunes:
++        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
++        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
++}
 +
-+EXTRA_OEMAKE += "-f Kbuild AQROOT=${S} KERNEL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_PATH=${TOOLCHAIN_PATH} CROSS_COMPILE=${TARGET_PREFIX} ARCH_TYPE=${TARGET_ARCH}"
++TARGET_PRODUCT_omap-a15 = "jacinto6evm"
++
++PR = "r1"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE += "DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT} LIBDIR=${libdir}"
 +
 +do_install() {
-+    install -d ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
-+    install -m 644 ${S}/galcore.ko ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
++    oe_runmake install
 +}
++
++INSANE_SKIP_${PN} += "ldflags"
 -- 
 2.7.4
 
