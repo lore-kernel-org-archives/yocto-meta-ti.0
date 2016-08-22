@@ -1,43 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <g-tammana@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7247EE00C35; Fri, 19 Aug 2016 19:49:23 -0700 (PDT)
+	id 7EB0DE00C05; Mon, 22 Aug 2016 09:46:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24E8DE00C0E
-	for <meta-ti@yoctoproject.org>; Fri, 19 Aug 2016 19:49:20 -0700 (PDT)
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0025]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC17CE00A92
+	for <meta-ti@yoctoproject.org>; Mon, 22 Aug 2016 09:46:26 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u7K2nIIg010187;
-	Fri, 19 Aug 2016 21:49:18 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u7K2nGlM016319;
-	Fri, 19 Aug 2016 21:49:17 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 19 Aug 2016 21:49:16 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u7K2nGFB020712;
-	Fri, 19 Aug 2016 21:49:16 -0500
-Date: Fri, 19 Aug 2016 22:49:16 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Daniel Gomez <dgomez@iseebcn.com>
-Message-ID: <20160820024916.GK18333@edge>
-References: <CADqvwgO+fJYtxOf4pq7LaGWsMC0H_nrpQGR7Zf3zP_pSvnGqnw@mail.gmail.com>
-	<20160714162913.GF32054@edge>
-	<CADqvwgPA+qcSjcqD-=MCPfm69Oz5PsF0nhwvnu2yBnm3dq2cww@mail.gmail.com>
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u7MGkOiJ010541
+	for <meta-ti@yoctoproject.org>; Mon, 22 Aug 2016 11:46:24 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u7MGkOox002454
+	for <meta-ti@yoctoproject.org>; Mon, 22 Aug 2016 11:46:24 -0500
+Received: from DFLE09.ent.ti.com ([fe80::7090:147d:b5eb:4c12]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0294.000; Mon, 22 Aug 2016 11:46:23 -0500
+From: "Tammana, Gowtham" <g-tammana@ti.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] test message - please ignore
+Thread-Index: AdH8lKLmgsTMMPlhRuGYG4nq2UP2UA==
+Date: Mon, 22 Aug 2016 16:46:22 +0000
+Message-ID: <6250208755F8DC48883FC57E4AE56EA962F1D0@DFLE09.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.172.224.222]
 MIME-Version: 1.0
-In-Reply-To: <CADqvwgPA+qcSjcqD-=MCPfm69Oz5PsF0nhwvnu2yBnm3dq2cww@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: omap3-sgx-modules kernel 3.14
+Subject: test message - please ignore
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,234 +45,112 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Aug 2016 02:49:23 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 22 Aug 2016 16:46:27 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_6250208755F8DC48883FC57E4AE56EA962F1D0DFLE09entticom_"
 
-On Fri, Jul 15, 2016 at 09:14:23AM +0200, Daniel Gomez wrote:
-> Hi Denys,
-> 
-> I'm using this kernel recipe (linux-mainline):
-> 
-> * Recipe:
-> meta-ti/recipes-kernel/linux-mainline-3.14.bb
+--_000_6250208755F8DC48883FC57E4AE56EA962F1D0DFLE09entticom_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Only linux-ti-staging had necessary modifications required by omap3-sgx-modules
+Test message to check subscription, please ignore.
 
-Originally the patches were external, but eventually they got picked up in the 
-kernel tree used by linux-ti-staging recipe.
+Thanks,
+Gowtham
 
--- 
-Denys
+--_000_6250208755F8DC48883FC57E4AE56EA962F1D0DFLE09entticom_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+@font-face
+	{font-family:Cousine;
+	panose-1:2 7 4 9 2 2 5 2 4 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-priority:99;
+	mso-style-link:"Plain Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.5pt;
+	font-family:Consolas;}
+p.MsoNoSpacing, li.MsoNoSpacing, div.MsoNoSpacing
+	{mso-style-name:"No Spacing\,Code";
+	mso-style-priority:1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:Consolas;}
+span.PlainTextChar
+	{mso-style-name:"Plain Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Plain Text";
+	font-family:Consolas;}
+span.EmailStyle20
+	{mso-style-type:personal-compose;
+	font-family:Cousine;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:Cousine"=
+>Test message to check subscription, please ignore.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:Cousine"=
+><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:Cousine"=
+>Thanks,<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:Cousine"=
+>Gowtham<o:p></o:p></span></p>
+</div>
+</body>
+</html>
 
-> $ bitbake -s
-> ..
-> linux-mainline
-> :3.14.43-r0
-> 
-> 
-> omap3.inc file has not been modified:
-> poky/meta-ti/conf$ grep -r "linux" .
-> ..
-> ./machine/include/omap3.inc:PREFERRED_PROVIDER_virtual/kernel =
-> "linux-mainline"
-> 
-> 
-> 
-> Daniel Gómez
-> 
-> 2016-07-14 18:29 GMT+02:00 Denys Dmytriyenko <denys@ti.com>:
-> 
-> > On Thu, Jul 14, 2016 at 05:57:42PM +0200, Daniel Gomez wrote:
-> > > Hi,
-> > >
-> > > I'm trying to compile omap3-sgx-modules for the omap3 platform (omap3630)
-> > > against 3.14 kernel version but several errors have appeared on bc_cat.c
-> > > file compilation.
-> > >
-> > > Is it possible to compile SDK 4.05 or higher against 3.13 or 3.14 kernel
-> > > versions and get SGX acceleration?
-> >
-> > What kernel recipe/tree is being used?
-> >
-> >
-> > > Thank you
-> > >
-> > > HOST Environment:
-> > > * Kernel
-> > > Linux xubuntu-VirtualBox 3.2.0-104-generic #145-Ubuntu SMP Thu Jun 9
-> > > 09:53:59 UTC 2016 i686 i686 i386 GNU/Linux
-> > >
-> > > * Distro
-> > > Distributor ID:    Ubuntu
-> > > Description:    Ubuntu 12.04.5 LTS
-> > > Release:    12.04
-> > > Codename:    precise
-> > >
-> > > * poky:
-> > > repo: git://git.yoctoproject.org/poky
-> > > branch: fido
-> > >
-> > > * meta-ti
-> > > repo: git://git.yoctoproject.org/meta-ti
-> > > branch: fido
-> > >
-> > > * machine
-> > > MACHINE=beagleboard
-> > >
-> > > * recipe omap3-sgx-modules
-> > > meta-ti/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-> > > TI_PLATFORM_omap3 = "omap3630"
-> > >
-> > > # output
-> > > $ MACHINE=beagleboard bitbake omap3-sgx-modules
-> > > WARNING: Host distribution "Ubuntu-12.04" has not been validated with
-> > this
-> > > version of the build system; you may possibly experience unexpected
-> > > failures. It is recommended that you use a tested distribution.
-> > > Loading cache: 100%
-> > >
-> > |########################################################################################################################################################################################################|
-> > > ETA:  00:00:00
-> > > Loaded 2 entries from dependency cache.
-> > > Parsing recipes: 100%
-> > >
-> > |######################################################################################################################################################################################################|
-> > > Time: 00:01:37
-> > > Parsing of 1059 .bb files complete (1 cached, 1058 parsed). 1469 targets,
-> > > 151 skipped, 0 masked, 0 errors.
-> > > NOTE: Resolving any missing task queue dependencies
-> > >
-> > > Build Configuration:
-> > > BB_VERSION        = "1.26.0"
-> > > BUILD_SYS         = "i686-linux"
-> > > NATIVELSBSTRING   = "Ubuntu-12.04"
-> > > TARGET_SYS        = "arm-poky-linux-gnueabi"
-> > > MACHINE           = "beagleboard"
-> > > DISTRO            = "poky"
-> > > DISTRO_VERSION    = "1.8.2"
-> > > TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard
-> > cortexa8"
-> > > TARGET_FPU        = "vfp-neon"
-> > > meta
-> > > meta-yocto
-> > > meta-yocto-bsp    = "fido:c9f0a99050ec0050f0dbcd55d0cd2ab18848113f"
-> > > meta-ti           = "fido:632ea21d490022bbca34ee43bda31bbe5678a779"
-> > >
-> > > NOTE: Preparing RunQueue
-> > > NOTE: Executing SetScene Tasks
-> > > NOTE: Executing RunQueue Tasks
-> > > WARNING: Failed to fetch URL
-> > > http://www.openssl.org/source/old/1.0.2/openssl-1.0.2h.tar.gz,
-> > attempting
-> > > MIRRORS if available
-> > > WARNING:
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM
-> > > ('S') doesn't exist, please set 'S' to a proper value
-> > > WARNING: TI installer requires 32bit glibc libraries for proper operation
-> > > run 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on
-> > > Ubuntu/Debian
-> > > ERROR: Function failed: do_compile (log file is located at
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/temp/log.do_compile.6024)
-> > > ERROR: Logfile of failure stored in:
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/temp/log.do_compile.6024
-> > > Log data follows:
-> > > | DEBUG: Executing shell function do_compile
-> > > | NOTE: make -j 2 -e MAKEFLAGS=
-> > > KERNEL_SRC=/<path>/poky/build/tmp/work-shared/beagleboard/kernel-source
-> > > KERNEL_PATH=/<path>/poky/build/tmp/work-shared/beagleboard/kernel-source
-> > > KERNEL_VERSION=3.14.43-g1325370701 CC=arm-poky-linux-gnueabi-gcc
-> > >  -mno-thumb-interwork -marm LD=arm-poky-linux-gnueabi-ld.bfd
-> > > AR=arm-poky-linux-gnueabi-ar
-> > >  O=/<path>/poky/build/tmp/work-shared/beagleboard/kernel-build-artifacts
-> > > BUILD=release TI_PLATFORM=omap3630
-> > > | make -C /<path>/poky/build/tmp/work-shared/beagleboard/kernel-source
-> > > M=`pwd`
-> > > | make[1]: Entering directory
-> > > `/<path>/poky/build/tmp/work-shared/beagleboard/kernel-source'
-> > > |   LD
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/built-in.o
-> > > |   CC [M]
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/bc_cat.o
-> > > |
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/bc_cat.c:
-> > > In function 'bc_cat_init':
-> > > |
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/bc_cat.c:612:6:
-> > > error: implicit declaration of function 'cpu_is_omap3530'
-> > > [-Werror=implicit-function-declaration]
-> > > |       width_align = cpu_is_omap3530() && ( omap_rev() <
-> > > OMAP3430_REV_ES3_0 ) ? 32 : 8;
-> > > |       ^
-> > > |
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/bc_cat.c:612:6:
-> > > error: implicit declaration of function 'omap_rev'
-> > > [-Werror=implicit-function-declaration]
-> > > |
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/bc_cat.c:612:56:
-> > > error: 'OMAP3430_REV_ES3_0' undeclared (first use in this function)
-> > > |       width_align = cpu_is_omap3530() && ( omap_rev() <
-> > > OMAP3430_REV_ES3_0 ) ? 32 : 8;
-> > > |                                                         ^
-> > > |
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/bc_cat.c:612:56:
-> > > note: each undeclared identifier is reported only once for each function
-> > it
-> > > appears in
-> > > | cc1: some warnings being treated as errors
-> > > | make[4]: ***
-> > >
-> > [/<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti/bc_cat.o]
-> > > Error 1
-> > > | make[3]: ***
-> > >
-> > [/<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM/services4/3rdparty/bufferclass_ti]
-> > > Error 2
-> > > | make[2]: ***
-> > >
-> > [_module_/<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/Graphics_SDK_4_05_00_03/GFX_Linux_KM]
-> > > Error 2
-> > > | make[1]: *** [sub-make] Error 2
-> > > | make[1]: Leaving directory
-> > > `/<path>/poky/build/tmp/work-shared/beagleboard/kernel-source'
-> > > | make: *** [all] Error 2
-> > > | ERROR: oe_runmake failed
-> > > | WARNING: exit code 1 from a shell command.
-> > > | ERROR: Function failed: do_compile (log file is located at
-> > >
-> > /<path>/poky/build/tmp/work/beagleboard-poky-linux-gnueabi/omap3-sgx-modules/4.05.00.03-r126c/temp/log.do_compile.6024)
-> > > ERROR: Task 7 (/<path>/poky/meta-ti/recipes-bsp/powervr-drivers/
-> > > omap3-sgx-modules_4.05.00.03.bb, do_compile) failed with exit code '1'
-> > > NOTE: Tasks Summary: Attempted 417 tasks of which 0 didn't need to be
-> > rerun
-> > > and 1 failed.
-> > > Waiting for 0 running tasks to finish:
-> > >
-> > > Summary: 1 task failed:
-> > >   /<path>/poky/meta-ti/recipes-bsp/powervr-drivers/
-> > > omap3-sgx-modules_4.05.00.03.bb, do_compile
-> > > Summary: There were 4 WARNING messages shown.
-> > > Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> > >
-> > > Daniel Gómez
-> >
-> > > --
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
-> >
-> >
-
+--_000_6250208755F8DC48883FC57E4AE56EA962F1D0DFLE09entticom_--
