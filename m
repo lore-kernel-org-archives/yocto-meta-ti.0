@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <g-tammana@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 79563E00E88; Tue, 23 Aug 2016 11:40:36 -0700 (PDT)
+	id 97E72E00DFA; Tue, 23 Aug 2016 12:28:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC7B3E00D89
-	for <meta-ti@yoctoproject.org>; Tue, 23 Aug 2016 11:40:31 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id EA30752A1A; Tue, 23 Aug 2016 18:40:29 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160823184029.EA30752A1A@arago-project.org>
-Date: Tue, 23 Aug 2016 18:40:29 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Gowtham Tammana : ti-gc320-driver: recipe for gc320 kernel mode driver
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60095E00DBD
+	for <meta-ti@yoctoproject.org>; Tue, 23 Aug 2016 12:28:42 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u7NJSdAE011393
+	for <meta-ti@yoctoproject.org>; Tue, 23 Aug 2016 14:28:40 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u7NJSd1O018163
+	for <meta-ti@yoctoproject.org>; Tue, 23 Aug 2016 14:28:39 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 23 Aug 2016 14:28:39 -0500
+Received: from uda0271916 (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u7NJSdkJ003562;
+	Tue, 23 Aug 2016 14:28:39 -0500
+Received: from a0271916local by uda0271916 with local (Exim 4.82)
+	(envelope-from <g-tammana@ti.com>)	id 1bcHNH-0004uu-D3; Tue, 23 Aug 2016
+	14:28:39 -0500
+From: <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 23 Aug 2016 14:28:33 -0500
+Message-ID: <1471980513-18771-1-git-send-email-g-tammana@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] dummy patch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,58 +45,14 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2016 18:40:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Aug 2016 19:28:45 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 30e001db25b8d66a51aa8071e274d00df390e798
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=30e001db25b8d66a51aa8071e274d00df390e798
+From: Gowtham Tammana <g-tammana@ti.com>
 
-Author: Gowtham Tammana <g-tammana@ti.com>
-Date:   Tue Aug 23 00:14:58 2016 +0000
+a dummy patch to check post to meta-ti permissions.
 
-ti-gc320-driver: recipe for gc320 kernel mode driver
-
-Kernel drivers for the Vivante GC320 chipset found in TI SoCs
-
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- .../gc320-drivers/ti-gc320-driver_5.0.11.p7.bb     |   24 ++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-new file mode 100644
-index 0000000..9344e30
---- /dev/null
-+++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Kernel drivers for the Vivante GC320 chipset found in TI SoCs"
-+HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-driver"
-+LICENSE = "MIT | GPLv2"
-+LIC_FILES_CHKSUM = "file://../LICENSE;md5=78d9818a51b9a8e9bb89dea418bac297"
-+
-+inherit module
-+
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+# Need to branch out with ${PV} var
-+BRANCH = "ti-${PV}-k4.4"
-+
-+SRCREV = "7a2b06ad1df46a274336f7ae0e24a9d67e72cd66"
-+
-+SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}"
-+S = "${WORKDIR}/git/src"
-+
-+EXTRA_OEMAKE += "-f Kbuild AQROOT=${S} KERNEL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_PATH=${TOOLCHAIN_PATH} CROSS_COMPILE=${TARGET_PREFIX} ARCH_TYPE=${TARGET_ARCH}"
-+
-+do_install() {
-+    install -d ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
-+    install -m 644 ${S}/galcore.ko ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
-+}
+-- 
+1.9.1
 
 
