@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 61438E00E7E; Tue, 23 Aug 2016 11:40:34 -0700 (PDT)
+	id 76985E00FB8; Tue, 23 Aug 2016 11:40:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DA05CE00D76
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DDB56E00E43
 	for <meta-ti@yoctoproject.org>; Tue, 23 Aug 2016 11:40:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A4351529EA; Tue, 23 Aug 2016 18:40:29 +0000 (UTC)
+	id BD07552A13; Tue, 23 Aug 2016 18:40:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160823184029.A4351529EA@arago-project.org>
+Message-Id: <20160823184029.BD07552A13@arago-project.org>
 Date: Tue, 23 Aug 2016 18:40:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Gowtham Tammana : ti-gc320-driver: recipe for gc320 kernel mode driver
+Subject: Gowtham Tammana : ti-gc320-libs: add recipe for gc320 user lib
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,58 +33,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2016 18:40:34 -0000
+X-List-Received-Date: Tue, 23 Aug 2016 18:40:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: ec487fccaa028c31583b6c51f5fdc317707b0225
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec487fccaa028c31583b6c51f5fdc317707b0225
+Commit: f807c7185321fb407e82c529ddff310dc037f727
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f807c7185321fb407e82c529ddff310dc037f727
 
 Author: Gowtham Tammana <g-tammana@ti.com>
-Date:   Tue Aug 23 00:14:58 2016 +0000
+Date:   Tue Aug 23 00:14:59 2016 +0000
 
-ti-gc320-driver: recipe for gc320 kernel mode driver
+ti-gc320-libs: add recipe for gc320 user lib
 
-Kernel drivers for the Vivante GC320 chipset found in TI SoCs
+Userspace libraries for GC320 chipset on TI SoCs
 
 Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../gc320-drivers/ti-gc320-driver_5.0.11.p7.bb     |   24 ++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
+ recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb |   39 ++++++++++++++++++++
+ 1 files changed, 39 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
 new file mode 100644
-index 0000000..9344e30
+index 0000000..45c8d51
 --- /dev/null
-+++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Kernel drivers for the Vivante GC320 chipset found in TI SoCs"
-+HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-driver"
-+LICENSE = "MIT | GPLv2"
-+LIC_FILES_CHKSUM = "file://../LICENSE;md5=78d9818a51b9a8e9bb89dea418bac297"
++++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+@@ -0,0 +1,39 @@
++DESCRIPTION = "Userspace libraries for GC320 chipset on TI SoCs"
++HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-libs"
++LICENSE = "TI-TSPA"
++LIC_FILES_CHKSUM = "file://Manifest.html;md5=4d759c4e533af6aaeff2af7f405697c2"
 +
-+inherit module
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
++CLEANBROKEN = "1"
 +
-+# Need to branch out with ${PV} var
-+BRANCH = "ti-${PV}-k4.4"
++BRANCH = "ti-${PV}"
 +
-+SRCREV = "7a2b06ad1df46a274336f7ae0e24a9d67e72cd66"
++SRC_URI = "git://git.ti.com/graphics/ti-gc320-libs.git;protocol=git;branch=${BRANCH}"
++SRCREV = "ab0ca5bff345f6c13807fea3c4acabf5f2b9b10a"
 +
-+SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}"
-+S = "${WORKDIR}/git/src"
++# There's only hardfp version available
++python __anonymous() {
++    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
++    if not tunes:
++        return
++    pkgn = bb.data.getVar("PN", d, 1)
++    pkgv = bb.data.getVar("PV", d, 1)
++    if "callconvention-hard" not in tunes:
++        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
++        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
++}
 +
-+EXTRA_OEMAKE += "-f Kbuild AQROOT=${S} KERNEL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_PATH=${TOOLCHAIN_PATH} CROSS_COMPILE=${TARGET_PREFIX} ARCH_TYPE=${TARGET_ARCH}"
++TARGET_PRODUCT_omap-a15 = "jacinto6evm"
++
++PR = "r1"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE += "DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT} LIBDIR=${libdir}"
 +
 +do_install() {
-+    install -d ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
-+    install -m 644 ${S}/galcore.ko ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
++    oe_runmake install
 +}
++
++INSANE_SKIP_${PN} += "ldflags"
 
 
