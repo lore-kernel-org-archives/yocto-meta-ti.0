@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5A3A1E010A5; Thu, 25 Aug 2016 11:13:46 -0700 (PDT)
+	id 5DD5BE010AA; Thu, 25 Aug 2016 11:13:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E879E00DF0
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40518E00E09
 	for <meta-ti@yoctoproject.org>; Thu, 25 Aug 2016 11:13:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BCEBC52A1A; Thu, 25 Aug 2016 18:13:42 +0000 (UTC)
+	id 66D9A529EA; Thu, 25 Aug 2016 18:13:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160825181342.BCEBC52A1A@arago-project.org>
+Message-Id: <20160825181342.66D9A529EA@arago-project.org>
 Date: Thu, 25 Aug 2016 18:13:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.03-rc4 tag
+Subject: Denys Dmytriyenko : README: add note about list subscription
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +33,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Aug 2016 18:13:46 -0000
+X-List-Received-Date: Thu, 25 Aug 2016 18:13:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 482c26fe674251aae1bb0aa3bbe34f50f5b8d60c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=482c26fe674251aae1bb0aa3bbe34f50f5b8d60c
+Branch: krogoth
+Commit: 69c26a51a9eaa524f55464ba74ba096609f7a8b9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=69c26a51a9eaa524f55464ba74ba096609f7a8b9
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Aug 25 23:09:06 2016 +0000
+Date:   Thu Aug 25 23:09:05 2016 +0000
 
-u-boot-ti-staging: update to ti2016.03-rc4 tag
+README: add note about list subscription
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ README |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 84b7316..c6485ca 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/README b/README
+index f5329cd..1159b79 100644
+--- a/README
++++ b/README
+@@ -19,5 +19,7 @@ Please follow the recommended setup procedures of your OE distribution.
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--PR = "r13"
-+PR = "r14"
- PV_append = "+git${SRCPV}"
+ Send pull requests, patches, comments or questions to meta-ti@yoctoproject.org
++Please note - meta-ti mailing list requires subscription for posting:
++https://lists.yoctoproject.org/listinfo/meta-ti
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "95c03ee8afb843191be2778ab6f7860a048a9b00"
-+SRCREV = "2f757e5b2c6b260c647a8a1bb295537f07c3a8b9"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+ Maintainers: Denys Dmytriyenko <denys@ti.com>
 
 
