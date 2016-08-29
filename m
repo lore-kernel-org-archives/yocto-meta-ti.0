@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C73D9E00951; Mon, 29 Aug 2016 12:17:34 -0700 (PDT)
+	id 7E809E00C09; Mon, 29 Aug 2016 16:48:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99C4CE00924
-	for <meta-ti@yoctoproject.org>; Mon, 29 Aug 2016 12:17:31 -0700 (PDT)
-Received: from vz-proxy-l008.mx.aol.com ([64.236.82.153])
-	by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0OCO007N3QWWQ370@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 29 Aug 2016 14:17:20 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
-	a=7z1cN_iqozsA:10 a=sozttTNsAAAA:8	a=JOcMbwtXvmWSAC2jWLoA:9
-Received: by 100.15.86.14 with SMTP id 64d96642; Mon, 29 Aug 2016 19:17:20 GMT
-Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id B183516210B;	Mon, 29 Aug 2016 15:17:19 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 495B4E009FA
+	for <meta-ti@yoctoproject.org>; Mon, 29 Aug 2016 16:48:32 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 8665D529D0; Mon, 29 Aug 2016 23:48:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 29 Aug 2016 15:17:19 -0400
-Message-id: <1472498239-3695-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] prueth-fw: update to version 3.1.4
+Message-Id: <20160829234831.8665D529D0@arago-project.org>
+Date: Mon, 29 Aug 2016 23:48:31 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : prueth-fw: update to version 3.1.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2016 19:17:34 -0000
+X-List-Received-Date: Mon, 29 Aug 2016 23:48:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: krogoth
+Commit: 008497c611bc381014d310678e7dd39668959fea
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=008497c611bc381014d310678e7dd39668959fea
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Aug 30 01:17:19 2016 +0000
+
+prueth-fw: update to version 3.1.4
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/prueth-fw/prueth-fw_git.bb | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+
+ recipes-bsp/prueth-fw/prueth-fw_git.bb |    8 +++-----
+ 1 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
 index 234fba5..f48bb25 100644
@@ -81,7 +80,5 @@ index 234fba5..f48bb25 100644
  BRANCH ?= "ti-linux-firmware-4.1.y"
  
  SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--- 
-2.7.4
 
 
