@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7E809E00C09; Mon, 29 Aug 2016 16:48:34 -0700 (PDT)
+	id 805FAE00BEA; Mon, 29 Aug 2016 16:48:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 495B4E009FA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 495EBE00BCE
 	for <meta-ti@yoctoproject.org>; Mon, 29 Aug 2016 16:48:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8665D529D0; Mon, 29 Aug 2016 23:48:31 +0000 (UTC)
+	id DCB8E529DA; Mon, 29 Aug 2016 23:48:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160829234831.8665D529D0@arago-project.org>
+Message-Id: <20160829234831.DCB8E529DA@arago-project.org>
 Date: Mon, 29 Aug 2016 23:48:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : prueth-fw: update to version 3.1.4
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 29 Aug 2016 23:48:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 008497c611bc381014d310678e7dd39668959fea
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=008497c611bc381014d310678e7dd39668959fea
+Branch: master
+Commit: c8e80c8249222bbf9f180b33ec38cde39d6a230b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c8e80c8249222bbf9f180b33ec38cde39d6a230b
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Aug 30 01:17:19 2016 +0000
