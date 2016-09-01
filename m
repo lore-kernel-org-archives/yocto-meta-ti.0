@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 365F2E00D98; Thu,  1 Sep 2016 11:58:09 -0700 (PDT)
+	id 3784DE00D48; Thu,  1 Sep 2016 11:58:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54FE1E009D8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56498E00C05
 	for <meta-ti@yoctoproject.org>; Thu,  1 Sep 2016 11:58:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 94E9452A75; Thu,  1 Sep 2016 18:58:05 +0000 (UTC)
+	id A1A3352A7A; Thu,  1 Sep 2016 18:58:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160901185805.94E9452A75@arago-project.org>
+Message-Id: <20160901185805.A1A3352A7A@arago-project.org>
 Date: Thu,  1 Sep 2016 18:58:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Tag ti2016.03 : Denys Dmytriyenko : LCPD Core SDK ti2016.03
+Subject: Tag ti2016.03-rc4 : Denys Dmytriyenko : LCPD Core SDK ti2016.03-rc4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,12 +37,12 @@ X-List-Received-Date: Thu, 01 Sep 2016 18:58:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: refs/tags/ti2016.03
-Tag:    a2e47491ed2d419edda11eea68d154cfad9292d8
-URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=a2e47491ed2d419edda11eea68d154cfad9292d8
+Branch: refs/tags/ti2016.03-rc4
+Tag:    6fb0e34b3e05857e08304ed193d2048d2c9dae40
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=6fb0e34b3e05857e08304ed193d2048d2c9dae40
 
 Tagger: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep  1 14:57:52 2016 -0400
+Date:   Thu Sep  1 14:57:43 2016 -0400
 
-LCPD Core SDK ti2016.03
+LCPD Core SDK ti2016.03-rc4
 
