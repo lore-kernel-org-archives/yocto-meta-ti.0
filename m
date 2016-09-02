@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3784DE00D48; Thu,  1 Sep 2016 11:58:09 -0700 (PDT)
+	id B98BEE00DF2; Thu,  1 Sep 2016 17:17:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56498E00C05
-	for <meta-ti@yoctoproject.org>; Thu,  1 Sep 2016 11:58:06 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A017E00DF2
+	for <meta-ti@yoctoproject.org>; Thu,  1 Sep 2016 17:17:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A1A3352A7A; Thu,  1 Sep 2016 18:58:05 +0000 (UTC)
+	id B4D3C52A5F; Fri,  2 Sep 2016 00:17:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160901185805.A1A3352A7A@arago-project.org>
-Date: Thu,  1 Sep 2016 18:58:05 +0000 (UTC)
+Message-Id: <20160902001739.B4D3C52A5F@arago-project.org>
+Date: Fri,  2 Sep 2016 00:17:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Tag ti2016.03-rc4 : Denys Dmytriyenko : LCPD Core SDK ti2016.03-rc4
+Subject: e-ruei1@ti.com : ti-sgx-ddk-km: bump SRCREV for compiler warning fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,16 +35,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2016 18:58:09 -0000
+X-List-Received-Date: Fri, 02 Sep 2016 00:17:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: refs/tags/ti2016.03-rc4
-Tag:    6fb0e34b3e05857e08304ed193d2048d2c9dae40
-URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=6fb0e34b3e05857e08304ed193d2048d2c9dae40
+Branch: krogoth
+Commit: 521ef596c8f60b211a1461c0e9caac3bf75fbc24
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=521ef596c8f60b211a1461c0e9caac3bf75fbc24
 
-Tagger: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep  1 14:57:43 2016 -0400
+Author: e-ruei1@ti.com <e-ruei1@ti.com>
+Date:   Sat Aug 27 01:00:51 2016 +0000
 
-LCPD Core SDK ti2016.03-rc4
+ti-sgx-ddk-km: bump SRCREV for compiler warning fix
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+index 1ebcb8a..7007c20 100644
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "c13efb766a8fc680374ae7affc6df535f823bacb"
++SRCREV = "a5a0fe1799cabfa1278321b667263cf3fa2cf32f"
+ 
+ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+ TARGET_PRODUCT_ti33x = "ti335x"
+
 
