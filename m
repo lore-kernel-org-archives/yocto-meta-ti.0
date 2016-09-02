@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B98BEE00DF2; Thu,  1 Sep 2016 17:17:42 -0700 (PDT)
+	id BA1CDE00DF3; Thu,  1 Sep 2016 17:17:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,12 +14,12 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A017E00DF2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C5C0E00DF3
 	for <meta-ti@yoctoproject.org>; Thu,  1 Sep 2016 17:17:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B4D3C52A5F; Fri,  2 Sep 2016 00:17:39 +0000 (UTC)
+	id 0D77352A75; Fri,  2 Sep 2016 00:17:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160902001739.B4D3C52A5F@arago-project.org>
+Message-Id: <20160902001740.0D77352A75@arago-project.org>
 Date: Fri,  2 Sep 2016 00:17:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: e-ruei1@ti.com : ti-sgx-ddk-km: bump SRCREV for compiler warning fix
@@ -39,9 +39,9 @@ X-List-Received-Date: Fri, 02 Sep 2016 00:17:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 521ef596c8f60b211a1461c0e9caac3bf75fbc24
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=521ef596c8f60b211a1461c0e9caac3bf75fbc24
+Branch: master
+Commit: 32a73016d5e080c26b7d738c32fb011ec8420294
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=32a73016d5e080c26b7d738c32fb011ec8420294
 
 Author: e-ruei1@ti.com <e-ruei1@ti.com>
 Date:   Sat Aug 27 01:00:51 2016 +0000
