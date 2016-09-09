@@ -1,39 +1,41 @@
-Return-Path: <denis@denix.org>
+Return-Path: <jreeder@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 35B5BE008E3; Fri,  9 Sep 2016 10:44:58 -0700 (PDT)
+	id 43A65E00932; Fri,  9 Sep 2016 11:07:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP,
-	but had no rDNS
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11625E0086E
-	for <meta-ti@yoctoproject.org>; Fri,  9 Sep 2016 10:44:51 -0700 (PDT)
-Received: from vz-proxy-l006.mx.aol.com ([64.236.82.153])
-	by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0OD800FJPZY5W100@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 09 Sep 2016 12:44:35 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
-	a=GW1xBdLrtEIA:10 a=sozttTNsAAAA:8	a=PzTLTaCRyfknZFXj2eYA:9
-Received: by 100.15.86.14 with SMTP id 15513af7; Fri, 09 Sep 2016 17:44:35 GMT
-Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id 7E08A162118;	Fri,  9 Sep 2016 13:44:28 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Fri, 09 Sep 2016 13:44:27 -0400
-Message-id: <1473443067-18961-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] linux-ti-staging: add QMSS PDSP FW dependency for Keystone
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0D08E008E3
+	for <meta-ti@yoctoproject.org>; Fri,  9 Sep 2016 11:07:38 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u89I7aPV013598
+	for <meta-ti@yoctoproject.org>; Fri, 9 Sep 2016 13:07:37 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u89I7Z6Q004645
+	for <meta-ti@yoctoproject.org>; Fri, 9 Sep 2016 13:07:35 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 9 Sep 2016 13:07:35 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u89I7Z40005894;	Fri, 9 Sep 2016 13:07:35 -0500
+Received: from localhost (uda0273976.am.dhcp.ti.com [10.219.21.82])	by
+	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	u89I7Z306984; Fri, 9 Sep 2016 13:07:35 -0500 (CDT)
+From: Jason Reeder <jreeder@ti.com>
+To: meta-ti <meta-ti@yoctoproject.org>
+Date: Fri, 9 Sep 2016 13:07:15 -0500
+Message-ID: <1473444435-19761-1-git-send-email-jreeder@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] pru-icss: bump SRCREV, PV, and PR due to updates
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,39 +48,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2016 17:44:58 -0000
+X-List-Received-Date: Fri, 09 Sep 2016 18:07:40 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+Due to bug fixes and updates, the package version number
+is being incremented to 5.0.1. The commit ID is also being
+updated to reflect these changes.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Line ending corrections to the manifest file also caused
+a new checksum value to be necessary. This has been updated
+in this commit as well.
+
+Signed-off-by: Jason Reeder <jreeder@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_4.4.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ recipes-bsp/pru/pru-icss_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 4c4a8e5..157bc6b 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -34,6 +34,9 @@ RDEPENDS_kernel-base_append_k2g-evm = " ti-sci-fw"
- # Add run-time dependency for SerDes firmware to the rootfs
- RDEPENDS_kernel-base_append_keystone = " serdes-fw"
+diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+index a56eba0..144e338 100644
+--- a/recipes-bsp/pru/pru-icss_git.bb
++++ b/recipes-bsp/pru/pru-icss_git.bb
+@@ -2,16 +2,16 @@ DESCRIPTION = "Programmable Real-time Unit Software Package"
+ HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
+ LICENSE = "BSD-3-Clause & GPL-2.0 & PD"
  
-+# Add run-time dependency for QMSS PDSP firmware to the rootfs
-+RDEPENDS_kernel-base_append_keystone = " qmss-pdsp-fw"
-+
- # Add run-time dependency for NETCP PA firmware to the rootfs
- RDEPENDS_kernel-base_append_k2hk-evm = " netcp-pa-fw"
- RDEPENDS_kernel-base_append_k2e-evm = " netcp-pa-fw"
-@@ -77,7 +80,7 @@ SRCREV = "20272d4fd5fd81c551d8a31a3daddc18923b71bb"
- PV = "4.4.19+git${SRCPV}"
+-LIC_FILES_CHKSUM = "file://PRU-Package-v5.0-Manifest.html;md5=eec933459cb42544706e35289de38e03"
++LIC_FILES_CHKSUM = "file://PRU-Package-v5.0-Manifest.html;md5=a86a37c8b6396ad0ad6ae752f1aa8fcc"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
+ inherit update-alternatives
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "913cf232ebe655603d3385de2b9cde4af7af5308"
++SRCREV = "5e08c1f7c1f1d642b508e8b9cea246d9d8ef54c8"
+ 
+-PV = "5.0.0"
+-PR = "r0"
++PV = "5.0.1"
++PR = "r1"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ 
 -- 
-2.7.4
+1.9.1
 
 
