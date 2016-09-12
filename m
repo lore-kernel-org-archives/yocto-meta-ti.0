@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B5FE0E00A4B; Mon, 12 Sep 2016 15:18:32 -0700 (PDT)
+	id B5338E00AC5; Mon, 12 Sep 2016 15:18:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93B63E00A6A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93B27E00A4B
 	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 15:18:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 307C252A40; Mon, 12 Sep 2016 22:18:27 +0000 (UTC)
+	id C4BF25299F; Mon, 12 Sep 2016 22:18:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160912221827.307C252A40@arago-project.org>
-Date: Mon, 12 Sep 2016 22:18:27 +0000 (UTC)
+Message-Id: <20160912221826.C4BF25299F@arago-project.org>
+Date: Mon, 12 Sep 2016 22:18:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jason Reeder : pru-icss: bump SRCREV, PV, and PR due to updates
+Subject: Denys Dmytriyenko : linux-ti-staging: add QMSS PDSP FW dependency for Keystone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,55 +37,44 @@ X-List-Received-Date: Mon, 12 Sep 2016 22:18:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e1d913c24271d7f69b77525dec87fb2e6afe53c7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e1d913c24271d7f69b77525dec87fb2e6afe53c7
+Branch: krogoth
+Commit: e808240dcb517f98ef78989d288eaaf40f2b6771
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e808240dcb517f98ef78989d288eaaf40f2b6771
 
-Author: Jason Reeder <jreeder@ti.com>
-Date:   Sat Sep 10 00:07:15 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Sep  9 23:44:27 2016 +0000
 
-pru-icss: bump SRCREV, PV, and PR due to updates
+linux-ti-staging: add QMSS PDSP FW dependency for Keystone
 
-Due to bug fixes and updates, the package version number
-is being incremented to 5.0.1. The commit ID is also being
-updated to reflect these changes.
-
-Line ending corrections to the manifest file also caused
-a new checksum value to be necessary. This has been updated
-in this commit as well.
-
-Signed-off-by: Jason Reeder <jreeder@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pru/pru-icss_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.4.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-index a56eba0..144e338 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -2,16 +2,16 @@ DESCRIPTION = "Programmable Real-time Unit Software Package"
- HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
- LICENSE = "BSD-3-Clause & GPL-2.0 & PD"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 4c4a8e5..157bc6b 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -34,6 +34,9 @@ RDEPENDS_kernel-base_append_k2g-evm = " ti-sci-fw"
+ # Add run-time dependency for SerDes firmware to the rootfs
+ RDEPENDS_kernel-base_append_keystone = " serdes-fw"
  
--LIC_FILES_CHKSUM = "file://PRU-Package-v5.0-Manifest.html;md5=eec933459cb42544706e35289de38e03"
-+LIC_FILES_CHKSUM = "file://PRU-Package-v5.0-Manifest.html;md5=a86a37c8b6396ad0ad6ae752f1aa8fcc"
++# Add run-time dependency for QMSS PDSP firmware to the rootfs
++RDEPENDS_kernel-base_append_keystone = " qmss-pdsp-fw"
++
+ # Add run-time dependency for NETCP PA firmware to the rootfs
+ RDEPENDS_kernel-base_append_k2hk-evm = " netcp-pa-fw"
+ RDEPENDS_kernel-base_append_k2e-evm = " netcp-pa-fw"
+@@ -77,7 +80,7 @@ SRCREV = "20272d4fd5fd81c551d8a31a3daddc18923b71bb"
+ PV = "4.4.19+git${SRCPV}"
  
- inherit update-alternatives
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
  
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
--SRCREV = "913cf232ebe655603d3385de2b9cde4af7af5308"
-+SRCREV = "5e08c1f7c1f1d642b508e8b9cea246d9d8ef54c8"
- 
--PV = "5.0.0"
--PR = "r0"
-+PV = "5.0.1"
-+PR = "r1"
- 
- require recipes-ti/includes/ti-paths.inc
- 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 
 
