@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BCE4BE00C66; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
+	id D88F3E00BFE; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8F80E00C05
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9FBAE00C0B
 	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:07 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 68E3052AB2; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
+	id 91E9F52AC0; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160913022704.68E3052AB2@arago-project.org>
+Message-Id: <20160913022704.91E9F52AC0@arago-project.org>
 Date: Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.20 and ti2016. 04-rc1 tag
+Subject: Denys Dmytriyenko : boot-monitor: update and bump version due to image format change
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,50 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 39e43c3fa62634fd72cb699ad99eb6382b411455
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=39e43c3fa62634fd72cb699ad99eb6382b411455
+Commit: fb237a2dd0f76d07aa60c98a0fa6a7cf3c3e6873
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fb237a2dd0f76d07aa60c98a0fa6a7cf3c3e6873
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep 13 04:40:52 2016 +0000
+Date:   Tue Sep 13 04:40:54 2016 +0000
 
-linux-ti-staging: update to 4.4.20 and ti2016.04-rc1 tag
+boot-monitor: update and bump version due to image format change
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/boot-monitor/boot-monitor_git.bb |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 12607d9..049a7ee 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index baefed4..04165b4 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -5,16 +5,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+ COMPATIBLE_MACHINE = "keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- BRANCH = "ti-rt-linux-4.4.y"
++DEPENDS = "u-boot-mkimage-native"
++
+ SRC_URI = "git://git.ti.com/processor-firmware/ks2-boot-monitor.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "efd77c72b9d67a96c9179e0cdf850aa47feb8c21"
-+SRCREV = "f8c45f6a24b969bfe5a734ebd721ab9c0a3d9f0c"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 157bc6b..f005dd2 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -76,11 +76,11 @@ S = "${WORKDIR}/git"
+-PV = "3.0+git${SRCPV}"
+-PR = "r1"
++PV = "4.0+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ BRANCH = "master"
  
--SRCREV = "20272d4fd5fd81c551d8a31a3daddc18923b71bb"
--PV = "4.4.19+git${SRCPV}"
-+SRCREV = "00f19d3e5347c2992fe0de52cabe5d379673973d"
-+PV = "4.4.20+git${SRCPV}"
+ S = "${WORKDIR}/git"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "035329caed63abe7193c855ad5d561ae783b19d7"
++SRCREV = "cf8b431e8b3b2ee4a4aa08964d56d3ce1b11da24"
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
+ 
 
 
