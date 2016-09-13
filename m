@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F221E00BFE; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
+	id BCE4BE00C66; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39FC0E00BFE
-	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:04 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8F80E00C05
+	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:07 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DF99E52A79; Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
+	id 68E3052AB2; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160913022703.DF99E52A79@arago-project.org>
-Date: Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
+Message-Id: <20160913022704.68E3052AB2@arago-project.org>
+Date: Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : amx3-cm3: update to 1.9.2 version
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.20 and ti2016. 04-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,39 +37,51 @@ X-List-Received-Date: Tue, 13 Sep 2016 02:27:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 1e0ff9d06d18e9393f283b999c985ee7fcc18537
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e0ff9d06d18e9393f283b999c985ee7fcc18537
+Branch: master
+Commit: 39e43c3fa62634fd72cb699ad99eb6382b411455
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=39e43c3fa62634fd72cb699ad99eb6382b411455
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep 13 04:40:56 2016 +0000
+Date:   Tue Sep 13 04:40:52 2016 +0000
 
-amx3-cm3: update to 1.9.2 version
+linux-ti-staging: update to 4.4.20 and ti2016.04-rc1 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index 448a5d3..5a2b08b 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -3,10 +3,10 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index 12607d9..049a7ee 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
--PV = "1.9.1"
--PR = "r3"
-+PV = "1.9.2"
-+PR = "r0"
+ BRANCH = "ti-rt-linux-4.4.y"
  
--SRCREV = "97c2c32d0bc8ca0254710dcb5df055aa9a569ae6"
-+SRCREV = "7eb9c0856a9e8b3b42bf64f761da135852b8eea7"
- BRANCH ?= "ti-v4.1.y"
+-SRCREV = "efd77c72b9d67a96c9179e0cdf850aa47feb8c21"
++SRCREV = "f8c45f6a24b969bfe5a734ebd721ab9c0a3d9f0c"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 157bc6b..f005dd2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -76,11 +76,11 @@ S = "${WORKDIR}/git"
  
- SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH}"
+ BRANCH = "ti-lsk-linux-4.4.y"
+ 
+-SRCREV = "20272d4fd5fd81c551d8a31a3daddc18923b71bb"
+-PV = "4.4.19+git${SRCPV}"
++SRCREV = "00f19d3e5347c2992fe0de52cabe5d379673973d"
++PV = "4.4.20+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 
 
