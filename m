@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8E511E00B95; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
+	id 8F221E00BFE; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 377D8E00B95
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39FC0E00BFE
 	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:04 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C9D8052A63; Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
+	id DF99E52A79; Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160913022703.C9D8052A63@arago-project.org>
+Message-Id: <20160913022703.DF99E52A79@arago-project.org>
 Date: Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am33x-cm3: remove old CM3 PM FW recipe for 3.14 kernel
+Subject: Denys Dmytriyenko : amx3-cm3: update to 1.9.2 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,55 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 2177840474cd51a0b3bf5933a69f647e660a064e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2177840474cd51a0b3bf5933a69f647e660a064e
+Commit: 1e0ff9d06d18e9393f283b999c985ee7fcc18537
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e0ff9d06d18e9393f283b999c985ee7fcc18537
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep 13 04:40:55 2016 +0000
+Date:   Tue Sep 13 04:40:56 2016 +0000
 
-am33x-cm3: remove old CM3 PM FW recipe for 3.14 kernel
+amx3-cm3: update to 1.9.2 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb |   29 --------------------------
- 1 files changed, 0 insertions(+), 29 deletions(-)
+ recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
-deleted file mode 100644
-index 62aebb9..0000000
---- a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
-+++ /dev/null
-@@ -1,29 +0,0 @@
--DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
--
--LICENSE = "TI-TSPA"
--LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
--
--PV = "1.9.0"
--PR = "r1"
--PE = "1"
--
--SRCREV = "d85e6a17da1025adac9ab7f97dd7aa2a58c517ce"
--BRANCH ?= "ti-v3.14.y"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH}"
--
--S = "${WORKDIR}/git"
--
--FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
--
--do_compile() {
--	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}"
--}
--
--do_install() {
--	install -d ${D}${base_libdir}/firmware
--	install -m 0644 bin/am335x-pm-firmware.elf ${D}${base_libdir}/firmware/
--	install -m 0644 bin/*-scale-data.bin ${D}${base_libdir}/firmware/
--}
--
--FILES_${PN} += "${base_libdir}/firmware"
+diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+index 448a5d3..5a2b08b 100644
+--- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
++++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+@@ -3,10 +3,10 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+ 
+-PV = "1.9.1"
+-PR = "r3"
++PV = "1.9.2"
++PR = "r0"
+ 
+-SRCREV = "97c2c32d0bc8ca0254710dcb5df055aa9a569ae6"
++SRCREV = "7eb9c0856a9e8b3b42bf64f761da135852b8eea7"
+ BRANCH ?= "ti-v4.1.y"
+ 
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH}"
 
 
