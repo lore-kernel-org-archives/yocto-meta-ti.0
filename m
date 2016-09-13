@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8C4DBE00C0F; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
+	id 8E511E00B95; Mon, 12 Sep 2016 19:27:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B227E00BFF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 377D8E00B95
 	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:04 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B278C52A60; Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
+	id C9D8052A63; Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160913022703.B278C52A60@arago-project.org>
+Message-Id: <20160913022703.C9D8052A63@arago-project.org>
 Date: Tue, 13 Sep 2016 02:27:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.04-rc1 tag
+Subject: Denys Dmytriyenko : am33x-cm3: remove old CM3 PM FW recipe for 3.14 kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,55 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 2ce29b3e7aca5c87d6be27f11c8b1806924fdec2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2ce29b3e7aca5c87d6be27f11c8b1806924fdec2
+Commit: 2177840474cd51a0b3bf5933a69f647e660a064e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2177840474cd51a0b3bf5933a69f647e660a064e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep 13 04:40:53 2016 +0000
+Date:   Tue Sep 13 04:40:55 2016 +0000
 
-u-boot-ti-staging: update to ti2016.04-rc1 tag
+am33x-cm3: remove old CM3 PM FW recipe for 3.14 kernel
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb |   29 --------------------------
+ 1 files changed, 0 insertions(+), 29 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index c6485ca..65e5e5c 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- 
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
- 
--PR = "r14"
-+PR = "r15"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "2f757e5b2c6b260c647a8a1bb295537f07c3a8b9"
-+SRCREV = "887fd1bf94087c13f30472fb7279690bb680e3ee"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+diff --git a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
+deleted file mode 100644
+index 62aebb9..0000000
+--- a/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+-
+-LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+-
+-PV = "1.9.0"
+-PR = "r1"
+-PE = "1"
+-
+-SRCREV = "d85e6a17da1025adac9ab7f97dd7aa2a58c517ce"
+-BRANCH ?= "ti-v3.14.y"
+-
+-SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH}"
+-
+-S = "${WORKDIR}/git"
+-
+-FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
+-
+-do_compile() {
+-	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}"
+-}
+-
+-do_install() {
+-	install -d ${D}${base_libdir}/firmware
+-	install -m 0644 bin/am335x-pm-firmware.elf ${D}${base_libdir}/firmware/
+-	install -m 0644 bin/*-scale-data.bin ${D}${base_libdir}/firmware/
+-}
+-
+-FILES_${PN} += "${base_libdir}/firmware"
 
 
