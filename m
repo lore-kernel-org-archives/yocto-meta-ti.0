@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7C98AE00C0E; Mon, 12 Sep 2016 19:27:11 -0700 (PDT)
+	id 7D914E00C0B; Mon, 12 Sep 2016 19:27:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7D4A9E00C3E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7D95CE00C46
 	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:07 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B7FD552AC3; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
+	id CB73B52AC4; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160913022704.B7FD552AC3@arago-project.org>
+Message-Id: <20160913022704.CB73B52AC4@arago-project.org>
 Date: Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : amx3-cm3: update to 1.9.2 version
+Subject: Denys Dmytriyenko : machines: add OPTEE config for dra7 and am57 machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c02651fe1466422c5781c3cc235a12932fb0cd58
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c02651fe1466422c5781c3cc235a12932fb0cd58
+Commit: 71db7c89152732847992b417b5fa8aff30f47c1e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=71db7c89152732847992b417b5fa8aff30f47c1e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep 13 04:40:56 2016 +0000
+Date:   Tue Sep 13 04:40:57 2016 +0000
 
-amx3-cm3: update to 1.9.2 version
+machines: add OPTEE config for dra7 and am57 machines
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/am57xx-hs-evm.conf |    4 ++++
+ conf/machine/dra7xx-hs-evm.conf |    4 ++++
+ 2 files changed, 8 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index 448a5d3..5a2b08b 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -3,10 +3,10 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
+index bd5a145..e43a648 100644
+--- a/conf/machine/am57xx-hs-evm.conf
++++ b/conf/machine/am57xx-hs-evm.conf
+@@ -12,3 +12,7 @@ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
--PV = "1.9.1"
--PR = "r3"
-+PV = "1.9.2"
-+PR = "r0"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_DRA7}"
++
++OPTEEMACHINE = "ti"
++OPTEEFLAVOR = "am572x_evm"
++OPTEEOUTPUTMACHINE = "ti"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index 537152b..a82402d 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -12,3 +12,7 @@ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
--SRCREV = "97c2c32d0bc8ca0254710dcb5df055aa9a569ae6"
-+SRCREV = "7eb9c0856a9e8b3b42bf64f761da135852b8eea7"
- BRANCH ?= "ti-v4.1.y"
- 
- SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH}"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_DRA7}"
++
++OPTEEMACHINE = "ti"
++OPTEEFLAVOR = "dra7xx_evm dra72x_evm_revc"
++OPTEEOUTPUTMACHINE = "ti"
 
 
