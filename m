@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 05109E00C0B; Mon, 12 Sep 2016 19:27:11 -0700 (PDT)
+	id 42C24E00C0E; Mon, 12 Sep 2016 19:27:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA1E6E00C0E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2CE5E00C27
 	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:07 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1305A52AAE; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
+	id DFBDD52AC6; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160913022704.1305A52AAE@arago-project.org>
+Message-Id: <20160913022704.DFBDD52AC6@arago-project.org>
 Date: Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : k2e-hs-evm: add K2E HS EVM config
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 13 Sep 2016 02:27:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 8f9c005bfdeca3341b0c86c8f393b21312f159d7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f9c005bfdeca3341b0c86c8f393b21312f159d7
+Branch: master
+Commit: c554a8735a392cf5f7d9370d62391c3d335e1220
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c554a8735a392cf5f7d9370d62391c3d335e1220
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Sep 13 04:40:58 2016 +0000
