@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3AB9DE00C92; Mon, 12 Sep 2016 19:27:13 -0700 (PDT)
+	id 3B92BE00C17; Mon, 12 Sep 2016 19:27:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2CFFE00C2D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA4EAE00C17
 	for <meta-ti@yoctoproject.org>; Mon, 12 Sep 2016 19:27:07 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F108A52AC7; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
+	id 2CA9552AB0; Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160913022704.F108A52AC7@arago-project.org>
+Message-Id: <20160913022704.2CA9552AB0@arago-project.org>
 Date: Tue, 13 Sep 2016 02:27:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : serdes-fw: update to 3.3.0.2c version
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 13 Sep 2016 02:27:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: f0ae7e1c366d6e20e0ad228aa965fc294ec35ccd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f0ae7e1c366d6e20e0ad228aa965fc294ec35ccd
+Branch: krogoth
+Commit: 33f12de8050b024b321b14b6f255fc01de89a913
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=33f12de8050b024b321b14b6f255fc01de89a913
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Sep 13 04:40:59 2016 +0000
