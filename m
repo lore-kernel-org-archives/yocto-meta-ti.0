@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 04813E0049A; Wed, 14 Sep 2016 08:55:15 -0700 (PDT)
+	id 0A6F2E0043F; Wed, 14 Sep 2016 08:58:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,27 +12,27 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B09C7E0043B
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 08:55:12 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D52B0E00509
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 08:58:16 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8EFtBPJ002244
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 10:55:11 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8EFtAa8015045
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 10:55:10 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 14 Sep 2016 10:55:10 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8EFwGWN004032
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 10:58:16 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8EFwFPN019679
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 10:58:15 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 14 Sep 2016 10:58:14 -0500
 Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u8EFtAmY023854;	Wed, 14 Sep 2016 10:55:10 -0500
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u8EFwEdo031872;	Wed, 14 Sep 2016 10:58:14 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 14 Sep 2016 11:55:08 -0400
-Message-ID: <1473868508-3642-1-git-send-email-jsobota@ti.com>
+Date: Wed, 14 Sep 2016 11:58:13 -0400
+Message-ID: <1473868693-3698-1-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [PATCH 1/4] pa-lld: Bump version and remove makefile error patch
+Subject: [master/krogoth][PATCH v2 3/6] pa-lld: Bump version and remove makefile error patch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,7 +45,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 15:55:15 -0000
+X-List-Received-Date: Wed, 14 Sep 2016 15:58:21 -0000
 Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
