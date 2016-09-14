@@ -1,35 +1,38 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 031C0E0045D; Wed, 14 Sep 2016 10:04:04 -0700 (PDT)
+	id 1BFEFE0049A; Wed, 14 Sep 2016 10:30:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE4D3E0043B
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 10:03:59 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5DF5E0043F
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 10:30:55 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8EH3wlQ016352
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 12:03:58 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8EH3wCd016875
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 12:03:58 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 14 Sep 2016 12:03:57 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u8EH3vuD005473;	Wed, 14 Sep 2016 12:03:57 -0500
-From: Sam Nelson <sam.nelson@ti.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8EHUs8S011141
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 12:30:54 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8EHUr6B012281
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 12:30:53 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 14 Sep 2016 12:30:52 -0500
+Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u8EHUqjL011950;	Wed, 14 Sep 2016 12:30:52 -0500
+From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 14 Sep 2016 13:03:56 -0400
-Message-ID: <1473872636-65169-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 14 Sep 2016 13:30:51 -0400
+Message-ID: <1473874251-5918-1-git-send-email-jsobota@ti.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [PATCH v2] ti-ipc: Update to new version 3.43.02.04
+Subject: [master/krogoth][PATCH v2 2/6] edma3-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,65 +45,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 17:04:04 -0000
+X-List-Received-Date: Wed, 14 Sep 2016 17:30:59 -0000
 Content-Type: text/plain
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-rtos_git.bb | 10 +++++-----
- recipes-ti/ipc/ti-ipc.inc         |  6 +++---
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 5b26436..e49a555 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -26,16 +26,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+index 4de5987..2853dd2 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld.inc
++++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
+ EDMA3_LLD_GIT_PROTOCOL = "git"
+ EDMA3_LLD_GIT_BRANCH = "master"
  
--# Corresponds to tag: 3.43.01.03
--SRCREV_ipc-examples = "e003640aa2ae8f5d433f6cda2172ecadffb5ac92"
-+# Corresponds to tag: 3.43.02.04
-+SRCREV_ipc-examples = "766ee598c790c95dad80f9e5db5051e35de4e18f"
+-# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_24"
+-EDMA3_LLD_SRCREV = "e864a057032b070fc04628bac1345ecef01e2224"
++# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_25A"
++EDMA3_LLD_SRCREV = "b2d61c61dd048bdea35e9b2810647b4d419a82b5"
  
--# Corresponds to tag: 3.43.01.03
--SRCREV_ipc-metadata = "b6dd82a450d75b9483a7cc9b619a30cf3cc25ae6"
-+# Corresponds to tag: 3.43.02.04
-+SRCREV_ipc-metadata = "394e8b9fda6981f4c485c4a48c0a13a0a3236390"
+ BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
+ SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${EDMA3_LLD_SRCREV}"
  
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.0"
- 
- DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 069906b..1479fa6 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,15 +8,15 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.43"
- 
--#Corresponds to 3.43.01.03
--TI_IPC_SRCREV = "eb4e543f60cccf427d47900014bcf9a5ae413cd6"
-+#Corresponds to 3.43.02.04
-+TI_IPC_SRCREV = "c179a1f4a102fc0c2b72da4db87753c8e523d639"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
- SRCREV = "${TI_IPC_SRCREV}"
- 
- S = "${WORKDIR}/git"
--PV = "3.43.01.03"
-+PV = "3.43.02.04"
+-PV = "2.12.01.24"
++PV = "2.12.01.25A"
  INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
 -- 
-1.9.1
+1.7.10.4
 
 
