@@ -1,6 +1,6 @@
-Return-Path: <jsobota@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9CA65E0049A; Wed, 14 Sep 2016 11:13:16 -0700 (PDT)
+	id 9B837E00AD2; Wed, 14 Sep 2016 20:07:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,28 +12,27 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2CC11E0043F
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 11:13:13 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5125FE00AB6
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 20:07:55 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8EIDC8x015256
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 13:13:12 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8EIDBaH008449
-	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 13:13:11 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 14 Sep 2016 13:13:11 -0500
-Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u8EIDBws018124;	Wed, 14 Sep 2016 13:13:11 -0500
-From: Justin Sobota <jsobota@ti.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8F37s6P026683
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 22:07:54 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8F37rAk002142
+	for <meta-ti@yoctoproject.org>; Wed, 14 Sep 2016 22:07:53 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 14 Sep 2016 22:07:52 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u8F37qS0027940;	Wed, 14 Sep 2016 22:07:52 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 14 Sep 2016 14:13:09 -0400
-Message-ID: <1473876790-7516-1-git-send-email-jsobota@ti.com>
-X-Mailer: git-send-email 1.7.10.4
+Date: Wed, 14 Sep 2016 23:07:49 -0400
+Message-ID: <1473908869-15217-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Cc: Ajay Jayaraj <ajayj@ti.com>
-Subject: [master/krogoth][PATCH] openmp-rtos: Updated version to 2.04.00.00
+Subject: [PATCH] mpm-transport: Update to new version 2.0.2.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,38 +45,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 18:13:16 -0000
+X-List-Received-Date: Thu, 15 Sep 2016 03:07:59 -0000
 Content-Type: text/plain
 
-From: Ajay Jayaraj <ajayj@ti.com>
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-ti/openmp-rtos/openmp-rtos_git.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-index 6893179..2984da3 100644
---- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-+++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 280a5e1..bfbf85b 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -15,10 +15,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
  
- require recipes-ti/includes/ti-paths.inc
+ BRANCH = "master"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.01.02
+-SRCREV = "5c1f177b8d5802227dfe7e86fc026620e1e10189"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00
++SRCREV = "696a9ec37559b671860ef393194c6032b7b6d9ef"
  
--PV = "2_03_01_00"
-+PV = "2_04_00_00"
+-PV = "2.0.1.2"
++PV = "2.0.2.0"
  PR = "r0"
  
- OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
-@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
- SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
- "
- 
--SRCREV = "a73b7b5a79a6ca9390388079b09a1cf5795bd7fc"
-+SRCREV = "2a657d3a38c507287ac84ef6771c27d38f0024f7"
- 
- LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
- 
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
 -- 
-1.7.10.4
+1.9.1
 
 
