@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DBE9CE00CC3; Fri, 16 Sep 2016 09:19:15 -0700 (PDT)
+	id DD6FEE00C97; Fri, 16 Sep 2016 09:19:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F826E00CA5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5976BE00C8B
 	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4748352991; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
+	id 7E6ED52A26; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161910.4748352991@arago-project.org>
+Message-Id: <20160916161910.7E6ED52A26@arago-project.org>
 Date: Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : linux: add new method for cmem injection
+Subject: Justin Sobota : pa-lld: Bump version and remove makefile error patch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,150 +38,84 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: bf58916a108025475bd7b66d92e1e3f93f0a687d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bf58916a108025475bd7b66d92e1e3f93f0a687d
+Commit: d966cd41340451eda50fcbe9135e766431917b32
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d966cd41340451eda50fcbe9135e766431917b32
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Sep 14 00:21:17 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Wed Sep 14 21:58:13 2016 +0000
 
-linux: add new method for cmem injection
+pa-lld: Bump version and remove makefile error patch
 
-* Add new method to perform CMEM DT injection as it is required to
-  customize at a finer level than machine.
-* Now CMEM injection can be performed per DT.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/cmem.inc                      |   78 +++++++++++++++++---
- recipes-kernel/linux/files/dra7xx/cmem-am571x.dtsi |   29 +++++++
- 2 files changed, 95 insertions(+), 12 deletions(-)
+ ...akefile_armv7-fix-missing-separator-error.patch |   30 --------------------
+ recipes-bsp/pa-lld/pa-lld.inc                      |   11 +++----
+ 2 files changed, 5 insertions(+), 36 deletions(-)
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index fc0bf48..b60909c 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -1,18 +1,72 @@
--SRC_URI += "file://cmem.dtsi"
-+# Add concept of machine variants to split DTBs into subsets
-+#
-+# Use these for temporary overrides
-+CMEM_MACHINE = "${MACHINE}"
-+CMEM_MACHINE_am57xx-evm = "am571x am572x"
-+CMEM_MACHINE_am57xx-hs-evm = "am571x am572x"
- 
-+# Set cmem.dtsi per machine or machine variant
-+CMEM_DTSI = "cmem.dtsi"
-+CMEM_DTSI_am571x = "cmem-am571x.dtsi"
-+
-+# Split device trees between variants
-+CMEM_DEVICETREE = "${KERNEL_DEVICETREE}"
-+CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb"
-+CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am572x-idk.dtb \
-+                          am572x-idk-lcd-osd.dtb am572x-idk-lcd-osd101t2587.dtb"
-+
-+
-+# Flag to enable CMEM injection
- RESERVE_CMEM ?= "0"
- 
--do_setup_cmem() {
--    if [ "${RESERVE_CMEM}" == "1" ]
--    then
--        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+diff --git a/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch b/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch
+deleted file mode 100644
+index 2ff41d3..0000000
+--- a/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 60a938e6902c7cb8bec34abbc5a3723c8094d728 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Tue, 1 Dec 2015 00:00:00 -0500
+-Subject: [PATCH] makefile_armv7: fix missing separator error
 -
--        for dtb in ${KERNEL_DEVICETREE}
--        do
--            dts=`echo $dtb | sed -e 's|dtb$|dts|'`
--            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/$dts
--        done
--    fi
-+# Add correct cmem.dtsi to SRC_URI for each variant for a given machine
-+python() {
-+    old_overrides = d.getVar('OVERRIDES', False)
-+
-+    # Initialize with empty string to simplify logic to append to SRC_URI
-+    cmem_dtsi = set([''])
-+
-+    for cmem_machine in (d.getVar('CMEM_MACHINE', True) or '').split():
-+        # Create copy of data for additional override
-+        localdata = bb.data.createCopy(d)
-+        localdata.setVar('OVERRIDES', '%s:%s' % (cmem_machine, old_overrides))
-+        bb.data.update_data(localdata)
-+
-+        cmem_dtsi.add(localdata.getVar('CMEM_DTSI', True))
-+
-+    d.appendVar('SRC_URI', ' file://'.join(cmem_dtsi))
-+}
-+
-+python do_setup_cmem() {
-+    import shutil
-+
-+    old_overrides = d.getVar('OVERRIDES', False)
-+
-+    if d.getVar('RESERVE_CMEM', True) is '1':
-+        for cmem_machine in (d.getVar('CMEM_MACHINE', True) or '').split():
-+            # Create copy of data for additional override
-+            localdata = bb.data.createCopy(d)
-+            localdata.setVar('OVERRIDES', '%s:%s' % (cmem_machine, old_overrides))
-+            bb.data.update_data(localdata)
-+
-+            # Get source directory and dtsi filename
-+            src_dir  = localdata.getVar('WORKDIR', True)
-+            src_dtsi = localdata.getVar('CMEM_DTSI', True)
-+
-+            # Get destination directory and destination dtsi filename which adds
-+            #   the MACHINE prefix.
-+            dst_dir  = os.path.join(localdata.getVar('S', True), 'arch/arm/boot/dts')
-+            dst_dtsi = localdata.expand('${MACHINE}-${CMEM_DTSI}')
-+
-+            # Copy cmem.dtsi into source tree
-+            shutil.copy(os.path.join(src_dir,src_dtsi), os.path.join(dst_dir,dst_dtsi))
-+
-+            # Inject dtsi into each dts in list
-+            for dtb in (localdata.getVar('CMEM_DEVICETREE', True) or '').split():
-+                dts = dtb[:-4] + '.dts'
-+
-+                with open(os.path.join(dst_dir,dts), 'a') as dts_file:
-+                    dts_file.write('\n#include "%s"\n' % dst_dtsi)
- }
+-Doesn't seem to work in all versions of Make, fails like this:
+-makefile_armv7:27: *** missing separator.  Stop.
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- makefile_armv7 | 3 ---
+- 1 file changed, 3 deletions(-)
+-
+-diff --git a/makefile_armv7 b/makefile_armv7
+-index a2bc4f6..1ae6e0a 100644
+---- a/makefile_armv7
+-+++ b/makefile_armv7
+-@@ -24,9 +24,6 @@ else
+-     export LLD_NAME=pa
+- endif        
+- 
+--echo DEVICE=$(DEVICE)
+--echo LLD_NAME=$(LLD_NAME)
+--
+- # Output for prebuilt generated libraries
+- export ARMV7LIBDIR ?= ./lib
+- export ARMV7OBJDIR ?= ./obj/$(DEVICE)
+--- 
+-2.2.0
+-
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index 6c51560..0b2a4cc 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -9,16 +9,15 @@ PA_LLD_GIT_PROTOCOL = "git"
+ PA_LLD_GIT_BRANCH = "master"
+ PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
  
- do_patch[postfuncs] += "do_setup_cmem"
-diff --git a/recipes-kernel/linux/files/dra7xx/cmem-am571x.dtsi b/recipes-kernel/linux/files/dra7xx/cmem-am571x.dtsi
-new file mode 100644
-index 0000000..ebd6129
---- /dev/null
-+++ b/recipes-kernel/linux/files/dra7xx/cmem-am571x.dtsi
-@@ -0,0 +1,29 @@
-+/ {
-+        reserved-memory {
-+                #address-cells = <2>;
-+                #size-cells = <2>;
-+                ranges;
-+
-+                cmem_block_mem_0: cmem_block_mem@a0000000 {
-+                        reg = <0x0 0xa0000000 0x0 0x0c000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
-+
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+                status = "okay";
-+
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x0 0x0c000000>;
-+                };
-+        };
-+};
+-# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.12"
+-PA_LLD_SRCREV = "d3f3f5d93d3febc24099974bbc77e67c80a83b1e"
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.02.00"
++PA_LLD_SRCREV = "dca2a281c0c57f3b3018a93fae5485825a33042c"
+ 
+ BRANCH = "${PA_LLD_GIT_BRANCH}"
+-SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
+-            file://0001-makefile_armv7-fix-missing-separator-error.patch"
++SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${PA_LLD_SRCREV}"
+ 
+-PV = "03.00.01.12"
+-INC_PR = "r2"
++PV = "03.00.02.00"
++INC_PR = "r0"
+ 
+ S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+ 
 
 
