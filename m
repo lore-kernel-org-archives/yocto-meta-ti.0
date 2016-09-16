@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6F03AE00C9C; Fri, 16 Sep 2016 09:19:13 -0700 (PDT)
+	id 99395E00C98; Fri, 16 Sep 2016 09:19:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25569E00C9A
-	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4A92E00C9E
+	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5EA5F52AA8; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
+	id 71C9952AB0; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161906.5EA5F52AA8@arago-project.org>
+Message-Id: <20160916161906.71C9952AB0@arago-project.org>
 Date: Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : qmss-lld: Bump version
+Subject: Justin Sobota : sa-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ea0e4c48245393a0b9261b307d4b812ff17a18cd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ea0e4c48245393a0b9261b307d4b812ff17a18cd
+Commit: d10551b907d5cd3d31a7cc49288a3513017ab782
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d10551b907d5cd3d31a7cc49288a3513017ab782
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Sep 14 07:29:19 2016 +0000
+Date:   Wed Sep 14 07:29:20 2016 +0000
 
-qmss-lld: Bump version
+sa-lld: Bump version
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/qmss-lld/qmss-lld.inc |    8 ++++----
+ recipes-bsp/sa-lld/sa-lld.inc |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
-index ed560c8..65764b3 100644
---- a/recipes-bsp/qmss-lld/qmss-lld.inc
-+++ b/recipes-bsp/qmss-lld/qmss-lld.inc
-@@ -9,15 +9,15 @@ QMSS_LLD_GIT_PROTOCOL = "git"
- QMSS_LLD_GIT_BRANCH = "master"
- QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+index 5f0124a..0eb2196 100644
+--- a/recipes-bsp/sa-lld/sa-lld.inc
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -8,14 +8,14 @@ SA_LLD_GIT_PROTOCOL = "git"
+ SA_LLD_GIT_BRANCH = "master"
+ SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
  
--# commit ID corresponding to DEV.QMSS_LLD.02.01.00.14A
--QMSS_LLD_SRCREV = "8fc6a846e509d6ad8499e1de68abd912d7947069"
-+# commit ID corresponding to "DEV.QMSS_LLD.02.01.00.14B"
-+QMSS_LLD_SRCREV = "04095405680f4ec92eeef9312ba04f7808b1c813"
+-# Below commit ID corresponds to "DEV.SA_LLD.03.00.00.14"
+-SA_LLD_SRCREV = "e0448f5172f9a4d945f9ad1b2a583574c378b5c7"
++# Below commit ID corresponds to "DEV.SA_LLD.03.00.00.15"
++SA_LLD_SRCREV = "59dbcc8b1ed05d81161bc4c472bed8916a004728"
  
- BRANCH ="${QMSS_LLD_GIT_BRANCH}"
- SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${QMSS_LLD_SRCREV}"
+ BRANCH = "${SA_LLD_GIT_BRANCH}"
+ SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${SA_LLD_SRCREV}"
  
--PV = "02.01.00.14"
--INC_PR = "r1"
-+PV = "02.01.00.14B"
+-PV = "03.00.00.14"
+-INC_PR = "r2"
++PV = "03.00.00.15"
 +INC_PR = "r0"
  
- DEVICELIST = "k2h k2k k2l k2e"
- DEVICELIST_k2hk-evm = "k2h k2k"
+ S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
 
 
