@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6C7FAE00CC0; Fri, 16 Sep 2016 09:19:13 -0700 (PDT)
+	id 6D837E00C98; Fri, 16 Sep 2016 09:19:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5C6FE00CA1
-	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:08 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2424DE00C98
+	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:07 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 93B1852ABB; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
+	id 3494D529C6; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161906.93B1852ABB@arago-project.org>
+Message-Id: <20160916161906.3494D529C6@arago-project.org>
 Date: Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update to new version 3.43.02.04
+Subject: Justin Sobota : edma3-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,71 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: fa5ca59327c85f4b321364556560f761f06f8324
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fa5ca59327c85f4b321364556560f761f06f8324
+Commit: f42668a44fca1c67636aae40163c478eeaf8f661
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f42668a44fca1c67636aae40163c478eeaf8f661
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Sep 14 23:03:56 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Wed Sep 14 23:30:51 2016 +0000
 
-ti-ipc: Update to new version 3.43.02.04
+edma3-lld: Bump version
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_git.bb |   10 +++++-----
- recipes-ti/ipc/ti-ipc.inc         |    6 +++---
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 5b26436..e49a555 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -26,16 +26,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+index 4de5987..2853dd2 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld.inc
++++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
+ EDMA3_LLD_GIT_PROTOCOL = "git"
+ EDMA3_LLD_GIT_BRANCH = "master"
  
--# Corresponds to tag: 3.43.01.03
--SRCREV_ipc-examples = "e003640aa2ae8f5d433f6cda2172ecadffb5ac92"
-+# Corresponds to tag: 3.43.02.04
-+SRCREV_ipc-examples = "766ee598c790c95dad80f9e5db5051e35de4e18f"
+-# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_24"
+-EDMA3_LLD_SRCREV = "e864a057032b070fc04628bac1345ecef01e2224"
++# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_25A"
++EDMA3_LLD_SRCREV = "b2d61c61dd048bdea35e9b2810647b4d419a82b5"
  
--# Corresponds to tag: 3.43.01.03
--SRCREV_ipc-metadata = "b6dd82a450d75b9483a7cc9b619a30cf3cc25ae6"
-+# Corresponds to tag: 3.43.02.04
-+SRCREV_ipc-metadata = "394e8b9fda6981f4c485c4a48c0a13a0a3236390"
+ BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
+ SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${EDMA3_LLD_SRCREV}"
  
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.0"
- 
- DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 069906b..1479fa6 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,15 +8,15 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.43"
- 
--#Corresponds to 3.43.01.03
--TI_IPC_SRCREV = "eb4e543f60cccf427d47900014bcf9a5ae413cd6"
-+#Corresponds to 3.43.02.04
-+TI_IPC_SRCREV = "c179a1f4a102fc0c2b72da4db87753c8e523d639"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
- SRCREV = "${TI_IPC_SRCREV}"
- 
- S = "${WORKDIR}/git"
--PV = "3.43.01.03"
-+PV = "3.43.02.04"
+-PV = "2.12.01.24"
++PV = "2.12.01.25A"
  INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
