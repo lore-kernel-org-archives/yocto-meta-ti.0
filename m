@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 43F4EE00CAA; Fri, 16 Sep 2016 09:19:11 -0700 (PDT)
+	id 6C7FAE00CC0; Fri, 16 Sep 2016 09:19:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21A9FE00C8B
-	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5C6FE00CA1
+	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4756D52A26; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
+	id 93B1852ABB; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161906.4756D52A26@arago-project.org>
+Message-Id: <20160916161906.93B1852ABB@arago-project.org>
 Date: Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : pa-lld: Bump version and remove makefile error patch
+Subject: Sam Nelson : ti-ipc: Update to new version 3.43.02.04
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,89 +33,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2016 16:19:11 -0000
+X-List-Received-Date: Fri, 16 Sep 2016 16:19:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9aeeb60207ef8022cd42c6570e92b6759a523f0c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9aeeb60207ef8022cd42c6570e92b6759a523f0c
+Commit: fa5ca59327c85f4b321364556560f761f06f8324
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fa5ca59327c85f4b321364556560f761f06f8324
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Sep 14 21:58:13 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Wed Sep 14 23:03:56 2016 +0000
 
-pa-lld: Bump version and remove makefile error patch
+ti-ipc: Update to new version 3.43.02.04
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...akefile_armv7-fix-missing-separator-error.patch |   30 --------------------
- recipes-bsp/pa-lld/pa-lld.inc                      |   11 +++----
- 2 files changed, 5 insertions(+), 36 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |   10 +++++-----
+ recipes-ti/ipc/ti-ipc.inc         |    6 +++---
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch b/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch
-deleted file mode 100644
-index 2ff41d3..0000000
---- a/recipes-bsp/pa-lld/files/0001-makefile_armv7-fix-missing-separator-error.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 60a938e6902c7cb8bec34abbc5a3723c8094d728 Mon Sep 17 00:00:00 2001
--From: Denys Dmytriyenko <denys@ti.com>
--Date: Tue, 1 Dec 2015 00:00:00 -0500
--Subject: [PATCH] makefile_armv7: fix missing separator error
--
--Doesn't seem to work in all versions of Make, fails like this:
--makefile_armv7:27: *** missing separator.  Stop.
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- makefile_armv7 | 3 ---
-- 1 file changed, 3 deletions(-)
--
--diff --git a/makefile_armv7 b/makefile_armv7
--index a2bc4f6..1ae6e0a 100644
----- a/makefile_armv7
--+++ b/makefile_armv7
--@@ -24,9 +24,6 @@ else
--     export LLD_NAME=pa
-- endif        
-- 
---echo DEVICE=$(DEVICE)
---echo LLD_NAME=$(LLD_NAME)
---
-- # Output for prebuilt generated libraries
-- export ARMV7LIBDIR ?= ./lib
-- export ARMV7OBJDIR ?= ./obj/$(DEVICE)
---- 
--2.2.0
--
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index 6c51560..0b2a4cc 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -9,16 +9,15 @@ PA_LLD_GIT_PROTOCOL = "git"
- PA_LLD_GIT_BRANCH = "master"
- PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 5b26436..e49a555 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -26,16 +26,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.12"
--PA_LLD_SRCREV = "d3f3f5d93d3febc24099974bbc77e67c80a83b1e"
-+# Below Commit ID corresponds to "DEV.PA_LLD.03.00.02.00"
-+PA_LLD_SRCREV = "dca2a281c0c57f3b3018a93fae5485825a33042c"
+-# Corresponds to tag: 3.43.01.03
+-SRCREV_ipc-examples = "e003640aa2ae8f5d433f6cda2172ecadffb5ac92"
++# Corresponds to tag: 3.43.02.04
++SRCREV_ipc-examples = "766ee598c790c95dad80f9e5db5051e35de4e18f"
  
- BRANCH = "${PA_LLD_GIT_BRANCH}"
--SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH} \
--            file://0001-makefile_armv7-fix-missing-separator-error.patch"
-+SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${PA_LLD_SRCREV}"
+-# Corresponds to tag: 3.43.01.03
+-SRCREV_ipc-metadata = "b6dd82a450d75b9483a7cc9b619a30cf3cc25ae6"
++# Corresponds to tag: 3.43.02.04
++SRCREV_ipc-metadata = "394e8b9fda6981f4c485c4a48c0a13a0a3236390"
  
--PV = "03.00.01.12"
--INC_PR = "r2"
-+PV = "03.00.02.00"
-+INC_PR = "r0"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
  
- S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.0"
  
+ DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 069906b..1479fa6 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,15 +8,15 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.43"
+ 
+-#Corresponds to 3.43.01.03
+-TI_IPC_SRCREV = "eb4e543f60cccf427d47900014bcf9a5ae413cd6"
++#Corresponds to 3.43.02.04
++TI_IPC_SRCREV = "c179a1f4a102fc0c2b72da4db87753c8e523d639"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ SRCREV = "${TI_IPC_SRCREV}"
+ 
+ S = "${WORKDIR}/git"
+-PV = "3.43.01.03"
++PV = "3.43.02.04"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
