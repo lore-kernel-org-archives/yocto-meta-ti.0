@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D4EEE00CAA; Fri, 16 Sep 2016 09:19:17 -0700 (PDT)
+	id F1CEEE00CB0; Fri, 16 Sep 2016 09:19:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8DB3E00CB4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A090E00CAB
 	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F2B86529AA; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
+	id B6B3E52AB2; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161910.F2B86529AA@arago-project.org>
+Message-Id: <20160916161910.B6B3E52AB2@arago-project.org>
 Date: Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update to new version 2.0.2.0
+Subject: Justin Sobota : ti-pdk-build-rtos: Bump version and add comp_top. mk to install
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,44 +33,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2016 16:19:17 -0000
+X-List-Received-Date: Fri, 16 Sep 2016 16:19:18 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: d1578d2766e62f65949c0f0c4ba9b2f5b3b95b2c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d1578d2766e62f65949c0f0c4ba9b2f5b3b95b2c
+Commit: 7f9528b0401b41de83767bb8f09756fa6f5fe387
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f9528b0401b41de83767bb8f09756fa6f5fe387
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Sep 15 09:07:49 2016 +0000
+Author: Justin Sobota <jsobota@ti.com>
+Date:   Wed Sep 14 21:58:58 2016 +0000
 
-mpm-transport: Update to new version 2.0.2.0
+ti-pdk-build-rtos: Bump version and add comp_top.mk to install
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb |    9 +++++----
+ 1 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index 280a5e1..bfbf85b 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -15,10 +15,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+index 3a3ab55..36fd360 100644
+--- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
++++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de
  
- BRANCH = "master"
--# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.01.02
--SRCREV = "5c1f177b8d5802227dfe7e86fc026620e1e10189"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00
-+SRCREV = "696a9ec37559b671860ef393194c6032b7b6d9ef"
+ require recipes-ti/includes/ti-paths.inc
  
--PV = "2.0.1.2"
-+PV = "2.0.2.0"
- PR = "r0"
+-PV = "01.00.00.00A"
+-PR = "r4"
++PV = "01.00.00.02"
++PR = "r0"
  
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
+ PDK_BUILD_GIT_PROTOCOL = "git"
+ PDK_BUILD_GIT_BRANCH = "master"
+ 
+-# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.00A"
+-PDK_BUILD_SRCREV = "8a026319765cc125e2daef709841bb3ce1a8d325"
++# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.02"
++PDK_BUILD_SRCREV = "0bbd9d2fdff205fda4893936d7cb71404c003b93"
+ 
+ BRANCH = "${PDK_BUILD_GIT_BRANCH}"
+ SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
+@@ -36,6 +36,7 @@ do_install() {
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+     
+     install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
++    install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+ 
+     sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
+         ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
 
 
