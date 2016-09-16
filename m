@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 29C16E00CC4; Fri, 16 Sep 2016 09:19:17 -0700 (PDT)
+	id 2ABBDE00CC1; Fri, 16 Sep 2016 09:19:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A05BE00CAA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA9DFE00CB2
 	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A557D52AB0; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
+	id DD37352991; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161910.A557D52AB0@arago-project.org>
+Message-Id: <20160916161910.DD37352991@arago-project.org>
 Date: Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : sa-lld: Bump version
+Subject: Ajay Jayaraj : openmp-rtos: Updated version to 2.04.00.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,44 +38,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 24d50041073d770977b69d0fee296902c73c88f3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24d50041073d770977b69d0fee296902c73c88f3
+Commit: fd44670b877ae670cac6a9d4d59e08815f0b50a8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fd44670b877ae670cac6a9d4d59e08815f0b50a8
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Sep 14 07:29:20 2016 +0000
+Author: Ajay Jayaraj <ajayj@ti.com>
+Date:   Thu Sep 15 00:13:09 2016 +0000
 
-sa-lld: Bump version
+openmp-rtos: Updated version to 2.04.00.00
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/sa-lld/sa-lld.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
-index 5f0124a..0eb2196 100644
---- a/recipes-bsp/sa-lld/sa-lld.inc
-+++ b/recipes-bsp/sa-lld/sa-lld.inc
-@@ -8,14 +8,14 @@ SA_LLD_GIT_PROTOCOL = "git"
- SA_LLD_GIT_BRANCH = "master"
- SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index 6893179..2984da3 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
  
--# Below commit ID corresponds to "DEV.SA_LLD.03.00.00.14"
--SA_LLD_SRCREV = "e0448f5172f9a4d945f9ad1b2a583574c378b5c7"
-+# Below commit ID corresponds to "DEV.SA_LLD.03.00.00.15"
-+SA_LLD_SRCREV = "59dbcc8b1ed05d81161bc4c472bed8916a004728"
+ require recipes-ti/includes/ti-paths.inc
  
- BRANCH = "${SA_LLD_GIT_BRANCH}"
- SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${SA_LLD_SRCREV}"
+-PV = "2_03_01_00"
++PV = "2_04_00_00"
+ PR = "r0"
  
--PV = "03.00.00.14"
--INC_PR = "r2"
-+PV = "03.00.00.15"
-+INC_PR = "r0"
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+ SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+ "
  
- S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
+-SRCREV = "a73b7b5a79a6ca9390388079b09a1cf5795bd7fc"
++SRCREV = "2a657d3a38c507287ac84ef6771c27d38f0024f7"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ 
 
 
