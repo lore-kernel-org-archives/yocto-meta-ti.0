@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E0099E00C8B; Fri, 16 Sep 2016 09:19:15 -0700 (PDT)
+	id E099EE00CA5; Fri, 16 Sep 2016 09:19:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6086E00CA4
-	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:08 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B3D4E00C97
+	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 820AE52AB2; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
+	id 92FE152AA8; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161906.820AE52AB2@arago-project.org>
-Date: Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
+Message-Id: <20160916161910.92FE152AA8@arago-project.org>
+Date: Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : ti-pdk-build-rtos: Bump version and add comp_top. mk to install
+Subject: Justin Sobota : qmss-lld: Bump version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,54 +37,46 @@ X-List-Received-Date: Fri, 16 Sep 2016 16:19:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a95c51e3cfbbb0838eb88a262b82024dcd8c21dd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a95c51e3cfbbb0838eb88a262b82024dcd8c21dd
+Branch: krogoth
+Commit: 5bee8bd4a7fca8ed2242925734ea2b87d467cdcc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5bee8bd4a7fca8ed2242925734ea2b87d467cdcc
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Sep 14 21:58:58 2016 +0000
+Date:   Wed Sep 14 07:29:19 2016 +0000
 
-ti-pdk-build-rtos: Bump version and add comp_top.mk to install
+qmss-lld: Bump version
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb |    9 +++++----
- 1 files changed, 5 insertions(+), 4 deletions(-)
+ recipes-bsp/qmss-lld/qmss-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-index 3a3ab55..36fd360 100644
---- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-+++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index ed560c8..65764b3 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -9,15 +9,15 @@ QMSS_LLD_GIT_PROTOCOL = "git"
+ QMSS_LLD_GIT_BRANCH = "master"
+ QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
  
- require recipes-ti/includes/ti-paths.inc
+-# commit ID corresponding to DEV.QMSS_LLD.02.01.00.14A
+-QMSS_LLD_SRCREV = "8fc6a846e509d6ad8499e1de68abd912d7947069"
++# commit ID corresponding to "DEV.QMSS_LLD.02.01.00.14B"
++QMSS_LLD_SRCREV = "04095405680f4ec92eeef9312ba04f7808b1c813"
  
--PV = "01.00.00.00A"
--PR = "r4"
-+PV = "01.00.00.02"
-+PR = "r0"
+ BRANCH ="${QMSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${QMSS_LLD_SRCREV}"
  
- PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
- PDK_BUILD_GIT_PROTOCOL = "git"
- PDK_BUILD_GIT_BRANCH = "master"
+-PV = "02.01.00.14"
+-INC_PR = "r1"
++PV = "02.01.00.14B"
++INC_PR = "r0"
  
--# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.00A"
--PDK_BUILD_SRCREV = "8a026319765cc125e2daef709841bb3ce1a8d325"
-+# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.02"
-+PDK_BUILD_SRCREV = "0bbd9d2fdff205fda4893936d7cb71404c003b93"
- 
- BRANCH = "${PDK_BUILD_GIT_BRANCH}"
- SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
-@@ -36,6 +36,7 @@ do_install() {
-     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-     
-     install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
-+    install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
- 
-     sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
-         ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
+ DEVICELIST = "k2h k2k k2l k2e"
+ DEVICELIST_k2hk-evm = "k2h k2k"
 
 
