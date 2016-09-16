@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6D837E00C98; Fri, 16 Sep 2016 09:19:13 -0700 (PDT)
+	id 6E739E00CBF; Fri, 16 Sep 2016 09:19:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2424DE00C98
-	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0B88E00C9C
+	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3494D529C6; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
+	id A721F52ABC; Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161906.3494D529C6@arago-project.org>
+Message-Id: <20160916161906.A721F52ABC@arago-project.org>
 Date: Fri, 16 Sep 2016 16:19:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : edma3-lld: Bump version
+Subject: Ajay Jayaraj : openmp-rtos: Updated version to 2.04.00.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f42668a44fca1c67636aae40163c478eeaf8f661
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f42668a44fca1c67636aae40163c478eeaf8f661
+Commit: ee82aceff2b8e1bf39fcf9cd5896b5b7d95f785c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ee82aceff2b8e1bf39fcf9cd5896b5b7d95f785c
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Sep 14 23:30:51 2016 +0000
+Author: Ajay Jayaraj <ajayj@ti.com>
+Date:   Thu Sep 15 00:13:09 2016 +0000
 
-edma3-lld: Bump version
+openmp-rtos: Updated version to 2.04.00.00
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 4de5987..2853dd2 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index 6893179..2984da3 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
  
--# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_24"
--EDMA3_LLD_SRCREV = "e864a057032b070fc04628bac1345ecef01e2224"
-+# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_25A"
-+EDMA3_LLD_SRCREV = "b2d61c61dd048bdea35e9b2810647b4d419a82b5"
+ require recipes-ti/includes/ti-paths.inc
  
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
+-PV = "2_03_01_00"
++PV = "2_04_00_00"
+ PR = "r0"
  
--PV = "2.12.01.24"
-+PV = "2.12.01.25A"
- INC_PR = "r0"
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+ SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+ "
+ 
+-SRCREV = "a73b7b5a79a6ca9390388079b09a1cf5795bd7fc"
++SRCREV = "2a657d3a38c507287ac84ef6771c27d38f0024f7"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ 
 
 
