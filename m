@@ -1,26 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F1CEEE00CB0; Fri, 16 Sep 2016 09:19:17 -0700 (PDT)
+	id B9E35E00404; Mon, 19 Sep 2016 09:59:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.23 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A090E00CAB
-	for <meta-ti@yoctoproject.org>; Fri, 16 Sep 2016 09:19:11 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id B6B3E52AB2; Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92F0BE002AC
+	for <meta-ti@yoctoproject.org>; Mon, 19 Sep 2016 09:59:35 -0700 (PDT)
+Received: from vz-proxy-l003.mx.aol.com ([64.236.82.155])
+	by vms173023.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0ODR009TCGJA9J30@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 19 Sep 2016 11:59:35 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=i+tV1o3iWEoTTvx3QNPGxA==:117
+	a=GW1xBdLrtEIA:10 a=sozttTNsAAAA:8	a=0UKH5BiQkwmWfwo1rRcA:9
+Received: by 100.15.110.130 with SMTP id 1d83e85a;
+	Mon, 19 Sep 2016 16:59:34 GMT
+Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
+	with ESMTP id 0444D162139;	Mon, 19 Sep 2016 12:59:34 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160916161910.B6B3E52AB2@arago-project.org>
-Date: Fri, 16 Sep 2016 16:19:10 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : ti-pdk-build-rtos: Bump version and add comp_top. mk to install
+Date: Mon, 19 Sep 2016 12:59:26 -0400
+Message-id: <1474304370-18201-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+In-reply-to: <1474304370-18201-1-git-send-email-denis@denix.org>
+References: <1474304370-18201-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/6] u-boot-ti-staging: update to ti2016.04-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,58 +48,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2016 16:19:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Sep 2016 16:59:39 -0000
 
-Module: meta-ti
-Branch: krogoth
-Commit: 7f9528b0401b41de83767bb8f09756fa6f5fe387
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f9528b0401b41de83767bb8f09756fa6f5fe387
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Justin Sobota <jsobota@ti.com>
-Date:   Wed Sep 14 21:58:58 2016 +0000
-
-ti-pdk-build-rtos: Bump version and add comp_top.mk to install
-
-Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb |    9 +++++----
- 1 files changed, 5 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-index 3a3ab55..36fd360 100644
---- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-+++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 65e5e5c..2e8d2e6 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- require recipes-ti/includes/ti-paths.inc
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--PV = "01.00.00.00A"
--PR = "r4"
-+PV = "01.00.00.02"
-+PR = "r0"
+-PR = "r15"
++PR = "r16"
+ PV_append = "+git${SRCPV}"
  
- PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
- PDK_BUILD_GIT_PROTOCOL = "git"
- PDK_BUILD_GIT_BRANCH = "master"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.00A"
--PDK_BUILD_SRCREV = "8a026319765cc125e2daef709841bb3ce1a8d325"
-+# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.02"
-+PDK_BUILD_SRCREV = "0bbd9d2fdff205fda4893936d7cb71404c003b93"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- BRANCH = "${PDK_BUILD_GIT_BRANCH}"
- SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
-@@ -36,6 +36,7 @@ do_install() {
-     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-     
-     install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
-+    install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+-SRCREV = "887fd1bf94087c13f30472fb7279690bb680e3ee"
++SRCREV = "ad0d149681408fada229eaf0443cae0a35e01032"
  
-     sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
-         ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
+-- 
+2.7.4
 
 
