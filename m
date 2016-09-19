@@ -1,41 +1,42 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3BD76E004F1; Mon, 19 Sep 2016 10:00:03 -0700 (PDT)
+	id 1097BE00503; Mon, 19 Sep 2016 10:00:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
 	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+X-Spam-HAM-Report: *  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP,
+	but had no rDNS
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [206.46.173.7 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1ECEE0043F
-	for <meta-ti@yoctoproject.org>; Mon, 19 Sep 2016 10:00:00 -0700 (PDT)
-Received: from vz-proxy-l004.mx.aol.com ([64.236.82.151])
-	by vms173019.mailsrvcs.net
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA1CFE00777
+	for <meta-ti@yoctoproject.org>; Mon, 19 Sep 2016 10:00:05 -0700 (PDT)
+Received: from vz-proxy-l008.mx.aol.com ([64.236.82.153])
+	by vms173007.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0ODR00L97GJBP3A0@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 19 Sep 2016 11:59:50 -0500 (CDT)
+	2014)) with ESMTPA id <0ODR003ASGJAJP20@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 19 Sep 2016 11:59:49 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=eaPqxu9IKnv3tbb7QsXVMw==:117
-	a=GW1xBdLrtEIA:10 a=sozttTNsAAAA:8	a=dppBkL_kf0DZw15ICd0A:9
-Received: by 100.15.110.130 with SMTP id 445b30ff;
-	Mon, 19 Sep 2016 16:59:50 GMT
+X-CMAE-Analysis: v=2.1 cv=MtGvkDue c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=GW1xBdLrtEIA:10 a=sozttTNsAAAA:8	a=SUn-jrWY8JI9hO41UjoA:9
+Received: by 100.15.110.130 with SMTP id 27a2bd70;
+	Mon, 19 Sep 2016 16:59:49 GMT
 Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
-	with ESMTP id 2C2C816213D;	Mon, 19 Sep 2016 12:59:34 -0400 (EDT)
+	with ESMTP id 0FBC316213A;	Mon, 19 Sep 2016 12:59:34 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 19 Sep 2016 12:59:30 -0400
-Message-id: <1474304370-18201-6-git-send-email-denis@denix.org>
+Date: Mon, 19 Sep 2016 12:59:27 -0400
+Message-id: <1474304370-18201-3-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-reply-to: <1474304370-18201-1-git-send-email-denis@denix.org>
 References: <1474304370-18201-1-git-send-email-denis@denix.org>
-Subject: [PATCH 6/6] linux-ti-staging: update to 4.4.21 and ti2016.04-rc2 tag
+Subject: [PATCH 3/6] conf/machine: rename SECDEV variables for additional platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,41 +49,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2016 17:00:03 -0000
+X-List-Received-Date: Mon, 19 Sep 2016 17:00:35 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/am437x-hs-evm.conf | 2 +-
+ conf/machine/am57xx-hs-evm.conf | 2 +-
+ conf/machine/dra7xx-hs-evm.conf | 2 +-
+ conf/machine/k2e-hs-evm.conf    | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 049a7ee..8b79fe5 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/conf/machine/am437x-hs-evm.conf b/conf/machine/am437x-hs-evm.conf
+index 4fb277d..2f551b5 100644
+--- a/conf/machine/am437x-hs-evm.conf
++++ b/conf/machine/am437x-hs-evm.conf
+@@ -11,4 +11,4 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
- BRANCH = "ti-rt-linux-4.4.y"
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AM4}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_CAT}/am4x"
+diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
+index e43a648..24e9b2a 100644
+--- a/conf/machine/am57xx-hs-evm.conf
++++ b/conf/machine/am57xx-hs-evm.conf
+@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
--SRCREV = "f8c45f6a24b969bfe5a734ebd721ab9c0a3d9f0c"
-+SRCREV = "7e80288aba5918c3ce2d80050c644331f9750cce"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index f005dd2..9b791ab 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -76,8 +76,8 @@ S = "${WORKDIR}/git"
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_DRA7}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ OPTEEMACHINE = "ti"
+ OPTEEFLAVOR = "am572x_evm"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index a82402d..a6a5e0f 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
--SRCREV = "00f19d3e5347c2992fe0de52cabe5d379673973d"
--PV = "4.4.20+git${SRCPV}"
-+SRCREV = "4fb4591a4ab1b3ef317fa87af3cd3c06f1a7284b"
-+PV = "4.4.21+git${SRCPV}"
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_DRA7}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ OPTEEMACHINE = "ti"
+ OPTEEFLAVOR = "dra7xx_evm dra72x_evm_revc"
+diff --git a/conf/machine/k2e-hs-evm.conf b/conf/machine/k2e-hs-evm.conf
+index f2df52e..98d595d 100644
+--- a/conf/machine/k2e-hs-evm.conf
++++ b/conf/machine/k2e-hs-evm.conf
+@@ -11,4 +11,4 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ 
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AM4}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_CAT}/k2e"
 -- 
 2.7.4
 
