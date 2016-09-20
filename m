@@ -1,26 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9B792E00AD7; Tue, 20 Sep 2016 06:32:17 -0700 (PDT)
+	id E388FE00B5F; Tue, 20 Sep 2016 08:37:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.9 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76A53E00AC5
-	for <meta-ti@yoctoproject.org>; Tue, 20 Sep 2016 06:32:13 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 4858352AB2; Tue, 20 Sep 2016 13:32:12 +0000 (UTC)
+X-Greylist: delayed 3601 seconds by postgrey-1.32 at yocto-www;
+	Tue, 20 Sep 2016 08:37:37 PDT
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93523E00B48
+	for <meta-ti@yoctoproject.org>; Tue, 20 Sep 2016 08:37:37 -0700 (PDT)
+Received: from vz-proxy-l007.mx.aol.com ([64.236.82.157])
+	by vms173009.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0ODT00EL84M91S50@vms173009.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 20 Sep 2016 09:37:31 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=EDyElNE8DnJcdewKkuvZJw==:117
+	a=GW1xBdLrtEIA:10 a=sozttTNsAAAA:8	a=E0SNWo-40AcjroOgFVIA:9
+Received: by 100.15.110.130 with SMTP id 5d89d438;
+	Tue, 20 Sep 2016 14:37:31 GMT
+Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
+	with ESMTP id 96F59162137;	Tue, 20 Sep 2016 10:37:20 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160920133212.4858352AB2@arago-project.org>
-Date: Tue, 20 Sep 2016 13:32:12 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: bump PR due to SECDEV variable change
+Date: Tue, 20 Sep 2016 10:37:19 -0400
+Message-id: <1474382239-24140-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] common-csl-ip-rtos: add support for k2e-hs-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,38 +48,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2016 13:32:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 Sep 2016 15:37:40 -0000
 
-Module: meta-ti
-Branch: krogoth
-Commit: cb46a166c2cef402fa10253e114bd1d3fa810309
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cb46a166c2cef402fa10253e114bd1d3fa810309
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep 20 09:31:06 2016 -0400
-
-u-boot-ti-staging: bump PR due to SECDEV variable change
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index c3b55ac..73f9643 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+index 877b230..d5fb83e 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
++++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+@@ -1,5 +1,5 @@
+ require common-csl-ip.inc
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--PR = "r16"
-+PR = "r17"
- PV_append = "+git${SRCPV}"
+@@ -16,6 +16,7 @@ LIMSOCS_omap-a15 = "am571x am572x"
+ LIMSOCS_k2hk-evm = "k2h k2k"
+ LIMSOCS_k2l-evm = "k2l"
+ LIMSOCS_k2e-evm = "k2e"
++LIMSOCS_k2e-hs-evm = "k2e"
+ LIMSOCS_k2g-evm = "k2g"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ export PDK_CSL_ROOT_PATH ="${WORKDIR}/build"
+-- 
+2.7.4
 
 
