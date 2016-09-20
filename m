@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 526CDE00B74; Tue, 20 Sep 2016 08:40:08 -0700 (PDT)
+	id 53D78E00B52; Tue, 20 Sep 2016 08:40:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1363E00B52
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EFFF7E00B48
 	for <meta-ti@yoctoproject.org>; Tue, 20 Sep 2016 08:40:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 32D5852A93; Tue, 20 Sep 2016 15:40:05 +0000 (UTC)
+	id 66BF252A94; Tue, 20 Sep 2016 15:40:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160920154005.32D5852A93@arago-project.org>
+Message-Id: <20160920154005.66BF252A94@arago-project.org>
 Date: Tue, 20 Sep 2016 15:40:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : common-csl-ip-rtos: add support for k2e-hs-evm
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 20 Sep 2016 15:40:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 24625003785159050c67116843bc4a3e34de8eeb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24625003785159050c67116843bc4a3e34de8eeb
+Branch: master
+Commit: 19dc633d8015cce3b7ad0931bd7cd906bf1c8581
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=19dc633d8015cce3b7ad0931bd7cd906bf1c8581
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Sep 20 20:37:19 2016 +0000
