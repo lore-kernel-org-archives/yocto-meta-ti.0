@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EDFE0E00BEB; Tue, 20 Sep 2016 12:32:06 -0700 (PDT)
+	id EFD50E00BEA; Tue, 20 Sep 2016 12:32:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E032E00BE1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CBE0E00563
 	for <meta-ti@yoctoproject.org>; Tue, 20 Sep 2016 12:32:04 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D1F2452A93; Tue, 20 Sep 2016 19:32:03 +0000 (UTC)
+	id A5E9D52A71; Tue, 20 Sep 2016 19:32:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160920193203.D1F2452A93@arago-project.org>
+Message-Id: <20160920193203.A5E9D52A71@arago-project.org>
 Date: Tue, 20 Sep 2016 19:32:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : conf/machine, recipes: introduce k2e SOC family
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 20 Sep 2016 19:32:07 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 939b243286d83fadd364d1e0b575d71aee14affd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=939b243286d83fadd364d1e0b575d71aee14affd
+Branch: krogoth
+Commit: 1f4d266c4d293c326155d7a2051a9affa8722400
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1f4d266c4d293c326155d7a2051a9affa8722400
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Sep 21 01:29:01 2016 +0000
@@ -82,5 +82,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-ti/openmp-rtos/openmp-rtos_git.bb          |    2 +-
  30 files changed, 36 insertions(+), 36 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=939b243286d83fadd364d1e0b575d71aee14affd
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=1f4d266c4d293c326155d7a2051a9affa8722400
 
