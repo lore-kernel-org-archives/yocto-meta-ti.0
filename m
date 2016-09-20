@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 01EC8E00B7A; Tue, 20 Sep 2016 09:33:49 -0700 (PDT)
+	id 032A8E00B52; Tue, 20 Sep 2016 09:33:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6D16E00B5F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D59E4E00B52
 	for <meta-ti@yoctoproject.org>; Tue, 20 Sep 2016 09:33:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5CCCD52AC4; Tue, 20 Sep 2016 16:33:46 +0000 (UTC)
+	id 30E2F52AB2; Tue, 20 Sep 2016 16:33:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160920163346.5CCCD52AC4@arago-project.org>
+Message-Id: <20160920163346.30E2F52AB2@arago-project.org>
 Date: Tue, 20 Sep 2016 16:33:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: specify DTB for k2e HS platform
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 20 Sep 2016 16:33:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e13d15397135634010e54cb34cd837bf567fcffa
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e13d15397135634010e54cb34cd837bf567fcffa
+Branch: krogoth
+Commit: 68bce98d8921d29e226da1a5b293aa8742655ab9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=68bce98d8921d29e226da1a5b293aa8742655ab9
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Sep 20 22:25:49 2016 +0000
