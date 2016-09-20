@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9A542E0083E; Mon, 19 Sep 2016 16:00:09 -0700 (PDT)
+	id 9A1A1E00B04; Tue, 20 Sep 2016 06:32:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E43F7E00848
-	for <meta-ti@yoctoproject.org>; Mon, 19 Sep 2016 15:59:57 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 774E1E00AD7
+	for <meta-ti@yoctoproject.org>; Tue, 20 Sep 2016 06:32:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7424952AC8; Mon, 19 Sep 2016 22:59:55 +0000 (UTC)
+	id 5824452A94; Tue, 20 Sep 2016 13:32:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160919225955.7424952AC8@arago-project.org>
-Date: Mon, 19 Sep 2016 22:59:55 +0000 (UTC)
+Message-Id: <20160920133212.5824452A94@arago-project.org>
+Date: Tue, 20 Sep 2016 13:32:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine, u-boot-ti-staging: add am335x-hs-evm platform
+Subject: Denys Dmytriyenko : u-boot-ti-staging: bump PR due to SECDEV variable change
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,64 +33,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2016 23:00:09 -0000
+X-List-Received-Date: Tue, 20 Sep 2016 13:32:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 6e43afafb5967e8ab1c603224e0fdd1fb62da4b2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e43afafb5967e8ab1c603224e0fdd1fb62da4b2
+Commit: bad4a7a79c6ce3376d0e055aedce843fc6828113
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bad4a7a79c6ce3376d0e055aedce843fc6828113
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep 19 22:59:29 2016 +0000
+Date:   Tue Sep 20 09:31:06 2016 -0400
 
-conf/machine, u-boot-ti-staging: add am335x-hs-evm platform
+u-boot-ti-staging: bump PR due to SECDEV variable change
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-hs-evm.conf                 |   14 ++++++++++++++
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    7 +++++++
- 2 files changed, 21 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/am335x-hs-evm.conf b/conf/machine/am335x-hs-evm.conf
-new file mode 100644
-index 0000000..674a764
---- /dev/null
-+++ b/conf/machine/am335x-hs-evm.conf
-@@ -0,0 +1,14 @@
-+#@TYPE: Machine
-+#@NAME: AM335x HS EVM
-+#@DESCRIPTION: Machine configuration for the TI AM435x HS EVM
-+
-+require conf/machine/am335x-evm.conf
-+
-+UBOOT_MACHINE = "am335x_hs_evm_mmc_config"
-+
-+UBOOT_ENTRYPOINT = "0x82000000"
-+UBOOT_LOADADDRESS = "0x82000000"
-+UBOOT_RD_LOADADDRESS = "0x84000000"
-+UBOOT_RD_ENTRYPOINT = "0x84000000"
-+
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_CAT}/am3x"
 diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 868109b..c3b55ac 100644
+index c3b55ac..73f9643 100644
 --- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
 +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -53,6 +53,13 @@ do_compile_append_am437x-hs-evm () {
- 	fi
- }
+@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
-+do_compile_append_am335x-hs-evm () {
-+	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
-+		rm -rf ${S}/MLO
-+		cp ${S}/u-boot-spl_HS_ISSW ${S}/MLO
-+	fi
-+}
-+
- do_install_append () {
- 	if [ -f ${S}/${UBOOT_HS_XLD_BINARY} ]; then
- 		install ${S}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ 
+-PR = "r16"
++PR = "r17"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
 
 
