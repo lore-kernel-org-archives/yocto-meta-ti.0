@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C6650E00D45; Fri, 23 Sep 2016 15:47:15 -0700 (PDT)
+	id E83EDE00D44; Fri, 23 Sep 2016 15:47:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 953E0E009DC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 953C1E00951
 	for <meta-ti@yoctoproject.org>; Fri, 23 Sep 2016 15:47:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5AA3452A89; Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
+	id 68EF2529E6; Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160923224712.5AA3452A89@arago-project.org>
+Message-Id: <20160923224712.68EF2529E6@arago-project.org>
 Date: Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine: update OPTEE OS flavor names slightly
+Subject: Denys Dmytriyenko : u-boot-ti-staging: don' t replace MLO with HS_ISSW for am335x HS platform
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +33,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2016 22:47:15 -0000
+X-List-Received-Date: Fri, 23 Sep 2016 22:47:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 57c5908d4a46c559a3a3cb352a3a81a6c967dbec
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=57c5908d4a46c559a3a3cb352a3a81a6c967dbec
+Commit: 69fd10ee8cc9f423e5092d35b47dfa3e52872545
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=69fd10ee8cc9f423e5092d35b47dfa3e52872545
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Sep 23 23:53:44 2016 +0000
+Date:   Sat Sep 24 01:10:14 2016 +0000
 
-conf/machine: update OPTEE OS flavor names slightly
+u-boot-ti-staging: don't replace MLO with HS_ISSW for am335x HS platform
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am57xx-hs-evm.conf |    2 +-
- conf/machine/dra7xx-hs-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    9 +--------
+ 1 files changed, 1 insertions(+), 8 deletions(-)
 
-diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
-index 24e9b2a..be67205 100644
---- a/conf/machine/am57xx-hs-evm.conf
-+++ b/conf/machine/am57xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 73f9643..9cf8a83 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "am572x_evm"
-+OPTEEFLAVOR = "am57xx_evm"
- OPTEEOUTPUTMACHINE = "ti"
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index a6a5e0f..3a8ada2 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "dra7xx_evm dra72x_evm_revc"
-+OPTEEFLAVOR = "dra7_evm dra72_evm_revc"
- OPTEEOUTPUTMACHINE = "ti"
+-PR = "r17"
++PR = "r18"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+@@ -53,13 +53,6 @@ do_compile_append_am437x-hs-evm () {
+ 	fi
+ }
+ 
+-do_compile_append_am335x-hs-evm () {
+-	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
+-		rm -rf ${S}/MLO
+-		cp ${S}/u-boot-spl_HS_ISSW ${S}/MLO
+-	fi
+-}
+-
+ do_install_append () {
+ 	if [ -f ${S}/${UBOOT_HS_XLD_BINARY} ]; then
+ 		install ${S}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
 
 
