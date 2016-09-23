@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EFD50E00BEA; Tue, 20 Sep 2016 12:32:06 -0700 (PDT)
+	id E5AB0E00CD9; Fri, 23 Sep 2016 09:51:00 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CBE0E00563
-	for <meta-ti@yoctoproject.org>; Tue, 20 Sep 2016 12:32:04 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7ABDE0074B
+	for <meta-ti@yoctoproject.org>; Fri, 23 Sep 2016 09:50:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A5E9D52A71; Tue, 20 Sep 2016 19:32:03 +0000 (UTC)
+	id 5BB8252A60; Fri, 23 Sep 2016 16:50:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160920193203.A5E9D52A71@arago-project.org>
-Date: Tue, 20 Sep 2016 19:32:03 +0000 (UTC)
+Message-Id: <20160923165056.5BB8252A60@arago-project.org>
+Date: Fri, 23 Sep 2016 16:50:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine, recipes: introduce k2e SOC family
+Subject: Tag ti2016.04-rc2 : Denys Dmytriyenko : LCPD Core SDK ti2016.04-rc2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,54 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2016 19:32:07 -0000
+X-List-Received-Date: Fri, 23 Sep 2016 16:51:00 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 1f4d266c4d293c326155d7a2051a9affa8722400
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1f4d266c4d293c326155d7a2051a9affa8722400
+Branch: refs/tags/ti2016.04-rc2
+Tag:    c1a296150b060747f2a3dee8c09e2b804040b3f1
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=c1a296150b060747f2a3dee8c09e2b804040b3f1
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep 21 01:29:01 2016 +0000
+Tagger: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Sep 23 12:50:33 2016 -0400
 
-conf/machine,recipes: introduce k2e SOC family
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- conf/machine/include/k2e.inc                       |    2 ++
- conf/machine/k2e-evm.conf                          |    2 +-
- .../common-csl-ip/common-csl-ip-rtos_git.bb        |    3 +--
- recipes-bsp/cppi-lld/cppi-lld-rtos_git.bb          |    2 +-
- recipes-bsp/cppi-lld/cppi-lld.inc                  |    2 +-
- recipes-bsp/dsptop/debugss-module-drv_git.bb       |    2 +-
- recipes-bsp/hplib/hplib.inc                        |    2 +-
- recipes-bsp/hyplnk-lld/hyplnk-lld.inc              |    4 ++--
- recipes-bsp/mmap-lld/mmap-lld-test_git.bb          |    2 +-
- recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb         |    2 +-
- recipes-bsp/nwal-lld/nwal-lld.inc                  |    2 +-
- recipes-bsp/pa-lld/pa-lld.inc                      |    4 ++--
- recipes-bsp/pktlib/pktlib-rtos_git.bb              |    2 +-
- recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb          |    2 +-
- recipes-bsp/qmss-lld/qmss-lld.inc                  |    2 +-
- recipes-bsp/rm-lld/rm-lld-rtos_git.bb              |    2 +-
- recipes-bsp/sa-lld/sa-lld-test_git.bb              |    2 +-
- recipes-bsp/traceframework/traceframework.inc      |    2 +-
- .../linux/files/{k2e-evm => k2e}/cmem.dtsi         |    0
- .../linux/files/{k2e-evm => k2e}/k2e-uio.dtsi      |    0
- recipes-kernel/linux/linux-ti-staging_4.4.bb       |    7 +++----
- recipes-kernel/linux/ti-uio.inc                    |    4 ++--
- recipes-ti/ipc/ipc-transport-common-rtos_git.bb    |    2 +-
- recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb      |    4 ++--
- recipes-ti/ipc/ipc-transport-qmss-test_git.bb      |    2 +-
- recipes-ti/ipc/ti-ipc.inc                          |    2 +-
- recipes-ti/ipc/ti-ipc_git.bb                       |    2 +-
- recipes-ti/mpm-transport/mpm-transport_git.bb      |    4 ++--
- recipes-ti/netapi/netapi.inc                       |    2 +-
- recipes-ti/openmp-rtos/openmp-rtos_git.bb          |    2 +-
- 30 files changed, 36 insertions(+), 36 deletions(-)
-
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=1f4d266c4d293c326155d7a2051a9affa8722400
+LCPD Core SDK ti2016.04-rc2
 
