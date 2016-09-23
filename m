@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 15DB3E00CA1; Fri, 23 Sep 2016 15:47:18 -0700 (PDT)
+	id 18DCAE00D4E; Fri, 23 Sep 2016 15:47:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98CA3E00D3F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9796DE00CA1
 	for <meta-ti@yoctoproject.org>; Fri, 23 Sep 2016 15:47:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A81B052A96; Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
+	id 84D0E52A90; Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160923224712.A81B052A96@arago-project.org>
+Message-Id: <20160923224712.84D0E52A90@arago-project.org>
 Date: Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: don' t replace MLO with HS_ISSW for am335x HS platform
+Subject: Denys Dmytriyenko : conf/machine: update OPTEE OS flavor names slightly
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,47 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9ffe3eb8cf5fcf13e274039fc57c77c78bc9d337
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9ffe3eb8cf5fcf13e274039fc57c77c78bc9d337
+Commit: 018d6239ea8c541b0375f04ef3e47283275b2669
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=018d6239ea8c541b0375f04ef3e47283275b2669
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Sep 24 01:10:14 2016 +0000
+Date:   Fri Sep 23 23:53:44 2016 +0000
 
-u-boot-ti-staging: don't replace MLO with HS_ISSW for am335x HS platform
+conf/machine: update OPTEE OS flavor names slightly
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    9 +--------
- 1 files changed, 1 insertions(+), 8 deletions(-)
+ conf/machine/am57xx-hs-evm.conf |    2 +-
+ conf/machine/dra7xx-hs-evm.conf |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 73f9643..9cf8a83 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
+index 24e9b2a..be67205 100644
+--- a/conf/machine/am57xx-hs-evm.conf
++++ b/conf/machine/am57xx-hs-evm.conf
+@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ OPTEEMACHINE = "ti"
+-OPTEEFLAVOR = "am572x_evm"
++OPTEEFLAVOR = "am57xx_evm"
+ OPTEEOUTPUTMACHINE = "ti"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index a6a5e0f..3a8ada2 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
  
--PR = "r17"
-+PR = "r18"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
-@@ -53,13 +53,6 @@ do_compile_append_am437x-hs-evm () {
- 	fi
- }
- 
--do_compile_append_am335x-hs-evm () {
--	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
--		rm -rf ${S}/MLO
--		cp ${S}/u-boot-spl_HS_ISSW ${S}/MLO
--	fi
--}
--
- do_install_append () {
- 	if [ -f ${S}/${UBOOT_HS_XLD_BINARY} ]; then
- 		install ${S}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
+ OPTEEMACHINE = "ti"
+-OPTEEFLAVOR = "dra7xx_evm dra72x_evm_revc"
++OPTEEFLAVOR = "dra7_evm dra72_evm_revc"
+ OPTEEOUTPUTMACHINE = "ti"
 
 
