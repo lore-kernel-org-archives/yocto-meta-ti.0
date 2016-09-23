@@ -1,26 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E40FFE00CDE; Fri, 23 Sep 2016 09:51:00 -0700 (PDT)
+	id 193EBE00C1E; Fri, 23 Sep 2016 10:53:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, NO_RDNS_DOTCOM_HELO,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+	*  0.8 NO_RDNS_DOTCOM_HELO Host HELO'd as a big ISP, but had no rDNS
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8F15E0090A
-	for <meta-ti@yoctoproject.org>; Fri, 23 Sep 2016 09:50:57 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 505E352A89; Fri, 23 Sep 2016 16:50:56 +0000 (UTC)
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B8EF9E007E1
+	for <meta-ti@yoctoproject.org>; Fri, 23 Sep 2016 10:53:46 -0700 (PDT)
+Received: from vz-proxy-l001.mx.aol.com ([64.236.82.153])
+	by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0ODY002PUXPLHK60@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 23 Sep 2016 12:53:45 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=GW1xBdLrtEIA:10 a=sozttTNsAAAA:8	a=TasUA3LgOFeN_0rcuAUA:9
+Received: by 100.15.110.130 with SMTP id 219391a3;
+	Fri, 23 Sep 2016 17:53:45 GMT
+Received: from sam.denix (sam [192.168.0.5])	by gandalf.denix.org (Postfix)
+	with ESMTP id D659716212C;	Fri, 23 Sep 2016 13:53:44 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20160923165056.505E352A89@arago-project.org>
-Date: Fri, 23 Sep 2016 16:50:56 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Tag ti2016.04-rc1 : Denys Dmytriyenko : LCPD Core SDK ti2016.04-rc1
+Date: Fri, 23 Sep 2016 13:53:44 -0400
+Message-id: <1474653224-16231-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] conf/machine: update OPTEE OS flavor names slightly
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,16 +46,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2016 16:51:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 Sep 2016 17:53:48 -0000
 
-Module: meta-ti
-Branch: refs/tags/ti2016.04-rc1
-Tag:    3dfab65c50963b1f745228dd80907b89ef858b55
-URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=3dfab65c50963b1f745228dd80907b89ef858b55
+From: Denys Dmytriyenko <denys@ti.com>
 
-Tagger: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Sep 23 12:48:55 2016 -0400
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/machine/am57xx-hs-evm.conf | 2 +-
+ conf/machine/dra7xx-hs-evm.conf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-LCPD Core SDK ti2016.04-rc1
+diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
+index 24e9b2a..be67205 100644
+--- a/conf/machine/am57xx-hs-evm.conf
++++ b/conf/machine/am57xx-hs-evm.conf
+@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
+ 
+ OPTEEMACHINE = "ti"
+-OPTEEFLAVOR = "am572x_evm"
++OPTEEFLAVOR = "am57xx_evm"
+ OPTEEOUTPUTMACHINE = "ti"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index a6a5e0f..3a8ada2 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
+ 
+ OPTEEMACHINE = "ti"
+-OPTEEFLAVOR = "dra7xx_evm dra72x_evm_revc"
++OPTEEFLAVOR = "dra7_evm dra72_evm_revc"
+ OPTEEOUTPUTMACHINE = "ti"
+-- 
+2.7.4
+
 
