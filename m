@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 18DCAE00D4E; Fri, 23 Sep 2016 15:47:18 -0700 (PDT)
+	id 1DECEE00571; Mon, 26 Sep 2016 10:24:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9796DE00CA1
-	for <meta-ti@yoctoproject.org>; Fri, 23 Sep 2016 15:47:13 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 84D0E52A90; Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20160923224712.84D0E52A90@arago-project.org>
-Date: Fri, 23 Sep 2016 22:47:12 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine: update OPTEE OS flavor names slightly
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C75C3E00519
+	for <meta-ti@yoctoproject.org>; Mon, 26 Sep 2016 10:24:43 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8QHOgtE026693
+	for <meta-ti@yoctoproject.org>; Mon, 26 Sep 2016 12:24:42 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8QHOfRD020518
+	for <meta-ti@yoctoproject.org>; Mon, 26 Sep 2016 12:24:41 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 26 Sep 2016 12:24:40 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u8QHOegW017911;	Mon, 26 Sep 2016 12:24:41 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 26 Sep 2016 13:24:39 -0400
+Message-ID: <1474910679-20190-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH] cmem: Update to new version 4.12.00.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +45,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2016 22:47:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 26 Sep 2016 17:24:48 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 018d6239ea8c541b0375f04ef3e47283275b2669
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=018d6239ea8c541b0375f04ef3e47283275b2669
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Sep 23 23:53:44 2016 +0000
-
-conf/machine: update OPTEE OS flavor names slightly
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
+ recipes-bsp/cmem/cmem.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
- conf/machine/am57xx-hs-evm.conf |    2 +-
- conf/machine/dra7xx-hs-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
-index 24e9b2a..be67205 100644
---- a/conf/machine/am57xx-hs-evm.conf
-+++ b/conf/machine/am57xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index 413f925..e68bb6b 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -3,11 +3,11 @@ HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "am572x_evm"
-+OPTEEFLAVOR = "am57xx_evm"
- OPTEEOUTPUTMACHINE = "ti"
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index a6a5e0f..3a8ada2 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
+-BRANCH ?= "lu-next"
+-# This corresponds to version 4.11.00.00_eng
+-SRCREV = "852e97b5584cbdb6aa0fdef02a7c4e245409bcb6"
++BRANCH = "master"
++# This corresponds to version 4.12.00.00
++SRCREV = "d6d3e84c84d0e84a9b96c3f6f789ac642d03afcb"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "dra7xx_evm dra72x_evm_revc"
-+OPTEEFLAVOR = "dra7_evm dra72_evm_revc"
- OPTEEOUTPUTMACHINE = "ti"
+-PV = "4.11.00.00+git${SRCPV}"
++PV = "4.12.00.00+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ 
+-- 
+1.9.1
 
 
