@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6DCCE0074C; Tue, 27 Sep 2016 12:47:37 -0700 (PDT)
+	id 2ADC7E0074C; Tue, 27 Sep 2016 13:34:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,30 +9,30 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A88DAE006B3
-	for <meta-ti@yoctoproject.org>; Tue, 27 Sep 2016 12:47:32 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB8DDE006B3
+	for <meta-ti@yoctoproject.org>; Tue, 27 Sep 2016 13:33:58 -0700 (PDT)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E2FA82091B;
-	Tue, 27 Sep 2016 19:47:30 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id EB7E620928;
+	Tue, 27 Sep 2016 20:33:57 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id 4RKZMPfMNwg3; Tue, 27 Sep 2016 19:47:30 +0000 (UTC)
+	with ESMTP id pm9K0hdq3p91; Tue, 27 Sep 2016 20:33:57 +0000 (UTC)
 Received: from gandalf.denix.org (pool-100-15-110-130.washdc.fios.verizon.net
 	[100.15.110.130])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C56A7202B9;
-	Tue, 27 Sep 2016 19:47:29 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CCB28202B9;
+	Tue, 27 Sep 2016 20:33:56 +0000 (UTC)
 Received: from sam.denix (sam [192.168.0.5])
-	by gandalf.denix.org (Postfix) with ESMTP id 5330316211C;
-	Tue, 27 Sep 2016 15:47:29 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 59E6616214B;
+	Tue, 27 Sep 2016 16:33:56 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Tue, 27 Sep 2016 15:47:28 -0400
-Message-Id: <1475005648-24175-1-git-send-email-denis@denix.org>
+Date: Tue, 27 Sep 2016 16:33:55 -0400
+Message-Id: <1475008435-24457-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] ti-sci-fw: update to version 0.1.1.22
+Subject: [PATCH] linux-ti-staging: update to ti2016.04-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,37 +45,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Sep 2016 19:47:37 -0000
+X-List-Received-Date: Tue, 27 Sep 2016 20:34:02 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index 7cbe859..70c9698 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "TI SCI firmware"
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index 8b79fe5..1971d41 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
--PV = "0.1.1.12"
-+PV = "0.1.1.22"
- PR = "r0"
+ BRANCH = "ti-rt-linux-4.4.y"
  
- CLEANBROKEN = "1"
-@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g-evm"
+-SRCREV = "7e80288aba5918c3ce2d80050c644331f9750cce"
++SRCREV = "de1b6d68259624fd60c7b31b410f9c82387dea0a"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index bb7cf97..0b203a0 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -76,11 +76,11 @@ S = "${WORKDIR}/git"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-lsk-linux-4.4.y"
  
--SRCREV = "89c279adfdd0e58f002ba6f0c26a14869b2d74cb"
-+SRCREV = "43c9f88e3c9dc974cfcf9cf62befaf433ab1514b"
- BRANCH ?= "ti-linux-firmware-4.1.y"
+-SRCREV = "4fb4591a4ab1b3ef317fa87af3cd3c06f1a7284b"
++SRCREV = "d42bcf7359877cce717b5ad087d1c4a10c53c74d"
+ PV = "4.4.21+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 -- 
 2.7.4
 
