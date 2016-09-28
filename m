@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2ADC7E0074C; Tue, 27 Sep 2016 13:34:02 -0700 (PDT)
+	id ACFE1E00C9D; Wed, 28 Sep 2016 00:26:46 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB8DDE006B3
-	for <meta-ti@yoctoproject.org>; Tue, 27 Sep 2016 13:33:58 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EB7E620928;
-	Tue, 27 Sep 2016 20:33:57 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id pm9K0hdq3p91; Tue, 27 Sep 2016 20:33:57 +0000 (UTC)
-Received: from gandalf.denix.org (pool-100-15-110-130.washdc.fios.verizon.net
-	[100.15.110.130])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CCB28202B9;
-	Tue, 27 Sep 2016 20:33:56 +0000 (UTC)
-Received: from sam.denix (sam [192.168.0.5])
-	by gandalf.denix.org (Postfix) with ESMTP id 59E6616214B;
-	Tue, 27 Sep 2016 16:33:56 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D0F5E00A64
+	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 00:26:42 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7152452A70; Wed, 28 Sep 2016 07:26:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 27 Sep 2016 16:33:55 -0400
-Message-Id: <1475008435-24457-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] linux-ti-staging: update to ti2016.04-rc3 tag
+Message-Id: <20160928072641.7152452A70@arago-project.org>
+Date: Wed, 28 Sep 2016 07:26:41 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.04-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,45 +33,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Sep 2016 20:34:02 -0000
+X-List-Received-Date: Wed, 28 Sep 2016 07:26:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 479e8fb94eac287d7a5e76b26494367b4181ccb1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=479e8fb94eac287d7a5e76b26494367b4181ccb1
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Sep 28 01:01:38 2016 +0000
+
+u-boot-ti-staging: update to ti2016.04-rc3 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 8b79fe5..1971d41 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+---
+
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 9cf8a83..0e054a4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--SRCREV = "7e80288aba5918c3ce2d80050c644331f9750cce"
-+SRCREV = "de1b6d68259624fd60c7b31b410f9c82387dea0a"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index bb7cf97..0b203a0 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -76,11 +76,11 @@ S = "${WORKDIR}/git"
+-PR = "r18"
++PR = "r19"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "4fb4591a4ab1b3ef317fa87af3cd3c06f1a7284b"
-+SRCREV = "d42bcf7359877cce717b5ad087d1c4a10c53c74d"
- PV = "4.4.21+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "d"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "ad0d149681408fada229eaf0443cae0a35e01032"
++SRCREV = "48030baf3d94d4601b9a8ce57c3d2d2d4e7b01c4"
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
--- 
-2.7.4
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
