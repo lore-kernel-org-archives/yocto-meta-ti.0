@@ -1,38 +1,40 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D5DDEE00B52; Wed, 28 Sep 2016 08:44:22 -0700 (PDT)
+	id E7CDEE00D10; Wed, 28 Sep 2016 08:44:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
 	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 95EB0E00B52
-	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 08:44:18 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAFE3E00CF2
+	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 08:44:21 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8SFiIfB013896
-	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 10:44:18 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8SFiHvK006090
-	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 10:44:17 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 28 Sep 2016 10:44:16 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8SFiLia013902
+	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 10:44:21 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8SFiKqN006108
+	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 10:44:20 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 28 Sep 2016 10:44:19 -0500
 Received: from a0756824local.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u8SFiGKW010765;	Wed, 28 Sep 2016 10:44:16 -0500
+	u8SFiGKX010765;	Wed, 28 Sep 2016 10:44:19 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 28 Sep 2016 11:44:02 -0400
-Message-ID: <1475077444-16485-1-git-send-email-jsobota@ti.com>
+Date: Wed, 28 Sep 2016 11:44:03 -0400
+Message-ID: <1475077444-16485-2-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1475077444-16485-1-git-send-email-jsobota@ti.com>
+References: <1475077444-16485-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] common-csl-ip: Update to version 3.3.0.4B
+Subject: [PATCH 2/3] gcc-arm-none-eabi-native: Update to version 4.9.2015q3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,38 +47,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Sep 2016 15:44:22 -0000
+X-List-Received-Date: Wed, 28 Sep 2016 15:44:25 -0000
 Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-bsp/common-csl-ip/common-csl-ip.inc |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ ...ve_4.8.2014q3.bb => gcc-arm-none-eabi-native_4.9.2015q3.bb} |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename recipes-ti/devtools/{gcc-arm-none-eabi-native_4.8.2014q3.bb => gcc-arm-none-eabi-native_4.9.2015q3.bb} (59%)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index a6c3887..76181e8 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
+similarity index 59%
+rename from recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb
+rename to recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
+index d3dba41..1fe5c52 100644
+--- a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.8.2014q3.bb
++++ b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
+@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=cba77c7fd
+ inherit native
+ require recipes-ti/includes/ti-paths.inc
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+-SRC_URI = "https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2;name=gcc-arm-none"
++SRC_URI = "https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2;name=gcc-arm-none"
  
--PV = "03.03.00.04A"
-+PV = "03.03.00.04B"
- INC_PR = "r0"
+-SRC_URI[gcc-arm-none.md5sum] = "acc8c8ff45f8801e2155934214309a87"
+-SRC_URI[gcc-arm-none.sha256sum] = "e33d7546de1e02844239c72b3ef5563f472fcd6b4637419d513770ae13f551c0"
++SRC_URI[gcc-arm-none.md5sum] = "8a4a74872830f80c788c944877d3ad8c"
++SRC_URI[gcc-arm-none.sha256sum] = "c50078bfbd29e6c15615900e746f4d0acde917338e55860b0f145f57387c12ab"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
+-S = "${WORKDIR}/gcc-arm-none-eabi-4_8-2014q3"
++S = "${WORKDIR}/gcc-arm-none-eabi-4_9-2015q3"
  
--# Below commit ID corresponds to "DEV.CSL_PROCESSOR-SDK.03.03.00.04A"
--CSL_SRCREV = "64aba2b19c2f03ef0e5b1814489c910bb19ca2ee"
-+# Below commit ID corresponds to "DEV.CSL_PROCESSOR-SDK.03.03.00.04B"
-+CSL_SRCREV = "a74dc132a21085214b49c3ae8884825d87b6dd2f"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+ do_install() {
+     install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
 -- 
 1.7.10.4
 
