@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 98B5CE00C9D; Wed, 28 Sep 2016 00:26:48 -0700 (PDT)
+	id A12D3E00CA3; Wed, 28 Sep 2016 00:26:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40270E00CA3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46F4EE00CA6
 	for <meta-ti@yoctoproject.org>; Wed, 28 Sep 2016 00:26:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 758D752A70; Wed, 28 Sep 2016 07:26:47 +0000 (UTC)
+	id 86A9052A96; Wed, 28 Sep 2016 07:26:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160928072647.758D752A70@arago-project.org>
+Message-Id: <20160928072647.86A9052A96@arago-project.org>
 Date: Wed, 28 Sep 2016 07:26:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-sci-fw: update to version 0.1.1.22
+Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2016.04-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,49 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 84d1ecaf323f9a13ae791176bfa0aec99b587184
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=84d1ecaf323f9a13ae791176bfa0aec99b587184
+Commit: 2bbab55c0aa8bb2279d7f3cf09d99156f60befc1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2bbab55c0aa8bb2279d7f3cf09d99156f60befc1
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep 28 01:47:28 2016 +0000
+Date:   Wed Sep 28 02:33:55 2016 +0000
 
-ti-sci-fw: update to version 0.1.1.22
+linux-ti-staging: update to ti2016.04-rc3 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index 7cbe859..70c9698 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "TI SCI firmware"
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index 8b79fe5..1971d41 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
--PV = "0.1.1.12"
-+PV = "0.1.1.22"
- PR = "r0"
+ BRANCH = "ti-rt-linux-4.4.y"
  
- CLEANBROKEN = "1"
-@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g-evm"
+-SRCREV = "7e80288aba5918c3ce2d80050c644331f9750cce"
++SRCREV = "de1b6d68259624fd60c7b31b410f9c82387dea0a"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index bb7cf97..0b203a0 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -76,11 +76,11 @@ S = "${WORKDIR}/git"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-lsk-linux-4.4.y"
  
--SRCREV = "89c279adfdd0e58f002ba6f0c26a14869b2d74cb"
-+SRCREV = "43c9f88e3c9dc974cfcf9cf62befaf433ab1514b"
- BRANCH ?= "ti-linux-firmware-4.1.y"
+-SRCREV = "4fb4591a4ab1b3ef317fa87af3cd3c06f1a7284b"
++SRCREV = "d42bcf7359877cce717b5ad087d1c4a10c53c74d"
+ PV = "4.4.21+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 
 
