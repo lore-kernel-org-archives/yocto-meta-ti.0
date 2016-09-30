@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D9E16E00D7F; Fri, 30 Sep 2016 09:40:40 -0700 (PDT)
+	id DC374E00D95; Fri, 30 Sep 2016 09:40:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EBE4EE00D95
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E957CE00D82
 	for <meta-ti@yoctoproject.org>; Fri, 30 Sep 2016 09:40:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B8FD552A93; Fri, 30 Sep 2016 16:40:35 +0000 (UTC)
+	id B83F152AA7; Fri, 30 Sep 2016 16:40:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20160930164035.B8FD552A93@arago-project.org>
-Date: Fri, 30 Sep 2016 16:40:35 +0000 (UTC)
+Message-Id: <20160930164036.B83F152AA7@arago-project.org>
+Date: Fri, 30 Sep 2016 16:40:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Justin Sobota : common-csl-ip: Update to version 3.3.0.4B
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 30 Sep 2016 16:40:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 97376334c54243d5ed737c05a8165d4586442358
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=97376334c54243d5ed737c05a8165d4586442358
+Branch: master
+Commit: 17416d98b5559fa921df12a8b929c0dfba9be949
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=17416d98b5559fa921df12a8b929c0dfba9be949
 
 Author: Justin Sobota <jsobota@ti.com>
 Date:   Wed Sep 28 21:44:02 2016 +0000
