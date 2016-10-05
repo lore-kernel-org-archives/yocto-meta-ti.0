@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B5E6CE0044F; Wed,  5 Oct 2016 11:36:59 -0700 (PDT)
+	id B7A2DE00444; Wed,  5 Oct 2016 11:36:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 95240E002AC
-	for <meta-ti@yoctoproject.org>; Wed,  5 Oct 2016 11:36:55 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0FD4E0034A
+	for <meta-ti@yoctoproject.org>; Wed,  5 Oct 2016 11:36:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 323A6529BA; Wed,  5 Oct 2016 18:36:54 +0000 (UTC)
+	id D0BE3529BA; Wed,  5 Oct 2016 18:36:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161005183654.323A6529BA@arago-project.org>
-Date: Wed,  5 Oct 2016 18:36:53 +0000 (UTC)
+Message-Id: <20161005183657.D0BE3529BA@arago-project.org>
+Date: Wed,  5 Oct 2016 18:36:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : ti-ipc-rtos: Remove M4F target for omap-a15
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 05 Oct 2016 18:36:59 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e3e29853fef5fa97451facfa9a864ff7718d0574
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e3e29853fef5fa97451facfa9a864ff7718d0574
+Branch: krogoth
+Commit: 49bb9c096c23b487e199a14d9b487f38c107d2e1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=49bb9c096c23b487e199a14d9b487f38c107d2e1
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Tue Sep 27 01:29:08 2016 +0000
