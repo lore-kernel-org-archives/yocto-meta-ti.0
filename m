@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BB30CE00AAB; Thu,  6 Oct 2016 14:26:18 -0700 (PDT)
+	id EAC83E00AAB; Thu,  6 Oct 2016 14:26:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E170E00831
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60807E00A85
 	for <meta-ti@yoctoproject.org>; Thu,  6 Oct 2016 14:26:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 93B01529A3; Thu,  6 Oct 2016 21:26:09 +0000 (UTC)
+	id 33F3952A26; Thu,  6 Oct 2016 21:26:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161006212609.93B01529A3@arago-project.org>
-Date: Thu,  6 Oct 2016 21:26:09 +0000 (UTC)
+Message-Id: <20161006212610.33F3952A26@arago-project.org>
+Date: Thu,  6 Oct 2016 21:26:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.04-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2016 21:26:18 -0000
+X-List-Received-Date: Thu, 06 Oct 2016 21:26:21 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 02b5977110800e097736987e3c58a594f29f73c0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02b5977110800e097736987e3c58a594f29f73c0
+Branch: master
+Commit: 8fe4460673f24977b0b1a90db356f78e04344324
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8fe4460673f24977b0b1a90db356f78e04344324
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Oct  7 03:20:54 2016 +0000
