@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EAC83E00AAB; Thu,  6 Oct 2016 14:26:20 -0700 (PDT)
+	id B129AE00C11; Fri,  7 Oct 2016 07:32:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60807E00A85
-	for <meta-ti@yoctoproject.org>; Thu,  6 Oct 2016 14:26:12 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 33F3952A26; Thu,  6 Oct 2016 21:26:10 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20161006212610.33F3952A26@arago-project.org>
-Date: Thu,  6 Oct 2016 21:26:10 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.04-rc4 tag
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7652DE00498
+	for <meta-ti@yoctoproject.org>; Fri,  7 Oct 2016 07:32:41 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u97EWfRq008923
+	for <meta-ti@yoctoproject.org>; Fri, 7 Oct 2016 09:32:41 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u97EWe7C021261
+	for <meta-ti@yoctoproject.org>; Fri, 7 Oct 2016 09:32:40 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 7 Oct 2016 09:32:39 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	u97EWdlE025037;	Fri, 7 Oct 2016 09:32:39 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 7 Oct 2016 10:30:18 -0400
+Message-ID: <1475850618-4691-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [PATCH] dsptop: bump SRCREV to version 1.4.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +45,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2016 21:26:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Oct 2016 14:32:45 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 8fe4460673f24977b0b1a90db356f78e04344324
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8fe4460673f24977b0b1a90db356f78e04344324
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Oct  7 03:20:54 2016 +0000
-
-u-boot-ti-staging: update to ti2016.04-rc4 tag
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
+ recipes-bsp/dsptop/dsptop.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 0e054a4..0facc23 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
+index 956dc31..2106ec8 100644
+--- a/recipes-bsp/dsptop/dsptop.inc
++++ b/recipes-bsp/dsptop/dsptop.inc
+@@ -1,6 +1,6 @@
+-# This corresponds to version 1.3.0
+-SRCREV = "4d92879b632ba70402b61fa65cc58f5373eb5217"
+-PV = "1.3.0"
++# This corresponds to version 1.4.0
++SRCREV = "0aedcabdbbcbfc7558f70fc50afc95583302a087"
++PV = "1.4.0"
+ INC_PR = "r0"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
- 
--PR = "r19"
-+PR = "r20"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "48030baf3d94d4601b9a8ce57c3d2d2d4e7b01c4"
-+SRCREV = "bbfdf926a1ebd5620fa8e3e60b9e747d8de12254"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+ SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
+-- 
+2.7.4
 
 
