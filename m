@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C4CFDE00CAB; Fri,  7 Oct 2016 18:01:52 -0700 (PDT)
+	id 748ACE00CAB; Fri,  7 Oct 2016 18:01:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86DE4E00C75
-	for <meta-ti@yoctoproject.org>; Fri,  7 Oct 2016 18:01:51 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E42EE00CAA
+	for <meta-ti@yoctoproject.org>; Fri,  7 Oct 2016 18:01:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A00752A93; Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
+	id 7F28952AA2; Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161008010150.3A00752A93@arago-project.org>
+Message-Id: <20161008010150.7F28952AA2@arago-project.org>
 Date: Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: also copy HS MLO variant
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Oct 2016 01:01:52 -0000
+X-List-Received-Date: Sat, 08 Oct 2016 01:01:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 6cb779a6ba1b0693f6bf82777e1a333effe6fca5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6cb779a6ba1b0693f6bf82777e1a333effe6fca5
+Branch: master
+Commit: 02a43b25f76fe89c17e1de140e35a4c2272cd580
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02a43b25f76fe89c17e1de140e35a4c2272cd580
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Oct  8 07:00:00 2016 +0000
