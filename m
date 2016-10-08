@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7620AE00C75; Fri,  7 Oct 2016 18:01:53 -0700 (PDT)
+	id 774AFE00C81; Fri,  7 Oct 2016 18:01:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88D6BE00C9A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B448E00CA7
 	for <meta-ti@yoctoproject.org>; Fri,  7 Oct 2016 18:01:50 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 163F052A80; Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
+	id E407652A70; Sat,  8 Oct 2016 01:01:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161008010150.163F052A80@arago-project.org>
-Date: Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
+Message-Id: <20161008010149.E407652A70@arago-project.org>
+Date: Sat,  8 Oct 2016 01:01:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update for moved ti2016.04-rc4 tag
+Subject: Jacob Stiffler : openmp-rtos: bump SRCREV to version 2.4.0.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: b494d93a702c7aba6f61707280d2508736dca68c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b494d93a702c7aba6f61707280d2508736dca68c
+Commit: be97ed7aef2b69327cf124d0cf2894eaaec6f9c4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=be97ed7aef2b69327cf124d0cf2894eaaec6f9c4
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Oct  8 06:56:57 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Sat Oct  8 01:02:53 2016 +0000
 
-linux-ti-staging: update for moved ti2016.04-rc4 tag
+openmp-rtos: bump SRCREV to version 2.4.0.1
 
+* Fixes uniitialized variable causing assertion failure.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.4.bb |    4 ++--
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index c3fe9bb..708ce85 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -76,11 +76,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index d9a3c98..ace7319 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ require recipes-ti/includes/ti-paths.inc
  
--SRCREV = "aa23871a2a5a5f4aea6f9dff394c137ab4cab2a4"
-+SRCREV = "4cd9d100e608a1fea838bad79c9c413b3e756d23"
- PV = "4.4.23+git${SRCPV}"
+-PV = "2_04_00_00"
++PV = "2_04_00_01"
+ PR = "r0"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "d"
-+MACHINE_KERNEL_PR_append = "e"
- PR = "${MACHINE_KERNEL_PR}"
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+ SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+ "
  
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+-SRCREV = "2a657d3a38c507287ac84ef6771c27d38f0024f7"
++SRCREV = "0a16ee27f0f61d4042327c71cff9ed52e5435777"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ 
 
 
