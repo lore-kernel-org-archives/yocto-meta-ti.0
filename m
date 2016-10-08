@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 748ACE00CAB; Fri,  7 Oct 2016 18:01:53 -0700 (PDT)
+	id 7620AE00C75; Fri,  7 Oct 2016 18:01:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E42EE00CAA
-	for <meta-ti@yoctoproject.org>; Fri,  7 Oct 2016 18:01:52 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88D6BE00C9A
+	for <meta-ti@yoctoproject.org>; Fri,  7 Oct 2016 18:01:50 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7F28952AA2; Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
+	id 163F052A80; Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161008010150.7F28952AA2@arago-project.org>
+Message-Id: <20161008010150.163F052A80@arago-project.org>
 Date: Sat,  8 Oct 2016 01:01:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: also copy HS MLO variant
+Subject: Denys Dmytriyenko : linux-ti-staging: update for moved ti2016.04-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,70 +37,39 @@ X-List-Received-Date: Sat, 08 Oct 2016 01:01:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 02a43b25f76fe89c17e1de140e35a4c2272cd580
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02a43b25f76fe89c17e1de140e35a4c2272cd580
+Branch: krogoth
+Commit: b494d93a702c7aba6f61707280d2508736dca68c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b494d93a702c7aba6f61707280d2508736dca68c
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Oct  8 07:00:00 2016 +0000
+Date:   Sat Oct  8 06:56:57 2016 +0000
 
-u-boot-ti-staging: also copy HS MLO variant
+linux-ti-staging: update for moved ti2016.04-rc4 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |   17 ++++++++++++++++-
- 1 files changed, 16 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.4.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 0facc23..38f58f7 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index c3fe9bb..708ce85 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -76,11 +76,11 @@ S = "${WORKDIR}/git"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ BRANCH = "ti-lsk-linux-4.4.y"
  
--PR = "r20"
-+PR = "r21"
- PV_append = "+git${SRCPV}"
+-SRCREV = "aa23871a2a5a5f4aea6f9dff394c137ab4cab2a4"
++SRCREV = "4cd9d100e608a1fea838bad79c9c413b3e756d23"
+ PV = "4.4.23+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
-@@ -46,6 +46,11 @@ UBOOT_HS_XLD_BINARY = "u-boot-spl_HS_X-LOADER"
- UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
- UBOOT_HS_XLD_SYMLINK = "u-boot-spl_HS_X-LOADER-${MACHINE}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "e"
+ PR = "${MACHINE_KERNEL_PR}"
  
-+# HS MLO
-+UBOOT_HS_MLO_BINARY = "u-boot_HS_MLO"
-+UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
-+UBOOT_HS_MLO_SYMLINK = "u-boot_HS_MLO-${MACHINE}"
-+
- do_compile_append_am437x-hs-evm () {
- 	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
- 		rm -rf ${S}/MLO
-@@ -58,6 +63,10 @@ do_install_append () {
- 		install ${S}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
- 		ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
- 	fi
-+	if [ -f ${S}/${UBOOT_HS_MLO_BINARY} ]; then
-+		install ${S}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
-+		ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
-+	fi
- }
- 
- do_deploy_append () {
-@@ -67,6 +76,12 @@ do_deploy_append () {
- 		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
- 		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
- 	fi
-+	if [ -f ${S}/${UBOOT_HS_MLO_BINARY} ]; then
-+		install ${S}/${UBOOT_HS_MLO_BINARY} ${DEPLOYDIR}/${UBOOT_HS_MLO_IMAGE}
-+		rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
-+		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
-+		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
-+	fi
- }
- 
- do_install_append_keystone () {
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 
 
