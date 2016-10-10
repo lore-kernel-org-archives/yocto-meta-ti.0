@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A5ED5E00CD9; Fri,  7 Oct 2016 21:36:52 -0700 (PDT)
+	id AEF59E0095D; Mon, 10 Oct 2016 02:49:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5097BE00CD6
-	for <meta-ti@yoctoproject.org>; Fri,  7 Oct 2016 21:36:49 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 182632099C;
-	Sat,  8 Oct 2016 04:36:48 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id vUeO6QFV69xP; Sat,  8 Oct 2016 04:36:48 +0000 (UTC)
-Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
-	[100.15.106.107])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D82CB202B9;
-	Sat,  8 Oct 2016 04:36:46 +0000 (UTC)
-Received: from sam.denix (sam [192.168.0.5])
-	by gandalf.denix.org (Postfix) with ESMTP id 0FF0B162066;
-	Sat,  8 Oct 2016 00:36:46 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9CC5AE00815
+	for <meta-ti@yoctoproject.org>; Mon, 10 Oct 2016 02:49:07 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 1265F52AA4; Mon, 10 Oct 2016 09:49:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Sat,  8 Oct 2016 00:36:45 -0400
-Message-Id: <1475901405-2084-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [master][PATCH] recipes: python3 fixes
+Message-Id: <20161010094907.1265F52AA4@arago-project.org>
+Date: Mon, 10 Oct 2016 09:49:07 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : recipes: python3 fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Oct 2016 04:36:52 -0000
+X-List-Received-Date: Mon, 10 Oct 2016 09:49:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 48ffe2b2da9b44cdb0ce055c008ab21843ec98b3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=48ffe2b2da9b44cdb0ce055c008ab21843ec98b3
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Oct  8 10:36:45 2016 +0000
+
+recipes: python3 fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/setup-defconfig.inc | 2 +-
- recipes-ti/includes/ti-unpack.inc        | 8 +++-----
+
+ recipes-kernel/linux/setup-defconfig.inc |    2 +-
+ recipes-ti/includes/ti-unpack.inc        |    8 +++-----
  2 files changed, 4 insertions(+), 6 deletions(-)
 
 diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
@@ -106,7 +105,5 @@ index 9101044..1922db6 100644
      os.chdir(save_cwd)
  }
 -
--- 
-2.7.4
 
 
