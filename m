@@ -1,35 +1,49 @@
-Return-Path: <gary@mlbassoc.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EA15CE00D26; Tue, 11 Oct 2016 03:01:06 -0700 (PDT)
+	id 51371E00D43; Tue, 11 Oct 2016 03:48:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Level: *
+X-Spam-Status: No, score=1.1 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	HTML_MIME_NO_HTML_TAG,MIME_HTML_ONLY,MISSING_MIMEOLE autolearn=no
 	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-X-Greylist: delayed 484 seconds by postgrey-1.32 at yocto-www;
-	Tue, 11 Oct 2016 03:01:00 PDT
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF43CE00CEA
-	for <meta-ti@yoctoproject.org>; Tue, 11 Oct 2016 03:01:00 -0700 (PDT)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 06C6D68A019; Tue, 11 Oct 2016 10:52:55 +0100 (BST)
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id 96CB568A019;
-	Tue, 11 Oct 2016 10:52:55 +0100 (BST)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 499DE674006F;
-	Tue, 11 Oct 2016 11:52:55 +0200 (CEST)
-To: meta-ti@yoctoproject.org
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <895883cb-edbd-a729-769b-46483e4cd6e1@mlbassoc.com>
-Date: Tue, 11 Oct 2016 11:52:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.3.0
+	*      [score: 0.0024]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	*  0.4 HTML_MIME_NO_HTML_TAG HTML-only message, but there is no HTML tag
+	*  1.9 MISSING_MIMEOLE Message has X-MSMail-Priority, but no X-MimeOLE
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC814E00D26
+	for <meta-ti@yoctoproject.org>; Tue, 11 Oct 2016 03:48:06 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 787F120906;
+	Tue, 11 Oct 2016 10:48:05 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id nE1O_4h6weJF; Tue, 11 Oct 2016 10:48:05 +0000 (UTC)
+Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
+	[100.15.106.107])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 59AC220068;
+	Tue, 11 Oct 2016 10:48:04 +0000 (UTC)
+Received: from [100.175.102.118] (unknown [172.56.6.225])
+	by gandalf.denix.org (Postfix) with ESMTPA id 98B99162171;
+	Tue, 11 Oct 2016 06:48:02 -0400 (EDT)
+Date: Tue, 11 Oct 2016 12:47:56 +0200
+Message-ID: <93e07642-1cc5-40eb-ac40-2debe67d0c72@email.android.com>
+X-Android-Message-ID: <93e07642-1cc5-40eb-ac40-2debe67d0c72@email.android.com>
+In-Reply-To: <895883cb-edbd-a729-769b-46483e4cd6e1@mlbassoc.com>
+From: Denys Dmytriyenko <denis@denix.org>
+To: Gary Thomas <gary@mlbassoc.com>
+Importance: Normal
+X-Priority: 3
+X-MSMail-Priority: Normal
 MIME-Version: 1.0
-Subject: Can't build for BeagleBone
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Can't build for BeagleBone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,49 +56,12 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2016 10:01:07 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Oct 2016 10:48:14 -0000
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
 
-Using (Poky/Yocto):
+PHAgZGlyPSJsdHIiPlllYWgsIEknbSBhbHNvIGdldHRpbmcgdGhpcyBpbiBtYXN0ZXIuIFdvcmtz
+IGZpbmUgaW4ga3JvZ290aC4gSGF2ZW4ndCB5ZXQgbG9va2VkIGNsb3NlIGF0IGl0IHRob3VnaC4u
+Ljxicj4KPC9wPgo=
 
-Build Configuration:
-BB_VERSION        = "1.31.2"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "universal"
-TARGET_SYS        = "arm-poky-linux-gnueabi"
-MACHINE           = "beaglebone"
-DISTRO            = "poky"
-DISTRO_VERSION    = "2.1+snapshot-20161011"
-TUNE_FEATURES     = "arm armv7a vfp thumb neon       callconvention-hard"
-TARGET_FPU        = "hard"
-meta              = "master:b9d6a7cc234f44e44e5421191924b7463e9c0a9d"
-meta-ti           = "master:48ffe2b2da9b44cdb0ce055c008ab21843ec98b3"
-meta-poky         = "master:b9d6a7cc234f44e44e5421191924b7463e9c0a9d"
-
-I get this error:
-
-| 
-/local/bbb_2016-10-11/tmp/work/beaglebone-poky-linux-gnueabi/u-boot-ti-staging/2016.05+gitAUTOINC+bbfdf926a1-r21/git/tools/mkenvimage.c: 
-In function 'main':
-| 
-/local/bbb_2016-10-11/tmp/work/beaglebone-poky-linux-gnueabi/u-boot-ti-staging/2016.05+gitAUTOINC+bbfdf926a1-r21/git/tools/mkenvimage.c:120:35: 
-error: 'PLAIN_VERSION' undeclared (first use in this function)
-|     printf("%s version %s\n", prg, PLAIN_VERSION);
-|                                    ^
-| 
-/local/bbb_2016-10-11/tmp/work/beaglebone-poky-linux-gnueabi/u-boot-ti-staging/2016.05+gitAUTOINC+bbfdf926a1-r21/git/tools/mkenvimage.c:120:35: 
-note: each undeclared identifier is reported only once for each function it appears in
-| scripts/Makefile.host:111: recipe for target 'tools/mkenvimage.o' failed
-
-I was able to build with this configuration in late September, so the changes
-in early October to .../meta-ti/recipes-bsp/u-boot must be involved.
-
-I'll look into the details, but in the meantime does anyone have suggestions?
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
 
