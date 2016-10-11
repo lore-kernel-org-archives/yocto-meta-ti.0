@@ -1,49 +1,41 @@
-Return-Path: <denis@denix.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 51371E00D43; Tue, 11 Oct 2016 03:48:14 -0700 (PDT)
+	id 10640E00D62; Tue, 11 Oct 2016 04:08:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.1 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	HTML_MIME_NO_HTML_TAG,MIME_HTML_ONLY,MISSING_MIMEOLE autolearn=no
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0024]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	*  0.4 HTML_MIME_NO_HTML_TAG HTML-only message, but there is no HTML tag
-	*  1.9 MISSING_MIMEOLE Message has X-MSMail-Priority, but no X-MimeOLE
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC814E00D26
-	for <meta-ti@yoctoproject.org>; Tue, 11 Oct 2016 03:48:06 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 787F120906;
-	Tue, 11 Oct 2016 10:48:05 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id nE1O_4h6weJF; Tue, 11 Oct 2016 10:48:05 +0000 (UTC)
-Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
-	[100.15.106.107])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 59AC220068;
-	Tue, 11 Oct 2016 10:48:04 +0000 (UTC)
-Received: from [100.175.102.118] (unknown [172.56.6.225])
-	by gandalf.denix.org (Postfix) with ESMTPA id 98B99162171;
-	Tue, 11 Oct 2016 06:48:02 -0400 (EDT)
-Date: Tue, 11 Oct 2016 12:47:56 +0200
-Message-ID: <93e07642-1cc5-40eb-ac40-2debe67d0c72@email.android.com>
-X-Android-Message-ID: <93e07642-1cc5-40eb-ac40-2debe67d0c72@email.android.com>
-In-Reply-To: <895883cb-edbd-a729-769b-46483e4cd6e1@mlbassoc.com>
-From: Denys Dmytriyenko <denis@denix.org>
-To: Gary Thomas <gary@mlbassoc.com>
-Importance: Normal
-X-Priority: 3
-X-MSMail-Priority: Normal
+	*      [score: 0.0000]
+Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0E95E00D34
+	for <meta-ti@yoctoproject.org>; Tue, 11 Oct 2016 04:08:04 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9B94XVA001829;
+	Tue, 11 Oct 2016 04:04:34 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9B94Xi4028944;
+	Tue, 11 Oct 2016 04:04:33 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 11 Oct 2016 04:04:33 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9B94XsL009546;
+	Tue, 11 Oct 2016 04:04:33 -0500
+Date: Tue, 11 Oct 2016 05:04:32 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Simon Pelletier-Thibault <simon.pelletiert@gmail.com>
+Message-ID: <20161011090432.GS12745@edge>
+References: <CAMUfapSLsRQiC=ugzRWLJHqFS-PzV9evCx0CQtWRqzdO=vC6GA@mail.gmail.com>
+	<009C030982313E4589C6BC55FBF1E82A142D6938@DFLE09.ent.ti.com>
+	<20161010142749.GR12745@edge>
+	<CAMUfapRgck57qr2oyGJb02qiUmyU+6nart61uYSQiFtKo6mDcQ@mail.gmail.com>
 MIME-Version: 1.0
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Can't build for BeagleBone
+In-Reply-To: <CAMUfapRgck57qr2oyGJb02qiUmyU+6nart61uYSQiFtKo6mDcQ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: BeagleBone Black - ti-sgx-ddk not working on yocto Krogoth, what is missing
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,12 +48,195 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2016 10:48:14 -0000
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 11 Oct 2016 11:08:08 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-PHAgZGlyPSJsdHIiPlllYWgsIEknbSBhbHNvIGdldHRpbmcgdGhpcyBpbiBtYXN0ZXIuIFdvcmtz
-IGZpbmUgaW4ga3JvZ290aC4gSGF2ZW4ndCB5ZXQgbG9va2VkIGNsb3NlIGF0IGl0IHRob3VnaC4u
-Ljxicj4KPC9wPgo=
+Is this what you are looking for?
+http://arago-project.org/git/?p=meta-arago.git;a=blob;f=meta-arago-distro/recipes-graphics/wayland/weston/0001-udev-seat-restrict-udev-enumeration-to-card0.patch;hb=HEAD
 
+BTW, you don't need mesa at all, just libgbm, but it requires some massaging 
+with PREFERRED_PROVIDERs and bbappends to get it going for now, although 
+there's been some discussion to get it fixed upstream in the future...
+
+-- 
+Denys
+
+
+On Mon, Oct 10, 2016 at 04:26:59PM -0400, Simon Pelletier-Thibault wrote:
+> Hi Eric, Denys
+> 
+> Thank you for answering.
+> 
+> I tried the following:
+> root@beaglebone:~# gles1test1
+> PVR:(Error): WSEGL_CreateWindowDrawable: Couldn't set CRTC: Invalid
+> argument [0, ]
+> 'eglCreateWindowSurface' returned egl error 'EGL_BAD_ALLOC' (0x3003)
+> root@beaglebone:~# gles2test1
+> --------------------- started ---------------------
+> PVR:(Error): WSEGL_CreateWindowDrawable: Couldn't set CRTC: Invalid
+> argument [0, ]
+> 'eglCreateWindowSurface' returned egl error 'EGL_BAD_ALLOC' (0x3003)
+> 
+> I also try other configurations, like core-image-weston. After "adjusting"
+> mesa so it won't install gbm, weston won't boot and I still errors.
+> 
+> here the weston output:
+> starting with no config
+> Loding module/usr/lib/weston/drm-backend.so
+> output repaint windows is 7 ms maximun
+> initilizing drm backend
+> using /dev/dri/card0
+> Loading module /usr/lib/weston/gl-rendered.so
+> ...
+> loaded module: found gbm_pvr.so
+> found valid GBM backend : gbm_pvr.so
+> warning no EGL_EXT_platform_base support of specific platform; failling
+> back to eglGetDisplay
+> failed to choose EGL config
+> failed to initialize egl
+> fatal: failed to create compositor backend
+> 
+> 
+> I think the problem is around the drm thing. I'm not an expert but:
+> when I look at /dev/dri/*, I see 2 card ( as if there is 2 drm driver)
+> root@beaglebone:~# ls -lsa /dev/dri/
+>      0 drwxr-xr-x    2 root     root           120 Jan  1  1970 .
+>      0 drwxr-xr-x   11 root     root         13160 Oct  6 04:22 ..
+>      0 crw-rw----    1 root     video     226,   0 Jan  1  1970 card0
+>      0 crw-rw----    1 root     video     226,   1 Jan  1  1970 card1
+>      0 crw-rw----    1 root     video     226,  64 Jan  1  1970 controlD64
+>      0 crw-rw----    1 root     video     226, 128 Jan  1  1970 renderD128
+> 
+> 
+> also
+> root@beaglebone:~# ls -lsa /sys/class/drm/card0/device/driver
+>      0 lrwxrwxrwx    1 root     root             0 Oct  6 04:31
+> /sys/class/drm/card0/device/driver ->
+> ../../../../bus/platform/drivers/tilcdc
+> root@beaglebone:~# ls -lsa /sys/class/drm/card1/device/driver
+>      0 lrwxrwxrwx    1 root     root             0 Oct  6 04:35
+> /sys/class/drm/card1/device/driver ->
+> ../../../../bus/platform/drivers/pvrsrvkm
+> 
+> 1. So it sound that there is 2 drm drivers is it normal?
+> 2. Should I change the device three to remove tilcdc, so the only drm
+> driver will be pvrsrvkm?
+> 3. Is there something to do to ensure libdrm use the SGX driver?
+> 
+> 
+> On Mon, Oct 10, 2016 at 10:27 AM, Denys Dmytriyenko <denys@ti.com> wrote:
+> 
+> > FYI, that is not part of meta-ti - both kmscube and SGX demos are part of
+> > meta-arago application layer, not meta-ti BSP layer.
+> >
+> > --
+> > Denys
+> >
+> >
+> > On Mon, Oct 10, 2016 at 02:19:22PM +0000, Ruei, Eric wrote:
+> > > Hi, Simon:
+> > >
+> > > Most of the SGX test programs including sgx_init_test will not work
+> > anymore because we have switched to DRM-based EGL Window Systems.
+> > > Have you tried other SGX test programs at the file system?
+> > >
+> > > -          Weston?
+> > >
+> > > -          QT programs ion top of Weston?
+> > >
+> > > -          Without Weston
+> > >
+> > > o   Kmscube
+> > >
+> > > o   /usr/bin/SGX/demos/Raw/ OGLES2ChameleonMan
+> > >
+> > > o   …
+> > >
+> > > Best regards,
+> > >
+> > > Eric
+> > > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@
+> > yoctoproject.org] On Behalf Of Simon Pelletier-Thibault
+> > > Sent: Friday, October 07, 2016 9:49 PM
+> > > To: meta-ti@yoctoproject.org
+> > > Subject: [meta-ti] BeagleBone Black - ti-sgx-ddk not working on yocto
+> > Krogoth, what is missing
+> > >
+> > > Hi,
+> > > I'm trying to use sgx driver for EGL application on BeagleBone Black. I
+> > build a minimal image to test it and it is not working.
+> > > I got this:
+> > > root@beaglebone:~# sgx_init_test
+> > > ----------------------- Start -----------------------
+> > > Try calling PVRSRVConnect with an invalid argument:
+> > > PVR:(Error): PVRSRVConnect: Invalid connection. [0, ]
+> > > PVR:(Error): PVRSRVConnect: Unable to open connection. [0, ]
+> > >  OK
+> > > Call PVRSRVConnect with a valid argument:
+> > >  OK
+> > > Try calling PVRSRVEnumerateDevices with invalid puiNumDevices:
+> > > PVR:(Error): PVRSRVEnumerateDevices: Invalid params [0, ]
+> > >  OK
+> > > Get number of devices from PVRSRVEnumerateDevices:
+> > >  OK
+> > > .... Reported 1 devices
+> > > .... Device Number  | Device Type
+> > >             0000    | PVRSRV_DEVICE_ID_SGX
+> > > Attempt to acquire device 0:
+> > >  OK
+> > > Getting SGX Client info
+> > >  OK
+> > > .... ui32ProcessID:266
+> > > Display Class API: enumerate devices
+> > >  OK
+> > > PVRSRVEnumerateDeviceClass() returns 0 display device(s)
+> > >  FAIL - PVRSRV_ERROR_NO_DC_DEVICES_FOUND
+> > > -----
+> > > Here my configuration:
+> > > bblayes.conf:
+> > > POKY_BBLAYERS_CONF_VERSION = "2"
+> > >
+> > > BBPATH = "${TOPDIR}"
+> > > BBFILES ?= ""
+> > >
+> > > BBLAYERS ?= " \
+> > >   /path/poky2.1/meta \
+> > >   /path/poky2.1/meta-poky \
+> > >   /path/meta-ti2 \
+> > >   "
+> > > -----
+> > >
+> > > local.conf:
+> > > PACKAGECONFIG_append_pn-qemu-native = " sdl"
+> > > PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
+> > > CONF_VERSION = "1"
+> > >
+> > > PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
+> > > PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
+> > > PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
+> > >
+> > > IMAGE_INSTALL_append_pn-core-image-minimal = " packagegroup-base-vfat
+> > packagegroup-base-usbhost dropbear linux-firmware ti-sgx-ddk-km
+> > ti-sgx-ddk-um libdrm"
+> > >
+> > > -----
+> > > What am I missing?
+> > >
+> > > I try other configurations, like core-image-weston. After "adjusting"
+> > mesa so it won't install gbm, weston won't boot and I still get the
+> > previous error.
+> > > Thank you.
+> > > Simon
+> > >
+> >
+> > > --
+> > > _______________________________________________
+> > > meta-ti mailing list
+> > > meta-ti@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/meta-ti
+> >
+> >
 
