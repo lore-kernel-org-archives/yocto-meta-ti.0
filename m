@@ -1,37 +1,35 @@
-Return-Path: <anandb@ti.com>
+Return-Path: <gary@mlbassoc.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D1F6AE00DF2; Thu, 13 Oct 2016 05:38:13 -0700 (PDT)
+	id E083DE00529; Sun, 16 Oct 2016 03:46:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85A07E00DC2
-	for <meta-ti@yoctoproject.org>; Thu, 13 Oct 2016 05:38:12 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9DCcBci003222
-	for <meta-ti@yoctoproject.org>; Thu, 13 Oct 2016 07:38:11 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9DCcBtW028047
-	for <meta-ti@yoctoproject.org>; Thu, 13 Oct 2016 07:38:11 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 13 Oct 2016 07:38:10 -0500
-Received: from tigfx.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9DCc9Ik031015;
-	Thu, 13 Oct 2016 07:38:10 -0500
-From: Anand Balagopalakrishnan <anandb@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 13 Oct 2016 18:08:06 +0530
-Message-ID: <1476362286-27157-1-git-send-email-anandb@ti.com>
-X-Mailer: git-send-email 1.9.1
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A1A1E00498
+	for <meta-ti@yoctoproject.org>; Sun, 16 Oct 2016 03:46:24 -0700 (PDT)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 69A8168A01C; Sun, 16 Oct 2016 11:46:22 +0100 (BST)
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id CE6B568A019;
+	Sun, 16 Oct 2016 11:46:21 +0100 (BST)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 441726740258;
+	Sun, 16 Oct 2016 12:46:21 +0200 (CEST)
+To: meta-ti@yoctoproject.org
+References: <93e07642-1cc5-40eb-ac40-2debe67d0c72@email.android.com>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <212371ab-9b66-e313-9cf3-9b9ce3578807@mlbassoc.com>
+Date: Sun, 16 Oct 2016 12:46:19 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.3.0
 MIME-Version: 1.0
-Subject: [PATCH] ti-sgx-ddk-km: remove dependency between user-mode and kernel-mode builds
+In-Reply-To: <93e07642-1cc5-40eb-ac40-2debe67d0c72@email.android.com>
+Subject: Re: Can't build for BeagleBone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,28 +42,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2016 12:38:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 16 Oct 2016 10:46:28 -0000
+X-Groupsio-MsgNum: 9104
+Content-Type: multipart/mixed; boundary="------------4541E1ED6881DEC1AB7A9633"
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
----
- recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--------------4541E1ED6881DEC1AB7A9633
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index 7007c20..d0e9206 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
- 
--SRCREV = "a5a0fe1799cabfa1278321b667263cf3fa2cf32f"
-+SRCREV = "e68719ba7c54602c710b6615cd665f5b7f47f85e"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
+On 2016-10-11 12:47, Denys Dmytriyenko wrote:
+> Yeah, I'm also getting this in master. Works fine in krogoth. Haven't yet looked close at it though...
+
+There seem to be two things wrong here.
+
+*) Yocto has moved most recipes to use a split source/build tree,
+    thus ${S} != ${B}
+*) There is some issue with generating the UBOOT_LOCALVERSION that
+    causes problems.
+
+This patch [sort of] addresses both.  At least it lets me build a
+working U-Boot for the BeagleBone from master.  I know it's not
+perfect, but I couldn't figure out the why the UBOOT_LOCALVERSION
+stuff wasn't working.
+
 -- 
-1.9.1
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
+--------------4541E1ED6881DEC1AB7A9633
+Content-Type: text/x-patch;
+ name="u-boot.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="u-boot.patch"
 
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index b0054c9..a854243 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -8,7 +8,7 @@ def get_git_revision(p):
+     except OSError:
+         return None
+ 
+-UBOOT_LOCALVERSION = "-g${@get_git_revision('${S}').__str__()[:10]}"
++#UBOOT_LOCALVERSION = "-g${@get_git_revision('${S}').__str__()[:10]}"
+ 
+ UBOOT_SUFFIX ?= "img"
+ 
+@@ -36,7 +36,7 @@ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+ do_install_append () {
+     if [ "x${SPL_UART_BINARY}" != "x" ]
+     then
+-        install ${S}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
++        install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
+         ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
+     fi
+ }
+@@ -45,7 +45,7 @@ do_deploy_append () {
+     cd ${DEPLOYDIR}
+     if [ "x${SPL_UART_BINARY}" != "x" ]
+     then
+-        install ${S}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
++        install ${B}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
+         rm -f ${DEPLOYDIR}/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
+         ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_BINARY}
+         ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
+
+--------------4541E1ED6881DEC1AB7A9633--
