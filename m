@@ -1,27 +1,42 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B6671E00848; Wed, 19 Oct 2016 19:36:42 -0700 (PDT)
+	id 0F5F2E006D8; Thu, 20 Oct 2016 08:26:46 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	UPPERCASE_50_75 autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-	*  0.0 UPPERCASE_50_75 message body is 50-75% uppercase
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C6D4E00756
-	for <meta-ti@yoctoproject.org>; Wed, 19 Oct 2016 19:36:37 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 949DC52AAC; Thu, 20 Oct 2016 02:36:36 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20161020023636.949DC52AAC@arago-project.org>
-Date: Thu, 20 Oct 2016 02:36:36 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: fix B != S and python3 issues
+Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76598E004F1
+	for <meta-ti@yoctoproject.org>; Thu, 20 Oct 2016 08:26:44 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9KFQhFi025395
+	for <meta-ti@yoctoproject.org>; Thu, 20 Oct 2016 10:26:43 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9KFQhWw006905
+	for <meta-ti@yoctoproject.org>; Thu, 20 Oct 2016 10:26:43 -0500
+Received: from DFLE12.ent.ti.com ([fe80::e9a3:bf19:af96:227b]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0294.000; Thu, 20 Oct 2016 10:26:43 -0500
+From: "Sobota, Justin" <jsobota@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [master/krogoth][PATCH 5/5] ti-xdctools: Upgrade to version
+	3.32.1.22
+Thread-Index: AQHSJLGY8elSpuc6gkCKB+I5PwvQaqCxgrwg
+Date: Thu, 20 Oct 2016 15:26:42 +0000
+Message-ID: <311ECDE3E284F649854AED0B108A0CE13AFE6FF4@DFLE12.ent.ti.com>
+References: <1476294829-27885-1-git-send-email-jsobota@ti.com>
+	<1476294829-27885-5-git-send-email-jsobota@ti.com>
+In-Reply-To: <1476294829-27885-5-git-send-email-jsobota@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.172.224.222]
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [master/krogoth][PATCH 5/5] ti-xdctools: Upgrade to version 3.32.1.22
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,150 +49,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2016 02:36:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 20 Oct 2016 15:26:46 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: master
-Commit: 69517353970fd79659a45bd9a903fa4627038dd4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=69517353970fd79659a45bd9a903fa4627038dd4
+Denys,
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Oct 18 23:04:26 2016 +0000
+An issue was found after upgrading to this component.  This patch should no=
+t be applied.
 
-u-boot-ti-staging: fix B != S and python3 issues
+Justin
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Gary Thomas <gary@mlbassoc.com>
+-----Original Message-----
+From: Sobota, Justin=20
+Sent: Wednesday, October 12, 2016 1:54 PM
+To: meta-ti@yoctoproject.org
+Cc: Sobota, Justin
+Subject: [master/krogoth][PATCH 5/5] ti-xdctools: Upgrade to version 3.32.1=
+.22
 
+Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
+ .../{ti-xdctools_3.32.00.06.bb =3D> ti-xdctools_3.32.01.22.bb}     |    6 =
++++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)  rename recipes-ti/devtool=
+s/{ti-xdctools_3.32.00.06.bb =3D> ti-xdctools_3.32.01.22.bb} (51%)
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |   36 +++++++++++-----------
- recipes-bsp/u-boot/u-boot-ti.inc                |    6 ++--
- 2 files changed, 21 insertions(+), 21 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 38f58f7..2b85800 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,7 +7,7 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- 
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
- 
--PR = "r21"
-+PR = "r22"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
-@@ -52,32 +52,32 @@ UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
- UBOOT_HS_MLO_SYMLINK = "u-boot_HS_MLO-${MACHINE}"
- 
- do_compile_append_am437x-hs-evm () {
--	if [ -f ${S}/u-boot-spl_HS_ISSW ]; then
--		rm -rf ${S}/MLO
--		cp ${S}/u-boot-spl_HS_ISSW ${S}/MLO
-+	if [ -f ${B}/u-boot-spl_HS_ISSW ]; then
-+		rm -rf ${B}/MLO
-+		cp ${B}/u-boot-spl_HS_ISSW ${B}/MLO
- 	fi
- }
- 
- do_install_append () {
--	if [ -f ${S}/${UBOOT_HS_XLD_BINARY} ]; then
--		install ${S}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
-+	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
-+		install ${B}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
- 		ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
- 	fi
--	if [ -f ${S}/${UBOOT_HS_MLO_BINARY} ]; then
--		install ${S}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
-+	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
-+		install ${B}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
- 		ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
- 	fi
- }
- 
- do_deploy_append () {
--	if [ -f ${S}/${UBOOT_HS_XLD_BINARY} ]; then
--		install ${S}/${UBOOT_HS_XLD_BINARY} ${DEPLOYDIR}/${UBOOT_HS_XLD_IMAGE}
-+	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
-+		install ${B}/${UBOOT_HS_XLD_BINARY} ${DEPLOYDIR}/${UBOOT_HS_XLD_IMAGE}
- 		rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
- 		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
- 		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
- 	fi
--	if [ -f ${S}/${UBOOT_HS_MLO_BINARY} ]; then
--		install ${S}/${UBOOT_HS_MLO_BINARY} ${DEPLOYDIR}/${UBOOT_HS_MLO_IMAGE}
-+	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
-+		install ${B}/${UBOOT_HS_MLO_BINARY} ${DEPLOYDIR}/${UBOOT_HS_MLO_IMAGE}
- 		rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
- 		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
- 		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
-@@ -85,28 +85,28 @@ do_deploy_append () {
- }
- 
- do_install_append_keystone () {
--	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
-+	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
- 	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
- 
--	install ${S}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
-+	install ${B}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
- 	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
- 
--	install ${S}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
-+	install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
- 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
- }
- 
- do_deploy_append_keystone () {
--	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
-+	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
- 	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
- 	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
- 	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
- 
--	install ${S}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
-+	install ${B}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
- 	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
- 	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
- 	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
- 
--	install ${S}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
-+	install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
- 	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
- 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
- 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index b0054c9..661f931 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -4,7 +4,7 @@ def get_git_revision(p):
-     import subprocess
- 
-     try:
--        return subprocess.Popen("git rev-parse HEAD 2>/dev/null ", cwd=p, shell=True, stdout=subprocess.PIPE).communicate()[0].rstrip()
-+        return subprocess.Popen("git rev-parse HEAD 2>/dev/null ", cwd=p, shell=True, stdout=subprocess.PIPE, universal_newlines=True).communicate()[0].rstrip()
-     except OSError:
-         return None
- 
-@@ -36,7 +36,7 @@ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
- do_install_append () {
-     if [ "x${SPL_UART_BINARY}" != "x" ]
-     then
--        install ${S}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
-+        install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
-         ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
-     fi
- }
-@@ -45,7 +45,7 @@ do_deploy_append () {
-     cd ${DEPLOYDIR}
-     if [ "x${SPL_UART_BINARY}" != "x" ]
-     then
--        install ${S}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
-+        install ${B}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
-         rm -f ${DEPLOYDIR}/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
-         ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_BINARY}
-         ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
+diff --git a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb b/recipes-ti/dev=
+tools/ti-xdctools_3.32.01.22.bb
+similarity index 51%
+rename from recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+rename to recipes-ti/devtools/ti-xdctools_3.32.01.22.bb
+index 19bbe5d..5f379c1 100644
+--- a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
++++ b/recipes-ti/devtools/ti-xdctools_3.32.01.22.bb
+@@ -1,9 +1,9 @@
+ require recipes-ti/devtools/ti-xdctools-core.inc
+=20
+-PV =3D "3_32_00_06"
++PV =3D "3_32_01_22"
+ PR =3D "r0"
+=20
+ LIC_FILES_CHKSUM =3D "file://docs/license/xdc/shelf/package.html;beginline=
+=3D1;endline=3D140;md5=3D1796f68c3d32d408415f5612f1f60652"
+=20
+-SRC_URI[xdczip.md5sum] =3D "93127f4c2f35d94b6c8e5a52b79c38ae"
+-SRC_URI[xdczip.sha256sum] =3D "d6f38a7f846ae4b1478554d75fc5f72cf677a1e2f34=
+8e214a725d1e849bd39c7"
++SRC_URI[xdczip.md5sum] =3D "ddae5b765ca62783c1e804c75c463c38"
++SRC_URI[xdczip.sha256sum] =3D "b1c6620ef0b8eac45ef6a587f93b3238bdcf3b02dfd=
+7e4b40d872a45c02c5cdc"
+--
+1.7.10.4
 
 
