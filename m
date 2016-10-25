@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E5AE0E00C72; Mon, 24 Oct 2016 19:29:40 -0700 (PDT)
+	id EF094E00C93; Mon, 24 Oct 2016 19:29:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,15 +14,15 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEDC0E00C45
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD994E00C25
 	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2016 19:29:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 969D852AC1; Tue, 25 Oct 2016 02:29:33 +0000 (UTC)
+	id 185B652AC4; Tue, 25 Oct 2016 02:29:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161025022933.969D852AC1@arago-project.org>
-Date: Tue, 25 Oct 2016 02:29:33 +0000 (UTC)
+Message-Id: <20161025022934.185B652AC4@arago-project.org>
+Date: Tue, 25 Oct 2016 02:29:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: remove dependency between user-mode and kernel-mode builds
+Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: remove invalid tests for sgx
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,39 +35,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2016 02:29:41 -0000
+X-List-Received-Date: Tue, 25 Oct 2016 02:29:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 8493dde861ef8e63681cbbbac7a29ed8f439154a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8493dde861ef8e63681cbbbac7a29ed8f439154a
+Branch: master
+Commit: f227a0045f3e860051d727067fab1586da828692
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f227a0045f3e860051d727067fab1586da828692
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Thu Oct 13 18:38:06 2016 +0000
+Date:   Thu Oct 13 18:37:41 2016 +0000
 
-ti-sgx-ddk-km: remove dependency between user-mode and kernel-mode builds
+ti-sgx-ddk-um: remove invalid tests for sgx
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index 7007c20..d0e9206 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index b905ac0..9d0c406 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
--SRCREV = "a5a0fe1799cabfa1278321b667263cf3fa2cf32f"
-+SRCREV = "e68719ba7c54602c710b6615cd665f5b7f47f85e"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "4cdbb6b192fc5cac53695faca3c3f8be16ca871d"
++SRCREV = "f65d06843ef21964e266a7618c1529840653d563"
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ 
+ inherit update-rc.d
+ 
+-PR = "r14"
++PR = "r15"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
