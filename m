@@ -1,26 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 303F7E00BE7; Tue, 25 Oct 2016 15:56:30 -0700 (PDT)
+	id 2B64EE00BF4; Tue, 25 Oct 2016 16:03:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0454E00CC3
-	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 15:56:12 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 0E5E952AD8; Tue, 25 Oct 2016 22:56:10 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20161025225610.0E5E952AD8@arago-project.org>
-Date: Tue, 25 Oct 2016 22:56:10 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-ipc: update to 3.43.03.05 version
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [198.47.19.12])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2DB3E00A7B
+	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 16:03:10 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9PN3Aje026034
+	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 18:03:10 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9PN3AV1028821
+	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 18:03:10 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 25 Oct 2016 18:03:09 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9PN39CC018699;
+	Tue, 25 Oct 2016 18:03:09 -0500
+Date: Tue, 25 Oct 2016 19:03:09 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Pang, Ivan" <i-pang@ti.com>
+Message-ID: <20161025230308.GT12745@edge>
+References: <1477433645-16457-1-git-send-email-i-pang@ti.com>
+	<20161025225127.GS12745@edge>
+	<C45960711C772449A33A51ED1374F08A2F5AC190@DLEE08.ent.ti.com>
+MIME-Version: 1.0
+In-Reply-To: <C45960711C772449A33A51ED1374F08A2F5AC190@DLEE08.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH 1/2] ti-sysbios: updated version to 6.46.1.38
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,74 +47,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2016 22:56:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 25 Oct 2016 23:03:14 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: ec712fdccb9490fb134a3fe59cdc636d438948f5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec712fdccb9490fb134a3fe59cdc636d438948f5
+On Tue, Oct 25, 2016 at 06:54:23PM -0400, Pang, Ivan wrote:
+> I want to update the version. I thought the convention is to create a new 
+> .bb recipe per version (as shown in the folder with multiple .bb files with 
+> different versions).
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Oct 26 03:03:49 2016 +0000
+In some cases multiple versions are needed, usually when a major update 
+happens and breaks compatibility, but the old version is still being used.
+Is this such a case?
 
-ti-ipc: update to 3.43.03.05 version
+-- 
+Denys
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
----
-
- recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
- recipes-ti/ipc/ti-ipc.inc         |    6 +++---
- 2 files changed, 7 insertions(+), 7 deletions(-)
-
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 53c9a6e..e03e753 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -26,16 +26,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
- 
--# Corresponds to tag: 3.43.02.04
-+# Corresponds to tag: 3.43.03.05
- SRCREV_ipc-examples = "766ee598c790c95dad80f9e5db5051e35de4e18f"
- 
--# Corresponds to tag: 3.43.02.04
--SRCREV_ipc-metadata = "394e8b9fda6981f4c485c4a48c0a13a0a3236390"
-+# Corresponds to tag: 3.43.04.05
-+SRCREV_ipc-metadata = "70d397241ebb4b2fd5a09cb9d506ecbbb3f4ad1e"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 3ce02c4..cf576d1 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,15 +8,15 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.43"
- 
--#Corresponds to 3.43.02.04
--TI_IPC_SRCREV = "c179a1f4a102fc0c2b72da4db87753c8e523d639"
-+#Corresponds to 3.43.03.05
-+TI_IPC_SRCREV = "6c2b64342cbd0317527a0924140566b2446488f5"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
- SRCREV = "${TI_IPC_SRCREV}"
- 
- S = "${WORKDIR}/git"
--PV = "3.43.02.04"
-+PV = "3.43.03.05"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-
+> -----Original Message-----
+> From: Dmytriyenko, Denys 
+> Sent: Tuesday, October 25, 2016 5:51 PM
+> To: Pang, Ivan
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH 1/2] ti-sysbios: updated version to 6.46.1.38
+> 
+> On Tue, Oct 25, 2016 at 05:14:04PM -0500, Ivan Pang wrote:
+> > Signed-off-by: Ivan Pang <i-pang@ti.com>
+> > ---
+> >  recipes-ti/bios/ti-sysbios_6.46.01.38.bb | 12 ++++++++++++
+> >  1 file changed, 12 insertions(+)
+> >  create mode 100644 recipes-ti/bios/ti-sysbios_6.46.01.38.bb
+> 
+> Did you mean to update the version instead of adding a new one?
+> 
+> 
+> > diff --git a/recipes-ti/bios/ti-sysbios_6.46.01.38.bb b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
+> > new file mode 100644
+> > index 0000000..407b3b4
+> > --- /dev/null
+> > +++ b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
+> > @@ -0,0 +1,12 @@
+> > +require recipes-ti/bios/ti-sysbios.inc
+> > +
+> > +PV = "6_46_01_38"
+> > +PR = "r0"
+> > +
+> > +LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=da86dca468e5dd80484dc83473ea32e3"
+> > +
+> > +SRC_URI[sysbiosbin.md5sum] = "5aee070f73eb6f3d9aab2ff9c483f396"
+> > +SRC_URI[sysbiosbin.sha256sum] = "3a04a584c3ee3221997b7d616ba45bbcc21ad241f4a4ab5c0f28c465d538af90"
+> > +
+> > +TI_BIN_UNPK_CMDS=""
+> > +TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+> > -- 
+> > 1.9.1
+> > 
+> > -- 
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
