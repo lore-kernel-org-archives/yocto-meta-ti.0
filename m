@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F08DEE00874; Mon, 24 Oct 2016 19:29:42 -0700 (PDT)
+	id F33FAE00C25; Mon, 24 Oct 2016 19:29:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF94AE00C49
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBA05E00874
 	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2016 19:29:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E073952AC3; Tue, 25 Oct 2016 02:29:33 +0000 (UTC)
+	id 42B2F52AC0; Tue, 25 Oct 2016 02:29:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161025022933.E073952AC3@arago-project.org>
+Message-Id: <20161025022933.42B2F52AC0@arago-project.org>
 Date: Tue, 25 Oct 2016 02:29:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : multiprocmgr: add systemd service
+Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: remove invalid tests for sgx
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,90 +39,44 @@ X-List-Received-Date: Tue, 25 Oct 2016 02:29:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 882eb9e79960cb6a4d659ac98709e01d0bebd8d9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=882eb9e79960cb6a4d659ac98709e01d0bebd8d9
+Branch: krogoth
+Commit: 0597d47676396f083635c05d2cea0260144075d3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0597d47676396f083635c05d2cea0260144075d3
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Oct 10 20:55:36 2016 +0000
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Thu Oct 13 18:37:41 2016 +0000
 
-multiprocmgr: add systemd service
+ti-sgx-ddk-um: remove invalid tests for sgx
 
-* The multiprocmgr's mpmsrv daemon requires a set of kernel modules to
-  be loaded prior to initialization.
-* Add a systemd service so that these dependencies may be specified.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../multiprocmgr/mpmsrv-daemon.service             |   14 ++++++++++++++
- recipes-ti/multiprocmgr/multiprocmgr_git.bb        |   19 +++++++++++++++----
- 2 files changed, 29 insertions(+), 4 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service b/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service
-new file mode 100644
-index 0000000..40eb465
---- /dev/null
-+++ b/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=TI Multiproc Manager
-+
-+[Service]
-+ExecStartPre=/sbin/modprobe keystone_remoteproc
-+ExecStartPre=/sbin/modprobe keystone_dsp_mem
-+ExecStartPre=/sbin/modprobe uio_module_drv
-+
-+Type=forking
-+PIDFile=/var/run/mpm/pid
-+ExecStart=/usr/bin/mpmsrv
-+
-+[Install]
-+WantedBy=basic.target
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-index 38d4ceb..2960ee3 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-+++ b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-@@ -3,7 +3,9 @@ SUMMARY = "Provides download, debug and other utilities for other cores in the S
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index b905ac0..9d0c406 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- include multiprocmgr.inc
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "4cdbb6b192fc5cac53695faca3c3f8be16ca871d"
++SRCREV = "f65d06843ef21964e266a7618c1529840653d563"
  
--PR = "${INC_PR}.0"
-+SRC_URI_append = " file://mpmsrv-daemon.service"
-+
-+PR = "${INC_PR}.1"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- DEPENDS = "mpm-transport libdaemon virtual/kernel"
- RDEPENDS_${PN} = "syslog-ng"
-@@ -15,15 +17,24 @@ CC += "-I${STAGING_KERNEL_DIR}/include"
- INITSCRIPT_NAME = "mpmsrv-daemon.sh"
- INITSCRIPT_PARAMS = "defaults 10"
+ inherit update-rc.d
  
--inherit update-rc.d
-+SYSTEMD_SERVICE_${PN} = "mpmsrv-daemon.service"
-+
-+inherit update-rc.d systemd
+-PR = "r14"
++PR = "r15"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
- do_install() {
- 	install -d ${D}${bindir}/
- 	install -c -m 755 ${S}/bin/mpmsrv ${D}${bindir}/mpmsrv
- 	install -c -m 755 ${S}/bin/mpmcl ${D}${bindir}/mpmcl
- 
--	install -d ${D}${sysconfdir}/init.d/
--	install -c -m 755 ${S}/scripts/mpmsrv-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
-+	systemd_enabled=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '1', '0', d)}
-+	if [ ${systemd_enabled} -eq 1 ]
-+	then
-+		install -d ${D}${systemd_system_unitdir}
-+		install -m 0644 ${WORKDIR}/mpmsrv-daemon.service ${D}${systemd_system_unitdir}
-+	else
-+		install -d ${D}${sysconfdir}/init.d/
-+		install -c -m 755 ${S}/scripts/mpmsrv-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
-+	fi
- 	install -d ${D}${sysconfdir}/mpm/
- 	install -c -m 755 ${S}/scripts/crash_callback.sh ${D}${sysconfdir}/mpm/crash_callback.sh
- 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
