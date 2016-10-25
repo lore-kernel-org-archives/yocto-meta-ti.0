@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EFBEFE00C7D; Mon, 24 Oct 2016 19:29:42 -0700 (PDT)
+	id F08DEE00874; Mon, 24 Oct 2016 19:29:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45015E00C71
-	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2016 19:29:38 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF94AE00C49
+	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2016 19:29:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 41DBE52AC6; Tue, 25 Oct 2016 02:29:34 +0000 (UTC)
+	id E073952AC3; Tue, 25 Oct 2016 02:29:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161025022934.41DBE52AC6@arago-project.org>
-Date: Tue, 25 Oct 2016 02:29:34 +0000 (UTC)
+Message-Id: <20161025022933.E073952AC3@arago-project.org>
+Date: Tue, 25 Oct 2016 02:29:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: remove dependency between user-mode and kernel-mode builds
+Subject: Jacob Stiffler : multiprocmgr: add systemd service
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,34 +38,89 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a5ff1c0717ba7c3c53bd72fbf2bcc18cf2798633
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a5ff1c0717ba7c3c53bd72fbf2bcc18cf2798633
+Commit: 882eb9e79960cb6a4d659ac98709e01d0bebd8d9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=882eb9e79960cb6a4d659ac98709e01d0bebd8d9
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Thu Oct 13 18:38:06 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Mon Oct 10 20:55:36 2016 +0000
 
-ti-sgx-ddk-km: remove dependency between user-mode and kernel-mode builds
+multiprocmgr: add systemd service
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+* The multiprocmgr's mpmsrv daemon requires a set of kernel modules to
+  be loaded prior to initialization.
+* Add a systemd service so that these dependencies may be specified.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../multiprocmgr/mpmsrv-daemon.service             |   14 ++++++++++++++
+ recipes-ti/multiprocmgr/multiprocmgr_git.bb        |   19 +++++++++++++++----
+ 2 files changed, 29 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index 7007c20..d0e9206 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service b/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service
+new file mode 100644
+index 0000000..40eb465
+--- /dev/null
++++ b/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service
+@@ -0,0 +1,14 @@
++[Unit]
++Description=TI Multiproc Manager
++
++[Service]
++ExecStartPre=/sbin/modprobe keystone_remoteproc
++ExecStartPre=/sbin/modprobe keystone_dsp_mem
++ExecStartPre=/sbin/modprobe uio_module_drv
++
++Type=forking
++PIDFile=/var/run/mpm/pid
++ExecStart=/usr/bin/mpmsrv
++
++[Install]
++WantedBy=basic.target
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
+index 38d4ceb..2960ee3 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
+@@ -3,7 +3,9 @@ SUMMARY = "Provides download, debug and other utilities for other cores in the S
  
--SRCREV = "a5a0fe1799cabfa1278321b667263cf3fa2cf32f"
-+SRCREV = "e68719ba7c54602c710b6615cd665f5b7f47f85e"
+ include multiprocmgr.inc
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
+-PR = "${INC_PR}.0"
++SRC_URI_append = " file://mpmsrv-daemon.service"
++
++PR = "${INC_PR}.1"
+ 
+ DEPENDS = "mpm-transport libdaemon virtual/kernel"
+ RDEPENDS_${PN} = "syslog-ng"
+@@ -15,15 +17,24 @@ CC += "-I${STAGING_KERNEL_DIR}/include"
+ INITSCRIPT_NAME = "mpmsrv-daemon.sh"
+ INITSCRIPT_PARAMS = "defaults 10"
+ 
+-inherit update-rc.d
++SYSTEMD_SERVICE_${PN} = "mpmsrv-daemon.service"
++
++inherit update-rc.d systemd
+ 
+ do_install() {
+ 	install -d ${D}${bindir}/
+ 	install -c -m 755 ${S}/bin/mpmsrv ${D}${bindir}/mpmsrv
+ 	install -c -m 755 ${S}/bin/mpmcl ${D}${bindir}/mpmcl
+ 
+-	install -d ${D}${sysconfdir}/init.d/
+-	install -c -m 755 ${S}/scripts/mpmsrv-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++	systemd_enabled=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '1', '0', d)}
++	if [ ${systemd_enabled} -eq 1 ]
++	then
++		install -d ${D}${systemd_system_unitdir}
++		install -m 0644 ${WORKDIR}/mpmsrv-daemon.service ${D}${systemd_system_unitdir}
++	else
++		install -d ${D}${sysconfdir}/init.d/
++		install -c -m 755 ${S}/scripts/mpmsrv-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++	fi
+ 	install -d ${D}${sysconfdir}/mpm/
+ 	install -c -m 755 ${S}/scripts/crash_callback.sh ${D}${sysconfdir}/mpm/crash_callback.sh
+ 
 
 
