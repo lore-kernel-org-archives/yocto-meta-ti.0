@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D049E00D3B; Tue, 25 Oct 2016 15:56:30 -0700 (PDT)
+	id 303F7E00BE7; Tue, 25 Oct 2016 15:56:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCDF6E00BE7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0454E00CC3
 	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 15:56:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D0D8F52AD5; Tue, 25 Oct 2016 22:56:09 +0000 (UTC)
+	id 0E5E952AD8; Tue, 25 Oct 2016 22:56:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161025225609.D0D8F52AD5@arago-project.org>
-Date: Tue, 25 Oct 2016 22:56:09 +0000 (UTC)
+Message-Id: <20161025225610.0E5E952AD8@arago-project.org>
+Date: Tue, 25 Oct 2016 22:56:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : prueth-fw: update with k2g-ice firmware images
+Subject: Denys Dmytriyenko : ti-ipc: update to 3.43.03.05 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,56 +38,69 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b9a690700666bd265ea698fa858e1b9cdcb82bfb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b9a690700666bd265ea698fa858e1b9cdcb82bfb
+Commit: ec712fdccb9490fb134a3fe59cdc636d438948f5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec712fdccb9490fb134a3fe59cdc636d438948f5
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Oct 26 01:43:10 2016 +0000
+Date:   Wed Oct 26 03:03:49 2016 +0000
 
-prueth-fw: update with k2g-ice firmware images
+ti-ipc: update to 3.43.03.05 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/prueth-fw/prueth-fw_git.bb |   10 +++++-----
- 1 files changed, 5 insertions(+), 5 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |    8 ++++----
+ recipes-ti/ipc/ti-ipc.inc         |    6 +++---
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-index f48bb25..77445e9 100644
---- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
-+++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-@@ -1,19 +1,18 @@
--DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x and AM335x"
-+DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x, AM335x and K2G"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 53c9a6e..e03e753 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -26,16 +26,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+-# Corresponds to tag: 3.43.02.04
++# Corresponds to tag: 3.43.03.05
+ SRCREV_ipc-examples = "766ee598c790c95dad80f9e5db5051e35de4e18f"
  
- PV = "3.1.4"
--
--PR = "r0"
-+PR = "r1"
+-# Corresponds to tag: 3.43.02.04
+-SRCREV_ipc-metadata = "394e8b9fda6981f4c485c4a48c0a13a0a3236390"
++# Corresponds to tag: 3.43.04.05
++SRCREV_ipc-metadata = "70d397241ebb4b2fd5a09cb9d506ecbbb3f4ad1e"
  
- CLEANBROKEN = "1"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
  
--COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm|am335x-evm"
-+COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm|am335x-evm|k2g"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 3ce02c4..cf576d1 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,15 +8,15 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.43"
+ 
+-#Corresponds to 3.43.02.04
+-TI_IPC_SRCREV = "c179a1f4a102fc0c2b72da4db87753c8e523d639"
++#Corresponds to 3.43.03.05
++TI_IPC_SRCREV = "6c2b64342cbd0317527a0924140566b2446488f5"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ SRCREV = "${TI_IPC_SRCREV}"
+ 
+ S = "${WORKDIR}/git"
+-PV = "3.43.02.04"
++PV = "3.43.03.05"
+ INC_PR = "r0"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "2229dbcb088365e1be8f00af6589e93eddfa3f2f"
-+SRCREV = "4ed1022c62bfe4ed4c66112024c8ee1301e9439d"
- BRANCH ?= "ti-linux-firmware-4.1.y"
- 
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-@@ -23,6 +22,7 @@ S = "${WORKDIR}/git"
- TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
- TARGET_am437x-evm = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
- TARGET_am335x-evm = "am335x-pru0-prueth-fw.elf am335x-pru1-prueth-fw.elf"
-+TARGET_k2g = "k2g-pru0-prueth-fw.elf k2g-pru1-prueth-fw.elf"
- 
- do_install() {
- 	install -d ${D}${base_libdir}/firmware/ti-pruss
 
 
