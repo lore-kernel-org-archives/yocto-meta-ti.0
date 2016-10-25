@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B5DEEE00AC5; Tue, 25 Oct 2016 15:56:15 -0700 (PDT)
+	id 05D80E00AC5; Tue, 25 Oct 2016 15:56:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 329FBE00BF9
-	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 15:56:09 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A204AE00C59
+	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 15:56:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E568452ACD; Tue, 25 Oct 2016 22:56:08 +0000 (UTC)
+	id 1734752ACE; Tue, 25 Oct 2016 22:56:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161025225608.E568452ACD@arago-project.org>
-Date: Tue, 25 Oct 2016 22:56:08 +0000 (UTC)
+Message-Id: <20161025225609.1734752ACE@arago-project.org>
+Date: Tue, 25 Oct 2016 22:56:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : prueth-fw: update with k2g-ice firmware images
+Subject: Denys Dmytriyenko : ti-sci-fw: update to the latest 0.1.1-37 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,61 +33,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2016 22:56:15 -0000
+X-List-Received-Date: Tue, 25 Oct 2016 22:56:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 4c4fc284ba64721eebe7833352f562062a8ce92a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4c4fc284ba64721eebe7833352f562062a8ce92a
+Commit: f278a2ba7a50b42fae2130baeac95219ee893999
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f278a2ba7a50b42fae2130baeac95219ee893999
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Oct 26 01:43:10 2016 +0000
+Date:   Wed Oct 26 01:43:11 2016 +0000
 
-prueth-fw: update with k2g-ice firmware images
+ti-sci-fw: update to the latest 0.1.1-37 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/prueth-fw/prueth-fw_git.bb |   10 +++++-----
- 1 files changed, 5 insertions(+), 5 deletions(-)
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-index f48bb25..77445e9 100644
---- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
-+++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
-@@ -1,19 +1,18 @@
--DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x and AM335x"
-+DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x, AM335x and K2G"
- 
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index eed61d5..f5706a6 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "TI SCI firmware"
  LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+ LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
  
- PV = "3.1.4"
--
--PR = "r0"
-+PR = "r1"
+-PV = "0.1.1.22"
++PV = "0.1.1.37"
+ PR = "r0"
  
  CLEANBROKEN = "1"
- 
--COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm|am335x-evm"
-+COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm|am335x-evm|k2g"
+@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--SRCREV = "2229dbcb088365e1be8f00af6589e93eddfa3f2f"
-+SRCREV = "4ed1022c62bfe4ed4c66112024c8ee1301e9439d"
+-SRCREV = "43c9f88e3c9dc974cfcf9cf62befaf433ab1514b"
++SRCREV = "9fe8861924a990dcd48ada5099df592273c2e166"
  BRANCH ?= "ti-linux-firmware-4.1.y"
  
  SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-@@ -23,6 +22,7 @@ S = "${WORKDIR}/git"
- TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
- TARGET_am437x-evm = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
- TARGET_am335x-evm = "am335x-pru0-prueth-fw.elf am335x-pru1-prueth-fw.elf"
-+TARGET_k2g = "k2g-pru0-prueth-fw.elf k2g-pru1-prueth-fw.elf"
- 
- do_install() {
- 	install -d ${D}${base_libdir}/firmware/ti-pruss
 
 
