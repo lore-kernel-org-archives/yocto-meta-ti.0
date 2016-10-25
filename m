@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 34614E00D40; Tue, 25 Oct 2016 15:56:29 -0700 (PDT)
+	id 77413E00D27; Tue, 25 Oct 2016 15:56:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE5DCE00CD8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CDE03E00CD5
 	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 15:56:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E174A52AD6; Tue, 25 Oct 2016 22:56:09 +0000 (UTC)
+	id BA8B552AD4; Tue, 25 Oct 2016 22:56:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161025225609.E174A52AD6@arago-project.org>
+Message-Id: <20161025225609.BA8B552AD4@arago-project.org>
 Date: Tue, 25 Oct 2016 22:56:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-sci-fw: update to the latest 0.1.1-37 version
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.05-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,33 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 527d28add9e65508b9833c98e8a44abf7061c200
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=527d28add9e65508b9833c98e8a44abf7061c200
+Commit: 7a2820b86b2a8fdd910182d0507880a6bf4250e2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7a2820b86b2a8fdd910182d0507880a6bf4250e2
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Oct 26 01:43:11 2016 +0000
+Date:   Wed Oct 26 01:43:09 2016 +0000
 
-ti-sci-fw: update to the latest 0.1.1-37 version
+u-boot-ti-staging: update to ti2016.05-rc1 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index eed61d5..f5706a6 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "TI SCI firmware"
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 2b85800..17a5d46 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -14,7 +14,7 @@ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH
  
--PV = "0.1.1.22"
-+PV = "0.1.1.37"
- PR = "r0"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- CLEANBROKEN = "1"
-@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g"
+-SRCREV = "bbfdf926a1ebd5620fa8e3e60b9e747d8de12254"
++SRCREV = "5d6f251e04bed6fa078e956b308fb2f520df33eb"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "43c9f88e3c9dc974cfcf9cf62befaf433ab1514b"
-+SRCREV = "9fe8861924a990dcd48ada5099df592273c2e166"
- BRANCH ?= "ti-linux-firmware-4.1.y"
- 
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
