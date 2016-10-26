@@ -1,38 +1,41 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8E982E00C18; Tue, 25 Oct 2016 17:17:40 -0700 (PDT)
+	id DE61DE00CEA; Tue, 25 Oct 2016 20:06:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [198.47.19.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54E12E00B93
-	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 17:17:36 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9Q0Hah1007812
-	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 19:17:36 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9Q0HaFH014636
-	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 19:17:36 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 25 Oct 2016 19:17:35 -0500
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A67C2E00CC7
+	for <meta-ti@yoctoproject.org>; Tue, 25 Oct 2016 20:06:41 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9Q36erL021575;
+	Tue, 25 Oct 2016 22:06:40 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9Q36eo2006551;
+	Tue, 25 Oct 2016 22:06:40 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 25 Oct 2016 22:06:40 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9Q0HZR4015179;
-	Tue, 25 Oct 2016 19:17:35 -0500
-Date: Tue, 25 Oct 2016 20:17:35 -0400
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9Q36dDJ018555;
+	Tue, 25 Oct 2016 22:06:40 -0500
+Date: Tue, 25 Oct 2016 23:06:39 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Ivan Pang <i-pang@ti.com>
-Message-ID: <20161026001735.GW12745@edge>
-References: <1477440362-20066-1-git-send-email-i-pang@ti.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20161026030639.GY12745@edge>
+References: <20161026000857.10015-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1477440362-20066-1-git-send-email-i-pang@ti.com>
+In-Reply-To: <20161026000857.10015-1-raj.khem@gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] ti-sysbios: update version to 6.46.1.38
+Subject: Re: [PATCH] ti-unpack.inc: Use absolute paths in require directive
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,50 +48,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2016 00:17:40 -0000
+X-List-Received-Date: Wed, 26 Oct 2016 03:06:45 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Tue, Oct 25, 2016 at 07:06:01PM -0500, Ivan Pang wrote:
-> Signed-off-by: Ivan Pang <i-pang@ti.com>
+On Tue, Oct 25, 2016 at 05:08:57PM -0700, Khem Raj wrote:
+> This helps in using this inc file from other BSP
+> layers which are dependent on meta-ti
+
+I'll take it for master. Do you need it in krogoth?
+
+
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  .../bios/{ti-sysbios_6.45.01.29.bb => ti-sysbios_6.46.01.38.bb}   | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->  rename recipes-ti/bios/{ti-sysbios_6.45.01.29.bb => ti-sysbios_6.46.01.38.bb} (32%)
-
-Now, we are talking, thanks!
-
-
-> diff --git a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
-> similarity index 32%
-> rename from recipes-ti/bios/ti-sysbios_6.45.01.29.bb
-> rename to recipes-ti/bios/ti-sysbios_6.46.01.38.bb
-> index 6ab4e27..407b3b4 100644
-> --- a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
-> +++ b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
-> @@ -1,12 +1,12 @@
->  require recipes-ti/bios/ti-sysbios.inc
+>  recipes-ti/includes/ti-eula-unpack.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
+> index 912cd18..ead0610 100644
+> --- a/recipes-ti/includes/ti-eula-unpack.inc
+> +++ b/recipes-ti/includes/ti-eula-unpack.inc
+> @@ -9,7 +9,7 @@
+>  #  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
+>  #                       the output in some internal directory
 >  
-> -PV = "6_45_01_29"
-> +PV = "6_46_01_38"
->  PR = "r0"
+> -require ../includes/ti-unpack.inc
+> +require recipes-ti/includes/ti-unpack.inc
 >  
-> -LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=dbcd89745f1745f24ace8171a96ed493"
-> +LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=da86dca468e5dd80484dc83473ea32e3"
-
-Need a brief explanation why the checksum changed here. Specifically, if the 
-license changed in any way from the existing BSD.
-
-
-> -SRC_URI[sysbiosbin.md5sum] = "16cf6dc3c5cc9d2b877fa7d81dd12150"
-> -SRC_URI[sysbiosbin.sha256sum] = "efaf5f1d725f3fd06e45476109b1124c74c16c39c870d12929e071047c3e5a22"
-> +SRC_URI[sysbiosbin.md5sum] = "5aee070f73eb6f3d9aab2ff9c483f396"
-> +SRC_URI[sysbiosbin.sha256sum] = "3a04a584c3ee3221997b7d616ba45bbcc21ad241f4a4ab5c0f28c465d538af90"
+>  TI_BIN_UNPK_ARGS = "--mode console"
 >  
->  TI_BIN_UNPK_CMDS=""
->  TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
 > -- 
-> 1.9.1
+> 2.10.1
 > 
 > -- 
 > _______________________________________________
