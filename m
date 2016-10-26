@@ -1,39 +1,41 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 03753E00D5E; Wed, 26 Oct 2016 13:19:41 -0700 (PDT)
+	id 8403CE00D5E; Wed, 26 Oct 2016 13:21:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A9E0E00D59
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 13:19:38 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9QKJcjT003388
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 15:19:38 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9QKJc3F009776
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 15:19:38 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 26 Oct 2016 15:19:37 -0500
-Received: from uda0850410.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	u9QKJbkf027762	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 15:19:37
-	-0500
-From: Eric Ruei <e-ruei1@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 26 Oct 2016 16:19:33 -0400
-Message-ID: <1477513173-11563-1-git-send-email-e-ruei1@ti.com>
-X-Mailer: git-send-email 1.9.1
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26767E00D59
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 13:21:33 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9QKLWui017151
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 15:21:32 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9QKLWdE016070
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 15:21:32 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 26 Oct 2016 15:21:32 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9QKLWDj006531;
+	Wed, 26 Oct 2016 15:21:32 -0500
+Date: Wed, 26 Oct 2016 16:21:31 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Eric Ruei <e-ruei1@ti.com>
+Message-ID: <20161026202131.GA12745@edge>
+References: <1477512873-11482-1-git-send-email-e-ruei1@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH] ti-gc320-libs: add all libraries to FILES
+In-Reply-To: <1477512873-11482-1-git-send-email-e-ruei1@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] ti-gc320-driver: add SRCIPK
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,35 +48,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2016 20:19:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Oct 2016 20:21:35 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
----
- recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+NAK
 
-diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-index 45c8d51..90b27e9 100644
---- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-+++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-@@ -26,7 +26,7 @@ python __anonymous() {
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- 
--PR = "r1"
-+PR = "r2"
- 
- S = "${WORKDIR}/git"
- 
-@@ -36,4 +36,6 @@ do_install() {
-     oe_runmake install
- }
- 
-+FILES_${PN} += "${libdir}/*"
-+
- INSANE_SKIP_${PN} += "ldflags"
--- 
-1.9.1
-
+On Wed, Oct 26, 2016 at 04:14:33PM -0400, Eric Ruei wrote:
+> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+> ---
+>  recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+> index 9344e30..9c8db73 100644
+> --- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+> +++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+> @@ -17,6 +17,9 @@ SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${B
+>  S = "${WORKDIR}/git/src"
+>  
+>  EXTRA_OEMAKE += "-f Kbuild AQROOT=${S} KERNEL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_PATH=${TOOLCHAIN_PATH} CROSS_COMPILE=${TARGET_PREFIX} ARCH_TYPE=${TARGET_ARCH}"
+> +
+> +CREATE_SRCIPK = "1"
+> +SRCIPK_INSTALL_DIR = "board-support/extra-drivers/${PN}-${PV}"
+>  
+>  do_install() {
+>      install -d ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
