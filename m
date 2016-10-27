@@ -1,41 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 51234E00D5E; Wed, 26 Oct 2016 13:23:42 -0700 (PDT)
+	id 798E6E008D3; Thu, 27 Oct 2016 09:39:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0742E00D59
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 13:23:39 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9QKNdVg017287
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 15:23:39 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9QKNdYT013449
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2016 15:23:39 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 26 Oct 2016 15:23:39 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9QKNdBQ030602;
-	Wed, 26 Oct 2016 15:23:39 -0500
-Date: Wed, 26 Oct 2016 16:23:38 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Eric Ruei <e-ruei1@ti.com>
-Message-ID: <20161026202338.GB12745@edge>
-References: <1477513173-11563-1-git-send-email-e-ruei1@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1477513173-11563-1-git-send-email-e-ruei1@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ti-gc320-libs: add all libraries to FILES
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F082FE007DA
+	for <meta-ti@yoctoproject.org>; Thu, 27 Oct 2016 09:39:50 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id AF73E20863;
+	Thu, 27 Oct 2016 16:39:48 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id wp67hMlSLRx5; Thu, 27 Oct 2016 16:39:48 +0000 (UTC)
+Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
+	[100.15.106.107])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8D48A201FD;
+	Thu, 27 Oct 2016 16:39:47 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by gandalf.denix.org (Postfix) with ESMTP id B7C50162173;
+	Thu, 27 Oct 2016 12:39:46 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Thu, 27 Oct 2016 12:39:46 -0400
+Message-Id: <1477586386-24014-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] libdce: update to 3.00.12.00 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,48 +45,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2016 20:23:42 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Oct 2016 16:39:52 -0000
 
-On Wed, Oct 26, 2016 at 04:19:33PM -0400, Eric Ruei wrote:
-> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
 
-Description doesn't explain the reason. It's meant to explain why, not what.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ .../libdce/{libdce_3.00.10.01.bb => libdce_3.00.12.00.bb}             | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename recipes-multimedia/libdce/{libdce_3.00.10.01.bb => libdce_3.00.12.00.bb} (86%)
 
+diff --git a/recipes-multimedia/libdce/libdce_3.00.10.01.bb b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
+similarity index 86%
+rename from recipes-multimedia/libdce/libdce_3.00.10.01.bb
+rename to recipes-multimedia/libdce/libdce_3.00.12.00.bb
+index 7adb961..32f12b4 100644
+--- a/recipes-multimedia/libdce/libdce_3.00.10.01.bb
++++ b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
+@@ -7,9 +7,7 @@ inherit autotools pkgconfig
+ DEPENDS = "libdrm ti-ipc"
+ 
+ SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
+-SRCREV = "f83e785d2b98404fed9e3a6264bf4945c65abd12"
++SRCREV = "1b1b5a2e5e995f607c22651579b49aa98d08610a"
+ 
+ S = "${WORKDIR}/git"
+ EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
+-
+-PR = "r1"
+-- 
+2.7.4
 
->  recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> index 45c8d51..90b27e9 100644
-> --- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> +++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> @@ -26,7 +26,7 @@ python __anonymous() {
->  
->  TARGET_PRODUCT_omap-a15 = "jacinto6evm"
->  
-> -PR = "r1"
-> +PR = "r2"
->  
->  S = "${WORKDIR}/git"
->  
-> @@ -36,4 +36,6 @@ do_install() {
->      oe_runmake install
->  }
->  
-> +FILES_${PN} += "${libdir}/*"
-
-Isn't it the default?
-
-
->  INSANE_SKIP_${PN} += "ldflags"
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
