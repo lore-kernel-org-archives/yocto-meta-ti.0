@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 706DEE00D30; Thu, 27 Oct 2016 16:44:08 -0700 (PDT)
+	id 5B64BE00D3F; Thu, 27 Oct 2016 16:44:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6E39E00CEA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5985E00CE9
 	for <meta-ti@yoctoproject.org>; Thu, 27 Oct 2016 16:44:07 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9B54D529A0; Thu, 27 Oct 2016 23:44:06 +0000 (UTC)
+	id 7F35E5299E; Thu, 27 Oct 2016 23:44:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161027234406.9B54D529A0@arago-project.org>
+Message-Id: <20161027234406.7F35E5299E@arago-project.org>
 Date: Thu, 27 Oct 2016 23:44:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Khem Raj : ti-unpack.inc: Use absolute paths in require directive
+Subject: Khem Raj : uim: Fix build breaks when toolchain is used from sstate
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,42 +33,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2016 23:44:08 -0000
+X-List-Received-Date: Thu, 27 Oct 2016 23:44:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 1124b4bfd069cf3d7fbb1a86277dc849a184007e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1124b4bfd069cf3d7fbb1a86277dc849a184007e
+Commit: bdefb88c97366b381d60267f134746ef2594fa59
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bdefb88c97366b381d60267f134746ef2594fa59
 
 Author: Khem Raj <raj.khem@gmail.com>
-Date:   Wed Oct 26 06:08:57 2016 +0000
+Date:   Wed Oct 26 00:36:00 2016 +0000
 
-ti-unpack.inc: Use absolute paths in require directive
+uim: Fix build breaks when toolchain is used from sstate
 
-This helps in using this inc file from other BSP
-layers which are dependent on meta-ti
+CC is being redefined here but its not considering
+the essential options to specify the sysroot as a result
+this breaks on systems tied to sstate servers where the toolchain
+might have had a different sysroot when built, in here
+it fails to find the standard headers due to missing sysroot
+options.
+
+Deleting the extra oeconf works fine.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/includes/ti-eula-unpack.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-connectivity/uim/uim_8.5.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
-index 912cd18..ead0610 100644
---- a/recipes-ti/includes/ti-eula-unpack.inc
-+++ b/recipes-ti/includes/ti-eula-unpack.inc
-@@ -9,7 +9,7 @@
- #  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
- #                       the output in some internal directory
+diff --git a/recipes-connectivity/uim/uim_8.5.bb b/recipes-connectivity/uim/uim_8.5.bb
+index ac9dc51..72e2166 100644
+--- a/recipes-connectivity/uim/uim_8.5.bb
++++ b/recipes-connectivity/uim/uim_8.5.bb
+@@ -12,8 +12,6 @@ SRC_URI = "git://git.ti.com/ti-bt/uim.git"
  
--require ../includes/ti-unpack.inc
-+require recipes-ti/includes/ti-unpack.inc
+ S = "${WORKDIR}/git"
  
- TI_BIN_UNPK_ARGS = "--mode console"
- 
+-EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc"
+-
+ do_install() {
+ 	install -d ${D}${bindir}
+ 	install -m 0755 uim ${D}${bindir}
 
 
