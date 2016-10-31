@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 11133E00A84; Mon, 31 Oct 2016 14:22:28 -0700 (PDT)
+	id 11DCDE00AF2; Mon, 31 Oct 2016 14:22:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE0E8E00A84
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:25 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34AF8E00B04
+	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8457252A47; Mon, 31 Oct 2016 21:22:24 +0000 (UTC)
+	id 67AF652A2F; Mon, 31 Oct 2016 21:22:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161031212224.8457252A47@arago-project.org>
-Date: Mon, 31 Oct 2016 21:22:24 +0000 (UTC)
+Message-Id: <20161031212223.67AF652A2F@arago-project.org>
+Date: Mon, 31 Oct 2016 21:22:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libulm: pass CC to work with internal toolchains that depend on sysroot flag
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.29 (sans RT) and ti2016 .05-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,34 +37,47 @@ X-List-Received-Date: Mon, 31 Oct 2016 21:22:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 26e28b2409c392719bdebf2fae19ce0bc0db3db5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=26e28b2409c392719bdebf2fae19ce0bc0db3db5
+Branch: krogoth
+Commit: f2352b2bb8edcd0723e815fafb9ddd9f81c7cd97
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f2352b2bb8edcd0723e815fafb9ddd9f81c7cd97
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Oct 28 06:32:38 2016 +0000
+Date:   Tue Nov  1 01:18:56 2016 +0000
 
-libulm: pass CC to work with internal toolchains that depend on sysroot flag
+linux-ti-staging: update to 4.4.29 (sans RT) and ti2016.05-rc2 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/libulm_git.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
-index 306d86f..7bf7f09 100644
---- a/recipes-bsp/dsptop/libulm_git.bb
-+++ b/recipes-bsp/dsptop/libulm_git.bb
-@@ -14,7 +14,7 @@ DEVICE_keystone = "C66AK2Hxx"
- EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index 943e4f0..333c522 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
- do_compile() {
--    oe_runmake arm XPORT_ONLY
-+    oe_runmake arm XPORT_ONLY CC="${CC}"
-     oe_runmake dsp C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include
- }
+ BRANCH = "ti-rt-linux-4.4.y"
  
+-SRCREV = "bb874e89d6d82f214c2828da512e44f2fe64db2e"
++SRCREV = "1a7c6a55f909c9c44acfa701108fbb6707e53f85"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 51729ef..2f67a01 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -79,8 +79,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.4.y"
+ 
+-SRCREV = "b379f92dff635b6bec915bffd6376425fb3bc0e8"
+-PV = "4.4.27+git${SRCPV}"
++SRCREV = "83973c23389df9755070a003b3a596beae056714"
++PV = "4.4.29+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 
 
