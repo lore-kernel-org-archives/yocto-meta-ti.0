@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4D01EE009CD; Mon, 31 Oct 2016 12:03:46 -0700 (PDT)
+	id 4954EE00A30; Mon, 31 Oct 2016 12:19:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,30 +9,32 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9DA7EE00997
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 12:03:43 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D18B5E0098A
+	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 12:19:00 -0700 (PDT)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3C7D72099C;
-	Mon, 31 Oct 2016 19:03:42 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 45A6620AAC;
+	Mon, 31 Oct 2016 19:19:00 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id YNDbm-F6K10B; Mon, 31 Oct 2016 19:03:42 +0000 (UTC)
+	with ESMTP id 3CxDR_rwP1Fa; Mon, 31 Oct 2016 19:19:00 +0000 (UTC)
 Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
 	[100.15.106.107])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 25557208FD;
-	Mon, 31 Oct 2016 19:03:41 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 16C562099C;
+	Mon, 31 Oct 2016 19:18:59 +0000 (UTC)
 Received: from sam.denix (sam [192.168.0.5])
-	by gandalf.denix.org (Postfix) with ESMTP id 78E0916217F;
-	Mon, 31 Oct 2016 15:03:40 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 559B2162185;
+	Mon, 31 Oct 2016 15:18:58 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 31 Oct 2016 15:03:40 -0400
-Message-Id: <1477940620-17449-1-git-send-email-denis@denix.org>
+Date: Mon, 31 Oct 2016 15:18:57 -0400
+Message-Id: <1477941537-18308-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] dra7xx-hs-evm: add DRA71x OPTEE flavor to the list
+In-Reply-To: <1477941537-18308-1-git-send-email-denis@denix.org>
+References: <1477941537-18308-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2016.05-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,26 +47,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 19:03:46 -0000
+X-List-Received-Date: Mon, 31 Oct 2016 19:19:03 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- conf/machine/dra7xx-hs-evm.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index 3a8ada2..db20aa2 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 37996b5..2f961f8 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "dra7_evm dra72_evm_revc"
-+OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
- OPTEEOUTPUTMACHINE = "ti"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ 
+-PR = "r22"
++PR = "r23"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2016.05"
+ 
+-SRCREV = "5d6f251e04bed6fa078e956b308fb2f520df33eb"
++SRCREV = "03a34ea13b9e91a89ae66fd159ff252999d0ba06"
+ 
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 -- 
 2.7.4
 
