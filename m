@@ -1,47 +1,33 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <gary@mlbassoc.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F21FCE009F0; Mon, 31 Oct 2016 07:01:36 -0700 (PDT)
+	id 174E9E00724; Mon, 31 Oct 2016 08:00:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 87F35E009CA
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 07:01:34 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u9VE1YIh021791
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 09:01:34 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id u9VE1YuN027995
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 09:01:34 -0500
-Received: from DFLE09.ent.ti.com ([fe80::7090:147d:b5eb:4c12]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.03.0294.000; Mon, 31 Oct 2016 09:01:34 -0500
-From: "Stiffler, Jacob" <j-stiffler@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "Balagopalakrishnan, Anand"
-	<anandb@ti.com>
-Thread-Topic: [meta-ti] [PATCH] ti-sgx-ddk-km: remove dependency between
-	user-mode and kernel-mode builds
-Thread-Index: AQHSLut0zahrxZX5h0O4D8+IghqOWaDCntbw
-Date: Mon, 31 Oct 2016 14:01:33 +0000
-Message-ID: <4B26FB5A64EBA14C87266869E037F958143257CA@DFLE09.ent.ti.com>
-References: <1476362286-27157-1-git-send-email-anandb@ti.com>
-	<20161025181246.GN12745@edge>
-In-Reply-To: <20161025181246.GN12745@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.172.224.221]
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCBDFE00444
+	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 07:59:57 -0700 (PDT)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id D079F68A01C; Mon, 31 Oct 2016 14:59:56 +0000 (GMT)
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id 8D6BA68A019;
+	Mon, 31 Oct 2016 14:59:56 +0000 (GMT)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id EC02E67402A5;
+	Mon, 31 Oct 2016 15:59:55 +0100 (CET)
+To: meta-ti@yoctoproject.org
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <59679b68-74ee-218f-292c-1cb043e05d19@mlbassoc.com>
+Date: Mon, 31 Oct 2016 15:59:55 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] ti-sgx-ddk-km: remove dependency between user-mode and kernel-mode builds
+Subject: Customized kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,69 +40,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 14:01:37 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 31 Oct 2016 15:00:03 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+I'd like to build a fully customized kernel for my BeagleBoneBlack,
+starting from the current linux-ti-staging_4.4
 
+How do I set my own defconfig for such a setup?  In particular,
+I want to tweak the config options being used, add some drivers,
+maybe file systems, etc.
 
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
-> Sent: Tuesday, October 25, 2016 2:13 PM
-> To: Balagopalakrishnan, Anand
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] ti-sgx-ddk-km: remove dependency between
-> user-mode and kernel-mode builds
->=20
-> Anand,
->=20
-> am57xx-evm is now breaking with this at do_compile():
->=20
-> /bin/sh: eurasiacon/binary2_omap_linux_release/target/install.sh: No such
-> file or directory
->=20
+Thanks for any pointers
 
-I am also seeing this issue. However, it does not appear to be specific to =
-am57xx-evm, but intermittent for all machines.
-
-> --
-> Denys
->=20
->=20
-> On Thu, Oct 13, 2016 at 06:08:06PM +0530, Anand Balagopalakrishnan wrote:
-> > Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
-> > ---
-> >  recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-> b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-> > index 7007c20..d0e9206 100644
-> > --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-> > +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-> > @@ -25,7 +25,7 @@ BRANCH =3D "ti-img-sgx/${PV}/k4.4"
-> >  SRC_URI =3D "git://git.ti.com/graphics/omap5-sgx-ddk-
-> linux.git;protocol=3Dgit;branch=3D${BRANCH}"
-> >  S =3D "${WORKDIR}/git"
-> >
-> > -SRCREV =3D "a5a0fe1799cabfa1278321b667263cf3fa2cf32f"
-> > +SRCREV =3D "e68719ba7c54602c710b6615cd665f5b7f47f85e"
-> >
-> >  TARGET_PRODUCT_omap-a15 =3D "jacinto6evm"
-> >  TARGET_PRODUCT_ti33x =3D "ti335x"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> --
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
