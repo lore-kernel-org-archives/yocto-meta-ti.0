@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0E8B0E00BF3; Mon, 31 Oct 2016 14:22:28 -0700 (PDT)
+	id 11133E00A84; Mon, 31 Oct 2016 14:22:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36044E00B45
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:24 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE0E8E00A84
+	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C223852A43; Mon, 31 Oct 2016 21:22:23 +0000 (UTC)
+	id 8457252A47; Mon, 31 Oct 2016 21:22:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161031212223.C223852A43@arago-project.org>
-Date: Mon, 31 Oct 2016 21:22:23 +0000 (UTC)
+Message-Id: <20161031212224.8457252A47@arago-project.org>
+Date: Mon, 31 Oct 2016 21:22:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.05-rc2 tag
+Subject: Denys Dmytriyenko : libulm: pass CC to work with internal toolchains that depend on sysroot flag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,42 +37,34 @@ X-List-Received-Date: Mon, 31 Oct 2016 21:22:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 0e8ef0c4cfff477acac994473e4474d51b6ec4ec
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0e8ef0c4cfff477acac994473e4474d51b6ec4ec
+Branch: master
+Commit: 26e28b2409c392719bdebf2fae19ce0bc0db3db5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=26e28b2409c392719bdebf2fae19ce0bc0db3db5
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Nov  1 01:18:57 2016 +0000
+Date:   Fri Oct 28 06:32:38 2016 +0000
 
-u-boot-ti-staging: update to ti2016.05-rc2 tag
+libulm: pass CC to work with internal toolchains that depend on sysroot flag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/dsptop/libulm_git.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 37996b5..2f961f8 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
+index 306d86f..7bf7f09 100644
+--- a/recipes-bsp/dsptop/libulm_git.bb
++++ b/recipes-bsp/dsptop/libulm_git.bb
+@@ -14,7 +14,7 @@ DEVICE_keystone = "C66AK2Hxx"
+ EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ do_compile() {
+-    oe_runmake arm XPORT_ONLY
++    oe_runmake arm XPORT_ONLY CC="${CC}"
+     oe_runmake dsp C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include
+ }
  
--PR = "r22"
-+PR = "r23"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "5d6f251e04bed6fa078e956b308fb2f520df33eb"
-+SRCREV = "03a34ea13b9e91a89ae66fd159ff252999d0ba06"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
 
 
