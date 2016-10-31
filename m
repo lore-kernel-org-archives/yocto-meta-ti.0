@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 125CCE00B04; Mon, 31 Oct 2016 14:22:28 -0700 (PDT)
+	id 910CBE00AF2; Mon, 31 Oct 2016 14:22:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33769E00AF2
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:24 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 251B7E00B79
+	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BE44C52996; Mon, 31 Oct 2016 21:22:22 +0000 (UTC)
+	id 52018529D4; Mon, 31 Oct 2016 21:22:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161031212222.BE44C52996@arago-project.org>
-Date: Mon, 31 Oct 2016 21:22:22 +0000 (UTC)
+Message-Id: <20161031212225.52018529D4@arago-project.org>
+Date: Mon, 31 Oct 2016 21:22:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update to new version 3.44.00
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.29 (sans RT) and ti2016 .05-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,75 +37,47 @@ X-List-Received-Date: Mon, 31 Oct 2016 21:22:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: bd9687339b14092ceeff6dc6f3c1a281aab90476
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bd9687339b14092ceeff6dc6f3c1a281aab90476
+Branch: master
+Commit: dfc8aaee1837cd6666a5bf698a8078fe48b159ca
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dfc8aaee1837cd6666a5bf698a8078fe48b159ca
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sun Oct 30 18:19:39 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Nov  1 01:18:56 2016 +0000
 
-ti-ipc: Update to new version 3.44.00
+linux-ti-staging: update to 4.4.29 (sans RT) and ti2016.05-rc2 tag
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos_git.bb |   10 +++++-----
- recipes-ti/ipc/ti-ipc.inc         |    8 ++++----
- 2 files changed, 9 insertions(+), 9 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index e03e753..5b0bed5 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -26,16 +26,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index 943e4f0..333c522 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
--# Corresponds to tag: 3.43.03.05
--SRCREV_ipc-examples = "766ee598c790c95dad80f9e5db5051e35de4e18f"
-+# Corresponds to tag: 3.44.00.00
-+SRCREV_ipc-examples = "a934d057647af00401e4bfd1c6a4a0f6144441b7"
+ BRANCH = "ti-rt-linux-4.4.y"
  
--# Corresponds to tag: 3.43.04.05
--SRCREV_ipc-metadata = "70d397241ebb4b2fd5a09cb9d506ecbbb3f4ad1e"
-+# Corresponds to tag: 3.44.00.00
-+SRCREV_ipc-metadata = "07a745d47ecd7b4b64860e7c5d0fbe4e89524f2e"
+-SRCREV = "bb874e89d6d82f214c2828da512e44f2fe64db2e"
++SRCREV = "1a7c6a55f909c9c44acfa701108fbb6707e53f85"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index 51729ef..2f67a01 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -79,8 +79,8 @@ S = "${WORKDIR}/git"
  
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ BRANCH = "ti-lsk-linux-4.4.y"
  
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
+-SRCREV = "b379f92dff635b6bec915bffd6376425fb3bc0e8"
+-PV = "4.4.27+git${SRCPV}"
++SRCREV = "83973c23389df9755070a003b3a596beae056714"
++PV = "4.4.29+git${SRCPV}"
  
- DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
- DEPENDS_append_keystone = " ti-cgt6x-native \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index cf576d1..869dada 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,17 +6,17 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "3.43"
-+TI_IPC_GIT_BRANCH = "ipc-next"
- 
--#Corresponds to 3.43.03.05
--TI_IPC_SRCREV = "6c2b64342cbd0317527a0924140566b2446488f5"
-+#Corresponds to 3.44.00.00
-+TI_IPC_SRCREV = "e6f64d4b04f1c929366c922a2e5a4728fbb4d919"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
- SRCREV = "${TI_IPC_SRCREV}"
- 
- S = "${WORKDIR}/git"
--PV = "3.43.03.05"
-+PV = "3.44.00.00"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 
 
