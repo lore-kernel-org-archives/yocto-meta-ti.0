@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 97607E00BC3; Mon, 31 Oct 2016 14:22:26 -0700 (PDT)
+	id 0AD7AE00BF9; Mon, 31 Oct 2016 14:22:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31CADE009F0
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:24 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EEA3DE00B6C
+	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2016 14:22:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 88545529C2; Mon, 31 Oct 2016 21:22:22 +0000 (UTC)
+	id 16AFC529C2; Mon, 31 Oct 2016 21:22:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161031212222.88545529C2@arago-project.org>
-Date: Mon, 31 Oct 2016 21:22:22 +0000 (UTC)
+Message-Id: <20161031212225.16AFC529C2@arago-project.org>
+Date: Mon, 31 Oct 2016 21:22:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libulm: pass CC to work with internal toolchains that depend on sysroot flag
+Subject: Denys Dmytriyenko : dra7xx-hs-evm: add DRA71x OPTEE flavor to the list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,38 +33,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 21:22:26 -0000
+X-List-Received-Date: Mon, 31 Oct 2016 21:22:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: daa4e8b333e41b0cdd9055adb4a8674568cedf3e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=daa4e8b333e41b0cdd9055adb4a8674568cedf3e
+Branch: master
+Commit: d435c2a374384993810a314cc35d8b20de625987
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d435c2a374384993810a314cc35d8b20de625987
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Oct 28 06:32:38 2016 +0000
+Date:   Tue Nov  1 01:03:40 2016 +0000
 
-libulm: pass CC to work with internal toolchains that depend on sysroot flag
+dra7xx-hs-evm: add DRA71x OPTEE flavor to the list
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/libulm_git.bb |    2 +-
+ conf/machine/dra7xx-hs-evm.conf |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
-index 306d86f..7bf7f09 100644
---- a/recipes-bsp/dsptop/libulm_git.bb
-+++ b/recipes-bsp/dsptop/libulm_git.bb
-@@ -14,7 +14,7 @@ DEVICE_keystone = "C66AK2Hxx"
- EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index 3a8ada2..db20aa2 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
  
- do_compile() {
--    oe_runmake arm XPORT_ONLY
-+    oe_runmake arm XPORT_ONLY CC="${CC}"
-     oe_runmake dsp C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include
- }
- 
+ OPTEEMACHINE = "ti"
+-OPTEEFLAVOR = "dra7_evm dra72_evm_revc"
++OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
+ OPTEEOUTPUTMACHINE = "ti"
 
 
