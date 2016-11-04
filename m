@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 688E9E00ACE; Fri,  4 Nov 2016 14:41:09 -0700 (PDT)
+	id DCFDBE00BE0; Fri,  4 Nov 2016 14:41:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1AFCCE007C2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96881E008BA
 	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2016 14:41:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2E1CB52987; Fri,  4 Nov 2016 21:41:07 +0000 (UTC)
+	id B010B52987; Fri,  4 Nov 2016 21:41:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161104214107.2E1CB52987@arago-project.org>
+Message-Id: <20161104214107.B010B52987@arago-project.org>
 Date: Fri,  4 Nov 2016 21:41:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: pull in prueth-fw for k2g
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2016 21:41:09 -0000
+X-List-Received-Date: Fri, 04 Nov 2016 21:41:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 296cbc1c586a3ad8e78ffbebec899fd2649ea64e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=296cbc1c586a3ad8e78ffbebec899fd2649ea64e
+Branch: master
+Commit: 540afce71ca47e786133a9defe8fbad6c1c755f6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=540afce71ca47e786133a9defe8fbad6c1c755f6
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Nov  3 02:19:44 2016 +0000
