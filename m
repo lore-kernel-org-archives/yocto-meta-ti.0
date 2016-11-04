@@ -1,47 +1,65 @@
-Return-Path: <SharihinDS@energomera.ru>
+Return-Path: <robertcnelson@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 699CDE00BF8; Fri,  4 Nov 2016 02:33:42 -0700 (PDT)
+	id F0549E00BBA; Fri,  4 Nov 2016 06:34:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [194.0.145.26 listed in list.dnswl.org]
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (robertcnelson[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.218.66 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-X-Greylist: delayed 67 seconds by postgrey-1.32 at yocto-www;
-	Fri, 04 Nov 2016 02:33:37 PDT
-Received: from owa.energomera.ru (mx.energomera.ru [194.0.145.26])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14486E0081E
-	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2016 02:33:37 -0700 (PDT)
-Received: from S04-EX01.energomera.ru (10.6.0.50) by S01-EX03.energomera.ru
-	(10.2.0.46) with Microsoft SMTP Server (TLS) id 14.3.266.1;
-	Fri, 4 Nov 2016 12:32:25 +0300
-Received: from S04-EX01.energomera.ru ([::1]) by S04-EX01.energomera.ru
-	([::1]) with mapi id 14.03.0266.001; Fri, 4 Nov 2016 12:32:20 +0300
-From: =?utf-8?B?0KjQsNGA0LjRhdC40L0g0JTQvNC40YLRgNC40Lkg0KHQtdGA0LPQtdC10LI=?=
-	=?utf-8?B?0LjRhw==?= <SharihinDS@energomera.ru>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: Unable to build ti-ccsv6-native and other packages
-Thread-Index: AQHSNn5WNmRmR4vUWEy7UBj0g890qg==
-Date: Fri, 4 Nov 2016 09:32:19 +0000
-Message-ID: <1478251939.5248.11.camel@energomera.ru>
-Accept-Language: ru-RU, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.2.0.46]
-x-kse-attachmentfiltering-interceptor-info: protection disabled
-x-kse-serverinfo: S04-EX01.energomera.ru, 9
-x-kse-antivirus-interceptor-info: scan successful
-x-kse-antivirus-info: Clean, bases: 04.11.2016 6:01:00
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-oi0-f66.google.com (mail-oi0-f66.google.com
+	[209.85.218.66])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C862E00B62
+	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2016 06:34:46 -0700 (PDT)
+Received: by mail-oi0-f66.google.com with SMTP id 128so12607156oih.3
+	for <meta-ti@yoctoproject.org>; Fri, 04 Nov 2016 06:34:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=j4mMPO1HZWaWJ+MFjUf+GhSt8s4gw0up09J1lfL3m4Q=;
+	b=xwhhL+Q27p5vtHRxl6MViDltaNZUMI9Ytj8HgxRVGR/b6nH0qBCeSHJW2Qjk5wMDqb
+	4hlxTNKaIDOPPBRmWNzhuKnOV0KqaOLAgjxRIAWs8Ihq/JnSkvCjTOSGziW5SrcNcwaN
+	l31nq/NWsFp4MeofM2I310W5T8jovaCZUkWLmDgu1nZbLzlsScss5umCFceZC8o791v2
+	u6nGEqIGLYZoa7atJ4/u4NrqLZlCp8vtd4fapPszEKCnaGn5tqa+fBjKE51TKTd3Vt30
+	iyaP9OIeoez4mUkxLEmkQMD83MoEALsPBhp6JNyZ8UvLNqAf2Paj22QlvdObG9kF87Yd
+	2zpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=j4mMPO1HZWaWJ+MFjUf+GhSt8s4gw0up09J1lfL3m4Q=;
+	b=bcWHA/MFR6a5rGbFT+KlXLOphtvtIXHgLWCgJWgxeJiLDxfbVcPRGd4lHeC0MrpTKc
+	fQy5R+u/ZmH3yFXboDBWYgKJlLoR56FYaI9xLgH+RDgaOrTTUkL9TDu6fHB28vZ115nM
+	hZ/C8i/28thOZ58LtL/cJWRkmidg5qk4Q3EPtnypO9/UKwEhbNMWxnoZPYr9ih5EktKj
+	gaqZ8+qGCuoyKopOy8fI/Oa/2omkKJwNtW9I4S3qVY401TWkcPUVn2EKEGKIenMoCMc4
+	S6S+iCeIGTqtYdhPahGweaCBeJuMTPLzch04gwKtSKevOPW+AajyOMiN3mUnFaabeUe/
+	1bmA==
+X-Gm-Message-State: ABUngvfTd/8CkClG+EfLxcD9UaUFNDJ0L4azZSp/cbq3BMqRhUr/nI5FrrHcJL/gkUI62sV4fi6S/g7yN1v0kA==
+X-Received: by 10.36.92.193 with SMTP id q184mr1855534itb.30.1478266483392;
+	Fri, 04 Nov 2016 06:34:43 -0700 (PDT)
 MIME-Version: 1.0
-X-KSE-AntiSpam-Interceptor-Info: protection disabled
-X-KSE-ServerInfo: S01-EX03.energomera.ru, 9
-X-KSE-Attachment-Filter-Scan-Result: Clean
-Subject: Unable to build ti-ccsv6-native and other packages
+Received: by 10.107.19.204 with HTTP; Fri, 4 Nov 2016 06:34:13 -0700 (PDT)
+In-Reply-To: <1478251939.5248.11.camel@energomera.ru>
+References: <1478251939.5248.11.camel@energomera.ru>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Fri, 4 Nov 2016 08:34:13 -0500
+Message-ID: <CAOCHtYgP2_WNH7o99uGxSFQKAN+vC_734VLWJy9+DTW_+FEGpw@mail.gmail.com>
+To: =?UTF-8?B?0KjQsNGA0LjRhdC40L0g0JTQvNC40YLRgNC40Lkg0KHQtdGA0LPQtdC10LLQuNGH?=
+	<SharihinDS@energomera.ru>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Unable to build ti-ccsv6-native and other packages
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,191 +72,83 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2016 09:33:42 -0000
-Content-Language: ru-RU
-Content-Type: multipart/alternative;
-	boundary="_000_1478251939524811camelenergomeraru_"
+X-List-Received-Date: Fri, 04 Nov 2016 13:34:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
---_000_1478251939524811camelenergomeraru_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+On Fri, Nov 4, 2016 at 4:32 AM, =D0=A8=D0=B0=D1=80=D0=B8=D1=85=D0=B8=D0=BD =
+=D0=94=D0=BC=D0=B8=D1=82=D1=80=D0=B8=D0=B9 =D0=A1=D0=B5=D1=80=D0=B3=D0=B5=
+=D0=B5=D0=B2=D0=B8=D1=87
+<SharihinDS@energomera.ru> wrote:
+> Hi all,
+> A few days ago it was announced the release of Yocto 2.2, so I decided to
+> rebuild whole distro.
+>
+> 1. When I started bitbake, I've found that there's no Doxygen package in
+> base Yocto/Poky distro, so I've copied one from meta-arago-extras. What's
+> the correct way to workaround this issue?
+>
+> 2. [Main issue] When bitbake tries to build ti-ccsv6-native there is a
+> error:
+>
+> WARNING: ti-ccsv6-native-6.1.3.00034-r0 do_fetch: Failed to fetch URL
+> http://install.source.dir.local/CCS6.1.3.00034_linux.tar.gz;name=3Dccsv6,
+> attempting MIRRORS if available
+> ERROR: ti-ccsv6-native-6.1.3.00034-r0 do_fetch: Fetcher failure: Fetch
+> command export
+> DBUS_SESSION_BUS_ADDRESS=3D"unix:abstract=3D/tmp/dbus-aH3buan98u,guid=3De=
+17812544d78610aef8cfc9f581c3d0c";
+> export SSH_AGENT_PID=3D"1525"; export
+> SSH_AUTH_SOCK=3D"/tmp/ssh-LRkwiDyVSVf5/agent.1479"; export
+> PATH=3D"/home/sharihinds/CL-SOM-AM57x/morty/scripts/native-intercept:/hom=
+e/sharihinds/CL-SOM-AM57x/morty/build/tmp/sysroots-uninative/x86_64-linux/u=
+sr/bin:/home/sharihinds/CL-SOM-AM57x/morty/scripts:/home/sharihinds/CL-SOM-=
+AM57x/morty/build/tmp/sysroots/x86_64-linux/usr/bin/x86_64-linux:/home/shar=
+ihinds/CL-SOM-AM57x/morty/build/tmp/sysroots/x86_64-linux/usr/bin:/home/sha=
+rihinds/CL-SOM-AM57x/morty/build/tmp/sysroots/x86_64-linux/usr/sbin:/home/s=
+harihinds/CL-SOM-AM57x/morty/build/tmp/sysroots/x86_64-linux/usr/bin:/home/=
+sharihinds/CL-SOM-AM57x/morty/build/tmp/sysroots/x86_64-linux/sbin:/home/sh=
+arihinds/CL-SOM-AM57x/morty/build/tmp/sysroots/x86_64-linux/bin:/home/shari=
+hinds/CL-SOM-AM57x/morty/scripts:/home/sharihinds/CL-SOM-AM57x/morty/bitbak=
+e/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/gam=
+es:/usr/local/games:/snap/bin";
+> export HOME=3D"/home/sharihinds"; /usr/bin/env wget -t 2 -T 30 -nv
+> --passive-ftp --no-check-certificate -P
+> /home/sharihinds/CL-SOM-AM57x/downloads
+> 'http://install.source.dir.local/CCS6.1.3.00034_linux.tar.gz' --progress=
+=3Ddot
+> -v failed with exit code 4, output:
+> --2016-11-04 12:07:14--
+> http://install.source.dir.local/CCS6.1.3.00034_linux.tar.gz
+> Resolving install.source.dir.local (install.source.dir.local)... failed:
+> Name or service not known.
+> wget: unable to resolve host address =E2=80=98install.source.dir.local=E2=
+=80=99
+>
+> ERROR: ti-ccsv6-native-6.1.3.00034-r0 do_fetch: Fetcher failure for URL:
+> 'http://install.source.dir.local/CCS6.1.3.00034_linux.tar.gz;name=3Dccsv6=
+'.
+> Unable to fetch URL from any source.
+> ERROR: ti-ccsv6-native-6.1.3.00034-r0 do_fetch: Function failed:
+> base_do_fetch
+> ERROR: Logfile of failure stored in:
+> /home/sharihinds/CL-SOM-AM57x/morty/build/tmp/work/x86_64-linux/ti-ccsv6-=
+native/6.1.3.00034-r0/temp/log.do_fetch.13158
+> ERROR: Task
+> (/home/sharihinds/CL-SOM-AM57x/morty/build/../meta-ti/recipes-ti/devtools=
+/ti-ccsv6-native_6.1.3.00034.bb:do_fetch)
+> failed with exit code '1'
+>
+> Error reveals when I add ipumm-fw in dependency of kernel.
+>
+> Does anybody encountered same problem? How can I fix this issue?
 
-SGkgYWxsLA0KQSBmZXcgZGF5cyBhZ28gaXQgd2FzIGFubm91bmNlZCB0aGUgcmVsZWFzZSBvZiBZ
-b2N0byAyLjIsIHNvIEkgZGVjaWRlZCB0byByZWJ1aWxkIHdob2xlIGRpc3Ryby4NCg0KMS4gV2hl
-biBJIHN0YXJ0ZWQgYml0YmFrZSwgSSd2ZSBmb3VuZCB0aGF0IHRoZXJlJ3Mgbm8gRG94eWdlbiBw
-YWNrYWdlIGluIGJhc2UgWW9jdG8vUG9reSBkaXN0cm8sIHNvIEkndmUgY29waWVkIG9uZSBmcm9t
-IG1ldGEtYXJhZ28tZXh0cmFzLiBXaGF0J3MgdGhlIGNvcnJlY3Qgd2F5IHRvIHdvcmthcm91bmQg
-dGhpcyBpc3N1ZT8NCg0KMi4gW01haW4gaXNzdWVdIFdoZW4gYml0YmFrZSB0cmllcyB0byBidWls
-ZCB0aS1jY3N2Ni1uYXRpdmUgdGhlcmUgaXMgYSBlcnJvcjoNCg0KV0FSTklORzogdGktY2NzdjYt
-bmF0aXZlLTYuMS4zLjAwMDM0LXIwIGRvX2ZldGNoOiBGYWlsZWQgdG8gZmV0Y2ggVVJMIGh0dHA6
-Ly9pbnN0YWxsLnNvdXJjZS5kaXIubG9jYWwvQ0NTNi4xLjMuMDAwMzRfbGludXgudGFyLmd6O25h
-bWU9Y2NzdjYsIGF0dGVtcHRpbmcgTUlSUk9SUyBpZiBhdmFpbGFibGUNCkVSUk9SOiB0aS1jY3N2
-Ni1uYXRpdmUtNi4xLjMuMDAwMzQtcjAgZG9fZmV0Y2g6IEZldGNoZXIgZmFpbHVyZTogRmV0Y2gg
-Y29tbWFuZCBleHBvcnQgREJVU19TRVNTSU9OX0JVU19BRERSRVNTPSJ1bml4OmFic3RyYWN0PS90
-bXAvZGJ1cy1hSDNidWFuOTh1LGd1aWQ9ZTE3ODEyNTQ0ZDc4NjEwYWVmOGNmYzlmNTgxYzNkMGMi
-OyBleHBvcnQgU1NIX0FHRU5UX1BJRD0iMTUyNSI7IGV4cG9ydCBTU0hfQVVUSF9TT0NLPSIvdG1w
-L3NzaC1MUmt3aUR5VlNWZjUvYWdlbnQuMTQ3OSI7IGV4cG9ydCBQQVRIPSIvaG9tZS9zaGFyaWhp
-bmRzL0NMLVNPTS1BTTU3eC9tb3J0eS9zY3JpcHRzL25hdGl2ZS1pbnRlcmNlcHQ6L2hvbWUvc2hh
-cmloaW5kcy9DTC1TT00tQU01N3gvbW9ydHkvYnVpbGQvdG1wL3N5c3Jvb3RzLXVuaW5hdGl2ZS94
-ODZfNjQtbGludXgvdXNyL2JpbjovaG9tZS9zaGFyaWhpbmRzL0NMLVNPTS1BTTU3eC9tb3J0eS9z
-Y3JpcHRzOi9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21vcnR5L2J1aWxkL3RtcC9zeXNy
-b290cy94ODZfNjQtbGludXgvdXNyL2Jpbi94ODZfNjQtbGludXg6L2hvbWUvc2hhcmloaW5kcy9D
-TC1TT00tQU01N3gvbW9ydHkvYnVpbGQvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvYmlu
-Oi9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21vcnR5L2J1aWxkL3RtcC9zeXNyb290cy94
-ODZfNjQtbGludXgvdXNyL3NiaW46L2hvbWUvc2hhcmloaW5kcy9DTC1TT00tQU01N3gvbW9ydHkv
-YnVpbGQvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvYmluOi9ob21lL3NoYXJpaGluZHMv
-Q0wtU09NLUFNNTd4L21vcnR5L2J1aWxkL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvc2Jpbjov
-aG9tZS9zaGFyaWhpbmRzL0NMLVNPTS1BTTU3eC9tb3J0eS9idWlsZC90bXAvc3lzcm9vdHMveDg2
-XzY0LWxpbnV4L2JpbjovaG9tZS9zaGFyaWhpbmRzL0NMLVNPTS1BTTU3eC9tb3J0eS9zY3JpcHRz
-Oi9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21vcnR5L2JpdGJha2UvYmluOi91c3IvbG9j
-YWwvc2JpbjovdXNyL2xvY2FsL2JpbjovdXNyL3NiaW46L3Vzci9iaW46L3NiaW46L2JpbjovdXNy
-L2dhbWVzOi91c3IvbG9jYWwvZ2FtZXM6L3NuYXAvYmluIjsgZXhwb3J0IEhPTUU9Ii9ob21lL3No
-YXJpaGluZHMiOyAvdXNyL2Jpbi9lbnYgd2dldCAtdCAyIC1UIDMwIC1udiAtLXBhc3NpdmUtZnRw
-IC0tbm8tY2hlY2stY2VydGlmaWNhdGUgLVAgL2hvbWUvc2hhcmloaW5kcy9DTC1TT00tQU01N3gv
-ZG93bmxvYWRzICdodHRwOi8vaW5zdGFsbC5zb3VyY2UuZGlyLmxvY2FsL0NDUzYuMS4zLjAwMDM0
-X2xpbnV4LnRhci5neicgLS1wcm9ncmVzcz1kb3QgLXYgZmFpbGVkIHdpdGggZXhpdCBjb2RlIDQs
-IG91dHB1dDoNCi0tMjAxNi0xMS0wNCAxMjowNzoxNC0tICBodHRwOi8vaW5zdGFsbC5zb3VyY2Uu
-ZGlyLmxvY2FsL0NDUzYuMS4zLjAwMDM0X2xpbnV4LnRhci5neg0KUmVzb2x2aW5nIGluc3RhbGwu
-c291cmNlLmRpci5sb2NhbCAoaW5zdGFsbC5zb3VyY2UuZGlyLmxvY2FsKS4uLiBmYWlsZWQ6IE5h
-bWUgb3Igc2VydmljZSBub3Qga25vd24uDQp3Z2V0OiB1bmFibGUgdG8gcmVzb2x2ZSBob3N0IGFk
-ZHJlc3Mg4oCYaW5zdGFsbC5zb3VyY2UuZGlyLmxvY2Fs4oCZDQoNCkVSUk9SOiB0aS1jY3N2Ni1u
-YXRpdmUtNi4xLjMuMDAwMzQtcjAgZG9fZmV0Y2g6IEZldGNoZXIgZmFpbHVyZSBmb3IgVVJMOiAn
-aHR0cDovL2luc3RhbGwuc291cmNlLmRpci5sb2NhbC9DQ1M2LjEuMy4wMDAzNF9saW51eC50YXIu
-Z3o7bmFtZT1jY3N2NicuIFVuYWJsZSB0byBmZXRjaCBVUkwgZnJvbSBhbnkgc291cmNlLg0KRVJS
-T1I6IHRpLWNjc3Y2LW5hdGl2ZS02LjEuMy4wMDAzNC1yMCBkb19mZXRjaDogRnVuY3Rpb24gZmFp
-bGVkOiBiYXNlX2RvX2ZldGNoDQpFUlJPUjogTG9nZmlsZSBvZiBmYWlsdXJlIHN0b3JlZCBpbjog
-L2hvbWUvc2hhcmloaW5kcy9DTC1TT00tQU01N3gvbW9ydHkvYnVpbGQvdG1wL3dvcmsveDg2XzY0
-LWxpbnV4L3RpLWNjc3Y2LW5hdGl2ZS82LjEuMy4wMDAzNC1yMC90ZW1wL2xvZy5kb19mZXRjaC4x
-MzE1OA0KRVJST1I6IFRhc2sgKC9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21vcnR5L2J1
-aWxkLy4uL21ldGEtdGkvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jY3N2Ni1uYXRpdmVfNi4xLjMu
-MDAwMzQuYmI6ZG9fZmV0Y2gpIGZhaWxlZCB3aXRoIGV4aXQgY29kZSAnMScNCg0KRXJyb3IgcmV2
-ZWFscyB3aGVuIEkgYWRkIGlwdW1tLWZ3IGluIGRlcGVuZGVuY3kgb2Yga2VybmVsLg0KDQpEb2Vz
-IGFueWJvZHkgZW5jb3VudGVyZWQgc2FtZSBwcm9ibGVtPyBIb3cgY2FuIEkgZml4IHRoaXMgaXNz
-dWU/DQoNClRoYW5rcw0K
+http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK#Code=
+_Composer_Studio
 
---_000_1478251939524811camelenergomeraru_
-Content-Type: text/html; charset="utf-8"
-Content-ID: <A6BF0329FFC3E244B5AA9E3C618F791C@energomera.ru>
-Content-Transfer-Encoding: base64
+Regards
 
-PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
-dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5Pg0KPGRpdj5IaSBhbGws
-PC9kaXY+DQo8ZGl2PkEgZmV3IGRheXMgYWdvIGl0IHdhcyBhbm5vdW5jZWQgdGhlIHJlbGVhc2Ug
-b2YgWW9jdG8gMi4yLCBzbyBJIGRlY2lkZWQgdG8gcmVidWlsZCB3aG9sZSBkaXN0cm8uPC9kaXY+
-DQo8ZGl2Pjxicj4NCjwvZGl2Pg0KPGRpdj4xLiBXaGVuIEkgc3RhcnRlZCBiaXRiYWtlLCBJJ3Zl
-IGZvdW5kIHRoYXQgdGhlcmUncyBubyBEb3h5Z2VuIHBhY2thZ2UgaW4gYmFzZSBZb2N0by9Qb2t5
-IGRpc3Rybywgc28gSSd2ZSBjb3BpZWQgb25lIGZyb20gbWV0YS1hcmFnby1leHRyYXMuIFdoYXQn
-cyB0aGUgY29ycmVjdCB3YXkgdG8gd29ya2Fyb3VuZCB0aGlzIGlzc3VlPzwvZGl2Pg0KPGRpdj48
-YnI+DQo8L2Rpdj4NCjxkaXY+Mi4gW01haW4gaXNzdWVdIFdoZW4gYml0YmFrZSB0cmllcyB0byBi
-dWlsZCZuYnNwO3RpLWNjc3Y2LW5hdGl2ZSB0aGVyZSBpcyBhIGVycm9yOjwvZGl2Pg0KPGRpdj48
-YnI+DQo8L2Rpdj4NCjxkaXY+PGZvbnQgc2l6ZT0iMSI+V0FSTklORzogdGktY2NzdjYtbmF0aXZl
-LTYuMS4zLjAwMDM0LXIwIGRvX2ZldGNoOiBGYWlsZWQgdG8gZmV0Y2ggVVJMDQo8YSBocmVmPSJo
-dHRwOi8vaW5zdGFsbC5zb3VyY2UuZGlyLmxvY2FsL0NDUzYuMS4zLjAwMDM0X2xpbnV4LnRhci5n
-ejtuYW1lPWNjc3Y2Ij4NCmh0dHA6Ly9pbnN0YWxsLnNvdXJjZS5kaXIubG9jYWwvQ0NTNi4xLjMu
-MDAwMzRfbGludXgudGFyLmd6O25hbWU9Y2NzdjY8L2E+LCBhdHRlbXB0aW5nIE1JUlJPUlMgaWYg
-YXZhaWxhYmxlPC9mb250PjwvZGl2Pg0KPGRpdj48Zm9udCBzaXplPSIxIj5FUlJPUjogdGktY2Nz
-djYtbmF0aXZlLTYuMS4zLjAwMDM0LXIwIGRvX2ZldGNoOiBGZXRjaGVyIGZhaWx1cmU6IEZldGNo
-IGNvbW1hbmQgZXhwb3J0IERCVVNfU0VTU0lPTl9CVVNfQUREUkVTUz0mcXVvdDt1bml4OmFic3Ry
-YWN0PS90bXAvZGJ1cy1hSDNidWFuOTh1LGd1aWQ9ZTE3ODEyNTQ0ZDc4NjEwYWVmOGNmYzlmNTgx
-YzNkMGMmcXVvdDs7IGV4cG9ydCBTU0hfQUdFTlRfUElEPSZxdW90OzE1MjUmcXVvdDs7IGV4cG9y
-dCBTU0hfQVVUSF9TT0NLPSZxdW90Oy90bXAvc3NoLUxSa3dpRHlWU1ZmNS9hZ2VudC4xNDc5JnF1
-b3Q7Ow0KIGV4cG9ydCBQQVRIPSZxdW90Oy9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21v
-cnR5L3NjcmlwdHMvbmF0aXZlLWludGVyY2VwdDovaG9tZS9zaGFyaWhpbmRzL0NMLVNPTS1BTTU3
-eC9tb3J0eS9idWlsZC90bXAvc3lzcm9vdHMtdW5pbmF0aXZlL3g4Nl82NC1saW51eC91c3IvYmlu
-Oi9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21vcnR5L3NjcmlwdHM6L2hvbWUvc2hhcmlo
-aW5kcy9DTC1TT00tQU01N3gvbW9ydHkvYnVpbGQvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91
-c3IvYmluL3g4Nl82NC1saW51eDovaG9tZS9zaGFyaWhpbmRzL0NMLVNPTS1BTTU3eC9tb3J0eS9i
-dWlsZC90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9iaW46L2hvbWUvc2hhcmloaW5kcy9D
-TC1TT00tQU01N3gvbW9ydHkvYnVpbGQvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3Ivc2Jp
-bjovaG9tZS9zaGFyaWhpbmRzL0NMLVNPTS1BTTU3eC9tb3J0eS9idWlsZC90bXAvc3lzcm9vdHMv
-eDg2XzY0LWxpbnV4L3Vzci9iaW46L2hvbWUvc2hhcmloaW5kcy9DTC1TT00tQU01N3gvbW9ydHkv
-YnVpbGQvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC9zYmluOi9ob21lL3NoYXJpaGluZHMvQ0wt
-U09NLUFNNTd4L21vcnR5L2J1aWxkL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvYmluOi9ob21l
-L3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21vcnR5L3NjcmlwdHM6L2hvbWUvc2hhcmloaW5kcy9D
-TC1TT00tQU01N3gvbW9ydHkvYml0YmFrZS9iaW46L3Vzci9sb2NhbC9zYmluOi91c3IvbG9jYWwv
-YmluOi91c3Ivc2JpbjovdXNyL2Jpbjovc2JpbjovYmluOi91c3IvZ2FtZXM6L3Vzci9sb2NhbC9n
-YW1lczovc25hcC9iaW4mcXVvdDs7DQogZXhwb3J0IEhPTUU9JnF1b3Q7L2hvbWUvc2hhcmloaW5k
-cyZxdW90OzsgL3Vzci9iaW4vZW52IHdnZXQgLXQgMiAtVCAzMCAtbnYgLS1wYXNzaXZlLWZ0cCAt
-LW5vLWNoZWNrLWNlcnRpZmljYXRlIC1QIC9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L2Rv
-d25sb2FkcyAnPGEgaHJlZj0iaHR0cDovL2luc3RhbGwuc291cmNlLmRpci5sb2NhbC9DQ1M2LjEu
-My4wMDAzNF9saW51eC50YXIuZ3onIj5odHRwOi8vaW5zdGFsbC5zb3VyY2UuZGlyLmxvY2FsL0ND
-UzYuMS4zLjAwMDM0X2xpbnV4LnRhci5neic8L2E+DQogLS1wcm9ncmVzcz1kb3QgLXYgZmFpbGVk
-IHdpdGggZXhpdCBjb2RlIDQsIG91dHB1dDo8L2ZvbnQ+PC9kaXY+DQo8ZGl2Pjxmb250IHNpemU9
-IjEiPi0tMjAxNi0xMS0wNCAxMjowNzoxNC0tJm5ic3A7Jm5ic3A7PGEgaHJlZj0iaHR0cDovL2lu
-c3RhbGwuc291cmNlLmRpci5sb2NhbC9DQ1M2LjEuMy4wMDAzNF9saW51eC50YXIuZ3oiPmh0dHA6
-Ly9pbnN0YWxsLnNvdXJjZS5kaXIubG9jYWwvQ0NTNi4xLjMuMDAwMzRfbGludXgudGFyLmd6PC9h
-PiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOzwvZm9udD48L2Rpdj4NCjxkaXY+PGZvbnQgc2l6ZT0iMSI+UmVzb2x2aW5nIGluc3Rh
-bGwuc291cmNlLmRpci5sb2NhbCAoaW5zdGFsbC5zb3VyY2UuZGlyLmxvY2FsKS4uLiBmYWlsZWQ6
-IE5hbWUgb3Igc2VydmljZSBub3Qga25vd24uJm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-PC9mb250PjwvZGl2Pg0KPGRpdj48Zm9udCBzaXplPSIxIj53Z2V0OiB1bmFibGUgdG8gcmVzb2x2
-ZSBob3N0IGFkZHJlc3Mg4oCYaW5zdGFsbC5zb3VyY2UuZGlyLmxvY2Fs4oCZJm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7PC9mb250PjwvZGl2Pg0KPGRpdj48Zm9udCBzaXplPSIxIj48YnI+DQo8L2ZvbnQ+PC9k
-aXY+DQo8ZGl2Pjxmb250IHNpemU9IjEiPkVSUk9SOiB0aS1jY3N2Ni1uYXRpdmUtNi4xLjMuMDAw
-MzQtcjAgZG9fZmV0Y2g6IEZldGNoZXIgZmFpbHVyZSBmb3IgVVJMOiAnPGEgaHJlZj0iaHR0cDov
-L2luc3RhbGwuc291cmNlLmRpci5sb2NhbC9DQ1M2LjEuMy4wMDAzNF9saW51eC50YXIuZ3o7bmFt
-ZT1jY3N2NiciPmh0dHA6Ly9pbnN0YWxsLnNvdXJjZS5kaXIubG9jYWwvQ0NTNi4xLjMuMDAwMzRf
-bGludXgudGFyLmd6O25hbWU9Y2NzdjYnPC9hPi4gVW5hYmxlDQogdG8gZmV0Y2ggVVJMIGZyb20g
-YW55IHNvdXJjZS48L2ZvbnQ+PC9kaXY+DQo8ZGl2Pjxmb250IHNpemU9IjEiPkVSUk9SOiB0aS1j
-Y3N2Ni1uYXRpdmUtNi4xLjMuMDAwMzQtcjAgZG9fZmV0Y2g6IEZ1bmN0aW9uIGZhaWxlZDogYmFz
-ZV9kb19mZXRjaDwvZm9udD48L2Rpdj4NCjxkaXY+PGZvbnQgc2l6ZT0iMSI+RVJST1I6IExvZ2Zp
-bGUgb2YgZmFpbHVyZSBzdG9yZWQgaW46IC9ob21lL3NoYXJpaGluZHMvQ0wtU09NLUFNNTd4L21v
-cnR5L2J1aWxkL3RtcC93b3JrL3g4Nl82NC1saW51eC90aS1jY3N2Ni1uYXRpdmUvNi4xLjMuMDAw
-MzQtcjAvdGVtcC9sb2cuZG9fZmV0Y2guMTMxNTg8L2ZvbnQ+PC9kaXY+DQo8ZGl2Pjxmb250IHNp
-emU9IjEiPkVSUk9SOiBUYXNrICgvaG9tZS9zaGFyaWhpbmRzL0NMLVNPTS1BTTU3eC9tb3J0eS9i
-dWlsZC8uLi9tZXRhLXRpL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2NzdjYtbmF0aXZlXzYuMS4z
-LjAwMDM0LmJiOmRvX2ZldGNoKSBmYWlsZWQgd2l0aCBleGl0IGNvZGUgJzEnPC9mb250PjwvZGl2
-Pg0KPGRpdj48YnI+DQo8L2Rpdj4NCjxkaXY+RXJyb3IgcmV2ZWFscyB3aGVuIEkgYWRkIDxiPmlw
-dW1tLWZ3PC9iPiBpbiBkZXBlbmRlbmN5IG9mIGtlcm5lbC4mbmJzcDs8L2Rpdj4NCjxkaXY+PGJy
-Pg0KPC9kaXY+DQo8ZGl2PkRvZXMgYW55Ym9keSBlbmNvdW50ZXJlZCBzYW1lIHByb2JsZW0/IEhv
-dyBjYW4gSSBmaXggdGhpcyBpc3N1ZT88L2Rpdj4NCjxkaXY+PGJyPg0KPC9kaXY+DQo8ZGl2PlRo
-YW5rczwvZGl2Pg0KPC9ib2R5Pg0KPC9odG1sPg0K
+--=20
+Robert Nelson
+https://rcn-ee.com/
 
---_000_1478251939524811camelenergomeraru_--
