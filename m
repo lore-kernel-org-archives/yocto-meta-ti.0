@@ -1,26 +1,50 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <SharihinDS@energomera.ru>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DCFDBE00BE0; Fri,  4 Nov 2016 14:41:10 -0700 (PDT)
+	id A2F77E00ACE; Sat,  5 Nov 2016 02:32:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [194.0.145.26 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96881E008BA
-	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2016 14:41:08 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id B010B52987; Fri,  4 Nov 2016 21:41:07 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20161104214107.B010B52987@arago-project.org>
-Date: Fri,  4 Nov 2016 21:41:07 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: pull in prueth-fw for k2g
+Received: from owa.energomera.ru (mx.energomera.ru [194.0.145.26])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E94C7E008BA
+	for <meta-ti@yoctoproject.org>; Sat,  5 Nov 2016 02:32:11 -0700 (PDT)
+Received: from S04-EX01.energomera.ru (10.6.0.50) by S01-EX03.energomera.ru
+	(10.2.0.46) with Microsoft SMTP Server (TLS) id 14.3.266.1;
+	Sat, 5 Nov 2016 12:32:08 +0300
+Received: from S04-EX01.energomera.ru ([::1]) by S04-EX01.energomera.ru
+	([::1]) with mapi id 14.03.0266.001; Sat, 5 Nov 2016 12:32:02 +0300
+From: =?utf-8?B?0KjQsNGA0LjRhdC40L0g0JTQvNC40YLRgNC40Lkg0KHQtdGA0LPQtdC10LI=?=
+	=?utf-8?B?0LjRhw==?= <SharihinDS@energomera.ru>
+To: "denys@ti.com" <denys@ti.com>
+Thread-Topic: [meta-ti] Unable to build ti-ccsv6-native and other packages
+Thread-Index: AQHSNn5WNmRmR4vUWEy7UBj0g890qqDJEoWAgADdH4A=
+Date: Sat, 5 Nov 2016 09:32:01 +0000
+Message-ID: <1478338321.1720.4.camel@energomera.ru>
+References: <1478251939.5248.11.camel@energomera.ru>
+	<20161104202035.GT12745@edge>
+In-Reply-To: <20161104202035.GT12745@edge>
+Accept-Language: ru-RU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.2.0.46]
+x-kse-attachmentfiltering-interceptor-info: protection disabled
+x-kse-serverinfo: S04-EX01.energomera.ru, 9
+x-kse-antivirus-interceptor-info: scan successful
+x-kse-antivirus-info: Clean, bases: 05.11.2016 3:48:00
+MIME-Version: 1.0
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-ServerInfo: S01-EX03.energomera.ru, 9
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean, bases: 05.11.2016 7:31:00
+X-KSE-Attachment-Filter-Scan-Result: Clean
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Unable to build ti-ccsv6-native and other packages
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +57,19 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2016 21:41:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 05 Nov 2016 09:32:17 -0000
+Content-Language: ru-RU
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <57202015FACE224F84220C4EEA329E33@energomera.ru>
+Content-Transfer-Encoding: base64
 
-Module: meta-ti
-Branch: master
-Commit: 540afce71ca47e786133a9defe8fbad6c1c755f6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=540afce71ca47e786133a9defe8fbad6c1c755f6
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Nov  3 02:19:44 2016 +0000
-
-linux-ti-staging: pull in prueth-fw for k2g
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/linux-ti-staging_4.4.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 2f67a01..ddc221d 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -46,6 +46,7 @@ RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
- RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
- RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
- RDEPENDS_kernel-base_append_am335x-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_k2g = " prueth-fw"
- 
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -83,7 +84,7 @@ SRCREV = "83973c23389df9755070a003b3a596beae056714"
- PV = "4.4.29+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
-
+T24g0J/RgiwgMjAxNi0xMS0wNCBhdCAxNjoyMCAtMDQwMCwgRGVueXMgRG15dHJpeWVua28gd3Jv
+dGU6DQo+ID4gRG9lcyBhbnlib2R5IGVuY291bnRlcmVkIHNhbWUgcHJvYmxlbT8gSG93IGNhbiBJ
+IGZpeCB0aGlzIGlzc3VlPw0KPiBDQ1MgcmVxdWlyZXMgbWFudWFsIGRvd25sb2FkIGR1ZSB0byBs
+aWNlbnNpbmcgLQ0KPiBpbnN0YWxsLnNvdXJjZS5kaXIubG9jYWwgaXMgYcKgDQo+IGZha2UgYWRk
+cmVzcyBhbmQgYSBwbGFjZWhvbGRlciB0byBmYWlsIGRvd25sb2FkIGF0dGVtcHRzIGlmIENDUw0K
+PiB0YXJiYWxsIHdhc8KgDQo+IG5vdCBhbHJlYWR5IHByb3ZpZGVkLg0KDQpUaGFua3MsIGJ1dCBo
+ZXJlJ3MgYW5vdGhlciBxdWVzdGlvbjogd2h5IGlwdW1tLWZ3IGRvIHJlcXVpcmUgQ0NTPyBJcw0K
+YnVpbGQgcHJvY2VzcyBmb3IgZmlybXdhcmUgc28gY29tcGxleCwgc28gZm9yIHNvbWUgbWVnYWJ5
+dGVzIG9mDQpmaXJtd2FyZSBJIHNob3VsZCBpbnN0YWxsIHRoZSB3aG9sZSBFY2xpcHNlPw==
 
