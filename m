@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 86E19E00997; Sun,  6 Nov 2016 15:19:14 -0800 (PST)
+	id C4E22E00A03; Sun,  6 Nov 2016 15:19:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E662AE00953
-	for <meta-ti@yoctoproject.org>; Sun,  6 Nov 2016 15:19:11 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8EA5E0098A
+	for <meta-ti@yoctoproject.org>; Sun,  6 Nov 2016 15:19:08 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8D5F652A76; Sun,  6 Nov 2016 23:19:10 +0000 (UTC)
+	id C517B52A2B; Sun,  6 Nov 2016 23:19:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161106231910.8D5F652A76@arago-project.org>
-Date: Sun,  6 Nov 2016 23:19:10 +0000 (UTC)
+Message-Id: <20161106231907.C517B52A2B@arago-project.org>
+Date: Sun,  6 Nov 2016 23:19:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.05-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Nov 2016 23:19:14 -0000
+X-List-Received-Date: Sun, 06 Nov 2016 23:19:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 4a155d5395c45d129e25457507cf5f42944a13a6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4a155d5395c45d129e25457507cf5f42944a13a6
+Branch: master
+Commit: c75feb998544bb07cd3956249df72e76b7c5ebd2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c75feb998544bb07cd3956249df72e76b7c5ebd2
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Nov  7 05:12:15 2016 +0000
@@ -54,7 +54,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 2f961f8..5b02c99 100644
+index a6f3f65..2eeb26d 100644
 --- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
 +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
 @@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
