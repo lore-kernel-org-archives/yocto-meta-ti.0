@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 428B7E0083E; Sun,  6 Nov 2016 18:19:34 -0800 (PST)
+	id 570F7E00503; Mon,  7 Nov 2016 16:09:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC78CE00752
-	for <meta-ti@yoctoproject.org>; Sun,  6 Nov 2016 18:19:32 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 621A1E00498
+	for <meta-ti@yoctoproject.org>; Mon,  7 Nov 2016 16:09:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1415B529B6; Mon,  7 Nov 2016 02:19:31 +0000 (UTC)
+	id AE5255298D; Tue,  8 Nov 2016 00:09:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161107021931.1415B529B6@arago-project.org>
-Date: Mon,  7 Nov 2016 02:19:31 +0000 (UTC)
+Message-Id: <20161108000909.AE5255298D@arago-project.org>
+Date: Tue,  8 Nov 2016 00:09:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: correct SRCREV for RT
+Subject: Tag ti2016.05-rc3 : Denys Dmytriyenko : LCPD Core SDK ti2016.05-rc3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,37 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2016 02:19:34 -0000
+X-List-Received-Date: Tue, 08 Nov 2016 00:09:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 19e05d7cac5dee15527f22ef1a728e8d78422688
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=19e05d7cac5dee15527f22ef1a728e8d78422688
+Branch: refs/tags/ti2016.05-rc3
+Tag:    417f4cc2e600407a21639d727ee5f2b3d798f790
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=417f4cc2e600407a21639d727ee5f2b3d798f790
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Nov  7 08:15:00 2016 +0000
+Tagger: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Nov  7 19:08:58 2016 -0500
 
-linux-ti-staging: correct SRCREV for RT
-
-Was mistakingly copied from non-RT.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 1ce66c0..33c15a9 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
- 
- BRANCH = "ti-rt-linux-4.4.y"
- 
--SRCREV = "372c734ee1c752372c0a69279bd73bda5a908066"
-+SRCREV = "f78a6f41de4e9319739b184307b242ee96602762"
-
+LCPD Core SDK ti2016.05-rc3
 
