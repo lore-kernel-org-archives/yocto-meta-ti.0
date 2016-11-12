@@ -1,39 +1,37 @@
-Return-Path: <anandb@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 13874E00BB0; Wed,  9 Nov 2016 00:40:07 -0800 (PST)
+	id CA521E0079D; Sat, 12 Nov 2016 06:51:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F0D1E009A4
-	for <meta-ti@yoctoproject.org>; Wed,  9 Nov 2016 00:40:04 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id uA98e43J018554
-	for <meta-ti@yoctoproject.org>; Wed, 9 Nov 2016 02:40:04 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uA98e3gB011856
-	for <meta-ti@yoctoproject.org>; Wed, 9 Nov 2016 02:40:04 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 9 Nov 2016 02:40:02 -0600
-Received: from tigfx.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id uA98e1P5008170;
-	Wed, 9 Nov 2016 02:40:02 -0600
-From: Anand Balagopalakrishnan <anandb@ti.com>
+X-Greylist: delayed 319 seconds by postgrey-1.32 at yocto-www;
+	Sat, 12 Nov 2016 06:51:37 PST
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85290E0079D
+	for <meta-ti@yoctoproject.org>; Sat, 12 Nov 2016 06:51:37 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id uACEkHcq013612
+	for <meta-ti@yoctoproject.org>; Sat, 12 Nov 2016 08:46:17 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uACEkHVt028329
+	for <meta-ti@yoctoproject.org>; Sat, 12 Nov 2016 08:46:17 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Sat, 12 Nov 2016 08:46:17 -0600
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	uACEkHIX018617;	Sat, 12 Nov 2016 08:46:17 -0600
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 9 Nov 2016 14:09:58 +0530
-Message-ID: <1478680798-10114-1-git-send-email-anandb@ti.com>
+Date: Sat, 12 Nov 2016 09:46:11 -0500
+Message-ID: <1478961971-54163-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH 1/1] ti-sgx-ddk-km: disable parallel builds for SGX driver
+Subject: [PATCH] mpm-transport: Update commit id with fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,30 +44,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2016 08:40:07 -0000
+X-List-Received-Date: Sat, 12 Nov 2016 14:51:40 -0000
 Content-Type: text/plain
 
-Random build failures are reported on SGX driver when building for
-different targets. Disable parallel compilation in SGX driver.
+Update and fixes to handle different type of memory sections in sysfs
+entry or device tree.
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-ti/mpm-transport/mpm-transport_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index 7007c20..597fb2f 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -31,6 +31,8 @@ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
- TARGET_PRODUCT_ti43x = "ti437x"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 51b5e9e..ee28f2f 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -15,11 +15,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
  
-+PARALLEL_MAKE = ""
-+
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
+ BRANCH = "master"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00
+-SRCREV = "696a9ec37559b671860ef393194c6032b7b6d9ef"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00A
++SRCREV = "7284e75d36b265ef8535d2e2ee54d1f2c700e862"
  
- do_compile_prepend() {
+ PV = "2.0.2.0"
+-PR = "r0"
++PR = "r1"
+ 
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
 -- 
 1.9.1
 
