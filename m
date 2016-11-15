@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9DBA3E00C20; Tue, 15 Nov 2016 11:32:51 -0800 (PST)
+	id A17D5E00C46; Tue, 15 Nov 2016 11:32:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26EB4E00C31
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25B37E00C20
 	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2016 11:32:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1913452AAE; Tue, 15 Nov 2016 19:32:46 +0000 (UTC)
+	id F12CD52AAD; Tue, 15 Nov 2016 19:32:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161115193246.1913452AAE@arago-project.org>
-Date: Tue, 15 Nov 2016 19:32:46 +0000 (UTC)
+Message-Id: <20161115193245.F12CD52AAD@arago-project.org>
+Date: Tue, 15 Nov 2016 19:32:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : cmem: add special handling for dra72x variant
+Subject: Denys Dmytriyenko : ti-ipc: update to include -pthread fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,84 +38,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 108f5ee0ec9cd8336195f51632ee604ce0ba7307
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=108f5ee0ec9cd8336195f51632ee604ce0ba7307
+Commit: c5162b67b26bc46b3fc6e773f3afa70d7aee7a53
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5162b67b26bc46b3fc6e773f3afa70d7aee7a53
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Nov 15 04:13:04 2016 +0000
+Date:   Tue Nov 15 03:55:21 2016 +0000
 
-cmem: add special handling for dra72x variant
+ti-ipc: update to include -pthread fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/cmem.inc                      |    7 ++++-
- recipes-kernel/linux/files/dra7xx/cmem-dra72x.dtsi |   29 ++++++++++++++++++++
- 2 files changed, 35 insertions(+), 1 deletions(-)
+ recipes-ti/ipc/ti-ipc.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index b60909c..d4edc60 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -4,17 +4,22 @@
- CMEM_MACHINE = "${MACHINE}"
- CMEM_MACHINE_am57xx-evm = "am571x am572x"
- CMEM_MACHINE_am57xx-hs-evm = "am571x am572x"
-+CMEM_MACHINE_dra7xx-evm = "dra72x dra74x"
-+CMEM_MACHINE_dra7xx-hs-evm = "dra72x dra74x"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 869dada..488e0fc 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -9,7 +9,7 @@ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "ipc-next"
  
- # Set cmem.dtsi per machine or machine variant
- CMEM_DTSI = "cmem.dtsi"
- CMEM_DTSI_am571x = "cmem-am571x.dtsi"
-+CMEM_DTSI_dra72x = "cmem-dra72x.dtsi"
+ #Corresponds to 3.44.00.00
+-TI_IPC_SRCREV = "e6f64d4b04f1c929366c922a2e5a4728fbb4d919"
++TI_IPC_SRCREV = "a1852fc8b254ed207bd1c1c88f5b362c9b6cc454"
  
- # Split device trees between variants
- CMEM_DEVICETREE = "${KERNEL_DEVICETREE}"
- CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb"
- CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am572x-idk.dtb \
-                           am572x-idk-lcd-osd.dtb am572x-idk-lcd-osd101t2587.dtb"
--
-+CMEM_DEVICETREE_dra72x = "dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb \
-+                          dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb"
-+CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra7-evm-lcd-osd101t2587.dtb"
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+@@ -17,7 +17,7 @@ SRCREV = "${TI_IPC_SRCREV}"
  
- # Flag to enable CMEM injection
- RESERVE_CMEM ?= "0"
-diff --git a/recipes-kernel/linux/files/dra7xx/cmem-dra72x.dtsi b/recipes-kernel/linux/files/dra7xx/cmem-dra72x.dtsi
-new file mode 100644
-index 0000000..ebd6129
---- /dev/null
-+++ b/recipes-kernel/linux/files/dra7xx/cmem-dra72x.dtsi
-@@ -0,0 +1,29 @@
-+/ {
-+        reserved-memory {
-+                #address-cells = <2>;
-+                #size-cells = <2>;
-+                ranges;
-+
-+                cmem_block_mem_0: cmem_block_mem@a0000000 {
-+                        reg = <0x0 0xa0000000 0x0 0x0c000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
-+
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+                status = "okay";
-+
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x0 0x0c000000>;
-+                };
-+        };
-+};
+ S = "${WORKDIR}/git"
+ PV = "3.44.00.00"
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
 
 
