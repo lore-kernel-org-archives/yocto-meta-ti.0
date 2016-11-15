@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 72E79E00C3E; Tue, 15 Nov 2016 11:32:49 -0800 (PST)
+	id 9DBA3E00C20; Tue, 15 Nov 2016 11:32:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 245EDE00C1A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26EB4E00C31
 	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2016 11:32:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A9C4C52AAC; Tue, 15 Nov 2016 19:32:45 +0000 (UTC)
+	id 1913452AAE; Tue, 15 Nov 2016 19:32:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161115193245.A9C4C52AAC@arago-project.org>
-Date: Tue, 15 Nov 2016 19:32:45 +0000 (UTC)
+Message-Id: <20161115193246.1913452AAE@arago-project.org>
+Date: Tue, 15 Nov 2016 19:32:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : cmem: add special handling for dra72x variant
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2016 19:32:49 -0000
+X-List-Received-Date: Tue, 15 Nov 2016 19:32:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: b2187f74dae9da6a77c4261270cf16b28981c7d2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b2187f74dae9da6a77c4261270cf16b28981c7d2
+Branch: master
+Commit: 108f5ee0ec9cd8336195f51632ee604ce0ba7307
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=108f5ee0ec9cd8336195f51632ee604ce0ba7307
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Nov 15 04:13:04 2016 +0000
