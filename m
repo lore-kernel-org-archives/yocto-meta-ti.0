@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 962E1E00C4F; Wed, 16 Nov 2016 11:40:27 -0800 (PST)
+	id 97A68E00712; Wed, 16 Nov 2016 11:40:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -13,12 +13,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36882E00712
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37C03E00C2E
 	for <meta-ti@yoctoproject.org>; Wed, 16 Nov 2016 11:40:25 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7A4E752A4B; Wed, 16 Nov 2016 19:40:22 +0000 (UTC)
+	id A60B352A50; Wed, 16 Nov 2016 19:40:22 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161116194022.7A4E752A4B@arago-project.org>
+Message-Id: <20161116194022.A60B352A50@arago-project.org>
 Date: Wed, 16 Nov 2016 19:40:22 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : linux: k2g: use k2g-evm files for all k2g SOCs
@@ -38,9 +38,9 @@ X-List-Received-Date: Wed, 16 Nov 2016 19:40:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 6cf0211e8a72e076d1409ae52e43e6be497db475
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6cf0211e8a72e076d1409ae52e43e6be497db475
+Branch: master
+Commit: af2cbf00fcd2055db468a93961c1e49c80d0600b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af2cbf00fcd2055db468a93961c1e49c80d0600b
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed Nov 16 09:01:22 2016 -0500
