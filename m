@@ -1,28 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C518E00C9B; Wed, 16 Nov 2016 11:34:14 -0800 (PST)
+	id 962E1E00C4F; Wed, 16 Nov 2016 11:40:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B830BE00C8F
-	for <meta-ti@yoctoproject.org>; Wed, 16 Nov 2016 11:34:07 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36882E00712
+	for <meta-ti@yoctoproject.org>; Wed, 16 Nov 2016 11:40:25 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A640952AC6; Wed, 16 Nov 2016 19:34:05 +0000 (UTC)
+	id 7A4E752A4B; Wed, 16 Nov 2016 19:40:22 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161116193405.A640952AC6@arago-project.org>
-Date: Wed, 16 Nov 2016 19:34:05 +0000 (UTC)
+Message-Id: <20161116194022.7A4E752A4B@arago-project.org>
+Date: Wed, 16 Nov 2016 19:40:22 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: disable parallel builds for SGX driver
+Subject: Jacob Stiffler : linux: k2g: use k2g-evm files for all k2g SOCs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,43 +34,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2016 19:34:14 -0000
+X-List-Received-Date: Wed, 16 Nov 2016 19:40:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 727b26f762f489afbc7f922f9faca57385b04462
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=727b26f762f489afbc7f922f9faca57385b04462
+Commit: 6cf0211e8a72e076d1409ae52e43e6be497db475
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6cf0211e8a72e076d1409ae52e43e6be497db475
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Wed Nov  9 14:39:58 2016 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Wed Nov 16 09:01:22 2016 -0500
 
-ti-sgx-ddk-km: disable parallel builds for SGX driver
+linux: k2g: use k2g-evm files for all k2g SOCs
 
-Random build failures are reported on SGX driver when building for
-
-different targets. Disable parallel compilation in SGX driver.
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ .../linux/files/{k2g-evm => k2g}/cmem.dtsi         |    0
+ .../{k2g-evm => k2g}/defconfig                     |    0
+ .../{k2g-evm => k2g}/defconfig                     |    0
+ .../{k2g-evm => k2g}/defconfig                     |    0
+ 4 files changed, 0 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index d0e9206..0e9592e 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -31,6 +31,8 @@ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
- TARGET_PRODUCT_ti43x = "ti437x"
- 
-+PARALLEL_MAKE = ""
-+
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
- 
- do_compile_prepend() {
+diff --git a/recipes-kernel/linux/files/k2g-evm/cmem.dtsi b/recipes-kernel/linux/files/k2g/cmem.dtsi
+similarity index 100%
+rename from recipes-kernel/linux/files/k2g-evm/cmem.dtsi
+rename to recipes-kernel/linux/files/k2g/cmem.dtsi
+diff --git a/recipes-kernel/linux/linux-ti-staging-4.4/k2g-evm/defconfig b/recipes-kernel/linux/linux-ti-staging-4.4/k2g/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-ti-staging-4.4/k2g-evm/defconfig
+rename to recipes-kernel/linux/linux-ti-staging-4.4/k2g/defconfig
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.4/k2g-evm/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.4/k2g/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-ti-staging-rt-4.4/k2g-evm/defconfig
+rename to recipes-kernel/linux/linux-ti-staging-rt-4.4/k2g/defconfig
+diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.4/k2g-evm/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.4/k2g/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-ti-staging-systest-4.4/k2g-evm/defconfig
+rename to recipes-kernel/linux/linux-ti-staging-systest-4.4/k2g/defconfig
 
 
