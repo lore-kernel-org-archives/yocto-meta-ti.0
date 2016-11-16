@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E67C7E00C2E; Wed, 16 Nov 2016 11:34:12 -0800 (PST)
+	id E79D1E00C3E; Wed, 16 Nov 2016 11:34:12 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5574E00C2E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B6AA6E00C3E
 	for <meta-ti@yoctoproject.org>; Wed, 16 Nov 2016 11:34:07 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7E06852ACB; Wed, 16 Nov 2016 19:34:06 +0000 (UTC)
+	id A172B52ACD; Wed, 16 Nov 2016 19:34:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161116193406.7E06852ACB@arago-project.org>
+Message-Id: <20161116193406.A172B52ACD@arago-project.org>
 Date: Wed, 16 Nov 2016 19:34:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: disable parallel builds for SGX driver
+Subject: Denys Dmytriyenko : am335x-evm, am437x-evm: increase leb count for ubi
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,38 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: e1b686cc0158cf5855dd846884eb4d47251a4267
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e1b686cc0158cf5855dd846884eb4d47251a4267
+Commit: 47178cf77a0657dedd690ac3c305d4d097ead4b6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=47178cf77a0657dedd690ac3c305d4d097ead4b6
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Wed Nov  9 14:39:58 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Nov 17 00:56:24 2016 +0000
 
-ti-sgx-ddk-km: disable parallel builds for SGX driver
+am335x-evm, am437x-evm: increase leb count for ubi
 
-Random build failures are reported on SGX driver when building for
-
-different targets. Disable parallel compilation in SGX driver.
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ conf/machine/am335x-evm.conf |    2 +-
+ conf/machine/am437x-evm.conf |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index d0e9206..0e9592e 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -31,6 +31,8 @@ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
- TARGET_PRODUCT_ti43x = "ti437x"
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index ab227b0..9a476c4 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5100"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5250"
  
-+PARALLEL_MAKE = ""
-+
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 1561602..7883616 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2400"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2450"
  
- do_compile_prepend() {
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
 
 
