@@ -1,40 +1,26 @@
-Return-Path: <jreeder@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 27F37E0093B; Tue, 15 Nov 2016 17:44:21 -0800 (PST)
+	id 7C0E6E00997; Tue, 15 Nov 2016 19:34:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 11220 seconds by postgrey-1.32 at yocto-www;
-	Tue, 15 Nov 2016 17:44:17 PST
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD244E0081E
-	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2016 17:44:17 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id uAFMbF3a025123
-	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2016 16:37:15 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uAFMbFtb017526
-	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2016 16:37:15 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 15 Nov 2016 16:37:14 -0600
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	uAFMbFxQ006094;	Tue, 15 Nov 2016 16:37:15 -0600
-Received: from localhost (uda0273976.am.dhcp.ti.com [10.219.21.82])	by
-	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	uAFMbE323843; Tue, 15 Nov 2016 16:37:15 -0600 (CST)
-From: Jason Reeder <jreeder@ti.com>
-To: meta-ti <meta-ti@yoctoproject.org>
-Date: Tue, 15 Nov 2016 16:36:28 -0600
-Message-ID: <1479249388-18158-1-git-send-email-jreeder@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] pru-icss: bump SRCREV and PV due to updates
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E78EE00A30
+	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2016 19:34:53 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 4213C52AB0; Wed, 16 Nov 2016 03:34:52 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20161116033452.4213C52AB0@arago-project.org>
+Date: Wed, 16 Nov 2016 03:34:52 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jason Reeder : pru-icss: bump SRCREV and PV due to updates
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,17 +33,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2016 01:44:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 16 Nov 2016 03:34:58 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: krogoth
+Commit: b5ae2a16ca15646c8c81554235332767d6214980
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b5ae2a16ca15646c8c81554235332767d6214980
+
+Author: Jason Reeder <jreeder@ti.com>
+Date:   Wed Nov 16 04:36:28 2016 +0000
+
+pru-icss: bump SRCREV and PV due to updates
 
 Due to bug fixes and updates, the package version number
 is being incremented to 5.1.0. The commit ID is also being
 updated to reflect these changes.
 
 Signed-off-by: Jason Reeder <jreeder@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/pru/pru-icss_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+
+ recipes-bsp/pru/pru-icss_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
 index 1fbfd12..c8c472e 100644
@@ -75,7 +74,5 @@ index 1fbfd12..c8c472e 100644
  PR = "r1"
  
  require recipes-ti/includes/ti-paths.inc
--- 
-1.9.1
 
 
