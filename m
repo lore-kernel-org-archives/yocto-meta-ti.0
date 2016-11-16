@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7C0E6E00997; Tue, 15 Nov 2016 19:34:58 -0800 (PST)
+	id 7AFF0E00B71; Tue, 15 Nov 2016 19:34:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E78EE00A30
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D4C9E00997
 	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2016 19:34:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4213C52AB0; Wed, 16 Nov 2016 03:34:52 +0000 (UTC)
+	id AC45852AC6; Wed, 16 Nov 2016 03:34:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161116033452.4213C52AB0@arago-project.org>
+Message-Id: <20161116033452.AC45852AC6@arago-project.org>
 Date: Wed, 16 Nov 2016 03:34:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jason Reeder : pru-icss: bump SRCREV and PV due to updates
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 16 Nov 2016 03:34:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: b5ae2a16ca15646c8c81554235332767d6214980
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b5ae2a16ca15646c8c81554235332767d6214980
+Branch: master
+Commit: 4f1c3bf31ff106f36ddf7f8a1c8e9a059362e93c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f1c3bf31ff106f36ddf7f8a1c8e9a059362e93c
 
 Author: Jason Reeder <jreeder@ti.com>
 Date:   Wed Nov 16 04:36:28 2016 +0000
