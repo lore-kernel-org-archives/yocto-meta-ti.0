@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8DBAFE0070F; Fri, 18 Nov 2016 08:26:46 -0800 (PST)
+	id 650A1E0093B; Fri, 18 Nov 2016 08:32:44 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E00B5E004E5
-	for <meta-ti@yoctoproject.org>; Fri, 18 Nov 2016 08:26:44 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4134BE0074B
+	for <meta-ti@yoctoproject.org>; Fri, 18 Nov 2016 08:31:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7F29952AD2; Fri, 18 Nov 2016 16:26:43 +0000 (UTC)
+	id B359152AD3; Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161118162643.7F29952AD2@arago-project.org>
-Date: Fri, 18 Nov 2016 16:26:43 +0000 (UTC)
+Message-Id: <20161118163146.B359152AD3@arago-project.org>
+Date: Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Tag ti2016.05-rc4 : Denys Dmytriyenko : LCPD Core SDK ti2016.05-rc4
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016. 05-rc5 tag to fix am5 mmc issues
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,16 +33,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 16:26:46 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 16:32:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: refs/tags/ti2016.05-rc4
-Tag:    34eec4a96c3d7e8fd68b6659a327561ceab3c75d
-URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=34eec4a96c3d7e8fd68b6659a327561ceab3c75d
+Branch: krogoth
+Commit: d8aa76970a0ba48762c631dfd79dbed49222373b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d8aa76970a0ba48762c631dfd79dbed49222373b
 
-Tagger: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Nov 18 11:26:29 2016 -0500
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Nov 18 11:30:33 2016 -0500
 
-LCPD Core SDK ti2016.05-rc4
+u-boot-ti-staging: update to ti2016.05-rc5 tag to fix am5 mmc issues
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index ed10807..99fa37c 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ 
+-PR = "r25"
++PR = "r26"
+ PV_append = "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2016.05"
+ 
+-SRCREV = "96d42df4e7cb700bde4bdf5106cfd2753749c4e7"
++SRCREV = "6c5519b6fc09274d28d653a9a3cabf7dc74883ca"
+ 
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
+
 
