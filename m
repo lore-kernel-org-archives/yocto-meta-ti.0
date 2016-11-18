@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 650A1E0093B; Fri, 18 Nov 2016 08:32:44 -0800 (PST)
+	id 99F1DE00A21; Fri, 18 Nov 2016 08:32:45 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4134BE0074B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA2E6E009CE
 	for <meta-ti@yoctoproject.org>; Fri, 18 Nov 2016 08:31:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B359152AD3; Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
+	id E85C752AD5; Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161118163146.B359152AD3@arago-project.org>
+Message-Id: <20161118163146.E85C752AD5@arago-project.org>
 Date: Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016. 05-rc5 tag to fix am5 mmc issues
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 16:32:44 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 16:32:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: d8aa76970a0ba48762c631dfd79dbed49222373b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d8aa76970a0ba48762c631dfd79dbed49222373b
+Branch: master
+Commit: d229e1cd79594bf6971350f4beea1ced482065ab
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d229e1cd79594bf6971350f4beea1ced482065ab
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Nov 18 11:30:33 2016 -0500
@@ -54,7 +54,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index ed10807..99fa37c 100644
+index ac62b8a..00d5df0 100644
 --- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
 +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
 @@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
