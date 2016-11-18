@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 99F1DE00A21; Fri, 18 Nov 2016 08:32:45 -0800 (PST)
+	id C8917E009CE; Fri, 18 Nov 2016 08:32:46 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA2E6E009CE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A95F4E00955
 	for <meta-ti@yoctoproject.org>; Fri, 18 Nov 2016 08:31:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E85C752AD5; Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
+	id 95A0A52AD2; Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161118163146.E85C752AD5@arago-project.org>
+Message-Id: <20161118163146.95A0A52AD2@arago-project.org>
 Date: Fri, 18 Nov 2016 16:31:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016. 05-rc5 tag to fix am5 mmc issues
+Subject: Denys Dmytriyenko : linux/cmem: patch keystone dtsi files to co-exist with new sram driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +33,125 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 16:32:45 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 16:32:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: d229e1cd79594bf6971350f4beea1ced482065ab
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d229e1cd79594bf6971350f4beea1ced482065ab
+Branch: krogoth
+Commit: 0e87d6fbf9f9369fe9f43969c8c37b9105f3af5e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0e87d6fbf9f9369fe9f43969c8c37b9105f3af5e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Nov 18 11:30:33 2016 -0500
+Date:   Fri Nov 18 03:08:02 2016 +0000
 
-u-boot-ti-staging: update to ti2016.05-rc5 tag to fix am5 mmc issues
+linux/cmem: patch keystone dtsi files to co-exist with new sram driver
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/cmem.inc                      |    3 +
+ ...stone-Remove-reg-entry-from-the-sram-node.patch |   79 ++++++++++++++++++++
+ 2 files changed, 82 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index ac62b8a..00d5df0 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
+index d4edc60..649b59d 100644
+--- a/recipes-kernel/linux/cmem.inc
++++ b/recipes-kernel/linux/cmem.inc
+@@ -24,6 +24,9 @@ CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb
+ # Flag to enable CMEM injection
+ RESERVE_CMEM ?= "0"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
- 
--PR = "r25"
-+PR = "r26"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "96d42df4e7cb700bde4bdf5106cfd2753749c4e7"
-+SRCREV = "6c5519b6fc09274d28d653a9a3cabf7dc74883ca"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
++# Need to patch main keystone dtsi files sram entry
++SRC_URI_append_keystone = "${@base_conditional("RESERVE_CMEM", "1", " file://0001-ARM-dts-keystone-Remove-reg-entry-from-the-sram-node.patch", "", d)}"
++
+ # Add correct cmem.dtsi to SRC_URI for each variant for a given machine
+ python() {
+     old_overrides = d.getVar('OVERRIDES', False)
+diff --git a/recipes-kernel/linux/files/0001-ARM-dts-keystone-Remove-reg-entry-from-the-sram-node.patch b/recipes-kernel/linux/files/0001-ARM-dts-keystone-Remove-reg-entry-from-the-sram-node.patch
+new file mode 100644
+index 0000000..1813986
+--- /dev/null
++++ b/recipes-kernel/linux/files/0001-ARM-dts-keystone-Remove-reg-entry-from-the-sram-node.patch
+@@ -0,0 +1,79 @@
++From c7e576590e45f9fb86a9d74fa66b4fd4f8eca803 Mon Sep 17 00:00:00 2001
++From: Sam Nelson <sam.nelson@ti.com>
++Date: Fri, 11 Nov 2016 10:32:48 -0500
++Subject: [PATCH] ARM: dts: keystone: Remove reg entry from the sram node
++
++Currently the reg entry reserves the whole MSMC ram range to be used
++only through the mmio-sram driver. (See LCPD-7801)
++
++Given that other modules (like CMEM) also currently reserve memory from
++MSMC, the reg entry which takes over the whole memory breaks those
++functionality. So currently recommending to remove this for now.
++Still the ranges entry will capture the total memory available.
++
++This will allow module like CMEM to reserve and use a non-overlapping
++section of memory not marked reserved by the sub nodes here.
++
++Resolves current issue with CMEM module reporting error allocating MSMC
++memory.
++
++Signed-off-by: Sam Nelson <sam.nelson@ti.com>
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++---
++ arch/arm/boot/dts/keystone-k2e.dtsi  | 1 -
++ arch/arm/boot/dts/keystone-k2g.dtsi  | 1 -
++ arch/arm/boot/dts/keystone-k2hk.dtsi | 1 -
++ arch/arm/boot/dts/keystone-k2l.dtsi  | 1 -
++ 4 files changed, 4 deletions(-)
++
++diff --git a/arch/arm/boot/dts/keystone-k2e.dtsi b/arch/arm/boot/dts/keystone-k2e.dtsi
++index 553c423..5b9252a 100644
++--- a/arch/arm/boot/dts/keystone-k2e.dtsi
+++++ b/arch/arm/boot/dts/keystone-k2e.dtsi
++@@ -98,7 +98,6 @@
++ 
++ 		msm_ram: msmram@0c000000 {
++ 			compatible = "mmio-sram";
++-			reg = <0x0c000000 0x200000>;
++ 			ranges = <0x0 0x0c000000 0x200000>;
++ 			#address-cells = <1>;
++ 			#size-cells = <1>;
++diff --git a/arch/arm/boot/dts/keystone-k2g.dtsi b/arch/arm/boot/dts/keystone-k2g.dtsi
++index 45faf40..e953d82 100644
++--- a/arch/arm/boot/dts/keystone-k2g.dtsi
+++++ b/arch/arm/boot/dts/keystone-k2g.dtsi
++@@ -99,7 +99,6 @@
++ 
++ 		msm_ram: msmram@0c000000 {
++ 			compatible = "mmio-sram";
++-			reg = <0x0c000000 0x100000>;
++ 			ranges = <0x0 0x0c000000 0x100000>;
++ 			#address-cells = <1>;
++ 			#size-cells = <1>;
++diff --git a/arch/arm/boot/dts/keystone-k2hk.dtsi b/arch/arm/boot/dts/keystone-k2hk.dtsi
++index edca6aa..f3f1932 100644
++--- a/arch/arm/boot/dts/keystone-k2hk.dtsi
+++++ b/arch/arm/boot/dts/keystone-k2hk.dtsi
++@@ -111,7 +111,6 @@
++ 
++ 		msm_ram: msmram@0c000000 {
++ 			compatible = "mmio-sram";
++-			reg = <0x0c000000 0x600000>;
++ 			ranges = <0x0 0x0c000000 0x600000>;
++ 			#address-cells = <1>;
++ 			#size-cells = <1>;
++diff --git a/arch/arm/boot/dts/keystone-k2l.dtsi b/arch/arm/boot/dts/keystone-k2l.dtsi
++index 76caff6..4ee7439 100644
++--- a/arch/arm/boot/dts/keystone-k2l.dtsi
+++++ b/arch/arm/boot/dts/keystone-k2l.dtsi
++@@ -284,7 +284,6 @@
++ 
++ 		msm_ram: msmram@0c000000 {
++ 			compatible = "mmio-sram";
++-			reg = <0x0c000000 0x200000>;
++ 			ranges = <0x0 0x0c000000 0x200000>;
++ 			#address-cells = <1>;
++ 			#size-cells = <1>;
++-- 
++2.7.4
++
 
 
