@@ -1,6 +1,6 @@
 Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6326CE009BF; Mon, 21 Nov 2016 06:35:24 -0800 (PST)
+	id 7C6AAE009F0; Mon, 21 Nov 2016 06:46:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,27 +10,25 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 282 seconds by postgrey-1.32 at yocto-www;
-	Mon, 21 Nov 2016 06:35:20 PST
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 182D4E009A5
-	for <meta-ti@yoctoproject.org>; Mon, 21 Nov 2016 06:35:20 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id uALEZKZL014631
-	for <meta-ti@yoctoproject.org>; Mon, 21 Nov 2016 08:35:20 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33201E009A5
+	for <meta-ti@yoctoproject.org>; Mon, 21 Nov 2016 06:46:31 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id uALEUc0j014209
+	for <meta-ti@yoctoproject.org>; Mon, 21 Nov 2016 08:30:38 -0600
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uALEZKKR016520
-	for <meta-ti@yoctoproject.org>; Mon, 21 Nov 2016 08:35:20 -0600
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uALEUcLQ022824
+	for <meta-ti@yoctoproject.org>; Mon, 21 Nov 2016 08:30:38 -0600
 Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 21 Nov 2016 08:35:19 -0600
+	Mon, 21 Nov 2016 08:30:37 -0600
 Received: from tigfx.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uALEZIxb031519;
-	Mon, 21 Nov 2016 08:35:19 -0600
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uALEUaof027128;
+	Mon, 21 Nov 2016 08:30:37 -0600
 From: Anand Balagopalakrishnan <anandb@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 21 Nov 2016 20:05:09 +0530
-Message-ID: <1479738909-1707-1-git-send-email-anandb@ti.com>
+Date: Mon, 21 Nov 2016 20:00:30 +0530
+Message-ID: <1479738630-1655-1-git-send-email-anandb@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 Subject: [PATCH 1/1] ti-sgx-ddk-um: add apphint to control number of GBM WSEGL surface buffers
@@ -46,7 +44,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2016 14:35:24 -0000
+X-List-Received-Date: Mon, 21 Nov 2016 14:46:35 -0000
 Content-Type: text/plain
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
