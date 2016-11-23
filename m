@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 15F84E00CCA; Wed, 23 Nov 2016 10:08:36 -0800 (PST)
+	id 73588E00CD2; Wed, 23 Nov 2016 10:08:37 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D20C1E00CAF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D20F1E00CC9
 	for <meta-ti@yoctoproject.org>; Wed, 23 Nov 2016 10:08:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C5E3D52AD0; Wed, 23 Nov 2016 18:08:32 +0000 (UTC)
+	id EFD0A52AD4; Wed, 23 Nov 2016 18:08:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161123180832.C5E3D52AD0@arago-project.org>
+Message-Id: <20161123180832.EFD0A52AD4@arago-project.org>
 Date: Wed, 23 Nov 2016 18:08:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : dsptop: fix build with any toolchain by passing correct CC var
+Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: add apphint to control number of GBM WSEGL surface buffers
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,47 +35,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2016 18:08:36 -0000
+X-List-Received-Date: Wed, 23 Nov 2016 18:08:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ab0505ceb0e983b21ac9a254176c657177cacb36
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ab0505ceb0e983b21ac9a254176c657177cacb36
+Commit: f2ce07dc7ac38dfe3c079c1317303b083ba44334
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f2ce07dc7ac38dfe3c079c1317303b083ba44334
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Nov 19 03:51:23 2016 +0000
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Mon Nov 21 20:30:30 2016 +0000
 
-dsptop: fix build with any toolchain by passing correct CC var
+ti-sgx-ddk-um: add apphint to control number of GBM WSEGL surface buffers
 
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/dsptop_git.bb |    4 ++--
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/dsptop_git.bb b/recipes-bsp/dsptop/dsptop_git.bb
-index 121dc9b..70f9166 100644
---- a/recipes-bsp/dsptop/dsptop_git.bb
-+++ b/recipes-bsp/dsptop/dsptop_git.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 15c9232..770cda2 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- DEPENDS = "libulm ncurses"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "fccafce7d0a023e36c064ccbaa7d33e89252ea00"
++SRCREV = "a5152f0b90bf3916eb1f478ac9fefe7d7ebe8bd9"
  
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- S = "${WORKDIR}/git/dsptop"
+ inherit update-rc.d
  
-@@ -12,7 +12,7 @@ DEVICE = ""
- DEVICE_dra7xx = "DRA7xx"
- DEVICE_keystone = "C66AK2Hxx"
+-PR = "r16"
++PR = "r17"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
--EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
-+EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}""
- 
- do_install() {
-     oe_runmake install DESTDIR=${D}
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
