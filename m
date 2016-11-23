@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 138B3E00CCC; Wed, 23 Nov 2016 10:08:36 -0800 (PST)
+	id 15F84E00CCA; Wed, 23 Nov 2016 10:08:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ADC09E00CAE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D20C1E00CAF
 	for <meta-ti@yoctoproject.org>; Wed, 23 Nov 2016 10:08:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DBD2152AD2; Wed, 23 Nov 2016 18:08:32 +0000 (UTC)
+	id C5E3D52AD0; Wed, 23 Nov 2016 18:08:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161123180832.DBD2152AD2@arago-project.org>
+Message-Id: <20161123180832.C5E3D52AD0@arago-project.org>
 Date: Wed, 23 Nov 2016 18:08:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : rwmem: fix build with any toolchain and use default CC var
+Subject: Denys Dmytriyenko : dsptop: fix build with any toolchain by passing correct CC var
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,33 +38,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b5524234769e8f3b24ce82f0843db82680eaedf9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b5524234769e8f3b24ce82f0843db82680eaedf9
+Commit: ab0505ceb0e983b21ac9a254176c657177cacb36
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ab0505ceb0e983b21ac9a254176c657177cacb36
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Nov 19 03:51:24 2016 +0000
+Date:   Sat Nov 19 03:51:23 2016 +0000
 
-rwmem: fix build with any toolchain and use default CC var
+dsptop: fix build with any toolchain by passing correct CC var
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/rwmem/rwmem_1.1.bb |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
+ recipes-bsp/dsptop/dsptop_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/rwmem/rwmem_1.1.bb b/recipes-bsp/rwmem/rwmem_1.1.bb
-index 1825e18..2848e1c 100644
---- a/recipes-bsp/rwmem/rwmem_1.1.bb
-+++ b/recipes-bsp/rwmem/rwmem_1.1.bb
-@@ -7,8 +7,6 @@ SRC_URI = "git://github.com/tomba/rwmem.git"
+diff --git a/recipes-bsp/dsptop/dsptop_git.bb b/recipes-bsp/dsptop/dsptop_git.bb
+index 121dc9b..70f9166 100644
+--- a/recipes-bsp/dsptop/dsptop_git.bb
++++ b/recipes-bsp/dsptop/dsptop_git.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979
  
- S = "${WORKDIR}/git"
+ DEPENDS = "libulm ncurses"
  
--EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc"
--
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ S = "${WORKDIR}/git/dsptop"
+ 
+@@ -12,7 +12,7 @@ DEVICE = ""
+ DEVICE_dra7xx = "DRA7xx"
+ DEVICE_keystone = "C66AK2Hxx"
+ 
+-EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
++EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}""
+ 
  do_install() {
- 	install -d ${D}${bindir}
- 	install -m 0755 rwmem ${D}${bindir}
+     oe_runmake install DESTDIR=${D}
 
 
