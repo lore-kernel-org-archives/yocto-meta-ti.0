@@ -1,6 +1,6 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A216DE00D3F; Fri,  2 Dec 2016 17:18:56 -0800 (PST)
+	id D8D0DE00B27; Mon,  5 Dec 2016 15:12:34 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,30 +8,31 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BCA9E00D2C
-	for <meta-ti@yoctoproject.org>; Fri,  2 Dec 2016 17:18:55 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id uB31ItLT030843
-	for <meta-ti@yoctoproject.org>; Fri, 2 Dec 2016 19:18:55 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uB31ItVv000737
-	for <meta-ti@yoctoproject.org>; Fri, 2 Dec 2016 19:18:55 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 2 Dec 2016 19:18:54 -0600
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	uB31IhVb016023;	Fri, 2 Dec 2016 19:18:54 -0600
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 2 Dec 2016 20:18:40 -0500
-Message-ID: <1480727920-62651-3-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1480727920-62651-1-git-send-email-sam.nelson@ti.com>
-References: <1480727920-62651-1-git-send-email-sam.nelson@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] recipes-kernel: cmem.dtsi: Update memory sections for DDR and MSMC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9C80FE00905
+	for <meta-ti@yoctoproject.org>; Mon,  5 Dec 2016 15:12:30 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8EBCA20A39;
+	Mon,  5 Dec 2016 23:12:28 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id ynZ075hnTuxR; Mon,  5 Dec 2016 23:12:28 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6EE0E20181;
+	Mon,  5 Dec 2016 23:12:27 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by mail.denix.org (Postfix) with ESMTP id C43C516218A;
+	Mon,  5 Dec 2016 18:12:26 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon,  5 Dec 2016 18:12:26 -0500
+Message-Id: <1480979546-20729-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] am335x-evm, am437x-evm: increase leb count for ubi
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,323 +45,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Dec 2016 01:18:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 05 Dec 2016 23:12:34 -0000
 
-cmem.dtsi splits the already defined dsp_common_mpm_area DDR memory into
-a smaller MPM segment and other CMEM blocks.
-The mpm_block_mem is removed and instead the original memory sections
-dsp_common_mpm_area and mpm_mem in the kernel dtb are updated to reflect
+From: Denys Dmytriyenko <denys@ti.com>
 
-On the MSMC memory, cmem.dtsi defines a sram subnode instead of the
-reserved memory.
-mpm MSMC areas are already captured in the kernel dtb.
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/files/k2e/cmem.dtsi      | 27 ++++----
- recipes-kernel/linux/files/k2g/cmem.dtsi      | 91 ++++++++++++++-------------
- recipes-kernel/linux/files/k2hk-evm/cmem.dtsi | 91 ++++++++++++++-------------
- recipes-kernel/linux/files/k2l-evm/cmem.dtsi  | 20 ++++--
- 4 files changed, 120 insertions(+), 109 deletions(-)
+ conf/machine/am335x-evm.conf | 2 +-
+ conf/machine/am437x-evm.conf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/files/k2e/cmem.dtsi b/recipes-kernel/linux/files/k2e/cmem.dtsi
-index 4c8e785..2a2909a 100644
---- a/recipes-kernel/linux/files/k2e/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2e/cmem.dtsi
-@@ -1,22 +1,10 @@
- / {
- 	reserved-memory {
--		mpm_block_mem_0: mpm_block_mem@820000000 {
--			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--			no-map;
--			status = "okay";
--		};
--
- 		cmem_block_mem_0: cmem_block_mem@829000000 {
- 			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
- 			no-map;
- 			status = "okay";
- 		};
--
--		cmem_block_mem_1: cmem_block_mem@00c080000 {
--			reg = <0x00000000 0x0c080000 0x00000000 0x000c0000>;
--			no-map;
--			status = "okay";
--		};
- 	};
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 9a476c4..491b1c5 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5250"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5600"
  
- 	cmem {
-@@ -36,7 +24,20 @@
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 7883616..5e28ff4 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2450"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2650"
  
- 		cmem_block_1: cmem_block@1 {
- 			reg = <1>;
--			memory-region = <&cmem_block_mem_1>;
-+			sram = <&sram_cmem>;
- 		};
- 	};
- };
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
-+
-+&msm_ram {
-+	sram_cmem: sram-cmem@80000 {
-+		reg = <0x80000 0xc0000>;
-+	};
-+};
-diff --git a/recipes-kernel/linux/files/k2g/cmem.dtsi b/recipes-kernel/linux/files/k2g/cmem.dtsi
-index f30bf5b..4716581 100644
---- a/recipes-kernel/linux/files/k2g/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2g/cmem.dtsi
-@@ -1,54 +1,55 @@
- / {
--        reserved-memory {
--                mpm_block_mem_0: mpm_block_mem@820000000 {
--                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--                        no-map;
--                        status = "okay";
--                };
--
--                cmem_block_mem_0: cmem_block_mem@829000000 {
--                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
--                        no-map;
--                        status = "okay";
--                };
--
--                cmem_block_mem_1: cmem_block_mem@00c000000 {
--                        reg = <0x00000000 0x0c000000 0x00000000 0x00100000>;
--                        no-map;
--                        status = "okay";
--                };
--
--                cmem_block_mem_2: cmem_block_mem@822000000 {
--                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
--                        no-map;
--                        status = "okay";
--                };
--        };
--
--        cmem {
--                compatible = "ti,cmem";
--                #address-cells = <1>;
--                #size-cells = <0>;
-+	reserved-memory {
-+
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
-+		cmem_block_mem_2: cmem_block_mem@822000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
- 
- 		#pool-size-cells = <2>;
- 
--                status = "okay";
-+		status = "okay";
- 
--                cmem_block_0: cmem_block@0 {
--                        reg = <0>;
--                        memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x00000000 0x17000000>;
--                };
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x17000000>;
-+		};
- 
--                cmem_block_1: cmem_block@1 {
--                        reg = <1>;
--                        memory-region = <&cmem_block_mem_1>;
--                };
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			sram = <&sram_cmem>;
-+		};
- 
--                cmem_block_2: cmem_block@2 {
--                        reg = <2>;
--                        memory-region = <&cmem_block_mem_2>;
--                };
--        };
-+		cmem_block_2: cmem_block@2 {
-+			reg = <2>;
-+			memory-region = <&cmem_block_mem_2>;
-+		 };
-+	};
-+};
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
- 
-+&msm_ram {
-+	sram_cmem: sram-cmem@a0000 {
-+		reg = <0xa0000 0x57000>;
-+	};
- };
-diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-index 98e9e7c..e5927ba 100644
---- a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-@@ -1,54 +1,55 @@
- / {
--        reserved-memory {
--                mpm_block_mem_0: mpm_block_mem@820000000 {
--                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--                        no-map;
--                        status = "okay";
--                };
--
--                cmem_block_mem_0: cmem_block_mem@829000000 {
--                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
--                        no-map;
--                        status = "okay";
--                };
--
--                cmem_block_mem_1: cmem_block_mem@00c100000 {
--                        reg = <0x00000000 0x0c100000 0x00000000 0x00480000>;
--                        no-map;
--                        status = "okay";
--                };
--
--                cmem_block_mem_2: cmem_block_mem@822000000 {
--                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
--                        no-map;
--                        status = "okay";
--                };
--        };
--
--        cmem {
--                compatible = "ti,cmem";
--                #address-cells = <1>;
--                #size-cells = <0>;
-+	reserved-memory {
-+
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
-+		cmem_block_mem_2: cmem_block_mem@822000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
- 
- 		#pool-size-cells = <2>;
- 
--                status = "okay";
-+		status = "okay";
- 
--                cmem_block_0: cmem_block@0 {
--                        reg = <0>;
--                        memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x00000000 0x17000000>;
--                };
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x17000000>;
-+		};
- 
--                cmem_block_1: cmem_block@1 {
--                        reg = <1>;
--                        memory-region = <&cmem_block_mem_1>;
--                };
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			sram = <&sram_cmem>;
-+		};
- 
--                cmem_block_2: cmem_block@2 {
--                        reg = <2>;
--                        memory-region = <&cmem_block_mem_2>;
--                };
--        };
-+		cmem_block_2: cmem_block@2 {
-+			reg = <2>;
-+			memory-region = <&cmem_block_mem_2>;
-+		 };
-+	};
-+};
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
- 
-+&msm_ram {
-+	sram_cmem: sram-cmem@100000 {
-+		reg = <0x100000 0x480000>;
-+	};
- };
-diff --git a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-index 4c8e785..8b09642 100644
---- a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-@@ -1,10 +1,5 @@
- / {
- 	reserved-memory {
--		mpm_block_mem_0: mpm_block_mem@820000000 {
--			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--			no-map;
--			status = "okay";
--		};
- 
- 		cmem_block_mem_0: cmem_block_mem@829000000 {
- 			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
-@@ -36,7 +31,20 @@
- 
- 		cmem_block_1: cmem_block@1 {
- 			reg = <1>;
--			memory-region = <&cmem_block_mem_1>;
-+			sram = <&sram_cmem>;
- 		};
- 	};
- };
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
-+
-+&msm_ram {
-+	sram_cmem: sram-cmem@80000 {
-+		reg = <0x80000 0xc0000>;
-+	};
-+};
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
 -- 
-1.9.1
+2.7.4
 
 
