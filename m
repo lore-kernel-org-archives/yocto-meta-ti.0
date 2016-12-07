@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B6CDAE00CFC; Tue,  6 Dec 2016 16:47:21 -0800 (PST)
+	id B4A9CE00CFF; Tue,  6 Dec 2016 16:47:21 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9526CE00CA3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90FC5E00C80
 	for <meta-ti@yoctoproject.org>; Tue,  6 Dec 2016 16:47:18 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6093952AD6; Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
+	id 236E152ACC; Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161207004717.6093952AD6@arago-project.org>
+Message-Id: <20161207004717.236E152ACC@arago-project.org>
 Date: Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cmem: Update to new version 4.13.0.0_eng
+Subject: Sam Nelson : ti-ipc: Add recipe to build ipc-examples
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,54 +38,114 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 117de86440419cd4eb9fbc7a73e6a6adfb18697a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=117de86440419cd4eb9fbc7a73e6a6adfb18697a
+Commit: 18f4073ad0269881bf9ffc056946d7391c1505a1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=18f4073ad0269881bf9ffc056946d7391c1505a1
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Dec  3 07:18:39 2016 +0000
+Date:   Wed Nov 30 03:35:15 2016 +0000
 
-cmem: Update to new version 4.13.0.0_eng
+ti-ipc: Add recipe to build ipc-examples
 
+Builds both linux and RTOS IPC examples
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
- recipes-bsp/cmem/cmem.inc        |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/ipc/ti-ipc-examples_git.bb |   86 +++++++++++++++++++++++++++++++++
+ 1 files changed, 86 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
-index d36816b..f1e1233 100644
---- a/recipes-bsp/cmem/cmem-mod_git.bb
-+++ b/recipes-bsp/cmem/cmem-mod_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
- include cmem.inc
- 
- # This package builds a kernel module, use kernel PR as base and append a local
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
- 
- inherit module
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index e68bb6b..0d05bb3 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -3,11 +3,11 @@ HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
- 
--BRANCH = "master"
--# This corresponds to version 4.12.00.00
-+BRANCH = "lu-next"
-+# This corresponds to version 4.13.00.00_eng
- SRCREV = "d6d3e84c84d0e84a9b96c3f6f789ac642d03afcb"
- 
--PV = "4.12.00.00+git${SRCPV}"
-+PV = "4.13.00.00+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
+diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-ti/ipc/ti-ipc-examples_git.bb
+new file mode 100644
+index 0000000..019bffa
+--- /dev/null
++++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
+@@ -0,0 +1,86 @@
++DESCRIPTION = "TI Inter Process Communication (IPC) examples"
++HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
++require ti-ipc-common.inc
++require ti-ipc-rtos.inc
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://${S_ipc-examples}/src/makefile;beginline=1;endline=30;md5=fb83580b16bce88e8ed568a6005c8f02"
++
++DEPENDS = "ti-ipc ti-xdctools ti-sysbios ti-ipc-rtos"
++
++INSANE_SKIP_${PN} += "arch"
++
++ALLOW_EMPTY_${PN} = "1"
++
++IPC_INSTALL_DIR="${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
++
++do_compile() {
++
++  cd ${S_ipc-examples}/src
++  oe_runmake .examples \
++    IPCTOOLS="${S_ipc-metadata}/src/etc"
++
++  if [ ! -z ${ALT_PLATFORM} ]; then
++    oe_runmake .examples "PLATFORM=${ALT_PLATFORM}" \
++      IPCTOOLS="${S_ipc-metadata}/src/etc"
++	echo test
++  fi
++  if [  "${PLATFORM}" != "UNKNOWN" ]; then
++    oe_runmake extract HOSTOS="bios" IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
++    oe_runmake extract HOSTOS="linux" IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
++
++    if [ ! -z ${ALT_PLATFORM} ]; then
++      oe_runmake extract PLATFORM="${ALT_PLATFORM}" HOSTOS="bios" \
++         IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
++      oe_runmake extract PLATFORM="${ALT_PLATFORM}" HOSTOS="linux" \ 
++        IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
++    fi
++    oe_runmake -C examples all HOSTOS="bios" \
++      IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" 
++    oe_runmake -C examples all HOSTOS="linux" \
++      LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
++      IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" 
++    if [ ! -z ${ALT_PLATFORM} ]; then
++      oe_runmake -C examples all HOSTOS="bios" \
++        IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" PLATFORM="${ALT_PLATFORM}" 
++      oe_runmake -C examples all HOSTOS="linux" \
++        LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
++        IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
++        PLATFORM="${ALT_PLATFORM}" 
++      echo testing
++    fi
++  fi
++}
++
++do_install() {
++  cd ${S_ipc-examples}/src
++  IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
++
++  install -d ${D}/ipc_${IPC_VERSION}/examples
++  if [  "${PLATFORM}" != "UNKNOWN" ]; then
++    oe_runmake -C examples install IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
++      HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples"
++    oe_runmake -C examples install_rov IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
++      HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples"
++
++    oe_runmake -C examples install IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
++      LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
++      HOSTOS="linux" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples"
++
++    if [ ! -z ${ALT_PLATFORM} ]; then
++      oe_runmake -C examples install IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \ 
++        HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples" \
++        PLATFORM="${ALT_PLATFORM}"
++      oe_runmake -C examples install_rov IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
++        HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples" \
++        PLATFORM="${ALT_PLATFORM}"
++
++      oe_runmake -C examples install IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
++        LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
++        HOSTOS="linux" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples" \
++        PLATFORM="${ALT_PLATFORM}"
++    fi
++  fi
++}
++
++FILES_${PN} += "ipc_*"
 
 
