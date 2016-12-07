@@ -1,38 +1,40 @@
-Return-Path: <denis@denix.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3F5AAE00D68; Wed,  7 Dec 2016 12:06:13 -0800 (PST)
+	id CF5EFE00D69; Wed,  7 Dec 2016 12:52:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
 	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34FFCE006E3
-	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 12:06:09 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B22E120B13;
-	Wed,  7 Dec 2016 20:06:08 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id K-mP_ZE41ibd; Wed,  7 Dec 2016 20:06:08 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9A0FB2017D;
-	Wed,  7 Dec 2016 20:06:07 +0000 (UTC)
-Received: from sam.denix (sam [192.168.0.5])
-	by mail.denix.org (Postfix) with ESMTP id 16D071621C8;
-	Wed,  7 Dec 2016 15:06:07 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Wed,  7 Dec 2016 15:06:06 -0500
-Message-Id: <1481141166-23966-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] conf/machine: split SECDEV use for am5x and dra7 machines
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3D92E00828
+	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 12:51:58 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id uB7KptFF028951;
+	Wed, 7 Dec 2016 14:51:55 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uB7KptQh022946;
+	Wed, 7 Dec 2016 14:51:55 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 7 Dec 2016 14:51:55 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uB7Kpt3W007401;
+	Wed, 7 Dec 2016 14:51:55 -0600
+Date: Wed, 7 Dec 2016 15:51:54 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Thomas Perrot <thomas.perrot@tupi.fr>
+Message-ID: <20161207205154.GV28380@edge>
+References: <20161207193949.13288-1-thomas.perrot@tupi.fr>
+MIME-Version: 1.0
+In-Reply-To: <20161207193949.13288-1-thomas.perrot@tupi.fr>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] Fix build issue due at the use of bb.data instead of d: Exception: AttributeError: module 'bb.data' has no attribute 'getVar'
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,43 +47,95 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2016 20:06:13 -0000
+X-List-Received-Date: Wed, 07 Dec 2016 20:52:01 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+Thanks, I've seen the API deprecation change in bitbake[1], but haven't had a 
+chance to make updates yet.
+BTW, your commit log got merged with the subject...
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/am57xx-hs-evm.conf | 2 +-
- conf/machine/dra7xx-hs-evm.conf | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+[1] http://cgit.openembedded.org/bitbake/commit/?id=1825604d46fcd29fad6cfd325f1cb1e1b457d2c9
 
-diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
-index be67205..906e6b0 100644
---- a/conf/machine/am57xx-hs-evm.conf
-+++ b/conf/machine/am57xx-hs-evm.conf
-@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
- UBOOT_RD_LOADADDRESS = "0x84000000"
- UBOOT_RD_ENTRYPOINT = "0x84000000"
- 
--TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
- 
- OPTEEMACHINE = "ti"
- OPTEEFLAVOR = "am57xx_evm"
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index db20aa2..8e8b566 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
- UBOOT_RD_LOADADDRESS = "0x84000000"
- UBOOT_RD_ENTRYPOINT = "0x84000000"
- 
--TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
- 
- OPTEEMACHINE = "ti"
- OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
 -- 
-2.7.4
+Denys
 
+
+On Wed, Dec 07, 2016 at 08:39:49PM +0100, Thomas Perrot wrote:
+> Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
+> ---
+>  recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb     | 6 +++---
+>  recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 6 +++---
+>  recipes-ti/devtools/ti-cgt6x_8.1.0.bb                  | 8 ++++----
+>  3 files changed, 10 insertions(+), 10 deletions(-)
+> 
+> diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+> index 45c8d519..394d1e4a 100644
+> --- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+> +++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+> @@ -14,11 +14,11 @@ SRCREV = "ab0ca5bff345f6c13807fea3c4acabf5f2b9b10a"
+>  
+>  # There's only hardfp version available
+>  python __anonymous() {
+> -    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+> +    tunes = d.getVar("TUNE_FEATURES", d, 1)
+>      if not tunes:
+>          return
+> -    pkgn = bb.data.getVar("PN", d, 1)
+> -    pkgv = bb.data.getVar("PV", d, 1)
+> +    pkgn = d.getVar("PN", d, 1)
+> +    pkgv = d.getVar("PV", d, 1)
+>      if "callconvention-hard" not in tunes:
+>          bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+>          raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> index 770cda21..5cec40e8 100644
+> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> @@ -12,11 +12,11 @@ SRCREV = "a5152f0b90bf3916eb1f478ac9fefe7d7ebe8bd9"
+>  
+>  # There's only hardfp version available
+>  python __anonymous() {
+> -    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+> +    tunes = d.getVar("TUNE_FEATURES", d, 1)
+>      if not tunes:
+>          return
+> -    pkgn = bb.data.getVar("PN", d, 1)
+> -    pkgv = bb.data.getVar("PV", d, 1)
+> +    pkgn = d.getVar("PN", d, 1)
+> +    pkgv = d.getVar("PV", d, 1)
+>      if "callconvention-hard" not in tunes:
+>          bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+>          raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+> diff --git a/recipes-ti/devtools/ti-cgt6x_8.1.0.bb b/recipes-ti/devtools/ti-cgt6x_8.1.0.bb
+> index 79b562a9..5e97927b 100644
+> --- a/recipes-ti/devtools/ti-cgt6x_8.1.0.bb
+> +++ b/recipes-ti/devtools/ti-cgt6x_8.1.0.bb
+> @@ -13,14 +13,14 @@ COMPATIBLE_HOST_class-target = "arm.*-linux"
+>  
+>  # For now we only have hardfp version for target class
+>  python __anonymous() {
+> -    c = bb.data.getVar("CLASSOVERRIDE", d, 1)
+> +    c = d.getVar("CLASSOVERRIDE", d, 1)
+>  
+>      if c == "class-target":
+> -        tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+> +        tunes = d.getVar("TUNE_FEATURES", d, 1)
+>          if not tunes:
+>              return
+> -        pkgn = bb.data.getVar("PN", d, 1)
+> -        pkgv = bb.data.getVar("PV", d, 1)
+> +        pkgn = d.getVar("PN", d, 1)
+> +        pkgv = d.getVar("PV", d, 1)
+>          if "callconvention-hard" not in tunes:
+>              bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+>              raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+> -- 
+> 2.11.0
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
