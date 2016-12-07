@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F4A1E00D68; Wed,  7 Dec 2016 11:50:48 -0800 (PST)
+	id 3F5AAE00D68; Wed,  7 Dec 2016 12:06:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0EB9E00D69
-	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 11:50:42 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D822452A20; Wed,  7 Dec 2016 19:50:41 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34FFCE006E3
+	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 12:06:09 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B22E120B13;
+	Wed,  7 Dec 2016 20:06:08 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id K-mP_ZE41ibd; Wed,  7 Dec 2016 20:06:08 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9A0FB2017D;
+	Wed,  7 Dec 2016 20:06:07 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by mail.denix.org (Postfix) with ESMTP id 16D071621C8;
+	Wed,  7 Dec 2016 15:06:07 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20161207195041.D822452A20@arago-project.org>
-Date: Wed,  7 Dec 2016 19:50:41 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update commit id with fixes
+Date: Wed,  7 Dec 2016 15:06:06 -0500
+Message-Id: <1481141166-23966-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] conf/machine: split SECDEV use for am5x and dra7 machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +45,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2016 19:50:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 Dec 2016 20:06:13 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 76625a437d5180bf9753e7ef2552ab02f2beab0f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=76625a437d5180bf9753e7ef2552ab02f2beab0f
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Dec  7 22:33:51 2016 +0000
-
-mpm-transport: Update commit id with fixes
-
-Update and fixes to handle different type of memory sections in sysfs
-entry or device tree.
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/am57xx-hs-evm.conf | 2 +-
+ conf/machine/dra7xx-hs-evm.conf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index 51b5e9e..ee28f2f 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -15,11 +15,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
+index be67205..906e6b0 100644
+--- a/conf/machine/am57xx-hs-evm.conf
++++ b/conf/machine/am57xx-hs-evm.conf
+@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
- BRANCH = "master"
--# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00
--SRCREV = "696a9ec37559b671860ef393194c6032b7b6d9ef"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00A
-+SRCREV = "7284e75d36b265ef8535d2e2ee54d1f2c700e862"
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
  
- PV = "2.0.2.0"
--PR = "r0"
-+PR = "r1"
+ OPTEEMACHINE = "ti"
+ OPTEEFLAVOR = "am57xx_evm"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index db20aa2..8e8b566 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
- EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
+ 
+ OPTEEMACHINE = "ti"
+ OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
+-- 
+2.7.4
 
 
