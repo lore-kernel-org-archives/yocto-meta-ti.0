@@ -1,40 +1,28 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CF5EFE00D69; Wed,  7 Dec 2016 12:52:01 -0800 (PST)
+	id 81390E00D7F; Wed,  7 Dec 2016 13:00:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
-	version=3.3.1
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3D92E00828
-	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 12:51:58 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id uB7KptFF028951;
-	Wed, 7 Dec 2016 14:51:55 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uB7KptQh022946;
-	Wed, 7 Dec 2016 14:51:55 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 7 Dec 2016 14:51:55 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uB7Kpt3W007401;
-	Wed, 7 Dec 2016 14:51:55 -0600
-Date: Wed, 7 Dec 2016 15:51:54 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Thomas Perrot <thomas.perrot@tupi.fr>
-Message-ID: <20161207205154.GV28380@edge>
-References: <20161207193949.13288-1-thomas.perrot@tupi.fr>
-MIME-Version: 1.0
-In-Reply-To: <20161207193949.13288-1-thomas.perrot@tupi.fr>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] Fix build issue due at the use of bb.data instead of d: Exception: AttributeError: module 'bb.data' has no attribute 'getVar'
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEA6FE00D69
+	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 13:00:57 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 2612D52A7B; Wed,  7 Dec 2016 21:00:56 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20161207210056.2612D52A7B@arago-project.org>
+Date: Wed,  7 Dec 2016 21:00:56 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: e-ruei1@ti.com : ti-sgx-ddk-um: fix a bug at the drmModeAddFB() call at null_drm_ws.c
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,95 +35,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2016 20:52:01 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Dec 2016 21:00:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Thanks, I've seen the API deprecation change in bitbake[1], but haven't had a 
-chance to make updates yet.
-BTW, your commit log got merged with the subject...
+Module: meta-ti
+Branch: morty
+Commit: 92f46e91b8af67f34c6396bb0bd360181872c072
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=92f46e91b8af67f34c6396bb0bd360181872c072
 
-[1] http://cgit.openembedded.org/bitbake/commit/?id=1825604d46fcd29fad6cfd325f1cb1e1b457d2c9
+Author: e-ruei1@ti.com <e-ruei1@ti.com>
+Date:   Wed Dec  7 21:00:59 2016 +0000
 
--- 
-Denys
+ti-sgx-ddk-um: fix a bug at the drmModeAddFB() call at null_drm_ws.c
 
+Both parameter depth and bpp are set to uiPixelWidthInBits at the current
+implementation, however, the depth may not be the same as bpp for certain
+pixel format such as XRGB8888. This bug was exposed by the recent DRM
+driver change introducing strict error checking. To fix this problem,
+add utility function uiPixelDepthInBits to derive and use depth based on
+the pixel format.
 
-On Wed, Dec 07, 2016 at 08:39:49PM +0100, Thomas Perrot wrote:
-> Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
-> ---
->  recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb     | 6 +++---
->  recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 6 +++---
->  recipes-ti/devtools/ti-cgt6x_8.1.0.bb                  | 8 ++++----
->  3 files changed, 10 insertions(+), 10 deletions(-)
-> 
-> diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> index 45c8d519..394d1e4a 100644
-> --- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> +++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> @@ -14,11 +14,11 @@ SRCREV = "ab0ca5bff345f6c13807fea3c4acabf5f2b9b10a"
->  
->  # There's only hardfp version available
->  python __anonymous() {
-> -    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
-> +    tunes = d.getVar("TUNE_FEATURES", d, 1)
->      if not tunes:
->          return
-> -    pkgn = bb.data.getVar("PN", d, 1)
-> -    pkgv = bb.data.getVar("PV", d, 1)
-> +    pkgn = d.getVar("PN", d, 1)
-> +    pkgv = d.getVar("PV", d, 1)
->      if "callconvention-hard" not in tunes:
->          bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
->          raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> index 770cda21..5cec40e8 100644
-> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> @@ -12,11 +12,11 @@ SRCREV = "a5152f0b90bf3916eb1f478ac9fefe7d7ebe8bd9"
->  
->  # There's only hardfp version available
->  python __anonymous() {
-> -    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
-> +    tunes = d.getVar("TUNE_FEATURES", d, 1)
->      if not tunes:
->          return
-> -    pkgn = bb.data.getVar("PN", d, 1)
-> -    pkgv = bb.data.getVar("PV", d, 1)
-> +    pkgn = d.getVar("PN", d, 1)
-> +    pkgv = d.getVar("PV", d, 1)
->      if "callconvention-hard" not in tunes:
->          bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
->          raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> diff --git a/recipes-ti/devtools/ti-cgt6x_8.1.0.bb b/recipes-ti/devtools/ti-cgt6x_8.1.0.bb
-> index 79b562a9..5e97927b 100644
-> --- a/recipes-ti/devtools/ti-cgt6x_8.1.0.bb
-> +++ b/recipes-ti/devtools/ti-cgt6x_8.1.0.bb
-> @@ -13,14 +13,14 @@ COMPATIBLE_HOST_class-target = "arm.*-linux"
->  
->  # For now we only have hardfp version for target class
->  python __anonymous() {
-> -    c = bb.data.getVar("CLASSOVERRIDE", d, 1)
-> +    c = d.getVar("CLASSOVERRIDE", d, 1)
->  
->      if c == "class-target":
-> -        tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
-> +        tunes = d.getVar("TUNE_FEATURES", d, 1)
->          if not tunes:
->              return
-> -        pkgn = bb.data.getVar("PN", d, 1)
-> -        pkgv = bb.data.getVar("PV", d, 1)
-> +        pkgn = d.getVar("PN", d, 1)
-> +        pkgv = d.getVar("PV", d, 1)
->          if "callconvention-hard" not in tunes:
->              bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
->              raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> -- 
-> 2.11.0
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 770cda2..5903b2e 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "a5152f0b90bf3916eb1f478ac9fefe7d7ebe8bd9"
++SRCREV = "3c0537748dd283b2de9c5369570aa2aade5a9979"
+ 
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ 
+ inherit update-rc.d
+ 
+-PR = "r17"
++PR = "r18"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
+
 
