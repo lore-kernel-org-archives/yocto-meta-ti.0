@@ -1,40 +1,26 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 16490E00B4C; Tue,  6 Dec 2016 12:28:05 -0800 (PST)
+	id B6CDAE00CFC; Tue,  6 Dec 2016 16:47:21 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
-	version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 1028 seconds by postgrey-1.32 at yocto-www;
-	Tue, 06 Dec 2016 12:28:03 PST
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 48EE9E00A4D
-	for <meta-ti@yoctoproject.org>; Tue,  6 Dec 2016 12:28:03 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id uB6KAtB8029250
-	for <meta-ti@yoctoproject.org>; Tue, 6 Dec 2016 14:10:55 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uB6KAsS9017454
-	for <meta-ti@yoctoproject.org>; Tue, 6 Dec 2016 14:10:55 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 6 Dec 2016 14:10:54 -0600
-Received: from uda0850410.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	uB6KAstl008635	for <meta-ti@yoctoproject.org>;
-	Tue, 6 Dec 2016 14:10:54 -0600
-From: Eric Ruei <e-ruei1@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 6 Dec 2016 15:10:50 -0500
-Message-ID: <1481055050-26926-1-git-send-email-e-ruei1@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] ti-sgx-ddk-um: fix a bug at the drmModeAddFB() call at null_drm_ws.c
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9526CE00CA3
+	for <meta-ti@yoctoproject.org>; Tue,  6 Dec 2016 16:47:18 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 6093952AD6; Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20161207004717.6093952AD6@arago-project.org>
+Date: Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : cmem: Update to new version 4.13.0.0_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,44 +33,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2016 20:28:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Dec 2016 00:47:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Both parameter depth and bpp are set to uiPixelWidthInBits at the current
-implementation, however, the depth may not be the same as bpp for certain
-pixel format such as XRGB8888. This bug was exposed by the recent DRM
-driver change introducing strict error checking. To fix this problem, add utility
-function uiPixelDepthInBits to derive and use depth based on the pixel format.
+Module: meta-ti
+Branch: krogoth
+Commit: 117de86440419cd4eb9fbc7a73e6a6adfb18697a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=117de86440419cd4eb9fbc7a73e6a6adfb18697a
 
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Sat Dec  3 07:18:39 2016 +0000
 
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+cmem: Update to new version 4.13.0.0_eng
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 15c9232..77fc198 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+ recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
+ recipes-bsp/cmem/cmem.inc        |    6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
+index d36816b..f1e1233 100644
+--- a/recipes-bsp/cmem/cmem-mod_git.bb
++++ b/recipes-bsp/cmem/cmem-mod_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
+ include cmem.inc
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "fccafce7d0a023e36c064ccbaa7d33e89252ea00"
-+SRCREV = "3c0537748dd283b2de9c5369570aa2aade5a9979"
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ inherit module
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index e68bb6b..0d05bb3 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -3,11 +3,11 @@ HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
  
- inherit update-rc.d
+-BRANCH = "master"
+-# This corresponds to version 4.12.00.00
++BRANCH = "lu-next"
++# This corresponds to version 4.13.00.00_eng
+ SRCREV = "d6d3e84c84d0e84a9b96c3f6f789ac642d03afcb"
  
--PR = "r16"
-+PR = "r17"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+-PV = "4.12.00.00+git${SRCPV}"
++PV = "4.13.00.00+git${SRCPV}"
  
- DEPENDS += "libdrm udev libgbm wayland libffi"
--- 
-1.9.1
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ 
 
 
