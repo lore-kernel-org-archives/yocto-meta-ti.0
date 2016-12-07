@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 11A52E00C88; Tue,  6 Dec 2016 16:47:23 -0800 (PST)
+	id 12562E00C93; Tue,  6 Dec 2016 16:47:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9391CE00C93
-	for <meta-ti@yoctoproject.org>; Tue,  6 Dec 2016 16:47:18 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39449E00CCC
+	for <meta-ti@yoctoproject.org>; Tue,  6 Dec 2016 16:47:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 102F152AB4; Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
+	id 5CF2D52AB4; Wed,  7 Dec 2016 00:47:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161207004717.102F152AB4@arago-project.org>
-Date: Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
+Message-Id: <20161207004718.5CF2D52AB4@arago-project.org>
+Date: Wed,  7 Dec 2016 00:47:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : ti-ipc: Reorganised recipes to help in adding ipc examples recipes
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 07 Dec 2016 00:47:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 16bf3379a3428b93e7bf4282b9175f40c4509f21
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=16bf3379a3428b93e7bf4282b9175f40c4509f21
+Branch: master
+Commit: 420e25c4c8d4014783a0ead7a0db7fa51037fb0f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=420e25c4c8d4014783a0ead7a0db7fa51037fb0f
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Tue Nov 29 20:28:10 2016 +0000
