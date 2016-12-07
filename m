@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6E37CE00D0E; Tue,  6 Dec 2016 16:47:25 -0800 (PST)
+	id A0E8AE00CFC; Tue,  6 Dec 2016 16:47:25 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F388E00CF2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FF5DE00CF9
 	for <meta-ti@yoctoproject.org>; Tue,  6 Dec 2016 16:47:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C1CC952ADA; Wed,  7 Dec 2016 00:47:18 +0000 (UTC)
+	id 9DF4552AD6; Wed,  7 Dec 2016 00:47:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161207004718.C1CC952ADA@arago-project.org>
+Message-Id: <20161207004718.9DF4552AD6@arago-project.org>
 Date: Wed,  7 Dec 2016 00:47:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am335x-evm, am437x-evm: increase leb count for ubi
+Subject: Sam Nelson : cmem: Update to new version 4.13.0.0_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,47 +38,54 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 8be700838f6e0c71a10c29c77e89093f8c334719
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8be700838f6e0c71a10c29c77e89093f8c334719
+Commit: 521df13d7a528cffc562e37dedbf06ded993911c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=521df13d7a528cffc562e37dedbf06ded993911c
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Dec  6 05:12:26 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Sat Dec  3 07:18:39 2016 +0000
 
-am335x-evm, am437x-evm: increase leb count for ubi
+cmem: Update to new version 4.13.0.0_eng
 
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    2 +-
- conf/machine/am437x-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
+ recipes-bsp/cmem/cmem.inc        |    6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 9a476c4..491b1c5 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5250"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5600"
+diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
+index bf6a477..1031e85 100644
+--- a/recipes-bsp/cmem/cmem-mod_git.bb
++++ b/recipes-bsp/cmem/cmem-mod_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
+ include cmem.inc
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 7883616..5e28ff4 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 994 LEBs
--MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2450"
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2650"
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
  
- # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # from dmesg:
+ inherit module
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index e68bb6b..0d05bb3 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -3,11 +3,11 @@ HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+ 
+-BRANCH = "master"
+-# This corresponds to version 4.12.00.00
++BRANCH = "lu-next"
++# This corresponds to version 4.13.00.00_eng
+ SRCREV = "d6d3e84c84d0e84a9b96c3f6f789ac642d03afcb"
+ 
+-PV = "4.12.00.00+git${SRCPV}"
++PV = "4.13.00.00+git${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ 
 
 
