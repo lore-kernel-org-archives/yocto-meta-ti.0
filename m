@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D4A65E00D72; Wed,  7 Dec 2016 11:50:46 -0800 (PST)
+	id 8D995E00D7C; Wed,  7 Dec 2016 11:50:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ADBEDE0073D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AFA31E00D68
 	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 11:50:42 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B2D3452A0E; Wed,  7 Dec 2016 19:50:41 +0000 (UTC)
+	id 05FCC52A2B; Wed,  7 Dec 2016 19:50:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161207195041.B2D3452A0E@arago-project.org>
-Date: Wed,  7 Dec 2016 19:50:41 +0000 (UTC)
+Message-Id: <20161207195042.05FCC52A2B@arago-project.org>
+Date: Wed,  7 Dec 2016 19:50:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: e-ruei1@ti.com : ti-sgx-ddk-um: fix a bug at the drmModeAddFB() call at null_drm_ws.c
 X-BeenThere: meta-ti@yoctoproject.org
@@ -35,13 +35,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2016 19:50:46 -0000
+X-List-Received-Date: Wed, 07 Dec 2016 19:50:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: ca02a57aa96a8a5a816c027a8ee494820b22749e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca02a57aa96a8a5a816c027a8ee494820b22749e
+Branch: master
+Commit: 92f46e91b8af67f34c6396bb0bd360181872c072
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=92f46e91b8af67f34c6396bb0bd360181872c072
 
 Author: e-ruei1@ti.com <e-ruei1@ti.com>
 Date:   Wed Dec  7 21:00:59 2016 +0000
