@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 11018E00CB0; Tue,  6 Dec 2016 16:47:23 -0800 (PST)
+	id 11A52E00C88; Tue,  6 Dec 2016 16:47:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D83D9E00CB0
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9391CE00C93
 	for <meta-ti@yoctoproject.org>; Tue,  6 Dec 2016 16:47:18 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E7E4C52AD7; Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
+	id 102F152AB4; Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161207004717.E7E4C52AD7@arago-project.org>
+Message-Id: <20161207004717.102F152AB4@arago-project.org>
 Date: Wed,  7 Dec 2016 00:47:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : recipes-kernel: cmem.dtsi: Update memory sections for DDR and MSMC
+Subject: Sam Nelson : ti-ipc: Reorganised recipes to help in adding ipc examples recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,329 +38,260 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: a8af1cd2e614b3692512eb600acd4ec1c2a11133
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a8af1cd2e614b3692512eb600acd4ec1c2a11133
+Commit: 16bf3379a3428b93e7bf4282b9175f40c4509f21
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=16bf3379a3428b93e7bf4282b9175f40c4509f21
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Dec  3 07:18:40 2016 +0000
+Date:   Tue Nov 29 20:28:10 2016 +0000
 
-recipes-kernel: cmem.dtsi: Update memory sections for DDR and MSMC
+ti-ipc: Reorganised recipes to help in adding ipc examples recipes
 
-cmem.dtsi splits the already defined dsp_common_mpm_area DDR memory into
-a smaller MPM segment and other CMEM blocks.
-The mpm_block_mem is removed and instead the original memory sections
-dsp_common_mpm_area and mpm_mem in the kernel dtb are updated to reflect
-
-On the MSMC memory, cmem.dtsi defines a sram subnode instead of the
-reserved memory.
-mpm MSMC areas are already captured in the kernel dtb.
+Created ti-ipc-common.inc & ti-ipc-rtos.inc to gather common definitions
+Updated commmit ids for ipc-examples
+Update ti-ipc-rtos to add ALT_PLATFORM examples
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/files/k2e/cmem.dtsi      |   27 ++++----
- recipes-kernel/linux/files/k2g/cmem.dtsi      |   91 +++++++++++++------------
- recipes-kernel/linux/files/k2hk-evm/cmem.dtsi |   91 +++++++++++++------------
- recipes-kernel/linux/files/k2l-evm/cmem.dtsi  |   20 ++++--
- 4 files changed, 120 insertions(+), 109 deletions(-)
+ recipes-ti/ipc/ti-ipc-common.inc  |   14 +++++++
+ recipes-ti/ipc/ti-ipc-rtos.inc    |   65 +++++++++++++++++++++++++++++++++
+ recipes-ti/ipc/ti-ipc-rtos_git.bb |   72 ++++---------------------------------
+ recipes-ti/ipc/ti-ipc.inc         |   16 +--------
+ recipes-ti/ipc/ti-ipc_git.bb      |    1 +
+ 5 files changed, 88 insertions(+), 80 deletions(-)
 
-diff --git a/recipes-kernel/linux/files/k2e/cmem.dtsi b/recipes-kernel/linux/files/k2e/cmem.dtsi
-index 4c8e785..2a2909a 100644
---- a/recipes-kernel/linux/files/k2e/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2e/cmem.dtsi
-@@ -1,22 +1,10 @@
- / {
- 	reserved-memory {
--		mpm_block_mem_0: mpm_block_mem@820000000 {
--			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--			no-map;
--			status = "okay";
--		};
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+new file mode 100644
+index 0000000..ddb48bc
+--- /dev/null
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -0,0 +1,14 @@
++PV = "3.44.00.00"
++INC_PR = "r2"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PLATFORM = "UNKNOWN"
++PLATFORM_omap5-evm = "OMAP54XX"
++PLATFORM_dra7xx = "DRA7XX"
++PLATFORM_k2hk-evm = "TCI6638"
++PLATFORM_k2l-evm = "TCI6630"
++PLATFORM_k2e = "66AK2E"
++PLATFORM_k2g = "66AK2G"
++
++ALT_PLATFORM_k2hk-evm = "TCI6636"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+new file mode 100644
+index 0000000..e1abf36
+--- /dev/null
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -0,0 +1,65 @@
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
++
++TI_IPC_EXAMPLES_GIT_URI = "git://git.ti.com/ipc/ipc-examples.git"
++TI_IPC_EXAMPLES_DEST_SUFFIX = "git/ipc-examples"
++TI_IPC_EXAMPLES_GIT_PROTOCOL = "git"
++TI_IPC_EXAMPLES_GIT_BRANCH = "master"
++TI_IPC_EXAMPLES_NAME = "ipc-examples"
++
++SRC_URI += "${TI_IPC_EXAMPLES_GIT_URI};\
++destsuffix=${TI_IPC_EXAMPLES_DEST_SUFFIX};\
++protocol=${TI_IPC_EXAMPLES_GIT_PROTOCOL};\
++branch=${TI_IPC_EXAMPLES_GIT_BRANCH};\
++name=${TI_IPC_EXAMPLES_NAME}"
++
++TI_IPC_METADATA_GIT_URI = "git://git.ti.com/ipc/ipc-metadata.git"
++TI_IPC_METADATA_DEST_SUFFIX = "git/ipc-metadata"
++TI_IPC_METADATA_GIT_PROTOCOL = "git"
++TI_IPC_METADATA_GIT_BRANCH = "master"
++TI_IPC_METADATA_NAME = "ipc-metadata"
++
++SRC_URI += "${TI_IPC_METADATA_GIT_URI};\
++destsuffix=${TI_IPC_METADATA_DEST_SUFFIX};\
++protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
++branch=${TI_IPC_METADATA_GIT_BRANCH};\
++name=${TI_IPC_METADATA_NAME}"
++
++# Corresponds to tag: 3.44.00.00C
++SRCREV_ipc-examples = "1b73bc32c5bdd869b5121f86859afb122d286acc"
++
++# Corresponds to tag: 3.44.00.00
++SRCREV_ipc-metadata = "07a745d47ecd7b4b64860e7c5d0fbe4e89524f2e"
++
++S_ipc-examples = "${WORKDIR}/git/ipc-examples"
++S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
++
++PR = "${INC_PR}.4"
++
++DEPENDS_append_keystone = " ti-cgt6x-native \
++                            gcc-arm-none-eabi-native \
++"
++DEPENDS_append_omap-a15 = " ti-cgt6x-native \
++                            ti-ccsv6-native \
++                            gcc-arm-none-eabi-native \
++"
++IPC_TARGETS = ""
++IPC_TARGETS_omap-a15 = "\
++    gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
++    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++    ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
++"
++
++IPC_TARGETS_keystone = " \
++    gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
++    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++"
++
++EXTRA_OEMAKE = "\
++    PLATFORM=${PLATFORM} \
++    XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
++    BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
++    ${IPC_TARGETS} \
++"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 5b0bed5..693a4e9 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -1,50 +1,8 @@
+-require recipes-ti/includes/ti-paths.inc
+-require recipes-ti/includes/ti-staging.inc
+ require ti-ipc.inc
 -
- 		cmem_block_mem_0: cmem_block_mem@829000000 {
- 			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
- 			no-map;
- 			status = "okay";
- 		};
+-TI_IPC_EXAMPLES_GIT_URI = "git://git.ti.com/ipc/ipc-examples.git"
+-TI_IPC_EXAMPLES_DEST_SUFFIX = "git/ipc-examples"
+-TI_IPC_EXAMPLES_GIT_PROTOCOL = "git"
+-TI_IPC_EXAMPLES_GIT_BRANCH = "master"
+-TI_IPC_EXAMPLES_NAME = "ipc-examples"
 -
--		cmem_block_mem_1: cmem_block_mem@00c080000 {
--			reg = <0x00000000 0x0c080000 0x00000000 0x000c0000>;
--			no-map;
--			status = "okay";
--		};
- 	};
- 
- 	cmem {
-@@ -36,7 +24,20 @@
- 
- 		cmem_block_1: cmem_block@1 {
- 			reg = <1>;
--			memory-region = <&cmem_block_mem_1>;
-+			sram = <&sram_cmem>;
- 		};
- 	};
- };
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
-+
-+&msm_ram {
-+	sram_cmem: sram-cmem@80000 {
-+		reg = <0x80000 0xc0000>;
-+	};
-+};
-diff --git a/recipes-kernel/linux/files/k2g/cmem.dtsi b/recipes-kernel/linux/files/k2g/cmem.dtsi
-index f30bf5b..4716581 100644
---- a/recipes-kernel/linux/files/k2g/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2g/cmem.dtsi
-@@ -1,54 +1,55 @@
- / {
--        reserved-memory {
--                mpm_block_mem_0: mpm_block_mem@820000000 {
--                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--                        no-map;
--                        status = "okay";
--                };
+-SRC_URI += "${TI_IPC_EXAMPLES_GIT_URI};\
+-destsuffix=${TI_IPC_EXAMPLES_DEST_SUFFIX};\
+-protocol=${TI_IPC_EXAMPLES_GIT_PROTOCOL};\
+-branch=${TI_IPC_EXAMPLES_GIT_BRANCH};\
+-name=${TI_IPC_EXAMPLES_NAME}"
 -
--                cmem_block_mem_0: cmem_block_mem@829000000 {
--                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
--                        no-map;
--                        status = "okay";
--                };
+-TI_IPC_METADATA_GIT_URI = "git://git.ti.com/ipc/ipc-metadata.git"
+-TI_IPC_METADATA_DEST_SUFFIX = "git/ipc-metadata"
+-TI_IPC_METADATA_GIT_PROTOCOL = "git"
+-TI_IPC_METADATA_GIT_BRANCH = "master"
+-TI_IPC_METADATA_NAME = "ipc-metadata"
 -
--                cmem_block_mem_1: cmem_block_mem@00c000000 {
--                        reg = <0x00000000 0x0c000000 0x00000000 0x00100000>;
--                        no-map;
--                        status = "okay";
--                };
+-SRC_URI += "${TI_IPC_METADATA_GIT_URI};\
+-destsuffix=${TI_IPC_METADATA_DEST_SUFFIX};\
+-protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+-branch=${TI_IPC_METADATA_GIT_BRANCH};\
+-name=${TI_IPC_METADATA_NAME}"
 -
--                cmem_block_mem_2: cmem_block_mem@822000000 {
--                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
--                        no-map;
--                        status = "okay";
--                };
--        };
+-# Corresponds to tag: 3.44.00.00
+-SRCREV_ipc-examples = "a934d057647af00401e4bfd1c6a4a0f6144441b7"
 -
--        cmem {
--                compatible = "ti,cmem";
--                #address-cells = <1>;
--                #size-cells = <0>;
-+	reserved-memory {
-+
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
-+		cmem_block_mem_2: cmem_block_mem@822000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
- 
- 		#pool-size-cells = <2>;
- 
--                status = "okay";
-+		status = "okay";
- 
--                cmem_block_0: cmem_block@0 {
--                        reg = <0>;
--                        memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x00000000 0x17000000>;
--                };
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x17000000>;
-+		};
- 
--                cmem_block_1: cmem_block@1 {
--                        reg = <1>;
--                        memory-region = <&cmem_block_mem_1>;
--                };
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			sram = <&sram_cmem>;
-+		};
- 
--                cmem_block_2: cmem_block@2 {
--                        reg = <2>;
--                        memory-region = <&cmem_block_mem_2>;
--                };
--        };
-+		cmem_block_2: cmem_block@2 {
-+			reg = <2>;
-+			memory-region = <&cmem_block_mem_2>;
-+		 };
-+	};
-+};
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
- 
-+&msm_ram {
-+	sram_cmem: sram-cmem@a0000 {
-+		reg = <0xa0000 0x57000>;
-+	};
- };
-diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-index 98e9e7c..e5927ba 100644
---- a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-@@ -1,54 +1,55 @@
- / {
--        reserved-memory {
--                mpm_block_mem_0: mpm_block_mem@820000000 {
--                        reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--                        no-map;
--                        status = "okay";
--                };
+-# Corresponds to tag: 3.44.00.00
+-SRCREV_ipc-metadata = "07a745d47ecd7b4b64860e7c5d0fbe4e89524f2e"
 -
--                cmem_block_mem_0: cmem_block_mem@829000000 {
--                        reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
--                        no-map;
--                        status = "okay";
--                };
+-S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+-S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
 -
--                cmem_block_mem_1: cmem_block_mem@00c100000 {
--                        reg = <0x00000000 0x0c100000 0x00000000 0x00480000>;
--                        no-map;
--                        status = "okay";
--                };
+-PR = "${INC_PR}.3"
++require ti-ipc-common.inc
++require ti-ipc-rtos.inc
+ 
+ DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
+-DEPENDS_append_keystone = " ti-cgt6x-native \
+-                            gcc-arm-none-eabi-native \
+-"
+-DEPENDS_append_omap-a15 = " ti-cgt6x-native \
+-                            ti-ccsv6-native \
+-                            gcc-arm-none-eabi-native \
+-"
+ 
+ PACKAGES =+ "${PN}-fw"
+ FILES_${PN}-fw = "${base_libdir}/firmware/*"
+@@ -55,27 +13,6 @@ INSANE_SKIP_${PN}-dev += "arch"
+ 
+ ALLOW_EMPTY_${PN} = "1"
+ 
+-IPC_TARGETS = ""
+-IPC_TARGETS_omap-a15 = "\
+-    gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
+-    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+-    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+-    ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
+-"
 -
--                cmem_block_mem_2: cmem_block_mem@822000000 {
--                        reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
--                        no-map;
--                        status = "okay";
--                };
--        };
+-IPC_TARGETS_keystone = " \
+-    gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
+-    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+-    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+-"
 -
--        cmem {
--                compatible = "ti,cmem";
--                #address-cells = <1>;
--                #size-cells = <0>;
-+	reserved-memory {
-+
-+		cmem_block_mem_0: cmem_block_mem@829000000 {
-+			reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
-+		cmem_block_mem_2: cmem_block_mem@822000000 {
-+			reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+			no-map;
-+			status = "okay";
-+		};
-+	};
-+
-+	cmem {
-+		compatible = "ti,cmem";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
+-EXTRA_OEMAKE = "\
+-    PLATFORM=${PLATFORM} \
+-    XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+-    BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
+-    ${IPC_TARGETS} \
+-"
+-
+ RELEASE_TYPE = "GA"
+ RELEASE_SUFFIX = ""
  
- 		#pool-size-cells = <2>;
+@@ -93,6 +30,11 @@ do_compile() {
+   cd ${S_ipc-examples}/src
+   oe_runmake .examples \
+     IPCTOOLS="${S_ipc-metadata}/src/etc"
++  if [ ! -z ${ALT_PLATFORM} ]; then
++    oe_runmake .examples \
++      IPCTOOLS="${S_ipc-metadata}/src/etc" \
++      PLATFORM=${ALT_PLATFORM}
++  fi
  
--                status = "okay";
-+		status = "okay";
+   if [  "${PLATFORM}" != "UNKNOWN" ]; then
+     oe_runmake extract HOSTOS="bios" IPC_INSTALL_DIR="${S}"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 488e0fc..2d38367 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
  
--                cmem_block_0: cmem_block@0 {
--                        reg = <0>;
--                        memory-region = <&cmem_block_mem_0>;
--                        cmem-buf-pools = <1 0x00000000 0x17000000>;
--                };
-+		cmem_block_0: cmem_block@0 {
-+			reg = <0>;
-+			memory-region = <&cmem_block_mem_0>;
-+			cmem-buf-pools = <1 0x00000000 0x17000000>;
-+		};
+ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+-TI_IPC_GIT_BRANCH = "ipc-next"
++TI_IPC_GIT_BRANCH = "3.44"
  
--                cmem_block_1: cmem_block@1 {
--                        reg = <1>;
--                        memory-region = <&cmem_block_mem_1>;
--                };
-+		cmem_block_1: cmem_block@1 {
-+			reg = <1>;
-+			sram = <&sram_cmem>;
-+		};
+ #Corresponds to 3.44.00.00
+ TI_IPC_SRCREV = "a1852fc8b254ed207bd1c1c88f5b362c9b6cc454"
+@@ -16,17 +16,3 @@ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};na
+ SRCREV = "${TI_IPC_SRCREV}"
  
--                cmem_block_2: cmem_block@2 {
--                        reg = <2>;
--                        memory-region = <&cmem_block_mem_2>;
--                };
--        };
-+		cmem_block_2: cmem_block@2 {
-+			reg = <2>;
-+			memory-region = <&cmem_block_mem_2>;
-+		 };
-+	};
-+};
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
+ S = "${WORKDIR}/git"
+-PV = "3.44.00.00"
+-INC_PR = "r1"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-PLATFORM = "UNKNOWN"
+-PLATFORM_omap5-evm = "OMAP54XX"
+-PLATFORM_dra7xx = "DRA7XX"
+-PLATFORM_k2hk-evm = "TCI6638"
+-PLATFORM_k2l-evm = "TCI6630"
+-PLATFORM_k2e = "66AK2E"
+-PLATFORM_k2g = "66AK2G"
+-
+-ALT_PLATFORM_k2hk-evm = "TCI6636"
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index cd844b4..6ccd2c4 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Mul
+ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
  
-+&msm_ram {
-+	sram_cmem: sram-cmem@100000 {
-+		reg = <0x100000 0x480000>;
-+	};
- };
-diff --git a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-index 4c8e785..8b09642 100644
---- a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-@@ -1,10 +1,5 @@
- / {
- 	reserved-memory {
--		mpm_block_mem_0: mpm_block_mem@820000000 {
--			reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--			no-map;
--			status = "okay";
--		};
+ require ti-ipc.inc
++require ti-ipc-common.inc
  
- 		cmem_block_mem_0: cmem_block_mem@829000000 {
- 			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
-@@ -36,7 +31,20 @@
+ PR = "${INC_PR}.0"
  
- 		cmem_block_1: cmem_block@1 {
- 			reg = <1>;
--			memory-region = <&cmem_block_mem_1>;
-+			sram = <&sram_cmem>;
- 		};
- 	};
- };
-+
-+&dsp_common_mpm_area {
-+	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
-+};
-+&mpm_mem {
-+	reg = <0xa0000000 0x02000000>;
-+};
-+
-+&msm_ram {
-+	sram_cmem: sram-cmem@80000 {
-+		reg = <0x80000 0xc0000>;
-+	};
-+};
 
 
