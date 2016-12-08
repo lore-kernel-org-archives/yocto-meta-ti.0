@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 81390E00D7F; Wed,  7 Dec 2016 13:00:59 -0800 (PST)
+	id BDFE7E00BB1; Thu,  8 Dec 2016 14:42:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEA6FE00D69
-	for <meta-ti@yoctoproject.org>; Wed,  7 Dec 2016 13:00:57 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40177E009FA
+	for <meta-ti@yoctoproject.org>; Thu,  8 Dec 2016 14:42:48 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2612D52A7B; Wed,  7 Dec 2016 21:00:56 +0000 (UTC)
+	id E863E52A8E; Thu,  8 Dec 2016 22:42:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161207210056.2612D52A7B@arago-project.org>
-Date: Wed,  7 Dec 2016 21:00:56 +0000 (UTC)
+Message-Id: <20161208224246.E863E52A8E@arago-project.org>
+Date: Thu,  8 Dec 2016 22:42:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: e-ruei1@ti.com : ti-sgx-ddk-um: fix a bug at the drmModeAddFB() call at null_drm_ws.c
+Subject: Denys Dmytriyenko : conf/machine: split SECDEV use for am5x and dra7 machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,55 +33,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2016 21:00:59 -0000
+X-List-Received-Date: Thu, 08 Dec 2016 22:42:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: 92f46e91b8af67f34c6396bb0bd360181872c072
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=92f46e91b8af67f34c6396bb0bd360181872c072
+Commit: 07b8724fbec124ee9c4608d7bf45e97c38ed5b1c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=07b8724fbec124ee9c4608d7bf45e97c38ed5b1c
 
-Author: e-ruei1@ti.com <e-ruei1@ti.com>
-Date:   Wed Dec  7 21:00:59 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Dec  8 02:06:06 2016 +0000
 
-ti-sgx-ddk-um: fix a bug at the drmModeAddFB() call at null_drm_ws.c
+conf/machine: split SECDEV use for am5x and dra7 machines
 
-Both parameter depth and bpp are set to uiPixelWidthInBits at the current
-implementation, however, the depth may not be the same as bpp for certain
-pixel format such as XRGB8888. This bug was exposed by the recent DRM
-driver change introducing strict error checking. To fix this problem,
-add utility function uiPixelDepthInBits to derive and use depth based on
-the pixel format.
-
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/am57xx-hs-evm.conf |    2 +-
+ conf/machine/dra7xx-hs-evm.conf |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 770cda2..5903b2e 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
+index be67205..906e6b0 100644
+--- a/conf/machine/am57xx-hs-evm.conf
++++ b/conf/machine/am57xx-hs-evm.conf
+@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "a5152f0b90bf3916eb1f478ac9fefe7d7ebe8bd9"
-+SRCREV = "3c0537748dd283b2de9c5369570aa2aade5a9979"
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ OPTEEMACHINE = "ti"
+ OPTEEFLAVOR = "am57xx_evm"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index db20aa2..8e8b566 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
+ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
  
- inherit update-rc.d
+-TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
  
--PR = "r17"
-+PR = "r18"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
- 
- DEPENDS += "libdrm udev libgbm wayland libffi"
+ OPTEEMACHINE = "ti"
+ OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
 
 
