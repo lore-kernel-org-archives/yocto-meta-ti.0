@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 97743E00BC1; Thu,  8 Dec 2016 14:43:05 -0800 (PST)
+	id 7B4D7E009CD; Thu,  8 Dec 2016 15:03:42 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E41B2E00C8F
-	for <meta-ti@yoctoproject.org>; Thu,  8 Dec 2016 14:42:53 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 128D652A0E; Thu,  8 Dec 2016 22:42:53 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A457E009CD
+	for <meta-ti@yoctoproject.org>; Thu,  8 Dec 2016 15:03:39 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 720FD208D7;
+	Thu,  8 Dec 2016 23:03:38 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id ogTm4ppLLTdH; Thu,  8 Dec 2016 23:03:38 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 51EEA207AF;
+	Thu,  8 Dec 2016 23:03:37 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by mail.denix.org (Postfix) with ESMTP id 70FC01621C7;
+	Thu,  8 Dec 2016 18:03:36 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20161208224253.128D652A0E@arago-project.org>
-Date: Thu,  8 Dec 2016 22:42:53 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine: split SECDEV use for am5x and dra7 machines
+Date: Thu,  8 Dec 2016 18:03:35 -0500
+Message-Id: <1481238215-28163-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] cmem: add support for memory carveouts of dra71 variant
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,52 +45,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2016 22:43:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 08 Dec 2016 23:03:42 -0000
 
-Module: meta-ti
-Branch: krogoth
-Commit: c664838d354b430fb380ca89de2c8ff3d1025569
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c664838d354b430fb380ca89de2c8ff3d1025569
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Dec  8 02:06:06 2016 +0000
-
-conf/machine: split SECDEV use for am5x and dra7 machines
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-kernel/linux/cmem.inc                      |  6 +++--
+ recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi | 29 ++++++++++++++++++++++
+ 2 files changed, 33 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi
 
- conf/machine/am57xx-hs-evm.conf |    2 +-
- conf/machine/dra7xx-hs-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
-index be67205..906e6b0 100644
---- a/conf/machine/am57xx-hs-evm.conf
-+++ b/conf/machine/am57xx-hs-evm.conf
-@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
- UBOOT_RD_LOADADDRESS = "0x84000000"
- UBOOT_RD_ENTRYPOINT = "0x84000000"
+diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
+index d4edc60..4541185 100644
+--- a/recipes-kernel/linux/cmem.inc
++++ b/recipes-kernel/linux/cmem.inc
+@@ -4,12 +4,13 @@
+ CMEM_MACHINE = "${MACHINE}"
+ CMEM_MACHINE_am57xx-evm = "am571x am572x"
+ CMEM_MACHINE_am57xx-hs-evm = "am571x am572x"
+-CMEM_MACHINE_dra7xx-evm = "dra72x dra74x"
+-CMEM_MACHINE_dra7xx-hs-evm = "dra72x dra74x"
++CMEM_MACHINE_dra7xx-evm = "dra71x dra72x dra74x"
++CMEM_MACHINE_dra7xx-hs-evm = "dra71x dra72x dra74x"
  
--TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
+ # Set cmem.dtsi per machine or machine variant
+ CMEM_DTSI = "cmem.dtsi"
+ CMEM_DTSI_am571x = "cmem-am571x.dtsi"
++CMEM_DTSI_dra71x = "cmem-dra71x.dtsi"
+ CMEM_DTSI_dra72x = "cmem-dra72x.dtsi"
  
- OPTEEMACHINE = "ti"
- OPTEEFLAVOR = "am57xx_evm"
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index db20aa2..8e8b566 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -11,7 +11,7 @@ UBOOT_LOADADDRESS = "0x82000000"
- UBOOT_RD_LOADADDRESS = "0x84000000"
- UBOOT_RD_ENTRYPOINT = "0x84000000"
- 
--TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}"
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
- 
- OPTEEMACHINE = "ti"
- OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
+ # Split device trees between variants
+@@ -17,6 +18,7 @@ CMEM_DEVICETREE = "${KERNEL_DEVICETREE}"
+ CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb"
+ CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am572x-idk.dtb \
+                           am572x-idk-lcd-osd.dtb am572x-idk-lcd-osd101t2587.dtb"
++CMEM_DEVICETREE_dra71x = "dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb"
+ CMEM_DEVICETREE_dra72x = "dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb \
+                           dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb"
+ CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra7-evm-lcd-osd101t2587.dtb"
+diff --git a/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi b/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi
+new file mode 100644
+index 0000000..ebd6129
+--- /dev/null
++++ b/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi
+@@ -0,0 +1,29 @@
++/ {
++        reserved-memory {
++                #address-cells = <2>;
++                #size-cells = <2>;
++                ranges;
++
++                cmem_block_mem_0: cmem_block_mem@a0000000 {
++                        reg = <0x0 0xa0000000 0x0 0x0c000000>;
++                        no-map;
++                        status = "okay";
++                };
++        };
++
++        cmem {
++                compatible = "ti,cmem";
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++		#pool-size-cells = <2>;
++
++                status = "okay";
++
++                cmem_block_0: cmem_block@0 {
++                        reg = <0>;
++                        memory-region = <&cmem_block_mem_0>;
++                        cmem-buf-pools = <1 0x0 0x0c000000>;
++                };
++        };
++};
+-- 
+2.7.4
 
 
