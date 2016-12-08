@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BDFE7E00BB1; Thu,  8 Dec 2016 14:42:58 -0800 (PST)
+	id BF178E00B79; Thu,  8 Dec 2016 14:42:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40177E009FA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 401AFE00A48
 	for <meta-ti@yoctoproject.org>; Thu,  8 Dec 2016 14:42:48 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E863E52A8E; Thu,  8 Dec 2016 22:42:46 +0000 (UTC)
+	id CE44052A0E; Thu,  8 Dec 2016 22:42:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161208224246.E863E52A8E@arago-project.org>
+Message-Id: <20161208224246.CE44052A0E@arago-project.org>
 Date: Thu,  8 Dec 2016 22:42:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : conf/machine: split SECDEV use for am5x and dra7 machines
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 08 Dec 2016 22:42:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: 07b8724fbec124ee9c4608d7bf45e97c38ed5b1c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=07b8724fbec124ee9c4608d7bf45e97c38ed5b1c
+Branch: master
+Commit: 0a85deda0420b359665228f813a535536d0e59e8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0a85deda0420b359665228f813a535536d0e59e8
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Dec  8 02:06:06 2016 +0000
