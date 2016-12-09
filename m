@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 68FABE00D89; Fri,  9 Dec 2016 14:27:34 -0800 (PST)
+	id 57D45E00D57; Fri,  9 Dec 2016 14:27:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F7AFE00D3F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93754E00D56
 	for <meta-ti@yoctoproject.org>; Fri,  9 Dec 2016 14:27:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F3A1A5297E; Fri,  9 Dec 2016 22:27:29 +0000 (UTC)
+	id 6D528529B8; Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161209222729.F3A1A5297E@arago-project.org>
-Date: Fri,  9 Dec 2016 22:27:29 +0000 (UTC)
+Message-Id: <20161209222730.6D528529B8@arago-project.org>
+Date: Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : cmem: add support for memory carveouts of dra71 variant
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.37 and ti2016. 06-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,89 +33,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2016 22:27:34 -0000
+X-List-Received-Date: Fri, 09 Dec 2016 22:27:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: dab6fb8c35c9e1d026dc4a75ebd6262be0d68dc6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dab6fb8c35c9e1d026dc4a75ebd6262be0d68dc6
+Commit: 47cc9a94258525f2a5bb1d4db3406d0d0d5a2f2a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=47cc9a94258525f2a5bb1d4db3406d0d0d5a2f2a
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Dec  9 05:03:35 2016 +0000
+Date:   Sat Dec 10 04:18:35 2016 +0000
 
-cmem: add support for memory carveouts of dra71 variant
+linux-ti-staging: update to 4.4.37 and ti2016.06-rc1 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/cmem.inc                      |    6 +++-
- recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi |   29 ++++++++++++++++++++
- 2 files changed, 33 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index d4edc60..4541185 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -4,12 +4,13 @@
- CMEM_MACHINE = "${MACHINE}"
- CMEM_MACHINE_am57xx-evm = "am571x am572x"
- CMEM_MACHINE_am57xx-hs-evm = "am571x am572x"
--CMEM_MACHINE_dra7xx-evm = "dra72x dra74x"
--CMEM_MACHINE_dra7xx-hs-evm = "dra72x dra74x"
-+CMEM_MACHINE_dra7xx-evm = "dra71x dra72x dra74x"
-+CMEM_MACHINE_dra7xx-hs-evm = "dra71x dra72x dra74x"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index b7888df..9cee40b 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
- # Set cmem.dtsi per machine or machine variant
- CMEM_DTSI = "cmem.dtsi"
- CMEM_DTSI_am571x = "cmem-am571x.dtsi"
-+CMEM_DTSI_dra71x = "cmem-dra71x.dtsi"
- CMEM_DTSI_dra72x = "cmem-dra72x.dtsi"
+ BRANCH = "ti-rt-linux-4.4.y"
  
- # Split device trees between variants
-@@ -17,6 +18,7 @@ CMEM_DEVICETREE = "${KERNEL_DEVICETREE}"
- CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb"
- CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am572x-idk.dtb \
-                           am572x-idk-lcd-osd.dtb am572x-idk-lcd-osd101t2587.dtb"
-+CMEM_DEVICETREE_dra71x = "dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb"
- CMEM_DEVICETREE_dra72x = "dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb \
-                           dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb"
- CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra7-evm-lcd-osd101t2587.dtb"
-diff --git a/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi b/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi
-new file mode 100644
-index 0000000..ebd6129
---- /dev/null
-+++ b/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi
-@@ -0,0 +1,29 @@
-+/ {
-+        reserved-memory {
-+                #address-cells = <2>;
-+                #size-cells = <2>;
-+                ranges;
-+
-+                cmem_block_mem_0: cmem_block_mem@a0000000 {
-+                        reg = <0x0 0xa0000000 0x0 0x0c000000>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
-+
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+		#pool-size-cells = <2>;
-+
-+                status = "okay";
-+
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x0 0x0c000000>;
-+                };
-+        };
-+};
+-SRCREV = "dd8a2ec8d0acf6431e7f67b4cebf44171cfa837d"
++SRCREV = "aaf30e5234b6e50ce4ef8dd96f571e5393c760d4"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index d1abdc9..67ed01e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -81,8 +81,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.4.y"
+ 
+-SRCREV = "33a812efb875d4dd31d1705fa6144ed11324a6eb"
+-PV = "4.4.32+git${SRCPV}"
++SRCREV = "93654b33257e160f2406d8906cbad936a7efadf6"
++PV = "4.4.37+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 
 
