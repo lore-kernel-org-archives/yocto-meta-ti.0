@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 53937E00D98; Fri,  9 Dec 2016 14:27:36 -0800 (PST)
+	id 58FA2E00D5A; Fri,  9 Dec 2016 14:27:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 921FEE00D4D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94BA9E00D57
 	for <meta-ti@yoctoproject.org>; Fri,  9 Dec 2016 14:27:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2EF85529C6; Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
+	id 5B19A529CD; Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161209222730.2EF85529C6@arago-project.org>
+Message-Id: <20161209222730.5B19A529CD@arago-project.org>
 Date: Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : goodix-fw: add Goodix GT9271 config firmware
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.06-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,81 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 459c78045aa2c25d36a4b338085b530698eb7dea
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=459c78045aa2c25d36a4b338085b530698eb7dea
+Commit: a3f6f7ff6d0ca043b06375f93cf97c2e66152a38
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a3f6f7ff6d0ca043b06375f93cf97c2e66152a38
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec 10 03:48:17 2016 +0000
+Date:   Sat Dec 10 04:18:34 2016 +0000
 
-goodix-fw: add Goodix GT9271 config firmware
+u-boot-ti-staging: update to ti2016.06-rc1 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/goodix-fw/goodix-fw_git.bb       |   29 ++++++++++++++++++++++++++
- recipes-kernel/linux/linux-ti-staging_4.4.bb |    9 ++++---
- 2 files changed, 34 insertions(+), 4 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/goodix-fw/goodix-fw_git.bb b/recipes-bsp/goodix-fw/goodix-fw_git.bb
-new file mode 100644
-index 0000000..815466b
---- /dev/null
-+++ b/recipes-bsp/goodix-fw/goodix-fw_git.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "Goodix GT9271 config firmware"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENCE.Spectrum-GT9271;md5=2a6de6be7af1fe46370c684daf27c852"
-+
-+PV = "1.0.0.0"
-+PR = "r0"
-+
-+CLEANBROKEN = "1"
-+
-+COMPATIBLE_MACHINE = "dra7xx"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+SRCREV = "f1a8d1d0131f83bd1a775cde7075eb67c070892c"
-+BRANCH ?= "ti-linux-firmware-4.1.y"
-+
-+SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-+ORIGIN = "DRA71x-RevA-GT9271_SpecDig_Config.bin"
-+TARGET = "goodix_9271_cfg.bin"
-+
-+do_install() {
-+	install -d ${D}${base_libdir}/firmware
-+	install -m 0644 ${S}/ti-evm/${ORIGIN} ${D}${base_libdir}/firmware/${TARGET}
-+}
-+
-+FILES_${PN} = "${base_libdir}/firmware"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 92ef5eb..d1abdc9 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -16,15 +16,16 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
- # Pull in the devicetree files into the rootfs
- RDEPENDS_kernel-base += "kernel-devicetree"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 99fa37c..7600158 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--# Add a run-time dependency for the PM firmware to be installed
--# on the target file system.
-+# Add run-time dependency for PM firmware to the rootfs
- RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
- RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--# Add a run-time dependency for the VPE VPDMA firmware to be installed
--# on the target file system.
-+# Add run-time dependency for VPE VPDMA firmware to the rootfs
- RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+-PR = "r26"
++PR = "r27"
+ PV_append = "+git${SRCPV}"
  
-+# Add run-time dependency for Goodix firmware to the rootfs
-+RDEPENDS_kernel-base_append_dra7xx = " goodix-fw"
-+
- # Install boot-monitor skern file into /boot dir of rootfs
- RDEPENDS_kernel-base_append_keystone = " boot-monitor"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
+ BRANCH ?= "ti-u-boot-2016.05"
+ 
+-SRCREV = "6c5519b6fc09274d28d653a9a3cabf7dc74883ca"
++SRCREV = "72e318bdcea876ac9a4cad2abcaca483425521c7"
+ 
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
