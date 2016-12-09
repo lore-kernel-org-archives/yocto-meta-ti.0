@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3F8D4E00D65; Fri,  9 Dec 2016 14:27:39 -0800 (PST)
+	id 4826AE00D81; Fri,  9 Dec 2016 14:27:39 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A9ECE00D69
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49470E00D68
 	for <meta-ti@yoctoproject.org>; Fri,  9 Dec 2016 14:27:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1B0CD52A8E; Fri,  9 Dec 2016 22:27:31 +0000 (UTC)
+	id 5013552AAE; Fri,  9 Dec 2016 22:27:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161209222731.1B0CD52A8E@arago-project.org>
+Message-Id: <20161209222731.5013552AAE@arago-project.org>
 Date: Fri,  9 Dec 2016 22:27:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am57xx-hs-evm, dra7xx-hs-evm: update OPTEEFLAVOR to match latest OPTEE code
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.37 and ti2016. 06-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: 6597647a5216e479852ff28320d7d659a0a0042d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6597647a5216e479852ff28320d7d659a0a0042d
+Commit: ab331c387f4a810786733d853dd87f4c624ab6c2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ab331c387f4a810786733d853dd87f4c624ab6c2
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec 10 02:49:59 2016 +0000
+Date:   Sat Dec 10 04:18:35 2016 +0000
 
-am57xx-hs-evm, dra7xx-hs-evm: update OPTEEFLAVOR to match latest OPTEE code
+linux-ti-staging: update to 4.4.37 and ti2016.06-rc1 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am57xx-hs-evm.conf |    2 +-
- conf/machine/dra7xx-hs-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
-index 906e6b0..cd03126 100644
---- a/conf/machine/am57xx-hs-evm.conf
-+++ b/conf/machine/am57xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+index b7888df..9cee40b 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "am57xx_evm"
-+OPTEEFLAVOR = "am57xx"
- OPTEEOUTPUTMACHINE = "ti"
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index 8e8b566..b6d5528 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
+ BRANCH = "ti-rt-linux-4.4.y"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
-+OPTEEFLAVOR = "dra7xx"
- OPTEEOUTPUTMACHINE = "ti"
+-SRCREV = "dd8a2ec8d0acf6431e7f67b4cebf44171cfa837d"
++SRCREV = "aaf30e5234b6e50ce4ef8dd96f571e5393c760d4"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+index d1abdc9..67ed01e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
+@@ -81,8 +81,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.4.y"
+ 
+-SRCREV = "33a812efb875d4dd31d1705fa6144ed11324a6eb"
+-PV = "4.4.32+git${SRCPV}"
++SRCREV = "93654b33257e160f2406d8906cbad936a7efadf6"
++PV = "4.4.37+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 
 
