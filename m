@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2DC21E00DAF; Fri,  9 Dec 2016 14:27:39 -0800 (PST)
+	id 3F8D4E00D65; Fri,  9 Dec 2016 14:27:39 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1293DE00D65
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A9ECE00D69
 	for <meta-ti@yoctoproject.org>; Fri,  9 Dec 2016 14:27:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C413D52A4B; Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
+	id 1B0CD52A8E; Fri,  9 Dec 2016 22:27:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161209222730.C413D52A4B@arago-project.org>
-Date: Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
+Message-Id: <20161209222731.1B0CD52A8E@arago-project.org>
+Date: Fri,  9 Dec 2016 22:27:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : goodix-fw: add Goodix GT9271 config firmware
+Subject: Denys Dmytriyenko : am57xx-hs-evm, dra7xx-hs-evm: update OPTEEFLAVOR to match latest OPTEE code
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,82 +37,44 @@ X-List-Received-Date: Fri, 09 Dec 2016 22:27:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 1c08c3ecb9161541b0d24adc32e3ff2b0c8ab74b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1c08c3ecb9161541b0d24adc32e3ff2b0c8ab74b
+Branch: morty
+Commit: 6597647a5216e479852ff28320d7d659a0a0042d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6597647a5216e479852ff28320d7d659a0a0042d
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec 10 03:48:17 2016 +0000
+Date:   Sat Dec 10 02:49:59 2016 +0000
 
-goodix-fw: add Goodix GT9271 config firmware
+am57xx-hs-evm, dra7xx-hs-evm: update OPTEEFLAVOR to match latest OPTEE code
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/goodix-fw/goodix-fw_git.bb       |   29 ++++++++++++++++++++++++++
- recipes-kernel/linux/linux-ti-staging_4.4.bb |    9 ++++---
- 2 files changed, 34 insertions(+), 4 deletions(-)
+ conf/machine/am57xx-hs-evm.conf |    2 +-
+ conf/machine/dra7xx-hs-evm.conf |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/goodix-fw/goodix-fw_git.bb b/recipes-bsp/goodix-fw/goodix-fw_git.bb
-new file mode 100644
-index 0000000..815466b
---- /dev/null
-+++ b/recipes-bsp/goodix-fw/goodix-fw_git.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "Goodix GT9271 config firmware"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENCE.Spectrum-GT9271;md5=2a6de6be7af1fe46370c684daf27c852"
-+
-+PV = "1.0.0.0"
-+PR = "r0"
-+
-+CLEANBROKEN = "1"
-+
-+COMPATIBLE_MACHINE = "dra7xx"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+SRCREV = "f1a8d1d0131f83bd1a775cde7075eb67c070892c"
-+BRANCH ?= "ti-linux-firmware-4.1.y"
-+
-+SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-+ORIGIN = "DRA71x-RevA-GT9271_SpecDig_Config.bin"
-+TARGET = "goodix_9271_cfg.bin"
-+
-+do_install() {
-+	install -d ${D}${base_libdir}/firmware
-+	install -m 0644 ${S}/ti-evm/${ORIGIN} ${D}${base_libdir}/firmware/${TARGET}
-+}
-+
-+FILES_${PN} = "${base_libdir}/firmware"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 92ef5eb..d1abdc9 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -16,15 +16,16 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
- # Pull in the devicetree files into the rootfs
- RDEPENDS_kernel-base += "kernel-devicetree"
+diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
+index 906e6b0..cd03126 100644
+--- a/conf/machine/am57xx-hs-evm.conf
++++ b/conf/machine/am57xx-hs-evm.conf
+@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
  
--# Add a run-time dependency for the PM firmware to be installed
--# on the target file system.
-+# Add run-time dependency for PM firmware to the rootfs
- RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
- RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
+ OPTEEMACHINE = "ti"
+-OPTEEFLAVOR = "am57xx_evm"
++OPTEEFLAVOR = "am57xx"
+ OPTEEOUTPUTMACHINE = "ti"
+diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
+index 8e8b566..b6d5528 100644
+--- a/conf/machine/dra7xx-hs-evm.conf
++++ b/conf/machine/dra7xx-hs-evm.conf
+@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
  
--# Add a run-time dependency for the VPE VPDMA firmware to be installed
--# on the target file system.
-+# Add run-time dependency for VPE VPDMA firmware to the rootfs
- RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
- 
-+# Add run-time dependency for Goodix firmware to the rootfs
-+RDEPENDS_kernel-base_append_dra7xx = " goodix-fw"
-+
- # Install boot-monitor skern file into /boot dir of rootfs
- RDEPENDS_kernel-base_append_keystone = " boot-monitor"
- 
+ OPTEEMACHINE = "ti"
+-OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
++OPTEEFLAVOR = "dra7xx"
+ OPTEEOUTPUTMACHINE = "ti"
 
 
