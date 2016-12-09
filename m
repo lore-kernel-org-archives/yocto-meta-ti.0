@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 67A51E00D8B; Fri,  9 Dec 2016 14:27:34 -0800 (PST)
+	id 68FABE00D89; Fri,  9 Dec 2016 14:27:34 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90AE3E00D42
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F7AFE00D3F
 	for <meta-ti@yoctoproject.org>; Fri,  9 Dec 2016 14:27:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 19A8252975; Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
+	id F3A1A5297E; Fri,  9 Dec 2016 22:27:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161209222730.19A8252975@arago-project.org>
-Date: Fri,  9 Dec 2016 22:27:30 +0000 (UTC)
+Message-Id: <20161209222729.F3A1A5297E@arago-project.org>
+Date: Fri,  9 Dec 2016 22:27:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am57xx-hs-evm, dra7xx-hs-evm: update OPTEEFLAVOR to match latest OPTEE code
+Subject: Denys Dmytriyenko : cmem: add support for memory carveouts of dra71 variant
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +38,84 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: f449d8bb25e7f86b6a26e15e0e3e542d474e08c4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f449d8bb25e7f86b6a26e15e0e3e542d474e08c4
+Commit: dab6fb8c35c9e1d026dc4a75ebd6262be0d68dc6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dab6fb8c35c9e1d026dc4a75ebd6262be0d68dc6
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec 10 02:49:59 2016 +0000
+Date:   Fri Dec  9 05:03:35 2016 +0000
 
-am57xx-hs-evm, dra7xx-hs-evm: update OPTEEFLAVOR to match latest OPTEE code
+cmem: add support for memory carveouts of dra71 variant
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am57xx-hs-evm.conf |    2 +-
- conf/machine/dra7xx-hs-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/cmem.inc                      |    6 +++-
+ recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi |   29 ++++++++++++++++++++
+ 2 files changed, 33 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/am57xx-hs-evm.conf b/conf/machine/am57xx-hs-evm.conf
-index 906e6b0..cd03126 100644
---- a/conf/machine/am57xx-hs-evm.conf
-+++ b/conf/machine/am57xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
+diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
+index d4edc60..4541185 100644
+--- a/recipes-kernel/linux/cmem.inc
++++ b/recipes-kernel/linux/cmem.inc
+@@ -4,12 +4,13 @@
+ CMEM_MACHINE = "${MACHINE}"
+ CMEM_MACHINE_am57xx-evm = "am571x am572x"
+ CMEM_MACHINE_am57xx-hs-evm = "am571x am572x"
+-CMEM_MACHINE_dra7xx-evm = "dra72x dra74x"
+-CMEM_MACHINE_dra7xx-hs-evm = "dra72x dra74x"
++CMEM_MACHINE_dra7xx-evm = "dra71x dra72x dra74x"
++CMEM_MACHINE_dra7xx-hs-evm = "dra71x dra72x dra74x"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "am57xx_evm"
-+OPTEEFLAVOR = "am57xx"
- OPTEEOUTPUTMACHINE = "ti"
-diff --git a/conf/machine/dra7xx-hs-evm.conf b/conf/machine/dra7xx-hs-evm.conf
-index 8e8b566..b6d5528 100644
---- a/conf/machine/dra7xx-hs-evm.conf
-+++ b/conf/machine/dra7xx-hs-evm.conf
-@@ -14,5 +14,5 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
+ # Set cmem.dtsi per machine or machine variant
+ CMEM_DTSI = "cmem.dtsi"
+ CMEM_DTSI_am571x = "cmem-am571x.dtsi"
++CMEM_DTSI_dra71x = "cmem-dra71x.dtsi"
+ CMEM_DTSI_dra72x = "cmem-dra72x.dtsi"
  
- OPTEEMACHINE = "ti"
--OPTEEFLAVOR = "dra7_evm dra72_evm_revc dra71_evm"
-+OPTEEFLAVOR = "dra7xx"
- OPTEEOUTPUTMACHINE = "ti"
+ # Split device trees between variants
+@@ -17,6 +18,7 @@ CMEM_DEVICETREE = "${KERNEL_DEVICETREE}"
+ CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb"
+ CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am572x-idk.dtb \
+                           am572x-idk-lcd-osd.dtb am572x-idk-lcd-osd101t2587.dtb"
++CMEM_DEVICETREE_dra71x = "dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb"
+ CMEM_DEVICETREE_dra72x = "dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb \
+                           dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb"
+ CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra7-evm-lcd-osd101t2587.dtb"
+diff --git a/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi b/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi
+new file mode 100644
+index 0000000..ebd6129
+--- /dev/null
++++ b/recipes-kernel/linux/files/dra7xx/cmem-dra71x.dtsi
+@@ -0,0 +1,29 @@
++/ {
++        reserved-memory {
++                #address-cells = <2>;
++                #size-cells = <2>;
++                ranges;
++
++                cmem_block_mem_0: cmem_block_mem@a0000000 {
++                        reg = <0x0 0xa0000000 0x0 0x0c000000>;
++                        no-map;
++                        status = "okay";
++                };
++        };
++
++        cmem {
++                compatible = "ti,cmem";
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++		#pool-size-cells = <2>;
++
++                status = "okay";
++
++                cmem_block_0: cmem_block@0 {
++                        reg = <0>;
++                        memory-region = <&cmem_block_mem_0>;
++                        cmem-buf-pools = <1 0x0 0x0c000000>;
++                };
++        };
++};
 
 
