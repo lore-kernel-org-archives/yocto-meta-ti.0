@@ -1,6 +1,6 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 71AA7E00E31; Fri, 16 Dec 2016 07:04:41 -0800 (PST)
+	id 8AFF3E00E58; Fri, 16 Dec 2016 07:51:33 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,32 +8,28 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 1091 seconds by postgrey-1.32 at yocto-www;
-	Fri, 16 Dec 2016 07:04:39 PST
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F24F8E00B57
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 07:04:39 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBGEkTPe005818
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 08:46:29 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGEkTfT019257
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 08:46:29 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 16 Dec 2016 08:46:28 -0600
-Received: from swubn01.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGEkP3f021098;
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E9F8E00E53
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 07:51:27 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBGEkRS6025228
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 08:46:27 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGEkRLw006282
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 08:46:27 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
 	Fri, 16 Dec 2016 08:46:27 -0600
+Received: from swubn01.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGEkP3e021098;
+	Fri, 16 Dec 2016 08:46:26 -0600
 From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Dec 2016 20:16:23 +0530
-Message-ID: <1481899583-31446-2-git-send-email-a0393906@ti.com>
+Date: Fri, 16 Dec 2016 20:16:22 +0530
+Message-ID: <1481899583-31446-1-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1481899583-31446-1-git-send-email-a0393906@ti.com>
-References: <1481899583-31446-1-git-send-email-a0393906@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] libdce: Update SRCREV add MJPEG Encoder support
+Subject: [PATCH 1/2] ipumm-fw: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,29 +42,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2016 15:04:41 -0000
+X-List-Received-Date: Fri, 16 Dec 2016 15:51:33 -0000
 Content-Type: text/plain
+
+This will include the following updates:
+ * Addition of MJPEG Encoder
+ * minor bug fixes
+ * codec updates for mpeg2d
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- recipes-multimedia/libdce/libdce_3.00.12.00.bb |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-multimedia/libdce/libdce_3.00.12.00.bb b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
-index 32f12b4..b1bbeab 100644
---- a/recipes-multimedia/libdce/libdce_3.00.12.00.bb
-+++ b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
-@@ -7,7 +7,9 @@ inherit autotools pkgconfig
- DEPENDS = "libdrm ti-ipc"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 4bebc2a..85dfc26 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -9,7 +9,7 @@ python __anonymous() {
+ DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+ LICENSE = "TI-TSPA"
  
- SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
--SRCREV = "1b1b5a2e5e995f607c22651579b49aa98d08610a"
-+SRCREV = "c51f144b079836afb868bff44afe7308248a0217"
-+
-+PR = "r1"
+-LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
++LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=5cc572579f07af266ab57fc17d762c7f"
+ 
+ COMPATIBLE_MACHINE = "dra7xx"
+ 
+@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+ 
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ 
+-SRCREV = "cd93550ed32c7849de91288e7d90cba3bd89614b"
++SRCREV = "42fd71596b161e79e017e00741433e84705a28a6"
  
  S = "${WORKDIR}/git"
- EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
+ 
+ PV = "3.00.12.00"
+-PR = "r0"
++PR = "r1"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
 -- 
 1.7.9.5
 
