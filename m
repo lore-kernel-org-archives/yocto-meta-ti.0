@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0DB0CE00EC7; Fri, 16 Dec 2016 09:45:12 -0800 (PST)
+	id 10EEFE00EC6; Fri, 16 Dec 2016 09:45:12 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0F220E00D46
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 09:45:10 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE8ADE00D18
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 09:45:09 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 289CB52A7D; Fri, 16 Dec 2016 17:45:09 +0000 (UTC)
+	id DA68F52A5B; Fri, 16 Dec 2016 17:45:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161216174509.289CB52A7D@arago-project.org>
-Date: Fri, 16 Dec 2016 17:45:09 +0000 (UTC)
+Message-Id: <20161216174508.DA68F52A5B@arago-project.org>
+Date: Fri, 16 Dec 2016 17:45:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: Update SRCREV
+Subject: Sam Nelson : recipes-kernel:cmem.dtsi:K2G: Update to remove redefinition of mpm areas
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,54 +38,85 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 7ea352966bc132535d5be50bded8f4d00d5753fd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7ea352966bc132535d5be50bded8f4d00d5753fd
+Commit: 836656c25c62da330186b6641bd3525a21d49649
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=836656c25c62da330186b6641bd3525a21d49649
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Fri Dec 16 20:46:22 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Dec 16 01:55:53 2016 +0000
 
-ipumm-fw: Update SRCREV
+recipes-kernel:cmem.dtsi:K2G: Update to remove redefinition of mpm areas
 
-This will include the following updates:
- * Addition of MJPEG Encoder
- * minor bug fixes
- * codec updates for mpeg2d
+Cleaning up redefinition of mpm areas and moving to use what is defined
+in the base device tree files as is.
+This effectively changes to a new memory partition.
+Note that this change needs a corresponding change in the dts files in
+the kernel tree to adjust the mpm memory area to the new memory
+partition.
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+The CMEM areas here are adjusted such that there is no overlap with the
+mpm areas defined in the dts files in the kernel tree.
+Note also the address ranges are arranged differently for K2G compared
+to  the other Keystone platforms.
+(This is to accomodate common memory map for multiple k2g platforms)
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/files/k2g/cmem.dtsi |   24 +++---------------------
+ 1 files changed, 3 insertions(+), 21 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 4bebc2a..85dfc26 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -9,7 +9,7 @@ python __anonymous() {
- DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
- LICENSE = "TI-TSPA"
+diff --git a/recipes-kernel/linux/files/k2g/cmem.dtsi b/recipes-kernel/linux/files/k2g/cmem.dtsi
+index 4716581..4c68d82 100644
+--- a/recipes-kernel/linux/files/k2g/cmem.dtsi
++++ b/recipes-kernel/linux/files/k2g/cmem.dtsi
+@@ -1,14 +1,8 @@
+ / {
+ 	reserved-memory {
  
--LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
-+LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=5cc572579f07af266ab57fc17d762c7f"
+-		cmem_block_mem_0: cmem_block_mem@829000000 {
+-			reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
+-			no-map;
+-			status = "okay";
+-		};
+-
+-		cmem_block_mem_2: cmem_block_mem@822000000 {
+-			reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
++		cmem_block_mem_0: cmem_block_mem@818000000 {
++			reg = <0x00000008 0x18000000 0x00000000 0x5000000>;
+ 			no-map;
+ 			status = "okay";
+ 		};
+@@ -26,28 +20,16 @@
+ 		cmem_block_0: cmem_block@0 {
+ 			reg = <0>;
+ 			memory-region = <&cmem_block_mem_0>;
+-			cmem-buf-pools = <1 0x00000000 0x17000000>;
++			cmem-buf-pools = <1 0x00000000 0x5000000>;
+ 		};
  
- COMPATIBLE_MACHINE = "dra7xx"
+ 		cmem_block_1: cmem_block@1 {
+ 			reg = <1>;
+ 			sram = <&sram_cmem>;
+ 		};
+-
+-		cmem_block_2: cmem_block@2 {
+-			reg = <2>;
+-			memory-region = <&cmem_block_mem_2>;
+-		 };
+ 	};
+ };
  
-@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
- 
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
- 
--SRCREV = "cd93550ed32c7849de91288e7d90cba3bd89614b"
-+SRCREV = "42fd71596b161e79e017e00741433e84705a28a6"
- 
- S = "${WORKDIR}/git"
- 
- PV = "3.00.12.00"
--PR = "r0"
-+PR = "r1"
- 
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+-&dsp_common_mpm_area {
+-	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
+-};
+-&mpm_mem {
+-	reg = <0xa0000000 0x02000000>;
+-};
+-
+ &msm_ram {
+ 	sram_cmem: sram-cmem@a0000 {
+ 		reg = <0xa0000 0x57000>;
 
 
