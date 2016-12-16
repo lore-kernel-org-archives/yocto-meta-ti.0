@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9FA15E00DD2; Fri, 16 Dec 2016 09:40:47 -0800 (PST)
+	id 0DB0CE00EC7; Fri, 16 Dec 2016 09:45:12 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF578E00DAE
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 09:40:45 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0F220E00D46
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 09:45:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2081C52A3F; Fri, 16 Dec 2016 17:40:44 +0000 (UTC)
+	id 289CB52A7D; Fri, 16 Dec 2016 17:45:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161216174044.2081C52A3F@arago-project.org>
-Date: Fri, 16 Dec 2016 17:40:44 +0000 (UTC)
+Message-Id: <20161216174509.289CB52A7D@arago-project.org>
+Date: Fri, 16 Dec 2016 17:45:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Tag ti2016.06-rc1 : Denys Dmytriyenko : LCPD Core SDK ti2016.06-rc1
+Subject: Karthik Ramanan : ipumm-fw: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,16 +33,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2016 17:40:47 -0000
+X-List-Received-Date: Fri, 16 Dec 2016 17:45:12 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: refs/tags/ti2016.06-rc1
-Tag:    cec802f21e478254e0d94fbe5785a93395afa9ed
-URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=cec802f21e478254e0d94fbe5785a93395afa9ed
+Branch: master
+Commit: 7ea352966bc132535d5be50bded8f4d00d5753fd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7ea352966bc132535d5be50bded8f4d00d5753fd
 
-Tagger: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Dec 16 12:40:33 2016 -0500
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Fri Dec 16 20:46:22 2016 +0000
 
-LCPD Core SDK ti2016.06-rc1
+ipumm-fw: Update SRCREV
+
+This will include the following updates:
+ * Addition of MJPEG Encoder
+ * minor bug fixes
+ * codec updates for mpeg2d
+
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 4bebc2a..85dfc26 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -9,7 +9,7 @@ python __anonymous() {
+ DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+ LICENSE = "TI-TSPA"
+ 
+-LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
++LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=5cc572579f07af266ab57fc17d762c7f"
+ 
+ COMPATIBLE_MACHINE = "dra7xx"
+ 
+@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+ 
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ 
+-SRCREV = "cd93550ed32c7849de91288e7d90cba3bd89614b"
++SRCREV = "42fd71596b161e79e017e00741433e84705a28a6"
+ 
+ S = "${WORKDIR}/git"
+ 
+ PV = "3.00.12.00"
+-PR = "r0"
++PR = "r1"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+
 
