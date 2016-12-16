@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7B19CE00E4E; Fri, 16 Dec 2016 09:12:52 -0800 (PST)
+	id 45A1CE00E90; Fri, 16 Dec 2016 09:16:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,28 +9,33 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,HTML_MESSAGE
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
+X-Greylist: delayed 317 seconds by postgrey-1.32 at yocto-www;
+	Fri, 16 Dec 2016 09:16:07 PST
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A207E008CA
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 09:12:48 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBGHCmsl008350
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 11:12:48 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGHCmsL014549
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 11:12:48 -0600
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0294.000; Fri, 16 Dec 2016 11:12:47 -0600
-From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "R, Karthik" <karthik.ramanan@ti.com>
-Thread-Topic: [meta-ti] [PATCH 1/2] ipumm-fw: Update SRCREV
-Thread-Index: AdJXv58xVvoyxarFtkeVBA/uionMAw==
-Date: Fri, 16 Dec 2016 17:12:46 +0000
-Message-ID: <012b8cea-868d-4c7c-8477-f4428f88323f@email.android.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9F0E3E00E8A
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 09:16:07 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBGHG7Ml008741
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 11:16:07 -0600
+Received: from dbdlxv05.itg.ti.com (dbdlxv05.itg.ti.com [172.24.171.60])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGHG6PD002837
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 11:16:07 -0600
+Received: from DBDE72.ent.ti.com (dbdmailx.itg.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGHG2kS028126
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 22:46:04 +0530
+Received: from [172.22.216.9] (172.22.216.9) by DBDE72.ent.ti.com
+	(172.24.171.97) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 16 Dec 2016 22:46:00 +0530
+To: "Dmytriyenko, Denys" <denys@ti.com>, "R, Karthik" <karthik.ramanan@ti.com>
+References: <012b8cea-868d-4c7c-8477-f4428f88323f@email.android.com>
+From: Karthik Ramanan <a0393906@ti.com>
+Message-ID: <5854214D.7040901@ti.com>
+Date: Fri, 16 Dec 2016 22:45:57 +0530
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
+	Thunderbird/38.6.0
 MIME-Version: 1.0
+In-Reply-To: <012b8cea-868d-4c7c-8477-f4428f88323f@email.android.com>
+X-Originating-IP: [172.22.216.9]
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH 1/2] ipumm-fw: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
@@ -45,121 +50,231 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2016 17:12:52 -0000
-Content-Language: en-US
+X-List-Received-Date: Fri, 16 Dec 2016 17:16:09 -0000
 Content-Type: multipart/alternative;
-	boundary="_000_012b8cea868d4c7c8477f4428f88323femailandroidcom_"
+	boundary="------------060302020506050306070809"
 
---_000_012b8cea868d4c7c8477f4428f88323femailandroidcom_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+--------------060302020506050306070809
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-RG9lcyB0aGF0IGNoYW5nZSB0aGUgb3ZlcmFsbCBsaWNlbnNlIGluIGFueSB3YXk/DQoNCk9uIERl
-YyAxNiwgMjAxNiAxMjoxMCwgIlIsIEthcnRoaWsiIDxrYXJ0aGlrLnJhbWFuYW5AdGkuY29tPiB3
-cm90ZToNCkhpIERlbnlzLA0KDQpUaGUgbGljZW5zZSBmaWxlIGhhcyBjaGFuZ2VkIHRvIHJlZmxl
-Y3QgdGhlIGFkZGl0aW9uIG9mIHRoZSBuZXcgTUpQRUcgRW5jb2Rlci4NClRoZXJlIGlzIG5vIG90
-aGVyIGNoYW5nZSBhcGFydCBmcm9tIHRoYXQuDQoNCkxldCBtZSBrbm93IGlmIEkgbmVlZCB0byBz
-dWJtaXQgdGhlIHYyIG9mIHRoZSBwYXRjaCB3aXRoIHRoZSBleHBhbmRlZCBkZXNjcmlwdGlvbi4N
-Cg0KUmVnYXJkcw0KS2FydGhpaw0KDQpPbiAxNi1EZWMtMTYgMTA6MTcgUE0sIERteXRyaXllbmtv
-LCBEZW55cyB3cm90ZToNClBsZWFzZSBicmllZmx5IGV4cGxhaW4gaW4gdGhlIGRlc2NyaXB0aW9u
-IHRoZSBjaGFuZ2UgaW4gbGljZW5zZSBjaGVja3N1bSBhbmQgd2hlcmUgaXQgYWZmZWN0cyB0aGUg
-bGljZW5zZSBpdHNlbGYuIFRoYW5rcy4NCg0KT24gRGVjIDE2LCAyMDE2IDExOjQ0LCAiUiwgS2Fy
-dGhpayIgPGthcnRoaWsucmFtYW5hbkB0aS5jb20+PG1haWx0bzprYXJ0aGlrLnJhbWFuYW5AdGku
-Y29tPiB3cm90ZToNClRoaXMgd2lsbCBpbmNsdWRlIHRoZSBmb2xsb3dpbmcgdXBkYXRlczoNCiAq
-IEFkZGl0aW9uIG9mIE1KUEVHIEVuY29kZXINCiAqIG1pbm9yIGJ1ZyBmaXhlcw0KICogY29kZWMg
-dXBkYXRlcyBmb3IgbXBlZzJkDQoNClNpZ25lZC1vZmYtYnk6IEthcnRoaWsgUmFtYW5hbiA8YTAz
-OTM5MDZAdGkuY29tPjxtYWlsdG86YTAzOTM5MDZAdGkuY29tPg0KLS0tDQogcmVjaXBlcy1ic3Av
-aXB1bW0tZncvaXB1bW0tZndfZ2l0LmJiIHwgICAgNiArKystLS0NCiAxIGZpbGUgY2hhbmdlZCwg
-MyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvcmVjaXBlcy1i
-c3AvaXB1bW0tZncvaXB1bW0tZndfZ2l0LmJiIGIvcmVjaXBlcy1ic3AvaXB1bW0tZncvaXB1bW0t
-ZndfZ2l0LmJiDQppbmRleCA0YmViYzJhLi44NWRmYzI2IDEwMDY0NA0KLS0tIGEvcmVjaXBlcy1i
-c3AvaXB1bW0tZncvaXB1bW0tZndfZ2l0LmJiDQorKysgYi9yZWNpcGVzLWJzcC9pcHVtbS1mdy9p
-cHVtbS1md19naXQuYmINCkBAIC05LDcgKzksNyBAQCBweXRob24gX19hbm9ueW1vdXMoKSB7DQog
-REVTQ1JJUFRJT04gPSAiRmlybXdhcmUgZm9yIElQVSBmb3Igc3VwcG9ydGluZyBBY2NlbGVyYXRl
-ZCBNTSBkZWNvZGUgYW5kIGVuY29kZSINCiBMSUNFTlNFID0gIlRJLVRTUEEiDQoNCi1MSUNfRklM
-RVNfQ0hLU1VNID0gImZpbGU6Ly9UZXhhc19JbnN0cnVtZW50c19pcHVtbV9NYW5pZmVzdC5wZGY7
-bWQ1PWUzZTdkNmVmYzdhY2E4Nzc4OTc3NTE5OGM0Y2E5ZjhlIg0KK0xJQ19GSUxFU19DSEtTVU0g
-PSAiZmlsZTovL1RleGFzX0luc3RydW1lbnRzX2lwdW1tX01hbmlmZXN0LnBkZjttZDU9NWNjNTcy
-NTc5ZjA3YWYyNjZhYjU3ZmMxN2Q3NjJjN2YiDQoNCiBDT01QQVRJQkxFX01BQ0hJTkUgPSAiZHJh
-N3h4Ig0KDQpAQCAtMTcsMTIgKzE3LDEyIEBAIFJERVBFTkRTXyR7UE59ID0gIiBsaWJkY2UiDQoN
-CiBTUkNfVVJJID0gImdpdDovL2dpdC50aS5jb20vaXZpbW0vaXB1bW0uZ2l0O3Byb3RvY29sPWdp
-dCINCg0KLVNSQ1JFViA9ICJjZDkzNTUwZWQzMmM3ODQ5ZGU5MTI4OGU3ZDkwY2JhM2JkODk2MTRi
-Ig0KK1NSQ1JFViA9ICI0MmZkNzE1OTZiMTYxZTc5ZTAxN2UwMDc0MTQzM2U4NDcwNWEyOGE2Ig0K
-DQogUyA9ICIke1dPUktESVJ9L2dpdCINCg0KIFBWID0gIjMuMDAuMTIuMDAiDQotUFIgPSAicjAi
-DQorUFIgPSAicjEiDQoNCiByZXF1aXJlIHJlY2lwZXMtdGkvaW5jbHVkZXMvdGktcGF0aHMuaW5j
-DQogcmVxdWlyZSByZWNpcGVzLXRpL2luY2x1ZGVzL3RpLXN0YWdpbmcuaW5jDQotLQ0KMS43Ljku
-NQ0KDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18N
-Cm1ldGEtdGkgbWFpbGluZyBsaXN0DQptZXRhLXRpQHlvY3RvcHJvamVjdC5vcmc8bWFpbHRvOm1l
-dGEtdGlAeW9jdG9wcm9qZWN0Lm9yZz4NCmh0dHBzOi8vbGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9s
-aXN0aW5mby9tZXRhLXRpDQoNCg0KDQo=
+No. It doesn't. Double checked the license type between the old and new 
+and it is the same.
 
---_000_012b8cea868d4c7c8477f4428f88323femailandroidcom_
+Regards
+Karthik
+
+On 16-Dec-16 10:42 PM, Dmytriyenko, Denys wrote:
+> Does that change the overall license in any way?
+>
+> On Dec 16, 2016 12:10, "R, Karthik" <karthik.ramanan@ti.com> wrote:
+>
+>     Hi Denys,
+>
+>     The license file has changed to reflect the addition of the new
+>     MJPEG Encoder.
+>     There is no other change apart from that.
+>
+>     Let me know if I need to submit the v2 of the patch with the
+>     expanded description.
+>
+>     Regards
+>     Karthik
+>
+>     On 16-Dec-16 10:17 PM, Dmytriyenko, Denys wrote:
+>
+>         Please briefly explain in the description the change in
+>         license checksum and where it affects the license itself. Thanks.
+>
+>         On Dec 16, 2016 11:44, "R, Karthik" <karthik.ramanan@ti.com>
+>         <mailto:karthik.ramanan@ti.com> wrote:
+>
+>             This will include the following updates:
+>              * Addition of MJPEG Encoder
+>              * minor bug fixes
+>              * codec updates for mpeg2d
+>
+>             Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+>             <mailto:a0393906@ti.com>
+>             ---
+>              recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
+>              1 file changed, 3 insertions(+), 3 deletions(-)
+>
+>             diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+>             b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+>             index 4bebc2a..85dfc26 100644
+>             --- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+>             +++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+>             @@ -9,7 +9,7 @@ python __anonymous() {
+>              DESCRIPTION = "Firmware for IPU for supporting
+>             Accelerated MM decode and encode"
+>              LICENSE = "TI-TSPA"
+>
+>             -LIC_FILES_CHKSUM =
+>             "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
+>             +LIC_FILES_CHKSUM =
+>             "file://Texas_Instruments_ipumm_Manifest.pdf;md5=5cc572579f07af266ab57fc17d762c7f"
+>
+>              COMPATIBLE_MACHINE = "dra7xx"
+>
+>             @@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+>
+>              SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+>
+>             -SRCREV = "cd93550ed32c7849de91288e7d90cba3bd89614b"
+>             +SRCREV = "42fd71596b161e79e017e00741433e84705a28a6"
+>
+>              S = "${WORKDIR}/git"
+>
+>              PV = "3.00.12.00"
+>             -PR = "r0"
+>             +PR = "r1"
+>
+>              require recipes-ti/includes/ti-paths.inc
+>              require recipes-ti/includes/ti-staging.inc
+>             -- 
+>             1.7.9.5
+>
+>             -- 
+>             _______________________________________________
+>             meta-ti mailing list
+>             meta-ti@yoctoproject.org <mailto:meta-ti@yoctoproject.org>
+>             https://lists.yoctoproject.org/listinfo/meta-ti
+>
+>
+>
+>
+
+
+--------------060302020506050306070809
 Content-Type: text/html; charset="utf-8"
-Content-ID: <902E7C55DEB434458322B07FDC6991AC@owa.mail.ti.com>
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
 
-PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
-dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5Pg0KPGRpdiBkaXI9ImF1
-dG8iPkRvZXMgdGhhdCBjaGFuZ2UgdGhlIG92ZXJhbGwgbGljZW5zZSBpbiBhbnkgd2F5PzwvZGl2
-Pg0KPGRpdiBjbGFzcz0iZ21haWxfZXh0cmEiPjxicj4NCjxkaXYgY2xhc3M9ImdtYWlsX3F1b3Rl
-Ij5PbiBEZWMgMTYsIDIwMTYgMTI6MTAsICZxdW90O1IsIEthcnRoaWsmcXVvdDsgJmx0O2thcnRo
-aWsucmFtYW5hbkB0aS5jb20mZ3Q7IHdyb3RlOjxiciB0eXBlPSJhdHRyaWJ1dGlvbiI+DQo8Ymxv
-Y2txdW90ZSBjbGFzcz0icXVvdGUiIHN0eWxlPSJtYXJnaW46MCAwIDAgLjhleDtib3JkZXItbGVm
-dDoxcHggI2NjYyBzb2xpZDtwYWRkaW5nLWxlZnQ6MWV4Ij4NCjxkaXY+PHR0PkhpIERlbnlzLDxi
-cj4NCjxicj4NClRoZSBsaWNlbnNlIGZpbGUgaGFzIGNoYW5nZWQgdG8gcmVmbGVjdCB0aGUgYWRk
-aXRpb24gb2YgdGhlIG5ldyBNSlBFRyBFbmNvZGVyLjxicj4NClRoZXJlIGlzIG5vIG90aGVyIGNo
-YW5nZSBhcGFydCBmcm9tIHRoYXQuPGJyPg0KPGJyPg0KTGV0IG1lIGtub3cgaWYgSSBuZWVkIHRv
-IHN1Ym1pdCB0aGUgdjIgb2YgdGhlIHBhdGNoIHdpdGggdGhlIGV4cGFuZGVkIGRlc2NyaXB0aW9u
-Ljxicj4NCjxicj4NClJlZ2FyZHM8YnI+DQpLYXJ0aGlrPGJyPg0KPC90dD48YnI+DQo8ZGl2Pk9u
-IDE2LURlYy0xNiAxMDoxNyBQTSwgRG15dHJpeWVua28sIERlbnlzIHdyb3RlOjxicj4NCjwvZGl2
-Pg0KPGJsb2NrcXVvdGU+DQo8ZGl2IGRpcj0iYXV0byI+UGxlYXNlIGJyaWVmbHkgZXhwbGFpbiBp
-biB0aGUgZGVzY3JpcHRpb24gdGhlIGNoYW5nZSBpbiBsaWNlbnNlIGNoZWNrc3VtIGFuZCB3aGVy
-ZSBpdCBhZmZlY3RzIHRoZSBsaWNlbnNlIGl0c2VsZi4gVGhhbmtzLjwvZGl2Pg0KPGRpdj48YnI+
-DQo8ZGl2IGNsYXNzPSJlbGlkZWQtdGV4dCI+T24gRGVjIDE2LCAyMDE2IDExOjQ0LCAmcXVvdDtS
-LCBLYXJ0aGlrJnF1b3Q7IDxhIGhyZWY9Im1haWx0bzprYXJ0aGlrLnJhbWFuYW5AdGkuY29tIj4N
-CiZsdDtrYXJ0aGlrLnJhbWFuYW5AdGkuY29tJmd0OzwvYT4gd3JvdGU6PGJyPg0KPGJsb2NrcXVv
-dGUgc3R5bGU9Im1hcmdpbjowIDAgMCAwLjhleDtib3JkZXItbGVmdDoxcHggI2NjYyBzb2xpZDtw
-YWRkaW5nLWxlZnQ6MWV4Ij4NCjxkaXY+PGZvbnQgc2l6ZT0iMiI+PHNwYW4gc3R5bGU9ImZvbnQt
-c2l6ZToxMHB0Ij48L3NwYW4+PC9mb250Pg0KPGRpdj5UaGlzIHdpbGwgaW5jbHVkZSB0aGUgZm9s
-bG93aW5nIHVwZGF0ZXM6PGJyPg0KJm5ic3A7KiBBZGRpdGlvbiBvZiBNSlBFRyBFbmNvZGVyPGJy
-Pg0KJm5ic3A7KiBtaW5vciBidWcgZml4ZXM8YnI+DQombmJzcDsqIGNvZGVjIHVwZGF0ZXMgZm9y
-IG1wZWcyZDxicj4NCjxicj4NClNpZ25lZC1vZmYtYnk6IEthcnRoaWsgUmFtYW5hbiA8YSBocmVm
-PSJtYWlsdG86YTAzOTM5MDZAdGkuY29tIj4mbHQ7YTAzOTM5MDZAdGkuY29tJmd0OzwvYT48YnI+
-DQotLS08YnI+DQombmJzcDtyZWNpcGVzLWJzcC9pcHVtbS1mdy9pcHVtbS1md19naXQuYmIgfCZu
-YnNwOyZuYnNwOyZuYnNwOyA2ICYjNDM7JiM0MzsmIzQzOy0tLTxicj4NCiZuYnNwOzEgZmlsZSBj
-aGFuZ2VkLCAzIGluc2VydGlvbnMoJiM0MzspLCAzIGRlbGV0aW9ucygtKTxicj4NCjxicj4NCmRp
-ZmYgLS1naXQgYS9yZWNpcGVzLWJzcC9pcHVtbS1mdy9pcHVtbS1md19naXQuYmIgYi9yZWNpcGVz
-LWJzcC9pcHVtbS1mdy9pcHVtbS1md19naXQuYmI8YnI+DQppbmRleCA0YmViYzJhLi44NWRmYzI2
-IDEwMDY0NDxicj4NCi0tLSBhL3JlY2lwZXMtYnNwL2lwdW1tLWZ3L2lwdW1tLWZ3X2dpdC5iYjxi
-cj4NCiYjNDM7JiM0MzsmIzQzOyBiL3JlY2lwZXMtYnNwL2lwdW1tLWZ3L2lwdW1tLWZ3X2dpdC5i
-Yjxicj4NCkBAIC05LDcgJiM0Mzs5LDcgQEAgcHl0aG9uIF9fYW5vbnltb3VzKCkgezwhLS0gLS0+
-PGJyPg0KJm5ic3A7REVTQ1JJUFRJT04gPSAmcXVvdDtGaXJtd2FyZSBmb3IgSVBVIGZvciBzdXBw
-b3J0aW5nIEFjY2VsZXJhdGVkIE1NIGRlY29kZSBhbmQgZW5jb2RlJnF1b3Q7PGJyPg0KJm5ic3A7
-TElDRU5TRSA9ICZxdW90O1RJLVRTUEEmcXVvdDs8YnI+DQombmJzcDs8YnI+DQotTElDX0ZJTEVT
-X0NIS1NVTSA9ICZxdW90OzxhIGhyZWY9IiI+ZmlsZTovL1RleGFzX0luc3RydW1lbnRzX2lwdW1t
-X01hbmlmZXN0LnBkZjttZDU9ZTNlN2Q2ZWZjN2FjYTg3Nzg5Nzc1MTk4YzRjYTlmOGU8L2E+JnF1
-b3Q7PGJyPg0KJiM0MztMSUNfRklMRVNfQ0hLU1VNID0gJnF1b3Q7PGEgaHJlZj0iIj5maWxlOi8v
-VGV4YXNfSW5zdHJ1bWVudHNfaXB1bW1fTWFuaWZlc3QucGRmO21kNT01Y2M1NzI1NzlmMDdhZjI2
-NmFiNTdmYzE3ZDc2MmM3ZjwvYT4mcXVvdDs8YnI+DQombmJzcDs8YnI+DQombmJzcDtDT01QQVRJ
-QkxFX01BQ0hJTkUgPSAmcXVvdDtkcmE3eHgmcXVvdDs8YnI+DQombmJzcDs8YnI+DQpAQCAtMTcs
-MTIgJiM0MzsxNywxMiBAQCBSREVQRU5EU18ke1BOfSA9ICZxdW90OyBsaWJkY2UmcXVvdDs8YnI+
-DQombmJzcDs8YnI+DQombmJzcDtTUkNfVVJJID0gPGEgaHJlZj0iIj4mcXVvdDtnaXQ6Ly9naXQu
-dGkuY29tL2l2aW1tL2lwdW1tLmdpdDtwcm90b2NvbD1naXQmcXVvdDs8L2E+PGJyPg0KJm5ic3A7
-PGJyPg0KLVNSQ1JFViA9ICZxdW90O2NkOTM1NTBlZDMyYzc4NDlkZTkxMjg4ZTdkOTBjYmEzYmQ4
-OTYxNGImcXVvdDs8YnI+DQomIzQzO1NSQ1JFViA9ICZxdW90OzQyZmQ3MTU5NmIxNjFlNzllMDE3
-ZTAwNzQxNDMzZTg0NzA1YTI4YTYmcXVvdDs8YnI+DQombmJzcDs8YnI+DQombmJzcDtTID0gJnF1
-b3Q7JHtXT1JLRElSfS9naXQmcXVvdDs8YnI+DQombmJzcDs8YnI+DQombmJzcDtQViA9ICZxdW90
-OzMuMDAuMTIuMDAmcXVvdDs8YnI+DQotUFIgPSAmcXVvdDtyMCZxdW90Ozxicj4NCiYjNDM7UFIg
-PSAmcXVvdDtyMSZxdW90Ozxicj4NCiZuYnNwOzxicj4NCiZuYnNwO3JlcXVpcmUgcmVjaXBlcy10
-aS9pbmNsdWRlcy90aS1wYXRocy5pbmM8YnI+DQombmJzcDtyZXF1aXJlIHJlY2lwZXMtdGkvaW5j
-bHVkZXMvdGktc3RhZ2luZy5pbmM8YnI+DQotLSA8YnI+DQoxLjcuOS41PGJyPg0KPGJyPg0KLS0g
-PGJyPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX188YnI+
-DQptZXRhLXRpIG1haWxpbmcgbGlzdDxicj4NCjxhIGhyZWY9Im1haWx0bzptZXRhLXRpQHlvY3Rv
-cHJvamVjdC5vcmciPm1ldGEtdGlAeW9jdG9wcm9qZWN0Lm9yZzwvYT48YnI+DQo8YSBocmVmPSJo
-dHRwczovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcvbGlzdGluZm8vbWV0YS10aSI+aHR0cHM6Ly9s
-aXN0cy55b2N0b3Byb2plY3Qub3JnL2xpc3RpbmZvL21ldGEtdGk8L2E+PGJyPg0KPC9kaXY+DQo8
-L2Rpdj4NCjwvYmxvY2txdW90ZT4NCjwvZGl2Pg0KPGJyPg0KPC9kaXY+DQo8L2Jsb2NrcXVvdGU+
-DQo8YnI+DQo8L2Rpdj4NCjwvYmxvY2txdW90ZT4NCjwvZGl2Pg0KPGJyPg0KPC9kaXY+DQo8L2Jv
-ZHk+DQo8L2h0bWw+DQo=
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  </head>
+  <body bgcolor="#FFFFFF" text="#000000">
+    <tt>No. It doesn't. Double checked the license type between the old
+      and new and it is the same.<br>
+      <br>
+      Regards<br>
+      Karthik<br>
+    </tt><br>
+    <div class="moz-cite-prefix">On 16-Dec-16 10:42 PM, Dmytriyenko,
+      Denys wrote:<br>
+    </div>
+    <blockquote
+      cite="mid:012b8cea-868d-4c7c-8477-f4428f88323f@email.android.com"
+      type="cite">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <div dir="auto">Does that change the overall license in any way?</div>
+      <div class="gmail_extra"><br>
+        <div class="gmail_quote">On Dec 16, 2016 12:10, "R, Karthik"
+          <a class="moz-txt-link-rfc2396E" href="mailto:karthik.ramanan@ti.com">&lt;karthik.ramanan@ti.com&gt;</a> wrote:<br type="attribution">
+          <blockquote class="quote" style="margin:0 0 0
+            .8ex;border-left:1px #ccc solid;padding-left:1ex">
+            <div><tt>Hi Denys,<br>
+                <br>
+                The license file has changed to reflect the addition of
+                the new MJPEG Encoder.<br>
+                There is no other change apart from that.<br>
+                <br>
+                Let me know if I need to submit the v2 of the patch with
+                the expanded description.<br>
+                <br>
+                Regards<br>
+                Karthik<br>
+              </tt><br>
+              <div>On 16-Dec-16 10:17 PM, Dmytriyenko, Denys wrote:<br>
+              </div>
+              <blockquote>
+                <div dir="auto">Please briefly explain in the
+                  description the change in license checksum and where
+                  it affects the license itself. Thanks.</div>
+                <div><br>
+                  <div class="elided-text">On Dec 16, 2016 11:44, "R,
+                    Karthik" <a moz-do-not-send="true"
+                      href="mailto:karthik.ramanan@ti.com">
+                      &lt;karthik.ramanan@ti.com&gt;</a> wrote:<br>
+                    <blockquote style="margin:0 0 0
+                      0.8ex;border-left:1px #ccc solid;padding-left:1ex">
+                      <div><font size="2"><span style="font-size:10pt"></span></font>
+                        <div>This will include the following updates:<br>
+                           * Addition of MJPEG Encoder<br>
+                           * minor bug fixes<br>
+                           * codec updates for mpeg2d<br>
+                          <br>
+                          Signed-off-by: Karthik Ramanan <a
+                            moz-do-not-send="true"
+                            href="mailto:a0393906@ti.com"><a class="moz-txt-link-rfc2396E" href="mailto:a0393906@ti.com">&lt;a0393906@ti.com&gt;</a></a><br>
+                          ---<br>
+                           recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6
+                          +++---<br>
+                           1 file changed, 3 insertions(+), 3
+                          deletions(-)<br>
+                          <br>
+                          diff --git
+                          a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+                          b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb<br>
+                          index 4bebc2a..85dfc26 100644<br>
+                          --- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb<br>
+                          +++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb<br>
+                          @@ -9,7 +9,7 @@ python __anonymous() {<!-- --><br>
+                           DESCRIPTION = "Firmware for IPU for
+                          supporting Accelerated MM decode and encode"<br>
+                           LICENSE = "TI-TSPA"<br>
+                           <br>
+                          -LIC_FILES_CHKSUM = "<a moz-do-not-send="true"
+                            href="">file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e</a>"<br>
+                          +LIC_FILES_CHKSUM = "<a moz-do-not-send="true"
+                            href="">file://Texas_Instruments_ipumm_Manifest.pdf;md5=5cc572579f07af266ab57fc17d762c7f</a>"<br>
+                           <br>
+                           COMPATIBLE_MACHINE = "dra7xx"<br>
+                           <br>
+                          @@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"<br>
+                           <br>
+                           SRC_URI = <a moz-do-not-send="true" href="">"git://git.ti.com/ivimm/ipumm.git;protocol=git"</a><br>
+                           <br>
+                          -SRCREV =
+                          "cd93550ed32c7849de91288e7d90cba3bd89614b"<br>
+                          +SRCREV =
+                          "42fd71596b161e79e017e00741433e84705a28a6"<br>
+                           <br>
+                           S = "${WORKDIR}/git"<br>
+                           <br>
+                           PV = "3.00.12.00"<br>
+                          -PR = "r0"<br>
+                          +PR = "r1"<br>
+                           <br>
+                           require recipes-ti/includes/ti-paths.inc<br>
+                           require recipes-ti/includes/ti-staging.inc<br>
+                          -- <br>
+                          1.7.9.5<br>
+                          <br>
+                          -- <br>
+_______________________________________________<br>
+                          meta-ti mailing list<br>
+                          <a moz-do-not-send="true"
+                            href="mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br>
+                          <a moz-do-not-send="true"
+                            href="https://lists.yoctoproject.org/listinfo/meta-ti">https://lists.yoctoproject.org/listinfo/meta-ti</a><br>
+                        </div>
+                      </div>
+                    </blockquote>
+                  </div>
+                  <br>
+                </div>
+              </blockquote>
+              <br>
+            </div>
+          </blockquote>
+        </div>
+        <br>
+      </div>
+    </blockquote>
+    <br>
+  </body>
+</html>
 
---_000_012b8cea868d4c7c8477f4428f88323femailandroidcom_--
+--------------060302020506050306070809--
