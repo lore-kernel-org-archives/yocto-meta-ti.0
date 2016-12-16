@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 29FFCE00EC9; Fri, 16 Dec 2016 09:45:16 -0800 (PST)
+	id 5C485E00EC8; Fri, 16 Dec 2016 09:45:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92B24E00EC6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0967E00EC8
 	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 09:45:15 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BAC1E52A5A; Fri, 16 Dec 2016 17:45:14 +0000 (UTC)
+	id 22AB552A7D; Fri, 16 Dec 2016 17:45:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161216174514.BAC1E52A5A@arago-project.org>
-Date: Fri, 16 Dec 2016 17:45:14 +0000 (UTC)
+Message-Id: <20161216174515.22AB552A7D@arago-project.org>
+Date: Fri, 16 Dec 2016 17:45:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : recipes-kernel:cmem.dtsi:Keystone2: Update to remove redefinition of mpm areas
+Subject: Karthik Ramanan : ipumm-fw: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,167 +38,54 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: d4be639847e6928ba189a222ec835f10086c75c7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d4be639847e6928ba189a222ec835f10086c75c7
+Commit: ec9ec37df2e5df80097e1b3de0208553c5b142af
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec9ec37df2e5df80097e1b3de0208553c5b142af
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Dec 16 01:55:52 2016 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Fri Dec 16 20:46:22 2016 +0000
 
-recipes-kernel:cmem.dtsi:Keystone2: Update to remove redefinition of mpm areas
+ipumm-fw: Update SRCREV
 
-Cleaning up redefinition of mpm areas and moving to use what is defined
-in the base device tree files as is.
-This effectively changes to a new memory partition.
-Note that this change needs a corresponding change in the dts files in
-the kernel tree to adjust the mpm memory area to the new memory
-partition.
+This will include the following updates:
+ * Addition of MJPEG Encoder
+ * minor bug fixes
+ * codec updates for mpeg2d
 
-The CMEM areas here are adjusted such that there is no overlap with the
-mpm areas defined in the dts files in the kernel tree.
-
-Also fixes issue with K2L, by removing overlapping memory area section.
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/files/k2e/cmem.dtsi      |   13 +++----------
- recipes-kernel/linux/files/k2hk-evm/cmem.dtsi |   24 +++---------------------
- recipes-kernel/linux/files/k2l-evm/cmem.dtsi  |   19 +++----------------
- 3 files changed, 9 insertions(+), 47 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/files/k2e/cmem.dtsi b/recipes-kernel/linux/files/k2e/cmem.dtsi
-index 2a2909a..c233768 100644
---- a/recipes-kernel/linux/files/k2e/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2e/cmem.dtsi
-@@ -1,7 +1,7 @@
- / {
- 	reserved-memory {
--		cmem_block_mem_0: cmem_block_mem@829000000 {
--			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
-+		cmem_block_mem_0: cmem_block_mem@830000000 {
-+			reg = <0x00000008 0x30000000 0x00000000 0x18000000>;
- 			no-map;
- 			status = "okay";
- 		};
-@@ -19,7 +19,7 @@
- 		cmem_block_0: cmem_block@0 {
- 			reg = <0>;
- 			memory-region = <&cmem_block_mem_0>;
--			cmem-buf-pools = <1 0x00000000 0x1E000000>;
-+			cmem-buf-pools = <1 0x00000000 0x18000000>;
- 		};
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 4bebc2a..85dfc26 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -9,7 +9,7 @@ python __anonymous() {
+ DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+ LICENSE = "TI-TSPA"
  
- 		cmem_block_1: cmem_block@1 {
-@@ -29,13 +29,6 @@
- 	};
- };
+-LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=e3e7d6efc7aca87789775198c4ca9f8e"
++LIC_FILES_CHKSUM = "file://Texas_Instruments_ipumm_Manifest.pdf;md5=5cc572579f07af266ab57fc17d762c7f"
  
--&dsp_common_mpm_area {
--	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--};
--&mpm_mem {
--	reg = <0xa0000000 0x02000000>;
--};
--
- &msm_ram {
- 	sram_cmem: sram-cmem@80000 {
- 		reg = <0x80000 0xc0000>;
-diff --git a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-index e5927ba..400aa9d 100644
---- a/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2hk-evm/cmem.dtsi
-@@ -1,14 +1,8 @@
- / {
- 	reserved-memory {
+ COMPATIBLE_MACHINE = "dra7xx"
  
--		cmem_block_mem_0: cmem_block_mem@829000000 {
--			reg = <0x00000008 0x29000000 0x00000000 0x17000000>;
--			no-map;
--			status = "okay";
--		};
--
--		cmem_block_mem_2: cmem_block_mem@822000000 {
--			reg = <0x00000008 0x22000000 0x00000000 0x07000000>;
-+		cmem_block_mem_0: cmem_block_mem@830000000 {
-+			reg = <0x00000008 0x30000000 0x00000000 0x18000000>;
- 			no-map;
- 			status = "okay";
- 		};
-@@ -26,28 +20,16 @@
- 		cmem_block_0: cmem_block@0 {
- 			reg = <0>;
- 			memory-region = <&cmem_block_mem_0>;
--			cmem-buf-pools = <1 0x00000000 0x17000000>;
-+			cmem-buf-pools = <1 0x00000000 0x18000000>;
- 		};
+@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
  
- 		cmem_block_1: cmem_block@1 {
- 			reg = <1>;
- 			sram = <&sram_cmem>;
- 		};
--
--		cmem_block_2: cmem_block@2 {
--			reg = <2>;
--			memory-region = <&cmem_block_mem_2>;
--		 };
- 	};
- };
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--&dsp_common_mpm_area {
--	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--};
--&mpm_mem {
--	reg = <0xa0000000 0x02000000>;
--};
--
- &msm_ram {
- 	sram_cmem: sram-cmem@100000 {
- 		reg = <0x100000 0x480000>;
-diff --git a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-index 8b09642..da389e5 100644
---- a/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-+++ b/recipes-kernel/linux/files/k2l-evm/cmem.dtsi
-@@ -1,14 +1,8 @@
- / {
- 	reserved-memory {
+-SRCREV = "cd93550ed32c7849de91288e7d90cba3bd89614b"
++SRCREV = "42fd71596b161e79e017e00741433e84705a28a6"
  
--		cmem_block_mem_0: cmem_block_mem@829000000 {
--			reg = <0x00000008 0x22000000 0x00000000 0x1E000000>;
--			no-map;
--			status = "okay";
--		};
--
--		cmem_block_mem_1: cmem_block_mem@00c080000 {
--			reg = <0x00000000 0x0c080000 0x00000000 0x000c0000>;
-+		cmem_block_mem_0: cmem_block_mem@830000000 {
-+			reg = <0x00000008 0x30000000 0x00000000 0x18000000>;
- 			no-map;
- 			status = "okay";
- 		};
-@@ -26,7 +20,7 @@
- 		cmem_block_0: cmem_block@0 {
- 			reg = <0>;
- 			memory-region = <&cmem_block_mem_0>;
--			cmem-buf-pools = <1 0x00000000 0x1E000000>;
-+			cmem-buf-pools = <1 0x00000000 0x18000000>;
- 		};
+ S = "${WORKDIR}/git"
  
- 		cmem_block_1: cmem_block@1 {
-@@ -36,13 +30,6 @@
- 	};
- };
+ PV = "3.00.12.00"
+-PR = "r0"
++PR = "r1"
  
--&dsp_common_mpm_area {
--	reg = <0x00000008 0x20000000 0x00000000 0x02000000>;
--};
--&mpm_mem {
--	reg = <0xa0000000 0x02000000>;
--};
--
- &msm_ram {
- 	sram_cmem: sram-cmem@80000 {
- 		reg = <0x80000 0xc0000>;
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
 
 
