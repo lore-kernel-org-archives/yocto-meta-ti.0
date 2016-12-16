@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BA694E008CE; Fri, 16 Dec 2016 11:10:14 -0800 (PST)
+	id CF92FE007C2; Fri, 16 Dec 2016 11:10:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 446B9E00566
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76CEDE006C7
 	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 11:10:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6C5BB52996; Fri, 16 Dec 2016 19:10:12 +0000 (UTC)
+	id 9709F529E8; Fri, 16 Dec 2016 19:10:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161216191012.6C5BB52996@arago-project.org>
+Message-Id: <20161216191012.9709F529E8@arago-project.org>
 Date: Fri, 16 Dec 2016 19:10:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.4.39 and ti2016. 06-rc2 tag
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.06-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,46 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: fbfb644ac90029ab68ea315beb3560438002eb6e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fbfb644ac90029ab68ea315beb3560438002eb6e
+Commit: d69015a0f3b6532bc8e6d4fdcfffe0fc49cb145c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d69015a0f3b6532bc8e6d4fdcfffe0fc49cb145c
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec 17 00:13:34 2016 +0000
+Date:   Sat Dec 17 00:13:35 2016 +0000
 
-linux-ti-staging: update to 4.4.39 and ti2016.06-rc2 tag
+u-boot-ti-staging: update to ti2016.06-rc2 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 9cee40b..21f13c9 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 7600158..d04fcad 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- BRANCH = "ti-rt-linux-4.4.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
  
--SRCREV = "aaf30e5234b6e50ce4ef8dd96f571e5393c760d4"
-+SRCREV = "0f50d72b1ffcd2d10a2471fb1332c56bb3054e42"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index 67ed01e..1c2f232 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -81,8 +81,8 @@ S = "${WORKDIR}/git"
+-PR = "r27"
++PR = "r28"
+ PV_append = "+git${SRCPV}"
  
- BRANCH = "ti-lsk-linux-4.4.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "93654b33257e160f2406d8906cbad936a7efadf6"
--PV = "4.4.37+git${SRCPV}"
-+SRCREV = "b9647b7eb9545f57f61db4889964fc66249a844f"
-+PV = "4.4.39+git${SRCPV}"
+ BRANCH ?= "ti-u-boot-2016.05"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+-SRCREV = "72e318bdcea876ac9a4cad2abcaca483425521c7"
++SRCREV = "89316b56926863db799e8df6d8f2290aac2d1826"
+ 
+ # Support for secure devices - detailed info is in doc/README.ti-secure
+ TI_SECURE_DEV_PKG ?= ""
 
 
