@@ -1,6 +1,6 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 18E0AE01070; Fri, 16 Dec 2016 14:47:36 -0800 (PST)
+	id BC6F5E00DEB; Fri, 16 Dec 2016 19:00:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,28 +8,28 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88D39E00E32
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 14:47:33 -0800 (PST)
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 30525E00DD5
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 19:00:57 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBGMlXlw023245
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 16:47:33 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBGMlXY6002113
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 16:47:33 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 16 Dec 2016 16:47:32 -0600
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBH30viL003641
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 21:00:57 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBH30u51008656
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2016 21:00:56 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 16 Dec 2016 21:00:56 -0600
 Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	uBGMlWLV023156;	Fri, 16 Dec 2016 16:47:32 -0600
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	uBH30uIR008620;	Fri, 16 Dec 2016 21:00:56 -0600
 From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Dec 2016 17:47:28 -0500
-Message-ID: <1481928448-25598-1-git-send-email-sam.nelson@ti.com>
+Date: Fri, 16 Dec 2016 22:00:53 -0500
+Message-ID: <1481943653-26769-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] ti-ipc: Update to new patch release 3.44.01.01
+Subject: [PATCH v2] ti-ipc: Update to new patch release 3.44.01.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,17 +42,21 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2016 22:47:36 -0000
+X-List-Received-Date: Sat, 17 Dec 2016 03:00:59 -0000
 Content-Type: text/plain
 
--Reduces build time
+-Enables parallel build when rtos build invokes xdc to reduce build time
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+
+---
+Added missed patch to enable parallel build
+---
 ---
  recipes-ti/ipc/ti-ipc-common.inc |  4 ++--
- recipes-ti/ipc/ti-ipc-rtos.inc   | 10 +++++-----
+ recipes-ti/ipc/ti-ipc-rtos.inc   | 11 ++++++-----
  recipes-ti/ipc/ti-ipc.inc        |  6 +++---
- 3 files changed, 10 insertions(+), 10 deletions(-)
+ 3 files changed, 11 insertions(+), 10 deletions(-)
 
 diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
 index ddb48bc..8a2aa0a 100644
@@ -67,7 +71,7 @@ index ddb48bc..8a2aa0a 100644
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
 diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 157ce75..1c509b0 100644
+index e1abf36..1c509b0 100644
 --- a/recipes-ti/ipc/ti-ipc-rtos.inc
 +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
 @@ -25,16 +25,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
@@ -87,11 +91,17 @@ index 157ce75..1c509b0 100644
  S_ipc-examples = "${WORKDIR}/git/ipc-examples"
  S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
  
--PR = "${INC_PR}.5"
+-PR = "${INC_PR}.4"
 +PR = "${INC_PR}.0"
  
  DEPENDS_append_keystone = " ti-cgt6x-native \
                              gcc-arm-none-eabi-native \
+@@ -62,4 +62,5 @@ EXTRA_OEMAKE = "\
+     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+     BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
+     ${IPC_TARGETS} \
++    JOBS="--jobs=${BB_NUMBER_THREADS}" \
+ "
 diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
 index 2d38367..3ac8bf5 100644
 --- a/recipes-ti/ipc/ti-ipc.inc
