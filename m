@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EE4DFE00A07; Mon, 19 Dec 2016 15:15:44 -0800 (PST)
+	id F0585E00A0A; Mon, 19 Dec 2016 15:15:44 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7623EE00A07
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77529E00A0A
 	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:15:42 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C49B0529FB; Mon, 19 Dec 2016 23:15:41 +0000 (UTC)
+	id F1F4552AAA; Mon, 19 Dec 2016 23:15:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231541.C49B0529FB@arago-project.org>
+Message-Id: <20161219231541.F1F4552AAA@arago-project.org>
 Date: Mon, 19 Dec 2016 23:15:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : edma3-lld: Upstream version 2.12.2.26
+Subject: Justin Sobota : ti-xdctools: Upstream version 3.32.01.22
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +39,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: cf466eb3d5f200185c09ee71ae1f0eb43232a7f3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cf466eb3d5f200185c09ee71ae1f0eb43232a7f3
+Commit: 0a56d3aada9a5a889bd0fd6818b45446b5ba7915
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0a56d3aada9a5a889bd0fd6818b45446b5ba7915
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Dec 15 21:54:32 2016 +0000
+Date:   Thu Dec 15 21:54:34 2016 +0000
 
-edma3-lld: Upstream version 2.12.2.26
+ti-xdctools: Upstream version 3.32.01.22
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
+ ...ols_3.32.00.06.bb => ti-xdctools_3.32.01.22.bb} |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 2853dd2..4efcefc 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb b/recipes-ti/devtools/ti-xdctools_3.32.01.22.bb
+similarity index 51%
+rename from recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
+rename to recipes-ti/devtools/ti-xdctools_3.32.01.22.bb
+index 19bbe5d..5f379c1 100644
+--- a/recipes-ti/devtools/ti-xdctools_3.32.00.06.bb
++++ b/recipes-ti/devtools/ti-xdctools_3.32.01.22.bb
+@@ -1,9 +1,9 @@
+ require recipes-ti/devtools/ti-xdctools-core.inc
  
--# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_25A"
--EDMA3_LLD_SRCREV = "b2d61c61dd048bdea35e9b2810647b4d419a82b5"
-+# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_02_26"
-+EDMA3_LLD_SRCREV = "1c67565620f5a5305cf3293bba669c6aa1a7e40a"
+-PV = "3_32_00_06"
++PV = "3_32_01_22"
+ PR = "r0"
  
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
+ LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=1796f68c3d32d408415f5612f1f60652"
  
--PV = "2.12.01.25A"
-+PV = "2.12.02.26"
- INC_PR = "r0"
+-SRC_URI[xdczip.md5sum] = "93127f4c2f35d94b6c8e5a52b79c38ae"
+-SRC_URI[xdczip.sha256sum] = "d6f38a7f846ae4b1478554d75fc5f72cf677a1e2f348e214a725d1e849bd39c7"
++SRC_URI[xdczip.md5sum] = "ddae5b765ca62783c1e804c75c463c38"
++SRC_URI[xdczip.sha256sum] = "b1c6620ef0b8eac45ef6a587f93b3238bdcf3b02dfd7e4b40d872a45c02c5cdc"
 
 
