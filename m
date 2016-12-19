@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 825E3E00D38; Mon, 19 Dec 2016 15:19:42 -0800 (PST)
+	id D9FA9E00D48; Mon, 19 Dec 2016 15:19:42 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA6C1E00C8F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0C7CE00C69
 	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:19:34 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E0AA452A3D; Mon, 19 Dec 2016 23:19:33 +0000 (UTC)
+	id 14DAD52AAA; Mon, 19 Dec 2016 23:19:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231933.E0AA452A3D@arago-project.org>
-Date: Mon, 19 Dec 2016 23:19:33 +0000 (UTC)
+Message-Id: <20161219231934.14DAD52AAA@arago-project.org>
+Date: Mon, 19 Dec 2016 23:19:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : multiprocmgr: Update to new version 3.0.2.0
+Subject: Sam Nelson : mpm-transport: Update to new version 2.0.3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,55 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: 9740942a7ba1405285ea2708fb5df81f32e1dfb7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9740942a7ba1405285ea2708fb5df81f32e1dfb7
+Commit: 78a25f3bb78d47234da4bb38ea14f48cde146b77
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=78a25f3bb78d47234da4bb38ea14f48cde146b77
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Dec 17 04:40:18 2016 +0000
+Date:   Sat Dec 17 04:41:09 2016 +0000
 
-multiprocmgr: Update to new version 3.0.2.0
-
-This version add dependce on CMEM
+mpm-transport: Update to new version 2.0.3
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/multiprocmgr/multiprocmgr.inc    |    6 +++---
- recipes-ti/multiprocmgr/multiprocmgr_git.bb |    2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index 9c134c4..b8bbb56 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -8,10 +8,10 @@ MULTIPROCMGR_GIT_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git"
- MULTIPROCMGR_GIT_PROTOCOL = "git"
- MULTIPROCMGR_GIT_BRANCH = "master"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index ee28f2f..0690807 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -15,11 +15,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
  
--# The following commits correspond to DEV.MPM-3.00.01.00
--MULTIPROCMGR_SRCREV = "6c2c0f7d14d34eb9074c6d6a6bd112da3751fb7e"
-+# The following commits correspond to DEV.MPM-3.00.02.00
-+MULTIPROCMGR_SRCREV = "303692fe954f36df91c90c300875a6587cb23556"
+ BRANCH = "master"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00A
+-SRCREV = "7284e75d36b265ef8535d2e2ee54d1f2c700e862"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.03.00
++SRCREV = "ba53217c5db1a6f9d21a0c8f50e9e30a6efa8be8"
  
--PV = "3.0.1.0"
-+PV = "3.0.2.0"
- INC_PR = "r0"
+-PV = "2.0.2.0"
+-PR = "r1"
++PV = "2.0.3.0"
++PR = "r0"
  
- BRANCH = "${MULTIPROCMGR_GIT_BRANCH}"
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-index 2960ee3..cafcd98 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-+++ b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-@@ -7,7 +7,7 @@ SRC_URI_append = " file://mpmsrv-daemon.service"
- 
- PR = "${INC_PR}.1"
- 
--DEPENDS = "mpm-transport libdaemon virtual/kernel"
-+DEPENDS = "mpm-transport libdaemon virtual/kernel cmem"
- RDEPENDS_${PN} = "syslog-ng"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
 
 
