@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4DDFBE00D60; Mon, 19 Dec 2016 15:16:09 -0800 (PST)
+	id 67B12E00D60; Mon, 19 Dec 2016 15:16:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36BCCE00DA3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69ED4E009BA
 	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:15:51 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 57D4B52AAA; Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
+	id 8BAD952ACD; Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231550.57D4B52AAA@arago-project.org>
+Message-Id: <20161219231550.8BAD952ACD@arago-project.org>
 Date: Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : ti-sysbios: Upstream version 6.46.01.38
+Subject: Justin Sobota : sa-lld: Upstream version 3.0.0.16
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +38,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 4bec2c5890aad20461b27c4dcac54e72e10d4a9b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4bec2c5890aad20461b27c4dcac54e72e10d4a9b
+Commit: 14a9e84e00cca322e89c004ea84bb9d7d6ee1799
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14a9e84e00cca322e89c004ea84bb9d7d6ee1799
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Dec 15 21:54:33 2016 +0000
+Date:   Thu Dec 15 21:54:36 2016 +0000
 
-ti-sysbios: Upstream version 6.46.01.38
+sa-lld: Upstream version 3.0.0.16
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/bios/ti-sysbios_6.45.01.29.bb |   12 ------------
- recipes-ti/bios/ti-sysbios_6.46.01.38.bb |   12 ++++++++++++
- 2 files changed, 12 insertions(+), 12 deletions(-)
+ recipes-bsp/sa-lld/sa-lld.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb b/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
-deleted file mode 100644
-index 6ab4e27..0000000
---- a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require recipes-ti/bios/ti-sysbios.inc
--
--PV = "6_45_01_29"
--PR = "r0"
--
--LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=dbcd89745f1745f24ace8171a96ed493"
--
--SRC_URI[sysbiosbin.md5sum] = "16cf6dc3c5cc9d2b877fa7d81dd12150"
--SRC_URI[sysbiosbin.sha256sum] = "efaf5f1d725f3fd06e45476109b1124c74c16c39c870d12929e071047c3e5a22"
--
--TI_BIN_UNPK_CMDS=""
--TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-diff --git a/recipes-ti/bios/ti-sysbios_6.46.01.38.bb b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
-new file mode 100644
-index 0000000..407b3b4
---- /dev/null
-+++ b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
-@@ -0,0 +1,12 @@
-+require recipes-ti/bios/ti-sysbios.inc
-+
-+PV = "6_46_01_38"
-+PR = "r0"
-+
-+LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=da86dca468e5dd80484dc83473ea32e3"
-+
-+SRC_URI[sysbiosbin.md5sum] = "5aee070f73eb6f3d9aab2ff9c483f396"
-+SRC_URI[sysbiosbin.sha256sum] = "3a04a584c3ee3221997b7d616ba45bbcc21ad241f4a4ab5c0f28c465d538af90"
-+
-+TI_BIN_UNPK_CMDS=""
-+TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+index 0eb2196..853abdd 100644
+--- a/recipes-bsp/sa-lld/sa-lld.inc
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -8,14 +8,14 @@ SA_LLD_GIT_PROTOCOL = "git"
+ SA_LLD_GIT_BRANCH = "master"
+ SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
+ 
+-# Below commit ID corresponds to "DEV.SA_LLD.03.00.00.15"
+-SA_LLD_SRCREV = "59dbcc8b1ed05d81161bc4c472bed8916a004728"
++# Below commit ID corresponds to "DEV.SA_LLD.03.00.00.16"
++SA_LLD_SRCREV = "eb1508714586f92e66bf5a8a4c212e8277f6b065"
+ 
+ BRANCH = "${SA_LLD_GIT_BRANCH}"
+ SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${SA_LLD_SRCREV}"
+ 
+-PV = "03.00.00.15"
++PV = "03.00.00.16"
+ INC_PR = "r0"
+ 
+ S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
 
 
