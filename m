@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 235A6E00C81; Mon, 19 Dec 2016 15:19:39 -0800 (PST)
+	id 99D6FE00CCA; Mon, 19 Dec 2016 15:19:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 407B9E00C59
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69E4AE00BF8
 	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:19:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 583B352AAA; Mon, 19 Dec 2016 23:19:29 +0000 (UTC)
+	id 7A72552AC8; Mon, 19 Dec 2016 23:19:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231929.583B352AAA@arago-project.org>
+Message-Id: <20161219231929.7A72552AC8@arago-project.org>
 Date: Mon, 19 Dec 2016 23:19:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update to new version 2.0.3
+Subject: Sam Nelson : ti-ipc: Update to new patch release 3.44.01.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +33,92 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2016 23:19:39 -0000
+X-List-Received-Date: Mon, 19 Dec 2016 23:19:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 1a61032eaaf32393dcb97ba7027df8dcd55c6405
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1a61032eaaf32393dcb97ba7027df8dcd55c6405
+Commit: 0ec7a29f55c7845e7d50d3c7f2a217ae55b3d145
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0ec7a29f55c7845e7d50d3c7f2a217ae55b3d145
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Dec 17 04:41:09 2016 +0000
+Date:   Sat Dec 17 09:00:53 2016 +0000
 
-mpm-transport: Update to new version 2.0.3
+ti-ipc: Update to new patch release 3.44.01.01
+
+-Enables parallel build when rtos build invokes xdc to reduce build time
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/ipc/ti-ipc-common.inc |    4 ++--
+ recipes-ti/ipc/ti-ipc-rtos.inc   |   11 ++++++-----
+ recipes-ti/ipc/ti-ipc.inc        |    6 +++---
+ 3 files changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index ee28f2f..0690807 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -15,11 +15,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index ddb48bc..8a2aa0a 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,5 +1,5 @@
+-PV = "3.44.00.00"
+-INC_PR = "r2"
++PV = "3.44.01.01"
++INC_PR = "r0"
  
- BRANCH = "master"
--# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.02.00A
--SRCREV = "7284e75d36b265ef8535d2e2ee54d1f2c700e862"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.03.00
-+SRCREV = "ba53217c5db1a6f9d21a0c8f50e9e30a6efa8be8"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--PV = "2.0.2.0"
--PR = "r1"
-+PV = "2.0.3.0"
-+PR = "r0"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index e1abf36..1c509b0 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -25,16 +25,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
- EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
- EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+-# Corresponds to tag: 3.44.00.00C
+-SRCREV_ipc-examples = "1b73bc32c5bdd869b5121f86859afb122d286acc"
++# Corresponds to tag: 3.44.01.01
++SRCREV_ipc-examples = "b19a3b7a003aa3304a12599a498d9b3a24f20c6e"
+ 
+-# Corresponds to tag: 3.44.00.00
+-SRCREV_ipc-metadata = "07a745d47ecd7b4b64860e7c5d0fbe4e89524f2e"
++# Corresponds to tag: 3.44.01.01
++SRCREV_ipc-metadata = "a21264bdbb1b64d41bbcb4e6bb17d2c1d4ccb839"
+ 
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ 
+-PR = "${INC_PR}.4"
++PR = "${INC_PR}.0"
+ 
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+@@ -62,4 +62,5 @@ EXTRA_OEMAKE = "\
+     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+     BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
+     ${IPC_TARGETS} \
++    JOBS="--jobs=${BB_NUMBER_THREADS}" \
+ "
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 2d38367..3ac8bf5 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+ 
+ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+-TI_IPC_GIT_BRANCH = "3.44"
++TI_IPC_GIT_BRANCH = "ipc-3.44-next"
+ 
+-#Corresponds to 3.44.00.00
+-TI_IPC_SRCREV = "a1852fc8b254ed207bd1c1c88f5b362c9b6cc454"
++#Corresponds to 3.44.01.01
++TI_IPC_SRCREV = "cff640a4c7e083f78116266ef681cec49d9b584b"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 
 
