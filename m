@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5A889E00BF8; Mon, 19 Dec 2016 15:15:55 -0800 (PST)
+	id 9E641E00BF8; Mon, 19 Dec 2016 15:15:55 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B261E00BF8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37639E00B63
 	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:15:48 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 30D1F52A3D; Mon, 19 Dec 2016 23:15:47 +0000 (UTC)
+	id 4A71952AAA; Mon, 19 Dec 2016 23:15:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231547.30D1F52A3D@arago-project.org>
+Message-Id: <20161219231547.4A71952AAA@arago-project.org>
 Date: Mon, 19 Dec 2016 23:15:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : edma3-lld: Upstream version 2.12.2.26
+Subject: Justin Sobota : ti-sysbios: Upstream version 6.46.01.38
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,58 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: 6d793ed29309f7f269b249597e63c534923f6fa4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6d793ed29309f7f269b249597e63c534923f6fa4
+Commit: 186ce262688f8618cb8ea11e7b364f03db0f3474
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=186ce262688f8618cb8ea11e7b364f03db0f3474
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Dec 15 21:54:32 2016 +0000
+Date:   Thu Dec 15 21:54:33 2016 +0000
 
-edma3-lld: Upstream version 2.12.2.26
+ti-sysbios: Upstream version 6.46.01.38
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/bios/ti-sysbios_6.45.01.29.bb |   12 ------------
+ recipes-ti/bios/ti-sysbios_6.46.01.38.bb |   12 ++++++++++++
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 2853dd2..4efcefc 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
- 
--# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_01_25A"
--EDMA3_LLD_SRCREV = "b2d61c61dd048bdea35e9b2810647b4d419a82b5"
-+# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_02_26"
-+EDMA3_LLD_SRCREV = "1c67565620f5a5305cf3293bba669c6aa1a7e40a"
- 
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
- 
--PV = "2.12.01.25A"
-+PV = "2.12.02.26"
- INC_PR = "r0"
+diff --git a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb b/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
+deleted file mode 100644
+index 6ab4e27..0000000
+--- a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require recipes-ti/bios/ti-sysbios.inc
+-
+-PV = "6_45_01_29"
+-PR = "r0"
+-
+-LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=dbcd89745f1745f24ace8171a96ed493"
+-
+-SRC_URI[sysbiosbin.md5sum] = "16cf6dc3c5cc9d2b877fa7d81dd12150"
+-SRC_URI[sysbiosbin.sha256sum] = "efaf5f1d725f3fd06e45476109b1124c74c16c39c870d12929e071047c3e5a22"
+-
+-TI_BIN_UNPK_CMDS=""
+-TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+diff --git a/recipes-ti/bios/ti-sysbios_6.46.01.38.bb b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
+new file mode 100644
+index 0000000..407b3b4
+--- /dev/null
++++ b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
+@@ -0,0 +1,12 @@
++require recipes-ti/bios/ti-sysbios.inc
++
++PV = "6_46_01_38"
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=da86dca468e5dd80484dc83473ea32e3"
++
++SRC_URI[sysbiosbin.md5sum] = "5aee070f73eb6f3d9aab2ff9c483f396"
++SRC_URI[sysbiosbin.sha256sum] = "3a04a584c3ee3221997b7d616ba45bbcc21ad241f4a4ab5c0f28c465d538af90"
++
++TI_BIN_UNPK_CMDS=""
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
 
 
