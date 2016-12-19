@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 14B14E00DD0; Mon, 19 Dec 2016 15:16:10 -0800 (PST)
+	id 396C7E00DD0; Mon, 19 Dec 2016 15:16:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A38F5E00D42
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF260E00D44
 	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:15:51 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B067552AD9; Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
+	id DB6C052A3D; Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231550.B067552AD9@arago-project.org>
+Message-Id: <20161219231550.DB6C052A3D@arago-project.org>
 Date: Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : nwal-lld: Upstream version 2.1.0.11A
+Subject: Justin Sobota : pruss-lld: Upstream version 1.0.0.5A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,100 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: d9b6a1f01c445d4dfeae650706d1c4807482873d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d9b6a1f01c445d4dfeae650706d1c4807482873d
+Commit: 878de323983bc56ea97c717be4d55b05a64d0a8b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=878de323983bc56ea97c717be4d55b05a64d0a8b
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Dec 15 21:54:38 2016 +0000
+Date:   Thu Dec 15 21:54:40 2016 +0000
 
-nwal-lld: Upstream version 2.1.0.11A
+pruss-lld: Upstream version 1.0.0.5A
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/pruss-lld/pruss-lld-test_git.bb |   19 +++++++++++++++++++
+ recipes-bsp/pruss-lld/pruss-lld.inc         |   20 ++++++++++++++++++++
+ recipes-bsp/pruss-lld/pruss-lld_git.bb      |   20 ++++++++++++++++++++
+ 3 files changed, 59 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-index 53f7313..69e43d1 100644
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -8,15 +8,15 @@ NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
- NWAL_LLD_GIT_PROTOCOL = "git"
- NWAL_LLD_GIT_BRANCH = "master"
- 
--# Below commit ID corresponds to "DEV.NWAL.02.01.00.10A"
--NWAL_LLD_SRCREV = "e7ed8c5abc4b93b99a5f45699eef8f3b8ca51d1e"
-+# Below commit ID corresponds to "DEV.NWAL.02.01.00.11A"
-+NWAL_LLD_SRCREV = "a93303e3d682d7161030113b72c3e1adf755bf89"
- 
- BRANCH = "${NWAL_LLD_GIT_BRANCH}"
- SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${NWAL_LLD_SRCREV}"
- 
--PV = "02.01.00.10"
--INC_PR = "r1"
-+PV = "02.01.00.11A"
+diff --git a/recipes-bsp/pruss-lld/pruss-lld-test_git.bb b/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+new file mode 100644
+index 0000000..d994ec8
+--- /dev/null
++++ b/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "TI PRUSS low level driver tests"
++
++DEPENDS="common-csl-ip pruss-lld osal"
++
++include pruss-lld.inc
++
++PR = "${INC_PR}.0"
++
++S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
++
++do_compile () {
++#   Build the tests
++    make -f makefile_armv7 tests PDK_INSTALL_PATH=${STAGING_INCDIR} PRUSS_SRC_DIR=${S}
++}
++
++do_install () {
++#   Install the binary
++    make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_BIN_BASE_DIR=${D}${bindir} PRUSS_SRC_DIR=${S}
++}
+diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
+new file mode 100644
+index 0000000..52a92bd
+--- /dev/null
++++ b/recipes-bsp/pruss-lld/pruss-lld.inc
+@@ -0,0 +1,20 @@
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://pruicss.h;beginline=1;endline=31;md5=315177aa03d58bcd124a6e799e2bd458"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g-evm"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PRUSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pruss-lld.git"
++PRUSS_LLD_GIT_PROTOCOL = "git"
++PRUSS_LLD_GIT_BRANCH = "master"
++PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
++
++# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.05A"
++PRUSS_LLD_SRCREV = "7421ea14f163fb3c95c3645fe0add1e05da9d748"
++
++BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
++SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${PRUSS_LLD_SRCREV}"
++PV = "01.00.00.05A"
 +INC_PR = "r0"
- 
- BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/nwal"
+diff --git a/recipes-bsp/pruss-lld/pruss-lld_git.bb b/recipes-bsp/pruss-lld/pruss-lld_git.bb
+new file mode 100644
+index 0000000..72670f4
+--- /dev/null
++++ b/recipes-bsp/pruss-lld/pruss-lld_git.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "TI PRUSS low level driver library"
++
++DEPENDS="common-csl-ip osal"
++
++include pruss-lld.inc
++
++PR = "${INC_PR}.1"
++
++S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
++
++do_compile () {
++#   Build the lib
++    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
++    make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++}
++
++do_install () {
++#   Install the lib
++    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++}
 
 
