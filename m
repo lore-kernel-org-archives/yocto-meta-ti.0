@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F1BFCE00A21; Mon, 19 Dec 2016 15:15:44 -0800 (PST)
+	id 8A18CE00A64; Mon, 19 Dec 2016 15:15:45 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73B6FE009BA
-	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:15:42 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E37BAE00AF2
+	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:15:43 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DB9FF52A3D; Mon, 19 Dec 2016 23:15:41 +0000 (UTC)
+	id C60A152AD9; Mon, 19 Dec 2016 23:15:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231541.DB9FF52A3D@arago-project.org>
-Date: Mon, 19 Dec 2016 23:15:41 +0000 (UTC)
+Message-Id: <20161219231542.C60A152AD9@arago-project.org>
+Date: Mon, 19 Dec 2016 23:15:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : ti-sysbios: Upstream version 6.46.01.38
+Subject: Justin Sobota : osal: Upstream version 1.0.0.5E
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +38,101 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 0ea39b13219d6506ef4bcc88a3170a88853a4e3b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0ea39b13219d6506ef4bcc88a3170a88853a4e3b
+Commit: e5be57d13d7cbb42e95d360f3153ae796864ad8d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e5be57d13d7cbb42e95d360f3153ae796864ad8d
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Dec 15 21:54:33 2016 +0000
+Date:   Thu Dec 15 21:54:39 2016 +0000
 
-ti-sysbios: Upstream version 6.46.01.38
+osal: Upstream version 1.0.0.5E
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/bios/ti-sysbios_6.45.01.29.bb |   12 ------------
- recipes-ti/bios/ti-sysbios_6.46.01.38.bb |   12 ++++++++++++
- 2 files changed, 12 insertions(+), 12 deletions(-)
+ recipes-bsp/osal/osal-test_git.bb |   20 ++++++++++++++++++++
+ recipes-bsp/osal/osal.inc         |   20 ++++++++++++++++++++
+ recipes-bsp/osal/osal_git.bb      |   20 ++++++++++++++++++++
+ 3 files changed, 60 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb b/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
-deleted file mode 100644
-index 6ab4e27..0000000
---- a/recipes-ti/bios/ti-sysbios_6.45.01.29.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require recipes-ti/bios/ti-sysbios.inc
--
--PV = "6_45_01_29"
--PR = "r0"
--
--LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=dbcd89745f1745f24ace8171a96ed493"
--
--SRC_URI[sysbiosbin.md5sum] = "16cf6dc3c5cc9d2b877fa7d81dd12150"
--SRC_URI[sysbiosbin.sha256sum] = "efaf5f1d725f3fd06e45476109b1124c74c16c39c870d12929e071047c3e5a22"
--
--TI_BIN_UNPK_CMDS=""
--TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-diff --git a/recipes-ti/bios/ti-sysbios_6.46.01.38.bb b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
+diff --git a/recipes-bsp/osal/osal-test_git.bb b/recipes-bsp/osal/osal-test_git.bb
 new file mode 100644
-index 0000000..407b3b4
+index 0000000..9d4fa6d
 --- /dev/null
-+++ b/recipes-ti/bios/ti-sysbios_6.46.01.38.bb
-@@ -0,0 +1,12 @@
-+require recipes-ti/bios/ti-sysbios.inc
++++ b/recipes-bsp/osal/osal-test_git.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "TI OSAL tests"
 +
-+PV = "6_46_01_38"
-+PR = "r0"
++DEPENDS="common-csl-ip osal"
 +
-+LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=da86dca468e5dd80484dc83473ea32e3"
++include osal.inc
 +
-+SRC_URI[sysbiosbin.md5sum] = "5aee070f73eb6f3d9aab2ff9c483f396"
-+SRC_URI[sysbiosbin.sha256sum] = "3a04a584c3ee3221997b7d616ba45bbcc21ad241f4a4ab5c0f28c465d538af90"
++PR = "${INC_PR}.0"
 +
-+TI_BIN_UNPK_CMDS=""
-+TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
++S = "${WORKDIR}/${OSAL_GIT_DESTSUFFIX}"
++
++do_compile () {
++#   Build the tests
++    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
++    make -f makefile_armv7 tests PDK_INSTALL_PATH=${STAGING_INCDIR} OSAL_SRC_DIR=${S}
++}
++
++do_install () {
++#   Install the binary
++    make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_BIN_BASE_DIR=${D}${bindir} OSAL_SRC_DIR=${S}
++}
+diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
+new file mode 100644
+index 0000000..55a165e
+--- /dev/null
++++ b/recipes-bsp/osal/osal.inc
+@@ -0,0 +1,20 @@
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=8cbd8efb1460e4f16e6b00c8a7686be4"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++OSAL_GIT_URI = "git://git.ti.com/keystone-rtos/osal.git"
++OSAL_GIT_PROTOCOL = "git"
++OSAL_GIT_BRANCH = "master"
++OSAL_GIT_DESTSUFFIX = "git/ti/osal"
++
++# Below commit ID corresponds to "DEV.OSAL.01.00.00.05E"
++OSAL_SRCREV = "5125c71d756530513500b463d3301d03dee04497"
++
++BRANCH = "${OSAL_GIT_BRANCH}"
++SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${OSAL_SRCREV}"
++PV = "01.00.00.05E"
++INC_PR = "r0"
+diff --git a/recipes-bsp/osal/osal_git.bb b/recipes-bsp/osal/osal_git.bb
+new file mode 100644
+index 0000000..ecb46b2
+--- /dev/null
++++ b/recipes-bsp/osal/osal_git.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "TI OSAL library for Linux"
++
++DEPENDS="common-csl-ip"
++
++include osal.inc
++
++PR = "${INC_PR}.0"
++
++S = "${WORKDIR}/${OSAL_GIT_DESTSUFFIX}"
++
++do_compile () {
++#   Build the lib
++    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
++    make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++}
++
++do_install () {
++#   Install the lib
++    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++}
 
 
