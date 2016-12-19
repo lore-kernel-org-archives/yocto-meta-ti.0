@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 043DBE00E31; Mon, 19 Dec 2016 15:16:11 -0800 (PST)
+	id 7146AE00E79; Mon, 19 Dec 2016 15:16:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D15F8E00D71
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A34C6E00C88
 	for <meta-ti@yoctoproject.org>; Mon, 19 Dec 2016 15:15:51 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0AF2752AC9; Mon, 19 Dec 2016 23:15:51 +0000 (UTC)
+	id 9F0EF52ACE; Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161219231551.0AF2752AC9@arago-project.org>
-Date: Mon, 19 Dec 2016 23:15:51 +0000 (UTC)
+Message-Id: <20161219231550.9F0EF52ACE@arago-project.org>
+Date: Mon, 19 Dec 2016 23:15:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Justin Sobota : common-csl-ip: Upstream version 3.3.0.5A
+Subject: Justin Sobota : ti-pdk-build-rtos: Upstream version 1.0.0.3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,116 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: e3bf02aa14a70cd833cd4a17cb8853bdb0f2252d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e3bf02aa14a70cd833cd4a17cb8853bdb0f2252d
+Commit: 56f06b0fbe0b62d4593a454f16177190335a64db
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=56f06b0fbe0b62d4593a454f16177190335a64db
 
 Author: Justin Sobota <jsobota@ti.com>
-Date:   Thu Dec 15 21:54:42 2016 +0000
+Date:   Thu Dec 15 21:54:37 2016 +0000
 
-common-csl-ip: Upstream version 3.3.0.5A
+ti-pdk-build-rtos: Upstream version 1.0.0.3
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb |   49 +++++++++++++++++-----
+ 1 files changed, 38 insertions(+), 11 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 76181e8..166eaa4 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+index 84dca37..73ed092 100644
+--- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
++++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+ require recipes-ti/includes/ti-paths.inc
  
--PV = "03.03.00.04B"
-+PV = "03.03.00.05A"
- INC_PR = "r0"
+-PV = "01.00.00.02B"
++PV = "01.00.00.03"
+ PR = "r0"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
+ PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
+ PDK_BUILD_GIT_PROTOCOL = "git"
+ PDK_BUILD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.CSL_PROCESSOR-SDK.03.03.00.04B"
--CSL_SRCREV = "a74dc132a21085214b49c3ae8884825d87b6dd2f"
-+# Below commit ID corresponds to "DEV.CSL_PROCESSOR-SDK.03.03.00.05A"
-+CSL_SRCREV = "811646f507d985dac04544c60c965cadf5e26a4f"
+-# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.02B"
+-PDK_BUILD_SRCREV = "28a1bf6dba6d4eb6d80bfe37c5a5f17941754192"
++# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.03"
++PDK_BUILD_SRCREV = "487845b835b54d97f2d2f47ee1d0d88784e7e9ca"
  
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+ BRANCH = "${PDK_BUILD_GIT_BRANCH}"
+ SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
+@@ -32,30 +32,46 @@ do_compile() {
+ do_install() {
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+     
+     install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+     install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+ 
+     sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
+         ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
+-
++    
+     install -m 0755 makerules/build_config.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/common.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/component.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/env.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/platform.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++}
++
++do_install_append_ti33x() {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
++
+     install -m 0755 makerules/rules_a8.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_a8_extend.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++
++    install -m 0755 am335x/config_am335x_a8.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
++}
++
++do_install_append_ti43x() {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
++
+     install -m 0755 makerules/rules_a9.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    
++    install -m 0755 am437x/config_am437x_a9.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
++}
++
++do_install_append_omap-a15() {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
++
++    install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    install -m 0755 am335x/config_am335x_a8.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
+-    install -m 0755 am335x/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
++    
+     install -m 0755 am571x/config_am571x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+     install -m 0755 am571x/config_am571x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+     install -m 0755 am571x/config_am571x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+@@ -65,5 +81,16 @@ do_install() {
+     install -m 0755 am572x/config_am572x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+     install -m 0755 am572x/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+ }
++    
++do_install_append_keystone() {
++    install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++    install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
++}
++
++do_install_append_k2g-evm() {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
++
++    install -m 0755 k2g/config_k2g_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
++}
+ 
+ FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
 
 
