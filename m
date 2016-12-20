@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 626D6E00C22; Tue, 20 Dec 2016 13:36:46 -0800 (PST)
+	id C572FE00C25; Tue, 20 Dec 2016 13:36:47 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C59DE00BC1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B268E00BC0
 	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 13:36:43 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DF29352AF1; Tue, 20 Dec 2016 21:36:42 +0000 (UTC)
+	id 0EFCA52AE3; Tue, 20 Dec 2016 21:36:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161220213642.DF29352AF1@arago-project.org>
+Message-Id: <20161220213642.0EFCA52AE3@arago-project.org>
 Date: Tue, 20 Dec 2016 21:36:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : pruss-lld: utilize oe_runmake
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2016 21:36:46 -0000
+X-List-Received-Date: Tue, 20 Dec 2016 21:36:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: 354b342d8e45914bf4d4c50a4d6a5c777cdfdadb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=354b342d8e45914bf4d4c50a4d6a5c777cdfdadb
+Branch: krogoth
+Commit: 10c1d75c9d5b5b448e312e2b4bae632b97ba6e52
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=10c1d75c9d5b5b448e312e2b4bae632b97ba6e52
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed Dec 21 02:39:14 2016 +0000
