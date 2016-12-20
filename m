@@ -1,39 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 796F0E00BC1; Tue, 20 Dec 2016 13:28:56 -0800 (PST)
+	id 64402E00BC1; Tue, 20 Dec 2016 13:36:46 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 358BBE00A64
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 13:28:52 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBKLSqSX031637
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 15:28:52 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBKLSqAC010376
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 15:28:52 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 20 Dec 2016 15:28:51 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBKLSpYT016641;
-	Tue, 20 Dec 2016 15:28:51 -0600
-Date: Tue, 20 Dec 2016 16:28:51 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20161220212850.GB28380@edge>
-References: <1481943653-26769-1-git-send-email-sam.nelson@ti.com>
-	<20161219232429.GW28380@edge>
-MIME-Version: 1.0
-In-Reply-To: <20161219232429.GW28380@edge>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2] ti-ipc: Update to new patch release 3.44.01.01
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19EAFE00A64
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 13:36:43 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 87DE052AF0; Tue, 20 Dec 2016 21:36:42 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20161220213642.87DE052AF0@arago-project.org>
+Date: Tue, 20 Dec 2016 21:36:42 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : pruss-lld: utilize oe_runmake
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,99 +33,88 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2016 21:28:56 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Dec 2016 21:36:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Dec 19, 2016 at 06:24:29PM -0500, Denys Dmytriyenko wrote:
-> On Fri, Dec 16, 2016 at 10:00:53PM -0500, Sam Nelson wrote:
-> > -Enables parallel build when rtos build invokes xdc to reduce build time
-> 
-> Thanks! That's a very welcome change!
+Module: meta-ti
+Branch: master
+Commit: 1c0dc51920d5b5bb5a0f2496bc9a0b6679d89181
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1c0dc51920d5b5bb5a0f2496bc9a0b6679d89181
 
-On my 6-core/12-thread machine the build time of ti-ipc-rtos decreased 
-from 50 minutes down to 10 minutes! Thanks again.
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Wed Dec 21 02:39:14 2016 +0000
 
+pruss-lld: utilize oe_runmake
 
-> > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> > 
-> > ---
-> > Added missed patch to enable parallel build
-> > ---
-> > ---
-> >  recipes-ti/ipc/ti-ipc-common.inc |  4 ++--
-> >  recipes-ti/ipc/ti-ipc-rtos.inc   | 11 ++++++-----
-> >  recipes-ti/ipc/ti-ipc.inc        |  6 +++---
-> >  3 files changed, 11 insertions(+), 10 deletions(-)
-> > 
-> > diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-> > index ddb48bc..8a2aa0a 100644
-> > --- a/recipes-ti/ipc/ti-ipc-common.inc
-> > +++ b/recipes-ti/ipc/ti-ipc-common.inc
-> > @@ -1,5 +1,5 @@
-> > -PV = "3.44.00.00"
-> > -INC_PR = "r2"
-> > +PV = "3.44.01.01"
-> > +INC_PR = "r0"
-> >  
-> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >  
-> > diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-> > index e1abf36..1c509b0 100644
-> > --- a/recipes-ti/ipc/ti-ipc-rtos.inc
-> > +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-> > @@ -25,16 +25,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
-> >  branch=${TI_IPC_METADATA_GIT_BRANCH};\
-> >  name=${TI_IPC_METADATA_NAME}"
-> >  
-> > -# Corresponds to tag: 3.44.00.00C
-> > -SRCREV_ipc-examples = "1b73bc32c5bdd869b5121f86859afb122d286acc"
-> > +# Corresponds to tag: 3.44.01.01
-> > +SRCREV_ipc-examples = "b19a3b7a003aa3304a12599a498d9b3a24f20c6e"
-> >  
-> > -# Corresponds to tag: 3.44.00.00
-> > -SRCREV_ipc-metadata = "07a745d47ecd7b4b64860e7c5d0fbe4e89524f2e"
-> > +# Corresponds to tag: 3.44.01.01
-> > +SRCREV_ipc-metadata = "a21264bdbb1b64d41bbcb4e6bb17d2c1d4ccb839"
-> >  
-> >  S_ipc-examples = "${WORKDIR}/git/ipc-examples"
-> >  S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-> >  
-> > -PR = "${INC_PR}.4"
-> > +PR = "${INC_PR}.0"
-> >  
-> >  DEPENDS_append_keystone = " ti-cgt6x-native \
-> >                              gcc-arm-none-eabi-native \
-> > @@ -62,4 +62,5 @@ EXTRA_OEMAKE = "\
-> >      XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
-> >      BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
-> >      ${IPC_TARGETS} \
-> > +    JOBS="--jobs=${BB_NUMBER_THREADS}" \
-> >  "
-> > diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-> > index 2d38367..3ac8bf5 100644
-> > --- a/recipes-ti/ipc/ti-ipc.inc
-> > +++ b/recipes-ti/ipc/ti-ipc.inc
-> > @@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
-> >  
-> >  TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
-> >  TI_IPC_GIT_PROTOCOL = "git"
-> > -TI_IPC_GIT_BRANCH = "3.44"
-> > +TI_IPC_GIT_BRANCH = "ipc-3.44-next"
-> >  
-> > -#Corresponds to 3.44.00.00
-> > -TI_IPC_SRCREV = "a1852fc8b254ed207bd1c1c88f5b362c9b6cc454"
-> > +#Corresponds to 3.44.01.01
-> > +TI_IPC_SRCREV = "cff640a4c7e083f78116266ef681cec49d9b584b"
-> >  
-> >  BRANCH = "${TI_IPC_GIT_BRANCH}"
-> >  SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
-> > -- 
-> > 1.9.1
-> > 
-> > -- 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+* Use the oe_runmake wrapper to invoke make
+* Supply common make arguments to EXTRA_OEMAKE such as which makefile
+  to invoke.
+* This resolves build issues when pruss-lld needs to be reconfigured
+  as do_configure would make the clean target of the incorrect
+  makefile.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-bsp/pruss-lld/pruss-lld-test_git.bb |    8 +++++---
+ recipes-bsp/pruss-lld/pruss-lld_git.bb      |   10 ++++++----
+ 2 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/recipes-bsp/pruss-lld/pruss-lld-test_git.bb b/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+index d994ec8..7fdbfb6 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
++++ b/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+@@ -4,16 +4,18 @@ DEPENDS="common-csl-ip pruss-lld osal"
+ 
+ include pruss-lld.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
+ 
++EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} PRUSS_SRC_DIR=${S}"
++
+ do_compile () {
+ #   Build the tests
+-    make -f makefile_armv7 tests PDK_INSTALL_PATH=${STAGING_INCDIR} PRUSS_SRC_DIR=${S}
++    oe_runmake tests
+ }
+ 
+ do_install () {
+ #   Install the binary
+-    make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_BIN_BASE_DIR=${D}${bindir} PRUSS_SRC_DIR=${S}
++    oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}${bindir}
+ }
+diff --git a/recipes-bsp/pruss-lld/pruss-lld_git.bb b/recipes-bsp/pruss-lld/pruss-lld_git.bb
+index 72670f4..2eca4ff 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld_git.bb
++++ b/recipes-bsp/pruss-lld/pruss-lld_git.bb
+@@ -4,17 +4,19 @@ DEPENDS="common-csl-ip osal"
+ 
+ include pruss-lld.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
+ 
++EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
++
+ do_compile () {
+ #   Build the lib
+-    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
+-    make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++    oe_runmake clean
++    oe_runmake lib
+ }
+ 
+ do_install () {
+ #   Install the lib
+-    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++    oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
+ }
+
 
