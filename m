@@ -1,41 +1,35 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 69BE2E00A64; Tue, 20 Dec 2016 12:31:57 -0800 (PST)
+	id EF428E00BE0; Tue, 20 Dec 2016 12:41:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 06BA2E00955
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 12:31:54 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBKKVmnE025936;
-	Tue, 20 Dec 2016 14:31:48 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBKKVm8N008317;
-	Tue, 20 Dec 2016 14:31:48 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 20 Dec 2016 14:31:47 -0600
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBKKVlCo003928;
-	Tue, 20 Dec 2016 14:31:47 -0600
-To: Christopher Larson <clarson@kergoth.com>
-References: <1482250466-32489-1-git-send-email-j-stiffler@ti.com>
-	<CABcZAN=hyfYC8SqiwSzX_8pUe-o7kDxCgWobCUBMrP0mV0E2sg@mail.gmail.com>
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 350E7E00A64
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 12:41:34 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBKKfYop009795
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 14:41:34 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBKKfYwS029493
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 14:41:34 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 20 Dec 2016 14:41:34 -0600
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	uBKKfXnW013295;	Tue, 20 Dec 2016 14:41:34 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <1ba5741e-9f59-45cf-d2e0-7a20a72ccbcb@ti.com>
-Date: Tue, 20 Dec 2016 15:31:47 -0500
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 20 Dec 2016 15:39:14 -0500
+Message-ID: <1482266354-2449-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CABcZAN=hyfYC8SqiwSzX_8pUe-o7kDxCgWobCUBMrP0mV0E2sg@mail.gmail.com>
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] pruss-lld: set CLEANBROKEN
+Subject: [PATCH v2] pruss-lld: utilize oe_runmake
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,113 +42,83 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2016 20:31:57 -0000
-Content-Type: multipart/alternative;
-	boundary="------------AC9F2137A9B8CBD52301A0AB"
+X-List-Received-Date: Tue, 20 Dec 2016 20:41:37 -0000
+Content-Type: text/plain
 
---------------AC9F2137A9B8CBD52301A0AB
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+* Use the oe_runmake wrapper to invoke make
+* Supply common make arguments to EXTRA_OEMAKE such as which makefile
+  to invoke.
+* This resolves build issues when pruss-lld needs to be reconfigured
+  as do_configure would make the clean target of the incorrect
+  makefile.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+NOTE the short log has changed on this version. The original patch 
+contained the shortlog: "pruss-lld: set CLEANBROKEN"
+
+v2 changes:
+* Use OE_EXTRAMAKE to specify the common make arguments
+
+ recipes-bsp/pruss-lld/pruss-lld-test_git.bb |  8 +++++---
+ recipes-bsp/pruss-lld/pruss-lld_git.bb      | 10 ++++++----
+ 2 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/recipes-bsp/pruss-lld/pruss-lld-test_git.bb b/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+index d994ec8..7fdbfb6 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
++++ b/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+@@ -4,16 +4,18 @@ DEPENDS="common-csl-ip pruss-lld osal"
+ 
+ include pruss-lld.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
+ 
++EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} PRUSS_SRC_DIR=${S}"
++
+ do_compile () {
+ #   Build the tests
+-    make -f makefile_armv7 tests PDK_INSTALL_PATH=${STAGING_INCDIR} PRUSS_SRC_DIR=${S}
++    oe_runmake tests
+ }
+ 
+ do_install () {
+ #   Install the binary
+-    make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_BIN_BASE_DIR=${D}${bindir} PRUSS_SRC_DIR=${S}
++    oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}${bindir}
+ }
+diff --git a/recipes-bsp/pruss-lld/pruss-lld_git.bb b/recipes-bsp/pruss-lld/pruss-lld_git.bb
+index 72670f4..2eca4ff 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld_git.bb
++++ b/recipes-bsp/pruss-lld/pruss-lld_git.bb
+@@ -4,17 +4,19 @@ DEPENDS="common-csl-ip osal"
+ 
+ include pruss-lld.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
+ 
++EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
++
+ do_compile () {
+ #   Build the lib
+-    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
+-    make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++    oe_runmake clean
++    oe_runmake lib
+ }
+ 
+ do_install () {
+ #   Install the lib
+-    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++    oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
+ }
+-- 
+2.7.4
 
 
-
-On 12/20/2016 12:54 PM, Christopher Larson wrote:
->
-> On Tue, Dec 20, 2016 at 9:14 AM, Jacob Stiffler <j-stiffler@ti.com 
-> <mailto:j-stiffler@ti.com>> wrote:
->
->     * The Linux binaries are built by the "makefile_armv7".
->     * pruss-lld provides a "makefile", but it is used for building the
->       RTOS binaries.
->     * This "makefile" requires the ti-pdk-build-rtos package and is broken
->       without it, so therefore set CLEANBROKEN instead of pulling in
->       unnecessary dependencies.
->
->     Signed-off-by: Jacob Stiffler <j-stiffler@ti.com
->     <mailto:j-stiffler@ti.com>>
->
->
-> Could you not just make sure the -f is passed to the clean?
->
-> EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}”
-
-This works. I will send out the v2.
-
-> -- 
-> Christopher Larson
-> clarson at kergoth dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Senior Software Engineer, Mentor Graphics
-
-
---------------AC9F2137A9B8CBD52301A0AB
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    <p><br>
-    </p>
-    <br>
-    <div class="moz-cite-prefix">On 12/20/2016 12:54 PM, Christopher
-      Larson wrote:<br>
-    </div>
-    <blockquote
-cite="mid:CABcZAN=hyfYC8SqiwSzX_8pUe-o7kDxCgWobCUBMrP0mV0E2sg@mail.gmail.com"
-      type="cite">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <div dir="ltr">
-        <div class="gmail_extra"><br>
-          <div class="gmail_quote">On Tue, Dec 20, 2016 at 9:14 AM,
-            Jacob Stiffler <span dir="ltr">&lt;<a
-                moz-do-not-send="true" href="mailto:j-stiffler@ti.com"
-                target="_blank">j-stiffler@ti.com</a>&gt;</span> wrote:<br>
-            <blockquote class="gmail_quote" style="margin:0px 0px 0px
-0.8ex;border-left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;padding-left:1ex">
-              <div id="gmail-:1mm" class="gmail-a3s gmail-aXjCH
-                gmail-m1591d0d514f9e25d">* The Linux binaries are built
-                by the "makefile_armv7".<br>
-                * pruss-lld provides a "makefile", but it is used for
-                building the<br>
-                  RTOS binaries.<br>
-                * This "makefile" requires the ti-pdk-build-rtos package
-                and is broken<br>
-                  without it, so therefore set CLEANBROKEN instead of
-                pulling in<br>
-                  unnecessary dependencies.<br>
-                <br>
-                Signed-off-by: Jacob Stiffler &lt;<a
-                  moz-do-not-send="true" href="mailto:j-stiffler@ti.com">j-stiffler@ti.com</a>&gt;</div>
-            </blockquote>
-          </div>
-          <br>
-          Could you not just make sure the -f is passed to the clean?</div>
-        <div class="gmail_extra"><br>
-        </div>
-        <div class="gmail_extra">EXTRA_OEMAKE += "-f makefile_armv7
-          PDK_INSTALL_PATH=${STAGING_INCDIR}”</div>
-      </div>
-    </blockquote>
-    <br>
-    This works. I will send out the v2.<br>
-    <br>
-    <blockquote
-cite="mid:CABcZAN=hyfYC8SqiwSzX_8pUe-o7kDxCgWobCUBMrP0mV0E2sg@mail.gmail.com"
-      type="cite">
-      <div dir="ltr">
-        <div class="gmail_extra">-- <br>
-          <div class="gmail_signature">Christopher Larson<br>
-            clarson at kergoth dot com<br>
-            Founder - BitBake, OpenEmbedded, OpenZaurus<br>
-            Senior Software Engineer, Mentor Graphics</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------AC9F2137A9B8CBD52301A0AB--
