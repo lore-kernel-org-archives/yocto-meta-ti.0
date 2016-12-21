@@ -1,35 +1,26 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CD346E01065; Tue, 20 Dec 2016 19:04:47 -0800 (PST)
+	id BF11DE00A4D; Wed, 21 Dec 2016 10:24:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A198AE01063
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 19:04:44 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBL34hqM023576
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 21:04:43 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBL34gNU020017
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2016 21:04:43 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 20 Dec 2016 21:04:42 -0600
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	uBL34gVb030203;	Tue, 20 Dec 2016 21:04:42 -0600
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 20 Dec 2016 22:04:40 -0500
-Message-ID: <1482289480-58562-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] cmem: Update commit id for 4.13.00.00_eng
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B41BE00571
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 10:24:46 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id D46B352AD7; Wed, 21 Dec 2016 18:24:45 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20161221182445.D46B352AD7@arago-project.org>
+Date: Wed, 21 Dec 2016 18:24:45 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : cmem: Update commit id for 4.13.00.00_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,18 +33,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 03:04:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Dec 2016 18:24:48 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: krogoth
+Commit: 636f0898319d32422d0721f9ac83687cb5579ed4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=636f0898319d32422d0721f9ac83687cb5579ed4
+
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Wed Dec 21 09:04:40 2016 +0000
+
+cmem: Update commit id for 4.13.00.00_eng
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/cmem/cmem-mod_git.bb | 2 +-
- recipes-bsp/cmem/cmem.inc        | 2 +-
- recipes-bsp/cmem/cmem_git.bb     | 2 +-
+
+ recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
+ recipes-bsp/cmem/cmem.inc        |    2 +-
+ recipes-bsp/cmem/cmem_git.bb     |    2 +-
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
-index 1031e85..14c7edf 100644
+index f1e1233..d36816b 100644
 --- a/recipes-bsp/cmem/cmem-mod_git.bb
 +++ b/recipes-bsp/cmem/cmem-mod_git.bb
 @@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
@@ -91,7 +95,5 @@ index bab9238..b30029d 100644
  
  PACKAGES =+ "${PN}-test"
  
--- 
-1.9.1
 
 
