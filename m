@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CE025E00C98; Wed, 21 Dec 2016 10:24:49 -0800 (PST)
+	id 0D903E00848; Wed, 21 Dec 2016 10:24:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 640CEE00571
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 10:24:48 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65663E007AA
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 10:24:49 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1307552AD7; Wed, 21 Dec 2016 18:24:48 +0000 (UTC)
+	id 583B652AD9; Wed, 21 Dec 2016 18:24:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161221182448.1307552AD7@arago-project.org>
-Date: Wed, 21 Dec 2016 18:24:47 +0000 (UTC)
+Message-Id: <20161221182448.583B652AD9@arago-project.org>
+Date: Wed, 21 Dec 2016 18:24:48 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : cmem.inc: only mangle SRC_URI in do_unpack instead of anon function
+Subject: Sam Nelson : cmem: Update commit id for 4.13.00.00_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,48 +33,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 18:24:49 -0000
+X-List-Received-Date: Wed, 21 Dec 2016 18:24:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: 3c2c9c0ffada179effe4e930f4f02ae60deefdae
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c2c9c0ffada179effe4e930f4f02ae60deefdae
+Commit: 9a146d37adfa67be735adbb24a8950e28364f0bc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9a146d37adfa67be735adbb24a8950e28364f0bc
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Dec 21 07:13:45 2016 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Wed Dec 21 09:04:40 2016 +0000
 
-cmem.inc: only mangle SRC_URI in do_unpack instead of anon function
+cmem: Update commit id for 4.13.00.00_eng
 
-Avoid taskhash mismatch errors.
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/cmem.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
+ recipes-bsp/cmem/cmem.inc        |    2 +-
+ recipes-bsp/cmem/cmem_git.bb     |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index 4541185..a61b899 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -27,7 +27,7 @@ CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb
- RESERVE_CMEM ?= "0"
+diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
+index 1031e85..14c7edf 100644
+--- a/recipes-bsp/cmem/cmem-mod_git.bb
++++ b/recipes-bsp/cmem/cmem-mod_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
+ include cmem.inc
  
- # Add correct cmem.dtsi to SRC_URI for each variant for a given machine
--python() {
-+python do_unpack() {
-     old_overrides = d.getVar('OVERRIDES', False)
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
-     # Initialize with empty string to simplify logic to append to SRC_URI
-@@ -42,6 +42,7 @@ python() {
-         cmem_dtsi.add(localdata.getVar('CMEM_DTSI', True))
+ inherit module
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index 0d05bb3..af48891 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e27
  
-     d.appendVar('SRC_URI', ' file://'.join(cmem_dtsi))
-+    bb.build.exec_func('base_do_unpack', d)
- }
+ BRANCH = "lu-next"
+ # This corresponds to version 4.13.00.00_eng
+-SRCREV = "d6d3e84c84d0e84a9b96c3f6f789ac642d03afcb"
++SRCREV = "1b1e19754049446c20fba7c22b39b325eb0154ec"
  
- python do_setup_cmem() {
+ PV = "4.13.00.00+git${SRCPV}"
+ 
+diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
+index bab9238..b30029d 100644
+--- a/recipes-bsp/cmem/cmem_git.bb
++++ b/recipes-bsp/cmem/cmem_git.bb
+@@ -4,7 +4,7 @@ include cmem.inc
+ 
+ RDEPENDS_${PN} = "cmem-mod"
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ PACKAGES =+ "${PN}-test"
+ 
 
 
