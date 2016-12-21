@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CBA12E00CB0; Wed, 21 Dec 2016 10:24:49 -0800 (PST)
+	id CE025E00C98; Wed, 21 Dec 2016 10:24:49 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17F29E00848
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 640CEE00571
 	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 10:24:48 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3B1DE52AD7; Wed, 21 Dec 2016 18:24:47 +0000 (UTC)
+	id 1307552AD7; Wed, 21 Dec 2016 18:24:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161221182447.3B1DE52AD7@arago-project.org>
+Message-Id: <20161221182448.1307552AD7@arago-project.org>
 Date: Wed, 21 Dec 2016 18:24:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : cmem.inc: only mangle SRC_URI in do_unpack instead of anon function
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 21 Dec 2016 18:24:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e022e00e66673af9fbfc3755bcdb9cd8dc9567e2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e022e00e66673af9fbfc3755bcdb9cd8dc9567e2
+Branch: morty
+Commit: 3c2c9c0ffada179effe4e930f4f02ae60deefdae
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c2c9c0ffada179effe4e930f4f02ae60deefdae
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Dec 21 07:13:45 2016 +0000
