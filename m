@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BF11DE00A4D; Wed, 21 Dec 2016 10:24:48 -0800 (PST)
+	id 1D9F9E00955; Wed, 21 Dec 2016 10:24:49 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B41BE00571
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 10:24:46 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC7BFE007AA
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 10:24:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D46B352AD7; Wed, 21 Dec 2016 18:24:45 +0000 (UTC)
+	id BDA3E52AD9; Wed, 21 Dec 2016 18:24:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161221182445.D46B352AD7@arago-project.org>
-Date: Wed, 21 Dec 2016 18:24:45 +0000 (UTC)
+Message-Id: <20161221182446.BDA3E52AD9@arago-project.org>
+Date: Wed, 21 Dec 2016 18:24:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cmem: Update commit id for 4.13.00.00_eng
+Subject: Denys Dmytriyenko : remaining recipes: fix build issue due to bb.data. * deprecation
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,67 +33,165 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 18:24:48 -0000
+X-List-Received-Date: Wed, 21 Dec 2016 18:24:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 636f0898319d32422d0721f9ac83687cb5579ed4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=636f0898319d32422d0721f9ac83687cb5579ed4
+Branch: master
+Commit: 16a794009702db32c6c6570cda656e9732858573
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=16a794009702db32c6c6570cda656e9732858573
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Dec 21 09:04:40 2016 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Dec 21 04:35:22 2016 +0000
 
-cmem: Update commit id for 4.13.00.00_eng
+remaining recipes: fix build issue due to bb.data.* deprecation
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Causes following error:
+Exception: AttributeError: module 'bb.data' has no attribute 'getVar'
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
- recipes-bsp/cmem/cmem.inc        |    2 +-
- recipes-bsp/cmem/cmem_git.bb     |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb               |    2 +-
+ .../codec-engine/ti-codecs-omap3530_4.00.00.00.bb  |   46 ++++++++++----------
+ recipes-ti/includes/ti-unpack.inc                  |   12 +++---
+ 3 files changed, 30 insertions(+), 30 deletions(-)
 
-diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
-index f1e1233..d36816b 100644
---- a/recipes-bsp/cmem/cmem-mod_git.bb
-+++ b/recipes-bsp/cmem/cmem-mod_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
- include cmem.inc
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 85dfc26..2dd4962 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -1,5 +1,5 @@
+ python __anonymous() {
+-    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
++    features = d.getVar("MACHINE_FEATURES", d, 1)
+     if not features:
+         return
+     if "mmip" not in features:
+diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
+index 5c87b4c..633e098 100644
+--- a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
++++ b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
+@@ -76,49 +76,49 @@ DSPSUFFIX_omap3530 = "x64P"
+ python do_unpack () {
+     bb.build.exec_func('base_do_unpack', d)
  
- # This package builds a kernel module, use kernel PR as base and append a local
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
+-    bb.data.setVar("BINFILE", "omap3530_h264enc_2_01_013_production.bin", d)
+-    bb.data.setVar("TARFILE", "omap3530_h264enc_2_01_013_production.tar", d)
++    d.setVar("BINFILE", "omap3530_h264enc_2_01_013_production.bin", d)
++    d.setVar("TARFILE", "omap3530_h264enc_2_01_013_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
  
- inherit module
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 0d05bb3..af48891 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e27
+-    bb.data.setVar("BINFILE", "omap3530_h264dec_2_01_007_production.bin", d)
+-    bb.data.setVar("TARFILE", "omap3530_h264dec_2_01_007_production.tar", d)
++    d.setVar("BINFILE", "omap3530_h264dec_2_01_007_production.bin", d)
++    d.setVar("TARFILE", "omap3530_h264dec_2_01_007_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
  
- BRANCH = "lu-next"
- # This corresponds to version 4.13.00.00_eng
--SRCREV = "d6d3e84c84d0e84a9b96c3f6f789ac642d03afcb"
-+SRCREV = "1b1e19754049446c20fba7c22b39b325eb0154ec"
+-    bb.data.setVar("BINFILE", "omap3530_jpegenc_02_01_01_00_production.bin", d)
+-    bb.data.setVar("TARFILE", "omap3530_jpegenc_02_01_01_00_production.tar", d)
++    d.setVar("BINFILE", "omap3530_jpegenc_02_01_01_00_production.bin", d)
++    d.setVar("TARFILE", "omap3530_jpegenc_02_01_01_00_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
  
- PV = "4.13.00.00+git${SRCPV}"
+-    bb.data.setVar("BINFILE", "c64xplus_jpegdec_02_00_01_01_production.bin", d)
+-    bb.data.setVar("TARFILE", "c64xplus_jpegdec_02_00_01_01_production.tar", d)
++    d.setVar("BINFILE", "c64xplus_jpegdec_02_00_01_01_production.bin", d)
++    d.setVar("TARFILE", "c64xplus_jpegdec_02_00_01_01_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
  
-diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
-index bab9238..b30029d 100644
---- a/recipes-bsp/cmem/cmem_git.bb
-+++ b/recipes-bsp/cmem/cmem_git.bb
-@@ -4,7 +4,7 @@ include cmem.inc
+-    bb.data.setVar("BINFILE", "c64xplus_mpeg2dec_02_00_02_00_production.bin", d)
+-    bb.data.setVar("TARFILE", "c64xplus_mpeg2dec_02_00_02_00_production.tar", d)
++    d.setVar("BINFILE", "c64xplus_mpeg2dec_02_00_02_00_production.bin", d)
++    d.setVar("TARFILE", "c64xplus_mpeg2dec_02_00_02_00_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
  
- RDEPENDS_${PN} = "cmem-mod"
+-    bb.data.setVar("BINFILE", "omap3530_mpeg4enc_02_04_00_00_production.bin", d)
+-    bb.data.setVar("TARFILE", "omap3530_mpeg4enc_02_04_00_00_production.tar", d)
++    d.setVar("BINFILE", "omap3530_mpeg4enc_02_04_00_00_production.bin", d)
++    d.setVar("TARFILE", "omap3530_mpeg4enc_02_04_00_00_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)   
  
--PR = "r0"
-+PR = "r1"
+-    bb.data.setVar("BINFILE", "c64xplus_mpeg4dec_02_01_00_00_production.bin", d)
+-    bb.data.setVar("TARFILE", "c64xplus_mpeg4dec_02_01_00_00_production.tar", d)
++    d.setVar("BINFILE", "c64xplus_mpeg4dec_02_01_00_00_production.bin", d)
++    d.setVar("TARFILE", "c64xplus_mpeg4dec_02_01_00_00_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
  
- PACKAGES =+ "${PN}-test"
+-    bb.data.setVar("BINFILE", "c64xplus_aachedec_01_30_03_00_production.bin", d)
+-    bb.data.setVar("TARFILE", "dm6446_aachedec_01_30_03_00_production.tar", d)
++    d.setVar("BINFILE", "c64xplus_aachedec_01_30_03_00_production.bin", d)
++    d.setVar("TARFILE", "dm6446_aachedec_01_30_03_00_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
  
+-    bb.data.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
+-    bb.data.setVar("TARFILE", "dm6446_g711enc_1_12_00_000_production.tar", d)
++    d.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
++    d.setVar("TARFILE", "dm6446_g711enc_1_12_00_000_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
+ 
+-    bb.data.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
+-    bb.data.setVar("TARFILE", "dm6446_g711dec_1_12_00_000_production.tar", d)
++    d.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
++    d.setVar("TARFILE", "dm6446_g711dec_1_12_00_000_production.tar", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
+ 
+-    bb.data.setVar("BINFILE", "c64xplus_deinterlacer_01_00_00_07_production.bin", d)
+-    bb.data.setVar("TARFILE", "c64xplus_deinterlacer_01_00_00_07/c64xplus_deinterlacer_01_00_00_07_production.tar", d)
+-    bb.data.setVar("TI_BIN_UNPK_CMDS", "y: :q: ", d)
++    d.setVar("BINFILE", "c64xplus_deinterlacer_01_00_00_07_production.bin", d)
++    d.setVar("TARFILE", "c64xplus_deinterlacer_01_00_00_07/c64xplus_deinterlacer_01_00_00_07_production.tar", d)
++    d.setVar("TI_BIN_UNPK_CMDS", "y: :q: ", d)
+     bb.build.exec_func('ti_bin_do_unpack', d)
+ 
+ }
+diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
+index 1922db6..cc315df 100644
+--- a/recipes-ti/includes/ti-unpack.inc
++++ b/recipes-ti/includes/ti-unpack.inc
+@@ -29,21 +29,21 @@ python ti_bin_do_unpack() {
+     localdata = bb.data.createCopy(d)
+     bb.data.update_data(localdata)
+ 
+-    binfile  = bb.data.getVar('BINFILE', localdata)
++    binfile  = d.getVar('BINFILE', localdata)
+     binfile  = bb.data.expand(binfile, localdata)
+ 
+     # Change to the working directory
+     save_cwd = os.getcwd()
+-    workdir  = bb.data.getVar('WORKDIR', localdata)
++    workdir  = d.getVar('WORKDIR', localdata)
+     workdir  = bb.data.expand(workdir, localdata)
+     os.chdir(workdir)
+ 
+     # Get unpack args
+-    arg_string = bb.data.getVar('TI_BIN_UNPK_ARGS', localdata)
++    arg_string = d.getVar('TI_BIN_UNPK_ARGS', localdata)
+     arg_string = bb.data.expand(arg_string, localdata)
+ 
+     # Get unpack commands
+-    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
++    cmd_string = d.getVar('TI_BIN_UNPK_CMDS', localdata)
+     cmd_list = cmd_string.split( ":" )
+ 
+     # Make the InstallJammer binary executable so we can run it
+@@ -61,14 +61,14 @@ python ti_bin_do_unpack() {
+     f = os.popen(filename,'w')
+     for cmd in cmd_list:
+         if cmd == "workdir":
+-            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
++            wdext = d.getVar('TI_BIN_UNPK_WDEXT', localdata)
+             wdext = bb.data.expand(wdext, localdata)
+             cmd = workdir+wdext
+         f.write(cmd+'\n');
+     f.close()
+ 
+     # Expand the tarball that was created if required
+-    tarfile  = bb.data.getVar('TARFILE', localdata)    
++    tarfile  = d.getVar('TARFILE', localdata)
+     if bool(tarfile) == True:
+         tarfile  = bb.data.expand(tarfile, localdata)
+         tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
 
 
