@@ -1,26 +1,37 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0F7CAE007AA; Wed, 21 Dec 2016 10:24:50 -0800 (PST)
+	id 62381E00A1E; Wed, 21 Dec 2016 21:57:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54E86E0089B
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 10:24:48 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 894FD52AD9; Wed, 21 Dec 2016 18:24:47 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20161221182447.894FD52AD9@arago-project.org>
-Date: Wed, 21 Dec 2016 18:24:47 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cmem: Update commit id for 4.13.00.00_eng
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22E6FE0083D
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 21:57:20 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBM5vKfq027018
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 23:57:20 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBM5vKGw010678
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 23:57:20 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 21 Dec 2016 23:57:19 -0600
+Received: from swubn01.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBM5vFvt029027;
+	Wed, 21 Dec 2016 23:57:18 -0600
+From: Karthik Ramanan <a0393906@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 22 Dec 2016 11:27:13 +0530
+Message-ID: <1482386233-14151-1-git-send-email-a0393906@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH] ti-sgx-ddk-um: Add support for YUYV EGLImage
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,67 +44,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 18:24:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Dec 2016 05:57:23 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: e6295c2eada6cdd4b909f567431c569e089be2b1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e6295c2eada6cdd4b909f567431c569e089be2b1
-
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Dec 21 09:04:40 2016 +0000
-
-cmem: Update commit id for 4.13.00.00_eng
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
- recipes-bsp/cmem/cmem.inc        |    2 +-
- recipes-bsp/cmem/cmem_git.bb     |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
-index 1031e85..14c7edf 100644
---- a/recipes-bsp/cmem/cmem-mod_git.bb
-+++ b/recipes-bsp/cmem/cmem-mod_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
- include cmem.inc
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 5903b2e..b7fd572 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- # This package builds a kernel module, use kernel PR as base and append a local
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "3c0537748dd283b2de9c5369570aa2aade5a9979"
++SRCREV = "739111e5d67871d08f9d7e643492bee40dce933c"
  
- inherit module
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 0d05bb3..af48891 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e27
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- BRANCH = "lu-next"
- # This corresponds to version 4.13.00.00_eng
--SRCREV = "d6d3e84c84d0e84a9b96c3f6f789ac642d03afcb"
-+SRCREV = "1b1e19754049446c20fba7c22b39b325eb0154ec"
+ inherit update-rc.d
  
- PV = "4.13.00.00+git${SRCPV}"
+-PR = "r18"
++PR = "r19"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
-diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
-index bab9238..b30029d 100644
---- a/recipes-bsp/cmem/cmem_git.bb
-+++ b/recipes-bsp/cmem/cmem_git.bb
-@@ -4,7 +4,7 @@ include cmem.inc
- 
- RDEPENDS_${PN} = "cmem-mod"
- 
--PR = "r0"
-+PR = "r1"
- 
- PACKAGES =+ "${PN}-test"
- 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
+-- 
+1.7.9.5
 
 
