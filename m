@@ -1,6 +1,6 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 62381E00A1E; Wed, 21 Dec 2016 21:57:23 -0800 (PST)
+	id 40DFCE00E7D; Wed, 21 Dec 2016 21:59:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,28 +10,28 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22E6FE0083D
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 21:57:20 -0800 (PST)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C55ECE009F0
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 21:59:36 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBM5vKfq027018
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 23:57:20 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBM5vKGw010678
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 23:57:20 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id uBM5xZZY004813
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 23:59:35 -0600
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBM5xZXZ012582
+	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2016 23:59:35 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 21 Dec 2016 23:57:19 -0600
+	Wed, 21 Dec 2016 23:59:34 -0600
 Received: from swubn01.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBM5vFvt029027;
-	Wed, 21 Dec 2016 23:57:18 -0600
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id uBM5xXrk016678;
+	Wed, 21 Dec 2016 23:59:34 -0600
 From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 22 Dec 2016 11:27:13 +0530
-Message-ID: <1482386233-14151-1-git-send-email-a0393906@ti.com>
+Date: Thu, 22 Dec 2016 11:29:32 +0530
+Message-ID: <1482386372-14780-1-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] ti-sgx-ddk-um: Add support for YUYV EGLImage
+Subject: [PATCH] ti-sgx-ddk-km: Fix error in calculation of page array
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,36 +44,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 05:57:23 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 05:59:38 -0000
 Content-Type: text/plain
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 5903b2e..b7fd572 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+index 0e9592e..6d48fdd 100644
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+@@ -7,7 +7,7 @@ inherit module
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "3c0537748dd283b2de9c5369570aa2aade5a9979"
-+SRCREV = "739111e5d67871d08f9d7e643492bee40dce933c"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+-MACHINE_KERNEL_PR_append = "i"
++MACHINE_KERNEL_PR_append = "j"
+ PR = "${MACHINE_KERNEL_PR}"
  
- inherit update-rc.d
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
--PR = "r18"
-+PR = "r19"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+-SRCREV = "e68719ba7c54602c710b6615cd665f5b7f47f85e"
++SRCREV = "bc3128527024bd76f9ab4d8d7db13ad65a24458b"
  
- DEPENDS += "libdrm udev libgbm wayland libffi"
+ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+ TARGET_PRODUCT_ti33x = "ti335x"
 -- 
 1.7.9.5
 
