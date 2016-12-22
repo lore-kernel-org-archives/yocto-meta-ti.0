@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0A11CE00D00; Thu, 22 Dec 2016 10:19:56 -0800 (PST)
+	id 2E983E00D00; Thu, 22 Dec 2016 10:19:57 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,15 +14,15 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B992E00CE0
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAB96E00CEC
 	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2016 10:19:55 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CF7BD52AA3; Thu, 22 Dec 2016 18:19:54 +0000 (UTC)
+	id E3A0452ACF; Thu, 22 Dec 2016 18:19:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161222181954.CF7BD52AA3@arago-project.org>
+Message-Id: <20161222181954.E3A0452ACF@arago-project.org>
 Date: Thu, 22 Dec 2016 18:19:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ti-sgx-ddk-um: Add support for YUYV EGLImage
+Subject: Karthik Ramanan : ti-sgx-ddk-km: Fix error in calculation of page array
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,48 +35,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 18:19:56 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 18:19:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: 4f569d664e705f9ee5578551e896827314b240d0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f569d664e705f9ee5578551e896827314b240d0
+Commit: a71dd19fc6720b74c67c834e9abb52c5ba34ec61
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a71dd19fc6720b74c67c834e9abb52c5ba34ec61
 
 Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Dec 22 11:57:13 2016 +0000
+Date:   Thu Dec 22 11:59:32 2016 +0000
 
-ti-sgx-ddk-um: Add support for YUYV EGLImage
+ti-sgx-ddk-km: Fix error in calculation of page array
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 5903b2e..b7fd572 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+index 0e9592e..6d48fdd 100644
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+@@ -7,7 +7,7 @@ inherit module
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "3c0537748dd283b2de9c5369570aa2aade5a9979"
-+SRCREV = "739111e5d67871d08f9d7e643492bee40dce933c"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+-MACHINE_KERNEL_PR_append = "i"
++MACHINE_KERNEL_PR_append = "j"
+ PR = "${MACHINE_KERNEL_PR}"
  
- inherit update-rc.d
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
--PR = "r18"
-+PR = "r19"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+-SRCREV = "e68719ba7c54602c710b6615cd665f5b7f47f85e"
++SRCREV = "bc3128527024bd76f9ab4d8d7db13ad65a24458b"
  
- DEPENDS += "libdrm udev libgbm wayland libffi"
+ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+ TARGET_PRODUCT_ti33x = "ti335x"
 
 
