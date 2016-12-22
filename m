@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 977F9E00B8E; Thu, 22 Dec 2016 10:19:53 -0800 (PST)
+	id 0A11CE00D00; Thu, 22 Dec 2016 10:19:56 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 675D8E00B8E
-	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2016 10:19:51 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B992E00CE0
+	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2016 10:19:55 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 827EE52AA3; Thu, 22 Dec 2016 18:19:50 +0000 (UTC)
+	id CF7BD52AA3; Thu, 22 Dec 2016 18:19:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161222181950.827EE52AA3@arago-project.org>
-Date: Thu, 22 Dec 2016 18:19:50 +0000 (UTC)
+Message-Id: <20161222181954.CF7BD52AA3@arago-project.org>
+Date: Thu, 22 Dec 2016 18:19:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Karthik Ramanan : ti-sgx-ddk-um: Add support for YUYV EGLImage
 X-BeenThere: meta-ti@yoctoproject.org
@@ -35,13 +35,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 18:19:53 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 18:19:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 214642b9f021f976f2b184c3006202a33c7ac0d7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=214642b9f021f976f2b184c3006202a33c7ac0d7
+Branch: morty
+Commit: 4f569d664e705f9ee5578551e896827314b240d0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f569d664e705f9ee5578551e896827314b240d0
 
 Author: Karthik Ramanan <a0393906@ti.com>
 Date:   Thu Dec 22 11:57:13 2016 +0000
@@ -57,7 +57,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 301bdd4..95c513d 100644
+index 5903b2e..b7fd572 100644
 --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
 +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
 @@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
