@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B7820E00843; Fri, 23 Dec 2016 18:09:17 -0800 (PST)
+	id B51C6E009B8; Fri, 23 Dec 2016 18:09:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 938A4E0083D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94BDDE00843
 	for <meta-ti@yoctoproject.org>; Fri, 23 Dec 2016 18:09:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 835DD529FB; Sat, 24 Dec 2016 02:09:12 +0000 (UTC)
+	id E936952A7B; Sat, 24 Dec 2016 02:09:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161224020912.835DD529FB@arago-project.org>
+Message-Id: <20161224020912.E936952A7B@arago-project.org>
 Date: Sat, 24 Dec 2016 02:09:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gowtham Tammana : ti-gc320-driver: add support for RT kernel
@@ -37,9 +37,9 @@ X-List-Received-Date: Sat, 24 Dec 2016 02:09:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: ba08ac1af4cb9690c6219968a84b2fed27beb35f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ba08ac1af4cb9690c6219968a84b2fed27beb35f
+Branch: master
+Commit: 059a6b1c1794ea642872b1f83a9b8b2187e40f1c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=059a6b1c1794ea642872b1f83a9b8b2187e40f1c
 
 Author: Gowtham Tammana <g-tammana@ti.com>
 Date:   Thu Dec 22 11:43:12 2016 -0600
