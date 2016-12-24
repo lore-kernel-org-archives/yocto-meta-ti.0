@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0A98BE00998; Fri, 23 Dec 2016 18:09:19 -0800 (PST)
+	id 386B0E0095C; Fri, 23 Dec 2016 18:09:19 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 985FBE0096D
-	for <meta-ti@yoctoproject.org>; Fri, 23 Dec 2016 18:09:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 02521E00972
+	for <meta-ti@yoctoproject.org>; Fri, 23 Dec 2016 18:09:15 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B552B52A76; Sat, 24 Dec 2016 02:09:12 +0000 (UTC)
+	id 4D20F52A83; Sat, 24 Dec 2016 02:09:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20161224020912.B552B52A76@arago-project.org>
-Date: Sat, 24 Dec 2016 02:09:12 +0000 (UTC)
+Message-Id: <20161224020913.4D20F52A83@arago-project.org>
+Date: Sat, 24 Dec 2016 02:09:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to ti2016.06-rc3 tag
+Subject: Gowtham Tammana : ti-gc320-driver: add support for RT kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,42 +37,42 @@ X-List-Received-Date: Sat, 24 Dec 2016 02:09:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: 8663e1611ab6c5bfe36d323d9d9db4dada4bd532
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8663e1611ab6c5bfe36d323d9d9db4dada4bd532
+Branch: morty
+Commit: 79d67f45dd108797e8fea971993af9bf353bc986
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=79d67f45dd108797e8fea971993af9bf353bc986
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Dec 24 00:51:57 2016 +0000
+Author: Gowtham Tammana <g-tammana@ti.com>
+Date:   Thu Dec 22 11:43:12 2016 -0600
 
-u-boot-ti-staging: update to ti2016.06-rc3 tag
+ti-gc320-driver: add support for RT kernel
 
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |    4 ++--
+ .../gc320-drivers/ti-gc320-driver_5.0.11.p7.bb     |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index d04fcad..ea77027 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+index 9344e30..8ad7e4b 100644
+--- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
++++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=78d9818a51b9a8e9bb89dea418bac297"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+ inherit module
  
--PR = "r28"
-+PR = "r29"
- PV_append = "+git${SRCPV}"
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ # Need to branch out with ${PV} var
+ BRANCH = "ti-${PV}-k4.4"
  
- BRANCH ?= "ti-u-boot-2016.05"
+-SRCREV = "7a2b06ad1df46a274336f7ae0e24a9d67e72cd66"
++SRCREV = "65887c911db495fb66c6847c8b6eadc76c7470f4"
  
--SRCREV = "89316b56926863db799e8df6d8f2290aac2d1826"
-+SRCREV = "7ba3fcfdd88a4dc2304f5dffbcea60fdb9e8117f"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
+ SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git/src"
 
 
