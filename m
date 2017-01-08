@@ -1,70 +1,62 @@
-Return-Path: <b.bimmermann@yahoo.de>
+Return-Path: <chriskot@quietwind.net>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D12F2E00524; Fri,  6 Jan 2017 02:22:40 -0800 (PST)
+	id D1738E0055C; Sat,  7 Jan 2017 23:57:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, RCVD_IN_DNSWL_LOW,
-	RCVD_IN_SORBS_SPAM, URI_HEX autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (b.bimmermann[at]yahoo.de)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [212.82.97.139 listed in list.dnswl.org]
-	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [212.82.97.139 listed in dnsbl.sorbs.net]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from nm36-vm7.bullet.mail.ir2.yahoo.com
-	(nm36-vm7.bullet.mail.ir2.yahoo.com [212.82.97.139])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E272CE0049A
-	for <meta-ti@yoctoproject.org>; Fri,  6 Jan 2017 02:22:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.de; s=s2048;
-	t=1483698148; bh=jDRh6Yed2t0xnM/HxcTjGlXvF8pgD4ImJiU7cWeT4LM=;
-	h=Subject:To:References:Cc:From:Date:In-Reply-To:From:Subject;
-	b=q+838Fx3sdQZFqGAT0eU4smPbsUku7o/huHfe+wWfj424Y9VMDZFauatyZ8Z3eq/pnNVcJQTfqh2gorwJQdPHoWzEuXvpWzJ1Ut2o/vDY/3PMoonRnzGwHshHQme9nij9jw25aKiyvMIFDhQTp9MiJxYJssZbqOSiny1zkh2HC+QYpT05dB3v0XSWOEwIFTe/5ZsmWtsNLMbUl00hgBttPKIQfizygWIoTl5d7LDkHnypsssdtmNpd2jroBntic8v/eL/L632pjPuyYLsAd8IrRLupnDHgc7MwQNFhnOm1t4Ph/8hmASF0+MLhjoNpsDiHGyu76dxuMrjSLiQylz+w==
-Received: from [212.82.98.48] by nm36.bullet.mail.ir2.yahoo.com with NNFMP;
-	06 Jan 2017 10:22:28 -0000
-Received: from [46.228.39.93] by tm1.bullet.mail.ir2.yahoo.com with NNFMP;
-	06 Jan 2017 10:22:27 -0000
-Received: from [127.0.0.1] by smtp130.mail.ir2.yahoo.com with NNFMP;
-	06 Jan 2017 10:21:45 -0000
-X-Yahoo-Newman-Id: 120943.15746.bm@smtp130.mail.ir2.yahoo.com
-X-Yahoo-Newman-Property: ymail-3
-X-YMail-OSG: Q8PlcPIVM1nHG7MlP5fAjybKzzeUdt0bPCxnalfAvQ4Klbj
-	Ez897rhUW9_qiAOwXC2TA8IaQ4DKo0A45vTmZeS16XB_iJpLvJewxH8nW5M5
-	ENzTjHjtZU7lFswzrjPYbw4J4eDhEIHby1PictTNwUY9fvKWnYPUKMNCp.tc
-	kLpPwKtxhf0rvUoDxLss7Qu5ueB5RKOwLPYDrdrPZpbfDUepj7IByAR7e2JN
-	4L1tc6YqgVNkJzXht3zVttAUBdPoJR4vruPVzVzm6JVtxzirL39GyTnK.Z_I
-	jGHh8TSqpV7ut8CVwKoR2v1kJp8giY3LNZBG4.8g51p3CVM.DyCNZjM5SxjB
-	.cqZmnncWVulGE3HHMZjEzs3rf7yITwu9vy90qXNxgzkRQ_tBkqI8X_zx5Pq
-	rzGEvx0jQI3KKY4j2OU0imlu1QAk2F9u.8yaeM9BaEOMU_Nkf6Pmx_2RztB2
-	w9rOL8nXAETciwKN0Bk83SnNXS5ygXFFAk89fSPRSJkIycAVSgbh7p1iwUk4
-	hTjzIG1u9eExpMzuTw2qVzpsccGec4YjtDg5tFo2Mb2Stic8Fun3SHoGNLJD
-	lCZp6coc5JItbrGU.EZjb5.p7FhRONg--
-X-Yahoo-SMTP: QRtRgFiswBDPIjAPyRh4GXvXyYhlMyXtnw--
-To: Denys Dmytriyenko <denys@ti.com>, "Ruei, Eric" <e-ruei1@ti.com>
-References: <972676697.10149692.1483518767462.ref@mail.yahoo.com>
-	<972676697.10149692.1483518767462@mail.yahoo.com>
-	<20170104171954.GG28380@edge>
-	<009C030982313E4589C6BC55FBF1E82A2532EF30@DFLE09.ent.ti.com>
-	<20170104181212.GI28380@edge>
-From: Benjamin Bimmermann <b.bimmermann@yahoo.de>
-Message-ID: <fddac173-68bc-668a-e7f0-d784f6eadd63@yahoo.de>
-Date: Fri, 6 Jan 2017 11:21:44 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.5.1
+X-Spam-Status: No, score=-0.0 required=5.0 tests=BAYES_20,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [69.89.30.42 listed in list.dnswl.org]
+	* -0.0 BAYES_20 BODY: Bayes spam probability is 5 to 20%
+	*      [score: 0.1606]
+X-Greylist: delayed 401 seconds by postgrey-1.32 at yocto-www;
+	Sat, 07 Jan 2017 23:57:04 PST
+Received: from gproxy3-pub.mail.unifiedlayer.com
+	(gproxy3-pub.mail.unifiedlayer.com [69.89.30.42])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id 164FAE0052B
+	for <meta-ti@yoctoproject.org>; Sat,  7 Jan 2017 23:57:03 -0800 (PST)
+Received: (qmail 25434 invoked by uid 0); 8 Jan 2017 07:50:22 -0000
+Received: from unknown (HELO CMOut01) (10.0.90.82)
+	by gproxy3.mail.unifiedlayer.com with SMTP; 8 Jan 2017 07:50:22 -0000
+Received: from host288.hostmonster.com ([74.220.215.88]) by CMOut01 with 
+	id VjqH1u00A1v0fLi01jqLXt; Sun, 08 Jan 2017 00:50:20 -0700
+X-Authority-Analysis: v=2.1 cv=V+Huj4Xi c=1 sm=1 tr=0
+	a=ELBcn9xbBe8RKOfaP8USrg==:117 a=ELBcn9xbBe8RKOfaP8USrg==:17
+	a=L9H7d07YOLsA:10 a=9cW_t1CCXrUA:10 a=s5jvgZ67dGcA:10 a=IkcTkHD0fZMA:10
+	a=IgFoBzBjUZAA:10 a=M5E88hr7y--xY54s9jUA:9 a=QEXdDO2ut3YA:10
+Received: from 45-17-238-199.lightspeed.rcsntx.sbcglobal.net
+	([45.17.238.199]:60091 helo=[192.168.1.111])
+	by host288.hostmonster.com with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.86_1)
+	(envelope-from <chriskot@quietwind.net>) id 1cQ8F8-0008ET-EY
+	for meta-ti@yoctoproject.org; Sun, 08 Jan 2017 00:50:18 -0700
+To: meta-ti@yoctoproject.org
+From: Chris Kottaridis <chriskot@quietwind.net>
+Message-ID: <d1f3d61f-1edf-5b20-4c7c-4cbc22be45d2@quietwind.net>
+Date: Sun, 8 Jan 2017 01:50:17 -0600
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.6.0
 MIME-Version: 1.0
-In-Reply-To: <20170104181212.GI28380@edge>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: ti-sgx-ddk-um / do_install failed / cp: cannot stat './targetfs//etc/*': No such file or directory
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - host288.hostmonster.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - quietwind.net
+X-BWhitelist: no
+X-Source-IP: 45.17.238.199
+X-Exim-ID: 1cQ8F8-0008ET-EY
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 45-17-238-199.lightspeed.rcsntx.sbcglobal.net
+	([192.168.1.111]) [45.17.238.199]:60091
+X-Source-Auth: chriskot@quietwind.net
+X-Email-Count: 1
+X-Source-Cap: cXVpZXR3aW47cXVpZXR3aW47aG9zdDI4OC5ob3N0bW9uc3Rlci5jb20=
+Subject: Beaglebone black wireless support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -77,52 +69,12 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jan 2017 10:22:40 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
+X-List-Received-Date: Sun, 08 Jan 2017 07:57:09 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi, all:
+Is the Beaglebone black wireless board supported in Yocto ?
 
-I have now successfully builded my Image. But I must change :
-
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb 
-b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index b7fd572..6c00e6a 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -69,6 +69,7 @@ RDEPENDS_${PN} += "${PN}-plugins"
-  ALLOW_EMPTY_${PN}-plugins = "1"
-
-  INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-  INHIBIT_SYSROOT_STRIP = "1"
-
-  INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-
-Maybe you should ad this.
-
-Thanks a lot,
-Benjamin
-
-
-Am 04.01.2017 um 19:12 schrieb Denys Dmytriyenko:
-> On Wed, Jan 04, 2017 at 12:54:07PM -0500, Ruei, Eric wrote:
->> Hi, All:
->>
->> I try beaglebone and it does work.
->> MACHINE=beaglebone bitbake ti-sgx-ddk-um
->>
->> Best regards,
-> Eric,
->
-> You are not using Poky, so you won't see this problem.
->
->
-> Benjamin,
->
-> You should either change your MACHINE from "beaglebone" to "am335x-evm" (which
-> is pretty much the same, a bit more generic), or you make sure you don't have
-> meta-yocto-bsp layer in your bblayers.conf.
->
-
+Thanks
+Chris Kottaridis
 
