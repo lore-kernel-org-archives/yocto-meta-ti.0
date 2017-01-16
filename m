@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F58CE009B2; Fri, 13 Jan 2017 10:16:35 -0800 (PST)
+	id 27615E00826; Mon, 16 Jan 2017 11:51:42 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B102E0034A
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jan 2017 10:16:20 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 7F70D52A7C; Fri, 13 Jan 2017 18:16:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7675E007CE
+	for <meta-ti@yoctoproject.org>; Mon, 16 Jan 2017 11:51:38 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id F25CF20AFB;
+	Mon, 16 Jan 2017 19:51:36 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 7coLmtwfX-uD; Mon, 16 Jan 2017 19:51:36 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D31D5208D7;
+	Mon, 16 Jan 2017 19:51:35 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by mail.denix.org (Postfix) with ESMTP id 493AB16231E;
+	Mon, 16 Jan 2017 14:51:35 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20170113181619.7F70D52A7C@arago-project.org>
-Date: Fri, 13 Jan 2017 18:16:19 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cmem: Update to new version 4.13.00.01_eng
+Date: Mon, 16 Jan 2017 14:51:34 -0500
+Message-Id: <1484596294-23737-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty][PATCH] README, layer.conf: update for morty and list dependencies
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +45,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jan 2017 18:16:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Jan 2017 19:51:42 -0000
 
-Module: meta-ti
-Branch: krogoth
-Commit: f0a7e52d65861a432ff94f2465e67e014cc7eca0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f0a7e52d65861a432ff94f2465e67e014cc7eca0
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Jan 10 23:06:50 2017 +0000
-
-cmem: Update to new version 4.13.00.01_eng
-
-Update to new version 4.13.00.01_eng with bug fix
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ README          | 2 +-
+ conf/layer.conf | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
- recipes-bsp/cmem/cmem.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index af48891..aa9c8f2 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+diff --git a/README b/README
+index 39dde59..1fa3771 100644
+--- a/README
++++ b/README
+@@ -8,7 +8,7 @@ This layer depends on:
  
- BRANCH = "lu-next"
--# This corresponds to version 4.13.00.00_eng
--SRCREV = "1b1e19754049446c20fba7c22b39b325eb0154ec"
-+# This corresponds to version 4.13.00.01_eng
-+SRCREV = "1389059f01eabc1e853a384f0e5f51c4f3e4f197"
+ URI: git://git.openembedded.org/openembedded-core
+ layers: meta
+-branch: master
++branch: morty
  
--PV = "4.13.00.00+git${SRCPV}"
-+PV = "4.13.00.01+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ The base BSP part of meta-ti should work with different OpenEmbedded/Yocto
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 4ad5022..a07e62f 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -10,6 +10,8 @@ BBFILE_PRIORITY_meta-ti = "6"
  
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
++LAYERDEPENDS_meta-ti = "core"
++
+ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+     ti-sgx-ddk-km \
+     ti-sgx-ddk-um \
+-- 
+2.7.4
 
 
