@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 35B78E004D8; Wed, 18 Jan 2017 18:09:48 -0800 (PST)
+	id F12D8E004E5; Wed, 18 Jan 2017 18:10:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 754C8E004A0
-	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2017 18:09:47 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 62776E004D2
+	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2017 18:10:07 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ADC3E529CD; Thu, 19 Jan 2017 02:09:46 +0000 (UTC)
+	id A1A6D529EA; Thu, 19 Jan 2017 02:10:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170119020946.ADC3E529CD@arago-project.org>
-Date: Thu, 19 Jan 2017 02:09:46 +0000 (UTC)
+Message-Id: <20170119021006.A1A6D529EA@arago-project.org>
+Date: Thu, 19 Jan 2017 02:10:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: e-ruei1@ti.com : ti-sgx-ddk-km: remove update of sysconfig register in driver
 X-BeenThere: meta-ti@yoctoproject.org
@@ -35,13 +35,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2017 02:09:48 -0000
+X-List-Received-Date: Thu, 19 Jan 2017 02:10:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: 430ef4bcbd5f392c5e110c96072ae20ecbced04e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=430ef4bcbd5f392c5e110c96072ae20ecbced04e
+Branch: master
+Commit: 68cecc424816b10762da378255e5119384c6dc46
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=68cecc424816b10762da378255e5119384c6dc46
 
 Author: e-ruei1@ti.com <e-ruei1@ti.com>
 Date:   Tue Jan 17 21:57:55 2017 +0000
