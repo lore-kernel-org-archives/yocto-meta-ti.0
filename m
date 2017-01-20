@@ -1,38 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6BDEDE003DB; Fri, 20 Jan 2017 09:56:29 -0800 (PST)
+	id 61F21E007A7; Fri, 20 Jan 2017 14:42:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D415DE0033D
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2017 09:56:26 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E61B720AD6;
-	Fri, 20 Jan 2017 17:56:24 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id NnV2WDt3xMG8; Fri, 20 Jan 2017 17:56:24 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C5C132017C;
-	Fri, 20 Jan 2017 17:56:23 +0000 (UTC)
-Received: from sam.denix (sam [192.168.0.5])
-	by mail.denix.org (Postfix) with ESMTP id 5B101162325;
-	Fri, 20 Jan 2017 12:56:23 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0498DE00546
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2017 14:42:07 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0CC17529DD; Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 20 Jan 2017 12:56:22 -0500
-Message-Id: <1484934982-17706-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [master/morty][PATCH] machine: update max_leb_cnt across the board
+Message-Id: <20170120224206.0CC17529DD@arago-project.org>
+Date: Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : machine: update max_leb_cnt across the board
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,16 +33,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 17:56:29 -0000
+X-List-Received-Date: Fri, 20 Jan 2017 22:42:10 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: dd1d21e48310c1656e46193cd74328434c3527ac
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dd1d21e48310c1656e46193cd74328434c3527ac
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Jan 20 23:56:22 2017 +0000
+
+machine: update max_leb_cnt across the board
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/machine/am335x-evm.conf | 2 +-
- conf/machine/am437x-evm.conf | 2 +-
- conf/machine/k2e-evm.conf    | 2 +-
- conf/machine/k2g-evm.conf    | 2 +-
- conf/machine/k2hk-evm.conf   | 2 +-
- conf/machine/k2l-evm.conf    | 2 +-
+
+ conf/machine/am335x-evm.conf |    2 +-
+ conf/machine/am437x-evm.conf |    2 +-
+ conf/machine/k2e-evm.conf    |    2 +-
+ conf/machine/k2g-evm.conf    |    2 +-
+ conf/machine/k2hk-evm.conf   |    2 +-
+ conf/machine/k2l-evm.conf    |    2 +-
  6 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
@@ -135,7 +136,5 @@ index d8d3944..54931e2 100644
  
  # do ubiattach /dev/ubi_ctrl -m 4
  # from dmesg:
--- 
-2.7.4
 
 
