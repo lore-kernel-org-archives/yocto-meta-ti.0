@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 63D1EE0071C; Fri, 20 Jan 2017 14:42:10 -0800 (PST)
+	id B0B8AE007C5; Fri, 20 Jan 2017 14:42:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03476E004D2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0627BE006EA
 	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2017 14:42:07 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DEDBD52A76; Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
+	id A190652A63; Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170120224206.DEDBD52A76@arago-project.org>
+Message-Id: <20170120224206.A190652A63@arago-project.org>
 Date: Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : machine: update max_leb_cnt across the board
+Subject: Denys Dmytriyenko : beaglebone: add check for potential conflicts with meta-yocto-bsp
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,108 +33,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 22:42:10 -0000
+X-List-Received-Date: Fri, 20 Jan 2017 22:42:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: c7835c176849498fcce5e58a5e1035731823673d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c7835c176849498fcce5e58a5e1035731823673d
+Commit: f78085faf770588cedb35e2b554f4d8a1b64a199
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f78085faf770588cedb35e2b554f4d8a1b64a199
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Jan 20 23:56:22 2017 +0000
+Date:   Thu Jan 19 06:24:20 2017 +0000
 
-machine: update max_leb_cnt across the board
+beaglebone: add check for potential conflicts with meta-yocto-bsp
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    2 +-
- conf/machine/am437x-evm.conf |    2 +-
- conf/machine/k2e-evm.conf    |    2 +-
- conf/machine/k2g-evm.conf    |    2 +-
- conf/machine/k2hk-evm.conf   |    2 +-
- conf/machine/k2l-evm.conf    |    2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+ conf/machine/beaglebone.conf        |    1 +
+ conf/machine/include/beaglebone.inc |   12 ++++++++++++
+ 2 files changed, 13 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 491b1c5..3b36cef 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5600"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6000"
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index bf3d91e..e168560 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -3,6 +3,7 @@
+ #@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board 
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 5e28ff4..142280e 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 994 LEBs
--MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2650"
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2800"
+ require conf/machine/include/ti33x.inc
++require conf/machine/include/beaglebone.inc
  
- # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # from dmesg:
-diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-index 7dd616e..43362dd 100644
---- a/conf/machine/k2e-evm.conf
-+++ b/conf/machine/k2e-evm.conf
-@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 3856 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4000"
- 
- # do ubiattach /dev/ubi_ctrl -m 4
- # from dmesg:
-diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-index fa1edfa..4d03f87 100644
---- a/conf/machine/k2g-evm.conf
-+++ b/conf/machine/k2g-evm.conf
-@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
- # UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1926 LEBs
--MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
- 
- # do ubiattach /dev/ubi_ctrl -m 4
- # from dmesg:
-diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
-index eec52d6..220f7fc 100644
---- a/conf/machine/k2hk-evm.conf
-+++ b/conf/machine/k2hk-evm.conf
-@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 3856 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3900"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4000"
- 
- # do ubiattach /dev/ubi_ctrl -m 4
- # from dmesg:
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-index d8d3944..54931e2 100644
---- a/conf/machine/k2l-evm.conf
-+++ b/conf/machine/k2l-evm.conf
-@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
- # UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1926 LEBs
--MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
- 
- # do ubiattach /dev/ubi_ctrl -m 4
- # from dmesg:
+ # Only has DVI connector for external screen
+ MACHINE_GUI_CLASS = "bigscreen"
+diff --git a/conf/machine/include/beaglebone.inc b/conf/machine/include/beaglebone.inc
+new file mode 100644
+index 0000000..f76ad3d
+--- /dev/null
++++ b/conf/machine/include/beaglebone.inc
+@@ -0,0 +1,12 @@
++python () {
++    layers = bb.data.getVar("BBFILE_COLLECTIONS", d, 1)
++    if not layers:
++        return
++    if "yoctobsp" in layers:
++        bb.fatal("\nmeta-yocto-bsp has been detected in bblayers.conf, which provides basic reference BSP for beaglebone platform. " \
++                "\nSince meta-ti provides official comprehensive BSP for TI SoCs, including beaglebone, there could be potential conflicts " \
++                "\nbetween beaglebone machine definitions available in meta-yocto-bsp and meta-ti layers. It is recommended to remove " \
++                "\nor disable meta-yocto-bsp in bblayers.conf, when using meta-ti and building for beaglebone platform. Alternatively, " \
++                "\nit is possible to build for am335x-evm with meta-ti, which is a more generic platform for Sitara AM335x SoC and " \
++                "\nalso covers beaglebone variants.")
++}
 
 
