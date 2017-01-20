@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B0B8AE007C5; Fri, 20 Jan 2017 14:42:11 -0800 (PST)
+	id B4603E003DB; Fri, 20 Jan 2017 14:42:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0627BE006EA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0205FE003DB
 	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2017 14:42:07 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A190652A63; Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
+	id CFAEA529CD; Fri, 20 Jan 2017 22:42:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170120224206.A190652A63@arago-project.org>
-Date: Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
+Message-Id: <20170120224205.CFAEA529CD@arago-project.org>
+Date: Fri, 20 Jan 2017 22:42:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : beaglebone: add check for potential conflicts with meta-yocto-bsp
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 20 Jan 2017 22:42:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: f78085faf770588cedb35e2b554f4d8a1b64a199
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f78085faf770588cedb35e2b554f4d8a1b64a199
+Branch: master
+Commit: 71130d99dbaed72cc05f5587f779ccbf7572a18a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=71130d99dbaed72cc05f5587f779ccbf7572a18a
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Jan 19 06:24:20 2017 +0000
