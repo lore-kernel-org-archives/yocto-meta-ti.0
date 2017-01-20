@@ -1,28 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F12D8E004E5; Wed, 18 Jan 2017 18:10:08 -0800 (PST)
+	id 6BDEDE003DB; Fri, 20 Jan 2017 09:56:29 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 62776E004D2
-	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2017 18:10:07 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id A1A6D529EA; Thu, 19 Jan 2017 02:10:06 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D415DE0033D
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2017 09:56:26 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E61B720AD6;
+	Fri, 20 Jan 2017 17:56:24 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id NnV2WDt3xMG8; Fri, 20 Jan 2017 17:56:24 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C5C132017C;
+	Fri, 20 Jan 2017 17:56:23 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by mail.denix.org (Postfix) with ESMTP id 5B101162325;
+	Fri, 20 Jan 2017 12:56:23 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20170119021006.A1A6D529EA@arago-project.org>
-Date: Thu, 19 Jan 2017 02:10:06 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: e-ruei1@ti.com : ti-sgx-ddk-km: remove update of sysconfig register in driver
+Date: Fri, 20 Jan 2017 12:56:22 -0500
+Message-Id: <1484934982-17706-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [master/morty][PATCH] machine: update max_leb_cnt across the board
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,54 +45,97 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2017 02:10:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Jan 2017 17:56:29 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 68cecc424816b10762da378255e5119384c6dc46
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=68cecc424816b10762da378255e5119384c6dc46
-
-Author: e-ruei1@ti.com <e-ruei1@ti.com>
-Date:   Tue Jan 17 21:57:55 2017 +0000
-
-ti-sgx-ddk-km: remove update of sysconfig register in driver
-
-The OCP SYSCONFIG register should be controlled by kernel hwmod only.
-the original code sets the SGX idle and standby mode to "No Standby"
-which prevents the SGX power domain to reach off state during suspend.
-Even though the problem was only introduced with kernel 4.4 upgrade, i.e.
-it seemed to be no harm before, we should remove the same.
-
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/am335x-evm.conf | 2 +-
+ conf/machine/am437x-evm.conf | 2 +-
+ conf/machine/k2e-evm.conf    | 2 +-
+ conf/machine/k2g-evm.conf    | 2 +-
+ conf/machine/k2hk-evm.conf   | 2 +-
+ conf/machine/k2l-evm.conf    | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index 6d48fdd..ca5916e 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -7,7 +7,7 @@ inherit module
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 491b1c5..3b36cef 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5600"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6000"
  
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 5e28ff4..142280e 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2650"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2800"
  
--MACHINE_KERNEL_PR_append = "j"
-+MACHINE_KERNEL_PR_append = "k"
- PR = "${MACHINE_KERNEL_PR}"
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
+diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
+index 7dd616e..43362dd 100644
+--- a/conf/machine/k2e-evm.conf
++++ b/conf/machine/k2e-evm.conf
+@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 3856 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4000"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -25,7 +25,7 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # from dmesg:
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+index fa1edfa..4d03f87 100644
+--- a/conf/machine/k2g-evm.conf
++++ b/conf/machine/k2g-evm.conf
+@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1926 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
  
--SRCREV = "bc3128527024bd76f9ab4d8d7db13ad65a24458b"
-+SRCREV = "8d5305b03dce13f3a9a89328c69c762dcd3109a4"
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # from dmesg:
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index eec52d6..220f7fc 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 3856 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3900"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4000"
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # from dmesg:
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+index d8d3944..54931e2 100644
+--- a/conf/machine/k2l-evm.conf
++++ b/conf/machine/k2l-evm.conf
+@@ -24,7 +24,7 @@ SYSVINIT_ENABLED_GETTYS = ""
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1926 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
+ 
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # from dmesg:
+-- 
+2.7.4
 
 
