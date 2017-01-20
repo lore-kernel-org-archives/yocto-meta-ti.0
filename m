@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 61F21E007A7; Fri, 20 Jan 2017 14:42:10 -0800 (PST)
+	id 63D1EE0071C; Fri, 20 Jan 2017 14:42:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0498DE00546
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03476E004D2
 	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2017 14:42:07 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0CC17529DD; Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
+	id DEDBD52A76; Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170120224206.0CC17529DD@arago-project.org>
+Message-Id: <20170120224206.DEDBD52A76@arago-project.org>
 Date: Fri, 20 Jan 2017 22:42:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : machine: update max_leb_cnt across the board
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 20 Jan 2017 22:42:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: dd1d21e48310c1656e46193cd74328434c3527ac
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dd1d21e48310c1656e46193cd74328434c3527ac
+Branch: morty
+Commit: c7835c176849498fcce5e58a5e1035731823673d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c7835c176849498fcce5e58a5e1035731823673d
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Jan 20 23:56:22 2017 +0000
