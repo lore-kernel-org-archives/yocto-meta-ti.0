@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BAEEAE0071C; Mon, 30 Jan 2017 12:51:58 -0800 (PST)
+	id BCBC8E003C1; Mon, 30 Jan 2017 12:51:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98B1EE003C1
-	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2017 12:51:53 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 703ABE00405
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2017 12:51:56 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F16C652AD3; Mon, 30 Jan 2017 20:51:51 +0000 (UTC)
+	id 9E93A52AD3; Mon, 30 Jan 2017 20:51:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170130205151.F16C652AD3@arago-project.org>
-Date: Mon, 30 Jan 2017 20:51:51 +0000 (UTC)
+Message-Id: <20170130205155.9E93A52AD3@arago-project.org>
+Date: Mon, 30 Jan 2017 20:51:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Gowtham Tammana : ti-gc320-driver: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 30 Jan 2017 20:51:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 06b068fb14d7d24dca57a58cbe6b8dfde7bd59c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=06b068fb14d7d24dca57a58cbe6b8dfde7bd59c8
+Branch: morty
+Commit: 0d128cff49f185651e6cf219dcb3d41320a5b23b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0d128cff49f185651e6cf219dcb3d41320a5b23b
 
 Author: Gowtham Tammana <g-tammana@ti.com>
 Date:   Mon Jan 30 21:55:57 2017 +0000
