@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <g-tammana@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B4603E003DB; Fri, 20 Jan 2017 14:42:11 -0800 (PST)
+	id 50C2AE00480; Mon, 30 Jan 2017 07:56:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0205FE003DB
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2017 14:42:07 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id CFAEA529CD; Fri, 20 Jan 2017 22:42:05 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20170120224205.CFAEA529CD@arago-project.org>
-Date: Fri, 20 Jan 2017 22:42:05 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : beaglebone: add check for potential conflicts with meta-yocto-bsp
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17D0BE003C1
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2017 07:55:55 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v0UFts4T007738
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2017 09:55:54 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v0UFtsWR029214
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2017 09:55:54 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 30 Jan 2017 09:55:53 -0600
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v0UFtrpr028377;	Mon, 30 Jan 2017 09:55:53 -0600
+Received: from uda0271916b.am.dhcp.ti.com (uda0271916b.am.dhcp.ti.com
+	[128.247.77.97])	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with
+	ESMTP id v0UFtr324419;	Mon, 30 Jan 2017 09:55:53 -0600 (CST)
+From: Gowtham Tammana <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 30 Jan 2017 09:55:57 -0600
+Message-ID: <1485791757-22979-1-git-send-email-g-tammana@ti.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [PATCH] ti-gc320-driver: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,56 +45,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 22:42:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 30 Jan 2017 15:56:08 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 71130d99dbaed72cc05f5587f779ccbf7572a18a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=71130d99dbaed72cc05f5587f779ccbf7572a18a
+This update includes the following
+  - Remove dependency on dmac_flus/inv/clean_range
+  - Remove spurious page count increment
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Jan 19 06:24:20 2017 +0000
-
-beaglebone: add check for potential conflicts with meta-yocto-bsp
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 ---
+ recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- conf/machine/beaglebone.conf        |    1 +
- conf/machine/include/beaglebone.inc |   12 ++++++++++++
- 2 files changed, 13 insertions(+), 0 deletions(-)
-
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index bf3d91e..e168560 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -3,6 +3,7 @@
- #@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board 
+diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+index 8ad7e4b..976904f 100644
+--- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
++++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+@@ -11,7 +11,7 @@ PR = "${MACHINE_KERNEL_PR}"
+ # Need to branch out with ${PV} var
+ BRANCH = "ti-${PV}-k4.4"
  
- require conf/machine/include/ti33x.inc
-+require conf/machine/include/beaglebone.inc
+-SRCREV = "65887c911db495fb66c6847c8b6eadc76c7470f4"
++SRCREV = "7c0f4dc755dc2ecb95195ed42ef24fea16ef2667"
  
- # Only has DVI connector for external screen
- MACHINE_GUI_CLASS = "bigscreen"
-diff --git a/conf/machine/include/beaglebone.inc b/conf/machine/include/beaglebone.inc
-new file mode 100644
-index 0000000..f76ad3d
---- /dev/null
-+++ b/conf/machine/include/beaglebone.inc
-@@ -0,0 +1,12 @@
-+python () {
-+    layers = bb.data.getVar("BBFILE_COLLECTIONS", d, 1)
-+    if not layers:
-+        return
-+    if "yoctobsp" in layers:
-+        bb.fatal("\nmeta-yocto-bsp has been detected in bblayers.conf, which provides basic reference BSP for beaglebone platform. " \
-+                "\nSince meta-ti provides official comprehensive BSP for TI SoCs, including beaglebone, there could be potential conflicts " \
-+                "\nbetween beaglebone machine definitions available in meta-yocto-bsp and meta-ti layers. It is recommended to remove " \
-+                "\nor disable meta-yocto-bsp in bblayers.conf, when using meta-ti and building for beaglebone platform. Alternatively, " \
-+                "\nit is possible to build for am335x-evm with meta-ti, which is a more generic platform for Sitara AM335x SoC and " \
-+                "\nalso covers beaglebone variants.")
-+}
+ SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git/src"
+-- 
+2.7.4
 
 
