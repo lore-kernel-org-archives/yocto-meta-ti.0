@@ -1,41 +1,40 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6F64E00524; Wed,  1 Feb 2017 14:04:15 -0800 (PST)
+	id 16C84E0092C; Wed,  1 Feb 2017 14:37:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,TVD_SPACE_RATIO
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 TVD_SPACE_RATIO TVD_SPACE_RATIO
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64A18E004D8
-	for <meta-ti@yoctoproject.org>; Wed,  1 Feb 2017 14:04:11 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99AC5E00524
+	for <meta-ti@yoctoproject.org>; Wed,  1 Feb 2017 14:36:57 -0800 (PST)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 1E90720B81;
-	Wed,  1 Feb 2017 22:04:10 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 2B12220B85;
+	Wed,  1 Feb 2017 22:36:57 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id DuXlYdcwLA-W; Wed,  1 Feb 2017 22:04:10 +0000 (UTC)
+	with ESMTP id MRDhe3zVJ3Wz; Wed,  1 Feb 2017 22:36:57 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
 	[100.15.95.79])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EEFF220B64;
-	Wed,  1 Feb 2017 22:04:08 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EDAE220B64;
+	Wed,  1 Feb 2017 22:36:55 +0000 (UTC)
 Received: from sam.denix (sam [192.168.0.5])
-	by mail.denix.org (Postfix) with ESMTP id 24CAA162335;
-	Wed,  1 Feb 2017 17:04:08 -0500 (EST)
+	by mail.denix.org (Postfix) with ESMTP id 3047A162335;
+	Wed,  1 Feb 2017 17:36:55 -0500 (EST)
 From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Wed,  1 Feb 2017 17:04:07 -0500
-Message-Id: <1485986647-26059-2-git-send-email-denys@ti.com>
+Date: Wed,  1 Feb 2017 17:36:53 -0500
+Message-Id: <1485988614-26296-2-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1485986647-26059-1-git-send-email-denys@ti.com>
-References: <1485986647-26059-1-git-send-email-denys@ti.com>
-Subject: [morty/master][PATCH 2/2] u-boot-ti-staging: add version 2017.01
+In-Reply-To: <1485988614-26296-1-git-send-email-denys@ti.com>
+References: <1485988614-26296-1-git-send-email-denys@ti.com>
+Subject: [morty/master][PATCH 2/3] conf/machine: set KERNEL_DEVICETREE dtb list per machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,25 +47,228 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2017 22:04:15 -0000
+X-List-Received-Date: Wed, 01 Feb 2017 22:37:02 -0000
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb | 5 +++++
- 1 file changed, 5 insertions(+)
- create mode 100644 recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
+ conf/machine/am3517-evm.conf   | 2 ++
+ conf/machine/am37x-evm.conf    | 2 ++
+ conf/machine/am57xx-evm.conf   | 5 +++++
+ conf/machine/beagleboard.conf  | 2 ++
+ conf/machine/beaglebone.conf   | 2 ++
+ conf/machine/dra7xx-evm.conf   | 5 +++++
+ conf/machine/include/omap3.inc | 2 ++
+ conf/machine/include/ti33x.inc | 2 ++
+ conf/machine/include/ti43x.inc | 2 ++
+ conf/machine/k2e-evm.conf      | 2 ++
+ conf/machine/k2g-evm.conf      | 2 ++
+ conf/machine/k2hk-evm.conf     | 2 ++
+ conf/machine/k2l-evm.conf      | 2 ++
+ conf/machine/omap5-evm.conf    | 2 ++
+ conf/machine/pandaboard.conf   | 2 ++
+ 15 files changed, 36 insertions(+)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-new file mode 100644
-index 0000000..e07b874
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-@@ -0,0 +1,5 @@
-+require u-boot-ti.inc
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 4fef634..883e9a4 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -15,6 +15,8 @@ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ SERIAL_CONSOLE = "115200 ttyO2"
+ USE_VT = "2"
+ 
++KERNEL_DEVICETREE = "am3517-evm.dtb"
 +
-+BRANCH = "ti-u-boot-2017.01"
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
+ 
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 99adb08..c1776df 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -12,6 +12,8 @@ MACHINE_FEATURES += "touchscreen ethernet"
+ IMAGE_FSTYPES += "ubi tar.gz"
+ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
++KERNEL_DEVICETREE = "omap3-evm-37xx.dtb"
 +
-+SRCREV = "d31a991ba516f814b340e0b0d280624ca902d563"
+ SERIAL_CONSOLE = "115200 ttyO0"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 98698e6..ec63418 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -12,6 +12,11 @@ SERIAL_CONSOLE = ""
+ SERIAL_CONSOLES = "115200;ttyS2 115200;ttyO2"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ 
++KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb \
++                    am57xx-evm.dtb am57xx-evm-reva3.dtb \
++                    am571x-idk.dtb \
++                    am572x-idk.dtb"
++
+ UBOOT_MACHINE = "am57xx_evm_config"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index 955961f..4f05a0e 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -10,6 +10,8 @@ MACHINE_GUI_CLASS = "bigscreen"
+ IMAGE_FSTYPES += "tar.gz ubi"
+ EXTRA_IMAGECMD_jffs2 = "-lnp"
+ 
++KERNEL_DEVICETREE = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-beagle-xm-ab.dtb"
++
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ UBOOT_MACHINE = "omap3_beagle_config"
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index e168560..72f3ba5 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -5,6 +5,8 @@
+ require conf/machine/include/ti33x.inc
+ require conf/machine/include/beaglebone.inc
+ 
++KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
++
+ # Only has DVI connector for external screen
+ MACHINE_GUI_CLASS = "bigscreen"
+ 
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 09f758d..6049914 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -12,6 +12,11 @@ SERIAL_CONSOLE = ""
+ SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ 
++KERNEL_DEVICETREE = "dra7-evm.dtb \
++                    dra72-evm.dtb \
++                    dra72-evm-revc.dtb \
++                    dra71-evm.dtb"
++
+ UBOOT_MACHINE = "dra7xx_evm_config"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 4fe4cb3..8c6423d 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -26,6 +26,8 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ 
++KERNEL_DEVICETREE = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-beagle-xm-ab.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
++
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "omap3_evm_config"
+ XLOAD_MACHINE = "omap3evm_config"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 6d1a45b..73d9aa4 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -26,6 +26,8 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ 
+ KERNEL_IMAGETYPE = "zImage"
+ 
++KERNEL_DEVICETREE = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb am335x-icev2.dtb"
++
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am335x_evm_config"
+ 
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 807a42e..8f2e11f 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -26,6 +26,8 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ 
+ KERNEL_IMAGETYPE = "zImage"
+ 
++KERNEL_DEVICETREE = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
++
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am43xx_evm_config"
+ 
+diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
+index 43362dd..530e6dc 100644
+--- a/conf/machine/k2e-evm.conf
++++ b/conf/machine/k2e-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/k2e.inc
+ 
+ MACHINE_FEATURES += "opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2e-evm.dtb"
++
+ UBOOT_MACHINE = "k2e_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2e"
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+index 4d03f87..b8e55e4 100644
+--- a/conf/machine/k2g-evm.conf
++++ b/conf/machine/k2g-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/k2g.inc
+ 
+ MACHINE_FEATURES += "alsa opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2g-evm.dtb keystone-k2g-ice.dtb"
++
+ UBOOT_MACHINE = "k2g_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2g"
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index 220f7fc..c753e68 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/keystone.inc
+ 
+ MACHINE_FEATURES += "opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2hk-evm.dtb"
++
+ UBOOT_MACHINE = "k2hk_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2hk"
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+index 54931e2..7a54492 100644
+--- a/conf/machine/k2l-evm.conf
++++ b/conf/machine/k2l-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/keystone.inc
+ 
+ MACHINE_FEATURES += "opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2l-evm.dtb"
++
+ UBOOT_MACHINE = "k2l_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2l"
+diff --git a/conf/machine/omap5-evm.conf b/conf/machine/omap5-evm.conf
+index 2a19e77..7a71acc 100644
+--- a/conf/machine/omap5-evm.conf
++++ b/conf/machine/omap5-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/omap-a15.inc
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
+ 
++KERNEL_DEVICETREE = "omap5-uevm.dtb"
++
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
+index 99497c1..920cd1e 100644
+--- a/conf/machine/pandaboard.conf
++++ b/conf/machine/pandaboard.conf
+@@ -8,6 +8,8 @@ MACHINE_GUI_CLASS = "bigscreen"
+ 
+ IMAGE_FSTYPES += "tar.gz"
+ 
++KERNEL_DEVICETREE = "omap4-panda.dtb omap4-panda-a4.dtb omap4-panda-es.dtb"
++
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
 -- 
 2.7.4
 
