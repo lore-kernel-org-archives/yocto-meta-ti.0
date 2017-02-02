@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0C198E009CA; Thu,  2 Feb 2017 15:35:33 -0800 (PST)
+	id 123D3E009B8; Thu,  2 Feb 2017 15:35:33 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	UPPERCASE_50_75 autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  0.0 UPPERCASE_50_75 message body is 50-75% uppercase
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 513D2E009A0
-	for <meta-ti@yoctoproject.org>; Thu,  2 Feb 2017 15:35:29 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4EDD0E00826
+	for <meta-ti@yoctoproject.org>; Thu,  2 Feb 2017 15:35:28 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4D41852B43; Thu,  2 Feb 2017 23:35:28 +0000 (UTC)
+	id D957852B2E; Thu,  2 Feb 2017 23:35:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170202233528.4D41852B43@arago-project.org>
-Date: Thu,  2 Feb 2017 23:35:28 +0000 (UTC)
+Message-Id: <20170202233526.D957852B2E@arago-project.org>
+Date: Thu,  2 Feb 2017 23:35:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: add version 4.9.7
+Subject: Denys Dmytriyenko : u-boot: move common settings and code to u-boot-ti.inc
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,264 +39,292 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c481cfe32a708012efe0a42ca3724e7a113f2205
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c481cfe32a708012efe0a42ca3724e7a113f2205
+Commit: 5021fec8b9799a805c9c3bdad30d34f99c97aeb8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5021fec8b9799a805c9c3bdad30d34f99c97aeb8
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Feb  2 04:36:54 2017 +0000
+Date:   Thu Feb  2 04:04:06 2017 +0000
 
-linux-ti-staging: add version 4.9.7
+u-boot: move common settings and code to u-boot-ti.inc
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti-staging-4.9/defconfig           |    1 +
- .../linux/linux-ti-staging-4.9/dra7xx/defconfig    |    1 +
- .../linux/linux-ti-staging-4.9/k2g/defconfig       |    1 +
- .../linux/linux-ti-staging-4.9/keystone/defconfig  |    1 +
- .../linux/linux-ti-staging-4.9/ti33x/defconfig     |    1 +
- .../linux/linux-ti-staging-4.9/ti43x/defconfig     |    1 +
- .../linux/linux-ti-staging-rt-4.9/defconfig        |    1 +
- .../linux/linux-ti-staging-rt-4.9/dra7xx/defconfig |    1 +
- .../linux/linux-ti-staging-rt-4.9/k2g/defconfig    |    1 +
- .../linux-ti-staging-rt-4.9/keystone/defconfig     |    1 +
- .../linux/linux-ti-staging-rt-4.9/ti33x/defconfig  |    1 +
- .../linux/linux-ti-staging-rt-4.9/ti43x/defconfig  |    1 +
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb    |    9 +++
- .../linux/linux-ti-staging-systest-4.9/defconfig   |    1 +
- .../linux-ti-staging-systest-4.9/dra7xx/defconfig  |    1 +
- .../linux-ti-staging-systest-4.9/k2g/defconfig     |    1 +
- .../keystone/defconfig                             |    1 +
- .../linux-ti-staging-systest-4.9/ti33x/defconfig   |    1 +
- .../linux-ti-staging-systest-4.9/ti43x/defconfig   |    1 +
- .../linux/linux-ti-staging-systest_4.9.bb          |    5 ++
- recipes-kernel/linux/linux-ti-staging_4.9.bb       |   66 ++++++++++++++++++++
- 21 files changed, 98 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |  108 +-------------------
+ recipes-bsp/u-boot/u-boot-ti.inc                |  126 ++++++++++++++++++++---
+ 2 files changed, 113 insertions(+), 121 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/defconfig
-new file mode 100644
-index 0000000..d083d18
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_omap2_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig
-new file mode 100644
-index 0000000..dcb53ba
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_dra7x_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig
-new file mode 100644
-index 0000000..316b04b
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_k2g_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig
-new file mode 100644
-index 0000000..5a40b93
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_keystone_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig
-new file mode 100644
-index 0000000..88f80fa
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am3x_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig
-new file mode 100644
-index 0000000..4b9daaf
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am4x_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig
-new file mode 100644
-index 0000000..f0b8bab
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_omap2_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig
-new file mode 100644
-index 0000000..47e3d04
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_dra7x_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig
-new file mode 100644
-index 0000000..a9c24f2
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_k2g_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig
-new file mode 100644
-index 0000000..fc68085
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_keystone_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig
-new file mode 100644
-index 0000000..0a4fbac
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am3x_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig
-new file mode 100644
-index 0000000..99594c8
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am4x_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-new file mode 100644
-index 0000000..b9d93b6
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -0,0 +1,9 @@
-+require linux-ti-staging_4.9.bb
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 4998d68..fa15569 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -1,113 +1,7 @@
+ require u-boot-ti.inc
+ 
+-# u-boot needs devtree compiler to parse dts files
+-DEPENDS += "dtc-native"
+-
+-DESCRIPTION = "u-boot bootloader for TI devices"
+-
+-LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+-
+ PR = "r30"
+-PV_append = "+git${SRCPV}"
+ 
+-SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH ?= "ti-u-boot-2016.05"
++BRANCH = "ti-u-boot-2016.05"
+ 
+ SRCREV = "4db46a6bbde46e4587b77e14763787f66c292701"
+-
+-# Support for secure devices - detailed info is in doc/README.ti-secure
+-TI_SECURE_DEV_PKG ?= ""
+-export TI_SECURE_DEV_PKG
+-
+-SPL_BINARY = "MLO"
+-SPL_BINARY_k2e-hs-evm = ""
+-SPL_UART_BINARY = "u-boot-spl.bin"
+-
+-# Keystone specifics
+-UBOOT_SUFFIX_keystone = "bin"
+-SPL_UART_BINARY_keystone = ""
+-
+-# SPI NOR Flash binaries
+-UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
+-UBOOT_SPI_BINARY = "u-boot.img"
+-UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
+-
+-# SPI NOR Flash deployed images
+-UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
+-UBOOT_SPI_SPL_SYMLINK = "u-boot-spl-${MACHINE}.bin"
+-UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+-UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
+-UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
+-UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
+-
+-# HS XLD
+-UBOOT_HS_XLD_BINARY = "u-boot-spl_HS_X-LOADER"
+-UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
+-UBOOT_HS_XLD_SYMLINK = "u-boot-spl_HS_X-LOADER-${MACHINE}"
+-
+-# HS MLO
+-UBOOT_HS_MLO_BINARY = "u-boot_HS_MLO"
+-UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
+-UBOOT_HS_MLO_SYMLINK = "u-boot_HS_MLO-${MACHINE}"
+-
+-do_compile_append_am437x-hs-evm () {
+-	if [ -f ${B}/u-boot-spl_HS_ISSW ]; then
+-		rm -rf ${B}/MLO
+-		cp ${B}/u-boot-spl_HS_ISSW ${B}/MLO
+-	fi
+-}
+-
+-do_install_append () {
+-	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
+-		ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
+-	fi
+-	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
+-		ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
+-	fi
+-}
+-
+-do_deploy_append () {
+-	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_XLD_BINARY} ${DEPLOYDIR}/${UBOOT_HS_XLD_IMAGE}
+-		rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
+-		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
+-		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
+-	fi
+-	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_MLO_BINARY} ${DEPLOYDIR}/${UBOOT_HS_MLO_IMAGE}
+-		rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
+-		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
+-		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
+-	fi
+-}
+-
+-do_install_append_keystone () {
+-	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
+-
+-	install ${B}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
+-	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
+-
+-	install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
+-}
+-
+-do_deploy_append_keystone () {
+-	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
+-	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
+-
+-	install ${B}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
+-	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
+-	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
+-	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
+-
+-	install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
+-	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
+-}
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 661f931..c53689e 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -16,8 +16,18 @@ require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+ 
+ FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
+ 
++SUMMARY = "u-boot bootloader for TI devices"
 +
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
++LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 +
-+BRANCH = "ti-rt-linux-4.9.y"
++BRANCH ?= "master"
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
 +
-+SRCREV = "9515cdeb59f8f504c1fdcd67ef9118ff202e7c88"
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig
-new file mode 100644
-index 0000000..5d051bd
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_omap2_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig
-new file mode 100644
-index 0000000..2b3635c
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_dra7x_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig
-new file mode 100644
-index 0000000..abfb330
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_k2g_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig
-new file mode 100644
-index 0000000..e95bcf9
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_keystone_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig
-new file mode 100644
-index 0000000..9ab6733
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am3x_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig
-new file mode 100644
-index 0000000..825c31c
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am4x_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb b/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb
-new file mode 100644
-index 0000000..c53f94c
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb
-@@ -0,0 +1,5 @@
-+require linux-ti-staging_4.9.bb
++PV_append = "+git${SRCPV}"
 +
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-new file mode 100644
-index 0000000..791d647
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -0,0 +1,66 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++# u-boot needs devtree compiler to parse dts files
++DEPENDS += "dtc-native"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+@@ -28,26 +38,114 @@ PKG_${PN}-dbg = "u-boot-dbg"
+ 
+ S = "${WORKDIR}/git"
+ 
++# Support for secure devices - detailed info is in doc/README.ti-secure
++TI_SECURE_DEV_PKG ?= ""
++export TI_SECURE_DEV_PKG
 +
-+inherit kernel
+ # SPL (Second Program Loader) to be loaded over UART
+ SPL_UART_BINARY ?= ""
+ SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+ 
++SPL_BINARY = "MLO"
++SPL_BINARY_k2e-hs-evm = ""
++SPL_UART_BINARY = "u-boot-spl.bin"
 +
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
-+require recipes-kernel/linux/cmem.inc
-+require recipes-kernel/linux/ti-uio.inc
++# Keystone specifics
++UBOOT_SUFFIX_keystone = "bin"
++SPL_UART_BINARY_keystone = ""
 +
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
++# SPI NOR Flash binaries
++UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
++UBOOT_SPI_BINARY = "u-boot.img"
++UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
 +
-+# Pull in the devicetree files into the rootfs
-+RDEPENDS_kernel-base += "kernel-devicetree"
++# SPI NOR Flash deployed images
++UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
++UBOOT_SPI_SPL_SYMLINK = "u-boot-spl-${MACHINE}.bin"
++UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
++UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
++UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
++UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
 +
-+# Add run-time dependency for PM firmware to the rootfs
-+RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
-+RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
++# HS XLD
++UBOOT_HS_XLD_BINARY = "u-boot-spl_HS_X-LOADER"
++UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
++UBOOT_HS_XLD_SYMLINK = "u-boot-spl_HS_X-LOADER-${MACHINE}"
 +
-+# Add run-time dependency for VPE VPDMA firmware to the rootfs
-+RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
++# HS MLO
++UBOOT_HS_MLO_BINARY = "u-boot_HS_MLO"
++UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
++UBOOT_HS_MLO_SYMLINK = "u-boot_HS_MLO-${MACHINE}"
 +
-+# Add run-time dependency for Goodix firmware to the rootfs
-+RDEPENDS_kernel-base_append_dra7xx = " goodix-fw"
++do_compile_append_am437x-hs-evm () {
++	if [ -f ${B}/u-boot-spl_HS_ISSW ]; then
++		rm -rf ${B}/MLO
++		cp ${B}/u-boot-spl_HS_ISSW ${B}/MLO
++	fi
++}
 +
-+# Install boot-monitor skern file into /boot dir of rootfs
-+RDEPENDS_kernel-base_append_keystone = " boot-monitor"
+ do_install_append () {
+-    if [ "x${SPL_UART_BINARY}" != "x" ]
+-    then
+-        install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
+-        ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
+-    fi
++	if [ "x${SPL_UART_BINARY}" != "x" ]; then
++		install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
++		ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
++	fi
++	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
++		install ${B}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
++	fi
++	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
++		install ${B}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
++		ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
++	fi
+ }
+ 
+ do_deploy_append () {
+-    cd ${DEPLOYDIR}
+-    if [ "x${SPL_UART_BINARY}" != "x" ]
+-    then
+-        install ${B}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
+-        rm -f ${DEPLOYDIR}/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
+-        ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_BINARY}
+-        ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
+-    fi
++	cd ${DEPLOYDIR}
++	if [ "x${SPL_UART_BINARY}" != "x" ]; then
++		install ${B}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
++		rm -f ${DEPLOYDIR}/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
++		ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_BINARY}
++		ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
++	fi
++	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
++		install ${B}/${UBOOT_HS_XLD_BINARY} ${DEPLOYDIR}/${UBOOT_HS_XLD_IMAGE}
++		rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
++	fi
++	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
++		install ${B}/${UBOOT_HS_MLO_BINARY} ${DEPLOYDIR}/${UBOOT_HS_MLO_IMAGE}
++		rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
++		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
++		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
++	fi
++}
 +
-+# Install ti-sci-fw into /boot dir of rootfs
-+RDEPENDS_kernel-base_append_k2g = " ti-sci-fw"
++do_install_append_keystone () {
++	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
 +
-+# Add run-time dependency for SerDes firmware to the rootfs
-+RDEPENDS_kernel-base_append_keystone = " serdes-fw"
++	install ${B}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
++	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
 +
-+# Add run-time dependency for QMSS PDSP firmware to the rootfs
-+RDEPENDS_kernel-base_append_keystone = " qmss-pdsp-fw"
++	install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
++}
 +
-+# Add run-time dependency for NETCP PA firmware to the rootfs
-+RDEPENDS_kernel-base_append_k2hk-evm = " netcp-pa-fw"
-+RDEPENDS_kernel-base_append_k2e = " netcp-pa-fw"
-+RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
++do_deploy_append_keystone () {
++	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
++	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
 +
-+# Add run-time dependency for PRU Ethernet firmware to the rootfs
-+RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_am335x-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_k2g = " prueth-fw"
++	install ${B}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
++	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
++	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
++	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
 +
-+S = "${WORKDIR}/git"
-+
-+BRANCH = "ti-lsk-linux-4.9.y"
-+
-+SRCREV = "20e747cb77b81fce68c4b7ee3cfa24e10aedf484"
-+PV = "4.9.7+git${SRCPV}"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
-+KERNEL_GIT_PROTOCOL = "git"
-+SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-+            file://defconfig"
++	install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
++	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
+ }
 
 
