@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2879CE009B8; Thu,  2 Feb 2017 15:35:33 -0800 (PST)
+	id 39478E009AD; Thu,  2 Feb 2017 15:35:33 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	UPPERCASE_50_75 autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  0.0 UPPERCASE_50_75 message body is 50-75% uppercase
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53A93E009AD
-	for <meta-ti@yoctoproject.org>; Thu,  2 Feb 2017 15:35:28 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4499E009BA
+	for <meta-ti@yoctoproject.org>; Thu,  2 Feb 2017 15:35:29 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 754DB52B3A; Thu,  2 Feb 2017 23:35:27 +0000 (UTC)
+	id 75B2952B44; Thu,  2 Feb 2017 23:35:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170202233527.754DB52B3A@arago-project.org>
-Date: Thu,  2 Feb 2017 23:35:27 +0000 (UTC)
+Message-Id: <20170202233528.75B2952B44@arago-project.org>
+Date: Thu,  2 Feb 2017 23:35:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: remove old 4.1 version
+Subject: Denys Dmytriyenko : u-boot: move common settings and code to u-boot-ti.inc
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,195 +38,293 @@ X-List-Received-Date: Thu, 02 Feb 2017 23:35:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: ff8c2019ac1f1f7646ee5c2a6eb4327217be6779
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff8c2019ac1f1f7646ee5c2a6eb4327217be6779
+Branch: morty
+Commit: ed4873bed88967eec18f9eb25b8e552cc5c43fe8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed4873bed88967eec18f9eb25b8e552cc5c43fe8
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Feb  2 04:36:52 2017 +0000
+Date:   Thu Feb  2 04:04:06 2017 +0000
 
-linux-ti-staging: remove old 4.1 version
+u-boot: move common settings and code to u-boot-ti.inc
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti-staging-4.1/defconfig           |    1 -
- .../linux/linux-ti-staging-4.1/keystone/defconfig  |    1 -
- .../linux/linux-ti-staging-rt-4.1/defconfig        |    1 -
- .../linux-ti-staging-rt-4.1/keystone/defconfig     |    1 -
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb    |    9 --
- .../linux/linux-ti-staging-systest-4.1/defconfig   |    1 -
- .../keystone/defconfig                             |    1 -
- .../linux/linux-ti-staging-systest_4.1.bb          |    5 -
- recipes-kernel/linux/linux-ti-staging_4.1.bb       |   92 --------------------
- 9 files changed, 0 insertions(+), 112 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb |  108 +-------------------
+ recipes-bsp/u-boot/u-boot-ti.inc                |  126 ++++++++++++++++++++---
+ 2 files changed, 113 insertions(+), 121 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-4.1/defconfig
-deleted file mode 100644
-index 990e7f7..0000000
---- a/recipes-kernel/linux/linux-ti-staging-4.1/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig
-deleted file mode 100644
-index 470cf11..0000000
---- a/recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/multi_core_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
-deleted file mode 100644
-index 2091fca..0000000
---- a/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/rt_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
-deleted file mode 100644
-index 6d28753..0000000
---- a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/rt_multi_core_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-deleted file mode 100644
-index 5671d45..0000000
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require linux-ti-staging_4.1.bb
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+index 4998d68..fa15569 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
+@@ -1,113 +1,7 @@
+ require u-boot-ti.inc
+ 
+-# u-boot needs devtree compiler to parse dts files
+-DEPENDS += "dtc-native"
 -
--# Look in the generic major.minor directory for files
--# This will have priority over generic non-rt path
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+-DESCRIPTION = "u-boot bootloader for TI devices"
 -
--BRANCH = "ti-rt-linux-4.1.y"
+-LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 -
--SRCREV = "3bef1493dbbc61880f09cfda285cd0032a501d41"
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.1/defconfig
-deleted file mode 100644
-index cfe4f99..0000000
---- a/recipes-kernel/linux/linux-ti-staging-systest-4.1/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/system_test_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.1/keystone/defconfig
-deleted file mode 100644
-index 68cfc25..0000000
---- a/recipes-kernel/linux/linux-ti-staging-systest-4.1/keystone/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/multi_core_system_test_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest_4.1.bb b/recipes-kernel/linux/linux-ti-staging-systest_4.1.bb
-deleted file mode 100644
-index 30962e6..0000000
---- a/recipes-kernel/linux/linux-ti-staging-systest_4.1.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require linux-ti-staging_4.1.bb
+ PR = "r30"
+-PV_append = "+git${SRCPV}"
+ 
+-SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
 -
--# Look in the generic major.minor directory for files
--# This will have priority over generic non-rt path
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-deleted file mode 100644
-index ea1ed62..0000000
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ /dev/null
-@@ -1,92 +0,0 @@
--SECTION = "kernel"
--DESCRIPTION = "Linux kernel for TI devices"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+-BRANCH ?= "ti-u-boot-2016.05"
++BRANCH = "ti-u-boot-2016.05"
+ 
+ SRCREV = "4db46a6bbde46e4587b77e14763787f66c292701"
 -
--inherit kernel
+-# Support for secure devices - detailed info is in doc/README.ti-secure
+-TI_SECURE_DEV_PKG ?= ""
+-export TI_SECURE_DEV_PKG
 -
--require recipes-kernel/linux/linux-dtb.inc
--require recipes-kernel/linux/setup-defconfig.inc
--require recipes-kernel/linux/cmem.inc
--require recipes-kernel/linux/ti-uio.inc
+-SPL_BINARY = "MLO"
+-SPL_BINARY_k2e-hs-evm = ""
+-SPL_UART_BINARY = "u-boot-spl.bin"
 -
--# Look in the generic major.minor directory for files
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
+-# Keystone specifics
+-UBOOT_SUFFIX_keystone = "bin"
+-SPL_UART_BINARY_keystone = ""
 -
--# Pull in the devicetree files into the rootfs
--RDEPENDS_kernel-base += "kernel-devicetree"
+-# SPI NOR Flash binaries
+-UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
+-UBOOT_SPI_BINARY = "u-boot.img"
+-UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
 -
--# Add a run-time dependency for the PM firmware to be installed
--# on the target file system.
--RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
--RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
+-# SPI NOR Flash deployed images
+-UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
+-UBOOT_SPI_SPL_SYMLINK = "u-boot-spl-${MACHINE}.bin"
+-UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+-UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
+-UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
+-UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
 -
--# Add a run-time dependency for the VPE VPDMA firmware to be installed
--# on the target file system.
--RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+-# HS XLD
+-UBOOT_HS_XLD_BINARY = "u-boot-spl_HS_X-LOADER"
+-UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
+-UBOOT_HS_XLD_SYMLINK = "u-boot-spl_HS_X-LOADER-${MACHINE}"
 -
--# Install boot-monitor skern file into /boot dir of rootfs
--RDEPENDS_kernel-base_append_keystone = " boot-monitor"
+-# HS MLO
+-UBOOT_HS_MLO_BINARY = "u-boot_HS_MLO"
+-UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
+-UBOOT_HS_MLO_SYMLINK = "u-boot_HS_MLO-${MACHINE}"
 -
--# Install ti-sci-fw into /boot dir of rootfs
--RDEPENDS_kernel-base_append_k2g-evm = " ti-sci-fw"
+-do_compile_append_am437x-hs-evm () {
+-	if [ -f ${B}/u-boot-spl_HS_ISSW ]; then
+-		rm -rf ${B}/MLO
+-		cp ${B}/u-boot-spl_HS_ISSW ${B}/MLO
+-	fi
+-}
 -
--# Add run-time dependency for SerDes firmware to the rootfs
--RDEPENDS_kernel-base_append_keystone = " serdes-fw"
+-do_install_append () {
+-	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
+-		ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
+-	fi
+-	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
+-		ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
+-	fi
+-}
 -
--# Add run-time dependency for NETCP PA firmware to the rootfs
--RDEPENDS_kernel-base_append_k2hk-evm = " netcp-pa-fw"
--RDEPENDS_kernel-base_append_k2e-evm = " netcp-pa-fw"
--RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
+-do_deploy_append () {
+-	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_XLD_BINARY} ${DEPLOYDIR}/${UBOOT_HS_XLD_IMAGE}
+-		rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
+-		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
+-		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
+-	fi
+-	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
+-		install ${B}/${UBOOT_HS_MLO_BINARY} ${DEPLOYDIR}/${UBOOT_HS_MLO_IMAGE}
+-		rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
+-		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
+-		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
+-	fi
+-}
 -
--# Add run-time dependency for PRU Ethernet firmware to the rootfs
--RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
--RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
+-do_install_append_keystone () {
+-	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
 -
--# Default is to package all dtb files for ti33x devices unless building
--# for the specific beaglebone machine.
--KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
--KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
--KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
--KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
--KERNEL_DEVICETREE_dra7xx-hs-evm = "${KERNEL_DEVICETREE_dra7xx-evm}"
--KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-beagle-x15-es2plus.dtb am57xx-evm.dtb am57xx-evm-es2plus.dtb am572x-idk.dtb am571x-idk.dtb am572x-idk-lcd-osd.dtb am571x-idk-lcd-osd.dtb"
--KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
--KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
--KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
--KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
--KERNEL_DEVICETREE_pandaboard = "omap4-panda.dtb omap4-panda-es.dtb"
--KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
--KERNEL_DEVICETREE_k2e-evm = "k2e-evm.dtb"
--KERNEL_DEVICETREE_k2g-evm = "k2g-evm.dtb"
--KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
+-	install ${B}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
+-	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
 -
--KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+-	install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
+-}
 -
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|omap3|omap4|keystone"
+-do_deploy_append_keystone () {
+-	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
+-	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
 -
--S = "${WORKDIR}/git"
+-	install ${B}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
+-	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
+-	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
+-	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
 -
--BRANCH = "ti-lsk-linux-4.1.y"
--
--SRCREV = "6b41ca0b945d73ac8c8318083f79411639836643"
--PV = "4.1.18+git${SRCPV}"
--
--# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "l"
--PR = "${MACHINE_KERNEL_PR}"
--
--KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--
--# SoC specific config fragments are not enabled yet
--KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${KERNEL_CONFIG_DIR}/am33xx_only.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx_only.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_dra7xx = " ${KERNEL_CONFIG_DIR}/dra7_only.cfg"
--
--MULTI_CONFIG_BASE_SUFFIX = ""
--
--KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
--KERNEL_GIT_PROTOCOL = "git"
--SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
--            file://defconfig"
+-	install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
+-	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
+-}
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 661f931..c53689e 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -16,8 +16,18 @@ require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+ 
+ FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
+ 
++SUMMARY = "u-boot bootloader for TI devices"
++
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
++LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
++
++BRANCH ?= "master"
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
++
++PV_append = "+git${SRCPV}"
++
++# u-boot needs devtree compiler to parse dts files
++DEPENDS += "dtc-native"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+@@ -28,26 +38,114 @@ PKG_${PN}-dbg = "u-boot-dbg"
+ 
+ S = "${WORKDIR}/git"
+ 
++# Support for secure devices - detailed info is in doc/README.ti-secure
++TI_SECURE_DEV_PKG ?= ""
++export TI_SECURE_DEV_PKG
++
+ # SPL (Second Program Loader) to be loaded over UART
+ SPL_UART_BINARY ?= ""
+ SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+ 
++SPL_BINARY = "MLO"
++SPL_BINARY_k2e-hs-evm = ""
++SPL_UART_BINARY = "u-boot-spl.bin"
++
++# Keystone specifics
++UBOOT_SUFFIX_keystone = "bin"
++SPL_UART_BINARY_keystone = ""
++
++# SPI NOR Flash binaries
++UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
++UBOOT_SPI_BINARY = "u-boot.img"
++UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
++
++# SPI NOR Flash deployed images
++UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
++UBOOT_SPI_SPL_SYMLINK = "u-boot-spl-${MACHINE}.bin"
++UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
++UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
++UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
++UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
++
++# HS XLD
++UBOOT_HS_XLD_BINARY = "u-boot-spl_HS_X-LOADER"
++UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
++UBOOT_HS_XLD_SYMLINK = "u-boot-spl_HS_X-LOADER-${MACHINE}"
++
++# HS MLO
++UBOOT_HS_MLO_BINARY = "u-boot_HS_MLO"
++UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
++UBOOT_HS_MLO_SYMLINK = "u-boot_HS_MLO-${MACHINE}"
++
++do_compile_append_am437x-hs-evm () {
++	if [ -f ${B}/u-boot-spl_HS_ISSW ]; then
++		rm -rf ${B}/MLO
++		cp ${B}/u-boot-spl_HS_ISSW ${B}/MLO
++	fi
++}
++
+ do_install_append () {
+-    if [ "x${SPL_UART_BINARY}" != "x" ]
+-    then
+-        install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
+-        ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
+-    fi
++	if [ "x${SPL_UART_BINARY}" != "x" ]; then
++		install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
++		ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
++	fi
++	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
++		install ${B}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
++	fi
++	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
++		install ${B}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
++		ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
++	fi
+ }
+ 
+ do_deploy_append () {
+-    cd ${DEPLOYDIR}
+-    if [ "x${SPL_UART_BINARY}" != "x" ]
+-    then
+-        install ${B}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
+-        rm -f ${DEPLOYDIR}/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
+-        ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_BINARY}
+-        ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
+-    fi
++	cd ${DEPLOYDIR}
++	if [ "x${SPL_UART_BINARY}" != "x" ]; then
++		install ${B}/spl/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_IMAGE}
++		rm -f ${DEPLOYDIR}/${SPL_UART_BINARY} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
++		ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_BINARY}
++		ln -sf ${SPL_UART_IMAGE} ${DEPLOYDIR}/${SPL_UART_SYMLINK}
++	fi
++	if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
++		install ${B}/${UBOOT_HS_XLD_BINARY} ${DEPLOYDIR}/${UBOOT_HS_XLD_IMAGE}
++		rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
++		ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
++	fi
++	if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
++		install ${B}/${UBOOT_HS_MLO_BINARY} ${DEPLOYDIR}/${UBOOT_HS_MLO_IMAGE}
++		rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
++		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
++		ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
++	fi
++}
++
++do_install_append_keystone () {
++	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
++
++	install ${B}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
++	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
++
++	install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
++}
++
++do_deploy_append_keystone () {
++	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
++	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
++
++	install ${B}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
++	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
++	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
++	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
++
++	install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
++	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
+ }
 
 
