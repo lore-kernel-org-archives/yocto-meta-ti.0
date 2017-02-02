@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 602E0E009D4; Thu,  2 Feb 2017 15:35:33 -0800 (PST)
+	id 7B121E009CF; Thu,  2 Feb 2017 15:35:33 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D79E5E009C2
-	for <meta-ti@yoctoproject.org>; Thu,  2 Feb 2017 15:35:29 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01D38E009C3
+	for <meta-ti@yoctoproject.org>; Thu,  2 Feb 2017 15:35:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D1C3652B46; Thu,  2 Feb 2017 23:35:28 +0000 (UTC)
+	id 21E4C52B2E; Thu,  2 Feb 2017 23:35:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170202233528.D1C3652B46@arago-project.org>
-Date: Thu,  2 Feb 2017 23:35:28 +0000 (UTC)
+Message-Id: <20170202233529.21E4C52B2E@arago-project.org>
+Date: Thu,  2 Feb 2017 23:35:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: remove old 4.1 version
+Subject: Denys Dmytriyenko : conf/machine: set KERNEL_DEVICETREE dtb list per machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,194 +38,235 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: fb42bf85af5569786034fbfa839d6391e0f571d6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fb42bf85af5569786034fbfa839d6391e0f571d6
+Commit: ca30444d7223477c897c9b30577bfade8dfd40ef
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca30444d7223477c897c9b30577bfade8dfd40ef
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Feb  2 04:36:52 2017 +0000
+Date:   Thu Feb  2 04:36:53 2017 +0000
 
-linux-ti-staging: remove old 4.1 version
+conf/machine: set KERNEL_DEVICETREE dtb list per machine
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti-staging-4.1/defconfig           |    1 -
- .../linux/linux-ti-staging-4.1/keystone/defconfig  |    1 -
- .../linux/linux-ti-staging-rt-4.1/defconfig        |    1 -
- .../linux-ti-staging-rt-4.1/keystone/defconfig     |    1 -
- recipes-kernel/linux/linux-ti-staging-rt_4.1.bb    |    9 --
- .../linux/linux-ti-staging-systest-4.1/defconfig   |    1 -
- .../keystone/defconfig                             |    1 -
- .../linux/linux-ti-staging-systest_4.1.bb          |    5 -
- recipes-kernel/linux/linux-ti-staging_4.1.bb       |   92 --------------------
- 9 files changed, 0 insertions(+), 112 deletions(-)
+ conf/machine/am3517-evm.conf   |    2 ++
+ conf/machine/am37x-evm.conf    |    2 ++
+ conf/machine/am57xx-evm.conf   |    5 +++++
+ conf/machine/beagleboard.conf  |    2 ++
+ conf/machine/beaglebone.conf   |    2 ++
+ conf/machine/dra7xx-evm.conf   |    5 +++++
+ conf/machine/include/omap3.inc |    2 ++
+ conf/machine/include/ti33x.inc |    2 ++
+ conf/machine/include/ti43x.inc |    2 ++
+ conf/machine/k2e-evm.conf      |    2 ++
+ conf/machine/k2g-evm.conf      |    2 ++
+ conf/machine/k2hk-evm.conf     |    2 ++
+ conf/machine/k2l-evm.conf      |    2 ++
+ conf/machine/omap5-evm.conf    |    2 ++
+ conf/machine/pandaboard.conf   |    2 ++
+ 15 files changed, 36 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-4.1/defconfig
-deleted file mode 100644
-index 990e7f7..0000000
---- a/recipes-kernel/linux/linux-ti-staging-4.1/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig
-deleted file mode 100644
-index 470cf11..0000000
---- a/recipes-kernel/linux/linux-ti-staging-4.1/keystone/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/multi_core_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
-deleted file mode 100644
-index 2091fca..0000000
---- a/recipes-kernel/linux/linux-ti-staging-rt-4.1/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/rt_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
-deleted file mode 100644
-index 6d28753..0000000
---- a/recipes-kernel/linux/linux-ti-staging-rt-4.1/keystone/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/rt_multi_core_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-deleted file mode 100644
-index 5671d45..0000000
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.1.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require linux-ti-staging_4.1.bb
--
--# Look in the generic major.minor directory for files
--# This will have priority over generic non-rt path
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
--
--BRANCH = "ti-rt-linux-4.1.y"
--
--SRCREV = "3bef1493dbbc61880f09cfda285cd0032a501d41"
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.1/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.1/defconfig
-deleted file mode 100644
-index cfe4f99..0000000
---- a/recipes-kernel/linux/linux-ti-staging-systest-4.1/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/system_test_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.1/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.1/keystone/defconfig
-deleted file mode 100644
-index 68cfc25..0000000
---- a/recipes-kernel/linux/linux-ti-staging-systest-4.1/keystone/defconfig
-+++ /dev/null
-@@ -1 +0,0 @@
--use-combined-config=ti_config_fragments/multi_core_system_test_defconfig_fragment
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest_4.1.bb b/recipes-kernel/linux/linux-ti-staging-systest_4.1.bb
-deleted file mode 100644
-index 30962e6..0000000
---- a/recipes-kernel/linux/linux-ti-staging-systest_4.1.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require linux-ti-staging_4.1.bb
--
--# Look in the generic major.minor directory for files
--# This will have priority over generic non-rt path
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-deleted file mode 100644
-index ea1ed62..0000000
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ /dev/null
-@@ -1,92 +0,0 @@
--SECTION = "kernel"
--DESCRIPTION = "Linux kernel for TI devices"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
--
--inherit kernel
--
--require recipes-kernel/linux/linux-dtb.inc
--require recipes-kernel/linux/setup-defconfig.inc
--require recipes-kernel/linux/cmem.inc
--require recipes-kernel/linux/ti-uio.inc
--
--# Look in the generic major.minor directory for files
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.1:"
--
--# Pull in the devicetree files into the rootfs
--RDEPENDS_kernel-base += "kernel-devicetree"
--
--# Add a run-time dependency for the PM firmware to be installed
--# on the target file system.
--RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
--RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
--
--# Add a run-time dependency for the VPE VPDMA firmware to be installed
--# on the target file system.
--RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
--
--# Install boot-monitor skern file into /boot dir of rootfs
--RDEPENDS_kernel-base_append_keystone = " boot-monitor"
--
--# Install ti-sci-fw into /boot dir of rootfs
--RDEPENDS_kernel-base_append_k2g-evm = " ti-sci-fw"
--
--# Add run-time dependency for SerDes firmware to the rootfs
--RDEPENDS_kernel-base_append_keystone = " serdes-fw"
--
--# Add run-time dependency for NETCP PA firmware to the rootfs
--RDEPENDS_kernel-base_append_k2hk-evm = " netcp-pa-fw"
--RDEPENDS_kernel-base_append_k2e-evm = " netcp-pa-fw"
--RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
--
--# Add run-time dependency for PRU Ethernet firmware to the rootfs
--RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
--RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
--
--# Default is to package all dtb files for ti33x devices unless building
--# for the specific beaglebone machine.
--KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
--KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
--KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
--KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb"
--KERNEL_DEVICETREE_dra7xx-hs-evm = "${KERNEL_DEVICETREE_dra7xx-evm}"
--KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-beagle-x15-es2plus.dtb am57xx-evm.dtb am57xx-evm-es2plus.dtb am572x-idk.dtb am571x-idk.dtb am572x-idk-lcd-osd.dtb am571x-idk-lcd-osd.dtb"
--KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
--KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
--KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
--KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
--KERNEL_DEVICETREE_pandaboard = "omap4-panda.dtb omap4-panda-es.dtb"
--KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
--KERNEL_DEVICETREE_k2e-evm = "k2e-evm.dtb"
--KERNEL_DEVICETREE_k2g-evm = "k2g-evm.dtb"
--KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
--
--KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
--
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|omap3|omap4|keystone"
--
--S = "${WORKDIR}/git"
--
--BRANCH = "ti-lsk-linux-4.1.y"
--
--SRCREV = "6b41ca0b945d73ac8c8318083f79411639836643"
--PV = "4.1.18+git${SRCPV}"
--
--# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "l"
--PR = "${MACHINE_KERNEL_PR}"
--
--KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--
--# SoC specific config fragments are not enabled yet
--KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${KERNEL_CONFIG_DIR}/am33xx_only.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx_only.cfg"
--KERNEL_CONFIG_FRAGMENTS_append_dra7xx = " ${KERNEL_CONFIG_DIR}/dra7_only.cfg"
--
--MULTI_CONFIG_BASE_SUFFIX = ""
--
--KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
--KERNEL_GIT_PROTOCOL = "git"
--SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
--            file://defconfig"
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 4fef634..883e9a4 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -15,6 +15,8 @@ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ SERIAL_CONSOLE = "115200 ttyO2"
+ USE_VT = "2"
+ 
++KERNEL_DEVICETREE = "am3517-evm.dtb"
++
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
+ 
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 99adb08..c1776df 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -12,6 +12,8 @@ MACHINE_FEATURES += "touchscreen ethernet"
+ IMAGE_FSTYPES += "ubi tar.gz"
+ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
++KERNEL_DEVICETREE = "omap3-evm-37xx.dtb"
++
+ SERIAL_CONSOLE = "115200 ttyO0"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 98698e6..ec63418 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -12,6 +12,11 @@ SERIAL_CONSOLE = ""
+ SERIAL_CONSOLES = "115200;ttyS2 115200;ttyO2"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ 
++KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb \
++                    am57xx-evm.dtb am57xx-evm-reva3.dtb \
++                    am571x-idk.dtb \
++                    am572x-idk.dtb"
++
+ UBOOT_MACHINE = "am57xx_evm_config"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index 955961f..4f05a0e 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -10,6 +10,8 @@ MACHINE_GUI_CLASS = "bigscreen"
+ IMAGE_FSTYPES += "tar.gz ubi"
+ EXTRA_IMAGECMD_jffs2 = "-lnp"
+ 
++KERNEL_DEVICETREE = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-beagle-xm-ab.dtb"
++
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ UBOOT_MACHINE = "omap3_beagle_config"
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index e168560..72f3ba5 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -5,6 +5,8 @@
+ require conf/machine/include/ti33x.inc
+ require conf/machine/include/beaglebone.inc
+ 
++KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
++
+ # Only has DVI connector for external screen
+ MACHINE_GUI_CLASS = "bigscreen"
+ 
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 09f758d..6049914 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -12,6 +12,11 @@ SERIAL_CONSOLE = ""
+ SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ 
++KERNEL_DEVICETREE = "dra7-evm.dtb \
++                    dra72-evm.dtb \
++                    dra72-evm-revc.dtb \
++                    dra71-evm.dtb"
++
+ UBOOT_MACHINE = "dra7xx_evm_config"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 4fe4cb3..8c6423d 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -26,6 +26,8 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ 
++KERNEL_DEVICETREE = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-beagle-xm-ab.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
++
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "omap3_evm_config"
+ XLOAD_MACHINE = "omap3evm_config"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 6d1a45b..73d9aa4 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -26,6 +26,8 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ 
+ KERNEL_IMAGETYPE = "zImage"
+ 
++KERNEL_DEVICETREE = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb am335x-icev2.dtb"
++
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am335x_evm_config"
+ 
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 807a42e..8f2e11f 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -26,6 +26,8 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ 
+ KERNEL_IMAGETYPE = "zImage"
+ 
++KERNEL_DEVICETREE = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
++
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am43xx_evm_config"
+ 
+diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
+index 43362dd..530e6dc 100644
+--- a/conf/machine/k2e-evm.conf
++++ b/conf/machine/k2e-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/k2e.inc
+ 
+ MACHINE_FEATURES += "opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2e-evm.dtb"
++
+ UBOOT_MACHINE = "k2e_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2e"
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+index 4d03f87..b8e55e4 100644
+--- a/conf/machine/k2g-evm.conf
++++ b/conf/machine/k2g-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/k2g.inc
+ 
+ MACHINE_FEATURES += "alsa opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2g-evm.dtb keystone-k2g-ice.dtb"
++
+ UBOOT_MACHINE = "k2g_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2g"
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index 220f7fc..c753e68 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/keystone.inc
+ 
+ MACHINE_FEATURES += "opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2hk-evm.dtb"
++
+ UBOOT_MACHINE = "k2hk_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2hk"
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+index 54931e2..7a54492 100644
+--- a/conf/machine/k2l-evm.conf
++++ b/conf/machine/k2l-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/keystone.inc
+ 
+ MACHINE_FEATURES += "opencl"
+ 
++KERNEL_DEVICETREE = "keystone-k2l-evm.dtb"
++
+ UBOOT_MACHINE = "k2l_evm_config"
+ 
+ BOOT_MONITOR_MAKE_TARGET = "k2l"
+diff --git a/conf/machine/omap5-evm.conf b/conf/machine/omap5-evm.conf
+index 2a19e77..7a71acc 100644
+--- a/conf/machine/omap5-evm.conf
++++ b/conf/machine/omap5-evm.conf
+@@ -6,6 +6,8 @@ require conf/machine/include/omap-a15.inc
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
+ 
++KERNEL_DEVICETREE = "omap5-uevm.dtb"
++
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
+index 99497c1..920cd1e 100644
+--- a/conf/machine/pandaboard.conf
++++ b/conf/machine/pandaboard.conf
+@@ -8,6 +8,8 @@ MACHINE_GUI_CLASS = "bigscreen"
+ 
+ IMAGE_FSTYPES += "tar.gz"
+ 
++KERNEL_DEVICETREE = "omap4-panda.dtb omap4-panda-a4.dtb omap4-panda-es.dtb"
++
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
 
 
