@@ -1,26 +1,89 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <v2panchal@live.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A5769E009C3; Thu,  2 Feb 2017 15:35:33 -0800 (PST)
+	id 6218FE009DA; Fri,  3 Feb 2017 05:12:31 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,FREEMAIL_FROM,
+	HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (v2panchal[at]live.com)
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1FF15E009C9
-	for <meta-ti@yoctoproject.org>; Thu,  2 Feb 2017 15:35:30 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6B15E52B36; Thu,  2 Feb 2017 23:35:29 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20170202233529.6B15E52B36@arago-project.org>
-Date: Thu,  2 Feb 2017 23:35:29 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: add version 4.9.7
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [65.55.116.26 listed in list.dnswl.org]
+X-Greylist: delayed 62 seconds by postgrey-1.32 at yocto-www;
+	Fri, 03 Feb 2017 05:12:30 PST
+Received: from BLU004-OMC1S15.hotmail.com (blu004-omc1s15.hotmail.com
+	[65.55.116.26])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6ED47E009D4
+	for <meta-ti@yoctoproject.org>; Fri,  3 Feb 2017 05:12:30 -0800 (PST)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com ([65.55.116.7])
+	by BLU004-OMC1S15.hotmail.com over TLS secured channel with
+	Microsoft SMTPSVC(7.5.7601.23008); Fri, 3 Feb 2017 05:11:28 -0800
+Received: from HE1EUR01FT052.eop-EUR01.prod.protection.outlook.com
+	(10.152.0.59) by HE1EUR01HT149.eop-EUR01.prod.protection.outlook.com
+	(10.152.1.111) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id 15.1.874.2;
+	Fri, 3 Feb 2017 13:10:46 +0000
+Received: from DB6PR0802MB2600.eurprd08.prod.outlook.com (10.152.0.51) by
+	HE1EUR01FT052.mail.protection.outlook.com (10.152.1.94) with Microsoft
+	SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id
+	15.1.874.2 via Frontend Transport; Fri, 3 Feb 2017 13:10:46 +0000
+Received: from DB6PR0802MB2600.eurprd08.prod.outlook.com ([10.172.252.17]) by
+	DB6PR0802MB2600.eurprd08.prod.outlook.com ([10.172.252.17]) with
+	mapi id 15.01.0860.027; Fri, 3 Feb 2017 13:10:46 +0000
+From: Vivek Panchal <v2panchal@live.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: Need information about TI DM365 and AM437X support
+Thread-Index: AQHSfZmdOzxbD5g7JEqB5Zlki6nylaFXQk+9
+Date: Fri, 3 Feb 2017 13:10:46 +0000
+Message-ID: <DB6PR0802MB2600E8A185B3690B668549429E4F0@DB6PR0802MB2600.eurprd08.prod.outlook.com>
+References: <AM5PR0802MB2596E5D5DCDC6E115C1FAF0E9E4C0@AM5PR0802MB2596.eurprd08.prod.outlook.com>
+In-Reply-To: <AM5PR0802MB2596E5D5DCDC6E115C1FAF0E9E4C0@AM5PR0802MB2596.eurprd08.prod.outlook.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: yoctoproject.org; dkim=none (message not signed)
+	header.d=none; yoctoproject.org;
+	dmarc=none action=none header.from=live.com; 
+x-incomingtopheadermarker: OriginalChecksum:D343C719197B108956767BF136B3287BE4E389F32C821B47C43BD0352F7254B5;
+	UpperCasedChecksum:D59F56A29BF154468578AAF50D28C441EEB767BDF2245968AF78A5EFB94D117C;
+	SizeAsReceived:7843; Count:39
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [M+RJuAOb4ozDg8nt0pIOn0K/+wnACUDi]
+x-incomingheadercount: 39
+x-eopattributedmessage: 0
+x-microsoft-exchange-diagnostics: 1; HE1EUR01HT149;
+	5:rcWRNxAdeoWASnelvMnQNUU9i0FMN0EjzgalOwD/PoIzOnB3cwedU/WjVEHC+zEIylwKUt/TA4YKMRRhmcSC8QRei+KNvcZaKjwBSEvQU00ZB4MjBoFdLEVNIRwxCTBIVcOEcIM1AfdyBdpQSs3pgqeDcf6rrYqDnviOKm2GEXY=;
+	24:C2nanY9wlWimGil1fNNJNjVMquG/t/I+EAOhTrXVvmU2grBCLE22ILor/LUC6/cWee/d2fsMORvqPiMKLqzkl+pFHMVH396HTLgVNbiNr5o=;
+	7:BO/2lGw1414MGa4osE9L7gkzJAP2eUORjdr3bN7mI52YEkEPN3Qpry0wbJEQrDQaT7AMIB5QyA0LyWFFDg02L2nJVwr29R+6yj4O4QEYQNB1wXTkb2pmp0GBMT30A6JzTNkk4p41WJlPFoTHvNZw9+sBWecWMrhkhLfvzZZWnTPcVd2/XMvyWjyZPpFYPaIomToo2isvmzRDC1dMu28SLhEvUeKae36vXh0U4Deg6fak2wRxnTsTKtCLCip0IogQ+ztR8hlXZCi3Qd4v+wvcQHby32lqz4/9ZKP6ROXlGvRcu8zk8RU0ntwMWVVP8uIukQTB5moWBiiYN+CSteZDhTJr3KqYGOMcJpo5pCYnAmc9D5h7ULCL5wDvmdNRbFLdYYiZcYoZRkLYL4Uy6bYQERnyEoQghLFhYoUqYtKFehUmhH/YGp3rr7qr61zuTBxBuGCkAB27zvc9qIb/ixjh4A34+H7jN2M23qrEl7JTJwuIGF7DmJCogKSZDXfZRaeP+P9Jy+pY0UVGjNIhKj6Aww==
+x-forefront-antispam-report: EFV:NLI; SFV:NSPM; SFS:(10019020)(98900005);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1EUR01HT149;
+	H:DB6PR0802MB2600.eurprd08.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; 
+x-ms-office365-filtering-correlation-id: 0998f852-a103-4692-0a91-08d44c3610f4
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(22001)(1601124038)(5061506426)(5061507331)(1603103135)(1601125107)(1701031045);
+	SRVR:HE1EUR01HT149; 
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(444111334)(432015086)(82015046); SRVR:HE1EUR01HT149;
+	BCL:0; PCL:0; RULEID:; SRVR:HE1EUR01HT149; 
+x-forefront-prvs: 02070414A1
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
+MIME-Version: 1.0
+X-OriginatorOrg: live.com
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Feb 2017 13:10:46.1125 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Internet
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1EUR01HT149
+X-OriginalArrivalTime: 03 Feb 2017 13:11:28.0074 (UTC)
+	FILETIME=[076B8AA0:01D27E1F]
+Subject: Fw: Need information about TI DM365 and AM437X support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,269 +96,85 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2017 23:35:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 03 Feb 2017 13:12:31 -0000
+Content-Language: en-GB
+Content-Type: multipart/alternative;
+	boundary="_000_DB6PR0802MB2600E8A185B3690B668549429E4F0DB6PR0802MB2600_"
 
-Module: meta-ti
-Branch: morty
-Commit: 935753e93814a75db2072e5d1b31b759f835e95c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=935753e93814a75db2072e5d1b31b759f835e95c
+--_000_DB6PR0802MB2600E8A185B3690B668549429E4F0DB6PR0802MB2600_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Feb  2 04:36:54 2017 +0000
-
-linux-ti-staging: add version 4.9.7
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- .../linux/linux-ti-staging-4.9/defconfig           |    1 +
- .../linux/linux-ti-staging-4.9/dra7xx/defconfig    |    1 +
- .../linux/linux-ti-staging-4.9/k2g/defconfig       |    1 +
- .../linux/linux-ti-staging-4.9/keystone/defconfig  |    1 +
- .../linux/linux-ti-staging-4.9/ti33x/defconfig     |    1 +
- .../linux/linux-ti-staging-4.9/ti43x/defconfig     |    1 +
- .../linux/linux-ti-staging-rt-4.9/defconfig        |    1 +
- .../linux/linux-ti-staging-rt-4.9/dra7xx/defconfig |    1 +
- .../linux/linux-ti-staging-rt-4.9/k2g/defconfig    |    1 +
- .../linux-ti-staging-rt-4.9/keystone/defconfig     |    1 +
- .../linux/linux-ti-staging-rt-4.9/ti33x/defconfig  |    1 +
- .../linux/linux-ti-staging-rt-4.9/ti43x/defconfig  |    1 +
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb    |    9 +++
- .../linux/linux-ti-staging-systest-4.9/defconfig   |    1 +
- .../linux-ti-staging-systest-4.9/dra7xx/defconfig  |    1 +
- .../linux-ti-staging-systest-4.9/k2g/defconfig     |    1 +
- .../keystone/defconfig                             |    1 +
- .../linux-ti-staging-systest-4.9/ti33x/defconfig   |    1 +
- .../linux-ti-staging-systest-4.9/ti43x/defconfig   |    1 +
- .../linux/linux-ti-staging-systest_4.9.bb          |    5 ++
- recipes-kernel/linux/linux-ti-staging_4.9.bb       |   66 ++++++++++++++++++++
- 21 files changed, 98 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/defconfig
-new file mode 100644
-index 0000000..d083d18
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_omap2_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig
-new file mode 100644
-index 0000000..dcb53ba
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_dra7x_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig
-new file mode 100644
-index 0000000..316b04b
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_k2g_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig
-new file mode 100644
-index 0000000..5a40b93
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_keystone_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig
-new file mode 100644
-index 0000000..88f80fa
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am3x_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig
-new file mode 100644
-index 0000000..4b9daaf
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am4x_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig
-new file mode 100644
-index 0000000..f0b8bab
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_omap2_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig
-new file mode 100644
-index 0000000..47e3d04
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_dra7x_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig
-new file mode 100644
-index 0000000..a9c24f2
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_k2g_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig
-new file mode 100644
-index 0000000..fc68085
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_keystone_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig
-new file mode 100644
-index 0000000..0a4fbac
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am3x_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig
-new file mode 100644
-index 0000000..99594c8
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am4x_rt_release
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-new file mode 100644
-index 0000000..b9d93b6
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -0,0 +1,9 @@
-+require linux-ti-staging_4.9.bb
-+
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
-+
-+BRANCH = "ti-rt-linux-4.9.y"
-+
-+SRCREV = "9515cdeb59f8f504c1fdcd67ef9118ff202e7c88"
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig
-new file mode 100644
-index 0000000..5d051bd
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_omap2_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig
-new file mode 100644
-index 0000000..2b3635c
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_dra7x_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig
-new file mode 100644
-index 0000000..abfb330
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_k2g_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig
-new file mode 100644
-index 0000000..e95bcf9
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_keystone_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig
-new file mode 100644
-index 0000000..9ab6733
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am3x_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig
-new file mode 100644
-index 0000000..825c31c
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig
-@@ -0,0 +1 @@
-+use-tisdk-config=ti_sdk_am4x_debug
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb b/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb
-new file mode 100644
-index 0000000..c53f94c
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb
-@@ -0,0 +1,5 @@
-+require linux-ti-staging_4.9.bb
-+
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-new file mode 100644
-index 0000000..791d647
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -0,0 +1,66 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+
-+inherit kernel
-+
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
-+require recipes-kernel/linux/cmem.inc
-+require recipes-kernel/linux/ti-uio.inc
-+
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
-+
-+# Pull in the devicetree files into the rootfs
-+RDEPENDS_kernel-base += "kernel-devicetree"
-+
-+# Add run-time dependency for PM firmware to the rootfs
-+RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
-+RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
-+
-+# Add run-time dependency for VPE VPDMA firmware to the rootfs
-+RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
-+
-+# Add run-time dependency for Goodix firmware to the rootfs
-+RDEPENDS_kernel-base_append_dra7xx = " goodix-fw"
-+
-+# Install boot-monitor skern file into /boot dir of rootfs
-+RDEPENDS_kernel-base_append_keystone = " boot-monitor"
-+
-+# Install ti-sci-fw into /boot dir of rootfs
-+RDEPENDS_kernel-base_append_k2g = " ti-sci-fw"
-+
-+# Add run-time dependency for SerDes firmware to the rootfs
-+RDEPENDS_kernel-base_append_keystone = " serdes-fw"
-+
-+# Add run-time dependency for QMSS PDSP firmware to the rootfs
-+RDEPENDS_kernel-base_append_keystone = " qmss-pdsp-fw"
-+
-+# Add run-time dependency for NETCP PA firmware to the rootfs
-+RDEPENDS_kernel-base_append_k2hk-evm = " netcp-pa-fw"
-+RDEPENDS_kernel-base_append_k2e = " netcp-pa-fw"
-+RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
-+
-+# Add run-time dependency for PRU Ethernet firmware to the rootfs
-+RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_am335x-evm = " prueth-fw"
-+RDEPENDS_kernel-base_append_k2g = " prueth-fw"
-+
-+S = "${WORKDIR}/git"
-+
-+BRANCH = "ti-lsk-linux-4.9.y"
-+
-+SRCREV = "20e747cb77b81fce68c4b7ee3cfa24e10aedf484"
-+PV = "4.9.7+git${SRCPV}"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
-+KERNEL_GIT_PROTOCOL = "git"
-+SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-+            file://defconfig"
+Hi,
 
 
+I am making Ti's DM365 and AM437x processor based custom boards and thinkin=
+g to use yocto project for the same purpose. Till now I don't have any info=
+rmation that DM365 is supported in yocto project or not ? I found am437x-ev=
+m is supported in it.
+
+
+I am new to yocto build system and need help to build uboot,kernel, filesys=
+tem for above mentioned processors.
+
+
+Please let me know further path.
+
+
+Thanks,
+
+V2P
+
+--_000_DB6PR0802MB2600E8A185B3690B668549429E4F0DB6PR0802MB2600_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
+-family:Calibri,Arial,Helvetica,sans-serif;" dir=3D"ltr">
+<p><span style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-=
+size: 12pt;">Hi,</span><br>
+</p>
+<div style=3D"color: rgb(0, 0, 0);">
+<div>
+<div id=3D"divtagdefaultwrapper" dir=3D"ltr" style=3D"font-size:12pt; color=
+:#000000; font-family:Calibri,Arial,Helvetica,sans-serif">
+<div>
+<p><br>
+</p>
+<p>I am making Ti's DM365 and AM437x processor based custom boards and thin=
+king to use yocto project for the same purpose. Till now I don't have any i=
+nformation that DM365 is supported in yocto project or not ? I found am437x=
+-evm is supported in it.
+<br>
+</p>
+<p><br>
+</p>
+<p>I am new to yocto build system and need help to build uboot,kernel, file=
+system for above mentioned processors.
+<br>
+</p>
+<p><br>
+</p>
+Please let me know further path.<br>
+<br>
+</div>
+<p></p>
+<p>Thanks,</p>
+<p>V2P<br>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_DB6PR0802MB2600E8A185B3690B668549429E4F0DB6PR0802MB2600_--
