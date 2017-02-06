@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AF593E00924; Mon,  6 Feb 2017 10:17:01 -0800 (PST)
+	id B113BE007BA; Mon,  6 Feb 2017 10:17:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A549E007BA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6CE2E0082E
 	for <meta-ti@yoctoproject.org>; Mon,  6 Feb 2017 10:16:58 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9AAA852AD8; Mon,  6 Feb 2017 18:16:57 +0000 (UTC)
+	id C36FF52AEA; Mon,  6 Feb 2017 18:16:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170206181657.9AAA852AD8@arago-project.org>
+Message-Id: <20170206181657.C36FF52AEA@arago-project.org>
 Date: Mon,  6 Feb 2017 18:16:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: enable parallel builds
+Subject: Denys Dmytriyenko : am335x-hs-evm: update UBOOT_MACHINE var for latest u-boot version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,50 +38,33 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 02a484d78d19a04b4ec9202b08bb8c2bbd4f2a75
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02a484d78d19a04b4ec9202b08bb8c2bbd4f2a75
+Commit: 75038fcb58c1182a397af7935a6873c08bcf4254
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=75038fcb58c1182a397af7935a6873c08bcf4254
 
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Mon Feb  6 11:56:30 2017 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Feb  6 21:41:55 2017 +0000
 
-ti-sgx-ddk-km: enable parallel builds
+am335x-hs-evm: update UBOOT_MACHINE var for latest u-boot version
 
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
+ conf/machine/am335x-hs-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index ca5916e..2d8b3ac 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -7,7 +7,7 @@ inherit module
+diff --git a/conf/machine/am335x-hs-evm.conf b/conf/machine/am335x-hs-evm.conf
+index 674a764..bb025b4 100644
+--- a/conf/machine/am335x-hs-evm.conf
++++ b/conf/machine/am335x-hs-evm.conf
+@@ -4,7 +4,7 @@
  
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+ require conf/machine/am335x-evm.conf
  
--MACHINE_KERNEL_PR_append = "k"
-+MACHINE_KERNEL_PR_append = "l"
- PR = "${MACHINE_KERNEL_PR}"
+-UBOOT_MACHINE = "am335x_hs_evm_mmc_config"
++UBOOT_MACHINE = "am335x_hs_evm_config"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -25,14 +25,12 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
- 
--SRCREV = "8d5305b03dce13f3a9a89328c69c762dcd3109a4"
-+SRCREV = "fd47e44b18944cf7ade480ac67a9c0172619ff7e"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
- TARGET_PRODUCT_ti43x = "ti437x"
- 
--PARALLEL_MAKE = ""
--
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
- 
- do_compile_prepend() {
+ UBOOT_ENTRYPOINT = "0x82000000"
+ UBOOT_LOADADDRESS = "0x82000000"
 
 
