@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C9F69E00839; Mon,  6 Feb 2017 10:14:31 -0800 (PST)
+	id AF593E00924; Mon,  6 Feb 2017 10:17:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A6C1E007BA
-	for <meta-ti@yoctoproject.org>; Mon,  6 Feb 2017 10:14:29 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A549E007BA
+	for <meta-ti@yoctoproject.org>; Mon,  6 Feb 2017 10:16:58 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A60B452AD8; Mon,  6 Feb 2017 18:14:28 +0000 (UTC)
+	id 9AAA852AD8; Mon,  6 Feb 2017 18:16:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170206181428.A60B452AD8@arago-project.org>
-Date: Mon,  6 Feb 2017 18:14:28 +0000 (UTC)
+Message-Id: <20170206181657.9AAA852AD8@arago-project.org>
+Date: Mon,  6 Feb 2017 18:16:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: enable parallel builds
 X-BeenThere: meta-ti@yoctoproject.org
@@ -35,13 +35,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2017 18:14:31 -0000
+X-List-Received-Date: Mon, 06 Feb 2017 18:17:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: krogoth
-Commit: dbef3f2c9a50386a9690f71055bfa11520e80c28
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dbef3f2c9a50386a9690f71055bfa11520e80c28
+Branch: master
+Commit: 02a484d78d19a04b4ec9202b08bb8c2bbd4f2a75
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02a484d78d19a04b4ec9202b08bb8c2bbd4f2a75
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
 Date:   Mon Feb  6 11:56:30 2017 +0000
