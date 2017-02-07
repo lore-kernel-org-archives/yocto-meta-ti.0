@@ -1,59 +1,37 @@
-Return-Path: <deepakvijay2255@gmail.com>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C2200E0083C; Mon,  6 Feb 2017 23:29:50 -0800 (PST)
+	id 7582BE00953; Tue,  7 Feb 2017 06:24:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, HTML_MESSAGE, RCVD_IN_DNSWL_NONE,
-	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [74.125.82.52 listed in list.dnswl.org]
-	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [74.125.82.52 listed in dnsbl.sorbs.net]
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC254E0082E
-	for <meta-ti@yoctoproject.org>; Mon,  6 Feb 2017 23:29:49 -0800 (PST)
-Received: by mail-wm0-f52.google.com with SMTP id v77so142128876wmv.0
-	for <meta-ti@yoctoproject.org>; Mon, 06 Feb 2017 23:29:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:from:date:message-id:subject:to;
-	bh=pr5PU6GtuhiS+FJ8FTUHAyrr5yPa684OUw/ICNl9afo=;
-	b=Uw9Hx9o5aPn1JhhgUOUISKSOz1QPAgxur9GXq4ZnTqOs1zeEGEb+1UrXCr+NW8HVin
-	t3JbUWyyohuEqV+DuCV547QX7Y4UfS7OFUnOjaHPyka3nqjIArBvPGxs66jblzNhst4T
-	vQGi5/9Jg3hbecYnviARA0d1Fv5H6IDbZVTvBBzU9WBkEKV/7jSyfMpEZMiFQMdbO2Ly
-	wP71sjEIZOM4CeN8XZVybOQ5NRK7Bq5u9fw6jS6ASsT//znw7wi594VTFqsAheHoSWF4
-	TDxdufZfbZNkRcfb7oHVasZhyj18qGXzC6b4gOi9ZRjvfFgBN+WEoSuWEDQtsSBzVZ4+
-	5MQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-	:to; bh=pr5PU6GtuhiS+FJ8FTUHAyrr5yPa684OUw/ICNl9afo=;
-	b=XYwEVhd3MqwOkrbu5O8FgxLHqWxgb2UZoFDerygQQOkgOLAtIVs0dni4/6L3zWlsIc
-	SSmisFdE+dmBr6bV0Q3Ufzr2oWt3E3Y+aiwEudDpoc/WN80BV9BFdLRMIWZ4vrE6wUKT
-	3jXhAcb2sJt+VRkSVcvt2qeIi5YL6uT+QphBbJN18yaH+AkkmdgCljF9/i4Waho3tfha
-	If6EWHr+RmqCNME/zQx/0kzikvC9+LM4xi/QDExEicICGawzUwPAdLJ5YsFPf9uTAxnP
-	mPCBz8roQa1iQwPcDt5/C6jZ1prkJ9F9LPkoLAUGpQVcHa5Bs/3bzeUNVZi0clSC4WhR
-	3OHw==
-X-Gm-Message-State: AMke39ney70Rdq5N4ocPx/OWqLFxyU9zvnubkcGIgzOQS3RctPaW/Ulag2dNQhPhQZEsGr0jrDVR68DBKsidYQ==
-X-Received: by 10.28.109.27 with SMTP id i27mr11082130wmc.54.1486452588588;
-	Mon, 06 Feb 2017 23:29:48 -0800 (PST)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2B477E0083C
+	for <meta-ti@yoctoproject.org>; Tue,  7 Feb 2017 06:23:58 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v17ENwgA010850
+	for <meta-ti@yoctoproject.org>; Tue, 7 Feb 2017 08:23:58 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v17ENwgU002908
+	for <meta-ti@yoctoproject.org>; Tue, 7 Feb 2017 08:23:58 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 7 Feb 2017 08:23:57 -0600
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v17ENuLH016567;
+	Tue, 7 Feb 2017 08:23:57 -0600
+From: Anand Balagopalakrishnan <anandb@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 7 Feb 2017 19:53:53 +0530
+Message-ID: <1486477433-191487-1-git-send-email-anandb@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Sender: deepakvijay2255@gmail.com
-Received: by 10.28.158.205 with HTTP; Mon, 6 Feb 2017 23:29:48 -0800 (PST)
-From: deepak vijay <deepakvijay2255@rediff.com>
-Date: Tue, 7 Feb 2017 12:59:48 +0530
-X-Google-Sender-Auth: 71gLJvIOO2Xz-UGsfdQXQabn-Qk
-Message-ID: <CAAxuRXj5GHofLCuYT118HcWixo5P4KeEtvUCdJdmXLD6qzQkng@mail.gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: How to add a new machine in meta-ti and configure ti-cgt toolchain to it?
+Subject: [for-morty 1/1] ti-sgx-ddk-km: move to K4.9, enable parallel builds
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,40 +44,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2017 07:29:50 -0000
-Content-Type: multipart/alternative; boundary=001a11478e8084b8d70547ebb6d7
+X-List-Received-Date: Tue, 07 Feb 2017 14:24:02 -0000
+Content-Type: text/plain
 
---001a11478e8084b8d70547ebb6d7
-Content-Type: text/plain; charset=UTF-8
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+---
+ recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-Hi,
-
-I am new to Yocto. I am trying to add a new machine omapl13x to mata-ti
-layer and i need to use ti-arm-cgt toolchain for this machine. But I am
-getting error for do_compile showing that "/bin/armcl command not found" .
-
-Can you guys please help me to understand where to define the toolchain
-path for a particular machine?
-I already tried with EXTERNAL_TOOLCHAIN in conf file but it was not
-working.
-
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+index ca5916e..984cab9 100644
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+@@ -7,7 +7,7 @@ inherit module
+ 
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+ 
+-MACHINE_KERNEL_PR_append = "k"
++MACHINE_KERNEL_PR_append = "l"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -20,19 +20,17 @@ RPROVIDES_${PN} = "omapdrm-pvr"
+ RREPLACES_${PN} = "omapdrm-pvr"
+ RCONFLICTS_${PN} = "omapdrm-pvr"
+ 
+-BRANCH = "ti-img-sgx/${PV}/k4.4"
++BRANCH = "ti-img-sgx/${PV}/k4.9"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "8d5305b03dce13f3a9a89328c69c762dcd3109a4"
++SRCREV = "0086977380d3320d70a3abc78b95fa0641427073"
+ 
+ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+ TARGET_PRODUCT_ti33x = "ti335x"
+ TARGET_PRODUCT_ti43x = "ti437x"
+ 
+-PARALLEL_MAKE = ""
+-
+ EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
+ 
+ do_compile_prepend() {
 -- 
-Regards,
-Deepak Vijay
+1.9.1
 
---001a11478e8084b8d70547ebb6d7
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hi,<div><br></div><div>I am new to Yocto. I am trying to a=
-dd a new machine omapl13x to mata-ti layer and i need to use ti-arm-cgt too=
-lchain for this machine. But I am getting error for do_compile showing that=
- &quot;/bin/armcl command not found&quot; .</div><div><br></div><div>Can yo=
-u guys please help me to understand where to define the toolchain path for =
-a particular machine?</div><div>I already tried with EXTERNAL_TOOLCHAIN in =
-conf file but it was not working.=C2=A0</div><div><div><br></div>-- <br><di=
-v class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"=
-ltr">Regards,<div>Deepak Vijay</div></div></div>
-</div></div>
-
---001a11478e8084b8d70547ebb6d7--
