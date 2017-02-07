@@ -1,28 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3E6DDE0083C; Mon,  6 Feb 2017 10:17:05 -0800 (PST)
+	id B23FFE0082E; Mon,  6 Feb 2017 17:01:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1854BE007BA
-	for <meta-ti@yoctoproject.org>; Mon,  6 Feb 2017 10:17:02 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 4923D52AD8; Mon,  6 Feb 2017 18:17:01 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70E3EE007AD
+	for <meta-ti@yoctoproject.org>; Mon,  6 Feb 2017 17:01:05 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3EBD720B2E;
+	Tue,  7 Feb 2017 01:01:03 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id XYnzIvh3TLLW; Tue,  7 Feb 2017 01:01:03 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1C85F20999;
+	Tue,  7 Feb 2017 01:01:02 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by mail.denix.org (Postfix) with ESMTP id 6363C1621BE;
+	Mon,  6 Feb 2017 20:01:01 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20170206181701.4923D52AD8@arago-project.org>
-Date: Mon,  6 Feb 2017 18:17:01 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: enable parallel builds
+Date: Mon,  6 Feb 2017 20:01:01 -0500
+Message-Id: <1486429261-25530-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] linux-ti-staging: update to 4.9.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,55 +45,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2017 18:17:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Feb 2017 01:01:09 -0000
 
-Module: meta-ti
-Branch: morty
-Commit: 16f6a2713d0e6ef4dcdbb7769b89979bdf751c11
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=16f6a2713d0e6ef4dcdbb7769b89979bdf751c11
-
-Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Mon Feb  6 11:56:30 2017 +0000
-
-ti-sgx-ddk-km: enable parallel builds
-
-Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-index ca5916e..2d8b3ac 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
-@@ -7,7 +7,7 @@ inherit module
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index b9d93b6..a4747e7 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+ BRANCH = "ti-rt-linux-4.9.y"
  
--MACHINE_KERNEL_PR_append = "k"
-+MACHINE_KERNEL_PR_append = "l"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "9515cdeb59f8f504c1fdcd67ef9118ff202e7c88"
++SRCREV = "2c6eb7f68157e732f08e1b69fedee286958634e8"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 791d647..37da32a 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -25,14 +25,12 @@ BRANCH = "ti-img-sgx/${PV}/k4.4"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
+ BRANCH = "ti-lsk-linux-4.9.y"
  
--SRCREV = "8d5305b03dce13f3a9a89328c69c762dcd3109a4"
-+SRCREV = "fd47e44b18944cf7ade480ac67a9c0172619ff7e"
+-SRCREV = "20e747cb77b81fce68c4b7ee3cfa24e10aedf484"
+-PV = "4.9.7+git${SRCPV}"
++SRCREV = "5482e867244d361b8f1e98916d28a6a6ba11b243"
++PV = "4.9.8+git${SRCPV}"
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
- TARGET_PRODUCT_ti43x = "ti437x"
- 
--PARALLEL_MAKE = ""
--
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
- 
- do_compile_prepend() {
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
+-- 
+2.7.4
 
 
