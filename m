@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 60C79E006EA; Wed,  8 Feb 2017 08:02:50 -0800 (PST)
+	id 6341CE006C6; Wed,  8 Feb 2017 08:02:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F7E6E00566
-	for <meta-ti@yoctoproject.org>; Wed,  8 Feb 2017 08:02:45 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41A47E00655
+	for <meta-ti@yoctoproject.org>; Wed,  8 Feb 2017 08:02:44 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 44A8A52AD1; Wed,  8 Feb 2017 16:02:44 +0000 (UTC)
+	id B345B52AAD; Wed,  8 Feb 2017 16:02:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170208160244.44A8A52AD1@arago-project.org>
-Date: Wed,  8 Feb 2017 16:02:44 +0000 (UTC)
+Message-Id: <20170208160243.B345B52AAD@arago-project.org>
+Date: Wed,  8 Feb 2017 16:02:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Anand Balagopalakrishnan : ti-sgx-ddk-km: move to k4.9
 X-BeenThere: meta-ti@yoctoproject.org
@@ -39,9 +39,9 @@ X-List-Received-Date: Wed, 08 Feb 2017 16:02:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: 81babbc15a7161bb0a40d30da744a5e4987462a5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=81babbc15a7161bb0a40d30da744a5e4987462a5
+Branch: master
+Commit: 6cc272556af490dab976ceafdc27d7635846e6fd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6cc272556af490dab976ceafdc27d7635846e6fd
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
 Date:   Wed Feb  8 11:17:58 2017 +0000
