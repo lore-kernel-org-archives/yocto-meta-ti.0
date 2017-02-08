@@ -1,6 +1,6 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 71D2AE0093F; Wed,  8 Feb 2017 11:50:24 -0800 (PST)
+	id 1C936E0093F; Wed,  8 Feb 2017 13:28:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,28 +8,28 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 389E3E006C6
-	for <meta-ti@yoctoproject.org>; Wed,  8 Feb 2017 11:50:20 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v18JoJsV031138
-	for <meta-ti@yoctoproject.org>; Wed, 8 Feb 2017 13:50:19 -0600
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D1E20E006C6
+	for <meta-ti@yoctoproject.org>; Wed,  8 Feb 2017 13:28:02 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v18LS1hY032031
+	for <meta-ti@yoctoproject.org>; Wed, 8 Feb 2017 15:28:01 -0600
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v18JoJPg024195
-	for <meta-ti@yoctoproject.org>; Wed, 8 Feb 2017 13:50:19 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v18LS1hf018668
+	for <meta-ti@yoctoproject.org>; Wed, 8 Feb 2017 15:28:01 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 8 Feb 2017 13:50:19 -0600
+	Wed, 8 Feb 2017 15:28:01 -0600
 Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v18JoJ7h021095;	Wed, 8 Feb 2017 13:50:19 -0600
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v18LS0QF017292;	Wed, 8 Feb 2017 15:28:00 -0600
 From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 8 Feb 2017 14:50:18 -0500
-Message-ID: <1486583418-3484-1-git-send-email-sam.nelson@ti.com>
+Date: Wed, 8 Feb 2017 16:27:59 -0500
+Message-ID: <1486589279-48191-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] ti-ipc: Update to new version 3.45.00.00_eng
+Subject: [PATCH] multiprocmgr-test: Add test c66x images, sources and scripts to package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,87 +42,113 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 19:50:24 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 21:28:06 -0000
 Content-Type: text/plain
 
-Also moved RELEASE_TYPE & RELEASE_SUFFIX variables to ti-ipc-rtos.inc
+multiprocmgr-test installs source files, host binaries and associated
+    scripts (ti/examples/mpm/test)
+multiprocmgr-rtos-test installs the C66x test images in the same
+directory structure.
+
+Other updates include
+- Use of oe_runmake instead of make
+- Added runtime dependency of multiprocmgr-rtos-test & bash
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-common.inc  | 2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc    | 9 ++++++---
- recipes-ti/ipc/ti-ipc-rtos_git.bb | 3 ---
- recipes-ti/ipc/ti-ipc.inc         | 6 +++---
- 4 files changed, 10 insertions(+), 10 deletions(-)
+ recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb | 24 +++++++++++++++++++-----
+ recipes-ti/multiprocmgr/multiprocmgr-test_git.bb | 21 ++++++++++++++++-----
+ 2 files changed, 35 insertions(+), 10 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 8a2aa0a..6aa08c5 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.44.01.01"
-+PV = "3.45.00.00"
- INC_PR = "r0"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+index 061790b..c88f0d7 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+@@ -6,22 +6,36 @@ require recipes-ti/multiprocmgr/multiprocmgr.inc
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 1c509b0..77ce7ec 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -25,15 +25,18 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+ DEPENDS = "ti-cgt6x-native"
  
--# Corresponds to tag: 3.44.01.01
-+# Corresponds to tag: 3.45.00.00_eng
- SRCREV_ipc-examples = "b19a3b7a003aa3304a12599a498d9b3a24f20c6e"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
--# Corresponds to tag: 3.44.01.01
--SRCREV_ipc-metadata = "a21264bdbb1b64d41bbcb4e6bb17d2c1d4ccb839"
-+# Corresponds to tag: 3.45.00.00_eng
-+SRCREV_ipc-metadata = "92fa9ce4419abf0fa2cf4063ee84e524c51548d0"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- 
-+RELEASE_TYPE = "ENG"
-+RELEASE_SUFFIX = "_eng"
+-export LOCAL_SYSROOT="${STAGING_DIR_TARGET}"
+-export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
++PACKAGES =+ "${PN}-test"
++FILES_${PN}-test = "${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
++                    ${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/*.out"
 +
- PR = "${INC_PR}.0"
- 
- DEPENDS_append_keystone = " ti-cgt6x-native \
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 693a4e9..f0ccb10 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -13,9 +13,6 @@ INSANE_SKIP_${PN}-dev += "arch"
- 
- ALLOW_EMPTY_${PN} = "1"
- 
--RELEASE_TYPE = "GA"
--RELEASE_SUFFIX = ""
--
- IPC_PACKAGE_DIR = "${S}/ipc-package"
++EXTRA_OEMAKE = "LOCAL_SYSROOT="${STAGING_DIR_TARGET}" \
++                C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++               "
  
  do_compile() {
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 3ac8bf5..876aca9 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+-    make c66x
+-    make test_c66x
++    oe_runmake c66x
++    oe_runmake test_c66x
+ }
  
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "ipc-3.44-next"
-+TI_IPC_GIT_BRANCH = "ipc-next"
+ do_install() {
+     install -d ${D}${MPM_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${MPM_INSTALL_DIR_RECIPE}
++
++    # Copy C66x binaries
++    install -d ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin
++    cp ${S}/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
++        ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/
++    install -d ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin
++    cp ${S}/test/sync_test/c66x/bin/*.out \
++        ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/
+ }
  
--#Corresponds to 3.44.01.01
--TI_IPC_SRCREV = "cff640a4c7e083f78116266ef681cec49d9b584b"
-+#Corresponds to 3.45.00.00_eng
-+TI_IPC_SRCREV = "9dd159d851496047b6833a5b7c71ed9ea95efc07"
+ FILES_${PN}-dev += "${MPM_INSTALL_DIR_RECIPE}"
+ INSANE_SKIP_${PN}-dev = "arch"
++INSANE_SKIP_${PN}-test = "arch"
  
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ ALLOW_EMPTY_${PN} = "1"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+index 7ec8796..f01d651 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+@@ -2,22 +2,33 @@ DESCRIPTION = "TI Multiproc Manager test code"
+ 
+ include multiprocmgr.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ DEPENDS = "multiprocmgr cmem"
+ RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
++RDEPENDS_${PN} += "multiprocmgr-rtos-test bash"
+ 
+ CC += "-I${STAGING_KERNEL_DIR}/include"
+ 
+ # Assuming the multiprocmgr kernel API is safe
+ CC[vardepsexclude] = "STAGING_KERNEL_DIR"
+ 
++FILES_${PN} += "\
++    ${datadir}/ti/examples/mpm \
++"
++
++FILES_${PN}-dbg += "\
++    ${datadir}/ti/examples/mpm/*/.debug \
++"
++
+ do_compile() {
+-	make -C ${S} test
++	oe_runmake -C ${S} test
+ }
+ 
+ do_install() {
+-	install -d ${D}${bindir}/
+-	install -c -m 755 ${S}/test/filetestdemo/host/bin/demo_filetest ${D}${bindir}/mpm_demo_filetest
+-	install -c -m 755 ${S}/test/sync_test/host/bin/sync_test ${D}${bindir}/mpm_sync_test
++	# Copy Sources and binary
++	install -d ${D}${datadir}/ti/examples/mpm/src
++	cp -r ${S}/src/mailbox ${D}${datadir}/ti/examples/mpm/src
++	cp -r ${S}/src/sync ${D}${datadir}/ti/examples/mpm/src
++	cp -r ${S}/test ${D}${datadir}/ti/examples/mpm
+ }
 -- 
 1.9.1
 
