@@ -1,26 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 22ED6E009C9; Thu,  9 Feb 2017 10:15:34 -0800 (PST)
+	id 803F8E0094C; Thu,  9 Feb 2017 10:22:19 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7630E0094C
-	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2017 10:15:32 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 169D9529A0; Thu,  9 Feb 2017 18:15:32 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20170209181532.169D9529A0@arago-project.org>
-Date: Thu,  9 Feb 2017 18:15:32 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : ti-ipc: Update to new version 3.45.00.00_eng
+X-Greylist: delayed 440 seconds by postgrey-1.32 at yocto-www;
+	Thu, 09 Feb 2017 10:22:17 PST
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16CDAE00924
+	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2017 10:22:17 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v19IElWu004242
+	for <meta-ti@yoctoproject.org>; Thu, 9 Feb 2017 12:14:47 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v19IEgGl031364
+	for <meta-ti@yoctoproject.org>; Thu, 9 Feb 2017 12:14:42 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 9 Feb 2017 12:14:42 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v19IEgdw029129;
+	Thu, 9 Feb 2017 12:14:42 -0600
+Date: Thu, 9 Feb 2017 13:14:41 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Sam Nelson <sam.nelson@ti.com>
+Message-ID: <20170209181441.GF2612@edge>
+References: <1486589279-48191-1-git-send-email-sam.nelson@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <1486589279-48191-1-git-send-email-sam.nelson@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] multiprocmgr-test: Add test c66x images, sources and scripts to package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,99 +47,126 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2017 18:15:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Feb 2017 18:22:19 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: morty
-Commit: 880ca7f51c7d40a1fed7f79ad8b39f0b597f4c81
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=880ca7f51c7d40a1fed7f79ad8b39f0b597f4c81
+Sam,
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Feb  9 01:50:18 2017 +0000
+Is this for krogoth or morty? Would be nice to specify in the subject...
 
-ti-ipc: Update to new version 3.45.00.00_eng
 
-Also moved RELEASE_TYPE & RELEASE_SUFFIX variables to ti-ipc-rtos.inc
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-ti/ipc/ti-ipc-common.inc  |    2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc    |    9 ++++++---
- recipes-ti/ipc/ti-ipc-rtos_git.bb |    3 ---
- recipes-ti/ipc/ti-ipc.inc         |    6 +++---
- 4 files changed, 10 insertions(+), 10 deletions(-)
-
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 8a2aa0a..6aa08c5 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.44.01.01"
-+PV = "3.45.00.00"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 1c509b0..77ce7ec 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -25,15 +25,18 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
- 
--# Corresponds to tag: 3.44.01.01
-+# Corresponds to tag: 3.45.00.00_eng
- SRCREV_ipc-examples = "b19a3b7a003aa3304a12599a498d9b3a24f20c6e"
- 
--# Corresponds to tag: 3.44.01.01
--SRCREV_ipc-metadata = "a21264bdbb1b64d41bbcb4e6bb17d2c1d4ccb839"
-+# Corresponds to tag: 3.45.00.00_eng
-+SRCREV_ipc-metadata = "92fa9ce4419abf0fa2cf4063ee84e524c51548d0"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- 
-+RELEASE_TYPE = "ENG"
-+RELEASE_SUFFIX = "_eng"
-+
- PR = "${INC_PR}.0"
- 
- DEPENDS_append_keystone = " ti-cgt6x-native \
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 693a4e9..f0ccb10 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -13,9 +13,6 @@ INSANE_SKIP_${PN}-dev += "arch"
- 
- ALLOW_EMPTY_${PN} = "1"
- 
--RELEASE_TYPE = "GA"
--RELEASE_SUFFIX = ""
--
- IPC_PACKAGE_DIR = "${S}/ipc-package"
- 
- do_compile() {
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 3ac8bf5..876aca9 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "ipc-3.44-next"
-+TI_IPC_GIT_BRANCH = "ipc-next"
- 
--#Corresponds to 3.44.01.01
--TI_IPC_SRCREV = "cff640a4c7e083f78116266ef681cec49d9b584b"
-+#Corresponds to 3.45.00.00_eng
-+TI_IPC_SRCREV = "9dd159d851496047b6833a5b7c71ed9ea95efc07"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
-
+On Wed, Feb 08, 2017 at 04:27:59PM -0500, Sam Nelson wrote:
+> multiprocmgr-test installs source files, host binaries and associated
+>     scripts (ti/examples/mpm/test)
+> multiprocmgr-rtos-test installs the C66x test images in the same
+> directory structure.
+> 
+> Other updates include
+> - Use of oe_runmake instead of make
+> - Added runtime dependency of multiprocmgr-rtos-test & bash
+> 
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> ---
+>  recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb | 24 +++++++++++++++++++-----
+>  recipes-ti/multiprocmgr/multiprocmgr-test_git.bb | 21 ++++++++++++++++-----
+>  2 files changed, 35 insertions(+), 10 deletions(-)
+> 
+> diff --git a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+> index 061790b..c88f0d7 100644
+> --- a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+> +++ b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+> @@ -6,22 +6,36 @@ require recipes-ti/multiprocmgr/multiprocmgr.inc
+>  
+>  DEPENDS = "ti-cgt6x-native"
+>  
+> -PR = "${INC_PR}.0"
+> +PR = "${INC_PR}.1"
+>  
+> -export LOCAL_SYSROOT="${STAGING_DIR_TARGET}"
+> -export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+> +PACKAGES =+ "${PN}-test"
+> +FILES_${PN}-test = "${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
+> +                    ${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/*.out"
+> +
+> +EXTRA_OEMAKE = "LOCAL_SYSROOT="${STAGING_DIR_TARGET}" \
+> +                C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+> +               "
+>  
+>  do_compile() {
+> -    make c66x
+> -    make test_c66x
+> +    oe_runmake c66x
+> +    oe_runmake test_c66x
+>  }
+>  
+>  do_install() {
+>      install -d ${D}${MPM_INSTALL_DIR_RECIPE}
+>      cp -pPrf ${S}/* ${D}${MPM_INSTALL_DIR_RECIPE}
+> +
+> +    # Copy C66x binaries
+> +    install -d ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin
+> +    cp ${S}/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
+> +        ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/
+> +    install -d ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin
+> +    cp ${S}/test/sync_test/c66x/bin/*.out \
+> +        ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/
+>  }
+>  
+>  FILES_${PN}-dev += "${MPM_INSTALL_DIR_RECIPE}"
+>  INSANE_SKIP_${PN}-dev = "arch"
+> +INSANE_SKIP_${PN}-test = "arch"
+>  
+>  ALLOW_EMPTY_${PN} = "1"
+> diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+> index 7ec8796..f01d651 100644
+> --- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+> +++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+> @@ -2,22 +2,33 @@ DESCRIPTION = "TI Multiproc Manager test code"
+>  
+>  include multiprocmgr.inc
+>  
+> -PR = "${INC_PR}.1"
+> +PR = "${INC_PR}.2"
+>  
+>  DEPENDS = "multiprocmgr cmem"
+>  RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
+> +RDEPENDS_${PN} += "multiprocmgr-rtos-test bash"
+>  
+>  CC += "-I${STAGING_KERNEL_DIR}/include"
+>  
+>  # Assuming the multiprocmgr kernel API is safe
+>  CC[vardepsexclude] = "STAGING_KERNEL_DIR"
+>  
+> +FILES_${PN} += "\
+> +    ${datadir}/ti/examples/mpm \
+> +"
+> +
+> +FILES_${PN}-dbg += "\
+> +    ${datadir}/ti/examples/mpm/*/.debug \
+> +"
+> +
+>  do_compile() {
+> -	make -C ${S} test
+> +	oe_runmake -C ${S} test
+>  }
+>  
+>  do_install() {
+> -	install -d ${D}${bindir}/
+> -	install -c -m 755 ${S}/test/filetestdemo/host/bin/demo_filetest ${D}${bindir}/mpm_demo_filetest
+> -	install -c -m 755 ${S}/test/sync_test/host/bin/sync_test ${D}${bindir}/mpm_sync_test
+> +	# Copy Sources and binary
+> +	install -d ${D}${datadir}/ti/examples/mpm/src
+> +	cp -r ${S}/src/mailbox ${D}${datadir}/ti/examples/mpm/src
+> +	cp -r ${S}/src/sync ${D}${datadir}/ti/examples/mpm/src
+> +	cp -r ${S}/test ${D}${datadir}/ti/examples/mpm
+>  }
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
