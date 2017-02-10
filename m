@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7BD51E009BC; Thu,  9 Feb 2017 18:09:37 -0800 (PST)
+	id 7CB91E009CA; Thu,  9 Feb 2017 18:09:37 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF785E009BC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E031DE009CA
 	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2017 18:09:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1B854529D2; Fri, 10 Feb 2017 02:09:30 +0000 (UTC)
+	id 9513552A22; Fri, 10 Feb 2017 02:09:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170210020930.1B854529D2@arago-project.org>
+Message-Id: <20170210020930.9513552A22@arago-project.org>
 Date: Fri, 10 Feb 2017 02:09:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : multiprocmgr-test: Add test c66x images, sources and scripts to package
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 10 Feb 2017 02:09:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3ab96808170dbd3347e751808883ce6024562b2a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3ab96808170dbd3347e751808883ce6024562b2a
+Branch: morty
+Commit: 952a788d17e08031848d9cea07f689c4a14b3a8a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=952a788d17e08031848d9cea07f689c4a14b3a8a
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Thu Feb  9 03:27:59 2017 +0000
