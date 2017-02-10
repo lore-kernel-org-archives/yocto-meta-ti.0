@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 583F9E00A25; Thu,  9 Feb 2017 18:10:14 -0800 (PST)
+	id 78F0AE00A25; Thu,  9 Feb 2017 18:10:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8CC15E00A73
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CD8BE009CA
 	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2017 18:10:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C002852A12; Fri, 10 Feb 2017 02:10:03 +0000 (UTC)
+	id AA34E529D2; Fri, 10 Feb 2017 02:10:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170210021003.C002852A12@arago-project.org>
+Message-Id: <20170210021003.AA34E529D2@arago-project.org>
 Date: Fri, 10 Feb 2017 02:10:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-test-pruss: Update to fix issue with make
+Subject: Sam Nelson : multiprocmgr-test: Add test c66x images, sources and scripts to package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,51 +38,120 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: b4800c6706e7b3ed71b9e5e1438d56da09515049
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4800c6706e7b3ed71b9e5e1438d56da09515049
+Commit: f9d3386df6ebdb2ce2574f76cde44c60ef0ad133
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9d3386df6ebdb2ce2574f76cde44c60ef0ad133
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Feb  9 03:51:10 2017 +0000
+Date:   Thu Feb  9 03:27:59 2017 +0000
 
-uio-test-pruss: Update to fix issue with make
+multiprocmgr-test: Add test c66x images, sources and scripts to package
 
-Add device option to build for specific device
-Make package Machine dependent
+multiprocmgr-test installs source files, host binaries and associated
+    scripts (ti/examples/mpm/test)
+multiprocmgr-rtos-test installs the C66x test images in the same
+directory structure.
+
+Other updates include
+- Use of oe_runmake instead of make
+- Added runtime dependency of multiprocmgr-rtos-test & bash
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/uio-test-pruss/uio-test-pruss_git.bb |   14 +++++++++++---
- 1 files changed, 11 insertions(+), 3 deletions(-)
+ recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb |   24 +++++++++++++++++----
+ recipes-ti/multiprocmgr/multiprocmgr-test_git.bb |   21 ++++++++++++++----
+ 2 files changed, 35 insertions(+), 10 deletions(-)
 
-diff --git a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-index 0a82d63..a342fe3 100644
---- a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-+++ b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-@@ -11,11 +11,19 @@ BRANCH = "master"
- SRC_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git;protocol=git;branch=${BRANCH}"
- LIC_FILES_CHKSUM = "file://Makefile;startline=1;endline=31;md5=0ee4f2c42eb6b04e37859bb55a18b144"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+index 061790b..c88f0d7 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+@@ -6,22 +6,36 @@ require recipes-ti/multiprocmgr/multiprocmgr.inc
  
--# Corresponds to version 01.00.00.00
--SRCREV = "f04b91b84331c9a12c897e4eb2836a0a3e3a5fae"
-+# Corresponds to version 01.00.00.00A
-+SRCREV = "88e78564ff9094ecb13b53d627fa6bfb25d9ac03"
-+
-+PR = "r1"
+ DEPENDS = "ti-cgt6x-native"
  
- COMPATIBLE_MACHINE = "omap-a15"
--EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR}"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+-export LOCAL_SYSROOT="${STAGING_DIR_TARGET}"
+-export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
++PACKAGES =+ "${PN}-test"
++FILES_${PN}-test = "${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
++                    ${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/*.out"
 +
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+DEVICE_NAME = ""
-+DEVICE_NAME_append_am57xx-evm = "am57xx"
-+
-+EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR} DEVICE=${DEVICE_NAME}"
++EXTRA_OEMAKE = "LOCAL_SYSROOT="${STAGING_DIR_TARGET}" \
++                C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
++               "
+ 
+ do_compile() {
+-    make c66x
+-    make test_c66x
++    oe_runmake c66x
++    oe_runmake test_c66x
+ }
  
  do_install() {
-     install -d ${D}${bindir}/
+     install -d ${D}${MPM_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${MPM_INSTALL_DIR_RECIPE}
++
++    # Copy C66x binaries
++    install -d ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin
++    cp ${S}/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
++        ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/
++    install -d ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin
++    cp ${S}/test/sync_test/c66x/bin/*.out \
++        ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/
+ }
+ 
+ FILES_${PN}-dev += "${MPM_INSTALL_DIR_RECIPE}"
+ INSANE_SKIP_${PN}-dev = "arch"
++INSANE_SKIP_${PN}-test = "arch"
+ 
+ ALLOW_EMPTY_${PN} = "1"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+index 7ec8796..f01d651 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+@@ -2,22 +2,33 @@ DESCRIPTION = "TI Multiproc Manager test code"
+ 
+ include multiprocmgr.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ DEPENDS = "multiprocmgr cmem"
+ RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
++RDEPENDS_${PN} += "multiprocmgr-rtos-test bash"
+ 
+ CC += "-I${STAGING_KERNEL_DIR}/include"
+ 
+ # Assuming the multiprocmgr kernel API is safe
+ CC[vardepsexclude] = "STAGING_KERNEL_DIR"
+ 
++FILES_${PN} += "\
++    ${datadir}/ti/examples/mpm \
++"
++
++FILES_${PN}-dbg += "\
++    ${datadir}/ti/examples/mpm/*/.debug \
++"
++
+ do_compile() {
+-	make -C ${S} test
++	oe_runmake -C ${S} test
+ }
+ 
+ do_install() {
+-	install -d ${D}${bindir}/
+-	install -c -m 755 ${S}/test/filetestdemo/host/bin/demo_filetest ${D}${bindir}/mpm_demo_filetest
+-	install -c -m 755 ${S}/test/sync_test/host/bin/sync_test ${D}${bindir}/mpm_sync_test
++	# Copy Sources and binary
++	install -d ${D}${datadir}/ti/examples/mpm/src
++	cp -r ${S}/src/mailbox ${D}${datadir}/ti/examples/mpm/src
++	cp -r ${S}/src/sync ${D}${datadir}/ti/examples/mpm/src
++	cp -r ${S}/test ${D}${datadir}/ti/examples/mpm
+ }
 
 
