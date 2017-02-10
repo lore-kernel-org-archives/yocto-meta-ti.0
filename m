@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3A0C2E009E2; Thu,  9 Feb 2017 18:09:35 -0800 (PST)
+	id 3C342E009D4; Thu,  9 Feb 2017 18:09:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E175FE009CD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2212E009CF
 	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2017 18:09:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C34CB52A3B; Fri, 10 Feb 2017 02:09:30 +0000 (UTC)
+	id 56E4952A12; Fri, 10 Feb 2017 02:09:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170210020930.C34CB52A3B@arago-project.org>
+Message-Id: <20170210020930.56E4952A12@arago-project.org>
 Date: Fri, 10 Feb 2017 02:09:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : uio-test-pruss: Update to fix issue with make
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 10 Feb 2017 02:09:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: 84b5d97201a2911c998a82cf3bed7a8eeb7dd3c3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=84b5d97201a2911c998a82cf3bed7a8eeb7dd3c3
+Branch: master
+Commit: 75f488a797cddc5bf956d9287652b4872abe68f3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=75f488a797cddc5bf956d9287652b4872abe68f3
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Thu Feb  9 03:51:10 2017 +0000
