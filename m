@@ -1,26 +1,37 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8FC39E006C6; Fri, 10 Feb 2017 09:16:34 -0800 (PST)
+	id 5F121E0082E; Mon, 13 Feb 2017 03:04:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9F72E00519
-	for <meta-ti@yoctoproject.org>; Fri, 10 Feb 2017 09:16:32 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 12D23529D1; Fri, 10 Feb 2017 17:16:32 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20170210171632.12D23529D1@arago-project.org>
-Date: Fri, 10 Feb 2017 17:16:32 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.9.9
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07116E00726
+	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 03:04:14 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v1DB4Ddg026630
+	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 05:04:13 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1DB4DIK024348
+	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 05:04:13 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 13 Feb 2017 05:04:13 -0600
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1DB4BJp003857;
+	Mon, 13 Feb 2017 05:04:12 -0600
+From: Karthik Ramanan <a0393906@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 13 Feb 2017 16:34:05 +0530
+Message-ID: <1486983845-145386-1-git-send-email-a0393906@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [krogoth] ti-sgx-ddk-um: enhance wl_display validation criterion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,51 +44,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2017 17:16:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 13 Feb 2017 11:04:17 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: morty
-Commit: 1941f65454fc3c88b2d26ae097c7d7e75e8d77ba
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1941f65454fc3c88b2d26ae097c7d7e75e8d77ba
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Feb 10 23:14:58 2017 +0000
-
-linux-ti-staging: update to 4.9.9
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index a4747e7..1355558 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index b7fd572..79f5ca7 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- BRANCH = "ti-rt-linux-4.9.y"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "739111e5d67871d08f9d7e643492bee40dce933c"
++SRCREV = "6019bf95ee30a65db6b27ea48e6ee65e8b16e0a6"
  
--SRCREV = "2c6eb7f68157e732f08e1b69fedee286958634e8"
-+SRCREV = "fca7cc6d34a3d18cbe5f54b77c0f5db12081acf8"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 37da32a..0c15c76 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- BRANCH = "ti-lsk-linux-4.9.y"
+ inherit update-rc.d
  
--SRCREV = "5482e867244d361b8f1e98916d28a6a6ba11b243"
--PV = "4.9.8+git${SRCPV}"
-+SRCREV = "b4aa954ead9260eaf7138755fc9d062a9f4630eb"
-+PV = "4.9.9+git${SRCPV}"
+-PR = "r19"
++PR = "r20"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ DEPENDS += "libdrm udev libgbm wayland libffi"
+-- 
+1.9.1
 
 
