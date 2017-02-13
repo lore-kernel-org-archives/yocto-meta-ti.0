@@ -1,37 +1,38 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5F121E0082E; Mon, 13 Feb 2017 03:04:17 -0800 (PST)
+	id 120FAE0086E; Mon, 13 Feb 2017 14:22:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07116E00726
-	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 03:04:14 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v1DB4Ddg026630
-	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 05:04:13 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1DB4DIK024348
-	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 05:04:13 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 13 Feb 2017 05:04:13 -0600
-Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1DB4BJp003857;
-	Mon, 13 Feb 2017 05:04:12 -0600
-From: Karthik Ramanan <a0393906@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 13 Feb 2017 16:34:05 +0530
-Message-ID: <1486983845-145386-1-git-send-email-a0393906@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [krogoth] ti-sgx-ddk-um: enhance wl_display validation criterion
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BDDB6E00754
+	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 14:22:56 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id EB22620B52;
+	Mon, 13 Feb 2017 22:22:55 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id Wb-GnDyNQ6GJ; Mon, 13 Feb 2017 22:22:55 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CB678208B1;
+	Mon, 13 Feb 2017 22:22:54 +0000 (UTC)
+Received: from gimli.denix (pippin [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 271B4162325;
+	Mon, 13 Feb 2017 17:22:54 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Mon, 13 Feb 2017 17:22:53 -0500
+Message-Id: <1487024573-96637-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] am180x-evm: update machine config to work with latest BSP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,37 +45,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2017 11:04:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 13 Feb 2017 22:22:59 -0000
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/am180x-evm.conf     | 4 +++-
+ recipes-bsp/u-boot/u-boot-ti.inc | 1 +
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index b7fd572..79f5ca7 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/${PV}"
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index f83814e..ef248a3 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -11,6 +11,8 @@ UBOOT_SUFFIX = "ais"
+ UBOOT_ENTRYPOINT = "0xc0008000"
+ UBOOT_LOADADDRESS = "0xc0008000"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "739111e5d67871d08f9d7e643492bee40dce933c"
-+SRCREV = "6019bf95ee30a65db6b27ea48e6ee65e8b16e0a6"
+-IMAGE_FSTYPES += "tar.gz"
++IMAGE_FSTYPES += "tar.xz"
  
- # There's only hardfp version available
- python __anonymous() {
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ SERIAL_CONSOLE = "115200 ttyS2"
++
++KERNEL_DEVICETREE = "da850-evm.dtb da850-lcdk.dtb"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index c53689e..7c19097 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -49,6 +49,7 @@ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
  
- inherit update-rc.d
+ SPL_BINARY = "MLO"
+ SPL_BINARY_k2e-hs-evm = ""
++SPL_BINARY_omapl138 = ""
+ SPL_UART_BINARY = "u-boot-spl.bin"
  
--PR = "r19"
-+PR = "r20"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
- 
- DEPENDS += "libdrm udev libgbm wayland libffi"
+ # Keystone specifics
 -- 
-1.9.1
+2.7.4
 
 
