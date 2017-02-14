@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E80B5E0086E; Mon, 13 Feb 2017 15:40:33 -0800 (PST)
+	id 60284E0086E; Mon, 13 Feb 2017 16:41:31 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BCD6BE00754
-	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 15:40:30 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CF5CE00754
+	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 16:41:25 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CCF725298B; Mon, 13 Feb 2017 23:40:29 +0000 (UTC)
+	id 8788452979; Tue, 14 Feb 2017 00:41:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170213234029.CCF725298B@arago-project.org>
-Date: Mon, 13 Feb 2017 23:40:29 +0000 (UTC)
+Message-Id: <20170214004121.8788452979@arago-project.org>
+Date: Tue, 14 Feb 2017 00:41:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 4.9.9
+Subject: Denys Dmytriyenko : am180x-evm: update machine config to work with latest BSP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,51 +33,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2017 23:40:34 -0000
+X-List-Received-Date: Tue, 14 Feb 2017 00:41:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: 1941f65454fc3c88b2d26ae097c7d7e75e8d77ba
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1941f65454fc3c88b2d26ae097c7d7e75e8d77ba
+Commit: f6f7275423dbd69f0fa91c5006dec698c3a33b86
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f6f7275423dbd69f0fa91c5006dec698c3a33b86
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Feb 10 23:14:58 2017 +0000
+Date:   Tue Feb 14 04:22:53 2017 +0000
 
-linux-ti-staging: update to 4.9.9
+am180x-evm: update machine config to work with latest BSP
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/am180x-evm.conf     |    4 +++-
+ recipes-bsp/u-boot/u-boot-ti.inc |    1 +
+ 2 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index a4747e7..1355558 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index f83814e..ef248a3 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -11,6 +11,8 @@ UBOOT_SUFFIX = "ais"
+ UBOOT_ENTRYPOINT = "0xc0008000"
+ UBOOT_LOADADDRESS = "0xc0008000"
  
- BRANCH = "ti-rt-linux-4.9.y"
+-IMAGE_FSTYPES += "tar.gz"
++IMAGE_FSTYPES += "tar.xz"
  
--SRCREV = "2c6eb7f68157e732f08e1b69fedee286958634e8"
-+SRCREV = "fca7cc6d34a3d18cbe5f54b77c0f5db12081acf8"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 37da32a..0c15c76 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
+ SERIAL_CONSOLE = "115200 ttyS2"
++
++KERNEL_DEVICETREE = "da850-evm.dtb da850-lcdk.dtb"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index c53689e..7c19097 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -49,6 +49,7 @@ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
  
- BRANCH = "ti-lsk-linux-4.9.y"
+ SPL_BINARY = "MLO"
+ SPL_BINARY_k2e-hs-evm = ""
++SPL_BINARY_omapl138 = ""
+ SPL_UART_BINARY = "u-boot-spl.bin"
  
--SRCREV = "5482e867244d361b8f1e98916d28a6a6ba11b243"
--PV = "4.9.8+git${SRCPV}"
-+SRCREV = "b4aa954ead9260eaf7138755fc9d062a9f4630eb"
-+PV = "4.9.9+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ # Keystone specifics
 
 
