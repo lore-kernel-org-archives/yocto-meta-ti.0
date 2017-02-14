@@ -1,26 +1,46 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 60284E0086E; Mon, 13 Feb 2017 16:41:31 -0800 (PST)
+	id 72C52E00953; Tue, 14 Feb 2017 03:50:39 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CF5CE00754
-	for <meta-ti@yoctoproject.org>; Mon, 13 Feb 2017 16:41:25 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 8788452979; Tue, 14 Feb 2017 00:41:21 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20170214004121.8788452979@arago-project.org>
-Date: Tue, 14 Feb 2017 00:41:21 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am180x-evm: update machine config to work with latest BSP
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 196DFE0089D
+	for <meta-ti@yoctoproject.org>; Tue, 14 Feb 2017 03:50:37 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v1EBobng001509
+	for <meta-ti@yoctoproject.org>; Tue, 14 Feb 2017 05:50:37 -0600
+Received: from dbdlxv05.itg.ti.com (dbdlxv05.itg.ti.com [172.24.171.60])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1EBoap0017755
+	for <meta-ti@yoctoproject.org>; Tue, 14 Feb 2017 05:50:37 -0600
+Received: from DBDE72.ent.ti.com (dbdmailx.itg.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1EBoXeF014699
+	for <meta-ti@yoctoproject.org>; Tue, 14 Feb 2017 17:20:35 +0530
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
+	14.03.0294.000; Tue, 14 Feb 2017 17:20:33 +0530
+From: "Balagopalakrishnan, Anand" <anandb@ti.com>
+To: "R, Karthik" <karthik.ramanan@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>, "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [krogoth] ti-sgx-ddk-um: enhance wl_display
+	validation	criterion
+Thread-Index: AQHShej51FnQm+8hP0ibgPRxaTX+vKFoZQEQ
+Date: Tue, 14 Feb 2017 11:50:32 +0000
+Message-ID: <05CF4794C98B244ABDC620C109037622C03C431A@DBDE04.ent.ti.com>
+References: <1486983845-145386-1-git-send-email-a0393906@ti.com>
+In-Reply-To: <1486983845-145386-1-git-send-email-a0393906@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.171.114]
+MIME-Version: 1.0
+Subject: Re: [krogoth] ti-sgx-ddk-um: enhance wl_display validation	criterion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,52 +53,61 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2017 00:41:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 14 Feb 2017 11:50:39 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: morty-next
-Commit: f6f7275423dbd69f0fa91c5006dec698c3a33b86
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f6f7275423dbd69f0fa91c5006dec698c3a33b86
+Denys,
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Feb 14 04:22:53 2017 +0000
+This patch is applicable for morty as well. Please pull to both branches.
 
-am180x-evm: update machine config to work with latest BSP
+Regards,
+Anand
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+-----Original Message-----
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of R, Karthik
+Sent: Monday, February 13, 2017 4:34 PM
+To: meta-ti@yoctoproject.org
+Subject: [meta-ti] [krogoth] ti-sgx-ddk-um: enhance wl_display validation c=
+riterion
 
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- conf/machine/am180x-evm.conf     |    4 +++-
- recipes-bsp/u-boot/u-boot-ti.inc |    1 +
- 2 files changed, 4 insertions(+), 1 deletions(-)
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recip=
+es-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index b7fd572..79f5ca7 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+ BRANCH =3D "ti-img-sgx/${PV}"
+=20
+ SRC_URI =3D "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=
+=3Dgit;branch=3D${BRANCH}"
+-SRCREV =3D "739111e5d67871d08f9d7e643492bee40dce933c"
++SRCREV =3D "6019bf95ee30a65db6b27ea48e6ee65e8b16e0a6"
+=20
+ # There's only hardfp version available  python __anonymous() { @@ -31,7 +=
+31,7 @@ INITSCRIPT_PARAMS =3D "defaults 8"
+=20
+ inherit update-rc.d
+=20
+-PR =3D "r19"
++PR =3D "r20"
+ PROVIDES +=3D "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk=
+-um-linux"
+=20
+ DEPENDS +=3D "libdrm udev libgbm wayland libffi"
+--
+1.9.1
 
-diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
-index f83814e..ef248a3 100644
---- a/conf/machine/am180x-evm.conf
-+++ b/conf/machine/am180x-evm.conf
-@@ -11,6 +11,8 @@ UBOOT_SUFFIX = "ais"
- UBOOT_ENTRYPOINT = "0xc0008000"
- UBOOT_LOADADDRESS = "0xc0008000"
- 
--IMAGE_FSTYPES += "tar.gz"
-+IMAGE_FSTYPES += "tar.xz"
- 
- SERIAL_CONSOLE = "115200 ttyS2"
-+
-+KERNEL_DEVICETREE = "da850-evm.dtb da850-lcdk.dtb"
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index c53689e..7c19097 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -49,6 +49,7 @@ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
- 
- SPL_BINARY = "MLO"
- SPL_BINARY_k2e-hs-evm = ""
-+SPL_BINARY_omapl138 = ""
- SPL_UART_BINARY = "u-boot-spl.bin"
- 
- # Keystone specifics
-
+--
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
 
