@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EC656E009B8; Wed, 15 Feb 2017 11:41:31 -0800 (PST)
+	id ECF2BE009D4; Wed, 15 Feb 2017 11:41:31 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8D0DE009B8
-	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 11:41:27 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10310E009D4
+	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 11:41:28 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9CE4652970; Wed, 15 Feb 2017 19:41:26 +0000 (UTC)
+	id 0EC8C52993; Wed, 15 Feb 2017 19:41:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170215194126.9CE4652970@arago-project.org>
-Date: Wed, 15 Feb 2017 19:41:26 +0000 (UTC)
+Message-Id: <20170215194127.0EC8C52993@arago-project.org>
+Date: Wed, 15 Feb 2017 19:41:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am180x-evm: update machine config to work with latest BSP
+Subject: Karthik Ramanan : ipumm-fw: Updated to MJPEG encoder
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,47 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 18697ca48bef2b0a23fe3d8433bcc1f7bd30e624
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=18697ca48bef2b0a23fe3d8433bcc1f7bd30e624
+Commit: 169c833bf2dc57107086272fe54508923b2f399d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=169c833bf2dc57107086272fe54508923b2f399d
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Feb 14 04:22:53 2017 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Wed Feb 15 17:34:37 2017 +0000
 
-am180x-evm: update machine config to work with latest BSP
+ipumm-fw: Updated to MJPEG encoder
 
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am180x-evm.conf     |    4 +++-
- recipes-bsp/u-boot/u-boot-ti.inc |    1 +
- 2 files changed, 4 insertions(+), 1 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
-index f83814e..ef248a3 100644
---- a/conf/machine/am180x-evm.conf
-+++ b/conf/machine/am180x-evm.conf
-@@ -11,6 +11,8 @@ UBOOT_SUFFIX = "ais"
- UBOOT_ENTRYPOINT = "0xc0008000"
- UBOOT_LOADADDRESS = "0xc0008000"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 2dd4962..26876d4 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
  
--IMAGE_FSTYPES += "tar.gz"
-+IMAGE_FSTYPES += "tar.xz"
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
- SERIAL_CONSOLE = "115200 ttyS2"
-+
-+KERNEL_DEVICETREE = "da850-evm.dtb da850-lcdk.dtb"
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index c53689e..7c19097 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -49,6 +49,7 @@ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+-SRCREV = "42fd71596b161e79e017e00741433e84705a28a6"
++SRCREV = "97efa6fa9fc108096fcc18404a2d0ef43f9304ac"
  
- SPL_BINARY = "MLO"
- SPL_BINARY_k2e-hs-evm = ""
-+SPL_BINARY_omapl138 = ""
- SPL_UART_BINARY = "u-boot-spl.bin"
+ S = "${WORKDIR}/git"
  
- # Keystone specifics
+ PV = "3.00.12.00"
+-PR = "r1"
++PR = "r2"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
 
 
