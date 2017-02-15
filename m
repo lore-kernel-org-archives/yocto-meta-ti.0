@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 88472E009B8; Wed, 15 Feb 2017 12:15:40 -0800 (PST)
+	id 8ECEEE009CA; Wed, 15 Feb 2017 12:15:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C757FE009CA
-	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 12:15:37 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4ED88E009B8
+	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 12:15:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1819352A4B; Wed, 15 Feb 2017 20:15:36 +0000 (UTC)
+	id AEC4E52A20; Wed, 15 Feb 2017 20:15:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170215201536.1819352A4B@arago-project.org>
-Date: Wed, 15 Feb 2017 20:15:36 +0000 (UTC)
+Message-Id: <20170215201535.AEC4E52A20@arago-project.org>
+Date: Wed, 15 Feb 2017 20:15:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : libdce: Update SRCREV
+Subject: Denys Dmytriyenko : am180x-evm: update machine config to work with latest BSP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: bffa5941eff60bd0fc27c0e49f8308d84f630cc7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bffa5941eff60bd0fc27c0e49f8308d84f630cc7
+Commit: 0ea919c0099d9e6e99b28177a9fb22e7b3e5ce58
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0ea919c0099d9e6e99b28177a9fb22e7b3e5ce58
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Wed Feb 15 17:34:38 2017 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Feb 14 04:22:53 2017 +0000
 
-libdce: Update SRCREV
+am180x-evm: update machine config to work with latest BSP
 
-This change will include:
- * New interface file for MJPEG Encoder
- * Increase max instances of Engines
-
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-multimedia/libdce/libdce_3.00.12.00.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/am180x-evm.conf     |    4 +++-
+ recipes-bsp/u-boot/u-boot-ti.inc |    1 +
+ 2 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-multimedia/libdce/libdce_3.00.12.00.bb b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
-index b1bbeab..1a2c104 100644
---- a/recipes-multimedia/libdce/libdce_3.00.12.00.bb
-+++ b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
-@@ -7,9 +7,9 @@ inherit autotools pkgconfig
- DEPENDS = "libdrm ti-ipc"
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index f83814e..ef248a3 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -11,6 +11,8 @@ UBOOT_SUFFIX = "ais"
+ UBOOT_ENTRYPOINT = "0xc0008000"
+ UBOOT_LOADADDRESS = "0xc0008000"
  
- SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
--SRCREV = "c51f144b079836afb868bff44afe7308248a0217"
-+SRCREV = "398dd27e7f3181fff9e3d910b418c69f1493f52f"
+-IMAGE_FSTYPES += "tar.gz"
++IMAGE_FSTYPES += "tar.xz"
  
--PR = "r1"
-+PR = "r4"
+ SERIAL_CONSOLE = "115200 ttyS2"
++
++KERNEL_DEVICETREE = "da850-evm.dtb da850-lcdk.dtb"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index c53689e..7c19097 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -49,6 +49,7 @@ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
  
- S = "${WORKDIR}/git"
- EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
+ SPL_BINARY = "MLO"
+ SPL_BINARY_k2e-hs-evm = ""
++SPL_BINARY_omapl138 = ""
+ SPL_UART_BINARY = "u-boot-spl.bin"
+ 
+ # Keystone specifics
 
 
