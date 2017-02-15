@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8587EE00992; Wed, 15 Feb 2017 12:15:40 -0800 (PST)
+	id 88472E009B8; Wed, 15 Feb 2017 12:15:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5099BE009C3
-	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 12:15:36 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C757FE009CA
+	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 12:15:37 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 02EB152A41; Wed, 15 Feb 2017 20:15:35 +0000 (UTC)
+	id 1819352A4B; Wed, 15 Feb 2017 20:15:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170215201536.02EB152A41@arago-project.org>
-Date: Wed, 15 Feb 2017 20:15:35 +0000 (UTC)
+Message-Id: <20170215201536.1819352A4B@arago-project.org>
+Date: Wed, 15 Feb 2017 20:15:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: Updated to MJPEG encoder
+Subject: Karthik Ramanan : libdce: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: 502ffcb5a8f3967fd2a10a4b337875b7d3d801da
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=502ffcb5a8f3967fd2a10a4b337875b7d3d801da
+Commit: bffa5941eff60bd0fc27c0e49f8308d84f630cc7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bffa5941eff60bd0fc27c0e49f8308d84f630cc7
 
 Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Wed Feb 15 17:34:37 2017 +0000
+Date:   Wed Feb 15 17:34:38 2017 +0000
 
-ipumm-fw: Updated to MJPEG encoder
+libdce: Update SRCREV
+
+This change will include:
+ * New interface file for MJPEG Encoder
+ * Increase max instances of Engines
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    4 ++--
+ recipes-multimedia/libdce/libdce_3.00.12.00.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 85dfc26..942ab93 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+diff --git a/recipes-multimedia/libdce/libdce_3.00.12.00.bb b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
+index b1bbeab..1a2c104 100644
+--- a/recipes-multimedia/libdce/libdce_3.00.12.00.bb
++++ b/recipes-multimedia/libdce/libdce_3.00.12.00.bb
+@@ -7,9 +7,9 @@ inherit autotools pkgconfig
+ DEPENDS = "libdrm ti-ipc"
  
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
+-SRCREV = "c51f144b079836afb868bff44afe7308248a0217"
++SRCREV = "398dd27e7f3181fff9e3d910b418c69f1493f52f"
  
--SRCREV = "42fd71596b161e79e017e00741433e84705a28a6"
-+SRCREV = "97efa6fa9fc108096fcc18404a2d0ef43f9304ac"
+-PR = "r1"
++PR = "r4"
  
  S = "${WORKDIR}/git"
- 
- PV = "3.00.12.00"
--PR = "r1"
-+PR = "r2"
- 
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+ EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
 
 
