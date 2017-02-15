@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 99332E009CE; Wed, 15 Feb 2017 12:15:38 -0800 (PST)
+	id 80EECE009F0; Wed, 15 Feb 2017 12:15:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C79FE00985
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4DAADE00992
 	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 12:15:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C1B3152A33; Wed, 15 Feb 2017 20:15:35 +0000 (UTC)
+	id D77DA52A34; Wed, 15 Feb 2017 20:15:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170215201535.C1B3152A33@arago-project.org>
+Message-Id: <20170215201535.D77DA52A34@arago-project.org>
 Date: Wed, 15 Feb 2017 20:15:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Dan Murphy : linux-ti-staging: update to 4.9.10
+Subject: Denys Dmytriyenko : conf/machine: add LCD-specific DTB entries for dra7/ am57/k2g
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,52 +33,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2017 20:15:38 -0000
+X-List-Received-Date: Wed, 15 Feb 2017 20:15:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: b1c37b45870a0771f74acf019d1c6f8f16701cc5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b1c37b45870a0771f74acf019d1c6f8f16701cc5
+Commit: c7c35e3a27a8250e2fea83f7528dcc6a30d33a91
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c7c35e3a27a8250e2fea83f7528dcc6a30d33a91
 
-Author: Dan Murphy <dmurphy@ti.com>
-Date:   Wed Feb 15 19:35:51 2017 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Feb 15 12:31:58 2017 +0000
 
-linux-ti-staging: update to 4.9.10
+conf/machine: add LCD-specific DTB entries for dra7/am57/k2g
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/am57xx-evm.conf |    4 ++--
+ conf/machine/dra7xx-evm.conf |    8 ++++----
+ conf/machine/k2g-evm.conf    |    2 +-
+ 3 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index 1355558..c6c0695 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index ec63418..eef98f2 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -14,8 +14,8 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
  
- BRANCH = "ti-rt-linux-4.9.y"
+ KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb \
+                     am57xx-evm.dtb am57xx-evm-reva3.dtb \
+-                    am571x-idk.dtb \
+-                    am572x-idk.dtb"
++                    am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb \
++                    am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb"
  
--SRCREV = "fca7cc6d34a3d18cbe5f54b77c0f5db12081acf8"
-+SRCREV = "68704903155296c0b09ce0ea0de8909e7592de65"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 0c15c76..416420c 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
+ UBOOT_MACHINE = "am57xx_evm_config"
  
- BRANCH = "ti-lsk-linux-4.9.y"
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 6049914..86d2dbf 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -12,10 +12,10 @@ SERIAL_CONSOLE = ""
+ SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
  
--SRCREV = "b4aa954ead9260eaf7138755fc9d062a9f4630eb"
--PV = "4.9.9+git${SRCPV}"
-+SRCREV = "1c74e8801cf58a30394ae92236895599f2c77253"
-+PV = "4.9.10+git${SRCPV}"
+-KERNEL_DEVICETREE = "dra7-evm.dtb \
+-                    dra72-evm.dtb \
+-                    dra72-evm-revc.dtb \
+-                    dra71-evm.dtb"
++KERNEL_DEVICETREE = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb \
++                    dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
++                    dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb \
++                    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ UBOOT_MACHINE = "dra7xx_evm_config"
+ 
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+index b8e55e4..d7bf609 100644
+--- a/conf/machine/k2g-evm.conf
++++ b/conf/machine/k2g-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/k2g.inc
+ 
+ MACHINE_FEATURES += "alsa opencl"
+ 
+-KERNEL_DEVICETREE = "keystone-k2g-evm.dtb keystone-k2g-ice.dtb"
++KERNEL_DEVICETREE = "keystone-k2g-evm.dtb keystone-k2g-evm-lcd.dtb keystone-k2g-ice.dtb"
+ 
+ UBOOT_MACHINE = "k2g_evm_config"
+ 
 
 
