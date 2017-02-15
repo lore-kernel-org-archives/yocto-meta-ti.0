@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E09F0E009CE; Wed, 15 Feb 2017 11:41:31 -0800 (PST)
+	id E4C0EE009CA; Wed, 15 Feb 2017 11:41:31 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14724E00A30
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA077E009D7
 	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2017 11:41:27 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DAE7E52980; Wed, 15 Feb 2017 19:41:26 +0000 (UTC)
+	id 6B5205209B; Wed, 15 Feb 2017 19:41:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170215194126.DAE7E52980@arago-project.org>
+Message-Id: <20170215194126.6B5205209B@arago-project.org>
 Date: Wed, 15 Feb 2017 19:41:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine: add LCD-specific DTB entries for dra7/ am57/k2g
+Subject: Karthik Ramanan : ti-sgx-ddk-um: enhance wl_display validation criterion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,69 +40,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 99913c5a6cfb18f291ecd9678b03b02d44e46968
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=99913c5a6cfb18f291ecd9678b03b02d44e46968
+Commit: 2293842abeeadef0a649d9609d268fe9aa054a54
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2293842abeeadef0a649d9609d268fe9aa054a54
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Feb 15 12:31:58 2017 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Mon Feb 13 17:04:05 2017 +0000
 
-conf/machine: add LCD-specific DTB entries for dra7/am57/k2g
+ti-sgx-ddk-um: enhance wl_display validation criterion
 
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am57xx-evm.conf |    4 ++--
- conf/machine/dra7xx-evm.conf |    8 ++++----
- conf/machine/k2g-evm.conf    |    2 +-
- 3 files changed, 7 insertions(+), 7 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index ec63418..eef98f2 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -14,8 +14,8 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 95c513d..1cab0e1 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb \
-                     am57xx-evm.dtb am57xx-evm-reva3.dtb \
--                    am571x-idk.dtb \
--                    am572x-idk.dtb"
-+                    am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb \
-+                    am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "739111e5d67871d08f9d7e643492bee40dce933c"
++SRCREV = "6019bf95ee30a65db6b27ea48e6ee65e8b16e0a6"
  
- UBOOT_MACHINE = "am57xx_evm_config"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 6049914..86d2dbf 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -12,10 +12,10 @@ SERIAL_CONSOLE = ""
- SERIAL_CONSOLES = "115200;ttyS0 115200;ttyO0"
- SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ inherit update-rc.d
  
--KERNEL_DEVICETREE = "dra7-evm.dtb \
--                    dra72-evm.dtb \
--                    dra72-evm-revc.dtb \
--                    dra71-evm.dtb"
-+KERNEL_DEVICETREE = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb \
-+                    dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
-+                    dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb \
-+                    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb"
+-PR = "r19"
++PR = "r20"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
- UBOOT_MACHINE = "dra7xx_evm_config"
- 
-diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-index b8e55e4..d7bf609 100644
---- a/conf/machine/k2g-evm.conf
-+++ b/conf/machine/k2g-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/k2g.inc
- 
- MACHINE_FEATURES += "alsa opencl"
- 
--KERNEL_DEVICETREE = "keystone-k2g-evm.dtb keystone-k2g-ice.dtb"
-+KERNEL_DEVICETREE = "keystone-k2g-evm.dtb keystone-k2g-evm-lcd.dtb keystone-k2g-ice.dtb"
- 
- UBOOT_MACHINE = "k2g_evm_config"
- 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
