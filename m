@@ -1,27 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3DCEBE00566; Thu, 16 Feb 2017 12:31:54 -0800 (PST)
+	id 4001BE004A0; Thu, 16 Feb 2017 12:31:54 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
-	*  2.5 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 180B1E0050B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16AD4E004A0
 	for <meta-ti@yoctoproject.org>; Thu, 16 Feb 2017 12:31:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EEB3852A66; Thu, 16 Feb 2017 20:31:44 +0000 (UTC)
+	id D0E6652A69; Thu, 16 Feb 2017 20:31:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170216203144.EEB3852A66@arago-project.org>
+Message-Id: <20170216203144.D0E6652A69@arago-project.org>
 Date: Thu, 16 Feb 2017 20:31:44 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-cgt-pru: update to version 2.1.4
+Subject: Sam Nelson : cmem: Update to new version 4.14.0.0_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,69 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: c6c98984843d222b696f80550c9a82e01bd73f2a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c6c98984843d222b696f80550c9a82e01bd73f2a
+Commit: 217cf4cd640e6ddd6419ae08a7a5a58b6092eb00
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=217cf4cd640e6ddd6419ae08a7a5a58b6092eb00
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Feb 16 21:28:31 2017 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Thu Feb 16 21:24:18 2017 +0000
 
-ti-cgt-pru: update to version 2.1.4
+cmem: Update to new version 4.14.0.0_eng
 
-* The old license file, LICENSE.txt, has been removed in this release,
-  so use the HTML manifest for the license.
+Has update to changes related to Kernel 4.9
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../{ti-cgt-pru_2.1.1.bb => ti-cgt-pru_2.1.4.bb}   |   16 ++++++++++------
- 1 files changed, 10 insertions(+), 6 deletions(-)
+ recipes-bsp/cmem/cmem.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb b/recipes-ti/devtools/ti-cgt-pru_2.1.4.bb
-similarity index 66%
-rename from recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
-rename to recipes-ti/devtools/ti-cgt-pru_2.1.4.bb
-index 049682f..5667ea2 100644
---- a/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
-+++ b/recipes-ti/devtools/ti-cgt-pru_2.1.4.bb
-@@ -2,8 +2,8 @@ DESCRIPTION = "TI PRU Code Generation Tools"
- HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
- LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index aa9c8f2..b6ffb27 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
  
--LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
--LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
-+LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.1.x_manifest.html;md5=d7fea45a7968939ff953ae8a1e6719f4"
-+LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.1.x_manifest.html;md5=d7fea45a7968939ff953ae8a1e6719f4"
+ BRANCH = "lu-next"
+-# This corresponds to version 4.13.00.01_eng
+-SRCREV = "1389059f01eabc1e853a384f0e5f51c4f3e4f197"
++# This corresponds to version 4.14.00.00_eng
++SRCREV = "b514a99ac45c64f0439282d0774d7cff5def4c6f"
  
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-unpack.inc
-@@ -18,11 +18,11 @@ BINFILE_NAME_class-target = "cgt-pru-arm"
+-PV = "4.13.00.01+git${SRCPV}"
++PV = "4.14.00.00+git${SRCPV}"
  
- SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
  
--SRC_URI[cgt-pru-x86.md5sum] = "d9923acea12dc41fc975c381804bd5ed"
--SRC_URI[cgt-pru-x86.sha256sum] = "bbea68a6e793156cfb4874777bfd41a32b20172d3a8f61db6aed33a697a58e30"
-+SRC_URI[cgt-pru-x86.md5sum] = "496b32b9804cf5b5b293dd938f7c5339"
-+SRC_URI[cgt-pru-x86.sha256sum] = "c80dbf35e7401f4c122ff25cc2f6b5db496607782fb4583cee8663a2763f4472"
- 
--SRC_URI[cgt-pru-arm.md5sum] = "3b97df4966715bdb50f9a9fc58fe6b24"
--SRC_URI[cgt-pru-arm.sha256sum] = "819a4680296fabf1ae0d4e0184276f8ab5324621d35388026d1b678ea71040c9"
-+SRC_URI[cgt-pru-arm.md5sum] = "b13bf0cdf484102cdfcb92a81b8092a2"
-+SRC_URI[cgt-pru-arm.sha256sum] = "c125bbe4e805b830e5d746ade929dc1f202f25a6863d5005ed97cc5a82e26754"
- 
- do_install() {
-     install -d ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}
-@@ -40,6 +40,10 @@ FILES_${PN}-dbg = "${TI_CGT_PRU_INSTALL_DIR_RECIPE}/bin/.debug \
-                    ${TI_CGT_PRU_INSTALL_DIR_RECIPE}/lib/.debug \
- "
- 
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+
- INSANE_SKIP_${PN} += "arch staticdev already-stripped"
- 
- BBCLASSEXTEND = "native nativesdk"
 
 
