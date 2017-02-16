@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4001BE004A0; Thu, 16 Feb 2017 12:31:54 -0800 (PST)
+	id 07AD6E00510; Thu, 16 Feb 2017 14:05:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16AD4E004A0
-	for <meta-ti@yoctoproject.org>; Thu, 16 Feb 2017 12:31:46 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D0E6652A69; Thu, 16 Feb 2017 20:31:44 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7BF7E004A0
+	for <meta-ti@yoctoproject.org>; Thu, 16 Feb 2017 14:04:57 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5938820B64;
+	Thu, 16 Feb 2017 22:04:56 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 4hK85z4eqFGC; Thu, 16 Feb 2017 22:04:56 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 306A3209A4;
+	Thu, 16 Feb 2017 22:04:54 +0000 (UTC)
+Received: from gimli.denix (pippin [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 4FB9C162374;
+	Thu, 16 Feb 2017 17:04:53 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20170216203144.D0E6652A69@arago-project.org>
-Date: Thu, 16 Feb 2017 20:31:44 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cmem: Update to new version 4.14.0.0_eng
+Date: Thu, 16 Feb 2017 17:04:51 -0500
+Message-Id: <1487282691-79592-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] linux-ti-staging: update with latest rpmsg merge to unblock KS2 MPM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +45,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 20:31:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 16 Feb 2017 22:05:01 -0000
 
-Module: meta-ti
-Branch: morty-next
-Commit: 217cf4cd640e6ddd6419ae08a7a5a58b6092eb00
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=217cf4cd640e6ddd6419ae08a7a5a58b6092eb00
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Feb 16 21:24:18 2017 +0000
-
-cmem: Update to new version 4.14.0.0_eng
-
-Has update to changes related to Kernel 4.9
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Cc: Dan Murphy <dmurphy@ti.com>
 ---
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- recipes-bsp/cmem/cmem.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index aa9c8f2..b6ffb27 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index c6c0695..87fa60e 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
- BRANCH = "lu-next"
--# This corresponds to version 4.13.00.01_eng
--SRCREV = "1389059f01eabc1e853a384f0e5f51c4f3e4f197"
-+# This corresponds to version 4.14.00.00_eng
-+SRCREV = "b514a99ac45c64f0439282d0774d7cff5def4c6f"
+ BRANCH = "ti-rt-linux-4.9.y"
  
--PV = "4.13.00.01+git${SRCPV}"
-+PV = "4.14.00.00+git${SRCPV}"
+-SRCREV = "68704903155296c0b09ce0ea0de8909e7592de65"
++SRCREV = "3749c8001ac5f67bc56383f106c43cdcfa541d42"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 416420c..110f34b 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -53,11 +53,11 @@ S = "${WORKDIR}/git"
  
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+ BRANCH = "ti-lsk-linux-4.9.y"
  
+-SRCREV = "1c74e8801cf58a30394ae92236895599f2c77253"
++SRCREV = "7a7b9948b82972a3181aa8c798b85af3bcb76a9a"
+ PV = "4.9.10+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+-- 
+2.7.4
 
 
