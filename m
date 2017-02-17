@@ -1,40 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F8BCE00566; Fri, 17 Feb 2017 11:24:16 -0800 (PST)
+	id 06E30E009A7; Fri, 17 Feb 2017 15:20:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08414E0050B
-	for <meta-ti@yoctoproject.org>; Fri, 17 Feb 2017 11:24:14 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6133220B97;
-	Fri, 17 Feb 2017 19:24:13 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id EjDYiVg7nC4Z; Fri, 17 Feb 2017 19:24:13 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3E9A620B96;
-	Fri, 17 Feb 2017 19:24:12 +0000 (UTC)
-Received: from gimli.denix (pippin [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 46FA416238B;
-	Fri, 17 Feb 2017 14:24:11 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56A9FE00726
+	for <meta-ti@yoctoproject.org>; Fri, 17 Feb 2017 15:19:58 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 5A33B529CD; Fri, 17 Feb 2017 23:19:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 17 Feb 2017 14:24:07 -0500
-Message-Id: <1487359447-64106-2-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1487359447-64106-1-git-send-email-denys@ti.com>
-References: <1487359447-64106-1-git-send-email-denys@ti.com>
-Subject: [morty/master][PATCH 2/2] linux-ti-staging: update to ti2017.00-rc1 tag
+Message-Id: <20170217231957.5A33B529CD@arago-project.org>
+Date: Fri, 17 Feb 2017 23:19:57 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2017.00-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,12 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2017 19:24:16 -0000
+X-List-Received-Date: Fri, 17 Feb 2017 23:20:02 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: d99bd573c3da91bd590100ce5e8e054bb3ffb318
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d99bd573c3da91bd590100ce5e8e054bb3ffb318
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Feb 18 01:24:07 2017 +0000
+
+linux-ti-staging: update to ti2017.00-rc1 tag
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    |    4 ++--
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
@@ -83,7 +82,5 @@ index 110f34b..acdbff4 100644
  PR = "${MACHINE_KERNEL_PR}"
  
  KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
--- 
-2.7.4
 
 
