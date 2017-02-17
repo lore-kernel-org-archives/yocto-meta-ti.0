@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6537BE0050B; Fri, 17 Feb 2017 10:26:01 -0800 (PST)
+	id 633F5E00726; Fri, 17 Feb 2017 10:26:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 06FB8E0050B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0864EE00510
 	for <meta-ti@yoctoproject.org>; Fri, 17 Feb 2017 10:25:58 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D20EA52A05; Fri, 17 Feb 2017 18:25:55 +0000 (UTC)
+	id 0E906529D5; Fri, 17 Feb 2017 18:25:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170217182555.D20EA52A05@arago-project.org>
-Date: Fri, 17 Feb 2017 18:25:55 +0000 (UTC)
+Message-Id: <20170217182555.0E906529D5@arago-project.org>
+Date: Fri, 17 Feb 2017 18:25:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : conf/machine: bump max_leb_cnt for am3 and am4
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 17 Feb 2017 18:26:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: 75f58488d8ee600ad361c92fec60da5ab33b0ed3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=75f58488d8ee600ad361c92fec60da5ab33b0ed3
+Branch: master
+Commit: 13bff16fc305e12805026ee0dc30d5cde567b382
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=13bff16fc305e12805026ee0dc30d5cde567b382
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Feb 17 23:53:34 2017 +0000
