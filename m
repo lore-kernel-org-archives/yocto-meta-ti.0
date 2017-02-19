@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 94D9FE009F8; Sat, 18 Feb 2017 16:23:07 -0800 (PST)
+	id BAA0BE009F8; Sat, 18 Feb 2017 16:43:44 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42278E009F5
-	for <meta-ti@yoctoproject.org>; Sat, 18 Feb 2017 16:23:07 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96B8EE009F5
+	for <meta-ti@yoctoproject.org>; Sat, 18 Feb 2017 16:43:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 31E2B529D5; Sun, 19 Feb 2017 00:23:06 +0000 (UTC)
+	id 4C4BF52975; Sun, 19 Feb 2017 00:43:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170219002306.31E2B529D5@arago-project.org>
-Date: Sun, 19 Feb 2017 00:23:06 +0000 (UTC)
+Message-Id: <20170219004339.4C4BF52975@arago-project.org>
+Date: Sun, 19 Feb 2017 00:43:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine: bump max_leb_cnt for am3
+Subject: Denys Dmytriyenko : u-boot-ti.inc: restructure SPL/UART variables, disable k2e-hs-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,40 +33,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Feb 2017 00:23:07 -0000
+X-List-Received-Date: Sun, 19 Feb 2017 00:43:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 243b85e8dac0d32847c648181c5466ecbc79bfc7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=243b85e8dac0d32847c648181c5466ecbc79bfc7
+Branch: morty
+Commit: 3e118a8b4b0ab2dbbd97a3ded1f621ba68735915
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e118a8b4b0ab2dbbd97a3ded1f621ba68735915
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 18 19:21:04 2017 -0500
+Date:   Sat Feb 18 19:42:31 2017 -0500
 
-conf/machine: bump max_leb_cnt for am3
-
-Previous commit meant to increase it more than just by 200...
+u-boot-ti.inc: restructure SPL/UART variables, disable k2e-hs-evm
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti.inc |   14 ++++++++------
+ 1 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 841e4d2..86a828c 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6200"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 7000"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 7c19097..0c0b6e8 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -42,19 +42,21 @@ S = "${WORKDIR}/git"
+ TI_SECURE_DEV_PKG ?= ""
+ export TI_SECURE_DEV_PKG
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+-# SPL (Second Program Loader) to be loaded over UART
+-SPL_UART_BINARY ?= ""
+-SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+-SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+-
++# SPL (Second Program Loader)
+ SPL_BINARY = "MLO"
+ SPL_BINARY_k2e-hs-evm = ""
+ SPL_BINARY_omapl138 = ""
++
++# SPL (Second Program Loader) to be loaded over UART
+ SPL_UART_BINARY = "u-boot-spl.bin"
++SPL_UART_BINARY_k2e-hs-evm = ""
++SPL_UART_BINARY_keystone = ""
++
++SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
++SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+ 
+ # Keystone specifics
+ UBOOT_SUFFIX_keystone = "bin"
+-SPL_UART_BINARY_keystone = ""
+ 
+ # SPI NOR Flash binaries
+ UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
 
 
