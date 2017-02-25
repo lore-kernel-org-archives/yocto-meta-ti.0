@@ -1,41 +1,35 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D6BD5E00839; Fri, 24 Feb 2017 18:01:54 -0800 (PST)
+	id 6339BE0085D; Fri, 24 Feb 2017 19:50:31 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD7FCE00546
-	for <meta-ti@yoctoproject.org>; Fri, 24 Feb 2017 18:01:51 -0800 (PST)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F329EE00655
+	for <meta-ti@yoctoproject.org>; Fri, 24 Feb 2017 19:50:26 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v1P21eFh003856
-	for <meta-ti@yoctoproject.org>; Fri, 24 Feb 2017 20:01:40 -0600
-Received: from dbdlxv05.itg.ti.com (dbdlxv05.itg.ti.com [172.24.171.60])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1P21Yv0032167
-	for <meta-ti@yoctoproject.org>; Fri, 24 Feb 2017 20:01:35 -0600
-Received: from DBDE72.ent.ti.com (dbde72.ent.ti.com [172.24.171.97])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1P21Wtt004679
-	for <meta-ti@yoctoproject.org>; Sat, 25 Feb 2017 07:31:33 +0530
-Received: from [172.22.217.45] (172.22.217.45) by DBDE72.ent.ti.com
-	(172.24.171.97) with Microsoft SMTP Server id 14.3.294.0;
-	Sat, 25 Feb 2017 07:31:31 +0530
-To: <meta-ti@yoctoproject.org>
-References: <1487934242-3848-1-git-send-email-anandb@ti.com>
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v1P3oPds027378
+	for <meta-ti@yoctoproject.org>; Fri, 24 Feb 2017 21:50:25 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1P3oPEO007455
+	for <meta-ti@yoctoproject.org>; Fri, 24 Feb 2017 21:50:25 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 24 Feb 2017 21:50:25 -0600
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1P3oN8D009340;
+	Fri, 24 Feb 2017 21:50:24 -0600
 From: Karthik Ramanan <a0393906@ti.com>
-Message-ID: <58B0E57B.90007@ti.com>
-Date: Sat, 25 Feb 2017 07:31:31 +0530
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
-	Thunderbird/38.7.2
+To: <meta-ti@yoctoproject.org>
+Date: Sat, 25 Feb 2017 09:20:22 +0530
+Message-ID: <1487994622-87927-1-git-send-email-a0393906@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1487934242-3848-1-git-send-email-anandb@ti.com>
-X-Originating-IP: [172.22.217.45]
-Subject: Re: [PATCH 1/1] ti-sgx-ddk-um: add support for dmabuf import in GBM WSEGL
+Subject: [krogoth] ti-ipc: update to 3.45.00.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,39 +42,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2017 02:01:54 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 25 Feb 2017 03:50:31 -0000
+Content-Type: text/plain
 
-This is required for both master and krogoth
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-common.inc |  2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc   | 10 +++++-----
+ recipes-ti/ipc/ti-ipc.inc        |  6 +++---
+ 3 files changed, 9 insertions(+), 9 deletions(-)
 
-On 24-Feb-17 4:34 PM, Anand Balagopalakrishnan wrote:
-> Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
-> ---
->   recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> index acbbe3e..f90d689 100644
-> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> @@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
->   BRANCH = "ti-img-sgx/${PV}"
->   
->   SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-> -SRCREV = "d1cb4ea42dbf275e2013aae95ad2d9182f05648c"
-> +SRCREV = "e8fda0a1865e206c058776b15336a53edc5e5999"
->   
->   # There's only hardfp version available
->   python __anonymous() {
-> @@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
->   
->   inherit update-rc.d
->   
-> -PR = "r21"
-> +PR = "r22"
->   PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
->   
->   DEPENDS += "libdrm udev libgbm wayland libffi"
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 8a2aa0a..6aa08c5 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,4 +1,4 @@
+-PV = "3.44.01.01"
++PV = "3.45.00.00"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 1c509b0..332f238 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -25,16 +25,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
+ 
+-# Corresponds to tag: 3.44.01.01
+-SRCREV_ipc-examples = "b19a3b7a003aa3304a12599a498d9b3a24f20c6e"
++# Corresponds to tag: 3.45.00.00
++SRCREV_ipc-examples = "3a8ee1841ec36117a9bcd3d45bb2781bbd53ecf8"
+ 
+-# Corresponds to tag: 3.44.01.01
+-SRCREV_ipc-metadata = "a21264bdbb1b64d41bbcb4e6bb17d2c1d4ccb839"
++# Corresponds to tag: 3.45.00.00
++SRCREV_ipc-metadata = "30b83f09be1877f86b22c971d978cb478fc7dd6e"
+ 
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 3ac8bf5..ea256d2 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+ 
+ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+-TI_IPC_GIT_BRANCH = "ipc-3.44-next"
++TI_IPC_GIT_BRANCH = "master"
+ 
+-#Corresponds to 3.44.01.01
+-TI_IPC_SRCREV = "cff640a4c7e083f78116266ef681cec49d9b584b"
++#Corresponds to 3.45.00.00
++TI_IPC_SRCREV = "1584985938884bf6cb1d839779578354b1865ea4"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+-- 
+1.9.1
 
 
