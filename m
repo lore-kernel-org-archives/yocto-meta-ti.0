@@ -1,26 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0B117E007BA; Mon, 27 Feb 2017 10:12:12 -0800 (PST)
+	id 3E5C0E0050B; Mon, 27 Feb 2017 10:18:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B57BE00935
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:12:09 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 9BB3E52A3D; Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20170227181207.9BB3E52A3D@arago-project.org>
-Date: Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : conf/machine: bump max_leb_cnt for am3
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BFF87E00405
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:18:19 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v1RIII5d021627
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 12:18:18 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1RIIIAG016800
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 12:18:18 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 27 Feb 2017 12:18:17 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1RIIIiB032469;
+	Mon, 27 Feb 2017 12:18:18 -0600
+Date: Mon, 27 Feb 2017 13:18:17 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Anand Balagopalakrishnan <anandb@ti.com>
+Message-ID: <20170227181817.GA11106@edge>
+References: <1488204107-21688-1-git-send-email-anandb@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <1488204107-21688-1-git-send-email-anandb@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [[ krogoth/morty PATCH] 1/1] ti-sgx-ddk-um: add support for GBM pixmap surface
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,40 +47,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2017 18:12:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Feb 2017 18:18:23 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: morty-next
-Commit: 3fe8ffe67c9ed7d5023078e29121db2e8d2f7c34
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3fe8ffe67c9ed7d5023078e29121db2e8d2f7c34
+Anand,
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 18 19:21:04 2017 -0500
+Thanks for the patch.
 
-conf/machine: bump max_leb_cnt for am3
+> [[ krogoth/morty PATCH] 1/1] ti-sgx-ddk-um: add support for GBM pixmap surface
 
-Previous commit meant to increase it more than just by 200...
+Can you please not do nested brackets here? Patchwork doesn't handle them 
+properly...
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+-- 
+Denys
 
----
 
- conf/machine/am335x-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 841e4d2..86a828c 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6200"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 7000"
- 
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-
+On Mon, Feb 27, 2017 at 07:31:47PM +0530, Anand Balagopalakrishnan wrote:
+> Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+> ---
+>  recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> index f90d689..3a9a2b2 100644
+> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> @@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+>  BRANCH = "ti-img-sgx/${PV}"
+>  
+>  SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+> -SRCREV = "e8fda0a1865e206c058776b15336a53edc5e5999"
+> +SRCREV = "d184140aa5c17e13e1bf21151f1a7bc068bdf8bf"
+>  
+>  # There's only hardfp version available
+>  python __anonymous() {
+> @@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+>  
+>  inherit update-rc.d
+>  
+> -PR = "r22"
+> +PR = "r23"
+>  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+>  
+>  DEPENDS += "libdrm udev libgbm wayland libffi"
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
