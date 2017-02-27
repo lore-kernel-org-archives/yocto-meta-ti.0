@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E611FE0052B; Mon, 27 Feb 2017 15:15:15 -0800 (PST)
+	id 37EF7E00519; Mon, 27 Feb 2017 15:15:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1241CE004D2
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:15:14 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9507E004E5
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:15:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 53738529D2; Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
+	id 2839E529F6; Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227231513.53738529D2@arago-project.org>
+Message-Id: <20170227231513.2839E529F6@arago-project.org>
 Date: Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Dan Murphy : linux-ti-staging: update to ti2017.00-rc2 tag
+Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: add support for GBM pixmap surface
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,55 +35,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2017 23:15:15 -0000
+X-List-Received-Date: Mon, 27 Feb 2017 23:15:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: f9fe9be6d468be5bc53fe918cb17479c1e08e480
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9fe9be6d468be5bc53fe918cb17479c1e08e480
+Commit: 3440fd7d22fa605612d5f9f0f4bdb60b7d89305b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3440fd7d22fa605612d5f9f0f4bdb60b7d89305b
 
-Author: Dan Murphy <dmurphy@ti.com>
-Date:   Tue Feb 28 01:19:12 2017 +0000
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Mon Feb 27 20:01:47 2017 +0000
 
-linux-ti-staging: update to ti2017.00-rc2 tag
+ti-sgx-ddk-um: add support for GBM pixmap surface
 
-Update to ti2017.00-rc2 tag as well as 4.9.13 kernel
-revision
-
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index 76592a0..fb051da 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index f90d689..3a9a2b2 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- BRANCH = "ti-rt-linux-4.9.y"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "e8fda0a1865e206c058776b15336a53edc5e5999"
++SRCREV = "d184140aa5c17e13e1bf21151f1a7bc068bdf8bf"
  
--SRCREV = "940177b0bc855cb2d5d2c9d536885b629dc5a4a3"
-+SRCREV = "0707ba4199e2925a57077fc24bb382f1ea1ac1d7"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index acdbff4..c9ed163 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- BRANCH = "ti-lsk-linux-4.9.y"
+ inherit update-rc.d
  
--SRCREV = "6c1ef0e5e0ace660dcb56552914ba2f42457fc51"
--PV = "4.9.10+git${SRCPV}"
-+SRCREV = "818ee96bb29bebc1aa1b26b4402a16eaa0621924"
-+PV = "4.9.13+git${SRCPV}"
+-PR = "r22"
++PR = "r23"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "c"
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
