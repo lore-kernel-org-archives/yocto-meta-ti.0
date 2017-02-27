@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1D33EE00510; Mon, 27 Feb 2017 15:20:15 -0800 (PST)
+	id 906C6E00405; Mon, 27 Feb 2017 15:20:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,15 +14,15 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1238E003C1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3E63E004D2
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:20:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 17EAA529D2; Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
+	id 275D8529F6; Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227232012.17EAA529D2@arago-project.org>
+Message-Id: <20170227232012.275D8529F6@arago-project.org>
 Date: Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Anand Balagopalakrishnan : PATCH 1/1] ti-sgx-ddk-um: fix memory leak with EGL Image DMABuf import
+Subject: Anand Balagopalakrishnan : ti-sgx-ddk-um: add support for dmabuf import in GBM WSEGL
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,13 +40,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: de642714328cd85b3983779770ef724a975384e6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=de642714328cd85b3983779770ef724a975384e6
+Commit: ed06c3bb58493a40b6fe584251a94f067fc9bdf7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed06c3bb58493a40b6fe584251a94f067fc9bdf7
 
 Author: Anand Balagopalakrishnan <anandb@ti.com>
-Date:   Thu Feb 23 11:54:10 2017 +0000
+Date:   Fri Feb 24 17:04:02 2017 +0000
 
-PATCH 1/1] ti-sgx-ddk-um: fix memory leak with EGL Image DMABuf import
+ti-sgx-ddk-um: add support for dmabuf import in GBM WSEGL
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
@@ -57,15 +57,15 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 79f5ca7..acbbe3e 100644
+index acbbe3e..f90d689 100644
 --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
 +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
 @@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
  BRANCH = "ti-img-sgx/${PV}"
  
  SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "6019bf95ee30a65db6b27ea48e6ee65e8b16e0a6"
-+SRCREV = "d1cb4ea42dbf275e2013aae95ad2d9182f05648c"
+-SRCREV = "d1cb4ea42dbf275e2013aae95ad2d9182f05648c"
++SRCREV = "e8fda0a1865e206c058776b15336a53edc5e5999"
  
  # There's only hardfp version available
  python __anonymous() {
@@ -73,8 +73,8 @@ index 79f5ca7..acbbe3e 100644
  
  inherit update-rc.d
  
--PR = "r20"
-+PR = "r21"
+-PR = "r21"
++PR = "r22"
  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
  DEPENDS += "libdrm udev libgbm wayland libffi"
