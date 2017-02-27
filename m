@@ -1,27 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 68B59E00655; Mon, 27 Feb 2017 10:12:10 -0800 (PST)
+	id 76DD6E00405; Mon, 27 Feb 2017 10:12:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
-	*  0.7 TO_NO_BRKTS_PCNT To: lacks brackets + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B221E00A0A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 080B9E00874
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:12:08 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 265E3529D2; Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
+	id 412E1529F6; Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227181207.265E3529D2@arago-project.org>
+Message-Id: <20170227181207.412E1529F6@arago-project.org>
 Date: Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-cgt-pru: update to version 2.1.4
+Subject: Denys Dmytriyenko : linux-ti-staging: update with latest rpmsg merge to unblock KS2 MPM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,69 +38,50 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: 653b7d7d94a3923e58e8f97b0af027313db1d619
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=653b7d7d94a3923e58e8f97b0af027313db1d619
+Commit: 31906c82606aa868be8435cc1a6341ffdfb61f27
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=31906c82606aa868be8435cc1a6341ffdfb61f27
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Feb 16 21:28:31 2017 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Feb 17 04:04:51 2017 +0000
 
-ti-cgt-pru: update to version 2.1.4
+linux-ti-staging: update with latest rpmsg merge to unblock KS2 MPM
 
-* The old license file, LICENSE.txt, has been removed in this release,
-  so use the HTML manifest for the license.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Cc: Dan Murphy <dmurphy@ti.com>
 
 ---
 
- .../{ti-cgt-pru_2.1.1.bb => ti-cgt-pru_2.1.4.bb}   |   16 ++++++++++------
- 1 files changed, 10 insertions(+), 6 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb b/recipes-ti/devtools/ti-cgt-pru_2.1.4.bb
-similarity index 66%
-rename from recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
-rename to recipes-ti/devtools/ti-cgt-pru_2.1.4.bb
-index 049682f..5667ea2 100644
---- a/recipes-ti/devtools/ti-cgt-pru_2.1.1.bb
-+++ b/recipes-ti/devtools/ti-cgt-pru_2.1.4.bb
-@@ -2,8 +2,8 @@ DESCRIPTION = "TI PRU Code Generation Tools"
- HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
- LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index c6c0695..87fa60e 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
--LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
--LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
-+LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.1.x_manifest.html;md5=d7fea45a7968939ff953ae8a1e6719f4"
-+LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.1.x_manifest.html;md5=d7fea45a7968939ff953ae8a1e6719f4"
+ BRANCH = "ti-rt-linux-4.9.y"
  
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-unpack.inc
-@@ -18,11 +18,11 @@ BINFILE_NAME_class-target = "cgt-pru-arm"
+-SRCREV = "68704903155296c0b09ce0ea0de8909e7592de65"
++SRCREV = "3749c8001ac5f67bc56383f106c43cdcfa541d42"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 416420c..110f34b 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -53,11 +53,11 @@ S = "${WORKDIR}/git"
  
- SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
+ BRANCH = "ti-lsk-linux-4.9.y"
  
--SRC_URI[cgt-pru-x86.md5sum] = "d9923acea12dc41fc975c381804bd5ed"
--SRC_URI[cgt-pru-x86.sha256sum] = "bbea68a6e793156cfb4874777bfd41a32b20172d3a8f61db6aed33a697a58e30"
-+SRC_URI[cgt-pru-x86.md5sum] = "496b32b9804cf5b5b293dd938f7c5339"
-+SRC_URI[cgt-pru-x86.sha256sum] = "c80dbf35e7401f4c122ff25cc2f6b5db496607782fb4583cee8663a2763f4472"
+-SRCREV = "1c74e8801cf58a30394ae92236895599f2c77253"
++SRCREV = "7a7b9948b82972a3181aa8c798b85af3bcb76a9a"
+ PV = "4.9.10+git${SRCPV}"
  
--SRC_URI[cgt-pru-arm.md5sum] = "3b97df4966715bdb50f9a9fc58fe6b24"
--SRC_URI[cgt-pru-arm.sha256sum] = "819a4680296fabf1ae0d4e0184276f8ab5324621d35388026d1b678ea71040c9"
-+SRC_URI[cgt-pru-arm.md5sum] = "b13bf0cdf484102cdfcb92a81b8092a2"
-+SRC_URI[cgt-pru-arm.sha256sum] = "c125bbe4e805b830e5d746ade929dc1f202f25a6863d5005ed97cc5a82e26754"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
- do_install() {
-     install -d ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}
-@@ -40,6 +40,10 @@ FILES_${PN}-dbg = "${TI_CGT_PRU_INSTALL_DIR_RECIPE}/bin/.debug \
-                    ${TI_CGT_PRU_INSTALL_DIR_RECIPE}/lib/.debug \
- "
- 
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+
- INSANE_SKIP_${PN} += "arch staticdev already-stripped"
- 
- BBCLASSEXTEND = "native nativesdk"
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 
 
