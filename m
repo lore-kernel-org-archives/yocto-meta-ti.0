@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EE6C6E00804; Mon, 27 Feb 2017 15:15:13 -0800 (PST)
+	id A82BFE00874; Mon, 27 Feb 2017 15:15:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	UPPERCASE_50_75 autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  0.0 UPPERCASE_50_75 message body is 50-75% uppercase
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 988E3E004D2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94BB1E003C1
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:15:12 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9E3DF52A60; Mon, 27 Feb 2017 23:15:11 +0000 (UTC)
+	id E9CA8529D2; Mon, 27 Feb 2017 23:15:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227231511.9E3DF52A60@arago-project.org>
-Date: Mon, 27 Feb 2017 23:15:11 +0000 (UTC)
+Message-Id: <20170227231510.E9CA8529D2@arago-project.org>
+Date: Mon, 27 Feb 2017 23:15:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: update to 3.00.13.00
+Subject: Denys Dmytriyenko : u-boot-ti.inc: k2e-hs-evm doesn' t provide the same binaries as other KS2 devices
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +39,94 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ff968e689b8b15f840466b10cddab9966060bebf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff968e689b8b15f840466b10cddab9966060bebf
+Commit: b599e91350a35af0814142578245e79cc70fbfb3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b599e91350a35af0814142578245e79cc70fbfb3
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Sat Feb 25 09:50:47 2017 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sun Feb 19 08:46:56 2017 +0000
 
-ipumm-fw: update to 3.00.13.00
+u-boot-ti.inc: k2e-hs-evm doesn't provide the same binaries as other KS2 devices
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Reviewed-by: Dan Murphy<dmurphy@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti.inc |   35 ++++++++++++++++++++++-------------
+ 1 files changed, 22 insertions(+), 13 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 26876d4..9b15476 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 0c0b6e8..57f7fe6 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -49,7 +49,6 @@ SPL_BINARY_omapl138 = ""
  
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ # SPL (Second Program Loader) to be loaded over UART
+ SPL_UART_BINARY = "u-boot-spl.bin"
+-SPL_UART_BINARY_k2e-hs-evm = ""
+ SPL_UART_BINARY_keystone = ""
  
--SRCREV = "97efa6fa9fc108096fcc18404a2d0ef43f9304ac"
-+SRCREV = "fd441443a4289c801a0c8d9f00b6966f7fe3476c"
+ SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+@@ -60,8 +59,10 @@ UBOOT_SUFFIX_keystone = "bin"
  
- S = "${WORKDIR}/git"
+ # SPI NOR Flash binaries
+ UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
++UBOOT_SPI_SPL_BINARY_k2e-hs-evm = ""
+ UBOOT_SPI_BINARY = "u-boot.img"
+ UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
++UBOOT_SPI_GPH_BINARY_k2e-hs-evm = ""
  
--PV = "3.00.12.00"
--PR = "r2"
-+PV = "3.00.13.00"
-+PR = "r5"
+ # SPI NOR Flash deployed images
+ UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
+@@ -126,29 +127,37 @@ do_deploy_append () {
+ }
  
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+ do_install_append_keystone () {
+-	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
++	if [ "x${UBOOT_SPI_SPL_BINARY}" != "x" ]; then
++		install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
++		ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
++	fi
+ 
+ 	install ${B}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
+ 	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
+ 
+-	install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
++	if [ "x${UBOOT_SPI_GPH_BINARY}" != "x" ]; then
++		install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
++		ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
++	fi
+ }
+ 
+ do_deploy_append_keystone () {
+-	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
+-	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
+-	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
++	if [ "x${UBOOT_SPI_SPL_BINARY}" != "x" ]; then
++		install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
++		rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
++		ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
++		ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
++	fi
+ 
+ 	install ${B}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
+ 	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
+ 	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
+ 	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
+ 
+-	install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
+-	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
+-	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
++	if [ "x${UBOOT_SPI_GPH_BINARY}" != "x" ]; then
++		install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
++		rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
++		ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
++		ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
++	fi
+ }
 
 
