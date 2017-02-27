@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8CF48E00546; Mon, 27 Feb 2017 15:20:15 -0800 (PST)
+	id 94E25E004D2; Mon, 27 Feb 2017 15:20:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B298CE00405
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5D7EE0050B
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:20:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4043152A34; Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
+	id 6E92A52A60; Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227232012.4043152A34@arago-project.org>
+Message-Id: <20170227232012.6E92A52A60@arago-project.org>
 Date: Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ti-ipc: update to 3.45.00.00
+Subject: Anand Balagopalakrishnan : 1/1] ti-sgx-ddk-um: add support for GBM pixmap surface
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,77 +40,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 179c0842b497df3e1d22caa5a04a67a7c75358ea
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=179c0842b497df3e1d22caa5a04a67a7c75358ea
+Commit: 7314bb6ac3c4380d6e53719b33646f8eaa1bbcb7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7314bb6ac3c4380d6e53719b33646f8eaa1bbcb7
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Sat Feb 25 09:50:22 2017 +0000
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Mon Feb 27 20:01:47 2017 +0000
 
-ti-ipc: update to 3.45.00.00
+1/1] ti-sgx-ddk-um: add support for GBM pixmap surface
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-common.inc |    2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc   |   10 +++++-----
- recipes-ti/ipc/ti-ipc.inc        |    6 +++---
- 3 files changed, 9 insertions(+), 9 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 8a2aa0a..6aa08c5 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.44.01.01"
-+PV = "3.45.00.00"
- INC_PR = "r0"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index f90d689..3a9a2b2 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 1c509b0..332f238 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -25,16 +25,16 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "e8fda0a1865e206c058776b15336a53edc5e5999"
++SRCREV = "d184140aa5c17e13e1bf21151f1a7bc068bdf8bf"
  
--# Corresponds to tag: 3.44.01.01
--SRCREV_ipc-examples = "b19a3b7a003aa3304a12599a498d9b3a24f20c6e"
-+# Corresponds to tag: 3.45.00.00
-+SRCREV_ipc-examples = "3a8ee1841ec36117a9bcd3d45bb2781bbd53ecf8"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
--# Corresponds to tag: 3.44.01.01
--SRCREV_ipc-metadata = "a21264bdbb1b64d41bbcb4e6bb17d2c1d4ccb839"
-+# Corresponds to tag: 3.45.00.00
-+SRCREV_ipc-metadata = "30b83f09be1877f86b22c971d978cb478fc7dd6e"
+ inherit update-rc.d
  
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+-PR = "r22"
++PR = "r23"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 3ac8bf5..ea256d2 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "ipc-3.44-next"
-+TI_IPC_GIT_BRANCH = "master"
- 
--#Corresponds to 3.44.01.01
--TI_IPC_SRCREV = "cff640a4c7e083f78116266ef681cec49d9b584b"
-+#Corresponds to 3.45.00.00
-+TI_IPC_SRCREV = "1584985938884bf6cb1d839779578354b1865ea4"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
