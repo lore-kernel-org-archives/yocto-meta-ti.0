@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 73032E00405; Mon, 27 Feb 2017 15:15:15 -0800 (PST)
+	id DA35EE00519; Mon, 27 Feb 2017 15:15:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF005E0077F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F419E0052B
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:15:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 021C2529D2; Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
+	id 0628E52A75; Mon, 27 Feb 2017 23:15:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227231513.021C2529D2@arago-project.org>
-Date: Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
+Message-Id: <20170227231512.0628E52A75@arago-project.org>
+Date: Mon, 27 Feb 2017 23:15:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: update to 3.00.13.00
+Subject: Dan Murphy : linux-ti-staging: update to ti2017.00-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,42 +37,51 @@ X-List-Received-Date: Mon, 27 Feb 2017 23:15:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: ee88c0f7ce10dc510dc9db30930cb7708926f54b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ee88c0f7ce10dc510dc9db30930cb7708926f54b
+Branch: master
+Commit: 65dc750106e8ebb46f2e992f54fd59fe5de47306
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=65dc750106e8ebb46f2e992f54fd59fe5de47306
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Sat Feb 25 09:50:47 2017 +0000
+Author: Dan Murphy <dmurphy@ti.com>
+Date:   Tue Feb 28 01:19:12 2017 +0000
 
-ipumm-fw: update to 3.00.13.00
+linux-ti-staging: update to ti2017.00-rc2 tag
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Update to ti2017.00-rc2 tag as well as 4.9.13 kernel
+revision
+
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 942ab93..1a5d285 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index 76592a0..fb051da 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ BRANCH = "ti-rt-linux-4.9.y"
  
--SRCREV = "97efa6fa9fc108096fcc18404a2d0ef43f9304ac"
-+SRCREV = "fd441443a4289c801a0c8d9f00b6966f7fe3476c"
+-SRCREV = "940177b0bc855cb2d5d2c9d536885b629dc5a4a3"
++SRCREV = "0707ba4199e2925a57077fc24bb382f1ea1ac1d7"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index acdbff4..c9ed163 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
  
- S = "${WORKDIR}/git"
+ BRANCH = "ti-lsk-linux-4.9.y"
  
--PV = "3.00.12.00"
--PR = "r2"
-+PV = "3.00.13.00"
-+PR = "r5"
+-SRCREV = "6c1ef0e5e0ace660dcb56552914ba2f42457fc51"
+-PV = "4.9.10+git${SRCPV}"
++SRCREV = "818ee96bb29bebc1aa1b26b4402a16eaa0621924"
++PV = "4.9.13+git${SRCPV}"
  
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 
 
