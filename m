@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3AB50E00405; Mon, 27 Feb 2017 15:15:15 -0800 (PST)
+	id 73032E00405; Mon, 27 Feb 2017 15:15:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F1D3E00655
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF005E0077F
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:15:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B576E52A34; Mon, 27 Feb 2017 23:15:12 +0000 (UTC)
+	id 021C2529D2; Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227231512.B576E52A34@arago-project.org>
-Date: Mon, 27 Feb 2017 23:15:12 +0000 (UTC)
+Message-Id: <20170227231513.021C2529D2@arago-project.org>
+Date: Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Dan Murphy : conf: am43: Add hdmi dtb file to Device tree files
+Subject: Karthik Ramanan : ipumm-fw: update to 3.00.13.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty
-Commit: 4c76c98d2a9d77c48450b01c12a63ac8d18820f2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4c76c98d2a9d77c48450b01c12a63ac8d18820f2
+Commit: ee88c0f7ce10dc510dc9db30930cb7708926f54b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ee88c0f7ce10dc510dc9db30930cb7708926f54b
 
-Author: Dan Murphy <dmurphy@ti.com>
-Date:   Fri Feb 24 02:54:28 2017 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Sat Feb 25 09:50:47 2017 +0000
 
-conf: am43: Add hdmi dtb file to Device tree files
+ipumm-fw: update to 3.00.13.00
 
-AM43x was missing the hdmi dtb file in the
-KERNEL_DEVICETREE variable.  Adding this in allows for
-a copy to deploy directory.
-
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/ti43x.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index 8f2e11f..2a2fd8d 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -26,7 +26,7 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 942ab93..1a5d285 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
  
- KERNEL_IMAGETYPE = "zImage"
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--KERNEL_DEVICETREE = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
-+KERNEL_DEVICETREE = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb am437x-idk-evm.dtb"
+-SRCREV = "97efa6fa9fc108096fcc18404a2d0ef43f9304ac"
++SRCREV = "fd441443a4289c801a0c8d9f00b6966f7fe3476c"
  
- UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "am43xx_evm_config"
+ S = "${WORKDIR}/git"
+ 
+-PV = "3.00.12.00"
+-PR = "r2"
++PV = "3.00.13.00"
++PR = "r5"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
 
 
