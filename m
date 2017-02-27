@@ -1,27 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 391AAE004D8; Mon, 27 Feb 2017 10:23:45 -0800 (PST)
+	id 406F9E00A26; Mon, 27 Feb 2017 11:19:30 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	UPPERCASE_50_75 autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-	*  0.0 UPPERCASE_50_75 message body is 50-75% uppercase
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1BC72E00510
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:23:42 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id BC23C529F6; Mon, 27 Feb 2017 18:23:40 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20170227182340.BC23C529F6@arago-project.org>
-Date: Mon, 27 Feb 2017 18:23:40 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti.inc: k2e-hs-evm doesn' t provide the same binaries as other KS2 devices
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E22EE0074B
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 11:19:16 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v1RJJFDA028258
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 13:19:15 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v1RJJFCp002210
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 13:19:15 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 27 Feb 2017 13:19:14 -0600
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v1RJJE8F020763;	Mon, 27 Feb 2017 13:19:14 -0600
+Received: from localhost (a0272616local.dhcp.ti.com [172.22.189.31] (may be
+	forged))	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP
+	id v1RJJE324508;	Mon, 27 Feb 2017 13:19:14 -0600 (CST)
+From: Dan Murphy <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 27 Feb 2017 13:19:12 -0600
+Message-ID: <1488223153-11830-1-git-send-email-dmurphy@ti.com>
+X-Mailer: git-send-email 2.7.2.333.g70bd996
+MIME-Version: 1.0
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2017.00-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,99 +45,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2017 18:23:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Feb 2017 19:19:30 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: morty-next
-Commit: 4633c1dd6e48b72c58e039adacb09471cc0b475f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4633c1dd6e48b72c58e039adacb09471cc0b475f
+Update to ti2017.00-rc2 tag as well as 4.9.13 kernel
+revision
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sun Feb 19 08:46:56 2017 +0000
-
-u-boot-ti.inc: k2e-hs-evm doesn't provide the same binaries as other KS2 devices
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Reviewed-by: Dan Murphy<dmurphy@ti.com>
-
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- recipes-bsp/u-boot/u-boot-ti.inc |   35 ++++++++++++++++++++++-------------
- 1 files changed, 22 insertions(+), 13 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index 0c0b6e8..57f7fe6 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -49,7 +49,6 @@ SPL_BINARY_omapl138 = ""
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index 76592a0..fb051da 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
- # SPL (Second Program Loader) to be loaded over UART
- SPL_UART_BINARY = "u-boot-spl.bin"
--SPL_UART_BINARY_k2e-hs-evm = ""
- SPL_UART_BINARY_keystone = ""
+ BRANCH = "ti-rt-linux-4.9.y"
  
- SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
-@@ -60,8 +59,10 @@ UBOOT_SUFFIX_keystone = "bin"
+-SRCREV = "940177b0bc855cb2d5d2c9d536885b629dc5a4a3"
++SRCREV = "0707ba4199e2925a57077fc24bb382f1ea1ac1d7"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index acdbff4..c9ed163 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -53,8 +53,8 @@ S = "${WORKDIR}/git"
  
- # SPI NOR Flash binaries
- UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
-+UBOOT_SPI_SPL_BINARY_k2e-hs-evm = ""
- UBOOT_SPI_BINARY = "u-boot.img"
- UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
-+UBOOT_SPI_GPH_BINARY_k2e-hs-evm = ""
+ BRANCH = "ti-lsk-linux-4.9.y"
  
- # SPI NOR Flash deployed images
- UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
-@@ -126,29 +127,37 @@ do_deploy_append () {
- }
+-SRCREV = "6c1ef0e5e0ace660dcb56552914ba2f42457fc51"
+-PV = "4.9.10+git${SRCPV}"
++SRCREV = "818ee96bb29bebc1aa1b26b4402a16eaa0621924"
++PV = "4.9.13+git${SRCPV}"
  
- do_install_append_keystone () {
--	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
--	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
-+	if [ "x${UBOOT_SPI_SPL_BINARY}" != "x" ]; then
-+		install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
-+		ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
-+	fi
- 
- 	install ${B}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
- 	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
- 
--	install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
--	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
-+	if [ "x${UBOOT_SPI_GPH_BINARY}" != "x" ]; then
-+		install ${B}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
-+		ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
-+	fi
- }
- 
- do_deploy_append_keystone () {
--	install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
--	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
--	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
--	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
-+	if [ "x${UBOOT_SPI_SPL_BINARY}" != "x" ]; then
-+		install ${B}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
-+		rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
-+		ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
-+		ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
-+	fi
- 
- 	install ${B}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
- 	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
- 	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
- 	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
- 
--	install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
--	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
--	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
--	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
-+	if [ "x${UBOOT_SPI_GPH_BINARY}" != "x" ]; then
-+		install ${B}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
-+		rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
-+		ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
-+		ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
-+	fi
- }
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
+-- 
+2.7.3
 
 
