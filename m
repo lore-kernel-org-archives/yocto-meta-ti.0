@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6AC55E00510; Mon, 27 Feb 2017 10:12:11 -0800 (PST)
+	id 6B618E00655; Mon, 27 Feb 2017 10:12:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A8C1E00510
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:12:09 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 085FEE0095F
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:12:08 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AE3DD52A58; Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
+	id 5AF0E529FA; Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227181207.AE3DD52A58@arago-project.org>
+Message-Id: <20170227181207.5AF0E529FA@arago-project.org>
 Date: Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti.inc: restructure SPL/UART variables, disable k2e-hs-evm
+Subject: Denys Dmytriyenko : conf/machine: bump max_leb_cnt for am3 and am4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,52 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: 3e118a8b4b0ab2dbbd97a3ded1f621ba68735915
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e118a8b4b0ab2dbbd97a3ded1f621ba68735915
+Commit: 75f58488d8ee600ad361c92fec60da5ab33b0ed3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=75f58488d8ee600ad361c92fec60da5ab33b0ed3
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 18 19:42:31 2017 -0500
+Date:   Fri Feb 17 23:53:34 2017 +0000
 
-u-boot-ti.inc: restructure SPL/UART variables, disable k2e-hs-evm
+conf/machine: bump max_leb_cnt for am3 and am4
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti.inc |   14 ++++++++------
- 1 files changed, 8 insertions(+), 6 deletions(-)
+ conf/machine/am335x-evm.conf |    2 +-
+ conf/machine/am437x-evm.conf |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index 7c19097..0c0b6e8 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -42,19 +42,21 @@ S = "${WORKDIR}/git"
- TI_SECURE_DEV_PKG ?= ""
- export TI_SECURE_DEV_PKG
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 3b36cef..841e4d2 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6000"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 6200"
  
--# SPL (Second Program Loader) to be loaded over UART
--SPL_UART_BINARY ?= ""
--SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
--SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
--
-+# SPL (Second Program Loader)
- SPL_BINARY = "MLO"
- SPL_BINARY_k2e-hs-evm = ""
- SPL_BINARY_omapl138 = ""
-+
-+# SPL (Second Program Loader) to be loaded over UART
- SPL_UART_BINARY = "u-boot-spl.bin"
-+SPL_UART_BINARY_k2e-hs-evm = ""
-+SPL_UART_BINARY_keystone = ""
-+
-+SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
-+SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 142280e..98af5ec 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -26,7 +26,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2800"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 4000"
  
- # Keystone specifics
- UBOOT_SUFFIX_keystone = "bin"
--SPL_UART_BINARY_keystone = ""
- 
- # SPI NOR Flash binaries
- UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
 
 
