@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0093EE00519; Mon, 27 Feb 2017 15:20:14 -0800 (PST)
+	id 1D33EE00510; Mon, 27 Feb 2017 15:20:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B49DEE004E5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1238E003C1
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:20:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5584F52A3D; Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
+	id 17EAA529D2; Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227232012.5584F52A3D@arago-project.org>
+Message-Id: <20170227232012.17EAA529D2@arago-project.org>
 Date: Mon, 27 Feb 2017 23:20:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: update to 3.00.13.00
+Subject: Anand Balagopalakrishnan : PATCH 1/1] ti-sgx-ddk-um: fix memory leak with EGL Image DMABuf import
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +40,43 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: krogoth
-Commit: 103e50bebe91be68eef620dfc0c7b918fe31152f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=103e50bebe91be68eef620dfc0c7b918fe31152f
+Commit: de642714328cd85b3983779770ef724a975384e6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=de642714328cd85b3983779770ef724a975384e6
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Sat Feb 25 09:50:47 2017 +0000
+Author: Anand Balagopalakrishnan <anandb@ti.com>
+Date:   Thu Feb 23 11:54:10 2017 +0000
 
-ipumm-fw: update to 3.00.13.00
+PATCH 1/1] ti-sgx-ddk-um: fix memory leak with EGL Image DMABuf import
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 942ab93..1a5d285 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 79f5ca7..acbbe3e 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
  
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "6019bf95ee30a65db6b27ea48e6ee65e8b16e0a6"
++SRCREV = "d1cb4ea42dbf275e2013aae95ad2d9182f05648c"
  
--SRCREV = "97efa6fa9fc108096fcc18404a2d0ef43f9304ac"
-+SRCREV = "fd441443a4289c801a0c8d9f00b6966f7fe3476c"
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
  
- S = "${WORKDIR}/git"
+ inherit update-rc.d
  
--PV = "3.00.12.00"
--PR = "r2"
-+PV = "3.00.13.00"
-+PR = "r5"
+-PR = "r20"
++PR = "r21"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 
 
