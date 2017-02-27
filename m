@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6672DE007BA; Mon, 27 Feb 2017 10:12:11 -0800 (PST)
+	id 6AC55E00510; Mon, 27 Feb 2017 10:12:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08618E00970
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:12:08 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A8C1E00510
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 10:12:09 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 13A075298B; Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
+	id AE3DD52A58; Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227181207.13A075298B@arago-project.org>
+Message-Id: <20170227181207.AE3DD52A58@arago-project.org>
 Date: Mon, 27 Feb 2017 18:12:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cmem: Update to new version 4.14.0.0_eng
+Subject: Denys Dmytriyenko : u-boot-ti.inc: restructure SPL/UART variables, disable k2e-hs-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,52 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: 660f6ae6250d0a2726fea8857e5e892fd625bbf0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=660f6ae6250d0a2726fea8857e5e892fd625bbf0
+Commit: 3e118a8b4b0ab2dbbd97a3ded1f621ba68735915
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e118a8b4b0ab2dbbd97a3ded1f621ba68735915
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Feb 16 21:24:18 2017 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Feb 18 19:42:31 2017 -0500
 
-cmem: Update to new version 4.14.0.0_eng
+u-boot-ti.inc: restructure SPL/UART variables, disable k2e-hs-evm
 
-Has update to changes related to Kernel 4.9
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/cmem/cmem.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti.inc |   14 ++++++++------
+ 1 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index aa9c8f2..b6ffb27 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 7c19097..0c0b6e8 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -42,19 +42,21 @@ S = "${WORKDIR}/git"
+ TI_SECURE_DEV_PKG ?= ""
+ export TI_SECURE_DEV_PKG
  
- BRANCH = "lu-next"
--# This corresponds to version 4.13.00.01_eng
--SRCREV = "1389059f01eabc1e853a384f0e5f51c4f3e4f197"
-+# This corresponds to version 4.14.00.00_eng
-+SRCREV = "b514a99ac45c64f0439282d0774d7cff5def4c6f"
+-# SPL (Second Program Loader) to be loaded over UART
+-SPL_UART_BINARY ?= ""
+-SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+-SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+-
++# SPL (Second Program Loader)
+ SPL_BINARY = "MLO"
+ SPL_BINARY_k2e-hs-evm = ""
+ SPL_BINARY_omapl138 = ""
++
++# SPL (Second Program Loader) to be loaded over UART
+ SPL_UART_BINARY = "u-boot-spl.bin"
++SPL_UART_BINARY_k2e-hs-evm = ""
++SPL_UART_BINARY_keystone = ""
++
++SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
++SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
  
--PV = "4.13.00.01+git${SRCPV}"
-+PV = "4.14.00.00+git${SRCPV}"
+ # Keystone specifics
+ UBOOT_SUFFIX_keystone = "bin"
+-SPL_UART_BINARY_keystone = ""
  
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
+ # SPI NOR Flash binaries
+ UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
 
 
