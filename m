@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DA35EE00519; Mon, 27 Feb 2017 15:15:15 -0800 (PST)
+	id E611FE0052B; Mon, 27 Feb 2017 15:15:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F419E0052B
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:15:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1241CE004D2
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 15:15:14 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0628E52A75; Mon, 27 Feb 2017 23:15:11 +0000 (UTC)
+	id 53738529D2; Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170227231512.0628E52A75@arago-project.org>
-Date: Mon, 27 Feb 2017 23:15:11 +0000 (UTC)
+Message-Id: <20170227231513.53738529D2@arago-project.org>
+Date: Mon, 27 Feb 2017 23:15:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Dan Murphy : linux-ti-staging: update to ti2017.00-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 27 Feb 2017 23:15:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 65dc750106e8ebb46f2e992f54fd59fe5de47306
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=65dc750106e8ebb46f2e992f54fd59fe5de47306
+Branch: morty
+Commit: f9fe9be6d468be5bc53fe918cb17479c1e08e480
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9fe9be6d468be5bc53fe918cb17479c1e08e480
 
 Author: Dan Murphy <dmurphy@ti.com>
 Date:   Tue Feb 28 01:19:12 2017 +0000
