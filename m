@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7E56DE00546; Mon, 27 Feb 2017 19:55:04 -0800 (PST)
+	id 7AF54E00655; Mon, 27 Feb 2017 19:55:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8ACB7E00519
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8C02AE0052B
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 19:55:01 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5921F52979; Tue, 28 Feb 2017 03:55:00 +0000 (UTC)
+	id 80D4952980; Tue, 28 Feb 2017 03:55:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170228035500.5921F52979@arago-project.org>
+Message-Id: <20170228035500.80D4952980@arago-project.org>
 Date: Tue, 28 Feb 2017 03:55:00 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ti-ipc: update from "eng" to GA version of 3.45
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 28 Feb 2017 03:55:04 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 2934600e9ba8f435712e4f09eea06379b7347340
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2934600e9ba8f435712e4f09eea06379b7347340
+Branch: morty
+Commit: 5299898b9261ef625dca3146c5bbcc4ab2d77811
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5299898b9261ef625dca3146c5bbcc4ab2d77811
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Feb 28 07:50:13 2017 +0000
