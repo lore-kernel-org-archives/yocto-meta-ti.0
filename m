@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AC453E00510; Mon, 27 Feb 2017 17:50:17 -0800 (PST)
+	id 7E56DE00546; Mon, 27 Feb 2017 19:55:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94151E004E5
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 17:50:16 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6DD4C209A4;
-	Tue, 28 Feb 2017 01:50:15 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 0I6d8mGEj-3u; Tue, 28 Feb 2017 01:50:15 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 54E2520481;
-	Tue, 28 Feb 2017 01:50:14 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id C0FC116238C;
-	Mon, 27 Feb 2017 20:50:13 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8ACB7E00519
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2017 19:55:01 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 5921F52979; Tue, 28 Feb 2017 03:55:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 27 Feb 2017 20:50:13 -0500
-Message-Id: <1488246613-46568-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [morty/master][PATCH] ti-ipc: update from "eng" to GA version of 3.45
+Message-Id: <20170228035500.5921F52979@arago-project.org>
+Date: Tue, 28 Feb 2017 03:55:00 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ti-ipc: update from "eng" to GA version of 3.45
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 01:50:17 -0000
+X-List-Received-Date: Tue, 28 Feb 2017 03:55:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 2934600e9ba8f435712e4f09eea06379b7347340
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2934600e9ba8f435712e4f09eea06379b7347340
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Feb 28 07:50:13 2017 +0000
+
+ti-ipc: update from "eng" to GA version of 3.45
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-ti/ipc/ti-ipc-rtos.inc | 14 +++++++-------
- recipes-ti/ipc/ti-ipc.inc      |  6 +++---
+
+ recipes-ti/ipc/ti-ipc-rtos.inc |   14 +++++++-------
+ recipes-ti/ipc/ti-ipc.inc      |    6 +++---
  2 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
@@ -104,7 +103,5 @@ index 876aca9..ea256d2 100644
  
  BRANCH = "${TI_IPC_GIT_BRANCH}"
  SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
--- 
-2.7.4
 
 
