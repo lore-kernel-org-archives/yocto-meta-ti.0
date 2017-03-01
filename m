@@ -1,40 +1,49 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4AB45E008D0; Wed,  1 Mar 2017 12:50:50 -0800 (PST)
+	id 3EF89E0082A; Wed,  1 Mar 2017 13:18:28 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1278E00826
-	for <meta-ti@yoctoproject.org>; Wed,  1 Mar 2017 12:50:46 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id C674920BA4;
-	Wed,  1 Mar 2017 20:50:45 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id rm7OTZTQC4fy; Wed,  1 Mar 2017 20:50:45 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A4C3020B6A;
-	Wed,  1 Mar 2017 20:50:44 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id B1E7E16239A;
-	Wed,  1 Mar 2017 15:50:43 -0500 (EST)
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1040CE00566
+	for <meta-ti@yoctoproject.org>; Wed,  1 Mar 2017 13:18:24 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v21LINg6016663
+	for <meta-ti@yoctoproject.org>; Wed, 1 Mar 2017 15:18:23 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1488403103;
+	bh=b4Nn69WV06UqoxanC+sAjtxBUgiVoiVXnyytUwJ+wu4=;
+	h=Date:From:To:Subject:References:In-Reply-To;
+	b=UXzD1MLXi6xf+3qKlv5+cIPD4oCd3BSkPPKhZmLxehVBhLlGJ40b0nZG0snatWWDB
+	3ZcJdUOkpRIxk4BxQF92UYmhoPMwMdjXv9xwrhKGGuCYSFPDz7dEuCoOrClcQgkcwP
+	6K4K/9S4FaUSblptveouh9IK4k91HVK9bRiC+ABg=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v21LINJh012501
+	for <meta-ti@yoctoproject.org>; Wed, 1 Mar 2017 15:18:23 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 1 Mar 2017 15:18:22 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v21LIMKJ010939	for
+	<meta-ti@yoctoproject.org>; Wed, 1 Mar 2017 15:18:23 -0600
+Date: Wed, 1 Mar 2017 16:18:22 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Wed,  1 Mar 2017 15:50:43 -0500
-Message-Id: <1488401443-81952-2-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1488401443-81952-1-git-send-email-denys@ti.com>
-References: <1488401443-81952-1-git-send-email-denys@ti.com>
-Subject: [morty/master][PATCH 2/2] conf/machine: deprecate opencl feature, introduce dsp feature
+To: <meta-ti@yoctoproject.org>
+Message-ID: <20170301211821.GM12614@edge>
+References: <20170215202756.GB19009@edge>
+MIME-Version: 1.0
+In-Reply-To: <20170215202756.GB19009@edge>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Commit notifications
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,103 +56,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 20:50:50 -0000
+X-List-Received-Date: Wed, 01 Mar 2017 21:18:28 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/include/dra7xx.inc   | 2 +-
- conf/machine/include/keystone.inc | 2 +-
- conf/machine/include/omap-a15.inc | 2 +-
- conf/machine/k2e-evm.conf         | 2 --
- conf/machine/k2g-evm.conf         | 2 +-
- conf/machine/k2hk-evm.conf        | 2 --
- conf/machine/k2l-evm.conf         | 2 --
- 7 files changed, 4 insertions(+), 10 deletions(-)
+...crickets...
 
-diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
-index 42941fd..857e1b3 100644
---- a/conf/machine/include/dra7xx.inc
-+++ b/conf/machine/include/dra7xx.inc
-@@ -1,4 +1,4 @@
- require conf/machine/include/omap-a15.inc
- SOC_FAMILY_append = ":dra7xx"
- 
--MACHINE_FEATURES += "pci opencl"
-+MACHINE_FEATURES += "pci"
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index dd1cbae..51ef563 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -23,5 +23,5 @@ UBI_VOLNAME = "rootfs"
- EXTRA_IMAGEDEPENDS += "u-boot"
- EXTRA_IMAGEDEPENDS += "boot-monitor"
- 
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat pci"
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat pci dsp"
- MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index a434456..d5ce54a 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -31,4 +31,4 @@ MACHINE_GUI_CLASS = "smallscreen"
- UBI_VOLNAME = "rootfs"
- 
- # List common SoC features, may need to add touchscreen for specific machines
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip"
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp"
-diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-index 530e6dc..95b0e42 100644
---- a/conf/machine/k2e-evm.conf
-+++ b/conf/machine/k2e-evm.conf
-@@ -4,8 +4,6 @@
- 
- require conf/machine/include/k2e.inc
- 
--MACHINE_FEATURES += "opencl"
--
- KERNEL_DEVICETREE = "keystone-k2e-evm.dtb"
- 
- UBOOT_MACHINE = "k2e_evm_config"
-diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-index d7bf609..458dfe4 100644
---- a/conf/machine/k2g-evm.conf
-+++ b/conf/machine/k2g-evm.conf
-@@ -4,7 +4,7 @@
- 
- require conf/machine/include/k2g.inc
- 
--MACHINE_FEATURES += "alsa opencl"
-+MACHINE_FEATURES += "alsa"
- 
- KERNEL_DEVICETREE = "keystone-k2g-evm.dtb keystone-k2g-evm-lcd.dtb keystone-k2g-ice.dtb"
- 
-diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
-index c753e68..6adb016 100644
---- a/conf/machine/k2hk-evm.conf
-+++ b/conf/machine/k2hk-evm.conf
-@@ -4,8 +4,6 @@
- 
- require conf/machine/include/keystone.inc
- 
--MACHINE_FEATURES += "opencl"
--
- KERNEL_DEVICETREE = "keystone-k2hk-evm.dtb"
- 
- UBOOT_MACHINE = "k2hk_evm_config"
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-index 7a54492..b4721d0 100644
---- a/conf/machine/k2l-evm.conf
-+++ b/conf/machine/k2l-evm.conf
-@@ -4,8 +4,6 @@
- 
- require conf/machine/include/keystone.inc
- 
--MACHINE_FEATURES += "opencl"
--
- KERNEL_DEVICETREE = "keystone-k2l-evm.dtb"
- 
- UBOOT_MACHINE = "k2l_evm_config"
+Anyway, I moved commit notifications to arago-commits@arago-project.org list. 
+In case anybody is interested...
+
 -- 
-2.7.4
+Denys
 
+
+On Wed, Feb 15, 2017 at 03:27:57PM -0500, Denys Dmytriyenko wrote:
+> All,
+> 
+> With patches now often being merged to 4 branches (krogoth, morty, morty-next 
+> and master), the volume of automatic commit notifications is getting rather 
+> high... Do people think I should move those to a separate dedicated list off 
+> of main meta-ti list?
+> 
+> -- 
+> Denys
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
