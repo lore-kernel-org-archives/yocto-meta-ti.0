@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C199E008D0; Wed,  1 Mar 2017 12:31:08 -0800 (PST)
+	id 37718E0095F; Wed,  1 Mar 2017 12:50:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28F97E00826
-	for <meta-ti@yoctoproject.org>; Wed,  1 Mar 2017 12:31:04 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 7701C52ACA; Wed,  1 Mar 2017 20:31:03 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3EC1E0082A
+	for <meta-ti@yoctoproject.org>; Wed,  1 Mar 2017 12:50:46 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C998520BA7;
+	Wed,  1 Mar 2017 20:50:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id lavoi5B4xw-J; Wed,  1 Mar 2017 20:50:45 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A2E54209DA;
+	Wed,  1 Mar 2017 20:50:44 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id A4FCE16230F;
+	Wed,  1 Mar 2017 15:50:43 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20170301203103.7701C52ACA@arago-project.org>
-Date: Wed,  1 Mar 2017 20:31:03 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Tag ti2017.00-rc2 : Denys Dmytriyenko : LCPD Core SDK ti2017.00-rc2
+Date: Wed,  1 Mar 2017 15:50:42 -0500
+Message-Id: <1488401443-81952-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH 1/2] k2g-ice: remove separate config in favor of generic k2g-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,16 +45,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 20:31:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Mar 2017 20:50:50 -0000
 
-Module: meta-ti
-Branch: refs/tags/ti2017.00-rc2
-Tag:    02907baa1881817854f466c14c47c3956bdfe9a8
-URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=02907baa1881817854f466c14c47c3956bdfe9a8
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/machine/k2g-ice.conf | 7 -------
+ 1 file changed, 7 deletions(-)
+ delete mode 100644 conf/machine/k2g-ice.conf
 
-Tagger: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  1 15:30:45 2017 -0500
+diff --git a/conf/machine/k2g-ice.conf b/conf/machine/k2g-ice.conf
+deleted file mode 100644
+index 6998b3f..0000000
+--- a/conf/machine/k2g-ice.conf
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2G ICE machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2G ICE
+-
+-require conf/machine/k2g-evm.conf
+-
+-UBOOT_MACHINE = "k2g_ice_config"
+-- 
+2.7.4
 
-LCPD Core SDK ti2017.00-rc2
 
