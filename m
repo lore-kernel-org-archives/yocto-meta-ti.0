@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 59788E00970; Wed,  1 Mar 2017 12:23:51 -0800 (PST)
+	id 5DE62E00826; Wed,  1 Mar 2017 12:23:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 578BAE0082A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5521FE00826
 	for <meta-ti@yoctoproject.org>; Wed,  1 Mar 2017 12:23:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F40CC52AB0; Wed,  1 Mar 2017 20:23:45 +0000 (UTC)
+	id 424EE52A7C; Wed,  1 Mar 2017 20:23:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170301202345.F40CC52AB0@arago-project.org>
-Date: Wed,  1 Mar 2017 20:23:45 +0000 (UTC)
+Message-Id: <20170301202346.424EE52A7C@arago-project.org>
+Date: Wed,  1 Mar 2017 20:23:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-ipc: update from "eng" to GA version of 3.45
+Subject: Denys Dmytriyenko : ti-ipc: explicitly depend on virtual/kernel: do_shared_workdir
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,70 +38,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: morty-next
-Commit: 5299898b9261ef625dca3146c5bbcc4ab2d77811
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5299898b9261ef625dca3146c5bbcc4ab2d77811
+Commit: 2c8294a83bc79a988b91f09e0b5243c761463574
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2c8294a83bc79a988b91f09e0b5243c761463574
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Feb 28 07:50:13 2017 +0000
+Date:   Wed Mar  1 05:55:01 2017 +0000
 
-ti-ipc: update from "eng" to GA version of 3.45
+ti-ipc: explicitly depend on virtual/kernel:do_shared_workdir
+
+ipc code looks for kernel's generated version.h file:
+  #include linux_version_include(KERNEL_BUILD_DIR)
+
+which now ends up in the following shared workdir:
+  work-shared/<mach>/kernel-build-artifacts/include/generated/uapi/linux/version.h
+
+It appears if kernel is provided by sstate, shared workdir is not
+getting populated, so depend on the task explicitly.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos.inc |   14 +++++++-------
- recipes-ti/ipc/ti-ipc.inc      |    6 +++---
- 2 files changed, 10 insertions(+), 10 deletions(-)
+ recipes-ti/ipc/ti-ipc_git.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 77ce7ec..7f029a7 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -25,19 +25,19 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index 6ccd2c4..5878b63 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -27,6 +27,8 @@ INITSCRIPT_PARAMS = "defaults 10"
  
--# Corresponds to tag: 3.45.00.00_eng
--SRCREV_ipc-examples = "b19a3b7a003aa3304a12599a498d9b3a24f20c6e"
-+# Corresponds to tag: 3.45.00.00
-+SRCREV_ipc-examples = "3a8ee1841ec36117a9bcd3d45bb2781bbd53ecf8"
+ EXTRA_OECONF += "PLATFORM=${PLATFORM} KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} KERNEL_BUILD_DIR=${STAGING_KERNEL_BUILDDIR}"
  
--# Corresponds to tag: 3.45.00.00_eng
--SRCREV_ipc-metadata = "92fa9ce4419abf0fa2cf4063ee84e524c51548d0"
-+# Corresponds to tag: 3.45.00.00
-+SRCREV_ipc-metadata = "30b83f09be1877f86b22c971d978cb478fc7dd6e"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- 
--RELEASE_TYPE = "ENG"
--RELEASE_SUFFIX = "_eng"
-+RELEASE_TYPE = "GA"
-+RELEASE_SUFFIX = ""
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.2"
- 
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 876aca9..ea256d2 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "ipc-next"
-+TI_IPC_GIT_BRANCH = "master"
- 
--#Corresponds to 3.45.00.00_eng
--TI_IPC_SRCREV = "9dd159d851496047b6833a5b7c71ed9ea95efc07"
-+#Corresponds to 3.45.00.00
-+TI_IPC_SRCREV = "1584985938884bf6cb1d839779578354b1865ea4"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
++do_compile[depends] += "virtual/kernel:do_shared_workdir"
++
+ do_configure() {
+     ( cd ${S}; autoreconf -f -i -s )
+     oe_runconf
 
 
