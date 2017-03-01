@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5DE62E00826; Wed,  1 Mar 2017 12:23:51 -0800 (PST)
+	id 4C199E008D0; Wed,  1 Mar 2017 12:31:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5521FE00826
-	for <meta-ti@yoctoproject.org>; Wed,  1 Mar 2017 12:23:47 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28F97E00826
+	for <meta-ti@yoctoproject.org>; Wed,  1 Mar 2017 12:31:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 424EE52A7C; Wed,  1 Mar 2017 20:23:46 +0000 (UTC)
+	id 7701C52ACA; Wed,  1 Mar 2017 20:31:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170301202346.424EE52A7C@arago-project.org>
-Date: Wed,  1 Mar 2017 20:23:46 +0000 (UTC)
+Message-Id: <20170301203103.7701C52ACA@arago-project.org>
+Date: Wed,  1 Mar 2017 20:31:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-ipc: explicitly depend on virtual/kernel: do_shared_workdir
+Subject: Tag ti2017.00-rc2 : Denys Dmytriyenko : LCPD Core SDK ti2017.00-rc2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,47 +33,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 20:23:51 -0000
+X-List-Received-Date: Wed, 01 Mar 2017 20:31:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty-next
-Commit: 2c8294a83bc79a988b91f09e0b5243c761463574
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2c8294a83bc79a988b91f09e0b5243c761463574
+Branch: refs/tags/ti2017.00-rc2
+Tag:    02907baa1881817854f466c14c47c3956bdfe9a8
+URL:    http://arago-project.org/git/meta-ti.git/?a=tag;h=02907baa1881817854f466c14c47c3956bdfe9a8
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  1 05:55:01 2017 +0000
+Tagger: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Mar  1 15:30:45 2017 -0500
 
-ti-ipc: explicitly depend on virtual/kernel:do_shared_workdir
-
-ipc code looks for kernel's generated version.h file:
-  #include linux_version_include(KERNEL_BUILD_DIR)
-
-which now ends up in the following shared workdir:
-  work-shared/<mach>/kernel-build-artifacts/include/generated/uapi/linux/version.h
-
-It appears if kernel is provided by sstate, shared workdir is not
-getting populated, so depend on the task explicitly.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-ti/ipc/ti-ipc_git.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-index 6ccd2c4..5878b63 100644
---- a/recipes-ti/ipc/ti-ipc_git.bb
-+++ b/recipes-ti/ipc/ti-ipc_git.bb
-@@ -27,6 +27,8 @@ INITSCRIPT_PARAMS = "defaults 10"
- 
- EXTRA_OECONF += "PLATFORM=${PLATFORM} KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} KERNEL_BUILD_DIR=${STAGING_KERNEL_BUILDDIR}"
- 
-+do_compile[depends] += "virtual/kernel:do_shared_workdir"
-+
- do_configure() {
-     ( cd ${S}; autoreconf -f -i -s )
-     oe_runconf
-
+LCPD Core SDK ti2017.00-rc2
 
