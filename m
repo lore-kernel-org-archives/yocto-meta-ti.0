@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7E599E00935; Tue, 28 Feb 2017 16:13:13 -0800 (PST)
+	id 7FB1FE004D2; Tue, 28 Feb 2017 16:13:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5CC54E004D2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E233E007AD
 	for <meta-ti@yoctoproject.org>; Tue, 28 Feb 2017 16:13:09 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6131052979; Wed,  1 Mar 2017 00:13:08 +0000 (UTC)
+	id 54D52529D2; Wed,  1 Mar 2017 00:13:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20170301001308.6131052979@arago-project.org>
+Message-Id: <20170301001308.54D52529D2@arago-project.org>
 Date: Wed,  1 Mar 2017 00:13:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ti-ipc: explicitly depend on virtual/kernel: do_shared_workdir
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 01 Mar 2017 00:13:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: morty
-Commit: 2c8294a83bc79a988b91f09e0b5243c761463574
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2c8294a83bc79a988b91f09e0b5243c761463574
+Branch: master
+Commit: c436524b0c099c65ff16b4275407659924b67fa8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c436524b0c099c65ff16b4275407659924b67fa8
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Mar  1 05:55:01 2017 +0000
