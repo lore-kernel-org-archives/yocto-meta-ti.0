@@ -1,38 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6B9C3E00826; Tue, 28 Feb 2017 15:55:08 -0800 (PST)
+	id 7E599E00935; Tue, 28 Feb 2017 16:13:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26B17E004D2
-	for <meta-ti@yoctoproject.org>; Tue, 28 Feb 2017 15:55:04 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4A27320B6C;
-	Tue, 28 Feb 2017 23:55:03 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id PLnMkkSXnM6I; Tue, 28 Feb 2017 23:55:03 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2998D209A1;
-	Tue, 28 Feb 2017 23:55:02 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 3E7DF16238F;
-	Tue, 28 Feb 2017 18:55:01 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5CC54E004D2
+	for <meta-ti@yoctoproject.org>; Tue, 28 Feb 2017 16:13:09 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 6131052979; Wed,  1 Mar 2017 00:13:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 28 Feb 2017 18:55:01 -0500
-Message-Id: <1488326101-53160-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [morty/master][PATCH] ti-ipc: explicitly depend on virtual/kernel:do_shared_workdir
+Message-Id: <20170301001308.6131052979@arago-project.org>
+Date: Wed,  1 Mar 2017 00:13:08 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ti-ipc: explicitly depend on virtual/kernel: do_shared_workdir
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,7 +33,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 23:55:08 -0000
+X-List-Received-Date: Wed, 01 Mar 2017 00:13:13 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: morty
+Commit: 2c8294a83bc79a988b91f09e0b5243c761463574
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2c8294a83bc79a988b91f09e0b5243c761463574
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Mar  1 05:55:01 2017 +0000
+
+ti-ipc: explicitly depend on virtual/kernel:do_shared_workdir
 
 ipc code looks for kernel's generated version.h file:
   #include linux_version_include(KERNEL_BUILD_DIR)
@@ -57,9 +56,11 @@ It appears if kernel is provided by sstate, shared workdir is not
 getting populated, so depend on the task explicitly.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-ti/ipc/ti-ipc_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+
+ recipes-ti/ipc/ti-ipc_git.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
 index 6ccd2c4..5878b63 100644
@@ -74,7 +75,5 @@ index 6ccd2c4..5878b63 100644
  do_configure() {
      ( cd ${S}; autoreconf -f -i -s )
      oe_runconf
--- 
-2.7.4
 
 
