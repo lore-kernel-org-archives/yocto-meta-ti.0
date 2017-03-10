@@ -1,50 +1,38 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ABE82E00A1E; Fri, 10 Mar 2017 10:17:31 -0800 (PST)
+	id 4F140E00A1E; Fri, 10 Mar 2017 10:42:24 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D2BAE00A0C
-	for <meta-ti@yoctoproject.org>; Fri, 10 Mar 2017 10:17:27 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2AIHHrp014268
-	for <meta-ti@yoctoproject.org>; Fri, 10 Mar 2017 12:17:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1489169837;
-	bh=LCHbOLfIJCpjPuFt6kjH1hUxr62UscjXEe+WLdOO5oU=;
-	h=From:To:CC:Subject:Date;
-	b=NOlL4TG7IgVfr2MR5C24FQHb5j8VdtQ3BtiiZrgBCWDi9X3Tbv+rQ+SNxeDMllyLY
-	4RpQzuxlz97ZOdZL440VsT6pFEURRw4HLhB/l8oYNl28oGmY0j5w8d6+0OzgLNco+t
-	/WTABWNo4shcbg7lvtUaGDo+VUadaEdQXT/j1T0M=
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2AIHBVx020190
-	for <meta-ti@yoctoproject.org>; Fri, 10 Mar 2017 12:17:12 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 10 Mar 2017 12:17:11 -0600
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v2AIHBv9021964;	Fri, 10 Mar 2017 12:17:11 -0600
-Received: from localhost (a0272616local.dhcp.ti.com [172.22.165.231])	by
-	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	v2AIHB329524; Fri, 10 Mar 2017 12:17:11 -0600 (CST)
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 10 Mar 2017 12:17:08 -0600
-Message-ID: <1489169828-6008-1-git-send-email-dmurphy@ti.com>
-X-Mailer: git-send-email 2.7.2.333.g70bd996
-MIME-Version: 1.0
-Subject: [PATCH] linux-ti-staging: update to ti2017.00-rc4 tag
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05D02E00A0C
+	for <meta-ti@yoctoproject.org>; Fri, 10 Mar 2017 10:42:20 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6DE4720BBB;
+	Fri, 10 Mar 2017 18:42:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 9unc_eTnKabY; Fri, 10 Mar 2017 18:42:19 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4E48520BAF;
+	Fri, 10 Mar 2017 18:42:18 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id CEB0416239D;
+	Fri, 10 Mar 2017 13:42:17 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Fri, 10 Mar 2017 13:42:17 -0500
+Message-Id: <1489171337-9082-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] wl18xx-fw: add version 8.9.0.0.70 (R8.7_SP1)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,39 +45,92 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Mar 2017 18:17:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 10 Mar 2017 18:42:24 -0000
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Previous versions were provided by meta-arago-extras, moving to meta-ti now.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/wl18xx-fw/wl18xx-fw.bb                 | 30 ++++++++++++++++++++++
+ ...01-Add-Makefile-to-install-firmware-files.patch | 29 +++++++++++++++++++++
+ 2 files changed, 59 insertions(+)
+ create mode 100644 recipes-bsp/wl18xx-fw/wl18xx-fw.bb
+ create mode 100644 recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index 78eb621..5014eb0 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
- 
- BRANCH = "ti-rt-linux-4.9.y"
- 
--SRCREV = "09576e41759bf32c30a506ecea24b6719d5ba678"
-+SRCREV = "4a074828ca9d95060b1821b7049666bf3f76b456"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 408bfec..1acc31e 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -55,7 +55,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.9.y"
- 
--SRCREV = "2d7a080e68b042ee89579bcb5eb335dd6bc7f634"
-+SRCREV = "179d9df2f5b46e0de10bac15b8e8ad1e4f51388a"
- PV = "4.9.13+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+diff --git a/recipes-bsp/wl18xx-fw/wl18xx-fw.bb b/recipes-bsp/wl18xx-fw/wl18xx-fw.bb
+new file mode 100644
+index 0000000..c11c919
+--- /dev/null
++++ b/recipes-bsp/wl18xx-fw/wl18xx-fw.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "Firmware files for use with TI wl18xx"
++LICENSE = "TI-TSPA"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=4977a0fe767ee17765ae63c435a32a9e"
++
++inherit allarch
++
++PV = "8.9.0.0.70"
++
++SRC_URI = " \
++	git://git.ti.com/wilink8-wlan/wl18xx_fw.git;protocol=git;branch=${BRANCH} \
++	file://0001-Add-Makefile-to-install-firmware-files.patch \
++"
++
++# Tag: R8.7-SP1
++SRCREV = "fe3909e93d15a4b17e43699dde2bba0e9a3c0abc"
++BRANCH = "master"
++
++S = "${WORKDIR}/git"
++
++CLEANBROKEN = "1"
++
++do_compile() {
++    :
++}
++
++do_install() {
++    oe_runmake 'DEST_DIR=${D}' install
++}
++
++FILES_${PN} = "/lib/firmware/ti-connectivity/*"
+diff --git a/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch b/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch
+new file mode 100644
+index 0000000..a8db077
+--- /dev/null
++++ b/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch
+@@ -0,0 +1,29 @@
++From 3a8fc3ccf00796254d6cef4b6d4cd70dc37012e1 Mon Sep 17 00:00:00 2001
++From: Denys Dmytriyenko <denys@ti.com>
++Date: Fri, 10 Mar 2017 13:28:29 -0500
++Subject: [PATCH] Add Makefile to install firmware files
++
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++---
++ Makefile | 9 +++++++++
++ 1 file changed, 9 insertions(+)
++ create mode 100644 Makefile
++
++diff --git a/Makefile b/Makefile
++new file mode 100644
++index 0000000..1cf38e3
++--- /dev/null
+++++ b/Makefile
++@@ -0,0 +1,9 @@
+++# Installs the the ti-connectivity wlan firmware files into the root file system
+++
+++install:
+++	@if [ ! -d $(DESTDIR) ] ; then \
+++		echo "Target filesystem directory doesn't exist."; \
+++		exit 1; \
+++	fi
+++	install -d  $(DEST_DIR)/lib/firmware/ti-connectivity
+++	cp *.bin $(DEST_DIR)/lib/firmware/ti-connectivity/
++-- 
++2.7.4
++
 -- 
-2.7.3
+2.7.4
 
 
