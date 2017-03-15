@@ -1,38 +1,47 @@
-Return-Path: <denis@denix.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3F7EBE00A48; Tue, 14 Mar 2017 14:56:55 -0700 (PDT)
+	id 52BD0E0093F; Wed, 15 Mar 2017 07:10:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 063AEE009DA
-	for <meta-ti@yoctoproject.org>; Tue, 14 Mar 2017 14:56:47 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id CADD020BA7;
-	Tue, 14 Mar 2017 21:56:46 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id htSqbXfa1Biy; Tue, 14 Mar 2017 21:56:46 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AA5F1208FB;
-	Tue, 14 Mar 2017 21:56:45 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 4334D1623C7;
-	Tue, 14 Mar 2017 17:56:45 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Tue, 14 Mar 2017 17:56:44 -0400
-Message-Id: <1489528604-134577-1-git-send-email-denis@denix.org>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B20AE007BA
+	for <meta-ti@yoctoproject.org>; Wed, 15 Mar 2017 07:10:25 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2FEAOjD014834
+	for <meta-ti@yoctoproject.org>; Wed, 15 Mar 2017 09:10:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1489587024;
+	bh=AICN0saI6BjENgQVkhtvYjFMF1FXmxh2nvkFsSlNmRw=;
+	h=From:To:CC:Subject:Date;
+	b=fUDjrZietFdKgvHZA38BvccwFV/WC1rGoj6ffqEH2TNi95vQevrKSy9J3huJUpE9N
+	jf9jxnQ+ah0Ysm7aIb/kr4Ze15u9h+eGGXelOnzjqXX1R8heOJD9bJg0QBNODYIIDR
+	k+OLbaxoaoYm2slkOyug827gkvg5eOqm5vnk97Zs=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2FEAO5E026817
+	for <meta-ti@yoctoproject.org>; Wed, 15 Mar 2017 09:10:24 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 15 Mar 2017 09:10:24 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v2FEANP7027036;	Wed, 15 Mar 2017 09:10:24 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 15 Mar 2017 10:08:12 -0400
+Message-ID: <1489586892-24538-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [morty/master][PATCH] kselftests: set file ownership to root, avoid contamination warnings
+MIME-Version: 1.0
+Subject: [krogoth/morty/master][PATCH] openmp-rtos: bump SRCREV to version 2.6.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,27 +54,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 21:56:55 -0000
+X-List-Received-Date: Wed, 15 Mar 2017 14:10:26 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-kernel/kselftests/kselftests_4.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/kselftests/kselftests_4.4.bb b/recipes-kernel/kselftests/kselftests_4.4.bb
-index eb560c9..7f9def7 100644
---- a/recipes-kernel/kselftests/kselftests_4.4.bb
-+++ b/recipes-kernel/kselftests/kselftests_4.4.bb
-@@ -42,6 +42,7 @@ do_compile () {
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index 256b5ac..5bf902b 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
  
- do_install () {
- 	oe_runmake install
-+	chown -R root:root ${D}
- }
+ require recipes-ti/includes/ti-paths.inc
  
- PACKAGE_BEFORE_PN = "${PN}-breakpoints ${PN}-cpu-hotplug ${PN}-efivarfs ${PN}-exec ${PN}-firmware ${PN}-ftrace \
+-PV = "2_05_00_00"
++PV = "2_06_00_00"
+ PR = "r0"
+ 
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+ SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+ "
+ 
+-SRCREV = "8a3e3b3d5aff1ea7c6dacf8699a83c948e926bfb"
++SRCREV = "a9aae66f792e999dafbd2e0bd834f98122398c4c"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ 
 -- 
 2.7.4
 
