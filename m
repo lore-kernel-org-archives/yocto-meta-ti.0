@@ -1,38 +1,50 @@
-Return-Path: <denys@ti.com>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 574BAE00839; Wed, 15 Mar 2017 14:41:35 -0700 (PDT)
+	id D7763E003E1; Thu, 16 Mar 2017 10:26:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14B6DE00546
-	for <meta-ti@yoctoproject.org>; Wed, 15 Mar 2017 14:41:21 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id AD4F020B7A;
-	Wed, 15 Mar 2017 21:41:19 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id pKvGXecGVY0f; Wed, 15 Mar 2017 21:41:19 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 87FB220B37;
-	Wed, 15 Mar 2017 21:41:18 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 114BA1623AA;
-	Wed, 15 Mar 2017 17:41:18 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 15 Mar 2017 17:41:15 -0400
-Message-Id: <1489614075-77390-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [krogoth/morty][PATCH] linux-ti-staging_4.4: update to 4.4.54
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 95F33E0030B
+	for <meta-ti@yoctoproject.org>; Thu, 16 Mar 2017 10:26:40 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2GHQdxp031119
+	for <meta-ti@yoctoproject.org>; Thu, 16 Mar 2017 12:26:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1489685199;
+	bh=gCxmFKCDDtJpvX4uXMXczDhUxc5P1OrQUNfHUtcFvoA=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=KNZJACPjHPSBDeDbefTtMkO9VsWQPTmudUsCoOrFKShwgM+KNhVYTAlRlATzyrQX+
+	ieuR9EYrRe3+0xkLbzllvWHtHotDwhfepk+8KBJvBSEFcnHVCh6FmJKLlWIuOvmAaP
+	uTCt+X4U1TR+4QjII2OT9i4xtyEUgoYoPwpeM/JU=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2GHQdIT007981
+	for <meta-ti@yoctoproject.org>; Thu, 16 Mar 2017 12:26:39 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 16 Mar 2017 12:26:39 -0500
+Received: from uda0850410.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v2GHQcLc017963	for <meta-ti@yoctoproject.org>; Thu, 16 Mar 2017 12:26:39
+	-0500
+From: Eric Ruei <e-ruei1@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 16 Mar 2017 13:26:34 -0400
+Message-ID: <1489685194-53625-3-git-send-email-e-ruei1@ti.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1489685194-53625-1-git-send-email-e-ruei1@ti.com>
+References: <1489685194-53625-1-git-send-email-e-ruei1@ti.com>
+MIME-Version: 1.0
+Subject: [krogoth][PATCH 3/3] gstreamer1.0-plugins-bad: waylandsink: add input format I420 support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,40 +57,130 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2017 21:41:35 -0000
+X-List-Received-Date: Thu, 16 Mar 2017 17:26:41 -0000
+Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.4.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.4.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ ...waylandsink-add-input-format-I420-support.patch | 89 ++++++++++++++++++++++
+ .../gstreamer1.0-plugins-bad_1.6.3.bbappend        |  2 +
+ 2 files changed, 91 insertions(+)
+ create mode 100644 meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad/0001-gstwaylandsink-add-input-format-I420-support.patch
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-index 9e26001..ce97991 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.4.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.4:"
+diff --git a/meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad/0001-gstwaylandsink-add-input-format-I420-support.patch b/meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad/0001-gstwaylandsink-add-input-format-I420-support.patch
+new file mode 100644
+index 0000000..c4bf4b1
+--- /dev/null
++++ b/meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad/0001-gstwaylandsink-add-input-format-I420-support.patch
+@@ -0,0 +1,89 @@
++From 4d04ea92f196b9e0880917cf029a95c9ebef0ea9 Mon Sep 17 00:00:00 2001
++From: Eric Ruei <e-ruei1@ti.com>
++Date: Wed, 22 Feb 2017 10:49:01 -0500
++Subject: [PATCH] gstwaylandsink: add input format I420 support
++
++The software-based video decoder produces the output in I420 format. To display
++the output without additional ARM MHz consumed in video format conversion,
++the function gst_wl_memory_construct_wl_buffer is enhanced to support I420 format.
++
++Signed-off-by: Eric Ruei <e-ruei1@ti.com>
++---
++ ext/wayland/wldrm.c | 41 ++++++++++++++++++++++++++++++++++-------
++ 1 file changed, 34 insertions(+), 7 deletions(-)
++
++diff --git a/ext/wayland/wldrm.c b/ext/wayland/wldrm.c
++index 8f2c393..cb2b0f2 100644
++--- a/ext/wayland/wldrm.c
+++++ b/ext/wayland/wldrm.c
++@@ -5,33 +5,60 @@
++ #include <omap_drmif.h>
++ #include <wayland-client.h>
++ 
+++GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
+++#define GST_CAT_DEFAULT gstwayland_debug
+++
+++
++ struct wl_buffer *
++ gst_wl_drm_memory_construct_wl_buffer (GstMemory * mem, GstWlDisplay * display,
++     const GstVideoInfo * info)
++ {
++   gint video_width = GST_VIDEO_INFO_WIDTH (info);
++   gint video_height = GST_VIDEO_INFO_HEIGHT (info);
+++  GstVideoFormat format = GST_VIDEO_INFO_FORMAT (info);
++   int fd = -1;
++   struct omap_bo *bo;
++   struct wl_buffer *buffer;
++-
++-  /* TODO get format, etc from caps.. and query device for
++-   * supported formats, and make this all more flexible to
++-   * cope with various formats:
++-   */
++-  uint32_t fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
+++  uint32_t fourcc;
++   uint32_t name;
++   /* note: wayland and mesa use the terminology:
++    *    stride - rowstride in bytes
++    *    pitch  - rowstride in pixels
++    */
++   uint32_t strides[3] = {
++-    GST_ROUND_UP_4 (video_width), GST_ROUND_UP_4 (video_width), 0,
+++    GST_ROUND_UP_4 (video_width), 0, 0,
++   };
++   uint32_t offsets[3] = {
++     0, strides[0] * video_height, 0
++   };
++ 
+++  if (format == GST_VIDEO_FORMAT_NV12)
+++  {
+++    /* NV12 */
+++    fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
+++    strides[1] = GST_ROUND_UP_4 (video_width);
+++  }
+++  else if(format == GST_VIDEO_FORMAT_I420)
+++  {
+++    /* YUV420 */
+++    fourcc = GST_MAKE_FOURCC ('Y', 'U', '1', '2');
+++    strides[1] = strides[2] = GST_ROUND_UP_4 (video_width/2);
+++    offsets[2] = offsets[1] + strides[1] * video_height/2;
+++  }
+++  else
+++  {
+++
+++    GST_DEBUG ("Unsupported video format: %d", format);
+++    /*
+++     * There are two xRGB frames with width and height = 1 required in the begining of a video stream.
+++     * If we consider them as errot, then it will case libwayland-clent.so crashes
+++     * due to invalid error handling.
+++     * Consider them as NV12 until we can figure out a better solution
+++     */
+++    fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
+++    strides[1] = GST_ROUND_UP_4 (video_width);
+++  }
+++
++   fd = gst_fd_memory_get_fd (mem);
++ 
++   if (fd < 0 ) {
++-- 
++1.9.1
++
+diff --git a/meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.6.3.bbappend b/meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.6.3.bbappend
+index 317b19e..bbd1d99 100644
+--- a/meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.6.3.bbappend
++++ b/meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.6.3.bbappend
+@@ -22,11 +22,13 @@ DEPENDS_append_ti33x = " \
+ SRC_URI_append_omap-a15 = " \
+     file://0001-kmssink-remove-DCE-dependencies.patch \
+     file://0002-kmssink-add-YUYV-support.patch \
++    file://0001-gstwaylandsink-add-input-format-I420-support.patch \
+ "
  
- BRANCH = "ti-rt-linux-4.4.y"
+ SRC_URI_append_ti43x = " \
+     file://0001-kmssink-remove-DCE-dependencies.patch \
+     file://0002-kmssink-add-YUYV-support.patch \
++    file://0001-gstwaylandsink-add-input-format-I420-support.patch \
+ "
  
--SRCREV = "15ae5cb78b00ab8989bcd85d36429c917c016237"
-+SRCREV = "00eb0a0737110139728384e2be21656f9669f8a8"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.4.bb b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-index ecf3f4c..64960e8 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.4.bb
-@@ -81,8 +81,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.4.y"
- 
--SRCREV = "7c580a51af521f320eb56717f291aa5b64c2f244"
--PV = "4.4.41+git${SRCPV}"
-+SRCREV = "ecd4eada6ffe24c7edde11a66e406ac96ab557f5"
-+PV = "4.4.54+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ SRC_URI_append_ti33x = " \
 -- 
-2.7.4
+1.9.1
 
 
