@@ -1,38 +1,36 @@
-Return-Path: <denis@denix.org>
+Return-Path: <fw@javox-solutions.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 78655E0052B; Thu, 16 Mar 2017 15:25:26 -0700 (PDT)
+	id 616E6E009B9; Fri, 17 Mar 2017 08:48:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	RCVD_IN_SORBS_SPAM,SPF_HELO_PASS autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [80.67.31.29 listed in list.dnswl.org]
+	* -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 09B62E003C1
-	for <meta-ti@yoctoproject.org>; Thu, 16 Mar 2017 15:25:24 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 912AA20BAF;
-	Thu, 16 Mar 2017 22:25:23 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 9vH1wBlK4Hd1; Thu, 16 Mar 2017 22:25:23 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6901F208FB;
-	Thu, 16 Mar 2017 22:25:21 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id E2F351623AE;
-	Thu, 16 Mar 2017 18:25:20 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
+	*      [80.67.31.29 listed in dnsbl.sorbs.net]
+X-Greylist: delayed 552 seconds by postgrey-1.32 at yocto-www;
+	Fri, 17 Mar 2017 08:48:46 PDT
+Received: from smtprelay02.ispgateway.de (smtprelay02.ispgateway.de
+	[80.67.31.29])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0AC07E0097C
+	for <meta-ti@yoctoproject.org>; Fri, 17 Mar 2017 08:48:46 -0700 (PDT)
+Received: from [87.79.86.159] (helo=javoxdev2.fritz.box)
+	by smtprelay02.ispgateway.de with esmtpa (Exim 4.84)
+	(envelope-from <fw@javox-solutions.com>)
+	id 1cotyW-00067l-VT; Fri, 17 Mar 2017 16:39:33 +0100
+From: Florian Wickert <fw@javox-solutions.com>
 To: meta-ti@yoctoproject.org
-Date: Thu, 16 Mar 2017 18:25:20 -0400
-Message-Id: <1489703120-59579-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] kselftests: fix capabilities and sigaltstack packaging
+Date: Fri, 17 Mar 2017 16:38:42 +0100
+Message-Id: <1489765123-11940-1-git-send-email-fw@javox-solutions.com>
+X-Mailer: git-send-email 2.1.4
+X-Df-Sender: ZndAamF2b3gtc29sdXRpb25zLmNvbQ==
+Subject: [PATCH] u-boot-ti.inc: added dependency to bc-native
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,44 +43,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Mar 2017 22:25:26 -0000
+X-List-Received-Date: Fri, 17 Mar 2017 15:48:49 -0000
 
-From: Denys Dmytriyenko <denys@ti.com>
+The script in scripts/Makefile.spl uses bc in line 201. Not having the dependency in the recipe can make the compile task fail.
 
-1. capabilities requires cap-ng.h header file, otherwise skipping the build
-2. sigaltstack was not using TEST_PROGS resulting in binary not being installed
-
-Since the main package depends on all subpackages, in both cases it would lead
-to a failure to install it into an image.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Cc: Fathi Boudra <fathi.boudra@linaro.org>
+Signed-off-by: Florian Wickert <fw@javox-solutions.com>
 ---
- recipes-kernel/kselftests/kselftests_4.9.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ recipes-bsp/u-boot/u-boot-ti.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-kernel/kselftests/kselftests_4.9.bb b/recipes-kernel/kselftests/kselftests_4.9.bb
-index 3b1e43e..a7b4ba6 100644
---- a/recipes-kernel/kselftests/kselftests_4.9.bb
-+++ b/recipes-kernel/kselftests/kselftests_4.9.bb
-@@ -60,6 +60,7 @@ do_configure () {
- 	sed "s|^CC := .*||g" -i ${S}/tools/testing/selftests/powerpc/switch_endian/Makefile
- 	sed "s|gcc|\$(CC)|g" -i ${S}/tools/testing/selftests/breakpoints/Makefile
- 	sed "s|^LDFLAGS += -lrt -lpthread|LDLIBS += -lrt -lpthread|g" -i ${S}/tools/testing/selftests/timers/Makefile
-+	sed "s|BINARIES|TEST_PROGS|g" -i ${S}/tools/testing/selftests/sigaltstack/Makefile
- }
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 57f7fe6..0d6a4b8 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -27,7 +27,7 @@ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH
+ PV_append = "+git${SRCPV}"
  
- do_compile () {
-@@ -138,6 +139,8 @@ FILES_${PN}-x86 = "${bindir}/kselftests/x86"
- FILES_${PN}-zram = "${bindir}/kselftests/zram"
- FILES_${PN}-dbg += "${bindir}/kselftests/*/.debug"
+ # u-boot needs devtree compiler to parse dts files
+-DEPENDS += "dtc-native"
++DEPENDS += "dtc-native bc-native"
  
-+ALLOW_EMPTY_${PN}-capabilities = "1"
-+
- RDEPENDS_${PN}-cpu-hotplug += "bash"
- RDEPENDS_${PN}-efivarfs += "bash"
- RDEPENDS_${PN}-memory-hotplug += "bash"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
 -- 
-2.7.4
+2.1.4
 
 
