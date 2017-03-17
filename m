@@ -1,36 +1,60 @@
-Return-Path: <fw@javox-solutions.com>
+Return-Path: <fathi.boudra@linaro.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 616E6E009B9; Fri, 17 Mar 2017 08:48:49 -0700 (PDT)
+	id 19F1EE009CF; Fri, 17 Mar 2017 09:37:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	RCVD_IN_SORBS_SPAM,SPF_HELO_PASS autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [80.67.31.29 listed in list.dnswl.org]
-	* -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [209.85.215.42 listed in list.dnswl.org]
+	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
+	*      [209.85.215.42 listed in dnsbl.sorbs.net]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [80.67.31.29 listed in dnsbl.sorbs.net]
-X-Greylist: delayed 552 seconds by postgrey-1.32 at yocto-www;
-	Fri, 17 Mar 2017 08:48:46 PDT
-Received: from smtprelay02.ispgateway.de (smtprelay02.ispgateway.de
-	[80.67.31.29])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0AC07E0097C
-	for <meta-ti@yoctoproject.org>; Fri, 17 Mar 2017 08:48:46 -0700 (PDT)
-Received: from [87.79.86.159] (helo=javoxdev2.fritz.box)
-	by smtprelay02.ispgateway.de with esmtpa (Exim 4.84)
-	(envelope-from <fw@javox-solutions.com>)
-	id 1cotyW-00067l-VT; Fri, 17 Mar 2017 16:39:33 +0100
-From: Florian Wickert <fw@javox-solutions.com>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-lf0-f42.google.com (mail-lf0-f42.google.com
+	[209.85.215.42])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9BF82E00985
+	for <meta-ti@yoctoproject.org>; Fri, 17 Mar 2017 09:36:57 -0700 (PDT)
+Received: by mail-lf0-f42.google.com with SMTP id z15so35465548lfd.1
+	for <meta-ti@yoctoproject.org>; Fri, 17 Mar 2017 09:36:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=a1YKuPJsEVUzdM3+fMpNyCSmcBXvK4X0IsU3pD8jn3Q=;
+	b=kTJ8Lh9tZ7U9sWLGhOjlyTZuH1VNZGGkPdey42TzKSCaaoeVnk/aNVRfyEB1a7YG/q
+	HEVr+GhSxO79+bgmAw17stsM0acxGzC8I/ZVlrlmLd0uGCd8aaHRhLzNQwD+GsUlM7zv
+	Vob/geNMXmuq/XSSB1NYJC0xT5TTV+kh0XySQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=a1YKuPJsEVUzdM3+fMpNyCSmcBXvK4X0IsU3pD8jn3Q=;
+	b=lkHJ2HHTn8sMMaO9BqXRff54tF9eVvibCQMAMtmulxjq/ipiftakzUSHDj9f2xAWoY
+	E22w2VkPfOVFhWxXjgtr5dDzJBtcj/EAnFjgPEn8vCrUo2jNZwziuzesrndAuiNfIvD5
+	i0VoeKfkceQw7sPNrRlPSe+8d46M1J1MMxQDXYi8G7o8uZCfWF6ky3LwQH43zQvCAZun
+	kQtowFwR2Plwj3zCHEbG5+VOEjjJm+s3gWvdLe6MSYZhnLaUB7Mj3T29tfs6CS8ER7Xh
+	w2ScWUfONegy6dd7L3nLiBq/NWk00VTcjPywSKSQ4UTeOhVvBRLsxS9QPK8R+oS/hna+
+	u8Yw==
+X-Gm-Message-State: AFeK/H274EWPMGQLQtOFlAYxzW2bIqHwo9q2ZHI7nqs07i0fknuIL0k5SLkORsbu0+OSFg/O
+X-Received: by 10.25.34.87 with SMTP id i84mr4637340lfi.140.1489768616688;
+	Fri, 17 Mar 2017 09:36:56 -0700 (PDT)
+Received: from localhost.localdomain (a91-156-68-16.elisa-laajakaista.fi.
+	[91.156.68.16]) by smtp.gmail.com with ESMTPSA id
+	b75sm1549643lfh.36.2017.03.17.09.36.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 17 Mar 2017 09:36:55 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 17 Mar 2017 16:38:42 +0100
-Message-Id: <1489765123-11940-1-git-send-email-fw@javox-solutions.com>
-X-Mailer: git-send-email 2.1.4
-X-Df-Sender: ZndAamF2b3gtc29sdXRpb25zLmNvbQ==
-Subject: [PATCH] u-boot-ti.inc: added dependency to bc-native
+Date: Fri, 17 Mar 2017 18:36:52 +0200
+Message-Id: <20170317163653.13127-1-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.11.0
+Subject: [morty-next][PATCH 1/2] kselftests: add libpcap-ng dependency
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,29 +67,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Mar 2017 15:48:49 -0000
+X-List-Received-Date: Fri, 17 Mar 2017 16:37:01 -0000
 
-The script in scripts/Makefile.spl uses bc in line 201. Not having the dependency in the recipe can make the compile task fail.
+libpcap-ng is required to build capabilities tests.
 
-Signed-off-by: Florian Wickert <fw@javox-solutions.com>
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
 ---
- recipes-bsp/u-boot/u-boot-ti.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-kernel/kselftests/kselftests_4.9.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index 57f7fe6..0d6a4b8 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -27,7 +27,7 @@ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH
- PV_append = "+git${SRCPV}"
- 
- # u-boot needs devtree compiler to parse dts files
--DEPENDS += "dtc-native"
-+DEPENDS += "dtc-native bc-native"
+diff --git a/recipes-kernel/kselftests/kselftests_4.9.bb b/recipes-kernel/kselftests/kselftests_4.9.bb
+index a7b4ba67..dd94a65b 100644
+--- a/recipes-kernel/kselftests/kselftests_4.9.bb
++++ b/recipes-kernel/kselftests/kselftests_4.9.bb
+@@ -11,7 +11,7 @@ S = "${WORKDIR}/linux-${PV}"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
+-DEPENDS = "libcap popt rsync-native"
++DEPENDS = "libcap libcap-ng popt rsync-native"
+ 
+ inherit kernel-arch
+ 
+@@ -139,8 +139,6 @@ FILES_${PN}-x86 = "${bindir}/kselftests/x86"
+ FILES_${PN}-zram = "${bindir}/kselftests/zram"
+ FILES_${PN}-dbg += "${bindir}/kselftests/*/.debug"
+ 
+-ALLOW_EMPTY_${PN}-capabilities = "1"
+-
+ RDEPENDS_${PN}-cpu-hotplug += "bash"
+ RDEPENDS_${PN}-efivarfs += "bash"
+ RDEPENDS_${PN}-memory-hotplug += "bash"
 -- 
-2.1.4
+2.11.0
 
 
