@@ -1,36 +1,49 @@
-Return-Path: <fw@javox-solutions.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 518A1E00AFD; Mon, 20 Mar 2017 08:46:42 -0700 (PDT)
+	id 9A971E00AFD; Mon, 20 Mar 2017 08:55:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_HELO_PASS autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [80.67.31.37 listed in list.dnswl.org]
-	* -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from smtprelay03.ispgateway.de (smtprelay03.ispgateway.de
-	[80.67.31.37])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D90DAE00AA7
-	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 08:46:40 -0700 (PDT)
-Received: from [89.1.50.161] (helo=[192.168.178.77])
-	by smtprelay03.ispgateway.de with esmtpsa
-	(TLSv1.2:DHE-RSA-AES128-SHA:128) (Exim 4.84)
-	(envelope-from <fw@javox-solutions.com>) id 1cpzW2-0007hu-MX
-	for meta-ti@yoctoproject.org; Mon, 20 Mar 2017 16:46:38 +0100
-To: meta-ti@yoctoproject.org
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DFE93E00AA7
+	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 08:55:28 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2KFt7nx029741;
+	Mon, 20 Mar 2017 10:55:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1490025307;
+	bh=HwadwxQ+vNwMPVrQvSJgWbfS54vOOw7YM+0bQBtuUmU=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=tmdO5F3/8tLo+SGVpUHlXZLx1U9TjrHsmJIHN8KhnNccheBnHeBycE9EU5bQVH75y
+	IdT6ZOyKQS1K3Dn4ZZoWXQsKUxBLhdzddAByqbWCvGEgZ8TpJ+gCCF3uqJQNMgCbbh
+	ro2itZgvfcBj23DaoSES+St+VLoWXBnpk50BGnnM=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KFt1W6013280;
+	Mon, 20 Mar 2017 10:55:02 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 20 Mar 2017 10:55:02 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KFt2wD013253;
+	Mon, 20 Mar 2017 10:55:02 -0500
+Date: Mon, 20 Mar 2017 11:54:59 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Glenn Schmottlach <gschmottlach@gmail.com>
+Message-ID: <20170320155459.GP14484@edge>
 References: <CAMS2kBEyHe6y3rKD0RV=LXnSXR8kQY7yHuHtBQrb5gvDiX4RCg@mail.gmail.com>
-From: Florian Wickert <fw@javox-solutions.com>
-Message-ID: <3ab947d9-7e20-fd6e-6ef0-6754df59f1ae@javox-solutions.com>
-Date: Mon, 20 Mar 2017 16:45:57 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Icedove/45.6.0
 MIME-Version: 1.0
 In-Reply-To: <CAMS2kBEyHe6y3rKD0RV=LXnSXR8kQY7yHuHtBQrb5gvDiX4RCg@mail.gmail.com>
-X-Df-Sender: ZndAamF2b3gtc29sdXRpb25zLmNvbQ==
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
 Subject: Re: Trouble modifying defconfig for linux-ti-staging_rt recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -44,59 +57,70 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 15:46:42 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Mar 2017 15:55:30 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-You are right, it does not inherit the yocto linux bbclass.
-Try setting this in your bbappend file:
-KERNEL_CONFIG_FRAGMENTS_append = " ${WORKDIR}/eem.cfg"
-
-Regards,
-Florian
-
-
-On 03/20/2017 04:44 PM, Glenn Schmottlach wrote:
+On Mon, Mar 20, 2017 at 11:44:16AM -0400, Glenn Schmottlach wrote:
 > I am having trouble modifying the kernel configuration for the
 > following TI kernel recipe using the Yocto Morty environment:
->
+> 
 > linux-ti-staging-rt_4.9.bb
->
+> 
 > I have created my own layer and with a *.bbappend file for this recipe, e.g.
->
+> 
 > linux-ti-staging-rt_4.9.bbappend
->
+> 
 > It appears the TI kernel recipes are not (yet) proper "Yocto" kernel
-> recipes in that they are not "fragment" aware. It appears I cannot do
+> recipes in that they are not "fragment" aware.
+
+TI kernel recipe is not "Yocto" kernel (which is really to say WindRiver 
+format), but the fragment support got upstreamed to the mainline kernel and 
+kernel itself now supports config fragments! That is what TI kernel uses and 
+meta-ti kernel recipe supports.
+
+
+> It appears I cannot do
 > the following inside of my *.bbappend recipe:
->
+> 
 > FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 > SRC_URI += "file://eem.cfg"
->
+
+You can add any additional fragments you want to be applied by the recipe to 
+KERNEL_CONFIG_FRAGMENTS variable.
+
+
 > Inside of "eem.cfg" I want to set the following kernel options:
->
+> 
 > CONFIG_USB_NET_CDC_EEM=m
 > CONFIG_USB_F_EEM=m
 > CONFIG_USB_ETH_EEM=y
->
+> 
 > This has no affect. I tried creating my own defconfig based on the
 > '.config' generated from the original recipe. I modified my *.bbappend
 > file as follows:
->
+> 
 > FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 > SRC_URI += "file://defconfig"
->
+> 
 > Again, my defconfig is not applied to the build.
->
+
+It already has file://defconfig in SRC_URI, that's how it works and gets the 
+fragments assembled.
+
+What's your platform? Are you sure one of the existing defconfigs are not 
+used instead?
+
+
 > I even tried patching kernel-source/ti_config_fragments and placing a
 > eem.cfg in that directory hoping the configuration generation script
 > (defconfig_builder.sh) might apply this fragment.
->
+> 
 > FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 > SRC_URI += "file://0001-eem-config.patch"
->
+> 
 > Where the patch contains:
->
+> 
 > Index: kernel-source/ti_config_fragments/eem.cfg
 > ===================================================================
 > --- /dev/null
@@ -106,14 +130,23 @@ On 03/20/2017 04:44 PM, Glenn Schmottlach wrote:
 > +CONFIG_USB_F_EEM=m
 > +CONFIG_USB_ETH_EEM=y
 > +
->
+> 
 > Unfortunately this did not work either.
->
+
+You also need to update the "map" file, which basically lists all the 
+fragments it needs to assemble for a platform. And platform's defconfig only 
+points to one of the entries in the map file.
+
+
 > I suspect this question has been asked before, but what is the
 > RECOMMENDED procedure for making kernel configuration changes to the
 > TI kernel recipes in a Yocto environment? What methods have others
 > used to tweak the TI kernel options from their *.bbappend files?
->
+> 
 > Thanks for any insights . . .
-
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
