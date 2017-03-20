@@ -1,13 +1,17 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <gschmottlach@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7FAAEE00AE0; Mon, 20 Mar 2017 04:52:53 -0700 (PDT)
+	id B68AAE00AFD; Mon, 20 Mar 2017 08:44:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,URI_HEX autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (gschmottlach[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.161.175 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -15,35 +19,41 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4637DE00AD5
-	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 04:52:50 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2KBqeAR026688
-	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 06:52:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1490010760;
-	bh=JQHuMGFZ1k0L3Im4NxpvzPIji0ZX6SxkqLQ9y28jg1U=;
-	h=From:To:CC:Subject:Date;
-	b=lGMBiPrUPVdlD7ynKSP/gu+bNRI963qn89fZUUfnjHF1es/gm6/afOwgdc/7CoLCb
-	UCRaDVg47a/6JwS+9Rf4ekULR39pxZvYASI8lmIlOTNkWSBWrWblIpBOrnSnUQ/3hH
-	Et49idl+vMy1el4mQrMdEAc3b0b62sDa10lBx/zE=
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KBqZMI005904
-	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 06:52:35 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 20 Mar 2017 06:52:34 -0500
-Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KBqXCi030023;
-	Mon, 20 Mar 2017 06:52:34 -0500
-From: Karthik Ramanan <a0393906@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 20 Mar 2017 17:22:13 +0530
-Message-ID: <1490010733-134572-1-git-send-email-a0393906@ti.com>
-X-Mailer: git-send-email 1.9.1
+Received: from mail-yw0-f175.google.com (mail-yw0-f175.google.com
+	[209.85.161.175])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BC1FE00AA7
+	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 08:44:18 -0700 (PDT)
+Received: by mail-yw0-f175.google.com with SMTP id o4so92719421ywd.3
+	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 08:44:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=s9XDLF+n3LFaGToJqGgnhGx9HBxBnoK4Q7CyKPKiQLo=;
+	b=f3ERc5G94Z+DsoWhm40fjcxVV/dWsG+71bj5FTPqRQ07XUj8kJT5X+UwiFc82yTLoi
+	Zy1h7xPfTRTAlY48U0Y9an+0RmCE5DExtR4u/awOiha5zB5qpDmw9HmoUn4hd975jbE2
+	g80WZW5tKOFvq+FIFkHQipG3plCLkaeuf3b1xVdBD8LI4PcWTQ3PvSq7M5I1JL7L6lqY
+	l+MOjEjGlxnPHudAHchCVQLHvqXINycMG5x6AXAiVXDeBYXwuOqATIIZOxJaU+X68IpA
+	sG/Awa7nMVvLUsxtb1ggTlLrE59juKe0CK9kcd74CRdgZkeehIS1lnFN6tVUqLnJIr4Z
+	CJOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=s9XDLF+n3LFaGToJqGgnhGx9HBxBnoK4Q7CyKPKiQLo=;
+	b=IK4Vksc2gsZezdhwZ5hr7oSfDB++XMdMAzXdzSJ+rdNpnhgSwVGrwGoZND6MgdLrPe
+	jH285ju7/nx2P6BNnowgGn44LZbw2kRIgf249lIzOPl9rL6KWTHQqlxmfrSLFePG8e+U
+	eXmwWJX81DnOhITAQrftvDThprOtSkO3HsEfHcSog7lw4lxCtoFDJp4Mr6GOokby5Bj7
+	sQ1gl0ZDfd4GKS0IjX8Ur9Jkpv7XczjCF40meJ1P471jxV1T4gwgl2DUMEbRo63Nc4Bh
+	v/aw5wLY+b+U9z2FcibIdkwsc25GUtbkBdx5HYxv8JTzxhr5eHEhgrvgl2x4oRbPboan
+	tFvQ==
+X-Gm-Message-State: AFeK/H3AbSGN45EPTrZkaNyWgZBxkHIc3MEgga35kdtTao0LvJXXdXMVKdgjR2Rjv2VVKpos3w3IrEvIqlOAxQ==
+X-Received: by 10.37.5.207 with SMTP id 198mr18733964ybf.78.1490024657163;
+	Mon, 20 Mar 2017 08:44:17 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [morty] ti-sgx-ddk-um: Add INSANE_SKIP with already-stripped
+Received: by 10.129.95.139 with HTTP; Mon, 20 Mar 2017 08:44:16 -0700 (PDT)
+From: Glenn Schmottlach <gschmottlach@gmail.com>
+Date: Mon, 20 Mar 2017 11:44:16 -0400
+Message-ID: <CAMS2kBEyHe6y3rKD0RV=LXnSXR8kQY7yHuHtBQrb5gvDiX4RCg@mail.gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: Trouble modifying defconfig for linux-ti-staging_rt recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,37 +66,65 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 11:52:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 20 Mar 2017 15:44:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Without this option, there is build failure on poky
+I am having trouble modifying the kernel configuration for the
+following TI kernel recipe using the Yocto Morty environment:
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
----
- recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+linux-ti-staging-rt_4.9.bb
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 3a9a2b2..ab54cac 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
- 
- inherit update-rc.d
- 
--PR = "r23"
-+PR = "r24"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
- 
- DEPENDS += "libdrm udev libgbm wayland libffi"
-@@ -73,5 +73,6 @@ INHIBIT_SYSROOT_STRIP = "1"
- 
- INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
- INSANE_SKIP_${PN}-plugins = "dev-so"
-+INSANE_SKIP_${PN} += "already-stripped"
- 
- CLEANBROKEN = "1"
--- 
-1.9.1
+I have created my own layer and with a *.bbappend file for this recipe, e.g.
 
+linux-ti-staging-rt_4.9.bbappend
+
+It appears the TI kernel recipes are not (yet) proper "Yocto" kernel
+recipes in that they are not "fragment" aware. It appears I cannot do
+the following inside of my *.bbappend recipe:
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI += "file://eem.cfg"
+
+Inside of "eem.cfg" I want to set the following kernel options:
+
+CONFIG_USB_NET_CDC_EEM=m
+CONFIG_USB_F_EEM=m
+CONFIG_USB_ETH_EEM=y
+
+This has no affect. I tried creating my own defconfig based on the
+'.config' generated from the original recipe. I modified my *.bbappend
+file as follows:
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI += "file://defconfig"
+
+Again, my defconfig is not applied to the build.
+
+I even tried patching kernel-source/ti_config_fragments and placing a
+eem.cfg in that directory hoping the configuration generation script
+(defconfig_builder.sh) might apply this fragment.
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI += "file://0001-eem-config.patch"
+
+Where the patch contains:
+
+Index: kernel-source/ti_config_fragments/eem.cfg
+===================================================================
+--- /dev/null
++++ kernel-source/ti_config_fragments/eem.cfg
+@@ -0,0 +1,4 @@
++CONFIG_USB_NET_CDC_EEM=m
++CONFIG_USB_F_EEM=m
++CONFIG_USB_ETH_EEM=y
++
+
+Unfortunately this did not work either.
+
+I suspect this question has been asked before, but what is the
+RECOMMENDED procedure for making kernel configuration changes to the
+TI kernel recipes in a Yocto environment? What methods have others
+used to tweak the TI kernel options from their *.bbappend files?
+
+Thanks for any insights . . .
 
