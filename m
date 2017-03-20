@@ -1,66 +1,52 @@
-Return-Path: <gschmottlach@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BC787E007AA; Mon, 20 Mar 2017 13:59:35 -0700 (PDT)
+	id AB977E00726; Mon, 20 Mar 2017 14:08:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, RCVD_IN_DNSWL_NONE,
-	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (gschmottlach[at]gmail.com)
-	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [209.85.161.174 listed in dnsbl.sorbs.net]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.161.174 listed in list.dnswl.org]
-Received: from mail-yw0-f174.google.com (mail-yw0-f174.google.com
-	[209.85.161.174])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 847D1E00524
-	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 13:59:31 -0700 (PDT)
-Received: by mail-yw0-f174.google.com with SMTP id v76so98513284ywg.0
-	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 13:59:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=7edOY0PzN/3HMRYvYCh3SzZlbv+t/t2wt68wcCJat8w=;
-	b=tlflJUb5njsbmYQw03ZlHJGzS2qZk+kOPMz2ZUfoxfgBw1pkukch3RZjyilFjrqLvW
-	cUrDs41IfEOyUrS+l0iz3GguwaZrdDa4APOKllJp629oynsudqIvHLEPLA/GXpnFF0Ho
-	d77G3R+APYwDdcAILcZRqmaDcJMJ2d+8J3yEuQFTQsDwh6F/puBbADaERFGxSMPttIKg
-	yaTCxFcUmZXv+1C8kbRfseHz+Qso7vhnulvCcLpFU0xS4UpLe3u4OC9pPAMZNHegr26X
-	Tpl+ZGys3wg896VlFgkwu8meVyV1Xrae/UvFh9a8LNFsakKA2Q8W9CiJWab1u2rd4M6i
-	LhlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=7edOY0PzN/3HMRYvYCh3SzZlbv+t/t2wt68wcCJat8w=;
-	b=sLV55V6T3sMW2fPpsvwELqGgweNjxXz8bpzAwAsHlUQbPA7RHTFizWpffyfjyC2ksd
-	R2s20DNCDiq/Bhxe1DWWgvANQVopGGPF8tfT2VG2ppztK1KGxJ7uL/rKPHgb+Ubl5oBb
-	1PkN5ynAMDXZAxBOOy7hxcFO4uPDE/+sl6iCk/x6ZjcNcEvKCRs1YXzUEnuqCrgUrQFJ
-	Se0vYePgi1bUnUwA3LV6kE0HMTXppV5BoCZfOfVPmO3MJOknKkzMuF2fwrRWUzzTlcDe
-	NiyBa82sST3HfmahVBO1ry8g+kuXfnff/Go8djWxdG45VGbg0RU3CRiNASyyUURP1dPk
-	Pmfw==
-X-Gm-Message-State: AFeK/H3jRNZXJrv4F9QR1tftHcYma5ywaTSMCZSay+CXdeFs+ONJKCCGm9e95gOfEImaCatpjkcOrIgt+quFxA==
-X-Received: by 10.37.51.86 with SMTP id z83mr20846144ybz.145.1490043571118;
-	Mon, 20 Mar 2017 13:59:31 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.129.95.139 with HTTP; Mon, 20 Mar 2017 13:59:30 -0700 (PDT)
-In-Reply-To: <20170320201516.GD23524@edge>
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4AD34E00524
+	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 14:08:03 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2KL82r4016191;
+	Mon, 20 Mar 2017 16:08:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1490044083;
+	bh=t0FlK8Mtj7w7By1INFFU7NMcOkKSGoVn2QCKzeeLeHw=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=Q3/Odbpfo0Onhu6ODn1o7o89bSWGqTkGCThspXI14wBDgNP6xWtcUjLIgJ0AVQtlo
+	nXJOiqLq0TQxmALJ4zSSVpJaVg9qDG1JkRdorXfN6FAmlIoQQEkMtOQX+6/s35JUnc
+	62K2uftsS1vs2lQQp/3Qy7pyVous0GdaPi2RsFS0=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KL82F1026640;
+	Mon, 20 Mar 2017 16:08:02 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 20 Mar 2017 16:08:02 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KL82Jx007353;
+	Mon, 20 Mar 2017 16:08:02 -0500
+Date: Mon, 20 Mar 2017 17:08:02 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Glenn Schmottlach <gschmottlach@gmail.com>
+Message-ID: <20170320210801.GB24585@edge>
 References: <CAMS2kBEyHe6y3rKD0RV=LXnSXR8kQY7yHuHtBQrb5gvDiX4RCg@mail.gmail.com>
 	<20170320155459.GP14484@edge>
 	<CAMS2kBE1mvJT5y=WiL1YvLY6-sdkCdZDvLMLL=i4wOqxA7QxXw@mail.gmail.com>
 	<20170320201516.GD23524@edge>
-From: Glenn Schmottlach <gschmottlach@gmail.com>
-Date: Mon, 20 Mar 2017 16:59:30 -0400
-Message-ID: <CAMS2kBHk15OszF0wTbLKyKGG6j+pv2dnm7oC28F2YF1htpebBw@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
+	<CAMS2kBHk15OszF0wTbLKyKGG6j+pv2dnm7oC28F2YF1htpebBw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMS2kBHk15OszF0wTbLKyKGG6j+pv2dnm7oC28F2YF1htpebBw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
 Subject: Re: Trouble modifying defconfig for linux-ti-staging_rt recipe
 X-BeenThere: meta-ti@yoctoproject.org
@@ -75,30 +61,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 20:59:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 20 Mar 2017 21:08:05 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-> So, beaglebone.conf sets up SOC_FAMILY to use "ti33x" override, hence it uses
-> defconfig in the corresponding ti33x directory. And that defconfig is just a
-> redirect to "ti_sdk_am3x_release" entry in the map file I explain below.
->
-> That said, since you prepend to FILESEXTRAPATHS and provide your own full
-> defconfig, I expect it to take precedence and overwrite everything our recipe
-> does - so not sure what didn't work here in your case...
->
+On Mon, Mar 20, 2017 at 04:59:30PM -0400, Glenn Schmottlach wrote:
+> > So, beaglebone.conf sets up SOC_FAMILY to use "ti33x" override, hence it uses
+> > defconfig in the corresponding ti33x directory. And that defconfig is just a
+> > redirect to "ti_sdk_am3x_release" entry in the map file I explain below.
+> >
+> > That said, since you prepend to FILESEXTRAPATHS and provide your own full
+> > defconfig, I expect it to take precedence and overwrite everything our recipe
+> > does - so not sure what didn't work here in your case...
+> >
+> 
+> I had hoped just adding a full defconfig to the SRC_URI in my
+> *.bbappend file would've overwritten the one generated by the TI
+> kernel recipe but unfortunately (at least in my situation) my custom
+> defconfig got clobbered by the default one for the BBB. I dumped the
+> SRC_URI (bitbake -e linux-ti-staging-rt | grep SRC_URI=) and it
+> contained two defconfig's so it was not entirely clear which one was
+> being applied last. The KERNEL_CONFIG_FRAGMENTS trick gets my by my
+> initial issue but I hope I won't get to the point of needing my own
+> custom defconfig. Wish I understood why mine didn't take . . . sort of
+> bothers me given that you said it should have overwritten the default.
 
-I had hoped just adding a full defconfig to the SRC_URI in my
-*.bbappend file would've overwritten the one generated by the TI
-kernel recipe but unfortunately (at least in my situation) my custom
-defconfig got clobbered by the default one for the BBB. I dumped the
-SRC_URI (bitbake -e linux-ti-staging-rt | grep SRC_URI=) and it
-contained two defconfig's so it was not entirely clear which one was
-being applied last. The KERNEL_CONFIG_FRAGMENTS trick gets my by my
-initial issue but I hope I won't get to the point of needing my own
-custom defconfig. Wish I understood why mine didn't take . . . sort of
-bothers me given that you said it should have overwritten the default.
+Yeah, SRC_URI already contains "defconfig" entry, thus no need to add it the 
+second time in your bbappend. Just doing the standard FILESEXTRAPATHS_prepend 
+trick in your bbappend should be enough to get it loaded in place of standard 
+meta-ti config stuff.
 
-Thanks again,
+What is your layer's BBFILE_PRIORITY? And where exactly do you add it to 
+BBLAYERS list in your conf/bblayers.conf file?
 
-Glenn
+-- 
+Denys
 
