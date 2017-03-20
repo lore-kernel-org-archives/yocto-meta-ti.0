@@ -1,54 +1,38 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AB977E00726; Mon, 20 Mar 2017 14:08:05 -0700 (PDT)
+	id 9BDCCE00726; Mon, 20 Mar 2017 15:06:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4AD34E00524
-	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 14:08:03 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2KL82r4016191;
-	Mon, 20 Mar 2017 16:08:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1490044083;
-	bh=t0FlK8Mtj7w7By1INFFU7NMcOkKSGoVn2QCKzeeLeHw=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=Q3/Odbpfo0Onhu6ODn1o7o89bSWGqTkGCThspXI14wBDgNP6xWtcUjLIgJ0AVQtlo
-	nXJOiqLq0TQxmALJ4zSSVpJaVg9qDG1JkRdorXfN6FAmlIoQQEkMtOQX+6/s35JUnc
-	62K2uftsS1vs2lQQp/3Qy7pyVous0GdaPi2RsFS0=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KL82F1026640;
-	Mon, 20 Mar 2017 16:08:02 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 20 Mar 2017 16:08:02 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2KL82Jx007353;
-	Mon, 20 Mar 2017 16:08:02 -0500
-Date: Mon, 20 Mar 2017 17:08:02 -0400
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60283E00524
+	for <meta-ti@yoctoproject.org>; Mon, 20 Mar 2017 15:06:40 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D5ACB208FB;
+	Mon, 20 Mar 2017 22:06:39 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 0yHetIiVTMH4; Mon, 20 Mar 2017 22:06:39 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B52C0208E3;
+	Mon, 20 Mar 2017 22:06:38 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 42C531623AA;
+	Mon, 20 Mar 2017 18:06:38 -0400 (EDT)
 From: Denys Dmytriyenko <denys@ti.com>
-To: Glenn Schmottlach <gschmottlach@gmail.com>
-Message-ID: <20170320210801.GB24585@edge>
-References: <CAMS2kBEyHe6y3rKD0RV=LXnSXR8kQY7yHuHtBQrb5gvDiX4RCg@mail.gmail.com>
-	<20170320155459.GP14484@edge>
-	<CAMS2kBE1mvJT5y=WiL1YvLY6-sdkCdZDvLMLL=i4wOqxA7QxXw@mail.gmail.com>
-	<20170320201516.GD23524@edge>
-	<CAMS2kBHk15OszF0wTbLKyKGG6j+pv2dnm7oC28F2YF1htpebBw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMS2kBHk15OszF0wTbLKyKGG6j+pv2dnm7oC28F2YF1htpebBw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Trouble modifying defconfig for linux-ti-staging_rt recipe
+To: meta-ti@yoctoproject.org
+Date: Mon, 20 Mar 2017 18:06:37 -0400
+Message-Id: <1490047597-19144-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] beaglebone: setup wic to produce SD card image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,39 +45,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 21:08:05 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Mar 2017 22:06:44 -0000
 
-On Mon, Mar 20, 2017 at 04:59:30PM -0400, Glenn Schmottlach wrote:
-> > So, beaglebone.conf sets up SOC_FAMILY to use "ti33x" override, hence it uses
-> > defconfig in the corresponding ti33x directory. And that defconfig is just a
-> > redirect to "ti_sdk_am3x_release" entry in the map file I explain below.
-> >
-> > That said, since you prepend to FILESEXTRAPATHS and provide your own full
-> > defconfig, I expect it to take precedence and overwrite everything our recipe
-> > does - so not sure what didn't work here in your case...
-> >
-> 
-> I had hoped just adding a full defconfig to the SRC_URI in my
-> *.bbappend file would've overwritten the one generated by the TI
-> kernel recipe but unfortunately (at least in my situation) my custom
-> defconfig got clobbered by the default one for the BBB. I dumped the
-> SRC_URI (bitbake -e linux-ti-staging-rt | grep SRC_URI=) and it
-> contained two defconfig's so it was not entirely clear which one was
-> being applied last. The KERNEL_CONFIG_FRAGMENTS trick gets my by my
-> initial issue but I hope I won't get to the point of needing my own
-> custom defconfig. Wish I understood why mine didn't take . . . sort of
-> bothers me given that you said it should have overwritten the default.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/machine/beaglebone.conf | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Yeah, SRC_URI already contains "defconfig" entry, thus no need to add it the 
-second time in your bbappend. Just doing the standard FILESEXTRAPATHS_prepend 
-trick in your bbappend should be enough to get it loaded in place of standard 
-meta-ti config stuff.
-
-What is your layer's BBFILE_PRIORITY? And where exactly do you add it to 
-BBLAYERS list in your conf/bblayers.conf file?
-
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index ff964ac..d1ed0e1 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -10,8 +10,12 @@ KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
+ # Only has DVI connector for external screen
+ MACHINE_GUI_CLASS = "bigscreen"
+ 
+-IMAGE_FSTYPES += "tar.gz"
++WKS_FILE = "sdimage-bootpart.wks"
++IMAGE_BOOT_FILES = "MLO u-boot.img"
++IMAGE_FSTYPES += "tar.xz wic.xz"
+ 
+ SERIAL_CONSOLE = "115200 ttyS0"
+ 
+ UBOOT_MACHINE = "am335x_boneblack_config"
++
++do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot"
 -- 
-Denys
+2.7.4
+
 
