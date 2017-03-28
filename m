@@ -1,51 +1,60 @@
-Return-Path: <denys@ti.com>
+Return-Path: <fathi.boudra@linaro.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0ABEDE0098A; Mon, 27 Mar 2017 11:36:15 -0700 (PDT)
+	id 98EFDE00B01; Tue, 28 Mar 2017 02:28:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
+	*      [209.85.215.48 listed in dnsbl.sorbs.net]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B97C2E00887
-	for <meta-ti@yoctoproject.org>; Mon, 27 Mar 2017 11:36:10 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2RIa9Cb023070;
-	Mon, 27 Mar 2017 13:36:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1490639769;
-	bh=cFsPcSiODU13caBvLgj1M0YRt0G8QH6h8C1Td/YQKIc=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=ZwYquocyTO4NhzC0syulSsPqhKn9zxyytyCk5SXZORUN7UmrPkvNeWqrxQPbsrNMs
-	zXLFDgF5mBvrV3v1YjbfFk76XXVBYNFH5la14WcoWQ6CwVgiyEPiAKn5K1R9vF7dCv
-	dkpaRAi0ZDySa8Ih1+oUP4RJHMNpjvgzfAoiGx4A=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2RIa9e6014422;
-	Mon, 27 Mar 2017 13:36:09 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 27 Mar 2017 13:36:09 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2RIa949022406;
-	Mon, 27 Mar 2017 13:36:09 -0500
-Date: Mon, 27 Mar 2017 14:36:08 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Yury Luneff <yury.lunev@gmail.com>
-Message-ID: <20170327183608.GE29187@edge>
-References: <698E70FE-FEC5-4D18-A474-E32176B34F91@gmail.com>
-	<DC609EBE-9306-49A9-94AB-116C9E60CD1B@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <DC609EBE-9306-49A9-94AB-116C9E60CD1B@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Weston not starting up with SGX drivers on BeagleBone Black
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.215.48 listed in list.dnswl.org]
+Received: from mail-lf0-f48.google.com (mail-lf0-f48.google.com
+	[209.85.215.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B058E00A51
+	for <meta-ti@yoctoproject.org>; Tue, 28 Mar 2017 02:28:44 -0700 (PDT)
+Received: by mail-lf0-f48.google.com with SMTP id h125so34549035lfe.0
+	for <meta-ti@yoctoproject.org>; Tue, 28 Mar 2017 02:28:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=LfGyak1/6yp5dKGvy3xK54ssAgh2MIpQbDblfVpXO9c=;
+	b=MNL1vLjhqYFsmQSRe9bGXgKuu1UVpaIbFDwWiXnG6UZnk5YM+YL0C9YetMb3dCfZmy
+	foF4meRbXl+M8iXjrXivmM9aRWPDts+zYjo0DIu3W7Z9JqgIVaxu6vLRs4KTIOz5s5fa
+	d0upDWB5vTzElrDzxfvuryp2xb2nN3nnIql/g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=LfGyak1/6yp5dKGvy3xK54ssAgh2MIpQbDblfVpXO9c=;
+	b=tzsDob5imxf58wUgtBM0X/iTO17Pt3avEjijavfshOyPEaYSzlh00f1xqmHZs+joeF
+	GSoI0iUnm7VssBhypHqWV6HQIINEdpzwrRwIpUmm8Pert5IClzYLCSXVCCjTJ0g9jEbT
+	AErAPofJYPW9yU/5NRq/Te7AgVHnzBy4x7MfSkjj3PvokFN4omvv0FKSTgkWh+rPwm09
+	1BtN2IYHj1t9NTr2EALJUu62Bq/J5M/fPj0iUbO2ARjFcs3cNlr74oy6M0sY/0uaHhvJ
+	ts4HUR7V1s/hUIrg83CNr6ZJGCiQ2JK2C1AgSHDW5B5p6S7ikWjYigDVC7OBlGv7Tq4x
+	K2GQ==
+X-Gm-Message-State: AFeK/H24Q3tglH4GPsVxuQ6CtDgCrf7I0cLU38pK4wbQmQrYt5hQVvaueF0gwBdid4XMZ9nt
+X-Received: by 10.25.152.9 with SMTP id a9mr10851980lfe.155.1490693323875;
+	Tue, 28 Mar 2017 02:28:43 -0700 (PDT)
+Received: from localhost.localdomain (a91-156-68-16.elisa-laajakaista.fi.
+	[91.156.68.16])
+	by smtp.gmail.com with ESMTPSA id p27sm600225lfg.5.2017.03.28.02.28.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 28 Mar 2017 02:28:42 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 28 Mar 2017 12:28:42 +0300
+Message-Id: <20170328092842.7327-1-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH v2] kselftests: update to 4.10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,68 +67,239 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2017 18:36:15 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 28 Mar 2017 09:28:48 -0000
 
-On Sun, Mar 26, 2017 at 08:41:48PM +0300, Yury Luneff wrote:
-> Hello again.
-> 
-> I seem to resolved this issue. I had to set initial video mode for tilcdc to 
-> be 1024x768@60 Hz in uEnv.txt. Then Weston started nicely with —current-mode 
-> being 1024x768.
+* Adjust md5sum/sha256sum for the updated tarball
+* Add new dependencies:
+  - numactl, used by net tests (for libnuma)
+  - util-linux, used by gpio tests (for libmount)
+* Get rid of the TARGETS list, manually maintained. Rely on the top-level
+  Makefile to call all the TARGETS. As a result, TARGETS isn't passed to
+  EXTRA_OEMAKE anymore.
+* Update EXTRA-OEMAKE:
+  - pass V=1 to be more verbose in the logs
+  - pass LD to fix gpio tests and avoid to use native linker causing a
+    build failure in cross-compilation environment.
+* Call headers_install in do_compile() to make sure to install the user
+  space API used by some tests but not properly declared as a build
+  dependency.
+* Add new packages: bpf, gpio and sync tests.
+* Allow empty package for bpf. It fails to build and need to be fixed.
+* Add breakpoints package on Aarch64. An arch specific test has been
+  added, though it is currently broken due to missing TRAP_BRANCH and
+  TRAP_HWBKPT definitions in glibc siginfo.
+* Get rid of do_configure() and convert the Makefiles fixes to patches,
+  easier to upstream.
+* Add patches to fix gpio and net tests. Also add a partial patch for
+  breakpoints on Aarch64, not applied for now because we need the glibc
+  fixes counterpart (see explanation above).
 
-Sounds good. Glad you were able to resolve it! Let us know if you have any 
-other issues.
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
 
+Changes in v2:
+ * Remove the workaround for broken gpio packaging and gpio-mockup-chardev
+   binary installation. Fixed in 0001-selftests-gpio-use-pkg-config.patch
+ * Reported by Denys Dmytriyenko, fix numctl DEPENDS as ARM doesn't support
+   NUMA (not in COMPATIBLE_HOST).
+
+ .../{kselftests_4.9.bb => kselftests_4.10.bb}      | 90 +++++++++-------------
+ 1 file changed, 37 insertions(+), 53 deletions(-)
+ rename recipes-kernel/kselftests/{kselftests_4.9.bb => kselftests_4.10.bb} (66%)
+
+diff --git a/recipes-kernel/kselftests/kselftests_4.9.bb b/recipes-kernel/kselftests/kselftests_4.10.bb
+similarity index 66%
+rename from recipes-kernel/kselftests/kselftests_4.9.bb
+rename to recipes-kernel/kselftests/kselftests_4.10.bb
+index 9d3f1d73..4ff9e5b9 100644
+--- a/recipes-kernel/kselftests/kselftests_4.9.bb
++++ b/recipes-kernel/kselftests/kselftests_4.10.bb
+@@ -2,70 +2,36 @@ SUMMARY = "Linux Kernel Selftests"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ 
+-SRC_URI = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz"
++SRC_URI = "\
++    https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz \
++    file://0001-selftests-lib-allow-to-override-CC-in-the-top-level-Makefile.patch \
++    file://0001-selftests-timers-use-LDLIBS-to-link-against-libpthread.patch \
++    file://0001-selftests-sigaltstack-fix-packaging.patch \
++    file://0001-selftests-seccomp-use-LDLIBS-to-link-against-libpthread.patch \
++    file://0001-selftests-gpio-use-pkg-config.patch \
++    file://0001-selftests-net-use-LDLIBS-to-link-against-libnuma.patch \
++    file://0001-selftests-breakpoints-allow-to-cross-compile-for-aar.patch;apply=no \
++"
+ 
+-SRC_URI[md5sum] = "0a68ef3615c64bd5ee54a3320e46667d"
+-SRC_URI[sha256sum] = "029098dcffab74875e086ae970e3828456838da6e0ba22ce3f64ef764f3d7f1a"
++SRC_URI[md5sum] = "b5e7f6b9b2fe1b6cc7bc56a3a0bfc090"
++SRC_URI[sha256sum] = "3c95d9f049bd085e5c346d2c77f063b8425f191460fcd3ae9fe7e94e0477dc4b"
+ 
+ S = "${WORKDIR}/linux-${PV}"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-DEPENDS = "libcap libcap-ng popt rsync-native"
+-
+-inherit kernel-arch
+-
+-# Filter out arch specific tests
+-TARGETS = " \
+-	${@bb.utils.contains_any("TARGET_ARCH", [ "x86", "x86-64" ], "breakpoints", "", d)} \
+-	capabilities \
+-	cpu-hotplug \
+-	efivarfs \
+-	exec \
+-	firmware \
+-	ftrace \
+-	futex \
+-	${@bb.utils.contains_any("TARGET_ARCH", [ "x86", "x86-64" ], "ipc", "", d)} \
+-	kcmp \
+-	lib \
+-	membarrier \
+-	memfd \
+-	memory-hotplug \
+-	mount \
+-	mqueue \
+-	net \
+-	nsfs \
+-	${@bb.utils.contains_any("TARGET_ARCH", [ "powerpc", "powerpc64" ], "powerpc", "", d)} \
+-	pstore \
+-	ptrace \
+-	seccomp \
+-	sigaltstack \
+-	size \
+-	static_keys \
+-	sysctl \
+-	timers \
+-	user \
+-	vm \
+-	${@bb.utils.contains_any("TARGET_ARCH", [ "x86", "x86-64" ], "x86", "", d)} \
+-	zram \
++DEPENDS = "libcap libcap-ng popt rsync-native util-linux \
++    ${@bb.utils.contains("TARGET_ARCH", "arm", "", "numactl", d)} \
+ "
+ 
+-EXTRA_OEMAKE += "-C tools/testing/selftests TARGETS="${TARGETS}" INSTALL_PATH=${D}${bindir}/kselftests CC="${CC}""
++inherit kernel-arch
+ 
+-# Their Makefiles are so sloppy, let's clean up a bit
+-do_configure () {
+-	sed "s|^CC := .*||g" -i ${S}/tools/testing/selftests/lib.mk
+-	sed "s|^CC = .*||g" -i ${S}/tools/testing/selftests/timers/Makefile
+-	sed "s|^CC = .*||g" -i ${S}/tools/testing/selftests/memfd/Makefile
+-	sed "s|^CC := .*||g" -i ${S}/tools/testing/selftests/powerpc/switch_endian/Makefile
+-	sed "s|gcc|\$(CC)|g" -i ${S}/tools/testing/selftests/breakpoints/Makefile
+-	sed "s|TARGETS|F_TARGETS|g" -i ${S}/tools/testing/selftests/futex/functional/Makefile
+-	sed "s|^LDFLAGS += -lpthread|LDLIBS += -lpthread|g" -i ${S}/tools/testing/selftests/seccomp/Makefile
+-	sed "s|^LDFLAGS += -lrt -lpthread|LDLIBS += -lrt -lpthread|g" -i ${S}/tools/testing/selftests/timers/Makefile
+-	sed "s|BINARIES|TEST_PROGS|g" -i ${S}/tools/testing/selftests/sigaltstack/Makefile
+-}
++EXTRA_OEMAKE += "V=1 -C ${S}/tools/testing/selftests INSTALL_PATH=${D}${bindir}/kselftests CC="${CC}" LD="${LD}""
+ 
+ do_compile () {
++	# Make sure to install the user space API used by some tests
++	# but not properly declared as a build dependency
++	${MAKE} -C ${S} headers_install
+ 	oe_runmake
+ }
+ 
+@@ -77,6 +43,7 @@ do_install () {
+ }
+ 
+ PACKAGE_BEFORE_PN = " \
++	${PN}-bpf \
+ 	${PN}-breakpoints \
+ 	${PN}-capabilities \
+ 	${PN}-cpu-hotplug \
+@@ -85,6 +52,7 @@ PACKAGE_BEFORE_PN = " \
+ 	${PN}-firmware \
+ 	${PN}-ftrace \
+ 	${PN}-futex \
++	${PN}-gpio \
+ 	${PN}-ipc \
+ 	${PN}-kcmp \
+ 	${PN}-lib \
+@@ -102,6 +70,7 @@ PACKAGE_BEFORE_PN = " \
+ 	${PN}-sigaltstack \
+ 	${PN}-size \
+ 	${PN}-static-keys \
++	${PN}-sync \
+ 	${PN}-sysctl \
+ 	${PN}-timers \
+ 	${PN}-user \
+@@ -110,6 +79,7 @@ PACKAGE_BEFORE_PN = " \
+ 	${PN}-zram \
+ "
+ 
++FILES_${PN}-bpf = "${bindir}/kselftests/bpf"
+ FILES_${PN}-breakpoints = "${bindir}/kselftests/breakpoints"
+ FILES_${PN}-capabilities = "${bindir}/kselftests/capabilities"
+ FILES_${PN}-cpu-hotplug = "${bindir}/kselftests/cpu-hotplug"
+@@ -118,6 +88,7 @@ FILES_${PN}-exec = "${bindir}/kselftests/exec"
+ FILES_${PN}-firmware = "${bindir}/kselftests/firmware"
+ FILES_${PN}-ftrace = "${bindir}/kselftests/ftrace"
+ FILES_${PN}-futex = "${bindir}/kselftests/futex"
++FILES_${PN}-gpio = "${bindir}/kselftests/gpio"
+ FILES_${PN}-ipc = "${bindir}/kselftests/ipc"
+ FILES_${PN}-kcmp = "${bindir}/kselftests/kcmp"
+ FILES_${PN}-lib = "${bindir}/kselftests/lib"
+@@ -135,6 +106,7 @@ FILES_${PN}-seccomp = "${bindir}/kselftests/seccomp"
+ FILES_${PN}-sigaltstack = "${bindir}/kselftests/sigaltstack"
+ FILES_${PN}-size = "${bindir}/kselftests/size"
+ FILES_${PN}-static-keys = "${bindir}/kselftests/static_keys"
++FILES_${PN}-sync = "${bindir}/kselftests/sync"
+ FILES_${PN}-sysctl = "${bindir}/kselftests/sysctl"
+ FILES_${PN}-timers = "${bindir}/kselftests/timers"
+ FILES_${PN}-user = "${bindir}/kselftests/user"
+@@ -143,6 +115,14 @@ FILES_${PN}-x86 = "${bindir}/kselftests/x86"
+ FILES_${PN}-zram = "${bindir}/kselftests/zram"
+ FILES_${PN}-dbg += "${bindir}/kselftests/*/.debug"
+ 
++# FIXME bpf target is failing to build and need to be fixed:
++# In file included from test_verifier.c:23:0:
++# ../../../../usr/include/linux/bpf_perf_event.h:14:17: error: field 'regs' has incomplete type
++#   struct pt_regs regs;
++#                  ^~~~
++# make[1]: *** [test_verifier] Error 1
++ALLOW_EMPTY_${PN}-bpf = "1"
++
+ RDEPENDS_${PN}-cpu-hotplug += "bash"
+ RDEPENDS_${PN}-efivarfs += "bash"
+ RDEPENDS_${PN}-futex += "bash ncurses"
+@@ -151,6 +131,7 @@ RDEPENDS_${PN}-net += "bash"
+ RDEPENDS_${PN}-vm += "bash"
+ RDEPENDS_${PN}-zram += "bash"
+ RDEPENDS_${PN} += "bash \
++	${PN}-bpf \
+ 	${PN}-capabilities \
+ 	${PN}-cpu-hotplug \
+ 	${PN}-efivarfs \
+@@ -158,6 +139,7 @@ RDEPENDS_${PN} += "bash \
+ 	${PN}-firmware \
+ 	${PN}-ftrace \
+ 	${PN}-futex \
++	${PN}-gpio \
+ 	${PN}-kcmp \
+ 	${PN}-lib \
+ 	${PN}-membarrier \
+@@ -173,6 +155,7 @@ RDEPENDS_${PN} += "bash \
+ 	${PN}-sigaltstack \
+ 	${PN}-size \
+ 	${PN}-static-keys \
++	${PN}-sync \
+ 	${PN}-sysctl \
+ 	${PN}-timers \
+ 	${PN}-user \
+@@ -180,6 +163,7 @@ RDEPENDS_${PN} += "bash \
+ 	${PN}-zram \
+ "
+ 
++RDEPENDS_${PN}_append_aarch64 = " ${PN}-breakpoints"
+ RDEPENDS_${PN}_append_x86 = " ${PN}-breakpoints ${PN}-ipc ${PN}-x86"
+ RDEPENDS_${PN}_append_x86-64 = " ${PN}-breakpoints ${PN}-ipc ${PN}-x86"
+ RDEPENDS_${PN}_append_powerpc = " ${PN}-powerpc"
 -- 
-Denys
-
-
-> 26 марта 2017 г., в 4:30, Yury Luneff <yury.lunev@gmail.com> написал(а):
-> > 
-> > Hello!
-> > 
-> > I’m trying to get Weston running on BeagleBone Black with TI’s SGX drivers. Kernel is 4.9.13-g102f61776e from meta-ti (morty branch) and the drivers alike.
-> > I have Weston 1.11 with patches from meta-arago (the patch that forces using card0 whereas I have card0 for tilcdc and card1 for pvrsrvkm plus the Mesa/GBM dealing patch). I had it running with SGX drivers already, but all of a sudden it ceased to startup properly.
-> > 
-> > # weston --tty=1 -B drm-backend.so --current-mode
-> > …
-> > [16:07:05.845] Output HDMI-A-1, (connector 26, crtc 24)
-> >               mode 1360x768@60.4, preferred, current
-> > ...
-> > [16:07:05.957] set mode failed: Invalid argument
-> > 
-> > I’ve posted complete Weston startup log here: http://pastebin.com/bHbdDMas
-> > 
-> > The failure reason is listed in dmesg log:
-> > tilcdc 4830e000.lcdc: Invalid pitch: fb and crtc widths must be the same
-> > 
-> > I see the patch comments in https://patchwork.kernel.org/patch/7856821/ that introduced this sanity check for tilcdc, but I’m not sure how to achieve proper setup with my case.
-> > 
-> > I have put 'gbm-format=rgb565’ in /etc/weston.ini. tilcdc’s pixel format seems to be the same: /sys/bus/platform/drivers/tilcdc/4830e000.lcdc/graphics/fb0/bits_per_pixel equals to 16.
-> > 
-> > I’m not sure how tilcdc and pvrsrvkm should work between each other but the result is weston/wayland not starting because of some framebuffer mode conflict.
-> > 
-> > I had it working very little time ago and I did it by specifying --current-mode for Weston, but now this option doesn’t help as Weston tries to set_mode anyway.
-> > 
-> > Please, give me an advice on how to debug this.
-> > 
-> > Thanks!
-> > —
-> > Yury Lunev
-> > 
-> > 
-> 
-> —
-> Yury Lunev
-> 
-
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+2.11.0
 
 
