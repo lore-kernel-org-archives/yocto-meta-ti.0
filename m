@@ -1,50 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D06FDE00953; Wed, 29 Mar 2017 17:12:18 -0700 (PDT)
+	id 695B1E00953; Wed, 29 Mar 2017 17:16:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A8EAE00901
-	for <meta-ti@yoctoproject.org>; Wed, 29 Mar 2017 17:12:15 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v2U0BdlL024018;
-	Wed, 29 Mar 2017 19:11:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1490832699;
-	bh=ePbLP5CpxQ2iaVZJDnIzDsnCJdKt7B73JE0hbfZz78g=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=GrmhXwnOfPmKxDElqXczxDGq26STyMQ3ZG4g2IXBWSGYkZHk3jd4zY4HeVMhLhrOK
-	2F77HxXgUUY62iTf3tJeI9QvNksBesq0nd8fW3Jv2ZUB5C/J2KZCTEUZPo6x4ldnu3
-	UbQ/Z0kTuWsKJkjlQd0tHsgV6TSJFYiYyORk5nFw=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2U0BdoJ025313;
-	Wed, 29 Mar 2017 19:11:39 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 29 Mar 2017 19:11:38 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v2U0BcHd007822;
-	Wed, 29 Mar 2017 19:11:38 -0500
-Date: Wed, 29 Mar 2017 20:11:38 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Message-ID: <20170330001138.GJ11364@edge>
-References: <1490576320-39277-1-git-send-email-denis@denix.org>
-MIME-Version: 1.0
-In-Reply-To: <1490576320-39277-1-git-send-email-denis@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [morty/master][PATCH] openmp-rtos: calls doxygen, depend on doxygen-native
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE06EE00874
+	for <meta-ti@yoctoproject.org>; Wed, 29 Mar 2017 17:16:17 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 639F920B7A;
+	Thu, 30 Mar 2017 00:16:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id OLmfY0z43Tgp; Thu, 30 Mar 2017 00:16:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 43FC1208B3;
+	Thu, 30 Mar 2017 00:16:15 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id B7C6B162415;
+	Wed, 29 Mar 2017 20:16:14 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 29 Mar 2017 20:16:14 -0400
+Message-Id: <1490832974-125670-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [master][PATCH v2] layer.conf: add unzip to HOSTTOOLS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,35 +45,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2017 00:12:18 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Mar 2017 00:16:18 -0000
 
-NAK due to dependencies - will have to figure our something else.
+From: Denys Dmytriyenko <denys@ti.com>
 
+CCS install uses unzip
 
-On Sun, Mar 26, 2017 at 08:58:38PM -0400, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
-> 
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->  recipes-ti/openmp-rtos/openmp-rtos_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> index 5bf902b..a798985 100644
-> --- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> +++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> @@ -19,7 +19,7 @@ SRCREV = "a9aae66f792e999dafbd2e0bd834f98122398c4c"
->  
->  LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
->  
-> -DEPENDS = "common-csl-ip-rtos ti-xdctools ti-ipc-rtos ti-sysbios ti-cgt6x-native libulm zip-native"
-> +DEPENDS = "common-csl-ip-rtos ti-xdctools ti-ipc-rtos ti-sysbios ti-cgt6x-native libulm zip-native doxygen-native"
->  DEPENDS_append_k2hk-evm = " qmss-lld-rtos cppi-lld-rtos"
->  DEPENDS_append_k2e = " qmss-lld-rtos cppi-lld-rtos"
->  DEPENDS_append_k2l-evm = " qmss-lld-rtos cppi-lld-rtos"
-> -- 
-> 2.7.4
-> 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/layer.conf | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/conf/layer.conf b/conf/layer.conf
+index a07e62f..b59effa 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -27,3 +27,6 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+     qmss-lld \
+     multiprocmgr \
+ "
++
++# Required by CCS installer
++HOSTTOOLS += "unzip"
+-- 
+2.7.4
+
 
