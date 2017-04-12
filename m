@@ -1,6 +1,6 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <g-tammana@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E7E45E00B1B; Wed, 12 Apr 2017 04:11:23 -0700 (PDT)
+	id C88B7E00992; Wed, 12 Apr 2017 15:37:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,35 +13,38 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9DE2E00AD5
-	for <meta-ti@yoctoproject.org>; Wed, 12 Apr 2017 04:11:20 -0700 (PDT)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93288E00961
+	for <meta-ti@yoctoproject.org>; Wed, 12 Apr 2017 15:37:46 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3CBB91u031830
-	for <meta-ti@yoctoproject.org>; Wed, 12 Apr 2017 06:11:09 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3CMbjhb017731
+	for <meta-ti@yoctoproject.org>; Wed, 12 Apr 2017 17:37:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1491995469;
-	bh=tXUp43aINmFWetRLnXucUD1lgnL/lqWQkb7pFpWv/cM=;
+	s=ti-com-17Q1; t=1492036665;
+	bh=JCx3+AAO+8SUNryz6TXrWImdaKC/uhc2rwqNqL4RElg=;
 	h=From:To:CC:Subject:Date;
-	b=vzYGdu92tuzM1drQztaaTfmeRqkgMRWMC7kiNPwdiI6GhFr1k2lqzDqfsQunIvRh3
-	cS2oxMlHe3B/toyyKVw2ywSWisiAujDu0aHv1sqOybz/UEWh9z0+9qC/AqyK3vtuk4
-	BWWt5I69pcP88m27imJaJ8XtbBF6UFUyl6JUudWw=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3CBB3gA029248
-	for <meta-ti@yoctoproject.org>; Wed, 12 Apr 2017 06:11:04 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 12 Apr 2017 06:11:03 -0500
-Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3CBB2bk030142;
-	Wed, 12 Apr 2017 06:11:02 -0500
-From: Karthik Ramanan <a0393906@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 12 Apr 2017 16:40:59 +0530
-Message-ID: <1491995459-156761-1-git-send-email-a0393906@ti.com>
-X-Mailer: git-send-email 1.9.1
+	b=cngdvT3baRJsbUMEsQaFKBOnFPqs5ssQa7dWWCl1HmAoffxVn0kIs5c91LQYkeZwQ
+	yla+jiElpFDM4kC9niOwMSPTU1VixkWv3nP4MABBR0nkhOZJaVu3hQjsJxrbPpB0BW
+	X8xKqLpSRwVLv7A+y28t0AeAtWS2CYPx9oyBNPEs=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3CMbjho023150
+	for <meta-ti@yoctoproject.org>; Wed, 12 Apr 2017 17:37:45 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 12 Apr 2017 17:37:44 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v3CMbjYQ028740;	Wed, 12 Apr 2017 17:37:45 -0500
+Received: from uda0271916b.am.dhcp.ti.com (uda0271916b.am.dhcp.ti.com
+	[128.247.77.97])	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with
+	ESMTP id v3CMbi320461;	Wed, 12 Apr 2017 17:37:44 -0500 (CDT)
+From: Gowtham Tammana <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
+Date: Wed, 12 Apr 2017 17:38:00 -0500
+Message-ID: <1492036680-11209-1-git-send-email-g-tammana@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [morty] dspdce-fw: Update SRCREV for dsp crash issue
+Subject: [krogoth][PATCH] ti-gc320-driver: Update SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,43 +57,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 11:11:24 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 22:37:49 -0000
 Content-Type: text/plain
 
-This update fixes the issue where the copycodec
-firmware crashes every 300 seconds after bind/
-unbind operation
+Update SRCREV to the latest head of `ti-5.0.11.p7-k4.4` branch.
+This adds the following changes:
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+  - Remove dependency on dmac_flush/inv/clean_range
+  - Remove spurious page count increments
+  - Use __GFP_DMA32 for allocations
+
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 ---
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index ee00833..3ca1385 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -6,16 +6,16 @@ COMPATIBLE_MACHINE = "dra7xx"
+diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+index 8ad7e4b..e2c006d 100644
+--- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
++++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=78d9818a51b9a8e9bb89dea418bac297"
  
- SRC_URI = "git://git.ti.com/glsdk/dspdce.git;protocol=git"
+ inherit module
  
--SRCREV = "3b9cea492f23d7dabb9ffa0e69631b858ba8e90a"
-+SRCREV = "de6e599f067b25c46cc0c8f74a22cc3b8aafbae8"
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
  
--PV = "1.00.00.06"
-+PV = "1.00.00.07"
+ # Need to branch out with ${PV} var
+ BRANCH = "ti-${PV}-k4.4"
  
- S = "${WORKDIR}/git"
+-SRCREV = "65887c911db495fb66c6847c8b6eadc76c7470f4"
++SRCREV = "d188246f28ad52410bc303c26a873e2cc0f82090"
  
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
- 
--PR = "r3"
-+PR = "r4"
- inherit update-alternatives
- 
- DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
+ SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git/src"
 -- 
-1.9.1
+2.7.4
 
 
