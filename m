@@ -1,6 +1,6 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D3FBDE00C38; Wed, 19 Apr 2017 03:30:30 -0700 (PDT)
+	id BAD59E00AE0; Wed, 19 Apr 2017 12:43:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,36 +14,37 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 802CAE00C34
-	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 03:30:27 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F8C6E00AD0
+	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 12:43:25 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3JAUHY0003567
-	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 05:30:17 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3JJhFgt009825
+	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 14:43:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1492597817;
-	bh=vgw4APi+eXC5YRwemo6q4nHmgmVLe9c+ifAz/TEaavA=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=vu9WbIo9hLEMHs/KfjBpLw+MZ34eMKAWHobfA0IeYkAeua9sv8Tpjd+Ro0MQHud6K
-	rQH01rpMDd7CNOJ1ePFZSvYFeFbjKAlyTKLQNRDdgp96af2iCBV2gxJNdoVDpGRDJ0
-	Lpb+KsRJBquJ4mrNdAzUNzkS3UPjZX60rAKygcLU=
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JAUCQT003362
-	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 05:30:12 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 19 Apr 2017 05:30:12 -0500
-Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JAU7vM017044;
-	Wed, 19 Apr 2017 05:30:11 -0500
-From: Karthik Ramanan <a0393906@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 19 Apr 2017 16:00:03 +0530
-Message-ID: <1492597804-77037-3-git-send-email-a0393906@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1492597804-77037-1-git-send-email-a0393906@ti.com>
+	s=ti-com-17Q1; t=1492630995;
+	bh=4hhJGj3AnGCNjL4G2HugDitIGr7INyxPoP74v2vQ9Fg=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=wa0XzhM1OqQv2cUGdeCCLBcgKrUu/7TLybawvebZYZ3JpGc9csWdL/HxMDauHYoVh
+	m+6JjHzSM5vZlM+Fr9BjEGZGctOjnn6dnvC2FbXsfSoRK09xzC2rrbwvULSCvOfOVN
+	XC32EGlKK1eKx1VWP2nmhlMjIkyOs2Tm3qm5kDc8=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JJhAg5004823
+	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 14:43:10 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 19 Apr 2017 14:43:09 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JJh9h4020755;
+	Wed, 19 Apr 2017 14:43:09 -0500
+Date: Wed, 19 Apr 2017 15:43:09 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Karthik Ramanan <a0393906@ti.com>
+Message-ID: <20170419194309.GI3457@edge>
 References: <1492597804-77037-1-git-send-email-a0393906@ti.com>
 MIME-Version: 1.0
-Subject: [morty 3/4] ti-ccsv6: Remove the recipe
+In-Reply-To: <1492597804-77037-1-git-send-email-a0393906@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [morty 1/4] ti-cgt-arm: Include recipes for 16.9.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,67 +57,194 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Apr 2017 10:30:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 19 Apr 2017 19:43:29 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
----
- recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb | 45 ----------------------
- 1 file changed, 45 deletions(-)
- delete mode 100644 recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
+Please see inline.
 
-diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
-deleted file mode 100644
-index 334c7df..0000000
---- a/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--DESCRIPTION = "TI DSP Code Generation Tools"
--HOMEPAGE = "http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads"
--LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
--
--LIC_FILES_CHKSUM = "file://${WORKDIR}/ccsv6/doc/EULA/EULA.doc;md5=24fb8a52ac52d3938b5888362edb295a"
--
--inherit native
--
--require recipes-ti/includes/ti-unpack.inc
--require recipes-ti/includes/ti-staging.inc
--require recipes-ti/includes/ti-paths.inc
--
--TI_CGT_ARM_VERSION = "15.12.1.LTS"
--
--SRC_URI = "http://install.source.dir.local/CCS${PV}_linux.tar.gz;name=ccsv6"
--
--S = "${WORKDIR}/CCS${PV}_linux"
--
--BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
--TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
--TI_BIN_UNPK_CMDS = ""
--
--SRC_URI[ccsv6.md5sum] = "ceaa5023c1a4b51bc637d3de1a15786b"
--SRC_URI[ccsv6.sha256sum] = "fb3205a21942da09684c871371513707c841c4fd8d88a62f6a7865b0a86cc492"
--
--do_install() {
--    install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
--    cp -r ${WORKDIR}/ccsv6/. ${D}${CCSV6_INSTALL_DIR_RECIPE}
--
--    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
--    cp -r ${WORKDIR}/ccsv6/tools/compiler/ti-cgt-arm_${TI_CGT_ARM_VERSION}/. \
--          ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
--}
--
--FILES_${PN} += "\
--  ${CCSV6_INSTALL_DIR_RECIPE} \
--  ${M4_TOOLCHAIN_INSTALL_DIR_RECIPE} \
--"
--
--INHIBIT_PACKAGE_STRIP = "1"
--INHIBIT_SYSROOT_STRIP = "1"
--INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
--INSANE_SKIP_${PN} = "arch libdir ldflags staticdev textrel dev-so"
--
--EXCLUDE_FROM_SHLIBS = "1"
--- 
-1.9.1
 
+On Wed, Apr 19, 2017 at 04:00:01PM +0530, Karthik Ramanan wrote:
+> From: Ivan Pang <i-pang@ti.com>
+> 
+> Signed-off-by: Ivan Pang <i-pang@ti.com>
+> Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+> ---
+>  classes/component_meta.bbclass          | 29 +++++++++++++++++++++++++++++
+>  recipes-ti/devtools/ti-cgt-arm-linux.bb | 26 ++++++++++++++++++++++++++
+>  recipes-ti/devtools/ti-cgt-arm.bb       | 26 ++++++++++++++++++++++++++
+>  recipes-ti/devtools/ti-cgt-arm.inc      | 19 +++++++++++++++++++
+>  4 files changed, 100 insertions(+)
+>  create mode 100644 classes/component_meta.bbclass
+>  create mode 100644 recipes-ti/devtools/ti-cgt-arm-linux.bb
+>  create mode 100644 recipes-ti/devtools/ti-cgt-arm.bb
+>  create mode 100644 recipes-ti/devtools/ti-cgt-arm.inc
+> 
+> diff --git a/classes/component_meta.bbclass b/classes/component_meta.bbclass
+> new file mode 100644
+> index 0000000..f2dc754
+> --- /dev/null
+> +++ b/classes/component_meta.bbclass
+> @@ -0,0 +1,29 @@
+> +CM_NAME ?= ""
+> +CM_VERSION ?= ""
+> +CM_ROOT_DIR ?= ""
+> +CM_BINARY ?= ""
+> +CM_DESCRIPTION ?= ""
+
+I'm not sure what's the purpose of this class and why you are including it 
+here...
+I'd suggest you drop it completely.
+
+
+> +do_component_meta() {
+> +    if [ ! -d "${DEPLOY_DIR_IMAGE}" ]
+> +    then
+> +        mkdir -p ${DEPLOY_DIR_IMAGE}    
+> +    fi
+> +
+> +    if [ ! -e "${DEPLOY_DIR_IMAGE}/.components_meta" ]
+> +    then
+> +        touch ${DEPLOY_DIR_IMAGE}/.components_meta
+> +    fi
+> +
+> +    # Check if component is already documented in .components_meta
+> +    if ! grep -q "${CM_ROOT_DIR}" ${DEPLOY_DIR_IMAGE}/.components_meta
+> +    then
+> +        # Add component meta information
+> +        echo "${CM_NAME}|${CM_VERSION}|${CM_ROOT_DIR}|${CM_BINARY}|${CM_DESCRIPTION}" >> \
+> +            ${DEPLOY_DIR_IMAGE}/.components_meta
+> +    fi
+> +}
+> +
+> +do_component_meta[lockfiles] = "${DEPLOY_DIR_IMAGE}/component_meta.lock"
+> +
+> +addtask do_component_meta after do_install before do_package
+> diff --git a/recipes-ti/devtools/ti-cgt-arm-linux.bb b/recipes-ti/devtools/ti-cgt-arm-linux.bb
+> new file mode 100644
+> index 0000000..dbb143c
+> --- /dev/null
+> +++ b/recipes-ti/devtools/ti-cgt-arm-linux.bb
+> @@ -0,0 +1,26 @@
+> +include ti-cgt-arm.inc
+> +
+> +BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
+> +BINFILE_MD5 = "aa65a078eeddbf10e8e132a4cf1d58f0"
+> +BINFILE_SHA256 = "a372fd6f7b2608e11326b5c7438311aa37c7fbca0728b158cb9064a0666a8a05"
+> +
+> +do_install() {
+> +    cp ${S}/../${BINFILE} ${S}/${BINFILE_NAME}
+
+Why do you need this step?
+
+In general, what's the difference between ti-cgt-arm-linux.bb and ti-cgt-arm.bb?
+
+Anyway, this ti-cgt-arm-linux recipe looks superflous to me...
+
+
+> +}
+> +
+> +inherit component_meta
+> +CM_NAME = "TI CGT ARM"
+> +CM_VERSION = "${PV}"
+> +CM_ROOT_DIR = "ti-cgt-arm_${PV}"
+> +CM_DESCRIPTION = "TI ARM code generation tools, including C/C++ compiler, linker, and run-time-support libraries"
+> +CM_BINARY = "${BINFILE_NAME}"
+> +
+> +deltask do_create_srcipk
+> +addtask create_srcipk after do_install before do_populate_sysroot
+> +
+> +CREATE_SRCIPK = "1"
+> +SRCIPK_INSTALL_DIR = "${CM_ROOT_DIR}"
+> +SRCIPK_SRC_DIR = "${S}"
+
+This should not be here! This has nothing to do with meta-ti!
+
+
+> +INHIBIT_PACKAGE_STRIP = "1"
+> +INHIBIT_SYSROOT_STRIP = "1"
+> diff --git a/recipes-ti/devtools/ti-cgt-arm.bb b/recipes-ti/devtools/ti-cgt-arm.bb
+> new file mode 100644
+> index 0000000..464374d
+> --- /dev/null
+> +++ b/recipes-ti/devtools/ti-cgt-arm.bb
+> @@ -0,0 +1,26 @@
+> +include ti-cgt-arm.inc
+> +
+> +S = "${WORKDIR}/ti-cgt-arm-${PV}"
+
+May need to be set in .inc file...
+
+
+> +require recipes-ti/includes/ti-unpack.inc
+> +require recipes-ti/includes/ti-staging.inc
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +TI_BIN_UNPK_ARGS = "--prefix ${S}"
+> +TI_BIN_UNPK_CMDS = ""
+> +
+> +BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
+> +BINFILE_MD5 = "aa65a078eeddbf10e8e132a4cf1d58f0"
+> +BINFILE_SHA256 = "a372fd6f7b2608e11326b5c7438311aa37c7fbca0728b158cb9064a0666a8a05"
+> +
+> +do_install() {
+> +    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
+> +    cp -r ${S}/ti-cgt-arm*/. ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
+> +}
+> +
+> +FILES_${PN} += "${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> +INHIBIT_PACKAGE_STRIP = "1"
+> +INHIBIT_SYSROOT_STRIP = "1"
+> diff --git a/recipes-ti/devtools/ti-cgt-arm.inc b/recipes-ti/devtools/ti-cgt-arm.inc
+> new file mode 100644
+> index 0000000..195d59e
+> --- /dev/null
+> +++ b/recipes-ti/devtools/ti-cgt-arm.inc
+> @@ -0,0 +1,19 @@
+> +DESCRIPTION = "TI ARM Code Generation Tools"
+
+Use SUMMARY
+
+
+> +HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+> +LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD & BSD-4-Clause"
+
+Is this the correct license?
+
+
+> +LIC_FILES_CHKSUM = "file://../${BINFILE};md5=${BINFILE_MD5}"
+
+This is very incorrect! Please point to the real license file.
+
+
+> +PV = "16.9.1"
+> +PE = "0"
+
+Drop this - 0 is the default.
+
+
+> +BINFILE_NAME = "cgt_arm_installer"
+> +
+> +SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"
+> +
+> +SRC_URI[cgt_arm_installer.md5sum] = "${BINFILE_MD5}"
+> +SRC_URI[cgt_arm_installer.sha256sum] = "${BINFILE_SHA256}"
+> +
+> +FILES_${PN} += "${S}/*"
+
+??? What's this?
+
+
+> +INSANE_SKIP_${PN} += "arch staticdev"
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
