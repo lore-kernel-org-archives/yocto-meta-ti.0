@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EE4D1E00AE0; Wed, 19 Apr 2017 12:45:57 -0700 (PDT)
+	id F2CEAE00AE0; Wed, 19 Apr 2017 12:47:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,39 +13,39 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 877D6E00AD0
-	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 12:45:56 -0700 (PDT)
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2AE7AE00AD0
+	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 12:47:34 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3JJjtSZ018188
-	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 14:45:55 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3JJlOLF010235
+	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 14:47:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1492631155;
-	bh=ky1qw3qUXcyRF3grZb7zpgnn+smouTfGv++Y9O/TMMU=;
+	s=ti-com-17Q1; t=1492631244;
+	bh=Gzs6s/fE2i4S3eO9nAdG044L+Zgn7Xjm/bwQ24aZNRI=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=co/5Vz7aKI9KGcc1WddQLT52D1DCPwvCrWjKS3Boz/C7VPFfiWSS+NMK6rZdp+SMc
-	/M0u9LqR/bn4ZX9b6P6iso7PlAUrHyLG3yf9x94G7JYI6ySdbkR8wsF8kjczyMnQB7
-	5o0D5OKn6QIgHnLGZPJcw+5Ke1u5utoxmRKFPLgs=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JJjtdP022774
-	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 14:45:55 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 19 Apr 2017 14:45:55 -0500
+	b=cXXVbEjm7QhvitXkqwql3dcNonc+vnm5J52qfPfh6208N8lZrbAtUOI1soLW4UVeB
+	w2LiDvOi/4ghAlpXPUUwCLtczMfm43v9PtGUk0z0COy2y5CdEmTQatfFPeH8I2r4cy
+	FKW4lzUrLCn5NPciyr+4bMwolyqVp30u2MUt4ND4=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JJlJIQ024611
+	for <meta-ti@yoctoproject.org>; Wed, 19 Apr 2017 14:47:19 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 19 Apr 2017 14:47:18 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JJjthW023566;
-	Wed, 19 Apr 2017 14:45:55 -0500
-Date: Wed, 19 Apr 2017 15:45:55 -0400
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3JJlJgK028345;
+	Wed, 19 Apr 2017 14:47:19 -0500
+Date: Wed, 19 Apr 2017 15:47:18 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Karthik Ramanan <a0393906@ti.com>
-Message-ID: <20170419194554.GK3457@edge>
+Message-ID: <20170419194718.GL3457@edge>
 References: <1492597804-77037-1-git-send-email-a0393906@ti.com>
-	<1492597804-77037-2-git-send-email-a0393906@ti.com>
+	<1492597804-77037-4-git-send-email-a0393906@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1492597804-77037-2-git-send-email-a0393906@ti.com>
+In-Reply-To: <1492597804-77037-4-git-send-email-a0393906@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [morty 2/4] Remove CCS dependencies for all components
+Subject: Re: [morty 4/4] ti-cgt-arm: Update to version 16.9.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,89 +58,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Apr 2017 19:45:58 -0000
+X-List-Received-Date: Wed, 19 Apr 2017 19:47:37 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Wed, Apr 19, 2017 at 04:00:02PM +0530, Karthik Ramanan wrote:
+Since you'd need to completely re-do patch #1, I suggest you squash this 
+change as well.
+
+
+On Wed, Apr 19, 2017 at 04:00:04PM +0530, Karthik Ramanan wrote:
 > Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 > ---
->  classes/ti-pdk.bbclass                      | 2 +-
->  recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb | 2 +-
->  recipes-bsp/ipumm-fw/ipumm-fw_git.bb        | 2 +-
->  recipes-ti/includes/ti-paths.inc            | 1 -
->  recipes-ti/ipc/ti-ipc-rtos.inc              | 2 +-
->  5 files changed, 4 insertions(+), 5 deletions(-)
+>  recipes-ti/devtools/ti-cgt-arm.bb  | 4 ++--
+>  recipes-ti/devtools/ti-cgt-arm.inc | 2 +-
+>  2 files changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-> index fd7c3e7..eca3652 100644
-> --- a/classes/ti-pdk.bbclass
-> +++ b/classes/ti-pdk.bbclass
-> @@ -5,7 +5,7 @@ inherit perlnative
+> diff --git a/recipes-ti/devtools/ti-cgt-arm.bb b/recipes-ti/devtools/ti-cgt-arm.bb
+> index 464374d..dbe61d4 100644
+> --- a/recipes-ti/devtools/ti-cgt-arm.bb
+> +++ b/recipes-ti/devtools/ti-cgt-arm.bb
+> @@ -10,8 +10,8 @@ TI_BIN_UNPK_ARGS = "--prefix ${S}"
+>  TI_BIN_UNPK_CMDS = ""
 >  
->  DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-pdk-build-rtos"
+>  BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
+> -BINFILE_MD5 = "aa65a078eeddbf10e8e132a4cf1d58f0"
+> -BINFILE_SHA256 = "a372fd6f7b2608e11326b5c7438311aa37c7fbca0728b158cb9064a0666a8a05"
+> +BINFILE_MD5 = "7b73e51e9548a4a0bf3923a336b1a974"
+> +BINFILE_SHA256 = "d1a5c255319088be7d75b3fce1b16a2e3d60c75023db7dad16cab6d4d3425d06"
 >  
-> -DEPENDS_append_omap-a15 = " ti-ccsv6-native"
-> +DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
->  DEPENDS_remove_ti33x = "ti-cgt6x-native"
->  DEPENDS_remove_ti43x = "ti-cgt6x-native"
+>  do_install() {
+>      install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
+> diff --git a/recipes-ti/devtools/ti-cgt-arm.inc b/recipes-ti/devtools/ti-cgt-arm.inc
+> index 195d59e..c14580c 100644
+> --- a/recipes-ti/devtools/ti-cgt-arm.inc
+> +++ b/recipes-ti/devtools/ti-cgt-arm.inc
+> @@ -4,7 +4,7 @@ LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0
 >  
-> diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-> index 6a01d0b..ce9ef85 100644
-> --- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-> +++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-> @@ -4,7 +4,7 @@ require recipes-ti/includes/ti-staging.inc
+>  LIC_FILES_CHKSUM = "file://../${BINFILE};md5=${BINFILE_MD5}"
 >  
->  PR = "${INC_PR}.0"
+> -PV = "16.9.1"
+> +PV = "16.9.2"
+>  PE = "0"
 >  
-> -DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
-> +DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-cgt-arm-native ti-cgt6x-native"
->  
->  COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> index 1a5d285..1291e69 100644
-> --- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> +++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> @@ -29,7 +29,7 @@ require recipes-ti/includes/ti-staging.inc
->  
->  inherit update-alternatives
->  
-> -DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ccsv6-native ti-ipc-rtos"
-> +DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
->  
->  export HWVERSION="ES10"
->  export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
-> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-> index e7d3e82..c5e25c9 100644
-> --- a/recipes-ti/includes/ti-paths.inc
-> +++ b/recipes-ti/includes/ti-paths.inc
-> @@ -46,7 +46,6 @@ export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
->  export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
->  export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
->  export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
-> -export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
-
-I'd suggest removing this variable in patch #3, along with removing CCS 
-recipe.
-
-
->  export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
->  export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
->  export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-> index b29e984..696a897 100644
-> --- a/recipes-ti/ipc/ti-ipc-rtos.inc
-> +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-> @@ -43,7 +43,7 @@ DEPENDS_append_keystone = " ti-cgt6x-native \
->                              gcc-arm-none-eabi-native \
->  "
->  DEPENDS_append_omap-a15 = " ti-cgt6x-native \
-> -                            ti-ccsv6-native \
-> +                            ti-cgt-arm-native \
->                              gcc-arm-none-eabi-native \
->  "
->  IPC_TARGETS = ""
+>  BINFILE_NAME = "cgt_arm_installer"
 > -- 
 > 1.9.1
 > 
