@@ -1,11 +1,11 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9CF32E00AD5; Fri, 21 Apr 2017 07:32:28 -0700 (PDT)
+	id 1CE68E007BA; Mon, 24 Apr 2017 04:13:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -13,38 +13,37 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2861BE00A30
-	for <meta-ti@yoctoproject.org>; Fri, 21 Apr 2017 07:32:25 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3LEWF1p001130
-	for <meta-ti@yoctoproject.org>; Fri, 21 Apr 2017 09:32:15 -0500
+	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
+	*      [198.47.27.77 listed in dnsbl.sorbs.net]
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C926E00AB6
+	for <meta-ti@yoctoproject.org>; Mon, 24 Apr 2017 04:12:50 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3OBCn2w005839
+	for <meta-ti@yoctoproject.org>; Mon, 24 Apr 2017 06:12:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1492785135;
-	bh=fPYfdrFCOJOk7BAwOnDkq3OOSvoo7O4zypS5iZRlxnA=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=J0K7QSJ4n+Eb79rWBKIP0eO0qGFJ9MdG8NDOXHuKzwpJd4onKKbbVt6EIjmck+Aj9
-	F6L4Bqdg69y3bLFgvPBFJZqGmUSXtnlSufTwzxIwgxej5oXnepjaoEwI9clmC/Dt8T
-	/45Qx9+89T1O/emf1EvEYxNS0076iJ+UXSc4NhQk=
+	s=ti-com-17Q1; t=1493032369;
+	bh=acEYygheXhZBwlUe+nU5eOmFJoYP6R7yZSvecY1YIGk=;
+	h=From:To:CC:Subject:Date;
+	b=MYq2V+68JygsdbVYDyLMO0xBfuxUt6DDhzE6PKSMlhgX15N/Z0tV7ioTtF4Q4KGEe
+	vcqBES0JfickwSQaGQBE07cMyQetpleqUEbSPHj3Xjo1Tk8+GbvZzohtGJsQvdWqpz
+	WKd6mlUsAD0XFpMNu5cGH0rlMf0in0pmWVKkG4ZU=
 Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3LEWASN015983
-	for <meta-ti@yoctoproject.org>; Fri, 21 Apr 2017 09:32:10 -0500
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3OBCmTu012733
+	for <meta-ti@yoctoproject.org>; Mon, 24 Apr 2017 06:12:49 -0500
 Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 21 Apr 2017 09:32:09 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3LEW9XJ026288;
-	Fri, 21 Apr 2017 09:32:09 -0500
-To: Karthik Ramanan <a0393906@ti.com>, <meta-ti@yoctoproject.org>
-References: <1492784105-58653-1-git-send-email-a0393906@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <bc8f561f-870e-c493-1696-ab2910b091ce@ti.com>
-Date: Fri, 21 Apr 2017 10:32:09 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	Mon, 24 Apr 2017 06:12:48 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v3OBCm3j013402;	Mon, 24 Apr 2017 06:12:48 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 24 Apr 2017 07:12:45 -0400
+Message-ID: <1493032365-37641-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1492784105-58653-1-git-send-email-a0393906@ti.com>
-Subject: Re: [morty PATCH v2 1/3] ti-cgt-arm: add recipe for 16.9.2
+Subject: [PATCH] mpm-transport: Update to new version 2.0.4.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,91 +56,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Apr 2017 14:32:28 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 24 Apr 2017 11:13:03 -0000
+Content-Type: text/plain
 
-Karthik,
+- Add INSANE_SKIP ldflags to avoid warning
+- Add no-preserve-ownership to avoid host contamination warning
 
-A couple concerns below.
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/mpm-transport/mpm-transport_git.bb | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Thanks,
-
-Jake
-
-
-On 4/21/2017 10:15 AM, Karthik Ramanan wrote:
-> Signed-off-by: Karthik Ramanan <a0393906@ti.com>
-> ---
->   recipes-ti/devtools/ti-cgt-arm.bb  |  8 ++++++++
->   recipes-ti/devtools/ti-cgt-arm.inc | 36 ++++++++++++++++++++++++++++++++++++
->   2 files changed, 44 insertions(+)
->   create mode 100644 recipes-ti/devtools/ti-cgt-arm.bb
->   create mode 100644 recipes-ti/devtools/ti-cgt-arm.inc
->
-> diff --git a/recipes-ti/devtools/ti-cgt-arm.bb b/recipes-ti/devtools/ti-cgt-arm.bb
-> new file mode 100644
-> index 0000000..82c1903
-> --- /dev/null
-> +++ b/recipes-ti/devtools/ti-cgt-arm.bb
-> @@ -0,0 +1,8 @@
-> +include ti-cgt-arm.inc
-> +
-> +LIC_FILES_CHKSUM = "file://${PN}_${PV}.LTS/README.txt;md5=c32eadd03472353c042a8a7c4568438b"
-> +
-> +PV = "16.9.2"
-
-Would it be better to have this in the recipe filename? I'm not sure if 
-there is a preference.
-
-> +
-> +BINFILE_MD5 = "7b73e51e9548a4a0bf3923a336b1a974"
-> +BINFILE_SHA256 = "d1a5c255319088be7d75b3fce1b16a2e3d60c75023db7dad16cab6d4d3425d06"
-> diff --git a/recipes-ti/devtools/ti-cgt-arm.inc b/recipes-ti/devtools/ti-cgt-arm.inc
-> new file mode 100644
-> index 0000000..3897b2e
-> --- /dev/null
-> +++ b/recipes-ti/devtools/ti-cgt-arm.inc
-> @@ -0,0 +1,36 @@
-> +SUMMARY= "TI ARM Code Generation Tools"
-> +HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> +LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD & BSD-4-Clause"
-> +
-> +require recipes-ti/includes/ti-unpack.inc
-> +require recipes-ti/includes/ti-staging.inc
-> +require recipes-ti/includes/ti-paths.inc
-> +
-> +S = "${WORKDIR}/ti-cgt-arm-${PV}"
-> +
-> +SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"
-> +
-> +BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
-> +TI_BIN_UNPK_ARGS = "--prefix ${S}"
-> +TI_BIN_UNPK_CMDS = ""
-> +
-> +do_install() {
-> +    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
-> +    cp -r ${S}/ti-cgt-arm*/. ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
-> +}
-> +
-> +SRC_URI[cgt_arm_installer.md5sum] = "${BINFILE_MD5}"
-> +SRC_URI[cgt_arm_installer.sha256sum] = "${BINFILE_SHA256}"
-> +
-> +BINFILE_NAME = "cgt_arm_installer"
-> +BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
-> +
-> +FILES_${PN} += "${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-
-It appears that there is not support for the "target" class as the 
-installer is for the x86 architecture.
-
-> +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_SYSROOT_STRIP = "1"
-> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> +
-> +INSANE_SKIP_${PN} += "arch staticdev"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index 0690807..bf02c0b 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -15,15 +15,16 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH = "master"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.03.00
+-SRCREV = "ba53217c5db1a6f9d21a0c8f50e9e30a6efa8be8"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.04.00
++SRCREV = "e0e44fe55bef7ddf89f7ff3574f07fa906e72a37"
+ 
+-PV = "2.0.3.0"
++PV = "2.0.4.0"
+ PR = "r0"
+ 
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+ EXTRA_OEMAKE_append_k2hk-evm += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+ EXTRA_OEMAKE_append_k2e += "HYPLNK_TRANSPORT=true"
++INSANE_SKIP_${PN} += "ldflags"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -43,7 +44,7 @@ do_install() {
+ 	install -c -m 644 ${S}/include/* ${D}${includedir}/
+ 
+ 	install -d ${D}${libdir}/
+-	cp  -a ${S}/lib/* ${D}${libdir}/
++	cp  -a --preserve=mode,timestamps --no-preserve=ownership ${S}/lib/* ${D}${libdir}/
+ 
+ 	install -d ${D}${sysconfdir}/mpm/
+ 	install -c -m 644 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
+-- 
+1.9.1
 
 
