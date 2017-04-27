@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <i-pang@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D5B7DE00B0B; Wed, 26 Apr 2017 04:20:56 -0700 (PDT)
+	id 90500E0094C; Wed, 26 Apr 2017 22:57:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,41 +13,43 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAAD3E00B03
-	for <meta-ti@yoctoproject.org>; Wed, 26 Apr 2017 04:20:53 -0700 (PDT)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 439B7E00812
+	for <meta-ti@yoctoproject.org>; Wed, 26 Apr 2017 22:57:16 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3QBKq7n026015
-	for <meta-ti@yoctoproject.org>; Wed, 26 Apr 2017 06:20:52 -0500
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3R5vFuj031181
+	for <meta-ti@yoctoproject.org>; Thu, 27 Apr 2017 00:57:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493205652;
-	bh=BG2IYeYFamqtomvNRAQjL4hAG3uc/X3Mb2GKcTG5CTA=;
-	h=Subject:To:References:CC:From:Date:In-Reply-To;
-	b=m0BO1jvDdvy9cPrGcZh/lvIo9uLIlqcuM1TtZE6h8kUO84xm0IYbZyUk4FuEIgt8a
-	SdxWYec9yHQzh9ogO4YhgSbwPSVpuMrc5tvTl+ochxTr88yZtFMqUdo8+9Ackm9E7g
-	CFBhql8/ILV0xXFJiJ0XtizYrJIz+/z7IxENWUUQ=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3QBKqeW023693
-	for <meta-ti@yoctoproject.org>; Wed, 26 Apr 2017 06:20:52 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 26 Apr 2017 06:20:52 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3QBKput020793;
-	Wed, 26 Apr 2017 06:20:52 -0500
-To: Karthik Ramanan <a0393906@ti.com>, "Pang, Ivan" <i-pang@ti.com>,
-	"Dmytriyenko, Denys" <denys@ti.com>, "R, Karthik" <karthik.ramanan@ti.com>
+	s=ti-com-17Q1; t=1493272635;
+	bh=g59MJepWZaPHxCr+cHIpApwWiAlJk1uvGwrbV46MErg=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=f752HqceF4Sr6Q0WnQNXrfNzonx/uyAP9x4GVXVGLb1AfoBZUde6lp8l40s6ELGP4
+	zSgmuxt3ikIbB8XPAOlrBEnwFvGGeVL8sj0XSScX5HiYVolr7InXKQrRNzsC9WPbpP
+	vyhwsvqgnqf4Jc7LXsj2rDFzB28j1jWl6D80+Onk=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3R5vF3v030215
+	for <meta-ti@yoctoproject.org>; Thu, 27 Apr 2017 00:57:15 -0500
+Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.03.0294.000; Thu, 27 Apr 2017 00:57:15 -0500
+From: "Pang, Ivan" <i-pang@ti.com>
+To: "Stiffler, Jacob" <j-stiffler@ti.com>, "R, Karthik"
+	<karthik.ramanan@ti.com>, "Dmytriyenko, Denys" <denys@ti.com>, "R, Karthik"
+	<karthik.ramanan@ti.com>
+Thread-Topic: [meta-ti] [morty v3 1/3] ti-cgt-arm: add recipe for 16.9.2
+Thread-Index: AQHSvbbVd8yTrY0dgESAv5LbhH8uzaHXDRoA//+w5nCAAL5OAIAAWmiAgADiumA=
+Date: Thu, 27 Apr 2017 05:57:14 +0000
+Message-ID: <C45960711C772449A33A51ED1374F08A4060D5D2@DFLE08.ent.ti.com>
 References: <1493119564-36769-1-git-send-email-a0393906@ti.com>
 	<20170425231916.GT31608@edge>
 	<C45960711C772449A33A51ED1374F08A4060D136@DFLE08.ent.ti.com>
-	<590036BC.4010306@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <26eecf02-370c-de7a-eb49-94cff6b5da9c@ti.com>
-Date: Wed, 26 Apr 2017 07:20:51 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	<590036BC.4010306@ti.com> <26eecf02-370c-de7a-eb49-94cff6b5da9c@ti.com>
+In-Reply-To: <26eecf02-370c-de7a-eb49-94cff6b5da9c@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.172.224.221]
 MIME-Version: 1.0
-In-Reply-To: <590036BC.4010306@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [morty v3 1/3] ti-cgt-arm: add recipe for 16.9.2
 X-BeenThere: meta-ti@yoctoproject.org
@@ -62,9 +64,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Apr 2017 11:20:56 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Apr 2017 05:57:21 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Jake, Karthik,
+
+It should be fine to go ahead with the merge then; I can work on refactorin=
+g the "linux" and "windows" recipes internally in meta-processor-sdk-intern=
+al. I'm not familiar with appending recipes to an existing .bb file, but it=
+ sounds like it can be done.
+
+Ivan
+
+-----Original Message-----
+From: Stiffler, Jacob=20
+Sent: Wednesday, April 26, 2017 6:21 AM
+To: R, Karthik; Pang, Ivan; Dmytriyenko, Denys; R, Karthik
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [morty v3 1/3] ti-cgt-arm: add recipe for 16.9.2
 
 
 
@@ -73,59 +92,60 @@ On 4/26/2017 1:57 AM, Karthik Ramanan wrote:
 > On 26-Apr-17 5:09 AM, Pang, Ivan wrote:
 >> Karthik, Denys,
 >>
->>>> +PV = "16.9.2"
->>   > Would it be better to have this in the recipe filename? I'm not 
+>>>> +PV =3D "16.9.2"
+>>   > Would it be better to have this in the recipe filename? I'm not=20
 >> sure if there is a preference.
 >>
->> Sorry, I haven't kept up with the patch mails. There was a specific 
->> reason I moved the PV out of the filename and into the .inc file - I 
->> had multiple recipes in RTOS that would need to align with this PV 
->> (see ti-cgt-arm-linux.bb and ti-cgt-arm-windows.bb). This would let 
+>> Sorry, I haven't kept up with the patch mails. There was a specific=20
+>> reason I moved the PV out of the filename and into the .inc file - I=20
+>> had multiple recipes in RTOS that would need to align with this PV=20
+>> (see ti-cgt-arm-linux.bb and ti-cgt-arm-windows.bb). This would let=20
 >> us update only the .inc file whenever we want to bump up the version.
 >>
 >> Ivan
 > Ivan,
 >
-> Since we decided to remove the linux and windows on the meta-ti 
+> Since we decided to remove the linux and windows on the meta-ti=20
 > context, we decided to move out the PV to the filename.
-> I think we should merge the recipe in its current form and then work 
+> I think we should merge the recipe in its current form and then work=20
 > on subsequent changes. Would you be fine with that approach?
 
 Ivan,
 
-the "linux" and "windows" recipe variants simply package the installer, 
-correct?
+the "linux" and "windows" recipe variants simply package the installer, cor=
+rect?
 
-If this is the case, you can always create the "linux" and "windows" 
+If this is the case, you can always create the "linux" and "windows"=20
 packages from the current recipe through a bbappend.
 
 - Jake
 
 >>
 >> -----Original Message-----
->> From: meta-ti-bounces@yoctoproject.org 
->> [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Dmytriyenko, 
+>> From: meta-ti-bounces@yoctoproject.org=20
+>> [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Dmytriyenko,=20
 >> Denys
 >> Sent: Tuesday, April 25, 2017 6:19 PM
 >> To: R, Karthik
 >> Cc: meta-ti@yoctoproject.org
->> Subject: Re: [meta-ti] [morty v3 1/3] ti-cgt-arm: add recipe for 16.9.2
+>> Subject: Re: [meta-ti] [morty v3 1/3] ti-cgt-arm: add recipe for=20
+>> 16.9.2
 >>
 >> Karthik,
 >>
 >> This looks much better!
 >>
->> I would have said there's no reason to split it into a recipe and 
->> .inc anymore, but we'll probably also need a -nativesdk recipe, so 
+>> I would have said there's no reason to split it into a recipe and=20
+>> .inc anymore, but we'll probably also need a -nativesdk recipe, so=20
 >> keeping .inc for now.
 >>
->> There are couple cosmetic nitpicks - there's no space between SUMMARY 
->> and = sign; and BINFILE variable is defined twice. I'll fix those on 
+>> There are couple cosmetic nitpicks - there's no space between SUMMARY=20
+>> and =3D sign; and BINFILE variable is defined twice. I'll fix those on=20
 >> merge though.
-> Thank you Denys, I will make a note on these points. The recipe went 
+> Thank you Denys, I will make a note on these points. The recipe went=20
 > through a lot of rework and I overlooked these aspects.
 >>
->> -- 
+>> --
 >> Denys
 >>
 >>
@@ -133,13 +153,13 @@ packages from the current recipe through a bbappend.
 >>> Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 >>> ---
 >>>   recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb |  8 ++++++
->>>   recipes-ti/devtools/ti-cgt-arm.inc              | 35 
+>>>   recipes-ti/devtools/ti-cgt-arm.inc              | 35=20
 >>> +++++++++++++++++++++++++
 >>>   2 files changed, 43 insertions(+)
 >>>   create mode 100644 recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb
 >>>   create mode 100644 recipes-ti/devtools/ti-cgt-arm.inc
 >>>
->>> diff --git a/recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb 
+>>> diff --git a/recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb
 >>> b/recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb
 >>> new file mode 100644
 >>> index 0000000..c4fc7f0
@@ -148,64 +168,67 @@ packages from the current recipe through a bbappend.
 >>> @@ -0,0 +1,8 @@
 >>> +include ti-cgt-arm.inc
 >>> +
->>> +LIC_FILES_CHKSUM = 
->>> "file://ti-cgt-arm_${PV}.LTS/README.txt;md5=c32eadd03472353c042a8a7c4568438b"
+>>> +LIC_FILES_CHKSUM =3D
+>>> "file://ti-cgt-arm_${PV}.LTS/README.txt;md5=3Dc32eadd03472353c042a8a7c4=
+568438b"
 >>> +
->>> +BINFILE_MD5 = "7b73e51e9548a4a0bf3923a336b1a974"
->>> +BINFILE_SHA256 = 
+>>> +BINFILE_MD5 =3D "7b73e51e9548a4a0bf3923a336b1a974"
+>>> +BINFILE_SHA256 =3D
 >>> "d1a5c255319088be7d75b3fce1b16a2e3d60c75023db7dad16cab6d4d3425d06"
 >>> +
->>> +PR_append = "r2"
->>> diff --git a/recipes-ti/devtools/ti-cgt-arm.inc 
+>>> +PR_append =3D "r2"
+>>> diff --git a/recipes-ti/devtools/ti-cgt-arm.inc
 >>> b/recipes-ti/devtools/ti-cgt-arm.inc
 >>> new file mode 100644
 >>> index 0000000..8cc1ca4
 >>> --- /dev/null
 >>> +++ b/recipes-ti/devtools/ti-cgt-arm.inc
 >>> @@ -0,0 +1,35 @@
->>> +SUMMARY= "TI ARM Code Generation Tools"
->>> +HOMEPAGE = 
->>> "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
->>> +LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & 
->>> BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & 
+>>> +SUMMARY=3D "TI ARM Code Generation Tools"
+>>> +HOMEPAGE =3D
+>>> "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/downl=
+oad.htm"
+>>> +LICENSE =3D "(TI-TSPA & Thai-Open-Source-Software-Center) &
+>>> BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT &=20
 >>> BSD-2-Clause & PD & BSD-4-Clause"
 >>> +
 >>> +inherit native
->>> +require recipes-ti/includes/ti-unpack.inc
->>> +require recipes-ti/includes/ti-staging.inc
+>>> +require recipes-ti/includes/ti-unpack.inc require=20
+>>> +recipes-ti/includes/ti-staging.inc
 >>> +require recipes-ti/includes/ti-paths.inc
 >>> +
->>> +S = "${WORKDIR}/ti-cgt-arm-${PV}"
+>>> +S =3D "${WORKDIR}/ti-cgt-arm-${PV}"
 >>> +
->>> +SRC_URI = 
->>> "http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"
+>>> +SRC_URI =3D
+>>> "http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/$=
+{BINFILE};name=3D${BINFILE_NAME}"
 >>> +
->>> +BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
->>> +TI_BIN_UNPK_ARGS = "--prefix ${S}"
->>> +TI_BIN_UNPK_CMDS = ""
+>>> +BINFILE =3D "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
+>>> +TI_BIN_UNPK_ARGS =3D "--prefix ${S}"
+>>> +TI_BIN_UNPK_CMDS =3D ""
 >>> +
 >>> +do_install() {
 >>> +    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
 >>> +    cp -r ${S}/ti-cgt-arm*/. ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
 >>> +}
 >>> +
->>> +SRC_URI[cgt_arm_installer.md5sum] = "${BINFILE_MD5}"
->>> +SRC_URI[cgt_arm_installer.sha256sum] = "${BINFILE_SHA256}"
+>>> +SRC_URI[cgt_arm_installer.md5sum] =3D "${BINFILE_MD5}"
+>>> +SRC_URI[cgt_arm_installer.sha256sum] =3D "${BINFILE_SHA256}"
 >>> +
->>> +BINFILE_NAME = "cgt_arm_installer"
->>> +BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
+>>> +BINFILE_NAME =3D "cgt_arm_installer"
+>>> +BINFILE =3D "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
 >>> +
->>> +FILES_${PN} += "${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+>>> +FILES_${PN} +=3D "${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
 >>> +
->>> +INHIBIT_PACKAGE_STRIP = "1"
->>> +INHIBIT_SYSROOT_STRIP = "1"
->>> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+>>> +INHIBIT_PACKAGE_STRIP =3D "1"
+>>> +INHIBIT_SYSROOT_STRIP =3D "1"
+>>> +INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
 >>> +
->>> +INSANE_SKIP_${PN} += "arch staticdev"
->>> -- 
+>>> +INSANE_SKIP_${PN} +=3D "arch staticdev"
+>>> --
 >>> 1.9.1
 >>>
->>> -- 
+>>> --
 >>> _______________________________________________
 >>> meta-ti mailing list
 >>> meta-ti@yoctoproject.org
