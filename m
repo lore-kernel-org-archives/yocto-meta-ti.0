@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E6029E00A9B; Fri, 28 Apr 2017 09:12:19 -0700 (PDT)
+	id 1A432E00AF8; Fri, 28 Apr 2017 09:12:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,37 +13,37 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9607AE009CE
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 09:12:17 -0700 (PDT)
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACD3AE00C61
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 09:12:28 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SGCGRB015489
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:16 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SGCHhO022957
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493395936;
-	bh=/dhRJ4xgZYxwVafh8NadTBXwi6IOZDfYcP9c9RRyAyg=;
+	s=ti-com-17Q1; t=1493395937;
+	bh=oHDmX6sYEELTAAvMr3JD8owQY77/jVSLhEyhdauFOVA=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=Xm3u1KhS20F4SbHgWAvBAdsWyubRhlCG0uSFkXirkQuCKFMcHPyGoMzZ0+VLc8dT1
-	Kf58VsLDx+DpvLXvdtFrwh1a7Nh+kiwa9n+6Rwm+gxDXl7naiscEzMAzVCYRq++qAQ
-	j9k0Z2+sCmW8qUIOilNE9INVkEwa7vkextKWXtKU=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SGCGCL013224
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:16 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 28 Apr 2017 11:12:16 -0500
+	b=lRNjhEPPSpxmTkj27Lauk3Wr//yhHui70SR0x2Q2oSF4I9DmUcWCxXOdgDHtHcbDQ
+	1e9JlIF2MvDwZenqVD+sr2SW3PiJhxCUu0ozPMkW+e77sZuRdoKd4v2VMZfX6/G7sg
+	RB4znHDfOFOHrD52mfnFPP7a3Zn7U/h9jvoZKGWs=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SGCC9I013144
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:12 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 28 Apr 2017 11:12:12 -0500
 Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v3SGC8el021789;	Fri, 28 Apr 2017 11:12:16 -0500
+	v3SGC8eh021789;	Fri, 28 Apr 2017 11:12:12 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 28 Apr 2017 12:11:59 -0400
-Message-ID: <1493395920-21543-7-git-send-email-jsobota@ti.com>
+Date: Fri, 28 Apr 2017 12:11:55 -0400
+Message-ID: <1493395920-21543-3-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1493395920-21543-1-git-send-email-jsobota@ti.com>
 References: <1493395920-21543-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [master/morty][PATCH 7/8] sa-lld: Update to version 3.0.0.17
+Subject: [master/morty][PATCH 3/8] osal: Update to version 1.0.0.6E
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,36 +56,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 16:12:20 -0000
+X-List-Received-Date: Fri, 28 Apr 2017 16:12:39 -0000
 Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-bsp/sa-lld/sa-lld.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/osal/osal.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
-index 853abdd..2f2c671 100644
---- a/recipes-bsp/sa-lld/sa-lld.inc
-+++ b/recipes-bsp/sa-lld/sa-lld.inc
-@@ -8,14 +8,14 @@ SA_LLD_GIT_PROTOCOL = "git"
- SA_LLD_GIT_BRANCH = "master"
- SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
+diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
+index 55a165e..fa8cde8 100644
+--- a/recipes-bsp/osal/osal.inc
++++ b/recipes-bsp/osal/osal.inc
+@@ -1,5 +1,5 @@
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=8cbd8efb1460e4f16e6b00c8a7686be4"
++LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=ae7b9f0410f26c80dcf790ef3f622fad"
  
--# Below commit ID corresponds to "DEV.SA_LLD.03.00.00.16"
--SA_LLD_SRCREV = "eb1508714586f92e66bf5a8a4c212e8277f6b065"
-+# Below commit ID corresponding to "DEV.SA_LLD.03.00.00.17"
-+SA_LLD_SRCREV = "5f153253b1874420b04bd8f95450a2b0c8c11335"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
+ OSAL_GIT_BRANCH = "master"
+ OSAL_GIT_DESTSUFFIX = "git/ti/osal"
  
- BRANCH = "${SA_LLD_GIT_BRANCH}"
- SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${SA_LLD_SRCREV}"
+-# Below commit ID corresponds to "DEV.OSAL.01.00.00.05E"
+-OSAL_SRCREV = "5125c71d756530513500b463d3301d03dee04497"
++# Below commit ID corresponding to "DEV.OSAL.01.00.00.06E"
++OSAL_SRCREV = "072ab0f76fa272ace5b1756075475f848c14221a"
  
--PV = "03.00.00.16"
-+PV = "03.00.00.17"
+ BRANCH = "${OSAL_GIT_BRANCH}"
+ SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${OSAL_SRCREV}"
+-PV = "01.00.00.05E"
++PV = "01.00.00.06E"
  INC_PR = "r0"
- 
- S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
 -- 
 2.7.4
 
