@@ -1,6 +1,6 @@
-Return-Path: <jsobota@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 33433E00A93; Fri, 28 Apr 2017 09:16:41 -0700 (PDT)
+	id DAAA5E00A5C; Fri, 28 Apr 2017 11:09:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,35 +13,40 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6CAEE00A4C
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 09:16:39 -0700 (PDT)
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E954E00A9B
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:09:00 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SGGd1R003187
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:16:39 -0500
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SI90AW002258
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 13:09:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493396199;
-	bh=PNqx9wOHsG61/pyWT7kDXSJEk919pTyZ/47R3fcCV5c=;
-	h=From:To:CC:Subject:Date;
-	b=mHnKJFz8AGUIs4fjNIpI9T2JLPYvsnQ+9GYQfGwTKLbElnawqHctqBxcPyPkQAm3p
-	jnX33OItQrYgeGJ01b7jcgvRGLI+kvkuyxK53qA7JoAH+6erfcwYwvFMHJ8JGw9SnK
-	FGM/dz7g/xu1loXo7n/3AR2KGJFZIBWVCPfb3gHo=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SGGdro015378
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:16:39 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 28 Apr 2017 11:16:38 -0500
-Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v3SGGcm2032446;	Fri, 28 Apr 2017 11:16:38 -0500
-From: Justin Sobota <jsobota@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 28 Apr 2017 12:16:32 -0400
-Message-ID: <1493396192-21611-1-git-send-email-jsobota@ti.com>
-X-Mailer: git-send-email 2.7.4
+	s=ti-com-17Q1; t=1493402940;
+	bh=tGMUbo0H7I+xAYhclCCj3WF48Tc4RL4RGAx2fFI5Gmw=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=GQgs+6o3neMjynXmsjuDRJhY7Pf/AbyZq4XUSs/VdUOzbS+t5T47PkT5Mq7dkporW
+	t+y9aL6RhSBLrx8YlWboW0kX1NNfAZPgB7Q2NqapovxfGNWw7EuY1xX/vPTYk8Xg+i
+	PqxHo9A/b6ZANQCzvnMF893qiR3CPUV7c6xSLFrE=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SI90qr004554
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 13:09:00 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 28 Apr 2017 13:08:59 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SI8xus004781;
+	Fri, 28 Apr 2017 13:09:00 -0500
+Date: Fri, 28 Apr 2017 14:08:59 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Sobota, Justin" <jsobota@ti.com>
+Message-ID: <20170428180859.GL31608@edge>
+References: <1493331034-13464-1-git-send-email-jsobota@ti.com>
+	<20170428002250.GI31608@edge>
+	<311ECDE3E284F649854AED0B108A0CE14C092A75@DFLE12.ent.ti.com>
 MIME-Version: 1.0
-Subject: [master/morty][PATCH] ti-pdk-build-rtos: Update to version 1.0.0.4B
+In-Reply-To: <311ECDE3E284F649854AED0B108A0CE14C092A75@DFLE12.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [master/morty][PATCH] Resolve host contamination warnings
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,131 +59,203 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 16:16:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 28 Apr 2017 18:09:19 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-- Add dra7xx support
-- Add pruss firmware makefiles
+Justin,
 
-Signed-off-by: Justin Sobota <jsobota@ti.com>
----
- recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb | 44 ++++++++++++++++++++----
- 1 file changed, 37 insertions(+), 7 deletions(-)
+See below.
 
-diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-index 73ed092..4e6ba96 100644
---- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-+++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de
- 
- require recipes-ti/includes/ti-paths.inc
- 
--PV = "01.00.00.03"
-+PV = "01.00.00.04B"
- PR = "r0"
- 
- PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
- PDK_BUILD_GIT_PROTOCOL = "git"
- PDK_BUILD_GIT_BRANCH = "master"
- 
--# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.03"
--PDK_BUILD_SRCREV = "487845b835b54d97f2d2f47ee1d0d88784e7e9ca"
-+# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.04B"
-+PDK_BUILD_SRCREV = "98b62506c451304252c7cd1e6af60dd11adc588a"
- 
- BRANCH = "${PDK_BUILD_GIT_BRANCH}"
- SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
-@@ -36,9 +36,6 @@ do_install() {
-     install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
-     install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
- 
--    sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
--        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
--    
-     install -m 0755 makerules/build_config.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     install -m 0755 makerules/common.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     install -m 0755 makerules/component.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-@@ -48,29 +45,39 @@ do_install() {
- 
- do_install_append_ti33x() {
-     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
- 
-     install -m 0755 makerules/rules_a8.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     install -m 0755 makerules/rules_a8_extend.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
- 
-     install -m 0755 am335x/config_am335x_a8.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
-+    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
-+    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
- }
- 
- do_install_append_ti43x() {
-     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
- 
-     install -m 0755 makerules/rules_a9.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     
-     install -m 0755 am437x/config_am437x_a9.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
-+    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
-+    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
- }
- 
--do_install_append_omap-a15() {
-+do_install_append_am57xx-evm() {
-     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
-     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
- 
-     install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     
-     install -m 0755 am571x/config_am571x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
-     install -m 0755 am571x/config_am571x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
-@@ -80,8 +87,30 @@ do_install_append_omap-a15() {
-     install -m 0755 am572x/config_am572x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-     install -m 0755 am572x/config_am572x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-     install -m 0755 am572x/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-+    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
-+    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
- }
-     
-+do_install_append_dra7xx-evm() {
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
-+
-+    install -m 0755 makefile ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/
-+
-+    install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+    install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+    install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+    install -m 0755 makerules/rules_arp32.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+    install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-+
-+    install -m 0755 tda2xx/config_tda2xx.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-+    install -m 0755 tda2xx/config_tda2xx_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-+    install -m 0755 tda2xx/config_tda2xx_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-+    install -m 0755 tda2xx/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-+    install -m 0755 tda3xx/config_tda3xx.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
-+    install -m 0755 tda3xx/config_tda3xx_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
-+}
-+
- do_install_append_keystone() {
-     install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-     install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-@@ -91,6 +120,7 @@ do_install_append_k2g-evm() {
-     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
- 
-     install -m 0755 k2g/config_k2g_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
-+    install -m 0755 k2g/config_k2g_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
- }
- 
- FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
--- 
-2.7.4
 
+On Fri, Apr 28, 2017 at 10:37:14AM -0400, Sobota, Justin wrote:
+> Hmm...I rebased with latest from morty, including Karthik's patches which 
+> touch two of the files in this patch, and the patch applied cleanly.
+> 
+> -----Original Message-----
+> From: Dmytriyenko, Denys 
+> Sent: Thursday, April 27, 2017 8:23 PM
+> To: Sobota, Justin
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [master/morty][PATCH] Resolve host contamination warnings
+> 
+> Does not apply - haven't checked what's wrong yet...
+> 
+> 
+> On Thu, Apr 27, 2017 at 06:10:34PM -0400, Justin Sobota wrote:
+> > Signed-off-by: Justin Sobota <jsobota@ti.com>
+> > ---
+> >  classes/ti-pdk.bbclass                                      | 2 +-
+> >  recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb                 | 5 +++--
+> >  recipes-ti/bios/ti-sysbios.inc                              | 3 ++-
+> >  recipes-ti/devtools/ti-cg-xml_2.41.00.bb                    | 3 ++-
+> >  recipes-ti/dsplib/dsplib-c66x.inc                           | 3 ++-
+> >  recipes-ti/framework-components/ti-framework-components.inc | 3 ++-
+> >  recipes-ti/imglib/imglib-c66x.inc                           | 3 ++-
+> >  recipes-ti/mathlib/mathlib-c66x.inc                         | 3 ++-
+> >  recipes-ti/xdais/ti-xdais.inc                               | 3 ++-
+> >  9 files changed, 18 insertions(+), 10 deletions(-)
+> > 
+> > diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass index 
+> > fd7c3e7..d4dbb5f 100644
+> > --- a/classes/ti-pdk.bbclass
+> > +++ b/classes/ti-pdk.bbclass
+> > @@ -89,7 +89,7 @@ do_compile() {
+> >  
+> >  do_install () {
+> >      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> > -    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
+> > +    find -name "*.tar" -exec tar xf {} --no-same-owner -C 
+> > + ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
+> >      
+> >      if [ "${PDK_COMP_LINK_TEXT}" != "" ]
+> >      then
+> > diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb 
+> > b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+> > index 6a01d0b..63dca8f 100644
+> > --- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+> > +++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+> > @@ -2,7 +2,7 @@ require edma3-lld.inc
+> >  require recipes-ti/includes/ti-paths.inc  require 
+> > recipes-ti/includes/ti-staging.inc
+> >  
+> > -PR = "${INC_PR}.0"
+> > +PR = "${INC_PR}.1"
+> >  
+> >  DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
+
+ti-ccsv6-native got replaced with ti-cgt-arm-native ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+> >  
+> > @@ -106,8 +106,9 @@ do_compile () {
+> >  }
+> >  
+> >  do_install () {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  INSANE_SKIP_${PN}-dev = "arch ldflags"
+> > diff --git a/recipes-ti/bios/ti-sysbios.inc 
+> > b/recipes-ti/bios/ti-sysbios.inc index 408be78..53b55a5 100644
+> > --- a/recipes-ti/bios/ti-sysbios.inc
+> > +++ b/recipes-ti/bios/ti-sysbios.inc
+> > @@ -15,8 +15,9 @@ BINFILE="bios_setuplinux_${PV}.bin"
+> >  TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
+> >  
+> >  do_install() {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${SYSBIOS_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${SYSBIOS_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${SYSBIOS_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  ALLOW_EMPTY_${PN} = "1"
+> > diff --git a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb 
+> > b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+> > index 115254e..a0387b7 100644
+> > --- a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+> > +++ b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+> > @@ -25,8 +25,9 @@ TI_BIN_UNPK_CMDS=""
+> >  TI_BIN_UNPK_ARGS="--prefix ${S} --mode silent"
+> >  
+> >  do_install() {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${CG_XML_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${CG_XML_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${CG_XML_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  FILES_${PN} += "${CG_XML_INSTALL_DIR_RECIPE}"
+> > diff --git a/recipes-ti/dsplib/dsplib-c66x.inc 
+> > b/recipes-ti/dsplib/dsplib-c66x.inc
+> > index 31acc1e..ce978db 100644
+> > --- a/recipes-ti/dsplib/dsplib-c66x.inc
+> > +++ b/recipes-ti/dsplib/dsplib-c66x.inc
+> > @@ -16,8 +16,9 @@ TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
+> >  TI_BIN_UNPK_CMDS = ""
+> >  
+> >  do_install() {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  ALLOW_EMPTY_${PN} = "1"
+> > diff --git 
+> > a/recipes-ti/framework-components/ti-framework-components.inc 
+> > b/recipes-ti/framework-components/ti-framework-components.inc
+> > index e111ec4..d3a1d75 100644
+> > --- a/recipes-ti/framework-components/ti-framework-components.inc
+> > +++ b/recipes-ti/framework-components/ti-framework-components.inc
+> > @@ -11,8 +11,9 @@ S = "${WORKDIR}/framework_components_${PV}"
+> >  SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/fc/${PV}/exports/framework_components_${PV},lite.tar.gz;name=fctarball"
+> >  
+> >  do_install() {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${FC_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${FC_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${FC_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  INSANE_SKIP_${PN} = "ldflags"
+> > diff --git a/recipes-ti/imglib/imglib-c66x.inc 
+> > b/recipes-ti/imglib/imglib-c66x.inc
+> > index 3c76ad5..eb57598 100644
+> > --- a/recipes-ti/imglib/imglib-c66x.inc
+> > +++ b/recipes-ti/imglib/imglib-c66x.inc
+> > @@ -18,8 +18,9 @@ TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
+> >  TI_BIN_UNPK_CMDS = ""
+> >  
+> >  do_install() {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${IMGLIB_C66_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${IMGLIB_C66_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${IMGLIB_C66_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  ALLOW_EMPTY_${PN} = "1"
+> > diff --git a/recipes-ti/mathlib/mathlib-c66x.inc 
+> > b/recipes-ti/mathlib/mathlib-c66x.inc
+> > index 1511337..7951e6c 100644
+> > --- a/recipes-ti/mathlib/mathlib-c66x.inc
+> > +++ b/recipes-ti/mathlib/mathlib-c66x.inc
+> > @@ -18,8 +18,9 @@ TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
+> >  TI_BIN_UNPK_CMDS = ""
+> >  
+> >  do_install() {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  ALLOW_EMPTY_${PN} = "1"
+> > diff --git a/recipes-ti/xdais/ti-xdais.inc 
+> > b/recipes-ti/xdais/ti-xdais.inc index a12ad64..24268b3 100644
+> > --- a/recipes-ti/xdais/ti-xdais.inc
+> > +++ b/recipes-ti/xdais/ti-xdais.inc
+> > @@ -11,8 +11,9 @@ S = "${WORKDIR}/xdais_${PV}"
+> >  SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/xdais/${PV}/exports/xdais_${PV}.tar.gz;name=xdaistarball"
+> >  
+> >  do_install() {
+> > +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+> >      install -d ${D}${XDAIS_INSTALL_DIR_RECIPE}
+> > -    cp -pPrf ${S}/* ${D}${XDAIS_INSTALL_DIR_RECIPE}
+> > +    cp ${CP_ARGS} ${S}/* ${D}${XDAIS_INSTALL_DIR_RECIPE}
+> >  }
+> >  
+> >  INHIBIT_PACKAGE_STRIP = "1"
+> > --
+> > 2.7.4
+> > 
+> > --
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
