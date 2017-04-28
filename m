@@ -1,38 +1,50 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 75E1BE009CE; Fri, 28 Apr 2017 11:24:37 -0700 (PDT)
+	id D5DEEE009CE; Fri, 28 Apr 2017 11:36:46 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 409A1E009A5
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:24:30 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9BCC120B62;
-	Fri, 28 Apr 2017 18:24:29 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 8tjd1JV34wsR; Fri, 28 Apr 2017 18:24:29 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6779D20756;
-	Fri, 28 Apr 2017 18:24:26 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id E45D8162439;
-	Fri, 28 Apr 2017 14:24:25 -0400 (EDT)
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E5BEE009A5
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:36:45 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SIaiQH005727;
+	Fri, 28 Apr 2017 13:36:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1493404604;
+	bh=G+vT8fluzDHSvKzqhhVsCmmcOcJi6wf/uRsbzgEPYxw=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=q23BSBK5oCjt3O3qSM21H41SuN2ny3A9cHopmSFD1bXnaOVOmBmPnz6WSfMyA1gQq
+	cIoTaO1RTOi5f2PPBA6mx0gd3TDYC+7qcyTTKyPtDoHxnc0tTEDZOa0ZsK82BPDycb
+	48BIKvINnUtz1S+cSsBhTuSXD4I8CKpfD969RH4I=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SIaimF002603;
+	Fri, 28 Apr 2017 13:36:44 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 28 Apr 2017 13:36:43 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SIahH6004638;
+	Fri, 28 Apr 2017 13:36:43 -0500
+Date: Fri, 28 Apr 2017 14:36:43 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Fri, 28 Apr 2017 14:24:23 -0400
-Message-Id: <1493403863-126827-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] edma3lld: remove outdated v1 recipe
+To: Anton Gerasimov <anton@advancedtelematic.com>
+Message-ID: <20170428183642.GP31608@edge>
+References: <15a28d2c-ad70-6b82-0acf-8383a8b97b21@advancedtelematic.com>
+MIME-Version: 1.0
+In-Reply-To: <15a28d2c-ad70-6b82-0acf-8383a8b97b21@advancedtelematic.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: wlcore/wl18xx upstream vs build_wl18xx.sh
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,66 +57,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 18:24:37 -0000
+X-List-Received-Date: Fri, 28 Apr 2017 18:36:46 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Current v2 version is in recipes-bsp
+The best place to ask this is on E2E forum: http://e2e.ti.com/
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Cc: Sam Nelson <sam.nelson@ti.com>
-Cc: Justin Sobota <jsobota@ti.com>
----
- recipes-ti/edma3lld/ti-edma3lld.inc            | 23 -----------------------
- recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb | 10 ----------
- 2 files changed, 33 deletions(-)
- delete mode 100644 recipes-ti/edma3lld/ti-edma3lld.inc
- delete mode 100644 recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
 
-diff --git a/recipes-ti/edma3lld/ti-edma3lld.inc b/recipes-ti/edma3lld/ti-edma3lld.inc
-deleted file mode 100644
-index fb131b6..0000000
---- a/recipes-ti/edma3lld/ti-edma3lld.inc
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "TI EDMA3 Low Level Driver (LLD)"
--HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/${SRC_URI_edma3lldsite}/edma3_lld"
--SECTION = "devel"
--LICENSE = "TI"
--LIC_FILES_CHKSUM = "file://packages/ti/sdo/edma3/drv/edma3_drv.h;md5=c1aa300aaf369a0a03e7922c1b0bbf8e"
--
--require ../includes/ti-paths.inc
--require ../includes/ti-staging.inc
--require ../includes/ti-eula-unpack.inc
--
--TI_BIN_UNPK_WDEXT="/edma3_lld_${PV}"
--S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}"
--
--SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/${SRC_URI_edma3lldsite}/edma3_lld/edma3-lld-bios5/${PV}/exports/EDMA3_LLD_setuplinux_${PV}.bin;name=edma3lldbin"
--
--BINFILE="EDMA3_LLD_setuplinux_${PV}.bin"
--TI_BIN_UNPK_CMDS="Y:workdir"
--
--do_install() {
--    install -d ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
--    cp -pPrf ${S}/* ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
--}
--
-diff --git a/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb b/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
-deleted file mode 100644
-index 549e020..0000000
---- a/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require ti-edma3lld.inc
--
--PV = "01_11_01_04"
--
--SRC_URI_edma3lldsite = "sdo_tii/psp"
--
--SRC_URI[edma3lldbin.md5sum] = "b3c41cb946e2e4b94348fc6bcbe30b16"
--SRC_URI[edma3lldbin.sha256sum] = "617db3eadff33a88e3d42818c204f379906da3b312bc120092408043e7e2aaeb"
--
--INSANE_SKIP_${PN} = "installed-vs-shipped"
--- 
-2.7.4
-
+On Fri, Apr 28, 2017 at 04:11:52PM +0200, Anton Gerasimov wrote:
+> Hi all,
+> 
+> my question is not related directly to meta-ti, but it's the only ti
+> developer mailing list I've found. If you know a better place for it,
+> please share.
+> 
+> I've tried to build linux-ti-staging kernel from meta-ti with wl18xx
+> support and it kind of works, i.e. I can scan for available networks,
+> but can't unfortunately connect to any. I've learned that TI's
+> recommended way to build their wireless drivers is via build_wl18xx.sh
+> from TI's build_utilities, which uses a bit convoluted procedure ending,
+> as far as I could understand, with backporting drivers from TI's own
+> kernel branch.
+> 
+> So I wonder how different these are from the upstream, if it is possible
+> that my problems are due to using upstream drivers, and if there is a
+> recommended method to install these drivers inside Yocto, without
+> post-processing built images.
+> 
+> Thanks in advance,
+> Anton Gerasimov
+> 
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
