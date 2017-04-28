@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 73F3EE00B21; Fri, 28 Apr 2017 09:12:47 -0700 (PDT)
+	id 33433E00A93; Fri, 28 Apr 2017 09:16:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,36 +14,34 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58D3BE00AE4
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 09:12:35 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SGCYS6002717
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:35 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6CAEE00A4C
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 09:16:39 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SGGd1R003187
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:16:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493395955;
+	s=ti-com-17Q1; t=1493396199;
 	bh=PNqx9wOHsG61/pyWT7kDXSJEk919pTyZ/47R3fcCV5c=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=d4A8py6DCtCmvXLvmBzOohvDFJkzoYccPKmdu6RI/QSdopMybNAmMkOoo5DhZEyf9
-	vUMojaSgOe0LSFg030nA2WuwbLsdtAYb4vmI6Yahkt4J+X4Fz9nbQO0mwlOAXbVKdx
-	jYUyVt39o6390JNK8CwNQdh46zeZMDx0HflfrAwM=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SGCYVK013410
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:34 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 28 Apr 2017 11:12:34 -0500
+	h=From:To:CC:Subject:Date;
+	b=mHnKJFz8AGUIs4fjNIpI9T2JLPYvsnQ+9GYQfGwTKLbElnawqHctqBxcPyPkQAm3p
+	jnX33OItQrYgeGJ01b7jcgvRGLI+kvkuyxK53qA7JoAH+6erfcwYwvFMHJ8JGw9SnK
+	FGM/dz7g/xu1loXo7n/3AR2KGJFZIBWVCPfb3gHo=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SGGdro015378
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:16:39 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 28 Apr 2017 11:16:38 -0500
 Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v3SGC8em021789;	Fri, 28 Apr 2017 11:12:34 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v3SGGcm2032446;	Fri, 28 Apr 2017 11:16:38 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 28 Apr 2017 12:12:00 -0400
-Message-ID: <1493395920-21543-8-git-send-email-jsobota@ti.com>
+Date: Fri, 28 Apr 2017 12:16:32 -0400
+Message-ID: <1493396192-21611-1-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1493395920-21543-1-git-send-email-jsobota@ti.com>
-References: <1493395920-21543-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [master/morty][PATCH 8/8] Update to version 1.0.0.4B
+Subject: [master/morty][PATCH] ti-pdk-build-rtos: Update to version 1.0.0.4B
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,7 +54,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 16:12:47 -0000
+X-List-Received-Date: Fri, 28 Apr 2017 16:16:41 -0000
 Content-Type: text/plain
 
 - Add dra7xx support
