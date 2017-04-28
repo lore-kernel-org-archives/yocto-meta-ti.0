@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9C0E4E00ACE; Fri, 28 Apr 2017 09:12:39 -0700 (PDT)
+	id 1E77BE00B05; Fri, 28 Apr 2017 09:12:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,36 +14,36 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A350E00AA7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A050E00A4C
 	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 09:12:30 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SGCJfq022961
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:19 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SGCKPb022965
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493395939;
-	bh=O4vj+OHSuCMLwWXIWRtplNGkTxRNqyWs3mAcmE4s6qU=;
+	s=ti-com-17Q1; t=1493395940;
+	bh=g9VZZIJOLZK8z6UCblbFKHQa2Pc5ChB/3Xyx/m1/TDc=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=LpQtDv5JQ6xJOMVXTFLy5P/C9Uqw5eY30Si2z0iS7XBq1UtEPLBJkKhh5I2xkYVp0
-	MwpsssOxks58F94E8IsVdJWjc3aMXAKVOy/mjNYYQgPTsdaMcPkrKSOlq7zZP+CSKZ
-	rqPOrT/lagYKZ5YNYlJK7T51e3rkSBxCunn3uq5c=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SGCEag013188
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:14 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 28 Apr 2017 11:12:14 -0500
+	b=jZT5rqc8b6Blll+K3oZH1tmmfbI1F5q9cHDCQoQnGDdmszI1j0C5wbfG4WEHGLH59
+	218zaZcagc323rE5dL0qUqnsA570BDwB9Xn8uHyjV3WSYFm3UhmtpC0lP8lDI3KBqA
+	eAjQyxC1Dx4akQSFIt6yXJsYRItRip/EU8vV60y8=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SGCF7J013209
+	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 11:12:15 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 28 Apr 2017 11:12:15 -0500
 Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v3SGC8ej021789;	Fri, 28 Apr 2017 11:12:14 -0500
+	v3SGC8ek021789;	Fri, 28 Apr 2017 11:12:15 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 28 Apr 2017 12:11:57 -0400
-Message-ID: <1493395920-21543-5-git-send-email-jsobota@ti.com>
+Date: Fri, 28 Apr 2017 12:11:58 -0400
+Message-ID: <1493395920-21543-6-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1493395920-21543-1-git-send-email-jsobota@ti.com>
 References: <1493395920-21543-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [master/morty][PATCH 5/8] pruss-lld: Update to version 1.0.0.6A
+Subject: [master/morty][PATCH 6/8] qmss-lld: Update to version 2.1.0.15A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,43 +56,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 16:12:39 -0000
+X-List-Received-Date: Fri, 28 Apr 2017 16:12:42 -0000
 Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-bsp/pruss-lld/pruss-lld.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/qmss-lld/qmss-lld.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
-index 52a92bd..8620108 100644
---- a/recipes-bsp/pruss-lld/pruss-lld.inc
-+++ b/recipes-bsp/pruss-lld/pruss-lld.inc
-@@ -1,7 +1,7 @@
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://pruicss.h;beginline=1;endline=31;md5=315177aa03d58bcd124a6e799e2bd458"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index 560f114..f2ef968 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -9,14 +9,14 @@ QMSS_LLD_GIT_PROTOCOL = "git"
+ QMSS_LLD_GIT_BRANCH = "master"
+ QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
  
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g-evm"
-+COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|k2g-evm"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-# commit ID corresponding to "DEV.QMSS_LLD.02.01.00.14B"
+-QMSS_LLD_SRCREV = "04095405680f4ec92eeef9312ba04f7808b1c813"
++# Below commit ID corresponding to "DEV.QMSS_LLD.02.01.00.15A"
++QMSS_LLD_SRCREV = "72fe9dc35b9e128a95b4e3e4403cb197616e2e88"
  
- PRUSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pruss-lld.git"
-@@ -9,12 +9,12 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
- PRUSS_LLD_GIT_BRANCH = "master"
- PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
+ BRANCH ="${QMSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${QMSS_LLD_SRCREV}"
  
--# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.05A"
--PRUSS_LLD_SRCREV = "7421ea14f163fb3c95c3645fe0add1e05da9d748"
-+# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.06A"
-+PRUSS_LLD_SRCREV = "b98729cc1fc26c9ac32846146892646a23c28adb"
- 
- BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
- SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- 
- SRCREV = "${PRUSS_LLD_SRCREV}"
--PV = "01.00.00.05A"
-+PV = "01.00.00.06A"
+-PV = "02.01.00.14B"
++PV = "02.01.00.15A"
  INC_PR = "r0"
+ 
+ DEVICELIST = "k2h k2k k2l k2e"
 -- 
 2.7.4
 
