@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D24C9E00AA2; Mon,  1 May 2017 12:39:22 -0700 (PDT)
+	id E4962E00ACD; Mon,  1 May 2017 14:46:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,41 +13,37 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 558D3E00546
-	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 12:39:22 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41JdM6e026299
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 14:39:22 -0500
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43857E00546
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 14:46:04 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41Lk4Pw019231
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:46:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493667562;
-	bh=HXUIFZjm/A0a8YX3UmowL1X3zXPQf8XAItELjzMrtcg=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=OY6n1Nc4SRJY63lcXD4E+nw6wDzYdA4Ejh70Q3ZYYh3eAFQHCv2wYdjq13iJElZpX
-	61e5p8ChHqIFlnunTyENNE8ZxzcHETqQVUWb0/9NUArFoYddpyuBku4BheEVjAaZn6
-	pj4oel8/CnUC1giHtgcb9TsC8DngBtjgLsfOr3Hs=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41JdMbx031736
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 14:39:22 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 1 May 2017 14:39:21 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41JdLgn016697;
-	Mon, 1 May 2017 14:39:21 -0500
-Date: Mon, 1 May 2017 15:39:21 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Dan Murphy <dmurphy@ti.com>
-Message-ID: <20170501193920.GW31608@edge>
-References: <20170501190150.4110-1-dmurphy@ti.com>
-	<20170501190150.4110-4-dmurphy@ti.com>
-	<20170501190959.GU31608@edge>
-	<ac991d21-8bb8-c91a-0b12-651c6cfeea36@ti.com>
+	s=ti-com-17Q1; t=1493675164;
+	bh=oHDmX6sYEELTAAvMr3JD8owQY77/jVSLhEyhdauFOVA=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=VT9JHWuVgSff2y2fuLyHOuLjIhftJ6S4hlAjrkVpOXxzsnewIP+vjrio1brDcNBEU
+	Ou5Gnyd6tjVe/OTlg4pcXDSOC+GhX4V4r+JZjidguZi8xrRbhY9WzGuerM/h0bNSQi
+	1GnLMXzpBgR8ej+FK2TeS6DkHbcO0KQKLuGtUrTU=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41Lk32h015772
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:46:04 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 1 May 2017 16:46:03 -0500
+Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v41Ljxef028441;	Mon, 1 May 2017 16:46:03 -0500
+From: Justin Sobota <jsobota@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 1 May 2017 17:45:47 -0400
+Message-ID: <1493675152-31383-3-git-send-email-jsobota@ti.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1493675152-31383-1-git-send-email-jsobota@ti.com>
+References: <1493675152-31383-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <ac991d21-8bb8-c91a-0b12-651c6cfeea36@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [v2 PATCH 4/4] boot-monitor: update to ti2017.01-rc2 tag
+Subject: [PATCH 3/8] osal: Update to version 1.0.0.6E
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,59 +56,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 19:39:22 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 May 2017 21:46:08 -0000
+Content-Type: text/plain
 
-On Mon, May 01, 2017 at 02:21:54PM -0500, Dan Murphy wrote:
-> Denys
-> 
-> On 05/01/2017 02:10 PM, Denys Dmytriyenko wrote:
-> > On Mon, May 01, 2017 at 02:01:50PM -0500, Dan Murphy wrote:
-> >> Signed-off-by: Dan Murphy <dmurphy@ti.com>
-> >> ---
-> >>
-> >> v2 - No changes
-> >>
-> >>  recipes-bsp/boot-monitor/boot-monitor_git.bb | 3 +--
-> >>  1 file changed, 1 insertion(+), 2 deletions(-)
-> >>
-> >> diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-> >> index e4ea67f6..1b6f3206 100644
-> >> --- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-> >> +++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-> >> @@ -8,7 +8,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >>  DEPENDS = "u-boot-mkimage-native"
-> >>  
-> >>  SRC_URI = "git://git.ti.com/processor-firmware/ks2-boot-monitor.git;protocol=git;branch=${BRANCH}"
-> >> -SRC_URI += "file://0001-makedefs-Fix-issue-with-setting-CHECK-and-VERBOSE.patch"
-> > 
-> > Can you also remove the corresponding patch file please? ^^^
-> > 
-> 
-> Do I remove the whole files directory or just the file?
+Signed-off-by: Justin Sobota <jsobota@ti.com>
+---
+ recipes-bsp/osal/osal.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-I believe there's just a single patch there, so it doesn't matter from git 
-perspective.
+diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
+index 55a165e..fa8cde8 100644
+--- a/recipes-bsp/osal/osal.inc
++++ b/recipes-bsp/osal/osal.inc
+@@ -1,5 +1,5 @@
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=8cbd8efb1460e4f16e6b00c8a7686be4"
++LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=ae7b9f0410f26c80dcf790ef3f622fad"
+ 
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
+ OSAL_GIT_BRANCH = "master"
+ OSAL_GIT_DESTSUFFIX = "git/ti/osal"
+ 
+-# Below commit ID corresponds to "DEV.OSAL.01.00.00.05E"
+-OSAL_SRCREV = "5125c71d756530513500b463d3301d03dee04497"
++# Below commit ID corresponding to "DEV.OSAL.01.00.00.06E"
++OSAL_SRCREV = "072ab0f76fa272ace5b1756075475f848c14221a"
+ 
+ BRANCH = "${OSAL_GIT_BRANCH}"
+ SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${OSAL_SRCREV}"
+-PV = "01.00.00.05E"
++PV = "01.00.00.06E"
+ INC_PR = "r0"
+-- 
+2.7.4
 
-
-> >>  PV = "4.0+git${SRCPV}"
-> >>  
-> >> @@ -16,7 +15,7 @@ BRANCH = "master"
-> >>  
-> >>  S = "${WORKDIR}/git"
-> >>  
-> >> -SRCREV = "d7b2bbd419400228da621f445526e519b56aef93"
-> >> +SRCREV = "e1f885ab6dc544884728e333cc6e396f7eb08286"
-> >>  
-> >>  BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
-> >>  
-> >> -- 
-> >> 2.12.2
-> >>
-> 
-> 
-> -- 
-> ------------------
-> Dan Murphy
 
