@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B4DB5E00B20; Mon,  1 May 2017 14:46:19 -0700 (PDT)
+	id E951CE00B20; Mon,  1 May 2017 14:46:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,36 +14,36 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17786E00AA2
-	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 14:46:18 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8DAF1E00B27
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 14:46:21 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41Lk76s007031
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:46:07 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41LkB10007044
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:46:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493675167;
-	bh=pb6iomiPLKyK4fo1iUjeTItjN6v0viN3ywRvu8p/8zQ=;
+	s=ti-com-17Q1; t=1493675171;
+	bh=O4vj+OHSuCMLwWXIWRtplNGkTxRNqyWs3mAcmE4s6qU=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=QSVnUifzeSbRcW5JOJO0hhsOiJDICdUncvd/pOF/Gx5prNVTxbkBVVCh/5NK0TwCt
-	a4MpqPuDckh+Y7Vun4RbD3qqipsHABOHXepve3CjzGzgZ7ziBda3RxpQuoSAs8q9Gm
-	GyHOGRrZtU/qrgJzlBAxPH96RU7crnlPx+r5sFrU=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41Lk23T015725
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:46:02 -0500
+	b=EeuCfH3/VGiDij3vnRs8pXb2+ShhfSWzFhB3Ho8PNUVN4nBzEZeJia72G3nFEcLtA
+	0ZSk5NQdapB02sgEnWPTc8GyQy5goumTjkX6itQmdyYxUBg/JhrODxaebDFJhr/F9I
+	shV2JDxlBPd5BpItYDP1XIYQm7MwvZ9r7NtdKlz4=
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41Lk6xL015895
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:46:06 -0500
 Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 1 May 2017 16:46:02 -0500
+	Mon, 1 May 2017 16:46:05 -0500
 Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v41Ljxee028441;	Mon, 1 May 2017 16:46:02 -0500
+	v41Ljxeh028441;	Mon, 1 May 2017 16:46:05 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 1 May 2017 17:45:46 -0400
-Message-ID: <1493675152-31383-2-git-send-email-jsobota@ti.com>
+Date: Mon, 1 May 2017 17:45:49 -0400
+Message-ID: <1493675152-31383-5-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1493675152-31383-1-git-send-email-jsobota@ti.com>
 References: <1493675152-31383-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/8] edma3-lld: Update to version 2.12.3.27
+Subject: [PATCH 5/8] pruss-lld: Update to version 1.0.0.6A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,33 +56,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 21:46:19 -0000
+X-List-Received-Date: Mon, 01 May 2017 21:46:26 -0000
 Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-bsp/edma3-lld/edma3-lld.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/pruss-lld/pruss-lld.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 4efcefc..63f1cac 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
+index 52a92bd..8620108 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld.inc
++++ b/recipes-bsp/pruss-lld/pruss-lld.inc
+@@ -1,7 +1,7 @@
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://pruicss.h;beginline=1;endline=31;md5=315177aa03d58bcd124a6e799e2bd458"
  
--# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_02_26"
--EDMA3_LLD_SRCREV = "1c67565620f5a5305cf3293bba669c6aa1a7e40a"
-+# Below commit ID corresponds to tag "DEV_EDMA3_LLD_02_12_03_27"
-+EDMA3_LLD_SRCREV = "ed434ef4019b696b753dae0f98fe6594a7ce35a3"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g-evm"
++COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|k2g-evm"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
+ PRUSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pruss-lld.git"
+@@ -9,12 +9,12 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
+ PRUSS_LLD_GIT_BRANCH = "master"
+ PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
  
--PV = "2.12.02.26"
-+PV = "2.12.03.27"
+-# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.05A"
+-PRUSS_LLD_SRCREV = "7421ea14f163fb3c95c3645fe0add1e05da9d748"
++# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.06A"
++PRUSS_LLD_SRCREV = "b98729cc1fc26c9ac32846146892646a23c28adb"
+ 
+ BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${PRUSS_LLD_SRCREV}"
+-PV = "01.00.00.05A"
++PV = "01.00.00.06A"
  INC_PR = "r0"
 -- 
 2.7.4
