@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 405A7E00B28; Mon,  1 May 2017 11:34:25 -0700 (PDT)
+	id 071B3E00AA2; Mon,  1 May 2017 11:57:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,37 +14,38 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F548E00B23
-	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:34:17 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BDA43E00546
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:57:17 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41IY7Wi017880
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:07 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41Iv6ea020708
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:57:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493663647;
-	bh=QRnjU9utVHo94c65v9JN/DBlpNq/M22nFN1sOFp8WIU=;
-	h=From:To:CC:Subject:Date;
-	b=NAT7Hcb1+ukExterSAOqZx5NuLiuxQBDRckhgcQK4tnr0raQPcVHAJEbfY2xmx3jl
-	TCfzcgB40uzpvSpO3VXTWlEFTPo1zSKxWwfWPgg0W6+ZrOQF5Kw0SIm/M1NFiVRdnS
-	JHqkneKzitqDYg6HYv35iN8VBB/r7BbE/2CHYVX8=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41IY2pi022085
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:02 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 1 May 2017 13:34:01 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v41IY1Uu007501;	Mon, 1 May 2017 13:34:01 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.109.252])	by
-	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	v41IY1328260; Mon, 1 May 2017 13:34:01 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
+	s=ti-com-17Q1; t=1493665026;
+	bh=oEvkq2WGxau/QjyL8tgHDmEVtG40RUKIuyU2LxY4ffY=;
+	h=Subject:To:References:CC:From:Date:In-Reply-To;
+	b=kDBN+WbnPsoAiIC+pB8J3hFEsPLJv6TWdNlI6COJ701zWV7voQZPPCBPlFV11tT3u
+	lwRL1JBCPLRqdhnueBRd25+s7KIOrBd1TqcsLS9ryKjNlauU+SyZ3HbJFpXZ9fGaBz
+	V0F9YVYNKB3OulCHHjFU5RRzmxmipj16wJ0zjGAA=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41Iv1Fg016785
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:57:01 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 1 May 2017 13:57:01 -0500
+Received: from [172.22.109.252] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41Iv1as006765;
+	Mon, 1 May 2017 13:57:01 -0500
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 1 May 2017 13:33:56 -0500
-Message-ID: <20170501183359.1645-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
+References: <20170501183359.1645-1-dmurphy@ti.com>
+	<20170501183359.1645-3-dmurphy@ti.com>
+From: Dan Murphy <dmurphy@ti.com>
+Message-ID: <b447a3bd-1025-f6a5-4d2d-bfc8c06d0abc@ti.com>
+Date: Mon, 1 May 2017 13:57:00 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-Subject: [PATCH 1/4] linux-ti-staging: update to ti2017.01-rc2 tag
+In-Reply-To: <20170501183359.1645-3-dmurphy@ti.com>
+Subject: Re: [PATCH 3/4] ti-sci-fw: update to the latest 0.1.1-47 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,41 +58,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 18:34:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 May 2017 18:57:21 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+On 05/01/2017 01:33 PM, Dan Murphy wrote:
+> Signed-off-by: Dan Murphy <dmurphy@ti.com>
+> ---
+>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> index f5706a65..f04008f3 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> @@ -3,8 +3,8 @@ DESCRIPTION = "TI SCI firmware"
+>  LICENSE = "TI-TFL"
+>  LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+>  
+> -PV = "0.1.1.37"
+> -PR = "r0"
+> +PV = "0.1.1.47"
+> +PR = "r1"
+>  
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index ba5b30c4..f156ab1f 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
- 
- BRANCH = "ti-rt-linux-4.9.y"
- 
--SRCREV = "9aca48cec363e084da1a6fef6ca4e16dd6788312"
-+SRCREV = "ca8f5854f1d211373e2bd80307215b086f18cbe1"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index ab5852bc..17e5af58 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.9.y"
- 
--SRCREV = "36a655ef1ade71c52c52c2e2ba5cb6cbb2e5031a"
--PV = "4.9.24+git${SRCPV}"
-+SRCREV = "cfe6f9907fd6d84fdcc2728c8ec9c79c07127c2e"
-+PV = "4.9.25+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "c"
+I forgot to update the srcrev here so I need to send that as v2
+
+>  CLEANBROKEN = "1"
+>  
+> 
+
+
 -- 
-2.12.2
-
+------------------
+Dan Murphy
 
