@@ -1,6 +1,6 @@
-Return-Path: <jsobota@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 43F69E009CE; Fri, 28 Apr 2017 12:29:06 -0700 (PDT)
+	id 5DEE9E00AA2; Mon,  1 May 2017 11:21:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,40 +13,39 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64E18E009A5
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 12:29:03 -0700 (PDT)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 06017E00546
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:21:22 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v3SJT3fw012240
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 14:29:03 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41ILLZR025551
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:21:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493407743;
-	bh=BC4muje75YxSU9+bHKda1OWWqwFOOxeaEKkT9L/iHLc=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=bCCUyUgwn02P27domsBmdbG2LqVhR4LqPgI/GlJO5gqOxdIClAm7aX3WtrkWc7Y3q
-	F19QbnAFuKmd8iSQliYCeveA6OoPD0d+Xtwe+YGyC6r/NET3HEgFw7UgHNDiDnYGrA
-	IYD8YuL+nbLr0SI2qCWzPbbiWUWjT+xtLYzZnWKc=
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v3SJT257003657
-	for <meta-ti@yoctoproject.org>; Fri, 28 Apr 2017 14:29:03 -0500
-Received: from DFLE12.ent.ti.com ([fe80::e9a3:bf19:af96:227b]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.03.0294.000; Fri, 28 Apr 2017 14:29:02 -0500
-From: "Sobota, Justin" <jsobota@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [PATCH] edma3lld: remove outdated v1 recipe
-Thread-Index: AQHSwEy56KJCAgZKvUWlIltomzvJ6qHbKq9g
-Date: Fri, 28 Apr 2017 19:29:01 +0000
-Message-ID: <311ECDE3E284F649854AED0B108A0CE14C092D60@DFLE12.ent.ti.com>
-References: <1493403863-126827-1-git-send-email-denys@ti.com>
-In-Reply-To: <1493403863-126827-1-git-send-email-denys@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.172.224.222]
+	s=ti-com-17Q1; t=1493662881;
+	bh=2+St5tMfbkCfy9CjYxyHfCb+PAkRT+sRxMTdHcD1diU=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=M1kn35Gc9NkPVqeWpGJnweByzJoKqjVkgZnjHOR7lQOMPJIa8VQFMJGofrFIVZGxY
+	omKgcsb17hDSUAkXvowYkmxo36uMfgPl/5Z0tqN6Zy/2x8mvZwcLXRJJohXgoCtlkW
+	AxOKboLvGNJwHAxcFKNx7yfg0z8ujCDkzchlEUtU=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41ILLiE032663
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:21:21 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 1 May 2017 13:21:21 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41ILLMt025837;
+	Mon, 1 May 2017 13:21:21 -0500
+Date: Mon, 1 May 2017 14:21:20 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Justin Sobota <jsobota@ti.com>
+Message-ID: <20170501182120.GS31608@edge>
+References: <1493395920-21543-1-git-send-email-jsobota@ti.com>
+	<1493395920-21543-8-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] edma3lld: remove outdated v1 recipe
+In-Reply-To: <1493395920-21543-8-git-send-email-jsobota@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [master/morty][PATCH 8/8] Update to version 1.0.0.4B
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,86 +58,153 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 19:29:06 -0000
-Content-Language: en-US
+X-List-Received-Date: Mon, 01 May 2017 18:21:32 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-ACK
+Justin,
 
------Original Message-----
-From: Dmytriyenko, Denys=20
-Sent: Friday, April 28, 2017 2:24 PM
-To: meta-ti@yoctoproject.org
-Cc: Dmytriyenko, Denys; Nelson, Sam; Sobota, Justin
-Subject: [PATCH] edma3lld: remove outdated v1 recipe
+This now breaks HS platforms (am57xx-hs-evm and dra7xx-hs-evm), since instead 
+of do_install_append_omap-a15() you have do_install_append_am57xx-evm() and 
+do_install_append_dra7xx-evm() and that leaves HS platforms out... And the 
+only difference I see is support for TDA platforms, which we don't support in 
+meta-ti anyway.
 
-Current v2 version is in recipes-bsp
+Moreover, common-csl-ip seems to depend on this update, hence this should go 
+first.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Cc: Sam Nelson <sam.nelson@ti.com>
-Cc: Justin Sobota <jsobota@ti.com>
----
- recipes-ti/edma3lld/ti-edma3lld.inc            | 23 ----------------------=
--
- recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb | 10 ----------
- 2 files changed, 33 deletions(-)
- delete mode 100644 recipes-ti/edma3lld/ti-edma3lld.inc
- delete mode 100644 recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
+-- 
+Denys
 
-diff --git a/recipes-ti/edma3lld/ti-edma3lld.inc b/recipes-ti/edma3lld/ti-e=
-dma3lld.inc
-deleted file mode 100644
-index fb131b6..0000000
---- a/recipes-ti/edma3lld/ti-edma3lld.inc
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION =3D "TI EDMA3 Low Level Driver (LLD)"
--HOMEPAGE =3D "http://software-dl.ti.com/dsps/dsps_public_sw/${SRC_URI_edma=
-3lldsite}/edma3_lld"
--SECTION =3D "devel"
--LICENSE =3D "TI"
--LIC_FILES_CHKSUM =3D "file://packages/ti/sdo/edma3/drv/edma3_drv.h;md5=3Dc=
-1aa300aaf369a0a03e7922c1b0bbf8e"
--
--require ../includes/ti-paths.inc
--require ../includes/ti-staging.inc
--require ../includes/ti-eula-unpack.inc
--
--TI_BIN_UNPK_WDEXT=3D"/edma3_lld_${PV}"
--S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}"
--
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/${SRC_URI_edma3=
-lldsite}/edma3_lld/edma3-lld-bios5/${PV}/exports/EDMA3_LLD_setuplinux_${PV}=
-.bin;name=3Dedma3lldbin"
--
--BINFILE=3D"EDMA3_LLD_setuplinux_${PV}.bin"
--TI_BIN_UNPK_CMDS=3D"Y:workdir"
--
--do_install() {
--    install -d ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
--    cp -pPrf ${S}/* ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
--}
--
-diff --git a/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb b/recipes-ti/ed=
-ma3lld/ti-edma3lld_01.11.01.04.bb
-deleted file mode 100644
-index 549e020..0000000
---- a/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require ti-edma3lld.inc
--
--PV =3D "01_11_01_04"
--
--SRC_URI_edma3lldsite =3D "sdo_tii/psp"
--
--SRC_URI[edma3lldbin.md5sum] =3D "b3c41cb946e2e4b94348fc6bcbe30b16"
--SRC_URI[edma3lldbin.sha256sum] =3D "617db3eadff33a88e3d42818c204f379906da3=
-b312bc120092408043e7e2aaeb"
--
--INSANE_SKIP_${PN} =3D "installed-vs-shipped"
---=20
-2.7.4
 
+On Fri, Apr 28, 2017 at 12:12:00PM -0400, Justin Sobota wrote:
+> - Add dra7xx support
+> - Add pruss firmware makefiles
+> 
+> Signed-off-by: Justin Sobota <jsobota@ti.com>
+> ---
+>  recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb | 44 ++++++++++++++++++++----
+>  1 file changed, 37 insertions(+), 7 deletions(-)
+> 
+> diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+> index 73ed092..4e6ba96 100644
+> --- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+> +++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+> @@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de
+>  
+>  require recipes-ti/includes/ti-paths.inc
+>  
+> -PV = "01.00.00.03"
+> +PV = "01.00.00.04B"
+>  PR = "r0"
+>  
+>  PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
+>  PDK_BUILD_GIT_PROTOCOL = "git"
+>  PDK_BUILD_GIT_BRANCH = "master"
+>  
+> -# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.03"
+> -PDK_BUILD_SRCREV = "487845b835b54d97f2d2f47ee1d0d88784e7e9ca"
+> +# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.04B"
+> +PDK_BUILD_SRCREV = "98b62506c451304252c7cd1e6af60dd11adc588a"
+>  
+>  BRANCH = "${PDK_BUILD_GIT_BRANCH}"
+>  SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
+> @@ -36,9 +36,6 @@ do_install() {
+>      install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+>      install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+>  
+> -    sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
+> -        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
+> -    
+>      install -m 0755 makerules/build_config.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      install -m 0755 makerules/common.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      install -m 0755 makerules/component.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> @@ -48,29 +45,39 @@ do_install() {
+>  
+>  do_install_append_ti33x() {
+>      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+>  
+>      install -m 0755 makerules/rules_a8.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      install -m 0755 makerules/rules_a8_extend.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>  
+>      install -m 0755 am335x/config_am335x_a8.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
+> +    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+> +    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+>  }
+>  
+>  do_install_append_ti43x() {
+>      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+>  
+>      install -m 0755 makerules/rules_a9.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      
+>      install -m 0755 am437x/config_am437x_a9.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
+> +    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+> +    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+>  }
+>  
+> -do_install_append_omap-a15() {
+> +do_install_append_am57xx-evm() {
+>      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+>      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+>  
+>      install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      
+>      install -m 0755 am571x/config_am571x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+>      install -m 0755 am571x/config_am571x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+> @@ -80,8 +87,30 @@ do_install_append_omap-a15() {
+>      install -m 0755 am572x/config_am572x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+>      install -m 0755 am572x/config_am572x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+>      install -m 0755 am572x/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
+> +    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+> +    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+>  }
+>      
+> +do_install_append_dra7xx-evm() {
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
+> +
+> +    install -m 0755 makefile ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/
+> +
+> +    install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +    install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +    install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +    install -m 0755 makerules/rules_arp32.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +    install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> +
+> +    install -m 0755 tda2xx/config_tda2xx.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
+> +    install -m 0755 tda2xx/config_tda2xx_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
+> +    install -m 0755 tda2xx/config_tda2xx_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
+> +    install -m 0755 tda2xx/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
+> +    install -m 0755 tda3xx/config_tda3xx.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
+> +    install -m 0755 tda3xx/config_tda3xx_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
+> +}
+> +
+>  do_install_append_keystone() {
+>      install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+>      install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+> @@ -91,6 +120,7 @@ do_install_append_k2g-evm() {
+>      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
+>  
+>      install -m 0755 k2g/config_k2g_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
+> +    install -m 0755 k2g/config_k2g_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
+>  }
+>  
+>  FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
+> -- 
+> 2.7.4
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
