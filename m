@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5DEE9E00AA2; Mon,  1 May 2017 11:21:32 -0700 (PDT)
+	id 9ABB1E00ACE; Mon,  1 May 2017 11:34:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,39 +13,40 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 06017E00546
-	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:21:22 -0700 (PDT)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5AE43E00546
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:34:03 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41ILLZR025551
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:21:21 -0500
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41IY3H1018518
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493662881;
-	bh=2+St5tMfbkCfy9CjYxyHfCb+PAkRT+sRxMTdHcD1diU=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=M1kn35Gc9NkPVqeWpGJnweByzJoKqjVkgZnjHOR7lQOMPJIa8VQFMJGofrFIVZGxY
-	omKgcsb17hDSUAkXvowYkmxo36uMfgPl/5Z0tqN6Zy/2x8mvZwcLXRJJohXgoCtlkW
-	AxOKboLvGNJwHAxcFKNx7yfg0z8ujCDkzchlEUtU=
+	s=ti-com-17Q1; t=1493663643;
+	bh=pPR89Mv6FNKoH72x90ckR3VVsXy7sj0YJO2ZI/baP80=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=h9lw8EmrtDym9OAd7PnrdnU83TuY3498pluTUUNx6MOqPwuBz/LqXkf494oWJ3Q8L
+	dY5lUubFluswGa03I4z6tBxvUggJdGogKWClYL235ZJTwmUG5Jm9TxGrzsvw7UfJ38
+	v0kegDe1U20YrrEU7YXpXy8ILNZU3azwvwmN9TbU=
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41ILLiE032663
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:21:21 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41IY2Z2016164
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:03 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 1 May 2017 13:21:21 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41ILLMt025837;
-	Mon, 1 May 2017 13:21:21 -0500
-Date: Mon, 1 May 2017 14:21:20 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Justin Sobota <jsobota@ti.com>
-Message-ID: <20170501182120.GS31608@edge>
-References: <1493395920-21543-1-git-send-email-jsobota@ti.com>
-	<1493395920-21543-8-git-send-email-jsobota@ti.com>
+	Mon, 1 May 2017 13:34:02 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v41IY2m5031595;	Mon, 1 May 2017 13:34:02 -0500
+Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.109.252])	by
+	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	v41IY2328268; Mon, 1 May 2017 13:34:02 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 1 May 2017 13:33:57 -0500
+Message-ID: <20170501183359.1645-2-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
+In-Reply-To: <20170501183359.1645-1-dmurphy@ti.com>
+References: <20170501183359.1645-1-dmurphy@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1493395920-21543-8-git-send-email-jsobota@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [master/morty][PATCH 8/8] Update to version 1.0.0.4B
+Subject: [PATCH 2/4] uboot-ti-staging: update to ti2017.01-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,153 +59,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 18:21:32 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 May 2017 18:34:07 -0000
+Content-Type: text/plain
 
-Justin,
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-This now breaks HS platforms (am57xx-hs-evm and dra7xx-hs-evm), since instead 
-of do_install_append_omap-a15() you have do_install_append_am57xx-evm() and 
-do_install_append_dra7xx-evm() and that leaves HS platforms out... And the 
-only difference I see is support for TDA platforms, which we don't support in 
-meta-ti anyway.
-
-Moreover, common-csl-ip seems to depend on this update, hence this should go 
-first.
-
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
+index f7548892..257d9b59 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ BRANCH = "ti-u-boot-2017.01"
+ 
+-SRCREV = "da5f8ccd0176b613a70566456577a4cfde96d653"
++SRCREV = "afb742e245808ecd7736194db6d6fbfbddeb20d3"
 -- 
-Denys
+2.12.2
 
-
-On Fri, Apr 28, 2017 at 12:12:00PM -0400, Justin Sobota wrote:
-> - Add dra7xx support
-> - Add pruss firmware makefiles
-> 
-> Signed-off-by: Justin Sobota <jsobota@ti.com>
-> ---
->  recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb | 44 ++++++++++++++++++++----
->  1 file changed, 37 insertions(+), 7 deletions(-)
-> 
-> diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-> index 73ed092..4e6ba96 100644
-> --- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-> +++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
-> @@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://makerules/env.mk;beginline=1;endline=31;md5=10503e8de
->  
->  require recipes-ti/includes/ti-paths.inc
->  
-> -PV = "01.00.00.03"
-> +PV = "01.00.00.04B"
->  PR = "r0"
->  
->  PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
->  PDK_BUILD_GIT_PROTOCOL = "git"
->  PDK_BUILD_GIT_BRANCH = "master"
->  
-> -# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.03"
-> -PDK_BUILD_SRCREV = "487845b835b54d97f2d2f47ee1d0d88784e7e9ca"
-> +# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.04B"
-> +PDK_BUILD_SRCREV = "98b62506c451304252c7cd1e6af60dd11adc588a"
->  
->  BRANCH = "${PDK_BUILD_GIT_BRANCH}"
->  SRC_URI = "${PDK_BUILD_GIT_URI};protocol=${PDK_BUILD_GIT_PROTOCOL};branch=${BRANCH}"
-> @@ -36,9 +36,6 @@ do_install() {
->      install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
->      install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
->  
-> -    sed -i -e "s|c\:/ti/ccsv5/utils/cygwin|\$(XDC_INSTALL_PATH)/bin|g" \
-> -        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/Rules.make
-> -    
->      install -m 0755 makerules/build_config.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      install -m 0755 makerules/common.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      install -m 0755 makerules/component.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> @@ -48,29 +45,39 @@ do_install() {
->  
->  do_install_append_ti33x() {
->      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
->  
->      install -m 0755 makerules/rules_a8.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      install -m 0755 makerules/rules_a8_extend.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->  
->      install -m 0755 am335x/config_am335x_a8.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am335x
-> +    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
-> +    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
->  }
->  
->  do_install_append_ti43x() {
->      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
->  
->      install -m 0755 makerules/rules_a9.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      
->      install -m 0755 am437x/config_am437x_a9.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
-> +    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
-> +    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
->  }
->  
-> -do_install_append_omap-a15() {
-> +do_install_append_am57xx-evm() {
->      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
->      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
->  
->      install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +    install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      
->      install -m 0755 am571x/config_am571x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
->      install -m 0755 am571x/config_am571x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
-> @@ -80,8 +87,30 @@ do_install_append_omap-a15() {
->      install -m 0755 am572x/config_am572x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
->      install -m 0755 am572x/config_am572x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
->      install -m 0755 am572x/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am572x
-> +    install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
-> +    install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
->  }
->      
-> +do_install_append_dra7xx-evm() {
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
-> +
-> +    install -m 0755 makefile ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/
-> +
-> +    install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +    install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +    install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +    install -m 0755 makerules/rules_arp32.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +    install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> +
-> +    install -m 0755 tda2xx/config_tda2xx.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-> +    install -m 0755 tda2xx/config_tda2xx_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-> +    install -m 0755 tda2xx/config_tda2xx_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-> +    install -m 0755 tda2xx/mem_segment_definition_1024mb_bios.xs ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
-> +    install -m 0755 tda3xx/config_tda3xx.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
-> +    install -m 0755 tda3xx/config_tda3xx_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
-> +}
-> +
->  do_install_append_keystone() {
->      install -m 0755 makerules/rules_66.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
->      install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
-> @@ -91,6 +120,7 @@ do_install_append_k2g-evm() {
->      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
->  
->      install -m 0755 k2g/config_k2g_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
-> +    install -m 0755 k2g/config_k2g_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
->  }
->  
->  FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
-> -- 
-> 2.7.4
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
