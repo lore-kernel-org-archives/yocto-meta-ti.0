@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9ABB1E00ACE; Mon,  1 May 2017 11:34:07 -0700 (PDT)
+	id AA8D6E00ACD; Mon,  1 May 2017 11:34:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,39 +14,39 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5AE43E00546
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C65AE0083D
 	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:34:03 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41IY3H1018518
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41IY3vu018522
 	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1493663643;
-	bh=pPR89Mv6FNKoH72x90ckR3VVsXy7sj0YJO2ZI/baP80=;
+	bh=k8ioWEzELJoW93zzo+5J5ge0UDeXcCbo5VOca/fDIIw=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=h9lw8EmrtDym9OAd7PnrdnU83TuY3498pluTUUNx6MOqPwuBz/LqXkf494oWJ3Q8L
-	dY5lUubFluswGa03I4z6tBxvUggJdGogKWClYL235ZJTwmUG5Jm9TxGrzsvw7UfJ38
-	v0kegDe1U20YrrEU7YXpXy8ILNZU3azwvwmN9TbU=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41IY2Z2016164
+	b=azZRm8TMDlggy2dBynidCQMT26m0Qi13dLTSHNQMuGaUEcFTjKAwGyLJ/p9nywB45
+	UiBVJh7V7yTtm5MzRicbjZqdN0EzUAa+7cpDqtIuwIwD6DBaQm1BZFjJeieiyFhppE
+	W4R8tNgHh/uoQOZGBVw93vgCOujKkOd+8elqqwpE=
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41IY3uK022316
 	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:03 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
 	Mon, 1 May 2017 13:34:02 -0500
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
 	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v41IY2m5031595;	Mon, 1 May 2017 13:34:02 -0500
+	v41IY2dm031609;	Mon, 1 May 2017 13:34:03 -0500
 Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.109.252])	by
 	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	v41IY2328268; Mon, 1 May 2017 13:34:02 -0500 (CDT)
+	v41IY2328276; Mon, 1 May 2017 13:34:02 -0500 (CDT)
 From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 1 May 2017 13:33:57 -0500
-Message-ID: <20170501183359.1645-2-dmurphy@ti.com>
+Date: Mon, 1 May 2017 13:33:58 -0500
+Message-ID: <20170501183359.1645-3-dmurphy@ti.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170501183359.1645-1-dmurphy@ti.com>
 References: <20170501183359.1645-1-dmurphy@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/4] uboot-ti-staging: update to ti2017.01-rc2 tag
+Subject: [PATCH 3/4] ti-sci-fw: update to the latest 0.1.1-47 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,23 +64,24 @@ Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb | 4 ++--
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-index f7548892..257d9b59 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index f5706a65..f04008f3 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -3,8 +3,8 @@ DESCRIPTION = "TI SCI firmware"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
  
--PR = "r1"
-+PR = "r2"
+-PV = "0.1.1.37"
+-PR = "r0"
++PV = "0.1.1.47"
++PR = "r1"
  
- BRANCH = "ti-u-boot-2017.01"
+ CLEANBROKEN = "1"
  
--SRCREV = "da5f8ccd0176b613a70566456577a4cfde96d653"
-+SRCREV = "afb742e245808ecd7736194db6d6fbfbddeb20d3"
 -- 
 2.12.2
 
