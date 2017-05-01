@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 41644E00AF0; Mon,  1 May 2017 14:48:15 -0700 (PDT)
+	id 60468E00AF0; Mon,  1 May 2017 14:48:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,37 +13,37 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0B6CE00AE0
-	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 14:48:13 -0700 (PDT)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2B13CE00AF2
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 14:48:14 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41LmDJT017462
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41LmDc0008637
 	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:48:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1493675293;
-	bh=c7vtFEdrZxVkeonQk1s1iIYlepeCzVIoBR7ITgqzgiQ=;
+	bh=g9VZZIJOLZK8z6UCblbFKHQa2Pc5ChB/3Xyx/m1/TDc=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=C1jKT5xeO8eWF6v1Sl37Bq0ivXauLKPBi028xemT8qH1LYFsJpVI/UbvadbYBGnq5
-	6KbZ1colV844BFtEt8HESlIGNvjVJxkfmnaROH2Vux258+iXnW8hzDZkJ3AXCBqtSx
-	vMrNARtEEcyPZXyRkjgPg8XlekrC24Wx6l5+kyiI=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41LmDDO018005
+	b=AiUCJspp9c/5Ob8Cl9l60pByLyzNu/Vz728KKY67zl/KLO4YT39GWCidCUGtMsrB2
+	iUq4p/dSJUPgFZShnfjdvyJgmbhhFT8Ox0jEP9ADd3G2EjrnPvWttCHM4AKnq6o0Z9
+	O8jheQz1Lo+Ra0vMLcpR/pqmFR9IOxIX1Vb7IgA4=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41LmD9U018035
 	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:48:13 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
 	Mon, 1 May 2017 16:48:13 -0500
 Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v41LmB99030372;	Mon, 1 May 2017 16:48:12 -0500
+	v41LmB9B030372;	Mon, 1 May 2017 16:48:13 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 1 May 2017 17:48:05 -0400
-Message-ID: <1493675289-31434-4-git-send-email-jsobota@ti.com>
+Date: Mon, 1 May 2017 17:48:07 -0400
+Message-ID: <1493675289-31434-6-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1493675289-31434-1-git-send-email-jsobota@ti.com>
 References: <1493675289-31434-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [master/morty][PATCHv2 4/8] pa-lld: Update to version 3.0.2.3
+Subject: [master/morty][PATCHv2 6/8] qmss-lld: Update to version 2.1.0.15A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,31 +61,31 @@ Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-bsp/pa-lld/pa-lld.inc | 6 +++---
+ recipes-bsp/qmss-lld/qmss-lld.inc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-index 28dfb9d..671d42f 100644
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ b/recipes-bsp/pa-lld/pa-lld.inc
-@@ -9,14 +9,14 @@ PA_LLD_GIT_PROTOCOL = "git"
- PA_LLD_GIT_BRANCH = "master"
- PA_LLD_GIT_DESTSUFFIX = "git/ti/drv/pa"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index 560f114..f2ef968 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -9,14 +9,14 @@ QMSS_LLD_GIT_PROTOCOL = "git"
+ QMSS_LLD_GIT_BRANCH = "master"
+ QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
  
--# Below Commit ID corresponds to "DEV.PA_LLD.03.00.02.01"
--PA_LLD_SRCREV = "e95de49323678a55072c90fb213b94f96cf494b1"
-+# Below commit ID corresponding to "DEV.PA_LLD.03.00.02.03"
-+PA_LLD_SRCREV = "5fef109f4ce43c6bc45000f2e609321d262165b2"
+-# commit ID corresponding to "DEV.QMSS_LLD.02.01.00.14B"
+-QMSS_LLD_SRCREV = "04095405680f4ec92eeef9312ba04f7808b1c813"
++# Below commit ID corresponding to "DEV.QMSS_LLD.02.01.00.15A"
++QMSS_LLD_SRCREV = "72fe9dc35b9e128a95b4e3e4403cb197616e2e88"
  
- BRANCH = "${PA_LLD_GIT_BRANCH}"
- SRC_URI = "${PA_LLD_GIT_URI};destsuffix=${PA_LLD_GIT_DESTSUFFIX};protocol=${PA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${PA_LLD_SRCREV}"
+ BRANCH ="${QMSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${QMSS_LLD_SRCREV}"
  
--PV = "03.00.02.01"
-+PV = "03.00.02.03"
+-PV = "02.01.00.14B"
++PV = "02.01.00.15A"
  INC_PR = "r0"
  
- S = "${WORKDIR}/${PA_LLD_GIT_DESTSUFFIX}"
+ DEVICELIST = "k2h k2k k2l k2e"
 -- 
 2.7.4
 
