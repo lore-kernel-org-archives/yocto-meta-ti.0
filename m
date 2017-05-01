@@ -1,6 +1,6 @@
 Return-Path: <jsobota@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3FB99E00B87; Mon,  1 May 2017 14:48:41 -0700 (PDT)
+	id 96A61E00B87; Mon,  1 May 2017 14:48:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,34 +14,36 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39BB0E00B7A
-	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 14:48:27 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41LmHij007239
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:48:17 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01191E00B3D
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 14:48:28 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41LmIds007240
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:48:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493675297;
-	bh=XULHVheiT1ED43+9oCR+0CtOxG3mhltd5ZziNSO+Zdw=;
-	h=From:To:CC:Subject:Date;
-	b=UoatSJPTqfVEZVepDaoqe5jOKQQersX3TtCS0kS9jC9TiCx12en1VVb0/kz1YZek8
-	m4XTGDZ5HyVLrnaDadGIfXMf0ROT6mh7EhCYdrz+6mS2M9rCik5a7f2mjmXE4KhJ36
-	9z8xfwbRZ0s69UOccnYeFNI9Lw8ZJMzjq9mcikz0=
+	s=ti-com-17Q1; t=1493675298;
+	bh=O4vj+OHSuCMLwWXIWRtplNGkTxRNqyWs3mAcmE4s6qU=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=M7bci6aTVx1hYhgINW0Mx8iGEma5nrlPyAIc0PsIYshwieBbxQsN2E/wkeEm4MUzM
+	YGbVrHow0+pj9rOLb6HU85BjDURD9cf0Ot93eC+lCvJHB2eIncCNHmCI0MmlVXAJcH
+	8bRwA/bHpBQEkDHyozHybmqmVC+tsMq1JiPNLbRM=
 Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41LmCwM019607
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:48:12 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41LmD6a018026
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 16:48:13 -0500
 Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 1 May 2017 16:48:12 -0500
+	Mon, 1 May 2017 16:48:13 -0500
 Received: from a0866445-vm1.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v41LmB96030372;	Mon, 1 May 2017 16:48:12 -0500
+	v41LmB9A030372;	Mon, 1 May 2017 16:48:13 -0500
 From: Justin Sobota <jsobota@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 1 May 2017 17:48:02 -0400
-Message-ID: <1493675289-31434-1-git-send-email-jsobota@ti.com>
+Date: Mon, 1 May 2017 17:48:06 -0400
+Message-ID: <1493675289-31434-5-git-send-email-jsobota@ti.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1493675289-31434-1-git-send-email-jsobota@ti.com>
+References: <1493675289-31434-1-git-send-email-jsobota@ti.com>
 MIME-Version: 1.0
-Subject: [master/morty][PATCHv2 1/8] common-csl-ip: Update to version 3.3.0.6C
+Subject: [master/morty][PATCHv2 5/8] pruss-lld: Update to version 1.0.0.6A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,33 +61,38 @@ Content-Type: text/plain
 
 Signed-off-by: Justin Sobota <jsobota@ti.com>
 ---
- recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/pruss-lld/pruss-lld.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 166eaa4..cac0b93 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
+index 52a92bd..8620108 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld.inc
++++ b/recipes-bsp/pruss-lld/pruss-lld.inc
+@@ -1,7 +1,7 @@
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://pruicss.h;beginline=1;endline=31;md5=315177aa03d58bcd124a6e799e2bd458"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g-evm"
++COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|k2g-evm"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--PV = "03.03.00.05A"
-+PV = "03.03.00.06C"
+ PRUSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pruss-lld.git"
+@@ -9,12 +9,12 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
+ PRUSS_LLD_GIT_BRANCH = "master"
+ PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
+ 
+-# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.05A"
+-PRUSS_LLD_SRCREV = "7421ea14f163fb3c95c3645fe0add1e05da9d748"
++# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.06A"
++PRUSS_LLD_SRCREV = "b98729cc1fc26c9ac32846146892646a23c28adb"
+ 
+ BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${PRUSS_LLD_SRCREV}"
+-PV = "01.00.00.05A"
++PV = "01.00.00.06A"
  INC_PR = "r0"
- 
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
- 
--# Below commit ID corresponds to "DEV.CSL_PROCESSOR-SDK.03.03.00.05A"
--CSL_SRCREV = "811646f507d985dac04544c60c965cadf5e26a4f"
-+# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.06C"
-+CSL_SRCREV = "ce2bbf96b08fa69eda7bfc92aa7760b7ca70dddf"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
 2.7.4
 
