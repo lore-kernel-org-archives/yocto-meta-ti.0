@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B0CD5E00AF0; Mon,  1 May 2017 11:34:09 -0700 (PDT)
+	id 405A7E00B28; Mon,  1 May 2017 11:34:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,40 +13,38 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0BBDE00AA2
-	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:34:04 -0700 (PDT)
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F548E00B23
+	for <meta-ti@yoctoproject.org>; Mon,  1 May 2017 11:34:17 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41IY4tI029653
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:04 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v41IY7Wi017880
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493663644;
-	bh=HKE0+R2atiaUxmSj1HtWEWMuWgInZdfvht/GZQ0SUEs=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=tdQe9mt1449s/MdFMuBiCB+mUOR2OeLnupfrdgej50n3K1Ck3I5NwG2eG1B4YQZ3I
-	q3e26z48RkOhLzpguzgCclE5DboLYF0lVN/WhRdtaPxgPluJhd1kiTojgSJJCpn6MJ
-	puVgTsHYxrJJITya0aye9MW9pdeWkoqTxaIXx9k0=
+	s=ti-com-17Q1; t=1493663647;
+	bh=QRnjU9utVHo94c65v9JN/DBlpNq/M22nFN1sOFp8WIU=;
+	h=From:To:CC:Subject:Date;
+	b=NAT7Hcb1+ukExterSAOqZx5NuLiuxQBDRckhgcQK4tnr0raQPcVHAJEbfY2xmx3jl
+	TCfzcgB40uzpvSpO3VXTWlEFTPo1zSKxWwfWPgg0W6+ZrOQF5Kw0SIm/M1NFiVRdnS
+	JHqkneKzitqDYg6HYv35iN8VBB/r7BbE/2CHYVX8=
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41IY3Vj022388
-	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:03 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v41IY2pi022085
+	for <meta-ti@yoctoproject.org>; Mon, 1 May 2017 13:34:02 -0500
 Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 1 May 2017 13:34:03 -0500
+	Mon, 1 May 2017 13:34:01 -0500
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
 	[128.247.22.53])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v41IY3aO007659;	Mon, 1 May 2017 13:34:03 -0500
+	v41IY1Uu007501;	Mon, 1 May 2017 13:34:01 -0500
 Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.109.252])	by
 	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	v41IY3328283; Mon, 1 May 2017 13:34:03 -0500 (CDT)
+	v41IY1328260; Mon, 1 May 2017 13:34:01 -0500 (CDT)
 From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 1 May 2017 13:33:59 -0500
-Message-ID: <20170501183359.1645-4-dmurphy@ti.com>
+Date: Mon, 1 May 2017 13:33:56 -0500
+Message-ID: <20170501183359.1645-1-dmurphy@ti.com>
 X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170501183359.1645-1-dmurphy@ti.com>
-References: <20170501183359.1645-1-dmurphy@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/4] boot-monitor: update to ti2017.01-rc2 tag
+Subject: [PATCH 1/4] linux-ti-staging: update to ti2017.01-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,35 +57,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 18:34:09 -0000
+X-List-Received-Date: Mon, 01 May 2017 18:34:25 -0000
 Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/boot-monitor/boot-monitor_git.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index e4ea67f6..1b6f3206 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -8,7 +8,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- DEPENDS = "u-boot-mkimage-native"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index ba5b30c4..f156ab1f 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
- SRC_URI = "git://git.ti.com/processor-firmware/ks2-boot-monitor.git;protocol=git;branch=${BRANCH}"
--SRC_URI += "file://0001-makedefs-Fix-issue-with-setting-CHECK-and-VERBOSE.patch"
+ BRANCH = "ti-rt-linux-4.9.y"
  
- PV = "4.0+git${SRCPV}"
+-SRCREV = "9aca48cec363e084da1a6fef6ca4e16dd6788312"
++SRCREV = "ca8f5854f1d211373e2bd80307215b086f18cbe1"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index ab5852bc..17e5af58 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
  
-@@ -16,7 +15,7 @@ BRANCH = "master"
+ BRANCH = "ti-lsk-linux-4.9.y"
  
- S = "${WORKDIR}/git"
+-SRCREV = "36a655ef1ade71c52c52c2e2ba5cb6cbb2e5031a"
+-PV = "4.9.24+git${SRCPV}"
++SRCREV = "cfe6f9907fd6d84fdcc2728c8ec9c79c07127c2e"
++PV = "4.9.25+git${SRCPV}"
  
--SRCREV = "d7b2bbd419400228da621f445526e519b56aef93"
-+SRCREV = "e1f885ab6dc544884728e333cc6e396f7eb08286"
- 
- BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
- 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 -- 
 2.12.2
 
