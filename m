@@ -1,47 +1,38 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7886EE00961; Wed,  3 May 2017 09:09:58 -0700 (PDT)
+	id 1B23EE0094C; Thu,  4 May 2017 12:49:46 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD02BE00939
-	for <meta-ti@yoctoproject.org>; Wed,  3 May 2017 09:09:55 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v43G9ivR027263
-	for <meta-ti@yoctoproject.org>; Wed, 3 May 2017 11:09:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1493827784;
-	bh=tj9iYSjKC38qyvrrr2BiJG9YCjvwPjWyRWw1/jIgLfs=;
-	h=From:To:CC:Subject:Date;
-	b=kK+ErL3B+coyCClhCNVC0dOqstim7zSMHUhYveyJpq2JAmey8/WJWqAHWXqpZyCMy
-	MiKfQFHq9M/UUpIZovwbi6UIyniHGdkYu9I8U0uzvNym/ZBJc7j6hqKvmSAhdeHU8s
-	MhohjgeEYev3e7O1ube5XmKeuMxvPCeK1qB/SM7M=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v43G9dn0012734
-	for <meta-ti@yoctoproject.org>; Wed, 3 May 2017 11:09:39 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 3 May 2017 11:09:39 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v43G9dcg028375;	Wed, 3 May 2017 11:09:39 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 3 May 2017 12:09:37 -0400
-Message-ID: <1493827777-63327-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [morty/master][PATCH] ti-ipc-rtos: Add default links for rproc firmware for omapl138
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4558E007EE
+	for <meta-ti@yoctoproject.org>; Thu,  4 May 2017 12:49:41 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7C6CD20873;
+	Thu,  4 May 2017 19:49:40 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id CUVxOTrSiwLU; Thu,  4 May 2017 19:49:40 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5352A20066;
+	Thu,  4 May 2017 19:49:38 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id D0FE516249B;
+	Thu,  4 May 2017 15:49:37 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Thu,  4 May 2017 15:49:37 -0400
+Message-Id: <1493927377-140060-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] ti-pdk-build-rtos: use k2g SOC family, clean up whitespaces
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,48 +45,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 May 2017 16:09:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 May 2017 19:49:46 -0000
 
-By default rproc firmware default link is added as message_single.xe66
-for omapl138
+Use k2g SOC family to cover HS and GP devices.
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Cc: Justin Sobota <jsobota@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-rtos.inc    | 2 +-
- recipes-ti/ipc/ti-ipc-rtos_git.bb | 8 ++++++++
- 2 files changed, 9 insertions(+), 1 deletion(-)
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 5fead3f..e76c1e4 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -37,7 +37,7 @@ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- RELEASE_TYPE = "ENG"
- RELEASE_SUFFIX = "_eng"
+diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+index 6031ed1..b196ee6 100644
+--- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
++++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+@@ -32,7 +32,7 @@ do_compile() {
+ do_install() {
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    
++
+     install -m 0755 Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
+     install -m 0755 comp_top.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build
  
--PR = "${INC_PR}.r0"
-+PR = "${INC_PR}.r1"
+@@ -62,7 +62,7 @@ do_install_append_ti43x() {
  
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 018634c..112dfcc 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -87,3 +87,11 @@ pkg_postrm_${PN}-fw_omap-a15 () {
-   update-alternatives --remove dra7-ipu1-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4
-   update-alternatives --remove dra7-ipu2-fw.xem4 ipc/ti_platforms_evmDRA7XX_ipu2/test_omx_ipu2_vayu.xem4
+     install -m 0755 makerules/rules_a9.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    
++
+     install -m 0755 am437x/config_am437x_a9.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am437x
+     install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+     install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+@@ -78,7 +78,7 @@ do_install_append_am57xx-evm() {
+     install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    
++
+     install -m 0755 am571x/config_am571x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+     install -m 0755 am571x/config_am571x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+     install -m 0755 am571x/config_am571x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+@@ -101,7 +101,7 @@ do_install_append_am57xx-hs-evm() {
+     install -m 0755 makerules/rules_m4.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_ti_cgt_arm.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+     install -m 0755 makerules/rules_pru.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+-    
++
+     install -m 0755 am571x/config_am571x.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+     install -m 0755 am571x/config_am571x_c66.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+     install -m 0755 am571x/config_am571x_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/am571x
+@@ -113,7 +113,7 @@ do_install_append_am57xx-hs-evm() {
+     install -m 0755 pruss/PRU0_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
+     install -m 0755 pruss/PRU1_to_ARM.cmd ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/pruss
  }
+-    
 +
-+pkg_postinst_${PN}-fw_omapl138 () {
-+  update-alternatives --install /lib/firmware/rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674 ${ALTERNATIVE_PRIORITY}
-+}
-+
-+pkg_postrm_${PN}-fw_omapl138 () {
-+  update-alternatives --remove rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674
-+}
+ do_install_append_dra7xx() {
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda2xx
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/tda3xx
+@@ -139,7 +139,7 @@ do_install_append_keystone() {
+     install -m 0755 makerules/rules_a15.mk ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/makerules
+ }
+ 
+-do_install_append_k2g-evm() {
++do_install_append_k2g() {
+     install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
+ 
+     install -m 0755 k2g/config_k2g_a15.bld ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/build/k2g
 -- 
-1.9.1
+2.7.4
 
 
