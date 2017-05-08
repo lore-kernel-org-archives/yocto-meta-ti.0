@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F08F8E0077F; Mon,  8 May 2017 06:56:58 -0700 (PDT)
+	id 1FA32E00B01; Mon,  8 May 2017 08:28:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,35 +13,38 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1F83E0059A
-	for <meta-ti@yoctoproject.org>; Mon,  8 May 2017 06:56:47 -0700 (PDT)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A166BE0080F
+	for <meta-ti@yoctoproject.org>; Mon,  8 May 2017 08:28:38 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v48Dua9s028414
-	for <meta-ti@yoctoproject.org>; Mon, 8 May 2017 08:56:36 -0500
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v48FSc2B004872
+	for <meta-ti@yoctoproject.org>; Mon, 8 May 2017 10:28:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1494251796;
-	bh=fY5YWhFpCUKtO/s2+Y/5Oaau+tl2a2/qGIZS4Ig9kNE=;
+	s=ti-com-17Q1; t=1494257318;
+	bh=KSVei/8BjvL22QHmSL25fs7UarJYGRKyhg8fSWsXpdU=;
 	h=From:To:CC:Subject:Date;
-	b=RGXmmcXkW5Hzvq2C6fqCet5WOjtuuGrKSb1+q3T7iiPAsKZpMQpDo/XBHfbtsyZxn
-	nlan9+w3GlKquPc8RQytpv43z66S+XxOKA3aGAwe6Z8V3XvSah4gqjjtEMwDpoC4F0
-	NsGdNVthccB5esfGSvdA3wRhY0uPHXyO4gmVQOVw=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v48DuUIv015301
-	for <meta-ti@yoctoproject.org>; Mon, 8 May 2017 08:56:30 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 8 May 2017 08:56:30 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v48DuUr9027485;	Mon, 8 May 2017 08:56:30 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
+	b=aDnNybMZgtegvedSWPm7mfgeecQlsZLO65ESOlRrMrg3cJlTPIOGTn4qwPf9JGdgY
+	XSe+o7PwldXkGLRnZW4bahLT2tVhzrLOGP1qEkwjX6Zkzm7NlJk/4aF5qklFBzKct2
+	jwchuYe1ej7LYCE5t+0TTjzx1TedSXXEPSgzNYVM=
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v48FScne003118
+	for <meta-ti@yoctoproject.org>; Mon, 8 May 2017 10:28:38 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 8 May 2017 10:28:37 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v48FSbdh031421;	Mon, 8 May 2017 10:28:37 -0500
+Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.67.170])	by
+	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	v48FSb318966; Mon, 8 May 2017 10:28:37 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 8 May 2017 09:54:22 -0400
-Message-ID: <1494251662-13946-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
+Date: Mon, 8 May 2017 10:28:28 -0500
+Message-ID: <20170508152829.32697-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
 MIME-Version: 1.0
-Subject: [PATCH] osal: utilize oe_runmake
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2017.01-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,79 +57,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 May 2017 13:56:59 -0000
+X-List-Received-Date: Mon, 08 May 2017 15:28:42 -0000
 Content-Type: text/plain
 
-* Use the oe_runmake wrapper to invoke make
-* Supply common make arguments to EXTRA_OEMAKE such as which makefile
-  to invoke.
-* This resolves build issues when osal needs to be reconfigured
-  as do_configure would make the clean target of the incorrect
-  makefile.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/osal/osal-test_git.bb | 10 ++++++----
- recipes-bsp/osal/osal_git.bb      | 10 ++++++----
- 2 files changed, 12 insertions(+), 8 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/osal/osal-test_git.bb b/recipes-bsp/osal/osal-test_git.bb
-index 9d4fa6d..58156e3 100644
---- a/recipes-bsp/osal/osal-test_git.bb
-+++ b/recipes-bsp/osal/osal-test_git.bb
-@@ -4,17 +4,19 @@ DEPENDS="common-csl-ip osal"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index f156ab1f..3e939bba 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
- include osal.inc
+ BRANCH = "ti-rt-linux-4.9.y"
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
+-SRCREV = "ca8f5854f1d211373e2bd80307215b086f18cbe1"
++SRCREV = "cfd875c8651b46642c2e9c113dae8665dd7b33c7"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 17e5af58..a1dd1ad0 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
  
- S = "${WORKDIR}/${OSAL_GIT_DESTSUFFIX}"
+ BRANCH = "ti-lsk-linux-4.9.y"
  
-+EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} OSAL_SRC_DIR=${S}"
-+
- do_compile () {
- #   Build the tests
--    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
--    make -f makefile_armv7 tests PDK_INSTALL_PATH=${STAGING_INCDIR} OSAL_SRC_DIR=${S}
-+    oe_runmake clean
-+    oe_runmake tests
- }
+-SRCREV = "cfe6f9907fd6d84fdcc2728c8ec9c79c07127c2e"
+-PV = "4.9.25+git${SRCPV}"
++SRCREV = "7828fafc7c16505ace03d23f088ddabda2f68b50"
++PV = "4.9.27+git${SRCPV}"
  
- do_install () {
- #   Install the binary
--    make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_BIN_BASE_DIR=${D}${bindir} OSAL_SRC_DIR=${S}
-+    oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}${bindir}
- }
-diff --git a/recipes-bsp/osal/osal_git.bb b/recipes-bsp/osal/osal_git.bb
-index ecb46b2..bb30ab5 100644
---- a/recipes-bsp/osal/osal_git.bb
-+++ b/recipes-bsp/osal/osal_git.bb
-@@ -4,17 +4,19 @@ DEPENDS="common-csl-ip"
- 
- include osal.inc
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- S = "${WORKDIR}/${OSAL_GIT_DESTSUFFIX}"
- 
-+EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
-+
- do_compile () {
- #   Build the lib
--    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
--    make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}
-+    oe_runmake clean
-+    oe_runmake lib
- }
- 
- do_install () {
- #   Install the lib
--    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-+    oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
- }
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 -- 
-2.7.4
+2.12.2
 
 
