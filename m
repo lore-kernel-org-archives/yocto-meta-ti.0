@@ -1,52 +1,38 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2C6E5E00B02; Mon,  8 May 2017 08:28:42 -0700 (PDT)
+	id D1EC9E00B03; Mon,  8 May 2017 17:27:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0A240E00AF4
-	for <meta-ti@yoctoproject.org>; Mon,  8 May 2017 08:28:39 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v48FScuK006720
-	for <meta-ti@yoctoproject.org>; Mon, 8 May 2017 10:28:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1494257318;
-	bh=gx7wZkZtyETCqLY29ipspQQ6IA55tXVU2Z5czU04eHI=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=Zll1vpNPwhnXspQHWW1+cZiV3K+r+OtH2NqypUKwMoIm6/051a44t60vN4lgLDHmI
-	y8kV1ysjhXnAtveWAixTR+rdD8NVsEMTofCiFhTCeEd63uAsgXECpQ83oLXSiDEzvU
-	SrMabXebJ8BeK45e10W2W9jKTKe8kqMl3xJ0cdco=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v48FScF8009836
-	for <meta-ti@yoctoproject.org>; Mon, 8 May 2017 10:28:38 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 8 May 2017 10:28:37 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v48FScht023245;	Mon, 8 May 2017 10:28:38 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.67.170])	by
-	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	v48FSb318970; Mon, 8 May 2017 10:28:37 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 8 May 2017 10:28:29 -0500
-Message-ID: <20170508152829.32697-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170508152829.32697-1-dmurphy@ti.com>
-References: <20170508152829.32697-1-dmurphy@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] uboot-ti-staging: update to ti2017.01-rc3 tag
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4FC02E00B01
+	for <meta-ti@yoctoproject.org>; Mon,  8 May 2017 17:27:30 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 1958420BAF;
+	Tue,  9 May 2017 00:27:30 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id yTbT6_HMqC3V; Tue,  9 May 2017 00:27:30 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ED78F200BB;
+	Tue,  9 May 2017 00:27:28 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 762B01624B1;
+	Mon,  8 May 2017 20:27:28 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Mon,  8 May 2017 20:27:27 -0400
+Message-Id: <1494289648-104082-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] ti-ipc-rtos: fix omapl138 update-alternatives missing parameter
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,29 +45,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 May 2017 15:28:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 May 2017 00:27:32 -0000
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-index 257d9b59..ca48426c 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 112dfcc..01ef7a0 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -89,7 +89,7 @@ pkg_postrm_${PN}-fw_omap-a15 () {
+ }
  
--PR = "r2"
-+PR = "r3"
+ pkg_postinst_${PN}-fw_omapl138 () {
+-  update-alternatives --install /lib/firmware/rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674 ${ALTERNATIVE_PRIORITY}
++  update-alternatives --install /lib/firmware/rproc-dsp-fw rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674 ${ALTERNATIVE_PRIORITY}
+ }
  
- BRANCH = "ti-u-boot-2017.01"
- 
--SRCREV = "afb742e245808ecd7736194db6d6fbfbddeb20d3"
-+SRCREV = "5875b5f5072adb4d2320cbe7aed787c00a3f1b7f"
+ pkg_postrm_${PN}-fw_omapl138 () {
 -- 
-2.12.2
+2.7.4
 
 
