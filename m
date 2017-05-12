@@ -1,54 +1,51 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D14F0E00B7A; Fri, 12 May 2017 05:03:41 -0700 (PDT)
+	id 0D50EE00852; Fri, 12 May 2017 09:35:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.16 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A266E00961
-	for <meta-ti@yoctoproject.org>; Fri, 12 May 2017 05:03:38 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v4CC3RlH021715
-	for <meta-ti@yoctoproject.org>; Fri, 12 May 2017 07:03:27 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1514E00812
+	for <meta-ti@yoctoproject.org>; Fri, 12 May 2017 09:35:46 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v4CGZZRW024278
+	for <meta-ti@yoctoproject.org>; Fri, 12 May 2017 11:35:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1494590607;
-	bh=EgsGj6IZEdsSdGz2+d2rdIjI0eS7NQKHrQhH40mbNi0=;
+	s=ti-com-17Q1; t=1494606935;
+	bh=UgIxHMSDkYR/qL2P6ki4OMmB9xfztDz8nmFABURjg6c=;
 	h=From:To:CC:Subject:Date;
-	b=g6CXuvj/y9yD8U1/NHUhoNLFPIcKaPuPD5hF7UAtHlEjNWgEBLTIcNwzbfqe34tlb
-	UfL4jeTa9Pe2XjeHgbBqd9HqQh6m7koxF+d8AxFnPc8UKby2KAKNnjzdDJS9wRJ2ul
-	CsomPZorLSGiAhgQ+D31EMJ8hyiMKdgM8GHBLAvg=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v4CC3MmE002166
-	for <meta-ti@yoctoproject.org>; Fri, 12 May 2017 07:03:22 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 12 May 2017 07:03:22 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v4CC3M3B019394;	Fri, 12 May 2017 07:03:22 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.166.45])	by
-	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	v4CC3L302367; Fri, 12 May 2017 07:03:22 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
+	b=J27WkpOBHS0I/PEI0VonGRaI6fi+ilL+OpUYFNKzwEZL6Qc+9KFVTWlMMGYFEwQvK
+	CSrpEPBDi0+2WCuXiDxB4/jByU1FG0m3SOHJ+5imBBP3ZUQG8MrB3woo1poBa9gIpT
+	ZoAcuFmGMpxX3ZE3Lw5hEoecSzva6HBoqMwMvsF8=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v4CGZUC6012572
+	for <meta-ti@yoctoproject.org>; Fri, 12 May 2017 11:35:30 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 12 May 2017 11:35:29 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v4CGZUeR002030;	Fri, 12 May 2017 11:35:30 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 12 May 2017 07:03:09 -0500
-Message-ID: <20170512120310.17511-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
+Date: Fri, 12 May 2017 12:35:28 -0400
+Message-ID: <1494606928-37931-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] ti-sci-fw: update to the latest 0.1.1-50 version
+Subject: [morty/master][PATCH] ti-ipc: Update to GA version 3.46.00.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,39 +58,69 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 May 2017 12:03:41 -0000
+X-List-Received-Date: Fri, 12 May 2017 16:35:50 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+docs: Release notes updated
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index bbfbd49a..83d01885 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -3,8 +3,8 @@ DESCRIPTION = "TI SCI firmware"
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
- 
--PV = "0.1.1.47"
--PR = "r1"
-+PV = "0.1.1.50"
-+PR = "r2"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,7 +12,7 @@ COMPATIBLE_MACHINE = "k2g"
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-common.inc |  2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc   | 10 +++++-----
+ recipes-ti/ipc/ti-ipc.inc        |  2 +-
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 988e712..be526e9 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,5 +1,5 @@
+ PV = "3.46.00.02"
+-INC_PR = "r0"
++INC_PR = "r1"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--SRCREV = "31c67d39e313d1bd08f82213d50f32fbb64f73fd"
-+SRCREV = "ab507546f0f3f217f4c782a20845856e14b38224"
- BRANCH ?= "ti-linux-firmware-4.1.y"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index e76c1e4..67ffa2e 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -28,16 +28,16 @@ name=${TI_IPC_METADATA_NAME}"
+ # Corresponds to tag: 3.45.00.00
+ SRCREV_ipc-examples = "3a8ee1841ec36117a9bcd3d45bb2781bbd53ecf8"
  
- SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+-# Corresponds to tag: 3.46.00.02_eng
+-SRCREV_ipc-metadata = "ec51206ff37707ca0c5eb1e13f24fff722f96d7d"
++# Corresponds to tag: 3.46.00.02
++SRCREV_ipc-metadata = "6addc32842c1433504cee2fb930af521798d3a1b"
+ 
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ 
+-RELEASE_TYPE = "ENG"
+-RELEASE_SUFFIX = "_eng"
++RELEASE_TYPE = "GA"
++RELEASE_SUFFIX = ""
+ 
+-PR = "${INC_PR}.r1"
++PR = "${INC_PR}.r2"
+ 
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 28af130..09d7cc2 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,7 +8,7 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.46"
+ 
+-#Corresponds to 3.46.00.02_eng
++#Corresponds to 3.46.00.02
+ TI_IPC_SRCREV = "997ef62671476be051cd4f9f94907e61573dffae"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
 -- 
-2.12.2
+1.9.1
 
 
