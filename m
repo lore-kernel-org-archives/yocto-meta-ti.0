@@ -1,51 +1,54 @@
-Return-Path: <i-pang@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 820BEE00B47; Wed, 31 May 2017 09:41:50 -0700 (PDT)
+	id 885A9E00B47; Wed, 31 May 2017 09:49:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.77 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 442F4E00992
-	for <meta-ti@yoctoproject.org>; Wed, 31 May 2017 09:41:40 -0700 (PDT)
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B8DFCE00992
+	for <meta-ti@yoctoproject.org>; Wed, 31 May 2017 09:49:07 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v4VGfTbQ003955
-	for <meta-ti@yoctoproject.org>; Wed, 31 May 2017 11:41:29 -0500
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v4VGn6wn030639
+	for <meta-ti@yoctoproject.org>; Wed, 31 May 2017 11:49:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1496248889;
-	bh=ivu5dvX5ehZ6DWc5TS65XotD3WQEtHGCVkczjQ99l04=;
-	h=From:To:CC:Subject:Date;
-	b=asuLOLwxyORpzrgivZFsTnt9ksNO3x/LdAV3RMK0tmmZgxpOosKCiT/lOzeF/jmNY
-	+Gt7/pkOB1Twu3LMVJXFIx5zTARj5K4OfksQJMWQd9HLCarNQrZZoLyTKWDo/SWJEP
-	sQado1DbRu2SwjnzmWdzXj1KYVQGmKgckJpy8fGs=
+	s=ti-com-17Q1; t=1496249346;
+	bh=r8w29VdTtA1Wl08wKueh7W7FKxqG4XMWLgYbdWEjDNQ=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=Rbi2xM0tKSTLfKKRAdP+1B7SZrE7MMN0jxGCsCeocUSZbZ3rbUb/jtsh5os3s+4J0
+	FtYaBGsYGPG4lah/41gT2Zx0uB/qu4ZoCMWpSXMjbPQyvSTtEGPaXXwf29BEqCU74a
+	8LcIt5r82QVbllhRIZUN8WxQmC1LzuuRJFZYBmUk=
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v4VGfOKn023527
-	for <meta-ti@yoctoproject.org>; Wed, 31 May 2017 11:41:24 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v4VGn625001424
+	for <meta-ti@yoctoproject.org>; Wed, 31 May 2017 11:49:06 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 31 May 2017 11:41:24 -0500
-Received: from uda0868762.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v4VGfOhv010302;	Wed, 31 May 2017 11:41:24 -0500
-From: Ivan Pang <i-pang@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 31 May 2017 11:41:05 -0500
-Message-ID: <1496248865-13909-1-git-send-email-i-pang@ti.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 31 May 2017 11:49:06 -0500
+Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v4VGn6NO027700;
+	Wed, 31 May 2017 11:49:06 -0500
+To: Ivan Pang <i-pang@ti.com>, <meta-ti@yoctoproject.org>
+References: <1496248865-13909-1-git-send-email-i-pang@ti.com>
+From: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <d448e54f-e861-929c-648f-204b31f8b96f@ti.com>
+Date: Wed, 31 May 2017 12:49:06 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
 MIME-Version: 1.0
-Subject: [PATCH] starterware-rtos: added recipe for RTOS starterware
+In-Reply-To: <1496248865-13909-1-git-send-email-i-pang@ti.com>
+Subject: Re: [PATCH] starterware-rtos: added recipe for RTOS starterware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,68 +61,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 May 2017 16:41:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 May 2017 16:49:08 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Ivan Pang <i-pang@ti.com>
----
- recipes-bsp/starterware/starterware-rtos_git.bb | 46 +++++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
- create mode 100644 recipes-bsp/starterware/starterware-rtos_git.bb
 
-diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
-new file mode 100644
-index 0000000..f831fb8
---- /dev/null
-+++ b/recipes-bsp/starterware/starterware-rtos_git.bb
-@@ -0,0 +1,46 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://Makefile;beginline=1;endline=35;md5=286cbb5dce3e348294b6b025cff969b3"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x"
-+DEPENDS = "gcc-arm-none-eabi-native"
-+
-+require recipes-ti/includes/ti-paths-append.inc
-+require recipes-ti/includes/ti-staging.inc
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+STARTERWARE_GIT_URI = "git://git.ti.com/keystone-rtos/starterware.git"
-+STARTERWARE_GIT_PROTOCOL = "git"
-+STARTERWARE_GIT_BRANCH = "master"
-+
-+# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.02A"
-+STARTERWARE_SRCREV = "d648ffc46a3508802ec5d4f70f3d0e8f970ce1fa"
-+
-+BRANCH = "${STARTERWARE_GIT_BRANCH}"
-+SRC_URI = "${STARTERWARE_GIT_URI};protocol=${STARTERWARE_GIT_PROTOCOL};branch=${BRANCH}"
-+
-+SRCREV = "${STARTERWARE_SRCREV}"
-+PV = "02.01.01.02A"
-+PR = "r0"
-+
-+S = "${WORKDIR}/git"
-+
-+PARTNO_ti33x = "am335x"
-+PARTNO_ti43x = "am437x"
-+
-+export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
-+export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
-+
-+do_compile() {
-+    cd build
-+    ./release_${PARTNO}.sh
-+}
-+
-+do_install() {
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware
-+    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware \;
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+
-+INSANE_SKIP_${PN} = "arch staticdev"
--- 
-1.9.1
+
+On 5/31/2017 12:41 PM, Ivan Pang wrote:
+> Signed-off-by: Ivan Pang <i-pang@ti.com>
+> ---
+>   recipes-bsp/starterware/starterware-rtos_git.bb | 46 +++++++++++++++++++++++++
+>   1 file changed, 46 insertions(+)
+>   create mode 100644 recipes-bsp/starterware/starterware-rtos_git.bb
+>
+> diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
+> new file mode 100644
+> index 0000000..f831fb8
+> --- /dev/null
+> +++ b/recipes-bsp/starterware/starterware-rtos_git.bb
+> @@ -0,0 +1,46 @@
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://Makefile;beginline=1;endline=35;md5=286cbb5dce3e348294b6b025cff969b3"
+> +
+> +COMPATIBLE_MACHINE = "ti33x|ti43x"
+> +DEPENDS = "gcc-arm-none-eabi-native"
+> +
+> +require recipes-ti/includes/ti-paths-append.inc
+       ^^^ This is not available in the meta-ti layer.
+> +require recipes-ti/includes/ti-staging.inc
+> +
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +STARTERWARE_GIT_URI = "git://git.ti.com/keystone-rtos/starterware.git"
+> +STARTERWARE_GIT_PROTOCOL = "git"
+> +STARTERWARE_GIT_BRANCH = "master"
+> +
+> +# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.02A"
+> +STARTERWARE_SRCREV = "d648ffc46a3508802ec5d4f70f3d0e8f970ce1fa"
+> +
+> +BRANCH = "${STARTERWARE_GIT_BRANCH}"
+> +SRC_URI = "${STARTERWARE_GIT_URI};protocol=${STARTERWARE_GIT_PROTOCOL};branch=${BRANCH}"
+> +
+> +SRCREV = "${STARTERWARE_SRCREV}"
+> +PV = "02.01.01.02A"
+> +PR = "r0"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +PARTNO_ti33x = "am335x"
+> +PARTNO_ti43x = "am437x"
+> +
+> +export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
+> +export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
+> +
+> +do_compile() {
+> +    cd build
+> +    ./release_${PARTNO}.sh
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware
+> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware \;
+> +}
+> +
+> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+> +
+> +INSANE_SKIP_${PN} = "arch staticdev"
 
 
