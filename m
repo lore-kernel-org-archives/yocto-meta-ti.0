@@ -1,18 +1,14 @@
-Return-Path: <paul.marc.liu@gmail.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DF2ACE00B5C; Thu,  1 Jun 2017 11:49:27 -0700 (PDT)
+	id 65666E009A0; Sat,  3 Jun 2017 04:54:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
-	RCVD_IN_DNSWL_NONE, 
-	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (paul.marc.liu[at]gmail.com)
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
@@ -20,45 +16,36 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
 	no *      trust
-	*      [209.85.220.169 listed in list.dnswl.org]
-	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [209.85.220.169 listed in dnsbl.sorbs.net]
-Received: from mail-qk0-f169.google.com (mail-qk0-f169.google.com
-	[209.85.220.169])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45D4CE00BAF
-	for <meta-ti@yoctoproject.org>; Thu,  1 Jun 2017 11:49:22 -0700 (PDT)
-Received: by mail-qk0-f169.google.com with SMTP id 19so43816739qke.2
-	for <meta-ti@yoctoproject.org>; Thu, 01 Jun 2017 11:49:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=PNiGDWpvdHtC1E1w9RvmpJwr6oD1DcNb4TnE9kA/DJA=;
-	b=dX5LObEEZZur0P2dK4QvBkM0t4mEX4LXiOSpJz9RmQRp+PR/yjTSaIGH7pOLQl4Cz9
-	BGAp8n9lc8XAR1iFiYPQ86vWJs0uHs4nOeZmZ0x6gBFREn+SFMYLQmLaXih9RBg57HLz
-	L4MxYE48qu5lfSwkPVEUkJoYJEqxm2UOI3ERdqtS038xwMbNNbstr4n+DGQrzd6WaIRw
-	SdAJMJfiVZ8ixz8Hg+fPYhyBZGBqn50VtE0gSTW9ll42kQIfbp2Hdgi5ZV5LEp4xLNvz
-	qDJSc9biZF3pkLvZX90cCWhAWgqlv+F2oWhk6SWtQahbq5OZZyPwNfFoG2SSD9tR+o/v
-	KQTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=PNiGDWpvdHtC1E1w9RvmpJwr6oD1DcNb4TnE9kA/DJA=;
-	b=ckENqpHYuRcb6rySO43fWXqxXg2ekLlFa4AIWJbuJC0kYbNqAadgU8Z6NHd9kW7q0p
-	Fpi6ZEBdSaA1fCRuR1trYjsqf4RiNaxlpGHn5vFpdS6Cgea9raIomZ7PUqdkEJsIxWyR
-	sIjW27iu7/bieiwTgE3DRZ4tA/Vm9SuviF3vSbrPK097zAKziJ/wsLQDD6llCqOGWe51
-	CTorsIPOglIMr2LVygxAPVw62P3uGxSOUzIjU1gXaB9rpeaGRikyFC2oroeLLkCuDNot
-	+6sP6MGIcvLcwYyIdXiRnCn/rteQ5pQJqBVr1DjbhSrQ6M743DmV3HD42zTdURvpDFX6
-	CfoA==
-X-Gm-Message-State: AKS2vOzN42qM5cX9yBrUbd6icbnuun5eqb8v8HWPVUZBUvpxB2VNwrR0
-	sgNFLfBn5AeFUwoJQwxrQl4lU3+845Q2cmc=
-X-Received: by 10.55.18.14 with SMTP id c14mr3823067qkh.138.1496342962080;
-	Thu, 01 Jun 2017 11:49:22 -0700 (PDT)
+	*      [198.47.19.16 listed in list.dnswl.org]
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DB9AE0082A
+	for <meta-ti@yoctoproject.org>; Sat,  3 Jun 2017 04:54:39 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v53BsSZ1002097
+	for <meta-ti@yoctoproject.org>; Sat, 3 Jun 2017 06:54:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1496490868;
+	bh=sVNfli2IfHyzIo1thpYHbDesNg7kHaea6BERYKUC/uc=;
+	h=From:To:CC:Subject:Date;
+	b=FSVhe4cyjANBlXXhqmEEB1BVcgYnP89qCIJD5SOI0fvrJzunsU5xasBfquT2ZecOm
+	CQIG9rPz1i8kub8vep9APgHh4vJwFwE+8jkl2ULtXv2Wu0YxZ+rIsoKaMcQWzeH7eA
+	vnMQ1lT1QY2POQB5PdqAMOYUYd4AEsj3jwoOg0ac=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v53BsNIN019849
+	for <meta-ti@yoctoproject.org>; Sat, 3 Jun 2017 06:54:23 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Sat, 3 Jun 2017 06:54:23 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v53BsNwx017701;	Sat, 3 Jun 2017 06:54:23 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Sat, 3 Jun 2017 07:54:19 -0400
+Message-ID: <1496490859-1172-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.55.214.18 with HTTP; Thu, 1 Jun 2017 11:49:21 -0700 (PDT)
-From: Paul Marc Liu <paul.marc.liu@gmail.com>
-Date: Thu, 1 Jun 2017 11:49:21 -0700
-Message-ID: <CAC_8XzCiyAFTzZbOzA2MBPLZH7af+pcqisqeZkEHeTRBOUwCOA@mail.gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: Beaglebone Black capemgr support on pyro
+Subject: [morty/master][PATCH] ti-ipc: Update to new version 3.46.01.03
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,45 +58,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 18:49:27 -0000
-Content-Type: multipart/alternative; boundary="001a11471190b791db0550ea7ebc"
+X-List-Received-Date: Sat, 03 Jun 2017 11:54:43 -0000
+Content-Type: text/plain
 
---001a11471190b791db0550ea7ebc
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-common.inc | 4 ++--
+ recipes-ti/ipc/ti-ipc-rtos.inc   | 8 ++++----
+ recipes-ti/ipc/ti-ipc.inc        | 4 ++--
+ 3 files changed, 8 insertions(+), 8 deletions(-)
 
-I am currently attempting to add beaglebone capemgr support to yocto pyro.
-The last mention of this effort that I was able to find in the yocto
-project was:
-
-https://lists.yoctoproject.org/pipermail/yocto/2014-October/021821.html
-
-I don't see meta-ti in the yocto pyro branch.  I would appreciate any
-direction on how to enable capemgr.
-
-Thank you.
-
-Paul Liu
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index be526e9..f5d8502 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,5 +1,5 @@
+-PV = "3.46.00.02"
+-INC_PR = "r1"
++PV = "3.46.01.03"
++INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 67ffa2e..a266ec3 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -25,11 +25,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
+ 
+-# Corresponds to tag: 3.45.00.00
++# Corresponds to tag: 3.46.01.03
+ SRCREV_ipc-examples = "3a8ee1841ec36117a9bcd3d45bb2781bbd53ecf8"
+ 
+-# Corresponds to tag: 3.46.00.02
+-SRCREV_ipc-metadata = "6addc32842c1433504cee2fb930af521798d3a1b"
++# Corresponds to tag: 3.46.01.03
++SRCREV_ipc-metadata = "0d80fea7f79fb40109879d061b849b68bbab1124"
+ 
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+@@ -37,7 +37,7 @@ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ RELEASE_TYPE = "GA"
+ RELEASE_SUFFIX = ""
+ 
+-PR = "${INC_PR}.r2"
++PR = "${INC_PR}.r0"
+ 
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 09d7cc2..39e57a9 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.46"
+ 
+-#Corresponds to 3.46.00.02
+-TI_IPC_SRCREV = "997ef62671476be051cd4f9f94907e61573dffae"
++#Corresponds to 3.46.01.03
++TI_IPC_SRCREV = "7b3a739876e46d3194861a2d93077ff95954affb"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 -- 
+1.9.1
 
-- Message content Private and Confidential -
-- If message was forwarded by mistake, please destroy
-message and attachments immediately. -
 
---001a11471190b791db0550ea7ebc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I am currently attempting to add beaglebone capemgr suppor=
-t to yocto pyro.=C2=A0 The last mention of this effort that I was able to f=
-ind in the yocto project was:<div><br></div><div><div><a href=3D"https://li=
-sts.yoctoproject.org/pipermail/yocto/2014-October/021821.html">https://list=
-s.yoctoproject.org/pipermail/yocto/2014-October/021821.html</a><br></div><d=
-iv><br></div><div>I don&#39;t see meta-ti in the yocto pyro branch.=C2=A0 I=
- would appreciate any direction on how to enable capemgr.</div><div><br></d=
-iv><div>Thank you.</div><div><br></div><div>Paul Liu</div>-- <br><div class=
-=3D"gmail_signature">=C2=A0<br>- Message content Private and Confidential -=
-<br>- If message was forwarded by mistake, please destroy<br>message and at=
-tachments immediately. - </div>
-</div></div>
-
---001a11471190b791db0550ea7ebc--
