@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5FE68E00BAA; Mon,  5 Jun 2017 07:47:34 -0700 (PDT)
+	id 6EAD9E00BA3; Mon,  5 Jun 2017 07:47:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,39 +18,37 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5778DE00B21
-	for <meta-ti@yoctoproject.org>; Mon,  5 Jun 2017 07:47:31 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v55ElKRj018924
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 013F6E00B1B
+	for <meta-ti@yoctoproject.org>; Mon,  5 Jun 2017 07:47:30 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v55ElKMu018923
 	for <meta-ti@yoctoproject.org>; Mon, 5 Jun 2017 09:47:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1496674040;
-	bh=kA+VIbP+N2IZRt3mNzm+BtbvKnf10p9pWPxnuDaZ+CE=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=gnz4Pq8p2YZABfq17reFNpoXR0apxo1Jq7ugKJom9xCVzG6KhPA1v2pbn1K0H+W3p
-	edSL1q7gm56fLFWQKSmR8Tfekj5vbGXW2qVVdtTGx4Cug17foDLZCyE2kgJfXEMhiE
-	YSYSQPYaOsyRo4Dvurd1FMT95aJVdx4r2RvsJa2M=
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v55ElFh2005846
+	bh=05+YwEhpn+qWaFK9GFGp2Z4Rri2s9AHfvEncvZ9Az1k=;
+	h=From:To:CC:Subject:Date;
+	b=SyNVNTIjoUXPhycdrUTIXd4aanafA9gLWkQGC2YG6EQtlyYanqaWxrI5TpRx2cMM4
+	6hH9x+rAKS3Y2AV9d45R7OIJMGLuRv875+Ae5biBH0qfhV/RFz4kI4GBqIvE6gLtG/
+	6XU1inV97jkovAW7vudU8/C8oR2J7NZAF4VXkFHg=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v55ElFo9016251
 	for <meta-ti@yoctoproject.org>; Mon, 5 Jun 2017 09:47:15 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 5 Jun 2017 09:47:15 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 5 Jun 2017 09:47:14 -0500
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v55ElFfa011575;	Mon, 5 Jun 2017 09:47:15 -0500
+	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v55ElEfn002408;	Mon, 5 Jun 2017 09:47:14 -0500
 Received: from localhost ([172.22.137.163])	by legion.dal.design.ti.com
-	(8.11.7p1+Sun/8.11.7) with ESMTP id v55ElE310613;
-	Mon, 5 Jun 2017 09:47:15 -0500 (CDT)
+	(8.11.7p1+Sun/8.11.7) with ESMTP id v55ElE310609;
+	Mon, 5 Jun 2017 09:47:14 -0500 (CDT)
 From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 5 Jun 2017 09:47:08 -0500
-Message-ID: <20170605144709.3342-2-dmurphy@ti.com>
+Date: Mon, 5 Jun 2017 09:47:07 -0500
+Message-ID: <20170605144709.3342-1-dmurphy@ti.com>
 X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170605144709.3342-1-dmurphy@ti.com>
-References: <20170605144709.3342-1-dmurphy@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/3] uboot-ti-staging: update to ti2017.02-rc1 tag
+Subject: [PATCH 1/3] linux-ti-staging: update to ti2017.02-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,23 +66,35 @@ Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-index c0d81b7d..5114fe31 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index f5cc6a31..cefcb5e4 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
--PR = "r4"
-+PR = "r5"
+ BRANCH = "ti-rt-linux-4.9.y"
  
- BRANCH = "ti-u-boot-2017.01"
+-SRCREV = "1d0018dd46277e57f69282f09da8065ea7cf9d3e"
++SRCREV = "2f909d1ae00e039828baadcd618689350c12623b"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 6f6baae6..97a97ef1 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
  
--SRCREV = "9fd60700db4562ffac00317a9a44761b8c3255f1"
-+SRCREV = "5147c6edfb017e6cd337c5c13a5b5af2bc2c2654"
+ BRANCH = "ti-lsk-linux-4.9.y"
+ 
+-SRCREV = "fd352255bbd9df6e31fc4d41e236a9e6a8f5423b"
+-PV = "4.9.28+git${SRCPV}"
++SRCREV = "ec91cfc2e29cc3ea11ba615fb1b2ccdf59b79001"
++PV = "4.9.30+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 -- 
 2.12.2
 
