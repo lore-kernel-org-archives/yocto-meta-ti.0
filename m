@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <i-pang@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6EAD9E00BA3; Mon,  5 Jun 2017 07:47:34 -0700 (PDT)
+	id 061C6E00BA2; Mon,  5 Jun 2017 11:09:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,37 +18,35 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 013F6E00B1B
-	for <meta-ti@yoctoproject.org>; Mon,  5 Jun 2017 07:47:30 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v55ElKMu018923
-	for <meta-ti@yoctoproject.org>; Mon, 5 Jun 2017 09:47:20 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C676E00B21
+	for <meta-ti@yoctoproject.org>; Mon,  5 Jun 2017 11:09:56 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v55I9kTa012151
+	for <meta-ti@yoctoproject.org>; Mon, 5 Jun 2017 13:09:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1496674040;
-	bh=05+YwEhpn+qWaFK9GFGp2Z4Rri2s9AHfvEncvZ9Az1k=;
-	h=From:To:CC:Subject:Date;
-	b=SyNVNTIjoUXPhycdrUTIXd4aanafA9gLWkQGC2YG6EQtlyYanqaWxrI5TpRx2cMM4
-	6hH9x+rAKS3Y2AV9d45R7OIJMGLuRv875+Ae5biBH0qfhV/RFz4kI4GBqIvE6gLtG/
-	6XU1inV97jkovAW7vudU8/C8oR2J7NZAF4VXkFHg=
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v55ElFo9016251
-	for <meta-ti@yoctoproject.org>; Mon, 5 Jun 2017 09:47:15 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 5 Jun 2017 09:47:14 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v55ElEfn002408;	Mon, 5 Jun 2017 09:47:14 -0500
-Received: from localhost ([172.22.137.163])	by legion.dal.design.ti.com
-	(8.11.7p1+Sun/8.11.7) with ESMTP id v55ElE310609;
-	Mon, 5 Jun 2017 09:47:14 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
+	s=ti-com-17Q1; t=1496686186;
+	bh=WsOEcO4jj2OjCI0YSg7i3bLh7Awmydte4J4Snk/LkVU=;
+	h=From:To:Subject:Date;
+	b=brXebHud5HpRQaBI6rPx1V8NqTAtUXJPxBNmTkMfzFGJkvwXCZ7D/72sAxpxb0SN9
+	5/ZEpUgHGilXUtxnuEtiZAPoWAO1eXxPF7c6K2r8WZ6p9ySpbv2XdzbQRMMIRtkK1W
+	2cknJuPbqbRQS+USpaxzzwHICSoqsf6mnpmtQ340=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v55I9ffp014032
+	for <meta-ti@yoctoproject.org>; Mon, 5 Jun 2017 13:09:41 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 5 Jun 2017 13:09:40 -0500
+Received: from uda0868762.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v55I9ekb001185	for <meta-ti@yoctoproject.org>;
+	Mon, 5 Jun 2017 13:09:40 -0500
+From: Ivan Pang <i-pang@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 5 Jun 2017 09:47:07 -0500
-Message-ID: <20170605144709.3342-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
+Date: Mon, 5 Jun 2017 13:09:40 -0500
+Message-ID: <1496686180-21056-1-git-send-email-i-pang@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH 1/3] linux-ti-staging: update to ti2017.02-rc1 tag
+Subject: [PATCH v2] starterware-rtos: added recipe for RTOS starterware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,41 +59,68 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 14:47:34 -0000
+X-List-Received-Date: Mon, 05 Jun 2017 18:09:58 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Ivan Pang <i-pang@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/starterware/starterware-rtos_git.bb | 46 +++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 recipes-bsp/starterware/starterware-rtos_git.bb
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index f5cc6a31..cefcb5e4 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
- 
- BRANCH = "ti-rt-linux-4.9.y"
- 
--SRCREV = "1d0018dd46277e57f69282f09da8065ea7cf9d3e"
-+SRCREV = "2f909d1ae00e039828baadcd618689350c12623b"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 6f6baae6..97a97ef1 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.9.y"
- 
--SRCREV = "fd352255bbd9df6e31fc4d41e236a9e6a8f5423b"
--PV = "4.9.28+git${SRCPV}"
-+SRCREV = "ec91cfc2e29cc3ea11ba615fb1b2ccdf59b79001"
-+PV = "4.9.30+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "c"
+diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
+new file mode 100644
+index 0000000..3fbe763
+--- /dev/null
++++ b/recipes-bsp/starterware/starterware-rtos_git.bb
+@@ -0,0 +1,46 @@
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://Makefile;beginline=1;endline=35;md5=286cbb5dce3e348294b6b025cff969b3"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x"
++DEPENDS = "gcc-arm-none-eabi-native"
++
++require recipes-ti/includes/ti-staging.inc
++require recipes-ti/includes/ti-paths.inc
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++STARTERWARE_GIT_URI = "git://git.ti.com/keystone-rtos/starterware.git"
++STARTERWARE_GIT_PROTOCOL = "git"
++STARTERWARE_GIT_BRANCH = "master"
++
++# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.02A"
++STARTERWARE_SRCREV = "d648ffc46a3508802ec5d4f70f3d0e8f970ce1fa"
++
++BRANCH = "${STARTERWARE_GIT_BRANCH}"
++SRC_URI = "${STARTERWARE_GIT_URI};protocol=${STARTERWARE_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${STARTERWARE_SRCREV}"
++PV = "02.01.01.02A"
++PR = "r0"
++
++S = "${WORKDIR}/git"
++
++PARTNO_ti33x = "am335x"
++PARTNO_ti43x = "am437x"
++
++export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
++export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
++
++do_compile() {
++    cd build
++    ./release_${PARTNO}.sh
++}
++
++do_install() {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware
++    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware \;
++}
++
++FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
++
++INSANE_SKIP_${PN} = "arch staticdev"
 -- 
-2.12.2
+1.9.1
 
 
