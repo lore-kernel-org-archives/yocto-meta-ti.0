@@ -1,65 +1,51 @@
-Return-Path: <paul.marc.liu@gmail.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AD7E5E00BF6; Thu,  8 Jun 2017 08:36:08 -0700 (PDT)
+	id 72119E00BF6; Thu,  8 Jun 2017 12:04:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [209.85.216.172 listed in list.dnswl.org]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (paul.marc.liu[at]gmail.com)
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
-	[209.85.216.172])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6371BE00B18
-	for <meta-ti@yoctoproject.org>; Thu,  8 Jun 2017 08:36:05 -0700 (PDT)
-Received: by mail-qt0-f172.google.com with SMTP id w1so45661140qtg.2
-	for <meta-ti@yoctoproject.org>; Thu, 08 Jun 2017 08:36:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=y3Yy7PaOWydiFvaZt9BQm/PXLIcQKOvE/3J7TVDbL5Y=;
-	b=YGToQIGqhfS2Rbf9n0j8MKMdQ/u1sojZzyUDmKLUZqyXBf2YKET1+GdMzvBdtkCwXt
-	rgs4Dqs9Mt8vpZNPnVN9kSD+JTkEl0J6OC7ogAdNvRrBCj+l72P/cxdFHP/dxPfg6vYg
-	z8TFW07mZhBkH0pFfGzS8DPPNye/9AN+mMzOgVeKZK+tW6ARdOHIibc67+Dxn44Z27e+
-	/UqeWlH35llHhbXcb4PgZudWL+hKyZqgxcWXxSJIVT/6A23FltOr/lTRsmDTK8UdygtA
-	4E4EKbIzQCP2631wps5rbaEkNSmlwQXcYIQ5mJ3mAHI2n2/EeCvyJu0RJlLh0BytMPxn
-	x/xQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=y3Yy7PaOWydiFvaZt9BQm/PXLIcQKOvE/3J7TVDbL5Y=;
-	b=COIEVj14ljPPBND21f0oY/MBSbsFvREq1QH71vnK2JqPYUqcr64W+2uBhPw3WLmcm7
-	Eq10so+yNVCVldQlUdhnDia7q/dqPZBjd5xPnINeVXwOI3xWzkR5QnA1JcwTLdtYIgcj
-	C4ZFGpGe1vwbYwa6EmnUaM/xYK97spGhoDhte1svjklP8QpD8bhefYz0dK7A0R+MZGpE
-	3UrYzdMB3dQnUXy9Xy9m/Qk933Wvt3fgPdFIJ0vGmb0kHwjN2kQhBMn3vRbhvOOw5eKj
-	bN+rpjfDirb42QMZHCIa1ri3FlsqGq67R+gshFP6eICvqWemIGSJqiaXfG7U+AOaL3J7
-	ZSKw==
-X-Gm-Message-State: AODbwcAdMHXlxd1Ee+oORC6FzHbgPxaawE1j0CmyF9OxL3tT7LzZhBCL
-	eLjMGEo67nMyXOMVu8sgANDuHHymtQ==
-X-Received: by 10.237.62.135 with SMTP id n7mr7768320qtf.0.1496936164489; Thu,
-	08 Jun 2017 08:36:04 -0700 (PDT)
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1CAFEE00B18
+	for <meta-ti@yoctoproject.org>; Thu,  8 Jun 2017 12:04:17 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v58J4Gsa030413
+	for <meta-ti@yoctoproject.org>; Thu, 8 Jun 2017 14:04:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1496948656;
+	bh=cVedXXWm5D4MorNi3NS20Zy9s7j/XkLWvj/OERbiQpM=;
+	h=From:To:CC:Subject:Date;
+	b=n+lSMXY7batHSoEFZd1TJ25m4YtUxnfxSeL5rcP+Adf08p2yNRpFceTKRmDYPVS8l
+	Ws4iOpzOlSAm8GWdPPqbD4aqgm3ifb8juJqBjjk7FLuIJQsw7QZBVlPJnIBlXLq0Bd
+	Y7py+bDWejDItTIxBu2NO0z8kiwbhjha5OnsTn0s=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v58J4G5C003640
+	for <meta-ti@yoctoproject.org>; Thu, 8 Jun 2017 14:04:16 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 8 Jun 2017 14:04:16 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v58J4GWG018371;	Thu, 8 Jun 2017 14:04:16 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 8 Jun 2017 14:58:33 -0400
+Message-ID: <1496948315-11900-4-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.55.214.18 with HTTP; Thu, 8 Jun 2017 08:36:03 -0700 (PDT)
-In-Reply-To: <9d0b2fc3-cfd6-f392-79b9-792025ba3dc8@bytesatwork.ch>
-References: <9d0b2fc3-cfd6-f392-79b9-792025ba3dc8@bytesatwork.ch>
-From: Paul Marc Liu <paul.marc.liu@gmail.com>
-Date: Thu, 8 Jun 2017 08:36:03 -0700
-Message-ID: <CAC_8XzC1S81SxichcepHw2LjS0MF9kyxQ6QaFvOw8WbHk_aaJA@mail.gmail.com>
-To: Daniel Ammann <daniel.ammann@bytesatwork.ch>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Pyro branch?
+Subject: [PATCH v4 4/6] machines: add ti-pdk class variables
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,94 +58,145 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jun 2017 15:36:08 -0000
-Content-Type: multipart/alternative; boundary="001a11423ba055ff4c0551749c03"
+X-List-Received-Date: Thu, 08 Jun 2017 19:04:20 -0000
+Content-Type: text/plain
 
---001a11423ba055ff4c0551749c03
-Content-Type: text/plain; charset="UTF-8"
+* Set the ti-pdk class variables which sets the list of devices and
+  boards supported.
 
-All:
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+v4 changes:
+* Retain compatibility with previous configuration by using am571x and
+  am572x for all omap-a15 SOCs.
 
-I am also interested in the beaglebone black target using meta-ti (or
-meta-beaglebone - which, in my opinion, should be under meta-ti) on pyro.
-I am currently using the RCN (debian and ubuntu) build but would like to
-port specific features on pyro / meta-ti.  Is anyone working on this
-effort?  I would like to estimate and coordinate efforts / divide and
-conquer.
+ conf/machine/am57xx-evm.conf      | 3 +++
+ conf/machine/beaglebone.conf      | 3 +++
+ conf/machine/dra7xx-evm.conf      | 4 ++++
+ conf/machine/include/k2e.inc      | 4 ++++
+ conf/machine/include/k2g.inc      | 4 ++++
+ conf/machine/include/k2hk.inc     | 4 ++++
+ conf/machine/include/omap-a15.inc | 3 +++
+ conf/machine/include/ti33x.inc    | 4 ++++
+ conf/machine/include/ti43x.inc    | 4 ++++
+ conf/machine/k2l-evm.conf         | 4 ++++
+ 10 files changed, 37 insertions(+)
 
-Thank you.
-
-Best Regards,
-
-Paul Liu
-
-On Thu, Jun 8, 2017 at 3:59 AM, Daniel Ammann <daniel.ammann@bytesatwork.ch>
-wrote:
-
-> Hi
->
-> Is there going to be a pyro branch for meta-ti?
-> I know that in the past there was only a new branch every other yocto
-> release, but since there was a morty branch, maybe the rule is not
-> valid anymore.
->
-> Thanks and kind regards
->
-> Daniel
-> --
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
->
-
-
-
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 7ebf809..3bc2d13 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -38,3 +38,6 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 8192"
+ # UBI: sub-page size:              512
+ # UBI: VID header offset:          2048 (aligned 2048)
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_BOARDS = "evmAM571x evmAM572x idkAM571x idkAM572x"
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index d1ed0e1..715d2f2 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -19,3 +19,6 @@ SERIAL_CONSOLE = "115200 ttyS0"
+ UBOOT_MACHINE = "am335x_boneblack_config"
+ 
+ do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot"
++
++# Refine the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_BOARDS = "bbbAM335x"
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index ed37770..993ca23 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -37,3 +37,7 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 8192"
+ # UBI: sub-page size:              512
+ # UBI: VID header offset:          2048 (aligned 2048)
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_BOARDS = "evmDRA72x evmDRA75x evmDRA78x"
++TI_PDK_LIMIT_SOCS_append = " dra72x dra75x dra78x"
+diff --git a/conf/machine/include/k2e.inc b/conf/machine/include/k2e.inc
+index ce3d9c8..6797fb2 100644
+--- a/conf/machine/include/k2e.inc
++++ b/conf/machine/include/k2e.inc
+@@ -1,2 +1,6 @@
+ require conf/machine/include/keystone.inc
+ SOC_FAMILY_append = ":k2e"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS = "k2e"
++TI_PDK_LIMIT_BOARDS = "evmK2E"
+diff --git a/conf/machine/include/k2g.inc b/conf/machine/include/k2g.inc
+index 3cd540d..7bcc412 100644
+--- a/conf/machine/include/k2g.inc
++++ b/conf/machine/include/k2g.inc
+@@ -1,2 +1,6 @@
+ require conf/machine/include/keystone.inc
+ SOC_FAMILY_append = ":k2g"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS = "k2g"
++TI_PDK_LIMIT_BOARDS = "evmK2G iceK2G"
+diff --git a/conf/machine/include/k2hk.inc b/conf/machine/include/k2hk.inc
+index 4f30847..2d2dd6a 100644
+--- a/conf/machine/include/k2hk.inc
++++ b/conf/machine/include/k2hk.inc
+@@ -1,2 +1,6 @@
+ require conf/machine/include/keystone.inc
+ SOC_FAMILY_append = ":k2hk"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS = "k2h k2k"
++TI_PDK_LIMIT_BOARDS = "evmK2H evmK2K"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 0ea428f..0c49753 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -34,3 +34,6 @@ UBI_VOLNAME = "rootfs"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS = "am571x am572x"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 73d9aa4..e1f5bbd 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -42,3 +42,7 @@ EXTRA_IMAGEDEPENDS += "u-boot"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS = "am335x"
++TI_PDK_LIMIT_BOARDS = "evmAM335x icev2AM335x iceAMIC110 bbbAM335x skAM335x"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 2a2fd8d..8830800 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -42,3 +42,7 @@ EXTRA_IMAGEDEPENDS += "u-boot"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS = "am437x"
++TI_PDK_LIMIT_BOARDS = "evmAM437x idkAM437x skAM437x"
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+index bddcd3c..3cf1dab 100644
+--- a/conf/machine/k2l-evm.conf
++++ b/conf/machine/k2l-evm.conf
+@@ -30,3 +30,7 @@ MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
+ # UBI: physical eraseblock size:   256 KiB
+ # UBI: sub-page size:              4096
+ UBINIZE_ARGS = "-m 4096 -p 256KiB -s 4096 -O 4096"
++
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS = "k2l"
++TI_PDK_LIMIT_BOARDS = "evmK2L"
 -- 
+2.7.4
 
-- Message content Private and Confidential -
-- If message was forwarded by mistake, please destroy
-message and attachments immediately. -
 
---001a11423ba055ff4c0551749c03
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">All:<div><br><div>I am also interested in the beaglebone b=
-lack target using meta-ti (or meta-beaglebone - which, in my opinion, shoul=
-d be under meta-ti) on pyro.=C2=A0 I am currently using the RCN (debian and=
- ubuntu) build but would like to port specific features on pyro / meta-ti.=
-=C2=A0 Is anyone working on this effort?=C2=A0 I would like to estimate and=
- coordinate efforts / divide and conquer.</div><div><br></div><div>Thank yo=
-u.</div><div><br></div><div>Best Regards,</div><div><br></div><div>Paul Liu=
-</div></div></div><div class=3D"gmail_extra"><br><div class=3D"gmail_quote"=
->On Thu, Jun 8, 2017 at 3:59 AM, Daniel Ammann <span dir=3D"ltr">&lt;<a hre=
-f=3D"mailto:daniel.ammann@bytesatwork.ch" target=3D"_blank">daniel.ammann@b=
-ytesatwork.ch</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" st=
-yle=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Hi<br=
->
-<br>
-Is there going to be a pyro branch for meta-ti?<br>
-I know that in the past there was only a new branch every other yocto<br>
-release, but since there was a morty branch, maybe the rule is not<br>
-valid anymore.<br>
-<br>
-Thanks and kind regards<br>
-<span class=3D"HOEnZb"><font color=3D"#888888"><br>
-Daniel<br>
---<br>
-______________________________<wbr>_________________<br>
-meta-ti mailing list<br>
-<a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br=
->
-<a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" rel=3D"noreferr=
-er" target=3D"_blank">https://lists.yoctoproject.<wbr>org/listinfo/meta-ti<=
-/a><br>
-</font></span></blockquote></div><br><br clear=3D"all"><div><br></div>-- <b=
-r><div class=3D"gmail_signature" data-smartmail=3D"gmail_signature">=C2=A0<=
-br>- Message content Private and Confidential -<br>- If message was forward=
-ed by mistake, please destroy<br>message and attachments immediately. - </d=
-iv>
-</div>
-
---001a11423ba055ff4c0551749c03--
