@@ -1,52 +1,38 @@
-Return-Path: <i-pang@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9F27DE00B67; Tue, 13 Jun 2017 10:43:07 -0700 (PDT)
+	id EFBEFE00ACF; Tue, 13 Jun 2017 11:47:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3ADDBE00888
-	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 10:43:06 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5DHh5RL013841
-	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 12:43:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1497375785;
-	bh=tosrGvcb5rp05QvTMHYs4E3NugmwUiqhNBzb0wPhvfc=;
-	h=From:To:Subject:Date;
-	b=HSufEaz1Zido0Ib+FfAAgnI5ubanCeU3LY9nBouKkRDqQdU0WipzWBBZ3j2L8AUJD
-	MJVv4PoEr5AgubPp//aDOixZV7oGA3RrMp/OY34hPzBAcIfH9oy4c0Z1DXmuntEPPf
-	cBT9/5J0zjdkVyL3lV42vAbi0uvEMAQLn4PhHAFA=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5DHh58e014124
-	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 12:43:05 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 13 Jun 2017 12:43:05 -0500
-Received: from uda0868762.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v5DHh5Pm018849	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 12:43:05
-	-0500
-From: Ivan Pang <i-pang@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 13 Jun 2017 12:43:05 -0500
-Message-ID: <1497375785-18461-1-git-send-email-i-pang@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH] ti-staging.inc: enable INHIBIT_SYSROOT_STRIP and INHIBIT_PACKAGE_DEBUG_SPLIT
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 584D9E00888
+	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 11:47:47 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C251A20B7D;
+	Tue, 13 Jun 2017 18:47:46 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id AA3rnONLnLzH; Tue, 13 Jun 2017 18:47:46 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A0C73207AF;
+	Tue, 13 Jun 2017 18:47:45 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 4A1E41624F5;
+	Tue, 13 Jun 2017 14:47:45 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Tue, 13 Jun 2017 14:47:44 -0400
+Message-Id: <1497379664-2671-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] omapl138, omapl1: add "omapl1" SOC family as superset of omapl138
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,26 +45,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jun 2017 17:43:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 13 Jun 2017 18:47:50 -0000
 
-Signed-off-by: Ivan Pang <i-pang@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/includes/ti-staging.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ conf/machine/include/{omapl138.inc => omapl1.inc} | 2 +-
+ conf/machine/include/omapl138.inc                 | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ copy conf/machine/include/{omapl138.inc => omapl1.inc} (64%)
 
-diff --git a/recipes-ti/includes/ti-staging.inc b/recipes-ti/includes/ti-staging.inc
-index b588805..ae523ce 100644
---- a/recipes-ti/includes/ti-staging.inc
-+++ b/recipes-ti/includes/ti-staging.inc
-@@ -1,4 +1,6 @@
- INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- 
- ALLOW_EMPTY_${PN} = "1"
- ALLOW_EMPTY_${PN}-dev = "1"
+diff --git a/conf/machine/include/omapl138.inc b/conf/machine/include/omapl1.inc
+similarity index 64%
+copy from conf/machine/include/omapl138.inc
+copy to conf/machine/include/omapl1.inc
+index 1949642..fb10af0 100644
+--- a/conf/machine/include/omapl138.inc
++++ b/conf/machine/include/omapl1.inc
+@@ -1,2 +1,2 @@
+-SOC_FAMILY = "omapl138"
++SOC_FAMILY = "omapl1"
+ require conf/machine/include/soc-family.inc
+diff --git a/conf/machine/include/omapl138.inc b/conf/machine/include/omapl138.inc
+index 1949642..931995f 100644
+--- a/conf/machine/include/omapl138.inc
++++ b/conf/machine/include/omapl138.inc
+@@ -1,2 +1,2 @@
+-SOC_FAMILY = "omapl138"
+-require conf/machine/include/soc-family.inc
++require conf/machine/include/omapl1.inc
++SOC_FAMILY_append = ":omapl138"
 -- 
-1.9.1
+2.7.4
 
 
