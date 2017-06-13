@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C8030E00B67; Tue, 13 Jun 2017 10:31:04 -0700 (PDT)
+	id 4D551E00B5E; Tue, 13 Jun 2017 10:42:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -16,39 +16,39 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
 	no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D9FDE00888
-	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 10:30:58 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5DHUsOb012424;
-	Tue, 13 Jun 2017 12:30:54 -0500
+	*      [198.47.27.80 listed in list.dnswl.org]
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D633E00888
+	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 10:42:05 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5DHg4xU010337
+	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 12:42:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1497375054;
-	bh=CtlWemQ1Upfann/JRHBq+9nuoWiCTFRPb4zOq+KWP+w=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=TxgPZprQfZgCzvhP8uAcPbKlQ6rQmZlQyvDCN5/kNwW4FkSCUOBa19vpS4IM8XLwp
-	LfbwWm+ktt5zxl1KE6QrfrMXEVKJ58S3l6LfiKj+WQE7QGW0z1878NYG/3I9PXPhK7
-	2XbMkI+W7df7/zSBE7yMKRV6ZIauVPOVY0ie5ROw=
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5DHUsr3017516;
-	Tue, 13 Jun 2017 12:30:54 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 13 Jun 2017 12:30:53 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5DHUr0j006905;
-	Tue, 13 Jun 2017 12:30:53 -0500
-Date: Tue, 13 Jun 2017 13:30:51 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Daniel Ammann <daniel.ammann@bytesatwork.ch>
-Message-ID: <20170613173051.GM21219@edge>
-References: <9d0b2fc3-cfd6-f392-79b9-792025ba3dc8@bytesatwork.ch>
+	s=ti-com-17Q1; t=1497375724;
+	bh=ZgcV97f7iyH+YRBYkpy/PDJNWJi13mBCeZdO2BH0q+w=;
+	h=From:To:CC:Subject:Date;
+	b=ieS5yWVfLDbH869N+MpQ0UtuDwmTrpuomA8imNCjAuZ9/6aBgErtR9heT7ATu0lul
+	hZs67hg2TSVp9SFESjG6cF6pgG+EvhzA4/0byyOp7UK0DfhUcgeeTdY/Vmbmh19dRP
+	1MFbQj27/fZdWyfGVjsuTc0pwLsul8b8oYIroi58=
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5DHg4Ko013169
+	for <meta-ti@yoctoproject.org>; Tue, 13 Jun 2017 12:42:04 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 13 Jun 2017 12:42:04 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v5DHg4bc016125;	Tue, 13 Jun 2017 12:42:04 -0500
+Received: from localhost (a0272616local-lt.dhcp.ti.com [128.247.59.156])	by
+	legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	v5DHg4324135; Tue, 13 Jun 2017 12:42:04 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 13 Jun 2017 12:41:56 -0500
+Message-ID: <20170613174157.26538-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
 MIME-Version: 1.0
-In-Reply-To: <9d0b2fc3-cfd6-f392-79b9-792025ba3dc8@bytesatwork.ch>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Pyro branch?
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2017.02-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,26 +61,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jun 2017 17:31:04 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 13 Jun 2017 17:42:09 -0000
+Content-Type: text/plain
 
-On Thu, Jun 08, 2017 at 12:59:54PM +0200, Daniel Ammann wrote:
-> Hi
-> 
-> Is there going to be a pyro branch for meta-ti?
-> I know that in the past there was only a new branch every other yocto 
-> release, but since there was a morty branch, maybe the rule is not 
-> valid anymore.
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-Due to limited resources, we support only 1 stable branch per year and we base 
-our multiple commercial releases on it throughout the year. As you can see, 
-morty is quite active right now in meta-ti. I'm also trying to keep master 
-going more smoothly, as well as adopt "-next" branch for testing, so I won't 
-be able to juggle so many branches and don't think I can support pyro at the 
-same time. As of picking up morty, instead of pyro - it's just because we 
-started this year cycle earlier and pyro wasn't out yet.
-
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index d0c42b29..4b9ab43a 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+ 
+ BRANCH = "ti-rt-linux-4.9.y"
+ 
+-SRCREV = "d4d0fb971da2c7db25c6560943f451637befff49"
++SRCREV = "6f2d5fd6dbf21935c84ee315c21a14e0734ce140"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 53263138..435df2d1 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.9.y"
+ 
+-SRCREV = "c1b1411312453efdcd9cec3d49b8f02bea4db540"
+-PV = "4.9.30+git${SRCPV}"
++SRCREV = "4d5a8c7b1494b9e67ef98e358ba1fb357e17c1f0"
++PV = "4.9.31+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 -- 
-Denys
+2.12.2
+
 
