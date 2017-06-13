@@ -1,51 +1,54 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E33DEE00B63; Mon, 12 Jun 2017 11:31:01 -0700 (PDT)
+	id 13720E00B8B; Mon, 12 Jun 2017 18:56:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1EB61E00888
-	for <meta-ti@yoctoproject.org>; Mon, 12 Jun 2017 11:31:00 -0700 (PDT)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [198.47.27.77 listed in list.dnswl.org]
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6716AE00B67
+	for <meta-ti@yoctoproject.org>; Mon, 12 Jun 2017 18:56:12 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5CIV09v025856
-	for <meta-ti@yoctoproject.org>; Mon, 12 Jun 2017 13:31:00 -0500
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5D1uCFU008692
+	for <meta-ti@yoctoproject.org>; Mon, 12 Jun 2017 20:56:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1497292260;
-	bh=FHlMCTAq9SaY2lTQgi4uWd9exiKORhkY5sWwk7iU/L8=;
-	h=From:To:CC:Subject:Date;
-	b=m6CVd0Zyq/HQTYNhWFRmTGUEeHVgeugK5unGvRy9JjvTiMEXjeuB3zNjiesEWtpO/
-	YM2F/la2IRmloK/c1VJcWf1x7ZUl3RfP9lUTVJ15iQmlCBXLlPX5oMABmCd033qNjA
-	/N3hDpoaHDLqdFrC6qCB8YUBFa80079Mvryj2BPY=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5CIV0dc025860
-	for <meta-ti@yoctoproject.org>; Mon, 12 Jun 2017 13:31:00 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 12 Jun 2017 13:30:59 -0500
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v5CIUxei007704;	Mon, 12 Jun 2017 13:30:59 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 12 Jun 2017 14:25:25 -0400
-Message-ID: <1497291925-14545-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
+	s=ti-com-17Q1; t=1497318972;
+	bh=S1qcyPstDwa1mzu7PiwEV6GNDSKRx6Q+A4026urMn8c=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=AFqeTTCCsihKDGVP7ozDiTolbEG8ontrRyjU8mVwyR1FxAYQCTY4BI8+bbm+qMX87
+	+mvxkFluBOsRYeJy5p4LVQAzWvSFOkYcO//+Q8KD9ocwNisVT3YmT2nY1j5hcSCN3I
+	3EfnSanO9rF+dOlOjqdjTudSk4978JwZSnGbiLEM=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5D1uCZL011342
+	for <meta-ti@yoctoproject.org>; Mon, 12 Jun 2017 20:56:12 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 12 Jun 2017 20:56:11 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5D1uBE8000397;
+	Mon, 12 Jun 2017 20:56:11 -0500
+Date: Mon, 12 Jun 2017 21:56:10 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Ivan Pang <i-pang@ti.com>
+Message-ID: <20170613015610.GJ21219@edge>
+References: <1496686180-21056-1-git-send-email-i-pang@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH] linux: cmem: update KERNEL_DEVICETREE lists
+In-Reply-To: <1496686180-21056-1-git-send-email-i-pang@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH v2] starterware-rtos: added recipe for RTOS starterware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,43 +61,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jun 2017 18:31:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 13 Jun 2017 01:56:15 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-* Update the device tree lists with the latest DTB names from the
-  machine configuration.
+Jake,
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
----
- recipes-kernel/linux/cmem.inc | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+Do you have any comments?
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index a61b899..ed048df 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -15,13 +15,15 @@ CMEM_DTSI_dra72x = "cmem-dra72x.dtsi"
- 
- # Split device trees between variants
- CMEM_DEVICETREE = "${KERNEL_DEVICETREE}"
--CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd.dtb am571x-idk-lcd-osd101t2587.dtb"
--CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-evm.dtb am57xx-evm-reva3.dtb am572x-idk.dtb \
--                          am572x-idk-lcd-osd.dtb am572x-idk-lcd-osd101t2587.dtb"
-+CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb"
-+CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb \
-+                          am57xx-evm.dtb am57xx-evm-cam-mt9t111.dtb am57xx-evm-cam-ov10635.dtb \
-+                          am57xx-evm-reva3.dtb am57xx-evm-reva3-cam-mt9t111.dtb am57xx-evm-reva3-cam-ov10635.dtb \
-+                          am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb"
- CMEM_DEVICETREE_dra71x = "dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb"
--CMEM_DEVICETREE_dra72x = "dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd.dtb dra72-evm-lcd-osd101t2587.dtb \
-+CMEM_DEVICETREE_dra72x = "dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
-                           dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb"
--CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd.dtb dra7-evm-lcd-osd101t2587.dtb"
-+CMEM_DEVICETREE_dra74x = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb"
- 
- # Flag to enable CMEM injection
- RESERVE_CMEM ?= "0"
--- 
-2.7.4
 
+On Mon, Jun 05, 2017 at 01:09:40PM -0500, Ivan Pang wrote:
+> Signed-off-by: Ivan Pang <i-pang@ti.com>
+> ---
+>  recipes-bsp/starterware/starterware-rtos_git.bb | 46 +++++++++++++++++++++++++
+>  1 file changed, 46 insertions(+)
+>  create mode 100644 recipes-bsp/starterware/starterware-rtos_git.bb
+> 
+> diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
+> new file mode 100644
+> index 0000000..3fbe763
+> --- /dev/null
+> +++ b/recipes-bsp/starterware/starterware-rtos_git.bb
+> @@ -0,0 +1,46 @@
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://Makefile;beginline=1;endline=35;md5=286cbb5dce3e348294b6b025cff969b3"
+> +
+> +COMPATIBLE_MACHINE = "ti33x|ti43x"
+> +DEPENDS = "gcc-arm-none-eabi-native"
+> +
+> +require recipes-ti/includes/ti-staging.inc
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +STARTERWARE_GIT_URI = "git://git.ti.com/keystone-rtos/starterware.git"
+> +STARTERWARE_GIT_PROTOCOL = "git"
+> +STARTERWARE_GIT_BRANCH = "master"
+> +
+> +# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.02A"
+> +STARTERWARE_SRCREV = "d648ffc46a3508802ec5d4f70f3d0e8f970ce1fa"
+> +
+> +BRANCH = "${STARTERWARE_GIT_BRANCH}"
+> +SRC_URI = "${STARTERWARE_GIT_URI};protocol=${STARTERWARE_GIT_PROTOCOL};branch=${BRANCH}"
+> +
+> +SRCREV = "${STARTERWARE_SRCREV}"
+> +PV = "02.01.01.02A"
+> +PR = "r0"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +PARTNO_ti33x = "am335x"
+> +PARTNO_ti43x = "am437x"
+> +
+> +export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
+> +export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
+> +
+> +do_compile() {
+> +    cd build
+> +    ./release_${PARTNO}.sh
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware
+> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware \;
+> +}
+> +
+> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+> +
+> +INSANE_SKIP_${PN} = "arch staticdev"
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
