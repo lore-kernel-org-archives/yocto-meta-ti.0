@@ -1,56 +1,51 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A4D7BE00B9E; Thu, 15 Jun 2017 09:40:58 -0700 (PDT)
+	id E8F49E00B9E; Thu, 15 Jun 2017 09:56:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6ADB6E00B99
-	for <meta-ti@yoctoproject.org>; Thu, 15 Jun 2017 09:40:48 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5FGelvI008073
-	for <meta-ti@yoctoproject.org>; Thu, 15 Jun 2017 11:40:47 -0500
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5F1AE00B99
+	for <meta-ti@yoctoproject.org>; Thu, 15 Jun 2017 09:56:42 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5FGuf33022410
+	for <meta-ti@yoctoproject.org>; Thu, 15 Jun 2017 11:56:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1497544847;
-	bh=yPkPuFdN/ojQvMtDqPBxtHRtnXj5gxE+CeHH4M8Qe5U=;
-	h=From:To:Subject:Date:References:In-Reply-To;
-	b=gaN4+wH1sATjg3vU0PPprvSTpt77z0k46e6Dh9xmiYv85QHfii6E5rS6Ocj4No8hB
-	vapb6/TJl2Bn7K5k3CPKLkp+qeItTMsBW3AQWny434hZLwjjsnGExgOFxesrNEUxUj
-	CWRMoYMpyqNVRgH5BMVbMP4XPD0lgAm5Md/2q46A=
+	s=ti-com-17Q1; t=1497545801;
+	bh=VaV4VlaHwQhTwa141GGl7HEea1EfYENUVHLI6nfIBfs=;
+	h=From:To:CC:Subject:Date;
+	b=V+SOY7R9DCzamxq3ZWuxnVP/ETpQJGpOFnSx8e3DcOrnfGSt8MFRAmUnKTW0wcP8m
+	ntSskpk9lbXWTTOPFrzbdiAvznykCMgJU5jC+eZfEI2pqIH8rDPTRRM3Iqjw0MWZ3N
+	pEtUwVC2ituy5Os6BRX22nOyGveykYB6DdVcIbOY=
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5FGelsE006576
-	for <meta-ti@yoctoproject.org>; Thu, 15 Jun 2017 11:40:47 -0500
-Received: from DFLE09.ent.ti.com ([fe80::7090:147d:b5eb:4c12]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.03.0294.000; Thu, 15 Jun 2017 11:40:46 -0500
-From: "Stiffler, Jacob" <j-stiffler@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [PATCH 2/2] openmp-rto: bump SRCREV to version 2.6.1.0
-Thread-Index: AQHS5fBHNANXgndMw029JPOjMOHUjqImICnA
-Date: Thu, 15 Jun 2017 16:40:46 +0000
-Message-ID: <4B26FB5A64EBA14C87266869E037F958254021B4@DFLE09.ent.ti.com>
-References: <1497541998-1014-1-git-send-email-j-stiffler@ti.com>
-	<1497541998-1014-2-git-send-email-j-stiffler@ti.com>
-In-Reply-To: <1497541998-1014-2-git-send-email-j-stiffler@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.172.224.221]
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5FGufCT006361
+	for <meta-ti@yoctoproject.org>; Thu, 15 Jun 2017 11:56:41 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 15 Jun 2017 11:56:41 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v5FGuebx014761;	Thu, 15 Jun 2017 11:56:41 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 15 Jun 2017 12:51:04 -0400
+Message-ID: <1497545464-10491-2-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] openmp-rto: bump SRCREV to version 2.6.1.0
+Subject: [PATCH v2 2/2] openmp-rtos: bump SRCREV to version 2.6.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -63,53 +58,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jun 2017 16:40:58 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 15 Jun 2017 16:56:50 -0000
+Content-Type: text/plain
 
-NAK... typo in the commit message (s/rto:/rtos:/)
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+v2 changes:
+* fixed typo in commit message
 
-> -----Original Message-----
-> From: Stiffler, Jacob
-> Sent: Thursday, June 15, 2017 11:53 AM
-> To: meta-ti@yoctoproject.org
-> Cc: Stiffler, Jacob
-> Subject: [PATCH 2/2] openmp-rto: bump SRCREV to version 2.6.1.0
->=20
-> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> ---
->  recipes-ti/openmp-rtos/openmp-rtos_git.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-
-> ti/openmp-rtos/openmp-rtos_git.bb
-> index 3ec3aff..4fede03 100644
-> --- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> +++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> @@ -4,7 +4,7 @@ LICENSE =3D "BSD"
->=20
->  require recipes-ti/includes/ti-paths.inc
->=20
-> -PV =3D "2_06_00_00"
-> +PV =3D "2_06_01_00"
->  PR =3D "r0"
->=20
->  OPENMP_RTOS_GIT_URI =3D "git://git.ti.com/openmp/ti-openmp-dsp-
-> runtime.git"
-> @@ -15,7 +15,7 @@ BRANCH =3D "${OPENMP_RTOS_GIT_BRANCH}"
->  SRC_URI =3D
-> "${OPENMP_RTOS_GIT_URI};protocol=3D${OPENMP_RTOS_GIT_PROTOCOL};br
-> anch=3D${BRANCH} \  "
->=20
-> -SRCREV =3D "a9aae66f792e999dafbd2e0bd834f98122398c4c"
-> +SRCREV =3D "bb04bfcb184e313300b95cd42089654da5c2706b"
->=20
->  LIC_FILES_CHKSUM =3D
-> "file://docs/license/omp_manifest_template.html;md5=3D61a6972303c0447b
-> 7c056195d7ebafee"
->=20
-> --
-> 2.7.4
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index 3ec3aff..4fede03 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ 
+-PV = "2_06_00_00"
++PV = "2_06_01_00"
+ PR = "r0"
+ 
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -15,7 +15,7 @@ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+ SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+ "
+ 
+-SRCREV = "a9aae66f792e999dafbd2e0bd834f98122398c4c"
++SRCREV = "bb04bfcb184e313300b95cd42089654da5c2706b"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ 
+-- 
+2.7.4
 
 
