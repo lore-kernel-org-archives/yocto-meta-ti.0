@@ -1,6 +1,6 @@
 Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4CEFFE00BC8; Thu, 22 Jun 2017 15:09:53 -0700 (PDT)
+	id 61D1EE00BD0; Thu, 22 Jun 2017 15:09:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,36 +18,34 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EFF1BE00BD0
-	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 15:09:51 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5MM9f0g029679
-	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 17:09:41 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5152E00BD6
+	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 15:09:47 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5MM9bXn029671
+	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 17:09:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1498169381;
-	bh=Gs5e6UDzMSwnh3EV0wnAlPQKp/3kjNQv01pG+QUmSFs=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=SkicAgKJv6AotJP0xEOJXoiJKOnDydqjdvtkdcHwXy+zzoYGmyuo9eG83pvBd51bj
-	bykJpRqfZ2mpkIbov5II4e5IpMsCdmEfU0Q0Oc0jmSkC9lSYmSdtx888aUs5itRRHZ
-	1q9x78dOAQip3vOnX3cyWDpXs65ZMj1xWo8w6fRg=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5MM9aTk028961
-	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 17:09:36 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 22 Jun 2017 17:09:36 -0500
+	s=ti-com-17Q1; t=1498169377;
+	bh=WS9bSy7dQXJ3fS3R12ISSfDlpXhxGjAiV0SRIaM99jw=;
+	h=From:To:CC:Subject:Date;
+	b=yyB3q0Lkpt21T+Am9YIcPqKBiFfS2KSPPLFlR6dvMNmrkviv6DJQySojrYqyEOfX8
+	Z0g/8AjSVACmPA+x2ztLdB48+QRO8VfPFcRpMgb4VpuWf4dKfZg7DZ4UKhxHCPIbja
+	S3C09abtFThdeWpeRgr2iJKZC0RkwS8H5thNL+RU=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5MM9WWm020425
+	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 17:09:32 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 22 Jun 2017 17:09:31 -0500
 Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v5MM9VdY020398;	Thu, 22 Jun 2017 17:09:36 -0500
+	v5MM9VdW020398;	Thu, 22 Jun 2017 17:09:31 -0500
 From: Hongmei Gou <h-gou@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 22 Jun 2017 18:09:24 -0400
-Message-ID: <1498169365-10248-3-git-send-email-h-gou@ti.com>
+Date: Thu, 22 Jun 2017 18:09:22 -0400
+Message-ID: <1498169365-10248-1-git-send-email-h-gou@ti.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1498169365-10248-1-git-send-email-h-gou@ti.com>
-References: <1498169365-10248-1-git-send-email-h-gou@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/3] uio-test-pruss: version bump to 1.0.1.0 and add support for am3/am4
+Subject: [PATCH 0/3] Add uio based pruss test for am3/am4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -63,59 +61,27 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Thu, 22 Jun 2017 22:09:53 -0000
 Content-Type: text/plain
 
-* Also defines are added to allow switching the git repo through
-  local.confappend
+The major changes include:
+1) Add am3/am4 support in uio-module-drv-test
+2) Add am3/am4 support in uio-test-pruss
+3) Add pru-uio device tree files for am3/am4
 
-Signed-off-by: Hongmei Gou <h-gou@ti.com>
----
- recipes-ti/uio-test-pruss/uio-test-pruss_git.bb | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+Hongmei Gou (3):
+  uio-module-drv*: version bump to 2.2.0 and add test support for
+    am3/am4
+  uio-test-pruss: version bump to 1.0.1.0 and add support for am3/am4
+  linux-ti-staging: include pru-uio device tree files for am3/am4
 
-diff --git a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-index a342fe3..724ca07 100644
---- a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-+++ b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Provides test pruss firmware for uio based tests"
- LICENSE = "BSD-3-Clause"
--PV = "1.0.0.0"
-+PV = "1.0.1.0"
- require recipes-ti/includes/ti-paths.inc
- 
- S = "${WORKDIR}/git"
-@@ -8,20 +8,27 @@ S = "${WORKDIR}/git"
- DEPENDS = "ti-cgt-pru-native"
- 
- BRANCH = "master"
--SRC_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git;protocol=git;branch=${BRANCH}"
- LIC_FILES_CHKSUM = "file://Makefile;startline=1;endline=31;md5=0ee4f2c42eb6b04e37859bb55a18b144"
- 
--# Corresponds to version 01.00.00.00A
--SRCREV = "88e78564ff9094ecb13b53d627fa6bfb25d9ac03"
-+UIO_TEST_PRUSS_GIT_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git"
-+UIO_TEST_PRUSS_GIT_PROTOCOL = "git"
-+SRC_URI = "${UIO_TEST_PRUSS_GIT_URI};protocol=${UIO_TEST_PRUSS_GIT_PROTOCOL};branch=${BRANCH}"
- 
--PR = "r1"
-+# Corresponds to version 01.00.01.00
-+UIO_TEST_PRUSS_SRCREV = "72f7454c2460bd7d52dab70631b38bf5d3585542"
- 
--COMPATIBLE_MACHINE = "omap-a15"
-+SRCREV = "${UIO_TEST_PRUSS_SRCREV}"
-+
-+PR = "r2"
-+
-+COMPATIBLE_MACHINE = "omap-a15|ti33x|ti43x"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- DEVICE_NAME = ""
- DEVICE_NAME_append_am57xx-evm = "am57xx"
-+DEVICE_NAME_append_ti33x = "am33xx"
-+DEVICE_NAME_append_ti43x = "am43xx"
- 
- EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR} DEVICE=${DEVICE_NAME}"
- 
+ .../uio-module-drv/uio-module-drv-test_git.bb      |  14 +-
+ recipes-bsp/uio-module-drv/uio-module-drv.inc      |  12 +-
+ .../linux/files/ti33x/am335x-pru-uio.dtsi          | 192 ++++++++++++++
+ .../linux/files/ti43x/am437x-pru-uio.dtsi          | 292 +++++++++++++++++++++
+ recipes-kernel/linux/ti-uio.inc                    |  28 ++
+ recipes-ti/uio-test-pruss/uio-test-pruss_git.bb    |  19 +-
+ 6 files changed, 545 insertions(+), 12 deletions(-)
+ create mode 100644 recipes-kernel/linux/files/ti33x/am335x-pru-uio.dtsi
+ create mode 100644 recipes-kernel/linux/files/ti43x/am437x-pru-uio.dtsi
+
 -- 
 1.9.1
 
