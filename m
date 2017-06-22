@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ECB43E00B58; Thu, 22 Jun 2017 12:16:10 -0700 (PDT)
+	id 66005E00B58; Thu, 22 Jun 2017 15:09:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,38 +17,37 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD99DE00B53
-	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 12:16:04 -0700 (PDT)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C425BE00B53
+	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 15:09:35 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5MJG4Nb027617
-	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 14:16:04 -0500
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5MM9Ys6025476
+	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 17:09:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1498158964;
-	bh=cSU+fbG4DGHwdQa4aFmHvCtTMUcmap0rGyjKrFM9Up0=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=DIaNQO2Ha6vBeYoqoFcdpag71N8qzpIHUmFYWvtr8wQA1CMz5hGPm6CrZP8t9KphS
-	o8nrFr8kGLF5Si+9GKMu3Qmde5gtg0Ww8t7j36xFUvj6xfcV4kTXcrnUrfyaX2c0bc
-	x9uCbJb+MjPKMIrP2DqC7zKWsXyQUENUgfYkni9c=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5MJG4pl023083
-	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 14:16:04 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 22 Jun 2017 14:16:03 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5MJG3jB002643;
-	Thu, 22 Jun 2017 14:16:03 -0500
-To: Ivan Pang <i-pang@ti.com>, <meta-ti@yoctoproject.org>
-References: <1498000807-27397-1-git-send-email-i-pang@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <43687bdd-02e6-19e0-cd58-df0985ef95f6@ti.com>
-Date: Thu, 22 Jun 2017 15:16:04 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	s=ti-com-17Q1; t=1498169374;
+	bh=aealcY3vvB0AOiqwtXQWK0IpJfq92B4zEWi53FS5/vs=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=ozQ+MGDKoSAn1IbWivPtmXXWYeYpZFkWMhbrnaWACNKIKMxxge64c1sgRk9owgcrU
+	wfYB7xKXiu53Cv9sTYWVKCe3BHWui1ETF2KsvbqYR6c2l3gPi+RbkSO/I3Gv3R5ebV
+	9FTaxnlh6WuIVhOimveGxCP1U9LOaWwUOqYwNxCE=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5MM9Yda028934
+	for <meta-ti@yoctoproject.org>; Thu, 22 Jun 2017 17:09:34 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 22 Jun 2017 17:09:34 -0500
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v5MM9VdX020398;	Thu, 22 Jun 2017 17:09:34 -0500
+From: Hongmei Gou <h-gou@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 22 Jun 2017 18:09:23 -0400
+Message-ID: <1498169365-10248-2-git-send-email-h-gou@ti.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1498169365-10248-1-git-send-email-h-gou@ti.com>
+References: <1498169365-10248-1-git-send-email-h-gou@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1498000807-27397-1-git-send-email-i-pang@ti.com>
-Subject: Re: [PATCH v3] starterware-rtos: added recipe for RTOS starterware
+Subject: [PATCH 1/3] uio-module-drv*: version bump to 2.2.0 and add test support for am3/am4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,72 +60,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jun 2017 19:16:11 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Jun 2017 22:09:37 -0000
+Content-Type: text/plain
 
-ACK
+* Also defines are added in .inc to allow switching the git repo
+  through local.confappend
 
-On 6/20/2017 7:20 PM, Ivan Pang wrote:
-> Signed-off-by: Ivan Pang <i-pang@ti.com>
-> ---
->   recipes-bsp/starterware/starterware-rtos_git.bb | 48 +++++++++++++++++++++++++
->   1 file changed, 48 insertions(+)
->   create mode 100644 recipes-bsp/starterware/starterware-rtos_git.bb
->
-> diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
-> new file mode 100644
-> index 0000000..5584cb2
-> --- /dev/null
-> +++ b/recipes-bsp/starterware/starterware-rtos_git.bb
-> @@ -0,0 +1,48 @@
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://Makefile;beginline=1;endline=35;md5=286cbb5dce3e348294b6b025cff969b3"
-> +
-> +COMPATIBLE_MACHINE = "ti33x|ti43x"
-> +DEPENDS = "gcc-arm-none-eabi-native"
-> +
-> +require recipes-ti/includes/ti-paths.inc
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +STARTERWARE_GIT_URI = "git://git.ti.com/keystone-rtos/starterware.git"
-> +STARTERWARE_GIT_PROTOCOL = "git"
-> +STARTERWARE_GIT_BRANCH = "master"
-> +
-> +# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.03A"
-> +STARTERWARE_SRCREV = "08f65ae3d5ccd19fbaf36040a99de971b685d144"
-> +
-> +BRANCH = "${STARTERWARE_GIT_BRANCH}"
-> +SRC_URI = "${STARTERWARE_GIT_URI};protocol=${STARTERWARE_GIT_PROTOCOL};branch=${BRANCH}"
-> +
-> +SRCREV = "${STARTERWARE_SRCREV}"
-> +PV = "02.01.01.03A"
-> +PR = "r0"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +PARTNO_ti33x = "am335x"
-> +PARTNO_ti43x = "am437x"
-> +
-> +export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
-> +export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
-> +
-> +do_compile() {
-> +    cd build
-> +    ./release_${PARTNO}.sh
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware
-> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware \;
-> +}
-> +
-> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-> +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_SYSROOT_STRIP = "1"
-> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> +INSANE_SKIP_${PN} = "arch staticdev"
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
+---
+ recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb | 14 ++++++++++++--
+ recipes-bsp/uio-module-drv/uio-module-drv.inc         | 12 ++++++++----
+ 2 files changed, 20 insertions(+), 6 deletions(-)
+
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+index 8303efe..2e3bb91 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
++++ b/recipes-bsp/uio-module-drv/uio-module-drv-test_git.bb
+@@ -2,12 +2,14 @@ DESCRIPTION = "Test code for user space IO (UIO) driver"
+ 
+ include uio-module-drv.inc
+ 
+-PR = "r2"
++PR = "r3"
+ 
+-COMPATIBLE_MACHINE = "keystone|omap-a15"
++COMPATIBLE_MACHINE = "keystone|omap-a15|ti33x|ti43x"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ DEVICE_NAME_omap-a15 = "am57xx"
++DEVICE_NAME_ti33x = "am33xx"
++DEVICE_NAME_ti43x = "am43xx"
+ DEVICE_NAME_keystone = "keystone"
+ RDEPENDS_${PN} = "uio-module-drv"
+ 
+@@ -28,3 +30,11 @@ do_install_append_keystone () {
+ do_install_append_omap-a15 () {
+ 	install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
+ }
++
++do_install_append_ti33x () {
++        install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
++}
++
++do_install_append_ti43x () {
++        install -c -m 755 ${S}/test/prussdrv_test/test/pruss_uio_test ${D}${bindir}/.
++}
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+index 88eab76..6d55db2 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
++++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+@@ -2,11 +2,15 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
+ 
+ BRANCH = "master"
+-# This corresponds to version 02.01.00.00
+-SRCREV = "19761495883bf8fb2670b0929d255135bd295dcb"
++# This corresponds to version 02.02.00.00
++UIO_MODULE_DRV_SRCREV = "59cd07395d7f26cbd01969d130d7b8bd5ccb12c5"
+ 
+-PV = "2.1.0.0+git${SRCPV}"
++PV = "2.2.0.0+git${SRCPV}"
+ 
+-SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
++UIO_MODULE_DRV_GIT_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git"
++UIO_MODULE_DRV_GIT_PROTOCOL = "git"
++SRC_URI = "${UIO_MODULE_DRV_GIT_URI};protocol=${UIO_MODULE_DRV_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${UIO_MODULE_DRV_SRCREV}"
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.9.1
 
 
