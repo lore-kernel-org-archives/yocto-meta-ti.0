@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6EE4CE00B9D; Fri, 23 Jun 2017 11:14:29 -0700 (PDT)
+	id 78FA2E00BDF; Fri, 23 Jun 2017 11:14:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,32 +9,30 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BCA10E00B18
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0032E00B1B
 	for <meta-ti@yoctoproject.org>; Fri, 23 Jun 2017 11:14:24 -0700 (PDT)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A36A320C1A;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BB43920C1B;
 	Fri, 23 Jun 2017 18:14:23 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id 3Cl_c-KFsgla; Fri, 23 Jun 2017 18:14:23 +0000 (UTC)
+	with ESMTP id 3tYntjXYvYHi; Fri, 23 Jun 2017 18:14:23 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6C94E208FB;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6722B204E0;
 	Fri, 23 Jun 2017 18:14:22 +0000 (UTC)
 Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id E4954162513;
+	by mail.denix.org (Postfix) with ESMTP id C77C216250E;
 	Fri, 23 Jun 2017 14:14:21 -0400 (EDT)
 From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 23 Jun 2017 14:14:17 -0400
-Message-Id: <1498241657-42514-2-git-send-email-denys@ti.com>
+Date: Fri, 23 Jun 2017 14:14:16 -0400
+Message-Id: <1498241657-42514-1-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1498241657-42514-1-git-send-email-denys@ti.com>
-References: <1498241657-42514-1-git-send-email-denys@ti.com>
-Subject: [PATCH 2/2] codec-engine: remove outdated components
+Subject: [PATCH 1/2] gstreamer-ti: remove outdated component
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,782 +45,2994 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jun 2017 18:14:29 -0000
+X-List-Received-Date: Fri, 23 Jun 2017 18:14:32 -0000
 
-Remove the old 2.x version of Codec Engine, that hasn't been updated in years
-and the corresponding codecs-omap3530 package.
+gstreamer-ti hasn't been updated in years. All the modern gstreamer plugins
+and bindings for TI platforms now reside in meta-arago-extras layer.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/codec-engine/ti-codec-engine.inc        | 199 --------------------
- .../bypass-GCArmv5T-used-is-sealed.patch           |  22 ---
- ...-08-Examples-Add-LPM_INSTALL_DIR-packages.patch |  60 ------
- .../ti-codec-engine/dm365-evm/loadmodules.sh       |  49 -----
- .../loadmodules-ti-codec-engine-apps.sh            |  37 ----
- .../unloadmodules-ti-codec-engine-apps.sh          |  12 --
- .../codec-engine/ti-codec-engine_2.26.02.11.bb     |  12 --
- .../ti-codecs-omap3530/disable-c6accel.diff        |  47 -----
- .../ti-codecs-omap3530/mp3dec_cs1omap3530.patch    |  41 ----
- .../codec-engine/ti-codecs-omap3530_4.00.00.00.bb  | 208 ---------------------
- 10 files changed, 687 deletions(-)
- delete mode 100644 recipes-ti/codec-engine/ti-codec-engine.inc
- delete mode 100644 recipes-ti/codec-engine/ti-codec-engine/bypass-GCArmv5T-used-is-sealed.patch
- delete mode 100644 recipes-ti/codec-engine/ti-codec-engine/ce-2-26-00-08-Examples-Add-LPM_INSTALL_DIR-packages.patch
- delete mode 100644 recipes-ti/codec-engine/ti-codec-engine/dm365-evm/loadmodules.sh
- delete mode 100644 recipes-ti/codec-engine/ti-codec-engine/loadmodules-ti-codec-engine-apps.sh
- delete mode 100644 recipes-ti/codec-engine/ti-codec-engine/unloadmodules-ti-codec-engine-apps.sh
- delete mode 100644 recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb
- delete mode 100644 recipes-ti/codec-engine/ti-codecs-omap3530/disable-c6accel.diff
- delete mode 100644 recipes-ti/codec-engine/ti-codecs-omap3530/mp3dec_cs1omap3530.patch
- delete mode 100644 recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
+ recipes-ti/gstreamer-ti/gstreamer-ti.inc           |  165 ---
+ .../gstreamer-ti/0001-add-omapdmaifbsink.patch     | 1336 --------------------
+ ...ting-the-display-framerate-directly-when-.patch |   86 --
+ ...04-Cosmetic-cleanup-clarify-some-comments.patch |   73 --
+ ...e-setting-the-framerate-directly-on-DM365.patch |   33 -
+ ...06-Remove-the-repeat_with_refresh-feature.patch |  132 --
+ ...-for-pad-allocated-buffers-in-TIDmaiVideo.patch |  313 -----
+ ...rt-for-pad-allocated-buffers-in-TIViddec2.patch |  302 -----
+ .../0009-dmaisink-compilation-fix.patch            |   26 -
+ ...te-dm365-cfg-to-work-with-platinum-codecs.patch |   26 -
+ ...p3530_dv400-platform-support-with-omap353.patch |  119 --
+ .../gstreamer-ti/gstreamer-ti/dm355-evm/gst-ti.sh  |   12 -
+ .../gstreamer-ti/dm365-evm/loadmodules.sh          |   37 -
+ .../gstreamer-ti/gstreamer-ti/gstreamer-ti-rc.sh   |   28 -
+ .../gstreamer-ti/gstreamer-ti/gstti-init.service   |   10 -
+ .../gstreamer-ti/gstreamer-ti/omap3/loadmodules.sh |   22 -
+ .../gstreamer-ti/omapl137/loadmodules.sh           |   12 -
+ .../omapl138/da850-omapl138-evm/loadmodules.sh     |   16 -
+ .../gstreamer-ti/omapl138/loadmodules.sh           |   15 -
+ .../gstreamer-ti/r962-remove-include-videodev.diff |   22 -
+ recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb        |   26 -
+ 21 files changed, 2811 deletions(-)
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti.inc
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0001-add-omapdmaifbsink.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0003-Support-setting-the-display-framerate-directly-when-.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0004-Cosmetic-cleanup-clarify-some-comments.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0005-Enable-setting-the-framerate-directly-on-DM365.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0006-Remove-the-repeat_with_refresh-feature.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0007-Add-support-for-pad-allocated-buffers-in-TIDmaiVideo.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0008-Add-support-for-pad-allocated-buffers-in-TIViddec2.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0009-dmaisink-compilation-fix.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0009-update-dm365-cfg-to-work-with-platinum-codecs.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/0010-replace-omap3530_dv400-platform-support-with-omap353.patch
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/dm355-evm/gst-ti.sh
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/dm365-evm/loadmodules.sh
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/gstreamer-ti-rc.sh
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/gstti-init.service
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/omap3/loadmodules.sh
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/omapl137/loadmodules.sh
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/da850-omapl138-evm/loadmodules.sh
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/loadmodules.sh
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti/r962-remove-include-videodev.diff
+ delete mode 100644 recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb
 
-diff --git a/recipes-ti/codec-engine/ti-codec-engine.inc b/recipes-ti/codec-engine/ti-codec-engine.inc
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti.inc b/recipes-ti/gstreamer-ti/gstreamer-ti.inc
 deleted file mode 100644
-index 15bd464..0000000
---- a/recipes-ti/codec-engine/ti-codec-engine.inc
+index e0e65a7..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti.inc
 +++ /dev/null
-@@ -1,199 +0,0 @@
--DESCRIPTION = "Codec Engine for TI ARM/DSP processors"
--HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ce"
--SECTION = "devel"
--LICENSE = "BSD"
+@@ -1,165 +0,0 @@
+-DESCRIPTION = "GSTREAMER Plugin (gstreamer-ti) for TI ARM/DSP processors"
+-HOMEPAGE = "https://gforge.ti.com/gf/project/gstreamer_ti/"
+-SECTION = "multimedia"
+-LICENSE = "LGPL"
 -
--# TODO :: Add Codec Engine Library Rebuild
--# TODO :: Add Examples APP_LOCAL build as well?
--# TODO :: Check DEPENDS - are the DSP side packages required for ARM-only products?
+-# TODO :: Replace omapl137 with official support in GST (currently linking to omapl138)
+-# TODO :: Codec Server Environment Variables shouldn't be required
+-# TODO :: Add (and check) rc scripts for all targets (just copied for now) (365,6467,omapl137)
+-# TODO :: Check if CPPFLAGS_append is still required
+-# TODO :: Remove ENCODE/DECODE combo exports - these are not used anymore (check?)
 -
+-inherit autotools-brokensep
+-inherit update-rc.d
 -require recipes-ti/includes/ti-paths.inc
 -require recipes-ti/includes/ti-staging.inc
 -
--PROVIDES += "ti-codec-engine-examples"
+-# Rebuild on kernel change since it links statically to ti-dmai, ti-codec-engine, etc
+-PR = "r85+${MACHINE_KERNEL_PR}"
 -
--PR = "${MACHINE_KERNEL_PR}"
+-DEPENDS = "ti-dmai gstreamer gst-plugins-base"
 -
--S = "${WORKDIR}/codec_engine_${PV}"
+-# enable c6accel elements on omapl138 and omap3
+-#DEPENDS_append_omapl138 = " ti-c6accel "
+-#EXTRA_OECONF_omapl138 = "--enable-c6accel"
+-#DEPENDS_append_omap3 = " ti-c6accel "
+-#EXTRA_OECONF_omap3 = "--enable-c6accel"
+-export C6ACCEL_INSTALL_DIR
 -
--SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ce/${PV}/exports/codec_engine_${PV},lite.tar.gz;name=cetarball "
+-# gstreamer_ti picks up some config variables from the environment
+-# - variables are used in the gstreamer makefile
+-#   - PLATFORM, XDC_PLATFORM, XDC_TARGET, MVTOOL_DIR  
+-# - others used by config.bld (which it gets from the dmai config.bld)
+-#   - CROSS_COMPILE, PLATFORM_XDC
 -
--DEPENDS = "ti-framework-components ti-xdais ti-xdctools ti-linuxutils"
--DEPENDS_append_dm6446 	= " ti-dspbios ti-dsplink ti-local-power-manager ti-cgt6x ti-biosutils ti-edma3lld"
--DEPENDS_append_dm6467 	= " ti-dspbios ti-dsplink ti-cgt6x ti-biosutils ti-edma3lld"
--DEPENDS_append_omap3	= " ti-dspbios ti-dsplink ti-local-power-manager ti-cgt6x ti-biosutils ti-edma3lld"
--DEPENDS_append_omapl137 = " ti-dspbios ti-dsplink ti-cgt6x ti-biosutils ti-edma3lld"
--DEPENDS_append_omapl138 = " ti-dspbios ti-dsplink ti-cgt6x ti-biosutils ti-edma3lld"
+-PLATFORM_dm6446        = "dm6446"
+-PLATFORM_dm6467        = "dm6467"
+-PLATFORM_dm6467t       = "dm6467t"
+-PLATFORM_omap3         = "omap3530"
+-PLATFORM_dm355         = "dm355"
+-PLATFORM_dm365         = "dm365"
+-PLATFORM_omapl137      = "omapl137"
+-PLATFORM_omapl138      = "omapl138"
+-PLATFORM              ?= "UNDEFINED_PLATFORM"
+-GST_TI_PLATFORM = "${PLATFORM}"
 -
--# SOC_FAMILY configuration
+-XDC_PLATFORM_dm6446    = "ti.platforms.evmDM6446"
+-XDC_PLATFORM_dm6467    = "ti.platforms.evmDM6467"
+-XDC_PLATFORM_omap3     = "ti.platforms.evm3530"
+-XDC_PLATFORM_dm355     = "ti.platforms.evmDM355"
+-XDC_PLATFORM_dm365     = "ti.platforms.evmDM365"
+-XDC_PLATFORM_omapl137  = "ti.platforms.evmOMAPL137"
+-XDC_PLATFORM_omapl138  = "ti.platforms.evmOMAPL138"
+-XDC_PLATFORM          ?= "UNDEFINED_XDC_PLATFORM"
 -
--# Define DEVICES variable
--CEEXAMPLESDEVICES_dm6446     = "DM6446"
--CEEXAMPLESDEVICES_dm6467     = "DM6467"
--CEEXAMPLESDEVICES_omap3      = "OMAP3530"
--CEEXAMPLESDEVICES_dm355      = "DM355"
--CEEXAMPLESDEVICES_dm365      = "DM365"
--CEEXAMPLESDEVICES_omapl137   = "OMAPL137"
--CEEXAMPLESDEVICES_omapl138   = "OMAPL138"
--CEEXAMPLESDEVICES           ?= "<UNDEFINED_CEEXAMPLESDEVICES>"
+-MEMARGS_omap3         = "99M@0x80000000"
+-MEMARGS              ?= "UNDEFINED_MEM_ARGS"
 -
--# Define GPPOS variable
--CEEXAMPLESGPPOS_dm6446       = "LINUX_GCC"
--CEEXAMPLESGPPOS_dm6467       = "LINUX_GCC"
--CEEXAMPLESGPPOS_omap3        = "LINUX_GCC"
--CEEXAMPLESGPPOS_dm355        = "LINUX_GCC"
--CEEXAMPLESGPPOS_dm365        = "LINUX_GCC"
--CEEXAMPLESGPPOS_omapl137     = "LINUX_GCC"
--CEEXAMPLESGPPOS_omapl138     = "LINUX_GCC"
--CEEXAMPLESGPPOS             ?= "<UNDEFINED_CEEXAMPLESGPPOS>"
+-export MEMARGS
+-export PLATFORM
+-export GST_TI_PLATFORM
+-export XDC_PLATFORM
+-export XDC_TARGET      = "gnu.targets.arm.GCArmv5T"
+-export PLATFORM_XDC    = "${XDC_PLATFORM}"
+-export CSTOOL_DIR      = "${TOOLCHAIN_PATH}"
+-export MVTOOL_DIR      = "${TOOLCHAIN_PATH}"
+-export MVTOOL_PREFIX   = "${TARGET_PREFIX}"
+-export CROSS_COMPILE   = "${TOOLCHAIN_PATH}/${TARGET_PREFIX}"
+-export LINK_XDC_ROOT   = "${LINK_INSTALL_DIR}"
 -
--# Define PROGRAM variable
--CEEXAMPLESPROGRAMS_dm6446    = "APP_CLIENT DSP_SERVER"
--CEEXAMPLESPROGRAMS_dm6467    = "APP_CLIENT DSP_SERVER"
--CEEXAMPLESPROGRAMS_omap3     = "APP_CLIENT DSP_SERVER"
--CEEXAMPLESPROGRAMS_dm355     = "APP_LOCAL"
--CEEXAMPLESPROGRAMS_dm365     = "APP_LOCAL"
--CEEXAMPLESPROGRAMS_omapl137  = "APP_CLIENT DSP_SERVER"
--CEEXAMPLESPROGRAMS_omapl138  = "APP_CLIENT DSP_SERVER"
--CEEXAMPLESPROGRAMS          ?= "<UNDEFINED_CEEXAMPLESPROGRAMS>"
+-# export codec combo (or server) locations
+-# Why do we need to do this?? - These will get picked up from CODEC_INSTALL_DIR?
+-# Sould only need this if we change from default server
 -
--do_configure() {
+-export CODEC_SERVER  = "${installdir}/ti-codecs-server/cs.x64P"
+-CPPFLAGS_append = " -DPlatform_${PLATFORM}"
 -
--    # No way to pass this via ENV?
--    sed -i  \
--        -e s:arm-none-linux-gnueabi-:${TARGET_PREFIX}:g \
--        ${S}/examples/xdcpaths.mak
+-# We are still using encode/decode combo for DM6446
+-export ENCODE_COMBO    = "${installdir}/ti-codecs-server/encodeCombo.x64P"
+-export DECODE_COMBO    = "${installdir}/ti-codecs-server/decodeCombo.x64P"
+-# Makefile also expects to be able to find the kernel headers from the envirionment
+-export LINUXKERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
 -
--    # compiler is not under ${TOOLCHAIN_PATH}/bin anymore...
--    sed -i  \
--        -e s:bin/${TARGET_PREFIX}gcc:${TARGET_PREFIX}gcc:g \
--        ${S}/examples/xdcpaths.mak
--
--    # ... and ar is not there too
--#    sed -i  \
--#        -e s:/arm-angstrom-linux-gnueabi/bin/ar:/arm-angstrom-linux-gnueabi-ar:g \
--#        ${S}/examples/ti/xdais/dm/examples/viddec1_copy/package.mak
--}
--
--do_prepsources() {
--
--        for i in codecs extensions servers apps ; do
--                cd ${S}/examples/ti/sdo/ce/examples/$i
--                make DEVICES="${CEEXAMPLESDEVICES}" \
--                     GPPOS="${CEEXAMPLESGPPOS}" \
--                     PROGRAMS="${CEEXAMPLESPROGRAMS}" \
--                     CE_INSTALL_DIR="${S}" \
--                     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
--                     BIOS_INSTALL_DIR="${BIOS_INSTALL_DIR}" \
--                     BIOSUTILS_INSTALL_DIR="${BIOSUTILS_INSTALL_DIR}" \
--		     DSPLINK_INSTALL_DIR="${LINK_INSTALL_DIR}" \
--                     XDAIS_INSTALL_DIR="${XDAIS_INSTALL_DIR}" \
--                     FC_INSTALL_DIR="${FC_INSTALL_DIR}" \
--                     CMEM_INSTALL_DIR="${CMEM_INSTALL_DIR}" \
--                     LPM_INSTALL_DIR="${LPM_INSTALL_DIR}" \
--                     EDMA3_LLD_INSTALL_DIR="${EDMA3_LLD_INSTALL_DIR}" \
--                     CGTOOLS_V5T="${TOOLCHAIN_PATH}" \
--                     CGTOOLS_C64P="${CODEGEN_INSTALL_DIR}" \
--                     CGTOOLS_C674="${CODEGEN_INSTALL_DIR}" \
--                     clean
--		     # '.make' target was used in CE < 2.26, but its no longer
--		     # supported in CE >= 2.26. Now we are moved to >=2.26 
--		     # hence commenting out the .make target.
--                     # .make clean
--        done
--}
--
--addtask prepsources after do_configure before do_compile
--
--do_compile () {
--
--        for i in codecs extensions servers apps ; do
--                cd ${S}/examples/ti/sdo/ce/examples/$i
--                make DEVICES="${CEEXAMPLESDEVICES}" \
--                     GPPOS="${CEEXAMPLESGPPOS}" \
--                     PROGRAMS="${CEEXAMPLESPROGRAMS}" \
--                     CE_INSTALL_DIR="${S}" \
--                     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
--                     BIOS_INSTALL_DIR="${BIOS_INSTALL_DIR}" \
--                     BIOSUTILS_INSTALL_DIR="${BIOSUTILS_INSTALL_DIR}" \
--		     DSPLINK_INSTALL_DIR="${LINK_INSTALL_DIR}" \
--                     XDAIS_INSTALL_DIR="${XDAIS_INSTALL_DIR}" \
--                     FC_INSTALL_DIR="${FC_INSTALL_DIR}" \
--                     CMEM_INSTALL_DIR="${CMEM_INSTALL_DIR}" \
--                     LPM_INSTALL_DIR="${LPM_INSTALL_DIR}" \
--                     EDMA3_LLD_INSTALL_DIR="${EDMA3_LLD_INSTALL_DIR}" \
--                     CGTOOLS_V5T="${TOOLCHAIN_PATH}" \
--                     CGTOOLS_C64P="${CODEGEN_INSTALL_DIR}" \
--                     CGTOOLS_C674="${CODEGEN_INSTALL_DIR}" \
--                     all
--        done
--}
--
--do_install() {
--
--	install -d ${D}/${installdir}/ti-codec-engine-examples
--	if [ -e ${S}/examples/apps/system_files/${CEEXAMPLESDEVICES}/loadmodules.sh ]; then
--		cp ${S}/examples/apps/system_files/${CEEXAMPLESDEVICES}/loadmodules.sh ${D}/${installdir}/ti-codec-engine-examples
--	elif [ -e ${WORKDIR}/loadmodules.sh ]; then
--		cp ${WORKDIR}/loadmodules.sh ${D}/${installdir}/ti-codec-engine-examples
+-do_configure_prepend() {
+-	# PSP kernel is based on older DSS. we need to replace linux/omapfb.h with mach/omapfb.h
+-	if ! [ -e ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ] ; then
+-		sed -i -e s:linux/omapfb:mach/omapfb:g ${S}/src/omapfb.h || true
 -	fi
 -
--	cd ${S}/examples/ti/sdo/ce/examples
--
--	# Install the apps, servers and test data, mirroring the source directory structure
--	#  - Put the servers inside the same folder as the executable
--	#  - TODO - Check nested dirs (e.g. dualcpu_separateconfig)
--
--        # Put all servers in separate tree.
--        for i in $(find . -name "*.${DSPSUFFIX}"); do
--                install -d ${D}/${installdir}/ti-codec-engine-examples/servers/`dirname ${i} | cut -f3 -d /`
--                install ${i} ${D}/${installdir}/ti-codec-engine-examples/servers/`dirname ${i} | cut -f3 -d /`
--        done
--
--	for i in $(find . -name "*.xv5T"); do
--		install -d ${D}/${installdir}/ti-codec-engine-examples/`dirname ${i} | cut -f3 -d /`
--		install ${i} ${D}/${installdir}/ti-codec-engine-examples/`dirname ${i} | cut -f3 -d /`
--	done
--
--	for i in $(find . -name "*.dat"); do
--		install -d ${D}/${installdir}/ti-codec-engine-examples/`dirname ${i} | cut -f3 -d /`
--		install ${i} ${D}/${installdir}/ti-codec-engine-examples/`dirname ${i} | cut -f3 -d /`
--        done
--
--	# For each directory, softlink to the app server, except special cases
--	cd ${D}/${installdir}/ti-codec-engine-examples
--	for i in $(find . -type d | grep -v servers); do
--		{
--		pwd
--		cd ${D}/${installdir}/ti-codec-engine-examples/$i
--		if [ $(basename $i) = "audio1_ires" ] ; then 
--			ln -s ../servers/audio1_ires/audio1_ires.${DSPSUFFIX}
--		elif [ $(basename $i) = "server_api_example" ] ; then
--			ln -s ../servers/server_api_example/audio_copy.${DSPSUFFIX}
--                elif [ $(basename $i) != "." ] ; then
--			ln -s ../servers/all_codecs/all.${DSPSUFFIX}
--		else
--			echo Skipping $i
--		fi
--		}
--	done
--
--        # Install/Stage the Source Tree
--        install -d ${D}${CE_INSTALL_DIR_RECIPE}
--        cp -pPrf ${S}/* ${D}${CE_INSTALL_DIR_RECIPE}
--}
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PACKAGES += "ti-codec-engine-examples"
--
--RDEPENDS_ti-codec-engine-examples                 = " ti-cmem-module"
--RDEPENDS_ti-codec-engine-examples_append_dm6446   = " ti-dsplink-module ti-lpm-module"
--RDEPENDS_ti-codec-engine-examples_append_dm6467   = " ti-dsplink-module"
--RDEPENDS_ti-codec-engine-examples_append_omap3    = " ti-dsplink-module ti-lpm-module"
--RDEPENDS_ti-codec-engine-examples_append_omapl137 = " ti-dsplink-module"
--RDEPENDS_ti-codec-engine-examples_append_omapl138 = " ti-dsplink-module"
--FILES_ti-codec-engine-examples = "${installdir}/ti-codec-engine-examples/*"
--INSANE_SKIP_ti-codec-engine-examples = "1"
--
--FILES_${PN}-dbg += "${installdir}/ti-codec-engine-examples/*/.debug"
-diff --git a/recipes-ti/codec-engine/ti-codec-engine/bypass-GCArmv5T-used-is-sealed.patch b/recipes-ti/codec-engine/ti-codec-engine/bypass-GCArmv5T-used-is-sealed.patch
-deleted file mode 100644
-index b93161f..0000000
---- a/recipes-ti/codec-engine/ti-codec-engine/bypass-GCArmv5T-used-is-sealed.patch
-+++ /dev/null
-@@ -1,22 +0,0 @@
--do_compile produces:
--
--js: "/prj/oe/bb/build/tmp-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-codec-engine-2_26_02_11-r114a/codec_engine_2_26_02_11/packages/ti/sdo/ce/osal/linux/package.xs", line 50: XDC runtime error: gnu.targets.arm.GCArmv5T: '$used' is sealed
--
--Fix per suggestion in http://e2e.ti.com/support/dsp/omap_applications_processors/f/447/t/110920.aspx
--
----- ./packages/ti/sdo/ce/osal/linux/package.xs.orig	2010-12-01 23:24:48.000000000 -0600
--+++ ./packages/ti/sdo/ce/osal/linux/package.xs	2011-12-27 14:59:39.382423341 -0600
--@@ -47,10 +47,10 @@
--     }
-- 
--     /* Conditionally load CMEM here */
---    var targetMod = xdc.useModule(prog.build.target.$name);
---    if ((":"+targetMod.getISAChain().join(":")+":").match(/:v5T:/i)) {
--+    //var targetMod = xdc.useModule(prog.build.target.$name);
--+    //if ((":"+targetMod.getISAChain().join(":")+":").match(/:v5T:/i)) {
--         xdc.useModule('ti.sdo.linuxutils.cmem.CMEM');
---    }
--+    //}
-- 
--     var osalGlobal = xdc.useModule('ti.sdo.ce.osal.Global');
-- 
-diff --git a/recipes-ti/codec-engine/ti-codec-engine/ce-2-26-00-08-Examples-Add-LPM_INSTALL_DIR-packages.patch b/recipes-ti/codec-engine/ti-codec-engine/ce-2-26-00-08-Examples-Add-LPM_INSTALL_DIR-packages.patch
-deleted file mode 100644
-index 1eb8108..0000000
---- a/recipes-ti/codec-engine/ti-codec-engine/ce-2-26-00-08-Examples-Add-LPM_INSTALL_DIR-packages.patch
-+++ /dev/null
-@@ -1,60 +0,0 @@
--diff --git a/examples/ti/sdo/ce/examples/apps/audio1_ires/rtcfg_local_evm3530_linux/makefile b/examples/ti/sdo/ce/examples/apps/audio1_ires/rtcfg_local_evm3530_linux/makefile
--index 2bbfb72..2a00d0d 100644
----- a/examples/ti/sdo/ce/examples/apps/audio1_ires/rtcfg_local_evm3530_linux/makefile
--+++ b/examples/ti/sdo/ce/examples/apps/audio1_ires/rtcfg_local_evm3530_linux/makefile
--@@ -80,6 +80,7 @@ REPO_PATH = \
-- 	$(FC_INSTALL_DIR)/packages \
-- 	$(FC_INSTALL_DIR)/examples \
-- 	$(CMEM_INSTALL_DIR)/packages \
--+	$(LPM_INSTALL_DIR)/packages \
-- 	$(BIOSUTILS_INSTALL_DIR)/packages \
-- 	$(EXAMPLES_ROOTDIR)
-- 
--diff --git a/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_local_evm3530_linux/makefile b/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_local_evm3530_linux/makefile
--index f2b187a..827f6bc 100644
----- a/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_local_evm3530_linux/makefile
--+++ b/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_local_evm3530_linux/makefile
--@@ -74,6 +74,7 @@ REPO_PATH = \
-- 	$(XDAIS_INSTALL_DIR)/packages \
-- 	$(FC_INSTALL_DIR)/packages \
-- 	$(CMEM_INSTALL_DIR)/packages \
--+	$(LPM_INSTALL_DIR)/packages \
-- 	$(BIOSUTILS_INSTALL_DIR)/packages \
-- 	$(EXAMPLES_ROOTDIR)
-- 
--diff --git a/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_remote_evm3530_linux/makefile b/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_remote_evm3530_linux/makefile
--index a4fe4dc..a23f991 100644
----- a/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_remote_evm3530_linux/makefile
--+++ b/examples/ti/sdo/ce/examples/apps/speech1_copy/rtcfg_remote_evm3530_linux/makefile
--@@ -76,6 +76,7 @@ REPO_PATH = \
-- 	$(XDAIS_INSTALL_DIR)/packages \
-- 	$(FC_INSTALL_DIR)/packages \
-- 	$(CMEM_INSTALL_DIR)/packages \
--+	$(LPM_INSTALL_DIR)/packages \
-- 	$(BIOSUTILS_INSTALL_DIR)/packages \
-- 	$(EXAMPLES_ROOTDIR)
-- 
--diff --git a/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_local_evm3530_linux/makefile b/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_local_evm3530_linux/makefile
--index 8baa9dd..3c01c04 100644
----- a/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_local_evm3530_linux/makefile
--+++ b/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_local_evm3530_linux/makefile
--@@ -74,6 +74,7 @@ REPO_PATH = \
-- 	$(XDAIS_INSTALL_DIR)/packages \
-- 	$(FC_INSTALL_DIR)/packages \
-- 	$(CMEM_INSTALL_DIR)/packages \
--+	$(LPM_INSTALL_DIR)/packages \
-- 	$(BIOSUTILS_INSTALL_DIR)/packages \
-- 	$(EXAMPLES_ROOTDIR)
-- 
--diff --git a/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_remote_evm3530_linux/makefile b/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_remote_evm3530_linux/makefile
--index 3319c06..09a6357 100644
----- a/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_remote_evm3530_linux/makefile
--+++ b/examples/ti/sdo/ce/examples/apps/video1_copy/rtcfg_remote_evm3530_linux/makefile
--@@ -75,6 +75,7 @@ REPO_PATH = \
-- 	$(XDAIS_INSTALL_DIR)/packages \
-- 	$(FC_INSTALL_DIR)/packages \
-- 	$(CMEM_INSTALL_DIR)/packages \
--+	$(LPM_INSTALL_DIR)/packages \
-- 	$(BIOSUTILS_INSTALL_DIR)/packages \
-- 	$(EXAMPLES_ROOTDIR)
-- 
-diff --git a/recipes-ti/codec-engine/ti-codec-engine/dm365-evm/loadmodules.sh b/recipes-ti/codec-engine/ti-codec-engine/dm365-evm/loadmodules.sh
-deleted file mode 100644
-index 60a40f0..0000000
---- a/recipes-ti/codec-engine/ti-codec-engine/dm365-evm/loadmodules.sh
-+++ /dev/null
-@@ -1,49 +0,0 @@
--#
--#  Copyright (c) 2008, Texas Instruments Incorporated
--#  All rights reserved.
--# 
--#  Redistribution and use in source and binary forms, with or without
--#  modification, are permitted provided that the following conditions
--#  are met:
--# 
--#  *  Redistributions of source code must retain the above copyright
--#     notice, this list of conditions and the following disclaimer.
--# 
--#  *  Redistributions in binary form must reproduce the above copyright
--#     notice, this list of conditions and the following disclaimer in the
--#     documentation and/or other materials provided with the distribution.
--# 
--#  *  Neither the name of Texas Instruments Incorporated nor the names of
--#     its contributors may be used to endorse or promote products derived
--#     from this software without specific prior written permission.
--# 
--#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
--#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
--#  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
--#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
--#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
--#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
--#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
--#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
--#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
--#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
--#  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--#
--
--# insert cmemk, tell it to occupy physical 120MB-128MB, create 
--# 20 4K buffers, 10 128K buffers  and two 1MB buffers
--CMEM_MODPARAMS="phys_start=0x87800000 phys_end=0x88000000 pools=20x4096,10x131072,2x1048576"
--
--if [ -e cmemk.ko ]
--    then
--        insmod cmemk.ko $CMEM_MODPARAMS
--    else
--        modprobe cmemk $CMEM_MODPARAMS
--fi
--
--# Allow cmem driver to be used by all users
--if [ -e /dev/cmem ]
--    then
--        chmod 666 /dev/cmem
--fi
--
-diff --git a/recipes-ti/codec-engine/ti-codec-engine/loadmodules-ti-codec-engine-apps.sh b/recipes-ti/codec-engine/ti-codec-engine/loadmodules-ti-codec-engine-apps.sh
-deleted file mode 100644
-index 9f9233d..0000000
---- a/recipes-ti/codec-engine/ti-codec-engine/loadmodules-ti-codec-engine-apps.sh
-+++ /dev/null
-@@ -1,37 +0,0 @@
--#
--# Default Memory Map - for OMAP3530 CE 2.21 examples
--#
--# Start Addr    Size    Description
--# -------------------------------------------
--# 0x80000000    80 MB   Linux
--# 0x85000000    08 MB   CMEM
--# 0x86000000    24 MB   DDRALGHEAP
--# 0x87800000     6 MB   DDR2 (BIOS, Codecs, Applications)
--# 0x87E00000     1 MB   DSPLINK (MEM)
--# 0x87F00000     4 KB   DSPLINK (RESET)
--# 0x87F01000  1020 KB   unused
--
--# sanity check to verify that we're using the right mem=xxM (80M in this case)
--awk '/MemTotal:/ {
--    mem=$2
--
--    if (mem > 80 * 1024)
--        print "Warning! You need to use mem=80M or less on the kernel cmdline"
--
--    printf "You have %dkB total memory for Linux\n", mem
--}' /proc/meminfo
--
--# Select cmemk parameters for best fit, i.e. starting at 0x85000000
--modprobe cmemk phys_start=0x85000000 phys_end=0x86000000 pools=20x4096,8x131072,5x1048576,1x1429440,1x256000,1x3600000,5x829440
--
--# insert DSP/BIOS Link driver
--#
--modprobe dsplinkk
--
--# make /dev/dsplink
--#rm -f /dev/dsplink
--#mknod /dev/dsplink c `awk "\\$2==\"dsplink\" {print \\$1}" /proc/devices` 0
--
--# insert Local Power Manager driver
--#
--modprobe lpm_omap3530
-diff --git a/recipes-ti/codec-engine/ti-codec-engine/unloadmodules-ti-codec-engine-apps.sh b/recipes-ti/codec-engine/ti-codec-engine/unloadmodules-ti-codec-engine-apps.sh
-deleted file mode 100644
-index f990d99..0000000
---- a/recipes-ti/codec-engine/ti-codec-engine/unloadmodules-ti-codec-engine-apps.sh
-+++ /dev/null
-@@ -1,12 +0,0 @@
--# Unload modules - CODEC ENGINE - OMAP3530
--
--# remove lpm module
--rmmod lpm_omap3530
--
--# remove DSP/BIOS Link driver
--rmmod dsplinkk
--#rm -f /dev/dsplink
--
--# remove cmem module
--rmmod cmemk
--
-diff --git a/recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb b/recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb
-deleted file mode 100644
-index 4a27b1d..0000000
---- a/recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require ti-codec-engine.inc
--
--LIC_FILES_CHKSUM = "file://codec_engine_${PV}_manifest.html;md5=912535f1b02ecf329a3979bf313f91e0"
--PV = "2_26_02_11"
--PR_append = "b"
--
--SRC_URI += "file://bypass-GCArmv5T-used-is-sealed.patch"
--
--SRC_URI[cetarball.md5sum] = "4f755f77119e4da19ab5cc7ae7ccfdb4"
--SRC_URI[cetarball.sha256sum] = "17fa053719265e0901fe3c3f90c9204957c6d0f5351d6b3ba4900df58cb7300f"
--
--INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530/disable-c6accel.diff b/recipes-ti/codec-engine/ti-codecs-omap3530/disable-c6accel.diff
-deleted file mode 100644
-index 6e2ed7e..0000000
---- a/recipes-ti/codec-engine/ti-codecs-omap3530/disable-c6accel.diff
-+++ /dev/null
-@@ -1,47 +0,0 @@
--diff -ur a/packages/ti/sdo/server/cs/codec.cfg b/packages/ti/sdo/server/cs/codec.cfg
----- a/packages/ti/sdo/server/cs/codec.cfg	2011-08-07 20:08:57.000000000 +0200
--+++ b/packages/ti/sdo/server/cs/codec.cfg	2011-08-07 20:08:10.000000000 +0200
--@@ -7,7 +7,7 @@
--  *  which we'll use to initialize config params and add the codecs to
--  *  the Server.algs array.
--  */
---    var C6ACCEL = xdc.useModule('ti.c6accel.ce.C6ACCEL');
--+/*    var C6ACCEL = xdc.useModule('ti.c6accel.ce.C6ACCEL');
-- 
--         C6ACCEL.serverFxns = "UNIVERSAL_SKEL";
--         C6ACCEL.stubFxns = "UNIVERSAL_STUBS";
--@@ -17,7 +17,7 @@
--         C6ACCEL.alg.codeSection = codeSection;
--         C6ACCEL.alg.udataSection = udataSection;
--         C6ACCEL.alg.dataSection = dataSection;
---
--+*/
--     var AACHEDEC = xdc.useModule('ti.sdo.codecs.aachedec.ce.AACHEDEC');
-- 
--         AACHEDEC.serverFxns = "AUDDEC1_SKEL";
--@@ -151,11 +151,11 @@
--  * algorithms (e.g. stack sizes, priorities, etc.).
--  */
-- Server.algs = [ 
---    {name: "c6accel", mod: C6ACCEL , threadAttrs: {
--+/*    {name: "c6accel", mod: C6ACCEL , threadAttrs: {
--         stackMemId: 0, priority: Server.MINPRI + 3},
--         groupId : 2,
--     },
---
--+*/
--     {name: "aachedec", mod: AACHEDEC , threadAttrs: {
--         stackMemId: 0, priority: Server.MINPRI + 3},
--         groupId : 2,
--diff -ur a/packages/ti/sdo/server/cs/package.xs b/packages/ti/sdo/server/cs/package.xs
----- a/packages/ti/sdo/server/cs/package.xs	2011-08-07 20:09:31.000000000 +0200
--+++ b/packages/ti/sdo/server/cs/package.xs	2011-08-07 20:08:21.000000000 +0200
--@@ -7,7 +7,7 @@
--     // Each codec is validated with the following call:
--     //    validate_one_codec(<package name>, <module name>);
-- 
---         validate_one_codec( "ti.c6accel", "C6ACCEL" );
--+//         validate_one_codec( "ti.c6accel", "C6ACCEL" );
--          validate_one_codec( "ti.sdo.codecs.aachedec", "AACHEDEC" );
--          validate_one_codec( "ti.sdo.codecs.deinterlacer", "I2P" );
--          validate_one_codec( "ti.sdo.codecs.g711dec", "G711DEC" );
-diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530/mp3dec_cs1omap3530.patch b/recipes-ti/codec-engine/ti-codecs-omap3530/mp3dec_cs1omap3530.patch
-deleted file mode 100644
-index 4ed9267..0000000
---- a/recipes-ti/codec-engine/ti-codecs-omap3530/mp3dec_cs1omap3530.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--diff -uNr -x .xdcenv.mak -x mp3dec cs1omap3530_1_00_01/packages/ti/sdo/server/cs/codec.cfg cs1omap3530_1_00_01_patches/packages/ti/sdo/server/cs/codec.cfg
----- cs1omap3530_1_00_01/packages/ti/sdo/server/cs/codec.cfg	2009-10-26 14:19:21.000000000 -0500
--+++ cs1omap3530_1_00_01_patches/packages/ti/sdo/server/cs/codec.cfg	2009-10-26 14:36:03.000000000 -0500
--@@ -92,6 +92,14 @@
--                 MPEG4ENC.alg.udataSection = "DDR2";
--                 MPEG4ENC.alg.dataSection = "DDR2";
-- 
--+    var MP3DEC = xdc.useModule('ti.sdo.codecs.mp3dec.ce.MP3DEC');
--+
--+     // Module Config
--+                MP3DEC.alg.watermark = false;
--+                MP3DEC.alg.codeSection = "DDR2";
--+                MP3DEC.alg.udataSection = "DDR2";
--+                MP3DEC.alg.dataSection = "DDR2";
--+
-- /*
--  * The array of algorithms this server can serve up.  This array also
--  * configures details about the threads which will be created to run the
--@@ -103,6 +111,11 @@
--         groupId : 1,
--     },
-- 
--+    {name: "mp3dec", mod: MP3DEC , threadAttrs: {
--+        stackMemId: 0, priority: Server.MINPRI + 3},
--+        groupId : 1,
--+    },
--+
--     {name: "g711dec", mod: G711DEC , threadAttrs: {
--         stackMemId: 0, priority: Server.MINPRI + 3},
--         groupId : 1,
--diff -uNr -x .xdcenv.mak -x mp3dec cs1omap3530_1_00_01/packages/ti/sdo/server/cs/package.xs cs1omap3530_1_00_01_patches/packages/ti/sdo/server/cs/package.xs
----- cs1omap3530_1_00_01/packages/ti/sdo/server/cs/package.xs	2009-10-26 14:19:20.000000000 -0500
--+++ cs1omap3530_1_00_01_patches/packages/ti/sdo/server/cs/package.xs	2009-10-26 14:53:40.000000000 -0500
--@@ -17,6 +17,7 @@
--          validate_one_codec( "ti.sdo.codecs.mpeg2dec", "MPEG2DEC" );
--          validate_one_codec( "ti.sdo.codecs.mpeg4dec", "MPEG4DEC" );
--          validate_one_codec( "ti.sdo.codecs.mpeg4enc", "MPEG4ENC" );
--+         validate_one_codec( "ti.sdo.codecs.mp3dec", "MP3DEC" );
-- }
-- 
-- function validate_one_codec( packageName, moduleName ) {
-diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-deleted file mode 100644
-index 5c87b4c..0000000
---- a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-+++ /dev/null
-@@ -1,208 +0,0 @@
--DESCRIPTION = "TI Codecs and Server Combo for OMAP3530"
--SECTION = "multimedia"
--LICENSE = "TI"
--
--require recipes-ti/includes/ti-paths.inc
--require recipes-ti/includes/ti-staging.inc
--
--PR="${MACHINE_KERNEL_PR}"
--PR_append = "a"
--
--PV="4_00_00_00"
--
--LIC_FILES_CHKSUM = "file://packages/ti/sdo/server/cs/docs/cs1omap3530_software_manifest.pdf;md5=84444ba7c7abe117c30f9c960d1930ec"
--
--CODEC_SUITE_NAME="${WORKDIR}/${PN}_${PV}"
--
--SRCREV = "8393c892b09e0ac42b19ff1531e232478c3b1a6c"
--
--require recipes-ti/includes/ti-eula-unpack.inc
--
--SRC_URI="http://software-dl.ti.com/dsps/dsps_public_sw/codecs/OMAP35xx//OMAP35xx_latest/omap3530_h264enc_2_01_013_production.bin;name=h264enc \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/OMAP35xx//OMAP35xx_latest/omap3530_h264dec_2_01_007_production.bin;name=h264dec \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/OMAP35xx//OMAP35xx_latest/omap3530_jpegenc_02_01_01_00_production.bin;name=jpegenc \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/C64XPlus_Video//C64XPlus_Video_latest/c64xplus_jpegdec_02_00_01_01_production.bin;name=jpegdec \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/C64XPlus_Video//C64XPlus_Video_latest/c64xplus_mpeg2dec_02_00_02_00_production.bin;name=mpeg2dec \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/OMAP35xx//OMAP35xx_latest/omap3530_mpeg4enc_02_04_00_00_production.bin;name=mpeg4enc \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/C64XPlus_Video//C64XPlus_Video_latest/c64xplus_mpeg4dec_02_01_00_00_production.bin;name=mpeg4dec \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/C64XPlus_Audio//C64XPlus_Audio_latest/c64xplus_aachedec_01_30_03_00_production.bin;name=aachedec \
--    http://software-dl.ti.com/dsps/dsps_public_sw/codecs/C64XPlus_Speech//C64XPlus_Speech_latest/c64xplus_g711_1_12_00_000_production.bin;name=g711 \
--    http://software-dl.ti.com/dsps/dsps_public_sw/sdo_tii/OMAP35xx_DM37xx_C64xPLUS_Algorithms/01_00_00_07//exports/c64xplus_deinterlacer_01_00_00_07_production.bin;name=i2p \
--    git://arago-project.org/git/projects/codec-servers.git;protocol=git \
--    \
--    file://disable-c6accel.diff \
--"
--
--SRC_URI[h264enc.md5sum] = "4a7a4698b1db360fe103aae76127a4ec"
--SRC_URI[h264enc.sha256sum] = "8fd970d83004bb099f51420b0eecd660b4ba9dccc87b2759d0b5a0be46f8f1a0"
--
--SRC_URI[h264dec.md5sum] = "81980df2d9dbedc5b64789c4e5575819"
--SRC_URI[h264dec.sha256sum] = "19d65e71ba0342670cb217e0fa6617263ff68a513e8444a8dfd5f34bd641b24f"
--
--SRC_URI[jpegenc.md5sum] = "c2e8ad88e90c04d2de7b199517019ac8"
--SRC_URI[jpegenc.sha256sum] = "6525e067cb5dd00cfc0b38045c44dcbed05866f8ad20188ceac630812502d473"
--
--SRC_URI[jpegdec.md5sum] = "cf2886c3406ab41409a586e5d550918d"
--SRC_URI[jpegdec.sha256sum] = "6b0c9f1b8f023070c6a59af690f015f84f2c7f3143235f788ddd1a4a7b229089"
--
--SRC_URI[mpeg2dec.md5sum] = "da3d0561f3073352be43dce96ce1ea62"
--SRC_URI[mpeg2dec.sha256sum] = "06cdb31242b8649bdd46bc07b9276de0ccd5f4e1c137d3cb79e0866c1ed04264"
--
--SRC_URI[mpeg4enc.md5sum] = "07c36e5d03368e1326df75a1f0c4934d"
--SRC_URI[mpeg4enc.sha256sum] = "a9566c8978f7230936053de9b1f3bfe8820ae555262ceba87243abdf60e5193f"
--
--SRC_URI[mpeg4dec.md5sum] = "4a27cda2d5a859e6322680a4855b6b88"
--SRC_URI[mpeg4dec.sha256sum] = "ca35db6841586fc2c22dd9c07a7f5b8557f480fa907e8a3471b660d4ada76e40"
--
--SRC_URI[aachedec.md5sum] = "649f2e79b4950719295cfecbff2ea82b"
--SRC_URI[aachedec.sha256sum] = "34d19e40d624ccdc1b371f9a5d6594b4793bdf3b7223ac65912d15d75320e020"
--
--SRC_URI[g711.md5sum] = "fd8e9f939cc505dc5761705ed17a726c"
--SRC_URI[g711.sha256sum] = "c87021e8df2a3f494f47e5bdce8a5fad04d667aa1b792fd9b3ecff634867b48d"
--
--SRC_URI[i2p.md5sum] = "f67c04eec9ee49c7a686eecf5d54be33"
--SRC_URI[i2p.sha256sum] = "3fbf8801f3ce2aabb6d31eb18e1e24e41ca861696b3140536f1d66adc76f0323"
--
--
--TI_BIN_UNPK_CMDS = "Y:workdir"
--
--S = "${CODEC_SUITE_NAME}"
--
--DEPENDS = "ti-cgt6x ti-xdctools ti-dspbios ti-codec-engine ti-linuxutils"
--
--#generic codec
--DSPSUFFIX_omap3530 = "x64P"
--
--python do_unpack () {
--    bb.build.exec_func('base_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "omap3530_h264enc_2_01_013_production.bin", d)
--    bb.data.setVar("TARFILE", "omap3530_h264enc_2_01_013_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "omap3530_h264dec_2_01_007_production.bin", d)
--    bb.data.setVar("TARFILE", "omap3530_h264dec_2_01_007_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "omap3530_jpegenc_02_01_01_00_production.bin", d)
--    bb.data.setVar("TARFILE", "omap3530_jpegenc_02_01_01_00_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "c64xplus_jpegdec_02_00_01_01_production.bin", d)
--    bb.data.setVar("TARFILE", "c64xplus_jpegdec_02_00_01_01_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "c64xplus_mpeg2dec_02_00_02_00_production.bin", d)
--    bb.data.setVar("TARFILE", "c64xplus_mpeg2dec_02_00_02_00_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "omap3530_mpeg4enc_02_04_00_00_production.bin", d)
--    bb.data.setVar("TARFILE", "omap3530_mpeg4enc_02_04_00_00_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)   
--
--    bb.data.setVar("BINFILE", "c64xplus_mpeg4dec_02_01_00_00_production.bin", d)
--    bb.data.setVar("TARFILE", "c64xplus_mpeg4dec_02_01_00_00_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "c64xplus_aachedec_01_30_03_00_production.bin", d)
--    bb.data.setVar("TARFILE", "dm6446_aachedec_01_30_03_00_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
--    bb.data.setVar("TARFILE", "dm6446_g711enc_1_12_00_000_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
--    bb.data.setVar("TARFILE", "dm6446_g711dec_1_12_00_000_production.tar", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--    bb.data.setVar("BINFILE", "c64xplus_deinterlacer_01_00_00_07_production.bin", d)
--    bb.data.setVar("TARFILE", "c64xplus_deinterlacer_01_00_00_07/c64xplus_deinterlacer_01_00_00_07_production.tar", d)
--    bb.data.setVar("TI_BIN_UNPK_CMDS", "y: :q: ", d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--
--}
--
--addtask prepsources after do_unpack before do_patch
--
--do_prepsources () {
--
--    mkdir -p ${CODEC_SUITE_NAME}/packages/ti/sdo/server/cs
--    cp ${WORKDIR}/git/omap3530/cs1omap3530/rel-files/*  ${CODEC_SUITE_NAME}/  
--    cp ${WORKDIR}/git/omap3530/cs1omap3530/source/*  ${CODEC_SUITE_NAME}/packages/ti/sdo/server/cs
--    cp -a "${WORKDIR}/git/omap3530/cs1omap3530/docs"  ${CODEC_SUITE_NAME}/packages/ti/sdo/server/cs 
--
--    mkdir -p ${CODEC_SUITE_NAME}/packages/ti/sdo/codecs
--    cp -a "${WORKDIR}/omap3530_h264enc_2_01_013_production/packages/ti/sdo/codecs/h264enc" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/omap3530_h264dec_2_01_007_production/packages/ti/sdo/codecs/h264dec" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/omap3530_jpegenc_02_01_01_00_production/packages/ti/sdo/codecs/jpegenc" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/c64xplus_jpegdec_02_00_01_01_production/packages/ti/sdo/codecs/jpegdec" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/c64xplus_mpeg2dec_02_00_02_00_production/packages/ti/sdo/codecs/mpeg2dec" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/omap3530_mpeg4enc_02_04_00_00_production/packages/ti/sdo/codecs/mpeg4enc" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/c64xplus_mpeg4dec_02_01_00_00_production/packages/ti/sdo/codecs/mpeg4dec" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    chmod -R +w "${WORKDIR}/dm6446_aachedec_01_30_03_00_production/packages/ti/sdo/codecs/aachedec/docs"
--    cp -a "${WORKDIR}/dm6446_aachedec_01_30_03_00_production/packages/ti/sdo/codecs/aachedec" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/dm6446_g711enc_1_12_00_000_production/packages/ti/sdo/codecs/g711enc" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/dm6446_g711dec_1_12_00_000_production/packages/ti/sdo/codecs/g711dec" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    cp -a "${WORKDIR}/c64xplus_deinterlacer_01_00_00_07_production/packages/ti/sdo/codecs/deinterlacer" "${CODEC_SUITE_NAME}/packages/ti/sdo/codecs"
--    chmod 755 -R ${CODEC_SUITE_NAME}
+-	# Angstrom 2008 breaks with -Wl,-T, while angstrom 2010 needs it
+-	if [ $(${TARGET_PREFIX}gcc -dumpversion | awk -F. '{print $2}') -gt 3 ] ; then
+-		# Fix up linkerscripts, recent toolchains need -T to prepend the default script to the custom one 
+-		for makefile in $(find ${S} -name "Makefile.am") ; do
+-			sed -i -e 's:-Wl,$(XDC_CONFIG_BASENAME)/linker.cmd:-Wl,-T,$(XDC_CONFIG_BASENAME)/linker.cmd:g' $makefile
+-		done
+-	fi
 -}
 -
 -do_compile() {
+-	# Recent kernel headers warn against inclusion from userspace
+-	for makefile in $(find ${S} -name "Makefile") ; do
+-		sed -i -e s:-Werror::g $makefile
+-	done
 -
--    cd "${S}"
--
--    make \
--             CE_INSTALL_DIR=${CE_INSTALL_DIR} \
--             FC_INSTALL_DIR=${FC_INSTALL_DIR} \
--             LINK_INSTALL_DIR=${LINK_INSTALL_DIR} \
--             CMEM_INSTALL_DIR=${CMEM_INSTALL_DIR} \
--             LPM_INSTALL_DIR=${LPM_INSTALL_DIR} \
--             BIOS_INSTALL_DIR=${BIOS_INSTALL_DIR} \
--             CODEGEN_INSTALL_DIR=${CODEGEN_INSTALL_DIR} \
--             XDC_INSTALL_DIR=${XDC_INSTALL_DIR} \
--             CODEC_INSTALL_DIR="${S}" \
--             XDCARGS="prod" \
--             C6ACCEL_INSTALL_DIR=${C6ACCEL_INSTALL_DIR} \
--             clean
--
--    make \
--             CE_INSTALL_DIR=${CE_INSTALL_DIR} \
--             FC_INSTALL_DIR=${FC_INSTALL_DIR} \
--             LINK_INSTALL_DIR=${LINK_INSTALL_DIR} \
--             CMEM_INSTALL_DIR=${CMEM_INSTALL_DIR} \
--             LPM_INSTALL_DIR=${LPM_INSTALL_DIR} \
--             BIOS_INSTALL_DIR=${BIOS_INSTALL_DIR} \
--             CODEGEN_INSTALL_DIR=${CODEGEN_INSTALL_DIR} \
--             XDC_INSTALL_DIR=${XDC_INSTALL_DIR} \
--             CODEC_INSTALL_DIR="${S}" \
--             XDCARGS="prod" \
--             C6ACCEL_INSTALL_DIR=${C6ACCEL_INSTALL_DIR} \
--             all
+-    oe_runmake
 -}
 -
--do_install() {
+-do_install_prepend () {
 -
--    install -d ${D}/${installdir}/ti-codecs-server
--    cd ${S}
+-    install -d ${D}/${installdir}/gst/${PLATFORM}
 -
--    # Install the DSP Server Binary 
--    for file in `find . -name *.${DSPSUFFIX}`; do
--        cp ${file} ${D}/${installdir}/ti-codecs-server
--    done
+-    # copy gstreamer demo scripts
+-    cp -R ${WORKDIR}/gstreamer_ti/gstreamer_demo/shared ${D}/${installdir}/gst
 -
--    # Install docs (codec qualiTI test reports, server config datasheet, etc)
--    for file in `find . -name *.html`; do
--        cp ${file} ${D}/${installdir}/ti-codecs-server
--    done
+-    # If we have loadmodules.sh in WORKDIR then give preference to this over
+-    # the default gst-ti loadmdules.sh
+-    if [ -f ${WORKDIR}/loadmodules.sh ]; then
+-       cp ${WORKDIR}/loadmodules.sh ${D}/${installdir}/gst/${PLATFORM}
+-    else
+-       cp -R ${WORKDIR}/gstreamer_ti/gstreamer_demo/${PLATFORM} ${D}/${installdir}/gst
+-    fi   
 -
--    install -d ${D}${CODEC_INSTALL_DIR_RECIPE}
--    cp -pPrf ${CODEC_SUITE_NAME}/* ${D}${CODEC_INSTALL_DIR_RECIPE}
+-    # delete .svn files
+-    find ${D}/${installdir}/gst -name .svn -type d | xargs rm -rf
+-    chmod 0755 ${D}/${installdir}/gst -R
+-
+-    install -d ${D}${sysconfdir}/init.d/
+-    install -m 0755  ${WORKDIR}/gstreamer-ti-rc.sh ${D}${sysconfdir}/init.d/gstti-init
+-    sed -i -e 's|<platform>|${PLATFORM}|g' ${D}${sysconfdir}/init.d/gstti-init
+-
+-	install -d ${D}${base_libdir}/systemd/system
+-	install -m 0644 ${WORKDIR}/gstti-init.service ${D}${base_libdir}/systemd/system/
+-	sed -i -e 's|<platform>|${PLATFORM}|g' -e 's|MEMARGS|${MEMARGS}|' ${D}${base_libdir}/systemd/system/gstti-init.service
+-}
+-
+-RRECOMMENDS_${PN}_append_dm6446    += "ti-codecs-dm6446-server   ti-cmem-module ti-dsplink-module"
+-RRECOMMENDS_${PN}_append_dm6467    += "ti-codecs-dm6467          ti-cmem-module ti-dsplink-module"
+-RRECOMMENDS_${PN}_append_omap3     += "ti-codecs-omap3530-server ti-cmem-module ti-dsplink-module ti-lpm-module ti-sdma-module"
+-RRECOMMENDS_${PN}_append_dm355     += "ti-codecs-dm355           ti-cmem-module ti-dm355mm-module"
+-RRECOMMENDS_${PN}_append_dm365     += "ti-codecs-dm365           ti-cmem-module ti-dm365mm-module ti-edma-module ti-irq-module"
+-RRECOMMENDS_${PN}_append_omapl137  += "ti-codecs-omapl137-server ti-cmem-module ti-dsplink-module"
+-RRECOMMENDS_${PN}_append_omapl138  += "ti-codecs-omapl138-server ti-cmem-module ti-dsplink-module"
+-
+-FILES_${PN}     += "${libdir}/gstreamer-0.10/*.so ${sysconfdir} ${installdir} ${base_libdir}/systemd"
+-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la"
+-FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+-
+-pkg_postinst_${PN} () {
+-if test "x$D" != "x"; then
+-	echo "Can't run gstreamer-ti postinst offline"
+-    exit 1
+-fi
+-	if [ -e ${base_bindir}/systemctl ] ; then
+-		systemctl enable gstti-init.service
+-	fi
+-
+-	if [ -d ${installdir}/ti-codecs-server/ ]; then
+-        ln -sf ${installdir}/ti-codecs-server/* ${installdir}/gst/${PLATFORM}/
+-	fi
 -}
 -
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--PACKAGES += "ti-codecs-omap3530-server"
--FILES_ti-codecs-omap3530-server = "${installdir}/ti-codecs-server/*"
+-INITSCRIPT_NAME = "gstti-init"
+-INITSCRIPT_PARAMS = "start 30 5 2 . stop 40 0 1 6 ."
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0001-add-omapdmaifbsink.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0001-add-omapdmaifbsink.patch
+deleted file mode 100644
+index bcf0d90..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0001-add-omapdmaifbsink.patch
++++ /dev/null
+@@ -1,1336 +0,0 @@
+-diff -uNr ticodecplugin/configure.ac ticodecplugin.new/configure.ac
+---- ticodecplugin/configure.ac	2010-08-24 15:08:58.609410984 -0500
+-+++ ticodecplugin.new/configure.ac	2010-09-03 13:54:11.909410298 -0500
+-@@ -25,6 +25,7 @@
+- AC_SUBST(ACLOCAL_AMFLAGS, "-I m4")
+- 
+- AM_CONFIG_HEADER(config.h)
+-+AM_PROG_AS
+- 
+- dnl check for tools
+- AC_PROG_CC
+-diff -uNr ticodecplugin/src/gstticodecplugin.c ticodecplugin.new/src/gstticodecplugin.c
+---- ticodecplugin/src/gstticodecplugin.c	2010-08-24 15:08:58.609410984 -0500
+-+++ ticodecplugin.new/src/gstticodecplugin.c	2010-09-03 13:54:11.929409696 -0500
+-@@ -42,6 +42,7 @@
+- #include "gsttiaudenc1.h"
+- #include "gsttividresize.h"
+- #include "gsttidmaiperf.h"
+-+#include "omapfb.h"
+- 
+- #ifdef HAVE_C6ACCEL
+-     #include "gsttic6xcolorspace.h"
+-@@ -134,6 +135,13 @@
+-         return FALSE;
+- #endif
+- 
+-+    env_value = getenv("GST_omapdmaifbsink_DISABLE");
+-+
+-+    if ((!env_value || strcmp(env_value,"1")) && !gst_element_register(
+-+        TICodecPlugin, "omapdmaifbsink", GST_RANK_PRIMARY,
+-+        GST_OMAPFB_SINK_TYPE))
+-+        return FALSE;
+-+
+-     return TRUE;
+- }
+- 
+-diff -uNr ticodecplugin/src/Makefile.am ticodecplugin.new/src/Makefile.am
+---- ticodecplugin/src/Makefile.am	2010-08-24 22:01:30.989165985 -0500
+-+++ ticodecplugin.new/src/Makefile.am	2010-09-03 13:53:41.037663172 -0500
+-@@ -12,16 +12,16 @@
+- 
+- 
+- # sources used to compile this plug-in
+--libgstticodecplugin_la_SOURCES = gstticodecplugin.c gsttiauddec1.c gsttividdec2.c gsttiimgenc1.c gsttiimgdec1.c gsttidmaibuffertransport.c gsttidmaibuftab.c gstticircbuffer.c gsttidmaivideosink.c gstticodecs.c gstticodecs_platform.c  gsttiquicktime_aac.c gsttiquicktime_h264.c gsttividenc1.c gsttiaudenc1.c gstticommonutils.c gsttividresize.c gsttidmaiperf.c gsttiquicktime_mpeg4.c $(C6ACCEL_SRC)
+-+libgstticodecplugin_la_SOURCES = gstticodecplugin.c gsttiauddec1.c gsttividdec2.c gsttiimgenc1.c gsttiimgdec1.c gsttidmaibuffertransport.c gsttidmaibuftab.c gstticircbuffer.c gsttidmaivideosink.c gstticodecs.c gstticodecs_platform.c  gsttiquicktime_aac.c gsttiquicktime_h264.c gsttividenc1.c gsttiaudenc1.c gstticommonutils.c gsttividresize.c gsttidmaiperf.c gsttiquicktime_mpeg4.c $(C6ACCEL_SRC) omapfb.c yuv.S
+- 
+- # flags used to compile this plugin
+- # add other _CFLAGS and _LIBS as needed
+--libgstticodecplugin_la_CFLAGS  = $(GST_CFLAGS) $(shell cat $(XDC_CONFIG_BASENAME)/compiler.opt)
+--libgstticodecplugin_la_LIBADD  = $(GST_LIBS) $(GST_BASE_LIBS) $(GST_PLUGINS_BASE_LIBS) -lgstvideo-0.10 -lgstaudio-0.10 -lm
+-+libgstticodecplugin_la_CFLAGS  = $(GST_CFLAGS) $(shell cat $(XDC_CONFIG_BASENAME)/compiler.opt) -I$(LINUXKERNEL_INSTALL_DIR)/include
+-+libgstticodecplugin_la_LIBADD  = $(GST_LIBS) $(GST_BASE_LIBS) $(GST_PLUGINS_BASE_LIBS) -lgstvideo-0.10 -lgstaudio-0.10 -lm  -lX11
+- libgstticodecplugin_la_LDFLAGS = $(GST_PLUGIN_LDFLAGS) -Wl,$(XDC_CONFIG_BASENAME)/linker.cmd -Wl,$(C6ACCEL_LIB)
+- 
+- # headers we need but don't want installed
+--noinst_HEADERS = gsttiauddec1.h gsttividdec2.h gsttiimgenc1.h gsttiimgdec1.h gsttidmaibuffertransport.h gsttidmaibuftab.h gstticircbuffer.h gsttidmaivideosink.h gsttithreadprops.h gstticodecs.h gsttiquicktime_aac.h gsttiquicktime_h264.h gsttividenc1.h gsttiaudenc1.h gstticommonutils.h gsttividresize.h gsttiquicktime_mpeg4.h $(C6ACCEL_HEAD)
+-+noinst_HEADERS = gsttiauddec1.h gsttividdec2.h gsttiimgenc1.h gsttiimgdec1.h gsttidmaibuffertransport.h gsttidmaibuftab.h gstticircbuffer.h gsttidmaivideosink.h gsttithreadprops.h gstticodecs.h gsttiquicktime_aac.h gsttiquicktime_h264.h gsttividenc1.h gsttiaudenc1.h gstticommonutils.h gsttividresize.h gsttiquicktime_mpeg4.h $(C6ACCEL_HEAD) omapfb.h
+- 
+- # XDC Configuration
+- CONFIGURO     = $(XDC_INSTALL_DIR)/xs xdc.tools.configuro
+-diff -uNr ticodecplugin/src/omapfb.c ticodecplugin.new/src/omapfb.c
+---- ticodecplugin/src/omapfb.c	1969-12-31 18:00:00.000000000 -0600
+-+++ ticodecplugin.new/src/omapfb.c	2010-09-03 13:54:11.929409696 -0500
+-@@ -0,0 +1,1005 @@
+-+/*
+-+ * Copyright (C) 2008 Felipe Contreras <felipe.contreras@gmail.com>
+-+ * Copyright (C) 2009 Tim Yamin <plasm@roo.me.uk>
+-+ * Copyright (C) 2009 Brijesh Singh <brijesh.ksingh@gmail.com>
+-+ *  
+-+ * X code largely copied from ximagesink by Julien Moutte and
+-+ * vo_omapfb.c by Gregoire Gentil.
+-+ *
+-+ * Use DMAI hw framecopy module to copy the dmai transport buffers.
+-+ *
+-+ * This library is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU Lesser General Public
+-+ * License as published by the Free Software Foundation
+-+ * version 2.1 of the License.
+-+ *
+-+ * This library is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+-+ * Lesser General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU General Public License
+-+ * along with this program; if not, write to the Free Software
+-+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
+-+ */
+-+
+-+#include <fcntl.h>
+-+#include <sys/ioctl.h>
+-+#include <sys/mman.h>
+-+#include <unistd.h>
+-+#include <string.h>
+-+#include <sys/types.h>
+-+#include <malloc.h>
+-+#include <stdlib.h>
+-+
+-+#include "omapfb.h"
+-+#include <gst/interfaces/xoverlay.h>
+-+
+-+static GstVideoSinkClass *parent_class = NULL;
+-+
+-+extern void yuv420_to_yuv422(__uint8_t *yuv, __uint8_t *y, __uint8_t *u, __uint8_t *v,
+-+                             int w, int h, int yw, int cw, int dw);
+-+
+-+static void x11_get_window_abs_position(Display *display, Window window,
+-+                                        int *wx, int *wy, int *ww, int *wh)
+-+{
+-+    Window root, parent;
+-+    Window *child;
+-+    unsigned int n_children;
+-+    XWindowAttributes attribs;
+-+
+-+    /* Get window attributes */
+-+    XGetWindowAttributes(display, window, &attribs);
+-+
+-+    /* Get relative position of given window */
+-+    *wx = attribs.x;
+-+    *wy = attribs.y;
+-+    if (ww)
+-+        *ww = attribs.width;
+-+    if (wh)
+-+        *wh = attribs.height;
+-+
+-+    /* Query window tree information */
+-+    XQueryTree(display, window, &root, &parent, &child, &n_children);
+-+    if (parent)
+-+    {
+-+        int x, y;
+-+
+-+    /* If we have a parent we must go there and discover his position */
+-+    x11_get_window_abs_position(display, parent, &x, &y, NULL, NULL);
+-+    *wx += x;
+-+    *wy += y;
+-+    }
+-+
+-+    /* If we had children, free them */
+-+    if(n_children)
+-+        XFree(child);
+-+}
+-+
+-+static GstXWindow *
+-+gst_omapfbsink_xwindow_new (GstOmapFbSink * omapfbsink, gint width, gint height)
+-+{
+-+    GstXWindow *xwindow = NULL;
+-+    XGCValues values;
+-+
+-+    if(!omapfbsink->xcontext)
+-+        return NULL;
+-+
+-+    xwindow = g_new0 (GstXWindow, 1);
+-+    xwindow->width = width;
+-+    xwindow->height = height;
+-+    xwindow->internal = TRUE;
+-+
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+    xwindow->win = XCreateSimpleWindow (omapfbsink->xcontext->disp,
+-+                    omapfbsink->xcontext->root,
+-+                    0, 0, xwindow->width, xwindow->height,
+-+                    0, 0, omapfbsink->colorKey);
+-+
+-+    /* We have to do that to prevent X from redrawing the background on
+-+       ConfigureNotify. This takes away flickering of video when resizing. */
+-+    XSetWindowBackgroundPixmap (omapfbsink->xcontext->disp, xwindow->win, None);
+-+
+-+    if (omapfbsink->handle_events) {
+-+        Atom wm_delete;
+-+
+-+    XSelectInput (omapfbsink->xcontext->disp, xwindow->win, ExposureMask |
+-+              StructureNotifyMask | PointerMotionMask | KeyPressMask |
+-+              KeyReleaseMask | ButtonPressMask | ButtonReleaseMask);
+-+
+-+    /* Tell the window manager we'd like delete client messages instead of
+-+     * being killed */
+-+    wm_delete = XInternAtom (omapfbsink->xcontext->disp,
+-+                 "WM_DELETE_WINDOW", False);
+-+    (void) XSetWMProtocols (omapfbsink->xcontext->disp, xwindow->win,
+-+                &wm_delete, 1);
+-+    }
+-+
+-+    xwindow->gc = XCreateGC (omapfbsink->xcontext->disp, xwindow->win,
+-+                 0, &values);
+-+
+-+    XMapRaised (omapfbsink->xcontext->disp, xwindow->win);
+-+    XSync (omapfbsink->xcontext->disp, FALSE);
+-+
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+    gst_x_overlay_got_xwindow_id (GST_X_OVERLAY (omapfbsink), xwindow->win);
+-+
+-+    return xwindow;
+-+}
+-+
+-+static gboolean gst_omapfbsink_update_plane (GstOmapFbSink *omapfbsink)
+-+{
+-+    int wx, wy, ww, wh;
+-+    if (!omapfbsink->xcontext)
+-+    {
+-+        if (ioctl (omapfbsink->overlay_fd, OMAPFB_SETUP_PLANE, &omapfbsink->plane_info))
+-+            return FALSE;
+-+        return TRUE;
+-+    }
+-+
+-+    if (omapfbsink->plane_info.enabled != 1)
+-+        return FALSE;
+-+
+-+    x11_get_window_abs_position(omapfbsink->xcontext->disp,
+-+                omapfbsink->xwindow->win, &wx, &wy, &ww, &wh);
+-+
+-+    if (wx != omapfbsink->xwindow->wx || wy != omapfbsink->xwindow->wy ||
+-+    wh != omapfbsink->xwindow->height || ww != omapfbsink->xwindow->width) {
+-+        omapfbsink->plane_info.out_width = omapfbsink->xwindow->width = ww;
+-+    omapfbsink->plane_info.out_height = omapfbsink->xwindow->height = wh;
+-+        omapfbsink->plane_info.pos_x = omapfbsink->xwindow->wx = wx;
+-+        omapfbsink->plane_info.pos_y = omapfbsink->xwindow->wy = wy;
+-+
+-+        GST_DEBUG_OBJECT(omapfbsink, "updating geometry to: (%d,%d) %dx%d", wx, wy, ww, wh);
+-+
+-+        XSetForeground (omapfbsink->xcontext->disp, omapfbsink->xwindow->gc, omapfbsink->colorKey);
+-+        XFillRectangle (omapfbsink->xcontext->disp, omapfbsink->xwindow->win, omapfbsink->xwindow->gc, 0, 0, ww, wh);
+-+
+-+        if (ioctl (omapfbsink->overlay_fd, OMAPFB_SETUP_PLANE, &omapfbsink->plane_info))
+-+      return FALSE;
+-+    }
+-+
+-+    return TRUE;
+-+}
+-+
+-+static void
+-+gst_omapfbsink_expose (GstXOverlay * overlay)
+-+{
+-+    gst_omapfbsink_update_plane(GST_OMAPFB_SINK (overlay));
+-+}
+-+
+-+static void
+-+gst_omapfbsink_xwindow_destroy (GstOmapFbSink * omapfbsink,
+-+    GstXWindow * xwindow)
+-+{
+-+    g_return_if_fail (xwindow != NULL);
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+
+-+    /* If we did not create that window we just free the GC and let it live */
+-+    if (xwindow->internal)
+-+        XDestroyWindow (omapfbsink->xcontext->disp, xwindow->win);
+-+    else
+-+        XSelectInput (omapfbsink->xcontext->disp, xwindow->win, 0);
+-+
+-+    XFreeGC (omapfbsink->xcontext->disp, xwindow->gc);
+-+    XSync (omapfbsink->xcontext->disp, FALSE);
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+    g_free (xwindow);
+-+}
+-+
+-+/* This function handles XEvents that might be in the queue. It generates
+-+   GstEvent that will be sent upstream in the pipeline to handle interactivity
+-+   and navigation.*/
+-+static void
+-+gst_omapfbsink_handle_xevents (GstOmapFbSink * omapfbsink)
+-+{
+-+    XEvent e;
+-+    g_mutex_lock (omapfbsink->flow_lock);
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+
+-+    while (XCheckWindowEvent (omapfbsink->xcontext->disp,
+-+           omapfbsink->xwindow->win, ExposureMask | StructureNotifyMask, &e)) {
+-+        switch (e.type) {
+-+            case Expose:
+-+            case ConfigureNotify:
+-+                gst_omapfbsink_update_plane (omapfbsink);
+-+                break;
+-+            default:
+-+                break;
+-+        }
+-+    }
+-+
+-+    /* Handle Display events */
+-+    while (XPending (omapfbsink->xcontext->disp)) {
+-+        XNextEvent (omapfbsink->xcontext->disp, &e);
+-+
+-+        switch (e.type) {
+-+            case ClientMessage:{
+-+                Atom wm_delete;
+-+
+-+                wm_delete = XInternAtom (omapfbsink->xcontext->disp,
+-+                        "WM_DELETE_WINDOW", False);
+-+                if (wm_delete == (Atom) e.xclient.data.l[0]) {
+-+                    /* Handle window deletion by posting an error on the bus */
+-+                    GST_ELEMENT_ERROR (omapfbsink, RESOURCE, NOT_FOUND,
+-+                            ("Output window was closed"), (NULL));
+-+
+-+                    g_mutex_unlock (omapfbsink->x_lock);
+-+                    gst_omapfbsink_xwindow_destroy (omapfbsink, omapfbsink->xwindow);
+-+                    omapfbsink->xwindow = NULL;
+-+                    g_mutex_lock (omapfbsink->x_lock);
+-+                }
+-+                break;
+-+            }
+-+            default:
+-+                break;
+-+        }
+-+    }
+-+
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+    g_mutex_unlock (omapfbsink->flow_lock);
+-+}
+-+
+-+static gpointer
+-+gst_omapfbsink_event_thread (GstOmapFbSink * omapfbsink)
+-+{
+-+    GST_OBJECT_LOCK (omapfbsink);
+-+    while (omapfbsink->running) {
+-+        GST_OBJECT_UNLOCK (omapfbsink);
+-+
+-+    if (omapfbsink->xwindow)
+-+      gst_omapfbsink_handle_xevents (omapfbsink);
+-+    g_usleep (100000);
+-+
+-+    GST_OBJECT_LOCK (omapfbsink);
+-+    }
+-+    GST_OBJECT_UNLOCK (omapfbsink);
+-+
+-+    return NULL;
+-+}
+-+
+-+/* This function gets the X Display and global info about it. Everything is
+-+   stored in our object and will be cleaned when the object is disposed. */
+-+static GstXContext *
+-+gst_omapfbsink_xcontext_get (GstOmapFbSink * omapfbsink)
+-+{
+-+    GstXContext *xcontext = g_new0 (GstXContext, 1);
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+
+-+    xcontext->disp = XOpenDisplay (omapfbsink->display_name);
+-+
+-+    if (!xcontext->disp) {
+-+        g_mutex_unlock (omapfbsink->x_lock);
+-+    g_free (xcontext);
+-+    GST_ELEMENT_WARNING (omapfbsink, RESOURCE, WRITE,
+-+                 ("Could not initialise X output"),
+-+                 ("Could not open display"));
+-+    return NULL;
+-+    }
+-+
+-+    xcontext->screen = DefaultScreenOfDisplay (xcontext->disp);
+-+    xcontext->screen_num = DefaultScreen (xcontext->disp);
+-+    xcontext->visual = DefaultVisual (xcontext->disp, xcontext->screen_num);
+-+    xcontext->root = DefaultRootWindow (xcontext->disp);
+-+
+-+    xcontext->width = DisplayWidth (xcontext->disp, xcontext->screen_num);
+-+    xcontext->height = DisplayHeight (xcontext->disp, xcontext->screen_num);
+-+
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+
+-+    /* Setup our event listening thread */
+-+    GST_OBJECT_LOCK (omapfbsink);
+-+    omapfbsink->running = TRUE;
+-+    omapfbsink->event_thread = g_thread_create (
+-+      (GThreadFunc) gst_omapfbsink_event_thread, omapfbsink, TRUE, NULL);
+-+    GST_OBJECT_UNLOCK (omapfbsink);
+-+
+-+    return xcontext;
+-+}
+-+
+-+static void
+-+gst_omapfbsink_set_xwindow_id (GstXOverlay * overlay, XID xwindow_id)
+-+{
+-+    GstOmapFbSink *omapfbsink = GST_OMAPFB_SINK (overlay);
+-+    GstXWindow *xwindow = NULL;
+-+    XWindowAttributes attr;
+-+
+-+    /* If we already use that window, return */
+-+    if (omapfbsink->xwindow && (xwindow_id == omapfbsink->xwindow->win))
+-+        return;
+-+
+-+    /* If the element has not initialized the X11 context try to do so */
+-+    if (!omapfbsink->xcontext &&
+-+    !(omapfbsink->xcontext = gst_omapfbsink_xcontext_get (omapfbsink))) {
+-+      g_mutex_unlock (omapfbsink->flow_lock);
+-+      return;
+-+    }
+-+
+-+    /* If a window is there already we destroy it */
+-+    if (omapfbsink->xwindow) {
+-+      gst_omapfbsink_xwindow_destroy (omapfbsink, omapfbsink->xwindow);
+-+      omapfbsink->xwindow = NULL;
+-+    }
+-+
+-+    /* If the xid is 0 we go back to an internal window */
+-+    if (xwindow_id == 0) {
+-+      /* If no width/height caps nego did not happen window will be created
+-+     during caps nego then */
+-+      if (GST_VIDEO_SINK_WIDTH (omapfbsink) && GST_VIDEO_SINK_HEIGHT (omapfbsink)) {
+-+    xwindow = gst_omapfbsink_xwindow_new (omapfbsink,
+-+          GST_VIDEO_SINK_WIDTH (omapfbsink),
+-+          GST_VIDEO_SINK_HEIGHT (omapfbsink));
+-+      }
+-+    } else {
+-+        xwindow = g_new0 (GstXWindow, 1);
+-+    xwindow->wx = xwindow->wy = -1;
+-+    xwindow->win = xwindow_id;
+-+
+-+    /* We get window geometry, set the event we want to receive,
+-+       and create a GC */
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+    XGetWindowAttributes (omapfbsink->xcontext->disp, xwindow->win, &attr);
+-+    xwindow->width = attr.width;
+-+    xwindow->height = attr.height;
+-+    xwindow->internal = FALSE;
+-+    if (omapfbsink->handle_events) {
+-+        XSelectInput (omapfbsink->xcontext->disp, xwindow->win, ExposureMask |
+-+              StructureNotifyMask | PointerMotionMask | KeyPressMask |
+-+              KeyReleaseMask);
+-+    }
+-+
+-+        xwindow->gc = XCreateGC (omapfbsink->xcontext->disp, xwindow->win, 0, NULL);
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+    }
+-+
+-+    if (xwindow) {
+-+        omapfbsink->xwindow = xwindow;
+-+
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+    gst_omapfbsink_update_plane(omapfbsink);
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+    }
+-+}
+-+
+-+static void
+-+gst_omapfbsink_xwindow_clear (GstOmapFbSink * omapfbsink,
+-+                  GstXWindow * xwindow)
+-+{
+-+    g_return_if_fail (xwindow != NULL);
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+
+-+    XSetForeground (omapfbsink->xcontext->disp, xwindow->gc,
+-+            XBlackPixel (omapfbsink->xcontext->disp,
+-+                 omapfbsink->xcontext->screen_num));
+-+
+-+    XFillRectangle (omapfbsink->xcontext->disp, xwindow->win, xwindow->gc,
+-+            0, 0, xwindow->width, xwindow->height);
+-+
+-+    XSync (omapfbsink->xcontext->disp, FALSE);
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+}
+-+
+-+static void
+-+gst_omapfbsink_set_event_handling (GstXOverlay * overlay,
+-+    gboolean handle_events)
+-+{
+-+    GstOmapFbSink *omapfbsink = GST_OMAPFB_SINK (overlay);
+-+    omapfbsink->handle_events = handle_events;
+-+
+-+    g_mutex_lock (omapfbsink->flow_lock);
+-+
+-+    if (G_UNLIKELY (!omapfbsink->xwindow)) {
+-+        g_mutex_unlock (omapfbsink->flow_lock);
+-+    return;
+-+    }
+-+
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+
+-+    if (handle_events) {
+-+        if (omapfbsink->xwindow->internal) {
+-+      XSelectInput (omapfbsink->xcontext->disp, omapfbsink->xwindow->win,
+-+            ExposureMask | StructureNotifyMask | PointerMotionMask |
+-+            KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask);
+-+    } else {
+-+      XSelectInput (omapfbsink->xcontext->disp, omapfbsink->xwindow->win,
+-+            ExposureMask | StructureNotifyMask | PointerMotionMask |
+-+            KeyPressMask | KeyReleaseMask);
+-+    }
+-+    } else {
+-+        XSelectInput (omapfbsink->xcontext->disp, omapfbsink->xwindow->win, 0);
+-+    }
+-+
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+    g_mutex_unlock (omapfbsink->flow_lock);
+-+}
+-+
+-+static void
+-+gst_omapfbsink_xoverlay_init (GstXOverlayClass * iface)
+-+{
+-+    iface->set_xwindow_id = gst_omapfbsink_set_xwindow_id;
+-+    iface->expose = gst_omapfbsink_expose;
+-+    iface->handle_events = gst_omapfbsink_set_event_handling;
+-+}
+-+
+-+static GstCaps *
+-+generate_sink_template (void)
+-+{
+-+    GstCaps *caps;
+-+    GstStructure *struc;
+-+
+-+    caps = gst_caps_new_empty ();
+-+
+-+    struc = gst_structure_new ("video/x-raw-yuv",
+-+                               "width", GST_TYPE_INT_RANGE, 16, 4096,
+-+                               "height", GST_TYPE_INT_RANGE, 16, 4096,
+-+                               "framerate", GST_TYPE_FRACTION_RANGE, 0, 1, 30, 1,
+-+                               NULL);
+-+
+-+    {
+-+        GValue list;
+-+        GValue val;
+-+
+-+        list.g_type = val.g_type = 0;
+-+
+-+        g_value_init (&list, GST_TYPE_LIST);
+-+        g_value_init (&val, GST_TYPE_FOURCC);
+-+
+-+#if 0
+-+        gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('Y', 'U', 'Y', '2'));
+-+        gst_value_list_append_value (&list, &val);
+-+#else
+-+    gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('I', '4', '2', '0'));
+-+    gst_value_list_append_value (&list, &val);
+-+
+-+        gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('U', 'Y', 'V', 'Y'));
+-+        gst_value_list_append_value (&list, &val);
+-+#endif
+-+
+-+        gst_structure_set_value (struc, "format", &list);
+-+
+-+        g_value_unset (&val);
+-+        g_value_unset (&list);
+-+    }
+-+
+-+    gst_caps_append_structure (caps, struc);
+-+
+-+    return caps;
+-+}
+-+
+-+static GstFlowReturn
+-+buffer_alloc (GstBaseSink *bsink,
+-+              guint64 offset,
+-+              guint size,
+-+              GstCaps *caps,
+-+              GstBuffer **buf)
+-+{
+-+    GstOmapFbSink *self;
+-+    GstBuffer *buffer = NULL;
+-+    GstFlowReturn ret = GST_FLOW_OK;
+-+    self = GST_OMAPFB_SINK (bsink);
+-+
+-+    if(self->row_skip) {
+-+        buffer = gst_buffer_new ();
+-+        GST_BUFFER_DATA (buffer) = self->buffer = self->framebuffer;
+-+        GST_BUFFER_SIZE (buffer) = self->buffer_size = size;
+-+        gst_buffer_set_caps (buffer, caps);
+-+    } else {
+-+        if(self->buffer && size == self->buffer_size) {
+-+            buffer = gst_buffer_new ();
+-+            GST_BUFFER_DATA (buffer) = self->buffer;
+-+            GST_BUFFER_SIZE (buffer) = size;
+-+            gst_buffer_set_caps (buffer, caps);
+-+        } else {
+-+            if(self->buffer)
+-+                free(self->buffer);
+-+            if(posix_memalign(&self->buffer, 16, (size_t) size) == 0) {
+-+                buffer = gst_buffer_new ();
+-+                GST_BUFFER_DATA (buffer) = self->buffer;
+-+                GST_BUFFER_SIZE (buffer) = self->buffer_size = size;
+-+                gst_buffer_set_caps (buffer, caps);
+-+            } else {
+-+                GST_ELEMENT_ERROR (self, RESOURCE, WRITE, ("Could not allocate aligned buf!"),
+-+                                  ("Could not alloc aligned buf!"));
+-+            }
+-+        }
+-+    }
+-+
+-+    *buf = buffer;
+-+    return ret;
+-+}
+-+
+-+static void
+-+x_memcpy (GstOmapFbSink *omapfbsink, __uint8_t *outBuf, __uint8_t *inBuf)
+-+{
+-+    BufferGfx_Attrs gfxAttrs = BufferGfx_Attrs_DEFAULT;
+-+    Buffer_Handle hInBuf = NULL, hOutBuf = NULL;
+-+    Framecopy_Attrs fcAttrs = Framecopy_Attrs_DEFAULT;
+-+    int size;
+-+
+-+    if (omapfbsink->hFc == NULL) {
+-+        fcAttrs.accel = TRUE;
+-+        omapfbsink->hFc = Framecopy_create(&fcAttrs);
+-+        if (omapfbsink->hFc == NULL) {
+-+            GST_ELEMENT_ERROR(omapfbsink, RESOURCE, WRITE, ("failed to create dmai framecopy handle"), ("failed to create dmai framecopy handle"));
+-+            goto cleanup;
+-+        }
+-+    }
+-+
+-+    gfxAttrs.bAttrs.reference   = TRUE;
+-+    gfxAttrs.dim.width          = GST_VIDEO_SINK_WIDTH (omapfbsink);
+-+    gfxAttrs.dim.height         = GST_VIDEO_SINK_HEIGHT (omapfbsink);
+-+    gfxAttrs.colorSpace         = ColorSpace_UYVY;
+-+    gfxAttrs.dim.lineLength     = omapfbsink->fixinfo.line_length;
+-+    size = gfxAttrs.dim.height * gfxAttrs.dim.width * 2;
+-+
+-+    hInBuf = Buffer_create(size, BufferGfx_getBufferAttrs(&gfxAttrs));
+-+    if (hInBuf == NULL) {
+-+        GST_ELEMENT_ERROR(omapfbsink, RESOURCE, WRITE, ("Could not allocate refer dmai buffer"), ("Could not allocate refer dmai buffer"));
+-+        goto cleanup;
+-+    }
+-+    Buffer_setUserPtr(hInBuf, (Int8*) inBuf);
+-+    Buffer_setNumBytesUsed(hInBuf,Buffer_getSize(hInBuf));
+-+
+-+    hOutBuf = Buffer_create(size, BufferGfx_getBufferAttrs(&gfxAttrs));
+-+    if (hOutBuf == NULL) {
+-+        GST_ELEMENT_ERROR(omapfbsink, RESOURCE, WRITE, ("Could not allocate refer dmai buffer"), ("Could not allocate refer dmai buffer"));
+-+        goto cleanup;
+-+    }
+-+    Buffer_setUserPtr(hOutBuf, (Int8*) outBuf);
+-+    Buffer_setNumBytesUsed(hOutBuf,Buffer_getSize(hOutBuf));
+-+
+-+
+-+    if (Framecopy_config(omapfbsink->hFc, hInBuf, hOutBuf) < 0) {
+-+        GST_ELEMENT_ERROR(omapfbsink, RESOURCE, WRITE, ("failed to configure dmai framecopy handle"), ("failed to configure dmai framecopy handle"));
+-+        goto cleanup;
+-+    }
+-+
+-+    if (Framecopy_execute(omapfbsink->hFc, hInBuf, hOutBuf) < 0) {
+-+        GST_ELEMENT_ERROR(omapfbsink, RESOURCE, WRITE, ("failed to execute dmai framecopy handle"), ("failed to configure dmai framecopy handle"));
+-+        goto cleanup;
+-+    }
+-+    cleanup:
+-+
+-+    if (hInBuf)
+-+        Buffer_delete(hInBuf);
+-+    if (hOutBuf)
+-+        Buffer_delete(hOutBuf);
+-+}
+-+
+-+static GstFlowReturn
+-+render (GstBaseSink * bsink, GstBuffer * buf)
+-+{
+-+    int i, w, h;
+-+    GstOmapFbSink *omapfbsink = GST_OMAPFB_SINK(bsink);
+-+    __uint8_t *fb = omapfbsink->framebuffer, *data = GST_BUFFER_DATA(buf);
+-+    gboolean useXcopy = FALSE;
+-+
+-+    if (GST_IS_TIDMAIBUFFERTRANSPORT(buf)) {
+-+        GST_LOG("found dmai transport buffer, enabling hw framecopy.\n");
+-+        useXcopy = TRUE;
+-+    }
+-+
+-+    if(omapfbsink->plane_info.enabled == 2)
+-+    {
+-+        omapfbsink->plane_info.enabled = 1;
+-+
+-+        g_mutex_lock (omapfbsink->x_lock);
+-+        gst_omapfbsink_update_plane(omapfbsink);
+-+        g_mutex_unlock (omapfbsink->x_lock);
+-+    }
+-+
+-+    /* If a buffer which wasn't supplied by us is given to us to render with,
+-+       we need to copy to our buffer first so that memory alignment constraints
+-+       are met. */
+-+    if((data != omapfbsink->buffer && GST_BUFFER_SIZE(buf) <= omapfbsink->buffer_size) && !useXcopy)
+-+    {
+-+        memcpy(omapfbsink->buffer, data, GST_BUFFER_SIZE(buf));
+-+        data = omapfbsink->buffer;
+-+    }
+-+
+-+    /* buffer_alloc gave a direct buffer, so we have nothing to
+-+       do here... */
+-+    if(omapfbsink->row_skip)
+-+        return GST_FLOW_OK;
+-+
+-+    switch(omapfbsink->image_format) {
+-+        case GST_MAKE_FOURCC('I', '4', '2', '0'):
+-+            /* Convert to YUV422 and send to FB */
+-+
+-+            h = GST_VIDEO_SINK_HEIGHT (omapfbsink);
+-+            w = GST_VIDEO_SINK_WIDTH (omapfbsink);
+-+
+-+            __uint8_t *y, *u, *v;
+-+            y = data;
+-+            u = y + w * h;
+-+            v = u + w / 2 * h / 2;
+-+            yuv420_to_yuv422(fb, y, u, v, w & ~15, h, w, w / 2, omapfbsink->fixinfo.line_length);
+-+            break;
+-+
+-+        case GST_MAKE_FOURCC('U', 'Y', 'V', 'Y'):
+-+            /* Send to FB, taking into account line_length */
+-+            if (useXcopy) {
+-+                x_memcpy(omapfbsink, fb, data);
+-+            }
+-+            else {
+-+
+-+            w = 2 * GST_VIDEO_SINK_WIDTH (omapfbsink);
+-+            for(i = 0; i < GST_VIDEO_SINK_HEIGHT (omapfbsink); i++)
+-+            {
+-+                memcpy(fb, data, w);
+-+
+-+                fb += omapfbsink->fixinfo.line_length;
+-+                data += w;
+-+            }
+-+            }
+-+            break;
+-+    }
+-+
+-+    return GST_FLOW_OK;
+-+}
+-+
+-+static gboolean
+-+setcaps (GstBaseSink *bsink,
+-+         GstCaps *vscapslist)
+-+{
+-+    GstOmapFbSink *self;
+-+    GstStructure *structure;
+-+
+-+    gint width, height;
+-+    struct omapfb_color_key color_key;
+-+
+-+    self = GST_OMAPFB_SINK (bsink);
+-+
+-+    structure = gst_caps_get_structure (vscapslist, 0);
+-+
+-+    gst_structure_get_int (structure, "width", &width);
+-+    gst_structure_get_int (structure, "height", &height);
+-+
+-+    self->overlay_info.xres = MIN (self->varinfo.xres, width) & ~15;
+-+    self->overlay_info.yres = MIN (self->varinfo.yres, height) & ~15;
+-+    self->overlay_info.xres_virtual = self->overlay_info.xres;
+-+    self->overlay_info.yres_virtual = self->overlay_info.yres;
+-+
+-+    self->overlay_info.xoffset = 0;
+-+    self->overlay_info.yoffset = 0;
+-+
+-+    gst_structure_get_fourcc (structure, "format", &self->image_format);
+-+    switch(self->image_format) {
+-+        case GST_MAKE_FOURCC('I', '4', '2', '0'):
+-+            self->row_skip = FALSE; /* Colorspace conversion required */
+-+            self->overlay_info.nonstd = OMAPFB_COLOR_YUY422;
+-+            break;
+-+        case GST_MAKE_FOURCC('U', 'Y', 'V', 'Y'):
+-+            /* Can data be pushed straight to the FB or do we need to interleave? */
+-+            if (self->fixinfo.line_length != 2 * width)
+-+                self->row_skip = FALSE;
+-+            else
+-+                self->row_skip = TRUE;
+-+            self->overlay_info.nonstd = OMAPFB_COLOR_YUV422;
+-+            break;
+-+    }
+-+
+-+    if (ioctl (self->overlay_fd, FBIOPUT_VSCREENINFO, &self->overlay_info))
+-+        return FALSE;
+-+
+-+    GST_VIDEO_SINK_WIDTH (self) = width;
+-+    GST_VIDEO_SINK_HEIGHT (self) = height;
+-+    if (!self->xwindow) {
+-+        self->xwindow = gst_omapfbsink_xwindow_new (self,
+-+            GST_VIDEO_SINK_WIDTH (self), GST_VIDEO_SINK_HEIGHT (self));
+-+    }
+-+
+-+    color_key.channel_out = OMAPFB_CHANNEL_OUT_LCD;
+-+    color_key.background = 0x0;
+-+    color_key.trans_key = self->colorKey;
+-+    if (self->xwindow)
+-+        color_key.key_type = OMAPFB_COLOR_KEY_GFX_DST;
+-+    else
+-+        color_key.key_type = OMAPFB_COLOR_KEY_DISABLED;
+-+
+-+    if (ioctl (self->overlay_fd, OMAPFB_SET_COLOR_KEY, &color_key))
+-+        return FALSE;
+-+
+-+    self->plane_info.pos_x = 0;
+-+    self->plane_info.pos_y = 0;
+-+    self->plane_info.out_width = self->overlay_info.xres;
+-+    self->plane_info.out_height = self->overlay_info.yres;
+-+    self->plane_info.enabled = 2;
+-+
+-+    if (ioctl (self->overlay_fd, FBIOGET_FSCREENINFO, &self->fixinfo))
+-+        return FALSE;
+-+
+-+    self->enabled = TRUE;
+-+    return TRUE;
+-+}
+-+
+-+static gboolean
+-+start (GstBaseSink *bsink)
+-+{
+-+    GstOmapFbSink *self;
+-+    int fd;
+-+
+-+    self = GST_OMAPFB_SINK (bsink);
+-+
+-+    fd = open ("/dev/fb0", O_RDWR);
+-+
+-+    if (fd == -1)
+-+        return FALSE;
+-+
+-+    if (ioctl (fd, FBIOGET_VSCREENINFO, &self->varinfo))
+-+    {
+-+        close (fd);
+-+        return FALSE;
+-+    }
+-+
+-+    if (close (fd))
+-+        return FALSE;
+-+
+-+    self->overlay_fd = open ("/dev/fb1", O_RDWR);
+-+
+-+    if (self->overlay_fd == -1)
+-+        return FALSE;
+-+
+-+    if (ioctl (self->overlay_fd, FBIOGET_VSCREENINFO, &self->overlay_info))
+-+        return FALSE;
+-+
+-+    if (ioctl (self->overlay_fd, OMAPFB_QUERY_PLANE, &self->plane_info))
+-+        return FALSE;
+-+
+-+    if (ioctl (self->overlay_fd, OMAPFB_QUERY_MEM, &self->mem_info))
+-+        return FALSE;
+-+
+-+    self->framebuffer = mmap (NULL, self->mem_info.size, PROT_WRITE, MAP_SHARED, self->overlay_fd, 0);
+-+    if (self->framebuffer == MAP_FAILED)
+-+        return FALSE;
+-+
+-+    return TRUE;
+-+}
+-+
+-+static gboolean
+-+stop (GstBaseSink *bsink)
+-+{
+-+    GstOmapFbSink *self;
+-+
+-+    self = GST_OMAPFB_SINK (bsink);
+-+
+-+    if (self->enabled)
+-+    {
+-+        self->plane_info.enabled = 0;
+-+
+-+        if (ioctl (self->overlay_fd, OMAPFB_SETUP_PLANE, &self->plane_info))
+-+            return FALSE;
+-+    }
+-+
+-+    if (munmap (self->framebuffer, self->mem_info.size))
+-+        return FALSE;
+-+
+-+    if (close (self->overlay_fd))
+-+        return FALSE;
+-+
+-+    if (self->hFc) 
+-+        Framecopy_delete(self->hFc);
+-+
+-+    return TRUE;
+-+}
+-+
+-+/* This function cleans the X context. Closing the Display and unrefing the
+-+   caps for supported formats. */
+-+static void
+-+gst_omapfbsink_xcontext_clear (GstOmapFbSink * omapfbsink)
+-+{
+-+    GstXContext *xcontext;
+-+    GST_OBJECT_LOCK (omapfbsink);
+-+    if (omapfbsink->xcontext == NULL) {
+-+      GST_OBJECT_UNLOCK (omapfbsink);
+-+      return;
+-+    }
+-+
+-+    xcontext = omapfbsink->xcontext;
+-+    omapfbsink->xcontext = NULL;
+-+
+-+    GST_OBJECT_UNLOCK (omapfbsink);
+-+    g_mutex_lock (omapfbsink->x_lock);
+-+
+-+    XCloseDisplay (xcontext->disp);
+-+    g_mutex_unlock (omapfbsink->x_lock);
+-+    g_free (xcontext);
+-+}
+-+
+-+static void
+-+gst_omapfbsink_reset (GstOmapFbSink *omapfbsink)
+-+{
+-+    GThread *thread;
+-+
+-+    GST_OBJECT_LOCK (omapfbsink);
+-+    omapfbsink->running = FALSE;
+-+    /* grab thread and mark it as NULL */
+-+    thread = omapfbsink->event_thread;
+-+    omapfbsink->event_thread = NULL;
+-+    GST_OBJECT_UNLOCK (omapfbsink);
+-+
+-+    /* Wait for our event thread to finish before we clean up our stuff. */
+-+    if (thread)
+-+      g_thread_join (thread);
+-+
+-+    g_mutex_lock (omapfbsink->flow_lock);
+-+    if (omapfbsink->xwindow) {
+-+        gst_omapfbsink_xwindow_clear (omapfbsink, omapfbsink->xwindow);
+-+        gst_omapfbsink_xwindow_destroy (omapfbsink, omapfbsink->xwindow);
+-+        omapfbsink->xwindow = NULL;
+-+    }
+-+    g_mutex_unlock (omapfbsink->flow_lock);
+-+    gst_omapfbsink_xcontext_clear (omapfbsink);
+-+}
+-+
+-+static GstStateChangeReturn
+-+gst_omapfbsink_change_state (GstElement * element, GstStateChange transition)
+-+{
+-+    GstOmapFbSink *omapfbsink;
+-+    GstStateChangeReturn ret = GST_STATE_CHANGE_SUCCESS;
+-+    GstXContext *xcontext = NULL;
+-+
+-+    omapfbsink = GST_OMAPFB_SINK (element);
+-+
+-+    switch (transition) {
+-+    case GST_STATE_CHANGE_NULL_TO_READY:
+-+
+-+        /* Initializing the XContext */
+-+        if (omapfbsink->xcontext == NULL) {
+-+            xcontext = gst_omapfbsink_xcontext_get (omapfbsink);
+-+
+-+            GST_OBJECT_LOCK (omapfbsink);
+-+            omapfbsink->xcontext = xcontext;
+-+            GST_OBJECT_UNLOCK (omapfbsink);
+-+        }
+-+        break;
+-+    case GST_STATE_CHANGE_READY_TO_PAUSED:
+-+        g_mutex_lock (omapfbsink->flow_lock);
+-+        if (omapfbsink->xwindow)
+-+            gst_omapfbsink_xwindow_clear (omapfbsink, omapfbsink->xwindow);
+-+        g_mutex_unlock (omapfbsink->flow_lock);
+-+        break;
+-+    case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
+-+        break;
+-+    default:
+-+        break;
+-+    }
+-+
+-+    ret = GST_ELEMENT_CLASS (parent_class)->change_state (element, transition);
+-+
+-+    switch (transition) {
+-+    case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
+-+        break;
+-+    case GST_STATE_CHANGE_PAUSED_TO_READY:
+-+        GST_VIDEO_SINK_WIDTH (omapfbsink) = 0;
+-+        GST_VIDEO_SINK_HEIGHT (omapfbsink) = 0;
+-+        break;
+-+    case GST_STATE_CHANGE_READY_TO_NULL:
+-+        gst_omapfbsink_reset (omapfbsink);
+-+        break;
+-+    default:
+-+        break;
+-+    }
+-+
+-+    return ret;
+-+}
+-+
+-+static void
+-+type_class_init (gpointer g_class,
+-+                 gpointer class_data)
+-+{
+-+    GstElementClass *element_class;
+-+    GstBaseSinkClass *base_sink_class;
+-+
+-+    element_class = (GstElementClass *) g_class;
+-+    base_sink_class = (GstBaseSinkClass *) g_class;
+-+
+-+    parent_class = g_type_class_peek_parent (g_class);
+-+
+-+    base_sink_class->set_caps = GST_DEBUG_FUNCPTR (setcaps);
+-+    base_sink_class->buffer_alloc = GST_DEBUG_FUNCPTR (buffer_alloc);
+-+    base_sink_class->render = GST_DEBUG_FUNCPTR (render);
+-+    base_sink_class->start = GST_DEBUG_FUNCPTR (start);
+-+    base_sink_class->stop = GST_DEBUG_FUNCPTR (stop);
+-+
+-+    element_class->change_state = gst_omapfbsink_change_state;
+-+}
+-+
+-+static void
+-+type_base_init (gpointer g_class)
+-+{
+-+    GstElementClass *element_class = GST_ELEMENT_CLASS (g_class);
+-+
+-+    {
+-+        GstElementDetails details;
+-+
+-+        details.longname = "Linux OMAP framebuffer sink";
+-+        details.klass = "Sink/Video";
+-+        details.description = "Renders video with omapfb";
+-+        details.author = "Felipe Contreras";
+-+
+-+        gst_element_class_set_details (element_class, &details);
+-+    }
+-+
+-+    {
+-+        GstPadTemplate *template;
+-+
+-+        template = gst_pad_template_new ("sink", GST_PAD_SINK,
+-+                                         GST_PAD_ALWAYS,
+-+                                         generate_sink_template ());
+-+
+-+        gst_element_class_add_pad_template (element_class, template);
+-+    }
+-+}
+-+
+-+static gboolean
+-+gst_omapfbsink_interface_supported (GstImplementsInterface * iface, GType type)
+-+{
+-+    g_assert (type == GST_TYPE_X_OVERLAY);
+-+    return TRUE;
+-+}
+-+
+-+static void
+-+gst_omapfbsink_interface_init (GstImplementsInterfaceClass * klass)
+-+{
+-+    klass->supported = gst_omapfbsink_interface_supported;
+-+}
+-+
+-+static void
+-+gst_omapfbsink_init (GstOmapFbSink * omapfbsink)
+-+{
+-+    omapfbsink->display_name = NULL;
+-+    omapfbsink->xcontext = NULL;
+-+    omapfbsink->xwindow = NULL;
+-+
+-+    omapfbsink->event_thread = NULL;
+-+    omapfbsink->running = FALSE;
+-+
+-+    omapfbsink->x_lock = g_mutex_new ();
+-+    omapfbsink->flow_lock = g_mutex_new ();
+-+
+-+    omapfbsink->handle_events = TRUE;
+-+    omapfbsink->colorKey = 0xff0;
+-+
+-+    omapfbsink->plane_info.enabled = 0;
+-+    omapfbsink->row_skip = FALSE;
+-+
+-+    omapfbsink->buffer = NULL;
+-+    omapfbsink->buffer_size = 0;
+-+    omapfbsink->hFc = NULL;
+-+}
+-+
+-+GType
+-+gst_omapfbsink_get_type (void)
+-+{
+-+    static GType type = 0;
+-+
+-+    if (G_UNLIKELY (type == 0))
+-+    {  
+-+        GTypeInfo *type_info;
+-+        static const GInterfaceInfo iface_info = {
+-+            (GInterfaceInitFunc) gst_omapfbsink_interface_init,
+-+            NULL,
+-+            NULL,
+-+        };
+-+        static const GInterfaceInfo overlay_info = {
+-+            (GInterfaceInitFunc) gst_omapfbsink_xoverlay_init,
+-+            NULL,
+-+            NULL,
+-+        };
+-+        type_info = g_new0 (GTypeInfo, 1);
+-+        type_info->class_size = sizeof (GstOmapFbSinkClass);
+-+        type_info->base_init = type_base_init;
+-+        type_info->class_init = type_class_init;
+-+        type_info->instance_size = sizeof (GstOmapFbSink);
+-+        type_info->instance_init = (GInstanceInitFunc) gst_omapfbsink_init;
+-+
+-+        type = g_type_register_static (GST_TYPE_BASE_SINK, "GstOmapFbSink", type_info, 0);
+-+        g_type_add_interface_static (type, GST_TYPE_IMPLEMENTS_INTERFACE, &iface_info);
+-+        g_type_add_interface_static (type, GST_TYPE_X_OVERLAY, &overlay_info);
+-+
+-+        g_free (type_info);
+-+    }
+-+
+-+    return type;
+-+}
+-diff -uNr ticodecplugin/src/omapfb.h ticodecplugin.new/src/omapfb.h
+---- ticodecplugin/src/omapfb.h	1969-12-31 18:00:00.000000000 -0600
+-+++ ticodecplugin.new/src/omapfb.h	2010-09-03 13:54:11.929409696 -0500
+-@@ -0,0 +1,142 @@
+-+/*
+-+ * Copyright (C) 2008 Felipe Contreras <felipe.contreras@gmail.com>
+-+ *
+-+ * This library is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU Lesser General Public
+-+ * License as published by the Free Software Foundation
+-+ * version 2.1 of the License.
+-+ *
+-+ * This library is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+-+ * Lesser General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU General Public License
+-+ * along with this program; if not, write to the Free Software
+-+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
+-+ */
+-+
+-+#ifndef GST_OMAPFB_H
+-+#define GST_OMAPFB_H
+-+
+-+#include <ti/sdo/dmai/BufferGfx.h>
+-+#include <ti/sdo/dmai/Framecopy.h>
+-+
+-+#include "gsttidmaibuffertransport.h"
+-+#include <gst/gst.h>
+-+#include <gst/video/gstvideosink.h>
+-+#include <gst/video/video.h>
+-+
+-+#include <X11/Xlib.h>
+-+#include <X11/Xutil.h>
+-+
+-+#include <linux/fb.h>
+-+#include <linux/omapfb.h>
+-+
+-+
+-+G_BEGIN_DECLS
+-+
+-+#define GST_OMAPFB_SINK_TYPE (gst_omapfbsink_get_type ())
+-+#define GST_OMAPFB_SINK(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_OMAPFB_SINK_TYPE, GstOmapFbSink))
+-+
+-+typedef struct GstXContext GstXContext;
+-+typedef struct GstXWindow GstXWindow;
+-+typedef struct GstOmapFbSink GstOmapFbSink;
+-+typedef struct GstOmapFbSinkClass GstOmapFbSinkClass;
+-+
+-+/**
+-+ * GstXWindow:
+-+ * @win: the Window ID of this X11 window
+-+ * @width: the width in pixels of Window @win
+-+ * @height: the height in pixels of Window @win
+-+ * @internal: used to remember if Window @win was created internally or passed
+-+ * through the #GstXOverlay interface
+-+ * @gc: the Graphical Context of Window @win
+-+ *
+-+ * Structure used to store informations about a Window.
+-+ */
+-+struct GstXWindow {
+-+    Window win;
+-+    gint width, height;
+-+    gboolean internal;
+-+    GC gc;
+-+
+-+    gint wx, wy;
+-+};
+-+
+-+/**
+-+ * GstXContext:
+-+ * @disp: the X11 Display of this context
+-+ * @screen: the default Screen of Display @disp
+-+ * @screen_num: the Screen number of @screen
+-+ * @visual: the default Visual of Screen @screen
+-+ * @root: the root Window of Display @disp
+-+ * @white: the value of a white pixel on Screen @screen
+-+ * @black: the value of a black pixel on Screen @screen
+-+ * @depth: the color depth of Display @disp
+-+ * @bpp: the number of bits per pixel on Display @disp
+-+ * @endianness: the endianness of image bytes on Display @disp
+-+ * @width: the width in pixels of Display @disp
+-+ * @height: the height in pixels of Display @disp
+-+ *
+-+ * Structure used to store various informations collected/calculated for a
+-+ * Display.
+-+ */
+-+struct GstXContext {
+-+    Display *disp;
+-+    Screen *screen;
+-+    gint screen_num;
+-+
+-+    Visual *visual;
+-+    Window root;
+-+
+-+    gint depth;
+-+    gint bpp;
+-+
+-+    gint width, height;
+-+};
+-+
+-+struct GstOmapFbSink
+-+{
+-+    GstVideoSink videosink;
+-+
+-+    struct fb_fix_screeninfo fixinfo;
+-+    struct fb_var_screeninfo varinfo;
+-+    struct fb_var_screeninfo overlay_info;
+-+    struct omapfb_mem_info mem_info;
+-+    struct omapfb_plane_info plane_info;
+-+
+-+    int overlay_fd;
+-+    unsigned char *framebuffer;
+-+    gboolean enabled;
+-+
+-+    GMutex *x_lock;
+-+    GMutex *flow_lock;
+-+
+-+    GstXContext *xcontext;
+-+    GstXWindow *xwindow;
+-+
+-+    gulong colorKey;
+-+    char *display_name;
+-+    GThread *event_thread;
+-+
+-+    void *buffer;
+-+    guint buffer_size;
+-+    guint image_format;
+-+
+-+    gboolean row_skip;
+-+    gboolean handle_events;
+-+    gboolean running;
+-+    Framecopy_Handle hFc;
+-+};
+-+
+-+struct GstOmapFbSinkClass
+-+{
+-+    GstBaseSinkClass parent_class;
+-+};
+-+
+-+GType gst_omapfbsink_get_type (void);
+-+
+-+G_END_DECLS
+-+
+-+#endif /* GST_OMAPFB_H */
+-diff -uNr ticodecplugin/src/yuv.S ticodecplugin.new/src/yuv.S
+---- ticodecplugin/src/yuv.S	1969-12-31 18:00:00.000000000 -0600
+-+++ ticodecplugin.new/src/yuv.S	2010-09-03 13:54:11.929409696 -0500
+-@@ -0,0 +1,117 @@
+-+/*
+-+    Copyright (C) 2008 Mans Rullgard
+-+
+-+    Permission is hereby granted, free of charge, to any person
+-+    obtaining a copy of this software and associated documentation
+-+    files (the "Software"), to deal in the Software without
+-+    restriction, including without limitation the rights to use, copy,
+-+    modify, merge, publish, distribute, sublicense, and/or sell copies
+-+    of the Software, and to permit persons to whom the Software is
+-+    furnished to do so, subject to the following conditions:
+-+
+-+    The above copyright notice and this permission notice shall be
+-+    included in all copies or substantial portions of the Software.
+-+
+-+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+-+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+-+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+-+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+-+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+-+    DEALINGS IN THE SOFTWARE.
+-+*/
+-+
+-+        .fpu neon
+-+        .text
+-+
+-+@ yuv420_to_yuv422(uint8_t *yuv, uint8_t *y, uint8_t *u, uint8_t *v,
+-+@                  int w, int h, int yw, int cw, int dw)
+-+
+-+#define yuv  r0
+-+#define y    r1
+-+#define u    r2
+-+#define v    r3
+-+#define w    r4
+-+#define h    r5
+-+#define yw   r6
+-+#define cw   r7
+-+#define dw   r8
+-+
+-+#define tyuv r9
+-+#define ty   r10
+-+#define tu   r11
+-+#define tv   r12
+-+#define i    lr
+-+
+-+        .global yuv420_to_yuv422
+-+        .func   yuv420_to_yuv422
+-+yuv420_to_yuv422:
+-+        push            {r4-r11,lr}
+-+        add             r4,  sp,  #36
+-+        ldm             r4, {r4-r8}
+-+1:
+-+        mov             tu,   u
+-+        mov             tv,   v
+-+        vld1.64         {d2}, [u,:64], cw               @ u0
+-+        vld1.64         {d3}, [v,:64], cw               @ v0
+-+        mov             tyuv, yuv
+-+        mov             ty,   y
+-+        vzip.8          d2,   d3                        @ u0v0
+-+        mov             i,    #16
+-+2:
+-+        pld             [y, #64]
+-+        vld1.64         {d0, d1},   [y,:128], yw        @ y0
+-+        pld             [u, #64]
+-+        subs            i,    i,    #4
+-+        vld1.64         {d6},       [u,:64],  cw        @ u2
+-+        pld             [y, #64]
+-+        vld1.64         {d4, d5},   [y,:128], yw        @ y1
+-+        pld             [v, #64]
+-+        vld1.64         {d7},       [v,:64],  cw        @ v2
+-+        pld             [y, #64]
+-+        vld1.64         {d16,d17},  [y,:128], yw        @ y2
+-+        vzip.8          d6,   d7                        @ u2v2
+-+        pld             [u, #64]
+-+        vld1.64         {d22},      [u,:64],  cw        @ u4
+-+        pld             [v, #64]
+-+        vld1.64         {d23},      [v,:64],  cw        @ v4
+-+        pld             [y, #64]
+-+        vld1.64         {d20,d21},  [y,:128], yw        @ y3
+-+        vmov            q9,   q3                        @ u2v2
+-+        vzip.8          d22,  d23                       @ u4v4
+-+        vrhadd.u8       q3,   q1,   q3                  @ u1v1
+-+        vzip.8          q0,   q1                        @ y0u0y0v0
+-+        vmov            q12,  q11                       @ u4v4
+-+        vzip.8          q2,   q3                        @ y1u1y1v1
+-+        vrhadd.u8       q11,  q9,   q11                 @ u3v3
+-+        vst1.64         {d0-d3},    [yuv,:128], dw      @ y0u0y0v0
+-+        vzip.8          q8,   q9                        @ y2u2y2v2
+-+        vst1.64         {d4-d7},    [yuv,:128], dw      @ y1u1y1v1
+-+        vzip.8          q10,  q11                       @ y3u3y3v3
+-+        vst1.64         {d16-d19},  [yuv,:128], dw      @ y2u2y2v2
+-+        vmov            q1,   q12
+-+        vst1.64         {d20-d23},  [yuv,:128], dw      @ y3u3y3v3
+-+        bgt             2b
+-+        subs            w,    w,    #16
+-+        add             yuv,  tyuv, #32
+-+        add             y,    ty,   #16
+-+        add             u,    tu,   #8
+-+        add             v,    tv,   #8
+-+        bgt             1b
+-+
+-+        ldr             w,    [sp, #36]
+-+        subs            h,    h,    #16
+-+        add             yuv,  yuv,  dw, lsl #4
+-+        sub             yuv,  yuv,  w,  lsl #1
+-+        add             y,    y,    yw, lsl #4
+-+        sub             y,    y,    w
+-+        add             u,    u,    cw, lsl #3
+-+        sub             u,    u,    w,  asr #1
+-+        add             v,    v,    cw, lsl #3
+-+        sub             v,    v,    w,  asr #1
+-+        bgt             1b
+-+
+-+        pop             {r4-r11,pc}
+-+        .endfunc
+-+
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0003-Support-setting-the-display-framerate-directly-when-.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0003-Support-setting-the-display-framerate-directly-when-.patch
+deleted file mode 100644
+index eb7181b..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0003-Support-setting-the-display-framerate-directly-when-.patch
++++ /dev/null
+@@ -1,86 +0,0 @@
+-From fb4dabcac144fcf1a7e9b1eba0114b2eed594d05 Mon Sep 17 00:00:00 2001
+-From: Don Darling <don.osc2@gmail.com>
+-Date: Thu, 26 Aug 2010 11:12:39 -0500
+-Subject: [PATCH 3/8] Support setting the display framerate directly when possible.
 -
--INSANE_SKIP_${PN} = "installed-vs-shipped"
+-If can_set_display_framerate is set to true, TIDmaiVideoSink will attempt to
+-set the display framerate directly in DMAI, instead of trying to simulate the
+-desired framerate by occasionally repeating frames.
+-
+-Platforms that support this will need to enable it explicitly.
+----
+- .../ticodecplugin/src/gsttidmaivideosink.c         |   24 ++++++++++++++++++++
+- .../ticodecplugin/src/gsttidmaivideosink.h         |    1 +
+- 2 files changed, 25 insertions(+), 0 deletions(-)
+-
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-index c87b89c..4e327ae 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-@@ -442,6 +442,7 @@ static void gst_tidmaivideosink_init(GstTIDmaiVideoSink * dmaisink,
+-     dmaisink->numBufs             = -1;
+-     dmaisink->framerepeat         = 0;
+-     dmaisink->repeat_with_refresh = FALSE;
+-+    dmaisink->can_set_display_framerate = FALSE;
+-     dmaisink->rotation            = -1;
+-     dmaisink->tempDmaiBuf         = NULL;
+-     dmaisink->accelFrameCopy      = TRUE;
+-@@ -952,6 +953,9 @@ static void gst_tidmaivideosink_check_set_framerate(GstTIDmaiVideoSink * sink)
+-  *    then 1 is returned to indicate that there will be no frame
+-  *    repeating.
+-  *
+-+ *    If the driver supports explicit configuration of the framerate, we
+-+ *    don't ever need to repeat frames, and 1 is returned.
+-+ *
+-  ******************************************************************************/
+- static int gst_tidmaivideosink_get_framerepeat(GstTIDmaiVideoSink * sink)
+- {
+-@@ -959,6 +963,13 @@ static int gst_tidmaivideosink_get_framerepeat(GstTIDmaiVideoSink * sink)
+- 
+-     GST_DEBUG("Begin\n");
+- 
+-+    /* If the display allows you to configure the frame rate, we never need
+-+     * to repeat a frame.
+-+     */
+-+    if (sink->can_set_display_framerate) {
+-+        return 1;
+-+    }
+-+
+-     /* Divide the native framerate by the desired framerate.  If the result
+-      * is a whole number, return it.  Otherwise return 1 -- we don't support
+-      * fractional repeat rates. */
+-@@ -1151,6 +1162,19 @@ static gboolean gst_tidmaivideosink_set_display_attrs(GstTIDmaiVideoSink *sink,
+-     sink->dAttrs.displayDevice = sink->displayDevice == NULL ?
+-         sink->dAttrs.displayDevice : sink->displayDevice;
+- 
+-+    /* Specify framerate if supported by DMAI and the display driver */
+-+    if (sink->can_set_display_framerate) {
+-+        #if defined (Platform_dm365)
+-+        sink->dAttrs.forceFrameRateNum =
+-+            gst_value_get_fraction_numerator(&sink->iattrs.framerate);
+-+        sink->dAttrs.forceFrameRateDen =
+-+            gst_value_get_fraction_denominator(&sink->iattrs.framerate);
+-+        #else
+-+        GST_ERROR("setting driver framerate is not supported\n");
+-+        return FALSE;
+-+        #endif
+-+    }
+-+
+-     /* Set rotation on OMAP35xx */
+-     if (sink->cpu_dev == Cpu_Device_OMAP3530) {
+-         sink->dAttrs.rotation = sink->rotation == -1 ?
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h
+-index 5d13e08..4800fcd 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h
+-@@ -124,6 +124,7 @@ struct _GstTIDmaiVideoSink {
+-    */
+-   int           framerepeat;
+-   gboolean      repeat_with_refresh;
+-+  gboolean      can_set_display_framerate;
+-   gboolean      signal_handoffs;
+- 
+-   /* Hardware accelerated copy */
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0004-Cosmetic-cleanup-clarify-some-comments.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0004-Cosmetic-cleanup-clarify-some-comments.patch
+deleted file mode 100644
+index 229c452..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0004-Cosmetic-cleanup-clarify-some-comments.patch
++++ /dev/null
+@@ -1,73 +0,0 @@
+-From 03ab3ad3f790dde2dbddfeb62001e8610dbb919a Mon Sep 17 00:00:00 2001
+-From: Don Darling <don.osc2@gmail.com>
+-Date: Thu, 26 Aug 2010 18:25:56 -0500
+-Subject: [PATCH 4/8] Cosmetic cleanup / clarify some comments.
+-
+----
+- .../ticodecplugin/src/gsttidmaivideosink.c         |   42 ++++++++-----------
+- 1 files changed, 18 insertions(+), 24 deletions(-)
+-
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-index 4e327ae..1d04e1c 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-@@ -434,23 +434,23 @@ static void gst_tidmaivideosink_init(GstTIDmaiVideoSink * dmaisink,
+-      * Anything that has a NULL value will be initialized with DMAI defaults 
+-      * in the gst_tidmaivideosink_init_display function.
+-      */
+--    dmaisink->displayStd          = NULL;
+--    dmaisink->displayDevice       = NULL;
+--    dmaisink->dGfxAttrs           = defaultGfxAttrs;
+--    dmaisink->videoStd            = NULL;
+--    dmaisink->videoOutput         = NULL;
+--    dmaisink->numBufs             = -1;
+--    dmaisink->framerepeat         = 0;
+--    dmaisink->repeat_with_refresh = FALSE;
+-+    dmaisink->displayStd                = NULL;
+-+    dmaisink->displayDevice             = NULL;
+-+    dmaisink->dGfxAttrs                 = defaultGfxAttrs;
+-+    dmaisink->videoStd                  = NULL;
+-+    dmaisink->videoOutput               = NULL;
+-+    dmaisink->numBufs                   = -1;
+-+    dmaisink->framerepeat               = 0;
+-+    dmaisink->repeat_with_refresh       = FALSE;
+-     dmaisink->can_set_display_framerate = FALSE;
+--    dmaisink->rotation            = -1;
+--    dmaisink->tempDmaiBuf         = NULL;
+--    dmaisink->accelFrameCopy      = TRUE;
+--    dmaisink->autoselect          = FALSE;
+--    dmaisink->prevVideoStd        = 0;
+--    dmaisink->useUserptrBufs      = FALSE;
+--    dmaisink->hideOSD             = FALSE;
+--    dmaisink->hDispBufTab         = NULL;
+-+    dmaisink->rotation                  = -1;
+-+    dmaisink->tempDmaiBuf               = NULL;
+-+    dmaisink->accelFrameCopy            = TRUE;
+-+    dmaisink->autoselect                = FALSE;
+-+    dmaisink->prevVideoStd              = 0;
+-+    dmaisink->useUserptrBufs            = FALSE;
+-+    dmaisink->hideOSD                   = FALSE;
+-+    dmaisink->hDispBufTab               = NULL;
+- 
+-     dmaisink->signal_handoffs = DEFAULT_SIGNAL_HANDOFFS;
+- 
+-@@ -947,14 +947,8 @@ static void gst_tidmaivideosink_check_set_framerate(GstTIDmaiVideoSink * sink)
+- /******************************************************************************
+-  * gst_tidmaivideosink_get_framerepeat
+-  *
+-- *    This function will look at the output display frame rate and the
+-- *    input frame rate and determine how many times a frame should be
+-- *    repeated.  If the output is not an integer multiple of the input
+-- *    then 1 is returned to indicate that there will be no frame
+-- *    repeating.
+-- *
+-- *    If the driver supports explicit configuration of the framerate, we
+-- *    don't ever need to repeat frames, and 1 is returned.
+-+ *    Return how many times a frame should be repeated to support a 
+-+ *    framerate lower than the display's native speed.
+-  *
+-  ******************************************************************************/
+- static int gst_tidmaivideosink_get_framerepeat(GstTIDmaiVideoSink * sink)
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0005-Enable-setting-the-framerate-directly-on-DM365.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0005-Enable-setting-the-framerate-directly-on-DM365.patch
+deleted file mode 100644
+index e405957..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0005-Enable-setting-the-framerate-directly-on-DM365.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 1cffa12c9ceb07558d2e4b35cc674070c7a3b8ee Mon Sep 17 00:00:00 2001
+-From: Don Darling <don.osc2@gmail.com>
+-Date: Thu, 26 Aug 2010 18:27:50 -0500
+-Subject: [PATCH 5/8] Enable setting the framerate directly on DM365.
+-
+-This is supported by recent changes to the display driver.  DM365 will no
+-longer use the "repeat_with_refresh" method to display frames more than once.
+----
+- .../ticodecplugin/src/gsttidmaivideosink.c         |    7 ++-----
+- 1 files changed, 2 insertions(+), 5 deletions(-)
+-
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-index 1d04e1c..3615bfd 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-@@ -475,12 +475,9 @@ static void gst_tidmaivideosink_init(GstTIDmaiVideoSink * dmaisink,
+-     g_assert(GST_VALUE_HOLDS_FRACTION(&dmaisink->oattrs.framerate));
+-     gst_value_set_fraction(&dmaisink->oattrs.framerate, 0, 1);
+- 
+--    /* On DM365, we don't have the bandwidth to copy a frame multiple times to
+--     * display them more than once.  We must put a frame to the display once
+--     * and let it be refreshed multiple times.
+--     */
+-+    /* DM365 supports setting the display framerate */
+-     #if defined(Platform_dm365)
+--    dmaisink->repeat_with_refresh = TRUE;
+-+    dmaisink->can_set_display_framerate = TRUE;
+-     #endif
+- 
+-     gst_tidmaivideosink_init_env(dmaisink);
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0006-Remove-the-repeat_with_refresh-feature.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0006-Remove-the-repeat_with_refresh-feature.patch
+deleted file mode 100644
+index 4055d0b..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0006-Remove-the-repeat_with_refresh-feature.patch
++++ /dev/null
+@@ -1,132 +0,0 @@
+-From c1205a792fd519cdebc32c00a5f604ccd78d3eac Mon Sep 17 00:00:00 2001
+-From: Don Darling <don.osc2@gmail.com>
+-Date: Thu, 26 Aug 2010 18:30:13 -0500
+-Subject: [PATCH 6/8] Remove the "repeat_with_refresh" feature.
+-
+-No platforms are using it any longer.
+----
+- .../ticodecplugin/src/gsttidmaivideosink.c         |   67 +-------------------
+- .../ticodecplugin/src/gsttidmaivideosink.h         |    1 -
+- 2 files changed, 1 insertions(+), 67 deletions(-)
+-
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-index 3615bfd..0125ed2 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-@@ -170,8 +170,6 @@ static gboolean
+-  gst_tidmaivideosink_event(GstBaseSink * bsink, GstEvent * event);
+- static void 
+-     gst_tidmaivideosink_init_env(GstTIDmaiVideoSink *sink);
+--static int
+--    gst_tidmaivideosink_videostd_get_refresh_latency(VideoStd_Type videoStd);
+- static gboolean
+-     gst_tidmaivideosink_alloc_display_buffers(GstTIDmaiVideoSink * sink,
+-         Int32 bufSize);
+-@@ -441,7 +439,6 @@ static void gst_tidmaivideosink_init(GstTIDmaiVideoSink * dmaisink,
+-     dmaisink->videoOutput               = NULL;
+-     dmaisink->numBufs                   = -1;
+-     dmaisink->framerepeat               = 0;
+--    dmaisink->repeat_with_refresh       = FALSE;
+-     dmaisink->can_set_display_framerate = FALSE;
+-     dmaisink->rotation                  = -1;
+-     dmaisink->tempDmaiBuf               = NULL;
+-@@ -755,55 +752,6 @@ static int gst_tidmaivideosink_videostd_get_attrs(VideoStd_Type videoStd,
+- 
+- 
+- /*******************************************************************************
+-- * gst_tidmaivideosink_videostd_get_refresh_latency
+-- *
+-- *    Return the refresh latency in us for the given display standard.
+--*******************************************************************************/
+--static int gst_tidmaivideosink_videostd_get_refresh_latency(
+--               VideoStd_Type videoStd)
+--{
+--    switch (videoStd) {
+--        case VideoStd_1080P_24:
+--            return 41667;
+--
+--        case VideoStd_SIF_PAL:
+--        case VideoStd_D1_PAL:
+--        case VideoStd_1080P_25:
+--        case VideoStd_1080I_25:
+--            return 40000;
+--
+--        case VideoStd_CIF:
+--        case VideoStd_SIF_NTSC:
+--        case VideoStd_D1_NTSC:
+--            return 33367;
+--            
+--        case VideoStd_1080I_30:
+--        case VideoStd_1080P_30:
+--            return 33333;
+--
+--        case VideoStd_576P:
+--        case VideoStd_720P_50:
+--            return 20000;
+--
+--        case VideoStd_480P:
+--        case VideoStd_720P_60:
+--        #if defined(Platform_dm6467t)
+--        case VideoStd_1080P_60:
+--        #endif
+--            return 16667;
+--
+--        case VideoStd_VGA:
+--            return 16667;
+--
+--        default:
+--            break;
+--    }
+--    GST_ERROR("Unknown videoStd entered (VideoStd = %d)\n", videoStd);
+--    return 0;
+--}
+--
+--
+--/*******************************************************************************
+-  * gst_tidmaivideosink_find_videostd
+-  *
+-  *    This function will take in a VideoStd_Attrs structure and find the
+-@@ -1580,10 +1528,7 @@ static GstFlowReturn gst_tidmaivideosink_render(GstBaseSink * bsink,
+- 
+-     /* Display the frame as many times as specified by framerepeat.  By
+-      * default, the input buffer is copied to a display buffer for each time
+--     * it is to be repeated.  However, if repeat_with_refresh is TRUE, then
+--     * the platform doesn't have the bandwidth for multiple copies.  In this
+--     * case we copy and display the input buffer only once, but let it refresh
+--     * multiple times.
+-+     * it is to be repeated.  
+-      */
+-     for (i = 0; i < sink->framerepeat; i++) {
+- 
+-@@ -1594,16 +1539,6 @@ static GstFlowReturn gst_tidmaivideosink_render(GstBaseSink * bsink,
+-             goto cleanup;
+-         }
+- 
+--        /* If repeat_with_refresh was specified, wait for the display to
+--         * refresh framerepeat-1 times to make sure it has finished displaying
+--         * this buffer before we write new data into it.
+--         */
+--        while (sink->repeat_with_refresh && i < (sink->framerepeat-1)) {
+--            usleep(gst_tidmaivideosink_videostd_get_refresh_latency(
+--                sink->dAttrs.videoStd) + 1);
+--            i++;
+--        }
+--
+-         /* Retrieve the dimensions of the display buffer */
+-         BufferGfx_getDimensions(hDispBuf, &dim);
+-         GST_LOG("Display size %dx%d pitch %d\n",
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h
+-index 4800fcd..2a28e4f 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.h
+-@@ -123,7 +123,6 @@ struct _GstTIDmaiVideoSink {
+-    * should be repeated to match the display output frame rate.
+-    */
+-   int           framerepeat;
+--  gboolean      repeat_with_refresh;
+-   gboolean      can_set_display_framerate;
+-   gboolean      signal_handoffs;
+- 
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0007-Add-support-for-pad-allocated-buffers-in-TIDmaiVideo.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0007-Add-support-for-pad-allocated-buffers-in-TIDmaiVideo.patch
+deleted file mode 100644
+index 863bd34..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0007-Add-support-for-pad-allocated-buffers-in-TIDmaiVideo.patch
++++ /dev/null
+@@ -1,313 +0,0 @@
+-From 108fa0bb550f9b7355bfd5ae5340220fd1a4c9b5 Mon Sep 17 00:00:00 2001
+-From: Don Darling <don.osc2@gmail.com>
+-Date: Thu, 5 Aug 2010 15:09:54 -0500
+-Subject: [PATCH 7/8] Add support for pad-allocated buffers in TIDmaiVideoSink.
+-
+-This feature is currently only tested and enabled for DM365.
+----
+- .../ticodecplugin/src/gsttidmaibuffertransport.c   |    4 +-
+- .../ticodecplugin/src/gsttidmaibuffertransport.h   |    6 +-
+- .../ticodecplugin/src/gsttidmaivideosink.c         |  197 ++++++++++++++++++--
+- 3 files changed, 191 insertions(+), 16 deletions(-)
+-
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.c b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.c
+-index 5fad371..9c69285 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.c
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.c
+-@@ -136,8 +136,8 @@ static void gst_tidmaibuffertransport_finalize(GstBuffer *gstbuffer)
+-      */
+-     if (Buffer_getBufTab(self->dmaiBuffer) != NULL) {
+-         GST_LOG("clearing GStreamer useMask bit\n");
+--        Buffer_freeUseMask(self->dmaiBuffer,
+--        gst_tidmaibuffer_GST_FREE);
+-+        Buffer_freeUseMask(self->dmaiBuffer, gst_tidmaibuffer_GST_FREE);
+-+        Buffer_freeUseMask(self->dmaiBuffer, gst_tidmaibuffer_VIDEOSINK_FREE);
+-     } else {
+-         GST_LOG("calling Buffer_delete()\n");
+-         Buffer_delete(self->dmaiBuffer);
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.h b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.h
+-index 0265e70..20945f3 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.h
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaibuffertransport.h
+-@@ -52,8 +52,10 @@ G_BEGIN_DECLS
+-     GstTIDmaiBufferTransportClass))
+- 
+- /* Use mask flags that keep track of where buffer is in use */
+--#define gst_tidmaibuffer_GST_FREE    0x1
+--#define gst_tidmaibuffer_CODEC_FREE  0x2
+-+#define gst_tidmaibuffer_GST_FREE        0x1
+-+#define gst_tidmaibuffer_CODEC_FREE      0x2
+-+#define gst_tidmaibuffer_VIDEOSINK_FREE  0x4
+-+#define gst_tidmaibuffer_DISPLAY_FREE    0x8
+- 
+- typedef struct _GstTIDmaiBufferTransport      GstTIDmaiBufferTransport;
+- typedef struct _GstTIDmaiBufferTransportClass GstTIDmaiBufferTransportClass;
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-index 0125ed2..7b84a8e 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttidmaivideosink.c
+-@@ -151,6 +151,9 @@ static GstStateChangeReturn
+-  gst_tidmaivideosink_change_state(GstElement * element,
+-      GstStateChange transition);
+- static GstFlowReturn
+-+ gst_tidmaivideosink_buffer_alloc(GstBaseSink * bsink, guint64 offset,
+-+     guint size, GstCaps * caps, GstBuffer ** buf);
+-+static GstFlowReturn
+-  gst_tidmaivideosink_preroll(GstBaseSink * bsink, GstBuffer * buffer);
+- static int
+-  gst_tidmaivideosink_videostd_get_attrs(VideoStd_Type videoStd,
+-@@ -353,6 +356,13 @@ static void gst_tidmaivideosink_class_init(GstTIDmaiVideoSinkClass * klass)
+-         GST_DEBUG_FUNCPTR(gst_tidmaivideosink_preroll);
+-     gstbase_sink_class->render   =
+-         GST_DEBUG_FUNCPTR(gst_tidmaivideosink_render);
+-+    gstbase_sink_class->buffer_alloc =
+-+        GST_DEBUG_FUNCPTR(gst_tidmaivideosink_buffer_alloc);
+-+
+-+    /* Pad-buffer allocation is currently only supported for DM365 */
+-+    #if !defined(Platform_dm365)
+-+    gstbase_sink_class->buffer_alloc = NULL;
+-+    #endif
+- }
+- 
+- 
+-@@ -663,6 +673,132 @@ static gboolean gst_tidmaivideosink_event(GstBaseSink * bsink,
+- 
+- 
+- /******************************************************************************
+-+ * gst_tidmaivideosink_buffer_alloc
+-+ ******************************************************************************/
+-+static GstFlowReturn gst_tidmaivideosink_buffer_alloc(GstBaseSink * bsink,
+-+                         guint64 offset, guint size, GstCaps * caps,
+-+                         GstBuffer ** buf)
+-+{
+-+    GstTIDmaiVideoSink *dmaisink    = GST_TIDMAIVIDEOSINK(bsink);
+-+    BufferGfx_Attrs     gfxAttrs    = BufferGfx_Attrs_DEFAULT;
+-+    gboolean            alloc_unref = FALSE;
+-+    Buffer_Handle       hDispBuf    = NULL;
+-+    GstCaps            *alloc_caps;
+-+
+-+    *buf = NULL;
+-+
+-+    GST_LOG_OBJECT(dmaisink,
+-+        "a buffer of %d bytes was requested with caps %" GST_PTR_FORMAT
+-+        " and offset %" G_GUINT64_FORMAT, size, caps, offset);
+-+
+-+    /* assume we're going to alloc what was requested, keep track of wheter we
+-+     * need to unref or not. When we suggest a new format upstream we will
+-+     * create a new caps that we need to unref. */
+-+    alloc_caps = caps;
+-+
+-+    /* Process the buffer caps */
+-+    if (!gst_tidmaivideosink_process_caps(bsink, alloc_caps)) {
+-+        return GST_FLOW_UNEXPECTED;
+-+    }
+-+
+-+    /* Pad buffer allocation requires that we use user-allocated display
+-+     * buffers.
+-+     */
+-+    if (!dmaisink->useUserptrBufs && dmaisink->hDisplay) {
+-+        GST_ELEMENT_ERROR(dmaisink, RESOURCE, FAILED,
+-+            ("Cannot use pad buffer allocation after mmap buffers already "
+-+             "in use\n"), (NULL));
+-+        return GST_FLOW_UNEXPECTED;
+-+    }
+-+    else {
+-+        dmaisink->useUserptrBufs = TRUE;
+-+    }
+-+
+-+    /* Allocate the display buffers */
+-+    if (!dmaisink->hDispBufTab && dmaisink->useUserptrBufs) {
+-+
+-+        /* Set the display attributes now so we can allocate display buffers */
+-+        if (!gst_tidmaivideosink_set_display_attrs(dmaisink,
+-+            dmaisink->dGfxAttrs.colorSpace)) {
+-+            GST_ERROR("Error while trying to set the display attributes\n");
+-+            return GST_FLOW_UNEXPECTED;
+-+        }
+-+
+-+        if (!gst_tidmaivideosink_alloc_display_buffers(dmaisink, size)) {
+-+            GST_ERROR("Failed to allocate display buffers");
+-+            return GST_FLOW_UNEXPECTED;
+-+        }
+-+    }
+-+
+-+    /* Get a buffer from the BufTab or display driver */
+-+    if (!(hDispBuf = gst_tidmaibuftab_get_buf(dmaisink->hDispBufTab))) {
+-+        if (dmaisink->hDisplay &&
+-+            Display_get(dmaisink->hDisplay, &hDispBuf) < 0) {
+-+            GST_ELEMENT_ERROR(dmaisink, RESOURCE, FAILED,
+-+                ("Failed to get display buffer\n"), (NULL));
+-+            return GST_FLOW_UNEXPECTED;
+-+        }
+-+    }
+-+
+-+    /* If the geometry doesn't match, generate a new caps for it */
+-+    Buffer_getAttrs(hDispBuf, BufferGfx_getBufferAttrs(&gfxAttrs));
+-+
+-+    if (gfxAttrs.dim.width  != dmaisink->dGfxAttrs.dim.width  ||
+-+        gfxAttrs.dim.height != dmaisink->dGfxAttrs.dim.height ||
+-+        gfxAttrs.colorSpace != dmaisink->dGfxAttrs.colorSpace) {
+-+
+-+        GstCaps *desired_caps;
+-+        GstStructure *desired_struct;
+-+
+-+        /* make a copy of the incomming caps to create the new suggestion. We
+-+         * can't use make_writable because we might then destroy the original
+-+         * caps which we still need when the peer does not accept the
+-+         * suggestion.
+-+         */
+-+        desired_caps = gst_caps_copy (caps);
+-+        desired_struct = gst_caps_get_structure (desired_caps, 0);
+-+
+-+        GST_DEBUG ("we prefer to receive a %ldx%ld video; %ldx%ld was requested",
+-+            gfxAttrs.dim.width, gfxAttrs.dim.height,
+-+            dmaisink->dGfxAttrs.dim.width, dmaisink->dGfxAttrs.dim.height);
+-+        gst_structure_set (desired_struct, "width", G_TYPE_INT,
+-+            gfxAttrs.dim.width, NULL);
+-+        gst_structure_set (desired_struct, "height", G_TYPE_INT,
+-+            gfxAttrs.dim.height, NULL);
+-+
+-+        if (gst_pad_peer_accept_caps (GST_VIDEO_SINK_PAD (dmaisink),
+-+                desired_caps)) {
+-+            alloc_caps  = desired_caps;
+-+            alloc_unref = TRUE;
+-+
+-+            if (!gst_tidmaivideosink_process_caps(bsink, alloc_caps)) {
+-+                return GST_FLOW_UNEXPECTED;
+-+            }
+-+            GST_DEBUG ("peer pad accepts our desired caps %" GST_PTR_FORMAT,
+-+                desired_caps);
+-+        }
+-+        else {
+-+            GST_DEBUG ("peer pad does not accept our desired caps %" 
+-+                GST_PTR_FORMAT, desired_caps);
+-+        }
+-+    }
+-+
+-+    /* Return the display buffer */
+-+    BufferGfx_resetDimensions(hDispBuf);
+-+    Buffer_freeUseMask(hDispBuf, gst_tidmaibuffer_DISPLAY_FREE);
+-+    *buf = gst_tidmaibuffertransport_new(hDispBuf, NULL);
+-+    gst_buffer_set_caps(*buf, alloc_caps);
+-+
+-+    /* If we allocated new caps, unref them now */
+-+    if (alloc_unref) {
+-+        gst_caps_unref (alloc_caps);
+-+    }
+-+
+-+    return GST_FLOW_OK;
+-+}
+-+
+-+
+-+/******************************************************************************
+-  * gst_tidmaivideosink_preroll
+-  ******************************************************************************/
+- static GstFlowReturn gst_tidmaivideosink_preroll(GstBaseSink * bsink,
+-@@ -1282,6 +1418,18 @@ static gboolean gst_tidmaivideosink_init_display(GstTIDmaiVideoSink * sink)
+-             return FALSE;
+-         }
+- 
+-+        /* If we own the display buffers, tell DMAI to delay starting the
+-+         * display until we call Display_put for the first time.
+-+         */
+-+        if (sink->hDispBufTab) {
+-+            #if defined(Platform_dm365)
+-+            sink->dAttrs.delayStreamon = TRUE;
+-+            #else
+-+            GST_ERROR("delayed V4L2 streamon not supported\n");
+-+            return FALSE;
+-+            #endif
+-+        }
+-+
+-         /* Allocate user-allocated display buffers, if requested */
+-         if (!sink->hDispBufTab && sink->useUserptrBufs) {
+-             if (!gst_tidmaivideosink_alloc_display_buffers(sink, 0)) {
+-@@ -1416,9 +1564,6 @@ static gboolean gst_tidmaivideosink_process_caps(GstBaseSink * bsink,
+-     gst_structure_get_fraction(structure, "framerate", &framerateNum,
+-         &framerateDen);
+- 
+--    /* Error check new values against existing ones */
+--    /* TBD */
+--
+-     /* Populate the display graphics attributes */
+-     dmaisink->dGfxAttrs.bAttrs.reference = dmaisink->contiguousInputFrame;
+-     dmaisink->dGfxAttrs.dim.width        = width;
+-@@ -1445,9 +1590,10 @@ static gboolean gst_tidmaivideosink_process_caps(GstBaseSink * bsink,
+- static GstFlowReturn gst_tidmaivideosink_render(GstBaseSink * bsink,
+-                          GstBuffer * buf)
+- {
+--    Buffer_Handle         hDispBuf  = NULL;
+--    Buffer_Handle         inBuf     = NULL;
+--    GstTIDmaiVideoSink   *sink      = GST_TIDMAIVIDEOSINK(bsink);
+-+    Buffer_Handle         hDispBuf     = NULL;
+-+    Buffer_Handle         inBuf        = NULL;
+-+    gboolean              inBufIsOurs  = FALSE;
+-+    GstTIDmaiVideoSink   *sink         = GST_TIDMAIVIDEOSINK(bsink);
+-     BufferGfx_Dimensions  dim;
+-     gchar                 dur_str[64];
+-     gchar                 ts_str[64];
+-@@ -1470,7 +1616,10 @@ static GstFlowReturn gst_tidmaivideosink_render(GstBaseSink * bsink,
+-      *  generated via videotestsrc plugin.
+-      */
+-     if (GST_IS_TIDMAIBUFFERTRANSPORT(buf)) {
+--        inBuf = GST_TIDMAIBUFFERTRANSPORT_DMAIBUF(buf);
+-+        inBuf       = GST_TIDMAIBUFFERTRANSPORT_DMAIBUF(buf);
+-+        inBufIsOurs = (sink->hDispBufTab &&
+-+                          GST_TIDMAIBUFTAB_BUFTAB(sink->hDispBufTab) ==
+-+                              Buffer_getBufTab(inBuf));
+-     } else {
+-         /* allocate DMAI buffer */
+-         if (sink->tempDmaiBuf == NULL) {
+-@@ -1532,11 +1681,33 @@ static GstFlowReturn gst_tidmaivideosink_render(GstBaseSink * bsink,
+-      */
+-     for (i = 0; i < sink->framerepeat; i++) {
+- 
+--        /* Get a buffer from the display driver */
+--        if (Display_get(sink->hDisplay, &hDispBuf) < 0) {
+--            GST_ELEMENT_ERROR(sink, RESOURCE, FAILED,
+--            ("Failed to get display buffer\n"), (NULL));
+--            goto cleanup;
+-+        /* If the input buffer originated from this element via pad allocation,
+-+         * simply give it back to the display and continue.
+-+         */
+-+        if (inBufIsOurs) {
+-+
+-+            /* Mark buffer as in-use by the display so it can't be re-used
+-+             * until it comes back from Display_get */
+-+            Buffer_setUseMask(inBuf, Buffer_getUseMask(inBuf) |
+-+                gst_tidmaibuffer_DISPLAY_FREE);
+-+
+-+            if (Display_put(sink->hDisplay, inBuf) < 0) {
+-+                GST_ELEMENT_ERROR(sink, RESOURCE, FAILED,
+-+                ("Failed to put display buffer\n"), (NULL));
+-+                goto cleanup;
+-+            }
+-+            continue;
+-+        }
+-+
+-+        /* Otherwise, our input buffer originated from up-stream.  Retrieve a
+-+         * display buffer to copy the contents into.
+-+         */
+-+        else {
+-+            if (Display_get(sink->hDisplay, &hDispBuf) < 0) {
+-+                GST_ELEMENT_ERROR(sink, RESOURCE, FAILED,
+-+                ("Failed to get display buffer\n"), (NULL));
+-+                goto cleanup;
+-+            }
+-         }
+- 
+-         /* Retrieve the dimensions of the display buffer */
+-@@ -1844,8 +2015,10 @@ static gboolean gst_tidmaivideosink_alloc_display_buffers(
+-             gfxAttrs.dim.height, gfxAttrs.dim.lineLength, gfxAttrs.colorSpace);
+-     }
+- 
+-+    gfxAttrs.bAttrs.useMask = gst_tidmaibuffer_VIDEOSINK_FREE;
+-     sink->hDispBufTab = gst_tidmaibuftab_new(sink->dAttrs.numBufs, bufSize,
+-         BufferGfx_getBufferAttrs(&gfxAttrs));
+-+    gst_tidmaibuftab_set_blocking(sink->hDispBufTab, FALSE);
+- 
+-     return TRUE;
+- }
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0008-Add-support-for-pad-allocated-buffers-in-TIViddec2.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0008-Add-support-for-pad-allocated-buffers-in-TIViddec2.patch
+deleted file mode 100644
+index 9ceb30f..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0008-Add-support-for-pad-allocated-buffers-in-TIViddec2.patch
++++ /dev/null
+@@ -1,302 +0,0 @@
+-From e5a264465c1c77d5fc18eeb51b99c79fc3f28a3e Mon Sep 17 00:00:00 2001
+-From: Don Darling <don.osc2@gmail.com>
+-Date: Tue, 8 Jun 2010 13:48:51 -0500
+-Subject: [PATCH 8/8] Add support for pad-allocated buffers in TIViddec2.
+-
+-When padAllocOutbufs=TRUE is specified to the TIViddec2 element, it will
+-attempt to allocate buffers from downstream instead of allocating its own.
+-
+-Downstream buffers will only be used if it can be determined that they are
+-all members of a DMAI BufTab, which means they are CMEM-based, and will work
+-with the codecs.  Currently, the only known downstream element that can provide
+-these buffers is TIDmaiVideoSink, and it is only supported for DM365.
+-
+-There is currently no support for centering small clips in the middle of the
+-display screen -- this would require additional support in the display driver.
+-As a result, pad-allocation can currently only be used with clips that are at
+-least as large as the display, and this feature not enabled by default because
+-of these strict clip-size requirements.
+-
+-On DM365, there are known issues with the MPEG-2 decoder's output buffer size
+-calculation that cause it not to work with D1 resolutions unless you hard-code
+-the size.  H.264 and MPEG-4 decoders work as expected, and MPEG-2 works as
+-expected for 720p.
+----
+- .../ti_build/ticodecplugin/src/gsttividdec2.c      |  159 ++++++++++++++++----
+- .../ti_build/ticodecplugin/src/gsttividdec2.h      |    1 +
+- 2 files changed, 127 insertions(+), 33 deletions(-)
+-
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.c b/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.c
+-index c39208f..ec3cb05 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.c
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.c
+-@@ -73,7 +73,8 @@ enum
+-   PROP_FRAMERATE,       /* framerate      (GstFraction) */
+-   PROP_DISPLAY_BUFFER,  /* displayBuffer  (boolean) */
+-   PROP_GEN_TIMESTAMPS,  /* genTimeStamps  (boolean) */
+--  PROP_RTCODECTHREAD    /* rtCodecThread (boolean) */
+-+  PROP_RTCODECTHREAD,   /* rtCodecThread (boolean) */
+-+  PROP_PAD_ALLOC_OUTBUFS /* padAllocOutbufs (boolean) */
+- };
+- 
+- /* Define sink (input) pad capabilities.  Currently, MPEG and H264 are 
+-@@ -170,8 +171,8 @@ static GstClockTime
+-  gst_tividdec2_frame_duration(GstTIViddec2 *viddec2);
+- static gboolean
+-  gst_tividdec2_resizeBufTab(GstTIViddec2 *viddec2);
+--static gboolean 
+--    gst_tividdec2_codec_start (GstTIViddec2  *viddec2);
+-+static gboolean
+-+    gst_tividdec2_codec_start (GstTIViddec2  *viddec2, GstBuffer **padBuffer);
+- static gboolean 
+-     gst_tividdec2_codec_stop (GstTIViddec2  *viddec2);
+- static void 
+-@@ -324,6 +325,11 @@ static void gst_tividdec2_class_init(GstTIViddec2Class *klass)
+-         g_param_spec_boolean("genTimeStamps", "Generate Time Stamps",
+-             "Set timestamps on output buffers",
+-             TRUE, G_PARAM_WRITABLE));
+-+
+-+    g_object_class_install_property(gobject_class, PROP_PAD_ALLOC_OUTBUFS,
+-+        g_param_spec_boolean("padAllocOutbufs", "Use pad allocation",
+-+            "Try to allocate buffers with pad allocation",
+-+            FALSE, G_PARAM_WRITABLE));
+- }
+- 
+- /******************************************************************************
+-@@ -448,6 +454,7 @@ static void gst_tividdec2_init(GstTIViddec2 *viddec2, GstTIViddec2Class *gclass)
+- 
+-     viddec2->numOutputBufs      = 0UL;
+-     viddec2->hOutBufTab         = NULL;
+-+    viddec2->padAllocOutbufs    = FALSE;
+-     viddec2->circBuf            = NULL;
+- 
+-     viddec2->sps_pps_data       = NULL;
+-@@ -548,6 +555,10 @@ static void gst_tividdec2_set_property(GObject *object, guint prop_id,
+-             viddec2->rtCodecThread = g_value_get_boolean(value);
+-             GST_LOG("setting \"RTCodecThread\" to \"%s\"\n",
+-                 viddec2->rtCodecThread ? "TRUE" : "FALSE");
+-+        case PROP_PAD_ALLOC_OUTBUFS:
+-+            viddec2->padAllocOutbufs = g_value_get_boolean(value);
+-+            GST_LOG("setting \"padAllocOutbufs\" to \"%s\"\n",
+-+                viddec2->padAllocOutbufs ? "TRUE" : "FALSE");
+-             break;
+-         default:
+-             G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
+-@@ -1079,9 +1090,9 @@ static gboolean gst_tividdec2_init_video(GstTIViddec2 *viddec2)
+-      */
+-     Rendezvous_meet(viddec2->waitOnDecodeThread);
+- 
+--    if (viddec2->circBuf == NULL || viddec2->hOutBufTab == NULL) {
+-+    if (viddec2->circBuf == NULL) {
+-         GST_ELEMENT_ERROR(viddec2, RESOURCE, FAILED,
+--        ("decode thread failed to create circbuf or display buffer handles\n"),
+-+        ("decode thread failed to create circbuf handles\n"),
+-         (NULL));
+-         return FALSE;
+-     }
+-@@ -1260,11 +1271,13 @@ static gboolean gst_tividdec2_codec_stop (GstTIViddec2  *viddec2)
+-  * gst_tividdec2_codec_start
+-  *     Initialize codec engine
+-  *****************************************************************************/
+--static gboolean gst_tividdec2_codec_start (GstTIViddec2  *viddec2)
+-+static gboolean gst_tividdec2_codec_start (GstTIViddec2  *viddec2,
+-+           GstBuffer **padBuffer)
+- {
+--    VIDDEC2_Params         params    = Vdec2_Params_DEFAULT;
+--    VIDDEC2_DynamicParams  dynParams = Vdec2_DynamicParams_DEFAULT;
+--    BufferGfx_Attrs        gfxAttrs  = BufferGfx_Attrs_DEFAULT;
+-+    VIDDEC2_Params         params      = Vdec2_Params_DEFAULT;
+-+    VIDDEC2_DynamicParams  dynParams   = Vdec2_DynamicParams_DEFAULT;
+-+    BufferGfx_Attrs        gfxAttrs    = BufferGfx_Attrs_DEFAULT;
+-+    BufTab_Handle          codecBufTab = NULL;
+-     Cpu_Device             device;
+-     ColorSpace_Type        colorSpace;
+-     Int                    defaultNumBufs;
+-@@ -1364,30 +1377,77 @@ static gboolean gst_tividdec2_codec_start (GstTIViddec2  *viddec2)
+-         viddec2->numOutputBufs = defaultNumBufs;
+-     }
+- 
+--    /* Create codec output buffers */
+--    GST_LOG("creating output buffer table\n");
+--    gfxAttrs.colorSpace     = colorSpace;
+--    gfxAttrs.dim.width      = params.maxWidth;
+--    gfxAttrs.dim.height     = params.maxHeight;
+--    gfxAttrs.dim.lineLength = BufferGfx_calcLineLength(
+--                                  gfxAttrs.dim.width, gfxAttrs.colorSpace);
+-+    /* Try to allocate a buffer from downstream.  To do this, we must first
+-+     * set the framerate to a reasonable default if one hasn't been specified,
+-+     * and we need to set the source pad caps with the stream information we
+-+     * have so far.
+-+     */
+-+    gst_tividdec2_frame_duration(viddec2);
+-+    gst_tividdec2_set_source_caps_base(viddec2, params.maxWidth,
+-+        params.maxHeight, colorSpace);
+-+
+-+    *padBuffer = NULL;
+-+    if (viddec2->padAllocOutbufs) {
+-+        if (gst_pad_alloc_buffer(viddec2->srcpad, 0,
+-+            Vdec2_getOutBufSize(viddec2->hVd), GST_PAD_CAPS(viddec2->srcpad),
+-+            padBuffer) != GST_FLOW_OK) {
+-+            GST_LOG("failed to allocate a downstream buffer\n");
+-+            *padBuffer = NULL;
+-+        }
+-+
+-+        if (*padBuffer && !GST_IS_TIDMAIBUFFERTRANSPORT(*padBuffer)) {
+-+            GST_LOG("downstream buffer is not a DMAI buffer; disabling use of "
+-+                "pad-allocated buffers\n");
+-+            gst_buffer_unref(*padBuffer);
+-+            *padBuffer = NULL;
+-+        }
+-+
+-+        if (*padBuffer) {
+-+            codecBufTab = Buffer_getBufTab(
+-+                GST_TIDMAIBUFFERTRANSPORT_DMAIBUF(*padBuffer));
+-+
+-+            if (!codecBufTab) {
+-+                GST_LOG("downstream buffer is not a BufTab member; disabling "
+-+                    "use of pad-allocated buffers\n");
+-+                gst_buffer_unref(*padBuffer);
+-+                *padBuffer = NULL;
+-+            }
+-+        }
+-+    }
+-+
+-+    /* If we can't use pad-allocated buffers, allocate our own BufTab for
+-+     * output buffers to push downstream.
+-+     */
+-+    if (!(*padBuffer)) {
+-+
+-+        GST_LOG("creating output buffer table\n");
+-+        gfxAttrs.colorSpace     = colorSpace;
+-+        gfxAttrs.dim.width      = params.maxWidth;
+-+        gfxAttrs.dim.height     = params.maxHeight;
+-+        gfxAttrs.dim.lineLength = BufferGfx_calcLineLength(
+-+                                      gfxAttrs.dim.width, gfxAttrs.colorSpace);
+- 
+--    /* By default, new buffers are marked as in-use by the codec */
+--    gfxAttrs.bAttrs.useMask = gst_tidmaibuffer_CODEC_FREE;
+-+        /* By default, new buffers are marked as in-use by the codec */
+-+        gfxAttrs.bAttrs.useMask = gst_tidmaibuffer_CODEC_FREE;
+- 
+--    viddec2->hOutBufTab = gst_tidmaibuftab_new(
+--        viddec2->numOutputBufs, Vdec2_getOutBufSize(viddec2->hVd),
+--        BufferGfx_getBufferAttrs(&gfxAttrs));
+-+        viddec2->hOutBufTab = gst_tidmaibuftab_new(
+-+            viddec2->numOutputBufs, Vdec2_getOutBufSize(viddec2->hVd),
+-+            BufferGfx_getBufferAttrs(&gfxAttrs));
+-+
+-+        codecBufTab = GST_TIDMAIBUFTAB_BUFTAB(viddec2->hOutBufTab);
+-+    }
+- 
+--    if (viddec2->hOutBufTab == NULL) {
+-+    /* The value of codecBufTab should now either point to a downstream
+-+     * BufTab or our own BufTab.
+-+     */
+-+    if (codecBufTab == NULL) {
+-         GST_ELEMENT_ERROR(viddec2, RESOURCE, NO_SPACE_LEFT,
+--        ("failed to create output buffers\n"), (NULL));
+-+            ("no BufTab available for codec output\n"), (NULL));
+-         return FALSE;
+-     }
+- 
+--    /* Tell the Vdec module that hOutBufTab will be used for display buffers */
+--    Vdec2_setBufTab(viddec2->hVd,
+--        GST_TIDMAIBUFTAB_BUFTAB(viddec2->hOutBufTab));
+-+    /* Tell the Vdec module what BufTab it will be using for its output */
+-+    Vdec2_setBufTab(viddec2->hVd, codecBufTab);
+- 
+-     return TRUE;
+- }
+-@@ -1403,8 +1463,10 @@ static void* gst_tividdec2_decode_thread(void *arg)
+- {
+-     GstTIViddec2  *viddec2        = GST_TIVIDDEC2(gst_object_ref(arg));
+-     GstBuffer     *encDataWindow  = NULL;
+-+    GstBuffer     *padBuffer      = NULL;
+-     Buffer_Attrs   bAttrs         = Buffer_Attrs_DEFAULT;
+-     gboolean       codecFlushed   = FALSE;
+-+    gboolean       usePadBufs     = FALSE;
+-     void          *threadRet      = GstTIThreadSuccess;
+-     Buffer_Handle  hDummyInputBuf = NULL;
+-     Buffer_Handle  hDstBuf;
+-@@ -1420,7 +1482,8 @@ static void* gst_tividdec2_decode_thread(void *arg)
+-     GST_LOG("init video decode_thread \n");
+- 
+-     /* Initialize codec engine */
+--    ret = gst_tividdec2_codec_start(viddec2);
+-+    ret = gst_tividdec2_codec_start(viddec2, &padBuffer);
+-+    usePadBufs = (padBuffer != NULL);
+- 
+-     /* Notify main thread that is ok to continue initialization */
+-     Rendezvous_meet(viddec2->waitOnDecodeThread);
+-@@ -1476,7 +1539,34 @@ static void* gst_tividdec2_decode_thread(void *arg)
+-         }
+- 
+-         /* Obtain a free output buffer for the decoded data */
+--        if (!(hDstBuf = gst_tidmaibuftab_get_buf(viddec2->hOutBufTab))) {
+-+        if (usePadBufs) {
+-+
+-+            /* First time through this loop, padBuffer will already be set
+-+             * to the buffer we got in codec_start.  It will be NULL for every
+-+             * frame after that.
+-+             */
+-+            if (G_LIKELY(!padBuffer)) {
+-+                if (gst_pad_alloc_buffer(viddec2->srcpad, 0, 0,
+-+                        GST_PAD_CAPS(viddec2->srcpad), &padBuffer)
+-+                        != GST_FLOW_OK) {
+-+                    GST_ELEMENT_ERROR(viddec2, RESOURCE, READ,
+-+                        ("failed to allocate a downstream buffer\n"), (NULL));
+-+                    padBuffer = NULL;
+-+                    goto thread_exit;
+-+                }
+-+            }
+-+            hDstBuf = GST_TIDMAIBUFFERTRANSPORT_DMAIBUF(padBuffer);
+-+            gst_buffer_unref(padBuffer);
+-+            padBuffer = NULL;
+-+
+-+            /* Set the CODEC_FREE flag -- this isn't done automatically when
+-+             * allocating buffers from downstream.
+-+             */
+-+            Buffer_setUseMask(hDstBuf, Buffer_getUseMask(hDstBuf) |
+-+                gst_tidmaibuffer_CODEC_FREE);
+-+
+-+        }
+-+        else if (!(hDstBuf = gst_tidmaibuftab_get_buf(viddec2->hOutBufTab))) {
+-             GST_ELEMENT_ERROR(viddec2, RESOURCE, READ,
+-                 ("failed to get a free contiguous buffer from BufTab\n"), 
+-                 (NULL));
+-@@ -1623,12 +1713,15 @@ thread_failure:
+- thread_exit:
+- 
+-     /* Re-claim any buffers owned by the codec */
+--    bufIdx = BufTab_getNumBufs(GST_TIDMAIBUFTAB_BUFTAB(viddec2->hOutBufTab));
+-+    if (viddec2->hOutBufTab) {
+-+        bufIdx =
+-+            BufTab_getNumBufs(GST_TIDMAIBUFTAB_BUFTAB(viddec2->hOutBufTab));
+- 
+--    while (bufIdx-- > 0) {
+--        Buffer_Handle hBuf = BufTab_getBuf(
+--            GST_TIDMAIBUFTAB_BUFTAB(viddec2->hOutBufTab), bufIdx);
+--        Buffer_freeUseMask(hBuf, gst_tidmaibuffer_CODEC_FREE);
+-+        while (bufIdx-- > 0) {
+-+            Buffer_Handle hBuf = BufTab_getBuf(
+-+                GST_TIDMAIBUFTAB_BUFTAB(viddec2->hOutBufTab), bufIdx);
+-+            Buffer_freeUseMask(hBuf, gst_tidmaibuffer_CODEC_FREE);
+-+        }
+-     }
+- 
+-     /* Release the last buffer we retrieved from the circular buffer */
+-diff --git a/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.h b/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.h
+-index b16e9c5..6b09d2a 100644
+---- a/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.h
+-+++ b/gstreamer_ti/ti_build/ticodecplugin/src/gsttividdec2.h
+-@@ -91,6 +91,7 @@ struct _GstTIViddec2
+-   UInt32           numOutputBufs;
+-   GstTIDmaiBufTab *hOutBufTab;
+-   GstTICircBuffer *circBuf;
+-+  gboolean         padAllocOutbufs;
+- 
+-   /* Quicktime h264 header  */
+-   GstBuffer       *sps_pps_data;
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0009-dmaisink-compilation-fix.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0009-dmaisink-compilation-fix.patch
+deleted file mode 100644
+index b8525b7..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0009-dmaisink-compilation-fix.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 721970f80e6bff0f231625f00301fa37473a2bb3 Mon Sep 17 00:00:00 2001
+-From: Brijesh Singh <bksingh@ti.com>
+-Date: Wed, 7 Jul 2010 19:21:01 -0500
+-Subject: [PATCH 9/9] dmaisink compilation fix
+-
+-temporary fix - should go in svn trunk
+----
+- src/gsttidmaivideosink.c |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/src/gsttidmaivideosink.c b/src/gsttidmaivideosink.c
+-index 99ca25d..2fb5aad 100644
+---- a/src/gsttidmaivideosink.c
+-+++ b/src/gsttidmaivideosink.c
+-@@ -1817,7 +1817,7 @@ static gboolean gst_tidmaivideosink_alloc_display_buffers(
+-         return FALSE;
+-     }
+- 
+--    GST_INFO("Allocating %ld display buffers", sink->dAttrs.numBufs);
+-+    GST_INFO("Allocating %d display buffers", sink->dAttrs.numBufs);
+- 
+-     /* Set the dimensions for the display */
+-     if (VideoStd_getResolution(sink->dAttrs.videoStd, &gfxAttrs.dim.width,
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0009-update-dm365-cfg-to-work-with-platinum-codecs.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0009-update-dm365-cfg-to-work-with-platinum-codecs.patch
+deleted file mode 100644
+index 0d36bf1..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0009-update-dm365-cfg-to-work-with-platinum-codecs.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From d5601a8beec6144fb39ebdc93778c081028a7fdd Mon Sep 17 00:00:00 2001
+-From: Brijesh Singh <bksingh@ti.com>
+-Date: Tue, 28 Sep 2010 19:35:14 -0500
+-Subject: [PATCH] update dm365 cfg to work with platinum codecs
+-
+----
+- src/gstticodecplugin_dm365.cfg |    3 +++
+- 1 files changed, 3 insertions(+), 0 deletions(-)
+-
+-diff --git a/src/gstticodecplugin_dm365.cfg b/src/gstticodecplugin_dm365.cfg
+-index d682643..43174b1 100644
+---- a/src/gstticodecplugin_dm365.cfg
+-+++ b/src/gstticodecplugin_dm365.cfg
+-@@ -86,6 +86,9 @@ var ADDRSPACE = xdc.useModule('ti.sdo.fc.ires.addrspace.ADDRSPACE');
+- 
+- var CMEM = xdc.useModule('ti.sdo.linuxutils.cmem.CMEM');
+- 
+-+var MEMTCM = xdc.useModule('ti.sdo.fc.ires.memtcm.MEMTCM');
+-+MEMTCM.cmemBlockId = 1; //Since we use _1 in our insmod command.
+-+
+- /* Uncomment these lines if you wish to debug FC and enable FC trace */
+- /* 
+- /*
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/0010-replace-omap3530_dv400-platform-support-with-omap353.patch b/recipes-ti/gstreamer-ti/gstreamer-ti/0010-replace-omap3530_dv400-platform-support-with-omap353.patch
+deleted file mode 100644
+index 85550e6..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/0010-replace-omap3530_dv400-platform-support-with-omap353.patch
++++ /dev/null
+@@ -1,119 +0,0 @@
+-From 0f2ef84ad320ec141a7ba6727cf18817ac42e413 Mon Sep 17 00:00:00 2001
+-From: Brijesh Singh <bksingh@ti.com>
+-Date: Mon, 4 Oct 2010 14:11:39 -0500
+-Subject: [PATCH] replace omap3530_dv400 platform support with omap3530
+-
+----
+- Makefile.external                       |   19 +++----------
+- src/gstticodecplugin_omap3530_dv400.cfg |   44 -------------------------------
+- 2 files changed, 5 insertions(+), 58 deletions(-)
+- delete mode 100644 src/gstticodecplugin_omap3530_dv400.cfg
+-
+-diff --git a/Makefile.external b/Makefile.external
+-index 6d118d8..2a85108 100644
+---- a/Makefile.external
+-+++ b/Makefile.external
+-@@ -8,7 +8,7 @@
+- # Copyright (C) 2009 Ridgerun 
+- #
+- 
+--.PHONY: default configure dm6446 omap3530 dm355 dm6467 dm365 omapl138 omap3530_dv400
+-+.PHONY: default configure dm6446 omap3530 dm355 dm6467 dm365 omapl138
+- 
+- DVSDK_PATH=undefined
+- DMAI_INSTALL_DIR=undefined
+-@@ -23,7 +23,7 @@ $(error You need to define the environment variable DMAI_INSTALL_DIR)
+- endif
+- 
+- default:
+--	@echo "Please specify the target: dm6446, omap3530, dm355, dm6467, dm6467t, dm365 omapl138 omap3530_dv400"
+-+	@echo "Please specify the target: dm6446, omap3530, dm355, dm6467, dm6467t, dm365 omapl138"
+- 
+- export GST_TI_PLATFORM=$(MAKECMDGOALS)
+- export BIOS_INSTALL_DIR
+-@@ -87,6 +87,9 @@ ifeq ($(GST_TI_PLATFORM), omap3530)
+-     export MVTOOL_DIR    = $(CSTOOL_DIR)
+-     export PLATFORM_XDC  = ${XDC_PLATFORM}
+-     export CROSS_COMPILE = ${CSTOOL_PREFIX}
+-+    export LINK_XDC_ROOT = $(LINK_INSTALL_DIR)
+-+    export C6ACCEL_INSTALL_DIR
+-+    export ENABLE_C6ACCEL ="--enable-c6accel"
+- endif
+- 
+- ifeq ($(GST_TI_PLATFORM), omapl138)
+-@@ -101,16 +104,6 @@ ifeq ($(GST_TI_PLATFORM), omapl138)
+-     export ENABLE_C6ACCEL ="--enable-c6accel"
+- endif
+- 
+--ifeq ($(GST_TI_PLATFORM), omap3530_dv400)
+--    export XDC_TARGET    = gnu.targets.arm.GCArmv5T
+--    export XDC_PLATFORM  = ti.platforms.evm3530
+--    export MVTOOL_PREFIX = $(CSTOOL_PREFIX)
+--    export MVTOOL_DIR    = $(CSTOOL_DIR)
+--    export PLATFORM_XDC  = ${XDC_PLATFORM}
+--    export CROSS_COMPILE = ${CSTOOL_PREFIX}
+--    export LINK_XDC_ROOT = $(LINK_INSTALL_DIR)
+--endif
+--
+- CPPFLAGS=-DPlatform_$(GST_TI_PLATFORM) 
+- HOST=arm-none-linux-gnueabi
+- 
+-@@ -141,5 +134,3 @@ dm365: Makefile
+- omapl138: Makefile
+- 	$(MAKE) -f Makefile
+- 
+--omap3530_dv400: Makefile
+--	$(MAKE) -f Makefile
+-diff --git a/src/gstticodecplugin_omap3530_dv400.cfg b/src/gstticodecplugin_omap3530_dv400.cfg
+-deleted file mode 100644
+-index 90f4edf..0000000
+---- a/src/gstticodecplugin_omap3530_dv400.cfg
+-+++ /dev/null
+-@@ -1,44 +0,0 @@
+--/*
+-- * Copyright (C) 2008-2010 Texas Instruments Incorporated - http://www.ti.com/
+-- *
+-- * This program is free software; you can redistribute it and/or modify 
+-- * it under the terms of the GNU Lesser General Public License as
+-- * published by the Free Software Foundation version 2.1 of the License.
+-- *
+-- * This program is distributed #as is# WITHOUT ANY WARRANTY of any kind,
+-- * whether express or implied; without even the implied warranty of
+-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-- * Lesser General Public License for more details.
+-- *
+-- */
+--
+--/* Load the Codec Engine 'Operating System Abstraction Layer' */
+--var osalGlobal = xdc.useModule('ti.sdo.ce.osal.Global');
+--
+--var os = xdc.useModule('ti.sdo.ce.osal.linux.Settings');
+--osalGlobal.os = os;
+--
+--/* Configure CE to use it's DSP Link Linux version */
+--var ipc = xdc.useModule('ti.sdo.ce.ipc.Settings');
+--ipc.commType = ipc.COMM_DSPLINK;
+--
+--/*
+-- *  ======== Engine Configuration ========
+-- */
+--var Engine = xdc.useModule('ti.sdo.ce.Engine');
+--var demoEngine = Engine.createFromServer(
+--    "codecServer",
+--    "./bin/cs.x64P",
+--    "ti.sdo.server.cs"
+--    );
+--
+--var combopath = "" + java.lang.System.getenv("CODEC_SERVER");
+--if (combopath != "" && combopath != "null") {
+--	demoEngine.server = java.lang.System.getenv("CODEC_SERVER");
+--}
+--
+--/* Load support for the DMAI module */
+--var DMAI = xdc.loadPackage('ti.sdo.dmai');
+--
+--var SCPY = xdc.useModule('ti.sdo.fc.scpy.SCPY');
+--var SDMA = xdc.useModule('ti.sdo.linuxutils.sdma.SDMA');
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/dm355-evm/gst-ti.sh b/recipes-ti/gstreamer-ti/gstreamer-ti/dm355-evm/gst-ti.sh
+deleted file mode 100644
+index 5467a67..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/dm355-evm/gst-ti.sh
++++ /dev/null
+@@ -1,12 +0,0 @@
+-#!/bin/sh
+-
+-# Disable XDM 0.9 elements
+-export GST_TI_TIViddec_DISABLE=1
+-export GST_TI_TIAuddec_DISABLE=1
+-export GST_TI_TIVidenc_DISABLE=1
+-export GST_TI_TIImgdec_DISABLE=1
+-export GST_TI_TIImgenc_DISABLE=1
+-
+-# Disable XDM 1.x audio decoder
+-export GST_TI_TIAuddec1_DISABLE=1
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/dm365-evm/loadmodules.sh b/recipes-ti/gstreamer-ti/gstreamer-ti/dm365-evm/loadmodules.sh
+deleted file mode 100644
+index c70bee1..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/dm365-evm/loadmodules.sh
++++ /dev/null
+@@ -1,37 +0,0 @@
+-#!/bin/sh
+-# 
+-# Default DM365 Memory Map 128 MB
+-#
+-# Start Addr    Size    Description
+-# ----------------------------------------------------------------
+-# 0x00001000    32K     ARM926 TCM memory used by platinum codec
+-# 0x80000000    48 MB   Linux
+-# 0x83000000    12 MB   Video driver memory (Linux)
+-# 0x83C00000    68 MB   CMEM
+-# 0x88000000    BOTTOM  ADDRESS
+-#
+-
+-rmmod cmemk 2>/dev/null
+-
+-# Pools configuration
+-modprobe cmemk phys_start=0x83C00000 phys_end=0x88000000 pools=1x16539648,1x4841472,4x1843200,14x1646592,1x282624,1x176128,1x147456,1x69632,1x61440,1x32768,2x20480,1x16384,1x12288,4x8192,69x4096 allowOverlap=1 phys_start_1=0x00001000 phys_end_1=0x00008000 pools_1=1x28672 
+-
+-# Decode + Display
+-#modprobe cmemk phys_start=0x83c00000 phys_end=0x88000000 pools=1x16539648,1x4841472,14x1646592,1x282624,1x176128,1x147456,1x69632,1x61440,1x32768,2x20480,1x12288,1x8192,64x4096
+-
+-# Capture + Encode
+-#modprobe cmemk phys_start=0x83c00000 phys_end=0x88000000 pools=1x3112960,1x2764800,3x1536000,1x65536,1x61440,1x49152,1x20480,1x16384,2x8192,87x4096
+-
+-# Resizer
+-#modprobe cmemk phys_start=0x83c00000 phys_end=0x88000000 pools=3x1843200
+-
+-# Non-accel display
+-#modprobe cmemk phys_start=0x83c00000 phys_end=0x88000000 pools=1x1843200
+-
+-modprobe irqk
+-modprobe edmak
+-modprobe dm365mmap
+-
+-rm -f /dev/dm365mmap
+-mknod /dev/dm365mmap c `awk "\\$2==\"dm365mmap\" {print \\$1}" /proc/devices` 0
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/gstreamer-ti-rc.sh b/recipes-ti/gstreamer-ti/gstreamer-ti/gstreamer-ti-rc.sh
+deleted file mode 100644
+index 35bf781..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/gstreamer-ti-rc.sh
++++ /dev/null
+@@ -1,28 +0,0 @@
+-#!/bin/sh
+-#
+-# configure kernel modules to run gst-ti plugins elements
+-#
+-
+-load_module() {
+-    echo 
+-    echo -n "Running /usr/share/ti/gst/<platform>/loadmodules.sh"
+-    /usr/share/ti/gst/<platform>/loadmodules.sh
+-}
+-
+-case "$1" in
+-      start) 
+-             echo -n "Loading kernel modules for gstreamer-ti... "
+-             load_module
+-             echo "  done"
+-             ;;
+-       stop) 
+-             echo "Nothing to do"
+-             ;;
+-        restart) 
+-             echo "Nothing to do"
+-             ;;
+-        *)
+-             echo "$0 <start/stop/restart>"
+-             ;;
+-esac
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/gstti-init.service b/recipes-ti/gstreamer-ti/gstreamer-ti/gstti-init.service
+deleted file mode 100644
+index cccf534..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/gstti-init.service
++++ /dev/null
+@@ -1,10 +0,0 @@
+-[Unit]
+-Description=TI Gstreamer plugins init
+-ConditionKernelCommandLine=mem=MEMARGS
+-
+-[Service]
+-ExecStart=/usr/share/ti/gst/<platform>/loadmodules.sh
+-RemainAfterExit=yes
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/omap3/loadmodules.sh b/recipes-ti/gstreamer-ti/gstreamer-ti/omap3/loadmodules.sh
+deleted file mode 100644
+index eb75883..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/omap3/loadmodules.sh
++++ /dev/null
+@@ -1,22 +0,0 @@
+-#!/bin/sh
+-#
+-# CMEM Allocation
+-#    1x5250000            Circular buffer
+-#    6x829440,1x691200    Video buffers (max D1 PAL)
+-#    1x345600             Underlying software components (codecs, etc.)
+-#    1x1                  Dummy buffer used during final flush
+-
+-rmmod cmemk 2>/dev/null
+-
+-modprobe cmemk allowOverlap=1 phys_start=0x86300000 phys_end=0x87300000 \
+-        pools=1x5250000,6x829440,1x345600,1x691200,1x1
+-
+-# insert DSP/BIOS Link driver
+-modprobe dsplinkk
+-
+-# insert Local Power Manager driver
+-modprobe lpm_omap3530
+-
+-# insert SDMA driver
+-modprobe sdmak 
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/omapl137/loadmodules.sh b/recipes-ti/gstreamer-ti/gstreamer-ti/omapl137/loadmodules.sh
+deleted file mode 100644
+index d031188..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/omapl137/loadmodules.sh
++++ /dev/null
+@@ -1,12 +0,0 @@
+-#!/bin/sh
+-#
+-# configure kernel modules for TI DSP based gstreamer plugin
+-#
+-
+-# insert cmemk, tell it to occupy physical 34MB-64MB.
+-#
+-modprobe cmemk phys_start=0xC2200000 phys_end=0xC3200000 \
+-    pools=1x5250000,3x1048576,3x829440,1x256000,4x131072
+-
+-modprobe dsplinkk
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/da850-omapl138-evm/loadmodules.sh b/recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/da850-omapl138-evm/loadmodules.sh
+deleted file mode 100644
+index f401725..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/da850-omapl138-evm/loadmodules.sh
++++ /dev/null
+@@ -1,16 +0,0 @@
+-#!/bin/sh
+-#
+-# configure kernel modules for TI DSP based gstreamer plugin
+-#
+-rmmod cmemk 2>/dev/null
+-rmmod dsplink 2>/dev/null
+-
+-modprobe cmemk phys_start=0xC2200000 phys_end=0xC3200000 \
+-    pools=1x5250000,3x1048576,3x829440,1x256000,4x131072 \
+-    allowOverlap=1
+-
+-modprobe dsplinkk
+-
+-rm -f /dev/dsplink
+-mknod /dev/dsplink c `awk "\\$2==\"dsplink\" {print \\$1}" /proc/devices` 0
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/loadmodules.sh b/recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/loadmodules.sh
+deleted file mode 100644
+index 95cfc3d..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/omapl138/loadmodules.sh
++++ /dev/null
+@@ -1,15 +0,0 @@
+-#!/bin/sh
+-#
+-# configure kernel modules for TI DSP based gstreamer plugin
+-#
+-
+-rmmod cmemk 2>/dev/null
+-
+-modprobe cmemk phys_start=0xC2200000 phys_end=0xC3200000 \
+-    pools=1x5250000,3x1048576,3x829440,1x256000,4x131072
+-
+-modprobe dsplinkk
+-
+-rm -f /dev/dsplink
+-mknod /dev/dsplink c `awk "\\$2==\"dsplink\" {print \\$1}" /proc/devices` 0
+-
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti/r962-remove-include-videodev.diff b/recipes-ti/gstreamer-ti/gstreamer-ti/r962-remove-include-videodev.diff
+deleted file mode 100644
+index cb106fc..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti/r962-remove-include-videodev.diff
++++ /dev/null
+@@ -1,22 +0,0 @@
+-diff -ur ticodecplugin_orig/src/gstticapturesrc.c ticodecplugin/src/gstticapturesrc.c
+---- ticodecplugin_orig/src/gstticapturesrc.c	2011-08-09 17:03:39.201308305 +0200
+-+++ ticodecplugin/src/gstticapturesrc.c	2011-08-09 17:02:35.177308274 +0200
+-@@ -25,7 +25,6 @@
+- #include <gst/gst.h>
+- #include <string.h>
+- #include <gst/gstmarshal.h>
+--#include <linux/videodev.h>
+- #include <linux/videodev2.h>
+- #include <sys/ioctl.h>
+- 
+-diff -ur ticodecplugin_orig/src/gsttidisplaysink2.c ticodecplugin/src/gsttidisplaysink2.c
+---- ticodecplugin_orig/src/gsttidisplaysink2.c	2011-08-09 17:03:53.329308312 +0200
+-+++ ticodecplugin/src/gsttidisplaysink2.c	2011-08-09 17:03:11.337308292 +0200
+-@@ -28,7 +28,6 @@
+- #include <gst/video/video.h>
+- #include <string.h>
+- #include <gst/gstmarshal.h>
+--#include <linux/videodev.h>
+- #include <linux/videodev2.h>
+- #include <sys/ioctl.h>
+- 
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb b/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb
+deleted file mode 100644
+index f314a35..0000000
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-require gstreamer-ti.inc
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=c8a292be1d17ba07ecbf7b49049cbf22"
+-
+-PV = "svnr${SRCREV}"
+-
+-S = "${WORKDIR}/gstreamer_ti/ti_build/ticodecplugin"
+-
+-SRCREV = "962"
+-
+-# apply patches from tracker 1208 to get zero copy support.
+-# https://gstreamer.ti.com/gf/project/gstreamer_ti/tracker/?action=TrackerItemEdit&tracker_item_id=1208&start=175
+-
+-SRC_URI = "svn://gforge.ti.com/svn/gstreamer_ti/trunk;module=gstreamer_ti;protocol=https;user=anonymous;pswd='' \
+-           file://gstreamer-ti-rc.sh \
+-           file://r962-remove-include-videodev.diff \
+-           file://gstti-init.service \
+-"
+-
+-# use local loadmodules.sh for these platform
+-# TODO: must be removed onces these loadmodules goes in gstreamer.ti.com
+-SRC_URI_append_dm365 = " file://loadmodules.sh"
+-SRC_URI_append_omapl137 = " file://loadmodules.sh"
+-SRC_URI_append_omapl138 = " file://loadmodules.sh "
+-SRC_URI_append_omap3 = " file://loadmodules.sh "
+-
 -- 
 2.7.4
 
