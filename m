@@ -1,56 +1,51 @@
-Return-Path: <kenny@understoryweather.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1A073E00BD6; Fri, 23 Jun 2017 19:50:57 -0700 (PDT)
+	id 3E366E0084A; Mon, 26 Jun 2017 11:23:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, HTML_MESSAGE, RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [209.85.217.176 listed in list.dnswl.org]
+	*      [198.47.19.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-ua0-f176.google.com (mail-ua0-f176.google.com
-	[209.85.217.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE2E2E00B28
-	for <meta-ti@yoctoproject.org>; Fri, 23 Jun 2017 19:50:43 -0700 (PDT)
-Received: by mail-ua0-f176.google.com with SMTP id 70so46554780uau.0
-	for <meta-ti@yoctoproject.org>; Fri, 23 Jun 2017 19:50:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=understoryweather-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=+dX/icZPs+GVOnpMWwJuDdOIpqmqkQBwOpNdaIOpZPI=;
-	b=WRQP5iSBxcrkF2nRmttp7Ir21TdkIb2PQ29Xaf9I0NTOHxB8gqmOSIHeG1FkfMBQrh
-	M2tjQPHs14AwVPctyhqjxyhPfU3j5rIhhN91b2kgJRnrOSwS7fBeJslhkFkaP1IOHpHl
-	6w+tRjoewjYUE5NAMLkGgF9E5Vy6oiDcMPnYXRTVtx0i0c9k8aS3m03G1/TZjY3UCzwj
-	vZzSkCqpbmBAUcDV2naJW1pV+lmqVQ5eszmhWF/s81Zn1X6qTzP7B1eNvt2T+vzUqZkk
-	TiONHAF0a0vhbc2j8+3o/MSYwg/lUTaxqUx9n4YiYi60UTePLXwb1lMx3To8WMfOAQTs
-	gN9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=+dX/icZPs+GVOnpMWwJuDdOIpqmqkQBwOpNdaIOpZPI=;
-	b=kYrO1wOJFj7e0CdzgsftVmGZcrIIgMdk2MMa2C5+aGQ9TCPQ8HoWlY0Hp+qjchAtOM
-	HNVygZQOGSGvDmsDzBZI+FqxIIRRJozZ8doX+ZWEiUVZE5RyNLPlptfD1c9VxVycROoD
-	XpQtym87gcLGsgH7lqt9C0IvU0VllI7CjoXfL2kAXJn5a5Hz/qpKvpgX/rdNy4TEpWm9
-	3Sxdb1eHvs/qhPBr8hAQiAZ2AcQDdCGbvZwqeFHi6jxk+205u9ddVikFhtTtABQotkc8
-	cb9/o5PlhDYsTxD9S0AmsgTbYFw1CY9kdebMbw+uFSVTWvdnyixqfOLfj+b3nYccgZLd
-	8/tA==
-X-Gm-Message-State: AKS2vOwvTgj157XcqxsJwl9Hk4B9PAnpopvfBdykZ6A4Cbgpn4rD6QpE
-	jiABUhtz8DTUTXQ6nX/3Q7Jf+IkZoUtZA3s=
-X-Received: by 10.176.3.117 with SMTP id 108mr8417245uat.56.1498272642780;
-	Fri, 23 Jun 2017 19:50:42 -0700 (PDT)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E21DAE0048B
+	for <meta-ti@yoctoproject.org>; Mon, 26 Jun 2017 11:23:08 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5QIN7Gv013823
+	for <meta-ti@yoctoproject.org>; Mon, 26 Jun 2017 13:23:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1498501387;
+	bh=ggXwBJG6YTvbzzHx7Fi25zxPfGndZF2oMDZH7u7Mo/c=;
+	h=From:To:CC:Subject:Date;
+	b=mQ0kTM00OTaGetenFpl63meVcnk4Tf87WXcJBqmt+x7X9GAxRPQDXsrx+pJZqYmx4
+	XD9+u6kTQvLpIdoIBDCD6TkARCKRl9S5v8Kok+QwMjW6qgmKdj5t/7/YEajqZdHSOF
+	VNfZO34VRjzYiSWE1xsMxqIwWgb1kt04KBeQYiFU=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5QIN7Go004446
+	for <meta-ti@yoctoproject.org>; Mon, 26 Jun 2017 13:23:07 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 26 Jun 2017 13:23:07 -0500
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v5QIN7i8010119;	Mon, 26 Jun 2017 13:23:07 -0500
+From: Hongmei Gou <h-gou@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 26 Jun 2017 14:23:05 -0400
+Message-ID: <1498501385-21976-1-git-send-email-h-gou@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-From: Kenny Koller <kenny@understoryweather.com>
-Date: Sat, 24 Jun 2017 02:50:32 +0000
-Message-ID: <CAPtqgUwJnmq+TNdrr7odqrpfwsxE8Z=c8GKnNez3maf6wBUupw@mail.gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: install cannot stat u-boot.img (Pyro)
+Subject: [PATCH v2 2/3] uio-test-pruss: version bump to 1.0.1.0 and add support for am3/am4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -63,85 +58,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jun 2017 02:50:57 -0000
-Content-Type: multipart/alternative; boundary="001a113d1982a6711b0552abc8c8"
+X-List-Received-Date: Mon, 26 Jun 2017 18:23:12 -0000
+Content-Type: text/plain
 
---001a113d1982a6711b0552abc8c8
-Content-Type: text/plain; charset="UTF-8"
+* Also defined variables for GIT SRC_URI parameters
 
-Hi,
+Signed-off-by: Hongmei Gou <h-gou@ti.com>
+---
+ recipes-ti/uio-test-pruss/uio-test-pruss_git.bb | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
 
-I'm using 2.3 to build the minimal Beaglebone Black images.
+diff --git a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
+index a342fe3..724ca07 100644
+--- a/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
++++ b/recipes-ti/uio-test-pruss/uio-test-pruss_git.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Provides test pruss firmware for uio based tests"
+ LICENSE = "BSD-3-Clause"
+-PV = "1.0.0.0"
++PV = "1.0.1.0"
+ require recipes-ti/includes/ti-paths.inc
+ 
+ S = "${WORKDIR}/git"
+@@ -8,20 +8,27 @@ S = "${WORKDIR}/git"
+ DEPENDS = "ti-cgt-pru-native"
+ 
+ BRANCH = "master"
+-SRC_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git;protocol=git;branch=${BRANCH}"
+ LIC_FILES_CHKSUM = "file://Makefile;startline=1;endline=31;md5=0ee4f2c42eb6b04e37859bb55a18b144"
+ 
+-# Corresponds to version 01.00.00.00A
+-SRCREV = "88e78564ff9094ecb13b53d627fa6bfb25d9ac03"
++UIO_TEST_PRUSS_GIT_URI = "git://git.ti.com/processor-sdk/uio-test-pruss.git"
++UIO_TEST_PRUSS_GIT_PROTOCOL = "git"
++SRC_URI = "${UIO_TEST_PRUSS_GIT_URI};protocol=${UIO_TEST_PRUSS_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+-PR = "r1"
++# Corresponds to version 01.00.01.00
++UIO_TEST_PRUSS_SRCREV = "72f7454c2460bd7d52dab70631b38bf5d3585542"
+ 
+-COMPATIBLE_MACHINE = "omap-a15"
++SRCREV = "${UIO_TEST_PRUSS_SRCREV}"
++
++PR = "r2"
++
++COMPATIBLE_MACHINE = "omap-a15|ti33x|ti43x"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ DEVICE_NAME = ""
+ DEVICE_NAME_append_am57xx-evm = "am57xx"
++DEVICE_NAME_append_ti33x = "am33xx"
++DEVICE_NAME_append_ti43x = "am43xx"
+ 
+ EXTRA_OEMAKE = "CGT_PRU=${TI_CGT_PRU_INSTALL_DIR} DEVICE=${DEVICE_NAME}"
+ 
+-- 
+1.9.1
 
-I issue the following and get the error below. Is the warning regarding a
-missing bootloader config the issue?
 
-Thanks,
-
-Kenny
-
-$ bitbake core-image-minimal
-
-| INFO: Creating image(s)...
-|
-| WARNING: bootloader config not specified, using defaults
-|
-| ERROR: _exec_cmd: install -m 0644 -D
-/home/ubuntu/yocto/poky/build/tmp/deploy/images/beaglebone/u-boot.img
-/home/ubuntu/yocto/poky/build/tmp/work/beaglebone-poky-linux-gnueabi/core-image-minimal/1.0-r0/deploy-core-image-minimal-image-complete/core-image-minimal-beaglebone-20170624014756/tmp.wic.khxryxga/boot/u-boot.img
-returned '1' instead of 0
-| output: install: cannot stat
-'/home/ubuntu/yocto/poky/build/tmp/deploy/images/beaglebone/u-boot.img': No
-such file or directory
-|
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_image_wic (log file is located at
-/home/ubuntu/yocto/poky/build/tmp/work/beaglebone-poky-linux-gnueabi/core-image-minimal/1.0-r0/temp/log.do_image_wic.12719)
-ERROR: Task
-(/home/ubuntu/yocto/poky/meta/recipes-core/images/core-image-minimal.bb:do_image_wic)
-failed with exit code '1'
-NOTE: Tasks Summary: Attempted 2263 tasks of which 2252 didn't need to be
-rerun and 1 failed.
-
-Summary: 1 task failed:
-  /home/ubuntu/yocto/poky/meta/recipes-core/images/core-image-minimal.bb:
-do_image_wic
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-
---001a113d1982a6711b0552abc8c8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div><br></div><div>I&#39;m using 2.3 to build the mini=
-mal Beaglebone Black images.</div><div><br></div><div>I issue the following=
- and get the error below. Is the warning regarding a missing bootloader con=
-fig the issue?</div><div><br></div><div>Thanks,</div><div><br></div><div>Ke=
-nny</div><div><br></div><div>$ bitbake core-image-minimal</div><div><br></d=
-iv><div><div><font face=3D"monospace">| INFO: Creating image(s)...</font></=
-div><div><font face=3D"monospace">|=C2=A0</font></div><div><font face=3D"mo=
-nospace">| WARNING: bootloader config not specified, using defaults</font><=
-/div><div><font face=3D"monospace">|=C2=A0</font></div><div><font face=3D"m=
-onospace">| ERROR: _exec_cmd: install -m 0644 -D /home/ubuntu/yocto/poky/bu=
-ild/tmp/deploy/images/beaglebone/u-boot.img /home/ubuntu/yocto/poky/build/t=
-mp/work/beaglebone-poky-linux-gnueabi/core-image-minimal/1.0-r0/deploy-core=
--image-minimal-image-complete/core-image-minimal-beaglebone-20170624014756/=
-tmp.wic.khxryxga/boot/u-boot.img returned &#39;1&#39; instead of 0</font></=
-div><div><font face=3D"monospace">| output: install: cannot stat &#39;/home=
-/ubuntu/yocto/poky/build/tmp/deploy/images/beaglebone/u-boot.img&#39;: No s=
-uch file or directory</font></div><div><font face=3D"monospace">|=C2=A0</fo=
-nt></div><div><font face=3D"monospace">| WARNING: exit code 1 from a shell =
-command.</font></div><div><font face=3D"monospace">| ERROR: Function failed=
-: do_image_wic (log file is located at /home/ubuntu/yocto/poky/build/tmp/wo=
-rk/beaglebone-poky-linux-gnueabi/core-image-minimal/1.0-r0/temp/log.do_imag=
-e_wic.12719)</font></div><div><font face=3D"monospace">ERROR: Task (/home/u=
-buntu/yocto/poky/meta/recipes-core/images/core-image-minimal.bb:do_image_wi=
-c) failed with exit code &#39;1&#39;</font></div><div><font face=3D"monospa=
-ce">NOTE: Tasks Summary: Attempted 2263 tasks of which 2252 didn&#39;t need=
- to be rerun and 1 failed.</font></div><div><font face=3D"monospace"><br></=
-font></div><div><font face=3D"monospace">Summary: 1 task failed:</font></di=
-v><div><font face=3D"monospace">=C2=A0 /home/ubuntu/yocto/poky/meta/recipes=
--core/images/core-image-minimal.bb:do_image_wic</font></div><div><font face=
-=3D"monospace">Summary: There was 1 ERROR message shown, returning a non-ze=
-ro exit code.</font></div></div></div>
-
---001a113d1982a6711b0552abc8c8--
