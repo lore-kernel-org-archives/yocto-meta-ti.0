@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8A9EEE00BAF; Fri, 30 Jun 2017 13:10:29 -0700 (PDT)
+	id 48953E00BAF; Fri, 30 Jun 2017 13:12:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,34 +18,34 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E409E00B9F
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jun 2017 13:10:26 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5UKAPAN030686
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jun 2017 15:10:25 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B9FEE00B9F
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jun 2017 13:12:27 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v5UKCQaP030962
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jun 2017 15:12:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1498853426;
-	bh=O93s/cqev8/ngPPnx1cUZkZf2T7+6gaauh4Gj1sEy44=;
+	s=ti-com-17Q1; t=1498853546;
+	bh=oE8ugQBqXdWxNW8bSQgfVpqtMjVHphWRWss0Cmz56k0=;
 	h=From:To:CC:Subject:Date;
-	b=fBQceS6VjBTBuRlPmxWg4m1ANUSc3PN152pCea5Mt0K+upZufNif4P6EDhwlMS2Iz
-	KWmkMCHvsybVgqEhSfMeKibLv0FIN0zG73S8No536GvER+Jwis/Wtqp+o/owshXgnk
-	mlvNkCbBq/CvLKiDCkmDQZEcVhtP0/flIjbxglC4=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5UKAP0w004496
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jun 2017 15:10:25 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 30 Jun 2017 15:10:25 -0500
+	b=urOQ0qds08ezmDTPl0mNJ/7VvgXgR2TZ0mtjb2LDzVFQJE4kCOTKKpyt5Wj+i4lXp
+	v3pvx8AmXXpuLw3PRP3AfDbyfGIPeGbPHdzJvoeorJgor/b0EeZFkOyHHiflOLzXNa
+	fAirAaUKxaKgvnU3pJ4ZiwdKL/p1GQRnGVVVBiIw=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v5UKCLor024937
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jun 2017 15:12:21 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 30 Jun 2017 15:12:21 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v5UKAPHi010778;	Fri, 30 Jun 2017 15:10:25 -0500
+	v5UKCLE2012168;	Fri, 30 Jun 2017 15:12:21 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 30 Jun 2017 16:10:23 -0400
-Message-ID: <1498853423-39337-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 30 Jun 2017 16:12:19 -0400
+Message-ID: <1498853539-39412-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] ti-pdk: Update tool paths for omapl1 & update cores for ti33x & ti43x
+Subject: [PATCH] common-csl-ip: Update for CSL version 3.3.0.7 & support for ti33x, ti43x & omapl1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,43 +58,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 20:10:29 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 20:12:28 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- classes/ti-pdk.bbclass | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-bsp/common-csl-ip/common-csl-ip.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-index 91f2844..62a4b06 100644
---- a/classes/ti-pdk.bbclass
-+++ b/classes/ti-pdk.bbclass
-@@ -8,6 +8,7 @@ DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-sim
- DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
- DEPENDS_remove_ti33x = "ti-cgt6x-native"
- DEPENDS_remove_ti43x = "ti-cgt6x-native"
-+DEPENDS_append_omapl1 = " ti-cgt-arm-native"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index cac0b93..71ef9e9 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -2,9 +2,9 @@ DESCRIPTION = "Chip support library low level interface"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
- S = "${WORKDIR}/git"
- B = "${WORKDIR}/build"
-@@ -38,6 +39,7 @@ export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
- export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
- export TOOLCHAIN_PATH_A15 = "${GCC_ARM_NONE_TOOLCHAIN}"
- export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
-+export TOOLCHAIN_PATH_Arm9 = "${M4_TOOLCHAIN_INSTALL_DIR}"
- export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+-COMPATIBLE_MACHINE = "keystone|dra7xx"
++COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
  
- export ROOTDIR = "${B}"
-@@ -51,7 +53,7 @@ export SECTTI="perl ${CG_XML_INSTALL_DIR}/ofd/sectti.pl"
- TI_PDK_XDCMAKE ?= "1"
+-PV = "03.03.00.06C"
++PV = "03.03.00.07B"
+ INC_PR = "r0"
  
- # By default, only build the cores with available toolchains
--TI_PDK_LIMIT_CORES ?= "a15_0 ipu1_0 ipu1_1 ipu2_0 ipu2_1 c66x c66xdsp_1 c66xdsp_2 arm9_0 c674x"
-+TI_PDK_LIMIT_CORES ?= "a15_0 ipu1_0 ipu1_1 ipu2_0 ipu2_1 c66x c66xdsp_1 c66xdsp_2 arm9_0 c674x a9host a8host"
- TI_PDK_LIMIT_SOCS ?= ""
- TI_PDK_LIMIT_BOARDS ?= ""
- TI_PDK_MAKE_TARGET ?= "release"
+ CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "master"
+ CSL_GIT_DESTSUFFIX = "git"
+ 
+-# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.06C"
+-CSL_SRCREV = "ce2bbf96b08fa69eda7bfc92aa7760b7ca70dddf"
++# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.07B"
++CSL_SRCREV = "28dbc2f4b0b06b29ac4e962a9494987d242b48b5"
+ 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
 1.9.1
 
