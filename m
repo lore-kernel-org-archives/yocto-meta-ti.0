@@ -1,16 +1,15 @@
-Return-Path: <robertcnelson@gmail.com>
+Return-Path: <i-pang@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BFFEBE00718; Wed,  5 Jul 2017 10:26:48 -0700 (PDT)
+	id A3110E00A38; Wed,  5 Jul 2017 15:16:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, RCVD_IN_DNSWL_NONE,
-	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (robertcnelson[at]gmail.com)
-	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [209.85.215.46 listed in dnsbl.sorbs.net]
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -18,49 +17,38 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.215.46 listed in list.dnswl.org]
-Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
-	[209.85.215.46])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15D5BE00349
-	for <meta-ti@yoctoproject.org>; Wed,  5 Jul 2017 10:26:45 -0700 (PDT)
-Received: by mail-lf0-f46.google.com with SMTP id h22so138445481lfk.3
-	for <meta-ti@yoctoproject.org>; Wed, 05 Jul 2017 10:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=8KzZrgLCwD5VSRDI4ahvXEWfrV5m0nsmusb2n0LK5pg=;
-	b=PbQ+ZhAMinompWV2bo82Lp1KwSQV41El7sqKJa45dSXImR586Dddp0DqdpUH1+Tvuf
-	p1TYbG9tXXn3Zo6A6uAauPKRAoZlzMOW7i7Fw8Vwz8daUnlODdAvJ++255yuO9ZHQudI
-	9j2hp3KKuHth5elYgTfMIzozeWVcjfMrcfOhURFubtHr9Q/1e1w4sK56mOASRfGr9pKL
-	Ot965CCCs73UGxOzI2wPw4EfAJr1DN3sLTxWWOVxDLNJOZhKZ2TjJpBcTwmHpeJm5zL7
-	Oqi7N1penYZuAt7VnT/mtD4uSJvhutdNIPgNb1lUy1ZaYTavHNZhxd1m1lI8ijnx0mYA
-	GVsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=8KzZrgLCwD5VSRDI4ahvXEWfrV5m0nsmusb2n0LK5pg=;
-	b=qxrI8sb0pH8yyYtfTo45PlFq2CLzZnDg9OkaGnInaCyk35YI5bc2tqE/A6xSlvn+kr
-	6gI84qwMCpewPMTMSqTKsqLJtEdnRIKwz6uFKAyydy6SqJmnvpifXGIA+fmFzDrT+NpK
-	SzwoMPIqiM0BenqR4wnq0a3M5C+UmwR1P0b9EmRBFXGnhqjtmz9xYxYiBIQV/sMTJzz5
-	b7F9vPrDkMdVBPvt+pxNc1TPwUiz01ZwNL4Ihtx+/uwLefQhFtxx1rOtjdbYRx6T72pl
-	EXUiDL7JePbpKCNRsVTpUAPdkM7hHrcNsq+W0znGN44qAhFJxvgCA3YTzVFpXW2M/0l8
-	lYzQ==
-X-Gm-Message-State: AKS2vOxZbw+ph+to/5pWz/SG8dawguEbt4lI7Dp8B11dYf5i/VL/dyJW
-	C79bHg4FBRMzoKP4Xi0J/hmlrYiRCg==
-X-Received: by 10.25.181.196 with SMTP id g65mr15576436lfk.108.1499275604461; 
-	Wed, 05 Jul 2017 10:26:44 -0700 (PDT)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E837E00349
+	for <meta-ti@yoctoproject.org>; Wed,  5 Jul 2017 15:16:33 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v65MGWKB016489
+	for <meta-ti@yoctoproject.org>; Wed, 5 Jul 2017 17:16:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1499292992;
+	bh=R4Crjx5FGmbAfJPA7sU6eoMTrrAx+pUdGW1wPG8KFX0=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=W4+OYIUIcwXwnU7TK9QTVMDZ9GAcuMGx8UTrWBNsHOZXZeL4obicimvY8oKI0PWFc
+	klBgrgTOA8ScxfD7Wx26uRte+FvmZGFIodHVznTghAbxlq+PU0UmKEGLXMBHm6rZOM
+	qU0Vkgs//Bc/8/jm3PNlZu3+cPKBarljN9+6CRT4=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v65MGWvA014055
+	for <meta-ti@yoctoproject.org>; Wed, 5 Jul 2017 17:16:32 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 5 Jul 2017 17:16:32 -0500
+Received: from uda0868762.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v65MGWMZ007541	for <meta-ti@yoctoproject.org>;
+	Wed, 5 Jul 2017 17:16:32 -0500
+From: Ivan Pang <i-pang@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 5 Jul 2017 17:16:29 -0500
+Message-ID: <1499292992-15234-3-git-send-email-i-pang@ti.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1499292992-15234-1-git-send-email-i-pang@ti.com>
+References: <1499292992-15234-1-git-send-email-i-pang@ti.com>
 MIME-Version: 1.0
-Received: by 10.25.115.20 with HTTP; Wed, 5 Jul 2017 10:26:13 -0700 (PDT)
-In-Reply-To: <bc6ae1fe-32e2-5afe-8d26-0e9b3676cc2b@gmail.com>
-References: <bc6ae1fe-32e2-5afe-8d26-0e9b3676cc2b@gmail.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 5 Jul 2017 12:26:13 -0500
-Message-ID: <CAOCHtYhAihOvX3TRijFyc6ArMtBW23boDrEezVLOW6ECcCqaXg@mail.gmail.com>
-To: Riko Ho <antonius.riko@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: boot/dtbs/4.4.54-ti-r93/am335x-boneblack.dtb
+Subject: [PATCH 3/6] eclipse-plugin.bbclass: added eclipse plugin bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -73,27 +61,204 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jul 2017 17:26:48 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 05 Jul 2017 22:16:37 -0000
+Content-Type: text/plain
 
-On Tue, Jul 4, 2017 at 9:58 PM, Riko Ho <antonius.riko@gmail.com> wrote:
-> Dear meta-ti Team Member,
->
-> Is it possible that I use this dtb with beagle yocto kernel ? if it is, how
-> to do that ?
->
-> loading /boot/dtbs/4.4.54-ti-r93/am335x-boneblack.dtb
-> --
+Signed-off-by: Ivan Pang <i-pang@ti.com>
+---
+ classes/eclipse-plugin.bbclass | 182 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 182 insertions(+)
+ create mode 100644 classes/eclipse-plugin.bbclass
 
-Riko,
-
-You can try loading that *.dtb with meta-ti's kernel, but it won't use
-the kernel overlay features built-into the *.dtb as the meta-ti tree
-lacks those out-of-tree-in-development-etc overlay patches.
-
-Regards,
-
+diff --git a/classes/eclipse-plugin.bbclass b/classes/eclipse-plugin.bbclass
+new file mode 100644
+index 0000000..35af07c
+--- /dev/null
++++ b/classes/eclipse-plugin.bbclass
+@@ -0,0 +1,182 @@
++
++ECLIPSE_PLUGIN_EXTENSION_FILE = ".eclipseextension"
++create_eclipse_plugin_extension() {
++    mkdir -p "${D}${ECLIPSE_PLUGIN_DIR}"
++    cat > "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_EXTENSION_FILE}" << EOF
++id=org.eclipse.platform
++name=Eclipse Platform
++version=3.2.0
++EOF
++}
++
++
++ECLIPSE_PLUGIN_FEATURE_DIR  = "features/${ECLIPSE_PLUGIN_RTSC}.product_${ECLIPSE_PLUGIN_VERSION}"
++ECLIPSE_PLUGIN_FEATURE_FILE = "${ECLIPSE_PLUGIN_FEATURE_DIR}/feature.xml"
++create_eclipse_plugin_feature() {
++    mkdir -p "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_FEATURE_DIR}"
++
++    cat > "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_FEATURE_FILE}" << EOF
++<?xml version="1.0" encoding="UTF-8"?>
++<feature
++      id="${ECLIPSE_PLUGIN_RTSC}.product_${ECLIPSE_PLUGIN_VERSION}"
++      label="${ECLIPSE_PLUGIN_NAME}"
++      version="${ECLIPSE_PLUGIN_VERSION}"
++      provider-name="${ECLIPSE_PLUGIN_PROVIDER}">
++
++   <description url="${ECLIPSE_PLUGIN_DESC_URL}">
++      ${ECLIPSE_PLUGIN_DESC}
++   </description>
++
++   <copyright>
++      ${ECLIPSE_PLUGIN_COPYRIGHT}
++   </copyright>
++
++   <license>
++      Released under the Eclipse Public License 1.0 (http://www.eclipse.org/legal/epl-v10.html)
++   </license>
++
++   <plugin
++        id="${ECLIPSE_PLUGIN_RTSC}.product_${ECLIPSE_PLUGIN_VERSION}"
++        version="${ECLIPSE_PLUGIN_VERSION}"
++        unpack="false" />
++
++</feature>
++EOF
++}
++
++ECLIPSE_PLUGIN_PLUGIN_DIR  = "plugins/${ECLIPSE_PLUGIN_RTSC}.product_${ECLIPSE_PLUGIN_VERSION}"
++ECLIPSE_PLUGIN_PLUGIN_FILE = "${ECLIPSE_PLUGIN_PLUGIN_DIR}/plugin.xml"
++create_eclipse_plugin_plugin() {
++    mkdir -pv "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_PLUGIN_DIR}"
++
++    cat > "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_PLUGIN_FILE}" << EOF
++<?xml version="1.0" encoding="UTF-8"?>
++<?eclipse version="3.2"?>
++<plugin
++    name="${ECLIPSE_PLUGIN_NAME} ${ECLIPSE_PLUGIN_VERSION}"
++    id="${ECLIPSE_PLUGIN_RTSC}.product_${ECLIPSE_PLUGIN_VERSION}"
++    version="${ECLIPSE_PLUGIN_VERSION}"
++    provider-name="${ECLIPSE_PLUGIN_PROVIDER}">
++EOF
++
++    if [ ! -z "${ECLIPSE_PLUGIN_CDOC}" ]
++    then
++        cat >> "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_PLUGIN_FILE}" << EOF
++    <extension point="org.eclipse.help.toc">
++        <toc file="toc_top.xml" primary="true"/>
++        <toc file="toc_cdoc.xml"/>
++    </extension>
++EOF
++    fi
++
++    cat >> "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_PLUGIN_FILE}" << EOF
++    <extension point="org.eclipse.help.contentProducer">
++        <contentProducer>
++            <producer class="org.eclipse.rtsc.xdctools.ui.help.HelpContentProducer"/>
++        </contentProducer>
++    </extension>
++
++    <extension point="org.eclipse.rtsc.xdctools.ui.productInfo">
++        <repository location="${ECLIPSE_PLUGIN_REPO}"/>
++        <docs location="${ECLIPSE_PLUGIN_DOCS}"/>
++        <info
++            installLocation="${ECLIPSE_PLUGIN_ROOT}"
++            productName="${ECLIPSE_PLUGIN_NAME}"
++            versionNumber="${ECLIPSE_PLUGIN_VERSION}"
++        />
++    </extension>
++
++
++    <extension point="org.eclipse.rtsc.xdctools.managedbuild.core.rtscProductTypes">
++        <productType
++            id="${ECLIPSE_PLUGIN_RTSC}"
++            name="${ECLIPSE_PLUGIN_NAME}"
++            folderPrefix="${ECLIPSE_FOLDER_PREFIX}"
++            rootMacroName="${ECLIPSE_ROOT_MACRO}"/>
++    </extension>
++
++    <extension point="org.eclipse.rtsc.xdctools.managedbuild.core.rtscProducts">
++        <product
++            productTypeId="${ECLIPSE_PLUGIN_RTSC}"
++            version="${ECLIPSE_PLUGIN_VERSION}"/>
++    </extension>
++
++</plugin>
++EOF
++}
++
++ECLIPSE_PLUGIN_TOC_FILE = "${ECLIPSE_PLUGIN_PLUGIN_DIR}/toc_top.xml"
++ECLIPSE_PLUGIN_CDOC_FILE = "${ECLIPSE_PLUGIN_PLUGIN_DIR}/toc_cdoc.xml"
++create_eclipse_plugin_toc() {
++    cat > "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_TOC_FILE}" << EOF
++<?xml version="1.0" encoding="UTF-8"?>
++<?NLS TYPE="org.eclipse.help.toc"?>
++
++<toc label="${ECLIPSE_PLUGIN_NAME} ${ECLIPSE_PLUGIN_VERSION}">
++    <topic label="API Reference"><link toc="toc_cdoc.xml"/></topic>
++</toc>
++EOF
++
++    cat > "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_CDOC_FILE}" << EOF
++<?xml version="1.0" encoding="utf-8"?>
++<?xml-stylesheet type="text/xsl" href="toc.xsl"?>
++<toc label="${ECLIPSE_PLUGIN_NAME}" topic="packages.html">
++EOF
++
++    for cdoc in ${ECLIPSE_PLUGIN_CDOC}
++    do
++        cat "${WORKDIR}/$cdoc" >> \
++            "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_CDOC_FILE}"
++    done
++
++    cat >> "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_CDOC_FILE}" << EOF
++</toc>
++EOF
++}
++
++ECLIPSE_PLUGIN_MANIFEST_DIR  = "${ECLIPSE_PLUGIN_PLUGIN_DIR}/META-INF"
++ECLIPSE_PLUGIN_MANIFEST_FILE = "${ECLIPSE_PLUGIN_MANIFEST_DIR}/MANIFEST.MF"
++create_eclipse_plugin_manifest() {
++    mkdir -p "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_MANIFEST_DIR}"
++
++    cat > "${D}${ECLIPSE_PLUGIN_DIR}/${ECLIPSE_PLUGIN_MANIFEST_FILE}" << EOF
++Manifest-Version: 1.0
++Bundle-ManifestVersion: 2
++Bundle-Name: ${ECLIPSE_PLUGIN_NAME} ${ECLIPSE_PLUGIN_VERSION}
++Bundle-SymbolicName: ${ECLIPSE_PLUGIN_RTSC}.product_${ECLIPSE_PLUGIN_VERSION};singleton:=true
++Bundle-Version: ${ECLIPSE_PLUGIN_VERSION}
++Bundle-Activator: org.eclipse.rtsc.xdctools.ui.CCSActivator
++Bundle-Vendor: ${ECLIPSE_PLUGIN_PROVIDER}
++Require-Bundle: org.eclipse.ui,
++ org.eclipse.core.runtime,
++ org.eclipse.help,
++ org.eclipse.rtsc.xdctools.ui
++Eclipse-LazyStart: true
++EOF
++}
++
++create_eclipse_plugin() {
++    create_eclipse_plugin_extension
++    create_eclipse_plugin_feature
++    create_eclipse_plugin_plugin
++
++    if [ ! -z "${ECLIPSE_PLUGIN_CDOC}" ]
++    then
++        create_eclipse_plugin_toc
++    fi
++
++    create_eclipse_plugin_manifest
++}
++
++do_install_append() {
++    bbwarn "CDOC = \"${ECLIPSE_PLUGIN_CDOC}\""
++    bbwarn "SRC_URI = \"${SRC_URI}\""
++    create_eclipse_plugin
++}
++
++def string_set(iterable):
++    return ' '.join(set(iterable))
++
++SRC_URI_append = "${@string_set('file://%s' %cdoc for cdoc in (d.getVar("ECLIPSE_PLUGIN_CDOC", True) or "").split())}"
++
++FILES_${PN} = "${ECLIPSE_PLUGIN_DIR}"
 -- 
-Robert Nelson
-https://rcn-ee.com/
+1.9.1
+
 
