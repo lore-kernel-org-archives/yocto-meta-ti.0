@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7CE19E00BD5; Thu,  6 Jul 2017 15:03:44 -0700 (PDT)
+	id 5DE94E00BD5; Thu,  6 Jul 2017 15:06:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,34 +18,34 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1BE44E00BC1
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:03:43 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14F78E00BC1
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:06:53 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66M3gfH022618
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:03:42 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66M6rlJ022871
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:06:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499378622;
-	bh=zVnZsKXcEHRev2D8MjDQTyml2D9OaCbUF+oHJP9bVp4=;
+	s=ti-com-17Q1; t=1499378813;
+	bh=MCQtqPGkhmaq48mu1otyDOXihkCqFA5bpKSd9vjMud4=;
 	h=From:To:CC:Subject:Date;
-	b=Nom0pKhsRROQoYZm5I1bcnCbAWpVvbEL+chXX63UABtg8RfKgZHuXk3efWI2qkPgz
-	2kFAqHUv94rRMWzAWQqtUFjfJ3HqKwDiWCEnwSuH/VYhLE5KuM5Fb3/hTPsLDepLV7
-	Jz+KyMn3rcL1AgsW5EuxzRkIq1nxZPEMzjv6TLiU=
+	b=D6G+N9tiZyjqB1v48nz9HDjlo/g0k9InZzzAZ6payV7GU0/lPxqIdjKlJSu8XUsiS
+	94b5zqUMyuKJ9uz1ErDgQT2T2Syn+i8+736bfkgMIQW6aDbAuSqdcg0RvFoBTFhy+S
+	UbttJ906KPSZz9wtfvFW4AcSFrxJHGKNyNHVafMQ=
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66M3gT9009725
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:03:42 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66M6r5Y014464
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:06:53 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
 	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 17:03:42 -0500
+	Thu, 6 Jul 2017 17:06:52 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66M3gKM026833;	Thu, 6 Jul 2017 17:03:42 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v66M6qoO009364;	Thu, 6 Jul 2017 17:06:52 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 18:03:40 -0400
-Message-ID: <1499378620-55895-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 18:06:50 -0400
+Message-ID: <1499378810-55974-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH v2] faultmanagement-rtos: Added rtos recipe for faultmanagement
+Subject: [PATCH v2] fatfs-rtos: Added fatfs recipe for rtos
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,55 +58,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 22:03:44 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 22:06:56 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- .../faultmanagement/faultmanagement-rtos_git.bb    | 34 ++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb
+ recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
 
-diff --git a/recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb b/recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb
+diff --git a/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb b/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
 new file mode 100644
-index 0000000..9cc4381
+index 0000000..6dccf01
 --- /dev/null
-+++ b/recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb
-@@ -0,0 +1,34 @@
++++ b/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
+@@ -0,0 +1,32 @@
 +inherit ti-pdk
 +
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://fault_mgmt.h;beginline=1;endline=41;md5=4be5df2b9c314da729e9e4f6cc0b2979"
++LIC_FILES_CHKSUM = "file://FATFS.h;beginline=1;endline=32;md5=6619832755598d1cc2b01f2e6a1801d6"
 +
-+COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm|k2l-evm"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+FAULT_MANAGEMENT_GIT_URI = "git://git.ti.com/keystone-rtos/fault_mgmt.git"
-+FAULT_MANAGEMENT_GIT_PROTOCOL = "git"
-+FAULT_MANAGEMENT_GIT_BRANCH = "master"
-+FAULT_MANAGEMENT_GIT_DESTSUFFIX = "git/ti/instrumentation/fault_mgmt"
++FATFS_GIT_URI = "git://git.ti.com/keystone-rtos/fatfs.git"
++FATFS_GIT_PROTOCOL = "git"
++FATFS_GIT_BRANCH = "master"
 +
-+# Below commit ID corresponds to "DEV.FAULT_MGMT.01.00.01.03"
-+FAULT_MANAGEMENT_SRCREV = "a300e7d1f262bdfa48c92851bad0da228a41acc3"
++# Below commit ID corresponds to "DEV.FATFS_LLD.01.00.00.06A"
++FATFS_SRCREV = "7cb9e45da11cd3c60fe48c38c9dcdaa6e49a8276"
 +
-+BRANCH = "${FAULT_MANAGEMENT_GIT_BRANCH}"
-+SRC_URI = "${FAULT_MANAGEMENT_GIT_URI};destsuffix=${FAULT_MANAGEMENT_GIT_DESTSUFFIX};protocol=${FAULT_MANAGEMENT_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH ="${FATFS_GIT_BRANCH}"
++SRC_URI = "${FATFS_GIT_URI};protocol=${FATFS_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${FAULT_MANAGEMENT_SRCREV}"
-+PV = "01.00.01.03"
++SRCREV = "${FATFS_SRCREV}"
++PV = "01.00.00.06A"
 +PR = "r0"
 +
-+S = "${WORKDIR}/${FAULT_MANAGEMENT_GIT_DESTSUFFIX}"
-+
-+DEPENDS_append_keystone = " qmss-lld-rtos \
-+                            cppi-lld-rtos \
-+                            pa-lld-rtos \
++DEPENDS_append = " mmcsd-lld-rtos \
 +"
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
 +
-+DEPENDS_append_k2hk-evm = " aif2-lld-rtos \
-+"
++export PDK_FATFS_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
++
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "Fault Management"
++PDK_COMP_LINK_TEXT = "FATFS Library"
 -- 
 1.9.1
 
