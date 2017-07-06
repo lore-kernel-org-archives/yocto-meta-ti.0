@@ -1,6 +1,6 @@
-Return-Path: <i-pang@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5FA24E00B57; Thu,  6 Jul 2017 10:08:35 -0700 (PDT)
+	id 5E836E00B9D; Thu,  6 Jul 2017 10:26:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,35 +17,36 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80003E00A9B
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 10:08:30 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66H8UmI028264
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 12:08:30 -0500
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF706E00A9B
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 10:26:55 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66HQsQ0014858
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 12:26:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499360910;
-	bh=HHatEuqOiascc4tM1DC/zDqZM5aI0UR0Q4+7yXeWw38=;
+	s=ti-com-17Q1; t=1499362014;
+	bh=PQ1LzFcYW1GA37VPbW9EKIJiHCEoHfmy9XgcownDj+U=;
 	h=From:To:Subject:Date:References:In-Reply-To;
-	b=CLXggP6utB+J26fDgq3gXqh1M5Vc3pt+QgGo9yNGXkXuvoZghpL1kpDvr09CJroTr
-	7Ru3VHutMC7JEMGhhyLwtm1j7D8PwI0tWBpCTq7frXekpiJRVDxYjVh3qBe3YUqe3w
-	703SuBbwRkJ6eAk++BGbEotH06OT6hP5fci/r2ns=
+	b=S6LH00t3QZDdeTp3qkZ/vliaFy87k4neiD7IV59CL4SJ/YSH3TabdBoMnPD2nV8AJ
+	dde1qZfjHD+wOtLVeCCrhvVfHEF+DofI5ZCk9jHiTirDus7m73DBqkKmgtqZWIST/x
+	RwcT110b+VzfiAuTr+nCiuuEXTpUoFtMKRyGF7fU=
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66H8UuA010254
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 12:08:30 -0500
-Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66HQsM1014391
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 12:26:54 -0500
+Received: from DFLE12.ent.ti.com ([fe80::e9a3:bf19:af96:227b]) by
 	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0294.000; Thu, 6 Jul 2017 12:08:30 -0500
-From: "Pang, Ivan" <i-pang@ti.com>
-To: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+	14.03.0294.000; Thu, 6 Jul 2017 12:26:54 -0500
+From: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>
+To: "Pang, Ivan" <i-pang@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
 Thread-Topic: [meta-ti] [PATCH] ti-staging: Inhibiting sysroot strip &
 	package	debug split
-Thread-Index: AQHS9nHZS8ha/qztqkauOyaAuD8DtqJHBX0g
-Date: Thu, 6 Jul 2017 17:08:29 +0000
-Message-ID: <C45960711C772449A33A51ED1374F08A40626766@DFLE08.ent.ti.com>
+Thread-Index: AQHS9np90ubWCWAwrkqci47GnHxIRqJHDPYA
+Date: Thu, 6 Jul 2017 17:26:54 +0000
+Message-ID: <5130E41A1BA9D145BA0F3B18D5CFB0A74379C51F@DFLE12.ent.ti.com>
 References: <1499357178-23074-1-git-send-email-m-radhakrishnan2@ti.com>
-In-Reply-To: <1499357178-23074-1-git-send-email-m-radhakrishnan2@ti.com>
+	<C45960711C772449A33A51ED1374F08A40626766@DFLE08.ent.ti.com>
+In-Reply-To: <C45960711C772449A33A51ED1374F08A40626766@DFLE08.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -64,10 +65,21 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 17:08:35 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 17:26:58 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+The board module failed without this patch.
+So, the references to ti-staging.inc needs to be removed from ALL the recip=
+es?
+
+-----Original Message-----
+From: Pang, Ivan=20
+Sent: Thursday, July 06, 2017 1:08 PM
+To: Radhakrishnan, Mahesh; meta-ti@yoctoproject.org
+Subject: RE: [meta-ti] [PATCH] ti-staging: Inhibiting sysroot strip & packa=
+ge debug split
 
 We had a previous discussion on this ti-staging.inc file and the conclusion=
  is that removing this file is the better way going forward.
