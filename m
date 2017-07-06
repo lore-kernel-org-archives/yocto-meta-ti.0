@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BA045E00BAD; Thu,  6 Jul 2017 09:33:10 -0700 (PDT)
+	id D1200E00BAD; Thu,  6 Jul 2017 09:35:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,35 +17,35 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D876E00B57
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 09:33:08 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66GX8nN013616
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:33:08 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23B5EE00B57
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 09:35:00 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66GZ085024348
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:35:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499358788;
-	bh=Ji4YbPcYL+Y3p/bP5q3RVWTk7/xOYXD94nVgj2Cz6oM=;
+	s=ti-com-17Q1; t=1499358900;
+	bh=/KjHmWQKs0fwH6ad1JqRLYNltinbtDYTXiK3r7g+i8k=;
 	h=From:To:CC:Subject:Date;
-	b=xjwdoiRzpjK63un2Undo6QrIYtLwqG7y27GlbdkQbozhQcTrHEW6cEislb+uCUPCe
-	d6Mkghl8YDvCWmGeGolFiQTZD3WVZ5bdHfTEvIa42FJS2KXHplPfoLXO66v4H4/0Lk
-	EtOR5Cuv6kpNoOJSj7KIe0DW3WDqoUA8DJ1ss1oc=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66GX8PB018553
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:33:08 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 11:33:07 -0500
+	b=EpWIJW5p6VA05KfQPlklQMOIIGuaxXco4HAXIU3PAMDnkOgq94CFFLFKacWl31LGg
+	mNcklrOOlzme+4L1qr93qf+FtB8g1WsJBMiORa/lZg8SRguzZOPXyk/H0XoPpt8ery
+	Z8ZuyMKEZxbK0bMmT6FyvrJFHk3KTOPt+SiGYla8=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66GZ0Ep001569
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:35:00 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 6 Jul 2017 11:34:59 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66GX7Ch003244;	Thu, 6 Jul 2017 11:33:07 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v66GYxL0018636;	Thu, 6 Jul 2017 11:34:59 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 12:33:06 -0400
-Message-ID: <1499358786-35219-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 12:34:58 -0400
+Message-ID: <1499358898-35274-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] bcp-lld-rtos: Added RTOS recipe for bcp-lld
+Subject: [PATCH] dfe-lld-rtos: Added RTOS recipe for dfe-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,61 +58,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 16:33:10 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 16:35:01 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb | 10 ++++++++++
- recipes-bsp/bcp-lld/bcp-lld.inc         | 22 ++++++++++++++++++++++
- 2 files changed, 32 insertions(+)
- create mode 100644 recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
- create mode 100644 recipes-bsp/bcp-lld/bcp-lld.inc
+ recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb b/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
+diff --git a/recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb b/recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb
 new file mode 100644
-index 0000000..dcbc55d
+index 0000000..2466569
 --- /dev/null
-+++ b/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
++++ b/recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb
 @@ -0,0 +1,10 @@
 +inherit ti-pdk
-+require bcp-lld.inc
++
++require recipes-bsp/dfe-lld/dfe-lld.inc
 +
 +PR = "${INC_PR}.0"
 +
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+"
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "BCP LLD"
-diff --git a/recipes-bsp/bcp-lld/bcp-lld.inc b/recipes-bsp/bcp-lld/bcp-lld.inc
-new file mode 100644
-index 0000000..ddaf97e
---- /dev/null
-+++ b/recipes-bsp/bcp-lld/bcp-lld.inc
-@@ -0,0 +1,22 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://bcp.h;beginline=1;endline=40;md5=4f6e6128dd075a89548c0287a39b8896"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|c667x-evm"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+BCP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/bcp-lld.git"
-+BCP_LLD_GIT_PROTOCOL = "git"
-+BCP_LLD_GIT_BRANCH = "master"
-+BCP_LLD_GIT_DESTSUFFIX = "git/ti/drv/bcp"
-+
-+# Below commit ID corresponds to "DEV.BCP_LLD.02.01.00.06"
-+BCP_LLD_SRCREV = "44e2ffcb6fd236c41f7ea8f9a1684833f5361daa"
-+
-+BRANCH = "${BCP_LLD_GIT_BRANCH}"
-+SRC_URI = "${BCP_LLD_GIT_URI};destsuffix=${BCP_LLD_GIT_DESTSUFFIX};protocol=${BCP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+
-+SRCREV = "${BCP_LLD_SRCREV}"
-+PV = "02.01.00.06"
-+INC_PR = "r0"
-+
-+S = "${WORKDIR}/${BCP_LLD_GIT_DESTSUFFIX}"
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "DFE LLD"
 -- 
 1.9.1
 
