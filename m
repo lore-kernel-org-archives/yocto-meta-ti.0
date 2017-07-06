@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E63D2E00BF7; Thu,  6 Jul 2017 09:00:17 -0700 (PDT)
+	id C66D4E00B9D; Thu,  6 Jul 2017 09:03:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,34 +18,34 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8769E00BDF
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 09:00:12 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66G0CTS009207
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:00:12 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D98BE00B2F
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 09:03:11 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66G3B4f009507
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:03:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499356812;
-	bh=ZWtMCCuFdzYmWJFdNhFI5x7T/FRWB1Om6WzXQfIbHOY=;
+	s=ti-com-17Q1; t=1499356991;
+	bh=prlbTBf9VStbBtdVGLp9RyMsEOgrUzDIHe0Vv3iQwak=;
 	h=From:To:CC:Subject:Date;
-	b=TY/ztmEmyPMzz6zPvHTivxe3xyRMI/Y7HdWegK/duTmRk+WEOt/ngUfvYY7hzURSO
-	zf+N5UNC93hv1/+n2e6r0BywGVPIxR2xVfNhfOoqrDnyN/yoWYCwnrNwiYUCli9y14
-	SiCcWQP8LmA81RWZ9lI6NGVuB9WLPap9JE24oy/I=
+	b=TjaNJr0LTV1fv1aEhAXglVcmusbwBaZYM9MHp7rhwUz2zM6rUNZuZ9BAnfuMqT8co
+	ceoIIBQQ4V1x8zT+jJoNKGVua2mvHFxzvdv3Qj9kNWLIW3iY/UiSsrp9AoUDjmE0C6
+	BF7VMNjaotlVP+CzeyoybRDzpYxuF7TXAjq4AlsI=
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66G0CWS019266
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:00:12 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66G3BVG012964
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:03:11 -0500
 Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 11:00:12 -0500
+	Thu, 6 Jul 2017 11:03:10 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66G0BPI002082;	Thu, 6 Jul 2017 11:00:12 -0500
+	v66G3AE9005719;	Thu, 6 Jul 2017 11:03:10 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 12:00:09 -0400
-Message-ID: <1499356809-20020-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 12:03:09 -0400
+Message-ID: <1499356989-21593-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] rm-lld-rtos: Add support for c66x
+Subject: [PATCH] traceframework-rtos: Add HTML doc link text
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,28 +58,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 16:00:18 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 16:03:13 -0000
 Content-Type: text/plain
 
 ---
- recipes-bsp/rm-lld/rm-lld-rtos_git.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-bsp/traceframework/traceframework-rtos_git.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/rm-lld/rm-lld-rtos_git.bb b/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
-index 50d8740..823af5b 100644
---- a/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
-+++ b/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
-@@ -1,7 +1,9 @@
- inherit ti-pdk
+diff --git a/recipes-bsp/traceframework/traceframework-rtos_git.bb b/recipes-bsp/traceframework/traceframework-rtos_git.bb
+index 32994d3..c4b76d1 100644
+--- a/recipes-bsp/traceframework/traceframework-rtos_git.bb
++++ b/recipes-bsp/traceframework/traceframework-rtos_git.bb
+@@ -2,9 +2,12 @@ inherit ti-pdk
  
-+COMPATIBLE_MACHINE_append = "|c66x"
+ require traceframework.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ DEPENDS_append = " uia \
+ "
+ 
+ XDCPATH_append = ";${UIA_INSTALL_DIR}/packages"
 +
- require rm-lld.inc
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "Trace Framework"
 -- 
 1.9.1
 
