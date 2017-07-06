@@ -1,6 +1,6 @@
 Return-Path: <antonius.riko@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7FE46E00AE6; Thu,  6 Jul 2017 00:22:58 -0700 (PDT)
+	id BFB0BE00B28; Thu,  6 Jul 2017 00:35:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,6 +9,9 @@ X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
 X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	mail provider *      (antonius.riko[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [74.125.83.50 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,62 +19,58 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.192.170 listed in list.dnswl.org]
 	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [209.85.192.170 listed in dnsbl.sorbs.net]
-Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
-	[209.85.192.170])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E5DCE00ACF
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 00:22:56 -0700 (PDT)
-Received: by mail-pf0-f170.google.com with SMTP id q85so7043886pfq.1
-	for <meta-ti@yoctoproject.org>; Thu, 06 Jul 2017 00:22:56 -0700 (PDT)
+	*      [74.125.83.50 listed in dnsbl.sorbs.net]
+Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F732E00AE4
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 00:35:39 -0700 (PDT)
+Received: by mail-pg0-f50.google.com with SMTP id u62so7155375pgb.3
+	for <meta-ti@yoctoproject.org>; Thu, 06 Jul 2017 00:35:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-transfer-encoding:content-language;
-	bh=KLqa2f5A5x+Jzx49CC4yO8n3bz0ILJ2L2gwrFN2Ihiw=;
-	b=hOW6JjHp37GWl2EVmSlzn6FpoiLkdei2Bf7ncEC2NDNRgqfTDXvnAzES3NYXJQ6kCx
-	48kveXzWSy+WFqn+5g9Hxg8K3CgqRduBfTK0UuC3OvrCQHFong/NmeJ3dw9NamIPxNsZ
-	3/1GkWqt3ILoTb82B3bjJMiTveY1W/tDQYZouWl1KuUFHI5t/qp6eRzY/P2zY3GXizCW
-	5sjdePdtUOkO/QKqLDNAh4HFEVqLyCIcPfeub1BNjhTEi6aE+6cX7deqBQIxRL72kgr6
-	RlENXhtXshtkLwHQsgTqX1IqmDMLs8YiFl+J2lBQc/DQsL4KGnlO8aIlSjgWGNE2MpMy
-	vAqQ==
+	bh=Ysyb1i1SYc7bzKJjyxlkA9ceISVd6MBweS84DSQ9dPU=;
+	b=QKS8rktDMg/tgTMtUeFMjC2iPIzW8CmifwJBPycgc5QvpZp6E/gMDcyEiTX5YZ0Xxy
+	mnvlyEnCfirAgnNnKSY40ealAhCu76uzqCsNbBjrqpRMQw3PIB3haSTZSbQ28+Z8NNkh
+	tYlMUdvhioBxz3HIai0LrMbyd1sTLkZqvDmKiy/sV+COs+VYgkZQwTevwL/dnhDoJlsx
+	CT+va8bM0IkQDfhm4IGASNtvB8dYdvSGIubhHa5A+y+twnzLn9MdKgo3C0QyI1qO7MSn
+	tizpZu9kaKqIan7AiSFo+j+uCACbuVQ720XPOMI6wiMnN33u/ocbxr3a8xWgTGY3KQHP
+	Hirg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=KLqa2f5A5x+Jzx49CC4yO8n3bz0ILJ2L2gwrFN2Ihiw=;
-	b=dS2kj3OLnyNMG7kND1PMBYcQsz4q8enSEG/8dVR1MCEiqysKyaXVbsZdBeZTABJSrT
-	czKwGyqb3Qd5CKNdw0nIT7CpRr/XqFE6gSTVWPa3p+jcSKnd5c+r0yOuTsPK2PiqaM+s
-	uvFHKho1Psd9kfGG+Z3++MvS1xcpdV12S39yHAASz5dQKm+WzGUTgSyEc9P/vw2JPe2X
-	TfyWzcYNbjhY/jgI+H/OcatsMYejth4o/VdCytn0bKMZNX4ztkKX0Ktdi11w1krgvLO9
-	cxjN8CozW1R2aI3cpxPi2UDQNyotJXZhBkmbRk75ZIDOkwkIs9x6Y01Elm8kj7OaPqzF
-	NEfg==
-X-Gm-Message-State: AIVw112qRPHKtSq+hAjrtwRtN/2ZHrEMygwf8Gi26Z0RS7Eh1YqofdCR
-	njfNLQr01awu4oUF
-X-Received: by 10.98.200.208 with SMTP id i77mr21113467pfk.54.1499325776357;
-	Thu, 06 Jul 2017 00:22:56 -0700 (PDT)
+	bh=Ysyb1i1SYc7bzKJjyxlkA9ceISVd6MBweS84DSQ9dPU=;
+	b=lmjZAOGebACP4679mvgyd34Z4Ncj14o4VkQMhAOW2rqP2UQMicQKAtasjxWCtOAhYn
+	t/75QwOwkGLDgUYZw4NAgvQ/9YLqfytAoqEikB9Fl8pIZPk1HRZzeFZUe2b9lFhVgx28
+	qB47GHXsiU4WbgbmXK7L/I+XNlSN4OKlYO6OWfBDR0W4Jkl53U8LxFx/tvTPftSWcOp9
+	k4XLdHvEzbHG6/Exd49BUkQ7QxTPGn1TaBpbyBx14zlvrfEBsS3z0ejoPSlQSDHDNoQy
+	DwzVBx+Ly8MunMADWHq9dkVrMnwSB0FclymIdBtk6waU/PPCMorcxuKbj2iWW02e7NjA
+	kxAA==
+X-Gm-Message-State: AIVw1102JGUUhX+L9As+EXtchCl7jkNjwfDwe01cK8BCbhiNe3z5st4a
+	7A/nt0dZtGQoF7t3
+X-Received: by 10.84.160.226 with SMTP id v31mr26019655plg.91.1499326539249;
+	Thu, 06 Jul 2017 00:35:39 -0700 (PDT)
 Received: from ?IPv6:2001:8003:804a:b500:4cfe:6c48:891b:52e0?
 	([2001:8003:804a:b500:4cfe:6c48:891b:52e0])
-	by smtp.gmail.com with ESMTPSA id t4sm1878115pgs.22.2017.07.06.00.22.54
-	for <meta-ti@yoctoproject.org>
+	by smtp.gmail.com with ESMTPSA id
+	w66sm3212844pfi.63.2017.07.06.00.35.37 for <meta-ti@yoctoproject.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Jul 2017 00:22:55 -0700 (PDT)
+	Thu, 06 Jul 2017 00:35:38 -0700 (PDT)
 To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 References: <bc6ae1fe-32e2-5afe-8d26-0e9b3676cc2b@gmail.com>
 	<CAOCHtYhAihOvX3TRijFyc6ArMtBW23boDrEezVLOW6ECcCqaXg@mail.gmail.com>
 	<CAByQQ_r5oVJio+Ze8xE2w8QhLGH0g8QupKaWMRh7FseVgaB7tg@mail.gmail.com>
 	<CAOCHtYi1Ce-5=_fTuL2s+pC16VSbnYX6TR6QJD5gq_bpFn7kPQ@mail.gmail.com>
 From: Riko Ho <antonius.riko@gmail.com>
-Message-ID: <bd07a68c-5415-a481-36a3-5edc4cf3af25@gmail.com>
-Date: Thu, 6 Jul 2017 15:22:51 +0800
+Message-ID: <c83c3d2c-10cf-54cc-445b-553a6c1156bb@gmail.com>
+Date: Thu, 6 Jul 2017 15:35:35 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.1.1
 MIME-Version: 1.0
 In-Reply-To: <CAOCHtYi1Ce-5=_fTuL2s+pC16VSbnYX6TR6QJD5gq_bpFn7kPQ@mail.gmail.com>
-Subject: Different response if I change the mode of SPI, but not yet right ?
+Subject: ./spidev_test -l ==> setup: unsupported mode bits 20 ?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -84,63 +83,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 07:22:58 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 07:35:40 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
-Dear Team Member,
-Different response if I change the mode of SPI, but not yet right ? What 
-is the issue ?
+Dear Meta-TI Team Member,
 
-root@beaglebone:~# ./spidev_test
-spi mode: 0
-bits per word: 8
-max speed: 500000 Hz (500 KHz)
+I tried with -l parameter but it said
+root@beaglebone:~# ./spidev_test -l spidev spi1.0: setup: unsupported 
+mode bits 20
+What is the cause ?
 
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00
-root@beaglebone:~# ./spidev_test -C
-spi mode: 4
-bits per word: 8
-max speed: 500000 Hz (500 KHz)
+spidev spi1.0: setup: unsupported mode bits 20
+can't set spi mode: Invalid argument
+Aborted
 
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00 00 00 00 00
-00 00
-root@beaglebone:~# ./spidev_test -CO
-spi mode: 6
-bits per word: 8
-max speed: 500000 Hz (500 KHz)
-
-03 03 03 03 03 03
-03 03 03 03 03 03
-03 03 03 03 03 03
-03 03 03 03 03 03
-03 03 03 03 03 03
-03 03 03 03 03 03
-03 03
-root@beaglebone:~# ./spidev_test -CH
-spi mode: 5
-bits per word: 8
-max speed: 500000 Hz (500 KHz)
-
-0F 0F 0F 0F 0F 0F
-0F 0F 0F 0F 0F 0F
-0F 0F 0F 0F 0F 0F
-0F 0F 0F 0F 0F 0F
-0F 0F 0F 0F 0F 0F
-0F 0F 0F 0F 0F 0F
-0F 0F
-root@beaglebone:~#
-
+Thanks,
+Riko
 
