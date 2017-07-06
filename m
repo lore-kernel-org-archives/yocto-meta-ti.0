@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EC535E00BD5; Thu,  6 Jul 2017 15:43:14 -0700 (PDT)
+	id 9AEEEE00BD5; Thu,  6 Jul 2017 15:43:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,34 +18,34 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81573E00BC1
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:43:12 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66MhB8S020647
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:43:11 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03738E00BC1
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:43:54 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66Mhsge020688
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:43:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499380991;
-	bh=OezzVqAfhSDmqZuag6a6JJP4fODihYFTyKSJxaXlVYw=;
+	s=ti-com-17Q1; t=1499381034;
+	bh=huMlwlEKIDq9lckVt/0P/KhS3w9HsbhaLmg0V6m5wAE=;
 	h=From:To:CC:Subject:Date;
-	b=i45J8neJFbSs6BUUGzY4T7ncYgzLp0THLrOd+w8dAUv0+083avGz1q8neQ5iklSow
-	tfJtlTPPnOIgnF4meNaJzZhQoJj86+52CF74IaDVY8MZA4qHk4Y3rHEM1+6J40KROv
-	vNqR+c0O8uH9hSvhZngA3gzGS3SdjcS+IGpkSjN4=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66MhBec029723
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:43:11 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 17:43:11 -0500
+	b=Yu4wXO3/TgBzMV2lkHv5EUaJ3HLRzLMSKYWei2H5y0kiSZpcTrT1alIOc9spEEC/f
+	x8HEac/fxEZ4IcKKfn5+7F5DQe30QP7TfmNfSHJMlkq3M3oOItxuK566ryDtm0K18K
+	oK/qhu2K4ib70VYf7M0iZoyFsCNr/8ZfORNVtMoE=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66MhscG030112
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:43:54 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 6 Jul 2017 17:43:53 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66MhB6H010924;	Thu, 6 Jul 2017 17:43:11 -0500
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v66Mhrig032343;	Thu, 6 Jul 2017 17:43:53 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 18:43:09 -0400
-Message-ID: <1499380989-60628-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 18:43:52 -0400
+Message-ID: <1499381032-60680-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] profiling-rtos: Add rtos recipe for profiling
+Subject: [PATCH] tsip-lld-rtos: Add rtos recipe for tsip-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,53 +58,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 22:43:15 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 22:43:55 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/utils-rtos/profiling-rtos_git.bb | 32 ++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 recipes-bsp/utils-rtos/profiling-rtos_git.bb
+ recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/utils-rtos/profiling-rtos_git.bb b/recipes-bsp/utils-rtos/profiling-rtos_git.bb
+diff --git a/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb b/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
 new file mode 100644
-index 0000000..bbb49b4
+index 0000000..f2a3e3a
 --- /dev/null
-+++ b/recipes-bsp/utils-rtos/profiling-rtos_git.bb
-@@ -0,0 +1,32 @@
++++ b/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
+@@ -0,0 +1,24 @@
 +inherit ti-pdk
 +
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://profilingver.h;beginline=1;endline=46;md5=974494ad60f33cfc0340e421c5a5a7a0"
++LIC_FILES_CHKSUM = "file://tsip.h;beginline=1;endline=32;md5=dab2257b0b8a3678c26915f6eb49b71e"
 +
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x"
++COMPATIBLE_MACHINE = "k2e-evm|c667x-evm"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+PROFILING_GIT_URI = "git://git.ti.com/keystone-rtos/utils.git"
-+PROFILING_GIT_PROTOCOL = "git"
-+PROFILING_GIT_BRANCH = "master"
++TSIP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/tsip-lld.git"
++TSIP_LLD_GIT_PROTOCOL = "git"
++TSIP_LLD_GIT_BRANCH = "master"
 +
-+# Below commit ID corresponds to "DEV.UTILS.01.00.00.04"
-+PROFILING_SRCREV = "535ee56fcc6a476029d9567df49a5308b866efe4"
++# Below commit ID corresponds to "DEV.TSIP_LLD.01.00.00.07A"
++TSIP_LLD_SRCREV = "211d2f1a5c3c7ec80349a18e6e6cae6c9e4df921"
 +
-+BRANCH = "${PROFILING_GIT_BRANCH}"
-+SRC_URI = "${PROFILING_GIT_URI};protocol=${PROFILING_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH = "${TSIP_LLD_GIT_BRANCH}"
++SRC_URI = "${TSIP_LLD_GIT_URI};protocol=${TSIP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${PROFILING_SRCREV}"
-+PV = "01.00.00.04"
++SRCREV = "${TSIP_LLD_SRCREV}"
++PV = "01.00.00.07"
 +PR = "r0"
 +
-+S = "${WORKDIR}/git/profiling"
-+
-+# Build with make instead of XDC
-+TI_PDK_XDCMAKE = "0"
-+
-+export PDK_PROFILING_ROOT_PATH ="${WORKDIR}/build"
-+export DEST_ROOT="${S}"
-+
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "Profiling Utility Library"
++PDK_COMP_LINK_TEXT = "TSIP LLD"
 -- 
 1.9.1
 
