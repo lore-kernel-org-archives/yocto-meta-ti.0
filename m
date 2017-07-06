@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 20C79E00BC1; Thu,  6 Jul 2017 15:41:17 -0700 (PDT)
+	id 5B3F7E00BD5; Thu,  6 Jul 2017 15:42:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
+	*      [198.47.19.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,35 +17,35 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA988E00BC1
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:41:13 -0700 (PDT)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E61FE00BC1
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:42:26 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66Mf2Yo006829
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:41:02 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66MgQv7026309
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:42:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499380862;
-	bh=nQRWOOUjfowYWvVlTgiip1w6/ToEqs1IHczeY4dGFaQ=;
+	s=ti-com-17Q1; t=1499380946;
+	bh=7U1qIr5oTVKLnvjx9wBxSpAkdoLJoJB1eG4exJMdtgE=;
 	h=From:To:CC:Subject:Date;
-	b=UKfOPC6G0i/m8AHg/UMd+5fWNMJDp6oaHSTeGsrIKSZImtduM0CxjFRyJ6n2YKGoT
-	VDoqiCI49oGgmRlgXpk3x4Z/OyNRbmv//mNuaYXkxUSWTj21W73kxtMHuGHqzeztD9
-	PBRck+ySv1cVdgXanHX5C5YDMtH9BfzH9HhgmR8E=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66MevAN026636
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:40:57 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 17:40:56 -0500
+	b=KNSNtP7PhzBbGh7IsSBKuo+XdswL69NgmcenCjJpf2Px06f9PnrFLP2cwQcgHhEsC
+	p2cQuA42lJmTYie+Epnobge2x5xW5NaXJaVeNB7N8q7GqZ6mmzvfa4fJ47hK9f9dsU
+	lHQf78DFz+xr0fjHrQfS8vYdXPlXvyKn919lZ5PI=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66MgQOB028724
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:42:26 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 6 Jul 2017 17:42:25 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66MevTm008822;	Thu, 6 Jul 2017 17:40:57 -0500
+	v66MgPFV010495;	Thu, 6 Jul 2017 17:42:25 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 18:40:55 -0400
-Message-ID: <1499380855-60521-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 18:42:24 -0400
+Message-ID: <1499380944-60574-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] transport-rtos: Added transport recipes(bmet, nimu, nimu-icss) for rtos
+Subject: [PATCH] icss-emac-lld-rtos: Added rtos recipe for icss-emac-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,139 +58,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 22:41:17 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 22:42:27 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb  | 19 ++++++++++++++
- recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb | 26 +++++++++++++++++++
- recipes-bsp/transport-rtos/nimu-rtos_git.bb      | 32 ++++++++++++++++++++++++
- recipes-bsp/transport-rtos/transport.inc         | 17 +++++++++++++
- 4 files changed, 94 insertions(+)
- create mode 100644 recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
- create mode 100644 recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
- create mode 100644 recipes-bsp/transport-rtos/nimu-rtos_git.bb
- create mode 100644 recipes-bsp/transport-rtos/transport.inc
+ .../icss-emac-lld/icss-emac-lld-rtos_git.bb        | 43 ++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100644 recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
+diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb b/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
 new file mode 100644
-index 0000000..72c4d7c
+index 0000000..53e6bf3
 --- /dev/null
-+++ b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
-@@ -0,0 +1,19 @@
++++ b/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
+@@ -0,0 +1,43 @@
 +inherit ti-pdk
-+require transport.inc
 +
-+PR = "${INC_PR}.0"
-+
-+LIC_FILES_CHKSUM = "file://bmet_transport.h;beginline=12;endline=40;md5=7c7fbe6af03d79b61025a67a8fc96f93"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm|k2l-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+"
-+
-+BMET_ETH_DESTSUFFIX = "git/bmet_eth"
-+
-+S = "${WORKDIR}/${BMET_ETH_DESTSUFFIX}"
-+
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "Baremetal Ethernet Transport"
-diff --git a/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
-new file mode 100644
-index 0000000..f290f64
---- /dev/null
-+++ b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
-@@ -0,0 +1,26 @@
-+inherit ti-pdk
-+require transport.inc
-+
-+PR = "${INC_PR}.0"
-+
-+LIC_FILES_CHKSUM = "file://nimu_icssEth.h;beginline=1;endline=35;md5=fd897e67955a19ba88443d4bc2e7e18a"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|c66x|omapl1"
-+
-+DEPENDS_append = " ti-ndk \
-+                   pruss-lld-rtos \
-+                   icss-emac-lld-rtos \
-+"
-+
-+NIMU_ICSS_DESTSUFFIX = "git/ndk/nimu_icss"
-+
-+# Build with make instead of XDC
-+TI_PDK_XDCMAKE = "0"
-+
-+S = "${WORKDIR}/${NIMU_ICSS_DESTSUFFIX}"
-+
-+export PDK_NIMU_ICSS_ROOT_PATH ="${WORKDIR}/build"
-+export DEST_ROOT="${S}"
-+
-+export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
-+XDCPATH_append = ";${NDK_INSTALL_DIR}/packages"
-diff --git a/recipes-bsp/transport-rtos/nimu-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
-new file mode 100644
-index 0000000..f52c763
---- /dev/null
-+++ b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
-@@ -0,0 +1,32 @@
-+inherit ti-pdk
-+require transport.inc
-+
-+PR = "${INC_PR}.0"
-+
-+LIC_FILES_CHKSUM = "file://nimu_eth.h;beginline=1;endline=35;md5=52ba99291b03b91058e37115b66edb10"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1"
-+
-+NIMU_DESTSUFFIX = "git/ndk/nimu"
-+
-+S = "${WORKDIR}/${NIMU_DESTSUFFIX}"
-+
-+DEPENDS_append = " ti-ndk osal-rtos"
-+DEPENDS_append_ti33x = " starterware-rtos emac-lld-rtos"
-+DEPENDS_append_ti43x = " starterware-rtos emac-lld-rtos"
-+DEPENDS_append_omap-a15 = " emac-lld-rtos"
-+DEPENDS_append_dra7xx-evm = " emac-lld-rtos"
-+DEPENDS_append_keystone = " qmss-lld-rtos cppi-lld-rtos"
-+DEPENDS_append_k2hk-evm = " pa-lld-rtos"
-+DEPENDS_append_k2e-evm = " pa-lld-rtos"
-+DEPENDS_append_k2l-evm = " pa-lld-rtos"
-+DEPENDS_append_k2g = " emac-lld-rtos"
-+
-+# Build with make instead of XDC
-+TI_PDK_XDCMAKE = "0"
-+
-+export PDK_NIMU_ROOT_PATH ="${WORKDIR}/build"
-+export DEST_ROOT="${S}"
-+
-+export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
-+XDCPATH_append = ";${NDK_INSTALL_DIR}/packages"
-diff --git a/recipes-bsp/transport-rtos/transport.inc b/recipes-bsp/transport-rtos/transport.inc
-new file mode 100644
-index 0000000..82427fb
---- /dev/null
-+++ b/recipes-bsp/transport-rtos/transport.inc
-@@ -0,0 +1,17 @@
 +LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://icss_emacDrv.h;beginline=1;endline=40;md5=88d270788c1d8516511304f11a28586d"
 +
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+TRANSPORT_GIT_URI = "git://git.ti.com/keystone-rtos/transport.git"
-+TRANSPORT_GIT_PROTOCOL = "git"
-+TRANSPORT_GIT_BRANCH = "master"
++ICSS_EMAC_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/icss-emac.git"
++ICSS_EMAC_LLD_GIT_PROTOCOL = "git"
++ICSS_EMAC_LLD_GIT_BRANCH = "master"
++ICSS_EMAC_LLD_GIT_DESTSUFFIX = "git/ti/drv/icss_emac"
 +
-+# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.07A"
-+TRANSPORT_SRCREV = "099dbf371cea3b2d883f5c97a4b0e7ef40e84c6a"
++# Below commit ID corresponds to "DEV.ICSS-EMAC_LLD.01.00.00.07C"
++ICSS_EMAC_LLD_SRCREV = "08cb0540eeab7721fe82b603cb6285393f314117"
 +
-+BRANCH = "${TRANSPORT_GIT_BRANCH}"
-+SRC_URI = "${TRANSPORT_GIT_URI};protocol=${TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH = "${ICSS_EMAC_LLD_GIT_BRANCH}"
++SRC_URI = "${ICSS_EMAC_LLD_GIT_URI};destsuffix=${ICSS_EMAC_LLD_GIT_DESTSUFFIX};protocol=${ICSS_EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${TRANSPORT_SRCREV}"
-+PV = "01.00.00.07A"
-+INC_PR = "r0"
++SRCREV = "${ICSS_EMAC_LLD_SRCREV}"
++PV = "01.00.00.07C"
++PR = "r0"
++
++S = "${WORKDIR}/${ICSS_EMAC_LLD_GIT_DESTSUFFIX}"
++
++DEPENDS_append = " osal-rtos \
++                   pruss-lld-rtos \
++"
++DEPENDS_append_ti33x = " starterware-rtos \
++"
++DEPENDS_append_ti43x = " starterware-rtos \
++"
++
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
++
++export PDK_ICSS_EMAC_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
++
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "ICSS-EMAC LLD"
++
++INSANE_SKIP_${PN} = "arch"
 -- 
 1.9.1
 
