@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EE8CFE00BD5; Thu,  6 Jul 2017 15:38:56 -0700 (PDT)
+	id 20C79E00BC1; Thu,  6 Jul 2017 15:41:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.19.16 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,35 +17,35 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 72C77E00BC1
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:38:55 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66MctTv003494
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:38:55 -0500
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA988E00BC1
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 15:41:13 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66Mf2Yo006829
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:41:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499380735;
-	bh=oyrC7ggvQzXukuEfSCeWujvVCxLrapuh4VBduIQkR34=;
+	s=ti-com-17Q1; t=1499380862;
+	bh=nQRWOOUjfowYWvVlTgiip1w6/ToEqs1IHczeY4dGFaQ=;
 	h=From:To:CC:Subject:Date;
-	b=WpKCpHyqLJOLwTUYgeWx51gGrf/L6tMtg51f2yjDCCahFuKBPqha78zVzelM3ZufM
-	lEkFq5rbHf7m/wIFYNDtebYI4p8n1+RhRfvst8DjxJNbjesR8z9JJM8McMQQUZNPTr
-	/y4a+BjxOH5oxC02R+Boy/AayQgJf4Rot5gvhW5o=
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66MctO9023438
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:38:55 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 17:38:54 -0500
+	b=UKfOPC6G0i/m8AHg/UMd+5fWNMJDp6oaHSTeGsrIKSZImtduM0CxjFRyJ6n2YKGoT
+	VDoqiCI49oGgmRlgXpk3x4Z/OyNRbmv//mNuaYXkxUSWTj21W73kxtMHuGHqzeztD9
+	PBRck+ySv1cVdgXanHX5C5YDMtH9BfzH9HhgmR8E=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66MevAN026636
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 17:40:57 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 6 Jul 2017 17:40:56 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66McsK8006331;	Thu, 6 Jul 2017 17:38:54 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v66MevTm008822;	Thu, 6 Jul 2017 17:40:57 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 18:38:51 -0400
-Message-ID: <1499380731-60444-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 18:40:55 -0400
+Message-ID: <1499380855-60521-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] pcie-lld-rtos: Added rtos recipe for pcie-lld
+Subject: [PATCH] transport-rtos: Added transport recipes(bmet, nimu, nimu-icss) for rtos
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,54 +58,139 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 22:38:57 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 22:41:17 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb | 33 +++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
- create mode 100644 recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
+ recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb  | 19 ++++++++++++++
+ recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb | 26 +++++++++++++++++++
+ recipes-bsp/transport-rtos/nimu-rtos_git.bb      | 32 ++++++++++++++++++++++++
+ recipes-bsp/transport-rtos/transport.inc         | 17 +++++++++++++
+ 4 files changed, 94 insertions(+)
+ create mode 100644 recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
+ create mode 100644 recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
+ create mode 100644 recipes-bsp/transport-rtos/nimu-rtos_git.bb
+ create mode 100644 recipes-bsp/transport-rtos/transport.inc
 
-diff --git a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
+diff --git a/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
 new file mode 100644
-index 0000000..4790731
+index 0000000..72c4d7c
 --- /dev/null
-+++ b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
-@@ -0,0 +1,33 @@
++++ b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
+@@ -0,0 +1,19 @@
 +inherit ti-pdk
++require transport.inc
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://pcie.h;beginline=1;endline=34;md5=c094db055596498ba803933936611eb2"
++PR = "${INC_PR}.0"
 +
-+COMPATIBLE_MACHINE = "omap-a15|keystone|c66x"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++LIC_FILES_CHKSUM = "file://bmet_transport.h;beginline=12;endline=40;md5=7c7fbe6af03d79b61025a67a8fc96f93"
 +
-+PCIE_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pcie-lld.git"
-+PCIE_LLD_GIT_PROTOCOL = "git"
-+PCIE_LLD_GIT_BRANCH = "master"
-+PCIE_LLD_GIT_DESTSUFFIX = "git/ti/drv/pcie"
++COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm|k2l-evm"
 +
-+# Below commit ID corresponds to "DEV.PCIE_LLD.02.02.00.09"
-+PCIE_LLD_SRCREV = "93f302f6f3dd3a83ac0dd0e24b3965f98f46eac7"
++DEPENDS_append = " qmss-lld-rtos \
++                   cppi-lld-rtos \
++"
 +
-+BRANCH = "${PCIE_LLD_GIT_BRANCH}"
-+SRC_URI = "${PCIE_LLD_GIT_URI};destsuffix=${PCIE_LLD_GIT_DESTSUFFIX};protocol=${PCIE_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++BMET_ETH_DESTSUFFIX = "git/bmet_eth"
 +
-+SRCREV = "${PCIE_LLD_SRCREV}"
-+PV = "02.02.00.09"
-+PR = "r0"
++S = "${WORKDIR}/${BMET_ETH_DESTSUFFIX}"
 +
-+S = "${WORKDIR}/${PCIE_LLD_GIT_DESTSUFFIX}"
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "Baremetal Ethernet Transport"
+diff --git a/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
+new file mode 100644
+index 0000000..f290f64
+--- /dev/null
++++ b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
+@@ -0,0 +1,26 @@
++inherit ti-pdk
++require transport.inc
 +
-+export PDK_PCIE_ROOT_PATH ="${WORKDIR}/build"
-+export DEST_ROOT="${S}"
++PR = "${INC_PR}.0"
++
++LIC_FILES_CHKSUM = "file://nimu_icssEth.h;beginline=1;endline=35;md5=fd897e67955a19ba88443d4bc2e7e18a"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|c66x|omapl1"
++
++DEPENDS_append = " ti-ndk \
++                   pruss-lld-rtos \
++                   icss-emac-lld-rtos \
++"
++
++NIMU_ICSS_DESTSUFFIX = "git/ndk/nimu_icss"
 +
 +# Build with make instead of XDC
 +TI_PDK_XDCMAKE = "0"
 +
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "PCIe LLD"
++S = "${WORKDIR}/${NIMU_ICSS_DESTSUFFIX}"
++
++export PDK_NIMU_ICSS_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
++
++export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
++XDCPATH_append = ";${NDK_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/transport-rtos/nimu-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
+new file mode 100644
+index 0000000..f52c763
+--- /dev/null
++++ b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
+@@ -0,0 +1,32 @@
++inherit ti-pdk
++require transport.inc
++
++PR = "${INC_PR}.0"
++
++LIC_FILES_CHKSUM = "file://nimu_eth.h;beginline=1;endline=35;md5=52ba99291b03b91058e37115b66edb10"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1"
++
++NIMU_DESTSUFFIX = "git/ndk/nimu"
++
++S = "${WORKDIR}/${NIMU_DESTSUFFIX}"
++
++DEPENDS_append = " ti-ndk osal-rtos"
++DEPENDS_append_ti33x = " starterware-rtos emac-lld-rtos"
++DEPENDS_append_ti43x = " starterware-rtos emac-lld-rtos"
++DEPENDS_append_omap-a15 = " emac-lld-rtos"
++DEPENDS_append_dra7xx-evm = " emac-lld-rtos"
++DEPENDS_append_keystone = " qmss-lld-rtos cppi-lld-rtos"
++DEPENDS_append_k2hk-evm = " pa-lld-rtos"
++DEPENDS_append_k2e-evm = " pa-lld-rtos"
++DEPENDS_append_k2l-evm = " pa-lld-rtos"
++DEPENDS_append_k2g = " emac-lld-rtos"
++
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
++
++export PDK_NIMU_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
++
++export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
++XDCPATH_append = ";${NDK_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/transport-rtos/transport.inc b/recipes-bsp/transport-rtos/transport.inc
+new file mode 100644
+index 0000000..82427fb
+--- /dev/null
++++ b/recipes-bsp/transport-rtos/transport.inc
+@@ -0,0 +1,17 @@
++LICENSE = "BSD-3-Clause"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++TRANSPORT_GIT_URI = "git://git.ti.com/keystone-rtos/transport.git"
++TRANSPORT_GIT_PROTOCOL = "git"
++TRANSPORT_GIT_BRANCH = "master"
++
++# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.07A"
++TRANSPORT_SRCREV = "099dbf371cea3b2d883f5c97a4b0e7ef40e84c6a"
++
++BRANCH = "${TRANSPORT_GIT_BRANCH}"
++SRC_URI = "${TRANSPORT_GIT_URI};protocol=${TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${TRANSPORT_SRCREV}"
++PV = "01.00.00.07A"
++INC_PR = "r0"
 -- 
 1.9.1
 
