@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C53A9E00BD5; Thu,  6 Jul 2017 14:25:16 -0700 (PDT)
+	id 9A6AEE00BD5; Thu,  6 Jul 2017 14:59:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
+	*      [198.47.19.16 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,35 +17,35 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 20EBBE00BC1
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 14:25:13 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66LPDdT018027
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 16:25:13 -0500
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 030B6E00BC1
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 14:59:06 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66LwunR002890
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 16:58:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499376313;
-	bh=/naL89gnlJoTAYo0wh8dImhNngsZexmo9JtfAoUEWl0=;
+	s=ti-com-17Q1; t=1499378336;
+	bh=CPeXdY459RHQ95J2bEM0OQPaf5QzhZ2tEHivjaO4lN0=;
 	h=From:To:CC:Subject:Date;
-	b=iYB8hmUFiKrMkn1emuFw+bmTfdja6e7Zq2KdJura7YhdnPBJ/8+rCqASd+QvMHVsR
-	xt2ZtTyiSi0nrm8xlL42PeiAEPcbDri2EmtEtdXaHtdn1HBO517bOg9Wip2WAADV/9
-	HFNbe+Gx1c9E9SDCasFgXqHbWHCG8JivwSPYrJ3s=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66LPDOe027292
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 16:25:13 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 16:25:12 -0500
+	b=y2m7GmBoJYRYfDAXcuZ4Em0tTjYBHE1pMahAb/mf2fDkZlWH2BKpSGp+rk1MfoplO
+	LrtD5nVrd9sCWIi0NivktNPtaHU6VwddWB+9aQ/IOS79XKMJc/luTmaVHcBtuEKrFe
+	kO8y0D3rSHaT3j5XAqVKc/VA7M2gUtM6RbET/9mk=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66Lwp2W005095
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 16:58:51 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 6 Jul 2017 16:58:50 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66LPCiV031820;	Thu, 6 Jul 2017 16:25:13 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v66LwoQd000631;	Thu, 6 Jul 2017 16:58:50 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 17:25:07 -0400
-Message-ID: <1499376307-55589-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 17:58:42 -0400
+Message-ID: <1499378322-55743-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH v2] audk2g-addon-rtos: Added recipe for audk2g-addon-rtos
+Subject: [PATCH v2] tcp3d-lld-rtos: Added rtos recipe for tcp3d-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,82 +58,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 21:25:16 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 21:59:08 -0000
 Content-Type: text/plain
 
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb | 62 +++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
- create mode 100644 recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
+ recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb | 32 +++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb b/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
+diff --git a/recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb b/recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb
 new file mode 100644
-index 0000000..4ee0995
+index 0000000..15248ca
 --- /dev/null
-+++ b/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
-@@ -0,0 +1,62 @@
-+require recipes-ti/includes/ti-paths.inc
-+require recipes-ti/includes/ti-staging.inc
++++ b/recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb
+@@ -0,0 +1,32 @@
++inherit ti-pdk
 +
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://audk2gaddonver.h;beginline=8;endline=47;md5=7a3996aaf1a3d3ca87358cf9b89bce3d"
++LIC_FILES_CHKSUM = "file://tcp3dver.h;beginline=1;endline=47;md5=3fe46c6320fb9ca4ac6692961402beb7"
 +
-+COMPATIBLE_MACHINE = "k2g"
++COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|c665x-evm"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+AUDK2G_ADDON_GIT_URI = "git://git.ti.com/processor-sdk/audk2g-addon.git"
-+AUDK2G_ADDON_GIT_PROTOCOL = "git"
-+AUDK2G_ADDON_GIT_BRANCH = "master"
-+AUDK2G_ADDON_GIT_DESTSUFFIX = "git/ti/addon/audk2g"
++TCP3D_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/tcp3d-lld.git"
++TCP3D_LLD_GIT_PROTOCOL = "git"
++TCP3D_LLD_GIT_BRANCH = "master"
++TCP3D_LLD_GIT_DESTSUFFIX = "git/ti/drv/bcp"
 +
-+# Below commit ID corresponds to "DEV.AUDK2G.01.04.00.00"
-+AUDK2G_ADDON_SRCREV = "815180b45ceb1fa3c110f9979106c7f5aa8b3ca2"
++# Below commit ID corresponds to "DEV.TCP3D_LLD.02.01.00.05"
++TCP3D_LLD_SRCREV = "8eb2edfc694982633e0dd01ba7b067ac9f634da9"
 +
-+BRANCH = "${AUDK2G_ADDON_GIT_BRANCH}"
-+SRC_URI = "${AUDK2G_ADDON_GIT_URI};destsuffix=${AUDK2G_ADDON_GIT_DESTSUFFIX};protocol=${AUDK2G_ADDON_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH = "${TCP3D_LLD_GIT_BRANCH}"
++SRC_URI = "${TCP3D_LLD_GIT_URI};destsuffix=${TCP3D_LLD_GIT_DESTSUFFIX};protocol=${TCP3D_LLD_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${AUDK2G_ADDON_SRCREV}"
-+PV = "01.04.00.00"
++SRCREV = "${TCP3D_LLD_SRCREV}"
++PV = "02.01.00.05"
 +PR = "r0"
 +
-+S = "${WORKDIR}/git/ti/addon/audk2g"
++S = "${WORKDIR}/${TCP3D_LLD_GIT_DESTSUFFIX}"
 +
-+DEPENDS = " ti-cgt6x-native \
-+            ti-sysbios \
-+            ti-xdctools \
-+            ti-pdk-build-rtos \
-+            common-csl-ip-rtos \
-+            gpio-lld-rtos \
-+            i2c-lld-rtos \
-+            board-rtos \
-+"
++DEPENDS_append = " edma3-lld-rtos"
 +
-+export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-+export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
-+export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
++export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
++XDCPATH_append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
 +
-+export XDCPATH = "${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;${PDK_INSTALL_DIR}/packages"
-+
-+LIMSOCS = "k2g"
-+LIMBOARDS = "evmK2G"
-+
-+export PDK_AUDK2G_ROOT_PATH = "${WORKDIR}/git"
-+
-+do_compile() {
-+    cd ${S}
-+
-+    make release LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
-+}
-+
-+do_install() {
-+    cd ${S}
-+
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/addon/audk2g
-+    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ \;
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "TCP3D LLD"
 -- 
 1.9.1
 
