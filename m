@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 15962E00B57; Thu,  6 Jul 2017 09:37:35 -0700 (PDT)
+	id 49BC9E00BAD; Thu,  6 Jul 2017 09:39:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,35 +17,35 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B096CE00B57
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 09:37:30 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66GbUCS009085
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:37:30 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7E21E00B57
+	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 09:39:14 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v66GdEdR024715
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:39:14 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499359050;
-	bh=P27CLyM/tQ41ovwJDGBsc0qe4qUqOy1yd7kj/KNverE=;
+	s=ti-com-17Q1; t=1499359154;
+	bh=vW+5hAkYmw3meFv0EAne+6RC4hlbLICg02SXSI/bFjM=;
 	h=From:To:CC:Subject:Date;
-	b=UO2c8GYjgX8z7j1Xe7ZSe+XQ6Gdlv6ZoxeNvFlMMsJxTMHH+tdf9z3BUQ/jYYGeDe
-	f97lhQxgvRs3sQ2zJP2P0ZrZ29gfDys/84TmallCMlsEwsEB9XVQpS4VoPImGgVM9N
-	qTRxfS0owbrcAT0uPXNXVBhvEk1+sIUgUanq1lQ0=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66GbU6M004764
-	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:37:30 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 6 Jul 2017 11:37:29 -0500
+	b=d9owgzcamJbcWLeL813uCGW6tNpB9/s9meSQVXDYvLvkTfFw4VL1j4GH2CsbDtdpo
+	tjW/nsUgdjfVqWkp54HQBmTcJdRhYhAmPbuAQ6Y8eZISnj3G89PMa5CUKemtKgBvmz
+	H+RjQZsDEthBd60frCCZet+VeaUY+TXAVVyjuCXg=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v66GdEwL025000
+	for <meta-ti@yoctoproject.org>; Thu, 6 Jul 2017 11:39:14 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 6 Jul 2017 11:39:14 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v66GbTRi008430;	Thu, 6 Jul 2017 11:37:29 -0500
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v66GdERZ008151;	Thu, 6 Jul 2017 11:39:14 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Jul 2017 12:37:28 -0400
-Message-ID: <1499359048-35341-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 6 Jul 2017 12:39:12 -0400
+Message-ID: <1499359152-35413-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] audk2g-addon-rtos: Added recipe for audk2g-addon-rtos
+Subject: [PATCH] board-rtos: Added board-rtos recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,92 +58,106 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 16:37:35 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 16:39:16 -0000
 Content-Type: text/plain
 
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb | 42 +++++++++++++++++++++++
- recipes-bsp/audk2g-addon/audk2g-addon.inc         | 22 ++++++++++++
- 2 files changed, 64 insertions(+)
- create mode 100644 recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
- create mode 100644 recipes-bsp/audk2g-addon/audk2g-addon.inc
+ recipes-bsp/board-rtos/board-rtos_git.bb | 58 ++++++++++++++++++++++++++++++++
+ recipes-bsp/board-rtos/board.inc         | 19 +++++++++++
+ 2 files changed, 77 insertions(+)
+ create mode 100644 recipes-bsp/board-rtos/board-rtos_git.bb
+ create mode 100644 recipes-bsp/board-rtos/board.inc
 
-diff --git a/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb b/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
+diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
 new file mode 100644
-index 0000000..c6065ac
+index 0000000..b4b8b0b
 --- /dev/null
-+++ b/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
-@@ -0,0 +1,42 @@
-+require recipes-ti/includes/ti-paths.inc
-+require recipes-ti/includes/ti-staging.inc
-+require audk2g-addon.inc
++++ b/recipes-bsp/board-rtos/board-rtos_git.bb
+@@ -0,0 +1,58 @@
++inherit ti-pdk
++require board.inc
 +
 +PR = "${INC_PR}.0"
 +
-+DEPENDS = " ti-cgt6x-native \
-+            ti-sysbios \
-+            ti-xdctools \
-+            ti-pdk-build-rtos \
-+            common-csl-ip-rtos \
-+            gpio-lld-rtos \
-+            i2c-lld-rtos \
-+            board-rtos \
++DEPENDS_append = " i2c-lld-rtos \
++                   spi-lld-rtos \
++                   uart-lld-rtos \
 +"
 +
-+export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-+export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
-+export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
++DEPENDS_append_omap-a15 = " osal-rtos \
++                            ti-ndk \
++"
 +
-+export XDCPATH = "${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;${PDK_INSTALL_DIR}/packages"
++DEPENDS_append_am57xx-evm = " gpio-lld-rtos \
++                              icss-emac-lld-rtos \
++                              mmcsd-lld-rtos \
++                              pruss-lld-rtos \
++                              pm-lld-rtos \
++"
 +
-+LIMSOCS = "k2g"
-+LIMBOARDS = "evmK2G"
++DEPENDS_append_ti33x = " gpio-lld-rtos \
++                         gpmc-lld-rtos \
++                         icss-emac-lld-rtos \
++                         mmcsd-lld-rtos \
++                         osal-rtos \
++                         pruss-lld-rtos \
++                         starterware-rtos \
++                         ti-ndk \
++"
 +
-+export PDK_AUDK2G_ROOT_PATH = "${WORKDIR}/git"
++DEPENDS_append_ti43x = " gpio-lld-rtos \
++                         gpmc-lld-rtos \
++                         icss-emac-lld-rtos \
++                         mmcsd-lld-rtos \
++                         osal-rtos \
++                         pruss-lld-rtos \
++                         starterware-rtos \
++                         ti-ndk \
++"
 +
-+do_compile() {
-+    cd ${S}
 +
-+    make release LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
-+}
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
 +
-+do_install() {
-+    cd ${S}
-+
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/addon/audk2g
-+    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ \;
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-diff --git a/recipes-bsp/audk2g-addon/audk2g-addon.inc b/recipes-bsp/audk2g-addon/audk2g-addon.inc
++LIMBOARDS_ti33x = "evmAM335x icev2AM335x iceAMIC110 bbbAM335x skAM335x"
++LIMBOARDS_ti43x = "evmAM437x idkAM437x skAM437x"
++LIMBOARDS_am57xx-evm = "evmAM571x evmAM572x idkAM571x idkAM572x"
++LIMBOARDS_dra7xx-evm = "evmDRA72x evmDRA75x evmDRA78x"
++LIMBOARDS_omapl137-evm = "evmOMAPL137"
++LIMBOARDS_omapl138-lcdk = "lcdkOMAPL138"
++LIMBOARDS_k2hk-evm = "evmK2H evmK2K"
++LIMBOARDS_k2e-evm = "evmK2E"
++LIMBOARDS_k2l-evm = "evmK2L"
++LIMBOARDS_k2g = "evmK2G iceK2G"
++export PDK_BOARD_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
++XDCPATH_append = ";${PDK_INSTALL_DIR}/packages/ti/csl;${NDK_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/board-rtos/board.inc b/recipes-bsp/board-rtos/board.inc
 new file mode 100644
-index 0000000..eced255
+index 0000000..6d6655e
 --- /dev/null
-+++ b/recipes-bsp/audk2g-addon/audk2g-addon.inc
-@@ -0,0 +1,22 @@
++++ b/recipes-bsp/board-rtos/board.inc
+@@ -0,0 +1,19 @@
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://audk2gaddonver.h;beginline=8;endline=47;md5=7a3996aaf1a3d3ca87358cf9b89bce3d"
++LIC_FILES_CHKSUM = "file://board.h;beginline=1;endline=32;md5=0e3182ba6a963da159c37eafa9752ade"
 +
-+COMPATIBLE_MACHINE = "k2g"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+AUDK2G_ADDON_GIT_URI = "git://git.ti.com/processor-sdk/audk2g-addon.git"
-+AUDK2G_ADDON_GIT_PROTOCOL = "git"
-+AUDK2G_ADDON_GIT_BRANCH = "master"
-+AUDK2G_ADDON_GIT_DESTSUFFIX = "git/ti/addon/audk2g"
++BOARD_GIT_URI = "git://git.ti.com/keystone-rtos/board.git"
++BOARD_GIT_PROTOCOL = "git"
++BOARD_GIT_BRANCH = "master"
 +
-+# Below commit ID corresponds to "DEV.AUDK2G.01.04.00.00"
-+AUDK2G_ADDON_SRCREV = "815180b45ceb1fa3c110f9979106c7f5aa8b3ca2"
++# Below commit ID corresponds to "DEV.BOARD.01.00.07.00"
++BOARD_SRCREV = "7d6a76ee65d75714740d468a48ca7e3668e66a94"
 +
-+BRANCH = "${AUDK2G_ADDON_GIT_BRANCH}"
-+SRC_URI = "${AUDK2G_ADDON_GIT_URI};destsuffix=${AUDK2G_ADDON_GIT_DESTSUFFIX};protocol=${AUDK2G_ADDON_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH ="${BOARD_GIT_BRANCH}"
++SRC_URI = "${BOARD_GIT_URI};protocol=${BOARD_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${AUDK2G_ADDON_SRCREV}"
-+PV = "01.04.00.00"
++SRCREV = "${BOARD_SRCREV}"
++PV = "01.00.07.00"
 +INC_PR = "r0"
-+
-+S = "${WORKDIR}/git/ti/addon/audk2g"
 -- 
 1.9.1
 
