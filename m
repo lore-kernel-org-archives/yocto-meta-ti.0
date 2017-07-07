@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 89CEEE00BBC; Fri,  7 Jul 2017 12:26:36 -0700 (PDT)
+	id 9A212E00BDC; Fri,  7 Jul 2017 12:30:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,34 +18,34 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4DD24E00B53
-	for <meta-ti@yoctoproject.org>; Fri,  7 Jul 2017 12:26:32 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v67JQWjk020008
-	for <meta-ti@yoctoproject.org>; Fri, 7 Jul 2017 14:26:32 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7750E00BC1
+	for <meta-ti@yoctoproject.org>; Fri,  7 Jul 2017 12:30:16 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v67JUFZM020560
+	for <meta-ti@yoctoproject.org>; Fri, 7 Jul 2017 14:30:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499455592;
-	bh=/im5Cc9fVCzHZ/y1xFSI7r7KQoTpP1moy0SFgHjKsOU=;
+	s=ti-com-17Q1; t=1499455815;
+	bh=u4Kie4IvwYBD6WtKX1m79IQ7upoMZNVAQ8H8NTGsfso=;
 	h=From:To:CC:Subject:Date;
-	b=trBcbCTSGmprvHNg9DhRztTAcoqMEftGjf5B4iuiDl9CzkNHGP958jGpEntJ+v1gO
-	Xu/BPOnwmjUPMpx9TdwOTC+x73LF+WvYYNv6pvw3QRO1VVOyw9/uDI4egAxFPmPVMG
-	gUNBRgDtdMJXAkB3q047LGMLjb3K612BmHnHUd44=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v67JQW9q023544
-	for <meta-ti@yoctoproject.org>; Fri, 7 Jul 2017 14:26:32 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 7 Jul 2017 14:26:31 -0500
+	b=NOj2JO8wH8cxuSB8UzznkhjAeNK/jawfH1OKIoQYOcWIml2DO0wOOg4LDwmw/47pc
+	2JVOv7beg5pTwogB/MpgunKhRa8QL6Fo1SWcDMBtjUZROs+X6OLKF7PJKwGDplzJqG
+	yFmGxQWFLOuY9df9DF4+PfLEHXmjNqHVrNzkrpQQ=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v67JUFR1009121
+	for <meta-ti@yoctoproject.org>; Fri, 7 Jul 2017 14:30:15 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 7 Jul 2017 14:30:15 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v67JQVeH004876;	Fri, 7 Jul 2017 14:26:31 -0500
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v67JUFGU025624;	Fri, 7 Jul 2017 14:30:15 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 7 Jul 2017 15:26:10 -0400
-Message-ID: <1499455570-47083-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 7 Jul 2017 15:30:11 -0400
+Message-ID: <1499455811-47644-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] nwal-lld-rtos: Add rtos recipe for nwal
+Subject: [PATCH] serdes-diag-rtos: Add rtos recipe for serdes-diag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,38 +58,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jul 2017 19:26:36 -0000
+X-List-Received-Date: Fri, 07 Jul 2017 19:30:27 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
+ recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb | 29 +++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb b/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
+diff --git a/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb b/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
 new file mode 100644
-index 0000000..8ffe0dc
+index 0000000..890aafc
 --- /dev/null
-+++ b/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
-@@ -0,0 +1,17 @@
++++ b/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
+@@ -0,0 +1,29 @@
 +inherit ti-pdk
 +
-+require recipes-bsp/nwal-lld/nwal-lld.inc
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://serdes_diag.h;beginline=1;endline=42;;md5=68e7ce6fdc0e9328fa7d0ec41c54420c"
 +
-+PR = "${INC_PR}.0"
++COMPATIBLE_MACHINE = "keystone|c66x"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+DEPENDS_append = " cppi-lld-rtos \
-+                   pa-lld-rtos \
-+                   pktlib-rtos \
-+                   qmss-lld-rtos \
-+                   sa-lld-rtos \
-+"
++SERDES_DIAG_GIT_URI = "git://git.ti.com/keystone-rtos/serdes_diag.git"
++SERDES_DIAG_GIT_PROTOCOL = "git"
++SERDES_DIAG_GIT_BRANCH = "master"
++SERDES_DIAG_GIT_DESTSUFFIX = "git/ti/diag/serdes_diag"
 +
-+COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm|k2l-evm|c667x-evm"
++# Below commit ID corresponds to "DEV.DIAG_SERDES_SB.01.00.00.07"
++SERDES_DIAG_SRCREV = "65a0c2f6afc84dce03c706432667382700a08654"
++
++BRANCH = "${SERDES_DIAG_GIT_BRANCH}"
++SRC_URI = "${SERDES_DIAG_GIT_URI};destsuffix=${SERDES_DIAG_GIT_DESTSUFFIX};protocol=${SERDES_DIAG_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${SERDES_DIAG_SRCREV}"
++PV = "01.00.00.07"
++PR = "r0"
++
++S = "${WORKDIR}/${SERDES_DIAG_GIT_DESTSUFFIX}"
 +
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "NWAL LLD"
++PDK_COMP_LINK_TEXT = "SERDES Diagnostics"
++
++INSANE_SKIP_${PN} = "arch"
 -- 
 1.9.1
 
