@@ -1,69 +1,54 @@
-Return-Path: <antonius.riko@gmail.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9C91EE00BD5; Thu,  6 Jul 2017 18:14:08 -0700 (PDT)
+	id 1B4BAE00B57; Fri,  7 Jul 2017 07:38:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (antonius.riko[at]gmail.com)
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [74.125.83.51 listed in list.dnswl.org]
-Received: from mail-pg0-f51.google.com (mail-pg0-f51.google.com [74.125.83.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E451E00BC1
-	for <meta-ti@yoctoproject.org>; Thu,  6 Jul 2017 18:14:04 -0700 (PDT)
-Received: by mail-pg0-f51.google.com with SMTP id u62so8987841pgb.3
-	for <meta-ti@yoctoproject.org>; Thu, 06 Jul 2017 18:14:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=to:from:subject:message-id:date:user-agent:mime-version
-	:content-language;
-	bh=0AywX8+PrGoRfIgkmAPymf9Waf6kZfUjSnWbDZ25NOo=;
-	b=B9Gtqw/q00kF7G+Nayr7PaoK/3m7xJzwye9Xg0k3qTpm6bwMdh4dHs6q1leFwTej3N
-	WAsE0uzGkH8shX7DLMT+7K1piRGZFiRitPfsbeMqyG/uWk7Aa69lF6k4cdKnvxHYT0t1
-	qj3Zy1/LQcSdZH21ltq/OiHA4GUk2wrvQZXqLYyO/6R1svG+ct0TxMI6ArgMqd32wblE
-	0RqhIRFggJik17Vy0J5HTd1TVjhGsxHgtz1VCyGnjWzYEFREv0Fvs8/GiiVxkRKcShN3
-	qV1+lQJVaEjQ2ii03pMBsqtwqF0UKiD8WNpDUBODUrJJtlwJ6YuGv9hxPffqIN2L2rKI
-	4TfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-	:mime-version:content-language;
-	bh=0AywX8+PrGoRfIgkmAPymf9Waf6kZfUjSnWbDZ25NOo=;
-	b=Lt+DUK2uwUoL8zZU0e+0z/AX8/3+5GPYAGXf40yOCmqWUv98+omn0oAu/04Ndvh8al
-	h9xe8v/8J943YJsKzTLvNlC6OPKX9ga+XX1ppEr2No6Gj8gaT0xn5ClQ+ABuX2blJrxq
-	xExzG71QTp0flovinzRv6V+2ltu9ZyszM82TrL3kcVXVIYOJDOilS5Bf04Xs6Kg7RNwI
-	xYkWRf9bPKTA1bNb1QKglepo2Hr73GI+DHpHKJf/RKYpNKC/Awu5yZmh7f57wswHGTw6
-	l8u+9BuaZJ7evDnwvN9qbwAFn50Oek9dXHG7nIR+0uZ/fbVjQW8Q40x4qyWFrkv0fzE7
-	0bKQ==
-X-Gm-Message-State: AIVw112BOtphd7QaXkK7IkhSwajnh/tpfGB7d4aqAPrsPu6NKWCLOTat
-	DVn/9DgG7UVMfsf6
-X-Received: by 10.99.163.26 with SMTP id s26mr20172525pge.232.1499390043808;
-	Thu, 06 Jul 2017 18:14:03 -0700 (PDT)
-Received: from ?IPv6:2001:8003:804a:b500:c5a6:f3a6:fe09:a31a?
-	([2001:8003:804a:b500:c5a6:f3a6:fe09:a31a])
-	by smtp.gmail.com with ESMTPSA id
-	t26sm2968627pfe.88.2017.07.06.18.14.02 for <meta-ti@yoctoproject.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Jul 2017 18:14:03 -0700 (PDT)
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-From: Riko Ho <antonius.riko@gmail.com>
-Message-ID: <6f7aa3d4-399c-c162-9077-c19cd9a4cfb0@gmail.com>
-Date: Fri, 7 Jul 2017 09:14:00 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.1.1
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E018E007D4
+	for <meta-ti@yoctoproject.org>; Fri,  7 Jul 2017 07:38:10 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v67Ec932006578
+	for <meta-ti@yoctoproject.org>; Fri, 7 Jul 2017 09:38:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1499438289;
+	bh=QDZsY1d3nX5X6L+1oes9lRVLpU+2g7aAnLTnbXQBo1I=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=R7psbdiN9aRUebyLlRIs0gHuDJtFii4yrMgBwBxPirbeoiqYw4Z6BBmDlOu0PHU9B
+	6PNEIkcdArIfe/jCt2t9ddTrnLdr9SN1hvFmwn4Mdopabo9AkuAO2WAv+WWzLSgZu9
+	jjU1sSNwbkb5DOZMqPinrPHR65b7z/+IHS8qW404=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v67Ec9Sl016264
+	for <meta-ti@yoctoproject.org>; Fri, 7 Jul 2017 09:38:09 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 7 Jul 2017 09:38:09 -0500
+Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v67Ec9Oh028657;
+	Fri, 7 Jul 2017 09:38:09 -0500
+To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>, <meta-ti@yoctoproject.org>
+References: <1499380666-60390-1-git-send-email-m-radhakrishnan2@ti.com>
+From: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <2bbb8fd4-788a-d297-ee5a-e6b84ebb4073@ti.com>
+Date: Fri, 7 Jul 2017 10:38:09 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Subject: GPIO on DTS ?
+In-Reply-To: <1499380666-60390-1-git-send-email-m-radhakrishnan2@ti.com>
+Subject: Re: [PATCH] ti-pdk-setup: Add ti-pdk-setup recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -76,151 +61,134 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jul 2017 01:14:08 -0000
-Content-Type: multipart/alternative;
-	boundary="------------96BFCCE7A654116FBCAAF7CA"
+X-List-Received-Date: Fri, 07 Jul 2017 14:38:13 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
---------------96BFCCE7A654116FBCAAF7CA
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Dear Meta-TI Team Member,
-
-I want to use 4 GPIO pins of my beaglebone black,
-
-Here's my dts code :
-
-==========
-
-  gpio0_pins: gpio0_pins {
-                 pinctrl-single,pins = <
-                     AM33XX_IOPAD(0x840, PIN_INPUT_PULLUP | MUX_MODE7) 
-/* gpmc_a0.gpio1_16 */
-                     AM33XX_IOPAD(0x844, PIN_OUTPUT_PULLDOWN | 
-MUX_MODE7) /* gpmc_a1.gpio1_17 */
-                     AM33XX_IOPAD(0x878, PIN_OUTPUT_PULLDOWN | 
-MUX_MODE7) /* gpmc_be1n.gpio1_28 */
-                     AM33XX_IOPAD(0x9A4, PIN_OUTPUT_PULLDOWN | 
-MUX_MODE7) /* mcasp0_fsr.gpio3_19 */
-                 >;
-};
-
-// Added GPIO0 node, experiment by Riko Ho 7 July 2017
-&gpio0 {
-          status = "okay";
-          pinctrl-names = "default";
-          pinctrl-0 = <&gpio0_pins>;
-
-};
 
 
-=======
+On 7/6/2017 6:37 PM, Mahesh Radhakrishnan wrote:
+> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+> ---
+>   recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb | 104 ++++++++++++++++++++++++++++
+>   1 file changed, 104 insertions(+)
+>   create mode 100644 recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb
+>
+> diff --git a/recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb b/recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb
+> new file mode 100644
+> index 0000000..bd66f56
+> --- /dev/null
+> +++ b/recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb
+> @@ -0,0 +1,104 @@
+> +DESCRIPTION = "Package containing scripts to setup the PDK development environment"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://release/full/pdksetupenv.sh;beginline=1;endline=20;md5=1858f90ca160daa7ca1b05dc3e474791"
+> +
+> +require recipes-ti/includes/ti-paths-append.inc
+> +
+> +PDK_SETUP_GIT_URI = "git://git@bitbucket.itg.ti.com/processor-sdk/processor-pdk-packages.git"
+> +PDK_SETUP_GIT_PROTOCOL = "ssh"
+> +PDK_SETUP_GIT_BRANCH = "master"
+> +
+> +# Below commit ID corresponds to "DEV.PDK_PACKAGES.01.00.00.01"
+> +PDK_SETUP_SRCREV = "23f310087fded4955d6d64e6df20fd057d1cede8"
+> +
+> +BRANCH = "${PDK_SETUP_GIT_BRANCH}"
+> +SRC_URI = "${PDK_SETUP_GIT_URI};protocol=${PDK_SETUP_GIT_PROTOCOL};branch=${BRANCH}"
+> +
+> +SRCREV = "${PDK_SETUP_SRCREV}"
+> +PV = "01.00.00.01"
+> +PR = "r0"
+> +
+> +S = "${WORKDIR}/git/"
+> +
+> +CLEANBROKEN = "1"
+> +
+> +LIMIT_SOCS_ti33x = "am335x"
+> +LIMIT_SOCS_ti43x = "am437x"
+> +LIMIT_SOCS_omap-a15 = "am571x am572x"
+> +LIMIT_SOCS_dra7xx-evm = "dra72x dra75x dra78x"
+> +LIMIT_SOCS_omapl137-evm = "omapl137"
+> +LIMIT_SOCS_omapl138-lcdk = "omapl138"
+> +LIMIT_SOCS_k2hk-evm = "k2h k2k"
+> +LIMIT_SOCS_k2e-evm = "k2e"
+> +LIMIT_SOCS_k2l-evm = "k2l"
+> +LIMIT_SOCS_k2g = "k2g"
+> +LIMIT_SOCS_c665x-evm = "c665x"
+> +LIMIT_SOCS_c667x-evm = "c6678"
+> +
+> +LIMIT_BOARDS_ti33x = "evmAM335x icev2AM335x bbbAM335x skAM335x"
+> +LIMIT_BOARDS_ti43x = "evmAM437x idkAM437x skAM437x"
+> +LIMIT_BOARDS_omap-a15 = "evmAM572x idkAM571x idkAM572x"
+> +LIMIT_BOARDS_dra7xx-evm = "evmDRA72x evmDRA75x evmDRA78x"
+> +LIMIT_BOARDS_omapl137-evm = "evmOMAPL137"
+> +LIMIT_BOARDS_omapl138-lcdk = "lcdkOMAPL138"
+> +LIMIT_BOARDS_k2hk-evm = "evmK2H evmK2K"
+> +LIMIT_BOARDS_k2e-evm = "evmK2E"
+> +LIMIT_BOARDS_k2l-evm = "evmK2L"
+> +LIMIT_BOARDS_k2g = "evmK2G iceK2G"
+> +LIMIT_BOARDS_c665x-evm = "evmC6657"
+> +LIMIT_BOARDS_c667x-evm = "evmC6678"
 
-I can see it already, are they correct ?
+LIMIT_BOARDS and LIMIT_SOCS should not need to be set here. They can be 
+obtained from the machine configuration as TI_PDK_LIMIT_SOCS and 
+TI_PDK_LIMIT_BOARDS.
 
-root@beaglebone:/sys/kernel/debug/pinctrl/44e10800.pinmux# cat 
-pinmux-pins | grep "gpio0"
-pin 16 (PIN16): 44e07000.gpio (GPIO UNCLAIMED) function gpio0_pins group 
-gpio0_pins
-pin 17 (PIN17): 44e07000.gpio (GPIO UNCLAIMED) function gpio0_pins group 
-gpio0_pins
-pin 30 (PIN30): 44e07000.gpio (GPIO UNCLAIMED) function gpio0_pins group 
-gpio0_pins
-pin 105 (PIN105): 44e07000.gpio (GPIO UNCLAIMED) function gpio0_pins 
-group gpio0_pins
+> +
+> +PDK_SOC = "${@'${MACHINE}'.replace('-evm','')}"
+> +PDK_SOC_omapl138-lcdk = "${@'${MACHINE}'.replace('-lcdk','')}"
+> +
+> +do_compile() {
+> +    :
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +
+> +    install -m 0755 release/full/pdksetupenv.sh ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdksetupenv.bat ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkProjectCreate.bat ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkProjectCreate.sh ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkAppImageCreate.bat ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkAppImageCreate.sh ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/macros.ini ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0644 release/full/Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +
+> +    sed -i -e "s|__PDK_VER__|${PDK_VERSION}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdkProjectCreate.sh
+> +    sed -i -e "s|__PDK_VER__|${PDK_VERSION}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdkProjectCreate.bat
+> +
+> +    sed -i -e "s|__LIMIT_SOCS__|${LIMIT_SOCS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.sh
+> +    sed -i -e "s|__LIMIT_SOCS__|${LIMIT_SOCS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.bat
+> +    sed -i -e "s|__LIMIT_SOCS__|${LIMIT_SOCS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
+> +
+> +    sed -i -e "s|__LIMIT_BOARDS__|${LIMIT_BOARDS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.sh
+> +    sed -i -e "s|__LIMIT_BOARDS__|${LIMIT_BOARDS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.bat
+> +    sed -i -e "s|__LIMIT_BOARDS__|${LIMIT_BOARDS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
+> +
+> +    TI_PDK_VERSION=`echo ${PDK_VERSION} | sed -e 's|\.|_|g' -e 's|^0||'`
+> +
+> +    sed -i -e "s|__PDK_SOC__|${PDK_SOC}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
+> +    sed -i -e "s|__PDK_VER__|${TI_PDK_VERSION}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
+> +}
+> +
+> +do_install_append_omapl1() {
+> +    sed -i -e "s|c66x|c674x|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.sh
+> +    sed -i -e "s|c66x|c674x|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.bat
+> +}
+> +
+> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
 
-==========
 
-I got :
-
-//omap_gpio 44e07000.gpio: could not find pctldev for node 
-/ocp/l4_wkup@44c00000/scm@210000/pinmux@800/gpio0_pins, deferring probe,
-
-When the board boots, is it ok ? Or I miss something, please advice, thanks.
-
--- 
-*
-
-/*******/
-Sent by Ubuntu LTS 16.04,
-Kind regards,
-Riko Ho
-/*******/
-
-*
-
---------------96BFCCE7A654116FBCAAF7CA
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <p>Dear Meta-TI Team Member,</p>
-    <p>I want to use 4 GPIO pins of my beaglebone black,</p>
-    <p>Here's my dts code :</p>
-    <p>==========<br>
-    </p>
-    <p> gpio0_pins: gpio0_pins {<br>
-                      pinctrl-single,pins = &lt;<br>
-                          AM33XX_IOPAD(0x840, PIN_INPUT_PULLUP |
-      MUX_MODE7) /* gpmc_a0.gpio1_16 */<br>
-                          AM33XX_IOPAD(0x844, PIN_OUTPUT_PULLDOWN |
-      MUX_MODE7) /* gpmc_a1.gpio1_17 */<br>
-                          AM33XX_IOPAD(0x878, PIN_OUTPUT_PULLDOWN |
-      MUX_MODE7) /* gpmc_be1n.gpio1_28 */<br>
-                          AM33XX_IOPAD(0x9A4, PIN_OUTPUT_PULLDOWN |
-      MUX_MODE7) /* mcasp0_fsr.gpio3_19 */<br>
-                      &gt;;<br>
-      };  <br>
-    </p>
-    <p>// Added GPIO0 node, experiment by Riko Ho 7 July 2017<br>
-      &amp;gpio0 {<br>
-               status = "okay";<br>
-               pinctrl-names = "default";<br>
-               pinctrl-0 = &lt;&amp;gpio0_pins&gt;;<br>
-             <br>
-      };<br>
-    </p>
-    <p><br>
-    </p>
-    <p>=======<br>
-    </p>
-    <p>I can see it already, are they correct ?<br>
-    </p>
-    <p><a class="moz-txt-link-abbreviated" href="mailto:root@beaglebone:/sys/kernel/debug/pinctrl/44e10800.pinmux#">root@beaglebone:/sys/kernel/debug/pinctrl/44e10800.pinmux#</a> cat
-      pinmux-pins | grep "gpio0"<br>
-      pin 16 (PIN16): 44e07000.gpio (GPIO UNCLAIMED) function gpio0_pins
-      group gpio0_pins<br>
-      pin 17 (PIN17): 44e07000.gpio (GPIO UNCLAIMED) function gpio0_pins
-      group gpio0_pins<br>
-      pin 30 (PIN30): 44e07000.gpio (GPIO UNCLAIMED) function gpio0_pins
-      group gpio0_pins<br>
-      pin 105 (PIN105): 44e07000.gpio (GPIO UNCLAIMED) function
-      gpio0_pins group gpio0_pins</p>
-    <p>==========<br>
-    </p>
-    <p>I got :</p>
-    <p>//omap_gpio 44e07000.gpio: could not find pctldev for node
-      /ocp/l4_wkup@44c00000/scm@210000/pinmux@800/gpio0_pins, deferring
-      probe,</p>
-    <p>When the board boots, is it ok ? Or I miss something, please
-      advice, thanks.<br>
-    </p>
-    <div class="moz-signature">-- <br>
-      <b>
-        <p style="color:blue;"> /*******/<br>
-          Sent by Ubuntu LTS 16.04,<br>
-          Kind regards,<br>
-          Riko Ho<br>
-          /*******/<br>
-        </p>
-      </b></div>
-  </body>
-</html>
-
---------------96BFCCE7A654116FBCAAF7CA--
