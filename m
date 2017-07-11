@@ -1,53 +1,58 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A415FE00C35; Tue, 11 Jul 2017 04:26:22 -0700 (PDT)
+	id DEEC6E00BAB; Tue, 11 Jul 2017 11:45:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
+	DKIM_VALID, DKIM_VALID_AU, HTML_MESSAGE,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.16 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A9B9E00B31
-	for <meta-ti@yoctoproject.org>; Tue, 11 Jul 2017 04:26:19 -0700 (PDT)
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C28DE00BA2
+	for <meta-ti@yoctoproject.org>; Tue, 11 Jul 2017 11:45:22 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6BBQJDt030476
-	for <meta-ti@yoctoproject.org>; Tue, 11 Jul 2017 06:26:19 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6BIjC4E024685
+	for <meta-ti@yoctoproject.org>; Tue, 11 Jul 2017 13:45:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499772379;
-	bh=Ah1bY4b7IMYqAa+cZX4falNXAJR4VOl3OuCatteZDB4=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=ouDChQ5DOqL5sAxMCWBbV7HNWWernx2abDFtZPfpp9sTgPRvTjk1k2VXOYxmhdoag
-	U32SC25MI1ZejwYHAHinurGcFM58JkEj6jPJIJnhTzIdJDqyb459injMdXVvZ+Bm5F
-	vRoDlyyhLNkPlrdE/qawLURmwGucFYRx2WMTXEQg=
+	s=ti-com-17Q1; t=1499798712;
+	bh=2ccjDJoQQZaPD0Ut9KI2MH7T5V+LosEoVZx09TbXgeg=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=VO3UE18WJwZJL0cM2bhkv9rXEI5kDdfOW2wqu2N191tJrcqy2W9NKpWc0inZGMJOH
+	/bXEqsrgYOnybzySj6vW0+ZqxCTuc1kq60HjEvo/zQykOZ/1p/MSwX3R+CQiJYgoh/
+	5Gs7S/MkMVVGIief9Dh2hT0pCqiRwrOvtuz1iyd8=
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6BBQJdB022241
-	for <meta-ti@yoctoproject.org>; Tue, 11 Jul 2017 06:26:19 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 11 Jul 2017 06:26:19 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6BBQIai007244;
-	Tue, 11 Jul 2017 06:26:19 -0500
-To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>, <meta-ti@yoctoproject.org>
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6BIj701020391
+	for <meta-ti@yoctoproject.org>; Tue, 11 Jul 2017 13:45:07 -0500
+Received: from DFLE12.ent.ti.com ([fe80::e9a3:bf19:af96:227b]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.03.0294.000; Tue, 11 Jul 2017 13:45:07 -0500
+From: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>
+To: "Stiffler, Jacob" <j-stiffler@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH] pruss-lld: Add rtos recipe & update the
+	version to 1.0.0.7
+Thread-Index: AQHS91X03NDn6oTSukG/hyVkm4tnI6JO1iwAgAAmBoA=
+Date: Tue, 11 Jul 2017 18:45:06 +0000
+Message-ID: <5130E41A1BA9D145BA0F3B18D5CFB0A74379FD4D@DFLE12.ent.ti.com>
 References: <1499455166-44572-1-git-send-email-m-radhakrishnan2@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <07592427-7fe1-b4e2-6549-ded120d0c197@ti.com>
-Date: Tue, 11 Jul 2017 07:26:18 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	<07592427-7fe1-b4e2-6549-ded120d0c197@ti.com>
+In-Reply-To: <07592427-7fe1-b4e2-6549-ded120d0c197@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.172.224.222]
 MIME-Version: 1.0
-In-Reply-To: <1499455166-44572-1-git-send-email-m-radhakrishnan2@ti.com>
 Subject: Re: [PATCH] pruss-lld: Add rtos recipe & update the version to 1.0.0.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -61,78 +66,224 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 11:26:22 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Jul 2017 18:45:25 -0000
 Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_5130E41A1BA9D145BA0F3B18D5CFB0A74379FD4DDFLE12entticom_"
 
+--_000_5130E41A1BA9D145BA0F3B18D5CFB0A74379FD4DDFLE12entticom_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
+UmVwbHkgaW5saW5lLg0KDQoNCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IFN0
+aWZmbGVyLCBKYWNvYg0KU2VudDogVHVlc2RheSwgSnVseSAxMSwgMjAxNyA3OjI2IEFNDQpUbzog
+UmFkaGFrcmlzaG5hbiwgTWFoZXNoOyBtZXRhLXRpQHlvY3RvcHJvamVjdC5vcmcNClN1YmplY3Q6
+IFJlOiBbbWV0YS10aV0gW1BBVENIXSBwcnVzcy1sbGQ6IEFkZCBydG9zIHJlY2lwZSAmIHVwZGF0
+ZSB0aGUgdmVyc2lvbiB0byAxLjAuMC43DQoNCg0KDQoNCg0KDQoNCk9uIDcvNy8yMDE3IDM6MTkg
+UE0sIE1haGVzaCBSYWRoYWtyaXNobmFuIHdyb3RlOg0KDQo+IFNpZ25lZC1vZmYtYnk6IE1haGVz
+aCBSYWRoYWtyaXNobmFuIDxtLXJhZGhha3Jpc2huYW4yQHRpLmNvbTxtYWlsdG86bS1yYWRoYWty
+aXNobmFuMkB0aS5jb20+Pg0KDQo+IC0tLQ0KDQo+ICAgcmVjaXBlcy1ic3AvcHJ1c3MtbGxkL3By
+dXNzLWxsZC1ydG9zX2dpdC5iYiB8IDIzICsrKysrKysrKysrKysrKysrKysrKysrDQoNCj4gICBy
+ZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1c3MtbGxkLmluYyAgICAgICAgIHwgIDYgKysrLS0tDQoN
+Cj4gICAyIGZpbGVzIGNoYW5nZWQsIDI2IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQoN
+Cj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgcmVjaXBlcy1ic3AvcHJ1c3MtbGxkL3BydXNzLWxsZC1y
+dG9zX2dpdC5iYg0KDQo+DQoNCj4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtYnNwL3BydXNzLWxsZC9w
+cnVzcy1sbGQtcnRvc19naXQuYmINCg0KPiBiL3JlY2lwZXMtYnNwL3BydXNzLWxsZC9wcnVzcy1s
+bGQtcnRvc19naXQuYmINCg0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KDQo+IGluZGV4IDAwMDAw
+MDAuLmE5MzVmMGINCg0KPiAtLS0gL2Rldi9udWxsDQoNCj4gKysrIGIvcmVjaXBlcy1ic3AvcHJ1
+c3MtbGxkL3BydXNzLWxsZC1ydG9zX2dpdC5iYg0KDQo+IEBAIC0wLDAgKzEsMjMgQEANCg0KPiAr
+aW5oZXJpdCB0aS1wZGsNCg0KPiArcmVxdWlyZSByZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1c3Mt
+bGxkLmluYw0KDQo+ICsNCg0KPiArQ09NUEFUSUJMRV9NQUNISU5FX2FwcGVuZCA9ICJ8azJnLWhz
+LWV2bSINCg0KDQoNCkNhbiB5b3UgaW5zdGVhZCB1cGRhdGUgdGhlIHBydXNzLWxsZC5pbmMgdG8g
+ZXh0ZW5kIGNvbXBhdGliaWxpdHkgd2l0aCB0aGUgazJnIFNPQyBmYW1pbHk/DQoNCldpbGwgZG8u
+DQoNCg0KDQo+ICsNCg0KPiArUFIgPSAiJHtJTkNfUFJ9LjAiDQoNCj4gKw0KDQo+ICtTID0gIiR7
+V09SS0RJUn0vJHtQUlVTU19MTERfR0lUX0RFU1RTVUZGSVh9Ig0KDQo+ICsNCg0KPiArREVQRU5E
+U19hcHBlbmQgPSAiIG9zYWwtcnRvcyINCg0KPiArREVQRU5EU19hcHBlbmRfdGkzM3ggPSAiIHN0
+YXJ0ZXJ3YXJlLXJ0b3MiDQoNCj4gK0RFUEVORFNfYXBwZW5kX3RpNDN4ID0gIiBzdGFydGVyd2Fy
+ZS1ydG9zIg0KDQoNCg0KVGhlIGRlcGVuZGVuY3kgb24gc3RhcnRlcndhcmUtcnRvcyBmb3IgdGkz
+M3gvdGk0M3ggYXBwZWFycyB0byBiZSBjb21tb24gZm9yIGFsbCB0aS1wZGsgY2xhc3MgcmVjaXBl
+cy4gU2hvdWxkIHRoaXMgZ28gaW50byB0aGUgdGktcGRrLmNsYXNzIHJlY2lwZSBpbnN0ZWFkPw0K
+DQpJ4oCZbSBub3Qgc3VyZSBhcyB0aGVyZSBhcmUgYWJvdXQgMzArIHBkayByZWNpcGVzIHdoaWNo
+IGRvIG5vdCBkZXBlbmQgb24gc3RhcnRlcndhcmUsIGFuZCB0aGVyZSBhcmUgYWJvdXQgMTUgb2Yg
+dGhlbSB3aGljaCBkZXBlbmQgb24gc3RhcnRlcndhcmUuDQoNCg0KDQo+ICsNCg0KPiArIyBCdWls
+ZCB3aXRoIG1ha2UgaW5zdGVhZCBvZiBYREMNCg0KPiArVElfUERLX1hEQ01BS0UgPSAiMCINCg0K
+PiArDQoNCj4gK2V4cG9ydCBQREtfUFJVU1NfUk9PVF9QQVRIID0iJHtXT1JLRElSfS9idWlsZCIN
+Cg0KPiArZXhwb3J0IERFU1RfUk9PVD0iJHtXT1JLRElSfS9idWlsZCINCg0KPiArDQoNCj4gKyMg
+SFRNTCBkb2MgbGluayBwYXJhbXMNCg0KPiArUERLX0NPTVBfTElOS19URVhUID0gIlBSVVNTIExM
+RCINCg0KPiArDQoNCj4gK0lOU0FORV9TS0lQXyR7UE59ID0gImFyY2giDQoNCj4gZGlmZiAtLWdp
+dCBhL3JlY2lwZXMtYnNwL3BydXNzLWxsZC9wcnVzcy1sbGQuaW5jDQoNCj4gYi9yZWNpcGVzLWJz
+cC9wcnVzcy1sbGQvcHJ1c3MtbGxkLmluYw0KDQo+IGluZGV4IDg2MjAxMDguLjUzNDNjOWYgMTAw
+NjQ0DQoNCj4gLS0tIGEvcmVjaXBlcy1ic3AvcHJ1c3MtbGxkL3BydXNzLWxsZC5pbmMNCg0KPiAr
+KysgYi9yZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1c3MtbGxkLmluYw0KDQo+IEBAIC05LDEyICs5
+LDEyIEBAIFBSVVNTX0xMRF9HSVRfUFJPVE9DT0wgPSAiZ2l0Ig0KDQo+ICAgUFJVU1NfTExEX0dJ
+VF9CUkFOQ0ggPSAibWFzdGVyIg0KDQo+ICAgUFJVU1NfTExEX0dJVF9ERVNUU1VGRklYID0gImdp
+dC90aS9kcnYvcHJ1c3MiDQoNCj4NCg0KPiAtIyBCZWxvdyBjb21taXQgSUQgY29ycmVzcG9uZHMg
+dG8gIkRFVi5QUlVTU19MTEQuMDEuMDAuMDAuMDZBIg0KDQo+IC1QUlVTU19MTERfU1JDUkVWID0g
+ImI5ODcyOWNjMWZjMjZjOWFjMzI4NDYxNDY4OTI2NDZhMjNjMjhhZGIiDQoNCj4gKyMgQmVsb3cg
+Y29tbWl0IElEIGNvcnJlc3BvbmRzIHRvICJERVYuUFJVU1NfTExELjAxLjAwLjAwLjA3Ig0KDQo+
+ICtQUlVTU19MTERfU1JDUkVWID0gIjYzNmJiNTY0NTAxNDcyM2M1NGMwODI0NWNmOGMyZWU0MDFl
+Y2ViNGYiDQoNCj4NCg0KPiAgIEJSQU5DSCA9ICIke1BSVVNTX0xMRF9HSVRfQlJBTkNIfSINCg0K
+PiAgIFNSQ19VUkkgPSAiJHtQUlVTU19MTERfR0lUX1VSSX07ZGVzdHN1ZmZpeD0ke1BSVVNTX0xM
+RF9HSVRfREVTVFNVRkZJWH07cHJvdG9jb2w9JHtQUlVTU19MTERfR0lUX1BST1RPQ09MfTticmFu
+Y2g9JHtCUkFOQ0h9Ig0KDQo+DQoNCj4gICBTUkNSRVYgPSAiJHtQUlVTU19MTERfU1JDUkVWfSIN
+Cg0KPiAtUFYgPSAiMDEuMDAuMDAuMDZBIg0KDQo+ICtQViA9ICIwMS4wMC4wMC4wNyINCg0KPiAg
+IElOQ19QUiA9ICJyMCINCg0KDQo=
 
-On 7/7/2017 3:19 PM, Mahesh Radhakrishnan wrote:
-> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-> ---
->   recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb | 23 +++++++++++++++++++++++
->   recipes-bsp/pruss-lld/pruss-lld.inc         |  6 +++---
->   2 files changed, 26 insertions(+), 3 deletions(-)
->   create mode 100644 recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
->
-> diff --git a/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb b/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
-> new file mode 100644
-> index 0000000..a935f0b
-> --- /dev/null
-> +++ b/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
-> @@ -0,0 +1,23 @@
-> +inherit ti-pdk
-> +require recipes-bsp/pruss-lld/pruss-lld.inc
-> +
-> +COMPATIBLE_MACHINE_append = "|k2g-hs-evm"
+--_000_5130E41A1BA9D145BA0F3B18D5CFB0A74379FD4DDFLE12entticom_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Can you instead update the pruss-lld.inc to extend compatibility with 
-the k2g SOC family?
+PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
+bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
+YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
+cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
+Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
+ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTQgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
+PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
+Q2FsaWJyaTsNCglwYW5vc2UtMToyIDE1IDUgMiAyIDIgNCAzIDIgNDt9DQovKiBTdHlsZSBEZWZp
+bml0aW9ucyAqLw0KcC5Nc29Ob3JtYWwsIGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXtt
+YXJnaW46MGluOw0KCW1hcmdpbi1ib3R0b206LjAwMDFwdDsNCglmb250LXNpemU6MTEuMHB0Ow0K
+CWZvbnQtZmFtaWx5OiJDYWxpYnJpIiwic2Fucy1zZXJpZiI7fQ0KYTpsaW5rLCBzcGFuLk1zb0h5
+cGVybGluaw0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6Ymx1ZTsNCgl0ZXh0LWRl
+Y29yYXRpb246dW5kZXJsaW5lO30NCmE6dmlzaXRlZCwgc3Bhbi5Nc29IeXBlcmxpbmtGb2xsb3dl
+ZA0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6cHVycGxlOw0KCXRleHQtZGVjb3Jh
+dGlvbjp1bmRlcmxpbmU7fQ0KcC5Nc29QbGFpblRleHQsIGxpLk1zb1BsYWluVGV4dCwgZGl2Lk1z
+b1BsYWluVGV4dA0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJbXNvLXN0eWxlLWxpbms6IlBs
+YWluIFRleHQgQ2hhciI7DQoJbWFyZ2luOjBpbjsNCgltYXJnaW4tYm90dG9tOi4wMDAxcHQ7DQoJ
+Zm9udC1zaXplOjExLjBwdDsNCglmb250LWZhbWlseToiQ2FsaWJyaSIsInNhbnMtc2VyaWYiO30N
+CnNwYW4uUGxhaW5UZXh0Q2hhcg0KCXttc28tc3R5bGUtbmFtZToiUGxhaW4gVGV4dCBDaGFyIjsN
+Cgltc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJbXNvLXN0eWxlLWxpbms6IlBsYWluIFRleHQiOw0K
+CWZvbnQtZmFtaWx5OiJDYWxpYnJpIiwic2Fucy1zZXJpZiI7fQ0KLk1zb0NocERlZmF1bHQNCgl7
+bXNvLXN0eWxlLXR5cGU6ZXhwb3J0LW9ubHk7DQoJZm9udC1mYW1pbHk6IkNhbGlicmkiLCJzYW5z
+LXNlcmlmIjt9DQpAcGFnZSBXb3JkU2VjdGlvbjENCgl7c2l6ZTo4LjVpbiAxMS4waW47DQoJbWFy
+Z2luOjEuMGluIDEuMGluIDEuMGluIDEuMGluO30NCmRpdi5Xb3JkU2VjdGlvbjENCgl7cGFnZTpX
+b3JkU2VjdGlvbjE7fQ0KLS0+PC9zdHlsZT48IS0tW2lmIGd0ZSBtc28gOV0+PHhtbD4NCjxvOnNo
+YXBlZGVmYXVsdHMgdjpleHQ9ImVkaXQiIHNwaWRtYXg9IjEwMjYiIC8+DQo8L3htbD48IVtlbmRp
+Zl0tLT48IS0tW2lmIGd0ZSBtc28gOV0+PHhtbD4NCjxvOnNoYXBlbGF5b3V0IHY6ZXh0PSJlZGl0
+Ij4NCjxvOmlkbWFwIHY6ZXh0PSJlZGl0IiBkYXRhPSIxIiAvPg0KPC9vOnNoYXBlbGF5b3V0Pjwv
+eG1sPjwhW2VuZGlmXS0tPg0KPC9oZWFkPg0KPGJvZHkgbGFuZz0iRU4tVVMiIGxpbms9ImJsdWUi
+IHZsaW5rPSJwdXJwbGUiPg0KPGRpdiBjbGFzcz0iV29yZFNlY3Rpb24xIj4NCjxwIGNsYXNzPSJN
+c29QbGFpblRleHQiPjxzcGFuIHN0eWxlPSJjb2xvcjojMDA3MEMwIj5SZXBseSBpbmxpbmUuPG86
+cD48L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+PG86cD4mbmJzcDs8
+L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4tLS0tLU9yaWdpbmFsIE1lc3NhZ2Ut
+LS0tLTxicj4NCkZyb206IFN0aWZmbGVyLCBKYWNvYiA8YnI+DQpTZW50OiBUdWVzZGF5LCBKdWx5
+IDExLCAyMDE3IDc6MjYgQU08YnI+DQpUbzogUmFkaGFrcmlzaG5hbiwgTWFoZXNoOyBtZXRhLXRp
+QHlvY3RvcHJvamVjdC5vcmc8YnI+DQpTdWJqZWN0OiBSZTogW21ldGEtdGldIFtQQVRDSF0gcHJ1
+c3MtbGxkOiBBZGQgcnRvcyByZWNpcGUgJmFtcDsgdXBkYXRlIHRoZSB2ZXJzaW9uIHRvIDEuMC4w
+Ljc8L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxw
+IGNsYXNzPSJNc29QbGFpblRleHQiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1z
+b1BsYWluVGV4dCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0
+Ij5PbiA3LzcvMjAxNyAzOjE5IFBNLCBNYWhlc2ggUmFkaGFrcmlzaG5hbiB3cm90ZTo8bzpwPjwv
+bzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgU2lnbmVkLW9mZi1ieTogTWFo
+ZXNoIFJhZGhha3Jpc2huYW4gJmx0OzxhIGhyZWY9Im1haWx0bzptLXJhZGhha3Jpc2huYW4yQHRp
+LmNvbSI+PHNwYW4gc3R5bGU9ImNvbG9yOndpbmRvd3RleHQ7dGV4dC1kZWNvcmF0aW9uOm5vbmUi
+Pm0tcmFkaGFrcmlzaG5hbjJAdGkuY29tPC9zcGFuPjwvYT4mZ3Q7PG86cD48L286cD48L3A+DQo8
+cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7IC0tLTxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9
+Ik1zb1BsYWluVGV4dCI+Jmd0OyZuYnNwOyZuYnNwOyByZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1
+c3MtbGxkLXJ0b3NfZ2l0LmJiIHwgMjMgJiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0
+MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7
+JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1Bs
+YWluVGV4dCI+Jmd0OyZuYnNwOyZuYnNwOyByZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1c3MtbGxk
+LmluYyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyB8Jm5i
+c3A7IDYgJiM0MzsmIzQzOyYjNDM7LS0tPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxh
+aW5UZXh0Ij4mZ3Q7Jm5ic3A7Jm5ic3A7IDIgZmlsZXMgY2hhbmdlZCwgMjYgaW5zZXJ0aW9ucygm
+IzQzOyksIDMgZGVsZXRpb25zKC0pPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5U
+ZXh0Ij4mZ3Q7Jm5ic3A7Jm5ic3A7IGNyZWF0ZSBtb2RlIDEwMDY0NCByZWNpcGVzLWJzcC9wcnVz
+cy1sbGQvcHJ1c3MtbGxkLXJ0b3NfZ2l0LmJiPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNv
+UGxhaW5UZXh0Ij4mZ3Q7PG86cD4mbmJzcDs8L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5U
+ZXh0Ij4mZ3Q7IGRpZmYgLS1naXQgYS9yZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1c3MtbGxkLXJ0
+b3NfZ2l0LmJiDQo8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsg
+Yi9yZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1c3MtbGxkLXJ0b3NfZ2l0LmJiPG86cD48L286cD48
+L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7IG5ldyBmaWxlIG1vZGUgMTAwNjQ0PG86
+cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7IGluZGV4IDAwMDAwMDAu
+LmE5MzVmMGI8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgLS0t
+IC9kZXYvbnVsbDxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyAm
+IzQzOyYjNDM7JiM0MzsgYi9yZWNpcGVzLWJzcC9wcnVzcy1sbGQvcHJ1c3MtbGxkLXJ0b3NfZ2l0
+LmJiPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7IEBAIC0wLDAg
+JiM0MzsxLDIzIEBAPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7
+ICYjNDM7aW5oZXJpdCB0aS1wZGs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRl
+eHQiPiZndDsgJiM0MztyZXF1aXJlIHJlY2lwZXMtYnNwL3BydXNzLWxsZC9wcnVzcy1sbGQuaW5j
+PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7ICYjNDM7PG86cD48
+L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7ICYjNDM7Q09NUEFUSUJMRV9N
+QUNISU5FX2FwcGVuZCA9ICZxdW90O3xrMmctaHMtZXZtJnF1b3Q7PG86cD48L286cD48L3A+DQo8
+cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJN
+c29QbGFpblRleHQiPkNhbiB5b3UgaW5zdGVhZCB1cGRhdGUgdGhlIHBydXNzLWxsZC5pbmMgdG8g
+ZXh0ZW5kIGNvbXBhdGliaWxpdHkgd2l0aCB0aGUgazJnIFNPQyBmYW1pbHk/PG86cD48L286cD48
+L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij48c3BhbiBzdHlsZT0iY29sb3I6IzAwNzBDMCI+
+V2lsbCBkby48bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij48
+bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgJiM0Mzs8
+bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgJiM0MztQUiA9ICZx
+dW90OyR7SU5DX1BSfS4wJnF1b3Q7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5U
+ZXh0Ij4mZ3Q7ICYjNDM7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4m
+Z3Q7ICYjNDM7UyA9ICZxdW90OyR7V09SS0RJUn0vJHtQUlVTU19MTERfR0lUX0RFU1RTVUZGSVh9
+JnF1b3Q7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7ICYjNDM7
+PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7ICYjNDM7REVQRU5E
+U19hcHBlbmQgPSAmcXVvdDsgb3NhbC1ydG9zJnF1b3Q7PG86cD48L286cD48L3A+DQo8cCBjbGFz
+cz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7ICYjNDM7REVQRU5EU19hcHBlbmRfdGkzM3ggPSAmcXVvdDsg
+c3RhcnRlcndhcmUtcnRvcyZxdW90OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWlu
+VGV4dCI+Jmd0OyAmIzQzO0RFUEVORFNfYXBwZW5kX3RpNDN4ID0gJnF1b3Q7IHN0YXJ0ZXJ3YXJl
+LXJ0b3MmcXVvdDs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPjxvOnA+
+Jm5ic3A7PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+VGhlIGRlcGVuZGVuY3kg
+b24gc3RhcnRlcndhcmUtcnRvcyBmb3IgdGkzM3gvdGk0M3ggYXBwZWFycyB0byBiZSBjb21tb24g
+Zm9yIGFsbCB0aS1wZGsgY2xhc3MgcmVjaXBlcy4gU2hvdWxkIHRoaXMgZ28gaW50byB0aGUgdGkt
+cGRrLmNsYXNzIHJlY2lwZSBpbnN0ZWFkPzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1Bs
+YWluVGV4dCI+PHNwYW4gc3R5bGU9ImNvbG9yOiMwMDcwQzAiPknigJltIG5vdCBzdXJlIGFzIHRo
+ZXJlIGFyZSBhYm91dCAzMCYjNDM7IHBkayByZWNpcGVzIHdoaWNoIGRvIG5vdCBkZXBlbmQgb24g
+c3RhcnRlcndhcmUsIGFuZCB0aGVyZSBhcmUgYWJvdXQgMTUgb2YgdGhlbSB3aGljaCBkZXBlbmQg
+b24gc3RhcnRlcndhcmUuDQo8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvUGxh
+aW5UZXh0Ij48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZn
+dDsgJiM0Mzs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgJiM0
+MzsjIEJ1aWxkIHdpdGggbWFrZSBpbnN0ZWFkIG9mIFhEQzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xh
+c3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyAmIzQzO1RJX1BES19YRENNQUtFID0gJnF1b3Q7MCZxdW90
+OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyAmIzQzOzxvOnA+
+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyAmIzQzO2V4cG9ydCBQREtf
+UFJVU1NfUk9PVF9QQVRIID0mcXVvdDske1dPUktESVJ9L2J1aWxkJnF1b3Q7PG86cD48L286cD48
+L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7ICYjNDM7ZXhwb3J0IERFU1RfUk9PVD0m
+cXVvdDske1dPUktESVJ9L2J1aWxkJnF1b3Q7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNv
+UGxhaW5UZXh0Ij4mZ3Q7ICYjNDM7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5U
+ZXh0Ij4mZ3Q7ICYjNDM7IyBIVE1MIGRvYyBsaW5rIHBhcmFtczxvOnA+PC9vOnA+PC9wPg0KPHAg
+Y2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyAmIzQzO1BES19DT01QX0xJTktfVEVYVCA9ICZxdW90
+O1BSVVNTIExMRCZxdW90OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+
+Jmd0OyAmIzQzOzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyAm
+IzQzO0lOU0FORV9TS0lQXyR7UE59ID0gJnF1b3Q7YXJjaCZxdW90OzxvOnA+PC9vOnA+PC9wPg0K
+PHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyBkaWZmIC0tZ2l0IGEvcmVjaXBlcy1ic3AvcHJ1
+c3MtbGxkL3BydXNzLWxsZC5pbmMgPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5U
+ZXh0Ij4mZ3Q7IGIvcmVjaXBlcy1ic3AvcHJ1c3MtbGxkL3BydXNzLWxsZC5pbmM8bzpwPjwvbzpw
+PjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgaW5kZXggODYyMDEwOC4uNTM0M2M5
+ZiAxMDA2NDQ8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgLS0t
+IGEvcmVjaXBlcy1ic3AvcHJ1c3MtbGxkL3BydXNzLWxsZC5pbmM8bzpwPjwvbzpwPjwvcD4NCjxw
+IGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgJiM0MzsmIzQzOyYjNDM7IGIvcmVjaXBlcy1ic3Av
+cHJ1c3MtbGxkL3BydXNzLWxsZC5pbmM8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFp
+blRleHQiPiZndDsgQEAgLTksMTIgJiM0Mzs5LDEyIEBAIFBSVVNTX0xMRF9HSVRfUFJPVE9DT0wg
+PSAmcXVvdDtnaXQmcXVvdDs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQi
+PiZndDsmbmJzcDsmbmJzcDsgUFJVU1NfTExEX0dJVF9CUkFOQ0ggPSAmcXVvdDttYXN0ZXImcXVv
+dDs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsmbmJzcDsmbmJz
+cDsgUFJVU1NfTExEX0dJVF9ERVNUU1VGRklYID0gJnF1b3Q7Z2l0L3RpL2Rydi9wcnVzcyZxdW90
+OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyZuYnNwOyZuYnNw
+OyA8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgLSMgQmVsb3cg
+Y29tbWl0IElEIGNvcnJlc3BvbmRzIHRvICZxdW90O0RFVi5QUlVTU19MTEQuMDEuMDAuMDAuMDZB
+JnF1b3Q7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7IC1QUlVT
+U19MTERfU1JDUkVWID0gJnF1b3Q7Yjk4NzI5Y2MxZmMyNmM5YWMzMjg0NjE0Njg5MjY0NmEyM2My
+OGFkYiZxdW90OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyAm
+IzQzOyMgQmVsb3cgY29tbWl0IElEIGNvcnJlc3BvbmRzIHRvICZxdW90O0RFVi5QUlVTU19MTEQu
+MDEuMDAuMDAuMDcmcXVvdDs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQi
+PiZndDsgJiM0MztQUlVTU19MTERfU1JDUkVWID0gJnF1b3Q7NjM2YmI1NjQ1MDE0NzIzYzU0YzA4
+MjQ1Y2Y4YzJlZTQwMWVjZWI0ZiZxdW90OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1Bs
+YWluVGV4dCI+Jmd0OyZuYnNwOyZuYnNwOyA8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Q
+bGFpblRleHQiPiZndDsmbmJzcDsmbmJzcDsgQlJBTkNIID0gJnF1b3Q7JHtQUlVTU19MTERfR0lU
+X0JSQU5DSH0mcXVvdDs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29QbGFpblRleHQiPiZn
+dDsmbmJzcDsmbmJzcDsgU1JDX1VSSSA9ICZxdW90OyR7UFJVU1NfTExEX0dJVF9VUkl9O2Rlc3Rz
+dWZmaXg9JHtQUlVTU19MTERfR0lUX0RFU1RTVUZGSVh9O3Byb3RvY29sPSR7UFJVU1NfTExEX0dJ
+VF9QUk9UT0NPTH07YnJhbmNoPSR7QlJBTkNIfSZxdW90OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xh
+c3M9Ik1zb1BsYWluVGV4dCI+Jmd0OyZuYnNwOyZuYnNwOyA8bzpwPjwvbzpwPjwvcD4NCjxwIGNs
+YXNzPSJNc29QbGFpblRleHQiPiZndDsmbmJzcDsmbmJzcDsgU1JDUkVWID0gJnF1b3Q7JHtQUlVT
+U19MTERfU1JDUkVWfSZxdW90OzxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb1BsYWluVGV4
+dCI+Jmd0OyAtUFYgPSAmcXVvdDswMS4wMC4wMC4wNkEmcXVvdDs8bzpwPjwvbzpwPjwvcD4NCjxw
+IGNsYXNzPSJNc29QbGFpblRleHQiPiZndDsgJiM0MztQViA9ICZxdW90OzAxLjAwLjAwLjA3JnF1
+b3Q7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvUGxhaW5UZXh0Ij4mZ3Q7Jm5ic3A7Jm5i
+c3A7IElOQ19QUiA9ICZxdW90O3IwJnF1b3Q7PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNv
+UGxhaW5UZXh0Ij48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0KPC9ib2R5Pg0KPC9odG1s
+Pg0K
 
-> +
-> +PR = "${INC_PR}.0"
-> +
-> +S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
-> +
-> +DEPENDS_append = " osal-rtos"
-> +DEPENDS_append_ti33x = " starterware-rtos"
-> +DEPENDS_append_ti43x = " starterware-rtos"
-
-The dependency on starterware-rtos for ti33x/ti43x appears to be common 
-for all ti-pdk class recipes. Should this go into the ti-pdk.class 
-recipe instead?
-
-> +
-> +# Build with make instead of XDC
-> +TI_PDK_XDCMAKE = "0"
-> +
-> +export PDK_PRUSS_ROOT_PATH ="${WORKDIR}/build"
-> +export DEST_ROOT="${WORKDIR}/build"
-> +
-> +# HTML doc link params
-> +PDK_COMP_LINK_TEXT = "PRUSS LLD"
-> +
-> +INSANE_SKIP_${PN} = "arch"
-> diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
-> index 8620108..5343c9f 100644
-> --- a/recipes-bsp/pruss-lld/pruss-lld.inc
-> +++ b/recipes-bsp/pruss-lld/pruss-lld.inc
-> @@ -9,12 +9,12 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
->   PRUSS_LLD_GIT_BRANCH = "master"
->   PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
->   
-> -# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.06A"
-> -PRUSS_LLD_SRCREV = "b98729cc1fc26c9ac32846146892646a23c28adb"
-> +# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.07"
-> +PRUSS_LLD_SRCREV = "636bb5645014723c54c08245cf8c2ee401eceb4f"
->   
->   BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
->   SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
->   
->   SRCREV = "${PRUSS_LLD_SRCREV}"
-> -PV = "01.00.00.06A"
-> +PV = "01.00.00.07"
->   INC_PR = "r0"
-
-
+--_000_5130E41A1BA9D145BA0F3B18D5CFB0A74379FD4DDFLE12entticom_--
