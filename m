@@ -1,51 +1,59 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <kenny@understoryweather.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0205AE00944; Thu, 13 Jul 2017 07:51:17 -0700 (PDT)
+	id 06CDDE00BD2; Fri, 14 Jul 2017 16:19:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, HTML_MESSAGE, RCVD_IN_DNSWL_NONE,
+	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [209.85.213.46 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 059E4E00726
-	for <meta-ti@yoctoproject.org>; Thu, 13 Jul 2017 07:51:08 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6DEp7Jl001507
-	for <meta-ti@yoctoproject.org>; Thu, 13 Jul 2017 09:51:07 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1499957467;
-	bh=r7vEectA9lci3R4DJcs982t7RFFuXsuveZAUysykP18=;
-	h=From:To:CC:Subject:Date;
-	b=DGJa3ohaTipXgEoNoBHuduBQ/oiK/xi+dUBbnEzIhUdqTzToBV27l8bbvXAqxeJpH
-	uoeVQ3XaPb9U2lisyx9bihXUtkHUtk6jfBDgXzJ4nSNZLo5jSNe5BZBISo8SuTS5Ww
-	FASvekRycJR7eS6a67xfr0ahbtLvbiAoQ9rZ/ock=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6DEp7tX028544
-	for <meta-ti@yoctoproject.org>; Thu, 13 Jul 2017 09:51:07 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 13 Jul 2017 09:51:07 -0500
-Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6DEp7ek019653;	Thu, 13 Jul 2017 09:51:07 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 13 Jul 2017 10:50:59 -0400
-Message-ID: <1499957459-47026-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
+	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
+	*      [209.85.213.46 listed in dnsbl.sorbs.net]
+Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
+	[209.85.213.46])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B491CE00BA1
+	for <meta-ti@yoctoproject.org>; Fri, 14 Jul 2017 16:19:03 -0700 (PDT)
+Received: by mail-vk0-f46.google.com with SMTP id r125so54263965vkf.1
+	for <meta-ti@yoctoproject.org>; Fri, 14 Jul 2017 16:19:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=understoryweather-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=jrcyR72IBAAdlAhQi4cEC+femEXpHPo50Wj9qxf9JCg=;
+	b=F2Os9v33Nj1P2suwGWgsK2eXqSwFsVR+Jc44gnxxIqhBG+yPVnqtQoFi8PTwRL70H/
+	RMj+k9PjzuCMhh3RffCQlMxa1F59s+kKdKKU8t9jpxrzh9Iyq7FApdb79bGY2djZQCO1
+	jRkDqa8Bqb3KwzOfbZaZH3ePR7dV5JsDU/FL+xrtPTikORkpUoHAIuj2wl4ppgnHo2ow
+	xoKEKa78n+RvD26Jd0OcxhOqI5elF2uje9MkmyIpm/VUGSjr/3cGfEuaso/asUwWUSiP
+	ztK/cMOcMLBj2a1DFtQxbuCqtSGDvmpHehvF9S4eE4Pf9Izv72Swte+jhchIsn/zrwcc
+	3oOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=jrcyR72IBAAdlAhQi4cEC+femEXpHPo50Wj9qxf9JCg=;
+	b=Squ7nlb5cDMum0S7CdCW2LD1a9DgOVYO+Ok+IBtLT6K565bf1WizvThfLRX9LgGVfq
+	6hQgJPcyWYtXfG1cV1FIRRdOqQ/M1W+SbOq8+IsYyNF0T62PCDYWJD33ztwdzrut8uBT
+	0X/zDPyrE0laSqexxm0hZ+Iym2XuKqYgzk2tkKRwQSmuindqg0ekeTCxYvCRIawPLN3T
+	xGqrooJkGJFyKCfCYXi+mJlDgedyca0gIAzQcA2PfUzeeZh0tNwT2VlTjS/G9cqPcgwa
+	iBpRsULujdYW9qptzw/p+W8dNIRGQCVDPQSLIV8jBwdqiTW5PsfyS8Awsg9SjhrqcgH0
+	u4Cg==
+X-Gm-Message-State: AIVw112dBpDvzlUKGpz9xvuruOzy8tcXhRmliIaN1ZAcS052ARyU3wcY
+	rHg+Yi6AXXUAw03xNyqrIL81Hjs1wHld37o=
+X-Received: by 10.31.66.141 with SMTP id p135mr5735949vka.85.1500074342743;
+	Fri, 14 Jul 2017 16:19:02 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH v3] bcp-lld-rtos: Added RTOS recipe for bcp-lld
+From: Kenny Koller <kenny@understoryweather.com>
+Date: Fri, 14 Jul 2017 23:18:51 +0000
+Message-ID: <CAPtqgUxb=NqzZUj6L2aEdbhbO=uTZBHyL8j0820AqSe0Oaxsig@mail.gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: U-Boot 2017.01 uEnv.txt Resolution (Raw Mode)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,62 +66,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jul 2017 14:51:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 14 Jul 2017 23:19:07 -0000
+Content-Type: multipart/alternative; boundary="001a1144b32656128e05544f4620"
 
-Upstreaming the RTOS recipe for Bit Coprocessor LLD drvier
+--001a1144b32656128e05544f4620
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
----
+I'm attempting to use the raw mode to boot a Beaglebone Black. I've loaded
+MLO and U-Boot at 128 kB and 384 kB and it successfully loads and runs
+U-Boot but fails to find and load a uEnv.txt because I'm unsure where to
+place it. I tried /boot on an EXT4 root filesystem.
 
-v3 - Added description & details in to commit
-v2 - Combined bcp.inc in to the bcp-lld-rtos_git.bb recipe
+I suppose raw mode is a PPL thing and there is no way for U-Boot to know
+about this and it can only support one way of loading the environment
+(which is to fatload from partition 1)?
 
- recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb | 34 +++++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
+I tried to resolve this in the Beaglebone community but I'm told that
+documentation won't be applicable unless I apply a patch. But I'd prefer to
+use the stock Yocto build.
 
-diff --git a/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb b/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
-new file mode 100644
-index 0000000..6ee95f9
---- /dev/null
-+++ b/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
-@@ -0,0 +1,34 @@
-+DESCRIPTION = "TI Bit Coprocessor (BCP) low level driver "
-+
-+inherit ti-pdk
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://bcp.h;beginline=1;endline=40;md5=4f6e6128dd075a89548c0287a39b8896"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|c667x-evm"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+BCP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/bcp-lld.git"
-+BCP_LLD_GIT_PROTOCOL = "git"
-+BCP_LLD_GIT_BRANCH = "master"
-+BCP_LLD_GIT_DESTSUFFIX = "git/ti/drv/bcp"
-+
-+# Below commit ID corresponds to "DEV.BCP_LLD.02.01.00.06"
-+BCP_LLD_SRCREV = "44e2ffcb6fd236c41f7ea8f9a1684833f5361daa"
-+
-+BRANCH = "${BCP_LLD_GIT_BRANCH}"
-+SRC_URI = "${BCP_LLD_GIT_URI};destsuffix=${BCP_LLD_GIT_DESTSUFFIX};protocol=${BCP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+
-+SRCREV = "${BCP_LLD_SRCREV}"
-+PV = "02.01.00.06"
-+PR = "r0"
-+
-+S = "${WORKDIR}/${BCP_LLD_GIT_DESTSUFFIX}"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+"
-+
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "BCP LLD"
-+
--- 
-1.9.1
+I hope you don't mind fielding this question. It's not clear to me how much
+of U-Boot is mainline from DENX, how much is from Robert Nelso, and how
+much is from meta-ti.
 
+Thanks.
 
+--001a1144b32656128e05544f4620
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">I&#39;m attempting to use the raw mode to boot a Beaglebon=
+e Black. I&#39;ve loaded MLO and U-Boot at 128 kB and 384 kB and it success=
+fully loads and runs U-Boot but fails to find and load a uEnv.txt because I=
+&#39;m unsure where to place it. I tried /boot on an EXT4 root filesystem.<=
+div><br></div><div>I suppose raw mode is a PPL thing and there is no way fo=
+r U-Boot to know about this and it can only support one way of loading the =
+environment (which is to fatload from partition 1)?<br><div><br></div><div>=
+I tried to resolve this in the Beaglebone community but I&#39;m told that d=
+ocumentation won&#39;t be applicable unless I apply a patch. But I&#39;d pr=
+efer to use the stock Yocto build.</div><div><br></div><div>I hope you don&=
+#39;t mind fielding this question. It&#39;s not clear to me how much of U-B=
+oot is mainline from DENX, how much is from Robert Nelso, and how much is f=
+rom meta-ti.</div></div><div><br></div><div>Thanks.</div></div>
+
+--001a1144b32656128e05544f4620--
