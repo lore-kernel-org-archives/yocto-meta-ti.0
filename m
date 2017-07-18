@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 30C93E00C8F; Tue, 18 Jul 2017 16:04:45 -0700 (PDT)
+	id 72C81E00CAF; Tue, 18 Jul 2017 16:04:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,37 +17,37 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E287E00C5D
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:35 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4OV5001263
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:24 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0810FE00C71
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:37 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4b0E027065
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500419064;
-	bh=bEHCaeA+nKPKe7mwVfIBHRUjxDVYLzmE0YH7gEOPgDY=;
+	s=ti-com-17Q1; t=1500419077;
+	bh=zevm0dZyBgXCKdu/YQzlVeyM954eM+MtN3NSAFNVgQo=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=APwKzboyCEWYhlC97Wy2DWYm58gEBQUk1Lwbupljtcu4uQoc1TniyePul5TDYtl1f
-	6DBTagA3E8NdQB6LXOxHGN18j/mB6tN5eFWE2d65OpmDKGJ27Vpa81Ew+okoL30uBu
-	K8jiGZ10ETf80RmMVhV/l8BwMRK8j0CInTyoNiMQ=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4Jjc008239
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:19 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 18 Jul 2017 18:04:19 -0500
+	b=pF6dFTpmomJgRYkcmRVFRr5npIpTvDoUeA68UbnmuWwEL/ibTvSBG9sPrSIp+vDSZ
+	JZ4e2DiWO2jskgiAUEs14VIV6e37EzhZ7GaqDyn3z2DrZuXv7bWiUgMkEZYVvZeVLI
+	V7PxgtxgXX15K8wia/KdGFJQddo5a2cI2Z0kD1YA=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4bxk032105
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:37 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 18 Jul 2017 18:04:36 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6IN46hc000997;	Tue, 18 Jul 2017 18:04:19 -0500
+	v6IN46hp000997;	Tue, 18 Jul 2017 18:04:37 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 18 Jul 2017 19:03:16 -0400
-Message-ID: <1500419028-3361-5-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 18 Jul 2017 19:03:29 -0400
+Message-ID: <1500419028-3361-18-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH v2 05/37] mmcsd-lld-rtos: Add rtos recipe for mmcsd-lld
+Subject: [PATCH v2 18/37] spi-lld-rtos: Add rtos recipe for spi-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,72 +60,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 23:04:45 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 23:04:47 -0000
 Content-Type: text/plain
 
-Upstreaming Multimedia card (MMC)/Secure Digital(SD) card driver recipe
-for RTOS
+Upstreaming TI RTOS driver for Serial Peripheral Interface (SPI)
+
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
 
-v2 - Adding summary
+v2 - Added summmary & merged in to a single recipe
 
- recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb | 46 +++++++++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
- create mode 100644 recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
+ recipes-bsp/spi-lld/spi-lld-rtos_git.bb | 41 +++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 recipes-bsp/spi-lld/spi-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb b/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
+diff --git a/recipes-bsp/spi-lld/spi-lld-rtos_git.bb b/recipes-bsp/spi-lld/spi-lld-rtos_git.bb
 new file mode 100644
-index 0000000..5d1e8ae
+index 0000000..4ed7248
 --- /dev/null
-+++ b/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-@@ -0,0 +1,46 @@
-+SUMMARY = "TI Multimedia card(MMC)/Secure Digital(SD) low level driver for RTOS "
++++ b/recipes-bsp/spi-lld/spi-lld-rtos_git.bb
+@@ -0,0 +1,41 @@
++SUMMARY = "TI RTOS low level driver for Serial Peripheral Interface (SPI)"
 +
 +inherit ti-pdk
 +
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://MMCSD.h;beginline=1;endline=32;md5=f74069541d4d165a000a66b4043cb065"
++LIC_FILES_CHKSUM = "file://SPI.h;beginline=1;endline=31;md5=8580f9c5c0de8d5d13518cf18a0122b8"
 +
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+MMCSD_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/sd-mmc.git"
-+MMCSD_LLD_GIT_PROTOCOL = "git"
-+MMCSD_LLD_GIT_BRANCH = "master"
-+MMCSD_LLD_GIT_DESTSUFFIX = "git/ti/drv/mmcsd"
++SPI_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/spi-lld.git"
++SPI_LLD_GIT_PROTOCOL = "git"
++SPI_LLD_GIT_BRANCH = "master"
 +
-+# Below commit ID corresponds to "DEV.MMCSD_LLD.01.00.00.07"
-+MMCSD_LLD_SRCREV = "54b4b40174297475a648abc4afd23560c2f29911"
++# Below commit ID corresponds to "DEV.SPI_LLD.01.00.00.07A"
++SPI_LLD_SRCREV = "d37daaf3a922e893fe845d44324393994321d443"
 +
-+BRANCH = "${MMCSD_LLD_GIT_BRANCH}"
-+SRC_URI = "${MMCSD_LLD_GIT_URI};destsuffix=${MMCSD_LLD_GIT_DESTSUFFIX};protocol=${MMCSD_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH = "${SPI_LLD_GIT_BRANCH}"
++SRC_URI = "${SPI_LLD_GIT_URI};protocol=${SPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${MMCSD_LLD_SRCREV}"
-+PV = "01.00.00.07"
++SRCREV = "${SPI_LLD_SRCREV}"
++PV = "01.00.00.07A"
 +PR = "r0"
 +
-+S = "${WORKDIR}/${MMCSD_LLD_GIT_DESTSUFFIX}"
-+
-+DEPENDS_append = " edma3-lld-rtos \
-+                   osal-rtos \
++DEPENDS_append = " osal-rtos \
++                   edma3-lld-rtos \
 +"
-+DEPENDS_append_ti33x = " starterware-rtos \
-+"
-+DEPENDS_append_ti43x = " starterware-rtos \
-+"
++DEPENDS_append_ti33x = " starterware-rtos"
++DEPENDS_append_ti43x = " starterware-rtos"
 +
 +# Build with make instead of XDC
 +TI_PDK_XDCMAKE = "0"
 +
-+export PDK_MMCSD_ROOT_PATH ="${WORKDIR}/build"
++export PDK_SPI_ROOT_PATH ="${WORKDIR}/build"
 +export DEST_ROOT="${S}"
 +
 +export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
 +XDCPATH_append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
 +
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "MMCSD LLD"
++PDK_COMP_LINK_TEXT = "SPI LLD"
 -- 
 1.9.1
 
