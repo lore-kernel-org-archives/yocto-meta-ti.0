@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 59CC2E00C7B; Tue, 18 Jul 2017 16:05:09 -0700 (PDT)
+	id 98BCAE00C89; Tue, 18 Jul 2017 16:05:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
+	*      [198.47.19.16 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,37 +17,37 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58B0AE00CCA
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:57 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4vQ9007584
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:57 -0500
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DAF79E00C95
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:05:00 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4o4V001309
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500419097;
-	bh=A8z1VT5XZOXUd66o8h6Iry5IxCw0Jw06Wiq9zTBF18A=;
+	s=ti-com-17Q1; t=1500419090;
+	bh=wceQyd1fjycaP5GeLGVX5UPpVyMqG4rMv5dpIN4sfXw=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=i6pZ5D2dDLg9VXX+5+7VL5i+XsBi+7KVuVUls/lzL3I7QAZout26S5cvRs2muALLf
-	48OhiQdeUy150NWNQaUmocJ+lyQlVt103/NhoMuLIAjyMiPVIVREtijS2hp/2kPQQq
-	bQj2iH9VQ9sRapJf5QXpiG/66Mz30G6O4gVHjbDo=
+	b=tqWcP+4oonv+lS6kj2UFVAumgEFGSMBRgelZxjAZwS3R42g3eurx6lcTUrbhdizih
+	xzELAGtCkP/MxyhW3wEWG4b4r+R1PA+TL+ynCSP+prB+BIW7M9exvUfO+QljVLbQJl
+	g7/zwRhs4cX2PupxlYsQYiDdDw3ZEVpQOawuCjXo=
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4vmS009032
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:57 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4j0V032384
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:45 -0500
 Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
 	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 18 Jul 2017 18:04:56 -0500
+	Tue, 18 Jul 2017 18:04:45 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6IN46i7000997;	Tue, 18 Jul 2017 18:04:56 -0500
+	v6IN46hv000997;	Tue, 18 Jul 2017 18:04:45 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 18 Jul 2017 19:03:45 -0400
-Message-ID: <1500419028-3361-34-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 18 Jul 2017 19:03:35 -0400
+Message-ID: <1500419028-3361-24-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH v2 34/37] ti-ndk: Adding recipe for ti-ndk
+Subject: [PATCH v2 24/37] usb-lld-rtos: Added rtos recipe for usb-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -63,69 +63,58 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Tue, 18 Jul 2017 23:05:09 -0000
 Content-Type: text/plain
 
-Upstreaming recipe for TI RTOS Networking development kit
-
+Upstreaming RTOS low level driver for USB interface
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
 
-v2 - Added summmary  & merged in to a single recipe
+v2 - Added summary & merged in to a single recipe
 
- recipes-ti/ndk/ti-ndk.inc           | 21 +++++++++++++++++++++
- recipes-ti/ndk/ti-ndk_2.25.01.11.bb | 17 +++++++++++++++++
- 2 files changed, 38 insertions(+)
- create mode 100644 recipes-ti/ndk/ti-ndk.inc
- create mode 100644 recipes-ti/ndk/ti-ndk_2.25.01.11.bb
+ recipes-bsp/usb-lld/usb-lld-rtos_git.bb | 36 +++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 recipes-bsp/usb-lld/usb-lld-rtos_git.bb
 
-diff --git a/recipes-ti/ndk/ti-ndk.inc b/recipes-ti/ndk/ti-ndk.inc
+diff --git a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
 new file mode 100644
-index 0000000..09d9ea0
+index 0000000..a227981
 --- /dev/null
-+++ b/recipes-ti/ndk/ti-ndk.inc
-@@ -0,0 +1,21 @@
-+SUMMARY = "TI RTOS_Networking"
-+HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ndk/index.html"
-+SECTION = "devel"
-+LICENSE = "BSD"
++++ b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "TI RTOS USB low level driver"
 +
-+require recipes-ti/includes/ti-paths.inc
++inherit ti-pdk
 +
-+S = "${WORKDIR}/ndk_${PV}"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://USBver.h;beginline=16;endline=46;md5=5394fa32763383d2c8e2aca5a1c67805"
 +
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ndk/${PV}/exports/ndk_${PV}.zip;name=ndkzip"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+do_install() {
-+    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-+    install -d ${D}${NDK_INSTALL_DIR_RECIPE}
-+    cp ${CP_ARGS} ${S}/* ${D}${NDK_INSTALL_DIR_RECIPE}
-+}
++USB_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/usb.git"
++USB_LLD_GIT_PROTOCOL = "git"
++USB_LLD_GIT_BRANCH = "master"
 +
-+ALLOW_EMPTY_${PN} = "1"
-+FILES_${PN}-dev += "${NDK_INSTALL_DIR_RECIPE}"
++# Below commit ID corresponds to "DEV.USB_LLD.01.00.00.09"
++USB_LLD_SRCREV = "6c2b21e5f6f8b34313f8d30a1de9b3e2fc301a73"
 +
-+INSANE_SKIP_${PN}-dev = "arch ldflags staticdev"
-diff --git a/recipes-ti/ndk/ti-ndk_2.25.01.11.bb b/recipes-ti/ndk/ti-ndk_2.25.01.11.bb
-new file mode 100644
-index 0000000..4369567
---- /dev/null
-+++ b/recipes-ti/ndk/ti-ndk_2.25.01.11.bb
-@@ -0,0 +1,17 @@
-+require ti-ndk.inc
++BRANCH = "${USB_LLD_GIT_BRANCH}"
++SRC_URI = "${USB_LLD_GIT_URI};protocol=${USB_LLD_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+PV = "2_25_01_11"
++SRCREV = "${USB_LLD_SRCREV}"
++PV = "01.00.00.09"
 +PR = "r0"
 +
-+LIC_FILES_CHKSUM = "file://ndk_${PV}_manifest.html;md5=80a8d9b76cf700929d3f5b6df09052d6"
++DEPENDS_append = " osal-rtos"
++DEPENDS_append_ti33x = " starterware-rtos"
++DEPENDS_append_ti43x = " starterware-rtos"
 +
-+SRC_URI[ndkzip.md5sum] = "e42bfcc8c3a6d183d60f26ec01ccc79b"
-+SRC_URI[ndkzip.sha256sum] = "a15bc9b570dc0628dd8b8c3665037a162610a6f86c5f17ebb6a329d3db60f071"
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
 +
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
++export PDK_USB_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
 +
-+deltask do_create_srcipk
-+addtask create_srcipk after do_install before do_package
-+
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "USB LLD"
 -- 
 1.9.1
 
