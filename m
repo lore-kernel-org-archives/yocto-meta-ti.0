@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7B86AE00C6B; Tue, 18 Jul 2017 16:04:29 -0700 (PDT)
+	id C1123E00C55; Tue, 18 Jul 2017 16:04:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,36 +18,36 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0067E00C56
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:24 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4OHI027017
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:24 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3ACEE00C55
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:26 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4Qdw027021
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500419064;
-	bh=r3DaFwPxQfA55Z4qBMf89Kke/Se49/tlyKfV08qALh0=;
+	s=ti-com-17Q1; t=1500419066;
+	bh=/heopnKz48OUczFjbuze69HDiSVd0plqeavHpFzajqI=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=rqGEoRTxIhtOtyiVpF1xp39hB2Mfl+NNR7NXGyqmxjNv1XZVlJc7GvwQurIRLaAfG
-	o+7D3Gp/JMU9JliUDHon1MEEva5nCF17XeYGqsL5wBOKIb5IxabAsdHwYul6T0ZSju
-	i3zHI0EU25hXBipSgW4o+VsMRFONT9alOS2IW6z4=
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4OJx031786
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:24 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 18 Jul 2017 18:04:24 -0500
+	b=xS2nKVLFK9mJeJHjeLkMilxxHPSPm4RXyOG9QoPsP/oS7HG6oQSfG2SHZYrA32qRz
+	lx7F92LSBzFvtni/JVj37wc8UxEOOJFmFGdZvYNltw+a/yW5Wo/0Ul/pkSaRWyVd35
+	/PV2pI35w1ygy2wjnuFJ0MkNoHHPUBxo3e4Etc6I=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4QaU008430
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:26 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 18 Jul 2017 18:04:26 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6IN46hg000997;	Tue, 18 Jul 2017 18:04:24 -0500
+	v6IN46hh000997;	Tue, 18 Jul 2017 18:04:26 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 18 Jul 2017 19:03:20 -0400
-Message-ID: <1500419028-3361-9-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 18 Jul 2017 19:03:21 -0400
+Message-ID: <1500419028-3361-10-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH v2 09/37] i2c-lld-rtos: Add rtos recipe for i2c-lld
+Subject: [PATCH v2 10/37] uart-lld-rtos: Added rtos recipe for uart-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,68 +60,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 23:04:29 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 23:04:34 -0000
 Content-Type: text/plain
 
-Upstreaming TI RTOS low level driver for I2C module
+Upstreaming RTOS PDK driver for UART module
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
 
-v2 - Adding summary & merging in to a single recipe
+v2 - Adding description & merging in to a single recipe
 
- recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb | 42 +++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
+ recipes-bsp/uart-lld/uart-lld-rtos_git.bb | 41 +++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 recipes-bsp/uart-lld/uart-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
+diff --git a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
 new file mode 100644
-index 0000000..4f711b8
+index 0000000..df5dce7
 --- /dev/null
-+++ b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-@@ -0,0 +1,42 @@
-+SUMMARY = "TI RTOS low level driver for Inter-IC module (I2C)"
++++ b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
+@@ -0,0 +1,41 @@
++DESCRIPTION = "TI RTOS low level driver for Universal Asynchronous Receiver/Transmitter (UART) module "
 +
 +inherit ti-pdk
 +
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://I2C.h;beginline=1;endline=32;md5=147a6773e962b103cd162ca58535289c"
++LIC_FILES_CHKSUM = "file://UART.h;beginline=1;endline=31;md5=8580f9c5c0de8d5d13518cf18a0122b8"
 +
 +COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+I2C_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/i2c-lld.git"
-+I2C_LLD_GIT_PROTOCOL = "git"
-+I2C_LLD_GIT_BRANCH = "master"
-+I2C_LLD_GIT_DESTSUFFIX = "git/ti/drv/i2c"
++UART_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/uart-lld.git"
++UART_LLD_GIT_PROTOCOL = "git"
++UART_LLD_GIT_BRANCH = "master"
 +
-+# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.07A"
-+I2C_LLD_SRCREV = "85ad56fb6e1f2bdabdd3c371b97170cb62a6fdd7"
++# Below commit ID corresponds to "DEV.UART_LLD.01.00.00.07A"
++UART_LLD_SRCREV = "884e340f5d2f004de99e44f014fedb781f1fb975"
 +
-+BRANCH = "${I2C_LLD_GIT_BRANCH}"
-+SRC_URI = "${I2C_LLD_GIT_URI};destsuffix=${I2C_LLD_GIT_DESTSUFFIX};protocol=${I2C_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH = "${UART_LLD_GIT_BRANCH}"
++SRC_URI = "${UART_LLD_GIT_URI};protocol=${UART_LLD_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${I2C_LLD_SRCREV}"
++SRCREV = "${UART_LLD_SRCREV}"
 +PV = "01.00.00.07A"
 +PR = "r0"
 +
-+DEPENDS_append = " osal-rtos \
++DEPENDS_append = " edma3-lld-rtos \
++                   osal-rtos \
 +"
-+DEPENDS_append_ti33x = " starterware-rtos \
-+"
-+DEPENDS_append_ti43x = " starterware-rtos \
-+"
++DEPENDS_append_ti33x = " starterware-rtos"
++DEPENDS_append_ti43x = " starterware-rtos"
 +
 +# Build with make instead of XDC
 +TI_PDK_XDCMAKE = "0"
 +
-+S = "${WORKDIR}/${I2C_LLD_GIT_DESTSUFFIX}"
-+
-+export PDK_I2C_ROOT_PATH ="${WORKDIR}/build"
++export PDK_UART_ROOT_PATH ="${WORKDIR}/build"
 +export DEST_ROOT="${S}"
 +
++export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
++XDCPATH_append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
++
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "I2C LLD"
++PDK_COMP_LINK_TEXT = "UART LLD"
 -- 
 1.9.1
 
