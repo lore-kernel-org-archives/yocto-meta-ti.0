@@ -1,51 +1,51 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5F6ABE00C3B; Mon, 17 Jul 2017 19:52:26 -0700 (PDT)
+	id EB016E00BFF; Tue, 18 Jul 2017 16:04:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.80 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33F05E00C39
-	for <meta-ti@yoctoproject.org>; Mon, 17 Jul 2017 19:52:24 -0700 (PDT)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54BAFE00BBC
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:07 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6I2qOFW025087
-	for <meta-ti@yoctoproject.org>; Mon, 17 Jul 2017 21:52:24 -0500
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN46QC026983
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500346344;
-	bh=hFFDEU+IZS7bsAWRcMuMXZvfbilBOtB185igy0IhmCo=;
+	s=ti-com-17Q1; t=1500419046;
+	bh=h99QBMI0KE7zOQao7IyT/yiOef4RcB2O9sVsHqV79ws=;
 	h=From:To:CC:Subject:Date;
-	b=pCTbTbQMLRph03Kt4nQv6oh0ptQXzYfjloefMdyPSfTHPp4Pk+QHG6LJ4SzjWGZ5i
-	OAkjktrKDDo1IJYJWgphKQmoRZAfpzM6zy7YrCjfq8eSDexmA482YcfDpLrH67rxjL
-	vg71ScTO7Kzmxe90oef55rq1Sfo6WmGHdXexSr8Y=
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6I2qOaf009230
-	for <meta-ti@yoctoproject.org>; Mon, 17 Jul 2017 21:52:24 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 17 Jul 2017 21:52:23 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6I2qNXu013126;	Mon, 17 Jul 2017 21:52:23 -0500
-From: Sam Nelson <sam.nelson@ti.com>
+	b=y8u18BVbIN8AXWWY6nTL4zvMmSgUT/w4KSPMu9GsHx2XDyc+zrtNdOxXdlDm9sUkG
+	AM59FxjbaWQPd5ceZlr58xOy5AfvXfHzjWhhbws9ShaR1eiTMIxmjGw54XIgwWmnNU
+	p+qzQ63KnwUEbS5QAfg5/V78//oCs/8w0k8fsfQw=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN462s031235
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:06 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 18 Jul 2017 18:04:06 -0500
+Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v6IN46hY000997;	Tue, 18 Jul 2017 18:04:06 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 17 Jul 2017 22:52:22 -0400
-Message-ID: <1500346342-47228-1-git-send-email-sam.nelson@ti.com>
+Date: Tue, 18 Jul 2017 19:03:12 -0400
+Message-ID: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [morty/master][PATCH] multiprocmgr: Update to new version 3.0.3.0
+Subject: [PATCH v2 01/37] bcp-lld-rtos: Added RTOS recipe for bcp-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,32 +58,60 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 02:52:26 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 23:04:08 -0000
 Content-Type: text/plain
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
----
- recipes-ti/multiprocmgr/multiprocmgr.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Upstreaming the RTOS recipe for Bit Coprocessor LLD drvier
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-index b8bbb56..441f44a 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr.inc
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -8,10 +8,10 @@ MULTIPROCMGR_GIT_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git"
- MULTIPROCMGR_GIT_PROTOCOL = "git"
- MULTIPROCMGR_GIT_BRANCH = "master"
- 
--# The following commits correspond to DEV.MPM-3.00.02.00
--MULTIPROCMGR_SRCREV = "303692fe954f36df91c90c300875a6587cb23556"
-+# The following commits correspond to DEV.MPM-3.00.03.00
-+MULTIPROCMGR_SRCREV = "c18c02bb655bae5c88d357b5810ccc69e6f1e128"
- 
--PV = "3.0.2.0"
-+PV = "3.0.3.0"
- INC_PR = "r0"
- 
- BRANCH = "${MULTIPROCMGR_GIT_BRANCH}"
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
+
+v2 - Renaming DESCRIPTION to SUMMARY
+
+ recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb | 34 +++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+ create mode 100644 recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
+
+diff --git a/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb b/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
+new file mode 100644
+index 0000000..a2de77c
+--- /dev/null
++++ b/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
+@@ -0,0 +1,34 @@
++SUMMARY = "TI Bit Coprocessor (BCP) low level driver "
++
++inherit ti-pdk
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://bcp.h;beginline=1;endline=40;md5=4f6e6128dd075a89548c0287a39b8896"
++
++COMPATIBLE_MACHINE = "k2hk-evm|k2l-evm|c667x-evm"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++BCP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/bcp-lld.git"
++BCP_LLD_GIT_PROTOCOL = "git"
++BCP_LLD_GIT_BRANCH = "master"
++BCP_LLD_GIT_DESTSUFFIX = "git/ti/drv/bcp"
++
++# Below commit ID corresponds to "DEV.BCP_LLD.02.01.00.06"
++BCP_LLD_SRCREV = "44e2ffcb6fd236c41f7ea8f9a1684833f5361daa"
++
++BRANCH = "${BCP_LLD_GIT_BRANCH}"
++SRC_URI = "${BCP_LLD_GIT_URI};destsuffix=${BCP_LLD_GIT_DESTSUFFIX};protocol=${BCP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${BCP_LLD_SRCREV}"
++PV = "02.01.00.06"
++PR = "r0"
++
++S = "${WORKDIR}/${BCP_LLD_GIT_DESTSUFFIX}"
++
++DEPENDS_append = " qmss-lld-rtos \
++                   cppi-lld-rtos \
++"
++
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "BCP LLD"
++
 -- 
 1.9.1
 
