@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A7062E00C95; Tue, 18 Jul 2017 16:05:00 -0700 (PDT)
+	id 863F6E00CBB; Tue, 18 Jul 2017 16:05:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,36 +18,36 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71BA0E00CAA
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:50 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 891D7E00C4D
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:04:52 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4o2T020807
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:50 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN4q40020815
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500419090;
-	bh=wvc4PQtN5zXKpzBhYxKMXuRiQ7EBBmGAK4I9vzHzafw=;
+	s=ti-com-17Q1; t=1500419092;
+	bh=CFwPSe3Y/LDEDu/6VlBAyQ0lVkzzZKqelAB6clskTYM=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=EUqeG0JgQ/RMGZNq8caxcF1gA4ZoJgUoZRtgJqJ5W2EWjUN+G6G0dVqPMPtznva0i
-	4rI3c+2m43vNEZoebj3p6pVlIl5DvfMGWajoZL7+6SHWasz3AjCMEp/RtUCN8I+qGt
-	4eNkVp8YOb5xhnyVZ5ZHKI6cMO2x/BvHobEeZeLs=
+	b=L2WScyKw9ARI97T3wfZb8juhKX5eVtogxsAY5sPOwjsBbnK4UVYo+y+bZ9LWfkAza
+	CgNSzHuyPVK//3bmdb9lPNRDeKf9Kg25YFl4vNBlJ2y0BCDz8onhtOgd0qyGLEDn+c
+	aSvciwQxZRZz9Z1hgn26pomTXawQf9k5sKS+Cv4c=
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4oHd008922
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:50 -0500
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4qRI008956
+	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:52 -0500
 Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 18 Jul 2017 18:04:49 -0500
+	Tue, 18 Jul 2017 18:04:52 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6IN46i1000997;	Tue, 18 Jul 2017 18:04:49 -0500
+	v6IN46i3000997;	Tue, 18 Jul 2017 18:04:51 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 18 Jul 2017 19:03:39 -0400
-Message-ID: <1500419028-3361-28-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 18 Jul 2017 19:03:41 -0400
+Message-ID: <1500419028-3361-30-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH v2 28/37] nwal-lld-rtos: Add rtos recipe for nwal
+Subject: [PATCH v2 30/37] icss-emac-lld-rtos: Added rtos recipe for icss-emac-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,45 +60,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 23:05:00 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 23:05:02 -0000
 Content-Type: text/plain
 
-Upstreaming the Network abstraction layer LLD library for RTOS
-
+Upstreaming RTOS low level driver for ICSS-EMAC
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
 
 v2 - Added summary
 
- recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
+ .../icss-emac-lld/icss-emac-lld-rtos_git.bb        | 25 ++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb b/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
+diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb b/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
 new file mode 100644
-index 0000000..7fe5103
+index 0000000..882ce99
 --- /dev/null
-+++ b/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "TI Network abstraction layer RTOS LLD library "
++++ b/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "TI RTOS low level driver for ICSS-EMAC"
 +
 +inherit ti-pdk
-+
-+require recipes-bsp/nwal-lld/nwal-lld.inc
++require icss-emac-lld.inc
 +
 +PR = "${INC_PR}.0"
 +
-+DEPENDS_append = " cppi-lld-rtos \
-+                   pa-lld-rtos \
-+                   pktlib-rtos \
-+                   qmss-lld-rtos \
-+                   sa-lld-rtos \
++DEPENDS_append = " osal-rtos \
++                   pruss-lld-rtos \
++"
++DEPENDS_append_ti33x = " starterware-rtos \
++"
++DEPENDS_append_ti43x = " starterware-rtos \
 +"
 +
-+COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm|k2l-evm|c667x-evm"
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
++
++export PDK_ICSS_EMAC_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
 +
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "NWAL LLD"
++PDK_COMP_LINK_TEXT = "ICSS-EMAC LLD"
++
++INSANE_SKIP_${PN} = "arch"
 -- 
 1.9.1
 
