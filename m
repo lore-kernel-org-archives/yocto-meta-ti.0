@@ -1,15 +1,15 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9F82EE00C45; Tue, 18 Jul 2017 16:05:23 -0700 (PDT)
+	id 85237E00C1B; Mon, 24 Jul 2017 11:45:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	RCVD_IN_SORBS_SPAM autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,37 +17,40 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79300E00C54
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 16:05:13 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6IN530v001327
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:05:03 -0500
+	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
+	*      [198.47.27.80 listed in dnsbl.sorbs.net]
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70920E00C17
+	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 11:45:15 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6OIjFoc003158
+	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 13:45:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500419103;
-	bh=YhKDrWkTFS+QfY2Q/qc2oIyhEnPQoOQF271/jDhF+JA=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=eR3Ubzhi7FIm/Anf/anF5mitKygoBhArmQB2iqWOypBetIYWk9T9TX/sXUmG/B8Nh
-	MJdJuhhxaPIqcf8WK0f0C19rbO6LVCVcu8d0cDhxBG0XkBMLcTY0yvOlNQCMx8iAYq
-	J2XYCXN4hp9zHQmAnz51JA6hpcD2z3L5sUtu0RQo=
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6IN4wJi032571
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jul 2017 18:04:58 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 18 Jul 2017 18:04:57 -0500
-Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6IN46i8000997;	Tue, 18 Jul 2017 18:04:57 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+	s=ti-com-17Q1; t=1500921915;
+	bh=PdCjbIge724H/gd6WFVxFrVSXwwQjFtelE3rHGc6t/A=;
+	h=From:To:CC:Subject:Date;
+	b=I7TnZe/0BpzfbyMNXpKVKys2DG8cjx0PbNu4f9jvMpa1XkOGLTftHZFlNzBjQfACz
+	K0z4DSoHMpxFibspD7UWnMcNKidS97da+ODNHAWYU5fUx6QsgKMXS1yuQCuQTLZlJI
+	aer28uaL+EL3ISl9eYCjhkv/8teuNKu7cGCufTxo=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6OIjFxR027972
+	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 13:45:15 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 24 Jul 2017 13:45:14 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v6OIjFDG026695;	Mon, 24 Jul 2017 13:45:15 -0500
+Received: from localhost ([172.22.136.47])	by legion.dal.design.ti.com
+	(8.11.7p1+Sun/8.11.7) with ESMTP id v6OIjE309806;
+	Mon, 24 Jul 2017 13:45:14 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 18 Jul 2017 19:03:46 -0400
-Message-ID: <1500419028-3361-35-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
-References: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Mon, 24 Jul 2017 13:45:12 -0500
+Message-ID: <20170724184513.30000-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
 MIME-Version: 1.0
-Subject: [PATCH v2 35/37] transport-rtos: Added transport recipes(bmet, nimu, nimu-icss) for rtos
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2017.03-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,151 +63,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 23:05:23 -0000
+X-List-Received-Date: Mon, 24 Jul 2017 18:45:17 -0000
 Content-Type: text/plain
 
-Upstreaming RTOS driver for Network Interface Management Unit
-(NIMU),BMET Ethernet and NIMU ICSS
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-v2 - Added summary
-
- recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb  | 21 +++++++++++++++
- recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb | 28 +++++++++++++++++++
- recipes-bsp/transport-rtos/nimu-rtos_git.bb      | 34 ++++++++++++++++++++++++
- recipes-bsp/transport-rtos/transport.inc         | 17 ++++++++++++
- 4 files changed, 100 insertions(+)
- create mode 100644 recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
- create mode 100644 recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
- create mode 100644 recipes-bsp/transport-rtos/nimu-rtos_git.bb
- create mode 100644 recipes-bsp/transport-rtos/transport.inc
-
-diff --git a/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
-new file mode 100644
-index 0000000..775ef3d
---- /dev/null
-+++ b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "RTOS driver for BMET Ethernet"
-+
-+inherit ti-pdk
-+require transport.inc
-+
-+PR = "${INC_PR}.0"
-+
-+LIC_FILES_CHKSUM = "file://bmet_transport.h;beginline=12;endline=40;md5=7c7fbe6af03d79b61025a67a8fc96f93"
-+
-+COMPATIBLE_MACHINE = "k2hk-evm|k2e-evm|k2l-evm"
-+
-+DEPENDS_append = " qmss-lld-rtos \
-+                   cppi-lld-rtos \
-+"
-+
-+BMET_ETH_DESTSUFFIX = "git/bmet_eth"
-+
-+S = "${WORKDIR}/${BMET_ETH_DESTSUFFIX}"
-+
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "Baremetal Ethernet Transport"
-diff --git a/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
-new file mode 100644
-index 0000000..3ca196d
---- /dev/null
-+++ b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "RTOS driver for NIMU ICSS"
-+
-+inherit ti-pdk
-+require transport.inc
-+
-+PR = "${INC_PR}.0"
-+
-+LIC_FILES_CHKSUM = "file://nimu_icssEth.h;beginline=1;endline=35;md5=fd897e67955a19ba88443d4bc2e7e18a"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|c66x|omapl1"
-+
-+DEPENDS_append = " ti-ndk \
-+                   pruss-lld-rtos \
-+                   icss-emac-lld-rtos \
-+"
-+
-+NIMU_ICSS_DESTSUFFIX = "git/ndk/nimu_icss"
-+
-+# Build with make instead of XDC
-+TI_PDK_XDCMAKE = "0"
-+
-+S = "${WORKDIR}/${NIMU_ICSS_DESTSUFFIX}"
-+
-+export PDK_NIMU_ICSS_ROOT_PATH ="${WORKDIR}/build"
-+export DEST_ROOT="${S}"
-+
-+export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
-+XDCPATH_append = ";${NDK_INSTALL_DIR}/packages"
-diff --git a/recipes-bsp/transport-rtos/nimu-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
-new file mode 100644
-index 0000000..0a415ae
---- /dev/null
-+++ b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "RTOS driver for Network Interface Management Unit (NIMU)"
-+
-+inherit ti-pdk
-+require transport.inc
-+
-+PR = "${INC_PR}.0"
-+
-+LIC_FILES_CHKSUM = "file://nimu_eth.h;beginline=1;endline=35;md5=52ba99291b03b91058e37115b66edb10"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1"
-+
-+NIMU_DESTSUFFIX = "git/ndk/nimu"
-+
-+S = "${WORKDIR}/${NIMU_DESTSUFFIX}"
-+
-+DEPENDS_append = " ti-ndk osal-rtos"
-+DEPENDS_append_ti33x = " starterware-rtos emac-lld-rtos"
-+DEPENDS_append_ti43x = " starterware-rtos emac-lld-rtos"
-+DEPENDS_append_omap-a15 = " emac-lld-rtos"
-+DEPENDS_append_dra7xx-evm = " emac-lld-rtos"
-+DEPENDS_append_keystone = " qmss-lld-rtos cppi-lld-rtos"
-+DEPENDS_append_k2hk-evm = " pa-lld-rtos"
-+DEPENDS_append_k2e-evm = " pa-lld-rtos"
-+DEPENDS_append_k2l-evm = " pa-lld-rtos"
-+DEPENDS_append_k2g = " emac-lld-rtos"
-+
-+# Build with make instead of XDC
-+TI_PDK_XDCMAKE = "0"
-+
-+export PDK_NIMU_ROOT_PATH ="${WORKDIR}/build"
-+export DEST_ROOT="${S}"
-+
-+export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
-+XDCPATH_append = ";${NDK_INSTALL_DIR}/packages"
-diff --git a/recipes-bsp/transport-rtos/transport.inc b/recipes-bsp/transport-rtos/transport.inc
-new file mode 100644
-index 0000000..82427fb
---- /dev/null
-+++ b/recipes-bsp/transport-rtos/transport.inc
-@@ -0,0 +1,17 @@
-+LICENSE = "BSD-3-Clause"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+TRANSPORT_GIT_URI = "git://git.ti.com/keystone-rtos/transport.git"
-+TRANSPORT_GIT_PROTOCOL = "git"
-+TRANSPORT_GIT_BRANCH = "master"
-+
-+# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.07A"
-+TRANSPORT_SRCREV = "099dbf371cea3b2d883f5c97a4b0e7ef40e84c6a"
-+
-+BRANCH = "${TRANSPORT_GIT_BRANCH}"
-+SRC_URI = "${TRANSPORT_GIT_URI};protocol=${TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
-+
-+SRCREV = "${TRANSPORT_SRCREV}"
-+PV = "01.00.00.07A"
-+INC_PR = "r0"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index cdafe80f..fa735cc5 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+ 
+ BRANCH = "ti-rt-linux-4.9.y"
+ 
+-SRCREV = "b8a39a9c58b8c913962916365d81360b5b85e251"
++SRCREV = "a54210e346049ee5130d149e6017b4b797214796"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 30a151f1..c5e573b3 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.9.y"
+ 
+-SRCREV = "99bc4905ab6eaa3373cf21540c9348e1654176d9"
+-PV = "4.9.38+git${SRCPV}"
++SRCREV = "fb4f56fbd0ed831f137d4aa5523b018d5544cc8d"
++PV = "4.9.39+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 -- 
-1.9.1
+2.13.2.516.ge629a7d28
 
 
