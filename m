@@ -1,6 +1,6 @@
 Return-Path: <i-pang@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BFEC8E00C25; Mon, 24 Jul 2017 15:31:12 -0700 (PDT)
+	id 11017E00C1B; Mon, 24 Jul 2017 15:31:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,37 +18,35 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15D8DE00C1B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18D67E00C1C
 	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 15:31:11 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6OMVAZG007349
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6OMVAuZ007347
 	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 17:31:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500935471;
-	bh=n2OG/AcrmzGx5F8rBU6y3ociQOd7LnaOBXirh9LOy9Y=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=rKZrz+vBRHSV0tVj3o5M2u6Zswf66SKc6d6i8QCMkrWIANZ4mThzlWt5E0IPr1oAR
-	rUeoLdwEo0HZHdi5OJsCQ13LrC+IviREfyS3gdE+huLoW5+D4rgY22Mn97rY5kAyj6
-	RnUavh5cPkzNfLHDdsLqLDp+CFYNytawPgcDHFqE=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6OMVA97008020
+	s=ti-com-17Q1; t=1500935470;
+	bh=Iribw9dcylYyVSpoNV3ylyDgv4KByWELaF+xkZozK3w=;
+	h=From:To:Subject:Date;
+	b=KJ2W0xGGdRdeaDVl4wQBsdRrHfGVJOAm1h1UwT74RbpDergaySH0rt5/wcvcHYj9F
+	/FrMOjwOFNgU38gpxxAdd1Coa/7X1P6t3g9pCu0yL2f5H1p/DU1joo0oEx+/YX1S0C
+	lt+Y+P6xhWHU1RpvHcOXrq2u4sMxftm+W48rA/QU=
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6OMVA6u013028
 	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 17:31:10 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
 	Mon, 24 Jul 2017 17:31:10 -0500
 Received: from uda0868762.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6OMVAtO008103	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 17:31:10
+	v6OMVAtM008103	for <meta-ti@yoctoproject.org>; Mon, 24 Jul 2017 17:31:10
 	-0500
 From: Ivan Pang <i-pang@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 24 Jul 2017 17:31:09 -0500
-Message-ID: <1500935470-11179-3-git-send-email-i-pang@ti.com>
+Date: Mon, 24 Jul 2017 17:31:07 -0500
+Message-ID: <1500935470-11179-1-git-send-email-i-pang@ti.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1500935470-11179-1-git-send-email-i-pang@ti.com>
-References: <1500935470-11179-1-git-send-email-i-pang@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/4] mad-utils-rtos: added recipe for MAD utils
+Subject: [PATCH 1/4] ti-paths.inc: added path for TI CGT6x 7.x.x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,90 +59,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 22:31:12 -0000
+X-List-Received-Date: Mon, 24 Jul 2017 22:31:13 -0000
 Content-Type: text/plain
 
-This recipe adds the Multicore Application Deployment (MAD)
-utility for c665x-evm and c667x-evm.
+This directory path is for installing TI CGT6x 7.x.x as well as
+invoking the installation from other recipes.
 
 Signed-off-by: Ivan Pang <i-pang@ti.com>
 ---
- recipes-bsp/mad-utils/mad-utils-rtos_git.bb | 66 +++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
- create mode 100644 recipes-bsp/mad-utils/mad-utils-rtos_git.bb
+ recipes-ti/includes/ti-paths.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/mad-utils/mad-utils-rtos_git.bb b/recipes-bsp/mad-utils/mad-utils-rtos_git.bb
-new file mode 100644
-index 0000000..0fab610
---- /dev/null
-+++ b/recipes-bsp/mad-utils/mad-utils-rtos_git.bb
-@@ -0,0 +1,66 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://README.txt;md5=44b2180aec0657f6b0e42e5611c0bafb"
-+
-+require recipes-ti/includes/ti-paths.inc
-+
-+DEPENDS = "ti-cgt6x-7-native"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+COMPATIBLE_MACHINE = "c66x"
-+
-+CLEANBROKEN = "1"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/mad-utils.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "2458510f76eddfa837c2b83448965e233156944b"
-+PR = "r0"
-+
-+S = "${WORKDIR}/git"
-+
-+export C6X_BASE_DIR="${TI_CGT6X_7_INSTALL_DIR}"
-+
-+DEVICE = ""
-+DEVICE_c665x-evm = "C6657"
-+DEVICE_c667x-evm = "C6678"
-+
-+ENDIAN = ""
-+ENDIAN_c665x-evm = "little big"
-+ENDIAN_c667x-evm = "little big"
-+
-+do_compile() {
-+    cd mad-loader
-+    cp mal/malLib/build/Makefile mal/malLib/build/Makefile_save
-+    sed -i "s@cl6x@${C6X_BASE_DIR}/bin/cl6x@g" mal/malLib/build/Makefile
-+    sed -i "s@ar6x@${C6X_BASE_DIR}/bin/ar6x@g" mal/malLib/build/Makefile
-+    sed -i "s@strip6x@${C6X_BASE_DIR}/bin/strip6x@g" mal/malLib/build/Makefile
-+    cp mal/malApp/build/Makefile mal/malApp/build/Makefile_save
-+    sed -i "s@cl6x@${C6X_BASE_DIR}/bin/cl6x@g" mal/malApp/build/Makefile
-+    sed -i "s@ar6x@${C6X_BASE_DIR}/bin/ar6x@g" mal/malApp/build/Makefile
-+    sed -i "s@strip6x@${C6X_BASE_DIR}/bin/strip6x@g" mal/malApp/build/Makefile
-+    cp nmlLoader/build/Makefile nmlLoader/build/Makefile_save
-+    sed -i "s@cl6x@${C6X_BASE_DIR}/bin/cl6x@g" nmlLoader/build/Makefile
-+    sed -i "s@ar6x@${C6X_BASE_DIR}/bin/ar6x@g" nmlLoader/build/Makefile
-+    sed -i "s@strip6x@${C6X_BASE_DIR}/bin/strip6x@g" nmlLoader/build/Makefile
-+    for e in ${ENDIAN}
-+    do
-+        mkdir -p bin/${DEVICE}/${e}
-+        make -C mal/malLib/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
-+        make -C mal/malApp/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
-+        cp mal/malApp/build/mal_app.exe bin/${DEVICE}/${e}
-+        make -C nmlLoader/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
-+        cp nmlLoader/build/nml.exe bin/${DEVICE}/${e}
-+    done
-+    mv -f mal/malLib/build/Makefile_save mal/malLib/build/Makefile
-+    mv -f mal/malApp/build/Makefile_save mal/malApp/build/Makefile
-+    mv -f nmlLoader/build/Makefile_save nmlLoader/build/Makefile
-+    cd -
-+}
-+
-+do_install() {
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils
-+    cp -r * ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils"
-+
-+INSANE_SKIP_${PN} += "arch staticdev ldflags file-rdeps"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index a7ea9a7..ebd4b8a 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -55,7 +55,7 @@ export VLIB_C66_INSTALL_DIR_RECIPE        = "${installdir}/ti-vlib-c66x-tree"
+ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+ export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
+ export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
+-
++export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
+ 
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -101,6 +101,7 @@ export VLIB_C66_INSTALL_DIR        = "${STAGING_DIR_TARGET}${VLIB_C66_INSTALL_DI
+ export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIPE}"
+ export OMP_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMP_INSTALL_DIR_RECIPE}"
+ export MPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${MPM_INSTALL_DIR_RECIPE}"
++export TI_CGT6X_7_INSTALL_DIR   = "${STAGING_DIR_NATIVE}${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
 -- 
 1.9.1
 
