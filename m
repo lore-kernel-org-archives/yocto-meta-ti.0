@@ -1,6 +1,6 @@
 Return-Path: <i-pang@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 38B9EE00BC0; Tue, 25 Jul 2017 14:06:43 -0700 (PDT)
+	id 4B8FFE00BBC; Tue, 25 Jul 2017 14:06:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,35 +18,37 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75480E00B43
-	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 14:06:41 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7683CE00B53
+	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 14:06:42 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6PL6fu7026662
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6PL6fVt026657
 	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 16:06:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1501016801;
-	bh=Iribw9dcylYyVSpoNV3ylyDgv4KByWELaF+xkZozK3w=;
-	h=From:To:Subject:Date;
-	b=SBIHAetAuTuSdN1t/NnNWTYWUSeEyWjn1mPvc+tLITHUAkc6F260Ga4DP0NKay6qy
-	gIoN9xFH7rhKl6HPL7o5Wiq/09m3Of7kTjOZG+nNFRKQry7hM4aU3tn7+R/NCcp0QM
-	I9s+ER6ctZsPXKLSxJpuxn+uPpbjnwM7p3v7d4fs=
+	bh=LZYMIyluf3cj1mVxYwyBHZSGjcYeZoqZaAbSn0yNAvg=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=IfwhJsvTQKreyiLmzZ0ie/kCqn0YFLaD26JidRXgYC3mcJheZKDr+s7FN2IUcJk3D
+	kmlmb2605iQWGxYNiv954d3T7SbPasTYXK8FXl3Vsc6/tbTx1ZNzVnRu3N4ymeVDjY
+	mctRGAJ90Ze9ae50zyP/TbcMzniEEx1ricVnM6lA=
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6PL6fwo029098
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6PL6fwm029098
 	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 16:06:41 -0500
 Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
 	Tue, 25 Jul 2017 16:06:40 -0500
 Received: from uda0868762.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6PL6fIV004221	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 16:06:41
+	v6PL6fIW004221	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 16:06:41
 	-0500
 From: Ivan Pang <i-pang@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 25 Jul 2017 16:06:38 -0500
-Message-ID: <1501016801-28357-1-git-send-email-i-pang@ti.com>
+Date: Tue, 25 Jul 2017 16:06:39 -0500
+Message-ID: <1501016801-28357-2-git-send-email-i-pang@ti.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1501016801-28357-1-git-send-email-i-pang@ti.com>
+References: <1501016801-28357-1-git-send-email-i-pang@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH v2 1/4] ti-paths.inc: added path for TI CGT6x 7.x.x
+Subject: [PATCH v2 2/4] ti-cgt6x-7: added recipe for TI CGT6x 7.x.x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -62,35 +64,57 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Tue, 25 Jul 2017 21:06:43 -0000
 Content-Type: text/plain
 
-This directory path is for installing TI CGT6x 7.x.x as well as
-invoking the installation from other recipes.
+This recipe specifically installs the 7.x.x series of TI CGT6x.
 
 Signed-off-by: Ivan Pang <i-pang@ti.com>
 ---
- recipes-ti/includes/ti-paths.inc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb | 37 +++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+ create mode 100644 recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb
 
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index a7ea9a7..ebd4b8a 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -55,7 +55,7 @@ export VLIB_C66_INSTALL_DIR_RECIPE        = "${installdir}/ti-vlib-c66x-tree"
- export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
- export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
- export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
--
-+export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
- 
- # This is where the tools will end up in sysroot
- export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
-@@ -101,6 +101,7 @@ export VLIB_C66_INSTALL_DIR        = "${STAGING_DIR_TARGET}${VLIB_C66_INSTALL_DI
- export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIPE}"
- export OMP_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMP_INSTALL_DIR_RECIPE}"
- export MPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${MPM_INSTALL_DIR_RECIPE}"
-+export TI_CGT6X_7_INSTALL_DIR   = "${STAGING_DIR_NATIVE}${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
- 
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
+diff --git a/recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb b/recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb
+new file mode 100644
+index 0000000..335e0ae
+--- /dev/null
++++ b/recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb
+@@ -0,0 +1,37 @@
++DESCRIPTION = "TI DSP Code Generation Tools"
++HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
++LICENSE = "TI"
++
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
++
++PE = "0"
++PR = "r0"
++
++S = "${WORKDIR}/c6000_7.4.16"
++
++inherit native
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-unpack.inc
++
++BINFILE = "ti_cgt_c6000_7.4.16_linux_installer_x86.bin"
++BINFILE_NAME = "cgt6x_7.4.16_x86_installer"
++TI_BIN_UNPK_ARGS = "--prefix ${WORKDIR} --mode unattended"
++TI_BIN_UNPK_CMDS=""
++
++SRC_URI = "http://install.source.dir.local/${BINFILE};name=${BINFILE_NAME}"
++
++SRC_URI[cgt6x_7.4.16_x86_installer.md5sum] = "21ca55c5b1f6b2d8d4fb7570d5eb5513"
++SRC_URI[cgt6x_7.4.16_x86_installer.sha256sum] = "baa0d1ef20397383f99f45068a6d160963a01419d42fbbb851263b54c91df82f"
++
++do_install() {
++    install -d ${D}/${TI_CGT6X_7_INSTALL_DIR_RECIPE}
++    cp -r ${WORKDIR}/c6000_7.4.16/. ${D}/${TI_CGT6X_7_INSTALL_DIR_RECIPE}
++}
++
++FILES_${PN} += "${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
++
++INSANE_SKIP_${PN} += "arch staticdev"
++
++INHIBIT_PACKAGE_STRIP = "1"
++INHIBIT_SYSROOT_STRIP = "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 -- 
 1.9.1
 
