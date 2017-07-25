@@ -1,55 +1,55 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D2C13E00BC0; Tue, 25 Jul 2017 07:14:56 -0700 (PDT)
+	id 5A39EE00BC0; Tue, 25 Jul 2017 07:28:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.80 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ABC62E00B76
-	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 07:14:55 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6PEEscw001319
-	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 09:14:54 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23DBFE00B76
+	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 07:28:13 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6PESDZ1024911
+	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 09:28:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1500992094;
-	bh=AzNvfaE5iQ+ax9Ltumr/zMt2XEdJjSFIm5CZBqLtI34=;
+	s=ti-com-17Q1; t=1500992893;
+	bh=HthhVV7yUOacooOzPwvsbtmO0fsJAWWQvixKg5ePTro=;
 	h=Subject:To:References:From:Date:In-Reply-To;
-	b=A0T5ifvuFJ9YuIgiX40T11Wbb+uhWFDBPeuXX/7wrEsvSmOPs8KjXkGNFMJVac4mG
-	w2XVUTfAQvSrfHRq+l2WNb3Ff63uFAa+iNtxz8QiwyZ8NRwkCQMZEQjsHR7WPzEWFj
-	INVfBbEcuNUH5QNB0KDOBGVtTReqSl8IzK3XzBn0=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6PEEsKC027970
-	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 09:14:54 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 25 Jul 2017 09:14:54 -0500
+	b=UmBLmIovsxofbkXLC9ujICp+bkqXEK1rEAyZr+pJrUNWE6JT5dKCdAsJwAL99OoEj
+	wE+2VCxxRosUJcBS6zQcGc+C53kZRnrNhCnsx1mwth8sn+FjJNUU8WLURR3fkNr6Ks
+	XinpZc9uNzh+WpFKK9nzIeGEh9MLMDhtuXnFkuyQ=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6PESD6d022884
+	for <meta-ti@yoctoproject.org>; Tue, 25 Jul 2017 09:28:13 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 25 Jul 2017 09:28:12 -0500
 Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6PEEs3S001802;
-	Tue, 25 Jul 2017 09:14:54 -0500
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6PESCiX014863;
+	Tue, 25 Jul 2017 09:28:12 -0500
 To: Ivan Pang <i-pang@ti.com>, <meta-ti@yoctoproject.org>
 References: <1500935470-11179-1-git-send-email-i-pang@ti.com>
-	<1500935470-11179-2-git-send-email-i-pang@ti.com>
+	<1500935470-11179-3-git-send-email-i-pang@ti.com>
 From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <3cbd5766-d1c7-f8e0-10aa-a072492e8565@ti.com>
-Date: Tue, 25 Jul 2017 10:14:53 -0400
+Message-ID: <e924bf12-8207-df2d-d17d-6fada235e684@ti.com>
+Date: Tue, 25 Jul 2017 10:28:12 -0400
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <1500935470-11179-2-git-send-email-i-pang@ti.com>
-Subject: Re: [PATCH 2/4] ti-cgt6x-7: added recipe for TI CGT6x 7.x.x
+In-Reply-To: <1500935470-11179-3-git-send-email-i-pang@ti.com>
+Subject: Re: [PATCH 3/4] mad-utils-rtos: added recipe for MAD utils
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -62,67 +62,102 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jul 2017 14:14:56 -0000
+X-List-Received-Date: Tue, 25 Jul 2017 14:28:15 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
-The "target" class of this recipe does not appear to be supported (i.e. 
-no ARM binary package). Shoudl this be native only, similar to ti-cgt-arm?
 
 
 On 7/24/2017 6:31 PM, Ivan Pang wrote:
-> This recipe specifically installs the 7.x.x series of TI CGT6x.
+> This recipe adds the Multicore Application Deployment (MAD)
+> utility for c665x-evm and c667x-evm.
 >
 > Signed-off-by: Ivan Pang <i-pang@ti.com>
 > ---
->   recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb | 38 ++++++++++++++++++++++++++++++++
->   1 file changed, 38 insertions(+)
->   create mode 100644 recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
+>   recipes-bsp/mad-utils/mad-utils-rtos_git.bb | 66 +++++++++++++++++++++++++++++
+>   1 file changed, 66 insertions(+)
+>   create mode 100644 recipes-bsp/mad-utils/mad-utils-rtos_git.bb
 >
-> diff --git a/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb b/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
+> diff --git a/recipes-bsp/mad-utils/mad-utils-rtos_git.bb b/recipes-bsp/mad-utils/mad-utils-rtos_git.bb
 > new file mode 100644
-> index 0000000..51d359e
+> index 0000000..0fab610
 > --- /dev/null
-> +++ b/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
-> @@ -0,0 +1,38 @@
-> +DESCRIPTION = "TI DSP Code Generation Tools"
-> +HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> +LICENSE = "TI"
-> +
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
-> +
-> +PE = "0"
-> +PR = "r0"
-> +
-> +S = "${WORKDIR}/c6000_7.4.16"
+> +++ b/recipes-bsp/mad-utils/mad-utils-rtos_git.bb
+> @@ -0,0 +1,66 @@
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://README.txt;md5=44b2180aec0657f6b0e42e5611c0bafb"
 > +
 > +require recipes-ti/includes/ti-paths.inc
-> +require recipes-ti/includes/ti-unpack.inc
 > +
-> +BINFILE = "ti_cgt_c6000_7.4.16_linux_installer_x86.bin"
-> +BINFILE_NAME = "cgt6x_7.4.16_x86_installer"
-> +TI_BIN_UNPK_ARGS = "--prefix ${WORKDIR} --mode unattended"
-> +TI_BIN_UNPK_CMDS=""
+> +DEPENDS = "ti-cgt6x-7-native"
 > +
-> +SRC_URI = "http://install.source.dir.local/${BINFILE};name=${BINFILE_NAME}"
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +COMPATIBLE_MACHINE = "c66x"
 > +
-> +SRC_URI[cgt6x_7.4.16_x86_installer.md5sum] = "21ca55c5b1f6b2d8d4fb7570d5eb5513"
-> +SRC_URI[cgt6x_7.4.16_x86_installer.sha256sum] = "baa0d1ef20397383f99f45068a6d160963a01419d42fbbb851263b54c91df82f"
+> +CLEANBROKEN = "1"
+
+Is CLEANBROKEN needed? I do not see a Makefile in the 'S' directory.
+
 > +
-> +do_install() {
-> +    install -d ${D}/${TI_CGT6X_7_INSTALL_DIR_RECIPE}
-> +    cp -r ${WORKDIR}/c6000_7.4.16/. ${D}/${TI_CGT6X_7_INSTALL_DIR_RECIPE}
+> +BRANCH = "master"
+> +SRC_URI = "git://git.ti.com/keystone-rtos/mad-utils.git;protocol=git;branch=${BRANCH}"
+> +SRCREV = "2458510f76eddfa837c2b83448965e233156944b"
+> +PR = "r0"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +export C6X_BASE_DIR="${TI_CGT6X_7_INSTALL_DIR}"
+> +
+> +DEVICE = ""
+> +DEVICE_c665x-evm = "C6657"
+> +DEVICE_c667x-evm = "C6678"
+> +
+> +ENDIAN = ""
+> +ENDIAN_c665x-evm = "little big"
+> +ENDIAN_c667x-evm = "little big"
+> +
+> +do_compile() {
+> +    cd mad-loader
+> +    cp mal/malLib/build/Makefile mal/malLib/build/Makefile_save
+> +    sed -i "s@cl6x@${C6X_BASE_DIR}/bin/cl6x@g" mal/malLib/build/Makefile
+> +    sed -i "s@ar6x@${C6X_BASE_DIR}/bin/ar6x@g" mal/malLib/build/Makefile
+> +    sed -i "s@strip6x@${C6X_BASE_DIR}/bin/strip6x@g" mal/malLib/build/Makefile
+> +    cp mal/malApp/build/Makefile mal/malApp/build/Makefile_save
+> +    sed -i "s@cl6x@${C6X_BASE_DIR}/bin/cl6x@g" mal/malApp/build/Makefile
+> +    sed -i "s@ar6x@${C6X_BASE_DIR}/bin/ar6x@g" mal/malApp/build/Makefile
+> +    sed -i "s@strip6x@${C6X_BASE_DIR}/bin/strip6x@g" mal/malApp/build/Makefile
+> +    cp nmlLoader/build/Makefile nmlLoader/build/Makefile_save
+> +    sed -i "s@cl6x@${C6X_BASE_DIR}/bin/cl6x@g" nmlLoader/build/Makefile
+> +    sed -i "s@ar6x@${C6X_BASE_DIR}/bin/ar6x@g" nmlLoader/build/Makefile
+> +    sed -i "s@strip6x@${C6X_BASE_DIR}/bin/strip6x@g" nmlLoader/build/Makefile
+
+I think that it would be cleaner to prepend PATH with 
+'${C6X_BASE_DIR}/bin'. Then you do not need to modify the makefile and 
+then undo the modifications.
+
+> +    for e in ${ENDIAN}
+> +    do
+> +        mkdir -p bin/${DEVICE}/${e}
+> +        make -C mal/malLib/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
+> +        make -C mal/malApp/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
+> +        cp mal/malApp/build/mal_app.exe bin/${DEVICE}/${e}
+> +        make -C nmlLoader/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
+> +        cp nmlLoader/build/nml.exe bin/${DEVICE}/${e}
+> +    done
+> +    mv -f mal/malLib/build/Makefile_save mal/malLib/build/Makefile
+> +    mv -f mal/malApp/build/Makefile_save mal/malApp/build/Makefile
+> +    mv -f nmlLoader/build/Makefile_save nmlLoader/build/Makefile
+> +    cd -
 > +}
 > +
-> +FILES_${PN} += "${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
+> +do_install() {
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils
+> +    cp -r * ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils
+> +}
 > +
-> +INSANE_SKIP_${PN} += "arch staticdev"
+> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils"
 > +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_SYSROOT_STRIP = "1"
-> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
+> +INSANE_SKIP_${PN} += "arch staticdev ldflags file-rdeps"
 
 
