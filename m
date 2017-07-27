@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2CEC1E00C80; Thu, 27 Jul 2017 06:17:50 -0700 (PDT)
+	id C2A4CE00C80; Thu, 27 Jul 2017 06:19:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,39 +17,39 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05DFAE00C61
-	for <meta-ti@yoctoproject.org>; Thu, 27 Jul 2017 06:17:48 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6RDHmQM028358
-	for <meta-ti@yoctoproject.org>; Thu, 27 Jul 2017 08:17:48 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2CBAAE00C61
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jul 2017 06:19:42 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6RDJg4R017546
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jul 2017 08:19:42 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1501161468;
-	bh=sCpiSin1SeGpOFaz2Q0getbiLAuLy6NrY2eZs/sN0k8=;
+	s=ti-com-17Q1; t=1501161582;
+	bh=682o6gx1lbfth1SQxHd6pqeKQYKwNu3iiSbvzD3VGQs=;
 	h=Subject:To:References:From:Date:In-Reply-To;
-	b=IfGh6fBKWBfeJyV8eJL6K+MBBybCWs9CPCoRgTjMtImFyfRJmIdYXeiRpaie3zqfs
-	0mOf+jDDg9eSfW2lO2xr5FDD/55/R2j8HSrD+uTvCLmF2GjtdLFrkIEKGc8glc1LLp
-	cTWUeXK4gweRcnOB8nchv+E0B+akcdNIEm/3w3I4=
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6RDHm2j009269
-	for <meta-ti@yoctoproject.org>; Thu, 27 Jul 2017 08:17:48 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 27 Jul 2017 08:17:47 -0500
+	b=NQAAwBytAk/fuOWqS9iG8Gx5yN/Zz9c6MwAvow1j88IsiCYT2GufP7mplLx9wzX4L
+	jyAE7f9vkHPfySUDjgjk9WJxSIbkgYdIZpe1fAm/bEELa/fAW4CcnxmGvbmjyCpnm+
+	sQaQh08Wu2L8V4T/XKkq8NiYrBW2gOQHnzYJgNRo=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6RDJgKn010225
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jul 2017 08:19:42 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 27 Jul 2017 08:19:41 -0500
 Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6RDHl83009951;
-	Thu, 27 Jul 2017 08:17:47 -0500
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6RDJfDj010620;
+	Thu, 27 Jul 2017 08:19:41 -0500
 To: Ivan Pang <i-pang@ti.com>, <meta-ti@yoctoproject.org>
 References: <1501016801-28357-1-git-send-email-i-pang@ti.com>
-	<1501016801-28357-2-git-send-email-i-pang@ti.com>
+	<1501016801-28357-4-git-send-email-i-pang@ti.com>
 From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <9ade1496-23c1-e7a5-e2c4-608cdab06978@ti.com>
-Date: Thu, 27 Jul 2017 09:17:47 -0400
+Message-ID: <abe53116-1cbc-ecea-98fa-4d13075ea8bc@ti.com>
+Date: Thu, 27 Jul 2017 09:19:41 -0400
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <1501016801-28357-2-git-send-email-i-pang@ti.com>
-Subject: Re: [PATCH v2 2/4] ti-cgt6x-7: added recipe for TI CGT6x 7.x.x
+In-Reply-To: <1501016801-28357-4-git-send-email-i-pang@ti.com>
+Subject: Re: [PATCH v2 4/4] ibl-boot-rtos: added recipe for RTOS IBL
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -62,7 +62,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jul 2017 13:17:50 -0000
+X-List-Received-Date: Thu, 27 Jul 2017 13:19:43 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
@@ -71,63 +71,77 @@ ACK
 
 
 On 7/25/2017 5:06 PM, Ivan Pang wrote:
-> This recipe specifically installs the 7.x.x series of TI CGT6x.
+> This recipe adds the Intermediate Bootloader (IBL) for c665x-evm
+> and c667x-evm.
 >
 > Signed-off-by: Ivan Pang <i-pang@ti.com>
 > ---
-
-In the future, it would be nice to list the changes between patch 
-versions in this location.
-
-The '--annotate' option to git-send-email will open a text editor on the 
-patch to allow you to add this information.
-
->   recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb | 37 +++++++++++++++++++++++++
->   1 file changed, 37 insertions(+)
->   create mode 100644 recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb
+>   recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb | 57 +++++++++++++++++++++++++++++++
+>   1 file changed, 57 insertions(+)
+>   create mode 100644 recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
 >
-> diff --git a/recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb b/recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb
+> diff --git a/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb b/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
 > new file mode 100644
-> index 0000000..335e0ae
+> index 0000000..47c6ccd
 > --- /dev/null
-> +++ b/recipes-ti/devtools/ti-cgt6x-7-native_7.4.16.bb
-> @@ -0,0 +1,37 @@
-> +DESCRIPTION = "TI DSP Code Generation Tools"
-> +HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> +LICENSE = "TI"
+> +++ b/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
+> @@ -0,0 +1,57 @@
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://src/ibl.h;beginline=1;endline=34;md5=ee7d7a3305d1e524955996d1c5e31cb9"
 > +
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
+> +require recipes-ti/includes/ti-paths.inc
 > +
-> +PE = "0"
+> +DEPENDS = "ti-cgt6x-7-native"
+> +
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +COMPATIBLE_MACHINE = "c66x"
+> +
+> +BRANCH = "master"
+> +SRC_URI = "git://git.ti.com/keystone-rtos/ibl.git;protocol=git;branch=${BRANCH}"
+> +SRCREV = "f7ed32cc8911e3353dd01080da9b725b44a12285"
 > +PR = "r0"
 > +
-> +S = "${WORKDIR}/c6000_7.4.16"
+> +S = "${WORKDIR}/git"
 > +
-> +inherit native
-> +require recipes-ti/includes/ti-paths.inc
-> +require recipes-ti/includes/ti-unpack.inc
+> +PATH_prepend = "${TI_CGT6X_7_INSTALL_DIR}/bin:"
 > +
-> +BINFILE = "ti_cgt_c6000_7.4.16_linux_installer_x86.bin"
-> +BINFILE_NAME = "cgt6x_7.4.16_x86_installer"
-> +TI_BIN_UNPK_ARGS = "--prefix ${WORKDIR} --mode unattended"
-> +TI_BIN_UNPK_CMDS=""
+> +IBLTARGETS = ""
+> +IBLTARGETS_c665x-evm = "evm_c6657_i2c"
+> +IBLTARGETS_c667x-evm = "evm_c6678_i2c"
 > +
-> +SRC_URI = "http://install.source.dir.local/${BINFILE};name=${BINFILE_NAME}"
+> +IBLENDIAN = ""
+> +IBLENDIAN_c665x-evm = "little big"
+> +IBLENDIAN_c667x-evm = "little big"
 > +
-> +SRC_URI[cgt6x_7.4.16_x86_installer.md5sum] = "21ca55c5b1f6b2d8d4fb7570d5eb5513"
-> +SRC_URI[cgt6x_7.4.16_x86_installer.sha256sum] = "baa0d1ef20397383f99f45068a6d160963a01419d42fbbb851263b54c91df82f"
+> +export C6X_BASE_DIR="${TI_CGT6X_7_INSTALL_DIR}"
+> +export TOOLSC6X="${C6X_BASE_DIR}"
+> +export TOOLSC6XDOS="${C6X_BASE_DIR}"
+> +export TOOLSBIOSC6XDOS="${C6X_BASE_DIR}"
+> +export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
 > +
-> +do_install() {
-> +    install -d ${D}/${TI_CGT6X_7_INSTALL_DIR_RECIPE}
-> +    cp -r ${WORKDIR}/c6000_7.4.16/. ${D}/${TI_CGT6X_7_INSTALL_DIR_RECIPE}
+> +do_compile() {
+> +    cd src/make
+> +    for t in ${IBLTARGETS}
+> +    do
+> +        for e in ${IBLENDIAN}
+> +        do
+> +            make ${t} ENDIAN=${e} I2C_BUS_ADDR=0x51
+> +        done
+> +    done
+> +    cd -
 > +}
 > +
-> +FILES_${PN} += "${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
+> +do_install() {
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/ibl
+> +    cp -r * ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/ibl
+> +}
 > +
-> +INSANE_SKIP_${PN} += "arch staticdev"
+> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
 > +
 > +INHIBIT_PACKAGE_STRIP = "1"
 > +INHIBIT_SYSROOT_STRIP = "1"
 > +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+> +
+> +INSANE_SKIP_${PN} = "arch file-rdeps"
 
 
