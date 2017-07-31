@@ -1,51 +1,52 @@
-Return-Path: <denys@ti.com>
+Return-Path: <i-pang@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3380DE00C2C; Mon, 31 Jul 2017 11:19:17 -0700 (PDT)
+	id 22138E00C5F; Mon, 31 Jul 2017 15:05:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB91AE00BAF
-	for <meta-ti@yoctoproject.org>; Mon, 31 Jul 2017 11:19:16 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6VIJFev016616
-	for <meta-ti@yoctoproject.org>; Mon, 31 Jul 2017 13:19:15 -0500
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B377DE00BAF
+	for <meta-ti@yoctoproject.org>; Mon, 31 Jul 2017 15:05:43 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v6VM5gvY001990
+	for <meta-ti@yoctoproject.org>; Mon, 31 Jul 2017 17:05:42 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1501525155;
-	bh=pHwCelQCTpILy6XltDc0x+H03vZ8keJ7IXZiI0lQK94=;
-	h=From:To:CC:Subject:Date;
-	b=kO/KLfPQpp1jZH8SU6hDQ3X54MsU36JkOxR3+uDBatXBV6cjzbQRvQe1EBfYnVOJ8
-	5g/qEbzHnMIpxSths3QTb64JHOeJ48VbtdLijQV4MgcbFBrf0hBWvdj8Fk2Mh0Bm06
-	dMRneMK2E9uCy0IN6zVevTxtQir5dgeOljjxsV7g=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6VIJFnO008892
-	for <meta-ti@yoctoproject.org>; Mon, 31 Jul 2017 13:19:15 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 31 Jul 2017 13:19:15 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v6VIJFaI011295;	Mon, 31 Jul 2017 13:19:15 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+	s=ti-com-17Q1; t=1501538742;
+	bh=Iribw9dcylYyVSpoNV3ylyDgv4KByWELaF+xkZozK3w=;
+	h=From:To:Subject:Date;
+	b=ow28bYCuvR62iWKJO+8kOyoPi5k+YMHEoXmGoTy87wH59XgndhwaQU5T1oDwSddfA
+	YJ9FP2WvsnD1x3f0TtUrz4D3KQsDTEr5Kyt5ecAikkiM8HjadaWgkZO9PyGhPIzCdi
+	HU/1o9OS2ottMalRgGvVjue8yFTH9+NAhq706/IY=
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v6VM5gBo026969
+	for <meta-ti@yoctoproject.org>; Mon, 31 Jul 2017 17:05:42 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 31 Jul 2017 17:05:42 -0500
+Received: from uda0868762.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	v6VM5gTE009982	for <meta-ti@yoctoproject.org>; Mon, 31 Jul 2017 17:05:42
+	-0500
+From: Ivan Pang <i-pang@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 31 Jul 2017 14:19:05 -0400
-Message-ID: <1501525145-28076-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Mon, 31 Jul 2017 17:05:39 -0500
+Message-ID: <1501538742-10101-1-git-send-email-i-pang@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] libdce: Update PV and SRCREV
+Subject: [PATCH v3 1/4] ti-paths.inc: added path for TI CGT6x 7.x.x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,41 +59,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jul 2017 18:19:17 -0000
+X-List-Received-Date: Mon, 31 Jul 2017 22:05:45 -0000
 Content-Type: text/plain
 
-From: Karthik Ramanan <a0393906@ti.com>
+This directory path is for installing TI CGT6x 7.x.x as well as
+invoking the installation from other recipes.
 
-Updates to dce_test to print additional
-extendedError for VC1 and MPEG2
-
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Ivan Pang <i-pang@ti.com>
 ---
- .../{libdce_3.00.12.00.bb => libdce_3.00.13.00.bb} |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename recipes-multimedia/libdce/{libdce_3.00.12.00.bb => libdce_3.00.13.00.bb} (86%)
+ recipes-ti/includes/ti-paths.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-multimedia/libdce/libdce_3.00.12.00.bb b/recipes-multimedia/libdce/libdce_3.00.13.00.bb
-similarity index 86%
-rename from recipes-multimedia/libdce/libdce_3.00.12.00.bb
-rename to recipes-multimedia/libdce/libdce_3.00.13.00.bb
-index 1a2c104..0845605 100644
---- a/recipes-multimedia/libdce/libdce_3.00.12.00.bb
-+++ b/recipes-multimedia/libdce/libdce_3.00.13.00.bb
-@@ -7,9 +7,9 @@ inherit autotools pkgconfig
- DEPENDS = "libdrm ti-ipc"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index a7ea9a7..ebd4b8a 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -55,7 +55,7 @@ export VLIB_C66_INSTALL_DIR_RECIPE        = "${installdir}/ti-vlib-c66x-tree"
+ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+ export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
+ export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
+-
++export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
  
- SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
--SRCREV = "398dd27e7f3181fff9e3d910b418c69f1493f52f"
-+SRCREV = "75810b7bb53d2d076a96c2d1e2f8c61b3c12cb6b"
+ # This is where the tools will end up in sysroot
+ export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+@@ -101,6 +101,7 @@ export VLIB_C66_INSTALL_DIR        = "${STAGING_DIR_TARGET}${VLIB_C66_INSTALL_DI
+ export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIPE}"
+ export OMP_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMP_INSTALL_DIR_RECIPE}"
+ export MPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${MPM_INSTALL_DIR_RECIPE}"
++export TI_CGT6X_7_INSTALL_DIR   = "${STAGING_DIR_NATIVE}${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
  
--PR = "r4"
-+PR = "r0"
- 
- S = "${WORKDIR}/git"
- EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
 -- 
-1.7.9.5
+1.9.1
 
 
