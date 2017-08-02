@@ -1,6 +1,6 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 52722E00C9E; Wed,  2 Aug 2017 04:45:54 -0700 (PDT)
+	id AC39BE00C31; Wed,  2 Aug 2017 08:33:31 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,35 +17,46 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12F8AE00C19
-	for <meta-ti@yoctoproject.org>; Wed,  2 Aug 2017 04:45:52 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v72Bjqf2000909
-	for <meta-ti@yoctoproject.org>; Wed, 2 Aug 2017 06:45:52 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E048E00B28
+	for <meta-ti@yoctoproject.org>; Wed,  2 Aug 2017 08:33:29 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v72FXSD3016130
+	for <meta-ti@yoctoproject.org>; Wed, 2 Aug 2017 10:33:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1501674352;
-	bh=TF8rRs5NJPRXjnnCS4rlWhr7J/tRwyQxpkyMA9ppYOE=;
+	s=ti-com-17Q1; t=1501688008;
+	bh=qCwa+q6rHHTvMIzv+Oa3t8cQh2PwIjY+ksOo7klGW4M=;
 	h=From:To:CC:Subject:Date;
-	b=DCcd04UKVFtKgoL60f1uqGkTn9gtmo+sB2lj5Ln+N38Lhs5uaIyxvPta+XS7c1rUU
-	OLBKbBAQRv7QLhIL+CH4mbeHj9r7nX+ncoJk+mZmDlpC933bFVWgnj1eoVoi0VVmg8
-	x4BT4ianqh2ZD4tlh/syvFQsaf0rncVIfYkpnAR8=
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v72BjqHK012497
-	for <meta-ti@yoctoproject.org>; Wed, 2 Aug 2017 06:45:52 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 2 Aug 2017 06:45:51 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	v72Bjpeg000906;	Wed, 2 Aug 2017 06:45:51 -0500
-From: Sam Nelson <sam.nelson@ti.com>
+	b=pJy+QYjeBHlZHRPtads2dIGD/hWULmEXgs2d89Z8ZkBNx4DNDLpsbMJhNOgwfIpGA
+	5+2v4rVJvu7A2bnY7FcB16eYgAuYk/zmpHAEssS13IhMZdnlF402/aMrJNvXBFgJZH
+	WFA5hrKJL1ufAInZFBgVEkCMQm7eKCDpFLwqDNjM=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v72FXS76015568
+	for <meta-ti@yoctoproject.org>; Wed, 2 Aug 2017 10:33:28 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Wed, 2 Aug 2017 10:33:28 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Wed, 2 Aug 2017 10:33:28 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
+	Transport; Wed, 2 Aug 2017 10:33:28 -0500
+Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v72FXS57019463;
+	Wed, 2 Aug 2017 10:33:28 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 2 Aug 2017 07:45:49 -0400
-Message-ID: <1501674349-62298-1-git-send-email-sam.nelson@ti.com>
+Date: Wed, 2 Aug 2017 11:33:25 -0400
+Message-ID: <1501688005-39245-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [morty/master][PATCH v2] ti-ipc: Update to GA version 3.46.02.04
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [PATCH v3] uart-lld-rtos: Added rtos recipe for uart-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,118 +69,69 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Aug 2017 11:45:54 -0000
+X-List-Received-Date: Wed, 02 Aug 2017 15:33:31 -0000
 Content-Type: text/plain
 
-- Update ipcdev branch to 3.46 ( commit id remains same)
-- Adds support for c66x platforms
-- Update to avoid stripping for IPC rtos example binaries
+Upstreaming RTOS PDK driver for UART module
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
 
----
-Change from previous patch
--- Removing dra7xx update: arp32 not upstream
----
----
- recipes-ti/ipc/ti-ipc-common.inc      |  4 +++-
- recipes-ti/ipc/ti-ipc-examples_git.bb |  1 +
- recipes-ti/ipc/ti-ipc-rtos.inc        | 14 ++++++++++----
- recipes-ti/ipc/ti-ipc.inc             |  4 ++--
- 4 files changed, 16 insertions(+), 7 deletions(-)
+v3 - Added summary
+v2 - Adding description & merging in to a single recipe
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index d9956fc..f2df678 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,5 +1,5 @@
- PV = "3.46.02.04"
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
-@@ -11,5 +11,7 @@ PLATFORM_k2l-evm = "TCI6630"
- PLATFORM_k2e = "66AK2E"
- PLATFORM_k2g = "66AK2G"
- PLATFORM_omapl138 = "OMAPL138"
-+PLATFORM_c667x-evm = "C6678"
-+PLATFORM_c665x-evm = "C6678"
- 
- ALT_PLATFORM_k2hk = "TCI6636"
-diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-ti/ipc/ti-ipc-examples_git.bb
-index 40c3bc3..5717a83 100644
---- a/recipes-ti/ipc/ti-ipc-examples_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
-@@ -93,3 +93,4 @@ do_install() {
- 
- FILES_${PN} += "ipc_*"
- FILES_${PN}-linux += "${bindir}/*"
-+INHIBIT_PACKAGE_STRIP_${PN} = "1"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 7dc9602..5a34d4b 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,11 +24,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
- 
--# Corresponds to tag: 3.46.02.04_eng
-+# Corresponds to tag: 3.46.02.04
- SRCREV_ipc-examples = "b833c759d620b4218ece6d64fae91e4777ef823a"
- 
--# Corresponds to tag: 3.46.02.04_eng
--SRCREV_ipc-metadata = "bb07d3e00dcaf1074589e805be0a4ed2ada2d17c"
-+# Corresponds to tag: 3.46.02.04
-+SRCREV_ipc-metadata = "afdcf6855f05c97d2bb77867f4f150aed29c1b12"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-@@ -36,7 +36,7 @@ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- RELEASE_TYPE = "ENG"
- RELEASE_SUFFIX = "_eng"
- 
--PR = "${INC_PR}.r0"
-+PR = "${INC_PR}.r1"
- 
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
-@@ -47,6 +47,8 @@ DEPENDS_append_omap-a15 = " ti-cgt6x-native \
- "
- DEPENDS_append_omapl138 = " ti-cgt6x-native \
- "
-+DEPENDS_append_c66x = " ti-cgt6x-native \
+ recipes-bsp/uart-lld/uart-lld-rtos_git.bb | 42 +++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+ create mode 100644 recipes-bsp/uart-lld/uart-lld-rtos_git.bb
+
+diff --git a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
+new file mode 100644
+index 0000000..e8510b6
+--- /dev/null
++++ b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
+@@ -0,0 +1,42 @@
++SUMMARY = "TI RTOS low level driver for UART"
++DESCRIPTION = "TI RTOS low level driver for Universal Asynchronous Receiver/Transmitter (UART) module "
++
++inherit ti-pdk
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://UART.h;beginline=1;endline=31;md5=8580f9c5c0de8d5d13518cf18a0122b8"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++UART_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/uart-lld.git"
++UART_LLD_GIT_PROTOCOL = "git"
++UART_LLD_GIT_BRANCH = "master"
++
++# Below commit ID corresponds to "DEV.UART_LLD.01.00.00.07A"
++UART_LLD_SRCREV = "884e340f5d2f004de99e44f014fedb781f1fb975"
++
++BRANCH = "${UART_LLD_GIT_BRANCH}"
++SRC_URI = "${UART_LLD_GIT_URI};protocol=${UART_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${UART_LLD_SRCREV}"
++PV = "01.00.00.07A"
++PR = "r0"
++
++DEPENDS_append = " edma3-lld-rtos \
++                   osal-rtos \
 +"
- 
- IPC_TARGETS = ""
- 
-@@ -66,6 +68,10 @@ IPC_TARGETS_keystone = " \
-     ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-     ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
- "
-+IPC_TARGETS_c66x = " \
-+    ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-+    ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
-+"
- 
- EXTRA_OEMAKE = "\
-     PLATFORM=${PLATFORM} \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 06c087a..c3742c1 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "ipc-next"
-+TI_IPC_GIT_BRANCH = "3.46"
- 
--#Corresponds to 3.46.02.04_eng
-+#Corresponds to 3.46.02.04
- TI_IPC_SRCREV = "bf355e7d0f5c3993f56a6ea778743b656ef6b536"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
++DEPENDS_append_ti33x = " starterware-rtos"
++DEPENDS_append_ti43x = " starterware-rtos"
++
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
++
++export PDK_UART_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
++
++export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
++XDCPATH_append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
++
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "UART LLD"
 -- 
 1.9.1
 
