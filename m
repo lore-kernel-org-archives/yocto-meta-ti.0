@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A4F86E00B8D; Mon,  7 Aug 2017 12:18:03 -0700 (PDT)
+	id 83098E00C01; Tue,  8 Aug 2017 08:31:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,38 +17,46 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 720B7E00B53
-	for <meta-ti@yoctoproject.org>; Mon,  7 Aug 2017 12:18:01 -0700 (PDT)
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76FD9E00970
+	for <meta-ti@yoctoproject.org>; Tue,  8 Aug 2017 08:31:42 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v77JI1jp008583
-	for <meta-ti@yoctoproject.org>; Mon, 7 Aug 2017 14:18:01 -0500
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v78FVfoZ008150
+	for <meta-ti@yoctoproject.org>; Tue, 8 Aug 2017 10:31:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1502133481;
-	bh=+965S5BMnVZGby2QwYUYg+23fXRAk4qDjudAvXMGVR0=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=W3L/C0Y2gCGWP5GXAwwEDBTKFc2SPUCN5j+5z5saO7hBe8I9mWg1he+3vH5JNARNL
-	f8OKZdc9oT6MsdDDkrUps53UoCYPIhw0CxBypmGXVodLUsmQZs4TdkWp4yEfjDY7Ub
-	Ew6wym4gTVkgFlE5syDYA1+HHURcED2cXs69DRtE=
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v77JI1Yk028229
-	for <meta-ti@yoctoproject.org>; Mon, 7 Aug 2017 14:18:01 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 7 Aug 2017 14:18:01 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v77JI1wQ031285;
-	Mon, 7 Aug 2017 14:18:01 -0500
-Date: Mon, 7 Aug 2017 15:17:57 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-Message-ID: <20170807191757.GK11104@edge>
-References: <1501797001-35113-1-git-send-email-m-radhakrishnan2@ti.com>
+	s=ti-com-17Q1; t=1502206301;
+	bh=QU8S4kpmC8TBQXxpNArN22rir/rOzw818GEuqfq19Sk=;
+	h=From:To:CC:Subject:Date;
+	b=ojqT/kyElHEMz3Jq2EtuffLaqWHA5tBNu3G+BQuqLKt6bwwvsPL6o0u8VQt9ED4H2
+	//D4VZGDpVvE4fFtCZl0K3QHvR0L+UG6iY0UHemHgLQCLlNqHlv8BG8Vw6JlGCsA/8
+	Cgdb7x9BCqnOcfqwSvaqqY3P93obi6yGKn9w6Sgg=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v78FVfia007600
+	for <meta-ti@yoctoproject.org>; Tue, 8 Aug 2017 10:31:41 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Tue, 8 Aug 2017 10:31:41 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Tue, 8 Aug 2017 10:31:41 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
+	Transport; Tue, 8 Aug 2017 10:31:41 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v78FVf5Q013571;
+	Tue, 8 Aug 2017 10:31:41 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 8 Aug 2017 11:31:39 -0400
+Message-ID: <1502206299-670-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1501797001-35113-1-git-send-email-m-radhakrishnan2@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ti-pdk-bbclass: Enabling support for pru firmware builds
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [morty/master][PATCH] ti-ipc: Update source release type to GA
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,62 +69,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Aug 2017 19:18:03 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Aug 2017 15:31:43 -0000
+Content-Type: text/plain
 
-On Thu, Aug 03, 2017 at 05:50:01PM -0400, Mahesh Radhakrishnan wrote:
-> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-> ---
->  classes/ti-pdk.bbclass | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
-> 
-> diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-> index 62a4b06..1753969 100644
-> --- a/classes/ti-pdk.bbclass
-> +++ b/classes/ti-pdk.bbclass
-> @@ -5,7 +5,10 @@ inherit perlnative
->  
->  DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-pdk-build-rtos"
->  
-> -DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
-> +DEPENDS_append_omap-a15 = " ti-cgt-arm-native ti-cgt-pru-native"
+- removes _eng tag from source package created
 
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-rtos.inc | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-> +DEPENDS_append_k2g = "ti-cgt-pru-native"
-> +DEPENDS_append_ti33x = "ti-cgt-pru-native"
-> +DEPENDS_append_ti43x = "ti-cgt-pru-native"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 5a34d4b..a7c1b3a 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -33,10 +33,10 @@ SRCREV_ipc-metadata = "afdcf6855f05c97d2bb77867f4f150aed29c1b12"
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ 
+-RELEASE_TYPE = "ENG"
+-RELEASE_SUFFIX = "_eng"
++RELEASE_TYPE = "GA"
++RELEASE_SUFFIX = ""
+ 
+-PR = "${INC_PR}.r1"
++PR = "${INC_PR}.r2"
+ 
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+@@ -79,4 +79,5 @@ EXTRA_OEMAKE = "\
+     BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
+     ${IPC_TARGETS} \
+     JOBS="--jobs=${BB_NUMBER_THREADS}" \
++    JAVA_TOOL_OPTIONS=-Xss2560k \
+ "
+-- 
+1.9.1
 
-These lines ^^^ corrupt the DEPENDS variable when they append new values w/o 
-whitespaces.
-
-
->  DEPENDS_remove_ti33x = "ti-cgt6x-native"
->  DEPENDS_remove_ti43x = "ti-cgt6x-native"
->  DEPENDS_append_omapl1 = " ti-cgt-arm-native"
-> @@ -41,6 +44,7 @@ export TOOLCHAIN_PATH_A15 = "${GCC_ARM_NONE_TOOLCHAIN}"
->  export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
->  export TOOLCHAIN_PATH_Arm9 = "${M4_TOOLCHAIN_INSTALL_DIR}"
->  export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-> +export CL_PRU_INSTALL_PATH = "${TI_CGT_PRU_INSTALL_DIR}"
->  
->  export ROOTDIR = "${B}"
->  export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
-> @@ -53,7 +57,7 @@ export SECTTI="perl ${CG_XML_INSTALL_DIR}/ofd/sectti.pl"
->  TI_PDK_XDCMAKE ?= "1"
->  
->  # By default, only build the cores with available toolchains
-> -TI_PDK_LIMIT_CORES ?= "a15_0 ipu1_0 ipu1_1 ipu2_0 ipu2_1 c66x c66xdsp_1 c66xdsp_2 arm9_0 c674x a9host a8host"
-> +TI_PDK_LIMIT_CORES ?= "a15_0 ipu1_0 ipu1_1 ipu2_0 ipu2_1 c66x c66xdsp_1 c66xdsp_2 arm9_0 c674x a9host a8host pru_0 pru_1"
->  TI_PDK_LIMIT_SOCS ?= ""
->  TI_PDK_LIMIT_BOARDS ?= ""
->  TI_PDK_MAKE_TARGET ?= "release"
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
