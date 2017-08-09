@@ -1,6 +1,6 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 83098E00C01; Tue,  8 Aug 2017 08:31:43 -0700 (PDT)
+	id 14E75E009A4; Wed,  9 Aug 2017 06:09:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,45 +18,48 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76FD9E00970
-	for <meta-ti@yoctoproject.org>; Tue,  8 Aug 2017 08:31:42 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v78FVfoZ008150
-	for <meta-ti@yoctoproject.org>; Tue, 8 Aug 2017 10:31:41 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C893E0090A
+	for <meta-ti@yoctoproject.org>; Wed,  9 Aug 2017 06:09:20 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v79D9Jck009420
+	for <meta-ti@yoctoproject.org>; Wed, 9 Aug 2017 08:09:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1502206301;
-	bh=QU8S4kpmC8TBQXxpNArN22rir/rOzw818GEuqfq19Sk=;
+	s=ti-com-17Q1; t=1502284159;
+	bh=UCA9CgRpA4IzEoVVkrPkgWFbIRJKVqXklwXUMoBR7ik=;
 	h=From:To:CC:Subject:Date;
-	b=ojqT/kyElHEMz3Jq2EtuffLaqWHA5tBNu3G+BQuqLKt6bwwvsPL6o0u8VQt9ED4H2
-	//D4VZGDpVvE4fFtCZl0K3QHvR0L+UG6iY0UHemHgLQCLlNqHlv8BG8Vw6JlGCsA/8
-	Cgdb7x9BCqnOcfqwSvaqqY3P93obi6yGKn9w6Sgg=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v78FVfia007600
-	for <meta-ti@yoctoproject.org>; Tue, 8 Aug 2017 10:31:41 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	b=r4fY+qo9ts656WV+CSaoVywsISeAyL9/KATV5EvlPCtEEETx1LSkIygEEYF6Dx0eC
+	agafnVzy+YMk8U/m9Lm1zyedFbQ7iOnbLPsAytJ/KZ+uUfNtDnMxR6Uqb6/bb7BKFx
+	zxdiTNvN00cavxSyWJblQwyxuscpeWdQbHXaPQ8A=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v79D9Joe025119
+	for <meta-ti@yoctoproject.org>; Wed, 9 Aug 2017 08:09:19 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 8 Aug 2017 10:31:41 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 9 Aug 2017 08:09:19 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 8 Aug 2017 10:31:41 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE100.ent.ti.com
-	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 9 Aug 2017 08:09:19 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 8 Aug 2017 10:31:41 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v78FVf5Q013571;
-	Tue, 8 Aug 2017 10:31:41 -0500
-From: Sam Nelson <sam.nelson@ti.com>
+	Transport; Wed, 9 Aug 2017 08:09:19 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v79D9JNa027662;
+	Wed, 9 Aug 2017 08:09:19 -0500
+Received: from localhost (a0272616local-lt.dhcp.ti.com [128.247.59.156])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	v79D9J323939; Wed, 9 Aug 2017 08:09:19 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 8 Aug 2017 11:31:39 -0400
-Message-ID: <1502206299-670-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 9 Aug 2017 08:09:13 -0500
+Message-ID: <20170809130914.2904-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/master][PATCH] ti-ipc: Update source release type to GA
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2017.03-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,41 +72,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 15:31:43 -0000
+X-List-Received-Date: Wed, 09 Aug 2017 13:09:21 -0000
 Content-Type: text/plain
 
-- removes _eng tag from source package created
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-rtos.inc | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 5a34d4b..a7c1b3a 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -33,10 +33,10 @@ SRCREV_ipc-metadata = "afdcf6855f05c97d2bb77867f4f150aed29c1b12"
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index b45c7b10..41c1c052 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
--RELEASE_TYPE = "ENG"
--RELEASE_SUFFIX = "_eng"
-+RELEASE_TYPE = "GA"
-+RELEASE_SUFFIX = ""
+ BRANCH = "ti-rt-linux-4.9.y"
  
--PR = "${INC_PR}.r1"
-+PR = "${INC_PR}.r2"
+-SRCREV = "c13c9194a632f30247df031b5579f03263a0b00b"
++SRCREV = "79149b757ed45f1050b519ba353cd180dc48604c"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index d8cbd921..fc39dfec 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
  
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
-@@ -79,4 +79,5 @@ EXTRA_OEMAKE = "\
-     BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
-     ${IPC_TARGETS} \
-     JOBS="--jobs=${BB_NUMBER_THREADS}" \
-+    JAVA_TOOL_OPTIONS=-Xss2560k \
- "
+ BRANCH = "ti-lsk-linux-4.9.y"
+ 
+-SRCREV = "5db0c78496883e0808d2b3e53d6ec9572eef4586"
+-PV = "4.9.40+git${SRCPV}"
++SRCREV = "7448cce4e5c0163d96dae0040e51153fefc12c92"
++PV = "4.9.41+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 -- 
-1.9.1
+2.13.2.516.ge629a7d28
 
 
