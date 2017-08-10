@@ -1,38 +1,68 @@
-Return-Path: <denys@ti.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0CFB6E00B87; Wed,  9 Aug 2017 12:22:29 -0700 (PDT)
+	id 4AA9BE00B87; Thu, 10 Aug 2017 05:47:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, RCVD_IN_DNSWL_NONE,
+	RCVD_IN_SORBS_SPAM, URI_HEX autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (ankur.tyagi85[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.192.196 listed in list.dnswl.org]
+	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
+	*      [209.85.192.196 listed in dnsbl.sorbs.net]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63EA9E00B65
-	for <meta-ti@yoctoproject.org>; Wed,  9 Aug 2017 12:22:28 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8694820AC9;
-	Wed,  9 Aug 2017 19:22:27 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 8uTffu9Za062; Wed,  9 Aug 2017 19:22:27 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 66B2D2014D;
-	Wed,  9 Aug 2017 19:22:26 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id EA074162565;
-	Wed,  9 Aug 2017 15:22:25 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 480EDE00B6F
+	for <meta-ti@yoctoproject.org>; Thu, 10 Aug 2017 05:47:55 -0700 (PDT)
+Received: by mail-pf0-f196.google.com with SMTP id t83so592864pfj.3
+	for <meta-ti@yoctoproject.org>; Thu, 10 Aug 2017 05:47:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=DiByHYX9VldWyGwW6QjJ8LT53tUn2HlErKXZ93JH66I=;
+	b=nPgjHxvF9obr/AWqYd5MhAtudn6n5EfK4c3V0ca7GPfLwKOMXnTwjxP41hrKZvU4nn
+	JwEKxyMR5G7hfcXhAEC8MABYTxyvXMuUN+9cf/djGU8+lRUogvJUoNHeUpIWqzjC+ccm
+	3snjBZmxi57CWb2i//RvvTbpmGLhzn+97Y2do850LbG4vETV10yHODpzDzNCWtKIWFHh
+	6l9+R67YuwiKlqiZ6iOOFfxwQxSUvEITxVNRddiZEc7x18eZy/RdI6509uGaCloKwQdx
+	NJREDqsKuqhA/cvYIaMwqXKLBMYktQtaiP9FEfveMsbTqrDTI9AUFvBe9gywQmE42a7l
+	kwfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=DiByHYX9VldWyGwW6QjJ8LT53tUn2HlErKXZ93JH66I=;
+	b=WUGF2TkR7o8uvunX5+R8PLvpWYap354GFrscaX4ep3gcuD5oZ7R9OJDuXtM3E/UuDs
+	zPYyTjpTLOy1Mvy3HVyRwmNJItd7+jX/DR64wNxksFvwrlj1pW0QljwL6YfhXJ9e1mS4
+	cHKHi6W/q9wh4oltYka+QgSTb677p0DzR1RwwkwRxTcZwBKLglwBrfQSQr4epRZhkzx/
+	C+fcGm6Br3mfCxgxoqtrNf1GDOREtC1gSBnXngSv5SxWZaaFjsFvdyp2dTjj8Sxgv8//
+	7g5DLJlFqYBgLorYqhUg5KELicTCxr9Z129CGzHNHfvpgPMWUPa8Km44HbQCEeBSlthj
+	VRVw==
+X-Gm-Message-State: AHYfb5hPehWRtgTU0e/gQwCNGrDOdnAD8rTOZzv28BXjS4UUzt2rh8Xx
+	Zi5e5yFlhMETIs9/
+X-Received: by 10.99.181.29 with SMTP id y29mr11379353pge.135.1502369274918;
+	Thu, 10 Aug 2017 05:47:54 -0700 (PDT)
+Received: from localhost.localdomain (103-224-128-49.flip.co.nz.
+	[103.224.128.49]) by smtp.gmail.com with ESMTPSA id
+	z83sm12604019pfd.10.2017.08.10.05.47.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 10 Aug 2017 05:47:53 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed,  9 Aug 2017 15:22:24 -0400
-Message-Id: <1502306544-82285-1-git-send-email-denys@ti.com>
+Date: Fri, 11 Aug 2017 00:47:24 +1200
+Message-Id: <1502369244-9597-1-git-send-email-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [morty/master][PATCH] ti-ipc-rtos: add default symlinks for Keystone DSP firmware images
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: ti-sgx-ddk-um_1.14.3699939: check for wayland in DISTRO_FEATURES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,53 +75,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Aug 2017 19:22:29 -0000
+X-List-Received-Date: Thu, 10 Aug 2017 12:47:57 -0000
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- recipes-ti/ipc/ti-ipc-rtos_git.bb | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 01ef7a0..f4eefa8 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -72,8 +72,35 @@ do_install() {
-   cp ${CP_ARGS} ${S}/packages/ti/ipc/tests/bin/* ${D}${base_libdir}/firmware/ipc || true
- }
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 60f63aa..593e405 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -34,8 +34,9 @@ inherit update-rc.d
+ PR = "r26"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
  
-+KFDSPNUM = "0"
-+KFDSPNUM_k2hk = "8"
-+KFDSPNUM_k2l-evm = "4"
-+KFDSPNUM_keystone = "1"
-+
-+KFPLAT = ""
-+KFPLAT_k2hk = "TCI6638K2K"
-+KFPLAT_k2l-evm = "TCI6630K2L"
-+KFPLAT_k2e = "C66AK2E"
-+KFPLAT_k2g = "TCI66AK2G02"
-+
- ALTERNATIVE_PRIORITY = "5"
+-DEPENDS += "libdrm udev libgbm wayland libffi"
+-RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
++WAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
++DEPENDS += "libdrm udev libgbm ${WAYLAND} libffi"
++RDEPENDS_${PN} += "libdrm libudev libgbm ${WAYLAND} libffi libdrm-omap"
  
-+pkg_postinst_${PN}-fw_keystone () {
-+  i=0
-+  while [ $i -lt ${KFDSPNUM} ]; do
-+    update-alternatives --install /lib/firmware/keystone-dsp$i-fw keystone-dsp$i-fw ipc/ti_platforms_evm${KFPLAT}_core0/messageq_single.xe66 ${ALTERNATIVE_PRIORITY}
-+    i=$(($i + 1))
-+  done
-+}
-+
-+pkg_postrm_${PN}-fw_keystone () {
-+  i=0
-+  while [ $i -lt ${KFDSPNUM} ]; do
-+    update-alternatives --remove keystone-dsp$i-fw ipc/ti_platforms_evm${KFPLAT}_core0/messageq_single.xe66
-+    i=$(($i + 1))
-+  done
-+}
-+
- pkg_postinst_${PN}-fw_omap-a15 () {
-   update-alternatives --install /lib/firmware/dra7-dsp1-fw.xe66 dra7-dsp1-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp1/test_omx_dsp1_vayu.xe66 ${ALTERNATIVE_PRIORITY}
-   update-alternatives --install /lib/firmware/dra7-dsp2-fw.xe66 dra7-dsp2-fw.xe66 ipc/ti_platforms_evmDRA7XX_dsp2/test_omx_dsp2_vayu.xe66 ${ALTERNATIVE_PRIORITY}
+ RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+ RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
+@@ -63,7 +64,7 @@ FILES_${PN} +=  "${includedir}/*"
+ FILES_${PN} +=  "${sysconfdir}/*"
+ 
+ PACKAGES =+ "${PN}-plugins"
+-FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
++FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '${libdir}/libpvrws_WAYLAND.so', '', d)}"
+ RDEPENDS_${PN} += "${PN}-plugins"
+ 
+ ALLOW_EMPTY_${PN}-plugins = "1"
 -- 
 2.7.4
 
