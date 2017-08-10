@@ -1,20 +1,15 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4AA9BE00B87; Thu, 10 Aug 2017 05:47:57 -0700 (PDT)
+	id E7F13E00C1B; Thu, 10 Aug 2017 13:38:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, RCVD_IN_DNSWL_NONE,
-	RCVD_IN_SORBS_SPAM, URI_HEX autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (ankur.tyagi85[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.192.196 listed in list.dnswl.org]
-	*  0.5 RCVD_IN_SORBS_SPAM RBL: SORBS: sender is a spam source
-	*      [209.85.192.196 listed in dnsbl.sorbs.net]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -22,47 +17,42 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 480EDE00B6F
-	for <meta-ti@yoctoproject.org>; Thu, 10 Aug 2017 05:47:55 -0700 (PDT)
-Received: by mail-pf0-f196.google.com with SMTP id t83so592864pfj.3
-	for <meta-ti@yoctoproject.org>; Thu, 10 Aug 2017 05:47:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=DiByHYX9VldWyGwW6QjJ8LT53tUn2HlErKXZ93JH66I=;
-	b=nPgjHxvF9obr/AWqYd5MhAtudn6n5EfK4c3V0ca7GPfLwKOMXnTwjxP41hrKZvU4nn
-	JwEKxyMR5G7hfcXhAEC8MABYTxyvXMuUN+9cf/djGU8+lRUogvJUoNHeUpIWqzjC+ccm
-	3snjBZmxi57CWb2i//RvvTbpmGLhzn+97Y2do850LbG4vETV10yHODpzDzNCWtKIWFHh
-	6l9+R67YuwiKlqiZ6iOOFfxwQxSUvEITxVNRddiZEc7x18eZy/RdI6509uGaCloKwQdx
-	NJREDqsKuqhA/cvYIaMwqXKLBMYktQtaiP9FEfveMsbTqrDTI9AUFvBe9gywQmE42a7l
-	kwfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=DiByHYX9VldWyGwW6QjJ8LT53tUn2HlErKXZ93JH66I=;
-	b=WUGF2TkR7o8uvunX5+R8PLvpWYap354GFrscaX4ep3gcuD5oZ7R9OJDuXtM3E/UuDs
-	zPYyTjpTLOy1Mvy3HVyRwmNJItd7+jX/DR64wNxksFvwrlj1pW0QljwL6YfhXJ9e1mS4
-	cHKHi6W/q9wh4oltYka+QgSTb677p0DzR1RwwkwRxTcZwBKLglwBrfQSQr4epRZhkzx/
-	C+fcGm6Br3mfCxgxoqtrNf1GDOREtC1gSBnXngSv5SxWZaaFjsFvdyp2dTjj8Sxgv8//
-	7g5DLJlFqYBgLorYqhUg5KELicTCxr9Z129CGzHNHfvpgPMWUPa8Km44HbQCEeBSlthj
-	VRVw==
-X-Gm-Message-State: AHYfb5hPehWRtgTU0e/gQwCNGrDOdnAD8rTOZzv28BXjS4UUzt2rh8Xx
-	Zi5e5yFlhMETIs9/
-X-Received: by 10.99.181.29 with SMTP id y29mr11379353pge.135.1502369274918;
-	Thu, 10 Aug 2017 05:47:54 -0700 (PDT)
-Received: from localhost.localdomain (103-224-128-49.flip.co.nz.
-	[103.224.128.49]) by smtp.gmail.com with ESMTPSA id
-	z83sm12604019pfd.10.2017.08.10.05.47.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 10 Aug 2017 05:47:53 -0700 (PDT)
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Fri, 11 Aug 2017 00:47:24 +1200
-Message-Id: <1502369244-9597-1-git-send-email-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: ti-sgx-ddk-um_1.14.3699939: check for wayland in DISTRO_FEATURES
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C072CE00C09
+	for <meta-ti@yoctoproject.org>; Thu, 10 Aug 2017 13:38:11 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7AKcA9r001579
+	for <meta-ti@yoctoproject.org>; Thu, 10 Aug 2017 15:38:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1502397490;
+	bh=bZVoQiYX/lt8i74tZgRjb+Dngv0S0bApmzRlrXWHP+4=;
+	h=From:To:CC:Subject:Date;
+	b=nRUQHUkgjWSTFyrzQlh270W6ocpL93b0cyLx3ABqgafSg6VkCIKiE9xZQ3/XycQQR
+	X0pCLo15R/GYxS/jsYrYxbmBOKe+PlOzYTWMG+vzjGVUUJMYVgSCjABhvNGUxx4rky
+	L3xCsI4nxlzw68BVncoBIkiZj+pwClvhsPADgm7E=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7AKcAYe016640
+	for <meta-ti@yoctoproject.org>; Thu, 10 Aug 2017 15:38:10 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Thu, 10 Aug 2017 15:38:10 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
+	Transport; Thu, 10 Aug 2017 15:38:10 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7AKcAID032008;
+	Thu, 10 Aug 2017 15:38:10 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 10 Aug 2017 16:38:08 -0400
+Message-ID: <1502397488-7241-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [morty/master][PATCH] multiprocmgr: Update to new version 3.0.4.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,39 +65,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Aug 2017 12:47:57 -0000
+X-List-Received-Date: Thu, 10 Aug 2017 20:38:13 -0000
+Content-Type: text/plain
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ recipes-ti/multiprocmgr/multiprocmgr.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 60f63aa..593e405 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -34,8 +34,9 @@ inherit update-rc.d
- PR = "r26"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
+index 441f44a..0231aaf 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr.inc
++++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
+@@ -8,10 +8,10 @@ MULTIPROCMGR_GIT_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git"
+ MULTIPROCMGR_GIT_PROTOCOL = "git"
+ MULTIPROCMGR_GIT_BRANCH = "master"
  
--DEPENDS += "libdrm udev libgbm wayland libffi"
--RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
-+WAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
-+DEPENDS += "libdrm udev libgbm ${WAYLAND} libffi"
-+RDEPENDS_${PN} += "libdrm libudev libgbm ${WAYLAND} libffi libdrm-omap"
+-# The following commits correspond to DEV.MPM-3.00.03.00
+-MULTIPROCMGR_SRCREV = "c18c02bb655bae5c88d357b5810ccc69e6f1e128"
++# The following commits correspond to DEV.MPM-3.00.04.00
++MULTIPROCMGR_SRCREV = "	21579a066b469ff4620e7cff12803ae152880bb5"
  
- RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
- RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-@@ -63,7 +64,7 @@ FILES_${PN} +=  "${includedir}/*"
- FILES_${PN} +=  "${sysconfdir}/*"
+-PV = "3.0.3.0"
++PV = "3.0.4.0"
+ INC_PR = "r0"
  
- PACKAGES =+ "${PN}-plugins"
--FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
-+FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '${libdir}/libpvrws_WAYLAND.so', '', d)}"
- RDEPENDS_${PN} += "${PN}-plugins"
- 
- ALLOW_EMPTY_${PN}-plugins = "1"
+ BRANCH = "${MULTIPROCMGR_GIT_BRANCH}"
 -- 
-2.7.4
+1.9.1
 
 
