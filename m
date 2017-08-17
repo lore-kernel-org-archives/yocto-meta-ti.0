@@ -1,6 +1,6 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3C4DFE00D3D; Thu, 17 Aug 2017 08:54:52 -0700 (PDT)
+	id 5E26DE00D7F; Thu, 17 Aug 2017 09:02:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=0.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	URI_HEX autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
+	*      [198.47.27.77 listed in list.dnswl.org]
 	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
@@ -20,46 +20,44 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  1.6 URIBL_SBL Contains an URL's NS IP listed in the SBL blocklist
 	*      [URIs: yoctoproject.org]
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60959E009A4
-	for <meta-ti@yoctoproject.org>; Thu, 17 Aug 2017 08:54:49 -0700 (PDT)
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1B15E009A4
+	for <meta-ti@yoctoproject.org>; Thu, 17 Aug 2017 09:02:29 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7HFsmUD029648;
-	Thu, 17 Aug 2017 10:54:48 -0500
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7HG2SjY028345;
+	Thu, 17 Aug 2017 11:02:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1502985288;
-	bh=PHoAtPca5Fq6Y/GWJ9l/6d67AJ1H3Ffwes4MJeOeYb8=;
+	s=ti-com-17Q1; t=1502985748;
+	bh=78Io5jFnq+QZNTTNqBcENuTJ7K6S8QvHtCu1XcOIsK0=;
 	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=M4tKeja2ED7QT5ZKL0iSpB4haCLWmjMaYEWFg8NeCVFIMLcDLiurX50/j+ABADk00
-	mLL+jVxpmTW0vXT3WfF+CFnDhVmoParehIN4PuWdRndhjU7l+E959Ap7ys3gCdLBIE
-	8AuR6ZDNee1LaTwdwVMDlRsRK5ub7EjXvPayv0II=
-Received: from dbdlxv05.itg.ti.com (dbdlxv05.itg.ti.com [172.24.171.60])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7HFslE3017164;
-	Thu, 17 Aug 2017 10:54:48 -0500
-Received: from DBDE72.ent.ti.com (dbdmailx.itg.ti.com [172.24.171.97])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7HFsjvI032114;
-	Thu, 17 Aug 2017 21:24:46 +0530
-Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
-	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
-	14.03.0294.000; Thu, 17 Aug 2017 21:24:44 +0530
-From: "R, Karthik" <karthik.ramanan@ti.com>
+	b=adZqi9DekpTij8stEqaxBhKdFsP0tQkzaypFzyYCQrFD+XZD7lw69fxdafbiRQg94
+	GU4Aw82lNw8pUfnIdPwfBom8Gt2YkTlQn2PRTgjtl5zm3XdhDqh6C5gKXRrtvagaxt
+	ZYmzhH5QNzNivddW6OMeelPUyqjUusa2yrjnu9mQ=
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7HG2Sun030390;
+	Thu, 17 Aug 2017 11:02:28 -0500
+Received: from DFLE09.ent.ti.com ([fe80::7090:147d:b5eb:4c12]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0294.000; Thu, 17 Aug 2017 11:02:27 -0500
+From: "Ruei, Eric" <e-ruei1@ti.com>
 To: "Dmytriyenko, Denys" <denys@ti.com>, Ankur Tyagi <ankur.tyagi85@gmail.com>
 Thread-Topic: [meta-ti] ti-sgx-ddk-um_1.14.3699939: check for wayland in
 	DISTRO_FEATURES
-Thread-Index: AQHTFsxmnBtlfB5gk0Wfezgb0RBhI6KItHxg
-Date: Thu, 17 Aug 2017 15:54:43 +0000
-Message-ID: <24B88602B5904F49971CAF899152529B82106DAA@DBDE04.ent.ti.com>
+Thread-Index: AQHTFsxk+tA0O+Xr1UOSi4hyDiG7XqKIrm0w
+Date: Thu, 17 Aug 2017 16:02:27 +0000
+Message-ID: <009C030982313E4589C6BC55FBF1E82A2539F2E4@DFLE09.ent.ti.com>
 References: <1502369244-9597-1-git-send-email-ankur.tyagi85@gmail.com>
 	<20170811200720.GQ19736@edge>
 	<CADySD0HZjR_GWuEPwe0qF_XO+g4xPZfXiK3m+iDrpH4-VFSzvg@mail.gmail.com>
 	<20170816201519.GG19736@edge>
 In-Reply-To: <20170816201519.GG19736@edge>
-Accept-Language: en-IN, en-US
+Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.24.171.115]
+x-originating-ip: [10.172.224.221]
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "R,
+	Karthik" <karthik.ramanan@ti.com>
 Subject: Re: ti-sgx-ddk-um_1.14.3699939: check for wayland in DISTRO_FEATURES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -73,22 +71,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 15:54:52 -0000
+X-List-Received-Date: Thu, 17 Aug 2017 16:02:30 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Denys, Ankur,
+Hi, Denys:
 
-Wasn't able to look at this one today.=20
-I will come back to you on this either tomorrow or latest by Monday.
+Yes, we can make PLSDK image with Weston disabled by removing wayland from =
+the DISTRO_FEATURES list.
+Conf/local.conf:
+DISTRO_FEATURES_remove =3D "wayland"
 
-Regards
-Karthik
+Therefore QT will use eglfs as the default QPA.
+
+However, some of the wayland related libraries and components are still pre=
+sent at the target file system.
+There is no need to update ti-sgx-ddk-um_1.14.3699939 recipe and SGX should=
+ work by using libpvrDRMWSEGL.so.
+
+Best regards,
+
+Eric
+
 
 -----Original Message-----
 From: Dmytriyenko, Denys=20
-Sent: Thursday, 17 August, 2017 1:45 AM
+Sent: Wednesday, August 16, 2017 4:15 PM
 To: Ankur Tyagi
 Cc: meta-ti@yoctoproject.org; Ruei, Eric; R, Karthik
 Subject: Re: [meta-ti] ti-sgx-ddk-um_1.14.3699939: check for wayland in DIS=
