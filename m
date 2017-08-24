@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2071E00B3D; Thu, 24 Aug 2017 12:52:21 -0700 (PDT)
+	id 61830E00B3D; Thu, 24 Aug 2017 12:53:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,44 +18,44 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6DF45E0090A
-	for <meta-ti@yoctoproject.org>; Thu, 24 Aug 2017 12:52:19 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7OJq9jW031514
-	for <meta-ti@yoctoproject.org>; Thu, 24 Aug 2017 14:52:09 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6EFCDE0090A
+	for <meta-ti@yoctoproject.org>; Thu, 24 Aug 2017 12:53:54 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7OJrheW031887
+	for <meta-ti@yoctoproject.org>; Thu, 24 Aug 2017 14:53:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1503604329;
-	bh=1wlM6hFvNCU7i8MP54MRRf4vPiLLxIYQVZZZtI1qwXY=;
+	s=ti-com-17Q1; t=1503604423;
+	bh=UzuIG7TbcYLU1RwdOuoPE2t81FTUOFtHJHGr7/wlQ20=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=xiQi6nVfnSacKaBvV9w5m3OpeHRNv+oPMQPgk/02KUVYqPCxjfyN7mj03zwdq2eCQ
-	OUDZ0PF/V2Gbp+HorZ/6tJ5snitK6ol7xgFtAQuxRKqfJjPTzRyyIQrSZ1Wc42WwRe
-	SLviZx6oHhsYzkzEDbK/0QX+9+SVG53v2FYoy38g=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7OJq4R9011903
-	for <meta-ti@yoctoproject.org>; Thu, 24 Aug 2017 14:52:04 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+	b=XG82B90doYRBu7QRkkqJj8/qbnzw7ETScuS2pNUjbdI2v3RqdMOan2Z08jlMB2EqF
+	yF9AbdSL04IKDZ/fNwSVWJOttydmdzvsDS48yfTuJH7tfieKhVDd2FLmjTOfksJhPM
+	2WwxDtUNbAzN1t0MNU+CHzSJDbEyhARVtgfTvvbM=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7OJrcBj032370
+	for <meta-ti@yoctoproject.org>; Thu, 24 Aug 2017 14:53:38 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Thu, 24 Aug 2017 14:52:04 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
+	Thu, 24 Aug 2017 14:53:38 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE111.ent.ti.com
+	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Thu, 24 Aug 2017 14:52:03 -0500
+	Transport; Thu, 24 Aug 2017 14:53:38 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7OJq3Mv022809;
-	Thu, 24 Aug 2017 14:52:03 -0500
-Date: Thu, 24 Aug 2017 15:51:59 -0400
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7OJrc0p030332;
+	Thu, 24 Aug 2017 14:53:38 -0500
+Date: Thu, 24 Aug 2017 15:53:34 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-Message-ID: <20170824195159.GH28233@edge>
+Message-ID: <20170824195334.GI28233@edge>
 References: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
-	<1500419028-3361-25-git-send-email-m-radhakrishnan2@ti.com>
+	<1500419028-3361-26-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1500419028-3361-25-git-send-email-m-radhakrishnan2@ti.com>
+In-Reply-To: <1500419028-3361-26-git-send-email-m-radhakrishnan2@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2 25/37] pm-lld-rtos: Adding rtos recipe for pm-lld
+Subject: Re: [PATCH v2 26/37] ti-pdk-setup: Add ti-pdk-setup recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,153 +68,112 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 19:52:21 -0000
+X-List-Received-Date: Thu, 24 Aug 2017 19:53:55 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Tue, Jul 18, 2017 at 07:03:36PM -0400, Mahesh Radhakrishnan wrote:
-> Upstreaming TI RTOS low level driver for Power Management module (PM)
+On Tue, Jul 18, 2017 at 07:03:37PM -0400, Mahesh Radhakrishnan wrote:
+> Upstreaming package to set up the PDK development environment
 > Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 > ---
 > 
-> v2 - Added summary & merged in to a single recipe
+> v2 - Added summary
 > 
->  recipes-bsp/pm-lld/pm-lld-rtos_git.bb | 95 +++++++++++++++++++++++++++++++++++
->  1 file changed, 95 insertions(+)
->  create mode 100644 recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+>  recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb | 81 +++++++++++++++++++++++++++++
+>  1 file changed, 81 insertions(+)
+>  create mode 100644 recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb
 > 
-> diff --git a/recipes-bsp/pm-lld/pm-lld-rtos_git.bb b/recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+> diff --git a/recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb b/recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb
 > new file mode 100644
-> index 0000000..c976deb
+> index 0000000..899db1f
 > --- /dev/null
-> +++ b/recipes-bsp/pm-lld/pm-lld-rtos_git.bb
-> @@ -0,0 +1,95 @@
-> +SUMMARY = "TI RTOS driver for Power Management module (PM)"
+> +++ b/recipes-ti/ti-pdk-setup/ti-pdk-setup_git.bb
+> @@ -0,0 +1,81 @@
+> +SUMMARY = "Package containing scripts to setup the PDK development environment"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://release/full/pdksetupenv.sh;beginline=1;endline=20;md5=1858f90ca160daa7ca1b05dc3e474791"
 > +
 > +require recipes-ti/includes/ti-paths.inc
 > +
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://Power.h;beginline=1;endline=31;md5=527b91fdcd26cd19ac07a754f45dedbe"
+> +PDK_SETUP_GIT_URI = "git://git@bitbucket.itg.ti.com/processor-sdk/processor-pdk-packages.git"
+
+NAK!
+
+
+> +PDK_SETUP_GIT_PROTOCOL = "ssh"
+> +PDK_SETUP_GIT_BRANCH = "master"
 > +
-> +COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g"
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +# Below commit ID corresponds to "DEV.PDK_PACKAGES.01.00.00.01"
+> +PDK_SETUP_SRCREV = "23f310087fded4955d6d64e6df20fd057d1cede8"
 > +
+> +BRANCH = "${PDK_SETUP_GIT_BRANCH}"
+> +SRC_URI = "${PDK_SETUP_GIT_URI};protocol=${PDK_SETUP_GIT_PROTOCOL};branch=${BRANCH}"
 > +
-> +PM_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pm-lld.git"
-> +PM_LLD_GIT_PROTOCOL = "git"
-> +PM_LLD_GIT_BRANCH = "int_pm_am335x"
-> +PM_LLD_GIT_BRANCH_dra7xx-evm = "master"
-
-^^^
-
-
-> +PM_LLD_GIT_DESTSUFFIX = "git/ti/drv/pm"
-> +
-> +# Below commit ID corresponds to "DEV.PM_LLD.01.04.00.01"
-> +PM_LLD_SRCREV = "c4908f94b3e655e6298aa9bfe9bbffbbc5d16111"
-> +
-> +# Below commit ID corresponds to "REL.PDK.TDA.01.07.00.06"
-> +PM_LLD_SRCREV_dra7xx-evm = "46ea13503d2991f636197edb206a9f62cea398d4"
-
-^^^
-
-In some places here you use more generic "omap-a15" SOC family, but in these 2 
-places I highlighted, you use very specific "dra7xx-evm", which will exclude 
-platforms like "dra7xx-hs-evm" as well as "am57xx-evm" and use "int_pm_am335x" 
-branch for those. Please confirm you actually want to do that.
-
-
-> +
-> +BRANCH = "${PM_LLD_GIT_BRANCH}"
-> +SRC_URI = "${PM_LLD_GIT_URI};destsuffix=${PM_LLD_GIT_DESTSUFFIX};protocol=${PM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-> +
-> +#PATCHTOOL = "git"
-> +#SRC_URI_append = " \
-> +#    file://.patch \
-> +#"
-
-Leftovers ^^^
-
-
-> +SRCREV = "${PM_LLD_SRCREV}"
-> +PV = "01.04.00.01"
+> +SRCREV = "${PDK_SETUP_SRCREV}"
+> +PV = "01.00.00.01"
 > +PR = "r0"
 > +
-> +S = "${WORKDIR}/${PM_LLD_GIT_DESTSUFFIX}"
+> +S = "${WORKDIR}/git/"
 > +
-> +DEPENDS = " ti-sysbios \
-> +            gcc-arm-none-eabi-native \
-> +            osal-rtos \
-> +            ca-certificates-native \
-> +            ti-pdk-setup \
-> +"
-> +DEPENDS_append_omap-a15 = " ti-cgt-arm-native \
-> +                            ti-cgt6x-native \
-> +                            common-csl-ip-rtos \
-> +"
-> +DEPENDS_append_ti33x = " starterware-rtos \
-> +"
-> +DEPENDS_append_ti43x = " starterware-rtos \
-> +"
-> +DEPENDS_append_k2g = " common-csl-ip-rtos \
-> +                       ti-cgt6x-native \
-> +"
+> +CLEANBROKEN = "1"
 > +
-> +# Fetch task cannot be completed until after ca-certificates-native populates sysroot with the SSL certificates
-> +do_fetch[depends] = "ca-certificates-native:do_populate_sysroot"
-
-Why? Shouldn't be a problem accessing git.ti.com over git protocol.
-
-
-> +export TOOLCHAIN_PATH_A15 = "${GCC_ARM_NONE_TOOLCHAIN}"
-> +export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
-> +export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
-> +export FPULIB_PATH = "${GCC_ARM_NONE_TOOLCHAIN}/lib/gcc/arm-none-eabi/4.9.3/fpu/"
-> +export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
-> +export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-> +export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-> +export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
-> +export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
-
-Aren't those already defined in a .inc file?
-
-
-> +export PDK_PM_ROOT_PATH = "${WORKDIR}/git"
+> +LIMIT_SOCS = "${TI_PDK_LIMIT_SOCS}"
+> +LIMIT_BOARDS = "${TI_PDK_LIMIT_BOARDS}"
 > +
-> +# Used by DEST_ROOT to redirect binary and obj files away from sysroot PDK tree
-> +OBJ_DIR = "${WORKDIR}/git/ti/binary"
+> +PDK_SOC = "${@'${MACHINE}'.replace('-evm','')}"
+> +PDK_SOC_omapl138-lcdk = "${@'${MACHINE}'.replace('-lcdk','')}"
 > +
 > +do_compile() {
-> +    make clean lib xdc_meta doxygen LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" DEST_ROOT=${OBJ_DIR}
-
-BTW, doxygen is not available in meta-ti nor in the only other dependent layer 
-which is oe-core.
-
-
-> +    # Remove unnecessary files from packaging
-> +    rm -rf patches/
-> +
-> +    # Cleanup docs
-> +    rm -rf docs/ReleaseNotes_PM_LLD.doc
-> +    rm -rf internal/
-> +
-> +    #archive
-> +    tar -cf pm_lld.tar --exclude='*.tar' ./*
+> +    :
 > +}
 > +
 > +do_install() {
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/pm
-> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/pm \;
-
-Is it necessary to tar-up everything at the end of do_compile and then un-tar 
-in do_install?
-
-
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +
+> +    install -m 0755 release/full/pdksetupenv.sh ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdksetupenv.bat ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkProjectCreate.bat ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkProjectCreate.sh ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkAppImageCreate.bat ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/pdkAppImageCreate.sh ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0755 release/full/macros.ini ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +    install -m 0644 release/full/Rules.make ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+> +
+> +    sed -i -e "s|__PDK_VER__|${PDK_VERSION}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdkProjectCreate.sh
+> +    sed -i -e "s|__PDK_VER__|${PDK_VERSION}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdkProjectCreate.bat
+> +
+> +    sed -i -e "s|__LIMIT_SOCS__|${LIMIT_SOCS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.sh
+> +    sed -i -e "s|__LIMIT_SOCS__|${LIMIT_SOCS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.bat
+> +    sed -i -e "s|__LIMIT_SOCS__|${LIMIT_SOCS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
+> +
+> +    sed -i -e "s|__LIMIT_BOARDS__|${LIMIT_BOARDS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.sh
+> +    sed -i -e "s|__LIMIT_BOARDS__|${LIMIT_BOARDS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.bat
+> +    sed -i -e "s|__LIMIT_BOARDS__|${LIMIT_BOARDS}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
+> +
+> +    TI_PDK_VERSION=`echo ${PDK_VERSION} | sed -e 's|\.|_|g' -e 's|^0||'`
+> +
+> +    sed -i -e "s|__PDK_SOC__|${PDK_SOC}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
+> +    sed -i -e "s|__PDK_VER__|${TI_PDK_VERSION}|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/Rules.make
 > +}
 > +
-> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+> +do_install_append_omapl1() {
+> +    sed -i -e "s|c66x|c674x|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.sh
+> +    sed -i -e "s|c66x|c674x|g" \
+> +        ${D}${PDK_INSTALL_DIR_RECIPE}/packages/pdksetupenv.bat
+> +}
 > +
-> +INSANE_SKIP_${PN} = "arch staticdev"
+> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
 > -- 
 > 1.9.1
 > 
