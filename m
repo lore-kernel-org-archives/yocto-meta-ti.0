@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0DEE8E00CC2; Wed, 30 Aug 2017 15:42:49 -0700 (PDT)
+	id 0997AE00C09; Wed, 30 Aug 2017 15:42:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22C16E00CC0
-	for <meta-ti@yoctoproject.org>; Wed, 30 Aug 2017 15:42:40 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7UMgU01031967
-	for <meta-ti@yoctoproject.org>; Wed, 30 Aug 2017 17:42:30 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 648F2E00C09
+	for <meta-ti@yoctoproject.org>; Wed, 30 Aug 2017 15:42:46 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7UMgaZr031984
+	for <meta-ti@yoctoproject.org>; Wed, 30 Aug 2017 17:42:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1504132950;
-	bh=uxK8nZGgP+M3DO8XyT9kvEu02GHTxGs/gfG6NQ/9UIE=;
+	s=ti-com-17Q1; t=1504132956;
+	bh=gSlZvcHTlaVDQ3+LvFBmTB86nT6oluPrRTBywdOXEus=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=ICjBiLREW76OJgeFqF7ty48hlOqqJM6PeAzbp+bfmuBVAqBmlQxTvF8wWI3qvBGzN
-	JSnUVNkNpJwsxxcRyoOW1ztJ3rY+R+45ezAMFZVpyv6kfXI4PHrDo4Y+n+WQ0WPm7c
-	RpYrt1WA5OdNv+IW8G9VvSgknYNOeiOD2uvZBwoU=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7UMgP5O014882
-	for <meta-ti@yoctoproject.org>; Wed, 30 Aug 2017 17:42:25 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE107.ent.ti.com
-	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	b=cRxE0IPOyKlTWOJzRFIVu6n64TlnSyPeztR4s/S9F0T5pPvljGZnQ5uHA573frTKo
+	ejoPc4GprCf1BJColeh+clYafxTl/u8KdF0n7GZ02MCRangHH36dUzeC1pPZgAZFDj
+	UfeXGubIC3uYdY/VqBr/nG0be/FYWbJtg20QvH5k=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7UMgVLf009822
+	for <meta-ti@yoctoproject.org>; Wed, 30 Aug 2017 17:42:31 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE103.ent.ti.com
+	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Wed, 30 Aug 2017 17:42:25 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE106.ent.ti.com
-	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 30 Aug 2017 17:42:30 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE107.ent.ti.com
+	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Wed, 30 Aug 2017 17:42:24 -0500
+	Transport; Wed, 30 Aug 2017 17:42:30 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7UMgL0d004119;
-	Wed, 30 Aug 2017 17:42:25 -0500
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7UMgL0h004119;
+	Wed, 30 Aug 2017 17:42:30 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 30 Aug 2017 18:42:12 -0400
-Message-ID: <1504132936-7725-3-git-send-email-m-radhakrishnan2@ti.com>
+Date: Wed, 30 Aug 2017 18:42:16 -0400
+Message-ID: <1504132936-7725-7-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1504132936-7725-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1504132936-7725-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH v3 3/7] vps-lld-rtos: Added rtos recipe for vps-lld
+Subject: [PATCH v3 7/7] audk2g-addon-rtos: Adding rtos recipe for audio addons for k2g
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,120 +67,82 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Aug 2017 22:42:49 -0000
+X-List-Received-Date: Wed, 30 Aug 2017 22:42:54 -0000
 Content-Type: text/plain
 
-Upstreaming RTOS low level driver for Video processing subsystem.
-
+Upstreaming RTOS audio addon software for K2G
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
 
- v3 - Removed intermediate tar-untar for do-install
+ v3 - Removed redundant code in do-compile & do-install
  v2 - Added summary
 
- recipes-bsp/vps-lld/vps-lld-rtos_git.bb | 93 +++++++++++++++++++++++++++++++++
- 1 file changed, 93 insertions(+)
- create mode 100644 recipes-bsp/vps-lld/vps-lld-rtos_git.bb
+ recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb | 56 +++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
+ create mode 100644 recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
 
-diff --git a/recipes-bsp/vps-lld/vps-lld-rtos_git.bb b/recipes-bsp/vps-lld/vps-lld-rtos_git.bb
+diff --git a/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb b/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
 new file mode 100644
-index 0000000..3a968dd
+index 0000000..9e233e2
 --- /dev/null
-+++ b/recipes-bsp/vps-lld/vps-lld-rtos_git.bb
-@@ -0,0 +1,93 @@
-+SUMMARY = "TI RTOS Low level driver for Video Processing Subsystem (VPS) "
++++ b/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
+@@ -0,0 +1,56 @@
++SUMMARY = "TI RTOS Audio add-on software for k2g"
 +
 +require recipes-ti/includes/ti-paths.inc
 +
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;beginline=1;endline=32;md5=4303d306ea53eb66132983d6901c137d"
++LIC_FILES_CHKSUM = "file://audk2gaddonver.h;beginline=8;endline=47;md5=7a3996aaf1a3d3ca87358cf9b89bce3d"
 +
-+COMPATIBLE_MACHINE = "omap-a15"
++COMPATIBLE_MACHINE = "k2g"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+VPS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/vps.git"
-+VPS_LLD_GIT_PROTOCOL = "git"
-+VPS_LLD_GIT_BRANCH = "master"
-+VPS_LLD_GIT_DESTSUFFIX = "git"
-+VPS_PACKAGE_BASE   = "${S}/../vps_base"
-+VPS_LLD_ROOTPATH = "${VPS_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/vps"
++AUDK2G_ADDON_GIT_URI = "git://git.ti.com/processor-sdk/audk2g-addon.git"
++AUDK2G_ADDON_GIT_PROTOCOL = "git"
++AUDK2G_ADDON_GIT_BRANCH = "master"
++AUDK2G_ADDON_GIT_DESTSUFFIX = "git/ti/addon/audk2g"
 +
-+# Below commit ID corresponds to "DEV.VPS_LLD.01.00.01.06B"
-+VPS_LLD_SRCREV = "58729317b65bdb24d4343cbb1f7f6cb90ca2faf0"
++# Below commit ID corresponds to "DEV.AUDK2G.01.04.00.00"
++AUDK2G_ADDON_SRCREV = "815180b45ceb1fa3c110f9979106c7f5aa8b3ca2"
 +
-+BRANCH = "${VPS_LLD_GIT_BRANCH}"
-+SRC_URI = "${VPS_LLD_GIT_URI};destsuffix=${VPS_LLD_GIT_DESTSUFFIX};protocol=${VPS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++BRANCH = "${AUDK2G_ADDON_GIT_BRANCH}"
++SRC_URI = "${AUDK2G_ADDON_GIT_URI};destsuffix=${AUDK2G_ADDON_GIT_DESTSUFFIX};protocol=${AUDK2G_ADDON_GIT_PROTOCOL};branch=${BRANCH}"
 +
-+SRCREV = "${VPS_LLD_SRCREV}"
-+PV = "01.00.01.06B"
++SRCREV = "${AUDK2G_ADDON_SRCREV}"
++PV = "01.04.00.00"
 +PR = "r0"
 +
-+S = "${WORKDIR}/${VPS_LLD_GIT_DESTSUFFIX}"
++S = "${WORKDIR}/git/ti/addon/audk2g"
 +
 +DEPENDS = " ti-cgt6x-native \
-+            ti-cgt-arm-native \
 +            ti-sysbios \
++            ti-xdctools \
++            ti-pdk-build-rtos \
 +            common-csl-ip-rtos \
-+            gcc-arm-none-eabi-native \
-+            osal-rtos \
-+            ca-certificates-native \
-+            edma3-lld-rtos \
-+            board-rtos \
-+            uart-lld-rtos \
++            gpio-lld-rtos \
 +            i2c-lld-rtos \
-+            pm-lld-rtos \
++            board-rtos \
 +"
 +
-+# Fetch task cannot be completed until after ca-certificates-native populates sysroot with the SSL certificates
-+do_fetch[depends] = "ca-certificates-native:do_populate_sysroot"
-+
-+export TOOLCHAIN_PATH_A15 = "${GCC_ARM_NONE_TOOLCHAIN}"
-+export FPULIB_PATH = "${GCC_ARM_NONE_TOOLCHAIN}/lib/gcc/arm-none-eabi/4.9.3/fpu/"
-+export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
 +export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 +export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
 +export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
 +export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
-+export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
 +
-+export PDK_VPS_ROOT_PATH = "${VPS_PACKAGE_BASE}/package/all/pdk_/packages"
++export XDCPATH = "${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;${PDK_INSTALL_DIR}/packages"
 +
-+BOARD_PACKAGE = ""
-+BOARD_PACKAGE_am57xx-evm = "evmAM572x"
-+BOARD_PACKAGE_dra7xx-evm = "evmDRA75x"
-+
-+
-+do_configure() {
-+    rm -rf ${VPS_PACKAGE_BASE}
-+    cd ${S}
-+    
-+    # remove any previous package
-+    rm -f ${VPS_PACKAGE_BASE}
-+
-+    # make the release package before building it
-+    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${VPS_PACKAGE_BASE} PDK_VPS_COMP_PATH=${S}
-+}
++export PDK_AUDK2G_ROOT_PATH = "${WORKDIR}/git"
 +
 +do_compile() {
-+    echo "vps lld root path is ${VPS_LLD_ROOTPATH}"
-+    cd ${VPS_LLD_ROOTPATH}
-+    
-+    # Build libraries
-+    make clean lib xdc_meta doxygen LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}"
-+
-+    #  Clean up .tar files from the package
-+    find -name "*.tar" -exec rm -f {} \;
++    make release LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}"
 +}
 +
 +do_install() {
-+    cd ${VPS_LLD_ROOTPATH}
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/vps
-+    cp -r ./*  ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/vps
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/addon/audk2g
++    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ \;
 +}
 +
 +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+
-+INSANE_SKIP_${PN} = "arch ldflags"
 -- 
 1.9.1
 
