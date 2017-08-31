@@ -1,60 +1,60 @@
-Return-Path: <denys@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6E420E00C45; Thu, 31 Aug 2017 09:37:56 -0700 (PDT)
+	id 7C807E00C7A; Thu, 31 Aug 2017 13:24:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
+	DKIM_VALID, DKIM_VALID_AU, HTML_MESSAGE,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
 	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24236E00C01
-	for <meta-ti@yoctoproject.org>; Thu, 31 Aug 2017 09:37:54 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7VGbsuo017123
-	for <meta-ti@yoctoproject.org>; Thu, 31 Aug 2017 11:37:54 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E91CE00C1A
+	for <meta-ti@yoctoproject.org>; Thu, 31 Aug 2017 13:24:30 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v7VKOTmE018847
+	for <meta-ti@yoctoproject.org>; Thu, 31 Aug 2017 15:24:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1504197474;
-	bh=0SfJ2by5pNI0Lmwjtc1/LojYwFPhRrxLouBAcI3XZFQ=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=YzyCilbKZiAFv051KEbLdD0jJWn+wCB+ko8AyW2dwevSOdeFlSQQuZHUAiiqEX81W
-	nr204sxzr3N+U8jYZGKDN5z2ayR6agD3hPnvs46/Cxt/APiVcGLbyz4el2H283zl38
-	p4u6Dk6Pm+2QfjoQKUQO6zGe16u90LxYnb3Stb4A=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7VGbsLT004881
-	for <meta-ti@yoctoproject.org>; Thu, 31 Aug 2017 11:37:54 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Thu, 31 Aug 2017 11:37:53 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Thu, 31 Aug 2017 11:37:53 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7VGbrQA001554;
-	Thu, 31 Aug 2017 11:37:53 -0500
-Date: Thu, 31 Aug 2017 12:37:49 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Ivan Pang <i-pang@ti.com>
-Message-ID: <20170831163749.GY8304@edge>
-References: <1504129361-28557-1-git-send-email-i-pang@ti.com>
+	s=ti-com-17Q1; t=1504211069;
+	bh=1S2W8YC5X8/VIHHbmRHl/fv/xHtPPgPjJxKP0Vl2U6g=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=jQHJuYeFY6Gi4w8zM0fdwMZGruQRzzbMbGlvdKVAEdZd64XVUxRbFrinemZZyKBOR
+	Y5GXWqBm/BqiLArnXmgwRT2ko4WWWqsgBZEl/wrIY3FZ51FaSq4SH3PkRB15N/Hkve
+	ZqsNm4uffE8FiKKpecyKqt6CK5KtTF2LgeECS7fg=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v7VKOT95027637
+	for <meta-ti@yoctoproject.org>; Thu, 31 Aug 2017 15:24:29 -0500
+Received: from DFLE12.ent.ti.com ([fe80::e9a3:bf19:af96:227b]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.03.0294.000; Thu, 31 Aug 2017 15:24:28 -0500
+From: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [PATCH v2 25/37] pm-lld-rtos: Adding rtos recipe for
+	pm-lld
+Thread-Index: AQHTABo/4dA9rIaZ80qoj7DcuKpQZ6KUeIKAgAqx0BA=
+Date: Thu, 31 Aug 2017 20:24:29 +0000
+Message-ID: <5130E41A1BA9D145BA0F3B18D5CFB0A7437E0089@DFLE12.ent.ti.com>
+References: <1500419028-3361-1-git-send-email-m-radhakrishnan2@ti.com>
+	<1500419028-3361-25-git-send-email-m-radhakrishnan2@ti.com>
+	<20170824195159.GH28233@edge>
+In-Reply-To: <20170824195159.GH28233@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.172.224.222]
 MIME-Version: 1.0
-In-Reply-To: <1504129361-28557-1-git-send-email-i-pang@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] nativesdk-dspcoreparse: added recipe for nativesdk-dspcoreparse
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH v2 25/37] pm-lld-rtos: Adding rtos recipe for pm-lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,86 +67,725 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Aug 2017 16:37:56 -0000
+X-List-Received-Date: Thu, 31 Aug 2017 20:24:34 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_5130E41A1BA9D145BA0F3B18D5CFB0A7437E0089DFLE12entticom_"
+
+--_000_5130E41A1BA9D145BA0F3B18D5CFB0A7437E0089DFLE12entticom_
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 30, 2017 at 04:42:41PM -0500, Ivan Pang wrote:
-> Signed-off-by: Ivan Pang <i-pang@ti.com>
+My comments/answers inline.
+
+
+
+Please note, I am in the process of addressing some comments from Jake (usi=
+ng oe_runmake instead of make). I will be submitting another patch very soo=
+n.
+
+
+
+-----Original Message-----
+From: Dmytriyenko, Denys
+Sent: Thursday, August 24, 2017 3:52 PM
+To: Radhakrishnan, Mahesh
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [PATCH v2 25/37] pm-lld-rtos: Adding rtos recipe for=
+ pm-lld
+
+
+
+On Tue, Jul 18, 2017 at 07:03:36PM -0400, Mahesh Radhakrishnan wrote:
+
+> Upstreaming TI RTOS low level driver for Power Management module (PM)
+
+> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com<mailto:m-rad=
+hakrishnan2@ti.com>>
+
 > ---
->  .../multiprocmgr/nativesdk-dspcoreparse_git.bb     | 46 ++++++++++++++++++++++
->  1 file changed, 46 insertions(+)
->  create mode 100644 recipes-ti/multiprocmgr/nativesdk-dspcoreparse_git.bb
-> 
-> diff --git a/recipes-ti/multiprocmgr/nativesdk-dspcoreparse_git.bb b/recipes-ti/multiprocmgr/nativesdk-dspcoreparse_git.bb
+
+>
+
+> v2 - Added summary & merged in to a single recipe
+
+>
+
+>  recipes-bsp/pm-lld/pm-lld-rtos_git.bb | 95
+
+> +++++++++++++++++++++++++++++++++++
+
+>  1 file changed, 95 insertions(+)
+
+>  create mode 100644 recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+
+>
+
+> diff --git a/recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+
+> b/recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+
 > new file mode 100644
-> index 0000000..63cf937
+
+> index 0000000..c976deb
+
 > --- /dev/null
-> +++ b/recipes-ti/multiprocmgr/nativesdk-dspcoreparse_git.bb
-> @@ -0,0 +1,46 @@
-> +SUMMARY = "DSP coredump parse utility"
-> +DESCRIPTION = "The DSP coredump parse (dspcoreparse) utility is a part\
-> +of the Multi-Proc Manager (MPM). This utility is used to provide\
-> +information upon a DSP core crash or unexpected runtime termination."
+
+> +++ b/recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+
+> @@ -0,0 +1,95 @@
+
+> +SUMMARY =3D "TI RTOS driver for Power Management module (PM)"
+
 > +
+
 > +require recipes-ti/includes/ti-paths.inc
-> +include recipes-ti/multiprocmgr/multiprocmgr.inc
+
 > +
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://dspcoreparse.c;beginline=1;endline=31;md5=7c271e4a6bd961947bce20c7fe5f86fe"
-> +BRANCH = "master"
+
+> +LICENSE =3D "BSD-3-Clause"
+
+> +LIC_FILES_CHKSUM =3D "file://Power.h;beginline=3D1;endline=3D31;md5=3D52=
+7b91fdcd26cd19ac07a754f45dedbe<file:///\\Power.h;beginline=3D1;endline=3D31=
+;md5=3D527b91fdcd26cd19ac07a754f45dedbe>"
+
 > +
-> +SRC_URI = "git://git.ti.com/sdk-tools/dspcoreparse.git;protocol=git;branch=${BRANCH}"
+
+> +COMPATIBLE_MACHINE =3D "ti33x|ti43x|omap-a15|k2g"
+
+> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+
 > +
-> +# Below commit ID corresponds to "DSPCOREPARSE.01.00.00.00A"
-> +SRCREV = "b692b85a33052a5c736cd538eedf178d45bd4e4e"
+
 > +
-> +S = "${WORKDIR}/git"
+
+> +PM_LLD_GIT_URI =3D "git://git.ti.com/keystone-rtos/pm-lld.git"
+
+> +PM_LLD_GIT_PROTOCOL =3D "git"
+
+> +PM_LLD_GIT_BRANCH =3D "int_pm_am335x"
+
+> +PM_LLD_GIT_BRANCH_dra7xx-evm =3D "master"
+
+
+
+^^^
+
+
+
+
+
+> +PM_LLD_GIT_DESTSUFFIX =3D "git/ti/drv/pm"
+
 > +
-> +do_compile () {
-> +  # Not building anything and using checked in binary file for now
-> +  echo "Nothing to compile"
+
+> +# Below commit ID corresponds to "DEV.PM_LLD.01.04.00.01"
+
+> +PM_LLD_SRCREV =3D "c4908f94b3e655e6298aa9bfe9bbffbbc5d16111"
+
+> +
+
+> +# Below commit ID corresponds to "REL.PDK.TDA.01.07.00.06"
+
+> +PM_LLD_SRCREV_dra7xx-evm =3D "46ea13503d2991f636197edb206a9f62cea398d4"
+
+
+
+^^^
+
+
+
+In some places here you use more generic "omap-a15" SOC family, but in thes=
+e 2 places I highlighted, you use very specific "dra7xx-evm", which will ex=
+clude platforms like "dra7xx-hs-evm" as well as "am57xx-evm" and use "int_p=
+m_am335x"
+
+branch for those. Please confirm you actually want to do that.
+
+
+
+[Mahesh]  PM LLD is defined only for dra7xx-evm, it is not defined for dra7=
+xx-hs-evm.   For dra7xx-evm alone, we use the specific commit mentioned abo=
+ve. For am335x , the specific branch is used.
+
+
+
+
+
+> +
+
+> +BRANCH =3D "${PM_LLD_GIT_BRANCH}"
+
+> +SRC_URI =3D "${PM_LLD_GIT_URI};destsuffix=3D${PM_LLD_GIT_DESTSUFFIX};pro=
+tocol=3D${PM_LLD_GIT_PROTOCOL};branch=3D${BRANCH}"
+
+> +
+
+> +#PATCHTOOL =3D "git"
+
+> +#SRC_URI_append =3D " \
+
+> +#    file://.patch<file:///\\.patch> \
+
+> +#"
+
+
+
+Leftovers ^^^
+
+[Mahesh] Have been removed in the latest patch.
+
+
+
+> +SRCREV =3D "${PM_LLD_SRCREV}"
+
+> +PV =3D "01.04.00.01"
+
+> +PR =3D "r0"
+
+> +
+
+> +S =3D "${WORKDIR}/${PM_LLD_GIT_DESTSUFFIX}"
+
+> +
+
+> +DEPENDS =3D " ti-sysbios \
+
+> +            gcc-arm-none-eabi-native \
+
+> +            osal-rtos \
+
+> +            ca-certificates-native \
+
+> +            ti-pdk-setup \
+
+> +"
+
+> +DEPENDS_append_omap-a15 =3D " ti-cgt-arm-native \
+
+> +                            ti-cgt6x-native \
+
+> +                            common-csl-ip-rtos \ "
+
+> +DEPENDS_append_ti33x =3D " starterware-rtos \ "
+
+> +DEPENDS_append_ti43x =3D " starterware-rtos \ "
+
+> +DEPENDS_append_k2g =3D " common-csl-ip-rtos \
+
+> +                       ti-cgt6x-native \ "
+
+> +
+
+> +# Fetch task cannot be completed until after ca-certificates-native
+
+> +populates sysroot with the SSL certificates do_fetch[depends] =3D "ca-ce=
+rtificates-native:do_populate_sysroot"
+
+
+
+Why? Shouldn't be a problem accessing git.ti.com over git protocol.
+
+[Mahesh] It will be removed in the upcoming patch
+
+
+
+
+
+> +export TOOLCHAIN_PATH_A15 =3D "${GCC_ARM_NONE_TOOLCHAIN}"
+
+> +export TOOLCHAIN_PATH_A8 =3D "${GCC_ARM_NONE_TOOLCHAIN}"
+
+> +export TOOLCHAIN_PATH_A9 =3D "${GCC_ARM_NONE_TOOLCHAIN}"
+
+> +export FPULIB_PATH =3D "${GCC_ARM_NONE_TOOLCHAIN}/lib/gcc/arm-none-eabi/=
+4.9.3/fpu/"
+
+> +export TOOLCHAIN_PATH_M4 =3D "${M4_TOOLCHAIN_INSTALL_DIR}"
+
+> +export C6X_GEN_INSTALL_PATH =3D "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-=
+c6x"
+
+> +export PDK_INSTALL_PATH =3D "${PDK_INSTALL_DIR}/packages"
+
+> +export BIOS_INSTALL_PATH =3D "${SYSBIOS_INSTALL_DIR}"
+
+> +export XDC_INSTALL_PATH =3D "${XDC_INSTALL_DIR}"
+
+
+
+Aren't those already defined in a .inc file?
+
+
+
+
+
+[Mahesh] There was no common inc file which I could include. The pm-lld.inc=
+ was removed and merged in to this recipe.   There were similar ones in pdk=
+ bbclass, but this recipe doesn't use pdk bbclass. Hence these definitions =
+here.
+
+
+
+
+
+> +export PDK_PM_ROOT_PATH =3D "${WORKDIR}/git"
+
+> +
+
+> +# Used by DEST_ROOT to redirect binary and obj files away from
+
+> +sysroot PDK tree OBJ_DIR =3D "${WORKDIR}/git/ti/binary"
+
+> +
+
+> +do_compile() {
+
+> +    make clean lib xdc_meta doxygen LIMIT_SOCS=3D"${TI_PDK_LIMIT_SOCS}"
+
+> +LIMIT_BOARDS=3D"${TI_PDK_LIMIT_BOARDS}" DEST_ROOT=3D${OBJ_DIR}
+
+
+
+BTW, doxygen is not available in meta-ti nor in the only other dependent la=
+yer which is oe-core.
+
+[Mahesh]  Does this mean that I should add doxygen-native to DEPENDS ?
+
+
+
+
+
+> +    # Remove unnecessary files from packaging
+
+> +    rm -rf patches/
+
+> +
+
+> +    # Cleanup docs
+
+> +    rm -rf docs/ReleaseNotes_PM_LLD.doc
+
+> +    rm -rf internal/
+
+> +
+
+> +    #archive
+
+> +    tar -cf pm_lld.tar --exclude=3D'*.tar' ./*
+
 > +}
+
 > +
-> +do_install () {
-> +    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-> +    install -d ${D}${MPM_INSTALL_DIR_RECIPE}/utils/dspcoreparse
-> +    cp ${CP_ARGS} ${S}/* -d ${D}${MPM_INSTALL_DIR_RECIPE}/utils/dspcoreparse/
+
+> +do_install() {
+
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/pm
+
+> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INST=
+ALL_DIR_RECIPE}/packages/ti/drv/pm \;
+
+
+
+Is it necessary to tar-up everything at the end of do_compile and then un-t=
+ar
+
+in do_install?
+
+[Mahesh]  The latest patch has removed the need for tar/untar.
+
+
+
+
+
+
+
 > +}
+
 > +
-> +PACKAGES =+ "${PN}-src"
 
-^^^ Nope
+> +FILES_${PN} +=3D "${PDK_INSTALL_DIR_RECIPE}/packages"
 
-
-> +FILES_${PN}-dev = "${MPM_INSTALL_DIR_RECIPE}/utils"
-
-Isn't it a binary? Why do you put it into ${PN}-dev?
-
-
-> +FILES_${PN}-src = "${S}/*"
-
-^^^ Can't do that.
-
-
-> +FILES_${PN}-dbg = "${MPM_INSTALL_DIR_RECIPE}/utils/dspcoreparse/.debug"
 > +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_SYSROOT_STRIP = "1"
-> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> +
-> +INSANE_SKIP_${PN}-dev = "arch file-rdeps"
-> +INSANE_SKIP_${PN}-src = "arch file-rdeps"
-> +INSANE_SKIP_${PN} = "arch file-rdeps"
-> +INSANE_SKIP_${PN}-dbg = "arch file-rdeps"
-> +
-> +ALLOW_EMPTY_${PN} = "1"
-> -- 
+
+> +INSANE_SKIP_${PN} =3D "arch staticdev"
+
+> --
+
 > 1.9.1
-> 
-> -- 
+
+>
+
+> --
+
 > _______________________________________________
+
 > meta-ti mailing list
-> meta-ti@yoctoproject.org
+
+> meta-ti@yoctoproject.org<mailto:meta-ti@yoctoproject.org>
+
 > https://lists.yoctoproject.org/listinfo/meta-ti
 
+--_000_5130E41A1BA9D145BA0F3B18D5CFB0A7437E0089DFLE12entticom_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-priority:99;
+	mso-style-link:"Plain Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+span.PlainTextChar
+	{mso-style-name:"Plain Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Plain Text";
+	font-family:"Calibri","sans-serif";}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">My comments/answers=
+ inline.<o:p></o:p></span></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0"><o:p>&nbsp;</o:p></=
+span></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">Please note, I am i=
+n the process of addressing some comments from Jake (using oe_runmake inste=
+ad of make). I will be submitting another patch very soon.<o:p></o:p></span=
+></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">-----Original Message-----<br>
+From: Dmytriyenko, Denys <br>
+Sent: Thursday, August 24, 2017 3:52 PM<br>
+To: Radhakrishnan, Mahesh<br>
+Cc: meta-ti@yoctoproject.org<br>
+Subject: Re: [meta-ti] [PATCH v2 25/37] pm-lld-rtos: Adding rtos recipe for=
+ pm-lld</p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">On Tue, Jul 18, 2017 at 07:03:36PM -0400, Mahesh =
+Radhakrishnan wrote:<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; Upstreaming TI RTOS low level driver for Pow=
+er Management module (PM)<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; Signed-off-by: Mahesh Radhakrishnan &lt;<a h=
+ref=3D"mailto:m-radhakrishnan2@ti.com"><span style=3D"color:windowtext;text=
+-decoration:none">m-radhakrishnan2@ti.com</span></a>&gt;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; ---<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; <o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; v2 - Added summary &amp; merged in to a sing=
+le recipe<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; <o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt;&nbsp; recipes-bsp/pm-lld/pm-lld-rtos_git.bb =
+| 95 <o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43=
+;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43=
+;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt;&nbsp; 1 file changed, 95 insertions(&#43;)<o=
+:p></o:p></p>
+<p class=3D"MsoPlainText">&gt;&nbsp; create mode 100644 recipes-bsp/pm-lld/=
+pm-lld-rtos_git.bb<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; <o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; diff --git a/recipes-bsp/pm-lld/pm-lld-rtos_=
+git.bb <o:p>
+</o:p></p>
+<p class=3D"MsoPlainText">&gt; b/recipes-bsp/pm-lld/pm-lld-rtos_git.bb<o:p>=
+</o:p></p>
+<p class=3D"MsoPlainText">&gt; new file mode 100644<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; index 0000000..c976deb<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; --- /dev/null<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&#43;&#43; b/recipes-bsp/pm-lld/pm-lld-=
+rtos_git.bb<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; @@ -0,0 &#43;1,95 @@<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;SUMMARY =3D &quot;TI RTOS driver for Po=
+wer Management module (PM)&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;require recipes-ti/includes/ti-paths.in=
+c<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;LICENSE =3D &quot;BSD-3-Clause&quot;<o:=
+p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;LIC_FILES_CHKSUM =3D &quot;<a href=3D"f=
+ile:///\\Power.h;beginline=3D1;endline=3D31;md5=3D527b91fdcd26cd19ac07a754f=
+45dedbe"><span style=3D"color:windowtext;text-decoration:none">file://Power=
+.h;beginline=3D1;endline=3D31;md5=3D527b91fdcd26cd19ac07a754f45dedbe</span>=
+</a>&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;COMPATIBLE_MACHINE =3D &quot;ti33x|ti43=
+x|omap-a15|k2g&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PACKAGE_ARCH =3D &quot;${MACHINE_ARCH}&=
+quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PM_LLD_GIT_URI =3D &quot;git://git.ti.c=
+om/keystone-rtos/pm-lld.git&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PM_LLD_GIT_PROTOCOL =3D &quot;git&quot;=
+<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PM_LLD_GIT_BRANCH =3D &quot;int_pm_am33=
+5x&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PM_LLD_GIT_BRANCH_dra7xx-evm =3D &quot;=
+master&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">^^^<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PM_LLD_GIT_DESTSUFFIX =3D &quot;git/ti/=
+drv/pm&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;# Below commit ID corresponds to &quot;=
+DEV.PM_LLD.01.04.00.01&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PM_LLD_SRCREV =3D &quot;c4908f94b3e655e=
+6298aa9bfe9bbffbbc5d16111&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;# Below commit ID corresponds to &quot;=
+REL.PDK.TDA.01.07.00.06&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PM_LLD_SRCREV_dra7xx-evm =3D &quot;46ea=
+13503d2991f636197edb206a9f62cea398d4&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">^^^<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">In some places here you use more generic &quot;om=
+ap-a15&quot; SOC family, but in these 2 places I highlighted, you use very =
+specific &quot;dra7xx-evm&quot;, which will exclude platforms like &quot;dr=
+a7xx-hs-evm&quot; as well as &quot;am57xx-evm&quot; and use &quot;int_pm_am=
+335x&quot;
+<o:p></o:p></p>
+<p class=3D"MsoPlainText">branch for those. Please confirm you actually wan=
+t to do that.<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">[Mahesh]&nbsp; PM L=
+LD is defined only for dra7xx-evm, it is not defined for dra7xx-hs-evm.&nbs=
+p;&nbsp; For dra7xx-evm alone, we use the specific commit mentioned above. =
+For am335x , the specific branch is used.<o:p></o:p></span></p>
+<p class=3D"MsoPlainText"><span style=3D"color:black"><o:p>&nbsp;</o:p></sp=
+an></p>
+<p class=3D"MsoPlainText"><span style=3D"color:black"><o:p>&nbsp;</o:p></sp=
+an></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;BRANCH =3D &quot;${PM_LLD_GIT_BRANCH}&q=
+uot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;SRC_URI =3D &quot;${PM_LLD_GIT_URI};des=
+tsuffix=3D${PM_LLD_GIT_DESTSUFFIX};protocol=3D${PM_LLD_GIT_PROTOCOL};branch=
+=3D${BRANCH}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;#PATCHTOOL =3D &quot;git&quot;<o:p></o:=
+p></p>
+<p class=3D"MsoPlainText">&gt; &#43;#SRC_URI_append =3D &quot; \<o:p></o:p>=
+</p>
+<p class=3D"MsoPlainText">&gt; &#43;#&nbsp;&nbsp;&nbsp; <a href=3D"file:///=
+\\.patch"><span style=3D"color:windowtext;text-decoration:none">file://.pat=
+ch</span></a> \<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;#&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">Leftovers ^^^<o:p></o:p></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">[Mahesh] Have been =
+removed in the latest patch.<o:p></o:p></span></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;SRCREV =3D &quot;${PM_LLD_SRCREV}&quot;=
+<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PV =3D &quot;01.04.00.01&quot;<o:p></o:=
+p></p>
+<p class=3D"MsoPlainText">&gt; &#43;PR =3D &quot;r0&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;S =3D &quot;${WORKDIR}/${PM_LLD_GIT_DES=
+TSUFFIX}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;DEPENDS =3D &quot; ti-sysbios \<o:p></o=
+:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; gcc-arm-none-eabi-native \<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; osal-rtos \<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; ca-certificates-native \<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; ti-pdk-setup \<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;DEPENDS_append_omap-a15 =3D &quot; ti-c=
+gt-arm-native \<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ti-cgt6x-native \<o:p></o:=
+p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; common-csl-ip-rtos \ &quot=
+;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;DEPENDS_append_ti33x =3D &quot; starter=
+ware-rtos \ &quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;DEPENDS_append_ti43x =3D &quot; starter=
+ware-rtos \ &quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;DEPENDS_append_k2g =3D &quot; common-cs=
+l-ip-rtos \<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp; ti-cgt6x-native \ &quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;# Fetch task cannot be completed until =
+after ca-certificates-native
+<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;populates sysroot with the SSL certific=
+ates do_fetch[depends] =3D &quot;ca-certificates-native:do_populate_sysroot=
+&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">Why? Shouldn't be a problem accessing git.ti.com =
+over git protocol.<o:p></o:p></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">[Mahesh] It will be=
+ removed in the upcoming patch<o:p></o:p></span></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export TOOLCHAIN_PATH_A15 =3D &quot;${G=
+CC_ARM_NONE_TOOLCHAIN}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export TOOLCHAIN_PATH_A8 =3D &quot;${GC=
+C_ARM_NONE_TOOLCHAIN}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export TOOLCHAIN_PATH_A9 =3D &quot;${GC=
+C_ARM_NONE_TOOLCHAIN}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export FPULIB_PATH =3D &quot;${GCC_ARM_=
+NONE_TOOLCHAIN}/lib/gcc/arm-none-eabi/4.9.3/fpu/&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export TOOLCHAIN_PATH_M4 =3D &quot;${M4=
+_TOOLCHAIN_INSTALL_DIR}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export C6X_GEN_INSTALL_PATH =3D &quot;$=
+{STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export PDK_INSTALL_PATH =3D &quot;${PDK=
+_INSTALL_DIR}/packages&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export BIOS_INSTALL_PATH =3D &quot;${SY=
+SBIOS_INSTALL_DIR}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export XDC_INSTALL_PATH =3D &quot;${XDC=
+_INSTALL_DIR}&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">Aren't those already defined in a .inc file?<o:p>=
+</o:p></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0"><o:p>&nbsp;</o:p></=
+span></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0"><o:p>&nbsp;</o:p></=
+span></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">[Mahesh] There was =
+no common inc file which I could include. The pm-lld.inc was removed and me=
+rged in to this recipe.&nbsp;&nbsp; There were similar ones in pdk bbclass,=
+ but this recipe doesn&#8217;t use pdk bbclass. Hence
+ these definitions here.<o:p></o:p></span></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0"><o:p>&nbsp;</o:p></=
+span></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;export PDK_PM_ROOT_PATH =3D &quot;${WOR=
+KDIR}/git&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;# Used by DEST_ROOT to redirect binary =
+and obj files away from
+<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;sysroot PDK tree OBJ_DIR =3D &quot;${WO=
+RKDIR}/git/ti/binary&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;do_compile() {<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; make clean lib xdc_m=
+eta doxygen LIMIT_SOCS=3D&quot;${TI_PDK_LIMIT_SOCS}&quot;
+<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;LIMIT_BOARDS=3D&quot;${TI_PDK_LIMIT_BOA=
+RDS}&quot; DEST_ROOT=3D${OBJ_DIR}<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">BTW, doxygen is not available in meta-ti nor in t=
+he only other dependent layer which is oe-core.<o:p></o:p></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">[Mahesh] &nbsp;Does=
+ this mean that I should add
+<b>doxygen-native</b> to DEPENDS ?<o:p></o:p></span></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; # Remove unnecessary=
+ files from packaging<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; rm -rf patches/<o:p>=
+</o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; # Cleanup docs<o:p><=
+/o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; rm -rf docs/ReleaseN=
+otes_PM_LLD.doc<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; rm -rf internal/<o:p=
+></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; #archive<o:p></o:p><=
+/p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; tar -cf pm_lld.tar -=
+-exclude=3D'*.tar' ./*<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;}<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;do_install() {<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; install -d ${D}${PDK=
+_INSTALL_DIR_RECIPE}/packages/ti/drv/pm<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;&nbsp;&nbsp;&nbsp; find -name &quot;*.t=
+ar&quot; -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/p=
+ackages/ti/drv/pm \;<o:p></o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">Is it necessary to tar-up everything at the end o=
+f do_compile and then un-tar
+<o:p></o:p></p>
+<p class=3D"MsoPlainText">in do_install?<o:p></o:p></p>
+<p class=3D"MsoPlainText"><span style=3D"color:#7030A0">[Mahesh] &nbsp;The =
+latest patch has removed the need for tar/untar.<o:p></o:p></span></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;}<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;FILES_${PN} &#43;=3D &quot;${PDK_INSTAL=
+L_DIR_RECIPE}/packages&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; &#43;INSANE_SKIP_${PN} =3D &quot;arch static=
+dev&quot;<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; -- <o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; 1.9.1<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; <o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; -- <o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; ____________________________________________=
+___<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; meta-ti mailing list<o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; <a href=3D"mailto:meta-ti@yoctoproject.org">=
+<span style=3D"color:windowtext;text-decoration:none">meta-ti@yoctoproject.=
+org</span></a><o:p></o:p></p>
+<p class=3D"MsoPlainText">&gt; <a href=3D"https://lists.yoctoproject.org/li=
+stinfo/meta-ti">
+<span style=3D"color:windowtext;text-decoration:none">https://lists.yoctopr=
+oject.org/listinfo/meta-ti</span></a><o:p></o:p></p>
+</div>
+</body>
+</html>
+
+--_000_5130E41A1BA9D145BA0F3B18D5CFB0A7437E0089DFLE12entticom_--
