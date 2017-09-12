@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 79B5BE00B8E; Tue, 12 Sep 2017 11:02:23 -0700 (PDT)
+	id C18FBE00CA5; Tue, 12 Sep 2017 11:56:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,44 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B500E00A39
-	for <meta-ti@yoctoproject.org>; Tue, 12 Sep 2017 11:02:21 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80E63E00B8E
+	for <meta-ti@yoctoproject.org>; Tue, 12 Sep 2017 11:56:04 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v8CI2KNu032574
-	for <meta-ti@yoctoproject.org>; Tue, 12 Sep 2017 13:02:20 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v8CIu4KA006958
+	for <meta-ti@yoctoproject.org>; Tue, 12 Sep 2017 13:56:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1505239340;
-	bh=NqPzwyg3fePR0YHg+bXcTAtr7XQs7eBAvvYdWHbfkgw=;
+	s=ti-com-17Q1; t=1505242564;
+	bh=cwT55KJt5CisnnTrHAVABxMYcZCVJt6tVwLc4cwm7Oc=;
 	h=From:To:CC:Subject:Date;
-	b=nDtZxWREY7ZcP5Ho8V0ehJ45VN05wlJhqwadwREv0psSxqVFGhbtjmYllQDdnEH19
-	lheskSB5m1HA6zAMWb+Xo+MenQKoqmyA26vf6BnGhVXtZrBa0Vbfxhl6Few+mxH/+1
-	oRBDUqeDhYi5CBNGt/+OlEvJFRSkTufByTMR7YSE=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8CI2KaF006476
-	for <meta-ti@yoctoproject.org>; Tue, 12 Sep 2017 13:02:20 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE106.ent.ti.com
-	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+	b=u5hz84Kva5pny6+eqycS/GnsB9Ua9VrRzOl8GXFYGQ0rIPkwCuRYXheKab3QZZ9Je
+	RpQTBIRQ4x+p6L/BWhI490BFRgqY7P0ZKIcppLmKrrvPBTFYA4qxDiGQeavSk+clG1
+	UybZiVVIaw5a3vV0I+I/y4GZ8ypqNaYwMJzuwh0A=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8CIu4aD016423
+	for <meta-ti@yoctoproject.org>; Tue, 12 Sep 2017 13:56:04 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 12 Sep 2017 13:02:20 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE101.ent.ti.com
-	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 12 Sep 2017 13:56:04 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE112.ent.ti.com
+	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 12 Sep 2017 13:02:20 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8CI2Ka3010841;
-	Tue, 12 Sep 2017 13:02:20 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+	Transport; Tue, 12 Sep 2017 13:56:04 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8CIu46H020896;
+	Tue, 12 Sep 2017 13:56:04 -0500
+Received: from localhost ([172.22.139.161])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	v8CIu3302809; Tue, 12 Sep 2017 13:56:03 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 12 Sep 2017 14:02:19 -0400
-Message-ID: <1505239339-26594-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Tue, 12 Sep 2017 13:56:02 -0500
+Message-ID: <20170912185602.16053-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/master][PATCH] dra7xx-evm: enable UBI images for NAND on dra71x
+Subject: [PATCH] linux-ti-staging: update to ti2017.04-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,28 +68,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Sep 2017 18:02:23 -0000
+X-List-Received-Date: Tue, 12 Sep 2017 18:56:07 -0000
 Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- conf/machine/dra7xx-evm.conf |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 2202a70..38230c6 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/dra7xx.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+index d4b51a36..fa3f0819 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
  
- MACHINE_FEATURES += "touchscreen"
+ BRANCH = "ti-rt-linux-4.9.y"
  
--IMAGE_FSTYPES += "tar.xz"
-+IMAGE_FSTYPES += "ubifs ubi tar.xz"
+-SRCREV = "b758af1b09065bce3331e128423ea52cc411fa2c"
++SRCREV = "47e434d98a40866672c439016dff01deacb5ed9c"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 03a54e05..73776988 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
  
- SERIAL_CONSOLE = "115200 ttyS0"
+ BRANCH = "ti-lsk-linux-4.9.y"
  
+-SRCREV = "b7dd237abcd1363fc166173b59a86a107ca0bcce"
+-PV = "4.9.47+git${SRCPV}"
++SRCREV = "c2eed4ada298a73248ebe92ff7c3ef3d79cc44a6"
++PV = "4.9.49+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c"
 -- 
-1.7.9.5
+2.14.0
 
 
