@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A92BFE00970; Mon, 18 Sep 2017 11:43:37 -0700 (PDT)
+	id 78076E00C82; Mon, 18 Sep 2017 13:22:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,44 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05B87E0090A
-	for <meta-ti@yoctoproject.org>; Mon, 18 Sep 2017 11:43:35 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DEE3E00956
+	for <meta-ti@yoctoproject.org>; Mon, 18 Sep 2017 13:22:43 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v8IIhZ8w018090
-	for <meta-ti@yoctoproject.org>; Mon, 18 Sep 2017 13:43:35 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v8IKMhNM030370
+	for <meta-ti@yoctoproject.org>; Mon, 18 Sep 2017 15:22:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1505760215;
-	bh=LqjAFj8Y8sYlglwJTB+GWkzkwJwLIonWZFAZjMf/l4M=;
+	s=ti-com-17Q1; t=1505766163;
+	bh=6oFN6ZNRfwn72Ogg1WJzVp540suTQjLCdpQO0BbmADA=;
 	h=From:To:CC:Subject:Date;
-	b=xctjdN/SVsNW0IrFT9jLfKwAnpn6B6/3e5K0HIzVYNJXLcD7dBY0SwGUMXSjTzaFv
-	G2XMywgV++N+9L9V8ZUmYB69jkkoGDDzPnqb6LYbs95j2kBTmgDPyAWbrNi2Crogzo
-	XTgSdyS+lzQG8KRfE6CJ1L4eNkC3kpeWYIJJkBrg=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8IIhZvP025597
-	for <meta-ti@yoctoproject.org>; Mon, 18 Sep 2017 13:43:35 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	b=R9rAfDAIWukOUo4mpyslMpSfq3jqHLNA9FsPVsvj7yyHX2520LU+6pLXp4Pv8UUCN
+	mYbJCDiKWPCgBPN+LYIxJE7oRAMoom0z1Utb65N58YCzB7gQoYJRWAXtLawaEe9bJh
+	p48Lo23vsZ05dYOExQDWP6XkrKZDXIX2cuUhDUMc=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8IKMhQO008384
+	for <meta-ti@yoctoproject.org>; Mon, 18 Sep 2017 15:22:43 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Mon, 18 Sep 2017 13:43:35 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_0,
+	Mon, 18 Sep 2017 15:22:43 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Mon, 18 Sep 2017 13:43:35 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8IIhYQZ017589;
-	Mon, 18 Sep 2017 13:43:34 -0500
-Received: from localhost ([172.22.137.22])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	v8IIhY326978; Mon, 18 Sep 2017 13:43:34 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
+	Transport; Mon, 18 Sep 2017 15:22:42 -0500
+Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8IKMgqm023930;
+	Mon, 18 Sep 2017 15:22:42 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 18 Sep 2017 13:43:27 -0500
-Message-ID: <20170918184327.3170-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
+Date: Mon, 18 Sep 2017 16:22:39 -0400
+Message-ID: <1505766159-40186-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] linux-ti-staging: update to ti2017.04-rc4 tag
+Subject: [PATCH v4] pruss-lld: Add rtos recipe & update the version to 1.0.0.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,41 +65,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Sep 2017 18:43:37 -0000
+X-List-Received-Date: Mon, 18 Sep 2017 20:22:47 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+RTOS low level driver for the PRUSS module
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ 
+ v4 - Updated the commit message
+ v3 - Added k2g SOC family in place of k2g-evm & k2g-hs-evm
+ v2 - Added summary
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index fa3f0819..07e4d987 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+ recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb | 23 +++++++++++++++++++++++
+ recipes-bsp/pruss-lld/pruss-lld.inc         |  8 ++++----
+ 2 files changed, 27 insertions(+), 4 deletions(-)
+ create mode 100644 recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
+
+diff --git a/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb b/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
+new file mode 100644
+index 0000000..5068286
+--- /dev/null
++++ b/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "TI RTOS low level driver library for PRUSS"
++
++inherit ti-pdk
++require recipes-bsp/pruss-lld/pruss-lld.inc
++
++PR = "${INC_PR}.0"
++
++S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
++
++DEPENDS_append = " osal-rtos"
++DEPENDS_append_ti33x = " starterware-rtos"
++DEPENDS_append_ti43x = " starterware-rtos"
++
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
++
++export PDK_PRUSS_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${WORKDIR}/build"
++
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "PRUSS LLD"
++
++INSANE_SKIP_${PN} = "arch"
+diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
+index 8620108..44d84b8 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld.inc
++++ b/recipes-bsp/pruss-lld/pruss-lld.inc
+@@ -1,7 +1,7 @@
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://pruicss.h;beginline=1;endline=31;md5=315177aa03d58bcd124a6e799e2bd458"
  
- BRANCH = "ti-rt-linux-4.9.y"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|k2g-evm"
++COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|k2g"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--SRCREV = "47e434d98a40866672c439016dff01deacb5ed9c"
-+SRCREV = "360f39b7d7af94362d796a8278bb33bae2c53713"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 73776988..0898523f 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
+ PRUSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pruss-lld.git"
+@@ -9,12 +9,12 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
+ PRUSS_LLD_GIT_BRANCH = "master"
+ PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
  
- BRANCH = "ti-lsk-linux-4.9.y"
+-# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.06A"
+-PRUSS_LLD_SRCREV = "b98729cc1fc26c9ac32846146892646a23c28adb"
++# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.07"
++PRUSS_LLD_SRCREV = "636bb5645014723c54c08245cf8c2ee401eceb4f"
  
--SRCREV = "c2eed4ada298a73248ebe92ff7c3ef3d79cc44a6"
--PV = "4.9.49+git${SRCPV}"
-+SRCREV = "77a6df0646af48355779e367cb6398f57464b937"
-+PV = "4.9.50+git${SRCPV}"
+ BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "c"
+ SRCREV = "${PRUSS_LLD_SRCREV}"
+-PV = "01.00.00.06A"
++PV = "01.00.00.07"
+ INC_PR = "r0"
 -- 
-2.14.0
+1.9.1
 
 
