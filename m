@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C4ECAE00CF7; Tue, 19 Sep 2017 08:01:22 -0700 (PDT)
+	id F0B1DE00CCC; Tue, 19 Sep 2017 08:01:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 09F35E00CDF
-	for <meta-ti@yoctoproject.org>; Tue, 19 Sep 2017 08:01:18 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED248E00CF6
+	for <meta-ti@yoctoproject.org>; Tue, 19 Sep 2017 08:01:21 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v8JF1856002606
-	for <meta-ti@yoctoproject.org>; Tue, 19 Sep 2017 10:01:08 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v8JF1Bpi002613
+	for <meta-ti@yoctoproject.org>; Tue, 19 Sep 2017 10:01:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1505833268;
-	bh=O72EIrL58QBN6UBZig6D7iEKObdD2Af/oaAqpr8nG0k=;
-	h=From:To:CC:Subject:Date;
-	b=AGs+x1WHM+Yn88nWZhasZE3OjxqOZwAoXgGeB5692QhlRHHc7iWmY8P5S4tAzFjqW
-	UWaBgWkW0Oy7PnHliy2ywTmSNt+IXOxqvOIQAvZynxVhXjPYMkyg2IhJ42amRFfMvp
-	4Qq1it8aPPTPQZtAChBzQjedGP26hwvsk6ONMrJg=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8JF12gR013095
-	for <meta-ti@yoctoproject.org>; Tue, 19 Sep 2017 10:01:02 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1505833271;
+	bh=wITOxEBVe8GpaWtzhXZ6JqzuvdloXoJWn4PuAYGGbqM=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=U7zCIvX8j2l6FDGEqNELD7DaIupYlscm1BcTnY2khXfsEAFqwbMDjFzEbRFztvWi6
+	jVkWMT/CzbIOxsrkxo5uUE36cJ5K0VphwGpwy/dDrbmLuzpcu1jYNX8swjCVAllUlb
+	7iSefz80W5NjOuFpqMo0O8OUEy1umSmA2duNqBzo=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8JF165V013285
+	for <meta-ti@yoctoproject.org>; Tue, 19 Sep 2017 10:01:06 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 19 Sep 2017 10:01:02 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 19 Sep 2017 10:01:06 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 19 Sep 2017 10:01:02 -0500
+	Transport; Tue, 19 Sep 2017 10:01:06 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8JF12ZY029672;
-	Tue, 19 Sep 2017 10:01:02 -0500
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v8JF12Za029672;
+	Tue, 19 Sep 2017 10:01:06 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 19 Sep 2017 11:00:56 -0400
-Message-ID: <1505833258-3641-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 19 Sep 2017 11:00:58 -0400
+Message-ID: <1505833258-3641-3-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1505833258-3641-1-git-send-email-m-radhakrishnan2@ti.com>
+References: <1505833258-3641-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH v1 1/3] common-csl-ip: Updating to version 3.3.0.8
+Subject: [PATCH v1 3/3] osal: Updating to version 1.0.0.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,37 +67,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 15:01:22 -0000
+X-List-Received-Date: Tue, 19 Sep 2017 15:01:24 -0000
 Content-Type: text/plain
 
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
+ recipes-bsp/osal/osal.inc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 71ef9e9..6315a5f 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
+index 63ccca9..04b84ec 100644
+--- a/recipes-bsp/osal/osal.inc
++++ b/recipes-bsp/osal/osal.inc
+@@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
+ OSAL_GIT_BRANCH = "master"
+ OSAL_GIT_DESTSUFFIX = "git/ti/osal"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
+-# Below commit ID corresponding to "DEV.OSAL.01.00.00.07"
+-OSAL_SRCREV = "62ea536572d91a17321dfca287771a5b65e6e00d"
++# Below commit ID corresponding to "DEV.OSAL.01.00.00.08"
++OSAL_SRCREV = "ebd3acdbb4e7d6d0393efedd15ce479c5a79772d"
  
--PV = "03.03.00.07B"
-+PV = "03.03.00.08"
+ BRANCH = "${OSAL_GIT_BRANCH}"
+ SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${OSAL_SRCREV}"
+-PV = "01.00.00.07"
++PV = "01.00.00.08"
  INC_PR = "r0"
- 
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
- 
--# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.07B"
--CSL_SRCREV = "28dbc2f4b0b06b29ac4e962a9494987d242b48b5"
-+# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.08"
-+CSL_SRCREV = "6a8af079b8bf8a66a9d0ff8c00f78badddcb8039"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
 1.9.1
 
