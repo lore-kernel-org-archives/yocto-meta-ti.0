@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C5FFE00D14; Mon,  2 Oct 2017 16:26:45 -0700 (PDT)
+	id 86A91E00D26; Tue,  3 Oct 2017 02:14:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.19.16 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,42 +17,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0DABCE00D03
-	for <meta-ti@yoctoproject.org>; Mon,  2 Oct 2017 16:26:43 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v92NQhFE026233
-	for <meta-ti@yoctoproject.org>; Mon, 2 Oct 2017 18:26:43 -0500
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8AEC5E00D20
+	for <meta-ti@yoctoproject.org>; Tue,  3 Oct 2017 02:14:36 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v939EPI1022988
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:14:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1506986803;
-	bh=luhG4cgF1c8QB9wSiC/1zdZwfQkQjz7Vp0JyYI+FMk8=;
+	s=ti-com-17Q1; t=1507022065;
+	bh=FnMRYG+orFdWlB7PYwczugZeQobw5Otd4THp8YTcesE=;
 	h=From:To:CC:Subject:Date;
-	b=LsBCgGbqeVDRWltCnCHMEOM/G01m3mASj1j9jqM3bR+pNtbRy5AfMJJ5gyykx/0cu
-	b+lk9f1hwi3aovNyws9N0Z9/JAPFy4d4mlxcbW2hu3tXnWITPICO+IXPsm7yYohd02
-	9oyWCiADWt7PtnCIXer2vXXP+TZy0rVBDoGyYIvA=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v92NQhGg028630
-	for <meta-ti@yoctoproject.org>; Mon, 2 Oct 2017 18:26:43 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+	b=sEML95X9wnh0iNg/OV+LltniwwYNpgWEaAS69b2wC7i4wflhXAEMPT/goHEPg98HJ
+	kEHGoeircIUQIILl07v0fw7IJbcTJB2WgO9mnTnGicIQVhb58TcKxyLrMsQ7ttQGkS
+	Rwp2CoHXFtTeD8Nh62AEuiIp9fYoMiELhUW14BRQ=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939EKgI001779
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:14:20 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Mon, 2 Oct 2017 18:26:43 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE102.ent.ti.com
-	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 3 Oct 2017 04:14:20 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Mon, 2 Oct 2017 18:26:42 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v92NQgMQ009277;
-	Mon, 2 Oct 2017 18:26:42 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+	Transport; Tue, 3 Oct 2017 04:14:20 -0500
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939EIvY011115;
+	Tue, 3 Oct 2017 04:14:19 -0500
+From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 2 Oct 2017 19:26:42 -0400
-Message-ID: <1506986802-16400-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Tue, 3 Oct 2017 14:44:16 +0530
+Message-ID: <1507022056-174298-1-git-send-email-a0393906@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/master][PATCH] linux-ti-staging: update to 4.9.52 and add new AM5 DTBs
+Subject: [PATCH] ipumm-fw: Update new SRCREV on git repo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,64 +64,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Oct 2017 23:26:45 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 09:14:38 -0000
 Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/am57xx-evm.conf                    |    3 ++-
- recipes-kernel/linux/linux-ti-staging-rt_4.9.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_4.9.bb    |    6 +++---
- 3 files changed, 6 insertions(+), 5 deletions(-)
+The ipumm-fw repository had to undergo a forced commit update.
+This was an unforeseen update and had to be done in urgency.
+This recipe update takes care of fixing the new commit-id that
+corresponds to the previous version that was being used.
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 78f56e6..5c70b83 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -10,11 +10,12 @@ IMAGE_FSTYPES += "tar.xz"
+There is no functional change.
+
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+---
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index a2d1b32..945c289 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
  
- SERIAL_CONSOLE = "115200 ttyS2"
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb \
-+KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb \
-                     am57xx-evm.dtb am57xx-evm-cam-mt9t111.dtb am57xx-evm-cam-ov10635.dtb \
-                     am57xx-evm-reva3.dtb am57xx-evm-reva3-cam-mt9t111.dtb am57xx-evm-reva3-cam-ov10635.dtb \
-                     am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb \
-                     am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb \
-+                    am574x-idk.dtb \
-                     ${@base_conditional('ENABLE_TI_UIO_DEVICES', '1', 'am572x-idk-pru-excl-uio.dtb am571x-idk-pru-excl-uio.dtb', '', d)}"
+-SRCREV = "fd441443a4289c801a0c8d9f00b6966f7fe3476c"
++SRCREV = "2aa80581cc7d1d82a1af9a46c37793b2fe8b9d42"
  
- UBOOT_MACHINE = "am57xx_evm_config"
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-index 07e4d98..76e75a3 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+ S = "${WORKDIR}/git"
  
- BRANCH = "ti-rt-linux-4.9.y"
+ PV = "3.00.13.00"
+-PR = "r5"
++PR = "r6"
  
--SRCREV = "360f39b7d7af94362d796a8278bb33bae2c53713"
-+SRCREV = "3e12ba947dd5acc384a07de643ad1a14c6a5161c"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 0898523..f7b026f 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -55,11 +55,11 @@ S = "${WORKDIR}/git"
+ require recipes-ti/includes/ti-paths.inc
  
- BRANCH = "ti-lsk-linux-4.9.y"
- 
--SRCREV = "77a6df0646af48355779e367cb6398f57464b937"
--PV = "4.9.50+git${SRCPV}"
-+SRCREV = "a96dc68aaaa04b33179bc5ca36e742c4786f2cce"
-+PV = "4.9.52+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "a"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 -- 
-1.7.9.5
+1.9.1
 
 
