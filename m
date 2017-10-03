@@ -1,6 +1,6 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C5688E00D33; Tue,  3 Oct 2017 04:15:11 -0700 (PDT)
+	id B0F00E00D3A; Tue,  3 Oct 2017 12:49:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,44 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E35DFE00D3A
-	for <meta-ti@yoctoproject.org>; Tue,  3 Oct 2017 04:15:09 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25E81E00D27
+	for <meta-ti@yoctoproject.org>; Tue,  3 Oct 2017 12:49:44 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v93BExUG003193
-	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 06:14:59 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v93JnXaF003222
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 14:49:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1507029299;
-	bh=dgd5Gcpo0Wr3qfnxrhwZDQY97Cgh/z/dAVz5GTLgGxE=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=h0gMBKqnsYsfag7IhW+dfKuVtHwF8Jd6D+yPycqe1tZiMUyA7JpaL/zXqecMRoN6d
-	DbrJu99GWyHeZtkJMLIg4NlGx6cUBmrnCLVhLRs8n7dInFS8ilFk2MxHfFmjJFOGmK
-	HS0nNPJlpMmpyIvWcgyfauqgT5ySDZX6IT9J9bDc=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v93BEs3u007648
-	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 06:14:54 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1507060173;
+	bh=ARUN34ox07kCrcKl1c+f1Z8n9JCVTqlY8RRX9AC0NRk=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=DRsV2CrCh0BwcVdf0M9qvzxYbqn80Ym97ALK73SnipIxtNyBJeHOYwHvC7FvghvE7
+	TreTBhri5eypVEemoGHK9eu6gq9uekp0qW0CjYDKVJB09YsY+P6+Ccic2X89Cwb0XQ
+	a5ucAxSKzV21h8eUHI9/OnvMkv6CIzStwchH2ejc=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v93JnSGn013701
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 14:49:28 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 3 Oct 2017 06:14:54 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 3 Oct 2017 14:49:28 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 3 Oct 2017 06:14:54 -0500
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v93BElB1014743;
-	Tue, 3 Oct 2017 06:14:53 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 3 Oct 2017 07:14:44 -0400
-Message-ID: <1507029285-5066-3-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1507029285-5066-1-git-send-email-sam.nelson@ti.com>
+	Transport; Tue, 3 Oct 2017 14:49:28 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v93JnS2K019122;
+	Tue, 3 Oct 2017 14:49:28 -0500
+Date: Tue, 3 Oct 2017 15:49:12 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Sam Nelson <sam.nelson@ti.com>
+Message-ID: <20171003194912.GU8393@edge>
 References: <1507029285-5066-1-git-send-email-sam.nelson@ti.com>
+	<1507029285-5066-2-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
+In-Reply-To: <1507029285-5066-2-git-send-email-sam.nelson@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/master][PATCH 3/4] ti-xdctools: Update to new version 3.50.03.33
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [morty/master][PATCH 2/4] ti-sysbios: Add recipe for new version 6.52.00.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,36 +68,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 11:15:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 03 Oct 2017 19:49:45 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
----
- .../{ti-xdctools_3.32.01.22.bb => ti-xdctools_3.50.03.33.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename recipes-ti/devtools/{ti-xdctools_3.32.01.22.bb => ti-xdctools_3.50.03.33.bb} (51%)
+Sam,
 
-diff --git a/recipes-ti/devtools/ti-xdctools_3.32.01.22.bb b/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-similarity index 51%
-rename from recipes-ti/devtools/ti-xdctools_3.32.01.22.bb
-rename to recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-index 5f379c1..73ab3bd 100644
---- a/recipes-ti/devtools/ti-xdctools_3.32.01.22.bb
-+++ b/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-@@ -1,9 +1,9 @@
- require recipes-ti/devtools/ti-xdctools-core.inc
- 
--PV = "3_32_01_22"
-+PV = "3_50_03_33"
- PR = "r0"
- 
- LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=1796f68c3d32d408415f5612f1f60652"
- 
--SRC_URI[xdczip.md5sum] = "ddae5b765ca62783c1e804c75c463c38"
--SRC_URI[xdczip.sha256sum] = "b1c6620ef0b8eac45ef6a587f93b3238bdcf3b02dfd7e4b40d872a45c02c5cdc"
-+SRC_URI[xdczip.md5sum] = "21310b647275a7c7dd5b37dcb96c0b1b"
-+SRC_URI[xdczip.sha256sum] = "afe8616773e63b01e79e8cfacaf4d2c8d3b92c798c7f8cf5d1c7b5fe2060bbe4"
--- 
-1.9.1
+You seem to be updating baremetal gcc from version 4 to version 6, but here 
+you are adding new sysbios version, leaving old one alone. Will it break the 
+old version of sysbios or does it build/work fine with the new gcc?
 
+On Tue, Oct 03, 2017 at 07:14:43AM -0400, Sam Nelson wrote:
+> Linux installer binary file name has changed compared to previous
+> version
+> Break backward compatibilty for A15 gcc tools: requires gcc-arm-none-
+> eabi-6-2017-q1-update or later
+> 
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> ---
+>  recipes-ti/bios/ti-sysbios_6.52.00.12.bb | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+> 
+> diff --git a/recipes-ti/bios/ti-sysbios_6.52.00.12.bb b/recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+> new file mode 100644
+> index 0000000..2bbe881
+> --- /dev/null
+> +++ b/recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+> @@ -0,0 +1,16 @@
+> +require recipes-ti/bios/ti-sysbios.inc
+> +
+> +PV = "6_52_00_12"
+> +PR = "r0"
+> +
+> +LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=ca549c223d732e6f69efc449795c4eeb"
+> +
+> +SRC_URI[sysbiosbin.md5sum] = "3c16af0843b5b6c5ff10512d1b586665"
+> +SRC_URI[sysbiosbin.sha256sum] = "4a2b9b76f52a57f02725337db9361787eae4c917d7cf989a697ed41eb4a1e701"
+> +
+> +TI_BIN_UNPK_CMDS = ""
+> +TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+> +
+> +BINFILE = "bios_${PV}.run"
+> +SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios/${PV}/exports/${BINFILE};name=sysbiosbin"
+> +
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
