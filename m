@@ -1,6 +1,6 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 86A91E00D26; Tue,  3 Oct 2017 02:14:38 -0700 (PDT)
+	id B2C39E00D26; Tue,  3 Oct 2017 02:17:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,40 +18,40 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8AEC5E00D20
-	for <meta-ti@yoctoproject.org>; Tue,  3 Oct 2017 02:14:36 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36BC4E00D20
+	for <meta-ti@yoctoproject.org>; Tue,  3 Oct 2017 02:17:00 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v939EPI1022988
-	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:14:25 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v939GoJ2023265
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:16:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1507022065;
+	s=ti-com-17Q1; t=1507022210;
 	bh=FnMRYG+orFdWlB7PYwczugZeQobw5Otd4THp8YTcesE=;
 	h=From:To:CC:Subject:Date;
-	b=sEML95X9wnh0iNg/OV+LltniwwYNpgWEaAS69b2wC7i4wflhXAEMPT/goHEPg98HJ
-	kEHGoeircIUQIILl07v0fw7IJbcTJB2WgO9mnTnGicIQVhb58TcKxyLrMsQ7ttQGkS
-	Rwp2CoHXFtTeD8Nh62AEuiIp9fYoMiELhUW14BRQ=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939EKgI001779
-	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:14:20 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	b=SPehjnC05VF37vvldvjpFPlmbmRdxBnuZMP77kEZOzrsAaCIST6hMjTY9X6Xvsply
+	uxc83p0HYLHlZigW9RWqL/Ccmt9svAywn+E41W41wmQ4qondA6K6IPO0LXKvVsv9Sq
+	pSt2LCOzpd21Ua6vi/AVu71rRTIAI8pIKt7lqTmg=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939GjdY004860
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:16:45 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE108.ent.ti.com
+	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 3 Oct 2017 04:14:20 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 3 Oct 2017 04:16:45 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 3 Oct 2017 04:14:20 -0500
+	Transport; Tue, 3 Oct 2017 04:16:45 -0500
 Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939EIvY011115;
-	Tue, 3 Oct 2017 04:14:19 -0500
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939Ggfa002209;
+	Tue, 3 Oct 2017 04:16:44 -0500
 From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 3 Oct 2017 14:44:16 +0530
-Message-ID: <1507022056-174298-1-git-send-email-a0393906@ti.com>
+Date: Tue, 3 Oct 2017 14:46:40 +0530
+Message-ID: <1507022200-175996-1-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] ipumm-fw: Update new SRCREV on git repo
+Subject: [morty] ipumm-fw: Update new SRCREV on git repo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,7 +64,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 09:14:38 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 09:17:02 -0000
 Content-Type: text/plain
 
 The ipumm-fw repository had to undergo a forced commit update.
