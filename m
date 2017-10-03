@@ -1,6 +1,6 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 28B6CE00D26; Tue,  3 Oct 2017 02:43:19 -0700 (PDT)
+	id F1E41E00D26; Tue,  3 Oct 2017 04:14:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,40 +18,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1796E00CB0
-	for <meta-ti@yoctoproject.org>; Tue,  3 Oct 2017 02:43:18 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE58AE00D03
+	for <meta-ti@yoctoproject.org>; Tue,  3 Oct 2017 04:14:51 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v939hH2i012709
-	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:43:17 -0500
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v93BEoJP025319
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 06:14:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1507023797;
-	bh=PCkQ2TTRNOqv7xYEsa9F7xIr1FLR3FnVgfFErYYfcfw=;
-	h=From:To:CC:Subject:Date;
-	b=DWj+fp3AL29r2oojUxxtOGsTbORdru6nqx2vzlmNeDKL98nJva+8GxiyI7iRzgMMR
-	AVDKbcRkEaUIjZpLof8pCN2ivQOSMKYZEd2NFU5/cp5zF4sI0jB/QSl4mus0Sa6j/+
-	MXu9FtX7A1wNLPf9ItxjlVVxZ31GGlavhwIrGmf8=
+	s=ti-com-17Q1; t=1507029291;
+	bh=S7wQlxBRtezwXyP6VVo8jGNXSLbCrq49ajyoijt5BsA=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=Tm6CIb69CoiFpJ2GzPLxKTuY5ScRnV/4t8MJuDtJMuNW7EcaB8r0y5ZPLUfx7GO6w
+	43aT4YNoJYLwJ4LeRefph86GcmO29gDuYWzuBu+gE1SZ7vytE0lan+vuc/hzRb8jzQ
+	mJKBd+3n4Lth1d1XspMShB0Elhaj0lh8o4rkaZvE=
 Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939hHQU032307
-	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 04:43:17 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE115.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v93BEoGg025130
+	for <meta-ti@yoctoproject.org>; Tue, 3 Oct 2017 06:14:50 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
 	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 3 Oct 2017 04:43:17 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE101.ent.ti.com
-	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 3 Oct 2017 06:14:50 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 3 Oct 2017 04:43:17 -0500
-Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v939hGXr004659;
-	Tue, 3 Oct 2017 04:43:16 -0500
-From: Karthik Ramanan <a0393906@ti.com>
+	Transport; Tue, 3 Oct 2017 06:14:50 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v93BElB0014743;
+	Tue, 3 Oct 2017 06:14:50 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 3 Oct 2017 15:13:14 +0530
-Message-ID: <1507023794-83634-1-git-send-email-a0393906@ti.com>
+Date: Tue, 3 Oct 2017 07:14:43 -0400
+Message-ID: <1507029285-5066-2-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1507029285-5066-1-git-send-email-sam.nelson@ti.com>
+References: <1507029285-5066-1-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [krogoth] ipumm-fw: Update new SRCREV on git repo
+Subject: [morty/master][PATCH 2/4] ti-sysbios: Add recipe for new version 6.52.00.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,40 +67,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 09:43:19 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 11:14:53 -0000
 Content-Type: text/plain
 
-The ipumm-fw repository had to undergo a forced commit update.
-This was an unforeseen update and had to be done in urgency.
-This recipe update takes care of fixing the new commit-id that
-corresponds to the previous version that was being used.
+Linux installer binary file name has changed compared to previous
+version
+Break backward compatibilty for A15 gcc tools: requires gcc-arm-none-
+eabi-6-2017-q1-update or later
 
-There is no functional change.
-
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/bios/ti-sysbios_6.52.00.12.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 recipes-ti/bios/ti-sysbios_6.52.00.12.bb
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 1a5d285..1ec9896 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
- 
- SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
- 
--SRCREV = "fd441443a4289c801a0c8d9f00b6966f7fe3476c"
-+SRCREV = "2aa80581cc7d1d82a1af9a46c37793b2fe8b9d42"
- 
- S = "${WORKDIR}/git"
- 
- PV = "3.00.13.00"
--PR = "r5"
-+PR = "r6"
- 
- require recipes-ti/includes/ti-paths.inc
- require recipes-ti/includes/ti-staging.inc
+diff --git a/recipes-ti/bios/ti-sysbios_6.52.00.12.bb b/recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+new file mode 100644
+index 0000000..2bbe881
+--- /dev/null
++++ b/recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+@@ -0,0 +1,16 @@
++require recipes-ti/bios/ti-sysbios.inc
++
++PV = "6_52_00_12"
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=ca549c223d732e6f69efc449795c4eeb"
++
++SRC_URI[sysbiosbin.md5sum] = "3c16af0843b5b6c5ff10512d1b586665"
++SRC_URI[sysbiosbin.sha256sum] = "4a2b9b76f52a57f02725337db9361787eae4c917d7cf989a697ed41eb4a1e701"
++
++TI_BIN_UNPK_CMDS = ""
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
++
++BINFILE = "bios_${PV}.run"
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios/${PV}/exports/${BINFILE};name=sysbiosbin"
++
 -- 
 1.9.1
 
