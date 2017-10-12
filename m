@@ -1,6 +1,6 @@
-Return-Path: <jjhiblot@ti.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5CEDAE00A9C; Thu, 12 Oct 2017 09:44:27 -0700 (PDT)
+	id C8927E00A9C; Thu, 12 Oct 2017 11:17:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,42 +18,39 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37738E00C65
-	for <meta-ti@yoctoproject.org>; Thu, 12 Oct 2017 09:44:25 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19CAEE007EF
+	for <meta-ti@yoctoproject.org>; Thu, 12 Oct 2017 11:17:10 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9CGiPE6026605
-	for <meta-ti@yoctoproject.org>; Thu, 12 Oct 2017 11:44:25 -0500
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9CIHAn5007944
+	for <meta-ti@yoctoproject.org>; Thu, 12 Oct 2017 13:17:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1507826665;
-	bh=v7Wa7qI+rOs7j1vsjX/G7bTaVmTc7oWDzIaYZOI5bdc=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=BIA8QxOufs2bv4BRp9QZsghlYaXAgKt3CgUZAY129xL8taPfSBjwZ7B1bivSYoDAh
-	eiis1BYKv23bb4VwkgJd4hjDopGLuqER7AjHnooPtwbN0SeN/ynUaf/Hyi+1xDSnW3
-	C8KtSpkj1d549Jr7viCF7GydetBKH/W7eQL9ux5M=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9CGiP4R014865
-	for <meta-ti@yoctoproject.org>; Thu, 12 Oct 2017 11:44:25 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE106.ent.ti.com
-	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Thu, 12 Oct 2017 11:44:24 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Thu, 12 Oct 2017 11:44:24 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9CGiNPh028719;
-	Thu, 12 Oct 2017 11:44:24 -0500
-From: Jean-Jacques Hiblot <jjhiblot@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Date: Thu, 12 Oct 2017 18:44:24 +0200
-Message-ID: <1507826664-24649-2-git-send-email-jjhiblot@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1507826664-24649-1-git-send-email-jjhiblot@ti.com>
-References: <1507826664-24649-1-git-send-email-jjhiblot@ti.com>
+	s=ti-com-17Q1; t=1507832230;
+	bh=cUL+Y1MvXzRIhLyBLaIaLJ2+lfhrcBP8769S7E3OYbY=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=APQBSNHRZM90OUqT29N5ht1NLAWIOnD08rKGC92jE5tqV0iSbC8oo0UgXWSgLC30N
+	Lic05KO/ubVjbMlSX3eSWxmANn4+Km8+6FoLftst6MIMVyFTxLlmuXgDFdrcDpkVoe
+	chtfPUfggw84Atw7615PYvwzj4oT/n9jI9kVtL0U=
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9CIHAek016549
+	for <meta-ti@yoctoproject.org>; Thu, 12 Oct 2017 13:17:10 -0500
+Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.03.0294.000; Thu, 12 Oct 2017 13:17:09 -0500
+From: "Gou, Hongmei" <h-gou@ti.com>
+To: "Stiffler, Jacob" <j-stiffler@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [PATCH] linux: ti-uio: remove KERNEL_DEVICETREE appends
+Thread-Index: AQHTQ3bkubNppX5E6ECDvloEZeBE/KLghZ7g
+Date: Thu, 12 Oct 2017 18:17:08 +0000
+Message-ID: <2E957F12D11D904590FA9AF86D366BD926D8E085@DLEE08.ent.ti.com>
+References: <1507825145-1602-1-git-send-email-j-stiffler@ti.com>
+In-Reply-To: <1507825145-1602-1-git-send-email-j-stiffler@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.172.224.221]
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [krogoth][PATCH 2/2] u-boot-ti-staging: update to ti2016.09-rc1 tag
+Subject: Re: [PATCH] linux: ti-uio: remove KERNEL_DEVICETREE appends
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,36 +63,84 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 16:44:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Oct 2017 18:17:11 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jean-Jacques Hiblot <jjhiblot@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ACK
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-index 0c786c3..7d987c8 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2016.05.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- 
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
- 
--PR = "r34"
-+PR = "r35"
- PV_append = "+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2016.05"
- 
--SRCREV = "299ebd66e11c2481a29ddcbfe65e196f6c9e0b41"
-+SRCREV = "340c262b4bed7adac127e572f857e6f931ef18b2"
- 
- # Support for secure devices - detailed info is in doc/README.ti-secure
- TI_SECURE_DEV_PKG ?= ""
--- 
-1.9.1
+> -----Original Message-----
+> From: Stiffler, Jacob
+> Sent: Thursday, October 12, 2017 12:19 PM
+> To: meta-ti@yoctoproject.org
+> Cc: Gou, Hongmei; Nelson, Sam; Stiffler, Jacob
+> Subject: [PATCH] linux: ti-uio: remove KERNEL_DEVICETREE appends
+>=20
+> * KERNEL_DEVICETREE is now specified in the machine configuration and
+>   these appends have already been added there.
+>   - This removes the duplcitaion of these device trees in this list and
+>     thus resolves the "duplicate node name" failure during the fitImage
+>     creation.
+> * Extend am57xx-evm dts injection to dra7xx family
+>   - Now that KERNEL_DEVICETREE is specified in the machine
+>     configuration, am57xx-hs-evm inherits this list from am57xx-evm.
+>   - Extending these injectionsto the entire family allows these device
+>     trees to be availble for am57xx-hs-evm as well.
+>   - For dra7xx-evm and dra7xx-hs-evm, these device trees will not be
+>     built as they are not included in their KERNEL_DEVICETREE list.
+>=20
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+>  recipes-kernel/linux/ti-uio.inc | 11 +++--------
+>  1 file changed, 3 insertions(+), 8 deletions(-)
+>=20
+> diff --git a/recipes-kernel/linux/ti-uio.inc b/recipes-kernel/linux/ti-ui=
+o.inc
+> index 13cf53e..3104f4e 100644
+> --- a/recipes-kernel/linux/ti-uio.inc
+> +++ b/recipes-kernel/linux/ti-uio.inc
+> @@ -3,8 +3,8 @@ SRC_URI_append_k2hk =3D " file://k2hk-uio.dtsi"
+>  SRC_URI_append_k2l-evm =3D " file://k2l-uio.dtsi"
+>  SRC_URI_append_k2e =3D " file://k2e-uio.dtsi"
+>  SRC_URI_append_k2g =3D " file://keystone-k2g-pru-uio.dtsi"
+> -SRC_URI_append_am57xx-evm =3D " file://am572x-pru-uio.dtsi \
+> -                              file://am571x-pru-uio.dtsi \
+> +SRC_URI_append_dra7xx =3D " file://am572x-pru-uio.dtsi \
+> +                          file://am571x-pru-uio.dtsi \
+>  "
+>  SRC_URI_append_ti33x =3D " file://am335x-pru-uio.dtsi"
+>  SRC_URI_append_ti43x =3D " file://am437x-pru-uio.dtsi"
+> @@ -15,11 +15,6 @@ DTSI_LIST_append_k2hk =3D " k2hk-uio.dtsi"
+>  DTSI_LIST_append_k2l-evm =3D " k2l-uio.dtsi"
+>  DTSI_LIST_append_k2e =3D " k2e-uio.dtsi"
+>=20
+> -KERNEL_DEVICETREE_append_am57xx-evm =3D
+> "${@base_conditional("ENABLE_TI_UIO_DEVICES", "1", " am572x-idk-pru-
+> excl-uio.dtb am571x-idk-pru-excl-uio.dtb", "", d)}"
+> -KERNEL_DEVICETREE_append_ti33x =3D
+> "${@base_conditional("ENABLE_TI_UIO_DEVICES", "1", " am335x-icev2-pru-
+> excl-uio.dtb", "", d)}"
+> -KERNEL_DEVICETREE_append_ti43x =3D
+> "${@base_conditional("ENABLE_TI_UIO_DEVICES", "1", " am437x-idk-pru-
+> excl-uio.dtb", "", d)}"
+> -KERNEL_DEVICETREE_append_k2g =3D
+> "${@base_conditional("ENABLE_TI_UIO_DEVICES", "1", " keystone-k2g-ice-
+> pru-excl-uio.dtb", "", d)}"
+> -
+>  do_setup_uio() {
+>      if [ "${ENABLE_TI_UIO_DEVICES}" =3D=3D "1" ]
+>      then
+> @@ -35,7 +30,7 @@ do_setup_uio() {
+>      fi
+>  }
+>=20
+> -do_setup_uio_append_am57xx-evm() {
+> +do_setup_uio_append_dra7xx() {
+>=20
+>      if [ "${ENABLE_TI_UIO_DEVICES}" =3D=3D "1" ]
+>      then
+> --
+> 2.7.4
 
 
