@@ -1,40 +1,63 @@
-Return-Path: <denis@denix.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 48BE4E00CA2; Thu, 12 Oct 2017 14:14:29 -0700 (PDT)
+	id 0F019E00D00; Fri, 13 Oct 2017 09:49:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	URI_HEX autolearn=no version=3.3.1
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D152E00CC0
-	for <meta-ti@yoctoproject.org>; Thu, 12 Oct 2017 14:14:25 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 17F5D20B0A;
-	Thu, 12 Oct 2017 21:08:36 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id q7jDmSWEv16g; Thu, 12 Oct 2017 21:08:35 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D761B204B1;
-	Thu, 12 Oct 2017 21:08:34 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 33A651626EC;
-	Thu, 12 Oct 2017 17:08:34 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Thu, 12 Oct 2017 17:08:26 -0400
-Message-Id: <1507842509-789-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1507842509-789-1-git-send-email-denis@denix.org>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DBED0E00CFE
+	for <meta-ti@yoctoproject.org>; Fri, 13 Oct 2017 09:49:27 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9DGnM1W001677;
+	Fri, 13 Oct 2017 11:49:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1507913362;
+	bh=omLz7G+n38AuoZF+31JjsKvYCjNVl+npN1OxzRTLvis=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=s57Auvpv+r+nP1LRdOtiMMrmumNv5AJHe98xtMod8HQFSC2l7n5W6DZzQ4q7o+C9K
+	fvw5vFXT5ZJ9Y4iM/MC5JGD+Aw69EWZPI4fHoeX7UxugTVmcLrg06+uOP+dKfUPxAg
+	r5l2ipOJxs2s+YQ54yonuQVFVrGV8NpyBvCheLzs=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9DGnMwI030568;
+	Fri, 13 Oct 2017 11:49:22 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Fri, 13 Oct 2017 11:49:22 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE114.ent.ti.com
+	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
+	Transport; Fri, 13 Oct 2017 11:49:22 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9DGnMuN031097;
+	Fri, 13 Oct 2017 11:49:22 -0500
+Date: Fri, 13 Oct 2017 12:49:07 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Message-ID: <20171013164906.GH16210@edge>
 References: <1507842509-789-1-git-send-email-denis@denix.org>
-Subject: [master][PATCH 2/5] kselftests: bypass seccomp gcc7 build failure, gpio RDEPENDS on bash
+	<1507842509-789-5-git-send-email-denis@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <1507842509-789-5-git-send-email-denis@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [master][PATCH 5/5] FIXME: ti-sgx-ddk-km: bypass gcc7 fallthrough check
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,38 +70,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 21:14:29 -0000
+X-List-Received-Date: Fri, 13 Oct 2017 16:49:29 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+On Thu, Oct 12, 2017 at 05:08:29PM -0400, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
+> 
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+> index 0e5411f..8515239 100644
+> --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+> @@ -33,6 +33,8 @@ TARGET_PRODUCT_ti43x = "ti437x"
+>  
+>  EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
+>  
+> +KERNEL_CC += "-Wimplicit-fallthrough=0"
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/kselftests/kselftests_4.10.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+Well, this flag is gcc7-specific and breaks gcc6 builds... :(
 
-diff --git a/recipes-kernel/kselftests/kselftests_4.10.bb b/recipes-kernel/kselftests/kselftests_4.10.bb
-index e3fab0c..e4cd278 100644
---- a/recipes-kernel/kselftests/kselftests_4.10.bb
-+++ b/recipes-kernel/kselftests/kselftests_4.10.bb
-@@ -123,6 +123,9 @@ FILES_${PN}-dbg += "${bindir}/kselftests/*/.debug"
- # make[1]: *** [test_verifier] Error 1
- ALLOW_EMPTY_${PN}-bpf = "1"
- 
-+# gcc 7.x fails to build seccomp
-+ALLOW_EMPTY_${PN}-seccomp = "1"
-+
- # FIXME net target builds most of the binaries, but reuseport_bpf_numa depends on libnuma,
- # which is not availbale on ARM, failing entire test case
- ALLOW_EMPTY_${PN}-net = "1"
-@@ -130,6 +133,7 @@ ALLOW_EMPTY_${PN}-net = "1"
- RDEPENDS_${PN}-cpu-hotplug += "bash"
- RDEPENDS_${PN}-efivarfs += "bash"
- RDEPENDS_${PN}-futex += "bash ncurses"
-+RDEPENDS_${PN}-gpio += "bash"
- RDEPENDS_${PN}-memory-hotplug += "bash"
- RDEPENDS_${PN}-net += "bash"
- RDEPENDS_${PN}-vm += "bash sudo"
--- 
-2.7.4
 
+> +
+>  do_compile_prepend() {
+>      cd ${S}/eurasia_km/eurasiacon/build/linux2/omap_linux
+>  }
+> -- 
+> 2.7.4
+> 
 
