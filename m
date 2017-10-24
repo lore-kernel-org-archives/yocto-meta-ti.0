@@ -1,6 +1,6 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 59E2EE00CF9; Tue, 24 Oct 2017 08:07:10 -0700 (PDT)
+	id 2488EE00D03; Tue, 24 Oct 2017 08:56:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,46 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B85CBE00CEF
-	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 08:07:09 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9OF78CJ014613
-	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 10:07:08 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8768E00CF2
+	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 08:56:22 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9OFuLo4023429
+	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 10:56:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1508857628;
-	bh=U/X4TEqO/iO59EVrWlkbdcp4xODhV4xOLdL3wPBfGjs=;
-	h=From:To:CC:Subject:Date;
-	b=rvLvxqV82QAeRB6Uqy2sF49ZjD86pDX+bgmMZErAw5KAanAD7bcgkZigb0d0veMRO
-	qr/X02fv7LurrWUK+QKKLwcarzpe5WsHHvLbgvs6IDJ0IxeSGULkjy2XuGJhOQzG+v
-	+ktFf1LTVmzPhM8mGXAUWkOwtrtIYxHC7S2fNQG4=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9OF785R032413
-	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 10:07:08 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1508860581;
+	bh=JjcwzSmsxLSUyrwFqqb8tqA4i1NJdwe4Qo0l8CIzE7k=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=hnhZIL2FFFV1tJqXXVKWG3xykXiJBpx/HyBXQBLSQUA8ALyTAAnvl2mejDSrUFKl7
+	+IikoEZc8V0++8UikeHnVwLvGgJWvwvvb740jyknoqvxRycLOwFWD7/wY2i6a18d0f
+	AMZj5+HP5yaoI/BCggn2V1K72HjWked044Sxuk9o=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9OFuL1I010597
+	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 10:56:21 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 24 Oct 2017 10:07:08 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 24 Oct 2017 10:56:21 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 24 Oct 2017 10:07:08 -0500
-Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9OF78At004909;
-	Tue, 24 Oct 2017 10:07:08 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+	Transport; Tue, 24 Oct 2017 10:56:21 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9OFuLFK022202;
+	Tue, 24 Oct 2017 10:56:21 -0500
+Received: from localhost ([172.22.134.4])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	v9OFuL322472; Tue, 24 Oct 2017 10:56:21 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 24 Oct 2017 11:07:06 -0400
-Message-ID: <1508857626-39935-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
+Date: Tue, 24 Oct 2017 10:56:19 -0500
+Message-ID: <20171024155619.22251-2-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
+In-Reply-To: <20171024155619.22251-1-dmurphy@ti.com>
+References: <20171024155619.22251-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] edma3-lld: Updating the revision to 02.12.05.30
+Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2017.05-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,35 +70,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Oct 2017 15:07:10 -0000
+X-List-Received-Date: Tue, 24 Oct 2017 15:56:24 -0000
 Content-Type: text/plain
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/edma3-lld/edma3-lld.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-index 5ff7927..d0bc0b9 100644
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
- EDMA3_LLD_GIT_PROTOCOL = "git"
- EDMA3_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
+index f10c3686..fe52ff1f 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2017.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
  
--# Below commit ID corresponds to new eng version
--EDMA3_LLD_SRCREV = "60cb2bbdd8e494334994dd49559bc27cd9a40b32"
-+# Below commit ID corresponds to version 2.12.05.30
-+EDMA3_LLD_SRCREV = "30cce115bda9001bc40c68e3788bbd1b3741569e"
+-PR = "r16"
++PR = "r17"
  
- BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
- SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- SRCREV = "${EDMA3_LLD_SRCREV}"
+ BRANCH = "ti-u-boot-2017.01"
  
--PV = "2.12.03.28"
-+PV = "2.12.05.30"
- INC_PR = "r0"
+-SRCREV = "a08afdf552d8d19fad64940d16fadb76df2d46ff"
++SRCREV = "738c8b3dfad90389ef541dce58f41afa530884da"
 -- 
-1.9.1
+2.14.0
 
 
