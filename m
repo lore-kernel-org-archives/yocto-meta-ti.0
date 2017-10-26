@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D4B45E00D03; Tue, 24 Oct 2017 09:38:33 -0700 (PDT)
+	id EEDC4E00D2A; Thu, 26 Oct 2017 10:14:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CAD98E00CF2
-	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 09:38:32 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9OGcW7u017315
-	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 11:38:32 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79D2FE00D19
+	for <meta-ti@yoctoproject.org>; Thu, 26 Oct 2017 10:14:56 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9QHEtRR005126
+	for <meta-ti@yoctoproject.org>; Thu, 26 Oct 2017 12:14:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1508863112;
-	bh=WHRwFFo22ovh2EqXUQsGJqBCkZ0PBwGI0p0R/fPiGfg=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=i3qDboFn4u9tgpff6apT9THMXDQE+4Z8xcBf/aRiWciAcH3mZtXk0oYKUDocrAEpv
-	DYncKwmKG0WYVLRPQ87D9YBGp57UQc0K3HhjwZEIb/5O4ZNylXhICmljTw1ol+2Lt6
-	Mto4sc/Y4SJ2dQeVnR72i9ezRYb18gOCOefkpg2U=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9OGcWpn011529
-	for <meta-ti@yoctoproject.org>; Tue, 24 Oct 2017 11:38:32 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1509038095;
+	bh=LvVXgUEXD8KLTzTW3gEwNvcEWYcw2hDWSWmCPBJzNsg=;
+	h=From:To:CC:Subject:Date;
+	b=pAy63M1qVMQL4XpqfsqBoMrIR7E1A/db4T3wFUKz8SAn/O/oKgk7v1CvAMkEgBaSu
+	8umKt7e4m0ncWL6Lesi5lahgh2x9/rLApcwJd0tNsQSt+qIoCPs5Jdal4WgwGXlpB8
+	oqn9anC184qmZldf5DQCW67rBnbsPutPBEunPleQ=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9QHEtse006385
+	for <meta-ti@yoctoproject.org>; Thu, 26 Oct 2017 12:14:55 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Tue, 24 Oct 2017 11:38:31 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_0,
+	Thu, 26 Oct 2017 12:14:55 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Tue, 24 Oct 2017 11:38:31 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9OGcVOZ029735;
-	Tue, 24 Oct 2017 11:38:31 -0500
-To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>, <meta-ti@yoctoproject.org>
-References: <1508857626-39935-1-git-send-email-m-radhakrishnan2@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <bd325a37-1d14-2ce6-8b5a-00ddf34a1f68@ti.com>
-Date: Tue, 24 Oct 2017 12:38:31 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
-	Thunderbird/52.3.0
+	Transport; Thu, 26 Oct 2017 12:14:55 -0500
+Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9QHEtVg026502;
+	Thu, 26 Oct 2017 12:14:55 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 26 Oct 2017 13:14:50 -0400
+Message-ID: <1509038090-56431-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1508857626-39935-1-git-send-email-m-radhakrishnan2@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: Re: [EXTERNAL] [PATCH] edma3-lld: Updating the revision to 02.12.05.30
+Subject: [PATCH v3] board-rtos: Added board-rtos recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,42 +65,98 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Oct 2017 16:38:33 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 26 Oct 2017 17:14:59 -0000
+Content-Type: text/plain
 
-ACK
+Upstreaming board library for RTOS
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
 
+ v3 - Updated the version to 1.00.08.00A
+ v2 - Added summary and merged in to a single recipe
 
-Acked-by: Jacob Stiffler <j-stiffler@ti.com>
+ recipes-bsp/board-rtos/board-rtos_git.bb | 71 ++++++++++++++++++++++++++++++++
+ 1 file changed, 71 insertions(+)
+ create mode 100644 recipes-bsp/board-rtos/board-rtos_git.bb
 
-
-On 10/24/2017 11:07 AM, Mahesh Radhakrishnan wrote:
-> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-> ---
->   recipes-bsp/edma3-lld/edma3-lld.inc | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-> index 5ff7927..d0bc0b9 100644
-> --- a/recipes-bsp/edma3-lld/edma3-lld.inc
-> +++ b/recipes-bsp/edma3-lld/edma3-lld.inc
-> @@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
->   EDMA3_LLD_GIT_PROTOCOL = "git"
->   EDMA3_LLD_GIT_BRANCH = "master"
->   
-> -# Below commit ID corresponds to new eng version
-> -EDMA3_LLD_SRCREV = "60cb2bbdd8e494334994dd49559bc27cd9a40b32"
-> +# Below commit ID corresponds to version 2.12.05.30
-> +EDMA3_LLD_SRCREV = "30cce115bda9001bc40c68e3788bbd1b3741569e"
->   
->   BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
->   SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
->   SRCREV = "${EDMA3_LLD_SRCREV}"
->   
-> -PV = "2.12.03.28"
-> +PV = "2.12.05.30"
->   INC_PR = "r0"
+diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
+new file mode 100644
+index 0000000..37b2a64
+--- /dev/null
++++ b/recipes-bsp/board-rtos/board-rtos_git.bb
+@@ -0,0 +1,71 @@
++SUMMARY = "TI RTOS Board Library"
++
++inherit ti-pdk
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://board.h;beginline=1;endline=32;md5=0e3182ba6a963da159c37eafa9752ade"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++BOARD_GIT_URI = "git://git.ti.com/keystone-rtos/board.git"
++BOARD_GIT_PROTOCOL = "git"
++BOARD_GIT_BRANCH = "master"
++
++# Below commit ID corresponds to "DEV.BOARD.01.00.08.00A"
++BOARD_SRCREV = "16b4ec027e2b0a3b91105a948d2c2d6db997bee0"
++
++BRANCH ="${BOARD_GIT_BRANCH}"
++SRC_URI = "${BOARD_GIT_URI};protocol=${BOARD_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${BOARD_SRCREV}"
++PV = "01.00.08.00A"
++PR = "r0"
++
++DEPENDS_append = " i2c-lld-rtos \
++                   spi-lld-rtos \
++                   uart-lld-rtos \
++"
++
++DEPENDS_append_omap-a15 = " osal-rtos \
++                            ti-ndk \
++"
++
++DEPENDS_append_am57xx-evm = " gpio-lld-rtos \
++                              icss-emac-lld-rtos \
++                              mmcsd-lld-rtos \
++                              pruss-lld-rtos \
++                              pm-lld-rtos \
++"
++
++DEPENDS_append_ti33x = " gpio-lld-rtos \
++                         gpmc-lld-rtos \
++                         icss-emac-lld-rtos \
++                         mmcsd-lld-rtos \
++                         osal-rtos \
++                         pruss-lld-rtos \
++                         starterware-rtos \
++                         ti-ndk \
++"
++
++DEPENDS_append_ti43x = " gpio-lld-rtos \
++                         gpmc-lld-rtos \
++                         icss-emac-lld-rtos \
++                         mmcsd-lld-rtos \
++                         osal-rtos \
++                         pruss-lld-rtos \
++                         starterware-rtos \
++                         ti-ndk \
++"
++
++
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
++
++INHIBIT_SYSROOT_STRIP = "1"
++INHIBIT_PACKAGE_STRIP = "1"
++
++export PDK_BOARD_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
++
++XDCPATH_append = ";${PDK_INSTALL_DIR}/packages/ti/csl;${NDK_INSTALL_DIR}/packages"
+-- 
+1.9.1
 
 
