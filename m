@@ -1,6 +1,6 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 25930E00D48; Fri, 27 Oct 2017 09:00:24 -0700 (PDT)
+	id E5C14E00D48; Fri, 27 Oct 2017 09:01:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.19.16 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,41 +17,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E49D5E00C01
-	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 09:00:22 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9RG0MaV031896
-	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 11:00:22 -0500
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEFB8E00C01
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 09:01:35 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9RG1Ond008523
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 11:01:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1509120022;
-	bh=hosIMM1sgS9vRsOJP1w6gugh2/23Ifh3XRdFLYai1Ko=;
+	s=ti-com-17Q1; t=1509120084;
+	bh=QvGy28hmHm7LCxSELFifgx2TVKqUa0+zNuKaNMgI6Hs=;
 	h=From:To:CC:Subject:Date;
-	b=kSxjesXDVOFDe3avohjQRQDl6mgMr9Mwt8MpTpDP9tUd9sT1/tgctQMsL16esrkhT
-	j/lDJA8IW5uvashBT/rZCm318MTNETfl9PDo/eZ3NOjDuwWL50K0tchGLrIPD8Kzw4
-	qVIpC05Jfp/hX/w/8Edxmi5xdJGdpFMZ41T54dhQ=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RG0MPR009252
-	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 11:00:22 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	b=j19sGx0NkBcfvxeUunFn9dXOPic8usbdCPXd/3MUwfRt04pS7J0BL6oCF/PZzoTSh
+	goC5DNWcWGRY9YaBtqfp074UZrsUxW7IbzUfxoq1qZLFUHCmX7I9P3WLRs69L4bJek
+	+E3D/RerH3ckzLMQsjzvZXigrtAvxBlwSM+fxZoo=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RG1Jpb025172
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 11:01:19 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE110.ent.ti.com
+	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Fri, 27 Oct 2017 11:00:21 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 27 Oct 2017 11:01:19 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE112.ent.ti.com
+	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Fri, 27 Oct 2017 11:00:21 -0500
+	Transport; Fri, 27 Oct 2017 11:01:19 -0500
 Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RG0JP9022034;
-	Fri, 27 Oct 2017 11:00:20 -0500
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RG1HEb010100;
+	Fri, 27 Oct 2017 11:01:18 -0500
 From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 27 Oct 2017 21:30:18 +0530
-Message-ID: <1509120018-67109-1-git-send-email-a0393906@ti.com>
+Date: Fri, 27 Oct 2017 21:31:15 +0530
+Message-ID: <1509120075-67773-1-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [krogoth] Remove CCS dependencies for all components
+Subject: [krogoth] ti-ccsv6: Remove the recipe and other dependencies
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,74 +64,92 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 16:00:24 -0000
+X-List-Received-Date: Fri, 27 Oct 2017 16:01:36 -0000
 Content-Type: text/plain
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-from meta-ti/morty ead9802 
+from meta-ti/morty 3648eba 
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- classes/ti-pdk.bbclass                      | 2 +-
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb | 2 +-
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb        | 2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc              | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb | 45 ----------------------
+ recipes-ti/includes/ti-paths.inc                   |  2 -
+ 2 files changed, 47 deletions(-)
+ delete mode 100644 recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
 
-diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-index fd7c3e7..eca3652 100644
---- a/classes/ti-pdk.bbclass
-+++ b/classes/ti-pdk.bbclass
-@@ -5,7 +5,7 @@ inherit perlnative
- 
- DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-pdk-build-rtos"
- 
--DEPENDS_append_omap-a15 = " ti-ccsv6-native"
-+DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
- DEPENDS_remove_ti33x = "ti-cgt6x-native"
- DEPENDS_remove_ti43x = "ti-cgt6x-native"
- 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-index 6a01d0b..ce9ef85 100644
---- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-@@ -4,7 +4,7 @@ require recipes-ti/includes/ti-staging.inc
- 
- PR = "${INC_PR}.0"
- 
--DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
-+DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-cgt-arm-native ti-cgt6x-native"
- 
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 1ec9896..2765ef5 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -29,7 +29,7 @@ require recipes-ti/includes/ti-staging.inc
- 
- inherit update-alternatives
- 
--DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ccsv6-native ti-ipc-rtos"
-+DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
- 
- export HWVERSION="ES10"
- export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index b29e984..696a897 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -43,7 +43,7 @@ DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
- "
- DEPENDS_append_omap-a15 = " ti-cgt6x-native \
--                            ti-ccsv6-native \
-+                            ti-cgt-arm-native \
-                             gcc-arm-none-eabi-native \
- "
- IPC_TARGETS = ""
+diff --git a/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb b/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
+deleted file mode 100644
+index 334c7df..0000000
+--- a/recipes-ti/devtools/ti-ccsv6-native_6.1.3.00034.bb
++++ /dev/null
+@@ -1,45 +0,0 @@
+-DESCRIPTION = "TI DSP Code Generation Tools"
+-HOMEPAGE = "http://processors.wiki.ti.com/index.php/Download_CCS#Code_Composer_Studio_Version_6_Downloads"
+-LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
+-
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/ccsv6/doc/EULA/EULA.doc;md5=24fb8a52ac52d3938b5888362edb295a"
+-
+-inherit native
+-
+-require recipes-ti/includes/ti-unpack.inc
+-require recipes-ti/includes/ti-staging.inc
+-require recipes-ti/includes/ti-paths.inc
+-
+-TI_CGT_ARM_VERSION = "15.12.1.LTS"
+-
+-SRC_URI = "http://install.source.dir.local/CCS${PV}_linux.tar.gz;name=ccsv6"
+-
+-S = "${WORKDIR}/CCS${PV}_linux"
+-
+-BINFILE = "CCS${PV}_linux/ccs_setup_${PV}.bin"
+-TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+-TI_BIN_UNPK_CMDS = ""
+-
+-SRC_URI[ccsv6.md5sum] = "ceaa5023c1a4b51bc637d3de1a15786b"
+-SRC_URI[ccsv6.sha256sum] = "fb3205a21942da09684c871371513707c841c4fd8d88a62f6a7865b0a86cc492"
+-
+-do_install() {
+-    install -d ${D}${CCSV6_INSTALL_DIR_RECIPE}
+-    cp -r ${WORKDIR}/ccsv6/. ${D}${CCSV6_INSTALL_DIR_RECIPE}
+-
+-    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
+-    cp -r ${WORKDIR}/ccsv6/tools/compiler/ti-cgt-arm_${TI_CGT_ARM_VERSION}/. \
+-          ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
+-}
+-
+-FILES_${PN} += "\
+-  ${CCSV6_INSTALL_DIR_RECIPE} \
+-  ${M4_TOOLCHAIN_INSTALL_DIR_RECIPE} \
+-"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-INSANE_SKIP_${PN} = "arch libdir ldflags staticdev textrel dev-so"
+-
+-EXCLUDE_FROM_SHLIBS = "1"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index e7d3e82..a7ea9a7 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -46,7 +46,6 @@ export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
+ export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
+ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
+-export CCSV6_INSTALL_DIR_RECIPE           = "${installdir}/ccsv6"
+ export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
+ export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
+ export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
+@@ -93,7 +92,6 @@ export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
+ export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
+ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
+ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+-export CCSV6_INSTALL_DIR           = "${STAGING_DIR_NATIVE}${CCSV6_INSTALL_DIR_RECIPE}"
+ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
+ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
+ export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
 -- 
 1.9.1
 
