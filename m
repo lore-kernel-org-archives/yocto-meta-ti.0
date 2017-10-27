@@ -1,6 +1,6 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D28BE00D47; Fri, 27 Oct 2017 08:59:39 -0700 (PDT)
+	id 25930E00D48; Fri, 27 Oct 2017 09:00:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.77 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,41 +17,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83165E00C01
-	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 08:59:37 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9RFxbHk006988
-	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 10:59:37 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E49D5E00C01
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 09:00:22 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9RG0MaV031896
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 11:00:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1509119977;
-	bh=LeY4eP+gu8EivHxH27HPe2DLgx8W96hPriKEEWAzhYc=;
+	s=ti-com-17Q1; t=1509120022;
+	bh=hosIMM1sgS9vRsOJP1w6gugh2/23Ifh3XRdFLYai1Ko=;
 	h=From:To:CC:Subject:Date;
-	b=mx+2H8CBaV+kdXQ9jSzshwPBbtUlGNP6AIp/ncljTLk/5i8D6Opl/gxwvwVPvjdE5
-	cOKc0Yug9GrggrSpOs1TtseSNpBhqmWQMVrGUvYIzeQKWXMF7f2nt89W+vzeCgb5BY
-	ZGAq7fAAb4cFao8WALZbmYzc1B0qH4kQPjaznYwE=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RFxbRF021038
-	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 10:59:37 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	b=kSxjesXDVOFDe3avohjQRQDl6mgMr9Mwt8MpTpDP9tUd9sT1/tgctQMsL16esrkhT
+	j/lDJA8IW5uvashBT/rZCm318MTNETfl9PDo/eZ3NOjDuwWL50K0tchGLrIPD8Kzw4
+	qVIpC05Jfp/hX/w/8Edxmi5xdJGdpFMZ41T54dhQ=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RG0MPR009252
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 11:00:22 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE112.ent.ti.com
+	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Fri, 27 Oct 2017 10:59:37 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 27 Oct 2017 11:00:21 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Fri, 27 Oct 2017 10:59:37 -0500
+	Transport; Fri, 27 Oct 2017 11:00:21 -0500
 Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RFxZ46007397;
-	Fri, 27 Oct 2017 10:59:36 -0500
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9RG0JP9022034;
+	Fri, 27 Oct 2017 11:00:20 -0500
 From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 27 Oct 2017 21:29:32 +0530
-Message-ID: <1509119972-66256-1-git-send-email-a0393906@ti.com>
+Date: Fri, 27 Oct 2017 21:30:18 +0530
+Message-ID: <1509120018-67109-1-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [krogoth] ti-cgt-arm: add recipe for 16.9.2
+Subject: [krogoth] Remove CCS dependencies for all components
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,74 +64,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 15:59:39 -0000
+X-List-Received-Date: Fri, 27 Oct 2017 16:00:24 -0000
 Content-Type: text/plain
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-from: meta-ti/morty 5df5bd9 
+from meta-ti/morty ead9802 
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb |  6 +++++
- recipes-ti/devtools/ti-cgt-arm.inc              | 34 +++++++++++++++++++++++++
- 2 files changed, 40 insertions(+)
- create mode 100644 recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb
- create mode 100644 recipes-ti/devtools/ti-cgt-arm.inc
+ classes/ti-pdk.bbclass                      | 2 +-
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb | 2 +-
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb        | 2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc              | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb b/recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb
-new file mode 100644
-index 0000000..8ff29ca
---- /dev/null
-+++ b/recipes-ti/devtools/ti-cgt-arm-native_16.9.2.bb
-@@ -0,0 +1,6 @@
-+include ti-cgt-arm.inc
-+
-+LIC_FILES_CHKSUM = "file://ti-cgt-arm_${PV}.LTS/README.txt;md5=c32eadd03472353c042a8a7c4568438b"
-+
-+BINFILE_MD5 = "7b73e51e9548a4a0bf3923a336b1a974"
-+BINFILE_SHA256 = "d1a5c255319088be7d75b3fce1b16a2e3d60c75023db7dad16cab6d4d3425d06"
-diff --git a/recipes-ti/devtools/ti-cgt-arm.inc b/recipes-ti/devtools/ti-cgt-arm.inc
-new file mode 100644
-index 0000000..436fab1
---- /dev/null
-+++ b/recipes-ti/devtools/ti-cgt-arm.inc
-@@ -0,0 +1,34 @@
-+SUMMARY = "TI ARM Code Generation Tools"
-+HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-+LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD & BSD-4-Clause"
-+
-+inherit native
-+require recipes-ti/includes/ti-unpack.inc
-+require recipes-ti/includes/ti-staging.inc
-+require recipes-ti/includes/ti-paths.inc
-+
-+S = "${WORKDIR}/ti-cgt-arm-${PV}"
-+
-+SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"
-+
-+BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
-+TI_BIN_UNPK_ARGS = "--prefix ${S}"
-+TI_BIN_UNPK_CMDS = ""
-+
-+do_install() {
-+    install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
-+    cp -r ${S}/ti-cgt-arm*/. ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
-+}
-+
-+SRC_URI[cgt_arm_installer.md5sum] = "${BINFILE_MD5}"
-+SRC_URI[cgt_arm_installer.sha256sum] = "${BINFILE_SHA256}"
-+
-+BINFILE_NAME = "cgt_arm_installer"
-+
-+FILES_${PN} += "${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+
-+INSANE_SKIP_${PN} += "arch staticdev"
+diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+index fd7c3e7..eca3652 100644
+--- a/classes/ti-pdk.bbclass
++++ b/classes/ti-pdk.bbclass
+@@ -5,7 +5,7 @@ inherit perlnative
+ 
+ DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-pdk-build-rtos"
+ 
+-DEPENDS_append_omap-a15 = " ti-ccsv6-native"
++DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
+ DEPENDS_remove_ti33x = "ti-cgt6x-native"
+ DEPENDS_remove_ti43x = "ti-cgt6x-native"
+ 
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index 6a01d0b..ce9ef85 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -4,7 +4,7 @@ require recipes-ti/includes/ti-staging.inc
+ 
+ PR = "${INC_PR}.0"
+ 
+-DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-ccsv6-native ti-cgt6x-native"
++DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-cgt-arm-native ti-cgt6x-native"
+ 
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 1ec9896..2765ef5 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -29,7 +29,7 @@ require recipes-ti/includes/ti-staging.inc
+ 
+ inherit update-alternatives
+ 
+-DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ccsv6-native ti-ipc-rtos"
++DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
+ 
+ export HWVERSION="ES10"
+ export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index b29e984..696a897 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -43,7 +43,7 @@ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+ "
+ DEPENDS_append_omap-a15 = " ti-cgt6x-native \
+-                            ti-ccsv6-native \
++                            ti-cgt-arm-native \
+                             gcc-arm-none-eabi-native \
+ "
+ IPC_TARGETS = ""
 -- 
 1.9.1
 
