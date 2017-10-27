@@ -1,6 +1,6 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E7438E00D2A; Thu, 26 Oct 2017 10:20:15 -0700 (PDT)
+	id B68F5E00D42; Thu, 26 Oct 2017 22:11:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,42 +17,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA155E00D19
-	for <meta-ti@yoctoproject.org>; Thu, 26 Oct 2017 10:20:14 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9QHK3kO023297
-	for <meta-ti@yoctoproject.org>; Thu, 26 Oct 2017 12:20:03 -0500
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D906E00D40
+	for <meta-ti@yoctoproject.org>; Thu, 26 Oct 2017 22:11:12 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9R5BBnZ021133
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 00:11:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1509038403;
-	bh=2lt5ojMLCIK4TfUTd8pEBTHTNTsb8SAGOQnMYedvcaM=;
+	s=ti-com-17Q1; t=1509081071;
+	bh=VpTre+poCfK0QrZbz1aDMcQWBKFZrDyNr7cEx8xg5Po=;
 	h=From:To:CC:Subject:Date;
-	b=PVzG7kIwobtxPP9VEJ8UvJGT3ImrBBV9k0BGHu14HqH6TujTxAY/5XnjKmw8GEWDq
-	g5L20NHEEwaq3B/SC3ZM0llFeV2FWIFyfLDTWIESbwlIsc6SHxPsvCEj7jTMxuzS/D
-	+1elwYZGvgRaa4O/RtwQU1hSi4IdgeO+pzk/T9aU=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9QHJwNV030202
-	for <meta-ti@yoctoproject.org>; Thu, 26 Oct 2017 12:19:58 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	b=iTplcqZvsOLRtO59Dv/og41/jQzxc5EZA7Rv7d1YCnggE6cKJwkMgeGD1YLunQgRr
+	uRTp7rcxN7cg1fbgOe/Lc/GalcTHfedFxMjnfS+g1tFSrKNgf5tCN/FPVKLtl2m8/v
+	iLT3oNn9AqPULWc6ZoFVR0/j4pMHjjLVE0Liq7tk=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9R5BBJj007485
+	for <meta-ti@yoctoproject.org>; Fri, 27 Oct 2017 00:11:11 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Thu, 26 Oct 2017 12:19:58 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 27 Oct 2017 00:11:11 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Thu, 26 Oct 2017 12:19:58 -0500
-Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9QHJwqe030214;
-	Thu, 26 Oct 2017 12:19:58 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+	Transport; Fri, 27 Oct 2017 00:11:11 -0500
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9R5B9RI013231;
+	Fri, 27 Oct 2017 00:11:10 -0500
+From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 26 Oct 2017 13:19:54 -0400
-Message-ID: <1509038394-60281-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 27 Oct 2017 10:41:07 +0530
+Message-ID: <1509081068-45481-1-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH v3] emac-lld-rtos: Added emac-lld-rtos recipe
+Subject: [morty 1/2] ipumm-fw: update to 3.00.13.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,57 +64,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Oct 2017 17:20:16 -0000
+X-List-Received-Date: Fri, 27 Oct 2017 05:11:13 -0000
 Content-Type: text/plain
 
-RTOS low level driver for Ethernet MAC
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- v3 - Updated to version 1.00.03.07
- v2 - Added summary and merged in to a single recipe 
-
- recipes-bsp/emac-lld/emac-lld-rtos_git.bb | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
- create mode 100644 recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-
-diff --git a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-new file mode 100644
-index 0000000..551ffed
---- /dev/null
-+++ b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "TI RTOS low level driver for Ethernet MAC (EMAC) peripheral"
-+
-+inherit ti-pdk
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://emacver.h;beginline=1;endline=47;md5=f66bb3695972ca2a85d990a390f45d88"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|c665x-evm"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+EMAC_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/emac-lld.git"
-+EMAC_LLD_GIT_PROTOCOL = "git"
-+EMAC_LLD_GIT_BRANCH = "master"
-+
-+# Below commit ID corresponds to "DEV.EMAC_LLD.01.00.03.07"
-+EMAC_LLD_SRCREV = "70bb4d2ed677d428f055c2178e95766511e14383"
-+
-+BRANCH ="${EMAC_LLD_GIT_BRANCH}"
-+SRC_URI = "${EMAC_LLD_GIT_URI};protocol=${EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
-+
-+SRCREV = "${EMAC_LLD_SRCREV}"
-+PV = "01.00.03.07"
-+PR = "r0"
-+
-+DEPENDS_append = " board-rtos osal-rtos"
-+DEPENDS_append_ti33x = " starterware-rtos"
-+DEPENDS_append_ti43x = " starterware-rtos"
-+DEPENDS_append_k2g  = " cppi-lld-rtos qmss-lld-rtos"
-+
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "EMAC LLD"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 945c289..633cb13 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,12 +17,12 @@ RDEPENDS_${PN} = " libdce"
+ 
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
+ 
+-SRCREV = "2aa80581cc7d1d82a1af9a46c37793b2fe8b9d42"
++SRCREV = "01bbb622267b687fa05e42062b146ad7a22e7afd"
+ 
+ S = "${WORKDIR}/git"
+ 
+-PV = "3.00.13.00"
+-PR = "r6"
++PV = "3.00.14.00"
++PR = "r1"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ 
 -- 
 1.9.1
 
