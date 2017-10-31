@@ -1,40 +1,57 @@
-Return-Path: <denys@ti.com>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 13CA8E00C44; Mon, 30 Oct 2017 14:45:11 -0700 (PDT)
+	id 80B63E00D03; Tue, 31 Oct 2017 09:37:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 582 seconds by postgrey-1.32 at yocto-www;
-	Mon, 30 Oct 2017 14:45:08 PDT
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2ABFBE009B4
-	for <meta-ti@yoctoproject.org>; Mon, 30 Oct 2017 14:45:08 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 98A68208CF;
-	Mon, 30 Oct 2017 21:35:25 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id V7X0BEcOLQA3; Mon, 30 Oct 2017 21:35:25 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 784E020074;
-	Mon, 30 Oct 2017 21:35:24 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id DFFC8162708;
-	Mon, 30 Oct 2017 17:35:23 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Mon, 30 Oct 2017 17:35:23 -0400
-Message-Id: <1509399323-106908-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [morty/master][PATCH] am57xx-evm.conf: add am574x-idk-lcd-osd101t2587.dtb to the list
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E7F5E009B4
+	for <meta-ti@yoctoproject.org>; Tue, 31 Oct 2017 09:37:00 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id v9VGaxrk021168
+	for <meta-ti@yoctoproject.org>; Tue, 31 Oct 2017 11:36:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1509467819;
+	bh=GL4sq0sMmc/5A4aY3DNoRBBFyQkWMqarIGP1vJALaPs=;
+	h=From:To:CC:Subject:Date;
+	b=SDGYIYxKHgGt+rdohVpGb29/WTxP61L0MCIqdMHX19Jg0ftDK5Q02cmukNY7CgWpl
+	A5Z/JCyRdX6HSA/tFZyH7nDB8RQXLUZRwJ8DqOjuv2mmHDEtDX83w69ef7zh5rA22j
+	0Ntl+RQHV7MeU2SOtIQJRX/BsTQh/s48VxThomB0=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9VGax2s005650
+	for <meta-ti@yoctoproject.org>; Tue, 31 Oct 2017 11:36:59 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Tue, 31 Oct 2017 11:36:59 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
+	Transport; Tue, 31 Oct 2017 11:36:59 -0500
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id v9VGav8U004325;
+	Tue, 31 Oct 2017 11:36:58 -0500
+From: Karthik Ramanan <a0393906@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 31 Oct 2017 22:06:52 +0530
+Message-ID: <1509467815-179618-1-git-send-email-a0393906@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [krogoth 1/4] ti-sysbios: Add recipe for new version 6.52.00.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,27 +64,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2017 21:45:11 -0000
+X-List-Received-Date: Tue, 31 Oct 2017 16:37:05 -0000
+Content-Type: text/plain
 
+From: Sam Nelson <sam.nelson@ti.com>
+
+Linux installer binary file name has changed compared to previous
+version
+Break backward compatibilty for A15 gcc tools: requires gcc-arm-none-
+eabi-6-2017-q1-update or later
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/am57xx-evm.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 5c70b83..c942634 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -15,7 +15,7 @@ KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-be
-                     am57xx-evm-reva3.dtb am57xx-evm-reva3-cam-mt9t111.dtb am57xx-evm-reva3-cam-ov10635.dtb \
-                     am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb \
-                     am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb \
--                    am574x-idk.dtb \
-+                    am574x-idk.dtb am574x-idk-lcd-osd101t2587.dtb \
-                     ${@base_conditional('ENABLE_TI_UIO_DEVICES', '1', 'am572x-idk-pru-excl-uio.dtb am571x-idk-pru-excl-uio.dtb', '', d)}"
- 
- UBOOT_MACHINE = "am57xx_evm_config"
+(from meta-ti/morty 2ee491283bfae006d6c6280ef7a680e69aae5cc7)
+
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+---
+ recipes-ti/bios/ti-sysbios_6.52.00.12.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+
+diff --git a/recipes-ti/bios/ti-sysbios_6.52.00.12.bb b/recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+new file mode 100644
+index 0000000..ebdb135
+--- /dev/null
++++ b/recipes-ti/bios/ti-sysbios_6.52.00.12.bb
+@@ -0,0 +1,15 @@
++require recipes-ti/bios/ti-sysbios.inc
++
++PV = "6_52_00_12"
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=ca549c223d732e6f69efc449795c4eeb"
++
++SRC_URI[sysbiosbin.md5sum] = "3c16af0843b5b6c5ff10512d1b586665"
++SRC_URI[sysbiosbin.sha256sum] = "4a2b9b76f52a57f02725337db9361787eae4c917d7cf989a697ed41eb4a1e701"
++
++TI_BIN_UNPK_CMDS = ""
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
++
++BINFILE = "bios_${PV}.run"
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios/${PV}/exports/${BINFILE};name=sysbiosbin"
 -- 
-2.7.4
+1.9.1
 
 
