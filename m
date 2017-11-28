@@ -1,67 +1,38 @@
-Return-Path: <jpewhacker@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 592E1E00B48; Tue, 28 Nov 2017 11:59:28 -0800 (PST)
+	id 37CABE00AF2; Tue, 28 Nov 2017 12:33:19 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [209.85.223.196 listed in list.dnswl.org]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (jpewhacker[at]gmail.com)
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2C36E00AD7
-	for <meta-ti@yoctoproject.org>; Tue, 28 Nov 2017 11:59:26 -0800 (PST)
-Received: by mail-io0-f196.google.com with SMTP id w127so1147730iow.11
-	for <meta-ti@yoctoproject.org>; Tue, 28 Nov 2017 11:59:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=HtSEdG50fxXhLBcscqjigsdj2dt7tkq/l+kig6MpsPs=;
-	b=rYr8NzJnCWH11stpj8rjBtlaje3DBC2P/ytEGVqdzXIVsjecZVxFqiJPmlbpuSUTbE
-	27l66/Ux2SzAC7F3g/7ECb6PonPhsLyjmuG6s74XQA+sGKK0va4tYBV8SLIA1Q0mvCEa
-	C6Lri1gkCLcPdRZS8lI+zVUHaRTAdNVcGD1dsPA+Y4p/q8P/sibcKRCrG79wK215t6Wz
-	SDU1G77cGG/AYsjdtjoxdZC4I/rhgyqzhPF7G/23KDrmeEahOpfAQVNOxRoeJ5AYD8VP
-	8VmuPskMHe+pYRExMeU+o7H7IeROwLYh6uyEGV8838Os5l4galpls9A2sRFnPZ+Xmss3
-	L1FQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=HtSEdG50fxXhLBcscqjigsdj2dt7tkq/l+kig6MpsPs=;
-	b=rpAY0MOY6qLP3CaLkfoxVF7DpsOysS3r4Yj2M9J75bFME1z5JRyiQ0YXMa3AGk5dB/
-	s0bFvw9UoTBC4exaTyb7eLlJEclCmD4aBWtPQiPri3pm9NvKPNNxuMX790qHTZTiEA7v
-	dBOv/cn0ofrenf5DT0wWNXTCkWdbZeM2x364UBOA/9clo2uL0ZGOp07uM8CtYf/+IWVc
-	tgaaJe+p2XfvUhGWfNUX/9Ks6Xo6MfzRd9qfUT6qyc64/w/L6bc/D+F+9MFDR/NdD3wI
-	pNb6GDojCdtrspTKhLsWrBoBKkcaAfc8EjJaerWesIm28jybz2TWl9STMp7Ldti1Tw/m
-	eOCg==
-X-Gm-Message-State: AJaThX6k4QbLHaPYjd0al5/8A/YbOqyHux8S77NFtl0LfAhWpdKnIiGe
-	Y14uhu5sf2THXgCQrpqEHxKFjXd7
-X-Google-Smtp-Source: AGs4zMamkf0K6wDel3p/P0Ua8cuee7PBzlDtiU31Xvi74wFUjf5+ca9ZNaxdkGqAKrV5oJL+uMEFKQ==
-X-Received: by 10.107.25.204 with SMTP id 195mr423226ioz.67.1511899165675;
-	Tue, 28 Nov 2017 11:59:25 -0800 (PST)
-Received: from ola-842mrw1.ad.garmin.com ([204.77.163.55])
-	by smtp.googlemail.com with ESMTPSA id
-	p198sm152250itp.11.2017.11.28.11.59.24
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 28 Nov 2017 11:59:24 -0800 (PST)
-From: Joshua Watt <jpewhacker@gmail.com>
-X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4296E00A9C
+	for <meta-ti@yoctoproject.org>; Tue, 28 Nov 2017 12:33:17 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C43B020ADA;
+	Tue, 28 Nov 2017 20:33:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 8SpcG3aMtAeq; Tue, 28 Nov 2017 20:33:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A4721201FD;
+	Tue, 28 Nov 2017 20:33:15 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 2B24C162740;
+	Tue, 28 Nov 2017 15:33:15 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Tue, 28 Nov 2017 13:58:56 -0600
-Message-Id: <20171128195856.28289-1-JPEWhacker@gmail.com>
-X-Mailer: git-send-email 2.14.3
-Cc: "Mertz, Timothy" <timothy.mertz@garmin.com>
-Subject: Make ti-xdctools a native recipe
+Date: Tue, 28 Nov 2017 15:33:13 -0500
+Message-Id: <1511901193-24476-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] dra7xx-evm.conf: add dra76-evm-tfp410.dtb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -74,271 +45,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Nov 2017 19:59:28 -0000
+X-List-Received-Date: Tue, 28 Nov 2017 20:33:19 -0000
 
-From: "Mertz, Timothy" <timothy.mertz@garmin.com>
-
-ti-xdctools should be a native recipe as it more accurately reflects how
-it is supposed to be used. In addition, this allows it to be built as
-nativesdk and included in SDK image tools
-
-Signed-off-by: "Mertz, Timothy" <timothy.mertz@garmin.com>
-Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- classes/ti-pdk.bbclass                                    | 2 +-
- recipes-bsp/dspdce-fw/dspdce-fw_git.bb                    | 2 +-
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb               | 2 +-
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb                      | 2 +-
- recipes-devtools/gdbc6x/gdbserver-c6x_git.bb              | 2 +-
- recipes-ti/c6accel/ti-c6accel.inc                         | 2 +-
- recipes-ti/codec-engine/ti-codec-engine.inc               | 2 +-
- recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb  | 2 +-
- recipes-ti/devtools/ti-xdctools_3.50.03.33.bb             | 4 ++++
- recipes-ti/dmai/ti-dmai.inc                               | 2 +-
- recipes-ti/dsplink/ti-dsplink.inc                         | 2 +-
- recipes-ti/includes/ti-paths.inc                          | 2 +-
- recipes-ti/ipc/ti-ipc-examples-linux_git.bb               | 2 +-
- recipes-ti/ipc/ti-ipc-examples_git.bb                     | 2 +-
- recipes-ti/ipc/ti-ipc-rtos_git.bb                         | 2 +-
- recipes-ti/local-power-manager/ti-local-power-manager.inc | 2 +-
- recipes-ti/openmp-rtos/openmp-rtos_git.bb                 | 2 +-
- recipes-ti/syslink/ti-syslink.inc                         | 2 +-
- 18 files changed, 21 insertions(+), 17 deletions(-)
+ conf/machine/dra7xx-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-index f876802c..b84b161a 100644
---- a/classes/ti-pdk.bbclass
-+++ b/classes/ti-pdk.bbclass
-@@ -3,7 +3,7 @@ require recipes-ti/includes/ti-staging.inc
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 2202a70..91afd85 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -13,7 +13,7 @@ SERIAL_CONSOLE = "115200 ttyS0"
+ KERNEL_DEVICETREE = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb \
+                     dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
+                     dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb \
+-                    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb dra76-evm.dtb"
++                    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb dra76-evm.dtb dra76-evm-tfp410.dtb"
  
- inherit perlnative
+ UBOOT_MACHINE = "dra7xx_evm_config"
  
--DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-cgt-pru-native ti-pdk-build-rtos"
-+DEPENDS = "ti-xdctools-native ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-cgt-pru-native ti-pdk-build-rtos"
- 
- DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
- DEPENDS_remove_ti33x = "ti-cgt6x-native"
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-index 2bada7b6..2756c2d8 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-@@ -17,7 +17,7 @@ require recipes-ti/includes/ti-paths.inc
- PR = "r4"
- inherit update-alternatives
- 
--DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
-+DEPENDS = "ti-xdctools-native ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
- 
- export HWVERSION = "ES10"
- export BIOSTOOLSROOT = "${STAGING_DIR_TARGET}/usr/share/ti"
-diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-index f5244785..edd67e37 100644
---- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-+++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-@@ -3,7 +3,7 @@ require recipes-ti/includes/ti-paths.inc
- 
- PR = "${INC_PR}.1"
- 
--DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-cgt-arm-native ti-cgt6x-native"
-+DEPENDS = "ti-sysbios ti-xdctools-native gcc-arm-none-eabi-native ti-cgt-arm-native ti-cgt6x-native"
- 
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 633cb135..7fa06a87 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -28,7 +28,7 @@ require recipes-ti/includes/ti-paths.inc
- 
- inherit update-alternatives
- 
--DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
-+DEPENDS = "ti-xdctools-native ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
- 
- export HWVERSION="ES10"
- export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
-diff --git a/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-index f4dc51dc..79b584be 100644
---- a/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-+++ b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "TI gdb-server to be used with c6xgdb."
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://../debian/copyright;md5=82c616b6c8f9c11c46feaaf8f9a11495"
- 
--DEPENDS = "ti-xdais ti-framework-components ti-cgt6x-native ti-sysbios ti-xdctools"
-+DEPENDS = "ti-xdais ti-framework-components ti-cgt6x-native ti-sysbios ti-xdctools-native"
- 
- PR = "${INC_PR}.0"
- 
-diff --git a/recipes-ti/c6accel/ti-c6accel.inc b/recipes-ti/c6accel/ti-c6accel.inc
-index 65990a85..7e7fb296 100644
---- a/recipes-ti/c6accel/ti-c6accel.inc
-+++ b/recipes-ti/c6accel/ti-c6accel.inc
-@@ -29,7 +29,7 @@ BINFILE="c6accel_${PV}_Linux-x86_Setup.bin"
- TI_BIN_UNPK_CMDS="Y:workdir"
- 
- DEPENDS = "ti-codec-engine ti-xdais ti-dsplink ti-dspbios" 
--DEPENDS += "ti-edma3lld ti-cgt6x ti-xdctools ti-framework-components" 
-+DEPENDS += "ti-edma3lld ti-cgt6x ti-xdctools-native ti-framework-components"
- DEPENDS += "ti-biosutils" 
- 
- TIARGS = ' \
-diff --git a/recipes-ti/codec-engine/ti-codec-engine.inc b/recipes-ti/codec-engine/ti-codec-engine.inc
-index 15bd4642..b4d366eb 100644
---- a/recipes-ti/codec-engine/ti-codec-engine.inc
-+++ b/recipes-ti/codec-engine/ti-codec-engine.inc
-@@ -18,7 +18,7 @@ S = "${WORKDIR}/codec_engine_${PV}"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ce/${PV}/exports/codec_engine_${PV},lite.tar.gz;name=cetarball "
- 
--DEPENDS = "ti-framework-components ti-xdais ti-xdctools ti-linuxutils"
-+DEPENDS = "ti-framework-components ti-xdais ti-xdctools-native ti-linuxutils"
- DEPENDS_append_dm6446 	= " ti-dspbios ti-dsplink ti-local-power-manager ti-cgt6x ti-biosutils ti-edma3lld"
- DEPENDS_append_dm6467 	= " ti-dspbios ti-dsplink ti-cgt6x ti-biosutils ti-edma3lld"
- DEPENDS_append_omap3	= " ti-dspbios ti-dsplink ti-local-power-manager ti-cgt6x ti-biosutils ti-edma3lld"
-diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-index 5c87b4cd..e14f1c1e 100644
---- a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-+++ b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-@@ -68,7 +68,7 @@ TI_BIN_UNPK_CMDS = "Y:workdir"
- 
- S = "${CODEC_SUITE_NAME}"
- 
--DEPENDS = "ti-cgt6x ti-xdctools ti-dspbios ti-codec-engine ti-linuxutils"
-+DEPENDS = "ti-cgt6x ti-xdctools-native ti-dspbios ti-codec-engine ti-linuxutils"
- 
- #generic codec
- DSPSUFFIX_omap3530 = "x64P"
-diff --git a/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb b/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-index 73ab3bdf..6ab2b94a 100644
---- a/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-+++ b/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-@@ -7,3 +7,7 @@ LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endli
- 
- SRC_URI[xdczip.md5sum] = "21310b647275a7c7dd5b37dcb96c0b1b"
- SRC_URI[xdczip.sha256sum] = "afe8616773e63b01e79e8cfacaf4d2c8d3b92c798c7f8cf5d1c7b5fe2060bbe4"
-+
-+FILES_${PN} += "${XDC_INSTALL_DIR_RECIPE}"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/recipes-ti/dmai/ti-dmai.inc b/recipes-ti/dmai/ti-dmai.inc
-index f81b4cff..50621184 100644
---- a/recipes-ti/dmai/ti-dmai.inc
-+++ b/recipes-ti/dmai/ti-dmai.inc
-@@ -29,7 +29,7 @@ SRC_URI = "svn://gforge.ti.com/svn/dmai/;module=${DMAIBRANCH};protocol=https;use
-         file://arago-tdox \
- 	"
- 
--DEPENDS = "virtual/kernel alsa-lib ti-framework-components ti-codec-engine ti-xdctools"
-+DEPENDS = "virtual/kernel alsa-lib ti-framework-components ti-codec-engine ti-xdctools-native"
- 
- DEPENDS_append_dm6446 	= " ti-codecs-dm6446   ti-dspbios ti-cgt6x ti-linuxutils"
- DEPENDS_append_dm6467 	= " ti-codecs-dm6467   ti-dspbios ti-cgt6x ti-linuxutils"
-diff --git a/recipes-ti/dsplink/ti-dsplink.inc b/recipes-ti/dsplink/ti-dsplink.inc
-index 78b53cf0..e0096155 100644
---- a/recipes-ti/dsplink/ti-dsplink.inc
-+++ b/recipes-ti/dsplink/ti-dsplink.inc
-@@ -30,7 +30,7 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/${PV_DL_PATH}/dsplink_l
-            file://ti-dsplink-examples-loadmodules.sh \
-            file://ti-dsplink-examples-unloadmodules.sh "
- 
--DEPENDS = "ti-dspbios ti-xdctools ti-cgt6x" 
-+DEPENDS = "ti-dspbios ti-xdctools-native ti-cgt6x"
- DEPENDS += "virtual/kernel perl-native" 
- 
- # SOC_FAMILY configuration
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index ebd4b8a5..3745ec07 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -88,7 +88,7 @@ export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSBIOS_INSTALL_DIR_RECI
- export SYSLINK_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSLINK_INSTALL_DIR_RECIPE}"
- export UIA_INSTALL_DIR        = "${STAGING_DIR_TARGET}${UIA_INSTALL_DIR_RECIPE}"
- export XDAIS_INSTALL_DIR      = "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE}"
--export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
-+export XDC_INSTALL_DIR        = "${STAGING_DIR_NATIVE}${XDC_INSTALL_DIR_RECIPE}"
- export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
- export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
- export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
-diff --git a/recipes-ti/ipc/ti-ipc-examples-linux_git.bb b/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-index 2340206c..545448c6 100644
---- a/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "TI Inter Process Communication (IPC) examples with Host running bios"
- require ti-ipc-examples.inc
- 
--DEPENDS = "ti-ipc ti-xdctools ti-sysbios ti-ipc-rtos"
-+DEPENDS = "ti-ipc ti-xdctools-native ti-sysbios ti-ipc-rtos"
- 
- do_compile_append() {
- 
-diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-ti/ipc/ti-ipc-examples_git.bb
-index 5482ce41..36df294e 100644
---- a/recipes-ti/ipc/ti-ipc-examples_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "TI Inter Process Communication (IPC) examples with Host running linux"
- require ti-ipc-examples.inc
- 
--DEPENDS = "ti-xdctools ti-sysbios ti-ipc-rtos"
-+DEPENDS = "ti-xdctools-native ti-sysbios ti-ipc-rtos"
- 
- do_compile_append() {
- 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index f4eefa85..4040c4d9 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -2,7 +2,7 @@ require ti-ipc.inc
- require ti-ipc-common.inc
- require ti-ipc-rtos.inc
- 
--DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
-+DEPENDS = "ti-xdctools-native ti-sysbios doxygen-native zip-native"
- 
- PACKAGES =+ "${PN}-fw"
- FILES_${PN}-fw = "${base_libdir}/firmware/*"
-diff --git a/recipes-ti/local-power-manager/ti-local-power-manager.inc b/recipes-ti/local-power-manager/ti-local-power-manager.inc
-index 2f2b5256..0e5d4f29 100644
---- a/recipes-ti/local-power-manager/ti-local-power-manager.inc
-+++ b/recipes-ti/local-power-manager/ti-local-power-manager.inc
-@@ -21,7 +21,7 @@ S = "${WORKDIR}/local_power_manager_linux_${PV}"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/lpm/${PV}/exports/local_power_manager_linux_${PV}.tar.gz;name=lpmtarball"
- 
--DEPENDS = "ti-dsplink ti-xdctools"
-+DEPENDS = "ti-dsplink ti-xdctools-native"
- DEPENDS += "virtual/kernel"
- 
- # SOC_FAMILY configuration
-diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-index f5bf4765..97474651 100644
---- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-+++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-@@ -19,7 +19,7 @@ SRCREV = "a2a518dcc9154a372b38bd5be8a483359123823c"
- 
- LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
- 
--DEPENDS = "common-csl-ip-rtos ti-xdctools ti-ipc-rtos ti-sysbios ti-cgt6x-native libulm zip-native"
-+DEPENDS = "common-csl-ip-rtos ti-xdctools-native ti-ipc-rtos ti-sysbios ti-cgt6x-native libulm zip-native"
- DEPENDS_append_k2hk = " qmss-lld-rtos cppi-lld-rtos"
- DEPENDS_append_k2e = " qmss-lld-rtos cppi-lld-rtos"
- DEPENDS_append_k2l-evm = " qmss-lld-rtos cppi-lld-rtos"
-diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-ti/syslink/ti-syslink.inc
-index af5f896a..5ff6af7c 100644
---- a/recipes-ti/syslink/ti-syslink.inc
-+++ b/recipes-ti/syslink/ti-syslink.inc
-@@ -31,7 +31,7 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/sy
-            file://syslink.pc \
-           "
- 
--DEPENDS = "ti-sysbios ti-xdctools ti-cgt6x ti-ipc ti-cgt470"
-+DEPENDS = "ti-sysbios ti-xdctools-native ti-cgt6x ti-ipc ti-cgt470"
- DEPENDS += "virtual/kernel" 
- 
- #common frameq gateMP heapBufMP heapMemMP knlNotify listMP messageQ notify ringIO ringIO_gpp sharedRegion slaveLoader tilerDaemon
 -- 
-2.14.3
+2.7.4
 
 
