@@ -1,6 +1,6 @@
-Return-Path: <eyalr@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 97A1FE00D83; Tue,  5 Dec 2017 01:30:06 -0800 (PST)
+	id 098CDE00BEA; Tue,  5 Dec 2017 09:53:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,39 +17,45 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D2649E00D69
-	for <meta-ti@yoctoproject.org>; Tue,  5 Dec 2017 01:30:05 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id vB59U5Ik008092
-	for <meta-ti@yoctoproject.org>; Tue, 5 Dec 2017 03:30:05 -0600
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A3F9E00B48
+	for <meta-ti@yoctoproject.org>; Tue,  5 Dec 2017 09:53:47 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id vB5HrljR004262
+	for <meta-ti@yoctoproject.org>; Tue, 5 Dec 2017 11:53:47 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1512466205;
-	bh=gXD1nt9DG2p7Hwdtnf5ZcaTjHR8GXmNUTpG34d3B46I=;
+	s=ti-com-17Q1; t=1512496427;
+	bh=jb40ARwYpOly5UqsIZ6pjLx4xzELLnQQuukmx7dsULE=;
 	h=From:To:CC:Subject:Date;
-	b=DwP1vpncfyiQbsh6Q+vTJP5FIlwbox9bNvOhO/wzt4YoAroszWbdAXv+o1JRVbmf6
-	AuKvxFifz1czQUpTHk3BTEY+VUqL+E5T2xnawMOYFJbCWyTkuGJhAQmq7tNX6UshQk
-	R0d++M8shxJM4Rm4Vxj/3uHbeyw5u9nbNaE/gSqk=
-Received: from DFRE70.ent.ti.com (dncmailx.itg.ti.com [10.167.188.34])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id vB59U4Kq019916
-	for <meta-ti@yoctoproject.org>; Tue, 5 Dec 2017 03:30:04 -0600
-Received: from DFRE01.ent.ti.com ([fe80::b027:5293:c8d8:d82a]) by
-	DFRE70.ent.ti.com ([fe80::645e:109b:13d3:dfa7%25]) with mapi id
-	14.03.0294.000; Tue, 5 Dec 2017 10:30:00 +0100
-From: "Reizer, Eyal" <eyalr@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [v2 3/4] wl18xx-target-scripts: update recipe for version
-	R8.7_SP3
-Thread-Index: AdNtq5ruW75bSEBLRPWPPyAzSudQEQ==
-Date: Tue, 5 Dec 2017 09:30:00 +0000
-Message-ID: <8665E2433BC68541A24DFFCA87B70F5B364AAED6@DFRE01.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.188.93]
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
+	b=hUkNi2IZScGpvfZAtva0q+PgLFMRUrwnYluclaOVls5tMIQmYxuB8uw3RtNqoQpb3
+	EY64d+uz/WqswEdDHrLLBSpKI4w85x87uIHQ6j8/uXz3NhLpEvylLvb/BCyn3s1jMT
+	7APXAuQOi/dzTt/JC0xQMKvQzcHy+7gFCOq4aR/s=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id vB5Hrllp023108
+	for <meta-ti@yoctoproject.org>; Tue, 5 Dec 2017 11:53:47 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Tue, 5 Dec 2017 11:53:47 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
+	Transport; Tue, 5 Dec 2017 11:53:46 -0600
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id vB5Hrkkk032434;
+	Tue, 5 Dec 2017 11:53:46 -0600
+Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.93.77])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	vB5Hrk310292; Tue, 5 Dec 2017 11:53:46 -0600 (CST)
+From: Dan Murphy <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 5 Dec 2017 11:53:43 -0600
+Message-ID: <20171205175343.6690-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
 MIME-Version: 1.0
-Subject: [v2 3/4] wl18xx-target-scripts: update recipe for version R8.7_SP3
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [PATCH] linux-ti-staging: update to ti2017.06-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -62,90 +68,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Dec 2017 09:30:06 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 Dec 2017 17:53:50 -0000
+Content-Type: text/plain
 
-Signed-off-by: Eyal Reizer <eyalr@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- .../wl18xx-target-scripts_8.7.1.bb                 | 22 ------------------=
-----
- .../wl18xx-target-scripts_8.7.3.bb                 | 22 ++++++++++++++++++=
-++++
- 2 files changed, 22 insertions(+), 22 deletions(-)
- delete mode 100644 recipes-connectivity/wl18xx-target-scripts/wl18xx-targe=
-t-scripts_8.7.1.bb
- create mode 100644 recipes-connectivity/wl18xx-target-scripts/wl18xx-targe=
-t-scripts_8.7.3.bb
+ recipes-kernel/linux/linux-ti-staging_4.9.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scrip=
-ts_8.7.1.bb b/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scri=
-pts_8.7.1.bb
-deleted file mode 100644
-index 07a164b..0000000
---- a/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scripts_8.7.=
-1.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION =3D "Scripts and configuration files for TI wireless drivers"
--LICENSE =3D "GPLv2"
--LIC_FILES_CHKSUM =3D "file://README;beginline=3D1;endline=3D21;md5=3Db8d6a=
-0865f50159bf5c0d175d1f4a705"
--
--# Tag: R8.7_SP1 (8.7.1)
--SRCREV =3D "a07b6e711d2a70608101d3d6cdc5749c4d8a96d5"
--BRANCH =3D "sitara-scripts"
--SRC_URI =3D "git://git.ti.com/wilink8-wlan/wl18xx-target-scripts.git;proto=
-col=3Dgit;branch=3D${BRANCH}"
--
--S =3D "${WORKDIR}/git"
--
--FILES_${PN} +=3D "${datadir}/wl18xx/"
--
--do_install() {
--	install -d ${D}${datadir}/wl18xx/
--
--	scripts=3D`find ./ -type f -name "*.*"`
--	for s in $scripts
--	do
--		install -m 0755 $s ${D}${datadir}/wl18xx/
--	done
--}
-diff --git a/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scrip=
-ts_8.7.3.bb b/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scri=
-pts_8.7.3.bb
-new file mode 100644
-index 0000000..b9492b2
---- /dev/null
-+++ b/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scripts_8.7.=
-3.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION =3D "Scripts and configuration files for TI wireless drivers"
-+LICENSE =3D "GPLv2"
-+LIC_FILES_CHKSUM =3D "file://README;beginline=3D1;endline=3D21;md5=3Db8d6a=
-0865f50159bf5c0d175d1f4a705"
-+
-+# Tag: R8.7_SP3 (8.7.3)
-+SRCREV =3D "a07b6e711d2a70608101d3d6cdc5749c4d8a96d5"
-+BRANCH =3D "sitara-scripts"
-+SRC_URI =3D "git://git.ti.com/wilink8-wlan/wl18xx-target-scripts.git;proto=
-col=3Dgit;branch=3D${BRANCH}"
-+
-+S =3D "${WORKDIR}/git"
-+
-+FILES_${PN} +=3D "${datadir}/wl18xx/"
-+
-+do_install() {
-+	install -d ${D}${datadir}/wl18xx/
-+
-+	scripts=3D`find ./ -type f -name "*.*"`
-+	for s in $scripts
-+	do
-+		install -m 0755 $s ${D}${datadir}/wl18xx/
-+	done
-+}
---=20
-2.7.4
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+index 5214cd5c..b979660e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.9.y"
+ 
+-SRCREV = "00e76b77c8bf0b01d48ebae421f9020ca4118658"
+-PV = "4.9.65+git${SRCPV}"
++SRCREV = "75a7894d6fc755de8c81cb631bd0065d78e68df6"
++PV = "4.9.67+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
+-- 
+2.15.0.124.g7668cbc60
 
 
