@@ -1,38 +1,58 @@
-Return-Path: <denys@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 71948E00D70; Wed, 13 Dec 2017 12:48:38 -0800 (PST)
+	id 3CE4DE00D70; Wed, 13 Dec 2017 12:58:54 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.16 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3FFD1E00D6D
-	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 12:48:36 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 66591208CC;
-	Wed, 13 Dec 2017 20:48:36 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 6BY34VOioE0B; Wed, 13 Dec 2017 20:48:36 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 473F0207BA;
-	Wed, 13 Dec 2017 20:48:35 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id C5FC21627F9;
-	Wed, 13 Dec 2017 15:48:34 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 13 Dec 2017 15:48:34 -0500
-Message-Id: <1513198114-70360-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [morty/master][PATCH] srss-tc: pass proper CROSS_COMPILE and CFLAGS
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0451CE00D17
+	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 12:58:52 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBDKwgLT004096
+	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 14:58:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1513198722;
+	bh=uklBdHPxcZak5kj6yUsr5kzSy8MVK8JU/WSuiADb/yo=;
+	h=From:To:Subject:Date;
+	b=qsFmq82Kt6/wV7PBRBlLF1mhSkGmp1dvP5LrAmLQf+foLz4nydjamBrYbKVyyAQ+g
+	Hm4jvDwqMTuPp4opG0imqKDMSCIxk4+PKsCRO/L384bLogGTGtpVqWUPdySKo4RKmQ
+	UB8GyL/t9gXcWPKJS9+r/ryhPdIqI6Kc38+4Shq4=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBDKwWiY032715
+	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 14:58:37 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
+	Wed, 13 Dec 2017 14:58:36 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
+	Transport; Wed, 13 Dec 2017 14:58:36 -0600
+Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBDKwaiZ012073
+	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 14:58:36 -0600
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 13 Dec 2017 15:58:35 -0500
+Message-ID: <1513198715-18815-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [morty/master][PATCH] pruss-lld: Update to version 1.0.0.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,28 +65,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2017 20:48:38 -0000
+X-List-Received-Date: Wed, 13 Dec 2017 20:58:54 -0000
+Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/srss-tc/srss-tc_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ recipes-bsp/pruss-lld/pruss-lld.inc | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/srss-tc/srss-tc_git.bb b/recipes-bsp/srss-tc/srss-tc_git.bb
-index 3c90069..483bde0 100644
---- a/recipes-bsp/srss-tc/srss-tc_git.bb
-+++ b/recipes-bsp/srss-tc/srss-tc_git.bb
-@@ -20,6 +20,9 @@ INITSCRIPT_PARAMS = "defaults 10"
+diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
+index 44d84b8..bbd060d 100644
+--- a/recipes-bsp/pruss-lld/pruss-lld.inc
++++ b/recipes-bsp/pruss-lld/pruss-lld.inc
+@@ -9,12 +9,13 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
+ PRUSS_LLD_GIT_BRANCH = "master"
+ PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
  
- inherit update-rc.d
- LDFLAGS += "-lrt"
-+CFLAGS += "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
+-# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.07"
+-PRUSS_LLD_SRCREV = "636bb5645014723c54c08245cf8c2ee401eceb4f"
++# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.08"
++PRUSS_LLD_SRCREV = "40d886b30f9b34bd86a76c6d7c04c37a9db7365b"
+ 
+ BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
+ SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${PRUSS_LLD_SRCREV}"
+-PV = "01.00.00.07"
++PV = "01.00.00.08"
+ INC_PR = "r0"
 +
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
- 
- do_install() {
- 	install -d ${D}${bindir}/
 -- 
-2.7.4
+1.9.1
 
 
