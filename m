@@ -1,58 +1,38 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 08334E00D70; Wed, 13 Dec 2017 12:21:48 -0800 (PST)
+	id 94CE1E00D17; Wed, 13 Dec 2017 12:23:15 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 740BAE00D17
-	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 12:21:47 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBDKLk2K013141
-	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 14:21:46 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1513196506;
-	bh=KJ5oM6mCGEVe5a+jcyvOr8qj2w0xnFUN3DOuulOHlug=;
-	h=From:To:Subject:Date;
-	b=vFKRldtofgoFY7Ey87hQVNcw2u5fkoIQNO0tTpmPIkMp66wC9QDDTQvVGpVfxQ1PT
-	yXtK3lMzTHL7JBWXA2CkOJDeeZ8scyssC3AfUhyOemI0TdsXl/8vzhx0DVs1dbWzO1
-	GKlv1Met6wTPTgZ5+2DeN/lIh/qQFKZGkYzmHtTk=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBDKLkHi005214
-	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 14:21:46 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Wed, 13 Dec 2017 14:21:46 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Wed, 13 Dec 2017 14:21:46 -0600
-Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBDKLkcs008783
-	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 14:21:46 -0600
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 13 Dec 2017 15:21:44 -0500
-Message-ID: <1513196504-15487-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/master][PATCH] icss-emac-lld: Update to version 1.0.0.10A
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9494E00D17
+	for <meta-ti@yoctoproject.org>; Wed, 13 Dec 2017 12:23:14 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C5666208CC;
+	Wed, 13 Dec 2017 20:23:13 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id va5vgcG9_826; Wed, 13 Dec 2017 20:23:13 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AC5BD207BA;
+	Wed, 13 Dec 2017 20:23:12 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 48C57162717;
+	Wed, 13 Dec 2017 15:23:12 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Wed, 13 Dec 2017 15:23:11 -0500
+Message-Id: <1513196591-16791-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [morty/master][PATCH] edma3-lld: pass TOOLCHAIN_OPTIONS and fix host-user-contamination
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,37 +45,77 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2017 20:21:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 13 Dec 2017 20:23:15 -0000
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+1. Need TOOLCHAIN_OPTIONS to pass --sysroot parameter for internal toolchain
+2. Use proper cp parameters to handle files ownership correctly
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/icss-emac-lld/icss-emac-lld.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld_git.bb | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-index 8e2ffd4..37ff6e0 100644
---- a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-+++ b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-@@ -9,14 +9,14 @@ ICSS_EMAC_LLD_GIT_PROTOCOL = "git"
- ICSS_EMAC_LLD_GIT_BRANCH = "master"
- ICSS_EMAC_LLD_GIT_DESTSUFFIX = "git/ti/drv/icss_emac"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+index e197d0b..38db2e2 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+@@ -24,41 +24,43 @@ do_compile () {
+ 	cd ${S}/packages
+ 	for platform in ${PLATFORMLIST}
+ 	do
+-		ROOTDIR=${S} CROSSCC="${TARGET_PREFIX}gcc" CROSSAR="${TARGET_PREFIX}ar" \
+-		CROSSLNK="${TARGET_PREFIX}gcc" INTERNAL_SW_ROOT="${S}" make \
++		ROOTDIR=${S} CROSSCC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" CROSSAR="${TARGET_PREFIX}ar" \
++		CROSSLNK="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" INTERNAL_SW_ROOT="${S}" make \
+ 		PLATFORM="$platform" TARGET=a15 TOOLCHAIN_a15=GCC FORMAT=ELF \
+ 		SONAME=libedma3.so all
+ 	done
+ }
  
--# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.07C"
--ICSS_EMAC_LLD_SRCREV = "08cb0540eeab7721fe82b603cb6285393f314117"
-+# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.10A"
-+ICSS_EMAC_LLD_SRCREV = "91f70af3714a823df4f71bde3c4d954728e07856"
+ do_install () {
++	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
++
+ 	install -d ${D}/${libdir}
  
- BRANCH = "${ICSS_EMAC_LLD_GIT_BRANCH}"
- SRC_URI = "${ICSS_EMAC_LLD_GIT_URI};destsuffix=${ICSS_EMAC_LLD_GIT_DESTSUFFIX};protocol=${ICSS_EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ 	# Static Libraries
+-	cp ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/edma3_lld_drv.aa15fg \
++	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/edma3_lld_drv.aa15fg \
+ 		${D}/${libdir}/libedma3.a
+-	cp ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/edma3_lld_rm.aa15fg \
++	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/edma3_lld_rm.aa15fg \
+ 		${D}/${libdir}/libedma3rm.a
  
- SRCREV = "${ICSS_EMAC_LLD_SRCREV}"
--PV = "01.00.00.07C"
-+PV = "01.00.00.10A"
- INC_PR = "r0"
+ 	# Shared Libraries
+-	cp -a ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/libedma* ${D}/${libdir}
+-	cp -a ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/libedma* ${D}/${libdir}
++	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/libedma* ${D}/${libdir}
++	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/libedma* ${D}/${libdir}
  
- S = "${WORKDIR}/${ICSS_EMAC_LLD_GIT_DESTSUFFIX}"
+ 	# Copy Headers
+ 	install -d ${D}/${includedir}/ti/sdo/edma3/drv/
+ 	install -d ${D}/${includedir}/ti/sdo/edma3/rm
+-	cp ${S}/packages/ti/sdo/edma3/drv/*.h ${D}/${includedir}/ti/sdo/edma3/drv/
+-	cp ${S}/packages/ti/sdo/edma3/rm/*.h ${D}/${includedir}/ti/sdo/edma3/rm/
++	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/drv/*.h ${D}/${includedir}/ti/sdo/edma3/drv/
++	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/rm/*.h ${D}/${includedir}/ti/sdo/edma3/rm/
+ 
+ 	# Copy Sample Config
+ 	install -d ${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+-	cp ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/evmTCI6636K2HSample.c \
++	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/evmTCI6636K2HSample.c \
+ 		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+-	cp ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/evmTCI6638K2KSample.c \
++	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/evmTCI6638K2KSample.c \
+ 		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+-	cp ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/evmTCI6630K2LSample.c \
++	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/evmTCI6630K2LSample.c \
+ 		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+-	cp ${S}/examples/edma3_user_space_driver/evmC66AK2E/evmC66AK2ESample.c \
++	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmC66AK2E/evmC66AK2ESample.c \
+ 		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+ 
+ 	install -d ${D}/${bindir}
 -- 
-1.9.1
+2.7.4
 
 
