@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1B97EE00D72; Thu, 14 Dec 2017 07:44:36 -0800 (PST)
+	id 4AA1AE00D9E; Thu, 14 Dec 2017 08:55:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D43FE00D41
-	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 07:44:35 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 989C3E00D94
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 08:55:42 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBEFiYik007393
-	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 09:44:34 -0600
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBEGtfWg020038
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 10:55:41 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1513266274;
-	bh=PJRi8KNLlNhb6buyxE8U8bOPnC2+6MNYkECf/SUvxFI=;
+	s=ti-com-17Q1; t=1513270541;
+	bh=Yga9UlM0olE81UzBAmZNBQlt4ROcWUzSqUKPEZ1I8t8=;
 	h=From:To:Subject:Date;
-	b=dXe8EcRs5wmPcXgA26ERFtvoBaAr0pmNvMLLeFtoEyCiFAPLabTHZyK4D5c5pp9GQ
-	hyOK210dx26v+f4kBiL/7VWynDojPfRhnDeT/tZU84SncixDB7d1fIsG+t2idWDOTo
-	qiFi0SU1FJ4fHV6khsI7yG4cN05qHtoK8hXVple0=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEFiYWl003169
-	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 09:44:34 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	b=skviL/N7WC6V70/5Jci4V1nyN2Lyy3TGZQQoKh/SVzuMD18Wh40C0GVoVUGG15uj5
+	yCbad2Isx1Vi2Nf6X9GzYCTPIbLY5lQOeTeFSCDGEiA1hINlf6ipmJm/XdcydBhDAs
+	GHyR/r0ELkV2SBrjQ+NrHl2bqKYAZLZgh/RcZHe0=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEGtf5C015916
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 10:55:41 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Thu, 14 Dec 2017 09:44:34 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_0,
+	Thu, 14 Dec 2017 10:55:41 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Thu, 14 Dec 2017 09:44:34 -0600
+	Transport; Thu, 14 Dec 2017 10:55:41 -0600
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEFiY6j005032
-	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 09:44:34 -0600
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEGtfEr019955
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 10:55:41 -0600
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 14 Dec 2017 10:44:32 -0500
-Message-ID: <1513266272-25411-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 14 Dec 2017 11:55:40 -0500
+Message-ID: <1513270540-30635-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/master][PATCH v2] board-rtos:Updating to version 1.0.9.0A
+Subject: [morty/master][PATCH ] i2c-lld-rtos: Updating to version 1.0.0.9A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,47 +65,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2017 15:44:36 -0000
+X-List-Received-Date: Thu, 14 Dec 2017 16:55:43 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
+ recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- v2 - Correct the typo in the COMPATIBLE_MACHINE 
-
- recipes-bsp/board-rtos/board-rtos_git.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
-index 37b2a64..e844e79 100644
---- a/recipes-bsp/board-rtos/board-rtos_git.bb
-+++ b/recipes-bsp/board-rtos/board-rtos_git.bb
-@@ -5,21 +5,21 @@ inherit ti-pdk
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://board.h;beginline=1;endline=32;md5=0e3182ba6a963da159c37eafa9752ade"
+diff --git a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
+index 4f711b8..a178c27 100644
+--- a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
++++ b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
+@@ -13,14 +13,14 @@ I2C_LLD_GIT_PROTOCOL = "git"
+ I2C_LLD_GIT_BRANCH = "master"
+ I2C_LLD_GIT_DESTSUFFIX = "git/ti/drv/i2c"
  
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1"
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.07A"
+-I2C_LLD_SRCREV = "85ad56fb6e1f2bdabdd3c371b97170cb62a6fdd7"
++# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.09A"
++I2C_LLD_SRCREV = "1a0e371f1c992b3f28cb160c6e3ada33d382f6a9"
  
- BOARD_GIT_URI = "git://git.ti.com/keystone-rtos/board.git"
- BOARD_GIT_PROTOCOL = "git"
- BOARD_GIT_BRANCH = "master"
+ BRANCH = "${I2C_LLD_GIT_BRANCH}"
+ SRC_URI = "${I2C_LLD_GIT_URI};destsuffix=${I2C_LLD_GIT_DESTSUFFIX};protocol=${I2C_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
--# Below commit ID corresponds to "DEV.BOARD.01.00.08.00A"
--BOARD_SRCREV = "16b4ec027e2b0a3b91105a948d2c2d6db997bee0"
-+# Below commit ID corresponds to "DEV.BOARD.01.00.09.00A"
-+BOARD_SRCREV = "387d77aff6e36af54c239a315cb2d477f1466f4d"
- 
- BRANCH ="${BOARD_GIT_BRANCH}"
- SRC_URI = "${BOARD_GIT_URI};protocol=${BOARD_GIT_PROTOCOL};branch=${BRANCH}"
- 
- SRCREV = "${BOARD_SRCREV}"
--PV = "01.00.08.00A"
-+PV = "01.00.09.00A"
+ SRCREV = "${I2C_LLD_SRCREV}"
+-PV = "01.00.00.07A"
++PV = "01.00.00.09A"
  PR = "r0"
  
- DEPENDS_append = " i2c-lld-rtos \
+ DEPENDS_append = " osal-rtos \
 -- 
 1.9.1
 
