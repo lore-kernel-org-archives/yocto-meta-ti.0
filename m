@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CA4B3E00D48; Thu, 14 Dec 2017 12:06:34 -0800 (PST)
+	id 9D9A8E00D1C; Thu, 14 Dec 2017 13:01:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,44 +17,42 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17B1EE00D1C
-	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 12:06:33 -0800 (PST)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0A783E00D1C
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 13:01:42 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBEK6NY0024306
-	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 14:06:23 -0600
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBEL1gTI021025
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 15:01:42 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1513281983;
-	bh=znV5dCdYxfNyZLrU24fyVppDX60lBVg9vpVjW686TC0=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=V+VyaKFtR5lEhRVnBESfqT+Ps8NyNx2LETcWMgkhzldeyL9OGJAGhX+qA9FSBl0So
-	EOSQfolMnsVpVm2QNCd8S4pJ35qigonsG8atK/nRYfCGS+xLuta2NEUL6s8p4q7Upt
-	sYGEwq4sfDp4Ygpx5mMuY9LMsi37SkJgLqhp3RTM=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEK6I9v007725
-	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 14:06:18 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.845.34;
-	Thu, 14 Dec 2017 14:06:17 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE105.ent.ti.com
-	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.845.34 via Frontend
-	Transport; Thu, 14 Dec 2017 14:06:17 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEK6Hkc001939;
-	Thu, 14 Dec 2017 14:06:17 -0600
-Date: Thu, 14 Dec 2017 15:06:17 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-Message-ID: <20171214200616.GH31492@edge>
-References: <1513281882-44118-1-git-send-email-m-radhakrishnan2@ti.com>
+	s=ti-com-17Q1; t=1513285302;
+	bh=tzU/q6aK9Fh5ZNtqiCt1Udlu/xzlyktAo21mflHX7xo=;
+	h=From:To:Subject:Date;
+	b=j9qMH/yapq40T7L/ULDtUnmDvKEVzbnn/jiOINhlD2s6UGrtNXo1QFX7y4ZZWPG9V
+	wk68pjaIQAvoUr4NQRsKhtTTwK/c8wjBM4JImVtnqotj86rXWFyXY81I8P70VJ3iD6
+	FyJG6YTvXlP58PIqH5ZimOSN1uYJLfqpvmVNWVYk=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEL1g40026184
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 15:01:42 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.845.34;
+	Thu, 14 Dec 2017 15:01:41 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Thu, 14 Dec 2017 15:01:41 -0600
+Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBEL1fnn002468
+	for <meta-ti@yoctoproject.org>; Thu, 14 Dec 2017 15:01:41 -0600
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 14 Dec 2017 16:01:30 -0500
+Message-ID: <1513285290-47989-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1513281882-44118-1-git-send-email-m-radhakrishnan2@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [morty/master][PATCH ] ti-ndk: Updating to version 2.26.00.08
+Subject: [morty/master][PATCH ] sa-lld: Update to version 3.0.0.19
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,65 +65,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2017 20:06:34 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Dec 2017 21:01:43 -0000
+Content-Type: text/plain
 
-Please use -C/-M
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
+ recipes-bsp/sa-lld/sa-lld.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-On Thu, Dec 14, 2017 at 03:04:42PM -0500, Mahesh Radhakrishnan wrote:
-> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-> ---
->  recipes-ti/ndk/ti-ndk_2.25.01.11.bb | 13 -------------
->  recipes-ti/ndk/ti-ndk_2.26.00.08.bb | 13 +++++++++++++
->  2 files changed, 13 insertions(+), 13 deletions(-)
->  delete mode 100644 recipes-ti/ndk/ti-ndk_2.25.01.11.bb
->  create mode 100644 recipes-ti/ndk/ti-ndk_2.26.00.08.bb
-> 
-> diff --git a/recipes-ti/ndk/ti-ndk_2.25.01.11.bb b/recipes-ti/ndk/ti-ndk_2.25.01.11.bb
-> deleted file mode 100644
-> index d5d926b..0000000
-> --- a/recipes-ti/ndk/ti-ndk_2.25.01.11.bb
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -require ti-ndk.inc
-> -
-> -PV = "2_25_01_11"
-> -PR = "r0"
-> -
-> -LIC_FILES_CHKSUM = "file://ndk_${PV}_manifest.html;md5=80a8d9b76cf700929d3f5b6df09052d6"
-> -
-> -SRC_URI[ndkzip.md5sum] = "e42bfcc8c3a6d183d60f26ec01ccc79b"
-> -SRC_URI[ndkzip.sha256sum] = "a15bc9b570dc0628dd8b8c3665037a162610a6f86c5f17ebb6a329d3db60f071"
-> -
-> -INHIBIT_PACKAGE_STRIP = "1"
-> -INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> -INHIBIT_SYSROOT_STRIP = "1"
-> diff --git a/recipes-ti/ndk/ti-ndk_2.26.00.08.bb b/recipes-ti/ndk/ti-ndk_2.26.00.08.bb
-> new file mode 100644
-> index 0000000..e587bf9
-> --- /dev/null
-> +++ b/recipes-ti/ndk/ti-ndk_2.26.00.08.bb
-> @@ -0,0 +1,13 @@
-> +require ti-ndk.inc
-> +
-> +PV = "2_26_00_08"
-> +PR = "r0"
-> +
-> +LIC_FILES_CHKSUM = "file://ndk_${PV}_manifest.html;md5=e2a7d40cf1e7207ac3dd6d993d71ee8c"
-> +
-> +SRC_URI[ndkzip.md5sum] = "09c7ffaff305f3083d15c0a0db73d781"
-> +SRC_URI[ndkzip.sha256sum] = "5b22c6b8bfbf3a22c53f52bf880d5cf49daf386716942a4202569521bb30f4a8"
-> +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> +INHIBIT_SYSROOT_STRIP = "1"
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+index 396fabf..9e101ba 100644
+--- a/recipes-bsp/sa-lld/sa-lld.inc
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -8,14 +8,14 @@ SA_LLD_GIT_PROTOCOL = "git"
+ SA_LLD_GIT_BRANCH = "master"
+ SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
+ 
+-# Below commit ID corresponding to "DEV.SA_LLD.03.00.00.18"
+-SA_LLD_SRCREV = "28893b417b5a598999b55dee19e86c9da4b02850"
++# Below commit ID corresponding to "DEV.SA_LLD.03.00.00.19"
++SA_LLD_SRCREV = "885e40c384b8986fe93928fcff84c6f0db5ea843"
+ 
+ BRANCH = "${SA_LLD_GIT_BRANCH}"
+ SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${SA_LLD_SRCREV}"
+ 
+-PV = "03.00.00.18"
++PV = "03.00.00.19"
+ INC_PR = "r0"
+ 
+ S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
+-- 
+1.9.1
+
 
