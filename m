@@ -1,38 +1,58 @@
-Return-Path: <denis@denix.org>
+Return-Path: <gaurav@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A8341E00D8C; Mon, 18 Dec 2017 22:01:39 -0800 (PST)
+	id AA703E00D7F; Tue, 19 Dec 2017 09:59:26 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCCDEE00D6A
-	for <meta-ti@yoctoproject.org>; Mon, 18 Dec 2017 22:01:37 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id F03E520B42;
-	Tue, 19 Dec 2017 06:01:36 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id Dwsun79R6Ukd; Tue, 19 Dec 2017 06:01:36 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A947B20B35;
-	Tue, 19 Dec 2017 06:01:35 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 1EB9A1631FB;
-	Tue, 19 Dec 2017 01:01:35 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Tue, 19 Dec 2017 01:01:29 -0500
-Message-Id: <1513663292-22396-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [rocko/master][PATCH 1/4] doxygen: import from meta-arago
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0AAD1E00B5F
+	for <meta-ti@yoctoproject.org>; Tue, 19 Dec 2017 09:59:25 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBJHxPFl018249
+	for <meta-ti@yoctoproject.org>; Tue, 19 Dec 2017 11:59:25 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1513706365;
+	bh=6fq0rZEKHnySb3dnF5CxF0dxTudtyyFa5yS5YAmoJxc=;
+	h=From:To:CC:Subject:Date;
+	b=jCw39AX67vQB75P7ZWZxLzGqt5XGUu9dI5CwRMr1JrrhZJHartFf0fqdWmuaoWg+7
+	+S6uMYHUkF+V13bf5FEu/PBtcdun1eM4DcI3GJBzJFKmT/0Fe+l1oS2kWn8Vn8LUvz
+	PlsDts8TjUyOudJms6rK0/3Fb0l5yqnfyI1hO8Vo=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBJHxPXw030287
+	for <meta-ti@yoctoproject.org>; Tue, 19 Dec 2017 11:59:25 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Tue, 19 Dec 2017 11:59:24 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Tue, 19 Dec 2017 11:59:24 -0600
+Received: from sdomc-build0.hou.asp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBJHxOnr011901;
+	Tue, 19 Dec 2017 11:59:24 -0600
+From: Gaurav Mitra <gaurav@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 19 Dec 2017 11:58:49 -0600
+Message-ID: <20171219175849.75856-1-gaurav@ti.com>
+X-Mailer: git-send-email 2.14.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [PATCH v2] Enable OpenMP RTOS eclipse plugin signature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,133 +65,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 06:01:39 -0000
+X-List-Received-Date: Tue, 19 Dec 2017 17:59:26 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
-
-Many LLD and RTOS components in meta-ti use doxygen during build.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Gaurav Mitra <gaurav@ti.com>
 ---
- .../doxygen/doxygen/patch-flex_2_6_0.diff          | 66 ++++++++++++++++++++++
- recipes-devtools/doxygen/doxygen_1.8.9.1.bb        | 34 +++++++++++
- 2 files changed, 100 insertions(+)
- create mode 100644 recipes-devtools/doxygen/doxygen/patch-flex_2_6_0.diff
- create mode 100644 recipes-devtools/doxygen/doxygen_1.8.9.1.bb
+ recipes-ti/openmp-rtos/openmp-rtos_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-devtools/doxygen/doxygen/patch-flex_2_6_0.diff b/recipes-devtools/doxygen/doxygen/patch-flex_2_6_0.diff
-new file mode 100644
-index 0000000..36d7379
---- /dev/null
-+++ b/recipes-devtools/doxygen/doxygen/patch-flex_2_6_0.diff
-@@ -0,0 +1,66 @@
-+--- src/code.l.orig
-++++ src/code.l
-+@@ -3695,7 +3695,7 @@ void codeFreeScanner()
-+ extern "C" { // some bogus code to keep the compiler happy
-+   void codeYYdummy() { yy_flex_realloc(0,0); } 
-+ }
-+-#elif YY_FLEX_SUBMINOR_VERSION<33
-++#elif YY_FLEX_MAJOR_VERSION<=2 && YY_FLEX_MINOR_VERSION<=5 && YY_FLEX_SUBMINOR_VERSION<33
-+ #error "You seem to be using a version of flex newer than 2.5.4 but older than 2.5.33. These versions do NOT work with doxygen! Please use version <=2.5.4 or >=2.5.33 or expect things to be parsed wrongly!"
-+ #endif
-+ 
-+--- src/commentscan.l.orig
-++++ src/commentscan.l
-+@@ -1098,7 +1098,7 @@ RCSTAG    "$"{ID}":"[^\n$]+"$"
-+ 					      // but we need to know the position in the input buffer where this 
-+ 					      // rule matched.
-+ 					      // for flex 2.5.33+ we should use YY_CURRENT_BUFFER_LVALUE
-+-#if YY_FLEX_MINOR_VERSION>=5 && YY_FLEX_SUBMINOR_VERSION>=33
-++#if YY_FLEX_MAJOR_VERSION>=2 && (YY_FLEX_MINOR_VERSION>5 || (YY_FLEX_MINOR_VERSION==5 && YY_FLEX_SUBMINOR_VERSION>=33))
-+ 					      inputPosition=prevPosition + (int)(yy_bp - YY_CURRENT_BUFFER_LVALUE->yy_ch_buf);
-+ #else
-+ 					      inputPosition=prevPosition + (int)(yy_bp - yy_current_buffer->yy_ch_buf);
-+@@ -1160,7 +1160,7 @@ RCSTAG    "$"{ID}":"[^\n$]+"$"
-+                                           g_memberGroupHeader.resize(0);
-+ 					  parseMore=TRUE;
-+                                           needNewEntry = TRUE;
-+-#if YY_FLEX_MINOR_VERSION>=5 && YY_FLEX_SUBMINOR_VERSION>=33
-++#if YY_FLEX_MAJOR_VERSION>=2 && (YY_FLEX_MINOR_VERSION>5 || (YY_FLEX_MINOR_VERSION==5 && YY_FLEX_SUBMINOR_VERSION>=33))
-+ 				          inputPosition=prevPosition + (int)(yy_bp - YY_CURRENT_BUFFER_LVALUE->yy_ch_buf) + strlen(yytext);
-+ #else
-+ 				          inputPosition=prevPosition + (int)(yy_bp - yy_current_buffer->yy_ch_buf) + strlen(yytext);
-+
-+--- src/fortrancode.l.orig
-++++ src/fortrancode.l
-+@@ -1289,7 +1289,7 @@ void parseFortranCode(CodeOutputInterfac
-+ extern "C" { // some bogus code to keep the compiler happy
-+   void fortrancodeYYdummy() { yy_flex_realloc(0,0); } 
-+ }
-+-#elif YY_FLEX_SUBMINOR_VERSION<33
-++#elif YY_FLEX_MAJOR_VERSION<=2 && YY_FLEX_MINOR_VERSION<=5 && YY_FLEX_SUBMINOR_VERSION<33
-+ #error "You seem to be using a version of flex newer than 2.5.4 but older than 2.5.33. These versions do NOT work with doxygen! Please use version <=2.5.4 or >=2.5.33 or expect things to be parsed wrongly!"
-+ #else
-+ extern "C" { // some bogus code to keep the compiler happy
-+
-+--- src/pycode.l.orig
-++++ src/pycode.l        
-+@@ -1503,7 +1503,7 @@ void parsePythonCode(CodeOutputInterface
-+ extern "C" { // some bogus code to keep the compiler happy
-+   void pycodeYYdummy() { yy_flex_realloc(0,0); } 
-+ }
-+-#elif YY_FLEX_SUBMINOR_VERSION<33
-++#elif YY_FLEX_MAJOR_VERSION<=2 && YY_FLEX_MINOR_VERSION<=5 && YY_FLEX_SUBMINOR_VERSION<33
-+ #error "You seem to be using a version of flex newer than 2.5.4. These are currently incompatible with 2.5.4, and do NOT work with doxygen! Please use version 2.5.4 or expect things to be parsed wrongly! A bug report has been submitted (#732132)."
-+ #endif
-+ 
-+--- src/vhdlcode.l
-++++ src.a/vhdlcode.l
-+@@ -1613,7 +1613,7 @@ void codeFreeVhdlScanner()
-+ extern "C" { // some bogus code to keep the compiler happy
-+   void vhdlcodeYYdummy() { yy_flex_realloc(0,0); } 
-+ }
-+-#elif YY_FLEX_SUBMINOR_VERSION<33
-++#elif YY_FLEX_MAJOR_VERSION<=2 && YY_FLEX_MINOR_VERSION<=5 && YY_FLEX_SUBMINOR_VERSION<33
-+ #error "You seem to be using a version of flex newer than 2.5.4 but older than 2.5.33. These versions do NOT work with doxygen! Please use version <=2.5.4 or >=2.5.33 or expect things to be parsed wrongly!"
-+ #endif
-+ 
-diff --git a/recipes-devtools/doxygen/doxygen_1.8.9.1.bb b/recipes-devtools/doxygen/doxygen_1.8.9.1.bb
-new file mode 100644
-index 0000000..27560fd
---- /dev/null
-+++ b/recipes-devtools/doxygen/doxygen_1.8.9.1.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "Utilities for generating documentation from source code"
-+HOMEPAGE = "http://www.doxygen.org/"
-+SECTION = "console/utils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b380c86cea229fa42b9e543fc491f5eb"
-+
-+DEPENDS = "flex-native bison-native"
-+
-+SRC_URI = "http://ftp.stack.nl/pub/users/dimitri/${BP}.src.tar.gz \
-+	file://patch-flex_2_6_0.diff;striplevel=0"
-+
-+SRC_URI[md5sum] = "3d1a5c26bef358c10a3894f356a69fbc"
-+SRC_URI[sha256sum] = "d4ab6e28d4d45d8956cad17470aade3fbe2356e8f64b92167e738c1887feccec"
-+
-+EXTRA_OECONF = "--prefix ${prefix}"
-+
-+do_configure () {
-+	./configure ${EXTRA_OECONF}
-+
-+	# TODO on rebuilds will repeatedly append.  Change logic to include a
-+	# separate file and overwrite that file?
-+	echo "TMAKE_CC=${CC}" >> tmake/lib/linux-g++/tmake.conf
-+	echo "TMAKE_CXX=${CXX}" >> tmake/lib/linux-g++/tmake.conf
-+	echo "TMAKE_CFLAGS=${CFLAGS}" >> tmake/lib/linux-g++/tmake.conf
-+	echo "TMAKE_CXXFLAGS=${CXXFLAGS}" >> tmake/lib/linux-g++/tmake.conf
-+	echo "TMAKE_LINK=${CXX}" >> tmake/lib/linux-g++/tmake.conf
-+	echo "TMAKE_LFLAGS=${LDFLAGS}" >> tmake/lib/linux-g++/tmake.conf
-+}
-+
-+do_install() {
-+	oe_runmake install DESTDIR=${D} MAN1DIR=share/man/man1
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+index f5bf4765..fd9c0ba5 100644
+--- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
++++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+@@ -4,7 +4,8 @@ LICENSE = "BSD"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ 
+-PV = "2_06_02_00"
++PV = "2_06_02_01"
++ECLIPSE_PLUGIN_VERSION = "2.06.02.01"
+ PR = "r0"
+ 
+ OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
+@@ -12,10 +13,9 @@ OPENMP_RTOS_GIT_PROTOCOL = "git"
+ OPENMP_RTOS_GIT_BRANCH = "master"
+ 
+ BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+-SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH} \
+-"
++SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+-SRCREV = "a2a518dcc9154a372b38bd5be8a483359123823c"
++SRCREV = "69af0caf19c2713e21b25e77acf103074be129f2"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+ 
 -- 
-2.7.4
+2.14.1
 
 
