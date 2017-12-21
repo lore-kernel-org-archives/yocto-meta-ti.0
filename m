@@ -1,17 +1,15 @@
-Return-Path: <jpewhacker@gmail.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8231AE00E41; Thu, 21 Dec 2017 09:16:26 -0800 (PST)
+	id 2A5D3E00E89; Thu, 21 Dec 2017 09:17:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (jpewhacker[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.214.68 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -19,55 +17,47 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
-	[209.85.214.68])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2B7C1E00E27
-	for <meta-ti@yoctoproject.org>; Thu, 21 Dec 2017 09:16:24 -0800 (PST)
-Received: by mail-it0-f68.google.com with SMTP id f190so11600817ita.5
-	for <meta-ti@yoctoproject.org>; Thu, 21 Dec 2017 09:16:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:message-id:subject:to:cc:date:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=+3lK9JqqouiHgYMxwh8vA08LrOvefAZeJA2X4ZIknSA=;
-	b=Rd6j0xmcUHIQXR4/GkfNmZXNAAQJYskDk2f4xZovzQXteZfwcKZJ0jGfQ8YXP2SQO2
-	etFMiUB6pqG1Yfw0BN2y7IFcT2Rsvpg7+5eGBJjgBT1act8pXoDQKAI3DfT914WNnMS8
-	DvNQqSOEYP8svrlt2d/ndOsqIn5CQWhe6T5daI1W6pkuMRuACvPsJPLHDOhTmPA/Y+Vn
-	Y+lmsvn6uRLcIVB6H4A1t/Kx2iL0FlbG9GUZZ4e7wWxt+1p29gcOh1tf703itcld1sJA
-	qAseprNp6Y4DY1DpaO+crPvpDg63Ndvl2empA/lNZzu3+HkHLlgIrGZZhiydgvom2cFg
-	QChw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:message-id:subject:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=+3lK9JqqouiHgYMxwh8vA08LrOvefAZeJA2X4ZIknSA=;
-	b=QcZSp7MGkPofeZPcJJd332W3UfIVn8I+3/g+AsoilYWG1/cguvusOsAkUCbz09zp9A
-	YWl1uxVbu2q3iBu/kqlLLqpVBnACP7WJ6Ve11Lqalr1THx1v+KTGJiebD2FaFoKzKIme
-	7PHGtpRlItFTrpUyLMaMKMQYe6CIh+tVVne7m+s7uh8AfbkdiLizm1UheTRcya3fWdB4
-	QY/A2ykskhT3M6ezqYqCVGcagDJhXTpEm3O9Hds4s+Sz3nGOdoCn6mpg4F9OEjjygZfk
-	A6HLUUAGeKNbse/piHWR7TOaKla96xsPNASFo+LhoODR11OBUjA1dbnjTpSqtraoUsq9
-	71Ag==
-X-Gm-Message-State: AKGB3mJMCJ7FsS9i1O1rQI00uPamJl6ZW4Xy8xZrVHjoxPRnWUqI6B55
-	L/RGHyFJoMwzyrNkQ09cAZc=
-X-Google-Smtp-Source: ACJfBos7SjilacekE5soNUFirtLVZR0a8OJujiV1ahf6QUcPYqweKQma17SEbZ+kvTjp2oYRCvc9Fw==
-X-Received: by 10.36.108.83 with SMTP id w80mr13790194itb.3.1513876584029;
-	Thu, 21 Dec 2017 09:16:24 -0800 (PST)
-Received: from ola-842mrw1.ad.garmin.com ([204.77.163.55])
-	by smtp.googlemail.com with ESMTPSA id
-	o73sm7822216ito.4.2017.12.21.09.16.23
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 21 Dec 2017 09:16:23 -0800 (PST)
-From: Joshua Watt <jpewhacker@gmail.com>
-X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
-Message-ID: <1513876583.6502.36.camel@gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>, meta-ti@yoctoproject.org
-Date: Thu, 21 Dec 2017 11:16:23 -0600
-In-Reply-To: <20171221171303.GE5984@edge>
-References: <1513447575-21127-1-git-send-email-denys@ti.com>
-	<20171221171303.GE5984@edge>
-X-Mailer: Evolution 3.26.2 (3.26.2-1.fc27) 
-Mime-Version: 1.0
-Cc: "Mertz, Timothy" <timothy.mertz@garmin.com>
-Subject: Re: [morty][PATCH v3] ti-xdctools: extend to native and nativesdk
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B221BE00E3F
+	for <meta-ti@yoctoproject.org>; Thu, 21 Dec 2017 09:17:07 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id vBLHH6PX032335
+	for <meta-ti@yoctoproject.org>; Thu, 21 Dec 2017 11:17:06 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1513876626;
+	bh=ysFvs5m1yUPYtzKELTU4t/vQPwhCjlnmSNAf3klW9b8=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=A40VS3SqgSwBtjdmY14w8ymWCqvrEXe4TEfct9iJPLNv9oNd9nAve879erLy+KUVx
+	QsDEvwdjbrdb2lIt06GJhoPhxhMmTmgeTOl6NAnQ/+5WNrutDy55fwPu8FDhbxMC4o
+	I0PB1RQ+ZRPVc7vcaBMbdVbU8lGJmZ8pJqbcVSm8=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id vBLHH6er020854
+	for <meta-ti@yoctoproject.org>; Thu, 21 Dec 2017 11:17:06 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Thu, 21 Dec 2017 11:17:06 -0600
+Received: from DLEE109.ent.ti.com ([fe80::992e:7546:157e:3b3d]) by
+	DLEE109.ent.ti.com ([fe80::992e:7546:157e:3b3d%17]) with mapi id
+	15.01.1261.035; Thu, 21 Dec 2017 11:17:06 -0600
+From: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [morty/master][PATCH ] ti-ndk: Updating to version
+	2.26.00.08
+Thread-Index: AQHTdRcAIHWlJOWXCUKBz77HbgWHMqNOZnQA//+uLEA=
+Date: Thu, 21 Dec 2017 17:17:06 +0000
+Message-ID: <3d776b07b7a045f28a2b30d62f4ea8aa@ti.com>
+References: <1513281882-44118-1-git-send-email-m-radhakrishnan2@ti.com>
+	<20171214200616.GH31492@edge> <20171221160906.GC5984@edge>
+In-Reply-To: <20171221160906.GC5984@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.218.109.157]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [morty/master][PATCH ] ti-ndk: Updating to version 2.26.00.08
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -80,374 +70,94 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Dec 2017 17:16:26 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Dec 2017 17:17:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2017-12-21 at 12:13 -0500, Denys Dmytriyenko wrote:
-> Are there any objections to this change? If not, I'll merge this soon
-> to morty 
-> and, with some modifications, to rocko and master. Thanks.
+Hi Denys,
+ I have resubmitted the patch with -M -C01 option added to the git send-ema=
+il command.=20
 
-I have no objections, FWIW
+Regards
+Machu.
+-----Original Message-----
+From: Dmytriyenko, Denys=20
+Sent: Thursday, December 21, 2017 11:09 AM
+To: Radhakrishnan, Mahesh
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [morty/master][PATCH ] ti-ndk: Updating to version 2=
+.26.00.08
 
-> 
-> 
-> On Sat, Dec 16, 2017 at 01:06:15PM -0500, Denys Dmytriyenko wrote:
-> > From: "Mertz, Timothy" <timothy.mertz@garmin.com>
-> > 
-> > ti-xdctools should be a native recipe as it more accurately
-> > reflects how
-> > it is supposed to be used. In addition, this allows it to be built
-> > as
-> > nativesdk and included in SDK image tools
-> > 
-> > Signed-off-by: "Mertz, Timothy" <timothy.mertz@garmin.com>
-> > Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Ping
+
+On Thu, Dec 14, 2017 at 03:06:17PM -0500, Denys Dmytriyenko wrote:
+> Please use -C/-M
+>=20
+> On Thu, Dec 14, 2017 at 03:04:42PM -0500, Mahesh Radhakrishnan wrote:
+> > Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 > > ---
-> > v3 - fix ipumm-fw build by passing native sysroot of xdctools
-> > 
-> >  classes/ti-pdk.bbclass                                    | 2 +-
-> >  recipes-bsp/dspdce-fw/dspdce-fw_git.bb                    | 2 +-
-> >  recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb               | 2 +-
-> >  recipes-bsp/ipumm-fw/ipumm-fw_git.bb                      | 4 +++-
-> >  recipes-devtools/gdbc6x/gdbserver-c6x_git.bb              | 2 +-
-> >  recipes-ti/c6accel/ti-c6accel.inc                         | 2 +-
-> >  recipes-ti/codec-engine/ti-codec-engine.inc               | 2 +-
-> >  recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb  | 2 +-
-> >  recipes-ti/devtools/ti-xdctools_3.50.03.33.bb             | 4 ++++
-> >  recipes-ti/dmai/ti-dmai.inc                               | 2 +-
-> >  recipes-ti/dsplink/ti-dsplink.inc                         | 2 +-
-> >  recipes-ti/includes/ti-paths.inc                          | 2 +-
-> >  recipes-ti/ipc/ti-ipc-examples-linux_git.bb               | 2 +-
-> >  recipes-ti/ipc/ti-ipc-examples_git.bb                     | 2 +-
-> >  recipes-ti/ipc/ti-ipc-rtos_git.bb                         | 2 +-
-> >  recipes-ti/local-power-manager/ti-local-power-manager.inc | 2 +-
-> >  recipes-ti/openmp-rtos/openmp-rtos_git.bb                 | 2 +-
-> >  recipes-ti/syslink/ti-syslink.inc                         | 2 +-
-> >  18 files changed, 23 insertions(+), 17 deletions(-)
-> > 
-> > diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-> > index f876802..b84b161 100644
-> > --- a/classes/ti-pdk.bbclass
-> > +++ b/classes/ti-pdk.bbclass
-> > @@ -3,7 +3,7 @@ require recipes-ti/includes/ti-staging.inc
-> >  
-> >  inherit perlnative
-> >  
-> > -DEPENDS = "ti-xdctools ti-cg-xml-native ti-sysbios common-csl-ip-
-> > rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-
-> > native ti-cgt-pru-native ti-pdk-build-rtos"
-> > +DEPENDS = "ti-xdctools-native ti-cg-xml-native ti-sysbios common-
-> > csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-
-> > cgt6x-native ti-cgt-pru-native ti-pdk-build-rtos"
-> >  
-> >  DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
-> >  DEPENDS_remove_ti33x = "ti-cgt6x-native"
-> > diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb b/recipes-
-> > bsp/dspdce-fw/dspdce-fw_git.bb
-> > index 2bada7b..2756c2d 100644
-> > --- a/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-> > +++ b/recipes-bsp/dspdce-fw/dspdce-fw_git.bb
-> > @@ -17,7 +17,7 @@ require recipes-ti/includes/ti-paths.inc
-> >  PR = "r4"
-> >  inherit update-alternatives
-> >  
-> > -DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-
-> > components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
-> > +DEPENDS = "ti-xdctools-native ti-sysbios ti-codec-engine ti-
-> > framework-components ti-xdais ti-ipc-rtos ti-osal ti-cgt6x-native"
-> >  
-> >  export HWVERSION = "ES10"
-> >  export BIOSTOOLSROOT = "${STAGING_DIR_TARGET}/usr/share/ti"
-> > diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-
-> > bsp/edma3-lld/edma3-lld-rtos_git.bb
-> > index 08ab4ec..f7bc0b1 100644
-> > --- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-> > +++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-> > @@ -3,7 +3,7 @@ require recipes-ti/includes/ti-paths.inc
-> >  
-> >  PR = "${INC_PR}.1"
-> >  
-> > -DEPENDS = "ti-sysbios ti-xdctools gcc-arm-none-eabi-native ti-cgt-
-> > arm-native ti-cgt6x-native"
-> > +DEPENDS = "ti-sysbios ti-xdctools-native gcc-arm-none-eabi-native
-> > ti-cgt-arm-native ti-cgt6x-native"
-> >  
-> >  COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone"
-> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-
-> > bsp/ipumm-fw/ipumm-fw_git.bb
-> > index 633cb13..7a06e43 100644
-> > --- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> > +++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> > @@ -28,7 +28,7 @@ require recipes-ti/includes/ti-paths.inc
-> >  
-> >  inherit update-alternatives
-> >  
-> > -DEPENDS = "ti-xdctools ti-sysbios ti-codec-engine ti-framework-
-> > components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
-> > +DEPENDS = "ti-xdctools-native ti-sysbios ti-codec-engine ti-
-> > framework-components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
-> >  
-> >  export HWVERSION="ES10"
-> >  export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
-> > @@ -43,6 +43,8 @@ export XDAISVERSION="ti-xdais-tree"
-> >  export TMS470CGTOOLPATH="${M4_TOOLCHAIN_INSTALL_DIR}"
-> >  export IPCSRC="${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
-> >  
-> > +EXTRA_OEMAKE +=
-> > "XDCDIST_TREE=${STAGING_DIR_NATIVE}/usr/share/ti/${XDCVERSION}"
+> >  recipes-ti/ndk/ti-ndk_2.25.01.11.bb | 13 ------------- =20
+> > recipes-ti/ndk/ti-ndk_2.26.00.08.bb | 13 +++++++++++++
+> >  2 files changed, 13 insertions(+), 13 deletions(-)  delete mode=20
+> > 100644 recipes-ti/ndk/ti-ndk_2.25.01.11.bb
+> >  create mode 100644 recipes-ti/ndk/ti-ndk_2.26.00.08.bb
+> >=20
+> > diff --git a/recipes-ti/ndk/ti-ndk_2.25.01.11.bb=20
+> > b/recipes-ti/ndk/ti-ndk_2.25.01.11.bb
+> > deleted file mode 100644
+> > index d5d926b..0000000
+> > --- a/recipes-ti/ndk/ti-ndk_2.25.01.11.bb
+> > +++ /dev/null
+> > @@ -1,13 +0,0 @@
+> > -require ti-ndk.inc
+> > -
+> > -PV =3D "2_25_01_11"
+> > -PR =3D "r0"
+> > -
+> > -LIC_FILES_CHKSUM =3D "file://ndk_${PV}_manifest.html;md5=3D80a8d9b76cf=
+700929d3f5b6df09052d6"
+> > -
+> > -SRC_URI[ndkzip.md5sum] =3D "e42bfcc8c3a6d183d60f26ec01ccc79b"
+> > -SRC_URI[ndkzip.sha256sum] =3D "a15bc9b570dc0628dd8b8c3665037a162610a6f=
+86c5f17ebb6a329d3db60f071"
+> > -
+> > -INHIBIT_PACKAGE_STRIP =3D "1"
+> > -INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
+> > -INHIBIT_SYSROOT_STRIP =3D "1"
+> > diff --git a/recipes-ti/ndk/ti-ndk_2.26.00.08.bb=20
+> > b/recipes-ti/ndk/ti-ndk_2.26.00.08.bb
+> > new file mode 100644
+> > index 0000000..e587bf9
+> > --- /dev/null
+> > +++ b/recipes-ti/ndk/ti-ndk_2.26.00.08.bb
+> > @@ -0,0 +1,13 @@
+> > +require ti-ndk.inc
 > > +
-> >  do_configure() {
-> >      oe_runmake unconfig
-> >      oe_runmake vayu_smp_config
-> > diff --git a/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-> > b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-> > index f4dc51d..79b584b 100644
-> > --- a/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-> > +++ b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-> > @@ -2,7 +2,7 @@ DESCRIPTION = "TI gdb-server to be used with
-> > c6xgdb."
-> >  LICENSE = "BSD"
-> >  LIC_FILES_CHKSUM =
-> > "file://../debian/copyright;md5=82c616b6c8f9c11c46feaaf8f9a11495"
-> >  
-> > -DEPENDS = "ti-xdais ti-framework-components ti-cgt6x-native ti-
-> > sysbios ti-xdctools"
-> > +DEPENDS = "ti-xdais ti-framework-components ti-cgt6x-native ti-
-> > sysbios ti-xdctools-native"
-> >  
-> >  PR = "${INC_PR}.0"
-> >  
-> > diff --git a/recipes-ti/c6accel/ti-c6accel.inc b/recipes-
-> > ti/c6accel/ti-c6accel.inc
-> > index 65990a8..7e7fb29 100644
-> > --- a/recipes-ti/c6accel/ti-c6accel.inc
-> > +++ b/recipes-ti/c6accel/ti-c6accel.inc
-> > @@ -29,7 +29,7 @@ BINFILE="c6accel_${PV}_Linux-x86_Setup.bin"
-> >  TI_BIN_UNPK_CMDS="Y:workdir"
-> >  
-> >  DEPENDS = "ti-codec-engine ti-xdais ti-dsplink ti-dspbios" 
-> > -DEPENDS += "ti-edma3lld ti-cgt6x ti-xdctools ti-framework-
-> > components" 
-> > +DEPENDS += "ti-edma3lld ti-cgt6x ti-xdctools-native ti-framework-
-> > components"
-> >  DEPENDS += "ti-biosutils" 
-> >  
-> >  TIARGS = ' \
-> > diff --git a/recipes-ti/codec-engine/ti-codec-engine.inc b/recipes-
-> > ti/codec-engine/ti-codec-engine.inc
-> > index 15bd464..b4d366e 100644
-> > --- a/recipes-ti/codec-engine/ti-codec-engine.inc
-> > +++ b/recipes-ti/codec-engine/ti-codec-engine.inc
-> > @@ -18,7 +18,7 @@ S = "${WORKDIR}/codec_engine_${PV}"
-> >  
-> >  SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/ta
-> > rgetcontent/ce/${PV}/exports/codec_engine_${PV},lite.tar.gz;name=ce
-> > tarball "
-> >  
-> > -DEPENDS = "ti-framework-components ti-xdais ti-xdctools ti-
-> > linuxutils"
-> > +DEPENDS = "ti-framework-components ti-xdais ti-xdctools-native ti-
-> > linuxutils"
-> >  DEPENDS_append_dm6446 	= " ti-dspbios ti-dsplink ti-local-
-> > power-manager ti-cgt6x ti-biosutils ti-edma3lld"
-> >  DEPENDS_append_dm6467 	= " ti-dspbios ti-dsplink ti-cgt6x
-> > ti-biosutils ti-edma3lld"
-> >  DEPENDS_append_omap3	= " ti-dspbios ti-dsplink ti-local-
-> > power-manager ti-cgt6x ti-biosutils ti-edma3lld"
-> > diff --git a/recipes-ti/codec-engine/ti-codecs-
-> > omap3530_4.00.00.00.bb b/recipes-ti/codec-engine/ti-codecs-
-> > omap3530_4.00.00.00.bb
-> > index 5c87b4c..e14f1c1 100644
-> > --- a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-> > +++ b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-> > @@ -68,7 +68,7 @@ TI_BIN_UNPK_CMDS = "Y:workdir"
-> >  
-> >  S = "${CODEC_SUITE_NAME}"
-> >  
-> > -DEPENDS = "ti-cgt6x ti-xdctools ti-dspbios ti-codec-engine ti-
-> > linuxutils"
-> > +DEPENDS = "ti-cgt6x ti-xdctools-native ti-dspbios ti-codec-engine
-> > ti-linuxutils"
-> >  
-> >  #generic codec
-> >  DSPSUFFIX_omap3530 = "x64P"
-> > diff --git a/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-> > b/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-> > index 73ab3bd..6ab2b94 100644
-> > --- a/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-> > +++ b/recipes-ti/devtools/ti-xdctools_3.50.03.33.bb
-> > @@ -7,3 +7,7 @@ LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/p
-> > ackage.html;beginline=1;endli
-> >  
-> >  SRC_URI[xdczip.md5sum] = "21310b647275a7c7dd5b37dcb96c0b1b"
-> >  SRC_URI[xdczip.sha256sum] =
-> > "afe8616773e63b01e79e8cfacaf4d2c8d3b92c798c7f8cf5d1c7b5fe2060bbe4"
+> > +PV =3D "2_26_00_08"
+> > +PR =3D "r0"
 > > +
-> > +FILES_${PN} += "${XDC_INSTALL_DIR_RECIPE}"
+> > +LIC_FILES_CHKSUM =3D "file://ndk_${PV}_manifest.html;md5=3De2a7d40cf1e=
+7207ac3dd6d993d71ee8c"
 > > +
-> > +BBCLASSEXTEND = "native nativesdk"
-> > diff --git a/recipes-ti/dmai/ti-dmai.inc b/recipes-ti/dmai/ti-
-> > dmai.inc
-> > index f81b4cf..5062118 100644
-> > --- a/recipes-ti/dmai/ti-dmai.inc
-> > +++ b/recipes-ti/dmai/ti-dmai.inc
-> > @@ -29,7 +29,7 @@ SRC_URI =
-> > "svn://gforge.ti.com/svn/dmai/;module=${DMAIBRANCH};protocol=https;
-> > use
-> >          file://arago-tdox \
-> >  	"
-> >  
-> > -DEPENDS = "virtual/kernel alsa-lib ti-framework-components ti-
-> > codec-engine ti-xdctools"
-> > +DEPENDS = "virtual/kernel alsa-lib ti-framework-components ti-
-> > codec-engine ti-xdctools-native"
-> >  
-> >  DEPENDS_append_dm6446 	= " ti-codecs-dm6446   ti-dspbios
-> > ti-cgt6x ti-linuxutils"
-> >  DEPENDS_append_dm6467 	= " ti-codecs-dm6467   ti-dspbios
-> > ti-cgt6x ti-linuxutils"
-> > diff --git a/recipes-ti/dsplink/ti-dsplink.inc b/recipes-
-> > ti/dsplink/ti-dsplink.inc
-> > index 78b53cf..e009615 100644
-> > --- a/recipes-ti/dsplink/ti-dsplink.inc
-> > +++ b/recipes-ti/dsplink/ti-dsplink.inc
-> > @@ -30,7 +30,7 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_pu
-> > blic_sw/${PV_DL_PATH}/dsplink_l
-> >             file://ti-dsplink-examples-loadmodules.sh \
-> >             file://ti-dsplink-examples-unloadmodules.sh "
-> >  
-> > -DEPENDS = "ti-dspbios ti-xdctools ti-cgt6x" 
-> > +DEPENDS = "ti-dspbios ti-xdctools-native ti-cgt6x"
-> >  DEPENDS += "virtual/kernel perl-native" 
-> >  
-> >  # SOC_FAMILY configuration
-> > diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-
-> > ti/includes/ti-paths.inc
-> > index ebd4b8a..3745ec0 100644
-> > --- a/recipes-ti/includes/ti-paths.inc
-> > +++ b/recipes-ti/includes/ti-paths.inc
-> > @@ -88,7 +88,7 @@ export SYSBIOS_INSTALL_DIR    =
-> > "${STAGING_DIR_TARGET}${SYSBIOS_INSTALL_DIR_RECI
-> >  export SYSLINK_INSTALL_DIR    =
-> > "${STAGING_DIR_TARGET}${SYSLINK_INSTALL_DIR_RECIPE}"
-> >  export UIA_INSTALL_DIR        =
-> > "${STAGING_DIR_TARGET}${UIA_INSTALL_DIR_RECIPE}"
-> >  export XDAIS_INSTALL_DIR      =
-> > "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE}"
-> > -export XDC_INSTALL_DIR        =
-> > "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
-> > +export XDC_INSTALL_DIR        =
-> > "${STAGING_DIR_NATIVE}${XDC_INSTALL_DIR_RECIPE}"
-> >  export PDK_INSTALL_DIR        =
-> > "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
-> >  export OSAL_INSTALL_DIR       =
-> > "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}"
-> >  export M4_TOOLCHAIN_INSTALL_DIR    =
-> > "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
-> > diff --git a/recipes-ti/ipc/ti-ipc-examples-linux_git.bb b/recipes-
-> > ti/ipc/ti-ipc-examples-linux_git.bb
-> > index 2340206..545448c 100644
-> > --- a/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-> > +++ b/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-> > @@ -1,7 +1,7 @@
-> >  DESCRIPTION = "TI Inter Process Communication (IPC) examples with
-> > Host running bios"
-> >  require ti-ipc-examples.inc
-> >  
-> > -DEPENDS = "ti-ipc ti-xdctools ti-sysbios ti-ipc-rtos"
-> > +DEPENDS = "ti-ipc ti-xdctools-native ti-sysbios ti-ipc-rtos"
-> >  
-> >  do_compile_append() {
-> >  
-> > diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-
-> > ti/ipc/ti-ipc-examples_git.bb
-> > index 5482ce4..36df294 100644
-> > --- a/recipes-ti/ipc/ti-ipc-examples_git.bb
-> > +++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
-> > @@ -1,7 +1,7 @@
-> >  DESCRIPTION = "TI Inter Process Communication (IPC) examples with
-> > Host running linux"
-> >  require ti-ipc-examples.inc
-> >  
-> > -DEPENDS = "ti-xdctools ti-sysbios ti-ipc-rtos"
-> > +DEPENDS = "ti-xdctools-native ti-sysbios ti-ipc-rtos"
-> >  
-> >  do_compile_append() {
-> >  
-> > diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-
-> > ipc-rtos_git.bb
-> > index f4eefa8..4040c4d 100644
-> > --- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-> > +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-> > @@ -2,7 +2,7 @@ require ti-ipc.inc
-> >  require ti-ipc-common.inc
-> >  require ti-ipc-rtos.inc
-> >  
-> > -DEPENDS = "ti-xdctools ti-sysbios doxygen-native zip-native"
-> > +DEPENDS = "ti-xdctools-native ti-sysbios doxygen-native zip-
-> > native"
-> >  
-> >  PACKAGES =+ "${PN}-fw"
-> >  FILES_${PN}-fw = "${base_libdir}/firmware/*"
-> > diff --git a/recipes-ti/local-power-manager/ti-local-power-
-> > manager.inc b/recipes-ti/local-power-manager/ti-local-power-
-> > manager.inc
-> > index 2f2b525..0e5d4f2 100644
-> > --- a/recipes-ti/local-power-manager/ti-local-power-manager.inc
-> > +++ b/recipes-ti/local-power-manager/ti-local-power-manager.inc
-> > @@ -21,7 +21,7 @@ S = "${WORKDIR}/local_power_manager_linux_${PV}"
-> >  
-> >  SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/ta
-> > rgetcontent/lpm/${PV}/exports/local_power_manager_linux_${PV}.tar.g
-> > z;name=lpmtarball"
-> >  
-> > -DEPENDS = "ti-dsplink ti-xdctools"
-> > +DEPENDS = "ti-dsplink ti-xdctools-native"
-> >  DEPENDS += "virtual/kernel"
-> >  
-> >  # SOC_FAMILY configuration
-> > diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-
-> > ti/openmp-rtos/openmp-rtos_git.bb
-> > index f5bf476..9747465 100644
-> > --- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> > +++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> > @@ -19,7 +19,7 @@ SRCREV =
-> > "a2a518dcc9154a372b38bd5be8a483359123823c"
-> >  
-> >  LIC_FILES_CHKSUM =
-> > "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447
-> > b7c056195d7ebafee"
-> >  
-> > -DEPENDS = "common-csl-ip-rtos ti-xdctools ti-ipc-rtos ti-sysbios
-> > ti-cgt6x-native libulm zip-native"
-> > +DEPENDS = "common-csl-ip-rtos ti-xdctools-native ti-ipc-rtos ti-
-> > sysbios ti-cgt6x-native libulm zip-native"
-> >  DEPENDS_append_k2hk = " qmss-lld-rtos cppi-lld-rtos"
-> >  DEPENDS_append_k2e = " qmss-lld-rtos cppi-lld-rtos"
-> >  DEPENDS_append_k2l-evm = " qmss-lld-rtos cppi-lld-rtos"
-> > diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-
-> > ti/syslink/ti-syslink.inc
-> > index af5f896..5ff6af7 100644
-> > --- a/recipes-ti/syslink/ti-syslink.inc
-> > +++ b/recipes-ti/syslink/ti-syslink.inc
-> > @@ -31,7 +31,7 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_pu
-> > blic_sw/sdo_sb/targetcontent/sy
-> >             file://syslink.pc \
-> >            "
-> >  
-> > -DEPENDS = "ti-sysbios ti-xdctools ti-cgt6x ti-ipc ti-cgt470"
-> > +DEPENDS = "ti-sysbios ti-xdctools-native ti-cgt6x ti-ipc ti-
-> > cgt470"
-> >  DEPENDS += "virtual/kernel" 
-> >  
-> >  #common frameq gateMP heapBufMP heapMemMP knlNotify listMP
-> > messageQ notify ringIO ringIO_gpp sharedRegion slaveLoader
-> > tilerDaemon
-> > -- 
-> > 2.7.4
-> > 
+> > +SRC_URI[ndkzip.md5sum] =3D "09c7ffaff305f3083d15c0a0db73d781"
+> > +SRC_URI[ndkzip.sha256sum] =3D "5b22c6b8bfbf3a22c53f52bf880d5cf49daf386=
+716942a4202569521bb30f4a8"
+> > +
+> > +INHIBIT_PACKAGE_STRIP =3D "1"
+> > +INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
+> > +INHIBIT_SYSROOT_STRIP =3D "1"
+> > --
+> > 1.9.1
+> >=20
+> > --
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
