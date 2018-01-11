@@ -1,74 +1,58 @@
-Return-Path: <jpewhacker@gmail.com>
+Return-Path: <s-das@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 214FDE00DCA; Mon,  8 Jan 2018 11:37:04 -0800 (PST)
+	id CBA8CE00D17; Thu, 11 Jan 2018 11:14:34 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (jpewhacker[at]gmail.com)
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
 	no *      trust
-	*      [209.85.214.65 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
-	[209.85.214.65])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAFDFE008FB
-	for <meta-ti@yoctoproject.org>; Mon,  8 Jan 2018 11:37:00 -0800 (PST)
-Received: by mail-it0-f65.google.com with SMTP id m11so10995926iti.1
-	for <meta-ti@yoctoproject.org>; Mon, 08 Jan 2018 11:37:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:message-id:subject:to:cc:date:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=BVeFbmGhw/6L4AmMnh0DPVlMSUbzKfKjSvyDXZl+d3I=;
-	b=sS7IC9HAzZTQVpWN03oB/m5Rvr7CQ2pu0xz56+Dki+5DRzyVgvJIxhrTRx3az6Yurb
-	vXrIgfmChF8ujOwmmgqpUhSaDoxbVXWbCj2JTQ85pIw9ShpTSe04EhgJ93hhCrni72dv
-	GPKGh+R67cLSiVrMm8c/dWJ91g11mhQDjMTjtIfsnqof7M/KwlI/3Ux4iV1Yvt75ORP+
-	KhetdI8mHvGyHUaKnefsBIyU3CuNthPhnjkU8UZXcJuIoPZ435h90iY3sBQSzAv9z/ck
-	yFQBd6sY8hgWeI6WJ9YL6CQUjvwD2UJsXN6PavLIYqscsLlXAF2huWTLJ9luuIlA2TjD
-	/L8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:message-id:subject:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=BVeFbmGhw/6L4AmMnh0DPVlMSUbzKfKjSvyDXZl+d3I=;
-	b=uhgZSrVOf+qS+7llzKyUk3JHLtoTz2vvFhYOe10K/xSY5zYGykXuwq5jF0LH4dyM+I
-	YtONb1IjZ+NXpB/U6qbFy1CyLJNLjqyNckrNhKphUP6qe6gsPsl/OsFmRtBXb3T692xr
-	f/GPdh+3y8o18+OepoWfAFbMZlNMetibAp/X2QzEmnKR4CTjbuWRK0jUdpnmsYOocM28
-	11tq+2OLi0i26mDk/0B3HZYS00guIUitma/ZjyGfxyP3OUENP/8VXLjrfb1H0iwzMgO4
-	vpFKH1hxumAIfny9x1mcvFgibsqMYAfPJcpCkzdhSmsjtyjh+Z2NoS7LM7oPY5M1CIZQ
-	B/CA==
-X-Gm-Message-State: AKGB3mKNoXtGSAr4p0sYbOu9JXwp9JMC2Rf+Ks8m3Og94OIG15XOjrLa
-	M1szAgw8w25IoVTSPiN297A=
-X-Google-Smtp-Source: ACJfBovzwKhWAuDV7oMFv8b1N1dm3okqRz8hhFlIQkht6rg1Ak28Z9AaaJVdtXMeuH9CmoYnoAX/GA==
-X-Received: by 10.36.133.213 with SMTP id r204mr13422214itd.125.1515440220104; 
-	Mon, 08 Jan 2018 11:37:00 -0800 (PST)
-Received: from ola-842mrw1.ad.garmin.com ([204.77.163.55])
-	by smtp.googlemail.com with ESMTPSA id
-	131sm3061779iof.59.2018.01.08.11.36.59
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 08 Jan 2018 11:36:59 -0800 (PST)
-From: Joshua Watt <jpewhacker@gmail.com>
-X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
-Message-ID: <1515440218.665.54.camel@gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Date: Mon, 08 Jan 2018 13:36:58 -0600
-In-Reply-To: <20180108192907.GP5984@edge>
-References: <1513663292-22396-1-git-send-email-denis@denix.org>
-	<1513663292-22396-3-git-send-email-denis@denix.org>
-	<1515177203.665.44.camel@gmail.com> <20180108192907.GP5984@edge>
-X-Mailer: Evolution 3.26.2 (3.26.2-1.fc27) 
-Mime-Version: 1.0
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [rocko/master][PATCH 3/4] openmp-rtos: depend on doxygen-native for documentation
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37971E008FB
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jan 2018 11:14:32 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w0BJEWue032603
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jan 2018 13:14:32 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1515698072;
+	bh=iWs6R1wviMpIu6DZ8pmgfQS7g5D0hV5KuPhi/WJVPq0=;
+	h=From:To:CC:Subject:Date;
+	b=DQ0g3+4lBK79NL94wXsXm65/c046UAf+3VX4eRj8Oz4qe//14VmITcakxH3x4r3TZ
+	Iwfudizo28Q63q9fDnaso0IvpnO7+mINagFxSCA+ih7qYoxpGueP66IzkNITEI/Eqi
+	zwkXPNxJCTvpraWdlJRhY5NEsORtKcqePIX6uLOI=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0BJEWBc022073
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jan 2018 13:14:32 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Thu, 11 Jan 2018 13:14:32 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Thu, 11 Jan 2018 13:14:32 -0600
+Received: from uda0226011a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0BJEVCH001357;
+	Thu, 11 Jan 2018 13:14:31 -0600
+From: Suraj Das <s-das@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 11 Jan 2018 14:14:29 -0500
+Message-ID: <1515698069-34902-1-git-send-email-s-das@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [PATCH] ti-cgt-pru: update toolchain to 2.2.1 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -81,63 +65,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2018 19:37:04 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Jan 2018 19:14:40 -0000
+Content-Type: text/plain
 
-On Mon, 2018-01-08 at 14:29 -0500, Denys Dmytriyenko wrote:
-> On Fri, Jan 05, 2018 at 12:33:23PM -0600, Joshua Watt wrote:
-> > On Tue, 2017-12-19 at 01:01 -0500, Denys Dmytriyenko wrote:
-> > > From: Denys Dmytriyenko <denys@ti.com>
-> > > 
-> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > ---
-> > >  recipes-ti/openmp-rtos/openmp-rtos_git.bb | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > 
-> > > diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-
-> > > ti/openmp-rtos/openmp-rtos_git.bb
-> > > index f5bf476..df082ea 100644
-> > > --- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> > > +++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-> > > @@ -19,7 +19,7 @@ SRCREV =
-> > > "a2a518dcc9154a372b38bd5be8a483359123823c"
-> > >  
-> > >  LIC_FILES_CHKSUM =
-> > > "file://docs/license/omp_manifest_template.html;md5=61a6972303c04
-> > > 47b7
-> > > c056195d7ebafee"
-> > >  
-> > > -DEPENDS = "common-csl-ip-rtos ti-xdctools ti-ipc-rtos ti-sysbios 
-> > > ti-
-> > > cgt6x-native libulm zip-native"
-> > > +DEPENDS = "common-csl-ip-rtos doxygen-native libulm ti-xdctools
-> > > ti-
-> > > ipc-rtos ti-sysbios ti-cgt6x-native zip-native"
-> > >  DEPENDS_append_k2hk = " qmss-lld-rtos cppi-lld-rtos"
-> > >  DEPENDS_append_k2e = " qmss-lld-rtos cppi-lld-rtos"
-> > >  DEPENDS_append_k2l-evm = " qmss-lld-rtos cppi-lld-rtos"
-> > > -- 
-> > > 2.7.4
-> > > 
-> > 
-> > Can we backport this to morty please?
-> 
-> This change requires adding doxygen recipe to meta-ti, which is a new
-> feature 
-> and not a simple bugfix. It's probably too late for adding new stuff
-> to morty. 
-> 
-> Do you have specific issues with the way it used to work in morty?
-> Since there 
-> weren't RSS or HOSTTOOLS restrictions in morty, host-wide doxygen
-> install used 
-> to work just fine then.
+---
+ .../devtools/{ti-cgt-pru_2.1.5.bb => ti-cgt-pru_2.2.1.bb}   | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+ rename recipes-ti/devtools/{ti-cgt-pru_2.1.5.bb => ti-cgt-pru_2.2.1.bb} (74%)
 
-Ya makes sense... We have been carrying around a bbappend that did the
-same thing as this patch, but we've always had a doxygen recipe in our
-layer setup. I missed/forgot that doxygen *wasn't* in meta-ti (on
-morty). We can just keep using the bbappend, sorry for the noise
+diff --git a/recipes-ti/devtools/ti-cgt-pru_2.1.5.bb b/recipes-ti/devtools/ti-cgt-pru_2.2.1.bb
+similarity index 74%
+rename from recipes-ti/devtools/ti-cgt-pru_2.1.5.bb
+rename to recipes-ti/devtools/ti-cgt-pru_2.2.1.bb
+index 5586d0f..c939a74 100644
+--- a/recipes-ti/devtools/ti-cgt-pru_2.1.5.bb
++++ b/recipes-ti/devtools/ti-cgt-pru_2.2.1.bb
+@@ -2,8 +2,8 @@ DESCRIPTION = "TI PRU Code Generation Tools"
+ HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+ LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
+ 
+-LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.1.x_manifest.html;md5=d7fea45a7968939ff953ae8a1e6719f4"
+-LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.1.x_manifest.html;md5=d7fea45a7968939ff953ae8a1e6719f4"
++LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.2.x_manifest.html;md5=e84b4022808f66b075095cb896747758"
++LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.2.x_manifest.html;md5=e84b4022808f66b075095cb896747758"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-unpack.inc
+@@ -18,11 +18,11 @@ BINFILE_NAME_class-target = "cgt-pru-arm"
+ 
+ SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
+ 
+-SRC_URI[cgt-pru-x86.md5sum] = "06ac11b90a55ee787ac20fcca9a27013"
+-SRC_URI[cgt-pru-x86.sha256sum] = "0f5b965ae1fda818ce5a81f1adbdae0a65047c6ae6cff1869e08e678122f8dff"
++SRC_URI[cgt-pru-x86.md5sum] = "749d75841eef7b465c7cb08beaa1d135"
++SRC_URI[cgt-pru-x86.sha256sum] = "7dc37fd689d1d506bf410d2a00af658b93a58d4bc10ac32c2210129dab617377"
+ 
+-SRC_URI[cgt-pru-arm.md5sum] = "bedda3b31d8918d5d1d3c6d886821d0a"
+-SRC_URI[cgt-pru-arm.sha256sum] = "f2711478f9160a73660a2b2f316ad446bc481141bb9889f1001441beccce3584"
++SRC_URI[cgt-pru-arm.md5sum] = "389eef56777e30e6dab337efca4af2bf"
++SRC_URI[cgt-pru-arm.sha256sum] = "b47a032f67cb3a3e5bea8ee3ed1908038f42938dd08e2ff72fc64f7aae2c1ff8"
+ 
+ do_install() {
+     install -d ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}
+@@ -47,3 +47,4 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ INSANE_SKIP_${PN} += "arch staticdev already-stripped"
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
+-- 
+1.9.1
 
-> 
 
