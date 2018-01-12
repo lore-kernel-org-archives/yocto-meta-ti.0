@@ -1,61 +1,60 @@
-Return-Path: <adam.yh.lee@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E5EB4E00DB6; Fri, 12 Jan 2018 10:18:44 -0800 (PST)
+	id 85056E00D94; Fri, 12 Jan 2018 12:52:45 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (adam.yh.lee[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.161.173 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-yw0-f173.google.com (mail-yw0-f173.google.com
-	[209.85.161.173])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2371E006CA
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jan 2018 10:18:43 -0800 (PST)
-Received: by mail-yw0-f173.google.com with SMTP id x190so2869886ywd.10
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jan 2018 10:18:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=qZI7FpfcM/Mysszj78mBIWvJb4k9Yk5KQvmkIkHpsJ0=;
-	b=q8NQc29+tE5VRQ4yOoYSnqo8be/YLEyKWGWFww1jjK71TBBV519azONAth3HvHI2yX
-	ntWX5XyytZ+XQC9SKW9GlCHZUbvCG+f57xfFR8TOxF0eAdPwsBBMPs/JAT5Ydg53cPRk
-	8PBj2xTSFlZtWmBi7u9C1sRxVAJbRNDORQX+8sxvX1gwc2xO25FjBTkSDNAKBxRG7wF3
-	T6L6SExuuYOmSpEHRVjdwGyAsjUGmhKHYOtPWaq650PLAt9494KgenpFTJPagRp7EiiJ
-	o/2AvpYjKOeL5fmMPQ3STZW2DJSTsgKSk1I3wGViSZoEJ9Hs1sTBwCrWKBw0O/kTXKyF
-	o2ZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=qZI7FpfcM/Mysszj78mBIWvJb4k9Yk5KQvmkIkHpsJ0=;
-	b=oSgBWdV8hkwgH+UY7y0FZiZ1oBYZJgurja1VEqW4ASbAzlfraIlWDWzmSpc6A+QuHb
-	bzTISnGQ6f+rZsfMWmdXXEa0W1UFNYt3AOL/LN/XifEhYyJDNpoaebPgMR7ywjKA8YEq
-	I1MKeO1NsrFiDKqLscxEy+Rcd1P3KFVqh7/5f/qQghURzk7WusnX9RvdcMjd2e3feaZn
-	4x1Ah2zXd8ccM0kQJSLF21aYYbMlMBnAhdOiJ+UFihnIWSG0iEOwAGcANjNFL8cdWGiM
-	wyuD5tYmeUGPXYvmodqvqV52pNsprAe6cfKptwDklEn2LEWKQqMjQ64Iotf42bLGHyUv
-	DXQQ==
-X-Gm-Message-State: AKGB3mJjl7NSblAZXFZ4Ss2QaJ2i6f/6/uLkqX95p3rdMIlHVfj0NL70
-	xrfNDZ5epG5qjr4d23mV9YLOfonwxqT1o6X6oE0=
-X-Google-Smtp-Source: ACJfBoslcadkYllxwHPJC0tZHIaC8Ier4SUZlsGq9yEE9nE5fUvn03Tl2BGzjjGfMQpEqA+8LeOMOzr7exxzQrDm4kg=
-X-Received: by 10.13.252.2 with SMTP id m2mr24684395ywf.231.1515781122777;
-	Fri, 12 Jan 2018 10:18:42 -0800 (PST)
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12E5EE006CA
+	for <meta-ti@yoctoproject.org>; Fri, 12 Jan 2018 12:52:43 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w0CKqgcm004925;
+	Fri, 12 Jan 2018 14:52:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1515790363;
+	bh=YkPPWPj0PPmHwyz7YYrPGmRjgJZy6p+qL7JytTTcgG0=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=cp0aPtlRjPFWFyexdq+vE37mMPyv7TkY7WUx0fmhVS9N0EuM8hc5Gy0GMRWNcEsGZ
+	b+Kob/Z6ysbbK1m6H/5jGB7QJyBYC3P2DaqPGfh7duCXI+6qvqkqkhjVK1tU2LalTV
+	Sdgg0hOrO+viWZ1yLA4Js9rzMHjxP6TNa5h8mtFM=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0CKqgqt014985;
+	Fri, 12 Jan 2018 14:52:42 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE111.ent.ti.com
+	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Fri, 12 Jan 2018 14:52:42 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Fri, 12 Jan 2018 14:52:42 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0CKqg23002752;
+	Fri, 12 Jan 2018 14:52:42 -0600
+Date: Fri, 12 Jan 2018 15:52:41 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Adam Lee <adam.yh.lee@gmail.com>
+Message-ID: <20180112205241.GM25785@edge>
+References: <CAFeBWL6siZyknfmD6PXrkwt6DA=7e6anK+0NBuwOBJRgVbOoEw@mail.gmail.com>
 MIME-Version: 1.0
-From: Adam Lee <adam.yh.lee@gmail.com>
-Date: Fri, 12 Jan 2018 18:18:32 +0000
-Message-ID: <CAFeBWL6siZyknfmD6PXrkwt6DA=7e6anK+0NBuwOBJRgVbOoEw@mail.gmail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Extensible SDK with TI SDK?
+In-Reply-To: <CAFeBWL6siZyknfmD6PXrkwt6DA=7e6anK+0NBuwOBJRgVbOoEw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Extensible SDK with TI SDK?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,91 +67,69 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jan 2018 18:18:45 -0000
-Content-Type: multipart/alternative; boundary="94eb2c06c0fe6169a50562984b17"
+X-List-Received-Date: Fri, 12 Jan 2018 20:52:45 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---94eb2c06c0fe6169a50562984b17
-Content-Type: text/plain; charset="UTF-8"
+Adam,
 
-Has anyone successfully built Yocto's Extensible SDK with meta-ti included?
-I am getting this error on the latest version:
+meta-ti is a pure BSP layer and has absolutely no knowledge of tisdk-rootfs-image.
+That means that meta-ti itself shouldn't have any issues with Yocto Extensible 
+SDK.
 
-ERROR: tisdk-rootfs-image-1.0-r0 do_populate_sdk_ext: Error executing a
-python function in exec_python_func() autogenerated:
+Now, TI SDK specifically is covered by meta-arago, which is a separate layer 
+with its own list, and does not currently support extensible SDK.
 
-The stack trace of python calls that resulted in this exception/failure was:
-File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
-     0001:
- *** 0002:copy_buildsystem(d)
-     0003:
-File: '/home/tisdk/sources/oe-core/meta/classes/populate_sdk_ext.bbclass',
-lineno: 331, function: copy_buildsystem
-     0327:            f.write('TCLIBCAPPEND = ""\n')
-     0328:            f.write('DL_DIR = "${TOPDIR}/downloads"\n')
-     0329:
-     0330:            f.write('INHERIT += "%s"\n' % 'uninative')
- *** 0331:            f.write('UNINATIVE_CHECKSUM[%s] = "%s"\n\n' %
-(d.getVar('BUILD_ARCH'), uninative_checksum))
-     0332:            f.write('CONF_VERSION = "%s"\n\n' %
-d.getVar('CONF_VERSION', False))
-     0333:
-     0334:            # Some classes are not suitable for SDK, remove them
-from INHERIT
-     0335:            f.write('INHERIT_remove = "%s"\n' %
-d.getVar('SDK_INHERIT_BLACKLIST', False))
-Exception: UnboundLocalError: local variable 'uninative_checksum'
-referenced before assignment
+-- 
+Denys
 
-ERROR: tisdk-rootfs-image-1.0-r0 do_populate_sdk_ext: Function failed:
-copy_buildsystem
-ERROR: Logfile of failure stored in:
-/home/tisdk/build/arago-tmp-glibc/work/am57xx_evm-oe-linux-gnueabi/tisdk-rootfs-image/1.0-r0/temp/log.do_populate_sdk_ext.42114
-ERROR: Task
-(/home/tisdk/sources/meta-arago/meta-arago-distro/recipes-core/images/tisdk-rootfs-image.bb:do_populate_sdk_ext)
-failed with exit code '1'
 
-Regards,
+On Fri, Jan 12, 2018 at 06:18:32PM +0000, Adam Lee wrote:
+> Has anyone successfully built Yocto's Extensible SDK with meta-ti included?
+> I am getting this error on the latest version:
+> 
+> ERROR: tisdk-rootfs-image-1.0-r0 do_populate_sdk_ext: Error executing a
+> python function in exec_python_func() autogenerated:
+> 
+> The stack trace of python calls that resulted in this exception/failure was:
+> File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+>      0001:
+>  *** 0002:copy_buildsystem(d)
+>      0003:
+> File: '/home/tisdk/sources/oe-core/meta/classes/populate_sdk_ext.bbclass',
+> lineno: 331, function: copy_buildsystem
+>      0327:            f.write('TCLIBCAPPEND = ""\n')
+>      0328:            f.write('DL_DIR = "${TOPDIR}/downloads"\n')
+>      0329:
+>      0330:            f.write('INHERIT += "%s"\n' % 'uninative')
+>  *** 0331:            f.write('UNINATIVE_CHECKSUM[%s] = "%s"\n\n' %
+> (d.getVar('BUILD_ARCH'), uninative_checksum))
+>      0332:            f.write('CONF_VERSION = "%s"\n\n' %
+> d.getVar('CONF_VERSION', False))
+>      0333:
+>      0334:            # Some classes are not suitable for SDK, remove them
+> from INHERIT
+>      0335:            f.write('INHERIT_remove = "%s"\n' %
+> d.getVar('SDK_INHERIT_BLACKLIST', False))
+> Exception: UnboundLocalError: local variable 'uninative_checksum'
+> referenced before assignment
+> 
+> ERROR: tisdk-rootfs-image-1.0-r0 do_populate_sdk_ext: Function failed:
+> copy_buildsystem
+> ERROR: Logfile of failure stored in:
+> /home/tisdk/build/arago-tmp-glibc/work/am57xx_evm-oe-linux-gnueabi/tisdk-rootfs-image/1.0-r0/temp/log.do_populate_sdk_ext.42114
+> ERROR: Task
+> (/home/tisdk/sources/meta-arago/meta-arago-distro/recipes-core/images/tisdk-rootfs-image.bb:do_populate_sdk_ext)
+> failed with exit code '1'
+> 
+> Regards,
+> 
+> Adam
 
-Adam
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
---94eb2c06c0fe6169a50562984b17
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Has anyone successfully built Yocto&#39;s Extensible =
-SDK with meta-ti included?</div><div>I am getting this error on the latest =
-version:</div><div><br></div><div>ERROR: tisdk-rootfs-image-1.0-r0 do_popul=
-ate_sdk_ext: Error executing a python function in exec_python_func() autoge=
-nerated:</div><div><br></div><div>The stack trace of python calls that resu=
-lted in this exception/failure was:</div><div>File: &#39;exec_python_func()=
- autogenerated&#39;, lineno: 2, function: &lt;module&gt;</div><div>=C2=A0 =
-=C2=A0 =C2=A00001:</div><div>=C2=A0*** 0002:copy_buildsystem(d)</div><div>=
-=C2=A0 =C2=A0 =C2=A00003:</div><div>File: &#39;/home/tisdk/sources/oe-core/=
-meta/classes/populate_sdk_ext.bbclass&#39;, lineno: 331, function: copy_bui=
-ldsystem</div><div>=C2=A0 =C2=A0 =C2=A00327:=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 f.write(&#39;TCLIBCAPPEND =3D &quot;&quot;\n&#39;)</div><div>=C2=
-=A0 =C2=A0 =C2=A00328:=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 f.write(&#3=
-9;DL_DIR =3D &quot;${TOPDIR}/downloads&quot;\n&#39;)</div><div>=C2=A0 =C2=
-=A0 =C2=A00329:</div><div>=C2=A0 =C2=A0 =C2=A00330:=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 f.write(&#39;INHERIT +=3D &quot;%s&quot;\n&#39; % &#39;un=
-inative&#39;)</div><div>=C2=A0*** 0331:=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 f.write(&#39;UNINATIVE_CHECKSUM[%s] =3D &quot;%s&quot;\n\n&#39; % (d=
-.getVar(&#39;BUILD_ARCH&#39;), uninative_checksum))</div><div>=C2=A0 =C2=A0=
- =C2=A00332:=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 f.write(&#39;CONF_VER=
-SION =3D &quot;%s&quot;\n\n&#39; % d.getVar(&#39;CONF_VERSION&#39;, False))=
-</div><div>=C2=A0 =C2=A0 =C2=A00333:</div><div>=C2=A0 =C2=A0 =C2=A00334:=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # Some classes are not suitable for =
-SDK, remove them from INHERIT</div><div>=C2=A0 =C2=A0 =C2=A00335:=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 f.write(&#39;INHERIT_remove =3D &quot;%s&qu=
-ot;\n&#39; % d.getVar(&#39;SDK_INHERIT_BLACKLIST&#39;, False))</div><div>Ex=
-ception: UnboundLocalError: local variable &#39;uninative_checksum&#39; ref=
-erenced before assignment</div><div><br></div><div>ERROR: tisdk-rootfs-imag=
-e-1.0-r0 do_populate_sdk_ext: Function failed: copy_buildsystem</div><div>E=
-RROR: Logfile of failure stored in: /home/tisdk/build/arago-tmp-glibc/work/=
-am57xx_evm-oe-linux-gnueabi/tisdk-rootfs-image/1.0-r0/temp/log.do_populate_=
-sdk_ext.42114</div><div>ERROR: Task (/home/tisdk/sources/meta-arago/meta-ar=
-ago-distro/recipes-core/images/tisdk-rootfs-image.bb:do_populate_sdk_ext) f=
-ailed with exit code &#39;1&#39;</div><div><br></div><div>Regards,</div><di=
-v><br></div><div>Adam</div></div>
-
---94eb2c06c0fe6169a50562984b17--
