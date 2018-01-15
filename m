@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 85056E00D94; Fri, 12 Jan 2018 12:52:45 -0800 (PST)
+	id BDA27E00CE8; Mon, 15 Jan 2018 09:32:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12E5EE006CA
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jan 2018 12:52:43 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E85AE008FB
+	for <meta-ti@yoctoproject.org>; Mon, 15 Jan 2018 09:32:26 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w0CKqgcm004925;
-	Fri, 12 Jan 2018 14:52:42 -0600
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w0FHWQKH016445
+	for <meta-ti@yoctoproject.org>; Mon, 15 Jan 2018 11:32:26 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1515790363;
-	bh=YkPPWPj0PPmHwyz7YYrPGmRjgJZy6p+qL7JytTTcgG0=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=cp0aPtlRjPFWFyexdq+vE37mMPyv7TkY7WUx0fmhVS9N0EuM8hc5Gy0GMRWNcEsGZ
-	b+Kob/Z6ysbbK1m6H/5jGB7QJyBYC3P2DaqPGfh7duCXI+6qvqkqkhjVK1tU2LalTV
-	Sdgg0hOrO+viWZ1yLA4Js9rzMHjxP6TNa5h8mtFM=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0CKqgqt014985;
-	Fri, 12 Jan 2018 14:52:42 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1516037546;
+	bh=Jb+FOkQ6Fc/QyH/YSarSr+lMs6wEd7Ra22c2BTCIaV0=;
+	h=From:To:CC:Subject:Date;
+	b=oU2M1jvlPSLkBqtvlm53lagRidDsWLoTHjL+VDqqf0CMZpn9gE+y5hOPvt0bnzBBf
+	yBt3ump/WgRPhUTssTKSI4s92NzcPP0hLkargTPBsQZQrrJDzHeoB7oihHRS2ImS/g
+	1U/kUSqqA5XeiUzf5lI+0xA490DT6D/oYhirwxKY=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0FHWQuL029455
+	for <meta-ti@yoctoproject.org>; Mon, 15 Jan 2018 11:32:26 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Fri, 12 Jan 2018 14:52:42 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
+	Mon, 15 Jan 2018 11:32:25 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Fri, 12 Jan 2018 14:52:42 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0CKqg23002752;
-	Fri, 12 Jan 2018 14:52:42 -0600
-Date: Fri, 12 Jan 2018 15:52:41 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Adam Lee <adam.yh.lee@gmail.com>
-Message-ID: <20180112205241.GM25785@edge>
-References: <CAFeBWL6siZyknfmD6PXrkwt6DA=7e6anK+0NBuwOBJRgVbOoEw@mail.gmail.com>
+	Transport; Mon, 15 Jan 2018 11:32:25 -0600
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0FHWPaH026731;
+	Mon, 15 Jan 2018 11:32:25 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 15 Jan 2018 12:32:21 -0500
+Message-ID: <1516037541-9913-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <CAFeBWL6siZyknfmD6PXrkwt6DA=7e6anK+0NBuwOBJRgVbOoEw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Extensible SDK with TI SDK?
+Subject: [morty/rocko/master][PATCH] ti-ipc: Update to new version 3.47.01.00_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,69 +65,87 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jan 2018 20:52:45 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Jan 2018 17:32:27 -0000
+Content-Type: text/plain
 
-Adam,
+Also remove unused IPC_VERSION definition for ti-ipc-examples-linux
 
-meta-ti is a pure BSP layer and has absolutely no knowledge of tisdk-rootfs-image.
-That means that meta-ti itself shouldn't have any issues with Yocto Extensible 
-SDK.
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-common.inc            |  2 +-
+ recipes-ti/ipc/ti-ipc-examples-linux_git.bb |  1 -
+ recipes-ti/ipc/ti-ipc-rtos.inc              | 10 +++++-----
+ recipes-ti/ipc/ti-ipc.inc                   |  6 +++---
+ 4 files changed, 9 insertions(+), 10 deletions(-)
 
-Now, TI SDK specifically is covered by meta-arago, which is a separate layer 
-with its own list, and does not currently support extensible SDK.
-
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 2fb7ffb..0ebe785 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,4 +1,4 @@
+-PV = "3.47.00.00"
++PV = "3.47.01.00"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-ti/ipc/ti-ipc-examples-linux_git.bb b/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
+index ddbe48f..471d7ff 100644
+--- a/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
++++ b/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
+@@ -27,7 +27,6 @@ do_compile_append() {
+ 
+ do_install_append() {
+   cd ${S_ipc-examples}/src
+-  IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
+ 
+   if [  "${PLATFORM}" != "UNKNOWN" ]; then
+     # Install directory for linux examples
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 57cd132..6eee228 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -24,17 +24,17 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
+ 
+-# Corresponds to tag: 3.47.00.00
++# Corresponds to tag: 3.47.01.00_eng
+ SRCREV_ipc-examples = "e71b82187a324faa9394b83e39495be38255f05b"
+ 
+-# Corresponds to tag: 3.47.00.00
+-SRCREV_ipc-metadata = "f026a364d0b9c1aba5c695bf0aac0be8ede95f59"
++# Corresponds to tag: 3.47.01.00_eng
++SRCREV_ipc-metadata = "2e02a01c78f2545d84a8e497581db55e606da34c"
+ 
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ 
+-RELEASE_TYPE = "GA"
+-RELEASE_SUFFIX = ""
++RELEASE_TYPE = "ENG"
++RELEASE_SUFFIX = "_eng"
+ 
+ PR = "${INC_PR}.r2"
+ 
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 02f3c8d..3e3ff8f 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+ 
+ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+-TI_IPC_GIT_BRANCH = "3.47"
++TI_IPC_GIT_BRANCH = "ipc-next"
+ 
+-#Corresponds to 3.47.00.00
+-TI_IPC_SRCREV = "e576990e3a220ad394b287588c1c7e85e8644d23"
++#Corresponds to 3.47.01.00_eng
++TI_IPC_SRCREV = "6a2595a4148fb12f259efc19164a9d33ad2ed294"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 -- 
-Denys
-
-
-On Fri, Jan 12, 2018 at 06:18:32PM +0000, Adam Lee wrote:
-> Has anyone successfully built Yocto's Extensible SDK with meta-ti included?
-> I am getting this error on the latest version:
-> 
-> ERROR: tisdk-rootfs-image-1.0-r0 do_populate_sdk_ext: Error executing a
-> python function in exec_python_func() autogenerated:
-> 
-> The stack trace of python calls that resulted in this exception/failure was:
-> File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
->      0001:
->  *** 0002:copy_buildsystem(d)
->      0003:
-> File: '/home/tisdk/sources/oe-core/meta/classes/populate_sdk_ext.bbclass',
-> lineno: 331, function: copy_buildsystem
->      0327:            f.write('TCLIBCAPPEND = ""\n')
->      0328:            f.write('DL_DIR = "${TOPDIR}/downloads"\n')
->      0329:
->      0330:            f.write('INHERIT += "%s"\n' % 'uninative')
->  *** 0331:            f.write('UNINATIVE_CHECKSUM[%s] = "%s"\n\n' %
-> (d.getVar('BUILD_ARCH'), uninative_checksum))
->      0332:            f.write('CONF_VERSION = "%s"\n\n' %
-> d.getVar('CONF_VERSION', False))
->      0333:
->      0334:            # Some classes are not suitable for SDK, remove them
-> from INHERIT
->      0335:            f.write('INHERIT_remove = "%s"\n' %
-> d.getVar('SDK_INHERIT_BLACKLIST', False))
-> Exception: UnboundLocalError: local variable 'uninative_checksum'
-> referenced before assignment
-> 
-> ERROR: tisdk-rootfs-image-1.0-r0 do_populate_sdk_ext: Function failed:
-> copy_buildsystem
-> ERROR: Logfile of failure stored in:
-> /home/tisdk/build/arago-tmp-glibc/work/am57xx_evm-oe-linux-gnueabi/tisdk-rootfs-image/1.0-r0/temp/log.do_populate_sdk_ext.42114
-> ERROR: Task
-> (/home/tisdk/sources/meta-arago/meta-arago-distro/recipes-core/images/tisdk-rootfs-image.bb:do_populate_sdk_ext)
-> failed with exit code '1'
-> 
-> Regards,
-> 
-> Adam
-
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+1.9.1
 
 
