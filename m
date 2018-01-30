@@ -1,59 +1,63 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <fabio.berton@ossystems.com.br>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2403EE00DAE; Mon, 29 Jan 2018 11:15:07 -0800 (PST)
+	id 8BA45E00E05; Tue, 30 Jan 2018 12:08:45 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44D40E00D17
-	for <meta-ti@yoctoproject.org>; Mon, 29 Jan 2018 11:15:06 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w0TJF5XL001753
-	for <meta-ti@yoctoproject.org>; Mon, 29 Jan 2018 13:15:06 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1517253306;
-	bh=S2z9P+Hd1JC8JKcAiBd1jMSVcPTtf5tnn7SK4dhin50=;
-	h=From:To:CC:Subject:Date;
-	b=JWQwxNQ716d8T8kx3fcbqWG3Kjza+NUyLJhGXOtA9xFVSZTm0qQhjVIKso/+Pn4WP
-	P4/BlBKFhQCeMV7TYWR6fEjqVaTx6bjneWLGNF4mzCutT6DHBx/0HXGBbD1GfnG1Ji
-	MH3mpdS6IIpmifT/vw0wR0kCs1hYUFx/kCd3OeAI=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0TJF5Va028188
-	for <meta-ti@yoctoproject.org>; Mon, 29 Jan 2018 13:15:05 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Mon, 29 Jan 2018 13:15:05 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Mon, 29 Jan 2018 13:15:05 -0600
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w0TJF508024122;
-	Mon, 29 Jan 2018 13:15:05 -0600
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 29 Jan 2018 14:06:37 -0500
-Message-ID: <1517252797-979-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: Stephen Molfetta <sjmolfetta@ti.com>
-Subject: [PATCH v3] dra7xx-evm.conf: removing am57xx SOCS from PDK
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.220.196 listed in list.dnswl.org]
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0F07BE0056D
+	for <meta-ti@yoctoproject.org>; Tue, 30 Jan 2018 12:08:44 -0800 (PST)
+Received: by mail-qk0-f196.google.com with SMTP id n129so1036665qke.6
+	for <meta-ti@yoctoproject.org>; Tue, 30 Jan 2018 12:08:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id:organization;
+	bh=wFsWeiJ6SCwe9beKzedBGFU3JpnDUGHVisXVtohTNg0=;
+	b=woF7mFSKHd4rTxtNhkwMuy1Vr32/yNJjvCpJLepCSf7HpeNB+tq+ye16OItXH1Ka/f
+	FfD6jefWjakErxf9lyH3PL67S9PRtR0XlYExMVxBLLn0wrIPAPV5OG6Y4dtmF4/uMvOM
+	1TxUuHEsoQsBlqsT2Rr2xFxv0KhJYVsuoGijDdHJdGf74qY0tbhZc/4QRRn0IyZVN+2o
+	eKrg5Ayf31G4vSUgREKB7v9sxwHscF3IYiyOY4ieS8GBO+22BkPxXbCz8lvw05s5k9UO
+	KiYZDutEZzsOj677scpIt+rPVjPCs0Mqq92tknriKGPjVolJpdjjhxBsFB5E4mCbYaQX
+	bGXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:organization;
+	bh=wFsWeiJ6SCwe9beKzedBGFU3JpnDUGHVisXVtohTNg0=;
+	b=HlvjKkwYf4VYbO8KEMTZMl5wE6Js3232TOeD1xZo+5yHElGCgG+GzmU7jRXDH0WpZK
+	awKhgPY4yA+oEIq9X5mxTTceIeDZ4JuAnthmoiKEZhk1aZfxQ8SFALemyZomKMNKSTw5
+	JzlCQbzIFF5Pfa/eRdM4u51JqQm4F6QN93mQvjGw6F34G+mJpX4z3DiuuQZDmbSoRqU7
+	fV/Gy6Rd2+oSQr9MJLbcdoylllZslPqQsO9vkZP56sGdG0zyS/cDLNx0RLCrUORe+qdL
+	uBY4/a90XVS6fx4YStsBuEFgjxLTVgahpaOiym07z0RtyBD0daSLBC+HdM1d7oprWlYJ
+	bBXA==
+X-Gm-Message-State: AKwxyteOqUKKOst7Q56RnN9m94HyMd3RzFAP6y9+jpLSKJ6W+9WkqteH
+	49ORM5z9RJWTj5nQ4vCsLmKo8Brl
+X-Google-Smtp-Source: AH8x226wIOnUS4oq4WFwwtOjVvjMbFOWaBIixx7OLSoExenfVaPaRNWdGujaXDdg1hkkU56T4s3NhQ==
+X-Received: by 10.55.198.79 with SMTP id b76mr44508733qkj.136.1517342923823;
+	Tue, 30 Jan 2018 12:08:43 -0800 (PST)
+Received: from centrium.lab.ossystems ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id
+	l189sm9727424qkc.54.2018.01.30.12.08.42
+	for <meta-ti@yoctoproject.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 30 Jan 2018 12:08:43 -0800 (PST)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: meta-ti@yoctoproject.org
+Date: Tue, 30 Jan 2018 18:08:28 -0200
+Message-Id: <20180130200828.13817-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.14.2
+Organization: O.S. Systems Software LTDA.
+Subject: [PATCH] recipes-ti: Don't use deprecated functions from utils.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,94 +70,61 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jan 2018 19:15:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 30 Jan 2018 20:08:45 -0000
 
-From: Stephen Molfetta <sjmolfetta@ti.com>
+From OE-Core commit c97acbd034532895ce57c6717ed1b3ccc7900b0d:
 
-opencl-monitor does not distinguish between dra7xx and am57xx devices,
-treating both as the same and attempting to build for am57xx regardless.
-However, this is dependent on common-csl-ip-rtos, a component of PDK,
-which in general does handle these devices differently.  The definition
-of am57xx SOCs in the PDK list from omap-15.conf gets inherited by
-dra7xx-evm.conf, thereby creating a rule that all dra7xx PDK recipes
-must build am57xx libraries. This results in a dra7xx image which is
-much larger than necessary, and more severely, creates an artifical
-dependency link between these two devices and introduces build failures
-for various PDK recipes.
+These functions were moved to meta/lib/oe in 2010 and the base_* functions in
+utils.bbclass were intended to be a short-term compatibility layer.  They're
+still used in a few places, so update the callers to use the new functions.
 
-Instead, we now override the PDK SOC definition in dra7xx-evm.conf, and
-only in the CSL RTOS recipe do we append the am57xx SOCS for dra7xx-evm
-machine build.  This allows for opencl-monitor to build successfully for
-dra7xx while preventing any other PDK recipes from attempting to build
-libraries for am57xx devices.
-
-This is a workaround that must stay in place until opencl build can
-properly comprehend am57xx and dra7xx independently, and/or omap-a15
-is not implied to be synonymous with am57xx in various recipes.
-
-Signed-off-by: Stephen Molfetta <sjmolfetta@ti.com>
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
-v2 changes: move am57xx-evm TI_PDK_LIMIT_SOCS from omap-a15 family
-v3 changes: rebased on latest morty
+ recipes-ti/dsplink/ti-dsplink.inc                         | 2 +-
+ recipes-ti/local-power-manager/ti-local-power-manager.inc | 2 +-
+ recipes-ti/syslink/ti-syslink.inc                         | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
- conf/machine/am57xx-evm.conf                        | 1 +
- conf/machine/dra7xx-evm.conf                        | 2 +-
- conf/machine/include/omap-a15.inc                   | 3 ---
- recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb | 5 ++++-
- 4 files changed, 6 insertions(+), 5 deletions(-)
-
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 6e2eedf..1832548 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -42,4 +42,5 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 8192"
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
+diff --git a/recipes-ti/dsplink/ti-dsplink.inc b/recipes-ti/dsplink/ti-dsplink.inc
+index e0096155..606b9e5c 100644
+--- a/recipes-ti/dsplink/ti-dsplink.inc
++++ b/recipes-ti/dsplink/ti-dsplink.inc
+@@ -150,7 +150,7 @@ do_compile() {
+       all
+ }
  
- # Set the list of device targets for ti-pdk class recipes
-+TI_PDK_LIMIT_SOCS = "am571x am572x am574x"
- TI_PDK_LIMIT_BOARDS = "evmAM571x evmAM572x idkAM571x idkAM572x idkAM574x"
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 91afd85..7db9ff6 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -40,4 +40,4 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
+-KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
++KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
  
- # Set the list of device targets for ti-pdk class recipes
- TI_PDK_LIMIT_BOARDS = "evmDRA72x evmDRA75x evmDRA78x"
--TI_PDK_LIMIT_SOCS_append = " dra72x dra75x dra78x"
-+TI_PDK_LIMIT_SOCS = "dra72x dra75x dra78x"
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index cda9e0c..6dcff82 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -34,6 +34,3 @@ UBI_VOLNAME = "rootfs"
+ do_install () {
+ 	
+diff --git a/recipes-ti/local-power-manager/ti-local-power-manager.inc b/recipes-ti/local-power-manager/ti-local-power-manager.inc
+index 0e5d4f29..5321251a 100644
+--- a/recipes-ti/local-power-manager/ti-local-power-manager.inc
++++ b/recipes-ti/local-power-manager/ti-local-power-manager.inc
+@@ -92,7 +92,7 @@ do_compile () {
+     XDCPATH=${S} ${XDC_INSTALL_DIR}/xdc -PR .
+ }
  
- # List common SoC features, may need to add touchscreen for specific machines
- MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp"
--
--# Set the list of device targets for ti-pdk class recipes
--TI_PDK_LIMIT_SOCS = "am571x am572x am574x"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-index f4496b9..100d2f4 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -1,5 +1,5 @@
- require common-csl-ip.inc
--PR = "${INC_PR}.5"
-+PR = "${INC_PR}.6"
+-KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
++KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_MACHINE_append = "|c66x"
-@@ -16,3 +16,6 @@ export DEST_ROOT="${S}"
+ do_install () {
  
- # HTML doc link params
- PDK_COMP_LINK_TEXT = "CSL-Chip Support Library"
-+
-+# Workaround: dra7xx build requires am57xx CSL libraries for opencl-monitor
-+TI_PDK_LIMIT_SOCS_append_dra7xx = " am571x am572x"
+diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-ti/syslink/ti-syslink.inc
+index 5ff6af7c..0968a986 100644
+--- a/recipes-ti/syslink/ti-syslink.inc
++++ b/recipes-ti/syslink/ti-syslink.inc
+@@ -181,7 +181,7 @@ do_compile() {
+ 	 `${XDC_INSTALL_DIR}/bin/xdcpkg ${SYSLINK_ROOT}/ti/syslink | grep samples`
+ }
+ 
+-KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
++KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+ 
+ do_install () {
+ 
 -- 
-2.7.4
+2.14.2
 
 
