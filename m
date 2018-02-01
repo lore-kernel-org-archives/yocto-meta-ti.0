@@ -1,63 +1,58 @@
-Return-Path: <fabio.berton@ossystems.com.br>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 29A74E0056D; Tue, 30 Jan 2018 12:11:33 -0800 (PST)
+	id 46EA3E00E22; Wed, 31 Jan 2018 18:43:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [209.85.220.193 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98358E0056D
-	for <meta-ti@yoctoproject.org>; Tue, 30 Jan 2018 12:11:32 -0800 (PST)
-Received: by mail-qk0-f193.google.com with SMTP id t134so11797693qke.5
-	for <meta-ti@yoctoproject.org>; Tue, 30 Jan 2018 12:11:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:organization;
-	bh=wFsWeiJ6SCwe9beKzedBGFU3JpnDUGHVisXVtohTNg0=;
-	b=Gk4/cob7VgxGgiGP1/fJzDOetyLAQ0mHoSlTvH2Wa+g6Xtjgnc/x5nO9ttdEKp3Sw6
-	6LTakZUmhmNqCqmDsVzjydeN1MDnXK1UHA6Ssn/IrB32qrwv11c4R/7IsWF+ANC+O/TY
-	2Jtgzb5NdmIhZuLKmp4yMwYe5utd9M3Bb3wsIsjPvvokPKc7gzLnnpyYwiJ0EwGPo5Rg
-	jw1G/CDa+ADE1lW7WXy6h5gOgLIxxe+dMCCY30jh9IMzIukbEnvqVl42JfTIYaFpCGdp
-	+xm7ROhJDlaDUDhZJ5c4qB3NwxLnJ9DPPk7C4qYiANma42rAWY5ZjwVPSin+xYUydjO1
-	8zag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:organization;
-	bh=wFsWeiJ6SCwe9beKzedBGFU3JpnDUGHVisXVtohTNg0=;
-	b=qxA9Tn/VpcDMOUZFfPO2qtuBOTE/i5ggtGNiDD/q6O8fQmRLw2rmYm8Ku5pM3EV+1v
-	LZqO0eeZvZL/vSAU2XLKMyYKi1cVuDHvuWxhoMxG6c50xBiwNZKE1ahB2WO/r0GSEmn/
-	go/SGXTSrKPn9LwyqcGTy9xv3tfUI4AdIQP/3QDGoLuBFrsbtgQj7s8fQf4jO1LJklkW
-	32ZYCsp6I29DduPaVaD0LPpE1CcddCg5jTaYpuYX2j06/sgtxrSdDcwpurqXcfAkW1Li
-	HO4I+acvj97XXmJIcAaUu6vnxR8OlNs10VfRANvLz2BAvBLCo9+62xl79AwL00tHPuWu
-	JqmQ==
-X-Gm-Message-State: AKwxytegQW1leW3idYQqyc91dpI3m015NaSpULau3b0KxfoXI/7NjMYZ
-	a5qyJfgwABalbwLa80kk8qKGxXqD
-X-Google-Smtp-Source: AH8x2248AE3e08jeh0vZalHSfJrrOp+3x2Z9lV+3i7hrctEkcQFFoRav01grIkNW7S+GEnLH9hXfDQ==
-X-Received: by 10.55.168.83 with SMTP id r80mr44402859qke.89.1517343091188;
-	Tue, 30 Jan 2018 12:11:31 -0800 (PST)
-Received: from centrium.lab.ossystems ([181.220.79.73])
-	by smtp.gmail.com with ESMTPSA id
-	e16sm12563860qtk.32.2018.01.30.12.11.29
-	for <meta-ti@yoctoproject.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Jan 2018 12:11:30 -0800 (PST)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: meta-ti@yoctoproject.org
-Date: Tue, 30 Jan 2018 18:11:15 -0200
-Message-Id: <20180130201115.13973-1-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.14.2
-Organization: O.S. Systems Software LTDA.
-Subject: [PATCH] recipes-ti: Don't use deprecated functions from utils.bbclass
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [198.47.27.77 listed in list.dnswl.org]
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BDAD0E00D1C
+	for <meta-ti@yoctoproject.org>; Wed, 31 Jan 2018 18:43:42 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w112hfdX025961
+	for <meta-ti@yoctoproject.org>; Wed, 31 Jan 2018 20:43:41 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1517453021;
+	bh=IbDa1etBlQbnaPPD7OCATnkE8sqJShrPIWnQgwemnVY=;
+	h=From:To:CC:Subject:Date;
+	b=FREcRKfDnXVriQU2f7n6+pnbfiVqwwB98zeV4qrksYTaqOon1Dmqaq/9Es3fvcqtT
+	wim3cvLirfoYFPxOHP2/hD9ES896YbkykQMVbufQif018MGDY8baR612pY3U+joLBu
+	0QfIduFbuVhMYD19chZqZ4dFmPH3Rd0lPXn6QnPs=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w112hf3g018346
+	for <meta-ti@yoctoproject.org>; Wed, 31 Jan 2018 20:43:41 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Wed, 31 Jan 2018 20:43:41 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Wed, 31 Jan 2018 20:43:41 -0600
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w112hfMD026028;
+	Wed, 31 Jan 2018 20:43:41 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 31 Jan 2018 21:43:38 -0500
+Message-ID: <1517453018-40338-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [master/rocko][PATCH] cmem: Update to new version 4.15.00.00_eng
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,61 +65,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2018 20:11:33 -0000
+X-List-Received-Date: Thu, 01 Feb 2018 02:43:43 -0000
+Content-Type: text/plain
 
-From OE-Core commit c97acbd034532895ce57c6717ed1b3ccc7900b0d:
-
-These functions were moved to meta/lib/oe in 2010 and the base_* functions in
-utils.bbclass were intended to be a short-term compatibility layer.  They're
-still used in a few places, so update the callers to use the new functions.
-
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+License update due to year update
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-ti/dsplink/ti-dsplink.inc                         | 2 +-
- recipes-ti/local-power-manager/ti-local-power-manager.inc | 2 +-
- recipes-ti/syslink/ti-syslink.inc                         | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/cmem/cmem-mod_git.bb | 2 +-
+ recipes-bsp/cmem/cmem.inc        | 8 ++++----
+ recipes-bsp/cmem/cmem_git.bb     | 2 +-
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-ti/dsplink/ti-dsplink.inc b/recipes-ti/dsplink/ti-dsplink.inc
-index e0096155..606b9e5c 100644
---- a/recipes-ti/dsplink/ti-dsplink.inc
-+++ b/recipes-ti/dsplink/ti-dsplink.inc
-@@ -150,7 +150,7 @@ do_compile() {
-       all
- }
+diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
+index 14c7edf..1031e85 100644
+--- a/recipes-bsp/cmem/cmem-mod_git.bb
++++ b/recipes-bsp/cmem/cmem-mod_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
+ include cmem.inc
  
--KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
-+KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+ # This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
  
- do_install () {
- 	
-diff --git a/recipes-ti/local-power-manager/ti-local-power-manager.inc b/recipes-ti/local-power-manager/ti-local-power-manager.inc
-index 0e5d4f29..5321251a 100644
---- a/recipes-ti/local-power-manager/ti-local-power-manager.inc
-+++ b/recipes-ti/local-power-manager/ti-local-power-manager.inc
-@@ -92,7 +92,7 @@ do_compile () {
-     XDCPATH=${S} ${XDC_INSTALL_DIR}/xdc -PR .
- }
+ inherit module
+diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
+index 53c305b..436368e 100644
+--- a/recipes-bsp/cmem/cmem.inc
++++ b/recipes-bsp/cmem/cmem.inc
+@@ -1,13 +1,13 @@
+ HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
  
--KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
-+KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
++LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=26be509e4bb413905bda8309e338e2b1"
  
- do_install () {
+ BRANCH = "lu-next"
+-# This corresponds to version 4.14.01.00
+-SRCREV = "b687f3c3658221cdb2731e2421a26004ee7193b8"
++# This corresponds to version 4.15.00.00_eng
++SRCREV = "86462821d99cf0e5c4ad33158e08feeb01b26484"
  
-diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-ti/syslink/ti-syslink.inc
-index 5ff6af7c..0968a986 100644
---- a/recipes-ti/syslink/ti-syslink.inc
-+++ b/recipes-ti/syslink/ti-syslink.inc
-@@ -181,7 +181,7 @@ do_compile() {
- 	 `${XDC_INSTALL_DIR}/bin/xdcpkg ${SYSLINK_ROOT}/ti/syslink | grep samples`
- }
+-PV = "4.14.01.00+git${SRCPV}"
++PV = "4.15.00.00+git${SRCPV}"
  
--KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
-+KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+ SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
  
- do_install () {
+diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
+index b30029d..bab9238 100644
+--- a/recipes-bsp/cmem/cmem_git.bb
++++ b/recipes-bsp/cmem/cmem_git.bb
+@@ -4,7 +4,7 @@ include cmem.inc
+ 
+ RDEPENDS_${PN} = "cmem-mod"
+ 
+-PR = "r1"
++PR = "r0"
+ 
+ PACKAGES =+ "${PN}-test"
  
 -- 
-2.14.2
+1.9.1
 
 
