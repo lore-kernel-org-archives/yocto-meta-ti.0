@@ -1,6 +1,6 @@
-Return-Path: <denis@denix.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 24753E00E41; Mon,  5 Feb 2018 16:04:18 -0800 (PST)
+	id 99B0FE00E34; Mon,  5 Feb 2018 17:42:20 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,30 +9,30 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8761E007D1
-	for <meta-ti@yoctoproject.org>; Mon,  5 Feb 2018 16:04:16 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE777E00DB7
+	for <meta-ti@yoctoproject.org>; Mon,  5 Feb 2018 17:42:19 -0800 (PST)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EDD4620B05;
-	Tue,  6 Feb 2018 00:04:15 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 1423920B55;
+	Tue,  6 Feb 2018 01:42:19 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id DxX2F84B4HcC; Tue,  6 Feb 2018 00:04:15 +0000 (UTC)
+	with ESMTP id mb96S2EnUe9b; Tue,  6 Feb 2018 01:42:18 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C98A0208FD;
-	Tue,  6 Feb 2018 00:04:14 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D824A208FD;
+	Tue,  6 Feb 2018 01:42:17 +0000 (UTC)
 Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 44D8A1631FD;
-	Mon,  5 Feb 2018 19:04:14 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	by mail.denix.org (Postfix) with ESMTP id 41F19163283;
+	Mon,  5 Feb 2018 20:42:17 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Mon,  5 Feb 2018 19:04:13 -0500
-Message-Id: <1517875453-37744-1-git-send-email-denis@denix.org>
+Date: Mon,  5 Feb 2018 20:42:12 -0500
+Message-Id: <1517881334-28694-1-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [master][PATCH] linux-ti-staging: support multiple kernel packages with KERNEL_PACKAGE_NAME
+Subject: [rocko/master][PATCH 1/3] dsplib-c66x: inhibit all stripping
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,76 +45,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Feb 2018 00:04:18 -0000
-
-From: Denys Dmytriyenko <denys@ti.com>
+X-List-Received-Date: Tue, 06 Feb 2018 01:42:20 -0000
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_4.9.bb | 32 ++++++++++++++--------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ recipes-ti/dsplib/dsplib-c66x.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-index 467cddc..4cde7d3 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.9.bb
-@@ -13,40 +13,40 @@ require recipes-kernel/linux/ti-uio.inc
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
+diff --git a/recipes-ti/dsplib/dsplib-c66x.inc b/recipes-ti/dsplib/dsplib-c66x.inc
+index ce978db..7ff99c2 100644
+--- a/recipes-ti/dsplib/dsplib-c66x.inc
++++ b/recipes-ti/dsplib/dsplib-c66x.inc
+@@ -24,4 +24,7 @@ do_install() {
+ ALLOW_EMPTY_${PN} = "1"
+ FILES_${PN}-dev += "${DSPLIB_C66_INSTALL_DIR_RECIPE}"
  
- # Pull in the devicetree files into the rootfs
--RDEPENDS_kernel-base += "kernel-devicetree"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
- 
- # Add run-time dependency for PM firmware to the rootfs
--RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
--RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti33x = " amx3-cm3"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti43x = " amx3-cm3"
- 
- # Add run-time dependency for VPE VPDMA firmware to the rootfs
--RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_dra7xx = " vpdma-fw"
- 
- # Add run-time dependency for Goodix firmware to the rootfs
--RDEPENDS_kernel-base_append_dra7xx = " goodix-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_dra7xx = " goodix-fw"
- 
- # Install boot-monitor skern file into /boot dir of rootfs
--RDEPENDS_kernel-base_append_keystone = " boot-monitor"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_keystone = " boot-monitor"
- 
- # Install ti-sci-fw into /boot dir of rootfs
--RDEPENDS_kernel-base_append_k2g = " ti-sci-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2g = " ti-sci-fw"
- 
- # Add run-time dependency for SerDes firmware to the rootfs
--RDEPENDS_kernel-base_append_keystone = " serdes-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_keystone = " serdes-fw"
- 
- # Add run-time dependency for QMSS PDSP firmware to the rootfs
--RDEPENDS_kernel-base_append_keystone = " qmss-pdsp-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_keystone = " qmss-pdsp-fw"
- 
- # Add run-time dependency for NETCP PA firmware to the rootfs
--RDEPENDS_kernel-base_append_k2hk = " netcp-pa-fw"
--RDEPENDS_kernel-base_append_k2e = " netcp-pa-fw"
--RDEPENDS_kernel-base_append_k2l-evm = " netcp-pa-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2hk = " netcp-pa-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2e = " netcp-pa-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2l-evm = " netcp-pa-fw"
- 
- # Add run-time dependency for PRU Ethernet firmware to the rootfs
--RDEPENDS_kernel-base_append_am57xx-evm = " prueth-fw"
--RDEPENDS_kernel-base_append_am437x-evm = " prueth-fw"
--RDEPENDS_kernel-base_append_am335x-evm = " prueth-fw"
--RDEPENDS_kernel-base_append_k2g = " prueth-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am57xx-evm = " prueth-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am437x-evm = " prueth-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am335x-evm = " prueth-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2g = " prueth-fw"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
++INHIBIT_PACKAGE_STRIP = "1"
++INHIBIT_SYSROOT_STRIP = "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ INSANE_SKIP_${PN}-dev = "arch"
 -- 
 2.7.4
 
