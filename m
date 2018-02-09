@@ -1,16 +1,17 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <adam.yh.lee@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EB0E2E00DE4; Mon,  5 Feb 2018 20:09:57 -0800 (PST)
+	id 8CE11E00E96; Fri,  9 Feb 2018 12:27:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (raj.khem[at]gmail.com)
+	mail provider *      (adam.yh.lee[at]gmail.com)
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
@@ -18,58 +19,43 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
 	no *      trust
-	*      [209.85.160.65 listed in list.dnswl.org]
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66E8DE00DB5
-	for <meta-ti@yoctoproject.org>; Mon,  5 Feb 2018 20:09:57 -0800 (PST)
-Received: by mail-pl0-f65.google.com with SMTP id t4so499126plo.0
-	for <meta-ti@yoctoproject.org>; Mon, 05 Feb 2018 20:09:57 -0800 (PST)
+	*      [209.85.161.181 listed in list.dnswl.org]
+Received: from mail-yw0-f181.google.com (mail-yw0-f181.google.com
+	[209.85.161.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 263FCE00B66
+	for <meta-ti@yoctoproject.org>; Fri,  9 Feb 2018 12:27:00 -0800 (PST)
+Received: by mail-yw0-f181.google.com with SMTP id v139so5971181ywg.4
+	for <meta-ti@yoctoproject.org>; Fri, 09 Feb 2018 12:27:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=bKZowoMFkUCrHaKclvNsYartax6n1LLnK3GptsQyf1I=;
-	b=Z3r3yVkcz7afMUjcucAgxmGujTK0ubWR/StePCJRKGqQIdpapkgFa11gK0CWcKqF4g
-	t3LWGGvTVrBMFe+WNfMrBjBUmDO1n0lCsVJ2LXZa3lczPBq9lP9JGRIRMkGLAgnr/m+b
-	oIwtbqyfQwvlov0VQ/n2AHYaPoA20wIKk8/8CIdWD5Weeu2QZL5KEZIJYowb7TbuNvMk
-	ib9YjKUapUmFrexjMsz/IKianBUouoHrD4qf0Hv2hfRNQgRz7FfkhGVBMay3LKRzmrTF
-	LtJi9LGm+kp+j26SCtHziBhPXkIYumcxTnALdmwyHJv79436yyAaXPbK6yxOh2KKDFZY
-	hj6Q==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=wWAkeg4iQt26pak0pcm12UBowwEPea/3tUwn+CYzW60=;
+	b=Eku7w5irg+GbqdGd9Fr+WAYf0xMk/Odzoav+0gzHQmnx6MHwvzVdVP3Q9i+Hqgoalf
+	WlhtYFKGlGYpqPmz23KFp9tmf9UH+8CBt0uhATDqxKAsNTE6Mne/fwAoHZPYsEm0zRxd
+	z/xrd6JiHmL9KjJO91zUJH5zP/2h7+ZFBWKag13KXQV1TAytdHyGBkIGNJfhLW9tzOiZ
+	diye0NQsfohjGVtF8F6z7/1qS4DKcZuHjq0ExArH8wToDflG3bJ3UAYt0bgrvGJ3LW95
+	2Z9rX4yWd9+J+huVMWfMwz+zX30EhmYMpHuIXersjiBebz0vbW1GBPhD7ViUnEg2o/8R
+	Cu5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=bKZowoMFkUCrHaKclvNsYartax6n1LLnK3GptsQyf1I=;
-	b=UiQhlgNPLDK4OYqgiaKyx7I2x9KBkvDayFlJ3W/6uVSPa6K6C5hlINZ7SqmoFzvKxs
-	dpVxMEmkBMPpZ0T8UcjHFYoN5+J5LBFst+84OQ3It8HVkPZwGSseKwGs5HkbO9jmL1fN
-	cKLNfekvJF3Myxok0t8KIINfSnyI7jyWS/f3UtWuKgMHtZKk2Fp4Fqi7GHpJaACflEvp
-	akLgCZ82FFWUEogD/WLaygl7cVPOiNTSLXo36RvLLmoOvs1w14g2IId0UgE+R5L4duq8
-	cAqsokJpRg6IBKUtWDsbGkQ8syIWwlqGhSmydD+gdiq4Bbw5Nbz3ZgcSyPLmnYpUkl/5
-	x6NQ==
-X-Gm-Message-State: APf1xPDEfUG6IzLhhfVAPJLyelGJmgkYy2I7KEI1PoIsPIwkaAMPKmMj
-	nWKyCtQStjtRLi+a98tUMGPHgsX3
-X-Google-Smtp-Source: AH8x225gMDJFNiJRVgarvc+NpGlpSUJHYwSqPZhuZvgVIsl08iiyJ6lJ6YDYHip0iCfo2lUBGhd6mg==
-X-Received: by 2002:a17:902:6b0b:: with SMTP id
-	o11-v6mr1070610plk.109.1517890196238; 
-	Mon, 05 Feb 2018 20:09:56 -0800 (PST)
-Received: from hermes.local ([2601:646:8880:466c:1cb8:99a9:4642:6fca])
-	by smtp.gmail.com with ESMTPSA id
-	c184sm18634183pfc.60.2018.02.05.20.09.55
-	for <meta-ti@yoctoproject.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Feb 2018 20:09:55 -0800 (PST)
-To: meta-ti@yoctoproject.org
-References: <1517881415-17786-1-git-send-email-denis@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <63b34f6e-ba51-3721-03ee-6c8fb224fd12@gmail.com>
-Date: Mon, 5 Feb 2018 20:09:54 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0)
-	Gecko/20100101 Thunderbird/58.0
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=wWAkeg4iQt26pak0pcm12UBowwEPea/3tUwn+CYzW60=;
+	b=O56KOhR0o8tD92p3KVmpT73+xVWy7zEZvvQq30CFCtlFd3sCfje9teNR054HHUEYpg
+	hHnUHTPSvStehhV7oGPYYiQQk627YBJzsrAdDz0XWxylsNoqnMBpg+nCByarl9k93LFa
+	shVxIWoXUMG7nANWGacY5oCIud1IYecFB55kyYslW+W4JfZzoxsEkqODuf5quxBz4U0l
+	dSe1X0AKT+gBqhUvY2rX4DMocjdRi2QZ/NKHP/fu44gBQYW7VjrumFD4UtB62a+NQnii
+	ckGZtUZizP/FJPz6BYF9/x29ohbcF1jwq+fEb7J5KYR1OWycnHBjpP/Td3oht12gGJfc
+	WQmQ==
+X-Gm-Message-State: APf1xPADYT4laMtVOz6pYD9n7VMc1oWehkjHaDr82RmknZ7pNzp/LHsC
+	uRO1rUjPeDduSieTfxylTaIvVr3fZTa7aZ02oNg=
+X-Google-Smtp-Source: AH8x225JBD2fS80LXTawTBVIb1Wv7vuYjqUBoVK34H6VBvMVXMZGhbgIj/q23aOCOVlWuXCq0rsXyRaIPsKbza1lP+c=
+X-Received: by 10.13.205.3 with SMTP id p3mr2776929ywd.377.1518208019989; Fri,
+	09 Feb 2018 12:26:59 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1517881415-17786-1-git-send-email-denis@denix.org>
-Subject: Re: [master][PATCH] beaglebone: drop check for meta-yocto-bsp collision
+From: Adam Lee <adam.yh.lee@gmail.com>
+Date: Fri, 09 Feb 2018 20:26:49 +0000
+Message-ID: <CAFeBWL7N1D8KQxdz2AqhDHbcww8+8x8ouMKRw4rK5ubf7Z63Uw@mail.gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Weston Desktop Shell
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -82,57 +68,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Feb 2018 04:09:58 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 09 Feb 2018 20:27:01 -0000
+Content-Type: multipart/alternative; boundary="001a114e3d46ba0cc90564cd598c"
 
+--001a114e3d46ba0cc90564cd598c
+Content-Type: text/plain; charset="UTF-8"
 
+Has anyone successfully brought up Weston desktop shell on the current
+master on Beagleboard X15 or AM57xx-EVM? I am having EGL initialization
+error. I don't know if it is something I have mis-configured.
 
-On 2/5/18 5:43 PM, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
-> 
-> Now that meta-yocto-bsp renamed reference machine to beaglebone-yocto
+BR,
 
-thats a good move finally.
+Adam
 
-> 
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->   conf/machine/beaglebone.conf        |  1 -
->   conf/machine/include/beaglebone.inc | 12 ------------
->   2 files changed, 13 deletions(-)
->   delete mode 100644 conf/machine/include/beaglebone.inc
-> 
-> diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-> index 715d2f2..a73bf22 100644
-> --- a/conf/machine/beaglebone.conf
-> +++ b/conf/machine/beaglebone.conf
-> @@ -3,7 +3,6 @@
->   #@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board
->   
->   require conf/machine/include/ti33x.inc
-> -require conf/machine/include/beaglebone.inc
->   
->   KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblack.dtb am335x-bonegreen.dtb"
->   
-> diff --git a/conf/machine/include/beaglebone.inc b/conf/machine/include/beaglebone.inc
-> deleted file mode 100644
-> index b10146d..0000000
-> --- a/conf/machine/include/beaglebone.inc
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -python () {
-> -    layers = d.getVar("BBFILE_COLLECTIONS", True)
-> -    if not layers:
-> -        return
-> -    if "yoctobsp" in layers:
-> -        bb.fatal("\nmeta-yocto-bsp has been detected in bblayers.conf, which provides basic reference BSP for beaglebone platform. " \
-> -                "\nSince meta-ti provides official comprehensive BSP for TI SoCs, including beaglebone, there could be potential conflicts " \
-> -                "\nbetween beaglebone machine definitions available in meta-yocto-bsp and meta-ti layers. It is recommended to remove " \
-> -                "\nor disable meta-yocto-bsp in bblayers.conf, when using meta-ti and building for beaglebone platform. Alternatively, " \
-> -                "\nit is possible to build for am335x-evm with meta-ti, which is a more generic platform for Sitara AM335x SoC and " \
-> -                "\nalso covers beaglebone variants.")
-> -}
-> 
+--001a114e3d46ba0cc90564cd598c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">Has anyone successfully brought up Weston desktop shell on=
+ the current master on Beagleboard X15 or AM57xx-EVM? I am having EGL initi=
+alization error. I don&#39;t know if it is something I have mis-configured.=
+<div><br></div><div>BR,</div><div><br></div><div>Adam</div></div>
+
+--001a114e3d46ba0cc90564cd598c--
