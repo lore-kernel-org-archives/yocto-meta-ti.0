@@ -1,17 +1,15 @@
-Return-Path: <adam.yh.lee@gmail.com>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CA92AE00DEE; Mon, 12 Feb 2018 08:04:08 -0800 (PST)
+	id 8A68FE00DE5; Mon, 12 Feb 2018 08:24:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	DKIM_VALID, DKIM_VALID_AU, HTML_MESSAGE,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (adam.yh.lee[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.161.178 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.80 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
@@ -20,45 +18,46 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
-	[209.85.161.178])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7F485E00D1C
-	for <meta-ti@yoctoproject.org>; Mon, 12 Feb 2018 08:04:06 -0800 (PST)
-Received: by mail-yw0-f178.google.com with SMTP id y186so2281185ywf.7
-	for <meta-ti@yoctoproject.org>; Mon, 12 Feb 2018 08:04:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=DUFVouyqjQlgGvPhGk0K4nCmgEW3FD3PN7UczTdqIFg=;
-	b=n6MIAlsauI4KSxljovJEYYcO/QAOs7DNylzrEN/LRyR8JLe1BRKHaTw+hvNnHOuK4O
-	TWD7oQdtmwI0VRzAWyDRYL7jI2k60OBXj1RVuAAfeW9htVKaGiofLoO8lv6ht+6DKf7a
-	SFGlooQqvAKTsjxzIUOApuA+rrpV6/jcqL8m6B9b6fzF5jtVIRB6B6hYkiOT32vBjA77
-	Dcvq2uvR0sxzfnI3OHNhLyGEQi6ArrLyjrY7zNFFwC1Ky5LnXgizK/bk9WWG++T4J8ca
-	AJjBtpj8z1OVzWhHP9tnCaa8TCG0bpYcpZlKp6n+InzcQ3OFB9Vht5hXkJrQZ19VgEV4
-	TbUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=DUFVouyqjQlgGvPhGk0K4nCmgEW3FD3PN7UczTdqIFg=;
-	b=Hawy4b8OJDI2KzWmgMANfz5mhBibZEgBvPyOUGxGZRJ5v4hT2cx4Ye5NX9LCEU1mVw
-	n0xssGqtlhXBPCyflaFlagpSwbk94Pd0mthgrRysL5SgqEnaNtHiLrp9M37HcwjcoufE
-	YSCw1y5M1BAk6xo7u81QGio7MDk8/wFBSP44YCbfwJK17LfcijDkmencYSmMHfid1UJP
-	RiVGaFLmFIaOdm8Hz8ZTYrODCPdsLYiWqjVoRtT/KIUfo7GDCHVR4Um3Y+ZwzQ16pes9
-	rwZ3KmqVgzUytTHj9gDvNKOtnpt8wYiIySLhTyCjE7SsX2gi04iILbN8NRNXW6a9eghz
-	sCAg==
-X-Gm-Message-State: APf1xPBTd+cyCff868w+gz+WrN2vvwP2LT6Pqeg4KS/2/ZYyueqzc+9I
-	lNw+1WxVmDn/AxGWFyPvgGifOegI69vpwz4UI3A=
-X-Google-Smtp-Source: AH8x225RnTNw/5Ob48UHMyisf+PiKhuQinRiF43sWEHQExxMr5zvkx3QHhaY4K5c+2q+ImdRF90DTh5FBNZuKksfpjs=
-X-Received: by 10.37.55.138 with SMTP id e132mr7869634yba.110.1518451445143;
-	Mon, 12 Feb 2018 08:04:05 -0800 (PST)
-MIME-Version: 1.0
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70CC3E00D1C
+	for <meta-ti@yoctoproject.org>; Mon, 12 Feb 2018 08:24:11 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w1CGOBuX008987;
+	Mon, 12 Feb 2018 10:24:11 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1518452651;
+	bh=xr5/LY95ToSNPcGVQgUfIrV9UghTiXqhfbbohiK4T4g=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=EONvtufcNjbN61ydVr/MB4XVBA4WQYfFoLdG3krsaaVwj78brunmP5Otx8v01l16i
+	77rXUSqombnzwqQdwiUQs87+hM2uf+R13ID7Y9CnBAgyJoEv8/1TdW6esY88Os7VLZ
+	9mdRjCUvtXlhB8cletCEtlwB81kh8m20oPMKqWxY=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w1CGOBQE018046;
+	Mon, 12 Feb 2018 10:24:11 -0600
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE111.ent.ti.com
+	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Mon, 12 Feb 2018 10:24:10 -0600
+Received: from DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455]) by
+	DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455%17]) with mapi id
+	15.01.1261.035; Mon, 12 Feb 2018 10:24:10 -0600
+From: "Ruei, Eric" <e-ruei1@ti.com>
+To: Adam Lee <adam.yh.lee@gmail.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [EXTERNAL] Re: [meta-ti] Weston Desktop Shell
+Thread-Index: AQHTpBsklzmKwyW4U0+Z4GUu/wPa96Og8JpA
+Date: Mon, 12 Feb 2018 16:24:10 +0000
+Message-ID: <c0d19df292da49ac8ccfafa9fa91eb62@ti.com>
 References: <CAFeBWL7N1D8KQxdz2AqhDHbcww8+8x8ouMKRw4rK5ubf7Z63Uw@mail.gmail.com>
-In-Reply-To: <CAFeBWL7N1D8KQxdz2AqhDHbcww8+8x8ouMKRw4rK5ubf7Z63Uw@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-Date: Mon, 12 Feb 2018 16:03:54 +0000
-Message-ID: <CAFeBWL5wNMRYoK1wW3nL3xo10ySpJbdYXmPjr0fnVBctyR7Lyw@mail.gmail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Weston Desktop Shell
+	<CAFeBWL5wNMRYoK1wW3nL3xo10ySpJbdYXmPjr0fnVBctyR7Lyw@mail.gmail.com>
+In-Reply-To: <CAFeBWL5wNMRYoK1wW3nL3xo10ySpJbdYXmPjr0fnVBctyR7Lyw@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-originating-ip: [158.218.103.39]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+MIME-Version: 1.0
+Subject: Re: [EXTERNAL] Re: Weston Desktop Shell
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,99 +70,306 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Feb 2018 16:04:08 -0000
-Content-Type: multipart/alternative; boundary="001a114738baff1e7105650606ac"
+X-List-Received-Date: Mon, 12 Feb 2018 16:24:13 -0000
+X-Groupsio-MsgNum: 10638
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_005_c0d19df292da49ac8ccfafa9fa91eb62ticom_"
 
---001a114738baff1e7105650606ac
-Content-Type: text/plain; charset="UTF-8"
+--_005_c0d19df292da49ac8ccfafa9fa91eb62ticom_
+Content-Type: multipart/alternative;
+	boundary="_000_c0d19df292da49ac8ccfafa9fa91eb62ticom_"
 
-I spent a bit of time getting the logs:
+--_000_c0d19df292da49ac8ccfafa9fa91eb62ticom_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-root@am57xx-evm:~# weston --backend=drm-backend.so --tty=4
-Date: 2018-01-08 UTC
-[19:24:55.053] weston 2.0.0
-               http://wayland.freedesktop.org
-               Bug reports to:
-https://bugs.freedesktop.org/enter_bug.cgi?product=Wayland&component=weston&version=2.0.0
-               Build: c26dbf3-dirty weston-launch: Provide a default
-version that doesn't require PAM (2018-02-09 11:58:14 -0500)
-[19:24:55.053] Command line: weston --backend=drm-backend.so --tty=4
-[19:24:55.053] OS: Linux, 4.9.69-g89d085d1a4, #10 SMP PREEMPT Thu Feb 8
-12:11:21 EST 2018, armv7l
-[19:24:55.053] Using config file '/etc//weston.ini'
-[19:24:55.054] Output repaint window is 7 ms maximum.
-[19:24:55.054] Loading module '/usr/lib/libweston-2/drm-backend.so'
-[19:24:55.055] initializing drm backend
-[19:24:55.091] using /dev/dri/card1
-[19:24:55.091] Loading module '/usr/lib/libweston-2/gl-renderer.so'
-failed to load module: /usr/lib/gbm/gbm_dri.so: cannot open shared object
-file: No such file or directory
-failed to load module: /usr/lib/gbm/gbm_gallium_drm.so: cannot open shared
-object file: No such file or directory
-loaded module : gbm_pvr.so
-found valid GBM backend : gbm_pvr.so
-PVR:(Error): [ 1157-> 1157] <
-gbm_pvr_create_device():592|ERROR> Failed to create DBM device: No such
-device [0, ]
-[19:24:55.095] failed to initialize egl
-[19:24:55.120] fatal: failed to create compositor backend
+SGksIEFkYW06DQoNClRoZSBwcm9ibGVtIHNob3dzIGFzIHRoZSBmb2xsb3dpbmcgbGluZS4NCg0K
+WzE5OjI0OjU1LjA1NV0gaW5pdGlhbGl6aW5nIGRybSBiYWNrZW5kDQpbMTk6MjQ6NTUuMDkxXSB1
+c2luZyAvZGV2L2RyaS9jYXJkMQ0KDQpUaGUgU0dYIERESyBjcmVhdGVzIGFub3RoZXIgZHJpLWxp
+a2UgZGV2aWNlIGFzIGNhcmQxLCBidXQgaXQgc2hvdWxkIG5vdCBiZSB1c2VkIGFzIERSTSBkZXZp
+Y2UuDQoNClBsZWFzZSBhcHBseSB0aGUgZm9sbG93aW5nIHBhdGNoIHRvIHRoZSBXZXN0b24gYnVp
+bGQuDQowMDAxLXVkZXYtc2VhdC1yZXN0cmljdC11ZGV2LWVudW1lcmF0aW9uLXRvLWNhcmQwLnBh
+dGNoLg0KDQpZb3UgbWF5IG5lZWQgb3RoZXIgcGF0Y2hlcyB1bmRlciBtZXRhLWFyYWdvLm1ldGEt
+YXJhZ28tZGlzdHJvL3JlY2lwZXMtZ3JhcGhpY3Mvd2F5bGFuZC93ZXN0b24gaW5jbHVkaW5nDQow
+MDAyLVdlc3Rvbi1BbGxvdy12aXN1YWxfaWQtdG8tYmUtMC5wYXRjaA0KDQpCZXN0IHJlZ2FyZHMs
+DQoNCkVyaWMNCg0KDQoNCkZyb206IG1ldGEtdGktYm91bmNlc0B5b2N0b3Byb2plY3Qub3JnIFtt
+YWlsdG86bWV0YS10aS1ib3VuY2VzQHlvY3RvcHJvamVjdC5vcmddIE9uIEJlaGFsZiBPZiBBZGFt
+IExlZQ0KU2VudDogTW9uZGF5LCBGZWJydWFyeSAxMiwgMjAxOCAxMTowNCBBTQ0KVG86IG1ldGEt
+dGlAeW9jdG9wcm9qZWN0Lm9yZw0KU3ViamVjdDogW0VYVEVSTkFMXSBSZTogW21ldGEtdGldIFdl
+c3RvbiBEZXNrdG9wIFNoZWxsDQoNCkkgc3BlbnQgYSBiaXQgb2YgdGltZSBnZXR0aW5nIHRoZSBs
+b2dzOg0KDQpyb290QGFtNTd4eC1ldm06fiMgd2VzdG9uIC0tYmFja2VuZD1kcm0tYmFja2VuZC5z
+byAtLXR0eT00DQpEYXRlOiAyMDE4LTAxLTA4IFVUQw0KWzE5OjI0OjU1LjA1M10gd2VzdG9uIDIu
+MC4wDQogICAgICAgICAgICAgICBodHRwOi8vd2F5bGFuZC5mcmVlZGVza3RvcC5vcmcNCiAgICAg
+ICAgICAgICAgIEJ1ZyByZXBvcnRzIHRvOiBodHRwczovL2J1Z3MuZnJlZWRlc2t0b3Aub3JnL2Vu
+dGVyX2J1Zy5jZ2k/cHJvZHVjdD1XYXlsYW5kJmNvbXBvbmVudD13ZXN0b24mdmVyc2lvbj0yLjAu
+MA0KICAgICAgICAgICAgICAgQnVpbGQ6IGMyNmRiZjMtZGlydHkgd2VzdG9uLWxhdW5jaDogUHJv
+dmlkZSBhIGRlZmF1bHQgdmVyc2lvbiB0aGF0IGRvZXNuJ3QgcmVxdWlyZSBQQU0gKDIwMTgtMDIt
+MDkgMTE6NTg6MTQgLTA1MDApDQpbMTk6MjQ6NTUuMDUzXSBDb21tYW5kIGxpbmU6IHdlc3RvbiAt
+LWJhY2tlbmQ9ZHJtLWJhY2tlbmQuc28gLS10dHk9NA0KWzE5OjI0OjU1LjA1M10gT1M6IExpbnV4
+LCA0LjkuNjktZzg5ZDA4NWQxYTQsICMxMCBTTVAgUFJFRU1QVCBUaHUgRmViIDggMTI6MTE6MjEg
+RVNUIDIwMTgsIGFybXY3bA0KWzE5OjI0OjU1LjA1M10gVXNpbmcgY29uZmlnIGZpbGUgJy9ldGMv
+L3dlc3Rvbi5pbmknDQpbMTk6MjQ6NTUuMDU0XSBPdXRwdXQgcmVwYWludCB3aW5kb3cgaXMgNyBt
+cyBtYXhpbXVtLg0KWzE5OjI0OjU1LjA1NF0gTG9hZGluZyBtb2R1bGUgJy91c3IvbGliL2xpYndl
+c3Rvbi0yL2RybS1iYWNrZW5kLnNvJw0KWzE5OjI0OjU1LjA1NV0gaW5pdGlhbGl6aW5nIGRybSBi
+YWNrZW5kDQpbMTk6MjQ6NTUuMDkxXSB1c2luZyAvZGV2L2RyaS9jYXJkMQ0KWzE5OjI0OjU1LjA5
+MV0gTG9hZGluZyBtb2R1bGUgJy91c3IvbGliL2xpYndlc3Rvbi0yL2dsLXJlbmRlcmVyLnNvJw0K
+ZmFpbGVkIHRvIGxvYWQgbW9kdWxlOiAvdXNyL2xpYi9nYm0vZ2JtX2RyaS5zbzogY2Fubm90IG9w
+ZW4gc2hhcmVkIG9iamVjdCBmaWxlOiBObyBzdWNoIGZpbGUgb3IgZGlyZWN0b3J5DQpmYWlsZWQg
+dG8gbG9hZCBtb2R1bGU6IC91c3IvbGliL2dibS9nYm1fZ2FsbGl1bV9kcm0uc286IGNhbm5vdCBv
+cGVuIHNoYXJlZCBvYmplY3QgZmlsZTogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeQ0KbG9hZGVk
+IG1vZHVsZSA6IGdibV9wdnIuc28NCmZvdW5kIHZhbGlkIEdCTSBiYWNrZW5kIDogZ2JtX3B2ci5z
+bw0KUFZSOihFcnJvcik6IFsgMTE1Ny0+IDExNTddIDwgICAgICAgICAgICAgIGdibV9wdnJfY3Jl
+YXRlX2RldmljZSgpOjU5MnxFUlJPUj4gRmFpbGVkIHRvIGNyZWF0ZSBEQk0gZGV2aWNlOiBObyBz
+dWNoIGRldmljZSBbMCwgXQ0KWzE5OjI0OjU1LjA5NV0gZmFpbGVkIHRvIGluaXRpYWxpemUgZWds
+DQpbMTk6MjQ6NTUuMTIwXSBmYXRhbDogZmFpbGVkIHRvIGNyZWF0ZSBjb21wb3NpdG9yIGJhY2tl
+bmQNCg0KQW55IGluc2lnaHQgYXMgdG8gd2h5IHRoaXMgaXMgaGFwcGVuaW5nLCBpdCB3b3VsZCBi
+ZSBtdWNoIGFwcHJlY2lhdGVkLg0KDQpBZGFtDQoNCk9uIEZyaSwgRmViIDksIDIwMTggYXQgMzoy
+NiBQTSBBZGFtIExlZSA8YWRhbS55aC5sZWVAZ21haWwuY29tPG1haWx0bzphZGFtLnloLmxlZUBn
+bWFpbC5jb20+PiB3cm90ZToNCkhhcyBhbnlvbmUgc3VjY2Vzc2Z1bGx5IGJyb3VnaHQgdXAgV2Vz
+dG9uIGRlc2t0b3Agc2hlbGwgb24gdGhlIGN1cnJlbnQgbWFzdGVyIG9uIEJlYWdsZWJvYXJkIFgx
+NSBvciBBTTU3eHgtRVZNPyBJIGFtIGhhdmluZyBFR0wgaW5pdGlhbGl6YXRpb24gZXJyb3IuIEkg
+ZG9uJ3Qga25vdyBpZiBpdCBpcyBzb21ldGhpbmcgSSBoYXZlIG1pcy1jb25maWd1cmVkLg0KDQpC
+UiwNCg0KQWRhbQ0K
 
-Any insight as to why this is happening, it would be much appreciated.
+--_000_c0d19df292da49ac8ccfafa9fa91eb62ticom_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Adam
+PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
+bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
+YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
+cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
+Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
+ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTQgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
+PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
+Q2FsaWJyaTsNCglwYW5vc2UtMToyIDE1IDUgMiAyIDIgNCAzIDIgNDt9DQpAZm9udC1mYWNlDQoJ
+e2ZvbnQtZmFtaWx5OlRhaG9tYTsNCglwYW5vc2UtMToyIDExIDYgNCAzIDUgNCA0IDIgNDt9DQov
+KiBTdHlsZSBEZWZpbml0aW9ucyAqLw0KcC5Nc29Ob3JtYWwsIGxpLk1zb05vcm1hbCwgZGl2Lk1z
+b05vcm1hbA0KCXttYXJnaW46MGluOw0KCW1hcmdpbi1ib3R0b206LjAwMDFwdDsNCglmb250LXNp
+emU6MTIuMHB0Ow0KCWZvbnQtZmFtaWx5OiJUaW1lcyBOZXcgUm9tYW4iLCJzZXJpZiI7fQ0KYTps
+aW5rLCBzcGFuLk1zb0h5cGVybGluaw0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6
+Ymx1ZTsNCgl0ZXh0LWRlY29yYXRpb246dW5kZXJsaW5lO30NCmE6dmlzaXRlZCwgc3Bhbi5Nc29I
+eXBlcmxpbmtGb2xsb3dlZA0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6cHVycGxl
+Ow0KCXRleHQtZGVjb3JhdGlvbjp1bmRlcmxpbmU7fQ0Kc3Bhbi5FbWFpbFN0eWxlMTcNCgl7bXNv
+LXN0eWxlLXR5cGU6cGVyc29uYWwtcmVwbHk7DQoJZm9udC1mYW1pbHk6IkNhbGlicmkiLCJzYW5z
+LXNlcmlmIjsNCgljb2xvcjojMUY0OTdEO30NCi5Nc29DaHBEZWZhdWx0DQoJe21zby1zdHlsZS10
+eXBlOmV4cG9ydC1vbmx5Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJpIiwic2Fucy1zZXJpZiI7fQ0K
+QHBhZ2UgV29yZFNlY3Rpb24xDQoJe3NpemU6OC41aW4gMTEuMGluOw0KCW1hcmdpbjoxLjBpbiAx
+LjBpbiAxLjBpbiAxLjBpbjt9DQpkaXYuV29yZFNlY3Rpb24xDQoJe3BhZ2U6V29yZFNlY3Rpb24x
+O30NCi0tPjwvc3R5bGU+PCEtLVtpZiBndGUgbXNvIDldPjx4bWw+DQo8bzpzaGFwZWRlZmF1bHRz
+IHY6ZXh0PSJlZGl0IiBzcGlkbWF4PSIxMDI2IiAvPg0KPC94bWw+PCFbZW5kaWZdLS0+PCEtLVtp
+ZiBndGUgbXNvIDldPjx4bWw+DQo8bzpzaGFwZWxheW91dCB2OmV4dD0iZWRpdCI+DQo8bzppZG1h
+cCB2OmV4dD0iZWRpdCIgZGF0YT0iMSIgLz4NCjwvbzpzaGFwZWxheW91dD48L3htbD48IVtlbmRp
+Zl0tLT4NCjwvaGVhZD4NCjxib2R5IGxhbmc9IkVOLVVTIiBsaW5rPSJibHVlIiB2bGluaz0icHVy
+cGxlIj4NCjxkaXYgY2xhc3M9IldvcmRTZWN0aW9uMSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48
+c3BhbiBzdHlsZT0iZm9udC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1
+b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+SGksIEFkYW06PG86cD48
+L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQt
+c2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNl
+cmlmJnF1b3Q7O2NvbG9yOiMxRjQ5N0QiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxw
+IGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFt
+aWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0
+OTdEIj5UaGUgcHJvYmxlbSBzaG93cyBhcyB0aGUgZm9sbG93aW5nIGxpbmUuPG86cD48L286cD48
+L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTox
+MS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1
+b3Q7O2NvbG9yOiMxRjQ5N0QiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNz
+PSJNc29Ob3JtYWwiPlsxOToyNDo1NS4wNTVdIGluaXRpYWxpemluZyBkcm0gYmFja2VuZDxvOnA+
+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+WzE5OjI0OjU1LjA5MV0gdXNpbmcgPHNw
+YW4gc3R5bGU9ImNvbG9yOnJlZCI+L2Rldi9kcmkvY2FyZDE8bzpwPjwvbzpwPjwvc3Bhbj48L3A+
+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iY29sb3I6cmVkIj48bzpwPiZuYnNw
+OzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9u
+dC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMt
+c2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+VGhlIFNHWCBEREsgY3JlYXRlcyBhbm90aGVyIGRy
+aS1saWtlIGRldmljZSBhcyBjYXJkMSwgYnV0IGl0IHNob3VsZCBub3QgYmUgdXNlZCBhcyBEUk0g
+ZGV2aWNlLjxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFu
+IHN0eWxlPSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDss
+JnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwv
+c3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEx
+LjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVv
+dDs7Y29sb3I6IzFGNDk3RCI+UGxlYXNlIGFwcGx5IHRoZSBmb2xsb3dpbmcgcGF0Y2ggdG8gdGhl
+IFdlc3RvbiBidWlsZC48bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFs
+Ij48c3BhbiBzdHlsZT0iZm9udC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJp
+JnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+MDAwMS11ZGV2LXNl
+YXQtcmVzdHJpY3QtdWRldi1lbnVtZXJhdGlvbi10by1jYXJkMC5wYXRjaC48bzpwPjwvbzpwPjwv
+c3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEx
+LjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVv
+dDs7Y29sb3I6IzFGNDk3RCI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9
+Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1
+b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2NvbG9yOiMxRjQ5N0QiPllv
+dSBtYXkgbmVlZCBvdGhlciBwYXRjaGVzIHVuZGVyIG1ldGEtYXJhZ28ubWV0YS1hcmFnby1kaXN0
+cm8vcmVjaXBlcy1ncmFwaGljcy93YXlsYW5kL3dlc3RvbiBpbmNsdWRpbmc8bzpwPjwvbzpwPjwv
+c3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEx
+LjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVv
+dDs7Y29sb3I6IzFGNDk3RCI+MDAwMi1XZXN0b24tQWxsb3ctdmlzdWFsX2lkLXRvLWJlLTAucGF0
+Y2g8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHls
+ZT0iZm9udC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90
+O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+
+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7
+Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2Nv
+bG9yOiMxRjQ5N0QiPkJlc3QgcmVnYXJkcyw8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFz
+cz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjExLjBwdDtmb250LWZhbWlseTom
+cXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+
+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4g
+c3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90Oywm
+cXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2NvbG9yOiMxRjQ5N0QiPkVyaWM8bzpwPjwvbzpwPjwvc3Bh
+bj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjExLjBw
+dDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7
+Y29sb3I6IzFGNDk3RCI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1z
+b05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7
+Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2NvbG9yOiMxRjQ5N0QiPjxvOnA+
+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxl
+PSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7
+c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48
+L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48Yj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEwLjBw
+dDtmb250LWZhbWlseTomcXVvdDtUYWhvbWEmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90OyI+
+RnJvbTo8L3NwYW4+PC9iPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5
+OiZxdW90O1RhaG9tYSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7Ij4gbWV0YS10aS1ib3Vu
+Y2VzQHlvY3RvcHJvamVjdC5vcmcgW21haWx0bzptZXRhLXRpLWJvdW5jZXNAeW9jdG9wcm9qZWN0
+Lm9yZ10NCjxiPk9uIEJlaGFsZiBPZiA8L2I+QWRhbSBMZWU8YnI+DQo8Yj5TZW50OjwvYj4gTW9u
+ZGF5LCBGZWJydWFyeSAxMiwgMjAxOCAxMTowNCBBTTxicj4NCjxiPlRvOjwvYj4gbWV0YS10aUB5
+b2N0b3Byb2plY3Qub3JnPGJyPg0KPGI+U3ViamVjdDo8L2I+IFtFWFRFUk5BTF0gUmU6IFttZXRh
+LXRpXSBXZXN0b24gRGVza3RvcCBTaGVsbDxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNz
+PSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPGRpdj4NCjxwIGNsYXNzPSJNc29O
+b3JtYWwiPkkgc3BlbnQgYSBiaXQgb2YgdGltZSBnZXR0aW5nIHRoZSBsb2dzOjxvOnA+PC9vOnA+
+PC9wPg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0K
+PC9kaXY+DQo8ZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPnJvb3RAYW01N3h4LWV2
+bTp+IyB3ZXN0b24gLS1iYWNrZW5kPWRybS1iYWNrZW5kLnNvIC0tdHR5PTQ8bzpwPjwvbzpwPjwv
+cD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkRhdGU6IDIwMTgtMDEtMDgg
+VVRDPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5b
+MTk6MjQ6NTUuMDUzXSB3ZXN0b24gMi4wLjA8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4N
+CjxwIGNsYXNzPSJNc29Ob3JtYWwiPiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsg
+Jm5ic3A7ICZuYnNwOyAmbmJzcDs8YSBocmVmPSJodHRwOi8vd2F5bGFuZC5mcmVlZGVza3RvcC5v
+cmciPmh0dHA6Ly93YXlsYW5kLmZyZWVkZXNrdG9wLm9yZzwvYT48bzpwPjwvbzpwPjwvcD4NCjwv
+ZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZu
+YnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDtCdWcgcmVwb3J0cyB0bzogPGEgaHJlZj0i
+aHR0cHM6Ly9idWdzLmZyZWVkZXNrdG9wLm9yZy9lbnRlcl9idWcuY2dpP3Byb2R1Y3Q9V2F5bGFu
+ZCZhbXA7Y29tcG9uZW50PXdlc3RvbiZhbXA7dmVyc2lvbj0yLjAuMCI+DQpodHRwczovL2J1Z3Mu
+ZnJlZWRlc2t0b3Aub3JnL2VudGVyX2J1Zy5jZ2k/cHJvZHVjdD1XYXlsYW5kJmFtcDtjb21wb25l
+bnQ9d2VzdG9uJmFtcDt2ZXJzaW9uPTIuMC4wPC9hPjxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8
+ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZu
+YnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwO0J1aWxkOiBjMjZkYmYzLWRpcnR5IHdlc3Rvbi1sYXVu
+Y2g6IFByb3ZpZGUgYSBkZWZhdWx0IHZlcnNpb24gdGhhdCBkb2Vzbid0IHJlcXVpcmUgUEFNICgy
+MDE4LTAyLTA5IDExOjU4OjE0IC0wNTAwKTxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0K
+PHAgY2xhc3M9Ik1zb05vcm1hbCI+WzE5OjI0OjU1LjA1M10gQ29tbWFuZCBsaW5lOiB3ZXN0b24g
+LS1iYWNrZW5kPWRybS1iYWNrZW5kLnNvIC0tdHR5PTQ8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0K
+PGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlsxOToyNDo1NS4wNTNdIE9TOiBMaW51eCwgNC45
+LjY5LWc4OWQwODVkMWE0LCAjMTAgU01QIFBSRUVNUFQgVGh1IEZlYiA4IDEyOjExOjIxIEVTVCAy
+MDE4LCBhcm12N2w8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29O
+b3JtYWwiPlsxOToyNDo1NS4wNTNdIFVzaW5nIGNvbmZpZyBmaWxlICcvZXRjLy93ZXN0b24uaW5p
+JzxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+WzE5
+OjI0OjU1LjA1NF0gT3V0cHV0IHJlcGFpbnQgd2luZG93IGlzIDcgbXMgbWF4aW11bS48bzpwPjwv
+bzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlsxOToyNDo1NS4w
+NTRdIExvYWRpbmcgbW9kdWxlICcvdXNyL2xpYi9saWJ3ZXN0b24tMi9kcm0tYmFja2VuZC5zbyc8
+bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlsxOToy
+NDo1NS4wNTVdIGluaXRpYWxpemluZyBkcm0gYmFja2VuZDxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+
+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+WzE5OjI0OjU1LjA5MV0gdXNpbmcgL2Rldi9k
+cmkvY2FyZDE8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3Jt
+YWwiPlsxOToyNDo1NS4wOTFdIExvYWRpbmcgbW9kdWxlICcvdXNyL2xpYi9saWJ3ZXN0b24tMi9n
+bC1yZW5kZXJlci5zbyc8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJN
+c29Ob3JtYWwiPmZhaWxlZCB0byBsb2FkIG1vZHVsZTogL3Vzci9saWIvZ2JtL2dibV9kcmkuc286
+IGNhbm5vdCBvcGVuIHNoYXJlZCBvYmplY3QgZmlsZTogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9y
+eTxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+ZmFp
+bGVkIHRvIGxvYWQgbW9kdWxlOiAvdXNyL2xpYi9nYm0vZ2JtX2dhbGxpdW1fZHJtLnNvOiBjYW5u
+b3Qgb3BlbiBzaGFyZWQgb2JqZWN0IGZpbGU6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3Rvcnk8bzpw
+PjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPmxvYWRlZCBt
+b2R1bGUgOiBnYm1fcHZyLnNvPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFz
+cz0iTXNvTm9ybWFsIj5mb3VuZCB2YWxpZCBHQk0gYmFja2VuZCA6IGdibV9wdnIuc288bzpwPjwv
+bzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlBWUjooRXJyb3Ip
+OiBbIDExNTctJmd0OyAxMTU3XSAmbHQ7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNw
+OyAmbmJzcDsgJm5ic3A7IGdibV9wdnJfY3JlYXRlX2RldmljZSgpOjU5MnxFUlJPUiZndDsgRmFp
+bGVkIHRvIGNyZWF0ZSBEQk0gZGV2aWNlOiBObyBzdWNoIGRldmljZSBbMCwgXTxvOnA+PC9vOnA+
+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+WzE5OjI0OjU1LjA5NV0g
+ZmFpbGVkIHRvIGluaXRpYWxpemUgZWdsPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8
+cCBjbGFzcz0iTXNvTm9ybWFsIj5bMTk6MjQ6NTUuMTIwXSBmYXRhbDogZmFpbGVkIHRvIGNyZWF0
+ZSBjb21wb3NpdG9yIGJhY2tlbmQ8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPC9kaXY+DQo8ZGl2
+Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rpdj4NCjxk
+aXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5BbnkgaW5zaWdodCBhcyB0byB3aHkgdGhpcyBpcyBo
+YXBwZW5pbmcsIGl0IHdvdWxkIGJlIG11Y2ggYXBwcmVjaWF0ZWQuPG86cD48L286cD48L3A+DQo8
+L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4N
+CjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkFkYW08bzpwPjwvbzpwPjwvcD4N
+CjwvZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8ZGl2
+Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPk9uIEZyaSwgRmViIDksIDIwMTggYXQgMzoy
+NiBQTSBBZGFtIExlZSAmbHQ7PGEgaHJlZj0ibWFpbHRvOmFkYW0ueWgubGVlQGdtYWlsLmNvbSIg
+dGFyZ2V0PSJfYmxhbmsiPmFkYW0ueWgubGVlQGdtYWlsLmNvbTwvYT4mZ3Q7IHdyb3RlOjxvOnA+
+PC9vOnA+PC9wPg0KPC9kaXY+DQo8YmxvY2txdW90ZSBzdHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVy
+LWxlZnQ6c29saWQgI0NDQ0NDQyAxLjBwdDtwYWRkaW5nOjBpbiAwaW4gMGluIDYuMHB0O21hcmdp
+bi1sZWZ0OjQuOHB0O21hcmdpbi1yaWdodDowaW4iPg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3Jt
+YWwiPkhhcyBhbnlvbmUgc3VjY2Vzc2Z1bGx5IGJyb3VnaHQgdXAgV2VzdG9uIGRlc2t0b3Agc2hl
+bGwgb24gdGhlIGN1cnJlbnQgbWFzdGVyIG9uIEJlYWdsZWJvYXJkIFgxNSBvciBBTTU3eHgtRVZN
+PyBJIGFtIGhhdmluZyBFR0wgaW5pdGlhbGl6YXRpb24gZXJyb3IuIEkgZG9uJ3Qga25vdyBpZiBp
+dCBpcyBzb21ldGhpbmcgSSBoYXZlIG1pcy1jb25maWd1cmVkLjxvOnA+PC9vOnA+PC9wPg0KPGRp
+dj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPC9kaXY+DQo8
+ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+QlIsPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxk
+aXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0K
+PGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkFkYW08bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0K
+PC9kaXY+DQo8L2Jsb2NrcXVvdGU+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L2JvZHk+DQo8
+L2h0bWw+DQo=
 
-On Fri, Feb 9, 2018 at 3:26 PM Adam Lee <adam.yh.lee@gmail.com> wrote:
+--_000_c0d19df292da49ac8ccfafa9fa91eb62ticom_--
 
-> Has anyone successfully brought up Weston desktop shell on the current
-> master on Beagleboard X15 or AM57xx-EVM? I am having EGL initialization
-> error. I don't know if it is something I have mis-configured.
->
-> BR,
->
-> Adam
->
+--_005_c0d19df292da49ac8ccfafa9fa91eb62ticom_
+Content-Type: application/octet-stream;
+	name="0001-udev-seat-restrict-udev-enumeration-to-card0.patch"
+Content-Description: 0001-udev-seat-restrict-udev-enumeration-to-card0.patch
+Content-Disposition: attachment;
+	filename="0001-udev-seat-restrict-udev-enumeration-to-card0.patch";
+	size=1343; creation-date="Mon, 12 Feb 2018 16:18:28 GMT";
+	modification-date="Tue, 03 Oct 2017 19:26:16 GMT"
+Content-Transfer-Encoding: base64
 
---001a114738baff1e7105650606ac
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+RnJvbSBlOGU3YTlmN2RmYTE2NGE3NWZkYmRjYTg3NjIyYTJlMTMzMzQ0NzhhIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmFuZCBCYWxhZ29wYWxha3Jpc2huYW4gPGFuYW5kYkB0aS5j
+b20+CkRhdGU6IFNhdCwgMjMgSmFuIDIwMTYgMjI6NDg6MDcgKzA1MzAKU3ViamVjdDogW1BBVENI
+IDEvMV0gdWRldi1zZWF0OiByZXN0cmljdCB1ZGV2IGVudW1lcmF0aW9uIHRvIGNhcmQwCgpJbiBj
+YXNlIG9mIHNlcGFyYXRlIEdQVSBhbmQgRGlzcGxheSBkZXZpY2VzIGFzIGZvdW5kIGluIGVtYmVk
+ZGVkIHN5c3RlbXMsIHdlCmNvdWxkIGhhdmUgbW9kZXNldCBub2RlIGFuZCByZW5kZXIgbm9kZSBj
+b250cm9sbGVkIGJ5IGRpZmZlcmVudCBkcml2ZXJzLgpUaGVyZSBpcyBhIGRpc3RpbmN0IHBvc3Np
+YmlsaXR5IHRoYXQgdWRldiBlbnVtZXJhdGlvbiByZXR1cm5zIHRoZSBEUk0gZGV2aWNlCmNvcnJl
+c3BvbmRpbmcgdG8gcmVuZGVyIG5vZGUgYXMgdGhlIHByaW1hcnkgRFJNIGRldmljZS4KCk9idmlv
+dXNseSwgbW9kZXNldCBvcGVyYXRpb25zIGNhbm5vdCBiZSBkb25lIG9uIHRoZSBHUFUgRFJNIGRl
+dmljZS4KClJlc3RyaWN0IHRoZSB1ZGV2IGVudW1lcmF0aW9uIHRvIGNhcmQwIGFuZCBlbnN1cmUg
+dGhhdCBEUk0gZGV2aWNlIGNvcnJlc3BvbmRpbmcKdG8gZGlzcGxheSBpcyByZXR1cm5lZCBhcyB0
+aGUgcHJpbWFyeSBEUk0gZGV2aWNlLgoKVXBzdHJlYW0tU3RhdHVzOiBQZW5kaW5nCgpTaWduZWQt
+b2ZmLWJ5OiBBbmFuZCBCYWxhZ29wYWxha3Jpc2huYW4gPGFuYW5kYkB0aS5jb20+Ci0tLQogc3Jj
+L2NvbXBvc2l0b3ItZHJtLmMgfCAgICAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24o
+KyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9zcmMvY29tcG9zaXRvci1kcm0uYyBiL3Ny
+Yy9jb21wb3NpdG9yLWRybS5jCmluZGV4IDY3NzdiZjguLjU5YzJjYzUgMTAwNjQ0Ci0tLSBhL3Ny
+Yy9jb21wb3NpdG9yLWRybS5jCisrKyBiL3NyYy9jb21wb3NpdG9yLWRybS5jCkBAIC0yODI3LDcg
+KzI4MjcsNyBAQCBmaW5kX3ByaW1hcnlfZ3B1KHN0cnVjdCBkcm1fYmFja2VuZCAqYiwgY29uc3Qg
+Y2hhciAqc2VhdCkKCgllID0gdWRldl9lbnVtZXJhdGVfbmV3KGItPnVkZXYpOwoJdWRldl9lbnVt
+ZXJhdGVfYWRkX21hdGNoX3N1YnN5c3RlbShlLCAiZHJtIik7Ci0JdWRldl9lbnVtZXJhdGVfYWRk
+X21hdGNoX3N5c25hbWUoZSwgImNhcmRbMC05XSoiKTsKKwl1ZGV2X2VudW1lcmF0ZV9hZGRfbWF0
+Y2hfc3lzbmFtZShlLCAiY2FyZDAiKTsKCgl1ZGV2X2VudW1lcmF0ZV9zY2FuX2RldmljZXMoZSk7
+Cglkcm1fZGV2aWNlID0gTlVMTDsKLS0KMS43LjkuNQo=
 
-<div dir=3D"ltr">I spent a bit of time getting the logs:<div><br></div><div=
-><div>root@am57xx-evm:~# weston --backend=3Ddrm-backend.so --tty=3D4</div><=
-div>Date: 2018-01-08 UTC</div><div>[19:24:55.053] weston 2.0.0</div><div>=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"http://wa=
-yland.freedesktop.org">http://wayland.freedesktop.org</a></div><div>=C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Bug reports to: <a href=3D"=
-https://bugs.freedesktop.org/enter_bug.cgi?product=3DWayland&amp;component=
-=3Dweston&amp;version=3D2.0.0">https://bugs.freedesktop.org/enter_bug.cgi?p=
-roduct=3DWayland&amp;component=3Dweston&amp;version=3D2.0.0</a></div><div>=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Build: c26dbf3-dirty=
- weston-launch: Provide a default version that doesn&#39;t require PAM (201=
-8-02-09 11:58:14 -0500)</div><div>[19:24:55.053] Command line: weston --bac=
-kend=3Ddrm-backend.so --tty=3D4</div><div>[19:24:55.053] OS: Linux, 4.9.69-=
-g89d085d1a4, #10 SMP PREEMPT Thu Feb 8 12:11:21 EST 2018, armv7l</div><div>=
-[19:24:55.053] Using config file &#39;/etc//weston.ini&#39;</div><div>[19:2=
-4:55.054] Output repaint window is 7 ms maximum.</div><div>[19:24:55.054] L=
-oading module &#39;/usr/lib/libweston-2/drm-backend.so&#39;</div><div>[19:2=
-4:55.055] initializing drm backend</div><div>[19:24:55.091] using /dev/dri/=
-card1</div><div>[19:24:55.091] Loading module &#39;/usr/lib/libweston-2/gl-=
-renderer.so&#39;</div><div>failed to load module: /usr/lib/gbm/gbm_dri.so: =
-cannot open shared object file: No such file or directory</div><div>failed =
-to load module: /usr/lib/gbm/gbm_gallium_drm.so: cannot open shared object =
-file: No such file or directory</div><div>loaded module : gbm_pvr.so</div><=
-div>found valid GBM backend : gbm_pvr.so</div><div>PVR:(Error): [ 1157-&gt;=
- 1157] &lt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 gbm_pvr_create_=
-device():592|ERROR&gt; Failed to create DBM device: No such device [0, ]</d=
-iv><div>[19:24:55.095] failed to initialize egl</div><div>[19:24:55.120] fa=
-tal: failed to create compositor backend</div></div><div><br></div><div>Any=
- insight as to why this is happening, it would be much appreciated.</div><d=
-iv><br></div><div>Adam</div><br><div class=3D"gmail_quote"><div dir=3D"ltr"=
->On Fri, Feb 9, 2018 at 3:26 PM Adam Lee &lt;<a href=3D"mailto:adam.yh.lee@=
-gmail.com" target=3D"_blank">adam.yh.lee@gmail.com</a>&gt; wrote:<br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><div dir=3D"ltr">Has anyone successfully bro=
-ught up Weston desktop shell on the current master on Beagleboard X15 or AM=
-57xx-EVM? I am having EGL initialization error. I don&#39;t know if it is s=
-omething I have mis-configured.<div><br></div><div>BR,</div><div><br></div>=
-<div>Adam</div></div></blockquote></div></div>
+--_005_c0d19df292da49ac8ccfafa9fa91eb62ticom_
+Content-Type: application/octet-stream;
+	name="0002-Weston-Allow-visual_id-to-be-0.patch"
+Content-Description: 0002-Weston-Allow-visual_id-to-be-0.patch
+Content-Disposition: attachment;
+	filename="0002-Weston-Allow-visual_id-to-be-0.patch"; size=934;
+	creation-date="Mon, 12 Feb 2018 16:24:08 GMT";
+	modification-date="Tue, 03 Oct 2017 19:26:16 GMT"
+Content-Transfer-Encoding: base64
 
---001a114738baff1e7105650606ac--
+RnJvbSA1YjVkZTZhODE0YjQzY2EwMjNhOTJiODViNDA3YjNkMDYxZGJjNjRmIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBFcmljIFJ1ZWkgPGUtcnVlaTFAdGkuY29tPgpEYXRlOiBUaHUs
+IDkgTWFyIDIwMTcgMTQ6MzI6MjQgLTA1MDAKU3ViamVjdDogW1BBVENIIDIvNF0gV2VzdG9uOiBB
+bGxvdyB2aXN1YWxfaWQgdG8gYmUgMAoKVGhlIGlucXVpcnkgb2YgdmlzdWFsIGlkIGZyb20gZWds
+IEFQSSBlZ2xHZXRDb25maWdBdHRyaWIoRUdMX05BVElWRV9WSVNVQUxfSUQpCmlzIGFuIG9wdGlv
+bmFsIGZlYXR1cmUuIFRoZSB2aXN1YWwgaWQgd2lsbCBiZSBzZXQgdG8gMCBpZiB0aGlzIGZlYXR1
+cmUgaXMKbm90IHN1cHBvcnRlZC4gVGhlcmVmb3JlLCB0aGUgcmV0dXJuIGNvbmRpdGlvbiBAZnVu
+Y3Rpb24gbWF0Y2hfY29uZmlnX3RvX3Zpc3VhbCgpCnNob3VsZCBiZSAoaWQgPT0gdmlzdWFsX2lk
+IHx8IGlkID09IDApIGluc3RlYWQgb2YgKGlkID09IHZpc3VhbF9pZCkKClNpZ25lZC1vZmYtYnk6
+IEVyaWMgUnVlaSA8ZS1ydWVpMUB0aS5jb20+Ci0tLQogc3JjL2dsLXJlbmRlcmVyLmMgfCAyICst
+CiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1n
+aXQgYS9zcmMvZ2wtcmVuZGVyZXIuYyBiL3NyYy9nbC1yZW5kZXJlci5jCmluZGV4IDIzYzBjZDcu
+LjRjMWYxNzAgMTAwNjQ0Ci0tLSBhL3NyYy9nbC1yZW5kZXJlci5jCisrKyBiL3NyYy9nbC1yZW5k
+ZXJlci5jCkBAIC0yNDYyLDcgKzI0NjIsNyBAQCBtYXRjaF9jb25maWdfdG9fdmlzdWFsKEVHTERp
+c3BsYXkgZWdsX2Rpc3BsYXksCiAJCQkJJmlkKSkKIAkJCWNvbnRpbnVlOwogCi0JCWlmIChpZCA9
+PSB2aXN1YWxfaWQpCisJCWlmIChpZCA9PSB2aXN1YWxfaWQgfHwgaWQgPT0gMCkKIAkJCXJldHVy
+biBpOwogCX0KIAotLSAKMS45LjEKCg==
+
+--_005_c0d19df292da49ac8ccfafa9fa91eb62ticom_--
