@@ -1,38 +1,59 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7D5D8E00E88; Wed, 14 Feb 2018 19:20:09 -0800 (PST)
+	id 8FFE8E00E00; Fri, 16 Feb 2018 07:47:21 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	UPPERCASE_50_75 autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.19.17 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04F57E00D17
-	for <meta-ti@yoctoproject.org>; Wed, 14 Feb 2018 19:20:07 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E8F07204AF;
-	Thu, 15 Feb 2018 03:20:06 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id A5QUdDCxYqT3; Thu, 15 Feb 2018 03:20:06 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B14432017C;
-	Thu, 15 Feb 2018 03:20:05 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 4417D1632A7;
-	Wed, 14 Feb 2018 22:20:05 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 14 Feb 2018 22:20:02 -0500
-Message-Id: <1518664803-56132-1-git-send-email-denys@ti.com>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.0 UPPERCASE_50_75 message body is 50-75% uppercase
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04CAEE00DE3
+	for <meta-ti@yoctoproject.org>; Fri, 16 Feb 2018 07:47:19 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w1GFlJHO032032
+	for <meta-ti@yoctoproject.org>; Fri, 16 Feb 2018 09:47:19 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1518796039;
+	bh=3tvOlClifUcpZUs9+mRLnbG9fNr07qw2NpdH69N+81E=;
+	h=From:To:CC:Subject:Date;
+	b=mfVVUC7ApUVnyItRoI+kKGyNvRsl9rLxv7McwCerlXm1iHtBoGv9G6ysX0tnKNhiM
+	WmClnEN3tVmV0nkKsyM9NcCwl4VaSPmPE8rGQZ4ekj+CkMXM17HjBQ0fvxhAm1//R2
+	o/z0PZwtbi5duk+QPrMMcIjPh4GqucBzBsVrlwW8=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w1GFlJJ7031373
+	for <meta-ti@yoctoproject.org>; Fri, 16 Feb 2018 09:47:19 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Fri, 16 Feb 2018 09:47:19 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Fri, 16 Feb 2018 09:47:18 -0600
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w1GFlIXh003069;
+	Fri, 16 Feb 2018 09:47:18 -0600
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 16 Feb 2018 10:38:53 -0500
+Message-ID: <1518795533-30393-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [rocko/master][PATCH 1/2] linux-ti-staging: upgrade to 4.14
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [morty/rocko/master][PATCH] ti-paths: add missing NDK_INSTALL_DIR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,241 +66,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Feb 2018 03:20:09 -0000
+X-List-Received-Date: Fri, 16 Feb 2018 15:47:21 -0000
+Content-Type: text/plain
 
-Some DTBs have changed, am57xx-evm moved to DT overlays.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- conf/machine/am57xx-evm.conf                                      | 3 +--
- conf/machine/dra7xx-evm.conf                                      | 7 ++++---
- .../{linux-ti-staging-4.9 => linux-ti-staging-4.14}/defconfig     | 0
- .../dra7xx/defconfig                                              | 0
- .../{linux-ti-staging-4.9 => linux-ti-staging-4.14}/k2g/defconfig | 0
- .../keystone/defconfig                                            | 0
- .../omapl138/defconfig                                            | 0
- .../ti33x/defconfig                                               | 0
- .../ti43x/defconfig                                               | 0
- .../defconfig                                                     | 0
- .../dra7xx/defconfig                                              | 0
- .../k2g/defconfig                                                 | 0
- .../keystone/defconfig                                            | 0
- .../ti33x/defconfig                                               | 0
- .../ti43x/defconfig                                               | 0
- .../{linux-ti-staging-rt_4.9.bb => linux-ti-staging-rt_4.14.bb}   | 8 ++++----
- .../defconfig                                                     | 0
- .../dra7xx/defconfig                                              | 0
- .../k2g/defconfig                                                 | 0
- .../keystone/defconfig                                            | 0
- .../omapl138/defconfig                                            | 0
- .../ti33x/defconfig                                               | 0
- .../ti43x/defconfig                                               | 0
- ...ti-staging-systest_4.9.bb => linux-ti-staging-systest_4.14.bb} | 4 ++--
- .../linux/{linux-ti-staging_4.9.bb => linux-ti-staging_4.14.bb}   | 8 ++++----
- 25 files changed, 15 insertions(+), 15 deletions(-)
- rename recipes-kernel/linux/{linux-ti-staging-4.9 => linux-ti-staging-4.14}/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-4.9 => linux-ti-staging-4.14}/dra7xx/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-4.9 => linux-ti-staging-4.14}/k2g/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-4.9 => linux-ti-staging-4.14}/keystone/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-4.9 => linux-ti-staging-4.14}/omapl138/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-4.9 => linux-ti-staging-4.14}/ti33x/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-4.9 => linux-ti-staging-4.14}/ti43x/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-rt-4.9 => linux-ti-staging-rt-4.14}/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-rt-4.9 => linux-ti-staging-rt-4.14}/dra7xx/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-rt-4.9 => linux-ti-staging-rt-4.14}/k2g/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-rt-4.9 => linux-ti-staging-rt-4.14}/keystone/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-rt-4.9 => linux-ti-staging-rt-4.14}/ti33x/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-rt-4.9 => linux-ti-staging-rt-4.14}/ti43x/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-rt_4.9.bb => linux-ti-staging-rt_4.14.bb} (39%)
- rename recipes-kernel/linux/{linux-ti-staging-systest-4.9 => linux-ti-staging-systest-4.14}/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-systest-4.9 => linux-ti-staging-systest-4.14}/dra7xx/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-systest-4.9 => linux-ti-staging-systest-4.14}/k2g/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-systest-4.9 => linux-ti-staging-systest-4.14}/keystone/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-systest-4.9 => linux-ti-staging-systest-4.14}/omapl138/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-systest-4.9 => linux-ti-staging-systest-4.14}/ti33x/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-systest-4.9 => linux-ti-staging-systest-4.14}/ti43x/defconfig (100%)
- rename recipes-kernel/linux/{linux-ti-staging-systest_4.9.bb => linux-ti-staging-systest_4.14.bb} (55%)
- rename recipes-kernel/linux/{linux-ti-staging_4.9.bb => linux-ti-staging_4.14.bb} (93%)
+ recipes-ti/includes/ti-paths.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 1832548..7724be3 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -11,8 +11,7 @@ IMAGE_FSTYPES += "tar.xz"
- SERIAL_CONSOLE = "115200 ttyS2"
- 
- KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb \
--                    am57xx-evm.dtb am57xx-evm-cam-mt9t111.dtb am57xx-evm-cam-ov10635.dtb \
--                    am57xx-evm-reva3.dtb am57xx-evm-reva3-cam-mt9t111.dtb am57xx-evm-reva3-cam-ov10635.dtb \
-+                    ti/am57xx-evm.dtbo ti/mt9t111.dtbo ti/ov10635.dtbo \
-                     am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb \
-                     am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb \
-                     am574x-idk.dtb am574x-idk-lcd-osd101t2587.dtb \
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 7db9ff6..e0717c5 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -10,10 +10,11 @@ IMAGE_FSTYPES += "tar.xz"
- 
- SERIAL_CONSOLE = "115200 ttyS0"
- 
--KERNEL_DEVICETREE = "dra7-evm.dtb dra7-evm-lcd-lg.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb \
--                    dra72-evm.dtb dra72-evm-lcd-lg.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
-+KERNEL_DEVICETREE = "dra7-evm.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb \
-+                    dra72-evm.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
-                     dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb \
--                    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb dra76-evm.dtb dra76-evm-tfp410.dtb"
-+                    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb \
-+                    dra76-evm.dtb dra76-evm-tfp410.dtb"
- 
- UBOOT_MACHINE = "dra7xx_evm_config"
- 
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-4.14/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-4.9/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-4.14/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-4.14/dra7xx/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-4.9/dra7xx/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-4.14/dra7xx/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-4.14/k2g/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-4.9/k2g/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-4.14/k2g/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-4.14/keystone/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-4.9/keystone/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-4.14/keystone/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/omapl138/defconfig b/recipes-kernel/linux/linux-ti-staging-4.14/omapl138/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-4.9/omapl138/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-4.14/omapl138/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-4.14/ti33x/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-4.9/ti33x/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-4.14/ti33x/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-4.14/ti43x/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-4.9/ti43x/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-4.14/ti43x/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.14/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-rt-4.9/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-rt-4.14/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.14/dra7xx/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-rt-4.9/dra7xx/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-rt-4.14/dra7xx/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.14/k2g/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-rt-4.9/k2g/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-rt-4.14/k2g/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.14/keystone/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-rt-4.9/keystone/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-rt-4.14/keystone/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.14/ti33x/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-rt-4.9/ti33x/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-rt-4.14/ti33x/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-rt-4.14/ti43x/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-rt-4.9/ti43x/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-rt-4.14/ti43x/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-similarity index 39%
-rename from recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-rename to recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-index f8b3584..802a8b1 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-@@ -1,9 +1,9 @@
--require linux-ti-staging_4.9.bb
-+require linux-ti-staging_4.14.bb
- 
- # Look in the generic major.minor directory for files
- # This will have priority over generic non-rt path
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
- 
--BRANCH = "ti-rt-linux-4.9.y"
-+BRANCH = "ti-rt-linux-4.14.y"
- 
--SRCREV = "764089ed2a847e9d4c06c0e0baaaeaf42aa2d99f"
-+SRCREV = "92c3e398509d57ea7ad40ac87aa5b7ed5e5014e2"
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.14/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-systest-4.9/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-systest-4.14/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.14/dra7xx/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-systest-4.9/dra7xx/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-systest-4.14/dra7xx/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.14/k2g/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-systest-4.9/k2g/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-systest-4.14/k2g/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.14/keystone/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-systest-4.9/keystone/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-systest-4.14/keystone/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/omapl138/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.14/omapl138/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-systest-4.9/omapl138/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-systest-4.14/omapl138/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.14/ti33x/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-systest-4.9/ti33x/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-systest-4.14/ti33x/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig b/recipes-kernel/linux/linux-ti-staging-systest-4.14/ti43x/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging-systest-4.9/ti43x/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-systest-4.14/ti43x/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb b/recipes-kernel/linux/linux-ti-staging-systest_4.14.bb
-similarity index 55%
-rename from recipes-kernel/linux/linux-ti-staging-systest_4.9.bb
-rename to recipes-kernel/linux/linux-ti-staging-systest_4.14.bb
-index c53f94c..5fa8fe2 100644
---- a/recipes-kernel/linux/linux-ti-staging-systest_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-systest_4.14.bb
-@@ -1,5 +1,5 @@
--require linux-ti-staging_4.9.bb
-+require linux-ti-staging_4.14.bb
- 
- # Look in the generic major.minor directory for files
- # This will have priority over generic non-rt path
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.9.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-similarity index 93%
-rename from recipes-kernel/linux/linux-ti-staging_4.9.bb
-rename to recipes-kernel/linux/linux-ti-staging_4.14.bb
-index 467cddc..613fb58 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.9.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-@@ -10,7 +10,7 @@ require recipes-kernel/linux/cmem.inc
- require recipes-kernel/linux/ti-uio.inc
- 
- # Look in the generic major.minor directory for files
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
- 
- # Pull in the devicetree files into the rootfs
- RDEPENDS_kernel-base += "kernel-devicetree"
-@@ -52,10 +52,10 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
- S = "${WORKDIR}/git"
- 
--BRANCH = "ti-lsk-linux-4.9.y"
-+BRANCH = "ti-lsk-linux-4.14.y"
- 
--SRCREV = "89d085d1a407961d43d2492803facb6a8e678fda"
--PV = "4.9.69+git${SRCPV}"
-+SRCREV = "36a950c35adcec9c55c20ef1deb5e33c87ae0a3f"
-+PV = "4.14.19+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 3745ec0..4f99d5e 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -83,6 +83,7 @@ export IPC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${IPC_INSTALL_DIR_RECIPE}"
+ export LINK_INSTALL_DIR       = "${STAGING_DIR_TARGET}${LINK_INSTALL_DIR_RECIPE}"
+ export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR_TARGET}${LINUXUTILS_INSTALL_DIR_RECIPE}"
+ export LPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${LPM_INSTALL_DIR_RECIPE}"
++export NDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${NDK_INSTALL_DIR_RECIPE}"
+ export OMX_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMX_INSTALL_DIR_RECIPE}"
+ export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSBIOS_INSTALL_DIR_RECIPE}"
+ export SYSLINK_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSLINK_INSTALL_DIR_RECIPE}"
 -- 
 2.7.4
 
