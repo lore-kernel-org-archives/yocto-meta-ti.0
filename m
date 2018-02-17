@@ -1,59 +1,38 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8FFE8E00E00; Fri, 16 Feb 2018 07:47:21 -0800 (PST)
+	id C6A72E01064; Fri, 16 Feb 2018 17:02:13 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
-	UPPERCASE_50_75 autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.17 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.0 UPPERCASE_50_75 message body is 50-75% uppercase
-Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04CAEE00DE3
-	for <meta-ti@yoctoproject.org>; Fri, 16 Feb 2018 07:47:19 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w1GFlJHO032032
-	for <meta-ti@yoctoproject.org>; Fri, 16 Feb 2018 09:47:19 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1518796039;
-	bh=3tvOlClifUcpZUs9+mRLnbG9fNr07qw2NpdH69N+81E=;
-	h=From:To:CC:Subject:Date;
-	b=mfVVUC7ApUVnyItRoI+kKGyNvRsl9rLxv7McwCerlXm1iHtBoGv9G6ysX0tnKNhiM
-	WmClnEN3tVmV0nkKsyM9NcCwl4VaSPmPE8rGQZ4ekj+CkMXM17HjBQ0fvxhAm1//R2
-	o/z0PZwtbi5duk+QPrMMcIjPh4GqucBzBsVrlwW8=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w1GFlJJ7031373
-	for <meta-ti@yoctoproject.org>; Fri, 16 Feb 2018 09:47:19 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Fri, 16 Feb 2018 09:47:19 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Fri, 16 Feb 2018 09:47:18 -0600
-Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w1GFlIXh003069;
-	Fri, 16 Feb 2018 09:47:18 -0600
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Feb 2018 10:38:53 -0500
-Message-ID: <1518795533-30393-1-git-send-email-j-stiffler@ti.com>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A352E00F84
+	for <meta-ti@yoctoproject.org>; Fri, 16 Feb 2018 17:02:12 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B092C20A8A;
+	Sat, 17 Feb 2018 01:02:11 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id DcS6BhxZlYQX; Sat, 17 Feb 2018 01:02:11 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8CEE320862;
+	Sat, 17 Feb 2018 01:02:10 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id E7E62163296;
+	Fri, 16 Feb 2018 20:02:09 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Fri, 16 Feb 2018 20:02:09 -0500
+Message-Id: <1518829329-18311-1-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/rocko/master][PATCH] ti-paths: add missing NDK_INSTALL_DIR
+Subject: [rocko/master][PATCH] linux-ti-staging, am57xx-evm.conf: udpate to the latest, add support for .itb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,26 +45,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Feb 2018 15:47:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 17 Feb 2018 01:02:13 -0000
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/includes/ti-paths.inc | 1 +
- 1 file changed, 1 insertion(+)
+ conf/machine/am57xx-evm.conf                     | 2 +-
+ recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.14.bb    | 6 ++++--
+ 3 files changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 3745ec0..4f99d5e 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -83,6 +83,7 @@ export IPC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${IPC_INSTALL_DIR_RECIPE}"
- export LINK_INSTALL_DIR       = "${STAGING_DIR_TARGET}${LINK_INSTALL_DIR_RECIPE}"
- export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR_TARGET}${LINUXUTILS_INSTALL_DIR_RECIPE}"
- export LPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${LPM_INSTALL_DIR_RECIPE}"
-+export NDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${NDK_INSTALL_DIR_RECIPE}"
- export OMX_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMX_INSTALL_DIR_RECIPE}"
- export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSBIOS_INSTALL_DIR_RECIPE}"
- export SYSLINK_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSLINK_INSTALL_DIR_RECIPE}"
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 7724be3..3419b39 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -11,7 +11,7 @@ IMAGE_FSTYPES += "tar.xz"
+ SERIAL_CONSOLE = "115200 ttyS2"
+ 
+ KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb \
+-                    ti/am57xx-evm.dtbo ti/mt9t111.dtbo ti/ov10635.dtbo \
++                    ti/am57xx-evm.dtbo ti/mt9t111.dtbo ti/ov10635.dtbo ti/am57xx-evm.itb \
+                     am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb \
+                     am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb \
+                     am574x-idk.dtb am574x-idk-lcd-osd101t2587.dtb \
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
+index 802a8b1..b9dcbdc 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
+ 
+ BRANCH = "ti-rt-linux-4.14.y"
+ 
+-SRCREV = "92c3e398509d57ea7ad40ac87aa5b7ed5e5014e2"
++SRCREV = "13c0583ddb2c981891bd2413fa1e300ff56cb6bf"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+index 613fb58..7bb5c62 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+@@ -54,8 +54,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-lsk-linux-4.14.y"
+ 
+-SRCREV = "36a950c35adcec9c55c20ef1deb5e33c87ae0a3f"
+-PV = "4.14.19+git${SRCPV}"
++SRCREV = "ceefd552693f88d40d447fdb5ac5c42104cd2632"
++PV = "4.14.20+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
+@@ -65,3 +65,5 @@ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ KERNEL_GIT_PROTOCOL = "git"
+ SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
+             file://defconfig"
++
++FILES_kernel-devicetree += "/${KERNEL_IMAGEDEST}/*.itb"
 -- 
 2.7.4
 
