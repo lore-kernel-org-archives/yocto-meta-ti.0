@@ -1,38 +1,58 @@
-Return-Path: <denis@denix.org>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6403E00F67; Wed, 28 Feb 2018 16:09:57 -0800 (PST)
+	id D7C0CE00E97; Thu,  1 Mar 2018 08:20:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	URI_HEX autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.77 listed in list.dnswl.org]
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F1A0E00EBD
-	for <meta-ti@yoctoproject.org>; Wed, 28 Feb 2018 16:09:54 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 2F99320B77;
-	Thu,  1 Mar 2018 00:09:54 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id kv_JrV_3ne1g; Thu,  1 Mar 2018 00:09:54 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E7C0120059;
-	Thu,  1 Mar 2018 00:09:52 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 25FAF1632D4;
-	Wed, 28 Feb 2018 19:09:52 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Wed, 28 Feb 2018 19:09:45 -0500
-Message-Id: <1519862990-49259-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [rocko/master][PATCH 1/5] recipes: remove outdated recipes, some deps are no longer satisfied
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B003EE00E5C
+	for <meta-ti@yoctoproject.org>; Thu,  1 Mar 2018 08:20:05 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w21GK4Eo008771
+	for <meta-ti@yoctoproject.org>; Thu, 1 Mar 2018 10:20:04 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1519921204;
+	bh=u9Q/A5/uGRze3teNw3X1CONnZpii5oZMVuxe+zq6hCk=;
+	h=From:To:CC:Subject:Date;
+	b=siSjJ2HTMDCR4DrcM53dkBS7EPQCD3CiJFKhLTqhCIu7SflCATDzK6KxD5OHtemL8
+	3rd0MbpMMWVy2dkVOuHvqcfLuqNWfPHI++xZx4GkCNWdNFQNGui9yXrHqXKpCQQ5X9
+	tWrpjnHEWHskPij+tHcNavo4Vhf1uz0qwe9B6ma8=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w21GK40E019333
+	for <meta-ti@yoctoproject.org>; Thu, 1 Mar 2018 10:20:04 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE103.ent.ti.com
+	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Thu, 1 Mar 2018 10:20:04 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Thu, 1 Mar 2018 10:20:04 -0600
+Received: from tigfx.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w21GK2e9032492;
+	Thu, 1 Mar 2018 10:20:03 -0600
+From: Anand Balagopalakrishnan <anandb@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 1 Mar 2018 21:49:55 +0530
+Message-ID: <1519921195-10423-1-git-send-email-anandb@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [FOR-KROGOTH 1/1] ti-sgx-ddk-um: wlpvr_ws: Map DBM buffers and populate meminfo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,260 +65,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2018 00:09:57 -0000
+X-List-Received-Date: Thu, 01 Mar 2018 16:20:06 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 ---
- recipes-core/packagegroups/packagegroup-ti-test.bb | 26 ----------
- recipes-ti/beagleboard/beaglebone-tester.bb        | 56 ----------------------
- recipes-ti/beagleboard/bonescript.bb               | 38 ---------------
- recipes-ti/beagleboard/bonescript/bone101.service  | 11 -----
- recipes-ti/beagleboard/bonescript/bonescript-git   | 11 -----
- recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb  | 55 ---------------------
- 6 files changed, 197 deletions(-)
- delete mode 100644 recipes-core/packagegroups/packagegroup-ti-test.bb
- delete mode 100644 recipes-ti/beagleboard/beaglebone-tester.bb
- delete mode 100644 recipes-ti/beagleboard/bonescript.bb
- delete mode 100644 recipes-ti/beagleboard/bonescript/bone101.service
- delete mode 100644 recipes-ti/beagleboard/bonescript/bonescript-git
- delete mode 100644 recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-core/packagegroups/packagegroup-ti-test.bb b/recipes-core/packagegroups/packagegroup-ti-test.bb
-deleted file mode 100644
-index 6971f07..0000000
---- a/recipes-core/packagegroups/packagegroup-ti-test.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--DESCRIPTION = "Extended task to get System Test specific apps"
--LICENSE = "MIT"
--PR = "r1"
--
--inherit packagegroup
--
--TEST = "\
--    bonnie++ \
--    hdparm \
--    iozone3 \
--    iperf \
--    lmbench \
--    rt-tests \
--    evtest \
--    bc \
--    memtester \
--    "
--
--TI_TEST = "\
--    ltp-ddt \
--    "
--
--RDEPENDS_${PN} = "\
--    ${TEST} \
--    ${TI_TEST} \
--    "
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-deleted file mode 100644
-index 66b98a4..0000000
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ /dev/null
-@@ -1,56 +0,0 @@
--DESCRIPTION = "BeagleBone tester scripts"
--HOMEPAGE = "http://beagleboard.org/support"
--
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
--
--# only scripts and data
--inherit allarch
--
--PR = "r20"
--
--SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
--          "
--SRCREV = "487a13e2e4faaafa40ba5430600e6aeecf9581a8"
--
--S = "${WORKDIR}/git"
--
--do_install() {
--	install -d ${D}${localstatedir}/lib/bone-tester/component/data/
--	install -d ${D}${localstatedir}/lib/bone-tester/init-scripts/
--	install -d ${D}${localstatedir}/lib/bone-tester/lib
--	install -d ${D}${base_libdir}/systemd/system/multi-user.target.wants/
--	install -d ${D}/boot/
--	install -m 0755 ${S}/bone-tester/init-scripts/uEnv.txt ${D}/boot/uEnv.txt
--
--	# systemd configuration
--	ln -s ../bone-tester.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/bone-tester.service
--	install -m 0755 ${S}/bone-tester/init-scripts/bone-tester.service ${D}${base_libdir}/systemd/system/bone-tester.service
--	install -m 0755 ${S}/bone-tester/init-scripts/init.sh ${D}${localstatedir}/lib/bone-tester/init-scripts/init.sh
--
--	for i in $(find ${S}/bone-tester/component/ -maxdepth 1 -type f) ; do
--		install -m 0755 ${i} ${D}${localstatedir}/lib/bone-tester/component/
--	done
--	for i in ${S}/bone-tester/component/data/* ; do
--		install -m 0755 ${i} ${D}${localstatedir}/lib/bone-tester/component/data/
--	done
--	for i in ${S}/bone-tester/lib/* ; do
--		install -m 0755 ${i} ${D}${localstatedir}/lib/bone-tester/lib/
--	done
--
--	install -d ${D}${bindir}
--	install -m 0755 ${S}/testaudio ${D}${bindir}
--
--}
--
--
--FILES_${PN} += "${base_libdir}/systemd \
--                /boot \
--               "
--
--RDEPENDS_${PN} = "alsa-utils-aplay sox iputils memtester"
--RRECOMMENDS_${PN} = "kernel-module-g-zero \
--                     kernel-module-g-mass-storage \
--                     kernel-module-g-file-storage \
--                     kernel-module-smsc95xx"
--
-diff --git a/recipes-ti/beagleboard/bonescript.bb b/recipes-ti/beagleboard/bonescript.bb
-deleted file mode 100644
-index b9dfbe6..0000000
---- a/recipes-ti/beagleboard/bonescript.bb
-+++ /dev/null
-@@ -1,38 +0,0 @@
--DESCRIPTION = "Scripting tools for the BeagleBoard and BeagleBone"
--
--PR = "r15"
--
--inherit systemd
--
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=659ee0c98db2664403c769d6b9ab50eb"
--
--SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-6af82b41178c37644399b19039ea7e80c1dbf8ee.tar.bz2 \
--           file://bonescript-git \
--           file://bone101.service \
--          "
--SRC_URI[md5sum] = "e5e214857afbd2e59b52171e60810be2"
--SRC_URI[sha256sum] = "e703416a63406c8b6c89fb1079406833ce6a9eb0ae1ba0a55fe3802b83186c50"
--
--S = "${WORKDIR}/bonescript"
--
--do_install() {
--	install -d ${D}${localstatedir}/lib/cloud9/
--	cp -a ${S}/* ${D}${localstatedir}/lib/cloud9/
--	cp -a ${S}/.git ${D}${localstatedir}/lib/cloud9/
--
--	install -d ${D}${base_libdir}/systemd/system
--	install -m 0644 ${WORKDIR}/bone101.service ${D}${base_libdir}/systemd/system
--
--	rm -f ${D}${localstatedir}/lib/cloud9/node_modules/binary/node_modules/put/test/c/itof
--	rm -f ${D}${localstatedir}/lib/cloud9/node_modules/binary/node_modules/put/test/c/ftoi
--}
--
--NATIVE_SYSTEMD_SUPPORT = "1"
--SYSTEMD_PACKAGES = "${PN}"
--SYSTEMD_SERVICE_${PN} = "bone101.service"
--
--FILES_${PN} += "${localstatedir} ${base_libdir}/systemd/system"
--CONFFILES_${PN} += "${localstatedir}/lib/cloud9/.git/config"
--RDEPENDS_${PN} = "nodejs cloud9"
--RRECOMMENDS_${PN} = "git"
-diff --git a/recipes-ti/beagleboard/bonescript/bone101.service b/recipes-ti/beagleboard/bonescript/bone101.service
-deleted file mode 100644
-index 49562ba..0000000
---- a/recipes-ti/beagleboard/bonescript/bone101.service
-+++ /dev/null
-@@ -1,11 +0,0 @@
--[Unit]
--Description=Beaglebone 101 presentation
--ConditionPathExists=|/var/lib/cloud9
--
--[Service]
--WorkingDirectory=/var/lib/cloud9
--ExecStart=/usr/bin/node bone101.js
--
--[Install]
--WantedBy=multi-user.target
--
-diff --git a/recipes-ti/beagleboard/bonescript/bonescript-git b/recipes-ti/beagleboard/bonescript/bonescript-git
-deleted file mode 100644
-index d9e66cf..0000000
---- a/recipes-ti/beagleboard/bonescript/bonescript-git
-+++ /dev/null
-@@ -1,11 +0,0 @@
--[core]
--	repositoryformatversion = 0
--	filemode = true
--	bare = false
--	logallrefupdates = true
--[remote "origin"]
--	fetch = +refs/heads/*:refs/remotes/origin/*
--	url = git://github.com/jadonk/bonescript.git
--[branch "master"]
--	remote = origin
--	merge = refs/heads/master
-diff --git a/recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb b/recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb
-deleted file mode 100644
-index dd493f8..0000000
---- a/recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb
-+++ /dev/null
-@@ -1,55 +0,0 @@
--DESCRIPTION = "eZ430 Chronos Tools - MSP430 Development Kit/Watch"
--HOMEPAGE = "http://processors.wiki.ti.com/index.php/EZ430-Chronos"
--LICENSE = "BSD-3-Clause"
--# We can't use the actualy source file, since it has space in its name :(
--LIC_FILES_CHKSUM = "file://eZ430-Chronos_CC_1_1.tcl;md5=59ba6ee0a26650ec660a4e65a9462806"
--
--SECTION = "multimedia"
--
--inherit allarch
--
--PV = "1_05_00_00"
--
--SRC_URI = "http://focus.ti.com/lit/sw/slac388/slac388.zip;name=slac388zip"
--
--SRC_URI[slac388zip.md5sum] = "22d4104a07af584222828fb377793796"
--SRC_URI[slac388zip.sha256sum] = "1c9cd1e36015e8db3b36c98be41907628144b76002b3f76b27fd310f4bd35ad7"
--
--require ../includes/ti-paths.inc
--require ../includes/ti-staging.inc
--require ../includes/ti-eula-unpack.inc
--
--S = "${WORKDIR}/ti/eZ430-Chronos"
--
--BINFILE="Chronos-Setup"
--TI_BIN_UNPK_CMDS="Y:workdir:"
--
--do_unpack_append() {
--    os.system('mv "Texas Instruments" ti')
--}
--
--do_configure() {
--	cp Control\ Center/Chronos\ Control\ Center/eZ430-Chronos_CC_1_1.tcl ${S}
--}
--
--do_compile() {
--    echo "Do Nothing for Now"
--}
--
--do_install() {
--
--    install -d ${D}/${installdir}/ti-msp430-chronos-apps
--    cp -pPrf "${S}"/"Control Center"/* ${D}/${installdir}/ti-msp430-chronos-apps
--
--    # Remove dos formatting
--    dos2unix "${D}/${installdir}/ti-msp430-chronos-apps/Chronos Data Logger"/*
--    dos2unix "${D}/${installdir}/ti-msp430-chronos-apps/Chronos Control Center"/*
--
--    # Should probably also remove hardcoded script reference to tcl8.5
--}
--
--PACKAGES += "ti-msp430-chronos-apps"
--FILES_ti-msp430-chronos-apps = "${installdir}/ti-msp430-chronos-apps/*"
--
--RDEPENDS_ti-msp430-chronos-apps += " tcl tk xdotool"
--RRECOMMENDS_ti-msp430-chronos-apps = "kernel-module-cdc-acm"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index 3a9a2b2..3e689cb 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ BRANCH = "ti-img-sgx/${PV}"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "d184140aa5c17e13e1bf21151f1a7bc068bdf8bf"
++SRCREV = "2736a396f9c801fc0818d830f8a3215aeb8b6534"
+ 
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -31,7 +31,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ 
+ inherit update-rc.d
+ 
+-PR = "r23"
++PR = "r24"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ 
+ DEPENDS += "libdrm udev libgbm wayland libffi"
 -- 
-2.7.4
+1.9.1
 
 
