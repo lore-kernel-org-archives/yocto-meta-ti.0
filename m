@@ -1,58 +1,38 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 00E36E00E47; Thu,  1 Mar 2018 11:59:52 -0800 (PST)
+	id C9A30E00E31; Thu,  1 Mar 2018 12:13:34 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58409E00DC6
-	for <meta-ti@yoctoproject.org>; Thu,  1 Mar 2018 11:59:51 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w21JxpZr000426
-	for <meta-ti@yoctoproject.org>; Thu, 1 Mar 2018 13:59:51 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1519934391;
-	bh=Thy1B588c4QdzQzv/+0YddWGsZhtCShxR4DKfCMfJrk=;
-	h=From:To:CC:Subject:Date;
-	b=JrzJGClEalMh5CPX26zqUO6p16Q1Z2u399oa1ARQ5U44MbAuzZcnSEuKlwms/9Nsw
-	mWxBKks4TClTLWbKqtA+H2iabjUspruojKP9UoVFf1CY4AZ7P8TmfSbc6m90nI2f9e
-	mvBjc61ErmlnP2DQ83eh7bdjBrtcudBiA+bWb7+M=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w21JxpSH011189
-	for <meta-ti@yoctoproject.org>; Thu, 1 Mar 2018 13:59:51 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Thu, 1 Mar 2018 13:59:51 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Thu, 1 Mar 2018 13:59:51 -0600
-Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w21Jxo79028774;
-	Thu, 1 Mar 2018 13:59:50 -0600
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 1 Mar 2018 14:59:49 -0500
-Message-ID: <1519934389-61095-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/rocko][PATCH] ti-ipc-rtos: Correction to 3.47.01.00 version
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41784E0047F
+	for <meta-ti@yoctoproject.org>; Thu,  1 Mar 2018 12:13:33 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 54CBB2086C;
+	Thu,  1 Mar 2018 20:13:33 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id WqVMXFb7wsdc; Thu,  1 Mar 2018 20:13:33 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 262FD20862;
+	Thu,  1 Mar 2018 20:13:31 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 5E3361632C1;
+	Thu,  1 Mar 2018 15:13:31 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Thu,  1 Mar 2018 15:13:30 -0500
+Message-Id: <1519935210-42085-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [rocko/master][PATCH] eudev: simplify by using ti-soc override
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,46 +45,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2018 19:59:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 01 Mar 2018 20:13:34 -0000
 
-Includes documentation correction and build optimization for examples
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-rtos.inc | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ recipes-core/udev/eudev_%.bbappend | 18 +-----------------
+ 1 file changed, 1 insertion(+), 17 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 95c538e..6bc644e 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,11 +24,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+diff --git a/recipes-core/udev/eudev_%.bbappend b/recipes-core/udev/eudev_%.bbappend
+index 620500b..fc68b90 100644
+--- a/recipes-core/udev/eudev_%.bbappend
++++ b/recipes-core/udev/eudev_%.bbappend
+@@ -7,23 +7,7 @@ SRC_URI_append = " \
  
--# Corresponds to tag: 3.47.01.00
--SRCREV_ipc-examples = "e71b82187a324faa9394b83e39495be38255f05b"
-+# Corresponds to tag: 3.47.01.00A
-+SRCREV_ipc-examples = "7f23e9b0ae395461b0854881dcc174392355d854"
+ PR_append = ".3"
  
--# Corresponds to tag: 3.47.01.00
--SRCREV_ipc-metadata = "f78329ff0b2c65469271dab59e232e6e0dc82dc7"
-+# Corresponds to tag: 3.47.01.00A
-+SRCREV_ipc-metadata = "72578cce9c9f9a932eb22b3397b46131efb12d69"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-@@ -36,7 +36,7 @@ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- RELEASE_TYPE = "GA"
- RELEASE_SUFFIX = ""
- 
--PR = "${INC_PR}.r3"
-+PR = "${INC_PR}.r4"
- 
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
+-install_ti_rules() {
++do_install_append_ti-soc() {
+     install -m 0644 ${WORKDIR}/omap-tty.rules ${D}${sysconfdir}/udev/rules.d/
+     install -m 0644 ${WORKDIR}/firmware.rules ${D}${sysconfdir}/udev/rules.d/
+ }
+-
+-do_install_append_ti33x() {
+-    install_ti_rules
+-}
+-
+-do_install_append_ti43x() {
+-    install_ti_rules
+-}
+-
+-do_install_append_omap-a15() {
+-    install_ti_rules
+-}
+-
+-do_install_append_keystone() {
+-    install_ti_rules
+-}
 -- 
-1.9.1
+2.7.4
 
 
