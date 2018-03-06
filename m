@@ -1,58 +1,38 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6BC71E00823; Tue,  6 Mar 2018 08:08:00 -0800 (PST)
+	id C51F0E00E7D; Tue,  6 Mar 2018 13:14:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11521E00DE6
-	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2018 08:07:58 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w26G7wtb030039
-	for <meta-ti@yoctoproject.org>; Tue, 6 Mar 2018 10:07:58 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1520352478;
-	bh=ObMjH43yVgvzGZC1vC7aZt3yqdjIFnLQFXmLEMUzqjk=;
-	h=From:To:Subject:Date;
-	b=Zvs9CGPxxNimQWQqocyqUzOnN195qoomH+RtLMp3wdHrkYOEXaflpH7wmulW/K4oR
-	Zmg5khnJ86obsfEjvEVXhVaZUUI+qSK3HHAZuXTQwxNUguVBDN5Kqgacn5CfXGAzIE
-	60qhEh0R1bPvFoDXR1EtPKvkIFaxFrpOBg8inBAo=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w26G7wOh026358
-	for <meta-ti@yoctoproject.org>; Tue, 6 Mar 2018 10:07:58 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Tue, 6 Mar 2018 10:07:57 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Tue, 6 Mar 2018 10:07:57 -0600
-Received: from uda0850410.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w26G7vDY014085
-	for <meta-ti@yoctoproject.org>; Tue, 6 Mar 2018 10:07:57 -0600
-From: Eric Ruei <e-ruei1@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 6 Mar 2018 11:07:53 -0500
-Message-ID: <1520352473-7431-1-git-send-email-e-ruei1@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/rocko/master][PATCH] ti-gc320-libs: bump SRCREV to pick up the latest version
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF8D7E00823
+	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2018 13:14:40 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B03AE20AD5;
+	Tue,  6 Mar 2018 21:14:39 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id dtbxT3URXT8O; Tue,  6 Mar 2018 21:14:39 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 685DF20174;
+	Tue,  6 Mar 2018 21:14:38 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id D7EFF16331D;
+	Tue,  6 Mar 2018 16:14:37 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Tue,  6 Mar 2018 16:14:37 -0500
+Message-Id: <1520370877-26257-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [rocko/master][PATCH] u-boot-ti-staging: update to ti2018.00-rc1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,49 +45,113 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2018 16:08:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 06 Mar 2018 21:14:41 -0000
 
-The new version include the 2D API include files
+Also remove AM3 SPL hack
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ ...K-am335x-Work-around-file-expansion-macro.patch | 73 ----------------------
+ recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb    |  6 +-
+ 2 files changed, 2 insertions(+), 77 deletions(-)
+ delete mode 100644 recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch
 
-diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-index 45c8d51..b879c85 100644
---- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-+++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Userspace libraries for GC320 chipset on TI SoCs"
- HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-libs"
- LICENSE = "TI-TSPA"
--LIC_FILES_CHKSUM = "file://Manifest.html;md5=4d759c4e533af6aaeff2af7f405697c2"
-+LIC_FILES_CHKSUM = "file://Manifest.html;md5=a9121e8936ace09820d23f7626daaca5"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
-@@ -10,7 +10,7 @@ CLEANBROKEN = "1"
- BRANCH = "ti-${PV}"
- 
- SRC_URI = "git://git.ti.com/graphics/ti-gc320-libs.git;protocol=git;branch=${BRANCH}"
--SRCREV = "ab0ca5bff345f6c13807fea3c4acabf5f2b9b10a"
-+SRCREV = "c0afab259de59909cfe74c01f3f7fbaa147f94b5"
- 
- # There's only hardfp version available
- python __anonymous() {
-@@ -26,7 +26,7 @@ python __anonymous() {
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch b/recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch
+deleted file mode 100644
+index a1502b2..0000000
+--- a/recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch
++++ /dev/null
+@@ -1,73 +0,0 @@
+-From 374035ab26df67968de5ecfc4983f68f9b0142e4 Mon Sep 17 00:00:00 2001
+-From: Dan Murphy <dmurphy@ti.com>
+-Date: Mon, 5 Mar 2018 14:37:24 -0600
+-Subject: [PATCH] HACK: am335x: Work around file expansion macro
+-
+-When building with the O= directive for AM335 and
+-an excessively long path name the build cannot fit into
+-the SPL region of the AM335.
+-
+-The __FILE__ macro reports the full path of the file and
+-stores it in the data section of the image.
+-
+-As a work around change the BUG() and WARN_ON macros for
+-the AM335 to only report the function and line number that
+-created the issue.  For all other devices report the filename
+-as normal
+-
+-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+----
+- include/linux/bug.h | 21 +++++++++++++++++++--
+- 1 file changed, 19 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/linux/bug.h b/include/linux/bug.h
+-index f07bb716fc..cf3f735dd6 100644
+---- a/include/linux/bug.h
+-+++ b/include/linux/bug.h
+-@@ -6,12 +6,26 @@
+- #include <linux/compiler.h>
+- #include <linux/printk.h>
+- 
+-+#ifdef CONFIG_AM33XX
+-+
+- #define BUG() do { \
+--	printk("BUG at %s:%d/%s()!\n", __FILE__, __LINE__, __func__); \
+-+	printk("BUG in %s():%d!\n", __func__, __LINE__); \
+- 	panic("BUG!"); \
+- } while (0)
+- 
+--#define BUG_ON(condition) do { if (unlikely(condition)) BUG(); } while (0)
+-+#define WARN_ON(condition) ({						\
+-+	int __ret_warn_on = !!(condition);				\
+-+	if (unlikely(__ret_warn_on))					\
+-+		printk("WARNING in /%s():%d!\n", __func__, __LINE__); \
+-+	unlikely(__ret_warn_on);					\
+-+})
+-+
+-+#else
+-+
+-+#define BUG() do { \
+-+	printk("BUG at %s:%d/%s()!\n", __FILE__, __LINE__, __func__); \
+-+	panic("BUG!"); \
+-+} while (0)
+- 
+- #define WARN_ON(condition) ({						\
+- 	int __ret_warn_on = !!(condition);				\
+-@@ -19,6 +33,7 @@
+- 		printk("WARNING at %s:%d/%s()!\n", __FILE__, __LINE__, __func__); \
+- 	unlikely(__ret_warn_on);					\
+- })
+-+#endif /* _CONFIG_AM33XX */
+- 
+- #define WARN_ON_ONCE(condition)	({				\
+- 	static bool __warned;					\
+-@@ -31,4 +46,6 @@
+- 	unlikely(__ret_warn_once);				\
+- })
+- 
+-+#define BUG_ON(condition) do { if (unlikely(condition)) BUG(); } while (0)
+-+
+- #endif	/* _LINUX_BUG_H */
+--- 
+-2.16.1.194.gb2e45c695
+-
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+index 01a71d9..c820feb 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+@@ -1,9 +1,7 @@
+ require u-boot-ti.inc
  
 -PR = "r1"
 +PR = "r2"
  
- S = "${WORKDIR}/git"
+ BRANCH = "ti-u-boot-2018.01"
  
+-SRCREV = "240ae44c5535bb7a2b6553813f5c42a4a1c5772a"
+-
+-SRC_URI_append_ti33x = " file://0001-HACK-am335x-Work-around-file-expansion-macro.patch"
++SRCREV = "7ae3421850d555f3d9397390f39bcb22e64a5147"
 -- 
-1.9.1
+2.7.4
 
 
