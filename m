@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 135B1E00DE0; Mon,  5 Mar 2018 20:03:52 -0800 (PST)
+	id 24B9CE00DA9; Mon,  5 Mar 2018 20:03:52 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,30 +9,32 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6A47E00DA9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C56A3E008FB
 	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2018 20:03:50 -0800 (PST)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D060620A8A;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id EA11620855;
 	Tue,  6 Mar 2018 04:03:49 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id VW8OYJG9hgYa; Tue,  6 Mar 2018 04:03:49 +0000 (UTC)
+	with ESMTP id moBMA8B5aL4S; Tue,  6 Mar 2018 04:03:49 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AFC1520855;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C25C82098D;
 	Tue,  6 Mar 2018 04:03:48 +0000 (UTC)
 Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 51EE116330F;
+	by mail.denix.org (Postfix) with ESMTP id 5EC80163310;
 	Mon,  5 Mar 2018 23:03:48 -0500 (EST)
 From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Mon,  5 Mar 2018 23:03:45 -0500
-Message-Id: <1520309026-19602-1-git-send-email-denys@ti.com>
+Date: Mon,  5 Mar 2018 23:03:46 -0500
+Message-Id: <1520309026-19602-2-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [rocko/master][PATCH 1/2] linux-ti-staging: update to 4.14.24
+In-Reply-To: <1520309026-19602-1-git-send-email-denys@ti.com>
+References: <1520309026-19602-1-git-send-email-denys@ti.com>
+Subject: [rocko/master][PATCH 2/2] u-boot-ti-staging: update to the latest and add patch for AM335 SPL size issue
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,35 +51,106 @@ X-List-Received-Date: Tue, 06 Mar 2018 04:03:52 -0000
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.14.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ ...K-am335x-Work-around-file-expansion-macro.patch | 73 ++++++++++++++++++++++
+ recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb    |  6 +-
+ 2 files changed, 77 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-index 98470f0..1c32cbd 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch b/recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch
+new file mode 100644
+index 0000000..a1502b2
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-ti-staging/0001-HACK-am335x-Work-around-file-expansion-macro.patch
+@@ -0,0 +1,73 @@
++From 374035ab26df67968de5ecfc4983f68f9b0142e4 Mon Sep 17 00:00:00 2001
++From: Dan Murphy <dmurphy@ti.com>
++Date: Mon, 5 Mar 2018 14:37:24 -0600
++Subject: [PATCH] HACK: am335x: Work around file expansion macro
++
++When building with the O= directive for AM335 and
++an excessively long path name the build cannot fit into
++the SPL region of the AM335.
++
++The __FILE__ macro reports the full path of the file and
++stores it in the data section of the image.
++
++As a work around change the BUG() and WARN_ON macros for
++the AM335 to only report the function and line number that
++created the issue.  For all other devices report the filename
++as normal
++
++Signed-off-by: Dan Murphy <dmurphy@ti.com>
++---
++ include/linux/bug.h | 21 +++++++++++++++++++--
++ 1 file changed, 19 insertions(+), 2 deletions(-)
++
++diff --git a/include/linux/bug.h b/include/linux/bug.h
++index f07bb716fc..cf3f735dd6 100644
++--- a/include/linux/bug.h
+++++ b/include/linux/bug.h
++@@ -6,12 +6,26 @@
++ #include <linux/compiler.h>
++ #include <linux/printk.h>
++ 
+++#ifdef CONFIG_AM33XX
+++
++ #define BUG() do { \
++-	printk("BUG at %s:%d/%s()!\n", __FILE__, __LINE__, __func__); \
+++	printk("BUG in %s():%d!\n", __func__, __LINE__); \
++ 	panic("BUG!"); \
++ } while (0)
++ 
++-#define BUG_ON(condition) do { if (unlikely(condition)) BUG(); } while (0)
+++#define WARN_ON(condition) ({						\
+++	int __ret_warn_on = !!(condition);				\
+++	if (unlikely(__ret_warn_on))					\
+++		printk("WARNING in /%s():%d!\n", __func__, __LINE__); \
+++	unlikely(__ret_warn_on);					\
+++})
+++
+++#else
+++
+++#define BUG() do { \
+++	printk("BUG at %s:%d/%s()!\n", __FILE__, __LINE__, __func__); \
+++	panic("BUG!"); \
+++} while (0)
++ 
++ #define WARN_ON(condition) ({						\
++ 	int __ret_warn_on = !!(condition);				\
++@@ -19,6 +33,7 @@
++ 		printk("WARNING at %s:%d/%s()!\n", __FILE__, __LINE__, __func__); \
++ 	unlikely(__ret_warn_on);					\
++ })
+++#endif /* _CONFIG_AM33XX */
++ 
++ #define WARN_ON_ONCE(condition)	({				\
++ 	static bool __warned;					\
++@@ -31,4 +46,6 @@
++ 	unlikely(__ret_warn_once);				\
++ })
++ 
+++#define BUG_ON(condition) do { if (unlikely(condition)) BUG(); } while (0)
+++
++ #endif	/* _LINUX_BUG_H */
++-- 
++2.16.1.194.gb2e45c695
++
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+index d64fe44..01a71d9 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+@@ -1,7 +1,9 @@
+ require u-boot-ti.inc
  
- BRANCH = "ti-rt-linux-4.14.y"
+-PR = "r0"
++PR = "r1"
  
--SRCREV = "c5071cde82c6b5d07eba3cfdc3b198d12839b516"
-+SRCREV = "29b034d65b34ec72a46bf865debb32855ecda6fa"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-index 0162648..28f118f 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-@@ -54,8 +54,8 @@ S = "${WORKDIR}/git"
+ BRANCH = "ti-u-boot-2018.01"
  
- BRANCH = "ti-lsk-linux-4.14.y"
- 
--SRCREV = "069a3f548c0500f531b8abf2e2017845751e1477"
--PV = "4.14.22+git${SRCPV}"
-+SRCREV = "57341df0b46c6be612d7487fb0a1df8b056449d8"
-+PV = "4.14.24+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+-SRCREV = "806db183bfaff66890c560c4b462404448023e36"
++SRCREV = "240ae44c5535bb7a2b6553813f5c42a4a1c5772a"
++
++SRC_URI_append_ti33x = " file://0001-HACK-am335x-Work-around-file-expansion-macro.patch"
 -- 
 2.7.4
 
