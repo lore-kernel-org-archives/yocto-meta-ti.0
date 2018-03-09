@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3DD36E00EFB; Fri,  9 Mar 2018 13:05:10 -0800 (PST)
+	id 4E47EE00EE0; Fri,  9 Mar 2018 13:05:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,30 +9,32 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01B98E00DB1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01BE5E00DC9
 	for <meta-ti@yoctoproject.org>; Fri,  9 Mar 2018 13:05:08 -0800 (PST)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E894020B7B;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id EE5D920B85;
 	Fri,  9 Mar 2018 21:05:07 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id Q19RadvFW2Yf; Fri,  9 Mar 2018 21:05:07 +0000 (UTC)
+	with ESMTP id i2kLEVVqHhpo; Fri,  9 Mar 2018 21:05:07 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B66D020059;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BE0C920B23;
 	Fri,  9 Mar 2018 21:05:06 +0000 (UTC)
 Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 09B63163325;
+	by mail.denix.org (Postfix) with ESMTP id 16659163329;
 	Fri,  9 Mar 2018 16:05:06 -0500 (EST)
 From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Fri,  9 Mar 2018 16:05:04 -0500
-Message-Id: <1520629505-14927-1-git-send-email-denys@ti.com>
+Date: Fri,  9 Mar 2018 16:05:05 -0500
+Message-Id: <1520629505-14927-2-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [rocko/master][PATCH 1/2] u-boot-ti-staging: update to the latest
+In-Reply-To: <1520629505-14927-1-git-send-email-denys@ti.com>
+References: <1520629505-14927-1-git-send-email-denys@ti.com>
+Subject: [rocko/master][PATCH 2/2] linux-ti-staging: update to 4.14.25
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,23 +51,35 @@ X-List-Received-Date: Fri, 09 Mar 2018 21:05:10 -0000
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.14.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index c820feb..67bf438 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
+index 1c32cbd..4866321 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
+@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
  
--PR = "r2"
-+PR = "r3"
+ BRANCH = "ti-rt-linux-4.14.y"
  
- BRANCH = "ti-u-boot-2018.01"
+-SRCREV = "29b034d65b34ec72a46bf865debb32855ecda6fa"
++SRCREV = "4886930a5c32b9e744a95937a0b1f174564df48c"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+index 28f118f..d4a827c 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+@@ -54,8 +54,8 @@ S = "${WORKDIR}/git"
  
--SRCREV = "7ae3421850d555f3d9397390f39bcb22e64a5147"
-+SRCREV = "7a172930b2d94c7eed67fe4d9881984b5a79ef29"
+ BRANCH = "ti-lsk-linux-4.14.y"
+ 
+-SRCREV = "57341df0b46c6be612d7487fb0a1df8b056449d8"
+-PV = "4.14.24+git${SRCPV}"
++SRCREV = "3bacc614e300e497679bdd7d2759f486e713f373"
++PV = "4.14.25+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 -- 
 2.7.4
 
