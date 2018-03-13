@@ -1,40 +1,63 @@
-Return-Path: <denys@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4E47EE00EE0; Fri,  9 Mar 2018 13:05:10 -0800 (PST)
+	id 28277E00E27; Tue, 13 Mar 2018 12:03:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.77 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01BE5E00DC9
-	for <meta-ti@yoctoproject.org>; Fri,  9 Mar 2018 13:05:08 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EE5D920B85;
-	Fri,  9 Mar 2018 21:05:07 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id i2kLEVVqHhpo; Fri,  9 Mar 2018 21:05:07 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BE0C920B23;
-	Fri,  9 Mar 2018 21:05:06 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 16659163329;
-	Fri,  9 Mar 2018 16:05:06 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Fri,  9 Mar 2018 16:05:05 -0500
-Message-Id: <1520629505-14927-2-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1520629505-14927-1-git-send-email-denys@ti.com>
-References: <1520629505-14927-1-git-send-email-denys@ti.com>
-Subject: [rocko/master][PATCH 2/2] linux-ti-staging: update to 4.14.25
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5E03E0097D
+	for <meta-ti@yoctoproject.org>; Tue, 13 Mar 2018 12:03:07 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2DJ378p001524
+	for <meta-ti@yoctoproject.org>; Tue, 13 Mar 2018 14:03:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1520967787;
+	bh=tCV1yAQEGlvSoGFzOiO/33e/LXG75E9fIoxOTRXQ2ws=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=IBnDq0cJU2F1TWhWYrKQB/FHYcatVu2u03/FnPGA7jP3ZhFWol84Eymz1u1bWprpO
+	VzD0qxPokPg5T/OE6H14jEXxFaRRHizCcogNSaXP5z5/Z96M2QSwKSGNNpg5bwsDfv
+	9+AiwIHYiZQugRWUtAm0oZCr3RCUAMt4s+0i6Pns=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2DJ37Pk026487
+	for <meta-ti@yoctoproject.org>; Tue, 13 Mar 2018 14:03:07 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Tue, 13 Mar 2018 14:03:07 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Tue, 13 Mar 2018 14:03:07 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2DJ36gb004689;
+	Tue, 13 Mar 2018 14:03:06 -0500
+Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.148.84])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	w2DJ36x12139; Tue, 13 Mar 2018 14:03:06 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 13 Mar 2018 14:02:44 -0500
+Message-ID: <20180313190244.2250-2-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
+In-Reply-To: <20180313190244.2250-1-dmurphy@ti.com>
+References: <20180313190244.2250-1-dmurphy@ti.com>
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2018.00-rc2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,40 +70,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2018 21:05:10 -0000
+X-List-Received-Date: Tue, 13 Mar 2018 19:03:09 -0000
+Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.14.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-index 1c32cbd..4866321 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-@@ -6,4 +6,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+index c820feb4..67bf4383 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
  
- BRANCH = "ti-rt-linux-4.14.y"
+-PR = "r2"
++PR = "r3"
  
--SRCREV = "29b034d65b34ec72a46bf865debb32855ecda6fa"
-+SRCREV = "4886930a5c32b9e744a95937a0b1f174564df48c"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-index 28f118f..d4a827c 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-@@ -54,8 +54,8 @@ S = "${WORKDIR}/git"
+ BRANCH = "ti-u-boot-2018.01"
  
- BRANCH = "ti-lsk-linux-4.14.y"
- 
--SRCREV = "57341df0b46c6be612d7487fb0a1df8b056449d8"
--PV = "4.14.24+git${SRCPV}"
-+SRCREV = "3bacc614e300e497679bdd7d2759f486e713f373"
-+PV = "4.14.25+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+-SRCREV = "7ae3421850d555f3d9397390f39bcb22e64a5147"
++SRCREV = "7a172930b2d94c7eed67fe4d9881984b5a79ef29"
 -- 
-2.7.4
+2.16.2.440.gc6284da4f
 
 
