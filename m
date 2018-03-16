@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E12ACE008BF; Fri, 16 Mar 2018 09:18:05 -0700 (PDT)
+	id EBA9AE007E1; Fri, 16 Mar 2018 09:30:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E2BDE007DA
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 09:18:05 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83EA5E00529
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 09:30:14 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2GGI4su006993
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 11:18:04 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2GGUD7V008960
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 11:30:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1521217084;
-	bh=/FK28cDS7MWSmKpJUR7EnVHWG7N3wF4vrVk3o5d8VDU=;
+	s=ti-com-17Q1; t=1521217813;
+	bh=N/5tiR26pucGT0RPbuu56Z645P2XYWfoWOHt/XyU55k=;
 	h=From:To:Subject:Date;
-	b=fysWO6TYQDlI0NXqUbBV+D3JpoYa7fhK0wx6Y9z+x2D3yODTjDy9qz2HwYRbQo7bj
-	G4OVqk0APb9MnCLsD9BrYry9/wJZoeKJhmTvok6Hco3BwVJmh2+KFrGXkUif/vp7Di
-	sMzRwwnwrMq4M2pDgNwK1FmdVXewnczNeUr7dRzA=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GGI401015689
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 11:18:04 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	b=vO6q+WXIWFAK97RAWgz0jKB6YbTugaYr2YmNxO772dWgiADeUgF/JlEghWg7yo9BV
+	4uPk+qpXy/qquQB2yuYOIy/a9CO6BTaSlvjS3BGWc4iniqVhIhQI0AAv4SVzgs8JDY
+	sutSStKFlVktsMuv+krRY01tYIcJo39j4r+DrgoA=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GGUDeX002182
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 11:30:13 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Fri, 16 Mar 2018 11:18:04 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 16 Mar 2018 11:30:13 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Fri, 16 Mar 2018 11:18:04 -0500
+	Transport; Fri, 16 Mar 2018 11:30:13 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GGI4eq030892
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 11:18:04 -0500
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GGUDLg019561
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 11:30:13 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Mar 2018 12:18:03 -0400
-Message-ID: <1521217083-27445-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 16 Mar 2018 12:30:12 -0400
+Message-ID: <1521217812-27719-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/rocko/master][PATCH] icss-emac-lld: Updating to version 01.00.00.11B
+Subject: [morty/rocko/master][PATCH] Update to version 01.01.00.09
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,36 +65,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 16:18:06 -0000
+X-List-Received-Date: Fri, 16 Mar 2018 16:30:15 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/icss-emac-lld/icss-emac-lld.inc | 6 +++---
+ recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-index 0ec3b2c..0a9efa5 100644
---- a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-+++ b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-@@ -9,14 +9,14 @@ ICSS_EMAC_LLD_GIT_PROTOCOL = "git"
- ICSS_EMAC_LLD_GIT_BRANCH = "master"
- ICSS_EMAC_LLD_GIT_DESTSUFFIX = "git/ti/drv/icss_emac"
+diff --git a/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb b/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
+index 0e03bd0..7633610 100644
+--- a/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
++++ b/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
+@@ -13,14 +13,14 @@ MCASP_LLD_GIT_PROTOCOL = "git"
+ MCASP_LLD_GIT_BRANCH = "master"
+ MCASP_LLD_GIT_DESTSUFFIX = "git/ti/drv/mcasp"
  
--# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.10A"
--ICSS_EMAC_LLD_SRCREV = "91f70af3714a823df4f71bde3c4d954728e07856"
-+# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.11B"
-+ICSS_EMAC_LLD_SRCREV = "bd643d75a0322b6ca769d8ecbee310d859c0f761"
+-# Below commit ID corresponds to "DEV.MCASP_LLD.01.01.00.08A"
+-MCASP_LLD_SRCREV = "56fc546fe3f0ba89477dfa020bcc4b6aa8ce64f3"
++# Below commit ID corresponds to "DEV.MCASP_LLD.01.01.00.09"
++MCASP_LLD_SRCREV = "6459379818712cac10c439a46936bd6bfcd762d7"
  
- BRANCH = "${ICSS_EMAC_LLD_GIT_BRANCH}"
- SRC_URI = "${ICSS_EMAC_LLD_GIT_URI};destsuffix=${ICSS_EMAC_LLD_GIT_DESTSUFFIX};protocol=${ICSS_EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${MCASP_LLD_GIT_BRANCH}"
+ SRC_URI = "${MCASP_LLD_GIT_URI};destsuffix=${MCASP_LLD_GIT_DESTSUFFIX};protocol=${MCASP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${ICSS_EMAC_LLD_SRCREV}"
--PV = "01.00.00.10A"
-+PV = "01.00.00.11B"
- INC_PR = "r0"
+ SRCREV = "${MCASP_LLD_SRCREV}"
+-PV = "01.01.00.08A"
++PV = "01.01.00.09"
+ PR = "r0"
  
- S = "${WORKDIR}/${ICSS_EMAC_LLD_GIT_DESTSUFFIX}"
+ S = "${WORKDIR}/${MCASP_LLD_GIT_DESTSUFFIX}"
 -- 
 1.9.1
 
