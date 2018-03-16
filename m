@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 165D9E00B9E; Fri, 16 Mar 2018 08:38:07 -0700 (PDT)
+	id 39FA3E00B9E; Fri, 16 Mar 2018 08:45:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 59C30E00B28
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 08:38:06 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2GFc6kJ029003
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:38:06 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1A69E00529
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 08:45:54 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2GFjsF4030422
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:45:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1521214686;
-	bh=nS9SkUcdihYew+yHJug1mNnTwTecLC3ujcxUeudPGQ8=;
+	s=ti-com-17Q1; t=1521215154;
+	bh=y/lYWyudf/ww7m/hWFXWEf+g+UqA4f44fXfBK//bV08=;
 	h=From:To:Subject:Date;
-	b=bVDUouknFwqchICdo30sLFFmeCaIz8MfE+VR7gqt2uujFoiHaFvholC/p2mh1f4G+
-	pbT34qbka7/A2qIMxyZ99g/zPCjS9FqXoFJmT3hqZGoXGF2NkfihTzHamA6ySTp6Bw
-	q8jyuFci52dMO+ymtff8Va7/FLpAOttSU7sbepe0=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFc5u1019364
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:38:06 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	b=dpkwDMFJg8bdfJsbhV54Na/Mi89QCo7RxQ2Vr3Ulsp8sMEFXf3COnxwUZVMrAVddI
+	iLb+uq5bfvq5cnAJxe/8RR3+QS0bFYRxQF28LrMSMYHF/xa50Dgf/j0loz9xxsIhDU
+	vdu9/5gYsEtK9ZbIckZZ2P7D53t1kTWNbXL8wzlI=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFjswI023645
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:45:54 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Fri, 16 Mar 2018 10:38:05 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 16 Mar 2018 10:45:54 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Fri, 16 Mar 2018 10:38:05 -0500
+	Transport; Fri, 16 Mar 2018 10:45:54 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFc5bO016333
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:38:05 -0500
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFjrOW019377
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:45:53 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Mar 2018 11:38:04 -0400
-Message-ID: <1521214684-26421-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 16 Mar 2018 11:45:50 -0400
+Message-ID: <1521215150-26649-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/rocko/master][PATCH] common-csl-ip: Updating to version 03.03.00.10
+Subject: [morty/rocko/master][PATCH] emac-lld-rtos: Updating to version 01.00.03.10A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,49 +65,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 15:38:07 -0000
+X-List-Received-Date: Fri, 16 Mar 2018 15:45:55 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb | 2 +-
- recipes-bsp/common-csl-ip/common-csl-ip.inc         | 6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/emac-lld/emac-lld-rtos_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-index 100d2f4..5f2dbd5 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -18,4 +18,4 @@ export DEST_ROOT="${S}"
- PDK_COMP_LINK_TEXT = "CSL-Chip Support Library"
+diff --git a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
+index 4f021fa..feb6105 100644
+--- a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
++++ b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
+@@ -12,14 +12,14 @@ EMAC_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/emac-lld.git"
+ EMAC_LLD_GIT_PROTOCOL = "git"
+ EMAC_LLD_GIT_BRANCH = "master"
  
- # Workaround: dra7xx build requires am57xx CSL libraries for opencl-monitor
--TI_PDK_LIMIT_SOCS_append_dra7xx = " am571x am572x"
-+TI_PDK_LIMIT_SOCS_append_dra7xx = " am571x am572x am574x"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index e919773..6b55618 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+-# Below commit ID corresponds to "DEV.EMAC_LLD.01.00.03.08"
+-EMAC_LLD_SRCREV = "20b30c9dd37ae1f899e93b560dce41f804e43317"
++# Below commit ID corresponds to "DEV.EMAC_LLD.01.00.03.10A"
++EMAC_LLD_SRCREV = "a2b663fcdfb485806f5a547336b343e73ebbae86"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
+ BRANCH ="${EMAC_LLD_GIT_BRANCH}"
+ SRC_URI = "${EMAC_LLD_GIT_URI};protocol=${EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
--PV = "03.03.00.09"
-+PV = "03.03.00.10"
- INC_PR = "r0"
+ SRCREV = "${EMAC_LLD_SRCREV}"
+-PV = "01.00.03.08"
++PV = "01.00.03.10A"
+ PR = "r0"
  
- CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
-@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "master"
- CSL_GIT_DESTSUFFIX = "git"
- 
--# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.09"
--CSL_SRCREV = "7a7ef0633d9e305072b79ac978738c48e46583cc"
-+# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.10"
-+CSL_SRCREV = "b252ed25443938ff59a6622aee2de7bc36304787"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+ DEPENDS_append = " board-rtos osal-rtos"
 -- 
 1.9.1
 
