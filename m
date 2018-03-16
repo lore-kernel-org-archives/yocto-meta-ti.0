@@ -1,6 +1,6 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9B932E00C66; Fri, 16 Mar 2018 08:30:45 -0700 (PDT)
+	id 7C66CE00B8F; Fri, 16 Mar 2018 08:38:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A2C5E00C5D
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 08:28:48 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2GFSl4m027045
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:28:47 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7B6FE0079D
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 08:38:01 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2GFc1FE028991
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:38:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1521214127;
-	bh=dAUkC0EHAMRALoYo5wpq+5srYKLiOUkwrEHDq2fi2HM=;
-	h=From:To:Subject:Date;
-	b=em64BQPJ1LvEuk+Wn4+qo2NzwQ26xICujKwMPCpFaJoGqvUaC4b5lJd6YbcGsj5EK
-	dHYSvqFcyLPZ3ErAVgn0xB2wly2TeCAH/5DrmooWP6znMfmZ5/5G0UP82tLej/A2px
-	Mk9aKSmZp9DIdHSQ/NR6E+9tryR1nlJPTZsFTYgA=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFSlh8003849
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:28:47 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1521214681;
+	bh=9tGDFj+wHrnvDm9yn1M8AgyTU/cBpuaXkGObRj7EYeY=;
+	h=From:To:CC:Subject:Date;
+	b=WYVXXFv8dF3TC53oeesrBqANUF0eKV/ZFr5YygeQc323nUwYouYwBlRzeHn4V9ksv
+	V7dcNhLoZTpWZjP6tygx9hoVEb70/f5r50VnRSDlu9ghLOnej5gCrIErSPPgB/Vit+
+	F6oEeauN5l2yh/IN101HZnagQlW5IYqYcVg30uUQ=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFc1OM009352
+	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:38:01 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Fri, 16 Mar 2018 10:28:47 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 16 Mar 2018 10:38:00 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Fri, 16 Mar 2018 10:28:47 -0500
-Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	Transport; Fri, 16 Mar 2018 10:38:00 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFSl7S007910
-	for <meta-ti@yoctoproject.org>; Fri, 16 Mar 2018 10:28:47 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2GFc0bQ009346;
+	Fri, 16 Mar 2018 10:38:00 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Mar 2018 11:28:45 -0400
-Message-ID: <1521214125-26067-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 16 Mar 2018 11:29:30 -0400
+Message-ID: <1521214170-9859-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/rocko/master][PATCH] board-rtos: Updating to version 01.00.10.00A
+Subject: [morty/rocko/master][PATCH] prueth-fw: build firmware from source
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,49 +65,89 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 15:30:45 -0000
+X-List-Received-Date: Fri, 16 Mar 2018 15:38:02 -0000
 Content-Type: text/plain
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
----
- recipes-bsp/board-rtos/board-rtos_git.bb | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+* Use ti-cgt-pru to build the firmware images
 
-diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
-index 1fc9c8e..0325162 100644
---- a/recipes-bsp/board-rtos/board-rtos_git.bb
-+++ b/recipes-bsp/board-rtos/board-rtos_git.bb
-@@ -12,15 +12,15 @@ BOARD_GIT_URI = "git://git.ti.com/keystone-rtos/board.git"
- BOARD_GIT_PROTOCOL = "git"
- BOARD_GIT_BRANCH = "master"
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ recipes-bsp/prueth-fw/prueth-fw_git.bb | 46 ++++++++++++++++++++++++----------
+ 1 file changed, 33 insertions(+), 13 deletions(-)
+
+diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+index 8359cf0..5a671e3 100644
+--- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
++++ b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+@@ -1,34 +1,54 @@
+ DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x, AM335x and K2G"
  
--# Below commit ID corresponds to "DEV.BOARD.01.00.09.00A"
--BOARD_SRCREV = "387d77aff6e36af54c239a315cb2d477f1466f4d"
-+# Below commit ID corresponds to "DEV.BOARD.01.00.10.00A"
-+BOARD_SRCREV = "14636b1363383167abb8d2b8ed6297d0b1c64930"
+ LICENSE = "TI-TFL"
+-LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++LIC_FILES_CHKSUM = "file://src/firmware_version.h;beginline=6;endline=53;md5=1f0a640a261059cdcbbcf01e6a739ff3"
  
- BRANCH ="${BOARD_GIT_BRANCH}"
- SRC_URI = "${BOARD_GIT_URI};protocol=${BOARD_GIT_PROTOCOL};branch=${BRANCH}"
++require recipes-ti/includes/ti-paths.inc
++
++ICSS_EMAC_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/icss-emac.git"
++ICSS_EMAC_LLD_GIT_PROTOCOL = "git"
++ICSS_EMAC_LLD_GIT_BRANCH = "master"
++ICSS_EMAC_LLD_GIT_DESTSUFFIX = "git/ti/drv/icss_emac"
++
++# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.11B"
++ICSS_EMAC_LLD_SRCREV = "bd643d75a0322b6ca769d8ecbee310d859c0f761"
++
++BRANCH = "${ICSS_EMAC_LLD_GIT_BRANCH}"
++SRC_URI = "${ICSS_EMAC_LLD_GIT_URI};destsuffix=${ICSS_EMAC_LLD_GIT_DESTSUFFIX};protocol=${ICSS_EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${ICSS_EMAC_LLD_SRCREV}"
+ PV = "5.1.4"
+ PR = "r0"
  
- SRCREV = "${BOARD_SRCREV}"
--PV = "01.00.09.00A"
--PR = "r1"
-+PV = "01.00.10.00A"
-+PR = "r0"
+-CLEANBROKEN = "1"
++S = "${WORKDIR}/${ICSS_EMAC_LLD_GIT_DESTSUFFIX}/firmware/icss_dualemac"
  
- DEPENDS_append = " i2c-lld-rtos \
-                    spi-lld-rtos \
-@@ -59,6 +59,9 @@ DEPENDS_append_ti43x = " gpio-lld-rtos \
-                          ti-ndk \
- "
+ COMPATIBLE_MACHINE = "am57xx-evm|am437x-evm|am335x-evm|k2g"
  
-+DEPENDS_append_dra7xx = " pm-lld-rtos \
-+                          mmcsd-lld-rtos \
-+"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- # Build with make instead of XDC
- TI_PDK_XDCMAKE = "0"
+-SRCREV = "b9d9e4bef2f32d4b55a63ecfec2e21f7b1eaaa34"
+-BRANCH ?= "ti-linux-firmware-4.1.y"
++DEPENDS = "ti-cgt-pru-native"
++
++PRU_VERSION = ""
++PRU_VERSION_am335x-evm = "REV1"
++PRU_VERSION_am437x-evm = "REV1"
++PRU_VERSION_am57xx-evm = "REV2"
++PRU_VERSION_k2g = "REV2"
+ 
+-SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++FW_PREFIX = ""
++FW_PREFIX_am335x-evm = "am335x"
++FW_PREFIX_am437x-evm = "am437x"
++FW_PREFIX_am57xx-evm = "am57xx"
++FW_PREFIX_k2g = "k2g"
+ 
+-S = "${WORKDIR}/git"
+ 
+-TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
+-TARGET_am437x-evm = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
+-TARGET_am335x-evm = "am335x-pru0-prueth-fw.elf am335x-pru1-prueth-fw.elf"
+-TARGET_k2g = "k2g-pru0-prueth-fw.elf k2g-pru1-prueth-fw.elf"
++EXTRA_OEMAKE += "CL_PRU_INSTALL_PATH="${TI_CGT_PRU_INSTALL_DIR}" PRU_VERSION_LIST="${PRU_VERSION}""
+ 
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware/ti-pruss
+-	for f in ${TARGET}; do
+-		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
+-	done
++	install -m 0644 ./elf/${PRU_VERSION}/icss_dualemac_PRU0.elf \
++		${D}${base_libdir}/firmware/ti-pruss/${FW_PREFIX}-pru0-prueth-fw.elf
++	install -m 0644 ./elf/${PRU_VERSION}/icss_dualemac_PRU1.elf \
++		${D}${base_libdir}/firmware/ti-pruss/${FW_PREFIX}-pru1-prueth-fw.elf
+ }
+ 
+ FILES_${PN} = "${base_libdir}/firmware"
 -- 
-1.9.1
+2.7.4
 
 
