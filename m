@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A1DF6E00AAF; Mon, 19 Mar 2018 07:47:32 -0700 (PDT)
+	id 514C3E00CD7; Mon, 19 Mar 2018 07:49:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,41 +18,41 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6E9EE00903
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 07:47:31 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD9F3E00903
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 07:49:18 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2JElVtS032306
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 09:47:31 -0500
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w2JEnIVQ032552
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 09:49:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1521470851;
-	bh=ILjhr+GuRrK+h+fFDB9VxdGYqLME7T+5krSNAoPo/Lk=;
+	s=ti-com-17Q1; t=1521470958;
+	bh=4Efnme4CxMzQn7s3/MgD+1l3WoRU03MtG7oxmaA0Grc=;
 	h=From:To:Subject:Date;
-	b=M4Otba8tDs/xrWtamZR8kRbODuJemwweTaKSlRVPOImGXTcGXkadgiuko44mBH276
-	SV9NrtBRpwaqHnbOwJ6LWTEhLDvjRu0+dRN7r+2vLBQJyDVFStsKr8R5IynHvYsp2u
-	UrXJvUlYsz7vgpKXQmGQvEam+9tNKayHYZ1y4xcg=
+	b=HAQr5TGAumBj7Y56AJIXYzl4P4Mz9iz63pa8a2vLA4AaNWclUKQOMixlE5jXkk+K1
+	qyHYBxjxu1dyIHq9kIoWelQ1SQ2fV1u0q7X2FI7P1SZFZrkn0oksekQjqQsi88ENhg
+	uUvUS2dqXj5qsKOMq1FUhHKsHRooE/nDiYIn12TU=
 Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2JElV1s002815
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 09:47:31 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE108.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2JEnIWm005381
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 09:49:18 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE108.ent.ti.com
 	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Mon, 19 Mar 2018 09:47:30 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE106.ent.ti.com
-	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_0,
+	Mon, 19 Mar 2018 09:49:17 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
-	Transport; Mon, 19 Mar 2018 09:47:30 -0500
+	Transport; Mon, 19 Mar 2018 09:49:17 -0500
 Received: from uda0875154a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2JElU7d029812
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 09:47:30 -0500
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w2JEnHs6032686
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2018 09:49:17 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 19 Mar 2018 10:47:29 -0400
-Message-ID: <1521470849-21633-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Mon, 19 Mar 2018 10:49:16 -0400
+Message-ID: <1521470956-22937-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [morty/rocko/master][PATCH] uart-lld-rtos: Updating to version 01.00.00.10A
+Subject: [morty/rocko/master][PATCH] usb-lld-rtos: Update to version 01.00.00.13
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,36 +65,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 14:47:32 -0000
+X-List-Received-Date: Mon, 19 Mar 2018 14:49:19 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/uart-lld/uart-lld-rtos_git.bb | 6 +++---
+ recipes-bsp/usb-lld/usb-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-index e76401d..c3b3a16 100644
---- a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-+++ b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-@@ -13,14 +13,14 @@ UART_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/uart-lld.git"
- UART_LLD_GIT_PROTOCOL = "git"
- UART_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+index 441741b..eedb955 100644
+--- a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
++++ b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+@@ -12,14 +12,14 @@ USB_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/usb.git"
+ USB_LLD_GIT_PROTOCOL = "git"
+ USB_LLD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.UART_LLD.01.00.00.09"
--UART_LLD_SRCREV = "f3670e497186b5ec5258d0e51fb1ebdaa3d60577"
-+# Below commit ID corresponds to "DEV.UART_LLD.01.00.00.10A"
-+UART_LLD_SRCREV = "4774991ce80627b9f3eb844712e256abaf7462f0"
+-# Below commit ID corresponds to "DEV.USB_LLD.01.00.00.12B"
+-USB_LLD_SRCREV = "c055edbc2e6bf6aad95aa6e83e46a9ff03ee026b"
++# Below commit ID corresponds to "DEV.USB_LLD.01.00.00.13"
++USB_LLD_SRCREV = "bac7156bac2b11c964f67a79752e1d6178fb1e86"
  
- BRANCH = "${UART_LLD_GIT_BRANCH}"
- SRC_URI = "${UART_LLD_GIT_URI};protocol=${UART_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${USB_LLD_GIT_BRANCH}"
+ SRC_URI = "${USB_LLD_GIT_URI};protocol=${USB_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${UART_LLD_SRCREV}"
--PV = "01.00.00.09"
-+PV = "01.00.00.10A"
+ SRCREV = "${USB_LLD_SRCREV}"
+-PV = "01.00.00.12B"
++PV = "01.00.00.13"
  PR = "r0"
  
- DEPENDS_append = " edma3-lld-rtos \
+ DEPENDS_append = " osal-rtos"
 -- 
 1.9.1
 
