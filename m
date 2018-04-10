@@ -1,38 +1,58 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 93392E00948; Wed,  4 Apr 2018 16:13:43 -0700 (PDT)
+	id 370CCE00BAF; Tue, 10 Apr 2018 08:41:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [198.47.27.80 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0539E007E1
-	for <meta-ti@yoctoproject.org>; Wed,  4 Apr 2018 16:13:42 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 784D420B22;
-	Wed,  4 Apr 2018 23:13:42 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id ubNoIYWAWhas; Wed,  4 Apr 2018 23:13:42 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5C19E20866;
-	Wed,  4 Apr 2018 23:13:41 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 2225A1633B1;
-	Wed,  4 Apr 2018 19:13:41 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Wed,  4 Apr 2018 19:13:40 -0400
-Message-Id: <1522883620-754-1-git-send-email-denys@ti.com>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86EDFE009DC
+	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2018 08:41:36 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3AFfZLX023092
+	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2018 10:41:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
+	s=ti-com-17Q1; t=1523374895;
+	bh=EaPZVcWtiLgqvp2JbQYPNlYdV+6p8Rj1FMg92SlqoGI=;
+	h=From:To:CC:Subject:Date;
+	b=TsxapQLdhjyJwd8VqjdOGVaHKgIMe6hnD39tYoA9gL+NP+xiNTv7WyxDTFSkE5PZo
+	35YY9CrLV13uac1pYKe8MI9/xWD6xGJ2/R/uuLlEsZ2EUvD17c2A7IE0Hy4htkB0Yk
+	q4iosR5lTAYPZmyUPgIvLd7RFREquVWbvV0lSLK8=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3AFfZA6003816
+	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2018 10:41:35 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
+	Tue, 10 Apr 2018 10:41:35 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
+	Transport; Tue, 10 Apr 2018 10:41:35 -0500
+Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3AFfZi5008716;
+	Tue, 10 Apr 2018 10:41:35 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 10 Apr 2018 11:31:14 -0400
+Message-ID: <1523374274-4010-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [rocko/master][PATCH] conf/machine: add couple new DTBs
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [rocko/master][PATCH] ti-cg-xml: skip file-rdeps check
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,41 +65,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2018 23:13:43 -0000
+X-List-Received-Date: Tue, 10 Apr 2018 15:41:37 -0000
+Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+* pre-packaged binaries depend on libc.so.6
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- conf/machine/dra7xx-evm.conf   | 2 +-
- conf/machine/include/ti33x.inc | 3 ++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ recipes-ti/devtools/ti-cg-xml_2.41.00.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 9a65a27..b9554ab 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -13,7 +13,7 @@ SERIAL_CONSOLE = "115200 ttyS0"
- KERNEL_DEVICETREE = "dra7-evm.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb \
-                     dra72-evm.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
-                     dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb \
--                    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb dra71-lcard.dtb \
-+                    dra71-evm.dtb dra71-evm-nand.dtb dra71-evm-lcd-auo-g101evn01.0.dtb dra71-lcard.dtb \
-                     dra76-evm.dtb dra76-evm-tfp410.dtb"
+diff --git a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+index d3c3ffe..5c0ff63 100644
+--- a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
++++ b/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+@@ -32,7 +32,7 @@ do_install() {
  
- UBOOT_MACHINE = "dra7xx_evm_config"
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 412bbac..291e89a 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -26,7 +26,8 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ FILES_${PN} += "${CG_XML_INSTALL_DIR_RECIPE}"
  
- KERNEL_IMAGETYPE = "zImage"
+-INSANE_SKIP_${PN} = "arch ldflags"
++INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
  
--KERNEL_DEVICETREE = "am335x-evm.dtb am335x-evmsk.dtb am335x-icev2.dtb \
-+KERNEL_DEVICETREE = "am335x-evm.dtb am335x-evmsk.dtb \
-+                    am335x-icev2.dtb am335x-icev2-prueth.dtb \
-                     am335x-bone.dtb am335x-boneblue.dtb \
-                     am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
-                     am335x-bonegreen.dtb am335x-bonegreen-wireless.dtb"
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_SYSROOT_STRIP = "1"
 -- 
 2.7.4
 
