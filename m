@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 594DFE00C36; Fri, 13 Apr 2018 10:12:48 -0700 (PDT)
+	id A17BBE00C58; Fri, 13 Apr 2018 10:12:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 069DAE00B28
-	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:47 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHClJW024287
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 30375E00B65
+	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:48 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHClai024291
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1523639567;
-	bh=YrFKMGrV/BoownMaGndKxLjPlNh94Yb708kvzk3Wego=;
+	bh=WxJvnL8bKoIu+uTNPhljADBv5JpnIg+Ki0WtIdx5DOA=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=sByeKAEtQmd8S8pM8xzRKiU5wqDdCUqaF26jZvyKsXOshVltLcXIh94K5NZcqyheJ
-	EDgxd4QKH9Y6Rr4nlGGKFHXZ7mFqT/5CiXJLu/fuor9tOyA/2srXNuBVLQoxVMrJIr
-	ZOMnD71POk2r4SEdrzKeUtJQk/4n1yxPmJ3QYZm4=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHClQk031983
+	b=pskeNURW0pdbeagLBFjU6ffFB7b4qQg9AR5TZOmEN0OT0xIUapLcNiKKyfAYhk+r4
+	HdEm9dihi/k8BciceG1869STyl9AycdGFs8ev92/MhJvBlJQCMjwKKuZYBIRHWlubN
+	bGWw17Gf3ywNf9cr8bl8xed/udPSFfc8ujhJ7G/k=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHClLS012471
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:47 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
 	Fri, 13 Apr 2018 12:12:47 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
 	Transport; Fri, 13 Apr 2018 12:12:47 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfMJ020225;
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfMK020225;
 	Fri, 13 Apr 2018 12:12:47 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 13 Apr 2018 13:02:17 -0400
-Message-ID: <1523638939-28861-22-git-send-email-j-stiffler@ti.com>
+Date: Fri, 13 Apr 2018 13:02:18 -0400
+Message-ID: <1523638939-28861-23-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 References: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 21/23] osal: Update to version 01.00.00.10A
+Subject: [rocko/master][PATCH 22/23] starterware:starterware-rtos: Udpate to version 02.01.01.06C & rtos updates
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,32 +72,65 @@ Content-Type: text/plain
 
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+This also includes rtos receipes changes required as a part of update to
+02.01.01.06C
+
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/osal/osal.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/starterware/starterware-rtos_git.bb | 7 +++++--
+ recipes-bsp/starterware/starterware.inc         | 6 +++---
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
-index 70ab2fa..2eac344 100644
---- a/recipes-bsp/osal/osal.inc
-+++ b/recipes-bsp/osal/osal.inc
-@@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
- OSAL_GIT_BRANCH = "master"
- OSAL_GIT_DESTSUFFIX = "git/ti/osal"
+diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
+index 88176bb..b846c04 100644
+--- a/recipes-bsp/starterware/starterware-rtos_git.bb
++++ b/recipes-bsp/starterware/starterware-rtos_git.bb
+@@ -1,6 +1,6 @@
+ require starterware.inc
  
--# Below commit ID corresponding to "DEV.OSAL.01.00.00.09"
--OSAL_SRCREV = "0bb1151f3622fb65f41f1d3dcffcee63fe9724de"
-+# Below commit ID corresponding to "DEV.OSAL.01.00.00.10A"
-+OSAL_SRCREV = "d26876bd625d14fc71a9dc79c09d03fab22631dd"
+-DEPENDS = "gcc-arm-none-eabi-native"
++DEPENDS = "gcc-arm-none-eabi-native ti-pdk-build-rtos"
  
- BRANCH = "${OSAL_GIT_BRANCH}"
- SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
+ require recipes-ti/includes/ti-paths.inc
  
- SRCREV = "${OSAL_SRCREV}"
--PV = "01.00.00.09"
-+PV = "01.00.00.10A"
+@@ -11,6 +11,8 @@ PARTNO_ti43x = "am437x"
+ 
+ export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
+ export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
++export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
++export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
+ 
+ do_compile() {
+     cd build
+@@ -27,4 +29,5 @@ FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_SYSROOT_STRIP = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-INSANE_SKIP_${PN} = "arch staticdev"
++INSANE_SKIP_${PN} = "arch staticdev file-rdeps"
++
+diff --git a/recipes-bsp/starterware/starterware.inc b/recipes-bsp/starterware/starterware.inc
+index ba17ef2..7772c84 100644
+--- a/recipes-bsp/starterware/starterware.inc
++++ b/recipes-bsp/starterware/starterware.inc
+@@ -8,14 +8,14 @@ STARTERWARE_GIT_URI = "git://git.ti.com/keystone-rtos/starterware.git"
+ STARTERWARE_GIT_PROTOCOL = "git"
+ STARTERWARE_GIT_BRANCH = "master"
+ 
+-# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.05"
+-STARTERWARE_SRCREV = "58526af258ef9a10a9eec32d2a6e3a1c9e6f9e88"
++# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.06C"
++STARTERWARE_SRCREV = "c8bbba0b37303529307be608ecca5fee66099973"
+ 
+ BRANCH = "${STARTERWARE_GIT_BRANCH}"
+ SRC_URI = "${STARTERWARE_GIT_URI};protocol=${STARTERWARE_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${STARTERWARE_SRCREV}"
+-PV = "02.01.01.05"
++PV = "02.01.01.06C"
  INC_PR = "r0"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.7.4
 
