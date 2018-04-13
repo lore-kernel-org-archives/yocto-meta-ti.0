@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1AAB7E00BF7; Fri, 13 Apr 2018 10:12:44 -0700 (PDT)
+	id 27958E00B9E; Fri, 13 Apr 2018 10:12:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 52679E00B9E
-	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:42 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHCg75008128
-	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:42 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7430BE00BE9
+	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:43 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHChDi008136
+	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1523639562;
-	bh=gPdzbnEzaorOjxYdBGYo5wZvAEO4w+AtUMkO9DTz2sM=;
+	s=ti-com-17Q1; t=1523639563;
+	bh=QJGcpRuL/YiyNWuFXQfyPkymMPfWMBLFsDQk1D6T7f4=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=LycE+nOAEgjI4945B55tL+GVmuWAzm8vPDx4EMQH3raqkY0x0KATBHRVft40ZA2bI
-	qi105FYyygupQyUWcJpiVPxtaE7V1HlzPgA/yaeF5UMlJzPV2uloo1DCwd90FgBcQ2
-	erohzc/YEepIWcbTr0hCxd789siUVIM6mRmq3uKw=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCgl5031865
-	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:42 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	b=Q+emiWfWJf9LkO34piUqXlwEcoxPkPanjHbcKZU0dyLtpkpNS60hJwfm4b5gZrjNJ
+	27sk8KnH/yVI0c40MXaIaNGhm/Zxewg+gx4NBRC3kC716SAasAtdlh8ftvrHb9YBWe
+	SaCbXEdVODOSy9hTk6BGqQbJK9n7DUww4gE/p4Ko=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHChSN012391
+	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:43 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
 	Fri, 13 Apr 2018 12:12:42 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
 	Transport; Fri, 13 Apr 2018 12:12:42 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfM2020225;
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfM3020225;
 	Fri, 13 Apr 2018 12:12:42 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 13 Apr 2018 13:02:00 -0400
-Message-ID: <1523638939-28861-5-git-send-email-j-stiffler@ti.com>
+Date: Fri, 13 Apr 2018 13:02:01 -0400
+Message-ID: <1523638939-28861-6-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 References: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 04/23] fatfs-rtos: Updating to version 01.00.00.09
+Subject: [rocko/master][PATCH 05/23] gpio-lld-rtos: Updating to version 01.00.00.10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,31 +75,31 @@ From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb | 6 +++---
+ recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb b/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
-index 2f3b6de..beed9d7 100644
---- a/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
-+++ b/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
-@@ -12,14 +12,14 @@ FATFS_GIT_URI = "git://git.ti.com/keystone-rtos/fatfs.git"
- FATFS_GIT_PROTOCOL = "git"
- FATFS_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb b/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
+index e313cee..0d1d42f 100644
+--- a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
++++ b/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
+@@ -13,14 +13,14 @@ GPIO_LLD_GIT_PROTOCOL = "git"
+ GPIO_LLD_GIT_BRANCH = "master"
+ GPIO_LLD_GIT_DESTSUFFIX = "git/ti/drv/gpio"
  
--# Below commit ID corresponds to "DEV.FATFS_LLD.01.00.00.08"
--FATFS_SRCREV = "374ae86c9b1f3a4ffbbb09c739e6e5d6709afd09"
-+# Below commit ID corresponds to "DEV.FATFS_LLD.01.00.00.09"
-+FATFS_SRCREV = "a5652991a9dd9a9b9b9c5c2cf35d1417f8272b00"
+-# Below commit ID corresponds to "DEV.GPIO_LLD.01.00.00.09"
+-GPIO_LLD_SRCREV = "99a20a668f36217705d57f7cc2f7faf1a5533bbe"
++# Below commit ID corresponds to "DEV.GPIO_LLD.01.00.00.10"
++GPIO_LLD_SRCREV = "2661a410e5bc00b4769db6ef2692f680a7a42feb"
  
- BRANCH ="${FATFS_GIT_BRANCH}"
- SRC_URI = "${FATFS_GIT_URI};protocol=${FATFS_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${GPIO_LLD_GIT_BRANCH}"
+ SRC_URI = "${GPIO_LLD_GIT_URI};destsuffix=${GPIO_LLD_GIT_DESTSUFFIX};protocol=${GPIO_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${FATFS_SRCREV}"
--PV = "01.00.00.08"
-+PV = "01.00.00.09"
+ SRCREV = "${GPIO_LLD_SRCREV}"
+-PV = "01.00.00.09"
++PV = "01.00.00.10"
  PR = "r0"
  
- DEPENDS_append = " mmcsd-lld-rtos \
+ S = "${WORKDIR}/${GPIO_LLD_GIT_DESTSUFFIX}"
 -- 
 2.7.4
 
