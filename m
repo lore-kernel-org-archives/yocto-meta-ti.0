@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C336E00C5B; Fri, 13 Apr 2018 10:12:45 -0700 (PDT)
+	id 80978E00C59; Fri, 13 Apr 2018 10:12:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EDF0E00B28
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E774E00C25
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:44 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHChMS008144
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHChTl008140
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1523639563;
-	bh=9X5jpnk+UIvGO//6MioRIxCw2DEgW2JVfM8IarfGZfA=;
+	bh=cbKMQr8LzmEdN8oHjXkU9WlxKTlpLAKClIdIGOaX7VU=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=mTsS+v+IgfoVfl1X53EV202sXVmTJkavLi2ki3zPLmBy9ANPPuxD7seH2jiC9mnDL
-	d5jIgekmshJ7X5lo8jNsln7qjJSgQiuhkPdS9gRDX+qqT1g0/xEtf0588/RSmWXO+v
-	IU5SRlX7M1xgUhKJsxMM8YPU5gNzkG9vaqBOrSVA=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHChTD031913
+	b=tJjGKup1JixQYBAYoH6mOYk86dWOo9yIDwhcHIn6dhZSQLly264wgTParT3RFWNBF
+	GMj2ymt0Wc8KQ49p9bNoEGMR2KW/cYvJ3GkJrM4S2XnFwXzCnvq8gCKAwfPqRJbsDU
+	McXSzDpVUqSi/pv2z4SY0RFyn+rEArTY0g1bSNDk=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHChvF031910
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:43 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
 	Fri, 13 Apr 2018 12:12:43 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
 	Transport; Fri, 13 Apr 2018 12:12:43 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfM5020225;
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfM6020225;
 	Fri, 13 Apr 2018 12:12:43 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 13 Apr 2018 13:02:03 -0400
-Message-ID: <1523638939-28861-8-git-send-email-j-stiffler@ti.com>
+Date: Fri, 13 Apr 2018 13:02:04 -0400
+Message-ID: <1523638939-28861-9-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 References: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 07/23] icss-emac-lld: Updating to version 01.00.00.11B
+Subject: [rocko/master][PATCH 08/23] mcasp-lld-rtos: Update to version 01.01.00.09
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,31 +75,31 @@ From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/icss-emac-lld/icss-emac-lld.inc | 6 +++---
+ recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-index 68ae99b..f52b369 100644
---- a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-+++ b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-@@ -9,14 +9,14 @@ ICSS_EMAC_LLD_GIT_PROTOCOL = "git"
- ICSS_EMAC_LLD_GIT_BRANCH = "master"
- ICSS_EMAC_LLD_GIT_DESTSUFFIX = "git/ti/drv/icss_emac"
+diff --git a/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb b/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
+index 0e03bd0..7633610 100644
+--- a/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
++++ b/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
+@@ -13,14 +13,14 @@ MCASP_LLD_GIT_PROTOCOL = "git"
+ MCASP_LLD_GIT_BRANCH = "master"
+ MCASP_LLD_GIT_DESTSUFFIX = "git/ti/drv/mcasp"
  
--# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.10A"
--ICSS_EMAC_LLD_SRCREV = "91f70af3714a823df4f71bde3c4d954728e07856"
-+# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.11B"
-+ICSS_EMAC_LLD_SRCREV = "bd643d75a0322b6ca769d8ecbee310d859c0f761"
+-# Below commit ID corresponds to "DEV.MCASP_LLD.01.01.00.08A"
+-MCASP_LLD_SRCREV = "56fc546fe3f0ba89477dfa020bcc4b6aa8ce64f3"
++# Below commit ID corresponds to "DEV.MCASP_LLD.01.01.00.09"
++MCASP_LLD_SRCREV = "6459379818712cac10c439a46936bd6bfcd762d7"
  
- BRANCH = "${ICSS_EMAC_LLD_GIT_BRANCH}"
- SRC_URI = "${ICSS_EMAC_LLD_GIT_URI};destsuffix=${ICSS_EMAC_LLD_GIT_DESTSUFFIX};protocol=${ICSS_EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${MCASP_LLD_GIT_BRANCH}"
+ SRC_URI = "${MCASP_LLD_GIT_URI};destsuffix=${MCASP_LLD_GIT_DESTSUFFIX};protocol=${MCASP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${ICSS_EMAC_LLD_SRCREV}"
--PV = "01.00.00.10A"
-+PV = "01.00.00.11B"
- INC_PR = "r0"
+ SRCREV = "${MCASP_LLD_SRCREV}"
+-PV = "01.01.00.08A"
++PV = "01.01.00.09"
+ PR = "r0"
  
- S = "${WORKDIR}/${ICSS_EMAC_LLD_GIT_DESTSUFFIX}"
+ S = "${WORKDIR}/${MCASP_LLD_GIT_DESTSUFFIX}"
 -- 
 2.7.4
 
