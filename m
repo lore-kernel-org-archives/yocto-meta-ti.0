@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 49538E00C25; Fri, 13 Apr 2018 10:12:47 -0700 (PDT)
+	id 97E0EE00C25; Fri, 13 Apr 2018 10:12:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,43 +18,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DBAA8E00B28
-	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:46 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHCkT8024614
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 373F3E00B65
+	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:47 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHCkcp024618
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1523639566;
-	bh=UCFUJXlsrrQzh6hsUkKBFlbgwrH1UpY+5908tKysuQs=;
+	bh=UiW7XjliZKtKNoLtzqKIo9o03bU4ELLLAn4eRjYOZI4=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=QH4ZfiOYmVSnmHMptxFifSbolUooucrFl+WeltDgipNja+b8EquSAtjga6Tz13y44
-	4vwKLeLL5h6toemvEnhzaVLixRHYEbNlVT/YyVIOil0L7kKA6sv/wbunU0A0nWDT+i
-	L6Km9X0ZXeClt3Uf99yWwgZzLP9eJTgw3ltea0+A=
+	b=O88IhFI8+xAioYKYAtzXVbEIixBPFDXPZK/vt5XBjOrNx6Mga/+ua+jbOUDa3l2dl
+	dNOBvF+YBf09o4ojhE8QlXfhYYFM3ntc6c/nAQRd/9wsw8y0EaaBrOXi1TmzTLaaYs
+	cjjpJQ9rRByRmxMf7hI9CYuUqRMDIaz76Hn4RzEU=
 Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCkkg012452
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCkB4031971
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:46 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
 	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
 	Fri, 13 Apr 2018 12:12:46 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE104.ent.ti.com
+	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
 	Transport; Fri, 13 Apr 2018 12:12:46 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfMF020225;
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfMG020225;
 	Fri, 13 Apr 2018 12:12:46 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 13 Apr 2018 13:02:13 -0400
-Message-ID: <1523638939-28861-18-git-send-email-j-stiffler@ti.com>
+Date: Fri, 13 Apr 2018 13:02:14 -0400
+Message-ID: <1523638939-28861-19-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 References: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 17/23] uart-lld-rtos: Updating to version 01.00.00.10A
+Subject: [rocko/master][PATCH 18/23] usb-lld-rtos: Update to version 01.00.00.13
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,31 +75,31 @@ From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/uart-lld/uart-lld-rtos_git.bb | 6 +++---
+ recipes-bsp/usb-lld/usb-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-index e76401d..c3b3a16 100644
---- a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-+++ b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-@@ -13,14 +13,14 @@ UART_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/uart-lld.git"
- UART_LLD_GIT_PROTOCOL = "git"
- UART_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+index 441741b..eedb955 100644
+--- a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
++++ b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+@@ -12,14 +12,14 @@ USB_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/usb.git"
+ USB_LLD_GIT_PROTOCOL = "git"
+ USB_LLD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.UART_LLD.01.00.00.09"
--UART_LLD_SRCREV = "f3670e497186b5ec5258d0e51fb1ebdaa3d60577"
-+# Below commit ID corresponds to "DEV.UART_LLD.01.00.00.10A"
-+UART_LLD_SRCREV = "4774991ce80627b9f3eb844712e256abaf7462f0"
+-# Below commit ID corresponds to "DEV.USB_LLD.01.00.00.12B"
+-USB_LLD_SRCREV = "c055edbc2e6bf6aad95aa6e83e46a9ff03ee026b"
++# Below commit ID corresponds to "DEV.USB_LLD.01.00.00.13"
++USB_LLD_SRCREV = "bac7156bac2b11c964f67a79752e1d6178fb1e86"
  
- BRANCH = "${UART_LLD_GIT_BRANCH}"
- SRC_URI = "${UART_LLD_GIT_URI};protocol=${UART_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${USB_LLD_GIT_BRANCH}"
+ SRC_URI = "${USB_LLD_GIT_URI};protocol=${USB_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${UART_LLD_SRCREV}"
--PV = "01.00.00.09"
-+PV = "01.00.00.10A"
+ SRCREV = "${USB_LLD_SRCREV}"
+-PV = "01.00.00.12B"
++PV = "01.00.00.13"
  PR = "r0"
  
- DEPENDS_append = " edma3-lld-rtos \
+ DEPENDS_append = " osal-rtos"
 -- 
 2.7.4
 
