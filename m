@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4152BE00B65; Fri, 13 Apr 2018 10:12:45 -0700 (PDT)
+	id 4C336E00C5B; Fri, 13 Apr 2018 10:12:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.19.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1470FE00B65
-	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:43 -0700 (PDT)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EDF0E00B28
+	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 10:12:44 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHCh2r012775
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3DHChMS008144
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
 	s=ti-com-17Q1; t=1523639563;
-	bh=6/TcFoN1FyJD3agUuQDJqSMppxKUxjGkMGWr0MYeE0k=;
+	bh=9X5jpnk+UIvGO//6MioRIxCw2DEgW2JVfM8IarfGZfA=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=HpqlPUSa6X8U1h1BnbuOY9I7fL61zsNcdO7QcqjPrdoY8H8/Oqng7xoCRNjJwA2a4
-	ePxEsYTAzX8JvGDxrh0CA4iVhIJpXW47vH6xpWegA+7Qq8gF/Fs4XYmtYhq1//MBFB
-	MxKL6u0FvoFG8jHJccr6Y7ib/o8fhrK0u6H4/d+s=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHChk6031893
+	b=mTsS+v+IgfoVfl1X53EV202sXVmTJkavLi2ki3zPLmBy9ANPPuxD7seH2jiC9mnDL
+	d5jIgekmshJ7X5lo8jNsln7qjJSgQiuhkPdS9gRDX+qqT1g0/xEtf0588/RSmWXO+v
+	IU5SRlX7M1xgUhKJsxMM8YPU5gNzkG9vaqBOrSVA=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHChTD031913
 	for <meta-ti@yoctoproject.org>; Fri, 13 Apr 2018 12:12:43 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1261.35;
-	Fri, 13 Apr 2018 12:12:42 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE100.ent.ti.com
-	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 13 Apr 2018 12:12:43 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE103.ent.ti.com
+	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1261.35 via Frontend
 	Transport; Fri, 13 Apr 2018 12:12:43 -0500
 Received: from udd0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfM4020225;
-	Fri, 13 Apr 2018 12:12:42 -0500
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3DHCfM5020225;
+	Fri, 13 Apr 2018 12:12:43 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 13 Apr 2018 13:02:02 -0400
-Message-ID: <1523638939-28861-7-git-send-email-j-stiffler@ti.com>
+Date: Fri, 13 Apr 2018 13:02:03 -0400
+Message-ID: <1523638939-28861-8-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 References: <1523638939-28861-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 06/23] i2c-lld-rtos: Updating to version 01.00.00.10 & dependency updates
+Subject: [rocko/master][PATCH 07/23] icss-emac-lld: Updating to version 01.00.00.11B
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,50 +75,31 @@ From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ recipes-bsp/icss-emac-lld/icss-emac-lld.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-index a178c27..cad45f3 100644
---- a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-+++ b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-@@ -13,21 +13,25 @@ I2C_LLD_GIT_PROTOCOL = "git"
- I2C_LLD_GIT_BRANCH = "master"
- I2C_LLD_GIT_DESTSUFFIX = "git/ti/drv/i2c"
+diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
+index 68ae99b..f52b369 100644
+--- a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
++++ b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
+@@ -9,14 +9,14 @@ ICSS_EMAC_LLD_GIT_PROTOCOL = "git"
+ ICSS_EMAC_LLD_GIT_BRANCH = "master"
+ ICSS_EMAC_LLD_GIT_DESTSUFFIX = "git/ti/drv/icss_emac"
  
--# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.09A"
--I2C_LLD_SRCREV = "1a0e371f1c992b3f28cb160c6e3ada33d382f6a9"
-+# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.10"
-+I2C_LLD_SRCREV = "631a38ad7245b68bfac40a417bdc9d3a0b7ca724"
+-# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.10A"
+-ICSS_EMAC_LLD_SRCREV = "91f70af3714a823df4f71bde3c4d954728e07856"
++# Below commit ID corresponds to "DEV.ICSS_EMAC_LLD.01.00.00.11B"
++ICSS_EMAC_LLD_SRCREV = "bd643d75a0322b6ca769d8ecbee310d859c0f761"
  
- BRANCH = "${I2C_LLD_GIT_BRANCH}"
- SRC_URI = "${I2C_LLD_GIT_URI};destsuffix=${I2C_LLD_GIT_DESTSUFFIX};protocol=${I2C_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${ICSS_EMAC_LLD_GIT_BRANCH}"
+ SRC_URI = "${ICSS_EMAC_LLD_GIT_URI};destsuffix=${ICSS_EMAC_LLD_GIT_DESTSUFFIX};protocol=${ICSS_EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${I2C_LLD_SRCREV}"
--PV = "01.00.00.09A"
-+PV = "01.00.00.10"
- PR = "r0"
+ SRCREV = "${ICSS_EMAC_LLD_SRCREV}"
+-PV = "01.00.00.10A"
++PV = "01.00.00.11B"
+ INC_PR = "r0"
  
- DEPENDS_append = " osal-rtos \
- "
- DEPENDS_append_ti33x = " starterware-rtos \
-+                         pruss-lld-rtos \
- "
- DEPENDS_append_ti43x = " starterware-rtos \
-+                         pruss-lld-rtos \
-+"
-+DEPENDS_append_am57xx-evm = " pruss-lld-rtos \
- "
- 
- # Build with make instead of XDC
-@@ -38,5 +42,7 @@ S = "${WORKDIR}/${I2C_LLD_GIT_DESTSUFFIX}"
- export PDK_I2C_ROOT_PATH ="${WORKDIR}/build"
- export DEST_ROOT="${S}"
- 
-+INSANE_SKIP_${PN} = "arch"
-+
- # HTML doc link params
- PDK_COMP_LINK_TEXT = "I2C LLD"
+ S = "${WORKDIR}/${ICSS_EMAC_LLD_GIT_DESTSUFFIX}"
 -- 
 2.7.4
 
