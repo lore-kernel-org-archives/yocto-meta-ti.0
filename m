@@ -1,6 +1,6 @@
-Return-Path: <bgriffis@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 52F55E00948; Mon, 23 Apr 2018 09:50:38 -0700 (PDT)
+	id CC6E9E00948; Mon, 23 Apr 2018 10:11:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
@@ -18,42 +18,45 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4584BE008BF
-	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2018 09:50:35 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3NGoZjo022049
-	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2018 11:50:35 -0500
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5DCB1E008BF
+	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2018 10:11:48 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w3NHBlDI007870
+	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2018 12:11:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ti.com;
-	s=ti-com-17Q1; t=1524502235;
-	bh=OeH0ztXzsMSuzM+R9tQutmNBCp9BKZhc2AS+v7kOg0Y=;
-	h=From:To:Subject:Date;
-	b=tmAZjbiiGOiiw3g868rkP7pgGIchgzWsJdEcI5uQBeeZcBRfmeNTbuKGUmPnjoS2P
-	AX7V/yH5185Wf3ddADNv82JhIP3W2lWpRVNsK9Ol6zseNZoMFytBEhoksSw+AcP2ex
-	P5QynSSK1B64YncJ9qPYeOIs0E2IzIZheQaoVDuE=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3NGoZwt009544
-	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2018 11:50:35 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1524503507;
+	bh=3iltLAxItFWmwQybE4O8vRjEydtGeskBqjfoWRnra30=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=aDjf/M8oka1OpU4CabUtfHuhStlLnvT91lydhYpAG3CNOD0LwYUOEL7F2A6O5TrIb
+	Sme1TfN2u4KILhodt+XmYrbHOUtRzJ0kJPb8EqWpKjOZkFAF/rvrI0IMDksb7k4vve
+	vgKIFPiHEPw/y4s3offYJD61v/vsLU7BtVpx5dL0=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w3NHBlG3031130
+	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2018 12:11:47 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Mon, 23 Apr 2018 11:50:35 -0500
-Received: from DFLE100.ent.ti.com ([fe80::f19c:5926:3526:1b30]) by
-	DFLE100.ent.ti.com ([fe80::f19c:5926:3526:1b30%17]) with mapi id
-	15.01.1466.003; Mon, 23 Apr 2018 11:50:35 -0500
-From: "Griffis, Brad" <bgriffis@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+	Mon, 23 Apr 2018 12:11:47 -0500
+Received: from DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222]) by
+	DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222%18]) with mapi id
+	15.01.1466.003; Mon, 23 Apr 2018 12:11:47 -0500
+From: "Stiffler, Jacob" <j-stiffler@ti.com>
+To: "Griffis, Brad" <bgriffis@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
 Thread-Topic: wget fetch issue with ti-cgt-pru_2.1.5.bb
-Thread-Index: AdPbIkHhpqc3TBWiTam9B0qS25aPNQ==
-Date: Mon, 23 Apr 2018 16:50:35 +0000
-Message-ID: <59ad3d9eeae2462fb29bf60eacc51dba@ti.com>
+Thread-Index: AdPbIkHhpqc3TBWiTam9B0qS25aPNQAAzM+A
+Date: Mon, 23 Apr 2018 17:11:47 +0000
+Message-ID: <009a3983ec77401a957b9159946f244c@ti.com>
+References: <59ad3d9eeae2462fb29bf60eacc51dba@ti.com>
+In-Reply-To: <59ad3d9eeae2462fb29bf60eacc51dba@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: yes
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.22.139.13]
+x-originating-ip: [10.218.109.201]
 x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-Subject: wget fetch issue with ti-cgt-pru_2.1.5.bb
+Subject: Re: wget fetch issue with ti-cgt-pru_2.1.5.bb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,20 +69,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2018 16:50:38 -0000
-X-Groupsio-MsgNum: 10790
+X-List-Received-Date: Mon, 23 Apr 2018 17:11:51 -0000
+X-Groupsio-MsgNum: 10791
 Content-Language: en-US
 Content-Type: multipart/related;
-	boundary="_004_59ad3d9eeae2462fb29bf60eacc51dbaticom_";
+	boundary="_004_009a3983ec77401a957b9159946f244cticom_";
 	type="multipart/alternative"
 
---_004_59ad3d9eeae2462fb29bf60eacc51dbaticom_
+--_004_009a3983ec77401a957b9159946f244cticom_
 Content-Type: multipart/alternative;
-	boundary="_000_59ad3d9eeae2462fb29bf60eacc51dbaticom_"
+	boundary="_000_009a3983ec77401a957b9159946f244cticom_"
 
---_000_59ad3d9eeae2462fb29bf60eacc51dbaticom_
+--_000_009a3983ec77401a957b9159946f244cticom_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+Brad,
+
+On my home machine. I was able to recreate this with wget, but I was able t=
+o download through other methods. I am not sure what may be happening.
+
+I was able to download through a browser (chrome), and I was able to downlo=
+ad with "curl" using the following command:
+
+$ curl -L http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_=
+cgt_pru_2.2.1_linux_installer_x86.bin > ti_cgt_pru_2.2.1_linux_installer_x8=
+6.bin
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Cur=
+rent
+                                 Dload  Upload   Total   Spent    Left  Spe=
+ed
+100   382  100   382    0     0   2239      0 --:--:-- --:--:-- --:--:--  2=
+247
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--   =
+  0
+100   318  100   318    0     0    848      0 --:--:-- --:--:-- --:--:--   =
+848
+100 17.0M  100 17.0M    0     0  4040k      0  0:00:04  0:00:04 --:--:-- 45=
+17k
+
+$ file ti_cgt_pru_2.2.1_linux_installer_x86.bin
+ti_cgt_pru_2.2.1_linux_installer_x86.bin: ELF 32-bit LSB  executable, Intel=
+ 80386, version 1 (GNU/Linux), statically linked, stripped
+
+- Jake
+
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Griffis, Brad
+Sent: Monday, April 23, 2018 12:51 PM
+To: meta-ti@yoctoproject.org
+Subject: [EXTERNAL] [meta-ti] wget fetch issue with ti-cgt-pru_2.1.5.bb
 
 Recipe: meta-ti/recipes-ti/devtools/ti-cgt-pru_2.1.5.bb
 Issue summary: fetch of ti_cgt_pru_2.2.1_linux_installer_x86.bin results in=
@@ -105,9 +144,10 @@ blic_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x86.bin [following]
 --2018-04-23 11:48:42--  https://www.ti.com/general/docs/licreg/anonymouspr=
 oddownload.tsp?downloadPage=3Dtrue&location=3Dhttp://software-dl.ti.com/cod=
 egen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x86.bin
-Resolving www.ti.com (www.ti.com)... 23.34.71.13, 2600:1407:21:281::b48, 26=
-00:1407:21:285::b48
-Connecting to www.ti.com (www.ti.com)|23.34.71.13|:443... connected.
+Resolving www.ti.com<http://www.ti.com> (www.ti.com<http://www.ti.com>)... =
+23.34.71.13, 2600:1407:21:281::b48, 2600:1407:21:285::b48
+Connecting to www.ti.com<http://www.ti.com> (www.ti.com)|23.34.71.13|:443<h=
+ttp://www.ti.com)|23.34.71.13|:443>... connected.
 HTTP request sent, awaiting response... 302 Moved Temporarily
 Location: http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_=
 cgt_pru_2.2.1_linux_installer_x86.bin?tracked=3D1 [following]
@@ -134,18 +174,19 @@ Member Group Technical Staff (MGTS)
 Schaumburg, IL
 Office: 847-517-4699
 
-[cid:image001.jpg@01D3DAF9.498214D0]<https://store.ti.com/?HQS=3Dsdm-mm-nul=
+[cid:image001.jpg@01D3DB04.5E41A970]<https://store.ti.com/?HQS=3Dsdm-mm-nul=
 l-americascentral-besig-store-null-wwe>
 
 
---_000_59ad3d9eeae2462fb29bf60eacc51dbaticom_
+--_000_009a3983ec77401a957b9159946f244cticom_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
 <html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
 osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
+xmlns:x=3D"urn:schemas-microsoft-com:office:excel" xmlns:m=3D"http://schema=
+s.microsoft.com/office/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html=
+40">
 <head>
 <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
 >
@@ -183,18 +224,31 @@ p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
 	margin-bottom:.0001pt;
 	font-size:8.0pt;
 	font-family:"Tahoma","sans-serif";}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri","sans-serif";
-	color:windowtext;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{mso-style-priority:34;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
 span.BalloonTextChar
 	{mso-style-name:"Balloon Text Char";
 	mso-style-priority:99;
 	mso-style-link:"Balloon Text";
 	font-family:"Tahoma","sans-serif";}
+span.EmailStyle19
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.EmailStyle20
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
 .MsoChpDefault
 	{mso-style-type:export-only;
-	font-family:"Calibri","sans-serif";}
+	font-size:10.0pt;}
 @page WordSection1
 	{size:8.5in 11.0in;
 	margin:1.0in 1.0in 1.0in 1.0in;}
@@ -209,6 +263,84 @@ div.WordSection1
 </head>
 <body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
 <div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Brad,<o:p></o:p></span=
+></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">On my home machine. I =
+was able to recreate this with wget, but I was able to download through oth=
+er methods. I am not sure what may be happening.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">I was able to download=
+ through a browser (chrome), and I was able to download with &#8220;curl&#8=
+221; using the following command:<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">$ curl -L http://software-dl.ti.com/codegen/esd/cgt_public=
+_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x86.bin &gt; ti_cgt_pru_2.2.=
+1_linux_installer_x86.bin<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">&nbsp; % Total&nbsp;&nbsp;&nbsp; % Received % Xferd&nbsp; =
+Average Speed &nbsp;&nbsp;Time&nbsp;&nbsp;&nbsp; Time&nbsp;&nbsp;&nbsp;&nbs=
+p; Time&nbsp; Current<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dload&nbsp; Upl=
+oad&nbsp;&nbsp; Total&nbsp;&nbsp; Spent&nbsp;&nbsp;&nbsp; Left&nbsp; Speed<=
+o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">100&nbsp;&nbsp; 382&nbsp; 100&nbsp;&nbsp; 382&nbsp;&nbsp;&=
+nbsp; 0&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 2239&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp; 0 --:--:-- --:--:-- --:--:--&nbsp; 2247<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">&nbsp; 0&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&nbsp; 0&nbs=
+p;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 --:--:-- --:--:--=
+ --:--:--&nbsp;&nbsp;&nbsp;&nbsp; 0<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">100&nbsp;&nbsp; 318&nbsp; 100&nbsp;&nbsp; 318&nbsp;&nbsp;&=
+nbsp; 0&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&nbsp; 848&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp; 0 --:--:-- --:--:-- --:--:--&nbsp;&nbsp; 848<o:p></o:p></span></=
+p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">100 17.0M&nbsp; 100 17.0M&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&=
+nbsp;&nbsp; 0&nbsp; 4040k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp; 0:00:04&nbs=
+p; 0:00:04 --:--:-- 4517k<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">$ file ti_cgt_pru_2.2.1_linux_installer_x86.bin<o:p></o:p>=
+</span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;">ti_cgt_pru_2.2.1_linux_installer_x86.bin: ELF 32-bit LSB&n=
+bsp; executable, Intel 80386, version 1 (GNU/Linux), statically linked, str=
+ipped<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">- Jake<o:p></o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
+;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
+ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> meta-ti-=
+bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject.org]
+<b>On Behalf Of </b>Griffis, Brad<br>
+<b>Sent:</b> Monday, April 23, 2018 12:51 PM<br>
+<b>To:</b> meta-ti@yoctoproject.org<br>
+<b>Subject:</b> [EXTERNAL] [meta-ti] wget fetch issue with ti-cgt-pru_2.1.5=
+.bb<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
 <p class=3D"MsoNormal">Recipe: meta-ti/recipes-ti/devtools/ti-cgt-pru_2.1.5=
 .bb<o:p></o:p></p>
 <p class=3D"MsoNormal">Issue summary: fetch of ti_cgt_pru_2.2.1_linux_insta=
@@ -222,38 +354,55 @@ the same behavior.<o:p></o:p></p>
 <p class=3D"MsoNormal">I can see the issue very easily just by doing a wget=
 :<o:p></o:p></p>
 <p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">brad@brad-XPS-15-9560:~$ wget http://software-dl.ti.=
-com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x8=
-6.bin<o:p></o:p></p>
-<p class=3D"MsoNormal">--2018-04-23 11:48:42--&nbsp; http://software-dl.ti.=
-com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x8=
-6.bin<o:p></o:p></p>
+<p class=3D"MsoNormal">brad@brad-XPS-15-9560:~$ wget <a href=3D"http://soft=
+ware-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_i=
+nstaller_x86.bin">
+http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.=
+2.1_linux_installer_x86.bin</a><o:p></o:p></p>
+<p class=3D"MsoNormal">--2018-04-23 11:48:42--&nbsp; <a href=3D"http://soft=
+ware-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_i=
+nstaller_x86.bin">
+http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.=
+2.1_linux_installer_x86.bin</a><o:p></o:p></p>
 <p class=3D"MsoNormal">Resolving software-dl.ti.com (software-dl.ti.com)...=
  23.209.190.17<o:p></o:p></p>
 <p class=3D"MsoNormal">Connecting to software-dl.ti.com (software-dl.ti.com=
 )|23.209.190.17|:80... connected.<o:p></o:p></p>
 <p class=3D"MsoNormal">HTTP request sent, awaiting response... 302 Moved Te=
 mporarily<o:p></o:p></p>
-<p class=3D"MsoNormal">Location: https://www.ti.com/general/docs/licreg/ano=
-nymousproddownload.tsp?downloadPage=3Dtrue&amp;location=3Dhttp://software-d=
-l.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_install=
-er_x86.bin [following]<o:p></o:p></p>
-<p class=3D"MsoNormal">--2018-04-23 11:48:42--&nbsp; https://www.ti.com/gen=
-eral/docs/licreg/anonymousproddownload.tsp?downloadPage=3Dtrue&amp;location=
-=3Dhttp://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru=
-_2.2.1_linux_installer_x86.bin<o:p></o:p></p>
-<p class=3D"MsoNormal">Resolving www.ti.com (www.ti.com)... 23.34.71.13, 26=
-00:1407:21:281::b48, 2600:1407:21:285::b48<o:p></o:p></p>
-<p class=3D"MsoNormal">Connecting to www.ti.com (www.ti.com)|23.34.71.13|:4=
-43... connected.<o:p></o:p></p>
+<p class=3D"MsoNormal">Location: <a href=3D"https://www.ti.com/general/docs=
+/licreg/anonymousproddownload.tsp?downloadPage=3Dtrue&amp;location=3Dhttp:/=
+/software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_li=
+nux_installer_x86.bin">
+https://www.ti.com/general/docs/licreg/anonymousproddownload.tsp?downloadPa=
+ge=3Dtrue&amp;location=3Dhttp://software-dl.ti.com/codegen/esd/cgt_public_s=
+w/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x86.bin</a> [following]<o:p></=
+o:p></p>
+<p class=3D"MsoNormal">--2018-04-23 11:48:42--&nbsp; <a href=3D"https://www=
+.ti.com/general/docs/licreg/anonymousproddownload.tsp?downloadPage=3Dtrue&a=
+mp;location=3Dhttp://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1=
+/ti_cgt_pru_2.2.1_linux_installer_x86.bin">
+https://www.ti.com/general/docs/licreg/anonymousproddownload.tsp?downloadPa=
+ge=3Dtrue&amp;location=3Dhttp://software-dl.ti.com/codegen/esd/cgt_public_s=
+w/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x86.bin</a><o:p></o:p></p>
+<p class=3D"MsoNormal">Resolving <a href=3D"http://www.ti.com">www.ti.com</=
+a> (<a href=3D"http://www.ti.com">www.ti.com</a>)... 23.34.71.13, 2600:1407=
+:21:281::b48, 2600:1407:21:285::b48<o:p></o:p></p>
+<p class=3D"MsoNormal">Connecting to <a href=3D"http://www.ti.com">www.ti.c=
+om</a> (<a href=3D"http://www.ti.com)|23.34.71.13|:443">www.ti.com)|23.34.7=
+1.13|:443</a>... connected.<o:p></o:p></p>
 <p class=3D"MsoNormal">HTTP request sent, awaiting response... 302 Moved Te=
 mporarily<o:p></o:p></p>
-<p class=3D"MsoNormal">Location: http://software-dl.ti.com/codegen/esd/cgt_=
-public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x86.bin?tracked=3D1 [f=
-ollowing]<o:p></o:p></p>
-<p class=3D"MsoNormal">--2018-04-23 11:48:42--&nbsp; http://software-dl.ti.=
-com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x8=
-6.bin?tracked=3D1<o:p></o:p></p>
+<p class=3D"MsoNormal">Location: <a href=3D"http://software-dl.ti.com/codeg=
+en/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_installer_x86.bin?tra=
+cked=3D1">
+http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.=
+2.1_linux_installer_x86.bin?tracked=3D1</a> [following]<o:p></o:p></p>
+<p class=3D"MsoNormal">--2018-04-23 11:48:42--&nbsp; <a href=3D"http://soft=
+ware-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.2.1_linux_i=
+nstaller_x86.bin?tracked=3D1">
+http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/2.2.1/ti_cgt_pru_2.=
+2.1_linux_installer_x86.bin?tracked=3D1</a><o:p></o:p></p>
 <p class=3D"MsoNormal">Connecting to software-dl.ti.com (software-dl.ti.com=
 )|23.209.190.17|:80... connected.<o:p></o:p></p>
 <p class=3D"MsoNormal">HTTP request sent, awaiting response... 403 Forbidde=
@@ -282,22 +431,23 @@ o:p></o:p></p>
 <p class=3D"MsoNormal"><a href=3D"https://store.ti.com/?HQS=3Dsdm-mm-null-a=
 mericascentral-besig-store-null-wwe"><span style=3D"color:windowtext;text-d=
 ecoration:none"><img border=3D"0" width=3D"624" height=3D"77" id=3D"Picture=
-_x0020_9" src=3D"cid:image001.jpg@01D3DAF9.498214D0"></span></a><o:p></o:p>=
+_x0020_9" src=3D"cid:image001.jpg@01D3DB04.5E41A970"></span></a><o:p></o:p>=
 </p>
 <p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
 </div>
 </body>
 </html>
 
---_000_59ad3d9eeae2462fb29bf60eacc51dbaticom_--
+--_000_009a3983ec77401a957b9159946f244cticom_--
 
---_004_59ad3d9eeae2462fb29bf60eacc51dbaticom_
+--_004_009a3983ec77401a957b9159946f244cticom_
 Content-Type: image/jpeg; name="image001.jpg"
 Content-Description: image001.jpg
 Content-Disposition: inline; filename="image001.jpg"; size=15513;
-	creation-date="Mon, 23 Apr 2018 16:50:34 GMT";
-	modification-date="Mon, 23 Apr 2018 16:50:34 GMT"
-Content-ID: <image001.jpg@01D3DAF9.498214D0>
+	creation-date="Mon, 23 Apr 2018 17:11:46 GMT";
+	modification-date="Mon, 23 Apr 2018 17:11:46 GMT"
+Content-ID: <image001.jpg@01D3DB04.5E41A970>
 Content-Transfer-Encoding: base64
 
 /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
@@ -559,4 +709,4 @@ a/Z/v/Cl6a/Z/v8Awo2EiPi2E73ofwitKhXpr9n+/wDCl6a/Z/v/AAo2EiPi2E73ofwitKhXpr9n
 +/8ACl6a/Z/v/CjYSI+LYTveh/CK0qFemv2f7/wpemv2f7/wo2EiPi2E73ofwiw8aaf/ABV36B/l
 Q3031/o/3/hXL15zHcHZ/WSR6/T+FM2B4IVU3SmFdG4B3A8D+F//2Q==
 
---_004_59ad3d9eeae2462fb29bf60eacc51dbaticom_--
+--_004_009a3983ec77401a957b9159946f244cticom_--
