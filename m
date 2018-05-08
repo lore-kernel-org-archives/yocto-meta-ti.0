@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <h-gou@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AAE6EE00C59; Tue,  8 May 2018 12:35:58 -0700 (PDT)
+	id AD3C5E00B8E; Tue,  8 May 2018 13:20:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.19.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,47 +17,43 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 82345E00B8E
-	for <meta-ti@yoctoproject.org>; Tue,  8 May 2018 12:35:57 -0700 (PDT)
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15957E0084D
+	for <meta-ti@yoctoproject.org>; Tue,  8 May 2018 13:20:27 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w48JZu7N005611
-	for <meta-ti@yoctoproject.org>; Tue, 8 May 2018 14:35:56 -0500
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w48KKRrM006676
+	for <meta-ti@yoctoproject.org>; Tue, 8 May 2018 15:20:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1525808156;
-	bh=skV+wxbt5DPb+FRc96aa8CPLdiu8PtHcGFHrqUwTCTs=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=P5ZIGlYupYuP1ZmeAb5WD2yhMx5qxWVfBlhUqlzidft43AmkeMsVq+x0Bx7Kd25rF
-	OT818vM3UVRsROcaUZfXHhY6fr/LFYr218ppSI71vXnwwE7RVtItXVSd5goIp0xSpt
-	tRDC6/LRWNa0UpXZVVCNHzWcDQXE53haOQltZjHc=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w48JZuYB002961
-	for <meta-ti@yoctoproject.org>; Tue, 8 May 2018 14:35:56 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1525810827;
+	bh=6XXGJNw+kXoHhywCYX+CXbMNeSNiTgfXQYw+ND89Wjc=;
+	h=From:To:CC:Subject:Date;
+	b=a7FPqeuYPDahvMXgpLOKvif3NkycQaJnlBGh967OzgvtK/rM+sQW05mYUk2kvNEyK
+	sMo5hA3vTXZQzESJDyAtCyU9OoaHRRn7IimDJO1hi98oylx4M/VI6aRPTeNh+VDysf
+	xTzLEH9zTdXhUKD3FPl+i6nm5Yph4xQWhtXTpPsI=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w48KKR1b003751
+	for <meta-ti@yoctoproject.org>; Tue, 8 May 2018 15:20:27 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 8 May 2018 14:35:56 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE105.ent.ti.com
-	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 8 May 2018 15:20:26 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE101.ent.ti.com
+	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 8 May 2018 14:35:56 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w48JZuQm001842;
-	Tue, 8 May 2018 14:35:56 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.161.202])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	w48JZtx29781; Tue, 8 May 2018 14:35:55 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
+	Transport; Tue, 8 May 2018 15:20:26 -0500
+Received: from uda0271529.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w48KKOvP014952;
+	Tue, 8 May 2018 15:20:26 -0500
+From: Hongmei Gou <a0271529@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 8 May 2018 14:35:53 -0500
-Message-ID: <20180508193553.17863-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20180508193553.17863-1-dmurphy@ti.com>
-References: <20180508193553.17863-1-dmurphy@ti.com>
+Date: Tue, 8 May 2018 16:20:22 -0400
+Message-ID: <1525810822-7013-1-git-send-email-a0271529@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2018.01-rc3
+Cc: Hongmei Gou <a0271529@ti.com>
+Subject: [rocko/master] [PATCH] linux-ti-staging: ti-uio: rebase pru-uio.dtsi for k2g and am3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,29 +66,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2018 19:35:58 -0000
+X-List-Received-Date: Tue, 08 May 2018 20:20:28 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Hongmei Gou <a0271529@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/files/k2g/keystone-k2g-pru-uio.dtsi | 4 ++--
+ recipes-kernel/linux/files/ti33x/am335x-pru-uio.dtsi     | 8 --------
+ 2 files changed, 2 insertions(+), 10 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index 638b5b61..c131571a 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
- 
--PR = "r8"
-+PR = "r9"
- 
- BRANCH = "ti-u-boot-2018.01"
- 
--SRCREV = "e9d294d5c4298693c748db3e1deeaa993d09c426"
-+SRCREV = "131dc8283021742f03e843e216ed301862e2db38"
+diff --git a/recipes-kernel/linux/files/k2g/keystone-k2g-pru-uio.dtsi b/recipes-kernel/linux/files/k2g/keystone-k2g-pru-uio.dtsi
+index 69955a4..2ba57f0 100644
+--- a/recipes-kernel/linux/files/k2g/keystone-k2g-pru-uio.dtsi
++++ b/recipes-kernel/linux/files/k2g/keystone-k2g-pru-uio.dtsi
+@@ -2,7 +2,7 @@
+ 		uio_pruss1_mdio: uio_mdio@20ab2400 {
+ 			compatible = "ti,davinci_mdio";
+ 			reg = <0x20ab2400 0x90>;
+-			clocks = <&k2g_clks K2G_DEV_ICSS0 K2G_DEV_ICSS_CORE_CLK>;
++			clocks = <&k2g_clks 0x0014 1>;
+ 			clock-names = "fck";
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -98,7 +98,7 @@
+ 		uio_pruss2_mdio: uio_mdio@20af2400 {
+ 			compatible = "ti,davinci_mdio";
+ 			reg = <0x20af2400 0x90>;
+-			clocks = <&k2g_clks K2G_DEV_ICSS1 K2G_DEV_ICSS_CORE_CLK>;
++			clocks = <&k2g_clks 0x0015 1>;
+ 			clock-names = "fck";
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+diff --git a/recipes-kernel/linux/files/ti33x/am335x-pru-uio.dtsi b/recipes-kernel/linux/files/ti33x/am335x-pru-uio.dtsi
+index 2d9127b..ddf4566 100644
+--- a/recipes-kernel/linux/files/ti33x/am335x-pru-uio.dtsi
++++ b/recipes-kernel/linux/files/ti33x/am335x-pru-uio.dtsi
+@@ -182,11 +182,3 @@
+ &pruss_mdio {
+ 	status = "disabled";
+ };
+-
+-&pruss_emac0 {
+-	status = "disabled";
+-};
+-
+-&pruss_emac1 {
+-	status = "disabled";
+-};
 -- 
-2.17.0.252.gfe0a9eaf3
+1.9.1
 
 
