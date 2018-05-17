@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 30DDDE007AD; Tue, 15 May 2018 11:29:26 -0700 (PDT)
+	id 5DFA5E00929; Thu, 17 May 2018 07:48:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.27.80 listed in list.dnswl.org]
+	*      [198.47.27.77 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,45 +17,42 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelnx194.ext.ti.com (lelnx194.ext.ti.com [198.47.27.80])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04F99E0044F
-	for <meta-ti@yoctoproject.org>; Tue, 15 May 2018 11:29:24 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelnx194.ext.ti.com (8.15.1/8.15.1) with ESMTP id w4FITOUu018820
-	for <meta-ti@yoctoproject.org>; Tue, 15 May 2018 13:29:24 -0500
+Received: from lelnx193.ext.ti.com (lelnx193.ext.ti.com [198.47.27.77])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10BADE007DA
+	for <meta-ti@yoctoproject.org>; Thu, 17 May 2018 07:48:49 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelnx193.ext.ti.com (8.15.1/8.15.1) with ESMTP id w4HEmnEV028474
+	for <meta-ti@yoctoproject.org>; Thu, 17 May 2018 09:48:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1526408964;
-	bh=C7cnxDwj5SOJtigSr4/AHsL5gHBF2ViOfuD3UfPiwjA=;
+	s=ti-com-17Q1; t=1526568529;
+	bh=DPR7iWErnHeIQmw6VnXjZQpbPqQxWv8Ro3Fjcq6/AEc=;
 	h=From:To:CC:Subject:Date;
-	b=ruN09XisVF1EJGC+v4ukcQEpvPEefQR+nN3luXsCV8Bh7ku3/qmsfzrgYz6qR9UwV
-	PD2ncAZrPH0jWUBJtmO4xJbiV2ivFvrolFw0e6BlTbRnQ2L8W+ibC1bpsJXTIl0h+C
-	ie1sqb5YcwPIDZwbZTNe1rLJ2PWOluaXEXT4E7So=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w4FITNGh008254
-	for <meta-ti@yoctoproject.org>; Tue, 15 May 2018 13:29:23 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	b=kzSsJ1gaqdCzZjD5xVmM3YQOuMmx/A35yjXqw0O6cNlPw85piqM0wHQEvY6maURer
+	dpJgr4NQzaShtdmWO+SFd+z1i7jCy4IhKznRfzYDETkAoIe6Rvg+XpAYcxhHYnHwgG
+	M7fEI14ugSE8zPokGyfbIj/B96Rj6GzKfzrAYLpA=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w4HEmnt0016729
+	for <meta-ti@yoctoproject.org>; Thu, 17 May 2018 09:48:49 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 15 May 2018 13:29:23 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE101.ent.ti.com
-	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_0,
+	Thu, 17 May 2018 09:48:48 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 15 May 2018 13:29:23 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w4FITN2W026632;
-	Tue, 15 May 2018 13:29:23 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.154.192])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	w4FITNx20511; Tue, 15 May 2018 13:29:23 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
+	Transport; Thu, 17 May 2018 09:48:49 -0500
+Received: from uda0862859a.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w4HEmmqd005086;
+	Thu, 17 May 2018 09:48:48 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 15 May 2018 13:29:12 -0500
-Message-ID: <20180515182912.31017-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
+Date: Thu, 17 May 2018 10:48:47 -0400
+Message-ID: <1526568527-21284-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] linux-ti-staging: update to ti2018.01-rc4
+Subject: [rocko/master][PATCH] ti-ipc: Update to new version 3.47.02.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,43 +65,194 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2018 18:29:26 -0000
+X-List-Received-Date: Thu, 17 May 2018 14:48:51 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 4 ++--
- recipes-kernel/linux/linux-ti-staging_4.14.bb    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+Adds new example for AM571X
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-index 36d470ba..f3708944 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-common.inc      |  5 +++--
+ recipes-ti/ipc/ti-ipc-examples.inc    |  6 +++---
+ recipes-ti/ipc/ti-ipc-examples_git.bb | 24 ++++++++++++------------
+ recipes-ti/ipc/ti-ipc-rtos.inc        | 10 +++++-----
+ recipes-ti/ipc/ti-ipc-rtos_git.bb     | 20 ++++++++++----------
+ recipes-ti/ipc/ti-ipc.inc             |  4 ++--
+ 6 files changed, 35 insertions(+), 34 deletions(-)
+
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 00e4e91..e65aacc 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,5 +1,5 @@
+-PV = "3.47.01.00"
+-INC_PR = "r1"
++PV = "3.47.02.00"
++INC_PR = "r0"
  
- BRANCH = "ti-rt-linux-4.14.y"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--SRCREV = "abfcd79f10da4eb13f9e8d3bc8eae007a8111fe9"
--PV = "4.14.39+git${SRCPV}"
-+SRCREV = "8dac75629c836fb3d75d51fbd2500df9b0b7edb9"
-+PV = "4.14.40+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-index 34430d63..804ee90a 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-@@ -54,8 +54,8 @@ S = "${WORKDIR}/git"
+@@ -15,3 +15,4 @@ PLATFORM_c667x-evm = "C6678"
+ PLATFORM_c665x-evm = "C6678"
  
- BRANCH = "ti-lsk-linux-4.14.y"
+ ALT_PLATFORM_k2hk = "TCI6636"
++ALT_PLATFORM_dra7xx = "AM572X AM571X"
+diff --git a/recipes-ti/ipc/ti-ipc-examples.inc b/recipes-ti/ipc/ti-ipc-examples.inc
+index c9fe2cb..cd2240c 100644
+--- a/recipes-ti/ipc/ti-ipc-examples.inc
++++ b/recipes-ti/ipc/ti-ipc-examples.inc
+@@ -17,10 +17,10 @@ do_compile() {
+   oe_runmake .examples \
+     IPCTOOLS="${S_ipc-metadata}/src/etc"
  
--SRCREV = "7aafa904fa069ab404fd4db21e82a646b90c6056"
--PV = "4.14.39+git${SRCPV}"
-+SRCREV = "fb417352e5966a95a4a9983264150e6b32009897"
-+PV = "4.14.40+git${SRCPV}"
+-  if [ ! -z ${ALT_PLATFORM} ]; then
+-    oe_runmake .examples "PLATFORM=${ALT_PLATFORM}" \
++  for alt_platform in ${ALT_PLATFORM}; do
++    oe_runmake .examples "PLATFORM=${alt_platform}" \
+       IPCTOOLS="${S_ipc-metadata}/src/etc"
+-  fi
++  done
+ }
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ do_install() {
+diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-ti/ipc/ti-ipc-examples_git.bb
+index 8aad69c..c46e5c8 100644
+--- a/recipes-ti/ipc/ti-ipc-examples_git.bb
++++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
+@@ -8,16 +8,16 @@ do_compile_append() {
+   if [  "${PLATFORM}" != "UNKNOWN" ]; then
+     oe_runmake extract HOSTOS="bios" IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
+ 
+-    if [ ! -z ${ALT_PLATFORM} ]; then
+-      oe_runmake extract PLATFORM="${ALT_PLATFORM}" HOSTOS="bios" \
++    for alt_platform in ${ALT_PLATFORM}; do
++      oe_runmake extract PLATFORM="${alt_platform}" HOSTOS="bios" \
+          IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
+-    fi
++    done
+     oe_runmake -C examples all HOSTOS="bios" \
+       IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
+-    if [ ! -z ${ALT_PLATFORM} ]; then
++    for alt_platform in ${ALT_PLATFORM}; do
+       oe_runmake -C examples all HOSTOS="bios" \
+-        IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" PLATFORM="${ALT_PLATFORM}"
+-    fi
++        IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" PLATFORM="${alt_platform}"
++    done
+   fi
+ }
+ 
+@@ -30,14 +30,14 @@ do_install_append() {
+     oe_runmake -C examples install_rov IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
+       HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples/bios"
+ 
+-    if [ ! -z ${ALT_PLATFORM} ]; then
++    for alt_platform in ${ALT_PLATFORM}; do
+       oe_runmake -C examples install IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
+-        HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples/bios" \
+-        PLATFORM="${ALT_PLATFORM}"
++        HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples/${alt_platform}/bios" \
++        PLATFORM="${alt_platform}"
+       oe_runmake -C examples install_rov IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
+-        HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples/bios" \
+-        PLATFORM="${ALT_PLATFORM}"
+-    fi
++        HOSTOS="bios" EXEC_DIR="${D}/ipc_${IPC_VERSION}/examples/${alt_platform}/bios" \
++        PLATFORM="${alt_platform}"
++    done
+   fi
+ }
+ 
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 3f876d3..868743e 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -24,11 +24,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
+ 
+-# Corresponds to tag: 3.47.01.00B
+-SRCREV_ipc-examples = "03ff856444b5bb9e60a907125a1f042b29b25d7b"
++# Corresponds to tag: 3.47.02.00
++SRCREV_ipc-metadata = "e8aff83111b8a0d64d7a77413b6f66d3106084d8"
+ 
+-# Corresponds to tag: 3.47.01.00A
+-SRCREV_ipc-metadata = "72578cce9c9f9a932eb22b3397b46131efb12d69"
++# Corresponds to tag: 3.47.02.00
++SRCREV_ipc-examples = "351e9a6d94c68f7ff64b2c002ee6750242ece6d9"
+ 
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+@@ -36,7 +36,7 @@ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+ RELEASE_TYPE = "GA"
+ RELEASE_SUFFIX = ""
+ 
+-PR = "${INC_PR}.r5"
++PR = "${INC_PR}.r0"
+ 
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+                             gcc-arm-none-eabi-native \
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 53ab76d..b292d67 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -27,20 +27,20 @@ do_compile() {
+   cd ${S_ipc-examples}/src
+   oe_runmake .examples \
+     IPCTOOLS="${S_ipc-metadata}/src/etc"
+-  if [ ! -z ${ALT_PLATFORM} ]; then
++  for alt_platform in ${ALT_PLATFORM}; do
+     oe_runmake .examples \
+       IPCTOOLS="${S_ipc-metadata}/src/etc" \
+-      PLATFORM=${ALT_PLATFORM}
+-  fi
++      PLATFORM=${alt_platform}
++  done
+ 
+   if [  "${PLATFORM}" != "UNKNOWN" ]; then
+     oe_runmake extract HOSTOS="bios" IPC_INSTALL_DIR="${S}"
+     oe_runmake extract HOSTOS="linux" IPC_INSTALL_DIR="${S}"
+ 
+-    if [ ! -z ${ALT_PLATFORM} ]; then
+-      oe_runmake extract PLATFORM=${ALT_PLATFORM} HOSTOS="bios" IPC_INSTALL_DIR="${S}"
+-      oe_runmake extract PLATFORM=${ALT_PLATFORM} HOSTOS="linux" IPC_INSTALL_DIR="${S}"
+-    fi
++    for alt_platform in ${ALT_PLATFORM}; do
++      oe_runmake extract PLATFORM=${alt_platform} HOSTOS="bios" IPC_INSTALL_DIR="${S}"
++      oe_runmake extract PLATFORM=${alt_platform} HOSTOS="linux" IPC_INSTALL_DIR="${S}"
++    done
+   fi
+ 
+   IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
+@@ -54,9 +54,9 @@ do_compile() {
+     cp -pPf ${S_ipc-examples}/src/examples/*.* ${IPC_PACKAGE_DIR}/examples/
+     cp -pPf ${S_ipc-examples}/src/examples/makefile ${IPC_PACKAGE_DIR}/examples/
+     cp -pPrf ${S_ipc-examples}/src/examples/${PLATFORM}* ${IPC_PACKAGE_DIR}/examples/
+-    if [ ! -z ${ALT_PLATFORM} ]; then
+-      cp -pPrf ${S_ipc-examples}/src/examples/${ALT_PLATFORM}* ${IPC_PACKAGE_DIR}/examples/
+-    fi
++    for alt_platform in ${ALT_PLATFORM}; do
++      cp -pPrf ${S_ipc-examples}/src/examples/${alt_platform}* ${IPC_PACKAGE_DIR}/examples/
++    done
+     find ${IPC_PACKAGE_DIR}/examples/ -name "*zip" -type f | xargs -I {} rm {}
+   fi
+ }
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 49d8224..e8038a5 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.47"
+ 
+-#Corresponds to 3.47.01.00
+-TI_IPC_SRCREV = "6a2595a4148fb12f259efc19164a9d33ad2ed294"
++#Corresponds to 3.47.02.00
++TI_IPC_SRCREV = "24c36385d096613af123d1e1696fb2fee652ef36"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 -- 
-2.17.0.582.gccdcbd54c
+1.9.1
 
 
