@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CD73DE010BD; Sun, 17 Jun 2018 12:37:29 -0700 (PDT)
+	id E0AF2E00E15; Sun, 17 Jun 2018 12:37:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,32 +9,32 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B7BBE00E15
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98FE4E00CB2
 	for <meta-ti@yoctoproject.org>; Sun, 17 Jun 2018 12:37:28 -0700 (PDT)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id BA0A920C17;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E942B20C15;
 	Sun, 17 Jun 2018 19:37:27 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id SWDSCoMuQkGR; Sun, 17 Jun 2018 19:37:27 +0000 (UTC)
+	with ESMTP id NUHPqtTpqS0r; Sun, 17 Jun 2018 19:37:27 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 59112207AB;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8B08B20BBF;
 	Sun, 17 Jun 2018 19:37:26 +0000 (UTC)
 Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id B00581634AC;
+	by mail.denix.org (Postfix) with ESMTP id BB9631634AD;
 	Sun, 17 Jun 2018 15:37:25 -0400 (EDT)
 From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Sun, 17 Jun 2018 15:37:20 -0400
-Message-Id: <1529264243-32781-2-git-send-email-denys@ti.com>
+Date: Sun, 17 Jun 2018 15:37:21 -0400
+Message-Id: <1529264243-32781-3-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1529264243-32781-1-git-send-email-denys@ti.com>
 References: <1529264243-32781-1-git-send-email-denys@ti.com>
-Subject: [rocko/master][PATCH 2/5] machine: am65xx-evm.conf: add machine definition for AM65xx platform
+Subject: [rocko/master][PATCH 3/5] arm-trusted-firmware: add version 1.5 of ATF with K3 support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,51 +47,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jun 2018 19:37:29 -0000
-
-The AM654 SoC is a lead device of the K3 Multicore SoC architecture
-platform, targeted for broad market and industrial control with aim to
-meet the complex processing needs of modern embedded products.
-
-See AM65x Technical Reference Manual (SPRUID7, April 2018)
-for further details: http://www.ti.com/lit/pdf/spruid7
+X-List-Received-Date: Sun, 17 Jun 2018 19:37:30 -0000
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- conf/machine/am65xx-evm.conf | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 conf/machine/am65xx-evm.conf
+ .../arm-trusted-firmware_1.5.bb                    | 61 ++++++++++++++++++++++
+ 1 file changed, 61 insertions(+)
+ create mode 100644 recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_1.5.bb
 
-diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
+diff --git a/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_1.5.bb b/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_1.5.bb
 new file mode 100644
-index 0000000..6b3bdec
+index 0000000..5a7fd21
 --- /dev/null
-+++ b/conf/machine/am65xx-evm.conf
-@@ -0,0 +1,24 @@
-+#@TYPE: Machine
-+#@NAME: AM65xx EVM
-+#@DESCRIPTION: Machine configuration for the TI AM65xx EVM
++++ b/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_1.5.bb
+@@ -0,0 +1,61 @@
++SUMMARY = "ARM Trusted Firmware"
++DESCRIPTION = "ARM Trusted Firmware provides a reference implementation of \
++Secure World software for ARMv8-A, including Exception Level 3 (EL3) software. \
++It provides implementations of various ARM interface standards such as the \
++Power State Coordination Interface (PSCI), Trusted Board Boot Requirements \
++(TBBR) and Secure monitor code."
++HOMEPAGE = "http://infocenter.arm.com/help/topic/com.arm.doc.dui0928e/CJHIDGJF.html"
 +
-+require conf/machine/include/k3.inc
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://license.rst;md5=e927e02bca647e14efd87e9e914b2443"
 +
-+MACHINE_FEATURES += "touchscreen"
++inherit deploy
 +
-+IMAGE_FSTYPES += "tar.xz cpio cpio.xz wic.xz"
++DEPENDS += "dtc-native"
 +
-+SERIAL_CONSOLE = "115200 ttyS2"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+KERNEL_DEVICETREE = "ti/k3-am654-base-board.dtb"
++S = "${WORKDIR}/git"
 +
-+UBOOT_MACHINE = "am65x_evm_a53_defconfig"
++PV_append = "+git${SRCPV}"
 +
-+OPTEEMACHINE = "k3"
-+OPTEEFLAVOR = "am65x"
-+OPTEEOUTPUTMACHINE = "k3"
++BRANCH = "ti-atf"
++SRC_URI = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH}"
 +
-+WKS_FILE = "sdimage-bootpart.wks"
-+IMAGE_BOOT_FILES = "u-boot.img"
++SRCREV ?= "5a0daebab6bf72b27cc74151d4e596247f804e44"
 +
-+do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot"
++# Make ATF "aware" of OPTEE, no build dependency
++PACKAGECONFIG[optee] = "SPD=opteed"
++
++COMPATIBLE_MACHINE = "k3"
++ATFPLATFORM_k3 = "k3"
++ATFBOARD_k3 = "generic"
++
++PACKAGECONFIG_k3 = "optee"
++
++CFLAGS[unexport] = "1"
++LDFLAGS[unexport] = "1"
++AS[unexport] = "1"
++LD[unexport] = "1"
++
++do_configure[noexec] = "1"
++
++EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" PLAT="${ATFPLATFORM}" TARGET_BOARD="${ATFBOARD}" ${PACKAGECONFIG_CONFARGS}'
++
++do_compile() {
++	oe_runmake all
++}
++
++do_install() {
++	install -d ${D}/boot
++	install -m 0644 ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/bl31.bin ${D}/boot/
++}
++
++do_deploy() {
++	install -d ${DEPLOYDIR}
++	install -m 0644 ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/bl31.bin ${DEPLOYDIR}/
++}
++addtask deploy before do_build after do_compile
++
++FILES_${PN} = "/boot"
++SYSROOT_DIRS += "/boot"
 -- 
 2.7.4
 
