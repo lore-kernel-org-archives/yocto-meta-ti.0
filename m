@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <d-senicic1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AD6D5E01538; Mon, 18 Jun 2018 11:29:21 -0700 (PDT)
+	id 3F72AE01081; Mon, 18 Jun 2018 11:36:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [198.47.19.16 listed in list.dnswl.org]
+	*      [198.47.19.17 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -17,45 +17,46 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01D19E01252
-	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 11:29:20 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w5IITK86011977
-	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 13:29:20 -0500
+Received: from fllnx210.ext.ti.com (fllnx210.ext.ti.com [198.47.19.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 633DAE01081
+	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 11:36:25 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllnx210.ext.ti.com (8.15.1/8.15.1) with ESMTP id w5IIaOWt018321
+	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 13:36:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1529346560;
-	bh=F5QwmLXlhaCIwmfvpfX4d5ACAO64XfPzYD1S4OcGoMM=;
-	h=From:To:Subject:Date:References:In-Reply-To;
-	b=WnWicsFOecMgtGCBdn9x6NS4yN4EHJnP0Za47xlrfQSb+H/OyuyxieqalSXMZo0AB
-	sAjY0G9YkD8jtJ4r9DVXNftmHt3m5jeu9NcuWYStgGAQ7wdtiGOD66ENcW1oNTokso
-	Bo0z4+xWU+zZFgbd5s1fKhjQC3s1vkNg+NGkmd+4=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w5IITKDb019639
-	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 13:29:20 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1529346984;
+	bh=rRzx6NNu48mr6ojKGMY3D4Qb5tcKoEdMcgSbPpcYdzs=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=ofhslGb05wjHcjgN5HDySDI+ppie/8bn99NPHpymD7DOdbjGEpUIOLsceJ0lg4dyZ
+	6qjZOZCGV/9OQhnTocJcch28LW8MMzBIF5T8ETdQhzurIaoS92MEWBAOdp3l0Xrgmv
+	gEF+r/10GobhY6wWgE/3ZUpbmp/UeqqHUIO3hAko=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w5IIaOUK025591
+	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 13:36:24 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Mon, 18 Jun 2018 13:29:20 -0500
-Received: from DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222]) by
-	DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222%18]) with mapi id
-	15.01.1466.003; Mon, 18 Jun 2018 13:29:20 -0500
-From: "Stiffler, Jacob" <j-stiffler@ti.com>
-To: "Senicic, Djordje" <d-senicic1@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
+	Mon, 18 Jun 2018 13:36:24 -0500
+Received: from DLEE100.ent.ti.com ([fe80::ad4d:c227:3f85:880d]) by
+	DLEE100.ent.ti.com ([fe80::ad4d:c227:3f85:880d%17]) with mapi id
+	15.01.1466.003; Mon, 18 Jun 2018 13:36:24 -0500
+From: "Senicic, Djordje" <d-senicic1@ti.com>
+To: "Stiffler, Jacob" <j-stiffler@ti.com>
 Thread-Topic: [EXTERNAL] [meta-ti] [rocko/master][PATCH] ti-pdk-build: New
 	DEV.PDK_BUILD.01.00.00.08F
-Thread-Index: AQHUBnDbTOBaZY41LE+NBjhza68v7qRmV3Iw
-Date: Mon, 18 Jun 2018 18:29:19 +0000
-Message-ID: <1a6cc17f8f8c400cbad046e36cdfc55a@ti.com>
+Thread-Index: AQHUBzJFpEOQEhFQgUWVXYX67u4SlqRmV+Hg
+Date: Mon, 18 Jun 2018 18:36:24 +0000
+Message-ID: <6480f958ca044a23a35fb37fd72edd85@ti.com>
 References: <1529263469-20920-1-git-send-email-x0157990@ti.com>
-In-Reply-To: <1529263469-20920-1-git-send-email-x0157990@ti.com>
+	<1a6cc17f8f8c400cbad046e36cdfc55a@ti.com>
+In-Reply-To: <1a6cc17f8f8c400cbad046e36cdfc55a@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [158.218.113.191]
+x-originating-ip: [158.218.113.185]
 x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [EXTERNAL] [rocko/master][PATCH] ti-pdk-build: New DEV.PDK_BUILD.01.00.00.08F
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -69,10 +70,19 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 18:29:21 -0000
+X-List-Received-Date: Mon, 18 Jun 2018 18:36:26 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+[meta-ti] [rocko/ti2018.1] ?
+
+-----Original Message-----
+From: Stiffler, Jacob=20
+Sent: Monday, June 18, 2018 2:29 PM
+To: Senicic, Djordje; meta-ti@yoctoproject.org
+Subject: RE: [EXTERNAL] [meta-ti] [rocko/master][PATCH] ti-pdk-build: New D=
+EV.PDK_BUILD.01.00.00.08F
 
 Please add this to the ti2018.01 branch.
 
