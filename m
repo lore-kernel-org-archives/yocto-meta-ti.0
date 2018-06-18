@@ -1,40 +1,57 @@
-Return-Path: <denys@ti.com>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2FB7AE00DD7; Sun, 17 Jun 2018 12:37:30 -0700 (PDT)
+	id 8CB03E01350; Mon, 18 Jun 2018 07:03:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97D0EE0084F
-	for <meta-ti@yoctoproject.org>; Sun, 17 Jun 2018 12:37:28 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B563B20C14;
-	Sun, 17 Jun 2018 19:37:27 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id Hqc61iwLR6u0; Sun, 17 Jun 2018 19:37:27 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 87F2F20BBE;
-	Sun, 17 Jun 2018 19:37:26 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id D40C01634B0;
-	Sun, 17 Jun 2018 15:37:25 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Sun, 17 Jun 2018 15:37:23 -0400
-Message-Id: <1529264243-32781-5-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1529264243-32781-1-git-send-email-denys@ti.com>
-References: <1529264243-32781-1-git-send-email-denys@ti.com>
-Subject: [rocko/master][PATCH 5/5] u-boot-ti-staging: add handling of K3 and AM65x on A53 side
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [198.47.19.16 listed in list.dnswl.org]
+Received: from fllnx209.ext.ti.com (fllnx209.ext.ti.com [198.47.19.16])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58E57E00CC8
+	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 07:03:10 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllnx209.ext.ti.com (8.15.1/8.15.1) with ESMTP id w5IE39F0026023
+	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 09:03:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1529330589;
+	bh=pqpsQS9D6MIpOpJUj7QaELL0ISuKfYa04yBckvnpfiA=;
+	h=From:To:CC:Subject:Date;
+	b=BzEOfbkyEFL1WzSdZjRDcqYNGTk58B/7AkkcSy+01TNdvJhgXSQBLTfrZOaBqjj25
+	qZfbg+/ZRK2h4bLY7om2kk1JNgJw5Bk6gd6zslj4KcvFNZbfGj6+iBgc/P+Hiufe9U
+	pPpx22BG/nJIpn7qZCWueBO+nCmTy/UWZGJ1zHMQ=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w5IE39BU009557
+	for <meta-ti@yoctoproject.org>; Mon, 18 Jun 2018 09:03:09 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
+	Mon, 18 Jun 2018 09:03:09 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE108.ent.ti.com
+	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
+	Transport; Mon, 18 Jun 2018 09:03:09 -0500
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w5IE38cO012238;
+	Mon, 18 Jun 2018 09:03:08 -0500
+From: Karthik Ramanan <a0393906@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 18 Jun 2018 19:33:05 +0530
+Message-ID: <1529330585-179615-1-git-send-email-a0393906@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [rocko] ipumm-fw: Update to 3.00.15.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,88 +64,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jun 2018 19:37:30 -0000
+X-List-Received-Date: Mon, 18 Jun 2018 14:03:11 -0000
+Content-Type: text/plain
 
-Handle dependencies on ATF and OPTEE via PACKAGECONFIGs.
+This upgrade brings in the following updates:
+ * MPEG4 Decoder Update to 01.00.17.01 from 01.00.15.01
+ * VC1 Decoder Update to 01.00.02.07 from 01.00.02.05
+ * Update to IPC 3.47.01.00
+ * Add profiler to measure based on IVA-HD processing time
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb |  6 +++---
- recipes-bsp/u-boot/u-boot-ti.inc                | 27 +++++++++++++++++++++++++
- 2 files changed, 30 insertions(+), 3 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index 14b5e4d..8f79fe5 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+index 4895955..761210e 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+@@ -17,11 +17,11 @@ RDEPENDS_${PN} = " libdce"
  
--PR = "r10"
-+PR = "r11"
+ SRC_URI = "git://git.ti.com/ivimm/ipumm.git;protocol=git"
  
--BRANCH = "ti-u-boot-2018.01"
-+BRANCH = "ti-u-boot-2018.01-next"
+-SRCREV = "01bbb622267b687fa05e42062b146ad7a22e7afd"
++SRCREV = "035ba2571a273162fde75a31decadc6534d17eca"
  
--SRCREV = "3c49934f57ead2da6b6a0a2345d576ba2735687c"
-+SRCREV = "6e9cffd6e111df6f9122b4a77c71112981feb9d3"
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index 666d7ae..4fd3529 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -29,6 +29,12 @@ PV_append = "+git${SRCPV}"
- # u-boot needs devtree compiler to parse dts files
- DEPENDS += "dtc-native bc-native lzop-native"
+ S = "${WORKDIR}/git"
  
-+PACKAGECONFIG[atf] = "ATF=${STAGING_DIR_HOST}/boot/bl31.bin,,arm-trusted-firmware"
-+PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}/boot/bl32.bin,,optee-os"
-+
-+# optee-os is not a direct dependency, do not enable optee by default
-+PACKAGECONFIG_append_k3 = " atf"
-+
- PROVIDES += "u-boot"
- PKG_${PN} = "u-boot"
- PKG_${PN}-dev = "u-boot-dev"
-@@ -47,10 +53,12 @@ SPL_BINARY_k2hk-hs-evm = ""
- SPL_BINARY_k2g-hs-evm = ""
- SPL_BINARY_k2l-hs-evm = ""
- SPL_BINARY_omapl138 = ""
-+SPL_BINARY_k3 = "tispl.bin"
+-PV = "3.00.14.00"
++PV = "3.00.15.00"
+ PR = "r1"
  
- # SPL (Second Program Loader) to be loaded over UART
- SPL_UART_BINARY = "u-boot-spl.bin"
- SPL_UART_BINARY_keystone = ""
-+SPL_UART_BINARY_k3 = ""
- 
- SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
- SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
-@@ -99,6 +107,25 @@ UBOOT_HS_2ND_BINARY = "u-boot-spl_HS_2ND"
- UBOOT_HS_2ND_IMAGE = "u-boot-spl_HS_2ND-${MACHINE}-${PV}-${PR}"
- UBOOT_HS_2ND_SYMLINK = "u-boot-spl_HS_2ND-${MACHINE}"
- 
-+do_compile_k3 () {
-+	if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ld-is-gold', d)}" ]; then
-+		sed -i 's/$(CROSS_COMPILE)ld$/$(CROSS_COMPILE)ld.bfd/g' ${S}/config.mk
-+	fi
-+
-+	unset LDFLAGS
-+	unset CFLAGS
-+	unset CPPFLAGS
-+
-+	if [ ! -e ${B}/.scmversion -a ! -e ${S}/.scmversion ]
-+	then
-+		echo ${UBOOT_LOCALVERSION} > ${B}/.scmversion
-+		echo ${UBOOT_LOCALVERSION} > ${S}/.scmversion
-+	fi
-+
-+	oe_runmake -C ${S} O=${B} ${UBOOT_MACHINE}
-+	oe_runmake -C ${S} O=${B} ${PACKAGECONFIG_CONFARGS} ${UBOOT_MAKE_TARGET}
-+}
-+
- do_install_append () {
- 	if [ -n "${UBOOT_CONFIG}" ]
- 	then
+ require recipes-ti/includes/ti-paths.inc
 -- 
-2.7.4
+1.9.1
 
 
