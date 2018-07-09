@@ -1,6 +1,6 @@
 Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 67D7AE00E6A; Mon,  9 Jul 2018 09:35:56 -0700 (PDT)
+	id E26ECE00E5C; Mon,  9 Jul 2018 09:35:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -15,44 +15,44 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22B89E00E4F
-	for <meta-ti@yoctoproject.org>; Mon,  9 Jul 2018 09:35:54 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w69GZsvP079031
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B627E00E5C
+	for <meta-ti@yoctoproject.org>; Mon,  9 Jul 2018 09:35:55 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w69GZsY3034218
 	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 11:35:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1531154154;
-	bh=poWyppTXDCzcOCi5mP4LEGR1CRi2f331CYJK0H94lts=;
+	bh=4a3bbLx6Kjy4DQkg9Oqmo6vVhA91Y7mUcQ1qGTaXaec=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=fjKC6bUFhZaT1OKjAFUN40RDZQydW14uVkPpN4fFOt0KQzJEMY+BRKRWPYnkUdG2n
-	BHMdFusnh5h1OT/mhgz4/ZiLfvPCaYvy11UEjccTPrRo7M7k3oq26Syj/KDAoavGuZ
-	DZ93NuDoTnRrxjJ5jqDsoqPEHL/YpAmCA6npOAsU=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w69GZsmJ028243
+	b=dw5Me4NQLoDSWN66EJXAAPqO4T75Ji2Bsb/s0JHMDdPxE/tdYd+EmjfNM8RcroJnq
+	Q5c7EIH8x1WFp5G3CJb8MdRbFI4xhsiNAli3uoesSjiTcZrJDuAGMOwhNVWSrmnOnc
+	3XCUtNByEnSWFoVP0eScrgWCyuCRUjdJPtBF0d2c=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w69GZscU032670
 	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 11:35:54 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE100.ent.ti.com
-	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
 	Mon, 9 Jul 2018 11:35:54 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
 	Transport; Mon, 9 Jul 2018 11:35:54 -0500
 Received: from uda0850410.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w69GZrLh002933
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w69GZrLi002933
 	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 11:35:54 -0500
 From: Eric Ruei <e-ruei1@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 9 Jul 2018 12:35:47 -0400
-Message-ID: <1531154148-30707-3-git-send-email-e-ruei1@ti.com>
+Date: Mon, 9 Jul 2018 12:35:48 -0400
+Message-ID: <1531154148-30707-4-git-send-email-e-ruei1@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1531154148-30707-1-git-send-email-e-ruei1@ti.com>
 References: <1531154148-30707-1-git-send-email-e-ruei1@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/3] ti-sgx-ddk-um: add k3 (AM654x) support
+Subject: [PATCH 3/3] ti-sgx-ddk-km: add k3 (AM654x) support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,119 +68,61 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Mon, 09 Jul 2018 16:35:56 -0000
 Content-Type: text/plain
 
-- add COMPATIBLE_MACHINE to distinguish AM3/4/5 with K3 (AM654x)
-- add k3 support based on SGX DDK 1.17
+- add K3 (AM654x) support based on SGX DDK 1.17
 
 Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |  2 +
- .../libgles/ti-sgx-ddk-um_1.17.4948957.bb          | 84 ++++++++++++++++++++++
- 2 files changed, 86 insertions(+)
- create mode 100644 recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+ .../powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb  | 41 ++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 282a4ab..354e081 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -3,6 +3,8 @@ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
- LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
- 
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-+
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- BRANCH = "ti-img-sgx/rocko/${PV}"
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
 new file mode 100644
-index 0000000..016709a
+index 0000000..3ce9105
 --- /dev/null
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -0,0 +1,84 @@
-+DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
-+HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
-+LICENSE = "TI-TSPA"
-+LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+@@ -0,0 +1,41 @@
++DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found in the TI SoCs"
++HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-linux"
++LICENSE = "MIT | GPLv2"
++LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=74506d9b8e5edbce66c2747c50fcef12"
++
++inherit module
 +
 +COMPATIBLE_MACHINE = "k3"
 +
++MACHINE_KERNEL_PR_append = "o"
++PR = "${MACHINE_KERNEL_PR}"
++
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+BRANCH = "ti-img-sgx/rocko/${PV}"
++DEPENDS = "virtual/kernel"
 +
-+SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "a564d20ec1b6aed55b3e60aa9ff35f3809eca110"
++PROVIDES = "omapdrm-pvr"
 +
-+# There's only hardfp version available
-+python __anonymous() {
-+    tunes = d.getVar("TUNE_FEATURES", d, 1)
-+    if not tunes:
-+        return
-+    pkgn = d.getVar("PN", d, 1)
-+    pkgv = d.getVar("PV", d, 1)
-+    if "callconvention-hard" not in tunes:
-+        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-+        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-+}
++RPROVIDES_${PN} = "omapdrm-pvr"
++RREPLACES_${PN} = "omapdrm-pvr"
++RCONFLICTS_${PN} = "omapdrm-pvr"
 +
-+TARGET_PRODUCT_k3 = "ti654x"
++BRANCH = "ti-img-sgx/${PV}/k4.14"
 +
-+
-+INITSCRIPT_NAME = "rc.pvr"
-+INITSCRIPT_PARAMS = "defaults 8"
-+
-+inherit update-rc.d
-+
-+PR = "r29"
-+PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
-+
-+DEPENDS += "libdrm udev libgbm wayland libffi"
-+RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
-+
-+RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-+RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-+RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-+
-+RREPLACES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-+RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-+RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-+
-+RCONFLICTS_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-+RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-+RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-+
-+# The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
-+RPROVIDES_${PN} += "libGLESv2.so.1"
++SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
 +
 +S = "${WORKDIR}/git"
 +
-+do_install () {
-+    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
-+    mkdir -p ${D}${libdir}/gbm
-+    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
-+    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
-+    chown -R root:root ${D}
++SRCREV = "b630d462f5fbb86e5f98965ba1af35da1207822f"
++
++TARGET_PRODUCT_k3 = "ti654x"
++
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
++
++do_compile_prepend() {
++    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap_linux
 +}
 +
-+FILES_${PN} =  "${bindir}/*"
-+FILES_${PN} += " ${libdir}/*"
-+FILES_${PN} +=  "${includedir}/*"
-+FILES_${PN} +=  "${sysconfdir}/*"
-+
-+PACKAGES =+ "${PN}-plugins"
-+FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
-+RDEPENDS_${PN} += "${PN}-plugins"
-+
-+ALLOW_EMPTY_${PN}-plugins = "1"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+
-+INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-+INSANE_SKIP_${PN}-plugins = "dev-so"
-+INSANE_SKIP_${PN} += "already-stripped"
-+
-+CLEANBROKEN = "1"
++do_install() {
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary_omap_linux_xorg_release/target_aarch64/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
++}
 -- 
 1.9.1
 
