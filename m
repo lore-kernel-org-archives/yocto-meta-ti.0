@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B085EE00C80; Mon,  9 Jul 2018 18:07:28 -0700 (PDT)
+	id 4803EE00D64; Tue, 10 Jul 2018 14:20:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -15,41 +15,46 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8FC2CE00929
-	for <meta-ti@yoctoproject.org>; Mon,  9 Jul 2018 18:07:27 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6A17Rem042610
-	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 20:07:27 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07F51E009AA
+	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2018 14:20:05 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6ALK5Hn087699
+	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2018 16:20:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1531184847;
-	bh=3fdNPI4zlxukzW0jvSZxBye6LgsEqaoaSii+608UXfk=;
-	h=From:To:CC:Subject:Date;
-	b=fRtV3OK4gyYAQgsJGsrI2wCMeSCQvpGmmsO+AjSkTweHTdb3/Kd+LtiADYCXDmZVH
-	dp6aMofquPXoSoYtyVqItjbGTPLncyHJPa1kTvYlqnvGo78yklQbj1mREjh5dLggr8
-	FUELHrFSq1Wd6tuNb3KOodXv8pCc4JYaPgt3dUUg=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6A17R3S023112
-	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 20:07:27 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1531257605;
+	bh=eSSvCdEK4f2WeuxsDglo+IeirxZIdgR9cO1hJomOe18=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=rC3Tto76GMT1j3U+Ofz6lylSn8Ye2j6nxamCve3ik7ip7Wl1yIUpZ6eJW6q5WwGuk
+	ttf9YHnwtjddqkvmwVcSXd7rrtlpbz3AGvMIAevjCXcnaJFbbr0qpP3TcckrN6cbx5
+	iscRyebARIqw9ckMfZZh6opwXEHyybeqQYcpLA/A=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6ALK56G015933
+	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2018 16:20:05 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Mon, 9 Jul 2018 20:07:26 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE105.ent.ti.com
-	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 10 Jul 2018 16:20:05 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Mon, 9 Jul 2018 20:07:26 -0500
-Received: from puget.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6A17QQv007376;
-	Mon, 9 Jul 2018 20:07:26 -0500
+	Transport; Tue, 10 Jul 2018 16:20:05 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6ALK4A2028103;
+	Tue, 10 Jul 2018 16:20:05 -0500
+Date: Tue, 10 Jul 2018 17:19:23 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 10 Jul 2018 01:06:01 +0000
-Message-ID: <20180710010601.15333-1-denys@ti.com>
-X-Mailer: git-send-email 2.17.1
+To: Eric Ruei <e-ruei1@ti.com>
+Message-ID: <20180710211922.GQ4189@beryl>
+References: <1531154148-30707-1-git-send-email-e-ruei1@ti.com>
+	<1531154148-30707-3-git-send-email-e-ruei1@ti.com>
+	<20180709192727.GE5464@beryl>
 MIME-Version: 1.0
+In-Reply-To: <20180709192727.GE5464@beryl>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH] meta-ti: cleanup use of d.getVar()
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 2/3] ti-sgx-ddk-um: add k3 (AM654x) support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -62,223 +67,155 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2018 01:07:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Jul 2018 21:20:08 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-1. drop use of True as second parameter, which is default, to align with master
-2. there were instances of incorrectly passing 'd' as second parameter from
-previous conversion from bb.data.getVar() usage
+While looking closer at the anonymous function, I wondered how would it have 
+worked as there's no "callconvention-hard" on Aarch64. And I noticed a small 
+problem with the way d.getVar() is called. I since fixed it and checked all 
+other instances. Please rebase your patches on the latest, once you have a 
+chance. Also, don't forget to use -C/-M to get a diff between old and new 
+versions, as they are quite similar and that would simplify review. Thanks!
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- classes/ti-pdk.bbclass                           |  2 +-
- conf/machine/include/beaglebone.inc              |  2 +-
- recipes-bsp/ipumm-fw/ipumm-fw_git.bb             |  2 +-
- .../libgal/ti-gc320-libs_5.0.11.p7.bb            |  6 +++---
- .../libgles/ti-sgx-ddk-um_1.14.3699939.bb        |  6 +++---
- recipes-kernel/linux/cmem.inc                    | 16 ++++++++--------
- recipes-ti/devtools/ti-cgt6x_8.2.2.bb            |  8 ++++----
- recipes-ti/includes/ti-unpack.inc                | 12 ++++++------
- 8 files changed, 27 insertions(+), 27 deletions(-)
-
-diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-index 540a665c..7ad6205d 100644
---- a/classes/ti-pdk.bbclass
-+++ b/classes/ti-pdk.bbclass
-@@ -67,7 +67,7 @@ PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
- PARALLEL_MAKE = ""
- 
- def get_doxygen_support(d):
--    if d.getVar('TI_PDK_DOXYGEN_SUPPORT', True) == '1':
-+    if d.getVar('TI_PDK_DOXYGEN_SUPPORT') == '1':
-         return ''
-     return 'DOXYGEN_SUPPORT=no'
- 
-diff --git a/conf/machine/include/beaglebone.inc b/conf/machine/include/beaglebone.inc
-index b10146d1..2e14cf1d 100644
---- a/conf/machine/include/beaglebone.inc
-+++ b/conf/machine/include/beaglebone.inc
-@@ -1,5 +1,5 @@
- python () {
--    layers = d.getVar("BBFILE_COLLECTIONS", True)
-+    layers = d.getVar("BBFILE_COLLECTIONS")
-     if not layers:
-         return
-     if "yoctobsp" in layers:
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 761210e7..22a8c4f8 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -1,5 +1,5 @@
- python __anonymous() {
--    features = d.getVar("MACHINE_FEATURES", d, 1)
-+    features = d.getVar("MACHINE_FEATURES")
-     if not features:
-         return
-     if "mmip" not in features:
-diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-index 52df495d..dafaac1e 100644
---- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-+++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-@@ -14,11 +14,11 @@ SRCREV = "c0afab259de59909cfe74c01f3f7fbaa147f94b5"
- 
- # There's only hardfp version available
- python __anonymous() {
--    tunes = d.getVar("TUNE_FEATURES", d, 1)
-+    tunes = d.getVar("TUNE_FEATURES")
-     if not tunes:
-         return
--    pkgn = d.getVar("PN", d, 1)
--    pkgv = d.getVar("PV", d, 1)
-+    pkgn = d.getVar("PN")
-+    pkgv = d.getVar("PV")
-     if "callconvention-hard" not in tunes:
-         bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-         raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-index 354e081f..345f8fca 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-@@ -14,11 +14,11 @@ SRCREV = "358fe42d34a7570896e5d1639869da564ddd0484"
- 
- # There's only hardfp version available
- python __anonymous() {
--    tunes = d.getVar("TUNE_FEATURES", d, 1)
-+    tunes = d.getVar("TUNE_FEATURES")
-     if not tunes:
-         return
--    pkgn = d.getVar("PN", d, 1)
--    pkgv = d.getVar("PV", d, 1)
-+    pkgn = d.getVar("PN")
-+    pkgv = d.getVar("PV")
-     if "callconvention-hard" not in tunes:
-         bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-         raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-index ad122799..8325c00f 100644
---- a/recipes-kernel/linux/cmem.inc
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -39,13 +39,13 @@ python do_unpack() {
-     # Initialize with empty string to simplify logic to append to SRC_URI
-     cmem_dtsi = set([''])
- 
--    for cmem_machine in (d.getVar('CMEM_MACHINE', True) or '').split():
-+    for cmem_machine in (d.getVar('CMEM_MACHINE') or '').split():
-         # Create copy of data for additional override
-         localdata = bb.data.createCopy(d)
-         localdata.setVar('OVERRIDES', '%s:%s' % (cmem_machine, old_overrides))
-         bb.data.update_data(localdata)
- 
--        cmem_dtsi.add(localdata.getVar('CMEM_DTSI', True))
-+        cmem_dtsi.add(localdata.getVar('CMEM_DTSI'))
- 
-     d.appendVar('SRC_URI', ' file://'.join(cmem_dtsi))
-     bb.build.exec_func('base_do_unpack', d)
-@@ -56,27 +56,27 @@ python do_setup_cmem() {
- 
-     old_overrides = d.getVar('OVERRIDES', False)
- 
--    if d.getVar('RESERVE_CMEM', True) is '1':
--        for cmem_machine in (d.getVar('CMEM_MACHINE', True) or '').split():
-+    if d.getVar('RESERVE_CMEM') is '1':
-+        for cmem_machine in (d.getVar('CMEM_MACHINE') or '').split():
-             # Create copy of data for additional override
-             localdata = bb.data.createCopy(d)
-             localdata.setVar('OVERRIDES', '%s:%s' % (cmem_machine, old_overrides))
-             bb.data.update_data(localdata)
- 
-             # Get source directory and dtsi filename
--            src_dir  = localdata.getVar('WORKDIR', True)
--            src_dtsi = localdata.getVar('CMEM_DTSI', True)
-+            src_dir  = localdata.getVar('WORKDIR')
-+            src_dtsi = localdata.getVar('CMEM_DTSI')
- 
-             # Get destination directory and destination dtsi filename which adds
-             #   the MACHINE prefix.
--            dst_dir  = os.path.join(localdata.getVar('S', True), 'arch/arm/boot/dts')
-+            dst_dir  = os.path.join(localdata.getVar('S'), 'arch/arm/boot/dts')
-             dst_dtsi = localdata.expand('${MACHINE}-${CMEM_DTSI}')
- 
-             # Copy cmem.dtsi into source tree
-             shutil.copy(os.path.join(src_dir,src_dtsi), os.path.join(dst_dir,dst_dtsi))
- 
-             # Inject dtsi into each dts in list
--            for dtb in (localdata.getVar('CMEM_DEVICETREE', True) or '').split():
-+            for dtb in (localdata.getVar('CMEM_DEVICETREE') or '').split():
-                 dts = dtb[:-4] + '.dts'
- 
-                 with open(os.path.join(dst_dir,dts), 'a') as dts_file:
-diff --git a/recipes-ti/devtools/ti-cgt6x_8.2.2.bb b/recipes-ti/devtools/ti-cgt6x_8.2.2.bb
-index 04e55ae9..53f52526 100644
---- a/recipes-ti/devtools/ti-cgt6x_8.2.2.bb
-+++ b/recipes-ti/devtools/ti-cgt6x_8.2.2.bb
-@@ -13,14 +13,14 @@ COMPATIBLE_HOST_class-target = "arm.*-linux"
- 
- # For now we only have hardfp version for target class
- python __anonymous() {
--    c = d.getVar("CLASSOVERRIDE", d, 1)
-+    c = d.getVar("CLASSOVERRIDE")
- 
-     if c == "class-target":
--        tunes = d.getVar("TUNE_FEATURES", d, 1)
-+        tunes = d.getVar("TUNE_FEATURES")
-         if not tunes:
-             return
--        pkgn = d.getVar("PN", d, 1)
--        pkgv = d.getVar("PV", d, 1)
-+        pkgn = d.getVar("PN")
-+        pkgv = d.getVar("PV")
-         if "callconvention-hard" not in tunes:
-             bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-             raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
-index cc315dff..a571fd5d 100644
---- a/recipes-ti/includes/ti-unpack.inc
-+++ b/recipes-ti/includes/ti-unpack.inc
-@@ -29,21 +29,21 @@ python ti_bin_do_unpack() {
-     localdata = bb.data.createCopy(d)
-     bb.data.update_data(localdata)
- 
--    binfile  = d.getVar('BINFILE', localdata)
-+    binfile  = localdata.getVar('BINFILE')
-     binfile  = bb.data.expand(binfile, localdata)
- 
-     # Change to the working directory
-     save_cwd = os.getcwd()
--    workdir  = d.getVar('WORKDIR', localdata)
-+    workdir  = localdata.getVar('WORKDIR')
-     workdir  = bb.data.expand(workdir, localdata)
-     os.chdir(workdir)
- 
-     # Get unpack args
--    arg_string = d.getVar('TI_BIN_UNPK_ARGS', localdata)
-+    arg_string = localdata.getVar('TI_BIN_UNPK_ARGS')
-     arg_string = bb.data.expand(arg_string, localdata)
- 
-     # Get unpack commands
--    cmd_string = d.getVar('TI_BIN_UNPK_CMDS', localdata)
-+    cmd_string = localdata.getVar('TI_BIN_UNPK_CMDS')
-     cmd_list = cmd_string.split( ":" )
- 
-     # Make the InstallJammer binary executable so we can run it
-@@ -61,14 +61,14 @@ python ti_bin_do_unpack() {
-     f = os.popen(filename,'w')
-     for cmd in cmd_list:
-         if cmd == "workdir":
--            wdext = d.getVar('TI_BIN_UNPK_WDEXT', localdata)
-+            wdext = localdata.getVar('TI_BIN_UNPK_WDEXT')
-             wdext = bb.data.expand(wdext, localdata)
-             cmd = workdir+wdext
-         f.write(cmd+'\n');
-     f.close()
- 
-     # Expand the tarball that was created if required
--    tarfile  = d.getVar('TARFILE', localdata)
-+    tarfile  = localdata.getVar('TARFILE')
-     if bool(tarfile) == True:
-         tarfile  = bb.data.expand(tarfile, localdata)
-         tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
 -- 
-2.17.1
+Denys
 
+
+On Mon, Jul 09, 2018 at 03:27:29PM -0400, Denys Dmytriyenko wrote:
+> Would be nice to see it as a diff (-C/-M), even though you add a new version.
+> 
+> BTW, have you tested these recipes?
+> 
+> -- 
+> Denys
+> 
+> 
+> On Mon, Jul 09, 2018 at 12:35:47PM -0400, Eric Ruei wrote:
+> > - add COMPATIBLE_MACHINE to distinguish AM3/4/5 with K3 (AM654x)
+> > - add k3 support based on SGX DDK 1.17
+> > 
+> > Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+> > ---
+> >  .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |  2 +
+> >  .../libgles/ti-sgx-ddk-um_1.17.4948957.bb          | 84 ++++++++++++++++++++++
+> >  2 files changed, 86 insertions(+)
+> >  create mode 100644 recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> > 
+> > diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> > index 282a4ab..354e081 100644
+> > --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> > +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+> > @@ -3,6 +3,8 @@ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
+> >  LICENSE = "TI-TSPA"
+> >  LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
+> >  
+> > +COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+> > +
+> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
+> >  
+> >  BRANCH = "ti-img-sgx/rocko/${PV}"
+> > diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> > new file mode 100644
+> > index 0000000..016709a
+> > --- /dev/null
+> > +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> > @@ -0,0 +1,84 @@
+> > +DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
+> > +HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
+> > +LICENSE = "TI-TSPA"
+> > +LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
+> > +
+> > +COMPATIBLE_MACHINE = "k3"
+> > +
+> > +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> > +
+> > +BRANCH = "ti-img-sgx/rocko/${PV}"
+> > +
+> > +SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+> > +SRCREV = "a564d20ec1b6aed55b3e60aa9ff35f3809eca110"
+> > +
+> > +# There's only hardfp version available
+> > +python __anonymous() {
+> > +    tunes = d.getVar("TUNE_FEATURES", d, 1)
+> > +    if not tunes:
+> > +        return
+> > +    pkgn = d.getVar("PN", d, 1)
+> > +    pkgv = d.getVar("PV", d, 1)
+> > +    if "callconvention-hard" not in tunes:
+> > +        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+> > +        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+> > +}
+> > +
+> > +TARGET_PRODUCT_k3 = "ti654x"
+> > +
+> > +
+> > +INITSCRIPT_NAME = "rc.pvr"
+> > +INITSCRIPT_PARAMS = "defaults 8"
+> > +
+> > +inherit update-rc.d
+> > +
+> > +PR = "r29"
+> > +PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+> > +
+> > +DEPENDS += "libdrm udev libgbm wayland libffi"
+> > +RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+> > +
+> > +RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+> > +RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
+> > +RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
+> > +
+> > +RREPLACES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+> > +RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
+> > +RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
+> > +
+> > +RCONFLICTS_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+> > +RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
+> > +RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
+> > +
+> > +# The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
+> > +RPROVIDES_${PN} += "libGLESv2.so.1"
+> > +
+> > +S = "${WORKDIR}/git"
+> > +
+> > +do_install () {
+> > +    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
+> > +    mkdir -p ${D}${libdir}/gbm
+> > +    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
+> > +    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
+> > +    chown -R root:root ${D}
+> > +}
+> > +
+> > +FILES_${PN} =  "${bindir}/*"
+> > +FILES_${PN} += " ${libdir}/*"
+> > +FILES_${PN} +=  "${includedir}/*"
+> > +FILES_${PN} +=  "${sysconfdir}/*"
+> > +
+> > +PACKAGES =+ "${PN}-plugins"
+> > +FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
+> > +RDEPENDS_${PN} += "${PN}-plugins"
+> > +
+> > +ALLOW_EMPTY_${PN}-plugins = "1"
+> > +
+> > +INHIBIT_PACKAGE_STRIP = "1"
+> > +INHIBIT_SYSROOT_STRIP = "1"
+> > +
+> > +INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
+> > +INSANE_SKIP_${PN}-plugins = "dev-so"
+> > +INSANE_SKIP_${PN} += "already-stripped"
+> > +
+> > +CLEANBROKEN = "1"
+> > -- 
+> > 1.9.1
+> > 
+> > -- 
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
