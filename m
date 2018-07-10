@@ -1,59 +1,53 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E241DE00E0A; Mon,  9 Jul 2018 12:28:15 -0700 (PDT)
+	id 79F6EE00DFF; Mon,  9 Jul 2018 17:55:22 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,URI_HEX autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D77E4E00DC3
-	for <meta-ti@yoctoproject.org>; Mon,  9 Jul 2018 12:28:14 -0700 (PDT)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11274E00929
+	for <meta-ti@yoctoproject.org>; Mon,  9 Jul 2018 17:55:21 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w69JSEGJ109234
-	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 14:28:14 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6A0tLW9040313
+	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 19:55:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1531164494;
-	bh=ca9zrtO7X7fLigQ5vLQSMpiOy2qcbKA/MR1mNCsUYm4=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=q+VG+TIIqMEmt+V91IWYkL5Pltf0LTS+AWv4y+dPheQkKsi6yi6E2owWVnLSsuDIO
-	tWA4LhtSTXUPOsGKW+EDyFqdyNeEtbzh/lw3U5q+c2p0S2dMlThdjU6YbUlvWkEkZl
-	xTn0rBOOg2DUGIkIICiz3lsX5YRk/Cl3frEztHJU=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w69JSEC1020505
-	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 14:28:14 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1531184121;
+	bh=siCx/557VkkFMdWHLx7W2F/AXrtAGQPsZtGnbJwFclI=;
+	h=From:To:CC:Subject:Date;
+	b=ie6BxUFTE0o1NikIVzB5n3QLysnz+Vkp4SYnTEIDyE4m5/7ztgdz2ua+qwTk2ALw3
+	9OTT7u40mbgMDoTAbwIVJhkdiPEvK1nPBJiq6uWyQ7F9SWIjYQ0HjgZDqAItNyfu0J
+	dV0rqw/+n6lWxCp9vrI6NegVuLujV16rDFwkTZ/0=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6A0tLpF025662
+	for <meta-ti@yoctoproject.org>; Mon, 9 Jul 2018 19:55:21 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Mon, 9 Jul 2018 14:28:14 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE102.ent.ti.com
-	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_0,
+	Mon, 9 Jul 2018 19:55:21 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Mon, 9 Jul 2018 14:28:13 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w69JSChH012203;
-	Mon, 9 Jul 2018 14:28:13 -0500
-Date: Mon, 9 Jul 2018 15:27:29 -0400
+	Transport; Mon, 9 Jul 2018 19:55:21 -0500
+Received: from puget.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6A0tKat020665;
+	Mon, 9 Jul 2018 19:55:21 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: Eric Ruei <e-ruei1@ti.com>
-Message-ID: <20180709192727.GE5464@beryl>
-References: <1531154148-30707-1-git-send-email-e-ruei1@ti.com>
-	<1531154148-30707-3-git-send-email-e-ruei1@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 10 Jul 2018 00:53:56 +0000
+Message-ID: <20180710005356.25288-1-denys@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <1531154148-30707-3-git-send-email-e-ruei1@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 2/3] ti-sgx-ddk-um: add k3 (AM654x) support
+Subject: [rocko/master][PATCH] am65xx-evm: add new k3-am654-pcie-usb3 DTBO file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,138 +60,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 19:28:16 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Jul 2018 00:55:22 -0000
+Content-Type: text/plain
 
-Would be nice to see it as a diff (-C/-M), even though you add a new version.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/machine/am65xx-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-BTW, have you tested these recipes?
-
+diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
+index 2b214ce7..08dbc9e8 100644
+--- a/conf/machine/am65xx-evm.conf
++++ b/conf/machine/am65xx-evm.conf
+@@ -13,7 +13,7 @@ SERIAL_CONSOLE = "115200 ttyS2"
+ KERNEL_DEVICETREE = " \
+     ti/k3-am654-base-board.dtb \
+     ti/k3-am654-evm-csi2-ov490.dtbo ti/k3-am654-evm-oldi-lcd1evm.dtbo \
+-    ti/k3-am654-idk.dtbo ti/k3-am654-pcie-usb2.dtbo"
++    ti/k3-am654-idk.dtbo ti/k3-am654-pcie-usb2.dtbo ti/k3-am654-pcie-usb3.dtbo"
+ 
+ UBOOT_MACHINE = "am65x_evm_a53_defconfig"
+ 
 -- 
-Denys
+2.17.1
 
-
-On Mon, Jul 09, 2018 at 12:35:47PM -0400, Eric Ruei wrote:
-> - add COMPATIBLE_MACHINE to distinguish AM3/4/5 with K3 (AM654x)
-> - add k3 support based on SGX DDK 1.17
-> 
-> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
-> ---
->  .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |  2 +
->  .../libgles/ti-sgx-ddk-um_1.17.4948957.bb          | 84 ++++++++++++++++++++++
->  2 files changed, 86 insertions(+)
->  create mode 100644 recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> 
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> index 282a4ab..354e081 100644
-> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> @@ -3,6 +3,8 @@ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
->  LICENSE = "TI-TSPA"
->  LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
->  
-> +COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-> +
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->  
->  BRANCH = "ti-img-sgx/rocko/${PV}"
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> new file mode 100644
-> index 0000000..016709a
-> --- /dev/null
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> @@ -0,0 +1,84 @@
-> +DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
-> +HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
-> +LICENSE = "TI-TSPA"
-> +LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
-> +
-> +COMPATIBLE_MACHINE = "k3"
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +BRANCH = "ti-img-sgx/rocko/${PV}"
-> +
-> +SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-> +SRCREV = "a564d20ec1b6aed55b3e60aa9ff35f3809eca110"
-> +
-> +# There's only hardfp version available
-> +python __anonymous() {
-> +    tunes = d.getVar("TUNE_FEATURES", d, 1)
-> +    if not tunes:
-> +        return
-> +    pkgn = d.getVar("PN", d, 1)
-> +    pkgv = d.getVar("PV", d, 1)
-> +    if "callconvention-hard" not in tunes:
-> +        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> +        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> +}
-> +
-> +TARGET_PRODUCT_k3 = "ti654x"
-> +
-> +
-> +INITSCRIPT_NAME = "rc.pvr"
-> +INITSCRIPT_PARAMS = "defaults 8"
-> +
-> +inherit update-rc.d
-> +
-> +PR = "r29"
-> +PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
-> +
-> +DEPENDS += "libdrm udev libgbm wayland libffi"
-> +RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
-> +
-> +RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-> +RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-> +RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-> +
-> +RREPLACES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-> +RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-> +RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-> +
-> +RCONFLICTS_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-> +RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-> +RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-> +
-> +# The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
-> +RPROVIDES_${PN} += "libGLESv2.so.1"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +do_install () {
-> +    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
-> +    mkdir -p ${D}${libdir}/gbm
-> +    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
-> +    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
-> +    chown -R root:root ${D}
-> +}
-> +
-> +FILES_${PN} =  "${bindir}/*"
-> +FILES_${PN} += " ${libdir}/*"
-> +FILES_${PN} +=  "${includedir}/*"
-> +FILES_${PN} +=  "${sysconfdir}/*"
-> +
-> +PACKAGES =+ "${PN}-plugins"
-> +FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
-> +RDEPENDS_${PN} += "${PN}-plugins"
-> +
-> +ALLOW_EMPTY_${PN}-plugins = "1"
-> +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_SYSROOT_STRIP = "1"
-> +
-> +INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-> +INSANE_SKIP_${PN}-plugins = "dev-so"
-> +INSANE_SKIP_${PN} += "already-stripped"
-> +
-> +CLEANBROKEN = "1"
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
