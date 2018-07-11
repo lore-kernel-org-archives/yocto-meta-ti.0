@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D77C6E00CA9; Wed, 11 Jul 2018 08:49:59 -0700 (PDT)
+	id 4F672E00CA9; Wed, 11 Jul 2018 08:50:00 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,45 +13,47 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A29D3E00972
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC665E00A48
 	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2018 08:49:58 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6BFnwds071543
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6BFnwfX057803
 	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2018 10:49:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1531324198;
-	bh=coLVKAtDUNH5GmAJqcmsyccR+YOYqvlU549FXE5EspY=;
-	h=From:To:CC:Subject:Date;
-	b=J+VUgJCBjrfU3C+NamOPPfehWfoeqHr8Qs0scPj9Y/l+DSpHrG8i8aDmcWwaWCFWe
-	xf2fp1QiwGCjRa2MrB7EDSpzwlKPgd5KoscQfRv36hNdomjwsjXCXheJFpJ0jghnGX
-	EhdVCa2zuEDAUyJnx3vCX7IkIFfSGgU8ZlZitl/c=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6BFnwLW019713
+	bh=vh1JdVYpGm8dwLVEOoPlKHOPbqZTC9bXJt0+roV3UE8=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=he9g1+UMFy93CZgG2VOqSsxAtOASHtJz4d7Wt91CgduRxvELj/DRdHJqCZ1tq/6aN
+	SzUInFTxj0bJOdP16CdqPwvOA7v/LWb2+vexxdgoOgh8CQ33SIhVNldzPE+Y/4Er91
+	VkQNjCpcmm9nWkDIjz+x9URMct6zVI99MpkORiso=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6BFnwkF019738
 	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2018 10:49:58 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Wed, 11 Jul 2018 10:49:57 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 11 Jul 2018 10:49:58 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Wed, 11 Jul 2018 10:49:57 -0500
+	Transport; Wed, 11 Jul 2018 10:49:58 -0500
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
 	[128.247.22.53])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6BFnvf7000368;
-	Wed, 11 Jul 2018 10:49:57 -0500
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6BFnwIY002405;
+	Wed, 11 Jul 2018 10:49:58 -0500
 Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.166.115])
 	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	w6BFnux14880; Wed, 11 Jul 2018 10:49:56 -0500 (CDT)
+	w6BFnvx14888; Wed, 11 Jul 2018 10:49:57 -0500 (CDT)
 From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 11 Jul 2018 10:49:42 -0500
-Message-ID: <20180711154943.22217-1-dmurphy@ti.com>
+Date: Wed, 11 Jul 2018 10:49:43 -0500
+Message-ID: <20180711154943.22217-2-dmurphy@ti.com>
 X-Mailer: git-send-email 2.12.2
+In-Reply-To: <20180711154943.22217-1-dmurphy@ti.com>
+References: <20180711154943.22217-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2018.02-rc4 tag
+Subject: [PATCH 2/2] linux-ti-staging: update ti2018.02-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,23 +71,36 @@ Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.14.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index 33110c1b..54122fb7 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
+index fbfa92e1..e34b4475 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
  
--PR = "r14"
-+PR = "r15"
+ BRANCH = "ti-rt-linux-4.14.y"
  
- BRANCH = "ti-u-boot-2018.01"
+-SRCREV = "cb407c0328dd3e46b8df9e1733f7d55c971a4ebe"
++SRCREV = "44ed1df2b3838b94058b7022a630d84ce3c36503"
+ PV = "4.14.53+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+index 9adeb2d9..a8d7e280 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
  
--SRCREV = "d87d0db0acc533e7f9d2711b9cbe1548c7eb9cf9"
-+SRCREV = "efdd6cd5ab525bf1dce5376f9e66c78a38e6e7b0"
+ BRANCH = "ti-lsk-linux-4.14.y"
+ 
+-SRCREV = "43744f7843e8a99b0e888817571cb77c6007371e"
+-PV = "4.14.53+git${SRCPV}"
++SRCREV = "0b59bc3be7f2b7ba62fcbd38a5c162c7c772edbc"
++PV = "4.14.54+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "b"
 -- 
 2.17.0.582.gccdcbd54c
 
