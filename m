@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4803EE00D64; Tue, 10 Jul 2018 14:20:08 -0700 (PDT)
+	id C8390E00CA9; Wed, 11 Jul 2018 08:45:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -16,45 +16,43 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07F51E009AA
-	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2018 14:20:05 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46606E0044F
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2018 08:45:36 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6ALK5Hn087699
-	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2018 16:20:05 -0500
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6BFjZVu028062
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2018 10:45:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1531257605;
-	bh=eSSvCdEK4f2WeuxsDglo+IeirxZIdgR9cO1hJomOe18=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=rC3Tto76GMT1j3U+Ofz6lylSn8Ye2j6nxamCve3ik7ip7Wl1yIUpZ6eJW6q5WwGuk
-	ttf9YHnwtjddqkvmwVcSXd7rrtlpbz3AGvMIAevjCXcnaJFbbr0qpP3TcckrN6cbx5
-	iscRyebARIqw9ckMfZZh6opwXEHyybeqQYcpLA/A=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6ALK56G015933
-	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2018 16:20:05 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1531323935;
+	bh=T2+sDRlCJByonVaRn8QajpLL36b8pS+B1mRMOHdn3aI=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=Mxv0+40PuuGhWYKQfIAqSROe3vD6uwvZJS0FjpAxjHFDG2rMAEYSFlsYaFBvsIb1/
+	HPVcxsMVKLr6/V2eebhJ6DfWtKd27wjI3PiQdYlAgbiSYbGobEolHlLPZ/i/JTP/PY
+	Di9etA+YBabkSusc1kzDikyofkvXhIz4pu2bYHvg=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6BFjZPM012438
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2018 10:45:35 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 10 Jul 2018 16:20:05 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 11 Jul 2018 10:45:35 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE104.ent.ti.com
+	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 10 Jul 2018 16:20:05 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6ALK4A2028103;
-	Tue, 10 Jul 2018 16:20:05 -0500
-Date: Tue, 10 Jul 2018 17:19:23 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Eric Ruei <e-ruei1@ti.com>
-Message-ID: <20180710211922.GQ4189@beryl>
-References: <1531154148-30707-1-git-send-email-e-ruei1@ti.com>
-	<1531154148-30707-3-git-send-email-e-ruei1@ti.com>
-	<20180709192727.GE5464@beryl>
+	Transport; Wed, 11 Jul 2018 10:45:35 -0500
+Received: from uda0850410.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6BFjYCK031016
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2018 10:45:35 -0500
+From: Eric Ruei <e-ruei1@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 11 Jul 2018 11:45:30 -0400
+Message-ID: <1531323931-31875-3-git-send-email-e-ruei1@ti.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1531323931-31875-1-git-send-email-e-ruei1@ti.com>
+References: <1531323931-31875-1-git-send-email-e-ruei1@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20180709192727.GE5464@beryl>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 2/3] ti-sgx-ddk-um: add k3 (AM654x) support
+Subject: [PATCH v2 2/3] ti-sgx-ddk-um: add k3 (AM654x) support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,155 +65,69 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2018 21:20:08 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Jul 2018 15:45:36 -0000
+Content-Type: text/plain
 
-While looking closer at the anonymous function, I wondered how would it have 
-worked as there's no "callconvention-hard" on Aarch64. And I noticed a small 
-problem with the way d.getVar() is called. I since fixed it and checked all 
-other instances. Please rebase your patches on the latest, once you have a 
-chance. Also, don't forget to use -C/-M to get a diff between old and new 
-versions, as they are quite similar and that would simplify review. Thanks!
+- add COMPATIBLE_MACHINE to distinguish AM3/4/5 with K3 (AM654x)
+- add k3 support based on SGX DDK 1.17
 
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb         |  1 +
+ ...gx-ddk-um_1.14.3699939.bb => ti-sgx-ddk-um_1.17.4948957.bb} | 10 +++++-----
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+ copy recipes-graphics/libgles/{ti-sgx-ddk-um_1.14.3699939.bb => ti-sgx-ddk-um_1.17.4948957.bb} (93%)
+
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+index d17411e..ef33d3a 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+@@ -3,6 +3,7 @@ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
+ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
+ 
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ BRANCH = "ti-img-sgx/rocko/${PV}"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+similarity index 93%
+copy from recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+copy to recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+index d17411e..e26cdab 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+@@ -1,14 +1,16 @@
+ DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
+ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
+ LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
++LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
++
++COMPATIBLE_MACHINE = "k3"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ BRANCH = "ti-img-sgx/rocko/${PV}"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "358fe42d34a7570896e5d1639869da564ddd0484"
++SRCREV = "a564d20ec1b6aed55b3e60aa9ff35f3809eca110"
+ 
+ # There's only hardfp version available
+ python __anonymous() {
+@@ -22,9 +24,7 @@ python __anonymous() {
+         raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+ }
+ 
+-TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+-TARGET_PRODUCT_ti33x = "ti335x"
+-TARGET_PRODUCT_ti43x = "ti437x"
++TARGET_PRODUCT_k3 = "ti654x"
+ 
+ INITSCRIPT_NAME = "rc.pvr"
+ INITSCRIPT_PARAMS = "defaults 8"
 -- 
-Denys
+1.9.1
 
-
-On Mon, Jul 09, 2018 at 03:27:29PM -0400, Denys Dmytriyenko wrote:
-> Would be nice to see it as a diff (-C/-M), even though you add a new version.
-> 
-> BTW, have you tested these recipes?
-> 
-> -- 
-> Denys
-> 
-> 
-> On Mon, Jul 09, 2018 at 12:35:47PM -0400, Eric Ruei wrote:
-> > - add COMPATIBLE_MACHINE to distinguish AM3/4/5 with K3 (AM654x)
-> > - add k3 support based on SGX DDK 1.17
-> > 
-> > Signed-off-by: Eric Ruei <e-ruei1@ti.com>
-> > ---
-> >  .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |  2 +
-> >  .../libgles/ti-sgx-ddk-um_1.17.4948957.bb          | 84 ++++++++++++++++++++++
-> >  2 files changed, 86 insertions(+)
-> >  create mode 100644 recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> > 
-> > diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> > index 282a4ab..354e081 100644
-> > --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> > +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
-> > @@ -3,6 +3,8 @@ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
-> >  LICENSE = "TI-TSPA"
-> >  LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
-> >  
-> > +COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-> > +
-> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >  
-> >  BRANCH = "ti-img-sgx/rocko/${PV}"
-> > diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> > new file mode 100644
-> > index 0000000..016709a
-> > --- /dev/null
-> > +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> > @@ -0,0 +1,84 @@
-> > +DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
-> > +HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
-> > +LICENSE = "TI-TSPA"
-> > +LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
-> > +
-> > +COMPATIBLE_MACHINE = "k3"
-> > +
-> > +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > +
-> > +BRANCH = "ti-img-sgx/rocko/${PV}"
-> > +
-> > +SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-> > +SRCREV = "a564d20ec1b6aed55b3e60aa9ff35f3809eca110"
-> > +
-> > +# There's only hardfp version available
-> > +python __anonymous() {
-> > +    tunes = d.getVar("TUNE_FEATURES", d, 1)
-> > +    if not tunes:
-> > +        return
-> > +    pkgn = d.getVar("PN", d, 1)
-> > +    pkgv = d.getVar("PV", d, 1)
-> > +    if "callconvention-hard" not in tunes:
-> > +        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> > +        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> > +}
-> > +
-> > +TARGET_PRODUCT_k3 = "ti654x"
-> > +
-> > +
-> > +INITSCRIPT_NAME = "rc.pvr"
-> > +INITSCRIPT_PARAMS = "defaults 8"
-> > +
-> > +inherit update-rc.d
-> > +
-> > +PR = "r29"
-> > +PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
-> > +
-> > +DEPENDS += "libdrm udev libgbm wayland libffi"
-> > +RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
-> > +
-> > +RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-> > +RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-> > +RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-> > +
-> > +RREPLACES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-> > +RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-> > +RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-> > +
-> > +RCONFLICTS_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
-> > +RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
-> > +RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-> > +
-> > +# The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
-> > +RPROVIDES_${PN} += "libGLESv2.so.1"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +do_install () {
-> > +    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
-> > +    mkdir -p ${D}${libdir}/gbm
-> > +    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
-> > +    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
-> > +    chown -R root:root ${D}
-> > +}
-> > +
-> > +FILES_${PN} =  "${bindir}/*"
-> > +FILES_${PN} += " ${libdir}/*"
-> > +FILES_${PN} +=  "${includedir}/*"
-> > +FILES_${PN} +=  "${sysconfdir}/*"
-> > +
-> > +PACKAGES =+ "${PN}-plugins"
-> > +FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
-> > +RDEPENDS_${PN} += "${PN}-plugins"
-> > +
-> > +ALLOW_EMPTY_${PN}-plugins = "1"
-> > +
-> > +INHIBIT_PACKAGE_STRIP = "1"
-> > +INHIBIT_SYSROOT_STRIP = "1"
-> > +
-> > +INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-> > +INSANE_SKIP_${PN}-plugins = "dev-so"
-> > +INSANE_SKIP_${PN} += "already-stripped"
-> > +
-> > +CLEANBROKEN = "1"
-> > -- 
-> > 1.9.1
-> > 
-> > -- 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
