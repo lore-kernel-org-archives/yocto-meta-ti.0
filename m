@@ -1,6 +1,6 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1EF56E01217; Fri, 13 Jul 2018 11:13:19 -0700 (PDT)
+	id 7B0AFE0121E; Fri, 13 Jul 2018 11:20:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -16,46 +16,45 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 871FFE00CC2
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2018 11:13:18 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6DIDHFo003184
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2018 13:13:18 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11DDBE0110F
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2018 11:20:05 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6DIK4YS004476
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2018 13:20:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1531505598;
-	bh=19bLOZ7+iT9kQVPfkoWaDm9b8kul717Pdv4ZrEP/vCg=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=WiZG9I/zcpLsh+519VBHJcHuqC2W7Vfj85T2D+v6fV0yYUuJygydQF6ZDUIpofNvF
-	dSXjRKn/XZBwFG+RA+GWTAwRfUZ/gc0kTz8nzI2C3Ej0nZSH03YB80F2Csq1hdf94i
-	H/J80f92penfyXaw5bHV5/AfElMFidhsrHQQP49M=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6DIDHqK031174
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2018 13:13:17 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1531506004;
+	bh=8iSHHsw7GPn8v/44BA9t3HKNXojtnbvchu3W8gpN42w=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=bvHVedKe/nwzx59g1cLJkA4c6WHWK4qinY8OaBTyklzGJmSFgh5//As0elNfMymM4
+	a2VIsfbVxH44ZN5zFqKAbZ9FZmYYZLTTbQ6rwM742WyDioxHZSHNmg+H/x77Ki2ly2
+	4aRevjorH77X2oHF8MqVR28EJAyV3RJjHq8+dhS4=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6DIK4vt028333
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2018 13:20:04 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 13 Jul 2018 13:13:17 -0500
-Received: from DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455]) by
-	DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455%17]) with mapi id
-	15.01.1466.003; Fri, 13 Jul 2018 13:13:17 -0500
-From: "Ruei, Eric" <e-ruei1@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH v2 3/3] ti-sgx-ddk-km: add k3 (AM654x) support
-Thread-Index: AQHUGs9xL4hJD7jOpkWvlMax/X7g9qSNdHGA
-Date: Fri, 13 Jul 2018 18:13:17 +0000
-Message-ID: <d6da453c8f8d4ca9adae9066fbae7546@ti.com>
+	Fri, 13 Jul 2018 13:20:04 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
+	Transport; Fri, 13 Jul 2018 13:20:04 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6DIK3eT024871;
+	Fri, 13 Jul 2018 13:20:03 -0500
+Date: Fri, 13 Jul 2018 14:19:24 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Ruei, Eric" <e-ruei1@ti.com>
+Message-ID: <20180713181924.GI25410@beryl>
 References: <1531323931-31875-1-git-send-email-e-ruei1@ti.com>
-	<1531323931-31875-4-git-send-email-e-ruei1@ti.com>
-	<20180713173137.GG25410@beryl>
-In-Reply-To: <20180713173137.GG25410@beryl>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [158.218.113.148]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	<20180713172948.GF25410@beryl>
+	<60789283c2234ef6b21e183e777eb84f@ti.com>
 MIME-Version: 1.0
+In-Reply-To: <60789283c2234ef6b21e183e777eb84f@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH v2 3/3] ti-sgx-ddk-km: add k3 (AM654x) support
+Subject: Re: [PATCH v2 0/3] Enable SGX on k3 (AM654x)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,103 +67,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2018 18:13:19 -0000
-Content-Language: en-US
+X-List-Received-Date: Fri, 13 Jul 2018 18:20:05 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+On Fri, Jul 13, 2018 at 02:11:18PM -0400, Ruei, Eric wrote:
+> I do not see any comments on this one.
+
+Sorry for the confusion - I meant inside the patches themselves, not the cover 
+letter.
 
 
-
------Original Message-----
-From: Dmytriyenko, Denys=20
-Sent: Friday, July 13, 2018 1:32 PM
-To: Ruei, Eric
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] [PATCH v2 3/3] ti-sgx-ddk-km: add k3 (AM654x) suppor=
-t
-
-On Wed, Jul 11, 2018 at 11:45:31AM -0400, Eric Ruei wrote:
-> - add K3 (AM654x) support based on SGX DDK 1.17
->=20
-> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
-> ---
->  .../powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb  | 41 ++++++++++++++++=
-++++++
-
-This is still sent as a new recipe, while being very similar to existing on=
-e.=20
-Making it a diff would really help. If git doesn't see the similarity on it=
-s=20
-own, you can try passing --find-copies-harder flag...
-
-Do you mean the fit will search the data base, not just in the local commit=
-s?
-
-
->  1 file changed, 41 insertions(+)
->  create mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.494895=
-7.bb
->=20
-> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/=
-recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> new file mode 100644
-> index 0000000..3ce9105
-> --- /dev/null
-> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> @@ -0,0 +1,41 @@
-> +DESCRIPTION =3D  "Kernel drivers for the PowerVR SGX chipset found in th=
-e TI SoCs"
-> +HOMEPAGE =3D "https://git.ti.com/graphics/omap5-sgx-ddk-linux"
-> +LICENSE =3D "MIT | GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://eurasia_km/README;beginline=3D13;endline=3D=
-22;md5=3D74506d9b8e5edbce66c2747c50fcef12"
-> +
-> +inherit module
-> +
-> +COMPATIBLE_MACHINE =3D "k3"
-> +
-> +MACHINE_KERNEL_PR_append =3D "o"
-> +PR =3D "${MACHINE_KERNEL_PR}"
-> +
-> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> +
-> +DEPENDS =3D "virtual/kernel"
-> +
-> +PROVIDES =3D "omapdrm-pvr"
-> +
-> +RPROVIDES_${PN} =3D "omapdrm-pvr"
-> +RREPLACES_${PN} =3D "omapdrm-pvr"
-> +RCONFLICTS_${PN} =3D "omapdrm-pvr"
-> +
-> +BRANCH =3D "ti-img-sgx/${PV}/k4.14"
-> +
-> +SRC_URI =3D "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=
-=3Dgit;branch=3D${BRANCH}"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +SRCREV =3D "b630d462f5fbb86e5f98965ba1af35da1207822f"
-> +
-> +TARGET_PRODUCT_k3 =3D "ti654x"
-> +
-> +EXTRA_OEMAKE +=3D 'KERNELDIR=3D"${STAGING_KERNEL_DIR}" TARGET_PRODUCT=3D=
-${TARGET_PRODUCT}'
-> +
-> +do_compile_prepend() {
-> +    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap_linux
-> +}
-> +
-> +do_install() {
-> +    make -C ${STAGING_KERNEL_DIR} SUBDIRS=3D${B}/eurasia_km/eurasiacon/b=
-inary_omap_linux_xorg_release/target_aarch64/kbuild INSTALL_MOD_PATH=3D${D}=
- PREFIX=3D${STAGING_DIR_HOST} modules_install
-> +}
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+> -----Original Message-----
+> From: Dmytriyenko, Denys 
+> Sent: Friday, July 13, 2018 1:30 PM
+> To: Ruei, Eric
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH v2 0/3] Enable SGX on k3 (AM654x)
+> 
+> Eric,
+> 
+> Thanks for addressing most of my comments! This looks much better, but there 
+> are still couple issues - please see inside.
+> 
+> 
+> On Wed, Jul 11, 2018 at 11:45:28AM -0400, Eric Ruei wrote:
+> > Enable SGX on k3 (AM654x)
+> > 
+> > Eric Ruei (3):
+> >   conf: machine: k3: enable sgx
+> >   ti-sgx-ddk-um: add k3 (AM654x) support
+> >   ti-sgx-ddk-km: add k3 (AM654x) support
+> > 
+> >  conf/machine/include/k3.inc                        |  4 +-
+> >  .../powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb  | 92 ++++++----------------
+> >  .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          |  1 +
+> >  ...14.3699939.bb => ti-sgx-ddk-um_1.17.4948957.bb} | 10 +--
+> >  4 files changed, 33 insertions(+), 74 deletions(-)
+> >  copy recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb => recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb (2%)
+> >  copy recipes-graphics/libgles/{ti-sgx-ddk-um_1.14.3699939.bb => ti-sgx-ddk-um_1.17.4948957.bb} (93%)
+> > 
+> > -- 
+> > 1.9.1
+> > 
+> > -- 
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
