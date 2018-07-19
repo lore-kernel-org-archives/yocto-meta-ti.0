@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 835EBE010F0; Thu, 19 Jul 2018 10:24:34 -0700 (PDT)
+	id 8DD0DE0158F; Thu, 19 Jul 2018 10:24:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,44 +13,44 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 87644E0141D
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE838E015E7
 	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 10:24:29 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6JHOSh3022020
-	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:28 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6JHOT3O130778
+	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1532021068;
-	bh=c+6TR9ACffOmy3JGmOJnDUxLPeAK2lm4+Kx3KE1cv/A=;
+	s=ti-com-17Q1; t=1532021069;
+	bh=AORR32SweG78FlfMEPX4VkaNYk86G3uzuuXQDsZZGOs=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=YvIwJEvTaEEVNnppLOM2IPHozMuj1Yu9laG7zLvupO4uPrk9FksXYn8fY0Ra4LQYn
-	bi9+OKFBQtjsw0WTk+dk4AlNtNxhHCP/3kiXOmCb9578ICAhrM9jzyg3mM/xAZfKGa
-	1UiadXHrac7FmEhv4ACAc6rf1Oel1pRF4T3faJv0=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOSvU011601
-	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:28 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	b=D8tBuRt5PQUbDiKxi62HMVHXNNdxH71JxJMGyPDbD60MDvTWk+a1FA2OEltT7SheG
+	jQR4R6MpIO7Av5Y/yfRtjyYWyMNOIQkKRJph8vR8gUqJK+/qCEBHHo+YTlNutFA4i+
+	GwGA5XNQBYhj4HlWxiGDZ2vviheMNCshEecADo48=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOT1B011613
+	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:29 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
 	Thu, 19 Jul 2018 12:24:28 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE101.ent.ti.com
+	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
 	Transport; Thu, 19 Jul 2018 12:24:28 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOORo023684
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOORq023684
 	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:28 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 19 Jul 2018 13:23:53 -0400
-Message-ID: <1532021058-48916-21-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 19 Jul 2018 13:23:55 -0400
+Message-ID: <1532021058-48916-23-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1532021058-48916-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1532021058-48916-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 20/45] mcbsp-lld-rtos: Update to version 1.0.0.10 after adding support for ompal1, makefile based build
+Subject: [rocko/master][PATCH 22/45] nwal-lld: Update to version 2.1.0.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,51 +68,31 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ recipes-bsp/nwal-lld/nwal-lld.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb b/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
-index 5573e10..f65e22a 100644
---- a/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
-+++ b/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
-@@ -5,7 +5,7 @@ inherit ti-pdk
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://mcbspver.h;beginline=1;endline=47;md5=a8a39efd13fa6fe66da5461b898d620e"
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index ba87bf0..679ae9f 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -8,14 +8,14 @@ NWAL_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git"
+ NWAL_LLD_GIT_PROTOCOL = "git"
+ NWAL_LLD_GIT_BRANCH = "master"
  
--COMPATIBLE_MACHINE = "k2g|c665x-evm"
-+COMPATIBLE_MACHINE = "k2g|c665x-evm|omapl1"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.11A"
+-NWAL_LLD_SRCREV = "a93303e3d682d7161030113b72c3e1adf755bf89"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.12"
++NWAL_LLD_SRCREV = "fef9d609f446c6a229c571473727ee5d1ad49630"
  
- MCBSP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/mcbsp-lld.git"
-@@ -13,14 +13,14 @@ MCBSP_LLD_GIT_PROTOCOL = "git"
- MCBSP_LLD_GIT_BRANCH = "master"
- MCBSP_LLD_GIT_DESTSUFFIX = "git/ti/drv/mcbsp"
+ BRANCH = "${NWAL_LLD_GIT_BRANCH}"
+ SRC_URI = "${NWAL_LLD_GIT_URI};protocol=${NWAL_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${NWAL_LLD_SRCREV}"
  
--# Below commit ID corresponds to "DEV.MCBSP_LLD.01.00.00.09"
--MCBSP_LLD_SRCREV = "e782f251a7009c786a208a15e6bc0331bb6808f6"
-+# Below commit ID corresponds to "DEV.MCBSP_LLD.01.00.00.10"
-+MCBSP_LLD_SRCREV = "4b53ebb479c769dac4908b759191f62b3b90ce4d"
+-PV = "02.01.00.11A"
++PV = "02.01.00.12"
+ INC_PR = "r0"
  
- BRANCH = "${MCBSP_LLD_GIT_BRANCH}"
- SRC_URI = "${MCBSP_LLD_GIT_URI};destsuffix=${MCBSP_LLD_GIT_DESTSUFFIX};protocol=${MCBSP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
- 
- SRCREV = "${MCBSP_LLD_SRCREV}"
--PV = "01.00.00.09"
-+PV = "01.00.00.10"
- PR = "r0"
- 
- S = "${WORKDIR}/${MCBSP_LLD_GIT_DESTSUFFIX}"
-@@ -31,5 +31,10 @@ DEPENDS_append = " edma3-lld-rtos \
- export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
- XDCPATH_append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
- 
-+TI_PDK_XDCMAKE = "0"
-+
-+export PDK_MCBSP_ROOT_PATH = "${WORKDIR}/build"
-+export DEST_ROOT = "${S}"
-+
- # HTML doc link params
- PDK_COMP_LINK_TEXT = "MCBSP LLD"
+ BASEDIR = "${WORKDIR}/git"
 -- 
 1.9.1
 
