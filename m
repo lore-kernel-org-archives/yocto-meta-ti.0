@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EA065E01726; Thu, 19 Jul 2018 10:24:29 -0700 (PDT)
+	id 0C29BE0130D; Thu, 19 Jul 2018 10:24:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,43 +14,43 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D287BE0133B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF699E01406
 	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 10:24:26 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6JHOQ8j130745
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w6JHOQLL130749
 	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1532021066;
-	bh=TU3AkPfQ5EHPjom6QIMVzxbXNBMTx//s3UULkbfY0+0=;
+	bh=+7KdYNfFuFq6mq0xCs1mnmGTzdOH58b14B4kih5cLCo=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=A0p2J2/KhZEbE2egSanqlsawsfg05x1qM4zBqtygsM/umOOfHUxGSVjUPz1eEsiEH
-	CkAmJifyGJbjhU/YKMEyES/04ZbGlJAN3gHKGc1ntpoYp4Ix+vBr9ckpvy7avRpI+c
-	imBTt/lLgndmY/ncCRZZSpC1rWcrebhLhhxLftCU=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOQb9011520
+	b=p3BbweASX9xQx+JR1U6X8MPnSXkI+h4RM7xyO98pXrBd8Y/k1I+5lr3gL6B1DSht4
+	VVAhw/tg8xGxMmYI6FFLqosHBedIc+OdetHol95Cdamfy/eHGl1jJUm7J5N96MfTI3
+	rAg1J26xcHS9d9H+HyaGi60nQfngzkU0MpyhfWpc=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOQgE015384
 	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:26 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE102.ent.ti.com
+	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
 	Thu, 19 Jul 2018 12:24:25 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
 	Transport; Thu, 19 Jul 2018 12:24:25 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOORZ023684
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w6JHOORW023684
 	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2018 12:24:25 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 19 Jul 2018 13:23:38 -0400
-Message-ID: <1532021058-48916-6-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 19 Jul 2018 13:23:35 -0400
+Message-ID: <1532021058-48916-3-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1532021058-48916-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1532021058-48916-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 05/45] cmb-addon-rtos: Update to version 1.1.0.1
+Subject: [rocko/master][PATCH 02/45] aif2-lld: Update to version 1.2.0.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,28 +68,31 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb | 6 +++---
+ recipes-bsp/aif2-lld/aif2-lld.inc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb b/recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb
-index 0fade74..f8242cf 100644
---- a/recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb
-+++ b/recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb
-@@ -14,11 +14,11 @@ CMB_ADDON_GIT_PROTOCOL = "git"
- CMB_ADDON_GIT_BRANCH = "master"
- CMB_ADDON_GIT_DESTSUFFIX = "git/ti/addon"
+diff --git a/recipes-bsp/aif2-lld/aif2-lld.inc b/recipes-bsp/aif2-lld/aif2-lld.inc
+index 9b5f279..a0f606c 100644
+--- a/recipes-bsp/aif2-lld/aif2-lld.inc
++++ b/recipes-bsp/aif2-lld/aif2-lld.inc
+@@ -7,14 +7,14 @@ AIF2_LLD_GIT_PROTOCOL = "git"
+ AIF2_LLD_GIT_BRANCH = "master"
+ AIF2_LLD_GIT_DESTSUFFIX = "git/ti/drv/aif2"
  
--# Below commit ID corresponds to "DEV.CMB.01.01.00.00"
--CMB_ADDON_SRCREV = "29c05572b82251bac73cd685afcffdb8549eaaaf"
-+# Below commit ID corresponds to "DEV.CMB.01.01.00.01"
-+CMB_ADDON_SRCREV = "d60c0887cc479abd09f014c038d0ebe1daa25dad"
+-# The following commit correspond to DEV.AIF2LLD.01.02.00.01
+-AIF2_LLD_SRCREV = "a701bbb5ed2976d5723c955c87a685f7517cffa3"
++# The following commit correspond to DEV.AIF2LLD.01.02.00.02
++AIF2_LLD_SRCREV = "e0c978cf1de9007c99a67d4683abaece1fca3617"
  
- SRCREV = "${CMB_ADDON_SRCREV}"
--PV = "01.01.00.00"
-+PV = "01.01.00.01"
- PR = "r0"
+ BRANCH = "${AIF2_LLD_GIT_BRANCH}"
+ SRC_URI = "${AIF2_LLD_GIT_URI};destsuffix=${AIF2_LLD_GIT_DESTSUFFIX};protocol=${AIF2_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${AIF2_LLD_SRCREV}"
  
- BRANCH = "${CMB_ADDON_GIT_BRANCH}"
+-PV = "1.2.0.1"
++PV = "1.2.0.2"
+ INC_PR = "r0"
+ 
+ COMPATIBLE_MACHINE = "k2hk"
 -- 
 1.9.1
 
