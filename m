@@ -1,16 +1,14 @@
-Return-Path: <hzhang@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0F05FE00874; Fri, 10 Aug 2018 12:25:48 -0700 (PDT)
+	id BE213E00874; Fri, 10 Aug 2018 19:47:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00, DATE_IN_PAST_03_06, 
-	DKIM_SIGNED, DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_LOW autolearn=no version=3.3.1
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-	*  1.6 DATE_IN_PAST_03_06 Date: is 3 to 6 hours before Received: date
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -18,42 +16,46 @@ X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 530CDE00848
-	for <meta-ti@yoctoproject.org>; Fri, 10 Aug 2018 12:25:47 -0700 (PDT)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3774E00848
+	for <meta-ti@yoctoproject.org>; Fri, 10 Aug 2018 19:47:11 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7AJPkiS039369
-	for <meta-ti@yoctoproject.org>; Fri, 10 Aug 2018 14:25:46 -0500
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7B2lAWR072454
+	for <meta-ti@yoctoproject.org>; Fri, 10 Aug 2018 21:47:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1533929146;
-	bh=YYdGez11SrnYhDSq3NO87Tnx3VSDbv0lTNNvf1Rj2uM=;
-	h=From:To:CC:Subject:Date;
-	b=hLqq+hArQcEnTBn3dQrzMoxzRVRa211D8ByoLgfXJFqV+0AkSfMtZSiVY/crH7Xzl
-	py4fNpB8q5DW4roN5tr3/IH5NGj99kgX7LM8UgsSmj7luaMRi0guqpM17Y8ktcB7Xh
-	STC/VnX4XGxfPlCnadgveYWm2ABKUbWKuq7jSOf4=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7AJPkgD013924
-	for <meta-ti@yoctoproject.org>; Fri, 10 Aug 2018 14:25:46 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1533955630;
+	bh=JY/UaGwC/9eOoO7SP1M2rASKHnk1RO42cF6ciRTJYsM=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=TLo2Fy9CnND2LgnCvvH/w1JvEiCbn6oDOLEGVGuyz9WT/F3Nbo8c1aEiNjIp7f2y/
+	vWVnmYjMhA2at04YQ9Xl14h1a/ofjPkk0PHzXcwaPtv9dnvbeXjqSFvut6hhtzsaTd
+	Bl/758FJU4dB8+aDTk+DJgDAeMty0AK+Vzn/BbeI=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7B2lABs015039
+	for <meta-ti@yoctoproject.org>; Fri, 10 Aug 2018 21:47:10 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 10 Aug 2018 14:25:46 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Fri, 10 Aug 2018 14:25:46 -0500
-Received: from hao-Ubuntu16.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7AJPkZM010194;
-	Fri, 10 Aug 2018 14:25:46 -0500
-From: <hzhang@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 10 Aug 2018 10:23:32 -0400
-Message-ID: <1533911012-21837-1-git-send-email-hzhang@ti.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 10 Aug 2018 21:47:10 -0500
+Received: from DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895]) by
+	DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895%18]) with mapi id
+	15.01.1466.003; Fri, 10 Aug 2018 21:47:10 -0500
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Zhang, Hao" <hzhang@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [EXTERNAL] [meta-ti] [PATCH] recipes-ti: devtools: add GCC
+	Linaro toolchain 2017.11 v7.2.1
+Thread-Index: AQHUMOAVdksO18T0lk+aU5eW9BkODaS52RTA
+Date: Sat, 11 Aug 2018 02:47:10 +0000
+Message-ID: <a563d2ec8947454793dcafe2e471309e@ti.com>
+References: <1533911012-21837-1-git-send-email-hzhang@ti.com>
+In-Reply-To: <1533911012-21837-1-git-send-email-hzhang@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.22.159.185]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] recipes-ti: devtools: add GCC Linaro toolchain 2017.11 v7.2.1
+Subject: Re: [EXTERNAL] [PATCH] recipes-ti: devtools: add GCC Linaro toolchain 2017.11 v7.2.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,114 +68,162 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2018 19:25:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 11 Aug 2018 02:47:12 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Hao Zhang <hzhang@ti.com>
 
-Signed-off-by: Hao Zhang <hzhang@ti.com>
----
- recipes-ti/devtools/gcc-linaro-aarch64-native.bb | 24 ++++++++++++++++++++++++
- recipes-ti/devtools/gcc-linaro-native.bb         | 24 ++++++++++++++++++++++++
- recipes-ti/devtools/gcc-linaro.inc               | 12 ++++++++++++
- recipes-ti/includes/ti-paths.inc                 |  2 ++
- 4 files changed, 62 insertions(+)
- create mode 100644 recipes-ti/devtools/gcc-linaro-aarch64-native.bb
- create mode 100644 recipes-ti/devtools/gcc-linaro-native.bb
- create mode 100644 recipes-ti/devtools/gcc-linaro.inc
 
-diff --git a/recipes-ti/devtools/gcc-linaro-aarch64-native.bb b/recipes-ti/devtools/gcc-linaro-aarch64-native.bb
-new file mode 100644
-index 0000000..6c0482d
---- /dev/null
-+++ b/recipes-ti/devtools/gcc-linaro-aarch64-native.bb
-@@ -0,0 +1,24 @@
-+include recipes-ti/devtools/gcc-linaro.inc
-+
-+PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
-+S = "${WORKDIR}/${PACKAGE_DIR}"
-+
-+LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
-+
-+inherit native
-+require recipes-ti/includes/ti-paths.inc
-+
-+SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
-+
-+SRC_URI[gcc-linaro-aarch64.md5sum] = "4972f8943820bdd2f577f498de78964b"
-+SRC_URI[gcc-linaro-aarch64.sha256sum] = "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4c8"
-+
-+do_install() {
-+    install -d ${D}${GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE}
-+    cp -r ${S}/. ${D}${GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE}
-+}
-+
-+FILES_${PN} = "${GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE}/*"
-+
-+INSANE_SKIP_${PN} = "already-stripped"
-+
-diff --git a/recipes-ti/devtools/gcc-linaro-native.bb b/recipes-ti/devtools/gcc-linaro-native.bb
-new file mode 100644
-index 0000000..767c0c0
---- /dev/null
-+++ b/recipes-ti/devtools/gcc-linaro-native.bb
-@@ -0,0 +1,24 @@
-+include recipes-ti/devtools/gcc-linaro.inc
-+
-+PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
-+S = "${WORKDIR}/${PACKAGE_DIR}"
-+
-+LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
-+
-+inherit native
-+require recipes-ti/includes/ti-paths.inc
-+
-+SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi.tar.xz;name=gcc-linaro"
-+
-+SRC_URI[gcc-linaro.md5sum] = "9a4a39cfc78c84375b1160aa93587aed"
-+SRC_URI[gcc-linaro.sha256sum] = "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
-+
-+do_install() {
-+    install -d ${D}${GCC_LINARO_TOOLCHAIN_RECIPE}
-+    cp -r ${S}/. ${D}${GCC_LINARO_TOOLCHAIN_RECIPE}
-+}
-+
-+FILES_${PN} = "${GCC_LINARO_TOOLCHAIN_RECIPE}/*"
-+
-+INSANE_SKIP_${PN} = "already-stripped"
-+
-diff --git a/recipes-ti/devtools/gcc-linaro.inc b/recipes-ti/devtools/gcc-linaro.inc
-new file mode 100644
-index 0000000..6575fc5
---- /dev/null
-+++ b/recipes-ti/devtools/gcc-linaro.inc
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Linaro GCC for ARM"
-+HOMEPAGE = "https://launchpad.net/gcc-arm-embedded"
-+SECTION = "devel"
-+LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
-+LIC_FILES_CHKSUM = "file://share/doc/gcc/GNU-Free-Documentation-License.html;md5=${LIC_CHKSUM}"
-+
-+PV = "7.2.1"
-+PR = "r0"
-+
-+GCC_ARM_YEAR = "2017.11"
-+
-+
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 4f99d5e..ef2feae 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -56,6 +56,8 @@ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
- export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
- export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
- export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
-+export GCC_LINARO_TOOLCHAIN_RECIPE          = "${installdir}/gcc-linaro"
-+export GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE  = "${installdir}/gcc-linaro-aarch64"
- 
- # This is where the tools will end up in sysroot
- export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
--- 
-2.7.4
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Zhang, Hao
+> Sent: Friday, August 10, 2018 10:24 AM
+> To: meta-ti@yoctoproject.org
+> Subject: [EXTERNAL] [meta-ti] [PATCH] recipes-ti: devtools: add GCC Linar=
+o
+> toolchain 2017.11 v7.2.1
+>=20
+> From: Hao Zhang <hzhang@ti.com>
+>=20
+> Signed-off-by: Hao Zhang <hzhang@ti.com>
+> ---
+>  recipes-ti/devtools/gcc-linaro-aarch64-native.bb | 24
+> ++++++++++++++++++++++++
+>  recipes-ti/devtools/gcc-linaro-native.bb         | 24
+> ++++++++++++++++++++++++
+>  recipes-ti/devtools/gcc-linaro.inc               | 12 ++++++++++++
+>  recipes-ti/includes/ti-paths.inc                 |  2 ++
+>  4 files changed, 62 insertions(+)
+>  create mode 100644 recipes-ti/devtools/gcc-linaro-aarch64-native.bb
+>  create mode 100644 recipes-ti/devtools/gcc-linaro-native.bb
+>  create mode 100644 recipes-ti/devtools/gcc-linaro.inc
+>=20
+> diff --git a/recipes-ti/devtools/gcc-linaro-aarch64-native.bb b/recipes-
+> ti/devtools/gcc-linaro-aarch64-native.bb
+> new file mode 100644
+> index 0000000..6c0482d
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro-aarch64-native.bb
+> @@ -0,0 +1,24 @@
+> +include recipes-ti/devtools/gcc-linaro.inc
+> +
+> +PACKAGE_DIR =3D "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
+> +S =3D "${WORKDIR}/${PACKAGE_DIR}"
+> +
+> +LIC_CHKSUM =3D "bc7fad4bba98e7a4cd5ab3042506493c"
+> +
+> +inherit native
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +SRC_URI =3D "https://releases.linaro.org/components/toolchain/binaries/7=
+.2-
+> ${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-
+> x86_64_aarch64-elf.tar.xz;name=3Dgcc-linaro-aarch64"
+> +
+> +SRC_URI[gcc-linaro-aarch64.md5sum] =3D
+> "4972f8943820bdd2f577f498de78964b"
+> +SRC_URI[gcc-linaro-aarch64.sha256sum] =3D
+> "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4
+> c8"
+> +
+> +do_install() {
+> +    install -d ${D}${GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE}
+> +    cp -r ${S}/. ${D}${GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE}
+> +}
+> +
+> +FILES_${PN} =3D "${GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE}/*"
+> +
+> +INSANE_SKIP_${PN} =3D "already-stripped"
+> +
+> diff --git a/recipes-ti/devtools/gcc-linaro-native.bb b/recipes-ti/devtoo=
+ls/gcc-
+> linaro-native.bb
+> new file mode 100644
+> index 0000000..767c0c0
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro-native.bb
+> @@ -0,0 +1,24 @@
+> +include recipes-ti/devtools/gcc-linaro.inc
+> +
+> +PACKAGE_DIR =3D "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
+> +S =3D "${WORKDIR}/${PACKAGE_DIR}"
+> +
+> +LIC_CHKSUM =3D "bc7fad4bba98e7a4cd5ab3042506493c"
+> +
+> +inherit native
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +SRC_URI =3D "https://releases.linaro.org/components/toolchain/binaries/7=
+.2-
+> ${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-
+> x86_64_arm-eabi.tar.xz;name=3Dgcc-linaro"
+> +
+> +SRC_URI[gcc-linaro.md5sum] =3D "9a4a39cfc78c84375b1160aa93587aed"
+> +SRC_URI[gcc-linaro.sha256sum] =3D
+> "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
+> +
+> +do_install() {
+> +    install -d ${D}${GCC_LINARO_TOOLCHAIN_RECIPE}
+> +    cp -r ${S}/. ${D}${GCC_LINARO_TOOLCHAIN_RECIPE}
+> +}
+> +
+> +FILES_${PN} =3D "${GCC_LINARO_TOOLCHAIN_RECIPE}/*"
+> +
+> +INSANE_SKIP_${PN} =3D "already-stripped"
+> +
+> diff --git a/recipes-ti/devtools/gcc-linaro.inc b/recipes-ti/devtools/gcc=
+-
+> linaro.inc
+> new file mode 100644
+> index 0000000..6575fc5
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro.inc
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION =3D "Linaro GCC for ARM"
+> +HOMEPAGE =3D "https://launchpad.net/gcc-arm-embedded"
+> +SECTION =3D "devel"
+> +LICENSE =3D "GPL-3.0-with-GCC-exception & GPLv3"
+> +LIC_FILES_CHKSUM =3D "file://share/doc/gcc/GNU-Free-Documentation-
+> License.html;md5=3D${LIC_CHKSUM}"
+> +
+> +PV =3D "7.2.1"
+> +PR =3D "r0"
+> +
+> +GCC_ARM_YEAR =3D "2017.11"
+> +
+> +
+> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-pa=
+ths.inc
+> index 4f99d5e..ef2feae 100644
+> --- a/recipes-ti/includes/ti-paths.inc
+> +++ b/recipes-ti/includes/ti-paths.inc
+> @@ -56,6 +56,8 @@ export CG_XML_INSTALL_DIR_RECIPE     =3D
+> "${installdir}/ti-cg-xml-tree"
+>  export OMP_INSTALL_DIR_RECIPE        =3D "${installdir}/ti-omp-tree"
+>  export MPM_INSTALL_DIR_RECIPE        =3D "${installdir}/ti-mpm-tree"
+>  export TI_CGT6X_7_INSTALL_DIR_RECIPE   =3D "${installdir}/cgt6x-7"
+> +export GCC_LINARO_TOOLCHAIN_RECIPE          =3D "${installdir}/gcc-linar=
+o"
+> +export GCC_LINARO_AARCH64_TOOLCHAIN_RECIPE  =3D "${installdir}/gcc-
+> linaro-aarch64"
+>=20
 
+Also need to add the following for completeness:=20
+export GCC_LINARO_TOOLCHAIN        =3D "${STAGING_DIR_NATIVE}${GCC_LINARO_T=
+OOLCHAIN_RECIPE}"
+export GCC_LINARO_AARCH64_TOOLCHAIN        =3D "${STAGING_DIR_NATIVE}${GCC_=
+LINARO_AARCH64_TOOLCHAIN_RECIPE}"
+
+>  # This is where the tools will end up in sysroot
+>  export BIOS_INSTALL_DIR       =3D
+> "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+> --
+> 2.7.4
+>=20
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
