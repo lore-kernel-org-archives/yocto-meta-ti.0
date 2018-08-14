@@ -1,6 +1,6 @@
-Return-Path: <nsaulnier@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 17A25E00566; Tue, 14 Aug 2018 08:50:36 -0700 (PDT)
+	id EAB9DE00566; Tue, 14 Aug 2018 10:15:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,45 +16,46 @@ X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCA32E0049F
-	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 08:50:34 -0700 (PDT)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1B47E0049F
+	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 10:15:34 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7EFoYrN074541
-	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 10:50:34 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7EHFYxG009245
+	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 12:15:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1534261834;
-	bh=KKIQ3KUurzh1TJuBg7qH4+fvgZyGUpS+2hTwkjIybMU=;
-	h=From:To:CC:Subject:Date;
-	b=UhC+S3nt+lalVKqETtlWTOqZv0poE0CyUEJTRIkV5ArFI4I34qxNyk7HnBh7d9BPC
-	XV+NUA6ELqj/Ru41AYrlUY410MEdS7sUT7CIP+Lq/lsDU4sOsSvP1vp64FYO7AZ89D
-	PA9U+M+vc6v2/En+/OuB4D3EBez7Daz7irSzAGm0=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7EFoY0Q008885
-	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 10:50:34 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1534266934;
+	bh=wKeFdjbjUEsTooL+PDDezswAy0Slvoa/LwEC9trt5xQ=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=fbxS78+icbuXZyh87BROKzIlXp+Vo4grzZD2+Xhqw3RbWDqTEIDa4B5qLT2YYumxQ
+	8YG/Wd/jr32uJhHU2ejXQ0+rn3j3t+qeZvfIQMIDlNTUrEB2crhOLKTbTdijkYNbEB
+	FEgsFBbxNQ8xGK9TvDIZ0MMo/V41pzWfU91f3Zjs=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7EHFY22023719
+	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 12:15:34 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 14 Aug 2018 10:50:32 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 14 Aug 2018 10:50:33 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7EFoX63008112;
-	Tue, 14 Aug 2018 10:50:33 -0500
-Received: from localhost (uda0226750.dhcp.ti.com [128.247.59.152])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	w7EFoXx25899; Tue, 14 Aug 2018 10:50:33 -0500 (CDT)
-From: Nick Saulnier <nsaulnier@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 14 Aug 2018 10:50:21 -0500
-Message-ID: <1534261821-11798-1-git-send-email-nsaulnier@ti.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 14 Aug 2018 12:15:33 -0500
+Received: from DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895]) by
+	DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895%18]) with mapi id
+	15.01.1466.003; Tue, 14 Aug 2018 12:15:33 -0500
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Zhang, Hao" <hzhang@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [EXTERNAL] [meta-ti] [PATCH] recipes-ti: devtools: add GCC
+	Linaro baremetal toolchain 2017.11 v7.2.1
+Thread-Index: AQHUM9ucvv7JdM1llk2rG1JQYRGSPqS/fEFQ
+Date: Tue, 14 Aug 2018 17:15:33 +0000
+Message-ID: <37facad8053e4f69bec675017778a762@ti.com>
+References: <1534238985-17254-1-git-send-email-hzhang@ti.com>
+In-Reply-To: <1534238985-17254-1-git-send-email-hzhang@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [158.218.118.11]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH v2] pru-icss_git.bb: Add am65x PRU_Halt
+Subject: Re: [EXTERNAL] [PATCH] recipes-ti: devtools: add GCC Linaro baremetal toolchain 2017.11 v7.2.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,109 +68,166 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 15:50:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 14 Aug 2018 17:15:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Updated SRCREV to point to an updated version of the PRU Software Support
-Package which includes PRU_Halt and RTU_Halt examples for am65x. PV will
-get updated in the next patch.
 
-Added PRU_Halt and RTU_Halt to do_install_append_am65xx-evm(). Decided to leave
-the installation of PRU_Halt examples in each processor's do_install_append
-function for now since PRU_Halt and RTU_Halt for am65x have different output
-file names than the previous ICSS processors. Those different output names can
-be seen in the lines ALTERNATIVE_TARGET_pru-icss-halt[am65x....].
 
-The previous commit made several changes to account for the fact that am65x Halt
-examples had not yet been added to the PRU Software Support Package. Those
-changes were removed in this commit.
-
-Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
----
- recipes-bsp/pru/pru-icss_git.bb | 32 +++++++++++++++++++++++---------
- 1 file changed, 23 insertions(+), 9 deletions(-)
-
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-index 3c871b70e3f0..e150076ec0a2 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -8,10 +8,10 @@ inherit update-alternatives
- 
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
--SRCREV = "81b568741b8b98e6f590271a9aea5956d2b2d9ce"
-+SRCREV = "1d9249c012005a669a6ffb2f76255d72ed5c0e4c"
- 
- PV = "5.2.1"
--PR = "r1"
-+PR = "r2"
- 
- require recipes-ti/includes/ti-paths.inc
- 
-@@ -103,6 +103,13 @@ do_install_append_k2g() {
- }
- 
- do_install_append_am65xx-evm() {
-+    for i in 0 1 
-+    do
-+        install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU${i}/PRU_Halt_${i}.out \
-+                   ${D}/lib/firmware/pru
-+        install -m 644 ${S}/examples/${PLATFORM}/RTU_Halt/gen/RTU${i}/RTU_Halt_${i}.out \
-+                   ${D}/lib/firmware/pru
-+    done
-     for i in 0 1 2
-     do
-         for j in 0 1
-@@ -116,7 +123,7 @@ do_install_append_am65xx-evm() {
-     done
- }
- 
--FILES_${PN}-halt = "/lib/firmware/pru/PRU_Halt.out"
-+FILES_${PN}-halt = "/lib/firmware/pru/PRU_Halt* /lib/firmware/pru/RTU_Halt*"
- FILES_${PN}-rpmsg-echo = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt* /lib/firmware/pru/RTU_RPMsg_Echo_Interrupt*"
- 
- # Set up names for the firmwares
-@@ -161,9 +168,6 @@ ALTERNATIVE_LINK_NAME[am65x-rtu2_1-fw] = "/lib/firmware/am65x-rtu2_1-fw"
- # Create the pru-icss-halt firmware alternatives
- ALTERNATIVE_pru-icss-halt = "${PRU_ICSS_ALTERNATIVES}"
- 
--# am65xx doesn't have halt FW for now
--ALTERNATIVE_pru-icss-halt_am65xx-evm = ""
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Zhang, Hao
+> Sent: Tuesday, August 14, 2018 5:30 AM
+> To: meta-ti@yoctoproject.org
+> Subject: [EXTERNAL] [meta-ti] [PATCH] recipes-ti: devtools: add GCC Linar=
+o
+> baremetal toolchain 2017.11 v7.2.1
+>=20
+> From: Hao Zhang <hzhang@ti.com>
+>=20
+> Signed-off-by: Hao Zhang <hzhang@ti.com>
+> ---
+>  .../gcc-linaro-baremetal-aarch64-native.bb         | 24
+> ++++++++++++++++++++++
+>  recipes-ti/devtools/gcc-linaro-baremetal-native.bb | 24
+> ++++++++++++++++++++++
+>  recipes-ti/devtools/gcc-linaro.inc                 | 12 +++++++++++
+>  recipes-ti/includes/ti-paths.inc                   |  2 ++
+>  4 files changed, 62 insertions(+)
+>  create mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-aarch64-
+> native.bb
+>  create mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+>  create mode 100644 recipes-ti/devtools/gcc-linaro.inc
+>=20
+> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> new file mode 100644
+> index 0000000..5e3e3b6
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> @@ -0,0 +1,24 @@
+> +include recipes-ti/devtools/gcc-linaro.inc
+> +
+> +PACKAGE_DIR =3D "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
+> +S =3D "${WORKDIR}/${PACKAGE_DIR}"
+> +
+> +LIC_CHKSUM =3D "bc7fad4bba98e7a4cd5ab3042506493c"
+> +
+> +inherit native
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +SRC_URI =3D "https://releases.linaro.org/components/toolchain/binaries/7=
+.2-
+> ${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-
+> x86_64_aarch64-elf.tar.xz;name=3Dgcc-linaro-aarch64"
+> +
+> +SRC_URI[gcc-linaro-aarch64.md5sum] =3D
+> "4972f8943820bdd2f577f498de78964b"
+> +SRC_URI[gcc-linaro-aarch64.sha256sum] =3D
+> "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4
+> c8"
+> +
+> +do_install() {
+> +    install -d
+> ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
+> +    cp -r ${S}/.
+> ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
+> +}
+> +
+> +FILES_${PN} =3D
+> "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}/*"
+> +
+> +INSANE_SKIP_${PN} =3D "already-stripped"
+> +
+> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb b/recipes=
 -
- ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru0-fw] = "/lib/firmware/pru/PRU_Halt.out"
- ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru1-fw] = "/lib/firmware/pru/PRU_Halt.out"
- 
-@@ -182,6 +186,19 @@ ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt.ou
- ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt.out"
- ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt.out"
- 
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru2_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru2_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu0_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu0_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
-+
- ALTERNATIVE_PRIORITY_pru-icss-halt = "50"
- 
- # Create the pru-icss-rpmsg-echo firmware alternatives
-@@ -220,9 +237,6 @@ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu2_1-fw] = "/lib/firmware/pru/RTU
- 
- ALTERNATIVE_PRIORITY_pru-icss-rpmsg-echo = "100"
- 
--# am65xx doesn't have halt FW for now
--ALLOW_EMPTY_${PN}-halt = "1"
+> ti/devtools/gcc-linaro-baremetal-native.bb
+> new file mode 100644
+> index 0000000..07a6f49
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+> @@ -0,0 +1,24 @@
+> +include recipes-ti/devtools/gcc-linaro.inc
+> +
+> +PACKAGE_DIR =3D "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
+> +S =3D "${WORKDIR}/${PACKAGE_DIR}"
+> +
+> +LIC_CHKSUM =3D "bc7fad4bba98e7a4cd5ab3042506493c"
+> +
+> +inherit native
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +SRC_URI =3D "https://releases.linaro.org/components/toolchain/binaries/7=
+.2-
+> ${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-
+> x86_64_arm-eabi.tar.xz;name=3Dgcc-linaro"
+> +
+> +SRC_URI[gcc-linaro.md5sum] =3D "9a4a39cfc78c84375b1160aa93587aed"
+> +SRC_URI[gcc-linaro.sha256sum] =3D
+> "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
+> +
+> +do_install() {
+> +    install -d ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
+> +    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
+> +}
+> +
+> +FILES_${PN} =3D "${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}/*"
+> +
+> +INSANE_SKIP_${PN} =3D "already-stripped"
+> +
+> diff --git a/recipes-ti/devtools/gcc-linaro.inc b/recipes-ti/devtools/gcc=
 -
- ALLOW_EMPTY_${PN} = "1"
- 
- # This installs PRU firmware, so skip "arch" QA check
--- 
-1.9.1
+> linaro.inc
+> new file mode 100644
+> index 0000000..6575fc5
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro.inc
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION =3D "Linaro GCC for ARM"
+> +HOMEPAGE =3D "https://launchpad.net/gcc-arm-embedded"
+> +SECTION =3D "devel"
+> +LICENSE =3D "GPL-3.0-with-GCC-exception & GPLv3"
+> +LIC_FILES_CHKSUM =3D "file://share/doc/gcc/GNU-Free-Documentation-
+> License.html;md5=3D${LIC_CHKSUM}"
+> +
+> +PV =3D "7.2.1"
+> +PR =3D "r0"
+> +
+> +GCC_ARM_YEAR =3D "2017.11"
+> +
+> +
+> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-pa=
+ths.inc
+> index 4f99d5e..b6c15d7 100644
+> --- a/recipes-ti/includes/ti-paths.inc
+> +++ b/recipes-ti/includes/ti-paths.inc
+> @@ -56,6 +56,8 @@ export CG_XML_INSTALL_DIR_RECIPE     =3D
+> "${installdir}/ti-cg-xml-tree"
+>  export OMP_INSTALL_DIR_RECIPE        =3D "${installdir}/ti-omp-tree"
+>  export MPM_INSTALL_DIR_RECIPE        =3D "${installdir}/ti-mpm-tree"
+>  export TI_CGT6X_7_INSTALL_DIR_RECIPE   =3D "${installdir}/cgt6x-7"
+> +export GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE          =3D
+> "${installdir}/gcc-linaro-baremetal"
+> +export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE  =3D
+> "${installdir}/gcc-linaro-baremetal-aarch64"
 
+Can you please also add for completeness:
+export GCC_LINARO_BAREMETAL_TOOLCHAIN        =3D  "${STAGING_DIR_NATIVE}${ =
+GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE }"
+export GCC_LINARO_ BAREMETAL_AARCH64_TOOLCHAIN            =3D  "${STAGING_D=
+IR_NATIVE}${GCC_LINARO_BAREMETAL _AARCH64_TOOLCHAIN_RECIPE}"
+
+>=20
+>  # This is where the tools will end up in sysroot
+>  export BIOS_INSTALL_DIR       =3D
+> "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+> --
+> 2.7.4
+>=20
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
