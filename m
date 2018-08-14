@@ -1,16 +1,14 @@
-Return-Path: <hzhang@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9226BE00566; Tue, 14 Aug 2018 11:49:59 -0700 (PDT)
+	id 4B671E00566; Tue, 14 Aug 2018 11:59:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00, DATE_IN_PAST_03_06, 
-	DKIM_SIGNED, DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_LOW autolearn=no version=3.3.1
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-	*  1.6 DATE_IN_PAST_03_06 Date: is 3 to 6 hours before Received: date
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -18,42 +16,42 @@ X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 82F43E0049F
-	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 11:49:58 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7EInwN2111932
-	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 13:49:58 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 735E9E0049F
+	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 11:59:31 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7EIxUtQ104806
+	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 13:59:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1534272598;
-	bh=a/n0FmFWXglh1bmR/rUQxmKq6PzEjm32RT2PgmqsXHk=;
+	s=ti-com-17Q1; t=1534273171;
+	bh=opvX+tooUJAm+WLbDsVgiwrSCRXtsKBL3AA9pJIhIE0=;
 	h=From:To:CC:Subject:Date;
-	b=eJx7gH6HWLyun/JKQ98erUHdc1FnwU4EVE6ipXc+I/oN0m2kBNwOhn2dCt5hA/2hN
-	aU1fCtLXFd6frZenCv/kd99/lUKq5b25kGavna9b46HQkzDU3e3LXHfvLpascrPw5a
-	qBxvODqs4tpUE0a3HwbegGNfae/vH8NPO2bb4SyI=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7EInvc9020168
-	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 13:49:58 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	b=qzotL9SCZHVmreiEnkwQ+IFCvzb08IO86deya0g0BViPKLEHiizFvHlyJLs6HpE/y
+	RvPhBm48Xj5qLe3CuEzqiDjLwA9YMziVdRDBV5ZV85V6oIz6W14q6+1q4Cy6ebZ8Ia
+	7E8e9StBexDfCuuMOaRxznfnRCuMUBjPsVZ8h25M=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7EIxU49003154
+	for <meta-ti@yoctoproject.org>; Tue, 14 Aug 2018 13:59:30 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
+	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 14 Aug 2018 13:49:35 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 14 Aug 2018 13:59:30 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 14 Aug 2018 13:49:34 -0500
-Received: from hao-Ubuntu16.dhcp.ti.com (ileax41-snat.itg.ti.com
+	Transport; Tue, 14 Aug 2018 13:59:30 -0500
+Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7EInYqG010441;
-	Tue, 14 Aug 2018 13:49:34 -0500
-From: <hzhang@ti.com>
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7EIxUE0019985;
+	Tue, 14 Aug 2018 13:59:30 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 14 Aug 2018 09:47:22 -0400
-Message-ID: <1534254442-35537-1-git-send-email-hzhang@ti.com>
-X-Mailer: git-send-email 2.7.4
+Date: Tue, 14 Aug 2018 14:59:28 -0400
+Message-ID: <1534273168-15171-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko][PATCH V3] recipes-ti: devtools: add GCC Linaro baremetal toolchain 2017.11 v7.2.1
+Subject: [rocko][PATCH v2] ti-ipc: Update to new version 3.50
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,125 +64,134 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 18:49:59 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 18:59:32 -0000
 Content-Type: text/plain
 
-From: Hao Zhang <hzhang@ti.com>
+Add AM65XX platform support
 
-Signed-off-by: Hao Zhang <hzhang@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 
 ---
-Changes from previous version of patch
-Remote white spaces end of file
+Change from previous version of patch
+- Update gcc toolchain to gcc-linaro-baremetal-aarch64
+NOTE: This patch depends on gcc-linaro-baremetal-aarch64-native patch to be checked in
 ---
 ---
- .../gcc-linaro-baremetal-aarch64-native.bb         | 23 ++++++++++++++++++++++
- recipes-ti/devtools/gcc-linaro-baremetal-native.bb | 23 ++++++++++++++++++++++
- recipes-ti/devtools/gcc-linaro.inc                 | 10 ++++++++++
- recipes-ti/includes/ti-paths.inc                   |  5 +++++
- 4 files changed, 61 insertions(+)
- create mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
- create mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-native.bb
- create mode 100644 recipes-ti/devtools/gcc-linaro.inc
+ recipes-ti/ipc/ti-ipc-common.inc   |  3 ++-
+ recipes-ti/ipc/ti-ipc-examples.inc |  2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc     | 16 ++++++++++++----
+ recipes-ti/ipc/ti-ipc-rtos_git.bb  |  8 ++++++++
+ recipes-ti/ipc/ti-ipc.inc          |  6 +++---
+ 5 files changed, 26 insertions(+), 9 deletions(-)
 
-diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
-new file mode 100644
-index 0000000..97344f9
---- /dev/null
-+++ b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
-@@ -0,0 +1,23 @@
-+include recipes-ti/devtools/gcc-linaro.inc
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 7f93842..6aea8e6 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,4 +1,4 @@
+-PV = "3.47.02.00"
++PV = "3.50.01.00"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -13,6 +13,7 @@ PLATFORM_k2g = "66AK2G"
+ PLATFORM_omapl138 = "OMAPL138"
+ PLATFORM_c667x-evm = "C6678"
+ PLATFORM_c665x-evm = "C6678"
++PLATFORM_am65xx-evm = "AM65XX"
+ 
+ ALT_PLATFORM_k2hk = "TCI6636"
+ ALT_PLATFORM_am57xx-evm = "AM572X AM571X"
+diff --git a/recipes-ti/ipc/ti-ipc-examples.inc b/recipes-ti/ipc/ti-ipc-examples.inc
+index cd2240c..022b13f 100644
+--- a/recipes-ti/ipc/ti-ipc-examples.inc
++++ b/recipes-ti/ipc/ti-ipc-examples.inc
+@@ -3,7 +3,7 @@ require ti-ipc-common.inc
+ require ti-ipc-rtos.inc
+ 
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://${S_ipc-examples}/src/makefile;beginline=1;endline=30;md5=fb83580b16bce88e8ed568a6005c8f02"
++LIC_FILES_CHKSUM = "file://${S_ipc-examples}/src/makefile;beginline=1;endline=30;md5=a52324bd5033bb49ea07bade1244ac9a"
+ 
+ INSANE_SKIP_${PN} += "arch"
+ 
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 868743e..13b1914 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -24,11 +24,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
+ 
+-# Corresponds to tag: 3.47.02.00
+-SRCREV_ipc-metadata = "e8aff83111b8a0d64d7a77413b6f66d3106084d8"
++# Corresponds to tag: 3.50.01.00
++SRCREV_ipc-metadata = "19a8e70cf6ca4fe0984987e25d937c61a62c7658"
+ 
+-# Corresponds to tag: 3.47.02.00
+-SRCREV_ipc-examples = "351e9a6d94c68f7ff64b2c002ee6750242ece6d9"
++# Corresponds to tag: 3.50.01.00
++SRCREV_ipc-examples = "1975687076426b587be8d2530df56c24425ca53a"
+ 
+ S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+@@ -50,6 +50,9 @@ DEPENDS_append_omapl138 = " ti-cgt6x-native \
+ DEPENDS_append_c66x = " ti-cgt6x-native \
+ "
+ 
++DEPENDS_append_am65xx-evm = " ti-cgt-arm-native \
++                              gcc-linaro-baremetal-aarch64-native"
 +
-+PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
-+S = "${WORKDIR}/${PACKAGE_DIR}"
+ IPC_TARGETS = ""
+ 
+ IPC_TARGETS_omap-a15 = "\
+@@ -73,6 +76,11 @@ IPC_TARGETS_c66x = " \
+     ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+ "
+ 
++IPC_TARGETS_am65xx-evm = "\
++    gnu.targets.arm.A53F="${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}" \
++    ti.targets.arm.elf.R5F="${M4_TOOLCHAIN_INSTALL_DIR}" \
++"
 +
-+LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+ EXTRA_OEMAKE = "\
+     PLATFORM=${PLATFORM} \
+     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index b292d67..b70935a 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -122,3 +122,11 @@ pkg_postinst_${PN}-fw_omapl138 () {
+ pkg_postrm_${PN}-fw_omapl138 () {
+   update-alternatives --remove rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674
+ }
 +
-+inherit native
-+require recipes-ti/includes/ti-paths.inc
-+
-+SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
-+
-+SRC_URI[gcc-linaro-aarch64.md5sum] = "4972f8943820bdd2f577f498de78964b"
-+SRC_URI[gcc-linaro-aarch64.sha256sum] = "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4c8"
-+
-+do_install() {
-+    install -d ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
-+    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
++pkg_postinst_${PN}-fw_am65xx-evm () {
++  update-alternatives --install /lib/firmware/rproc-r5f-fw rproc-r5f-fw ipc/ti_platforms_cortexR_AM65X/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
 +}
 +
-+FILES_${PN} = "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}/*"
-+
-+INSANE_SKIP_${PN} = "already-stripped"
-diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
-new file mode 100644
-index 0000000..0268ae3
---- /dev/null
-+++ b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
-@@ -0,0 +1,23 @@
-+include recipes-ti/devtools/gcc-linaro.inc
-+
-+PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
-+S = "${WORKDIR}/${PACKAGE_DIR}"
-+
-+LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
-+
-+inherit native
-+require recipes-ti/includes/ti-paths.inc
-+
-+SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi.tar.xz;name=gcc-linaro"
-+
-+SRC_URI[gcc-linaro.md5sum] = "9a4a39cfc78c84375b1160aa93587aed"
-+SRC_URI[gcc-linaro.sha256sum] = "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
-+
-+do_install() {
-+    install -d ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
-+    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
++pkg_postrm_${PN}-fw_am65xx-evm () {
++  update-alternatives --remove rproc-r5f-fw ipc/ti_platforms_cortexR_AM65X/messageq_single.xe674
 +}
-+
-+FILES_${PN} = "${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}/*"
-+
-+INSANE_SKIP_${PN} = "already-stripped"
-diff --git a/recipes-ti/devtools/gcc-linaro.inc b/recipes-ti/devtools/gcc-linaro.inc
-new file mode 100644
-index 0000000..19f5a2c
---- /dev/null
-+++ b/recipes-ti/devtools/gcc-linaro.inc
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "Linaro GCC for ARM"
-+HOMEPAGE = "https://launchpad.net/gcc-arm-embedded"
-+SECTION = "devel"
-+LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
-+LIC_FILES_CHKSUM = "file://share/doc/gcc/GNU-Free-Documentation-License.html;md5=${LIC_CHKSUM}"
-+
-+PV = "7.2.1"
-+PR = "r0"
-+
-+GCC_ARM_YEAR = "2017.11"
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 4f99d5e..ddfb8aa 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -56,6 +56,8 @@ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
- export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
- export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
- export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
-+export GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE          = "${installdir}/gcc-linaro-baremetal"
-+export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE  = "${installdir}/gcc-linaro-baremetal-aarch64"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index e8038a5..07321cb 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
  
- # This is where the tools will end up in sysroot
- export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
-@@ -103,6 +105,9 @@ export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIP
- export OMP_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMP_INSTALL_DIR_RECIPE}"
- export MPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${MPM_INSTALL_DIR_RECIPE}"
- export TI_CGT6X_7_INSTALL_DIR   = "${STAGING_DIR_NATIVE}${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
-+export GCC_LINARO_BAREMETAL_TOOLCHAIN         =  "${STAGING_DIR_NATIVE}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE }"
-+export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN =  "${STAGING_DIR_NATIVE}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}"
-+
+ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+-TI_IPC_GIT_BRANCH = "3.47"
++TI_IPC_GIT_BRANCH = "3.50"
  
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
+-#Corresponds to 3.47.02.00
+-TI_IPC_SRCREV = "24c36385d096613af123d1e1696fb2fee652ef36"
++#Corresponds to 3.50.01.00
++TI_IPC_SRCREV = "f0d0edaf3ce7ed8d81d8969eaaa98cec8b662424"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 -- 
-2.7.4
+1.9.1
 
 
