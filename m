@@ -1,62 +1,59 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1A243E006D8; Wed, 15 Aug 2018 11:21:50 -0700 (PDT)
+	id A9BE3E00566; Wed, 15 Aug 2018 11:54:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC460E00566
-	for <meta-ti@yoctoproject.org>; Wed, 15 Aug 2018 11:21:48 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7FILmPA126962
-	for <meta-ti@yoctoproject.org>; Wed, 15 Aug 2018 13:21:48 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46FECE0049A
+	for <meta-ti@yoctoproject.org>; Wed, 15 Aug 2018 11:54:14 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7FIsEX4012695
+	for <meta-ti@yoctoproject.org>; Wed, 15 Aug 2018 13:54:14 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1534357308;
-	bh=GBmdFdqqysxHKou58wSswFdZXxF5d7y40yk5L31g42A=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=Q1J103XjipRCYcaLvMv2cHhHl5USS7TMaNpbrD+C9dwDF+5lT5Cf8YInMTqVyvO/E
-	iMD7zxLD+1CR0W3C0a/mmb6cE3G4JGMFaX2r5uaFlNlSo23E6UvH57i+ch7QERidrh
-	qFy7XN3qRpJAnnVrxPBWMwB9cJHTudhE41Y5gaVM=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7FILmKq005262
-	for <meta-ti@yoctoproject.org>; Wed, 15 Aug 2018 13:21:48 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1534359254;
+	bh=XDgeJY3LqCCgNMQERuO7onVSfjV56P9v8nKH3Cg0Ryo=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=kEXOOxn9xE3g1W3Gj3SrOL/SUop07Es1pka2bfA8GPenoPCXlvK0hW9q9WLBG+gpe
+	N8Ks6cXv7ZQaIZcAfiqrFpR10V+WQOXwkjMg4rl8pu8lKtBlpyz1/ZSGw4JRAFPsbC
+	/MnHrBePh87LYSCTfOHD5koBo7jg2jH7lj7RXZEs=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7FIsE2X018022
+	for <meta-ti@yoctoproject.org>; Wed, 15 Aug 2018 13:54:14 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Wed, 15 Aug 2018 13:21:48 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 15 Aug 2018 13:54:14 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE111.ent.ti.com
+	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Wed, 15 Aug 2018 13:21:47 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7FILl1G010407;
-	Wed, 15 Aug 2018 13:21:47 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.176.241])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	w7FILlx09061; Wed, 15 Aug 2018 13:21:47 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 15 Aug 2018 13:21:41 -0500
-Message-ID: <20180815182141.25990-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20180815182141.25990-1-dmurphy@ti.com>
-References: <20180815182141.25990-1-dmurphy@ti.com>
+	Transport; Wed, 15 Aug 2018 13:54:14 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7FIsEG1023820;
+	Wed, 15 Aug 2018 13:54:14 -0500
+Date: Wed, 15 Aug 2018 14:53:11 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <hzhang@ti.com>
+Message-ID: <20180815185311.GL2547@beryl>
+References: <1534257139-36600-1-git-send-email-hzhang@ti.com>
 MIME-Version: 1.0
+In-Reply-To: <1534257139-36600-1-git-send-email-hzhang@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2018.03-rc3 tag
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [rocko][PATCH V4] recipes-ti: devtools: add GCC Linaro baremetal toolchain 2017.11 v7.2.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,29 +66,136 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Aug 2018 18:21:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 15 Aug 2018 18:54:16 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Thanks, I'll take it. Please fix the host contamination warnings from "cp" in 
+the followup patch.
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index 54635b90..5708f94b 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
- 
--PR = "r17"
-+PR = "r18"
- 
- BRANCH = "ti-u-boot-2018.01"
- 
--SRCREV = "2e9c8a1f292b8c86a5669347cf369ed3feb79a7e"
-+SRCREV = "6d540394a483c2d38aec0b84d1950d1031648ccc"
--- 
-2.17.0.582.gccdcbd54c
 
+On Tue, Aug 14, 2018 at 10:32:19AM -0400, hzhang@ti.com wrote:
+> From: Hao Zhang <hzhang@ti.com>
+> 
+> Signed-off-by: Hao Zhang <hzhang@ti.com>
+> 
+> ---
+> Changes from previous version of patch
+> Remove white space
+> ---
+> ---
+>  .../gcc-linaro-baremetal-aarch64-native.bb         | 23 ++++++++++++++++++++++
+>  recipes-ti/devtools/gcc-linaro-baremetal-native.bb | 23 ++++++++++++++++++++++
+>  recipes-ti/devtools/gcc-linaro.inc                 | 10 ++++++++++
+>  recipes-ti/includes/ti-paths.inc                   |  5 +++++
+>  4 files changed, 61 insertions(+)
+>  create mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+>  create mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+>  create mode 100644 recipes-ti/devtools/gcc-linaro.inc
+> 
+> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> new file mode 100644
+> index 0000000..97344f9
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> @@ -0,0 +1,23 @@
+> +include recipes-ti/devtools/gcc-linaro.inc
+> +
+> +PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
+> +S = "${WORKDIR}/${PACKAGE_DIR}"
+> +
+> +LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+> +
+> +inherit native
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
+> +
+> +SRC_URI[gcc-linaro-aarch64.md5sum] = "4972f8943820bdd2f577f498de78964b"
+> +SRC_URI[gcc-linaro-aarch64.sha256sum] = "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4c8"
+> +
+> +do_install() {
+> +    install -d ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
+> +    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
+> +}
+> +
+> +FILES_${PN} = "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}/*"
+> +
+> +INSANE_SKIP_${PN} = "already-stripped"
+> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+> new file mode 100644
+> index 0000000..0268ae3
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+> @@ -0,0 +1,23 @@
+> +include recipes-ti/devtools/gcc-linaro.inc
+> +
+> +PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
+> +S = "${WORKDIR}/${PACKAGE_DIR}"
+> +
+> +LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+> +
+> +inherit native
+> +require recipes-ti/includes/ti-paths.inc
+> +
+> +SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi.tar.xz;name=gcc-linaro"
+> +
+> +SRC_URI[gcc-linaro.md5sum] = "9a4a39cfc78c84375b1160aa93587aed"
+> +SRC_URI[gcc-linaro.sha256sum] = "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
+> +
+> +do_install() {
+> +    install -d ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
+> +    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
+> +}
+> +
+> +FILES_${PN} = "${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}/*"
+> +
+> +INSANE_SKIP_${PN} = "already-stripped"
+> diff --git a/recipes-ti/devtools/gcc-linaro.inc b/recipes-ti/devtools/gcc-linaro.inc
+> new file mode 100644
+> index 0000000..19f5a2c
+> --- /dev/null
+> +++ b/recipes-ti/devtools/gcc-linaro.inc
+> @@ -0,0 +1,10 @@
+> +DESCRIPTION = "Linaro GCC for ARM"
+> +HOMEPAGE = "https://launchpad.net/gcc-arm-embedded"
+> +SECTION = "devel"
+> +LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
+> +LIC_FILES_CHKSUM = "file://share/doc/gcc/GNU-Free-Documentation-License.html;md5=${LIC_CHKSUM}"
+> +
+> +PV = "7.2.1"
+> +PR = "r0"
+> +
+> +GCC_ARM_YEAR = "2017.11"
+> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+> index 4f99d5e..a401264 100644
+> --- a/recipes-ti/includes/ti-paths.inc
+> +++ b/recipes-ti/includes/ti-paths.inc
+> @@ -56,6 +56,8 @@ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+>  export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
+>  export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
+>  export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
+> +export GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE          = "${installdir}/gcc-linaro-baremetal"
+> +export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE  = "${installdir}/gcc-linaro-baremetal-aarch64"
+>  
+>  # This is where the tools will end up in sysroot
+>  export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
+> @@ -103,6 +105,9 @@ export CG_XML_INSTALL_DIR     = "${STAGING_DIR_NATIVE}${CG_XML_INSTALL_DIR_RECIP
+>  export OMP_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMP_INSTALL_DIR_RECIPE}"
+>  export MPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${MPM_INSTALL_DIR_RECIPE}"
+>  export TI_CGT6X_7_INSTALL_DIR   = "${STAGING_DIR_NATIVE}${TI_CGT6X_7_INSTALL_DIR_RECIPE}"
+> +export GCC_LINARO_BAREMETAL_TOOLCHAIN         =  "${STAGING_DIR_NATIVE}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}"
+> +export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN =  "${STAGING_DIR_NATIVE}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}"
+> +
+>  
+>  DSPSUFFIX_omapl137 = "x674"
+>  DSPSUFFIX_omapl138 = "x674"
+> -- 
+> 2.7.4
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
