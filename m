@@ -1,58 +1,62 @@
-Return-Path: <denys@ti.com>
+Return-Path: <s-anna@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AA9FBE0079D; Wed, 15 Aug 2018 22:22:43 -0700 (PDT)
+	id 9C43EE00566; Thu, 16 Aug 2018 04:50:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B85CDE00519
-	for <meta-ti@yoctoproject.org>; Wed, 15 Aug 2018 22:22:42 -0700 (PDT)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [198.47.23.248 listed in list.dnswl.org]
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E358E003D7
+	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 04:50:15 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7G5Mg0Q005252
-	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 00:22:42 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7GBoFLQ115283
+	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 06:50:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1534396962;
-	bh=R3psxW39axTEgCoVfKyqQgTPWiVtTSgvMofLxBcOo3Y=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=fjLKwVEdlNs7EhLRmsVINcIZJZUS8p0qJ0nAhB1bEKSpE+nO/15SowSd8nLXF2s/D
-	AarLOgY5AslIFAE3nFJrVzrW2i/hir8OKfhtzvLTpzmOooNFOMTDflTmB+Iq/tbe5U
-	F8zSp4y2FX7P4aSotlNTs6x2sPoGpE7S2Vrz3OYY=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7G5Mg2Q006061
-	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 00:22:42 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1534420215;
+	bh=XK/mqmxMNGRHc5BMH+C5/deUlZgRtMw+47VdT9/qCwg=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=SQoysqlWIekSb7cDhjXJXN8d7q+hmC6qoVlen8zQ6SNNMTykkWeLiafoe+e0zG0/1
+	4kLCYgLdgcoFzJzr0vWDycQ+DbeneezeubQyE7iohj7ZiHtWAsA2Qzo0zKiaW3qKTL
+	bs9ZDN1BqV4QGWDZaS8eM0v50+WuXbeBHSnam0q0=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7GBoFaI015716
+	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 06:50:15 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Thu, 16 Aug 2018 00:22:41 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Thu, 16 Aug 2018 00:22:41 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7G5MfSZ016452;
-	Thu, 16 Aug 2018 00:22:41 -0500
-Date: Thu, 16 Aug 2018 01:21:39 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <hzhang@ti.com>
-Message-ID: <20180816052138.GS2547@beryl>
+	Thu, 16 Aug 2018 06:50:15 -0500
+Received: from DFLE111.ent.ti.com ([fe80::6c89:b1ca:ee8f:1a6f]) by
+	DFLE111.ent.ti.com ([fe80::6c89:b1ca:ee8f:1a6f%17]) with mapi id
+	15.01.1466.003; Thu, 16 Aug 2018 06:50:15 -0500
+From: "Anna, Suman" <s-anna@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "Zhang, Hao" <hzhang@ti.com>
+Thread-Topic: [meta-ti] [rocko][PATCH V3 2/2] recipes-ti: bios: add TI SYSBIOS
+	6.73.00.12
+Thread-Index: AQHUNSEo8su+YvhJGUa3DKXVG9wZbaTCRC/Q
+Date: Thu, 16 Aug 2018 11:50:15 +0000
+Message-ID: <7dbaaa9986314d76b4a3c54b175fc12d@ti.com>
 References: <1534257478-36797-1-git-send-email-hzhang@ti.com>
+	<20180816052138.GS2547@beryl>
+In-Reply-To: <20180816052138.GS2547@beryl>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.22.182.244]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-In-Reply-To: <1534257478-36797-1-git-send-email-hzhang@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org, "Anna, Suman" <s-anna@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "R,
+	Karthik" <karthik.ramanan@ti.com>, "Nadampalli, Sunita" <sunitan@ti.com>
 Subject: Re: [rocko][PATCH V3 2/2] recipes-ti: bios: add TI SYSBIOS 6.73.00.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -66,202 +70,216 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 05:22:43 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Aug 2018 11:50:17 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Ok, this breaks ipumm-fw build:
-
-| NOTE: make -j 56 XDCDIST_TREE=/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/recipe-sysroot-native/usr/share/ti/ti-xdctools-tree
-| export XDCARGS="profile=release trace_level=0 hw_type=VAYU hw_version=ES10 BIOS_type=SMP prof_type=DISABLE"; \
-| /OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/recipe-sysroot-native/usr/share/ti/ti-xdctools-tree/xdc --jobs=1 -PD /OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baselib/.; \
-| /OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/recipe-sysroot-native/usr/share/ti/ti-xdctools-tree/xdc --jobs=1 -PD /OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baseimage/.
-| making all: Thu Aug 16 02:48:21 UTC 2018 ...
-| ======== .interfaces [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/src/ti/framework/dce] ========
-| making package.mak (because of package.bld) ...
-| Selected Vayu for ES10
-| generating interfaces for package ti.framework.dce (because package/package.xdc.inc is older than package.xdc) ...
-| ======== .interfaces [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/src/ti/utils] ========
-| making package.mak (because of package.bld) ...
-| Selected Vayu for ES10
-| generating interfaces for package src.ti.utils (because package/package.xdc.inc is older than package.xdc) ...
-| ======== .interfaces [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baselib] ========
-| making package.mak (because of package.bld) ...
-| Selected Vayu for ES10
-| config file: dce_ipu.cfg
-| 
-| profile: release
-| 
-|  -D_DM270  -D_DM290_IMX_MCFIX_   -DDRIVERCOMPONENTS=1 -DISSCOMPONENTS=1 -DVIDEOCOMPONENTS=1 -DTESTCOMPONENTS=1
-| 
-| HwType = 2
-| HwVer = 1
-| generating interfaces for package platform.ti.dce.baselib (because package/package.xdc.inc is older than package.xdc) ...
-|     translating BASELIB
-| .interfaces files complete: Thu Aug 16 02:48:34 UTC 2018.
-| ======== .libraries [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/src/ti/framework/dce] ========
-| clem4 package/package_ti.framework.dce.c ...
-| clem4 dce.c ...
-| "dce.c", line 53: fatal error #1965: cannot open source file "ti/sysbios/posix/pthread.h"
-| 1 catastrophic error detected in the compilation of "dce.c".
-| Compilation terminated.
-| 
-| >> Compilation failure
-| lib/ipu/release/ti.framework.dce.aem4.mak:44: recipe for target 'package/lib/lib/ipu/release/ti.framework.dce/dce.oem4' failed
-| make[1]: *** [package/lib/lib/ipu/release/ti.framework.dce/dce.oem4] Error 1
-| gmake: *** [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/src/ti/framework/dce,.libraries] Error 2
-| making all: Thu Aug 16 02:48:35 UTC 2018 ...
-| ======== .interfaces [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baseimage] ========
-| making package.mak (because of package.bld) ...
-| Selected Vayu for ES10
-| config file: dce_ipu.cfg
-| 
-| profile: release
-| 
-|  -D_DM270  -D_DM290_IMX_MCFIX_   -DDRIVERCOMPONENTS=1 -DISSCOMPONENTS=1 -DVIDEOCOMPONENTS=1 -DTESTCOMPONENTS=1
-| 
-| HwType = 2
-| HwVer = 1
-| generating interfaces for package platform.ti.dce.baseimage (because package/package.xdc.inc is older than package.xdc) ...
-| .interfaces files complete: Thu Aug 16 02:48:39 UTC 2018.
-| ======== .libraries [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baseimage] ========
-| .libraries files complete: Thu Aug 16 02:48:39 UTC 2018.
-| ======== .dlls [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baseimage] ========
-| configuring out/ipu/release/ipu.xem4 from package/cfg/out/ipu/release/ipu_pem4.cfg ...
-| HwType = 2
-| HwVer = 1
-| IPUMM commit 035ba25 version MMIP 3_00_15_00  IPC 3_47_01_00
-| Benelli Vayu: Setting PRCM Addresses ES1.0
-| loading: ivahd_mpeg4dec
-| loading: ivahd_h264dec
-| loading: ivahd_jpegvdec
-| loading: ivahd_jpegvenc
-| loading: ivahd_vc1vdec
-| loading: ivahd_mpeg2vdec
-| loading: ivahd_h264enc
-| loading: ivahd_mpeg4enc
-| SMP Enabled BIOS
-| warning: ti.sysbios.posix.Settings: "/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/recipe-sysroot/usr/share/ti/ti-sysbios-tree/packages/ti/sysbios/posix/Settings.xs", line 80: ti.sysbios.posix.Settings : This module is deprecated, it has been replaced by ti.posix.tirtos.Settings. Please update your config script. Loading and configuring the new module on behalf of this module.
-| generating custom ti.sysbios library makefile ...
-| generating custom ti.sdo.utils library makefile ...
-| generating custom ti.sdo.ipc library makefile ...
-| Auto-registering resource manager for HDVICP2
-| manageIpc = true
-| Heap: ti.sysbios.heaps.HeapMem
-| Default lib not found: lib/ipu/release/ipu.aem4
-| looking for release lib
-| js: "/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baselib/package.xs", line 92: Error: Library not found: lib/ipu/release/ipu.aem4
-| package.mak:265: recipe for target 'package/cfg/out/ipu/release/ipu_pem4.xdl' failed
-| make[1]: *** [package/cfg/out/ipu/release/ipu_pem4.xdl] Error 1
-| make[1]: *** Deleting file 'package/cfg/out/ipu/release/ipu_pem4.xdl'
-| make[1]: *** [package/cfg/out/ipu/release/ipu_pem4.xdl] Deleting file 'package/cfg/out/ipu/release/ipu_pem4.h'
-| make[1]: *** [package/cfg/out/ipu/release/ipu_pem4.xdl] Deleting file 'package/cfg/out/ipu/release/ipu_pem4.c'
-| gmake: *** [/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/git/platform/ti/dce/baseimage,.dlls] Error 2
-| Makefile:166: recipe for target 'build' failed
-| make: *** [build] Error 2
-| ERROR: oe_runmake failed
-| WARNING: /OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/temp/run.do_compile.6164:1 exit 1 from 'exit 1'
-| ERROR: Function failed: do_compile (log file is located at /OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/armv7ahf-neon-linux-gnueabi/ipumm-fw/3.00.15.00-r1/temp/log.do_compile.6164)
-
-
-On Tue, Aug 14, 2018 at 10:37:58AM -0400, hzhang@ti.com wrote:
-> From: Hao Zhang <hzhang@ti.com>
-> 
-> Signed-off-by: Hao Zhang <hzhang@ti.com>
-> 
-> ---
-> Changes from previous version of patch
-> Remove old version of tools
-> ---
-> ---
->  recipes-ti/bios/ti-dspbios_5.41.11.38.bb                     |  9 ---------
->  recipes-ti/bios/ti-sysbios_6.33.00.19.bb                     |  9 ---------
->  recipes-ti/bios/ti-sysbios_6.46.05.55.bb                     | 12 ------------
->  .../{ti-sysbios_6.52.00.12.bb => ti-sysbios_6.73.00.12.bb}   |  8 ++++----
->  4 files changed, 4 insertions(+), 34 deletions(-)
->  delete mode 100644 recipes-ti/bios/ti-dspbios_5.41.11.38.bb
->  delete mode 100644 recipes-ti/bios/ti-sysbios_6.33.00.19.bb
->  delete mode 100644 recipes-ti/bios/ti-sysbios_6.46.05.55.bb
->  rename recipes-ti/bios/{ti-sysbios_6.52.00.12.bb => ti-sysbios_6.73.00.12.bb} (52%)
-> 
-> diff --git a/recipes-ti/bios/ti-dspbios_5.41.11.38.bb b/recipes-ti/bios/ti-dspbios_5.41.11.38.bb
-> deleted file mode 100644
-> index f60f6c0..0000000
-> --- a/recipes-ti/bios/ti-dspbios_5.41.11.38.bb
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -require ti-dspbios.inc
-> -
-> -PV = "5_41_11_38"
-> -
-> -SRC_URI[biosbin.md5sum] = "7fab13740c25f5b34b331bcdc759536e"
-> -SRC_URI[biosbin.sha256sum] = "96b8e090f79420a4c11d9c0c10d182d1d3b4afb48f11ec375c97b4c91970d0a0"
-> -
-> -
-> -INSANE_SKIP_${PN} = "installed-vs-shipped"
-> diff --git a/recipes-ti/bios/ti-sysbios_6.33.00.19.bb b/recipes-ti/bios/ti-sysbios_6.33.00.19.bb
-> deleted file mode 100644
-> index 4e2b445..0000000
-> --- a/recipes-ti/bios/ti-sysbios_6.33.00.19.bb
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -require ti-sysbios.inc
-> -
-> -PV = "6_33_00_19"
-> -LIC_FILES_CHKSUM = "file://sysbios_${PV}_manifest.html;md5=94136ca9815f76603b7202a41f1d6f5e"
-> -
-> -SRC_URI[sysbiosbin.md5sum] = "e1a2f28a8b3087896bbd986696e1a908"
-> -SRC_URI[sysbiosbin.sha256sum] = "b7e096662f5d928eb818bbb14474deb1e3e038fea34b516b248de637835121ec"
-> -
-> -S = "${WORKDIR}/ti/bios_${PV}"
-> diff --git a/recipes-ti/bios/ti-sysbios_6.46.05.55.bb b/recipes-ti/bios/ti-sysbios_6.46.05.55.bb
-> deleted file mode 100644
-> index e910d53..0000000
-> --- a/recipes-ti/bios/ti-sysbios_6.46.05.55.bb
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -require recipes-ti/bios/ti-sysbios.inc
-> -
-> -PV = "6_46_05_55"
-> -PR = "r0"
-> -
-> -LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=1c88b63f0ce751d88354de0727623eba"
-> -
-> -SRC_URI[sysbiosbin.md5sum] = "8182effcbeea90778e393818ec4d65e8"
-> -SRC_URI[sysbiosbin.sha256sum] = "2ad3432cafd1a93dd8cd1e56b722c979852d5c72f5defc29843d507cdd7b667a"
-> -
-> -TI_BIN_UNPK_CMDS=""
-> -TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-> diff --git a/recipes-ti/bios/ti-sysbios_6.52.00.12.bb b/recipes-ti/bios/ti-sysbios_6.73.00.12.bb
-> similarity index 52%
-> rename from recipes-ti/bios/ti-sysbios_6.52.00.12.bb
-> rename to recipes-ti/bios/ti-sysbios_6.73.00.12.bb
-> index ebdb135..b727673 100644
-> --- a/recipes-ti/bios/ti-sysbios_6.52.00.12.bb
-> +++ b/recipes-ti/bios/ti-sysbios_6.73.00.12.bb
-> @@ -1,12 +1,12 @@
->  require recipes-ti/bios/ti-sysbios.inc
->  
-> -PV = "6_52_00_12"
-> +PV = "6_73_00_12"
->  PR = "r0"
->  
-> -LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=ca549c223d732e6f69efc449795c4eeb"
-> +LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=99771475f3621a6bf690df10327eaaa9"
->  
-> -SRC_URI[sysbiosbin.md5sum] = "3c16af0843b5b6c5ff10512d1b586665"
-> -SRC_URI[sysbiosbin.sha256sum] = "4a2b9b76f52a57f02725337db9361787eae4c917d7cf989a697ed41eb4a1e701"
-> +SRC_URI[sysbiosbin.md5sum] = "f8ff74bf0cfebdd5689fba843272ac61"
-> +SRC_URI[sysbiosbin.sha256sum] = "4fdf76696fb43984a9cae739fd2ee091ca9d031ad0277d2bb94dbb26eae63f43"
->  
->  TI_BIN_UNPK_CMDS = ""
->  TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-> -- 
-> 2.7.4
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+KyBTdW5pdGEgYXMgd2VsbC4NCg0KPiANCj4gT2ssIHRoaXMgYnJlYWtzIGlwdW1tLWZ3IGJ1aWxk
+Og0KPiANCj4gfCBOT1RFOiBtYWtlIC1qIDU2IFhEQ0RJU1RfVFJFRT0vT0UvYXJhZ28tcm9ja28t
+bmV4dC9idWlsZC9hcmFnby10bXAtDQo+IGV4dGVybmFsLWxpbmFyby10b29sY2hhaW4vd29yay9h
+cm12N2FoZi1uZW9uLWxpbnV4LWdudWVhYmkvaXB1bW0tDQo+IGZ3LzMuMDAuMTUuMDAtcjEvcmVj
+aXBlLXN5c3Jvb3QtbmF0aXZlL3Vzci9zaGFyZS90aS90aS14ZGN0b29scy10cmVlDQo+IHwgZXhw
+b3J0IFhEQ0FSR1M9InByb2ZpbGU9cmVsZWFzZSB0cmFjZV9sZXZlbD0wIGh3X3R5cGU9VkFZVQ0K
+PiBod192ZXJzaW9uPUVTMTAgQklPU190eXBlPVNNUCBwcm9mX3R5cGU9RElTQUJMRSI7IFwNCj4g
+fCAvT0UvYXJhZ28tcm9ja28tbmV4dC9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtbGluYXJvLQ0K
+PiB0b29sY2hhaW4vd29yay9hcm12N2FoZi1uZW9uLWxpbnV4LWdudWVhYmkvaXB1bW0tZncvMy4w
+MC4xNS4wMC1yMS9yZWNpcGUtDQo+IHN5c3Jvb3QtbmF0aXZlL3Vzci9zaGFyZS90aS90aS14ZGN0
+b29scy10cmVlL3hkYyAtLWpvYnM9MSAtUEQgL09FL2FyYWdvLXJvY2tvLQ0KPiBuZXh0L2J1aWxk
+L2FyYWdvLXRtcC1leHRlcm5hbC1saW5hcm8tdG9vbGNoYWluL3dvcmsvYXJtdjdhaGYtbmVvbi1s
+aW51eC0NCj4gZ251ZWFiaS9pcHVtbS1mdy8zLjAwLjE1LjAwLXIxL2dpdC9wbGF0Zm9ybS90aS9k
+Y2UvYmFzZWxpYi8uOyBcDQo+IHwgL09FL2FyYWdvLXJvY2tvLW5leHQvYnVpbGQvYXJhZ28tdG1w
+LWV4dGVybmFsLWxpbmFyby0NCj4gdG9vbGNoYWluL3dvcmsvYXJtdjdhaGYtbmVvbi1saW51eC1n
+bnVlYWJpL2lwdW1tLWZ3LzMuMDAuMTUuMDAtcjEvcmVjaXBlLQ0KPiBzeXNyb290LW5hdGl2ZS91
+c3Ivc2hhcmUvdGkvdGkteGRjdG9vbHMtdHJlZS94ZGMgLS1qb2JzPTEgLVBEIC9PRS9hcmFnby1y
+b2Nrby0NCj4gbmV4dC9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtbGluYXJvLXRvb2xjaGFpbi93
+b3JrL2FybXY3YWhmLW5lb24tbGludXgtDQo+IGdudWVhYmkvaXB1bW0tZncvMy4wMC4xNS4wMC1y
+MS9naXQvcGxhdGZvcm0vdGkvZGNlL2Jhc2VpbWFnZS8uDQo+IHwgbWFraW5nIGFsbDogVGh1IEF1
+ZyAxNiAwMjo0ODoyMSBVVEMgMjAxOCAuLi4NCj4gfCA9PT09PT09PSAuaW50ZXJmYWNlcyBbL09F
+L2FyYWdvLXJvY2tvLW5leHQvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWxpbmFyby0NCj4gdG9v
+bGNoYWluL3dvcmsvYXJtdjdhaGYtbmVvbi1saW51eC1nbnVlYWJpL2lwdW1tLWZ3LzMuMDAuMTUu
+MDAtDQo+IHIxL2dpdC9zcmMvdGkvZnJhbWV3b3JrL2RjZV0gPT09PT09PT0NCj4gfCBtYWtpbmcg
+cGFja2FnZS5tYWsgKGJlY2F1c2Ugb2YgcGFja2FnZS5ibGQpIC4uLg0KPiB8IFNlbGVjdGVkIFZh
+eXUgZm9yIEVTMTANCj4gfCBnZW5lcmF0aW5nIGludGVyZmFjZXMgZm9yIHBhY2thZ2UgdGkuZnJh
+bWV3b3JrLmRjZSAoYmVjYXVzZQ0KPiBwYWNrYWdlL3BhY2thZ2UueGRjLmluYyBpcyBvbGRlciB0
+aGFuIHBhY2thZ2UueGRjKSAuLi4NCj4gfCA9PT09PT09PSAuaW50ZXJmYWNlcyBbL09FL2FyYWdv
+LXJvY2tvLW5leHQvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWxpbmFyby0NCj4gdG9vbGNoYWlu
+L3dvcmsvYXJtdjdhaGYtbmVvbi1saW51eC1nbnVlYWJpL2lwdW1tLWZ3LzMuMDAuMTUuMDAtDQo+
+IHIxL2dpdC9zcmMvdGkvdXRpbHNdID09PT09PT09DQo+IHwgbWFraW5nIHBhY2thZ2UubWFrIChi
+ZWNhdXNlIG9mIHBhY2thZ2UuYmxkKSAuLi4NCj4gfCBTZWxlY3RlZCBWYXl1IGZvciBFUzEwDQo+
+IHwgZ2VuZXJhdGluZyBpbnRlcmZhY2VzIGZvciBwYWNrYWdlIHNyYy50aS51dGlscyAoYmVjYXVz
+ZSBwYWNrYWdlL3BhY2thZ2UueGRjLmluYw0KPiBpcyBvbGRlciB0aGFuIHBhY2thZ2UueGRjKSAu
+Li4NCj4gfCA9PT09PT09PSAuaW50ZXJmYWNlcyBbL09FL2FyYWdvLXJvY2tvLW5leHQvYnVpbGQv
+YXJhZ28tdG1wLWV4dGVybmFsLWxpbmFyby0NCj4gdG9vbGNoYWluL3dvcmsvYXJtdjdhaGYtbmVv
+bi1saW51eC1nbnVlYWJpL2lwdW1tLWZ3LzMuMDAuMTUuMDAtDQo+IHIxL2dpdC9wbGF0Zm9ybS90
+aS9kY2UvYmFzZWxpYl0gPT09PT09PT0NCj4gfCBtYWtpbmcgcGFja2FnZS5tYWsgKGJlY2F1c2Ug
+b2YgcGFja2FnZS5ibGQpIC4uLg0KPiB8IFNlbGVjdGVkIFZheXUgZm9yIEVTMTANCj4gfCBjb25m
+aWcgZmlsZTogZGNlX2lwdS5jZmcNCj4gfA0KPiB8IHByb2ZpbGU6IHJlbGVhc2UNCj4gfA0KPiB8
+ICAtRF9ETTI3MCAgLURfRE0yOTBfSU1YX01DRklYXyAgIC1ERFJJVkVSQ09NUE9ORU5UUz0xIC0N
+Cj4gRElTU0NPTVBPTkVOVFM9MSAtRFZJREVPQ09NUE9ORU5UUz0xIC1EVEVTVENPTVBPTkVOVFM9
+MQ0KPiB8DQo+IHwgSHdUeXBlID0gMg0KPiB8IEh3VmVyID0gMQ0KPiB8IGdlbmVyYXRpbmcgaW50
+ZXJmYWNlcyBmb3IgcGFja2FnZSBwbGF0Zm9ybS50aS5kY2UuYmFzZWxpYiAoYmVjYXVzZQ0KPiBw
+YWNrYWdlL3BhY2thZ2UueGRjLmluYyBpcyBvbGRlciB0aGFuIHBhY2thZ2UueGRjKSAuLi4NCj4g
+fCAgICAgdHJhbnNsYXRpbmcgQkFTRUxJQg0KPiB8IC5pbnRlcmZhY2VzIGZpbGVzIGNvbXBsZXRl
+OiBUaHUgQXVnIDE2IDAyOjQ4OjM0IFVUQyAyMDE4Lg0KPiB8ID09PT09PT09IC5saWJyYXJpZXMg
+Wy9PRS9hcmFnby1yb2Nrby1uZXh0L2J1aWxkL2FyYWdvLXRtcC1leHRlcm5hbC1saW5hcm8tDQo+
+IHRvb2xjaGFpbi93b3JrL2FybXY3YWhmLW5lb24tbGludXgtZ251ZWFiaS9pcHVtbS1mdy8zLjAw
+LjE1LjAwLQ0KPiByMS9naXQvc3JjL3RpL2ZyYW1ld29yay9kY2VdID09PT09PT09DQo+IHwgY2xl
+bTQgcGFja2FnZS9wYWNrYWdlX3RpLmZyYW1ld29yay5kY2UuYyAuLi4NCj4gfCBjbGVtNCBkY2Uu
+YyAuLi4NCj4gfCAiZGNlLmMiLCBsaW5lIDUzOiBmYXRhbCBlcnJvciAjMTk2NTogY2Fubm90IG9w
+ZW4gc291cmNlIGZpbGUNCj4gInRpL3N5c2Jpb3MvcG9zaXgvcHRocmVhZC5oIg0KPiB8IDEgY2F0
+YXN0cm9waGljIGVycm9yIGRldGVjdGVkIGluIHRoZSBjb21waWxhdGlvbiBvZiAiZGNlLmMiLg0K
+PiB8IENvbXBpbGF0aW9uIHRlcm1pbmF0ZWQuDQo+IHwNCj4gfCA+PiBDb21waWxhdGlvbiBmYWls
+dXJlDQo+IHwgbGliL2lwdS9yZWxlYXNlL3RpLmZyYW1ld29yay5kY2UuYWVtNC5tYWs6NDQ6IHJl
+Y2lwZSBmb3IgdGFyZ2V0DQo+ICdwYWNrYWdlL2xpYi9saWIvaXB1L3JlbGVhc2UvdGkuZnJhbWV3
+b3JrLmRjZS9kY2Uub2VtNCcgZmFpbGVkDQo+IHwgbWFrZVsxXTogKioqIFtwYWNrYWdlL2xpYi9s
+aWIvaXB1L3JlbGVhc2UvdGkuZnJhbWV3b3JrLmRjZS9kY2Uub2VtNF0gRXJyb3INCj4gMQ0KPiB8
+IGdtYWtlOiAqKiogWy9PRS9hcmFnby1yb2Nrby1uZXh0L2J1aWxkL2FyYWdvLXRtcC1leHRlcm5h
+bC1saW5hcm8tDQo+IHRvb2xjaGFpbi93b3JrL2FybXY3YWhmLW5lb24tbGludXgtZ251ZWFiaS9p
+cHVtbS1mdy8zLjAwLjE1LjAwLQ0KPiByMS9naXQvc3JjL3RpL2ZyYW1ld29yay9kY2UsLmxpYnJh
+cmllc10gRXJyb3IgMg0KPiB8IG1ha2luZyBhbGw6IFRodSBBdWcgMTYgMDI6NDg6MzUgVVRDIDIw
+MTggLi4uDQo+IHwgPT09PT09PT0gLmludGVyZmFjZXMgWy9PRS9hcmFnby1yb2Nrby1uZXh0L2J1
+aWxkL2FyYWdvLXRtcC1leHRlcm5hbC1saW5hcm8tDQo+IHRvb2xjaGFpbi93b3JrL2FybXY3YWhm
+LW5lb24tbGludXgtZ251ZWFiaS9pcHVtbS1mdy8zLjAwLjE1LjAwLQ0KPiByMS9naXQvcGxhdGZv
+cm0vdGkvZGNlL2Jhc2VpbWFnZV0gPT09PT09PT0NCj4gfCBtYWtpbmcgcGFja2FnZS5tYWsgKGJl
+Y2F1c2Ugb2YgcGFja2FnZS5ibGQpIC4uLg0KPiB8IFNlbGVjdGVkIFZheXUgZm9yIEVTMTANCj4g
+fCBjb25maWcgZmlsZTogZGNlX2lwdS5jZmcNCj4gfA0KPiB8IHByb2ZpbGU6IHJlbGVhc2UNCj4g
+fA0KPiB8ICAtRF9ETTI3MCAgLURfRE0yOTBfSU1YX01DRklYXyAgIC1ERFJJVkVSQ09NUE9ORU5U
+Uz0xIC0NCj4gRElTU0NPTVBPTkVOVFM9MSAtRFZJREVPQ09NUE9ORU5UUz0xIC1EVEVTVENPTVBP
+TkVOVFM9MQ0KPiB8DQo+IHwgSHdUeXBlID0gMg0KPiB8IEh3VmVyID0gMQ0KPiB8IGdlbmVyYXRp
+bmcgaW50ZXJmYWNlcyBmb3IgcGFja2FnZSBwbGF0Zm9ybS50aS5kY2UuYmFzZWltYWdlIChiZWNh
+dXNlDQo+IHBhY2thZ2UvcGFja2FnZS54ZGMuaW5jIGlzIG9sZGVyIHRoYW4gcGFja2FnZS54ZGMp
+IC4uLg0KPiB8IC5pbnRlcmZhY2VzIGZpbGVzIGNvbXBsZXRlOiBUaHUgQXVnIDE2IDAyOjQ4OjM5
+IFVUQyAyMDE4Lg0KPiB8ID09PT09PT09IC5saWJyYXJpZXMgWy9PRS9hcmFnby1yb2Nrby1uZXh0
+L2J1aWxkL2FyYWdvLXRtcC1leHRlcm5hbC1saW5hcm8tDQo+IHRvb2xjaGFpbi93b3JrL2FybXY3
+YWhmLW5lb24tbGludXgtZ251ZWFiaS9pcHVtbS1mdy8zLjAwLjE1LjAwLQ0KPiByMS9naXQvcGxh
+dGZvcm0vdGkvZGNlL2Jhc2VpbWFnZV0gPT09PT09PT0NCj4gfCAubGlicmFyaWVzIGZpbGVzIGNv
+bXBsZXRlOiBUaHUgQXVnIDE2IDAyOjQ4OjM5IFVUQyAyMDE4Lg0KPiB8ID09PT09PT09IC5kbGxz
+IFsvT0UvYXJhZ28tcm9ja28tbmV4dC9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtbGluYXJvLQ0K
+PiB0b29sY2hhaW4vd29yay9hcm12N2FoZi1uZW9uLWxpbnV4LWdudWVhYmkvaXB1bW0tZncvMy4w
+MC4xNS4wMC0NCj4gcjEvZ2l0L3BsYXRmb3JtL3RpL2RjZS9iYXNlaW1hZ2VdID09PT09PT09DQo+
+IHwgY29uZmlndXJpbmcgb3V0L2lwdS9yZWxlYXNlL2lwdS54ZW00IGZyb20NCj4gcGFja2FnZS9j
+Zmcvb3V0L2lwdS9yZWxlYXNlL2lwdV9wZW00LmNmZyAuLi4NCj4gfCBId1R5cGUgPSAyDQo+IHwg
+SHdWZXIgPSAxDQo+IHwgSVBVTU0gY29tbWl0IDAzNWJhMjUgdmVyc2lvbiBNTUlQIDNfMDBfMTVf
+MDAgIElQQyAzXzQ3XzAxXzAwDQo+IHwgQmVuZWxsaSBWYXl1OiBTZXR0aW5nIFBSQ00gQWRkcmVz
+c2VzIEVTMS4wDQo+IHwgbG9hZGluZzogaXZhaGRfbXBlZzRkZWMNCj4gfCBsb2FkaW5nOiBpdmFo
+ZF9oMjY0ZGVjDQo+IHwgbG9hZGluZzogaXZhaGRfanBlZ3ZkZWMNCj4gfCBsb2FkaW5nOiBpdmFo
+ZF9qcGVndmVuYw0KPiB8IGxvYWRpbmc6IGl2YWhkX3ZjMXZkZWMNCj4gfCBsb2FkaW5nOiBpdmFo
+ZF9tcGVnMnZkZWMNCj4gfCBsb2FkaW5nOiBpdmFoZF9oMjY0ZW5jDQo+IHwgbG9hZGluZzogaXZh
+aGRfbXBlZzRlbmMNCj4gfCBTTVAgRW5hYmxlZCBCSU9TDQo+IHwgd2FybmluZzogdGkuc3lzYmlv
+cy5wb3NpeC5TZXR0aW5nczogIi9PRS9hcmFnby1yb2Nrby1uZXh0L2J1aWxkL2FyYWdvLXRtcC0N
+Cj4gZXh0ZXJuYWwtbGluYXJvLXRvb2xjaGFpbi93b3JrL2FybXY3YWhmLW5lb24tbGludXgtZ251
+ZWFiaS9pcHVtbS0NCj4gZncvMy4wMC4xNS4wMC1yMS9yZWNpcGUtc3lzcm9vdC91c3Ivc2hhcmUv
+dGkvdGktc3lzYmlvcy0NCj4gdHJlZS9wYWNrYWdlcy90aS9zeXNiaW9zL3Bvc2l4L1NldHRpbmdz
+LnhzIiwgbGluZSA4MDogdGkuc3lzYmlvcy5wb3NpeC5TZXR0aW5ncyA6DQo+IFRoaXMgbW9kdWxl
+IGlzIGRlcHJlY2F0ZWQsIGl0IGhhcyBiZWVuIHJlcGxhY2VkIGJ5IHRpLnBvc2l4LnRpcnRvcy5T
+ZXR0aW5ncy4NCj4gUGxlYXNlIHVwZGF0ZSB5b3VyIGNvbmZpZyBzY3JpcHQuIExvYWRpbmcgYW5k
+IGNvbmZpZ3VyaW5nIHRoZSBuZXcgbW9kdWxlIG9uDQo+IGJlaGFsZiBvZiB0aGlzIG1vZHVsZS4N
+Cj4gfCBnZW5lcmF0aW5nIGN1c3RvbSB0aS5zeXNiaW9zIGxpYnJhcnkgbWFrZWZpbGUgLi4uDQo+
+IHwgZ2VuZXJhdGluZyBjdXN0b20gdGkuc2RvLnV0aWxzIGxpYnJhcnkgbWFrZWZpbGUgLi4uDQo+
+IHwgZ2VuZXJhdGluZyBjdXN0b20gdGkuc2RvLmlwYyBsaWJyYXJ5IG1ha2VmaWxlIC4uLg0KPiB8
+IEF1dG8tcmVnaXN0ZXJpbmcgcmVzb3VyY2UgbWFuYWdlciBmb3IgSERWSUNQMg0KPiB8IG1hbmFn
+ZUlwYyA9IHRydWUNCj4gfCBIZWFwOiB0aS5zeXNiaW9zLmhlYXBzLkhlYXBNZW0NCj4gfCBEZWZh
+dWx0IGxpYiBub3QgZm91bmQ6IGxpYi9pcHUvcmVsZWFzZS9pcHUuYWVtNA0KPiB8IGxvb2tpbmcg
+Zm9yIHJlbGVhc2UgbGliDQo+IHwganM6ICIvT0UvYXJhZ28tcm9ja28tbmV4dC9idWlsZC9hcmFn
+by10bXAtZXh0ZXJuYWwtbGluYXJvLQ0KPiB0b29sY2hhaW4vd29yay9hcm12N2FoZi1uZW9uLWxp
+bnV4LWdudWVhYmkvaXB1bW0tZncvMy4wMC4xNS4wMC0NCj4gcjEvZ2l0L3BsYXRmb3JtL3RpL2Rj
+ZS9iYXNlbGliL3BhY2thZ2UueHMiLCBsaW5lIDkyOiBFcnJvcjogTGlicmFyeSBub3QgZm91bmQ6
+DQo+IGxpYi9pcHUvcmVsZWFzZS9pcHUuYWVtNA0KPiB8IHBhY2thZ2UubWFrOjI2NTogcmVjaXBl
+IGZvciB0YXJnZXQNCj4gJ3BhY2thZ2UvY2ZnL291dC9pcHUvcmVsZWFzZS9pcHVfcGVtNC54ZGwn
+IGZhaWxlZA0KPiB8IG1ha2VbMV06ICoqKiBbcGFja2FnZS9jZmcvb3V0L2lwdS9yZWxlYXNlL2lw
+dV9wZW00LnhkbF0gRXJyb3IgMQ0KPiB8IG1ha2VbMV06ICoqKiBEZWxldGluZyBmaWxlICdwYWNr
+YWdlL2NmZy9vdXQvaXB1L3JlbGVhc2UvaXB1X3BlbTQueGRsJw0KPiB8IG1ha2VbMV06ICoqKiBb
+cGFja2FnZS9jZmcvb3V0L2lwdS9yZWxlYXNlL2lwdV9wZW00LnhkbF0gRGVsZXRpbmcgZmlsZQ0K
+PiAncGFja2FnZS9jZmcvb3V0L2lwdS9yZWxlYXNlL2lwdV9wZW00LmgnDQo+IHwgbWFrZVsxXTog
+KioqIFtwYWNrYWdlL2NmZy9vdXQvaXB1L3JlbGVhc2UvaXB1X3BlbTQueGRsXSBEZWxldGluZyBm
+aWxlDQo+ICdwYWNrYWdlL2NmZy9vdXQvaXB1L3JlbGVhc2UvaXB1X3BlbTQuYycNCj4gfCBnbWFr
+ZTogKioqIFsvT0UvYXJhZ28tcm9ja28tbmV4dC9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtbGlu
+YXJvLQ0KPiB0b29sY2hhaW4vd29yay9hcm12N2FoZi1uZW9uLWxpbnV4LWdudWVhYmkvaXB1bW0t
+ZncvMy4wMC4xNS4wMC0NCj4gcjEvZ2l0L3BsYXRmb3JtL3RpL2RjZS9iYXNlaW1hZ2UsLmRsbHNd
+IEVycm9yIDINCj4gfCBNYWtlZmlsZToxNjY6IHJlY2lwZSBmb3IgdGFyZ2V0ICdidWlsZCcgZmFp
+bGVkDQo+IHwgbWFrZTogKioqIFtidWlsZF0gRXJyb3IgMg0KPiB8IEVSUk9SOiBvZV9ydW5tYWtl
+IGZhaWxlZA0KPiB8IFdBUk5JTkc6IC9PRS9hcmFnby1yb2Nrby1uZXh0L2J1aWxkL2FyYWdvLXRt
+cC1leHRlcm5hbC1saW5hcm8tDQo+IHRvb2xjaGFpbi93b3JrL2FybXY3YWhmLW5lb24tbGludXgt
+Z251ZWFiaS9pcHVtbS1mdy8zLjAwLjE1LjAwLQ0KPiByMS90ZW1wL3J1bi5kb19jb21waWxlLjYx
+NjQ6MSBleGl0IDEgZnJvbSAnZXhpdCAxJw0KPiB8IEVSUk9SOiBGdW5jdGlvbiBmYWlsZWQ6IGRv
+X2NvbXBpbGUgKGxvZyBmaWxlIGlzIGxvY2F0ZWQgYXQgL09FL2FyYWdvLXJvY2tvLQ0KPiBuZXh0
+L2J1aWxkL2FyYWdvLXRtcC1leHRlcm5hbC1saW5hcm8tdG9vbGNoYWluL3dvcmsvYXJtdjdhaGYt
+bmVvbi1saW51eC0NCj4gZ251ZWFiaS9pcHVtbS1mdy8zLjAwLjE1LjAwLXIxL3RlbXAvbG9nLmRv
+X2NvbXBpbGUuNjE2NCkNCj4gDQo+IA0KPiBPbiBUdWUsIEF1ZyAxNCwgMjAxOCBhdCAxMDozNzo1
+OEFNIC0wNDAwLCBoemhhbmdAdGkuY29tIHdyb3RlOg0KPiA+IEZyb206IEhhbyBaaGFuZyA8aHpo
+YW5nQHRpLmNvbT4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEhhbyBaaGFuZyA8aHpoYW5nQHRp
+LmNvbT4NCj4gPg0KPiA+IC0tLQ0KPiA+IENoYW5nZXMgZnJvbSBwcmV2aW91cyB2ZXJzaW9uIG9m
+IHBhdGNoDQo+ID4gUmVtb3ZlIG9sZCB2ZXJzaW9uIG9mIHRvb2xzDQo+ID4gLS0tDQo+ID4gLS0t
+DQo+ID4gIHJlY2lwZXMtdGkvYmlvcy90aS1kc3BiaW9zXzUuNDEuMTEuMzguYmIgICAgICAgICAg
+ICAgICAgICAgICB8ICA5IC0tLS0tLS0tLQ0KPiA+ICByZWNpcGVzLXRpL2Jpb3MvdGktc3lzYmlv
+c182LjMzLjAwLjE5LmJiICAgICAgICAgICAgICAgICAgICAgfCAgOSAtLS0tLS0tLS0NCj4gPiAg
+cmVjaXBlcy10aS9iaW9zL3RpLXN5c2Jpb3NfNi40Ni4wNS41NS5iYiAgICAgICAgICAgICAgICAg
+ICAgIHwgMTIgLS0tLS0tLS0tLS0tDQo+ID4gIC4uLi97dGktc3lzYmlvc182LjUyLjAwLjEyLmJi
+ID0+IHRpLXN5c2Jpb3NfNi43My4wMC4xMi5iYn0gICB8ICA4ICsrKystLS0tDQo+ID4gIDQgZmls
+ZXMgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspLCAzNCBkZWxldGlvbnMoLSkNCj4gPiAgZGVsZXRl
+IG1vZGUgMTAwNjQ0IHJlY2lwZXMtdGkvYmlvcy90aS1kc3BiaW9zXzUuNDEuMTEuMzguYmINCj4g
+PiAgZGVsZXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMtdGkvYmlvcy90aS1zeXNiaW9zXzYuMzMuMDAu
+MTkuYmINCj4gPiAgZGVsZXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMtdGkvYmlvcy90aS1zeXNiaW9z
+XzYuNDYuMDUuNTUuYmINCj4gPiAgcmVuYW1lIHJlY2lwZXMtdGkvYmlvcy97dGktc3lzYmlvc182
+LjUyLjAwLjEyLmJiID0+IHRpLQ0KPiBzeXNiaW9zXzYuNzMuMDAuMTIuYmJ9ICg1MiUpDQo+ID4N
+Cj4gPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy10aS9iaW9zL3RpLWRzcGJpb3NfNS40MS4xMS4zOC5i
+YiBiL3JlY2lwZXMtdGkvYmlvcy90aS0NCj4gZHNwYmlvc181LjQxLjExLjM4LmJiDQo+ID4gZGVs
+ZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggZjYwZjZjMC4uMDAwMDAwMA0KPiA+IC0t
+LSBhL3JlY2lwZXMtdGkvYmlvcy90aS1kc3BiaW9zXzUuNDEuMTEuMzguYmINCj4gPiArKysgL2Rl
+di9udWxsDQo+ID4gQEAgLTEsOSArMCwwIEBADQo+ID4gLXJlcXVpcmUgdGktZHNwYmlvcy5pbmMN
+Cj4gPiAtDQo+ID4gLVBWID0gIjVfNDFfMTFfMzgiDQo+ID4gLQ0KPiA+IC1TUkNfVVJJW2Jpb3Ni
+aW4ubWQ1c3VtXSA9ICI3ZmFiMTM3NDBjMjVmNWIzNGIzMzFiY2RjNzU5NTM2ZSINCj4gPiAtU1JD
+X1VSSVtiaW9zYmluLnNoYTI1NnN1bV0gPQ0KPiAiOTZiOGUwOTBmNzk0MjBhNGMxMWQ5YzBjMTBk
+MTgyZDFkM2I0YWZiNDhmMTFlYzM3NWM5N2I0YzkxOTcwZDBhMA0KPiAiDQo+ID4gLQ0KPiA+IC0N
+Cj4gPiAtSU5TQU5FX1NLSVBfJHtQTn0gPSAiaW5zdGFsbGVkLXZzLXNoaXBwZWQiDQo+ID4gZGlm
+ZiAtLWdpdCBhL3JlY2lwZXMtdGkvYmlvcy90aS1zeXNiaW9zXzYuMzMuMDAuMTkuYmIgYi9yZWNp
+cGVzLXRpL2Jpb3MvdGktDQo+IHN5c2Jpb3NfNi4zMy4wMC4xOS5iYg0KPiA+IGRlbGV0ZWQgZmls
+ZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDRlMmI0NDUuLjAwMDAwMDANCj4gPiAtLS0gYS9yZWNp
+cGVzLXRpL2Jpb3MvdGktc3lzYmlvc182LjMzLjAwLjE5LmJiDQo+ID4gKysrIC9kZXYvbnVsbA0K
+PiA+IEBAIC0xLDkgKzAsMCBAQA0KPiA+IC1yZXF1aXJlIHRpLXN5c2Jpb3MuaW5jDQo+ID4gLQ0K
+PiA+IC1QViA9ICI2XzMzXzAwXzE5Ig0KPiA+IC1MSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6
+Ly9zeXNiaW9zXyR7UFZ9X21hbmlmZXN0Lmh0bWw7bWQ1PTk0MTM2Y2E5ODE1Zjc2NjAzYjcyMDJh
+NDFmMWQ2Zg0KPiA1ZSINCj4gPiAtDQo+ID4gLVNSQ19VUklbc3lzYmlvc2Jpbi5tZDVzdW1dID0g
+ImUxYTJmMjhhOGIzMDg3ODk2YmJkOTg2Njk2ZTFhOTA4Ig0KPiA+IC1TUkNfVVJJW3N5c2Jpb3Ni
+aW4uc2hhMjU2c3VtXSA9DQo+ICJiN2UwOTY2NjJmNWQ5MjhlYjgxOGJiYjE0NDc0ZGViMWUzZTAz
+OGZlYTM0YjUxNmIyNDhkZTYzNzgzNTEyMWUNCj4gYyINCj4gPiAtDQo+ID4gLVMgPSAiJHtXT1JL
+RElSfS90aS9iaW9zXyR7UFZ9Ig0KPiA+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL2Jpb3MvdGkt
+c3lzYmlvc182LjQ2LjA1LjU1LmJiIGIvcmVjaXBlcy10aS9iaW9zL3RpLQ0KPiBzeXNiaW9zXzYu
+NDYuMDUuNTUuYmINCj4gPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCBlOTEw
+ZDUzLi4wMDAwMDAwDQo+ID4gLS0tIGEvcmVjaXBlcy10aS9iaW9zL3RpLXN5c2Jpb3NfNi40Ni4w
+NS41NS5iYg0KPiA+ICsrKyAvZGV2L251bGwNCj4gPiBAQCAtMSwxMiArMCwwIEBADQo+ID4gLXJl
+cXVpcmUgcmVjaXBlcy10aS9iaW9zL3RpLXN5c2Jpb3MuaW5jDQo+ID4gLQ0KPiA+IC1QViA9ICI2
+XzQ2XzA1XzU1Ig0KPiA+IC1QUiA9ICJyMCINCj4gPiAtDQo+ID4gLUxJQ19GSUxFU19DSEtTVU0g
+PQ0KPiAiZmlsZTovL21hbmlmZXN0X2Jpb3NfJHtQVn0uaHRtbDttZDU9MWM4OGI2M2YwY2U3NTFk
+ODgzNTRkZTA3Mjc2MjNlYmENCj4gIg0KPiA+IC0NCj4gPiAtU1JDX1VSSVtzeXNiaW9zYmluLm1k
+NXN1bV0gPSAiODE4MmVmZmNiZWVhOTA3NzhlMzkzODE4ZWM0ZDY1ZTgiDQo+ID4gLVNSQ19VUklb
+c3lzYmlvc2Jpbi5zaGEyNTZzdW1dID0NCj4gIjJhZDM0MzJjYWZkMWE5M2RkOGNkMWU1NmI3MjJj
+OTc5ODUyZDVjNzJmNWRlZmMyOTg0M2Q1MDdjZGQ3YjY2N2ENCj4gIg0KPiA+IC0NCj4gPiAtVElf
+QklOX1VOUEtfQ01EUz0iIg0KPiA+IC1USV9CSU5fVU5QS19BUkdTID0gIi0tbW9kZSB1bmF0dGVu
+ZGVkIC0tcHJlZml4ICR7V09SS0RJUn0iDQo+ID4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvYmlv
+cy90aS1zeXNiaW9zXzYuNTIuMDAuMTIuYmIgYi9yZWNpcGVzLXRpL2Jpb3MvdGktDQo+IHN5c2Jp
+b3NfNi43My4wMC4xMi5iYg0KPiA+IHNpbWlsYXJpdHkgaW5kZXggNTIlDQo+ID4gcmVuYW1lIGZy
+b20gcmVjaXBlcy10aS9iaW9zL3RpLXN5c2Jpb3NfNi41Mi4wMC4xMi5iYg0KPiA+IHJlbmFtZSB0
+byByZWNpcGVzLXRpL2Jpb3MvdGktc3lzYmlvc182LjczLjAwLjEyLmJiDQo+ID4gaW5kZXggZWJk
+YjEzNS4uYjcyNzY3MyAxMDA2NDQNCj4gPiAtLS0gYS9yZWNpcGVzLXRpL2Jpb3MvdGktc3lzYmlv
+c182LjUyLjAwLjEyLmJiDQo+ID4gKysrIGIvcmVjaXBlcy10aS9iaW9zL3RpLXN5c2Jpb3NfNi43
+My4wMC4xMi5iYg0KPiA+IEBAIC0xLDEyICsxLDEyIEBADQo+ID4gIHJlcXVpcmUgcmVjaXBlcy10
+aS9iaW9zL3RpLXN5c2Jpb3MuaW5jDQo+ID4NCj4gPiAtUFYgPSAiNl81Ml8wMF8xMiINCj4gPiAr
+UFYgPSAiNl83M18wMF8xMiINCj4gPiAgUFIgPSAicjAiDQo+ID4NCj4gPiAtTElDX0ZJTEVTX0NI
+S1NVTSA9DQo+ICJmaWxlOi8vbWFuaWZlc3RfYmlvc18ke1BWfS5odG1sO21kNT1jYTU0OWMyMjNk
+NzMyZTZmNjllZmM0NDk3OTVjNGVlYiINCj4gPiArTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxl
+Oi8vbWFuaWZlc3RfYmlvc18ke1BWfS5odG1sO21kNT05OTc3MTQ3NWYzNjIxYTZiZjY5MGRmMTAz
+MjdlYWFhOSINCj4gPg0KPiA+IC1TUkNfVVJJW3N5c2Jpb3NiaW4ubWQ1c3VtXSA9ICIzYzE2YWYw
+ODQzYjViNmM1ZmYxMDUxMmQxYjU4NjY2NSINCj4gPiAtU1JDX1VSSVtzeXNiaW9zYmluLnNoYTI1
+NnN1bV0gPQ0KPiAiNGEyYjliNzZmNTJhNTdmMDI3MjUzMzdkYjkzNjE3ODdlYWU0YzkxN2Q3Y2Y5
+ODlhNjk3ZWQ0MWViNGExZTcwMQ0KPiAiDQo+ID4gK1NSQ19VUklbc3lzYmlvc2Jpbi5tZDVzdW1d
+ID0gImY4ZmY3NGJmMGNmZWJkZDU2ODlmYmE4NDMyNzJhYzYxIg0KPiA+ICtTUkNfVVJJW3N5c2Jp
+b3NiaW4uc2hhMjU2c3VtXSA9DQo+ICI0ZmRmNzY2OTZmYjQzOTg0YTljYWU3MzlmZDJlZTA5MWNh
+OWQwMzFhZDAyNzdkMmJiOTRkYmIyNmVhZTYzZjQzIg0KPiA+DQo+ID4gIFRJX0JJTl9VTlBLX0NN
+RFMgPSAiIg0KPiA+ICBUSV9CSU5fVU5QS19BUkdTID0gIi0tbW9kZSB1bmF0dGVuZGVkIC0tcHJl
+Zml4ICR7V09SS0RJUn0iDQo+ID4gLS0NCj4gPiAyLjcuNA0KPiA+DQo+ID4gLS0NCj4gPiBfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+IG1ldGEtdGkg
+bWFpbGluZyBsaXN0DQo+ID4gbWV0YS10aUB5b2N0b3Byb2plY3Qub3JnDQo+ID4gaHR0cHM6Ly9s
+aXN0cy55b2N0b3Byb2plY3Qub3JnL2xpc3RpbmZvL21ldGEtdGkNCg==
 
