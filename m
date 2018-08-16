@@ -1,49 +1,62 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D118AE007D1; Thu, 16 Aug 2018 11:03:10 -0700 (PDT)
+	id 559B0E007D1; Thu, 16 Aug 2018 11:07:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
 	http://www.dnswl.org/, low *      trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A4C8E006B4
-	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 11:03:09 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7GI39bQ062525
-	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 13:03:09 -0500
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7GI39Bk026082
-	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 13:03:09 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C618E006B4
+	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 11:07:22 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7GI7LhD052021
+	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 13:07:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1534442841;
+	bh=MjT4pRIhyoL5qx043Ot0idrzX7JcFhvKZmhPRY0jxaA=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=pgXLudN5BxZc5XKtoYiNj4//DZ1UT1k0o6j7aVBjWyCyv9/OoUfhR4QFPmgpGvc04
+	hrMB3gXOXI77EufBUISeSBxnKrU3Y9wD7B4aeXPs2TgKrX0v1k1D28ArIRu/rGuKLZ
+	Y1QdCJ13ne288m95dTYeAxaps/8M6huGRnbO6K6E=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7GI7LH7025091
+	for <meta-ti@yoctoproject.org>; Thu, 16 Aug 2018 13:07:21 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Thu, 16 Aug 2018 13:03:08 -0500
-Received: from DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895]) by
-	DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895%18]) with mapi id
-	15.01.1466.003; Thu, 16 Aug 2018 13:03:08 -0500
-From: "Nelson, Sam" <sam.nelson@ti.com>
-To: "Anna, Suman" <s-anna@ti.com>, "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [rocko][PATCH v2] ti-ipc: Update to new version 3.50
-Thread-Index: AQHUNXid2//jXTT4rEuFUR/GXalluKTC6IsA///DKJA=
-Date: Thu, 16 Aug 2018 18:03:08 +0000
-Message-ID: <8b1625be39654a84b0773ace1730d6e8@ti.com>
+	Thu, 16 Aug 2018 13:07:21 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
+	Transport; Thu, 16 Aug 2018 13:07:21 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7GI7L6Q014824;
+	Thu, 16 Aug 2018 13:07:21 -0500
+Date: Thu, 16 Aug 2018 14:06:19 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Nelson, Sam" <sam.nelson@ti.com>
+Message-ID: <20180816180619.GX2547@beryl>
 References: <1534273168-15171-1-git-send-email-sam.nelson@ti.com>
 	<20180816154742.GU2547@beryl>
 	<e4dc8737-14ff-b295-01a6-2cf47bf17ca9@ti.com>
-In-Reply-To: <e4dc8737-14ff-b295-01a6-2cf47bf17ca9@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [158.218.113.135]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	<8b1625be39654a84b0773ace1730d6e8@ti.com>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+In-Reply-To: <8b1625be39654a84b0773ace1730d6e8@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Anna,
+	Suman" <s-anna@ti.com>
 Subject: Re: [rocko][PATCH v2] ti-ipc: Update to new version 3.50
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -57,124 +70,202 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 18:03:10 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 16 Aug 2018 18:07:23 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogQW5uYSwgU3VtYW4NCj4g
-U2VudDogVGh1cnNkYXksIEF1Z3VzdCAxNiwgMjAxOCAxMjo0MCBQTQ0KPiBUbzogRG15dHJpeWVu
-a28sIERlbnlzOyBOZWxzb24sIFNhbQ0KPiBDYzogbWV0YS10aUB5b2N0b3Byb2plY3Qub3JnDQo+
-IFN1YmplY3Q6IFJlOiBbbWV0YS10aV0gW3JvY2tvXVtQQVRDSCB2Ml0gdGktaXBjOiBVcGRhdGUg
-dG8gbmV3IHZlcnNpb24gMy41MA0KPiANCj4gSGkgU2FtLA0KPiANCj4gT24gMDgvMTYvMjAxOCAx
-MDo0NyBBTSwgRGVueXMgRG15dHJpeWVua28gd3JvdGU6DQo+ID4gK1N1bWFuLA0KPiA+DQo+ID4g
-T24gVHVlLCBBdWcgMTQsIDIwMTggYXQgMDI6NTk6MjhQTSAtMDQwMCwgU2FtIE5lbHNvbiB3cm90
-ZToNCj4gPj4gQWRkIEFNNjVYWCBwbGF0Zm9ybSBzdXBwb3J0DQo+ID4+DQo+ID4+IFNpZ25lZC1v
-ZmYtYnk6IFNhbSBOZWxzb24gPHNhbS5uZWxzb25AdGkuY29tPg0KPiA+Pg0KPiA+PiAtLS0NCj4g
-Pj4gQ2hhbmdlIGZyb20gcHJldmlvdXMgdmVyc2lvbiBvZiBwYXRjaA0KPiA+PiAtIFVwZGF0ZSBn
-Y2MgdG9vbGNoYWluIHRvIGdjYy1saW5hcm8tYmFyZW1ldGFsLWFhcmNoNjQNCj4gPj4gTk9URTog
-VGhpcyBwYXRjaCBkZXBlbmRzIG9uIGdjYy1saW5hcm8tYmFyZW1ldGFsLWFhcmNoNjQtbmF0aXZl
-IHBhdGNoIHRvDQo+IGJlIGNoZWNrZWQgaW4NCj4gPj4gLS0tDQo+ID4+IC0tLQ0KPiA+PiAgcmVj
-aXBlcy10aS9pcGMvdGktaXBjLWNvbW1vbi5pbmMgICB8ICAzICsrLQ0KPiA+PiAgcmVjaXBlcy10
-aS9pcGMvdGktaXBjLWV4YW1wbGVzLmluYyB8ICAyICstDQo+ID4+ICByZWNpcGVzLXRpL2lwYy90
-aS1pcGMtcnRvcy5pbmMgICAgIHwgMTYgKysrKysrKysrKysrLS0tLQ0KPiA+PiAgcmVjaXBlcy10
-aS9pcGMvdGktaXBjLXJ0b3NfZ2l0LmJiICB8ICA4ICsrKysrKysrDQo+ID4+ICByZWNpcGVzLXRp
-L2lwYy90aS1pcGMuaW5jICAgICAgICAgIHwgIDYgKysrLS0tDQo+ID4+ICA1IGZpbGVzIGNoYW5n
-ZWQsIDI2IGluc2VydGlvbnMoKyksIDkgZGVsZXRpb25zKC0pDQo+ID4+DQo+ID4+IGRpZmYgLS1n
-aXQgYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMtY29tbW9uLmluYyBiL3JlY2lwZXMtdGkvaXBjL3Rp
-LWlwYy0NCj4gY29tbW9uLmluYw0KPiA+PiBpbmRleCA3ZjkzODQyLi42YWVhOGU2IDEwMDY0NA0K
-PiA+PiAtLS0gYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMtY29tbW9uLmluYw0KPiA+PiArKysgYi9y
-ZWNpcGVzLXRpL2lwYy90aS1pcGMtY29tbW9uLmluYw0KPiA+PiBAQCAtMSw0ICsxLDQgQEANCj4g
-Pj4gLVBWID0gIjMuNDcuMDIuMDAiDQo+ID4+ICtQViA9ICIzLjUwLjAxLjAwIg0KPiA+PiAgSU5D
-X1BSID0gInIwIg0KPiA+Pg0KPiA+PiAgUEFDS0FHRV9BUkNIID0gIiR7TUFDSElORV9BUkNIfSIN
-Cj4gPj4gQEAgLTEzLDYgKzEzLDcgQEAgUExBVEZPUk1fazJnID0gIjY2QUsyRyINCj4gPj4gIFBM
-QVRGT1JNX29tYXBsMTM4ID0gIk9NQVBMMTM4Ig0KPiA+PiAgUExBVEZPUk1fYzY2N3gtZXZtID0g
-IkM2Njc4Ig0KPiA+PiAgUExBVEZPUk1fYzY2NXgtZXZtID0gIkM2Njc4Ig0KPiA+PiArUExBVEZP
-Uk1fYW02NXh4LWV2bSA9ICJBTTY1WFgiDQo+ID4+DQo+ID4+ICBBTFRfUExBVEZPUk1fazJoayA9
-ICJUQ0k2NjM2Ig0KPiA+PiAgQUxUX1BMQVRGT1JNX2FtNTd4eC1ldm0gPSAiQU01NzJYIEFNNTcx
-WCINCj4gPj4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1leGFtcGxlcy5pbmMg
-Yi9yZWNpcGVzLXRpL2lwYy90aS1pcGMtDQo+IGV4YW1wbGVzLmluYw0KPiA+PiBpbmRleCBjZDIy
-NDBjLi4wMjJiMTNmIDEwMDY0NA0KPiA+PiAtLS0gYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMtZXhh
-bXBsZXMuaW5jDQo+ID4+ICsrKyBiL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1leGFtcGxlcy5pbmMN
-Cj4gPj4gQEAgLTMsNyArMyw3IEBAIHJlcXVpcmUgdGktaXBjLWNvbW1vbi5pbmMNCj4gPj4gIHJl
-cXVpcmUgdGktaXBjLXJ0b3MuaW5jDQo+ID4+DQo+ID4+ICBMSUNFTlNFID0gIkJTRCINCj4gPj4g
-LUxJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovLyR7U19pcGMtDQo+IGV4YW1wbGVzfS9zcmMvbWFr
-ZWZpbGU7YmVnaW5saW5lPTE7ZW5kbGluZT0zMDttZDU9ZmI4MzU4MGIxNmJjZTg4ZThlZA0KPiA1
-NjhhNjAwNWM4ZjAyIg0KPiA+PiArTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vJHtTX2lwYy0N
-Cj4gZXhhbXBsZXN9L3NyYy9tYWtlZmlsZTtiZWdpbmxpbmU9MTtlbmRsaW5lPTMwO21kNT1hNTIz
-MjRiZDUwMzNiYjQ5ZWEwDQo+IDdiYWRlMTI0NGFjOWEiDQo+ID4+DQo+ID4+ICBJTlNBTkVfU0tJ
-UF8ke1BOfSArPSAiYXJjaCINCj4gPj4NCj4gPj4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvaXBj
-L3RpLWlwYy1ydG9zLmluYyBiL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1ydG9zLmluYw0KPiA+PiBp
-bmRleCA4Njg3NDNlLi4xM2IxOTE0IDEwMDY0NA0KPiA+PiAtLS0gYS9yZWNpcGVzLXRpL2lwYy90
-aS1pcGMtcnRvcy5pbmMNCj4gPj4gKysrIGIvcmVjaXBlcy10aS9pcGMvdGktaXBjLXJ0b3MuaW5j
-DQo+ID4+IEBAIC0yNCwxMSArMjQsMTEgQEAgcHJvdG9jb2w9JHtUSV9JUENfTUVUQURBVEFfR0lU
-X1BST1RPQ09MfTtcDQo+ID4+ICBicmFuY2g9JHtUSV9JUENfTUVUQURBVEFfR0lUX0JSQU5DSH07
-XA0KPiA+PiAgbmFtZT0ke1RJX0lQQ19NRVRBREFUQV9OQU1FfSINCj4gPj4NCj4gPj4gLSMgQ29y
-cmVzcG9uZHMgdG8gdGFnOiAzLjQ3LjAyLjAwDQo+ID4+IC1TUkNSRVZfaXBjLW1ldGFkYXRhID0N
-Cj4gImU4YWZmODMxMTFiOGEwZDY0ZDdhNzc0MTNiNmY2NmQzMTA2MDg0ZDgiDQo+ID4+ICsjIENv
-cnJlc3BvbmRzIHRvIHRhZzogMy41MC4wMS4wMA0KPiA+PiArU1JDUkVWX2lwYy1tZXRhZGF0YSA9
-DQo+ICIxOWE4ZTcwY2Y2Y2E0ZmUwOTg0OTg3ZTI1ZDkzN2M2MWE2MmM3NjU4Ig0KPiA+Pg0KPiA+
-PiAtIyBDb3JyZXNwb25kcyB0byB0YWc6IDMuNDcuMDIuMDANCj4gPj4gLVNSQ1JFVl9pcGMtZXhh
-bXBsZXMgPQ0KPiAiMzUxZTlhNmQ5NGM2OGY3ZmY2NGIyYzAwMmVlNjc1MDI0MmVjZTZkOSINCj4g
-Pj4gKyMgQ29ycmVzcG9uZHMgdG8gdGFnOiAzLjUwLjAxLjAwDQo+ID4+ICtTUkNSRVZfaXBjLWV4
-YW1wbGVzID0NCj4gIjE5NzU2ODcwNzY0MjZiNTg3YmU4ZDI1MzBkZjU2YzI0NDI1Y2E1M2EiDQo+
-ID4+DQo+ID4+ICBTX2lwYy1leGFtcGxlcyA9ICIke1dPUktESVJ9L2dpdC9pcGMtZXhhbXBsZXMi
-DQo+ID4+ICBTX2lwYy1tZXRhZGF0YSA9ICIke1dPUktESVJ9L2dpdC9pcGMtbWV0YWRhdGEiDQo+
-ID4+IEBAIC01MCw2ICs1MCw5IEBAIERFUEVORFNfYXBwZW5kX29tYXBsMTM4ID0gIiB0aS1jZ3Q2
-eC1uYXRpdmUgXA0KPiA+PiAgREVQRU5EU19hcHBlbmRfYzY2eCA9ICIgdGktY2d0NngtbmF0aXZl
-IFwNCj4gPj4gICINCj4gPj4NCj4gPj4gK0RFUEVORFNfYXBwZW5kX2FtNjV4eC1ldm0gPSAiIHRp
-LWNndC1hcm0tbmF0aXZlIFwNCj4gPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdj
-Yy1saW5hcm8tYmFyZW1ldGFsLWFhcmNoNjQtbmF0aXZlIg0KPiA+PiArDQo+ID4+ICBJUENfVEFS
-R0VUUyA9ICIiDQo+ID4+DQo+ID4+ICBJUENfVEFSR0VUU19vbWFwLWExNSA9ICJcDQo+ID4+IEBA
-IC03Myw2ICs3NiwxMSBAQCBJUENfVEFSR0VUU19jNjZ4ID0gIiBcDQo+ID4+DQo+IHRpLnRhcmdl
-dHMuZWxmLkM2Nl9iaWdfZW5kaWFuPSIke1NUQUdJTkdfRElSX05BVElWRX0vdXNyL3NoYXJlL3Rp
-L2NndC1jNngiDQo+IFwNCj4gPj4gICINCj4gPj4NCj4gPj4gK0lQQ19UQVJHRVRTX2FtNjV4eC1l
-dm0gPSAiXA0KPiA+PiArDQo+IGdudS50YXJnZXRzLmFybS5BNTNGPSIke0dDQ19MSU5BUk9fQkFS
-RU1FVEFMX0FBUkNINjRfVE9PTENIQUlOfQ0KPiAiIFwNCj4gPj4gKyAgICB0aS50YXJnZXRzLmFy
-bS5lbGYuUjVGPSIke000X1RPT0xDSEFJTl9JTlNUQUxMX0RJUn0iIFwNCj4gPj4gKyINCj4gPj4g
-Kw0KPiA+PiAgRVhUUkFfT0VNQUtFID0gIlwNCj4gPj4gICAgICBQTEFURk9STT0ke1BMQVRGT1JN
-fSBcDQo+ID4+ICAgICAgWERDX0lOU1RBTExfRElSPSIke1hEQ19JTlNUQUxMX0RJUn0iIFwNCj4g
-Pj4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1ydG9zX2dpdC5iYiBiL3JlY2lw
-ZXMtdGkvaXBjL3RpLWlwYy0NCj4gcnRvc19naXQuYmINCj4gPj4gaW5kZXggYjI5MmQ2Ny4uYjcw
-OTM1YSAxMDA2NDQNCj4gPj4gLS0tIGEvcmVjaXBlcy10aS9pcGMvdGktaXBjLXJ0b3NfZ2l0LmJi
-DQo+ID4+ICsrKyBiL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1ydG9zX2dpdC5iYg0KPiA+PiBAQCAt
-MTIyLDMgKzEyMiwxMSBAQCBwa2dfcG9zdGluc3RfJHtQTn0tZndfb21hcGwxMzggKCkgew0KPiA+
-PiAgcGtnX3Bvc3RybV8ke1BOfS1md19vbWFwbDEzOCAoKSB7DQo+ID4+ICAgIHVwZGF0ZS1hbHRl
-cm5hdGl2ZXMgLS1yZW1vdmUgcnByb2MtZHNwLWZ3DQo+IGlwYy90aV9wbGF0Zm9ybXNfZXZtT01B
-UEwxMzhfRFNQL21lc3NhZ2VxX3NpbmdsZS54ZTY3NA0KPiA+PiAgfQ0KPiA+PiArDQo+ID4+ICtw
-a2dfcG9zdGluc3RfJHtQTn0tZndfYW02NXh4LWV2bSAoKSB7DQo+ID4+ICsgIHVwZGF0ZS1hbHRl
-cm5hdGl2ZXMgLS1pbnN0YWxsIC9saWIvZmlybXdhcmUvcnByb2MtcjVmLWZ3IHJwcm9jLXI1Zi1m
-dw0KPiBpcGMvdGlfcGxhdGZvcm1zX2NvcnRleFJfQU02NVgvbWVzc2FnZXFfc2luZ2xlLnhlcjVm
-DQo+ICR7QUxURVJOQVRJVkVfUFJJT1JJVFl9DQo+IA0KPiBOb3Qgc3VyZSB3aGVyZSB5b3UgZ290
-IHRoZSBycHJvYy1yNWYtZncgbmFtZSBmcm9tLCBidXQgdGhpcyBpcw0KPiBkZWZpbml0ZWx5IG5v
-dCB0aGUgbmFtZSB0aGF0IEkgYW0gdXNpbmcgaW4gdGhlIGRyaXZlci4gVGhpcyBpcyB3aGF0IEkN
-Cj4gd2lsbCBiZSB1c2luZyBmb3IgdGhlIHR3byBSNUYgY29yZXM6IGFtNjV4LW1jdS1yNWYwLWZ3
-IGFuZA0KPiBhbTY1eC1tY3UtcjVmMS1mdy4gQW5kIHRoZSBDb3JlMCBpbWFnZSBuYW1lIGlzIHRo
-ZSBvbmUgd2Ugd2lsbCB1c2UgaW4NCj4gTG9ja1N0ZXAgbW9kZSBhcyB3ZWxsLg0KDQpJIGFtIGZp
-bmUgd2l0aCB0aGlzLiBJIGNhbiB1cGRhdGUgd2l0aCBuZXcgcGF0Y2guDQoNCg0KPiANCj4gSSBh
-bSBvcGVuIHRvIHN1Z2dlc3Rpb25zIGlmIHdlIHdhbnQgdG8gcmVuYW1lIGl0IHNvbWV0aGluZyBl
-bHNlLCBidXQgSQ0KPiBoYXZlIGJlZW4gZm9sbG93aW5nIHRoZSBjb252ZW50aW9uIHRoYXQgSSBo
-YXZlIGJlZW4gdXNpbmcgc28gZmFyIG9uDQo+IG90aGVyIFNvQ3MuDQo+IA0KPiByZWdhcmRzDQo+
-IFN1bWFuDQo+IA0KPiA+PiArfQ0KPiA+PiArDQo+ID4+ICtwa2dfcG9zdHJtXyR7UE59LWZ3X2Ft
-NjV4eC1ldm0gKCkgew0KPiA+PiArICB1cGRhdGUtYWx0ZXJuYXRpdmVzIC0tcmVtb3ZlIHJwcm9j
-LXI1Zi1mdw0KPiBpcGMvdGlfcGxhdGZvcm1zX2NvcnRleFJfQU02NVgvbWVzc2FnZXFfc2luZ2xl
-LnhlNjc0DQo+ID4+ICt9DQo+ID4+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMu
-aW5jIGIvcmVjaXBlcy10aS9pcGMvdGktaXBjLmluYw0KPiA+PiBpbmRleCBlODAzOGE1Li4wNzMy
-MWNiIDEwMDY0NA0KPiA+PiAtLS0gYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMuaW5jDQo+ID4+ICsr
-KyBiL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy5pbmMNCj4gPj4gQEAgLTYsMTAgKzYsMTAgQEAgTElD
-X0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vJHtTfS9pcGMtDQo+IGxpbnV4Lm1haztiZWdpbmxpbmU9
-MTtlbmRsaW5lPTMwO21kNT03YjMyN2Y5DQo+ID4+DQo+ID4+ICBUSV9JUENfR0lUX1VSSSA9ICJn
-aXQ6Ly9naXQudGkuY29tL2lwYy9pcGNkZXYuZ2l0Ig0KPiA+PiAgVElfSVBDX0dJVF9QUk9UT0NP
-TCA9ICJnaXQiDQo+ID4+IC1USV9JUENfR0lUX0JSQU5DSCA9ICIzLjQ3Ig0KPiA+PiArVElfSVBD
-X0dJVF9CUkFOQ0ggPSAiMy41MCINCj4gPj4NCj4gPj4gLSNDb3JyZXNwb25kcyB0byAzLjQ3LjAy
-LjAwDQo+ID4+IC1USV9JUENfU1JDUkVWID0gIjI0YzM2Mzg1ZDA5NjYxM2FmMTIzZDFlMTY5NmZi
-MmZlZTY1MmVmMzYiDQo+ID4+ICsjQ29ycmVzcG9uZHMgdG8gMy41MC4wMS4wMA0KPiA+PiArVElf
-SVBDX1NSQ1JFViA9ICJmMGQwZWRhZjNjZTdlZDhkODFkODk2OWVhYWE5OGNlYzhiNjYyNDI0Ig0K
-PiA+Pg0KPiA+PiAgQlJBTkNIID0gIiR7VElfSVBDX0dJVF9CUkFOQ0h9Ig0KPiA+PiAgU1JDX1VS
-SSA9DQo+ICIke1RJX0lQQ19HSVRfVVJJfTtwcm90b2NvbD0ke1RJX0lQQ19HSVRfUFJPVE9DT0x9
-O2JyYW5jaD0ke0JSQU5DSH07bg0KPiBhbWU9aXBjZGV2Ig0KPiA+PiAtLQ0KPiA+PiAxLjkuMQ0K
-PiA+Pg0KPiA+PiAtLQ0KPiA+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXw0KPiA+PiBtZXRhLXRpIG1haWxpbmcgbGlzdA0KPiA+PiBtZXRhLXRpQHlvY3Rv
-cHJvamVjdC5vcmcNCj4gPj4gaHR0cHM6Ly9saXN0cy55b2N0b3Byb2plY3Qub3JnL2xpc3RpbmZv
-L21ldGEtdGkNCg0K
+On Thu, Aug 16, 2018 at 02:03:08PM -0400, Nelson, Sam wrote:
+> 
+> 
+> > -----Original Message-----
+> > From: Anna, Suman
+> > Sent: Thursday, August 16, 2018 12:40 PM
+> > To: Dmytriyenko, Denys; Nelson, Sam
+> > Cc: meta-ti@yoctoproject.org
+> > Subject: Re: [meta-ti] [rocko][PATCH v2] ti-ipc: Update to new version 3.50
+> > 
+> > Hi Sam,
+> > 
+> > On 08/16/2018 10:47 AM, Denys Dmytriyenko wrote:
+> > > +Suman,
+> > >
+> > > On Tue, Aug 14, 2018 at 02:59:28PM -0400, Sam Nelson wrote:
+> > >> Add AM65XX platform support
+> > >>
+> > >> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> > >>
+> > >> ---
+> > >> Change from previous version of patch
+> > >> - Update gcc toolchain to gcc-linaro-baremetal-aarch64
+> > >> NOTE: This patch depends on gcc-linaro-baremetal-aarch64-native patch to
+> > be checked in
+> > >> ---
+> > >> ---
+> > >>  recipes-ti/ipc/ti-ipc-common.inc   |  3 ++-
+> > >>  recipes-ti/ipc/ti-ipc-examples.inc |  2 +-
+> > >>  recipes-ti/ipc/ti-ipc-rtos.inc     | 16 ++++++++++++----
+> > >>  recipes-ti/ipc/ti-ipc-rtos_git.bb  |  8 ++++++++
+> > >>  recipes-ti/ipc/ti-ipc.inc          |  6 +++---
+> > >>  5 files changed, 26 insertions(+), 9 deletions(-)
+> > >>
+> > >> diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-
+> > common.inc
+> > >> index 7f93842..6aea8e6 100644
+> > >> --- a/recipes-ti/ipc/ti-ipc-common.inc
+> > >> +++ b/recipes-ti/ipc/ti-ipc-common.inc
+> > >> @@ -1,4 +1,4 @@
+> > >> -PV = "3.47.02.00"
+> > >> +PV = "3.50.01.00"
+> > >>  INC_PR = "r0"
+> > >>
+> > >>  PACKAGE_ARCH = "${MACHINE_ARCH}"
+> > >> @@ -13,6 +13,7 @@ PLATFORM_k2g = "66AK2G"
+> > >>  PLATFORM_omapl138 = "OMAPL138"
+> > >>  PLATFORM_c667x-evm = "C6678"
+> > >>  PLATFORM_c665x-evm = "C6678"
+> > >> +PLATFORM_am65xx-evm = "AM65XX"
+> > >>
+> > >>  ALT_PLATFORM_k2hk = "TCI6636"
+> > >>  ALT_PLATFORM_am57xx-evm = "AM572X AM571X"
+> > >> diff --git a/recipes-ti/ipc/ti-ipc-examples.inc b/recipes-ti/ipc/ti-ipc-
+> > examples.inc
+> > >> index cd2240c..022b13f 100644
+> > >> --- a/recipes-ti/ipc/ti-ipc-examples.inc
+> > >> +++ b/recipes-ti/ipc/ti-ipc-examples.inc
+> > >> @@ -3,7 +3,7 @@ require ti-ipc-common.inc
+> > >>  require ti-ipc-rtos.inc
+> > >>
+> > >>  LICENSE = "BSD"
+> > >> -LIC_FILES_CHKSUM = "file://${S_ipc-
+> > examples}/src/makefile;beginline=1;endline=30;md5=fb83580b16bce88e8ed
+> > 568a6005c8f02"
+> > >> +LIC_FILES_CHKSUM = "file://${S_ipc-
+> > examples}/src/makefile;beginline=1;endline=30;md5=a52324bd5033bb49ea0
+> > 7bade1244ac9a"
+> > >>
+> > >>  INSANE_SKIP_${PN} += "arch"
+> > >>
+> > >> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+> > >> index 868743e..13b1914 100644
+> > >> --- a/recipes-ti/ipc/ti-ipc-rtos.inc
+> > >> +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+> > >> @@ -24,11 +24,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+> > >>  branch=${TI_IPC_METADATA_GIT_BRANCH};\
+> > >>  name=${TI_IPC_METADATA_NAME}"
+> > >>
+> > >> -# Corresponds to tag: 3.47.02.00
+> > >> -SRCREV_ipc-metadata =
+> > "e8aff83111b8a0d64d7a77413b6f66d3106084d8"
+> > >> +# Corresponds to tag: 3.50.01.00
+> > >> +SRCREV_ipc-metadata =
+> > "19a8e70cf6ca4fe0984987e25d937c61a62c7658"
+> > >>
+> > >> -# Corresponds to tag: 3.47.02.00
+> > >> -SRCREV_ipc-examples =
+> > "351e9a6d94c68f7ff64b2c002ee6750242ece6d9"
+> > >> +# Corresponds to tag: 3.50.01.00
+> > >> +SRCREV_ipc-examples =
+> > "1975687076426b587be8d2530df56c24425ca53a"
+> > >>
+> > >>  S_ipc-examples = "${WORKDIR}/git/ipc-examples"
+> > >>  S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
+> > >> @@ -50,6 +50,9 @@ DEPENDS_append_omapl138 = " ti-cgt6x-native \
+> > >>  DEPENDS_append_c66x = " ti-cgt6x-native \
+> > >>  "
+> > >>
+> > >> +DEPENDS_append_am65xx-evm = " ti-cgt-arm-native \
+> > >> +                              gcc-linaro-baremetal-aarch64-native"
+> > >> +
+> > >>  IPC_TARGETS = ""
+> > >>
+> > >>  IPC_TARGETS_omap-a15 = "\
+> > >> @@ -73,6 +76,11 @@ IPC_TARGETS_c66x = " \
+> > >>
+> > ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+> > \
+> > >>  "
+> > >>
+> > >> +IPC_TARGETS_am65xx-evm = "\
+> > >> +
+> > gnu.targets.arm.A53F="${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}
+> > " \
+> > >> +    ti.targets.arm.elf.R5F="${M4_TOOLCHAIN_INSTALL_DIR}" \
+> > >> +"
+> > >> +
+> > >>  EXTRA_OEMAKE = "\
+> > >>      PLATFORM=${PLATFORM} \
+> > >>      XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+> > >> diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-
+> > rtos_git.bb
+> > >> index b292d67..b70935a 100644
+> > >> --- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> > >> +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+> > >> @@ -122,3 +122,11 @@ pkg_postinst_${PN}-fw_omapl138 () {
+> > >>  pkg_postrm_${PN}-fw_omapl138 () {
+> > >>    update-alternatives --remove rproc-dsp-fw
+> > ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674
+> > >>  }
+> > >> +
+> > >> +pkg_postinst_${PN}-fw_am65xx-evm () {
+> > >> +  update-alternatives --install /lib/firmware/rproc-r5f-fw rproc-r5f-fw
+> > ipc/ti_platforms_cortexR_AM65X/messageq_single.xer5f
+> > ${ALTERNATIVE_PRIORITY}
+> > 
+> > Not sure where you got the rproc-r5f-fw name from, but this is
+> > definitely not the name that I am using in the driver. This is what I
+> > will be using for the two R5F cores: am65x-mcu-r5f0-fw and
+> > am65x-mcu-r5f1-fw. And the Core0 image name is the one we will use in
+> > LockStep mode as well.
+> 
+> I am fine with this. I can update with new patch.
+
+Thanks, Sam. I had to drop all BIOS/XDC/IPC updates from "rocko-next" due to 
+IPUMM breakage anyway.
+
+Denys
+
+
+> > I am open to suggestions if we want to rename it something else, but I
+> > have been following the convention that I have been using so far on
+> > other SoCs.
+> > 
+> > regards
+> > Suman
+> > 
+> > >> +}
+> > >> +
+> > >> +pkg_postrm_${PN}-fw_am65xx-evm () {
+> > >> +  update-alternatives --remove rproc-r5f-fw
+> > ipc/ti_platforms_cortexR_AM65X/messageq_single.xe674
+> > >> +}
+> > >> diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+> > >> index e8038a5..07321cb 100644
+> > >> --- a/recipes-ti/ipc/ti-ipc.inc
+> > >> +++ b/recipes-ti/ipc/ti-ipc.inc
+> > >> @@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-
+> > linux.mak;beginline=1;endline=30;md5=7b327f9
+> > >>
+> > >>  TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+> > >>  TI_IPC_GIT_PROTOCOL = "git"
+> > >> -TI_IPC_GIT_BRANCH = "3.47"
+> > >> +TI_IPC_GIT_BRANCH = "3.50"
+> > >>
+> > >> -#Corresponds to 3.47.02.00
+> > >> -TI_IPC_SRCREV = "24c36385d096613af123d1e1696fb2fee652ef36"
+> > >> +#Corresponds to 3.50.01.00
+> > >> +TI_IPC_SRCREV = "f0d0edaf3ce7ed8d81d8969eaaa98cec8b662424"
+> > >>
+> > >>  BRANCH = "${TI_IPC_GIT_BRANCH}"
+> > >>  SRC_URI =
+> > "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};n
+> > ame=ipcdev"
+> > >> --
+> > >> 1.9.1
+> > >>
+> > >> --
+> > >> _______________________________________________
+> > >> meta-ti mailing list
+> > >> meta-ti@yoctoproject.org
+> > >> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
