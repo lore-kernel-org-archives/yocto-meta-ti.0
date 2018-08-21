@@ -1,45 +1,57 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 409B7E0097C; Tue, 21 Aug 2018 07:17:01 -0700 (PDT)
+	id 32FB6E0097C; Tue, 21 Aug 2018 14:28:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	http://www.dnswl.org/, *      medium trust
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0701DE006C7
-	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 07:16:59 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7LEGxpn100944
-	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 09:16:59 -0500
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7LEGx2g018573
-	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 09:16:59 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A305E008D9
+	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 14:28:47 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7LLSkW4075379
+	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 16:28:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1534886926;
+	bh=DhNLoq0TeiBFJ8SGdkiwbPCPD/0iGQIgVkztZlkFAlo=;
+	h=From:To:CC:Subject:Date;
+	b=dHzrLaaDPg950rltdJ6jR1oBj8nNjVGkLHTweXepdSVpKJcGGp59/75tBW1WkeAGm
+	BctBvtplMaZksiATiPARZTDWQxaT0qoLLiorC9e0xDNqzYo/veOFDuZTiHnFXhwMj1
+	gEOR+12LTBQ9WF8Mjle4OvKyLK1BLEv0ERAhfHxk=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7LLSkgu019895
+	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 16:28:46 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 21 Aug 2018 09:16:58 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 21 Aug 2018 16:28:46 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE107.ent.ti.com
+	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 21 Aug 2018 09:16:58 -0500
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	Transport; Tue, 21 Aug 2018 16:28:46 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7LEGwNp030827;
-	Tue, 21 Aug 2018 09:16:58 -0500
-From: Sam Nelson <sam.nelson@ti.com>
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7LLSkeg003298;
+	Tue, 21 Aug 2018 16:28:46 -0500
+From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 21 Aug 2018 10:16:57 -0400
-Message-ID: <1534861017-23311-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+Date: Tue, 21 Aug 2018 21:25:58 +0000
+Message-ID: <20180821212558.11225-1-denys@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko][PATCH v3] ti-ipc: Update to new version 3.50
+Subject: [rocko/master][PATCH] gdbc6x: gcc7 related fixes got accepted upstream, remove
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,135 +64,365 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2018 14:17:01 -0000
+X-List-Received-Date: Tue, 21 Aug 2018 21:28:49 -0000
 Content-Type: text/plain
 
-Add AM65XX platform support
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
-Change from previous version of patch
-- Update commit id with fixes
-- Update firmware link names in filesystem
-NOTE: This patch depends on gcc-linaro-baremetal-aarch64-native patch to be checked in
----
----
- recipes-ti/ipc/ti-ipc-common.inc   |  3 ++-
- recipes-ti/ipc/ti-ipc-examples.inc |  2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc     | 16 ++++++++++++----
- recipes-ti/ipc/ti-ipc-rtos_git.bb  |  8 ++++++++
- recipes-ti/ipc/ti-ipc.inc          |  6 +++---
- 5 files changed, 26 insertions(+), 9 deletions(-)
+ recipes-devtools/gdbc6x/gdbc6x.inc            |  4 +-
+ ...-fall-through-comment-to-work-with-g.patch | 35 ----------------
+ ...llthrough-comment-to-recognize-by-gc.patch | 26 ------------
+ ...x-implicit-fallthrough-error-in-gcc7.patch | 26 ------------
+ ...x-implicit-fallthrough-error-in-gcc7.patch | 25 ------------
+ ....c-fix-format-overflow-error-in-gcc7.patch | 26 ------------
+ ...ents-for-implicit-fallthrough-error-.patch | 38 ------------------
+ ...cit-fallthrough-and-format-overflow-.patch | 40 -------------------
+ ...format-truncation-and-implicit-fallt.patch | 35 ----------------
+ recipes-devtools/gdbc6x/gdbc6x_git.bb         |  8 ----
+ 10 files changed, 2 insertions(+), 261 deletions(-)
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-coffgen.c-adjust-fall-through-comment-to-work-with-g.patch
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-elf.c-correct-fallthrough-comment-to-recognize-by-gc.patch
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-elf32-tic6x.c-fix-implicit-fallthrough-error-in-gcc7.patch
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-elflink.c-fix-implicit-fallthrough-error-in-gcc7.patch
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-ihex.c-fix-format-overflow-error-in-gcc7.patch
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-reloc.c-add-comments-for-implicit-fallthrough-error-.patch
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-srec.c-fix-implicit-fallthrough-and-format-overflow-.patch
+ delete mode 100644 recipes-devtools/gdbc6x/gdbc6x/0001-tic6x-dis.c-fix-format-truncation-and-implicit-fallt.patch
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 7f93842..6aea8e6 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.47.02.00"
-+PV = "3.50.01.00"
- INC_PR = "r0"
+diff --git a/recipes-devtools/gdbc6x/gdbc6x.inc b/recipes-devtools/gdbc6x/gdbc6x.inc
+index df08ee5c..9fc2f1dd 100644
+--- a/recipes-devtools/gdbc6x/gdbc6x.inc
++++ b/recipes-devtools/gdbc6x/gdbc6x.inc
+@@ -1,8 +1,8 @@
+ # This corresponds to version 1.1.0
+-SRCREV = "df0b8f6f4e9ba5b9c94ea8c17c6dfeae37c1c9d1"
++SRCREV = "d136542bbcad9489b8391550d8a8bee41076f080"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -13,6 +13,7 @@ PLATFORM_k2g = "66AK2G"
- PLATFORM_omapl138 = "OMAPL138"
- PLATFORM_c667x-evm = "C6678"
- PLATFORM_c665x-evm = "C6678"
-+PLATFORM_am65xx-evm = "AM65XX"
+ PV = "1.1.0"
+-INC_PR = "r3"
++INC_PR = "r4"
  
- ALT_PLATFORM_k2hk = "TCI6636"
- ALT_PLATFORM_am57xx-evm = "AM572X AM571X"
-diff --git a/recipes-ti/ipc/ti-ipc-examples.inc b/recipes-ti/ipc/ti-ipc-examples.inc
-index cd2240c..022b13f 100644
---- a/recipes-ti/ipc/ti-ipc-examples.inc
-+++ b/recipes-ti/ipc/ti-ipc-examples.inc
-@@ -3,7 +3,7 @@ require ti-ipc-common.inc
- require ti-ipc-rtos.inc
+ SRC_URI = "git://git.ti.com/sdo-emu/gdbc6x.git;protocol=git;branch=${BRANCH}"
  
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://${S_ipc-examples}/src/makefile;beginline=1;endline=30;md5=fb83580b16bce88e8ed568a6005c8f02"
-+LIC_FILES_CHKSUM = "file://${S_ipc-examples}/src/makefile;beginline=1;endline=30;md5=a52324bd5033bb49ea07bade1244ac9a"
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-coffgen.c-adjust-fall-through-comment-to-work-with-g.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-coffgen.c-adjust-fall-through-comment-to-work-with-g.patch
+deleted file mode 100644
+index eb72db9e..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-coffgen.c-adjust-fall-through-comment-to-work-with-g.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 043a40fdc396118e099180b0ce0578ead24cf312 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 19:12:28 -0500
+-Subject: [PATCH] coffgen.c: adjust fall through comment to work with gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/bfd/coffgen.c | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/gdbc6x/bfd/coffgen.c b/gdbc6x/bfd/coffgen.c
+-index 07a527d..665df95 100644
+---- a/gdbc6x/bfd/coffgen.c
+-+++ b/gdbc6x/bfd/coffgen.c
+-@@ -2116,7 +2116,7 @@ coff_print_symbol (bfd *abfd,
+- 				 auxp->u.auxent.x_scn.x_comdat);
+- 		      break;
+- 		    }
+--		    /* Otherwise fall through.  */
+-+		    /* Else fall through.  */
+- 		case C_EXT:
+- 		case C_AIX_WEAKEXT:
+- 		  if (ISFCN (combined->u.syment.n_type))
+-@@ -2136,7 +2136,7 @@ coff_print_symbol (bfd *abfd,
+- 			       llnos, next);
+- 		      break;
+- 		    }
+--		  /* Otherwise fall through.  */
+-+		  /* Else fall through.  */
+- 		default:
+- 		  fprintf (file, "AUX lnno %d size 0x%x tagndx %ld",
+- 			   auxp->u.auxent.x_sym.x_misc.x_lnsz.x_lnno,
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-elf.c-correct-fallthrough-comment-to-recognize-by-gc.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-elf.c-correct-fallthrough-comment-to-recognize-by-gc.patch
+deleted file mode 100644
+index de5f1ca1..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-elf.c-correct-fallthrough-comment-to-recognize-by-gc.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From b77515953ba72728a10a46381d8b1dd73b89825d Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 20:19:51 -0500
+-Subject: [PATCH] elf.c: correct fallthrough comment to recognize by gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/bfd/elf.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/gdbc6x/bfd/elf.c b/gdbc6x/bfd/elf.c
+-index ede51e9..80bac08 100644
+---- a/gdbc6x/bfd/elf.c
+-+++ b/gdbc6x/bfd/elf.c
+-@@ -1595,7 +1595,7 @@ bfd_section_from_shdr (bfd *abfd, unsigned int shindex)
+- 	      if (hdr->sh_link == (SHN_LORESERVE & 0xffff) /* SHN_BEFORE */
+- 		  || hdr->sh_link == ((SHN_LORESERVE + 1) & 0xffff) /* SHN_AFTER */)
+- 		break;
+--	      /* Otherwise fall through.  */
+-+	      /* Else fall through.  */
+- 	    default:
+- 	      return FALSE;
+- 	    }
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-elf32-tic6x.c-fix-implicit-fallthrough-error-in-gcc7.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-elf32-tic6x.c-fix-implicit-fallthrough-error-in-gcc7.patch
+deleted file mode 100644
+index 5591f83a..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-elf32-tic6x.c-fix-implicit-fallthrough-error-in-gcc7.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From fed1d4701b8442c613e7ebc0bb94b251844d3b1c Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 20:16:20 -0500
+-Subject: [PATCH] elf32-tic6x.c: fix implicit fallthrough error in gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/bfd/elf32-tic6x.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/gdbc6x/bfd/elf32-tic6x.c b/gdbc6x/bfd/elf32-tic6x.c
+-index fe82c8f..b046566 100644
+---- a/gdbc6x/bfd/elf32-tic6x.c
+-+++ b/gdbc6x/bfd/elf32-tic6x.c
+-@@ -2365,7 +2365,7 @@ elf32_tic6x_relocate_section (bfd *output_bfd,
+- 		  goto done_reloc;
+- 		}
+- 	    }
+--
+-+	    /* FALLTHRU */
+- 	case R_C6000_PCR_S12:
+- 	case R_C6000_PCR_S10:
+- 	case R_C6000_PCR_S7:
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-elflink.c-fix-implicit-fallthrough-error-in-gcc7.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-elflink.c-fix-implicit-fallthrough-error-in-gcc7.patch
+deleted file mode 100644
+index 875d7866..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-elflink.c-fix-implicit-fallthrough-error-in-gcc7.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 1df6aeea82957cab8094043e458cd1ca0741eaef Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 20:25:40 -0500
+-Subject: [PATCH] elflink.c: fix implicit fallthrough error in gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/bfd/elflink.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/gdbc6x/bfd/elflink.c b/gdbc6x/bfd/elflink.c
+-index 7dcafd6..e173399 100644
+---- a/gdbc6x/bfd/elflink.c
+-+++ b/gdbc6x/bfd/elflink.c
+-@@ -7698,6 +7698,7 @@ eval_symbol (bfd_vma *result,
+- 
+-     case 'S':
+-       symbol_is_section = TRUE;
+-+      /* FALLTHRU */
+-     case 's':
+-       ++sym;
+-       symlen = strtol (sym, (char **) symp, 10);
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-ihex.c-fix-format-overflow-error-in-gcc7.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-ihex.c-fix-format-overflow-error-in-gcc7.patch
+deleted file mode 100644
+index 95b6e449..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-ihex.c-fix-format-overflow-error-in-gcc7.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From daca80121b92504c4a21e7420765a91d9625f2a4 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 20:11:45 -0500
+-Subject: [PATCH] ihex.c: fix format overflow error in gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/bfd/ihex.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/gdbc6x/bfd/ihex.c b/gdbc6x/bfd/ihex.c
+-index 09f756a..abe7398 100644
+---- a/gdbc6x/bfd/ihex.c
+-+++ b/gdbc6x/bfd/ihex.c
+-@@ -217,7 +217,7 @@ ihex_bad_byte (bfd *abfd, unsigned int lineno, int c, bfd_boolean error)
+-     }
+-   else
+-     {
+--      char buf[10];
+-+      char buf[13];
+- 
+-       if (! ISPRINT (c))
+- 	sprintf (buf, "\\%03o", (unsigned int) c);
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-reloc.c-add-comments-for-implicit-fallthrough-error-.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-reloc.c-add-comments-for-implicit-fallthrough-error-.patch
+deleted file mode 100644
+index a21d4212..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-reloc.c-add-comments-for-implicit-fallthrough-error-.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From e4708813cc0d08b75a8db49dcde0722f3d3add5c Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 19:30:22 -0500
+-Subject: [PATCH] reloc.c: add comments for implicit fallthrough error in gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/bfd/reloc.c | 5 +++++
+- 1 file changed, 5 insertions(+)
+-
+-diff --git a/gdbc6x/bfd/reloc.c b/gdbc6x/bfd/reloc.c
+-index 0d191f1..a6e0e12 100644
+---- a/gdbc6x/bfd/reloc.c
+-+++ b/gdbc6x/bfd/reloc.c
+-@@ -7254,15 +7254,20 @@ bfd_default_reloc_type_lookup (bfd *abfd, bfd_reloc_code_real_type code)
+- 	{
+- 	case 64:
+- 	  BFD_FAIL ();
+-+	  /* FALLTHRU */
+- 	case 32:
+- 	  return &bfd_howto_32;
+- 	case 16:
+- 	  BFD_FAIL ();
+-+	  /* FALLTHRU */
+- 	default:
+- 	  BFD_FAIL ();
+-+	  /* FALLTHRU */
+- 	}
+-+	/* FALLTHRU */
+-     default:
+-       BFD_FAIL ();
+-+      /* FALLTHRU */
+-     }
+-   return NULL;
+- }
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-srec.c-fix-implicit-fallthrough-and-format-overflow-.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-srec.c-fix-implicit-fallthrough-and-format-overflow-.patch
+deleted file mode 100644
+index 9ecb5a4a..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-srec.c-fix-implicit-fallthrough-and-format-overflow-.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From 36293cf669de453207ce38cd8ac296df4a34e6b5 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 19:40:41 -0500
+-Subject: [PATCH] srec.c: fix implicit fallthrough and format overflow errors
+- in gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/bfd/srec.c | 4 +++-
+- 1 file changed, 3 insertions(+), 1 deletion(-)
+-
+-diff --git a/gdbc6x/bfd/srec.c b/gdbc6x/bfd/srec.c
+-index ded9e76..076e152 100644
+---- a/gdbc6x/bfd/srec.c
+-+++ b/gdbc6x/bfd/srec.c
+-@@ -248,7 +248,7 @@ srec_bad_byte (bfd *abfd,
+-     }
+-   else
+-     {
+--      char buf[10];
+-+      char buf[13];
+- 
+-       if (! ISPRINT (c))
+- 	sprintf (buf, "\\%03o", (unsigned int) c);
+-@@ -961,10 +961,12 @@ srec_write_record (bfd *abfd,
+-     case 7:
+-       TOHEX (dst, (address >> 24), check_sum);
+-       dst += 2;
+-+      /* FALLTHRU */
+-     case 8:
+-     case 2:
+-       TOHEX (dst, (address >> 16), check_sum);
+-       dst += 2;
+-+      /* FALLTHRU */
+-     case 9:
+-     case 1:
+-     case 0:
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/0001-tic6x-dis.c-fix-format-truncation-and-implicit-fallt.patch b/recipes-devtools/gdbc6x/gdbc6x/0001-tic6x-dis.c-fix-format-truncation-and-implicit-fallt.patch
+deleted file mode 100644
+index e7c7d655..00000000
+--- a/recipes-devtools/gdbc6x/gdbc6x/0001-tic6x-dis.c-fix-format-truncation-and-implicit-fallt.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From b14e8814c467e8cea03725d2e7c937f352449ab6 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Fri, 10 Nov 2017 20:33:26 -0500
+-Subject: [PATCH] tic6x-dis.c: fix format truncation and implicit fallthrough
+- errors in gcc7
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- gdbc6x/opcodes/tic6x-dis.c | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/gdbc6x/opcodes/tic6x-dis.c b/gdbc6x/opcodes/tic6x-dis.c
+-index d926d09..69ba999 100644
+---- a/gdbc6x/opcodes/tic6x-dis.c
+-+++ b/gdbc6x/opcodes/tic6x-dis.c
+-@@ -691,7 +691,7 @@ print_insn_tic6x (bfd_vma addr, struct disassemble_info *info)
+- 	  if (opc->flags & TIC6X_FLAG_INSN16_BSIDE && func_unit_side == 1)
+- 	      func_unit_cross = 1;
+- 
+--	  snprintf (func_unit_buf, 7, " .%c%u%s%s", func_unit_char,
+-+	  snprintf (func_unit_buf, 8, " .%c%u%s%s", func_unit_char,
+- 		    func_unit_side, (func_unit_cross ? "X" : ""), data_str);
+- 	  func_unit = func_unit_buf;
+- 	}
+-@@ -1085,6 +1085,7 @@ print_insn_tic6x (bfd_vma addr, struct disassemble_info *info)
+- 		case tic6x_coding_mem_offset_minus_one_noscale:
+- 		case tic6x_coding_mem_offset_minus_one:
+- 		  fld_val += 1;
+-+		  /* FALLTHRU */
+- 		case tic6x_coding_mem_offset_noscale:
+- 		case tic6x_coding_mem_offset:
+- 		  mem_offset = fld_val;
+--- 
+-2.7.4
+-
+diff --git a/recipes-devtools/gdbc6x/gdbc6x_git.bb b/recipes-devtools/gdbc6x/gdbc6x_git.bb
+index be6f5066..8ab9cf90 100644
+--- a/recipes-devtools/gdbc6x/gdbc6x_git.bb
++++ b/recipes-devtools/gdbc6x/gdbc6x_git.bb
+@@ -11,14 +11,6 @@ PR = "${INC_PR}.1"
  
- INSANE_SKIP_${PN} += "arch"
- 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 868743e..13b1914 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,11 +24,11 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
- 
--# Corresponds to tag: 3.47.02.00
--SRCREV_ipc-metadata = "e8aff83111b8a0d64d7a77413b6f66d3106084d8"
-+# Corresponds to tag: 3.50.01.00
-+SRCREV_ipc-metadata = "19a8e70cf6ca4fe0984987e25d937c61a62c7658"
- 
--# Corresponds to tag: 3.47.02.00
--SRCREV_ipc-examples = "351e9a6d94c68f7ff64b2c002ee6750242ece6d9"
-+# Corresponds to tag: 3.50.01.00
-+SRCREV_ipc-examples = "1975687076426b587be8d2530df56c24425ca53a"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-@@ -50,6 +50,9 @@ DEPENDS_append_omapl138 = " ti-cgt6x-native \
- DEPENDS_append_c66x = " ti-cgt6x-native \
+ SRC_URI_append = " \
+     file://init \
+-    file://0001-coffgen.c-adjust-fall-through-comment-to-work-with-g.patch;striplevel=2 \
+-    file://0001-reloc.c-add-comments-for-implicit-fallthrough-error-.patch;striplevel=2 \
+-    file://0001-srec.c-fix-implicit-fallthrough-and-format-overflow-.patch;striplevel=2 \
+-    file://0001-ihex.c-fix-format-overflow-error-in-gcc7.patch;striplevel=2 \
+-    file://0001-elf32-tic6x.c-fix-implicit-fallthrough-error-in-gcc7.patch;striplevel=2 \
+-    file://0001-elf.c-correct-fallthrough-comment-to-recognize-by-gc.patch;striplevel=2 \
+-    file://0001-elflink.c-fix-implicit-fallthrough-error-in-gcc7.patch;striplevel=2 \
+-    file://0001-tic6x-dis.c-fix-format-truncation-and-implicit-fallt.patch;striplevel=2 \
  "
  
-+DEPENDS_append_am65xx-evm = " ti-cgt-arm-native \
-+                              gcc-linaro-baremetal-aarch64-native"
-+
- IPC_TARGETS = ""
- 
- IPC_TARGETS_omap-a15 = "\
-@@ -73,6 +76,11 @@ IPC_TARGETS_c66x = " \
-     ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
- "
- 
-+IPC_TARGETS_am65xx-evm = "\
-+    gnu.targets.arm.A53F="${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}" \
-+    ti.targets.arm.elf.R5F="${M4_TOOLCHAIN_INSTALL_DIR}" \
-+"
-+
- EXTRA_OEMAKE = "\
-     PLATFORM=${PLATFORM} \
-     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index b292d67..c374bb1 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -122,3 +122,11 @@ pkg_postinst_${PN}-fw_omapl138 () {
- pkg_postrm_${PN}-fw_omapl138 () {
-   update-alternatives --remove rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674
- }
-+
-+pkg_postinst_${PN}-fw_am65xx-evm () {
-+  update-alternatives --install /lib/firmware/am65x-mcu-r5f0-fw am65x-mcu-r5f0-fw ipc/ti_platforms_cortexR_AM65X/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
-+}
-+
-+pkg_postrm_${PN}-fw_am65xx-evm () {
-+  update-alternatives --remove am65x-mcu-r5f0-fw ipc/ti_platforms_cortexR_AM65X/messageq_single.xe674
-+}
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index e8038a5..c52c707 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "3.47"
-+TI_IPC_GIT_BRANCH = "3.50"
- 
--#Corresponds to 3.47.02.00
--TI_IPC_SRCREV = "24c36385d096613af123d1e1696fb2fee652ef36"
-+#Corresponds to 3.50.01.00A
-+TI_IPC_SRCREV = "4da40c42c21c73da090731f5e7999ae837b6b02a"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ S = "${WORKDIR}/git/gdbc6x"
 -- 
-1.9.1
+2.17.1
 
 
