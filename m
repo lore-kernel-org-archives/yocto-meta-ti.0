@@ -1,6 +1,6 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 391A3E0097C; Tue, 21 Aug 2018 17:46:28 -0700 (PDT)
+	id 1A60FE0097C; Tue, 21 Aug 2018 17:50:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	http://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,42 +16,46 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD63AE008D9
-	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 17:46:27 -0700 (PDT)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6420E0095C
+	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 17:50:01 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7M0kRWx018626
-	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 19:46:27 -0500
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7M0o1G4111570
+	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 19:50:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1534898787;
-	bh=JpBIENJu216WsgRHOKU1IpXXErh0ymQ1VDjT56y+HRo=;
-	h=From:To:CC:Subject:Date;
-	b=wivMI9pu8KzQ7eJpr2pabOeGABIvpTaeg2NZqCxxvnxcDO7LvtpwBhhOSWOjxynxb
-	4uv6lDRv0t5vhCmQGEAuuvFcgMQRJ2M9GpPVjCuH+ijioNrhomBBbNebRrd2iFUlWM
-	vTdhk7hdIs97fiBQ/BGpTyq4fjAgGSn5LHrNT3GE=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7M0kRrY026259
-	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 19:46:27 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1534899001;
+	bh=ktcrQVY+C9sJ35qbBgkoCz3SJ/tOlmRXsELNv8OBvOU=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=dlsnfWiZVq/rXK3F4R3Z1Rb3GHllXK578mDRuAWbDZsorVhU5NIvEH6MxPNDV/a6x
+	ow+aSioTyFqXbRtXoNiAtpXWd6KwelohGAsX6Yphj2O76uomQJyiyGOEmvJWgsFrtu
+	StwMyhpKaPzTbbkbx6ccGxDfrwon8eBCDfJZEZqA=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7M0o1vS030651
+	for <meta-ti@yoctoproject.org>; Tue, 21 Aug 2018 19:50:01 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 21 Aug 2018 19:46:26 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 21 Aug 2018 19:46:26 -0500
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7M0kQC4021464;
-	Tue, 21 Aug 2018 19:46:26 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>, <s-anna@ti.com>
-Date: Tue, 21 Aug 2018 20:46:25 -0400
-Message-ID: <1534898785-58591-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 21 Aug 2018 19:50:00 -0500
+Received: from DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895]) by
+	DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895%18]) with mapi id
+	15.01.1466.003; Tue, 21 Aug 2018 19:50:00 -0500
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Anna, Suman" <s-anna@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti][rocko][PATCH v4] ti-ipc: Update to new version 3.50
+Thread-Index: AQHUOaVYX1HRn9q6Ik6ZlApTBnOaNaTLLiGA///CFXA=
+Date: Wed, 22 Aug 2018 00:50:00 +0000
+Message-ID: <31651cdce5594467b59d8311b4a947d7@ti.com>
+References: <1534893540-56123-1-git-send-email-sam.nelson@ti.com>
+	<eb565605-0538-6124-df8b-5ee0579d2a75@ti.com>
+In-Reply-To: <eb565605-0538-6124-df8b-5ee0579d2a75@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.22.131.168]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko][PATCH v2] cmem: Update to new version 4.15.00.02
+Subject: Re: [rocko][PATCH v4] ti-ipc: Update to new version 3.50
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,44 +68,112 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 00:46:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 22 Aug 2018 00:50:03 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Has fix for mmap issues with latest kernel 4.14.x
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-
----
-Change from previous version of patch
-Squish missed patch
----
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
----
- recipes-bsp/cmem/cmem.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 695432a..a60ce52 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -3,11 +3,11 @@ HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=26be509e4bb413905bda8309e338e2b1"
- 
--BRANCH = "master"
--# This corresponds to version 4.15.00.01
--SRCREV = "000038a65af9428b559de5e00e4a7588892ad7b0"
-+BRANCH = "lu-next"
-+# This corresponds to version 4.15.00.02
-+SRCREV = "0f39ed469f7c327cb0b03139976b511c337c7f6a"
- 
--PV = "4.15.00.01+git${SRCPV}"
-+PV = "4.15.00.02+git${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
--- 
-1.9.1
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogQW5uYSwgU3VtYW4NCj4g
+U2VudDogVHVlc2RheSwgQXVndXN0IDIxLCAyMDE4IDc6MjkgUE0NCj4gVG86IE5lbHNvbiwgU2Ft
+OyBtZXRhLXRpQHlvY3RvcHJvamVjdC5vcmcNCj4gU3ViamVjdDogUmU6IFttZXRhLXRpXVtyb2Nr
+b11bUEFUQ0ggdjRdIHRpLWlwYzogVXBkYXRlIHRvIG5ldyB2ZXJzaW9uIDMuNTANCj4gDQo+IE9u
+IDA4LzIxLzIwMTggMDY6MTkgUE0sIFNhbSBOZWxzb24gd3JvdGU6DQo+ID4gQWRkIEFNNjVYWCBw
+bGF0Zm9ybSBzdXBwb3J0DQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBTYW0gTmVsc29uIDxzYW0u
+bmVsc29uQHRpLmNvbT4NCj4gPg0KPiA+IC0tLQ0KPiA+IENoYW5nZSBmcm9tIHByZXZpb3VzIHZl
+cnNpb24gb2YgcGF0Y2gNCj4gPiAtIFVwZGF0ZSBjb21taXQgaWQgYW5kIHRhZyAzLjUwLjAxLjAw
+QiB3aXRoIGZpeGVzDQo+ID4gTk9URTogVGhpcyBwYXRjaCBkZXBlbmRzIG9uIGdjYy1saW5hcm8t
+YmFyZW1ldGFsLWFhcmNoNjQtbmF0aXZlIHBhdGNoIHRvDQo+IGJlIGNoZWNrZWQgaW4NCj4gPiAt
+LS0NCj4gPiAtLS0NCj4gPiAgcmVjaXBlcy10aS9pcGMvdGktaXBjLWNvbW1vbi5pbmMgICB8ICAz
+ICsrLQ0KPiA+ICByZWNpcGVzLXRpL2lwYy90aS1pcGMtZXhhbXBsZXMuaW5jIHwgIDIgKy0NCj4g
+PiAgcmVjaXBlcy10aS9pcGMvdGktaXBjLXJ0b3MuaW5jICAgICB8IDE2ICsrKysrKysrKysrKy0t
+LS0NCj4gPiAgcmVjaXBlcy10aS9pcGMvdGktaXBjLXJ0b3NfZ2l0LmJiICB8ICA4ICsrKysrKysr
+DQo+ID4gIHJlY2lwZXMtdGkvaXBjL3RpLWlwYy5pbmMgICAgICAgICAgfCAgNiArKystLS0NCj4g
+PiAgNSBmaWxlcyBjaGFuZ2VkLCAyNiBpbnNlcnRpb25zKCspLCA5IGRlbGV0aW9ucygtKQ0KPiA+
+DQo+ID4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1jb21tb24uaW5jIGIvcmVj
+aXBlcy10aS9pcGMvdGktaXBjLQ0KPiBjb21tb24uaW5jDQo+ID4gaW5kZXggN2Y5Mzg0Mi4uNmFl
+YThlNiAxMDA2NDQNCj4gPiAtLS0gYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMtY29tbW9uLmluYw0K
+PiA+ICsrKyBiL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1jb21tb24uaW5jDQo+ID4gQEAgLTEsNCAr
+MSw0IEBADQo+ID4gLVBWID0gIjMuNDcuMDIuMDAiDQo+ID4gK1BWID0gIjMuNTAuMDEuMDAiDQo+
+ID4gIElOQ19QUiA9ICJyMCINCj4gPg0KPiA+ICBQQUNLQUdFX0FSQ0ggPSAiJHtNQUNISU5FX0FS
+Q0h9Ig0KPiA+IEBAIC0xMyw2ICsxMyw3IEBAIFBMQVRGT1JNX2syZyA9ICI2NkFLMkciDQo+ID4g
+IFBMQVRGT1JNX29tYXBsMTM4ID0gIk9NQVBMMTM4Ig0KPiA+ICBQTEFURk9STV9jNjY3eC1ldm0g
+PSAiQzY2NzgiDQo+ID4gIFBMQVRGT1JNX2M2NjV4LWV2bSA9ICJDNjY3OCINCj4gPiArUExBVEZP
+Uk1fYW02NXh4LWV2bSA9ICJBTTY1WFgiDQo+ID4NCj4gPiAgQUxUX1BMQVRGT1JNX2syaGsgPSAi
+VENJNjYzNiINCj4gPiAgQUxUX1BMQVRGT1JNX2FtNTd4eC1ldm0gPSAiQU01NzJYIEFNNTcxWCIN
+Cj4gPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy10aS9pcGMvdGktaXBjLWV4YW1wbGVzLmluYyBiL3Jl
+Y2lwZXMtdGkvaXBjL3RpLWlwYy0NCj4gZXhhbXBsZXMuaW5jDQo+ID4gaW5kZXggY2QyMjQwYy4u
+MDIyYjEzZiAxMDA2NDQNCj4gPiAtLS0gYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMtZXhhbXBsZXMu
+aW5jDQo+ID4gKysrIGIvcmVjaXBlcy10aS9pcGMvdGktaXBjLWV4YW1wbGVzLmluYw0KPiA+IEBA
+IC0zLDcgKzMsNyBAQCByZXF1aXJlIHRpLWlwYy1jb21tb24uaW5jDQo+ID4gIHJlcXVpcmUgdGkt
+aXBjLXJ0b3MuaW5jDQo+ID4NCj4gPiAgTElDRU5TRSA9ICJCU0QiDQo+ID4gLUxJQ19GSUxFU19D
+SEtTVU0gPSAiZmlsZTovLyR7U19pcGMtDQo+IGV4YW1wbGVzfS9zcmMvbWFrZWZpbGU7YmVnaW5s
+aW5lPTE7ZW5kbGluZT0zMDttZDU9ZmI4MzU4MGIxNmJjZTg4ZThlZA0KPiA1NjhhNjAwNWM4ZjAy
+Ig0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly8ke1NfaXBjLQ0KPiBleGFtcGxlc30v
+c3JjL21ha2VmaWxlO2JlZ2lubGluZT0xO2VuZGxpbmU9MzA7bWQ1PWE1MjMyNGJkNTAzM2JiNDll
+YTANCj4gN2JhZGUxMjQ0YWM5YSINCj4gPg0KPiA+ICBJTlNBTkVfU0tJUF8ke1BOfSArPSAiYXJj
+aCINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMtcnRvcy5pbmMg
+Yi9yZWNpcGVzLXRpL2lwYy90aS1pcGMtcnRvcy5pbmMNCj4gPiBpbmRleCA4Njg3NDNlLi4xM2Ix
+OTE0IDEwMDY0NA0KPiA+IC0tLSBhL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1ydG9zLmluYw0KPiA+
+ICsrKyBiL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1ydG9zLmluYw0KPiA+IEBAIC0yNCwxMSArMjQs
+MTEgQEAgcHJvdG9jb2w9JHtUSV9JUENfTUVUQURBVEFfR0lUX1BST1RPQ09MfTtcDQo+ID4gIGJy
+YW5jaD0ke1RJX0lQQ19NRVRBREFUQV9HSVRfQlJBTkNIfTtcDQo+ID4gIG5hbWU9JHtUSV9JUENf
+TUVUQURBVEFfTkFNRX0iDQo+ID4NCj4gPiAtIyBDb3JyZXNwb25kcyB0byB0YWc6IDMuNDcuMDIu
+MDANCj4gPiAtU1JDUkVWX2lwYy1tZXRhZGF0YSA9ICJlOGFmZjgzMTExYjhhMGQ2NGQ3YTc3NDEz
+YjZmNjZkMzEwNjA4NGQ4Ig0KPiA+ICsjIENvcnJlc3BvbmRzIHRvIHRhZzogMy41MC4wMS4wMA0K
+PiA+ICtTUkNSRVZfaXBjLW1ldGFkYXRhID0gIjE5YThlNzBjZjZjYTRmZTA5ODQ5ODdlMjVkOTM3
+YzYxYTYyYzc2NTgiDQo+ID4NCj4gPiAtIyBDb3JyZXNwb25kcyB0byB0YWc6IDMuNDcuMDIuMDAN
+Cj4gPiAtU1JDUkVWX2lwYy1leGFtcGxlcyA9ICIzNTFlOWE2ZDk0YzY4ZjdmZjY0YjJjMDAyZWU2
+NzUwMjQyZWNlNmQ5Ig0KPiA+ICsjIENvcnJlc3BvbmRzIHRvIHRhZzogMy41MC4wMS4wMA0KPiA+
+ICtTUkNSRVZfaXBjLWV4YW1wbGVzID0NCj4gIjE5NzU2ODcwNzY0MjZiNTg3YmU4ZDI1MzBkZjU2
+YzI0NDI1Y2E1M2EiDQo+ID4NCj4gPiAgU19pcGMtZXhhbXBsZXMgPSAiJHtXT1JLRElSfS9naXQv
+aXBjLWV4YW1wbGVzIg0KPiA+ICBTX2lwYy1tZXRhZGF0YSA9ICIke1dPUktESVJ9L2dpdC9pcGMt
+bWV0YWRhdGEiDQo+ID4gQEAgLTUwLDYgKzUwLDkgQEAgREVQRU5EU19hcHBlbmRfb21hcGwxMzgg
+PSAiIHRpLWNndDZ4LW5hdGl2ZSBcDQo+ID4gIERFUEVORFNfYXBwZW5kX2M2NnggPSAiIHRpLWNn
+dDZ4LW5hdGl2ZSBcDQo+ID4gICINCj4gPg0KPiA+ICtERVBFTkRTX2FwcGVuZF9hbTY1eHgtZXZt
+ID0gIiB0aS1jZ3QtYXJtLW5hdGl2ZSBcDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGdjYy1saW5hcm8tYmFyZW1ldGFsLWFhcmNoNjQtbmF0aXZlIg0KPiA+ICsNCj4gPiAgSVBD
+X1RBUkdFVFMgPSAiIg0KPiA+DQo+ID4gIElQQ19UQVJHRVRTX29tYXAtYTE1ID0gIlwNCj4gPiBA
+QCAtNzMsNiArNzYsMTEgQEAgSVBDX1RBUkdFVFNfYzY2eCA9ICIgXA0KPiA+DQo+IHRpLnRhcmdl
+dHMuZWxmLkM2Nl9iaWdfZW5kaWFuPSIke1NUQUdJTkdfRElSX05BVElWRX0vdXNyL3NoYXJlL3Rp
+L2NndC1jNngiDQo+IFwNCj4gPiAgIg0KPiA+DQo+ID4gK0lQQ19UQVJHRVRTX2FtNjV4eC1ldm0g
+PSAiXA0KPiA+ICsNCj4gZ251LnRhcmdldHMuYXJtLkE1M0Y9IiR7R0NDX0xJTkFST19CQVJFTUVU
+QUxfQUFSQ0g2NF9UT09MQ0hBSU59DQo+ICIgXA0KPiA+ICsgICAgdGkudGFyZ2V0cy5hcm0uZWxm
+LlI1Rj0iJHtNNF9UT09MQ0hBSU5fSU5TVEFMTF9ESVJ9IiBcDQo+ID4gKyINCj4gPiArDQo+ID4g
+IEVYVFJBX09FTUFLRSA9ICJcDQo+ID4gICAgICBQTEFURk9STT0ke1BMQVRGT1JNfSBcDQo+ID4g
+ICAgICBYRENfSU5TVEFMTF9ESVI9IiR7WERDX0lOU1RBTExfRElSfSIgXA0KPiA+IGRpZmYgLS1n
+aXQgYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMtcnRvc19naXQuYmIgYi9yZWNpcGVzLXRpL2lwYy90
+aS1pcGMtcnRvc19naXQuYmINCj4gPiBpbmRleCBiMjkyZDY3Li5jMzc0YmIxIDEwMDY0NA0KPiA+
+IC0tLSBhL3JlY2lwZXMtdGkvaXBjL3RpLWlwYy1ydG9zX2dpdC5iYg0KPiA+ICsrKyBiL3JlY2lw
+ZXMtdGkvaXBjL3RpLWlwYy1ydG9zX2dpdC5iYg0KPiA+IEBAIC0xMjIsMyArMTIyLDExIEBAIHBr
+Z19wb3N0aW5zdF8ke1BOfS1md19vbWFwbDEzOCAoKSB7DQo+ID4gIHBrZ19wb3N0cm1fJHtQTn0t
+Zndfb21hcGwxMzggKCkgew0KPiA+ICAgIHVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1yZW1vdmUgcnBy
+b2MtZHNwLWZ3DQo+IGlwYy90aV9wbGF0Zm9ybXNfZXZtT01BUEwxMzhfRFNQL21lc3NhZ2VxX3Np
+bmdsZS54ZTY3NA0KPiA+ICB9DQo+ID4gKw0KPiA+ICtwa2dfcG9zdGluc3RfJHtQTn0tZndfYW02
+NXh4LWV2bSAoKSB7DQo+ID4gKyAgdXBkYXRlLWFsdGVybmF0aXZlcyAtLWluc3RhbGwgL2xpYi9m
+aXJtd2FyZS9hbTY1eC1tY3UtcjVmMC1mdyBhbTY1eC0NCj4gbWN1LXI1ZjAtZncgaXBjL3RpX3Bs
+YXRmb3Jtc19jb3J0ZXhSX0FNNjVYL21lc3NhZ2VxX3NpbmdsZS54ZXI1Zg0KPiAke0FMVEVSTkFU
+SVZFX1BSSU9SSVRZfQ0KPiA+ICt9DQo+ID4gKw0KPiA+ICtwa2dfcG9zdHJtXyR7UE59LWZ3X2Ft
+NjV4eC1ldm0gKCkgew0KPiA+ICsgIHVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1yZW1vdmUgYW02NXgt
+bWN1LXI1ZjAtZncNCj4gaXBjL3RpX3BsYXRmb3Jtc19jb3J0ZXhSX0FNNjVYL21lc3NhZ2VxX3Np
+bmdsZS54ZTY3NA0KPiA+ICt9DQo+ID4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvaXBjL3RpLWlw
+Yy5pbmMgYi9yZWNpcGVzLXRpL2lwYy90aS1pcGMuaW5jDQo+ID4gaW5kZXggZTgwMzhhNS4uNDk0
+YzYwNSAxMDA2NDQNCj4gPiAtLS0gYS9yZWNpcGVzLXRpL2lwYy90aS1pcGMuaW5jDQo+ID4gKysr
+IGIvcmVjaXBlcy10aS9pcGMvdGktaXBjLmluYw0KPiA+IEBAIC02LDEwICs2LDEwIEBAIExJQ19G
+SUxFU19DSEtTVU0gPSAiZmlsZTovLyR7U30vaXBjLQ0KPiBsaW51eC5tYWs7YmVnaW5saW5lPTE7
+ZW5kbGluZT0zMDttZDU9N2IzMjdmOQ0KPiA+DQo+ID4gIFRJX0lQQ19HSVRfVVJJID0gImdpdDov
+L2dpdC50aS5jb20vaXBjL2lwY2Rldi5naXQiDQo+ID4gIFRJX0lQQ19HSVRfUFJPVE9DT0wgPSAi
+Z2l0Ig0KPiA+IC1USV9JUENfR0lUX0JSQU5DSCA9ICIzLjQ3Ig0KPiA+ICtUSV9JUENfR0lUX0JS
+QU5DSCA9ICIzLjUwIg0KPiA+DQo+ID4gLSNDb3JyZXNwb25kcyB0byAzLjQ3LjAyLjAwDQo+ID4g
+LVRJX0lQQ19TUkNSRVYgPSAiMjRjMzYzODVkMDk2NjEzYWYxMjNkMWUxNjk2ZmIyZmVlNjUyZWYz
+NiINCj4gPiArI0NvcnJlc3BvbmRzIHRvIDMuNTAuMDEuMDBCDQo+IA0KPiBUaGFua3MgZm9yIHRo
+ZSB1cGRhdGUuIFRoaXMgc2hvdWxkIGJlIGFuIHVzYWJsZSB2ZXJzaW9uIGFjcm9zcyBhbGwNCj4g
+cGxhdGZvcm1zLg0KPiANCj4gUGxlYXNlIHVwZGF0ZSB0aGUgdGFnIG9uIHRoZSB0cmVlIGFjY29y
+ZGluZ2x5LiBDdXJyZW50bHkgdGFnIGlzIG9uZQ0KPiBjb21taXQgYmVoaW5kIHcuci50IHRoZSBi
+ZWxvdyBjb21taXQuDQoNCkkganVzdCBsb29rZWQgYXQgZ2l0LnRpLmNvbSBhbmQgdGFnIGlzIGF0
+IHRoZSByaWdodCBjb21taXQuIENhbiB5b3UgcmVmcmVzaCBhbmQgY2hlY2s/DQoNCj4gDQo+IHJl
+Z2FyZHMNCj4gU3VtYW4NCj4gDQo+ID4gK1RJX0lQQ19TUkNSRVYgPSAiNzFkOWY0MGQzNWVhOTli
+YTkzODU2MzljNGZlZTI0ZTFlZGM0NmI0MiINCj4gPg0KPiA+ICBCUkFOQ0ggPSAiJHtUSV9JUENf
+R0lUX0JSQU5DSH0iDQo+ID4gIFNSQ19VUkkgPQ0KPiAiJHtUSV9JUENfR0lUX1VSSX07cHJvdG9j
+b2w9JHtUSV9JUENfR0lUX1BST1RPQ09MfTticmFuY2g9JHtCUkFOQ0h9O24NCj4gYW1lPWlwY2Rl
+diINCj4gPg0KDQo=
 
