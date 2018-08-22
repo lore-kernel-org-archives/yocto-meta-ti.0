@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1FF58E00474; Wed, 22 Aug 2018 15:49:30 -0700 (PDT)
+	id 180A7E00546; Wed, 22 Aug 2018 15:51:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	http://www.dnswl.org/, *      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,45 +16,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 30D6EE00474
-	for <meta-ti@yoctoproject.org>; Wed, 22 Aug 2018 15:49:28 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7MMnRZL037225
-	for <meta-ti@yoctoproject.org>; Wed, 22 Aug 2018 17:49:27 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B6F9E00474
+	for <meta-ti@yoctoproject.org>; Wed, 22 Aug 2018 15:51:08 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7MMp8c0099865
+	for <meta-ti@yoctoproject.org>; Wed, 22 Aug 2018 17:51:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1534978167;
-	bh=tiWqsfGne9/IXyiTgFgFD2WDX2KuxMddmPLKTCM1WyU=;
+	s=ti-com-17Q1; t=1534978268;
+	bh=c8zoVmi0PuSKkywd/qE1KqJGz7CNQtCGN1nJdek7JFc=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=NH48+of2PN8ap12AoxbnDaKJGCbF7QWFP0qJ0+lZTD+XSxPJ/TZ5EAFV2JZmzoX32
-	yuvwDur7ptJ1NNAtDDIfUQKF0mc9l3nR39W1BRTGrJtznB+9t9c5JVSs2UPq4yyGQ+
-	a0LZpdUfxQ2CyyW2kWonl/QxDK39lTKD6T3EldaA=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7MMnRIV025010
-	for <meta-ti@yoctoproject.org>; Wed, 22 Aug 2018 17:49:27 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	b=ww94JcdbD7DATVC5dHXdeoLeES4J9m8GprVFNptc03g5wG59jp3DyCiRlwX+4BX/o
+	5c3f4E2kNxwfSnpj7l8LS2GgMFU4MkbqRwhvwr5n2Lrkwveh1tDSUssN9BwiPKHSSb
+	wNuFzDqtGnPxUFhIezy6O7+0LuT74EGp9TfpcDF4=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7MMp8Xk018138
+	for <meta-ti@yoctoproject.org>; Wed, 22 Aug 2018 17:51:08 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Wed, 22 Aug 2018 17:49:27 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 22 Aug 2018 17:51:07 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE110.ent.ti.com
+	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Wed, 22 Aug 2018 17:49:27 -0500
+	Transport; Wed, 22 Aug 2018 17:51:07 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7MMnRMo000504;
-	Wed, 22 Aug 2018 17:49:27 -0500
-Date: Wed, 22 Aug 2018 18:48:31 -0400
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7MMp7Cn002789;
+	Wed, 22 Aug 2018 17:51:07 -0500
+Date: Wed, 22 Aug 2018 18:50:12 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20180822224831.GL29422@beryl>
-References: <1534974652-28676-1-git-send-email-sam.nelson@ti.com>
-	<1534974652-28676-3-git-send-email-sam.nelson@ti.com>
+Message-ID: <20180822225012.GM29422@beryl>
+References: <1534972730-13639-1-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1534974652-28676-3-git-send-email-sam.nelson@ti.com>
+In-Reply-To: <1534972730-13639-1-git-send-email-sam.nelson@ti.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [rocko][PATCH 3/4] osal: Update to new version 1.0.0.12
+Subject: Re: [rocko][PATCH] ti-pdk: Add tool chain dependencies for am65xx platform
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,66 +66,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 22:49:30 -0000
+X-List-Received-Date: Wed, 22 Aug 2018 22:51:09 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Wed, Aug 22, 2018 at 05:50:51PM -0400, Sam Nelson wrote:
-> Adds support for AM65XX platform
-> 
-> NOTE:
-> License checksum change is just due to addition of current year
-> 2018 to copyright
+On Wed, Aug 22, 2018 at 05:18:50PM -0400, Sam Nelson wrote:
+> Adds the dependency on toolchain needed for A53 and R5 cores
 > 
 > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 > ---
->  recipes-bsp/osal/osal-rtos_git.bb | 2 +-
->  recipes-bsp/osal/osal.inc         | 8 ++++----
->  2 files changed, 5 insertions(+), 5 deletions(-)
+>  classes/ti-pdk.bbclass | 4 ++++
+>  1 file changed, 4 insertions(+)
 > 
-> diff --git a/recipes-bsp/osal/osal-rtos_git.bb b/recipes-bsp/osal/osal-rtos_git.bb
-> index b150760..8ba7862 100644
-> --- a/recipes-bsp/osal/osal-rtos_git.bb
-> +++ b/recipes-bsp/osal/osal-rtos_git.bb
-> @@ -3,7 +3,7 @@ require recipes-bsp/osal/osal.inc
->  
->  PR = "${INC_PR}.0"
->  
-> -COMPATIBLE_MACHINE_append = "|c66x"
-> +COMPATIBLE_MACHINE_append = "|c66x|am65xx-evm"
+> diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+> index 7ad6205..f0d14a7 100644
+> --- a/classes/ti-pdk.bbclass
+> +++ b/classes/ti-pdk.bbclass
+> @@ -9,6 +9,8 @@ DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
+>  DEPENDS_remove_ti33x = "ti-cgt6x-native"
+>  DEPENDS_remove_ti43x = "ti-cgt6x-native"
+>  DEPENDS_append_omapl1 = " ti-cgt-arm-native"
+> +DEPENDS_remove_am65xx-evm = "gcc-arm-none-eabi-native ti-cgt6x-native"
 
-k3?
+Will gcc-arm-none-eabi-native recipe be removed?
 
 
->  S = "${WORKDIR}/${OSAL_GIT_DESTSUFFIX}"
+> +DEPENDS_append_am65xx-evm = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
 >  
-> diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
-> index 16cf1fa..f360244 100644
-> --- a/recipes-bsp/osal/osal.inc
-> +++ b/recipes-bsp/osal/osal.inc
-> @@ -1,5 +1,5 @@
->  LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=ae7b9f0410f26c80dcf790ef3f622fad"
-> +LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=6fbde6922f8bca1e6cd371d3c2faa4f9"
+>  S = "${WORKDIR}/git"
+>  B = "${WORKDIR}/build"
+> @@ -42,6 +44,8 @@ export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
+>  export TOOLCHAIN_PATH_Arm9 = "${M4_TOOLCHAIN_INSTALL_DIR}"
+>  export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+>  export CL_PRU_INSTALL_PATH = "${TI_CGT_PRU_INSTALL_DIR}"
+> +export TOOLCHAIN_PATH_GCC_ARCH64 = "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}"
+> +export TOOLCHAIN_PATH_R5 = "${M4_TOOLCHAIN_INSTALL_DIR}"
 >  
->  COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1"
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> @@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
->  OSAL_GIT_BRANCH = "master"
->  OSAL_GIT_DESTSUFFIX = "git/ti/osal"
->  
-> -# Below commit ID corresponding to "DEV.OSAL.01.00.00.11"
-> -OSAL_SRCREV = "6113a74a2aded1aa1c339708d39b2e47e74263e9"
-> +# Below commit ID corresponding to "DEV.OSAL.01.00.00.12"
-> +OSAL_SRCREV = "d93d8833e5e0bbd3e76f8618a4f717e3539a8d11"
->  
->  BRANCH = "${OSAL_GIT_BRANCH}"
->  SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
->  
->  SRCREV = "${OSAL_SRCREV}"
-> -PV = "01.00.00.11"
-> +PV = "01.00.00.12"
->  INC_PR = "r0"
+>  export ROOTDIR = "${B}"
+>  export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
 > -- 
 > 1.9.1
 > 
