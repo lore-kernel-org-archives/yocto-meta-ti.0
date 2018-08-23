@@ -1,59 +1,57 @@
-Return-Path: <denys@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 311E9E00718; Thu, 23 Aug 2018 10:38:16 -0700 (PDT)
+	id 15E84E00718; Thu, 23 Aug 2018 11:28:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	http://www.dnswl.org/, *      medium trust
+	*      [198.47.19.141 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F14CEE003C1
-	for <meta-ti@yoctoproject.org>; Thu, 23 Aug 2018 10:38:14 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7NHcEki100053;
-	Thu, 23 Aug 2018 12:38:14 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67142E003C1
+	for <meta-ti@yoctoproject.org>; Thu, 23 Aug 2018 11:28:11 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7NISAZM072675
+	for <meta-ti@yoctoproject.org>; Thu, 23 Aug 2018 13:28:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1535045894;
-	bh=X3ABmhHz44IUGfgxlfBsg9JJT72N0kPo8jJ/sY+hdjg=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=u2i0XcJ+SVDrl8NtPwXjkOnHoiYvLld88EVJMgNJSl33uuCblUWFUqMFWYMfo2U4P
-	hvLElM+3KnIqAuvS2wsG63x/TmpWLIH/rOkoNAOtXGUVuIske5oH3U1NC15N0quhkJ
-	a52zd+N5R5xZhIQ6z9ogGDRBuG3zHEHiBJvXObuE=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7NHcEW9005203;
-	Thu, 23 Aug 2018 12:38:14 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1535048890;
+	bh=UKchG4knGAOahIM0jDo3z0/X+DSVpmbQoHmwb7Q9V/s=;
+	h=From:To:CC:Subject:Date;
+	b=u3+aLQ8wTp92rjxUiSNqEYuZMB/SSHi2H93LTVEy75KV3GeqQTSRyZLhTgHoRyR8o
+	NsbAWZWSzq09vVTNC4b9owBmtva79RGslJiycpMO0SebkmJ+s58o7rpoFtStI28tK2
+	psAqMUdlNpRiS5hUR6LAYTVrFLdEmNV6VLz9hWsE=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7NISAUA001222
+	for <meta-ti@yoctoproject.org>; Thu, 23 Aug 2018 13:28:10 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Thu, 23 Aug 2018 12:38:13 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_0,
+	Thu, 23 Aug 2018 13:28:10 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE110.ent.ti.com
+	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Thu, 23 Aug 2018 12:38:13 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7NHcDrb024547;
-	Thu, 23 Aug 2018 12:38:13 -0500
-Date: Thu, 23 Aug 2018 13:37:19 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Leo Meza <leo.e.meza@gmail.com>
-Message-ID: <20180823173719.GV29422@beryl>
-References: <CADrbpyyMX+hnshPQN7yVbB1UBdopKiHFD-Nqh=MVqyVohgqYAA@mail.gmail.com>
+	Transport; Thu, 23 Aug 2018 13:28:10 -0500
+Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7NISAhg010387;
+	Thu, 23 Aug 2018 13:28:10 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 23 Aug 2018 14:28:09 -0400
+Message-ID: <1535048889-3938-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <CADrbpyyMX+hnshPQN7yVbB1UBdopKiHFD-Nqh=MVqyVohgqYAA@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Getting Started with meta-ti "rocko" and beaglebone black (BBB)
+Subject: [rocko][PATCH v4 4/4] sciclient: Add recipe for SCI client driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,45 +64,114 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2018 17:38:16 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Aug 2018 18:28:12 -0000
+Content-Type: text/plain
 
-Check if your rootfs contains zImage and DTBs in /boot as well as modules in 
-/lib/modules - I don't believe "minimal" image handles those automatically.
+Sci client provides API to communicate with the core running System
+firmware
 
-Alternatively, don't use "minimal" image, but rather "base" or a more 
-specialized image.
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 
+---
+Change from previous version of patch
+- Remove redundant description
+- remove redudant defines
+---
+---
+ recipes-bsp/sciclient/sciclient-rtos_git.bb | 83 +++++++++++++++++++++++++++++
+ 1 file changed, 83 insertions(+)
+ create mode 100644 recipes-bsp/sciclient/sciclient-rtos_git.bb
+
+diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+new file mode 100644
+index 0000000..e059f4b
+--- /dev/null
++++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+@@ -0,0 +1,83 @@
++SUMMARY = "TI RTOS low level driver for SCICLIENT"
++
++inherit ti-pdk
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://sciclient.h;beginline=1;endline=31;md5=7224b2eeca1444815f1737bfcdfa892a"
++
++COMPATIBLE_MACHINE = "k3"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SCICLIENT_GIT_URI = "git://git.ti.com/keystone-rtos/sciclient.git"
++SCICLIENT_GIT_PROTOCOL = "git"
++SCICLIENT_GIT_BRANCH = "master"
++
++# Below commit ID corresponds to "DEV.SCICLIENT.01.00.00.00"
++SCICLIENT_SRCREV = "4ac052a70764c5fcf9dd18d521fe3b631bfcd875"
++
++BRANCH = "${SCICLIENT_GIT_BRANCH}"
++SRC_URI = "${SCICLIENT_GIT_URI};protocol=${SCICLIENT_GIT_PROTOCOL};branch=${BRANCH}"
++
++SRCREV = "${SCICLIENT_SRCREV}"
++PV = "01.00.00.00"
++PR = "r0"
++
++DEPENDS_append = " osal-rtos common-csl-ip-rtos"
++
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
++
++SCICLIENT_PACKAGE_BASE   = "${S}/../sciclient_base"
++SCICLIENT_ROOTPATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/sciclient"
++
++export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
++export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages"
++
++#export PDK_SCICLIENT_ROOT_PATH ="${WORKDIR}/build"
++#export DEST_ROOT="${S}"
++
++LIMSOCS_am65xx-evm = "am65xx"
++LIMBOARDS_am65xx-evm = "am65xx_evm"
++BOARD_PACKAGE_am65xx-evm = "am65xx_evm"
++
++# HTML doc link params
++PDK_COMP_LINK_TEXT = "SCICLIENT"
++
++do_configure() {
++
++    rm -rf ${SCICLIENT_PACKAGE_BASE}
++    cd ${S}
++
++    # remove any previous package
++    rm -f ${SCICLIENT_PACKAGE_BASE}
++
++    # make the release package before building it
++    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${SCICLIENT_PACKAGE_BASE} PDK_SCICLIENT_COMP_PATH=${S}
++
++   # This is to ensure the make package completed successfully
++    cat  ${SCICLIENT_ROOTPATH}/makefile
++}
++
++do_compile() {
++
++    cd ${SCICLIENT_ROOTPATH}
++
++    # Clean
++    # make clean LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
++
++    # Build am65xx libraries
++    make lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
++
++    #archive
++    tar -cf sciclient.tar --exclude='*.tar' ./*
++}
++
++do_install() {
++    cd ${SCICLIENT_ROOTPATH}
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient
++    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient \;
++}
++
++FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
++
++INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
 -- 
-Denys
-
-
-On Wed, Aug 22, 2018 at 11:18:49AM -0700, Leo Meza wrote:
-> I'm learning yocto and was able to easily boot my BBB with a
-> core-image-minimal system using the meta-yocto-bsp layer. However, when I
-> removed that layer and tried with meta-ti, I just see this on the Putty
-> serial console, it repeats over an over:
-> 
-> U-Boot SPL 2018.01-g6d540394a4 (Aug 22 2018 - 16:33:01)
-> Trying to boot from MMC1
-> *** Warning - bad CRC, using default environment
-> 
-> I'm copying MLO, zImage, u-boot.img, and am335x-boneblack.dtb to the BOOT
-> (1st) partition of my uSD card. Then extracting
-> core-image-minimal-beaglebone.tar.xz -C to the ROOT (2nd) partition of my
-> uSD card. This works fine when using meta-yocto-bsp, but not with meta-ti.
-> So, if anyone can help me understand what the different steps are between
-> using the two different layers, I'd greatly appreciate it. Spent several
-> days trying to figure this out so far.
-> 
-> Thanks in advance,
-> Leo
-
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+1.9.1
 
 
