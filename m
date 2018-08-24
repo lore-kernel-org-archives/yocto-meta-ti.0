@@ -1,6 +1,6 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3D57DE00828; Fri, 24 Aug 2018 10:46:57 -0700 (PDT)
+	id 4627CE0074B; Fri, 24 Aug 2018 13:20:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,41 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C747FE0080F
-	for <meta-ti@yoctoproject.org>; Fri, 24 Aug 2018 10:46:55 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78853E0043F
+	for <meta-ti@yoctoproject.org>; Fri, 24 Aug 2018 13:20:31 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7OHkt47055601
-	for <meta-ti@yoctoproject.org>; Fri, 24 Aug 2018 12:46:55 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7OKKU5U081510
+	for <meta-ti@yoctoproject.org>; Fri, 24 Aug 2018 15:20:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1535132815;
-	bh=1HBnNI9X7/n/HtsCdjKBNdfgpVx/r1+gVoL8CzUdONU=;
-	h=From:To:CC:Subject:Date;
-	b=lyIwMhXdnrBivP/fEPmCjagrdJBVplEoaj3O0SUiJ9sj65ZKBUzm3M/FRzQsha0Uc
-	7+DomM9fqSPf+fv9SOH3d0h5XxK/JkXwFX2llgqg8EWpqv549JB/Si8AZPLGaz8yEu
-	M5l7gQsbOOwZW/GDZmoSfI25vfTXU89Qh9Ye1lh0=
+	s=ti-com-17Q1; t=1535142030;
+	bh=B8xbop1LnEWHzLJ22aCZkyWVu6xFkb3cVsZIopbG6/Y=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=LKepz1aSix6TajOz7vG1OlpqJbLylw57qGrA+JXi5sn5MsqFlpY3SS3V44hYIu+gQ
+	3yx2mq3TOT2c3Gid/zf/2WSEMrxB+FCn5zj9vaXgFU6uCNZcaz9IpNT/LRQBS0V6Fz
+	vYPFqlb7BzZbPLsilR4p7OiJYhwHoQdNkgaKUkog=
 Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7OHktQ8005094
-	for <meta-ti@yoctoproject.org>; Fri, 24 Aug 2018 12:46:55 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE113.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7OKKU61028591
+	for <meta-ti@yoctoproject.org>; Fri, 24 Aug 2018 15:20:30 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
 	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 24 Aug 2018 12:46:54 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 24 Aug 2018 15:20:30 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Fri, 24 Aug 2018 12:46:54 -0500
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7OHkss0020122;
-	Fri, 24 Aug 2018 12:46:54 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>, <s-anna@ti.com>
-Date: Fri, 24 Aug 2018 13:46:53 -0400
-Message-ID: <1535132813-25811-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+	Transport; Fri, 24 Aug 2018 15:20:30 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7OKKURd029729;
+	Fri, 24 Aug 2018 15:20:30 -0500
+Date: Fri, 24 Aug 2018 16:19:37 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Sam Nelson <sam.nelson@ti.com>
+Message-ID: <20180824201936.GB9228@beryl>
+References: <1535048889-3938-1-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
+In-Reply-To: <1535048889-3938-1-git-send-email-sam.nelson@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko][PATCH] ti-ipc: Update to new version 3.50.01.01
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [rocko][PATCH v4 4/4] sciclient: Add recipe for SCI client driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,99 +66,129 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2018 17:46:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 24 Aug 2018 20:20:32 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
--Updates to use sciclient for configuring interrupt routing in SOC
+On Thu, Aug 23, 2018 at 02:28:09PM -0400, Sam Nelson wrote:
+> Sci client provides API to communicate with the core running System
+> firmware
+> 
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> 
+> ---
+> Change from previous version of patch
+> - Remove redundant description
+> - remove redudant defines
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
----
- recipes-ti/ipc/ti-ipc-common.inc      |  2 +-
- recipes-ti/ipc/ti-ipc-examples_git.bb |  2 ++
- recipes-ti/ipc/ti-ipc-rtos.inc        | 12 ++++++++----
- recipes-ti/ipc/ti-ipc-rtos_git.bb     |  1 +
- recipes-ti/ipc/ti-ipc.inc             |  4 ++--
- 5 files changed, 14 insertions(+), 7 deletions(-)
+Sam,
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 6aea8e6..543990a 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.50.01.00"
-+PV = "3.50.01.01"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-ti/ipc/ti-ipc-examples_git.bb
-index c46e5c8..d8733ae 100644
---- a/recipes-ti/ipc/ti-ipc-examples_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
-@@ -3,6 +3,8 @@ require ti-ipc-examples.inc
- 
- DEPENDS = "ti-ipc ti-xdctools-native ti-sysbios ti-ipc-rtos zip-native"
- 
-+DEPENDS_append_am65xx-evm = " sciclient-rtos"
-+
- do_compile_append() {
- 
-   if [  "${PLATFORM}" != "UNKNOWN" ]; then
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 13b1914..4b2d7d7 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,11 +24,13 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
- 
--# Corresponds to tag: 3.50.01.00
--SRCREV_ipc-metadata = "19a8e70cf6ca4fe0984987e25d937c61a62c7658"
-+# Corresponds to tag: 3.50.01.01
-+TI_IPC_METADATA_SRCREV = "c749d4dd70cc259679dc862a164ad147d51381f6"
-+# Corresponds to tag: 3.50.01.01
-+TI_IPC_EXAMPLES_SRCREV = "71f6e59a6b2c7e20c2656e5000f318339ded2f3c"
- 
--# Corresponds to tag: 3.50.01.00
--SRCREV_ipc-examples = "1975687076426b587be8d2530df56c24425ca53a"
-+SRCREV_ipc-metadata = "${TI_IPC_METADATA_SRCREV}"
-+SRCREV_ipc-examples = "${TI_IPC_EXAMPLES_SRCREV}"
- 
- S_ipc-examples = "${WORKDIR}/git/ipc-examples"
- S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
-@@ -89,3 +91,5 @@ EXTRA_OEMAKE = "\
-     JOBS="--jobs=${BB_NUMBER_THREADS}" \
-     JAVA_TOOL_OPTIONS=-Xss2560k \
- "
-+EXTRA_OEMAKE_append_am65xx-evm = " PDK_INSTALL_DIR=${PDK_INSTALL_DIR}"
-+
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index c374bb1..ee7778a 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -3,6 +3,7 @@ require ti-ipc-common.inc
- require ti-ipc-rtos.inc
- 
- DEPENDS = "ti-xdctools-native ti-sysbios doxygen-native zip-native"
-+DEPENDS_append_am65xx-evm = " sciclient-rtos"
- 
- PACKAGES =+ "${PN}-fw"
- FILES_${PN}-fw = "${base_libdir}/firmware/*"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index b10e242..ca39292 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.50"
- 
--#Corresponds to 3.50.01.00C
--TI_IPC_SRCREV = "32294eb80e9889ba12d0c008b21acab4545713af"
-+#Corresponds to 3.50.01.01
-+TI_IPC_SRCREV = "771859b9687476c3ba1b5bf0d4afb3c97876137e"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
--- 
-1.9.1
+Can you please make these 2 changes as a separate patch? I wanted to start 
+testing all the other updates right away and didn't wait for your v4, but 
+instead went with v3, as the changes are rather cosmetical. Thanks.
 
+
+> ---
+> ---
+>  recipes-bsp/sciclient/sciclient-rtos_git.bb | 83 +++++++++++++++++++++++++++++
+>  1 file changed, 83 insertions(+)
+>  create mode 100644 recipes-bsp/sciclient/sciclient-rtos_git.bb
+> 
+> diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> new file mode 100644
+> index 0000000..e059f4b
+> --- /dev/null
+> +++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> @@ -0,0 +1,83 @@
+> +SUMMARY = "TI RTOS low level driver for SCICLIENT"
+> +
+> +inherit ti-pdk
+> +
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://sciclient.h;beginline=1;endline=31;md5=7224b2eeca1444815f1737bfcdfa892a"
+> +
+> +COMPATIBLE_MACHINE = "k3"
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +SCICLIENT_GIT_URI = "git://git.ti.com/keystone-rtos/sciclient.git"
+> +SCICLIENT_GIT_PROTOCOL = "git"
+> +SCICLIENT_GIT_BRANCH = "master"
+> +
+> +# Below commit ID corresponds to "DEV.SCICLIENT.01.00.00.00"
+> +SCICLIENT_SRCREV = "4ac052a70764c5fcf9dd18d521fe3b631bfcd875"
+> +
+> +BRANCH = "${SCICLIENT_GIT_BRANCH}"
+> +SRC_URI = "${SCICLIENT_GIT_URI};protocol=${SCICLIENT_GIT_PROTOCOL};branch=${BRANCH}"
+> +
+> +SRCREV = "${SCICLIENT_SRCREV}"
+> +PV = "01.00.00.00"
+> +PR = "r0"
+> +
+> +DEPENDS_append = " osal-rtos common-csl-ip-rtos"
+> +
+> +# Build with make instead of XDC
+> +TI_PDK_XDCMAKE = "0"
+> +
+> +SCICLIENT_PACKAGE_BASE   = "${S}/../sciclient_base"
+> +SCICLIENT_ROOTPATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/sciclient"
+> +
+> +export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+> +export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages"
+> +
+> +#export PDK_SCICLIENT_ROOT_PATH ="${WORKDIR}/build"
+> +#export DEST_ROOT="${S}"
+> +
+> +LIMSOCS_am65xx-evm = "am65xx"
+> +LIMBOARDS_am65xx-evm = "am65xx_evm"
+> +BOARD_PACKAGE_am65xx-evm = "am65xx_evm"
+> +
+> +# HTML doc link params
+> +PDK_COMP_LINK_TEXT = "SCICLIENT"
+> +
+> +do_configure() {
+> +
+> +    rm -rf ${SCICLIENT_PACKAGE_BASE}
+> +    cd ${S}
+> +
+> +    # remove any previous package
+> +    rm -f ${SCICLIENT_PACKAGE_BASE}
+> +
+> +    # make the release package before building it
+> +    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${SCICLIENT_PACKAGE_BASE} PDK_SCICLIENT_COMP_PATH=${S}
+> +
+> +   # This is to ensure the make package completed successfully
+> +    cat  ${SCICLIENT_ROOTPATH}/makefile
+> +}
+> +
+> +do_compile() {
+> +
+> +    cd ${SCICLIENT_ROOTPATH}
+> +
+> +    # Clean
+> +    # make clean LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
+> +
+> +    # Build am65xx libraries
+> +    make lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
+> +
+> +    #archive
+> +    tar -cf sciclient.tar --exclude='*.tar' ./*
+> +}
+> +
+> +do_install() {
+> +    cd ${SCICLIENT_ROOTPATH}
+> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient
+> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient \;
+> +}
+> +
+> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+> +
+> +INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
