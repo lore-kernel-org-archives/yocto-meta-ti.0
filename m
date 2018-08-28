@@ -1,59 +1,67 @@
-Return-Path: <denys@ti.com>
+Return-Path: <leo.e.meza@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 567AEE00519; Mon, 27 Aug 2018 13:35:52 -0700 (PDT)
+	id 7856BE00519; Tue, 28 Aug 2018 07:58:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (leo.e.meza[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.218.67 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86EA2E00519
-	for <meta-ti@yoctoproject.org>; Mon, 27 Aug 2018 13:35:51 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w7RKZoEg104689
-	for <meta-ti@yoctoproject.org>; Mon, 27 Aug 2018 15:35:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1535402150;
-	bh=jbu2WQI1bPGiatBUR6J0oKPsfQ9iDg1pGTx6ZI9uzzU=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=KHO90k+5Sl/98Lp2hGaRuHx0tvQXahUtEYcor2CTZjWtc6DhUH3pAMRSnIEog6po4
-	m6m6TE7UCoP4vm0pMDGkhkKXBxf8wK4ZWTUw6MqMoMzJ2ZNo/EiuAKdl3qpymLo/ek
-	Luz6WJbs9dP3Z7x0FwWldzCvAdFBykpPn4cMcJWU=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7RKZoph027820
-	for <meta-ti@yoctoproject.org>; Mon, 27 Aug 2018 15:35:50 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Mon, 27 Aug 2018 15:35:50 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Mon, 27 Aug 2018 15:35:50 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w7RKZo6d018143;
-	Mon, 27 Aug 2018 15:35:50 -0500
-Date: Mon, 27 Aug 2018 16:35:00 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Nick Saulnier <nsaulnier@ti.com>
-Message-ID: <20180827203500.GI21923@beryl>
-References: <1535339954-20697-1-git-send-email-nsaulnier@ti.com>
+Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
+	[209.85.218.67])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A7EFE003D9
+	for <meta-ti@yoctoproject.org>; Tue, 28 Aug 2018 07:58:18 -0700 (PDT)
+Received: by mail-oi0-f67.google.com with SMTP id l82-v6so3334524oih.11
+	for <meta-ti@yoctoproject.org>; Tue, 28 Aug 2018 07:58:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=4VNW24NZnEZc3r3Qr8wvL0aOPi8nJx3di5Yyfaeu4aE=;
+	b=USBi4mSoqv9VEifiuGM5/Iqv5vwHE8VieazvTvSktIO/t1nhgJQO9fc4L7b4ffRONp
+	9rZCnFJ0zAQfKsY+OgKWho4tc3Y2864hhZtYmAYQFy9iLZ9+H5lYVz7XwR8j/mG4lLIr
+	EAk5OdPbtMkTG2txrwXjLgIar7qSYGnx/PSNq9hhxCV/FXtidRFKCYKxEYBclC4gXiKj
+	/556hxvDSXkrKCYR0BLTFrIgEjtQ23Y4fQx7pABxiQy3w7ufvvSgAyUwZGO8LtAVvwyF
+	E6UAgCF6nHHPGZ2rWGgKdNxZrJXAiO09I7cGT+VtPGXrtbRXE8qUMdqc9argYaUaufvg
+	vpeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=4VNW24NZnEZc3r3Qr8wvL0aOPi8nJx3di5Yyfaeu4aE=;
+	b=QYtvqGQZf/hCrqT+1sRpYIjTaFW+rr58c83r17KdpG72fC4SHJXW/UlurUFq3qEmgd
+	NBUnvteggfkY5EL4+chqkQvGiGLQNAjwuVC0BsaS9Q6vARdU32X+iz+l92kDzoXLWk+2
+	c5y0gbsI642DkKuLawTDKspxz9zg7MFIO3fmwzCJSD8CP4QmTh6YFADfUstGd/loO3kR
+	xkeTpov5XxwvzlKSGlw6n2pdwbxTBAlGyMi6PsLlneXuzv9mkUj2Exx902Z/CjxPVkPg
+	ke0+Cst6t4/tNkxq5zshunAKcZO5HnhTi6dX7dKMgpoKsBAYZoS6xuZ1LSTC7b8vfNY0
+	gHWw==
+X-Gm-Message-State: APzg51CMKuTHJATEEk2qlrPeJ7OqW5ha0jpdr4+LdiWSHWJXju4MGbZC
+	KxvFuptnqXRizl+D9Qxu9z+VMwzCoSAjLgRjt10=
+X-Google-Smtp-Source: ANB0Vdbr9tLx3Q38533S6hGW0z0avSIXNagJ0jCovA1C6aEEIx7Td9eTziQ/2tsUB0I4octD0MKbrKfHheLtZsrXtsc=
+X-Received: by 2002:aca:6ac8:: with SMTP id
+	f191-v6mr1682929oic.223.1535468295777; 
+	Tue, 28 Aug 2018 07:58:15 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1535339954-20697-1-git-send-email-nsaulnier@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <CADrbpyyMX+hnshPQN7yVbB1UBdopKiHFD-Nqh=MVqyVohgqYAA@mail.gmail.com>
+	<2cf7ae74-ad2e-38b4-bb34-a2cf7c6a97d4@ti.com>
+In-Reply-To: <2cf7ae74-ad2e-38b4-bb34-a2cf7c6a97d4@ti.com>
+From: Leo Meza <leo.e.meza@gmail.com>
+Date: Tue, 28 Aug 2018 07:58:04 -0700
+Message-ID: <CADrbpyz6p13T4LeLWzipbm4iUK8cOR6BvyZfDV48CcgyeC6qdA@mail.gmail.com>
+To: wmills@ti.com
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v1] pru-icss_git.bb: add am65x examples, Lab_0, 5
+Subject: Re: Getting Started with meta-ti "rocko" and beaglebone black (BBB)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,70 +74,215 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 20:35:52 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Aug 2018 14:58:19 -0000
+Content-Type: multipart/alternative; boundary="00000000000055ed2f0574801281"
 
-| make[1]: Entering directory '/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/pru-icss/5.3.0-r1/git/labs'
-| make[1]: *** lab_5/solution/PRU_RPMsg_Echo_Interrupt1: No such file or directory.  Stop.
-| make[1]: Leaving directory '/OE/arago-rocko-next/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/pru-icss/5.3.0-r1/git/labs'
-| Makefile:16: recipe for target 'lab_5/solution/PRU_RPMsg_Echo_Interrupt1' failed
-| make: *** [lab_5/solution/PRU_RPMsg_Echo_Interrupt1] Error 2
+--00000000000055ed2f0574801281
+Content-Type: text/plain; charset="UTF-8"
 
+Thanks Bill/Denys,
 
-On Sun, Aug 26, 2018 at 10:19:14PM -0500, Nick Saulnier wrote:
-> This updates the commit ID of the PRU Software Support Package
-> which is pulled into the SDK. The updated PRU Software Support
-> Package includes:
-> 
-> added am65x resources:
-> PRU_Halt example
-> PRU_MAC_Multiply_Accum example
-> ICSSG header files
-> 
-> added Lab_0:
-> this provides a "Hello World" style beginning Linux example for
-> every TI processor with a supported PRU (am335x, am437x, am57x,
-> k2g, am65x).
-> 
-> expanded Lab_5:
-> expanded Lab 5 to provide a more advanced PRU Linux example for
-> every TI processor with a supported PRU (am335x, am437x, am57x,
-> k2g, am65x).
-> 
-> Kernel 4.14 new features:
-> updated resource table for all examples and labs to match the
-> new template introduced in kernel 4.14
-> 
-> Code cleanup/bug fixes:
-> update RPMsg examples to provide a more elegent way to provide
-> the max message length.
-> updated Linker Command files to better match TRM.
-> 
-> Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
-> ---
->  recipes-bsp/pru/pru-icss_git.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-> index e150076ec0a2..ff8f4a4ab321 100644
-> --- a/recipes-bsp/pru/pru-icss_git.bb
-> +++ b/recipes-bsp/pru/pru-icss_git.bb
-> @@ -8,10 +8,10 @@ inherit update-alternatives
->  
->  BRANCH = "master"
->  SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
-> -SRCREV = "1d9249c012005a669a6ffb2f76255d72ed5c0e4c"
-> +SRCREV = "78bef8fcc5204129a1da6ba015563c904478f568"
->  
-> -PV = "5.2.1"
-> -PR = "r2"
-> +PV = "5.3.0"
-> +PR = "r1"
->  
->  require recipes-ti/includes/ti-paths.inc
->  
-> -- 
-> 1.9.1
-> 
+I was getting errors when trying to build with am335x-evm machine, so I
+stayed with beaglebone machine since it at least let me complete a build.
+I'm still getting the repeating messages at the serial console, here are my
+steps, maybe I'm still doing something wrong.
+1. Poky is at rocko branch 2731fd3
+2. meta-ti is at rocko branch b38fd82
+3. Replaced meta-yocto-bsp with meta-ti in bblayers.conf
+4. Set MACHINE ?= "beaglebone" in local.conf
+5. Build with "bitbake core-image-minimal"
+6. sudo cp MLO $BOOT
+7. sudo cp u-boot.img $BOOT
+8. sudo tar -xf core-image-minimal-beaglebone.tar.xz -C $ROOT
+9. sudo cp zImage $ROOT/boot
+10. sudo cp am335x-boneblack.dtb $ROOT/boot
+11. sudo tar -xvzf modules-beaglebone.tgz -C $ROOT
+12. Did not use uEnv.txt and did not change environment variables
 
+Not sure if I did this part right because I don't know what is meant by
+"short form *.dtbs":
+"Put zImage and the short form *.dtbs in root partitions' /boot dir"
+
+Any further tips/pointers would be appreciated.
+
+Thanks in advance,
+Leo
+
+On Thu, Aug 23, 2018 at 6:42 PM William Mills <wmills@ti.com> wrote:
+
+> Leo,
+>
+> On 08/22/2018 02:18 PM, Leo Meza wrote:
+> > I'm learning yocto and was able to easily boot my BBB with a
+> > core-image-minimal system using the meta-yocto-bsp layer. However, when
+> > I removed that layer and tried with meta-ti, I just see this on the
+> > Putty serial console, it repeats over an over:
+> >
+> > U-Boot SPL 2018.01-g6d540394a4 (Aug 22 2018 - 16:33:01)
+> > Trying to boot from MMC1
+> > *** Warning - bad CRC, using default environment
+> >
+>
+> I was able to duplicate this result when using meta-ti to build the
+> "beaglebone" machine.
+>
+> TI builds and test the am335x-evm machine for all am335x based boards
+> inlcuding beaglebone.  If you switch to this machine you should have
+> better luck.
+>
+> Note that as Denys said elsewhere TI images and default u-boot variable
+> settings assume that the kernel is in the root partition not the boot
+> partition.  The _path_ in the root partition should be /boot/zImage
+>
+> The only thing you need in the boot partition is MLO and the u-boot.img.
+> If you want to override the u-boot settings you can have a uEnv.txt file
+> there.  Also if you save the environment from within u-boot it will end
+> up as a file in the boot partition named uboot.env
+>
+> I notice that the am335x-evm machine does not create a .wic image so you
+> will have to assemble the parts from the deploy dir.
+> Put MLO and u-boot.img in the boot partition
+> untar the rootfs tar ball to the root partition
+> Put zImage and the short form *.dtbs in root partitions' /boot dir
+> untar the modules tar ball in the root partition.
+>
+>
+> > I'm copying MLO, zImage, u-boot.img, and am335x-boneblack.dtb to the
+> > BOOT (1st) partition of my uSD card. Then extracting
+> > core-image-minimal-beaglebone.tar.xz -C to the ROOT (2nd) partition of
+> > my uSD card. This works fine when using meta-yocto-bsp, but not with
+> > meta-ti. So, if anyone can help me understand what the different steps
+> > are between using the two different layers, I'd greatly appreciate it.
+> > Spent several days trying to figure this out so far.
+> >
+> > Thanks in advance,
+> > Leo
+> >
+> >
+>
+> Denys,
+>
+> The beaglebone machine creates a much smaller MLO (~75K vs 109K) and
+> u-boot.img.
+> When you boot the image the SPL just spits out the message above over
+> and over.  It never gets to u-boot.
+>
+> To reproduce I started with a clean clone of poky
+> added a clean clone of meta-ti
+> checked out rocko for both
+> . oe-*
+> edit conf/bblayers to take out yocto-bsp (for safty sake)
+> added meta-ti
+> built core-image-minimal for beaglebone machine.
+>
+> Bill
+>
+
+--00000000000055ed2f0574801281
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Thanks Bill/Denys,<div><br></div><div>I was getting errors=
+ when trying to build with am335x-evm machine, so I stayed with beaglebone =
+machine since it at least let me complete a build. I&#39;m still getting th=
+e repeating messages at the serial console, here are my steps, maybe I&#39;=
+m still doing something wrong.</div><div>1. Poky is at rocko branch=C2=A027=
+31fd3</div><div>2. meta-ti is at rocko branch=C2=A0b38fd82</div><div>3. Rep=
+laced meta-yocto-bsp with meta-ti in bblayers.conf</div><div>4. Set=C2=A0MA=
+CHINE ?=3D &quot;beaglebone&quot; in local.conf</div><div>5. Build with &qu=
+ot;bitbake core-image-minimal&quot;</div><div>6. sudo cp MLO $BOOT</div><di=
+v>7. sudo cp u-boot.img $BOOT</div><div>8. sudo tar -xf=C2=A0core-image-min=
+imal-beaglebone.tar.xz -C $ROOT</div><div>9. sudo cp zImage $ROOT/boot</div=
+><div>10. sudo cp am335x-boneblack.dtb $ROOT/boot</div><div>11. sudo tar -x=
+vzf modules-beaglebone.tgz -C $ROOT</div><div>12. Did not use uEnv.txt and =
+did not change environment variables</div><div><br></div><div>Not sure if I=
+ did this part right because I don&#39;t know what is meant by &quot;short =
+form *.dtbs&quot;:</div><div>&quot;Put zImage and the short form *.dtbs in =
+root partitions&#39; /boot dir&quot;</div><div><br></div><div>Any further t=
+ips/pointers would be appreciated.</div><div><br></div><div>Thanks in advan=
+ce,</div><div>Leo</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
+">On Thu, Aug 23, 2018 at 6:42 PM William Mills &lt;<a href=3D"mailto:wmill=
+s@ti.com">wmills@ti.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
+quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
+ex">Leo,<br>
+<br>
+On 08/22/2018 02:18 PM, Leo Meza wrote:<br>
+&gt; I&#39;m learning yocto and was able to easily boot my BBB with a<br>
+&gt; core-image-minimal system using the meta-yocto-bsp layer. However, whe=
+n<br>
+&gt; I removed that layer and tried with meta-ti, I just see this on the<br=
+>
+&gt; Putty serial console, it repeats over an over:<br>
+&gt; <br>
+&gt; U-Boot SPL 2018.01-g6d540394a4 (Aug 22 2018 - 16:33:01)<br>
+&gt; Trying to boot from MMC1<br>
+&gt; *** Warning - bad CRC, using default environment<br>
+&gt; <br>
+<br>
+I was able to duplicate this result when using meta-ti to build the<br>
+&quot;beaglebone&quot; machine.<br>
+<br>
+TI builds and test the am335x-evm machine for all am335x based boards<br>
+inlcuding beaglebone.=C2=A0 If you switch to this machine you should have<b=
+r>
+better luck.<br>
+<br>
+Note that as Denys said elsewhere TI images and default u-boot variable<br>
+settings assume that the kernel is in the root partition not the boot<br>
+partition.=C2=A0 The _path_ in the root partition should be /boot/zImage<br=
+>
+<br>
+The only thing you need in the boot partition is MLO and the u-boot.img.<br=
+>
+If you want to override the u-boot settings you can have a uEnv.txt file<br=
+>
+there.=C2=A0 Also if you save the environment from within u-boot it will en=
+d<br>
+up as a file in the boot partition named uboot.env<br>
+<br>
+I notice that the am335x-evm machine does not create a .wic image so you<br=
+>
+will have to assemble the parts from the deploy dir.<br>
+Put MLO and u-boot.img in the boot partition<br>
+untar the rootfs tar ball to the root partition<br>
+Put zImage and the short form *.dtbs in root partitions&#39; /boot dir<br>
+untar the modules tar ball in the root partition.<br>
+<br>
+<br>
+&gt; I&#39;m copying MLO, zImage, u-boot.img, and am335x-boneblack.dtb to t=
+he<br>
+&gt; BOOT (1st) partition of my uSD card. Then extracting<br>
+&gt; core-image-minimal-beaglebone.tar.xz -C to the ROOT (2nd) partition of=
+<br>
+&gt; my uSD card. This works fine when using meta-yocto-bsp, but not with<b=
+r>
+&gt; meta-ti. So, if anyone can help me understand what the different steps=
+<br>
+&gt; are between using the two different layers, I&#39;d greatly appreciate=
+ it.<br>
+&gt; Spent several days trying to figure this out so far.<br>
+&gt; <br>
+&gt; Thanks in advance,<br>
+&gt; Leo<br>
+&gt; <br>
+&gt; <br>
+<br>
+Denys,<br>
+<br>
+The beaglebone machine creates a much smaller MLO (~75K vs 109K) and<br>
+u-boot.img.<br>
+When you boot the image the SPL just spits out the message above over<br>
+and over.=C2=A0 It never gets to u-boot.<br>
+<br>
+To reproduce I started with a clean clone of poky<br>
+added a clean clone of meta-ti<br>
+checked out rocko for both<br>
+. oe-*<br>
+edit conf/bblayers to take out yocto-bsp (for safty sake)<br>
+added meta-ti<br>
+built core-image-minimal for beaglebone machine.<br>
+<br>
+Bill<br>
+</blockquote></div>
+
+--00000000000055ed2f0574801281--
