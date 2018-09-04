@@ -1,11 +1,12 @@
 Return-Path: <xuj@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B9E5DE008FF; Tue,  4 Sep 2018 07:36:20 -0700 (PDT)
+	id 77F0EE00812; Tue,  4 Sep 2018 07:36:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED,T_FILL_THIS_FORM_SHORT
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	http://www.dnswl.org/, *      medium trust
 	*      [198.47.19.141 listed in list.dnswl.org]
@@ -16,42 +17,46 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
+	*      information
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 919F5E00718
-	for <meta-ti@yoctoproject.org>; Tue,  4 Sep 2018 07:36:19 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F2DFE00812
+	for <meta-ti@yoctoproject.org>; Tue,  4 Sep 2018 07:36:20 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w84EaINd050622
-	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:18 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w84EaKS0050632
+	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1536071778;
-	bh=UcDdxOa1GI7WSMx/kaukB34A/dAHrIwqINDluMwYJUI=;
-	h=From:To:CC:Subject:Date;
-	b=RCrSBhlZFKTSIRPLEF4ks+5vQSbh/c9VgI5YNgqS7v628J5RrNBoj6dApEwecnO3I
-	mHxfQkes4Vy72ZwIZlr0luOPkVjMo9rdpamJXrL4hafmt1shgj2nBAVnXpg1vU+eig
-	kLmZZRbCshNKWf8UaWmzeCv6DB9lrjcdwFCcFXcI=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaI9G024884
-	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:18 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1536071780;
+	bh=EDiLfO4N1ImABip7Q7FceJIwLK7pxydlO2ayE+kP4u4=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=In2j+xL+w6AHa+E66x79H60ppwdPcQRwjZkHHtLIFRXXFuYeV/Kij/umsdgFckQTv
+	xNj0wc9d0ARX0x1JbE0jdHd9hmDQmb3C/HP0XmToCX57PA4SGJVewjzTh6wHczI1gZ
+	10Isa/mlbDeUp/V1mf0qa7T7os40VA/m4CZhe/wM=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaKpv024916
+	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:20 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 4 Sep 2018 09:36:18 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 4 Sep 2018 09:36:19 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 4 Sep 2018 09:36:18 -0500
+	Transport; Tue, 4 Sep 2018 09:36:19 -0500
 Received: from UDA0869574.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaIRD019713;
-	Tue, 4 Sep 2018 09:36:18 -0500
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaIRE019713;
+	Tue, 4 Sep 2018 09:36:19 -0500
 From: Jianzhong Xu <xuj@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 4 Sep 2018 10:36:13 -0400
-Message-ID: <1536071775-11082-1-git-send-email-xuj@ti.com>
+Date: Tue, 4 Sep 2018 10:36:14 -0400
+Message-ID: <1536071775-11082-2-git-send-email-xuj@ti.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1536071775-11082-1-git-send-email-xuj@ti.com>
+References: <1536071775-11082-1-git-send-email-xuj@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 1/3] Added SWTOOLS which is needed to build processor libs (DSPLIB, MATHLIB, etc) from source.
+Subject: [PATCH 2/3] Added MATHLIB recipe to build MATHLIB from source.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,65 +69,181 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Sep 2018 14:36:20 -0000
+X-List-Received-Date: Tue, 04 Sep 2018 14:36:21 -0000
 Content-Type: text/plain
 
 Signed-off-by: Jianzhong Xu <xuj@ti.com>
 ---
- recipes-ti/swtools/swtools_git.bb | 45 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
- create mode 100644 recipes-ti/swtools/swtools_git.bb
+ recipes-ti/mathlib/mathlib-c66x.inc        | 29 -----------
+ recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb |  9 ----
+ recipes-ti/mathlib/mathlib-c66x_git.bb     |  6 +++
+ recipes-ti/mathlib/mathlib-c674x_git.bb    |  5 ++
+ recipes-ti/mathlib/mathlib.inc             | 80 ++++++++++++++++++++++++++++++
+ 5 files changed, 91 insertions(+), 38 deletions(-)
+ delete mode 100644 recipes-ti/mathlib/mathlib-c66x.inc
+ delete mode 100644 recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
+ create mode 100644 recipes-ti/mathlib/mathlib-c66x_git.bb
+ create mode 100644 recipes-ti/mathlib/mathlib-c674x_git.bb
+ create mode 100644 recipes-ti/mathlib/mathlib.inc
 
-diff --git a/recipes-ti/swtools/swtools_git.bb b/recipes-ti/swtools/swtools_git.bb
+diff --git a/recipes-ti/mathlib/mathlib-c66x.inc b/recipes-ti/mathlib/mathlib-c66x.inc
+deleted file mode 100644
+index 7951e6c..0000000
+--- a/recipes-ti/mathlib/mathlib-c66x.inc
++++ /dev/null
+@@ -1,29 +0,0 @@
+-DESCRIPTION = "MATHLIB contains optimized general-purpose signal-processing routines for TI DSPs"
+-HOMEPAGE = "http://www.ti.com/tool/mathlib"
+-SECTION = "devel"
+-LICENSE = "BSD-3-Clause"
+-
+-require ../includes/ti-paths.inc
+-require ../includes/ti-staging.inc
+-require ../includes/ti-unpack.inc
+-
+-COMPATIBLE_MACHINE = "omap-a15|keystone"
+-
+-SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/mathlib/${PV}/exports/${BINFILE};name=mathlib"
+-
+-S = "${WORKDIR}/mathlib-c66x-${PV}"
+-
+-BINFILE = "mathlib_c66x_${PV}_Linux.bin"
+-TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
+-TI_BIN_UNPK_CMDS = ""
+-
+-do_install() {
+-    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+-    install -d ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
+-    cp ${CP_ARGS} ${S}/* ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
+-}
+-
+-ALLOW_EMPTY_${PN} = "1"
+-FILES_${PN}-dev += "${MATHLIB_C66_INSTALL_DIR_RECIPE}"
+-
+-INSANE_SKIP_${PN}-dev = "arch"
+diff --git a/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb b/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
+deleted file mode 100644
+index 50746fb..0000000
+--- a/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require mathlib-c66x.inc
+-
+-PV = "3_1_1_0"
+-PR = "r1"
+-
+-LIC_FILES_CHKSUM = "file://packages/ti/mathlib/mathlib.h;beginline=9;endline=35;md5=954ed7074e987be574989f985f1897db"
+-
+-SRC_URI[mathlib.md5sum] = "f3c9ad06dfcea780b5362c57a4bc48b8"
+-SRC_URI[mathlib.sha256sum] = "85df897c94e8768e9a1f186c21702ed3887d39cda6dc67cb4580fa3f083e8925"
+diff --git a/recipes-ti/mathlib/mathlib-c66x_git.bb b/recipes-ti/mathlib/mathlib-c66x_git.bb
 new file mode 100644
-index 0000000..0d210cc
+index 0000000..28bf8c6
 --- /dev/null
-+++ b/recipes-ti/swtools/swtools_git.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "TI Software Tools"
-+HOMEPAGE = "https://git.ti.com/ep-processor-libraries/swtools"
-+SECTION = "devel"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://ti/mas/swtools/copyright.txt;md5=b1f52a1435051fdb18f8885b0384147d"
++++ b/recipes-ti/mathlib/mathlib-c66x_git.bb
+@@ -0,0 +1,6 @@
++MATHLIB_BUILD_TARGET = "c66x"
++MATHLIB_INSTALL_DIR_RECIPE = "${MATHLIB_C66_INSTALL_DIR_RECIPE}"
++MATHLIB_INSTALL_DIR = "${MATHLIB_C66_INSTALL_DIR}"
++
++include mathlib.inc
++
+diff --git a/recipes-ti/mathlib/mathlib-c674x_git.bb b/recipes-ti/mathlib/mathlib-c674x_git.bb
+new file mode 100644
+index 0000000..8c042bb
+--- /dev/null
++++ b/recipes-ti/mathlib/mathlib-c674x_git.bb
+@@ -0,0 +1,5 @@
++MATHLIB_BUILD_TARGET = "c674x"
++MATHLIB_INSTALL_DIR_RECIPE = "${MATHLIB_C674_INSTALL_DIR_RECIPE}"
++MATHLIB_INSTALL_DIR = "${MATHLIB_C674_INSTALL_DIR}"
++
++include mathlib.inc
+diff --git a/recipes-ti/mathlib/mathlib.inc b/recipes-ti/mathlib/mathlib.inc
+new file mode 100644
+index 0000000..9f9cdc5
+--- /dev/null
++++ b/recipes-ti/mathlib/mathlib.inc
+@@ -0,0 +1,80 @@
++SUMMARY = "MATHLIB contains optimized floating-point math functions for TI DSPs"
++HOMEPAGE = "http://git.ti.com/ep-processor-libraries/mathlib"
++LICENSE = "BSD-3-Clause"
 +
 +require ../includes/ti-paths.inc
 +
-+DEPENDS = "ti-cgt6x-native \
-+           ti-sysbios \ 
-+           ti-xdctools-native"
-+
-+PV = "5_0_8"
++PV = "3_1_2_2"
 +PR = "r0"
-+S = "${WORKDIR}/git"
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/ep-processor-libraries/swtools.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "881267836907de650edadc56b8e57ab45428021d"
 +
-+export C64PCODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C674CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C66CODEGENTOOL  = "${CGTOOLS_INSTALL_DIR}"
++COMPATIBLE_MACHINE = "am57xx-evm|keystone|c66x|omapl1"
++
++DEPENDS = "ti-cgt6x-native \
++           ti-xdctools-native \
++           ti-sysbios \ 
++           doxygen-native \ 
++           zip-native \ 
++           swtools "
++
++S = "${WORKDIR}/git"
++
++SRC_URI = "git://git.ti.com/ep-processor-libraries/mathlib.git;protocol=git;branch=master"
++SRCREV = "195355db20f53295cfeef0bcfba0a8d8fdb0a753"
++
++LIC_FILES_CHKSUM = "file://ti/mathlib/src/acosdp/acosdp.h;beginline=1;endline=35;md5=c133f7e139b46385906c861dd9552250"
++
++export MATHLIB_WORK_DIR="${S}"
++export CGTOOLS_INSTALL_DIR  = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
++export C64PCODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
++export C674CODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
++export C66CODEGENTOOL ="${CGTOOLS_INSTALL_DIR}"
++export SWTOOLS_PATH = "${SWTOOLS_INSTALL_DIR}/ti/mas/swtools"
++export XDCBUILDCFG="${SWTOOLS_PATH}/config.bld"
 +
 +PATH_append = ":${XDC_INSTALL_DIR}"
 +
-+XDCPATH .= "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
++XDCPATH.="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
++XDCPATH.="${SWTOOLS_INSTALL_DIR};${MATHLIB_WORK_DIR};"
 +
 +export XDCPATH
 +
++MATHLIB_PACKAGE_NAME = "mathlib_${MATHLIB_BUILD_TARGET}_${PV}"
++
 +do_compile() {
-+	cd ${S}/ti/mas/swtools
-+	xdc
++	cd ${MATHLIB_WORK_DIR}/ti/mathlib;	
++	xdc XDCARGS="${MATHLIB_BUILD_TARGET} bundle" XDCOPTIONS="-v"
 +}
 +
 +do_install() {
-+    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-+    install -d ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
++	install -d ${D}${MATHLIB_INSTALL_DIR_RECIPE}
++
++	find -name "${MATHLIB_PACKAGE_NAME}.zip" -exec unzip -o {} -d ${D}${MATHLIB_INSTALL_DIR_RECIPE} \;
++	mv ${D}${MATHLIB_INSTALL_DIR_RECIPE}/mathlib/* ${D}${MATHLIB_INSTALL_DIR_RECIPE}
++	mv ${D}${MATHLIB_INSTALL_DIR_RECIPE}/mathlib/.metadata ${D}${MATHLIB_INSTALL_DIR_RECIPE}
++	rm -r ${D}${MATHLIB_INSTALL_DIR_RECIPE}/mathlib
 +}
 +
-+FILES_${PN}-dev += "${SWTOOLS_INSTALL_DIR_RECIPE}"
 +
-+INSANE_SKIP_${PN}-dev = "arch staticdev"
++inherit deploy
++addtask deploy before do_build after do_install
++
++do_deploy() {
++	install -d ${DEPLOYDIR}
++	# zip up files in ${D}${MATHLIB_INSTALL_DIR_RECIPE}
++	# and place the zip file in ${DEPLOYDIR}
++	mkdir ./${MATHLIB_PACKAGE_NAME}
++	cp -r ${D}${MATHLIB_INSTALL_DIR_RECIPE}/* ./${MATHLIB_PACKAGE_NAME}
++	cp -r ${D}${MATHLIB_INSTALL_DIR_RECIPE}/.metadata ./${MATHLIB_PACKAGE_NAME}
++
++
++	zip -9 -y -r -q ${DEPLOYDIR}/${MATHLIB_PACKAGE_NAME}.zip ./${MATHLIB_PACKAGE_NAME}
++	rm -r ./${MATHLIB_PACKAGE_NAME}
++}
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
 +ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${MATHLIB_INSTALL_DIR_RECIPE}"
++
++INSANE_SKIP_${PN}-dev = "arch"
 +
 -- 
 1.9.1
