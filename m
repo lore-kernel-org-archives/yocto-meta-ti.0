@@ -1,6 +1,6 @@
 Return-Path: <xuj@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 77F0EE00812; Tue,  4 Sep 2018 07:36:21 -0700 (PDT)
+	id A3945E009CA; Tue,  4 Sep 2018 07:36:22 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -20,43 +20,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
 	*      information
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F2DFE00812
-	for <meta-ti@yoctoproject.org>; Tue,  4 Sep 2018 07:36:20 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 732D9E008E0
+	for <meta-ti@yoctoproject.org>; Tue,  4 Sep 2018 07:36:21 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w84EaKS0050632
-	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:20 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w84EaLg2050644
+	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1536071780;
-	bh=EDiLfO4N1ImABip7Q7FceJIwLK7pxydlO2ayE+kP4u4=;
+	s=ti-com-17Q1; t=1536071781;
+	bh=ErECa/2NExN684QlgvkbAeMjtFVGrb1n7ESh8JapYfQ=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=In2j+xL+w6AHa+E66x79H60ppwdPcQRwjZkHHtLIFRXXFuYeV/Kij/umsdgFckQTv
-	xNj0wc9d0ARX0x1JbE0jdHd9hmDQmb3C/HP0XmToCX57PA4SGJVewjzTh6wHczI1gZ
-	10Isa/mlbDeUp/V1mf0qa7T7os40VA/m4CZhe/wM=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaKpv024916
-	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:20 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	b=MQXo5wFVQccWhez7bKBYjTOJYUcGK5bsU3/BuZVY+kqQfv34LXg4mIDCdV5sGYVLU
+	iSDy4q4x/3wcLqVCiX8cY0t1yiyHcV2m2vkjVE9TF9YMzaqXuAWbuB3gqzU8TQXfSb
+	xdRzSXlVMPVZYphEaIZJ+ROo2wa6gdbMkgBbiw5g=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaLV4024925
+	for <meta-ti@yoctoproject.org>; Tue, 4 Sep 2018 09:36:21 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 4 Sep 2018 09:36:19 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 4 Sep 2018 09:36:20 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 4 Sep 2018 09:36:19 -0500
+	Transport; Tue, 4 Sep 2018 09:36:20 -0500
 Received: from UDA0869574.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaIRE019713;
-	Tue, 4 Sep 2018 09:36:19 -0500
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w84EaIRF019713;
+	Tue, 4 Sep 2018 09:36:20 -0500
 From: Jianzhong Xu <xuj@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 4 Sep 2018 10:36:14 -0400
-Message-ID: <1536071775-11082-2-git-send-email-xuj@ti.com>
+Date: Tue, 4 Sep 2018 10:36:15 -0400
+Message-ID: <1536071775-11082-3-git-send-email-xuj@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1536071775-11082-1-git-send-email-xuj@ti.com>
 References: <1536071775-11082-1-git-send-email-xuj@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/3] Added MATHLIB recipe to build MATHLIB from source.
+Subject: [PATCH 3/3] Added DSPLIB recipe to build DSPLIB from source.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,31 +69,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Sep 2018 14:36:21 -0000
+X-List-Received-Date: Tue, 04 Sep 2018 14:36:22 -0000
 Content-Type: text/plain
 
 Signed-off-by: Jianzhong Xu <xuj@ti.com>
 ---
- recipes-ti/mathlib/mathlib-c66x.inc        | 29 -----------
- recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb |  9 ----
- recipes-ti/mathlib/mathlib-c66x_git.bb     |  6 +++
- recipes-ti/mathlib/mathlib-c674x_git.bb    |  5 ++
- recipes-ti/mathlib/mathlib.inc             | 80 ++++++++++++++++++++++++++++++
- 5 files changed, 91 insertions(+), 38 deletions(-)
- delete mode 100644 recipes-ti/mathlib/mathlib-c66x.inc
- delete mode 100644 recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
- create mode 100644 recipes-ti/mathlib/mathlib-c66x_git.bb
- create mode 100644 recipes-ti/mathlib/mathlib-c674x_git.bb
- create mode 100644 recipes-ti/mathlib/mathlib.inc
+ recipes-ti/dsplib/dsplib-c64xp_git.bb    |  9 ++++
+ recipes-ti/dsplib/dsplib-c66x.inc        | 30 ------------
+ recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb |  9 ----
+ recipes-ti/dsplib/dsplib-c66x_git.bb     | 10 ++++
+ recipes-ti/dsplib/dsplib-c674x_git.bb    |  9 ++++
+ recipes-ti/dsplib/dsplib.inc             | 79 ++++++++++++++++++++++++++++++++
+ recipes-ti/includes/ti-paths.inc         |  8 +++-
+ 7 files changed, 114 insertions(+), 40 deletions(-)
+ create mode 100644 recipes-ti/dsplib/dsplib-c64xp_git.bb
+ delete mode 100644 recipes-ti/dsplib/dsplib-c66x.inc
+ delete mode 100644 recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
+ create mode 100644 recipes-ti/dsplib/dsplib-c66x_git.bb
+ create mode 100644 recipes-ti/dsplib/dsplib-c674x_git.bb
+ create mode 100644 recipes-ti/dsplib/dsplib.inc
 
-diff --git a/recipes-ti/mathlib/mathlib-c66x.inc b/recipes-ti/mathlib/mathlib-c66x.inc
+diff --git a/recipes-ti/dsplib/dsplib-c64xp_git.bb b/recipes-ti/dsplib/dsplib-c64xp_git.bb
+new file mode 100644
+index 0000000..1038d44
+--- /dev/null
++++ b/recipes-ti/dsplib/dsplib-c64xp_git.bb
+@@ -0,0 +1,9 @@
++MATHLIB_INSTALL_DIR = "${MATHLIB_C64P_INSTALL_DIR}/packages"
++DSPLIB_INSTALL_DIR_RECIPE = "${DSPLIB_C64P_INSTALL_DIR_RECIPE}"
++DSPLIB_INSTALL_DIR = "${DSPLIB_C64P_INSTALL_DIR}"
++DSPLIB_BUILD_TARGET = "c64Px"
++
++DEPENDS = ""
++
++include dsplib.inc
++
+diff --git a/recipes-ti/dsplib/dsplib-c66x.inc b/recipes-ti/dsplib/dsplib-c66x.inc
 deleted file mode 100644
-index 7951e6c..0000000
---- a/recipes-ti/mathlib/mathlib-c66x.inc
+index 7ff99c2..0000000
+--- a/recipes-ti/dsplib/dsplib-c66x.inc
 +++ /dev/null
-@@ -1,29 +0,0 @@
--DESCRIPTION = "MATHLIB contains optimized general-purpose signal-processing routines for TI DSPs"
--HOMEPAGE = "http://www.ti.com/tool/mathlib"
+@@ -1,30 +0,0 @@
+-DESCRIPTION = "DSPLIB contains optimized general-purpose signal-processing routines for TI DSPs"
+-HOMEPAGE = "http://www.ti.com/tool/sprc265"
 -SECTION = "devel"
 -LICENSE = "BSD-3-Clause"
 -
@@ -103,122 +121,132 @@ index 7951e6c..0000000
 -
 -COMPATIBLE_MACHINE = "omap-a15|keystone"
 -
--SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/mathlib/${PV}/exports/${BINFILE};name=mathlib"
+-SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/dsplib/${PV}/exports/${BINFILE};name=dsplib"
 -
--S = "${WORKDIR}/mathlib-c66x-${PV}"
--
--BINFILE = "mathlib_c66x_${PV}_Linux.bin"
+-BINFILE = "dsplib_c66x_${PV}_Linux.bin"
 -TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
 -TI_BIN_UNPK_CMDS = ""
 -
 -do_install() {
 -    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
--    install -d ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
--    cp ${CP_ARGS} ${S}/* ${D}${MATHLIB_C66_INSTALL_DIR_RECIPE}
+-    install -d ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
+-    cp ${CP_ARGS} ${S}/* ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
 -}
 -
 -ALLOW_EMPTY_${PN} = "1"
--FILES_${PN}-dev += "${MATHLIB_C66_INSTALL_DIR_RECIPE}"
+-FILES_${PN}-dev += "${DSPLIB_C66_INSTALL_DIR_RECIPE}"
 -
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 -INSANE_SKIP_${PN}-dev = "arch"
-diff --git a/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb b/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
+diff --git a/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb b/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
 deleted file mode 100644
-index 50746fb..0000000
---- a/recipes-ti/mathlib/mathlib-c66x_3.1.1.0.bb
+index f1273f3..0000000
+--- a/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
 +++ /dev/null
 @@ -1,9 +0,0 @@
--require mathlib-c66x.inc
+-require dsplib-c66x.inc
 -
--PV = "3_1_1_0"
+-PV = "3_4_0_0"
 -PR = "r1"
 -
--LIC_FILES_CHKSUM = "file://packages/ti/mathlib/mathlib.h;beginline=9;endline=35;md5=954ed7074e987be574989f985f1897db"
+-LIC_FILES_CHKSUM = "file://packages/ti/dsplib/dsplib.h;beginline=9;endline=35;md5=17733f9e1100f8a628512f47c4bf676a"
 -
--SRC_URI[mathlib.md5sum] = "f3c9ad06dfcea780b5362c57a4bc48b8"
--SRC_URI[mathlib.sha256sum] = "85df897c94e8768e9a1f186c21702ed3887d39cda6dc67cb4580fa3f083e8925"
-diff --git a/recipes-ti/mathlib/mathlib-c66x_git.bb b/recipes-ti/mathlib/mathlib-c66x_git.bb
+-SRC_URI[dsplib.md5sum] = "66785604729c153dcad5282097dee8bf"
+-SRC_URI[dsplib.sha256sum] = "e88909b6271ce6c4c62e2ab90181b7adb36c7f28f5c52836668eb35888785ce8"
+diff --git a/recipes-ti/dsplib/dsplib-c66x_git.bb b/recipes-ti/dsplib/dsplib-c66x_git.bb
 new file mode 100644
-index 0000000..28bf8c6
+index 0000000..cbc25d0
 --- /dev/null
-+++ b/recipes-ti/mathlib/mathlib-c66x_git.bb
-@@ -0,0 +1,6 @@
-+MATHLIB_BUILD_TARGET = "c66x"
-+MATHLIB_INSTALL_DIR_RECIPE = "${MATHLIB_C66_INSTALL_DIR_RECIPE}"
-+MATHLIB_INSTALL_DIR = "${MATHLIB_C66_INSTALL_DIR}"
++++ b/recipes-ti/dsplib/dsplib-c66x_git.bb
+@@ -0,0 +1,10 @@
++MATHLIB_INSTALL_DIR = "${MATHLIB_C66_INSTALL_DIR}/packages"
++DSPLIB_INSTALL_DIR_RECIPE = "${DSPLIB_C66_INSTALL_DIR_RECIPE}"
++DSPLIB_INSTALL_DIR = "${DSPLIB_C66_INSTALL_DIR}"
++DSPLIB_BUILD_TARGET = "c66x"
 +
-+include mathlib.inc
++DEPENDS = "mathlib-c66x"
 +
-diff --git a/recipes-ti/mathlib/mathlib-c674x_git.bb b/recipes-ti/mathlib/mathlib-c674x_git.bb
++include dsplib.inc
++
++
+diff --git a/recipes-ti/dsplib/dsplib-c674x_git.bb b/recipes-ti/dsplib/dsplib-c674x_git.bb
 new file mode 100644
-index 0000000..8c042bb
+index 0000000..07c6892
 --- /dev/null
-+++ b/recipes-ti/mathlib/mathlib-c674x_git.bb
-@@ -0,0 +1,5 @@
-+MATHLIB_BUILD_TARGET = "c674x"
-+MATHLIB_INSTALL_DIR_RECIPE = "${MATHLIB_C674_INSTALL_DIR_RECIPE}"
-+MATHLIB_INSTALL_DIR = "${MATHLIB_C674_INSTALL_DIR}"
++++ b/recipes-ti/dsplib/dsplib-c674x_git.bb
+@@ -0,0 +1,9 @@
++MATHLIB_INSTALL_DIR = "${MATHLIB_C674_INSTALL_DIR}/packages"
++DSPLIB_INSTALL_DIR_RECIPE = "${DSPLIB_C674_INSTALL_DIR_RECIPE}"
++DSPLIB_INSTALL_DIR = "${DSPLIB_C674_INSTALL_DIR}"
++DSPLIB_BUILD_TARGET = "c674x"
 +
-+include mathlib.inc
-diff --git a/recipes-ti/mathlib/mathlib.inc b/recipes-ti/mathlib/mathlib.inc
++DEPENDS = "mathlib-c674x"
++
++include dsplib.inc
++
+diff --git a/recipes-ti/dsplib/dsplib.inc b/recipes-ti/dsplib/dsplib.inc
 new file mode 100644
-index 0000000..9f9cdc5
+index 0000000..66fe0fb
 --- /dev/null
-+++ b/recipes-ti/mathlib/mathlib.inc
-@@ -0,0 +1,80 @@
-+SUMMARY = "MATHLIB contains optimized floating-point math functions for TI DSPs"
-+HOMEPAGE = "http://git.ti.com/ep-processor-libraries/mathlib"
++++ b/recipes-ti/dsplib/dsplib.inc
+@@ -0,0 +1,79 @@
++SUMMARY = "DSPLIB contains optimized signal processing functions for TI DSPs"
++HOMEPAGE = "http://git.ti.com/ep-processor-libraries/dsplib"
 +LICENSE = "BSD-3-Clause"
 +
 +require ../includes/ti-paths.inc
 +
-+PV = "3_1_2_2"
++PV = "3_4_0_1"
 +PR = "r0"
 +
 +COMPATIBLE_MACHINE = "am57xx-evm|keystone|c66x|omapl1"
 +
-+DEPENDS = "ti-cgt6x-native \
++DEPENDS += "ti-cgt6x-native \
 +           ti-xdctools-native \
-+           ti-sysbios \ 
++           ti-sysbios \
 +           doxygen-native \ 
 +           zip-native \ 
 +           swtools "
 +
 +S = "${WORKDIR}/git"
 +
-+SRC_URI = "git://git.ti.com/ep-processor-libraries/mathlib.git;protocol=git;branch=master"
-+SRCREV = "195355db20f53295cfeef0bcfba0a8d8fdb0a753"
++SRC_URI = "git://git.ti.com/ep-processor-libraries/dsplib.git;protocol=git;branch=master"
++SRCREV = "bf5a51cba462c5cb03ed20a6a1bb1bd16c0683e1"
 +
-+LIC_FILES_CHKSUM = "file://ti/mathlib/src/acosdp/acosdp.h;beginline=1;endline=35;md5=c133f7e139b46385906c861dd9552250"
++LIC_FILES_CHKSUM = "file://ti/dsplib/src/common/c66/lnk.cmd;beginline=1;endline=37;md5=0f0c9c4d51d8af75419781591ace190b"
 +
-+export MATHLIB_WORK_DIR="${S}"
++export DSPLIB_WORK_DIR="${S}"
 +export CGTOOLS_INSTALL_DIR  = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 +export C64PCODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
 +export C674CODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
 +export C66CODEGENTOOL ="${CGTOOLS_INSTALL_DIR}"
 +export SWTOOLS_PATH = "${SWTOOLS_INSTALL_DIR}/ti/mas/swtools"
 +export XDCBUILDCFG="${SWTOOLS_PATH}/config.bld"
++export INCDIR="${MATHLIB_INSTALL_DIR}/"
 +
 +PATH_append = ":${XDC_INSTALL_DIR}"
 +
 +XDCPATH.="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
-+XDCPATH.="${SWTOOLS_INSTALL_DIR};${MATHLIB_WORK_DIR};"
++XDCPATH.="${SWTOOLS_INSTALL_DIR};${MATHLIB_INSTALL_DIR};${DSPLIB_WORK_DIR};"
 +
 +export XDCPATH
 +
-+MATHLIB_PACKAGE_NAME = "mathlib_${MATHLIB_BUILD_TARGET}_${PV}"
++DSPLIB_PACKAGE_NAME = "dsplib_${DSPLIB_BUILD_TARGET}_${PV}"
 +
 +do_compile() {
-+	cd ${MATHLIB_WORK_DIR}/ti/mathlib;	
-+	xdc XDCARGS="${MATHLIB_BUILD_TARGET} bundle" XDCOPTIONS="-v"
++	cd ${DSPLIB_WORK_DIR}/ti/dsplib;
++	xdc XDCARGS="${DSPLIB_BUILD_TARGET} bundle" XDCOPTIONS="-v"
 +}
 +
 +do_install() {
-+	install -d ${D}${MATHLIB_INSTALL_DIR_RECIPE}
++	install -d ${D}${DSPLIB_INSTALL_DIR_RECIPE}
 +
-+	find -name "${MATHLIB_PACKAGE_NAME}.zip" -exec unzip -o {} -d ${D}${MATHLIB_INSTALL_DIR_RECIPE} \;
-+	mv ${D}${MATHLIB_INSTALL_DIR_RECIPE}/mathlib/* ${D}${MATHLIB_INSTALL_DIR_RECIPE}
-+	mv ${D}${MATHLIB_INSTALL_DIR_RECIPE}/mathlib/.metadata ${D}${MATHLIB_INSTALL_DIR_RECIPE}
-+	rm -r ${D}${MATHLIB_INSTALL_DIR_RECIPE}/mathlib
++	find -name "${DSPLIB_PACKAGE_NAME}.zip" -exec unzip -o {} -d ${D}${DSPLIB_INSTALL_DIR_RECIPE} \;
++	mv ${D}${DSPLIB_INSTALL_DIR_RECIPE}/dsplib/* ${D}${DSPLIB_INSTALL_DIR_RECIPE}
++	mv ${D}${DSPLIB_INSTALL_DIR_RECIPE}/dsplib/.metadata ${D}${DSPLIB_INSTALL_DIR_RECIPE}
++	rm -r ${D}${DSPLIB_INSTALL_DIR_RECIPE}/dsplib
 +}
 +
 +
@@ -227,24 +255,64 @@ index 0000000..9f9cdc5
 +
 +do_deploy() {
 +	install -d ${DEPLOYDIR}
-+	# zip up files in ${D}${MATHLIB_INSTALL_DIR_RECIPE}
++	# zip up files in ${D}${DSPLIB_INSTALL_DIR_RECIPE}
 +	# and place the zip file in ${DEPLOYDIR}
-+	mkdir ./${MATHLIB_PACKAGE_NAME}
-+	cp -r ${D}${MATHLIB_INSTALL_DIR_RECIPE}/* ./${MATHLIB_PACKAGE_NAME}
-+	cp -r ${D}${MATHLIB_INSTALL_DIR_RECIPE}/.metadata ./${MATHLIB_PACKAGE_NAME}
-+
-+
-+	zip -9 -y -r -q ${DEPLOYDIR}/${MATHLIB_PACKAGE_NAME}.zip ./${MATHLIB_PACKAGE_NAME}
-+	rm -r ./${MATHLIB_PACKAGE_NAME}
++	mkdir ./${DSPLIB_PACKAGE_NAME}
++	cp -r ${D}${DSPLIB_INSTALL_DIR_RECIPE}/* ./${DSPLIB_PACKAGE_NAME}
++	cp -r ${D}${DSPLIB_INSTALL_DIR_RECIPE}/.metadata ./${DSPLIB_PACKAGE_NAME}
++	zip -9 -y -r -q ${DEPLOYDIR}/${DSPLIB_PACKAGE_NAME}.zip ./${DSPLIB_PACKAGE_NAME}
++	rm -r ./${DSPLIB_PACKAGE_NAME}
 +}
 +
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
 +ALLOW_EMPTY_${PN} = "1"
-+FILES_${PN}-dev += "${MATHLIB_INSTALL_DIR_RECIPE}"
++FILES_${PN}-dev += "${DSPLIB_INSTALL_DIR_RECIPE}"
 +
 +INSANE_SKIP_${PN}-dev = "arch"
 +
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 4f99d5e..cfd10b4 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -17,6 +17,7 @@ export DMAI_INSTALL_DIR_RECIPE       = "${installdir}/ti-dmai-tree"
+ export DSP_BENCHMARK_INSTALL_DIR_RECIPE = "${installdir}/ti-dsp-benchmark-tree"
+ export DSPLIB_C64P_INSTALL_DIR_RECIPE = "${installdir}/ti-dsplib-c64p-tree"
+ export DSPLIB_C674_INSTALL_DIR_RECIPE = "${installdir}/ti-dsplib-c674x-tree"
++export DSPLIB_C66_INSTALL_DIR_RECIPE  = "${installdir}/ti-dsplib-c66x-tree"
+ export DSPLIB_INSTALL_DIR_RECIPE     = "${installdir}/ti-dsplib-tree"
+ export DVSDK_DEMOS_INSTALL_DIR_RECIPE= "${installdir}/ti-dvsdk-demos-tree"
+ export DVTB_INSTALL_DIR_RECIPE       = "${installdir}/ti-dvtb-tree"
+@@ -39,6 +40,7 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export RTFS_INSTALL_DIR_RECIPE       = "${installdir}/ti-rtfs-tree"
+ export SYSBIOS_INSTALL_DIR_RECIPE    = "${installdir}/ti-sysbios-tree"
+ export SYSLINK_INSTALL_DIR_RECIPE    = "${installdir}/ti-syslink-tree"
++export SWTOOLS_INSTALL_DIR_RECIPE    = "${installdir}/ti-swtools-tree"
+ export UIA_INSTALL_DIR_RECIPE        = "${installdir}/ti-uia-tree"
+ export VICPLIB_INSTALL_DIR_RECIPE    = "${installdir}/ti-vicplib-tree"
+ export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
+@@ -48,8 +50,8 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
+ export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
+ export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
+-export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
+ export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
++export MATHLIB_C674INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c674x-tree"
+ export IMGLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-imglib-c66x-tree"
+ export VLIB_C66_INSTALL_DIR_RECIPE        = "${installdir}/ti-vlib-c66x-tree"
+ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+@@ -95,7 +97,11 @@ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}
+ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
+ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
++export SWTOOLS_INSTALL_DIR         = "${STAGING_DIR_TARGET}${SWTOOLS_INSTALL_DIR_RECIPE}"
++export DSPLIB_C64P_INSTALL_DIR     = "${STAGING_DIR_TARGET}${DSPLIB_C64P_INSTALL_DIR_RECIPE}"
++export DSPLIB_C674_INSTALL_DIR     = "${STAGING_DIR_TARGET}${DSPLIB_C674_INSTALL_DIR_RECIPE}"
+ export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
++export MATHLIB_C674INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C674_INSTALL_DIR_RECIPE}"
+ export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
+ export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
+ export VLIB_C66_INSTALL_DIR        = "${STAGING_DIR_TARGET}${VLIB_C66_INSTALL_DIR_RECIPE}"
 -- 
 1.9.1
 
