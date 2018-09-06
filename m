@@ -1,6 +1,6 @@
 Return-Path: <xuj@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E8AD6E0093B; Thu,  6 Sep 2018 09:32:22 -0700 (PDT)
+	id 13DCEE0093B; Thu,  6 Sep 2018 10:46:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	http://www.dnswl.org/, *      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -19,42 +19,42 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
 	*      information
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6115E0090C
-	for <meta-ti@yoctoproject.org>; Thu,  6 Sep 2018 09:32:21 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w86GWLSj042441
-	for <meta-ti@yoctoproject.org>; Thu, 6 Sep 2018 11:32:21 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCE44E0090C
+	for <meta-ti@yoctoproject.org>; Thu,  6 Sep 2018 10:46:31 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id w86HkV8v117837
+	for <meta-ti@yoctoproject.org>; Thu, 6 Sep 2018 12:46:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1536251541;
-	bh=V2zqj0za+JZViddepL9dvTeSYc9b+8E04KzkEt3Cjq4=;
+	s=ti-com-17Q1; t=1536255991;
+	bh=P/JsLsyWrYMpA7/+FXwg1ytoyanYEHO6NOcwlNYl8fI=;
 	h=From:To:CC:Subject:Date;
-	b=w3DiYBWx7EuimpjkJ22ZNGUUXjWNITc0C711QGB88UWwTD6ULgjvcXoFE4eAYZI9v
-	k4bvU8HFnM4BeiL9r1qidgI/O3MDvHKUI7a5z+m0KNAkX7ymSgMJAmqhAOCa38jbPn
-	heiJnRmIH4A33uxbPJ3pFUcvD2qMAPbZGT/TNKpo=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w86GWLOE018185
-	for <meta-ti@yoctoproject.org>; Thu, 6 Sep 2018 11:32:21 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	b=u5MkM3gievLoHhtIpBteOf+u98qrJ2qXgD8ZIXNaHb1gxa6CFZmewTw41VicJ595b
+	XnVgrf9z49MISjPp0W19xGS/Zaq9mlpK0sTS+7tNOpVT0p5Yc23CYpt7CLMBU78jO5
+	Nz06c6FPlC0OzHI2KC2qDH+f2fMpl6KG/Mg9ZbZU=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w86HkV4p027836
+	for <meta-ti@yoctoproject.org>; Thu, 6 Sep 2018 12:46:31 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Thu, 6 Sep 2018 11:32:20 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_0,
+	Thu, 6 Sep 2018 12:46:31 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Thu, 6 Sep 2018 11:32:21 -0500
+	Transport; Thu, 6 Sep 2018 12:46:31 -0500
 Received: from UDA0869574.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w86GWKic009193;
-	Thu, 6 Sep 2018 11:32:20 -0500
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w86HkUOk031792;
+	Thu, 6 Sep 2018 12:46:30 -0500
 From: Jianzhong Xu <xuj@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Sep 2018 12:32:17 -0400
-Message-ID: <1536251537-13950-1-git-send-email-xuj@ti.com>
+Date: Thu, 6 Sep 2018 13:46:23 -0400
+Message-ID: <1536255983-16162-1-git-send-email-xuj@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] Added DSPLIB recipe to build DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB and DSPLIB.
+Subject: [PATCH 3/3 v2] Added DSPLIB recipe to build DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB and DSPLIB.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,10 +67,14 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 16:32:23 -0000
+X-List-Received-Date: Thu, 06 Sep 2018 17:46:33 -0000
 Content-Type: text/plain
 
 Signed-off-by: Jianzhong Xu <xuj@ti.com>
+---
+Change from previous version of patch
+Corrected typo: MATHLIB_C674INSTALL_XXX should have been MATHLIB_C674_INSTALL_XXX
+---
 ---
  recipes-ti/dsplib/dsplib-c64xp_git.bb    |  9 ++++
  recipes-ti/dsplib/dsplib-c66x.inc        | 30 ------------
