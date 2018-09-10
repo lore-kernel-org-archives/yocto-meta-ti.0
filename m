@@ -1,60 +1,57 @@
-Return-Path: <nsaulnier@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5D09CE00A73; Mon, 10 Sep 2018 13:41:31 -0700 (PDT)
+	id 2BB23E00A73; Mon, 10 Sep 2018 14:10:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	http://www.dnswl.org/, *      medium trust
+	*      [198.47.19.141 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C81AAE00994
-	for <meta-ti@yoctoproject.org>; Mon, 10 Sep 2018 13:41:30 -0700 (PDT)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 642D9E00994
+	for <meta-ti@yoctoproject.org>; Mon, 10 Sep 2018 14:10:55 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8AKfUqh128527
-	for <meta-ti@yoctoproject.org>; Mon, 10 Sep 2018 15:41:30 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8ALAsF6126768
+	for <meta-ti@yoctoproject.org>; Mon, 10 Sep 2018 16:10:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1536612090;
-	bh=bQzSGA7kwbY6MgIIuslzo0u6EbanotpMtSox3cfUm34=;
+	s=ti-com-17Q1; t=1536613854;
+	bh=Tz0aJK4WbZctMoiAwwATZz+M5lTJvA2+NOoLiZwQ/xI=;
 	h=From:To:CC:Subject:Date;
-	b=Q4jIg5NFX+DsPtnBVZXWl+0Moa0igSGNDaBfOx1Ep/xObkwgyhmF/1z9sRjUPviCJ
-	8/ACvPRdi36ZgTVs+88l/2zLnD9TYmsi7Og0PH4nvajtgaSc3hqbX6ftSTGNFESfO3
-	L5poQWcOwU98lHmscP6XgWOJ4h2cg2bOVVmigSw0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8AKfUl7015793
-	for <meta-ti@yoctoproject.org>; Mon, 10 Sep 2018 15:41:30 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	b=xzRU/N6fmirspR8yDOXVLO9Hd2JIYrNUEK0Njlfa0qbngdXaes3ieBqGfbiLFE+qu
+	FA4VC74YQ4hlAb1rPmzdS3z3OBT7X/K2gHYBDbqqY6HGiiBhW/IcidmIxtfRmpqDcI
+	NTLc0V7EdiaH0hUFQnzw9iaNHW+x9OmJX35F5bpU=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8ALAsai002350
+	for <meta-ti@yoctoproject.org>; Mon, 10 Sep 2018 16:10:54 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Mon, 10 Sep 2018 15:41:30 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE106.ent.ti.com
-	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_0,
+	Mon, 10 Sep 2018 16:10:54 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Mon, 10 Sep 2018 15:41:29 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8AKfTw4028504;
-	Mon, 10 Sep 2018 15:41:30 -0500
-Received: from localhost (uda0226750.dhcp.ti.com [128.247.59.152])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	w8AKfTx08358; Mon, 10 Sep 2018 15:41:29 -0500 (CDT)
-From: Nick Saulnier <nsaulnier@ti.com>
+	Transport; Mon, 10 Sep 2018 16:10:54 -0500
+Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8ALAsFP024083;
+	Mon, 10 Sep 2018 16:10:54 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 10 Sep 2018 15:41:26 -0500
-Message-ID: <1536612086-3384-1-git-send-email-nsaulnier@ti.com>
+Date: Mon, 10 Sep 2018 17:10:53 -0400
+Message-ID: <1536613853-20701-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH v1] pru-icss_git.bb: rename PRU_ADC to PRU_ADC_onChip
+Subject: [rocko-next][PATCH v2] ti-ipc: Add systemd startup script
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,35 +64,96 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2018 20:41:31 -0000
+X-List-Received-Date: Mon, 10 Sep 2018 21:10:57 -0000
 Content-Type: text/plain
 
-TI design TIDA-01555 is added to Processor Linux SDK 5.1 as pru-adc-1.0.
-Rename the PRU SW Support Package example PRU_ADC to PRU_ADC_onChip to prevent
-confusion in the future.
+With systemd enabled, it is better to add the proper systemd
+script instead of legacy init.d script.
 
-Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+
 ---
- recipes-bsp/pru/pru-icss_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Changes from previous version of patch
+Remove PIDFile entries
+---
+---
+ recipes-ti/ipc/ti-ipc/tiipclad-daemon.service |  9 +++++++++
+ recipes-ti/ipc/ti-ipc_git.bb                  | 21 +++++++++++++++++----
+ 2 files changed, 26 insertions(+), 4 deletions(-)
+ create mode 100644 recipes-ti/ipc/ti-ipc/tiipclad-daemon.service
 
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-index 37d6ca97962a..51519b31f079 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -8,10 +8,10 @@ inherit update-alternatives
+diff --git a/recipes-ti/ipc/ti-ipc/tiipclad-daemon.service b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.service
+new file mode 100644
+index 0000000..ea26845
+--- /dev/null
++++ b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.service
+@@ -0,0 +1,9 @@
++[Unit]
++Description=TI IPC Daemon
++
++[Service]
++Type=forking
++ExecStart=/usr/bin/__LAD_DAEMON__ -g -l lad.txt
++
++[Install]
++WantedBy=basic.target
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index 23b8d94..8b3ac91 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -4,12 +4,13 @@ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+ require ti-ipc.inc
+ require ti-ipc-common.inc
  
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
--SRCREV = "80ea0921bd0024ee5943a19fae1a64ea51d72a50"
-+SRCREV = "f43599464e8e879a127241b68fbeb0abca4cbd9f"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
  
- PV = "5.3.0"
--PR = "r1"
-+PR = "r2"
+ DEPENDS += "virtual/kernel"
  
- require recipes-ti/includes/ti-paths.inc
+ SRC_URI += "file://tiipclad-daemon.sh \
+             file://omap_remoteproc.conf \
++            file://tiipclad-daemon.service \
+             file://0001-Add-kernel-build-dir.patch \
+            "
  
+@@ -23,11 +24,13 @@ DAEMON_k2g = "lad_66ak2g"
+ DAEMON_omapl138 = "lad_omapl138"
+ DAEMON_k3 = "lad_am65xx"
+ 
+-inherit autotools-brokensep pkgconfig update-rc.d
++inherit autotools-brokensep pkgconfig update-rc.d systemd
+ 
+ INITSCRIPT_NAME = "tiipclad-daemon.sh"
+ INITSCRIPT_PARAMS = "defaults 10"
+ 
++SYSTEMD_SERVICE_${PN} = "tiipclad-daemon.service"
++
+ EXTRA_OECONF += "PLATFORM=${PLATFORM} KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} KERNEL_BUILD_DIR=${STAGING_KERNEL_BUILDDIR}"
+ 
+ do_compile[depends] += "virtual/kernel:do_shared_workdir"
+@@ -40,10 +43,20 @@ do_configure() {
+ do_install_append() {
+     install -d ${D}${sysconfdir}/init.d/
+ 
+-    # Modify the tiipclad-daemon.sh script to point to the right
++    # Modify the startup scripts to point to the right
+     # lad daemon executable.
+     sed -i -e "s/__LAD_DAEMON__/${DAEMON}/" ${WORKDIR}/tiipclad-daemon.sh
+-    install -c -m 755 ${WORKDIR}/tiipclad-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++    sed -i -e "s/__LAD_DAEMON__/${DAEMON}/" ${WORKDIR}/tiipclad-daemon.service
++
++    systemd_enabled=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '1', '0', d)}
++    if [ ${systemd_enabled} -eq 1 ]
++    then
++        install -d ${D}${systemd_system_unitdir}
++        install -m 0644 ${WORKDIR}/tiipclad-daemon.service ${D}${systemd_system_unitdir}
++    else
++        install -d ${D}${sysconfdir}/init.d/
++        install -c -m 755 ${S}/scripts/tiipclad-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++    fi
+ }
+ 
+ do_install_append_dra7xx() {
 -- 
 1.9.1
 
