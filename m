@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <xuj@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C183BE006AF; Wed, 12 Sep 2018 13:37:49 -0700 (PDT)
+	id CA31FE006AF; Wed, 12 Sep 2018 14:06:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -20,46 +20,47 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
 	*      information
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E9CCE0053F
-	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2018 13:37:48 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8CKblGG049203
-	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2018 15:37:47 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C25AAE0053F
+	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2018 14:06:25 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8CL6Pm3055639
+	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2018 16:06:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1536784667;
-	bh=lpTzGTOQcD/3Iw29Wow9eFcYhAeh7H9yAk9fwSXvSJw=;
+	s=ti-com-17Q1; t=1536786385;
+	bh=jrl7cXP+d224OSeuDh5K2pc5FOuZgo0RKxCs+yDoE8A=;
 	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=o7gNW1ErmaEtluU8PjkOe1cI6L0ByTP3QJL409EBlDENLn7xcVV7oGRTcnvr5QPFn
-	CxK+huCu5IcbxJQjyDU6iyD0TLBIUrdBs05kw7zDJs4JRjSojPSIVhngbyIGpfRxeu
-	SXTCepQcgP23PipiqWFFw3OG7fHAkKeX36co3fTg=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8CKblxi018403
-	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2018 15:37:47 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	b=cVr4Xu/QxdfQygjlL48i/qX9a5zlXg0sSXY4YSQm6xMhc44DH+i/CopXvH0D2Ssno
+	JB2yT/bYkydNtNIaeYelQvmpqBnaKbdTwZhXAxuty1Q+T8J4pdQBbLhnZZ18yihI1+
+	RBu1mUnZGw9tsyBCkj7DcGhnKWFNP9vm/smsVu0Y=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8CL6P9k029840
+	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2018 16:06:25 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Wed, 12 Sep 2018 15:37:47 -0500
+	Wed, 12 Sep 2018 16:06:25 -0500
 Received: from DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895]) by
 	DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895%18]) with mapi id
-	15.01.1466.003; Wed, 12 Sep 2018 15:37:48 -0500
-From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "Xu, Jianzhong" <xuj@ti.com>
+	15.01.1466.003; Wed, 12 Sep 2018 16:06:25 -0500
+From: "Xu, Jianzhong" <xuj@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
 Thread-Topic: [meta-ti] [EXTERNAL] [PATCH 3/3 v2] Added DSPLIB recipe to build
 	DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB
 	and DSPLIB.
-Thread-Index: AQHUSdHhrgZ1c17FHk6paaWPshaIMqTtFm2AgABKuwD//8gbAP//85UA
-Date: Wed, 12 Sep 2018 20:37:48 +0000
-Message-ID: <f1fe357da2074bee88e9c56c6b5663f1@ti.com>
+Thread-Index: AQHUSszaPzA8kiYI0UeuilkCSFgFTaTtClyggABf/wCAAATMAP//tBNA
+Date: Wed, 12 Sep 2018 21:06:25 +0000
+Message-ID: <da4092efc0784743bd662870aada61d1@ti.com>
 References: <1536255983-16162-1-git-send-email-xuj@ti.com>
 	<674173dd-2a6b-b932-49f3-e3c30fbfd050@ti.com>
 	<20180912191313.GB12296@beryl>
 	<0edace8daec141e48401dfaf972f69af@ti.com>
 	<20180912202038.GF12296@beryl>
-In-Reply-To: <20180912202038.GF12296@beryl>
+	<f1fe357da2074bee88e9c56c6b5663f1@ti.com>
+In-Reply-To: <f1fe357da2074bee88e9c56c6b5663f1@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.22.171.19]
+x-originating-ip: [158.218.113.76]
 x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
@@ -76,10 +77,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2018 20:37:49 -0000
+X-List-Received-Date: Wed, 12 Sep 2018 21:06:26 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+Denys,
+
+Please try c667x-evm.
+
+Thanks,
+Jianzhong
+
+-----Original Message-----
+From: Dmytriyenko, Denys=20
+Sent: Wednesday, September 12, 2018 4:38 PM
+To: Dmytriyenko, Denys; Xu, Jianzhong
+Cc: Stiffler, Jacob; meta-ti@yoctoproject.org
+Subject: RE: [meta-ti] [EXTERNAL] [PATCH 3/3 v2] Added DSPLIB recipe to bui=
+ld DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB and DSPLIB=
+.
 
 And it crashed and burned right away:
 
