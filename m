@@ -1,6 +1,6 @@
-Return-Path: <xuj@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BA662E0093B; Thu, 13 Sep 2018 08:44:47 -0700 (PDT)
+	id 3035BE0093B; Thu, 13 Sep 2018 09:01:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	T_FILL_THIS_FORM_SHORT autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	http://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
@@ -20,37 +20,37 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
 	*      information
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15D91E005B1
-	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2018 08:44:44 -0700 (PDT)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63500E005B1
+	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2018 09:01:33 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8DFii3S090510
-	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2018 10:44:44 -0500
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8DG1Wan070202
+	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2018 11:01:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1536853484;
-	bh=fttzP859kQoY2+hZhQa6gNQyPvTRepa0EXahUwwwgyw=;
+	s=ti-com-17Q1; t=1536854492;
+	bh=o6e93PaxMsE4ax9QYi2+b0pvS495ChnygCbO4MYsXNE=;
 	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=IA2CNTvEF9ogJYwAZc9z2+9TE+KDMnod6UlBknC29tT7giD6NuTqyfPplK6UykzT0
-	WGTbiZkjLAzTmmSdr4foo7pilMUYEC0mChKE0aMtdHSMoCx40aVVRlqQmgq0sigVzr
-	ghvgC60CbddAHIbC7gZ2NYM1o7M/teKNHXLqTDac=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8DFiiaJ010704
-	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2018 10:44:44 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	b=umDGoLGvva6fEDI4Tk7ivOgtizGnzomcO0H6n0Ex57+GgnNcTKB023w+VPcl0XnZO
+	/TGRk5NgFvWPI8vOvfTelol5Fs/Vnr+MlRifmd55NltWrZa7W1eYu2uV2l4uG6hIml
+	WK/Z90b8aB+87g1sHvijdQEo41zkt0Wh51e2kQR8=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8DG1WSF009485
+	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2018 11:01:32 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Thu, 13 Sep 2018 10:44:44 -0500
-Received: from DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895]) by
-	DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895%18]) with mapi id
-	15.01.1466.003; Thu, 13 Sep 2018 10:44:44 -0500
-From: "Xu, Jianzhong" <xuj@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "Stiffler, Jacob" <j-stiffler@ti.com>
+	Thu, 13 Sep 2018 11:01:32 -0500
+Received: from DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222]) by
+	DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222%18]) with mapi id
+	15.01.1466.003; Thu, 13 Sep 2018 11:01:32 -0500
+From: "Stiffler, Jacob" <j-stiffler@ti.com>
+To: "Xu, Jianzhong" <xuj@ti.com>, "Dmytriyenko, Denys" <denys@ti.com>
 Thread-Topic: [meta-ti] [EXTERNAL] [PATCH 3/3 v2] Added DSPLIB recipe to build
 	DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB
 	and DSPLIB.
-Thread-Index: AQHUSszaPzA8kiYI0UeuilkCSFgFTaTtClyggABf/wCAAATMAIAAJcEAgADSdgCAAEM1gP//sMRM
-Date: Thu, 13 Sep 2018 15:44:44 +0000
-Message-ID: <54721d798ca04e03b26319cb76db9300@ti.com>
+Thread-Index: AQHUSszaFnU8Q2yPOUGcujGT05IflKTtXzIAgAALKQCAAATMAIAAJcEAgAB+pACAAJcHgIAABQcA//+uZHA=
+Date: Thu, 13 Sep 2018 16:01:32 +0000
+Message-ID: <2fcb0ee9597541678597a5019c117160@ti.com>
 References: <1536255983-16162-1-git-send-email-xuj@ti.com>
 	<674173dd-2a6b-b932-49f3-e3c30fbfd050@ti.com>
 	<20180912191313.GB12296@beryl>
@@ -60,11 +60,12 @@ References: <1536255983-16162-1-git-send-email-xuj@ti.com>
 	<20180912225256.GJ12296@beryl>
 	<cf942c47-0bea-3824-969f-c0d748dd422b@ti.com>,
 	<20180913152644.GO12296@beryl>
-In-Reply-To: <20180913152644.GO12296@beryl>
+	<54721d798ca04e03b26319cb76db9300@ti.com>
+In-Reply-To: <54721d798ca04e03b26319cb76db9300@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [158.218.117.92]
+x-originating-ip: [158.218.113.191]
 x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
@@ -81,16 +82,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2018 15:44:47 -0000
+X-List-Received-Date: Thu, 13 Sep 2018 16:01:37 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_54721d798ca04e03b26319cb76db9300ticom_"
+	boundary="_000_2fcb0ee9597541678597a5019c117160ticom_"
 
---_000_54721d798ca04e03b26319cb76db9300ticom_
+--_000_2fcb0ee9597541678597a5019c117160ticom_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
+That will work as c66x is a subset of the keystone SOC family.
+
+I just don't think that specifying COMPATIBLE_MACHINE is necessary as these=
+ packages are independent of the architecture that is running Linux.
+
+And due to this, we should also remove the 'PACKAGE_ARCH =3D ${MACHINE_ARCH=
+}"' as there is no difference between the resulting packages for any machin=
+e.
+
+IMHO, COMPATIBLE_MACHINE has been overused and it creates more problems tha=
+t it solves.
+
+- Jake
+
+From: Xu, Jianzhong
+Sent: Thursday, September 13, 2018 11:45 AM
+To: Dmytriyenko, Denys; Stiffler, Jacob
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [EXTERNAL] [PATCH 3/3 v2] Added DSPLIB recipe to bui=
+ld DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB and DSPLIB=
+.
+
+
 Denys,
+
 
 
 Would the following fix the problems you've seen:
@@ -98,6 +123,7 @@ Would the following fix the problems you've seen:
 COMPATIBLE_MACHINE =3D "omap-a15|keystone"
 
 This was in DSPLIB recipes before.
+
 
 
 Thanks,
@@ -883,63 +909,199 @@ g-xml-tree"
 > >>>>    > https://lists.yoctoproject.org/listinfo/meta-ti
 >
 
---_000_54721d798ca04e03b26319cb76db9300ticom_
+--_000_2fcb0ee9597541678597a5019c117160ticom_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-<html>
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
 <head>
 <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
 >
-<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
-<!-- converted from text --><style><!-- .EmailQuote { margin-left: 1pt; pad=
-ding-left: 4pt; border-left: #800000 2px solid; } --></style>
-</head>
-<body>
-<meta content=3D"text/html; charset=3DUTF-8">
-<style type=3D"text/css" style=3D"">
-<!--
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
 p
-	{margin-top:0;
-	margin-bottom:0}
--->
-</style>
-<div dir=3D"ltr">
-<div id=3D"x_divtagdefaultwrapper" dir=3D"ltr" style=3D"font-size:12pt; col=
-or:#000000; font-family:Calibri,Helvetica,sans-serif">
-<p>Denys,</p>
-<p><br>
-</p>
-<p>Would the following fix the problems you've seen:</p>
-<p></p>
-<div><br>
+	{mso-style-priority:99;
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{mso-style-priority:34;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.emailquote, li.emailquote, div.emailquote
+	{mso-style-name:emailquote;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.0pt;
+	margin-bottom:.0001pt;
+	border:none;
+	padding:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.EmailStyle19
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">That will work as c66x is=
+ a subset of the keystone SOC family.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">I just don&#8217;t think =
+that specifying COMPATIBLE_MACHINE is necessary as these packages are indep=
+endent of the architecture that is running Linux.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">And due to this, we shoul=
+d also remove the &#8216;PACKAGE_ARCH =3D ${MACHINE_ARCH}&#8221;&#8217; as =
+there is no difference between the resulting packages for any machine.<o:p>=
+</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">IMHO, COMPATIBLE_MACHINE =
+has been overused and it creates more problems that it solves.<o:p></o:p></=
+span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">- Jake<o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
+;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
+ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Xu, Jian=
+zhong
+<br>
+<b>Sent:</b> Thursday, September 13, 2018 11:45 AM<br>
+<b>To:</b> Dmytriyenko, Denys; Stiffler, Jacob<br>
+<b>Cc:</b> meta-ti@yoctoproject.org<br>
+<b>Subject:</b> Re: [meta-ti] [EXTERNAL] [PATCH 3/3 v2] Added DSPLIB recipe=
+ to build DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB and=
+ DSPLIB.<o:p></o:p></span></p>
 </div>
-<div>COMPATIBLE_MACHINE =3D &quot;omap-a15|keystone&quot;</div>
-<div><br>
 </div>
-This was in DSPLIB recipes before.&nbsp;
-<p></p>
-<p><br>
-</p>
-<p>Thanks,</p>
-<p>Jianzhong</p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<div id=3D"x_divtagdefaultwrapper">
+<p><span style=3D"font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;co=
+lor:black">Denys,<o:p></o:p></span></p>
+<p><span style=3D"font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;co=
+lor:black"><o:p>&nbsp;</o:p></span></p>
+<p><span style=3D"font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;co=
+lor:black">Would the following fix the problems you've seen:<o:p></o:p></sp=
+an></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,&quot=
+;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
 </div>
-<hr tabindex=3D"-1" style=3D"display:inline-block; width:98%">
-<div id=3D"x_divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" =
-color=3D"#000000" style=3D"font-size:11pt"><b>From:</b> Dmytriyenko, Denys<=
-br>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,&quot=
+;sans-serif&quot;;color:black">COMPATIBLE_MACHINE =3D &quot;omap-a15|keysto=
+ne&quot;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,&quot=
+;sans-serif&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,&quot=
+;sans-serif&quot;;color:black">This was in DSPLIB recipes before.&nbsp;
+<o:p></o:p></span></p>
+<p><span style=3D"font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;co=
+lor:black"><o:p>&nbsp;</o:p></span></p>
+<p><span style=3D"font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;co=
+lor:black">Thanks,<o:p></o:p></span></p>
+<p><span style=3D"font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;co=
+lor:black">Jianzhong<o:p></o:p></span></p>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"x_divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,&quot;sans-serif&quot;;color:black">From:</span></b><span st=
+yle=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&qu=
+ot;;color:black"> Dmytriyenko, Denys<br>
 <b>Sent:</b> Thursday, September 13, 2018 11:26:45 AM<br>
 <b>To:</b> Stiffler, Jacob<br>
 <b>Cc:</b> Xu, Jianzhong; meta-ti@yoctoproject.org<br>
 <b>Subject:</b> Re: [meta-ti] [EXTERNAL] [PATCH 3/3 v2] Added DSPLIB recipe=
  to build DSPLIB from source. Updated includes/ti-paths.inc for MATHLIB and=
- DSPLIB.</font>
-<div>&nbsp;</div>
+ DSPLIB.</span>
+<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
 </div>
 </div>
-<font size=3D"2"><span style=3D"font-size:10pt;">
-<div class=3D"PlainText">On Thu, Sep 13, 2018 at 07:26:12AM -0400, Jacob St=
-iffler wrote:<br>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt">On Thu, Sep 13, 201=
+8 at 07:26:12AM -0400, Jacob Stiffler wrote:<br>
 &gt; <br>
 &gt; <br>
 &gt; On 9/12/2018 6:52 PM, Denys Dmytriyenko wrote:<br>
@@ -1327,8 +1489,7 @@ uot;omap-a15|keystone&quot;<br>
 &gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &gt; &gt;-<br>
 &gt; &gt;&gt;&gt;&gt;<br>
 &gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &gt; &gt;-SRC_URI =3D<br>
-&gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &quot;<a href=3D""></a>http://softw=
-are-<br>
+&gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &quot;http://software-<br>
 &gt; &gt;&gt;&gt;dl.ti.com/sdoemb/sdoemb_public_sw/dsplib/${PV}/exports/${B=
 INFILE};name=3Dd<br>
 &gt; &gt;&gt;&gt;splib&quot;<br>
@@ -1412,8 +1573,8 @@ r>
 &gt; &gt;&gt;&gt;&gt;<br>
 &gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &gt; &gt;-LIC_FILES_CHKSUM =3D<br>
 &gt; &gt;&gt;&gt;&gt;<br>
-&gt; &gt;&gt;&gt;&quot;<a href=3D""></a>file://packages/ti/dsplib/dsplib.h;=
-beginline=3D9;endline=3D35;md5=3D17733f9e1100f8<br>
+&gt; &gt;&gt;&gt;&quot;file://packages/ti/dsplib/dsplib.h;beginline=3D9;end=
+line=3D35;md5=3D17733f9e1100f8<br>
 &gt; &gt;&gt;&gt;a628512f47c4bf676a&quot;<br>
 &gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &gt; &gt;-<br>
 &gt; &gt;&gt;&gt;&gt;<br>
@@ -1591,8 +1752,8 @@ br>
 &gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &gt; &gt;&#43;LIC_FILES_CHKSUM =3D<=
 br>
 &gt; &gt;&gt;&gt;&gt;<br>
-&gt; &gt;&gt;&gt;&quot;<a href=3D""></a>file://ti/dsplib/src/common/c66/lnk=
-.cmd;beginline=3D1;endline=3D37;md5=3D0f0c9c4<br>
+&gt; &gt;&gt;&gt;&quot;file://ti/dsplib/src/common/c66/lnk.cmd;beginline=3D=
+1;endline=3D37;md5=3D0f0c9c4<br>
 &gt; &gt;&gt;&gt;d51d8af75419781591ace190b&quot;<br>
 &gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &gt; &gt;&#43;<br>
 &gt; &gt;&gt;&gt;&gt;<br>
@@ -1963,10 +2124,11 @@ _________________<br>
 &gt; &gt;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp; &gt; <a href=3D"https://lists.yocto=
 project.org/listinfo/meta-ti">https://lists.yoctoproject.org/listinfo/meta-=
 ti</a><br>
-&gt; <br>
+&gt; <o:p></o:p></span></p>
 </div>
-</span></font>
+</div>
+</div>
 </body>
 </html>
 
---_000_54721d798ca04e03b26319cb76db9300ticom_--
+--_000_2fcb0ee9597541678597a5019c117160ticom_--
