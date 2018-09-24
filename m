@@ -1,62 +1,98 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <matt.tsai@thermofisher.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 651B9E00B92; Mon, 24 Sep 2018 08:12:13 -0700 (PDT)
+	id 8C2B3E00B9D; Mon, 24 Sep 2018 16:15:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED,T_FILL_THIS_FORM_SHORT
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	http://www.dnswl.org/, *      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	KHOP_DYNAMIC,RCVD_IN_DNSWL_NONE autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [208.86.201.75 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
-	*      information
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF5E1E00B58
-	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 08:12:11 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8OFCB4X033232
-	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 10:12:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1537801931;
-	bh=AfsxCbNCeFCUwY9gwQ6A1i+j0HLkTJ/ZtG4mgn5qyoo=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=VODqyFARj3wBspaydOKLtMD+jNt4K5zcg56ik6elsFJabChS1RyHbDcqqTX6cgsM6
-	gdHmS9mQezVN0EHQGq6061XsXj65+ZQGej6bAe56yTxZS+p0DrAzXCL+HpmTAjIsqA
-	ia7Rpb8os6NxLqczhXI02Uyv5kDVny221uVHTQZA=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8OFCBe4029348
-	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 10:12:11 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Mon, 24 Sep 2018 10:12:11 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE104.ent.ti.com
-	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Mon, 24 Sep 2018 10:12:11 -0500
-Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8OFC8T3025916;
-	Mon, 24 Sep 2018 10:12:10 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 24 Sep 2018 10:59:35 -0400
-Message-ID: <1537801175-24942-3-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1537801175-24942-1-git-send-email-j-stiffler@ti.com>
-References: <1537801175-24942-1-git-send-email-j-stiffler@ti.com>
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  2.0 KHOP_DYNAMIC Relay looks like a dynamic address
+X-Greylist: delayed 4396 seconds by postgrey-1.32 at yocto-www;
+	Mon, 24 Sep 2018 16:15:02 PDT
+Received: from mx0b-002a2102.pphosted.com (mx0b-002a2102.pphosted.com
+	[208.86.201.75])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05D6BE00B3E
+	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 16:15:02 -0700 (PDT)
+Received: from pps.filterd (m0118554.ppops.net [127.0.0.1])
+	by mx0a-002a2102.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w8OLx9Q4177721
+	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 22:01:45 GMT
+Received: from nam02-bl2-obe.outbound.protection.outlook.com
+	(mail-bl2nam02lp0088.outbound.protection.outlook.com [207.46.163.88])
+	by mx0a-002a2102.pphosted.com with ESMTP id 2mnknhyj9m-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 22:01:45 +0000
+Received: from BN7PR07MB4866.namprd07.prod.outlook.com (52.135.250.145) by
+	BN7PR07MB4866.namprd07.prod.outlook.com (52.135.250.145) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1143.18; Mon, 24 Sep 2018 22:01:44 +0000
+Received: from BN7PR07MB4866.namprd07.prod.outlook.com
+	([fe80::1d0e:560f:f1ce:bf81]) by
+	BN7PR07MB4866.namprd07.prod.outlook.com
+	([fe80::1d0e:560f:f1ce:bf81%5]) with mapi id 15.20.1143.019;
+	Mon, 24 Sep 2018 22:01:43 +0000
+From: "Tsai, Matt" <matt.tsai@thermofisher.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: Unable to run bitbake -c virtual/kernel menuconfig
+Thread-Index: AdRUUGtnZ2Wmcr32SgSZMeGfl22XHQ==
+Date: Mon, 24 Sep 2018 22:01:43 +0000
+Message-ID: <BN7PR07MB4866C3E8727CE0B47C74E8E792170@BN7PR07MB4866.namprd07.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [208.184.154.60]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; BN7PR07MB4866;
+	6:ZsE81tc7CPmlE9RVN8Z4iaiVktdE5b4y3Ua/oOEHA+70dZsja1782a/i0cYNYdCInLcuE4FGhdm6MW4Fdr3h+SZHSlSh0qKEs6Wzt54UtIZEFDVPHzRZuknKrpgZZk3lfDxNbPHMqjNlRVvK1dcybyaqrvN48JEnOPE2p63rdky3/MVEH+M5rd93mJQlNxQMfmKtR5Q/0qVp6EHksGycFVQV1V9VW8XsPFn1xeXv3fy7z7wVHhLPjCNEjxgfGphTklCQNz9lle5qajP0VY+jWTTkQdfAv8PhddzLDOodQeDjFvggxUZKK/62FFRYkKsapsjYfqphFywUbvHytifemOIcjmLGlP1ZhRUuiHQKZvugECz2ptMtXM40F35zPAoyIegx/iKAKE8/inauJKiAZabWXzf68PA8iC8SB8kvosnNVu8wJ54kFdVi/ZTTTufjE50mb5nQqEsOnUulN+Nxzw==;
+	5:UN517TnO/oasNU6lE6fKl8kTAJELLNt30S/oGdH0qqVoNlNzH+L2HqwqubFHiNu9neE0hJsB8HsN4NQRsp5OINgmrGhmhtRxXwz0JrtCH9kGQs9HiAr0R6cDh/wWzzLcT6+mIS/EeGQd5LkvF/iUcGalDANgcMteYBlYs+vAOwA=;
+	7:yqmLheCSk+flw21ychd4HNRgyZoBQZTNLtyd3xNhxLLA5CrrwyDDuiVHDaCPtyb/di0Ab7X1HJQBx5ko+BiMIbw5mhH+/qaQrbPirTeB/nNMb8loCeNZkWatt+RCNiLQHmOM9nW6T8kXecsc1Im8xyx2XT7ELE6MgnkORXl1vc5gjokYofDOg4dmKzLTYQnaOM/+AZePD9uLKoR+H6YrtZq5NEYPapo3hFMKyor6MpMtzf5DALXQRC6cbLhwg8ft
+x-ms-exchange-antispam-srfa-diagnostics: SOS;
+x-ms-office365-filtering-correlation-id: 36b54491-f5b0-47ec-3c00-08d6226950ab
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(7020095)(4652040)(8989299)(4534165)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
+	SRVR:BN7PR07MB4866; 
+x-ms-traffictypediagnostic: BN7PR07MB4866:
+x-microsoft-antispam-prvs: <BN7PR07MB4866D2A834350804A3EC72FD92170@BN7PR07MB4866.namprd07.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:(21748063052155)(28532068793085)(190501279198761)(227612066756510);
+x-ms-exchange-senderadcheck: 1
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(3002001)(93006095)(93001095)(3231355)(944501410)(52105095)(10201501046)(6055026)(149066)(150027)(6041310)(20161123560045)(20161123562045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123564045)(20161123558120)(201708071742011)(7699051)(76991041);
+	SRVR:BN7PR07MB4866; BCL:0; PCL:0; RULEID:; SRVR:BN7PR07MB4866; 
+x-forefront-prvs: 0805EC9467
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(366004)(136003)(39860400002)(346002)(376002)(396003)(189003)(199004)(54094003)(53754006)(504964003)(74316002)(486006)(6506007)(26005)(105586002)(2351001)(6916009)(186003)(14454004)(478600001)(102836004)(106356001)(6346003)(8676002)(81156014)(99286004)(66066001)(55016002)(7736002)(2906002)(97736004)(33656002)(2501003)(256004)(8936002)(5660300001)(2900100001)(25786009)(5250100002)(71200400001)(71190400001)(3846002)(81166006)(6436002)(6116002)(790700001)(68736007)(86362001)(316002)(476003)(6306002)(5640700003)(54896002)(9686003)(53936002)(5630700001)(7696005);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BN7PR07MB4866;
+	H:BN7PR07MB4866.namprd07.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: thermofisher.com does not
+	designate permitted sender hosts)
+x-microsoft-antispam-message-info: FEPAMvTOFjp9rAEsf7D8yBgAV4+bDBJiFVNgciTOpJFmq1Dq0BNUA49QeENDteqr11RFG/BrmlB6ZaTpLM6IsAcMN/iXr+e1yxwKSNYwsCZs4zPNx+Z5zM9G0UD/B8B9R+7kP9dzqP6jmVnaRGXZUgcChZc36cNs9U+T4BcdcDz8g9c7OFbVG1AqsIYXvDNuGOI5LMJyTMSuEVYc3tYh5ioy1Jf1o4tZakxhFKmgRJUPIu7NEmGmORP13yxejdG5UmA7TBmGy+xAA3oNxfG/J+rfZGY0hvEf4aihL8jjimVhpuffA68hPFyTbssvdi99tQ3bJC3hVCSR0NwVPz26SlVQXshQbcQWwqLHezLOPLg=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH v5 3/3] dsplib: build DSPLIB C66x/C674x/C64x+ from source
+X-OriginatorOrg: thermofisher.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36b54491-f5b0-47ec-3c00-08d6226950ab
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2018 22:01:43.8731 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b67d722d-aa8a-4777-a169-ebeb7a6a3b67
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR07MB4866
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2017-11-13_09:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=926 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1807170000 definitions=main-1809240209
+Subject: Unable to run bitbake -c virtual/kernel menuconfig
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,247 +105,160 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2018 15:12:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Sep 2018 23:15:04 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_BN7PR07MB4866C3E8727CE0B47C74E8E792170BN7PR07MB4866namp_"
 
-From: Jianzhong Xu <xuj@ti.com>
+--_000_BN7PR07MB4866C3E8727CE0B47C74E8E792170BN7PR07MB4866namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Remove DSPLIB recipe that downloads pre-built DSPLIB from ti.com.
-Add new recipe to build DSPLIB for C66x, C674x, or C64x+ from source code.
+Hi all,
 
-Signed-off-by: Jianzhong Xu <xuj@ti.com>
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
----
-Changes from previous version:
-* Removed duplication of shortlog in full commit log
-* Included dsplib.inc first in bb files
-* Remove DSPLIB_INSTALL_DIR from ti-paths.inc as it is unused outside
-  of dsplib, and dsplib uses this as a local variable.
+I was trying to configure Linux kernel using Yocto and meta-ti layer: Poky =
+branch is sumo-19.0.0; meta-ti branch is sumo. I was able set up the Yocto =
+build system to build the core-image-minimal successfully. My build host is=
+ machine Ubuntu 16.04LTS and the target device is Beaglebone Black. However=
+, when I tried to customize the kernel using "bitbake -c virtual/kernel men=
+uconfig", I got the following error:
 
- recipes-ti/dsplib/dsplib-c64xp_git.bb    |  6 +++
- recipes-ti/dsplib/dsplib-c66x.inc        | 30 -------------
- recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb |  9 ----
- recipes-ti/dsplib/dsplib-c66x_git.bb     |  8 ++++
- recipes-ti/dsplib/dsplib-c674x_git.bb    |  8 ++++
- recipes-ti/dsplib/dsplib.inc             | 73 ++++++++++++++++++++++++++++++++
- recipes-ti/includes/ti-paths.inc         |  6 +--
- 7 files changed, 98 insertions(+), 42 deletions(-)
- create mode 100644 recipes-ti/dsplib/dsplib-c64xp_git.bb
- delete mode 100644 recipes-ti/dsplib/dsplib-c66x.inc
- delete mode 100644 recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
- create mode 100644 recipes-ti/dsplib/dsplib-c66x_git.bb
- create mode 100644 recipes-ti/dsplib/dsplib-c674x_git.bb
- create mode 100644 recipes-ti/dsplib/dsplib.inc
+  GEN     ./Makefile
+  HOSTLD  scripts/kconfig/mconf
+scripts/kconfig/mconf.o: In function `show_help':
+mconf.c:(.text+0x914): undefined reference to `stdscr'
+scripts/kconfig/lxdialog/checklist.o: In function `print_arrows':
+checklist.c:(.text+0x2c): undefined reference to `wmove'
+checklist.c:(.text+0x4c): undefined reference to `acs_map'
+...
+scripts/kconfig/lxdialog/menubox.o: In function `print_arrows.constprop.0':
+menubox.c:(.text+0x3c3): undefined reference to `wrefresh'
+collect2: error: ld returned 1 exit status
+scripts/Makefile.host:111: recipe for target 'scripts/kconfig/mconf' failed
+make[3]: *** [scripts/kconfig/mconf] Error 1
+.../build/tmp/work-shared/beaglebone/kernel-source/Makefile:512: recipe for=
+ target 'menuconfig' failed
+make[2]: *** [menuconfig] Error 2
+Makefile:146: recipe for target 'sub-make' failed
+make[1]: *** [sub-make] Error 2
+Makefile:24: recipe for target '__sub-make' failed
+make: *** [__sub-make] Error 2
+Command failed.
 
-diff --git a/recipes-ti/dsplib/dsplib-c64xp_git.bb b/recipes-ti/dsplib/dsplib-c64xp_git.bb
-new file mode 100644
-index 0000000..1550a53
---- /dev/null
-+++ b/recipes-ti/dsplib/dsplib-c64xp_git.bb
-@@ -0,0 +1,6 @@
-+include dsplib.inc
-+
-+MATHLIB_INSTALL_DIR = "${MATHLIB_C64P_INSTALL_DIR}/packages"
-+DSPLIB_INSTALL_DIR_RECIPE = "${DSPLIB_C64P_INSTALL_DIR_RECIPE}"
-+DSPLIB_INSTALL_DIR = "${DSPLIB_C64P_INSTALL_DIR}"
-+DSPLIB_BUILD_TARGET = "c64Px"
-diff --git a/recipes-ti/dsplib/dsplib-c66x.inc b/recipes-ti/dsplib/dsplib-c66x.inc
-deleted file mode 100644
-index 7ff99c2..0000000
---- a/recipes-ti/dsplib/dsplib-c66x.inc
-+++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "DSPLIB contains optimized general-purpose signal-processing routines for TI DSPs"
--HOMEPAGE = "http://www.ti.com/tool/sprc265"
--SECTION = "devel"
--LICENSE = "BSD-3-Clause"
--
--require ../includes/ti-paths.inc
--require ../includes/ti-staging.inc
--require ../includes/ti-unpack.inc
--
--COMPATIBLE_MACHINE = "omap-a15|keystone"
--
--SRC_URI = "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/dsplib/${PV}/exports/${BINFILE};name=dsplib"
--
--BINFILE = "dsplib_c66x_${PV}_Linux.bin"
--TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
--TI_BIN_UNPK_CMDS = ""
--
--do_install() {
--    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
--    install -d ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
--    cp ${CP_ARGS} ${S}/* ${D}${DSPLIB_C66_INSTALL_DIR_RECIPE}
--}
--
--ALLOW_EMPTY_${PN} = "1"
--FILES_${PN}-dev += "${DSPLIB_C66_INSTALL_DIR_RECIPE}"
--
--INHIBIT_PACKAGE_STRIP = "1"
--INHIBIT_SYSROOT_STRIP = "1"
--INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
--INSANE_SKIP_${PN}-dev = "arch"
-diff --git a/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb b/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
-deleted file mode 100644
-index f1273f3..0000000
---- a/recipes-ti/dsplib/dsplib-c66x_3.4.0.0.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require dsplib-c66x.inc
--
--PV = "3_4_0_0"
--PR = "r1"
--
--LIC_FILES_CHKSUM = "file://packages/ti/dsplib/dsplib.h;beginline=9;endline=35;md5=17733f9e1100f8a628512f47c4bf676a"
--
--SRC_URI[dsplib.md5sum] = "66785604729c153dcad5282097dee8bf"
--SRC_URI[dsplib.sha256sum] = "e88909b6271ce6c4c62e2ab90181b7adb36c7f28f5c52836668eb35888785ce8"
-diff --git a/recipes-ti/dsplib/dsplib-c66x_git.bb b/recipes-ti/dsplib/dsplib-c66x_git.bb
-new file mode 100644
-index 0000000..b28d8df
---- /dev/null
-+++ b/recipes-ti/dsplib/dsplib-c66x_git.bb
-@@ -0,0 +1,8 @@
-+include dsplib.inc
-+
-+MATHLIB_INSTALL_DIR = "${MATHLIB_C66_INSTALL_DIR}/packages"
-+DSPLIB_INSTALL_DIR_RECIPE = "${DSPLIB_C66_INSTALL_DIR_RECIPE}"
-+DSPLIB_INSTALL_DIR = "${DSPLIB_C66_INSTALL_DIR}"
-+DSPLIB_BUILD_TARGET = "c66x"
-+
-+DEPENDS += "mathlib-c66x"
-diff --git a/recipes-ti/dsplib/dsplib-c674x_git.bb b/recipes-ti/dsplib/dsplib-c674x_git.bb
-new file mode 100644
-index 0000000..47974ea
---- /dev/null
-+++ b/recipes-ti/dsplib/dsplib-c674x_git.bb
-@@ -0,0 +1,8 @@
-+include dsplib.inc
-+
-+MATHLIB_INSTALL_DIR = "${MATHLIB_C674_INSTALL_DIR}/packages"
-+DSPLIB_INSTALL_DIR_RECIPE = "${DSPLIB_C674_INSTALL_DIR_RECIPE}"
-+DSPLIB_INSTALL_DIR = "${DSPLIB_C674_INSTALL_DIR}"
-+DSPLIB_BUILD_TARGET = "c674x"
-+
-+DEPENDS += "mathlib-c674x"
-diff --git a/recipes-ti/dsplib/dsplib.inc b/recipes-ti/dsplib/dsplib.inc
-new file mode 100644
-index 0000000..7180c4a
---- /dev/null
-+++ b/recipes-ti/dsplib/dsplib.inc
-@@ -0,0 +1,73 @@
-+SUMMARY = "DSPLIB contains optimized signal processing functions for TI DSPs"
-+HOMEPAGE = "http://git.ti.com/ep-processor-libraries/dsplib"
-+LICENSE = "BSD-3-Clause"
-+
-+require ../includes/ti-paths.inc
-+
-+PV = "3_4_0_1"
-+PR = "r0"
-+
-+DEPENDS = "ti-cgt6x-native \
-+           ti-xdctools-native \
-+           ti-sysbios \
-+           doxygen-native \
-+           zip-native \
-+           swtools"
-+
-+S = "${WORKDIR}/git"
-+
-+SRC_URI = "git://git.ti.com/ep-processor-libraries/dsplib.git;protocol=git;branch=master"
-+SRCREV = "bf5a51cba462c5cb03ed20a6a1bb1bd16c0683e1"
-+
-+LIC_FILES_CHKSUM = "file://ti/dsplib/src/common/c66/lnk.cmd;beginline=1;endline=37;md5=0f0c9c4d51d8af75419781591ace190b"
-+
-+export DSPLIB_WORK_DIR="${S}"
-+export CGTOOLS_INSTALL_DIR  = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+export C64PCODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
-+export C674CODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
-+export C66CODEGENTOOL ="${CGTOOLS_INSTALL_DIR}"
-+export SWTOOLS_PATH = "${SWTOOLS_INSTALL_DIR}/ti/mas/swtools"
-+export XDCBUILDCFG="${SWTOOLS_PATH}/config.bld"
-+export INCDIR="${MATHLIB_INSTALL_DIR}/"
-+
-+PATH_append = ":${XDC_INSTALL_DIR}"
-+
-+XDCPATH.="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
-+XDCPATH.="${SWTOOLS_INSTALL_DIR};${MATHLIB_INSTALL_DIR};${DSPLIB_WORK_DIR};"
-+
-+export XDCPATH
-+
-+DSPLIB_PACKAGE_NAME = "dsplib_${DSPLIB_BUILD_TARGET}_${PV}"
-+
-+do_compile() {
-+	cd ${DSPLIB_WORK_DIR}/ti/dsplib;
-+	xdc XDCARGS="${DSPLIB_BUILD_TARGET} bundle" XDCOPTIONS="-v"
-+}
-+
-+do_install() {
-+	install -d ${D}${DSPLIB_INSTALL_DIR_RECIPE}
-+
-+	find -name "${DSPLIB_PACKAGE_NAME}.zip" -exec unzip -o {} -d ${D}${DSPLIB_INSTALL_DIR_RECIPE} \;
-+	mv ${D}${DSPLIB_INSTALL_DIR_RECIPE}/dsplib/* ${D}${DSPLIB_INSTALL_DIR_RECIPE}
-+	mv ${D}${DSPLIB_INSTALL_DIR_RECIPE}/dsplib/.metadata ${D}${DSPLIB_INSTALL_DIR_RECIPE}
-+	rm -r ${D}${DSPLIB_INSTALL_DIR_RECIPE}/dsplib
-+}
-+
-+inherit deploy
-+addtask deploy before do_build after do_install
-+
-+do_deploy() {
-+	install -d ${DEPLOYDIR}
-+	# zip up files in ${D}${DSPLIB_INSTALL_DIR_RECIPE}
-+	# and place the zip file in ${DEPLOYDIR}
-+	mkdir ./${DSPLIB_PACKAGE_NAME}
-+	cp -r ${D}${DSPLIB_INSTALL_DIR_RECIPE}/* ./${DSPLIB_PACKAGE_NAME}
-+	cp -r ${D}${DSPLIB_INSTALL_DIR_RECIPE}/.metadata ./${DSPLIB_PACKAGE_NAME}
-+	zip -9 -y -r -q ${DEPLOYDIR}/${DSPLIB_PACKAGE_NAME}.zip ./${DSPLIB_PACKAGE_NAME}
-+	rm -r ./${DSPLIB_PACKAGE_NAME}
-+}
-+
-+ALLOW_EMPTY_${PN} = "1"
-+FILES_${PN}-dev += "${DSPLIB_INSTALL_DIR_RECIPE}"
-+
-+INSANE_SKIP_${PN}-dev = "arch"
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 6c2b200..93494f0 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -17,7 +17,7 @@ export DMAI_INSTALL_DIR_RECIPE       = "${installdir}/ti-dmai-tree"
- export DSP_BENCHMARK_INSTALL_DIR_RECIPE = "${installdir}/ti-dsp-benchmark-tree"
- export DSPLIB_C64P_INSTALL_DIR_RECIPE = "${installdir}/ti-dsplib-c64p-tree"
- export DSPLIB_C674_INSTALL_DIR_RECIPE = "${installdir}/ti-dsplib-c674x-tree"
--export DSPLIB_INSTALL_DIR_RECIPE     = "${installdir}/ti-dsplib-tree"
-+export DSPLIB_C66_INSTALL_DIR_RECIPE  = "${installdir}/ti-dsplib-c66x-tree"
- export DVSDK_DEMOS_INSTALL_DIR_RECIPE= "${installdir}/ti-dvsdk-demos-tree"
- export DVTB_INSTALL_DIR_RECIPE       = "${installdir}/ti-dvtb-tree"
- export EDMA3_LLD_INSTALL_DIR_RECIPE  = "${installdir}/ti-edma3lld-tree"
-@@ -49,7 +49,6 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
- export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
- export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
- export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
--export DSPLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-dsplib-c66x-tree"
- export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
- export MATHLIB_C674_INSTALL_DIR_RECIPE    = "${installdir}/ti-mathlib-c674x-tree"
- export IMGLIB_C66_INSTALL_DIR_RECIPE      = "${installdir}/ti-imglib-c66x-tree"
-@@ -74,7 +73,6 @@ export CODEGEN_ARM_INSTALL_DIR= "${STAGING_DIR_TARGET}${CODEGEN_ARM_INSTALL_DIR_
- export CODEGEN_INSTALL_DIR    = "${STAGING_DIR_TARGET}${CODEGEN_INSTALL_DIR_RECIPE}"
- export DMAI_INSTALL_DIR       = "${STAGING_DIR_TARGET}${DMAI_INSTALL_DIR_RECIPE}"
- export DSP_BENCHMARK_INSTALL_DIR = "${STAGING_DIR_TARGET}${DSP_BENCHMARK_INSTALL_DIR_RECIPE}"
--export DSPLIB_INSTALL_DIR     = "${STAGING_DIR_TARGET}${DSPLIB_INSTALL_DIR_RECIPE}"
- export EDMA3_LLD_INSTALL_DIR  = "${STAGING_DIR_TARGET}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
- export EDMA3_LLD_SYSBIOS_INSTALL_DIR  = "${STAGING_DIR_TARGET}${EDMA3_LLD_SYSBIOS_INSTALL_DIR_RECIPE}"
- export FASTMATHLIB_C674P_INSTALL_DIR = "${STAGING_DIR_TARGET}${FASTMATHLIB_C674P_INSTALL_DIR_RECIPE}"
-@@ -100,6 +98,8 @@ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTAL
- export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
- export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
- export SWTOOLS_INSTALL_DIR         = "${STAGING_DIR_TARGET}${SWTOOLS_INSTALL_DIR_RECIPE}"
-+export DSPLIB_C64P_INSTALL_DIR     = "${STAGING_DIR_TARGET}${DSPLIB_C64P_INSTALL_DIR_RECIPE}"
-+export DSPLIB_C674_INSTALL_DIR     = "${STAGING_DIR_TARGET}${DSPLIB_C674_INSTALL_DIR_RECIPE}"
- export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
- export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
- export MATHLIB_C674_INSTALL_DIR    = "${STAGING_DIR_TARGET}${MATHLIB_C674_INSTALL_DIR_RECIPE}"
--- 
-2.7.4
+I wonder if anyone has the same issue and how to solve this problem. Please=
+ help. Thank you in advance!
 
 
+
+
+--_000_BN7PR07MB4866C3E8727CE0B47C74E8E792170BN7PR07MB4866namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hi all,<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I was trying to configure Linux kernel using Yocto a=
+nd meta-ti layer: Poky branch is sumo-19.0.0; meta-ti branch is sumo. I was=
+ able set up the Yocto build system to build the core-image-minimal success=
+fully. My build host is machine Ubuntu
+ 16.04LTS and the target device is Beaglebone Black. However, when I tried =
+to customize the kernel using &#8220;bitbake -c virtual/kernel menuconfig&#=
+8221;, I got the following error:<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">&nbsp; GEN&nbsp;&nbsp;&nbsp;&nbsp; ./Makefile<o:p></=
+o:p></p>
+<p class=3D"MsoNormal">&nbsp; HOSTLD&nbsp; scripts/kconfig/mconf<o:p></o:p>=
+</p>
+<p class=3D"MsoNormal">scripts/kconfig/mconf.o: In function `show_help':<o:=
+p></o:p></p>
+<p class=3D"MsoNormal">mconf.c:(.text&#43;0x914): undefined reference to `s=
+tdscr'<o:p></o:p></p>
+<p class=3D"MsoNormal">scripts/kconfig/lxdialog/checklist.o: In function `p=
+rint_arrows':<o:p></o:p></p>
+<p class=3D"MsoNormal">checklist.c:(.text&#43;0x2c): undefined reference to=
+ `wmove'<o:p></o:p></p>
+<p class=3D"MsoNormal">checklist.c:(.text&#43;0x4c): undefined reference to=
+ `acs_map'<o:p></o:p></p>
+<p class=3D"MsoNormal">...<o:p></o:p></p>
+<p class=3D"MsoNormal">scripts/kconfig/lxdialog/menubox.o: In function `pri=
+nt_arrows.constprop.0':<o:p></o:p></p>
+<p class=3D"MsoNormal">menubox.c:(.text&#43;0x3c3): undefined reference to =
+`wrefresh'<o:p></o:p></p>
+<p class=3D"MsoNormal">collect2: error: ld returned 1 exit status<o:p></o:p=
+></p>
+<p class=3D"MsoNormal">scripts/Makefile.host:111: recipe for target 'script=
+s/kconfig/mconf' failed<o:p></o:p></p>
+<p class=3D"MsoNormal">make[3]: *** [scripts/kconfig/mconf] Error 1<o:p></o=
+:p></p>
+<p class=3D"MsoNormal">&#8230;/build/tmp/work-shared/beaglebone/kernel-sour=
+ce/Makefile:512: recipe for target 'menuconfig' failed<o:p></o:p></p>
+<p class=3D"MsoNormal">make[2]: *** [menuconfig] Error 2<o:p></o:p></p>
+<p class=3D"MsoNormal">Makefile:146: recipe for target 'sub-make' failed<o:=
+p></o:p></p>
+<p class=3D"MsoNormal">make[1]: *** [sub-make] Error 2<o:p></o:p></p>
+<p class=3D"MsoNormal">Makefile:24: recipe for target '__sub-make' failed<o=
+:p></o:p></p>
+<p class=3D"MsoNormal">make: *** [__sub-make] Error 2<o:p></o:p></p>
+<p class=3D"MsoNormal">Command failed.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I wonder if anyone has the same issue and how to sol=
+ve this problem. Please help. Thank you in advance!<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_BN7PR07MB4866C3E8727CE0B47C74E8E792170BN7PR07MB4866namp_--
