@@ -1,62 +1,57 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4892AE00AC8; Fri, 21 Sep 2018 10:38:03 -0700 (PDT)
+	id 43D2BE00AC5; Mon, 24 Sep 2018 08:12:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	http://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70424E00AB9
-	for <meta-ti@yoctoproject.org>; Fri, 21 Sep 2018 10:38:02 -0700 (PDT)
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.23.248 listed in list.dnswl.org]
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C148FE00566
+	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 08:12:09 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8LHc1kS002427
-	for <meta-ti@yoctoproject.org>; Fri, 21 Sep 2018 12:38:01 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8OFC9Wp037687
+	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 10:12:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1537551481;
-	bh=Zac3PcVPsHiJUi+DrSBKbVA4exZt3i0lPnfoJbNTQB4=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=rYgyxPq88R7k+1vCKSEBchBA3sSK8Rjyu5IEUfzpQe8Vwvwnu61CV9i/w0qnybgtO
-	+4M0gXLTFXqIajtwfiX6DD1/wr9v7AO7EO2GdOHldh7vW23I1g+hgBgZcmX4HzKvws
-	H5w2ej8yaShwkNUKM78WOsyPOyIsXgZOVqBNENOY=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8LHc1SX008512
-	for <meta-ti@yoctoproject.org>; Fri, 21 Sep 2018 12:38:01 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1537801929;
+	bh=uqQ01vorajvyCP1XZ6RUU654fAbB4WzVyRvJvmm4R+Y=;
+	h=From:To:CC:Subject:Date;
+	b=XWWV9rdKApP0bqEJ1kq9vnLcgL5TJzhypbWHV3SIZtVv4QVBKdz9bjb7QZ1EuFdCg
+	a4k7G3WTnofoem8z3rEMAncvS+UIK1aZn4QyY7OspMyuUgAQENJgVnwVKc4fDAldTu
+	JcHZlJEDiEeCaqyw4G1qxh6KPmkeZz5v5dki3zs4=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8OFC9wG029275
+	for <meta-ti@yoctoproject.org>; Mon, 24 Sep 2018 10:12:09 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 21 Sep 2018 12:38:00 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE100.ent.ti.com
-	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_0,
+	Mon, 24 Sep 2018 10:12:08 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Fri, 21 Sep 2018 12:38:00 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8LHc0Zj028304;
-	Fri, 21 Sep 2018 12:38:00 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.187.66])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	w8LHc0x13983; Fri, 21 Sep 2018 12:38:00 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
+	Transport; Mon, 24 Sep 2018 10:12:08 -0500
+Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8OFC8T1025916;
+	Mon, 24 Sep 2018 10:12:08 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 21 Sep 2018 12:37:41 -0500
-Message-ID: <20180921173741.1052-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20180921173741.1052-1-dmurphy@ti.com>
-References: <20180921173741.1052-1-dmurphy@ti.com>
+Date: Mon, 24 Sep 2018 10:59:33 -0400
+Message-ID: <1537801175-24942-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] linux-ti-staging: update to ti2018.04-rc2
+Subject: [PATCH v5 1/3] swtools: common tools for xdc-based component build
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,42 +64,96 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Sep 2018 17:38:03 -0000
+X-List-Received-Date: Mon, 24 Sep 2018 15:12:10 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.14.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+From: Jianzhong Xu <xuj@ti.com>
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-index e3d7a706..f585f1b2 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
- 
- BRANCH = "ti-rt-linux-4.14.y"
- 
--SRCREV = "ba07e295a734f2d1faaff6105e5e7d26b09d7a70"
-+SRCREV = "ae5042b9a06e578aa50c46386f30449c3f4e7171"
- PV = "4.14.69+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-index b9929279..e10496e2 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-@@ -55,8 +55,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-lsk-linux-4.14.y"
- 
--SRCREV = "a027c576fec6416d40a1e41154e76301b01abc39"
--PV = "4.14.69+git${SRCPV}"
-+SRCREV = "bd5de28772967a3f8a8ec29c0a636cd5d5cd057d"
-+PV = "4.14.71+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+Add SWTOOLS which is needed to build xdc-based processor libs such as
+DSPLIB, MATHLIB, etc from source.
+
+Signed-off-by: Jianzhong Xu <xuj@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+Changes from previous version:
+* Removed duplication of shortlog in full commit log
+
+ recipes-ti/includes/ti-paths.inc  |  2 ++
+ recipes-ti/swtools/swtools_git.bb | 44 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 46 insertions(+)
+ create mode 100644 recipes-ti/swtools/swtools_git.bb
+
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index a401264..f797a2d 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -39,6 +39,7 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export RTFS_INSTALL_DIR_RECIPE       = "${installdir}/ti-rtfs-tree"
+ export SYSBIOS_INSTALL_DIR_RECIPE    = "${installdir}/ti-sysbios-tree"
+ export SYSLINK_INSTALL_DIR_RECIPE    = "${installdir}/ti-syslink-tree"
++export SWTOOLS_INSTALL_DIR_RECIPE    = "${installdir}/ti-swtools-tree"
+ export UIA_INSTALL_DIR_RECIPE        = "${installdir}/ti-uia-tree"
+ export VICPLIB_INSTALL_DIR_RECIPE    = "${installdir}/ti-vicplib-tree"
+ export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
+@@ -97,6 +98,7 @@ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}
+ export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+ export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
+ export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
++export SWTOOLS_INSTALL_DIR         = "${STAGING_DIR_TARGET}${SWTOOLS_INSTALL_DIR_RECIPE}"
+ export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
+ export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
+ export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/swtools/swtools_git.bb b/recipes-ti/swtools/swtools_git.bb
+new file mode 100644
+index 0000000..425a069
+--- /dev/null
++++ b/recipes-ti/swtools/swtools_git.bb
+@@ -0,0 +1,44 @@
++SUMMARY = "TI Software Tools"
++HOMEPAGE = "https://git.ti.com/ep-processor-libraries/swtools"
++SECTION = "devel"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://ti/mas/swtools/copyright.txt;md5=b1f52a1435051fdb18f8885b0384147d"
++
++require ../includes/ti-paths.inc
++
++DEPENDS = "ti-cgt6x-native \
++           ti-sysbios \
++           ti-xdctools-native"
++
++PV = "5_0_8"
++PR = "r0"
++S = "${WORKDIR}/git"
++BRANCH = "master"
++SRC_URI = "git://git.ti.com/ep-processor-libraries/swtools.git;protocol=git;branch=${BRANCH}"
++SRCREV = "881267836907de650edadc56b8e57ab45428021d"
++
++export C64PCODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
++export C674CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
++export C66CODEGENTOOL  = "${CGTOOLS_INSTALL_DIR}"
++
++PATH_append = ":${XDC_INSTALL_DIR}"
++
++XDCPATH .= "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
++
++export XDCPATH
++
++do_compile() {
++	cd ${S}/ti/mas/swtools
++	xdc
++}
++
++do_install() {
++	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
++	install -d ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
++	cp -pPrf ${S}/* ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
++}
++
++FILES_${PN}-dev += "${SWTOOLS_INSTALL_DIR_RECIPE}"
++
++INSANE_SKIP_${PN}-dev = "arch staticdev"
++ALLOW_EMPTY_${PN} = "1"
 -- 
-2.19.0
+2.7.4
 
 
