@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 97A08E0090A; Thu, 27 Sep 2018 16:32:25 -0700 (PDT)
+	id 22093E0090A; Thu, 27 Sep 2018 16:38:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -15,43 +15,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 850ADE00519
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 16:32:24 -0700 (PDT)
+	*      [198.47.23.248 listed in list.dnswl.org]
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DECD3E00519
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 16:37:59 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RNWNA6088382
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 18:32:23 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RNbxvo026710
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 18:37:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1538091143;
-	bh=fL5dZ7HZm0b1Dmao/F+XfQvGvv+exl1dO9lwZCQ7VAo=;
-	h=From:To:CC:Subject:Date;
-	b=vlm5ql9ZQqM3ra5Oh1LgPI10Xcz6ok1GLBmXJa9gYWmrIF6sS5E6M+Q2uixf6dpPy
-	V93mGtW5czAKWKfY6KrENyqkUHD2n50LkaDz7izGsU6oR02yzWBl89wZ+V7xAr2c9W
-	XlVJx3JBC+jn/vy+eO8joJrY7BJdAu3GjJsgi2/Y=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RNWNCn019797
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 18:32:23 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1538091479;
+	bh=qxn5zI+8e5JpOII8oIIaiMeC3v9xHhPmXw3tcq785ps=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=IalK7A87QjkDonBJPGGjN0xa9zUt0g0Uejugi42ZPNhpTYlgFTCgRBY5S1+zNlIhH
+	0P16Av97ibWCN8REfhM/orpZkxyQN5SsQziEqFuTLeYe5x2uPKHI6uMWdDPgQd4/uP
+	ULk64GI7uU+RFXoSIEka8gF9ZS/oDSv8VFejW6RY=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RNbxFF028545
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 18:37:59 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Thu, 27 Sep 2018 18:32:24 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Thu, 27 Sep 2018 18:32:23 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RNWN7d013575;
-	Thu, 27 Sep 2018 18:32:23 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 27 Sep 2018 23:28:18 +0000
-Message-ID: <20180927232818.21707-1-denys@ti.com>
-X-Mailer: git-send-email 2.17.1
+	Thu, 27 Sep 2018 18:37:59 -0500
+Received: from DLEE109.ent.ti.com ([fe80::992e:7546:157e:3b3d]) by
+	DLEE109.ent.ti.com ([fe80::992e:7546:157e:3b3d%17]) with mapi id
+	15.01.1466.003; Thu, 27 Sep 2018 18:37:58 -0500
+From: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [rocko/master][PATCH v2 20/30] pcie-lld-rtos: Update
+	to version 02.03.00.01 and added k3 support
+Thread-Index: AQHUVqtlBydUFJjeKU+lV+eO+3e+fKUEyEwA
+Date: Thu, 27 Sep 2018 23:37:58 +0000
+Message-ID: <9093020a82614713b6bff4433652cdad@ti.com>
+References: <1538081009-52859-1-git-send-email-m-radhakrishnan2@ti.com>
+	<1538081009-52859-21-git-send-email-m-radhakrishnan2@ti.com>
+	<20180927214524.GR8582@beryl>
+In-Reply-To: <20180927214524.GR8582@beryl>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [158.218.117.116]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko-next][PATCH] u-boot-ti-staging: update to version with separated SYSFW
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [rocko/master][PATCH v2 20/30] pcie-lld-rtos: Update to version 02.03.00.01 and added k3 support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,30 +70,90 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 23:32:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Sep 2018 23:38:01 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index 98e9a7d0..e97156a8 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
- 
--PR = "r21"
-+PR = "r22"
- 
--BRANCH = "ti-u-boot-2018.01"
-+BRANCH = "ti-u-boot-2018.01-next"
- 
--SRCREV = "9b8c6b92b7cbbbe027cf73743686de46d1f1574b"
-+SRCREV = "1d3ad14e9d5155d3ebfaf9612af62d29a0f903fb"
--- 
-2.17.1
 
+-----Original Message-----
+From: Dmytriyenko, Denys=20
+Sent: Thursday, September 27, 2018 5:45 PM
+To: Radhakrishnan, Mahesh
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [rocko/master][PATCH v2 20/30] pcie-lld-rtos: Update=
+ to version 02.03.00.01 and added k3 support
+
+On Thu, Sep 27, 2018 at 04:43:19PM -0400, Mahesh Radhakrishnan wrote:
+> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+> ---
+>  recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb | 13 ++++++++-----
+>  1 file changed, 8 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb b/recipes-bsp/pcie=
+-lld/pcie-lld-rtos_git.bb
+> index 1b7218a..35a0cbc 100644
+> --- a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
+> +++ b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
+> @@ -3,9 +3,9 @@ SUMMARY =3D "TI RTOS low lever driver for Peripheral Inte=
+rconnect Express (PCIE)"
+>  inherit ti-pdk
+> =20
+>  LICENSE =3D "BSD-3-Clause"
+> -LIC_FILES_CHKSUM =3D "file://pcie.h;beginline=3D1;endline=3D34;md5=3Dc09=
+4db055596498ba803933936611eb2"
+> +LIC_FILES_CHKSUM =3D "file://pcie.h;beginline=3D1;endline=3D34;md5=3D566=
+a784d78790a716d641764d5d60b74"
+
+Why the change?
+The copyright year changed. Here is the diff
+ @@ -1,6 +1,6 @@
+ /*
+  *
+- * Copyright (C) 2010-2016 Texas Instruments Incorporated - http://www.ti.=
+com/
++ * Copyright (C) 2010-2018 Texas Instruments Incorporated - http://www.ti.=
+com/^M
+  *
+  *
+
+
+> -COMPATIBLE_MACHINE =3D "omap-a15|keystone|c66x"
+> +COMPATIBLE_MACHINE =3D "omap-a15|keystone|c66x|k3"
+>  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> =20
+>  PCIE_LLD_GIT_URI =3D "git://git.ti.com/keystone-rtos/pcie-lld.git"
+> @@ -13,16 +13,19 @@ PCIE_LLD_GIT_PROTOCOL =3D "git"
+>  PCIE_LLD_GIT_BRANCH =3D "master"
+>  PCIE_LLD_GIT_DESTSUFFIX =3D "git/ti/drv/pcie"
+> =20
+> -# Below commit ID corresponds to "DEV.PCIE_LLD.02.02.00.13"
+> -PCIE_LLD_SRCREV =3D "bf8d3a22c03a5f273321c284fa1737072eca3f77"
+> +# Below commit ID corresponds to "DEV.PCIE_LLD.02.03.00.01"
+> +PCIE_LLD_SRCREV =3D "61759fc238600e3d5506ce86db1f6b604334edf8"
+> =20
+>  BRANCH =3D "${PCIE_LLD_GIT_BRANCH}"
+>  SRC_URI =3D "${PCIE_LLD_GIT_URI};destsuffix=3D${PCIE_LLD_GIT_DESTSUFFIX}=
+;protocol=3D${PCIE_LLD_GIT_PROTOCOL};branch=3D${BRANCH}"
+> =20
+>  SRCREV =3D "${PCIE_LLD_SRCREV}"
+> -PV =3D "02.02.00.13"
+> +PV =3D "02.03.00.01"
+>  PR =3D "r0"
+> =20
+> +DEPENDS_append_k3 =3D " udma-lld-rtos \
+> +"
+> +
+>  S =3D "${WORKDIR}/${PCIE_LLD_GIT_DESTSUFFIX}"
+> =20
+>  export PDK_PCIE_ROOT_PATH =3D"${WORKDIR}/build"
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
