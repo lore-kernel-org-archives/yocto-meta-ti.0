@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8EA99E00CBC; Thu, 27 Sep 2018 08:23:54 -0700 (PDT)
+	id C9E98E00CB9; Thu, 27 Sep 2018 08:23:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,43 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 47689E00BDF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 48817E00BE0
 	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 08:23:29 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RFNSGY128129
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:28 -0500
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RFNT1P128133
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1538061808;
-	bh=ZjNmD418WHYw26A6Hc4N0hL6eoKaea5pYNXWEAZ/AW8=;
+	s=ti-com-17Q1; t=1538061809;
+	bh=zVTVqUldr2Pr7Pu8+dP9rBZ6yfkCAqT5FNVrsChJFnE=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=hrsF0iTZ7YUujUOodA1W3nrkZ8yefkuQxnSY9lHY1joNhFtDlyQIMnipeyql/eIGU
-	J/GtlQ5GkSr4GCX1aWDX+RvHp9sEhYOogoQpI7ozO02TsVN6mvc9REnDHOdXUyNVuZ
-	1lBAW3uj8dnwtqsTrCsXNolZ0Ebd0zWVFqJrjrzc=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNSJd018746
+	b=bxTEltz6wG29XgR4NYhxBZCJQb3dSM4OCNwMqRddDqhRFNd4SR2AG9vZF2Y8sivLm
+	1BhtSmHFi02Uv57LLzIfGqQPDKJHDxAUdAsCL7KefAX111UcClCy+6SbQAmja69rTe
+	fGJ4zMTmPiV6gmAlDgHNiZObr0l1S/Sv3QMxJ1C0=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNSW0016639
 	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:28 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
 	Thu, 27 Sep 2018 10:23:28 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Thu, 27 Sep 2018 10:23:27 -0500
+	Transport; Thu, 27 Sep 2018 10:23:28 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNIJV014983
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNIJX014983
 	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:28 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 27 Sep 2018 11:22:35 -0400
-Message-ID: <1538061764-54977-22-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 27 Sep 2018 11:22:37 -0400
+Message-ID: <1538061764-54977-24-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1538061764-54977-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1538061764-54977-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 21/30] pruss-lld: pruss-lld-rtos: Update to version 01.00.00.11 and added k3 support for rtos
+Subject: [rocko/master][PATCH 23/30] transport-rtos: nimu-rtos: Updated to version 01.00.00.13 & added k3 support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,43 +71,51 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb | 1 +
- recipes-bsp/pruss-lld/pruss-lld.inc         | 6 +++---
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ recipes-bsp/transport-rtos/nimu-rtos_git.bb | 3 ++-
+ recipes-bsp/transport-rtos/transport.inc    | 6 +++---
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb b/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
-index 5068286..b8db20e 100644
---- a/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
-+++ b/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
-@@ -3,6 +3,7 @@ SUMMARY = "TI RTOS low level driver library for PRUSS"
- inherit ti-pdk
- require recipes-bsp/pruss-lld/pruss-lld.inc
+diff --git a/recipes-bsp/transport-rtos/nimu-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
+index 3321af4..101951b 100644
+--- a/recipes-bsp/transport-rtos/nimu-rtos_git.bb
++++ b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
+@@ -7,7 +7,7 @@ PR = "${INC_PR}.0"
  
-+COMPATIBLE_MACHINE_append = "|k3"
- PR = "${INC_PR}.0"
+ LIC_FILES_CHKSUM = "file://nimu_eth.h;beginline=1;endline=35;md5=ee9c662c39d4584fb2a8b66413d2866d"
  
- S = "${WORKDIR}/${PRUSS_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
-index 89e960d..dd5bd08 100644
---- a/recipes-bsp/pruss-lld/pruss-lld.inc
-+++ b/recipes-bsp/pruss-lld/pruss-lld.inc
-@@ -9,13 +9,13 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
- PRUSS_LLD_GIT_BRANCH = "master"
- PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1|k3"
  
--# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.10"
--PRUSS_LLD_SRCREV = "a11714517887bda62fab76941f2f32207fad2b05"
-+# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.11"
-+PRUSS_LLD_SRCREV = "4319eb250685f672979d4d6cc80c40a56e1afa0d"
+ NIMU_DESTSUFFIX = "git/ndk/nimu"
  
- BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
- SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+@@ -25,6 +25,7 @@ DEPENDS_append_k2g = " emac-lld-rtos"
+ DEPENDS_append_c665x-evm = " emac-lld-rtos"
+ DEPENDS_append_c667x-evm = " pa-lld-rtos cppi-lld-rtos"
+ DEPENDS_append_omapl1 = " emac-lld-rtos"
++DEPENDS_append_k3 = " emac-lld-rtos"
  
- SRCREV = "${PRUSS_LLD_SRCREV}"
--PV = "01.00.00.10"
-+PV = "01.00.00.11"
+ # Build with make instead of XDC
+ TI_PDK_XDCMAKE = "0"
+diff --git a/recipes-bsp/transport-rtos/transport.inc b/recipes-bsp/transport-rtos/transport.inc
+index 61772bd..b78b680 100644
+--- a/recipes-bsp/transport-rtos/transport.inc
++++ b/recipes-bsp/transport-rtos/transport.inc
+@@ -6,12 +6,12 @@ TRANSPORT_GIT_URI = "git://git.ti.com/keystone-rtos/transport.git"
+ TRANSPORT_GIT_PROTOCOL = "git"
+ TRANSPORT_GIT_BRANCH = "master"
+ 
+-# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.12"
+-TRANSPORT_SRCREV = "0e0f30a30388ea34b3a00beb69c9bfccc26dfaa0"
++# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.13"
++TRANSPORT_SRCREV = "3129b2ac9b00eb8882252402bc6ff31092e57da2"
+ 
+ BRANCH = "${TRANSPORT_GIT_BRANCH}"
+ SRC_URI = "${TRANSPORT_GIT_URI};protocol=${TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
+ 
+ SRCREV = "${TRANSPORT_SRCREV}"
+-PV = "01.00.00.12"
++PV = "01.00.00.13"
  INC_PR = "r0"
- 
 -- 
 1.9.1
 
