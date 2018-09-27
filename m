@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B0114E00BD0; Thu, 27 Sep 2018 08:23:27 -0700 (PDT)
+	id 26E90E00BD2; Thu, 27 Sep 2018 08:23:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,43 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C52EDE00B5E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6093E00B81
 	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 08:23:26 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RFNQ9X045025
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:26 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RFNPMA045011
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1538061806;
-	bh=Oq09o3NxDY4E7SPcabNYW5ypbOI4pbowxZ7lUxjzTMY=;
+	s=ti-com-17Q1; t=1538061805;
+	bh=8Ocz5D6JIL9NPtQ60oTmt8y1VFMRCIcwdIFZHNIhkWM=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=yLxw21kksCBIt72ro182n7s9nogw5raEGlDbA6tG5t0fmGSCuMboe1Bw9IsUtz82s
-	KKUKq3rt/vdyrWnBZP1QJhBMQ0gBjvxlY7aUfJozKD7QL/wpFAVt70tUd/bvNoIsWy
-	G9noxuK04qnKlZhfVL5aa56fzHPuD0WwFSa5x9bw=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNQ3A018585
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:26 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE108.ent.ti.com
-	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	b=v9037XuXtQLp1f0ymHTjCzhUZyr7qZH/mSZKJAOf+LO0VoR2NVoFGzeax5TJIJL5e
+	0qZGKLLbReoL7426PVU9ltAeiOKDJ8HP+sWyQ4VS1q9wIIT5ihzqhOCHaBd1zBJ7jW
+	FYeP0YmqZ7i086AX/aK26DJmuGUF1VDQ4KvJwaWg=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNPja018535
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:25 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
 	Thu, 27 Sep 2018 10:23:25 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Thu, 27 Sep 2018 10:23:26 -0500
+	Transport; Thu, 27 Sep 2018 10:23:25 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNIJK014983
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:25 -0500
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNIJG014983
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:24 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 27 Sep 2018 11:22:24 -0400
-Message-ID: <1538061764-54977-11-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 27 Sep 2018 11:22:20 -0400
+Message-ID: <1538061764-54977-7-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1538061764-54977-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1538061764-54977-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 10/30] emac-lld-rtos:Update to version 01.00.03.12A and added support to k3
+Subject: [rocko/master][PATCH 06/30] board-rtos: Update to version 01.00.10.02 and added support to k3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,50 +66,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 15:23:27 -0000
+X-List-Received-Date: Thu, 27 Sep 2018 15:23:28 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/emac-lld/emac-lld-rtos_git.bb | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ recipes-bsp/board-rtos/board-rtos_git.bb | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-index f0b1672..9519c83 100644
---- a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-+++ b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-@@ -5,21 +5,21 @@ inherit ti-pdk
+diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
+index df3e961..0e253d7 100644
+--- a/recipes-bsp/board-rtos/board-rtos_git.bb
++++ b/recipes-bsp/board-rtos/board-rtos_git.bb
+@@ -5,22 +5,22 @@ inherit ti-pdk
  LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://emacver.h;beginline=1;endline=47;md5=f66bb3695972ca2a85d990a390f45d88"
+ LIC_FILES_CHKSUM = "file://board.h;beginline=1;endline=32;md5=9bed8e4ac2fb37fc627cefe49eb1c919"
  
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|c665x-evm"
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|c665x-evm|k3"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x|k3"
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- EMAC_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/emac-lld.git"
- EMAC_LLD_GIT_PROTOCOL = "git"
- EMAC_LLD_GIT_BRANCH = "master"
+ BOARD_GIT_URI = "git://git.ti.com/keystone-rtos/board.git"
+ BOARD_GIT_PROTOCOL = "git"
+ BOARD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.EMAC_LLD.01.00.03.11"
--EMAC_LLD_SRCREV = "d541d5a564029b3472e054cd7aa2bae53b40378c"
-+# Below commit ID corresponds to "DEV.EMAC_LLD.01.00.03.12A"
-+EMAC_LLD_SRCREV = "5501d03014ada54f25e72eda380f751e734f006e"
+-# Below commit ID corresponds to "DEV.BOARD.01.00.10.01"
+-BOARD_SRCREV = "983d89de8143645571e7893e95632a8be0fab67e"
++# Below commit ID corresponds to "DEV.BOARD.01.00.10.02"
++BOARD_SRCREV = "60bde3650d067e4064f93c292c8d9108aa1bf57b"
  
- BRANCH ="${EMAC_LLD_GIT_BRANCH}"
- SRC_URI = "${EMAC_LLD_GIT_URI};protocol=${EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH ="${BOARD_GIT_BRANCH}"
+ SRC_URI = "${BOARD_GIT_URI};protocol=${BOARD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${EMAC_LLD_SRCREV}"
--PV = "01.00.03.11"
-+PV = "01.00.03.12A"
- PR = "r0"
+ SRCREV = "${BOARD_SRCREV}"
+-PV = "01.00.10.01"
+-PR = "r1"
++PV = "01.00.10.02"
++PR = "r0"
  
- DEPENDS_append = " board-rtos osal-rtos"
-@@ -27,6 +27,9 @@ DEPENDS_append_ti33x = " starterware-rtos"
- DEPENDS_append_ti43x = " starterware-rtos"
- DEPENDS_append_k2g  = " cppi-lld-rtos qmss-lld-rtos"
+ DEPENDS_append = " i2c-lld-rtos \
+                    spi-lld-rtos \
+@@ -63,6 +63,11 @@ DEPENDS_append_dra7xx = " pm-lld-rtos \
+                           mmcsd-lld-rtos \
+ "
  
-+DEPENDS_remove_k3 = "board-rtos "
-+DEPENDS_append_k3 = " udma-lld-rtos "
++DEPENDS_append_am65xx-evm = " sciclient-rtos \
++                              pm-lld-rtos \
++"
++
 +
  # Build with make instead of XDC
  TI_PDK_XDCMAKE = "0"
