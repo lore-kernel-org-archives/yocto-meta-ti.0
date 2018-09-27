@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 21F35E00B47; Thu, 27 Sep 2018 08:23:25 -0700 (PDT)
+	id 2C71FE0090A; Thu, 27 Sep 2018 08:23:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,43 +17,43 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      medium trust
 	*      [198.47.23.249 listed in list.dnswl.org]
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0002E00519
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0D3BE00754
 	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 08:23:24 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RFNOXj128061
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8RFNOAe128065
 	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1538061804;
-	bh=s1FoWmzal+aiirug1oxbeveCoSq2KhWccafcPI3USg8=;
+	bh=VcKPmT0wTtg7L6TgjIPqYqH0wR0zqeH48Q7jhaBb8Yc=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=VFwY70ACeIp/pGChAET9CDeu6QYP0OE3JAD9FSa0+E2Tboh/AgtNAJ6bZPLJZBkfo
-	wpN+tYVBTzX4fMqKwslsYgIcYKRai1xMYGbIJpi7m2VWiZiIRaCzreSYCypCMrbGRQ
-	VdNVq4lidaYQIXRg9luqHOEUJgR84kbJUnzur/Ww=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNOZu016314
+	b=pbpCvhBSNIEIIOqxkQASpQ0NqbWwDf3O5h3CRb/E3UGCIu5TC1ApYnjMhdOVVTamV
+	z5Tpw6KKOA/CEXSVFEvCnibHJ57KGSxgl6tKlsFh1lZJMeeL01muZDxb5ve8lF+H9l
+	Isw2BQl70ci0L4jTHnVso6q78o9rG6tyTZkTxo7E=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNO1o016317
 	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:24 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
 	Thu, 27 Sep 2018 10:23:24 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
 	Transport; Thu, 27 Sep 2018 10:23:24 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNIJB014983
-	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:23 -0500
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8RFNIJC014983
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2018 10:23:24 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 27 Sep 2018 11:22:15 -0400
-Message-ID: <1538061764-54977-2-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 27 Sep 2018 11:22:16 -0400
+Message-ID: <1538061764-54977-3-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1538061764-54977-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1538061764-54977-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 01/30] ti-pdk-bbclass: Checking for doxygen support in the correct manner
+Subject: [rocko/master][PATCH 02/30] common-csl-ip: Update to version 03.03.00.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,33 +71,33 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- classes/ti-pdk.bbclass | 6 +++---
+ recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-index 0716074..f59969f 100644
---- a/classes/ti-pdk.bbclass
-+++ b/classes/ti-pdk.bbclass
-@@ -9,8 +9,8 @@ DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
- DEPENDS_remove_ti33x = "ti-cgt6x-native"
- DEPENDS_remove_ti43x = "ti-cgt6x-native"
- DEPENDS_append_omapl1 = " ti-cgt-arm-native"
--DEPENDS_remove_am65xx-evm = "gcc-arm-none-eabi-native ti-cgt6x-native"
--DEPENDS_append_am65xx-evm = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
-+DEPENDS_remove_k3 = "gcc-arm-none-eabi-native ti-cgt6x-native"
-+DEPENDS_append_k3 = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index ed8078d..c31d313 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
- S = "${WORKDIR}/git"
- B = "${WORKDIR}/build"
-@@ -72,7 +72,7 @@ PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
- PARALLEL_MAKE = ""
+ COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
  
- def get_doxygen_support(d):
--    if d.getVar('TI_PDK_DOXYGEN_SUPPORT') == '1':
-+    if d.getVar('TI_PDK_DOXYGEN_SUPPORT', True) == '1':
-         return ''
-     return 'DOXYGEN_SUPPORT=no'
+-PV = "05.01.00.00"
++PV = "03.04.00.12"
+ INC_PR = "r0"
  
+ CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+@@ -12,8 +12,8 @@ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "master"
+ CSL_GIT_DESTSUFFIX = "git"
+ 
+-# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.05.01.00.00"
+-CSL_SRCREV = "8db3d673101a504fd7fb36d6c9c4981e1e15ff50"
++# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.12"
++CSL_SRCREV = "0c3b2c8a054d2af27fe1683e9aa579d43049a3bf"
+ 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
 1.9.1
 
