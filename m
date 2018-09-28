@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 41DBDE00ADF; Fri, 28 Sep 2018 09:26:39 -0700 (PDT)
+	id 561DCE00AB9; Fri, 28 Sep 2018 09:26:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,43 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C91AE00AD8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D8D0E00ADD
 	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 09:26:36 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8SGQZEB058394
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 11:26:35 -0500
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8SGQauG058398
+	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 11:26:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1538151995;
-	bh=qEfao6HKjvplO+XKiHfvEVUjlu1XwkJERAADSX7ti7k=;
+	s=ti-com-17Q1; t=1538151996;
+	bh=XqZy7zEph+K66Yilp80ykqiTR5V5ec3csukZlJFhI8c=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=rcjSX24HfJFoYl4NzFsEUU50yrTz9Od2QoPCCy9NukIB/VYQ+GJY1QkXsh8VtJQ3R
-	b3xK4NAcljtsRZ58xDFxdgH3pYceHJ6ZDDfonJlv1B3CoJbvb3zYLDbfuqQvtGNhlp
-	0g7adogfDX6sE/U+XOfwVGnNEwpmFDUlrYa04Szc=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8SGQZYB000722
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 11:26:35 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	b=SrjJRu7n0vwzFWb710MXGKg8TuhtJedvjKc777hmjgDKlnAUCvUSmRIhMierxGVmH
+	GRfbEnvsjUcWzKfadKcYgURerp6oekHSr2FnuicFtvzR/aCBeoPsTkDiJVcI+Vjf3L
+	LWTN6x6/HD47CmONJ4OWkJ/NzbSWtZHaQocCHy1I=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8SGQaYA003190
+	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 11:26:36 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 28 Sep 2018 11:26:35 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
+	Fri, 28 Sep 2018 11:26:36 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
 	Transport; Fri, 28 Sep 2018 11:26:35 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8SGQWMP011688
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8SGQWMQ011688
 	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 11:26:35 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 28 Sep 2018 12:26:14 -0400
-Message-ID: <1538151990-44823-14-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 28 Sep 2018 12:26:15 -0400
+Message-ID: <1538151990-44823-15-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1538151990-44823-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1538151990-44823-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH v3 13/29] fatfs-rtos: Update to version 01.00.00.11 & added k3 support
+Subject: [rocko/master][PATCH v3 14/29] mcbsp-lld-rtos: Update to version 01.00.00.11A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,39 +71,31 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb b/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
-index 546ec87..6f02f0c 100644
---- a/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
-+++ b/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
-@@ -5,21 +5,21 @@ inherit ti-pdk
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://FATFS.h;beginline=1;endline=32;md5=6619832755598d1cc2b01f2e6a1801d6"
+diff --git a/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb b/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
+index f65e22a..277ec13 100644
+--- a/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
++++ b/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
+@@ -13,14 +13,14 @@ MCBSP_LLD_GIT_PROTOCOL = "git"
+ MCBSP_LLD_GIT_BRANCH = "master"
+ MCBSP_LLD_GIT_DESTSUFFIX = "git/ti/drv/mcbsp"
  
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1"
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|k3"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-# Below commit ID corresponds to "DEV.MCBSP_LLD.01.00.00.10"
+-MCBSP_LLD_SRCREV = "4b53ebb479c769dac4908b759191f62b3b90ce4d"
++# Below commit ID corresponds to "DEV.MCBSP_LLD.01.00.00.11A"
++MCBSP_LLD_SRCREV = "fb654c63ec9cf0c9b898a901abc176ecd9a06517"
  
- FATFS_GIT_URI = "git://git.ti.com/keystone-rtos/fatfs.git"
- FATFS_GIT_PROTOCOL = "git"
- FATFS_GIT_BRANCH = "master"
+ BRANCH = "${MCBSP_LLD_GIT_BRANCH}"
+ SRC_URI = "${MCBSP_LLD_GIT_URI};destsuffix=${MCBSP_LLD_GIT_DESTSUFFIX};protocol=${MCBSP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
--# Below commit ID corresponds to "DEV.FATFS_LLD.01.00.00.10"
--FATFS_SRCREV = "6d4e228e53dd50da0d0fed3877a9b366519d80b4"
-+# Below commit ID corresponds to "DEV.FATFS_LLD.01.00.00.11"
-+FATFS_SRCREV = "8b1bd374ebcb898d209305727106d4bf3f313ab2"
- 
- BRANCH = "${FATFS_GIT_BRANCH}"
- SRC_URI = "${FATFS_GIT_URI};protocol=${FATFS_GIT_PROTOCOL};branch=${BRANCH}"
- 
- SRCREV = "${FATFS_SRCREV}"
+ SRCREV = "${MCBSP_LLD_SRCREV}"
 -PV = "01.00.00.10"
-+PV = "01.00.00.11"
++PV = "01.00.00.11A"
  PR = "r0"
  
- DEPENDS_append = " mmcsd-lld-rtos"
+ S = "${WORKDIR}/${MCBSP_LLD_GIT_DESTSUFFIX}"
 -- 
 1.9.1
 
