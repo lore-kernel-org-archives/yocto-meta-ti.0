@@ -1,62 +1,63 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4E3E3E00566; Fri, 28 Sep 2018 05:21:51 -0700 (PDT)
+	id DA4D3E009E7; Fri, 28 Sep 2018 07:22:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HTML_MESSAGE,RCVD_IN_DNSWL_MED autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	http://www.dnswl.org/, *      medium trust
+	*      [198.47.23.248 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F283E00519
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 05:21:50 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C3B32E009CF
+	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 07:22:32 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8SCLnOK071937
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 07:21:49 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w8SEMWI9099672
+	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 09:22:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1538137309;
-	bh=cAaeMLY3DUrsfBgA2hDPWhkCzzALl5Laz9QlVLHv8o4=;
-	h=Subject:From:To:CC:References:Date:In-Reply-To;
-	b=LcBDB3JivypOPJxJrb47vzCi3Ya5Qjqd5y/ZjEYUXO6SNMiibcHhz16HUPEfxYClA
-	0vtEqGP68euV4aNvGYJlLtUugh2XE+LuJDGRR94Bkj9IntOdNWqxmTjJYQu+PbLx5X
-	V9/9Nt8Np0+32BanGl0tw4rRSMzkDxe4phXt9+8k=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8SCLnBm000512
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 07:21:49 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1538144552;
+	bh=vEa9oOXSexricoFz6zG2uriSGqSbHk7P8bZHuNlbp68=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=t+Lk8nDvaeWeE9I4I/owL7AMbadFpb21eQGqTx2Y3+7JLJD0XmCgFNnHh51EP/Ri2
+	mIjjteVgYE0+Djt+G/pzTnh93c3aqgimxygGmjznr5Y9tqZa3n3Qc0SBWCXr2xn21l
+	Zu7IbMESKhTfowhOolUt9N4tpeLd5oWAbOHxJPsY=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8SEMW3T009462
+	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2018 09:22:32 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 28 Sep 2018 07:21:49 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Fri, 28 Sep 2018 07:21:49 -0500
-Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w8SCLmYZ029122;
-	Fri, 28 Sep 2018 07:21:49 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-References: <1537801175-24942-1-git-send-email-j-stiffler@ti.com>
-	<3adb07a1-b65b-fac6-c331-2e6c307aac81@ti.com>
-Message-ID: <71588169-10f0-673e-c577-2c0c50906342@ti.com>
-Date: Fri, 28 Sep 2018 08:21:48 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
+	Fri, 28 Sep 2018 09:22:32 -0500
+Received: from DLEE109.ent.ti.com ([fe80::992e:7546:157e:3b3d]) by
+	DLEE109.ent.ti.com ([fe80::992e:7546:157e:3b3d%17]) with mapi id
+	15.01.1466.003; Fri, 28 Sep 2018 09:22:31 -0500
+From: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [rocko/master][PATCH v2 01/30] ti-pdk-bbclass:
+	Checking for doxygen support in the correct manner
+Thread-Index: AQHUVqosoX52AL0Q2024sfZlvlltTKUFv3sA
+Date: Fri, 28 Sep 2018 14:22:31 +0000
+Message-ID: <d7921beb7fd0422ba15437061a2830ed@ti.com>
+References: <1538081009-52859-1-git-send-email-m-radhakrishnan2@ti.com>
+	<1538081009-52859-2-git-send-email-m-radhakrishnan2@ti.com>
+	<20180927213638.GM8582@beryl>
+In-Reply-To: <20180927213638.GM8582@beryl>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [158.218.117.116]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-In-Reply-To: <3adb07a1-b65b-fac6-c331-2e6c307aac81@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: Re: [PATCH v5 1/3] swtools: common tools for xdc-based component build
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [rocko/master][PATCH v2 01/30] ti-pdk-bbclass: Checking for doxygen support in the correct manner
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,238 +70,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2018 12:21:51 -0000
-Content-Type: multipart/alternative;
-	boundary="------------0C2ED406F815B5B713631AC9"
+X-List-Received-Date: Fri, 28 Sep 2018 14:22:36 -0000
 Content-Language: en-US
-
---------------0C2ED406F815B5B713631AC9
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Ping.
-
-On 9/26/2018 8:22 AM, Jacob Stiffler wrote:
-> Denys,
->
-> Can you please backport this set to ti2018.03?
->
->
-> Thank you,
->
-> Jake
->
-> On 9/24/2018 10:59 AM, Jacob Stiffler wrote:
->> From: Jianzhong Xu<xuj@ti.com>
->>
->> Add SWTOOLS which is needed to build xdc-based processor libs such as
->> DSPLIB, MATHLIB, etc from source.
->>
->> Signed-off-by: Jianzhong Xu<xuj@ti.com>
->> Signed-off-by: Jacob Stiffler<j-stiffler@ti.com>
->> ---
->> Changes from previous version:
->> * Removed duplication of shortlog in full commit log
->>
->>   recipes-ti/includes/ti-paths.inc  |  2 ++
->>   recipes-ti/swtools/swtools_git.bb | 44 +++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 46 insertions(+)
->>   create mode 100644 recipes-ti/swtools/swtools_git.bb
->>
->> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
->> index a401264..f797a2d 100644
->> --- a/recipes-ti/includes/ti-paths.inc
->> +++ b/recipes-ti/includes/ti-paths.inc
->> @@ -39,6 +39,7 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
->>   export RTFS_INSTALL_DIR_RECIPE       = "${installdir}/ti-rtfs-tree"
->>   export SYSBIOS_INSTALL_DIR_RECIPE    = "${installdir}/ti-sysbios-tree"
->>   export SYSLINK_INSTALL_DIR_RECIPE    = "${installdir}/ti-syslink-tree"
->> +export SWTOOLS_INSTALL_DIR_RECIPE    = "${installdir}/ti-swtools-tree"
->>   export UIA_INSTALL_DIR_RECIPE        = "${installdir}/ti-uia-tree"
->>   export VICPLIB_INSTALL_DIR_RECIPE    = "${installdir}/ti-vicplib-tree"
->>   export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
->> @@ -97,6 +98,7 @@ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}
->>   export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
->>   export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
->>   export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
->> +export SWTOOLS_INSTALL_DIR         = "${STAGING_DIR_TARGET}${SWTOOLS_INSTALL_DIR_RECIPE}"
->>   export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
->>   export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
->>   export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
->> diff --git a/recipes-ti/swtools/swtools_git.bb b/recipes-ti/swtools/swtools_git.bb
->> new file mode 100644
->> index 0000000..425a069
->> --- /dev/null
->> +++ b/recipes-ti/swtools/swtools_git.bb
->> @@ -0,0 +1,44 @@
->> +SUMMARY = "TI Software Tools"
->> +HOMEPAGE ="https://git.ti.com/ep-processor-libraries/swtools"
->> +SECTION = "devel"
->> +LICENSE = "BSD"
->> +LIC_FILES_CHKSUM ="file://ti/mas/swtools/copyright.txt;md5=b1f52a1435051fdb18f8885b0384147d"
->> +
->> +require ../includes/ti-paths.inc
->> +
->> +DEPENDS = "ti-cgt6x-native \
->> +           ti-sysbios \
->> +           ti-xdctools-native"
->> +
->> +PV = "5_0_8"
->> +PR = "r0"
->> +S = "${WORKDIR}/git"
->> +BRANCH = "master"
->> +SRC_URI = "git://git.ti.com/ep-processor-libraries/swtools.git;protocol=git;branch=${BRANCH}"
->> +SRCREV = "881267836907de650edadc56b8e57ab45428021d"
->> +
->> +export C64PCODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
->> +export C674CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
->> +export C66CODEGENTOOL  = "${CGTOOLS_INSTALL_DIR}"
->> +
->> +PATH_append = ":${XDC_INSTALL_DIR}"
->> +
->> +XDCPATH .= "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
->> +
->> +export XDCPATH
->> +
->> +do_compile() {
->> +	cd ${S}/ti/mas/swtools
->> +	xdc
->> +}
->> +
->> +do_install() {
->> +	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
->> +	install -d ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
->> +	cp -pPrf ${S}/* ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
->> +}
->> +
->> +FILES_${PN}-dev += "${SWTOOLS_INSTALL_DIR_RECIPE}"
->> +
->> +INSANE_SKIP_${PN}-dev = "arch staticdev"
->> +ALLOW_EMPTY_${PN} = "1"
->
-
---------------0C2ED406F815B5B713631AC9
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <p>Ping.<br>
-    </p>
-    <div class="moz-cite-prefix">On 9/26/2018 8:22 AM, Jacob Stiffler
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:3adb07a1-b65b-fac6-c331-2e6c307aac81@ti.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <pre class="content">Denys,
-
-Can you please backport this set to ti2018.03?
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
 
-Thank you,
 
-Jake</pre>
-      <br>
-      <div class="moz-cite-prefix">On 9/24/2018 10:59 AM, Jacob Stiffler
-        wrote:<br>
-      </div>
-      <blockquote type="cite"
-        cite="mid:1537801175-24942-1-git-send-email-j-stiffler@ti.com">
-        <pre wrap="">From: Jianzhong Xu <a class="moz-txt-link-rfc2396E" href="mailto:xuj@ti.com" moz-do-not-send="true">&lt;xuj@ti.com&gt;</a>
+-----Original Message-----
+From: Dmytriyenko, Denys=20
+Sent: Thursday, September 27, 2018 5:37 PM
+To: Radhakrishnan, Mahesh
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [rocko/master][PATCH v2 01/30] ti-pdk-bbclass: Check=
+ing for doxygen support in the correct manner
 
-Add SWTOOLS which is needed to build xdc-based processor libs such as
-DSPLIB, MATHLIB, etc from source.
+On Thu, Sep 27, 2018 at 04:43:00PM -0400, Mahesh Radhakrishnan wrote:
+> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+> ---
+>  classes/ti-pdk.bbclass | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+> index 0716074..f59969f 100644
+> --- a/classes/ti-pdk.bbclass
+> +++ b/classes/ti-pdk.bbclass
+> @@ -9,8 +9,8 @@ DEPENDS_append_omap-a15 =3D " ti-cgt-arm-native"
+>  DEPENDS_remove_ti33x =3D "ti-cgt6x-native"
+>  DEPENDS_remove_ti43x =3D "ti-cgt6x-native"
+>  DEPENDS_append_omapl1 =3D " ti-cgt-arm-native"
+> -DEPENDS_remove_am65xx-evm =3D "gcc-arm-none-eabi-native ti-cgt6x-native"
+> -DEPENDS_append_am65xx-evm =3D " ti-cgt-arm-native gcc-linaro-baremetal-a=
+arch64-native"
+> +DEPENDS_remove_k3 =3D "gcc-arm-none-eabi-native ti-cgt6x-native"
+> +DEPENDS_append_k3 =3D " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-n=
+ative"
+> =20
+>  S =3D "${WORKDIR}/git"
+>  B =3D "${WORKDIR}/build"
+> @@ -72,7 +72,7 @@ PARALLEL_XDC =3D "--jobs=3D${BB_NUMBER_THREADS}"
+>  PARALLEL_MAKE =3D ""
+> =20
+>  def get_doxygen_support(d):
+> -    if d.getVar('TI_PDK_DOXYGEN_SUPPORT') =3D=3D '1':
+> +    if d.getVar('TI_PDK_DOXYGEN_SUPPORT', True) =3D=3D '1':
 
-Signed-off-by: Jianzhong Xu <a class="moz-txt-link-rfc2396E" href="mailto:xuj@ti.com" moz-do-not-send="true">&lt;xuj@ti.com&gt;</a>
-Signed-off-by: Jacob Stiffler <a class="moz-txt-link-rfc2396E" href="mailto:j-stiffler@ti.com" moz-do-not-send="true">&lt;j-stiffler@ti.com&gt;</a>
----
-Changes from previous version:
-* Removed duplication of shortlog in full commit log
+"Checking for doxygen support in the correct manner"
 
- recipes-ti/includes/ti-paths.inc  |  2 ++
- recipes-ti/swtools/swtools_git.bb | 44 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+)
- create mode 100644 recipes-ti/swtools/swtools_git.bb
+Why the change?
 
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index a401264..f797a2d 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -39,6 +39,7 @@ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
- export RTFS_INSTALL_DIR_RECIPE       = "${installdir}/ti-rtfs-tree"
- export SYSBIOS_INSTALL_DIR_RECIPE    = "${installdir}/ti-sysbios-tree"
- export SYSLINK_INSTALL_DIR_RECIPE    = "${installdir}/ti-syslink-tree"
-+export SWTOOLS_INSTALL_DIR_RECIPE    = "${installdir}/ti-swtools-tree"
- export UIA_INSTALL_DIR_RECIPE        = "${installdir}/ti-uia-tree"
- export VICPLIB_INSTALL_DIR_RECIPE    = "${installdir}/ti-vicplib-tree"
- export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
-@@ -97,6 +98,7 @@ export OSAL_INSTALL_DIR       = "${STAGING_DIR_TARGET}${OSAL_INSTALL_DIR_RECIPE}
- export M4_TOOLCHAIN_INSTALL_DIR    = "${STAGING_DIR_NATIVE}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
- export GCC_ARM_NONE_TOOLCHAIN      = "${STAGING_DIR_NATIVE}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}"
- export TI_CGT_PRU_INSTALL_DIR      = "${STAGING_DIR_NATIVE}${TI_CGT_PRU_INSTALL_DIR_RECIPE}"
-+export SWTOOLS_INSTALL_DIR         = "${STAGING_DIR_TARGET}${SWTOOLS_INSTALL_DIR_RECIPE}"
- export DSPLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${DSPLIB_C66_INSTALL_DIR_RECIPE}"
- export MATHLIB_C66_INSTALL_DIR     = "${STAGING_DIR_TARGET}${MATHLIB_C66_INSTALL_DIR_RECIPE}"
- export IMGLIB_C66_INSTALL_DIR      = "${STAGING_DIR_TARGET}${IMGLIB_C66_INSTALL_DIR_RECIPE}"
-diff --git a/recipes-ti/swtools/swtools_git.bb b/recipes-ti/swtools/swtools_git.bb
-new file mode 100644
-index 0000000..425a069
---- /dev/null
-+++ b/recipes-ti/swtools/swtools_git.bb
-@@ -0,0 +1,44 @@
-+SUMMARY = "TI Software Tools"
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://git.ti.com/ep-processor-libraries/swtools" moz-do-not-send="true">"https://git.ti.com/ep-processor-libraries/swtools"</a>
-+SECTION = "devel"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://ti/mas/swtools/copyright.txt;md5=b1f52a1435051fdb18f8885b0384147d" moz-do-not-send="true">"file://ti/mas/swtools/copyright.txt;md5=b1f52a1435051fdb18f8885b0384147d"</a>
-+
-+require ../includes/ti-paths.inc
-+
-+DEPENDS = "ti-cgt6x-native \
-+           ti-sysbios \
-+           ti-xdctools-native"
-+
-+PV = "5_0_8"
-+PR = "r0"
-+S = "${WORKDIR}/git"
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/ep-processor-libraries/swtools.git;protocol=git;branch=${BRANCH}"
-+SRCREV = "881267836907de650edadc56b8e57ab45428021d"
-+
-+export C64PCODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C674CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C66CODEGENTOOL  = "${CGTOOLS_INSTALL_DIR}"
-+
-+PATH_append = ":${XDC_INSTALL_DIR}"
-+
-+XDCPATH .= "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
-+
-+export XDCPATH
-+
-+do_compile() {
-+	cd ${S}/ti/mas/swtools
-+	xdc
-+}
-+
-+do_install() {
-+	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-+	install -d ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
-+	cp -pPrf ${S}/* ${D}${SWTOOLS_INSTALL_DIR_RECIPE}
-+}
-+
-+FILES_${PN}-dev += "${SWTOOLS_INSTALL_DIR_RECIPE}"
-+
-+INSANE_SKIP_${PN}-dev = "arch staticdev"
-+ALLOW_EMPTY_${PN} = "1"
-</pre>
-      </blockquote>
-      <br>
-    </blockquote>
-  </body>
-</html>
+I was thinking it was a bug fix when the doxygen support was added, but I'm=
+ wrong .
+I see the commit now which explains why this was removed=20
+https://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/classes/ti-pdk.bb=
+class?h=3Drocko&id=3D195d3f7b93b605eccab685b408f354d35a60884e=20
+Apparently meta-processor-sdk-internal's ti-pdk.bbclass  didn't catch up wi=
+th this change.
+So, pls ignore this patch.
 
---------------0C2ED406F815B5B713631AC9--
+>          return ''
+>      return 'DOXYGEN_SUPPORT=3Dno'
+> =20
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
