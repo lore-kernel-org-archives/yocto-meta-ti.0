@@ -1,59 +1,60 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6C9EAE00A4F; Tue,  2 Oct 2018 05:29:28 -0700 (PDT)
+	id 16449E00971; Tue,  2 Oct 2018 11:38:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HTML_MESSAGE,RCVD_IN_DNSWL_MED autolearn=ham
 	version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	http://www.dnswl.org/, *      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A580E00950
-	for <meta-ti@yoctoproject.org>; Tue,  2 Oct 2018 05:29:27 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w92CTRUH120900
-	for <meta-ti@yoctoproject.org>; Tue, 2 Oct 2018 07:29:27 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCF60E00718
+	for <meta-ti@yoctoproject.org>; Tue,  2 Oct 2018 11:38:01 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w92Ic137010716
+	for <meta-ti@yoctoproject.org>; Tue, 2 Oct 2018 13:38:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1538483367;
-	bh=5UABZi7cL/2Gb5tiBRoLYo/1JIg0IOiE88eEHRdmcNY=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=hjVTY5Om+8LK/Lg1mwaFxLtpS+ipEjIZavL1mjVDNaGxTT0c183aLMmRRhRVRVeQq
-	9Y5EThAUCai9cn7e7PShKvdVn1dIrbMbs3NezKx2qRHUofoczMJcpFqgBX4u8PNCCF
-	5Kp8ar38hvZ7qZRhZQ3OB+X4gMhg5jrA7U5ddCAY=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w92CTRLR028260
-	for <meta-ti@yoctoproject.org>; Tue, 2 Oct 2018 07:29:27 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1538505481;
+	bh=ue+4or52dtVM4CQK39fy7hm+C+Gw0cRtHgQzMhyUAas=;
+	h=Subject:From:To:References:Date:In-Reply-To;
+	b=j6FE9eYozMaxMm4yfiBtMeVz0gM+qsM/lIxNwk5LAn+x6VZXs0iMJtdCqlm/aHlqX
+	4jHcfF04SRI9ah4QTF/uzV+hnRjxODICY1K09iYCfJaoh2RM0uwP6VggNLPJ8/cz6P
+	Y2AgZ8rF7kezNzUgYP39VsZ3O5gDf5zsD3IJuLRQ=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w92Ic1RO030988
+	for <meta-ti@yoctoproject.org>; Tue, 2 Oct 2018 13:38:01 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE101.ent.ti.com
+	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 2 Oct 2018 07:29:27 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 2 Oct 2018 13:38:01 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 2 Oct 2018 07:29:26 -0500
+	Transport; Tue, 2 Oct 2018 13:38:01 -0500
 Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w92CTQOv021349
-	for <meta-ti@yoctoproject.org>; Tue, 2 Oct 2018 07:29:26 -0500
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w92Ic0Jn008500
+	for <meta-ti@yoctoproject.org>; Tue, 2 Oct 2018 13:38:00 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
 References: <1538480167-12075-1-git-send-email-j-stiffler@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <d6478c27-3a89-1343-935d-32da5e16618d@ti.com>
-Date: Tue, 2 Oct 2018 08:29:26 -0400
+	<d6478c27-3a89-1343-935d-32da5e16618d@ti.com>
+Message-ID: <9dab7c3b-95ab-4f32-272f-5207e6eea46f@ti.com>
+Date: Tue, 2 Oct 2018 14:38:00 -0400
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <1538480167-12075-1-git-send-email-j-stiffler@ti.com>
+In-Reply-To: <d6478c27-3a89-1343-935d-32da5e16618d@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Subject: Re: [ti2018.03/rocko/master][PATCH] ti-cgt-arm: prevent build of existing library
 X-BeenThere: meta-ti@yoctoproject.org
@@ -68,69 +69,83 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2018 12:29:28 -0000
+X-List-Received-Date: Tue, 02 Oct 2018 18:38:03 -0000
 Content-Type: multipart/alternative;
-	boundary="------------7BBA97014DF7B76BF79E121A"
+	boundary="------------29B20B8FEF89B31F7F9E9E23"
 Content-Language: en-US
 
---------------7BBA97014DF7B76BF79E121A
+--------------29B20B8FEF89B31F7F9E9E23
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I recently ran into this error, so I sent this out in a hurry to get it 
-fixed. But now I am thinking that it may be better to remove this 
-library in do_configure, similar to base class calls make clean
 
-Any suggestions?
-
-
-Thanks,
-
-Jake
-
-On 10/2/2018 7:36 AM, Jacob Stiffler wrote:
-> * Prevent a potential error as mklib will return an error if the
->    library already exists.
-> * The error encountered is the following:
+On 10/2/2018 8:29 AM, Jacob Stiffler wrote:
 >
-> | >> ERROR: mklib: destination library .../work/x86_64-linux/ti-cgt-arm-native/16.9.2-r1/ti-cgt-arm-16.9.2/ti-cgt-arm_16.9.2.LTS/lib/rtsv7R4_A_le_v3D16_eabi.lib already exists
-> | WARNING: .../work/x86_64-linux/ti-cgt-arm-native/16.9.2-r1/temp/run.do_compile.13758:1 exit 1 from 'lib/mklib --pattern=rtsv7R4_A_le_v3D16_eabi.lib'
+> I recently ran into this error, so I sent this out in a hurry to get 
+> it fixed. But now I am thinking that it may be better to remove this 
+> library in do_configure, similar to base class calls make clean
 >
-> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> ---
->   recipes-ti/devtools/ti-cgt-arm.inc | 10 +++++++---
->   1 file changed, 7 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes-ti/devtools/ti-cgt-arm.inc b/recipes-ti/devtools/ti-cgt-arm.inc
-> index b9f7566..e83973b 100644
-> --- a/recipes-ti/devtools/ti-cgt-arm.inc
-> +++ b/recipes-ti/devtools/ti-cgt-arm.inc
-> @@ -9,7 +9,7 @@ require recipes-ti/includes/ti-paths.inc
->   
->   S = "${WORKDIR}/ti-cgt-arm-${PV}"
->   
-> -PR = "r1"
-> +PR = "r2"
->   
->   SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"
->   
-> @@ -19,8 +19,12 @@ TI_BIN_UNPK_CMDS = ""
->   
->   do_compile_append() {
->       cd ${S}/ti-cgt-arm_${PV}.LTS
-> -    export PATH=${PATH}:${S}/ti-cgt-arm_${PV}.LTS/bin
-> -    lib/mklib --pattern=rtsv7R4_A_le_v3D16_eabi.lib
-> +
-> +    if [ ! -f "./lib/rtsv7R4_A_le_v3D16_eabi.lib" ]
-> +    then
-> +        export PATH=${PATH}:${S}/ti-cgt-arm_${PV}.LTS/bin
-> +        lib/mklib --pattern=rtsv7R4_A_le_v3D16_eabi.lib
-> +    fi
->   }
->   
->   do_install() {
 
---------------7BBA97014DF7B76BF79E121A
+After thinking about it some more, I would prefer to remove the library 
+in do_configure() to be safe in the unlikely scenario that there are 
+dependencies involved.
+
+
+As it is now, this is hardcoded to a single library. While I am making 
+changes, should I enhance this to take a list of libraries so that it 
+can be easily extended in the future?
+
+
+> Any suggestions?
+>
+>
+> Thanks,
+>
+> Jake
+>
+> On 10/2/2018 7:36 AM, Jacob Stiffler wrote:
+>> * Prevent a potential error as mklib will return an error if the
+>>    library already exists.
+>> * The error encountered is the following:
+>>
+>> | >> ERROR: mklib: destination library .../work/x86_64-linux/ti-cgt-arm-native/16.9.2-r1/ti-cgt-arm-16.9.2/ti-cgt-arm_16.9.2.LTS/lib/rtsv7R4_A_le_v3D16_eabi.lib already exists
+>> | WARNING: .../work/x86_64-linux/ti-cgt-arm-native/16.9.2-r1/temp/run.do_compile.13758:1 exit 1 from 'lib/mklib --pattern=rtsv7R4_A_le_v3D16_eabi.lib'
+>>
+>> Signed-off-by: Jacob Stiffler<j-stiffler@ti.com>
+>> ---
+>>   recipes-ti/devtools/ti-cgt-arm.inc | 10 +++++++---
+>>   1 file changed, 7 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/recipes-ti/devtools/ti-cgt-arm.inc b/recipes-ti/devtools/ti-cgt-arm.inc
+>> index b9f7566..e83973b 100644
+>> --- a/recipes-ti/devtools/ti-cgt-arm.inc
+>> +++ b/recipes-ti/devtools/ti-cgt-arm.inc
+>> @@ -9,7 +9,7 @@ require recipes-ti/includes/ti-paths.inc
+>>   
+>>   S = "${WORKDIR}/ti-cgt-arm-${PV}"
+>>   
+>> -PR = "r1"
+>> +PR = "r2"
+>>   
+>>   SRC_URI ="http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"
+>>   
+>> @@ -19,8 +19,12 @@ TI_BIN_UNPK_CMDS = ""
+>>   
+>>   do_compile_append() {
+>>       cd ${S}/ti-cgt-arm_${PV}.LTS
+>> -    export PATH=${PATH}:${S}/ti-cgt-arm_${PV}.LTS/bin
+>> -    lib/mklib --pattern=rtsv7R4_A_le_v3D16_eabi.lib
+>> +
+>> +    if [ ! -f "./lib/rtsv7R4_A_le_v3D16_eabi.lib" ]
+>> +    then
+>> +        export PATH=${PATH}:${S}/ti-cgt-arm_${PV}.LTS/bin
+>> +        lib/mklib --pattern=rtsv7R4_A_le_v3D16_eabi.lib
+>> +    fi
+>>   }
+>>   
+>>   do_install() {
+
+--------------29B20B8FEF89B31F7F9E9E23
 Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
@@ -139,7 +154,15 @@ Content-Transfer-Encoding: 7bit
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body text="#000000" bgcolor="#FFFFFF">
-    <p><!--[if gte mso 9]><xml>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 10/2/2018 8:29 AM, Jacob Stiffler
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:d6478c27-3a89-1343-935d-32da5e16618d@ti.com">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <p><!--[if gte mso 9]><xml>
  <o:OfficeDocumentSettings>
   <o:AllowPNG/>
  </o:OfficeDocumentSettings>
@@ -460,33 +483,46 @@ Content-Transfer-Encoding: 7bit
 	mso-hansi-font-family:Calibri;
 	mso-hansi-theme-font:minor-latin;}
 </style>
-<![endif]-->
+<![endif]--> </p>
       <p class="MsoPlainText">I recently ran into this error, so I sent
-        this out in a
-        hurry to get it fixed. But now I am thinking that it may be
-        better to remove
-        this library in do_configure, similar to base class calls make
-        clean</p>
+        this out in a hurry to get it fixed. But now I am thinking that
+        it may be better to remove this library in do_configure, similar
+        to base class calls make clean</p>
+    </blockquote>
+    <p><br>
+    </p>
+    <p>After thinking about it some more, I would prefer to remove the
+      library in do_configure() to be safe in the unlikely scenario that
+      there are dependencies involved.</p>
+    <p><br>
+    </p>
+    <p>As it is now, this is hardcoded to a single library. While I am
+      making changes, should I enhance this to take a list of libraries
+      so that it can be easily extended in the future?<br>
+    </p>
+    <p><br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:d6478c27-3a89-1343-935d-32da5e16618d@ti.com">
       <p class="MsoPlainText">Any suggestions?</p>
       <p class="MsoPlainText"><br>
       </p>
       <p class="MsoPlainText">Thanks,</p>
       <p class="MsoPlainText">Jake<br>
       </p>
-    </p>
-    <div class="moz-cite-prefix">On 10/2/2018 7:36 AM, Jacob Stiffler
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:1538480167-12075-1-git-send-email-j-stiffler@ti.com">
-      <pre class="moz-quote-pre" wrap="">* Prevent a potential error as mklib will return an error if the
+      <div class="moz-cite-prefix">On 10/2/2018 7:36 AM, Jacob Stiffler
+        wrote:<br>
+      </div>
+      <blockquote type="cite"
+        cite="mid:1538480167-12075-1-git-send-email-j-stiffler@ti.com">
+        <pre class="moz-quote-pre" wrap="">* Prevent a potential error as mklib will return an error if the
   library already exists.
 * The error encountered is the following:
 
 | &gt;&gt; ERROR: mklib: destination library .../work/x86_64-linux/ti-cgt-arm-native/16.9.2-r1/ti-cgt-arm-16.9.2/ti-cgt-arm_16.9.2.LTS/lib/rtsv7R4_A_le_v3D16_eabi.lib already exists
 | WARNING: .../work/x86_64-linux/ti-cgt-arm-native/16.9.2-r1/temp/run.do_compile.13758:1 exit 1 from 'lib/mklib --pattern=rtsv7R4_A_le_v3D16_eabi.lib'
 
-Signed-off-by: Jacob Stiffler <a class="moz-txt-link-rfc2396E" href="mailto:j-stiffler@ti.com">&lt;j-stiffler@ti.com&gt;</a>
+Signed-off-by: Jacob Stiffler <a class="moz-txt-link-rfc2396E" href="mailto:j-stiffler@ti.com" moz-do-not-send="true">&lt;j-stiffler@ti.com&gt;</a>
 ---
  recipes-ti/devtools/ti-cgt-arm.inc | 10 +++++++---
  1 file changed, 7 insertions(+), 3 deletions(-)
@@ -502,7 +538,7 @@ index b9f7566..e83973b 100644
 -PR = "r1"
 +PR = "r2"
  
- SRC_URI = <a class="moz-txt-link-rfc2396E" href="http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}">"http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"</a>
+ SRC_URI = <a class="moz-txt-link-rfc2396E" href="http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}" moz-do-not-send="true">"http://software-dl.ti.com/codegen/esd/cgt_public_sw/TMS470/${PV}.LTS/${BINFILE};name=${BINFILE_NAME}"</a>
  
 @@ -19,8 +19,12 @@ TI_BIN_UNPK_CMDS = ""
  
@@ -520,8 +556,9 @@ index b9f7566..e83973b 100644
  
  do_install() {
 </pre>
+      </blockquote>
     </blockquote>
   </body>
 </html>
 
---------------7BBA97014DF7B76BF79E121A--
+--------------29B20B8FEF89B31F7F9E9E23--
