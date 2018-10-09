@@ -1,6 +1,6 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1709EE00A4F; Mon,  8 Oct 2018 18:25:15 -0700 (PDT)
+	id 799B3E00B6C; Mon,  8 Oct 2018 23:19:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,57 +13,57 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	provider *      (raj.khem[at]gmail.com)
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
 	no *      trust
-	*      [209.85.210.179 listed in list.dnswl.org]
+	*      [209.85.215.195 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
-	[209.85.210.179])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C568E0097C
-	for <meta-ti@yoctoproject.org>; Mon,  8 Oct 2018 18:25:14 -0700 (PDT)
-Received: by mail-pf1-f179.google.com with SMTP id l17-v6so4806814pff.2
-	for <meta-ti@yoctoproject.org>; Mon, 08 Oct 2018 18:25:14 -0700 (PDT)
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 419FCE00A86
+	for <meta-ti@yoctoproject.org>; Mon,  8 Oct 2018 23:19:01 -0700 (PDT)
+Received: by mail-pg1-f195.google.com with SMTP id t70-v6so267007pgd.12
+	for <meta-ti@yoctoproject.org>; Mon, 08 Oct 2018 23:19:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=HO76LQbO45D6MkNBAjhiW8FJECjYz62tjVuQkQajj70=;
-	b=bpiYAalmpbXX2TYdbpcaCAHadOj4KopX8fHBfYFsljgrhW3id38/L+JQaQ8dvulZAs
-	A0Q5f4nZ3s+RQIB05KlWf5MQCaHFNOR9WF6N7jEIHrC1csqgtc+cBl+aOMWxecul85eV
-	Iw8TXzUsgb2FCbRg0/dXb5/n0arJI5eyF8dBg3loWrWSB+8LtdHrkZD6Xrb8cGeHdor2
-	RtzNYWloOxXQUDJpc9cKM6F8sAUdFAeOQBx+Oiqhuhqpvu4ceRyndA8hOWcZHs+JUpF1
-	N9ZkEfaSDw/ECEqFe8URgPe2x1YEZ2FAc6RPKBYBrdxFXh92Qzd/0H/Y6gS0BpNdfVN3
-	mdFA==
+	bh=qv5lQGxsw3wbubK5Ufz8zo596F7iCTbqPK7ArlTjYeY=;
+	b=uYnERm0ZxFWv0loCp7h4yOISgrkvwBTMSmqjaRlzkhUKYYQvqXrD/Jha5THa4QRh/4
+	wIOqsaA3Z3zw2uHyqOVi4M1xmlzIHPHxiAyl2podB3d1sK6PtG77t1H4XBFAfWxG2ou0
+	0dyoY9yEB0+iZd0jHV9+C80OY5MljsRjE53xKpFlsWWee3UaxpG6d18rAuN0tqjksB4O
+	lUI225XuqYrOHkB7m+z+SkY4aahJiT69Zrmhs6C7LpJdf8ez17fyvXv64qBCL57+4U8v
+	alEbpSXnnEN/1pzialfyba3ymKnuXr+lyjYtknlGWGiwfXATgen9OwVge53COh+pwz5G
+	wz1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=HO76LQbO45D6MkNBAjhiW8FJECjYz62tjVuQkQajj70=;
-	b=U6qSMQL8qQq+SwobC2YN2YHpxEc/u5yrABtUGGJGHiHBd7t7c8tIaG5KDfyMO52Llo
-	/xKCX++eeMo/Jl8HBZhwvH3THJtTtP5juRAt6Z/lOeGy7zOf64g9qmGldp2wSmLEFovA
-	Y2NLmpNkeTjRuoNpdCgZ8rGHIAVQK7FbjOWv+SMAYyq5GilbHxWWSEE0VUD7fHGUyYg7
-	s+KWR7iEEnr7a0sTMN8zGPtACw1GitLNVPrASLHUNAbQFXJeyGT8QM4ZZUsiibCHcqGC
-	yprqwuaQBYVGpuX9vKmaY0zk7tW5HiPPDjLvdSmIZjKerjVDyx0ACwEQCGymJKz/vVp0
-	7Q6g==
-X-Gm-Message-State: ABuFfohVfSqhgV0aSHbgcUmCR+JC5dl9QwUOxrZ6rGVcst10xeC6oiKr
-	fKb9M9gWE8vGKLafAdDsN/mmKwCx
-X-Google-Smtp-Source: ACcGV602w9gjCUE1E567pb1W3dqWXuol5GjUxGiyKtuZlYHOtdAEh63EjtpZ+hZeTRqb+mfm5b6xaw==
-X-Received: by 2002:a63:a612:: with SMTP id
-	t18-v6mr18302629pge.338.1539048313217; 
-	Mon, 08 Oct 2018 18:25:13 -0700 (PDT)
+	bh=qv5lQGxsw3wbubK5Ufz8zo596F7iCTbqPK7ArlTjYeY=;
+	b=hfua1QKVzU6ekSExJRRv8WK9wqak8I649yyLg0J935BOySXOWVxBjp8F+L2zSPbzRd
+	05rvA6TU8YGew3oGBMBd+aqLvAoa0DO//0wEaP5rhabilF5TQbul6TM6vSmnSWyo4/8/
+	WSeBI8ypeW3vM6Mv+pGoVfZMaTw5G0reEobHSal0gXkxtLOz4fNa0DolJvuh99rNdWuZ
+	izkCTyKOqmSc6BzIHLZBlgpuXPClryKhwZ5JDXrmV/eyuYT0tJhHD4HIYo8tdl13xanQ
+	BBHwEx7NlPTSXsnCZ2bGW/Ha5JZXkky8Y3dZ5bVEor7H2sj4nTS0LPMy1rJqmJMwLu7w
+	dMbg==
+X-Gm-Message-State: ABuFfojKhXZ5nXpEF8LxqLDSrMzwmNnnYQPIsqkz0mqtuBNlQ4OHeCEc
+	xDiSOUuE/YVGjGkgJVv+PR1cwEQe
+X-Google-Smtp-Source: ACcGV61jnYmpdFJw12UfwQvLNUEqOFX9KNPRPr6EHiOjOsqIIJUfanyclEPGX/20/pvya+Xl7MhdGA==
+X-Received: by 2002:a63:4614:: with SMTP id
+	t20-v6mr24890558pga.438.1539065940401; 
+	Mon, 08 Oct 2018 23:19:00 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::fd07])
 	by smtp.gmail.com with ESMTPSA id
-	q25-v6sm31451369pfk.154.2018.10.08.18.25.12
+	i2-v6sm17823466pgq.35.2018.10.08.23.18.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 08 Oct 2018 18:25:12 -0700 (PDT)
+	Mon, 08 Oct 2018 23:18:59 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Mon,  8 Oct 2018 18:25:04 -0700
-Message-Id: <20181009012504.22166-1-raj.khem@gmail.com>
+Date: Mon,  8 Oct 2018 23:18:49 -0700
+Message-Id: <20181009061849.5757-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-Subject: [PATCH] cm3-pm-firmware: Use ffreestanding in cflags
+Subject: [PATCH] doxygen: Set DISABLE_STATIC to be empty
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -76,88 +76,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2018 01:25:15 -0000
+X-List-Received-Date: Tue, 09 Oct 2018 06:19:02 -0000
 Content-Transfer-Encoding: 8bit
 
-This helps it compile when we use hard-float ABI for linux
-and want to build this standlone app using same toolchain for
-cortex-m3 ( which does not have FPU )
+by default its set like this
+DISABLE_STATIC ?= " --disable-static"
+
+but doxygen configure is not typical autoconf
+generated so this option is not available, its
+better to keep it empty so it can work with
+dustros which disable static libs as policy
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb   |  8 ++--
- .../files/0001-Use-ffreestanding.patch        | 39 +++++++++++++++++++
- 2 files changed, 43 insertions(+), 4 deletions(-)
- create mode 100644 recipes-bsp/cm3-pm-firmware/files/0001-Use-ffreestanding.patch
+ recipes-devtools/doxygen/doxygen_1.8.9.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index 1dcc021c..3572638d 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -9,14 +9,14 @@ PR = "r0"
- SRCREV = "7eb9c0856a9e8b3b42bf64f761da135852b8eea7"
- BRANCH ?= "ti-v4.1.y"
+diff --git a/recipes-devtools/doxygen/doxygen_1.8.9.1.bb b/recipes-devtools/doxygen/doxygen_1.8.9.1.bb
+index 27560fdd..eb43e741 100644
+--- a/recipes-devtools/doxygen/doxygen_1.8.9.1.bb
++++ b/recipes-devtools/doxygen/doxygen_1.8.9.1.bb
+@@ -14,6 +14,8 @@ SRC_URI[sha256sum] = "d4ab6e28d4d45d8956cad17470aade3fbe2356e8f64b92167e738c1887
  
--SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH}"
-+SRC_URI = "git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git;protocol=git;branch=${BRANCH} \
-+           file://0001-Use-ffreestanding.patch \
-+          "
+ EXTRA_OECONF = "--prefix ${prefix}"
  
- S = "${WORKDIR}/git"
++DISABLE_STATIC = ""
++
+ do_configure () {
+ 	./configure ${EXTRA_OECONF}
  
--FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
--
- do_compile() {
--	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI} ${SECURITY_NOPIE_CFLAGS}"
-+	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${SECURITY_NOPIE_CFLAGS}"
- }
- 
- do_install() {
-diff --git a/recipes-bsp/cm3-pm-firmware/files/0001-Use-ffreestanding.patch b/recipes-bsp/cm3-pm-firmware/files/0001-Use-ffreestanding.patch
-new file mode 100644
-index 00000000..701d2956
---- /dev/null
-+++ b/recipes-bsp/cm3-pm-firmware/files/0001-Use-ffreestanding.patch
-@@ -0,0 +1,39 @@
-+From 8f19f63a6fa65ce0fc4de2162d6aaeb6a92fedd9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 8 Oct 2018 18:15:13 -0700
-+Subject: [PATCH] Use -ffreestanding
-+
-+When compiled using hosted toolchains e.g. default Linux targetted
-+toolchains from OpenEmbedded, we need to ensure that none of hosted
-+nature of toolchain is manifested and its compiled as a standalone
-+baremetal application. In addition to using -nostdlib we also need to
-+specify -ffreestanding so it does not include linux specific compiler
-+headers etc.
-+
-+This means that the floating point config defaults of toolchain is not
-+looking for platform specific headers e.g. gnu/stubs-soft.h or
-+gnu/stubs-hard.h, since OE make it free choice to use hard-fp calling
-+convention ABI choice, this change ensures it does not affect compiling
-+this baremetal application
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index f1c10ae..3fd9f23 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -13,7 +13,7 @@ SRCDIR = src
-+ BINDIR = bin
-+ 
-+ INCLUDES = $(SRCDIR)/include
-+-CFLAGS =-mcpu=cortex-m3 -mthumb -nostdlib -Wall -Wundef \
-++CFLAGS =-mcpu=cortex-m3 -mthumb -nostdlib -ffreestanding -Wall -Wundef \
-+ 	-Werror-implicit-function-declaration -Wstrict-prototypes \
-+ 	-Wdeclaration-after-statement -fno-delete-null-pointer-checks \
-+ 	-Wempty-body -fno-strict-overflow  -g -I$(INCLUDES) -O2	-MD
-+-- 
-+2.19.1
-+
 -- 
 2.19.1
 
