@@ -1,61 +1,67 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 37A61E00B92; Fri, 12 Oct 2018 13:37:04 -0700 (PDT)
+	id 0CA60E00B92; Fri, 12 Oct 2018 13:49:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	http://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.222.195 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2335E00B6C
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 13:37:02 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w9CKb1I9033056;
-	Fri, 12 Oct 2018 15:37:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1539376621;
-	bh=rXi4teKlEGM5/t/O+Ira1YVYqjOH6oNFHRFxfk8OjV4=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=wWlFBMaGCmfLrrbqGCEuvz6YZyBqO2S5sF0Lz75E2Pg952ruzS5aR6OLmeIVCn3tI
-	irdgspJfQN6z+SmdMTHhvVI3ggXDKjpVXGEbTal9BJBX9HB+vWWGtyXyIrl8L2ONsd
-	iI2TlOKCdibc6yV0T77IsPMP+bBn87uUmPk4afZs=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9CKb0ad028715;
-	Fri, 12 Oct 2018 15:37:01 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 12 Oct 2018 15:37:01 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE106.ent.ti.com
-	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Fri, 12 Oct 2018 15:37:01 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9CKb0rJ026820;
-	Fri, 12 Oct 2018 15:37:01 -0500
-Date: Fri, 12 Oct 2018 16:37:00 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20181012203700.GY19188@beryl>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9E51E00B6C
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 13:49:32 -0700 (PDT)
+Received: by mail-qk1-f195.google.com with SMTP id m8-v6so8465294qka.12
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 13:49:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=qBtaN5RH3Z3nxlR058+YMQnFuM7TWTrpszdhNzc2UeA=;
+	b=WQm/JwaZgByA80DdZFIWB7qcizDCqug2557qcnnZXcDvekX79gkYyb71Z7bGMuP9SZ
+	tPte+CYJMccYBFRgtq8ZiiaWXpoFaYsi+zow/JIqQl42UJr/nUDOcQGd6Cvp8vvqaQET
+	LIwubofbEzzkRRt2biUv6DSVwaLbQiAEE0y1y/HXCbsfygEletoS+E/Ze1Y7AmIR+aQU
+	LvUaygwKuyj4QLXMdrXMsS6AITvJkQXVZmq6dVUTnFOQ/TMmbn5qsgfhgp47BcShc0SR
+	qwb0OTmR4YMRtPiHzoC4GKH/JsTNwfZ4OEhPOv1NOwCsgPT35bxP2HTwI63Z1Le2Ikv9
+	EHeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=qBtaN5RH3Z3nxlR058+YMQnFuM7TWTrpszdhNzc2UeA=;
+	b=DcXOcOr9RrVBQr2kIiErF29x7gJlHH4gic4LVwLJqF+RFoa8fczIXLlbZDJxezogt1
+	QPBxaNFOOW+y9PLaDjXOOaVSUAk5P51xiCXqGGwXnk1RG3EEJxVyDWwYSHGIumY2nitT
+	nbZl3vFf+CUQ1tfW7pjWaShE/eajnvC9o8ZgAx2XVwmkcV/9uDhsr1tL/Yu8YTXoTU72
+	oMnHpE17f19QAo65HhDpD5Eu4rFpjCdcrhv4n6PvLksrnkOou/zXZ0Z+CJ6v8khpQV/e
+	N4mcHqVv2vShcR92xHx8OvG0hn4hXX2gImP/QY395Vp/hTsIc6CrbL7nPP52h8pHLOCX
+	cwJg==
+X-Gm-Message-State: ABuFfohEH08eYah+OB0ViV+DCUrj7HLwbgUDGyu2O7hjBdD+4ZFd3bt4
+	ygkCBaiGkx75A+4nlZVbwwA7BK3lLo2i5Eq3pmI=
+X-Google-Smtp-Source: ACcGV627e4hrWu6zAqdPimOgabdAowoFaXaDv5DGAnW5689tWnUPh84LoK5dzjISwHaxsPnAd7AgG+QdPosamFzW21I=
+X-Received: by 2002:a37:655:: with SMTP id 82-v6mr7119301qkg.223.1539377371792;
+	Fri, 12 Oct 2018 13:49:31 -0700 (PDT)
+MIME-Version: 1.0
 References: <20181012195000.4545-1-raj.khem@gmail.com>
 	<20181012195801.GV19188@beryl>
 	<CAMKF1spE0fJTErUNg=ifQx9s2T-UybjAL++GFwZM+Pyi77pJwg@mail.gmail.com>
 	<20181012203149.GW19188@beryl>
 	<CAMKF1sqh743UGN0DeWEoR1jX=2NQYGtwh+ONEg+q0MTXkkx3aA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqh743UGN0DeWEoR1jX=2NQYGtwh+ONEg+q0MTXkkx3aA@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	<20181012203700.GY19188@beryl>
+In-Reply-To: <20181012203700.GY19188@beryl>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 12 Oct 2018 13:49:05 -0700
+Message-ID: <CAMKF1sr48=qWuYYGA4DBbA7Mz+SeOquVfv8iLCWXh66+_pfYQw@mail.gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH] beaglebone-getting-started: Use cp options to not alter file mode
 X-BeenThere: meta-ti@yoctoproject.org
@@ -70,73 +76,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2018 20:37:04 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 12 Oct 2018 20:49:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Oct 12, 2018 at 01:34:13PM -0700, Khem Raj wrote:
-> On Fri, Oct 12, 2018 at 1:31 PM Denys Dmytriyenko <denys@ti.com> wrote:
+On Fri, Oct 12, 2018 at 1:37 PM Denys Dmytriyenko <denys@ti.com> wrote:
+>
+> On Fri, Oct 12, 2018 at 01:34:13PM -0700, Khem Raj wrote:
+> > On Fri, Oct 12, 2018 at 1:31 PM Denys Dmytriyenko <denys@ti.com> wrote:
+> > >
+> > > On Fri, Oct 12, 2018 at 01:01:41PM -0700, Khem Raj wrote:
+> > > > On Fri, Oct 12, 2018 at 12:58 PM Denys Dmytriyenko <denys@ti.com> wrote:
+> > > > >
+> > > > > Are you still trying to do world builds? :)
+> > > > >
+> > > >
+> > > > yes. with the patches I send in this week meta-ti seems to behave in
+> > > > multi-BSP setup
+> > > > I will soon add it to bblayers.conf for Yoe distro and it will start
+> > > > testing on meta-openembedded CI builds, atleast for not nosing other
+> > > > BSPs, I dont have infra to do world build for all the machines
+> > > >
+> > > > but if you were to pick Yoe distro and run with it for machines you
+> > > > are interested in
+> > > > that would be awesome.
+> > > >
+> > > > See. https://github.com/YoeDistro/yoe-distro, everyone having interesting boards
+> > > > is welcome to run world builds using that and report problems.
+> > >
+> > > I can probably add it to my CI loop as well - I already do extensive builds
+> > > and tests on Arago, Poky and distroless.
 > >
-> > On Fri, Oct 12, 2018 at 01:01:41PM -0700, Khem Raj wrote:
-> > > On Fri, Oct 12, 2018 at 12:58 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> > > >
-> > > > Are you still trying to do world builds? :)
-> > > >
-> > >
-> > > yes. with the patches I send in this week meta-ti seems to behave in
-> > > multi-BSP setup
-> > > I will soon add it to bblayers.conf for Yoe distro and it will start
-> > > testing on meta-openembedded CI builds, atleast for not nosing other
-> > > BSPs, I dont have infra to do world build for all the machines
-> > >
-> > > but if you were to pick Yoe distro and run with it for machines you
-> > > are interested in
-> > > that would be awesome.
-> > >
-> > > See. https://github.com/YoeDistro/yoe-distro, everyone having interesting boards
-> > > is welcome to run world builds using that and report problems.
-> >
-> > I can probably add it to my CI loop as well - I already do extensive builds
-> > and tests on Arago, Poky and distroless.
-> 
-> Cool thanks. Although you wont need all of above
-> after this :)
+> > Cool thanks. Although you wont need all of above
+> > after this :)
+>
+> Meaning?
 
-Meaning?
-
-
-> > > > Most of the places with this QA warning that are part of our builds were fixed
-> > > > before, but there are some outdated recipes like this one which were left out.
-> > > >
-> > > >
-> > > > On Fri, Oct 12, 2018 at 12:50:00PM -0700, Khem Raj wrote:
-> > > > > Fixes do_package_qa warnings
-> > > > > <FILE> is owned by uid 1000, which is the same as the user running bitbake. This may be due to host contamination
-> > > > >
-> > > > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > > > > ---
-> > > > >  recipes-ti/beagleboard/beaglebone-getting-started.bb | 2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/recipes-ti/beagleboard/beaglebone-getting-started.bb b/recipes-ti/beagleboard/beaglebone-getting-started.bb
-> > > > > index 603a01a7..6c61a4e9 100644
-> > > > > --- a/recipes-ti/beagleboard/beaglebone-getting-started.bb
-> > > > > +++ b/recipes-ti/beagleboard/beaglebone-getting-started.bb
-> > > > > @@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
-> > > > >
-> > > > >  do_install() {
-> > > > >       install -d ${D}${datadir}/${PN}
-> > > > > -     cp -a ${S}/* ${D}${datadir}/${PN}
-> > > > > +     cp -R --no-dereference --preserve=mode,links ${S}/* ${D}${datadir}/${PN}
-> > > > >  }
-> > > > >
-> > > > >  FILES_${PN} += "${datadir}/${PN}"
-> > > > > --
-> > > > > 2.19.1
-> > > > >
-> > > > > --
-> > > > > _______________________________________________
-> > > > > meta-ti mailing list
-> > > > > meta-ti@yoctoproject.org
-> > > > > https://lists.yoctoproject.org/listinfo/meta-ti
+Yoe is a superset
 
