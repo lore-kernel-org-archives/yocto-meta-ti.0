@@ -1,6 +1,6 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 26379E00AB9; Wed, 10 Oct 2018 21:23:37 -0700 (PDT)
+	id BF3AAE00B92; Fri, 12 Oct 2018 12:50:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,57 +13,57 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	provider *      (raj.khem[at]gmail.com)
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
 	no *      trust
-	*      [209.85.215.173 listed in list.dnswl.org]
+	*      [209.85.215.196 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
-	[209.85.215.173])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBDB9E00718
-	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2018 21:23:36 -0700 (PDT)
-Received: by mail-pg1-f173.google.com with SMTP id i4-v6so3519617pgq.9
-	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2018 21:23:36 -0700 (PDT)
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61009E00B6C
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 12:50:11 -0700 (PDT)
+Received: by mail-pg1-f196.google.com with SMTP id n31-v6so6304861pgm.7
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 12:50:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=vFKpmrF+iAsU5yDzfycUGBmKfP1gbsZw/9tu/7QJ14M=;
-	b=OMYtgQogSzgRVUcBLIMeAPTTfn69QUAO4B20V3nXWTRRp3SsPTBz4IJMHwFO7I+jDY
-	vZ+BJduF7sM4xJcJfegMJ5cn7ROLWh+MA+kXIucg3DavLtndA6UKlH/3LsaNqoxKBBek
-	Vj4Q8qC8inazDAL4hdLNz1vU7zpyduE+SrWmZhPulfW1QsiZ7fB93aobzuAjRTTQYReC
-	EIzbD4k0HLyHo/8QQIMszZBamH4dXImXi0ENk6URRFcejKDTKtCF8x3LNFCyH7Ppm5RB
-	60RAWXkAZ7eJh99mI4oMRQXmyVipEqDb/9Pho0/m8xTxXdGii/KHp1uA/weWaUxyNprQ
-	AjzQ==
+	bh=RD8IdSgbOk/AAIBSZ0wzlR52nINohhErQvxJ8ofYLa0=;
+	b=uWyW3LlGVqk3bnRMItNkfYVayHJogptsW4tzH9OHdmZsPvR2Dd0S9imUcD6QX45Znp
+	+OehlAPWIW2YgHA6GY8XRf9xWZUJShDrSOFKX9jAnf6W/t2DxfF3c3ohBk/kV0OTcUh1
+	s2JZno1e5eLaRhLk92c8b8P6PDGk4cdoloV02WxP+CaU/hmUGA7ZZgQ6Fn3DkSOPf6P0
+	SIQ6vaUFp1CjDJ7wXAzmnmOMVvB0oMRKf9DWBxaoQzREYhlIQ2WN7ACdMJm8ED9lK0OQ
+	daxLOQJDOSLcfozpLXYdVl4aLmPugpVtbxatnFx04Hc1NpUzB9QSp/3jpbkue8Uk6Zar
+	VBGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=vFKpmrF+iAsU5yDzfycUGBmKfP1gbsZw/9tu/7QJ14M=;
-	b=f8aanj0h4o6aRfHd0t1646z9RE82FG3zhLizb2XsJbvZMOI6a17whDWHYuJJ1kKKeU
-	JLUMhNGiTT7SWVUXdR8PoPs+gzMjYB5GtTcjRQihAqAU5t3ORdK1MBVIBAc8TuWzyPnk
-	VL/G0omhv9dkzMgd1eIpPeIGW5gmpIqqgT6oPWtgcbBxxbUbi3a5KgPsnFcd0XffdCi4
-	gc+J6FJrwxO+6n4jIt5rc+y5qwpvj9aZIYKWqg4N7tVznDVfUmT7Ch9Iv0fjPzuC1cnH
-	dyxSYPwUwhSKLARP9fmaxRMm+1QbKjTRPk0+rN06kvCtXn9FtdyFXg73Z8EvCiMikTqI
-	3jPg==
-X-Gm-Message-State: ABuFfog7RlfkdoaemXbiz494EltD00G0hcqgbv119SCGozqLLNG56VYp
-	Uqc8/MFuhFRuZx2nvJv0QJtsXJvT
-X-Google-Smtp-Source: ACcGV60UZaTRWXT7L2I3sX3LrYzHryFVcA3S9N+wPdtd9mL+rr0XH+wq6d++JZ3/aNq+xivAzfo3sA==
-X-Received: by 2002:a63:2d43:: with SMTP id
-	t64-v6mr32675926pgt.128.1539231815568; 
-	Wed, 10 Oct 2018 21:23:35 -0700 (PDT)
+	bh=RD8IdSgbOk/AAIBSZ0wzlR52nINohhErQvxJ8ofYLa0=;
+	b=TDFU6FFSxFGjo8lxpih0TU/JSE0rB64vN+drKmQTZMMd+nO38SzF9meF7WbDmmiIPe
+	kmFOjQVoKD8N3HzlUEUmXb8NtK9FMJH7Pjk0MRjyl8IR6XtwdRNFX5iE0C6QLUGhNAB3
+	NZhNSk6/sl+1g13HvoJLmvIGYVnXtFtyPpREz8i7lraQCkBWu3GELBtvSmW/pFeg0YYr
+	A/flxfZAdd2wiuYJQOm6tJVrN/3kFLBIoAxZIyVB537+TdpAj7FrDCidlowbPSe35W2l
+	xxNwEZrDuh+gu+k2/ws1Df+mWNDK9F/9iZke1RHrT0cWth9gD1Q5x72axCM+q9qZDPeH
+	Yu4g==
+X-Gm-Message-State: ABuFfohouOjJLjMTh60xge4iNKizqddyflOoMW+6VXfE9WMbu8eQKbtX
+	iyFu5Xvpu3RtqysySSysBkr2TUe1
+X-Google-Smtp-Source: ACcGV605hitxH05PWA3e/a1T75RDFZVg8iQp7A+acYuhx0NL8LfIIPm4nxuncIal0kF4zGmnCTXjfQ==
+X-Received: by 2002:a63:2251:: with SMTP id
+	t17-v6mr6619579pgm.275.1539373810449; 
+	Fri, 12 Oct 2018 12:50:10 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::939f])
 	by smtp.gmail.com with ESMTPSA id
-	n7-v6sm13613984pgv.63.2018.10.10.21.23.34
+	c79-v6sm3466717pfc.92.2018.10.12.12.50.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 10 Oct 2018 21:23:34 -0700 (PDT)
+	Fri, 12 Oct 2018 12:50:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed, 10 Oct 2018 21:23:24 -0700
-Message-Id: <20181011042324.31996-1-raj.khem@gmail.com>
+Date: Fri, 12 Oct 2018 12:50:00 -0700
+Message-Id: <20181012195000.4545-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-Subject: [PATCH] recips: Mark more recipes to be ti-soc specific
+Subject: [PATCH] beaglebone-getting-started: Use cp options to not alter file mode
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -76,63 +76,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2018 04:23:37 -0000
+X-List-Received-Date: Fri, 12 Oct 2018 19:50:11 -0000
 Content-Transfer-Encoding: 8bit
+
+Fixes do_package_qa warnings
+<FILE> is owned by uid 1000, which is the same as the user running bitbake. This may be due to host contamination
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb | 3 +++
- recipes-bsp/cmem/cmem.inc                   | 2 ++
- recipes-ti/devtools/ti-xdctools-common.inc  | 5 +++++
- recipes-ti/osal/ti-osal.inc                 | 4 ++++
- 4 files changed, 14 insertions(+)
+ recipes-ti/beagleboard/beaglebone-getting-started.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index 3572638d..29fff504 100644
---- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -26,3 +26,6 @@ do_install() {
+diff --git a/recipes-ti/beagleboard/beaglebone-getting-started.bb b/recipes-ti/beagleboard/beaglebone-getting-started.bb
+index 603a01a7..6c61a4e9 100644
+--- a/recipes-ti/beagleboard/beaglebone-getting-started.bb
++++ b/recipes-ti/beagleboard/beaglebone-getting-started.bb
+@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
+ 
+ do_install() {
+ 	install -d ${D}${datadir}/${PN}
+-	cp -a ${S}/* ${D}${datadir}/${PN}
++	cp -R --no-dereference --preserve=mode,links ${S}/* ${D}${datadir}/${PN}
  }
  
- FILES_${PN} += "${base_libdir}/firmware"
-+COMPATIBLE_HOST ?= "null"
-+COMPATIBLE_HOST_ti33x = "(.*)"
-+
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-index 11cebe8d..abbf2492 100644
---- a/recipes-bsp/cmem/cmem.inc
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -12,3 +12,5 @@ PV = "4.15.00.02+git${SRCPV}"
- SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
- 
- S = "${WORKDIR}/git"
-+COMPATIBLE_HOST ?= "null"
-+COMPATIBLE_HOST_ti-soc = "(.*)"
-diff --git a/recipes-ti/devtools/ti-xdctools-common.inc b/recipes-ti/devtools/ti-xdctools-common.inc
-index a3949cad..0e86ef7a 100644
---- a/recipes-ti/devtools/ti-xdctools-common.inc
-+++ b/recipes-ti/devtools/ti-xdctools-common.inc
-@@ -61,3 +61,8 @@ libhpi.so \
- lib.so \
- libcairo.so.2 \
- "
-+COMPATIBLE_HOST ?= "null"
-+COMPATIBLE_HOST_ti-soc = "(.*)"
-+COMPATIBLE_HOST_class-native = "(.*)"
-+COMPATIBLE_HOST_class-nativesdk = "(.*)"
-+
-diff --git a/recipes-ti/osal/ti-osal.inc b/recipes-ti/osal/ti-osal.inc
-index cb8da354..bbbdf517 100644
---- a/recipes-ti/osal/ti-osal.inc
-+++ b/recipes-ti/osal/ti-osal.inc
-@@ -19,3 +19,7 @@ INSANE_SKIP_${PN}-dev = "staticdev"
- 
- ALLOW_EMPTY_${PN} = "1"
- FILES_${PN}-dev += "${OSAL_INSTALL_DIR_RECIPE}"
-+
-+COMPATIBLE_HOST ?= "null"
-+COMPATIBLE_HOST_ti-soc = "(.*)"
-+
+ FILES_${PN} += "${datadir}/${PN}"
 -- 
 2.19.1
 
