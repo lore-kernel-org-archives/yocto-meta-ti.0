@@ -1,67 +1,69 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 66431E00B93; Fri, 12 Oct 2018 14:20:34 -0700 (PDT)
+	id 7DBC0E00B9F; Fri, 12 Oct 2018 18:57:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E49D8E00B6C
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 14:20:32 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w9CLKWKX043943;
-	Fri, 12 Oct 2018 16:20:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1539379232;
-	bh=06QEN/iVl5S5+6l5twWvD0S1hzEtvqMe9hmZFZQF2+U=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=MLwm+P/qR/sIH3w/rIdoLMHvVEcbVhHW7aW0lCCKrBYx6iAk+hsE2RtyXktHerPcs
-	pwro94H3MdLxdMRW3hS4qZKXley5zDhuqSsO772hn7LcH9Q4JxlMlWDeSvYKBQR33A
-	6aeqkaWSziJbvS8c2BOHvz7ms8jQp7ouAiO4b4Jw=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9CLKWbJ007988;
-	Fri, 12 Oct 2018 16:20:32 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Fri, 12 Oct 2018 16:20:32 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Fri, 12 Oct 2018 16:20:31 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9CLKVtm013620;
-	Fri, 12 Oct 2018 16:20:31 -0500
-Date: Fri, 12 Oct 2018 17:20:31 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20181012212031.GA19188@beryl>
-References: <20181012195000.4545-1-raj.khem@gmail.com>
-	<20181012195801.GV19188@beryl>
-	<CAMKF1spE0fJTErUNg=ifQx9s2T-UybjAL++GFwZM+Pyi77pJwg@mail.gmail.com>
-	<20181012203149.GW19188@beryl>
-	<CAMKF1sqh743UGN0DeWEoR1jX=2NQYGtwh+ONEg+q0MTXkkx3aA@mail.gmail.com>
-	<20181012203700.GY19188@beryl>
-	<CAMKF1sr48=qWuYYGA4DBbA7Mz+SeOquVfv8iLCWXh66+_pfYQw@mail.gmail.com>
-	<20181012210144.GZ19188@beryl>
-	<CAMKF1spNj-CGTGUQaRqSNZXjjspVQQ_fkRt=9pHDhMYMG279Pg@mail.gmail.com>
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.215.195 listed in list.dnswl.org]
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 058E5E00B92
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 18:57:29 -0700 (PDT)
+Received: by mail-pg1-f195.google.com with SMTP id f18-v6so6631868pgv.3
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2018 18:57:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=zMXKgYd11M4CcynRoS1fV5vnv1VlkSBum7e9RkGVEfE=;
+	b=D9QFUNryC8CxiCwIeqIzQ1gwt/FuZdBx3n9fQKhLsIlknbD+mkMrTWtSqfC/jXyPQ5
+	5mR3o7uZ+KfJ6gaGsYYXnzmYtfRe1QAlni8srlSPilmxpGUpyXHMvsi+5i0LYbpZeSXO
+	ab21iLKgQA2tWwRex/1Ecga8dMoY0PYr+s07CKgBxFjYAe67Xh2maI/K3Lbid67mO/pw
+	WgoQoK5SYZ2ZOo2su8v/BzhGH3hVi+EsaJIDrgW+OOEY/qvC+sigBC3VjT6PRftYVEpn
+	tG2nQv75dOcFTub1NqMvfUfEfX2TPclxKi1fKUU8/oC8jvbcKdQSOlo+ouCzDodgoZg3
+	M8wg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=zMXKgYd11M4CcynRoS1fV5vnv1VlkSBum7e9RkGVEfE=;
+	b=ftPyb2hFqGgUQuNu4d98sq4E1hIeIN1pyTAplOihB+r/qvjEu1KD9qlSQotjVFdbCx
+	cnoOeAtssh9xBDKMcoGMgf3VoT33PYJGE5fyXR/IQJKlrlkuQgy4Asr5mQQMG3q09wl/
+	7ZfoOGAscStdhPSglc3XbS9/xi2L8E/ooiWxawKeWWf9FENGJlMKOWvZsozVlVi2JSBs
+	p8/agmQ/KnZ9mfCuLxDdV4w/83Vt6nvd8ficRqNpd4vqeeySWhsmCpwrnSN4BHrun2do
+	gfsG/qKeAsblJ0vToyY9OeLNXzqFJUkHopqBZsX6dPx1JMLr7Kj5tT25GhL4X/B79icv
+	W/Aw==
+X-Gm-Message-State: ABuFfoh72z8bPK40HEoxt+KwyE2TsocNqZgxveB0vaX7bkG3sjDomEdd
+	OMXh75Wh3W4zTus6AoJlvpGh1pbg
+X-Google-Smtp-Source: ACcGV60dXOuG8K4xZev474A5j/ykTccB/Du8EKzsEpv6kTHrKird3vp1Qhfk3vY0XjyAZxQxNDr7yw==
+X-Received: by 2002:a62:5f05:: with SMTP id
+	t5-v6mr8468852pfb.223.1539395848902; 
+	Fri, 12 Oct 2018 18:57:28 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::939f])
+	by smtp.gmail.com with ESMTPSA id
+	i5-v6sm3456319pfo.107.2018.10.12.18.57.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 12 Oct 2018 18:57:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Fri, 12 Oct 2018 18:57:20 -0700
+Message-Id: <20181013015721.33162-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spNj-CGTGUQaRqSNZXjjspVQQ_fkRt=9pHDhMYMG279Pg@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] beaglebone-getting-started: Use cp options to not alter file mode
+Subject: [PATCH 1/2] beaglebone.wks: Add beaglebone wic template
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -74,53 +76,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2018 21:20:34 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 13 Oct 2018 01:57:30 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 12, 2018 at 02:14:23PM -0700, Khem Raj wrote:
-> On Fri, Oct 12, 2018 at 2:01 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> >
-> > On Fri, Oct 12, 2018 at 01:49:05PM -0700, Khem Raj wrote:
-> > > On Fri, Oct 12, 2018 at 1:37 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> > > >
-> > > > On Fri, Oct 12, 2018 at 01:34:13PM -0700, Khem Raj wrote:
-> > > > > On Fri, Oct 12, 2018 at 1:31 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> > > > > >
-> > > > > > On Fri, Oct 12, 2018 at 01:01:41PM -0700, Khem Raj wrote:
-> > > > > > > On Fri, Oct 12, 2018 at 12:58 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> > > > > > > >
-> > > > > > > > Are you still trying to do world builds? :)
-> > > > > > > >
-> > > > > > >
-> > > > > > > yes. with the patches I send in this week meta-ti seems to behave in
-> > > > > > > multi-BSP setup
-> > > > > > > I will soon add it to bblayers.conf for Yoe distro and it will start
-> > > > > > > testing on meta-openembedded CI builds, atleast for not nosing other
-> > > > > > > BSPs, I dont have infra to do world build for all the machines
-> > > > > > >
-> > > > > > > but if you were to pick Yoe distro and run with it for machines you
-> > > > > > > are interested in
-> > > > > > > that would be awesome.
-> > > > > > >
-> > > > > > > See. https://github.com/YoeDistro/yoe-distro, everyone having interesting boards
-> > > > > > > is welcome to run world builds using that and report problems.
-> > > > > >
-> > > > > > I can probably add it to my CI loop as well - I already do extensive builds
-> > > > > > and tests on Arago, Poky and distroless.
-> > > > >
-> > > > > Cool thanks. Although you wont need all of above
-> > > > > after this :)
-> > > >
-> > > > Meaning?
-> > >
-> > > Yoe is a superset
-> >
-> > Uhm, hardly. Do you mean just BSP pieces?
-> 
-> not only that but we have added lot
-> of common layers too
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ wic/beaglebone.wks | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 wic/beaglebone.wks
 
-Still, it may only replace basic BSP testing, not a whole Distro with custom 
-apps, etc...
+diff --git a/wic/beaglebone.wks b/wic/beaglebone.wks
+new file mode 100644
+index 00000000..b75f238d
+--- /dev/null
++++ b/wic/beaglebone.wks
+@@ -0,0 +1,6 @@
++# short-description: Create SD card image for Beaglebone
++# long-description: Creates a partitioned SD card image for Beaglebone.
++# Boot files are located in the first vfat partition.
++
++part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 4 --size 16 --sourceparams="loader=u-boot" --use-uuid
++part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4 --use-uuid
+-- 
+2.19.1
+
 
