@@ -1,71 +1,69 @@
 Return-Path: <trini@konsulko.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D19E0E00950; Tue, 16 Oct 2018 11:52:15 -0700 (PDT)
+	id E8CCAE00950; Tue, 16 Oct 2018 11:53:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [209.85.222.194 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.160.196 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 930F7E006AF
-	for <meta-ti@yoctoproject.org>; Tue, 16 Oct 2018 11:52:14 -0700 (PDT)
-Received: by mail-qt1-f196.google.com with SMTP id e10-v6so27009006qtq.12
-	for <meta-ti@yoctoproject.org>; Tue, 16 Oct 2018 11:52:14 -0700 (PDT)
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B076E006AF
+	for <meta-ti@yoctoproject.org>; Tue, 16 Oct 2018 11:53:10 -0700 (PDT)
+Received: by mail-qk1-f194.google.com with SMTP id q5-v6so14839090qki.6
+	for <meta-ti@yoctoproject.org>; Tue, 16 Oct 2018 11:53:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=Ss2OLi3D5CDdk3gCPFR6UfeS8IKqLRxJ4iahkkjPR/8=;
-	b=f+fNAhNtODfdGqCQjpkF/FV0BppG3BMDslVOi7jJGNWPBPhY43+cD6WRmnltnan4jM
-	LDg0gqO5hWkIMPOivG38h/TraMy4OWNXGhZAFFtiogLAI7LEpZV6NJa+7D6qMfMhUgTe
-	p0lnOzBasVFEVIk8Wnjoy66RJSLC/Ms4oci80=
+	bh=vwPMvE1vDeHu0ccIwnYuc99RwZz9AdkKj7pncySE+qw=;
+	b=TIEdDwBd8IYEL/MJbENTN1JU+NUQ29kwozuZ4L7fOX83TpGjttbuVy1JH/x9GOYhJf
+	RC7QFo6wjleUX43XoRZW6kz1YYh/gQmpOoi0dPZ7d9Jwxt6Oa1CmLm4SlwBaJewiV3eq
+	sm6t7Btp3E2L9MfK5LWJKP01gBS+2EOylBRWo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Ss2OLi3D5CDdk3gCPFR6UfeS8IKqLRxJ4iahkkjPR/8=;
-	b=BvflOzKfwSICQh91NZilF4W6O5Pc8glpkxBqo7QFjlohMd/ELDsXvWRd+DXCnlh2bZ
-	sGWr0CzJrt1SvsCEqKl+pMoCWYHxPtUW4htsf5Sm4HrZwhKxphshKv+QlIDH2PrAZenr
-	ImBhRkaxGpoukxjA0MIxr6K3LA+KP25UPy6c19dniPGYyh1fhDuz1HKk6ioX7Wtb0ASQ
-	/62xSmL7gvYIIaKl4Kh9qTofC33XUTXlNQ0G1YBdqLFYbOAzyrgLI4YpZqGly9SPrG8P
-	21pkLH0NPDZnp3e8t1eZ26C/uohefxLno1Mk/un0VRRWgljSVi7crWrIz0n6WQKZ5t5t
-	d5sA==
-X-Gm-Message-State: ABuFfogyGQ9oM0QPEhPAxdtSWvdaZmc535cjKrGxVVqtgL72zmmD8NJH
-	ceCSQKQJ3Ud2VTlFLNLIFya36w==
-X-Google-Smtp-Source: ACcGV60m19vBNiwj0nMZY19C+ceqDXMw52tddXrJ8gPu8Je9tloO5txRn7Izmxyk99ehUVfc7rGyHg==
-X-Received: by 2002:a0c:f0d0:: with SMTP id d16mr22512059qvl.207.1539715933774;
-	Tue, 16 Oct 2018 11:52:13 -0700 (PDT)
+	bh=vwPMvE1vDeHu0ccIwnYuc99RwZz9AdkKj7pncySE+qw=;
+	b=dn+fKs2pRxJTzoDsTWEyVG2v9nH5DSoSxgo3GBlFsatgGl0yDxWn0FH7+e5zk1gAkq
+	jNEQGNHkIXmpay9n7JSa9VZf4NER5DrrCPVUrAaGde9wfQCDvH2guToXU9H8j+Ix2+la
+	7TlPdLFRUpMGNFTeasJrr+gaxl8+Kq8FzG+h0ICvqWFJYx6V1Ce6PBF9qYjkM3wgM6MA
+	Fm9dndxkqAkvd2f53PDxvFoYEMTWWECgUlpgatXXrOqSdhpf+tip8XJo7SXccG/+vvmn
+	i9IWSDuju3UvkiwwuMqz6+pXOKUIYSypGQ/27W3NEhmCrwLQanpezCom1kdJA0d3Mwa/
+	dIWQ==
+X-Gm-Message-State: ABuFfoibHjqgpXCSvKYF0hE7EnDShgfmtJbPt+5GJmr/Q9aXi76pFmyy
+	CoYakObpVM2IHzBj9XoOQJHY2Q==
+X-Google-Smtp-Source: ACcGV62M6MMDh2l+ZIjygw6v8acpN//C14WVkEVsfwSds6AZ1R6eN7w9HgnCQTRSbBSNPiOw0nBCUQ==
+X-Received: by 2002:a37:d656:: with SMTP id
+	t83-v6mr379077qki.151.1539715990319; 
+	Tue, 16 Oct 2018 11:53:10 -0700 (PDT)
 Received: from bill-the-cat (cpe-65-184-133-47.ec.res.rr.com. [65.184.133.47])
 	by smtp.gmail.com with ESMTPSA id
-	r57-v6sm10838328qtc.36.2018.10.16.11.52.12
+	n25-v6sm12767987qtf.14.2018.10.16.11.53.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 16 Oct 2018 11:52:12 -0700 (PDT)
-Date: Tue, 16 Oct 2018 14:52:10 -0400
+	Tue, 16 Oct 2018 11:53:09 -0700 (PDT)
+Date: Tue, 16 Oct 2018 14:53:07 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20181016185210.GM1032@bill-the-cat>
-References: <1539399036-6199-1-git-send-email-denys@ti.com>
-	<CAMKF1soZ5HFiWKDrk5jcYG1NihHaSMqmpJXMxCH9b-cKyKra7w@mail.gmail.com>
-	<20181014192417.GB20670@beryl>
-	<CAMKF1sqGw7PxhmncR7cZL_BMqZ37uhfWA7+L7N=EN7FZLaAomw@mail.gmail.com>
-	<20181016164210.GI1032@bill-the-cat>
-	<CAMKF1srw+fEpBr-yJ8DWTPajc=PvmTwV-qubMrr7MCbR4-xSHA@mail.gmail.com>
+Message-ID: <20181016185307.GN1032@bill-the-cat>
+References: <20181016074745.39972-1-raj.khem@gmail.com>
+	<20181016163938.GH1032@bill-the-cat>
+	<CAMKF1srMCRsi_xEqUV417X36jEwQYsn=z0DDZAUeyf6BH+WLkQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srw+fEpBr-yJ8DWTPajc=PvmTwV-qubMrr7MCbR4-xSHA@mail.gmail.com>
+In-Reply-To: <CAMKF1srMCRsi_xEqUV417X36jEwQYsn=z0DDZAUeyf6BH+WLkQ@mail.gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] beaglebone.conf: temporarily use generic am335x_evm_config for U-boot
+Subject: Re: [PATCH 1/3] u-boot: reduce the SPL `.rodata' size
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -78,95 +76,158 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2018 18:52:15 -0000
-X-Groupsio-MsgNum: 11383
+X-List-Received-Date: Tue, 16 Oct 2018 18:53:12 -0000
+X-Groupsio-MsgNum: 11384
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iUV/lbBrmPtUT9dM"
+	protocol="application/pgp-signature"; boundary="aSnC4ZPPfhCvD8sN"
 Content-Disposition: inline
 
---iUV/lbBrmPtUT9dM
+--aSnC4ZPPfhCvD8sN
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 16, 2018 at 11:11:36AM -0700, Khem Raj wrote:
-> On Tue, Oct 16, 2018 at 9:42 AM Tom Rini <trini@konsulko.com> wrote:
+On Tue, Oct 16, 2018 at 11:13:44AM -0700, Khem Raj wrote:
+> On Tue, Oct 16, 2018 at 9:39 AM Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sun, Oct 14, 2018 at 10:07:45PM -0700, Khem Raj wrote:
-> > > On Sun, Oct 14, 2018 at 12:24 PM Denys Dmytriyenko <denys@ti.com> wro=
-te:
-> > > >
-> > > > On Sat, Oct 13, 2018 at 01:17:12AM -0700, Khem Raj wrote:
-> > > > > On Fri, Oct 12, 2018 at 8:00 PM Denys Dmytriyenko <denys@ti.com> =
-wrote:
-> > > > > >
-> > > > > > There have been reports recently that am335x_beaglebone_config =
-generates bad SPL.
-> > > > > > Until that is debugged and fixed, use generic am335x_evm_config=
- that covers all
-> > > > > > AM335x platforms, including BeagleBone variants.
-> > > > > >
-> > > > >
-> > > > > it fails to link
-> > > > >
-> > > > > | arm-yoe-linux-gnueabi-ld.bfd: u-boot-spl section `.rodata' will=
- not
-> > > > > fit in region `.sram'
-> > > > > | arm-yoe-linux-gnueabi-ld.bfd: region `.sram' overflowed by 5772=
- bytes
-> > > > > | make[2]: *** [/mnt/a/yoe/build/tmp/work/beaglebone-yoe-linux-gn=
-ueabi/u-boot-ti-staging/2018.01+gitAUTOINC+2cc52408bf-r24/git/scripts/Makef=
-ile.spl:349:
-> > > > > spl/u-boot-spl] Error 1
-> > > >
-> > > > FWIW, just built u-boot-ti-staging with gcc7 and gcc8 from oe-core,=
- as well as
-> > > > Linaro gcc7 - no problems.
+> > On Tue, Oct 16, 2018 at 12:47:43AM -0700, Khem Raj wrote:
+> > > Fixes errors e.g.
 > > >
-> > > My distro inherits poky policies, and on master it now inherits
-> > > hardening policies ( security flags) by defaults
-> > > do you happen to test poky ?
+> > > | arm-yoe-linux-gnueabi-ld.bfd: u-boot-spl section `.rodata' will not
+> > > fit in region `.sram'
+> > > | arm-yoe-linux-gnueabi-ld.bfd: region `.sram' overflowed by 5772 byt=
+es
+> > >
+> > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > ---
+> > >  ...vm_defconfig-Reduce-SPL-.rodata-size.patch | 73 +++++++++++++++++=
+++
+> > >  .../u-boot/u-boot-ti-staging_2018.01.bb       |  2 +
+> > >  2 files changed, 75 insertions(+)
+> > >  create mode 100644 recipes-bsp/u-boot/files/0001-am335x_evm_defconfi=
+g-Reduce-SPL-.rodata-size.patch
+> > >
+> > > diff --git a/recipes-bsp/u-boot/files/0001-am335x_evm_defconfig-Reduc=
+e-SPL-.rodata-size.patch b/recipes-bsp/u-boot/files/0001-am335x_evm_defconf=
+ig-Reduce-SPL-.rodata-size.patch
+> > > new file mode 100644
+> > > index 00000000..47597b28
+> > > --- /dev/null
+> > > +++ b/recipes-bsp/u-boot/files/0001-am335x_evm_defconfig-Reduce-SPL-.=
+rodata-size.patch
+> > > @@ -0,0 +1,73 @@
+> > > +From 56dce6462e60e2aa5b87c97c5a2c43a4d834e251 Mon Sep 17 00:00:00 20=
+01
+> > > +From: "Kemal R. Shakir" <kemal@ti.com>
+> > > +Date: Wed, 3 Oct 2018 15:56:37 +0300
+> > > +Subject: [PATCH 1/1] am335x_evm_defconfig: Reduce SPL `.rodata' size
+> > > +
+> > > +---
+> > > + configs/am335x_evm_defconfig | 54 +++++++++++++++++++++++++++++++++=
++++
+> > > + 1 file changed, 54 insertions(+)
+> > > +
+> > > +diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defco=
+nfig
+> > > +index 4908099431..568a4f535e 100644
+> > > +--- a/configs/am335x_evm_defconfig
+> > > ++++ b/configs/am335x_evm_defconfig
+> > > +@@ -63,3 +63,57 @@ CONFIG_DYNAMIC_CRC_TABLE=3Dy
+> > > + CONFIG_SPL_TINY_MEMSET=3Dy
+> > > + CONFIG_RSA=3Dy
+> > > + CONFIG_LZO=3Dy
+> > > ++
+> > > ++#
+> > > ++# SPL / TPL
+> > > ++#
+> > > ++CONFIG_SUPPORT_SPL=3Dy
+> > > ++CONFIG_SPL=3Dy
+> > > ++CONFIG_SPL_BOARD_INIT=3Dy
+> > > ++# CONFIG_SPL_BOOTROM_SUPPORT is not set
+> > > ++CONFIG_SPL_RAW_IMAGE_SUPPORT=3Dy
+> > > ++CONFIG_SPL_LEGACY_IMAGE_SUPPORT=3Dy
+> > > ++CONFIG_SPL_SYS_MALLOC_SIMPLE=3Dy
+> > > ++# CONFIG_TPL_SYS_MALLOC_SIMPLE is not set
+> > > ++CONFIG_SPL_STACK_R=3Dy
+> > > ++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=3D0x100000
+> > > ++CONFIG_SPL_SEPARATE_BSS=3Dy
+> > > ++# CONFIG_SPL_DISPLAY_PRINT is not set
+> > > ++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=3Dy
+> > > ++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D0x300
+> > > ++# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is not set
+> > > ++# CONFIG_SPL_CRC32_SUPPORT is not set
+> > > ++# CONFIG_SPL_MD5_SUPPORT is not set
+> > > ++# CONFIG_SPL_SHA1_SUPPORT is not set
+> > > ++# CONFIG_SPL_SHA256_SUPPORT is not set
+> > > ++# CONFIG_SPL_FIT_IMAGE_TINY is not set
+> > > ++# CONFIG_SPL_CPU_SUPPORT is not set
+> > > ++# CONFIG_SPL_CRYPTO_SUPPORT is not set
+> > > ++# CONFIG_SPL_HASH_SUPPORT is not set
+> > > ++# CONFIG_SPL_DMA_SUPPORT is not set
+> > > ++# CONFIG_SPL_ENV_SUPPORT is not set
+> > > ++CONFIG_SPL_EXT_SUPPORT=3Dy
+> > > ++# CONFIG_SPL_FPGA_SUPPORT is not set
+> > > ++CONFIG_SPL_I2C_SUPPORT=3Dy
+> > > ++# CONFIG_SPL_MMC_WRITE is not set
+> > > ++# CONFIG_SPL_MPC8XXX_INIT_DDR_SUPPORT is not set
+> > > ++CONFIG_SPL_MTD_SUPPORT=3Dy
+> > > ++CONFIG_SPL_MUSB_NEW_SUPPORT=3Dy
+> > > ++CONFIG_SPL_NET_SUPPORT=3Dy
+> > > ++CONFIG_SPL_NET_VCI_STRING=3D"AM335x U-Boot SPL"
+> > > ++# CONFIG_SPL_NO_CPU_SUPPORT is not set
+> > > ++# CONFIG_SPL_NOR_SUPPORT is not set
+> > > ++# CONFIG_SPL_XIP_SUPPORT is not set
+> > > ++# CONFIG_SPL_ONENAND_SUPPORT is not set
+> > > ++CONFIG_SPL_OS_BOOT=3Dy
+> > > ++# CONFIG_SPL_PCI_SUPPORT is not set
+> > > ++# CONFIG_SPL_PCH_SUPPORT is not set
+> > > ++# CONFIG_SPL_POST_MEM_SUPPORT is not set
+> > > ++CONFIG_SPL_POWER_SUPPORT=3Dy
+> > > ++# CONFIG_SPL_RAM_SUPPORT is not set
+> > > ++# CONFIG_SPL_RTC_SUPPORT is not set
+> > > ++# CONFIG_SPL_SATA_SUPPORT is not set
+> > > ++# CONFIG_SPL_THERMAL is not set
+> > > ++# CONFIG_SPL_USB_HOST_SUPPORT is not set
+> > > ++# CONFIG_SPL_USB_GADGET_SUPPORT is not set
+> > > ++# CONFIG_SPL_YMODEM_SUPPORT is not set
 > >
-> > I think we want to take a look at which of the security flags really
-> > make sense to use in this context.  Thanks!
+> > The original patch isn't yours, but, what?  Apply this patch, run 'make
+> > am335x_evm_defconfig savedefconfig', copy 'defconfig' back over to
+> > configs/am335x_evm_defconfig and see what actually changed vs top of
+> > tree.  We really want to know what you're now turning off compared with
+> > the regular config and perhaps look into why that's now overflowing, and
+> > with what compiler?  That's some rather large growth.  Thanks!
 >=20
-> there could be more to it, since the distro uses thumb2 ISA by
-> default, I am not sure
-> if u-boot overrides that and builds using arm mode ISA always but
-> something to consider, I saw several reports about u-boot overflowing
-> sram sections and most of
-> the solutions were "oh it works for me" or at the best your toolchain
-> is different then mine. here is mine use it and move on.
+> I can try that now that I have it in buildable state, but since master
+> works fine on both
+> accounts ( defconfig and sram issue) I will see when I can get to it.
 
-Yes, we enforce an ISA in U-Boot, depending on how things are configured
-and have been doing thumb2 for a long time on these targets.  But, if we
-have some issues here, I'd really like to root cause them.  I'm honestly
-surprised the security flags are even being passed, but I guess they end
-up put into TOOLCHAIN_OPTIONS not CFLAGS directly?  And what/when/how do
-we reliably get an overflow?  Thanks!
+With or without this patch applied?  I really don't think this patch,
+as-is, should be applied anywhere, perhaps other than as a temporary
+work-around.
 
 --=20
 Tom
 
---iUV/lbBrmPtUT9dM
+--aSnC4ZPPfhCvD8sN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQIcBAEBAgAGBQJbxjNaAAoJEIf59jXTHXZSrKoP/1QZBjmCJo6Z0lOyCZu0FXC0
-87tgpeJUIKgSbl+zUxlHJAmVFXPvOjWPD/O3S92nSYHB8GfryD7YloFJkQe3zNL2
-JOapfzmcN3bQe3H8clCi5e52yCRg7/CPFavzddEJu8ffNbxxcxQE2n6T/OpIE3RK
-XSta9EZyPDQC5LHCyxdNg4tkgCWSbfCw58CPly1lnIE27grmKR0WeL6CZSuZ24G0
-6LMWWNrfIaYTEgx6QsqNsdsMxu9qAi3UwDuqzlQOtDsxy/82a5cx8Ot4U5+bJgvn
-YJIRh/VTT4IsWbaZQZbH/avq6eM2BuwIrnfoN3VntXEEIWntY9UWhBRcOH0TFPAh
-JX5nSyS3/Hj/UaDdZivNExavMnLjCd1DSUQji474ucRay02pVou8QArmaE+RQnC9
-hDr4SZHDYEzpJdbJ4dcVk5Wve1s5h2G4Hmt2s7zhAhcG7n7Rx0mAVaq5lZbNqayH
-Uu611uiQzB1afJvOig9XMXhbhM51V7o2QYjxgjd9QBxF8XqhBslz1oBXML35p+KZ
-UKmN6VinPj9o8NQGRj6JKsyBPPCZD9/XS3A0yVBD/jGqUoNvww6V6eiKecw1omYV
-wpnSBizJz1ZVKZiXFeIVtXtIBsZjM8Xj+wjjTPW+QSJf/DBmHu7gQY2Qt2x/+wFI
-fSm5IzjGFsVzpsCon1ET
-=xPHh
+iQIcBAEBAgAGBQJbxjOTAAoJEIf59jXTHXZSgu8P/3QJRq0sIdER/a34Rcdq0Ih2
+6x/iu0MgSL9lv6GOcVsMc2RD1Y7w4UARspeUu1nZSQG4yTQCO5NGJNvEG3D9+Y28
+A0sSbTFE1Mxy5Kc/TFLx2lpeo0ybaL9nL5z3F9m8KThBcUiryUlL+wzYgP2K8EZb
+pT+vLjpdo4f+Q+Azd96zgSmPqrSl38pKnKvqUjANHvSoLO7J+Phrm65a9UwJylz5
+PHqowha4GUIXeFohjLz2bu0uE8NU5ZaqvAXmpDahuhId4v63pOEY9SA5snx2RHzb
+hiEWZYq1jzm2meULKhvWNxAW07GKbfik+1HaIbvuFsikOGn3FaX9NZjcIRz9iuW+
+RubgmE4q7YO6Zo8mAntRk5sp2MRe4NW1wW3xQFr2HDJHmaPyU5CGLb65i0MyOM+/
+yJvZSeop8P65DBTxa0QYuzFallnWzW4MxsvHxjH6+28m70AfEOdF3A9Qoj+bsD5Z
+WGzI7dRM+Q0XAdXseMtxyWBMhSCZFp8zpoJ/6Wvw6jJXRNjSfQTCu1Wnk09ikJ13
+42jwei6UVCX3o5cPGpZsuHYp/Csr1bd5HXCfZD2G3V/hJ7Nr+fncbZ4drm3LN8BZ
+tiqDLjcX70nEHatQiMGuEWLOCLGy+BT1Sk5PJ650XOtqf2d4sK2NK/bk2FySejvv
+KS9PNQoex+tFX2NrtLy/
+=HRoh
 -----END PGP SIGNATURE-----
 
---iUV/lbBrmPtUT9dM--
+--aSnC4ZPPfhCvD8sN--
