@@ -1,52 +1,57 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B0DE2E00950; Tue, 16 Oct 2018 11:38:31 -0700 (PDT)
+	id E2520E00950; Tue, 16 Oct 2018 11:51:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	http://www.dnswl.org/, *      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [209.85.160.195 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90B38E006AF
-	for <meta-ti@yoctoproject.org>; Tue, 16 Oct 2018 11:38:30 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w9GIcT6l091261;
-	Tue, 16 Oct 2018 13:38:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1539715109;
-	bh=p6gLUqMRQ00WiSOVBiXuwPtY+iXFoZrLfzjfKe2t+CQ=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=dCMdZQv9bmjVqB5tZhmfNZrmQ+MCoeBdVZVvh0r9VeC6RXeD70aYq3vbt8CKviiqG
-	JeHK4+Lim5sxkxc07Ie4a8c2arbrPMdyXem9EXEpuMGlgpb868a1RI3/BMP/tUqv4/
-	riwRiKOZnEIDIXfn/+pzPk46fxDyUljesxdpUAog=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9GIcT1k032115;
-	Tue, 16 Oct 2018 13:38:29 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Tue, 16 Oct 2018 13:38:29 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE107.ent.ti.com
-	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Tue, 16 Oct 2018 13:38:29 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9GIcT6e010896;
-	Tue, 16 Oct 2018 13:38:29 -0500
-Date: Tue, 16 Oct 2018 14:38:28 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20181016183828.GK14250@beryl>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0EA4E006AF
+	for <meta-ti@yoctoproject.org>; Tue, 16 Oct 2018 11:51:02 -0700 (PDT)
+Received: by mail-qt1-f195.google.com with SMTP id o17-v6so27066001qtr.1
+	for <meta-ti@yoctoproject.org>; Tue, 16 Oct 2018 11:51:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=7yPby9ecPoLPjxXYkmDcQWimU5nyDGEnwlq0N6R6XqI=;
+	b=mCd7zqA3nZ9y+gyJT9SebIcApLfRj6U+h0R4DJsF8ukbidt2W4qbJEp2hm3dtLa0mp
+	uwtfafqTeKCXYwjYJ7Iyw6u/60thhfpEeDzvDu3WV9XMJvmCVpxjO45QWDOO/VhLB5SM
+	L447RcsqFYJ/igbV/2akclTalhlrt7BoAYgY6HRokJLDplauJY/vqr6PDti2Xqb1nPv0
+	yd6RrA4aEBhvmuuaPDyw4zHdMGkOcmnAPbjLbd9yWNdLKFWyjqsv7hRGLigRUQLSk2TI
+	vL2vzcu1MeURj62g7sOnwGPTG3O5Z359Rm7sz8OMlME5ZcFkhNJhT0K1iRKwbl4TxQjm
+	X4Cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=7yPby9ecPoLPjxXYkmDcQWimU5nyDGEnwlq0N6R6XqI=;
+	b=U5meYwGTuwhqK3PGdt6IAlr9OfGIr8etza5wysRJMSzNL95sJVhvPZ0GesHefr0yf7
+	p+v558iXHMvcYfQcJagLwnJhQbTagRZDcuckXp+g2EWKn7VMas6G5JNgXdkrSrJvIbSk
+	Z/wAdVVRzF6iYJd3xwqV1ys/NaBsEXS/81yq6M3tnaaog9nfJiOK+jtjPsPzvuFsNW/i
+	Q1dT3mPJzUFVW6tTDc78bcegaNJWFSTHGxYM9+agGEU4a5Qir2ZeXl8BMvaEn5i5HQt/
+	qmyc7eREKACjWKhNwEHvo8gsr+nhsN8x/BEY+ekLvwWJ4Iq7/IJ/Oas7B04WfXFbEdQa
+	4Ntw==
+X-Gm-Message-State: ABuFfohMI5+avI8shRFn80U+2hKHvVWLbrl2ZSqIdFTFGSTtxg208Lfg
+	kL+IircnagErwM7fsZQSU1ogugEVSkvoi3JGrhc=
+X-Google-Smtp-Source: ACcGV61GR/g8f1sJSNokH8j4/qDlPib9H6qxDLQAyN3eBexfjWGKfWup6YzT0gAfHCB/1Tovu9J3MnN5shZ/9hUyqjM=
+X-Received: by 2002:ac8:4790:: with SMTP id
+	k16-v6mr22217778qtq.253.1539715861997; 
+	Tue, 16 Oct 2018 11:51:01 -0700 (PDT)
+MIME-Version: 1.0
 References: <1539399036-6199-1-git-send-email-denys@ti.com>
 	<CAMKF1soZ5HFiWKDrk5jcYG1NihHaSMqmpJXMxCH9b-cKyKra7w@mail.gmail.com>
 	<20181014192417.GB20670@beryl>
@@ -54,10 +59,11 @@ References: <1539399036-6199-1-git-send-email-denys@ti.com>
 	<20181016164210.GI1032@bill-the-cat>
 	<CAMKF1srw+fEpBr-yJ8DWTPajc=PvmTwV-qubMrr7MCbR4-xSHA@mail.gmail.com>
 	<20181016182859.GI14250@beryl>
-MIME-Version: 1.0
 In-Reply-To: <20181016182859.GI14250@beryl>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 16 Oct 2018 11:50:36 -0700
+Message-ID: <CAMKF1spHf5=JABw4D6Ue7AGRAxuW=56rLbJC74V=kJoGfkucrA@mail.gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: meta-ti@yoctoproject.org, Tom Rini <trini@konsulko.com>
 Subject: Re: [PATCH] beaglebone.conf: temporarily use generic am335x_evm_config for U-boot
 X-BeenThere: meta-ti@yoctoproject.org
@@ -72,11 +78,11 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2018 18:38:31 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Oct 2018 18:51:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 16, 2018 at 02:29:00PM -0400, Denys Dmytriyenko wrote:
+On Tue, Oct 16, 2018 at 11:29 AM Denys Dmytriyenko <denys@ti.com> wrote:
+>
 > On Tue, Oct 16, 2018 at 11:11:36AM -0700, Khem Raj wrote:
 > > On Tue, Oct 16, 2018 at 9:42 AM Tom Rini <trini@konsulko.com> wrote:
 > > >
@@ -109,7 +115,7 @@ On Tue, Oct 16, 2018 at 02:29:00PM -0400, Denys Dmytriyenko wrote:
 > > > I think we want to take a look at which of the security flags really
 > > > make sense to use in this context.  Thanks!
 > > >
-> > 
+> >
 > > there could be more to it, since the distro uses thumb2 ISA by
 > > default, I am not sure
 > > if u-boot overrides that and builds using arm mode ISA always but
@@ -117,38 +123,39 @@ On Tue, Oct 16, 2018 at 02:29:00PM -0400, Denys Dmytriyenko wrote:
 > > sram sections and most of
 > > the solutions were "oh it works for me" or at the best your toolchain
 > > is different then mine. here is mine use it and move on.
-> 
+>
 > Khem,
-> 
-> Well, FWIW, Tom and I are very familiar with this issue. As a matter of fact, 
-> I first encountered it almost 2 years ago and had to prove there's such an 
-> issue, because everyone was saying it works for them, something must be wrong 
+>
+> Well, FWIW, Tom and I are very familiar with this issue. As a matter of fact,
+> I first encountered it almost 2 years ago and had to prove there's such an
+> issue, because everyone was saying it works for them, something must be wrong
 > with my OE builds... :)
-> 
-> While .sram region is very limited, the issue is exacerbated by the fact that 
-> all debug symbols from macros like __FILE__ are ended up in that section as 
-> well. So, the longer your build path, the larger the section becomes. Once I 
-> had instructions to reproduce the failure here internally with a series of 
-> long-named nested directories like aaaaaa and bbbbbb, Nishanth started this 
+>
+> While .sram region is very limited, the issue is exacerbated by the fact that
+> all debug symbols from macros like __FILE__ are ended up in that section as
+> well. So, the longer your build path, the larger the section becomes. Once I
+> had instructions to reproduce the failure here internally with a series of
+> long-named nested directories like aaaaaa and bbbbbb, Nishanth started this
 > thread on U-boot mailing list:
 > https://lists.denx.de/pipermail/u-boot/2017-March/285031.html
-> 
-> We've had the corresponding bug open internally all this time, while adding 
-> workarounds to limit .sram section size by other means, like disabling some 
+>
+> We've had the corresponding bug open internally all this time, while adding
+> workarounds to limit .sram section size by other means, like disabling some
 > options to reduce the code size. Your patch is one of those workarounds...
-> 
-> But we've been patiently waiting for the following feature to come into gcc to 
+>
+> But we've been patiently waiting for the following feature to come into gcc to
 > fix the issue properly:
 > https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70268
-> 
-> Since it's now part of gcc8, we should be able to use it. Not sure how to keep 
+>
+> Since it's now part of gcc8, we should be able to use it. Not sure how to keep
 > gcc7 backward compatibility though...
 
-BTW, there were few attempts to "fix" it in U-boot as well, such as [1], but I 
-don't believe they got accepted. Tom?
+dumping absolute file name strings into SPL seems a waste of space to
+me, but I will leave that out for now. Moreover it exposes build paths
+into binaries that user may not be interested to share
 
-[1] https://patchwork.ozlabs.org/cover/825356/
-
--- 
-Denys
+-ffile-prefix-map has been in OE toolchains since gcc6 and I think we
+are already using it for kernel builds. We can probably enhance uboot
+recipes in OE-Core to
+use this option if compiler supports it. That solves my problem.
 
