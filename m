@@ -1,16 +1,13 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4EED4E00C37; Wed, 17 Oct 2018 12:29:17 -0700 (PDT)
+	id 5BEC4E00C1B; Wed, 17 Oct 2018 12:29:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [209.85.210.194 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
 	provider *      (raj.khem[at]gmail.com)
@@ -19,53 +16,56 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88D4AE00BE8
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:09 -0700 (PDT)
-Received: by mail-pf1-f194.google.com with SMTP id j23-v6so13668329pfi.4
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:09 -0700 (PDT)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.214.194 listed in list.dnswl.org]
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07399E00BFD
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:10 -0700 (PDT)
+Received: by mail-pl1-f194.google.com with SMTP id s4-v6so13175079plp.0
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=nfIxzvH8Fm90dXMfVHUw+aGqOulLB2h9PIDnqDKGL+A=;
-	b=KyxBcwmxamrMZ0Z6xl06Mq5x8eEv8ykrELQRVudX0ofcX0gp0ANELn2FyhbZh4HIGp
-	Zb7eh6HoCS0l6bY/JEyE+dM9EnRZIodO5ktqd44+ad99HLE6zvxtFQfZULxxshmTaFjh
-	5lEeKYHhU0B2BSCfkIwiP654mcEa8s98SJ2/ZTsZ+yU3IrV78DsXfW+Z83/fHA8oFhvW
-	z5tzxMzLkH7onP7Yy0wIJGj3o7tG8f4M5XlsELNj4cv7V27PR2bOSEL3WoZTWMAA466c
-	p9dkiHkYhK2RShnQrgA8PQfq8QJSdkmws+D+92h6MvW4L6Ce2ErFGn6fD7RgqF2BkOnu
-	6SGQ==
+	bh=yng0ITNBmfMxkM5NDzDi6XBoDUpHI8IgzUiD7ni92AM=;
+	b=cm5DY5PKFaPcPUz46iOHHztzSiEgbNzI3eypf09hmaT4XHSNSwlCTOmqmSKThxXUuU
+	1+bKW6vKLUpKkIuz8IeMg/2xZ7vesJjqmRll9X4Qrko1JYZ5SfVEj3ct5C2YZnRMbeGe
+	Ntp76/2dHt57ofha9N5kTmJHS8KNFvqXXHg3TxwZ916eFJ3he4+1EPLpf8sCjCbrBlim
+	i+wFfYEGdygJfSzLb6Z+DuNGhJRE5243IeoBOYpOa/a0XVny+frrS96pHqyqao6HWT+A
+	ErZr9bI89v6WHKLouUEYtBHacYDjqCMywzSRXksi17hMg9hxw6sarkRSDOBULOIAAwLv
+	GySg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=nfIxzvH8Fm90dXMfVHUw+aGqOulLB2h9PIDnqDKGL+A=;
-	b=O4vF/n0hMOFxM9wQprB3URFpgk0sofr7SSsM7XxQH7zaMzg/vTGkXwHUsXxIMUq4Xs
-	DVgaLfAUkDVysq5HrMK2fE9qyRBJTybj/It0/BBOMrQQqhHmxbhbUeg4KyBsQsJw++wW
-	TLsyGXJIOf65tUk0g68svAz0HC48Q8yoJm6IkShJ+6LP8yFB32CfK7oKFZa8DYXMyXUh
-	Oq42juFieq6opxNUfsEURyaUk/LKsCXE8w/Ev7UDDCu5S54xz9JJkGhmU997P7jCierG
-	6KkG97h1oymxIVqjIlz3Kdo/FvKbYjRNkoP05Tl2QYIq9SvB00ImZax9JC0yhVGeZmJI
-	AlQA==
-X-Gm-Message-State: ABuFfogUGn5l/eZ2xxGW5bqdcjnVhZcuDCcNCyGHOnw9THldirBaHpZn
-	/mQfMNT+MtU7I830OCMuTvOdXzbNN2k=
-X-Google-Smtp-Source: ACcGV60ZZwrNeMZnNSQk1yuf2ZF9egcqlZh9DF4a4RDfTN3xtckiCoxMLgThsuD37JL6QpgxzrkZyQ==
-X-Received: by 2002:a62:1c06:: with SMTP id
-	c6-v6mr28018152pfc.41.1539804548806; 
-	Wed, 17 Oct 2018 12:29:08 -0700 (PDT)
+	bh=yng0ITNBmfMxkM5NDzDi6XBoDUpHI8IgzUiD7ni92AM=;
+	b=Sg/3tkKjUpQQnfxFJ3pIr1JS1DbyXaIE7GVKaTPPuiSdGGIUgEk1XW6/VREWf4eiBj
+	sfIKgIXLP+Y2x1e/wPnmCsDsGEDpjQd60Y21ce2fE5N63MiOA8kiD6C6WHrrThbSX7AR
+	Yc4Noe3w3XlXcxVHKuUSNy45CgLZOhTwqmcWhoBnV/mk0x4iEq9SDR18xe1TGaplYaNU
+	9b91nnDnFzWSBsmZebgvm80TlIML5VmTpkRuNWz4bX5xJ10G/pwHjJqC8WtvyAxAi4Yu
+	qyizAjjxzdW0nY3ULOWyP2G91313NjGKpWDqC1cQvVefkhwZ0/U9KVCg631U8H6DObI0
+	XIGg==
+X-Gm-Message-State: ABuFfoj0EBu+h+/8Y086DIs3D6J7Y98Xwryr+y7YV0w9a/ybXnPE/dYH
+	YL9XuHg33c7u/lhKVEEV0MbQxq/HOOY=
+X-Google-Smtp-Source: ACcGV63848LSxNs3ocBiGZOFOlf1v/96F/P3S6gMMhEkZteIgE8yMucyv2Y+rlVs6EobNhEul5BYoA==
+X-Received: by 2002:a17:902:9047:: with SMTP id
+	w7-v6mr27026277plz.4.1539804550213; 
+	Wed, 17 Oct 2018 12:29:10 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::b111])
 	by smtp.gmail.com with ESMTPSA id
-	j3-v6sm18044151pfn.175.2018.10.17.12.29.07
+	j3-v6sm18044151pfn.175.2018.10.17.12.29.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Oct 2018 12:29:07 -0700 (PDT)
+	Wed, 17 Oct 2018 12:29:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed, 17 Oct 2018 12:28:52 -0700
-Message-Id: <20181017192853.42942-4-raj.khem@gmail.com>
+Date: Wed, 17 Oct 2018 12:28:53 -0700
+Message-Id: <20181017192853.42942-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181017192853.42942-1-raj.khem@gmail.com>
 References: <20181017192853.42942-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/5] beaglebone.conf: Package kernel and devicetree
+Subject: [PATCH 5/5] beaglebone.conf: SERIAL_CONSOLE has been deprecated
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -81,45 +81,24 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Wed, 17 Oct 2018 19:29:17 -0000
 Content-Transfer-Encoding: 8bit
 
-Use variables from upstream u-boot, makes it easy to switch to
-mainline u-boot from oe-core if someone wants to
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/machine/beaglebone.conf | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ conf/machine/beaglebone.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index 25147926..9b656d01 100644
+index 9b656d01..f1818578 100644
 --- a/conf/machine/beaglebone.conf
 +++ b/conf/machine/beaglebone.conf
-@@ -1,6 +1,6 @@
- #@TYPE: Machine
- #@NAME: BeagleBone machine
--#@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board 
-+#@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board
+@@ -11,7 +11,7 @@ KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblue.dtb \
+ # Only has DVI connector for external screen
+ MACHINE_GUI_CLASS = "bigscreen"
  
- require conf/machine/include/ti33x.inc
+-SERIAL_CONSOLE = "115200 ttyS0"
++SERIAL_CONSOLES = "115200;ttyS0"
  
-@@ -17,10 +17,16 @@ SERIAL_CONSOLE = "115200 ttyS0"
+ # fall back on generic am335x_evm_config for now
  #UBOOT_MACHINE = "am335x_boneblack_config"
- 
- WKS_FILE = "sdimage-bootpart.wks"
--IMAGE_BOOT_FILES = "MLO u-boot.img"
--IMAGE_FSTYPES += "tar.xz wic.xz"
- 
- do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot"
-+IMAGE_BOOT_FILES ?= "u-boot.${UBOOT_SUFFIX} MLO"
-+
-+IMAGE_FSTYPES += "tar.xz wic.xz"
- 
- # Refine the list of device targets for ti-pdk class recipes
- TI_PDK_LIMIT_BOARDS = "bbbAM335x"
-+
-+SPL_BINARY = "MLO"
-+UBOOT_SUFFIX = "img"
-+
-+IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 -- 
 2.19.1
 
