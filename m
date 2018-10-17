@@ -1,71 +1,68 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5BEC4E00C1B; Wed, 17 Oct 2018 12:29:17 -0700 (PDT)
+	id 3B570E00ABE; Wed, 17 Oct 2018 12:37:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	http://www.dnswl.org/, *      medium trust
+	*      [198.47.23.248 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (raj.khem[at]gmail.com)
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.214.194 listed in list.dnswl.org]
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07399E00BFD
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:10 -0700 (PDT)
-Received: by mail-pl1-f194.google.com with SMTP id s4-v6so13175079plp.0
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=yng0ITNBmfMxkM5NDzDi6XBoDUpHI8IgzUiD7ni92AM=;
-	b=cm5DY5PKFaPcPUz46iOHHztzSiEgbNzI3eypf09hmaT4XHSNSwlCTOmqmSKThxXUuU
-	1+bKW6vKLUpKkIuz8IeMg/2xZ7vesJjqmRll9X4Qrko1JYZ5SfVEj3ct5C2YZnRMbeGe
-	Ntp76/2dHt57ofha9N5kTmJHS8KNFvqXXHg3TxwZ916eFJ3he4+1EPLpf8sCjCbrBlim
-	i+wFfYEGdygJfSzLb6Z+DuNGhJRE5243IeoBOYpOa/a0XVny+frrS96pHqyqao6HWT+A
-	ErZr9bI89v6WHKLouUEYtBHacYDjqCMywzSRXksi17hMg9hxw6sarkRSDOBULOIAAwLv
-	GySg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=yng0ITNBmfMxkM5NDzDi6XBoDUpHI8IgzUiD7ni92AM=;
-	b=Sg/3tkKjUpQQnfxFJ3pIr1JS1DbyXaIE7GVKaTPPuiSdGGIUgEk1XW6/VREWf4eiBj
-	sfIKgIXLP+Y2x1e/wPnmCsDsGEDpjQd60Y21ce2fE5N63MiOA8kiD6C6WHrrThbSX7AR
-	Yc4Noe3w3XlXcxVHKuUSNy45CgLZOhTwqmcWhoBnV/mk0x4iEq9SDR18xe1TGaplYaNU
-	9b91nnDnFzWSBsmZebgvm80TlIML5VmTpkRuNWz4bX5xJ10G/pwHjJqC8WtvyAxAi4Yu
-	qyizAjjxzdW0nY3ULOWyP2G91313NjGKpWDqC1cQvVefkhwZ0/U9KVCg631U8H6DObI0
-	XIGg==
-X-Gm-Message-State: ABuFfoj0EBu+h+/8Y086DIs3D6J7Y98Xwryr+y7YV0w9a/ybXnPE/dYH
-	YL9XuHg33c7u/lhKVEEV0MbQxq/HOOY=
-X-Google-Smtp-Source: ACcGV63848LSxNs3ocBiGZOFOlf1v/96F/P3S6gMMhEkZteIgE8yMucyv2Y+rlVs6EobNhEul5BYoA==
-X-Received: by 2002:a17:902:9047:: with SMTP id
-	w7-v6mr27026277plz.4.1539804550213; 
-	Wed, 17 Oct 2018 12:29:10 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::b111])
-	by smtp.gmail.com with ESMTPSA id
-	j3-v6sm18044151pfn.175.2018.10.17.12.29.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Oct 2018 12:29:09 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 17 Oct 2018 12:28:53 -0700
-Message-Id: <20181017192853.42942-5-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.19.1
-In-Reply-To: <20181017192853.42942-1-raj.khem@gmail.com>
-References: <20181017192853.42942-1-raj.khem@gmail.com>
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9AA6CE00A0C
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:37:19 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id w9HJbHnE064465;
+	Wed, 17 Oct 2018 14:37:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1539805037;
+	bh=pVuNghDzgPu4Ge2QFOiJQirTO3I67LiDEOqG3qHAumc=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=nLqhZHHXsM4QfGN8EqLij8XGFoz3DUAs9/woSwO7yRUA3ABSQVJ10MtyT+pFwaA5y
+	aTiaSPH9C03KUxbInDJjlm/Dx0zxIyXFGnCJHIJF7WUA11QMzZMsaPqhWCOW1pFhKE
+	vfBVP7H6SylqRIIEpllr0XIBrr5nT6PKfchWyZhY=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9HJbHtZ023286;
+	Wed, 17 Oct 2018 14:37:17 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE111.ent.ti.com
+	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
+	Wed, 17 Oct 2018 14:37:17 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
+	Transport; Wed, 17 Oct 2018 14:37:16 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9HJbGji028219;
+	Wed, 17 Oct 2018 14:37:17 -0500
+Date: Wed, 17 Oct 2018 15:37:16 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20181017193716.GH4031@beryl>
+References: <CAMKF1srw+fEpBr-yJ8DWTPajc=PvmTwV-qubMrr7MCbR4-xSHA@mail.gmail.com>
+	<20181016182859.GI14250@beryl> <20181016183828.GK14250@beryl>
+	<20181016185925.GO1032@bill-the-cat>
+	<9e7016817d464dd8bfb1210b8e9e6cf5@SOC-EX01V.e01.socionext.com>
+	<CAMKF1srteMQK0AC0Dj2hQ5z3ouzD7HsfTS5Yjg=-wcDTj4+z=A@mail.gmail.com>
+	<20181017112615.GT1032@bill-the-cat>
+	<CAMKF1srPbZ_8XKeKt=aMSrHCPZNAQULb4P8atahBLjm21Zvb9g@mail.gmail.com>
+	<20181017192501.GG4031@beryl>
+	<CAMKF1sqMCEGkNyOK_WgN6KfKs+_30tq-_868SrkSmxAjbRhGAA@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/5] beaglebone.conf: SERIAL_CONSOLE has been deprecated
+In-Reply-To: <CAMKF1sqMCEGkNyOK_WgN6KfKs+_30tq-_868SrkSmxAjbRhGAA@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: meta-ti@yoctoproject.org, Tom Rini <trini@konsulko.com>,
+	Masahiro Yamada <yamada.masahiro@socionext.com>
+Subject: Re: [PATCH] beaglebone.conf: temporarily use generic am335x_evm_config for U-boot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -78,28 +75,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 19:29:17 -0000
+X-List-Received-Date: Wed, 17 Oct 2018 19:37:20 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/machine/beaglebone.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Oct 17, 2018 at 12:27:19PM -0700, Khem Raj wrote:
+> On Wed, Oct 17, 2018 at 12:25 PM Denys Dmytriyenko <denys@ti.com> wrote:
+> > > > > Yeah I saw that but this patch is not their in 2018.01 release that TI
+> > > > fork
+> > > > > is based on regardless I backported this patch to this version it did not
+> > > > > bring the size below mark
+> > > > > I think it’s because we are using hardened toolchain and that enalbles
+> > > > > extra options to enable pie and ssp since these options get added to CC
+> > > > > they get passed into uboot straight
+> > > > >
+> > > > > I think we should just disable security flags for u boot in OE and may be
+> > > > > uboot make system should append fno-pie fno-stack-protector to nullify
+> > > > > these options
+> > > >
+> > > > OK, do you want to submit a patch for that or should I do one and just
+> > > > Suggested-by you?  Thanks!
+> > >
+> > >
+> > > This would not be acceptable change since it changes how we build gcc
+> > > itself secondly it does not happen for master uboot
+> > >
+> > > However if this works then we need to understand why it increas e the size
+> >
+> > Even if this change is not acceptable upstream, I would prefer it locally in
+> > meta-ti recipe, instead of disabling more features to free up 5-6KB in SPL.
+> 
+> this is a distro level change. meta-ti is not appropriate place to decide that
 
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index 9b656d01..f1818578 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -11,7 +11,7 @@ KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblue.dtb \
- # Only has DVI connector for external screen
- MACHINE_GUI_CLASS = "bigscreen"
- 
--SERIAL_CONSOLE = "115200 ttyS0"
-+SERIAL_CONSOLES = "115200;ttyS0"
- 
- # fall back on generic am335x_evm_config for now
- #UBOOT_MACHINE = "am335x_boneblack_config"
+Are we talking about passing fno-pie and fno-stack-protector to U-boot build 
+that you suggested above? That is what I'm referring here. It can be BBB 
+specific patch. That is until we figure out why it grows code so much...
+
 -- 
-2.19.1
-
+Denys
 
