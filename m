@@ -1,6 +1,6 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B69FBE00ABE; Wed, 17 Oct 2018 12:27:47 -0700 (PDT)
+	id 947EDE00B5E; Wed, 17 Oct 2018 12:29:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,7 +11,7 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
 	no *      trust
-	*      [209.85.160.194 listed in list.dnswl.org]
+	*      [209.85.215.193 listed in list.dnswl.org]
 	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
 	provider *      (raj.khem[at]gmail.com)
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -19,58 +19,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0611E00A0C
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:27:46 -0700 (PDT)
-Received: by mail-qt1-f194.google.com with SMTP id b4-v6so31439080qtc.7
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:27:46 -0700 (PDT)
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61337E00A0C
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:06 -0700 (PDT)
+Received: by mail-pg1-f193.google.com with SMTP id f8-v6so12995729pgq.5
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Oq/13XqNLoTejGMiS/Xs6CN/ednSsuUpU4UONNj/nfI=;
-	b=vBVDyJb2uFq7Rgv4z1fBW6NmnZQ5y1loQwbhvTQNy+8vkxLmX2OgJtBA5lrqBKcYyu
-	//1adIFvmFDSPKbeOc1C5uqdzxWgoAXydw4BM1M9ENopVvfj/QrsQBwjOUyuxbYHCTml
-	nQP3g/u6gv/A+o/WHGypx9mDtCAR01DtuoqG1D6xtzrmbwJGX+NVUORbOpwu9/QbTqeW
-	l7hD3RBznyPdZ2uiTCVQVcjXih6YQe37/KDPXPxxi8E+qfj8uK0zAMXxexe0+g692gnD
-	MV1/dL1G64g8Cq6Hx2R/k5dbX0jlpZuReAs5ev3/YveZLNgc1qME3GE4JxrYAf5PX0+i
-	d5lA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8NRRTkP9KluZnvGkATkZJO84peB9VbQtKavWcSvVd2Q=;
+	b=cMfS3rObw8prqTpXJ1O35/oaLFnM41Ej9LyJ3173Cfdj7hrp0r0obKZgrAlZYljMAH
+	BR10vAEHF3+2By0jHfV/NKC2a0N7GCgYG6uUWQjriA1UASvlMZ37NBXCE2zX78DA4vFQ
+	X2d+JIJkp+TbL7+BGqJmCnZW+AaZuU+skUQhxVy8IRkhqu+LSaHcgRwBWBUH119ul4eG
+	FRmKr2B7LmugWU6kd44jFvAzNa0x16V2wxDAEwd41ojUKQH8UL7bWmagH+GWtBW7vMxP
+	Zx1KOPwtVBajF/pvecEl5lczW9emkiBRUMtJuaSNrJOanqxuA4knSybFWuvBq2AmVrgk
+	jhLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Oq/13XqNLoTejGMiS/Xs6CN/ednSsuUpU4UONNj/nfI=;
-	b=roEiMbDXqcRkjnrroj9/Pwb9CE9iygWUn/LwNef9tggzp5SeylXpe3yAdvhI+nSxhO
-	K1gdboBHzDyMxD+oyjpuTfnr6cvvXERYmuFU17Enp6jV1tSS64ZN0TitQZJXQjquhF7X
-	9K9oBhZFNaYoLxovZg0QjgQHCt450iROJWK2R51nUe+VEXsTFb4OvLCf3yGNHITZxMb2
-	ZGBEEax/ISZEuKwoWFItZUcJZn6+KiszX48H4xLpGVSlfKkw9NmOrDZArHUEpltXr3pi
-	jdt3RwKo78cWsyLCQlPq6vZgSeiukZQh+PudSBXsOsEuDN4m6swnx/f/QWuRp9pJbQVe
-	go6Q==
-X-Gm-Message-State: ABuFfohGIDmtHTrrIEdAxJ38kWjW+JArzFTy5IGJ62GnkW/jqDznzbcx
-	KHF1bIQaPrr+mllnPAEIfvpsDcsEz3ZuEEIpG2U=
-X-Google-Smtp-Source: ACcGV63KF0DAYd0qNJPMcPLMbSMtJfzlI3cbUKrwvA/Y43q0rLSKnb/m/E56EB6583JpvweFOJER3EI9Bi0xWdGw0yo=
-X-Received: by 2002:ac8:4790:: with SMTP id
-	k16-v6mr26668691qtq.253.1539804465933; 
-	Wed, 17 Oct 2018 12:27:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAMKF1sqGw7PxhmncR7cZL_BMqZ37uhfWA7+L7N=EN7FZLaAomw@mail.gmail.com>
-	<20181016164210.GI1032@bill-the-cat>
-	<CAMKF1srw+fEpBr-yJ8DWTPajc=PvmTwV-qubMrr7MCbR4-xSHA@mail.gmail.com>
-	<20181016182859.GI14250@beryl> <20181016183828.GK14250@beryl>
-	<20181016185925.GO1032@bill-the-cat>
-	<9e7016817d464dd8bfb1210b8e9e6cf5@SOC-EX01V.e01.socionext.com>
-	<CAMKF1srteMQK0AC0Dj2hQ5z3ouzD7HsfTS5Yjg=-wcDTj4+z=A@mail.gmail.com>
-	<20181017112615.GT1032@bill-the-cat>
-	<CAMKF1srPbZ_8XKeKt=aMSrHCPZNAQULb4P8atahBLjm21Zvb9g@mail.gmail.com>
-	<20181017192501.GG4031@beryl>
-In-Reply-To: <20181017192501.GG4031@beryl>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8NRRTkP9KluZnvGkATkZJO84peB9VbQtKavWcSvVd2Q=;
+	b=JiGxlRcO13FUdNJzL2gLuxG2cyY3jzanYD//RYioTS5FvcnJ1lr9aX0DsyQa2e7/r+
+	a8zSCxA2ylg/3Fgjkw9+aX0kg9pUFoPqJSO1v+Jknj+AnKcQhlZb+09cTY5N8zJTeDgx
+	QEX5YOwDGmA/rKgcSf93XzRL6tpD2jgg9bcRVghcrbf5Dx3O918qP9i/Cf8PNsr5vp+S
+	LSwn7F03+dtMGj3RC0xZ2/FVyl8YFQQ0PRLbFNSuM0oO/fW9pZPsS7WHV+ihTF/Jr0Jk
+	ZZFS8G+3g6lQMUVoGoCOiJeIL8yuCUVfTA+4lpCmCRQ5MEtTVHaF/QLngkylgzmGCm6V
+	W1Ag==
+X-Gm-Message-State: ABuFfog7f+08M2oCsg5ni1f2oO/oRtz9OfwccV19WlkWxZKoMHeLskeq
+	owhl1xNM6j5s5qnjT1r0083eIkXeyl4=
+X-Google-Smtp-Source: ACcGV63QWtIQUFa8ixfQvnV7QmHKjwEBEAgyF49FBDVebUECXDNdkV+zlW2dSfvQMeuqRF7alsBtzQ==
+X-Received: by 2002:a63:a357:: with SMTP id
+	v23-v6mr4263526pgn.39.1539804545298; 
+	Wed, 17 Oct 2018 12:29:05 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::b111])
+	by smtp.gmail.com with ESMTPSA id
+	j3-v6sm18044151pfn.175.2018.10.17.12.29.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 17 Oct 2018 12:29:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 17 Oct 2018 12:27:19 -0700
-Message-ID: <CAMKF1sqMCEGkNyOK_WgN6KfKs+_30tq-_868SrkSmxAjbRhGAA@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org, Tom Rini <trini@konsulko.com>,
-	Masahiro Yamada <yamada.masahiro@socionext.com>
-Subject: Re: [PATCH] beaglebone.conf: temporarily use generic am335x_evm_config for U-boot
+To: meta-ti@yoctoproject.org
+Date: Wed, 17 Oct 2018 12:28:49 -0700
+Message-Id: <20181017192853.42942-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
+Subject: [PATCH 1/5] recipes: Limit ti specific recipes under ti-soc override
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -83,247 +76,222 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 19:27:47 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Oct 2018 19:29:07 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Oct 17, 2018 at 12:25 PM Denys Dmytriyenko <denys@ti.com> wrote:
->
-> On Wed, Oct 17, 2018 at 08:00:52AM -0700, Khem Raj wrote:
-> > On Wed, Oct 17, 2018 at 4:26 AM Tom Rini <trini@konsulko.com> wrote:
-> >
-> > > On Tue, Oct 16, 2018 at 09:06:27PM -0700, Khem Raj wrote:
-> > > > On Tue, Oct 16, 2018 at 7:39 PM <yamada.masahiro@socionext.com> wro=
-te:
-> > > >
-> > > > > Hi.
-> > > > >
-> > > > > > -----Original Message-----
-> > > > > > From: Tom Rini [mailto:trini@konsulko.com]
-> > > > > > Sent: Wednesday, October 17, 2018 3:59 AM
-> > > > > > To: Denys Dmytriyenko <denys@ti.com>; Yamada, Masahiro/=E5=B1=
-=B1=E7=94=B0 =E7=9C=9F=E5=BC=98
-> > > > > > <yamada.masahiro@socionext.com>
-> > > > > > Cc: Khem Raj <raj.khem@gmail.com>; meta-ti@yoctoproject.org
-> > > > > > Subject: Re: [meta-ti] [PATCH] beaglebone.conf: temporarily use
-> > > generic
-> > > > > > am335x_evm_config for U-boot
-> > > > > >
-> > > > > > On Tue, Oct 16, 2018 at 02:38:28PM -0400, Denys Dmytriyenko wro=
-te:
-> > > > > > > On Tue, Oct 16, 2018 at 02:29:00PM -0400, Denys Dmytriyenko w=
-rote:
-> > > > > > > > On Tue, Oct 16, 2018 at 11:11:36AM -0700, Khem Raj wrote:
-> > > > > > > > > On Tue, Oct 16, 2018 at 9:42 AM Tom Rini <trini@konsulko.=
-com>
-> > > > > wrote:
-> > > > > > > > > >
-> > > > > > > > > > On Sun, Oct 14, 2018 at 10:07:45PM -0700, Khem Raj wrot=
-e:
-> > > > > > > > > > > On Sun, Oct 14, 2018 at 12:24 PM Denys Dmytriyenko <
-> > > > > denys@ti.com>
-> > > > > > wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Sat, Oct 13, 2018 at 01:17:12AM -0700, Khem Raj =
-wrote:
-> > > > > > > > > > > > > On Fri, Oct 12, 2018 at 8:00 PM Denys Dmytriyenko=
- <
-> > > > > denys@ti.com>
-> > > > > > wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > There have been reports recently that
-> > > > > am335x_beaglebone_config
-> > > > > > generates bad SPL.
-> > > > > > > > > > > > > > Until that is debugged and fixed, use generic
-> > > > > am335x_evm_config
-> > > > > > that covers all
-> > > > > > > > > > > > > > AM335x platforms, including BeagleBone variants=
-.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > it fails to link
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > | arm-yoe-linux-gnueabi-ld.bfd: u-boot-spl sectio=
-n
-> > > > > `.rodata'
-> > > > > > will not
-> > > > > > > > > > > > > fit in region `.sram'
-> > > > > > > > > > > > > | arm-yoe-linux-gnueabi-ld.bfd: region `.sram'
-> > > overflowed
-> > > > > > by 5772 bytes
-> > > > > > > > > > > > > | make[2]: ***
-> > > > > >
-> > > [/mnt/a/yoe/build/tmp/work/beaglebone-yoe-linux-gnueabi/u-boot-ti-sta=
-g
-> > > > > > ing/2018.01+gitAUTOINC+2cc52408bf-r24/git/scripts/Makefile.spl:=
-349:
-> > > > > > > > > > > > > spl/u-boot-spl] Error 1
-> > > > > > > > > > > >
-> > > > > > > > > > > > FWIW, just built u-boot-ti-staging with gcc7 and gc=
-c8
-> > > from
-> > > > > oe-core,
-> > > > > > as well as
-> > > > > > > > > > > > Linaro gcc7 - no problems.
-> > > > > > > > > > >
-> > > > > > > > > > > My distro inherits poky policies, and on master it no=
-w
-> > > inherits
-> > > > > > > > > > > hardening policies ( security flags) by defaults
-> > > > > > > > > > > do you happen to test poky ?
-> > > > > > > > > >
-> > > > > > > > > > I think we want to take a look at which of the security=
- flags
-> > > > > really
-> > > > > > > > > > make sense to use in this context.  Thanks!
-> > > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > there could be more to it, since the distro uses thumb2 I=
-SA by
-> > > > > > > > > default, I am not sure
-> > > > > > > > > if u-boot overrides that and builds using arm mode ISA al=
-ways
-> > > but
-> > > > > > > > > something to consider, I saw several reports about u-boot
-> > > > > overflowing
-> > > > > > > > > sram sections and most of
-> > > > > > > > > the solutions were "oh it works for me" or at the best yo=
-ur
-> > > > > toolchain
-> > > > > > > > > is different then mine. here is mine use it and move on.
-> > > > > > > >
-> > > > > > > > Khem,
-> > > > > > > >
-> > > > > > > > Well, FWIW, Tom and I are very familiar with this issue. As=
- a
-> > > matter
-> > > > > > of fact,
-> > > > > > > > I first encountered it almost 2 years ago and had to prove
-> > > there's
-> > > > > such
-> > > > > > an
-> > > > > > > > issue, because everyone was saying it works for them, somet=
-hing
-> > > must
-> > > > > > be wrong
-> > > > > > > > with my OE builds... :)
-> > > > > > > >
-> > > > > > > > While .sram region is very limited, the issue is exacerbate=
-d by
-> > > the
-> > > > > > fact that
-> > > > > > > > all debug symbols from macros like __FILE__ are ended up in=
- that
-> > > > > section
-> > > > > > as
-> > > > > > > > well. So, the longer your build path, the larger the sectio=
-n
-> > > becomes.
-> > > > > > Once I
-> > > > > > > > had instructions to reproduce the failure here internally w=
-ith a
-> > > > > series
-> > > > > > of
-> > > > > > > > long-named nested directories like aaaaaa and bbbbbb, Nisha=
-nth
-> > > > > started
-> > > > > > this
-> > > > > > > > thread on U-boot mailing list:
-> > > > > > > > https://lists.denx.de/pipermail/u-boot/2017-March/285031.ht=
-ml
-> > > > > > > >
-> > > > > > > > We've had the corresponding bug open internally all this ti=
-me,
-> > > while
-> > > > > > adding
-> > > > > > > > workarounds to limit .sram section size by other means, lik=
-e
-> > > > > disabling
-> > > > > > some
-> > > > > > > > options to reduce the code size. Your patch is one of those
-> > > > > workarounds...
-> > > > > > > >
-> > > > > > > > But we've been patiently waiting for the following feature =
-to
-> > > come
-> > > > > into
-> > > > > > gcc to
-> > > > > > > > fix the issue properly:
-> > > > > > > > https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D70268
-> > > > > > > >
-> > > > > > > > Since it's now part of gcc8, we should be able to use it. N=
-ot
-> > > sure
-> > > > > how
-> > > > > > to keep
-> > > > > > > > gcc7 backward compatibility though...
-> > > > > > >
-> > > > > > > BTW, there were few attempts to "fix" it in U-boot as well, s=
-uch as
-> > > > > [1],
-> > > > > > but I
-> > > > > > > don't believe they got accepted. Tom?
-> > > > > > >
-> > > > > > > [1] https://patchwork.ozlabs.org/cover/825356/
-> > > > > >
-> > > > > > I think the end result was waiting on the kernel community to a=
-gree
-> > > on a
-> > > > > > path forward for Kbuild and then bring that back.
-> > > > >
-> > > > >
-> > > > >
-> > > > > U-Boot now supports -fmacro-prefix-map, so GCC 8 is OK.
-> > > > > (see commit 1eb2e71ed)
-> > > > >
-> > > > > For GCC 7 or older, sorry, I have no idea what to do.
-> > > > > My patch set [1] was an ugly hack,
-> > > > > and wrong in theEven if this change is not acceptable upstream, I=
- would prefer it locally in
-meta-ti recipe, instead of disabling more features to free up 5-6KB in
-SPL. first place.
-> > > > >
-> > > > > What I can suggest is, please use GCC 8.
-> > > >
-> > > >
-> > > > Yeah I saw that but this patch is not their in 2018.01 release that=
- TI
-> > > fork
-> > > > is based on regardless I backported this patch to this version it d=
-id not
-> > > > bring the size below mark
-> > > > I think it=E2=80=99s because we are using hardened toolchain and th=
-at enalbles
-> > > > extra options to enable pie and ssp since these options get added t=
-o CC
-> > > > they get passed into uboot straight
-> > > >
-> > > > I think we should just disable security flags for u boot in OE and =
-may be
-> > > > uboot make system should append fno-pie fno-stack-protector to null=
-ify
-> > > > these options
-> > >
-> > > OK, do you want to submit a patch for that or should I do one and jus=
-t
-> > > Suggested-by you?  Thanks!
-> >
-> >
-> > This would not be acceptable change since it changes how we build gcc
-> > itself secondly it does not happen for master uboot
-> >
-> > However if this works then we need to understand why it increas e the s=
-ize
->
-> Even if this change is not acceptable upstream, I would prefer it locally=
- in
-> meta-ti recipe, instead of disabling more features to free up 5-6KB in SP=
-L.
+This helps in multi-BSP scenario, where other BSP layers are also
+present in the layermix
 
-this is a distro level change. meta-ti is not appropriate place to decide t=
-hat
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-bsp/cuia/cuia_1.0.0.13.bb                      | 3 +++
+ recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 3 +++
+ recipes-bsp/x-load/x-load_git.bb                       | 3 +++
+ recipes-graphics/gbm/libgbm_10.0.0.bb                  | 3 +++
+ recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb     | 3 +++
+ recipes-graphics/omapfbplay/omapfbplay.inc             | 2 ++
+ recipes-multimedia/libdce/libdce_3.00.14.00.bb         | 2 ++
+ recipes-ti/bios/ti-biosutils_1.02.02.bb                | 3 +++
+ recipes-ti/dmai/ti-dmai_svn.bb                         | 3 +++
+ recipes-ti/dsplib/dsplib.inc                           | 2 ++
+ recipes-ti/hdvpss/ti-hdvpss_01.00.01.27.bb             | 2 ++
+ recipes-ti/includes/ti-unpack.inc                      | 5 +++++
+ recipes-ti/ipc/ti-ipc-common.inc                       | 2 ++
+ recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb      | 3 +++
+ recipes-ti/mathlib/mathlib.inc                         | 2 ++
+ recipes-ti/ndk/ti-ndk_3.40.01.01.bb                    | 3 +++
+ recipes-ti/swtools/swtools_git.bb                      | 2 ++
+ 17 files changed, 46 insertions(+)
 
->
-> --
-> Denys
+diff --git a/recipes-bsp/cuia/cuia_1.0.0.13.bb b/recipes-bsp/cuia/cuia_1.0.0.13.bb
+index e048f6aa..a7caf504 100644
+--- a/recipes-bsp/cuia/cuia_1.0.0.13.bb
++++ b/recipes-bsp/cuia/cuia_1.0.0.13.bb
+@@ -23,3 +23,6 @@ do_install() {
+ 	cd ${S}
+ 	oe_runmake DESTDIR=${D} libdir=${libdir} includedir=${includedir} install
+ }
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+index 94485b6a..d29b6496 100644
+--- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
++++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+@@ -22,3 +22,6 @@ do_install() {
+     install -d ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
+     install -m 644 ${S}/galcore.ko ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
+ }
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-bsp/x-load/x-load_git.bb b/recipes-bsp/x-load/x-load_git.bb
+index dd8bce2d..1ce1b0f0 100644
+--- a/recipes-bsp/x-load/x-load_git.bb
++++ b/recipes-bsp/x-load/x-load_git.bb
+@@ -17,3 +17,6 @@ CONFIG_HEADER_beagleboard = "1"
+ XLOAD_MACHINE_omap3-touchbook = "omap3530beagle_config"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-graphics/gbm/libgbm_10.0.0.bb b/recipes-graphics/gbm/libgbm_10.0.0.bb
+index 38715ccf..9e3c7ed0 100644
+--- a/recipes-graphics/gbm/libgbm_10.0.0.bb
++++ b/recipes-graphics/gbm/libgbm_10.0.0.bb
+@@ -16,3 +16,6 @@ SRC_URI = "git://git.ti.com/glsdk/libgbm.git;protocol=git;branch=${BRANCH} \
+             file://0001-gbm.c-include-sys-sysmacros.h-for-minor-major-in-new.patch"
+ 
+ S = "${WORKDIR}/git"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+index dafaac1e..a2f8f192 100644
+--- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
++++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+@@ -37,3 +37,6 @@ do_install() {
+ }
+ 
+ INSANE_SKIP_${PN} += "ldflags"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-graphics/omapfbplay/omapfbplay.inc b/recipes-graphics/omapfbplay/omapfbplay.inc
+index df166dd3..744eb8f7 100644
+--- a/recipes-graphics/omapfbplay/omapfbplay.inc
++++ b/recipes-graphics/omapfbplay/omapfbplay.inc
+@@ -14,6 +14,8 @@ SRC_URI = "git://git.mansr.com/omapfbplay;protocol=git \
+ S = "${WORKDIR}/git"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+ 
+ # We want a kernel header for armv7a, but we don't want to make mplayer machine specific for that
+ STAGING_KERNEL_DIR = "${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"
+diff --git a/recipes-multimedia/libdce/libdce_3.00.14.00.bb b/recipes-multimedia/libdce/libdce_3.00.14.00.bb
+index 04c0b718..0deec7ab 100644
+--- a/recipes-multimedia/libdce/libdce_3.00.14.00.bb
++++ b/recipes-multimedia/libdce/libdce_3.00.14.00.bb
+@@ -13,3 +13,5 @@ PR = "r1"
+ 
+ S = "${WORKDIR}/git"
+ EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/bios/ti-biosutils_1.02.02.bb b/recipes-ti/bios/ti-biosutils_1.02.02.bb
+index 5b6b4f43..01c070d7 100644
+--- a/recipes-ti/bios/ti-biosutils_1.02.02.bb
++++ b/recipes-ti/bios/ti-biosutils_1.02.02.bb
+@@ -7,3 +7,6 @@ SRC_URI[biosutilstarball.md5sum] = "0654e9e72b0a6fc7a6575829c0cd90c9"
+ SRC_URI[biosutilstarball.sha256sum] = "df486500bdc8dbe3800fc7efe4241e6fa5b1827ba7c0dc17a71b41d42ef921e1"
+ 
+ INSANE_SKIP_${PN} = "installed-vs-shipped"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/dmai/ti-dmai_svn.bb b/recipes-ti/dmai/ti-dmai_svn.bb
+index 4a91b9b9..3cc54b91 100644
+--- a/recipes-ti/dmai/ti-dmai_svn.bb
++++ b/recipes-ti/dmai/ti-dmai_svn.bb
+@@ -38,3 +38,6 @@ SRC_URI_append = " file://omap3530-r642-remove-include-videodev.diff;striplevel=
+                  "
+ 
+ INSANE_SKIP_${PN} = "installed-vs-shipped"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/dsplib/dsplib.inc b/recipes-ti/dsplib/dsplib.inc
+index f3696795..a3953105 100644
+--- a/recipes-ti/dsplib/dsplib.inc
++++ b/recipes-ti/dsplib/dsplib.inc
+@@ -69,3 +69,5 @@ ALLOW_EMPTY_${PN} = "1"
+ FILES_${PN}-dev += "${DSPLIB_INSTALL_DIR_RECIPE}"
+ 
+ INSANE_SKIP_${PN}-dev = "arch"
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/hdvpss/ti-hdvpss_01.00.01.27.bb b/recipes-ti/hdvpss/ti-hdvpss_01.00.01.27.bb
+index e3b1c56f..c2e7d268 100644
+--- a/recipes-ti/hdvpss/ti-hdvpss_01.00.01.27.bb
++++ b/recipes-ti/hdvpss/ti-hdvpss_01.00.01.27.bb
+@@ -4,3 +4,5 @@ SRC_URI[md5sum] = "6db908bef3b933dc8cea666564d5d4d8"
+ SRC_URI[sha256sum] = "2caa9c859cfe348197e860f07d174a8ab7048d38d6d3a12ec576802122c9e91e"
+ 
+ 
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
+index a571fd5d..b520d6ab 100644
+--- a/recipes-ti/includes/ti-unpack.inc
++++ b/recipes-ti/includes/ti-unpack.inc
+@@ -79,3 +79,8 @@ python ti_bin_do_unpack() {
+     # Return to the previous directory
+     os.chdir(save_cwd)
+ }
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
++COMPATIBLE_HOST_class-native = "(.*)"
++
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index dddb7344..aea9d278 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -2,6 +2,8 @@ PV = "3.50.02.02"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+ 
+ PLATFORM = "UNKNOWN"
+ PLATFORM_omap5-evm = "OMAP54XX"
+diff --git a/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb b/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb
+index 1a56d1da..113e6a69 100644
+--- a/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb
++++ b/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb
+@@ -12,3 +12,6 @@ SRC_URI[md5sum] = "70b4918bc35c1bcfef34d6ba3fbce0c8"
+ SRC_URI[sha256sum] = "51266dd928f8d629cd417c869789a6c0d596612120f165619119cbaadfd66ee2"
+ 
+ INSANE_SKIP_${PN} = "installed-vs-shipped"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/mathlib/mathlib.inc b/recipes-ti/mathlib/mathlib.inc
+index 6aea085a..61f198bc 100644
+--- a/recipes-ti/mathlib/mathlib.inc
++++ b/recipes-ti/mathlib/mathlib.inc
+@@ -68,3 +68,5 @@ ALLOW_EMPTY_${PN} = "1"
+ FILES_${PN}-dev += "${MATHLIB_INSTALL_DIR_RECIPE}"
+ 
+ INSANE_SKIP_${PN}-dev = "arch"
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/ndk/ti-ndk_3.40.01.01.bb b/recipes-ti/ndk/ti-ndk_3.40.01.01.bb
+index 4a494b19..c6c18733 100644
+--- a/recipes-ti/ndk/ti-ndk_3.40.01.01.bb
++++ b/recipes-ti/ndk/ti-ndk_3.40.01.01.bb
+@@ -11,3 +11,6 @@ SRC_URI[ndkzip.sha256sum] = "e2e5c683c70dfad6f4372c5eeebaf0209b27abb0f77304f14f0
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ INHIBIT_SYSROOT_STRIP = "1"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+diff --git a/recipes-ti/swtools/swtools_git.bb b/recipes-ti/swtools/swtools_git.bb
+index 425a0690..168fe211 100644
+--- a/recipes-ti/swtools/swtools_git.bb
++++ b/recipes-ti/swtools/swtools_git.bb
+@@ -42,3 +42,5 @@ FILES_${PN}-dev += "${SWTOOLS_INSTALL_DIR_RECIPE}"
+ 
+ INSANE_SKIP_${PN}-dev = "arch staticdev"
+ ALLOW_EMPTY_${PN} = "1"
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
+-- 
+2.19.1
+
 
