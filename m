@@ -1,19 +1,19 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8B208E00BDC; Wed, 17 Oct 2018 12:29:08 -0700 (PDT)
+	id 4EED4E00C37; Wed, 17 Oct 2018 12:29:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [209.85.210.194 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
 	provider *      (raj.khem[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [209.85.210.194 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -21,52 +21,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
 	[209.85.210.194])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E238DE00A0C
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:07 -0700 (PDT)
-Received: by mail-pf1-f194.google.com with SMTP id c25-v6so13671625pfe.6
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88D4AE00BE8
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:09 -0700 (PDT)
+Received: by mail-pf1-f194.google.com with SMTP id j23-v6so13668329pfi.4
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2018 12:29:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=cDdoQI61O+tIrdZnpIl4tDqvmhR2v39f8eSFqOsjdkI=;
-	b=kJdMhqMN+Sh6EImstEKJvgY+f28bVDfWJYJ/KPcDWnt8kOP9MNvRwz4vZPBZ40GUno
-	9LAHxVF30/3LQ73O3BN87sS5xM4OUQ+/xjs3b8JVzA+skIql9Ik0drmnPRVrMM9Xd6T1
-	YbhElM0wP52+XZ8eOiHy2urGt9h/64PxZVaUL+n+1BQWUge8RzxsR4y0H4cCezfLv6IL
-	4mV9fXzXj5YLcyOjwlLLhU+AGeNdChI3Di96nprZBLMNQyCAlA4Ny0dglcS/H0tlw7su
-	bf4u6w17FDoNdqBOA8WppQI8hwAB2xA5NT/jTbkCGJU1q4hk4CKEMpe1KlB5nWtwLQ4+
-	tVSQ==
+	bh=nfIxzvH8Fm90dXMfVHUw+aGqOulLB2h9PIDnqDKGL+A=;
+	b=KyxBcwmxamrMZ0Z6xl06Mq5x8eEv8ykrELQRVudX0ofcX0gp0ANELn2FyhbZh4HIGp
+	Zb7eh6HoCS0l6bY/JEyE+dM9EnRZIodO5ktqd44+ad99HLE6zvxtFQfZULxxshmTaFjh
+	5lEeKYHhU0B2BSCfkIwiP654mcEa8s98SJ2/ZTsZ+yU3IrV78DsXfW+Z83/fHA8oFhvW
+	z5tzxMzLkH7onP7Yy0wIJGj3o7tG8f4M5XlsELNj4cv7V27PR2bOSEL3WoZTWMAA466c
+	p9dkiHkYhK2RShnQrgA8PQfq8QJSdkmws+D+92h6MvW4L6Ce2ErFGn6fD7RgqF2BkOnu
+	6SGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=cDdoQI61O+tIrdZnpIl4tDqvmhR2v39f8eSFqOsjdkI=;
-	b=I3h9Nae4Cv6jdoUKz4frFw0UOLxuHLNLkjSZY4hX3hgCR/eVBC0CUFXNEe1i3D+KGh
-	VxqfyI6eg9stpqUnnUSDw2jEx4Q9i1pUohOKjFAUIpEQKIc8aNChv8LflNhpLVjxg74X
-	qhBqEJcBsUWRVntbsN7UBn81Iacp2uvMH6raQ6qdEIgETur6nISQJkJaXYe5tf+hEi6s
-	Jc7tQQM0Ri12ACP//HiW2vN9nLpc0lQ1DG7nudKDGcXUlQiZX70ec1+cTeHKCTPwuC/v
-	BnVEJ7EH40xpOkw9wQnEs1+YqoeWdD3kOA5INM7Es9Pz4Nj1xZFxi8T063fN8g8dwNUz
-	yqOA==
-X-Gm-Message-State: ABuFfoh1UFNQNd6V8r6YqTsfFWMkuKkE97bGuC7cyM9ZS7RbhM5YPhL9
-	1O0yrZMNfhyAVqc+v1tmPwkcnmMuDnc=
-X-Google-Smtp-Source: ACcGV60vfPPcK68szSX8NA59rLyknvjbySfZd9mS9BGAqGr9h0eXvT7M0mtCcRCqJw0dZGiFDpOKlQ==
-X-Received: by 2002:a63:745e:: with SMTP id
-	e30-v6mr25727548pgn.446.1539804547023; 
-	Wed, 17 Oct 2018 12:29:07 -0700 (PDT)
+	bh=nfIxzvH8Fm90dXMfVHUw+aGqOulLB2h9PIDnqDKGL+A=;
+	b=O4vF/n0hMOFxM9wQprB3URFpgk0sofr7SSsM7XxQH7zaMzg/vTGkXwHUsXxIMUq4Xs
+	DVgaLfAUkDVysq5HrMK2fE9qyRBJTybj/It0/BBOMrQQqhHmxbhbUeg4KyBsQsJw++wW
+	TLsyGXJIOf65tUk0g68svAz0HC48Q8yoJm6IkShJ+6LP8yFB32CfK7oKFZa8DYXMyXUh
+	Oq42juFieq6opxNUfsEURyaUk/LKsCXE8w/Ev7UDDCu5S54xz9JJkGhmU997P7jCierG
+	6KkG97h1oymxIVqjIlz3Kdo/FvKbYjRNkoP05Tl2QYIq9SvB00ImZax9JC0yhVGeZmJI
+	AlQA==
+X-Gm-Message-State: ABuFfogUGn5l/eZ2xxGW5bqdcjnVhZcuDCcNCyGHOnw9THldirBaHpZn
+	/mQfMNT+MtU7I830OCMuTvOdXzbNN2k=
+X-Google-Smtp-Source: ACcGV60ZZwrNeMZnNSQk1yuf2ZF9egcqlZh9DF4a4RDfTN3xtckiCoxMLgThsuD37JL6QpgxzrkZyQ==
+X-Received: by 2002:a62:1c06:: with SMTP id
+	c6-v6mr28018152pfc.41.1539804548806; 
+	Wed, 17 Oct 2018 12:29:08 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::b111])
 	by smtp.gmail.com with ESMTPSA id
-	j3-v6sm18044151pfn.175.2018.10.17.12.29.06
+	j3-v6sm18044151pfn.175.2018.10.17.12.29.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Oct 2018 12:29:06 -0700 (PDT)
+	Wed, 17 Oct 2018 12:29:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed, 17 Oct 2018 12:28:51 -0700
-Message-Id: <20181017192853.42942-3-raj.khem@gmail.com>
+Date: Wed, 17 Oct 2018 12:28:52 -0700
+Message-Id: <20181017192853.42942-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181017192853.42942-1-raj.khem@gmail.com>
 References: <20181017192853.42942-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/5] u-boot: reduce the SPL `.rodata' size
+Subject: [PATCH 4/5] beaglebone.conf: Package kernel and devicetree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -79,75 +78,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 19:29:08 -0000
+X-List-Received-Date: Wed, 17 Oct 2018 19:29:17 -0000
 Content-Transfer-Encoding: 8bit
 
-Fixes errors e.g.
-
-| arm-yoe-linux-gnueabi-ld.bfd: u-boot-spl section `.rodata' will not fit in region `.sram'
-| arm-yoe-linux-gnueabi-ld.bfd: region `.sram' overflowed by 5772 bytes
+Use variables from upstream u-boot, makes it easy to switch to
+mainline u-boot from oe-core if someone wants to
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Denys Dmytriyenko <trini@konsulko.com>
 ---
- ...vm_defconfig-Reduce-SPL-.rodata-size.patch | 36 +++++++++++++++++++
- .../u-boot/u-boot-ti-staging_2018.01.bb       |  2 ++
- 2 files changed, 38 insertions(+)
- create mode 100644 recipes-bsp/u-boot/files/0001-am335x_evm_defconfig-Reduce-SPL-.rodata-size.patch
+ conf/machine/beaglebone.conf | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/files/0001-am335x_evm_defconfig-Reduce-SPL-.rodata-size.patch b/recipes-bsp/u-boot/files/0001-am335x_evm_defconfig-Reduce-SPL-.rodata-size.patch
-new file mode 100644
-index 00000000..6244a56a
---- /dev/null
-+++ b/recipes-bsp/u-boot/files/0001-am335x_evm_defconfig-Reduce-SPL-.rodata-size.patch
-@@ -0,0 +1,36 @@
-+From 45ead566ebf63999f07e966fa4962bb9bbe3ed4a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 16 Oct 2018 17:11:13 -0700
-+Subject: [PATCH] Disable usb-gadget usb-eth support in SPL
-+
-+This helps in shedding some size to fit in into SRAM
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configs/am335x_evm_defconfig | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
-+
-+diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-+index 4908099431..8342089dee 100644
-+--- a/configs/am335x_evm_defconfig
-++++ b/configs/am335x_evm_defconfig
-+@@ -12,14 +12,13 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+ CONFIG_VERSION_VARIABLE=y
-+ CONFIG_ARCH_MISC_INIT=y
-+ CONFIG_SPL=y
-+-CONFIG_SPL_ETH_SUPPORT=y
-++# CONFIG_SPL_ENV_SUPPORT is not set
-+ CONFIG_SPL_MTD_SUPPORT=y
-+ CONFIG_SPL_MUSB_NEW_SUPPORT=y
-+ CONFIG_SPL_NET_SUPPORT=y
-+ CONFIG_SPL_NET_VCI_STRING="AM335x U-Boot SPL"
-+ CONFIG_SPL_OS_BOOT=y
-+-CONFIG_SPL_USB_GADGET_SUPPORT=y
-+-CONFIG_SPL_USBETH_SUPPORT=y
-++# CONFIG_SPL_YMODEM_SUPPORT is not set
-+ CONFIG_FASTBOOT=y
-+ CONFIG_CMD_SPL=y
-+ CONFIG_CMD_SPL_NAND_OFS=0x00080000
-+-- 
-+2.19.1
-+
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index cbb8857a..46a26480 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -5,3 +5,5 @@ PR = "r24"
- BRANCH = "ti-u-boot-2018.01"
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index 25147926..9b656d01 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -1,6 +1,6 @@
+ #@TYPE: Machine
+ #@NAME: BeagleBone machine
+-#@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board 
++#@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board
  
- SRCREV = "2cc52408bf1357f11b96548e78223a1df321c1ae"
+ require conf/machine/include/ti33x.inc
+ 
+@@ -17,10 +17,16 @@ SERIAL_CONSOLE = "115200 ttyS0"
+ #UBOOT_MACHINE = "am335x_boneblack_config"
+ 
+ WKS_FILE = "sdimage-bootpart.wks"
+-IMAGE_BOOT_FILES = "MLO u-boot.img"
+-IMAGE_FSTYPES += "tar.xz wic.xz"
+ 
+ do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot"
++IMAGE_BOOT_FILES ?= "u-boot.${UBOOT_SUFFIX} MLO"
 +
-+SRC_URI += "file://0001-am335x_evm_defconfig-Reduce-SPL-.rodata-size.patch"
++IMAGE_FSTYPES += "tar.xz wic.xz"
+ 
+ # Refine the list of device targets for ti-pdk class recipes
+ TI_PDK_LIMIT_BOARDS = "bbbAM335x"
++
++SPL_BINARY = "MLO"
++UBOOT_SUFFIX = "img"
++
++IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 -- 
 2.19.1
 
