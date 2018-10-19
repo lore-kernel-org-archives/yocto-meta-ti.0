@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 82071E00A54; Thu, 18 Oct 2018 17:27:14 -0700 (PDT)
+	id 0BB43E00A54; Thu, 18 Oct 2018 17:27:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,50 +10,52 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B12CE0097C
-	for <meta-ti@yoctoproject.org>; Thu, 18 Oct 2018 17:27:13 -0700 (PDT)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FD80E0097C
+	for <meta-ti@yoctoproject.org>; Thu, 18 Oct 2018 17:27:53 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id w9J0RC11075015;
-	Thu, 18 Oct 2018 19:27:12 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id w9J0Rr4i072433;
+	Thu, 18 Oct 2018 19:27:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1539908832;
-	bh=x385f/S6TqzGWhdkb1XziABUpWLvAT66n84Yb1vudKI=;
+	s=ti-com-17Q1; t=1539908873;
+	bh=ZaIl8LZ56fwExNbhkXgJKCgl7dVdRZ3Qne7QwZ377HI=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=b0vlle0ALeFheBovij6yp+ULKJ3Wgcnu7lOPxLFHCH2WHoB7qfw2ZY6laoGqKMWpk
-	7bqCdfkvXL/ENJE1bGuRn3XyLi3Y/lWWLyZVBwBnVS+o3EH2hCV0mpfnWJE3H5xfYc
-	0MtRhqLbsU+PIXPZHHmVcqdu3Rs0fGo10RfOnmVc=
+	b=BNVGh+mL+y8t+hxjGLIRgZGJ7eQJMC9uXD5PBcH+jFvmIqkdkq3yifHr8fbziAhwa
+	tlEq7Uj5CVJQzOq2G1IBpPoiZkY/i7pNDxOuBH8mc5fknUHDRiTvIX437AlPUu2HiI
+	UgmiwQF/0FCPTNdpaoHG6J+RFHpLsXP2T/0RmWnw=
 Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9J0RCkE031141;
-	Thu, 18 Oct 2018 19:27:12 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE103.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9J0Rru7032104;
+	Thu, 18 Oct 2018 19:27:53 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE103.ent.ti.com
 	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Thu, 18 Oct 2018 19:27:11 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
+	Thu, 18 Oct 2018 19:27:52 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE107.ent.ti.com
+	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Thu, 18 Oct 2018 19:27:11 -0500
+	Transport; Thu, 18 Oct 2018 19:27:52 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9J0RBvC011191;
-	Thu, 18 Oct 2018 19:27:11 -0500
-Date: Thu, 18 Oct 2018 20:27:11 -0400
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id w9J0RqS1028178;
+	Thu, 18 Oct 2018 19:27:52 -0500
+Date: Thu, 18 Oct 2018 20:27:52 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20181019002711.GA10501@beryl>
-References: <20181018054946.22407-1-raj.khem@gmail.com>
+To: Jeremy Grosser <jeremy@synack.me>
+Message-ID: <20181019002752.GB10501@beryl>
+References: <CANg34PkEbA1B1q+3dK4TWCHzg6RhPD6skB8bgCqWGU8VCUx1xw@mail.gmail.com>
+	<20181017231203.GP4031@beryl> <20181017232342.GQ4031@beryl>
+	<20181018073522.GB15705@katana.synack.me>
 MIME-Version: 1.0
-In-Reply-To: <20181018054946.22407-1-raj.khem@gmail.com>
+In-Reply-To: <20181018073522.GB15705@katana.synack.me>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] u-boot: Alawys build with disabled PIE
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] lego-ev3: Add support for LEGO Mindstorms EV3 (AM1808)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,85 +68,260 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Oct 2018 00:27:14 -0000
+X-List-Received-Date: Fri, 19 Oct 2018 00:27:55 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Wed, Oct 17, 2018 at 10:49:46PM -0700, Khem Raj wrote:
-> some OE distros can default to hardened toolchains which means PIE is
-> added implicitly to compiler cmdline, here this options makes sure that
-> whattever the default toolchain are, u-boot is not impacted
-> 
-> Fixes errors e.g.
-> 
-> | arm-yoe-linux-gnueabi-ld.bfd: u-boot-spl section `.rodata' will not fit in region `.sram'
-> | arm-yoe-linux-gnueabi-ld.bfd: region `.sram' overflowed by 5772 bytes
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Denys Dmytriyenko <denys@ti.com>
-
-Thanks, merged!
+Thanks, merged.
 
 
+On Thu, Oct 18, 2018 at 12:35:23AM -0700, Jeremy Grosser wrote:
+> Thanks for the feedback! Updated patch below. Changes:
+>  - Change SERIAL_CONSOLE to new SERIAL_CONSOLES format.
+>  - Move SPL_BINARY variable into lego-ev3 machine config
+>  - Check for KERNEL_DEVICETREE_BUNDLE before uImage manipulation.
+>  - Fix line wrapping errors introduced by MUA
+> 
+> Signed-off-by: Jeremy Grosser <jeremy@synack.me>
 > ---
->  .../0001-Always-build-with-fno-PIE.patch      | 35 +++++++++++++++++++
->  .../u-boot/u-boot-ti-staging_2018.01.bb       |  2 ++
->  2 files changed, 37 insertions(+)
->  create mode 100644 recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch
+>  conf/machine/lego-ev3.conf                    | 22 ++++++++++++++++
+>  recipes-bsp/u-boot/u-boot-ti.inc              |  1 +
+>  recipes-kernel/linux/bundle-devicetree.inc    | 26 +++++++++++++++++++
+>  recipes-kernel/linux/linux-ti-staging_4.14.bb |  1 +
+>  4 files changed, 50 insertions(+)
+>  create mode 100644 conf/machine/lego-ev3.conf
+>  create mode 100644 recipes-kernel/linux/bundle-devicetree.inc
 > 
-> diff --git a/recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch b/recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch
+> diff --git a/conf/machine/lego-ev3.conf b/conf/machine/lego-ev3.conf
 > new file mode 100644
-> index 00000000..dfd99c66
+> index 00000000..5c425221
 > --- /dev/null
-> +++ b/recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch
-> @@ -0,0 +1,35 @@
-> +From ec81bbe3ea7e077512f4b9d2b4aa87e7f1494bcc Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Wed, 17 Oct 2018 22:32:57 -0700
-> +Subject: [PATCH] Always build with -fno-PIE
+> +++ b/conf/machine/lego-ev3.conf
+> @@ -0,0 +1,22 @@
+> +#@TYPE: Machine
+> +#@NAME: LEGO Mindstorms EV3
+> +#@DESCRIPTION: Machine configuration for the LEGO Mindstorms EV3
 > +
-> +GNU Toolchains can be configured to generate PIE by default
-> +while PIE could be ok, it is known that u-boot/SPL on ARM starts to
-> +generate bigger code and starts to overflow the SRAM size, therefore
-> +disabling PIE explcitly insulates against toolchain intrinsic defaults
+> +require conf/machine/include/davinci.inc
+> +require conf/machine/include/omapl138.inc
 > +
-> +Fixes errors like
-> +| arm-yoe-linux-gnueabi-ld.bfd: u-boot-spl section `.rodata' will not fit in region `.sram'
-> +| arm-yoe-linux-gnueabi-ld.bfd: region `.sram' overflowed by 5772 bytes
+> +UBOOT_MACHINE = "legoev3_config"
+> +UBOOT_SUFFIX = "bin"
+> +UBOOT_ENTRYPOINT = "0xC0008000"
+> +UBOOT_LOADADDRESS = "0xC0008000"
+> +SPL_BINARY = ""
 > +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +Cc: Tom Rini <trini@konsulko.com>
-> +---
-> + Makefile | 1 +
-> + 1 file changed, 1 insertion(+)
+> +KERNEL_DEVICETREE = "da850-lego-ev3.dtb"
+> +KERNEL_IMAGETYPES = "uImage"
+> +KERNEL_DEVICETREE_BUNDLE = "1"
+> +SERIAL_CONSOLES = "115200;ttyS1"
 > +
-> +diff --git a/Makefile b/Makefile
-> +index 45cd751ba3..9eb8ac564e 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -592,6 +592,7 @@ KBUILD_CFLAGS	+= -O2
-> + endif
-> + 
-> + KBUILD_CFLAGS += $(call cc-option,-fno-stack-protector)
-> ++KBUILD_CFLAGS += $(call cc-option,-fno-PIE)
-> + KBUILD_CFLAGS += $(call cc-option,-fno-delete-null-pointer-checks)
-> + 
-> + KBUILD_CFLAGS	+= -g
-> +-- 
-> +2.19.1
-> +
-> diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-> index cbb8857a..c9c97111 100644
-> --- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-> @@ -5,3 +5,5 @@ PR = "r24"
->  BRANCH = "ti-u-boot-2018.01"
+> +IMAGE_FSTYPES += " wic"
+> +WKS_FILE = "sdimage-bootpart.wks"
+> +WIC_CREATE_EXTRA_ARGS += " --no-fstab-update"
+> +IMAGE_BOOT_FILES = "${KERNEL_IMAGETYPES}"
+> diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+> index d3267be1..62f04f7c 100644
+> --- a/recipes-bsp/u-boot/u-boot-ti.inc
+> +++ b/recipes-bsp/u-boot/u-boot-ti.inc
+> @@ -55,6 +55,7 @@ export TI_SECURE_DEV_PKG
+>  SPL_UART_BINARY = "u-boot-spl.bin"
+>  SPL_UART_BINARY_keystone = ""
+>  SPL_UART_BINARY_k3 = ""
+> +SPL_UART_BINARY_lego-ev3 = ""
 >  
->  SRCREV = "2cc52408bf1357f11b96548e78223a1df321c1ae"
+>  SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+>  SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+> diff --git a/recipes-kernel/linux/bundle-devicetree.inc b/recipes-kernel/linux/bundle-devicetree.inc
+> new file mode 100644
+> index 00000000..4d450374
+> --- /dev/null
+> +++ b/recipes-kernel/linux/bundle-devicetree.inc
+> @@ -0,0 +1,26 @@
+> +# Upstream kernel-devicetree.bbclass only supports bundling the DTB with
+> +# zImage. The factory u-boot on lego-ev3 EEPROM only supports uImage, so we
+> +# append the DTB to the final uImage here.
 > +
-> +SRC_URI += "file://0001-Always-build-with-fno-PIE.patch"
+> +do_deploy_append() {
+> +    if [ "${KERNEL_DEVICETREE_BUNDLE}" = "1" ]; then
+> +        install -d ${DEPLOYDIR}
+> +        for dtbf in ${KERNEL_DEVICETREE}; do
+> +            dtb=`normalize_dtb "$dtbf"`
+> +            dtb_ext=${dtb##*.}
+> +            dtb_base_name=`basename $dtb .$dtb_ext`
+> +            for type in ${KERNEL_IMAGETYPE_FOR_MAKE}; do
+> +                if [ "$type" = "uImage" ]; then
+> +                    cat ${D}/${KERNEL_IMAGEDEST}/$type \
+> +                    ${DEPLOYDIR}/$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext \
+> +                    > ${DEPLOYDIR}/$type-$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext.bin
+> +                    ln -sf $type-$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext.bin \
+> +                    ${DEPLOYDIR}/$type-$dtb_base_name-${KERNEL_DTB_LINK_NAME}.$dtb_ext.bin
+> +                    cat ${D}/${KERNEL_IMAGEDEST}/$type \
+> +                    ${DEPLOYDIR}/$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext \
+> +                    > ${DEPLOYDIR}/$type
+> +                fi
+> +            done
+> +        done
+> +    fi
+> +}
+> diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+> index 5ee206ec..13b94ffe 100644
+> --- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
+> +++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+> @@ -8,6 +8,7 @@ inherit kernel
+>  require recipes-kernel/linux/setup-defconfig.inc
+>  require recipes-kernel/linux/cmem.inc
+>  require recipes-kernel/linux/ti-uio.inc
+> +require recipes-kernel/linux/bundle-devicetree.inc
+>  
+>  # Look in the generic major.minor directory for files
+>  FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
 > -- 
 > 2.19.1
 > 
+> 
+> On Wed, Oct 17, 2018 at 07:23:42PM -0400, Denys Dmytriyenko wrote:
+> > On Wed, Oct 17, 2018 at 07:12:03PM -0400, Denys Dmytriyenko wrote:
+> > > Thanks! Looks very intersting. Please see comments inline.
+> > > 
+> > > 
+> > > On Mon, Oct 15, 2018 at 08:19:02PM -0700, Jeremy Grosser wrote:
+> > > > Signed-off-by: Jeremy Grosser <jeremy@synack.me>
+> > > > ---
+> > > >  conf/machine/lego-ev3.conf                    | 21 ++++++++++++++++
+> > > >  recipes-bsp/u-boot/u-boot-ti.inc              |  2 ++
+> > > >  recipes-kernel/linux/bundle-devicetree.inc    | 24 +++++++++++++++++++
+> > > >  recipes-kernel/linux/linux-ti-staging_4.14.bb |  1 +
+> > > >  4 files changed, 48 insertions(+)
+> > > >  create mode 100644 conf/machine/lego-ev3.conf
+> > > >  create mode 100644 recipes-kernel/linux/bundle-devicetree.inc
+> > > > 
+> > > > diff --git a/conf/machine/lego-ev3.conf b/conf/machine/lego-ev3.conf
+> > > > new file mode 100644
+> > > > index 00000000..18626001
+> > > > --- /dev/null
+> > > > +++ b/conf/machine/lego-ev3.conf
+> > > > @@ -0,0 +1,21 @@
+> > > > +#@TYPE: Machine
+> > > > +#@NAME: LEGO Mindstorms EV3
+> > > > +#@DESCRIPTION: Machine configuration for the LEGO Mindstorms EV3
+> > > > +
+> > > > +require conf/machine/include/davinci.inc
+> > > > +require conf/machine/include/omapl138.inc
+> > > > +
+> > > > +UBOOT_MACHINE = "legoev3_config"
+> > > > +UBOOT_SUFFIX = "bin"
+> > > > +UBOOT_ENTRYPOINT = "0xC0008000"
+> > > > +UBOOT_LOADADDRESS = "0xC0008000"
+> > > > +
+> > > > +KERNEL_DEVICETREE = "da850-lego-ev3.dtb"
+> > > > +KERNEL_IMAGETYPES = "uImage"
+> > > > +KERNEL_DEVICETREE_BUNDLE = "1"
+> > > > +SERIAL_CONSOLE ?= "115200 ttyS1"
+> > > 
+> > > Can you please rebase with recent changes to deprecate SERIAL_CONSOLE.
+> > > 
+> > > 
+> > > > +
+> > > > +IMAGE_FSTYPES += " wic"
+> > > > +WKS_FILE = "sdimage-bootpart.wks"
+> > > > +WIC_CREATE_EXTRA_ARGS += " --no-fstab-update"
+> > > > +IMAGE_BOOT_FILES = "${KERNEL_IMAGETYPES}"
+> > > > diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+> > > > index f22fcb4d..aba5e90c 100644
+> > > > --- a/recipes-bsp/u-boot/u-boot-ti.inc
+> > > > +++ b/recipes-bsp/u-boot/u-boot-ti.inc
+> > > > @@ -57,12 +57,14 @@ SPL_BINARY_k2hk-hs-evm = ""
+> > > >  SPL_BINARY_k2g-hs-evm = ""
+> > > >  SPL_BINARY_k2l-hs-evm = ""
+> > > >  SPL_BINARY_omapl138 = ""
+> > > > +SPL_BINARY_lego-ev3 = ""
+> > > 
+> > > Sorry, this has also just changed, please move to machine config.
+> > > 
+> > > 
+> > > >  SPL_BINARY_k3 = "tispl.bin"
+> > > > 
+> > > >  # SPL (Second Program Loader) to be loaded over UART
+> > > >  SPL_UART_BINARY = "u-boot-spl.bin"
+> > > >  SPL_UART_BINARY_keystone = ""
+> > > >  SPL_UART_BINARY_k3 = ""
+> > > > +SPL_UART_BINARY_lego-ev3 = ""
+> > > > 
+> > > >  SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+> > > >  SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+> > > > diff --git a/recipes-kernel/linux/bundle-devicetree.inc
+> > > > b/recipes-kernel/linux/bundle-devicetree.inc
+> > > > new file mode 100644
+> > > > index 00000000..ce159878
+> > > > --- /dev/null
+> > > > +++ b/recipes-kernel/linux/bundle-devicetree.inc
+> > > > @@ -0,0 +1,24 @@
+> > > > +# Upstream kernel-devicetree.bbclass only supports bundling the DTB with
+> > > > +# zImage. The factory u-boot on lego-ev3 EEPROM only supports uImage, so we
+> > > > +# append the DTB to the final uImage here.
+> > > > +
+> > > > +do_deploy_append() {
+> > > 
+> > > Can you check for KERNEL_DEVICETREE_BUNDLE being set right away here, so 
+> > > normally it won't even go into all the loops inside.
+> > > 
+> > > 
+> > > > +    for dtbf in ${KERNEL_DEVICETREE}; do
+> > > > +        dtb=`normalize_dtb "$dtbf"`
+> > > > +        dtb_ext=${dtb##*.}
+> > > > +        dtb_base_name=`basename $dtb .$dtb_ext`
+> > > > +        install -d ${DEPLOYDIR}
+> > > 
+> > > For all the DTBs listed (and some platforms have tens of them!) you'd be 
+> > > creating DEPLOYDIR over and over again...
+> > > 
+> > > 
+> > > > +        for type in ${KERNEL_IMAGETYPE_FOR_MAKE}; do
+> > > > +            if [ "$type" = "uImage" ] && [
+> > > > "${KERNEL_DEVICETREE_BUNDLE}" = "1" ]; then
+> > 
+> > Oh, and forgot to mention: the patch looks corrupted here and in couple more 
+> > lines below - make sure your MUA doesn't do line wrap or send with git...
+> > 
+> > 
+> > > > +                cat ${D}/${KERNEL_IMAGEDEST}/$type \
+> > > > +                    ${DEPLOYDIR}/$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext \
+> > > > +                    >
+> > > > ${DEPLOYDIR}/$type-$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext.bin
+> > > > +                ln -sf $type-$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext.bin \
+> > > > +
+> > > > ${DEPLOYDIR}/$type-$dtb_base_name-${KERNEL_DTB_LINK_NAME}.$dtb_ext.bin
+> > > > +                cat ${D}/${KERNEL_IMAGEDEST}/$type \
+> > > > +                    ${DEPLOYDIR}/$dtb_base_name-${KERNEL_DTB_NAME}.$dtb_ext \
+> > > > +                    > ${DEPLOYDIR}/$type
+> > > > +            fi
+> > > > +        done
+> > > > +    done
+> > > > +}
+> > > > diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb
+> > > > b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+> > > > index 5ee206ec..13b94ffe 100644
+> > > > --- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
+> > > > +++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
+> > > > @@ -8,6 +8,7 @@ inherit kernel
+> > > >  require recipes-kernel/linux/setup-defconfig.inc
+> > > >  require recipes-kernel/linux/cmem.inc
+> > > >  require recipes-kernel/linux/ti-uio.inc
+> > > > +require recipes-kernel/linux/bundle-devicetree.inc
+> > > > 
+> > > >  # Look in the generic major.minor directory for files
+> > > >  FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
+> > > > --
+> > > > 2.19.1
+> > > > -- 
+> > > > _______________________________________________
+> > > > meta-ti mailing list
+> > > > meta-ti@yoctoproject.org
+> > > > https://lists.yoctoproject.org/listinfo/meta-ti
+> > > -- 
+> > > _______________________________________________
+> > > meta-ti mailing list
+> > > meta-ti@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/meta-ti
 
