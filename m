@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 43BB1E00C52; Wed, 14 Nov 2018 12:25:34 -0800 (PST)
+	id 5B6CCE00C52; Wed, 14 Nov 2018 12:25:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,45 +17,47 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4750E00C19
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 305C2E00C4B
 	for <meta-ti@yoctoproject.org>; Wed, 14 Nov 2018 12:25:33 -0800 (PST)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id wAEKPXCa092074
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id wAEKPXua092078
 	for <meta-ti@yoctoproject.org>; Wed, 14 Nov 2018 14:25:33 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1542227133;
-	bh=josKIiVjFlvJtw/amdTUPPC2ZhAieI8mT4VksD9zxss=;
-	h=From:To:CC:Subject:Date;
-	b=G/wuDk12ALs/WfuBxx1luvC9T/tgOhV4LPKuaugzhsGWTvF4YGBOz9ZGk97eORAx3
-	urGwVWgNYjcaRP0g07+IzEcZEU9duiCViCrmwx4Ixtn22cQN4N0rIwcxpwia8poxXs
-	YjgzqpdewfFMcPiLahyyRRBcXYENWj3NYZQ4shMk=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wAEKPX0n120377
+	bh=ZR9IsbFKm57RfsIHLwk0kkMmJJmLZvXdQbESjxgWlSM=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=WEyo5S7uuAwXcQv4RYpXNtDjIHW7IblrW8LNose5Y16oCMfHwKRWnK9WzbFVIOk57
+	3IpLdnQnFC6Yo+wmY3y2We01bxy+FwJstDslmJOvk608fqNAlzk4H3ZmfFMz3pR0+g
+	aMo+97KT/L6yWw3J9xVnsqroRnuwjuReF9t4+qNE=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wAEKPXnG120407
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Wed, 14 Nov 2018 14:25:33 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
+	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1466.3;
-	Wed, 14 Nov 2018 14:25:32 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 14 Nov 2018 14:25:33 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE106.ent.ti.com
+	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1466.3 via Frontend
-	Transport; Wed, 14 Nov 2018 14:25:32 -0600
+	Transport; Wed, 14 Nov 2018 14:25:33 -0600
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
 	[128.247.22.53])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id wAEKPWT1026975;
-	Wed, 14 Nov 2018 14:25:32 -0600
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id wAEKPXPv030834;
+	Wed, 14 Nov 2018 14:25:33 -0600
 Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.179.134])
 	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	wAEKPWx23091; Wed, 14 Nov 2018 14:25:32 -0600 (CST)
+	wAEKPWx23097; Wed, 14 Nov 2018 14:25:32 -0600 (CST)
 From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 14 Nov 2018 14:25:18 -0600
-Message-ID: <20181114202519.7687-1-dmurphy@ti.com>
+Date: Wed, 14 Nov 2018 14:25:19 -0600
+Message-ID: <20181114202519.7687-2-dmurphy@ti.com>
 X-Mailer: git-send-email 2.12.2
+In-Reply-To: <20181114202519.7687-1-dmurphy@ti.com>
+References: <20181114202519.7687-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH v2 1/2] linux-ti-staging: update to ti2018.05-rc4 tag
+Subject: [PATCH v2 2/2] u-boot-ti-staging: update to ti2018.05-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,44 +70,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Nov 2018 20:25:34 -0000
+X-List-Received-Date: Wed, 14 Nov 2018 20:25:35 -0000
 Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.14.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.14.bb    | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-index 620b9c1e..a351ef8d 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.14.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+index 6fa2af9a..f027dc44 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
  
- BRANCH = "ti-rt-linux-4.14.y"
+-PR = "r27"
++PR = "r28"
  
--SRCREV = "cbd4210a3af802dee7281705667b36bed455e1bb"
-+SRCREV = "aab33cfa0d3aed1fb463f6a6e62236db6b04fc5f"
- PV = "4.14.79+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.14.bb b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-index 0caf1ab9..2dfb0c52 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.14.bb
-@@ -55,11 +55,11 @@ S = "${WORKDIR}/git"
+ BRANCH = "ti-u-boot-2018.01"
  
- BRANCH = "ti-lsk-linux-4.14.y"
- 
--SRCREV = "ae8686a0d910688543aeddba3f90523bec4d50dc"
-+SRCREV = "3438de34744b2eba32456bf8e3f44b19e3061331"
- PV = "4.14.79+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+-SRCREV = "9e1b118712213d2cab15280b5c6776bef35d4d59"
++SRCREV = "b1db1fb0d39fa706f0ad8e36f301aba429475bed"
 -- 
 2.19.1.856.g8858448bb4
 
