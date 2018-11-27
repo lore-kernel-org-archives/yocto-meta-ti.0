@@ -1,61 +1,69 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6D85DE00C41; Mon, 19 Nov 2018 09:01:01 -0800 (PST)
+	id 03B6DE00A54; Mon, 26 Nov 2018 22:46:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.214.169 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 327E3E00C09
-	for <meta-ti@yoctoproject.org>; Mon, 19 Nov 2018 09:00:59 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id wAJH0xft086471
-	for <meta-ti@yoctoproject.org>; Mon, 19 Nov 2018 11:00:59 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1542646859;
-	bh=nw8N2pw/a1+Zz6/KErzXn/rHOYtrs3nHSvFhRtFkiaA=;
-	h=From:To:CC:Subject:Date;
-	b=ifrsqOUmvz50M5rZlZ9jLhuwVRVz92k/vc1LHDNc5A81yWmeZ5l2pd2MrqOGiIWG1
-	fyQZ2VnhsI0ao1MClYwuN9TtsicecObI46UhlW+f+MFKyQqYPsFqkg6JDB6jTWx1ST
-	ufiPc8Vto/9j/UWlkfms8fVzQSd3a1T85/Y2Th9s=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wAJH0xN2080582
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 19 Nov 2018 11:00:59 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Mon, 19 Nov 2018 11:00:59 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Mon, 19 Nov 2018 11:00:59 -0600
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id wAJH0w87002291;
-	Mon, 19 Nov 2018 11:00:59 -0600
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.33.105])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	wAJH0wx18765; Mon, 19 Nov 2018 11:00:58 -0600 (CST)
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 19 Nov 2018 11:00:56 -0600
-Message-ID: <20181119170056.8359-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+	[209.85.214.169])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01558E009B2
+	for <meta-ti@yoctoproject.org>; Mon, 26 Nov 2018 22:46:51 -0800 (PST)
+Received: by mail-pl1-f169.google.com with SMTP id gn14so15128091plb.10
+	for <meta-ti@yoctoproject.org>; Mon, 26 Nov 2018 22:46:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xKIRTvhjdJ9Y+6BRPEmc9V+sYGIqcg3CIjT+6Dpi3pc=;
+	b=o7g4XBo71njnk2ZkRul4DaezgGo8nOSxrriVV1JIztKRKH3nKHdLTiYvj9oOPm2ljt
+	yBssae0ZSSVSIgSylTuD+Jc55q4uxvD3PyFXzA/Fc45sg/mJV2J8yAyCScGKMwj+JnB/
+	qprmkMDu7gOjgCFDCE5EQh9vsMFQSekC8kCXCQ2kOhC9VuZmOnIsx19KMZwdVnpWpqIP
+	9k/TDBbt1p71FnNMDuVO3+EJCKAzmUaRUeUCoXFg77AgNKyXP2/BIxCd/ryexES3mcQ3
+	xXE91MlJvxPSxYCQ/G8/3008f9nPoW2AUgji+V1vwIHvdQwk19BZiI2bM7aHT6KpcL00
+	ChYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xKIRTvhjdJ9Y+6BRPEmc9V+sYGIqcg3CIjT+6Dpi3pc=;
+	b=Rzq+IbFmJKNzQ59vjT6hC6SU02Qt0UhaeCnfbGgatTaOaxOilO4sPb16f2qSEglmrb
+	W4qL+En7tZiL9+TlPaRAiovR3H5pdHGYXg1Ejym9Q/kyhGpQn+DjokOgIZNAiXyCf1LL
+	ZDyAYTHLaS2ndo1SCWYMTktPtUtYqyLJk2hVnP5TkNYQR2X4L115WgQ8ShBKGWYEVL2o
+	60vjL+9lgcI3DEePenEv+01gzK8ryA8r9G1XNzeSWR/N9/w8XO4phbP9y0q7AOGhe8IM
+	myvSaRJlSuMHouGccX4LolxJkl0cqvJ9yhlwxB19IfG06FY7w4fgSmypBhl1o5OwbGRF
+	N14g==
+X-Gm-Message-State: AA+aEWazpRRHcVBUPDtBv5kaCjMN+QeQUF6KTEbBPNX5agYhpKOOGVKy
+	cxfJ0uucA8cTmeZCj8D6n2t+l+h725k=
+X-Google-Smtp-Source: AFSGD/Vrg/a0tJ485rY8AVvAFGx5n59ubDEVQKjmPQ5M8EZ8sq8CeK/mPk+A7RZF4kl4Tzvdan9wLw==
+X-Received: by 2002:a17:902:2a66:: with SMTP id
+	i93mr30692156plb.113.1543301210793; 
+	Mon, 26 Nov 2018 22:46:50 -0800 (PST)
+Received: from localhost.localdomain ([2601:646:877f:9499::26ab])
+	by smtp.gmail.com with ESMTPSA id
+	z191sm2858542pgd.74.2018.11.26.22.46.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 26 Nov 2018 22:46:49 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Mon, 26 Nov 2018 22:46:35 -0800
+Message-Id: <20181127064635.42008-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.2
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] u-boot-ti-staging: update to ti2018.05-rc5 tag
+Subject: [PATCH] uio-module-drv: Mark it to be ti SOC specific
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,29 +76,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2018 17:01:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 27 Nov 2018 06:46:53 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Fails to compile with non TI kernels
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/uio-module-drv/uio-module-drv.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-index f027dc44..e3910ece 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+index 99d908ee..f483010e 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
++++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+@@ -14,3 +14,6 @@ SRC_URI = "${UIO_MODULE_DRV_GIT_URI};protocol=${UIO_MODULE_DRV_GIT_PROTOCOL};bra
+ SRCREV = "${UIO_MODULE_DRV_SRCREV}"
  
--PR = "r28"
-+PR = "r29"
- 
- BRANCH = "ti-u-boot-2018.01"
- 
--SRCREV = "b1db1fb0d39fa706f0ad8e36f301aba429475bed"
-+SRCREV = "eac41e26ac56fcabf9826b21377931c7b8e646f2"
+ S = "${WORKDIR}/git"
++
++COMPATIBLE_HOST ?= "null"
++COMPATIBLE_HOST_ti-soc = "(.*)"
 -- 
-2.19.1.856.g8858448bb4
+2.19.2
 
 
