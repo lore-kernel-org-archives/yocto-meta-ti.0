@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 99C71E00D6E; Fri, 14 Dec 2018 11:31:52 -0800 (PST)
+	id 789D0E00DA4; Fri, 14 Dec 2018 11:31:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B422E00B77
-	for <meta-ti@yoctoproject.org>; Fri, 14 Dec 2018 11:31:51 -0800 (PST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id wBEJVpIT040565
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3381DE00C58
+	for <meta-ti@yoctoproject.org>; Fri, 14 Dec 2018 11:31:52 -0800 (PST)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id wBEJVpJR040569
 	for <meta-ti@yoctoproject.org>; Fri, 14 Dec 2018 13:31:51 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1544815911;
-	bh=GC2aOQM2VAyXXxyZW0TBm2qlWCu1rvKjqhhWctCDmgo=;
+	bh=o+o44g6H/esbeHsrmjmzR2QSrDX2PRz9JmZgYOt3OGU=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=eHRUZ0Dhlmtsx3uvLbdz86uU2cxkRKOqDgEiNQEpdKCsnKkVO7LRpkJBKTmABc0UQ
-	Zdj6T23Qt0dj/OCbeIZuYz63LedHRl+iAsJdHqeyYAk2st4aqId92V/ZFlJuxc0hKa
-	E5+i/kTHg43ZdkWhMMPVRGxdXQR2JrhJJ+VIMQvU=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wBEJVpn9101341
+	b=iEnCyGTuLj5bUuJ4cz8PxpKgo80UYW6ltQzDxm7xVkwMuS5ULq7MnaZiBljdq2bNU
+	3Iqe3Rzgg8wLONCOoL3kwkYY7faRP4sKbzZA7VUPXKiCD7TxPbMbvWH6Dp2YlVsYIh
+	aTD7YlfzcTSbkLFFNO4Sp1IbYRcV10HSDfQbFEv8=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wBEJVp4x019933
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Fri, 14 Dec 2018 13:31:51 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE105.ent.ti.com
-	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
 	Fri, 14 Dec 2018 13:31:51 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE102.ent.ti.com
+	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
 	Transport; Fri, 14 Dec 2018 13:31:51 -0600
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id wBEJVmdE031115
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id wBEJVmdF031115
 	for <meta-ti@yoctoproject.org>; Fri, 14 Dec 2018 13:31:51 -0600
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 14 Dec 2018 14:31:23 -0500
-Message-ID: <1544815903-10792-15-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 14 Dec 2018 14:31:24 -0500
+Message-ID: <1544815903-10792-16-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1544815903-10792-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1544815903-10792-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 14/34] mmcsd-lld-rtos: SRCREV udpate to 01.00.00.14, added sciclient dependency for k3
+Subject: [rocko/master][PATCH 15/34] osal: SRCREV udpate to 01.00.00.13
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,46 +67,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2018 19:31:52 -0000
+X-List-Received-Date: Fri, 14 Dec 2018 19:31:53 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ recipes-bsp/osal/osal.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb b/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-index 82c828e..efa3c55 100644
---- a/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-+++ b/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-@@ -13,14 +13,14 @@ MMCSD_LLD_GIT_PROTOCOL = "git"
- MMCSD_LLD_GIT_BRANCH = "master"
- MMCSD_LLD_GIT_DESTSUFFIX = "git/ti/drv/mmcsd"
+diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
+index 5b38d7b..5388164 100644
+--- a/recipes-bsp/osal/osal.inc
++++ b/recipes-bsp/osal/osal.inc
+@@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
+ OSAL_GIT_BRANCH = "master"
+ OSAL_GIT_DESTSUFFIX = "git/ti/osal"
  
--# Below commit ID corresponds to "DEV.MMCSD_LLD.01.00.00.13"
--MMCSD_LLD_SRCREV = "73e5ce5b0c1ebf05ca440263721f045b09cd0688"
-+# Below commit ID corresponds to "DEV.MMCSD_LLD.01.00.00.14"
-+MMCSD_LLD_SRCREV = "cdacb10f1f89ed8017172d2470c62997aef3a633"
+-# Below commit ID corresponding to "DEV.OSAL.01.00.00.12"
+-OSAL_SRCREV = "f9f47ad458a39201d822aa7f7e4774eb145ed451"
++# Below commit ID corresponding to "DEV.OSAL.01.00.00.13"
++OSAL_SRCREV = "ce73d71aacc4c3cbe7f7baf18a45049465c99eee"
  
- BRANCH = "${MMCSD_LLD_GIT_BRANCH}"
- SRC_URI = "${MMCSD_LLD_GIT_URI};destsuffix=${MMCSD_LLD_GIT_DESTSUFFIX};protocol=${MMCSD_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${OSAL_GIT_BRANCH}"
+ SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${MMCSD_LLD_SRCREV}"
--PV = "01.00.00.13"
-+PV = "01.00.00.14"
- PR = "r0"
- 
- S = "${WORKDIR}/${MMCSD_LLD_GIT_DESTSUFFIX}"
-@@ -34,6 +34,9 @@ DEPENDS_append_ti43x = " starterware-rtos \
- "
- DEPENDS_remove_k3 = "edma3-lld-rtos "
- 
-+DEPENDS_append_k3 = " sciclient-rtos \
-+"
-+
- # Build with make instead of XDC
- TI_PDK_XDCMAKE = "0"
- 
+ SRCREV = "${OSAL_SRCREV}"
+-PV = "01.00.00.12"
+-INC_PR = "r1"
++PV = "01.00.00.13"
++INC_PR = "r0"
 -- 
 1.9.1
 
