@@ -1,60 +1,64 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C0247E00C10; Mon, 17 Dec 2018 11:13:21 -0800 (PST)
+	id D9F97E00BB7; Mon, 17 Dec 2018 11:17:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.222.196 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4DB3E00BB7
-	for <meta-ti@yoctoproject.org>; Mon, 17 Dec 2018 11:13:20 -0800 (PST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id wBHJDKG1036012;
-	Mon, 17 Dec 2018 13:13:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1545074000;
-	bh=UO9h9QoKiR6onfMjZU9WnsB5oyW4Th4+mmkS5+Ve7ms=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=Ts8gSgcpujYCpidwboPBeGTz6qTFv+WYOT9leJ69AaRscrqoQzaD8Fc3ddFXckp3B
-	Aio36IpcyIvS50ypV3ykccs9VzLfUuYH13Kr4PfTVadDI1r5gQGYOzfFnBONdrr5r/
-	CNCl7yW8FOgBEruTpucOnsFNr1BoAgohBCn48WvY=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wBHJDKDD038006
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 17 Dec 2018 13:13:20 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Mon, 17 Dec 2018 13:13:19 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE102.ent.ti.com
-	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Mon, 17 Dec 2018 13:13:19 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id wBHJDJkM026781;
-	Mon, 17 Dec 2018 13:13:19 -0600
-Date: Mon, 17 Dec 2018 14:13:19 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20181217191319.GB517@beryl>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5BACE00B58
+	for <meta-ti@yoctoproject.org>; Mon, 17 Dec 2018 11:17:34 -0800 (PST)
+Received: by mail-qk1-f196.google.com with SMTP id q1so7990592qkf.13
+	for <meta-ti@yoctoproject.org>; Mon, 17 Dec 2018 11:17:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=5N9Gj6FiQVQoQvvuGIFXgTYV+ANdKl+jHEQYF2xXyxU=;
+	b=QcFjvCAiw8avVlWIwun1+NlS8KdOGYnVNT96AzKbZCDbk2nzrXJxdjYjWeWq6N0lNX
+	aGg6TE3wpKfmSdN1CoqDPOYUTutE2iKgtOnH/ZEVYTL28n5uY/9LRDIOF2m022VJDL4B
+	nzyS39QnKRt+wSyPR2sL/PxlyK8/kSv2JWLsDS45YFSFLKqhDxm3Sm8Tx10rlKREbA9U
+	soa0EOiI5Z7V8TgQfXAiIA3XHzCiwXz3bNYhGxhpcX4jYxNXYnlTQh1alzq8QK07XtTQ
+	lRrJ8EL1PhgGhk32wpcV+pwtH5FdhWDspGXC4vRq9GXQGKgLlAR/u3idjXqK4/KaPIK5
+	hcWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=5N9Gj6FiQVQoQvvuGIFXgTYV+ANdKl+jHEQYF2xXyxU=;
+	b=R4TbEWW0YH1PV2CNWpsuYJCN952lYbspNa8H2ZPEmNdW3B5uIDDvNbd9DnO21JY/Aa
+	20vGUU9w00VwXc1CZDc4LZf1tnK1P9fVMvMkibfZZD9j89Dbw14DtWphK/8UsbVKaCoj
+	Y9Bl07jOEtuvu0/v5qWdprQioAktwsJgPW/zjMMRIYU5W5KSZjcJmTw4tjc6EogPWQG8
+	Sz/om4/hFldrG3kRXXBhrGMz4lRoXVnFX0p7QN51KtaReUJIhJRtNY8O966WTu+UyrxH
+	fC0/o3dgjscdnakZXnPXvMk5B33SHBdEyTdfxTVNNfhTA18JYF6M/gsgfr2rGUmMD/KO
+	SjJg==
+X-Gm-Message-State: AA+aEWZt23sWOv/Z95GcJExoulF07vEOUP0gveRqM+lVjpv32ff+6qbl
+	PH02b44XQ/asG/Jb2qjggWPq6YC1shNh5LnJXtmMNEBq
+X-Google-Smtp-Source: AFSGD/WRpgrxYwTsujqQl8O3KxA7FtY39uT86P3CTHrTawmdIA4fBaKkc3QN1JzhSmcBglU/D9arwJKGakzKQnMwxuk=
+X-Received: by 2002:a37:a80a:: with SMTP id r10mr13998698qke.2.1545074253561; 
+	Mon, 17 Dec 2018 11:17:33 -0800 (PST)
+MIME-Version: 1.0
 References: <20181209075901.18421-1-raj.khem@gmail.com>
 	<CAMKF1spD7Xkh1GDs4gG1YqvczzKcpeQbAYadSFMC-VpFZLAbDA@mail.gmail.com>
 	<20181217190708.GA517@beryl>
-MIME-Version: 1.0
 In-Reply-To: <20181217190708.GA517@beryl>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 17 Dec 2018 11:17:07 -0800
+Message-ID: <CAMKF1soF8T0ZpiuRCvUFsdkBpbU7Jz+ujCWoHsoPs71fVBiuVw@mail.gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH V2] rwmem: Update to latest
 X-BeenThere: meta-ti@yoctoproject.org
@@ -69,30 +73,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2018 19:13:21 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Dec 2018 19:17:35 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Dec 17, 2018 at 02:07:08PM -0500, Denys Dmytriyenko wrote:
+On Mon, Dec 17, 2018 at 11:07 AM Denys Dmytriyenko <denys@ti.com> wrote:
+>
 > On Mon, Dec 17, 2018 at 10:58:47AM -0800, Khem Raj wrote:
 > > ping^1
-> 
+>
 > Yeah, I've been meaning to reply, just didn't have time.
-> 
-> Mostly I'm fine with the update. But I don't like hidden submodules instead of 
-> direct dependencies. I already made pybind11 recipe for Tomi's kms++ some time 
-> ago (though upstreaming it to oe-core didn't work and I didn't find time to 
-> follow up). I haven't looked at "inih" module yet, but maybe should be a 
+>
+> Mostly I'm fine with the update. But I don't like hidden submodules instead of
+> direct dependencies. I already made pybind11 recipe for Tomi's kms++ some time
+> ago (though upstreaming it to oe-core didn't work and I didn't find time to
+> follow up). I haven't looked at "inih" module yet, but maybe should be a
 > separate recipe as well?
 
-http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-support/inih/libinih_git.bb
+thats ok but usually if they are doing static linking its better to keep
+the gitsubmods or maybe at best use multiple SRC_URIs for each
+component, I think its just inviting more work to keep different
+recipes in sync otherwise. These new recipes may interfere with other
+packages
+etc.
 
-
+>
 > BTW, should it DEPENDS on python3 or inherit python3native?
-> 
+>
+
+its needed during runtime.
+
 > Denys
-> 
-> 
+>
+>
 > > On Sat, Dec 8, 2018 at 11:59 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > >
 > > > New versions use CMake
@@ -177,14 +189,9 @@ http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-support/inih
 > > > --
 > > > 2.19.2
 > > >
-> > -- 
+> > --
 > > _______________________________________________
 > > meta-ti mailing list
 > > meta-ti@yoctoproject.org
 > > https://lists.yoctoproject.org/listinfo/meta-ti
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
