@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7697EE00C4E; Tue, 18 Dec 2018 14:26:41 -0800 (PST)
+	id 87D0DE00BB7; Tue, 18 Dec 2018 14:26:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1C68E00C46
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88C78E00C29
 	for <meta-ti@yoctoproject.org>; Tue, 18 Dec 2018 14:26:40 -0800 (PST)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id wBIMQeYg107424
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id wBIMQeEJ107420
 	for <meta-ti@yoctoproject.org>; Tue, 18 Dec 2018 16:26:40 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1545172000;
-	bh=mmFfENLtUKJV9NTePA8aRITxLnPTrfi7Zvms9pYODg8=;
+	bh=oszyUJw0UuIeFzB6wlRPJ6cFtyg7d6wP/3ZWIMT7+1s=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=zEekoKKDFcTuGlAwiCU2T41Ox1kgPBGT/atK8m2zTHVErXhWrl7JQbm9I/bQ83nTC
-	0+ttKo+OCcY2FIr4B+yFI9h2PaZLymVsAfcDvOSayRXI0ptXgeLCXfKnQA0PAmS1yT
-	3jQadTqyqAPxZxznu0qa+3h9VBWJDicXW5E8S09g=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wBIMQeDo054733
+	b=xgAXJtZ9F3EajaZPXefS8KIbAeWEGGzYwv2t9Mwf0ZUX3H3NJoQCe3YGZotXAEJCG
+	jPEuLvxmSdG9ip+8aczEI7vbAMZsalG9++ALYdUHArnP+1QDUjPOGGDRQpQkTuLkVq
+	rUn4ST05thKW3IKghqyrAVy8lAnQha5eaWSyMZmw=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id wBIMQeKM075203
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Tue, 18 Dec 2018 16:26:40 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Tue, 18 Dec 2018 16:26:40 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 18 Dec 2018 16:26:39 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Tue, 18 Dec 2018 16:26:40 -0600
+	Transport; Tue, 18 Dec 2018 16:26:39 -0600
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id wBIMQcER023799
-	for <meta-ti@yoctoproject.org>; Tue, 18 Dec 2018 16:26:40 -0600
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id wBIMQcEQ023799
+	for <meta-ti@yoctoproject.org>; Tue, 18 Dec 2018 16:26:39 -0600
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 18 Dec 2018 17:26:35 -0500
-Message-ID: <1545171996-17507-7-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 18 Dec 2018 17:26:34 -0500
+Message-ID: <1545171996-17507-6-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1545171996-17507-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1545171996-17507-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 6/7] udma-lld-rtos: SRCREV update to 01.00.00.01A
+Subject: [rocko/master][PATCH 5/7] spi-lld-rtos: SRCREV udpate to 01.00.00.13A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,28 +72,28 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/udma-lld/udma-lld-rtos_git.bb | 6 +++---
+ recipes-bsp/spi-lld/spi-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb b/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
-index c918742..d5253e2 100644
---- a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
-+++ b/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
-@@ -13,14 +13,14 @@ UDMA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/udma-lld.git"
- UDMA_LLD_GIT_PROTOCOL = "git"
- UDMA_LLD_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/spi-lld/spi-lld-rtos_git.bb b/recipes-bsp/spi-lld/spi-lld-rtos_git.bb
+index 19c0b5f..3916ebb 100644
+--- a/recipes-bsp/spi-lld/spi-lld-rtos_git.bb
++++ b/recipes-bsp/spi-lld/spi-lld-rtos_git.bb
+@@ -12,14 +12,14 @@ SPI_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/spi-lld.git"
+ SPI_LLD_GIT_PROTOCOL = "git"
+ SPI_LLD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.UDMA_LLD.01.00.00.01"
--UDMA_LLD_SRCREV = "3a17e8cb4df073368e3a261c6482eba733aff78e"
-+# Below commit ID corresponds to "DEV.UDMA_LLD.01.00.00.01A"
-+UDMA_LLD_SRCREV = "e03304e15bb7f1a86c77f1a9984361c822ab2b70"
+-# Below commit ID corresponds to "DEV.SPI_LLD.01.00.00.13"
+-SPI_LLD_SRCREV = "ae908342837ca627276d4cee3c4e10d0792fad54"
++# Below commit ID corresponds to "DEV.SPI_LLD.01.00.00.13A"
++SPI_LLD_SRCREV = "2c6c4fe250383c8854be8fd58a6b599dbbe3fe8e"
  
- BRANCH = "${UDMA_LLD_GIT_BRANCH}"
- SRC_URI = "${UDMA_LLD_GIT_URI};protocol=${UDMA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${SPI_LLD_GIT_BRANCH}"
+ SRC_URI = "${SPI_LLD_GIT_URI};protocol=${SPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${UDMA_LLD_SRCREV}"
--PV = "01.00.00.01"
-+PV = "01.00.00.01A"
+ SRCREV = "${SPI_LLD_SRCREV}"
+-PV = "01.00.00.13"
++PV = "01.00.00.13A"
  PR = "r0"
  
  DEPENDS_append = " osal-rtos \
