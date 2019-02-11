@@ -1,38 +1,61 @@
-Return-Path: <denys@ti.com>
+Return-Path: <madhu1313b@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C8400E00C45; Wed,  6 Feb 2019 16:42:47 -0800 (PST)
+	id 62068E00C1B; Mon, 11 Feb 2019 04:34:55 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89C6CE00C1E
-	for <meta-ti@yoctoproject.org>; Wed,  6 Feb 2019 16:42:46 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B2CE940B53;
-	Thu,  7 Feb 2019 00:42:45 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id ZXSyn5RzOy3c; Thu,  7 Feb 2019 00:42:45 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-91-218.washdc.fios.verizon.net
-	[100.15.91.218])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 94EB140AD5;
-	Thu,  7 Feb 2019 00:42:44 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id A29E516A90C;
-	Wed,  6 Feb 2019 19:42:43 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (madhu1313b[at]gmail.com)
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [209.85.160.180 listed in list.dnswl.org]
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+	[209.85.160.180])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 401C0E0090C
+	for <meta-ti@yoctoproject.org>; Mon, 11 Feb 2019 04:34:54 -0800 (PST)
+Received: by mail-qt1-f180.google.com with SMTP id e5so11807208qtr.12
+	for <meta-ti@yoctoproject.org>; Mon, 11 Feb 2019 04:34:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=axSi0RMLc3GXdzrBdTr5xtT/DIPLVEj2/aXwrfNyCWg=;
+	b=aCQHkXq8N+c3KR4yduClq4JQrJSueURhzeRkSjtxEVLvYhxZx7pZGg3LOkxfrG0aqi
+	rWH2rD2oZUBVrYOH6G/OYsyoCasW8LXF/nZhms7yrGDVIuzPWYHhhqGxqfYP/LR2eWN1
+	+ZwaHDEmbS/BGpVd6cvpP10GAlGVC+VH/MJzr5U99k/T5ubb5zK4rHulIcPt7NkhG/0b
+	lkGm7+7ixnlI7KaoKTwlaYgYQg8fq7S61A9RiBdKSfYd9X1yBqw1MOG3/IfuxVL2exX9
+	tn6qqsHIsg2zV0nyRRfgH5de2SY/BH3aAz3kExli7LEJjJRmG0y0FL6A/SQ+ltJ9hQjr
+	sL9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=axSi0RMLc3GXdzrBdTr5xtT/DIPLVEj2/aXwrfNyCWg=;
+	b=oGnnzwbRuUXuNEVjQZQxXPaHeK/zhdve7pTPjIOkDN/AyYDc+QvI/IJpmEpWiuwvn2
+	7nf74qPE57pjZ9TFv5Fhee9T62GpmebIc+yxMTIC+j+Us3d5YuKN6uWJhwzcreU3hZzw
+	xEkUUHhM30H5taHIaegCpswkDHVPycPilAPXxDT/Sk8e6wgdJyDRufZb9rhGRtzUJeNc
+	gXFBn/P83JSplEbUYGIqHbiiOgAIKg3nWe2jDAW0MlQT/P86JVdzLtP7THtJLc+jYAvW
+	C2S5yzt+eqHj2l+sVSJBX2bQJFx+/nA8fRvV2oUvJ5jH2z1Z69d+MGRujlkcwCZKXMc0
+	CtUg==
+X-Gm-Message-State: AHQUAuaJYjOgqkNjnDVRMTZvjVs1gn85/olFv++XtcA2nhhdFvzCxHH1
+	wzSpx/9khRVc806dWLbHC6AefRoxc8ADq+AptX38QUDR
+X-Google-Smtp-Source: AHgI3IYYC2PbJW0mlkVIaNeIeDqSMpUyQdkfaIxLdwa9olkab4xFh2L7JCB0Chpwm1A88aK7cmQUi1qCqvIPgbfGdVg=
+X-Received: by 2002:ac8:d86:: with SMTP id s6mr26221274qti.324.1549888493555; 
+	Mon, 11 Feb 2019 04:34:53 -0800 (PST)
+MIME-Version: 1.0
+From: Madhu B <madhu1313b@gmail.com>
+Date: Mon, 11 Feb 2019 18:04:40 +0530
+Message-ID: <CAH5YvUuMV-_6iGOxk79RH6=G3tt=poqcgNJhSrYHMXR75MmR9w@mail.gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed,  6 Feb 2019 19:42:42 -0500
-Message-Id: <1549500162-52879-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [master][PATCH] u-boot-ti-staging: update to 2019.01
+Subject: How can I enable the Wayland on panda board?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,113 +68,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2019 00:42:47 -0000
+X-List-Received-Date: Mon, 11 Feb 2019 12:34:55 -0000
+Content-Type: multipart/alternative; boundary="0000000000001993ae05819d89ff"
 
-License checksum changed due to extra SPDX lines - no actual license change.
+--0000000000001993ae05819d89ff
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- .../files/0001-Always-build-with-fno-PIE.patch     | 35 ----------------------
- recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb    |  9 ------
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb    |  7 +++++
- recipes-bsp/u-boot/u-boot-ti.inc                   |  4 +--
- 4 files changed, 9 insertions(+), 46 deletions(-)
- delete mode 100644 recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
- create mode 100644 recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
+Hello everyone,
+                   I was trying to bring-up the AGL on panda board. I need
+to know, how to enable the Wayland on panda board.
 
-diff --git a/recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch b/recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch
-deleted file mode 100644
-index dfd99c6..0000000
---- a/recipes-bsp/u-boot/files/0001-Always-build-with-fno-PIE.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From ec81bbe3ea7e077512f4b9d2b4aa87e7f1494bcc Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 17 Oct 2018 22:32:57 -0700
--Subject: [PATCH] Always build with -fno-PIE
--
--GNU Toolchains can be configured to generate PIE by default
--while PIE could be ok, it is known that u-boot/SPL on ARM starts to
--generate bigger code and starts to overflow the SRAM size, therefore
--disabling PIE explcitly insulates against toolchain intrinsic defaults
--
--Fixes errors like
--| arm-yoe-linux-gnueabi-ld.bfd: u-boot-spl section `.rodata' will not fit in region `.sram'
--| arm-yoe-linux-gnueabi-ld.bfd: region `.sram' overflowed by 5772 bytes
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Cc: Tom Rini <trini@konsulko.com>
-----
-- Makefile | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/Makefile b/Makefile
--index 45cd751ba3..9eb8ac564e 100644
----- a/Makefile
--+++ b/Makefile
--@@ -592,6 +592,7 @@ KBUILD_CFLAGS	+= -O2
-- endif
-- 
-- KBUILD_CFLAGS += $(call cc-option,-fno-stack-protector)
--+KBUILD_CFLAGS += $(call cc-option,-fno-PIE)
-- KBUILD_CFLAGS += $(call cc-option,-fno-delete-null-pointer-checks)
-- 
-- KBUILD_CFLAGS	+= -g
---- 
--2.19.1
--
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-deleted file mode 100644
-index d458dc9..0000000
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2018.01.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require u-boot-ti.inc
--
--PR = "r30"
--
--BRANCH = "ti-u-boot-2018.01"
--
--SRCREV = "313dcd69c2b32648266f91bcf223f9e539bc4201"
--
--SRC_URI += "file://0001-Always-build-with-fno-PIE.patch"
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-new file mode 100644
-index 0000000..a890b82
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -0,0 +1,7 @@
-+require u-boot-ti.inc
-+
-+PR = "r0"
-+
-+BRANCH = "ti-u-boot-2019.01"
-+
-+SRCREV = "721a0ba045e97f4532718d38ed6941eb9a167225"
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index 62f04f7..9d82711 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -20,7 +20,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
- SUMMARY = "u-boot bootloader for TI devices"
- 
- LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
-+LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
- 
- BRANCH ?= "master"
- UBOOT_GIT_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git"
-@@ -30,7 +30,7 @@ SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};branch=${BRANCH}"
- PV_append = "+git${SRCPV}"
- 
- # u-boot needs devtree compiler to parse dts files
--DEPENDS += "dtc-native bc-native lzop-native"
-+DEPENDS += "dtc-native bc-native lzop-native flex-native bison-native"
- 
- PACKAGECONFIG[atf] = "ATF=${STAGING_DIR_HOST}/boot/bl31.bin,,arm-trusted-firmware"
- PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}/boot/bl32.bin,,optee-os"
--- 
-2.7.4
+Regards,
+-Madhu.
 
+--0000000000001993ae05819d89ff
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div>Hello everyone,</div><div>=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 I was trying to bring-up the AGL on panda board. I need to know, how=
+ to enable the Wayland on panda board.</div><div><br></div><div>Regards,</d=
+iv><div>-Madhu.</div></div>
+
+--0000000000001993ae05819d89ff--
