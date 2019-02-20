@@ -1,6 +1,6 @@
-Return-Path: <g-tammana@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B5C68E009EB; Mon, 18 Feb 2019 15:11:10 -0800 (PST)
+	id 0A98BE00BC8; Tue, 19 Feb 2019 20:15:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,53 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 817A2E008CA
-	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2019 15:11:09 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x1INB88M083734
-	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2019 17:11:08 -0600
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8BFACE007B3
+	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2019 20:15:09 -0800 (PST)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x1K4F8NV062584
+	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2019 22:15:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1550531468;
-	bh=5XirbXc/HNMlAvl6PkoQ49T4pjooDfG/Zw7dGf5Mkts=;
+	s=ti-com-17Q1; t=1550636108;
+	bh=gjK5P/pzqkYLJ257VbT4oie1yYdqPX0nZFj5F0sbVBk=;
 	h=From:To:CC:Subject:Date;
-	b=Q/N+EKDU1eoZOWrXMgBMxbri6GG1clEk8sIzgefNP7S/38Vf7X4jIlTpx4k1DvH0p
-	LesC/sUSmzV6oCYbKrHIoHjKJ3ThJWb0Z2PzwOjwgFGm4SaCLX6jHxujnIJetfFuNF
-	r5rKgaSjft2TcGgVi3fUh4TtKG3QfEvn/ZLvPg+M=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x1INB8xW087435
+	b=tUArbzG2k/grCoQbdGx+N4bOIAcknzxem9DPWi7BzoYjdTzEwxMazZceixc29pKw/
+	9vUEr1UdDtYIscnBoluJnNY2BsLZmtLJONl2VqdOjb+TkpoVzorsU67kyosmAodCug
+	aadFZu1jc3LD+ZDgtnHKhReEobfYIcRYFHxCfThs=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x1K4F8XA101210
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2019 17:11:08 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2019 22:15:08 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Mon, 18 Feb 2019 17:11:08 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE100.ent.ti.com
-	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 19 Feb 2019 22:15:08 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Mon, 18 Feb 2019 17:11:08 -0600
-Received: from legion.dal.desgin.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x1INB8LE008844;
-	Mon, 18 Feb 2019 17:11:08 -0600
-Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com
-	[128.247.77.97])
-	by legion.dal.desgin.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x1INB7U04439; Mon, 18 Feb 2019 17:11:07 -0600 (CST)
-From: Gowtham Tammana <g-tammana@ti.com>
-To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
-Date: Mon, 18 Feb 2019 17:12:30 -0600
-Message-ID: <20190218231230.14092-1-g-tammana@ti.com>
-X-Mailer: git-send-email 2.20.1
+	Transport; Tue, 19 Feb 2019 22:15:08 -0600
+Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x1K4F8HM013124;
+	Tue, 19 Feb 2019 22:15:08 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 19 Feb 2019 23:15:06 -0500
+Message-ID: <1550636106-60314-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master][PATCH] ti-gc320-driver: move to k4.19
+Subject: [PATCH] ti-ipc: Update to new version 3.50.03.05
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,73 +65,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2019 23:11:10 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 20 Feb 2019 04:15:11 -0000
 Content-Type: text/plain
 
-  - Updated the recipe to pick sources for k4.19
-  - Removed the gcc8 workaround patch as the new srcrev include those fixes
-
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- ...-bypass-gcc8-stringop-overflow-error.patch | 26 -------------------
- .../ti-gc320-driver_5.0.11.p7.bb              |  7 +++--
- 2 files changed, 3 insertions(+), 30 deletions(-)
- delete mode 100644 recipes-bsp/gc320-drivers/ti-gc320-driver/0001-Kbuild-bypass-gcc8-stringop-overflow-error.patch
+ recipes-ti/ipc/ti-ipc-common.inc | 2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc   | 6 +++---
+ recipes-ti/ipc/ti-ipc.inc        | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver/0001-Kbuild-bypass-gcc8-stringop-overflow-error.patch b/recipes-bsp/gc320-drivers/ti-gc320-driver/0001-Kbuild-bypass-gcc8-stringop-overflow-error.patch
-deleted file mode 100644
-index 431afa76..00000000
---- a/recipes-bsp/gc320-drivers/ti-gc320-driver/0001-Kbuild-bypass-gcc8-stringop-overflow-error.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From c93a4217425ffebae1fb2d5c6c7fc957eb8aa18c Mon Sep 17 00:00:00 2001
--From: Denys Dmytriyenko <denys@ti.com>
--Date: Tue, 16 Oct 2018 21:16:48 -0400
--Subject: [PATCH] Kbuild: bypass gcc8 stringop-overflow error
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- src/Kbuild | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/Kbuild b/src/Kbuild
--index 574a107..df4368d 100755
----- a/src/Kbuild
--+++ b/src/Kbuild
--@@ -87,7 +87,7 @@ MODULE_NAME ?= galcore
-- CUSTOMER_ALLOCATOR_OBJS    ?=
-- ALLOCATOR_ARRAY_H_LOCATION ?= $(OS_KERNEL_DIR)/allocator/default/
-- 
---EXTRA_CFLAGS += -Werror
--+EXTRA_CFLAGS += -Werror -Wno-stringop-overflow
-- 
-- OBJS := $(OS_KERNEL_DIR)/gc_hal_kernel_device.o \
--         $(OS_KERNEL_DIR)/gc_hal_kernel_linux.o \
---- 
--2.7.4
--
-diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-index 1a6bc5da..551a3512 100644
---- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-+++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-@@ -9,12 +9,11 @@ MACHINE_KERNEL_PR_append = "e"
- PR = "${MACHINE_KERNEL_PR}"
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 0168ce4..42361e3 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,4 +1,4 @@
+-PV = "3.50.03.04"
++PV = "3.50.03.05"
+ INC_PR = "r0"
  
- # Need to branch out with ${PV} var
--BRANCH = "ti-${PV}-k4.14"
-+BRANCH = "ti-${PV}-k4.19"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 99ab339..e4f632d 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -24,9 +24,9 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
  
--SRCREV = "a36799d9329efcfff19e30e690156d5ebf7e0c55"
-+SRCREV = "9b59e596b4adefabbb686ce8845edef8114558fd"
+-# Corresponds to tag: 3.50.03.04
+-TI_IPC_METADATA_SRCREV = "f23715fb222f7cae877a3bcda194891369895733"
+-# Corresponds to tag: 3.50.03.04
++# Corresponds to tag: 3.50.03.05
++TI_IPC_METADATA_SRCREV = "3936c41d021c6d56c25f4bb07b647314a6589a57"
++# Corresponds to tag: 3.50.03.05
+ TI_IPC_EXAMPLES_SRCREV = "55a8341c60a91c0ba2d79b7e4b805e2e39b3060f"
  
--SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH} \
--	file://0001-Kbuild-bypass-gcc8-stringop-overflow-error.patch;striplevel=2"
-+SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}
+ SRCREV_ipc-metadata = "${TI_IPC_METADATA_SRCREV}"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index c703638..482fdcc 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.50"
  
- S = "${WORKDIR}/git/src"
+-#Corresponds to 3.50.03.04
+-TI_IPC_SRCREV = "f68ca6cec06ecc6296228b148b175584aa0f2c8c"
++#Corresponds to 3.50.03.05
++TI_IPC_SRCREV = "7007b8adff409fd8c90757c9adafd264a3ff15e3"
  
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 -- 
-2.20.1
+1.9.1
 
 
