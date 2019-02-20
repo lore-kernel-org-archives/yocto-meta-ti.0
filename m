@@ -1,58 +1,58 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 30619E00BCC; Tue, 19 Feb 2019 20:16:05 -0800 (PST)
+	id 0E25BE00BCC; Wed, 20 Feb 2019 06:24:22 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	http://www.dnswl.org/, *      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2BEDFE00BBC
-	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2019 20:16:03 -0800 (PST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B07E1E0091D
+	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2019 06:24:20 -0800 (PST)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x1K4G241063115
-	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2019 22:16:02 -0600
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x1KEOKfW031748
+	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2019 08:24:20 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1550636162;
-	bh=gjK5P/pzqkYLJ257VbT4oie1yYdqPX0nZFj5F0sbVBk=;
+	s=ti-com-17Q1; t=1550672660;
+	bh=2qnQ3wN4uVHv9ba+5l9582KsFEoCMVOdHx/FV5AwUI4=;
 	h=From:To:CC:Subject:Date;
-	b=fQIfSHBJZ1/D/vX+imHYmGIl6IdGf2e1vBDSoa778PsCJqsURTdOjLwIZ7rwgqHrq
-	i3ZpQZ7kaQbr9s9jfugE0OJ29sWErJSBQKtm6t9weq8XAnl5adDklZ+3C08WiynH3G
-	BJHUyjuV+EhgrSfdzlOu3zRTsBNbJqhvD598p4ZU=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x1K4G2Y2010521
+	b=mvuTELHphwQDNWcaGk4RmDGmmLYyiaYJ4MHkv4jnAjT037UHGs0SkYlM/R3wJ4xKZ
+	fhp/vvALHjUv26pwzFa8Wk/4Q66Bb13Ckyg01/QWWIAqOp57L2cwQFzngxcG1+Pg8P
+	e9p1fRgAuNgtWxHyAq1+KqmsEL5mI5Zj6R0e3eMM=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x1KEOKBn029437
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2019 22:16:02 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2019 08:24:20 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Tue, 19 Feb 2019 22:16:01 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_0,
+	Wed, 20 Feb 2019 08:24:19 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Tue, 19 Feb 2019 22:16:01 -0600
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	Transport; Wed, 20 Feb 2019 08:24:19 -0600
+Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x1K4G1iE000389;
-	Tue, 19 Feb 2019 22:16:01 -0600
-From: Sam Nelson <sam.nelson@ti.com>
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x1KEOJeb026491;
+	Wed, 20 Feb 2019 08:24:19 -0600
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 19 Feb 2019 23:16:00 -0500
-Message-ID: <1550636160-60362-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 20 Feb 2019 09:12:06 -0500
+Message-ID: <1550671926-8313-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH] ti-ipc: Update to new version 3.50.03.05
+Subject: [rocko/master][PATCH] gcc-arm-none-eabi: extend to nativesdk class
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,59 +65,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2019 04:16:05 -0000
+X-List-Received-Date: Wed, 20 Feb 2019 14:24:22 -0000
 Content-Type: text/plain
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-common.inc | 2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc   | 6 +++---
- recipes-ti/ipc/ti-ipc.inc        | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ ...1-update.bb => gcc-arm-none-eabi_6-2017-q1-update.bb} | 16 ++++++++++++++--
+ 1 file changed, 14 insertions(+), 2 deletions(-)
+ rename recipes-ti/devtools/{gcc-arm-none-eabi-native_6-2017-q1-update.bb => gcc-arm-none-eabi_6-2017-q1-update.bb} (67%)
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 0168ce4..42361e3 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.50.03.04"
-+PV = "3.50.03.05"
- INC_PR = "r0"
+diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+similarity index 67%
+rename from recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
+rename to recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+index 1140f27..c10ee16 100644
+--- a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
++++ b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+@@ -3,7 +3,6 @@ LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 99ab339..e4f632d 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,9 +24,9 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
+ LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=c224e429f53a1a6ce70bf8986ea2990b"
  
--# Corresponds to tag: 3.50.03.04
--TI_IPC_METADATA_SRCREV = "f23715fb222f7cae877a3bcda194891369895733"
--# Corresponds to tag: 3.50.03.04
-+# Corresponds to tag: 3.50.03.05
-+TI_IPC_METADATA_SRCREV = "3936c41d021c6d56c25f4bb07b647314a6589a57"
-+# Corresponds to tag: 3.50.03.05
- TI_IPC_EXAMPLES_SRCREV = "55a8341c60a91c0ba2d79b7e4b805e2e39b3060f"
+-inherit native
+ require recipes-ti/includes/ti-paths.inc
  
- SRCREV_ipc-metadata = "${TI_IPC_METADATA_SRCREV}"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index c703638..482fdcc 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.50"
+ SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6_1-2017q1/gcc-arm-none-eabi-6-2017-q1-update-linux.tar.bz2;name=gcc-arm-none"
+@@ -13,6 +12,17 @@ SRC_URI[gcc-arm-none.sha256sum] = "e7aad2579f02e3b095c6d7899ca5e6a70cfa9b8a8cbd6
  
--#Corresponds to 3.50.03.04
--TI_IPC_SRCREV = "f68ca6cec06ecc6296228b148b175584aa0f2c8c"
-+#Corresponds to 3.50.03.05
-+TI_IPC_SRCREV = "7007b8adff409fd8c90757c9adafd264a3ff15e3"
+ S = "${WORKDIR}/gcc-arm-none-eabi-6-2017-q1-update"
  
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
++# only x86_64 is supported
++python __anonymous() {
++    host_arch = d.getVar("HOST_ARCH")
++
++    if host_arch != "x86_64":
++        pkgn = d.getVar("PN")
++        pkgv = d.getVar("PV")
++
++        raise bb.parse.SkipPackage("%s-%s ONLY supported for x86_64 target" % (pkgn, pkgv))
++}
++
+ do_install() {
+     install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
+     cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
+@@ -20,4 +30,6 @@ do_install() {
+ 
+ FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
+ 
+-INSANE_SKIP_${PN} = "already-stripped"
++INSANE_SKIP_${PN} = "already-stripped libdir staticdev"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-1.9.1
+2.7.4
 
 
