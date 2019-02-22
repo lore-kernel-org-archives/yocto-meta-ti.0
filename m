@@ -1,6 +1,6 @@
-Return-Path: <g-tammana@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9DD67E00BB7; Wed, 20 Feb 2019 16:16:02 -0800 (PST)
+	id 95262E00CCE; Thu, 21 Feb 2019 18:29:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,53 +10,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at http://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64DCCE00872
-	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2019 16:15:59 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x1L0Fw4Q071305
-	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2019 18:15:58 -0600
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CBECE00B5C
+	for <meta-ti@yoctoproject.org>; Thu, 21 Feb 2019 18:29:52 -0800 (PST)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x1M2Tpd0094523
+	for <meta-ti@yoctoproject.org>; Thu, 21 Feb 2019 20:29:51 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1550708158;
-	bh=i+Lr6vFj6RMttTeosozbj/IvnJ28V0OQuc+Vgen0seY=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=J6LRcYY+JO/vd9rNrdjo7riJRSP83Czwl7coo9qUZG/k8UkL+OQkZqEZecQnE4zbL
-	iVQrUj3V0mpZGSYf+1WyiSDejE2jl27JduNdi4BxkXw9aLV3xoEtZLJU+H2zy/kX9O
-	0ZgE25ps3ezBJSzHf485mDt7Kp5Q+8wJVWZDpi+o=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x1L0FwY4013857
+	s=ti-com-17Q1; t=1550802591;
+	bh=M5Lh4jybP0dZSWKnl5jvdXvCV+0XRXExGxTam3k6aH0=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=wRN8kctlYMgaIXz9nSZLQ3S1KOrRvUgJ+Wfv19LUkcWXaS5cqKFAtOxMAOUCMU1mK
+	hNJg5w4fZSJLzFIN2hqJSURCUIbmBhCxt98mlCAo8vMDY9kUGisB/GPBapEytJekzW
+	HtLjZUucn3azqiNBwKRcNY1KMjRSmAod/fXHXfSc=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x1M2Tp5E033990
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2019 18:15:58 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE106.ent.ti.com
-	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 21 Feb 2019 20:29:51 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Wed, 20 Feb 2019 18:15:58 -0600
-Received: from DLEE111.ent.ti.com ([fe80::a4a2:21d4:3321:ad11]) by
-	DLEE111.ent.ti.com ([fe80::a4a2:21d4:3321:ad11%17]) with mapi id
-	15.01.1591.008; Wed, 20 Feb 2019 18:15:58 -0600
-From: "Tammana, Gowtham" <g-tammana@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti][master][PATCH] ti-gc320-driver: move to k4.19
-Thread-Index: AQHUx987NReQNZ5F0keKKOMRBNBYC6XpqJoA//+8hfA=
-Date: Thu, 21 Feb 2019 00:15:58 +0000
-Message-ID: <4e9ec19649cc45eb8ae81ce8e2203bb5@ti.com>
-References: <20190218231230.14092-1-g-tammana@ti.com>
-	<20190220221609.GC11501@beryl>
-In-Reply-To: <20190220221609.GC11501@beryl>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.247.30.184]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	Thu, 21 Feb 2019 20:29:50 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
+	Transport; Thu, 21 Feb 2019 20:29:51 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x1M2Toqu015918;
+	Thu, 21 Feb 2019 20:29:50 -0600
+Date: Thu, 21 Feb 2019 21:29:50 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20190222022950.GD16391@beryl>
+References: <1550671926-8313-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [master][PATCH] ti-gc320-driver: move to k4.19
+In-Reply-To: <1550671926-8313-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [rocko/master][PATCH] gcc-arm-none-eabi: extend to nativesdk class
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,60 +67,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2019 00:16:02 -0000
-Content-Language: en-US
+X-List-Received-Date: Fri, 22 Feb 2019 02:29:53 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+On Wed, Feb 20, 2019 at 09:12:06AM -0500, Jacob Stiffler wrote:
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+>  ...1-update.bb => gcc-arm-none-eabi_6-2017-q1-update.bb} | 16 ++++++++++++++--
+>  1 file changed, 14 insertions(+), 2 deletions(-)
+>  rename recipes-ti/devtools/{gcc-arm-none-eabi-native_6-2017-q1-update.bb => gcc-arm-none-eabi_6-2017-q1-update.bb} (67%)
+> 
+> diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+> similarity index 67%
+> rename from recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
+> rename to recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+> index 1140f27..c10ee16 100644
+> --- a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
+> +++ b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+> @@ -3,7 +3,6 @@ LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
+>  
+>  LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=c224e429f53a1a6ce70bf8986ea2990b"
+>  
+> -inherit native
+>  require recipes-ti/includes/ti-paths.inc
+>  
+>  SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6_1-2017q1/gcc-arm-none-eabi-6-2017-q1-update-linux.tar.bz2;name=gcc-arm-none"
+> @@ -13,6 +12,17 @@ SRC_URI[gcc-arm-none.sha256sum] = "e7aad2579f02e3b095c6d7899ca5e6a70cfa9b8a8cbd6
+>  
+>  S = "${WORKDIR}/gcc-arm-none-eabi-6-2017-q1-update"
+>  
+> +# only x86_64 is supported
+> +python __anonymous() {
+> +    host_arch = d.getVar("HOST_ARCH")
+> +
+> +    if host_arch != "x86_64":
+> +        pkgn = d.getVar("PN")
+> +        pkgv = d.getVar("PV")
+> +
+> +        raise bb.parse.SkipPackage("%s-%s ONLY supported for x86_64 target" % (pkgn, pkgv))
+> +}
+> +
+
+I've been thinking about this one.
+Would it be better to have a common .inc file and 2 one-line native and 
+nativesdk recipes that include that .inc file, and avoid __anonymous() 
+function altogether?
 
 
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Wednesday, February 20, 2019 4:16 PM
-> To: Tammana, Gowtham
-> Cc: meta-ti@yoctoproject.org; Balagopalakrishnan, Anand; Ruei, Eric
-> Subject: Re: [meta-ti][master][PATCH] ti-gc320-driver: move to k4.19
->=20
-> On Mon, Feb 18, 2019 at 05:12:30PM -0600, Gowtham Tammana wrote:
-> >   - Updated the recipe to pick sources for k4.19
-> >   - Removed the gcc8 workaround patch as the new srcrev include those f=
-ixes
-> >
-> > Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
-> > ---
-> ...
-> > diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-> b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-> > index 1a6bc5da..551a3512 100644
-> > --- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-> > +++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-> > @@ -9,12 +9,11 @@ MACHINE_KERNEL_PR_append =3D "e"
-> >  PR =3D "${MACHINE_KERNEL_PR}"
-> >
-> >  # Need to branch out with ${PV} var
-> > -BRANCH =3D "ti-${PV}-k4.14"
-> > +BRANCH =3D "ti-${PV}-k4.19"
-> >
-> > -SRCREV =3D "a36799d9329efcfff19e30e690156d5ebf7e0c55"
-> > +SRCREV =3D "9b59e596b4adefabbb686ce8845edef8114558fd"
-> >
-> > -SRC_URI =3D "git://git.ti.com/graphics/ti-gc320-
-> driver.git;protocol=3Dgit;branch=3D${BRANCH} \
-> > -	file://0001-Kbuild-bypass-gcc8-stringop-overflow-
-> error.patch;striplevel=3D2"
-> > +SRC_URI =3D "git://git.ti.com/graphics/ti-gc320-
-> driver.git;protocol=3Dgit;branch=3D${BRANCH}
->=20
-> This change lost the closing quote in SRC_URI, leading to parse errors.
-> Please at least build-test your patches before submitting them! Thanks.
-
-An oversight from my side on choosing the patchset, apologies.
-Thanks for the fix.
-
-=20
-> >  S =3D "${WORKDIR}/git/src"
-> >
-> > --
-> > 2.20.1
-> >
+>  do_install() {
+>      install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
+>      cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
+> @@ -20,4 +30,6 @@ do_install() {
+>  
+>  FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
+>  
+> -INSANE_SKIP_${PN} = "already-stripped"
+> +INSANE_SKIP_${PN} = "already-stripped libdir staticdev"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> -- 
+> 2.7.4
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
