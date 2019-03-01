@@ -1,63 +1,39 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ACAA4E00994; Fri,  1 Mar 2019 09:20:51 -0800 (PST)
+	id 47ED0E00B43; Fri,  1 Mar 2019 13:07:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E344E0053F
-	for <meta-ti@yoctoproject.org>; Fri,  1 Mar 2019 09:20:50 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x21HKngq064097;
-	Fri, 1 Mar 2019 11:20:49 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1551460849;
-	bh=FImmMbeBCdXKS5fSBfeNFWBzg7BljIr8kEaS4xoqh3I=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=y9f1zbHXaQ1533Ginb8bweTAswNpGZgImQfpV4jh1WsjvoLOAbDmF6w24Xm6a0nTP
-	9n2lavOzCn8aSL1blftZb4OBJYaWl2mmyeOfUrFvExa80Au4zFwv/lzmrQ2CFsSbDJ
-	UVGDVbXDFA1SrFpPxwT8httl18DjTIHBkIQvSuJg=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x21HKnD9050477
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 1 Mar 2019 11:20:49 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Fri, 1 Mar 2019 11:20:49 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Fri, 1 Mar 2019 11:20:49 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x21HKmIs021201;
-	Fri, 1 Mar 2019 11:20:48 -0600
-Date: Fri, 1 Mar 2019 12:20:47 -0500
+	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2AE20E009A0
+	for <meta-ti@yoctoproject.org>; Fri,  1 Mar 2019 13:07:56 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6032040ACD;
+	Fri,  1 Mar 2019 21:07:56 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id ssG0_6upVzCK; Fri,  1 Mar 2019 21:07:56 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-91-218.washdc.fios.verizon.net
+	[100.15.91.218])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4885040A55;
+	Fri,  1 Mar 2019 21:07:55 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 8142116BAA9;
+	Fri,  1 Mar 2019 16:07:54 -0500 (EST)
 From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190301172047.GS5250@beryl>
-References: <1550866849-31173-1-git-send-email-j-stiffler@ti.com>
-	<CAMKF1soxpPcwDzfzeKL1aKPwOt9eOo+h180EGqDtoVp-Pyd5bQ@mail.gmail.com>
-	<20190301150727.GR5250@beryl>
-	<CAMKF1spepGOyi3O1rznabFYivcsUdxL1+u4hZYjMfH_3n1NvLw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1spepGOyi3O1rznabFYivcsUdxL1+u4hZYjMfH_3n1NvLw@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [rocko/master][PATCH v2] gcc-arm-none-eabi: extend to nativesdk class
+To: meta-ti@yoctoproject.org
+Date: Fri,  1 Mar 2019 16:07:54 -0500
+Message-Id: <1551474474-26476-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [master][PATCH] ti-sgx-ddk: remove old 1.14 version of DDK KM and UM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,99 +46,239 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 17:20:51 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Mar 2019 21:07:59 -0000
 
-On Fri, Mar 01, 2019 at 07:59:38AM -0800, Khem Raj wrote:
-> On Fri, Mar 1, 2019 at 7:07 AM Denys Dmytriyenko <denys@ti.com> wrote:
-> >
-> > On Fri, Mar 01, 2019 at 06:54:50AM -0800, Khem Raj wrote:
-> > > On Fri, Feb 22, 2019 at 12:33 PM Jacob Stiffler <j-stiffler@ti.com> wrote:
-> > > >
-> > > > Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> > > > ---
-> > > > v2 changes:
-> > > > * Use COMPATIBLE_HOST instead of anonymous python to limit to x86_64-linux
-> > > >
-> > > >  ..._6-2017-q1-update.bb => gcc-arm-none-eabi_6-2017-q1-update.bb} | 8 ++++++--
-> > > >  1 file changed, 6 insertions(+), 2 deletions(-)
-> > > >  rename recipes-ti/devtools/{gcc-arm-none-eabi-native_6-2017-q1-update.bb => gcc-arm-none-eabi_6-2017-q1-update.bb} (83%)
-> > > >
-> > > > diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
-> > > > similarity index 83%
-> > > > rename from recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
-> > > > rename to recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
-> > > > index 1140f27..ae3d1d7 100644
-> > > > --- a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
-> > > > +++ b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
-> > > > @@ -3,7 +3,6 @@ LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
-> > > >
-> > > >  LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=c224e429f53a1a6ce70bf8986ea2990b"
-> > > >
-> > > > -inherit native
-> > >
-> > > this means it is also available as target package now.
-> >
-> > Yes, hence COMPATIBLE_HOST below. Also see earlier discussion on v1 of the
-> > patch for other considered options.
-> >
-> >
-> > > >  require recipes-ti/includes/ti-paths.inc
-> > > >
-> > > >  SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6_1-2017q1/gcc-arm-none-eabi-6-2017-q1-update-linux.tar.bz2;name=gcc-arm-none"
-> > > > @@ -13,6 +12,9 @@ SRC_URI[gcc-arm-none.sha256sum] = "e7aad2579f02e3b095c6d7899ca5e6a70cfa9b8a8cbd6
-> > > >
-> > > >  S = "${WORKDIR}/gcc-arm-none-eabi-6-2017-q1-update"
-> > > >
-> > > > +# only x86_64 is supported
-> > > > +COMPATIBLE_HOST = "x86_64.*-linux"
-> > > > +
-> > >
-> > > fails on qemux86-64
-> > > https://errors.yoctoproject.org/Errors/Details/230712/
-> >
-> > The errors are from package_qa and seem to be due to binary nature of the
-> > package and RDEPENDS between libraries.
-> >
-> >
-> > > you have to limit its availability to native and nativesdk only.
-> >
-> > While intension of COMPATIBLE_HOST was to limit it to native and nativesdk
-> > indirectly, x86-64 target does also match. And theoretically it can be a valid
-> > use case for this bare-metal Arm cross-compile toolchain... I wonder if simply
-> > skipping "file-rdeps" QA checks would be fine.
-> >
-> 
-> If you dont intend to support this usecase, then I would suggest to
-> keep it limited to what you intend to support. Either way this is a
-> regression which should be fixed
+DDK 1.17 is now supported for same platforms.
 
-https://lists.yoctoproject.org/pipermail/meta-ti/2019-March/011597.html
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ...-buildvars.mk-pass-Wno-cast-function-type.patch | 26 -------
+ ...inux-osfunc.c-fix-gcc8-stringop-truncatio.patch | 34 ---------
+ .../powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb  | 45 -----------
+ .../libgles/ti-sgx-ddk-um_1.14.3699939.bb          | 87 ----------------------
+ 4 files changed, 192 deletions(-)
+ delete mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-buildvars.mk-pass-Wno-cast-function-type.patch
+ delete mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-srvkm-env-linux-osfunc.c-fix-gcc8-stringop-truncatio.patch
+ delete mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+ delete mode 100644 recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
 
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-buildvars.mk-pass-Wno-cast-function-type.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-buildvars.mk-pass-Wno-cast-function-type.patch
+deleted file mode 100644
+index e1d2d10..0000000
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-buildvars.mk-pass-Wno-cast-function-type.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 287ca27cdf9004b4ba9bb0ce30d6139f707246f9 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Sun, 14 Oct 2018 19:53:14 -0400
+-Subject: [PATCH] buildvars.mk: pass -Wno-cast-function-type
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- eurasia_km/eurasiacon/build/linux2/buildvars.mk | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/eurasia_km/eurasiacon/build/linux2/buildvars.mk b/eurasia_km/eurasiacon/build/linux2/buildvars.mk
+-index f30e467..f00f852 100644
+---- a/eurasia_km/eurasiacon/build/linux2/buildvars.mk
+-+++ b/eurasia_km/eurasiacon/build/linux2/buildvars.mk
+-@@ -48,7 +48,7 @@
+- 
+- # These flags are used for kernel, User C and User C++
+- #
+--COMMON_FLAGS := -W -Wall
+-+COMMON_FLAGS := -W -Wall -Wno-cast-function-type
+- 
+- # Some GCC warnings are C only, so we must mask them from C++
+- #
+--- 
+-2.7.4
+-
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-srvkm-env-linux-osfunc.c-fix-gcc8-stringop-truncatio.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-srvkm-env-linux-osfunc.c-fix-gcc8-stringop-truncatio.patch
+deleted file mode 100644
+index 96e657d..0000000
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-srvkm-env-linux-osfunc.c-fix-gcc8-stringop-truncatio.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 353d8b9313abc492e5938171cea4ac697fd991f0 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Sun, 14 Oct 2018 19:41:49 -0400
+-Subject: [PATCH] srvkm/env/linux/osfunc.c: fix gcc8 stringop-truncation error
+-
+-gcc8 now checks for strncpy function that potentially truncate the terminating
+-NUL charcter from the source string. Fails like this:
+-
+-.../services4/srvkm/env/linux/osfunc.c:3051:13: error: 'strncpy' specified bound 50 equals destination size [-Werror=stringop-truncation]
+-|              strncpy(psEventObject->szName, pszName, EVENTOBJNAME_MAXLENGTH);
+-|              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-| cc1: all warnings being treated as errors
+-
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- eurasia_km/services4/srvkm/env/linux/osfunc.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/eurasia_km/services4/srvkm/env/linux/osfunc.c b/eurasia_km/services4/srvkm/env/linux/osfunc.c
+-index 02dfe9b..02c8e3b 100644
+---- a/eurasia_km/services4/srvkm/env/linux/osfunc.c
+-+++ b/eurasia_km/services4/srvkm/env/linux/osfunc.c
+-@@ -3048,7 +3048,7 @@ PVRSRV_ERROR OSEventObjectCreateKM(const IMG_CHAR *pszName, PVRSRV_EVENTOBJECT *
+-         if(pszName)
+-         {
+-             /* copy over the event object name */
+--            strncpy(psEventObject->szName, pszName, EVENTOBJNAME_MAXLENGTH);
+-+            strncpy(psEventObject->szName, pszName, EVENTOBJNAME_MAXLENGTH-1);
+-         }
+-         else
+-         {
+--- 
+-2.7.4
+-
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
+deleted file mode 100644
+index 4283587..0000000
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.14.3699939.bb
++++ /dev/null
+@@ -1,45 +0,0 @@
+-DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found in the TI SoCs"
+-HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-linux"
+-LICENSE = "MIT | GPLv2"
+-LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=74506d9b8e5edbce66c2747c50fcef12"
+-
+-inherit module
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+-
+-MACHINE_KERNEL_PR_append = "p"
+-PR = "${MACHINE_KERNEL_PR}"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-DEPENDS = "virtual/kernel"
+-
+-PROVIDES = "omapdrm-pvr"
+-
+-RPROVIDES_${PN} = "omapdrm-pvr"
+-RREPLACES_${PN} = "omapdrm-pvr"
+-RCONFLICTS_${PN} = "omapdrm-pvr"
+-
+-BRANCH = "ti-img-sgx/${PV}/k4.14"
+-
+-SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH} \
+-	file://0001-srvkm-env-linux-osfunc.c-fix-gcc8-stringop-truncatio.patch \
+-	file://0001-buildvars.mk-pass-Wno-cast-function-type.patch"
+-
+-S = "${WORKDIR}/git"
+-
+-SRCREV = "76da7d73976f0a5dc04fdc84a3af899d6c2b1fe2"
+-
+-TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+-TARGET_PRODUCT_ti33x = "ti335x"
+-TARGET_PRODUCT_ti43x = "ti437x"
+-
+-EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" TARGET_PRODUCT=${TARGET_PRODUCT}'
+-
+-do_compile_prepend() {
+-    cd ${S}/eurasia_km/eurasiacon/build/linux2/omap_linux
+-}
+-
+-do_install() {
+-    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_omap_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+-}
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
+deleted file mode 100644
+index 1c9fad9..0000000
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.14.3699939.bb
++++ /dev/null
+@@ -1,87 +0,0 @@
+-DESCRIPTION = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
+-HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
+-LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=550702a031857e0426ef7d6f6cf2d9f4"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-BRANCH = "ti-img-sgx/rocko/${PV}"
+-
+-SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "bc62c9d0c590dfbc801bf6b10176c3a8b6a39d98"
+-
+-# There's only hardfp version available
+-python __anonymous() {
+-    tunes = d.getVar("TUNE_FEATURES")
+-    if not tunes:
+-        return
+-    pkgn = d.getVar("PN")
+-    pkgv = d.getVar("PV")
+-    if "callconvention-hard" not in tunes:
+-        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-}
+-
+-TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+-TARGET_PRODUCT_ti33x = "ti335x"
+-TARGET_PRODUCT_ti43x = "ti437x"
+-
+-INITSCRIPT_NAME = "rc.pvr"
+-INITSCRIPT_PARAMS = "defaults 8"
+-
+-inherit update-rc.d
+-
+-PR = "r32"
+-PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+-
+-DEPENDS += "libdrm udev libgbm wayland libffi"
+-RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
+-
+-RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+-RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
+-RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
+-
+-RREPLACES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+-RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
+-RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
+-
+-RCONFLICTS_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
+-RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
+-RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
+-
+-# The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
+-RPROVIDES_${PN} += "libGLESv2.so.1"
+-
+-S = "${WORKDIR}/git"
+-
+-do_install () {
+-    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
+-    mkdir -p ${D}${libdir}/gbm
+-    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
+-    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
+-
+-    rm -f ${D}${libdir}/pkgconfig/wayland-egl.pc
+-
+-    chown -R root:root ${D}
+-}
+-
+-FILES_${PN} =  "${bindir}/*"
+-FILES_${PN} += " ${libdir}/*"
+-FILES_${PN} +=  "${includedir}/*"
+-FILES_${PN} +=  "${sysconfdir}/*"
+-
+-PACKAGES =+ "${PN}-plugins"
+-FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
+-RDEPENDS_${PN} += "${PN}-plugins"
+-
+-ALLOW_EMPTY_${PN}-plugins = "1"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+-
+-INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
+-INSANE_SKIP_${PN}-plugins = "dev-so"
+-INSANE_SKIP_${PN} += "already-stripped"
+-
+-CLEANBROKEN = "1"
+-- 
+2.7.4
 
-> > > >  do_install() {
-> > > >      install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
-> > > >      cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
-> > > > @@ -20,4 +22,6 @@ do_install() {
-> > > >
-> > > >  FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
-> > > >
-> > > > -INSANE_SKIP_${PN} = "already-stripped"
-> > > > +INSANE_SKIP_${PN} = "already-stripped libdir staticdev"
-> > > > +
-> > > > +BBCLASSEXTEND = "native nativesdk"
-> > > > --
-> > > > 2.7.4
-> > > >
-> > > > --
-> > > > _______________________________________________
-> > > > meta-ti mailing list
-> > > > meta-ti@yoctoproject.org
-> > > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > > --
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
 
