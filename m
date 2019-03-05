@@ -1,60 +1,38 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AA6E7E00D24; Mon,  4 Mar 2019 17:06:18 -0800 (PST)
+	id 6FFC9E00D11; Mon,  4 Mar 2019 17:23:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DFADE00D11
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2019 17:06:17 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2516Hrb039365
-	for <meta-ti@yoctoproject.org>; Mon, 4 Mar 2019 19:06:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1551747977;
-	bh=7oIuxddYfWC3vYdTme1etnxcbFd6Q+4zPjkTketXGOQ=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=EVbMggllC8z4rFiF2RtD7n0Y1ISPecGxJKXS9cVLCp2EJAfO0Dva6bhB7szYM9Oub
-	h2u3LVGWg74tavjNdUfsiGl4RJwgynnY0+kBMJRHxP7uOYtVAkMYBPtfUz7uwb11o+
-	Q4dMQjYAZcD75OUI9Rclz6B4QudHQVhRIbgHkrFw=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2516HYP095079
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 4 Mar 2019 19:06:17 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Mon, 4 Mar 2019 19:06:17 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Mon, 4 Mar 2019 19:06:17 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2516G5v025128;
-	Mon, 4 Mar 2019 19:06:16 -0600
-Date: Mon, 4 Mar 2019 20:06:16 -0500
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34B0CE00BCC
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2019 17:23:46 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 51C3540A6E;
+	Tue,  5 Mar 2019 01:23:46 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id k-lrGJ8L8F9s; Tue,  5 Mar 2019 01:23:46 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-91-218.washdc.fios.verizon.net
+	[100.15.91.218])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 383A240A58;
+	Tue,  5 Mar 2019 01:23:45 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id E060816BB9B;
+	Mon,  4 Mar 2019 20:23:44 -0500 (EST)
 From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20190305010615.GT26081@beryl>
-References: <1551747809-62717-1-git-send-email-sam.nelson@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1551747809-62717-1-git-send-email-sam.nelson@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org, s-anna@ti.com
-Subject: Re: [master][PATCH] ti-ipc: Update firmware image names
+To: meta-ti@yoctoproject.org
+Date: Mon,  4 Mar 2019 20:23:44 -0500
+Message-Id: <1551749024-18647-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [master][PATCH] dra7xx-evm.conf: dra71-evm-nand.dtb is causing problems, disable for now
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,49 +45,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Mar 2019 01:06:18 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 05 Mar 2019 01:23:48 -0000
 
-Thanks, looks good!
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/machine/dra7xx-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index df176ba..0e17350 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -12,7 +12,7 @@ SERIAL_CONSOLES = "115200;ttyS0"
+ 
+ KERNEL_DEVICETREE = " \
+     dra7-evm.dtb dra7-evm-lcd-osd101t2045.dtb dra7-evm-lcd-osd101t2587.dtb \
+-    dra71-evm.dtb dra71-evm-nand.dtb dra71-evm-lcd-auo-g101evn01.0.dtb \
++    dra71-evm.dtb dra71-evm-lcd-auo-g101evn01.0.dtb \
+     dra72-evm.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
+     dra72-evm-revc.dtb dra72-evm-revc-lcd-osd101t2045.dtb dra72-evm-revc-lcd-osd101t2587.dtb \
+     dra76-evm.dtb dra76-evm-tfp410.dtb \
+-- 
+2.7.4
 
-On Mon, Mar 04, 2019 at 08:03:29PM -0500, Sam Nelson wrote:
-> The firmware names expected by driver is changed
-> am65x-mcu-r5f0-fw -> am65x-mcu-r5f0_0-fw
-> am65x-mcu-r5f1-fw -> am65x-mcu-r5f0_1-fw
-> 
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> ---
->  recipes-ti/ipc/ti-ipc-rtos_git.bb | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-> index a276f22..7f1cae0 100644
-> --- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-> +++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-> @@ -131,11 +131,11 @@ pkg_postrm_${PN}-fw_omapl138 () {
->  }
->  
->  pkg_postinst_${PN}-fw_am65xx-evm () {
-> -  update-alternatives --install /lib/firmware/am65x-mcu-r5f0-fw am65x-mcu-r5f0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
-> -  update-alternatives --install /lib/firmware/am65x-mcu-r5f1-fw am65x-mcu-r5f1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
-> +  update-alternatives --install /lib/firmware/am65x-mcu-r5f0_0-fw am65x-mcu-r5f0_0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
-> +  update-alternatives --install /lib/firmware/am65x-mcu-r5f0_1-fw am65x-mcu-r5f0_1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
->  }
->  
->  pkg_postrm_${PN}-fw_am65xx-evm () {
-> -  update-alternatives --remove am65x-mcu-r5f0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f
-> -  update-alternatives --remove am65x-mcu-r5f1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f
-> +  update-alternatives --remove am65x-mcu-r5f0_0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f
-> +  update-alternatives --remove am65x-mcu-r5f0_1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f
->  }
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
