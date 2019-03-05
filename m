@@ -1,6 +1,6 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 90B27E00D24; Mon,  4 Mar 2019 18:03:51 -0800 (PST)
+	id CBACBE00D24; Mon,  4 Mar 2019 18:18:10 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,45 +16,47 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DEEA0E00D11
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2019 18:03:50 -0800 (PST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D50BE00D11
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2019 18:18:09 -0800 (PST)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2523oQB101457
-	for <meta-ti@yoctoproject.org>; Mon, 4 Mar 2019 20:03:50 -0600
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x252I8To026361
+	for <meta-ti@yoctoproject.org>; Mon, 4 Mar 2019 20:18:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1551751430;
-	bh=WT2Y8kr44pmAUlngY0+pweSAl9+yr4GfPywWI/WV+eM=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=u9cbft5BkDnNaJp8nrLr6QHVdDqvZ+y3Mzq8LlLyLaRsfd3R2+UH+PW1SxywP19RC
-	utPcxJnC/dRPTe/resGNwONbn86j2zovMBjhaKqK/EbiquI7M5v9A+Fd+VahxCkThE
-	W7MPx5VRzI6Vzh8UBolX2aCcIJKKHwDpqChZTUw8=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2523ohP042549
+	s=ti-com-17Q1; t=1551752288;
+	bh=+zgPzF9YWkkso6Bwg7XkSdxepHZGhoQoI77xeYOcQ5U=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=qNhs9BT1d0/PQXuyp7Nb2qNuFD8ty9HIRIPUS0HkgB5mY2gTIixrbGeNycqF7ZpIZ
+	LLlW9Azeb2d/ox3qjQPhnY/quat/FO6DgS2Ricp6bDKl5lghTqhRmUECpFiE4fJh4a
+	DQYk+43cUgl2kyA24X9veMDq47W2ooQk1gLLH8mQ=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x252I8d9057458
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 4 Mar 2019 20:03:50 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Mon, 4 Mar 2019 20:18:08 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Mon, 4 Mar 2019 20:03:49 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_0,
+	Mon, 4 Mar 2019 20:18:08 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Mon, 4 Mar 2019 20:03:49 -0600
-Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2523mOt019033
-	for <meta-ti@yoctoproject.org>; Mon, 4 Mar 2019 20:03:49 -0600
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 4 Mar 2019 21:03:46 -0500
-Message-ID: <1551751426-10598-2-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1551751426-10598-1-git-send-email-m-radhakrishnan2@ti.com>
-References: <1551751426-10598-1-git-send-email-m-radhakrishnan2@ti.com>
+	Transport; Mon, 4 Mar 2019 20:18:08 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x252I8Od017645;
+	Mon, 4 Mar 2019 20:18:08 -0600
+Date: Mon, 4 Mar 2019 21:18:08 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20190305021807.GY26081@beryl>
+References: <1551460736-16483-1-git-send-email-denys@ti.com>
+	<6f775973-d681-4da8-355f-9c3987526a1c@ti.com>
+	<20190305005551.GS26081@beryl>
 MIME-Version: 1.0
+In-Reply-To: <20190305005551.GS26081@beryl>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH v2] gcc-arm-none-eabi-native: Update to 7.0-2018-q2-update
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [EXTERNAL] [master][PATCH] gcc-arm-none-eabi: not supported on any target
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,57 +69,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Mar 2019 02:03:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 05 Mar 2019 02:18:10 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
----
- ....bb => gcc-arm-none-eabi-native_7-2018-q2-update.bb} | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
- rename recipes-ti/devtools/{gcc-arm-none-eabi-native_6-2017-q1-update.bb => gcc-arm-none-eabi-native_7-2018-q2-update.bb} (47%)
+On Mon, Mar 04, 2019 at 07:55:52PM -0500, Denys Dmytriyenko wrote:
+> On Mon, Mar 04, 2019 at 11:08:48AM -0500, Jacob Stiffler wrote:
+> > On a different machine, I am seeing the package_qa errors for the nativesdk
+> > package.
+> 
+> Have you tried using the binaries?
+> 
+> 
+> > Should I submit a patch on top of this one to suppress the QA warnings and
+> > errors? Or should I combine this change with that patch?
+> 
+> Not sure what you mean by combining...
 
-diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb b/recipes-ti/devtools/gcc-arm-none-eabi-native_7-2018-q2-update.bb
-similarity index 47%
-rename from recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
-rename to recipes-ti/devtools/gcc-arm-none-eabi-native_7-2018-q2-update.bb
-index 1140f27..c5f76aa 100644
---- a/recipes-ti/devtools/gcc-arm-none-eabi-native_6-2017-q1-update.bb
-+++ b/recipes-ti/devtools/gcc-arm-none-eabi-native_7-2018-q2-update.bb
-@@ -1,17 +1,20 @@
- DESCRIPTION = "Baremetal GCC for ARM"
- LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
- 
--LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=c224e429f53a1a6ce70bf8986ea2990b"
-+LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=f77466c63f5787f4bd669c402aabe061"
- 
- inherit native
- require recipes-ti/includes/ti-paths.inc
- 
--SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6_1-2017q1/gcc-arm-none-eabi-6-2017-q1-update-linux.tar.bz2;name=gcc-arm-none"
-+SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2018q2/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2;name=gcc-arm-none"
- 
--SRC_URI[gcc-arm-none.md5sum] = "30004c24f4632bc594952462bb0cd1c9"
--SRC_URI[gcc-arm-none.sha256sum] = "e7aad2579f02e3b095c6d7899ca5e6a70cfa9b8a8cbd6abd868da849d416c2eb"
-+SRC_URI[gcc-arm-none.md5sum] = "299ebd3f1c2c90930d28ab82e5d8d6c0"
-+SRC_URI[gcc-arm-none.sha256sum] = "bb17109f0ee697254a5d4ae6e5e01440e3ea8f0277f2e8169bf95d07c7d5fe69"
- 
--S = "${WORKDIR}/gcc-arm-none-eabi-6-2017-q1-update"
-+S = "${WORKDIR}/gcc-arm-none-eabi-7-2018-q2-update"
-+
-+# only x86_64 is supported
-+COMPATIBLE_HOST = "x86_64.*-linux"
- 
- do_install() {
-     install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
-@@ -20,4 +23,6 @@ do_install() {
- 
- FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
- 
--INSANE_SKIP_${PN} = "already-stripped"
-+INSANE_SKIP_${PN} = "already-stripped libdir staticdev"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-1.9.1
+Just realized you are probably looking at rocko and this change hasn't been 
+backported yet:
+http://arago-project.org/git/?p=meta-ti.git;a=commitdiff;h=84b3ff8da8311138e534cfb8930c08aa4b417c3e
 
+
+> > Thank you,
+> > 
+> > Jake
+> > 
+> > 
+> > On 3/1/2019 12:18 PM, Denys Dmytriyenko wrote:
+> > >This package is only meant for native and nativesdk usage.
+> > >
+> > >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > >---
+> > >  recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb | 1 +
+> > >  1 file changed, 1 insertion(+)
+> > >
+> > >diff --git a/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+> > >index ae3d1d7..d08dd2f 100644
+> > >--- a/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+> > >+++ b/recipes-ti/devtools/gcc-arm-none-eabi_6-2017-q1-update.bb
+> > >@@ -14,6 +14,7 @@ S = "${WORKDIR}/gcc-arm-none-eabi-6-2017-q1-update"
+> > >  # only x86_64 is supported
+> > >  COMPATIBLE_HOST = "x86_64.*-linux"
+> > >+COMPATIBLE_HOST_class-target = "null"
+> > >  do_install() {
+> > >      install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
