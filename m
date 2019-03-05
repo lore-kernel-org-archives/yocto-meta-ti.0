@@ -1,58 +1,60 @@
-Return-Path: <gaurav@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DC7C9E00CEA; Tue,  5 Mar 2019 07:22:24 -0800 (PST)
+	id C5744E00D26; Tue,  5 Mar 2019 09:19:07 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	https://www.dnswl.org/, *      medium trust
 	*      [198.47.23.248 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A79AE00CCC
-	for <meta-ti@yoctoproject.org>; Tue,  5 Mar 2019 07:22:24 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x25FMNso050649
-	for <meta-ti@yoctoproject.org>; Tue, 5 Mar 2019 09:22:23 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4FE9E00CE6
+	for <meta-ti@yoctoproject.org>; Tue,  5 Mar 2019 09:19:06 -0800 (PST)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x25HJ6D9107081
+	for <meta-ti@yoctoproject.org>; Tue, 5 Mar 2019 11:19:06 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1551799343;
-	bh=eLrWdWYiBLtj1qwD4Ei7fHEylXYDHXN3hVGjNvHdazI=;
-	h=From:To:CC:Subject:Date;
-	b=W2idjlSP1h5zhbHg/iivauGj3hHkVNOUOhBZFdJ7qEjSEw7jQcd004l4hH9JFRW2N
-	XxIVtzpPw+cvh00sOxKLKwPBZmUAJFIsuM/sgqdM40JpAJ1zf8rPcwHC959lQVzNJ2
-	aOSIE/18gTqePl5b5kIjvl9MyI/5yRt0uOexAvis=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x25FMNQ0110694
+	s=ti-com-17Q1; t=1551806346;
+	bh=K87yug+OzecRDqVOTTBHEIjmR45iRHuX2FzwX4bY6I0=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=iME8H79NFX2MV8fv78CEC00FCYk3kG2I8RfEwygOwC+lXCFZSS+V1fnTdkTBZCs59
+	KwIcrGPb7SaVVQLV1mb+6HkXBU0YktIDdzS2xn/t8s1C6Fh8RapNE3kAt0JZ+67QKf
+	3bB3vlOeYXm6w2sfH9eJIR7TPO2NqplTFC6uz2gs=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x25HJ6sQ091133
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 5 Mar 2019 09:22:23 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 5 Mar 2019 11:19:06 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Tue, 5 Mar 2019 09:22:23 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE108.ent.ti.com
-	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 5 Mar 2019 11:19:05 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Tue, 5 Mar 2019 09:22:23 -0600
-Received: from sdomc-build0.hou.asp.ti.com (ileax41-snat.itg.ti.com
+	Transport; Tue, 5 Mar 2019 11:19:05 -0600
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x25FMNbp010837;
-	Tue, 5 Mar 2019 09:22:23 -0600
-From: Gaurav Mitra <gaurav@ti.com>
+	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x25HJ4t7005568
+	for <meta-ti@yoctoproject.org>; Tue, 5 Mar 2019 11:19:05 -0600
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 5 Mar 2019 09:22:18 -0600
-Message-ID: <20190305152218.101304-1-gaurav@ti.com>
-X-Mailer: git-send-email 2.14.1
+Date: Tue, 5 Mar 2019 12:19:02 -0500
+Message-ID: <1551806342-16708-2-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1551806342-16708-1-git-send-email-m-radhakrishnan2@ti.com>
+References: <1551806342-16708-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] openmp-rtos: update version to 2.06.03.00
+Subject: [rocko/master][PATCH v2] ti-cg-xml: Update to version 2.61.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,37 +67,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Mar 2019 15:22:24 -0000
+X-List-Received-Date: Tue, 05 Mar 2019 17:19:07 -0000
 Content-Type: text/plain
 
-Signed-off-by: Gaurav Mitra <gaurav@ti.com>
----
- recipes-ti/openmp-rtos/openmp-rtos_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+The license checksum change is due to the copyright year and version.
+The license itself has not changed.
 
-diff --git a/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-index e9b14e5b..67d9edf5 100644
---- a/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-+++ b/recipes-ti/openmp-rtos/openmp-rtos_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
+ .../{ti-cg-xml_2.41.00.bb => ti-cg-xml_2.61.00.bb}      | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
+ rename recipes-ti/devtools/{ti-cg-xml_2.41.00.bb => ti-cg-xml_2.61.00.bb} (64%)
+
+diff --git a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb b/recipes-ti/devtools/ti-cg-xml_2.61.00.bb
+similarity index 64%
+rename from recipes-ti/devtools/ti-cg-xml_2.41.00.bb
+rename to recipes-ti/devtools/ti-cg-xml_2.61.00.bb
+index 5c0ff63..2caac8f 100644
+--- a/recipes-ti/devtools/ti-cg-xml_2.41.00.bb
++++ b/recipes-ti/devtools/ti-cg-xml_2.61.00.bb
+@@ -7,22 +7,21 @@ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ require recipes-ti/includes/ti-unpack.inc
  
- require recipes-ti/includes/ti-paths.inc
+-PV = "2_41_00"
+-
++PV = "2.61.00"
++PE = "1"
+ S = "${WORKDIR}/cg_xml_${PV}"
  
--PV = "2_06_02_01"
-+PV = "2_06_03_00"
- PR = "r0"
+ SRC_URI = "\
+-    http://software-dl.ti.com/ccs/non-esd/releases/other/applications_packages/cg_xml/cg_xml_v${PV}/cg_xml-v${PV}-Linux-x86-Install;name=cgxmlbin_linux \
++    http://software-dl.ti.com/ccs/non-esd/releases/other/applications_packages/cg_xml/cg_xml_v${PV}/cgxml-${PV}-linux-installer.run;name=cgxmlbin_linux \
+ "
++LIC_FILES_CHKSUM = "file://cg_xml_${PV}_Manifest.pdf;md5=fc02a39748ba50373f32b2f4a5e3a684"
  
- OPENMP_RTOS_GIT_URI = "git://git.ti.com/openmp/ti-openmp-dsp-runtime.git"
-@@ -14,7 +14,7 @@ OPENMP_RTOS_GIT_BRANCH = "master"
- BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
- SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH}"
+-LIC_FILES_CHKSUM = "file://cg_xml_${PV}_Manifest.pdf;md5=ba23d76ef3d5ec111b03267105c91bd4"
+-
+-SRC_URI[cgxmlbin_linux.md5sum] = "9e421f25f6da455b0155570ce0e62628"
+-SRC_URI[cgxmlbin_linux.sha256sum] = "bbc25f4abe27a8b93bae1d8581c3dee87111c3769c305d086287038ee9038cbf"
++SRC_URI[cgxmlbin_linux.md5sum] = "6ce60caa97bbf15158d806fb062fadff"
++SRC_URI[cgxmlbin_linux.sha256sum] = "da77cb10bd3d5de89e27e4ce8f4408a2e50775c8980225f9a828ddc242bb81f9"
  
--SRCREV = "69af0caf19c2713e21b25e77acf103074be129f2"
-+SRCREV = "c090eb664d9815a36ead0e14f31e102590680fb8"
+-BINFILE="cg_xml-v${PV}-Linux-x86-Install"
++BINFILE="cgxml-${PV}-linux-installer.run"
+ TI_BIN_UNPK_CMDS=""
+-TI_BIN_UNPK_ARGS="--prefix ${S} --mode silent"
++TI_BIN_UNPK_ARGS="--prefix ${S} --mode unattended"
  
- LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
- 
+ do_install() {
+     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 -- 
-2.14.1
+1.9.1
 
 
