@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <x0038811@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2FE73E00CCC; Tue,  5 Mar 2019 15:20:47 -0800 (PST)
+	id 9E0E8E00DD1; Wed,  6 Mar 2019 00:33:28 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -15,49 +15,44 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC926E00C43
-	for <meta-ti@yoctoproject.org>; Tue,  5 Mar 2019 15:20:46 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x25NKkPx102153
-	for <meta-ti@yoctoproject.org>; Tue, 5 Mar 2019 17:20:46 -0600
+	*      [198.47.23.248 listed in list.dnswl.org]
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5E66E00DC9
+	for <meta-ti@yoctoproject.org>; Wed,  6 Mar 2019 00:33:27 -0800 (PST)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x268XR1C048505
+	for <meta-ti@yoctoproject.org>; Wed, 6 Mar 2019 02:33:27 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1551828046;
-	bh=QtZ6E1qanPNf4+JGR75xU+1qWPcT8Pv2bCPhbuf+utU=;
-	h=From:To:Subject:Date:References:In-Reply-To;
-	b=FQSpl01231ZheI4MSed3Y3gckBxaHvj8sCHB/X3r1NFI+i5kOKVwe5DGpkiFbLGoT
-	yQV2ge81ID3HfEyEXEnicrDSlXjH7hnL9NbfkqlNZ9m7nlo78ChQIbYPvtEvdGu125
-	Kqe2Fj1r4ZyMkfvkBIjbh8aUOYUcMhf3v5qmBYiI=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x25NKj59075606
+	s=ti-com-17Q1; t=1551861207;
+	bh=4mKCCeYZYQ29F1LC1YSEP7BiXRwMEoAk6RuD8ApNteA=;
+	h=From:To:CC:Subject:Date;
+	b=zQDCWigVPeIS5sBaX9tKNCVMPryrLmQBmAjVYkZyEohVIhDVlE0u3C8I/3N1VDL3c
+	OCWQznTDSDIKN9WKIq+xOfoKb1lCWPFFUl2bhf2dXz56ScFpTs/O92I9n8jUR2sYhN
+	HveaPRRPPl12dAPgTaAyEriX9C5SSSoh+HWMHtaY=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x268XQWY102063
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 5 Mar 2019 17:20:45 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 6 Mar 2019 02:33:27 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
+	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Tue, 5 Mar 2019 17:20:45 -0600
-Received: from DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222]) by
-	DFLE114.ent.ti.com ([fe80::bc90:ddd:2b87:4222%18]) with mapi id
-	15.01.1591.008; Tue, 5 Mar 2019 17:20:45 -0600
-From: "Stiffler, Jacob" <j-stiffler@ti.com>
-To: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [EXTERNAL] [meta-ti] [rocko/master][PATCH] ti-ndk: Correcting
-	the SRC_URI link
-Thread-Index: AQHU0thiYCDzoeBEV0qKy8phEbQ/UaX9rmog
-Date: Tue, 5 Mar 2019 23:20:45 +0000
-Message-ID: <79e67be591c046c3bd4378932b9f77c3@ti.com>
-References: <1551737951-45344-1-git-send-email-m-radhakrishnan2@ti.com>
-	<1551737951-45344-2-git-send-email-m-radhakrishnan2@ti.com>
-In-Reply-To: <1551737951-45344-2-git-send-email-m-radhakrishnan2@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [158.218.113.191]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	Wed, 6 Mar 2019 02:33:26 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
+	Transport; Wed, 6 Mar 2019 02:33:26 -0600
+Received: from udx0038811.india.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x268XP6F029527;
+	Wed, 6 Mar 2019 02:33:25 -0600
+From: Ramprasad N <x0038811@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 6 Mar 2019 14:03:09 +0530
+Message-ID: <1551861190-29766-1-git-send-email-x0038811@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [EXTERNAL] [rocko/master][PATCH] ti-ndk: Correcting the SRC_URI link
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [rocko/master 0/1] ipumm updates with codec bugfixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,55 +65,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Mar 2019 23:20:47 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Mar 2019 08:33:28 -0000
+Content-Type: text/plain
 
-Denys,
+ This upgrade brings in the following updates:
+* MPEG2 Decoder Update to 01.00.18.01 from 01.00.17.01
+* VC1 Decoder Update to 01.00.02.08 from 01.00.02.07
 
-Please apply to rocko.
+Ramprasad N (1):
+  ipumm: Update SRCREV with codec fixes
 
-- Jake
+ recipes-bsp/ipumm-fw/ipumm-fw_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> bounces@yoctoproject.org] On Behalf Of Radhakrishnan, Mahesh
-> Sent: Monday, March 04, 2019 5:19 PM
-> To: meta-ti@yoctoproject.org
-> Subject: [EXTERNAL] [meta-ti] [rocko/master][PATCH] ti-ndk: Correcting th=
-e
-> SRC_URI link
->=20
-> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-> ---
->  recipes-ti/ndk/ti-ndk.inc | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->=20
-> diff --git a/recipes-ti/ndk/ti-ndk.inc b/recipes-ti/ndk/ti-ndk.inc
-> index dfb09de..9afde31 100644
-> --- a/recipes-ti/ndk/ti-ndk.inc
-> +++ b/recipes-ti/ndk/ti-ndk.inc
-> @@ -6,8 +6,7 @@ LICENSE =3D "BSD"
->  require recipes-ti/includes/ti-paths.inc
->=20
->  S =3D "${WORKDIR}/ndk_${PV}"
-> -
-> -SRC_URI =3D "http://software-
-> dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ndk/${PV}/exports/n
-> dk_${PV}.zip;name=3Dndkzip"
-> +SRC_URI =3D "http://software-
-> dl.ti.com/targetcontent/ndk/${PV}/exports/ndk_${PV}.zip;name=3Dndkzip"
->=20
->  do_install() {
->      CP_ARGS=3D"-Prf --preserve=3Dmode,timestamps --no-preserve=3Downersh=
-ip"
-> --
-> 1.9.1
->=20
-> --
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+-- 
+1.9.1
+
 
