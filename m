@@ -1,6 +1,6 @@
-Return-Path: <xuj@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 71827E00AC5; Mon, 11 Mar 2019 14:05:04 -0700 (PDT)
+	id 2763EE00AC5; Mon, 11 Mar 2019 18:43:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,49 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E660EE0091D
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 14:05:03 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2BL53mu121767
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 16:05:03 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E00BE00950
+	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 18:43:57 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2C1hvLb039061
+	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 20:43:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1552338303;
-	bh=giJPV/9bVH/zQil2nS6W3/5URea7vyI7SeLUHuyiXqA=;
-	h=From:To:CC:Subject:Date;
-	b=X1R9Gf9lDICuImV7g1U7otTQtWdaVNEOO0fXhyMD1t2xMxgdEOQHsQUcVcy3g1np+
-	l8kz4dmS8RodSYnj92fnZAKPE59ma5v9venHWOFo1EibBAqaYiR+G14BItZCdvCvGi
-	yxjycTmFGjG064yrQswU3DxG2uUW8x4cXbVrA+z0=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2BL53gu093359
+	s=ti-com-17Q1; t=1552355037;
+	bh=QR5vz+WarbUehGteiUt1T6T1X4wXpQJWqmJCcwrPRv4=;
+	h=From:To:Subject:Date;
+	b=htVsjhCkUOTTJMfQeVGvlmyE54J8ObdHas14DJwOPL3z6h9vLRgIAsHedDOLLLdib
+	bJIXeca+7klW3kqvqXetEy6EG1HRYl3cDh+nMb92xKemhPX2UjQ7sD/9NMe30789H7
+	2wt6HupHXOfmuLdkw1q3dNLgREVKIm1mTiKxqOVU=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2C1hvHt085314
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 16:05:03 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 20:43:57 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE102.ent.ti.com
+	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Mon, 11 Mar 2019 16:05:02 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Mon, 11 Mar 2019 16:05:02 -0500
-Received: from UDA0869574.dhcp.ti.com (ileax41-snat.itg.ti.com
+	Mon, 11 Mar 2019 20:43:56 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1713.5 via Frontend
+	Transport; Mon, 11 Mar 2019 20:43:56 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2BL52Mo010210;
-	Mon, 11 Mar 2019 16:05:02 -0500
-From: Jianzhong Xu <xuj@ti.com>
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2C1hssM014989
+	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 20:43:55 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 11 Mar 2019 17:05:00 -0400
-Message-ID: <1552338300-25966-1-git-send-email-xuj@ti.com>
+Date: Mon, 11 Mar 2019 21:43:41 -0400
+Message-ID: <1552355028-25739-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH] dsplib: bump SRCREV
+Subject: [rocko/master][PATCH 0/7] Tools update for RTOS 5.3 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,36 +65,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Mar 2019 21:05:04 -0000
+X-List-Received-Date: Tue, 12 Mar 2019 01:43:59 -0000
 Content-Type: text/plain
 
-Signed-off-by: Jianzhong Xu <xuj@ti.com>
----
- recipes-ti/dsplib/dsplib.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Tools update for RTOS 5.3 release.
 
-diff --git a/recipes-ti/dsplib/dsplib.inc b/recipes-ti/dsplib/dsplib.inc
-index 7f63891..2738fc5 100644
---- a/recipes-ti/dsplib/dsplib.inc
-+++ b/recipes-ti/dsplib/dsplib.inc
-@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
- 
- require ../includes/ti-paths.inc
- 
--PV = "3_4_0_2"
-+PV = "3_4_0_3"
- PR = "r0"
- 
- DEPENDS = "ti-cgt6x-native \
-@@ -17,7 +17,7 @@ DEPENDS = "ti-cgt6x-native \
- S = "${WORKDIR}/git"
- 
- SRC_URI = "git://git.ti.com/ep-processor-libraries/dsplib.git;protocol=git;branch=master"
--SRCREV = "52adc985f1bba7484b74f136db80728195ff37d5"
-+SRCREV = "2cd21a04913648d040bd63234183cc6f81f5286a"
- 
- LIC_FILES_CHKSUM = "file://ti/dsplib/src/common/c66/lnk.cmd;beginline=1;endline=37;md5=0f0c9c4d51d8af75419781591ace190b"
- 
+Mahesh Radhakrishnan (7):
+  ti-ndk: Correcting the SRC_URI link
+  gcc-arm-none-eabi-native: Update to 7.0-2018-q2-update
+  ti-cg-xml: Update to version 2.61.00
+  ti-cgt6x: Update to version 8.3.2
+  ti-xdctools: Update to version 3.51.01.18
+  ti-cgt-arm: Update to version 18.1.5 LTS
+  ti-sysbios: Update to version 6.75.02.00
+
+ ...bios_6.73.01.01.bb => ti-sysbios_6.75.02.00.bb} |  8 +++---
+ ...> gcc-arm-none-eabi-native_7-2018-q2-update.bb} | 17 ++++++++----
+ .../{ti-cg-xml_2.41.00.bb => ti-cg-xml_2.61.00.bb} | 17 ++++++------
+ ...ative_16.9.9.bb => ti-cgt-arm-native_18.1.5.bb} |  6 ++--
+ recipes-ti/devtools/ti-cgt-arm.inc                 | 16 ++---------
+ .../{ti-cgt6x_8.2.2.bb => ti-cgt6x_8.3.2.bb}       | 32 ++++++++--------------
+ ...ols_3.50.08.24.bb => ti-xdctools_3.51.01.18.bb} |  8 +++---
+ recipes-ti/ndk/ti-ndk.inc                          |  3 +-
+ 8 files changed, 44 insertions(+), 63 deletions(-)
+ rename recipes-ti/bios/{ti-sysbios_6.73.01.01.bb => ti-sysbios_6.75.02.00.bb} (52%)
+ rename recipes-ti/devtools/{gcc-arm-none-eabi-native_6-2017-q1-update.bb => gcc-arm-none-eabi-native_7-2018-q2-update.bb} (47%)
+ rename recipes-ti/devtools/{ti-cg-xml_2.41.00.bb => ti-cg-xml_2.61.00.bb} (63%)
+ rename recipes-ti/devtools/{ti-cgt-arm-native_16.9.9.bb => ti-cgt-arm-native_18.1.5.bb} (9%)
+ rename recipes-ti/devtools/{ti-cgt6x_8.2.2.bb => ti-cgt6x_8.3.2.bb} (70%)
+ rename recipes-ti/devtools/{ti-xdctools_3.50.08.24.bb => ti-xdctools_3.51.01.18.bb} (35%)
+
 -- 
 1.9.1
 
