@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 12022E00CE5; Tue, 12 Mar 2019 09:28:12 -0700 (PDT)
+	id E337AE00C1E; Tue, 12 Mar 2019 16:09:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,54 +10,52 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9FA22E00C38
-	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 09:28:11 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2CGSAPs057911
-	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 11:28:10 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF23DE00872
+	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 16:09:03 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2CN925a008143
+	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 18:09:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1552408090;
-	bh=OWk5xWkpTzz7VkZ109ElyxIQezLEg0dQkE40VLJIQRw=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=WWh3tAN/NkTO+1MfMwn5KKxnIGkWjHUhpb9dqjw2N0PJQqhCPHDIpaeJDgNlOFXgp
-	CqsyWN8o17+ubgbBnUw5ON4A716z7CYxqJDsnILDi02RiJVvdAlLzorSGXTw3G/y/x
-	fLFA+Yo/Zg4T7XaHF55IheKVI0FXDUjXY8Qwqvws=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2CGSAub063058
+	s=ti-com-17Q1; t=1552432143;
+	bh=eH2UOhrCQU/p51zDYhuKy470XhAnZM84b1GVzQNBBRo=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=VVdju9OFmEguBaqWWm1BuPLjfSYJ3QWAfdYClgNifq1djd5fybdvcz5iXwuvmIa+K
+	G/9zsyU/5uALXoAaTuCHiy7uyIHyVFJ8iWlL0lFrXaH5pqoNYTcY0YKNhRyc4k75WL
+	WZA/3Jt4vc/PivI3eeFYr1jxzNfHI/x/fYU90DUU=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2CN92YM114850
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 11:28:10 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 18:09:02 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Tue, 12 Mar 2019 11:28:09 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_0,
+	Tue, 12 Mar 2019 18:09:02 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Tue, 12 Mar 2019 11:28:10 -0500
-Received: from legion.dal.desgin.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2CGS9vZ030863;
-	Tue, 12 Mar 2019 11:28:09 -0500
-Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.79.221])
-	by legion.dal.desgin.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x2CGS9U04252; Tue, 12 Mar 2019 11:28:09 -0500 (CDT)
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 12 Mar 2019 11:27:44 -0500
-Message-ID: <20190312162744.11666-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20190312162744.11666-1-dmurphy@ti.com>
-References: <20190312162744.11666-1-dmurphy@ti.com>
+	Transport; Tue, 12 Mar 2019 18:09:02 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2CN91Pa003279;
+	Tue, 12 Mar 2019 18:09:02 -0500
+Date: Tue, 12 Mar 2019 19:09:01 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+Message-ID: <20190312230901.GD28041@beryl>
+References: <1552355028-25739-1-git-send-email-m-radhakrishnan2@ti.com>
+	<1552355028-25739-5-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
+In-Reply-To: <1552355028-25739-5-git-send-email-m-radhakrishnan2@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2019.00-rc2 tag
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [rocko/master][PATCH 4/7] ti-cgt6x: Update to version 8.3.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,29 +68,122 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 16:28:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 12 Mar 2019 23:09:05 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Mon, Mar 11, 2019 at 09:43:45PM -0400, Mahesh Radhakrishnan wrote:
+> The license checksum changed due to the version, licenses have not
+> changed.
+> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+> ---
+>  .../{ti-cgt6x_8.2.2.bb => ti-cgt6x_8.3.2.bb}       | 32 ++++++++--------------
+>  1 file changed, 11 insertions(+), 21 deletions(-)
+>  rename recipes-ti/devtools/{ti-cgt6x_8.2.2.bb => ti-cgt6x_8.3.2.bb} (70%)
+> 
+> diff --git a/recipes-ti/devtools/ti-cgt6x_8.2.2.bb b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+> similarity index 70%
+> rename from recipes-ti/devtools/ti-cgt6x_8.2.2.bb
+> rename to recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+> index 53f5252..cf1d4eb 100644
+> --- a/recipes-ti/devtools/ti-cgt6x_8.2.2.bb
+> +++ b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+> @@ -1,9 +1,9 @@
+>  DESCRIPTION = "TI DSP Code Generation Tools"
+>  HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
+> +LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index 63994a4a..4bfc7c03 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
- 
--PR = "r2"
-+PR = "r3"
- 
- BRANCH = "ti-u-boot-2019.01"
- 
--SRCREV = "9d4ad70f1cc33e4cfbe95f5d00ddd23d82cf167b"
-+SRCREV = "fdb959e6dd7c2cdc736484677abbd7d0a2acab7e"
--- 
-2.20.1.390.gb5101f9297
+In ti-cgt-arm patch #6 you have this text regarding the LICENSE change to 
+include Patrick-Powell:
 
+> However Patrick powell license which was missing earlier has been added now.
+
+First of all, this text is missing here in the commit log.
+Second, in ti-cgt-arm Patrick-Powell is added, and here it replaces 
+Hewlett-Packard. Please double-check which way is correct and update the 
+commit log to mention this. Thanks!
+
+
+> -LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/C6000_8.2.x_CodeGenerationTools_Manifest.htm;md5=66147c95fc5d3f900b73414f8258c91e"
+> -LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/C6000_8.2.x_CodeGenerationTools_Manifest.htm;md5=66147c95fc5d3f900b73414f8258c91e"
+> +LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
+> +LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
+>  
+>  PE = "1"
+>  
+> @@ -37,11 +37,13 @@ BINFILE_NAME_class-target = "cgt6x_arm_installer"
+>  
+>  SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/${PV}/${BINFILE};name=${BINFILE_NAME}"
+>  
+> -SRC_URI[cgt6x_x86_installer.md5sum] = "548c841b231c2fbd954218d4e370c995"
+> -SRC_URI[cgt6x_x86_installer.sha256sum] = "f269e51eb29de2efd32b3ea93beebd7b00a1a156c923be1a33ba7d785c4c6a24"
+> +SRC_URI[cgt6x_x86_installer.md5sum] = "f1f534e6a4bdee6df39e8d0cb458d161"
+> +SRC_URI[cgt6x_x86_installer.sha256sum] = "1fba2a8f5532b33a23677771d686a866171ce7a0e567fed50d900d0ecd2e17e6"
+>  
+> -SRC_URI[cgt6x_arm_installer.md5sum] = "56f5e5464ab87af517a6cdd5fed06f3f"
+> -SRC_URI[cgt6x_arm_installer.sha256sum] = "4b2e605a4afc3d4d0ac74013ee32496541abf093aedd70bc7ef040597933b1ea"
+> +SRC_URI[cgt6x_arm_installer.md5sum] = "425d82308e71202ad004a36b7ec3cec9"
+> +SRC_URI[cgt6x_arm_installer.sha256sum] = "70c387ddde379194fed712087be6cb0ca5f4f0e65d7f29bd7462c38ee011928f"
+> +
+> +CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+>  
+>  do_install() {
+>      install -d ${D}${bindir}
+> @@ -54,10 +56,7 @@ do_install() {
+>          install -m 755 ${binfile} ${D}${datadir}/ti/cgt-c6x/bin
+>      done
+>  
+> -    install -d ${D}${datadir}/ti/cgt-c6x/include
+> -    for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
+> -        install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
+> -    done
+> +    cp ${CP_ARGS}  ${S}/ti-cgt-c6000_${PV}/include ${D}${datadir}/ti/cgt-c6x/include 
+
+There's an extra white-space at the end of this ^^ line and git apply will 
+complain about it.
+
+
+>      install -d ${D}${datadir}/ti/cgt-c6x/lib
+>      for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.a; do
+> @@ -72,11 +71,6 @@ do_install() {
+>          install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+>      done
+>  
+> -    install -d ${D}${datadir}/ti/cgt-c6x/lib/src
+> -    for srcfile in ${S}/ti-cgt-c6000_${PV}/lib/src/*; do
+> -        install -m 644 ${srcfile} ${D}${datadir}/ti/cgt-c6x/lib/src
+> -    done
+> -
+>      install -d ${D}${datadir}/man/man1
+>      for manfile in ${S}/ti-cgt-c6000_${PV}/man/man1/*; do
+>          if [ -e ${manfile} ]; then
+> @@ -89,7 +83,7 @@ do_install() {
+>          install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+>      done
+>  
+> -    for docfile in ${S}/ti-cgt-c6000_${PV}/*.htm; do
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/*.html; do
+>          install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+>      done
+>  
+> @@ -97,10 +91,6 @@ do_install() {
+>          install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+>      done
+>  
+> -    for docfile in ${S}/ti-cgt-c6000_${PV}/doc/*; do
+> -        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> -    done
+> -
+>  }
+>  
+>  do_install_class-target() {
+> -- 
+> 1.9.1
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
