@@ -1,6 +1,6 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0E26EE00CE8; Mon, 11 Mar 2019 18:44:08 -0700 (PDT)
+	id 72300E009A0; Tue, 12 Mar 2019 09:28:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,45 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB2EEE00BB7
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 18:44:06 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01241E00872
+	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 09:28:08 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2C1i6Wa041669
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 20:44:06 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2CGS8MG120672
+	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 11:28:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1552355046;
-	bh=l0cvq/bAutnwdl2eYR+GbDGyqKmnMEmepM+l3/AwKEE=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=tLgbjjGAFibuPXnL5mO/+x23knhxeXvXXP/Ymj6E3wbpYXhs53Q539G3Ce+4ts6En
-	ruQPDuecMBb5nLwho9iQJzWxvl4bBOat09jRnsJU9F3AXxRNY5+vCiN2YvzQdFITkh
-	+Xg5zIF+brUbCsaItFxBkLU0m9NBB+s+h6Ocm1ig=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2C1i6kS085846
+	s=ti-com-17Q1; t=1552408088;
+	bh=YuR5lfY+byFoxGR6QiIPAsl2iC7XwvOwrUQFKnl15KI=;
+	h=From:To:CC:Subject:Date;
+	b=FXJumSiW6fOFuaxrdjuiH8Va7tJBDDRTaiNjmLR/t6X6NWpYqFOk+ZuhSN3xpoiLR
+	qEcGan36rEnDqmmEK0F0tLk3Eng8e4Yu8yIO3I2b+oqOddc+AW82b5/3cHcw7NBcta
+	995h/L6dqiWeZhSjV6x4yICeaITCKTk9WcA6E0wg=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2CGS8Ir018392
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 20:44:06 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2019 11:28:08 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Mon, 11 Mar 2019 20:44:05 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE100.ent.ti.com
+	Tue, 12 Mar 2019 11:28:08 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE100.ent.ti.com
 	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1713.5 via Frontend
-	Transport; Mon, 11 Mar 2019 20:44:05 -0500
-Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2C1hssT014989
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2019 20:44:05 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+	Transport; Tue, 12 Mar 2019 11:28:07 -0500
+Received: from legion.dal.desgin.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2CGS7VA029876;
+	Tue, 12 Mar 2019 11:28:07 -0500
+Received: from localhost (a0272616local-lt.dhcp.ti.com [172.22.79.221])
+	by legion.dal.desgin.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	x2CGS7U04202; Tue, 12 Mar 2019 11:28:07 -0500 (CDT)
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 11 Mar 2019 21:43:48 -0400
-Message-ID: <1552355028-25739-8-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1552355028-25739-1-git-send-email-m-radhakrishnan2@ti.com>
-References: <1552355028-25739-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 12 Mar 2019 11:27:43 -0500
+Message-ID: <20190312162744.11666-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.12.2
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 7/7] ti-sysbios: Update to version 6.75.02.00
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2019.00-rc2 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,43 +68,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 01:44:08 -0000
+X-List-Received-Date: Tue, 12 Mar 2019 16:28:09 -0000
 Content-Type: text/plain
 
-The checksum has been changeded due to the version string and copyright
-year. Licenses themselves have not changed.
-
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- .../bios/{ti-sysbios_6.73.01.01.bb => ti-sysbios_6.75.02.00.bb}   | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename recipes-ti/bios/{ti-sysbios_6.73.01.01.bb => ti-sysbios_6.75.02.00.bb} (52%)
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/bios/ti-sysbios_6.73.01.01.bb b/recipes-ti/bios/ti-sysbios_6.75.02.00.bb
-similarity index 52%
-rename from recipes-ti/bios/ti-sysbios_6.73.01.01.bb
-rename to recipes-ti/bios/ti-sysbios_6.75.02.00.bb
-index ef2ef25..553d43e 100644
---- a/recipes-ti/bios/ti-sysbios_6.73.01.01.bb
-+++ b/recipes-ti/bios/ti-sysbios_6.75.02.00.bb
-@@ -1,12 +1,12 @@
- require recipes-ti/bios/ti-sysbios.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+index 7a10f51f..75eb9de0 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
  
--PV = "6_73_01_01"
-+PV = "6_75_02_00"
- PR = "r0"
+ BRANCH = "ti-rt-linux-4.19.y"
  
--LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=99771475f3621a6bf690df10327eaaa9"
-+LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=5cf40699c51b26d36fc01647c0b27fb1"
+-SRCREV = "e7773a524819bf5f46c2bdb207d123840fda7819"
++SRCREV = "7cc393e448475c8b68dba81ca568b5ffd219e5aa"
+ PV = "4.19.25+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+index 6eeff9aa..5c341c24 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -56,7 +56,7 @@ S = "${WORKDIR}/git"
  
--SRC_URI[sysbiosbin.md5sum] = "899ddf89d259e2848b93d6d53902a2d5"
--SRC_URI[sysbiosbin.sha256sum] = "005b63d59308e0fe6e8fc4ff9d760c829880fb3e0daf43eb8181680ddf11ac85"
-+SRC_URI[sysbiosbin.md5sum] = "8bca751d3054e74b9edb510a0d099095"
-+SRC_URI[sysbiosbin.sha256sum] = "c92cb72f86656b1e37454e238e9838f301eeeb4d711a0f4a84089ef80ccb6013"
+ BRANCH = "ti-linux-4.19.y"
  
- TI_BIN_UNPK_CMDS = ""
- TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+-SRCREV = "9f33c6db10809255598c25d188f1dc820ead5cfa"
++SRCREV = "0584082b5f5c815faee33f5fc0a1c8bc3d77ebf7"
+ PV = "4.19.25+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
-1.9.1
+2.20.1.390.gb5101f9297
 
 
