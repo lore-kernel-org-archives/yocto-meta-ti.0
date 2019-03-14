@@ -1,60 +1,60 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 868EEE00D21; Wed, 13 Mar 2019 20:27:39 -0700 (PDT)
+	id 9E6F1E00D14; Wed, 13 Mar 2019 20:27:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2C0EE00B43
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAFB7E00D14
 	for <meta-ti@yoctoproject.org>; Wed, 13 Mar 2019 20:27:38 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2E3RcYh101603
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2E3Rcmv081890
 	for <meta-ti@yoctoproject.org>; Wed, 13 Mar 2019 22:27:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1552534058;
-	bh=OsPF5PyF20fe4s7KF6mM5Wdf1Ga/yPFRuXC5Yb78Z/Q=;
+	bh=eWBeUF5cUzHCbapEPRV8QfhMcnExAWMh5qGYDux9Loo=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=NIQ+5gtmAnUOcZ8RngBFBwrqGMXw552AQbDC4NPYsvmGlK4afuJu8gsPwh+xOu/FC
-	eBcXp6LAwqRpmcDKS5v4EMizz3srftq4MTUnP3ilFrlZQOwI/7h2OVQgo6KLQ01xnw
-	snfdfai5oK0fzvdKqvZIohJ2E/Q6waEpWZXjgYLw=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2E3RcHd047761
+	b=SRhAtynsYqQj89G6h6AYQr3OqVQpgmVec+xygt4WhQgdOxRtwSaslaOp8FpokDxQ/
+	mDFI5LqoTcMBxxov12F5sK4jFTp58/uXR6hAi19a7zS0bHGWl+UpEQQI+UFOsv7RZ1
+	ttIpyjeWnUYBlpH7cCOIW94pOz7eWYxP2mrTkNLA=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2E3RcrB006472
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Wed, 13 Mar 2019 22:27:38 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1591.10;
-	Wed, 13 Mar 2019 22:27:38 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE104.ent.ti.com
-	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_0,
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE108.ent.ti.com
+	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Wed, 13 Mar 2019 22:27:37 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1591.10 via Frontend
-	Transport; Wed, 13 Mar 2019 22:27:38 -0500
+	Transport; Wed, 13 Mar 2019 22:27:37 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2E3RaO0017670;
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2E3RaNx017670;
 	Wed, 13 Mar 2019 22:27:37 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 14 Mar 2019 03:18:08 +0000
-Message-ID: <20190314031810.27721-4-denys@ti.com>
+Date: Thu, 14 Mar 2019 03:18:07 +0000
+Message-ID: <20190314031810.27721-3-denys@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190314031810.27721-1-denys@ti.com>
 References: <20190314031810.27721-1-denys@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/thud/master][PATCH v2 4/6] ti-xdctools: Update to version 3.51.01.18
+Subject: [rocko/thud/master][PATCH v2 3/6] ti-cgt6x: Update to version 8.3.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,37 +72,107 @@ Content-Type: text/plain
 
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 
-The license checksum update is due to the version number update. The
-licenses have not changed.
+The license checksum changed due to the version and also because Hewlett Packard
+license is no longer applicable.
+The Patrick Powell license which was present earlier too was not mentioned in
+the recipe, now it has been explicitly mentioned as well.
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- ...i-xdctools_3.50.08.24.bb => ti-xdctools_3.51.01.18.bb} | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename recipes-ti/devtools/{ti-xdctools_3.50.08.24.bb => ti-xdctools_3.51.01.18.bb} (35%)
+ .../{ti-cgt6x_8.2.2.bb => ti-cgt6x_8.3.2.bb}  | 32 ++++++-------------
+ 1 file changed, 10 insertions(+), 22 deletions(-)
+ rename recipes-ti/devtools/{ti-cgt6x_8.2.2.bb => ti-cgt6x_8.3.2.bb} (70%)
 
-diff --git a/recipes-ti/devtools/ti-xdctools_3.50.08.24.bb b/recipes-ti/devtools/ti-xdctools_3.51.01.18.bb
-similarity index 35%
-rename from recipes-ti/devtools/ti-xdctools_3.50.08.24.bb
-rename to recipes-ti/devtools/ti-xdctools_3.51.01.18.bb
-index 1e776e77..35258b4d 100644
---- a/recipes-ti/devtools/ti-xdctools_3.50.08.24.bb
-+++ b/recipes-ti/devtools/ti-xdctools_3.51.01.18.bb
+diff --git a/recipes-ti/devtools/ti-cgt6x_8.2.2.bb b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+similarity index 70%
+rename from recipes-ti/devtools/ti-cgt6x_8.2.2.bb
+rename to recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+index 53f52526..deee61c7 100644
+--- a/recipes-ti/devtools/ti-cgt6x_8.2.2.bb
++++ b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
 @@ -1,9 +1,9 @@
- require recipes-ti/devtools/ti-xdctools-core.inc
+ DESCRIPTION = "TI DSP Code Generation Tools"
+ HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+-LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
++LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
  
--PV = "3_50_08_24"
-+PV = "3_51_01_18"
- PR = "r0"
+-LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/C6000_8.2.x_CodeGenerationTools_Manifest.htm;md5=66147c95fc5d3f900b73414f8258c91e"
+-LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/C6000_8.2.x_CodeGenerationTools_Manifest.htm;md5=66147c95fc5d3f900b73414f8258c91e"
++LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
++LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
  
--LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=1796f68c3d32d408415f5612f1f60652"
-+LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=7d8508a640d8e76fe372141df01c351f"
+ PE = "1"
  
--SRC_URI[xdczip.md5sum] = "19e73ea981354e6fa7144978bc16e215"
--SRC_URI[xdczip.sha256sum] = "335fd4050abba8e3c1c38d382d39a889441ef0d9bee57dba5892923acd586488"
-+SRC_URI[xdczip.md5sum] = "54b80b603471623c1dbb0cfeb75b0fe2"
-+SRC_URI[xdczip.sha256sum] = "9bbbf433f0970bcb0cbf938615afe4d54420ecc56bc6e872f1a004338a8f19d5"
+@@ -26,7 +26,6 @@ python __anonymous() {
+             raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+ }
+ 
+-
+ BINFILE = "ti_cgt_c6000_${PV}_linux_installer_x86.bin"
+ BINFILE_NAME = "cgt6x_x86_installer"
+ TI_BIN_UNPK_ARGS = "--prefix ${S}"
+@@ -37,11 +36,11 @@ BINFILE_NAME_class-target = "cgt6x_arm_installer"
+ 
+ SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/${PV}/${BINFILE};name=${BINFILE_NAME}"
+ 
+-SRC_URI[cgt6x_x86_installer.md5sum] = "548c841b231c2fbd954218d4e370c995"
+-SRC_URI[cgt6x_x86_installer.sha256sum] = "f269e51eb29de2efd32b3ea93beebd7b00a1a156c923be1a33ba7d785c4c6a24"
++SRC_URI[cgt6x_x86_installer.md5sum] = "f1f534e6a4bdee6df39e8d0cb458d161"
++SRC_URI[cgt6x_x86_installer.sha256sum] = "1fba2a8f5532b33a23677771d686a866171ce7a0e567fed50d900d0ecd2e17e6"
+ 
+-SRC_URI[cgt6x_arm_installer.md5sum] = "56f5e5464ab87af517a6cdd5fed06f3f"
+-SRC_URI[cgt6x_arm_installer.sha256sum] = "4b2e605a4afc3d4d0ac74013ee32496541abf093aedd70bc7ef040597933b1ea"
++SRC_URI[cgt6x_arm_installer.md5sum] = "425d82308e71202ad004a36b7ec3cec9"
++SRC_URI[cgt6x_arm_installer.sha256sum] = "70c387ddde379194fed712087be6cb0ca5f4f0e65d7f29bd7462c38ee011928f"
+ 
+ do_install() {
+     install -d ${D}${bindir}
+@@ -54,10 +53,8 @@ do_install() {
+         install -m 755 ${binfile} ${D}${datadir}/ti/cgt-c6x/bin
+     done
+ 
+-    install -d ${D}${datadir}/ti/cgt-c6x/include
+-    for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
+-        install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
+-    done
++    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
++    cp ${CP_ARGS} ${S}/ti-cgt-c6000_${PV}/include ${D}${datadir}/ti/cgt-c6x/include
+ 
+     install -d ${D}${datadir}/ti/cgt-c6x/lib
+     for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.a; do
+@@ -72,11 +69,6 @@ do_install() {
+         install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+     done
+ 
+-    install -d ${D}${datadir}/ti/cgt-c6x/lib/src
+-    for srcfile in ${S}/ti-cgt-c6000_${PV}/lib/src/*; do
+-        install -m 644 ${srcfile} ${D}${datadir}/ti/cgt-c6x/lib/src
+-    done
+-
+     install -d ${D}${datadir}/man/man1
+     for manfile in ${S}/ti-cgt-c6000_${PV}/man/man1/*; do
+         if [ -e ${manfile} ]; then
+@@ -89,7 +81,7 @@ do_install() {
+         install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+     done
+ 
+-    for docfile in ${S}/ti-cgt-c6000_${PV}/*.htm; do
++    for docfile in ${S}/ti-cgt-c6000_${PV}/*.html; do
+         install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+     done
+ 
+@@ -97,10 +89,6 @@ do_install() {
+         install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+     done
+ 
+-    for docfile in ${S}/ti-cgt-c6000_${PV}/doc/*; do
+-        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+-    done
+-
+ }
+ 
+ do_install_class-target() {
 -- 
 2.17.1
 
