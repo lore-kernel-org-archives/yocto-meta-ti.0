@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F0E37E00D15; Thu, 21 Mar 2019 06:16:22 -0700 (PDT)
+	id C151DE00DAF; Thu, 21 Mar 2019 06:16:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 008ADE00D16
-	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 06:16:21 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2LDGLKS080852
-	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:21 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60A76E00C45
+	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 06:16:22 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2LDGMAc080856
+	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1553174181;
-	bh=Pz3UTJFkGwms67cmKh5wb7dC/bIVYcOBdPqXp7xxCqc=;
+	s=ti-com-17Q1; t=1553174182;
+	bh=Pyu43bubgXPBrdR/gj5Qym+e/9ynLjXH9FNBQFSL/34=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=Fj/Ct8onKBL492S3WhFY0PVQX44TBDKzatbUgtHgyGph8GA5wNDh0WTcmYft/g6Oy
-	pp9VmjEqzvzkMY9iRcvTAnMBkx+MKxsaj9MN6V6ebij0GErx+51zQhbB12jOQP6igS
-	ykffCjbEPdtNP9fDU1j3gxMR/B25euxgPWUcvPUQ=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2LDGL5v066888
+	b=UskAahTileKnw36zLgVl6zTNd/uj/km+XCb8reSXON7qscTj/sA1/73lCIeRboYRb
+	CO4HF4YddqkdMcjS4jRNhVMXMBEU5WyYif3qluXjQG+q1wtG0WsEn4MbgHXAW6plo4
+	+ohuIGGDbcO0BTWFIHvsPaBV2QTtCMGvkvn5x/bA=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2LDGMWT047604
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:21 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:22 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
+	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Thu, 21 Mar 2019 08:16:21 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE107.ent.ti.com
-	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE112.ent.ti.com
+	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1713.5 via Frontend
 	Transport; Thu, 21 Mar 2019 08:16:21 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2LDGHZq025094
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2LDGHZr025094
 	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:21 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 21 Mar 2019 09:15:56 -0400
-Message-ID: <1553174173-28679-13-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 21 Mar 2019 09:15:57 -0400
+Message-ID: <1553174173-28679-14-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1553174173-28679-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1553174173-28679-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 12/29] osal: SRCREV update to 01.00.00.14A
+Subject: [rocko/master][PATCH 13/29] pcie-lld-rtos: SRCREV update to 02.03.00.03
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,34 +67,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2019 13:16:23 -0000
+X-List-Received-Date: Thu, 21 Mar 2019 13:16:32 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/osal/osal.inc | 6 +++---
+ recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
-index 978b89a..aacf0df 100644
---- a/recipes-bsp/osal/osal.inc
-+++ b/recipes-bsp/osal/osal.inc
-@@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
- OSAL_GIT_BRANCH = "master"
- OSAL_GIT_DESTSUFFIX = "git/ti/osal"
+diff --git a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
+index 2c57cbb..8aee7e4 100644
+--- a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
++++ b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
+@@ -13,14 +13,14 @@ PCIE_LLD_GIT_PROTOCOL = "git"
+ PCIE_LLD_GIT_BRANCH = "master"
+ PCIE_LLD_GIT_DESTSUFFIX = "git/ti/drv/pcie"
  
--# Below commit ID corresponding to "DEV.OSAL.01.00.00.14"
--OSAL_SRCREV = "96a9ad7b42bfe4e212713a6753f23cad6c3b287b"
-+# Below commit ID corresponding to "DEV.OSAL.01.00.00.14A"
-+OSAL_SRCREV = "f57cf90ba4c7dff6a016f60f2e343d777f20e06e"
+-# Below commit ID corresponds to "DEV.PCIE_LLD.02.03.00.02"
+-PCIE_LLD_SRCREV = "3c6e68d77778a2e655803b8aa1c2b8ac056518b2"
++# Below commit ID corresponds to "DEV.PCIE_LLD.02.03.00.03"
++PCIE_LLD_SRCREV = "202a89929d8da0ac923978145b4cc44cfafc12d5"
  
- BRANCH = "${OSAL_GIT_BRANCH}"
- SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${PCIE_LLD_GIT_BRANCH}"
+ SRC_URI = "${PCIE_LLD_GIT_URI};destsuffix=${PCIE_LLD_GIT_DESTSUFFIX};protocol=${PCIE_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${OSAL_SRCREV}"
--PV = "01.00.00.14"
-+PV = "01.00.00.14A"
- INC_PR = "r0"
+ SRCREV = "${PCIE_LLD_SRCREV}"
+-PV = "02.03.00.02"
++PV = "02.03.00.03"
+ PR = "r0"
+ 
+ DEPENDS_append_k3 = " udma-lld-rtos \
 -- 
 1.9.1
 
