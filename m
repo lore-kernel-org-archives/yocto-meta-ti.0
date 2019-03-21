@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A83A5E00DFA; Thu, 21 Mar 2019 06:18:45 -0700 (PDT)
+	id E0B03E00D67; Thu, 21 Mar 2019 06:18:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07607E00D63
-	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 06:16:25 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2LDGPRc105520
-	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:25 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93795E00D64
+	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 06:16:26 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2LDGQ1V105537
+	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1553174185;
-	bh=Hs8i1lq22UwhHxtj7EP0Yzt02Klgjt6GChXK0hzuRJM=;
+	s=ti-com-17Q1; t=1553174186;
+	bh=GjUCvKbRdvUNfzXGPppTYxKMvEvd1Tt2tvxwZrEjgIk=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=wvVcqDXJWi+GdNDdJxD1vryRGvLcnSfOtpvg4cmFMgDO7E0f0fcHKEfTqT8/ZbYSQ
-	BMW4YAaMezgH8bmVjYCTlUMhq2SS1gGm8RElNj5yxQ5OeRftgOu5QP4ZMpDVjnrdy7
-	ETYwq8fZn9Afqtcln38qLLUABGEqWD17dXb/3sR4=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2LDGPVJ066947
+	b=XYsQLG+ejrLb0llXmeos1H/bew56pk0el7gJCImaeSvt9miu7ie2zx6QBB4eSL9XF
+	bdzOQJKrJsu76sfWkwwoc51o/Z6drb+4fx5aAO24PjG/H84md3kH100wbVSwL4Pw6+
+	v5eaYuMTwWxXVGGwEH5PmU7U0HeaJojHJPM2FbhU=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2LDGQQ3047661
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:25 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:26 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Thu, 21 Mar 2019 08:16:25 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_0,
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE114.ent.ti.com
+	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.1.1713.5 via Frontend
-	Transport; Thu, 21 Mar 2019 08:16:25 -0500
+	Transport; Thu, 21 Mar 2019 08:16:26 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2LDGHa6025094
+	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id x2LDGHa8025094
 	for <meta-ti@yoctoproject.org>; Thu, 21 Mar 2019 08:16:25 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 21 Mar 2019 09:16:10 -0400
-Message-ID: <1553174173-28679-27-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 21 Mar 2019 09:16:12 -0400
+Message-ID: <1553174173-28679-29-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1553174173-28679-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1553174173-28679-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 26/29] dsplib: Recipe enhancements to facilitate AUTOREV
+Subject: [rocko/master][PATCH 28/29] swtools: Enhancements to facilitate AUTOREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,44 +67,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2019 13:18:45 -0000
+X-List-Received-Date: Thu, 21 Mar 2019 13:18:46 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-ti/dsplib/dsplib.inc | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ recipes-ti/swtools/swtools_git.bb | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/dsplib/dsplib.inc b/recipes-ti/dsplib/dsplib.inc
-index 2738fc5..ad47437 100644
---- a/recipes-ti/dsplib/dsplib.inc
-+++ b/recipes-ti/dsplib/dsplib.inc
-@@ -5,7 +5,7 @@ LICENSE = "BSD-3-Clause"
- require ../includes/ti-paths.inc
+diff --git a/recipes-ti/swtools/swtools_git.bb b/recipes-ti/swtools/swtools_git.bb
+index 16a8cc0..89a64d5 100644
+--- a/recipes-ti/swtools/swtools_git.bb
++++ b/recipes-ti/swtools/swtools_git.bb
+@@ -11,11 +11,18 @@ DEPENDS = "ti-cgt6x-native \
+            ti-xdctools-native"
  
- PV = "3_4_0_3"
+ PV = "5_0_8"
 -PR = "r0"
 +PR = "r1"
- 
- DEPENDS = "ti-cgt6x-native \
-            ti-xdctools-native \
-@@ -16,8 +16,14 @@ DEPENDS = "ti-cgt6x-native \
- 
  S = "${WORKDIR}/git"
- 
--SRC_URI = "git://git.ti.com/ep-processor-libraries/dsplib.git;protocol=git;branch=master"
--SRCREV = "2cd21a04913648d040bd63234183cc6f81f5286a"
-+DSPLIB_GIT_BRANCH = "master"
-+DSPLIB_GIT_PROTOCOL = "git"
-+DSPLIB_GIT_URI = "git://git.ti.com/ep-processor-libraries/dsplib.git"
-+DSPLIB_SRCREV = "2cd21a04913648d040bd63234183cc6f81f5286a"
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/ep-processor-libraries/swtools.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "d0c1022954b489d5f3d8d2f5c81d8c6a392f4af4"
 +
-+BRANCH = "${DSPLIB_GIT_BRANCH}"
-+SRC_URI = "${DSPLIB_GIT_URI};protocol=${DSPLIB_GIT_PROTOCOL};branch=${DSPLIB_GIT_BRANCH}"
-+SRCREV = "${DSPLIB_SRCREV}"
++SWTOOLS_GIT_BRANCH = "master"
++SWTOOLS_GIT_PROTOCOL = "git"
++SWTOOLS_GIT_URI = "git://git.ti.com/ep-processor-libraries/swtools.git"
++SWTOOLS_SRCREV = "d0c1022954b489d5f3d8d2f5c81d8c6a392f4af4"
++
++BRANCH = "${SWTOOLS_GIT_BRANCH}"
++SRC_URI = "${SWTOOLS_GIT_URI};protocol=${SWTOOLS_GIT_PROTOCOL};branch=${SWTOOLS_GIT_BRANCH}"
++SRCREV = "${SWTOOLS_SRCREV}"
++
  
- LIC_FILES_CHKSUM = "file://ti/dsplib/src/common/c66/lnk.cmd;beginline=1;endline=37;md5=0f0c9c4d51d8af75419781591ace190b"
- 
+ export C64PCODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
+ export C674CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
 -- 
 1.9.1
 
