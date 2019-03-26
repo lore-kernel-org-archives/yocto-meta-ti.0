@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7EE0AE00D12; Tue, 26 Mar 2019 15:34:59 -0700 (PDT)
+	id 8DD03E00D11; Tue, 26 Mar 2019 15:34:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -15,46 +15,44 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5CA5EE0097C
+	*      [198.47.23.249 listed in list.dnswl.org]
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5DDCFE00A54
 	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2019 15:34:58 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2QMYvkM082850
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2QMYvAw112698
 	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2019 17:34:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1553639697;
-	bh=hfbJXhbOaQp8s8iAL/cD8jmeGF9E9edzTfep9bekEYI=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=YgRtQVkEUYukMW9lyYz9ONR0gB54ztfYPBtGxuXuR5okfy13vTwVM5+pFbBjApVGw
-	aaHZIl84FUThpNImi9f7ZFWDRqJHZuD+7ojJ6kBKuoiIXge3QW/kC04xPdHUR1LJcf
-	AehBy5NXYZ6OVuVNGlUMO30W1YtNLNgFSFdfXUkM=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2QMYv4d101185
+	bh=/e2cxZGgM5CUgrHjO89conDHu5ZdaO3J3KcOwyv1Qb0=;
+	h=From:To:Subject:Date;
+	b=G1r2cCdujqGqH7tlWhn00InRjUae9KDGB5uIRa24JSUpgsbKx0cEfOIsO3JSPjsMS
+	ddKqAu+7wmon/9jxzlOxKC+jviE2cB6FXhSxGBetMNcsj9TQjJM//vnkkzij+iBOJi
+	wjBN2b4AzpNI1kZvRQPgK81bnKvKujSCrJzPDnCM=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2QMYveq052906
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2019 17:34:57 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE107.ent.ti.com
+	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Tue, 26 Mar 2019 17:34:57 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 26 Mar 2019 17:34:57 -0500
+	Frontend Transport; Tue, 26 Mar 2019 17:34:56 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x2QMYuVP126272
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2019 17:34:57 -0500
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x2QMYuVO126272
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2019 17:34:56 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 26 Mar 2019 18:34:48 -0400
-Message-ID: <1553639694-36968-2-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 26 Mar 2019 18:34:47 -0400
+Message-ID: <1553639694-36968-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1553639694-36968-1-git-send-email-m-radhakrishnan2@ti.com>
-References: <1553639694-36968-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH 1/7] common-csl-ip: SRCREV bump to 03.03.00.14C
+Subject: [rocko/master][PATCH 0/7] RTOS Patchset-2 for 5.3 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,35 +68,26 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Tue, 26 Mar 2019 22:34:59 -0000
 Content-Type: text/plain
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
----
- recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+RTOS Patchset-2 contains bug fixes and HS support on top of Patchset-1 submitted a week ago
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 20c89b6..3d49c6d 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- 
- COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
- 
--PV = "03.03.00.14B"
-+PV = "03.03.00.14C"
- INC_PR = "r0"
- PE = "1"
- 
-@@ -13,8 +13,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "release"
- CSL_GIT_DESTSUFFIX = "git"
- 
--# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.14B"
--CSL_SRCREV = "93a5bf5f9708d4654ba70df1b13d920b4782d71e"
-+# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.14C"
-+CSL_SRCREV = "e0e88283f3c9c5afd5b1fd93986f2a67186f5b13"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+Mahesh Radhakrishnan (7):
+  common-csl-ip: SRCREV bump to 03.03.00.14C
+  emac-lld-rtos: SRCREV bump to 01.00.03.14B
+  mmcsd-lld-rtos: SRCREV bump to 01.00.00.15A
+  transport-rtos: SRCREV bump to version 01.00.00.15A
+  ti-pdk-build-rtos: SRCREV bump to version 01.00.00.12A
+  icss-emac-lld: SRCREV bump to 01.00.00.15
+  sciclient-rtos: SRCREV bump to 01.00.00.02B
+
+ recipes-bsp/common-csl-ip/common-csl-ip.inc      | 6 +++---
+ recipes-bsp/emac-lld/emac-lld-rtos_git.bb        | 6 +++---
+ recipes-bsp/icss-emac-lld/icss-emac-lld.inc      | 6 +++---
+ recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb      | 6 +++---
+ recipes-bsp/sciclient/sciclient-rtos_git.bb      | 6 +++---
+ recipes-bsp/transport-rtos/transport.inc         | 6 +++---
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb | 6 +++---
+ 7 files changed, 21 insertions(+), 21 deletions(-)
+
 -- 
 1.9.1
 
