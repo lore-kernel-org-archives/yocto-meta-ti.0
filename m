@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 603D0E00D16; Wed, 27 Mar 2019 13:08:09 -0700 (PDT)
+	id F13A8E00BAF; Thu, 28 Mar 2019 08:02:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,42 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0A929E00872
-	for <meta-ti@yoctoproject.org>; Wed, 27 Mar 2019 13:08:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4001E0049A
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 08:02:17 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2RK87nd026716
-	for <meta-ti@yoctoproject.org>; Wed, 27 Mar 2019 15:08:07 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2SF2HDS126514
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 10:02:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1553717287;
-	bh=KM8IKMpeXqVHv22CNnKYZZCbvGFd3MKZJlIkUBOcxiw=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=pFv7ivnhthXNGj6AoMwyau7LtvYtDVczl8qB2G1/p5CTGcew8IJ66K2E2v49puOwT
-	UHh9iNYQfaC6N2/3IOXo3tCFEYTnZPQs54ahna4TWY9OpVaOQYjBwsqRn4IbpzWw+R
-	zE/r0q984VYEf3qluCsr9OxtZn3SCSdXQyFHe2Wk=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2RK87W6103523
+	s=ti-com-17Q1; t=1553785337;
+	bh=aHcDmmVW7Mytr3wdnlMrPGz91kadgXEvh2gYI4TKRwY=;
+	h=From:To:Subject:Date;
+	b=JWOpJ9sIA29LTZ0nzni8ClMZu7C8N0cdd8ruKOy4hAO8FKNUGe/FHilalkKpqplNS
+	o8LjELFboEKH3eGVs70dhfQ9D6uRI+nh0INqIsJsZtm2If2WBIvwpcKhyD70jhrjlP
+	dRu8MwYhGl2md78iT+qRHULtPpqk8bGThwISCjak=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2SF2HpD000467
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 27 Mar 2019 15:08:07 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 10:02:17 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 27 Mar 2019 15:08:06 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 28 Mar 2019 10:02:16 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 27 Mar 2019 15:08:07 -0500
-Received: from [172.22.104.87] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x2RK86na122493;
-	Wed, 27 Mar 2019 15:08:06 -0500
+	Frontend Transport; Thu, 28 Mar 2019 10:02:16 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x2SF2GqY091105
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 10:02:16 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-References: <20190327200718.10742-1-dmurphy@ti.com>
-From: Dan Murphy <dmurphy@ti.com>
-Message-ID: <efbb5c33-bbf3-75e7-d93a-e70db4543cde@ti.com>
-Date: Wed, 27 Mar 2019 15:08:04 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.3
+Date: Thu, 28 Mar 2019 11:02:10 -0400
+Message-ID: <1553785330-28931-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190327200718.10742-1-dmurphy@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: Re: [PATCH 1/2] linux-ti-staging: update to ti2019.00-rc4 tag
+Subject: [rocko/master][PATCH] common-csl-ip: SRCREV bump to 03.03.00.14D
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,53 +65,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 20:08:09 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Mar 2019 15:02:21 -0000
+Content-Type: text/plain
 
-Denys
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
+ recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-On 3/27/19 3:07 PM, Dan Murphy wrote:
-> Signed-off-by: Dan Murphy <dmurphy@ti.com>
-> ---
->  recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
->  recipes-kernel/linux/linux-ti-staging_4.19.bb    | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-> index 05440e6c..6474f89a 100644
-> --- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-> +++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-> @@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
->  
->  BRANCH = "ti-rt-linux-4.19.y"
->  
-> -SRCREV = "24b7d60eb75b1193fed97f0a275ff47afddb6dc3"
-> +SRCREV = "1a4ec38759a01193db742b2ae94ed1cfea59be6d"
->  PV = "4.19.25+git${SRCPV}"
-> diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-> index 9506fa3e..549af69d 100644
-> --- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
-> +++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-> @@ -56,7 +56,7 @@ S = "${WORKDIR}/git"
->  
->  BRANCH = "ti-linux-4.19.y"
->  
-> -SRCREV = "e7e1c645f0757d6c7d8636b3d8080efa0812f2c8"
-> +SRCREV = "451567d437af9f45c9fd319cb77b6fc9b7ef20fa"
->  PV = "4.19.25+git${SRCPV}"
->  
-
-I expect that we will see a PV bump for 2019.01.  Not going to do it until after 2019.00 release.
-
-Dan
-
->  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-> 
-
-
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index 3d49c6d..ff6b9c9 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+ 
+ COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
+ 
+-PV = "03.03.00.14C"
++PV = "03.03.00.14D"
+ INC_PR = "r0"
+ PE = "1"
+ 
+@@ -13,8 +13,8 @@ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "release"
+ CSL_GIT_DESTSUFFIX = "git"
+ 
+-# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.14C"
+-CSL_SRCREV = "e0e88283f3c9c5afd5b1fd93986f2a67186f5b13"
++# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.14D"
++CSL_SRCREV = "192be8698c81d31ba096892ca252a25089923823"
+ 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
-------------------
-Dan Murphy
+1.9.1
+
 
