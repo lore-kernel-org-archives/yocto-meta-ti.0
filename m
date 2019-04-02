@@ -1,58 +1,69 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F13A8E00BAF; Thu, 28 Mar 2019 08:02:20 -0700 (PDT)
+	id 9A65FE00AB0; Mon,  1 Apr 2019 19:23:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.214.181 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4001E0049A
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 08:02:17 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x2SF2HDS126514
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 10:02:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1553785337;
-	bh=aHcDmmVW7Mytr3wdnlMrPGz91kadgXEvh2gYI4TKRwY=;
-	h=From:To:Subject:Date;
-	b=JWOpJ9sIA29LTZ0nzni8ClMZu7C8N0cdd8ruKOy4hAO8FKNUGe/FHilalkKpqplNS
-	o8LjELFboEKH3eGVs70dhfQ9D6uRI+nh0INqIsJsZtm2If2WBIvwpcKhyD70jhrjlP
-	dRu8MwYhGl2md78iT+qRHULtPpqk8bGThwISCjak=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x2SF2HpD000467
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 10:02:17 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 28 Mar 2019 10:02:16 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 28 Mar 2019 10:02:16 -0500
-Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x2SF2GqY091105
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2019 10:02:16 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 28 Mar 2019 11:02:10 -0400
-Message-ID: <1553785330-28931-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
+	[209.85.214.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8EC57E00A84
+	for <meta-ti@yoctoproject.org>; Mon,  1 Apr 2019 19:23:24 -0700 (PDT)
+Received: by mail-pl1-f181.google.com with SMTP id y6so5450635plt.1
+	for <meta-ti@yoctoproject.org>; Mon, 01 Apr 2019 19:23:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tBMvXj3UkQ8MKoWH7VW/9Omjg3+b6Pvs3gl7muB5Kpo=;
+	b=LIrAneAIxGNV0vgzGbKuF5U9HdygURL6cJ5q9nGliHlizEIkRoayGxnHldGm9rSnNv
+	Gx8KDqx26ZZDJbqzccylvWbprT6px8xalJv1SND9RP2ExEJ/adZGh9Ouv7HSGT5mPyYw
+	by+XkKSvTh6Urijbvnk9rJp2/XnQIgiwZqcLXLukTZOMuLKQfoED6eCAL/pNDzt0gxm6
+	/FP91j8VFaBb0kT/oQs3vmeDuQ5HS3lM7G/0QuXiS8Lu6vYXiMF10tPVIseQv9LfAjcr
+	njLoSEsXlaB+RBdatVJcw2WlmKGTNwNXMI/ovmkINLIN6++gRSB312r5rCyu8JQyVa1P
+	xW8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tBMvXj3UkQ8MKoWH7VW/9Omjg3+b6Pvs3gl7muB5Kpo=;
+	b=YdyagD7gxvoPvFK4L81uqJiRFsjgx8ec3hcxYQZJeN2P7Jz0Iqdg25K3CpL4hM5pYJ
+	GKp/TQwGPl3WLgTvxQF4DTEwAdPGY0Nquc7twEn5RGEWlXggeQrBCw2EVeqpqTl4Tf5+
+	qdjsZNzfE/+fukviJefixuPsr2Uo3F3oazbpntDgzlkf7OYFP5Mbfdy+g39rfCHy+gta
+	wD/MpMdMg2VeOMld7qI8ZWrATQhsGs8DF+ULTh6GTct2633GusBJGIO0Xy6San2gDQ8X
+	cHCNmds2psgcVDUip6Z/6c5aa9JMvi+nTTHh66kdp9m5TbponE6JPsB3NrtQOx9Maqkl
+	1lfQ==
+X-Gm-Message-State: APjAAAW3I1A96EqiiB78PW+NUO61kq3+sMjxLVX9rHs/7xiPOs/OGvTG
+	f2tG7rc4Ih5EX9BIsFjdojHnrvO8HQo=
+X-Google-Smtp-Source: APXvYqxqPuIezRaWO9BSBwAJuDkJYul7ruRK938xnr0MqdOQVQ0GFebP8aJXQYNwmH/Dhrw+Ua+OWw==
+X-Received: by 2002:a17:902:9a98:: with SMTP id
+	w24mr66881421plp.247.1554171803640; 
+	Mon, 01 Apr 2019 19:23:23 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::7644])
+	by smtp.gmail.com with ESMTPSA id
+	c17sm16031598pfd.76.2019.04.01.19.23.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 01 Apr 2019 19:23:22 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Mon,  1 Apr 2019 19:23:14 -0700
+Message-Id: <20190402022314.43905-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [rocko/master][PATCH] common-csl-ip: SRCREV bump to 03.03.00.14D
+Subject: [PATCH] layer.conf: Add warrior to compatible release series
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,39 +76,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2019 15:02:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 02 Apr 2019 02:23:25 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-index 3d49c6d..ff6b9c9 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 824443d4..f6b6bf70 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -8,7 +8,7 @@ BBFILE_COLLECTIONS += "meta-ti"
+ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti = "6"
  
- COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
+-LAYERSERIES_COMPAT_meta-ti = "sumo thud"
++LAYERSERIES_COMPAT_meta-ti = "sumo thud warrior"
  
--PV = "03.03.00.14C"
-+PV = "03.03.00.14D"
- INC_PR = "r0"
- PE = "1"
+ LICENSE_PATH += "${LAYERDIR}/licenses"
  
-@@ -13,8 +13,8 @@ CSL_GIT_PROTOCOL ="git"
- CSL_GIT_BRANCH = "release"
- CSL_GIT_DESTSUFFIX = "git"
- 
--# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.14C"
--CSL_SRCREV = "e0e88283f3c9c5afd5b1fd93986f2a67186f5b13"
-+# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.14D"
-+CSL_SRCREV = "192be8698c81d31ba096892ca252a25089923823"
- 
- BRANCH="${CSL_GIT_BRANCH}"
- SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
-1.9.1
+2.21.0
 
 
