@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CF2D3E00C93; Wed,  3 Apr 2019 05:21:36 -0700 (PDT)
+	id 1EBDEE00D32; Wed,  3 Apr 2019 12:01:31 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,50 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D52B3E00C46
-	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2019 05:21:34 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x33CLYwh085691
-	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2019 07:21:34 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23E02E00D2A
+	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2019 12:01:28 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x33J1SF5076011
+	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2019 14:01:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1554294094;
-	bh=yq+hPNp66w5Yg2EC7AHwLbG0R7qc1TCe36TQ+5yXvTc=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=jEczMAVHGlJ6S0jrC9zbziFBS2JP2VjuCG3TjO0VWRzoTmGbFDR6+FmoOK/dwQtdm
-	7f0gjuU3yc9VfVqcsNL4q2oXPBic0dT1bCOLpkPxUSwNHlH0aIkvo4dq2hRb8kBe6a
-	qjT0jOZKdI5KK0X5hx5ljYBEATMhYf3b7BZVUuSk=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x33CLYGF087589
+	s=ti-com-17Q1; t=1554318088;
+	bh=m6/bFaaiihYRfho1AqIgK7bu2Ed2Fu/97yU/euOGNAs=;
+	h=From:To:Subject:Date;
+	b=IX9DWvX08c4yUWsH/KADSzYqT0ZtkY7A7yIbcg/7GSs/K0i3sUJH3Y0KvjuF5n9sZ
+	8peeRfiiotDV/5xs1rQM71+/hu/y7XDUGSUrOInxK8oeaw9msVgIiT5hG8uLSdmse6
+	vnvjR/xKMcc87uCl4R8/r4k7UkXtBWk2Bq8q7IQw=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x33J1SGU055604
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2019 07:21:34 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2019 14:01:28 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 3 Apr 2019 07:21:34 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
-	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 3 Apr 2019 14:01:28 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 3 Apr 2019 07:21:33 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x33CLXQq064095;
-	Wed, 3 Apr 2019 07:21:33 -0500
-From: Dan Murphy <dmurphy@ti.com>
+	Frontend Transport; Wed, 3 Apr 2019 14:01:28 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x33J1RUc071214
+	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2019 14:01:27 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 3 Apr 2019 07:21:32 -0500
-Message-ID: <20190403122132.18292-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20190403122132.18292-1-dmurphy@ti.com>
-References: <20190403122132.18292-1-dmurphy@ti.com>
+Date: Wed, 3 Apr 2019 15:01:25 -0400
+Message-ID: <1554318085-57389-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2019.00-rc5 tag
+Subject: [rocko/master][PATCH] board-rtos: SRCREV bump to 01.00.10.04C
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,29 +65,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 12:21:36 -0000
+X-List-Received-Date: Wed, 03 Apr 2019 19:01:31 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/board-rtos/board-rtos_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index 57f03cc9..445e43a7 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
+index 288d049..d85f8c9 100644
+--- a/recipes-bsp/board-rtos/board-rtos_git.bb
++++ b/recipes-bsp/board-rtos/board-rtos_git.bb
+@@ -12,14 +12,14 @@ BOARD_GIT_URI = "git://git.ti.com/keystone-rtos/board.git"
+ BOARD_GIT_PROTOCOL = "git"
+ BOARD_GIT_BRANCH = "master"
  
--PR = "r5"
-+PR = "r6"
+-# Below commit ID corresponds to "DEV.BOARD.01.00.10.04B"
+-BOARD_SRCREV = "f630b9dade989a6c08ebd114f5c938cd668b6d86"
++# Below commit ID corresponds to "DEV.BOARD.01.00.10.04C"
++BOARD_SRCREV = "e794b8d6a58dc800cb406b05f45b46652c9d4f4c"
  
- BRANCH = "ti-u-boot-2019.01"
+ BRANCH ="${BOARD_GIT_BRANCH}"
+ SRC_URI = "${BOARD_GIT_URI};protocol=${BOARD_GIT_PROTOCOL};branch=${BRANCH}"
  
--SRCREV = "a0e49036fcd6c81c913f38a4611613d0ed8aafcf"
-+SRCREV = "d037fa061ba36c90f803adb59bb5f3d85431ea86"
+ SRCREV = "${BOARD_SRCREV}"
+-PV = "01.00.10.04B"
++PV = "01.00.10.04C"
+ PR = "r0"
+ 
+ DEPENDS_append = " i2c-lld-rtos \
 -- 
-2.19.0
+1.9.1
 
 
