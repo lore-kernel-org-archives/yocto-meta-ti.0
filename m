@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 616DAE00BAA; Tue, 23 Apr 2019 11:36:26 -0700 (PDT)
+	id 818F9E00AD5; Wed, 24 Apr 2019 06:35:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,48 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 30ED0E00AC5
-	for <meta-ti@yoctoproject.org>; Tue, 23 Apr 2019 11:36:24 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x3NIaOph099621
-	for <meta-ti@yoctoproject.org>; Tue, 23 Apr 2019 13:36:24 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E8DFE00B1B
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2019 06:35:53 -0700 (PDT)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x3ODZq4j117106
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2019 08:35:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1556044584;
-	bh=mmaXyI1dATOJSiCATUt50iiyp6KbcUL5eJqwELRSAiI=;
+	s=ti-com-17Q1; t=1556112952;
+	bh=BYr8HAWvO5lG6mHvhwFSvhdP/izA9cQ6qGLBvbisK2E=;
 	h=From:To:CC:Subject:Date;
-	b=RNlFi4WyStCybyRRMVH8VH9UskA0Dsn8t9NoYzeHSp0DLHSe6sxMh9N0eXCOhXBR7
-	mCEu1uQPvzuFqRx0JTnQ4lDLXQUdcrzug8lOx1nqfHarEvJyoMN8faA92+OgaZeeo5
-	HhP6i2lK3o5oPRN4t9i/23iek4K/H6McHz5fZ6yU=
+	b=lNr/kMeYIJ1x9aknBwlfDt5WiNWrLK1aVZ0lTdjFcDMbUu91T7Q4CIJolcUbWsd7W
+	fnGS0NgvFSJmUST1pWqrICrq7JMuuhi7XVnGVTuWI+Cbp5SJ3jhQroq2le56TjL3g5
+	yUwioEhOzYY1Mq952oDPtzdT3sJrS0PIas2HJmSc=
 Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x3NIaOlv046624
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x3ODZqe7025224
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 23 Apr 2019 13:36:24 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE108.ent.ti.com
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2019 08:35:52 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE108.ent.ti.com
 	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 23 Apr 2019 13:36:24 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 24 Apr 2019 08:35:52 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 23 Apr 2019 13:36:24 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x3NIaNGT091638;
-	Tue, 23 Apr 2019 13:36:24 -0500
-From: Dan Murphy <dmurphy@ti.com>
+	Frontend Transport; Wed, 24 Apr 2019 08:35:53 -0500
+Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x3ODZqTi005619;
+	Wed, 24 Apr 2019 08:35:52 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 23 Apr 2019 13:36:22 -0500
-Message-ID: <20190423183623.17669-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.21.0.5.gaeb582a983
+Date: Wed, 24 Apr 2019 09:23:32 -0400
+Message-ID: <1556112212-19002-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2019.01-rc1 tag
+Subject: [master/thud][PATCH] ti-ipc-rtos: add SRCREV_FORMAT
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,30 +65,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2019 18:36:26 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 24 Apr 2019 13:35:55 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index 445e43a7..a15f07f2 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index e4f632d..9b7bccf 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -29,6 +29,7 @@ TI_IPC_METADATA_SRCREV = "3936c41d021c6d56c25f4bb07b647314a6589a57"
+ # Corresponds to tag: 3.50.03.05
+ TI_IPC_EXAMPLES_SRCREV = "55a8341c60a91c0ba2d79b7e4b805e2e39b3060f"
  
--PR = "r6"
-+PR = "r7"
++SRCREV_FORMAT = "default"
+ SRCREV_ipc-metadata = "${TI_IPC_METADATA_SRCREV}"
+ SRCREV_ipc-examples = "${TI_IPC_EXAMPLES_SRCREV}"
  
- BRANCH = "ti-u-boot-2019.01"
- 
--SRCREV = "d037fa061ba36c90f803adb59bb5f3d85431ea86"
-+SRCREV = "84756f3dc48a99dc29fa637d6c8954654257a332"
 -- 
-2.21.0.5.gaeb582a983
+2.7.4
 
 
