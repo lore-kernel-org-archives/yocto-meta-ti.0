@@ -1,60 +1,62 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <ashish.emailaddress@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 08A88E00D3A; Thu,  2 May 2019 12:04:07 -0700 (PDT)
+	id DE887E00BE2; Sun,  5 May 2019 07:42:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	URI_HEX autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (ashish.emailaddress[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.166.177 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 863A9E00C37
-	for <meta-ti@yoctoproject.org>; Thu,  2 May 2019 12:04:06 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x42J45Iv048588
-	for <meta-ti@yoctoproject.org>; Thu, 2 May 2019 14:04:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1556823845;
-	bh=pgHnHgHjRwvdCTX9Sp9LsGRQzYnu/sUkiHv8fZjXSjI=;
-	h=From:To:Subject:Date;
-	b=m5nLwHcPYNU+lLCyWdebZ/QacyOqQCW82F5/KTITXKygiGh4EMGi1/NLdt2m2uKs6
-	xb8xrkQmWL5pFKz3StTM1aBSi73lGBy5TIBmFdRMbrlsOerCK8UqJippaojW1285p5
-	+mBPlzeWTCpliO1rNFk9sd3P4H5T5Z3EkgjPO56E=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x42J4547054031
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 2 May 2019 14:04:05 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 2 May 2019 14:04:05 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 2 May 2019 14:04:05 -0500
-Received: from UDA0850410.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x42J45Sh060518
-	for <meta-ti@yoctoproject.org>; Thu, 2 May 2019 14:04:05 -0500
-From: Eric Ruei <e-ruei1@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 2 May 2019 15:03:59 -0400
-Message-ID: <20190502190359.41613-1-e-ruei1@ti.com>
-X-Mailer: git-send-email 2.17.1
+Received: from mail-it1-f177.google.com (mail-it1-f177.google.com
+	[209.85.166.177])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0AB90E00BAA;
+	Sun,  5 May 2019 07:42:50 -0700 (PDT)
+Received: by mail-it1-f177.google.com with SMTP id a190so16528685ite.4;
+	Sun, 05 May 2019 07:42:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=6Om4CpHgjnja2Wlx5zA38ypxcxPW3a+oPbgoRJA/HtI=;
+	b=VL9NI6SiYK3I3nG8pHcN1upvmUXv7UW97lT5ArpTg+2/gLQqX4aCOVhl/NgFDmlxa/
+	s9spa1QnJA2qCjv1YzTT3dUy1cH2awHh9hLPgXEdoMlHLfa0j9dYDzzI2e/p/aysGbwL
+	kH4L6o1tP6lDKUWWVJF436BCK+480zkZaay+4rz11GiWTzvuJXIZO2HN31aNsp5GAeaQ
+	pnZbQAox65hWrWzy06jTRlLPbo1q4pzA2aJGqZwkdrY90XzSDokPRYOS4bJmMHu1Q30g
+	vJy7cVAOYhsPNO711sAudok7ovqEu/tcN4nf8a8hOxYAQtdVTyhOEqy2Cw1MgpGOYpK+
+	1IXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=6Om4CpHgjnja2Wlx5zA38ypxcxPW3a+oPbgoRJA/HtI=;
+	b=ZD2afy94Mt2SVDk8SVt2mgOJfAjh/3ipdhVcL+K/tv35PMxjBHuofLzsOQRm1fYyh1
+	PnXBkRz1C8Ix6raDHRHcU+GnIAaTg/cwdKUCi4J9xsw/MQIXg56ikxBa239hBnuRGy2t
+	dpr4UZ2qSXFLj4RFgoYzL4yuTYyKDTApqSPeAwlM9kfYPtFKxD1XbNtco19W8rZv9BY8
+	JHhoudHuXT5CehuF13Btb4StDqMRI8c4kO0lto8pBSIsCUWBOIdvUO+ZcKc65/7eJd4+
+	Zita8QjnRrFGO3tuFKNXCgBq3+3Ft9ORTj8+hDKA0colH8M7P4uz4dny1koqv9AY4IPc
+	rKLg==
+X-Gm-Message-State: APjAAAWcln94SUs/jldsfkLeVC3/lmoadRJKzJCsv3pUdONK6EvMSWVF
+	YxvpuMo37A8nAruuLbohNPEPg0Y+6mR5TvRASbbZfWgI
+X-Google-Smtp-Source: APXvYqw5+tfQaq0CBQDCq0kBIKm98sdp37ubYaxNw97KJJDXjCeyMjstg7s5riCS9gJbo8mC8en0ZE7sJ2ryLbBjMEI=
+X-Received: by 2002:a05:6638:209:: with SMTP id
+	e9mr9328199jaq.22.1557067370306; 
+	Sun, 05 May 2019 07:42:50 -0700 (PDT)
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] ti-sgx-ddk-um: bump SRCREV to pick up wsegl fix
+From: AshishKumar Mishra <ashish.emailaddress@gmail.com>
+Date: Sun, 5 May 2019 20:12:39 +0530
+Message-ID: <CAOe0dAV0D78sfX7W_Ge-5be8oo+W47knZAWUoTbeojqa-ezTaQ@mail.gmail.com>
+To: meta-ti@yoctoproject.org, linux-yocto@yoctoproject.org
+Subject: Meta-yocto-bsp fails to boot with META-TI [ Yocto-2.6.1]
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,39 +69,136 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 May 2019 19:04:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 05 May 2019 14:42:52 -0000
+Content-Type: multipart/alternative; boundary="0000000000007fa0d7058824ff97"
 
-- um: wsegl/wayland: support external wayland-egl and struct wl_gl_window
+--0000000000007fa0d7058824ff97
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
----
- recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Hi All ,
+I am starting to learn Yocto & following the manual from the Yocto website
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-index c0225c58..7b4f2ec2 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -10,7 +10,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/thud/${PV}"
- 
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "2bce2bd76259848e7d263e0a85c164480a71ba7d"
-+SRCREV = "b0db45b7f74312afbff3e30c334e899e9c9d1338"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
-@@ -22,7 +22,7 @@ INITSCRIPT_PARAMS = "defaults 8"
- 
- inherit update-rc.d
- 
--PR = "r31"
-+PR = "r32"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
- 
- DEPENDS += "libdrm udev libgbm wayland libffi"
--- 
-2.17.1
+I have added meta-ti to yocto and create the images
+
+Can team please provide some pointer to resolve the below error
+or let me know if i am doing any thing wong.
+
+When flashed the images on SD card , the uboot is struck with below
+mentioned error
 
 
+U-Boot#
+U-Boot#
+U-Boot#
+
+U-Boot SPL 2014.04-00014-g47880f5 (Apr 22 2014 - 13:23:54)
+reading args
+spl_load_image_fat_os: error reading image args, err - -1
+reading u-boot.img
+reading u-boot.img
+
+
+U-Boot 2014.04-00014-g47880f5 (Apr 22 2014 - 13:23:54)
+
+I2C:   ready
+DRAM:  512 MiB
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+*** Warning - readenv() failed, using default environment
+
+Net:   <ethaddr> not set. Validating first E-fuse MAC
+cpsw, usb_ether
+Hit any key to stop autoboot:  0
+gpio: pin 53 (gpio 53) value is 1
+mmc0 is current device
+gpio: pin 54 (gpio 54) value is 1
+SD/MMC found on device 0
+reading uEnv.txt
+** Unable to read file uEnv.txt **
+Checking if uenvcmd is set ...
+
+uenvcmd was not defined in uEnv.txt ...
+gpio: pin 56 (gpio 56) value is 0
+gpio: pin 55 (gpio 55) value is 0
+gpio: pin 54 (gpio 54) value is 0
+mmc1(part 0) is current device
+gpio: pin 54 (gpio 54) value is 1
+SD/MMC found on device 1
+reading uEnv.txt
+1430 bytes read in 5 ms (279.3 KiB/s)
+gpio: pin 55 (gpio 55) value is 1
+Loaded environment from uEnv.txt
+Importing environment from mmc ...
+Checking if uenvcmd is set ...
+gpio: pin 56 (gpio 56) value is 1
+Running uenvcmd ...
+reading zImage
+3717760 bytes read in 205 ms (17.3 MiB/s)
+reading initrd.img
+2869068 bytes read in 160 ms (17.1 MiB/s)
+reading /dtbs/am335x-boneblack.dtb
+** Unable to read file /dtbs/am335x-boneblack.dtb **
+Kernel image @ 0x82000000 [ 0x000000 - 0x38ba80 ]
+ERROR: Did not find a cmdline Flattened Device Tree
+Could not find a valid device tree
+
+uenvcmd was not defined in uEnv.txt ...
+Booting from nand ...
+
+no devices available
+
+no devices available
+Kernel image @ 0x82000000 [ 0x000000 - 0x38ba80 ]
+ERROR: Did not find a cmdline Flattened Device Tree
+Could not find a valid device tree
+U-Boot#
+U-Boot#
+
+--0000000000007fa0d7058824ff97
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div>Hi All , <br></div><div>I am startin=
+g to learn Yocto &amp; following the manual from the Yocto website</div><di=
+v><br></div><div>I have added meta-ti to yocto and create the images <br></=
+div><div><br></div>Can team please provide some pointer to resolve the belo=
+w error <br><div>or let me know if i am doing any thing wong. <br></div><di=
+v><br></div><div>When flashed the images on SD card , the uboot is struck w=
+ith below mentioned error=C2=A0</div><div><br></div><div><br></div><div>U-B=
+oot# <br>U-Boot# <br>U-Boot#=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 <br>U-Boot SPL 2014.04-00014-g47880f5 (Apr 22 2014=
+ - 13:23:54)<br>reading args<br>spl_load_image_fat_os: error reading image =
+args, err - -1<br>reading u-boot.img<br>reading u-boot.img<br><br><br>U-Boo=
+t 2014.04-00014-g47880f5 (Apr 22 2014 - 13:23:54)<br><br>I2C:=C2=A0=C2=A0 r=
+eady<br>DRAM:=C2=A0 512 MiB<br>NAND:=C2=A0 0 MiB<br>MMC:=C2=A0=C2=A0 OMAP S=
+D/MMC: 0, OMAP SD/MMC: 1<br>*** Warning - readenv() failed, using default e=
+nvironment<br><br>Net:=C2=A0=C2=A0 &lt;ethaddr&gt; not set. Validating firs=
+t E-fuse MAC<br>cpsw, usb_ether<br>Hit any key to stop autoboot:=C2=A0 0 <b=
+r>gpio: pin 53 (gpio 53) value is 1<br>mmc0 is current device<br>gpio: pin =
+54 (gpio 54) value is 1<br>SD/MMC found on device 0<br>reading uEnv.txt<br>=
+** Unable to read file uEnv.txt **<br>Checking if uenvcmd is set ...<br><br=
+>uenvcmd was not defined in uEnv.txt ...<br>gpio: pin 56 (gpio 56) value is=
+ 0<br>gpio: pin 55 (gpio 55) value is 0<br>gpio: pin 54 (gpio 54) value is =
+0<br>mmc1(part 0) is current device<br>gpio: pin 54 (gpio 54) value is 1<br=
+>SD/MMC found on device 1<br>reading uEnv.txt<br>1430 bytes read in 5 ms (2=
+79.3 KiB/s)<br>gpio: pin 55 (gpio 55) value is 1<br>Loaded environment from=
+ uEnv.txt<br>Importing environment from mmc ...<br>Checking if uenvcmd is s=
+et ...<br>gpio: pin 56 (gpio 56) value is 1<br>Running uenvcmd ...<br>readi=
+ng zImage<br>3717760 bytes read in 205 ms (17.3 MiB/s)<br>reading initrd.im=
+g<br>2869068 bytes read in 160 ms (17.1 MiB/s)<br>reading /dtbs/am335x-bone=
+black.dtb<br>** Unable to read file /dtbs/am335x-boneblack.dtb **<br>Kernel=
+ image @ 0x82000000 [ 0x000000 - 0x38ba80 ]<br>ERROR: Did not find a cmdlin=
+e Flattened Device Tree<br>Could not find a valid device tree<br><br>uenvcm=
+d was not defined in uEnv.txt ...<br>Booting from nand ...<br><br>no device=
+s available<br><br>no devices available<br>Kernel image @ 0x82000000 [ 0x00=
+0000 - 0x38ba80 ]<br>ERROR: Did not find a cmdline Flattened Device Tree<br=
+>Could not find a valid device tree<br>U-Boot# <br>U-Boot# <br></div><div><=
+br></div><div><br></div><div><br></div><div><br></div><div><br></div></div>=
+</div>
+
+--0000000000007fa0d7058824ff97--
