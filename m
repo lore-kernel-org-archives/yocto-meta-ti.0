@@ -1,62 +1,61 @@
-Return-Path: <denys@ti.com>
+Return-Path: <fgd7806@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 14C55E00D45; Tue,  7 May 2019 10:14:25 -0700 (PDT)
+	id 1F904E00D47; Tue,  7 May 2019 10:42:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (fgd7806[at]gmail.com)
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5B00E00950;
-	Tue,  7 May 2019 10:14:23 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x47HEM4O062884;
-	Tue, 7 May 2019 12:14:22 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1557249262;
-	bh=7bXEM/Q91Czz8qxl8NOgWpMCMIy1YFm1gS7DFRRfaSE=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=QOg6PoTYpghCI/54QlcCX67Aob4wGJJ1EzBPp/Tx7YmxFYOWtAGxEBi9NZqGAyT40
-	6f1jKQyD/NpHd1EtQ1nlcH/z6jBvd+06IiDl2NHnIr5jF8d+4Hc0Dg8ToasidVxh7r
-	WKcco/Poz4SJhrj8sFhWEJG8NICQvFPKmFwbBLeY=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x47HEMj6034691
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 7 May 2019 12:14:22 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 7 May 2019 12:14:21 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 7 May 2019 12:14:21 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x47HELRi010039;
-	Tue, 7 May 2019 12:14:21 -0500
-Date: Tue, 7 May 2019 13:14:21 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Robert Nelson <robertcnelson@gmail.com>
-Message-ID: <20190507171421.GC1678@beryl>
-References: <CAOe0dAV0D78sfX7W_Ge-5be8oo+W47knZAWUoTbeojqa-ezTaQ@mail.gmail.com>
-	<CAOCHtYhu+Fkvvi4zADPWXoYcfUQF1GQ--SXNtdOOWqo0Xp_0Sg@mail.gmail.com>
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.160.170 listed in list.dnswl.org]
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
+	[209.85.160.170])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B8A2CE00D40
+	for <meta-ti@yoctoproject.org>; Tue,  7 May 2019 10:42:37 -0700 (PDT)
+Received: by mail-qt1-f170.google.com with SMTP id j6so20060074qtq.1
+	for <meta-ti@yoctoproject.org>; Tue, 07 May 2019 10:42:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=DeZ4UstUfuY6JO2Mu9NM2Sbs33OlYgqSxnmM/2vMU4A=;
+	b=Gjlqlfi0Gzb10R2xVU06kXCZs0a9QYArWKj0thvhEg0dbVZY3VWiTNgByB5l8fclv/
+	zLnjiUyEflZCMmR4sFwOGXxSI/oqVGLTqOx6uH/MiwUcF/tWGskVZYXCOg79fTahaYBY
+	xZGjEueIJ00sd3Z55ezOBxPdEAMyXk8llNz67a25X4JatAAVkwKUNIlsxMqY/3pJ3U4N
+	BBLnGS+JpqPrrVt5NXoonmP0uhrtUL1Q1PuXBIXsWOHzP76AMLYW5DKsCyZZXl4Ggr48
+	E7ZV2zVdZe+3leCabMp/koMPyocstjb5rfowkvex9nhPEaO6wz2vTA/qjP0e1b5rL3a8
+	lFLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=DeZ4UstUfuY6JO2Mu9NM2Sbs33OlYgqSxnmM/2vMU4A=;
+	b=cSKdJACcKburP6jHN6CJrpjbb3gJ+0wOaHD96wTZ1sCntX9HWP1UxnOjrjz5dmXRy1
+	0msSnOCnfeh8MRhVJoZI4ctQ0n5iObxPtiuI949SRHzemBs6IDNBCnP4gm4m8RZCpyxp
+	l8HcYf1gXUj3VLRclAgD3oZULAPzsIqjbzyhiflkkpNfCwhj0OBZCi51AJ4JYJJ2u+6x
+	QHQz99JDjODqhZ7plfUeaJY3ILuVMn+R/6yhbhchrQ3MjHGR1UPoNQhzTgVf3HFAzYyP
+	ABkQypV7PiOwvUvfIozalO8Kl9StmEm9rpftJPbr+Z6wqFh0RSeptNFkPlSqLQ2fb/vu
+	3rpA==
+X-Gm-Message-State: APjAAAXLqnoJ2Kjb83+Z008YeqC40V3b5JIojA9mJdKUpagRtDKFlSbt
+	+/vcjo9TPP2+0+uPDlnz8fEikbaRVREI2N8EmYU+mw==
+X-Google-Smtp-Source: APXvYqxeM+Dfc1hWq9lHmEgVK5v0qnP2ZGNkyFVip6Km25NyT2aleS3PN+MNh5CMNYz+3AOhMbVogPUnDyp1bd2uHB8=
+X-Received: by 2002:ac8:5347:: with SMTP id d7mr65873qto.207.1557250956659;
+	Tue, 07 May 2019 10:42:36 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAOCHtYhu+Fkvvi4zADPWXoYcfUQF1GQ--SXNtdOOWqo0Xp_0Sg@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org, linux-yocto@yoctoproject.org,
-	AshishKumar Mishra <ashish.emailaddress@gmail.com>
-Subject: Re: Meta-yocto-bsp fails to boot with META-TI [ Yocto-2.6.1]
+From: fernando gonzalez <fgd7806@gmail.com>
+Date: Tue, 7 May 2019 11:42:25 -0600
+Message-ID: <CACe-08Syz7SS-B6DZ7dF6zKNzJM_9x0QSKJo1TXoYQf2w5quHQ@mail.gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: Compile dts into dtbo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,54 +68,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2019 17:14:25 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 May 2019 17:42:38 -0000
+Content-Type: multipart/alternative; boundary="000000000000190ff805884fbefd"
 
-On Tue, May 07, 2019 at 11:51:41AM -0500, Robert Nelson wrote:
-> On Sun, May 5, 2019 at 9:43 AM AshishKumar Mishra
-> <ashish.emailaddress@gmail.com> wrote:
-> >
-> > Hi All ,
-> > I am starting to learn Yocto & following the manual from the Yocto website
-> >
-> > I have added meta-ti to yocto and create the images
-> >
-> > Can team please provide some pointer to resolve the below error
-> > or let me know if i am doing any thing wong.
-> >
-> > When flashed the images on SD card , the uboot is struck with below mentioned error
-> >
-> >
-> > U-Boot#
-> > U-Boot#
-> > U-Boot#
-> > U-Boot SPL 2014.04-00014-g47880f5 (Apr 22 2014 - 13:23:54)
-> > reading args
-> > spl_load_image_fat_os: error reading image args, err - -1
-> > reading u-boot.img
-> > reading u-boot.img
-> >
-> >
-> > U-Boot 2014.04-00014-g47880f5 (Apr 22 2014 - 13:23:54)
-> 
-> Clear out your eMMC, you have a really old build of u-boot installed
-> to eMMC that is blocking your new image..
+--000000000000190ff805884fbefd
+Content-Type: text/plain; charset="UTF-8"
 
-Yes, I even had that mentioned in the corresponding README:
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-yocto/tree/meta-yocto-bsp/README.hardware#n134
+I'm using branch "rocko" to build an image for am335x-evm machine. I need
+to generate a dtbo from a custom dts using the same dtc used by Yocto
+(1.4.4 in my case). I was wondering if there is a way to do this from a
+custom recipe, so it is performed during "bitbake core-image-base", say
+"do_compile(){dtc -O dtb -o <output.dtbo> -b 0 -@ <input.dts>}".
+For now I just need to compile the file and put the dtbo in lib/firmware
+folder.
 
-Denys
+--000000000000190ff805884fbefd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div>I&#39;m using branch &quot;rocko&quot; to build an im=
+age for am335x-evm machine. I need to generate a dtbo from a custom dts usi=
+ng the same dtc used by Yocto (1.4.4 in my case). I was wondering if there =
+is a way to do this from a custom recipe, so it is performed during &quot;b=
+itbake core-image-base&quot;, say &quot;do_compile(){dtc -O dtb -o &lt;outp=
+ut.dtbo&gt; -b 0 -@ &lt;input.dts&gt;}&quot;.</div><div>For now I just need=
+ to compile the file and put the dtbo in lib/firmware folder.=C2=A0</div></=
+div>
 
-> Regards,
-> 
-> -- 
-> Robert Nelson
-> https://rcn-ee.com/
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
+--000000000000190ff805884fbefd--
