@@ -1,60 +1,57 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B3DD9E00D4C; Wed,  8 May 2019 08:38:09 -0700 (PDT)
+	id 911C8E00A84; Wed,  8 May 2019 09:09:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	https://www.dnswl.org/, *      medium trust
 	*      [198.47.23.249 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3488DE00D3D
-	for <meta-ti@yoctoproject.org>; Wed,  8 May 2019 08:38:08 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x48Fc8Yu118792
-	for <meta-ti@yoctoproject.org>; Wed, 8 May 2019 10:38:08 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9047E00942
+	for <meta-ti@yoctoproject.org>; Wed,  8 May 2019 09:09:19 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x48G9Jir125918
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2019 11:09:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1557329888;
-	bh=FR7+MwwuzbkCe2USb1+hkn/wF8UQrhYOV2GKlLmCQ9U=;
-	h=From:To:Subject:Date;
-	b=vNRZPmpDgATnGqvq1UM0vf2FdbUWm21VjEAt52GkRSUZXiMMhn0QsL8Ph/hpMR4pZ
-	P2cTSbnErQE0LMrBPw4G2oty1pdzqpHDb5GKuye5432hSNRLY504LM0DeDd0vf7aAc
-	ERenzl/OW6jzCy2i7o5a2gutVZ5KkQA0hlXS89SQ=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x48Fc84h011753
+	s=ti-com-17Q1; t=1557331759;
+	bh=0Y9t9Uss8F7n1xz0vBJAZnpgTD+NKXyHCnw4BNHYKqo=;
+	h=From:To:CC:Subject:Date;
+	b=RhMbhlGldMxMDnrLHI+t5LxtS8lJu+BwmZZK8YmRKDLsXcl2hAY3BgbIKuD4YpW3j
+	zR11s9/Z/ehuAV9p4iDPwaXqLfNoCwg2jojErwemcwraYYtpJBJRWnReqx3Uh9n8Oi
+	Y0ZK91fLdNlV+naw8NJIa1vlSBA9zJ3a5+gYdIJs=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x48G9JJQ054481
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 8 May 2019 10:38:08 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2019 11:09:19 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 8 May 2019 10:38:08 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
-	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 8 May 2019 11:09:18 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 8 May 2019 10:38:08 -0500
-Received: from UDA0850410.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x48Fc5Tc095792
-	for <meta-ti@yoctoproject.org>; Wed, 8 May 2019 10:38:07 -0500
-From: Eric Ruei <e-ruei1@ti.com>
+	Frontend Transport; Wed, 8 May 2019 11:09:18 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x48G9I0R012913;
+	Wed, 8 May 2019 11:09:18 -0500
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 8 May 2019 11:37:58 -0400
-Message-ID: <20190508153758.10921-1-e-ruei1@ti.com>
-X-Mailer: git-send-email 2.17.1
+Date: Wed, 8 May 2019 11:09:24 -0500
+Message-ID: <20190508160925.28647-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.21.0.5.gaeb582a983
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] ti-sgx-ddk-km: bump SRCREV to pick up toolchain enhancement
+Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2019.01-rc3 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,39 +64,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2019 15:38:09 -0000
+X-List-Received-Date: Wed, 08 May 2019 16:09:20 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-- support general toolchain
-
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb | 4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-index 1b012ce5..2b1e1ee4 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-@@ -7,7 +7,7 @@ inherit module
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
+index 8d5007e1..7472e3c0 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
  
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
+-PR = "r8"
++PR = "r9"
  
--MACHINE_KERNEL_PR_append = "p"
-+MACHINE_KERNEL_PR_append = "q"
- PR = "${MACHINE_KERNEL_PR}"
+ BRANCH = "ti-u-boot-2019.01"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -26,7 +26,7 @@ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch
- 
- S = "${WORKDIR}/git"
- 
--SRCREV = "16961a3f4524b653fba99d949d6972c77c7d2701"
-+SRCREV = "dbdbd9309a58ee723fc827ef5fd45c28347cf61f"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
+-SRCREV = "41677ab7aab8be58115433054d0d57b3acdd1009"
++SRCREV = "6528965a7e8a1f376f505e4ce7cbe0e1dc05ff83"
 -- 
-2.17.1
+2.21.0.5.gaeb582a983
 
 
