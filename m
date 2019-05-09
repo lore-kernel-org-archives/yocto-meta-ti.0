@@ -1,68 +1,60 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2581BE00D73; Thu,  9 May 2019 11:25:35 -0700 (PDT)
+	id C7931E00D73; Thu,  9 May 2019 14:12:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	https://www.dnswl.org/, no *      trust
-	*      [209.85.215.195 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (raj.khem[at]gmail.com)
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1623E00D6B
-	for <meta-ti@yoctoproject.org>; Thu,  9 May 2019 11:25:34 -0700 (PDT)
-Received: by mail-pg1-f195.google.com with SMTP id j26so1628127pgl.5
-	for <meta-ti@yoctoproject.org>; Thu, 09 May 2019 11:25:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=fmeqgoniR8ImfItHnsyHe7QEawNnS92EzLVFQ0ch92Y=;
-	b=m9unO/YPagxBz5uG6oB/U0Ogr8OcoEzLvNmo8b656jPcoRh7T45lftW/J35CS63AT0
-	bQXhAznChHVZCQHMcSWm6R5ffCBnyiAizvr0Ay6Z3iYBMGpw5FHBWMs8XQZWbJssMV6W
-	MxsKVF05zu4UcEMLjfnOjoAMecvpOgG9reIllB9L/fLZnNBQnDwXIUOgmKGA2w2MAn2s
-	WEeD1KLefq6F4LzWXcL3dfAuS7U9jymgnFabgyykXY8HRuUzLa8zPvRppCt/4clJOUdk
-	RwBXp6HZByIDIQrDlz5av7XQLXjPp+pmyAmuthLyEWkiwLve+CtrxtnYdv5aenQ65I9a
-	AxOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=fmeqgoniR8ImfItHnsyHe7QEawNnS92EzLVFQ0ch92Y=;
-	b=V9JVuaKP9uFwERRMZI57F1cPiA1dJcoPEcUXwLrk4DNYqHm+qO8BcUh0MejzY9FkuJ
-	mQIVD3KvgDRLoUbrN3YybeYrJbSZKdAlZ35xZqXxTViDxBh+tW7OKil6wjx6Q9RPgI+z
-	TxXRSMgaYfYXANnXgK+XUFxuV1XKTwDaVLOMlgTFaQxs20wSuTPEecbsctdSniTOdESy
-	GRk0r4CrAqobjWxBlHtzpjifE3TrG870+khmejOXRRo1ro2No5++aGk2CJ88dLh6Iglu
-	ptl9YpmPqgIelg10krlpKkedGJcU+ZFg9FTSHPakhR9Wi1NH5j7va3Lmbm+yawazumoN
-	jq1g==
-X-Gm-Message-State: APjAAAVQE/ElRBMLNhKaJs7PgIqw4yO941fw+pnNk6GHghv9nWJ7D5AB
-	NX7ujf5Xbp8XdemDhU43RNP2wiz5mIU=
-X-Google-Smtp-Source: APXvYqwG2QLbBRNDiJoxP0p04O9aMN2DAdnSdxLhQ4LRRP154hW2NubQ/rQx8/MfEthIvoD6B/0eDQ==
-X-Received: by 2002:a62:5ec4:: with SMTP id s187mr7416933pfb.185.1557426333643;
-	Thu, 09 May 2019 11:25:33 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::592a])
-	by smtp.gmail.com with ESMTPSA id
-	g10sm7057767pfg.153.2019.05.09.11.25.32
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 May 2019 11:25:32 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Thu,  9 May 2019 11:25:22 -0700
-Message-Id: <20190509182522.29756-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB34EE00D6B
+	for <meta-ti@yoctoproject.org>; Thu,  9 May 2019 14:12:31 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x49LCUWf048184;
+	Thu, 9 May 2019 16:12:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1557436350;
+	bh=ZFWbuFr89MVCITshSBHF46S3w6QLwga6WJe2+p7xOUo=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=pMuEHxAwqiF5cdQwGXCSMbP79ZSSiYa+OxFyjxZ4ia2s7304HIV6T1DjnUuG4QkQD
+	7wn2JmiNa3g7ZVGABNxntnNKfZm0qKF/CDc33BE0JWSKBnJkmsXlPrejACu25uHfVW
+	7s0LjoQNRWGraZ1BaJVy5XpIoMklqND/KEdF3aLk=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x49LCUFZ105275
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 9 May 2019 16:12:30 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Thu, 9 May 2019 16:12:30 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Thu, 9 May 2019 16:12:30 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x49LCTXS055909;
+	Thu, 9 May 2019 16:12:29 -0500
+Date: Thu, 9 May 2019 17:12:29 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Andreas Hansson <pahansson73@gmail.com>
+Message-ID: <20190509211229.GF5359@beryl>
+References: <CABtUruFr4cKiujy=d+y-v-0zqXyzDeKX67QObQEzNU33VSW8yg@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH] beaglebone-capes: Update checksums for LICENSE
+In-Reply-To: <CABtUruFr4cKiujy=d+y-v-0zqXyzDeKX67QObQEzNU33VSW8yg@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [thud] ti-sgx-ddk-km do not build in thud
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,31 +67,84 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 May 2019 18:25:35 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 09 May 2019 21:12:32 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-OE-Core has reworded the license file see
-https://git.openembedded.org/openembedded-core/commit/?id=f8c9c511b5f1b7dbd45b77f345cb6c048ae6763e
+Andreas,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes-ti/beagleboard/beaglebone-capes.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Can you please check if this fixes your issue:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?h=thud&id=5e62bde3d2f2858a39a75d6408433873dcacd6f8
+http://git.ti.com/gitweb/?p=graphics/omap5-sgx-ddk-linux.git;a=commitdiff;h=dbdbd9309a58ee723fc827ef5fd45c28347cf61f
 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
-index e74033a1..30b985b5 100644
---- a/recipes-ti/beagleboard/beaglebone-capes.bb
-+++ b/recipes-ti/beagleboard/beaglebone-capes.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Userspace setup for beaglebone capes"
- 
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=b97a012949927931feb7793eee5ed924 "
- 
- PR = "r4"
- 
 -- 
-2.21.0
+Denys
+
+
+On Mon, Apr 15, 2019 at 11:25:44AM +0200, Andreas Hansson wrote:
+> Hi
+> 
+> when compiling the recipe ti-sgx-ddk-km with using the thud branch in
+> meta-ti(and poky) I get this error:
+> 
+>  ../config/compiler.mk:176:
+> ******************************************************
+> | ../config/compiler.mk:176: Compiler target 'arm-poky-linux-gnueabi' not
+> recognised
+> | ../config/compiler.mk:176: (missing ../config/compilers/
+> arm-poky-linux-gnueabi.mk file)
+> | ../config/compiler.mk:176:
+> ******************************************************
+> | ../config/compiler.mk:176: *** Compiler 'arm-poky-linux-gnueabi' not
+> recognised.  Stop.
+> 
+> If I examine the source of ti-sgx-ddk-km I can see that there are a number
+> of makefiles in the .../config/compilers/ directory, apparently one for
+> each compiler name, but none for arm-poky-linux-gnueabi.
+> 
+> This is the content
+> 
+> .../eurasia_km/eurasiacon/build/linux2/config/compilers# ls -la
+> total 28
+> drwxr-xr-x 2 1000 1000 4096 Apr 15 08:33 .
+> drwxr-xr-x 3 1000 1000 4096 Apr 15 08:33 ..
+> -rw-r--r-- 1 1000 1000  316 Apr 15 08:33 aarch64-linux-gnu.mk
+> -rw-r--r-- 1 1000 1000  144 Apr 15 08:33 arm-linux-gnueabihf.mk
+> -rw-r--r-- 1 1000 1000   59 Apr 15 08:33 i386-linux-gnu.mk
+> -rw-r--r-- 1 1000 1000   71 Apr 15 08:33 mips-mti-linux-gnu.mk
+> -rw-r--r-- 1 1000 1000 1237 Apr 15 08:33 x86_64-linux-gnu.mk
+> 
+> 
+> If I copy the file arm-linux-gnueabihf.mk to arm-poky-linux-gnueabi.mk
+> everything compiles fine.
+> 
+> I have tried this in meta-ti
+> version: 51ea3a467a688b51f2e033657c77aa55f4452ed3
+> 
+> Build Configuration:
+> BB_VERSION           = "1.40.0"
+> BUILD_SYS            = "x86_64-linux"
+> NATIVELSBSTRING      = "universal"
+> TARGET_SYS           = "arm-poky-linux-gnueabi"
+> MACHINE              = "beaglebone"
+> DISTRO               = "poky"
+> DISTRO_VERSION       = "2.6.2"
+> TUNE_FEATURES        = "arm armv7a vfp thumb neon callconvention-hard"
+> TARGET_FPU           = "hard"
+> meta-ti              = "HEAD:51ea3a467a688b51f2e033657c77aa55f4452ed3"
+> meta
+> meta-poky            = "HEAD:a192fff25b10fc29543edaef8555f3b15ef8234f"
+> ...
+> 
+> 
+> 
+> BR
+> Andreas Hansson
+
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
