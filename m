@@ -1,40 +1,68 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CA7C5E00D2A; Wed,  8 May 2019 21:15:01 -0700 (PDT)
+	id 2581BE00D73; Thu,  9 May 2019 11:25:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	https://www.dnswl.org/, no *      trust
+	*      [209.85.215.195 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 883BDE00CC9
-	for <meta-ti@yoctoproject.org>; Wed,  8 May 2019 21:14:59 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id BE8C940BB2;
-	Thu,  9 May 2019 04:14:58 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id OGJhVoumUhmb; Thu,  9 May 2019 04:14:58 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9F4BB40024;
-	Thu,  9 May 2019 04:14:57 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 8A1F116EAEF;
-	Thu,  9 May 2019 00:14:56 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1623E00D6B
+	for <meta-ti@yoctoproject.org>; Thu,  9 May 2019 11:25:34 -0700 (PDT)
+Received: by mail-pg1-f195.google.com with SMTP id j26so1628127pgl.5
+	for <meta-ti@yoctoproject.org>; Thu, 09 May 2019 11:25:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fmeqgoniR8ImfItHnsyHe7QEawNnS92EzLVFQ0ch92Y=;
+	b=m9unO/YPagxBz5uG6oB/U0Ogr8OcoEzLvNmo8b656jPcoRh7T45lftW/J35CS63AT0
+	bQXhAznChHVZCQHMcSWm6R5ffCBnyiAizvr0Ay6Z3iYBMGpw5FHBWMs8XQZWbJssMV6W
+	MxsKVF05zu4UcEMLjfnOjoAMecvpOgG9reIllB9L/fLZnNBQnDwXIUOgmKGA2w2MAn2s
+	WEeD1KLefq6F4LzWXcL3dfAuS7U9jymgnFabgyykXY8HRuUzLa8zPvRppCt/4clJOUdk
+	RwBXp6HZByIDIQrDlz5av7XQLXjPp+pmyAmuthLyEWkiwLve+CtrxtnYdv5aenQ65I9a
+	AxOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fmeqgoniR8ImfItHnsyHe7QEawNnS92EzLVFQ0ch92Y=;
+	b=V9JVuaKP9uFwERRMZI57F1cPiA1dJcoPEcUXwLrk4DNYqHm+qO8BcUh0MejzY9FkuJ
+	mQIVD3KvgDRLoUbrN3YybeYrJbSZKdAlZ35xZqXxTViDxBh+tW7OKil6wjx6Q9RPgI+z
+	TxXRSMgaYfYXANnXgK+XUFxuV1XKTwDaVLOMlgTFaQxs20wSuTPEecbsctdSniTOdESy
+	GRk0r4CrAqobjWxBlHtzpjifE3TrG870+khmejOXRRo1ro2No5++aGk2CJ88dLh6Iglu
+	ptl9YpmPqgIelg10krlpKkedGJcU+ZFg9FTSHPakhR9Wi1NH5j7va3Lmbm+yawazumoN
+	jq1g==
+X-Gm-Message-State: APjAAAVQE/ElRBMLNhKaJs7PgIqw4yO941fw+pnNk6GHghv9nWJ7D5AB
+	NX7ujf5Xbp8XdemDhU43RNP2wiz5mIU=
+X-Google-Smtp-Source: APXvYqwG2QLbBRNDiJoxP0p04O9aMN2DAdnSdxLhQ4LRRP154hW2NubQ/rQx8/MfEthIvoD6B/0eDQ==
+X-Received: by 2002:a62:5ec4:: with SMTP id s187mr7416933pfb.185.1557426333643;
+	Thu, 09 May 2019 11:25:33 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::592a])
+	by smtp.gmail.com with ESMTPSA id
+	g10sm7057767pfg.153.2019.05.09.11.25.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 May 2019 11:25:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Thu,  9 May 2019 00:14:54 -0400
-Message-Id: <1557375295-41687-2-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1557375295-41687-1-git-send-email-denys@ti.com>
-References: <1557375295-41687-1-git-send-email-denys@ti.com>
-Subject: [thud/master][PATCH 2/3] recipes: convert existing uses of am65xx-evm to am65xx SOC family
+Date: Thu,  9 May 2019 11:25:22 -0700
+Message-Id: <20190509182522.29756-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [PATCH] beaglebone-capes: Update checksums for LICENSE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,159 +75,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 May 2019 04:15:01 -0000
+X-List-Received-Date: Thu, 09 May 2019 18:25:35 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+OE-Core has reworded the license file see
+https://git.openembedded.org/openembedded-core/commit/?id=f8c9c511b5f1b7dbd45b77f345cb6c048ae6763e
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-bsp/pru/pru-icss_git.bb             | 6 +++---
- recipes-bsp/sciclient/sciclient-rtos_git.bb | 6 +++---
- recipes-ti/ipc/ti-ipc-common.inc            | 2 +-
- recipes-ti/ipc/ti-ipc-examples_git.bb       | 2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc              | 6 +++---
- recipes-ti/ipc/ti-ipc-rtos_git.bb           | 8 ++++----
- 6 files changed, 15 insertions(+), 15 deletions(-)
+ recipes-ti/beagleboard/beaglebone-capes.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-index 94522f6..a36bce0 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -40,7 +40,7 @@ PLATFORM_ti33x = "am335x"
- PLATFORM_ti43x = "am437x"
- PLATFORM_omap-a15 = "am572x"
- PLATFORM_k2g = "k2g"
--PLATFORM_am65xx-evm = "am65x"
-+PLATFORM_am65xx = "am65x"
+diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
+index e74033a1..30b985b5 100644
+--- a/recipes-ti/beagleboard/beaglebone-capes.bb
++++ b/recipes-ti/beagleboard/beaglebone-capes.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Userspace setup for beaglebone capes"
  
- do_compile() {
-     for dir in ${SUBDIRS}
-@@ -102,7 +102,7 @@ do_install_append_k2g() {
-     done
- }
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
++LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=b97a012949927931feb7793eee5ed924 "
  
--do_install_append_am65xx-evm() {
-+do_install_append_am65xx() {
-     for i in 0 1 
-     do
-         install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU${i}/PRU_Halt_${i}.out \
-@@ -131,7 +131,7 @@ PRU_ICSS_ALTERNATIVES_ti33x    = "am335x-pru0-fw am335x-pru1-fw"
- PRU_ICSS_ALTERNATIVES_ti43x    = "am437x-pru0_0-fw am437x-pru0_1-fw am437x-pru1_0-fw am437x-pru1_1-fw"
- PRU_ICSS_ALTERNATIVES_omap-a15 = "am57xx-pru1_0-fw am57xx-pru1_1-fw am57xx-pru2_0-fw am57xx-pru2_1-fw"
- PRU_ICSS_ALTERNATIVES_k2g      = "k2g-pru0_0-fw k2g-pru0_1-fw k2g-pru1_0-fw k2g-pru1_1-fw"
--PRU_ICSS_ALTERNATIVES_am65xx-evm = "am65x-pru0_0-fw am65x-pru0_1-fw am65x-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw am65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1-fw"
-+PRU_ICSS_ALTERNATIVES_am65xx   = "am65x-pru0_0-fw am65x-pru0_1-fw am65x-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw am65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1-fw"
+ PR = "r4"
  
- # Set up link names for the firmwares
- ALTERNATIVE_LINK_NAME[am335x-pru0-fw] = "/lib/firmware/am335x-pru0-fw"
-diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
-index 2de94d0..e145599 100644
---- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
-+++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
-@@ -36,9 +36,9 @@ export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/pac
- #export PDK_SCICLIENT_ROOT_PATH ="${WORKDIR}/build"
- #export DEST_ROOT="${S}"
- 
--LIMSOCS_am65xx-evm = "am65xx"
--LIMBOARDS_am65xx-evm = "am65xx_evm"
--BOARD_PACKAGE_am65xx-evm = "am65xx_evm"
-+LIMSOCS_am65xx = "am65xx"
-+LIMBOARDS_am65xx = "am65xx_evm"
-+BOARD_PACKAGE_am65xx = "am65xx_evm"
- 
- # HTML doc link params
- PDK_COMP_LINK_TEXT = "SCICLIENT"
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 8401ea6..036e46d 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -15,7 +15,7 @@ PLATFORM_k2g = "66AK2G"
- PLATFORM_omapl138 = "OMAPL138"
- PLATFORM_c667x-evm = "C6678"
- PLATFORM_c665x-evm = "C6678"
--PLATFORM_am65xx-evm = "AM65XX"
-+PLATFORM_am65xx = "AM65XX"
- 
- ALT_PLATFORM_k2hk = "TCI6636"
- ALT_PLATFORM_am57xx-evm = "AM572X AM571X"
-diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-ti/ipc/ti-ipc-examples_git.bb
-index d8733ae..43e45e6 100644
---- a/recipes-ti/ipc/ti-ipc-examples_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
-@@ -3,7 +3,7 @@ require ti-ipc-examples.inc
- 
- DEPENDS = "ti-ipc ti-xdctools-native ti-sysbios ti-ipc-rtos zip-native"
- 
--DEPENDS_append_am65xx-evm = " sciclient-rtos"
-+DEPENDS_append_am65xx = " sciclient-rtos"
- 
- do_compile_append() {
- 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 9b7bccf..dcd6309 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -53,7 +53,7 @@ DEPENDS_append_omapl138 = " ti-cgt6x-native \
- DEPENDS_append_c66x = " ti-cgt6x-native \
- "
- 
--DEPENDS_append_am65xx-evm = " ti-cgt-arm-native \
-+DEPENDS_append_am65xx = " ti-cgt-arm-native \
-                               gcc-linaro-baremetal-aarch64-native"
- 
- IPC_TARGETS = ""
-@@ -79,7 +79,7 @@ IPC_TARGETS_c66x = " \
-     ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
- "
- 
--IPC_TARGETS_am65xx-evm = "\
-+IPC_TARGETS_am65xx = "\
-     gnu.targets.arm.A53F="${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}" \
-     ti.targets.arm.elf.R5F="${M4_TOOLCHAIN_INSTALL_DIR}" \
- "
-@@ -92,5 +92,5 @@ EXTRA_OEMAKE = "\
-     JOBS="--jobs=${BB_NUMBER_THREADS}" \
-     JAVA_TOOL_OPTIONS=-Xss2560k \
- "
--EXTRA_OEMAKE_append_am65xx-evm = " PDK_INSTALL_DIR=${PDK_INSTALL_DIR}"
-+EXTRA_OEMAKE_append_am65xx = " PDK_INSTALL_DIR=${PDK_INSTALL_DIR}"
- 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 7f1cae0..4c0e71e 100644
---- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -3,7 +3,7 @@ require ti-ipc-common.inc
- require ti-ipc-rtos.inc
- 
- DEPENDS = "ti-xdctools-native ti-sysbios doxygen-native zip-native"
--DEPENDS_append_am65xx-evm = " sciclient-rtos"
-+DEPENDS_append_am65xx = " sciclient-rtos"
- 
- PACKAGES =+ "${PN}-fw"
- FILES_${PN}-fw = "${base_libdir}/firmware/*"
-@@ -62,7 +62,7 @@ do_compile() {
-   fi
- }
- 
--do_install_prepend_am65xx-evm () {
-+do_install_prepend_am65xx () {
-   # Trim directory name
-   mv ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_false_R5F0 ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_R5F0
-   mv ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_false_R5F1 ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_R5F1
-@@ -130,12 +130,12 @@ pkg_postrm_${PN}-fw_omapl138 () {
-   update-alternatives --remove rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674
- }
- 
--pkg_postinst_${PN}-fw_am65xx-evm () {
-+pkg_postinst_${PN}-fw_am65xx () {
-   update-alternatives --install /lib/firmware/am65x-mcu-r5f0_0-fw am65x-mcu-r5f0_0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
-   update-alternatives --install /lib/firmware/am65x-mcu-r5f0_1-fw am65x-mcu-r5f0_1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
- }
- 
--pkg_postrm_${PN}-fw_am65xx-evm () {
-+pkg_postrm_${PN}-fw_am65xx () {
-   update-alternatives --remove am65x-mcu-r5f0_0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f
-   update-alternatives --remove am65x-mcu-r5f0_1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f
- }
 -- 
-2.7.4
+2.21.0
 
 
