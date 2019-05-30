@@ -1,60 +1,58 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5848BE009FA; Thu, 30 May 2019 07:34:03 -0700 (PDT)
+	id 22AF8E00C14; Thu, 30 May 2019 07:44:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	https://www.dnswl.org/, *      medium trust
 	*      [198.47.19.141 listed in list.dnswl.org]
-	*  1.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C1AFE009FA
-	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 07:34:01 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90B8EE00BAA
+	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 07:44:11 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x4UEY1ni006238
-	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 09:34:01 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x4UEiBDC008884
+	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 09:44:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1559226841;
-	bh=vXDYt/dvtKGanX8ioeS6AcaFiQoocRPsIDL11fgcGYQ=;
+	s=ti-com-17Q1; t=1559227451;
+	bh=VAliKLU3en9DSi9f1N/wKB4J6mpi91aDePGsOkzm6+U=;
 	h=From:To:Subject:Date;
-	b=L7rhHFrfdw2WPuQRPTAr6Lkv5b7wccf8/Abgku9cf6bVK92vzUql2Ol+UkpaebnEq
-	ATN1d6VrFjDF2igrgqG+xcUQTtIlYFjUAicXoU9pRO47YDqfEZfRINdSgVhyZLl3N8
-	p0fiW/NWRnjx94AHof5wNAZ9uGGJvAozOQ/cPGdc=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x4UEY186093344
+	b=Rt30+osGNLLZFCD24YlImxLcbaIOSkgjKD0fUixTyFN3OCKRt7Mk9NMQcucNLItA4
+	IKNa0RCYjVL3Ihrh132GSl3GtDZY3DsULgLRAKIORnYTse+ktaXG0I2pTEb3dKw5e1
+	C2cm7yxMdXRCBBixfPiyWP65xgMqk7fJUfwlqZoo=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x4UEiBah105295
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 09:34:01 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 09:44:11 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 30 May 2019 09:34:01 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 30 May 2019 09:44:10 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
+	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 30 May 2019 09:34:01 -0500
-Received: from UDA0850410.gt.design.ti.com (ileax41-snat.itg.ti.com
+	Frontend Transport; Thu, 30 May 2019 09:44:10 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x4UEY1ij082817
-	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 09:34:01 -0500
-From: Eric Ruei <e-ruei1@ti.com>
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x4UEiA3B024645
+	for <meta-ti@yoctoproject.org>; Thu, 30 May 2019 09:44:10 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 30 May 2019 10:33:47 -0400
-Message-ID: <20190530143347.35175-1-e-ruei1@ti.com>
-X-Mailer: git-send-email 2.17.1
+Date: Thu, 30 May 2019 10:44:07 -0400
+Message-ID: <1559227447-11708-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] ti-sgx-ddk-um: bump SRCREV to pick up the fix for AM5 performance degradation
+Subject: [thud/master][PATCH] serdes-diag-rtos: SRCREV update to 1.0.0.12 and adding support to k3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,39 +65,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 14:34:03 -0000
+X-List-Received-Date: Thu, 30 May 2019 14:44:12 -0000
 Content-Type: text/plain
 
--um: opengles2: disable GLES2MOVEBUFFERMEMTODEVICE
-
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-index 7b4f2ec2..02c9b750 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -10,7 +10,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- BRANCH = "ti-img-sgx/thud/${PV}"
+diff --git a/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb b/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
+index 6b6792e..ccb2b47 100644
+--- a/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
++++ b/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
+@@ -5,7 +5,7 @@ inherit ti-pdk
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://serdes_diag.h;beginline=1;endline=42;;md5=68e7ce6fdc0e9328fa7d0ec41c54420c"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "b0db45b7f74312afbff3e30c334e899e9c9d1338"
-+SRCREV = "9e63d5ac0b40d6a70463173c597122b6645c8a95"
+-COMPATIBLE_MACHINE = "keystone|c66x"
++COMPATIBLE_MACHINE = "keystone|c66x|k3"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
-@@ -22,7 +22,7 @@ INITSCRIPT_PARAMS = "defaults 8"
+ SERDES_DIAG_GIT_URI = "git://git.ti.com/keystone-rtos/serdes_diag.git"
+@@ -13,18 +13,22 @@ SERDES_DIAG_GIT_PROTOCOL = "git"
+ SERDES_DIAG_GIT_BRANCH = "master"
+ SERDES_DIAG_GIT_DESTSUFFIX = "git/ti/diag/serdes_diag"
  
- inherit update-rc.d
+-# Below commit ID corresponds to "DEV.DIAG_SERDES_SB.01.00.00.11A"
+-SERDES_DIAG_SRCREV = "74db059c48ca5a903dab9cfbf665fd8693de8296"
++# Below commit ID corresponds to "DEV.DIAG_SERDES_SB.01.00.00.12"
++SERDES_DIAG_SRCREV = "d6909d21ae9fc6b751fffa1aac761fdb088544d9"
  
--PR = "r32"
-+PR = "r33"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
+ BRANCH = "${SERDES_DIAG_GIT_BRANCH}"
+ SRC_URI = "${SERDES_DIAG_GIT_URI};destsuffix=${SERDES_DIAG_GIT_DESTSUFFIX};protocol=${SERDES_DIAG_GIT_PROTOCOL};branch=${BRANCH}"
  
- DEPENDS += "libdrm udev libgbm wayland libffi"
+ SRCREV = "${SERDES_DIAG_SRCREV}"
+-PV = "01.00.00.11A"
++PV = "01.00.00.12"
+ PR = "r0"
+ 
+ S = "${WORKDIR}/${SERDES_DIAG_GIT_DESTSUFFIX}"
+ 
++
++# Build with make instead of XDC for k3
++TI_PDK_XDCMAKE_k3 = "0"
++
+ # HTML doc link params
+ PDK_COMP_LINK_TEXT = "SERDES Diagnostics"
+ 
 -- 
-2.17.1
+1.9.1
 
 
