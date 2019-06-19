@@ -1,60 +1,59 @@
-Return-Path: <denys@ti.com>
+Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A7E87E00D6B; Tue, 18 Jun 2019 15:11:42 -0700 (PDT)
+	id 6B895E00DA8; Wed, 19 Jun 2019 04:56:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
+	URI_HEX autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 337F5E00D00
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jun 2019 15:11:40 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5IMBder009054
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jun 2019 17:11:39 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6462E00DA4
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2019 04:56:07 -0700 (PDT)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5JBu7NW036555
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2019 06:56:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1560895899;
-	bh=WC5QTERuOaabNp/56lpSA+onK6+kNbcZZi7IJp3EEig=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=nI71N0Y1a0UwyjWTpQOMJVkvZD76YMBkxXlmKPXUxqLQeDTOWzwStHBMGARyv4NRK
-	B2AGMd/YsZuOCnHPx4BWbxTkuka7RBiS0cMvDjSPx4GLy+B56zsH/QBaTI1ELmVLUo
-	TzJCagoWFVVStjbJAJ7d/K/Cp3xOGPJZHnCnRpCI=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5IMBdnc017456
+	s=ti-com-17Q1; t=1560945367;
+	bh=P/vI29TSzpefq/vxu+XKUUHhFx9Kpcsk12eZo5XdmX0=;
+	h=From:To:CC:Subject:Date;
+	b=rYIJz64EmOt7ybn1+SvSmLJjBh2FtUV6gQ1GlNgyUf2mc4xpxGJ4bKPuVMO0uqi3h
+	9BLIAtqgWQu+w814/hlbeToQ6oorMvgYOwmouTRvFxmke4bInb2nMBUEQ7lbsUc4H7
+	vMRxKVaiC0Ef4T+Wrv8BbxdBDyE4csh8hYkeAN9s=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5JBu7b0018524
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 18 Jun 2019 17:11:39 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2019 06:56:07 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 18 Jun 2019 17:11:39 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 19 Jun 2019 06:56:06 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE101.ent.ti.com
+	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 18 Jun 2019 17:11:39 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5IMBdT4127489;
-	Tue, 18 Jun 2019 17:11:39 -0500
-Date: Tue, 18 Jun 2019 18:11:39 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <20190618221138.GC32001@beryl>
-References: <1560884418-23216-1-git-send-email-j-stiffler@ti.com>
+	Frontend Transport; Wed, 19 Jun 2019 06:56:06 -0500
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5JBu5ws078731; 
+	Wed, 19 Jun 2019 06:56:06 -0500
+From: Anand Balagopalakrishnan <anandb@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 19 Jun 2019 17:26:01 +0530
+Message-ID: <1560945362-8895-1-git-send-email-anandb@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1560884418-23216-1-git-send-email-j-stiffler@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org, rogerq@ti.com
-Subject: Re: [master/thud][PATCH 0/5] Build am65xx prueth-fw from source
+Subject: [[thud] PATCH 1/2] ti-img-rogue-driver: add PowerVR Rogue kernel module for J721E
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,47 +66,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 22:11:42 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Jun 2019 11:56:08 -0000
+Content-Type: text/plain
 
-Jake,
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+---
+ .../ti-img-rogue-driver_1.10.5187610.bb            | 32 ++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
 
-You called the new recipe prueth-fw-am65x_git.bb (with 1 "x") but in 
-linux-ti-staging you RDEPENDS on "prueth-fw-am65xx" (with 2 "x").
-Since my next builds broke, I'll rebase and drop these patches for now. 
-Please test and re-submit the fixes. Thanks.
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
+new file mode 100644
+index 0000000..a79abfd
+--- /dev/null
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
++HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
++LICENSE = "MIT | GPLv2"
++LIC_FILES_CHKSUM = "file://README;beginline=15;endline=20;md5=0403c7dea01a2b8232261e805325fac2"
++
++inherit module
++
++MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++COMPATIBLE_MACHINE = "j7-evm"
++
++DEPENDS = "virtual/kernel"
++
++BRANCH = "linux/thud/k4.19/${PV}"
++
++SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH}"
++S = "${WORKDIR}/git"
++
++SRCREV = "4dd7ff1382e7dfe6aaec8cc118b976facbc4b138"
++
++PVR_SOC = "j721e_linux"
++PVR_BVNC = "22.104.208.318"
++PVR_BUILD = "release"
++PVR_WS = "nulldrmws"
++
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" RGX_BVNC=${PVR_BVNC} BUILD=${PVR_BUILD} PVR_BUILD_DIR=${PVR_SOC} WINDOW_SYSTEM=${PVR_WS}'
++
++do_install() {
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/binary_${PVR_SOC}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
++}
+-- 
+1.9.1
 
-Denys
-
-
-On Tue, Jun 18, 2019 at 03:00:13PM -0400, Jacob Stiffler wrote:
-> Build prueth-fw for am65xx from sources and remove existing prebuilt
-> firmware recipe.
-> 
-> Jacob Stiffler (5):
->   emac-lld-rtos: update to version 01.00.03.15
->   emac-lld: separate SRC_URI in inc file
->   prueth-fw-am65xx: build am65xx prueth-fw from source
->   linux-ti-staging: switch RDEPENDS to prueth-fw-am65xx
->   prueth-fw-bin: remove prebuilt firmware recipe
-> 
->  recipes-bsp/emac-lld/emac-lld-rtos_git.bb     | 18 +++--------
->  recipes-bsp/emac-lld/emac-lld.inc             | 17 +++++++++++
->  recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb  | 44 +++++++++++++++++++++++++++
->  recipes-bsp/prueth-fw/prueth-fw-bin_git.bb    | 32 -------------------
->  recipes-kernel/linux/linux-ti-staging_4.19.bb |  2 +-
->  5 files changed, 66 insertions(+), 47 deletions(-)
->  create mode 100644 recipes-bsp/emac-lld/emac-lld.inc
->  create mode 100644 recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
->  delete mode 100644 recipes-bsp/prueth-fw/prueth-fw-bin_git.bb
-> 
-> -- 
-> 2.7.4
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
