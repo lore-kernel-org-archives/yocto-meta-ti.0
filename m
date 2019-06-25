@@ -1,60 +1,38 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C63DDE00B31; Mon, 24 Jun 2019 05:56:45 -0700 (PDT)
+	id 52407E00D35; Mon, 24 Jun 2019 19:34:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 002ACE0049C
-	for <meta-ti@yoctoproject.org>; Mon, 24 Jun 2019 05:56:44 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5OCuiRg009786
-	for <meta-ti@yoctoproject.org>; Mon, 24 Jun 2019 07:56:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1561381004;
-	bh=sSukX3xc4vlY206FlPYtmN+wVpHYoZe7p9YvgXmMBaQ=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=NOMTJyqqVQTy9PHDjHzT5pYxlvEvxAxoIAmMMg79lrD3FeodHJj/A38GsWA5iSvtB
-	JejRf7dHAC01LiJu76GSo6PK/OQu2kRppIassD5URHQDJfH0O8mSwQtjl84+eL9ec8
-	3bUgJqaCgwyLmhfL4V/HYxDYNxxOyxUaU0WP3g4g=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5OCuiCQ010626
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 24 Jun 2019 07:56:44 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE105.ent.ti.com
-	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 24 Jun 2019 07:56:44 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 24 Jun 2019 07:56:43 -0500
-Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5OCuhfv050782
-	for <meta-ti@yoctoproject.org>; Mon, 24 Jun 2019 07:56:43 -0500
-To: <meta-ti@yoctoproject.org>
-References: <1561120504-29275-1-git-send-email-j-stiffler@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <c6d82d9a-44ed-b064-62cc-1efa74355f14@ti.com>
-Date: Mon, 24 Jun 2019 08:56:43 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.1
-MIME-Version: 1.0
-In-Reply-To: <1561120504-29275-1-git-send-email-j-stiffler@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: Re: [master/thud/ti2019.01][PATCH] machines: k2*: restore original max_leb_cnt
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22410E00D00
+	for <meta-ti@yoctoproject.org>; Mon, 24 Jun 2019 19:34:57 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5ABDD40BBF;
+	Tue, 25 Jun 2019 02:34:57 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id KIAL1CLBwPQW; Tue, 25 Jun 2019 02:34:57 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 33E2940B7B;
+	Tue, 25 Jun 2019 02:34:56 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 6932916B9E5;
+	Mon, 24 Jun 2019 22:34:55 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Mon, 24 Jun 2019 22:34:54 -0400
+Message-Id: <1561430094-13616-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [thud/master][PATCH] linux-ti-staging: update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,81 +45,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jun 2019 12:56:45 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 25 Jun 2019 02:34:59 -0000
 
-Denys,
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-Can you please back-port this to ti2019.01?
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+index 744c3be..83a2485 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
+ 
+ BRANCH = "ti-rt-linux-4.19.y"
+ 
+-SRCREV = "b54073f9af9cf51aabb75b69d099da7ba53d134c"
++SRCREV = "bec45aa9b46eaf73cfdfbd4a95b3d6c8c3d3dac6"
+ PV = "4.19.50+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+index d8e7678..b0fd06a 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -56,11 +56,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-4.19.y"
+ 
+-SRCREV = "566bdcbaedf38d343bf68ef47682e664c027c365"
++SRCREV = "2d5b605e78e570347031f314242e9f84b83dacbc"
+ PV = "4.19.50+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+-- 
+2.7.4
 
-
-Thank you,
-
-Jake
-
-On 6/21/2019 8:35 AM, Jacob Stiffler wrote:
-> Restore max_leb_cnt so that the UBI/UBIFS fits into the board flash
->
-> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> ---
->   conf/machine/k2e-evm.conf  | 2 +-
->   conf/machine/k2g-evm.conf  | 2 +-
->   conf/machine/k2hk-evm.conf | 2 +-
->   conf/machine/k2l-evm.conf  | 2 +-
->   4 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-> index e9f500f..662f5c8 100644
-> --- a/conf/machine/k2e-evm.conf
-> +++ b/conf/machine/k2e-evm.conf
-> @@ -22,7 +22,7 @@ SYSVINIT_ENABLED_GETTYS = ""
->   # UBI: logical eraseblock size:    126976 bytes
->   # from ubiattach stdout:
->   # UBI device number 0, total 3856 LEBs
-> -MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4000"
-> +MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
->   
->   # do ubiattach /dev/ubi_ctrl -m 4
->   # from dmesg:
-> diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
-> index a8ddc66..7681a75 100644
-> --- a/conf/machine/k2g-evm.conf
-> +++ b/conf/machine/k2g-evm.conf
-> @@ -25,7 +25,7 @@ SYSVINIT_ENABLED_GETTYS = ""
->   # UBI: logical eraseblock size:    253952 bytes
->   # from ubiattach stdout:
->   # UBI device number 0, total 1926 LEBs
-> -MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
-> +MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
->   
->   # do ubiattach /dev/ubi_ctrl -m 4
->   # from dmesg:
-> diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
-> index de79de9..89386f1 100644
-> --- a/conf/machine/k2hk-evm.conf
-> +++ b/conf/machine/k2hk-evm.conf
-> @@ -22,7 +22,7 @@ SYSVINIT_ENABLED_GETTYS = ""
->   # UBI: logical eraseblock size:    126976 bytes
->   # from ubiattach stdout:
->   # UBI device number 0, total 3856 LEBs
-> -MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4000"
-> +MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
->   
->   # do ubiattach /dev/ubi_ctrl -m 4
->   # from dmesg:
-> diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-> index e326ba2..dddc01f 100644
-> --- a/conf/machine/k2l-evm.conf
-> +++ b/conf/machine/k2l-evm.conf
-> @@ -22,7 +22,7 @@ SYSVINIT_ENABLED_GETTYS = ""
->   # UBI: logical eraseblock size:    253952 bytes
->   # from ubiattach stdout:
->   # UBI device number 0, total 1926 LEBs
-> -MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 2000"
-> +MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
->   
->   # do ubiattach /dev/ubi_ctrl -m 4
->   # from dmesg:
 
