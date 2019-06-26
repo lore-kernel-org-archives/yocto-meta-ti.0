@@ -1,59 +1,60 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 74A7CE00D79; Wed, 26 Jun 2019 11:20:19 -0700 (PDT)
+	id B13E1E00D75; Wed, 26 Jun 2019 14:06:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 190ACE00D77
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 11:20:18 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKIFP083537
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 13:20:18 -0500
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33C4EE00931
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 14:06:28 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QL6Rgt077889
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 16:06:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1561573218;
-	bh=ka562j/VRgrIMmVWAA6019PKZLUu1B78vgYsvYjHmiE=;
+	s=ti-com-17Q1; t=1561583187;
+	bh=1DPncQ80EVnBUP1UcpsScBJXk/I+tEXqkM3LqQjiKzc=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=TCSn2HsKStwIzVQqc99/3SJV0KmzQxWfZiN2wimmYmL9R+c9u149Gclij810TCNbq
-	QVTZ3EAL7SNGp91W241TIH179akxtBwM+O+1KzCDlpGDfeFpN/9U1t19MgErxesBQY
-	Bj8UK4Plu7WUZuKi9MIeYTMruJNB8M1VQTGzhcPU=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QIKIPt041053
+	b=n+gi1Wo7GDErPd9hqnEoZSHbtx399mdKgS7D4NTLKkhPEAnlnAjHkgefYBQnBtNH8
+	njO2SGNuXrKqO+zlpGT3fk5klnQZowuq9g1/9gPIi+kqkIXRo1QW9220dypPmmQDbG
+	rfPN4mPFEKRXudECkGa9XbNaWf30ZN+9MXq9qPnY=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QL6R5D042156
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 13:20:18 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 16:06:27 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE111.ent.ti.com
+	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 26 Jun 2019 13:20:18 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 26 Jun 2019 16:06:27 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 26 Jun 2019 13:20:18 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKIA8013861;
-	Wed, 26 Jun 2019 13:20:18 -0500
-From: Dan Murphy <dmurphy@ti.com>
+	Frontend Transport; Wed, 26 Jun 2019 16:06:27 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QL6Rh0018637;
+	Wed, 26 Jun 2019 16:06:27 -0500
+From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 26 Jun 2019 13:19:58 -0500
-Message-ID: <20190626181958.17218-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.21.0.5.gaeb582a983
-In-Reply-To: <20190626181958.17218-1-dmurphy@ti.com>
-References: <20190626181958.17218-1-dmurphy@ti.com>
+Date: Wed, 26 Jun 2019 20:54:03 +0000
+Message-ID: <20190626205404.32521-2-denys@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20190626205404.32521-1-denys@ti.com>
+References: <20190626205404.32521-1-denys@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] linux-ti-staging: update the RT kernel tag for ti2019.02-rc1
+Subject: [thud/master][PATCH 2/3] arm-trusted-firmware: update to ti2019.02-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,41 +67,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jun 2019 18:20:19 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 26 Jun 2019 21:06:28 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.19.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-index 83a24856..b161a695 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
+diff --git a/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.0.bb b/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.0.bb
+index fc24e53f..43312b65 100644
+--- a/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.0.bb
++++ b/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.0.bb
+@@ -22,7 +22,7 @@ PV_append = "+git${SRCPV}"
+ BRANCH = "ti-atf"
+ SRC_URI = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH}"
  
- BRANCH = "ti-rt-linux-4.19.y"
+-SRCREV ?= "b81d5871adaa7a35dc33f7450b9dd19183ef9590"
++SRCREV ?= "48ec9e41a27f9b58975e0c6ff571e43f2015f9fc"
  
--SRCREV = "bec45aa9b46eaf73cfdfbd4a95b3d6c8c3d3dac6"
-+SRCREV = "bc64d0520cc47b47350be414a4258e9f23fa543d"
- PV = "4.19.50+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-index b0fd06a9..d76d4bb3 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-@@ -56,7 +56,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-4.19.y"
- 
--SRCREV = "2d5b605e78e570347031f314242e9f84b83dacbc"
-+SRCREV = "6303bfc3b7ef10a29199737eb916700991385391"
- PV = "4.19.50+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ # Make ATF "aware" of OPTEE, no build dependency
+ PACKAGECONFIG[optee] = "SPD=opteed"
 -- 
-2.21.0.5.gaeb582a983
+2.17.1
 
 
