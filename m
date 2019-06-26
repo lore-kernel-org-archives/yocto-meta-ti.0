@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8224DE00D86; Wed, 26 Jun 2019 09:06:43 -0700 (PDT)
+	id 298E8E00D7E; Wed, 26 Jun 2019 11:20:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,45 +17,41 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1750BE00D85
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 09:06:43 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QG6gWr048900
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 11:06:42 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B84B6E00D75
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 11:20:18 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKIn8083533
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 13:20:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1561565202;
-	bh=jRW5ujh0+KIzvfpTZIZJn4gTg4q14+Lu3Rf+hKmQtw0=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=eFeJJ1CsnveunecRbz11OC4Erkh9SLe9+HjBJvqff7BE2BlxwzAHnlu/iXtsO0h8n
-	WGtjaknLwsrDH7QL7fHwCXjpZHGLVsZNE9dohu9IzNSJNzaVJ7HbGRj1KAraC8y95x
-	RgIMfxKUUt+7zr8s08z2uvJtBBX/RVWf9t8rgnOY=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QG6gck084197
+	s=ti-com-17Q1; t=1561573218;
+	bh=2U/7/bKJ2Xf08M3+Q4lsQEWmmd1e4D6AiG3yzb3va3g=;
+	h=From:To:CC:Subject:Date;
+	b=R9mX4dEsRITa0n+ZEpZOXAyzsG3ez8J7L2Js4Rju3HJOpD3iMQIi2TNwjVpiFDa46
+	qVlEx8fM5xduP9fREx9xNoisX5JVux32cQgQwXyZMLZG+pUxXAoQCjGZ1QKkR3RSGt
+	XgmTLqBVCIP4pE7fF1dmwsGTkgI0er1l6pzZSdI0=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QIKI6m062944
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 11:06:42 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 13:20:18 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 26 Jun 2019 11:06:42 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
-	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 26 Jun 2019 13:20:17 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 26 Jun 2019 11:06:42 -0500
-Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QG6cPi042136;
-	Wed, 26 Jun 2019 11:06:41 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
+	Frontend Transport; Wed, 26 Jun 2019 13:20:17 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKHjI043876;
+	Wed, 26 Jun 2019 13:20:17 -0500
+From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 26 Jun 2019 11:49:53 -0400
-Message-ID: <1561564193-15418-5-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1561564193-15418-1-git-send-email-j-stiffler@ti.com>
-References: <1561564193-15418-1-git-send-email-j-stiffler@ti.com>
+Date: Wed, 26 Jun 2019 13:19:57 -0500
+Message-ID: <20190626181958.17218-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.21.0.5.gaeb582a983
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: rogerq@ti.com
-Subject: [master/thud/ti2019.01][PATCH v3 5/5] prueth-fw-bin: remove prebuilt firmware recipe
+Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2019.02-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,57 +64,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jun 2019 16:06:43 -0000
+X-List-Received-Date: Wed, 26 Jun 2019 18:20:19 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-* The prueth-fw-am65xx provides the same firmware but built from
-  sourecs.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/prueth-fw/prueth-fw-bin_git.bb | 32 ------------------------------
- 1 file changed, 32 deletions(-)
- delete mode 100644 recipes-bsp/prueth-fw/prueth-fw-bin_git.bb
+ recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/prueth-fw/prueth-fw-bin_git.bb b/recipes-bsp/prueth-fw/prueth-fw-bin_git.bb
-deleted file mode 100644
-index 60dc087..0000000
---- a/recipes-bsp/prueth-fw/prueth-fw-bin_git.bb
-+++ /dev/null
-@@ -1,32 +0,0 @@
--SUMMARY = "PRU Ethernet firmware for AM65xx"
--
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
--
--PV = "5.3.0.5"
--
--CLEANBROKEN = "1"
--
--COMPATIBLE_MACHINE = "am65xx-evm"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--SRCREV = "534ba03becfa9b39ccbd42b97e091abd94a207e7"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
--S = "${WORKDIR}/git"
--
--TARGET = "am65x-pru0-prueth-fw.elf am65x-pru1-prueth-fw.elf am65x-rtu0-prueth-fw.elf am65x-rtu1-prueth-fw.elf"
--
--do_install() {
--	install -d ${D}${base_libdir}/firmware/ti-pruss
--	for f in ${TARGET}; do
--		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
--	done
--}
--
--FILES_${PN} = "${base_libdir}/firmware"
--
--INSANE_SKIP_${PN} = "arch"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
+index 7f3925a0..d769b51c 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
+ 
+-PR = "r16"
++PR = "r17"
+ 
+ BRANCH = "ti-u-boot-2019.01"
+ 
+-SRCREV = "5ca8cfcdfd4cca4f9e911f68e68f81cc2ff61e2b"
++SRCREV = "06e0b5babedd4ddbde7239c9e9d642f5705593ae"
 -- 
-2.7.4
+2.21.0.5.gaeb582a983
 
 
