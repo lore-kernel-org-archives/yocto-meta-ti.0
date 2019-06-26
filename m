@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 298E8E00D7E; Wed, 26 Jun 2019 11:20:19 -0700 (PDT)
+	id 74A7CE00D79; Wed, 26 Jun 2019 11:20:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,41 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B84B6E00D75
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 190ACE00D77
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 11:20:18 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKIn8083533
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKIFP083537
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 13:20:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1561573218;
-	bh=2U/7/bKJ2Xf08M3+Q4lsQEWmmd1e4D6AiG3yzb3va3g=;
-	h=From:To:CC:Subject:Date;
-	b=R9mX4dEsRITa0n+ZEpZOXAyzsG3ez8J7L2Js4Rju3HJOpD3iMQIi2TNwjVpiFDa46
-	qVlEx8fM5xduP9fREx9xNoisX5JVux32cQgQwXyZMLZG+pUxXAoQCjGZ1QKkR3RSGt
-	XgmTLqBVCIP4pE7fF1dmwsGTkgI0er1l6pzZSdI0=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QIKI6m062944
+	bh=ka562j/VRgrIMmVWAA6019PKZLUu1B78vgYsvYjHmiE=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=TCSn2HsKStwIzVQqc99/3SJV0KmzQxWfZiN2wimmYmL9R+c9u149Gclij810TCNbq
+	QVTZ3EAL7SNGp91W241TIH179akxtBwM+O+1KzCDlpGDfeFpN/9U1t19MgErxesBQY
+	Bj8UK4Plu7WUZuKi9MIeYTMruJNB8M1VQTGzhcPU=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QIKIPt041053
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 13:20:18 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 26 Jun 2019 13:20:17 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 26 Jun 2019 13:20:18 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 26 Jun 2019 13:20:17 -0500
+	Frontend Transport; Wed, 26 Jun 2019 13:20:18 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKHjI043876;
-	Wed, 26 Jun 2019 13:20:17 -0500
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QIKIA8013861;
+	Wed, 26 Jun 2019 13:20:18 -0500
 From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 26 Jun 2019 13:19:57 -0500
-Message-ID: <20190626181958.17218-1-dmurphy@ti.com>
+Date: Wed, 26 Jun 2019 13:19:58 -0500
+Message-ID: <20190626181958.17218-2-dmurphy@ti.com>
 X-Mailer: git-send-email 2.21.0.5.gaeb582a983
+In-Reply-To: <20190626181958.17218-1-dmurphy@ti.com>
+References: <20190626181958.17218-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2019.02-rc1 tag
+Subject: [PATCH 2/2] linux-ti-staging: update the RT kernel tag for ti2019.02-rc1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,23 +72,34 @@ Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index 7f3925a0..d769b51c 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+index 83a24856..b161a695 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
  
--PR = "r16"
-+PR = "r17"
+ BRANCH = "ti-rt-linux-4.19.y"
  
- BRANCH = "ti-u-boot-2019.01"
+-SRCREV = "bec45aa9b46eaf73cfdfbd4a95b3d6c8c3d3dac6"
++SRCREV = "bc64d0520cc47b47350be414a4258e9f23fa543d"
+ PV = "4.19.50+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+index b0fd06a9..d76d4bb3 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -56,7 +56,7 @@ S = "${WORKDIR}/git"
  
--SRCREV = "5ca8cfcdfd4cca4f9e911f68e68f81cc2ff61e2b"
-+SRCREV = "06e0b5babedd4ddbde7239c9e9d642f5705593ae"
+ BRANCH = "ti-linux-4.19.y"
+ 
+-SRCREV = "2d5b605e78e570347031f314242e9f84b83dacbc"
++SRCREV = "6303bfc3b7ef10a29199737eb916700991385391"
+ PV = "4.19.50+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
 2.21.0.5.gaeb582a983
 
