@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BEC30E00D6B; Wed, 26 Jun 2019 14:06:28 -0700 (PDT)
+	id 17B41E00D77; Wed, 26 Jun 2019 14:06:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,49 +10,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 364C2E00D68
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 14:06:27 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QL6RCB077884
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 16:06:27 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E493FE00931
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 14:06:28 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5QL6SLN124986
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 16:06:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1561583187;
-	bh=58/JQ3KglvOmCU3+GQEOwcx4w0JstCKZUBjFLiBahQc=;
-	h=From:To:CC:Subject:Date;
-	b=K7NwqmsIcM/Tfu9OD9PZC+RDexh2t25Nvpzi2QK4RDc9VvGVxzivmx9oMU+jDjlV3
-	jrFpELS2XPaf4tPOvXMBBPfPSAa3YWYJKrAq+j/9/Hja5b35l5eOxEJ7l/YMZGyYMY
-	DdGGAxoIulQICPwVqvl9aUAcD2gys350eRUrpLOc=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QL6RYo104027
+	s=ti-com-17Q1; t=1561583188;
+	bh=3ZBxVKrbq1npxL6GK+pRs9d5KVzL+vIN8bae7aBBx+E=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=bg97iFGYCaIyy4Ndv5awjWgjtokYCxK5p93gHa3nW/43LJzpI9q7J17AXS0jem03L
+	8odfKplzaCxlmhxuiD/Au0OwjkhRnnScpsjIfPWam2RDD4P+eQizm7XdcOkVJiRPm5
+	MLwmEvrQhMmLh163Cs8AQCrltSPDeNUl3rZzMSmY=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5QL6SE8130431
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 16:06:27 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 16:06:28 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Wed, 26 Jun 2019 16:06:27 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
 	Frontend Transport; Wed, 26 Jun 2019 16:06:27 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QL6Rgx018637;
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5QL6Rh1018637;
 	Wed, 26 Jun 2019 16:06:27 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 26 Jun 2019 20:54:02 +0000
-Message-ID: <20190626205404.32521-1-denys@ti.com>
+Date: Wed, 26 Jun 2019 20:54:04 +0000
+Message-ID: <20190626205404.32521-3-denys@ti.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20190626205404.32521-1-denys@ti.com>
+References: <20190626205404.32521-1-denys@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 1/3] j7-evm: add new DTBOs for DP and display sharing
+Subject: [thud/master][PATCH 3/3] cadence-mhdp-fw: add Cadence MHDP DP bridge firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,28 +67,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jun 2019 21:06:28 -0000
+X-List-Received-Date: Wed, 26 Jun 2019 21:06:30 -0000
 Content-Type: text/plain
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- conf/machine/j7-evm.conf | 2 ++
- 1 file changed, 2 insertions(+)
+ .../cadence-mhdp-fw/cadence-mhdp-fw_git.bb    | 28 +++++++++++++++++++
+ recipes-kernel/linux/linux-ti-staging_4.19.bb |  3 ++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
 
-diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-index bc269617..9a2fadab 100644
---- a/conf/machine/j7-evm.conf
-+++ b/conf/machine/j7-evm.conf
-@@ -11,7 +11,9 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+diff --git a/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+new file mode 100644
+index 00000000..e8d5c544
+--- /dev/null
++++ b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Cadence MHDP DP bridge firmware"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENCE.Spectrum-GT9271;md5=2a6de6be7af1fe46370c684daf27c852"
++
++PV = "1.2.15"
++PR = "r0"
++
++CLEANBROKEN = "1"
++
++COMPATIBLE_MACHINE = "j7-evm"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SRCREV = "3930363562b35a5f3d495a61ea7e51739462b14a"
++BRANCH ?= "ti-linux-firmware"
++
++SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++TARGET = "mhdp8546.bin"
++
++do_install() {
++	install -d ${D}${base_libdir}/firmware
++	install -m 0644 ${S}/cadence/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++}
++
++FILES_${PN} = "${base_libdir}/firmware"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+index b0fd06a9..29cd644b 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -50,6 +50,9 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am335x-evm = " prueth-fw"
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2g = " prueth-fw"
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am65xx-evm = " prueth-fw-bin"
  
- KERNEL_DEVICETREE = " \
-     ti/k3-j721e-common-proc-board.dtb \
-+    ti/k3-j721e-dp0.dtbo \
-     ti/k3-j721e-common-proc-board-infotainment.dtbo \
-+    ti/k3-j721e-common-proc-board-infotainment-display-sharing.dtbo \
- "
++# Add run-time dependency for Cadence MHDP firmware to the rootfs
++RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7-evm = " cadence-mhdp-fw"
++
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
  
- UBOOT_MACHINE = "j721e_evm_a72_config"
+ S = "${WORKDIR}/git"
 -- 
 2.17.1
 
