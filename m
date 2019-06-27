@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7AE91E00D8F; Wed, 26 Jun 2019 21:24:09 -0700 (PDT)
+	id 8C739E00D8D; Wed, 26 Jun 2019 21:24:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      medium trust
 	*      [198.47.23.248 listed in list.dnswl.org]
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45254E00D83
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B6F5E00D86
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 21:24:08 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O7aU037830
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O7W3037835
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 23:24:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1561609447;
-	bh=2yfA7rEmXVkl5SrhtO0h+TzqiREngTyWFKOm/Neb+Zc=;
+	s=ti-com-17Q1; t=1561609448;
+	bh=TNxj4lmn+ARgDDgnascURj1aMR10nJmaHJSLepgFm9E=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=qJ3qq8Ylc+6SG9j/0YFTl3Ruo25sLkakAB0W8LpYWyHOvizGw0uTY3Iu9Hm8rj8Tj
-	UAz+mqFMV2nbhxVtoacp/NvUyp6VKaP+V2BQiYI7O2daVxHUxBNDRm6VVefEUyLP9H
-	xZeWYwKoOLtEBDv0SGSI3UCFDvC/0cmCvfBRLeQU=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5R4O7Bn116988
+	b=ITyEfMTrupi4itsvYKFJaoXTVeOBUQMC4ktSC3f4mAweFJj6YMprslMo1fsJy6baP
+	4OWjJ6yybXb7F0PQ7kQkbXsoFrcHZkgi5RrTdzaqVC7QffT4i63m9m8XyWJyqQGLQ6
+	sjXBBfiORe7a8a5jSx7/QHVEGMZ3PTJ2U3uXJZjQ=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5R4O7aG078572
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 23:24:07 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Wed, 26 Jun 2019 23:24:07 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE100.ent.ti.com
-	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
+	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
 	Frontend Transport; Wed, 26 Jun 2019 23:24:07 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O50Y079141
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O50X079141
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 23:24:07 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 27 Jun 2019 00:23:38 -0400
-Message-ID: <1561609436-41672-7-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 27 Jun 2019 00:23:37 -0400
+Message-ID: <1561609436-41672-6-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1561609436-41672-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1561609436-41672-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 06/24] i2c-lld-rtos: SRCREV update to 01.00.00.15
+Subject: [thud/master][PATCH 05/24] gpio-lld-rtos:SRCREV update to 01.00.00.15
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,31 +72,31 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb | 6 +++---
+ recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-index 2b3931e..da1ce6c 100644
---- a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-+++ b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-@@ -13,14 +13,14 @@ I2C_LLD_GIT_PROTOCOL = "git"
- I2C_LLD_GIT_BRANCH = "master"
- I2C_LLD_GIT_DESTSUFFIX = "git/ti/drv/i2c"
+diff --git a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb b/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
+index d37583f..b94d040 100644
+--- a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
++++ b/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
+@@ -13,14 +13,14 @@ GPIO_LLD_GIT_PROTOCOL = "git"
+ GPIO_LLD_GIT_BRANCH = "master"
+ GPIO_LLD_GIT_DESTSUFFIX = "git/ti/drv/gpio"
  
--# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.14"
--I2C_LLD_SRCREV = "639374a5f9d9cf01f0e922063c13b579f6b1b908"
-+# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.15"
-+I2C_LLD_SRCREV = "5fcc5b822d09edf8f7afef276b5b58b6fec4c791"
+-# Below commit ID corresponds to "DEV.GPIO_LLD.01.00.00.14"
+-GPIO_LLD_SRCREV = "44d3cfcd49bfffe4d02d61c541398db3ffac7ef3"
++# Below commit ID corresponds to "DEV.GPIO_LLD.01.00.00.15"
++GPIO_LLD_SRCREV = "21d6134f002358705181bf950b9c01620370ff27"
  
- BRANCH = "${I2C_LLD_GIT_BRANCH}"
- SRC_URI = "${I2C_LLD_GIT_URI};destsuffix=${I2C_LLD_GIT_DESTSUFFIX};protocol=${I2C_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${GPIO_LLD_GIT_BRANCH}"
+ SRC_URI = "${GPIO_LLD_GIT_URI};destsuffix=${GPIO_LLD_GIT_DESTSUFFIX};protocol=${GPIO_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${I2C_LLD_SRCREV}"
+ SRCREV = "${GPIO_LLD_SRCREV}"
 -PV = "01.00.00.14"
 +PV = "01.00.00.15"
  PR = "r0"
  
- DEPENDS_append = " osal-rtos \
+ S = "${WORKDIR}/${GPIO_LLD_GIT_DESTSUFFIX}"
 -- 
 1.9.1
 
