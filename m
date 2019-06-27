@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8C739E00D8D; Wed, 26 Jun 2019 21:24:09 -0700 (PDT)
+	id 965E4E00D86; Wed, 26 Jun 2019 21:24:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -15,46 +15,46 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B6F5E00D86
+	*      [198.47.23.249 listed in list.dnswl.org]
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 711FDE00D7E
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 21:24:08 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O7W3037835
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O7qO049144
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 23:24:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1561609448;
-	bh=TNxj4lmn+ARgDDgnascURj1aMR10nJmaHJSLepgFm9E=;
+	s=ti-com-17Q1; t=1561609447;
+	bh=ftcgYGC4K0hbm0kcCxYS8Sy8Su3vVQNbW2XtDQ4aIzk=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=ITyEfMTrupi4itsvYKFJaoXTVeOBUQMC4ktSC3f4mAweFJj6YMprslMo1fsJy6baP
-	4OWjJ6yybXb7F0PQ7kQkbXsoFrcHZkgi5RrTdzaqVC7QffT4i63m9m8XyWJyqQGLQ6
-	sjXBBfiORe7a8a5jSx7/QHVEGMZ3PTJ2U3uXJZjQ=
+	b=r14spMZwn3bQT8LNVarUQdW1duqPmE6zzUosJEsYzuWzu7R5t2lj7nSjhICU1BlMv
+	zar6Oi5wB8eWu6DfJb2bQ8RdOmTddYqT8ZWg5gebFg+bGMZnBRElOSiBG/9VCHqFNf
+	pimvZEDIqEIvVpKtRbH6yIfi+koICyF/CeoRbmQE=
 Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5R4O7aG078572
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5R4O7aF078572
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 23:24:07 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE103.ent.ti.com
 	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 26 Jun 2019 23:24:07 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 26 Jun 2019 23:24:06 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
+	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 26 Jun 2019 23:24:07 -0500
+	Frontend Transport; Wed, 26 Jun 2019 23:24:06 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O50X079141
-	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 23:24:07 -0500
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5R4O50V079141
+	for <meta-ti@yoctoproject.org>; Wed, 26 Jun 2019 23:24:06 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 27 Jun 2019 00:23:37 -0400
-Message-ID: <1561609436-41672-6-git-send-email-m-radhakrishnan2@ti.com>
+Date: Thu, 27 Jun 2019 00:23:35 -0400
+Message-ID: <1561609436-41672-4-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1561609436-41672-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1561609436-41672-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 05/24] gpio-lld-rtos:SRCREV update to 01.00.00.15
+Subject: [thud/master][PATCH 03/24] edma3-lld: SRCREV update to 2.12.05.30E
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,31 +72,29 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb | 6 +++---
+ recipes-bsp/edma3-lld/edma3-lld.inc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb b/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
-index d37583f..b94d040 100644
---- a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
-+++ b/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
-@@ -13,14 +13,14 @@ GPIO_LLD_GIT_PROTOCOL = "git"
- GPIO_LLD_GIT_BRANCH = "master"
- GPIO_LLD_GIT_DESTSUFFIX = "git/ti/drv/gpio"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+index 9efb076..57ba325 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld.inc
++++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+@@ -6,12 +6,12 @@ EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
+ EDMA3_LLD_GIT_PROTOCOL = "git"
+ EDMA3_LLD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.GPIO_LLD.01.00.00.14"
--GPIO_LLD_SRCREV = "44d3cfcd49bfffe4d02d61c541398db3ffac7ef3"
-+# Below commit ID corresponds to "DEV.GPIO_LLD.01.00.00.15"
-+GPIO_LLD_SRCREV = "21d6134f002358705181bf950b9c01620370ff27"
+-# Below commit ID corresponds to version 2.12.05.30D
+-EDMA3_LLD_SRCREV = "20750e17302116f3760aba68f8323ae110d1cbd0"
++# Below commit ID corresponds to version 2.12.05.30E
++EDMA3_LLD_SRCREV = "be925706f060d7b32d894d8b17ce144d454bb4de"
  
- BRANCH = "${GPIO_LLD_GIT_BRANCH}"
- SRC_URI = "${GPIO_LLD_GIT_URI};destsuffix=${GPIO_LLD_GIT_DESTSUFFIX};protocol=${GPIO_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
+ SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ SRCREV = "${EDMA3_LLD_SRCREV}"
  
- SRCREV = "${GPIO_LLD_SRCREV}"
--PV = "01.00.00.14"
-+PV = "01.00.00.15"
- PR = "r0"
- 
- S = "${WORKDIR}/${GPIO_LLD_GIT_DESTSUFFIX}"
+-PV = "2.12.05.30D"
++PV = "2.12.05.30E"
+ INC_PR = "r0"
 -- 
 1.9.1
 
