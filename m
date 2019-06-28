@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0639EE00D8D; Fri, 28 Jun 2019 15:24:34 -0700 (PDT)
+	id 4DFBBE00B54; Fri, 28 Jun 2019 15:24:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,51 +10,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9240E00B54
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 343DCE00D89
 	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 15:24:32 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5SMOWbp009049
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5SMOW8c046003
 	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 17:24:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1561760672;
-	bh=KhwKAuVDJS7eBtQue/Q0ZQVRrVSobE3mBx1KtMkjVJU=;
+	bh=KAB95MomHGKxNym0tL6PhqfYqjWoj6/M4A8SWx7OlIc=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=cLWHlXdkIfijK3rK7UlidSP0f2EKNvz3D48eb29lXzPPgdkEe9GHMioHct38JtYvz
-	RVV3HtFooaLTZ4pgJbQiVk2R0UdMtq/83DoP2qUXlgzbFTR31uWsZUHPnOWbDNIIuL
-	tggz2p2SU4G2xW3jqKzHGqx/Nw4O8SQuRWgmjp8c=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5SMOWY5057960
+	b=Hnaty1zeqs31hbNi0wHtEwXrvAQzweixawDXbPnt/5ImPwdP6rMDWN+lu2FTLI47t
+	BbkPMPzp43cUwzaFcO5OkOdAi+S2M2h84PgQfcO/mbjOE3kw65NnxyW9kSZil81dBc
+	KKMWR+ww+cWXG7m2ktwXv76JzZ5XiH4IyOFHXIYc=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5SMOWt5101388
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 17:24:32 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Fri, 28 Jun 2019 17:24:31 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 28 Jun 2019 17:24:32 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE114.ent.ti.com
+	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Fri, 28 Jun 2019 17:24:31 -0500
+	Frontend Transport; Fri, 28 Jun 2019 17:24:32 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5SMOVnx012488
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 17:24:31 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5SMOVo0012488
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 17:24:32 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 28 Jun 2019 18:24:21 -0400
-Message-ID: <1561760664-53158-2-git-send-email-m-radhakrishnan2@ti.com>
+Date: Fri, 28 Jun 2019 18:24:22 -0400
+Message-ID: <1561760664-53158-3-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1561760664-53158-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1561760664-53158-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 1/4] board-rtos: SRCREV update to 01.00.10.05C
+Subject: [thud/master][PATCH 2/4] emac-lld-rtos: SRCREV update to 01.00.03.16A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,31 +72,31 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/board-rtos/board-rtos_git.bb | 6 +++---
+ recipes-bsp/emac-lld/emac-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
-index 3c73bbd..c84ab91 100644
---- a/recipes-bsp/board-rtos/board-rtos_git.bb
-+++ b/recipes-bsp/board-rtos/board-rtos_git.bb
-@@ -12,14 +12,14 @@ BOARD_GIT_URI = "git://git.ti.com/keystone-rtos/board.git"
- BOARD_GIT_PROTOCOL = "git"
- BOARD_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
+index 1232482..13c5c2d 100644
+--- a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
++++ b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
+@@ -12,14 +12,14 @@ EMAC_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/emac-lld.git"
+ EMAC_LLD_GIT_PROTOCOL = "git"
+ EMAC_LLD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.BOARD.01.00.10.05B"
--BOARD_SRCREV = "f9c6cef93ea619ac86f5b7579741a2ed978fea7f"
-+# Below commit ID corresponds to "DEV.BOARD.01.00.10.05C"
-+BOARD_SRCREV = "49f962f57cbfdc365bac6109ec7824c53461c227"
+-# Below commit ID corresponds to "DEV.EMAC_LLD.01.00.03.16"
+-EMAC_LLD_SRCREV = "f90f832dc63b60b234c3f5ae2ff4d774728e83bf"
++# Below commit ID corresponds to "DEV.EMAC_LLD.01.00.03.16A"
++EMAC_LLD_SRCREV = "73511804953577ec36e893498e5d6a4542b74d5c"
  
- BRANCH ="${BOARD_GIT_BRANCH}"
- SRC_URI = "${BOARD_GIT_URI};protocol=${BOARD_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH ="${EMAC_LLD_GIT_BRANCH}"
+ SRC_URI = "${EMAC_LLD_GIT_URI};protocol=${EMAC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${BOARD_SRCREV}"
--PV = "01.00.10.05B"
-+PV = "01.00.10.05C"
+ SRCREV = "${EMAC_LLD_SRCREV}"
+-PV = "01.00.03.16"
++PV = "01.00.03.16A"
  PR = "r0"
  
- DEPENDS_append = " i2c-lld-rtos \
+ DEPENDS_append = " board-rtos osal-rtos"
 -- 
 1.9.1
 
