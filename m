@@ -1,6 +1,6 @@
 Return-Path: <anandb@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 712BCE00D8C; Fri, 28 Jun 2019 03:27:00 -0700 (PDT)
+	id 1855EE00D85; Fri, 28 Jun 2019 03:48:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,53 +9,51 @@ X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
 	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0639DE00D88
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 03:26:59 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5SAQx1S009264
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 05:26:59 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7AF31E0098A
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 03:48:04 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5SAm3W3121254
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 05:48:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1561717619;
-	bh=2H+B0AyHRc20cMHkyX4zwsmmfSK43wi5k9wqqAMzn8k=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=syWcFrPvhCsCfFN8nEOGOPmaf/y2b4K6tGt7zz6RuPZ39hn1DwgOKuWSPpBLTIHiH
-	PXvaq/bx2DYI+P79qovQDw1AJMVDIhVj59k3ejmOzDlT8VZIdU9AvwB2emmQNT8Eq/
-	u6mV5Kykciof7FKIPeq576Vonydzov30kXoqWfjk=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5SAQx3H077102
+	s=ti-com-17Q1; t=1561718883;
+	bh=iLezRWJUqOdD8R7CHrHYMU8xBwbxqUv5DA4EzQTwjLE=;
+	h=From:To:CC:Subject:Date;
+	b=OL0A9GrVnsH6wMuhMi0cyO7y2wkffUI58Cr/dDfrR42RMXq4LhWM3spzwcTrSG+QW
+	ieQKttWtAqOE1YT1QhGl9hD7Rj62YhkDrNHUdot9zphrC7pPkL/PYyESqQmJeo52zz
+	1F9Hl4Wqa3RHL9z46203B9PnFfKMjmQclCOSnxRE=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5SAm3IB105157
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 05:26:59 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2019 05:48:03 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Fri, 28 Jun 2019 05:26:59 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE110.ent.ti.com
-	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 28 Jun 2019 05:48:03 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Fri, 28 Jun 2019 05:26:59 -0500
+	Frontend Transport; Fri, 28 Jun 2019 05:48:03 -0500
 Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5SAQti0052795; 
-	Fri, 28 Jun 2019 05:26:58 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5SAm16L082168; 
+	Fri, 28 Jun 2019 05:48:02 -0500
 From: Anand Balagopalakrishnan <anandb@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 28 Jun 2019 15:56:53 +0530
-Message-ID: <1561717613-65947-2-git-send-email-anandb@ti.com>
+Date: Fri, 28 Jun 2019 16:18:00 +0530
+Message-ID: <1561718880-125419-1-git-send-email-anandb@ti.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1561717613-65947-1-git-send-email-anandb@ti.com>
-References: <1561717613-65947-1-git-send-email-anandb@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud][PATCH 2/2] ti-img-rogue-driver: switch to linux window system branch
+Subject: [thud][PATCH 1/1] ti-img-rogue-umlibs: add window system as an install option
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,42 +66,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 10:27:00 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 10:48:05 -0000
 Content-Type: text/plain
+
+We will start supporting Wayland window system. It is good to have nulldrmws as
+a debug option. GPU driver recipe already support window system option.
 
 Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 ---
- recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
-index 92156e1..b7431b0 100644
---- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
-+++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=15;endline=20;md5=0403c7dea01a2b8232
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "d"
- PR = "${MACHINE_KERNEL_PR}"
- 
+diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb
+index c7700fb..94f078e 100644
+--- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb
++++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb
+@@ -6,15 +6,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
  PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -15,12 +15,12 @@ DEPENDS = "virtual/kernel"
+ COMPATIBLE_MACHINE = "j7-evm"
  
- PROVIDES = "virtual/gpudriver"
+-PR = "r2"
++PR = "r3"
  
--BRANCH = "linux/thud/k4.19/${PV}"
-+BRANCH = "linuxws/thud/k4.19/${PV}"
+ BRANCH = "linuxws/thud/k4.19/${PV}"
  
- SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=${BRANCH}"
+-SRCREV = "97fc1ca42b03f400de38b78e21aaf6b5d94b1c5d"
++SRCREV = "3da5ebfde8a41cd38ab935f3e350d5d195fe7309"
+ 
+ PVR_SOC ?= "j721e_linux"
+ PVR_BUILD ?= "release"
++PVR_WS = "nulldrmws"
+ 
+ INITSCRIPT_NAME = "rc.pvr"
+ INITSCRIPT_PARAMS = "defaults 8"
+@@ -43,7 +44,7 @@ RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
  S = "${WORKDIR}/git"
  
--SRCREV = "21160dca62b4cc58cdb8600f660f15a660c7f524"
-+SRCREV = "e94d4e0d9c23e30da54a6e6901e849b52dfc6945"
+ do_install () {
+-    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${PVR_SOC} BUILD=${PVR_BUILD}
++    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${PVR_SOC} BUILD=${PVR_BUILD} WINDOW_SYSTEM=${PVR_WS}
+     chown -R root:root ${D}
+ }
  
- PVR_SOC = "j721e_linux"
- PVR_BVNC = "22.104.208.318"
 -- 
 1.9.1
 
