@@ -1,6 +1,6 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <nikhil.nd@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5C9C4E00D35; Thu,  4 Jul 2019 06:18:52 -0700 (PDT)
+	id 6DA05E00DFE; Fri,  5 Jul 2019 01:55:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,49 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C1ACE00C37
-	for <meta-ti@yoctoproject.org>; Thu,  4 Jul 2019 06:18:50 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x64DIni5129437
-	for <meta-ti@yoctoproject.org>; Thu, 4 Jul 2019 08:18:49 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7F226E00DBD
+	for <meta-ti@yoctoproject.org>; Fri,  5 Jul 2019 01:55:05 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x658t4GF020255
+	for <meta-ti@yoctoproject.org>; Fri, 5 Jul 2019 03:55:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1562246329;
-	bh=5+7JxAbAzNIhwH8md4QTJ/Kcp1RCIak8V3jwA5PnpBg=;
-	h=From:To:Subject:Date;
-	b=FSfzdP+UH/PztL8xwMc1Xa32GPlufrWK2GOJE++Es5R97bS9DYrgjdTzdneLbfGWq
-	K1j0oGKT4FACIXXz3e3y80CSzRPXwxmF3iIxHoVtLLxd4UpgXEb3eJaWqkyFNN5qhV
-	jTEUXqIvLlVx65dbQGaW+2yeIJApXll5RSQfz67o=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x64DIni7011576
+	s=ti-com-17Q1; t=1562316904;
+	bh=8YRvzf4QQpHWzHgCIBE3iQ+KHF10DOizAaEmtTrWQ3I=;
+	h=From:To:CC:Subject:Date;
+	b=TW62i2dJfN+/NoTqw8fVVm31fjAIf0wuOfcCL13/yFB/wiy0iSfWXvUnib+8OF0uO
+	xxIMiSz0FmlCdamZyr7DaFnId20k1vjA6XlA8mJ2iabVTvEjcW2zwnaTyy08wadPjl
+	wWDfOiPkLh6Nll/ZhJjYkr2FvR7LbzPBFrQ6ccac=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x658t4gx078751
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 4 Jul 2019 08:18:49 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE100.ent.ti.com
-	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 5 Jul 2019 03:55:04 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 4 Jul 2019 08:18:49 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 5 Jul 2019 03:55:04 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 4 Jul 2019 08:18:49 -0500
-Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x64DIn9o070859
-	for <meta-ti@yoctoproject.org>; Thu, 4 Jul 2019 08:18:49 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 4 Jul 2019 09:18:46 -0400
-Message-ID: <1562246326-21400-1-git-send-email-m-radhakrishnan2@ti.com>
+	Frontend Transport; Fri, 5 Jul 2019 03:55:04 -0500
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x658t2sT097401; 
+	Fri, 5 Jul 2019 03:55:03 -0500
+From: Nikhil Devshatwar <nikhil.nd@ti.com>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Date: Fri, 5 Jul 2019 14:24:58 +0530
+Message-ID: <1562316898-151844-1-git-send-email-nikhil.nd@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH] osal: SRCREV update to 01.00.00.15A
+Cc: karthik.ramanan@ti.com
+Subject: [thud PATCH v1] jailhouse: add recipe for Jailhouse module, FW, cells, inmates and basic demo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,34 +65,296 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2019 13:18:52 -0000
+X-List-Received-Date: Fri, 05 Jul 2019 08:55:11 -0000
 Content-Type: text/plain
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
----
- recipes-bsp/osal/osal.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+From: Denys Dmytriyenko <denys@ti.com>
 
-diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
-index 96c1a64..8a086bb 100644
---- a/recipes-bsp/osal/osal.inc
-+++ b/recipes-bsp/osal/osal.inc
-@@ -9,12 +9,12 @@ OSAL_GIT_PROTOCOL = "git"
- OSAL_GIT_BRANCH = "master"
- OSAL_GIT_DESTSUFFIX = "git/ti/osal"
- 
--# Below commit ID corresponding to "DEV.OSAL.01.00.00.15"
--OSAL_SRCREV = "7cda1a688cf9a828ce76cb467a1a9cd46eda6299"
-+# Below commit ID corresponding to "DEV.OSAL.01.00.00.15A"
-+OSAL_SRCREV = "600a4006e636614900518e12c2828a02c7306f36"
- 
- BRANCH = "${OSAL_GIT_BRANCH}"
- SRC_URI = "${OSAL_GIT_URI};destsuffix=${OSAL_GIT_DESTSUFFIX};protocol=${OSAL_GIT_PROTOCOL};branch=${BRANCH}"
- 
- SRCREV = "${OSAL_SRCREV}"
--PV = "01.00.00.15"
-+PV = "01.00.00.15A"
- INC_PR = "r0"
+Builds the Jailhouse kernel module, hypervisor binaries
+and all the cell configs for root cell and other demos.
+Generate the linux-demo loader script without initramfs.
+
+Supports am65x and j7-evm machines
+
+[nikhil.nd@ti.com: Update for public trees]
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
+---
+ recipes-bsp/jailhouse/jailhouse-arch.inc           |  20 +++
+ .../jailhouse/0001-Makefile-fixes-for-yocto.patch  |  84 ++++++++++++
+ recipes-bsp/jailhouse/jailhouse_git.bb             | 144 +++++++++++++++++++++
+ 3 files changed, 248 insertions(+)
+ create mode 100644 recipes-bsp/jailhouse/jailhouse-arch.inc
+ create mode 100644 recipes-bsp/jailhouse/jailhouse/0001-Makefile-fixes-for-yocto.patch
+ create mode 100644 recipes-bsp/jailhouse/jailhouse_git.bb
+
+diff --git a/recipes-bsp/jailhouse/jailhouse-arch.inc b/recipes-bsp/jailhouse/jailhouse-arch.inc
+new file mode 100644
+index 0000000..e06ec23
+--- /dev/null
++++ b/recipes-bsp/jailhouse/jailhouse-arch.inc
+@@ -0,0 +1,20 @@
++# Set jailhouse architecture JH_ARCH variable
++#
++# return value must match one of architectures supported by jailhouse
++#
++valid_jh_archs = "x86 arm"
++
++def map_jh_arch(a, d):
++    import re
++
++    valid_jh_archs = d.getVar('valid_jh_archs', True).split()
++
++    if   re.match('(i.86|athlon|x86.64)$', a):  return 'x86'
++    elif re.match('armeb$', a):                 return 'arm'
++    elif re.match('aarch64$', a):               return 'arm64'
++    elif re.match('aarch64_be$', a):            return 'arm64'
++    elif a in valid_jh_archs:                   return a
++    else:
++        bb.error("cannot map '%s' to a jailhouse supported architecture" % a)
++
++export JH_ARCH = "${@map_jh_arch(d.getVar('TARGET_ARCH', True), d)}"
+diff --git a/recipes-bsp/jailhouse/jailhouse/0001-Makefile-fixes-for-yocto.patch b/recipes-bsp/jailhouse/jailhouse/0001-Makefile-fixes-for-yocto.patch
+new file mode 100644
+index 0000000..3f71761
+--- /dev/null
++++ b/recipes-bsp/jailhouse/jailhouse/0001-Makefile-fixes-for-yocto.patch
+@@ -0,0 +1,84 @@
++From a079feba07435c73b294202fb56b2d425d107ca5 Mon Sep 17 00:00:00 2001
++From: Nikhil Devshatwar <nikhil.nd@ti.com>
++Date: Fri, 5 Jul 2019 13:35:25 +0530
++Subject: [PATCH] Makefile fixes for yocto
++
++Fix some LDFLAG in the toplevel Kbuild
++
++Avoid building and installing tools.
++It has many dependencies on python, pyjailhouse, man pages,
++bash completion, etc
++
++Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
++---
++ Kbuild         | 2 +-
++ Makefile       | 4 ----
++ tools/Makefile | 8 ++++----
++ 3 files changed, 5 insertions(+), 9 deletions(-)
++
++diff --git a/Kbuild b/Kbuild
++index 7cbde52..054e068 100644
++--- a/Kbuild
+++++ b/Kbuild
++@@ -51,7 +51,7 @@ GEN_PCI_DEFS_PY := $(obj)/pyjailhouse/pci_defs.py
++ $(GEN_PCI_DEFS_PY): $(src)/scripts/gen_pci_defs.sh
++ 	$(call if_changed,gen_pci_defs)
++ 
++-subdir-y := driver hypervisor configs inmates tools
+++subdir-y := driver hypervisor configs inmates
++ 
++ subdir-ccflags-y := -Werror
++ 
++diff --git a/Makefile b/Makefile
++index 7401739..546be35 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -53,10 +53,6 @@ tool_inmates_install: $(DESTDIR)$(libexecdir)/jailhouse
++ 	$(INSTALL_DATA) inmates/tools/$(ARCH)/*.bin $<
++ 
++ install: modules_install firmware_install tool_inmates_install
++-	$(Q)$(MAKE) -C tools $@ src=.
++-ifeq ($(strip $(PYTHON_PIP_USABLE)), yes)
++-	$(PIP) install --upgrade --force-reinstall $(PIP_ROOT) .
++-endif
++ 
++ .PHONY: modules_install install clean firmware_install modules tools docs \
++ 	docs_clean
++diff --git a/tools/Makefile b/tools/Makefile
++index 08fd361..b5c117d 100644
++--- a/tools/Makefile
+++++ b/tools/Makefile
++@@ -23,7 +23,6 @@ KBUILD_CFLAGS := -g -O3 -DLIBEXECDIR=\"$(libexecdir)\" \
++ 	-D__LINUX_COMPILER_TYPES_H \
++ 	-DJAILHOUSE_VERSION=\"$(shell cat $(src)/../VERSION)\" $(EXTRA_CFLAGS)
++ # prior to 4.19
++-LDFLAGS :=
++ # since 4.19
++ KBUILD_LDFLAGS :=
++ 
++@@ -101,7 +100,7 @@ endef
++ targets += jailhouse.o
++ 
++ $(obj)/jailhouse: $(obj)/jailhouse.o
++-	$(call if_changed,ld)
+++	$(LD) $(LDFLAGS) -o $@ $^
++ 
++ CFLAGS_jailhouse-gcov-extract.o	:= -I$(src)/../hypervisor/include \
++ 	-I$(src)/../hypervisor/arch/$(SRCARCH)/include
++@@ -112,10 +111,11 @@ targets += jailhouse-gcov-extract.o
++ always += jailhouse-gcov-extract
++ 
++ $(obj)/jailhouse-gcov-extract: $(obj)/jailhouse-gcov-extract.o
++-	$(call if_changed,ld)
+++	$(LD) $(LDFLAGS) -o $@ $^
++ 
++ $(obj)/jailhouse-config-collect: $(src)/jailhouse-config-create $(src)/jailhouse-config-collect.tmpl
++-	$(call if_changed,gen_collect)
+++	$< -g $@; \
+++	chmod +x $@
++ 
++ targets += $(MAN8_PAGES)
++ always +=  $(MAN8_PAGES)
++-- 
++2.7.4
++
+diff --git a/recipes-bsp/jailhouse/jailhouse_git.bb b/recipes-bsp/jailhouse/jailhouse_git.bb
+new file mode 100644
+index 0000000..78eb801
+--- /dev/null
++++ b/recipes-bsp/jailhouse/jailhouse_git.bb
+@@ -0,0 +1,144 @@
++SUMMARY = "Linux-based partitioning hypervisor"
++DESCRIPTION = "Jailhouse is a partitioning Hypervisor based on Linux. It is able to run bare-metal applications or (adapted) \
++operating systems besides Linux. For this purpose, it configures CPU and device virtualization features of the hardware \
++platform in a way that none of these domains, called 'cells' here, can interfere with each other in an unacceptable way."
++HOMEPAGE = "https://github.com/siemens/jailhouse"
++SECTION = "jailhouse"
++LICENSE = "GPL-2.0 & BSD-2-Clause"
++
++LIC_FILES_CHKSUM = " \
++    file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
++"
++
++PV = "0.10+git${SRCPV}"
++SRCREV = "5c6aa2b78c6485e9455d9d1441df3d695e1a8b4e"
++BRANCH = "ti-jailhouse-0.10"
++
++SRC_URI = " \
++    git://git.ti.com/jailhouse/ti-jailhouse.git;protocol=git;branch=${BRANCH} \
++    file://0001-Makefile-fixes-for-yocto.patch \
++"
++
++DEPENDS = "virtual/kernel dtc-native python-mako-native python-mako make-native"
++RDEPENDS_${PN} += "\
++	python-curses\
++	python-datetime\
++	python-argparse\
++	python-mmap\
++"
++
++S = "${WORKDIR}/git"
++
++require jailhouse-arch.inc
++inherit module pythonnative bash-completion deploy
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++JH_DATADIR ?= "${datadir}/jailhouse"
++JH_EXEC_DIR ?= "${libexecdir}/jailhouse"
++CELL_DIR ?= "${JH_DATADIR}/cells"
++CELLCONF_DIR ?= "${JH_DATADIR}/configs"
++INMATES_DIR ?= "${JH_DATADIR}/inmates"
++
++JH_CONFIG ?= "${S}/ci/jailhouse-config-x86.h"
++JH_CONFIG_k3 ?= "${S}/ci/jailhouse-config-k3.h"
++
++JH_CELL_FILES ?= "*.cell"
++JH_CELL_FILES_k3 ?= "k3-*.cell"
++
++JH_INMATE_DTB ?= ""
++JH_INMATE_DTB_am65xx-evm ?= "inmate-k3-am654.dtb"
++JH_INMATE_DTB_j7-evm ?= "inmate-k3-j721e-evm.dtb"
++
++JH_LINUX_DEMO_CELL ?= ""
++JH_LINUX_DEMO_CELL_am65xx-evm ?= "k3-am654-linux-demo.cell"
++JH_LINUX_DEMO_CELL_j7-evm ?= "k3-j721e-evm-linux-demo.cell"
++
++JH_SYSCONFIG_CELL ?= ""
++JH_SYSCONFIG_CELL_am65xx-evm ?= "k3-am654.cell"
++JH_SYSCONFIG_CELL_j7-evm ?= "k3-j721e-evm.cell"
++
++JH_CMDLINE ?= ""
++JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait earlycon=ns16550a,mmio32,0x2810000"
++
++do_configure() {
++	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ]; 
++	then
++		cp ${STAGING_DIR_HOST}/${CELLCONF_DIR}/*.c ${S}/configs/
++	fi
++
++	cp -av ${JH_CONFIG} ${S}/include/jailhouse/config.h
++}
++
++USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
++                    -DJAILHOUSE_VERSION=\\\"$JAILHOUSE_VERSION\\\" \
++                    -Wall -Wextra -Wmissing-declarations -Wmissing-prototypes -Werror \
++                    -I../driver'
++
++TOOLS_SRC_DIR = "${S}/tools"
++TOOLS_OBJ_DIR = "${S}/tools"
++
++do_compile() {
++	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
++	oe_runmake V=1 ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
++}
++
++python __anonymous () {
++	d.appendVarFlag('do_install', 'depends', ' virtual/kernel:do_deploy')
++	initrd = d.getVar('INITRAMFS_IMAGE', True)
++	if initrd:
++		d.appendVarFlag('do_install', 'depends', ' ${INITRAMFS_IMAGE}:do_image_complete')
++}
++
++do_install() {
++	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
++	oe_runmake ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR} CC="${KERNEL_CC}" LD="${KERNEL_LD}" DESTDIR=${D} install
++
++	install -d ${D}${CELL_DIR}
++	install -m 0644 ${B}/configs/${JH_ARCH}/${JH_CELL_FILES} ${D}${CELL_DIR}/
++
++	install -d ${D}${INMATES_DIR}
++	install -m 0644 ${B}/inmates/demos/${JH_ARCH}/*.bin ${D}${INMATES_DIR}
++
++	install -d ${D}/boot
++
++	if [ -n "${JH_INMATE_DTB}" -a -n "${JH_LINUX_DEMO_CELL}" ]; then
++		cd ${TOOLS_SRC_DIR}
++
++		echo "#! /bin/sh" > ${D}${JH_DATADIR}/linux-demo.sh
++		echo "jailhouse enable ${CELL_DIR}/${JH_SYSCONFIG_CELL}" >> ${D}${JH_DATADIR}/linux-demo.sh
++		./jailhouse-cell-linux -w ${D}${JH_DATADIR}/${JH_INMATE_DTB} \
++			-a ${JH_ARCH} -c ${JH_CMDLINE} \
++			-d ../configs/${JH_ARCH}/dts/${JH_INMATE_DTB} \
++			${D}${CELL_DIR}/${JH_LINUX_DEMO_CELL} \
++			${DEPLOY_DIR_IMAGE}/Image \
++			| tr -cd '\11\12\15\40-\176' \
++			>> ${D}${JH_DATADIR}/linux-demo.sh
++
++		sed -i -e 's,^Modified device tree written.*,,g' ${D}${JH_DATADIR}/linux-demo.sh
++		sed -i -e 's,\${D},,g' ${D}${JH_DATADIR}/linux-demo.sh
++		sed -i -e 's, linux-loader.bin, ${JH_EXEC_DIR}/linux-loader.bin,g' ${D}${JH_DATADIR}/linux-demo.sh
++		sed -i -e 's,\${DEPLOY_DIR_IMAGE},/boot,g' ${D}${JH_DATADIR}/linux-demo.sh
++		sed -i -e '/^\s*$/d' ${D}${JH_DATADIR}/linux-demo.sh
++		chmod +x ${D}${JH_DATADIR}/linux-demo.sh
++	fi
++}
++
++
++PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
++FILES_${PN} = "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR} /boot"
++
++INSANE_SKIP_${PN} = "ldflags"
++
++KERNEL_MODULE_AUTOLOAD += "jailhouse"
++
++# Any extra cells/inmates from external recipes/packages
++CELLS = ""
++
++python __anonymous () {
++    # Setup DEPENDS and RDEPENDS to included cells"
++    cells = d.getVar('CELLS', True) or ""
++    for cell in cells.split():
++        d.appendVar('DEPENDS', ' ' + cell)
++        d.appendVar('RDEPENDS_${PN}', ' ' + cell)
++}
 -- 
 1.9.1
 
