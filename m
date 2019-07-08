@@ -1,6 +1,6 @@
-Return-Path: <nikhil.nd@ti.com>
+Return-Path: <subhajit_paul@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A3B8FE00D5D; Sun,  7 Jul 2019 07:00:57 -0700 (PDT)
+	id 043CDE00D3A; Mon,  8 Jul 2019 09:08:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,51 +10,52 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 13B76E00D53
-	for <meta-ti@yoctoproject.org>; Sun,  7 Jul 2019 07:00:55 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x67E0tf3028257
-	for <meta-ti@yoctoproject.org>; Sun, 7 Jul 2019 09:00:55 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D97DDE008A4
+	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2019 09:08:25 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x68G8P8E073753
+	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2019 11:08:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1562508055;
-	bh=kL+wMcacrTYcALDzzQdujV2Mv/Dwhkq1Peq+A18Lr9s=;
+	s=ti-com-17Q1; t=1562602105;
+	bh=8s+hrjWVekqqykkVOAt8MdbCrFq44qFUiunbqtibCF8=;
 	h=From:To:Subject:Date:References:In-Reply-To;
-	b=vmSrYb9uRSsPd2CZAy8islYzuQLs+ZsRGni/beTeeoOJLGkU6O1WEKOG61vsDEZcF
-	xEd+eQ9C51VOtsOD7gNgyGtc2GEkl33tLjB4jWnVEIhSlG8zLZqIQPR3/Vhf3g0Ykj
-	DKOlOk7KkxEkryQMMd2WBufj/GxZS/QS/lTMHGeg=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x67E0tos057885
+	b=J1OxjdxjMi8y0jBAPlCHEvub9mbc7Z8cjowxJT4gbyrSM6EY5E0HBEfX7sR6SmwXM
+	738qpVyS9eJ+njZv+i3QZ7BSVmzvxxi54xPm/KXXsMTC9mciumSXTfkgIYSRQZ4t+7
+	NBBR+opL5+IRaZrMTwXCqFtjSYl6gUNDMHQzdXHw=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x68G8OqL006811
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Sun, 7 Jul 2019 09:00:55 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2019 11:08:24 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Sun, 7 Jul 2019 09:00:55 -0500
-Received: from DFLE108.ent.ti.com ([fe80::c18:99ac:4a4:2ceb]) by
-	DFLE108.ent.ti.com ([fe80::c18:99ac:4a4:2ceb%17]) with mapi id
-	15.01.1713.004; Sun, 7 Jul 2019 09:00:55 -0500
-From: "Devshatwar, Nikhil" <nikhil.nd@ti.com>
-To: "Paul, Subhajit" <subhajit_paul@ti.com>, "meta-ti@yoctoproject.org"
+	Mon, 8 Jul 2019 11:08:24 -0500
+Received: from DLEE110.ent.ti.com ([fe80::546b:3e96:e947:ccce]) by
+	DLEE110.ent.ti.com ([fe80::cdd3:d2b:f042:64fd%20]) with mapi id
+	15.01.1713.004; Mon, 8 Jul 2019 11:08:24 -0500
+From: "Paul, Subhajit" <subhajit_paul@ti.com>
+To: "Devshatwar, Nikhil" <nikhil.nd@ti.com>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
 Thread-Topic: [meta-ti] [EXTERNAL] [ thud PATCH v2] jailhouse: add recipe for
 	Jailhouse module, FW, cells, inmates and basic demo
-Thread-Index: AQHVNKdBFzKSyfUqK0GLWJ2SkY2lqaa/LrBw
-Date: Sun, 7 Jul 2019 14:00:55 +0000
-Message-ID: <8e782511d83845469e528927fc0bde47@ti.com>
+Thread-Index: AQHVNMxluJYQSaoUQkmRZjUgdzPWzabA5PLw
+Date: Mon, 8 Jul 2019 16:08:24 +0000
+Message-ID: <8749c369d8d8452fa9b4c3030d819d4a@ti.com>
 References: <1562339000-19082-1-git-send-email-nikhil.nd@ti.com>
 	<5496bc2b-ec16-7645-4056-2235bc0854f7@ti.com>
-In-Reply-To: <5496bc2b-ec16-7645-4056-2235bc0854f7@ti.com>
-Accept-Language: en-US
+	<8e782511d83845469e528927fc0bde47@ti.com>
+In-Reply-To: <8e782511d83845469e528927fc0bde47@ti.com>
+Accept-Language: en-IN, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.133.234]
+x-originating-ip: [10.250.132.233]
 x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
 Subject: Re: [EXTERNAL] [ thud PATCH v2] jailhouse: add recipe for Jailhouse module, FW, cells, inmates and basic demo
@@ -70,10 +71,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jul 2019 14:00:57 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 16:08:27 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+Reviewed-by: Subhajit Paul <subhajit_paul@ti..com>
+Tested-by: Subhajit Paul <subhajit_paul@ti..com>
+
+-----Original Message-----
+From: Devshatwar, Nikhil=20
+Sent: Sunday, July 7, 2019 7:31 PM
+To: Paul, Subhajit; meta-ti@yoctoproject.org
+Subject: RE: [meta-ti] [EXTERNAL] [ thud PATCH v2] jailhouse: add recipe fo=
+r Jailhouse module, FW, cells, inmates and basic demo
 
 
 
