@@ -1,6 +1,6 @@
-Return-Path: <subhajit_paul@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 043CDE00D3A; Mon,  8 Jul 2019 09:08:27 -0700 (PDT)
+	id DEF28E00BD5; Mon,  8 Jul 2019 09:41:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,55 +10,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D97DDE008A4
-	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2019 09:08:25 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x68G8P8E073753
-	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2019 11:08:25 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6EDB3E009FA
+	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2019 09:41:05 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x68Gf46p027130
+	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2019 11:41:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1562602105;
-	bh=8s+hrjWVekqqykkVOAt8MdbCrFq44qFUiunbqtibCF8=;
-	h=From:To:Subject:Date:References:In-Reply-To;
-	b=J1OxjdxjMi8y0jBAPlCHEvub9mbc7Z8cjowxJT4gbyrSM6EY5E0HBEfX7sR6SmwXM
-	738qpVyS9eJ+njZv+i3QZ7BSVmzvxxi54xPm/KXXsMTC9mciumSXTfkgIYSRQZ4t+7
-	NBBR+opL5+IRaZrMTwXCqFtjSYl6gUNDMHQzdXHw=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x68G8OqL006811
+	s=ti-com-17Q1; t=1562604064;
+	bh=FcbpKrc5/KmN0W9qvJSeRhE+YS5FTfgRH+QmU0k6zAs=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=qlvRkKa6n6f4duzrMQX04FWMOHXx+NA3PAAvJ/yx4LrBQzgEt+Y3ghqG73ofrLfma
+	ZWr1zjpVOagEtZNMa+1HZgin45Aejlxe/PX1eJglr7zkgjTXR+8o4tIlNCcVvAdB0M
+	qQHZXD+7bPiqA28bomWlXPnOwBOlV/nHijDeXoz8=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x68Gf4RU076358
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2019 11:08:24 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2019 11:41:04 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 8 Jul 2019 11:08:24 -0500
-Received: from DLEE110.ent.ti.com ([fe80::546b:3e96:e947:ccce]) by
-	DLEE110.ent.ti.com ([fe80::cdd3:d2b:f042:64fd%20]) with mapi id
-	15.01.1713.004; Mon, 8 Jul 2019 11:08:24 -0500
-From: "Paul, Subhajit" <subhajit_paul@ti.com>
-To: "Devshatwar, Nikhil" <nikhil.nd@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [EXTERNAL] [ thud PATCH v2] jailhouse: add recipe for
-	Jailhouse module, FW, cells, inmates and basic demo
-Thread-Index: AQHVNMxluJYQSaoUQkmRZjUgdzPWzabA5PLw
-Date: Mon, 8 Jul 2019 16:08:24 +0000
-Message-ID: <8749c369d8d8452fa9b4c3030d819d4a@ti.com>
-References: <1562339000-19082-1-git-send-email-nikhil.nd@ti.com>
-	<5496bc2b-ec16-7645-4056-2235bc0854f7@ti.com>
-	<8e782511d83845469e528927fc0bde47@ti.com>
-In-Reply-To: <8e782511d83845469e528927fc0bde47@ti.com>
-Accept-Language: en-IN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.132.233]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	Mon, 8 Jul 2019 11:41:04 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Mon, 8 Jul 2019 11:41:03 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x68Gf3Nd028848;
+	Mon, 8 Jul 2019 11:41:03 -0500
+Date: Mon, 8 Jul 2019 12:41:03 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Nikhil Devshatwar <nikhil.nd@ti.com>
+Message-ID: <20190708164103.GD26050@beryl>
+References: <1562317035-13652-1-git-send-email-nikhil.nd@ti.com>
 MIME-Version: 1.0
-Subject: Re: [EXTERNAL] [ thud PATCH v2] jailhouse: add recipe for Jailhouse module, FW, cells, inmates and basic demo
+In-Reply-To: <1562317035-13652-1-git-send-email-nikhil.nd@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: meta-ti@yoctoproject.org, karthik.ramanan@ti.com
+Subject: Re: [thud PATCH v1] packagegroup-arago-tisdk-addons: add jailhouse for j7-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,258 +67,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 16:08:27 -0000
-Content-Language: en-US
+X-List-Received-Date: Mon, 08 Jul 2019 16:41:05 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Reviewed-by: Subhajit Paul <subhajit_paul@ti..com>
-Tested-by: Subhajit Paul <subhajit_paul@ti..com>
-
------Original Message-----
-From: Devshatwar, Nikhil=20
-Sent: Sunday, July 7, 2019 7:31 PM
-To: Paul, Subhajit; meta-ti@yoctoproject.org
-Subject: RE: [meta-ti] [EXTERNAL] [ thud PATCH v2] jailhouse: add recipe fo=
-r Jailhouse module, FW, cells, inmates and basic demo
+Wrong list - this should be sent to meta-arago.
 
 
-
------Original Message-----
-From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
-.org] On Behalf Of Paul, Subhajit
-Sent: Sunday, July 7, 2019 3:04 PM
-To: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] [EXTERNAL] [ thud PATCH v2] jailhouse: add recipe fo=
-r Jailhouse module, FW, cells, inmates and basic demo
-
-On 05/07/19 8:33 PM, Nikhil Devshatwar wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
->
-> Builds the Jailhouse kernel module, hypervisor binaries
-> and all the cell configs for root cell and other demos.
-> Generate the linux-demo loader script without initramfs.
->
-> Supports am65x and j7-evm machines
->
-> [nikhil.nd@ti.com: Update for public trees]
->
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+On Fri, Jul 05, 2019 at 02:27:15PM +0530, Nikhil Devshatwar wrote:
 > Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
 > ---
-> Changes from v1:
-> * Fix issues with building tools
-> * Remove the makefile patch
->
->   recipes-bsp/jailhouse/jailhouse-arch.inc |  20 +++++
->   recipes-bsp/jailhouse/jailhouse_git.bb   | 141 ++++++++++++++++++++++++=
-+++++++
->   2 files changed, 161 insertions(+)
->   create mode 100644 recipes-bsp/jailhouse/jailhouse-arch.inc
->   create mode 100644 recipes-bsp/jailhouse/jailhouse_git.bb
->
-> diff --git a/recipes-bsp/jailhouse/jailhouse-arch.inc b/recipes-bsp/jailh=
-ouse/jailhouse-arch.inc
-> new file mode 100644
-> index 0000000..e06ec23
-> --- /dev/null
-> +++ b/recipes-bsp/jailhouse/jailhouse-arch.inc
-> @@ -0,0 +1,20 @@
-> +# Set jailhouse architecture JH_ARCH variable
-> +#
-> +# return value must match one of architectures supported by jailhouse
-> +#
-> +valid_jh_archs =3D "x86 arm"
-> +
-> +def map_jh_arch(a, d):
-> +    import re
-> +
-> +    valid_jh_archs =3D d.getVar('valid_jh_archs', True).split()
-> +
-> +    if   re.match('(i.86|athlon|x86.64)$', a):  return 'x86'
-> +    elif re.match('armeb$', a):                 return 'arm'
-> +    elif re.match('aarch64$', a):               return 'arm64'
-> +    elif re.match('aarch64_be$', a):            return 'arm64'
-> +    elif a in valid_jh_archs:                   return a
-> +    else:
-> +        bb.error("cannot map '%s' to a jailhouse supported architecture"=
- % a)
-> +
-> +export JH_ARCH =3D "${@map_jh_arch(d.getVar('TARGET_ARCH', True), d)}"
-> diff --git a/recipes-bsp/jailhouse/jailhouse_git.bb b/recipes-bsp/jailhou=
-se/jailhouse_git.bb
-> new file mode 100644
-> index 0000000..18b984f
-> --- /dev/null
-> +++ b/recipes-bsp/jailhouse/jailhouse_git.bb
-> @@ -0,0 +1,141 @@
-> +SUMMARY =3D "Linux-based partitioning hypervisor"
-> +DESCRIPTION =3D "Jailhouse is a partitioning Hypervisor based on Linux. =
-It is able to run bare-metal applications or (adapted) \
-> +operating systems besides Linux. For this purpose, it configures CPU and=
- device virtualization features of the hardware \
-> +platform in a way that none of these domains, called 'cells' here, can i=
-nterfere with each other in an unacceptable way."
-> +HOMEPAGE =3D "https://github.com/siemens/jailhouse"
-> +SECTION =3D "jailhouse"
-> +LICENSE =3D "GPL-2.0 & BSD-2-Clause"
-> +
-> +LIC_FILES_CHKSUM =3D " \
-> +    file://COPYING;md5=3D9fa7f895f96bde2d47fd5b7d95b6ba4d \
-> +"
-> +
-> +PV =3D "0.10+git${SRCPV}"
-> +SRCREV =3D "5c6aa2b78c6485e9455d9d1441df3d695e1a8b4e"
-> +BRANCH =3D "ti-jailhouse-0.10"
-> +
-> +SRC_URI =3D " \
-> +    git://git.ti.com/jailhouse/ti-jailhouse.git;protocol=3Dgit;branch=3D=
-${BRANCH} \
-> +"
-> +
-> +DEPENDS =3D "virtual/kernel dtc-native python-mako-native python-mako ma=
-ke-native"
-> +RDEPENDS_${PN} +=3D "\
-> +	python-curses\
-> +	python-datetime\
-> +	python-argparse\
-> +	python-mmap\
-> +"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +require jailhouse-arch.inc
-> +inherit module pythonnative bash-completion deploy
-> +
-> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> +
-> +JH_DATADIR ?=3D "${datadir}/jailhouse"
-> +JH_EXEC_DIR ?=3D "${libexecdir}/jailhouse"
-> +CELL_DIR ?=3D "${JH_DATADIR}/cells"
-> +CELLCONF_DIR ?=3D "${JH_DATADIR}/configs"
-> +INMATES_DIR ?=3D "${JH_DATADIR}/inmates"
-> +
-> +JH_CONFIG ?=3D "${S}/ci/jailhouse-config-x86.h"
-> +JH_CONFIG_k3 ?=3D "${S}/ci/jailhouse-config-k3.h"
-> +
-> +JH_CELL_FILES ?=3D "*.cell"
-> +JH_CELL_FILES_k3 ?=3D "k3-*.cell"
-> +
-> +JH_INMATE_DTB ?=3D ""
-> +JH_INMATE_DTB_am65xx-evm ?=3D "inmate-k3-am654.dtb"
-> +JH_INMATE_DTB_j7-evm ?=3D "inmate-k3-j721e-evm.dtb"
-> +
-> +JH_LINUX_DEMO_CELL ?=3D ""
-> +JH_LINUX_DEMO_CELL_am65xx-evm ?=3D "k3-am654-linux-demo.cell"
-> +JH_LINUX_DEMO_CELL_j7-evm ?=3D "k3-j721e-evm-linux-demo.cell"
-> +
-> +JH_SYSCONFIG_CELL ?=3D ""
-> +JH_SYSCONFIG_CELL_am65xx-evm ?=3D "k3-am654.cell"
-> +JH_SYSCONFIG_CELL_j7-evm ?=3D "k3-j721e-evm.cell"
-> +
-> +JH_CMDLINE ?=3D ""
-> +JH_CMDLINE_k3 ?=3D "console=3DttyS1,115200n8 root=3D/dev/mmcblk0p2 rw ro=
-otfstype=3Dext4 rootwait earlycon=3Dns16550a,mmio32,0x2810000"
-> +
-> +do_configure() {
-> +	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ];
-> +	then
-> +		cp ${STAGING_DIR_HOST}/${CELLCONF_DIR}/*.c ${S}/configs/
-> +	fi
-> +
-> +	cp -av ${JH_CONFIG} ${S}/include/jailhouse/config.h
-> +}
-> +
-> +USER_SPACE_CFLAGS =3D '${CFLAGS} -DLIBEXECDIR=3D\\\"${libexecdir}\\\" \
-> +                    -DJAILHOUSE_VERSION=3D\\\"$JAILHOUSE_VERSION\\\" \
-> +                    -Wall -Wextra -Wmissing-declarations -Wmissing-proto=
-types -Werror \
-> +                    -I../driver'
-> +
-> +TOOLS_SRC_DIR =3D "${S}/tools"
-> +TOOLS_OBJ_DIR =3D "${S}/tools"
-> +
-> +do_compile() {
-> +	oe_runmake V=3D1 ARCH=3D${JH_ARCH} CROSS_COMPILE=3D${TARGET_PREFIX} KDI=
-R=3D${STAGING_KERNEL_BUILDDIR}
-> +}
-> +
-> +python __anonymous () {
-> +	d.appendVarFlag('do_install', 'depends', ' virtual/kernel:do_deploy')
-> +	initrd =3D d.getVar('INITRAMFS_IMAGE', True)
-> +	if initrd:
-> +		d.appendVarFlag('do_install', 'depends', ' ${INITRAMFS_IMAGE}:do_image=
-_complete')
-> +}
-> +
-> +do_install() {
-> +	oe_runmake ARCH=3D${JH_ARCH} CROSS_COMPILE=3D${TARGET_PREFIX} KDIR=3D${=
-STAGING_KERNEL_BUILDDIR} DESTDIR=3D${D} install
-> +
-> +	install -d ${D}${CELL_DIR}
-> +	install -m 0644 ${B}/configs/${JH_ARCH}/${JH_CELL_FILES} ${D}${CELL_DIR=
-}/
-> +
-> +	install -d ${D}${INMATES_DIR}
-> +	install -m 0644 ${B}/inmates/demos/${JH_ARCH}/*.bin ${D}${INMATES_DIR}
-> +
-> +	install -d ${D}/boot
-> +
-> +	if [ -n "${JH_INMATE_DTB}" -a -n "${JH_LINUX_DEMO_CELL}" ]; then
-> +		cd ${TOOLS_SRC_DIR}
-> +
-> +		echo "#! /bin/sh" > ${D}${JH_DATADIR}/linux-demo.sh
-> +		echo "jailhouse enable ${CELL_DIR}/${JH_SYSCONFIG_CELL}" >> ${D}${JH_D=
-ATADIR}/linux-demo.sh
-> +		./jailhouse-cell-linux -w ${D}${JH_DATADIR}/${JH_INMATE_DTB} \
-> +			-a ${JH_ARCH} -c "${JH_CMDLINE}" \
-> +			-d ../configs/${JH_ARCH}/dts/${JH_INMATE_DTB} \
-> +			${D}${CELL_DIR}/${JH_LINUX_DEMO_CELL} \
-> +			${DEPLOY_DIR_IMAGE}/Image \
-> +			| tr -cd '\11\12\15\40-\176' \
-> +			>> ${D}${JH_DATADIR}/linux-demo.sh
-> +
-> +		sed -i -e 's,^Modified device tree written.*,,g' ${D}${JH_DATADIR}/lin=
-ux-demo.sh
-> +		sed -i -e 's,\${D},,g' ${D}${JH_DATADIR}/linux-demo.sh
-> +		sed -i -e 's, linux-loader.bin, ${JH_EXEC_DIR}/linux-loader.bin,g' ${D=
-}${JH_DATADIR}/linux-demo.sh
-> +		sed -i -e 's,\${DEPLOY_DIR_IMAGE},/boot,g' ${D}${JH_DATADIR}/linux-dem=
-o.sh
-> +		sed -i -e '/^\s*$/d' ${D}${JH_DATADIR}/linux-demo.sh
-> +		chmod +x ${D}${JH_DATADIR}/linux-demo.sh
-> +	fi
-> +}
-> +
-> +
-> +PACKAGE_BEFORE_PN =3D "kernel-module-jailhouse"
-> +FILES_${PN} =3D "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_D=
-ATADIR} /boot"
-> +
-> +INSANE_SKIP_${PN} =3D "ldflags"
-> +
-> +KERNEL_MODULE_AUTOLOAD +=3D "jailhouse"
-
-I think we should not autoload this.
-This only autloads the kernel module, Jailhouse is not installed yet.
-The Root cell Linux continues to run in non virtualized environment.
-
-- Subhajit
-
-> +
-> +# Any extra cells/inmates from external recipes/packages
-> +CELLS =3D ""
-> +
-> +python __anonymous () {
-> +    # Setup DEPENDS and RDEPENDS to included cells"
-> +    cells =3D d.getVar('CELLS', True) or ""
-> +    for cell in cells.split():
-> +        d.appendVar('DEPENDS', ' ' + cell)
-> +        d.appendVar('RDEPENDS_${PN}', ' ' + cell)
-> +}
---=20
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
+>  .../recipes-core/packagegroups/packagegroup-arago-tisdk-addons.bb       | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-arago-distro/recipes-core/packagegroups/packagegroup-arago-tisdk-addons.bb b/meta-arago-distro/recipes-core/packagegroups/packagegroup-arago-tisdk-addons.bb
+> index be3ada6..21aa724 100644
+> --- a/meta-arago-distro/recipes-core/packagegroups/packagegroup-arago-tisdk-addons.bb
+> +++ b/meta-arago-distro/recipes-core/packagegroups/packagegroup-arago-tisdk-addons.bb
+> @@ -76,7 +76,7 @@ UTILS_append_k3 = " mmc-utils \
+>  "
+>  
+>  UTILS_append_am65xx = " ti-ipc-rtos-fw pru-icss"
+> -UTILS_append_j7-evm = " ipc-lld-fw ti-display-sharing-fw"
+> +UTILS_append_j7-evm = " ipc-lld-fw ti-display-sharing-fw jailhouse"
+>  
+>  UTILS_append_omapl138 = " ti-ipc-rtos-fw"
+>  
+> -- 
+> 1.9.1
+> 
 
