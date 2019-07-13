@@ -1,13 +1,16 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0CFCAE00B65; Fri, 12 Jul 2019 17:43:38 -0700 (PDT)
+	id 8FBCCE00A96; Fri, 12 Jul 2019 18:00:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	https://www.dnswl.org/, no *      trust
+	*      [209.85.214.196 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
 	provider *      (raj.khem[at]gmail.com)
@@ -16,56 +19,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
-	no *      trust
-	*      [209.85.215.174 listed in list.dnswl.org]
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com
-	[209.85.215.174])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8B79E00A96
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:37 -0700 (PDT)
-Received: by mail-pg1-f174.google.com with SMTP id z75so5263106pgz.5
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:37 -0700 (PDT)
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 241A6E009EA
+	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 18:00:05 -0700 (PDT)
+Received: by mail-pl1-f196.google.com with SMTP id c14so5558594plo.0
+	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 18:00:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=VLXxYcDuTeJT2Pjb7CgkxHdvMq6KU084QCTWs2zkhHw=;
-	b=uf4UGGXPu7+ObtO39y7vvImVDucDAcwFsP9CbFi0QEz49/T4Bxp8657sxRJ3OzYxmD
-	jgN+kh1Y9hWVmTiclWlCwaNBlNDtyRc5HVO6++PNjA8wqY61HMgT2Kbl+ww2ZtoYU5HJ
-	4x0iaUDYjfmEVDtu3dy0f/l49MfPMulzrTWz5j2Fe0xO295zK+ECC4odK2coEW/mi5FY
-	vOEFpDt61W1tPMj3EgSFFwbk1NqTxEuTF3cxC4UG/PFlnM65t+m4amU2s7nSZvvdAczF
-	igqg90D2XKHzn1wrJh2h0MvE5/S8IFagTavdl+IWFEdILVV9R1JHC70WgOFDXtNvv+xo
-	llpA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EFvZSPdjDR1Kz3XXtFuX3eNnzi3EkPMj3MGhDABH3S4=;
+	b=SpcidajHFtSzIJin/Ei3INhq5m931cWDEX2GqBeLlzSQW+OsSBtLRH9VmIffaFtyGh
+	8bhby9YpcDd5gKpFd8+sK19+eB64msJv3szdlipplrtz/ldhU+9HMPfSe6xrYV69nesy
+	PTDMX5ABN7hxfz/eEWL8tH1G62/uhOWJ5z82YD/BKzXnzeAbAyaXOko7MTKw3uCRVrgX
+	vUQO2wCnU/PoL3jFWBYZvnNfK41C43e0DTYskuwurYzmTgvTDHly+uz/1DcNOtQlwArr
+	FEhCIpfT2mRByp5khRpBVSCij0Ma3h4tDe8x6ZAVGSE2KVqzPJTjLMqQ4dRSA5zj7713
+	wmEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=VLXxYcDuTeJT2Pjb7CgkxHdvMq6KU084QCTWs2zkhHw=;
-	b=jT6VTWrhNrvxZ2e1sPgwAOybg3k6njuRk4W33oE2Fc5tmb5csLWoGlIv75yGlG1BmF
-	TGKnav2cjvERgTKTROF8pYT2msQFDhhMpu2VzSo9LtX4i0aeYY7gqz1HH7LtLIyw6vGL
-	JPFKx9xQMx0Mr9uRBmm6cWyrrv+JLobebFxZ6E9fj4mkeC2UZriIsII05Bk1NaN3UhLC
-	k0iYYtWU4QmXRNk4YN7rfNThpmMDPSH7NN1UW7RuK6JNznMU8PsSowjPaaqZA/A5Oihr
-	K17ql0LZf73HpQpdKV0UjInkXGjzA0fVokp/DsISC0wS+i32BlZgSysqaajCEy+1auqP
-	/D8A==
-X-Gm-Message-State: APjAAAXvgCBSREjkO5sIij5JKtDUMDDfAnRo1n87kUyhs8G9qqwDVg4P
-	VcsFynHkJxNu6y+REqje7GMdCSGg3qM=
-X-Google-Smtp-Source: APXvYqwIRfKs6kmUiZrIps7cAAh/W9KA8VqkhihEsuzDfQ/A+4jC0YTg8Lg1Sl7ebuKEDVOZIAlD7Q==
-X-Received: by 2002:a17:90a:e397:: with SMTP id
-	b23mr15485117pjz.117.1562978616826; 
-	Fri, 12 Jul 2019 17:43:36 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EFvZSPdjDR1Kz3XXtFuX3eNnzi3EkPMj3MGhDABH3S4=;
+	b=OUErA7mRVdiNPAjKgKnlV31pstWvTQWiMyEregNH3a0rNjFYV0aEkWAsSYHPNtyhzM
+	FRvJh7r7faAm77i0GFBysYng8TRRY/lOkNg46pl6v1X76PZd4TRQceIMIB2AyY0phtib
+	zFgpIUScR9J22sCHtJ1+HbrR/NPMgkXX9YrElWIIeWT9WbuaifT0akak4EZI2gyv8nCv
+	y2kHcytF2xN6rKj0szZd0ngICau6WwIdnsjPqeoelZ4LitfU0/rfN0Mq8a2Jee68mZUg
+	3i8IIvUNmHDpgveGkonnGspNR020IoXB8rEuxWOsDIKIRhWssK3DXJqJt+v6g6EhohEO
+	D8mQ==
+X-Gm-Message-State: APjAAAWWhQZpNp161jESjOklNeakAjZ4Fs1VnrjDnvbKBsJLmMPRVFdG
+	jW7kCHHDiOeeFmnjb90WT/KVpd2wJCw=
+X-Google-Smtp-Source: APXvYqy4LIhiDTXS0HguEmom9a2lqy4k1EjoHGN74o5HbTznIWTNJs9GWayEJHDaA/wfBDOWGKzc6g==
+X-Received: by 2002:a17:902:b08a:: with SMTP id
+	p10mr15236368plr.83.1562979604271; 
+	Fri, 12 Jul 2019 18:00:04 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	j19sm10547303pgn.19.2019.07.12.17.43.36
+	b68sm14017194pfb.149.2019.07.12.18.00.03
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 12 Jul 2019 17:43:36 -0700 (PDT)
+	Fri, 12 Jul 2019 18:00:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 12 Jul 2019 17:43:24 -0700
-Message-Id: <20190713004324.12695-4-raj.khem@gmail.com>
+Date: Fri, 12 Jul 2019 17:59:54 -0700
+Message-Id: <20190713005955.6870-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190713004324.12695-1-raj.khem@gmail.com>
-References: <20190713004324.12695-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/4] jailhouse: Pin to TI SOCs
+Subject: [PATCH 1/2] amx3-cm3: Use COMPATIBLE_MACHINE instead of COMPATIBLE_HOST
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -78,31 +76,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jul 2019 00:43:38 -0000
+X-List-Received-Date: Sat, 13 Jul 2019 01:00:05 -0000
 Content-Transfer-Encoding: 8bit
 
-This needs to be ported and tested with non-TI SOCs
-its better to limit this to just TI SOCs as of now
-this makes sure that meta-ti can be used in a multi-BSP
-distro
+This represents it correctly in package arch as well
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-kernel/jailhouse/jailhouse_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
-index db31bb7d..919c75d9 100644
---- a/recipes-kernel/jailhouse/jailhouse_git.bb
-+++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-@@ -32,6 +32,7 @@ require jailhouse-arch.inc
- inherit module pythonnative bash-completion deploy
+diff --git a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+index b9a3b0fa..79166ca9 100644
+--- a/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
++++ b/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+@@ -24,5 +24,5 @@ do_install() {
+ }
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ FILES_${PN} += "${base_libdir}/firmware"
+-COMPATIBLE_HOST ?= "null"
+-COMPATIBLE_HOST_ti-soc = "(.*)"
++
 +COMPATIBLE_MACHINE = "(ti-soc)"
- 
- JH_DATADIR ?= "${datadir}/jailhouse"
- JH_EXEC_DIR ?= "${libexecdir}/jailhouse"
 -- 
 2.22.0
 
