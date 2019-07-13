@@ -1,6 +1,6 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 76579E00AF2; Fri, 12 Jul 2019 17:43:35 -0700 (PDT)
+	id 5842AE009FA; Fri, 12 Jul 2019 17:43:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,59 +11,61 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
 	provider *      (raj.khem[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
-	no *      trust
-	*      [209.85.215.193 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3F67E00931
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:34 -0700 (PDT)
-Received: by mail-pg1-f193.google.com with SMTP id z75so5263082pgz.5
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:34 -0700 (PDT)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.214.196 listed in list.dnswl.org]
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 583B3E009FA
+	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:35 -0700 (PDT)
+Received: by mail-pl1-f196.google.com with SMTP id k8so5571747plt.3
+	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pg7SACcZPy7cExJwyukz4lp/OF8flz7GV8G2q3gmVsY=;
-	b=b2rrL1JG7tUsvAgR4mDUOJ04naDri1+W285sCOs7xhjNrad3oFKe73/3GqyVtxnZKA
-	vu4/mC18frcOvg0WZJgSDRdY6P4M7onYdoAtXY+q87QVNJC3uok/TmCktJDn/MaxBuW8
-	Zh6DsDgLBZSlFwiz+rlb6cniPmXGeNT8yGDIcN3iscEE+Q03kYVx+SesZdW2MrOCkSL3
-	5BXHQ/8lPVwE5EJ2+hBAcuQs5VCtpA8iTvykWpo9FUdIZy3MOD6rRlU+WPGzO04IhK4P
-	xNu4a6kDHAUHcwn7R0oT2LRLS2YuBNYHUyZm9zBaYgTGdlPICmJij9aE53OA7zDf6cxM
-	jNUw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=0JskdxGZWjj9DD2NTuShUDUxLBx6zYQn0nCN+8jBruM=;
+	b=i42rtLiJF6eSqfrKtC8OjiekTGFrr5jZ0Q1M5JwW2Fh+T9NJjafYbjoqgXPr/Uo+1j
+	Y3DHmKpp4pYHkC9EHiU0x6p8uETX54ZSSw+MZ8D7Rtg77i22BwizMDBY2DHag4DzuQ3H
+	Wea9SbaAmu21ZxVpAuWJQu4zXw9EXSwcxetH4cA4AAH/xvNphGLsIw1SZDO5QMeoQXgA
+	HXjfI+jord8kYqN0O1PjnBRGc4r8yJyG+qbiO2vJM2pbkT5i4pUTAv58a6PLYnoEKPzE
+	Th1+3f7/m8Lss2uGqvFseKZXaGBND3xENGfjHRL9HF31dJV8UqyjYBzsKbZpIR1XjxlU
+	rmFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pg7SACcZPy7cExJwyukz4lp/OF8flz7GV8G2q3gmVsY=;
-	b=Hw5/clgogJOFitRd6y8HG8wEwERxIsS8mCtrhfZ61h2cZRCr+9fW3VO/ThapP+elmb
-	nbPCnm63V25bVBisHO0FwMPe9dSjNF25+TAb3DFlDBaod1tIeRQtDYia0rfZiKkzNP4X
-	hOVK5wu5yRKP2AwY2s0B3sSRps25pszTLwWeX8lrc/24KfjlK4M7rdIRkNkUpjmpubEo
-	1iQLmip0E/trb7J34taWbCBq58bMBJnMRJyaZrSvydKhhp62YHcNoP+Z/0mn8sIRnYx+
-	xAxfBvOHRHmgTflQFmsFYuSwIHClW9tFYgPcxbaT9uxrMVkEB8LruhCDx35C6Tt74SJM
-	iMHA==
-X-Gm-Message-State: APjAAAWiC8Q2E8NrcM/9cfX4WqjhDvX7er80skOj3nwlOuX0jLAT1NxX
-	724TalijuVmQk8hgyeFcQM4uZcR02xU=
-X-Google-Smtp-Source: APXvYqxVXUuzsxdsNi4p2EDr/3GJdQ+Q+ayid4aaMdW1qhexxydy1mENunUZp6yQGKI4gx5bUW1cZA==
-X-Received: by 2002:a17:90a:21ac:: with SMTP id
-	q41mr15708368pjc.31.1562978613852; 
-	Fri, 12 Jul 2019 17:43:33 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=0JskdxGZWjj9DD2NTuShUDUxLBx6zYQn0nCN+8jBruM=;
+	b=Ls8I2GRyjFyoD5gWcwZrMEClfPXC37dMIM6XDszrSsnQ2MglV3usf/StC0fTuHvsw4
+	YKKxWaCYjw3Ii6O1BGI+yFCB7ryyafi7+hvU8wURdkhxpnOn0BAyCZom4XmIvzdkOGxS
+	Cm8BzrE4BMxrPrXnWRXCmYXcNEhEYf+mNsT46L//kzA+uVfdgWc3xuLxRx9AFamAIxmI
+	d8Gc/+K6PTz6EUOnw3mBIzEYUnkx2CQzXo20Bu0zfnbY/DgnNlgMU4zHTzouwctT3f4a
+	dBCeo4T4FcYE4PR5C/KbZyp7rVh2OjY5MRn7/rmzznSs0mgknqaH7SxYuDNjCR070wCF
+	YWmA==
+X-Gm-Message-State: APjAAAVil2dXmvf66KlcqrzAQD6rO4LZ6u0EnP+wGdN34EtYzz/7thB4
+	Eq6jUzJ8+xdfR8cqGYoA1kO+zml05Yk=
+X-Google-Smtp-Source: APXvYqw7yjHIy797WWTR04HxJmaILl2SOn4bsN/94+T0KYbrAwM4dBXkiNvc3d+wc1+veEXztOpBPA==
+X-Received: by 2002:a17:902:8a8a:: with SMTP id
+	p10mr15362937plo.88.1562978614477; 
+	Fri, 12 Jul 2019 17:43:34 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
 	j19sm10547303pgn.19.2019.07.12.17.43.33
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 12 Jul 2019 17:43:33 -0700 (PDT)
+	Fri, 12 Jul 2019 17:43:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 12 Jul 2019 17:43:21 -0700
-Message-Id: <20190713004324.12695-1-raj.khem@gmail.com>
+Date: Fri, 12 Jul 2019 17:43:22 -0700
+Message-Id: <20190713004324.12695-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
+In-Reply-To: <20190713004324.12695-1-raj.khem@gmail.com>
+References: <20190713004324.12695-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/4] ti-display-sharing-fw: Do not strip during staging sysroot stage
+Subject: [PATCH 2/4] jailhouse: Limit OE architectures to supported ones
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -76,31 +78,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jul 2019 00:43:35 -0000
+X-List-Received-Date: Sat, 13 Jul 2019 00:43:36 -0000
 Content-Transfer-Encoding: 8bit
 
-Fixes build with non arm architectures
-
-Subprocess output:x86_64-yoe-linux-strip: Unable to recognise the format of the input file `TOPDIR/build/tmpfs/work/qemux86_64-yoe-linux/ti-display-sharing-fw/00.09.00.00-gitAUTOINC+4a86f16df9-r0/sysroot-destdir/lib/firmware/ti-display-sharing-j721e.bin'
+Fixes
+ERROR: cannot map 'mips' to a jailhouse supported architecture
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-bsp/ti-display-sharing-fw/ti-display-sharing-fw_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-kernel/jailhouse/jailhouse-arch.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/recipes-bsp/ti-display-sharing-fw/ti-display-sharing-fw_git.bb b/recipes-bsp/ti-display-sharing-fw/ti-display-sharing-fw_git.bb
-index 675b3f2c..db095d90 100644
---- a/recipes-bsp/ti-display-sharing-fw/ti-display-sharing-fw_git.bb
-+++ b/recipes-bsp/ti-display-sharing-fw/ti-display-sharing-fw_git.bb
-@@ -36,6 +36,8 @@ ALTERNATIVE_PRIORITY = "9"
+diff --git a/recipes-kernel/jailhouse/jailhouse-arch.inc b/recipes-kernel/jailhouse/jailhouse-arch.inc
+index e06ec231..0546fa26 100644
+--- a/recipes-kernel/jailhouse/jailhouse-arch.inc
++++ b/recipes-kernel/jailhouse/jailhouse-arch.inc
+@@ -18,3 +18,6 @@ def map_jh_arch(a, d):
+         bb.error("cannot map '%s' to a jailhouse supported architecture" % a)
  
- # This is used to prevent the build system to strip the executables
- INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
+ export JH_ARCH = "${@map_jh_arch(d.getVar('TARGET_ARCH', True), d)}"
 +
- # This is used to prevent the build system to split the debug info in a separate file
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- # As it likely to be a different arch from the Yocto build, disable checking by adding "arch" to INSANE_SKIP
++COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
++
 -- 
 2.22.0
 
