@@ -1,6 +1,6 @@
 Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5842AE009FA; Fri, 12 Jul 2019 17:43:36 -0700 (PDT)
+	id 981F2E00B3E; Fri, 12 Jul 2019 17:43:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,54 +18,53 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
 	no *      trust
-	*      [209.85.214.196 listed in list.dnswl.org]
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 583B3E009FA
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:35 -0700 (PDT)
-Received: by mail-pl1-f196.google.com with SMTP id k8so5571747plt.3
-	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:35 -0700 (PDT)
+	*      [209.85.210.196 listed in list.dnswl.org]
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A88EE00B6C
+	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:36 -0700 (PDT)
+Received: by mail-pf1-f196.google.com with SMTP id g2so5033189pfq.0
+	for <meta-ti@yoctoproject.org>; Fri, 12 Jul 2019 17:43:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=0JskdxGZWjj9DD2NTuShUDUxLBx6zYQn0nCN+8jBruM=;
-	b=i42rtLiJF6eSqfrKtC8OjiekTGFrr5jZ0Q1M5JwW2Fh+T9NJjafYbjoqgXPr/Uo+1j
-	Y3DHmKpp4pYHkC9EHiU0x6p8uETX54ZSSw+MZ8D7Rtg77i22BwizMDBY2DHag4DzuQ3H
-	Wea9SbaAmu21ZxVpAuWJQu4zXw9EXSwcxetH4cA4AAH/xvNphGLsIw1SZDO5QMeoQXgA
-	HXjfI+jord8kYqN0O1PjnBRGc4r8yJyG+qbiO2vJM2pbkT5i4pUTAv58a6PLYnoEKPzE
-	Th1+3f7/m8Lss2uGqvFseKZXaGBND3xENGfjHRL9HF31dJV8UqyjYBzsKbZpIR1XjxlU
-	rmFA==
+	bh=X9B6w6GiliO858oSCFLyTlK4GTR+CZ07xC9A8fpkg1Y=;
+	b=i3sJfgosgXy9O6C9nRcNAqEo0e/DhEyX/4W7qrlWJSUE0nn2OUjTCdUq2LbsxWj79f
+	KzsuF8u9P4wryf3epaCUufr6Yjz6oSdDQqnhwOmxmlaAVn65oWLKc+Lz++1kCVC3Zfdv
+	RwMrwNetg6wGoe+RZntOmDWJsNCADlfvMMEWQfN5LgmulSLhZEzSlarWYAA9uJk5zj+Q
+	YFdE2TF3eZLsTTTnt74gwHP/oLa8lrebFKvuAXPLgRDDt4AVcst7Ylp8iwogWbc0XZpu
+	X6m7zefrRu3PL/3j6fGa17QGa+0ukalvh1FSV8cS4FWSRLkoXZaqsNvAxMbu8JJ+Nr/x
+	LzAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=0JskdxGZWjj9DD2NTuShUDUxLBx6zYQn0nCN+8jBruM=;
-	b=Ls8I2GRyjFyoD5gWcwZrMEClfPXC37dMIM6XDszrSsnQ2MglV3usf/StC0fTuHvsw4
-	YKKxWaCYjw3Ii6O1BGI+yFCB7ryyafi7+hvU8wURdkhxpnOn0BAyCZom4XmIvzdkOGxS
-	Cm8BzrE4BMxrPrXnWRXCmYXcNEhEYf+mNsT46L//kzA+uVfdgWc3xuLxRx9AFamAIxmI
-	d8Gc/+K6PTz6EUOnw3mBIzEYUnkx2CQzXo20Bu0zfnbY/DgnNlgMU4zHTzouwctT3f4a
-	dBCeo4T4FcYE4PR5C/KbZyp7rVh2OjY5MRn7/rmzznSs0mgknqaH7SxYuDNjCR070wCF
-	YWmA==
-X-Gm-Message-State: APjAAAVil2dXmvf66KlcqrzAQD6rO4LZ6u0EnP+wGdN34EtYzz/7thB4
-	Eq6jUzJ8+xdfR8cqGYoA1kO+zml05Yk=
-X-Google-Smtp-Source: APXvYqw7yjHIy797WWTR04HxJmaILl2SOn4bsN/94+T0KYbrAwM4dBXkiNvc3d+wc1+veEXztOpBPA==
-X-Received: by 2002:a17:902:8a8a:: with SMTP id
-	p10mr15362937plo.88.1562978614477; 
-	Fri, 12 Jul 2019 17:43:34 -0700 (PDT)
+	bh=X9B6w6GiliO858oSCFLyTlK4GTR+CZ07xC9A8fpkg1Y=;
+	b=bmzDuJs1JOkW6jIDcDQpO/K0SoeVQHTL1p+piWxqBOv59H+sJMUSl+WpqXdUMtkGRl
+	nwO3qsEprTav4Kvd7YRBSX+vq99iDq4uy/dKypn3Qe62XUaXTUG6G94DD8JP0IQA7GFI
+	qcNhPZPvclP/W7jUS/wsIDyBVbsJ8+DvnfQKGUPfW8ZvZeFutFiAcZe4yGCxiZ73pqDD
+	Noobj9JbL/+nEUW9GmzHr88gMVOmUeEqh7WZ0aggHDk+P2LMBpoXK9yRPuFBAkIUUG7i
+	n8b6p7flZhjBT11V7BA+LgY2XJOJRmlEhaqWY0hdWoKbk4bRdJ/i7wlC0KIgneR5zUF4
+	RSZQ==
+X-Gm-Message-State: APjAAAUqmPKlfVcLTqaBZ6q47uNZvN+teqYLenReccvVL+DF9yp6HSwE
+	653/R+CANy59tu7bvvEU+4gYn2MWT6s=
+X-Google-Smtp-Source: APXvYqxp1/EalXCxzFmp3eSVwCeHQ/iSyUm+Ic5u1vJ+ct4MpYajpBeti4842RfLAoki5zOGdAB46w==
+X-Received: by 2002:a63:6507:: with SMTP id z7mr13600262pgb.186.1562978616120; 
+	Fri, 12 Jul 2019 17:43:36 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	j19sm10547303pgn.19.2019.07.12.17.43.33
+	j19sm10547303pgn.19.2019.07.12.17.43.34
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
 	Fri, 12 Jul 2019 17:43:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 12 Jul 2019 17:43:22 -0700
-Message-Id: <20190713004324.12695-2-raj.khem@gmail.com>
+Date: Fri, 12 Jul 2019 17:43:23 -0700
+Message-Id: <20190713004324.12695-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190713004324.12695-1-raj.khem@gmail.com>
 References: <20190713004324.12695-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/4] jailhouse: Limit OE architectures to supported ones
+Subject: [PATCH 3/4] jailhouse: Replace tabs with spaces in python code
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -78,28 +77,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jul 2019 00:43:36 -0000
+X-List-Received-Date: Sat, 13 Jul 2019 00:43:37 -0000
 Content-Transfer-Encoding: 8bit
 
 Fixes
-ERROR: cannot map 'mips' to a jailhouse supported architecture
+WARNING: python should use 4 spaces indentation, but found tabs in jailhouse_git.bb, line 85
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-kernel/jailhouse/jailhouse-arch.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ recipes-kernel/jailhouse/jailhouse_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/jailhouse/jailhouse-arch.inc b/recipes-kernel/jailhouse/jailhouse-arch.inc
-index e06ec231..0546fa26 100644
---- a/recipes-kernel/jailhouse/jailhouse-arch.inc
-+++ b/recipes-kernel/jailhouse/jailhouse-arch.inc
-@@ -18,3 +18,6 @@ def map_jh_arch(a, d):
-         bb.error("cannot map '%s' to a jailhouse supported architecture" % a)
+diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
+index 753664ed..db31bb7d 100644
+--- a/recipes-kernel/jailhouse/jailhouse_git.bb
++++ b/recipes-kernel/jailhouse/jailhouse_git.bb
+@@ -82,10 +82,10 @@ do_compile() {
+ }
  
- export JH_ARCH = "${@map_jh_arch(d.getVar('TARGET_ARCH', True), d)}"
-+
-+COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
-+
+ python __anonymous () {
+-	d.appendVarFlag('do_install', 'depends', ' virtual/kernel:do_deploy')
+-	initrd = d.getVar('INITRAMFS_IMAGE', True)
+-	if initrd:
+-		d.appendVarFlag('do_install', 'depends', ' ${INITRAMFS_IMAGE}:do_image_complete')
++        d.appendVarFlag('do_install', 'depends', ' virtual/kernel:do_deploy')
++        initrd = d.getVar('INITRAMFS_IMAGE', True)
++        if initrd:
++                d.appendVarFlag('do_install', 'depends', ' ${INITRAMFS_IMAGE}:do_image_complete')
+ }
+ 
+ do_install() {
 -- 
 2.22.0
 
