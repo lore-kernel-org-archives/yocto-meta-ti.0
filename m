@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C5B89E00D6A; Tue, 16 Jul 2019 08:11:39 -0700 (PDT)
+	id CEEA5E00D67; Tue, 16 Jul 2019 08:11:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -15,43 +15,45 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      valid
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7F71CE00D47
+	*      [198.47.19.141 listed in list.dnswl.org]
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9BA98E00D63
 	for <meta-ti@yoctoproject.org>; Tue, 16 Jul 2019 08:11:38 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x6GFBbaf083879
-	for <meta-ti@yoctoproject.org>; Tue, 16 Jul 2019 10:11:37 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x6GFBcA2124539
+	for <meta-ti@yoctoproject.org>; Tue, 16 Jul 2019 10:11:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1563289897;
-	bh=99B/2I8OgE0TycZ3YlBUKt8SQAkLmF3Vz6/HhSXbIxQ=;
-	h=From:To:CC:Subject:Date;
-	b=gNIqcuA6Tlw/GKg3GVo7AjWBwP/2Elgf4xl4PhFFDMaPivtJOzxefx7tC3p9HjT5a
-	cLceNoEgbU7spgV9ch9k5KehmH5jE97Yi4HnEcvmE/lbKHVn6s3U0t8dp9MaPmSmln
-	ZgI+9RMBiVYfZr2Z9YKbG2YbJetUPC6PtAdI2kGM=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x6GFBbT0019191
+	s=ti-com-17Q1; t=1563289898;
+	bh=Y1TTGXbnRzRAsSX+FUal2qNNDKyWqiM22/jToFbFBzA=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=h+IBTZXBD/Hli6M/vYB9OqcquuvhVxLl+wA8SPNKD28P7lK6567lgGVL1jrb8tr9P
+	2EauTb7jedIHdOImXFuEtuyNcrU2C5o1g+BrtSTJ7nm+AGMPOFcvdBCLbUZT9IdSWU
+	ckbGCWZX5sM4pm953IKbTGSr0fd8gNvF62EiLyLA=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x6GFBchu069122
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 16 Jul 2019 10:11:37 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 16 Jul 2019 10:11:38 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Tue, 16 Jul 2019 10:11:37 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE100.ent.ti.com
-	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE101.ent.ti.com
+	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
 	Frontend Transport; Tue, 16 Jul 2019 10:11:37 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x6GFBb6a064039;
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x6GFBbLd059876;
 	Tue, 16 Jul 2019 10:11:37 -0500
 From: Dan Murphy <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 16 Jul 2019 10:11:35 -0500
-Message-ID: <20190716151136.11199-1-dmurphy@ti.com>
+Date: Tue, 16 Jul 2019 10:11:36 -0500
+Message-ID: <20190716151136.11199-2-dmurphy@ti.com>
 X-Mailer: git-send-email 2.22.0.214.g8dca754b1e
+In-Reply-To: <20190716151136.11199-1-dmurphy@ti.com>
+References: <20190716151136.11199-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2019.02-rc4 tag
+Subject: [PATCH 2/2] linux-ti-staging: update to ti2019.02-rc4 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -70,23 +72,34 @@ Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index 5322a74c..f8349acc 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+index f9b3fb14..0591924c 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
  
--PR = "r19"
-+PR = "r20"
+ BRANCH = "ti-rt-linux-4.19.y"
  
- BRANCH = "ti-u-boot-2019.01"
+-SRCREV = "2f81b589b68ecca2421740e8c1e32a6fe3896b21"
++SRCREV = "7e13ea97dd88e93b41660737d226004b9439bbd2"
+ PV = "4.19.50+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+index 954c8a8b..16def5da 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -59,7 +59,7 @@ S = "${WORKDIR}/git"
  
--SRCREV = "6e54d1f7fa51da095a1d7db87bc3dce32a8ea7c5"
-+SRCREV = "060705d06cc36539a8e502a4cd500d8a80d74a48"
+ BRANCH = "ti-linux-4.19.y"
+ 
+-SRCREV = "79386bfefcb012692abd377a69ce4b8ea992b52e"
++SRCREV = "e56692e9c3c5de4ab094003454449a19503a8c32"
+ PV = "4.19.50+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
 2.22.0.214.g8dca754b1e
 
