@@ -1,60 +1,40 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 33970E00CD5; Mon, 29 Jul 2019 10:54:12 -0700 (PDT)
+	id 65224E00DFB; Fri,  2 Aug 2019 09:19:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96861E00CD2
-	for <meta-ti@yoctoproject.org>; Mon, 29 Jul 2019 10:54:11 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x6THsBNi108676
-	for <meta-ti@yoctoproject.org>; Mon, 29 Jul 2019 12:54:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1564422851;
-	bh=HAE1lfZxZLuHLPFYophDmrusJvS8VC9+L0QlUk7XO5E=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=DXHzOCYaPFEqCVTwSlMG0b1XSJYYKwzgyyirkLRT4uI6FhwFjJzQA+9oRqlaiOXxZ
-	dliulnrtsvXgHvKSGj5OeUUw6zRNls8ticeHpkOUUf5q16OrfiAkZq17crgneIagoj
-	TC5yx88A97F19rDLqOuMHKs3KR/WDqXylxPKkJlE=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x6THsB14107979
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 29 Jul 2019 12:54:11 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 29 Jul 2019 12:54:10 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 29 Jul 2019 12:54:10 -0500
-Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x6THs8To029802;
-	Mon, 29 Jul 2019 12:54:10 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 29 Jul 2019 13:37:27 -0400
-Message-ID: <1564421847-25948-3-git-send-email-j-stiffler@ti.com>
+X-Greylist: delayed 413 seconds by postgrey-1.32 at yocto-www;
+	Fri, 02 Aug 2019 09:19:02 PDT
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E472E00DFB
+	for <meta-ti@yoctoproject.org>; Fri,  2 Aug 2019 09:19:01 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5968B40BDC;
+	Fri,  2 Aug 2019 16:12:09 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id F4-h5bIzsRzq; Fri,  2 Aug 2019 16:12:09 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3FD5840BC4;
+	Fri,  2 Aug 2019 16:12:08 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 791C717155E;
+	Fri,  2 Aug 2019 12:12:07 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Fri,  2 Aug 2019 12:12:07 -0400
+Message-Id: <1564762327-46237-1-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1564421847-25948-1-git-send-email-j-stiffler@ti.com>
-References: <1564421847-25948-1-git-send-email-j-stiffler@ti.com>
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][PATCH 3/3] ti-cgt-arm: extend to nativesdk
+Subject: [thud/master][PATCH] linux-ti-staging: update to 4.19.59, drop k3-j721e-dp0.dtbo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,47 +47,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 17:54:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 02 Aug 2019 16:19:03 -0000
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- .../{ti-cgt-arm-native_18.12.1.bb => ti-cgt-arm_18.12.1.bb}        | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
- rename recipes-ti/devtools/{ti-cgt-arm-native_18.12.1.bb => ti-cgt-arm_18.12.1.bb} (90%)
+ conf/machine/j7-evm.conf                         | 1 -
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 6 +++---
+ 3 files changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-cgt-arm-native_18.12.1.bb b/recipes-ti/devtools/ti-cgt-arm_18.12.1.bb
-similarity index 90%
-rename from recipes-ti/devtools/ti-cgt-arm-native_18.12.1.bb
-rename to recipes-ti/devtools/ti-cgt-arm_18.12.1.bb
-index 5d72406..eecde58 100644
---- a/recipes-ti/devtools/ti-cgt-arm-native_18.12.1.bb
-+++ b/recipes-ti/devtools/ti-cgt-arm_18.12.1.bb
-@@ -4,7 +4,6 @@ LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0
+diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
+index 55d7d61..17d48d0 100644
+--- a/conf/machine/j7-evm.conf
++++ b/conf/machine/j7-evm.conf
+@@ -11,7 +11,6 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
  
- LIC_FILES_CHKSUM = "file://ti-cgt-arm_${PV}.LTS/README.txt;md5=ab7a61241e90fcd144a756d88294cf30"
+ KERNEL_DEVICETREE = " \
+     ti/k3-j721e-common-proc-board.dtb \
+-    ti/k3-j721e-dp0.dtbo \
+     ti/k3-j721e-common-proc-board-infotainment.dtbo \
+     ti/k3-j721e-common-proc-board-infotainment-display-sharing.dtbo \
+     ti/k3-j721e-common-proc-board-jailhouse.dtbo \
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+index 0591924..6a614e5 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
  
--inherit native
- require recipes-ti/includes/ti-unpack.inc
- require recipes-ti/includes/ti-staging.inc
- require recipes-ti/includes/ti-paths.inc
-@@ -19,6 +18,10 @@ BINFILE = "ti_cgt_tms470_${PV}.LTS_linux_installer_x86.bin"
- TI_BIN_UNPK_ARGS = "--prefix ${S}"
- TI_BIN_UNPK_CMDS = ""
+ BRANCH = "ti-rt-linux-4.19.y"
  
-+# only x86_64 is supported
-+COMPATIBLE_HOST = "x86_64.*-linux"
-+COMPATIBLE_HOST_class-target = "null"
-+
- do_install() {
-     install -d ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
-     cp -r ${S}/ti-cgt-arm*/. ${D}${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}
-@@ -36,3 +39,5 @@ INHIBIT_SYSROOT_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-SRCREV = "7e13ea97dd88e93b41660737d226004b9439bbd2"
+-PV = "4.19.50+git${SRCPV}"
++SRCREV = "57d7f0b3d0bcd0b9a2f579010b6ece87dc43cd8b"
++PV = "4.19.59+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+index 16def5d..6e9b8d8 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -59,11 +59,11 @@ S = "${WORKDIR}/git"
  
- INSANE_SKIP_${PN} += "arch staticdev"
-+
-+BBCLASSEXTEND = "native nativesdk"
+ BRANCH = "ti-linux-4.19.y"
+ 
+-SRCREV = "e56692e9c3c5de4ab094003454449a19503a8c32"
+-PV = "4.19.50+git${SRCPV}"
++SRCREV = "b6ad90b0801b8828648682a75f84be83fb9fab06"
++PV = "4.19.59+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 -- 
 2.7.4
 
