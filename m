@@ -1,6 +1,6 @@
-Return-Path: <g-tammana@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7CFFDE00EBE; Fri,  2 Aug 2019 12:33:13 -0700 (PDT)
+	id 250F6E00EBF; Fri,  2 Aug 2019 12:34:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -19,46 +19,46 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0D9DE00EB0
-	for <meta-ti@yoctoproject.org>; Fri,  2 Aug 2019 12:33:12 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x72JXCeU116983
-	for <meta-ti@yoctoproject.org>; Fri, 2 Aug 2019 14:33:12 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80B16E00EBB
+	for <meta-ti@yoctoproject.org>; Fri,  2 Aug 2019 12:34:52 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x72JYqad117186
+	for <meta-ti@yoctoproject.org>; Fri, 2 Aug 2019 14:34:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1564774392;
-	bh=63bAEWIy5IpfdkmfWNp8TtaMQ/CQBg3tTO/v6augUbI=;
-	h=From:To:CC:Subject:Date;
-	b=oQh6KjUSUqotJiihYbwObuW7ZRBpKbxXbR+VNT3lBM+vM8HMNZc5Kz36hR8suFQyB
-	fZPufxf1ubv72/sUK8tvq+37vR1LWcbqOOcWCEk64hTFxR0in7FNq2iVFU5hTsGLYS
-	9jVVkM8GNx6+es5JgLyf0doGle/3LctYJSmxH1VY=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x72JXC5k091319
+	s=ti-com-17Q1; t=1564774492;
+	bh=Hq8bV12oZW73m/E+yLVgbTIzk/nJiLUzo6ga+/hWTXo=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=OBJqo4YozTGjZ4WQ1H33wRuizJLkbCQI+TGj1bf5fgbUfRiZ5a4PhHl1pfoigqqT4
+	nkUZcmA88higCPa+8ezXkp90XVoJ0mzyDlKH35qdKqbKW447BJPCtYP2TSsE6sT6+4
+	9MNFVtCsbSqwFLZoxJXH1ajvqEE+d9ShxAoIWmiA=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x72JYqYs000734
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 2 Aug 2019 14:33:12 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 2 Aug 2019 14:34:52 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Fri, 2 Aug 2019 14:33:12 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE106.ent.ti.com
-	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 2 Aug 2019 14:34:51 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Fri, 2 Aug 2019 14:33:12 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x72JXCrF080488;
-	Fri, 2 Aug 2019 14:33:12 -0500
-Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com
-	[128.247.77.97])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x72JXBZ11490; Fri, 2 Aug 2019 14:33:11 -0500 (CDT)
-From: Gowtham Tammana <g-tammana@ti.com>
-To: Denys Dmytriyenko <denys@ti.com>, <meta-ti@yoctoproject.org>
-Date: Fri, 2 Aug 2019 14:35:05 -0500
-Message-ID: <20190802193505.25313-1-g-tammana@ti.com>
-X-Mailer: git-send-email 2.22.0
+	Frontend Transport; Fri, 2 Aug 2019 14:34:51 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x72JYpbM046902;
+	Fri, 2 Aug 2019 14:34:51 -0500
+Date: Fri, 2 Aug 2019 15:34:51 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Tammana, Gowtham" <g-tammana@ti.com>
+Message-ID: <20190802193451.GT20944@beryl>
+References: <20190802193001.20559-1-g-tammana@ti.com>
+	<c712cd58ad6d445e96780796c30eb6dc@ti.com>
+	<20190802193228.GS20944@beryl>
 MIME-Version: 1.0
+In-Reply-To: <20190802193228.GS20944@beryl>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud][PATCH] ti-img-rogue-umlibs: Update recipe to pick newer version
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] ti-img-rogue-driver: Update recipe to pick newer version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,42 +71,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 19:33:13 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Fri, 02 Aug 2019 19:34:53 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Updated the recipe to pick newer version, 1.10.5371573, of libgles
-libraries.
+Ah, you mean "thud" tag, Ok.
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
----
- ...bs_1.10.5187610.bb => ti-img-rogue-umlibs_1.10.5371573.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename recipes-graphics/libgles/{ti-img-rogue-umlibs_1.10.5187610.bb => ti-img-rogue-umlibs_1.10.5371573.bb} (96%)
-
-diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-similarity index 96%
-rename from recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb
-rename to recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-index a8030aae..8c05fd1c 100644
---- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5187610.bb
-+++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_MACHINE = "j7-evm"
- 
--PR = "r9"
-+PR = "r0"
- 
- BRANCH = "linuxws/thud/k4.19/${PV}"
- 
- SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=${BRANCH}"
--SRCREV = "9ca36686e248675b709e5072672f987a2d95ed86"
-+SRCREV = "a6875532315d71f036104a5cb49efa5857b4d953"
- 
- PVR_SOC ?= "j721e_linux"
- PVR_BUILD ?= "release"
--- 
-2.22.0
-
+On Fri, Aug 02, 2019 at 03:32:28PM -0400, Denys Dmytriyenko wrote:
+> It's automatic
+> 
+> On Fri, Aug 02, 2019 at 03:28:54PM -0400, Tammana, Gowtham wrote:
+> > Missed on meta-ti tag in the subject. Will send v2.
+> > 
+> > Thanks,
+> > Gowtham
+> > 
+> > >-----Original Message-----
+> > >From: Tammana, Gowtham
+> > >Sent: Friday, August 02, 2019 2:30 PM
+> > >To: Dmytriyenko, Denys; meta-ti@yoctoproject.org
+> > >Cc: Tammana, Gowtham
+> > >Subject: [PATCH] ti-img-rogue-driver: Update recipe to pick newer version
+> > >
+> > >Updated the recipe to pick the newer version, 1.10.5371573, of rogue
+> > >gpu kernel sources.
+> > >
+> > >Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+> > >---
+> > > ...er_1.10.5187610.bb => ti-img-rogue-driver_1.10.5371573.bb} | 4 ++--
+> > > 1 file changed, 2 insertions(+), 2 deletions(-)
+> > > rename recipes-bsp/powervr-drivers/{ti-img-rogue-driver_1.10.5187610.bb =>
+> > >ti-img-rogue-driver_1.10.5371573.bb} (92%)
+> > >
+> > >diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
+> > >b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
+> > >similarity index 92%
+> > >rename from recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
+> > >rename to recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
+> > >index 9ae60c4e..fcf35edc 100644
+> > >--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5187610.bb
+> > >+++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
+> > >@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =
+> > >"file://README;beginline=15;endline=20;md5=0403c7dea01a2b8232
+> > >
+> > > inherit module
+> > >
+> > >-MACHINE_KERNEL_PR_append = "e"
+> > >+MACHINE_KERNEL_PR_append = "a"
+> > > PR = "${MACHINE_KERNEL_PR}"
+> > >
+> > > PACKAGE_ARCH = "${MACHINE_ARCH}"
+> > >@@ -20,7 +20,7 @@ BRANCH = "linuxws/thud/k4.19/${PV}"
+> > > SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-
+> > >driver.git;branch=${BRANCH}"
+> > > S = "${WORKDIR}/git"
+> > >
+> > >-SRCREV = "976f73444ef86b231819052bba2020e5b00aeb06"
+> > >+SRCREV = "1531b98ba602911359bfded2d683e49b3c731313"
+> > >
+> > > PVR_SOC = "j721e_linux"
+> > > PVR_BVNC = "22.104.208.318"
+> > >--
+> > >2.22.0
+> > 
 
