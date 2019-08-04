@@ -1,44 +1,61 @@
-Return-Path: <andy.pont@sdcsystems.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 66BF1E00C9E; Sun,  4 Aug 2019 05:03:42 -0700 (PDT)
+	id C4274E00A5C; Sun,  4 Aug 2019 08:11:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_QP_LONG_LINE,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
-	no *      trust
-	*      [216.40.44.200 listed in list.dnswl.org]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
-Received: from smtprelay.hostedemail.com (smtprelay0200.hostedemail.com
-	[216.40.44.200])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6151DE007E1
-	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 05:03:41 -0700 (PDT)
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
-	[216.40.38.60])
-	by smtprelay01.hostedemail.com (Postfix) with ESMTP id DD193100E86C3
-	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 12:03:39 +0000 (UTC)
-X-Session-Marker: 616E64792E706F6E744073646373797374656D732E636F6D
-X-HE-Tag: camp93_1fea523889316
-X-Filterd-Recvd-Size: 4119
-Received: from [192.168.10.100] (unknown [5.133.40.160])
-	(Authenticated sender: andy.pont@sdcsystems.com)
-	by omf15.hostedemail.com (Postfix) with ESMTPA
-	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 12:03:39 +0000 (UTC)
-From: "Andy Pont" <andy.pont@sdcsystems.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Date: Sun, 04 Aug 2019 12:03:37 +0000
-Message-Id: <em44ffe6f3-add5-413e-994e-7c6409ff9a3f@andys-imac.local>
-User-Agent: eM_Client/7.2.35700.0
-Mime-Version: 1.0
-Subject: Kernel config fragments not in deployed image.
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A636FE00931
+	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 08:11:45 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x74FBiXm091853
+	for <meta-ti@yoctoproject.org>; Sun, 4 Aug 2019 10:11:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1564931505;
+	bh=Gr69RPoS5RqJANGU6dJAbXE4asUP32ZUNriJaJeVzvk=;
+	h=From:To:Subject:Date;
+	b=y6/GWD+7veVfqzLc9TNu3uCacZNo+5lb/8JuCe2HjmpR8puZ2p89qzwp1YjKeMIIr
+	EhxgO9nOvQz5s1n7/w9e4WytxwWis0/gxp2jPjVKv1dfhi0kKkZ51sSbAGAQxHkv5T
+	s+e37WMHHUjZXwx48/pB2+m+bjhbWzeEXTidBYng=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x74FBioY099864
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Sun, 4 Aug 2019 10:11:44 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Sun, 4 Aug 2019 10:11:44 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Sun, 4 Aug 2019 10:11:44 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x74FBito002979
+	for <meta-ti@yoctoproject.org>; Sun, 4 Aug 2019 10:11:44 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Sun, 4 Aug 2019 11:11:41 -0400
+Message-ID: <1564931501-45964-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [thud/master][PATCH] ti-sysbios: Update to sysbios 6.72.02.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: Andy Pont <andy.pont@sdcsystems.com>
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -48,59 +65,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Aug 2019 12:03:42 -0000
-Content-Type: multipart/alternative;
-	boundary="------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF"
+X-List-Received-Date: Sun, 04 Aug 2019 15:11:47 -0000
+Content-Type: text/plain
 
---------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF
-Content-Type: text/plain; format=flowed; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+The checksum has changed due to version & date, the license has not
+changed
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
+ recipes-ti/bios/ti-sysbios.inc                     |  3 +-
+ .../{ti-sysbios.inc => ti-sysbios_6.76.02.02.bb}   | 34 +++++++---------------
+ 2 files changed, 11 insertions(+), 26 deletions(-)
+ copy recipes-ti/bios/{ti-sysbios.inc => ti-sysbios_6.76.02.02.bb} (7%)
 
-I have created a linux-ti-staging_4.19.bbappend which contains the =0Afollo=
-wing:=0A=0AFILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:=E2=80=9D=0A=0ASR=
-C_URI +=3D =E2=80=9C \=0A   file://rtl8192cu.cfg \=0A=E2=80=9C=0A=0AKERNEL_=
-CONFIG_FRAGMENTS_append =3D =E2=80=9C \=0A   ${WORKDIR}/rtl8192cu.cfg \=0A=
-=E2=80=9C=0A=0AThe rtl8192cu.cfg file enables a few options to build a kern=
-el module =0Afor the RTL8192 USB WiFi module:=0A=0ACONFIG_RTL8192CU=3Dm=0AC=
-ONFIG_RTLWIFI=3Dm=0ACONFIG_RTLWIFI_USB=3Dm=0ACONFIG_RTLWIFI_DEBUG=3Dy=0ACON=
-FIG_RTL8192C_COMMON=3Dm=0A=0AAfter rebuilding the image I can find the resu=
-ltant rtl8192cu.ko file in =0Aa number of directories under =0Atmp/work/bea=
-glebone-poky-linux-gnueabi/linux-ti-staging/4.19.38+gitAUTOINC+c17c376661-r=
-22a =0Abut it isn=E2=80=99t in the lib/modules/=E2=80=A6 directory in the d=
-eployed image.=0A=0AHave I missed a step somewhere along the way?=0A=0A-And=
-y.=0A=0A
+diff --git a/recipes-ti/bios/ti-sysbios.inc b/recipes-ti/bios/ti-sysbios.inc
+index d2a551f..087f2ed 100644
+--- a/recipes-ti/bios/ti-sysbios.inc
++++ b/recipes-ti/bios/ti-sysbios.inc
+@@ -10,8 +10,7 @@ require ../includes/ti-eula-unpack.inc
+ S = "${WORKDIR}/bios_${PV}"
+ 
+ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios/${PV}/exports/bios_setuplinux_${PV}.bin;name=sysbiosbin"
+-
+-BINFILE="bios_setuplinux_${PV}.bin"
++BINFILE="bios_${PV}.bin"
+ TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
+ 
+ do_install() {
+diff --git a/recipes-ti/bios/ti-sysbios.inc b/recipes-ti/bios/ti-sysbios_6.76.02.02.bb
+similarity index 7%
+copy from recipes-ti/bios/ti-sysbios.inc
+copy to recipes-ti/bios/ti-sysbios_6.76.02.02.bb
+index d2a551f..c7acf8e 100644
+--- a/recipes-ti/bios/ti-sysbios.inc
++++ b/recipes-ti/bios/ti-sysbios_6.76.02.02.bb
+@@ -1,29 +1,15 @@
+-DESCRIPTION = "TI SYS/BIOS v6 Kernel"
+-HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios"
+-SECTION = "devel"
+-LICENSE = "BSD"
++require recipes-ti/bios/ti-sysbios.inc
+ 
+-require ../includes/ti-paths.inc
+-require ../includes/ti-staging.inc
+-require ../includes/ti-eula-unpack.inc
++PV = "6_76_02_02"
++PR = "r0"
+ 
+-S = "${WORKDIR}/bios_${PV}"
++LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=5cf40699c51b26d36fc01647c0b27fb1"
+ 
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios/${PV}/exports/bios_setuplinux_${PV}.bin;name=sysbiosbin"
++SRC_URI[sysbiosbin.md5sum] = "7ae35f34179492913e40f02ec5ffb7dd"
++SRC_URI[sysbiosbin.sha256sum] = "029981f79ce61fe28241944f4f60c37b2c4b8c83fe1ee38ed400d58412b4fdb6"
+ 
+-BINFILE="bios_setuplinux_${PV}.bin"
+-TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
++TI_BIN_UNPK_CMDS = ""
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+ 
+-do_install() {
+-    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+-    install -d ${D}${SYSBIOS_INSTALL_DIR_RECIPE}
+-    cp ${CP_ARGS} ${S}/* ${D}${SYSBIOS_INSTALL_DIR_RECIPE}
+-}
+-
+-ALLOW_EMPTY_${PN} = "1"
+-FILES_${PN}-dev += "${SYSBIOS_INSTALL_DIR_RECIPE}"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-INSANE_SKIP_${PN}-dev = "arch ldflags staticdev file-rdeps"
++BINFILE = "bios_${PV}.run"
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios/${PV}/exports/${BINFILE};name=sysbiosbin"
+-- 
+1.9.1
 
---------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
 
-<html><head><style id=3D"css_styles">blockquote.cite { margin-left: 5px; ma=
-rgin-right: 0px; padding-left: 10px; padding-right:0px; border-left: 1px so=
-lid #cccccc }=0Ablockquote.cite2 {margin-left: 5px; margin-right: 0px; padd=
-ing-left: 10px; padding-right:0px; border-left: 1px solid #cccccc; margin-t=
-op: 3px; padding-top: 0px; }=0Aa img { border: 0px; }=0Ali[style=3D'text-al=
-ign: center;'], li[style=3D'text-align: right;'] {  list-style-position: in=
-side;}=0Abody { font-family: Verdana; font-size: 12px;   }</style></head><b=
-ody class=3D"plain"><div>I have created a linux-ti-staging_4.19.bbappend wh=
-ich contains the following:</div><div><br /></div><div>FILESEXTRAPATHS_prep=
-end :=3D "${THISDIR}/${PN}:=E2=80=9D</div><div><br /></div><div>SRC_URI +=
-=3D =E2=80=9C \</div><div>=C2=A0 file://rtl8192cu.cfg \</div><div>=E2=80=9C=
-</div><div><br /></div><div>KERNEL_CONFIG_FRAGMENTS_append =3D =E2=80=9C \<=
-/div><div>=C2=A0 ${WORKDIR}/rtl8192cu.cfg \</div><div>=E2=80=9C</div><div><=
-br /></div><div id=3D"signature_old">The rtl8192cu.cfg file enables a few o=
-ptions to build a kernel module for the RTL8192 USB WiFi module:</div><div=
- id=3D"signature_old"><br /></div><div id=3D"signature_old">CONFIG_RTL8192CU=
-=3Dm</div><div id=3D"signature_old">CONFIG_RTLWIFI=3Dm</div><div id=3D"sign=
-ature_old">CONFIG_RTLWIFI_USB=3Dm</div><div id=3D"signature_old">CONFIG_RTL=
-WIFI_DEBUG=3Dy</div><div id=3D"signature_old">CONFIG_RTL8192C_COMMON=3Dm</d=
-iv><div id=3D"signature_old"><br /></div><div id=3D"signature_old">After re=
-building the image I can find the resultant rtl8192cu.ko file in a number o=
-f directories under tmp/work/beaglebone-poky-linux-gnueabi/linux-ti-staging=
-/4.19.38+gitAUTOINC+c17c376661-r22a but it isn=E2=80=99t in the lib/modules=
-/=E2=80=A6 directory in the deployed image.</div><div id=3D"signature_old">=
-<br /></div><div id=3D"signature_old">Have I missed a step somewhere along=
- the way?</div><div id=3D"signature_old"><br /></div><div id=3D"signature_ol=
-d">-Andy.</div><div id=3D"signature_old">=C2=A0=C2=A0</div><div><br /></div=
->=0A</body></html>
-
---------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF--
