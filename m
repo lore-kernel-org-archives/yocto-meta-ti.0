@@ -1,61 +1,44 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <andy.pont@sdcsystems.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D1349E00AE6; Fri,  2 Aug 2019 18:17:44 -0700 (PDT)
+	id 66BF1E00C9E; Sun,  4 Aug 2019 05:03:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_QP_LONG_LINE,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11807E00AB6
-	for <meta-ti@yoctoproject.org>; Fri,  2 Aug 2019 18:17:36 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x731HZr1022690
-	for <meta-ti@yoctoproject.org>; Fri, 2 Aug 2019 20:17:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1564795055;
-	bh=tka0xtytBV1Hs8WhzchC7tCGjg5rGc/gzPE7JUO1JJM=;
-	h=From:To:CC:Subject:Date;
-	b=SLAqNgGDhnhw3lh5KXJoHOnzALlG0zZJ5DlCtCoxbCdYoJt6jqsRoYebfZsKu7Djn
-	2hgP+YgzJwewl/HkmVIqMOox7ZFdLnOyNwRSX0gbXpRqPTFIx7cirnHY9ETLpiKu5o
-	X8QVy7VJFmt4deiT4mbjCnLa0j1Z0PAB64SDGGwY=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x731HZcW081270
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 2 Aug 2019 20:17:35 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Fri, 2 Aug 2019 20:17:35 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE106.ent.ti.com
-	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Fri, 2 Aug 2019 20:17:35 -0500
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x731HYuT051078;
-	Fri, 2 Aug 2019 20:17:35 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>, <s-anna@ti.com>
-Date: Fri, 2 Aug 2019 21:17:29 -0400
-Message-ID: <1564795049-19168-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH] ti-ipc: Update to new version 3.50.04.06
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [216.40.44.200 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
+Received: from smtprelay.hostedemail.com (smtprelay0200.hostedemail.com
+	[216.40.44.200])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6151DE007E1
+	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 05:03:41 -0700 (PDT)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
+	[216.40.38.60])
+	by smtprelay01.hostedemail.com (Postfix) with ESMTP id DD193100E86C3
+	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 12:03:39 +0000 (UTC)
+X-Session-Marker: 616E64792E706F6E744073646373797374656D732E636F6D
+X-HE-Tag: camp93_1fea523889316
+X-Filterd-Recvd-Size: 4119
+Received: from [192.168.10.100] (unknown [5.133.40.160])
+	(Authenticated sender: andy.pont@sdcsystems.com)
+	by omf15.hostedemail.com (Postfix) with ESMTPA
+	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 12:03:39 +0000 (UTC)
+From: "Andy Pont" <andy.pont@sdcsystems.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Date: Sun, 04 Aug 2019 12:03:37 +0000
+Message-Id: <em44ffe6f3-add5-413e-994e-7c6409ff9a3f@andys-imac.local>
+User-Agent: eM_Client/7.2.35700.0
+Mime-Version: 1.0
+Subject: Kernel config fragments not in deployed image.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: Andy Pont <andy.pont@sdcsystems.com>
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -65,61 +48,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2019 01:17:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 04 Aug 2019 12:03:42 -0000
+Content-Type: multipart/alternative;
+	boundary="------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF"
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
----
- recipes-ti/ipc/ti-ipc-common.inc | 2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc   | 8 ++++----
- recipes-ti/ipc/ti-ipc.inc        | 4 ++--
- 3 files changed, 7 insertions(+), 7 deletions(-)
+--------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF
+Content-Type: text/plain; format=flowed; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 036e46d..4ec72cc 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.50.03.05"
-+PV = "3.50.04.06"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index dcd6309..460befe 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,10 +24,10 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
- 
--# Corresponds to tag: 3.50.03.05
--TI_IPC_METADATA_SRCREV = "3936c41d021c6d56c25f4bb07b647314a6589a57"
--# Corresponds to tag: 3.50.03.05
--TI_IPC_EXAMPLES_SRCREV = "55a8341c60a91c0ba2d79b7e4b805e2e39b3060f"
-+# Corresponds to tag: 3.50.04.06
-+TI_IPC_METADATA_SRCREV = "15d256ea3c3a35fe065a0513f09f4ea6ece58725"
-+# Corresponds to tag: 3.50.04.06
-+TI_IPC_EXAMPLES_SRCREV = "f29c27652302892abbe78ce2c22a2aae28b28d69"
- 
- SRCREV_FORMAT = "default"
- SRCREV_ipc-metadata = "${TI_IPC_METADATA_SRCREV}"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 482fdcc..b9f9ca9 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.50"
- 
--#Corresponds to 3.50.03.05
--TI_IPC_SRCREV = "7007b8adff409fd8c90757c9adafd264a3ff15e3"
-+#Corresponds to 3.50.04.06
-+TI_IPC_SRCREV = "ca7ce99b8ec82331559f0fd99a174bdcca1da9ac"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
--- 
-1.9.1
+I have created a linux-ti-staging_4.19.bbappend which contains the =0Afollo=
+wing:=0A=0AFILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:=E2=80=9D=0A=0ASR=
+C_URI +=3D =E2=80=9C \=0A   file://rtl8192cu.cfg \=0A=E2=80=9C=0A=0AKERNEL_=
+CONFIG_FRAGMENTS_append =3D =E2=80=9C \=0A   ${WORKDIR}/rtl8192cu.cfg \=0A=
+=E2=80=9C=0A=0AThe rtl8192cu.cfg file enables a few options to build a kern=
+el module =0Afor the RTL8192 USB WiFi module:=0A=0ACONFIG_RTL8192CU=3Dm=0AC=
+ONFIG_RTLWIFI=3Dm=0ACONFIG_RTLWIFI_USB=3Dm=0ACONFIG_RTLWIFI_DEBUG=3Dy=0ACON=
+FIG_RTL8192C_COMMON=3Dm=0A=0AAfter rebuilding the image I can find the resu=
+ltant rtl8192cu.ko file in =0Aa number of directories under =0Atmp/work/bea=
+glebone-poky-linux-gnueabi/linux-ti-staging/4.19.38+gitAUTOINC+c17c376661-r=
+22a =0Abut it isn=E2=80=99t in the lib/modules/=E2=80=A6 directory in the d=
+eployed image.=0A=0AHave I missed a step somewhere along the way?=0A=0A-And=
+y.=0A=0A
 
+--------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+<html><head><style id=3D"css_styles">blockquote.cite { margin-left: 5px; ma=
+rgin-right: 0px; padding-left: 10px; padding-right:0px; border-left: 1px so=
+lid #cccccc }=0Ablockquote.cite2 {margin-left: 5px; margin-right: 0px; padd=
+ing-left: 10px; padding-right:0px; border-left: 1px solid #cccccc; margin-t=
+op: 3px; padding-top: 0px; }=0Aa img { border: 0px; }=0Ali[style=3D'text-al=
+ign: center;'], li[style=3D'text-align: right;'] {  list-style-position: in=
+side;}=0Abody { font-family: Verdana; font-size: 12px;   }</style></head><b=
+ody class=3D"plain"><div>I have created a linux-ti-staging_4.19.bbappend wh=
+ich contains the following:</div><div><br /></div><div>FILESEXTRAPATHS_prep=
+end :=3D "${THISDIR}/${PN}:=E2=80=9D</div><div><br /></div><div>SRC_URI +=
+=3D =E2=80=9C \</div><div>=C2=A0 file://rtl8192cu.cfg \</div><div>=E2=80=9C=
+</div><div><br /></div><div>KERNEL_CONFIG_FRAGMENTS_append =3D =E2=80=9C \<=
+/div><div>=C2=A0 ${WORKDIR}/rtl8192cu.cfg \</div><div>=E2=80=9C</div><div><=
+br /></div><div id=3D"signature_old">The rtl8192cu.cfg file enables a few o=
+ptions to build a kernel module for the RTL8192 USB WiFi module:</div><div=
+ id=3D"signature_old"><br /></div><div id=3D"signature_old">CONFIG_RTL8192CU=
+=3Dm</div><div id=3D"signature_old">CONFIG_RTLWIFI=3Dm</div><div id=3D"sign=
+ature_old">CONFIG_RTLWIFI_USB=3Dm</div><div id=3D"signature_old">CONFIG_RTL=
+WIFI_DEBUG=3Dy</div><div id=3D"signature_old">CONFIG_RTL8192C_COMMON=3Dm</d=
+iv><div id=3D"signature_old"><br /></div><div id=3D"signature_old">After re=
+building the image I can find the resultant rtl8192cu.ko file in a number o=
+f directories under tmp/work/beaglebone-poky-linux-gnueabi/linux-ti-staging=
+/4.19.38+gitAUTOINC+c17c376661-r22a but it isn=E2=80=99t in the lib/modules=
+/=E2=80=A6 directory in the deployed image.</div><div id=3D"signature_old">=
+<br /></div><div id=3D"signature_old">Have I missed a step somewhere along=
+ the way?</div><div id=3D"signature_old"><br /></div><div id=3D"signature_ol=
+d">-Andy.</div><div id=3D"signature_old">=C2=A0=C2=A0</div><div><br /></div=
+>=0A</body></html>
+
+--------=_MB751C0FAC-4C9A-47BC-BFC2-7CBAE5C253DF--
