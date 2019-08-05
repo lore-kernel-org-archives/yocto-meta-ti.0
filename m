@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 46986E00B8E; Sun,  4 Aug 2019 18:47:13 -0700 (PDT)
+	id 43BDEE00D35; Mon,  5 Aug 2019 11:02:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,51 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2DD48E00A00
-	for <meta-ti@yoctoproject.org>; Sun,  4 Aug 2019 18:47:11 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x751l9KE009153;
-	Sun, 4 Aug 2019 20:47:09 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B0DBE0049C
+	for <meta-ti@yoctoproject.org>; Mon,  5 Aug 2019 11:02:49 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x75I2mEb098829
+	for <meta-ti@yoctoproject.org>; Mon, 5 Aug 2019 13:02:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1564969629;
-	bh=tPVIS013pNTKx6JYkAgvlca0XE/KvfgGvJJfIS1N+10=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=caGcIYb/3JwdUPLx7ncO/O0MAI2jiAXXb5oO4SQth4pJAuPHWFsav/4ofiSl4pQ4o
-	vRNiIq8AOFm1TkJYZ0a5t+AUlDeXhifSwSsVeRcM6XPVskchLHLM7kz+pWs+niW4C1
-	N3RKTLc8nu1MY4vaKgT4uRZhlfXLleWuoGe3bVSQ=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x751l9YJ097499
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 4 Aug 2019 20:47:09 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1565028168;
+	bh=9/hnfckN0HfPH3WQOVayo4M9RSOJ6U6KWEWGFXWNXJ4=;
+	h=From:To:Subject:Date;
+	b=TJP1k5jPF+WBYN7gzBUP6gxJDvWtr2U8SakyHbxQe9uO+Iyy49IeZZUIkjcbtFtMU
+	vdShrMUqo+ABT50dHYFad3FQbyo36ELWHXmL3ELEWFJvxIl4S308BJf1HlZgH4qxws
+	P9tBq0nipMA3VJXZ8C2/exqbn6ESC2Yuk7iE7Vdw=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x75I2mUF098093
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Mon, 5 Aug 2019 13:02:48 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Sun, 4 Aug 2019 20:47:09 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 5 Aug 2019 13:02:48 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Sun, 4 Aug 2019 20:47:09 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x751l9Wn066109;
-	Sun, 4 Aug 2019 20:47:09 -0500
-Date: Sun, 4 Aug 2019 21:47:08 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Andy Pont <andy.pont@sdcsystems.com>
-Message-ID: <20190805014708.GB19505@beryl>
-References: <em44ffe6f3-add5-413e-994e-7c6409ff9a3f@andys-imac.local>
+	Frontend Transport; Mon, 5 Aug 2019 13:02:48 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x75I2lcN011061
+	for <meta-ti@yoctoproject.org>; Mon, 5 Aug 2019 13:02:48 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 5 Aug 2019 14:02:44 -0400
+Message-ID: <1565028164-34658-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <em44ffe6f3-add5-413e-994e-7c6409ff9a3f@andys-imac.local>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Kernel config fragments not in deployed image.
+Subject: [thud/master][PATCH v2] ti-cgt-pru: Update to version 2.3.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,53 +65,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 01:47:13 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 05 Aug 2019 18:02:50 -0000
+Content-Type: text/plain
 
-On Sun, Aug 04, 2019 at 12:03:37PM +0000, Andy Pont wrote:
-> I have created a linux-ti-staging_4.19.bbappend which contains the
-> following:
-> 
-> FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:”
-> 
-> SRC_URI += “ \
->   file://rtl8192cu.cfg \
-> “
-> 
-> KERNEL_CONFIG_FRAGMENTS_append = “ \
->   ${WORKDIR}/rtl8192cu.cfg \
-> “
-> 
-> The rtl8192cu.cfg file enables a few options to build a kernel module for
-> the RTL8192 USB WiFi module:
-> 
-> CONFIG_RTL8192CU=m
-> CONFIG_RTLWIFI=m
-> CONFIG_RTLWIFI_USB=m
-> CONFIG_RTLWIFI_DEBUG=y
-> CONFIG_RTL8192C_COMMON=m
-> 
-> After rebuilding the image I can find the resultant rtl8192cu.ko file in a
-> number of directories under tmp/work/beaglebone-poky-linux-gnueabi/linux-ti-staging/4.19.38+gitAUTOINC+c17c376661-r22a
-> but it isn’t in the lib/modules/… directory in the deployed image.
+The License Checksum has changed due to version, the licenses have not
+changed
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
+ v2 -Fixed RDEPENDS & cgt-pru-arm md5sum & sha256sum
 
-> Subject: Kernel config fragments not in deployed image.
+ .../devtools/{ti-cgt-pru_2.2.1.bb => ti-cgt-pru_2.3.2.bb}  | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+ rename recipes-ti/devtools/{ti-cgt-pru_2.2.1.bb => ti-cgt-pru_2.3.2.bb} (71%)
 
-You are mixing few totally orthogonal things - config fragments, kernel 
-modules and what gets added into a deployed image.
-
-Config fragments change kernel configuration, which may or may not result in 
-extra kernel modules. Definitely you should not expect config fragments to be 
-deployed into an image, as you said in the Subject.
-
-But once you get your modules built, you'd need to modify your image recipe to 
-get those installed and be part of the corresponding image.
-
-Depending on your image recipe, you either need to add the extra kernel module 
-to RDEPENDS_${PN}, to a corresponding packagegroup or to IMAGE_INSTALL.
-
+diff --git a/recipes-ti/devtools/ti-cgt-pru_2.2.1.bb b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+similarity index 71%
+rename from recipes-ti/devtools/ti-cgt-pru_2.2.1.bb
+rename to recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+index 8d3887e..ed10e27 100644
+--- a/recipes-ti/devtools/ti-cgt-pru_2.2.1.bb
++++ b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+@@ -2,8 +2,8 @@ DESCRIPTION = "TI PRU Code Generation Tools"
+ HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+ LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
+ 
+-LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.2.x_manifest.html;md5=e84b4022808f66b075095cb896747758"
+-LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.2.x_manifest.html;md5=e84b4022808f66b075095cb896747758"
++LIC_FILES_CHKSUM = "file://ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.3.x_manifest.html;md5=e22f9d8240f7cca0c0aa5242d9ffa5bc"
++LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.3.x_manifest.html;md5=e22f9d8240f7cca0c0aa5242d9ffa5bc"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-unpack.inc
+@@ -18,11 +18,11 @@ BINFILE_NAME_class-target = "cgt-pru-arm"
+ 
+ SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
+ 
+-SRC_URI[cgt-pru-x86.md5sum] = "749d75841eef7b465c7cb08beaa1d135"
+-SRC_URI[cgt-pru-x86.sha256sum] = "7dc37fd689d1d506bf410d2a00af658b93a58d4bc10ac32c2210129dab617377"
++SRC_URI[cgt-pru-x86.md5sum] = "270a0ecca383f66cad3a0e2a738c6ab0"
++SRC_URI[cgt-pru-x86.sha256sum] = "af1178a059d46d67d5672df053dd2fbebb0b89a513b17b8739dbe915b4a5d71a"
+ 
+-SRC_URI[cgt-pru-arm.md5sum] = "389eef56777e30e6dab337efca4af2bf"
+-SRC_URI[cgt-pru-arm.sha256sum] = "b47a032f67cb3a3e5bea8ee3ed1908038f42938dd08e2ff72fc64f7aae2c1ff8"
++SRC_URI[cgt-pru-arm.md5sum] = "fbf10083af1b0e5d69b018126603bb58"
++SRC_URI[cgt-pru-arm.sha256sum] = "75ac84775a5624ea7e4fad4efc1acb7e869c79160550d48ba780068a3dce879c"
+ 
+ do_install() {
+     install -d ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}
+@@ -44,6 +44,6 @@ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_SYSROOT_STRIP = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ 
+-INSANE_SKIP_${PN} += "arch staticdev already-stripped"
++INSANE_SKIP_${PN} += "arch staticdev already-stripped file-rdeps"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-Denys
+1.9.1
+
 
