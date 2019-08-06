@@ -1,62 +1,58 @@
-Return-Path: <jbergsagel@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0F6FAE00D47; Mon,  5 Aug 2019 16:06:29 -0700 (PDT)
+	id 51384E00C9B; Tue,  6 Aug 2019 11:54:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	https://www.dnswl.org/, *      medium trust
+	*      [198.47.19.141 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79FB6E0049C
-	for <meta-ti@yoctoproject.org>; Mon,  5 Aug 2019 16:06:28 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x75N6RLM040526
-	for <meta-ti@yoctoproject.org>; Mon, 5 Aug 2019 18:06:27 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0BD31E006EE
+	for <meta-ti@yoctoproject.org>; Tue,  6 Aug 2019 11:54:30 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x76IsUbo025470
+	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1565046387;
-	bh=ew3yI0ihHche9oRx8cA2BZn8d+pMGas32gdieMFupR0=;
-	h=From:To:CC:Subject:Date;
-	b=qNCsN8fa5zaDrtkk7X2sY+p7HyGwlOCcF3b4E1BPVR/cW9lUO7eTbw5ERlP9KbFNM
-	z2HoNQk7g/PI7ryp3X3TjZtB9TZR6ByCihvN1a+WubZJJ+RPdMrcfCMd7lX+wuumfY
-	AZ4or+OKXbGMMnYaDcxiDsbpBgZCRIZcoZqUnsj4=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x75N6R4g036796
+	s=ti-com-17Q1; t=1565117670;
+	bh=5KrzuXbCRDRwT/bzdSKy9hnwRJAsC3HuqW3i1P0pnTU=;
+	h=From:To:Subject:Date;
+	b=jx8n8Jvj/vYqWP5UJXRLML6cv908rY7ifrhKd4aChqPYZGGDMox7azya95KgYajmA
+	JetdTBiOIWMingW7I0/c1aD6ZWgyTYi0Zj8Ji5DenOYiRJvDc/WomY1KJG0C6VOV7c
+	b2CLmhSBtluLm7S99OJf2xrA68wIqzrfZQaAKiOE=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x76IsUuP063808
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 5 Aug 2019 18:06:27 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:30 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 5 Aug 2019 18:06:27 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
-	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 6 Aug 2019 13:54:30 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 5 Aug 2019 18:06:27 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x75N6RqF065593;
-	Mon, 5 Aug 2019 18:06:27 -0500
-Received: from localhost (udc0211050.dhcp.ti.com [128.247.77.185])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x75N6RZ27717; Mon, 5 Aug 2019 18:06:27 -0500 (CDT)
-From: Jonathan Bergsagel <jbergsagel@ti.com>
+	Frontend Transport; Tue, 6 Aug 2019 13:54:30 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x76IsTFW070565
+	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:30 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 5 Aug 2019 18:04:23 -0500
-Message-ID: <20190805230423.2564-1-jbergsagel@ti.com>
-X-Mailer: git-send-email 2.17.1
+Date: Tue, 6 Aug 2019 14:53:55 -0400
+Message-ID: <1565117660-52661-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: Suman Anna <s-anna@ti.com>, Santosh Jha <sjha@ti.com>
-Subject: [PATCH] ipc-lld: firmware binary updates with WFI fix
+Subject: [thud/master][PATCH 00/25] RTOS Patchset for sysbios 6.76.02.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,32 +65,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 23:06:29 -0000
+X-List-Received-Date: Tue, 06 Aug 2019 18:54:32 -0000
 Content-Type: text/plain
 
-Updated IPC/LLD firmware binaries for AM65xx and
-J721E to support WFI state for proper remote core
-power-down and power-up.
+This is the RTOS patchset which contains the c6x big endian descope changes needed to include sysbios 6.76.02.02 for ProcSDK 6.1 RTOS release
 
-Signed-off-by: Jonathan Bergsagel <jbergsagel@ti.com>
----
- recipes-bsp/ipc-lld/ipc-lld-fw_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Mahesh Radhakrishnan (25):
+  aif2-lld: SRCREV update t 01.02.00.02B
+  bcp-lld-rtos:SCREV update to 02.01.00.07B
+  cppi-lld: SRCREV update to 02.01.00.14A
+  edma3-lld: SRCREV update
+  faultmanagement-rtos: SRCREV update to 01.00.01.04A
+  fftc-lld-rtos: SRCREV update to 02.02.00.07B
+  hyplnk-lld: SRCREV update to 02.01.00.08A
+  iqn-lld: SRCREV update to 1.0.0.11A
+  mmap-lld: SRCREV update to 02.00.00.08B
+  nwal-lld: SRCREV update to 02.01.00.12A
+  pa-lld: SRCREV update to 03.00.02.08A
+  pktlib: SRCREV update to 2.1.0.8B
+  rm-lld: SRCREV update to 02.02.00.03B
+  sa-lld: SRCREV update to 04.00.00.03A
+  serdes-diag-rtos: SRCREV udpate to 01.00.00.12B
+  srio-lld: SRCREV update to 02.00.00.17A
+  tcp3d-lld-rtos: SRCREV update to 0-2.01.00.06B
+  traceframework: SRCREV udpate to 01.01.01.09A
+  transport-rtos: SRCREV update to 01.00.00.16B
+  tsip-lld-rtos: SRCREV update to 01.00.00.08A
+  wdtimer-rtos: SRCREV update to 01.00.00.04A
+  dsplib: SRCREV update
+  mathlib: SRCREV update
+  swtools: SRCREV update
+  ti-pdk-build-rtos: SRCREV update to 01.00.00.13B
 
-diff --git a/recipes-bsp/ipc-lld/ipc-lld-fw_git.bb b/recipes-bsp/ipc-lld/ipc-lld-fw_git.bb
-index 4c8743d021f3..dd1f57b3ba3a 100644
---- a/recipes-bsp/ipc-lld/ipc-lld-fw_git.bb
-+++ b/recipes-bsp/ipc-lld/ipc-lld-fw_git.bb
-@@ -13,7 +13,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- PROTOCOL = "git"
- BRANCH = "master"
--SRCREV = "81392da08fab2b5cfc23d63dbe71b7244a6af477"
-+SRCREV = "c9f7cfe61b67998a053fe145344ce0c9b5bb22aa"
- 
- SRC_URI = "git://git.ti.com/keystone-rtos/ipc-lld.git;protocol=${PROTOCOL};branch=${BRANCH}"
- 
+ recipes-bsp/aif2-lld/aif2-lld.inc                       | 6 +++---
+ recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb                 | 6 +++---
+ recipes-bsp/cppi-lld/cppi-lld.inc                       | 6 +++---
+ recipes-bsp/edma3-lld/edma3-lld.inc                     | 4 ++--
+ recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb | 6 +++---
+ recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb               | 6 +++---
+ recipes-bsp/hyplnk-lld/hyplnk-lld.inc                   | 6 +++---
+ recipes-bsp/iqn2-lld/iqn2-lld.inc                       | 6 +++---
+ recipes-bsp/mmap-lld/mmap-lld.inc                       | 6 +++---
+ recipes-bsp/nwal-lld/nwal-lld.inc                       | 6 +++---
+ recipes-bsp/pa-lld/pa-lld.inc                           | 6 +++---
+ recipes-bsp/pktlib/pktlib.inc                           | 6 +++---
+ recipes-bsp/rm-lld/rm-lld.inc                           | 6 +++---
+ recipes-bsp/sa-lld/sa-lld.inc                           | 6 +++---
+ recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb         | 6 +++---
+ recipes-bsp/srio-lld/srio-lld.inc                       | 6 +++---
+ recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb             | 6 +++---
+ recipes-bsp/traceframework/traceframework.inc           | 6 +++---
+ recipes-bsp/transport-rtos/transport.inc                | 6 +++---
+ recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb               | 6 +++---
+ recipes-bsp/wdtimer/wdtimer-rtos_git.bb                 | 6 +++---
+ recipes-ti/dsplib/dsplib.inc                            | 4 ++--
+ recipes-ti/mathlib/mathlib.inc                          | 4 ++--
+ recipes-ti/swtools/swtools_git.bb                       | 4 ++--
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb        | 6 +++---
+ 25 files changed, 71 insertions(+), 71 deletions(-)
+
 -- 
-2.17.1
+1.9.1
 
 
