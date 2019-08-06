@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 171A3E00D88; Tue,  6 Aug 2019 11:54:41 -0700 (PDT)
+	id 26DB7E00D8B; Tue,  6 Aug 2019 11:54:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 742C4E00DA9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70053E00D9F
 	for <meta-ti@yoctoproject.org>; Tue,  6 Aug 2019 11:54:40 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x76Isd8p025524
-	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:39 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x76IseUI025528
+	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1565117679;
-	bh=KZdVyVh6w9hTEDjLYl4sIXM1xe+Hqrwo5bOylK8r5qo=;
+	s=ti-com-17Q1; t=1565117680;
+	bh=2WrO/RQtqg0r2ohNzlIctQqreDYhEmCPPhqMQ1FdyjQ=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=m5Z1pTwax+HqfFyjufoT3qKUreCxZNiXs/inQNBYiGMuQll9wuVcSS3Pi/FeYfsHE
-	/ZtWS+dPNlCFs/9Sgq7x30Zj4c7quWgYvD0iKoADpKBy1VzrtuKW8S1+b9CdP92BBT
-	TKgdYo8fVlqClRuONGDl5osmGuECj0P3YrKwIKKQ=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x76Isd7T063949
+	b=D28Vdfm3ztOhFNLun0GNUc5Y7S+W90NipBQbjWgs1XWniJVlBsSXmvL+zEx1Xj4uF
+	GXDpYoFtKURGbEJWXt3PkpNHeAjLYkDS8PxasuiXC8ol6SWxslfiRUaZR04+ydYSZt
+	nKfCOgFQI0LeFggs4aYGcorHdEgh9si+SWyowc6A=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x76IseCP058424
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:39 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:40 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Tue, 6 Aug 2019 13:54:39 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
-	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
 	Frontend Transport; Tue, 6 Aug 2019 13:54:39 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x76IsTFp070565
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x76IsTFq070565
 	for <meta-ti@yoctoproject.org>; Tue, 6 Aug 2019 13:54:39 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 6 Aug 2019 14:54:14 -0400
-Message-ID: <1565117660-52661-20-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 6 Aug 2019 14:54:15 -0400
+Message-ID: <1565117660-52661-21-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1565117660-52661-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1565117660-52661-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 19/25] transport-rtos: SRCREV update to 01.00.00.16B
+Subject: [thud/master][PATCH 20/25] tsip-lld-rtos: SRCREV update to 01.00.00.08A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,29 +72,31 @@ Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-bsp/transport-rtos/transport.inc | 6 +++---
+ recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/transport-rtos/transport.inc b/recipes-bsp/transport-rtos/transport.inc
-index 086c80e..52784dc 100644
---- a/recipes-bsp/transport-rtos/transport.inc
-+++ b/recipes-bsp/transport-rtos/transport.inc
-@@ -6,12 +6,12 @@ TRANSPORT_GIT_URI = "git://git.ti.com/keystone-rtos/transport.git"
- TRANSPORT_GIT_PROTOCOL = "git"
- TRANSPORT_GIT_BRANCH = "master"
+diff --git a/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb b/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
+index 0e90e6a..6da80dd 100644
+--- a/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
++++ b/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
+@@ -12,14 +12,14 @@ TSIP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/tsip-lld.git"
+ TSIP_LLD_GIT_PROTOCOL = "git"
+ TSIP_LLD_GIT_BRANCH = "master"
  
--# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.16A"
--TRANSPORT_SRCREV = "63793fa936534e5cc940b1ed562dfb866cdc442f"
-+# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.16B"
-+TRANSPORT_SRCREV = "70fead21c102b9b75db99f1933aade27a000ef34"
+-# Below commit ID corresponds to "DEV.TSIP_LLD.01.00.00.08"
+-TSIP_LLD_SRCREV = "f40c0153b711622e67ab4b36da5cf044f7bd9a8e"
++# Below commit ID corresponds to "DEV.TSIP_LLD.01.00.00.08A"
++TSIP_LLD_SRCREV = "368ff5fbd963f4b5d5c81bbfaf3daca23beb2a87"
  
- BRANCH = "${TRANSPORT_GIT_BRANCH}"
- SRC_URI = "${TRANSPORT_GIT_URI};protocol=${TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
+ BRANCH = "${TSIP_LLD_GIT_BRANCH}"
+ SRC_URI = "${TSIP_LLD_GIT_URI};protocol=${TSIP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
  
- SRCREV = "${TRANSPORT_SRCREV}"
--PV = "01.00.00.16A"
-+PV = "01.00.00.16B"
- INC_PR = "r0"
+ SRCREV = "${TSIP_LLD_SRCREV}"
+-PV = "01.00.00.08"
++PV = "01.00.00.08A"
+ PR = "r0"
+ 
+ # HTML doc link params
 -- 
 1.9.1
 
