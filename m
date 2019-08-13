@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D9AFE00C7D; Tue, 13 Aug 2019 13:00:16 -0700 (PDT)
+	id F4132E00C7D; Tue, 13 Aug 2019 13:01:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,42 +17,42 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A945BE0090E
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 13:00:15 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8CAA8E00BEB
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 13:01:36 -0700 (PDT)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DK0FFx119655
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:00:15 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DK1ap1119915
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:01:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1565726415;
-	bh=xJCWio8Q9py7urJmZq/RFFlXDUAuAgryreqIykQ08+Y=;
+	s=ti-com-17Q1; t=1565726496;
+	bh=+1++XAhcxk2Dh8+hK5yKlnwNYayBqbTNVZorLag+LlA=;
 	h=From:To:Subject:Date;
-	b=GVjmMKPO63T24blyp2xcDyoNc2Wnqe2YOgbLNaglY8XEhjTS+YPNsoo6G8Wv2qSa/
-	ebebr7J+9nLJyPAJlWvxTDmXyXcegLUVJbqeJZ30dYE32N8I7m2b92bJpHF9s/LtGz
-	8fpbrYLqxh2XEykFBnD8EKzCpX86CROLv/IW7tDM=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DK0FE3003797
+	b=xZnnidmFnkYOw8JDiX7qQpJf8JQIpQkvEzm3kOlZ51CZebx0V1iQ+rt4KPBXiGHFU
+	Zq7O2Vz+irz6QpmlR53fIZZQBZj8UTqiFF/S/qONs/Gqvw+4DTIBSN4WaHuyuLz6SR
+	g15FibIVycp6beGdODnbcXJQZf12++RMrg53QYE0=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DK1Zb4005610
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:00:15 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:01:36 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 13 Aug 2019 15:00:15 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 13 Aug 2019 15:01:35 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE114.ent.ti.com
+	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 13 Aug 2019 15:00:15 -0500
+	Frontend Transport; Tue, 13 Aug 2019 15:01:35 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DK0EDp033594
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:00:14 -0500
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DK1Zea125643
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:01:35 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 13 Aug 2019 16:00:13 -0400
-Message-ID: <1565726413-31601-1-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 13 Aug 2019 16:01:33 -0400
+Message-ID: <1565726493-32218-1-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH v2] j7-evm.conf: Adding TI_PDK_LIMIT_SOCS/BOARDS/CORES for j7
+Subject: [thud/master][PATCH] sciclient-rtos: Adding support to j7-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,30 +65,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2019 20:00:16 -0000
+X-List-Received-Date: Tue, 13 Aug 2019 20:01:37 -0000
 Content-Type: text/plain
 
 Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- v2 - Removed the _j7-evm suffix for TI_PDK_LIMIT_* 
+ recipes-bsp/sciclient/sciclient-rtos_git.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
- conf/machine/j7-evm.conf | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-index 17d48d0..1cb9aff 100644
---- a/conf/machine/j7-evm.conf
-+++ b/conf/machine/j7-evm.conf
-@@ -28,4 +28,9 @@ OPTEEOUTPUTMACHINE = "k3"
- IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
- WKS_FILE = "sdimage-bootpart.wks"
+diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+index 36de7c4..8599f6a 100644
+--- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
++++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+@@ -37,8 +37,13 @@ export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/pac
+ #export DEST_ROOT="${S}"
  
-+# Set the list of device targets for ti-pdk class recipes
-+TI_PDK_LIMIT_SOCS = "j721e"
-+TI_PDK_LIMIT_BOARDS = "j721e_evm"
-+TI_PDK_LIMIT_CORES = "mpu1_0 mcu1_0 mcu1_1 mcu2_0 mpu2_1 mpu3_0 mpu3_1 c66xdsp_1 c66xdsp_2 c7x_1"
+ LIMSOCS_am65xx = "am65xx"
++LIMSOCS_j7-evm = "j721e"
 +
- do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot:do_deploy"
+ LIMBOARDS_am65xx = "am65xx_evm"
++LIMBOARDS_j7-evm = "j721e_evm"
++
+ BOARD_PACKAGE_am65xx = "am65xx_evm"
++BOARD_PACKAGE_j7-evm = "j721e_evm"
+ 
+ # HTML doc link params
+ PDK_COMP_LINK_TEXT = "SCICLIENT"
+@@ -66,7 +71,7 @@ do_compile() {
+     # make clean LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
+ 
+     # Build am65xx libraries
+-    make lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
++    make lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}" LIMIT_CORES="${TI_PDK_LIMIT_CORES}"
+ 
+     #archive
+     tar -cf sciclient.tar --exclude='*.tar' ./*
 -- 
 1.9.1
 
