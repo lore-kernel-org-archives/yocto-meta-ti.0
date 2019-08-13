@@ -1,59 +1,58 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0CE73E00D46; Tue, 13 Aug 2019 12:33:28 -0700 (PDT)
+	id 97DF8E00B3E; Tue, 13 Aug 2019 12:45:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	https://www.dnswl.org/, *      medium trust
 	*      [198.47.23.249 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA7E2E008D3
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 12:33:26 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0C2DFE0090E
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 12:45:35 -0700 (PDT)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DJXQNU081267
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:33:26 -0500
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DJjZuV083914
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:45:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1565724806;
-	bh=lQpDrlMOygj0jmGv533WxdtSZSEYQvCn9y226SYC84c=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=SVHJVXbsu1fOCxmT+Yv++MB0kcFSOtpREZSMgGKTyF4mhvtV8Upa1HYlo+cFDznOf
-	9U98kElT/Fy7ajKkOoSqWr0UXgAMmyvThJOnxMTzyFbZ77/X4ZFD38NrbZPHImwN2f
-	8iv2h8VHXPnHlQjeiAdjOTAdf1aKG2G4t7sZ2y6o=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DJXQpX103503
+	s=ti-com-17Q1; t=1565725535;
+	bh=sAjW48oKbJqUvGOSTI27msYth8IRU0jWi85yDNk9yVM=;
+	h=From:To:Subject:Date;
+	b=WUQLUDx1ybJASU0U7k4V3sDtVXSDIV4Pi3thxoKLNCI+TVNUjWwBNACvx67ZLxupK
+	T+6JZuOHyq+dPyf+WX5MX80N0FjwIvZ/APnzGTZW8wq5Fsf0BZht5wyG1skZpnZtAx
+	kagIbsz5addE34HbHSX41jzh6B/C9hV6GLlFHBL0=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DJjZdD117983
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:33:26 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:45:35 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE104.ent.ti.com
+	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 13 Aug 2019 14:33:25 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE112.ent.ti.com
-	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 13 Aug 2019 14:45:35 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 13 Aug 2019 14:33:25 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DJXPm3105278;
-	Tue, 13 Aug 2019 14:33:25 -0500
-From: Dan Murphy <dmurphy@ti.com>
+	Frontend Transport; Tue, 13 Aug 2019 14:45:35 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DJjYou014042
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:45:35 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 13 Aug 2019 14:33:20 -0500
-Message-ID: <20190813193320.17586-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.22.0.214.g8dca754b1e
-In-Reply-To: <20190813193320.17586-1-dmurphy@ti.com>
-References: <20190813193320.17586-1-dmurphy@ti.com>
+Date: Tue, 13 Aug 2019 15:45:32 -0400
+Message-ID: <1565725532-29215-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] linux-ti-staging: update to ti2019.03-rc2 tag
+Subject: [thud/master][PATCH] j7-evm.conf: Adding TI_PDK_LIMIT_SOCS/BOARDS/CORES for j7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,41 +65,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2019 19:33:28 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 13 Aug 2019 19:45:36 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.19.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/j7-evm.conf | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-index 838bccad..8941de54 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
+diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
+index 17d48d0..22914ba 100644
+--- a/conf/machine/j7-evm.conf
++++ b/conf/machine/j7-evm.conf
+@@ -28,4 +28,9 @@ OPTEEOUTPUTMACHINE = "k3"
+ IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
+ WKS_FILE = "sdimage-bootpart.wks"
  
- BRANCH = "ti-rt-linux-4.19.y"
- 
--SRCREV = "29e336b7bd52d27d6143ff3b1310a93fc1ae0ca6"
-+SRCREV = "23e34c8e14573f23de2e3da63411ef5cc0e0b0e7"
- PV = "4.19.59+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-index b3005e0a..75f18f07 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-@@ -59,7 +59,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-4.19.y"
- 
--SRCREV = "0bdb6f512425f74d865d497f717dc893aebab187"
-+SRCREV = "ce37756a6aad97d1f7933dc0542977a032025b2e"
- PV = "4.19.59+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
++# Set the list of device targets for ti-pdk class recipes
++TI_PDK_LIMIT_SOCS_j7-evm = "j721e"
++TI_PDK_LIMIT_BOARDS_j7-evm = "j721e_evm"
++TI_PDK_LIMIT_CORES_j7-evm = "mpu1_0 mcu1_0 mcu1_1 mcu2_0 mpu2_1 mpu3_0 mpu3_1 c66xdsp_1 c66xdsp_2 c7x_1"
++
+ do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot:do_deploy"
 -- 
-2.22.0.214.g8dca754b1e
+1.9.1
 
 
