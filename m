@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2A846E00B3E; Tue, 13 Aug 2019 13:05:51 -0700 (PDT)
+	id B59E1E00C78; Tue, 13 Aug 2019 13:17:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,46 +16,45 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B0B2E0090E
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 13:05:50 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DK5ouH092224
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:05:50 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D23CE00B3E
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 13:17:32 -0700 (PDT)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DKHWah127005
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:17:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1565726750;
-	bh=X4EAyt5/TBYdVAASpdT7QlXk67cVKkAaoQzkd1dOhhA=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=iD7nxyWkEQNFI95s+Y18NX0HJscG6bXXqK7Pe3JfVOr8euPhEcAouIhKuMAIkkEBj
-	pxozTikEIW/eVlyM4hZWIjHfFZTc7tpyMlwLsactTul2Gdv9jGKyv2Q/dMSFCtRTHQ
-	9sJxVqaqh+Q4PMWVGP6l9AVBGTpR5b56XEmHuz6U=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DK5no0013123
+	s=ti-com-17Q1; t=1565727452;
+	bh=r/2wddvZdLgfzcZBmpu1YLspgvCYTlvL69AbBnSvBL8=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=nab7gyx7jlMvWHUO8+MH5sm/qR9A1LNv0zjXBlN8q3efKxN5OWLjxe5Od1jLLawv+
+	Ys9LWG5eYt07+k0rnDIYP91qQJ370nLVMqpVEIO69QKzVTeBTRIruBrSOolZ4zgKUB
+	45Wa76re+RhHQRDY9qVyoUBLwvaXExD9tda2QFDc=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DKHW46018769
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:05:49 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE110.ent.ti.com
-	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 15:17:32 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 13 Aug 2019 15:05:49 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 13 Aug 2019 15:17:32 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE100.ent.ti.com
+	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 13 Aug 2019 15:05:49 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DK5nhS043444;
-	Tue, 13 Aug 2019 15:05:49 -0500
-Date: Tue, 13 Aug 2019 16:05:49 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-Message-ID: <20190813200549.GF7130@beryl>
-References: <1565725739-30469-1-git-send-email-m-radhakrishnan2@ti.com>
-	<1565725739-30469-2-git-send-email-m-radhakrishnan2@ti.com>
+	Frontend Transport; Tue, 13 Aug 2019 15:17:32 -0500
+Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DKHVmU060802;
+	Tue, 13 Aug 2019 15:17:32 -0500
+To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>, <meta-ti@yoctoproject.org>
+References: <1565726493-32218-1-git-send-email-m-radhakrishnan2@ti.com>
+From: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <55ec8d6a-5fed-ec7c-0534-959cc0fc0d90@ti.com>
+Date: Tue, 13 Aug 2019 16:17:32 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <1565725739-30469-2-git-send-email-m-radhakrishnan2@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <1565726493-32218-1-git-send-email-m-radhakrishnan2@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [thud/master][PATCH 1/2] ti-cgt-7x: Initial version of TI-CGT-C7000 recipe
+Subject: Re: [EXTERNAL] [thud/master][PATCH] sciclient-rtos: Adding support to j7-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,114 +67,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2019 20:05:51 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-
-On Tue, Aug 13, 2019 at 03:48:58PM -0400, Mahesh Radhakrishnan wrote:
-> The tools are not available externally yet, hence the
-> SRC_URI link
-> "http://install.source.dir.local/${BINFILE};name=${BINFILE_NAME}"
-
-Please don't phrase it like this! There's no such thing as internal or 
-external at this level. Better say that it's not publicly fetchable yet 
-and requires pre-downloading.
+X-List-Received-Date: Tue, 13 Aug 2019 20:17:33 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
 
+On 8/13/2019 4:01 PM, Mahesh Radhakrishnan wrote:
+> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 > ---
->  recipes-ti/devtools/ti-cgt7x_1.1.0.bb | 65 +++++++++++++++++++++++++++++++++++
->  1 file changed, 65 insertions(+)
->  create mode 100644 recipes-ti/devtools/ti-cgt7x_1.1.0.bb
-> 
-> diff --git a/recipes-ti/devtools/ti-cgt7x_1.1.0.bb b/recipes-ti/devtools/ti-cgt7x_1.1.0.bb
-> new file mode 100644
-> index 0000000..19da698
-> --- /dev/null
-> +++ b/recipes-ti/devtools/ti-cgt7x_1.1.0.bb
-> @@ -0,0 +1,65 @@
-> +DESCRIPTION = "TI DSP Code Generation Tools"
-> +HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> +LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
+>   recipes-bsp/sciclient/sciclient-rtos_git.bb | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> index 36de7c4..8599f6a 100644
+> --- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> +++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> @@ -37,8 +37,13 @@ export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/pac
+>   #export DEST_ROOT="${S}"
+>   
+>   LIMSOCS_am65xx = "am65xx"
+> +LIMSOCS_j7-evm = "j721e"
 > +
-> +LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c7x/C7000_1.0.x_CodeGenerationTools_Manifest.htm;md5=3074e433c5d52657076d1d138dfbdaf8"
+>   LIMBOARDS_am65xx = "am65xx_evm"
+> +LIMBOARDS_j7-evm = "j721e_evm"
 > +
-> +require recipes-ti/includes/ti-unpack.inc
-> +
-> +# only x86_64 is supported
-> +COMPATIBLE_HOST = "x86_64.*-linux"
-> +COMPATIBLE_HOST_class-target = "null"
-
-So, target is not supported, but LIC_FILES_CHKSUM is only set for the target.
 
 
-> +# For now we only have hardfp version for target class
-> +python __anonymous() {
-> +    c = d.getVar("CLASSOVERRIDE")
-> +
-> +    if c == "class-target":
-> +        tunes = d.getVar("TUNE_FEATURES")
-> +        if not tunes:
-> +            return
-> +        pkgn = d.getVar("PN")
-> +        pkgv = d.getVar("PV")
-> +        if "callconvention-hard" not in tunes:
-> +            bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-> +            raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-
-Again, this check is also only valid for the target.
+Can you use the TI_PDK_LIMIT_* vars defined in the machine configuration?
 
 
-> +}
-> +
-> +BINFILE = "ti_cgt_c7000_${PV}_linux_installer_x86.bin"
-> +BINFILE_NAME = "cgt7x_x86_installer"
-> +
-> +# Please note, "install.source.dir.local" is not a real URL, below files need to be pre-downloaded
-> +SRC_URI = "http://install.source.dir.local/${BINFILE};name=${BINFILE_NAME}"
-> +
-> +TI_BIN_UNPK_ARGS = "--prefix ${S}"
-> +TI_BIN_UNPK_CMDS = ""
-> +
-> +BINFILE = "ti_cgt_c7000_${PV}_linux_installer_x86.bin"
-> +
-> +BINFILE_MD5 = "feb668b4213403c661909adcf65d2ba8"
-> +BINFILE_SHA256 = "4a3954c973622c00a9b91fa90473cf921f4b763300b0e7c32735304867856ab8"
-> +
-> +SRC_URI[cgt7x_x86_installer.md5sum]    = "feb668b4213403c661909adcf65d2ba8"
-> +SRC_URI[cgt7x_x86_installer.sha256sum] = "4a3954c973622c00a9b91fa90473cf921f4b763300b0e7c32735304867856ab8"
-> +
-> +S = "${WORKDIR}/c7000_${PV}"
-> +
-> +do_install() {
-> +    install -d ${D}/${TI_CGT7X_INSTALL_DIR_RECIPE}
-> +    cp -rP --preserve=mode,links,timestamps --no-preserve=ownership ${WORKDIR}/c7000_${PV}/. ${D}/${TI_CGT7X_INSTALL_DIR_RECIPE}
-> +}
-> +
-> +do_install_class-target() {
-> +    ${WORKDIR}/${BINFILE} --prefix ${D}
-> +}
-> +
-> +
-> +FILES_${PN} += "${TI_CGT7X_INSTALL_DIR_RECIPE}"
-> +
-> +INSANE_SKIP_${PN} += "arch staticdev textrel"
-> +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_SYSROOT_STRIP = "1"
-> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-
-How are native and nativesdk would work, if LIC_FILES_CHKSUM is only provided 
-for target?
-
-
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+>   BOARD_PACKAGE_am65xx = "am65xx_evm"
+> +BOARD_PACKAGE_j7-evm = "j721e_evm"
+>   
+>   # HTML doc link params
+>   PDK_COMP_LINK_TEXT = "SCICLIENT"
+> @@ -66,7 +71,7 @@ do_compile() {
+>       # make clean LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
+>   
+>       # Build am65xx libraries
+> -    make lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
+> +    make lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}" LIMIT_CORES="${TI_PDK_LIMIT_CORES}"
+>   
+>       #archive
+>       tar -cf sciclient.tar --exclude='*.tar' ./*
 
