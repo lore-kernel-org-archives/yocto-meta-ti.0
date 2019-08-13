@@ -1,60 +1,58 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8BA8DE00C7D; Tue, 13 Aug 2019 12:56:35 -0700 (PDT)
+	id F21C0E00BEB; Tue, 13 Aug 2019 12:58:00 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	https://www.dnswl.org/, *      medium trust
+	*      [198.47.23.248 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57CCBE00B3E
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 12:56:33 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DJuWpX118717
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:56:33 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F5CCE007AA
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 12:57:58 -0700 (PDT)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7DJvwbm038494
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:57:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1565726193;
-	bh=15k41q0RF1go28TPoZrdpZ5fNTbdOZeKyHmvhlxsWXk=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=I4+SstMrKYOEFKd4GJuvT02xSHKJprhrWWsA34Ka9otqcZrJvdptUXBHoIVrl/Y4f
-	a323iHmHXmB8MEJPP7jXB4DE+mNZ9SCvo4S2WJT/7dvEr/Zey4sYBsMFh6YgDUuoun
-	EPWKI6nusUcUSgFoR/6AOp2DtVoGzXHD9TEoY4ec=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DJuWNC117331
+	s=ti-com-17Q1; t=1565726278;
+	bh=IDmBJ3fIIqwPmgN7wel/ZAV0d4D2uOV61qXv4RvOca4=;
+	h=From:To:Subject:Date;
+	b=jc0lUR4mG+h8887bBMu9RzWIdDkVZI+9hbXJH6NogPcXKI6SxionncKeXEbyBXzIa
+	Jp3z/sslI2438SqDSj2rCyIByX0V7w7F4uoA5Lz/piXw6ynNUqDgE+g9HFsIqmESPc
+	QTxJmMxdCFmgFS/XHmBMCd1MXsO3RqE8e6v4cTkw=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7DJvvPF123006
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:56:32 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:57:58 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
+	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 13 Aug 2019 14:56:32 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE105.ent.ti.com
-	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 13 Aug 2019 14:57:57 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
+	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 13 Aug 2019 14:56:32 -0500
-Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DJuW8p117263;
-	Tue, 13 Aug 2019 14:56:32 -0500
-To: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>, <meta-ti@yoctoproject.org>
-References: <1565725532-29215-1-git-send-email-m-radhakrishnan2@ti.com>
-From: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <92c24b3a-24b0-389d-01d0-a1d6a1ffffa8@ti.com>
-Date: Tue, 13 Aug 2019 15:56:32 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Frontend Transport; Tue, 13 Aug 2019 14:57:57 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7DJvvl7006894
+	for <meta-ti@yoctoproject.org>; Tue, 13 Aug 2019 14:57:57 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 13 Aug 2019 15:57:55 -0400
+Message-ID: <1565726275-31049-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1565725532-29215-1-git-send-email-m-radhakrishnan2@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: Re: [EXTERNAL] [thud/master][PATCH] j7-evm.conf: Adding TI_PDK_LIMIT_SOCS/BOARDS/CORES for j7
+Subject: [thud/master][PATCH] ti-pdk-bbclass: Defining dependants for j7-evm, updated the default core list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,36 +65,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2019 19:56:35 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 13 Aug 2019 19:58:01 -0000
+Content-Type: text/plain
 
+Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+---
+ classes/ti-pdk.bbclass | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-On 8/13/2019 3:45 PM, Mahesh Radhakrishnan wrote:
-> Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-> ---
->   conf/machine/j7-evm.conf | 5 +++++
->   1 file changed, 5 insertions(+)
->
-> diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-> index 17d48d0..22914ba 100644
-> --- a/conf/machine/j7-evm.conf
-> +++ b/conf/machine/j7-evm.conf
-> @@ -28,4 +28,9 @@ OPTEEOUTPUTMACHINE = "k3"
->   IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
->   WKS_FILE = "sdimage-bootpart.wks"
->   
-> +# Set the list of device targets for ti-pdk class recipes
-> +TI_PDK_LIMIT_SOCS_j7-evm = "j721e"
-> +TI_PDK_LIMIT_BOARDS_j7-evm = "j721e_evm"
-> +TI_PDK_LIMIT_CORES_j7-evm = "mpu1_0 mcu1_0 mcu1_1 mcu2_0 mpu2_1 mpu3_0 mpu3_1 c66xdsp_1 c66xdsp_2 c7x_1"
+diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+index f0e6f2d..563ee2b 100644
+--- a/classes/ti-pdk.bbclass
++++ b/classes/ti-pdk.bbclass
+@@ -9,8 +9,10 @@ DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
+ DEPENDS_remove_ti33x = "ti-cgt6x-native"
+ DEPENDS_remove_ti43x = "ti-cgt6x-native"
+ DEPENDS_append_omapl1 = " ti-cgt-arm-native"
+-DEPENDS_remove_k3 = "gcc-arm-none-eabi-native ti-cgt6x-native"
+-DEPENDS_append_k3 = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
++DEPENDS_remove_am65xx = "gcc-arm-none-eabi-native ti-cgt6x-native"
++DEPENDS_append_am65xx = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
++DEPENDS_remove_j7-evm = "gcc-arm-none-eabi-native"
++DEPENDS_append_j7-evm = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native ti-cgt7x-native"
+ 
+ S = "${WORKDIR}/git"
+ B = "${WORKDIR}/build"
+@@ -43,6 +45,7 @@ export TOOLCHAIN_PATH_A15 = "${GCC_ARM_NONE_TOOLCHAIN}"
+ export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
+ export TOOLCHAIN_PATH_Arm9 = "${M4_TOOLCHAIN_INSTALL_DIR}"
+ export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
++export C7X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c7x"
+ export TOOLCHAIN_PATH_EVE = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-arp32"
+ export CL_PRU_INSTALL_PATH = "${TI_CGT_PRU_INSTALL_DIR}"
+ export TOOLCHAIN_PATH_GCC_ARCH64 = "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}"
+@@ -59,7 +62,7 @@ export SECTTI="perl ${CG_XML_INSTALL_DIR}/ofd/sectti.pl"
+ TI_PDK_XDCMAKE ?= "1"
+ 
+ # By default, only build the cores with available toolchains
+-TI_PDK_LIMIT_CORES ?= "a15_0 ipu1_0 ipu1_1 ipu2_0 ipu2_1 c66x c66xdsp_1 c66xdsp_2 arm9_0 c674x a9host a8host pru_0 pru_1"
++TI_PDK_LIMIT_CORES ?= "a15_0 ipu1_0 ipu1_1 ipu2_0 ipu2_1 mpu1_0 mcu1_0 mcu1_1 mcu2_0 mpu2_1 mpu3_0 mpu3_1 c66x c66xdsp_1 c66xdsp_2 c7x_1 arm9_0 c674x a9host a8host pru_0 pru_1"
+ TI_PDK_LIMIT_SOCS ?= ""
+ TI_PDK_LIMIT_BOARDS ?= ""
+ TI_PDK_MAKE_TARGET ?= "release"
+-- 
+1.9.1
 
-
-You are adding this directly to the machine configuration, so the 
-"_j7-evm" overrides are not necessary and can be removed.
-
-
-> +
->   do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot:do_deploy"
 
