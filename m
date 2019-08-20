@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4F8D9E00BEB; Mon, 19 Aug 2019 16:58:23 -0700 (PDT)
+	id 17258E00D4F; Tue, 20 Aug 2019 11:27:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,42 +17,43 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24171E00B3E
-	for <meta-ti@yoctoproject.org>; Mon, 19 Aug 2019 16:58:21 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7JNwLlt046995
-	for <meta-ti@yoctoproject.org>; Mon, 19 Aug 2019 18:58:21 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60708E008F2
+	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2019 11:27:51 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7KIRoaF084740
+	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2019 13:27:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1566259101;
-	bh=OhQPEv5pogDuA8JVDwMtJzwVxQSvf7Lm0seW88wruTs=;
+	s=ti-com-17Q1; t=1566325670;
+	bh=LlCexZhjGDLrIGcOcWYMkKQDEbrZAwM1yfQuwC9DjlU=;
 	h=From:To:CC:Subject:Date;
-	b=OZSgwAVAmixbSjM+aD7t9MlE9jyBwwh+hqrsPrWov8S283wpPDUjCs0pvrkW7COH5
-	WHFEq8cncnareE30lpAajJkEmSeFyOxMlbN4la6Moypj9t4lDWFyJxHcCoNmN+SLPg
-	o9lSiCBDikzJwxudlHap+PwruMaHlFCxFOLN02EU=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7JNwLHB048303
+	b=OHDPrr5BFB2JQfyHb+9tJL5Is6Pt7ObyhoFxoaOe2wMLJ5o54L3Qf4od6jKVXSDDb
+	PJYpXWFSsrNWP4S/hu87HOE/Z3Upf3XzAqSkh6gd9lRWcq/Sl66t2fCewZFk6XE8x+
+	UNdz67RmQn4TKA/hmfViyQ6EIUc7NYUhFH7sduOc=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7KIRom1055175
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 19 Aug 2019 18:58:21 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2019 13:27:50 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 19 Aug 2019 18:58:21 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE106.ent.ti.com
-	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 20 Aug 2019 13:27:50 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 19 Aug 2019 18:58:21 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	Frontend Transport; Tue, 20 Aug 2019 13:27:50 -0500
+Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7JNwKK6110386;
-	Mon, 19 Aug 2019 18:58:21 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7KIRnDK111374;
+	Tue, 20 Aug 2019 13:27:50 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 19 Aug 2019 23:44:00 +0000
-Message-ID: <20190819234400.18819-1-denys@ti.com>
-X-Mailer: git-send-email 2.17.1
+Date: Tue, 20 Aug 2019 14:11:10 -0400
+Message-ID: <1566324672-29395-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH v2 1/2] conf/machine: update with new DTBs/DTBOs
+Cc: lokeshvutla@ti.com
+Subject: [master/thud][PATCH v2 1/3] jailhouse: update to ti2019.03-rc2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,62 +66,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2019 23:58:23 -0000
+X-List-Received-Date: Tue, 20 Aug 2019 18:27:52 -0000
 Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+* extend to am65xx family
+* and correct am65xx cell and inmate filenames.
+* remove earlycon bootargs for am65xx
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
-v2 - fix missing .dtb suffix in sancloud-bbe
+v2 changes:
+* Remove earlycon args for all k3
 
- conf/machine/am65xx-evm.conf   | 1 +
- conf/machine/include/ti33x.inc | 3 ++-
- conf/machine/j7-evm.conf       | 4 ++--
- 3 files changed, 5 insertions(+), 3 deletions(-)
+ recipes-kernel/jailhouse/jailhouse_git.bb | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
-index 83eae598..27bb0b06 100644
---- a/conf/machine/am65xx-evm.conf
-+++ b/conf/machine/am65xx-evm.conf
-@@ -16,6 +16,7 @@ KERNEL_DEVICETREE = " \
-     ti/k3-am654-evm-csi2-ov490.dtbo ti/k3-am654-evm-csi2-ov5640.dtbo \
-     ti/k3-am654-evm-oldi-lcd1evm.dtbo ti/k3-am654-evm-tc358876.dtbo \
-     ti/k3-am654-pcie-usb2.dtbo ti/k3-am654-pcie-usb3.dtbo \
-+    ti/k3-am654-base-board-jailhouse.dtbo \
+diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
+index 5e2c71b..d637d51 100644
+--- a/recipes-kernel/jailhouse/jailhouse_git.bb
++++ b/recipes-kernel/jailhouse/jailhouse_git.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
  "
  
- UBOOT_MACHINE = "am65x_evm_a53_defconfig"
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 8ddae81c..5ff6efea 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -30,8 +30,9 @@ KERNEL_DEVICETREE = " \
-     am335x-evm.dtb am335x-evmsk.dtb \
-     am335x-icev2.dtb am335x-icev2-prueth.dtb \
-     am335x-pocketbeagle.dtb am335x-bone.dtb am335x-boneblue.dtb \
--    am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
-     am335x-bonegreen.dtb am335x-bonegreen-wireless.dtb \
-+    am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
-+    am335x-boneblack-prusuart.dtb am335x-sancloud-bbe.dtb \
- "
+ PV = "0.10+git${SRCPV}"
+-SRCREV = "e71fd2dc7e8494a44cc3c762a24824532a412807"
++SRCREV = "96329f098e655cd42d7d0dbb3cd2cc7c3492d633"
+ BRANCH = "ti-jailhouse-0.10"
  
- KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am335x-icev2-pru-excl-uio.dtb', '', d)}"
-diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-index 1cb9aff5..ca594e81 100644
---- a/conf/machine/j7-evm.conf
-+++ b/conf/machine/j7-evm.conf
-@@ -28,9 +28,9 @@ OPTEEOUTPUTMACHINE = "k3"
- IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
- WKS_FILE = "sdimage-bootpart.wks"
+ SRC_URI = " \
+@@ -47,19 +47,19 @@ JH_CELL_FILES ?= "*.cell"
+ JH_CELL_FILES_k3 ?= "k3-*.cell"
  
-+do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot:do_deploy"
-+
- # Set the list of device targets for ti-pdk class recipes
- TI_PDK_LIMIT_SOCS = "j721e"
- TI_PDK_LIMIT_BOARDS = "j721e_evm"
- TI_PDK_LIMIT_CORES = "mpu1_0 mcu1_0 mcu1_1 mcu2_0 mpu2_1 mpu3_0 mpu3_1 c66xdsp_1 c66xdsp_2 c7x_1"
--
--do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot:do_deploy"
+ JH_INMATE_DTB ?= ""
+-JH_INMATE_DTB_am65xx-evm ?= "inmate-k3-am654.dtb"
++JH_INMATE_DTB_am65xx ?= "inmate-k3-am654-idk.dtb"
+ JH_INMATE_DTB_j7-evm ?= "inmate-k3-j721e-evm.dtb"
+ 
+ JH_LINUX_DEMO_CELL ?= ""
+-JH_LINUX_DEMO_CELL_am65xx-evm ?= "k3-am654-linux-demo.cell"
++JH_LINUX_DEMO_CELL_am65xx ?= "k3-am654-idk-linux-demo.cell"
+ JH_LINUX_DEMO_CELL_j7-evm ?= "k3-j721e-evm-linux-demo.cell"
+ 
+ JH_SYSCONFIG_CELL ?= ""
+-JH_SYSCONFIG_CELL_am65xx-evm ?= "k3-am654.cell"
++JH_SYSCONFIG_CELL_am65xx ?= "k3-am654-idk.cell"
+ JH_SYSCONFIG_CELL_j7-evm ?= "k3-j721e-evm.cell"
+ 
+ JH_CMDLINE ?= ""
+-JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait earlycon=ns16550a,mmio32,0x2810000"
++JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
+ 
+ do_configure() {
+ 	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ]; 
 -- 
-2.17.1
+2.7.4
 
 
