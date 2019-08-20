@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 17258E00D4F; Tue, 20 Aug 2019 11:27:52 -0700 (PDT)
+	id DDDE4E0097C; Tue, 20 Aug 2019 11:27:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,50 +10,52 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60708E008F2
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D26CE0097C
 	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2019 11:27:51 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7KIRoaF084740
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7KIRovv053820
 	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2019 13:27:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1566325670;
-	bh=LlCexZhjGDLrIGcOcWYMkKQDEbrZAwM1yfQuwC9DjlU=;
-	h=From:To:CC:Subject:Date;
-	b=OHDPrr5BFB2JQfyHb+9tJL5Is6Pt7ObyhoFxoaOe2wMLJ5o54L3Qf4od6jKVXSDDb
-	PJYpXWFSsrNWP4S/hu87HOE/Z3Upf3XzAqSkh6gd9lRWcq/Sl66t2fCewZFk6XE8x+
-	UNdz67RmQn4TKA/hmfViyQ6EIUc7NYUhFH7sduOc=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7KIRom1055175
+	s=ti-com-17Q1; t=1566325671;
+	bh=4wtY6XCZFbGta1/r70hziAIu+DwhtOg10r/DI9oXt7U=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=vjNl6FJllPQoS5B/2r0GK7TEuqDhHzmtihOZ5MG+2m5GFbeIFFdBuXLJoE2ncwz71
+	aiVlLqzbg9iPHzhJCKC0XHOU3JK4JCg86KgU8kNqBs4l8vIylaXzEOd10mkoZYK6R3
+	9nhdqoAaK+gmoiC6VdN/hRuHMUFTvigVjWiZvFIQ=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7KIRo8F083464
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2019 13:27:50 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE102.ent.ti.com
-	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
 	Tue, 20 Aug 2019 13:27:50 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE105.ent.ti.com
-	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
+	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
 	Frontend Transport; Tue, 20 Aug 2019 13:27:50 -0500
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7KIRnDK111374;
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7KIRnDL111374;
 	Tue, 20 Aug 2019 13:27:50 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 20 Aug 2019 14:11:10 -0400
-Message-ID: <1566324672-29395-1-git-send-email-j-stiffler@ti.com>
+Date: Tue, 20 Aug 2019 14:11:11 -0400
+Message-ID: <1566324672-29395-2-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1566324672-29395-1-git-send-email-j-stiffler@ti.com>
+References: <1566324672-29395-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Cc: lokeshvutla@ti.com
-Subject: [master/thud][PATCH v2 1/3] jailhouse: update to ti2019.03-rc2
+Subject: [master/thud][PATCH v2 2/3] jailhouse: provide tools package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,58 +68,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2019 18:27:52 -0000
+X-List-Received-Date: Tue, 20 Aug 2019 18:27:54 -0000
 Content-Type: text/plain
 
-* extend to am65xx family
-* and correct am65xx cell and inmate filenames.
-* remove earlycon bootargs for am65xx
+Create a package containing the jailhouse tools which are used to work
+with the cells and inmates. This recipe provides a good example for
+using the jailhouse-cell-linux tool.
+
+The tools require the pyjailhouse python modules, so package them as
+well.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
-v2 changes:
-* Remove earlycon args for all k3
-
- recipes-kernel/jailhouse/jailhouse_git.bb | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ recipes-kernel/jailhouse/jailhouse_git.bb | 24 ++++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
 
 diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
-index 5e2c71b..d637d51 100644
+index d637d51..5d572d0 100644
 --- a/recipes-kernel/jailhouse/jailhouse_git.bb
 +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
- "
+@@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
+ S = "${WORKDIR}/git"
  
- PV = "0.10+git${SRCPV}"
--SRCREV = "e71fd2dc7e8494a44cc3c762a24824532a412807"
-+SRCREV = "96329f098e655cd42d7d0dbb3cd2cc7c3492d633"
- BRANCH = "ti-jailhouse-0.10"
+ require jailhouse-arch.inc
+-inherit module pythonnative bash-completion deploy
++inherit module pythonnative bash-completion deploy setuptools
  
- SRC_URI = " \
-@@ -47,19 +47,19 @@ JH_CELL_FILES ?= "*.cell"
- JH_CELL_FILES_k3 ?= "k3-*.cell"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_MACHINE = "(ti-soc)"
+@@ -78,12 +78,21 @@ USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
+ TOOLS_SRC_DIR = "${S}/tools"
+ TOOLS_OBJ_DIR = "${S}/tools"
  
- JH_INMATE_DTB ?= ""
--JH_INMATE_DTB_am65xx-evm ?= "inmate-k3-am654.dtb"
-+JH_INMATE_DTB_am65xx ?= "inmate-k3-am654-idk.dtb"
- JH_INMATE_DTB_j7-evm ?= "inmate-k3-j721e-evm.dtb"
++EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR}"
++
++
+ do_compile() {
+-	oe_runmake V=1 ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR}
++	oe_runmake V=1
+ }
  
- JH_LINUX_DEMO_CELL ?= ""
--JH_LINUX_DEMO_CELL_am65xx-evm ?= "k3-am654-linux-demo.cell"
-+JH_LINUX_DEMO_CELL_am65xx ?= "k3-am654-idk-linux-demo.cell"
- JH_LINUX_DEMO_CELL_j7-evm ?= "k3-j721e-evm-linux-demo.cell"
+ do_install() {
+-	oe_runmake ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR} DESTDIR=${D} install
++	# Install pyjailhouse python modules needed by the tools
++	distutils_do_install
++
++	# We want to install the python tools, but we do not want to use pip...
++	# At least with v0.10, we can work around this with
++	# 'PIP=":" PYTHON_PIP_USEABLE=yes'
++	oe_runmake PIP=: PYTHON_PIP_USEABLE=yes DESTDIR=${D} install
  
- JH_SYSCONFIG_CELL ?= ""
--JH_SYSCONFIG_CELL_am65xx-evm ?= "k3-am654.cell"
-+JH_SYSCONFIG_CELL_am65xx ?= "k3-am654-idk.cell"
- JH_SYSCONFIG_CELL_j7-evm ?= "k3-j721e-evm.cell"
+ 	install -d ${D}${CELL_DIR}
+ 	install -m 0644 ${B}/configs/${JH_ARCH}/${JH_CELL_FILES} ${D}${CELL_DIR}/
+@@ -115,8 +124,15 @@ do_install() {
+ 	fi
+ }
  
- JH_CMDLINE ?= ""
--JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait earlycon=ns16550a,mmio32,0x2810000"
-+JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
+-PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
++PACKAGE_BEFORE_PN = "kernel-module-jailhouse pyjailhouse ${PN}-tools"
+ FILES_${PN} = "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR} /boot"
++FILES_pyjailhouse = "${PYTHON_SITEPACKAGES_DIR}"
++FILES_${PN}-tools = "${libexecdir}/${BPN}/${BPN}-*"
++
++RDEPENDS_${PN}-tools = "pyjailhouse python-mmap python-math python-argparse python-datetime python-curses python-compression"
++RDEPENDS_pyjailhouse = "python-core python-ctypes python-fcntl python-shell"
++
++RRECCOMMENDS_${PN} = "${PN}-tools"
  
- do_configure() {
- 	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ]; 
+ INSANE_SKIP_${PN} = "ldflags"
+ 
 -- 
 2.7.4
 
