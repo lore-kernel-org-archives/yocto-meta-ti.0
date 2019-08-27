@@ -1,37 +1,61 @@
-Return-Path: <alessio.bogani@elettra.eu>
+Return-Path: <r10kindsofpeople@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 518A5E00D88; Mon, 26 Aug 2019 13:27:56 -0700 (PDT)
+	id 15A5CE00DAA; Tue, 27 Aug 2019 13:43:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [140.105.206.208 listed in list.dnswl.org]
-X-Greylist: delayed 288 seconds by postgrey-1.32 at yocto-www;
-	Mon, 26 Aug 2019 13:27:53 PDT
-Received: from spamalot.elettra.eu (spamalot.elettra.trieste.it
-	[140.105.206.208])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E6B9E00C5C
-	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2019 13:27:53 -0700 (PDT)
-Received: from spamalot.elettra.eu (localhost.localdomain [127.0.0.1])
-	by localhost (Email Security Appliance) with SMTP id
-	3A975440DE3_D643FA7B
-	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2019 20:23:03 +0000 (GMT)
-Received: from pc-bogani.elettra.trieste.it (pc-bogani.elettra.trieste.it
-	[192.168.205.85])
-	by spamalot.elettra.eu (Sophos Email Appliance) with ESMTP id
-	31A9643E31F_D643FA5F; Mon, 26 Aug 2019 20:23:01 +0000 (GMT)
-From: Alessio Igor Bogani <alessio.bogani@elettra.eu>
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (r10kindsofpeople[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.167.179 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com
+	[209.85.167.179])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC95DE009DA
+	for <meta-ti@yoctoproject.org>; Tue, 27 Aug 2019 13:43:30 -0700 (PDT)
+Received: by mail-oi1-f179.google.com with SMTP id g128so355998oib.1
+	for <meta-ti@yoctoproject.org>; Tue, 27 Aug 2019 13:43:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Q+Lu4RH4Q6naxtcMoWC0D6z3msmTXG+23EOh0ZIQ78I=;
+	b=jDtWpasZJraOPf7fBgqDWUCbOx724Hu9dP+optcGpXSACVpv5/6jwS6sp2RbPxky/p
+	7bI5Vt6WVT1V7hbQLUYV3f2cxZVPMR1sKq955EQmxEWib9pZw7x/anAPBwZ3gZd3HUr2
+	rzEZ7r2vYbedK6OOSkBJYrbN1BBh/AsdEfCFWaaGaNxuXyUx8civQjGqw0xd8/Q/Q67Z
+	VcGyuAMiP80onRyjQE4sQYV95mqV5jguWz5JmV3JTJ2Q0f92J/yj0ndswQtavNrAJGUc
+	vrxPg/9nfffWTaMqapjXPTQNswXAnc/XnwWC0L3g3hqYuXCT/I3RJwHOabRS+ZYWcNb+
+	0YTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Q+Lu4RH4Q6naxtcMoWC0D6z3msmTXG+23EOh0ZIQ78I=;
+	b=YtjxfWueOnV8HRcyEDMyBH3IGthzUsYw8rC/3CXSoJBpUtKzQ0h9/BH7CxVPrNY7Fa
+	LXfzx1dc8Rym9H7o+hzP7aLNgnHGwEiPZyzWwjxHXV1alq5u0E2AHAtNns+h9e/IpN5P
+	FRxuiS1ntlG8uzCN23QsETgR9Lc4Xuyoy6uJ85QR2EFY5bDieDfgvJofO28TJonaxJvA
+	nv/CdkHhw7ZVYDEKDWZOfQdceDevpO+MoBwDDkZjCco037096OiXklzjMmlIOpmSrAmQ
+	HBDvwG49zjPWzz3gsmQjD47zD/9a4yGsWe9g/GCSjuilnUnWhmjGfcY8BeKZZbp8plLQ
+	DBbA==
+X-Gm-Message-State: APjAAAUoVh53wITsSIde7+4Rht+fFzLRq6T/2/Pg4nG6GKO6vSfifGbP
+	5VWOe/gjYTtou1b6/vtPef8UYaSR0mc8Th5EPyMgZw==
+X-Google-Smtp-Source: APXvYqyefxdFTj0uUvw3lhYygdnW0vHy1CzgYQbfekNL79a2kDc7wgf0GeY77QyLYamV83LCJz1ZZ/SMZBMse2oufXg=
+X-Received: by 2002:aca:1a0b:: with SMTP id a11mr463451oia.128.1566938610032; 
+	Tue, 27 Aug 2019 13:43:30 -0700 (PDT)
+MIME-Version: 1.0
+From: r10kindsofpeople <r10kindsofpeople@gmail.com>
+Date: Tue, 27 Aug 2019 16:43:19 -0400
+Message-ID: <CAE8H0+VA9qgYGAW7nqA4RQB-ejNjuM=J2EGrL3jPAmRYijKnOw@mail.gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Mon, 26 Aug 2019 22:22:59 +0200
-Message-Id: <20190826202259.9753-1-alessio.bogani@elettra.eu>
-X-Mailer: git-send-email 2.17.1
-X-SASI-RCODE: 200
-Subject: [PATCH] am65xx-evm, beagle-x15, beaglebone, j7-evm, lego-ev3: Let user optionally override kickstarter files
+Subject: Getting Started/kernel config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,81 +68,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2019 20:27:56 -0000
+X-List-Received-Date: Tue, 27 Aug 2019 20:43:33 -0000
+Content-Type: multipart/alternative; boundary="0000000000003c629405911f53bd"
 
-Signed-off-by: Alessio Igor Bogani <alessio.bogani@elettra.eu>
----
- conf/machine/am65xx-evm.conf | 2 +-
- conf/machine/beagle-x15.conf | 2 +-
- conf/machine/beaglebone.conf | 2 +-
- conf/machine/j7-evm.conf     | 2 +-
- conf/machine/lego-ev3.conf   | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+--0000000000003c629405911f53bd
+Content-Type: text/plain; charset="UTF-8"
 
-diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
-index 27bb0b06..bd57c485 100644
---- a/conf/machine/am65xx-evm.conf
-+++ b/conf/machine/am65xx-evm.conf
-@@ -29,6 +29,6 @@ OPTEEOUTPUTMACHINE = "k3"
- # tiboot3.bin and sysfw.itb, which are provided by meta-arago
- # u-boot-k3-r5 and ti-sci-fw recipes
- IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
--WKS_FILE = "sdimage-bootpart.wks"
-+WKS_FILE ?= "sdimage-bootpart.wks"
- 
- do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot:do_deploy"
-diff --git a/conf/machine/beagle-x15.conf b/conf/machine/beagle-x15.conf
-index 275a5ce0..1386ff05 100644
---- a/conf/machine/beagle-x15.conf
-+++ b/conf/machine/beagle-x15.conf
-@@ -12,7 +12,7 @@ SERIAL_CONSOLES = "115200;ttyS2"
- 
- UBOOT_MACHINE = "am57xx_evm_config"
- 
--WKS_FILE = "sdimage-bootpart.wks"
-+WKS_FILE ?= "sdimage-bootpart.wks"
- IMAGE_BOOT_FILES = "MLO u-boot.img"
- IMAGE_FSTYPES += "tar.xz wic.xz"
- 
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index 450a1893..69db4215 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -13,7 +13,7 @@ MACHINE_GUI_CLASS = "bigscreen"
- 
- SERIAL_CONSOLES = "115200;ttyS0"
- 
--WKS_FILE = "sdimage-bootpart.wks"
-+WKS_FILE ?= "sdimage-bootpart.wks"
- 
- do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot"
- IMAGE_BOOT_FILES ?= "u-boot.${UBOOT_SUFFIX} ${SPL_BINARY}"
-diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-index ca594e81..98a4258b 100644
---- a/conf/machine/j7-evm.conf
-+++ b/conf/machine/j7-evm.conf
-@@ -26,7 +26,7 @@ OPTEEOUTPUTMACHINE = "k3"
- # tiboot3.bin and sysfw.itb, which are provided by meta-arago
- # u-boot-k3-r5 and ti-sci-fw recipes
- IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
--WKS_FILE = "sdimage-bootpart.wks"
-+WKS_FILE ?= "sdimage-bootpart.wks"
- 
- do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot:do_deploy"
- 
-diff --git a/conf/machine/lego-ev3.conf b/conf/machine/lego-ev3.conf
-index 5c425221..5b89a6a7 100644
---- a/conf/machine/lego-ev3.conf
-+++ b/conf/machine/lego-ev3.conf
-@@ -17,6 +17,6 @@ KERNEL_DEVICETREE_BUNDLE = "1"
- SERIAL_CONSOLES = "115200;ttyS1"
- 
- IMAGE_FSTYPES += " wic"
--WKS_FILE = "sdimage-bootpart.wks"
-+WKS_FILE ?= "sdimage-bootpart.wks"
- WIC_CREATE_EXTRA_ARGS += " --no-fstab-update"
- IMAGE_BOOT_FILES = "${KERNEL_IMAGETYPES}"
--- 
-2.17.1
+Hi,
+I've been working with Yocto on various processors including the AM335x
+(under Arago and a mfg's BSP) for quite a while now.  But I'm working on a
+new project with the Beaglebone Black Wireless.  Downloaded thud, set
+machine to to am335x-evm and have a bootable microSD image.  Using
+systemd.  Core-image-full-cmdline.
 
+Is there a guide available for working with meta-ti ?  I'm having trouble
+understanding the kernel configuration recipes, finding out what the
+current configuration is, and how I can modify it.
 
+On the specific problem, I'm trying to enable the usb ethernet gadget and
+configure WiFi so I have both options for connecting to the target.  At
+some point, I'd like to configure the WiFi as an AP, assuming that's
+possible.  There's a few other kernel configurations that I need that seem
+to be atypical.
+
+Any pointers would be appreciated.
+
+John
+
+--0000000000003c629405911f53bd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi,<div>I&#39;ve been working with Yocto on various proces=
+sors including the AM335x (under Arago and a mfg&#39;s BSP) for quite a whi=
+le now.=C2=A0 But I&#39;m working on a new project with the Beaglebone Blac=
+k Wireless.=C2=A0 Downloaded thud, set machine to to am335x-evm and have a =
+bootable microSD image.=C2=A0 Using systemd.=C2=A0 Core-image-full-cmdline.=
+=C2=A0=C2=A0</div><div><br></div><div>Is there a guide available for workin=
+g with meta-ti ?=C2=A0 I&#39;m having trouble understanding the kernel conf=
+iguration recipes, finding out what the current configuration is, and how I=
+ can modify it.=C2=A0=C2=A0</div><div><br></div><div>On the specific proble=
+m, I&#39;m trying to enable the usb ethernet gadget and configure WiFi so I=
+ have both options for connecting to the target.=C2=A0 At some point, I&#39=
+;d like to configure the WiFi as an AP, assuming that&#39;s possible.=C2=A0=
+ There&#39;s a few other kernel configurations that I need that seem to be =
+atypical.=C2=A0=C2=A0</div><div><br></div><div>Any pointers would be apprec=
+iated.</div><div><br></div><div>John</div></div>
+
+--0000000000003c629405911f53bd--
