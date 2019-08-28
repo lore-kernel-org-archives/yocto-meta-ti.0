@@ -1,61 +1,58 @@
-Return-Path: <r10kindsofpeople@gmail.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 15A5CE00DAA; Tue, 27 Aug 2019 13:43:33 -0700 (PDT)
+	id 69436E00D77; Wed, 28 Aug 2019 05:46:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (r10kindsofpeople[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
-	no *      trust
-	*      [209.85.167.179 listed in list.dnswl.org]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com
-	[209.85.167.179])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC95DE009DA
-	for <meta-ti@yoctoproject.org>; Tue, 27 Aug 2019 13:43:30 -0700 (PDT)
-Received: by mail-oi1-f179.google.com with SMTP id g128so355998oib.1
-	for <meta-ti@yoctoproject.org>; Tue, 27 Aug 2019 13:43:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=Q+Lu4RH4Q6naxtcMoWC0D6z3msmTXG+23EOh0ZIQ78I=;
-	b=jDtWpasZJraOPf7fBgqDWUCbOx724Hu9dP+optcGpXSACVpv5/6jwS6sp2RbPxky/p
-	7bI5Vt6WVT1V7hbQLUYV3f2cxZVPMR1sKq955EQmxEWib9pZw7x/anAPBwZ3gZd3HUr2
-	rzEZ7r2vYbedK6OOSkBJYrbN1BBh/AsdEfCFWaaGaNxuXyUx8civQjGqw0xd8/Q/Q67Z
-	VcGyuAMiP80onRyjQE4sQYV95mqV5jguWz5JmV3JTJ2Q0f92J/yj0ndswQtavNrAJGUc
-	vrxPg/9nfffWTaMqapjXPTQNswXAnc/XnwWC0L3g3hqYuXCT/I3RJwHOabRS+ZYWcNb+
-	0YTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=Q+Lu4RH4Q6naxtcMoWC0D6z3msmTXG+23EOh0ZIQ78I=;
-	b=YtjxfWueOnV8HRcyEDMyBH3IGthzUsYw8rC/3CXSoJBpUtKzQ0h9/BH7CxVPrNY7Fa
-	LXfzx1dc8Rym9H7o+hzP7aLNgnHGwEiPZyzWwjxHXV1alq5u0E2AHAtNns+h9e/IpN5P
-	FRxuiS1ntlG8uzCN23QsETgR9Lc4Xuyoy6uJ85QR2EFY5bDieDfgvJofO28TJonaxJvA
-	nv/CdkHhw7ZVYDEKDWZOfQdceDevpO+MoBwDDkZjCco037096OiXklzjMmlIOpmSrAmQ
-	HBDvwG49zjPWzz3gsmQjD47zD/9a4yGsWe9g/GCSjuilnUnWhmjGfcY8BeKZZbp8plLQ
-	DBbA==
-X-Gm-Message-State: APjAAAUoVh53wITsSIde7+4Rht+fFzLRq6T/2/Pg4nG6GKO6vSfifGbP
-	5VWOe/gjYTtou1b6/vtPef8UYaSR0mc8Th5EPyMgZw==
-X-Google-Smtp-Source: APXvYqyefxdFTj0uUvw3lhYygdnW0vHy1CzgYQbfekNL79a2kDc7wgf0GeY77QyLYamV83LCJz1ZZ/SMZBMse2oufXg=
-X-Received: by 2002:aca:1a0b:: with SMTP id a11mr463451oia.128.1566938610032; 
-	Tue, 27 Aug 2019 13:43:30 -0700 (PDT)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18905E00D33
+	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2019 05:46:52 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7SCkqWi068379
+	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2019 07:46:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1566996412;
+	bh=BV9V58VB2dYp+O4I3bQZBHzw+/IuZH1jDS6UE6JlZ0Q=;
+	h=From:To:Subject:Date;
+	b=M8es95jZKGSq5ovkSDn8XYl9Pw9rmAtZ9HHNhN/Uspqi6gtofyIwBivfTcKGj9Kx+
+	UIzPlzSXdNqoJMr9HKN8dIUmCikexlf/oGUDyb+wrlXM9MmFx2WQbF++Hd5NBUt2WX
+	HRDtRihMneDSSQC05y2DZb5QFP79BB9DOjdGvvU0=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7SCkqgU096791
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2019 07:46:52 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE102.ent.ti.com
+	(10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Wed, 28 Aug 2019 07:46:52 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Wed, 28 Aug 2019 07:46:52 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7SCkpPt057468
+	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2019 07:46:52 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 28 Aug 2019 08:46:48 -0400
+Message-ID: <1566996408-60116-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-From: r10kindsofpeople <r10kindsofpeople@gmail.com>
-Date: Tue, 27 Aug 2019 16:43:19 -0400
-Message-ID: <CAE8H0+VA9qgYGAW7nqA4RQB-ejNjuM=J2EGrL3jPAmRYijKnOw@mail.gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: Getting Started/kernel config
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [thud/master][PATCH] j7-evm.conf: Correcting the core list for j7-evm (mpu2/3_x to mcu2/3_x)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,51 +65,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 20:43:33 -0000
-Content-Type: multipart/alternative; boundary="0000000000003c629405911f53bd"
+X-List-Received-Date: Wed, 28 Aug 2019 12:46:54 -0000
+Content-Type: text/plain
 
---0000000000003c629405911f53bd
-Content-Type: text/plain; charset="UTF-8"
+There is no mpu2_1,mpu3_0,mpu3_1 for j7-evm. They should have been
+mcu2_1,mcu3_0 and mcu3_1 respectively.
+---
+ conf/machine/j7-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Hi,
-I've been working with Yocto on various processors including the AM335x
-(under Arago and a mfg's BSP) for quite a while now.  But I'm working on a
-new project with the Beaglebone Black Wireless.  Downloaded thud, set
-machine to to am335x-evm and have a bootable microSD image.  Using
-systemd.  Core-image-full-cmdline.
+diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
+index ca594e8..cadf637 100644
+--- a/conf/machine/j7-evm.conf
++++ b/conf/machine/j7-evm.conf
+@@ -33,4 +33,4 @@ do_image_wic[depends] += "mtools-native:do_populate_sysroot dosfstools-native:do
+ # Set the list of device targets for ti-pdk class recipes
+ TI_PDK_LIMIT_SOCS = "j721e"
+ TI_PDK_LIMIT_BOARDS = "j721e_evm"
+-TI_PDK_LIMIT_CORES = "mpu1_0 mcu1_0 mcu1_1 mcu2_0 mpu2_1 mpu3_0 mpu3_1 c66xdsp_1 c66xdsp_2 c7x_1"
++TI_PDK_LIMIT_CORES = "mpu1_0 mcu1_0 mcu1_1 mcu2_0 mcu2_1 mcu3_0 mcu3_1 c66xdsp_1 c66xdsp_2 c7x_1"
+-- 
+1.9.1
 
-Is there a guide available for working with meta-ti ?  I'm having trouble
-understanding the kernel configuration recipes, finding out what the
-current configuration is, and how I can modify it.
 
-On the specific problem, I'm trying to enable the usb ethernet gadget and
-configure WiFi so I have both options for connecting to the target.  At
-some point, I'd like to configure the WiFi as an AP, assuming that's
-possible.  There's a few other kernel configurations that I need that seem
-to be atypical.
-
-Any pointers would be appreciated.
-
-John
-
---0000000000003c629405911f53bd
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div>I&#39;ve been working with Yocto on various proces=
-sors including the AM335x (under Arago and a mfg&#39;s BSP) for quite a whi=
-le now.=C2=A0 But I&#39;m working on a new project with the Beaglebone Blac=
-k Wireless.=C2=A0 Downloaded thud, set machine to to am335x-evm and have a =
-bootable microSD image.=C2=A0 Using systemd.=C2=A0 Core-image-full-cmdline.=
-=C2=A0=C2=A0</div><div><br></div><div>Is there a guide available for workin=
-g with meta-ti ?=C2=A0 I&#39;m having trouble understanding the kernel conf=
-iguration recipes, finding out what the current configuration is, and how I=
- can modify it.=C2=A0=C2=A0</div><div><br></div><div>On the specific proble=
-m, I&#39;m trying to enable the usb ethernet gadget and configure WiFi so I=
- have both options for connecting to the target.=C2=A0 At some point, I&#39=
-;d like to configure the WiFi as an AP, assuming that&#39;s possible.=C2=A0=
- There&#39;s a few other kernel configurations that I need that seem to be =
-atypical.=C2=A0=C2=A0</div><div><br></div><div>Any pointers would be apprec=
-iated.</div><div><br></div><div>John</div></div>
-
---0000000000003c629405911f53bd--
