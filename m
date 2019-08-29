@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <nikhil.nd@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1B3F0E00DE1; Wed, 28 Aug 2019 09:38:01 -0700 (PDT)
+	id B1E77E00E15; Thu, 29 Aug 2019 01:41:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,48 +10,53 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 864B6E00C78
-	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2019 09:38:00 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7SGbxlQ031424
-	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2019 11:37:59 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 925F8E00E22
+	for <meta-ti@yoctoproject.org>; Thu, 29 Aug 2019 01:41:35 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7T8fYjr109131
+	for <meta-ti@yoctoproject.org>; Thu, 29 Aug 2019 03:41:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1567010279;
-	bh=OGgw3jNAyITXqTBufU6/73m0RtuVK5jgXST9SSSoRcI=;
-	h=From:To:CC:Subject:Date;
-	b=ujONGD0r1qNfR/KyTiDwTZnu6OtH/ZSX5BUG5xYo8FJFmW6cEJBg/AZvqINT3InEx
-	EkPWm2vKf+DUSYd2s48qr8XVB7cSF3G+4cFMPQ5we47P7TOoIyYdO5rCx3QCQ6Z9wX
-	2LG7+7W8InOB3P27phqfU1E8zDpiUVD27dn/t1lY=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7SGbxvZ004631
+	s=ti-com-17Q1; t=1567068094;
+	bh=eBscsvpJfaXcSWwWlAkwPhCL1WZu3TyBxx0OhCEcOek=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=fnweRbUP+v/2sM0brcHvdKtlKKovmmuUkmy4UTrDffVWxaf6v3pzgLUCY0wWzzCXo
+	s6Cvbm2ptZEXY43HMqs5ohQjzhuuAS3YPiQCYgyNlDMttclZzBzHXjWIKjsiGDyvPy
+	FzFswD0j47VChZ+U3nAgnDyZ+k4lcsy+x76UxfGw=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7T8fYWl089696
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2019 11:37:59 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 29 Aug 2019 03:41:34 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 28 Aug 2019 11:37:59 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 29 Aug 2019 03:41:34 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 28 Aug 2019 11:37:59 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7SGbxYp051131;
-	Wed, 28 Aug 2019 11:37:59 -0500
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 28 Aug 2019 11:37:57 -0500
-Message-ID: <20190828163758.6650-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.22.0.214.g8dca754b1e
+	Frontend Transport; Thu, 29 Aug 2019 03:41:34 -0500
+Received: from [172.24.190.110] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7T8fVBe118765;
+	Thu, 29 Aug 2019 03:41:32 -0500
+To: Jacob Stiffler <j-stiffler@ti.com>, <meta-ti@yoctoproject.org>
+References: <1566324672-29395-1-git-send-email-j-stiffler@ti.com>
+	<1566324672-29395-2-git-send-email-j-stiffler@ti.com>
+From: Nikhil Devshatwar <a0132237@ti.com>
+Message-ID: <89a82035-f8a0-07d6-92d3-69e3733fbf33@ti.com>
+Date: Thu, 29 Aug 2019 14:11:30 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
 MIME-Version: 1.0
+In-Reply-To: <1566324672-29395-2-git-send-email-j-stiffler@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 1/2] u-boot-ti-staging: update to ti2019.03-rc4 tag
+Cc: lokeshvutla@ti.com
+Subject: Re: [master/thud][PATCH v2 2/3] jailhouse: provide tools package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,30 +69,87 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 16:38:01 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Aug 2019 08:41:40 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On 20/08/19 11:41 PM, Jacob Stiffler wrote:
+> Create a package containing the jailhouse tools which are used to work
+> with the cells and inmates. This recipe provides a good example for
+> using the jailhouse-cell-linux tool.
+> 
+> The tools require the pyjailhouse python modules, so package them as
+> well.
+> 
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index 408aa693..61da434a 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
- 
--PR = "r22"
-+PR = "r23"
- 
- BRANCH = "ti-u-boot-2019.01"
- 
--SRCREV = "5b0daeda209745437c90c3f095a519c47eadfbd6"
-+SRCREV = "a280dd38e1d3dc7f9c6ceba54fc9830fe9a152a3"
--- 
-2.22.0.214.g8dca754b1e
+
+Tested-by: Nikhil Devshatwar <nikhil.nd@ti.com>
+
+I had to specifically install the pyjailhouse IPK for pyjailhouse.
+You can add this in the meta-arago packagegroup recipe
+
+Nikhil D
+
+> ---
+>   recipes-kernel/jailhouse/jailhouse_git.bb | 24 ++++++++++++++++++++----
+>   1 file changed, 20 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
+> index d637d51..5d572d0 100644
+> --- a/recipes-kernel/jailhouse/jailhouse_git.bb
+> +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
+> @@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
+>   S = "${WORKDIR}/git"
+>   
+>   require jailhouse-arch.inc
+> -inherit module pythonnative bash-completion deploy
+> +inherit module pythonnative bash-completion deploy setuptools
+>   
+>   PACKAGE_ARCH = "${MACHINE_ARCH}"
+>   COMPATIBLE_MACHINE = "(ti-soc)"
+> @@ -78,12 +78,21 @@ USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
+>   TOOLS_SRC_DIR = "${S}/tools"
+>   TOOLS_OBJ_DIR = "${S}/tools"
+>   
+> +EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR}"
+> +
+> +
+>   do_compile() {
+> -	oe_runmake V=1 ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR}
+> +	oe_runmake V=1
+>   }
+>   
+>   do_install() {
+> -	oe_runmake ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR} DESTDIR=${D} install
+> +	# Install pyjailhouse python modules needed by the tools
+> +	distutils_do_install
+> +
+> +	# We want to install the python tools, but we do not want to use pip...
+> +	# At least with v0.10, we can work around this with
+> +	# 'PIP=":" PYTHON_PIP_USEABLE=yes'
+> +	oe_runmake PIP=: PYTHON_PIP_USEABLE=yes DESTDIR=${D} install
+>   
+>   	install -d ${D}${CELL_DIR}
+>   	install -m 0644 ${B}/configs/${JH_ARCH}/${JH_CELL_FILES} ${D}${CELL_DIR}/
+> @@ -115,8 +124,15 @@ do_install() {
+>   	fi
+>   }
+>   
+> -PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
+> +PACKAGE_BEFORE_PN = "kernel-module-jailhouse pyjailhouse ${PN}-tools"
+>   FILES_${PN} = "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR} /boot"
+> +FILES_pyjailhouse = "${PYTHON_SITEPACKAGES_DIR}"
+> +FILES_${PN}-tools = "${libexecdir}/${BPN}/${BPN}-*"
+> +
+> +RDEPENDS_${PN}-tools = "pyjailhouse python-mmap python-math python-argparse python-datetime python-curses python-compression"
+> +RDEPENDS_pyjailhouse = "python-core python-ctypes python-fcntl python-shell"
+> +
+> +RRECCOMMENDS_${PN} = "${PN}-tools"
+>   
+>   INSANE_SKIP_${PN} = "ldflags"
+>   
+> 
 
 
