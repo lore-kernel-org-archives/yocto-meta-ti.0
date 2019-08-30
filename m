@@ -1,6 +1,6 @@
-Return-Path: <nikhil.nd@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2C441E00DEF; Thu, 29 Aug 2019 01:51:57 -0700 (PDT)
+	id A2D5CE00C46; Fri, 30 Aug 2019 08:57:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,53 +10,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 853BAE00C78
-	for <meta-ti@yoctoproject.org>; Thu, 29 Aug 2019 01:51:56 -0700 (PDT)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0273FE00956
+	for <meta-ti@yoctoproject.org>; Fri, 30 Aug 2019 08:57:15 -0700 (PDT)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7T8pt2K008445
-	for <meta-ti@yoctoproject.org>; Thu, 29 Aug 2019 03:51:55 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x7UFvFPp023176
+	for <meta-ti@yoctoproject.org>; Fri, 30 Aug 2019 10:57:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1567068715;
-	bh=ziMy8OEiGIcsmrDOe4TYC9Bd7dxabZuqostBrcPTV08=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=HGBF1WPLmu7wIHPg1zva188jLdh+MdjlovNxGkxreLSmypugmRu7k6kYwDj2OGnaM
-	uAJ2uhLZHW5tg1J7Kc1rK730VP5FKSFIBXE1dDiwFknKSQoAAR/t0/92F4E7c4xh6K
-	J82kB2XAdpVUR9mKucRvA3JU84mFDmbRg/bjdKbU=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7T8ptvc001702
+	s=ti-com-17Q1; t=1567180635;
+	bh=9l0h70oM5e2F8A9T7LLeSADSA2iDFIzr78y/Wlv00P4=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=Lhwvgn51cer/r02HeJKka1QKafmQaZIdcZ0aePHMXxCe5rCkFo/E0B2+wivQF91UU
+	gXQDYuypGPPpxw75ZPEFO7aW4aAv0jnI9nIdVaQr3Xn+k6wOZO+Mu9Pxz3nKeZksYj
+	MCXgdB3uBmwYF3EHbLiXN9pxsddTohamvDd9uwbo=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x7UFvFku008563
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 29 Aug 2019 03:51:55 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 30 Aug 2019 10:57:15 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 29 Aug 2019 03:51:55 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE110.ent.ti.com
-	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 30 Aug 2019 10:57:14 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+	(10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 29 Aug 2019 03:51:55 -0500
-Received: from [172.24.190.110] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7T8pqUM093791;
-	Thu, 29 Aug 2019 03:51:53 -0500
-To: Jacob Stiffler <j-stiffler@ti.com>, <meta-ti@yoctoproject.org>
+	Frontend Transport; Fri, 30 Aug 2019 10:57:14 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x7UFvEbq055563;
+	Fri, 30 Aug 2019 10:57:14 -0500
+Date: Fri, 30 Aug 2019 11:57:14 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20190830155714.GA3307@beryl>
 References: <1566324672-29395-1-git-send-email-j-stiffler@ti.com>
-	<1566324672-29395-3-git-send-email-j-stiffler@ti.com>
-From: Nikhil Devshatwar <a0132237@ti.com>
-Message-ID: <2bb8f813-ad8e-028d-f9c6-e26c1d685458@ti.com>
-Date: Thu, 29 Aug 2019 14:21:51 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <1566324672-29395-3-git-send-email-j-stiffler@ti.com>
+In-Reply-To: <1566324672-29395-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: lokeshvutla@ti.com
-Subject: Re: [master/thud][PATCH v2 3/3] jailhouse: use ramfs for linux-demo
+Cc: meta-ti@yoctoproject.org, lokeshvutla@ti.com
+Subject: Re: [master/thud][PATCH v2 1/3] jailhouse: update to ti2019.03-rc2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,84 +67,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 08:51:57 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Aug 2019 15:57:16 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On 20/08/19 11:41 PM, Jacob Stiffler wrote:
-> * Configure the linux-demo to use a ramfs for the linux inmate.
-> * Using JH_RAMFS_IMAGE, this can be set in some global conf.
+This won't apply, as v1 was already merged prior to v2:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?h=thud&id=ee2665f793d3280b67e82bc4fba4b538a9647912
+
+Moreover, can you update to ti2019.03-rc4 tag - there were several commits 
+since rc2:
+http://git.ti.com/gitweb/?p=jailhouse/ti-jailhouse.git;a=shortlog;h=refs/heads/ti-jailhouse-0.10
+
+Thanks.
+
+Denys
+
+
+On Tue, Aug 20, 2019 at 02:11:10PM -0400, Jacob Stiffler wrote:
+> * extend to am65xx family
+> * and correct am65xx cell and inmate filenames.
+> * remove earlycon bootargs for am65xx
 > 
 > Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-
-Tested-by: Nikhil Devshatwar <nikhil.nd@ti.com>
-
-I manually built the core-image-minimal in cpio format with a bbappend of my own.
-How is this supposed to be built automatically?
-
-Can you add a depends variable so that the build kicks automatically?
-
-Nikhil D
-
 > ---
->   recipes-kernel/jailhouse/jailhouse_git.bb | 21 +++++++++++++++++----
->   1 file changed, 17 insertions(+), 4 deletions(-)
+> v2 changes:
+> * Remove earlycon args for all k3
+> 
+>  recipes-kernel/jailhouse/jailhouse_git.bb | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 > 
 > diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
-> index 5d572d0..ba6772f 100644
+> index 5e2c71b..d637d51 100644
 > --- a/recipes-kernel/jailhouse/jailhouse_git.bb
 > +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-> @@ -58,8 +58,10 @@ JH_SYSCONFIG_CELL ?= ""
->   JH_SYSCONFIG_CELL_am65xx ?= "k3-am654-idk.cell"
->   JH_SYSCONFIG_CELL_j7-evm ?= "k3-j721e-evm.cell"
->   
-> +JH_RAMFS_IMAGE ?= "core-image-minimal"
-> +
->   JH_CMDLINE ?= ""
-> -JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
-> +JH_CMDLINE_k3 ?= "console=ttyS1,115200n8"
->   
->   do_configure() {
->   	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ];
-> @@ -101,6 +103,16 @@ do_install() {
->   	install -m 0644 ${B}/inmates/demos/${JH_ARCH}/*.bin ${D}${INMATES_DIR}
->   
->   	install -d ${D}/boot
-> +	if [ -n "${JH_RAMFS_IMAGE}" ]
-> +	then
-> +		if [ -f ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}-${MACHINE}.cpio ]
-> +		then
-> +			install -m 0644 ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}-${MACHINE}.cpio ${D}/boot
-> +		else
-> +			bbwarn "Could find find JH_RAMFS_IMAGE (${JH_RAMFS_IMAGE}-${MACHINE}.cpio)!"
-> +			bbwarn "Please make sure that \"cpio\" is in IMAGE_FSTYPES."
-> +		fi
-> +	fi
->   
->   	if [ -n "${JH_INMATE_DTB}" -a -n "${JH_LINUX_DEMO_CELL}" ]; then
->   		cd ${TOOLS_SRC_DIR}
-> @@ -110,6 +122,7 @@ do_install() {
->   		./jailhouse-cell-linux -w ${D}${JH_DATADIR}/${JH_INMATE_DTB} \
->   			-a ${JH_ARCH} -c "${JH_CMDLINE}" \
->   			-d ../configs/${JH_ARCH}/dts/${JH_INMATE_DTB} \
-> +			-i ${D}/boot/${JH_RAMFS_IMAGE}-${MACHINE}.cpio \
->   			${D}${CELL_DIR}/${JH_LINUX_DEMO_CELL} \
->   			${DEPLOY_DIR_IMAGE}/Image \
->   			| tr -cd '\11\12\15\40-\176' \
-> @@ -143,9 +156,9 @@ CELLS = ""
->   
->   python __anonymous () {
->       d.appendVarFlag('do_install', 'depends', ' virtual/kernel:do_deploy')
-> -    initrd = d.getVar('INITRAMFS_IMAGE', True)
-> -    if initrd:
-> -        d.appendVarFlag('do_install', 'depends', ' ${INITRAMFS_IMAGE}:do_image_complete')
-> +    ramfs = d.getVar('JH_RAMFS_IMAGE', True)
-> +    if ramfs:
-> +        d.appendVarFlag('do_install', 'depends', ' ${JH_RAMFS_IMAGE}:do_image_complete')
->   
->       # Setup DEPENDS and RDEPENDS to included cells
->       cells = d.getVar('CELLS', True) or ""
+> @@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
+>  "
+>  
+>  PV = "0.10+git${SRCPV}"
+> -SRCREV = "e71fd2dc7e8494a44cc3c762a24824532a412807"
+> +SRCREV = "96329f098e655cd42d7d0dbb3cd2cc7c3492d633"
+>  BRANCH = "ti-jailhouse-0.10"
+>  
+>  SRC_URI = " \
+> @@ -47,19 +47,19 @@ JH_CELL_FILES ?= "*.cell"
+>  JH_CELL_FILES_k3 ?= "k3-*.cell"
+>  
+>  JH_INMATE_DTB ?= ""
+> -JH_INMATE_DTB_am65xx-evm ?= "inmate-k3-am654.dtb"
+> +JH_INMATE_DTB_am65xx ?= "inmate-k3-am654-idk.dtb"
+>  JH_INMATE_DTB_j7-evm ?= "inmate-k3-j721e-evm.dtb"
+>  
+>  JH_LINUX_DEMO_CELL ?= ""
+> -JH_LINUX_DEMO_CELL_am65xx-evm ?= "k3-am654-linux-demo.cell"
+> +JH_LINUX_DEMO_CELL_am65xx ?= "k3-am654-idk-linux-demo.cell"
+>  JH_LINUX_DEMO_CELL_j7-evm ?= "k3-j721e-evm-linux-demo.cell"
+>  
+>  JH_SYSCONFIG_CELL ?= ""
+> -JH_SYSCONFIG_CELL_am65xx-evm ?= "k3-am654.cell"
+> +JH_SYSCONFIG_CELL_am65xx ?= "k3-am654-idk.cell"
+>  JH_SYSCONFIG_CELL_j7-evm ?= "k3-j721e-evm.cell"
+>  
+>  JH_CMDLINE ?= ""
+> -JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait earlycon=ns16550a,mmio32,0x2810000"
+> +JH_CMDLINE_k3 ?= "console=ttyS1,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
+>  
+>  do_configure() {
+>  	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ]; 
+> -- 
+> 2.7.4
 > 
-
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
