@@ -1,6 +1,6 @@
 Return-Path: <>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 78D7AE00E10; Thu,  5 Sep 2019 09:38:53 -0700 (PDT)
+	id 13BB6E00E47; Thu,  5 Sep 2019 09:38:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,59 +9,59 @@ X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
 	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 470C9E00E10
-	for <meta-ti@yoctoproject.org>; Thu,  5 Sep 2019 09:38:52 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x85Gcpu1103186
-	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:51 -0500
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BCBEFE00E24
+	for <meta-ti@yoctoproject.org>; Thu,  5 Sep 2019 09:38:55 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x85GctNR124756
+	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1567701531;
-	bh=pg9gdMXhuSWhc8PaFqpC1ckfOF9b9W/4CQJ28PsC+4s=;
+	s=ti-com-17Q1; t=1567701535;
+	bh=qxO5htsma0pKUHt2EHTZRrm540L5Kcd06vsBW0gRKhE=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=o+wXM1Kg0rB3wanm5boOhUHxD7NY/gKTg8QDi0xhhrwrLi/84DM2n7Oy0KpiDj11Z
-	9rWQ2yF1kqY8FfeI8Fw7/LLHdO8VT5j6FmSZNRx234aYA/ZCRCQkJL9C2qq2XEfiJG
-	U56guMUE8zLtJgESIB9IQ/8fPgLmobqmK1rj44B4=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x85GcpaQ059832
+	b=iWUkzkpZMLyAR5iac8UbOM5zxe5q4p3FxCx3Al8Hg/Z/GpKCd/na1x2xQ9lPaDgKo
+	+tUEByatrJ487yeN4tFZnfq/S3hPcd6w4fdEFaVWU4y8kwzuvDp0QorI5N2sJOwmTL
+	t8HLpQ6v5pFWThmjaG4uRVBMsrh31gfMOsskva0s=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x85Gcttd012806
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:51 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
-	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:55 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 5 Sep 2019 11:38:51 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
-	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 5 Sep 2019 11:38:54 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 5 Sep 2019 11:38:51 -0500
+	Frontend Transport; Thu, 5 Sep 2019 11:38:54 -0500
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
 	[128.247.22.53])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x85Gcp1c086744;
-	Thu, 5 Sep 2019 11:38:51 -0500
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x85GcsiS071593;
+	Thu, 5 Sep 2019 11:38:54 -0500
 Received: from localhost ([10.250.95.88])
 	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x85GcnZ15482; Thu, 5 Sep 2019 11:38:49 -0500 (CDT)
+	x85GcqZ15490; Thu, 5 Sep 2019 11:38:52 -0500 (CDT)
 From: "Andrew F. Davis" <afd@ti.com>
 To: Denys Dmytriyenko <denys@ti.com>, Gowtham Tammana <g-tammana@ti.com>,
 	Anand Balagopalakrishnan <anandb@ti.com>, Eric Ruei <e-ruei1@ti.com>
-Date: Thu, 5 Sep 2019 12:38:44 -0400
-Message-ID: <20190905163847.18928-2-afd@ti.com>
+Date: Thu, 5 Sep 2019 12:38:45 -0400
+Message-ID: <20190905163847.18928-3-afd@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190905163847.18928-1-afd@ti.com>
 References: <20190905163847.18928-1-afd@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Cc: meta-ti@yoctoproject.org
-Subject: [thud/master][PATCH 2/5] ti-sgx-ddk-um: Add expat as runtime dependency
+Subject: [thud/master][PATCH 3/5] ti-sgx-ddk-um: Add wayland-protocols as build dependency
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -74,55 +74,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2019 16:38:53 -0000
+X-List-Received-Date: Thu, 05 Sep 2019 16:38:57 -0000
 Content-Type: text/plain
 
-Although not needed for the IMG default EGL implementation libexpat
-is needed when using the Mesa EGL version.
-
-While here s/libudev/udev as 'libudev' is package shipped as part of the
-eudev project, but we use systemd, so we actually depend on 'udev'.
-
-Move the PACKAGE_ARCH and PR defines to a more natural spot that also
-lines up with the RGX version of recipe for easier diffs.
-
-One thing we could have done is remove the DEPENDS line. We do not have
-any build dependencies as these are pre-made library binaries, but I use
-the package rootfs generated by bitbake to build the binaries locally,
-so leave it for now.
+Although not needed for the IMG default EGL implementation this is needed
+when building the Mesa EGL version of the DDK.
 
 Signed-off-by: Andrew F. Davis <afd@ti.com>
 ---
- recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-index 80570ef0..0a62cc35 100644
+index 0a62cc35..0695ca0a 100644
 --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
 +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -3,9 +3,10 @@ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
- LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
+@@ -25,8 +25,8 @@ inherit update-rc.d
  
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
- 
--PACKAGE_ARCH = "${MACHINE_ARCH}"
-+PR = "r34"
- 
- BRANCH = "ti-img-sgx/thud/${PV}"
- 
-@@ -22,11 +23,10 @@ INITSCRIPT_PARAMS = "defaults 8"
- 
- inherit update-rc.d
- 
--PR = "r34"
  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm omap5-sgx-ddk-um-linux"
  
--DEPENDS += "libdrm udev wayland libffi"
--RDEPENDS_${PN} += "libdrm libudev wayland libffi libdrm-omap"
-+DEPENDS += "libdrm udev wayland libffi expat"
-+RDEPENDS_${PN} += "libdrm libdrm-omap udev wayland libffi expat"
+-DEPENDS += "libdrm udev wayland libffi expat"
+-RDEPENDS_${PN} += "libdrm libdrm-omap udev wayland libffi expat"
++DEPENDS += "libdrm udev wayland wayland-protocols libffi expat"
++RDEPENDS_${PN} += "libdrm libdrm-omap udev wayland wayland-protocols libffi expat"
  
  RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm omap5-sgx-ddk-um-linux"
  RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev omap5-sgx-ddk-um-linux-dev"
