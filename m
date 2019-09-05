@@ -1,6 +1,6 @@
 Return-Path: <>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3E29BE00E14; Thu,  5 Sep 2019 09:38:51 -0700 (PDT)
+	id 78D7AE00E10; Thu,  5 Sep 2019 09:38:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,55 +11,57 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E91F9E00E0D
-	for <meta-ti@yoctoproject.org>; Thu,  5 Sep 2019 09:38:49 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x85Gcnek037885
-	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:49 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 470C9E00E10
+	for <meta-ti@yoctoproject.org>; Thu,  5 Sep 2019 09:38:52 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x85Gcpu1103186
+	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1567701529;
-	bh=FQ3RsE47yk0IjFCoWCwdxrR5o+dzDxn36ZUiPoUl2OI=;
-	h=From:To:CC:Subject:Date;
-	b=oZNDYI4pU34VfixMgYTPQyecBdnCUxA1vU/uwsweZZsk9fQ0bqjMptT9DQJwUDrBv
-	NBY9U+CK5Lrv7h5ktOh3TWQul+I+gsXBXdCH6Srz4oxhkoYkfoS5LakqBP9qPFUWjW
-	HNfoka9crT4lW4CepaXzJDSkyK91h2Sew7hcB2zk=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x85GcnrG023829
+	s=ti-com-17Q1; t=1567701531;
+	bh=pg9gdMXhuSWhc8PaFqpC1ckfOF9b9W/4CQJ28PsC+4s=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=o+wXM1Kg0rB3wanm5boOhUHxD7NY/gKTg8QDi0xhhrwrLi/84DM2n7Oy0KpiDj11Z
+	9rWQ2yF1kqY8FfeI8Fw7/LLHdO8VT5j6FmSZNRx234aYA/ZCRCQkJL9C2qq2XEfiJG
+	U56guMUE8zLtJgESIB9IQ/8fPgLmobqmK1rj44B4=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x85GcpaQ059832
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:49 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE100.ent.ti.com
-	(10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2019 11:38:51 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 5 Sep 2019 11:38:49 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 5 Sep 2019 11:38:51 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
+	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 5 Sep 2019 11:38:49 -0500
+	Frontend Transport; Thu, 5 Sep 2019 11:38:51 -0500
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
 	[128.247.22.53])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x85GcmEL086713;
-	Thu, 5 Sep 2019 11:38:49 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x85Gcp1c086744;
+	Thu, 5 Sep 2019 11:38:51 -0500
 Received: from localhost ([10.250.95.88])
 	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x85GcmZ15478; Thu, 5 Sep 2019 11:38:48 -0500 (CDT)
+	x85GcnZ15482; Thu, 5 Sep 2019 11:38:49 -0500 (CDT)
 From: "Andrew F. Davis" <afd@ti.com>
 To: Denys Dmytriyenko <denys@ti.com>, Gowtham Tammana <g-tammana@ti.com>,
 	Anand Balagopalakrishnan <anandb@ti.com>, Eric Ruei <e-ruei1@ti.com>
-Date: Thu, 5 Sep 2019 12:38:43 -0400
-Message-ID: <20190905163847.18928-1-afd@ti.com>
+Date: Thu, 5 Sep 2019 12:38:44 -0400
+Message-ID: <20190905163847.18928-2-afd@ti.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20190905163847.18928-1-afd@ti.com>
+References: <20190905163847.18928-1-afd@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Cc: meta-ti@yoctoproject.org
-Subject: [thud/master][PATCH 1/5] ti-sgx-ddk-um: libgbm is now part of this project
+Subject: [thud/master][PATCH 2/5] ti-sgx-ddk-um: Add expat as runtime dependency
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,111 +74,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2019 16:38:51 -0000
+X-List-Received-Date: Thu, 05 Sep 2019 16:38:53 -0000
 Content-Type: text/plain
 
-The GBM library is tightly coupled with the system graphics systems,
-other hardware GPU vendors (including our Rogue DDK) and Mesa all deploy
-a version of the library as part of their GPU driver. We SGX does the
-same. This should ease integration for us as we now don't rely on a
-separate project for this library and our deployment strategy can match
-across Mesa/RGX recipes, allowing for better re-use of common components.
+Although not needed for the IMG default EGL implementation libexpat
+is needed when using the Mesa EGL version.
+
+While here s/libudev/udev as 'libudev' is package shipped as part of the
+eudev project, but we use systemd, so we actually depend on 'udev'.
+
+Move the PACKAGE_ARCH and PR defines to a more natural spot that also
+lines up with the RGX version of recipe for easier diffs.
+
+One thing we could have done is remove the DEPENDS line. We do not have
+any build dependencies as these are pre-made library binaries, but I use
+the package rootfs generated by bitbake to build the binaries locally,
+so leave it for now.
 
 Signed-off-by: Andrew F. Davis <afd@ti.com>
 ---
- recipes-graphics/gbm/libgbm_10.0.0.bb         | 23 --------------
- .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     | 30 +++++++++----------
- 2 files changed, 14 insertions(+), 39 deletions(-)
- delete mode 100644 recipes-graphics/gbm/libgbm_10.0.0.bb
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-graphics/gbm/libgbm_10.0.0.bb b/recipes-graphics/gbm/libgbm_10.0.0.bb
-deleted file mode 100644
-index 6d058b72..00000000
---- a/recipes-graphics/gbm/libgbm_10.0.0.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "Userspace interface for the kernel GBM services"
--HOMEPAGE = "http://git.ti.com/glsdk/libgbm.git"
--
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://gbm.c;beginline=1;endline=26;md5=b871c7f2f477df29ee4c0ec437b187f7"
--
--DEPENDS = "libdrm udev"
--
--PROVIDES += "virtual/libgbm"
--
--inherit autotools pkgconfig
--
--BRANCH = "next"
--
--SRCREV = "96f37555c7e82a417b02051661377b10e6b3966e"
--
--SRC_URI = "git://git.ti.com/glsdk/libgbm.git;protocol=git;branch=${BRANCH} \
--            file://0001-gbm.c-include-sys-sysmacros.h-for-minor-major-in-new.patch"
--
--S = "${WORKDIR}/git"
--
--COMPATIBLE_HOST ?= "null"
--COMPATIBLE_HOST_ti-soc = "(.*)"
 diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-index 02c9b750..80570ef0 100644
+index 80570ef0..0a62cc35 100644
 --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
 +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -10,7 +10,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -3,9 +3,10 @@ HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
+ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
+ 
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
+ 
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
++PR = "r34"
+ 
  BRANCH = "ti-img-sgx/thud/${PV}"
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "9e63d5ac0b40d6a70463173c597122b6645c8a95"
-+SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
-@@ -22,23 +22,23 @@ INITSCRIPT_PARAMS = "defaults 8"
+@@ -22,11 +23,10 @@ INITSCRIPT_PARAMS = "defaults 8"
  
  inherit update-rc.d
  
--PR = "r33"
--PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 omap5-sgx-ddk-um-linux"
-+PR = "r34"
-+PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm omap5-sgx-ddk-um-linux"
+-PR = "r34"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm omap5-sgx-ddk-um-linux"
  
--DEPENDS += "libdrm udev libgbm wayland libffi"
--RDEPENDS_${PN} += "libdrm libudev libgbm wayland libffi libdrm-omap"
-+DEPENDS += "libdrm udev wayland libffi"
-+RDEPENDS_${PN} += "libdrm libudev wayland libffi libdrm-omap"
+-DEPENDS += "libdrm udev wayland libffi"
+-RDEPENDS_${PN} += "libdrm libudev wayland libffi libdrm-omap"
++DEPENDS += "libdrm udev wayland libffi expat"
++RDEPENDS_${PN} += "libdrm libdrm-omap udev wayland libffi expat"
  
--RPROVIDES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
--RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
--RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-+RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm omap5-sgx-ddk-um-linux"
-+RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev omap5-sgx-ddk-um-linux-dev"
-+RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg omap5-sgx-ddk-um-linux-dbg"
- 
--RREPLACES_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
--RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
--RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-+RREPLACES_${PN} = "libegl libgles1 libgles2 libgbm omap5-sgx-ddk-um-linux"
-+RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev omap5-sgx-ddk-um-linux-dev"
-+RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg omap5-sgx-ddk-um-linux-dbg"
- 
--RCONFLICTS_${PN} = "libegl libgles1 libgles2 omap5-sgx-ddk-um-linux"
--RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev omap5-sgx-ddk-um-linux-dev"
--RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg omap5-sgx-ddk-um-linux-dbg"
-+RCONFLICTS_${PN} = "libegl libgles1 libgles2 libgbm omap5-sgx-ddk-um-linux"
-+RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev omap5-sgx-ddk-um-linux-dev"
-+RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg omap5-sgx-ddk-um-linux-dbg"
- 
- # The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
- RPROVIDES_${PN} += "libGLESv2.so.1"
-@@ -47,8 +47,6 @@ S = "${WORKDIR}/git"
- 
- do_install () {
-     oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
--    mkdir -p ${D}${libdir}/gbm
--    ln -sf ../libpvrGBMWSEGL.so.${PV} ${D}${libdir}/gbm/gbm_pvr.so
-     ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
- 
-     rm -f ${D}${libdir}/pkgconfig/wayland-egl.pc
+ RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm omap5-sgx-ddk-um-linux"
+ RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev omap5-sgx-ddk-um-linux-dev"
 -- 
 2.17.1
 
