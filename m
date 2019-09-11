@@ -1,68 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6C4E0E00E0A; Wed, 11 Sep 2019 09:15:38 -0700 (PDT)
+	id 4ED28E00E0B; Wed, 11 Sep 2019 12:24:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (raj.khem[at]gmail.com)
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
-	no *      trust
-	*      [209.85.210.180 listed in list.dnswl.org]
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56CB9E00E07
-	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2019 09:15:37 -0700 (PDT)
-Received: by mail-pf1-f180.google.com with SMTP id y22so13994536pfr.3
-	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2019 09:15:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zmSVg7HCWL9FdbaKTCgiLs3IhAQtM5mpT1ZnqxADmFw=;
-	b=JZf8ei173ZeRUir0JQvKvZGBv/3jsSfO+gaKLAKKQgOjcUczTlwmUnhtHHCGPxPT24
-	LhY36MfAxjnNIpuDFwuXMayPtgiZu8FxXNTAxO5wkpxTeF7f0XjtlqX+Rb3lAGqmqe/8
-	5ngndtrkSvSFDpWuIlR+Ck9YaEqqmYWp0+ASt12EkgyOi+UEGQbWk5xcxQnSfeJquBI1
-	ClmrFsDrtSNbx8AGHB5yGxYW351LQyzc2jI+ZcWBZ4IAJnIABArdkd0n5me0VJpCVAnK
-	tgYKEBXOdPcADUclomIAr7D5TDDigR/CsaHmn1owpRmv0PyntbMkkK1LYg0NuYJpE9Wa
-	xvbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zmSVg7HCWL9FdbaKTCgiLs3IhAQtM5mpT1ZnqxADmFw=;
-	b=mZUsDGBI7/Jlbuv5Rmod3NeGnex68a+PYXhEkPbnlvuO7rd/Kar5Jn16YEYgfQ0QaZ
-	1I/ocNcoo2ureoin8d9wF9VUMS2Q6dY34AccuHkDNnqttEksEsJITL7+GFKP8rDFd+E5
-	P1l0YlmA8RC/7MUusU7qS81UiX1DF5lW6c2z+IYcATc14pAFmYC1bb6BF6ST2Nc/Azgp
-	bgfRPNuZcwbmwAcjMW6qt/6mAVF3w6sYSMLY/CNL0RUE7kTOZw0zfz23PfarYiUVtNa+
-	sgzgoVS0vJJDUNrkOJkpUXweksfBLbYOSlaM9SaMRYbzyQ1eERpm5bqOY1ll1SbWU/B9
-	/qCQ==
-X-Gm-Message-State: APjAAAU5KC9qj3LiGBgLwS1E5DmCc8ZlRu6QpPulxVsTROWE1WPSi9kG
-	DLZyNibWVr1BjDRgjU/IiMCPUB82vq8=
-X-Google-Smtp-Source: APXvYqzjHXBJ4gNGeepliNINT2AqUK2wmzKMDjcWgdr48epcW0eAIhjWey6iiBsrnCsWJLDrQT9ECw==
-X-Received: by 2002:a63:e70f:: with SMTP id b15mr33607301pgi.152.1568218535997;
-	Wed, 11 Sep 2019 09:15:35 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	k22sm4819091pfa.87.2019.09.11.09.15.35
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Sep 2019 09:15:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C3E23E00E00
+	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2019 12:24:02 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D7DAF40BF9;
+	Wed, 11 Sep 2019 19:24:01 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id AYpj6gdUtZQd; Wed, 11 Sep 2019 19:24:01 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C161140BC4;
+	Wed, 11 Sep 2019 19:24:00 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 79BED173B14;
+	Wed, 11 Sep 2019 15:24:00 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Wed, 11 Sep 2019 09:15:24 -0700
-Message-Id: <20190911161524.2780057-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
-MIME-Version: 1.0
-Subject: [PATCH] ti-unpack: Simplify the logic to detect 32bit glibc on build host
+Date: Wed, 11 Sep 2019 15:23:52 -0400
+Message-Id: <1568229835-30920-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [thud/master][PATCH 1/4] jailhouse: ensure INITRAMFS_IMAGE is initialized, pass full CC var
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,31 +45,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 16:15:38 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Sep 2019 19:24:03 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* If both INITRAMFS_IMAGE and JH_RAMFS_IMAGE are unset, variables fail to
+  expand, which leads to dependency errors.
+* Passing full CC variable ensure all options are specified, especially
+  --sysroot one for internal toolchains.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/includes/ti-unpack.inc | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ recipes-kernel/jailhouse/jailhouse_git.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
-index 81fcf6a6..828f3d5a 100644
---- a/recipes-ti/includes/ti-unpack.inc
-+++ b/recipes-ti/includes/ti-unpack.inc
-@@ -20,10 +20,7 @@ python ti_bin_do_unpack() {
-     import os
+diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
+index 0b52ecb..32aecf8 100644
+--- a/recipes-kernel/jailhouse/jailhouse_git.bb
++++ b/recipes-kernel/jailhouse/jailhouse_git.bb
+@@ -58,6 +58,7 @@ JH_SYSCONFIG_CELL ?= ""
+ JH_SYSCONFIG_CELL_am65xx ?= "k3-am654-idk.cell"
+ JH_SYSCONFIG_CELL_j7-evm ?= "k3-j721e-evm.cell"
  
-     # InstallJammer requires 32bit version of glibc
--    lib32path = '/lib'
--    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
--        lib32path = '/lib32'
--    if not os.path.exists('%s/libc.so.6' % lib32path) and not os.path.exists('%s/i386-linux-gnu/libc.so.6' % lib32path):
-+    if not os.path.exists('/lib/ld-linux.so.2'):
-         bb.fatal("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install libc6:i386' on Ubuntu/Debian")
++INITRAMFS_IMAGE ?= ""
+ JH_RAMFS_IMAGE ?= "${INITRAMFS_IMAGE}"
  
-     localdata = bb.data.createCopy(d)
+ JH_CMDLINE ?= ""
+@@ -78,10 +79,8 @@ USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
+                     -I../driver'
+ 
+ TOOLS_SRC_DIR = "${S}/tools"
+-TOOLS_OBJ_DIR = "${S}/tools"
+-
+-EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} KDIR=${STAGING_KERNEL_BUILDDIR}"
+ 
++EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" KDIR=${STAGING_KERNEL_BUILDDIR}"
+ 
+ do_compile() {
+ 	oe_runmake V=1
 -- 
-2.23.0
+2.7.4
 
 
