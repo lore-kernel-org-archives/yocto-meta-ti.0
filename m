@@ -1,41 +1,62 @@
-Return-Path: <denys@ti.com>
+Return-Path: <angelabaker@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 67331E00E00; Wed, 11 Sep 2019 12:24:04 -0700 (PDT)
+	id 4CBABE00E0D; Wed, 11 Sep 2019 13:33:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00, URI_HEX autolearn=no
-	version=3.3.1
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C50A6E00E07
-	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2019 12:24:02 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id F06A640BE3;
-	Wed, 11 Sep 2019 19:24:01 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id sRR98Xbto7ow; Wed, 11 Sep 2019 19:24:01 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id DAB4E40BF5;
-	Wed, 11 Sep 2019 19:24:00 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 95185173BB9;
-	Wed, 11 Sep 2019 15:24:00 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 11 Sep 2019 15:23:54 -0400
-Message-Id: <1568229835-30920-3-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1568229835-30920-1-git-send-email-denys@ti.com>
-References: <1568229835-30920-1-git-send-email-denys@ti.com>
-Subject: [thud/master][PATCH 3/4] ti-sgx-ddk-km: also support arm-oe-linux-gnueabi as a hardfp compiler
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2BE58E00D8E
+	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2019 13:33:21 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8BKXLM1124879
+	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2019 15:33:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1568234001;
+	bh=mVyqzfUWOp+/tLaktd6r4RUNybxH5eaCE6ivxVv/DMM=;
+	h=From:To:CC:Subject:Date;
+	b=qnd5AQ/HnNclTz7MQVVbRVFUjmlPjq0S1HfiBjQ9qf7u4hXPfKjsWO/hm/SKQsX1F
+	NBx20AAoQPVoUHWOLGATOppO68XO99zma7B6BYaaIxBKDOr4caX/EDSXQpISTfVW9n
+	Sr95fi6hP/Iqx3tjKyXtOdE6q7q2i/Hj1gdiLiow=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8BKXLn1101703
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2019 15:33:21 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Wed, 11 Sep 2019 15:33:21 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Wed, 11 Sep 2019 15:33:20 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8BKXKfd015504;
+	Wed, 11 Sep 2019 15:33:20 -0500
+Received: from uda0866189.dhcp.ti.com (uda0866189.dhcp.ti.com [128.247.77.48])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	x8BKXKZ05902; Wed, 11 Sep 2019 15:33:20 -0500 (CDT)
+From: Angela Stegmaier <angelabaker@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 11 Sep 2019 15:08:51 -0500
+Message-ID: <1568232531-10323-1-git-send-email-angelabaker@ti.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: sunitan@ti.com
+Subject: [thud][PATCH] ti-img-encode-decode: Update SRCREV and build encoder
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,78 +69,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 19:24:04 -0000
+X-List-Received-Date: Wed, 11 Sep 2019 20:33:23 -0000
+Content-Type: text/plain
 
-OE-built internal toolchain doesn't use "-gnueabihf" suffix and instead uses
-"-gnueabi" for both softfp and hardfp.
+Pick up latest version of ti-img-encode-decode which
+includes updates for decoder and addition of encoder.
 
-For now we only support hardfp (user-space binaries are only available in
-hardfp), but would be nice to check for "callconvention-hard" before applying
-the patch.
+Also update the recipe to build the encoder module.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Angela Stegmaier <angelabaker@ti.com>
 ---
- ...OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch | 34 ++++++++++++++++++++++
- .../powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb  |  4 ++-
- 2 files changed, 37 insertions(+), 1 deletion(-)
- create mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
+ .../ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb     | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-new file mode 100644
-index 0000000..071ce0c
---- /dev/null
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-@@ -0,0 +1,34 @@
-+From 755632b4f3a40996a12bc7816a9839af7112040a Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denys@ti.com>
-+Date: Mon, 9 Sep 2019 17:05:48 -0400
-+Subject: [PATCH] km: support OpenEmbedded hardfp toolchain w/o -gnueabihf
-+ suffix
-+
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+---
-+ eurasia_km/eurasiacon/build/linux2/config/compiler.mk | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-+index dead2f9..2ba3e5e 100644
-+--- a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-++++ b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-+@@ -68,12 +68,12 @@ define calculate-compiler-preferred-target
-+   ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
-+    $(1)_compiler_preferred_target := aarch64-linux-gnu
-+   endif
-++  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-++   $(1)_compiler_preferred_target := arm-linux-gnueabihf
-++  endif
-+   ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-+    $(1)_compiler_preferred_target := arm-linux-gnueabi
-+   endif
-+-  ifneq ($$(filter arm-%-gnueabihf,$$($(1)_compiler_preferred_target)),)
-+-   $(1)_compiler_preferred_target := arm-linux-gnueabihf
-+-  endif
-+  endif
-+ endef
-+ 
-+-- 
-+2.7.4
-+
-diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-index 8338ed7..c8dbe4f 100644
---- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-@@ -18,7 +18,9 @@ PROVIDES = "virtual/gpudriver"
+diff --git a/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb b/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb
+index c684103..0b84301 100644
+--- a/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb
++++ b/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb
+@@ -1,15 +1,15 @@
+ SUMMARY = "Kernel drivers for the IMG VXE384 MP2 and D5520 encoder/decoder found in TI SoCs"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://common/dq.c;beginline=1;endline=16;md5=e015e28ff5e88576dab9fdf641e3dbfe"
++LIC_FILES_CHKSUM = "file://driver/common/dq.c;beginline=1;endline=16;md5=e015e28ff5e88576dab9fdf641e3dbfe"
  
- BRANCH = "ti-img-sgx/${PV}/k4.19"
+ inherit module
  
--SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
-+SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH} \
-+    file://0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch \
-+"
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ COMPATIBLE_MACHINE = "j7-evm"
+ 
+-SRCREV = "1f85a7fb3b78c82b44038aaf29bfdb229aeb6bc8"
++SRCREV = "c7657d2ead0ca211ab307dd2f403621de5b3e80d"
+ 
+ EXTRA_OEMAKE = "KPATH=${STAGING_KERNEL_DIR} KCONF=${STAGING_KERNEL_BUILDDIR}"
+ TARGET_CC_ARCH += "${LDFLAGS}"
+@@ -19,7 +19,13 @@ SRC_URI = "git://git.ti.com/jacinto7_multimedia/ti-img-encode-decode.git;protoco
  
  S = "${WORKDIR}/git"
  
++do_compile() {
++	oe_runmake all -C ${S}/linux/decoder
++	oe_runmake all -C ${S}/linux/encoder
++}
++
+ do_install() {
+ 	install -d ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
+-	install -m 644 ${S}/vxd-dec.ko ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
++	install -m 644 ${S}/linux/decoder/vxd-dec.ko ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
++	install -m 644 ${S}/linux/encoder/vxe-enc.ko ${D}/${base_libdir}/modules/${KERNEL_VERSION}/extra
+ }
 -- 
-2.7.4
+1.9.1
 
 
