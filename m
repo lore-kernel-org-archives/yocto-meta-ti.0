@@ -1,61 +1,60 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B2D0FE009E6; Fri, 13 Sep 2019 12:30:59 -0700 (PDT)
+	id 4920AE009DC; Fri, 13 Sep 2019 12:46:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 09FBEE00994
-	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 12:30:58 -0700 (PDT)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE4A1E00961
+	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 12:46:57 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8DJUwU6046137;
-	Fri, 13 Sep 2019 14:30:58 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8DJkurw008729
+	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 14:46:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1568403058;
-	bh=/jRkJp4M+jAAVNLUHnvFW6cD8xS316r4iQ2J8aM8SUI=;
+	s=ti-com-17Q1; t=1568404016;
+	bh=Grd1nD0GF+Lt42VbNZRVSkkWTJdoApf+ST3+Myjo27U=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=XdGx8NuBLBgFNgTxjeeTathQK9hz8bIZEmRdpEGX5txIE82EaGhWBveU7zY1xf9xe
-	yAxZKtZ4mg/c/JYwAoRhHOEWGgQgnLbGWx9ZdF84E5i9bOKfVJlpUmmS78j0DkdEAb
-	XYVzZ6Kh/kB+vKO/FkZ+np1/PR+jtlxKgoYSmc1Q=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8DJUwSj113099
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 13 Sep 2019 14:30:58 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	b=RavBjDNENzPX4zeYGwGRK4TuBzLU++1Z2sdam9I0ubDSbvUEoxYNmQ1Tzk6J82kmD
+	hKx5XIyS+Kn1hmI4TURrPDMH0KeeHscR6+srG87zvL34IjVP8Ry1Cz/1ysTqwVZRtq
+	5jR9D1yPJVYikh57PaOMAAaRlZAB8KCAVZD5Lc10=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8DJku4l001062
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 14:46:56 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
+	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Fri, 13 Sep 2019 14:30:57 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
-	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 13 Sep 2019 14:46:55 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+	(10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Fri, 13 Sep 2019 14:30:57 -0500
+	Frontend Transport; Fri, 13 Sep 2019 14:46:56 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8DJUv1R112556;
-	Fri, 13 Sep 2019 14:30:57 -0500
-Date: Fri, 13 Sep 2019 15:30:57 -0400
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8DJku9h050582;
+	Fri, 13 Sep 2019 14:46:56 -0500
+Date: Fri, 13 Sep 2019 15:46:56 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190913193057.GD8889@beryl>
-References: <1568344904-32388-1-git-send-email-denys@ti.com>
-	<CAMKF1sqG2T3e9+swGyyT2J8OAXWqPfedyyr06PWpOyS8A4R4VA@mail.gmail.com>
+To: Santhana Bharathi <santa@ti.com>
+Message-ID: <20190913194656.GE8889@beryl>
+References: <1568361432-43215-1-git-send-email-santa@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqG2T3e9+swGyyT2J8OAXWqPfedyyr06PWpOyS8A4R4VA@mail.gmail.com>
+In-Reply-To: <1568361432-43215-1-git-send-email-santa@ti.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [thud/master][PATCH] ion: add libion and ion-tests packages for ION support
+Cc: meta-ti@yoctoproject.org, nsekhar@ti.com, prasad.jondhale@ti.com
+Subject: Re: [thud][PATCH V2] cpsw9g-eth-fw: Add CPSW 9G support for J7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,124 +67,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 19:30:59 -0000
+X-List-Received-Date: Fri, 13 Sep 2019 19:46:58 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-Ok, I'll take a look. Thanks.
+On Fri, Sep 13, 2019 at 01:27:12PM +0530, Santhana Bharathi wrote:
+> Signed-off-by: Santhana Bharathi <santa@ti.com>
+> ---
+>  recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb | 43 ++++++++++++++++++++++++++
+>  1 file changed, 43 insertions(+)
+>  create mode 100644 recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+> 
+> diff --git a/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+> new file mode 100644
+> index 0000000..2c597ff
+> --- /dev/null
+> +++ b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+> @@ -0,0 +1,43 @@
+> +SUMMARY = "R5 PSDK CPSW9G Ethernet Switch Firmware"
+> +
+> +LICENSE = "TI-TFL"
+> +LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=04ad0a015d4bb63c2b9e7b112debf3db"
+> +
+> +PV = "1.0+git${SRCPV}"
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +inherit deploy
+> +inherit update-alternatives
+> +
+> +PROTOCOL = "git"
+> +BRANCH = "master"
+> +SRCREV = "df7f399319ee401dfbda9317878128a0f718507f"
+> +
+> +SRC_URI = "git://git.ti.com/glsdk/ti-eth-fw.git;protocol=${PROTOCOL};branch=${BRANCH}"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +CPSW9G_FW_DIR = "${S}/ethfw"
+> +CPSW9G_FW_FILENAME = "app_remoteswitchcfg_server.xer5f"
+> +
+> +# make sure that lib/firmware, and all its contents are part of the package
+> +FILES_${PN} += "${base_libdir}/firmware"
+> +
+> +do_install() {
+> +  install -d ${D}${base_libdir}/firmware
+> +  install -m 0555 ${CPSW9G_FW_DIR}/${CPSW9G_FW_FILENAME} ${D}${base_libdir}/firmware
 
-On Fri, Sep 13, 2019 at 06:24:48AM -0700, Khem Raj wrote:
-> thai breaks on musl  see
+0555 doesn't seem right. Standard Unix permissions are 0755 for executables 
+and 0644 for regular files. Unless you specifically need something else - 
+please explain.
+
+
+> +}
+> +
+> +TARGET_MAIN_R5FSS0_0 = "j7-main-r5f0_0-fw"
+> +ALTERNATIVE_${PN} = "j7-main-r5f0_0-fw"
+> +ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
+> +ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${CPSW9G_FW_FILENAME}"
+> +ALTERNATIVE_PRIORITY = "17"
+> +
+> +INHIBIT_PACKAGE_STRIP = "1"
+> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+> +INSANE_SKIP_${PN} += "arch"
+> +
+> +do_compile[noexec] = "1"
+> +do_configure[noexec] = "1"
+> +
+> -- 
+> 1.9.1
 > 
-> https://errors.yoctoproject.org/Errors/Details/270173/
-> 
-> a patch like meta/recipes-support/attr/attr/dont-use-decl-macros.patch
-> from oe-core will solve it. Care to fix ?
-> 
-> On Thu, Sep 12, 2019 at 8:22 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> >
-> > ION Userspace Memory Allocator Library and tests
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> >  ...-CMakeLists.txt-disable-phys-addr-for-now.patch | 34 ++++++++++++++++++++++
-> >  recipes-devtools/ion/ion-tests_git.bb              | 18 ++++++++++++
-> >  recipes-devtools/ion/libion_git.bb                 | 14 +++++++++
-> >  3 files changed, 66 insertions(+)
-> >  create mode 100644 recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch
-> >  create mode 100644 recipes-devtools/ion/ion-tests_git.bb
-> >  create mode 100644 recipes-devtools/ion/libion_git.bb
-> >
-> > diff --git a/recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch b/recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch
-> > new file mode 100644
-> > index 0000000..7cf5895
-> > --- /dev/null
-> > +++ b/recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch
-> > @@ -0,0 +1,34 @@
-> > +From 85264fc72a261d20107a50ea2fad0258900a132b Mon Sep 17 00:00:00 2001
-> > +From: Denys Dmytriyenko <denys@ti.com>
-> > +Date: Sat, 20 Apr 2019 16:54:03 +0000
-> > +Subject: [PATCH] CMakeLists.txt: disable phys-addr for now
-> > +
-> > +Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > +---
-> > + CMakeLists.txt | 13 -------------
-> > + 1 file changed, 13 deletions(-)
-> > +
-> > +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> > +index 1d60003..eca6ba7 100644
-> > +--- a/CMakeLists.txt
-> > ++++ b/CMakeLists.txt
-> > +@@ -54,16 +54,3 @@ target_link_libraries(ion-print-heaps
-> > + target_include_directories(ion-print-heaps PUBLIC ${LIBION_INCLUDE_DIRS})
-> > +
-> > + install(TARGETS ion-print-heaps RUNTIME DESTINATION bin)
-> > +-
-> > +-# phys-addr
-> > +-
-> > +-add_executable(phys-addr
-> > +-      src/phys-addr.c
-> > +-)
-> > +-
-> > +-target_link_libraries(phys-addr
-> > +-      ${LIBION_LIBRARIES}
-> > +-)
-> > +-target_include_directories(phys-addr PUBLIC ${LIBION_INCLUDE_DIRS})
-> > +-
-> > +-install(TARGETS phys-addr RUNTIME DESTINATION bin)
-> > +--
-> > +2.17.1
-> > +
-> > diff --git a/recipes-devtools/ion/ion-tests_git.bb b/recipes-devtools/ion/ion-tests_git.bb
-> > new file mode 100644
-> > index 0000000..831f5e8
-> > --- /dev/null
-> > +++ b/recipes-devtools/ion/ion-tests_git.bb
-> > @@ -0,0 +1,18 @@
-> > +SUMMARY = "Test cases for ION"
-> > +HOMEPAGE = "https://github.com/glneo/ion-tests"
-> > +LICENSE = "Apache-2.0"
-> > +LIC_FILES_CHKSUM = "file://src/ion_test.c;beginline=1;endline=15;md5=b225db900869a4cd31461606e55a3ec5"
-> > +
-> > +PV = "1.0"
-> > +
-> > +BRANCH = "master"
-> > +SRC_URI = "git://github.com/glneo/ion-tests.git;protocol=git;branch=${BRANCH} \
-> > +       file://0001-CMakeLists.txt-disable-phys-addr-for-now.patch \
-> > +"
-> > +SRCREV = "70d730cebca29e6fd37b21d9beac82ae645f3900"
-> > +
-> > +DEPENDS = "libion gtest"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +inherit cmake pkgconfig
-> > diff --git a/recipes-devtools/ion/libion_git.bb b/recipes-devtools/ion/libion_git.bb
-> > new file mode 100644
-> > index 0000000..7c93ed3
-> > --- /dev/null
-> > +++ b/recipes-devtools/ion/libion_git.bb
-> > @@ -0,0 +1,14 @@
-> > +SUMMARY = "ION Userspace Memory Allocator Library"
-> > +HOMEPAGE = "https://github.com/glneo/libion"
-> > +LICENSE = "Apache-2.0"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-> > +
-> > +PV = "1.0.0"
-> > +
-> > +BRANCH = "master"
-> > +SRC_URI = "git://github.com/glneo/libion.git;protocol=git;branch=${BRANCH}"
-> > +SRCREV = "11dad7977ec3ecba37c013da7ec0408c01413000"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +inherit cmake pkgconfig
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
 
