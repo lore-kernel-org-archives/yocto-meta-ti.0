@@ -1,65 +1,80 @@
-Return-Path: <g-tammana@ti.com>
+Return-Path: <mhalstead@linuxfoundation.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 96EEEE00994; Fri, 13 Sep 2019 14:35:52 -0700 (PDT)
+	id 80094E00D9E; Fri, 13 Sep 2019 16:01:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_NONE autolearn=unavailable
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.221.66 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2718BE0096F
-	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 14:35:51 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8DLZpxI028838
-	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 16:35:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1568410551;
-	bh=2os3alfLtHmTjRkjxbhkfp9hOiB83jWfSxx9tIOb5Rg=;
-	h=From:To:CC:Subject:Date;
-	b=sGpRTvFg4/XXlcOC7XoeLmXnguOTMO21L4GOz4nP7L2okUy1AJlV+8FGFTVMdZVSK
-	PuUH2VEdEjPMo6kCz3FJfvbOLrWY78ZJFJWpENX50emEMizP4yUlRSE3Ale4z5KhCB
-	8CLZa6c4cgEYp3M8uhhw1XCPV4n5hsNpJz8GAv5c=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8DLZpRR085406
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 16:35:51 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Fri, 13 Sep 2019 16:35:50 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Fri, 13 Sep 2019 16:35:50 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8DLZoh0020211;
-	Fri, 13 Sep 2019 16:35:51 -0500
-Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com
-	[128.247.77.97])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x8DLZoZ23653; Fri, 13 Sep 2019 16:35:50 -0500 (CDT)
-From: Gowtham Tammana <g-tammana@ti.com>
-To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
-Date: Fri, 13 Sep 2019 16:37:45 -0500
-Message-ID: <20190913213745.4699-1-g-tammana@ti.com>
-X-Mailer: git-send-email 2.23.0
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C53DE00DD5
+	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 16:01:22 -0700 (PDT)
+Received: by mail-wr1-f66.google.com with SMTP id y19so33522162wrd.3
+	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 16:01:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=to:from:subject:organization:message-id:date:user-agent
+	:mime-version:content-language;
+	bh=oU6bDakwQdngBBBoI7/Km9JrxmHc5hMcVoDBHwfC6P4=;
+	b=Es6cq/czQtZSybYatAKgYmcHA6K398Nwk8psB75U7pWwgtdf0+FBlCOuPCF1ayH7bD
+	G5khCV9CgVeEjxrWXzPMfpHSnjuj69vN6vmZMrOZR8o5d1iwoURBTf+yeJSCWNBhkvfs
+	uPcrpehuEW8KZQcH8iw8UvsJwO4tdmzm0VEk8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:organization:message-id:date
+	:user-agent:mime-version:content-language;
+	bh=oU6bDakwQdngBBBoI7/Km9JrxmHc5hMcVoDBHwfC6P4=;
+	b=JYOATpRlREciTI2ygNwTZYm/L+OUVVnuRr3ts71iPgt1Wr5Vusgc4qG6aOGBnWmSAw
+	oAT+ACqA0l0FQz6ikqS4QfEEzJs86bnO0On57G2R8erC/pHzk0ZTaYI79/+ngwtDBhQV
+	PMIRX8SkaDwc7TjuYbgOkxDyX0DRh+HTOlox5ZHUsgLCk7pagznZCDQUCJBlg17Hjp4R
+	JR/D5lLNB3401WOmzyPm74qBK07VYfIU0k5O+qdaYolMU8bqr39AYM4Z/9j38G+YixUH
+	PwO4osVB0+xVtWGsk/UdByIVNvp2aTkvXrP6UxaWEiT4VVAVO7IeCN6nso2GVu+bFENg
+	dn7A==
+X-Gm-Message-State: APjAAAV2Vug4ztgfKcWibJr97ENwYoOdlBFPkqU0KuoWTVd49fhlV+AE
+	VmDec/l+L1ajWgmVSfK1Vx0g9Q==
+X-Google-Smtp-Source: APXvYqxSny/YKylL5OWjG/GcvBaoN530zqIHkGr9PDgycW4p4CgOcQTaV2Sxawr1uR1YqS7jjK8KRw==
+X-Received: by 2002:adf:f50d:: with SMTP id q13mr473088wro.187.1568415681833; 
+	Fri, 13 Sep 2019 16:01:21 -0700 (PDT)
+Received: from localhost.localdomain ([194.187.249.59])
+	by smtp.gmail.com with ESMTPSA id
+	q19sm43621286wra.89.2019.09.13.16.01.19
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Fri, 13 Sep 2019 16:01:20 -0700 (PDT)
+To: automated-testing@yoctoproject.org, conferences@yoctoproject.org,
+	eclipse-yocto@yoctoproject.org, linux-yocto@yoctoproject.org,
+	members@yoctoproject.org, meta-amd@yoctoproject.org,
+	meta-freescale@yoctoproject.org, meta-intel@yoctoproject.org,
+	meta-lsi@yoctoproject.org, meta-mentor@yoctoproject.org,
+	meta-ti@yoctoproject.org, meta-virtualization@yoctoproject.org,
+	meta-xilinx@yoctoproject.org, pointofcontact@yoctoproject.org,
+	poky@yoctoproject.org, toaster@yoctoproject.org, tsc@yoctoproject.org, 
+	wg@yoctoproject.org, yocto@yoctoproject.org, yocto-ab@yoctoproject.org, 
+	yocto-advocacy@yoctoproject.org, yocto-announce@yoctoproject.org,
+	yocto-bsp@yoctoproject.org, yocto-builds@yoctoproject.org,
+	yocto-finance@yoctoproject.org, yocto-infrastructure@yoctoproject.org, 
+	yocto-perf@yoctoproject.org, yocto-security@yoctoproject.org,
+	yocto-website@yoctoproject.org
+From: Michael Halstead <mhalstead@linuxfoundation.org>
+Organization: Linux Foundation
+Message-ID: <c875b530-6d7e-96c8-f93a-fb6cf801b338@linuxfoundation.org>
+Date: Fri, 13 Sep 2019 16:01:18 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: Erick Narvaez <a0226667@ti.com>
-Subject: [thud][PATCH] ti-img-rogue-umlibs: Update srcrev to pick latest
+X-Mailman-Approved-At: Fri, 13 Sep 2019 16:16:48 -0700
+Subject: Mailing list update September 15th - platform change delayed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,38 +87,70 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 21:35:52 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 Sep 2019 23:01:26 -0000
+X-Groupsio-MsgNum: 12214
+Content-Type: multipart/mixed; boundary="------------411857EE089012BBC9AD03CC"
+Content-Language: en-US
 
-The source repo has been updated with latest nulldrmws artifacts and
-debug binaries. Updating srcrev to pick the latest changes.
+--------------411857EE089012BBC9AD03CC
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
----
- recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+This Sunday I will take the Mailman mailing lists offline for updates in
+preparation for the platform change. As part of the update I plan to
+change the list addresses to their new dedicated domain
+@lists.yoctoproject.org so we can start changing addresses in the
+MAINTAINERS files and elsewhere.
 
-diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-index a21a43b9..f49830fe 100644
---- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-+++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_MACHINE = "j7-evm"
- 
--PR = "r2"
-+PR = "r3"
- 
- BRANCH = "linuxws/thud/k4.19/${PV}"
- 
- SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=${BRANCH}"
--SRCREV = "dc94fecfb74de3384736e215d829d70e97bb612c"
-+SRCREV = "237d3736114d0e8c6c0fe00845949f51bb78544f"
- 
- PVR_SOC ?= "j721e_linux"
- PVR_BUILD ?= "release"
--- 
-2.23.0
+Moderators, thanks for helping by clearing out the queues in advance. If
+you have outstanding moderation or trouble clearing your queue please
+reach out to me.
 
+I will send a follow up e-mail with a new time line for the platform
+change after these updates are in place.
 
+--=20
+Michael Halstead
+Linux Foundation / Yocto Project
+Systems Operations Engineer
+
+--------------411857EE089012BBC9AD03CC
+Content-Type: application/pgp-keys;
+ name="pEpkey.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="pEpkey.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQENBF13fTkBCAClvac608cisaG9YFWRyH8lTo8Hs9UQLXedH0wlOILJJl5apA+Y
+hA/nLtS678OwyMBC8Gc1n/zPFtH7Aagw9BRObENutD7UtjJ6juz/1u2CJFMaYHeu
+z6FqBoHFeRJC0sNhTxQkOzk97hyJesgNhcKcXuEAZ09Pi3RBXUxeru9ZTv2azjjJ
+vV3ULSXL6AUnpXMeuvMGwb8HqAM1mqTtn4WcIiqqa6nEp+VvPFr3PGU/alA/9S2N
+2OqA9/37tGMWFu34z/s/SHRROEUhVb8LRhz7NkuBtF3nAA5R0RRxT/qK2m0LnyDt
+WuPtLHMfNt2KDLusctK+nub60+p3CY4OKo8tABEBAAG0ME1pY2hhZWwgSGFsc3Rl
+YWQgPG1oYWxzdGVhZEBsaW51eGZvdW5kYXRpb24ub3JnPokBVAQTAQgAPhYhBHXA
+FTA0Glu9zfX2sne7QvI6aljTBQJdd305AhsDBQkB4TOABQsJCAcCBhUKCQgLAgQW
+AgMBAh4BAheAAAoJEHe7QvI6aljTuUUH/jWg/RepKzUnzJIzp2vLALFDhlKeg6Tw
+m7uukiI8CF4TN7JctdBVk32sAvttAwdRUOmv8kTzkcuAiy8CGQpIoKDpbnXDfuds
+2mxr9Z7SGqzIjTAKqgEIhFpnWCTPZooAAzyqCTEdu5UpWNHuRiZk1PnFNIyCSDN4
+P4Kt3fcOZrRPtDkx4I9910O60ald0NtEfKSx01cfhhgEGbIbM7Ui2lui996jtsX7
+E4G+qtrnfpNo0XGMoyiqLDFkNYqXG7VwaU6Kt1R1XsHG7zrttz1H8NcEXhtg8HX+
+mxEfhK8YdRKs97aJvqv1uJVxNB2aA/sQYFcXsoeGm9H+EOreX0au0Va5AQ0EXXd9
+OQEIALNgB4lRYpXgHPgdx7zUghVknXLCuFAN9XDRButxPlwpsbv+n9Ce2OH7bUae
+7GJtoz1TfBU16XJrvbiwe8NiHxCBke3vjzmqIpkyi0ABbM+Rqk1H5U+TGr1qIcwG
+8Xs2Ksat87kwORV8cQryGx7fIOB5t12Zp7wy8nQr+E1cyUo/JBm5FY2JQnH+D7QE
+Fept/XLgW/UEiqrDYlrNnxZPfzh8Ka8l/gj2B8IYq1pNe99hqCvbBfnhQ8DYI4Ze
+93nkOBTXVGKyz6FcaZy/pSfA0N2q7r9FgAOVxEN5usXwkwSmukDw4OVMtQm9sRvL
+BiF04qMGRD/JCHPozYFUQYy1xcEAEQEAAYkBPAQYAQgAJhYhBHXAFTA0Glu9zfX2
+sne7QvI6aljTBQJdd305AhsMBQkB4TOAAAoJEHe7QvI6aljT7IUIAJTasNuqjZXA
+bWFdwzQ6lv2o1S9uZ244rCzJlD/nKpTGHCzhZ4dUDArjk6Wq5U66gmkwYdKc9gmu
+6B81tBI4Tihv7dyh7BtX83VuY73TwveLfRrZfMmD1WR61K4I4NaFO9zV/9dT3sSB
+vtVRi+hxEv50O1aNBqYqMUC/4zp4NV0/F3jzRSd+PSkuiASZ4U/za/SDorkNoRa5
+aWSyRMfuI3FGATRUwbtt4zLeLdx5NUmKcPJCXuC1101n8C0TrP+fjr0TmyDibYF+
+lSYycwE89ixVahQDFiQ7EiqzLJRaYbhNhbC8ZcrMhjaWRQRFlSk+CtjXCOaZSiiA
+SpP9CcOd05I=3D
+=3DtSXc
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------411857EE089012BBC9AD03CC--
