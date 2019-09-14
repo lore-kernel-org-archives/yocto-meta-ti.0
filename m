@@ -1,80 +1,65 @@
-Return-Path: <mhalstead@linuxfoundation.org>
+Return-Path: <>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 80094E00D9E; Fri, 13 Sep 2019 16:01:26 -0700 (PDT)
+	id CBC4BE0082E; Sat, 14 Sep 2019 06:51:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_NONE autolearn=unavailable
-	version=3.3.1
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
+	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
-	no *      trust
-	*      [209.85.221.66 listed in list.dnswl.org]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C53DE00DD5
-	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 16:01:22 -0700 (PDT)
-Received: by mail-wr1-f66.google.com with SMTP id y19so33522162wrd.3
-	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2019 16:01:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=to:from:subject:organization:message-id:date:user-agent
-	:mime-version:content-language;
-	bh=oU6bDakwQdngBBBoI7/Km9JrxmHc5hMcVoDBHwfC6P4=;
-	b=Es6cq/czQtZSybYatAKgYmcHA6K398Nwk8psB75U7pWwgtdf0+FBlCOuPCF1ayH7bD
-	G5khCV9CgVeEjxrWXzPMfpHSnjuj69vN6vmZMrOZR8o5d1iwoURBTf+yeJSCWNBhkvfs
-	uPcrpehuEW8KZQcH8iw8UvsJwO4tdmzm0VEk8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:organization:message-id:date
-	:user-agent:mime-version:content-language;
-	bh=oU6bDakwQdngBBBoI7/Km9JrxmHc5hMcVoDBHwfC6P4=;
-	b=JYOATpRlREciTI2ygNwTZYm/L+OUVVnuRr3ts71iPgt1Wr5Vusgc4qG6aOGBnWmSAw
-	oAT+ACqA0l0FQz6ikqS4QfEEzJs86bnO0On57G2R8erC/pHzk0ZTaYI79/+ngwtDBhQV
-	PMIRX8SkaDwc7TjuYbgOkxDyX0DRh+HTOlox5ZHUsgLCk7pagznZCDQUCJBlg17Hjp4R
-	JR/D5lLNB3401WOmzyPm74qBK07VYfIU0k5O+qdaYolMU8bqr39AYM4Z/9j38G+YixUH
-	PwO4osVB0+xVtWGsk/UdByIVNvp2aTkvXrP6UxaWEiT4VVAVO7IeCN6nso2GVu+bFENg
-	dn7A==
-X-Gm-Message-State: APjAAAV2Vug4ztgfKcWibJr97ENwYoOdlBFPkqU0KuoWTVd49fhlV+AE
-	VmDec/l+L1ajWgmVSfK1Vx0g9Q==
-X-Google-Smtp-Source: APXvYqxSny/YKylL5OWjG/GcvBaoN530zqIHkGr9PDgycW4p4CgOcQTaV2Sxawr1uR1YqS7jjK8KRw==
-X-Received: by 2002:adf:f50d:: with SMTP id q13mr473088wro.187.1568415681833; 
-	Fri, 13 Sep 2019 16:01:21 -0700 (PDT)
-Received: from localhost.localdomain ([194.187.249.59])
-	by smtp.gmail.com with ESMTPSA id
-	q19sm43621286wra.89.2019.09.13.16.01.19
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 13 Sep 2019 16:01:20 -0700 (PDT)
-To: automated-testing@yoctoproject.org, conferences@yoctoproject.org,
-	eclipse-yocto@yoctoproject.org, linux-yocto@yoctoproject.org,
-	members@yoctoproject.org, meta-amd@yoctoproject.org,
-	meta-freescale@yoctoproject.org, meta-intel@yoctoproject.org,
-	meta-lsi@yoctoproject.org, meta-mentor@yoctoproject.org,
-	meta-ti@yoctoproject.org, meta-virtualization@yoctoproject.org,
-	meta-xilinx@yoctoproject.org, pointofcontact@yoctoproject.org,
-	poky@yoctoproject.org, toaster@yoctoproject.org, tsc@yoctoproject.org, 
-	wg@yoctoproject.org, yocto@yoctoproject.org, yocto-ab@yoctoproject.org, 
-	yocto-advocacy@yoctoproject.org, yocto-announce@yoctoproject.org,
-	yocto-bsp@yoctoproject.org, yocto-builds@yoctoproject.org,
-	yocto-finance@yoctoproject.org, yocto-infrastructure@yoctoproject.org, 
-	yocto-perf@yoctoproject.org, yocto-security@yoctoproject.org,
-	yocto-website@yoctoproject.org
-From: Michael Halstead <mhalstead@linuxfoundation.org>
-Organization: Linux Foundation
-Message-ID: <c875b530-6d7e-96c8-f93a-fb6cf801b338@linuxfoundation.org>
-Date: Fri, 13 Sep 2019 16:01:18 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90EA6E00790
+	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 06:51:55 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8EDpsWt007124
+	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 08:51:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1568469114;
+	bh=7ezr4QwuLRyuBreal5lD8sRx6TaKsIyWX9o0jcgU9X0=;
+	h=From:To:CC:Subject:Date;
+	b=OXJM2cYnAQ0tyfGtSmlnK9YiDSM3OARxYb+6tW9pSv7y5IVDR0HRow3ihtTQEadNW
+	JNsHvYDJuYvWln6X8Bq7pnST0bn0GOtyce7LqWlyyoUAFerR3IAkIchZvoiUKQReEz
+	bXn6AziBUVGxGmwCWDwbLMlZ5Rp97rWBNXaPydQQ=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8EDps00088484
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 08:51:54 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Sat, 14 Sep 2019 08:51:53 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE104.ent.ti.com
+	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Sat, 14 Sep 2019 08:51:54 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8EDps1e117474;
+	Sat, 14 Sep 2019 08:51:54 -0500
+Received: from localhost ([10.250.95.88])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	x8EDpqZ06276; Sat, 14 Sep 2019 08:51:52 -0500 (CDT)
+From: "Andrew F. Davis" <afd@ti.com>
+To: Denys Dmytriyenko <denys@ti.com>, Gowtham Tammana <g-tammana@ti.com>, Eric
+	Ruei <e-ruei1@ti.com>
+Date: Sat, 14 Sep 2019 09:51:51 -0400
+Message-ID: <20190914135151.3619-1-afd@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Mailman-Approved-At: Fri, 13 Sep 2019 16:16:48 -0700
-Subject: Mailing list update September 15th - platform change delayed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: meta-ti@yoctoproject.org
+Subject: [master][RFC] Mesa recipie now provides GL frontend libs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -87,70 +72,173 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 23:01:26 -0000
-X-Groupsio-MsgNum: 12214
-Content-Type: multipart/mixed; boundary="------------411857EE089012BBC9AD03CC"
-Content-Language: en-US
+X-List-Received-Date: Sat, 14 Sep 2019 13:51:56 -0000
+Content-Type: text/plain
 
---------------411857EE089012BBC9AD03CC
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andrew F. Davis <afd@ti.com>
+---
 
-This Sunday I will take the Mailman mailing lists offline for updates in
-preparation for the platform change. As part of the update I plan to
-change the list addresses to their new dedicated domain
-@lists.yoctoproject.org so we can start changing addresses in the
-MAINTAINERS files and elsewhere.
+Hello all,
 
-Moderators, thanks for helping by clearing out the queues in advance. If
-you have outstanding moderation or trouble clearing your queue please
-reach out to me.
+This is a preview change of our GPU driver stack. Mesa can now used to
+provide the GL frontend libraries (EGL/GBM) for our SGX based systems.
+This greatly expands our supported extensions and improves compatibility
+with software designed to work with Mesa and Mesa provided tooling. The
+existing backend is now confined to just a DRI backend used to provide
+the GLES1/2 functions. The extensions/compatibility on this part of the
+stack will not change.
 
-I will send a follow up e-mail with a new time line for the platform
-change after these updates are in place.
+The Mesa-side-glue to interface with the SGX DRI blobs is currently
+internal only until we can find the right way to distribute the patches
+(recipe patches in meta-ti or as a fork of Mesa hosted on git.ti.com).
+Currently they are on my internal only bitbucket, so those outside TI
+will not be able to test just yet :( but can review this recipe patch
+just the same.
 
---=20
-Michael Halstead
-Linux Foundation / Yocto Project
-Systems Operations Engineer
+What you need to do right now for this to have an effect is to change
+your preferred provider of GL libs over in your distro layer to the
+new mesa-pvr.
 
---------------411857EE089012BBC9AD03CC
-Content-Type: application/pgp-keys;
- name="pEpkey.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename="pEpkey.asc"
+-PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgbm = "ti-sgx-ddk-um"
++PREFERRED_PROVIDER_virtual/egl = "mesa-pvr"
++PREFERRED_PROVIDER_virtual/libgles1 = "mesa-pvr"
++PREFERRED_PROVIDER_virtual/libgles2 = "mesa-pvr"
++PREFERRED_PROVIDER_virtual/libgbm = "mesa-pvr"
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+At some point I'd like this to just be "mesa" but with some bbappends to
+change the repo and some per platform PACKAGECONFIG magic set so it
+builds the same as this recipe.
 
-mQENBF13fTkBCAClvac608cisaG9YFWRyH8lTo8Hs9UQLXedH0wlOILJJl5apA+Y
-hA/nLtS678OwyMBC8Gc1n/zPFtH7Aagw9BRObENutD7UtjJ6juz/1u2CJFMaYHeu
-z6FqBoHFeRJC0sNhTxQkOzk97hyJesgNhcKcXuEAZ09Pi3RBXUxeru9ZTv2azjjJ
-vV3ULSXL6AUnpXMeuvMGwb8HqAM1mqTtn4WcIiqqa6nEp+VvPFr3PGU/alA/9S2N
-2OqA9/37tGMWFu34z/s/SHRROEUhVb8LRhz7NkuBtF3nAA5R0RRxT/qK2m0LnyDt
-WuPtLHMfNt2KDLusctK+nub60+p3CY4OKo8tABEBAAG0ME1pY2hhZWwgSGFsc3Rl
-YWQgPG1oYWxzdGVhZEBsaW51eGZvdW5kYXRpb24ub3JnPokBVAQTAQgAPhYhBHXA
-FTA0Glu9zfX2sne7QvI6aljTBQJdd305AhsDBQkB4TOABQsJCAcCBhUKCQgLAgQW
-AgMBAh4BAheAAAoJEHe7QvI6aljTuUUH/jWg/RepKzUnzJIzp2vLALFDhlKeg6Tw
-m7uukiI8CF4TN7JctdBVk32sAvttAwdRUOmv8kTzkcuAiy8CGQpIoKDpbnXDfuds
-2mxr9Z7SGqzIjTAKqgEIhFpnWCTPZooAAzyqCTEdu5UpWNHuRiZk1PnFNIyCSDN4
-P4Kt3fcOZrRPtDkx4I9910O60ald0NtEfKSx01cfhhgEGbIbM7Ui2lui996jtsX7
-E4G+qtrnfpNo0XGMoyiqLDFkNYqXG7VwaU6Kt1R1XsHG7zrttz1H8NcEXhtg8HX+
-mxEfhK8YdRKs97aJvqv1uJVxNB2aA/sQYFcXsoeGm9H+EOreX0au0Va5AQ0EXXd9
-OQEIALNgB4lRYpXgHPgdx7zUghVknXLCuFAN9XDRButxPlwpsbv+n9Ce2OH7bUae
-7GJtoz1TfBU16XJrvbiwe8NiHxCBke3vjzmqIpkyi0ABbM+Rqk1H5U+TGr1qIcwG
-8Xs2Ksat87kwORV8cQryGx7fIOB5t12Zp7wy8nQr+E1cyUo/JBm5FY2JQnH+D7QE
-Fept/XLgW/UEiqrDYlrNnxZPfzh8Ka8l/gj2B8IYq1pNe99hqCvbBfnhQ8DYI4Ze
-93nkOBTXVGKyz6FcaZy/pSfA0N2q7r9FgAOVxEN5usXwkwSmukDw4OVMtQm9sRvL
-BiF04qMGRD/JCHPozYFUQYy1xcEAEQEAAYkBPAQYAQgAJhYhBHXAFTA0Glu9zfX2
-sne7QvI6aljTBQJdd305AhsMBQkB4TOAAAoJEHe7QvI6aljT7IUIAJTasNuqjZXA
-bWFdwzQ6lv2o1S9uZ244rCzJlD/nKpTGHCzhZ4dUDArjk6Wq5U66gmkwYdKc9gmu
-6B81tBI4Tihv7dyh7BtX83VuY73TwveLfRrZfMmD1WR61K4I4NaFO9zV/9dT3sSB
-vtVRi+hxEv50O1aNBqYqMUC/4zp4NV0/F3jzRSd+PSkuiASZ4U/za/SDorkNoRa5
-aWSyRMfuI3FGATRUwbtt4zLeLdx5NUmKcPJCXuC1101n8C0TrP+fjr0TmyDibYF+
-lSYycwE89ixVahQDFiQ7EiqzLJRaYbhNhbC8ZcrMhjaWRQRFlSk+CtjXCOaZSiiA
-SpP9CcOd05I=3D
-=3DtSXc
------END PGP PUBLIC KEY BLOCK-----
+All comments, opinions, and concerns welcome :)
 
---------------411857EE089012BBC9AD03CC--
+Andrew
+
+ recipes-graphics/libgles/mesa-pvr_git.bb      | 46 +++++++++++++++++++
+ .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     | 28 ++---------
+ 2 files changed, 49 insertions(+), 25 deletions(-)
+ create mode 100644 recipes-graphics/libgles/mesa-pvr_git.bb
+
+diff --git a/recipes-graphics/libgles/mesa-pvr_git.bb b/recipes-graphics/libgles/mesa-pvr_git.bb
+new file mode 100644
+index 00000000..f66197c5
+--- /dev/null
++++ b/recipes-graphics/libgles/mesa-pvr_git.bb
+@@ -0,0 +1,46 @@
++SUMMARY = "Mesa with IMG PVR DRI driver"
++
++HOMEPAGE = "http://mesa3d.org"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://docs/license.html;md5=725f991a1cc322aa7a0cd3a2016621c4"
++
++PV = "0.0+${PR}+gitr${SRCREV}"
++
++SRC_URI = "git://git@bitbucket.itg.ti.com/~a0226330/mesa.git;protocol=ssh;branch=${BRANCH}"
++BRANCH = "mesa-19.1.6-pvr-buildup"
++SRCREV = "ea27ae6fdaf9d813dc484113661afa6276cdd5da"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "expat makedepend-native flex-native bison-native libxml2-native zlib chrpath-replacement-native python3-mako-native gettext-native wayland-native wayland libdrm wayland-protocols xorgproto libdrm ti-sgx-ddk-um"
++RDEPENDS_${PN} = "ti-sgx-ddk-um"
++EXTRANATIVEPATH += "chrpath-native"
++PROVIDES = "virtual/libgles1 virtual/libgles2 virtual/egl virtual/libgbm"
++
++inherit meson pkgconfig python3native gettext distro_features_check
++
++BBCLASSEXTEND = "native nativesdk"
++
++ANY_OF_DISTRO_FEATURES_class-target = "opengl vulkan"
++
++EXTRA_OEMESON = " \
++    -Dshared-glapi=true \
++    -Dgallium-opencl=disabled \
++    -Dglx-read-only-text=true \
++    -Dplatforms=wayland,drm \
++    -Dglx=disabled \
++    -Ddri-drivers=pvr \
++    -Ddri3=false \
++    -Dgles1=true \
++    -Dgles2=true \
++    -Degl=true \
++    -Dgallium-drivers='' \
++    -Dvulkan-drivers='' \
++    -Dllvm=false \
++    -Dlibunwind=false \
++"
++
++# mesa tries to run cross-built gen_matypes on build machine to get struct size information
++EXTRA_OEMESON_append = " -Dasm=false"
++
++FILES_${PN} += " ${libdir}/dri/*"
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+index 7a6f013e..f063e455 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
+ 
+-PR = "r34"
++PR = "r35"
+ 
+-BRANCH = "ti-img-sgx/thud/${PV}"
++BRANCH = "ti-img-sgx/thud/${PV}-mesa-experimental"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
++SRCREV = "a6c033f992d124cfc4ee1488b2565c20116f653c"
+ 
+ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+ TARGET_PRODUCT_ti33x = "ti335x"
+@@ -23,23 +23,9 @@ INITSCRIPT_PARAMS = "defaults 8"
+ 
+ inherit update-rc.d
+ 
+-PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm"
+-
+ DEPENDS += "libdrm udev wayland wayland-protocols libffi expat"
+ RDEPENDS_${PN} += "libdrm libdrm-omap udev wayland wayland-protocols libffi expat"
+ 
+-RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm"
+-RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
+-RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
+-
+-RREPLACES_${PN} = "libegl libgles1 libgles2 libgbm"
+-RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
+-RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
+-
+-RCONFLICTS_${PN} = "libegl libgles1 libgles2 libgbm"
+-RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
+-RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
+-
+ # The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
+ RPROVIDES_${PN} += "libGLESv2.so.1"
+ 
+@@ -54,20 +40,12 @@ do_install () {
+ 
+ FILES_${PN} =  "${bindir}/*"
+ FILES_${PN} += " ${libdir}/*"
+-FILES_${PN} +=  "${includedir}/*"
+ FILES_${PN} +=  "${sysconfdir}/*"
+ 
+-PACKAGES =+ "${PN}-plugins"
+-FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
+-RDEPENDS_${PN} += "${PN}-plugins"
+-
+-ALLOW_EMPTY_${PN}-plugins = "1"
+-
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_SYSROOT_STRIP = "1"
+ 
+ INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
+-INSANE_SKIP_${PN}-plugins = "dev-so"
+ INSANE_SKIP_${PN} += "already-stripped"
+ 
+ CLEANBROKEN = "1"
+-- 
+2.17.1
+
+
