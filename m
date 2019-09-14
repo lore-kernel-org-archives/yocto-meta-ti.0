@@ -1,65 +1,68 @@
-Return-Path: <>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CBC4BE0082E; Sat, 14 Sep 2019 06:51:56 -0700 (PDT)
+	id 738A6E009D4; Sat, 14 Sep 2019 07:43:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	URI_HEX autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.215.173 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90EA6E00790
-	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 06:51:55 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8EDpsWt007124
-	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 08:51:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1568469114;
-	bh=7ezr4QwuLRyuBreal5lD8sRx6TaKsIyWX9o0jcgU9X0=;
-	h=From:To:CC:Subject:Date;
-	b=OXJM2cYnAQ0tyfGtSmlnK9YiDSM3OARxYb+6tW9pSv7y5IVDR0HRow3ihtTQEadNW
-	JNsHvYDJuYvWln6X8Bq7pnST0bn0GOtyce7LqWlyyoUAFerR3IAkIchZvoiUKQReEz
-	bXn6AziBUVGxGmwCWDwbLMlZ5Rp97rWBNXaPydQQ=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8EDps00088484
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 08:51:54 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
-	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Sat, 14 Sep 2019 08:51:53 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Sat, 14 Sep 2019 08:51:54 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8EDps1e117474;
-	Sat, 14 Sep 2019 08:51:54 -0500
-Received: from localhost ([10.250.95.88])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x8EDpqZ06276; Sat, 14 Sep 2019 08:51:52 -0500 (CDT)
-From: "Andrew F. Davis" <afd@ti.com>
-To: Denys Dmytriyenko <denys@ti.com>, Gowtham Tammana <g-tammana@ti.com>, Eric
-	Ruei <e-ruei1@ti.com>
-Date: Sat, 14 Sep 2019 09:51:51 -0400
-Message-ID: <20190914135151.3619-1-afd@ti.com>
-X-Mailer: git-send-email 2.17.1
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+	[209.85.215.173])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D694CE0082A
+	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 07:43:37 -0700 (PDT)
+Received: by mail-pg1-f173.google.com with SMTP id x15so16840667pgg.8
+	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 07:43:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=y3t0wCHLg11iyEQ7hbqhhCqGT1MygBeZ/259/4/Jb8Y=;
+	b=fu27Lzn2gAq9CU4l/vVD6Hi1vn7pJfrL67chDFeP1nsFU+bf+7c5ZBSXPaWdlvgquU
+	PL+9wahflDjGDVbjAujsQkxoykoKgzdsaQN1Df6PqRn2wLLZaVUKgaeuo+gLCuWeRNKG
+	dakRTH/01iAZ32hMe7bCqz3u6sZQdrVQQhWtDrP7tVGVEbd/evr7XBK4bCmjVDUr6rWm
+	Gi6huoV9EcnMMbnbmxApOZs+Lm+RU9PbtVmmvMD9t68qaQ2PJ5etFsRD6TEFG046Sw56
+	jVLTZnbE9MrODx+ZKXdorp9ozKJKbGrBi1cCgXcdPM4iGlo5uYJk2n/jlg/LUp6xNeLX
+	0uag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=y3t0wCHLg11iyEQ7hbqhhCqGT1MygBeZ/259/4/Jb8Y=;
+	b=C+7GbXYnR1eKVLjPn8f9ItoZLWVUhZzHoCXR0BJl5j4J5K5PWm/VKJLeZh06XcDvK/
+	FnNSU/Jy8SQqvQNCQlTMVaXJE1dqIAd2g9LGggP8nzoff4RdjyEVYVlKkWE0aoOjYtbc
+	7ckN+twNKNeNq8sISMKC0fqeuT+4rkuZcUOV0oj2zRoHl4EOajx/CLsIttkXEco+sb4i
+	qoNPRgNJvpW8EoL5mhRTi1g8He0m3wx/I+UuU+UzQvMS3ewlqWVj/CmK/SY+po9JLEHD
+	hKPimLw7jZgM7reQ/xQVCtsHTEEGkQL/bjYvB7tESfvzJidkI5xlnsJwKK1D5Ibt9fjQ
+	UQFw==
+X-Gm-Message-State: APjAAAVmJzOMF+60ntuYGW/nj134z+64LCwghpLgoqt9sKPkFgu87RMQ
+	YlGCSDQL7KFj7SDUDLXbhN7NfQNCP9Q=
+X-Google-Smtp-Source: APXvYqy8kXG2WDUbiq1OYij02hmw2yqZ6sgpbZz/grgyoYeIEfFayBuehbOdXvibcbmGZ1fMZyyyNg==
+X-Received: by 2002:a63:f907:: with SMTP id h7mr48457572pgi.418.1568472216521; 
+	Sat, 14 Sep 2019 07:43:36 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3])
+	by smtp.gmail.com with ESMTPSA id 24sm7631333pfh.12.2019.09.14.07.43.35
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 14 Sep 2019 07:43:35 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Sat, 14 Sep 2019 07:43:26 -0700
+Message-Id: <20190914144326.2954755-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: [master][RFC] Mesa recipie now provides GL frontend libs
+Subject: [PATCH] libion: Fix musl build
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,173 +75,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Sep 2019 13:51:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 14 Sep 2019 14:43:39 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andrew F. Davis <afd@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+ ...tead-of-__BEGIN_DECL-__END_DECL-macr.patch | 42 +++++++++++++++++++
+ recipes-devtools/ion/libion_git.bb            |  4 +-
+ 2 files changed, 45 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch
 
-Hello all,
-
-This is a preview change of our GPU driver stack. Mesa can now used to
-provide the GL frontend libraries (EGL/GBM) for our SGX based systems.
-This greatly expands our supported extensions and improves compatibility
-with software designed to work with Mesa and Mesa provided tooling. The
-existing backend is now confined to just a DRI backend used to provide
-the GLES1/2 functions. The extensions/compatibility on this part of the
-stack will not change.
-
-The Mesa-side-glue to interface with the SGX DRI blobs is currently
-internal only until we can find the right way to distribute the patches
-(recipe patches in meta-ti or as a fork of Mesa hosted on git.ti.com).
-Currently they are on my internal only bitbucket, so those outside TI
-will not be able to test just yet :( but can review this recipe patch
-just the same.
-
-What you need to do right now for this to have an effect is to change
-your preferred provider of GL libs over in your distro layer to the
-new mesa-pvr.
-
--PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
--PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
--PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
--PREFERRED_PROVIDER_virtual/libgbm = "ti-sgx-ddk-um"
-+PREFERRED_PROVIDER_virtual/egl = "mesa-pvr"
-+PREFERRED_PROVIDER_virtual/libgles1 = "mesa-pvr"
-+PREFERRED_PROVIDER_virtual/libgles2 = "mesa-pvr"
-+PREFERRED_PROVIDER_virtual/libgbm = "mesa-pvr"
-
-At some point I'd like this to just be "mesa" but with some bbappends to
-change the repo and some per platform PACKAGECONFIG magic set so it
-builds the same as this recipe.
-
-All comments, opinions, and concerns welcome :)
-
-Andrew
-
- recipes-graphics/libgles/mesa-pvr_git.bb      | 46 +++++++++++++++++++
- .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     | 28 ++---------
- 2 files changed, 49 insertions(+), 25 deletions(-)
- create mode 100644 recipes-graphics/libgles/mesa-pvr_git.bb
-
-diff --git a/recipes-graphics/libgles/mesa-pvr_git.bb b/recipes-graphics/libgles/mesa-pvr_git.bb
+diff --git a/recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch b/recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch
 new file mode 100644
-index 00000000..f66197c5
+index 00000000..530c869e
 --- /dev/null
-+++ b/recipes-graphics/libgles/mesa-pvr_git.bb
-@@ -0,0 +1,46 @@
-+SUMMARY = "Mesa with IMG PVR DRI driver"
++++ b/recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch
+@@ -0,0 +1,42 @@
++From 197e7bf9a20076c6564a860bd2215e8101ee4cad Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 14 Sep 2019 07:36:47 -0700
++Subject: [PATCH] Use extern "C" instead of __BEGIN_DECL/__END_DECL macros
 +
-+HOMEPAGE = "http://mesa3d.org"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://docs/license.html;md5=725f991a1cc322aa7a0cd3a2016621c4"
++these macros are defined in sys/cdefs.h for glibc and this header is not available on all libc
 +
-+PV = "0.0+${PR}+gitr${SRCREV}"
++for glibc they are defined like below
 +
-+SRC_URI = "git://git@bitbucket.itg.ti.com/~a0226330/mesa.git;protocol=ssh;branch=${BRANCH}"
-+BRANCH = "mesa-19.1.6-pvr-buildup"
-+SRCREV = "ea27ae6fdaf9d813dc484113661afa6276cdd5da"
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ include/ion/ion.h | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
 +
-+S = "${WORKDIR}/git"
++diff --git a/include/ion/ion.h b/include/ion/ion.h
++index 81ab9cc..e95df4b 100644
++--- a/include/ion/ion.h
+++++ b/include/ion/ion.h
++@@ -24,7 +24,9 @@
++ #include <sys/types.h>
++ #include <linux/ion.h>
++ 
++-__BEGIN_DECLS
+++#ifdef __cplusplus
+++extern "C" {
+++#endif
++ 
++ int ion_open();
++ int ion_close(int fd);
++@@ -34,6 +36,8 @@ int ion_free(int fd, int handle_fd);
++ int ion_query_heap_cnt(int fd, int* cnt);
++ int ion_query_get_heaps(int fd, int cnt, void* buffers);
++ 
++-__END_DECLS
+++#ifdef __cplusplus
+++}
+++#endif
++ 
++ #endif /* __ION_H */
++-- 
++2.23.0
 +
-+DEPENDS = "expat makedepend-native flex-native bison-native libxml2-native zlib chrpath-replacement-native python3-mako-native gettext-native wayland-native wayland libdrm wayland-protocols xorgproto libdrm ti-sgx-ddk-um"
-+RDEPENDS_${PN} = "ti-sgx-ddk-um"
-+EXTRANATIVEPATH += "chrpath-native"
-+PROVIDES = "virtual/libgles1 virtual/libgles2 virtual/egl virtual/libgbm"
-+
-+inherit meson pkgconfig python3native gettext distro_features_check
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+ANY_OF_DISTRO_FEATURES_class-target = "opengl vulkan"
-+
-+EXTRA_OEMESON = " \
-+    -Dshared-glapi=true \
-+    -Dgallium-opencl=disabled \
-+    -Dglx-read-only-text=true \
-+    -Dplatforms=wayland,drm \
-+    -Dglx=disabled \
-+    -Ddri-drivers=pvr \
-+    -Ddri3=false \
-+    -Dgles1=true \
-+    -Dgles2=true \
-+    -Degl=true \
-+    -Dgallium-drivers='' \
-+    -Dvulkan-drivers='' \
-+    -Dllvm=false \
-+    -Dlibunwind=false \
+diff --git a/recipes-devtools/ion/libion_git.bb b/recipes-devtools/ion/libion_git.bb
+index 7c93ed3f..38ba9bd8 100644
+--- a/recipes-devtools/ion/libion_git.bb
++++ b/recipes-devtools/ion/libion_git.bb
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ PV = "1.0.0"
+ 
+ BRANCH = "master"
+-SRC_URI = "git://github.com/glneo/libion.git;protocol=git;branch=${BRANCH}"
++SRC_URI = "git://github.com/glneo/libion.git;protocol=git;branch=${BRANCH} \
++           file://0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch \
 +"
-+
-+# mesa tries to run cross-built gen_matypes on build machine to get struct size information
-+EXTRA_OEMESON_append = " -Dasm=false"
-+
-+FILES_${PN} += " ${libdir}/dri/*"
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-index 7a6f013e..f063e455 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
+ SRCREV = "11dad7977ec3ecba37c013da7ec0408c01413000"
  
--PR = "r34"
-+PR = "r35"
- 
--BRANCH = "ti-img-sgx/thud/${PV}"
-+BRANCH = "ti-img-sgx/thud/${PV}-mesa-experimental"
- 
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
-+SRCREV = "a6c033f992d124cfc4ee1488b2565c20116f653c"
- 
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
-@@ -23,23 +23,9 @@ INITSCRIPT_PARAMS = "defaults 8"
- 
- inherit update-rc.d
- 
--PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm"
--
- DEPENDS += "libdrm udev wayland wayland-protocols libffi expat"
- RDEPENDS_${PN} += "libdrm libdrm-omap udev wayland wayland-protocols libffi expat"
- 
--RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm"
--RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
--RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
--
--RREPLACES_${PN} = "libegl libgles1 libgles2 libgbm"
--RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
--RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
--
--RCONFLICTS_${PN} = "libegl libgles1 libgles2 libgbm"
--RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
--RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
--
- # The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
- RPROVIDES_${PN} += "libGLESv2.so.1"
- 
-@@ -54,20 +40,12 @@ do_install () {
- 
- FILES_${PN} =  "${bindir}/*"
- FILES_${PN} += " ${libdir}/*"
--FILES_${PN} +=  "${includedir}/*"
- FILES_${PN} +=  "${sysconfdir}/*"
- 
--PACKAGES =+ "${PN}-plugins"
--FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
--RDEPENDS_${PN} += "${PN}-plugins"
--
--ALLOW_EMPTY_${PN}-plugins = "1"
--
- INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_SYSROOT_STRIP = "1"
- 
- INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
--INSANE_SKIP_${PN}-plugins = "dev-so"
- INSANE_SKIP_${PN} += "already-stripped"
- 
- CLEANBROKEN = "1"
+ S = "${WORKDIR}/git"
 -- 
-2.17.1
+2.23.0
 
 
