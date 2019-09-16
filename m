@@ -1,68 +1,58 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <santa@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 738A6E009D4; Sat, 14 Sep 2019 07:43:39 -0700 (PDT)
+	id 29F77E00D4A; Sun, 15 Sep 2019 22:17:55 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (raj.khem[at]gmail.com)
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
-	no *      trust
-	*      [209.85.215.173 listed in list.dnswl.org]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
-	[209.85.215.173])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D694CE0082A
-	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 07:43:37 -0700 (PDT)
-Received: by mail-pg1-f173.google.com with SMTP id x15so16840667pgg.8
-	for <meta-ti@yoctoproject.org>; Sat, 14 Sep 2019 07:43:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=y3t0wCHLg11iyEQ7hbqhhCqGT1MygBeZ/259/4/Jb8Y=;
-	b=fu27Lzn2gAq9CU4l/vVD6Hi1vn7pJfrL67chDFeP1nsFU+bf+7c5ZBSXPaWdlvgquU
-	PL+9wahflDjGDVbjAujsQkxoykoKgzdsaQN1Df6PqRn2wLLZaVUKgaeuo+gLCuWeRNKG
-	dakRTH/01iAZ32hMe7bCqz3u6sZQdrVQQhWtDrP7tVGVEbd/evr7XBK4bCmjVDUr6rWm
-	Gi6huoV9EcnMMbnbmxApOZs+Lm+RU9PbtVmmvMD9t68qaQ2PJ5etFsRD6TEFG046Sw56
-	jVLTZnbE9MrODx+ZKXdorp9ozKJKbGrBi1cCgXcdPM4iGlo5uYJk2n/jlg/LUp6xNeLX
-	0uag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=y3t0wCHLg11iyEQ7hbqhhCqGT1MygBeZ/259/4/Jb8Y=;
-	b=C+7GbXYnR1eKVLjPn8f9ItoZLWVUhZzHoCXR0BJl5j4J5K5PWm/VKJLeZh06XcDvK/
-	FnNSU/Jy8SQqvQNCQlTMVaXJE1dqIAd2g9LGggP8nzoff4RdjyEVYVlKkWE0aoOjYtbc
-	7ckN+twNKNeNq8sISMKC0fqeuT+4rkuZcUOV0oj2zRoHl4EOajx/CLsIttkXEco+sb4i
-	qoNPRgNJvpW8EoL5mhRTi1g8He0m3wx/I+UuU+UzQvMS3ewlqWVj/CmK/SY+po9JLEHD
-	hKPimLw7jZgM7reQ/xQVCtsHTEEGkQL/bjYvB7tESfvzJidkI5xlnsJwKK1D5Ibt9fjQ
-	UQFw==
-X-Gm-Message-State: APjAAAVmJzOMF+60ntuYGW/nj134z+64LCwghpLgoqt9sKPkFgu87RMQ
-	YlGCSDQL7KFj7SDUDLXbhN7NfQNCP9Q=
-X-Google-Smtp-Source: APXvYqy8kXG2WDUbiq1OYij02hmw2yqZ6sgpbZz/grgyoYeIEfFayBuehbOdXvibcbmGZ1fMZyyyNg==
-X-Received: by 2002:a63:f907:: with SMTP id h7mr48457572pgi.418.1568472216521; 
-	Sat, 14 Sep 2019 07:43:36 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3])
-	by smtp.gmail.com with ESMTPSA id 24sm7631333pfh.12.2019.09.14.07.43.35
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 14 Sep 2019 07:43:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Sat, 14 Sep 2019 07:43:26 -0700
-Message-Id: <20190914144326.2954755-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3758E00D00
+	for <meta-ti@yoctoproject.org>; Sun, 15 Sep 2019 22:17:52 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8G5Hq9p087655
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 00:17:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1568611072;
+	bh=u7UwBYZmGf3uOi3Qa48MNBjhh/9Nm69xeQ6zOFSaDq8=;
+	h=From:To:CC:Subject:Date;
+	b=dVxowYwynM/gpf8hlO+1K4l2s5CJydqeQTdtDWjtOTyfArtk0Kn7tpPm34AQk+ci6
+	mZB0DEvkhxbHmTuX7lauQkQ8PXzCi9monhEDjksUEk8qYrnUD0qNgryuMzaTrDsUyy
+	ofloxHKPYrD68hvPLA1AGXyO3YRMa7aVdgiXRVnE=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8G5HqM7068592
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 00:17:52 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Mon, 16 Sep 2019 00:17:50 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Mon, 16 Sep 2019 00:17:50 -0500
+Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8G5Hn5T086653; 
+	Mon, 16 Sep 2019 00:17:50 -0500
+From: Santhana Bharathi <santa@ti.com>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Date: Mon, 16 Sep 2019 10:47:41 +0530
+Message-ID: <1568611061-195385-1-git-send-email-santa@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] libion: Fix musl build
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: santa@ti.com, prasad.jondhale@ti.com, nsekhar@ti.com
+Subject: [thud][PATCH V3] cpsw9g-eth-fw: Add CPSW 9G support for J7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -75,80 +65,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Sep 2019 14:43:39 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 Sep 2019 05:17:55 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Santhana Bharathi <santa@ti.com>
 ---
- ...tead-of-__BEGIN_DECL-__END_DECL-macr.patch | 42 +++++++++++++++++++
- recipes-devtools/ion/libion_git.bb            |  4 +-
- 2 files changed, 45 insertions(+), 1 deletion(-)
- create mode 100644 recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch
+ recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb | 44 ++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+ create mode 100644 recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
 
-diff --git a/recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch b/recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch
+diff --git a/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
 new file mode 100644
-index 00000000..530c869e
+index 0000000..29a5f1d
 --- /dev/null
-+++ b/recipes-devtools/ion/libion/0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch
-@@ -0,0 +1,42 @@
-+From 197e7bf9a20076c6564a860bd2215e8101ee4cad Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 14 Sep 2019 07:36:47 -0700
-+Subject: [PATCH] Use extern "C" instead of __BEGIN_DECL/__END_DECL macros
++++ b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+@@ -0,0 +1,44 @@
++SUMMARY = "R5 PSDK CPSW9G Ethernet Switch Firmware"
 +
-+these macros are defined in sys/cdefs.h for glibc and this header is not available on all libc
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=04ad0a015d4bb63c2b9e7b112debf3db"
 +
-+for glibc they are defined like below
++PV = "1.0+git${SRCPV}"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ include/ion/ion.h | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
++inherit deploy
++inherit update-alternatives
 +
-+diff --git a/include/ion/ion.h b/include/ion/ion.h
-+index 81ab9cc..e95df4b 100644
-+--- a/include/ion/ion.h
-++++ b/include/ion/ion.h
-+@@ -24,7 +24,9 @@
-+ #include <sys/types.h>
-+ #include <linux/ion.h>
-+ 
-+-__BEGIN_DECLS
-++#ifdef __cplusplus
-++extern "C" {
-++#endif
-+ 
-+ int ion_open();
-+ int ion_close(int fd);
-+@@ -34,6 +36,8 @@ int ion_free(int fd, int handle_fd);
-+ int ion_query_heap_cnt(int fd, int* cnt);
-+ int ion_query_get_heaps(int fd, int cnt, void* buffers);
-+ 
-+-__END_DECLS
-++#ifdef __cplusplus
-++}
-++#endif
-+ 
-+ #endif /* __ION_H */
-+-- 
-+2.23.0
++PROTOCOL = "git"
++BRANCH = "master"
++SRCREV = "df7f399319ee401dfbda9317878128a0f718507f"
 +
-diff --git a/recipes-devtools/ion/libion_git.bb b/recipes-devtools/ion/libion_git.bb
-index 7c93ed3f..38ba9bd8 100644
---- a/recipes-devtools/ion/libion_git.bb
-+++ b/recipes-devtools/ion/libion_git.bb
-@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- PV = "1.0.0"
- 
- BRANCH = "master"
--SRC_URI = "git://github.com/glneo/libion.git;protocol=git;branch=${BRANCH}"
-+SRC_URI = "git://github.com/glneo/libion.git;protocol=git;branch=${BRANCH} \
-+           file://0001-Use-extern-C-instead-of-__BEGIN_DECL-__END_DECL-macr.patch \
-+"
- SRCREV = "11dad7977ec3ecba37c013da7ec0408c01413000"
- 
- S = "${WORKDIR}/git"
++SRC_URI = "git://git.ti.com/glsdk/ti-eth-fw.git;protocol=${PROTOCOL};branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++CPSW9G_FW_DIR = "${S}/ethfw"
++CPSW9G_FW_FILENAME = "app_remoteswitchcfg_server.xer5f"
++
++# make sure that lib/firmware, and all its contents are part of the package
++FILES_${PN} += "${base_libdir}/firmware"
++
++do_install() {
++  install -d ${D}${base_libdir}/firmware
++# Ethernet firmware to be loaded on Main R5 core(needs read permission)
++  install -m 0644 ${CPSW9G_FW_DIR}/${CPSW9G_FW_FILENAME} ${D}${base_libdir}/firmware
++}
++
++TARGET_MAIN_R5FSS0_0 = "j7-main-r5f0_0-fw"
++ALTERNATIVE_${PN} = "j7-main-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
++ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${CPSW9G_FW_FILENAME}"
++ALTERNATIVE_PRIORITY = "17"
++
++INHIBIT_PACKAGE_STRIP = "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++INSANE_SKIP_${PN} += "arch"
++
++do_compile[noexec] = "1"
++do_configure[noexec] = "1"
++
 -- 
-2.23.0
+1.9.1
 
 
