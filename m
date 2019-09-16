@@ -1,60 +1,61 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 204F7E0098A; Mon, 16 Sep 2019 10:57:35 -0700 (PDT)
+	id DD326E00B33; Mon, 16 Sep 2019 12:24:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B9F1E008C8
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 10:57:34 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8GHvXn0118298
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 12:57:33 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EF3CE0098A
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 12:24:16 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8GJOFeT036559
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 14:24:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1568656653;
-	bh=89kqsUcmGqMcc1xRC7hrHNZD2+RUiBEOYDjTuZO1dTA=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=HYC0jxFYJH8B4xtDgtYoKyq3Nz7BTqY3nli0cy5kBwcqVojhu3J7Wp973o6swSRDL
-	Y/lLI8JBLOj87FwvmXPpj9W7fCBqWcDSsw/FgjEP4wjGLgA7/jsqxagGAbX+Fu0Rrd
-	2uYYR0BNjt8lThKKq6CraGDz3ZKH0kZJU8sXzEns=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8GHvXiU118068
+	s=ti-com-17Q1; t=1568661855;
+	bh=y9CZab3OT2ngKLUW82iFmBt8s7EsbOfDivE2LW2Wq5M=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=dbJ8EFsU4GgyqChkEqqFc+MPZPreSOzOIAky4pz7rpjUfHAXhGp8XUfBYyvD8c0ge
+	Ef7WOT80HKHxv/E84NtERVtqAV54K78T79AvPUsH51ExW3Y7gmsiYWnjsqmqYt7t4P
+	D7zH1KJwrpK2bQGY33l/wkQA/HyRDcd0utA5wj3Q=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8GJOF6u112777
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 12:57:33 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 14:24:15 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE108.ent.ti.com
+	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 16 Sep 2019 12:57:31 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
-	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 16 Sep 2019 12:57:31 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8GHvXJj111873;
-	Mon, 16 Sep 2019 12:57:33 -0500
-Date: Mon, 16 Sep 2019 13:57:33 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Santhana Bharathi <santa@ti.com>
-Message-ID: <20190916175732.GH26975@beryl>
-References: <1568611061-195385-1-git-send-email-santa@ti.com>
+	Mon, 16 Sep 2019 14:24:13 -0500
+Received: from DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895]) by
+	DFLE112.ent.ti.com ([fe80::d4dd:a09e:396d:a895%17]) with mapi id
+	15.01.1713.004; Mon, 16 Sep 2019 14:24:13 -0500
+From: "Dmytriyenko, Denys" <denys@ti.com>
+To: "Nelson, Sam" <sam.nelson@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [thud/master] ti-ipc: Update to new version 3.50.04.07
+Thread-Index: AQHVanZZElJlOoccHUu6egBEfDUeYacus6UA
+Date: Mon, 16 Sep 2019 19:24:13 +0000
+Message-ID: <490bcfb2a61b460ebcdbd088139f23d6@ti.com>
+References: <1568408431-59130-1-git-send-email-sam.nelson@ti.com>
+In-Reply-To: <1568408431-59130-1-git-send-email-sam.nelson@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.250.67.211]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-In-Reply-To: <1568611061-195385-1-git-send-email-santa@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org, nsekhar@ti.com, prasad.jondhale@ti.com
-Subject: Re: [thud][PATCH V3] cpsw9g-eth-fw: Add CPSW 9G support for J7
+Subject: Re: [thud/master] ti-ipc: Update to new version 3.50.04.07
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,74 +68,84 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 17:57:35 -0000
+X-List-Received-Date: Mon, 16 Sep 2019 19:24:17 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 16, 2019 at 10:47:41AM +0530, Santhana Bharathi wrote:
-> Signed-off-by: Santhana Bharathi <santa@ti.com>
+ti-ipc-rtos fails on am65xx with "error: ti.drv.sciclient.Settings: no elem=
+ent named 'coreType'"
+
+
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Nelson, Sam
+> Sent: Friday, September 13, 2019 5:01 PM
+> To: meta-ti@yoctoproject.org
+> Subject: [meta-ti] [thud/master] ti-ipc: Update to new version 3.50.04.07
+>=20
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 > ---
-
-Thanks. For next time please document patch revision changes here. I.e. what 
-changed in v2, what changed in v3, etc. I'll merge this one as is now - no 
-need to resubmit.
-
-
->  recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb | 44 ++++++++++++++++++++++++++
->  1 file changed, 44 insertions(+)
->  create mode 100644 recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-> 
-> diff --git a/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-> new file mode 100644
-> index 0000000..29a5f1d
-> --- /dev/null
-> +++ b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-> @@ -0,0 +1,44 @@
-> +SUMMARY = "R5 PSDK CPSW9G Ethernet Switch Firmware"
-> +
-> +LICENSE = "TI-TFL"
-> +LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=04ad0a015d4bb63c2b9e7b112debf3db"
-> +
-> +PV = "1.0+git${SRCPV}"
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +inherit deploy
-> +inherit update-alternatives
-> +
-> +PROTOCOL = "git"
-> +BRANCH = "master"
-> +SRCREV = "df7f399319ee401dfbda9317878128a0f718507f"
-> +
-> +SRC_URI = "git://git.ti.com/glsdk/ti-eth-fw.git;protocol=${PROTOCOL};branch=${BRANCH}"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +CPSW9G_FW_DIR = "${S}/ethfw"
-> +CPSW9G_FW_FILENAME = "app_remoteswitchcfg_server.xer5f"
-> +
-> +# make sure that lib/firmware, and all its contents are part of the package
-> +FILES_${PN} += "${base_libdir}/firmware"
-> +
-> +do_install() {
-> +  install -d ${D}${base_libdir}/firmware
-> +# Ethernet firmware to be loaded on Main R5 core(needs read permission)
-> +  install -m 0644 ${CPSW9G_FW_DIR}/${CPSW9G_FW_FILENAME} ${D}${base_libdir}/firmware
-> +}
-> +
-> +TARGET_MAIN_R5FSS0_0 = "j7-main-r5f0_0-fw"
-> +ALTERNATIVE_${PN} = "j7-main-r5f0_0-fw"
-> +ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
-> +ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${CPSW9G_FW_FILENAME}"
-> +ALTERNATIVE_PRIORITY = "17"
-> +
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> +INSANE_SKIP_${PN} += "arch"
-> +
-> +do_compile[noexec] = "1"
-> +do_configure[noexec] = "1"
-> +
-> -- 
+>  recipes-ti/ipc/ti-ipc-common.inc | 2 +-
+>  recipes-ti/ipc/ti-ipc-rtos.inc   | 6 +++---
+>  recipes-ti/ipc/ti-ipc.inc        | 4 ++--
+>  3 files changed, 6 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-com=
+mon.inc
+> index 4ec72cc..365486e 100644
+> --- a/recipes-ti/ipc/ti-ipc-common.inc
+> +++ b/recipes-ti/ipc/ti-ipc-common.inc
+> @@ -1,4 +1,4 @@
+> -PV =3D "3.50.04.06"
+> +PV =3D "3.50.04.07"
+>  INC_PR =3D "r0"
+>=20
+>  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.=
+inc
+> index 460befe..3d4a7a2 100644
+> --- a/recipes-ti/ipc/ti-ipc-rtos.inc
+> +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+> @@ -24,9 +24,9 @@ protocol=3D${TI_IPC_METADATA_GIT_PROTOCOL};\
+>  branch=3D${TI_IPC_METADATA_GIT_BRANCH};\
+>  name=3D${TI_IPC_METADATA_NAME}"
+>=20
+> -# Corresponds to tag: 3.50.04.06
+> -TI_IPC_METADATA_SRCREV =3D
+> "15d256ea3c3a35fe065a0513f09f4ea6ece58725"
+> -# Corresponds to tag: 3.50.04.06
+> +# Corresponds to tag: 3.50.04.07
+> +TI_IPC_METADATA_SRCREV =3D
+> "37e85ff1966f7d093fe2bde2dd9d4546f29d0d80"
+> +# Corresponds to tag: 3.50.04.07
+>  TI_IPC_EXAMPLES_SRCREV =3D "f29c27652302892abbe78ce2c22a2aae28b28d69"
+>=20
+>  SRCREV_FORMAT =3D "default"
+> diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+> index b9f9ca9..000c5c0 100644
+> --- a/recipes-ti/ipc/ti-ipc.inc
+> +++ b/recipes-ti/ipc/ti-ipc.inc
+> @@ -8,8 +8,8 @@ TI_IPC_GIT_URI =3D "git://git.ti.com/ipc/ipcdev.git"
+>  TI_IPC_GIT_PROTOCOL =3D "git"
+>  TI_IPC_GIT_BRANCH =3D "3.50"
+>=20
+> -#Corresponds to 3.50.04.06
+> -TI_IPC_SRCREV =3D "ca7ce99b8ec82331559f0fd99a174bdcca1da9ac"
+> +#Corresponds to 3.50.04.07
+> +TI_IPC_SRCREV =3D "129b6f44c50cbe760a5c1481b34b323b7a42ead5"
+>=20
+>  BRANCH =3D "${TI_IPC_GIT_BRANCH}"
+>  SRC_URI =3D
+> "${TI_IPC_GIT_URI};protocol=3D${TI_IPC_GIT_PROTOCOL};branch=3D${BRANCH};n=
+a
+> me=3Dipcdev"
+> --
 > 1.9.1
-> 
+>=20
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
