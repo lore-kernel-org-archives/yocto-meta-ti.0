@@ -1,57 +1,60 @@
-Return-Path: <m-radhakrishnan2@ti.com>
+Return-Path: <robertcnelson@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AC9FAE0098A; Mon, 16 Sep 2019 08:09:09 -0700 (PDT)
+	id EBF55E00A49; Mon, 16 Sep 2019 08:38:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.208.195 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E794E006B6
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 08:09:08 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8GF98pu077299
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 10:09:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1568646548;
-	bh=nN0ZpXL+drQOCPiY1VsA8b4pYhbhWJTrXqFmT+fPxA0=;
-	h=From:To:Subject:Date;
-	b=TcptDZSkGuBIqd0P0MWKm2ZShf+bDD7rO4R3F2qLqSIwCRII7CMkka1cgFnynfEzI
-	vel5wDmrPuoc5ByGvaA9wAS7wuo4qp0jFksjjZ+dk+ngZn0hXJY8TAcQzEb9Ffjgbd
-	CbVHgpEaViT1AqGPDwEOFxY/5lSKlPF+4GeGa8BA=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8GF981L036686
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 10:09:08 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 16 Sep 2019 10:09:08 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 16 Sep 2019 10:09:05 -0500
-Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8GF9706016497
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 10:09:08 -0500
-From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 16 Sep 2019 11:09:05 -0400
-Message-ID: <1568646545-28643-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9557BE00942
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 08:38:15 -0700 (PDT)
+Received: by mail-lj1-f195.google.com with SMTP id q64so333260ljb.12
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2019 08:38:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=beagleboard-org.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=MIGxvoZms+gvQNRP20aXRzJJRAaynUbGpBIULIrVYcQ=;
+	b=TKJoA4/DHatmahlbRD5aMNpNoUUlbV14oIwvRiiiwUBhRInHzg9LCYsJakOhT+TKxy
+	uVRiZyrIAzs034tXIWFAGom9rThGxuM/XJek0t6tecdn6z97u1TfcY9NhKVo2ii0hBYS
+	i8cNKPdMvxZbcpXdhBXh1CGMcD2OxT+s2OATxMGG2jGRoDx73GGoRFN3eOlShxIUVWnx
+	p9ofPr4WOvTGNursTM+5TVOmVTcwZIQwIx9n/9AlsePuYED0ADwIJ3MRwQ1GIPj0Fl+P
+	YbS0gBisneUyDtlt3Zmo38qA5tAiWvQhhCFklWeUMOp722l+0Mv3uBU0gviHFJbBewJD
+	vo8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=MIGxvoZms+gvQNRP20aXRzJJRAaynUbGpBIULIrVYcQ=;
+	b=hTjDxhXUp7RNJel7LSASor3eAX/fjLfUagPT5awDg9ilArvekBsoOiE/VDEaLBEBdx
+	aRr7Rx9dsk75CU7tSdGpOrJFfvsCsEl6iWvjM+vZcbozySdYuf+xdBMOW4MMwy1ANnMd
+	RaSxP6yX64YmqiV/jeYyB0jvx0bGRoj59nXd/kr/phlmsXPTCUaqpcGQkWxglW7Zfax6
+	WDqNRntEX3/CJdmC8rQxFD9qdJoixeKoT6qedfaelcuvIWNal6pF9F/4Cs2HaZhmwcNi
+	AGVJjQm//V4udQ7T5mCDs5k6aXL7fAh0bPAfgSVMMQ+Hl/Z2yV3cDkrED8/PEmJMRX9b
+	tUUg==
+X-Gm-Message-State: APjAAAW/weqs+NMwlAMBoDbDtZQhunNzRxXW1kRPTspykHjfJTFy75Nf
+	y9Q+nZ7dNRRAJuhl/80bxeZvR6Fw8MaVXXuM/+U=
+X-Google-Smtp-Source: APXvYqzaZVc6S35ypeYI2490Pb2UWB9fr6gBmx/4knrBq6vh0n843LrSSbpIXbhFZxwpbADJalzUVUOk/0jyRACKkqw=
+X-Received: by 2002:a2e:551:: with SMTP id 78mr170872ljf.48.1568648294418;
+	Mon, 16 Sep 2019 08:38:14 -0700 (PDT)
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH] ibl-boot-rtos: SRCREV bump to address b2ccs utils packaging issue on windows
+References: <20190914135151.3619-1-afd@ti.com>
+In-Reply-To: <20190914135151.3619-1-afd@ti.com>
+From: Robert Nelson <robertcnelson@beagleboard.org>
+Date: Mon, 16 Sep 2019 10:37:47 -0500
+Message-ID: <CAOCHtYjjRM5LDKrQgU9nYaAEo4TZP82Xpw-RzDez8G0_tTuQgQ@mail.gmail.com>
+To: "Andrew F. Davis" <afd@ti.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [master][RFC] Mesa recipie now provides GL frontend libs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,52 +67,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 15:09:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 16 Sep 2019 15:38:18 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
----
- recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+On Sat, Sep 14, 2019 at 8:52 AM Andrew F. Davis <afd@ti.com> wrote:
+>
+> Signed-off-by: Andrew F. Davis <afd@ti.com>
+> ---
+>
+> Hello all,
+>
+> This is a preview change of our GPU driver stack. Mesa can now used to
+> provide the GL frontend libraries (EGL/GBM) for our SGX based systems.
+> This greatly expands our supported extensions and improves compatibility
+> with software designed to work with Mesa and Mesa provided tooling. The
+> existing backend is now confined to just a DRI backend used to provide
+> the GLES1/2 functions. The extensions/compatibility on this part of the
+> stack will not change.
+>
+> The Mesa-side-glue to interface with the SGX DRI blobs is currently
+> internal only until we can find the right way to distribute the patches
+> (recipe patches in meta-ti or as a fork of Mesa hosted on git.ti.com).
+> Currently they are on my internal only bitbucket, so those outside TI
+> will not be able to test just yet :( but can review this recipe patch
+> just the same.
 
-diff --git a/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb b/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
-index b70ea6c..59b75b3 100644
---- a/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
-+++ b/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
-@@ -19,10 +19,17 @@ COMPATIBLE_MACHINE = "c66x"
- 
- CLEANBROKEN = "1"
- 
--BRANCH = "master"
--SRC_URI = "git://git.ti.com/keystone-rtos/ibl.git;protocol=git;branch=${BRANCH}"
--SRCREV = "8a3c14da3f0808854367cae38afe9d47ab80dce6"
--PR = "r1"
-+IBL_BOOT_GIT_URI = "git://git.ti.com/keystone-rtos/ibl.git"
-+IBL_BOOT_GIT_PROTOCOL = "git"
-+IBL_BOOT_GIT_BRANCH = "master"
-+IBL_BOOT_SRCREV = "ed3f0989d8cdc813b7ca1ed899c4d84b63de3a75"
-+
-+BRANCH = "${IBL_BOOT_GIT_BRANCH}"
-+SRC_URI = "${IBL_BOOT_GIT_URI};protocol=${IBL_BOOT_GIT_PROTOCOL};branch=${BRANCH}"
-+SRCREV = "${IBL_BOOT_SRCREV}"
-+
-+
-+PR = "r2"
- 
- S = "${WORKDIR}/git"
- 
-@@ -33,8 +40,8 @@ IBLTARGETS_c665x-evm = "evm_c6657_i2c"
- IBLTARGETS_c667x-evm = "evm_c6678_i2c"
- 
- IBLENDIAN = ""
--IBLENDIAN_c665x-evm = "little big"
--IBLENDIAN_c667x-evm = "little big"
-+IBLENDIAN_c665x-evm = "little"
-+IBLENDIAN_c667x-evm = "little"
- 
- export C6X_BASE_DIR="${TI_CGT6X_7_INSTALL_DIR}"
- export TOOLSC6X="${C6X_BASE_DIR}"
--- 
-1.9.1
+Count me in! This looks awesome, we'd like these for BeagleBoard asap
+Pretty Please! ;)
 
+Regards,
 
