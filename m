@@ -1,40 +1,57 @@
-Return-Path: <denys@ti.com>
+Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3E408E00D4A; Tue, 17 Sep 2019 11:01:09 -0700 (PDT)
+	id 02A84E00BFF; Tue, 17 Sep 2019 12:22:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00, SUBJ_OBFU_PUNCT_FEW
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.7 SUBJ_OBFU_PUNCT_FEW Possible punctuation-obfuscated Subject:
-	header
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 048BDE00C4F
-	for <meta-ti@yoctoproject.org>; Tue, 17 Sep 2019 11:01:07 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EA6AC40BE5;
-	Tue, 17 Sep 2019 18:01:06 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id X3q31Lg9s2Ua; Tue, 17 Sep 2019 18:01:06 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C899640BC7;
-	Tue, 17 Sep 2019 18:01:04 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 02C14172E07;
-	Tue, 17 Sep 2019 14:01:03 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Tue, 17 Sep 2019 14:01:03 -0400
-Message-Id: <1568743263-3442-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [thud/master][PATCH] libion: update to fix musl builds by avoiding __BEGIN_DECL/__END_DECL
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C02AE009EA
+	for <meta-ti@yoctoproject.org>; Tue, 17 Sep 2019 12:22:44 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8HJMi5n071179
+	for <meta-ti@yoctoproject.org>; Tue, 17 Sep 2019 14:22:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1568748164;
+	bh=Q1eETA+t10iJ4nAg+PpweEUF2GEnyKMaKuPDR58nAVo=;
+	h=From:To:CC:Subject:Date;
+	b=Nhj6a84ltZbOYA9n8QeI29zRKFQTKeGA7WWDEDv+Xb+HzNTtP6foZiSWfkYWmSgwE
+	2xzyJX9o3h+WO7qJUw6/SohneIInZzGdWxCTMgLc7vhLQ2brxuzGVIOkBk8hTWdb1d
+	sNRafwz/nJOwB/o4e6bjOWYZXNXh1FNcdVGfOkQg=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8HJMi4r081016
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Tue, 17 Sep 2019 14:22:44 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Tue, 17 Sep 2019 14:22:41 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
+	Frontend Transport; Tue, 17 Sep 2019 14:22:41 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8HJMi3h104522;
+	Tue, 17 Sep 2019 14:22:44 -0500
+From: Dan Murphy <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 17 Sep 2019 14:24:49 -0500
+Message-ID: <20190917192450.24308-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.22.0.214.g8dca754b1e
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2019.04-rc1 tag
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,30 +64,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Sep 2019 18:01:09 -0000
+X-List-Received-Date: Tue, 17 Sep 2019 19:22:46 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-The fix from Khem Raj to use extern "C" instead of __BEGIN_DECL/__END_DECL macros
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Cc: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-devtools/ion/libion_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-devtools/ion/libion_git.bb b/recipes-devtools/ion/libion_git.bb
-index 7c93ed3..8bfe19e 100644
---- a/recipes-devtools/ion/libion_git.bb
-+++ b/recipes-devtools/ion/libion_git.bb
-@@ -7,7 +7,7 @@ PV = "1.0.0"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+index 531ca54c..277c2df3 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
  
- BRANCH = "master"
- SRC_URI = "git://github.com/glneo/libion.git;protocol=git;branch=${BRANCH}"
--SRCREV = "11dad7977ec3ecba37c013da7ec0408c01413000"
-+SRCREV = "813bd63e2f2118e17cb1c5d38505a1e572a2381c"
+ BRANCH = "ti-rt-linux-4.19.y"
  
- S = "${WORKDIR}/git"
+-SRCREV = "0dd2fca286ce8f7590dcff186f1fda6c4849184c"
+-PV = "4.19.59+git${SRCPV}"
++SRCREV = "b94ae17a71eace50d505c47f4f1f039625a9c729"
++PV = "4.19.73+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+index 8ca180df..170df0a1 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -59,8 +59,8 @@ S = "${WORKDIR}/git"
  
+ BRANCH = "ti-linux-4.19.y"
+ 
+-SRCREV = "50ceb3c6e7f2d5f54d66d4999e79d3c4e09796df"
+-PV = "4.19.59+git${SRCPV}"
++SRCREV = "5782b8a917cc864b8b8144205beb533ad7a5b5f6"
++PV = "4.19.73+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 -- 
-2.7.4
+2.22.0.214.g8dca754b1e
 
 
