@@ -1,6 +1,6 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <prvs=15897a19a=Kevin.E.Cribbs@L3Harris.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 504F9E00D8E; Wed, 18 Sep 2019 11:50:49 -0700 (PDT)
+	id 638A6E00BE2; Thu, 19 Sep 2019 05:41:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,48 +10,94 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [166.20.51.117 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4DFFE00C87
-	for <meta-ti@yoctoproject.org>; Wed, 18 Sep 2019 11:50:48 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8IIomHx089854
-	for <meta-ti@yoctoproject.org>; Wed, 18 Sep 2019 13:50:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1568832648;
-	bh=oriUwbRqcd3WYA/bTgp6lQLXuJlRPBQn9OAfIGByBNo=;
-	h=From:To:CC:Subject:Date;
-	b=RIlFF1VB2lmVHaxYjHyic9j9XQG5YTp+BIQOCHVexQRFKWE07//KtVGGaTpom6BdU
-	WX7Lujp0YlE5tWr5/5BRKZP0tORW5oD1A6wiD/v3UWZktAg60JAFxjwGyRc/9g//Hm
-	fdNSXNGBEN3LplnmqQH7DZLAoLPvw2pNescJWUdo=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8IIolFF062561
-	for <meta-ti@yoctoproject.org>; Wed, 18 Sep 2019 13:50:47 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 18 Sep 2019 13:50:44 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE101.ent.ti.com
-	(157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 18 Sep 2019 13:50:44 -0500
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8IIolsn116449;
-	Wed, 18 Sep 2019 13:50:47 -0500
-From: Sam Nelson <sam.nelson@ti.com>
+Received: from smtp6out.l-3com.com (smtp6out.l-3com.com [166.20.51.117])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC79AE00994
+	for <meta-ti@yoctoproject.org>; Thu, 19 Sep 2019 05:41:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=l3harris.com; i=@l3harris.com; q=dns/txt; s=mail1;
+	t=1568896874; x=1600432874;
+	h=from:to:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=Vw4XaUBtf9ggwpaVkNvsWls83j9aumPMxRNKFo83IPI=;
+	b=A+cZx/1ZUqeFfJx+H1yWHHGvKpwhlXS9SnGP6kjU+BKziu7yxRkx5J4l
+	yLq1JAMXwqjhmHf+QWo1ZO5/sLAJLbDdTnfu1KFb8VHRa5VjhsJGfNKuw
+	hta/x1iabzW4nKvQI/H9Smj++Os7J2qq1orMVltNvu6MgPrnAQR75yg/m
+	2kco5M7q2j7lUiZVo9HOMRAww4Ry/9+dcoD1/c2a1x6QND5L/5UvkGok+
+	s7G8Imp0ol/uMaHB7WGhcRfh88yBqhtBI75ETL0T1LIkDCVV6cCYxffNh
+	zNnc2PcbEYgTYYOok2XWde0Nl3T30GzkrRkZxKTafqzRleePkFDAPktf9 w==;
+X-filenames: 
+X-filesizes: None
+X-filetypes: 
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,523,1559520000"; d="scan'208";a="424770721"
+X-L3Internal: true
+Received: from ex08dag01azusva.rootforest.com (HELO mail.l3t.com)
+	([141.199.128.138])
+	by smtp6out.l-3com.com with ESMTP; 19 Sep 2019 12:41:12 +0000
+Received: from EX05DAG01azusva.rootforest.com (141.199.128.135) by
+	EX08DAG01AZUSVA.rootforest.com (141.199.128.138) with Microsoft SMTP
+	Server
+	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+	15.1.1713.5; Thu, 19 Sep 2019 12:41:12 +0000
+Received: from USG02-BN3-obe.outbound.protection.office365.us (23.103.199.144)
+	by smtp.l3t.com (141.199.128.135) with Microsoft SMTP Server
+	(version=TLS1_2, 
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1713.5 via
+	Frontend Transport; Thu, 19 Sep 2019 12:41:12 +0000
+Received: from CY1P110MB0470.NAMP110.PROD.OUTLOOK.COM (52.145.1.138) by
+	CY1P110MB0214.NAMP110.PROD.OUTLOOK.COM (23.103.24.217) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2241.26; Thu, 19 Sep 2019 12:41:09 +0000
+Received: from CY1P110MB0470.NAMP110.PROD.OUTLOOK.COM
+	([fe80::c82b:7d59:7f61:ead0]) by CY1P110MB0470.NAMP110.PROD.OUTLOOK.COM
+	([fe80::c82b:7d59:7f61:ead0%11]) with mapi id 15.20.2136.029;
+	Thu, 19 Sep 2019 12:41:09 +0000
+From: <Kevin.E.Cribbs@L3Harris.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 18 Sep 2019 14:50:46 -0400
-Message-ID: <1568832646-1049-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
+Thread-Topic: [meta-ti] meta-ti (a345e0c2) Linux kernel fails to boot on
+	Beagleboard-xM (rev C)
+Thread-Index: AdVu3ufoIqpeUmgGRj+tFMGoe8BBXw==
+Date: Thu, 19 Sep 2019 12:41:09 +0000
+Message-ID: <CY1P110MB047006AD2DFE79658DE8867DE8890@CY1P110MB0470.NAMP110.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Kevin.E.Cribbs@L3Harris.com; 
+x-originating-ip: [166.20.224.11]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: bb9ef5d9-dbc6-4a85-2dcd-08d73cfea594
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(5600167)(711020)(4605104)(1401327)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
+	SRVR:CY1P110MB0214; 
+x-ms-traffictypediagnostic: CY1P110MB0214:
+x-microsoft-antispam-prvs: <CY1P110MB0214F7ACA046051EDB76BC96E8890@CY1P110MB0214.NAMP110.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-forefront-prvs: 016572D96D
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(366004)(199004)(189003)(486006)(2351001)(55016002)(9686003)(3846002)(5640700003)(66446008)(6436002)(66556008)(2906002)(6116002)(14454004)(76116006)(64756008)(7736002)(66946007)(6246003)(25786009)(8936002)(74316002)(498600001)(66066001)(66476007)(99286004)(6916009)(305945005)(229853002)(8676002)(102836004)(81166006)(2501003)(476003)(81156014)(256004)(26005)(86362001)(5660300002)(71200400001)(6506007)(186003)(52536014)(7696005)(33656002)(71190400001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:CY1P110MB0214;
+	H:CY1P110MB0470.NAMP110.PROD.OUTLOOK.COM; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:3; MX:3; 
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH v2] ti-ipc: Update to new version 3.50.04.07
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb9ef5d9-dbc6-4a85-2dcd-08d73cfea594
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Sep 2019 12:41:09.2666 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: ba488c5e-f105-4a2b-a8b1-b57b26a44117
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Kevin.E.Cribbs@cse.L3T.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1P110MB0214
+X-OriginatorOrg: L3Harris.com
+Subject: Re: meta-ti (a345e0c2) Linux kernel fails to boot on Beagleboard-xM (rev C)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,68 +110,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2019 18:50:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 19 Sep 2019 12:41:15 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Summary: meta-ti created beagleboard .config is causing the Linux kernel to=
+ fail during boot
 
----
-Update from previous version of the patch
-- Updated ipc-examples commit
-- This has dependency on sciclient update
-so nned to merge only after sciclient patch
----
----
- recipes-ti/ipc/ti-ipc-common.inc | 2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc   | 8 ++++----
- recipes-ti/ipc/ti-ipc.inc        | 4 ++--
- 3 files changed, 7 insertions(+), 7 deletions(-)
+Question:  How do I connect with the people that can correct the MACHINE eq=
+ual beagleboard .config file?
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 4ec72cc..365486e 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.50.04.06"
-+PV = "3.50.04.07"
- INC_PR = "r0"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index 460befe..ef8640e 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,10 +24,10 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
- 
--# Corresponds to tag: 3.50.04.06
--TI_IPC_METADATA_SRCREV = "15d256ea3c3a35fe065a0513f09f4ea6ece58725"
--# Corresponds to tag: 3.50.04.06
--TI_IPC_EXAMPLES_SRCREV = "f29c27652302892abbe78ce2c22a2aae28b28d69"
-+# Corresponds to tag: 3.50.04.07
-+TI_IPC_METADATA_SRCREV = "37e85ff1966f7d093fe2bde2dd9d4546f29d0d80"
-+# Corresponds to tag: 3.50.04.07
-+TI_IPC_EXAMPLES_SRCREV = "90e68a120c29f489fc8760fe8b86c5b765bdd76f"
- 
- SRCREV_FORMAT = "default"
- SRCREV_ipc-metadata = "${TI_IPC_METADATA_SRCREV}"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index b9f9ca9..000c5c0 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.50"
- 
--#Corresponds to 3.50.04.06
--TI_IPC_SRCREV = "ca7ce99b8ec82331559f0fd99a174bdcca1da9ac"
-+#Corresponds to 3.50.04.07
-+TI_IPC_SRCREV = "129b6f44c50cbe760a5c1481b34b323b7a42ead5"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
--- 
-1.9.1
+
+Information that may explain why I ask the question above:
+
+Based on Denys' recent reply, I confirmed a mainline Linux kernel v4.19.73 =
+build runs on the Beagleboard-xM (when compiled with an appropriate kernel =
+.config).
+
+After identifying an appropriate .config for the mainline Linux kernel v4.1=
+9.73, I used that .config for defconfig in a poky 2.7.1 and meta-ti (44a979=
+c5265) build. The meta-ti build using my defconfig override runs on the Bea=
+gleboard-xM.
+
+When not overridden, the defconfig used for MACHINE equal beagleboard is th=
+e one line "use-tisdk-config=3Dti_sdk_omap2_release" file. During do_config=
+ure(), the one line defconfig causes execution of the lines below (with con=
+fig equal to "ti_sdk_omap2_release").
+/short/build/tmp/work/beagleboard-poky-linux-gnueabi/linux-ti-staging/4.19.=
+59+gitAUTOINC+50ceb3c6e7-r127a/git/ti_config_fragments/defconfig_builder.sh=
+ -w /short/build/tmp/work/beagleboard-poky-linux-gnueabi/linux-ti-staging/4=
+.19.59+gitAUTOINC+50ceb3c6e7-r127a/git -t $config
+oe_runmake -C /short/build/tmp/work/beagleboard-poky-linux-gnueabi/linux-ti=
+-staging/4.19.59+gitAUTOINC+50ceb3c6e7-r127a/git O=3D/short/build/tmp/work/=
+beagleboard-poky-linux-gnueabi/linux-ti-staging/4.19.59+gitAUTOINC+50ceb3c6=
+e7-r127a/build "$config"_defconfig
+
+After my quick scan of the defconfig_builder.sh, I found a "ti_sdk_omap2_re=
+lease_defconfig" file I believe to be based on arch/arm/configs/multi_v7_de=
+fconfig (based on defconfig_map.txt redirection via "defconfig: multi_v7_de=
+fconfig").
+
+
+  =
+
+
+CONFIDENTIALITY NOTICE: This email and any attachments are for the sole use=
+ of the intended recipient and may contain material that is proprietary, co=
+nfidential, privileged or otherwise legally protected or restricted under a=
+pplicable government laws. Any review, disclosure, distributing or other us=
+e without expressed permission of the sender is strictly prohibited. If you=
+ are not the intended recipient, please contact the sender and delete all c=
+opies without reading, printing, or saving.
+
 
 
