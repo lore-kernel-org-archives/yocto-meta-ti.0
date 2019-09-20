@@ -1,54 +1,54 @@
 Return-Path: <sjha@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1D73DE0096F; Fri, 20 Sep 2019 10:16:35 -0700 (PDT)
+	id 049C1E00935; Fri, 20 Sep 2019 10:21:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
+X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
+	https://www.dnswl.org/, *      medium trust
 	*      [198.47.19.142 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73D17E008D9
-	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2019 10:16:34 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1CD4E00867
+	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2019 10:21:35 -0700 (PDT)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8KHGXxV011920
-	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2019 12:16:33 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8KHLZg2012985
+	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2019 12:21:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1568999793;
+	s=ti-com-17Q1; t=1569000095;
 	bh=geuuM4VNckOCpxu/RbeQr4RTBQu473j1lTMETYxc0hk=;
 	h=From:To:CC:Subject:Date;
-	b=HrSA9Ha6sfTHglrr4fmoSe3HfBfXR3+fU06wFXWI2nQYRjZBx7ByOxT+fEUANieiq
-	3Gbe3Ct2LNI4T0e/h3AxszjwipTzkkf3iLfu5eFxya+lO5xVHLgV8hrU/iRiwvNy0f
-	mP2cVA09Me1eb4Nzwrspn3b+D1rnS2xJkAOuOQN0=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8KHGXEn120544
+	b=xnF70ccNhoMiv1Lx8chr38CI4x5nN2St0JTnyUqhTX1yRYxOLQQyhuu/A0+3ykjwX
+	nAWKsxHqrgX061XLMwYNcQESaZDPurr4VeduLRcRWb4DGjEfobo/oT7OXWGbzV0Px+
+	soyFtUL04c8MEigc617sY2QQj+flJ4b5R/PoRYuw=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8KHLZsx126601
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2019 12:16:33 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2019 12:21:35 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Fri, 20 Sep 2019 12:16:33 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
-	(157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 20 Sep 2019 12:21:30 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Fri, 20 Sep 2019 12:16:33 -0500
+	Frontend Transport; Fri, 20 Sep 2019 12:21:30 -0500
 Received: from uda0132919.dal.design.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8KHGXSo023524;
-	Fri, 20 Sep 2019 12:16:33 -0500
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8KHLYWZ030991;
+	Fri, 20 Sep 2019 12:21:34 -0500
 From: Santosh Jha <sjha@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 20 Sep 2019 12:16:10 -0500
-Message-ID: <20190920171610.32176-1-sjha@ti.com>
+Date: Fri, 20 Sep 2019 12:21:11 -0500
+Message-ID: <20190920172111.32712-1-sjha@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -65,7 +65,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2019 17:16:35 -0000
+X-List-Received-Date: Fri, 20 Sep 2019 17:21:37 -0000
 Content-Type: text/plain
 
 IPC-LLD provides the low-level RPMSG based
