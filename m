@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <s-anna@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A672BE00D46; Mon, 23 Sep 2019 14:06:42 -0700 (PDT)
+	id A6984E00D00; Mon, 23 Sep 2019 14:24:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,51 +10,52 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5FCC5E00963
-	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2019 14:06:41 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8NL6eGd046389
-	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2019 16:06:40 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F203CE00A49
+	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2019 14:24:50 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8NLOoqP075379
+	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2019 16:24:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1569272800;
-	bh=Su8QjlH6H5EdHuk/1TH3R593E92tbxzf4ckbEQL5KHI=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=K3Uu4Ee1zzjr0txRvkDjI8faie3OypDkS8Vo67XGZ+e/IbcuO6U9XmRyjkVbFE7o+
-	8njIi2IzwEnIgItXoq17Rofl4SOGwvEGNIyytn7DhvMhZro9Ul1brRrFj9N5KRIFHb
-	6z5W9YS8/QNZvzPvjrGGNG+DYed5eFvMGqVhMIiI=
+	s=ti-com-17Q1; t=1569273890;
+	bh=mnTgM2HZsGL9w4arJ1jISco0UQNe7n+DkqawaCYP/N0=;
+	h=From:To:CC:Subject:Date;
+	b=ZhG38qhlL/HCeMF8hGrxKSfj22MhBUzT5BVs8X8O1KKpPfczVODupGEW4dEzYo1Fu
+	E9I1d1v6sVXgu0gMernC/OjHFa36+AVLwO039M3eAGRfXKnpadirbF+1nXaMtUOt95
+	7a3z+wCnBbD5o73JwZ7FiyP4Au4Cpp3MyxTfSkJk=
 Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8NL6ecj097616
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8NLOogd089651
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2019 16:06:40 -0500
+	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2019 16:24:50 -0500
 Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE114.ent.ti.com
 	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 23 Sep 2019 16:06:34 -0500
+	Mon, 23 Sep 2019 16:24:44 -0500
 Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE108.ent.ti.com
 	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 23 Sep 2019 16:06:34 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8NL6eqR064578;
-	Mon, 23 Sep 2019 16:06:40 -0500
-Date: Mon, 23 Sep 2019 17:06:40 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Santosh Jha <sjha@ti.com>
-Message-ID: <20190923210640.GB26590@beryl>
-References: <20190920172111.32712-1-sjha@ti.com>
+	Frontend Transport; Mon, 23 Sep 2019 16:24:44 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8NLOn9b089353;
+	Mon, 23 Sep 2019 16:24:50 -0500
+Received: from localhost (irmo.dhcp.ti.com [128.247.58.153])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	x8NLOnZ09160; Mon, 23 Sep 2019 16:24:49 -0500 (CDT)
+From: Suman Anna <s-anna@ti.com>
+To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 23 Sep 2019 16:24:49 -0500
+Message-ID: <20190923212449.15502-1-s-anna@ti.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <20190920172111.32712-1-sjha@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [thud/master][PATCH] ipc-lld: Adding recipe for IPC low-level driver and examples
+Subject: [thud/master PATCH] pru-icss: add J721E Support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,223 +68,145 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 21:06:42 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Sep 2019 21:24:53 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Why there are 2 identical patches and are there any differences?
+From: Nick Saulnier <nsaulnier@ti.com>
 
-Anyway, the patch seems mostly fine, please address few comments below inline. 
-Thanks.
+Updated git commit & version number for PRU Software Support Package.
 
+Builds J721E Halt and RPMsg examples and packages them into lib/firmware/pru
 
-On Fri, Sep 20, 2019 at 12:21:11PM -0500, Santosh Jha wrote:
-> IPC-LLD provides the low-level RPMSG based
-> communication interface between various cores
-> 
-> Signed-off-by: Santosh Jha <sjha@ti.com>
-> ---
->  .../ipc-lld/ipc-lld-examples-rtos_git.bb      | 51 +++++++++++++++++++
->  recipes-ti/ipc-lld/ipc-lld-rtos_git.bb        | 45 ++++++++++++++++
->  recipes-ti/ipc-lld/ipc-lld.inc                | 38 ++++++++++++++
->  3 files changed, 134 insertions(+)
->  create mode 100644 recipes-ti/ipc-lld/ipc-lld-examples-rtos_git.bb
->  create mode 100644 recipes-ti/ipc-lld/ipc-lld-rtos_git.bb
->  create mode 100644 recipes-ti/ipc-lld/ipc-lld.inc
+Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
+Signed-off-by: Suman Anna <s-anna@ti.com>
+---
+ recipes-bsp/pru/pru-icss_git.bb | 68 +++++++++++++++++++++++++++++++--
+ 1 file changed, 65 insertions(+), 3 deletions(-)
 
-Normally all LLDs reside in recipes.bsp. Moreorver, we already have 
-recipes-bsp/ipc-lld/ with ipc-lld-fw.bb pre-built FW recipe.
+diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+index 812caae9ade0..4fb059084e19 100644
+--- a/recipes-bsp/pru/pru-icss_git.bb
++++ b/recipes-bsp/pru/pru-icss_git.bb
+@@ -8,9 +8,9 @@ inherit update-alternatives
+ 
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "99b1bfd8ca8780fd2306c2c939f3fd477b2e5218"
++SRCREV = "1ff0393b3b9454fe9c58399c1b5d2db511e8049c"
+ 
+-PV = "5.4.0"
++PV = "5.5.0"
+ PR = "r1"
+ 
+ require recipes-ti/includes/ti-paths.inc
+@@ -41,6 +41,7 @@ PLATFORM_ti43x = "am437x"
+ PLATFORM_omap-a15 = "am572x"
+ PLATFORM_k2g = "k2g"
+ PLATFORM_am65xx = "am65x"
++PLATFORM_j7-evm = "j7-evm"
+ 
+ do_compile() {
+     for dir in ${SUBDIRS}
+@@ -131,7 +132,31 @@ do_install_append_am65xx() {
+     done
+ }
+ 
+-FILES_${PN}-halt = "/lib/firmware/pru/PRU_Halt* /lib/firmware/pru/RTU_Halt*"
++do_install_append_j7-evm() {
++    for i in 0 1
++    do
++        install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU${i}/PRU_Halt_${i}.out \
++                   ${D}/lib/firmware/pru
++        install -m 644 ${S}/examples/${PLATFORM}/RTU_Halt/gen/RTU${i}/RTU_Halt_${i}.out \
++                   ${D}/lib/firmware/pru
++        install -m 644 ${S}/examples/${PLATFORM}/TX_PRU_Halt/gen/TX_PRU${i}/TX_PRU_Halt_${i}.out \
++                   ${D}/lib/firmware/pru
++    done
++    for i in 0 1
++    do
++        for j in 0 1
++        do
++            install -m 0644 ${S}/examples/j721e/PRU_RPMsg_Echo_Interrupt${j}/gen/icssg${i}/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
++                            ${D}/lib/firmware/pru
++            install -m 0644 ${S}/examples/j721e/RTU_RPMsg_Echo_Interrupt${j}/gen/icssg${i}/RTU_RPMsg_Echo_Interrupt${i}_${j}.out \
++                            ${D}/lib/firmware/pru
++
++        done
++    done
++}
++
++
++FILES_${PN}-halt = "/lib/firmware/pru/PRU_Halt* /lib/firmware/pru/RTU_Halt* /lib/firmware/pru/TX_PRU_Halt*"
+ FILES_${PN}-rpmsg-echo = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt* /lib/firmware/pru/RTU_RPMsg_Echo_Interrupt*"
+ 
+ # Set up names for the firmwares
+@@ -140,6 +165,7 @@ PRU_ICSS_ALTERNATIVES_ti43x    = "am437x-pru0_0-fw am437x-pru0_1-fw am437x-pru1_
+ PRU_ICSS_ALTERNATIVES_omap-a15 = "am57xx-pru1_0-fw am57xx-pru1_1-fw am57xx-pru2_0-fw am57xx-pru2_1-fw"
+ PRU_ICSS_ALTERNATIVES_k2g      = "k2g-pru0_0-fw k2g-pru0_1-fw k2g-pru1_0-fw k2g-pru1_1-fw"
+ PRU_ICSS_ALTERNATIVES_am65xx   = "am65x-pru0_0-fw am65x-pru0_1-fw am65x-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw am65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1-fw"
++PRU_ICSS_ALTERNATIVES_j7-evm   = "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw j7-txpru0_0-fw j7-txpru0_1-fw j7-txpru1_0-fw j7-txpru1_1-fw"
+ 
+ # Set up link names for the firmwares
+ ALTERNATIVE_LINK_NAME[am335x-pru0-fw] = "/lib/firmware/am335x-pru0-fw"
+@@ -173,6 +199,19 @@ ALTERNATIVE_LINK_NAME[am65x-rtu1_1-fw] = "/lib/firmware/am65x-rtu1_1-fw"
+ ALTERNATIVE_LINK_NAME[am65x-rtu2_0-fw] = "/lib/firmware/am65x-rtu2_0-fw"
+ ALTERNATIVE_LINK_NAME[am65x-rtu2_1-fw] = "/lib/firmware/am65x-rtu2_1-fw"
+ 
++ALTERNATIVE_LINK_NAME[j7-pru0_0-fw] = "/lib/firmware/j7-pru0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-pru0_1-fw] = "/lib/firmware/j7-pru0_1-fw"
++ALTERNATIVE_LINK_NAME[j7-pru1_0-fw] = "/lib/firmware/j7-pru1_0-fw"
++ALTERNATIVE_LINK_NAME[j7-pru1_1-fw] = "/lib/firmware/j7-pru1_1-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu0_0-fw] = "/lib/firmware/j7-rtu0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu0_1-fw] = "/lib/firmware/j7-rtu0_1-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu1_0-fw] = "/lib/firmware/j7-rtu1_0-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu1_1-fw] = "/lib/firmware/j7-rtu1_1-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru0_0-fw] = "/lib/firmware/j7-txpru0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru0_1-fw] = "/lib/firmware/j7-txpru0_1-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru1_0-fw] = "/lib/firmware/j7-txpru1_0-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru1_1-fw] = "/lib/firmware/j7-txpru1_1-fw"
++
+ # Create the pru-icss-halt firmware alternatives
+ ALTERNATIVE_pru-icss-halt = "${PRU_ICSS_ALTERNATIVES}"
+ 
+@@ -207,6 +246,20 @@ ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_1-fw] = "/lib/firmware/pru/RTU_Halt_
+ ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
+ ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
+ 
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu0_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu0_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu1_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu1_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru0_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru0_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru1_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru1_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
++
++
+ ALTERNATIVE_PRIORITY_pru-icss-halt = "50"
+ 
+ # Create the pru-icss-rpmsg-echo firmware alternatives
+@@ -243,6 +296,15 @@ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu1_1-fw] = "/lib/firmware/pru/RTU
+ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu2_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt2_0.out"
+ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu2_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt2_1.out"
+ 
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru0_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru0_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru1_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru1_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu0_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu0_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu1_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu1_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt1_1.out"
++
+ ALTERNATIVE_PRIORITY_pru-icss-rpmsg-echo = "100"
+ 
+ ALLOW_EMPTY_${PN} = "1"
+-- 
+2.23.0
 
-
-> diff --git a/recipes-ti/ipc-lld/ipc-lld-examples-rtos_git.bb b/recipes-ti/ipc-lld/ipc-lld-examples-rtos_git.bb
-> new file mode 100644
-> index 00000000..cadde4d2
-> --- /dev/null
-> +++ b/recipes-ti/ipc-lld/ipc-lld-examples-rtos_git.bb
-> @@ -0,0 +1,51 @@
-> +SUMMARY = "echo_test for IPC-LLD"
-> +
-> +require ipc-lld.inc
-> +
-> +DEPENDS_append = " ipc-lld-rtos common-csl-ip-rtos sciclient-rtos board-rtos"
-
-Not critical, but DEPENDS += here would be better
-
-
-> +REMOTE_FW_DIR = "${S}/examples/echo_test/yocto_bin"
-> +REMOTE_FW_BIN_DIR = "${REMOTE_FW_DIR}/ipc_echo_test/bin"
-> +
-> +# make sure that lib/firmware, and all its contents are part of the package
-> +FILES_${PN} += "${base_libdir}/firmware"
-
-There's another FILES_${PN} below
-
-
-> +DST_BIN_PATH = "${base_libdir}/firmware/pdk-ipc/"
-> +
-> +do_configure() {
-> +    #Nothing to configure
-> +    :
-> +}
-
-This is preferred:
-do_configure[noexec] = "1"
-
-
-> +do_compile() {
-> +    cd ${S}
-> +
-> +    for board in ${TI_PDK_LIMIT_BOARDS}
-> +    do
-> +        for core in ${TI_PDK_LIMIT_CORES}
-> +        do
-> +            oe_runmake examples BOARD="${board}" CORE="${core}" DEST_ROOT=${REMOTE_FW_DIR}
-
-Use $board and $core instead for shell vars instead of bitbake vars.
-
-
-> +        done
-> +    done
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${DST_BIN_PATH}
-> +
-> +    for board in ${TI_PDK_LIMIT_BOARDS}
-> +    do
-> +        for core in ${TI_PDK_LIMIT_CORES}
-> +        do
-> +            install -m 0644 ${REMOTE_FW_BIN_DIR}/${board}/ipc_echo_test_${core}_release.x* ${D}${DST_BIN_PATH}
-
-Same comment as above
-
-
-> +            #removing map files copied in previous line
-> +            rm ${D}${DST_BIN_PATH}/*.map
-> +        done
-> +    done
-> +}
-> +
-> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-
-There's another FILES_${PN} above - please keep them in the same spot
-
-
-> +INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
-> +
-> +INSANE_SKIP_${PN}-dbg = "arch"
-> diff --git a/recipes-ti/ipc-lld/ipc-lld-rtos_git.bb b/recipes-ti/ipc-lld/ipc-lld-rtos_git.bb
-> new file mode 100644
-> index 00000000..eff3cea1
-> --- /dev/null
-> +++ b/recipes-ti/ipc-lld/ipc-lld-rtos_git.bb
-> @@ -0,0 +1,45 @@
-> +SUMMARY = "TI RTOS low level driver for IPC"
-> +
-> +require ipc-lld.inc
-> +
-> +DEPENDS_append = " osal-rtos common-csl-ip-rtos sciclient-rtos"
-
-Same as above
-
-
-> +do_configure() {
-> +    # remove any previous package
-> +    rm -rf ${IPCLLD_PACKAGE_BASE}
-> +    cd ${S}
-> +
-> +    mkdir -p ${IPCLLD_ROOTPATH}
-> +
-> +    for board in ${TI_PDK_LIMIT_BOARDS}
-> +    do
-> +        # make the release package before building it
-> +        oe_runmake package BOARD=${board} DEST_ROOT=${IPCLLD_PACKAGE_BASE} PDK_IPC_COMP_PATH=${S}
-
-Use shell vars
-
-
-> +    done
-> +
-> +}
-> +
-> +do_compile() {
-> +    cd ${IPCLLD_ROOTPATH}
-> +
-> +    oe_runmake lib LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" PDK_IPC_COMP_PATH=${IPCLLD_ROOTPATH}
-> +}
-> +
-> +do_install() {
-> +    cd ${IPCLLD_ROOTPATH}
-> +
-> +    #remove prebuilt binaries
-> +    rm -rf examples/echo_test/binaries
-> +
-> +    #archive
-> +    tar -cf ipc-lld.tar --exclude='*.tar' ./*
-> +
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc
-> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc \;
-> +}
-> +
-> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-> +
-> +INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
-> +
-> +INSANE_SKIP_${PN}-dbg = "arch"
-> diff --git a/recipes-ti/ipc-lld/ipc-lld.inc b/recipes-ti/ipc-lld/ipc-lld.inc
-> new file mode 100644
-> index 00000000..7a0ebec8
-> --- /dev/null
-> +++ b/recipes-ti/ipc-lld/ipc-lld.inc
-> @@ -0,0 +1,38 @@
-> +SUMMARY = "TI RTOS low level driver for IPC"
-
-Both of the recipe that include this .inc overwrite SUMMARY anyway
-
-
-> +
-> +inherit ti-pdk
-> +
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7eae093f2b09fd39307f30028a068b91"
-> +
-> +COMPATIBLE_MACHINE = "k3"
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +IPCLLD_GIT_URI = "git://git.ti.com/keystone-rtos/ipc-lld.git"
-> +IPCLLD_GIT_PROTOCOL = "git"
-> +IPCLLD_GIT_BRANCH = "master"
-> +
-> +# Below commit ID corresponds to "01.00.00.00"
-> +IPCLLD_SRCREV = "c695ca99aa4b7242e808889cfeacf848f14112c7"
-> +
-> +BRANCH = "${IPCLLD_GIT_BRANCH}"
-> +SRC_URI = "${IPCLLD_GIT_URI};protocol=${IPCLLD_GIT_PROTOCOL};branch=${BRANCH}"
-> +
-> +SRCREV = "${IPCLLD_SRCREV}"
-> +PV = "01.00.00.00"
-> +PR = "r0"
-> +
-> +# Build with make instead of XDC
-> +TI_PDK_XDCMAKE = "0"
-> +
-> +IPCLLD_PACKAGE_BASE   = "${S}/../ipclld_base"
-> +IPCLLD_ROOTPATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/ipc"
-> +
-> +export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-> +export PDK_IPC_ROOT_PATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages"
-> +
-> +# HTML doc link params
-> +PDK_COMP_LINK_TEXT = "IPCLLD"
-> +
-> +EXTRA_OEMAKE = "PDK_INSTALL_PATH=${PDK_INSTALL_PATH} "
-> +
-> -- 
-> 2.17.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
