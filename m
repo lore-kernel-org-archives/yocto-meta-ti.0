@@ -1,58 +1,69 @@
-Return-Path: <sjha@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 87A90E00D68; Wed, 25 Sep 2019 08:15:37 -0700 (PDT)
+	id 0D273E00DF3; Thu, 26 Sep 2019 09:02:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.214.193 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5EF97E00790
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2019 08:15:36 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8PFFZVx019516
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2019 10:15:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1569424535;
-	bh=39OnNZCvzh/ilSXmqq9jYnmGgBRzM8pfpsYmyVkxSOE=;
-	h=From:To:CC:Subject:Date;
-	b=x4U0Qt6C15rSnKia+9vPz9xRVY+1FaDtC3y2W8UdYRJOCSl6z+vN5pw7m6XFMyLKb
-	qF+PRs8kfptcCBGJTxaFYgdovVo6JgriolzgehtJ7bdPJ8xSnhygUUw5Z5SnW8Hons
-	yYjFTZBOXOaG4nJS9ZneRYfu5Jx7NOSxrrDxT3Xs=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8PFFZ1f075484
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2019 10:15:35 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 25 Sep 2019 10:15:28 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 25 Sep 2019 10:15:28 -0500
-Received: from uda0132919.dal.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8PFFZPf063031;
-	Wed, 25 Sep 2019 10:15:35 -0500
-From: Santosh Jha <sjha@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 25 Sep 2019 10:15:07 -0500
-Message-ID: <20190925151507.9370-1-sjha@ti.com>
-X-Mailer: git-send-email 2.17.1
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CA01E00D54
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 09:02:01 -0700 (PDT)
+Received: by mail-pl1-f193.google.com with SMTP id y10so1514900plp.2
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 09:02:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1GzVrPkVFV3t/+UdO4emRnsEIcwOm8Naf/ysyhFlX1o=;
+	b=psTuOMXhIpVs6Yo+O62zXWEiRidrBiU+0dLWliKN/QKmxJ5/BVWXO/wyn0RpSuf978
+	xsbhfq+1vpXuH9k6wqOT5nfYN11K+KFTdL41zoJph4y5jCiXprPzbRlFU/uX8zdAqGNV
+	2oqIBXM0jODoeXCxUEnyr/H7IZ4WufuUJmnRP41aVIh5wCG4/JNeors7AWvAqgw/+nT1
+	Z1LJmmkf13s+wwUyeHpQcPYTC8UB82WDTEFDHVpwS6O5oaHB41WSRTtYZV+UW2IDjlcR
+	IaC0yu5Oj69LJ24ZuH5LAA4OoEoMaf5Ai6ldqlDx07EVdMJ9aECxP1YaaILGCVKvNgXm
+	w5yA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1GzVrPkVFV3t/+UdO4emRnsEIcwOm8Naf/ysyhFlX1o=;
+	b=BgWCL3LMhyaB25TPDD+48NW9Y0eEVwo2d3SK5dyG3ZKIo9S9ekgBTnMBAaVBu4s+F6
+	Hjk50vkBMzMLBj/fPhSwmXNPw6ZoP062uY5uW0R+HAJnMq0+m5UhoMxNfzmpgceNrdEp
+	O9fq5cOGbULhg0nL/aGqZAc5FK9UUQXUkf1UI/IeGIOt7Dmj3rexRytJmyBmDrlUVNu4
+	6Rz8tDH4L6WS6+bdC09F7J7HgD2r8mDwhueAlOBCZHBpJmndWtXpPb4cyP+CXNSeoduK
+	QL3eZEhBoC39lmwLBKRaI0MgN7hZ3OkXPdDToSuCdbmi2HCVFu+XSEMaAmzUd3j2xljv
+	oCGg==
+X-Gm-Message-State: APjAAAUJMXKSVmYAszr48nynVzUHkQW3NaCgAK2xzO01/zoPurQRtd5l
+	lLT0O0yKb9E/AmKAJq1/fCIXSzCmeDA=
+X-Google-Smtp-Source: APXvYqyjCXGOGaJ3tYvY8b1sPvs8b5omznSgA/Q2fAiXcc6SKkZJ6FNZwRZoIDNLUaWR9DLDmJAW4A==
+X-Received: by 2002:a17:902:a58a:: with SMTP id
+	az10mr5017110plb.42.1569513720139; 
+	Thu, 26 Sep 2019 09:02:00 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	q14sm6082862pgf.74.2019.09.26.09.01.59
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 26 Sep 2019 09:01:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Thu, 26 Sep 2019 09:01:50 -0700
+Message-Id: <20190926160150.2507778-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH v2] ipc-lld: Adding recipe for IPC low-level driver and examples
+Subject: [PATCH] rwmem: Update to 2.0-rc2+
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,177 +76,148 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 15:15:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Sep 2019 16:02:02 -0000
+Content-Transfer-Encoding: 8bit
 
-IPC-LLD provides the low-level RPMSG based
-communication interface between various cores
+- New versions uses CMake and extra modules
+- Correct detection of nm/ranlib/ar for LTO
+- Fix build with clang/libc++
 
-Signed-off-by: Santosh Jha <sjha@ti.com>
-
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+ ...Make-provided-vars-for-ar-and-ranlib.patch | 34 +++++++++++++++++++
+ ....h-Include-cerrno-for-errno-definiti.patch | 24 +++++++++++++
+ recipes-bsp/rwmem/rwmem_1.1.bb                | 13 -------
+ recipes-bsp/rwmem/rwmem_1.2.bb                | 27 +++++++++++++++
+ 4 files changed, 85 insertions(+), 13 deletions(-)
+ create mode 100644 recipes-bsp/rwmem/rwmem/0001-Use-CMake-provided-vars-for-ar-and-ranlib.patch
+ create mode 100644 recipes-bsp/rwmem/rwmem/0001-librwmem-helpers.h-Include-cerrno-for-errno-definiti.patch
+ delete mode 100644 recipes-bsp/rwmem/rwmem_1.1.bb
+ create mode 100644 recipes-bsp/rwmem/rwmem_1.2.bb
 
-Changed from previous version of patch
- - Moved from recipe-ti to recipe-bsp directory
- - Addressed review comments
-
----
----
- .../ipc-lld/ipc-lld-examples-rtos_git.bb      | 47 +++++++++++++++++++
- recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb       | 45 ++++++++++++++++++
- recipes-bsp/ipc-lld/ipc-lld.inc               | 36 ++++++++++++++
- 3 files changed, 128 insertions(+)
- create mode 100644 recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
- create mode 100644 recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
- create mode 100644 recipes-bsp/ipc-lld/ipc-lld.inc
-
-diff --git a/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb b/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
+diff --git a/recipes-bsp/rwmem/rwmem/0001-Use-CMake-provided-vars-for-ar-and-ranlib.patch b/recipes-bsp/rwmem/rwmem/0001-Use-CMake-provided-vars-for-ar-and-ranlib.patch
 new file mode 100644
-index 00000000..44f76675
+index 00000000..79968f32
 --- /dev/null
-+++ b/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-@@ -0,0 +1,47 @@
-+SUMMARY = "echo_test for IPC-LLD"
++++ b/recipes-bsp/rwmem/rwmem/0001-Use-CMake-provided-vars-for-ar-and-ranlib.patch
+@@ -0,0 +1,34 @@
++From ee3bbdaae568118b4aad453c8fbb1ec648e8fbf2 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 8 Dec 2018 22:48:23 -0800
++Subject: [PATCH] Use CMake provided vars for ar and ranlib
 +
-+require ipc-lld.inc
++hardcoding them means we may not be able to cross compile the package
++reliably as build host may or may not have gcc-ar and gcc-ranlib
++installed, using the cross tools is the correct thing to do here
 +
-+DEPENDS += " ipc-lld-rtos common-csl-ip-rtos sciclient-rtos board-rtos"
++Upstream-Status: Submitted [https://github.com/tomba/rwmem/pull/5]
 +
-+REMOTE_FW_DIR = "${S}/examples/echo_test/yocto_bin"
-+REMOTE_FW_BIN_DIR = "${REMOTE_FW_DIR}/ipc_echo_test/bin"
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ CMakeLists.txt | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+DST_BIN_PATH = "${base_libdir}/firmware/pdk-ipc/"
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 5e7f327..e36fca0 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -50,8 +50,8 @@ if (NOT ${U_CMAKE_BUILD_TYPE} MATCHES DEBUG)
++ 	if (HAS_LTO_FLAG)
++ 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -flto")
++ 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
++-		set(CMAKE_AR gcc-ar)
++-		set(CMAKE_RANLIB gcc-ranlib)
+++		set(CMAKE_AR ${CMAKE_CXX_COMPILER_AR})
+++		set(CMAKE_RANLIB ${CMAKE_CXX_COMPILER_RANLIB})
++ 	endif()
++ endif()
++ 
++-- 
++2.19.2
 +
-+do_configure[noexec] = "1"
+diff --git a/recipes-bsp/rwmem/rwmem/0001-librwmem-helpers.h-Include-cerrno-for-errno-definiti.patch b/recipes-bsp/rwmem/rwmem/0001-librwmem-helpers.h-Include-cerrno-for-errno-definiti.patch
+new file mode 100644
+index 00000000..9f33fa5e
+--- /dev/null
++++ b/recipes-bsp/rwmem/rwmem/0001-librwmem-helpers.h-Include-cerrno-for-errno-definiti.patch
+@@ -0,0 +1,24 @@
++From 9f1d52590336caeab8038cdd015294df2e5d8c1f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 1 Feb 2019 23:47:04 -0800
++Subject: [PATCH] librwmem/helpers.h: Include <cerrno> for errno definitions
 +
-+do_compile() {
-+    cd ${S}
++this is found with libc++
 +
-+    for board in ${TI_PDK_LIMIT_BOARDS}
-+    do
-+        for core in ${TI_PDK_LIMIT_CORES}
-+        do
-+            oe_runmake examples BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
-+        done
-+    done
-+}
++Upstream-Status: Submitted [https://github.com/tomba/rwmem/pull/5]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ librwmem/helpers.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/librwmem/helpers.h b/librwmem/helpers.h
++index ccc6c9e..686943e 100644
++--- a/librwmem/helpers.h
+++++ b/librwmem/helpers.h
++@@ -1,5 +1,6 @@
++ #pragma once
++ 
+++#include <cerrno>
++ #include <string>
++ #include <vector>
++ #include <string.h>
+diff --git a/recipes-bsp/rwmem/rwmem_1.1.bb b/recipes-bsp/rwmem/rwmem_1.1.bb
+deleted file mode 100644
+index 2848e1cd..00000000
+--- a/recipes-bsp/rwmem/rwmem_1.1.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "A small tool to read/write memory"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-
+-SRCREV = "54904b8873b265d8f1faf82617c2f04814c102c6"
+-SRC_URI = "git://github.com/tomba/rwmem.git"
+-
+-S = "${WORKDIR}/git"
+-
+-do_install() {
+-	install -d ${D}${bindir}
+-	install -m 0755 rwmem ${D}${bindir}
+-}
+diff --git a/recipes-bsp/rwmem/rwmem_1.2.bb b/recipes-bsp/rwmem/rwmem_1.2.bb
+new file mode 100644
+index 00000000..c4d2bc49
+--- /dev/null
++++ b/recipes-bsp/rwmem/rwmem_1.2.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "A small tool to read/write memory"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++PV .= "+git${SRCPV}"
++
++SRCREV_rwmem = "7e5ca9802c1b8ff1f6407c19dfd0b9415501bb11"
++SRCREV_inih = "4b10c654051a86556dfdb634c891b6c3224c4109"
++SRCREV_pybind11 = "9a19306fbf30642ca331d0ec88e7da54a96860f9"
++
++SRCREV_FORMAT = "rwmem_inih_pybind11"
++
++SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem \
++           git://github.com/benhoyt/inih.git;protocol=https;name=inih;nobranch=1;destsuffix=git/ext/inih \
++           git://github.com/pybind/pybind11.git;protocol=https;name=pybind11;nobranch=1;destsuffix=git/ext/pybind11 \
++           file://0001-Use-CMake-provided-vars-for-ar-and-ranlib.patch \
++           file://0001-librwmem-helpers.h-Include-cerrno-for-errno-definiti.patch \
++           "
++
++S = "${WORKDIR}/git"
++
++inherit cmake pkgconfig python3native
 +
 +do_install() {
-+    install -d ${D}${DST_BIN_PATH}
-+
-+    for board in ${TI_PDK_LIMIT_BOARDS}
-+    do
-+        for core in ${TI_PDK_LIMIT_CORES}
-+        do
-+            install -m 0644 ${REMOTE_FW_BIN_DIR}/$board/ipc_echo_test_${core}_release.x* ${D}${DST_BIN_PATH}
-+
-+            #removing map files copied in previous line
-+            rm ${D}${DST_BIN_PATH}/*.map
-+        done
-+    done
++	install -D -m 0755 ${B}/bin/rwmem ${D}${bindir}/rwmem
++	install -D -m 0644 ${B}/lib/librwmem.a ${D}${libdir}/librwmem.a
 +}
-+
-+# make sure that lib/firmware, and all its contents are part of the package
-+FILES_${PN} += "${base_libdir}/firmware"
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+
-+INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
-+
-+INSANE_SKIP_${PN}-dbg = "arch"
-diff --git a/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb b/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
-new file mode 100644
-index 00000000..e005ea70
---- /dev/null
-+++ b/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "TI RTOS low level driver for IPC"
-+
-+require ipc-lld.inc
-+
-+DEPENDS += " osal-rtos common-csl-ip-rtos sciclient-rtos"
-+
-+do_configure() {
-+    # remove any previous package
-+    rm -rf ${IPCLLD_PACKAGE_BASE}
-+    cd ${S}
-+
-+    mkdir -p ${IPCLLD_ROOTPATH}
-+
-+    for board in ${TI_PDK_LIMIT_BOARDS}
-+    do
-+        # make the release package before building it
-+        oe_runmake package BOARD=$board DEST_ROOT=${IPCLLD_PACKAGE_BASE} PDK_IPC_COMP_PATH=${S}
-+    done
-+
-+}
-+
-+do_compile() {
-+    cd ${IPCLLD_ROOTPATH}
-+
-+    oe_runmake lib LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" PDK_IPC_COMP_PATH=${IPCLLD_ROOTPATH}
-+}
-+
-+do_install() {
-+    cd ${IPCLLD_ROOTPATH}
-+
-+    #remove prebuilt binaries
-+    rm -rf examples/echo_test/binaries
-+
-+    #archive
-+    tar -cf ipc-lld.tar --exclude='*.tar' ./*
-+
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc
-+    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc \;
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+
-+INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
-+
-+INSANE_SKIP_${PN}-dbg = "arch"
-diff --git a/recipes-bsp/ipc-lld/ipc-lld.inc b/recipes-bsp/ipc-lld/ipc-lld.inc
-new file mode 100644
-index 00000000..3fed3726
---- /dev/null
-+++ b/recipes-bsp/ipc-lld/ipc-lld.inc
-@@ -0,0 +1,36 @@
-+inherit ti-pdk
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7eae093f2b09fd39307f30028a068b91"
-+
-+COMPATIBLE_MACHINE = "k3"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+IPCLLD_GIT_URI = "git://git.ti.com/keystone-rtos/ipc-lld.git"
-+IPCLLD_GIT_PROTOCOL = "git"
-+IPCLLD_GIT_BRANCH = "master"
-+
-+# Below commit ID corresponds to "01.00.00.00"
-+IPCLLD_SRCREV = "c695ca99aa4b7242e808889cfeacf848f14112c7"
-+
-+BRANCH = "${IPCLLD_GIT_BRANCH}"
-+SRC_URI = "${IPCLLD_GIT_URI};protocol=${IPCLLD_GIT_PROTOCOL};branch=${BRANCH}"
-+
-+SRCREV = "${IPCLLD_SRCREV}"
-+PV = "01.00.00.00"
-+PR = "r0"
-+
-+# Build with make instead of XDC
-+TI_PDK_XDCMAKE = "0"
-+
-+IPCLLD_PACKAGE_BASE   = "${S}/../ipclld_base"
-+IPCLLD_ROOTPATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/ipc"
-+
-+export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-+export PDK_IPC_ROOT_PATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages"
-+
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "IPCLLD"
-+
-+EXTRA_OEMAKE = "PDK_INSTALL_PATH=${PDK_INSTALL_PATH} "
-+
 -- 
-2.17.1
+2.23.0
 
 
