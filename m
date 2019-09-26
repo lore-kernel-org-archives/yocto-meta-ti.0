@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 17ED5E00B1B; Thu, 26 Sep 2019 10:29:01 -0700 (PDT)
+	id 69A04E00ECA; Thu, 26 Sep 2019 11:17:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,51 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BDC07E0084E
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 10:28:59 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8QHSxr8120402
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 12:28:59 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6F98E00EC8
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 11:17:11 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8QIHBWQ129338
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 13:17:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1569518939;
-	bh=niTt3oiXPJyIXwOMO+XqvN1jOfMG10hZLE6nhqE7GDo=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=pP3VjbA/LKCaEmWfsEzqmPreW1H3HN0X3BbjORkDNHddKb4j0OCv4EPfXpwJ8IjNP
-	9E9PZQM55bXrW06W7DuvAHrDfjwh5+zIiiaArrOz+dWAtPgwuHupVuzI0XQWr9YWI6
-	pzad5NA+w8qaRyzT4SNlfNvhTek3SgSZ7gsuWcOM=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8QHSxi1114700
+	s=ti-com-17Q1; t=1569521831;
+	bh=LIrcMcB1uMPizWW/c/PLu7ZbfbaQQ94Z8YQtlVnsE14=;
+	h=From:To:Subject:Date;
+	b=PESljwD5jBtJ75CtAzugrRhDR3P5KtEu6tqrblMg5wjusCoKqoHWxgxWapMsH2OhI
+	yPpnxbKnQbXGf7w8VhmnprmSmtW2OqlpV3JiiKNQO0YGDJCBtc0E7ZkXjz0V8fn6T7
+	p2mpJJElXMrrDlQDyGggSA16a4/7XTT8jNHrd93o=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8QIHAIS026501
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 12:28:59 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 13:17:10 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Thu, 26 Sep 2019 12:28:51 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 26 Sep 2019 13:17:03 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Thu, 26 Sep 2019 12:28:51 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8QHSw3b117973;
-	Thu, 26 Sep 2019 12:28:58 -0500
-Date: Thu, 26 Sep 2019 13:28:58 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Santosh Jha <sjha@ti.com>
-Message-ID: <20190926172858.GB5566@beryl>
-References: <20190925151507.9370-1-sjha@ti.com>
+	Frontend Transport; Thu, 26 Sep 2019 13:17:03 -0500
+Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8QIHAUA079468
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2019 13:17:10 -0500
+From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 26 Sep 2019 14:17:06 -0400
+Message-ID: <1569521826-10051-1-git-send-email-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190925151507.9370-1-sjha@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [thud/master][PATCH v2] ipc-lld: Adding recipe for IPC low-level driver and examples
+Subject: [thud/master][PATCH] ti-cgt7x: Update to version 1.2.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,186 +65,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 17:29:01 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 26 Sep 2019 18:17:12 -0000
+Content-Type: text/plain
 
-Looks good, thanks for addressing the comments.
+The license checksum changed due to the version, but the license itself
+has not changed since the last release (1.1.0)
+---
+ .../devtools/{ti-cgt7x_1.1.0.bb => ti-cgt7x_1.2.0.bb}       | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+ rename recipes-ti/devtools/{ti-cgt7x_1.1.0.bb => ti-cgt7x_1.2.0.bb} (68%)
 
-On Wed, Sep 25, 2019 at 10:15:07AM -0500, Santosh Jha wrote:
-> IPC-LLD provides the low-level RPMSG based
-> communication interface between various cores
-> 
-> Signed-off-by: Santosh Jha <sjha@ti.com>
-> 
-> ---
-> 
-> Changed from previous version of patch
->  - Moved from recipe-ti to recipe-bsp directory
->  - Addressed review comments
-> 
-> ---
-> ---
->  .../ipc-lld/ipc-lld-examples-rtos_git.bb      | 47 +++++++++++++++++++
->  recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb       | 45 ++++++++++++++++++
->  recipes-bsp/ipc-lld/ipc-lld.inc               | 36 ++++++++++++++
->  3 files changed, 128 insertions(+)
->  create mode 100644 recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
->  create mode 100644 recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
->  create mode 100644 recipes-bsp/ipc-lld/ipc-lld.inc
-> 
-> diff --git a/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb b/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-> new file mode 100644
-> index 00000000..44f76675
-> --- /dev/null
-> +++ b/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-> @@ -0,0 +1,47 @@
-> +SUMMARY = "echo_test for IPC-LLD"
-> +
-> +require ipc-lld.inc
-> +
-> +DEPENDS += " ipc-lld-rtos common-csl-ip-rtos sciclient-rtos board-rtos"
-> +
-> +REMOTE_FW_DIR = "${S}/examples/echo_test/yocto_bin"
-> +REMOTE_FW_BIN_DIR = "${REMOTE_FW_DIR}/ipc_echo_test/bin"
-> +
-> +DST_BIN_PATH = "${base_libdir}/firmware/pdk-ipc/"
-> +
-> +do_configure[noexec] = "1"
-> +
-> +do_compile() {
-> +    cd ${S}
-> +
-> +    for board in ${TI_PDK_LIMIT_BOARDS}
-> +    do
-> +        for core in ${TI_PDK_LIMIT_CORES}
-> +        do
-> +            oe_runmake examples BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
-> +        done
-> +    done
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${DST_BIN_PATH}
-> +
-> +    for board in ${TI_PDK_LIMIT_BOARDS}
-> +    do
-> +        for core in ${TI_PDK_LIMIT_CORES}
-> +        do
-> +            install -m 0644 ${REMOTE_FW_BIN_DIR}/$board/ipc_echo_test_${core}_release.x* ${D}${DST_BIN_PATH}
-> +
-> +            #removing map files copied in previous line
-> +            rm ${D}${DST_BIN_PATH}/*.map
-> +        done
-> +    done
-> +}
-> +
-> +# make sure that lib/firmware, and all its contents are part of the package
-> +FILES_${PN} += "${base_libdir}/firmware"
-> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-> +
-> +INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
-> +
-> +INSANE_SKIP_${PN}-dbg = "arch"
-> diff --git a/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb b/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
-> new file mode 100644
-> index 00000000..e005ea70
-> --- /dev/null
-> +++ b/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
-> @@ -0,0 +1,45 @@
-> +SUMMARY = "TI RTOS low level driver for IPC"
-> +
-> +require ipc-lld.inc
-> +
-> +DEPENDS += " osal-rtos common-csl-ip-rtos sciclient-rtos"
-> +
-> +do_configure() {
-> +    # remove any previous package
-> +    rm -rf ${IPCLLD_PACKAGE_BASE}
-> +    cd ${S}
-> +
-> +    mkdir -p ${IPCLLD_ROOTPATH}
-> +
-> +    for board in ${TI_PDK_LIMIT_BOARDS}
-> +    do
-> +        # make the release package before building it
-> +        oe_runmake package BOARD=$board DEST_ROOT=${IPCLLD_PACKAGE_BASE} PDK_IPC_COMP_PATH=${S}
-> +    done
-> +
-> +}
-> +
-> +do_compile() {
-> +    cd ${IPCLLD_ROOTPATH}
-> +
-> +    oe_runmake lib LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" PDK_IPC_COMP_PATH=${IPCLLD_ROOTPATH}
-> +}
-> +
-> +do_install() {
-> +    cd ${IPCLLD_ROOTPATH}
-> +
-> +    #remove prebuilt binaries
-> +    rm -rf examples/echo_test/binaries
-> +
-> +    #archive
-> +    tar -cf ipc-lld.tar --exclude='*.tar' ./*
-> +
-> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc
-> +    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc \;
-> +}
-> +
-> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-> +
-> +INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
-> +
-> +INSANE_SKIP_${PN}-dbg = "arch"
-> diff --git a/recipes-bsp/ipc-lld/ipc-lld.inc b/recipes-bsp/ipc-lld/ipc-lld.inc
-> new file mode 100644
-> index 00000000..3fed3726
-> --- /dev/null
-> +++ b/recipes-bsp/ipc-lld/ipc-lld.inc
-> @@ -0,0 +1,36 @@
-> +inherit ti-pdk
-> +
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7eae093f2b09fd39307f30028a068b91"
-> +
-> +COMPATIBLE_MACHINE = "k3"
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +IPCLLD_GIT_URI = "git://git.ti.com/keystone-rtos/ipc-lld.git"
-> +IPCLLD_GIT_PROTOCOL = "git"
-> +IPCLLD_GIT_BRANCH = "master"
-> +
-> +# Below commit ID corresponds to "01.00.00.00"
-> +IPCLLD_SRCREV = "c695ca99aa4b7242e808889cfeacf848f14112c7"
-> +
-> +BRANCH = "${IPCLLD_GIT_BRANCH}"
-> +SRC_URI = "${IPCLLD_GIT_URI};protocol=${IPCLLD_GIT_PROTOCOL};branch=${BRANCH}"
-> +
-> +SRCREV = "${IPCLLD_SRCREV}"
-> +PV = "01.00.00.00"
-> +PR = "r0"
-> +
-> +# Build with make instead of XDC
-> +TI_PDK_XDCMAKE = "0"
-> +
-> +IPCLLD_PACKAGE_BASE   = "${S}/../ipclld_base"
-> +IPCLLD_ROOTPATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/ipc"
-> +
-> +export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-> +export PDK_IPC_ROOT_PATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages"
-> +
-> +# HTML doc link params
-> +PDK_COMP_LINK_TEXT = "IPCLLD"
-> +
-> +EXTRA_OEMAKE = "PDK_INSTALL_PATH=${PDK_INSTALL_PATH} "
-> +
-> -- 
-> 2.17.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-ti/devtools/ti-cgt7x_1.1.0.bb b/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+similarity index 68%
+rename from recipes-ti/devtools/ti-cgt7x_1.1.0.bb
+rename to recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+index 72bbcc1..09178af 100644
+--- a/recipes-ti/devtools/ti-cgt7x_1.1.0.bb
++++ b/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+@@ -8,7 +8,7 @@ libraries and standard header files needed to produce a working DSP application.
+ HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+ LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
+ 
+-LIC_FILES_CHKSUM = "file://ti-cgt-c7000_${PV}/C7000_1.0.x_CodeGenerationTools_Manifest.html;md5=3074e433c5d52657076d1d138dfbdaf8"
++LIC_FILES_CHKSUM = "file://ti-cgt-c7000_${PV}.STS/C7000_Code_Generation_Tools_1.x_manifest.html;md5=f1156d241d104c281bc64a6ec8eadc64"
+ 
+ require recipes-ti/includes/ti-unpack.inc
+ require recipes-ti/includes/ti-paths.inc
+@@ -17,23 +17,22 @@ require recipes-ti/includes/ti-paths.inc
+ COMPATIBLE_HOST = "x86_64.*-linux"
+ COMPATIBLE_HOST_class-target = "null"
+ 
+-BINFILE = "ti_cgt_c7000_${PV}_linux_installer_x86.bin"
++BINFILE = "ti_cgt_c7000_${PV}.STS_linux_installer_x86.bin"
+ BINFILE_NAME = "cgt7x_x86_installer"
+ 
+-# Please note, "install.source.dir.local" is not a real URL, below files need to be pre-downloaded
+-SRC_URI = "http://install.source.dir.local/${BINFILE};name=${BINFILE_NAME}"
++SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C7000/${PV}.STS/${BINFILE};name=${BINFILE_NAME}"
+ 
+ TI_BIN_UNPK_ARGS = "--prefix ${S}"
+ TI_BIN_UNPK_CMDS = ""
+ 
+-SRC_URI[cgt7x_x86_installer.md5sum]    = "feb668b4213403c661909adcf65d2ba8"
+-SRC_URI[cgt7x_x86_installer.sha256sum] = "4a3954c973622c00a9b91fa90473cf921f4b763300b0e7c32735304867856ab8"
++SRC_URI[cgt7x_x86_installer.md5sum]    = "813840908f333dd2a31f92edec71c1fb"
++SRC_URI[cgt7x_x86_installer.sha256sum] = "21379811a8857489f72ca8ec45a46eb086ced0bdbb58e78f73a86e63984ab2f5"
+ 
+ S = "${WORKDIR}/c7000_${PV}"
+ 
+ do_install() {
+     install -d ${D}/${TI_CGT7X_INSTALL_DIR_RECIPE}
+-    cp -rP --preserve=mode,links,timestamps --no-preserve=ownership ${WORKDIR}/c7000_${PV}/ti-cgt-c7000_${PV}/. ${D}/${TI_CGT7X_INSTALL_DIR_RECIPE}
++    cp -rP --preserve=mode,links,timestamps --no-preserve=ownership ${WORKDIR}/c7000_${PV}/ti-cgt-c7000_${PV}.STS/. ${D}/${TI_CGT7X_INSTALL_DIR_RECIPE}
+ }
+ 
+ 
+-- 
+1.9.1
+
 
