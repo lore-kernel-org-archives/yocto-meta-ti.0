@@ -1,61 +1,64 @@
-Return-Path: <s-anna@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 668D2E00C46; Mon, 30 Sep 2019 16:38:28 -0700 (PDT)
+	id 0CDBBE00C46; Mon, 30 Sep 2019 17:00:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	https://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
+	*      medium trust
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43F13E00B33
-	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2019 16:38:26 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8UNcQUT056949
-	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2019 18:38:26 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6088FE00B33
+	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2019 17:00:16 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9100FAP056667;
+	Mon, 30 Sep 2019 19:00:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1569886706;
-	bh=KI6WnEtlEmhmGAuvavnjEVYZtK9j8wU7LDp7fs0iFZk=;
-	h=From:To:CC:Subject:Date;
-	b=yOBIMkcPGqVWZpRIsMO2hX+vJOgVdi8pv/5BcQio9BTs6Z0nKInPVb26sKFBMcGo+
-	pOCZczd3xp4mgezz0htnt4cvSrlFefeRBm3psBc0OmnX3Iu7nRIY0EXzs1CxndJoHP
-	a15vn+xc8v5teXDDMw1SReoySvpXpry4WNUGMtUU=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8UNcQ9F087128
-	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2019 18:38:26 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
-	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Mon, 30 Sep 2019 18:38:26 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
+	s=ti-com-17Q1; t=1569888015;
+	bh=kswRrpN1qKZw8KRMkkKppxUtoHESHN2gfnTHyv2Ua5k=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=WJZ/7Ru5zwq9iDyY1QrD53BSf2vch8du38KgOW2aqDdp6gfvRn6sK8TSxUWoDOm9B
+	aBgc5s0AX86f2P41ry8TN0D1Qjvn8Fam83bSFcBCbDGzQ66tGek53PnlvR3Y1pj/Mg
+	aDcFbswjFO6Wy1wyU1l1umsJggLeWmYv0GJGy4w0=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9100FdT032990
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 30 Sep 2019 19:00:15 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE111.ent.ti.com
 	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Mon, 30 Sep 2019 19:00:15 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE103.ent.ti.com
+	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Mon, 30 Sep 2019 18:38:26 -0500
-Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
-	[128.247.22.53])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8UNcQcS125410;
-	Mon, 30 Sep 2019 18:38:26 -0500
-Received: from localhost (irmo.dhcp.ti.com [128.247.58.153])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
-	x8UNcPZ09883; Mon, 30 Sep 2019 18:38:25 -0500 (CDT)
-From: Suman Anna <s-anna@ti.com>
-To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
-Date: Mon, 30 Sep 2019 18:38:22 -0500
-Message-ID: <20190930233822.31836-1-s-anna@ti.com>
-X-Mailer: git-send-email 2.23.0
+	Frontend Transport; Mon, 30 Sep 2019 19:00:15 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9100EpO113431;
+	Mon, 30 Sep 2019 19:00:15 -0500
+Date: Mon, 30 Sep 2019 20:00:14 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191001000014.GE15230@beryl>
+References: <20190929154335.2646732-1-raj.khem@gmail.com>
+	<20190929154335.2646732-3-raj.khem@gmail.com>
+	<20190930183244.GB12684@beryl>
+	<83d37389-25a3-bc84-1a98-3e5670dc25f6@gmail.com>
+	<20190930204356.GA15230@beryl>
 MIME-Version: 1.0
+In-Reply-To: <20190930204356.GA15230@beryl>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: Suman Anna <s-anna@ti.com>
-Subject: [thud/master PATCH] pru-icss: fix build warnings for j7-evm
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 3/3] beaglebone-getting-started: Mention CC-BY-SA-3.0 and correct GPL version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,58 +71,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Sep 2019 23:38:28 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 01 Oct 2019 00:00:17 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-The rpmsg-echo firmwares are not supported for Tx_PRU cores on
-J721E SoCs, these cores only support the Halt images. So suppress
-the build warnings around Tx_PRU rpmsg-echo firmwares by limiting
-the default ALTERNATIVES and updating the list for just the
-pru-icss-halt package.
+On Mon, Sep 30, 2019 at 04:43:56PM -0400, Denys Dmytriyenko wrote:
+> On Mon, Sep 30, 2019 at 01:40:23PM -0700, Khem Raj wrote:
+> > 
+> > 
+> > On 9/30/19 11:32 AM, Denys Dmytriyenko wrote:
+> > > On Sun, Sep 29, 2019 at 08:43:35AM -0700, Khem Raj wrote:
+> > >> This is as per
+> > >> https://github.com/jadonk/beaglebone-getting-started/blob/master/LICENSE.txt
+> > > 
+> > > You are looking at the latest LICENSE file, while the recipe hasn't updated 
+> > > its SRCREV since early 2012, back when beagleboard.org was still active in OE. 
+> > > Specifically, GPLv3+ was added in 2013:
+> > > https://github.com/jadonk/beaglebone-getting-started/commits/master/LICENSE.txt
+> > > 
+> > > We don't use this package, but I kept it in case someone still needs it. I did 
+> > > put a README with a note in that directory:
+> > > http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-ti/README
+> > > 
+> > > Probably, this can be updated to the latest, as part of fixing the LICENSE? :)
+> > > 
+> > 
+> > The README should be specific about which recipes are not maintained, it
+> > has a general statement which gives a scare, if the recipe is not
+> > maintained then this should be removed or atleast blacklisted if you
+> > still want to keep it around.
+> > 
+> > I was trying to help clearing up license warnings, other than that I
 
-Signed-off-by: Suman Anna <s-anna@ti.com>
----
-Incremental fix for
- [thud]   1a83bdda9038 ("pru-icss: add J721E Support")
- [master] 494495c4577f ("pru-icss: add J721E Support")
+BTW, the only warning I see for this recipe, is that "others" license is 
+unknown. Your patch was not addressing it - should I just remove "others" 
+from the list, as this was back from the days when the list wasn't checked 
+so strictly?
 
- recipes-bsp/pru/pru-icss_git.bb | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-index b2642fbcc821..6508b6c2bcf3 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -11,7 +11,7 @@ SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-pa
- SRCREV = "1ff0393b3b9454fe9c58399c1b5d2db511e8049c"
- 
- PV = "5.5.0"
--PR = "r0"
-+PR = "r1"
- 
- require recipes-ti/includes/ti-paths.inc
- 
-@@ -165,7 +165,7 @@ PRU_ICSS_ALTERNATIVES_ti43x    = "am437x-pru0_0-fw am437x-pru0_1-fw am437x-pru1_
- PRU_ICSS_ALTERNATIVES_omap-a15 = "am57xx-pru1_0-fw am57xx-pru1_1-fw am57xx-pru2_0-fw am57xx-pru2_1-fw"
- PRU_ICSS_ALTERNATIVES_k2g      = "k2g-pru0_0-fw k2g-pru0_1-fw k2g-pru1_0-fw k2g-pru1_1-fw"
- PRU_ICSS_ALTERNATIVES_am65xx   = "am65x-pru0_0-fw am65x-pru0_1-fw am65x-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw am65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1-fw"
--PRU_ICSS_ALTERNATIVES_j7-evm   = "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw j7-txpru0_0-fw j7-txpru0_1-fw j7-txpru1_0-fw j7-txpru1_1-fw"
-+PRU_ICSS_ALTERNATIVES_j7-evm   = "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw"
- 
- # Set up link names for the firmwares
- ALTERNATIVE_LINK_NAME[am335x-pru0-fw] = "/lib/firmware/am335x-pru0-fw"
-@@ -215,6 +215,9 @@ ALTERNATIVE_LINK_NAME[j7-txpru1_1-fw] = "/lib/firmware/j7-txpru1_1-fw"
- # Create the pru-icss-halt firmware alternatives
- ALTERNATIVE_pru-icss-halt = "${PRU_ICSS_ALTERNATIVES}"
- 
-+# Only Halt firmware images are supported for the Tx_PRU cores
-+ALTERNATIVE_pru-icss-halt_append_j7-evm = " j7-txpru0_0-fw j7-txpru0_1-fw j7-txpru1_0-fw j7-txpru1_1-fw"
-+
- ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru0-fw] = "/lib/firmware/pru/PRU_Halt.out"
- ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru1-fw] = "/lib/firmware/pru/PRU_Halt.out"
- 
--- 
-2.23.0
-
+> > dont have any interest in this recipe.
+> > 
+> > I can send a patch to blacklist it if thats fine with you.
+> 
+> Fair enough, let me take a look at it myself.
+> 
+> 
+> > >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > >> ---
+> > >>  recipes-ti/beagleboard/beaglebone-getting-started.bb | 2 +-
+> > >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >>
+> > >> diff --git a/recipes-ti/beagleboard/beaglebone-getting-started.bb b/recipes-ti/beagleboard/beaglebone-getting-started.bb
+> > >> index 6c61a4e9..c86e3518 100644
+> > >> --- a/recipes-ti/beagleboard/beaglebone-getting-started.bb
+> > >> +++ b/recipes-ti/beagleboard/beaglebone-getting-started.bb
+> > >> @@ -4,7 +4,7 @@ PR = "r21"
+> > >>  
+> > >>  inherit allarch
+> > >>  
+> > >> -LICENSE = "GPLv2+ & MIT & PD & others"
+> > >> +LICENSE = "CC-BY-SA-3.0 & GPLv3+ & MIT & PD & others"
+> > >>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
+> > >>  
+> > >>  SRCREV = "6c548a307c948b28a99d48fd17d9790b56182196"
+> > >> -- 
+> > >> 2.23.0
+> > >>
+> > >> -- 
+> > >> _______________________________________________
+> > >> meta-ti mailing list
+> > >> meta-ti@yoctoproject.org
+> > >> https://lists.yoctoproject.org/listinfo/meta-ti
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
