@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 92FCBE00D86; Tue,  1 Oct 2019 17:04:31 -0700 (PDT)
+	id 516BBE00D7E; Tue,  1 Oct 2019 17:04:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D1375E00DA3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 094B3E00DA4
 	for <meta-ti@yoctoproject.org>; Tue,  1 Oct 2019 17:04:26 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9204POI033986
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9204P9J033991
 	for <meta-ti@yoctoproject.org>; Tue, 1 Oct 2019 19:04:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1569974665;
-	bh=HjOBHWbf0A65vna0qLpy9kjhlbgUrWKPQwr1tKiy9G0=;
+	bh=U4peM3u+lYW5nMpelrzyXh3zu0eCvIUTWw4VTQ3dZiw=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=YRVUbCCdK1XWHKT6fJBaeUqRbaWtvKiYCqJf7FR4veQqRXF8wCZ/wyaIEz59Kvtr7
-	QNVhIDnLFzSaPryc5WNQ5uIU9wS9Z+7t/kiCKlyXJQMBG6E8V+NOb0lm6tMbyVrK7C
-	TLvtKkpvk0M8cO/YoKguxyf9ltVP5ravE/p1r6i8=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9204PK1093775
+	b=vP81b955OMgIGCCo6O0j7oWxNLI+nxOHhTPd+IB7Thp6RKAl0G8Ic/yPKuzwOrJ2Y
+	2jzod3c5zHbrJKNl1sKF4nX87BdID6EDcPgBLfC383bnMOwegdg6h4VMroJTDmbEAJ
+	I1Bw3NPrRLRqD4Vxfe2VTpkq5Ysxl7LlG/UkrwTY=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9204PUn093779
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@yoctoproject.org>; Tue, 1 Oct 2019 19:04:25 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE108.ent.ti.com
-	(10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 1 Oct 2019 19:04:14 -0500
+	Tue, 1 Oct 2019 19:04:15 -0500
 Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
 	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 1 Oct 2019 19:04:14 -0500
+	Frontend Transport; Tue, 1 Oct 2019 19:04:15 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9204JGn007494
-	for <meta-ti@yoctoproject.org>; Tue, 1 Oct 2019 19:04:24 -0500
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9204JGp007494
+	for <meta-ti@yoctoproject.org>; Tue, 1 Oct 2019 19:04:25 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 1 Oct 2019 20:04:09 -0400
-Message-ID: <1569974651-63945-26-git-send-email-m-radhakrishnan2@ti.com>
+Date: Tue, 1 Oct 2019 20:04:11 -0400
+Message-ID: <1569974651-63945-28-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1569974651-63945-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1569974651-63945-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 25/27] profiling-rtos: SRCREV update to 01.00.00.10
+Subject: [thud/master][PATCH 27/27] ti-pdk-build-rtos: SRCREV update to 01.00.00.14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,31 +71,32 @@ X-List-Received-Date: Wed, 02 Oct 2019 00:04:32 -0000
 Content-Type: text/plain
 
 ---
- recipes-bsp/utils-rtos/profiling-rtos_git.bb | 6 +++---
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/utils-rtos/profiling-rtos_git.bb b/recipes-bsp/utils-rtos/profiling-rtos_git.bb
-index 4acb5d8..134a0f9 100644
---- a/recipes-bsp/utils-rtos/profiling-rtos_git.bb
-+++ b/recipes-bsp/utils-rtos/profiling-rtos_git.bb
-@@ -12,14 +12,14 @@ PROFILING_GIT_URI = "git://git.ti.com/keystone-rtos/utils.git"
- PROFILING_GIT_PROTOCOL = "git"
- PROFILING_GIT_BRANCH = "master"
+diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+index 35b3fea..c403642 100644
+--- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
++++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;beginline=1;endline=31;md5=92ab6f5e10f150
  
--# Below commit ID corresponds to "DEV.UTILS.01.00.00.09"
--PROFILING_SRCREV = "84802d7a787a53f33a24254069c90208c5d87d1e"
-+# Below commit ID corresponds to "DEV.UTILS.01.00.00.10"
-+PROFILING_SRCREV = "dbd2683d80326165d078282b1ef7dce44667e972"
+ require recipes-ti/includes/ti-paths.inc
  
- BRANCH = "${PROFILING_GIT_BRANCH}"
- SRC_URI = "${PROFILING_GIT_URI};protocol=${PROFILING_GIT_PROTOCOL};branch=${BRANCH}"
- 
- SRCREV = "${PROFILING_SRCREV}"
--PV = "01.00.00.09"
-+PV = "01.00.00.10"
+-PV = "01.00.00.13B"
++PV = "01.00.00.14"
  PR = "r0"
  
- S = "${WORKDIR}/git/profiling"
+ PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
+ PDK_BUILD_GIT_PROTOCOL = "git"
+ PDK_BUILD_GIT_BRANCH = "master"
+ 
+-# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.13B"
+-PDK_BUILD_SRCREV = "6f627e137f27a1e819df944e92630552b513df0b"
++# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.14"
++PDK_BUILD_SRCREV = "21a7a453bed44e383464fa709b206064c2e0caa0"
+ 
+ BRANCH = "${PDK_BUILD_GIT_BRANCH}"
+ SRC_URI = "\
 -- 
 1.9.1
 
