@@ -1,6 +1,6 @@
 Return-Path: <m-radhakrishnan2@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 35D47E00D94; Sun,  6 Oct 2019 09:53:01 -0700 (PDT)
+	id EF5FDE00DB6; Sun,  6 Oct 2019 09:53:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B1A4E00D97
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F01C2E00D99
 	for <meta-ti@yoctoproject.org>; Sun,  6 Oct 2019 09:52:57 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x96GquCD100618
-	for <meta-ti@yoctoproject.org>; Sun, 6 Oct 2019 11:52:56 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x96GqvLf100622
+	for <meta-ti@yoctoproject.org>; Sun, 6 Oct 2019 11:52:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1570380776;
-	bh=41FMzPkKUcheKEH5shB3qnzBt2n8TSsgVZqzB3FvnYs=;
+	s=ti-com-17Q1; t=1570380777;
+	bh=eTljR1uLtZaJu/lfOJobKb+TaZ+Td32df9O/UbKsRxM=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=VcGVZ2L2OuQR1Ksb+oj3WV4q99yespe4xUqUUwJRj2IGdUTWyiZeRCb0v6KMmb303
-	96RkSpTfYxlZjjpzpDAn5O9gx5AFJ/9Q2Y2U+ERXaKTnvs5P7XpkUzHTpX5Lfhl0sf
-	Unpp0ADFWZ2pnvn9YLl9ZfmyDU2x6J1DyggfwCyg=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x96Gqup1037689
+	b=mVayj5L5Q/qdN8HLbMD47csWYBRhx2seg0NwT5DPUXPopXM7Fu2zvYIkho2uz4tpo
+	rmXpqnjcie3eImkXLO40lKtJi1/bMWpIpwvUMoX+NjxmojxsIIM13OD3j/H57c+Ijp
+	JXo3h3GBjpoT7OZkWaM9IMokyQvjOniENUlRRfXs=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x96Gqv7h037704
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Sun, 6 Oct 2019 11:52:56 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE115.ent.ti.com
-	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Sun, 6 Oct 2019 11:52:57 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Sun, 6 Oct 2019 11:52:56 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE100.ent.ti.com
-	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+	Sun, 6 Oct 2019 11:52:55 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Sun, 6 Oct 2019 11:52:56 -0500
+	Frontend Transport; Sun, 6 Oct 2019 11:52:55 -0500
 Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x96GqsK6103999
-	for <meta-ti@yoctoproject.org>; Sun, 6 Oct 2019 11:52:56 -0500
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x96GqsKA103999
+	for <meta-ti@yoctoproject.org>; Sun, 6 Oct 2019 11:52:57 -0500
 From: Mahesh Radhakrishnan <m-radhakrishnan2@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Sun, 6 Oct 2019 12:52:47 -0400
-Message-ID: <1570380771-1351-10-git-send-email-m-radhakrishnan2@ti.com>
+Date: Sun, 6 Oct 2019 12:52:51 -0400
+Message-ID: <1570380771-1351-14-git-send-email-m-radhakrishnan2@ti.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1570380771-1351-1-git-send-email-m-radhakrishnan2@ti.com>
 References: <1570380771-1351-1-git-send-email-m-radhakrishnan2@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 09/13] pruss-lld: SRCREV update to 01.00.00.15A
+Subject: [thud/master][PATCH 13/13] ti-pdk-build-rtos: SRCREV update to 01.00.00.14A
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,34 +67,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Oct 2019 16:53:01 -0000
+X-List-Received-Date: Sun, 06 Oct 2019 16:53:03 -0000
 Content-Type: text/plain
 
 ---
- recipes-bsp/pruss-lld/pruss-lld.inc | 6 +++---
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
-index 313254b..278a630 100644
---- a/recipes-bsp/pruss-lld/pruss-lld.inc
-+++ b/recipes-bsp/pruss-lld/pruss-lld.inc
-@@ -9,13 +9,13 @@ PRUSS_LLD_GIT_PROTOCOL = "git"
- PRUSS_LLD_GIT_BRANCH = "master"
- PRUSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/pruss"
+diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+index c403642..2e1a557 100644
+--- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
++++ b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;beginline=1;endline=31;md5=92ab6f5e10f150
  
--# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.15"
--PRUSS_LLD_SRCREV = "b4f0059fafebef66967e6e0e5f2559de2082145a"
-+# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.15A"
-+PRUSS_LLD_SRCREV = "914a5aab5080413fe848fa2903ace4d15e43699a"
+ require recipes-ti/includes/ti-paths.inc
  
- BRANCH = "${PRUSS_LLD_GIT_BRANCH}"
- SRC_URI = "${PRUSS_LLD_GIT_URI};destsuffix=${PRUSS_LLD_GIT_DESTSUFFIX};protocol=${PRUSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-PV = "01.00.00.14"
++PV = "01.00.00.14A"
+ PR = "r0"
  
- SRCREV = "${PRUSS_LLD_SRCREV}"
--PV = "01.00.00.15"
-+PV = "01.00.00.15A"
- INC_PR = "r0"
+ PDK_BUILD_GIT_URI = "git://git.ti.com/keystone-rtos/processor-pdk-build.git"
+ PDK_BUILD_GIT_PROTOCOL = "git"
+ PDK_BUILD_GIT_BRANCH = "master"
  
+-# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.14"
+-PDK_BUILD_SRCREV = "21a7a453bed44e383464fa709b206064c2e0caa0"
++# Below Commit ID corresponds to "DEV.PDK_BUILD.01.00.00.14A"
++PDK_BUILD_SRCREV = "0a459346f029fb33a4a808a206382ef3c1b8086f"
+ 
+ BRANCH = "${PDK_BUILD_GIT_BRANCH}"
+ SRC_URI = "\
 -- 
 1.9.1
 
