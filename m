@@ -1,6 +1,6 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0B7D9E00D9D; Wed,  9 Oct 2019 10:38:30 -0700 (PDT)
+	id 4821EE00D8F; Wed,  9 Oct 2019 11:33:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,50 +10,49 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5F791E00790
-	for <meta-ti@yoctoproject.org>; Wed,  9 Oct 2019 10:38:28 -0700 (PDT)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x99HcSbI028869
-	for <meta-ti@yoctoproject.org>; Wed, 9 Oct 2019 12:38:28 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AEEB4E00D8B
+	for <meta-ti@yoctoproject.org>; Wed,  9 Oct 2019 11:33:03 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x99IX2Sd048833
+	for <meta-ti@yoctoproject.org>; Wed, 9 Oct 2019 13:33:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1570642708;
-	bh=YLdMZDXNyfLml2AcQK2LyzHe4kkLRq1rNl7NqOaNraw=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=kqIHOh4oeXRW7LS0WF1LUf8pd+/1ZcVgjNtroBiiTT4APuttdkoH2yA/lo2hwvyT4
-	0tPa99oESHzuYW4HZT1JHTCbytYRABR3n4t9RMO0KjIffQBpD7O4vTPsRE+b7RFMqc
-	/o+NIJ6FoucQChM1b22MZxHtD0obdQahWp032WUE=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x99HcSKl047513
+	s=ti-com-17Q1; t=1570645982;
+	bh=hWXNfMVZsmjg+9EWVHY8GVsMNiaMUVQ5YIwqQf0T5JI=;
+	h=From:To:CC:Subject:Date;
+	b=NkE92qrzglV7JbQ+LKrHE9l9brW9fguMkVOFkyk1fl6iEFu7V2kaRpPlUi7eQFAe9
+	zgUOuhR0/JKvLdWs5ROmjIMdlydBh4vXGy62idc3ZIaX6R/EReHiVhGjI0SLAHg6rh
+	/4SuU4juShVU2XwGhqXk3bb73ZdCwq0jLXq6bJkk=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x99IX2QE094152
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 9 Oct 2019 12:38:28 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE110.ent.ti.com
-	(157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 9 Oct 2019 13:33:02 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 9 Oct 2019 12:38:28 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 9 Oct 2019 13:32:58 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
+	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 9 Oct 2019 12:38:25 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x99HcSVu045570;
-	Wed, 9 Oct 2019 12:38:28 -0500
-From: Dan Murphy <dmurphy@ti.com>
+	Frontend Transport; Wed, 9 Oct 2019 13:33:01 -0500
+Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x99IX1De057863;
+	Wed, 9 Oct 2019 13:33:01 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 9 Oct 2019 12:38:08 -0500
-Message-ID: <20191009173808.21562-2-dmurphy@ti.com>
-X-Mailer: git-send-email 2.22.0.214.g8dca754b1e
-In-Reply-To: <20191009173808.21562-1-dmurphy@ti.com>
-References: <20191009173808.21562-1-dmurphy@ti.com>
+Date: Wed, 9 Oct 2019 14:33:00 -0400
+Message-ID: <1570645980-50960-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH 2/2] u-boot-ti-staging: update to ti2019.04-rc4 tag
+Subject: [thud/master/ti2019.03][PATCH] ti-ipc: Update commit id for latest code for 3.50.04.07
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,30 +65,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2019 17:38:31 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 09 Oct 2019 18:33:04 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Include fixes issues found with static analysis
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index 982f060d..029b5849 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-common.inc | 2 +-
+ recipes-ti/ipc/ti-ipc.inc        | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 365486e..5f4a475 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,5 +1,5 @@
+ PV = "3.50.04.07"
+-INC_PR = "r0"
++INC_PR = "r1"
  
--PR = "r26"
-+PR = "r27"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_HOST ?= "null"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 000c5c0..2111f6b 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.50"
  
- BRANCH = "ti-u-boot-2019.01"
+-#Corresponds to 3.50.04.07
+-TI_IPC_SRCREV = "129b6f44c50cbe760a5c1481b34b323b7a42ead5"
++#Corresponds to 3.50.04.07A
++TI_IPC_SRCREV = "9d26f80f2d7bf85d46e431a3a9ec85d3dfbc74dd"
  
--SRCREV = "5e08a7d116d05c1efd63695ec371c6cd8a5d9f06"
-+SRCREV = "2ba748d301539a7ae84c34d76aed5f675cf20094"
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 -- 
-2.22.0.214.g8dca754b1e
+1.9.1
 
 
