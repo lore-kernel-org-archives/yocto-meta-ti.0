@@ -1,41 +1,66 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1CB37E00D77; Thu, 17 Oct 2019 18:13:50 -0700 (PDT)
+	id 0758AE00A4C; Mon, 21 Oct 2019 14:31:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/,
-	low *      trust
-	*      [64.68.198.64 listed in list.dnswl.org]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF164E00D5F
-	for <meta-ti@yoctoproject.org>; Thu, 17 Oct 2019 18:13:45 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 02B9740BEC;
-	Fri, 18 Oct 2019 01:13:45 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id pnKEWhWeC3sl; Fri, 18 Oct 2019 01:13:44 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 989F940BE5;
-	Fri, 18 Oct 2019 01:13:43 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id D0B9817429C;
-	Thu, 17 Oct 2019 21:13:42 -0400 (EDT)
-From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Thu, 17 Oct 2019 21:13:42 -0400
-Message-Id: <1571361222-36904-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [master][PATCH] ti-ipc: update 0001-Add-kernel-build-dir.patch
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.222.196 listed in list.dnswl.org]
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D90A5E00973
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2019 14:31:06 -0700 (PDT)
+Received: by mail-qk1-f196.google.com with SMTP id u22so14227268qkk.11
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2019 14:31:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=e8yAOOcdRSq3Ab32AKs9nwSNAgaxMmv4UsWFkDmMZTI=;
+	b=eqdqIg/EyGYIe0exxDjNbgd7WOjwbkdVzDcg9MITczPgKC3qNS7v1lTaeLMPeBayRK
+	cnUCyBYApMLt9ad+AZ+JxjTArCfsD+XE+eE3BaNiSBznLRsfHNJOA1/5fa9JwlC9WTZ6
+	DyvLRXyorv4rHmbc9jDioU//8myi52zzmqPpe3fy8tFuTnzyENxNTjEpaLnC/Ep0eq3a
+	eZHuABufmgnkWOQBoo/TsOvQZBMMASJlfgOrw6gSUmDuJ139B3Q74mNXRUtgq3rUNW3t
+	YXP94dCfitymoAP7y2EJGQnzsQFkEdaAOk91vx0tfhXIhxPdF+WHM+kd0cwsLuSjoJh3
+	7KGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=e8yAOOcdRSq3Ab32AKs9nwSNAgaxMmv4UsWFkDmMZTI=;
+	b=HHpwwQ5aqemOKUb35F1u4+uTtl8KjsaoODx5fKkcFQvKV4JtnR7FvqCOamLAW+QokG
+	lsDkJw7zxE2R1+MKgl3WSToN20QWi0nQSL3Vm9pkxqCYP82hjYLu9gzp+BfNapoNGXtu
+	DHM8loi8+Ikd3Vk1fznVEzeS6v56tIoWd300lVx7Llp4Brybeaxxs+uS//Suij3U3TSO
+	pdS3dQA3C0YFaD+JGIaBcZaDTPKeNY2Wylocvy1k/zm77kQT63qsqkpGUIWQcwqEobWE
+	BN+x8dDo0reRQeOoeLPwQCkqyDAx11BQh/I3mHtO+CDJvnJgAaGPXpMUW0CBUvK9ZfWV
+	Kr5A==
+X-Gm-Message-State: APjAAAVQ4KC7rPsKvIYiAxxUL/E3PUfmCi178iUKNB6+oc/q/QGry54k
+	QwdpEu4HRlI3wU0Ioue72NnghRgQNPIPgUdbGQ3FFAQ79G3ILA==
+X-Google-Smtp-Source: APXvYqw0J/bSfZgAoHx9YjWwVdJs6PPstlFHs+0G2eG8fQrXPhLNE09JYt39Nk+i8PMeP2I3qd8F9ee1JTMXbTwyL/U=
+X-Received: by 2002:a05:620a:1f6:: with SMTP id
+	x22mr20130519qkn.474.1571693464877; 
+	Mon, 21 Oct 2019 14:31:04 -0700 (PDT)
+MIME-Version: 1.0
+References: <1571251103-152990-1-git-send-email-santa@ti.com>
+In-Reply-To: <1571251103-152990-1-git-send-email-santa@ti.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 21 Oct 2019 14:30:37 -0700
+Message-ID: <CAMKF1sq_OGPzX+qr8d_k3u9Sx1MDHnjYXY5W9qrHerNyCK0pcA@mail.gmail.com>
+To: Santhana Bharathi <santa@ti.com>
+Cc: srk@ti.com, grygorii.strashko@ti.com, badri@ti.com, prasad.jondhale@ti.com,
+	nsekhar@ti.com, meta-ti@yoctoproject.org
+Subject: Re: [thud][PATCH V1] cpsw9g-eth-fw: update ethernet firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,64 +73,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 01:13:50 -0000
+X-List-Received-Date: Mon, 21 Oct 2019 21:31:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+I am getting this error
 
-diff --git a/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch b/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch
-index e612ddc..71d5b2b 100644
---- a/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch
-+++ b/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch
-@@ -1,4 +1,4 @@
--From 7d9f57983c6d14ac14f26987eddc555ea5c75d61 Mon Sep 17 00:00:00 2001
-+From c3ada6bf49e6fcf7bc49e5bf09754f384838ca6a Mon Sep 17 00:00:00 2001
- From: Denys Dmytriyenko <denys@ti.com>
- Date: Mon, 27 Jul 2015 11:51:52 -0400
- Subject: [PATCH] Add kernel build dir
-@@ -17,18 +17,18 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-  4 files changed, 14 insertions(+), 1 deletion(-)
- 
- diff --git a/configure.ac b/configure.ac
--index f0b4b61..9b5d07c 100644
-+index 4d4a559..84ac78b 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -71,6 +71,7 @@ AC_SUBST([AM_LDFLAGS])
-- AC_ARG_VAR(PLATFORM, Platform to build. Options are: 'OMAPL138' 'OMAP54XX' '66AK2E' 'TCI6630' 'TCI6636' 'TCI6638' '66AK2G' and 'DRA7XX'. If not defined all platforms will be built.)
-+ AC_ARG_VAR(PLATFORM, Platform to build. Options are: 'OMAPL138' 'OMAP54XX' '66AK2E' 'TCI6630' 'TCI6636' 'TCI6638' '66AK2G' 'DRA7XX' and 'AM65XX'. If not defined all platforms will be built.)
-  AC_ARG_VAR(CMEM_INSTALL_DIR, Installation path directory to the CMEM libraries)
-  AC_ARG_VAR(KERNEL_INSTALL_DIR, Installation path to the Linux kernel.)
- +AC_ARG_VAR(KERNEL_BUILD_DIR, Path to the Linux kernel build artifacts.)
-  AC_ARG_VAR(AF_RPMSG, Address Family used by the RPMSG driver)
-  AC_ARG_VAR(DRM_PREFIX, Installation location to the DRM library.)
-  
--@@ -111,6 +112,7 @@ AS_IF([test "x$PLATFORM" = "x"], [CMEM_INSTALL_DIR=])
-+@@ -113,6 +114,7 @@ AS_IF([test "x$PLATFORM" = "x"], [CMEM_INSTALL_DIR=])
-  AC_SUBST([PLATFORM])
-  AC_SUBST([CMEM_INSTALL_DIR])
-  AC_SUBST([KERNEL_INSTALL_DIR])
-@@ -36,7 +36,7 @@ index f0b4b61..9b5d07c 100644
-  AC_SUBST([AF_RPMSG])
-  AC_SUBST([DRM_PREFIX])
-  
--@@ -127,6 +129,7 @@ AM_CONDITIONAL([DRA7XX], [test "x$PLATFORM" = "xDRA7XX"])
-+@@ -130,6 +132,7 @@ AM_CONDITIONAL([AM65XX], [test "x$PLATFORM" = "xAM65XX"])
-  AM_CONDITIONAL([CMEM], [test "x$CMEM_INSTALL_DIR" != "x"])
-  AM_CONDITIONAL([KDIR], [test "x$KERNEL_INSTALL_DIR" != "x"])
-  AM_CONDITIONAL([KERNEL_INSTALL_DIR], [test -n "$KERNEL_INSTALL_DIR"])
-@@ -44,7 +44,7 @@ index f0b4b61..9b5d07c 100644
-  AM_CONDITIONAL([DRM], [test "x$DRM_PREFIX" != "x"])
-  AM_CONDITIONAL([AF_RPMSG], [test -n "$AF_RPMSG"])
-  
--@@ -157,6 +160,9 @@ You have configured to build for the '${PLATFORM}' platform
-+@@ -160,6 +163,9 @@ You have configured to build for the '${PLATFORM}' platform
-  Your KERNEL installation directory is set to:
-      '${KERNEL_INSTALL_DIR}'
-  
--- 
-2.7.4
+Cloning into bare repository
+'TOPDIR/downloads/git2/git.ti.com.glsdk.ti-eth-fw.git'...
+fatal: unable to connect to git.ti.com:
+git.ti.com[0: 198.47.28.207]: errno=Connection refused
 
+
+ERROR: Fetcher failure for URL:
+'git://git.ti.com/glsdk/ti-eth-fw.git;protocol=git;branch=master'.
+Unable to fetch URL from any source.
+
+On Wed, Oct 16, 2019 at 11:41 AM Santhana Bharathi <santa@ti.com> wrote:
+>
+>  * Updated Ethernet firmware binary for 1.0 release
+>
+> Signed-off-by: Santhana Bharathi <santa@ti.com>
+> ---
+>  recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+> index a521edf..5598e42 100644
+> --- a/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+> +++ b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+> @@ -11,7 +11,7 @@ inherit update-alternatives
+>
+>  PROTOCOL = "git"
+>  BRANCH = "master"
+> -SRCREV = "7f3af9b0b4c04edcb68c49cb64fcf0d65a860457"
+> +SRCREV = "792c06d9a0f2b9d4b150bce4651bdaae2413b28d"
+>
+>  SRC_URI = "git://git.ti.com/glsdk/ti-eth-fw.git;protocol=${PROTOCOL};branch=${BRANCH}"
+>
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
