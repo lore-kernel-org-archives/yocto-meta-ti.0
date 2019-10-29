@@ -1,6 +1,6 @@
-Return-Path: <e-ruei1@ti.com>
+Return-Path: <g-tammana@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1B820E00D9E; Tue, 29 Oct 2019 06:20:30 -0700 (PDT)
+	id DF3E9E00DEF; Tue, 29 Oct 2019 11:32:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,49 +11,55 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CFE92E00D8F
-	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 06:20:28 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9TDKSX4095687
-	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 08:20:28 -0500
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A8E5E00DA3
+	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 11:32:29 -0700 (PDT)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9TIWTvm074642
+	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 13:32:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1572355228;
-	bh=zfpTU5buIVRHQAxfv1ZavZ718F0bXsPymQDAl/e4kI8=;
-	h=From:To:Subject:Date;
-	b=LdivuKkj/0PmZ0Jjz2J4CvIYrEnCLb758TKL+YhIn7/HHheose+8niEeLj/TWBuyt
-	zVkBE/VsT5iRY6VY9zeCaksiVw2+mB0J2pPSc+Og3dglGOu7+fT2E1VJew7mWBXRyI
-	nMPMBLmid2cx3etr97jFro0v7dmj3vyGzZRXYEXc=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9TDKQX5106355
-	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 08:20:26 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1572373949;
+	bh=zJ+dEWrcbpbcprb0Mq+8NhCnjjx6JLRcIkRgBBGFrBk=;
+	h=From:To:CC:Subject:Date;
+	b=qGeEzIQqbaNcQ52nLPIFmzB6+Lw5EijkF6T+338UMsk0RA8mZawT6p2EhKN5hldJ6
+	uDwVPByVxlwZUUpB843LipvETO3WuTkuJ+q12dlWyice96shNthkEWhMZIpSbev6Wp
+	1dyTPpLGBc0LpyQfNQ4fDNRBSC1pA2SVmXxZBMFQ=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9TIWTAr117839
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 13:32:29 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 29 Oct 2019 08:20:14 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
-	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 29 Oct 2019 13:32:17 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE101.ent.ti.com
+	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 29 Oct 2019 08:20:14 -0500
-Received: from UDA0850410.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9TDKQFu072033
-	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 08:20:26 -0500
-From: Eric Ruei <e-ruei1@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 29 Oct 2019 09:20:20 -0400
-Message-ID: <20191029132020.8891-1-e-ruei1@ti.com>
-X-Mailer: git-send-email 2.17.1
+	Frontend Transport; Tue, 29 Oct 2019 13:32:16 -0500
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com
+	[128.247.22.53])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9TIWTIG094192;
+	Tue, 29 Oct 2019 13:32:29 -0500
+Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com
+	[128.247.77.97])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id
+	x9TIWSu09906; Tue, 29 Oct 2019 13:32:28 -0500 (CDT)
+From: Gowtham Tammana <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 29 Oct 2019 13:34:24 -0500
+Message-ID: <20191029183424.20386-1-g-tammana@ti.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] ti-sgx-ddk-um: update SRCREV to pick up Mesa-based EGL/GLES libraries
+Cc: Erick Narvaez <a0226667@ti.com>
+Subject: [thud][PATCH] ti-img-rogue-driver: Update srcrev to pick latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,53 +72,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 13:20:30 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 18:32:31 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This is the initial step toward Mesa-based EGL/GLES libraries which
-support all the required EGL 1.5 extensions. We plan to provide a
-Mesa-pvr recipe to build Mesa from source and SGX/DDK patches where
-ti-sgx-ddk-um shall provide the EGL/GLES plugins only at the next step.
+Picks the following changes
+  - enable hwr by default
+  - mips page table setup fix
 
-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 ---
- recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ .../powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-index 7a6f013e..3991d917 100644
---- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-+++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -11,7 +11,7 @@ PR = "r34"
- BRANCH = "ti-img-sgx/thud/${PV}"
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
+index f412d6aa..2f4b7ac5 100644
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=15;endline=20;md5=0403c7dea01a2b8232
  
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
--SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
-+SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
+ inherit module
  
- TARGET_PRODUCT_omap-a15 = "jacinto6evm"
- TARGET_PRODUCT_ti33x = "ti335x"
-@@ -47,7 +47,9 @@ S = "${WORKDIR}/git"
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "e"
+ PR = "${MACHINE_KERNEL_PR}"
  
- do_install () {
-     oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
--    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
-+    ln -sf libGLESv2.so ${D}${libdir}/libGLESv2.so.1
-+
-+    rm -rf ${D}${includedir}/GL
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -22,7 +22,7 @@ SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH} \
+ "
+ S = "${WORKDIR}/git"
  
-     chown -R root:root ${D}
- }
-@@ -58,7 +60,7 @@ FILES_${PN} +=  "${includedir}/*"
- FILES_${PN} +=  "${sysconfdir}/*"
+-SRCREV = "f718a8251eb02c2493a2361c509a29ce634beadc"
++SRCREV = "fe40a51f33987c59aca300f8a976a9a9c8112703"
  
- PACKAGES =+ "${PN}-plugins"
--FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
-+FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLESv1_CM.so ${libdir}/libGLES_CM.so ${libdir}/libGLESv1_PVR_MESA.so ${libdir}/libGLESv2_PVR_MESA.so"
- RDEPENDS_${PN} += "${PN}-plugins"
- 
- ALLOW_EMPTY_${PN}-plugins = "1"
+ PVR_SOC = "j721e_linux"
+ PVR_BVNC = "22.104.208.318"
 -- 
-2.17.1
+2.23.0
 
 
