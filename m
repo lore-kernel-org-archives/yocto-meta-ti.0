@@ -1,6 +1,6 @@
-Return-Path: <afd@ti.com>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 08C74E00D9F; Wed, 30 Oct 2019 08:14:39 -0700 (PDT)
+	id 1F265E00D99; Wed, 30 Oct 2019 08:14:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -9,7 +9,7 @@ X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
@@ -18,35 +18,28 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A4CDE00D83
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 08:14:37 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9UFEbPd029688
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 10:14:37 -0500
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03AE4E00E07
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 08:14:49 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9UFEnD8121680
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 10:14:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1572448477;
-	bh=nUh/yP8A8ZwYuSF391coUQzvc3eYXDpH1sqfMCg05i0=;
+	s=ti-com-17Q1; t=1572448489;
+	bh=PFSb81ibDweMGoM6r1V0ff1WWgRneM+4iOAaJ/vngj8=;
 	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=IU9dpL89gNOr6n7JU3fO0bIP1zUOIhpm5/j8D7rbRK23SfRTI2ruPAOfy/FImKgb3
-	nIArx+4XiW2FWDtYaaa275kQXqRVm6oU7Hl8bQ0XgMUe5p6rynhb7fUkCx6a4dzpb8
-	YYYbVg0oY0UROrdFQKs4m9BHyjP3mKlpA1eJAIKw=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9UFEbte014953
+	b=m6PYie3puvg82kpZES98qO7hTLFVPtauBunAFqBn9N8YbOCNQ2EezLYm7X2bw/ePf
+	7Ew4AVYZvhFj/UGBhEUaxEZK30+wJvSaR4todby466cU4x3j4GJC7kvOwQnKRD/Shh
+	L965MsFNw/A0cmZjt3PH5CJ990HGZlr3m484/0kI=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9UFEni9004048
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 10:14:37 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
-	(10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 10:14:49 -0500
+Received: from [158.218.113.148] (158.218.113.148) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 30 Oct 2019 10:14:24 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE104.ent.ti.com
-	(10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 30 Oct 2019 10:14:24 -0500
-Received: from [10.250.45.147] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9UFEa3T122524;
 	Wed, 30 Oct 2019 10:14:36 -0500
-To: Denys Dmytriyenko <denys@ti.com>
+To: Denys Dmytriyenko <denys@ti.com>, "Andrew F. Davis" <afd@ti.com>
 References: <20191029132020.8891-1-e-ruei1@ti.com>
 	<aceddb08-4720-395a-e454-e0537fd77aee@ti.com>
 	<45b0c0c5-832c-7128-3475-d1b045027151@ti.com>
@@ -55,16 +48,18 @@ References: <20191029132020.8891-1-e-ruei1@ti.com>
 	<d8ba1b4e-5175-96fe-ef71-67736e0cd3d0@ti.com>
 	<445d8d7b-7324-c6da-096d-2d8349bf955d@ti.com>
 	<20191030150639.GQ7518@beryl>
-From: "Andrew F. Davis" <afd@ti.com>
-Message-ID: <fa9568df-2189-8206-66dd-79815b84bf52@ti.com>
-Date: Wed, 30 Oct 2019 11:14:36 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+From: "Ruei, Eric" <a0850410@ti.com>
+Message-ID: <ee3425af-85dc-98ea-78b9-baf405a27f34@ti.com>
+Date: Wed, 30 Oct 2019 11:14:34 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
 	Thunderbird/60.9.0
 MIME-Version: 1.0
 In-Reply-To: <20191030150639.GQ7518@beryl>
+X-Originating-IP: [158.218.113.148]
+X-ClientProxiedBy: DLEE100.ent.ti.com (157.170.170.30) To DLEE113.ent.ti.com
+	(157.170.170.24)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: "Ruei, Eric" <a0850410@ti.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [EXTERNAL] Re: [PATCH] ti-sgx-ddk-um: update SRCREV to pick up Mesa-based EGL/GLES libraries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -78,12 +73,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 15:14:39 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Wed, 30 Oct 2019 15:14:57 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 10/30/19 11:06 AM, Denys Dmytriyenko wrote:
+Hi, guys:
+
+Is there anything that we do regarding the large package size (1M to 8M)?
+
+Best regards,
+
+Eric
+
+On 10/30/2019 11:06 AM, Denys Dmytriyenko wrote:
 > On Wed, Oct 30, 2019 at 10:58:31AM -0400, Andrew F. Davis wrote:
 >> On 10/30/19 10:53 AM, Ruei, Eric wrote:
 >>> On 10/30/2019 9:53 AM, Tammana, Gowtham wrote:
@@ -109,9 +112,9 @@ On 10/30/19 11:06 AM, Denys Dmytriyenko wrote:
 >>>>>>>>
 >>>>>>>> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 >>>>>>>> ---
->>>>>>>>    recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8
+>>>>>>>>     recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8
 >>>>>>>> +++++---
->>>>>>>>    1 file changed, 5 insertions(+), 3 deletions(-)
+>>>>>>>>     1 file changed, 5 insertions(+), 3 deletions(-)
 >>>>>>>>
 >>>>>>>> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
 >>>>>>>> b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
@@ -119,18 +122,18 @@ On 10/30/19 11:06 AM, Denys Dmytriyenko wrote:
 >>>>>>>> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
 >>>>>>>> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
 >>>>>>>> @@ -11,7 +11,7 @@ PR = "r34"
->>>>>>>>    BRANCH = "ti-img-sgx/thud/${PV}"
->>>>>>>>      SRC_URI =
+>>>>>>>>     BRANCH = "ti-img-sgx/thud/${PV}"
+>>>>>>>>       SRC_URI =
 >>>>>>>> "git://git.ti.com/graphics/omap5-sgx-ddk-um-
 >>>>> linux.git;protocol=git;branch=${BRANCH}"
 >>>>>>>>
 >>>>>>>> -SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
 >>>>>>>> +SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
->>>>>>>>      TARGET_PRODUCT_omap-a15 = "jacinto6evm"
->>>>>>>>    TARGET_PRODUCT_ti33x = "ti335x"
+>>>>>>>>       TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+>>>>>>>>     TARGET_PRODUCT_ti33x = "ti335x"
 >>>>>>>> @@ -47,7 +47,9 @@ S = "${WORKDIR}/git"
->>>>>>>>      do_install () {
->>>>>>>>        oe_runmake install DESTDIR=${D}
+>>>>>>>>       do_install () {
+>>>>>>>>         oe_runmake install DESTDIR=${D}
 >>>>>>>> TARGET_PRODUCT=${TARGET_PRODUCT}
 >>>>>>>> -    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
 >>>>>>>> +    ln -sf libGLESv2.so ${D}${libdir}/libGLESv2.so.1
@@ -168,26 +171,14 @@ On 10/30/19 11:06 AM, Denys Dmytriyenko wrote:
 > 
 > Previously DDK only provided headers in these dirs: EGL, GLES, GLES2, KHR, gbm.
 > 
-> And OpenCL required GL headers, hence there was a "hacky" package created 
+> And OpenCL required GL headers, hence there was a "hacky" package created
 > specifically for that:
 > http://arago-project.org/git/?p=meta-arago.git;a=blob;f=meta-arago-extras/recipes-ti/ocl/ocl-gl-headers_git.bb;hb=HEAD
 > 
 > If DDK now properly provides GL headers, the other package can be dropped.
 > 
-> But the question remains - should DDK actually provide GL headers, even though 
+> But the question remains - should DDK actually provide GL headers, even though
 > it doesn't provide full support for it?
 > 
 
-The GL headers are the stock headers provided by Kronos that every GL
-implementation should provide, they often contain definitions for
-unsupported features (even the GLES folders have unsupported extension
-definitions). The exact set of usable features can be determined at
-runtime using various provided methods.
-
-Basically it is up to the EGL layer to report back what the underlying
-implementation supports, it should not be based on the content/age of
-the headers at compile time. Without these headers valid/usable programs
-may not compile on our platform.
-
-Andrew
 
