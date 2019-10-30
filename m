@@ -1,61 +1,58 @@
-Return-Path: <denys@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 22BB6E00D8B; Tue, 29 Oct 2019 16:29:05 -0700 (PDT)
+	id ABEA0E00DEF; Tue, 29 Oct 2019 21:12:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	URI_HEX autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+	*      [198.47.23.248 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D3E5E00C46
-	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 16:29:04 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9TNT3xb047155
-	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 18:29:03 -0500
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B77AE00DEF
+	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 21:12:19 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9U4CIUx026539
+	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 23:12:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1572391743;
-	bh=DY4JBQPF/pdq0ZwwdPlUjS33MAcvLiGbnzVfIlCXrF8=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=qLB9u9UZl2i6amqaSPHZPM/de+HA/NgmjZlJUf4gOgqc3dE+gRvZJkxJsGOE4wJ8A
-	pOfQoiwZbkBj//MD4thzzCxws/9OeFB2SkGif9J84iBwLimVLfvu1dIO8zK4NlRlVY
-	iy8kHujLpSyy2vcv3juBVbi5ulTAljwFM6DkOdgo=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9TNT2sD117115
-	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 18:29:03 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Tue, 29 Oct 2019 18:28:51 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE112.ent.ti.com
+	s=ti-com-17Q1; t=1572408738;
+	bh=Tshli8mVvk+424fd6mgXpcJ6yq7dRorrodfsqgajc/Y=;
+	h=From:To:CC:Subject:Date;
+	b=BGeeMzDY2114VshHB1PlOpvQ/85J6BHMsdCzFyLpCRVwFdWXcYwc9ceEwit3Dh6bI
+	J3np4SVH86WntDMHLIhHjQEX3vDQUceCu8flaNs+ZEkvSsk5bwflJyebjZTKcoP4DS
+	hvuHI5rd6QQcOcBPL/OPrxNlGkUxD6BEIg+agm1Q=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9U4CIvo058592
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2019 23:12:18 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
 	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
+	Tue, 29 Oct 2019 23:12:05 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
+	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Tue, 29 Oct 2019 18:28:51 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9TNT3Hd007985;
-	Tue, 29 Oct 2019 18:29:03 -0500
-Date: Tue, 29 Oct 2019 19:29:01 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Eric Ruei <e-ruei1@ti.com>
-Message-ID: <20191029232901.GK7518@beryl>
-References: <20191029132020.8891-1-e-ruei1@ti.com>
+	Frontend Transport; Tue, 29 Oct 2019 23:12:05 -0500
+Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9U4CHZk111935;
+	Tue, 29 Oct 2019 23:12:18 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 30 Oct 2019 00:12:13 -0400
+Message-ID: <1572408733-51383-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20191029132020.8891-1-e-ruei1@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ti-sgx-ddk-um: update SRCREV to pick up Mesa-based EGL/GLES libraries
+Subject: [thud/master][PATCH] ti-ipc: Update to new version 3.50.04.08
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -68,66 +65,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 23:29:05 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Oct 2019 04:12:20 -0000
+Content-Type: text/plain
 
-On Tue, Oct 29, 2019 at 09:20:20AM -0400, Eric Ruei wrote:
-> This is the initial step toward Mesa-based EGL/GLES libraries which
-> support all the required EGL 1.5 extensions. We plan to provide a
-> Mesa-pvr recipe to build Mesa from source and SGX/DDK patches where
-> ti-sgx-ddk-um shall provide the EGL/GLES plugins only at the next step.
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/ipc/ti-ipc-common.inc | 2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc   | 4 ++--
+ recipes-ti/ipc/ti-ipc.inc        | 4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-Eric,
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 365486e..86a0fd0 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -1,4 +1,4 @@
+-PV = "3.50.04.07"
++PV = "3.50.04.08"
+ INC_PR = "r0"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 25942db..7789b5a 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -24,8 +24,8 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
+ branch=${TI_IPC_METADATA_GIT_BRANCH};\
+ name=${TI_IPC_METADATA_NAME}"
+ 
+-# Corresponds to tag: 3.50.04.07
+-TI_IPC_METADATA_SRCREV = "37e85ff1966f7d093fe2bde2dd9d4546f29d0d80"
++# Corresponds to tag: 3.50.04.08
++TI_IPC_METADATA_SRCREV = "48788ea79190c4995df4c802e8aa4e17f332943d"
+ # Corresponds to tag: 3.50.04.07B
+ TI_IPC_EXAMPLES_SRCREV = "ad3d694e30367a5c04525aef7c6ee9a33896fd59"
+ 
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 000c5c0..d1eaad2 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
+ TI_IPC_GIT_PROTOCOL = "git"
+ TI_IPC_GIT_BRANCH = "3.50"
+ 
+-#Corresponds to 3.50.04.07
+-TI_IPC_SRCREV = "129b6f44c50cbe760a5c1481b34b323b7a42ead5"
++#Corresponds to 3.50.04.08
++TI_IPC_SRCREV = "1d53b856338b86d1979fe09345c0b382913a848a"
+ 
+ BRANCH = "${TI_IPC_GIT_BRANCH}"
+ SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+-- 
+1.9.1
 
-The new binaries are huge. The compressed package went from 900 KB to 8 MB in 
-size and now both AM3 and AM4 won't fit into allocated rootfs size...
-
-
-> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
-> ---
->  recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> index 7a6f013e..3991d917 100644
-> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> @@ -11,7 +11,7 @@ PR = "r34"
->  BRANCH = "ti-img-sgx/thud/${PV}"
->  
->  SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-> -SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
-> +SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
->  
->  TARGET_PRODUCT_omap-a15 = "jacinto6evm"
->  TARGET_PRODUCT_ti33x = "ti335x"
-> @@ -47,7 +47,9 @@ S = "${WORKDIR}/git"
->  
->  do_install () {
->      oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT}
-> -    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
-> +    ln -sf libGLESv2.so ${D}${libdir}/libGLESv2.so.1
-> +
-> +    rm -rf ${D}${includedir}/GL
->  
->      chown -R root:root ${D}
->  }
-> @@ -58,7 +60,7 @@ FILES_${PN} +=  "${includedir}/*"
->  FILES_${PN} +=  "${sysconfdir}/*"
->  
->  PACKAGES =+ "${PN}-plugins"
-> -FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLES_CM.so ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so  ${libdir}/libpvrws_WAYLAND.so"
-> +FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLESv1_CM.so ${libdir}/libGLES_CM.so ${libdir}/libGLESv1_PVR_MESA.so ${libdir}/libGLESv2_PVR_MESA.so"
->  RDEPENDS_${PN} += "${PN}-plugins"
->  
->  ALLOW_EMPTY_${PN}-plugins = "1"
-> -- 
-> 2.17.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
