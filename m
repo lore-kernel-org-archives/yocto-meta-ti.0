@@ -1,6 +1,6 @@
-Return-Path: <afd@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 47564E00D9F; Wed, 30 Oct 2019 07:58:34 -0700 (PDT)
+	id F107CE00D9F; Wed, 30 Oct 2019 08:06:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -19,50 +19,50 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 633B1E00D00
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 07:58:33 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5FE3E00D00
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 08:06:40 -0700 (PDT)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9UEwW4n020365
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 09:58:32 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9UF6eRT023688
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 10:06:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1572447512;
-	bh=MY7517WJdi3x0sMxpj/8ArakM1PaCXDsFfv8QdWOGec=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=h7zT5fzCiKm2mIRf5TRENn2TrhzrZOXNVeMdhg9sfIEg69gDEerMyrS5c2wMLKI+/
-	c/rofSnZL17nwWBnsS2pQhl9SHkSqfeKZdutyLSk+aKihnIvwz5P0IFw5aaVENdr+v
-	g2rE4fnxv8C28uINAe5PScAkEp0UX28KavszLomc=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9UEwWmY123651
+	s=ti-com-17Q1; t=1572448000;
+	bh=3P3Sp2Mu7Ge2EXOnrAGajElqA5I6+zAyHP1GvDFgEE8=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=vJo+EIUnjxG/2idtBd+MKScARV4PSDJef1NG9qLJhX528RcuPebByiPjO6w/2OjKn
+	rVcrK/5YyfnIV97c0r52HJUhojA4rCkbtCDlusU35j6NFhOufDQxicfvMBlAv9uAKk
+	6q9bJ6YtDUrTPEt0FDxyGcK2O9a04UsOM9Rnx6aI=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9UF6emw004510
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 09:58:32 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
-	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 10:06:40 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
+	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 30 Oct 2019 09:58:19 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
-	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 30 Oct 2019 10:06:27 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
+	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 30 Oct 2019 09:58:19 -0500
-Received: from [10.250.45.147] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9UEwWxC094688;
-	Wed, 30 Oct 2019 09:58:32 -0500
-To: "Ruei, Eric" <a0850410@ti.com>, "Tammana, Gowtham" <g-tammana@ti.com>,
-	"Ruei, Eric" <e-ruei1@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
+	Frontend Transport; Wed, 30 Oct 2019 10:06:27 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9UF6dYI094275;
+	Wed, 30 Oct 2019 10:06:39 -0500
+Date: Wed, 30 Oct 2019 11:06:39 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Andrew F. Davis" <afd@ti.com>
+Message-ID: <20191030150639.GQ7518@beryl>
 References: <20191029132020.8891-1-e-ruei1@ti.com>
 	<aceddb08-4720-395a-e454-e0537fd77aee@ti.com>
 	<45b0c0c5-832c-7128-3475-d1b045027151@ti.com>
 	<a53bb589-e9e6-883c-f8ad-c6047aff9c9f@ti.com>
 	<05819c0f80764f22a5693f493bd871dd@ti.com>
 	<d8ba1b4e-5175-96fe-ef71-67736e0cd3d0@ti.com>
-From: "Andrew F. Davis" <afd@ti.com>
-Message-ID: <445d8d7b-7324-c6da-096d-2d8349bf955d@ti.com>
-Date: Wed, 30 Oct 2019 10:58:31 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	<445d8d7b-7324-c6da-096d-2d8349bf955d@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <d8ba1b4e-5175-96fe-ef71-67736e0cd3d0@ti.com>
+In-Reply-To: <445d8d7b-7324-c6da-096d-2d8349bf955d@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: "Ruei, Eric" <a0850410@ti.com>,
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [EXTERNAL] Re: [PATCH] ti-sgx-ddk-um: update SRCREV to pick up Mesa-based EGL/GLES libraries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -76,135 +76,149 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 14:58:34 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
+X-List-Received-Date: Wed, 30 Oct 2019 15:06:42 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-On 10/30/19 10:53 AM, Ruei, Eric wrote:
-> On 10/30/2019 9:53 AM, Tammana, Gowtham wrote:
->>
->>
->>> -----Original Message-----
->>> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->>> bounces@yoctoproject.org] On Behalf Of Davis, Andrew
->>> Sent: Wednesday, October 30, 2019 8:36 AM
->>> To: Ruei, Eric; Ruei, Eric; meta-ti@yoctoproject.org
->>> Subject: [EXTERNAL] Re: [meta-ti] [PATCH] ti-sgx-ddk-um: update
->>> SRCREV to pick
->>> up Mesa-based EGL/GLES libraries
->>>
->>> On 10/30/19 9:31 AM, Ruei, Eric wrote:
->>>> On 10/30/2019 9:22 AM, Andrew F. Davis wrote:
->>>>> On 10/29/19 9:20 AM, Eric Ruei wrote:
->>>>>> This is the initial step toward Mesa-based EGL/GLES libraries which
->>>>>> support all the required EGL 1.5 extensions. We plan to provide a
->>>>>> Mesa-pvr recipe to build Mesa from source and SGX/DDK patches where
->>>>>> ti-sgx-ddk-um shall provide the EGL/GLES plugins only at the next
->>>>>> step.
->>>>>>
->>>>>> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
->>>>>> ---
->>>>>> Â Â  recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8
->>>>>> +++++---
->>>>>> Â Â  1 file changed, 5 insertions(+), 3 deletions(-)
->>>>>>
->>>>>> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
->>>>>> b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
->>>>>> index 7a6f013e..3991d917 100644
->>>>>> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
->>>>>> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
->>>>>> @@ -11,7 +11,7 @@ PR = "r34"
->>>>>> Â Â  BRANCH = "ti-img-sgx/thud/${PV}"
->>>>>> Â Â  Â  SRC_URI =
->>>>>> "git://git.ti.com/graphics/omap5-sgx-ddk-um-
->>> linux.git;protocol=git;branch=${BRANCH}"
->>>>>>
->>>>>> -SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
->>>>>> +SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
->>>>>> Â Â  Â  TARGET_PRODUCT_omap-a15 = "jacinto6evm"
->>>>>> Â Â  TARGET_PRODUCT_ti33x = "ti335x"
->>>>>> @@ -47,7 +47,9 @@ S = "${WORKDIR}/git"
->>>>>> Â Â  Â  do_install () {
->>>>>> Â Â Â Â Â Â  oe_runmake install DESTDIR=${D}
->>>>>> TARGET_PRODUCT=${TARGET_PRODUCT}
->>>>>> -Â Â Â  ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
->>>>>> +Â Â Â  ln -sf libGLESv2.so ${D}${libdir}/libGLESv2.so.1
->>>>>> +
->>>>>> +Â Â Â  rm -rf ${D}${includedir}/GL
->>>>>
->>>>>
->>>>> Why remove this?
->>>>>
->>>>>
->>>>
->>>> There is another component provides GL header files.
->>>> Denys: how do we resolve this conflict?
->>>>
->>>
->>>
->>> The DSP OpenCL implementation? That package needs fixed, not this one,
->>> the OpenGL implementation (this driver) should provide the GL headers.
->>
->> We don't support desktop GL, they shouldn't come from this package.
->>
->> Gowtham
->>
+On Wed, Oct 30, 2019 at 10:58:31AM -0400, Andrew F. Davis wrote:
+> On 10/30/19 10:53 AM, Ruei, Eric wrote:
+> > On 10/30/2019 9:53 AM, Tammana, Gowtham wrote:
+> >>
+> >>
+> >>> -----Original Message-----
+> >>> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> >>> bounces@yoctoproject.org] On Behalf Of Davis, Andrew
+> >>> Sent: Wednesday, October 30, 2019 8:36 AM
+> >>> To: Ruei, Eric; Ruei, Eric; meta-ti@yoctoproject.org
+> >>> Subject: [EXTERNAL] Re: [meta-ti] [PATCH] ti-sgx-ddk-um: update
+> >>> SRCREV to pick
+> >>> up Mesa-based EGL/GLES libraries
+> >>>
+> >>> On 10/30/19 9:31 AM, Ruei, Eric wrote:
+> >>>> On 10/30/2019 9:22 AM, Andrew F. Davis wrote:
+> >>>>> On 10/29/19 9:20 AM, Eric Ruei wrote:
+> >>>>>> This is the initial step toward Mesa-based EGL/GLES libraries which
+> >>>>>> support all the required EGL 1.5 extensions. We plan to provide a
+> >>>>>> Mesa-pvr recipe to build Mesa from source and SGX/DDK patches where
+> >>>>>> ti-sgx-ddk-um shall provide the EGL/GLES plugins only at the next
+> >>>>>> step.
+> >>>>>>
+> >>>>>> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+> >>>>>> ---
+> >>>>>>    recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8
+> >>>>>> +++++---
+> >>>>>>    1 file changed, 5 insertions(+), 3 deletions(-)
+> >>>>>>
+> >>>>>> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> >>>>>> b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> >>>>>> index 7a6f013e..3991d917 100644
+> >>>>>> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> >>>>>> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> >>>>>> @@ -11,7 +11,7 @@ PR = "r34"
+> >>>>>>    BRANCH = "ti-img-sgx/thud/${PV}"
+> >>>>>>      SRC_URI =
+> >>>>>> "git://git.ti.com/graphics/omap5-sgx-ddk-um-
+> >>> linux.git;protocol=git;branch=${BRANCH}"
+> >>>>>>
+> >>>>>> -SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
+> >>>>>> +SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
+> >>>>>>      TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+> >>>>>>    TARGET_PRODUCT_ti33x = "ti335x"
+> >>>>>> @@ -47,7 +47,9 @@ S = "${WORKDIR}/git"
+> >>>>>>      do_install () {
+> >>>>>>        oe_runmake install DESTDIR=${D}
+> >>>>>> TARGET_PRODUCT=${TARGET_PRODUCT}
+> >>>>>> -    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
+> >>>>>> +    ln -sf libGLESv2.so ${D}${libdir}/libGLESv2.so.1
+> >>>>>> +
+> >>>>>> +    rm -rf ${D}${includedir}/GL
+> >>>>>
+> >>>>>
+> >>>>> Why remove this?
+> >>>>>
+> >>>>>
+> >>>>
+> >>>> There is another component provides GL header files.
+> >>>> Denys: how do we resolve this conflict?
+> >>>>
+> >>>
+> >>>
+> >>> The DSP OpenCL implementation? That package needs fixed, not this one,
+> >>> the OpenGL implementation (this driver) should provide the GL headers.
+> >>
+> >> We don't support desktop GL, they shouldn't come from this package.
+> >>
+> >> Gowtham
+> >>
+> > 
+> > Andrew:
+> > 
+> > Do you agree? I can keep the line here tentatively until GL is removed
+> > from the package itself.
+> > 
 > 
-> Andrew:
 > 
-> Do you agree? I can keep the line here tentatively until GL is removed
-> from the package itself.
-> 
+> I still believe we should be shipping the GL headers in this package.
+> But I won't object to removing the headers temporarily using this recipe
+> until the conflicting ones can be removed from the OpenCL package.
+
+Previously DDK only provided headers in these dirs: EGL, GLES, GLES2, KHR, gbm.
+
+And OpenCL required GL headers, hence there was a "hacky" package created 
+specifically for that:
+http://arago-project.org/git/?p=meta-arago.git;a=blob;f=meta-arago-extras/recipes-ti/ocl/ocl-gl-headers_git.bb;hb=HEAD
+
+If DDK now properly provides GL headers, the other package can be dropped.
+
+But the question remains - should DDK actually provide GL headers, even though 
+it doesn't provide full support for it?
+
+-- 
+Denys
 
 
-I still believe we should be shipping the GL headers in this package.
-But I won't object to removing the headers temporarily using this recipe
-until the conflicting ones can be removed from the OpenCL package.
-
-Andrew
-
-
-> Eric
-> 
-> 
-> 
->>>>
->>>>
->>>>>> Â Â  Â Â Â Â Â  chown -R root:root ${D}
->>>>>> Â Â  }
->>>>>> @@ -58,7 +60,7 @@ FILES_${PN} +=Â  "${includedir}/*"
->>>>>> Â Â  FILES_${PN} +=Â  "${sysconfdir}/*"
->>>>>> Â Â  Â  PACKAGES =+ "${PN}-plugins"
->>>>>> -FILES_${PN}-plugins = "${libdir}/libsrv_init.so
->>>>>> ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so
->>>>>> ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so
->>>>>> ${libdir}/libEGL.so ${libdir}/libGLES_CM.so
->>>>>> ${libdir}/libpvrDRMWSEGL.soÂ  ${libdir}/libpvrGBMWSEGL.so
->>>>>> ${libdir}/libpvrws_WAYLAND.so"
->>>>>> +FILES_${PN}-plugins = "${libdir}/libsrv_init.so
->>>>>> ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so
->>>>>> ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so
->>>>>> ${libdir}/libEGL.so ${libdir}/libGLESv1_CM.so ${libdir}/libGLES_CM.so
->>>>>> ${libdir}/libGLESv1_PVR_MESA.so ${libdir}/libGLESv2_PVR_MESA.so"
->>>>>> Â Â  RDEPENDS_${PN} += "${PN}-plugins"
->>>>>
->>>>>
->>>>> The newer binaries after the DDK commit "um: Attempt to load shared
->>>>> object with version extension automatically" do not need all this
->>>>> plugin
->>>>> stuff, it can all be dropped.
->>>>>
->>>>> Andrew
->>>>>
->>>>>
->>>>>> Â Â  Â  ALLOW_EMPTY_${PN}-plugins = "1"
->>>>>>
->>>>
->>> -- 
->>> _______________________________________________
->>> meta-ti mailing list
->>> meta-ti@yoctoproject.org
->>> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+> >>>>
+> >>>>
+> >>>>>>          chown -R root:root ${D}
+> >>>>>>    }
+> >>>>>> @@ -58,7 +60,7 @@ FILES_${PN} +=  "${includedir}/*"
+> >>>>>>    FILES_${PN} +=  "${sysconfdir}/*"
+> >>>>>>      PACKAGES =+ "${PN}-plugins"
+> >>>>>> -FILES_${PN}-plugins = "${libdir}/libsrv_init.so
+> >>>>>> ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so
+> >>>>>> ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so
+> >>>>>> ${libdir}/libEGL.so ${libdir}/libGLES_CM.so
+> >>>>>> ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so
+> >>>>>> ${libdir}/libpvrws_WAYLAND.so"
+> >>>>>> +FILES_${PN}-plugins = "${libdir}/libsrv_init.so
+> >>>>>> ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so
+> >>>>>> ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so
+> >>>>>> ${libdir}/libEGL.so ${libdir}/libGLESv1_CM.so ${libdir}/libGLES_CM.so
+> >>>>>> ${libdir}/libGLESv1_PVR_MESA.so ${libdir}/libGLESv2_PVR_MESA.so"
+> >>>>>>    RDEPENDS_${PN} += "${PN}-plugins"
+> >>>>>
+> >>>>>
+> >>>>> The newer binaries after the DDK commit "um: Attempt to load shared
+> >>>>> object with version extension automatically" do not need all this
+> >>>>> plugin
+> >>>>> stuff, it can all be dropped.
+> >>>>>
+> >>>>> Andrew
+> >>>>>
+> >>>>>
+> >>>>>>      ALLOW_EMPTY_${PN}-plugins = "1"
+> >>>>>>
+> >>>>
+> >>> -- 
+> >>> _______________________________________________
+> >>> meta-ti mailing list
+> >>> meta-ti@yoctoproject.org
+> >>> https://lists.yoctoproject.org/listinfo/meta-ti
+> > 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
