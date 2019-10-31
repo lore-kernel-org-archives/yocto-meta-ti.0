@@ -1,58 +1,66 @@
-Return-Path: <sjha@ti.com>
+Return-Path: <e-ruei1@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5AF9BE00D9F; Wed, 30 Oct 2019 14:59:34 -0700 (PDT)
+	id 72DF0E00D4F; Thu, 31 Oct 2019 05:39:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
+	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
+	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 329E8E00D8E
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 14:59:32 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9ULxVr6130307
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 16:59:31 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8DBF8E00571
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2019 05:39:31 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id x9VCdUaK099148
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2019 07:39:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1572472771;
-	bh=XcuayI+dd4lxV8Z/01r9maMrXqZlv0h/GB5+5y5E3Sk=;
-	h=From:To:CC:Subject:Date;
-	b=auOvAYSNtBcEbjVgURABAml7GjNhDMYVbvHhJUOj1FuO+5c9tpt0NYuMpj6UEzepx
-	QUgygSg8+lhycY5svOdoCk2lDzrkH24JC5yQUpaCwC90yAO0R3Wf2ZvgI5XqeNrefw
-	wqeBU5dvRd3IR9NYzJCefrjEjO1zq/VOLY+VWhCM=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9ULxV9i088528
+	s=ti-com-17Q1; t=1572525570;
+	bh=8kN0kRaEFXNo6enZrIeu8XceJ1DbrA6D2OBmvxIxIus=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=U1eRMGSMAA87gRuCkasntOZdYZ2680HtCA2H7lR16vpu1SuheGIrOT3e1dI+2hyft
+	Gu4uNZwzn6dyHRTib6oqIQo4Sv41afuvxdikFnmTD8Jez4frkM450Z0Uox6CaiL3Bz
+	nLvx3pWsNjw4gw4iKBG30SFq72fZytgVt8TMCGpo=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x9VCdUpm068867
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2019 16:59:31 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2019 07:39:30 -0500
+Received: from [158.218.113.148] (158.218.113.148) by DLEE113.ent.ti.com
+	(157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5;
-	Wed, 30 Oct 2019 16:59:18 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
-	Frontend Transport; Wed, 30 Oct 2019 16:59:18 -0500
-Received: from uda0132919.dal.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x9ULxVr7058973;
-	Wed, 30 Oct 2019 16:59:31 -0500
-From: Santosh Jha <sjha@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 30 Oct 2019 16:59:54 -0500
-Message-ID: <20191030215954.25620-1-sjha@ti.com>
-X-Mailer: git-send-email 2.17.1
+	Thu, 31 Oct 2019 07:39:17 -0500
+To: "Andrew F. Davis" <afd@ti.com>, "Tammana, Gowtham" <g-tammana@ti.com>,
+	"Ruei, Eric" <e-ruei1@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+References: <20191029132020.8891-1-e-ruei1@ti.com>
+	<aceddb08-4720-395a-e454-e0537fd77aee@ti.com>
+	<45b0c0c5-832c-7128-3475-d1b045027151@ti.com>
+	<a53bb589-e9e6-883c-f8ad-c6047aff9c9f@ti.com>
+	<05819c0f80764f22a5693f493bd871dd@ti.com>
+	<d8ba1b4e-5175-96fe-ef71-67736e0cd3d0@ti.com>
+	<445d8d7b-7324-c6da-096d-2d8349bf955d@ti.com>
+From: "Ruei, Eric" <a0850410@ti.com>
+Message-ID: <76c8ba28-561f-0deb-c25d-ca395ffee2b4@ti.com>
+Date: Thu, 31 Oct 2019 08:39:16 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
+In-Reply-To: <445d8d7b-7324-c6da-096d-2d8349bf955d@ti.com>
+X-Originating-IP: [158.218.113.148]
+X-ClientProxiedBy: DLEE100.ent.ti.com (157.170.170.30) To DLEE113.ent.ti.com
+	(157.170.170.24)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [thud/master][PATCH 4] ipc-lld: inherit update-alternatives for softlink
+Subject: Re: [EXTERNAL] Re: [PATCH] ti-sgx-ddk-um: update SRCREV to pick up Mesa-based EGL/GLES libraries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,161 +73,145 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 21:59:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 31 Oct 2019 12:39:34 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-- Fixed softlink  - inherit update-alternatives
-- Added all-bios binaries in install
+Hi, Andrew, Gowtham and Denys:
 
-Signed-off-by: Santosh Jha <sjha@ti.com>
+What is our conclusion (solution) for the package size increment?
 
----
-Changes:
- - Removed 'inherit deploy'
- - Updated Commit message
- - Removed deploy appends
- - Fixed typo in commit message
- - Modified the script to use stripped image for
-   symbolic link
----
----
- .../ipc-lld/ipc-lld-examples-rtos_git.bb      | 76 +++++++++----------
- recipes-bsp/ipc-lld/ipc-lld.inc               |  2 +-
- 2 files changed, 36 insertions(+), 42 deletions(-)
+Best regards,
 
-diff --git a/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb b/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-index 75db2162..d20f871a 100644
---- a/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-+++ b/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-@@ -2,11 +2,16 @@ SUMMARY = "echo_test for IPC-LLD"
- 
- require ipc-lld.inc
- 
-+inherit update-alternatives
-+
- DEPENDS += " ipc-lld-rtos common-csl-ip-rtos sciclient-rtos board-rtos"
- 
--REMOTE_FW_DIR = "${S}/examples/echo_test/yocto_bin"
-+REMOTE_FW_DIR = "${S}/examples/yocto_bin"
- REMOTE_FW_BIN_DIR = "${REMOTE_FW_DIR}/ipc_echo_test/bin"
- REMOTE_FWB_BIN_DIR = "${REMOTE_FW_DIR}/ipc_echo_testb/bin"
-+RTOS_ALL_CORES_BIN_DIR = "${REMOTE_FW_DIR}/ex02_bios_multicore_echo_test/bin"
-+RTOS_2_CORES_BIN_DIR = "${REMOTE_FW_DIR}/ex01_bios_2core_echo_test/bin"
-+LINUX_2_CORES_BIN_DIR = "${REMOTE_FW_DIR}/ex03_linux_bios_2core_echo_test/bin"
- 
- DST_BIN_PATH = "${base_libdir}/firmware/pdk-ipc"
- 
-@@ -31,7 +36,7 @@ do_install() {
-     do
-         for core in ${TI_PDK_LIMIT_CORES}
-         do
--            install -m 0644 ${REMOTE_FW_BIN_DIR}/$board/ipc_echo_test_${core}_release.x* ${D}${DST_BIN_PATH}
-+            install -m 0644 ${REMOTE_FW_BIN_DIR}/$board/ipc_echo_test_${core}_release* ${D}${DST_BIN_PATH}
- 
-             #removing map files copied in previous line
-             rm ${D}${DST_BIN_PATH}/*.map
-@@ -51,6 +56,13 @@ do_install_append_j7-evm() {
-     install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu2_1_release.xer5f ${D}${DST_BIN_PATH}
-     install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_0_release.xer5f ${D}${DST_BIN_PATH}
-     install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_1_release.xer5f ${D}${DST_BIN_PATH}
-+
-+    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu1_0_release_strip.xer5f ${D}${DST_BIN_PATH}
-+    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu1_1_release_strip.xer5f ${D}${DST_BIN_PATH}
-+    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu2_0_release_strip.xer5f ${D}${DST_BIN_PATH}
-+    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu2_1_release_strip.xer5f ${D}${DST_BIN_PATH}
-+    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_0_release_strip.xer5f ${D}${DST_BIN_PATH}
-+    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_1_release_strip.xer5f ${D}${DST_BIN_PATH}
- }
- 
- 
-@@ -101,52 +113,34 @@ ALTERNATIVE_LINK_NAME[j7-c71_0-fw] = "${base_libdir}/firmware/${TARGET_C7X}"
- 
- # Create the firmware alternatives
- 
--ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release.xer5f"
--ALTERNATIVE_TARGET[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release.xer5f"
-+ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
- 
--ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release.xer5f"
--ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release.xer5f"
--ALTERNATIVE_TARGET[j7-c66_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_1_release.xe66"
--ALTERNATIVE_TARGET[j7-c66_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_2_release.xe66"
--ALTERNATIVE_TARGET[j7-c71_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release.xe71"
-+ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
-+ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
-+ALTERNATIVE_TARGET[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f"
-+ALTERNATIVE_TARGET[j7-c66_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_1_release_strip.xe66"
-+ALTERNATIVE_TARGET[j7-c66_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_2_release_strip.xe66"
-+ALTERNATIVE_TARGET[j7-c71_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release_strip.xe71"
- 
- ALTERNATIVE_PRIORITY = "10"
- 
--# copy the executables into the deploy directory
--
--do_deploy() {
--    :
--}
-+#add source and all rtos binaries package
-+PACKAGES =+ "${PN}-src"
-+PACKAGES =+ "${PN}-allrtos"
- 
--do_deploy_am65xx() {
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu1_0_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu1_1_release.xer5f ${DEPLOYDIR}/
--}
--
--do_deploy_j7-evm() {
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu1_0_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FWB_BIN_DIR}/ipc_echo_testb_mcu1_0_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu1_1_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FWB_BIN_DIR}/ipc_echo_testb_mcu1_1_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu2_0_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FWB_BIN_DIR}/ipc_echo_testb_mcu2_0_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu2_1_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FWB_BIN_DIR}/ipc_echo_testb_mcu2_1_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu3_0_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FWB_BIN_DIR}/ipc_echo_testb_mcu3_0_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_mcu3_1_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FWB_BIN_DIR}/ipc_echo_testb_mcu3_1_release.xer5f ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_c66xdsp_1_release.xe66 ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_c66xdsp_2_release.xe66 ${DEPLOYDIR}/
--    install ${REMOTE_FW_BIN_DIR}/ipc_echo_test_c7x_1_release.xe71 ${DEPLOYDIR}/
--}
- # make sure that lib/firmware, and all its contents are part of the package
- FILES_${PN} += "${base_libdir}/firmware"
--FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+FILES_${PN}-src += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+FILES_${PN}-allrtos_append_am65xx += "${RTOS_ALL_CORES_BIN_DIR}/am65xx_evm"
-+FILES_${PN}-allrtos_append_j7-evm += "${RTOS_ALL_CORES_BIN_DIR}/j721e_evm"
-+FILES_${PN}-allrtos_append_am65xx += "${RTOS_2_CORES_BIN_DIR}/am65xx_evm"
-+FILES_${PN}-allrtos_append_j7-evm += "${RTOS_2_CORES_BIN_DIR}/j721e_evm"
-+FILES_${PN}-allrtos_append_am65xx += "${LINUX_2_CORES_BIN_DIR}/am65xx_evm"
-+FILES_${PN}-allrtos_append_j7-evm += "${LINUX_2_CORES_BIN_DIR}/j721e_evm"
- 
- INSANE_SKIP_${PN} = "arch ldflags file-rdeps"
- 
-diff --git a/recipes-bsp/ipc-lld/ipc-lld.inc b/recipes-bsp/ipc-lld/ipc-lld.inc
-index 06683a06..243678f4 100644
---- a/recipes-bsp/ipc-lld/ipc-lld.inc
-+++ b/recipes-bsp/ipc-lld/ipc-lld.inc
-@@ -18,7 +18,7 @@ SRC_URI = "${IPCLLD_GIT_URI};protocol=${IPCLLD_GIT_PROTOCOL};branch=${BRANCH}"
- 
- SRCREV = "${IPCLLD_SRCREV}"
- PV = "01.00.00.00"
--PR = "r1"
-+PR = "r2"
- 
- # Build with make instead of XDC
- TI_PDK_XDCMAKE = "0"
--- 
-2.17.1
+Eric
+
+On 10/30/2019 10:58 AM, Andrew F. Davis wrote:
+> On 10/30/19 10:53 AM, Ruei, Eric wrote:
+>> On 10/30/2019 9:53 AM, Tammana, Gowtham wrote:
+>>>
+>>>
+>>>> -----Original Message-----
+>>>> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>>>> bounces@yoctoproject.org] On Behalf Of Davis, Andrew
+>>>> Sent: Wednesday, October 30, 2019 8:36 AM
+>>>> To: Ruei, Eric; Ruei, Eric; meta-ti@yoctoproject.org
+>>>> Subject: [EXTERNAL] Re: [meta-ti] [PATCH] ti-sgx-ddk-um: update
+>>>> SRCREV to pick
+>>>> up Mesa-based EGL/GLES libraries
+>>>>
+>>>> On 10/30/19 9:31 AM, Ruei, Eric wrote:
+>>>>> On 10/30/2019 9:22 AM, Andrew F. Davis wrote:
+>>>>>> On 10/29/19 9:20 AM, Eric Ruei wrote:
+>>>>>>> This is the initial step toward Mesa-based EGL/GLES libraries which
+>>>>>>> support all the required EGL 1.5 extensions. We plan to provide a
+>>>>>>> Mesa-pvr recipe to build Mesa from source and SGX/DDK patches where
+>>>>>>> ti-sgx-ddk-um shall provide the EGL/GLES plugins only at the next
+>>>>>>> step.
+>>>>>>>
+>>>>>>> Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+>>>>>>> ---
+>>>>>>>     recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb | 8
+>>>>>>> +++++---
+>>>>>>>     1 file changed, 5 insertions(+), 3 deletions(-)
+>>>>>>>
+>>>>>>> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+>>>>>>> b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+>>>>>>> index 7a6f013e..3991d917 100644
+>>>>>>> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+>>>>>>> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+>>>>>>> @@ -11,7 +11,7 @@ PR = "r34"
+>>>>>>>     BRANCH = "ti-img-sgx/thud/${PV}"
+>>>>>>>       SRC_URI =
+>>>>>>> "git://git.ti.com/graphics/omap5-sgx-ddk-um-
+>>>> linux.git;protocol=git;branch=${BRANCH}"
+>>>>>>>
+>>>>>>> -SRCREV = "87d7e5c1e4db1bab048939c9719059d549c1e8dd"
+>>>>>>> +SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
+>>>>>>>       TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+>>>>>>>     TARGET_PRODUCT_ti33x = "ti335x"
+>>>>>>> @@ -47,7 +47,9 @@ S = "${WORKDIR}/git"
+>>>>>>>       do_install () {
+>>>>>>>         oe_runmake install DESTDIR=${D}
+>>>>>>> TARGET_PRODUCT=${TARGET_PRODUCT}
+>>>>>>> -    ln -sf libGLESv2.so.${PV} ${D}${libdir}/libGLESv2.so.1
+>>>>>>> +    ln -sf libGLESv2.so ${D}${libdir}/libGLESv2.so.1
+>>>>>>> +
+>>>>>>> +    rm -rf ${D}${includedir}/GL
+>>>>>>
+>>>>>>
+>>>>>> Why remove this?
+>>>>>>
+>>>>>>
+>>>>>
+>>>>> There is another component provides GL header files.
+>>>>> Denys: how do we resolve this conflict?
+>>>>>
+>>>>
+>>>>
+>>>> The DSP OpenCL implementation? That package needs fixed, not this one,
+>>>> the OpenGL implementation (this driver) should provide the GL headers.
+>>>
+>>> We don't support desktop GL, they shouldn't come from this package.
+>>>
+>>> Gowtham
+>>>
+>>
+>> Andrew:
+>>
+>> Do you agree? I can keep the line here tentatively until GL is removed
+>> from the package itself.
+>>
+> 
+> 
+> I still believe we should be shipping the GL headers in this package.
+> But I won't object to removing the headers temporarily using this recipe
+> until the conflicting ones can be removed from the OpenCL package.
+> 
+> Andrew
+> 
+> 
+>> Eric
+>>
+>>
+>>
+>>>>>
+>>>>>
+>>>>>>>           chown -R root:root ${D}
+>>>>>>>     }
+>>>>>>> @@ -58,7 +60,7 @@ FILES_${PN} +=  "${includedir}/*"
+>>>>>>>     FILES_${PN} +=  "${sysconfdir}/*"
+>>>>>>>       PACKAGES =+ "${PN}-plugins"
+>>>>>>> -FILES_${PN}-plugins = "${libdir}/libsrv_init.so
+>>>>>>> ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so
+>>>>>>> ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so
+>>>>>>> ${libdir}/libEGL.so ${libdir}/libGLES_CM.so
+>>>>>>> ${libdir}/libpvrDRMWSEGL.so  ${libdir}/libpvrGBMWSEGL.so
+>>>>>>> ${libdir}/libpvrws_WAYLAND.so"
+>>>>>>> +FILES_${PN}-plugins = "${libdir}/libsrv_init.so
+>>>>>>> ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so
+>>>>>>> ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so
+>>>>>>> ${libdir}/libEGL.so ${libdir}/libGLESv1_CM.so ${libdir}/libGLES_CM.so
+>>>>>>> ${libdir}/libGLESv1_PVR_MESA.so ${libdir}/libGLESv2_PVR_MESA.so"
+>>>>>>>     RDEPENDS_${PN} += "${PN}-plugins"
+>>>>>>
+>>>>>>
+>>>>>> The newer binaries after the DDK commit "um: Attempt to load shared
+>>>>>> object with version extension automatically" do not need all this
+>>>>>> plugin
+>>>>>> stuff, it can all be dropped.
+>>>>>>
+>>>>>> Andrew
+>>>>>>
+>>>>>>
+>>>>>>>       ALLOW_EMPTY_${PN}-plugins = "1"
+>>>>>>>
+>>>>>
+>>>> -- 
+>>>> _______________________________________________
+>>>> meta-ti mailing list
+>>>> meta-ti@yoctoproject.org
+>>>> https://lists.yoctoproject.org/listinfo/meta-ti
+>>
 
 
