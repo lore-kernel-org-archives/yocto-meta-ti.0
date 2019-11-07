@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A3443E00E17; Thu,  7 Nov 2019 10:09:53 -0800 (PST)
+	id C23AEE00E04; Thu,  7 Nov 2019 10:09:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A143E00E02
-	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:50 -0800 (PST)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9oSG039638
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:50 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0CEBE008D9
+	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:49 -0800 (PST)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9n8J039633
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:49 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573150190;
-	bh=loLMNYX23I3JWf2UYA/lAslkeKjeDPNui7qFi0y3BnM=;
+	s=ti-com-17Q1; t=1573150189;
+	bh=AkE41hr0EGE0/UYPoh1tfQ2Be40xnTOTqhw/D13To+M=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=gKky4kdw+flr42rOgnHwy5wjqO1H8YVzvcOnwLc6rSIydmoyyhyjRkVCWskd67gNG
-	Xpr9GCX7evw3VeWeYyp6yVnzDvu/eFN84na4LEfAFa6E79pRAURXcdC5XFqIDnUbXh
-	UHn67uUIFWhdzYur4Dqpt6RiJXO+n9aiEgK8yemc=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xA7I9oaZ071110
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:50 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Thu, 7 Nov 2019 12:09:34 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
+	b=uhfsAAFBlyKRDf/E3ItkdyrcZQ5J6E8iocrY27Tlj5WJ6ikC6Hvcoz+OfbCmspVrH
+	Y6loLvGozVVkoQyneu62yaYHFmP7dFhfnGP7Z6kHtWruUMiRBpvbNCI9Lb0m42Wldl
+	YKvo9fSU2L/4q1HwUSDREWNn3Uagj2wU48u/V0VA=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9nl4125136
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:49 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
 	(157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
+	Thu, 7 Nov 2019 12:09:48 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE104.ent.ti.com
+	(157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Thu, 7 Nov 2019 12:09:49 -0600
+	Frontend Transport; Thu, 7 Nov 2019 12:09:33 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jII067418;
-	Thu, 7 Nov 2019 12:09:49 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jIF067418;
+	Thu, 7 Nov 2019 12:09:48 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 7 Nov 2019 12:50:07 -0500
-Message-ID: <1573149037-762-13-git-send-email-j-stiffler@ti.com>
+Date: Thu, 7 Nov 2019 12:50:04 -0500
+Message-ID: <1573149037-762-10-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 References: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][RFC 12/42] hyplnk-lld: migrate to ti-pdk-fetch.bbclass
+Subject: [master/thud][RFC 09/42] fftc-lld: migrate to ti-pdk-fetch.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,42 +71,51 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/hyplnk-lld/hyplnk-lld.inc | 18 ++++--------------
- 1 file changed, 4 insertions(+), 14 deletions(-)
+ recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb | 20 +++-----------------
+ 1 file changed, 3 insertions(+), 17 deletions(-)
 
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-index a73f513..36cf136 100644
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-+++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-@@ -6,24 +6,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb b/recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb
+index 9103639..1feac80 100644
+--- a/recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb
++++ b/recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb
+@@ -1,6 +1,7 @@
+ SUMMARY = "TI FFT Coprocessor (FFTC) low level driver "
  
- LLDNAME="hyplnk"
- 
--LIC_FILES_CHKSUM = "file://${WORKDIR}/${HYPLNK_GIT_DESTSUFFIX}/COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
- 
--HYPLNK_GIT_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git"
--HYPLNK_GIT_PROTOCOL = "git"
--HYPLNK_GIT_BRANCH = "master"
--HYPLNK_GIT_DESTSUFFIX = "git/ti/drv/${LLDNAME}"
-+inherit ti-pdk-fetch
+-inherit ti-pdk
++inherit ti-pdk ti-pdk-fetch
 +PE = "1"
  
--# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.08A
--HYPLNK_SRCREV = "67fc593f28d243d25a5e19720eba8b3e53a5efc0"
--
--BRANCH="${HYPLNK_GIT_BRANCH}"
--SRC_URI = "${HYPLNK_GIT_URI};destsuffix=${HYPLNK_GIT_DESTSUFFIX};protocol=${HYPLNK_GIT_PROTOCOL};branch=${BRANCH}"
--SRCREV = "${HYPLNK_SRCREV}"
--
--PV = "2.1.0.8A"
- INC_PR = "r0"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://fftc.h;beginline=1;endline=39;md5=2f1010c47d364414644caf6d30a2b7df"
+@@ -8,27 +9,12 @@ LIC_FILES_CHKSUM = "file://fftc.h;beginline=1;endline=39;md5=2f1010c47d364414644
+ COMPATIBLE_MACHINE = "k2hk|k2l"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- DEVICELIST_k2hk = "k2h k2k"
- DEVICELIST_k2e  = "k2e"
+-FFTC_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/fftc-lld.git"
+-FFTC_LLD_GIT_PROTOCOL = "git"
+-FFTC_LLD_GIT_BRANCH = "master"
+-FFTC_LLD_GIT_DESTSUFFIX = "git/ti/drv/fftc"
+-
+-# Below commit ID corresponds to "DEV.FFTC_LLD.02.02.00.07B"
+-FFTC_LLD_SRCREV = "962d899e1e81a4d02ad59368032cf24956cde5f2"
+-
+-BRANCH = "${FFTC_LLD_GIT_BRANCH}"
+-SRC_URI = "${FFTC_LLD_GIT_URI};destsuffix=${FFTC_LLD_GIT_DESTSUFFIX};protocol=${FFTC_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${FFTC_LLD_SRCREV}"
+-PV = "02.02.00.07B"
+ PR = "r0"
  
--S = "${WORKDIR}/${HYPLNK_GIT_DESTSUFFIX}"
-+TI_PDK_COMP = "ti.drv.hyplnk"
+-S = "${WORKDIR}/${FFTC_LLD_GIT_DESTSUFFIX}"
+-
+-
+ DEPENDS_append= " qmss-lld-rtos \
+                   cppi-lld-rtos \
+ "
+ 
+ # HTML doc link params
+ PDK_COMP_LINK_TEXT = "FFTC LLD"
++TI_PDK_COMP = "ti.drv.fftc"
 -- 
 2.7.4
 
