@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 55462E00E1F; Thu,  7 Nov 2019 10:09:54 -0800 (PST)
+	id 7D1FAE00E21; Thu,  7 Nov 2019 10:09:54 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD668E00C0A
-	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:48 -0800 (PST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9m0S020092
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:48 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7DEF1E00E0B
+	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:51 -0800 (PST)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9oU7020106
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:51 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573150188;
-	bh=MfkQMm9IXU1ZwFnNti2U0YxwcCM8bBQ7bXmzdnE5MOs=;
+	s=ti-com-17Q1; t=1573150191;
+	bh=VR/NOsfCJLOLqw4UGksBGb1xxv5Gdh3fmbDXe6K9BaY=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=tXobRAFGJB2c9mWPoZ4MgTdbHSLLcooBVmhvwkRm63A66pF2vDNDVbR8//y8Rz618
-	zDm01f+nsKoMS6JqC1s4jhdk6YqNIBXVO80x6W9O1z282ZGeRpi5U8dORFb9Z5HqEz
-	HS1mKN921/AivV9DiLJKtyuzsWZZGFMpXRWgZCBQ=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xA7I9mpq004014
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:48 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	b=plvOQ0DDESCJpovNNpHZbVv/49FN2Qjc/KRURV8HfXPn2JjYnkZUJwxTUFzNv0pVy
+	CMXspJK1u7PpA6z65jwXjXDUZgQckqo+NGYimvDA3rwo1fgXR6RWuBZAxk5nwEJziQ
+	dxCrmHMU4dz+3V1AHYHF/ZW3m2GWAF3RjJ6mfAvg=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9oNn125191
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:50 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE112.ent.ti.com
+	(10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Thu, 7 Nov 2019 12:09:32 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
-	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 7 Nov 2019 12:09:35 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Thu, 7 Nov 2019 12:09:32 -0600
+	Frontend Transport; Thu, 7 Nov 2019 12:09:35 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jIB067418;
-	Thu, 7 Nov 2019 12:09:47 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jIL067418;
+	Thu, 7 Nov 2019 12:09:50 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 7 Nov 2019 12:50:00 -0500
-Message-ID: <1573149037-762-6-git-send-email-j-stiffler@ti.com>
+Date: Thu, 7 Nov 2019 12:50:10 -0500
+Message-ID: <1573149037-762-16-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 References: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][RFC 05/42] cppi-lld: migrate to ti-pdk-fetch.bbclass
+Subject: [master/thud][RFC 15/42] ipc-lld: migrate to ti-pdk-fetch.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,41 +71,51 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/cppi-lld/cppi-lld.inc | 16 +++-------------
- 1 file changed, 3 insertions(+), 13 deletions(-)
+ recipes-bsp/ipc-lld/ipc-lld.inc | 18 ++++--------------
+ 1 file changed, 4 insertions(+), 14 deletions(-)
 
-diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
-index dec5b7d..dec146c 100644
---- a/recipes-bsp/cppi-lld/cppi-lld.inc
-+++ b/recipes-bsp/cppi-lld/cppi-lld.inc
-@@ -4,19 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/cppi/COPYING.txt;md5=e8f6789acd
- COMPATIBLE_MACHINE = "keystone"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--CPPI_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git"
--CPPI_LLD_GIT_PROTOCOL = "git"
--CPPI_LLD_GIT_BRANCH = "master"
--CPPI_LLD_GIT_DESTSUFFIX = "git/ti/drv/cppi"
-+inherit ti-pdk-fetch
+diff --git a/recipes-bsp/ipc-lld/ipc-lld.inc b/recipes-bsp/ipc-lld/ipc-lld.inc
+index 243678f..2909c20 100644
+--- a/recipes-bsp/ipc-lld/ipc-lld.inc
++++ b/recipes-bsp/ipc-lld/ipc-lld.inc
+@@ -1,4 +1,5 @@
+-inherit ti-pdk
++inherit ti-pdk ti-pdk-fetch
 +PE = "1"
  
--# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.14A"
--CPPI_LLD_SRCREV = "d9b51bfc77ee0c97ed11dc6753667cfadc0285f6"
--
--BRANCH = "${CPPI_LLD_GIT_BRANCH}"
--SRC_URI = "${CPPI_LLD_GIT_URI};destsuffix=${CPPI_LLD_GIT_DESTSUFFIX};protocol=${CPPI_LLD_GIT_PROTOCOL};branch=${BRANCH}"
--
--SRCREV = "${CPPI_LLD_SRCREV}"
--PV = "02.01.00.14A"
- INC_PR = "r0"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7eae093f2b09fd39307f30028a068b91"
+@@ -6,24 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7eae093f2b09fd39307f30028a068b91"
+ COMPATIBLE_MACHINE = "k3"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- DEVICELIST = "k2h k2k k2l k2e"
-@@ -24,4 +14,4 @@ DEVICELIST_k2hk = "k2h k2k"
- DEVICELIST_k2l  = "k2l"
- DEVICELIST_k2e  = "k2e"
+-IPCLLD_GIT_URI = "git://git.ti.com/keystone-rtos/ipc-lld.git"
+-IPCLLD_GIT_PROTOCOL = "git"
+-IPCLLD_GIT_BRANCH = "master"
+-
+-# Below commit ID corresponds to "01.00.00.00"
+-IPCLLD_SRCREV = "c695ca99aa4b7242e808889cfeacf848f14112c7"
+-
+-BRANCH = "${IPCLLD_GIT_BRANCH}"
+-SRC_URI = "${IPCLLD_GIT_URI};protocol=${IPCLLD_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${IPCLLD_SRCREV}"
+-PV = "01.00.00.00"
+ PR = "r2"
  
--S = "${WORKDIR}/${CPPI_LLD_GIT_DESTSUFFIX}"
-+TI_PDK_COMP = "ti.drv.cppi"
+ # Build with make instead of XDC
+ TI_PDK_XDCMAKE = "0"
+ 
+-IPCLLD_PACKAGE_BASE   = "${S}/../ipclld_base"
++IPCLLD_PACKAGE_BASE   = "${WORKDIR}/ipclld_base"
+ IPCLLD_ROOTPATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/ipc"
+ 
+ export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+@@ -35,3 +24,4 @@ PDK_COMP_LINK_TEXT = "IPCLLD"
+ EXTRA_OEMAKE = "PDK_INSTALL_PATH=${PDK_INSTALL_PATH} "
+ 
+ TI_PDK_LIMIT_CORES_append_am65xx-evm = " mcu1_1 "
++TI_PDK_COMP = "ti.drv.ipc"
 -- 
 2.7.4
 
