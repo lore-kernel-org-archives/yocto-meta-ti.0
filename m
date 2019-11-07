@@ -1,57 +1,42 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C77C3E00C46; Wed,  6 Nov 2019 11:10:42 -0800 (PST)
+	id 2BED4E00D7E; Wed,  6 Nov 2019 21:06:18 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	URI_HEX autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BAD4EE00A07
-	for <meta-ti@yoctoproject.org>; Wed,  6 Nov 2019 11:10:41 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA6JAfuc105102
-	for <meta-ti@yoctoproject.org>; Wed, 6 Nov 2019 13:10:41 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573067441;
-	bh=A3y0Ve5tiBCENhmT956klFca3L5cPjm2K0MMtCybNWU=;
-	h=From:To:CC:Subject:Date;
-	b=urrT0h0WqYWzJ5sB+D637tNN64BQwwr4Z9iMvBSn0zivBMPzLbI+0aK1bFb5tK1Qs
-	+T4YVIGA20l5rFRYl503S3hWVrd71KOnNVp06cvzt3bvXLDtNCkPGpMIlZOwYpHCrN
-	8ARH8z5t1z3mj8gEo7fhh12Pr/uguq6eCPb3D9Nk=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xA6JAfW9018787
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 6 Nov 2019 13:10:41 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Wed, 6 Nov 2019 13:10:40 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
-	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Wed, 6 Nov 2019 13:10:25 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA6JAevt045491;
-	Wed, 6 Nov 2019 13:10:40 -0600
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 6 Nov 2019 13:09:42 -0600
-Message-ID: <20191106190942.21615-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.22.0.214.g8dca754b1e
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] linux-ti-staging: update to ti2019.05-rc2
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/,
+	low *      trust
+	*      [64.68.198.64 listed in list.dnswl.org]
+	*  0.1 URI_HEX URI: URI hostname has long hexadecimal sequence
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 529E3E00B8E
+	for <meta-ti@yoctoproject.org>; Wed,  6 Nov 2019 21:06:16 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6E0F640BEA;
+	Thu,  7 Nov 2019 05:06:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id n2ZU-LKjlNir; Thu,  7 Nov 2019 05:06:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5359B40B37;
+	Thu,  7 Nov 2019 05:06:15 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 8A61E170390;
+	Thu,  7 Nov 2019 00:06:14 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Thu,  7 Nov 2019 00:06:14 -0500
+Message-Id: <1573103174-8187-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [RFC][PATCH] sgx-um, rogue-umlibs, gc320-libs: RRECOMMENDS on corresponding drivers
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,41 +49,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 19:10:42 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Nov 2019 05:06:18 -0000
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_4.19.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb           | 2 ++
+ recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb | 4 +++-
+ recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb       | 2 ++
+ 3 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-index 0fa21913..7bc90ad9 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.19:"
+diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+index 0221e39..9487e72 100644
+--- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
++++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+@@ -12,6 +12,8 @@ BRANCH = "ti-${PV}"
+ SRC_URI = "git://git.ti.com/graphics/ti-gc320-libs.git;protocol=git;branch=${BRANCH}"
+ SRCREV = "c0afab259de59909cfe74c01f3f7fbaa147f94b5"
  
- BRANCH = "ti-rt-linux-4.19.y"
++RRECOMMENDS_${PN} = "ti-gc320-driver"
++
+ # There's only hardfp version available
+ python __anonymous() {
+     tunes = d.getVar("TUNE_FEATURES")
+diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
+index 9cb863a..6729075 100644
+--- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
++++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
+@@ -27,7 +27,7 @@ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm"
+ DEPENDS += "libdrm wayland expat"
+ RDEPENDS_${PN} += "bash"
+ RDEPENDS_${PN} += "python-core"
+-RDEPENDS_${PN} += "ti-img-rogue-driver wayland expat"
++RDEPENDS_${PN} += "wayland expat"
  
--SRCREV = "5785287a3edc2b91165f5f7475e5ec696d338fc7"
-+SRCREV = "94677bda81ff6fe7a5c04cfa6bf434014104162a"
- PV = "4.19.79+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-index 2c2a1df3..6371c127 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
-@@ -59,7 +59,7 @@ S = "${WORKDIR}/git"
+ RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm"
+ RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
+@@ -41,6 +41,8 @@ RCONFLICTS_${PN} = "libegl libgles1 libgles2 libgbm"
+ RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
+ RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
  
- BRANCH = "ti-linux-4.19.y"
++RRECOMMENDS_${PN} += "ti-img-rogue-driver"
++
+ S = "${WORKDIR}/git"
  
--SRCREV = "69eee289657a92187b9747f1247edb7d7a7cacab"
-+SRCREV = "6f929595b9d64333380bd547788714c81fbc2508"
- PV = "4.19.79+git${SRCPV}"
+ do_install () {
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+index ecf3ffc..8b0b305 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+@@ -43,6 +43,8 @@ RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
+ # The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
+ RPROVIDES_${PN} += "libGLESv2.so.1"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
++RRECOMMENDS_${PN} += "ti-sgx-ddk-km"
++
+ S = "${WORKDIR}/git"
+ 
+ do_install () {
 -- 
-2.22.0.214.g8dca754b1e
+2.7.4
 
 
