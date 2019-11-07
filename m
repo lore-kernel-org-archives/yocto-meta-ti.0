@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3C8CFE00E0F; Thu,  7 Nov 2019 10:10:04 -0800 (PST)
+	id 51FA0E008D9; Thu,  7 Nov 2019 10:10:03 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,50 +10,51 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 537A9E008D9
-	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:58 -0800 (PST)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9wUL106966
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:58 -0600
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8FE4E00E0F
+	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:57 -0800 (PST)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9v3D070530
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:57 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573150198;
-	bh=u2lsFWFEyTDX8YkpqNJaCJVEr5Y7yWvJZehygugGg+I=;
+	s=ti-com-17Q1; t=1573150197;
+	bh=R/ZivR+sULyPnipy2LdQKpmxO4NFE7OZSXFGp5+8r1Q=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=XnuMFJoniNWVo8E+OzrixvzUBfOZdt9V4OTsg/xQzj+4QHquld6wPf2xUk2t3PGnK
-	Q5jcHYKYeZZ6yzbH7Vsp953jbbp+kyjGn0Ei5sKeavwViL9Ii4yFiFUo/bbKUmGeLu
-	tAwqTIQlOgcflx/8joFcPItQY1BM2YE2PzfM/bY8=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9w2l125284
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:58 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	b=gRk9YHQOKE/Fqh2lN0hovJp8xg7vLFVwz7ylbp8lQV59pMIB90xAlNUafkmOjn0ZF
+	m6DOth4ezhvDKEH5CPKWkxLLY9bGmHgmtxsZLrv23HB7jr5y11a1BYfJmKFys3dFzd
+	7zvbuCBIAsiNXq9jOGfHDhloSnWZopUZiNterlHw=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xA7I9vYA004252
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:57 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
+	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Thu, 7 Nov 2019 12:09:42 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
-	(157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 7 Nov 2019 12:09:56 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
+	(157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Thu, 7 Nov 2019 12:09:42 -0600
+	Frontend Transport; Thu, 7 Nov 2019 12:09:40 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jIk067418;
-	Thu, 7 Nov 2019 12:09:58 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jIg067418;
+	Thu, 7 Nov 2019 12:09:56 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 7 Nov 2019 12:50:35 -0500
-Message-ID: <1573149037-762-41-git-send-email-j-stiffler@ti.com>
+Date: Thu, 7 Nov 2019 12:50:31 -0500
+Message-ID: <1573149037-762-37-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 References: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][RFC 40/42] cal-lld: TI RTOS low level driver for CAL
+Subject: [master/thud][RFC 36/42] udma-lld: migrate to ti-pdk-fetch.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -71,92 +72,56 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/cal-lld/cal-lld-rtos_git.bb | 76 +++++++++++++++++++++++++++++++++
- 1 file changed, 76 insertions(+)
- create mode 100644 recipes-bsp/cal-lld/cal-lld-rtos_git.bb
+ recipes-bsp/udma-lld/udma-lld-rtos_git.bb | 18 ++++--------------
+ 1 file changed, 4 insertions(+), 14 deletions(-)
 
-diff --git a/recipes-bsp/cal-lld/cal-lld-rtos_git.bb b/recipes-bsp/cal-lld/cal-lld-rtos_git.bb
-new file mode 100644
-index 0000000..8c6fe13
---- /dev/null
-+++ b/recipes-bsp/cal-lld/cal-lld-rtos_git.bb
-@@ -0,0 +1,76 @@
-+SUMMARY = "TI RTOS low level driver for CAL"
-+
+diff --git a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb b/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
+index c3352c1..8a58764 100644
+--- a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
++++ b/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
+@@ -1,7 +1,8 @@
+ SUMMARY = "TI RTOS low level driver for UDMA"
+ DESCRIPTION = "TI RTOS low level driver for Universal DMA module "
+ 
+-inherit ti-pdk
 +inherit ti-pdk ti-pdk-fetch
 +PE = "1"
-+
-+require recipes-ti/includes/ti-paths-append.inc
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://cal.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
-+
-+COMPATIBLE_MACHINE = "k3"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+
-+PR = "r0"
-+
-+DEPENDS_append = " osal-rtos \
-+                   fvid2-rtos \
-+"
-+
-+# Build with make instead of XDC
-+TI_PDK_XDCMAKE = "0"
-+
-+CAL_PACKAGE_BASE   = "${WORKDIR}/cal_base"
-+CAL_LLD_ROOTPATH = "${CAL_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/cal"
-+
-+export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-+export PDK_CAL_ROOT_PATH = "${CAL_PACKAGE_BASE}/package/all/pdk_/packages"
-+
-+LIMSOCS = ""
-+LIMSOCS_am65xx-evm = "am65xx"
-+LIMSOCS_am65xx-hs-evm = "am65xx"
-+
-+LIMBOARDS = ""
-+LIMBOARDS_am65xx-evm = "am65xx_evm"
-+LIMBOARDS_am65xx-hs-evm = "am65xx_evm"
-+
-+BOARD_PACKAGE = ""
-+BOARD_PACKAGE_am65xx-evm = "am65xx_evm"
-+BOARD_PACKAGE_am65xx-hs-evm = "am65xx_evm"
-+
-+# HTML doc link params
-+PDK_COMP_LINK_TEXT = "CAL"
-+
-+do_configure() {
-+    rm -rf ${CAL_PACKAGE_BASE}
-+    cd ${S}
-+
-+    # remove any previous package
-+    rm -f ${CAL_PACKAGE_BASE}
-+
-+    # make the release package before building it
-+    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${CAL_PACKAGE_BASE} PDK_CAL_COMP_PATH=${S}
-+}
-+
-+do_compile() {
-+    echo "cal lld root path is ${CAL_LLD_ROOTPATH}"
-+    cd ${CAL_LLD_ROOTPATH}
-+
-+    # Build am65xx libraries
-+    make clean lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
-+
-+    #archive
-+    tar -cf cal_lld.tar --exclude='*.tar' ./*
-+}
-+
-+do_install() {
-+    cd ${CAL_LLD_ROOTPATH}
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/cal
-+    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/cal \;
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+
-+INSANE_SKIP_${PN} = "arch ldflags"
-+TI_PDK_COMP = "ti.drv.cal"
+ 
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://udma.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
+@@ -9,18 +10,6 @@ LIC_FILES_CHKSUM = "file://udma.h;beginline=1;endline=31;md5=83d177cf3df55c16b27
+ COMPATIBLE_MACHINE = "k3"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-UDMA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/udma-lld.git"
+-UDMA_LLD_GIT_PROTOCOL = "git"
+-UDMA_LLD_GIT_BRANCH = "master"
+-
+-# Below commit ID corresponds to "DEV.UDMA_LLD.01.00.00.04"
+-UDMA_LLD_SRCREV = "67edfa436beb3362051a097b456ba07c95faa4a6"
+-
+-BRANCH = "${UDMA_LLD_GIT_BRANCH}"
+-SRC_URI = "${UDMA_LLD_GIT_URI};protocol=${UDMA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${UDMA_LLD_SRCREV}"
+-PV = "01.00.00.04"
+ PR = "r0"
+ 
+ DEPENDS_append = " osal-rtos \
+@@ -30,7 +19,7 @@ DEPENDS_append = " osal-rtos \
+ # Build with make instead of XDC
+ TI_PDK_XDCMAKE = "0"
+ 
+-UDMA_PACKAGE_BASE   = "${S}/../udma_base"
++UDMA_PACKAGE_BASE   = "${WORKDIR}/udma_base"
+ UDMA_LLD_ROOTPATH = "${UDMA_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/udma"
+ 
+ export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+@@ -71,3 +60,4 @@ do_install() {
+ FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+ 
+ INSANE_SKIP_${PN} = "arch ldflags"
++TI_PDK_COMP = "ti.drv.udma"
 -- 
 2.7.4
 
