@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F2B4E00E16; Thu,  7 Nov 2019 10:09:57 -0800 (PST)
+	id 0D507E00E16; Thu,  7 Nov 2019 10:09:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	https://www.dnswl.org/, *      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.19.142 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,44 +16,45 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A374E00E11
-	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:52 -0800 (PST)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9qjC070503
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:52 -0600
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE332E00BA1
+	for <meta-ti@yoctoproject.org>; Thu,  7 Nov 2019 10:09:54 -0800 (PST)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9sCV039664
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:54 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573150192;
-	bh=RlxqXw0BX23nD8h6IO1Pfc2A+ksctLSbCXzYmT0dg1s=;
+	s=ti-com-17Q1; t=1573150194;
+	bh=h+TlUuhx7SFr6J41oxY2VQsIba1Y/mtXGeUSKNZWxws=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=u4inJCnVE5uCaHKPyNU/ROBn4cNmj/vw8rYRoo+yO7xJS7U8EdgxnYRVhCYzEjSsf
-	iDUeu3duJvW1xaLkKtsfhPX/Q1P+WK0QoeMKG9kYnUSVmq41Fd9Jvy0qXkLHKa1eGA
-	byDsvkLM0EQMqPWUbCvkFTD1cFzCSzJ7gj+4HEN0=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9qCP125209
-	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:52 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
-	(157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	b=T47zMf836MQhNJhgmg0H33zkilQHi3A44pNaHJSv66rqdhEoIxpJh8GR096k6EvSy
+	9UgVAivuQwJhkbZc1MP8nk9E+ss5Qt06Pqxp4WDGUqdGCX3/9KlzS/6z0ff1r16ixD
+	Ow6wsRz4a/UF1fg6JHmCu7lxBZ7x8hv9WaR3zd7g=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xA7I9sD8121320
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Thu, 7 Nov 2019 12:09:54 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE111.ent.ti.com
+	(10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Thu, 7 Nov 2019 12:09:36 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
-	(157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 7 Nov 2019 12:09:38 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
+	(10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Thu, 7 Nov 2019 12:09:36 -0600
+	Frontend Transport; Thu, 7 Nov 2019 12:09:38 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jIP067418;
-	Thu, 7 Nov 2019 12:09:51 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xA7I9jIX067418;
+	Thu, 7 Nov 2019 12:09:54 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 7 Nov 2019 12:50:14 -0500
-Message-ID: <1573149037-762-20-git-send-email-j-stiffler@ti.com>
+Date: Thu, 7 Nov 2019 12:50:22 -0500
+Message-ID: <1573149037-762-28-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 References: <1573149037-762-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][RFC 19/42] mmcsd-lld: migrate to ti-pdk-fetch.bbclass
+Subject: [master/thud][RFC 27/42] qmss-lld: migrate to ti-pdk-fetch.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -66,55 +67,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 18:09:57 -0000
+X-List-Received-Date: Thu, 07 Nov 2019 18:09:58 -0000
 Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb | 17 +++--------------
- 1 file changed, 3 insertions(+), 14 deletions(-)
+ recipes-bsp/qmss-lld/qmss-lld.inc | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb b/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-index e94d8c8..c9d9d12 100644
---- a/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-+++ b/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-@@ -1,6 +1,7 @@
- SUMMARY = "TI Multimedia card(MMC)/Secure Digital(SD) low level driver for RTOS "
- 
--inherit ti-pdk
-+inherit ti-pdk ti-pdk-fetch
-+PE = "1"
- 
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://MMCSD.h;beginline=1;endline=32;md5=f74069541d4d165a000a66b4043cb065"
-@@ -8,22 +9,9 @@ LIC_FILES_CHKSUM = "file://MMCSD.h;beginline=1;endline=32;md5=f74069541d4d165a00
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|k3"
+diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+index f42f16e..813fcca 100644
+--- a/recipes-bsp/qmss-lld/qmss-lld.inc
++++ b/recipes-bsp/qmss-lld/qmss-lld.inc
+@@ -4,19 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=cd04fb0870
+ COMPATIBLE_MACHINE = "keystone"
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--MMCSD_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/sd-mmc.git"
--MMCSD_LLD_GIT_PROTOCOL = "git"
--MMCSD_LLD_GIT_BRANCH = "master"
--MMCSD_LLD_GIT_DESTSUFFIX = "git/ti/drv/mmcsd"
+-QMSS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/qmss-lld.git"
+-QMSS_LLD_GIT_PROTOCOL = "git"
+-QMSS_LLD_GIT_BRANCH = "master"
+-QMSS_LLD_GIT_DESTSUFFIX = "git/ti/drv/qmss"
++inherit ti-pdk-fetch
++PE = "1"
  
--# Below commit ID corresponds to "DEV.MMCSD_LLD.01.00.00.17D"
--MMCSD_LLD_SRCREV = "d723e336b917989b08bef590c3e125010c0d3461"
+-# Below commit ID corresponding to "DEV.QMSS_LLD.02.01.00.16A"
+-QMSS_LLD_SRCREV = "7ca6e92b2081bd2eb64fa3dc9ca33df78b3ce292"
 -
--BRANCH = "${MMCSD_LLD_GIT_BRANCH}"
--SRC_URI = "${MMCSD_LLD_GIT_URI};destsuffix=${MMCSD_LLD_GIT_DESTSUFFIX};protocol=${MMCSD_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-BRANCH ="${QMSS_LLD_GIT_BRANCH}"
+-SRC_URI = "${QMSS_LLD_GIT_URI};destsuffix=${QMSS_LLD_GIT_DESTSUFFIX};protocol=${QMSS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-SRCREV = "${QMSS_LLD_SRCREV}"
 -
--SRCREV = "${MMCSD_LLD_SRCREV}"
--PV = "01.00.00.17D"
- PR = "r0"
+-PV = "02.01.00.16A"
+ INC_PR = "r0"
  
--S = "${WORKDIR}/${MMCSD_LLD_GIT_DESTSUFFIX}"
+ DEVICELIST = "k2h k2k k2l k2e"
+@@ -24,4 +14,4 @@ DEVICELIST_k2hk = "k2h k2k"
+ DEVICELIST_k2l = "k2l"
+ DEVICELIST_k2e = "k2e"
  
- DEPENDS_append = " edma3-lld-rtos \
-                    osal-rtos \
-@@ -48,3 +36,4 @@ XDCPATH_append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
- 
- # HTML doc link params
- PDK_COMP_LINK_TEXT = "MMCSD LLD"
-+TI_PDK_COMP = "ti.drv.mmcsd"
+-S = "${WORKDIR}/${QMSS_LLD_GIT_DESTSUFFIX}"
++TI_PDK_COMP = "ti.drv.qmss"
 -- 
 2.7.4
 
