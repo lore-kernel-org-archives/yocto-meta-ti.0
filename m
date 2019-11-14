@@ -1,57 +1,41 @@
-Return-Path: <dmurphy@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 25312E00E1B; Wed, 13 Nov 2019 05:50:09 -0800 (PST)
+	id 257E6E00DAF; Wed, 13 Nov 2019 17:21:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/, 
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B2A4E00E18
-	for <meta-ti@yoctoproject.org>; Wed, 13 Nov 2019 05:50:07 -0800 (PST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id xADDo7fa070006
-	for <meta-ti@yoctoproject.org>; Wed, 13 Nov 2019 07:50:07 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573653007;
-	bh=4WnkQhLiIHLmvplK7y1TjTt1Bk4eQtEJx2hZ6H0QNjc=;
-	h=From:To:CC:Subject:Date;
-	b=KAKKucs9BhHnTnGRjPg6/NlM7g8pZNWyL3NiBK+4YAdlt4HmIeVhcQs1FCFl3xOPZ
-	8d1SQskB+yfMR2Ez9ZozsNHWU1Af8uhqi+L++5gaPYtx0G3TfurHLQ9jnWnvICypZM
-	kSibBBHUAQpC1V0AY2nUYqbSkZbBnQqg7dBQGf6U=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xADDo7hP086086
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 13 Nov 2019 07:50:07 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Wed, 13 Nov 2019 07:49:49 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE114.ent.ti.com
-	(157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Wed, 13 Nov 2019 07:49:49 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xADDo6lG011988;
-	Wed, 13 Nov 2019 07:50:06 -0600
-From: Dan Murphy <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 13 Nov 2019 07:49:05 -0600
-Message-ID: <20191113134905.16031-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.22.0.214.g8dca754b1e
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [PATCH] u-boot-ti-staging: update to ti2019.05-rc3
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/,
+	low *      trust
+	*      [64.68.198.64 listed in list.dnswl.org]
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DACFFE00BF7
+	for <meta-ti@yoctoproject.org>; Wed, 13 Nov 2019 17:21:46 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id F418540BF2;
+	Thu, 14 Nov 2019 01:21:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id optfOYLpCE43; Thu, 14 Nov 2019 01:21:45 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C25CF40BE5;
+	Thu, 14 Nov 2019 01:21:44 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 7C8B61742EA;
+	Wed, 13 Nov 2019 20:21:44 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 13 Nov 2019 20:21:44 -0500
+Message-Id: <1573694504-30345-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [RFC][PATCH] vis: mark as compatible with dra7xx family
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,30 +48,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Nov 2019 13:50:09 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 14 Nov 2019 01:21:50 -0000
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb | 4 ++--
+ recipes-bsp/vis-fw/vis_01.50.07.15.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-index d1784cbc..566910cd 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-bsp/vis-fw/vis_01.50.07.15.bb b/recipes-bsp/vis-fw/vis_01.50.07.15.bb
+index 5b9834c..6eaf8de 100644
+--- a/recipes-bsp/vis-fw/vis_01.50.07.15.bb
++++ b/recipes-bsp/vis-fw/vis_01.50.07.15.bb
+@@ -2,12 +2,12 @@ DESCRIPTION = "Radio Application Firmware"
+ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Manifest.html;md5=a59aa54b9470f555cf086b91dca0afa3"
  
--PR = "r28"
-+PR = "r29"
+-COMPATIBLE_MACHINE = "dra7xx-evm"
++COMPATIBLE_MACHINE = "dra7xx"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- BRANCH = "ti-u-boot-2019.01"
+ PR = "r1"
  
--SRCREV = "964fa245a2919a6d4783211efa5dddd1df10e80f"
-+SRCREV = "15f33de024517ae1843cb68e3b8ed81f9281b47f"
+-SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vis/01_50_07_15/exports/vis-${MACHINE}-01.50.07.15.tar.gz;protocol=http"
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vis/01_50_07_15/exports/vis-dra7xx-evm-01.50.07.15.tar.gz;protocol=http"
+ 
+ SRC_URI[md5sum] = "fe8b00e398fb3b7ada0c15b601867acb"
+ SRC_URI[sha256sum] = "6e2aa47ae892910616ebdc96646af778af9a59ca0657716ab4fa4b24a9afae69"
 -- 
-2.22.0.214.g8dca754b1e
+2.7.4
 
 
