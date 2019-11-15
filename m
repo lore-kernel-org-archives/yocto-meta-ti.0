@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2C13E00E85; Fri, 15 Nov 2019 07:34:21 -0800 (PST)
+	id B347BE00E89; Fri, 15 Nov 2019 07:34:21 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,45 +16,45 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6799CE00ED6
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E12D5E00D99
 	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 07:34:20 -0800 (PST)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYI1J038823
-	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:18 -0600
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYKeY057583
+	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:20 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573832058;
-	bh=z7jMImRQ/ac24jXoE1nUlvVfBgyapal0eocbJyqCRWo=;
+	s=ti-com-17Q1; t=1573832060;
+	bh=yhB+QxMgylV4BkVb0WdkbXGRiI/5ed9I+Ifnvuv+KyU=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=pY+W2XUnFHdIUgJGBgVVw2xLb+GEhrII6FU1ipYyyOSDc6GtkBFa2UaJbvu0lW4pg
-	dW6PS+boEZ7LQhcmD/szi4TuvJH6TIHdHn/eEYc7MZ6xtflxzhmSsGBdMUrhWEpODr
-	5wKLWGQC4klLo2DUudLG9Fk9pDdqFCgUCbqivkMk=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xAFFYIxo114611
+	b=ioQ0QyoDjm7aSXTp+ca+KR8BHJkwOkPWuwLembwIy7DV7nWmz7dAhz+SlU3ADxE8q
+	ylp55NfuO8BdQcZm4l1kTB1MAFG8tvrkhzBG1r+/m98IKxXjXglcM/lNgL4a/tPaWm
+	Va8p2vmQSz+XNvSOVpfIMzWVIUKmyMKRg9DejdB0=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xAFFYKUX114631
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:18 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE110.ent.ti.com
-	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:20 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Fri, 15 Nov 2019 09:34:18 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE103.ent.ti.com
-	(10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 15 Nov 2019 09:34:20 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+	(157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Fri, 15 Nov 2019 09:34:18 -0600
+	Frontend Transport; Fri, 15 Nov 2019 09:34:20 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBfj041975;
-	Fri, 15 Nov 2019 09:34:18 -0600
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBfp041975;
+	Fri, 15 Nov 2019 09:34:20 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 15 Nov 2019 10:14:43 -0500
-Message-ID: <1573830902-17409-24-git-send-email-j-stiffler@ti.com>
+Date: Fri, 15 Nov 2019 10:14:49 -0500
+Message-ID: <1573830902-17409-30-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 References: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][PATCH 23/42] pcie-lld: migrate to ti-pdk-fetch.bbclass
+Subject: [master/thud][PATCH 29/42] sciclient: migrate to ti-pdk-fetch.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,51 +72,53 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb | 20 +++++---------------
- 1 file changed, 5 insertions(+), 15 deletions(-)
+ recipes-bsp/sciclient/sciclient-rtos_git.bb | 20 ++++++--------------
+ 1 file changed, 6 insertions(+), 14 deletions(-)
 
-diff --git a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
-index 51a24e7..cbf15a3 100644
---- a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
-+++ b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
+diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+index bfaa84a..6a3d79c 100644
+--- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
++++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
 @@ -1,6 +1,10 @@
- SUMMARY = "TI RTOS low lever driver for Peripheral Interconnect Express (PCIE)"
+ SUMMARY = "TI RTOS low level driver for SCICLIENT"
  
 -inherit ti-pdk
 +inherit ti-pdk ti-pdk-fetch
 +
-+TI_PDK_COMP = "ti.drv.pcie"
++TI_PDK_COMP = "ti.drv.sciclient"
 +
 +PE = "1"
  
  LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://pcie.h;beginline=1;endline=34;md5=566a784d78790a716d641764d5d60b74"
-@@ -8,25 +12,11 @@ LIC_FILES_CHKSUM = "file://pcie.h;beginline=1;endline=34;md5=566a784d78790a716d6
- COMPATIBLE_MACHINE = "omap-a15|keystone|c66x|k3"
+ LIC_FILES_CHKSUM = "file://sciclient.h;beginline=1;endline=31;md5=7224b2eeca1444815f1737bfcdfa892a"
+@@ -8,18 +12,6 @@ LIC_FILES_CHKSUM = "file://sciclient.h;beginline=1;endline=31;md5=7224b2eeca1444
+ COMPATIBLE_MACHINE = "k3"
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--PCIE_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pcie-lld.git"
--PCIE_LLD_GIT_PROTOCOL = "git"
--PCIE_LLD_GIT_BRANCH = "master"
--PCIE_LLD_GIT_DESTSUFFIX = "git/ti/drv/pcie"
+-SCICLIENT_GIT_URI = "git://git.ti.com/keystone-rtos/sciclient.git"
+-SCICLIENT_GIT_PROTOCOL = "git"
+-SCICLIENT_GIT_BRANCH = "master"
 -
--# Below commit ID corresponds to "DEV.PCIE_LLD.02.03.00.05"
--PCIE_LLD_SRCREV = "3cdbb5e4e4ccced496a4ca91b203965fafffc3e9"
+-# Below commit ID corresponds to "DEV.SCICLIENT.01.00.00.04"
+-SCICLIENT_SRCREV = "287fe553ef548a60cce59e6a41d2e173ecbbc18a"
 -
--BRANCH = "${PCIE_LLD_GIT_BRANCH}"
--SRC_URI = "${PCIE_LLD_GIT_URI};destsuffix=${PCIE_LLD_GIT_DESTSUFFIX};protocol=${PCIE_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-BRANCH = "${SCICLIENT_GIT_BRANCH}"
+-SRC_URI = "${SCICLIENT_GIT_URI};protocol=${SCICLIENT_GIT_PROTOCOL};branch=${BRANCH}"
 -
--SRCREV = "${PCIE_LLD_SRCREV}"
--PV = "02.03.00.05"
+-SRCREV = "${SCICLIENT_SRCREV}"
+-PV = "01.00.00.04"
  PR = "r0"
  
- DEPENDS_append_k3 = " udma-lld-rtos \
- "
+ DEPENDS_append = " osal-rtos common-csl-ip-rtos"
+@@ -27,7 +19,7 @@ DEPENDS_append = " osal-rtos common-csl-ip-rtos"
+ # Build with make instead of XDC
+ TI_PDK_XDCMAKE = "0"
  
--S = "${WORKDIR}/${PCIE_LLD_GIT_DESTSUFFIX}"
+-SCICLIENT_PACKAGE_BASE   = "${S}/../sciclient_base"
++SCICLIENT_PACKAGE_BASE = "${WORKDIR}/sciclient_base"
+ SCICLIENT_ROOTPATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/sciclient"
  
- export PDK_PCIE_ROOT_PATH ="${WORKDIR}/build"
- export DEST_ROOT="${S}"
+ export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
 -- 
 2.7.4
 
