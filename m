@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1FB24E00F05; Fri, 15 Nov 2019 07:34:29 -0800 (PST)
+	id 2D2E4E00EBC; Fri, 15 Nov 2019 07:34:29 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB82DE00EBC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF9C7E00EF3
 	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 07:34:24 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYOHj038884
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYOYD038888
 	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:24 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1573832064;
-	bh=5/ULI39JJ2TSSGXgR6NqfyGmL0oExQkBSZ4jNGqVPrs=;
+	bh=BWAyKAW8vVxOW3XjbicRncQqiWbmTcwh5y1DF+kdmzU=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=E27qEsDRIYEkGXn3iG3YsoH8E4JHpg+Ris7Ks7DLo7+9JZU+sor/VJl5VWordG9oa
-	T0qpFHxmW3LIQFON9iPgLlsfHL1JPhna+cxpKWBkQDagBEGXOElUu2b1fRoZXygs2w
-	o1/6AFdSCbIVW9H+MS3OEC19+8aPdIo7dI+M6GRo=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xAFFYOaL095281
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	b=XT0Zr47ujiosuoC+tF63dPClameqZwNQiKQdNOzvDOayo9jQhSVWvyHUUENMMbHYq
+	qR4Qfr3qzARD8dr6KKQuTWuuxHJ+Q1q1GE6u1H3NEKGmiwYG0zn/inO4WYF2I/esUp
+	Pw1CFaYEAJGCGo+4MX3aowYLInFfOGW13ghjF2kc=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYOQr050971
 	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:24 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
-	Fri, 15 Nov 2019 09:34:23 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
-	(157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 15 Nov 2019 09:34:24 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
+	(10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
-	Frontend Transport; Fri, 15 Nov 2019 09:34:23 -0600
+	Frontend Transport; Fri, 15 Nov 2019 09:34:24 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBg3041975;
-	Fri, 15 Nov 2019 09:34:23 -0600
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBg4041975;
+	Fri, 15 Nov 2019 09:34:24 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 15 Nov 2019 10:15:01 -0500
-Message-ID: <1573830902-17409-42-git-send-email-j-stiffler@ti.com>
+Date: Fri, 15 Nov 2019 10:15:02 -0500
+Message-ID: <1573830902-17409-43-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 References: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][PATCH 41/42] fvid2: TI RTOS Video Driver Interface
+Subject: [master/thud][PATCH 42/42] iolink-lld: TI RTOS low level driver for IO-Link Master
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,86 +71,49 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/fvid2/fvid2-rtos_git.bb | 70 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 70 insertions(+)
- create mode 100755 recipes-bsp/fvid2/fvid2-rtos_git.bb
+ recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb | 33 +++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb
 
-diff --git a/recipes-bsp/fvid2/fvid2-rtos_git.bb b/recipes-bsp/fvid2/fvid2-rtos_git.bb
-new file mode 100755
-index 0000000..07f2c34
+diff --git a/recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb b/recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb
+new file mode 100644
+index 0000000..c0c27b6
 --- /dev/null
-+++ b/recipes-bsp/fvid2/fvid2-rtos_git.bb
-@@ -0,0 +1,70 @@
-+SUMMARY = "TI RTOS Video Driver Interface"
++++ b/recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb
+@@ -0,0 +1,33 @@
++SUMMARY = "TI RTOS low level driver for IO-Link Master"
 +
 +inherit ti-pdk ti-pdk-fetch
 +
-+TI_PDK_COMP = "ti.drv.fvid2"
++TI_PDK_COMP = "ti.drv.iolink"
 +
 +PE = "1"
 +
-+require recipes-ti/includes/ti-paths.inc
-+
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://fvid2.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
++LIC_FILES_CHKSUM = "file://IOLINK.h;beginline=1;endline=32;md5=da669339a4b8594ed3edbe7ca30c726e"
 +
-+COMPATIBLE_MACHINE = "k3"
++COMPATIBLE_MACHINE = "ti43x"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+PR = "r0"
++PR = "r2"
 +
 +DEPENDS_append = " osal-rtos \
++"
++DEPENDS_append_ti43x = " starterware-rtos \
++                         pruss-lld-rtos \
 +"
 +
 +# Build with make instead of XDC
 +TI_PDK_XDCMAKE = "0"
 +
-+FVID2_PACKAGE_BASE   = "${WORKDIR}/fvid2_base"
-+FVID2_ROOTPATH = "${FVID2_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/fvid2"
 +
-+export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-+export PDK_FVID2_ROOT_PATH = "${FVID2_PACKAGE_BASE}/package/all/pdk_/packages"
++export PDK_IOLINK_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
 +
-+
-+BOARD_PACKAGE = ""
-+BOARD_PACKAGE_am65xx-evm = "am65xx_evm"
-+BOARD_PACKAGE_am65xx-hs-evm = "am65xx_evm"
-+BOARD_PACKAGE_j7-evm = "j721e_evm"
++INSANE_SKIP_${PN} = "arch"
 +
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "FVID2"
-+
-+do_configure() {
-+    rm -rf ${FVID2_PACKAGE_BASE}
-+    cd ${S}
-+
-+    # remove any previous package
-+    rm -f ${FVID2_PACKAGE_BASE}
-+
-+    # make the release package before building it
-+    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${FVID2_PACKAGE_BASE} PDK_FVID2_COMP_PATH=${S}
-+}
-+
-+do_compile() {
-+    echo "fvid2 root path is ${FVID2_ROOTPATH}"
-+    cd ${FVID2_ROOTPATH}
-+
-+    # Build am65xx libraries
-+    make clean lib xdc_meta LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}"  LIMIT_CORES="${TI_PDK_LIMIT_CORES}"
-+
-+    #archive
-+    tar -cf fvid2.tar --exclude='*.tar' ./*
-+}
-+
-+do_install() {
-+    cd ${FVID2_ROOTPATH}
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/fvid2
-+    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/fvid2 \;
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
-+
-+INSANE_SKIP_${PN} = "arch ldflags"
++PDK_COMP_LINK_TEXT = "IOLINK LLD"
 -- 
 2.7.4
 
