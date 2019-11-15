@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9EE99E00E81; Fri, 15 Nov 2019 07:34:18 -0800 (PST)
+	id B2F7EE00E89; Fri, 15 Nov 2019 07:34:18 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,7 +8,7 @@ X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	https://www.dnswl.org/, *      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -16,44 +16,44 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 399C0E00E89
-	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 07:34:16 -0800 (PST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4F38E00E85
+	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 07:34:15 -0800 (PST)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYFJ8067930
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYFg9057532
 	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:15 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1573832055;
-	bh=v7UaKByoEsdTyKsFhn8p63CcfmspB+tt1IfIgbdOQQQ=;
+	bh=abzA4CT/4N/YnXfX1y7kHf7Hx98scF7IXYx29ysHGBY=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=xPz7do0g0EC6x6FAcULam4qcHvpMZinkZOaguziCwaNjpN+Jd6yVLYKmmg4iTH5xl
-	jOcDBVkq9/GfeWPCRrIaXhE/pPvrIdyOa7ETpvNeWDUe0MQTWrWqhO3ok2HfS/G9tA
-	JtgjEq7VKfDpo4QR1ysQRa8YBhnPbwzc5hwlygWY=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYFUb050741
+	b=gmwbMzoFV+RZvpq353I5zW6ge51G7OrGALsgcVmKIjrbXMxCJJGe/AogBFRMc04iv
+	8ypJPTjcOqCXvRKiI1EUpIGW6lF/LB7FOY+dNzgpHj6n0nEGSFcz0eMe+qBQWVMmkK
+	kn0kYqDt62v9dejQVFZbZGvQMPeq+EQPPcQ+CA+0=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYFsI050734
 	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:15 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE108.ent.ti.com
-	(157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
 	Fri, 15 Nov 2019 09:34:15 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
-	(157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
+	(157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
 	Frontend Transport; Fri, 15 Nov 2019 09:34:15 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBfZ041975;
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBfY041975;
 	Fri, 15 Nov 2019 09:34:15 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 15 Nov 2019 10:14:33 -0500
-Message-ID: <1573830902-17409-14-git-send-email-j-stiffler@ti.com>
+Date: Fri, 15 Nov 2019 10:14:32 -0500
+Message-ID: <1573830902-17409-13-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 References: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][PATCH 13/42] i2c-lld: migrate to ti-pdk-fetch.bbclass
+Subject: [master/thud][PATCH 12/42] hyplnk-lld: migrate to ti-pdk-fetch.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -69,55 +69,46 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Fri, 15 Nov 2019 15:34:18 -0000
 Content-Type: text/plain
 
+LIC_FILES_CHKSUM changed to use a relative path.
+
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb | 19 +++++--------------
- 1 file changed, 5 insertions(+), 14 deletions(-)
+ recipes-bsp/hyplnk-lld/hyplnk-lld.inc | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-index bf64abf..1cd1c99 100644
---- a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-+++ b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-@@ -1,6 +1,10 @@
- SUMMARY = "TI RTOS low level driver for Inter-IC module (I2C)"
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+index a73f513..849c2ee 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+@@ -6,24 +6,16 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--inherit ti-pdk
-+inherit ti-pdk ti-pdk-fetch
-+
-+TI_PDK_COMP = "ti.drv.i2c"
-+
+ LLDNAME="hyplnk"
+ 
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/${HYPLNK_GIT_DESTSUFFIX}/COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
+ 
+-HYPLNK_GIT_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git"
+-HYPLNK_GIT_PROTOCOL = "git"
+-HYPLNK_GIT_BRANCH = "master"
+-HYPLNK_GIT_DESTSUFFIX = "git/ti/drv/${LLDNAME}"
++inherit ti-pdk-fetch
+ 
+-# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.08A
+-HYPLNK_SRCREV = "67fc593f28d243d25a5e19720eba8b3e53a5efc0"
++TI_PDK_COMP = "ti.drv.hyplnk"
+ 
+-BRANCH="${HYPLNK_GIT_BRANCH}"
+-SRC_URI = "${HYPLNK_GIT_URI};destsuffix=${HYPLNK_GIT_DESTSUFFIX};protocol=${HYPLNK_GIT_PROTOCOL};branch=${BRANCH}"
+-SRCREV = "${HYPLNK_SRCREV}"
 +PE = "1"
  
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://I2C.h;beginline=1;endline=32;md5=50084375278c1a2779571be134f98f7c"
-@@ -8,19 +12,7 @@ LIC_FILES_CHKSUM = "file://I2C.h;beginline=1;endline=32;md5=50084375278c1a277957
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x|k3"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-PV = "2.1.0.8A"
+ INC_PR = "r0"
  
--I2C_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/i2c-lld.git"
--I2C_LLD_GIT_PROTOCOL = "git"
--I2C_LLD_GIT_BRANCH = "master"
--I2C_LLD_GIT_DESTSUFFIX = "git/ti/drv/i2c"
--
--# Below commit ID corresponds to "DEV.I2C_LLD.01.00.00.16A"
--I2C_LLD_SRCREV = "1524f975a96de004000ce7e5b3367d6640b7d193"
--
--BRANCH = "${I2C_LLD_GIT_BRANCH}"
--SRC_URI = "${I2C_LLD_GIT_URI};destsuffix=${I2C_LLD_GIT_DESTSUFFIX};protocol=${I2C_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+ DEVICELIST_k2hk = "k2h k2k"
+ DEVICELIST_k2e  = "k2e"
  
--SRCREV = "${I2C_LLD_SRCREV}"
--PV = "01.00.00.16A"
- PR = "r0"
- 
- DEPENDS_append = " osal-rtos \
-@@ -43,7 +35,6 @@ DEPENDS_append_j7-evm = " sciclient-rtos \
- # Build with make instead of XDC
- TI_PDK_XDCMAKE = "0"
- 
--S = "${WORKDIR}/${I2C_LLD_GIT_DESTSUFFIX}"
- 
- export PDK_I2C_ROOT_PATH ="${WORKDIR}/build"
- export DEST_ROOT="${S}"
+-S = "${WORKDIR}/${HYPLNK_GIT_DESTSUFFIX}"
 -- 
 2.7.4
 
