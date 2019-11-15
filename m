@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1ECFCE00F67; Fri, 15 Nov 2019 07:34:27 -0800 (PST)
+	id 3708DE01069; Fri, 15 Nov 2019 07:34:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,44 +17,43 @@ X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25BBEE00D99
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 602B5E00E7B
 	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 07:34:23 -0800 (PST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYMI8038866
-	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:22 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYNBU038871
+	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:23 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1573832062;
-	bh=PVPA6ku/iD7fBhifSkZLbP8QIR6jH5nPkatifFFAwOs=;
+	s=ti-com-17Q1; t=1573832063;
+	bh=yhSJupXZdMW7tt9hc55yUKSIpn/Ca4pWp3WjeOAXl1g=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=TQahxC8kiraOnM1C9WMdlOOKFMjbl/Oxj9mI7opPwEORxowItC7PpjSFM5f/rSih+
-	Mg9+MDItNtyrCizuTsqKD4TU3i6J4XvL+mc/UUWFBrbJHY2XpWOcwDfyBVhTY2lqVS
-	GhELtaLppoNM5C8lvILuZjhguJz6M5/zxs7oTrNw=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xAFFYMeR010657
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:22 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE115.ent.ti.com
-	(10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	b=PknZ1OgRMY5HPldwu5jugMEhbL0W+1S56YdsmKwE+MtaQLdKzixNsCuqnGgpDhFMn
+	A9GueTx1EUYACGpVstvvrsuUDsGBa08y1GoxRinFdi2wrtaaW+tTeA4LJsNxjwzR58
+	ExAy/WF5TqItT+r3DZtt+v79XzFPhJ0Tfoi8JtxE=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYNmj050929
+	for <meta-ti@yoctoproject.org>; Fri, 15 Nov 2019 09:34:23 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
+	(10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3;
 	Fri, 15 Nov 2019 09:34:22 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
-	(10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE107.ent.ti.com
+	(10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
 	Frontend Transport; Fri, 15 Nov 2019 09:34:22 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBfw041975;
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAFFYBfx041975;
 	Fri, 15 Nov 2019 09:34:22 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 15 Nov 2019 10:14:56 -0500
-Message-ID: <1573830902-17409-37-git-send-email-j-stiffler@ti.com>
+Date: Fri, 15 Nov 2019 10:14:57 -0500
+Message-ID: <1573830902-17409-38-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 References: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Subject: [master/thud][PATCH 36/42] udma-lld: migrate to ti-pdk-fetch.bbclass
+Subject: [master/thud][PATCH 37/42] usb-lld: migrate to ti-pdk-fetch.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -72,54 +71,44 @@ Content-Type: text/plain
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/udma-lld/udma-lld-rtos_git.bb | 20 ++++++--------------
- 1 file changed, 6 insertions(+), 14 deletions(-)
+ recipes-bsp/usb-lld/usb-lld-rtos_git.bb | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
 
-diff --git a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb b/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
-index c3352c1..214317c 100644
---- a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
-+++ b/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
-@@ -1,7 +1,11 @@
- SUMMARY = "TI RTOS low level driver for UDMA"
- DESCRIPTION = "TI RTOS low level driver for Universal DMA module "
+diff --git a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+index 6a212e3..7aa0d1b 100644
+--- a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
++++ b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+@@ -1,6 +1,10 @@
+ SUMMARY = "TI RTOS USB low level driver"
  
 -inherit ti-pdk
 +inherit ti-pdk ti-pdk-fetch
 +
-+TI_PDK_COMP = "ti.drv.udma"
++TI_PDK_COMP = "ti.drv.usb"
 +
 +PE = "1"
  
  LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://udma.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
-@@ -9,18 +13,6 @@ LIC_FILES_CHKSUM = "file://udma.h;beginline=1;endline=31;md5=83d177cf3df55c16b27
- COMPATIBLE_MACHINE = "k3"
+ LIC_FILES_CHKSUM = "file://USBver.h;beginline=16;endline=46;md5=5394fa32763383d2c8e2aca5a1c67805"
+@@ -8,18 +12,6 @@ LIC_FILES_CHKSUM = "file://USBver.h;beginline=16;endline=46;md5=5394fa32763383d2
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|k3"
  PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--UDMA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/udma-lld.git"
--UDMA_LLD_GIT_PROTOCOL = "git"
--UDMA_LLD_GIT_BRANCH = "master"
+-USB_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/usb.git"
+-USB_LLD_GIT_PROTOCOL = "git"
+-USB_LLD_GIT_BRANCH = "master"
 -
--# Below commit ID corresponds to "DEV.UDMA_LLD.01.00.00.04"
--UDMA_LLD_SRCREV = "67edfa436beb3362051a097b456ba07c95faa4a6"
+-# Below commit ID corresponds to "DEV.USB_LLD.01.00.00.19"
+-USB_LLD_SRCREV = "1304fbdc7e0d67dd3722ac1a450a547a5d82d20a"
 -
--BRANCH = "${UDMA_LLD_GIT_BRANCH}"
--SRC_URI = "${UDMA_LLD_GIT_URI};protocol=${UDMA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-BRANCH = "${USB_LLD_GIT_BRANCH}"
+-SRC_URI = "${USB_LLD_GIT_URI};protocol=${USB_LLD_GIT_PROTOCOL};branch=${BRANCH}"
 -
--SRCREV = "${UDMA_LLD_SRCREV}"
--PV = "01.00.00.04"
+-SRCREV = "${USB_LLD_SRCREV}"
+-PV = "01.00.00.19"
  PR = "r0"
  
- DEPENDS_append = " osal-rtos \
-@@ -30,7 +22,7 @@ DEPENDS_append = " osal-rtos \
- # Build with make instead of XDC
- TI_PDK_XDCMAKE = "0"
- 
--UDMA_PACKAGE_BASE   = "${S}/../udma_base"
-+UDMA_PACKAGE_BASE   = "${WORKDIR}/udma_base"
- UDMA_LLD_ROOTPATH = "${UDMA_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/udma"
- 
- export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+ DEPENDS_append = " osal-rtos"
 -- 
 2.7.4
 
