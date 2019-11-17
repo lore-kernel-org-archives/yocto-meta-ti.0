@@ -1,74 +1,67 @@
-Return-Path: <paul@betafive.co.uk>
+Return-Path: <colin.bester@biocharger.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4C826E00D8B; Sat, 16 Nov 2019 03:51:22 -0800 (PST)
+	id D65ADE00D88; Sun, 17 Nov 2019 06:56:04 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW,
-	SPF_HELO_PASS autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/,
-	low *      trust
-	*      [66.111.4.25 listed in list.dnswl.org]
-	* -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.167.171 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-X-Greylist: delayed 461 seconds by postgrey-1.32 at yocto-www;
-	Sat, 16 Nov 2019 03:51:21 PST
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
-	[66.111.4.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7932AE00AE6
-	for <meta-ti@yoctoproject.org>; Sat, 16 Nov 2019 03:51:21 -0800 (PST)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by mailout.nyi.internal (Postfix) with ESMTP id E532F21B01;
-	Sat, 16 Nov 2019 06:43:39 -0500 (EST)
-Received: from imap2 ([10.202.2.52])
-	by compute1.internal (MEProxy); Sat, 16 Nov 2019 06:43:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=betafive.co.uk;
-	h=mime-version:message-id:date:from:to:subject:content-type; s=
-	fm3; bh=XT/7SJ3/S/hhqmnR0E9jvuxiTWWGQ3GA/EBYPjivlTY=; b=mwY6Sw09
-	Cj2fab8SUsuYR9jSbcJq2tIGCW++DgxSeZPwM6QNCk8zWebFt0o6YmltFnZWatnM
-	N3EkK3FHRU9fhnOSk2//uxjcumtroIsD4zqRWDHUySKohw5vhrTDH7In8VGjGcFD
-	of2DH706MvFdruVocTCd5ufd1M6i/fP2QRXtA16I1OPmHcfqTm0V0jHnAbnGhh3G
-	fMOEzcewnJoM6lpUXNusjjF0apxZ2LsX4kPErVhFtVArsZ2FAqbm8hwL4Z5pnXcy
-	nZWjy/0Pv42/Ayzz6k0SnGallBYtJG9Lrt/mlr51BRVr4DFay4Ql6nL9YCdmbC9X
-	1wzTeXIiJLKN2g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-type:date:from:message-id
-	:mime-version:subject:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm1; bh=XT/7SJ3/S/hhqmnR0E9jvuxiTWWGQ
-	3GA/EBYPjivlTY=; b=BcI+GnMVp9do6oWFFhuo9CHQwzmUmWkC+m9qQeEGUyqTe
-	QKq/dyhTRFShCIV/5aN000GurUIU7uTjMSXfYtlhwSoTMJ4IVFY/CYIFswAWqNBg
-	gIf93I9kSdYu69NWmJvuq1SapFXfOqB96Uv9MAaYYg0AhlnI/DhvbEOpfY2NDO47
-	N6CqLjn6Afb5cPnIO7rVpgyK7ONh/KCuKY4SkYzhbOD3GNR6PbAS1GVnYiHF65Pm
-	VdMQ/OKJIMX5cbO9FTfd44mDSvMXGdzChGAbVpQL5pwSj5fFasGIFcwxsvEvA+YD
-	Wl4SFLsRdHJxdqypmaronJFTir9h0gEXRkPTVwrMA==
-X-ME-Sender: <xms:6-DPXYUZKhFcbG-sm5bx3PWJiAiLXQPgByNOP7fN_aBn9FAOIq5-VA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedrudefledgtdejucetufdoteggodetrfdotf
-	fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-	uceurghilhhouhhtmecufedttdenucenucfjughrpefofgggkfffhffvufgtsehttdertd
-	erredtnecuhfhrohhmpedfrfgruhhluceurghrkhgvrhdfuceophgruhhlsegsvghtrghf
-	ihhvvgdrtghordhukheqnecurfgrrhgrmhepmhgrihhlfhhrohhmpehprghulhessggvth
-	grfhhivhgvrdgtohdruhhknecuvehluhhsthgvrhfuihiivgeptd
-X-ME-Proxy: <xmx:6-DPXaMWFkyBaZQxkt6Vbd7esyASKPmnm0QyPO8KNhEwdBkFI8RyVw>
-	<xmx:6-DPXTynOkXGoZQQy5-dl5TfTaCTMyLxSk_MTokXGOfI0rrVqX5S-Q>
-	<xmx:6-DPXfjosDEtU61semGdoHz3jEZLu5SycZss33BYfLfkbgXvmKXELw>
-	<xmx:6-DPXTw4Sch6kl__pwlR2Lvf6uiXatzbwH6Is4WHACDMuZvNiwOe2Q>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id 64475E00A3; Sat, 16 Nov 2019 06:43:39 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.1.7-562-gfd0633a-fmstable-20191114v1
-Mime-Version: 1.0
-Message-Id: <2972340c-d2ba-481b-900c-9c758cb60fde@www.fastmail.com>
-Date: Sat, 16 Nov 2019 11:43:19 +0000
-From: "Paul Barker" <paul@betafive.co.uk>
-To: meta-ti@yoctoproject.org, denys@ti.com
-Subject: Backport request for thud
+Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com
+	[209.85.167.171])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68841E00D47
+	for <meta-ti@yoctoproject.org>; Sun, 17 Nov 2019 06:56:04 -0800 (PST)
+Received: by mail-oi1-f171.google.com with SMTP id o12so2847802oic.9
+	for <meta-ti@yoctoproject.org>; Sun, 17 Nov 2019 06:56:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=biocharger.com; s=google;
+	h=from:content-transfer-encoding:mime-version:subject:message-id:date
+	:to; bh=D0mbYnO0o25An0VXMZpDJRFY1QrH/TorrTmWm3I8DuA=;
+	b=BnUq/Okt0iK6yc5MsLtUKs6VAaZjzCEam6qRLKiPrrGs5X1+1LdThnMvxtJ3FXVKr9
+	lokiJAZEFIVsKExJi2bZuUshy9D92G7l81mE11uZNFp9I9tHg7/YbuCyBTxoT5M7DTob
+	MHyPU/Ig/xTJIAok8SSgnHzXhLGfuGaJCU8RS3x6dvNZ+/BIw2BU6/U0QgeakhWYM7OH
+	3xGVAOxglbse9G87RZNW4ZHkxD1WlJvWWF70D/2pjDZ0UkU+SS8ZWAywFtKhoIpTh/jd
+	vLaEusXpuLsp218/UiZU0M8lcKTbEd7tX2c13ljgZU3C4MFuAdJxAOIhxSNNwvkAPWRe
+	Bq1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:content-transfer-encoding:mime-version
+	:subject:message-id:date:to;
+	bh=D0mbYnO0o25An0VXMZpDJRFY1QrH/TorrTmWm3I8DuA=;
+	b=s7bIHSOeafOr8PadAggT6SHMJ7JArV2z0H1JVf7rBKo5D71P3OYqKDsngZqwt4arFj
+	58me7eOt7JvXtyDe3kHIdxB91ZVbXh16fo+lrRyraF+Vae9VbFhJqfmVaHohVtuGx6mw
+	eK9QRia91I+WCWakwitp/Tmb5koq2GmaXQ/6PIuSkne+Q77Vt0UYKF88xOwe84M7PlyD
+	iALTCyDHD9LWobpHWOXln4SGaLExSv7RUmrTQfT/0F3BdZ8G4Ab8qHeMmAsH0NdiCLx7
+	9HvwyogZ7FfNSc3xZIUfs4vExy+y+gCfbirO3uXZqvfb6ILW6wWYh6+Bn783bmq+DK1q
+	6yFQ==
+X-Gm-Message-State: APjAAAV7cgD9ByJbcFyjeaXw2Td7RsLuFe1cAv/pvOJeyqsQUZodwwEn
+	p+WsuDgqx6Qdv9uaFXpWBRml88eos0cA0g==
+X-Google-Smtp-Source: APXvYqxAuFMTkyUxmaCCquLRz9uPRKESDzqT4BRYnx9YNq+S5OWucV7PbhNAbFUS+WLXHwzm1sOVNQ==
+X-Received: by 2002:a05:6808:88:: with SMTP id
+	s8mr15540304oic.109.1574002563347; 
+	Sun, 17 Nov 2019 06:56:03 -0800 (PST)
+Received: from [192.168.1.69] ([209.94.253.133])
+	by smtp.gmail.com with ESMTPSA id
+	a23sm4937573oia.41.2019.11.17.06.56.01 for <meta-ti@yoctoproject.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 17 Nov 2019 06:56:02 -0800 (PST)
+From: Colin Bester <colin.bester@biocharger.com>
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
+Message-Id: <5B61D358-0332-46AF-B815-C49CBD1433C5@biocharger.com>
+Date: Sun, 17 Nov 2019 08:56:00 -0600
+To: meta-ti@yoctoproject.org
+X-Mailer: Apple Mail (2.3445.104.11)
+Subject: Equivalence to shipped BBB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -81,15 +74,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Nov 2019 11:51:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 17 Nov 2019 14:56:04 -0000
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-I'm currently seeing build failures on the thud branch with meta-ti under Centos 7 and Centos 8. As /lib and /lib64 are links to /usr/lib and /usr/lib64 respectively, the logic in ti-unpack.inc is looking for the 32-bit C library under /lib32 which doesn't exist.
+Can one create BBB image as is currently shipped today using yocto and =
+meta-ti or is additional building/installation required after creation =
+of image via yocto?
 
-Could you backport 6f80b1e5595a13eec465581cfb352efcb0286bc8 from master to thud to fix this?
 
-Thanks,
+Internet Disclaimer
+_________________
 
--- 
-Paul Barker
+This message (including any attachments) contains confidential =
+information intended for a specific individual and purpose, and may be =
+protected by law.=20
+If you are not the intended recipient, you should delete this message =
+and are hereby notified that any disclosure, copying, or distribution of =
+this message, or the taking of any action based on it, is strictly =
+prohibited.
+_________________
+
+
+
 
