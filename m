@@ -1,43 +1,68 @@
-Return-Path: <denys@ti.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9E5E4E00E3D; Wed, 20 Nov 2019 18:32:44 -0800 (PST)
+	id B3086E00E04; Thu, 21 Nov 2019 07:01:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SUBJ_OBFU_PUNCT_FEW autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/,
-	low *      trust
-	*      [64.68.198.64 listed in list.dnswl.org]
-	* 0.7 SUBJ_OBFU_PUNCT_FEW Possible punctuation-obfuscated Subject:
-	header
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D47EE00E3B
-	for <meta-ti@yoctoproject.org>; Wed, 20 Nov 2019 18:32:43 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 67E5E40BEA;
-	Thu, 21 Nov 2019 02:32:42 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id iXPymeIwyV4O; Thu, 21 Nov 2019 02:32:42 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1C6E440BE4;
-	Thu, 21 Nov 2019 02:32:40 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id EF533174318;
-	Wed, 20 Nov 2019 21:32:39 -0500 (EST)
-From: Denys Dmytriyenko <denys@ti.com>
+	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	provider *      (raj.khem[at]gmail.com)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/,
+	no *      trust
+	*      [209.85.215.193 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 555BDE00DB7
+	for <meta-ti@yoctoproject.org>; Thu, 21 Nov 2019 07:01:00 -0800 (PST)
+Received: by mail-pg1-f193.google.com with SMTP id k13so1735857pgh.3
+	for <meta-ti@yoctoproject.org>; Thu, 21 Nov 2019 07:01:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ei5fFTZvXSPMEu1KsyXxs92R7jlt9Lg3TPzuzHmToq4=;
+	b=rZU/xeg/FE+5+OAajZz3T/tCeTWnqTt4+KycKLLWYpnNCXDtwBE2B5QCVbQZUoCfxu
+	aC714Yb8gHw5TKR6jN3vVK/iPrJsm9KnxJwwqKCiTYzCyLeKrqceE5YRYzhaK5Li9Hc5
+	W0oLcQ0QKPFXstC+0Q0F0fQ/gCCffxmYhFrkkxNVjWwwRntj2e31UDzqXAXGZLG9JcuD
+	4nyi2CEG7T32pH/ft3AK0XLkBsdpiSE7GDwllD9OzS8NMsJq92FMHg79njmE57tFX/AN
+	yUw03arklBHBs9/zQkGbesYkVbBqYagNWb6qukBhKr7fwLbAA776t6VQAjYJh4EAhjiQ
+	ijkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ei5fFTZvXSPMEu1KsyXxs92R7jlt9Lg3TPzuzHmToq4=;
+	b=FymS2QHBWqRb+57mAF/L0UDQhl+3i9VIaOM9aZHEh+chWshxwdI3d9byXBo/S4Z2oW
+	D+TyG5vWsl4eIyCzr/xlpOHJbFfyXZpHFJ1n91S/EWnuOv5eIEAgYE1/8aTtJglD26uP
+	FHHlJyfW9LIh/95ALSHJTyjKWpQG/z37WmrxOF9PgRm/1f4prhhUUhb0K4FBs9yCB3BD
+	qfvndt4n4+bvyQA7pJ9OBYol28FFbX0s46vaqvbyJIWrZ950pggAjxJG+3LCpVZgmHGj
+	K4lT4tj97U0mLMY7j21xPO4B9aDN8ZnkvTPzJnBc0TtwA/c2lCw+4u+R+i+uuiAjUUPQ
+	izQQ==
+X-Gm-Message-State: APjAAAWE6pHVBcwhzWPETrIi138DUPCyMk8dB5n86loMeprWXHSokMo6
+	Q4qsSu4CJSTh2CJfkkITwToyp6fnETk=
+X-Google-Smtp-Source: APXvYqyRGDd9HdkQgQsSV5rAoOIKeLQqSEthrsnUe6McvM6ob5f5fcwDZRzNeVsubAutXRiGmiNmOA==
+X-Received: by 2002:a63:586:: with SMTP id 128mr9710968pgf.198.1574348459056; 
+	Thu, 21 Nov 2019 07:00:59 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::d61])
+	by smtp.gmail.com with ESMTPSA id
+	b200sm4023584pfb.86.2019.11.21.07.00.57
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 21 Nov 2019 07:00:58 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed, 20 Nov 2019 21:32:39 -0500
-Message-Id: <1574303559-26293-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [thud/master][PATCH] am335x-evm: bump max_leb_cnt again
+Date: Thu, 21 Nov 2019 07:00:45 -0800
+Message-Id: <20191121150045.3811589-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
+MIME-Version: 1.0
+Subject: [PATCH] kselftests: Fix typo in COMPATIBLE_MACHINE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,27 +75,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2019 02:32:44 -0000
+X-List-Received-Date: Thu, 21 Nov 2019 15:01:00 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/machine/am335x-evm.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-kernel/kselftests/kselftests_4.10.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index ad245dd..92e6cf0 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -24,7 +24,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 9800"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 9900"
+diff --git a/recipes-kernel/kselftests/kselftests_4.10.bb b/recipes-kernel/kselftests/kselftests_4.10.bb
+index 115b0767..f478e56d 100644
+--- a/recipes-kernel/kselftests/kselftests_4.10.bb
++++ b/recipes-kernel/kselftests/kselftests_4.10.bb
+@@ -186,5 +186,5 @@ INSANE_SKIP_${PN}-ipc = "ldflags"
+ INSANE_SKIP_${PN}-mount = "ldflags"
+ INSANE_SKIP_${PN}-vm = "ldflags"
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+-COMAPTIBLE_MACHINE_riscv64 = "(null)"
+-COMAPTIBLE_MACHINE_riscv32 = "(null)"
++COMPATIBLE_MACHINE_riscv64 = "(null)"
++COMPATIBLE_MACHINE_riscv32 = "(null)"
 -- 
-2.7.4
+2.24.0
 
 
