@@ -1,134 +1,86 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.2950.1574635750618850721
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web12.41.1574703456307232173
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 24 Nov 2019 14:49:11 -0800
+ Mon, 25 Nov 2019 09:37:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=PfyqYyKh;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: denys@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAOMn9Y3011564
-	for <meta-ti@lists.yoctoproject.org>; Sun, 24 Nov 2019 16:49:09 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=E/sWGaes;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: denys@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id F36B9E00FCC; Mon, 25 Nov 2019 09:37:35 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DEAA5E00F78
+	for <meta-ti@yoctoproject.org>; Mon, 25 Nov 2019 09:37:34 -0800 (PST)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id xAPHbV3g063052;
+	Mon, 25 Nov 2019 11:37:31 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1574635749;
-	bh=eQOmGn9tWxuKLVzO09Iijh3eqkj3hks9lCJXYdKDYtE=;
-	h=Date:From:To:Subject:References:In-Reply-To;
-	b=PfyqYyKhxWEzKzEs/aEdm3awGA+Mwb1x60FAuzIKZfT8XKf6cIAaD7y1rz/hjCYC3
-	 xQKweYOsxIioPlisQtNaUHPS2QLlUtLNTcIv0/REjgcsH8602zzUSBNbQpUzXgwChA
-	 NgLJ15PMsehlO2gxfkq8IVdcWvw5zQvu1FrV8/FQ=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xAOMn9wm112006
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Sun, 24 Nov 2019 16:49:09 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Sun, 24
- Nov 2019 16:49:09 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1574703451;
+	bh=zRRiUpMjexjBb3KZtTiquUb285SDqJTuk2UMJ3DkgsA=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=E/sWGaes/xXC1jW+8wbLyVIybJGDlR0Uu2X9iJwxdexQys1B19QVfuNkN/uGe2oFr
+	 SVa3eTjxoSS6uu4ghlamXRAQa2UYS6WBHw8DiLfwqndgt/i09VRAS2evWC311x0J5H
+	 9NEfYBdQR+vxPMtqFdNl1n4bTKouXAHSVbHXZOYs=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAPHbUst013397;
+	Mon, 25 Nov 2019 11:37:30 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 25
+ Nov 2019 11:37:30 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Sun, 24 Nov 2019 16:49:09 -0600
+ Frontend Transport; Mon, 25 Nov 2019 11:37:30 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAOMn9of070436
-	for <meta-ti@lists.yoctoproject.org>; Sun, 24 Nov 2019 16:49:09 -0600
-Date: Sun, 24 Nov 2019 17:49:09 -0500
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id xAPHbTUm004666;
+	Mon, 25 Nov 2019 11:37:30 -0600
+Date: Mon, 25 Nov 2019 12:37:28 -0500
 From: "Denys Dmytriyenko" <denys@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] Mailing list platform change November 21st
-Message-ID: <20191124224909.GR27719@beryl>
-References: <e0299795-a076-faba-6cd2-1a6ccf295f76@linuxfoundation.org>
- <CADfgfoYzWFVsY_KhETe-vto0t7v-uHnKAkzuSoSRvekKtmovWQ@mail.gmail.com>
- <CADfgfoZw57K2zbOXOGj1f0kU+3Nq4varmSatuNxrbxoo1+a9aA@mail.gmail.com>
+To: Paul Barker <paul@betafive.co.uk>
+CC: <meta-ti@yoctoproject.org>
+Subject: Re: [meta-ti] Backport request for thud
+Message-ID: <20191125173727.GB4706@beryl>
+References: <2972340c-d2ba-481b-900c-9c758cb60fde@www.fastmail.com>
+ <20191119182147.GF27719@beryl>
 MIME-Version: 1.0
-In-Reply-To: <CADfgfoZw57K2zbOXOGj1f0kU+3Nq4varmSatuNxrbxoo1+a9aA@mail.gmail.com>
+In-Reply-To: <20191119182147.GF27719@beryl>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-All,
+On Tue, Nov 19, 2019 at 01:21:47PM -0500, Denys Dmytriyenko wrote:
+> On Sat, Nov 16, 2019 at 11:43:19AM +0000, Paul Barker wrote:
+> > I'm currently seeing build failures on the thud branch with meta-ti under 
+> > Centos 7 and Centos 8. As /lib and /lib64 are links to /usr/lib and 
+> > /usr/lib64 respectively, the logic in ti-unpack.inc is looking for the 
+> > 32-bit C library under /lib32 which doesn't exist.
+> > 
+> > Could you backport 6f80b1e5595a13eec465581cfb352efcb0286bc8 from master to 
+> > thud to fix this?
+> 
+> Paul,
+> 
+> I will backport this fix to thud, but currently it's frozen due to a pending 
+> release. Please give it a week or so. Thanks.
 
-You may have already seen email from Michael about the migration of Yocto 
-Project mailing lists to the new management software, quoted below.
-
-For meta-ti subscribers there are 2 major changes:
-
-1. The proper email address of the list is meta-ti@lists.yoctoproject.org - 
-please update your adddress books accordingly. The older shorter address of 
-meta-ti@yoctoproject.org will still work for some time, but eventually may be 
-deprecated.
-
-2. The new Web interface is https://lists.yoctoproject.org/g/meta-ti with 
-links to individual posts and patches being different now. The old archives 
-have been preserved for now as well, so old links will work for a while.
-
-Please let me know of any questions or issues. Thanks.
+It is now merged to thud.
 
 -- 
 Denys
-
-
-On Thu, Nov 21, 2019 at 07:59:13PM -0800, Michael Halstead wrote:
-> The migration is complete. Please update your address books to point to the
-> new list e-mail addresses. There are rewrites in place so the previous
-> mailing list addresses will continue to work for a limited time. I am
-> sending this message to the old addresses to test that functionality. In
-> the next few days we will have redirects for the old pipermail archives to
-> keep links working. We are also in the process of setting up
-> https://public-inbox.org/README.html for users who would like to retrieve
-> list mail using git. Lists and archives are currently accessible via the
-> links at https://www.yoctoproject.org/community/mailing-lists/.
-> 
-> If you are currently a member of any list your account is already created.
-> Visit https://lists.yoctoproject.org/sendloginlink and enter the e-mail you
-> receive list mail at to receive a login link and set a password.
-> 
-> If you have questions please visit
-> https://wiki.yoctoproject.org/wiki/index.php?title=GroupsMigration to see
-> if they have been answered. E-mail pointofcontact@lists.yoctoproject.org
-> with new questions.
-> 
-> --
-> Michael Halstead
-> Linux Foundation / Yocto Project
-> Systems Operations Engineer
-> 
-> 
-> On Wed, Nov 20, 2019 at 11:23 PM Michael Halstead <
-> mhalstead@linuxfoundation.org> wrote:
-> 
-> > The window for the mailing list move has shifted forward to November 21st
-> > from 4pm to 8pm Pacific Standard Time. (2019-11-22 00:00-04:00 UTC)
-> >
-> > Moderators please tend to all pending requests today.
-> >
-> > Thank you,
-> > --
-> > Michael Halstead
-> > Linux Foundation / Yocto Project
-> > Systems Operations Engineer
-> >
-> > On Fri, Nov 15, 2019 at 4:25 PM Michael Halstead <
-> > mhalstead@linuxfoundation.org> wrote:
-> >
-> >> After backing out of the first attempt to migrate we are again moving
-> >> our lists from Mailman to Groups.io. E-mail to lists will be delayed
-> >> during the move window on November 21st between 17:00 and 23:00 UTC.
-> >>
-> >> A new account will be created for you on the Groups.io platform and most
-> >> users will only need to update their list mailing address from the
-> >> @yoctoproject.org to @lists.yoctoproject.org.
-> >>
-> >> Moderators please attend to all pending requests next Wednesday November
-> >> 20th.
-> >>
-> >> Please read more about the change on the wiki:
-> >>
-> >> https://wiki.yoctoproject.org/wiki/index.php?title=GroupsMigration
-> >>
-> >> If there are serious issues we will rollback the changes. We will e-mail
-> >> all lists when work is complete.
-> >>
-> >> --
-> >> Michael Halstead
-> >> Linux Foundation / Yocto Project
-> >> Systems Operations Engineer
