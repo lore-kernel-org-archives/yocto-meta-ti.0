@@ -1,12 +1,12 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web12.5975.1575313537544159459
+ by mx.groups.io with SMTP id smtpd.web11.5901.1575313538302496861
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 02 Dec 2019 11:05:37 -0800
+ Mon, 02 Dec 2019 11:05:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=unTt7Byv;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=uQDRw2RN;
  spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: j-stiffler@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6571DE010FD; Mon,  2 Dec 2019 11:05:37 -0800 (PST)
+	id 2D5F8E010FD; Mon,  2 Dec 2019 11:05:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -24,38 +24,39 @@ X-Spam-HAM-Report:
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3750E008DB
-	for <meta-ti@yoctoproject.org>; Mon,  2 Dec 2019 11:05:36 -0800 (PST)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xB2J5a19039526
-	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:05:36 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8C147E008DB
+	for <meta-ti@yoctoproject.org>; Mon,  2 Dec 2019 11:05:37 -0800 (PST)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xB2J5bHn039530
+	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:05:37 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1575313536;
-	bh=nnRm6zi+4GqyFHGFzcsS6P15LFVSIKwPskOAlzdwnZc=;
+	s=ti-com-17Q1; t=1575313537;
+	bh=yuc2kq3yuLgqlU0Zhj1LIY5xdgcxCaikanrmLYvBzO0=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=unTt7ByvnjshPUyIMdJsT68SuDs6895hwNsVi/Q/QA7TAnvQJPK0FI4GfBP2/iz1q
-	 dW81VSJyrtyjI1zmbhStADd7HyVN8XfxmvhfjS+rd+uCtrIsCqQGNNu5Ly5dM8uqRp
-	 296KrsclUQXb4j5+WcQ5GdT5WoD1KoKGRN4l0z2g=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB2J5aJT010676
-	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:05:36 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	b=uQDRw2RNx/9atryE9XxYp/8DwEll6eXdsJDqz9Fr+rvRpJmttDEMYXbcdfIQrG+ur
+	 xaQ1XAkc27Q32j3URZowI5lITJeCa/7IjOAW4qN3ldXaIbNiS4ngfKF+kTWS3vt5DS
+	 +es9L/knjaXVr5jZWjJ69BB/touuYajWHzrnZnmE=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xB2J5beu100043
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:05:37 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 2 Dec
- 2019 13:05:34 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ 2019 13:05:36 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Mon, 2 Dec 2019 13:05:34 -0600
+ Frontend Transport; Mon, 2 Dec 2019 13:05:36 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB2J4rlh070019;
-	Mon, 2 Dec 2019 13:05:34 -0600
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB2J4rli070019;
+	Mon, 2 Dec 2019 13:05:36 -0600
 From: "Jacob Stiffler" <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
 CC: <m-radhakrishnan2@ti.com>, Jacob Stiffler <j-stiffler@ti.com>
-Subject: [master/thud][PATCH v2 40/42] cal-lld: TI RTOS low level driver for CAL
-Date: Mon, 2 Dec 2019 13:45:44 -0500
-Message-ID: <1575312346-16973-40-git-send-email-j-stiffler@ti.com>
+Subject: [master/thud][PATCH v2 41/42] fvid2: TI RTOS Video Driver Interface
+Date: Mon, 2 Dec 2019 13:45:45 -0500
+Message-ID: <1575312346-16973-41-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1575312346-16973-1-git-send-email-j-stiffler@ti.com>
 References: <1575312346-16973-1-git-send-email-j-stiffler@ti.com>
@@ -69,87 +70,79 @@ v2 changes:
 * Remove inclusion of ti-path as this is already handled by
   ti-pdk.bbclass.
 
- recipes-bsp/cal-lld/cal-lld-rtos_git.bb | 76 +++++++++++++++++++++++++++++++++
- 1 file changed, 76 insertions(+)
- create mode 100644 recipes-bsp/cal-lld/cal-lld-rtos_git.bb
+ recipes-bsp/fvid2/fvid2-rtos_git.bb | 68 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
+ create mode 100755 recipes-bsp/fvid2/fvid2-rtos_git.bb
 
-diff --git a/recipes-bsp/cal-lld/cal-lld-rtos_git.bb b/recipes-bsp/cal-lld/cal-lld-rtos_git.bb
-new file mode 100644
-index 0000000..f3c780f
+diff --git a/recipes-bsp/fvid2/fvid2-rtos_git.bb b/recipes-bsp/fvid2/fvid2-rtos_git.bb
+new file mode 100755
+index 0000000..db1f9e1
 --- /dev/null
-+++ b/recipes-bsp/cal-lld/cal-lld-rtos_git.bb
-@@ -0,0 +1,76 @@
-+SUMMARY = "TI RTOS low level driver for CAL"
++++ b/recipes-bsp/fvid2/fvid2-rtos_git.bb
+@@ -0,0 +1,68 @@
++SUMMARY = "TI RTOS Video Driver Interface"
 +
 +inherit ti-pdk ti-pdk-fetch
 +
-+TI_PDK_COMP = "ti.drv.cal"
++TI_PDK_COMP = "ti.drv.fvid2"
 +
 +PE = "1"
 +
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://cal.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
++LIC_FILES_CHKSUM = "file://fvid2.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
 +
 +COMPATIBLE_MACHINE = "k3"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+
 +PR = "r0"
 +
 +DEPENDS_append = " osal-rtos \
-+                   fvid2-rtos \
 +"
 +
 +# Build with make instead of XDC
 +TI_PDK_XDCMAKE = "0"
 +
-+CAL_PACKAGE_BASE   = "${WORKDIR}/cal_base"
-+CAL_LLD_ROOTPATH = "${CAL_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/cal"
++FVID2_PACKAGE_BASE   = "${WORKDIR}/fvid2_base"
++FVID2_ROOTPATH = "${FVID2_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/fvid2"
 +
 +export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
-+export PDK_CAL_ROOT_PATH = "${CAL_PACKAGE_BASE}/package/all/pdk_/packages"
++export PDK_FVID2_ROOT_PATH = "${FVID2_PACKAGE_BASE}/package/all/pdk_/packages"
 +
-+LIMSOCS = ""
-+LIMSOCS_am65xx-evm = "am65xx"
-+LIMSOCS_am65xx-hs-evm = "am65xx"
-+
-+LIMBOARDS = ""
-+LIMBOARDS_am65xx-evm = "am65xx_evm"
-+LIMBOARDS_am65xx-hs-evm = "am65xx_evm"
 +
 +BOARD_PACKAGE = ""
 +BOARD_PACKAGE_am65xx-evm = "am65xx_evm"
 +BOARD_PACKAGE_am65xx-hs-evm = "am65xx_evm"
++BOARD_PACKAGE_j7-evm = "j721e_evm"
 +
 +# HTML doc link params
-+PDK_COMP_LINK_TEXT = "CAL"
++PDK_COMP_LINK_TEXT = "FVID2"
 +
 +do_configure() {
-+    rm -rf ${CAL_PACKAGE_BASE}
++    rm -rf ${FVID2_PACKAGE_BASE}
 +    cd ${S}
 +
 +    # remove any previous package
-+    rm -f ${CAL_PACKAGE_BASE}
++    rm -f ${FVID2_PACKAGE_BASE}
 +
 +    # make the release package before building it
-+    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${CAL_PACKAGE_BASE} PDK_CAL_COMP_PATH=${S}
++    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${FVID2_PACKAGE_BASE} PDK_FVID2_COMP_PATH=${S}
 +}
 +
 +do_compile() {
-+    echo "cal lld root path is ${CAL_LLD_ROOTPATH}"
-+    cd ${CAL_LLD_ROOTPATH}
++    echo "fvid2 root path is ${FVID2_ROOTPATH}"
++    cd ${FVID2_ROOTPATH}
 +
 +    # Build am65xx libraries
-+    make clean lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
++    make clean lib xdc_meta LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}"  LIMIT_CORES="${TI_PDK_LIMIT_CORES}"
 +
 +    #archive
-+    tar -cf cal_lld.tar --exclude='*.tar' ./*
++    tar -cf fvid2.tar --exclude='*.tar' ./*
 +}
 +
 +do_install() {
-+    cd ${CAL_LLD_ROOTPATH}
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/cal
-+    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/cal \;
++    cd ${FVID2_ROOTPATH}
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/fvid2
++    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/fvid2 \;
 +}
 +
 +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
