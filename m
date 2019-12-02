@@ -1,12 +1,12 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web12.5968.1575313496085114724
+ by mx.groups.io with SMTP id smtpd.web09.5941.1575313529536205423
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 02 Dec 2019 11:04:56 -0800
+ Mon, 02 Dec 2019 11:05:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=SlWlrepS;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=vadDi/Wz;
  spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: j-stiffler@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9DB4EE01101; Mon,  2 Dec 2019 11:04:55 -0800 (PST)
+	id 686DCE01101; Mon,  2 Dec 2019 11:05:29 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,162 +17,179 @@ X-Spam-HAM-Report:
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
 	*       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 887ABE0107E
-	for <meta-ti@yoctoproject.org>; Mon,  2 Dec 2019 11:04:54 -0800 (PST)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xB2J4rG9122986
-	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:04:53 -0600
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF772E0107F
+	for <meta-ti@yoctoproject.org>; Mon,  2 Dec 2019 11:05:27 -0800 (PST)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xB2J5RIM039496
+	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:05:27 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1575313493;
-	bh=hlmEi3hhcu2ulyT99u7yiTi3RLHgxQ3l19rqv7EUf9I=;
-	h=From:To:CC:Subject:Date;
-	b=SlWlrepShV4UcLJc1EJuimTQ5DXifc4V6a8zzdZeInlq2iB9Kt5xEuxoCg3Uyt5te
-	 wBF7SEB/g7WnYCNbkjAhkr9G1RNq3lxvMlYqqI3/bL89eRQEoPgcrbOlQzxe9IcFuf
-	 ge6G7m9FtXDwrFm7PK0gIWzojpHlOx3ICrcFjPW0=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB2J4rTb009323
-	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:04:53 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1575313527;
+	bh=CS75XwwEJfyKpvQrYBz+q7Upq2gF/Qd03tu5eFx1PTk=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=vadDi/WzFACx7ZEHyMH7+GZaezVeoB4ipwEPMesOhhxTDiAxeGPVgotBzbTAWm36V
+	 MZctyABaFCVUu7mMr+XWmhu8m3ecNwEfJb2pTYsTkN6HCnljy1+TXOyE8s2xrL7K62
+	 8+siTYUPXk8YHyUskW8kLDOYqJ+u+2J9x2Q5A7qk=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xB2J5Rel007395
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Mon, 2 Dec 2019 13:05:27 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 2 Dec
- 2019 13:04:53 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ 2019 13:05:25 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Mon, 2 Dec 2019 13:04:53 -0600
+ Frontend Transport; Mon, 2 Dec 2019 13:05:26 -0600
 Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB2J4rlf070019;
-	Mon, 2 Dec 2019 13:04:53 -0600
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB2J4rlg070019;
+	Mon, 2 Dec 2019 13:05:25 -0600
 From: "Jacob Stiffler" <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
 CC: <m-radhakrishnan2@ti.com>, Jacob Stiffler <j-stiffler@ti.com>
-Subject: [master/thud][PATCH v2 01/42] ti-pdk-fetch: add class for common pdk sources
-Date: Mon, 2 Dec 2019 13:45:05 -0500
-Message-ID: <1575312346-16973-1-git-send-email-j-stiffler@ti.com>
+Subject: [master/thud][PATCH v2 33/42] transport-rtos: migrate to ti-pdk-fetch.bbclass
+Date: Mon, 2 Dec 2019 13:45:37 -0500
+Message-ID: <1575312346-16973-33-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1575312346-16973-1-git-send-email-j-stiffler@ti.com>
+References: <1575312346-16973-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-Recently individual components and LLD sources have been combined
-into a single PDK repo. Use this class to specify the common source.
-Also use this class to keep the sources separate from each other when
-building. This keeps the build identical to previous recipes while
-keeping control on interdependencies.
-
-Similar to gcc-source, use the ti-pdk-source recipe to unpack the
-sources into a "work-shared" area. Then hard-link only the necessary
-files into a recipe's WORKDIR.
+* Add new recipe for timesync-rtos
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
 v2 changes:
+* timesync: Remove inclusion of ti-path as this is already handled by
+  ti-pdk.bbclass.
 
-To be more efficient, use ti-pdk-source to unpack sources once to a
-common "work-shared" area. Then each recipe will hard-link only the
-necessary sources. Follow the example set by gcc-source in oe-core.
+ recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb  |  4 +--
+ recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb |  4 +--
+ recipes-bsp/transport-rtos/nimu-rtos_git.bb      |  4 +--
+ recipes-bsp/transport-rtos/timesync-rtos_git.bb  | 31 ++++++++++++++++++++++++
+ recipes-bsp/transport-rtos/transport.inc         | 12 +++------
+ 5 files changed, 37 insertions(+), 18 deletions(-)
+ create mode 100644 recipes-bsp/transport-rtos/timesync-rtos_git.bb
 
- classes/ti-pdk-fetch.bbclass                   | 43 ++++++++++++++++++++++++++
- recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb | 33 ++++++++++++++++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 classes/ti-pdk-fetch.bbclass
- create mode 100644 recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
-
-diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
+diff --git a/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
+index 137476e..f14161f 100644
+--- a/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
++++ b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
+@@ -13,9 +13,7 @@ DEPENDS_append = " qmss-lld-rtos \
+                    cppi-lld-rtos \
+ "
+ 
+-BMET_ETH_DESTSUFFIX = "git/bmet_eth"
+-
+-S = "${WORKDIR}/${BMET_ETH_DESTSUFFIX}"
++TI_PDK_COMP = "ti.transport.bmet_eth"
+ 
+ # HTML doc link params
+ PDK_COMP_LINK_TEXT = "Baremetal Ethernet Transport"
+diff --git a/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
+index 4750e04..02ddc47 100644
+--- a/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
++++ b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
+@@ -17,13 +17,11 @@ DEPENDS_append_c665x-evm = " emac-lld-rtos"
+ DEPENDS_append_c667x-evm = " pa-lld-rtos"
+ DEPENDS_append_omapl1 = " emac-lld-rtos"
+ 
+-NIMU_ICSS_DESTSUFFIX = "git/ndk/nimu_icss"
++TI_PDK_COMP = "ti.transport.ndk.nimu_icss"
+ 
+ # Build with make instead of XDC
+ TI_PDK_XDCMAKE = "0"
+ 
+-S = "${WORKDIR}/${NIMU_ICSS_DESTSUFFIX}"
+-
+ export PDK_NIMU_ICSS_ROOT_PATH ="${WORKDIR}/build"
+ export DEST_ROOT="${S}"
+ 
+diff --git a/recipes-bsp/transport-rtos/nimu-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
+index 1e3bc18..4389b1e 100644
+--- a/recipes-bsp/transport-rtos/nimu-rtos_git.bb
++++ b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
+@@ -9,9 +9,7 @@ LIC_FILES_CHKSUM = "file://nimu_eth.h;beginline=1;endline=35;md5=ee9c662c39d4584
+ 
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1|k3"
+ 
+-NIMU_DESTSUFFIX = "git/ndk/nimu"
+-
+-S = "${WORKDIR}/${NIMU_DESTSUFFIX}"
++TI_PDK_COMP = "ti.transport.ndk.nimu"
+ 
+ DEPENDS_append = " ti-ndk osal-rtos"
+ DEPENDS_append_ti33x = " starterware-rtos emac-lld-rtos"
+diff --git a/recipes-bsp/transport-rtos/timesync-rtos_git.bb b/recipes-bsp/transport-rtos/timesync-rtos_git.bb
 new file mode 100644
-index 0000000..d845ccc
+index 0000000..556c128
 --- /dev/null
-+++ b/classes/ti-pdk-fetch.bbclass
-@@ -0,0 +1,43 @@
-+TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
-+TI_PDK_GIT_BRANCH ?= "master"
-+TI_PDK_GIT_PROTOCOL ?= "git"
-+TI_PDK_SRCREV ?= "a1d6fab78b8c9e9dcaec5bd6df54af8d196a901a"
++++ b/recipes-bsp/transport-rtos/timesync-rtos_git.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "RTOS driver for timesync driver"
 +
-+TI_PDK_VERSION ?= "2019.11.0"
++inherit ti-pdk
++require recipes-bsp/transport-rtos/transport.inc
 +
-+PV = "${TI_PDK_VERSION}"
++PR = "${INC_PR}.0"
 +
-+TI_PDK_COMP ?= ""
-+TI_PDK_COMP_PATH = "${@'${TI_PDK_COMP}'.replace('.','/')}"
++LIC_FILES_CHKSUM = "file://timeSync_ver.h;beginline=23;endline=45;md5=4bd873035e47065aaa811e53622992e9"
 +
-+TI_PDK_SOURCE_PN = "ti-pdk-source"
-+TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
-+TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g"
 +
-+S = "${WORKDIR}/git/${TI_PDK_COMP_PATH}"
++DEPENDS_append = " ti-ndk \
++                   osal-rtos \
++                   pruss-lld-rtos \
++                   icss-emac-lld-rtos \
++                   nimu-icss-rtos \
++                   edma3-lld-rtos \
++"
 +
-+# Hard-link only required sources from PDK
-+python do_unpack_append() {
-+    if len(d.getVar('TI_PDK_COMP') or '') > 0:
-+        import shutil
++TI_PDK_COMP = "ti.transport.timeSync"
 +
-+        # Get src/dst paths
-+        src = os.path.join(d.getVar('TI_PDK_SOURCE'),'packages',d.getVar('TI_PDK_COMP_PATH'))
-+        s = d.getVar('S')
++# Build with make instead of XDC
++TI_PDK_XDCMAKE = "0"
 +
-+        # Set up the directory structure, except for the root of the sources
-+        # hard-linked.
-+        bb.utils.mkdirhier(s)
-+        os.rmdir(s)
++export PDK_TIMESYNC_ROOT_PATH ="${WORKDIR}/build"
++export DEST_ROOT="${S}"
 +
-+        # Recursively hard-link the sources
-+        shutil.copytree(src, s, copy_function=os.link)
-+}
++export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
++export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
 +
-+# Make sure that ti-pdk-source is unpacked before we set up the hardlinks.
-+python __anonymous () {
-+    pn = d.getVar('PN')
-+    pdk_src_pn = d.getVar('TI_PDK_SOURCE_PN')
-+    if pn != pdk_src_pn:
-+        d.appendVarFlag('do_unpack', 'depends', ' ${TI_PDK_SOURCE_PN}:do_unpack')
-+}
-diff --git a/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb b/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
-new file mode 100644
-index 0000000..f4b3da9
---- /dev/null
-+++ b/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
-@@ -0,0 +1,33 @@
-+# Recipe to fetch/unpack sources used by ti-pdk-fetch recipes.
-+#
-+# Mimic gcc-source.inc from oe-core.
-+
-+# These shources will be unpacked to a "work-shared" directory. Then each
-+# "ti-pdk-fetch" recipe will hard-link only the sources it requires.
-+
-+deltask do_configure
-+deltask do_compile
-+deltask do_install
-+deltask do_populate_sysroot
-+deltask do_populate_lic
-+
-+RM_WORK_EXCLUDE += "${PN}"
-+EXCLUDE_FROM_WORLD = "1"
-+
-+inherit nopackages ti-pdk-fetch
-+
-+LICENSE = "BSD-3-Clause"
-+
-+PN = "${TI_PDK_SOURCE_PN}"
-+WORKDIR = "${TI_PDK_SOURCE_WORKDIR}"
-+SSTATE_SWSPEC = "sstate:ti-pdk::${PV}:${PR}::${SSTATE_VERSION}:"
-+
-+STAMP = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}"
-+STAMPCLEAN = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}*"
-+
-+INHIBIT_DEFAULT_DEPS = "1"
-+DEPENDS = ""
-+PACKAGES = ""
-+
-+SRC_URI = "${TI_PDK_GIT_URI};branch=${TI_PDK_GIT_BRANCH};protocol=${TI_PDK_GIT_PROTOCOL}"
-+SRCREV = "${TI_PDK_SRCREV}"
++XDCPATH_append = ";${NDK_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/transport-rtos/transport.inc b/recipes-bsp/transport-rtos/transport.inc
+index 345cd6d..866d7a3 100644
+--- a/recipes-bsp/transport-rtos/transport.inc
++++ b/recipes-bsp/transport-rtos/transport.inc
+@@ -2,16 +2,10 @@ LICENSE = "BSD-3-Clause"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-TRANSPORT_GIT_URI = "git://git.ti.com/keystone-rtos/transport.git"
+-TRANSPORT_GIT_PROTOCOL = "git"
+-TRANSPORT_GIT_BRANCH = "master"
++inherit ti-pdk-fetch
+ 
+-# Below commit ID corresponds to "DEV.TRANSPORT.01.00.00.17A"
+-TRANSPORT_SRCREV = "9ed171c476a5606777d2dcb4e831c279a5160245"
++TI_PDK_COMP = "ti.transport"
+ 
+-BRANCH = "${TRANSPORT_GIT_BRANCH}"
+-SRC_URI = "${TRANSPORT_GIT_URI};protocol=${TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
++PE = "1"
+ 
+-SRCREV = "${TRANSPORT_SRCREV}"
+-PV = "01.00.00.17A"
+ INC_PR = "r0"
 -- 
 2.7.4
 
