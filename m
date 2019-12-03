@@ -1,76 +1,122 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web10.2027.1575350478928448349
+Received: from hostingweb31-40.netsons.net (hostingweb31-40.netsons.net [89.40.174.40])
+ by mx.groups.io with SMTP id smtpd.web09.4585.1575374117935165371
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 02 Dec 2019 21:21:19 -0800
+ Tue, 03 Dec 2019 03:55:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=syntax error for token:  (domain: gallagher.com, ip: 140.211.169.56, mailfrom: ankur.tyagi@gallagher.com)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 70A36E01101; Mon,  2 Dec 2019 21:21:18 -0800 (PST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
-	SUBJ_OBFU_PUNCT_FEW,SUBJ_OBFU_PUNCT_MANY autolearn=no version=3.3.1
-X-Spam-HAM-Report: 
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at https://www.dnswl.org/, no
-	*      trust
-	*      [203.167.229.98 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	*  0.7 SUBJ_OBFU_PUNCT_FEW Possible punctuation-obfuscated Subject: header
-	*  1.5 SUBJ_OBFU_PUNCT_MANY Punctuation-obfuscated Subject: header
-Received: from mail.gallagher.co.nz (mail.gallagher.co.nz [203.167.229.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A7C3E0082A
-	for <meta-ti@yoctoproject.org>; Mon,  2 Dec 2019 21:21:15 -0800 (PST)
-Received: from gglnzdom1.gallagher.local (Not Verified[172.16.0.58]) by mail.gallagher.co.nz  (using TLS: TLSv1.2, AES256-GCM-SHA384)
-	id <B5de5f0c60000>; Tue, 03 Dec 2019 18:21:13 +1300
-Received: from ubuntu.localdomain ([10.60.3.76])
-          by gglnzdom1.gallagher.local
-          with ESMTP id 2019120318211069-186181 ;
-          Tue, 3 Dec 2019 18:21:10 +1300 
-From: ankur.tyagi@gallagher.com
-To: meta-ti@yoctoproject.org
-Subject: [PATCH][thud,master] am335x-evm.conf: Use soft assignment for MKUBIFS_ARGS, UBINIZE_ARGS
-Date: Mon, 2 Dec 2019 21:21:06 -0800
-Message-Id: <20191203052106.5254-1-ankur.tyagi@gallagher.com>
-X-TNEFEvaluated: 1
+ dkim=missing; spf=pass (domain: lucaceresoli.net, ip: 89.40.174.40, mailfrom: luca@lucaceresoli.net)
+Received: from [109.168.11.45] (port=56492 helo=[192.168.101.73])
+	by hostingweb31.netsons.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <luca@lucaceresoli.net>)
+	id 1ic6lv-0033zp-8L; Tue, 03 Dec 2019 12:55:15 +0100
+Subject: Re: [meta-ti] [PATCH] meta-ti: Set the --jobs based on host cpu_count
+To: Khem Raj <raj.khem@gmail.com>
+Cc: meta-ti@lists.yoctoproject.org, "Kemal R. Shakir" <kemal@ti.com>
+References: <20191129144818.14061-1-luca@lucaceresoli.net>
+ <CAMKF1sp-vHHK4Y=UepxZhJFcvukndix7KYoKtG3C4cDE_X9M9Q@mail.gmail.com>
+ <afdd88a1-949e-ad0a-98bb-db6b5bef66a5@lucaceresoli.net>
+ <CAMKF1sry3S0JLQLb+rc4N4FHtPCnXvA469tNA1Fj4JoPUKm5og@mail.gmail.com>
+From: "Luca Ceresoli" <luca@lucaceresoli.net>
+Message-ID: <a5a67694-4785-2e13-1ec6-281fac45780d@lucaceresoli.net>
+Date: Tue, 3 Dec 2019 12:55:15 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.1
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sry3S0JLQLb+rc4N4FHtPCnXvA469tNA1Fj4JoPUKm5og@mail.gmail.com>
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - hostingweb31.netsons.net
+X-AntiAbuse: Original Domain - lists.yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - lucaceresoli.net
+X-Get-Message-Sender-Via: hostingweb31.netsons.net: authenticated_id: luca+lucaceresoli.net/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: hostingweb31.netsons.net: luca@lucaceresoli.net
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-This is allow user to override them in their configuration
+Hi Khem,
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi@gallagher.com>
----
- conf/machine/am335x-evm.conf | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On 02/12/19 18:09, Khem Raj wrote:
+[...]
+>>>> --- a/classes/ti-pdk.bbclass
+>>>> +++ b/classes/ti-pdk.bbclass
+>>>> @@ -68,7 +68,7 @@ TI_PDK_DOXYGEN_SUPPORT ?= "1"
+>>>>
+>>>>  TI_PDK_XDC_ARGS ?= "${TI_PDK_LIMIT_SOCS}"
+>>>>
+>>>> -PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
+>>>> +PARALLEL_XDC = "--jobs=${@oe.utils.cpu_count()}"
+>>>
+>>> this may create another variableto control when limting parallelism so
+>>> expressing it in
+>>> terms of BB_NUMBER_THREAD s desired
+>>>
+>>> perhaps you can try adding
+>>>
+>>> do_configure[vardepsexclude] = "PARALLEL_XDC"
+>>> do_compile[vardepsexclude] = "PARALLEL_XDC"
+>>
+>> Thank you for your review.
+>>
+>> I agree the solution in this patch is not ideal as it removes ability to
+>> control the build load.
+>>
+>> However using BB_NUMBER_THREADS (with our without vardepsexclude) is
+>> also not quite correct. PARALLEL_XDC should have to do with
+>> PARALLEL_MAKE, not BB_NUMBER_THREADS.
+>>
+>> But PARALLEL_MAKE is not a number, so using PARALLEL_MAKE would be
+>> correct but it's not doable, and using BB_NUMBER_THREADS is doable but
+>> not quite correct... :(
+>>
+>> Bottom line: for lack of better ideas, I'm sending a new patch that
+>> keeps using BB_NUMBER_THREADS and takes your suggestion above. I guess
+>> it should be OK for most users. At least it's not worse than the current
+>> behavior and can still be improved later.
+>>
+> 
+> another option would be to use parallel_make_argument to contruct what you want
+> e.g. see how boost does it
+> 
+> https://git.openembedded.org/openembedded-core/tree/meta/recipes-support/boost/boost.inc#n141
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 92e6cf05..8bfbee84 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -24,7 +24,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 9900"
-+MKUBIFS_ARGS ?= "-F -m 2048 -e 126976 -c 9900"
- 
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-@@ -32,4 +32,4 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 9900"
- # UBI: physical eraseblock size:   131072 bytes (128 KiB)
- # UBI: sub-page size:              512
- # UBI: VID header offset:          2048 (aligned 2048)
--UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
-+UBINIZE_ARGS ?= "-m 2048 -p 128KiB -s 512 -O 2048"
+Oh, good idea, thanks! It looks like the correct solution to use the
+proper variable (PARALLEL_MAKE) in place of BB_NUMBER_THREADS.
+
+But surprisingly it also fixes the "basehash value changed" problem. How
+can this happen? My patch is simply:
+
+--- a/classes/ti-pdk.bbclass
++++ b/classes/ti-pdk.bbclass
+-PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
++PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
+
+and
+
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
++PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
+ EXTRA_OEMAKE = "\
+     PLATFORM=${PLATFORM} \
+     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
+     BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
+     ${IPC_TARGETS} \
+-    JOBS="--jobs=${BB_NUMBER_THREADS}" \
++    ${PARALLEL_XDC} \
+     JAVA_TOOL_OPTIONS=-Xss2560k \
+ "
+
+So I wonder why the signature is not considered as changing since
+EXTRA_OEMAKE *is* changing from one build to another with a different
+PARALLEL_MAKE.
+
+Any hints?
+
+Whatever the reason, this version definitely supersedes v2, and after
+some more testing I'll send v3 with the above implementation.
+
 -- 
-2.17.1
-
-
-###########################################################################
-This email is confidential and may contain information subject to legal 
-privilege.  If you are not the intended recipient please advise us of our
-error by return e-mail then delete this email and any attached files.  
-You may not copy, disclose or use the contents in any way.  
-
-The views expressed in this email may not be those of Gallagher Group 
-Ltd or subsidiary companies thereof.
-###########################################################################
+Luca
