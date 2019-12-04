@@ -1,120 +1,325 @@
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
- by mx.groups.io with SMTP id smtpd.web10.7364.1575478245317653423
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web09.1014.1575486136223569797
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 04 Dec 2019 08:50:45 -0800
+ Wed, 04 Dec 2019 11:02:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cLW7ObuK;
- spf=pass (domain: gmail.com, ip: 209.85.160.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f194.google.com with SMTP id d5so450506qto.0
-        for <meta-ti@lists.yoctoproject.org>; Wed, 04 Dec 2019 08:50:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=uN9djdOb8r0rgUACTCn9MD6N65gGL1BstbnAA6Ctg88=;
-        b=cLW7ObuKERMDgcDLLKIQ4sC6hCMbWLk5Bmvysw8QoZp7zrwL2dJOiuZp4MYZ4D0tK+
-         ji/PMMva38uyibUKDSqTuOQKz5trqP41AM+2jLC7hFpcWsLrLjY0r0iSji7K6TTVp82e
-         zicG9CtKT7dH+aBvmdjc+ClqbQmPIsoqSgHu2P9Yozl8ZTpA2lIPWhUrPBL9xGio3oLg
-         WgllB2kzbmt3vdkaSGcWN/uHdLRT2HVaeDRBRPhdXuDlKRCsxW321YpgTb+XbtrpKn1J
-         xvWGoLtZ7GjnDOAvwopO7DdsiTNZDHZKoerwE+qJsncFTpteXX6dzcgIMLk0H4JZYBJ/
-         C4Nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=uN9djdOb8r0rgUACTCn9MD6N65gGL1BstbnAA6Ctg88=;
-        b=LUZ9n3GT+vvkLu2zpfMWxUUA8z+O94PbyuyPdAVOkiC/Ce5N5lluFpsqiftR0tl2w6
-         OI5pUnZ8jZkCQVnxM4P6RZ9rUuZW5FJJeErmRPWODPKSLGNMtXT2YdmWG97pph0c2ydO
-         ayAODFbm8umh4ctqMUBeEgFYNOAaY8WHmTVx/FmISbWuLuxG0hmhWBUxnjSoF3NzvHw5
-         Lei5qxeAjGP9UrfCZSIV7Zo9KRqWy6K/Vdz9U/4SR0SYP3u0dfHRDWVuOdvwoph0V3SC
-         qSDIymOOm8QgZH0OU/vp7WLuPC+SXFHN99yns1RXHAJqKfq4h54jBQxFDLLq2soYGgGX
-         KR1g==
-X-Gm-Message-State: APjAAAWBQp9PlBQuSs1Bf2xD/nomniFgb/0ydUJCRl9MnEcO/dkmhTVf
-	4NAKx1xxIvSywcy02qSe+D+kbt6Xuat0Sw5xvDM=
-X-Google-Smtp-Source: APXvYqwETaBWOXHQhi2cI4xsEZ+eRxv/WQUGhe+d4tXR40BavwPyHy7cE1d6tqqsHeDt6LXjDXkJHB8zB8pRkP6bcqA=
-X-Received: by 2002:ac8:544f:: with SMTP id d15mr3721048qtq.53.1575478244011;
- Wed, 04 Dec 2019 08:50:44 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fsROuAUU;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: j-stiffler@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id xB4J2FQG018661;
+	Wed, 4 Dec 2019 13:02:15 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1575486135;
+	bh=peHoDkcYhXIdIxVAMpuLPhk0s5ffDiopiLSRAPZd/Pk=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=fsROuAUUzxjHu+NpDtvilhgESONoMU0VHcmlYmODGwZvIYd77ZuZFX18EhfMuDERy
+	 gtq1HT27mMJwiuIKYYKERtPO95F0T+z5cSFbnGnNxy1QQdyDNJrGmUw7HrscQoY5aI
+	 ZvuVkx5HVQph8VIKTfKGBG5y+gJ7aIShBo2LWN9U=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB4J2FJ8108210;
+	Wed, 4 Dec 2019 13:02:15 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 4 Dec
+ 2019 13:02:14 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Wed, 4 Dec 2019 13:02:14 -0600
+Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB4J2E0P015234;
+	Wed, 4 Dec 2019 13:02:14 -0600
+Subject: Re: [EXTERNAL] [meta-ti] [master/thud][PATCH v2 01/42] ti-pdk-fetch: add class for common pdk sources
+To: <meta-ti@yoctoproject.org>
+CC: <meta-ti@lists.yoctoproject.org>, Khem Raj <raj.khem@gmail.com>,
+        Denys
+ Dmytriyenko <denys@ti.com>
+References: <15DCA3475EF6B6AA.2688@lists.yoctoproject.org>
+From: "Jacob Stiffler" <j-stiffler@ti.com>
+Message-ID: <9b8c1160-9f7a-4d5b-9389-918388aac595@ti.com>
+Date: Wed, 4 Dec 2019 14:02:13 -0500
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.1
 MIME-Version: 1.0
-References: <20191204164529.19951-1-luca@lucaceresoli.net>
-In-Reply-To: <20191204164529.19951-1-luca@lucaceresoli.net>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 4 Dec 2019 08:50:16 -0800
-Message-ID: <CAMKF1sowAhsB=zBuWBmY27WVeVPKmrTyiWCgMv52hbMRnjykEg@mail.gmail.com>
-Subject: Re: [PATCH v3] Fix "basehash value changed" errors and BB_NUMBER_THREADS usage
-To: Luca Ceresoli <luca@lucaceresoli.net>
-Cc: meta-ti@lists.yoctoproject.org, "Kemal R . Shakir" <kemal@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <15DCA3475EF6B6AA.2688@lists.yoctoproject.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/alternative;
+	boundary="------------E5584E2A4D865EAD71096FAF"
+Content-Language: en-US
 
-thanks for iterating over it. Its looks good now.
+--------------E5584E2A4D865EAD71096FAF
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 4, 2019 at 8:45 AM Luca Ceresoli <luca@lucaceresoli.net> wrote:
+Any further comments on this updated approach?
+
+
+On 12/2/2019 1:45 PM, Jacob Stiffler via Lists.Yoctoproject.Org wrote:
+> Recently individual components and LLD sources have been combined
+> into a single PDK repo. Use this class to specify the common source.
+> Also use this class to keep the sources separate from each other when
+> building. This keeps the build identical to previous recipes while
+> keeping control on interdependencies.
 >
-> Changing BB_NUMBER_THREADS between successive builds causes a "basehash
-> value changed" error. Additionally, using BB_NUMBER_THREADS to pass a
-> number of processes to run to xdc is wrong: PARALLEL_MAKE is the correct
-> variable to use.
+> Similar to gcc-source, use the ti-pdk-source recipe to unpack the
+> sources into a "work-shared" area. Then hard-link only the necessary
+> files into a recipe's WORKDIR.
 >
-> Fix both problems by using oe.utils.parallel_make_argument() to obtain the
-> number of processes to run from PARALLEL_MAKE.
->
-> Fixes:
->
->   ERROR: When reparsing .../meta-ti/recipes-ti/ipc/ti-ipc-rtos_git.bb.do_configure, the basehash value changed from 63897a188012cedde03f756b5dbbfa70 to 13b80bf4f4327c367bd201eb4aa32ad7. The metadata is not deterministic and this needs to be fixed.
->   ERROR: When reparsing .../meta-ti/recipes-ti/ipc/ti-ipc-rtos_git.bb.do_compile, the basehash value changed from 2fb59a7db2a2f69d2c25c06c1b6a4245 to 314c664cc040afae2800fcc378dd9ae0. The metadata is not deterministic and this needs to be fixed.
->
-> Steps to reproduce:
->
->   BB_NUMBER_THREADS="3" bitbake ti-ipc-rtos ti-ipc-examples-linux
->   BB_NUMBER_THREADS="4" bitbake -c cleansstate osal-rtos
->   BB_NUMBER_THREADS="5" bitbake ti-ipc-rtos ti-ipc-examples-linux
->
-> Reported here: https://e2e.ti.com/support/processors/f/791/p/825142/3059419
-> Reported-by: Matthew McKee (e-mail unknown)
-> Suggested-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
->
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 > ---
+> v2 changes:
 >
-> Changes v2 -> v3:
->  - reimplement using oe.utils.parallel_make_argument(), thanks to Khem for
->    the hint
-> ---
->  classes/ti-pdk.bbclass         | 2 +-
->  recipes-ti/ipc/ti-ipc-rtos.inc | 3 ++-
->  2 files changed, 3 insertions(+), 2 deletions(-)
+> To be more efficient, use ti-pdk-source to unpack sources once to a
+> common "work-shared" area. Then each recipe will hard-link only the
+> necessary sources. Follow the example set by gcc-source in oe-core.
 >
-> diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-> index 7030f70ed8e2..a07fdbb34bbe 100644
-> --- a/classes/ti-pdk.bbclass
-> +++ b/classes/ti-pdk.bbclass
-> @@ -71,7 +71,7 @@ TI_PDK_DOXYGEN_SUPPORT ?= "1"
+>   classes/ti-pdk-fetch.bbclass                   | 43 ++++++++++++++++++++++++++
+>   recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb | 33 ++++++++++++++++++++
+>   2 files changed, 76 insertions(+)
+>   create mode 100644 classes/ti-pdk-fetch.bbclass
+>   create mode 100644 recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
 >
->  TI_PDK_XDC_ARGS ?= "${TI_PDK_LIMIT_SOCS}"
+> diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
+> new file mode 100644
+> index 0000000..d845ccc
+> --- /dev/null
+> +++ b/classes/ti-pdk-fetch.bbclass
+> @@ -0,0 +1,43 @@
+> +TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
+> +TI_PDK_GIT_BRANCH ?= "master"
+> +TI_PDK_GIT_PROTOCOL ?= "git"
+> +TI_PDK_SRCREV ?= "a1d6fab78b8c9e9dcaec5bd6df54af8d196a901a"
+> +
+> +TI_PDK_VERSION ?= "2019.11.0"
+> +
+> +PV = "${TI_PDK_VERSION}"
+> +
+> +TI_PDK_COMP ?= ""
+> +TI_PDK_COMP_PATH = "${@'${TI_PDK_COMP}'.replace('.','/')}"
+> +
+> +TI_PDK_SOURCE_PN = "ti-pdk-source"
+> +TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
+> +TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
+> +
+> +S = "${WORKDIR}/git/${TI_PDK_COMP_PATH}"
+> +
+> +# Hard-link only required sources from PDK
+> +python do_unpack_append() {
+> +    if len(d.getVar('TI_PDK_COMP') or '') > 0:
+> +        import shutil
+> +
+> +        # Get src/dst paths
+> +        src = os.path.join(d.getVar('TI_PDK_SOURCE'),'packages',d.getVar('TI_PDK_COMP_PATH'))
+> +        s = d.getVar('S')
+> +
+> +        # Set up the directory structure, except for the root of the sources
+> +        # hard-linked.
+> +        bb.utils.mkdirhier(s)
+> +        os.rmdir(s)
+> +
+> +        # Recursively hard-link the sources
+> +        shutil.copytree(src, s, copy_function=os.link)
+> +}
+> +
+> +# Make sure that ti-pdk-source is unpacked before we set up the hardlinks.
+> +python __anonymous () {
+> +    pn = d.getVar('PN')
+> +    pdk_src_pn = d.getVar('TI_PDK_SOURCE_PN')
+> +    if pn != pdk_src_pn:
+> +        d.appendVarFlag('do_unpack', 'depends', ' ${TI_PDK_SOURCE_PN}:do_unpack')
+> +}
+> diff --git a/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb b/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
+> new file mode 100644
+> index 0000000..f4b3da9
+> --- /dev/null
+> +++ b/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
+> @@ -0,0 +1,33 @@
+> +# Recipe to fetch/unpack sources used by ti-pdk-fetch recipes.
+> +#
+> +# Mimic gcc-source.inc from oe-core.
+> +
+> +# These shources will be unpacked to a "work-shared" directory. Then each
+> +# "ti-pdk-fetch" recipe will hard-link only the sources it requires.
+> +
+> +deltask do_configure
+> +deltask do_compile
+> +deltask do_install
+> +deltask do_populate_sysroot
+> +deltask do_populate_lic
+> +
+> +RM_WORK_EXCLUDE += "${PN}"
+> +EXCLUDE_FROM_WORLD = "1"
+> +
+> +inherit nopackages ti-pdk-fetch
+> +
+> +LICENSE = "BSD-3-Clause"
+> +
+> +PN = "${TI_PDK_SOURCE_PN}"
+> +WORKDIR = "${TI_PDK_SOURCE_WORKDIR}"
+> +SSTATE_SWSPEC = "sstate:ti-pdk::${PV}:${PR}::${SSTATE_VERSION}:"
+> +
+> +STAMP = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}"
+> +STAMPCLEAN = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}*"
+> +
+> +INHIBIT_DEFAULT_DEPS = "1"
+> +DEPENDS = ""
+> +PACKAGES = ""
+> +
+> +SRC_URI = "${TI_PDK_GIT_URI};branch=${TI_PDK_GIT_BRANCH};protocol=${TI_PDK_GIT_PROTOCOL}"
+> +SRCREV = "${TI_PDK_SRCREV}"
 >
-> -PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
-> +PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
->  PARALLEL_MAKE = ""
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
 >
->  def get_doxygen_support(d):
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-> index 7789b5a1ad2d..baf1ccc1f7b4 100644
-> --- a/recipes-ti/ipc/ti-ipc-rtos.inc
-> +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-> @@ -84,12 +84,13 @@ IPC_TARGETS_am65xx = "\
->      ti.targets.arm.elf.R5F="${M4_TOOLCHAIN_INSTALL_DIR}" \
->  "
->
-> +PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
->  EXTRA_OEMAKE = "\
->      PLATFORM=${PLATFORM} \
->      XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
->      BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
->      ${IPC_TARGETS} \
-> -    JOBS="--jobs=${BB_NUMBER_THREADS}" \
-> +    ${PARALLEL_XDC} \
->      JAVA_TOOL_OPTIONS=-Xss2560k \
->  "
->  EXTRA_OEMAKE_append_am65xx = " PDK_INSTALL_DIR=${PDK_INSTALL_DIR}"
-> --
-> 2.24.0
->
+> View/Reply Online (#12539): https://lists.yoctoproject.org/g/meta-ti/message/12539
+> Mute This Topic: https://lists.yoctoproject.org/mt/65159993/3619770
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub  [j-stiffler@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+
+--------------E5584E2A4D865EAD71096FAF
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p>Any further comments on this updated approach?</p>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 12/2/2019 1:45 PM, Jacob Stiffler
+      via Lists.Yoctoproject.Org wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:15DCA3475EF6B6AA.2688@lists.yoctoproject.org">
+      <pre class="moz-quote-pre" wrap="">Recently individual components and LLD sources have been combined
+into a single PDK repo. Use this class to specify the common source.
+Also use this class to keep the sources separate from each other when
+building. This keeps the build identical to previous recipes while
+keeping control on interdependencies.
+
+Similar to gcc-source, use the ti-pdk-source recipe to unpack the
+sources into a "work-shared" area. Then hard-link only the necessary
+files into a recipe's WORKDIR.
+
+Signed-off-by: Jacob Stiffler <a class="moz-txt-link-rfc2396E" href="mailto:j-stiffler@ti.com">&lt;j-stiffler@ti.com&gt;</a>
+---
+v2 changes:
+
+To be more efficient, use ti-pdk-source to unpack sources once to a
+common "work-shared" area. Then each recipe will hard-link only the
+necessary sources. Follow the example set by gcc-source in oe-core.
+
+ classes/ti-pdk-fetch.bbclass                   | 43 ++++++++++++++++++++++++++
+ recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb | 33 ++++++++++++++++++++
+ 2 files changed, 76 insertions(+)
+ create mode 100644 classes/ti-pdk-fetch.bbclass
+ create mode 100644 recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
+
+diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
+new file mode 100644
+index 0000000..d845ccc
+--- /dev/null
++++ b/classes/ti-pdk-fetch.bbclass
+@@ -0,0 +1,43 @@
++TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
++TI_PDK_GIT_BRANCH ?= "master"
++TI_PDK_GIT_PROTOCOL ?= "git"
++TI_PDK_SRCREV ?= "a1d6fab78b8c9e9dcaec5bd6df54af8d196a901a"
++
++TI_PDK_VERSION ?= "2019.11.0"
++
++PV = "${TI_PDK_VERSION}"
++
++TI_PDK_COMP ?= ""
++TI_PDK_COMP_PATH = <a class="moz-txt-link-rfc2396E" href="mailto:${@'${TI_PDK_COMP}'.replace('.','/')}">"${@'${TI_PDK_COMP}'.replace('.','/')}"</a>
++
++TI_PDK_SOURCE_PN = "ti-pdk-source"
++TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
++TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
++
++S = "${WORKDIR}/git/${TI_PDK_COMP_PATH}"
++
++# Hard-link only required sources from PDK
++python do_unpack_append() {
++    if len(d.getVar('TI_PDK_COMP') or '') &gt; 0:
++        import shutil
++
++        # Get src/dst paths
++        src = os.path.join(d.getVar('TI_PDK_SOURCE'),'packages',d.getVar('TI_PDK_COMP_PATH'))
++        s = d.getVar('S')
++
++        # Set up the directory structure, except for the root of the sources
++        # hard-linked.
++        bb.utils.mkdirhier(s)
++        os.rmdir(s)
++
++        # Recursively hard-link the sources
++        shutil.copytree(src, s, copy_function=os.link)
++}
++
++# Make sure that ti-pdk-source is unpacked before we set up the hardlinks.
++python __anonymous () {
++    pn = d.getVar('PN')
++    pdk_src_pn = d.getVar('TI_PDK_SOURCE_PN')
++    if pn != pdk_src_pn:
++        d.appendVarFlag('do_unpack', 'depends', ' ${TI_PDK_SOURCE_PN}:do_unpack')
++}
+diff --git a/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb b/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
+new file mode 100644
+index 0000000..f4b3da9
+--- /dev/null
++++ b/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
+@@ -0,0 +1,33 @@
++# Recipe to fetch/unpack sources used by ti-pdk-fetch recipes.
++#
++# Mimic gcc-source.inc from oe-core.
++
++# These shources will be unpacked to a "work-shared" directory. Then each
++# "ti-pdk-fetch" recipe will hard-link only the sources it requires.
++
++deltask do_configure
++deltask do_compile
++deltask do_install
++deltask do_populate_sysroot
++deltask do_populate_lic
++
++RM_WORK_EXCLUDE += "${PN}"
++EXCLUDE_FROM_WORLD = "1"
++
++inherit nopackages ti-pdk-fetch
++
++LICENSE = "BSD-3-Clause"
++
++PN = "${TI_PDK_SOURCE_PN}"
++WORKDIR = "${TI_PDK_SOURCE_WORKDIR}"
++SSTATE_SWSPEC = "sstate:ti-pdk::${PV}:${PR}::${SSTATE_VERSION}:"
++
++STAMP = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}"
++STAMPCLEAN = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}*"
++
++INHIBIT_DEFAULT_DEPS = "1"
++DEPENDS = ""
++PACKAGES = ""
++
++SRC_URI = "${TI_PDK_GIT_URI};branch=${TI_PDK_GIT_BRANCH};protocol=${TI_PDK_GIT_PROTOCOL}"
++SRCREV = "${TI_PDK_SRCREV}"
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+
+View/Reply Online (#12539): <a class="moz-txt-link-freetext" href="https://lists.yoctoproject.org/g/meta-ti/message/12539">https://lists.yoctoproject.org/g/meta-ti/message/12539</a>
+Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.yoctoproject.org/mt/65159993/3619770">https://lists.yoctoproject.org/mt/65159993/3619770</a>
+Group Owner: <a class="moz-txt-link-abbreviated" href="mailto:meta-ti+owner@lists.yoctoproject.org">meta-ti+owner@lists.yoctoproject.org</a>
+Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.yoctoproject.org/g/meta-ti/unsub">https://lists.yoctoproject.org/g/meta-ti/unsub</a>  [<a class="moz-txt-link-abbreviated" href="mailto:j-stiffler@ti.com">j-stiffler@ti.com</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------E5584E2A4D865EAD71096FAF--
