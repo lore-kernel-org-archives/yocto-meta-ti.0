@@ -1,28 +1,23 @@
 Received: from hostingweb31-40.netsons.net (hostingweb31-40.netsons.net [89.40.174.40])
- by mx.groups.io with SMTP id smtpd.web09.4585.1575374117935165371
+ by mx.groups.io with SMTP id smtpd.web10.7267.1575477941347977664
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 03 Dec 2019 03:55:18 -0800
+ Wed, 04 Dec 2019 08:45:42 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: lucaceresoli.net, ip: 89.40.174.40, mailfrom: luca@lucaceresoli.net)
-Received: from [109.168.11.45] (port=56492 helo=[192.168.101.73])
-	by hostingweb31.netsons.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
+Received: from [109.168.11.45] (port=33408 helo=pc-ceresoli.dev.aim)
+	by hostingweb31.netsons.net with esmtpa (Exim 4.92)
 	(envelope-from <luca@lucaceresoli.net>)
-	id 1ic6lv-0033zp-8L; Tue, 03 Dec 2019 12:55:15 +0100
-Subject: Re: [meta-ti] [PATCH] meta-ti: Set the --jobs based on host cpu_count
-To: Khem Raj <raj.khem@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org, "Kemal R. Shakir" <kemal@ti.com>
-References: <20191129144818.14061-1-luca@lucaceresoli.net>
- <CAMKF1sp-vHHK4Y=UepxZhJFcvukndix7KYoKtG3C4cDE_X9M9Q@mail.gmail.com>
- <afdd88a1-949e-ad0a-98bb-db6b5bef66a5@lucaceresoli.net>
- <CAMKF1sry3S0JLQLb+rc4N4FHtPCnXvA469tNA1Fj4JoPUKm5og@mail.gmail.com>
+	id 1icXmU-00FtpC-Cc; Wed, 04 Dec 2019 17:45:38 +0100
 From: "Luca Ceresoli" <luca@lucaceresoli.net>
-Message-ID: <a5a67694-4785-2e13-1ec6-281fac45780d@lucaceresoli.net>
-Date: Tue, 3 Dec 2019 12:55:15 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.1
+To: meta-ti@lists.yoctoproject.org
+Cc: Luca Ceresoli <luca@lucaceresoli.net>,
+	"Kemal R . Shakir" <kemal@ti.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH v3] Fix "basehash value changed" errors and BB_NUMBER_THREADS usage
+Date: Wed,  4 Dec 2019 17:45:29 +0100
+Message-Id: <20191204164529.19951-1-luca@lucaceresoli.net>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sry3S0JLQLb+rc4N4FHtPCnXvA469tNA1Fj4JoPUKm5og@mail.gmail.com>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - hostingweb31.netsons.net
 X-AntiAbuse: Original Domain - lists.yoctoproject.org
@@ -33,71 +28,63 @@ X-Authenticated-Sender: hostingweb31.netsons.net: luca@lucaceresoli.net
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Khem,
+Changing BB_NUMBER_THREADS between successive builds causes a "basehash
+value changed" error. Additionally, using BB_NUMBER_THREADS to pass a
+number of processes to run to xdc is wrong: PARALLEL_MAKE is the correct
+variable to use.
 
-On 02/12/19 18:09, Khem Raj wrote:
-[...]
->>>> --- a/classes/ti-pdk.bbclass
->>>> +++ b/classes/ti-pdk.bbclass
->>>> @@ -68,7 +68,7 @@ TI_PDK_DOXYGEN_SUPPORT ?= "1"
->>>>
->>>>  TI_PDK_XDC_ARGS ?= "${TI_PDK_LIMIT_SOCS}"
->>>>
->>>> -PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
->>>> +PARALLEL_XDC = "--jobs=${@oe.utils.cpu_count()}"
->>>
->>> this may create another variableto control when limting parallelism so
->>> expressing it in
->>> terms of BB_NUMBER_THREAD s desired
->>>
->>> perhaps you can try adding
->>>
->>> do_configure[vardepsexclude] = "PARALLEL_XDC"
->>> do_compile[vardepsexclude] = "PARALLEL_XDC"
->>
->> Thank you for your review.
->>
->> I agree the solution in this patch is not ideal as it removes ability to
->> control the build load.
->>
->> However using BB_NUMBER_THREADS (with our without vardepsexclude) is
->> also not quite correct. PARALLEL_XDC should have to do with
->> PARALLEL_MAKE, not BB_NUMBER_THREADS.
->>
->> But PARALLEL_MAKE is not a number, so using PARALLEL_MAKE would be
->> correct but it's not doable, and using BB_NUMBER_THREADS is doable but
->> not quite correct... :(
->>
->> Bottom line: for lack of better ideas, I'm sending a new patch that
->> keeps using BB_NUMBER_THREADS and takes your suggestion above. I guess
->> it should be OK for most users. At least it's not worse than the current
->> behavior and can still be improved later.
->>
-> 
-> another option would be to use parallel_make_argument to contruct what you want
-> e.g. see how boost does it
-> 
-> https://git.openembedded.org/openembedded-core/tree/meta/recipes-support/boost/boost.inc#n141
+Fix both problems by using oe.utils.parallel_make_argument() to obtain the
+number of processes to run from PARALLEL_MAKE.
 
-Oh, good idea, thanks! It looks like the correct solution to use the
-proper variable (PARALLEL_MAKE) in place of BB_NUMBER_THREADS.
+Fixes:
 
-But surprisingly it also fixes the "basehash value changed" problem. How
-can this happen? My patch is simply:
+  ERROR: When reparsing .../meta-ti/recipes-ti/ipc/ti-ipc-rtos_git.bb.do_configure, the basehash value changed from 63897a188012cedde03f756b5dbbfa70 to 13b80bf4f4327c367bd201eb4aa32ad7. The metadata is not deterministic and this needs to be fixed.
+  ERROR: When reparsing .../meta-ti/recipes-ti/ipc/ti-ipc-rtos_git.bb.do_compile, the basehash value changed from 2fb59a7db2a2f69d2c25c06c1b6a4245 to 314c664cc040afae2800fcc378dd9ae0. The metadata is not deterministic and this needs to be fixed.
 
+Steps to reproduce:
+
+  BB_NUMBER_THREADS="3" bitbake ti-ipc-rtos ti-ipc-examples-linux
+  BB_NUMBER_THREADS="4" bitbake -c cleansstate osal-rtos
+  BB_NUMBER_THREADS="5" bitbake ti-ipc-rtos ti-ipc-examples-linux
+
+Reported here: https://e2e.ti.com/support/processors/f/791/p/825142/3059419
+Reported-by: Matthew McKee (e-mail unknown)
+Suggested-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
+
+---
+
+Changes v2 -> v3:
+ - reimplement using oe.utils.parallel_make_argument(), thanks to Khem for
+   the hint
+---
+ classes/ti-pdk.bbclass         | 2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+index 7030f70ed8e2..a07fdbb34bbe 100644
 --- a/classes/ti-pdk.bbclass
 +++ b/classes/ti-pdk.bbclass
+@@ -71,7 +71,7 @@ TI_PDK_DOXYGEN_SUPPORT ?= "1"
+ 
+ TI_PDK_XDC_ARGS ?= "${TI_PDK_LIMIT_SOCS}"
+ 
 -PARALLEL_XDC = "--jobs=${BB_NUMBER_THREADS}"
 +PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
-
-and
-
+ PARALLEL_MAKE = ""
+ 
+ def get_doxygen_support(d):
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index 7789b5a1ad2d..baf1ccc1f7b4 100644
 --- a/recipes-ti/ipc/ti-ipc-rtos.inc
 +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -84,12 +84,13 @@ IPC_TARGETS_am65xx = "\
+     ti.targets.arm.elf.R5F="${M4_TOOLCHAIN_INSTALL_DIR}" \
+ "
+ 
 +PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
  EXTRA_OEMAKE = "\
      PLATFORM=${PLATFORM} \
@@ -108,15 +95,7 @@ and
 +    ${PARALLEL_XDC} \
      JAVA_TOOL_OPTIONS=-Xss2560k \
  "
-
-So I wonder why the signature is not considered as changing since
-EXTRA_OEMAKE *is* changing from one build to another with a different
-PARALLEL_MAKE.
-
-Any hints?
-
-Whatever the reason, this version definitely supersedes v2, and after
-some more testing I'll send v3 with the above implementation.
-
+ EXTRA_OEMAKE_append_am65xx = " PDK_INSTALL_DIR=${PDK_INSTALL_DIR}"
 -- 
-Luca
+2.24.0
+
