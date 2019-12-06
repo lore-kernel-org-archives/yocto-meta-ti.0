@@ -1,147 +1,153 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.7007.1575594133106199961
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web09.6149.1575649756108577936
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 Dec 2019 17:02:13 -0800
+ Fri, 06 Dec 2019 08:29:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 887C140C06;
-	Fri,  6 Dec 2019 01:02:12 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6PCUmY7RXo20; Fri,  6 Dec 2019 01:02:12 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 681F440C04;
-	Fri,  6 Dec 2019 01:02:11 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 3990A174336; Thu,  5 Dec 2019 20:02:11 -0500 (EST)
-Date: Thu, 5 Dec 2019 20:02:11 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: c-robey@ti.com
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [PATCH v4] cmem: Adding am5729 beaglebonai CMEM configuration
-Message-ID: <20191206010211.GX4735@denix.org>
-References: <20191205211321.23743-1-c-robey@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GB+ieQhy;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: denys@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id BC5E2E01156; Fri,  6 Dec 2019 08:29:15 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E03B5E00B7A
+	for <meta-ti@yoctoproject.org>; Fri,  6 Dec 2019 08:29:14 -0800 (PST)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id xB6GTEGp048939
+	for <meta-ti@yoctoproject.org>; Fri, 6 Dec 2019 10:29:14 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1575649754;
+	bh=yuEXK07EiXY2VImEvFvT9yV7aNs4PlcIut5AaGm7erc=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=GB+ieQhyUQc6y12E83UPPW+fPLBq7IcXjVQV9+wXcILftmrmV0TuIxuN4WIJ+pIde
+	 XD+T67RXEnxBQXQ0Aoyznt2vYS3EAQJZIWzwjyq5QMJKFUIiSQsb6zJ7S0xscsHY4x
+	 PuZdE6PY/v0EZBKxHzBtRIim/zR64uEEPud+00kw=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xB6GTEhx025094
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Fri, 6 Dec 2019 10:29:14 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Fri, 6 Dec
+ 2019 10:29:14 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Fri, 6 Dec 2019 10:29:14 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xB6GTDnY026630;
+	Fri, 6 Dec 2019 10:29:13 -0600
+Date: Fri, 6 Dec 2019 11:29:13 -0500
+From: "Denys Dmytriyenko" <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+CC: <meta-ti@yoctoproject.org>
+Subject: Re: [meta-ti] [master/thud][PATCH 24/42] pru: migrate to ti-pdk-fetch.bbclass
+Message-ID: <20191206162913.GU24609@beryl>
+References: <1573830902-17409-1-git-send-email-j-stiffler@ti.com>
+ <1573830902-17409-25-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20191205211321.23743-1-c-robey@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
+In-Reply-To: <1573830902-17409-25-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-Thanks, merged into next for testing.
-
-On Thu, Dec 05, 2019 at 03:13:21PM -0600, Caleb Robey via Lists.Yoctoproject.Org wrote:
-> CMEM memory block for bbai should be 402MB to allow full EVE
-> acceleration and DSP use, but accounting for the BBAI only having
-> 1GB of RAM.
-> 
-> Signed-off-by: Caleb Robey <c-robey@ti.com>
-> 
+On Fri, Nov 15, 2019 at 10:14:44AM -0500, Jacob Stiffler wrote:
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 > ---
+>  recipes-bsp/pru/pru-pwm-fw_git.bb    | 11 +++++------
+>  recipes-bsp/pru/pru-swuart-fw_git.bb | 12 ++++++------
+>  2 files changed, 11 insertions(+), 12 deletions(-)
 > 
-> v2 changes:
->     - Added am572b to CMEM_MACHINEs.
-> 
-> v3 changes:
->     - changed am572b to am5729-beagleboneai for clarity
-> 
-> v4 changes:
->     - corrected mistake of adding new CMEM machine and
->       added beagleboneai to the already known machines
-> 
->  recipes-kernel/linux/cmem.inc                 |  6 ++-
->  .../dra7xx/cmem-am5729-beagleboneai.dtsi      | 40 +++++++++++++++++++
->  2 files changed, 44 insertions(+), 2 deletions(-)
->  create mode 100644 recipes-kernel/linux/files/dra7xx/cmem-am5729-beagleboneai.dtsi
-> 
-> diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-> index 8bd643f4..3ad8e25d 100644
-> --- a/recipes-kernel/linux/cmem.inc
-> +++ b/recipes-kernel/linux/cmem.inc
-> @@ -2,14 +2,15 @@
->  #
->  # Use these for temporary overrides
->  CMEM_MACHINE = "${MACHINE}"
-> -CMEM_MACHINE_am57xx-evm = "am571x am572x am574x"
-> -CMEM_MACHINE_am57xx-hs-evm = "am571x am572x am574x"
-> +CMEM_MACHINE_am57xx-evm = "am571x am572x am5729-beagleboneai am574x"
-> +CMEM_MACHINE_am57xx-hs-evm = "am571x am572x am5729-beagleboneai am574x"
->  CMEM_MACHINE_dra7xx-evm = "dra71x dra72x dra74x dra76x"
->  CMEM_MACHINE_dra7xx-hs-evm = "dra71x dra72x dra74x dra76x"
+> diff --git a/recipes-bsp/pru/pru-pwm-fw_git.bb b/recipes-bsp/pru/pru-pwm-fw_git.bb
+
+This seems to break pru-pwm-fw on am65xx:
+
+"iepPwm.c", line 594: error #20: identifier "CSL_ICSS_IEP0_CFG_BASE" is undefined
+"iepPwm.c", line 600: error #20: identifier "CSL_ICSS_IEP1_CFG_BASE" is undefined
+
+Jake, do you know if this can be fixed quickly, so I don't have to drop 42 
+patches from next branch? Thanks!
+
+Denys
+
+
+> index 0fe7987..a8c7103 100644
+> --- a/recipes-bsp/pru/pru-pwm-fw_git.bb
+> +++ b/recipes-bsp/pru/pru-pwm-fw_git.bb
+> @@ -8,17 +8,16 @@ require recipes-ti/includes/ti-paths.inc
+>  COMPATIBLE_MACHINE = "am65xx"
+>  PACKAGE_ARCH = "${MACHINE_ARCH}"
 >  
->  # Set cmem.dtsi per machine or machine variant
->  CMEM_DTSI = "cmem.dtsi"
->  CMEM_DTSI_am571x = "cmem-am571x.dtsi"
-> +CMEM_DTSI_am5729-beagleboneai = "cmem-am5729-beagleboneai.dtsi"
->  CMEM_DTSI_am574x = "cmem-am574x.dtsi"
->  CMEM_DTSI_dra71x = "cmem-dra71x.dtsi"
->  CMEM_DTSI_dra72x = "cmem-dra72x.dtsi"
-> @@ -20,6 +21,7 @@ CMEM_DEVICETREE = "${KERNEL_DEVICETREE}"
->  CMEM_DEVICETREE_am571x = "am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb"
->  CMEM_DEVICETREE_am572x = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revc.dtb \
->                            am572x-idk.dtb am572x-idk-lcd-osd101t2045.dtb am572x-idk-lcd-osd101t2587.dtb"
-> +CMEM_DEVICETREE_am5729-beagleboneai = "am5729-beagleboneai.dtb"
->  CMEM_DEVICETREE_am574x = "am574x-idk.dtb am574x-idk-lcd-osd101t2587.dtb"
->  CMEM_DEVICETREE_dra71x = "dra71-evm.dtb"
->  CMEM_DEVICETREE_dra72x = "dra72-evm.dtb dra72-evm-lcd-osd101t2045.dtb dra72-evm-lcd-osd101t2587.dtb \
-> diff --git a/recipes-kernel/linux/files/dra7xx/cmem-am5729-beagleboneai.dtsi b/recipes-kernel/linux/files/dra7xx/cmem-am5729-beagleboneai.dtsi
-> new file mode 100644
-> index 00000000..e0511d08
-> --- /dev/null
-> +++ b/recipes-kernel/linux/files/dra7xx/cmem-am5729-beagleboneai.dtsi
-> @@ -0,0 +1,40 @@
-> +/ {
-> +	reserved-memory {
-> +		#address-cells = <2>;
-> +		#size-cells = <2>;
-> +		ranges;
+> -# Below commit ID corresponds to "DEV.PRUSS_LLD.01.00.00.15B"
+> -SRCREV = "989f802266d52f50a6db8f2be6967eacd9d2b409"
+>  
+> -PV = "01.00.00.15B"
+>  
+> -BRANCH = "master"
+> -SRC_URI = "git://git.ti.com/keystone-rtos/pruss-lld.git;protocol=git;branch=${BRANCH}"
+> +inherit ti-pdk-fetch
 > +
-> +		cmem_block_mem_0: cmem_block_mem@a0000000 {
-> +			reg = <0x0 0xa0000000 0x0 0x18000000>;
-> +			no-map;
-> +			status = "okay";
-> +		};
+> +TI_PDK_COMP = "ti.drv.pruss.example.apps.icssg_pwm.firmware.src"
 > +
-> +		cmem_block_mem_1_ocmc3: cmem_block_mem@40500000 {
-> +			reg = <0x0 0x40500000 0x0 0x100000>;
-> +			no-map;
-> +			status = "okay";
-> +		};
-> +	};
+> +PE = "1"
+>  
+>  DEPENDS = "ti-cgt-pru-native pru-icss common-csl-ip-rtos"
+>  
+> -S = "${WORKDIR}/git/example/apps/icssg_pwm/firmware/src"
+>  
+>  EXTRA_OEMAKE += " \
+>      PRU_CGT="${TI_CGT_PRU_INSTALL_DIR}" \
+> diff --git a/recipes-bsp/pru/pru-swuart-fw_git.bb b/recipes-bsp/pru/pru-swuart-fw_git.bb
+> index e22b3be..1cb51f3 100644
+> --- a/recipes-bsp/pru/pru-swuart-fw_git.bb
+> +++ b/recipes-bsp/pru/pru-swuart-fw_git.bb
+> @@ -8,20 +8,20 @@ require recipes-ti/includes/ti-paths.inc
+>  COMPATIBLE_MACHINE = "ti33x"
+>  PACKAGE_ARCH = "${MACHINE_ARCH}"
+>  
+> -# Below commit ID corresponds to "DEV.UART_LLD.01.00.00.15"
+> -SRCREV = "4493f456549c85749a05b1f46bf0b75d23976db1"
+>  
+> -PV = "01.00.00.15"
+> +inherit ti-pdk-fetch
+>  
+> -BRANCH = "master"
+> -SRC_URI = "git://git.ti.com/keystone-rtos/uart-lld.git;protocol=git;branch=${BRANCH} \
+> +TI_PDK_COMP = "ti.drv.uart"
 > +
-> +	cmem {
-> +		compatible = "ti,cmem";
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
+> +PE = "1"
 > +
-> +		#pool-size-cells = <2>;
-> +
-> +		status = "okay";
-> +
-> +		cmem_block_0: cmem_block@0 {
-> +			reg = <0>;
-> +			memory-region = <&cmem_block_mem_0>;
-> +			cmem-buf-pools = <1 0x0 0x18000000>;
-> +		};
-> +
-> +		cmem_block_1: cmem_block@1 {
-> +			reg = <1>;
-> +			memory-region = <&cmem_block_mem_1_ocmc3>;
-> +		};
-> +	};
-> +};
+> +SRC_URI_append = " \
+>  	file://0001-icss_uart-add-Makefile-for-building-firmware.patch \
+>  	file://0001-icss_uart-remove-dependency-on-PDK-CSL.patch \
+>  "
+>  
+>  DEPENDS = "ti-cgt-pru-native pru-icss"
+>  
+> -S = "${WORKDIR}/git"
+>  
+>  export PRU_CGT = "${TI_CGT_PRU_INSTALL_DIR}"
+>  export PRU_SSP = "${STAGING_DIR_TARGET}/usr"
 > -- 
-> 2.17.1
+> 2.7.4
 > 
-
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> 
-> View/Reply Online (#12551): https://lists.yoctoproject.org/g/meta-ti/message/12551
-> Mute This Topic: https://lists.yoctoproject.org/mt/67215961/3617104
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub  [denis@denix.org]
-> -=-=-=-=-=-=-=-=-=-=-=-
-
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
