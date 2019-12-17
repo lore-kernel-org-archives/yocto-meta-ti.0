@@ -1,84 +1,111 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web12.13661.1576536367213238555
+ by mx.groups.io with SMTP id smtpd.web09.2245.1576554043513362077
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 16 Dec 2019 14:46:07 -0800
+ Mon, 16 Dec 2019 19:40:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=u7aygelu;
- spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: denys@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cVVcpjUC;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: nsaulnier@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C0752E011FF; Mon, 16 Dec 2019 14:46:06 -0800 (PST)
+	id 1BE49E01257; Mon, 16 Dec 2019 19:40:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
 	*      medium trust
 	*      [198.47.19.141 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
 	*       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B7FDE00942
-	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 14:46:05 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 861D9E00E1F
+	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 19:40:42 -0800 (PST)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xBGMk4IL043580
-	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 16:46:04 -0600
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xBH3efdb024329
+	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 21:40:41 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1576536365;
-	bh=pk1/M9MRRLhRN/gg//ufZZLf/OyMkCoXas48/U1t8zk=;
+	s=ti-com-17Q1; t=1576554041;
+	bh=K51+8fKY+Vmll3don03PvDbooe04125584IYrrs6uGI=;
 	h=From:To:CC:Subject:Date;
-	b=u7aygeluR+Yq7cThv+HqbsF8SSGc9+uZb6enYgLcM4z7xz12GAoBb+6LqGog+HHRy
-	 ZuTIxUWylpqDgW8ETZs0bAJeuLZC10t/WqUEACziU1G3egkEjCFSscHdrWl/mSYazp
-	 KoVjkvwYCukcem0V4A09FgzM9pJ6u4w0qVpGGAxw=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xBGMk4fG015892
+	b=cVVcpjUCudNTpZbyOu26vNihCeKpOWvlr7zBHFVFBB1T07UZ6ckhgKMnRlP/pbqwq
+	 cCwlknypGNgHKr2rmc3zKqmysZBh1XfDEV4Dt64U/8rWegTxD7nnC+fDPccHaSzkPP
+	 oQ6Uko0nTLS7eDKxeofAEb5p5GFxu+Lb/YfDuSVk=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xBH3efti063563
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 16:46:04 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 21:40:41 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 16
- Dec 2019 16:46:04 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2019 21:40:41 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Mon, 16 Dec 2019 16:46:04 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id xBGMk4RY069717;
-	Mon, 16 Dec 2019 16:46:04 -0600
-From: "Denys Dmytriyenko" <denys@ti.com>
+ Frontend Transport; Mon, 16 Dec 2019 21:40:41 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xBH3efLK031217;
+	Mon, 16 Dec 2019 21:40:41 -0600
+From: "Nick Saulnier" <nsaulnier@ti.com>
 To: <meta-ti@yoctoproject.org>
-CC: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] am57xx-evm: add am5729-beagleboneai.dtb
-Date: Mon, 16 Dec 2019 22:27:27 +0000
-Message-ID: <20191216222727.22168-1-denys@ti.com>
+CC: <nsaulnier@ti.com>, <denys@ti.com>, <j-stiffler@ti.com>
+Subject: [meta-ti][PATCH v2] pru-icss_git.bb: Update Manifest and PSSP commits
+Date: Mon, 16 Dec 2019 21:39:48 -0600
+Message-ID: <20191217033948.17653-1-nsaulnier@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/am57xx-evm.conf | 1 +
- 1 file changed, 1 insertion(+)
+- Updated the Software Manifest from 5.0 -> 6.0 to account for new processors,
+etc.
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index cbfe2510..a0b1b532 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -12,6 +12,7 @@ SERIAL_CONSOLES = "115200;ttyS2"
+- Updated to PRU Software Support Package v5.6.0
+	updated manifest
+	added PRU Getting Started Labs
+	improved several examples
+
+Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
+---
+ recipes-bsp/pru/pru-icss_git.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+index 6508b6c2bcf3..51cd04d94af1 100644
+--- a/recipes-bsp/pru/pru-icss_git.bb
++++ b/recipes-bsp/pru/pru-icss_git.bb
+@@ -2,15 +2,15 @@ DESCRIPTION = "Programmable Real-time Unit Software Package"
+ HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
+ LICENSE = "BSD-3-Clause & GPL-2.0 & PD"
  
- KERNEL_DEVICETREE = " \
-     am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb \
-+    am5729-beagleboneai.dtb \
-     am57xx-evm.dtb am57xx-evm-cam-mt9t111.dtb am57xx-evm-cam-ov10635.dtb \
-     am57xx-evm-reva3.dtb am57xx-evm-reva3-cam-mt9t111.dtb am57xx-evm-reva3-cam-ov10635.dtb \
-     am571x-idk.dtb am571x-idk-lcd-osd101t2045.dtb am571x-idk-lcd-osd101t2587.dtb \
+-LIC_FILES_CHKSUM = "file://PRU-Package-v5.0-Manifest.html;md5=a86a37c8b6396ad0ad6ae752f1aa8fcc"
++LIC_FILES_CHKSUM = "file://PRU-Package-v6.0-Manifest.html;md5=ea854230556f47609efdaedca174b44c"
+ 
+ inherit update-alternatives
+ 
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "1ff0393b3b9454fe9c58399c1b5d2db511e8049c"
++SRCREV = "ff252a5e174f1b6aa42931744939f20d25d8e070"
+ 
+-PV = "5.5.0"
++PV = "5.6.0"
+ PR = "r1"
+ 
+ require recipes-ti/includes/ti-paths.inc
+@@ -33,6 +33,7 @@ DEPENDS = "ti-cgt-pru-native"
+ S = "${WORKDIR}/git"
+ 
+ export PRU_CGT = "${TI_CGT_PRU_INSTALL_DIR}"
++export PRU_PSSP = "${S}"
+ 
+ SUBDIRS = "examples pru_cape/pru_fw lib/src labs"
+ 
 -- 
 2.17.1
 
