@@ -1,12 +1,12 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web09.2245.1576554043513362077
+ by mx.groups.io with SMTP id smtpd.web10.2241.1576554308072266227
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 16 Dec 2019 19:40:44 -0800
+ Mon, 16 Dec 2019 19:45:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cVVcpjUC;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=SBoDEGBE;
  spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: nsaulnier@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1BE49E01257; Mon, 16 Dec 2019 19:40:43 -0800 (PST)
+	id E688CE00736; Mon, 16 Dec 2019 19:45:07 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,52 +17,73 @@ X-Spam-HAM-Report:
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.19.141 listed in list.dnswl.org]
+	*      [198.47.23.249 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
 	*       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 861D9E00E1F
-	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 19:40:42 -0800 (PST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xBH3efdb024329
-	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 21:40:41 -0600
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B71A3E00736
+	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 19:45:06 -0800 (PST)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xBH3j69g049023
+	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 21:45:06 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1576554041;
-	bh=K51+8fKY+Vmll3don03PvDbooe04125584IYrrs6uGI=;
-	h=From:To:CC:Subject:Date;
-	b=cVVcpjUCudNTpZbyOu26vNihCeKpOWvlr7zBHFVFBB1T07UZ6ckhgKMnRlP/pbqwq
-	 cCwlknypGNgHKr2rmc3zKqmysZBh1XfDEV4Dt64U/8rWegTxD7nnC+fDPccHaSzkPP
-	 oQ6Uko0nTLS7eDKxeofAEb5p5GFxu+Lb/YfDuSVk=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xBH3efti063563
+	s=ti-com-17Q1; t=1576554306;
+	bh=g9VPuoIx2EsYATf4U0QSuaTArGdaDATtfTNyztBIZWc=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=SBoDEGBEYNIKdqb3h9mfRyV9N5ps37I3A1xPXStBpWx4uAIrkWBBa1mxmc6/0h/vR
+	 7z7qMgTAlDAlhKH9zrvY5u7TRb7mKjE0ruPY2xIgRGSXpeKxw+984dFhGyb9VO58KS
+	 2tMJKjaSDTyf6xePhkOf4WXLT4r8EwosN/Fqrhdg=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xBH3j6mX110797
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 21:40:41 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Mon, 16 Dec 2019 21:45:06 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 16
- Dec 2019 21:40:41 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Mon, 16 Dec 2019 21:40:41 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xBH3efLK031217;
-	Mon, 16 Dec 2019 21:40:41 -0600
+ Dec 2019 21:45:05 -0600
+Received: from DFLE115.ent.ti.com ([fe80::4af:9649:4629:5ff4]) by
+ DFLE115.ent.ti.com ([fe80::4af:9649:4629:5ff4%18]) with mapi id
+ 15.01.1847.003; Mon, 16 Dec 2019 21:45:05 -0600
 From: "Nick Saulnier" <nsaulnier@ti.com>
-To: <meta-ti@yoctoproject.org>
-CC: <nsaulnier@ti.com>, <denys@ti.com>, <j-stiffler@ti.com>
-Subject: [meta-ti][PATCH v2] pru-icss_git.bb: Update Manifest and PSSP commits
-Date: Mon, 16 Dec 2019 21:39:48 -0600
-Message-ID: <20191217033948.17653-1-nsaulnier@ti.com>
-X-Mailer: git-send-email 2.17.1
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+CC: "Dmytriyenko, Denys" <denys@ti.com>, "Stiffler, Jacob" <j-stiffler@ti.com>
+Subject: Re: [meta-ti][PATCH v2] pru-icss_git.bb: Update Manifest and PSSP commits
+Thread-Topic: [meta-ti][PATCH v2] pru-icss_git.bb: Update Manifest and PSSP
+ commits
+Thread-Index: AQHVtIvB431HlzI9fki5NeT4YoFFhKe9rphQ
+Date: Tue, 17 Dec 2019 03:45:05 +0000
+Message-ID: <47a2924278c24aa38d98a17027005f84@ti.com>
+References: <20191217033948.17653-1-nsaulnier@ti.com>
+In-Reply-To: <20191217033948.17653-1-nsaulnier@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.250.95.137]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-- Updated the Software Manifest from 5.0 -> 6.0 to account for new processors,
+Hoping this fixes the build issue. PRU_PSSP =3D "${S}" should point to wher=
+e the git repo is copied locally, right?
+
+Regards,
+Nick
+
+-----Original Message-----
+From: Saulnier, Nick=20
+Sent: Monday, December 16, 2019 9:40 PM
+To: meta-ti@yoctoproject.org
+Cc: Saulnier, Nick; Dmytriyenko, Denys; Stiffler, Jacob
+Subject: [meta-ti][PATCH v2] pru-icss_git.bb: Update Manifest and PSSP comm=
+its
+
+- Updated the Software Manifest from 5.0 -> 6.0 to account for new processo=
+rs,
 etc.
 
 - Updated to PRU Software Support Package v5.6.0
@@ -75,37 +96,42 @@ Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
  recipes-bsp/pru/pru-icss_git.bb | 7 ++++---
  1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git=
+.bb
 index 6508b6c2bcf3..51cd04d94af1 100644
 --- a/recipes-bsp/pru/pru-icss_git.bb
 +++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -2,15 +2,15 @@ DESCRIPTION = "Programmable Real-time Unit Software Package"
- HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
- LICENSE = "BSD-3-Clause & GPL-2.0 & PD"
- 
--LIC_FILES_CHKSUM = "file://PRU-Package-v5.0-Manifest.html;md5=a86a37c8b6396ad0ad6ae752f1aa8fcc"
-+LIC_FILES_CHKSUM = "file://PRU-Package-v6.0-Manifest.html;md5=ea854230556f47609efdaedca174b44c"
- 
+@@ -2,15 +2,15 @@ DESCRIPTION =3D "Programmable Real-time Unit Software Pac=
+kage"
+ HOMEPAGE =3D "http://processors.wiki.ti.com/index.php/PRU-ICSS"
+ LICENSE =3D "BSD-3-Clause & GPL-2.0 & PD"
+=20
+-LIC_FILES_CHKSUM =3D "file://PRU-Package-v5.0-Manifest.html;md5=3Da86a37c8=
+b6396ad0ad6ae752f1aa8fcc"
++LIC_FILES_CHKSUM =3D "file://PRU-Package-v6.0-Manifest.html;md5=3Dea854230=
+556f47609efdaedca174b44c"
+=20
  inherit update-alternatives
- 
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
--SRCREV = "1ff0393b3b9454fe9c58399c1b5d2db511e8049c"
-+SRCREV = "ff252a5e174f1b6aa42931744939f20d25d8e070"
- 
--PV = "5.5.0"
-+PV = "5.6.0"
- PR = "r1"
- 
+=20
+ BRANCH =3D "master"
+ SRC_URI =3D "git://git.ti.com/pru-software-support-package/pru-software-su=
+pport-package.git;protocol=3Dgit;branch=3D${BRANCH}"
+-SRCREV =3D "1ff0393b3b9454fe9c58399c1b5d2db511e8049c"
++SRCREV =3D "ff252a5e174f1b6aa42931744939f20d25d8e070"
+=20
+-PV =3D "5.5.0"
++PV =3D "5.6.0"
+ PR =3D "r1"
+=20
  require recipes-ti/includes/ti-paths.inc
-@@ -33,6 +33,7 @@ DEPENDS = "ti-cgt-pru-native"
- S = "${WORKDIR}/git"
- 
- export PRU_CGT = "${TI_CGT_PRU_INSTALL_DIR}"
-+export PRU_PSSP = "${S}"
- 
- SUBDIRS = "examples pru_cape/pru_fw lib/src labs"
- 
--- 
+@@ -33,6 +33,7 @@ DEPENDS =3D "ti-cgt-pru-native"
+ S =3D "${WORKDIR}/git"
+=20
+ export PRU_CGT =3D "${TI_CGT_PRU_INSTALL_DIR}"
++export PRU_PSSP =3D "${S}"
+=20
+ SUBDIRS =3D "examples pru_cape/pru_fw lib/src labs"
+=20
+--=20
 2.17.1
 
