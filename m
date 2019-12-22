@@ -1,69 +1,66 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.1750.1576784177118011953
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web09.1841.1577043347787439179
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 19 Dec 2019 11:36:17 -0800
+ Sun, 22 Dec 2019 11:35:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VrvcWz4b;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: j-stiffler@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id xBJJaG8d000868
-	for <meta-ti@lists.yoctoproject.org>; Thu, 19 Dec 2019 13:36:16 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1576784176;
-	bh=pf6catVt1ijpla5ith6AUQz2O3NDP89/IvP1/1QWkNs=;
-	h=From:To:CC:Subject:Date;
-	b=VrvcWz4bIg3fqOVk5H/Ny+nBxwTui1UsbjRT/i4mPAHhqjx2sLTu+bkK17NBd9qHM
-	 hoSCDcKCsDWWT1GIpiPe/BNxLL90Eu+vaJ8gMc3Y7lnu19bxOEfltgpRJ05O0CYxf6
-	 P7vJpQosZupAAetAtALzWRs5jzPSStJIQrCDfwhA=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xBJJaGNK048748
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 19 Dec 2019 13:36:16 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 19
- Dec 2019 13:36:16 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 19 Dec 2019 13:36:16 -0600
-Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xBJJaEii009110;
-	Thu, 19 Dec 2019 13:36:15 -0600
-From: "Jacob Stiffler" <j-stiffler@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: <m-radhakrishnan2@ti.com>, Jacob Stiffler <j-stiffler@ti.com>
-Subject: [master/thud][PATCH] ti-pdk-fetch: bump SRCREV for minor fix
-Date: Thu, 19 Dec 2019 14:17:10 -0500
-Message-ID: <1576783030-8805-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ope6gMCt;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f170.google.com with SMTP id d71so4169700qkc.0
+        for <meta-ti@lists.yoctoproject.org>; Sun, 22 Dec 2019 11:35:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=eT6vV3haj1FUnnCqFmt5G+BplWQ3x9d1n6alkp2UfJw=;
+        b=ope6gMCtrWI/jH35zdB+ua91CTGsdxZfMrB0+T9cpvXQW+nb7JN2MG3bgnDwF4wiqO
+         ilEsuzf2LH84Cn0XPKVihOfSnfMd/4yYHZ/lqbfGmO3dYPCEJgwgVJRL8gHXm6JPsE8e
+         kJT/4rT5DLzBb8QdQRaViZxUSrg20m6p+VyjAKDsaLmvNXwfsHk8sH1aeBSP43zLSVUZ
+         bVsOp2xMwsmY2LnpzUV3THbhRH8IFv8h9j5FxCI8E9UCFYAB5toLk4dIzLUQdXCnqd4I
+         jpBBGYAl18EQb3Q4+0na9WtAjVqsTcjSeQcLZx0PmMJtdI66rjoDXqF3TVvm+Wks1naA
+         Q3lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=eT6vV3haj1FUnnCqFmt5G+BplWQ3x9d1n6alkp2UfJw=;
+        b=rWB8OCxQZ0K6eQtt+gU5hGAEwM5HaK/n5uiwCofHgDAnZkbj9AKkF+bPICHqDRD8ug
+         SkaJz+sItOYs1QvbItFRPV6Ulh3GjcLH8KXZvtf1BKcZvdxsKck/dU9iXBhaKXzBgFcR
+         9wT7JNnJLjSp+Y19e6elucIJ5AiagahtQCWa5Jrqu28BOyxN/N/rfBjfJRuX5dSsRsWO
+         ym5kJgmurH7jsEd46jYUmb1SzpzTG9FD2pFN38XI2GuMJZH5JyC8t8CQ3lxsvrEpeszj
+         jYMuXD+vselIZb9Zyy5dkqD4exTe8sofQTmzLd6qzE+B/p3U2qDRsop5cSw6OT8n2J5O
+         xsJQ==
+X-Gm-Message-State: APjAAAXoTNWnVKwhcY82JjNiuM9i19BT9wQ492Z1uXVAZY0R4O+gctW/
+	95JDGYgiMIv17pPtlM/tt8HA5aJ5K2U6hOE9AndfgXDsz5g=
+X-Google-Smtp-Source: APXvYqxbB7Naufite/zTC+TYWVObn1gS85YOeXGqKV2WghnAPLTT0OPJ1lqp7rRkOlvAcSNaGJgZsh659p0g4ZAsgIU=
+X-Received: by 2002:a37:a3c7:: with SMTP id m190mr23321480qke.212.1577043346563;
+ Sun, 22 Dec 2019 11:35:46 -0800 (PST)
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sun, 22 Dec 2019 11:35:20 -0800
+Message-ID: <CAMKF1spqBMcmPvE9-8dBWb0qzNVsBRO-zaSGTSgHw-gp4StPdA@mail.gmail.com>
+Subject: No generic license file exists for: Patrick-Powell in any provider
+To: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 
-* dualemac: fix to drop PTP sync msgs from unknown master
+Hi
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
----
- classes/ti-pdk-fetch.bbclass | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+bitbake emits this warning during parse when meta-ti is in play
 
-diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
-index e544f90..117e54f 100644
---- a/classes/ti-pdk-fetch.bbclass
-+++ b/classes/ti-pdk-fetch.bbclass
-@@ -1,9 +1,9 @@
- TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
- TI_PDK_GIT_BRANCH ?= "release/PROCESSOR-SDK_06.02.00"
- TI_PDK_GIT_PROTOCOL ?= "git"
--TI_PDK_SRCREV ?= "db6617355928f9aed72bd3158ed86eea2fa81f35"
-+TI_PDK_SRCREV ?= "2357d1436f1b2c3b5f1d0c9c94e045d33b63f3fe"
- 
--TI_PDK_VERSION ?= "2019.12.1"
-+TI_PDK_VERSION ?= "2019.12.2"
- 
- PV = "${TI_PDK_VERSION}"
- 
--- 
-2.7.4
+WARNING: ti-cgt6x-1_8.3.2-r0 do_populate_lic: ti-cgt6x: No generic
+license file exists for: Patrick-Powell in any provider
 
+following recipes seems to be using Patrick-Powell license, but its
+not defined anywhere it seems
+perhaps a file with appropriate text should be added to meta-ti/licenses
+
+recipes-ti/devtools/ti-cgt-arm_18.12.1.bb:LICENSE = "(TI-TSPA &
+Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 &
+Hewlett-Packard & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD &
+BSD-4-Clause"
+recipes-ti/devtools/ti-cgt6x_8.3.2.bb:LICENSE = "(TI-TSPA &
+Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 &
+Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
+recipes-ti/devtools/ti-cgt7x_1.2.0.bb:LICENSE = "(TI-TSPA &
+Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 &
+Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
+
+Cheers
+-Khem
