@@ -1,50 +1,50 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web11.3919.1577145631742474804
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
+ by mx.groups.io with SMTP id smtpd.web11.11012.1577840134713589792
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 23 Dec 2019 16:00:31 -0800
+ Tue, 31 Dec 2019 16:55:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Sq2wfRu7;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id c23so7780682plz.4
-        for <meta-ti@lists.yoctoproject.org>; Mon, 23 Dec 2019 16:00:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VAn5orCf;
+ spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f196.google.com with SMTP id n9so12419627pff.13
+        for <meta-ti@lists.yoctoproject.org>; Tue, 31 Dec 2019 16:55:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hQDFNFUrape9JmOrRU0EK0jRKaiC9M/WFPlKpEw9MLc=;
-        b=Sq2wfRu7dm4WenjjJVQScXBwBJe2ge0xcfv03oKSARGTAxpzeER2eHXb2h9x3J6YCu
-         jqXP/Sg6QLXpnv5eNsTmtnYw887ln+va7rDnSJCMflCmYugERGkxqYoansvQVwprqpLb
-         1b5WGaDOjv0qpHEVkNV8wjjK3HjUQ4JJlAFMFaAY8y+R66FPb6R5BHuPyTET5/Cs1/Uo
-         Hsc3Eqnsb3u0MA82TszF0qo7J8QQo83YPPd6zHEgPTP1TJ4fK5K0UIWLYtRVq1+mzoLF
-         HEwhlHMf6N82KuHpYxi27IZ+sZX1FY9RwLjrkmSEOZzwgeW1bxR/Z8qr3Ru0QqNRQExn
-         lFzw==
+        bh=8GURU3ilBxsrbdAGBw2SFdjsdOCika2rqPy5qg99lIc=;
+        b=VAn5orCfeq12wl4NGHUIVyYPGfSCgU9K4K9cUsD0KFREWHEA+7gmVG5HfhiO2WcMoL
+         H82YdAbvmroO2x7sS0xj1HrKQQs2hD294TEbDDurQR/Igz49gW2iL0aywxTfkrea2j2c
+         IRTnOzTbmCM9zldYMFFpuIbJ8+JX0AFXLD3dsKo4WcynLyOlkiUf+EPC26FaXHu8yAZC
+         D+RuQ74aCxj7A79NsXaflLGSSRbT5nJ4ocegBtuSaDX8UBY+AXKiHYmqlIPcfpbNKOdm
+         imI2fQ6bKjZs1ZrJYz75hWB/W38d5w/r9wxJfmfoIglamekQCPix6mvJbFMGBnPoI2nI
+         1Skw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hQDFNFUrape9JmOrRU0EK0jRKaiC9M/WFPlKpEw9MLc=;
-        b=goTklcyY/PnFg0YzUw5/6JNZDRhEIPEp/LawhN3AYj+j1XOzJbYE8jKJp6nvKSQnsF
-         pOo7Z5vSuhqpF8cumpRXWziR5YCLsvIoYyyZ0b9BWIi6rp31MwgsvKk/gQ5qZmLZSm5M
-         F6imbiv03J9oVUPjVnvPKQo+E54U64WxjzWYw0KBoMHZCINdt2FN7YL0Vx7dt3mz53mA
-         Te2a9xK5Unvc4bsqqigabswjqjuRAFQ8WsjqSttNALogO5KA6NLl8ypamr7BFMsstw0X
-         K/c924glXQA/Ng/B6chBubupak8Fu9qM9ohIyrcNurMi4Z7dSeBxkSx2VwLVkFLz81om
-         jNhA==
-X-Gm-Message-State: APjAAAV6at80PxlSpAxnKRw8GkEUmJA+O+FCvzj8R0xLnSPWSox0+A1M
-	+bperGi31IW5CQGZRCjALpbrzW8e1oI=
-X-Google-Smtp-Source: APXvYqwW5aBkotwzLnOuw/LLNlPdi/eHZ3RgnQc9MkIbXpbjXFbW8QQnO7D1ZGzW3aYmZR0ZlEAZMQ==
-X-Received: by 2002:a17:902:7e49:: with SMTP id a9mr31280338pln.230.1577145630651;
-        Mon, 23 Dec 2019 16:00:30 -0800 (PST)
+        bh=8GURU3ilBxsrbdAGBw2SFdjsdOCika2rqPy5qg99lIc=;
+        b=PfSjG+zLgcW5WcF7sqvzdiR94yKNUyDLnnv+vwWpm6GFZd7zdsyznWYAs9FqghE+wE
+         oC1angHfT5u85B2wUI/TH62KZakSzSeFd95ONV+D513CLlVdCIRUvNDUDn+0Lk4lPDno
+         y34cLYQ+6J/+O8GQETn7XoJtzv20qfzYtMnIFnObVg5dqGoQLx1c8y6GiN7SE/s04YU+
+         u0dUfy/ZNh+jyD7NMUogWWuHh4oeMwaVc0vtEWeJZkjaZDiOoi2+n437nxhhkr8h5KMh
+         kuiyF2OZoNCM9f5MBkAq7RzfAXYaJRci5jIFYkjxmctkC45R/fhqNx4ELWcReO5GnHSK
+         pofw==
+X-Gm-Message-State: APjAAAWMcEVkHo0rJUqWIkc3LCs5lGCfNEU81s5lZQoieUvmLfz3YLyI
+	sdOjCaJXUjbOnTrAbQCndIpTdT6vGfs=
+X-Google-Smtp-Source: APXvYqwLmcWPF4moyNhWgdiSDho3Jh32eQGghuO3vsknU+yHIwgKXweeLjaFCNENvAANC42Nwl6cpg==
+X-Received: by 2002:a63:5b59:: with SMTP id l25mr82799088pgm.382.1577840133720;
+        Tue, 31 Dec 2019 16:55:33 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
-        by smtp.gmail.com with ESMTPSA id b19sm11288473pfo.56.2019.12.23.16.00.29
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::fa4b])
+        by smtp.gmail.com with ESMTPSA id e9sm55292781pgn.49.2019.12.31.16.55.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Dec 2019 16:00:30 -0800 (PST)
+        Tue, 31 Dec 2019 16:55:32 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: meta-ti@lists.yoctoproject.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] rwmem: Include <stdexcept> where it is missing
-Date: Mon, 23 Dec 2019 16:00:18 -0800
-Message-Id: <20191224000018.2308154-1-raj.khem@gmail.com>
+Subject: [PATCH V2] rwmem: Update to latest to Include <stdexcept> fix
+Date: Tue, 31 Dec 2019 16:55:29 -0800
+Message-Id: <20200101005529.1328441-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -56,64 +56,24 @@ throw std::invalid_argument(string("Unrecognized option ") + argv[optind - 1]);
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...t-for-invalid_argument-and-out_of_ra.patch | 35 +++++++++++++++++++
- recipes-bsp/rwmem/rwmem_1.2.bb                |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 recipes-bsp/rwmem/rwmem/0001-include-stdexcept-for-invalid_argument-and-out_of_ra.patch
+v2: Just bump srcrev to include the fix which is now upstream
 
-diff --git a/recipes-bsp/rwmem/rwmem/0001-include-stdexcept-for-invalid_argument-and-out_of_ra.patch b/recipes-bsp/rwmem/rwmem/0001-include-stdexcept-for-invalid_argument-and-out_of_ra.patch
-new file mode 100644
-index 00000000..41999492
---- /dev/null
-+++ b/recipes-bsp/rwmem/rwmem/0001-include-stdexcept-for-invalid_argument-and-out_of_ra.patch
-@@ -0,0 +1,35 @@
-+From b5677a3461f4b44b78e74a6b46629606adad11c1 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 23 Dec 2019 15:52:15 -0800
-+Subject: [PATCH] include <stdexcept> for invalid_argument and out_of_range
-+
-+Upstream-Status: Submitted [https://github.com/tomba/rwmem/pull/6]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ librwmem/regs.cpp | 1 +
-+ rwmem/opts.cpp    | 1 +
-+ 2 files changed, 2 insertions(+)
-+
-+diff --git a/librwmem/regs.cpp b/librwmem/regs.cpp
-+index 5e5c22f..669d10d 100644
-+--- a/librwmem/regs.cpp
-++++ b/librwmem/regs.cpp
-+@@ -1,4 +1,5 @@
-+ #include <memory>
-++#include <stdexcept>
-+ #include <cstdint>
-+ #include <cstdlib>
-+ #include <cstring>
-+diff --git a/rwmem/opts.cpp b/rwmem/opts.cpp
-+index 0a10567..e521d56 100644
-+--- a/rwmem/opts.cpp
-++++ b/rwmem/opts.cpp
-+@@ -1,4 +1,5 @@
-+ #include <algorithm>
-++#include <stdexcept>
-+ 
-+ #include <unistd.h>
-+ #include <getopt.h>
-+-- 
-+2.24.1
-+
+ recipes-bsp/rwmem/rwmem_1.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 diff --git a/recipes-bsp/rwmem/rwmem_1.2.bb b/recipes-bsp/rwmem/rwmem_1.2.bb
-index 0545b0cc..9177e60d 100644
+index 0545b0cc..43e75ce0 100644
 --- a/recipes-bsp/rwmem/rwmem_1.2.bb
 +++ b/recipes-bsp/rwmem/rwmem_1.2.bb
-@@ -15,6 +15,7 @@ SRCREV_FORMAT = "rwmem_inih_pybind11"
- SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem \
-            git://github.com/benhoyt/inih.git;protocol=https;name=inih;nobranch=1;destsuffix=git/ext/inih \
-            git://github.com/pybind/pybind11.git;protocol=https;name=pybind11;nobranch=1;destsuffix=git/ext/pybind11 \
-+           file://0001-include-stdexcept-for-invalid_argument-and-out_of_ra.patch \
-            "
+@@ -6,7 +6,7 @@ DEPENDS += "python3"
  
- S = "${WORKDIR}/git"
+ PV .= "+git${SRCPV}"
+ 
+-SRCREV_rwmem = "cc296c5366a35a4c4271cfa3cc9831f6f34bfd9d"
++SRCREV_rwmem = "3ec3e421211b58e766651c2e3a3a21acf14a1906"
+ SRCREV_inih = "4b10c654051a86556dfdb634c891b6c3224c4109"
+ SRCREV_pybind11 = "9a19306fbf30642ca331d0ec88e7da54a96860f9"
+ 
 -- 
 2.24.1
 
