@@ -1,97 +1,76 @@
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com [209.85.210.195])
- by mx.groups.io with SMTP id smtpd.web09.14369.1577877709030603459
+Received: from mail-il1-f193.google.com (mail-il1-f193.google.com [209.85.166.193])
+ by mx.groups.io with SMTP id smtpd.web09.1160.1577994063126822168
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 01 Jan 2020 03:21:49 -0800
+ Thu, 02 Jan 2020 11:41:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nTrhPxpW;
- spf=pass (domain: gmail.com, ip: 209.85.210.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f195.google.com with SMTP id 4so20701922pfz.9
-        for <meta-ti@lists.yoctoproject.org>; Wed, 01 Jan 2020 03:21:48 -0800 (PST)
+ dkim=pass header.i=@openavr-org.20150623.gappssmtp.com header.s=20150623 header.b=rxo+Om+V;
+ spf=none, err=permanent DNS error (domain: openavr.org, ip: 209.85.166.193, mailfrom: troth@openavr.org)
+Received: by mail-il1-f193.google.com with SMTP id f10so34888472ils.8
+        for <meta-ti@lists.yoctoproject.org>; Thu, 02 Jan 2020 11:41:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Tzfe0lMErq0zalPytoB2o8ClXuyrxG3JXgKPXcnZuro=;
-        b=nTrhPxpWortJDFEt0/UQodeIZHsEqLEFf18BYUx6ijDRnkBTL+laDFOh8cMZCQ6UXH
-         12j2RYs+FGJgXpLuE5xe9jXF9j/R+6bsO+jb2/mrxgKDt8jMYb/nxc47aDO21WhXyT8p
-         YXW3173XhnjwKcgxNgpQfVYb0fj+eBB9GzJ6RmzY6qWctiGZZGf13ZXvWKU2m9QPm29i
-         9ZpExm6TwaVvxQ4hJxCWZBKzxiHyF4EtZ2x4v+ObpmvpxPC29fknJzDx5Dk/f0PSA8Wo
-         jbhV5v5/fIXU520dU1Q6BfRigDDX5ZpC+eRT2Kxg+Zg9/fye+SfplOfWQzut2qIjdAGd
-         eClg==
+        d=openavr-org.20150623.gappssmtp.com; s=20150623;
+        h=date:from:to:subject:message-id:mime-version:content-disposition
+         :user-agent;
+        bh=M8Uo2G+3e8fHH5HIz8/kHQ81zdB+39cnVJhJu7rSECQ=;
+        b=rxo+Om+VDNibNawi59lrIcFv+CwzOGKmPM8svr4dqItWN4zOPBk6zoNt0pdDs9QGqI
+         JvgQtAJuJx/ryC8sHcMBrX5ipcRDb/T2Ay31aO8wy+Io7e9MtNtIvv+F9k5whrIRPjb6
+         pZ8VxqwE5qKzDElmLgnNxdaZb4/DarYudylL0XrLHowcdSTvhXMZmwrkgGWEvC9geAAf
+         Fa3WjxiH4zKpwCJaeSU9byIt2Sr7N55ZOtZgaFLZh+NhL5iz6q/4B1J/bz0mmnS/ZQCw
+         VshGRxTujTSCxXOZSn2N70GemZMsfVh6VLAtCQA4ejRM+zBu5iVD+tQbEGpb0o62XFCY
+         8/9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Tzfe0lMErq0zalPytoB2o8ClXuyrxG3JXgKPXcnZuro=;
-        b=FpcGpm9qnqyVfH4T82c3H1OXAP6XVifQ/NQ3EtKY0FobblfRmRCFU0YJ2zkGGHkdlu
-         Az/2gWnoCbXYahQeIbhniZtQ+6vabxVlkhv00vAp+kgvm5SU6tek+TYmy+gSLG+qdhpo
-         TMnx+nH3w+p/P7BOb9icDB5ychjrqIwn5c4cOWTqf31wawT5iGmeVLANJC4+BqCpcylX
-         MKifvxleZX9KMm7bS5U0KUbHCQ7uAUq1mmPD6ZnaLONeo2eX81MMZoue/5NlBbAuRJ/S
-         33T+ZycRrwck3NwaSbR66Op9wPyb0qsrTk0JtPY211Z6039oYJo2SdGNgnssMy7pNXS3
-         mZJg==
-X-Gm-Message-State: APjAAAWD5tv9J7E08/Bue5NGTquh83M43Y9WGeANmYTibPJy7s/I7F7u
-	RwiZm0RKbFPNZh7Flzd0gDswCJ/TRgc=
-X-Google-Smtp-Source: APXvYqwJYKdeMtj46vuuPwD8fHMMKq+qRkagMIgmaHtnDwKyy6cTVIWk/L9Rzi+SP8pgqD6DplNpaw==
-X-Received: by 2002:a62:1c95:: with SMTP id c143mr80537426pfc.219.1577877707987;
-        Wed, 01 Jan 2020 03:21:47 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::fa4b])
-        by smtp.gmail.com with ESMTPSA id g24sm59349697pfk.92.2020.01.01.03.21.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Jan 2020 03:21:47 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+        h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+         :content-disposition:user-agent;
+        bh=M8Uo2G+3e8fHH5HIz8/kHQ81zdB+39cnVJhJu7rSECQ=;
+        b=fns4qX45hOcnHSCVOBimV3vDhCETrWkxPuSS+GV2U+ZdLaAVZ78xocxSBIc8lOFYnB
+         l41EuyUQr3mgCYccq0lyK5KtdyLOnz+NPj/+qnm2LkXlGC5NTWI0rMOwID4pjb2d2AzQ
+         0Ydrskl7YElWBqhGTu1QtXshv6TWK3YQ51IJWf+sVaU6SniI2+xPegk0nl5/pv+0ZQCx
+         xoas+cULzr8yeutR2CnIndLk7rCUleZjTAd8DBNl2EPYFZeCCblPdf0fxt7mxpGbaWFq
+         A2cI6ocxfw4txsptHsctSNk5lycWCzBfZvC5Vz5t5lCYJoFBmsh4ZjtZggYv92APko7Y
+         QXRQ==
+X-Gm-Message-State: APjAAAWCswdCEOGQLJVyofQb/Iwy9jo3bVZhDtJwaLj1Gjtrzo/puLB0
+	gHWfV2h2jl99lIXar8WarHXN5eKz+2Y=
+X-Google-Smtp-Source: APXvYqyAzlDRAosHeUg08+orGo9NgVTXtWHncDXFyzGtQtYf558tw9VhNJBUWZJsTqF4Ub/pyyzefQ==
+X-Received: by 2002:a92:ccd0:: with SMTP id u16mr66613028ilq.215.1577994062181;
+        Thu, 02 Jan 2020 11:41:02 -0800 (PST)
+Return-Path: <troth@openavr.org>
+Received: from beast (c-73-243-79-134.hsd1.co.comcast.net. [73.243.79.134])
+        by smtp.gmail.com with ESMTPSA id m90sm16194270ilh.56.2020.01.02.11.41.01
+        for <meta-ti@lists.yoctoproject.org>
+        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+        Thu, 02 Jan 2020 11:41:01 -0800 (PST)
+Date: Thu, 2 Jan 2020 12:40:59 -0700
+From: "Theodore A. Roth" <troth@openavr.org>
 To: meta-ti@lists.yoctoproject.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH v3] rwmem: Delete
-Date: Wed,  1 Jan 2020 03:21:44 -0800
-Message-Id: <20200101112144.3267596-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
+Subject: [PATCH] beagle-x15: add am5729-beagleboneai.dtb
+Message-ID: <20200102194059.GA13220@beast>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Already migrated to meta-oe
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Theodore A. Roth <troth@openavr.org>
 ---
-v3: Delete recipe, its already in meta-oe now
+ conf/machine/beagle-x15.conf | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
- recipes-bsp/rwmem/rwmem_1.2.bb | 27 ---------------------------
- 1 file changed, 27 deletions(-)
- delete mode 100644 recipes-bsp/rwmem/rwmem_1.2.bb
-
-diff --git a/recipes-bsp/rwmem/rwmem_1.2.bb b/recipes-bsp/rwmem/rwmem_1.2.bb
-deleted file mode 100644
-index 0545b0cc..00000000
---- a/recipes-bsp/rwmem/rwmem_1.2.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "A small tool to read/write memory"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--
--DEPENDS += "python3"
--
--PV .= "+git${SRCPV}"
--
--SRCREV_rwmem = "cc296c5366a35a4c4271cfa3cc9831f6f34bfd9d"
--SRCREV_inih = "4b10c654051a86556dfdb634c891b6c3224c4109"
--SRCREV_pybind11 = "9a19306fbf30642ca331d0ec88e7da54a96860f9"
--
--SRCREV_FORMAT = "rwmem_inih_pybind11"
--
--SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem \
--           git://github.com/benhoyt/inih.git;protocol=https;name=inih;nobranch=1;destsuffix=git/ext/inih \
--           git://github.com/pybind/pybind11.git;protocol=https;name=pybind11;nobranch=1;destsuffix=git/ext/pybind11 \
--           "
--
--S = "${WORKDIR}/git"
--
--inherit cmake pkgconfig
--
--do_install() {
--	install -D -m 0755 ${B}/bin/rwmem ${D}${bindir}/rwmem
--	install -D -m 0644 ${B}/lib/librwmem.a ${D}${libdir}/librwmem.a
--}
+diff --git a/conf/machine/beagle-x15.conf b/conf/machine/beagle-x15.conf
+index d5e05ec7..0af45a84 100644
+--- a/conf/machine/beagle-x15.conf
++++ b/conf/machine/beagle-x15.conf
+@@ -4,7 +4,10 @@
+ 
+ require conf/machine/include/dra7xx.inc
+ 
+-KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb"
++KERNEL_DEVICETREE = " \
++    am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb \
++    am5729-beagleboneai.dtb \
++"
+ 
+ MACHINE_GUI_CLASS = "bigscreen"
+ 
 -- 
-2.24.1
+2.17.1
 
