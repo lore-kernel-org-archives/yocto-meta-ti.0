@@ -1,87 +1,156 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web09.2166.1578342161271197982
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.7572.1578413439782531051
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 06 Jan 2020 12:22:41 -0800
+ Tue, 07 Jan 2020 08:10:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=XixS+jGu;
- spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: m-radhakrishnan2@ti.com)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D079BE01486; Mon,  6 Jan 2020 12:22:40 -0800 (PST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: 
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.19.142 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
-	*       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D2DBE013C9
-	for <meta-ti@yoctoproject.org>; Mon,  6 Jan 2020 12:22:39 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 006KMcXY070262
-	for <meta-ti@yoctoproject.org>; Mon, 6 Jan 2020 14:22:38 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=P6sVywZ3;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 007GAdpH046687;
+	Tue, 7 Jan 2020 10:10:39 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1578342158;
-	bh=fsRYfTvcvcZrFnZTkF0Nm+LNdsaiH47qn5pM1mCCBhs=;
-	h=From:To:Subject:Date;
-	b=XixS+jGupDp3DvUgFfx/obSdjBSOY2zyWTLTH3qYBb+qccePY1VSiZYXb9UwuqmTE
-	 fFdV3pGvCectY+79B3KP3RiKfr823UJm/LEgNgS5IIzgq/zbsA6Q/nyxNT69I6J0Dk
-	 a9t5EekApoY3KZK0j/tvmiKRKh/pRmRPYMYTc0es=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 006KMcLh026877
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 6 Jan 2020 14:22:38 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 6 Jan
- 2020 14:22:38 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1578413439;
+	bh=ccIW/OrcB6Dgyq2RvR4Uc1he1D4FhUPEmwzXT01LsZA=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=P6sVywZ39ZxBOkFsgvJWmdGAk9kdRGrnP+Ty/4WnAUiqReHWZeOP1itvvIey+uNg0
+	 T2UIhQ9EvBfF9WB8CK7I15QZ5FvQ9ZX+LIFg4uHiA02i4aAAl/WGUIihWssEArm4O2
+	 V1EJYHxtV669/T4kWuOmvyW/URXvv2RS4XvVfJz4=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 007GAcgK045141
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 7 Jan 2020 10:10:38 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Tue, 7 Jan
+ 2020 10:10:38 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Mon, 6 Jan 2020 14:22:38 -0600
-Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 006KMcmt053185
-	for <meta-ti@yoctoproject.org>; Mon, 6 Jan 2020 14:22:38 -0600
-From: "Mahesh Radhakrishnan" <m-radhakrishnan2@ti.com>
-To: <meta-ti@yoctoproject.org>
-Subject: [thud/master][PATCH] ti-pdk-fetch: SRCREV update
-Date: Mon, 6 Jan 2020 15:22:36 -0500
-Message-ID: <1578342156-39548-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
+ Frontend Transport; Tue, 7 Jan 2020 10:10:38 -0600
+Received: from [10.250.65.50] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 007GAcgM006258;
+	Tue, 7 Jan 2020 10:10:38 -0600
+Subject: Re: [meta-ti] [PATCH] beagle-x15: add am5729-beagleboneai.dtb
+To: "Theodore A. Roth" <troth@openavr.org>
+CC: <meta-ti@lists.yoctoproject.org>
+References: <20200102194059.GA13220@beast>
+ <d626ca1c-6e7f-0412-5a6c-8021a9eb8237@ti.com>
+ <CAFMvBt2hut8kkGo4O3NAecQ5Vs=hSLQ5GRJDTk144OnsL-uxLw@mail.gmail.com>
+From: "Andrew F. Davis" <afd@ti.com>
+Message-ID: <db6a741c-6cd6-5107-c507-2eabc5257530@ti.com>
+Date: Tue, 7 Jan 2020 11:10:38 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
+In-Reply-To: <CAFMvBt2hut8kkGo4O3NAecQ5Vs=hSLQ5GRJDTk144OnsL-uxLw@mail.gmail.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
----
- classes/ti-pdk-fetch.bbclass | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On 1/3/20 6:35 PM, Theodore A. Roth wrote:
+> On Fri, Jan 3, 2020 at 2:30 PM Andrew F. Davis <afd@ti.com> wrote:
+>>
+>> On 1/2/20 2:40 PM, Theodore A. Roth wrote:
+>>> Signed-off-by: Theodore A. Roth <troth@openavr.org>
+>>> ---
+>>>  conf/machine/beagle-x15.conf | 5 ++++-
+>>
+>>
+>> Why add this to the X15 machine? The Beagebone AI is not an X15, the
+>> catch all for AM57xx machines seems to be am57xx-evm.conf, which already
+>> has the am5729-beagleboneai.dtb.
+> 
+> I tried building an image using the am57xx-evm.conf machine in the first place,
+> but it didn't build the wic image, so I added it to the X15 (since they have the
+> same processor). The X15 machine seemed a good place to put it due to the
+> similarities. Seemed similar to what is going on in the beaglebone.conf machine
+> file (lots of very different boards handled in a single machine file).
+> 
+>>
+>> Thinking more about this, the defining features of the AI might warrant
+>> a new machine conf.
+> 
+> I'm not opposed to adding a new beagle-ai.conf machine. Looking at
+> the X15 machine conf, it seems that there would not be much different
+> for the BBAI other than possibly MACHINE_GUI_CLASS and SERIAL_CONSOLES.
+> 
 
-diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
-index 117e54f..0a4b1e5 100644
---- a/classes/ti-pdk-fetch.bbclass
-+++ b/classes/ti-pdk-fetch.bbclass
-@@ -1,9 +1,9 @@
- TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
--TI_PDK_GIT_BRANCH ?= "release/PROCESSOR-SDK_06.02.00"
-+TI_PDK_GIT_BRANCH ?= "release/PROCESSOR-SDK_06.03.00"
- TI_PDK_GIT_PROTOCOL ?= "git"
--TI_PDK_SRCREV ?= "2357d1436f1b2c3b5f1d0c9c94e045d33b63f3fe"
-+TI_PDK_SRCREV ?= "6cc30b07b7463702625cbc77ddced480c3403de1"
- 
--TI_PDK_VERSION ?= "2019.12.2"
-+TI_PDK_VERSION ?= "2020.1.6"
- 
- PV = "${TI_PDK_VERSION}"
- 
--- 
-1.9.1
 
+Seems the only difference is in the display (the serial console looks
+the same for both).
+
+The AM57xx-EVM is basically just an x15 but with a touchscreen attached:
+
+MACHINE_FEATURES += "touchscreen"
+
+The X15 on the other-hand uses HDMI:
+
+MACHINE_GUI_CLASS = "bigscreen"
+
+If we can remove these differences (auto detect them in userspace or
+something), then we can combine am57xx-evm.conf and beagle-x15.conf into
+just one machine target, which to me is the best way to it (reduce
+targets means less testing, etc..)
+
+
+> Any ideas or hints on what would be different in the machine conf for BBAI
+> versus the X15?
+
+
+Looks like for your wic image IMAGE_FSTYPES could be changed from
+"tar.xz" to "tar.xz wic.xz" so both are generated using the
+am57xx-evm.conf target. What do you use the wic image for anyway, I'm
+not familiar with it?
+
+
+> 
+> I'm also not sure why beagle-x15.conf has UBIFS stuff it it since that board has
+> an eMMC nand flash device on it.
+> 
+
+
+Possibly left over from when it was forked from am57xx-evm.conf. So as
+above, re-combining to one superset machine will help prevent this kind
+of thing.
+
+Andrew
+
+
+> Thanks for the feedback.
+> 
+> Ted Roth
+> 
+>>
+>> Andrew
+>>
+>>
+>>>  1 file changed, 4 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/conf/machine/beagle-x15.conf b/conf/machine/beagle-x15.conf
+>>> index d5e05ec7..0af45a84 100644
+>>> --- a/conf/machine/beagle-x15.conf
+>>> +++ b/conf/machine/beagle-x15.conf
+>>> @@ -4,7 +4,10 @@
+>>>
+>>>  require conf/machine/include/dra7xx.inc
+>>>
+>>> -KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb"
+>>> +KERNEL_DEVICETREE = " \
+>>> +    am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb \
+>>> +    am5729-beagleboneai.dtb \
+>>> +"
+>>>
+>>>  MACHINE_GUI_CLASS = "bigscreen"
+>>>
+>>>
+>>>
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>> Links: You receive all messages sent to this group.
+>>>
+>>> View/Reply Online (#12591): https://lists.yoctoproject.org/g/meta-ti/message/12591
+>>> Mute This Topic: https://lists.yoctoproject.org/mt/69386296/3619733
+>>> Group Owner: meta-ti+owner@lists.yoctoproject.org
+>>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub  [afd@ti.com]
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>
