@@ -1,12 +1,12 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web11.408.1578521466240086230
+ by mx.groups.io with SMTP id smtpd.web09.1536.1578600458699951897
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 08 Jan 2020 14:11:06 -0800
+ Thu, 09 Jan 2020 12:07:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=S5zKzH6f;
- spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: m-radhakrishnan2@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=zJJaV6x3;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: dmurphy@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 99396E01405; Wed,  8 Jan 2020 14:11:05 -0800 (PST)
+	id 37700E014DE; Thu,  9 Jan 2020 12:07:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,74 +17,88 @@ X-Spam-HAM-Report:
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
 	*       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5F7ABE01387
-	for <meta-ti@yoctoproject.org>; Wed,  8 Jan 2020 14:11:04 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 008MB3GT057338
-	for <meta-ti@yoctoproject.org>; Wed, 8 Jan 2020 16:11:03 -0600
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9CCB9E01426
+	for <meta-ti@yoctoproject.org>; Thu,  9 Jan 2020 12:07:36 -0800 (PST)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 009K7aEX090503
+	for <meta-ti@yoctoproject.org>; Thu, 9 Jan 2020 14:07:36 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1578521463;
-	bh=glhbq+SWqqsRTJEO9jeO7kQt7IQdjaw7gOXMJ6460JA=;
-	h=From:To:Subject:Date;
-	b=S5zKzH6fMd0+Vi78sStVyUQQK7sKiOfMdQcjQyVMjQR+D0yUl9ezFM5cnVHOPq3qh
-	 uYza8zMR5RLcGqAmKy8YKSWs01gyBXtA4TKa/Jss5jb4RMDFuXPlu9AZoRL7lcRDfN
-	 5sQNXqN+NcFWzwwg5gQs9QKDTyf+xBVoIFNaP2aY=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 008MB3bQ124518
+	s=ti-com-17Q1; t=1578600456;
+	bh=tk0z8NPuSJccT5PIsPnB3qDQ2CPfRmLS8U/yb1NFJCE=;
+	h=From:To:CC:Subject:Date;
+	b=zJJaV6x3QecXSznJAsoYFio/q0tLfB++0bDoX7fb9al/pO6lTgovgf6nQaZcR05Pu
+	 jSllytCZ4u2Bz3kQbQF2EGuTZ8PRrSMz7rdWJh5laobgQdExirC7WE0kI4YkJ5GTDO
+	 ixSOrig1B4h6TsL3jpj0kPapPuLC5TTaKvQ7sEp8=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 009K7aDs041891
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 8 Jan 2020 16:11:03 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 8 Jan
- 2020 16:11:02 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 9 Jan 2020 14:07:36 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 9 Jan
+ 2020 14:07:36 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Wed, 8 Jan 2020 16:11:02 -0600
-Received: from uda0875154a.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 008MB27m012957
-	for <meta-ti@yoctoproject.org>; Wed, 8 Jan 2020 16:11:02 -0600
-From: "Mahesh Radhakrishnan" <m-radhakrishnan2@ti.com>
+ Frontend Transport; Thu, 9 Jan 2020 14:07:36 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 009K7ZUt018260;
+	Thu, 9 Jan 2020 14:07:36 -0600
+From: "Dan Murphy" <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
-Subject: [thud/master][PATCH v2] ti-pdk-fetch: SRCREV update for fetching PCIE updates
-Date: Wed, 8 Jan 2020 17:10:59 -0500
-Message-ID: <1578521459-38498-1-git-send-email-m-radhakrishnan2@ti.com>
-X-Mailer: git-send-email 1.9.1
+CC: <denys@ti.com>, Dan Murphy <dmurphy@ti.com>
+Subject: [PATCH] linux-ti-staging: update to ti2019.06-rc3
+Date: Thu, 9 Jan 2020 14:04:44 -0600
+Message-ID: <20200109200444.30531-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-From: "Mahesh Radhakrishnan via Lists.Yoctoproject.Org" <m-radhakrishnan2=ti.com@lists.yoctoproject.org>
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- classes/ti-pdk-fetch.bbclass | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
-index 117e54f..c275916 100644
---- a/classes/ti-pdk-fetch.bbclass
-+++ b/classes/ti-pdk-fetch.bbclass
-@@ -1,9 +1,9 @@
- TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
--TI_PDK_GIT_BRANCH ?= "release/PROCESSOR-SDK_06.02.00"
-+TI_PDK_GIT_BRANCH ?= "master"
- TI_PDK_GIT_PROTOCOL ?= "git"
--TI_PDK_SRCREV ?= "2357d1436f1b2c3b5f1d0c9c94e045d33b63f3fe"
-+TI_PDK_SRCREV ?= "4e5372ab43f283d96cb5e2a0373aca3944d869a3"
- 
--TI_PDK_VERSION ?= "2019.12.2"
-+TI_PDK_VERSION ?= "2020.1.8"
- 
- PV = "${TI_PDK_VERSION}"
- 
--- 
-1.9.1
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-k=
+ernel/linux/linux-ti-staging-rt_4.19.bb
+index 91fe00b8..e6c4d9d6 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}-4.19:"
+=20
+ BRANCH =3D "ti-rt-linux-4.19.y"
+=20
+-SRCREV =3D "4a1d8698636cf4c7b4bcac5ff2e13ff0df8b74e0"
+-PV =3D "4.19.82+git${SRCPV}"
++SRCREV =3D "20817c0fe0125f641fa4529f0f6d12178d07fa09"
++PV =3D "4.19.90+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kern=
+el/linux/linux-ti-staging_4.19.bb
+index 2491365f..fffe91a2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -60,8 +60,8 @@ S =3D "${WORKDIR}/git"
+=20
+ BRANCH =3D "ti-linux-4.19.y"
+=20
+-SRCREV =3D "3f7e6b12d9a8dc3eebd65254a478501938fdf93e"
+-PV =3D "4.19.82+git${SRCPV}"
++SRCREV =3D "ced3bea42c328cfc1ac0c0fc6e6a317e16263bcf"
++PV =3D "4.19.90+git${SRCPV}"
+=20
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
+ild
+ MACHINE_KERNEL_PR_append =3D "a"
+--=20
+2.23.0
 
