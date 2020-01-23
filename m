@@ -1,113 +1,104 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web09.533.1579800445518100484
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web11.2747.1579812579864613449
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 23 Jan 2020 09:27:25 -0800
+ Thu, 23 Jan 2020 12:49:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VAmLes3L;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: denys@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=pfvhTJFB;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: dmurphy@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id 8CAADE01602; Thu, 23 Jan 2020 12:49:39 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 48872E01599
+	for <meta-ti@yoctoproject.org>; Thu, 23 Jan 2020 12:49:37 -0800 (PST)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 00NHROLJ052579
-	for <meta-ti@lists.yoctoproject.org>; Thu, 23 Jan 2020 11:27:24 -0600
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 00NKnaqN018220
+	for <meta-ti@yoctoproject.org>; Thu, 23 Jan 2020 14:49:36 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1579800444;
-	bh=6FlZ2ZqW36STlwjQdrtA8APkeqpKrOZQdr85LpCjL70=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=VAmLes3LX3z06jqNV80Wjvup/Ift90rhlRutsMwGi6uSbRHe2CNNi18NcL7dzozjw
-	 mWD6a3wGV1k3QJqFfTKwiepM+8LcQQE5GtxRgSKaYUncCDYZ0XXLttn/GSnceOzd4b
-	 hXD8dM1jxqt+CCaiX+a/o/XaPqLa0ca/ATZguSzc=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 00NHROab125603
+	s=ti-com-17Q1; t=1579812576;
+	bh=1D5HuCVOndCGI/CdgCEgQkZeL9yHeE/HZ9uAJd6/hQ8=;
+	h=From:To:CC:Subject:Date;
+	b=pfvhTJFBNyPNxUAM62l4OWtSpUslkA/O/Bmaaa9/HH7xVGWgy59yrrFI5wkyYaNBg
+	 LNfGeveFBOTIZV7oDs7qlTlnmlaQHjXLj0cmNVvds9UicTDxlu3LSjWUS1yXmVMtPB
+	 OF632MEWEXbMUdgTlXrS44V8jOtvEIMnLknDyzrw=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 00NKnajf017841
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 23 Jan 2020 11:27:24 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 23 Jan 2020 14:49:36 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 23
- Jan 2020 11:27:24 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2020 14:49:36 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 23 Jan 2020 11:27:24 -0600
+ Frontend Transport; Thu, 23 Jan 2020 14:49:36 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00NHROSB006775;
-	Thu, 23 Jan 2020 11:27:24 -0600
-Date: Thu, 23 Jan 2020 12:27:23 -0500
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: "Huang, David" <d-huang@ti.com>
-CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
-        "Hernandez, Alejandro" <ajhernandez@ti.com>
-Subject: Re: [meta-ti][thud][PATCH] ti-img-encode-decode: Update SRCREV to latest
-Message-ID: <20200123172723.GQ3658@beryl>
-References: <20200123165856.26907-1-d-huang@ti.com>
- <20200123170515.GN3658@beryl>
- <c3b4990d4ef6439caa8b638f884fdaf7@ti.com>
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00NKna16086597;
+	Thu, 23 Jan 2020 14:49:36 -0600
+From: "Dan Murphy" <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+CC: <denys@ti.com>, Dan Murphy <dmurphy@ti.com>
+Subject: [PATCH] linux-ti-staging: update to ti2019.06-rc4
+Date: Thu, 23 Jan 2020 14:46:26 -0600
+Message-ID: <20200123204626.25802-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <c3b4990d4ef6439caa8b638f884fdaf7@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, updated and merged to thud-next!
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_4.19.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_4.19.bb    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-On Thu, Jan 23, 2020 at 12:08:31PM -0500, Huang, David wrote:
-> Hi Denys,
-> 
-> Yes, I think I tried to enter it as $(CROSS_COMPILE) and that got interpreted away. Please go ahead and fix this while merging.
-> 
-> Thanks,
-> David
-> 
-> -----Original Message-----
-> From: Dmytriyenko, Denys 
-> Sent: Thursday, January 23, 2020 11:05 AM
-> To: Huang, David
-> Cc: meta-ti@lists.yoctoproject.org; Hernandez, Alejandro
-> Subject: Re: [meta-ti][thud][PATCH] ti-img-encode-decode: Update SRCREV to latest
-> 
-> Thanks!
-> 
-> On Thu, Jan 23, 2020 at 10:58:56AM -0600, David Huang via Lists.Yoctoproject.Org wrote:
-> > From: David Huang <d-huang@ti.com>
-> > 
-> > Pick up latest version of ti-img-encode-decode recipe
-> > with Makefiles using instead of hard coding
-> 
-> Is this message incomplete? Did you miss "using CROSS_COMPILE"? If that's the 
-> case and you have tested the recipe update, I can fix the commit message while 
-> merging. Please let me know. Thanks.
-> 
-> Denys
-> 
-> 
-> > aarch64-linux-gnu as the cross compiler.
-> > 
-> > Signed-off-by: David Huang <d-huang@ti.com>
-> > ---
-> >  .../ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb        | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb b/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb
-> > index 86d954756600..a1da9585e368 100644
-> > --- a/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb
-> > +++ b/recipes-bsp/ti-img-encode-decode/ti-img-encode-decode_1.0.0.bb
-> > @@ -4,12 +4,12 @@ LIC_FILES_CHKSUM = "file://driver/common/dq.c;beginline=1;endline=16;md5=e015e28
-> >  
-> >  inherit module
-> >  
-> > -MACHINE_KERNEL_PR_append = "f"
-> > +MACHINE_KERNEL_PR_append = "g"
-> >  PR = "${MACHINE_KERNEL_PR}"
-> >  
-> >  COMPATIBLE_MACHINE = "j7-evm"
-> >  
-> > -SRCREV = "030e50dd0c53ec8e7825c85479ac3208925bb58d"
-> > +SRCREV = "0eba3678300f649e49f03d92d1b624cf0e008008"
-> >  
-> >  EXTRA_OEMAKE = "KPATH=${STAGING_KERNEL_DIR} KCONF=${STAGING_KERNEL_BUILDDIR}"
-> >  TARGET_CC_ARCH += "${LDFLAGS}"
-> > -- 
-> > 2.17.1
-> > 
-> 
-> > 
-> 
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb b/recipes-k=
+ernel/linux/linux-ti-staging-rt_4.19.bb
+index e6c4d9d6..4fb788ce 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_4.19.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}-4.19:"
+=20
+ BRANCH =3D "ti-rt-linux-4.19.y"
+=20
+-SRCREV =3D "20817c0fe0125f641fa4529f0f6d12178d07fa09"
+-PV =3D "4.19.90+git${SRCPV}"
++SRCREV =3D "58d6e18a2189d6e579835ece6ccf829e0193f139"
++PV =3D "4.19.94+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.19.bb b/recipes-kern=
+el/linux/linux-ti-staging_4.19.bb
+index fffe91a2..e44b569b 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.19.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.19.bb
+@@ -60,8 +60,8 @@ S =3D "${WORKDIR}/git"
+=20
+ BRANCH =3D "ti-linux-4.19.y"
+=20
+-SRCREV =3D "ced3bea42c328cfc1ac0c0fc6e6a317e16263bcf"
+-PV =3D "4.19.90+git${SRCPV}"
++SRCREV =3D "901fa13b903fe2399b66d3ea58f8d84cc9782ca7"
++PV =3D "4.19.94+git${SRCPV}"
+=20
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
+ild
+ MACHINE_KERNEL_PR_append =3D "a"
+--=20
+2.25.0
+
