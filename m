@@ -1,109 +1,94 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web12.62.1580337502182010480
+ by mx.groups.io with SMTP id smtpd.web11.69.1580339967178890150
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Jan 2020 14:38:22 -0800
+ Wed, 29 Jan 2020 15:19:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 140.211.169.56, mailfrom: denis@denix.org)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=abdoLD6/;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: denys@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C7406E01661; Wed, 29 Jan 2020 14:38:21 -0800 (PST)
+	id 1248AE01663; Wed, 29 Jan 2020 15:19:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-HAM-Report: 
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/, low
-	*      trust
-	*      [64.68.198.64 listed in list.dnswl.org]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC111E0165D
-	for <meta-ti@yoctoproject.org>; Wed, 29 Jan 2020 14:38:19 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B4D4140A4E;
-	Wed, 29 Jan 2020 22:38:18 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 28jSSKLHFdOH; Wed, 29 Jan 2020 22:38:18 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 918DE4006B;
-	Wed, 29 Jan 2020 22:38:17 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id E016E1711A7;
-	Wed, 29 Jan 2020 17:38:16 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [master][PATCH] jailhouse: switch to Python3 dependencies
-Date: Wed, 29 Jan 2020 17:38:16 -0500
-Message-Id: <1580337496-16026-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.19.142 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A58FE0160D
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jan 2020 15:19:24 -0800 (PST)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 00TNJNHZ086599;
+	Wed, 29 Jan 2020 17:19:23 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1580339963;
+	bh=45lyJ29gjNRRD0CUg/FItwggqjMyVFWt8IhSONeiL5Y=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=abdoLD6/Xq0ts3wqHFECBb6C1em/j8c0Mq7aUiwcanOLSEAEXf2dGOdIAbsQsmQAT
+	 xN64H5AdtUrkjlNo9Ey7A6fuHmSG+yM1RByomDMR5+QK0x4ZYFdypYxusBrRaGuNmD
+	 NTTCQUSv/9XR4+E5K9Zj/47IbVhdcnfkQJ39+NOo=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 00TNJNbP048471
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 29 Jan 2020 17:19:23 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 29
+ Jan 2020 17:19:23 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Wed, 29 Jan 2020 17:19:23 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00TNJN3d078250;
+	Wed, 29 Jan 2020 17:19:23 -0600
+Date: Wed, 29 Jan 2020 18:19:23 -0500
+From: "Denys Dmytriyenko" <denys@ti.com>
+To: Peter Griffin <peter.griffin@linaro.org>
+CC: <meta-ti@yoctoproject.org>, <andrey.konovalov@linaro.org>
+Subject: Re: [PATCH] jailhouse_git: update to inherit python3 classes
+Message-ID: <20200129231922.GS3658@beryl>
+References: <1580339755-23335-1-git-send-email-peter.griffin@linaro.org>
+MIME-Version: 1.0
+In-Reply-To: <1580339755-23335-1-git-send-email-peter.griffin@linaro.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+NAK
 
-python-argparse is not available in oe-core, but meta-python provides a
-drop-in replacement python3-configargparse, if needed. meta-ti does not
-depend on meta-python for now - can be adjusted in the distro layer.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/jailhouse/jailhouse_git.bb | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
-
-diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
-index 4186dc3..ed23cde 100644
---- a/recipes-kernel/jailhouse/jailhouse_git.bb
-+++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-@@ -18,18 +18,18 @@ SRC_URI = " \
-     git://git.ti.com/jailhouse/ti-jailhouse.git;protocol=git;branch=${BRANCH} \
- "
- 
--DEPENDS = "virtual/kernel dtc-native python-mako-native python-mako make-native"
-+DEPENDS = "virtual/kernel dtc-native python3-mako-native python3-mako make-native"
- RDEPENDS_${PN} += "\
--	python-curses\
--	python-datetime\
--	python-argparse\
--	python-mmap\
-+	python3-curses\
-+	python3-datetime\
-+	python3-mmap\
- "
- 
--S = "${WORKDIR}/git"
--
- require jailhouse-arch.inc
--inherit module pythonnative bash-completion deploy setuptools
-+inherit module python3native bash-completion deploy setuptools3
-+
-+S = "${WORKDIR}/git"
-+B = "${S}"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_MACHINE = "(ti-soc)"
-@@ -88,7 +88,7 @@ do_compile() {
- 
- do_install() {
- 	# Install pyjailhouse python modules needed by the tools
--	distutils_do_install
-+	distutils3_do_install
- 
- 	# We want to install the python tools, but we do not want to use pip...
- 	# At least with v0.10, we can work around this with
-@@ -141,8 +141,8 @@ FILES_${PN} = "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR} /b
- FILES_pyjailhouse = "${PYTHON_SITEPACKAGES_DIR}"
- FILES_${PN}-tools = "${libexecdir}/${BPN}/${BPN}-*"
- 
--RDEPENDS_${PN}-tools = "pyjailhouse python-mmap python-math python-argparse python-datetime python-curses python-compression"
--RDEPENDS_pyjailhouse = "python-core python-ctypes python-fcntl python-shell"
-+RDEPENDS_${PN}-tools = "pyjailhouse python3-mmap python3-math python3-datetime python3-curses python3-compression"
-+RDEPENDS_pyjailhouse = "python3-core python3-ctypes python3-fcntl python3-shell"
- 
- RRECOMMENDS_${PN} = "${PN}-tools"
- 
--- 
-2.7.4
-
+On Wed, Jan 29, 2020 at 11:15:55PM +0000, Peter Griffin wrote:
+> This avoids the parsing errors, now that python2
+> has been removed.
+> 
+> Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
+> ---
+>  recipes-kernel/jailhouse/jailhouse_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
+> index 4186dc3..89833e6 100644
+> --- a/recipes-kernel/jailhouse/jailhouse_git.bb
+> +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
+> @@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
+>  S = "${WORKDIR}/git"
+>  
+>  require jailhouse-arch.inc
+> -inherit module pythonnative bash-completion deploy setuptools
+> +inherit module python3native bash-completion deploy setuptools3
+>  
+>  PACKAGE_ARCH = "${MACHINE_ARCH}"
+>  COMPATIBLE_MACHINE = "(ti-soc)"
+> -- 
+> 2.7.4
+> 
