@@ -1,87 +1,73 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.3210.1580355253221857151
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web11.3931.1580361088261619857
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Jan 2020 19:34:13 -0800
+ Wed, 29 Jan 2020 21:11:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lOUpomM6;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: denys@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 00U3YBG9056445;
-	Wed, 29 Jan 2020 21:34:11 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1580355251;
-	bh=YxhV01iUuZeQPJaGOCTjrRD6ul20hktCMGt4EZToviM=;
-	h=Date:From:To:Subject:References:In-Reply-To;
-	b=lOUpomM6viHv0KzxlCOuhXngLzLEgVnrNBPuKZItSmd9msRw7jxARNLB0tFily5x8
-	 gH2nNj5/CHi2XqlnsQr2oDrnFgTAHmFmZy4tWZrsF21s7jsmb3LBjAjyix2aDMkyjL
-	 yWXl9iwTMO9MIiRfpbPCc7m5Z1OHV88TvPfKIKbM=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 00U3YAnH097082
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 29 Jan 2020 21:34:10 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 29
- Jan 2020 21:34:10 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Wed, 29 Jan 2020 21:34:10 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00U3YArX108507;
-	Wed, 29 Jan 2020 21:34:10 -0600
-Date: Wed, 29 Jan 2020 22:34:10 -0500
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Peter Griffin <peter.griffin@linaro.org>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH] jailhouse_git: update to inherit python3 classes
-Message-ID: <20200130033410.GV3658@beryl>
-References: <1580339755-23335-1-git-send-email-peter.griffin@linaro.org>
- <15EE7ED3E5F24894.17230@lists.yoctoproject.org>
-MIME-Version: 1.0
-In-Reply-To: <15EE7ED3E5F24894.17230@lists.yoctoproject.org>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 140.211.169.56, mailfrom: denis@denix.org)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id B3F63E01661; Wed, 29 Jan 2020 21:11:27 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/, low
+	*      trust
+	*      [64.68.198.64 listed in list.dnswl.org]
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 416AAE015B5
+	for <meta-ti@yoctoproject.org>; Wed, 29 Jan 2020 21:11:25 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 43F1C40C29;
+	Thu, 30 Jan 2020 05:11:25 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vmHMnS-43n4C; Thu, 30 Jan 2020 05:11:25 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 27B5F40C0C;
+	Thu, 30 Jan 2020 05:11:24 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id A216316E7F5;
+	Thu, 30 Jan 2020 00:11:22 -0500 (EST)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [zeus/master][PATCH 1/4] u-boot-ti-staging: upgrade to 2020.01
+Date: Thu, 30 Jan 2020 00:11:17 -0500
+Message-Id: <1580361080-40866-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-Let me elaborate:
+From: Denys Dmytriyenko <denys@ti.com>
 
-1. Your patch is incomplete - it fixes parsing issues, but not build issues
-2. There was a more complete patch submitted earlier in the day to address that:
-https://lists.yoctoproject.org/g/meta-ti/message/12625
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ .../{u-boot-ti-staging_2019.01.bb => u-boot-ti-staging_2020.01.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename recipes-bsp/u-boot/{u-boot-ti-staging_2019.01.bb => u-boot-ti-staging_2020.01.bb} (21%)
 
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+similarity index 21%
+rename from recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
+rename to recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+index 472f569..533e72e 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2019.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
+ 
+-PR = "r32"
++PR = "r0"
+ 
+-BRANCH = "ti-u-boot-2019.01"
++BRANCH = "ti-u-boot-2020.01"
+ 
+-SRCREV = "350f3927b89bc06ce1c9ddb618280d298c418b94"
++SRCREV = "7903c7038afdc12758c101a42b628137d8c276c9"
 -- 
-Denys
-
-
-On Wed, Jan 29, 2020 at 06:19:23PM -0500, Denys Dmytriyenko via Lists.Yoctoproject.Org wrote:
-> NAK
-> 
-> On Wed, Jan 29, 2020 at 11:15:55PM +0000, Peter Griffin wrote:
-> > This avoids the parsing errors, now that python2
-> > has been removed.
-> > 
-> > Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
-> > ---
-> >  recipes-kernel/jailhouse/jailhouse_git.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
-> > index 4186dc3..89833e6 100644
-> > --- a/recipes-kernel/jailhouse/jailhouse_git.bb
-> > +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-> > @@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
-> >  S = "${WORKDIR}/git"
-> >  
-> >  require jailhouse-arch.inc
-> > -inherit module pythonnative bash-completion deploy setuptools
-> > +inherit module python3native bash-completion deploy setuptools3
-> >  
-> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >  COMPATIBLE_MACHINE = "(ti-soc)"
-> > -- 
-> > 2.7.4
-> > 
-
-> 
+2.7.4
 
