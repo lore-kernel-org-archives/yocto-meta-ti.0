@@ -1,118 +1,66 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web12.1269.1580432253924949589
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web10.1258.1580432383726280005
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 30 Jan 2020 16:57:34 -0800
+ Thu, 30 Jan 2020 16:59:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ag1HO8dw;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: denys@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 00V0vWpV102554;
-	Thu, 30 Jan 2020 18:57:32 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1580432252;
-	bh=RwBSKFD+80epF6E76V1B13bfvBTk6fWarvV9Cz1PnKA=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=ag1HO8dwl7MiuKEvsYVMfyAP3Iw5C5DTQ2m890bt0er1s68keza/ztNFqgmOJ7qI4
-	 EOpF0tezUKEREquz8Udcm9ooUv+oc5gAHk1XU0ja9kSsRyp4CD5qFCo8tJka/gzBi+
-	 rfgvvvhz5+i1NoMQfhJKzu/0bMXoY1RKNngAGbDY=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00V0vWpA059324;
-	Thu, 30 Jan 2020 18:57:32 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 30
- Jan 2020 18:57:32 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 30 Jan 2020 18:57:32 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00V0vWEV123540;
-	Thu, 30 Jan 2020 18:57:32 -0600
-Date: Thu, 30 Jan 2020 19:57:31 -0500
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Peter Griffin <peter.griffin@linaro.org>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH] jailhouse_git: update to inherit python3 classes
-Message-ID: <20200131005731.GX3658@beryl>
-References: <1580339755-23335-1-git-send-email-peter.griffin@linaro.org>
- <15EE7ED3E5F24894.17230@lists.yoctoproject.org>
- <20200130033410.GV3658@beryl>
- <CADrjBPopF503QR2_d6T7-SWCNqG_hbAobN866jBSMWVTfdmJ1w@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CADrjBPopF503QR2_d6T7-SWCNqG_hbAobN866jBSMWVTfdmJ1w@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 140.211.169.56, mailfrom: denis@denix.org)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id 925D4E013AE; Thu, 30 Jan 2020 16:59:43 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/, low
+	*      trust
+	*      [64.68.198.64 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DBCE5E0049C
+	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2020 16:59:42 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D510D40C33;
+	Fri, 31 Jan 2020 00:59:41 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id sQzWEG1yeeOm; Fri, 31 Jan 2020 00:59:41 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BA34340C31;
+	Fri, 31 Jan 2020 00:59:40 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 73E2A170F48;
+	Thu, 30 Jan 2020 19:59:40 -0500 (EST)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [zeus/master][PATCH] README: update mailing list URL
+Date: Thu, 30 Jan 2020 19:59:40 -0500
+Message-Id: <1580432380-23868-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-On Thu, Jan 30, 2020 at 09:14:47AM +0000, Peter Griffin wrote:
-> Hi Denys,
-> 
-> On Thu, 30 Jan 2020 at 03:34, Denys Dmytriyenko <denys@ti.com> wrote:
-> 
-> > Let me elaborate:
-> >
-> > 1. Your patch is incomplete - it fixes parsing issues, but not build issues
-> >
-> 
-> Thanks for the extra info, yes that is correct I didn't build any TI
-> platform,
-> but I needed to fix the parse issues to build the non meta-ti based platform
-> I was working on (or disable your layer). I should have made that clearer
-> in the commit message.
-> 
-> 2. There was a more complete patch submitted earlier in the day to address
-> > that:
-> > https://lists.yoctoproject.org/g/meta-ti/message/12625
-> 
-> 
-> Ok great. I was trying to check your mailing list but seems I was using a
-> old link from the README here
-> https://www.yoctoproject.org/pipermail/meta-ti/.
+From: Denys Dmytriyenko <denys@ti.com>
 
-Ah, good point! I need to update that. Thanks.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ README | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/README b/README
+index 39dde59..778a975 100644
+--- a/README
++++ b/README
+@@ -20,6 +20,6 @@ Please follow the recommended setup procedures of your OE distribution.
+ 
+ Send pull requests, patches, comments or questions to meta-ti@yoctoproject.org
+ Please note - meta-ti mailing list requires subscription for posting:
+-https://lists.yoctoproject.org/listinfo/meta-ti
++https://lists.yoctoproject.org/g/meta-ti
+ 
+ Maintainers: Denys Dmytriyenko <denys@ti.com>
+-- 
+2.7.4
 
-> Peter.
-> 
-> >
-> >
-> > --
-> > Denys
-> >
-> >
-> > On Wed, Jan 29, 2020 at 06:19:23PM -0500, Denys Dmytriyenko via
-> > Lists.Yoctoproject.Org wrote:
-> > > NAK
-> > >
-> > > On Wed, Jan 29, 2020 at 11:15:55PM +0000, Peter Griffin wrote:
-> > > > This avoids the parsing errors, now that python2
-> > > > has been removed.
-> > > >
-> > > > Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
-> > > > ---
-> > > >  recipes-kernel/jailhouse/jailhouse_git.bb | 2 +-
-> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb
-> > b/recipes-kernel/jailhouse/jailhouse_git.bb
-> > > > index 4186dc3..89833e6 100644
-> > > > --- a/recipes-kernel/jailhouse/jailhouse_git.bb
-> > > > +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-> > > > @@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
-> > > >  S = "${WORKDIR}/git"
-> > > >
-> > > >  require jailhouse-arch.inc
-> > > > -inherit module pythonnative bash-completion deploy setuptools
-> > > > +inherit module python3native bash-completion deploy setuptools3
-> > > >
-> > > >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > > >  COMPATIBLE_MACHINE = "(ti-soc)"
-> > > > --
-> > > > 2.7.4
-> > > >
-> >
-> > > 
-> >
-> >
