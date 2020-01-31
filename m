@@ -1,271 +1,118 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web12.1245.1580432170754255133
- for <meta-ti@lists.yoctoproject.org>;
- Thu, 30 Jan 2020 16:56:11 -0800
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=NO8BUJAX;
- spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: denys@ti.com)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 55599E015BD; Thu, 30 Jan 2020 16:56:10 -0800 (PST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: 
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
-	*       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1D43E00852
-	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2020 16:56:08 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 00V0u8FO102297
-	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2020 18:56:08 -0600
+ by mx.groups.io with SMTP id smtpd.web12.1269.1580432253924949589
+ for <meta-ti@lists.yoctoproject.org>;
+ Thu, 30 Jan 2020 16:57:34 -0800
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ag1HO8dw;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: denys@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 00V0vWpV102554;
+	Thu, 30 Jan 2020 18:57:32 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1580432168;
-	bh=uzAVv9zUeW96Xu7PHaFG9Y5RzffcdVbLFzwgQTcGq+0=;
+	s=ti-com-17Q1; t=1580432252;
+	bh=RwBSKFD+80epF6E76V1B13bfvBTk6fWarvV9Cz1PnKA=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=NO8BUJAXX8JKxWu9FvhbY1uWZyA7O9+PiReWy79PqvIeOWnUefYwbv1gsSjkfusvl
-	 Ee6tpjTikJT9l2kTU6WhT9X+/hzdwwogAPmIXbdJMrNrjMVPkZGeDa+lGA1KnuZVjA
-	 C63p6LFWQqNc8JERMSUuSRXcHhuGrRp0NPCvAtsU=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 00V0u89F129353
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2020 18:56:08 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	b=ag1HO8dwl7MiuKEvsYVMfyAP3Iw5C5DTQ2m890bt0er1s68keza/ztNFqgmOJ7qI4
+	 EOpF0tezUKEREquz8Udcm9ooUv+oc5gAHk1XU0ja9kSsRyp4CD5qFCo8tJka/gzBi+
+	 rfgvvvhz5+i1NoMQfhJKzu/0bMXoY1RKNngAGbDY=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00V0vWpA059324;
+	Thu, 30 Jan 2020 18:57:32 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 30
- Jan 2020 18:56:07 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2020 18:57:32 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 30 Jan 2020 18:56:07 -0600
+ Frontend Transport; Thu, 30 Jan 2020 18:57:32 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00V0u73Q121404;
-	Thu, 30 Jan 2020 18:56:07 -0600
-Date: Thu, 30 Jan 2020 19:56:07 -0500
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 00V0vWEV123540;
+	Thu, 30 Jan 2020 18:57:32 -0600
+Date: Thu, 30 Jan 2020 19:57:31 -0500
 From: "Denys Dmytriyenko" <denys@ti.com>
-To: "Andrew F. Davis" <afd@ti.com>
-CC: <meta-ti@yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH 1/2] omapfbplay: Remove depricated and non-working omapfbplay tool
-Message-ID: <20200131005607.GW3658@beryl>
-References: <20200130170155.32038-1-afd@ti.com>
+To: Peter Griffin <peter.griffin@linaro.org>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti] [PATCH] jailhouse_git: update to inherit python3 classes
+Message-ID: <20200131005731.GX3658@beryl>
+References: <1580339755-23335-1-git-send-email-peter.griffin@linaro.org>
+ <15EE7ED3E5F24894.17230@lists.yoctoproject.org>
+ <20200130033410.GV3658@beryl>
+ <CADrjBPopF503QR2_d6T7-SWCNqG_hbAobN866jBSMWVTfdmJ1w@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20200130170155.32038-1-afd@ti.com>
+In-Reply-To: <CADrjBPopF503QR2_d6T7-SWCNqG_hbAobN866jBSMWVTfdmJ1w@mail.gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-Andrew,
-
-Can you please re-send these 2 patches - I don't think they made it to the 
-list. While I can grab them directly from my mailbox, I was wondering what 
-the problem was.
-
-Denys
-
-
-On Thu, Jan 30, 2020 at 12:01:54PM -0500, Andrew F. Davis wrote:
-> This program uses many software components that are not recommended
-> anymore making it a bad example. The original source repo is gone.
-> It has dependencies on very old kernel versions. Lastly it doesn't
-> look to have been built by anyone in a long time. Lets remove this.
+On Thu, Jan 30, 2020 at 09:14:47AM +0000, Peter Griffin wrote:
+> Hi Denys,
 > 
-> Signed-off-by: Andrew F. Davis <afd@ti.com>
-> ---
->  ...h-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch | 26 -------------
->  .../files/omapfbplay-errorhandling.patch      | 34 -----------------
->  .../omapfbplay/omapfbplay-cmem_git.bb         | 16 --------
->  .../omapfbplay/omapfbplay-dce_git.bb          |  7 ----
->  .../omapfbplay/omapfbplay-xv_git.bb           |  3 --
->  recipes-graphics/omapfbplay/omapfbplay.inc    | 37 -------------------
->  recipes-graphics/omapfbplay/omapfbplay_git.bb |  3 --
->  7 files changed, 126 deletions(-)
->  delete mode 100644 recipes-graphics/omapfbplay/files/0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch
->  delete mode 100644 recipes-graphics/omapfbplay/files/omapfbplay-errorhandling.patch
->  delete mode 100644 recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb
->  delete mode 100644 recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
->  delete mode 100644 recipes-graphics/omapfbplay/omapfbplay-xv_git.bb
->  delete mode 100644 recipes-graphics/omapfbplay/omapfbplay.inc
->  delete mode 100644 recipes-graphics/omapfbplay/omapfbplay_git.bb
+> On Thu, 30 Jan 2020 at 03:34, Denys Dmytriyenko <denys@ti.com> wrote:
 > 
-> diff --git a/recipes-graphics/omapfbplay/files/0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch b/recipes-graphics/omapfbplay/files/0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch
-> deleted file mode 100644
-> index e01fddbf..00000000
-> --- a/recipes-graphics/omapfbplay/files/0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -From 71670f4a067efc169018a9ec9321ccc9af3bbd59 Mon Sep 17 00:00:00 2001
-> -From: Roger Monk <r-monk@ti.com>
-> -Date: Thu, 10 May 2012 14:50:11 +0100
-> -Subject: [PATCH] omapfbplay:  switch CODEC_TYPE_VIDEO to AVMEDIA_TYPE_VIDEO
-> -
-> -Signed-off-by: Roger Monk <r-monk@ti.com>
-> ----
-> - omapfbplay.c |    2 +-
-> - 1 files changed, 1 insertions(+), 1 deletions(-)
-> -
-> -diff --git a/omapfbplay.c b/omapfbplay.c
-> -index ad35bd5..818cf2c 100644
-> ---- a/omapfbplay.c
-> -+++ b/omapfbplay.c
-> -@@ -74,7 +74,7 @@ find_stream(AVFormatContext *afc)
-> -     int i;
-> - 
-> -     for (i = 0; i < afc->nb_streams; i++) {
-> --        if (afc->streams[i]->codec->codec_type == CODEC_TYPE_VIDEO && !st)
-> -+        if (afc->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO && !st)
-> -             st = afc->streams[i];
-> -         else
-> -             afc->streams[i]->discard = AVDISCARD_ALL;
-> --- 
-> -1.7.0.4
-> -
-> diff --git a/recipes-graphics/omapfbplay/files/omapfbplay-errorhandling.patch b/recipes-graphics/omapfbplay/files/omapfbplay-errorhandling.patch
-> deleted file mode 100644
-> index 7dd544f8..00000000
-> --- a/recipes-graphics/omapfbplay/files/omapfbplay-errorhandling.patch
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -From e321ae7df57ada9ecc8c155fa4e5511c96ef5db3 Mon Sep 17 00:00:00 2001
-> -From: Rob Clark <rob@ti.com>
-> -Date: Fri, 18 Mar 2011 12:40:51 -0500
-> -Subject: [PATCH] dce: differentiate between fatal and non-fatal errors
-> -
-> -For streams with errors, the codec will throw back an error. But not
-> -all errors are fatal.
-> ----
-> - dce.c |   10 ++++++++--
-> - 1 files changed, 8 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/dce.c b/dce.c
-> -index ab7ad0a..88f175e 100644
-> ---- a/dce.c
-> -+++ b/dce.c
-> -@@ -270,8 +270,14 @@ static int dce_decode(AVPacket *p)
-> - 
-> -     err = VIDDEC3_process(codec, inbufs, outbufs, in_args, out_args);
-> -     if (err) {
-> --        fprintf(stderr, "VIDDEC3_process() error %d\n", err);
-> --        return -1;
-> -+        fprintf(stderr, "VIDDEC3_process() error %d %08x\n", err,
-> -+                    out_args->extendedError);
-> -+        /* for non-fatal errors, keep going.. a non-fatal error could
-> -+         * just indicate an error in the input stream which the codec
-> -+         * was able to conceal
-> -+         */
-> -+        if (XDM_ISFATALERROR(out_args->extendedError))
-> -+            return -1;
-> -     }
-> - 
-> -     for (i = 0; i < out_args->outputID[i]; i++) {
-> --- 
-> -1.7.1
-> diff --git a/recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb b/recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb
-> deleted file mode 100644
-> index a0392f6c..00000000
-> --- a/recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -require omapfbplay.inc
-> -
-> -DEPENDS += "ti-linuxutils"
-> -
-> -require recipes-ti/includes/ti-paths.inc
-> -
-> -PACKAGE_ARCH = "${MACHINE_ARCH}"
-> -
-> -SDMA_CFLAGS = " -I${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/sdma/include/"
-> -CMEM_CFLAGS = " -I${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/cmem/include/"
-> -CFLAGS += " -I. -I${STAGING_KERNEL_DIR}/include ${SDMA_CFLAGS} ${CMEM_CFLAGS}"
-> -
-> -export SDMA_LIBS = "-L${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/sdma/lib -l:sdma.a470MV"
-> -export CMEM_LIBS = "-L${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/cmem/lib -l:cmem.a470MV"
-> -
-> -OMAPFBPLAYOPTS = "V4L2=y OMAPFB=y NETSYNC=y CMEM=y SDMA=y"
-> diff --git a/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb b/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
-> deleted file mode 100644
-> index e70ac729..00000000
-> --- a/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
-> +++ /dev/null
-> @@ -1,7 +0,0 @@
-> -require omapfbplay.inc
-> -
-> -DEPENDS += "libdce"
-> -
-> -CFLAGS += " -I. -I${STAGING_INCDIR}/dce -I${STAGING_KERNEL_DIR}/include "
-> -
-> -OMAPFBPLAYOPTS = "V4L2=y OMAPFB=y NETSYNC=y DCE=y"
-> diff --git a/recipes-graphics/omapfbplay/omapfbplay-xv_git.bb b/recipes-graphics/omapfbplay/omapfbplay-xv_git.bb
-> deleted file mode 100644
-> index cadf6d8e..00000000
-> --- a/recipes-graphics/omapfbplay/omapfbplay-xv_git.bb
-> +++ /dev/null
-> @@ -1,3 +0,0 @@
-> -require omapfbplay.inc
-> -
-> -OMAPFBPLAYOPTS = "V4L2=y NETSYNC=y XV=y"
-> diff --git a/recipes-graphics/omapfbplay/omapfbplay.inc b/recipes-graphics/omapfbplay/omapfbplay.inc
-> deleted file mode 100644
-> index 744eb8f7..00000000
-> --- a/recipes-graphics/omapfbplay/omapfbplay.inc
-> +++ /dev/null
-> @@ -1,37 +0,0 @@
-> -DESCRIPTION = "Simple libav-based player that uses the omapfb overlays"
-> -DEPENDS = "bzip2 lame libav virtual/kernel"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://omapfbplay.c;beginline=2;endline=22;md5=05d3789ab362e6f4a9682e98100ea0fa"
-> -
-> -PV = "0.0+${PR}+gitr${SRCREV}"
-> -
-> -SRCREV = "34293052c5a2ae328eac6903512e6b4ce19b5639"
-> -SRC_URI = "git://git.mansr.com/omapfbplay;protocol=git \
-> -           file://omapfbplay-errorhandling.patch \
-> -           file://0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch \
-> -          "
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -PACKAGE_ARCH = "${MACHINE_ARCH}"
-> -COMPATIBLE_HOST ?= "null"
-> -COMPATIBLE_HOST_ti-soc = "(.*)"
-> -
-> -# We want a kernel header for armv7a, but we don't want to make mplayer machine specific for that
-> -STAGING_KERNEL_DIR = "${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"
-> -CFLAGS += " -I. -I${STAGING_KERNEL_DIR}/include "
-> -
-> -OMAPFBPLAYVARIANT ?= "${PN}"
-> -OMAPFBPLAYOPTS ?= "V4L2=y NETSYNC=y"
-> -
-> -do_compile() {
-> -	cp ${STAGING_KERNEL_DIR}/arch/arm/plat-omap/include/mach/omapfb.h ${S} || true
-> -	cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.h ${S} || true
-> -	cp ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ${S} || true
-> -	oe_runmake ${TARGET_ARCH}=y ${OMAPFBPLAYOPTS} -e
-> -}
-> -
-> -do_install() {
-> -	install -d ${D}/${bindir}
-> -	install -m 0755 ${S}/omapfbplay ${D}/${bindir}/${OMAPFBPLAYVARIANT}
-> -}
-> diff --git a/recipes-graphics/omapfbplay/omapfbplay_git.bb b/recipes-graphics/omapfbplay/omapfbplay_git.bb
-> deleted file mode 100644
-> index 0d3956f1..00000000
-> --- a/recipes-graphics/omapfbplay/omapfbplay_git.bb
-> +++ /dev/null
-> @@ -1,3 +0,0 @@
-> -require omapfbplay.inc
-> -
-> -OMAPFBPLAYOPTS = "V4L2=y OMAPFB=y NETSYNC=y"
-> -- 
-> 2.17.1
+> > Let me elaborate:
+> >
+> > 1. Your patch is incomplete - it fixes parsing issues, but not build issues
+> >
 > 
+> Thanks for the extra info, yes that is correct I didn't build any TI
+> platform,
+> but I needed to fix the parse issues to build the non meta-ti based platform
+> I was working on (or disable your layer). I should have made that clearer
+> in the commit message.
+> 
+> 2. There was a more complete patch submitted earlier in the day to address
+> > that:
+> > https://lists.yoctoproject.org/g/meta-ti/message/12625
+> 
+> 
+> Ok great. I was trying to check your mailing list but seems I was using a
+> old link from the README here
+> https://www.yoctoproject.org/pipermail/meta-ti/.
+
+Ah, good point! I need to update that. Thanks.
+
+
+> Peter.
+> 
+> >
+> >
+> > --
+> > Denys
+> >
+> >
+> > On Wed, Jan 29, 2020 at 06:19:23PM -0500, Denys Dmytriyenko via
+> > Lists.Yoctoproject.Org wrote:
+> > > NAK
+> > >
+> > > On Wed, Jan 29, 2020 at 11:15:55PM +0000, Peter Griffin wrote:
+> > > > This avoids the parsing errors, now that python2
+> > > > has been removed.
+> > > >
+> > > > Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
+> > > > ---
+> > > >  recipes-kernel/jailhouse/jailhouse_git.bb | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb
+> > b/recipes-kernel/jailhouse/jailhouse_git.bb
+> > > > index 4186dc3..89833e6 100644
+> > > > --- a/recipes-kernel/jailhouse/jailhouse_git.bb
+> > > > +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
+> > > > @@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
+> > > >  S = "${WORKDIR}/git"
+> > > >
+> > > >  require jailhouse-arch.inc
+> > > > -inherit module pythonnative bash-completion deploy setuptools
+> > > > +inherit module python3native bash-completion deploy setuptools3
+> > > >
+> > > >  PACKAGE_ARCH = "${MACHINE_ARCH}"
+> > > >  COMPATIBLE_MACHINE = "(ti-soc)"
+> > > > --
+> > > > 2.7.4
+> > > >
+> >
+> > > 
+> >
+> >
