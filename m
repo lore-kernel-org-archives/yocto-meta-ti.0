@@ -1,82 +1,69 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web10.544.1581121602331865388
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web10.10523.1581272831406254814
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 07 Feb 2020 16:26:42 -0800
+ Sun, 09 Feb 2020 10:27:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 140.211.169.56, mailfrom: denis@denix.org)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C84A1E016EC; Fri,  7 Feb 2020 16:26:41 -0800 (PST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: 
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/, low
-	*      trust
-	*      [64.68.198.64 listed in list.dnswl.org]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8265BE01650
-	for <meta-ti@yoctoproject.org>; Fri,  7 Feb 2020 16:26:40 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A6B0340BEF;
-	Sat,  8 Feb 2020 00:26:39 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SN2u9RgUcenY; Sat,  8 Feb 2020 00:26:39 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8650540AD1;
-	Sat,  8 Feb 2020 00:26:38 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 3A5131743E4;
-	Fri,  7 Feb 2020 19:26:38 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [zeus/master][PATCH 1/2] linux-ti-staging: update to 5.4.17
-Date: Fri,  7 Feb 2020 19:26:36 -0500
-Message-Id: <1581121597-47580-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DzKN7Xkp;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id j20so4345094qka.10
+        for <meta-ti@lists.yoctoproject.org>; Sun, 09 Feb 2020 10:27:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=hYShSGeZKgeR8WZv6jIYi87VNFTcnmKyxC4fJRw4Vqo=;
+        b=DzKN7XkpCje+1FO8AD/Wpz/SqvD5lHvJgAN0/g1fMwo8LAGBCppoJrDg8Nr3Fkm+gS
+         W3ZR6d2EN2V76yZGkvbOZyiogPXvJUPLNvhwrdStp/7XAwt44YhkUKR7CW22+V+odfkT
+         9KnH6bsq4mP/OTp/qks72maBebiX01YWvC5AlFHbN4gKlK17+b0y443hQIG0+v5IhPPk
+         dneN8AS+o+LZEgNP9icPFbDf7igDyFuTH3bQbVNOv4dSbqou9umyxnl4zI3qj1iZPTji
+         dOp3qARfhS7O7uRJ4C38ys7Y3WeRHNQWlqFEfWqWGG7Bdapd82RqlrJEae7SU4HDhw8i
+         KtOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=hYShSGeZKgeR8WZv6jIYi87VNFTcnmKyxC4fJRw4Vqo=;
+        b=adNToGNSNwzM500EB7YvgemnFrE49+318F9qMypdJI1aC7R1JiPrKvU9smkSMhGO9J
+         2n0w0hJz4oMzZ3ikH5QZraUJfO6tdmNdMWM2SfKdA2hzzAdZYMtPbvIFlxXnWkMMGTZG
+         fxqA4aMwvj+xxnJCh/yxYFunQAbHaKJUzwQnEVxsLNsg1XRD0w3Z4UExXzNn81ltCt4t
+         mK6TalM2x9Yr4cqpGX1wFlq5obUW/DV8v+VGjS85nCmjenna7BzkVfazpz/rOoF/c5AS
+         KfvlcvE5NcFRV7bgDrsh2C/pqTxXM49MawZSIRU+3mX/fzoUexsNhM3VAR/0djGznHOv
+         X9SQ==
+X-Gm-Message-State: APjAAAUblMJwby1DbYhiM75iwxDagnERh8eG7qwpfeMowWdOuKth2Snj
+	F/Pof8ATHldr9NlgBzrF5xfzWy/7yUsFs1g+hJTLA6X3IdQ=
+X-Google-Smtp-Source: APXvYqzvZLkzdm8LMh3zkGpdjJNgtm8F6QVgyTm4WL/fzJx3NVzMixeWqbtIPPci0mnF7e4N1Z8wOJhQ2vMGiaklqpg=
+X-Received: by 2002:a37:bf82:: with SMTP id p124mr7716403qkf.337.1581272830108;
+ Sun, 09 Feb 2020 10:27:10 -0800 (PST)
+MIME-Version: 1.0
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sun, 9 Feb 2020 10:26:44 -0800
+Message-ID: <CAMKF1sqBztnkEciT045JbkeYyacjCe91b3FNCkv8k77DLEY=-g@mail.gmail.com>
+Subject: ti-cgt6x bundling libc.a with unreadable ELF file header
+To: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hi
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-rt_5.4.bb | 4 ++--
- recipes-kernel/linux/linux-ti-staging_5.4.bb    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+Recently, I am seeing below packaging error for ti-cgt6x
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
-index 0490427..42131e6 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.4:"
- 
- BRANCH = "ti-rt-linux-5.4.y"
- 
--SRCREV = "1866b83701a617b8634739f183f4ba44ab3357c1"
--PV = "5.4.13+git${SRCPV}"
-+SRCREV = "0511dab3c571a3a400bd1c16ad48464d8dd2a124"
-+PV = "5.4.17+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-index 0280579..e174055 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-@@ -60,8 +60,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-5.4.y"
- 
--SRCREV = "c65c87b98f8d1b647c13b5bb36e5ffbad5805ff1"
--PV = "5.4.13+git${SRCPV}"
-+SRCREV = "0a1968dffa210e2de0e3ad921eabf9548b2ca8ee"
-+PV = "5.4.17+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
--- 
-2.7.4
+https://errors.yoctoproject.org/Errors/Details/390526/
 
+eu-readelf also fails to read this file as well as binutils readelf
+also complains
+
+readelf: Error:
+/mnt/b/yoe/build/tmp/work/armv7vet2hf-neon-yoe-linux-musleabi/ti-cgt6x/1_8.3.2-r0/package/usr/share/ti/cgt-c6x/lib/libc.a(__TI_$$LIBINFO):
+Failed to read file header
+
+this libc.a is a binary blob so I cant find out how it is. built so
+pinpoint where the problem
+could be.
+
+since these are DSP blobs should this be ignored from processing and
+just dumped into rootfs
+this will help packager turn a blind eye towards its contents or
+should this be fixed and turned into
+a readable ELF file by normal binutils. I doubt it being a problem
+with tools, since I see same issue
+with elfutils tools as well as binutils ELF manipulation tools.
+
+Thanks
+-Khem
