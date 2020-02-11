@@ -1,66 +1,71 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web11.3417.1581381688473842949
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
+ by mx.groups.io with SMTP id smtpd.web10.3383.1581381809978796403
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 10 Feb 2020 16:41:28 -0800
+ Mon, 10 Feb 2020 16:43:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 140.211.169.56, mailfrom: denis@denix.org)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 09F01E0171C; Mon, 10 Feb 2020 16:41:28 -0800 (PST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: 
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/, low
-	*      trust
-	*      [64.68.198.64 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 465FDE016C9
-	for <meta-ti@yoctoproject.org>; Mon, 10 Feb 2020 16:41:27 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A859840C11;
-	Tue, 11 Feb 2020 00:41:26 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0PfBFviV4ZW7; Tue, 11 Feb 2020 00:41:26 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 924C040BFC;
-	Tue, 11 Feb 2020 00:41:25 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 473461743F0;
-	Mon, 10 Feb 2020 19:41:25 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [master][PATCH] u-boot-ti: also include new upstream u-boot-common.inc
-Date: Mon, 10 Feb 2020 19:41:25 -0500
-Message-Id: <1581381685-18472-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Xh372uyC;
+ spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f68.google.com with SMTP id 12so484403pjb.5
+        for <meta-ti@lists.yoctoproject.org>; Mon, 10 Feb 2020 16:43:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YCo/AahkpSUAxuDyyL2zu8oroqk6wkYK6G0RDjkdOJE=;
+        b=Xh372uyCZzRUUn3ENWLJ+dikznUIlB4yKvEn+e3Ukuyku0lkNOrG/gd181mxoRcB1N
+         H7mblzzZQaQAdd9OQaA99QaiC8XzNwsXA93qq0HZha4xZBgXEGYCligPNj40L+WKi505
+         n5PHzFciVg01ZhBbf/nwX6cYy48EZw2KAY8HnNutz3F12BHVPlkfP9ETatvVynS6IsdT
+         ThmdJcSGqvyQ6k8OVL7IKm1ymtSRIG0+Mgz/2Se8/hyJKPg5kDEKr8xsQpHXGi0GSGUv
+         FuwdXU5d9PbHjbeTTS8GeX87ZjLIKNKpVtCGRlJ/dRy+O8uLWWUaBsBW5GSIbK8po5jr
+         1UEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YCo/AahkpSUAxuDyyL2zu8oroqk6wkYK6G0RDjkdOJE=;
+        b=hu0RAJwl0i8yhAsX7Lul7hVQqqn3G0R6XyQLZ+ZkfXUqFoqsnoBoegikvdcw0/T5xf
+         8ScfxwkiilhcXc1ePZbwP1e+iLKVVuMx5eXKRR35WDhWlNZXw7J3CYBAfHD14IPNZnkj
+         RFcUrP3jA0m+METGA9pn+FGWYMc1zkPfRbnCYuMHVsW+GnN/Jm6AGCSi63iAisR/f603
+         oODqrxxKSRMjE0Fj7L1lyBoQtQes2ThBvs3WkFgSjRBYk3WSstgmn1YHN0b5ga97cPOK
+         t3v3IUguNMfauC7hBtQO+WIoe4jomLbOptyDX4vmQg1ESCB0HYolGjVNZeo32uMWM18W
+         UCgA==
+X-Gm-Message-State: APjAAAUlEaAssgRCYQxz81hdoi5d7rlS2ooIaID1vLF9uma4p7WMBwHI
+	xvvH1QPyTr3owv0tXjo3ZsHAMUVzT70=
+X-Google-Smtp-Source: APXvYqwkVjR8eIdcbe5dl5epVIEeGJgzr9y68Jc1IjMeGKNqXc9r5vkp9pzfUrGL1A7yob9QZ2Y3QA==
+X-Received: by 2002:a17:90a:cf11:: with SMTP id h17mr585109pju.103.1581381808946;
+        Mon, 10 Feb 2020 16:43:28 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::5683])
+        by smtp.gmail.com with ESMTPSA id g10sm1302118pgc.87.2020.02.10.16.43.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Feb 2020 16:43:28 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] ti-cgt6x: Limit it to TI SOCs
+Date: Mon, 10 Feb 2020 16:43:29 -0800
+Message-Id: <20200211004329.3326947-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+Helps meta-ti live in a multi-BSP distributions
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-bsp/u-boot/u-boot-ti.inc | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-ti/devtools/ti-cgt6x_8.3.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index f1187e6..8f88a1a 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -13,6 +13,7 @@ UBOOT_LOCALVERSION = "-g${@get_git_revision('${S}').__str__()[:10]}"
- UBOOT_SUFFIX ?= "img"
- SPL_BINARY ?= "MLO"
+diff --git a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+index deee61c7..c63c3f6e 100644
+--- a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
++++ b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+@@ -102,3 +102,5 @@ FILES_${PN}-dbg += "${datadir}/ti/cgt-c6x/bin/.debug"
+ INSANE_SKIP_${PN} += "staticdev"
  
-+require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot-common.inc
- require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
+ BBCLASSEXTEND = "native nativesdk"
++
++COMPATIBLE_MACHINE_class-target = "(ti-soc)"
 -- 
-2.7.4
+2.25.0
 
