@@ -1,106 +1,119 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.17177.1581456863775466348
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web09.17477.1581459564950437638
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 11 Feb 2020 13:34:24 -0800
+ Tue, 11 Feb 2020 14:19:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=mifuAazu;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: sam.nelson@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01BLYNiY075593
-	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Feb 2020 15:34:23 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1581456863;
-	bh=nVUhUWcOXg98JSLhtn5o3ssdtsdRQmY4/N2v59un/Mg=;
-	h=From:To:CC:Subject:Date;
-	b=mifuAazuUc1xOors2XlWmzsPe4cvjAX26mTwMOtkL04r2Hvc4ZAp7PoSTu2p9CPMZ
-	 WANAXgjacgwqxJgwDT8b57Yz0DibR2U8UWlJ/8amUWp0Za9WN/Q2g4x+H6DLeUYbdg
-	 qMB4bzEPoQWSdbtq3jdfpO3PPfVkWuhdqLf4PKs0=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01BLYNSn064637
-	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Feb 2020 15:34:23 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Tue, 11
- Feb 2020 15:34:22 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Tue, 11 Feb 2020 15:34:22 -0600
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01BLYMxL047595;
-	Tue, 11 Feb 2020 15:34:22 -0600
-From: "Sam Nelson" <sam.nelson@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Sam Nelson <sam.nelson@ti.com>
-Subject: [meta-ti][thud][PATCH] Revert "ti-ipc: Update to new version 3.51.00.00"
-Date: Tue, 11 Feb 2020 16:34:19 -0500
-Message-ID: <1581456859-19417-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 140.211.169.56, mailfrom: denis@denix.org)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id 85340E016D6; Tue, 11 Feb 2020 14:19:24 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/, low
+	*      trust
+	*      [64.68.198.64 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D42EE013AE
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2020 14:19:22 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B0D9240C1C;
+	Tue, 11 Feb 2020 22:19:21 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EeNuXV3VuKIR; Tue, 11 Feb 2020 22:19:21 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8702E40BCC;
+	Tue, 11 Feb 2020 22:19:18 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 3F8B01743F8;
+	Tue, 11 Feb 2020 17:19:18 -0500 (EST)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>,
+	Suman Anna <s-anna@ti.com>,
+	Sam Nelson <sam.nelson@ti.com>
+Subject: [zeus/master][PATCH] multiprocmgr: do not mix kernel and user-space headers, fully depend on uapi
+Date: Tue, 11 Feb 2020 17:19:12 -0500
+Message-Id: <1581459552-49195-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-This reverts commit c18c41a7c3c7794a126942057642b5f8684bddf5.
+From: Denys Dmytriyenko <denys@ti.com>
+
+As multiprocmgr is a user-space app and should only use uapi headers, drop
+extra -I for the kernel headers. Patch out any assumptions of direct access
+to the kernel headers.
+
+Cc: Suman Anna <s-anna@ti.com>
+Cc: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-common.inc | 2 +-
- recipes-ti/ipc/ti-ipc-rtos.inc   | 8 ++++----
- recipes-ti/ipc/ti-ipc.inc        | 6 +++---
- 3 files changed, 8 insertions(+), 8 deletions(-)
+ ...on-t-suppress-kernel-linux-types.h-inclus.patch | 28 ++++++++++++++++++++++
+ recipes-ti/multiprocmgr/multiprocmgr_git.bb        |  3 +--
+ 2 files changed, 29 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-ti/multiprocmgr/multiprocmgr/0001-mpmdlif.c-don-t-suppress-kernel-linux-types.h-inclus.patch
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 96cbd66..86a0fd0 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,4 +1,4 @@
--PV = "3.51.00.00"
-+PV = "3.50.04.08"
- INC_PR = "r0"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr/0001-mpmdlif.c-don-t-suppress-kernel-linux-types.h-inclus.patch b/recipes-ti/multiprocmgr/multiprocmgr/0001-mpmdlif.c-don-t-suppress-kernel-linux-types.h-inclus.patch
+new file mode 100644
+index 0000000..c3315cf
+--- /dev/null
++++ b/recipes-ti/multiprocmgr/multiprocmgr/0001-mpmdlif.c-don-t-suppress-kernel-linux-types.h-inclus.patch
+@@ -0,0 +1,28 @@
++From 95921ccf77ae037bb3b95f45a632f60975c6c9bb Mon Sep 17 00:00:00 2001
++From: Denys Dmytriyenko <denys@ti.com>
++Date: Tue, 11 Feb 2020 17:03:18 -0500
++Subject: [PATCH] mpmdlif.c: don't suppress kernel <linux/types.h> inclusion
++
++Defining _LINUX_TYPES_H before including <linux/keystone_remoteproc.h> causes
++<linux/types.h> to skip defining kernel types, resulting in undefined __u32
++
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++---
++ src/daemon/mpmdlif.c | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/src/daemon/mpmdlif.c b/src/daemon/mpmdlif.c
++index 0c31604..1abd00f 100644
++--- a/src/daemon/mpmdlif.c
+++++ b/src/daemon/mpmdlif.c
++@@ -46,7 +46,6 @@
++ #include <byteswap.h>
++ #include <stdint.h>
++ 
++-#define _LINUX_TYPES_H
++ #include "linux/keystone_remoteproc.h"
++ #include "internal/rsc_types.h"
++ //#include <elf.h>
++-- 
++2.7.4
++
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
+index 6143341..aea2445 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
+@@ -6,6 +6,7 @@ include multiprocmgr.inc
+ SRC_URI += " \
+ 	file://mpmsrv-daemon.service \
+ 	file://0001-mpmdlif.c-don-t-hardcode-kernel-s-uapi-location-keys.patch \
++	file://0001-mpmdlif.c-don-t-suppress-kernel-linux-types.h-inclus.patch \
+ "
+ 
+ PR = "${INC_PR}.2"
+@@ -14,8 +15,6 @@ DEPENDS = "mpm-transport libdaemon virtual/kernel cmem"
  
  PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-index c4ab268..4d0d449 100644
---- a/recipes-ti/ipc/ti-ipc-rtos.inc
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -24,9 +24,9 @@ protocol=${TI_IPC_METADATA_GIT_PROTOCOL};\
- branch=${TI_IPC_METADATA_GIT_BRANCH};\
- name=${TI_IPC_METADATA_NAME}"
  
--# Corresponds to tag: 3.51.00.00
--TI_IPC_METADATA_SRCREV = "1bf668fd6b0ec2ef6956fa55b8484d0b21a9f9e2"
--# Corresponds to tag: 3.51.00.00
-+# Corresponds to tag: 3.50.04.08
-+TI_IPC_METADATA_SRCREV = "48788ea79190c4995df4c802e8aa4e17f332943d"
-+# Corresponds to tag: 3.50.04.08
- TI_IPC_EXAMPLES_SRCREV = "4707fcbbe0d136e781c4a7ffdc072be407c34358"
+-CC += "-I${STAGING_KERNEL_DIR}/include -I${STAGING_KERNEL_DIR}/include/uapi"
+-
+ INITSCRIPT_NAME = "mpmsrv-daemon.sh"
+ INITSCRIPT_PARAMS = "defaults 10"
  
- SRCREV_FORMAT = "default"
-@@ -39,7 +39,7 @@ S_ipc-metadata = "${WORKDIR}/git/ipc-metadata"
- RELEASE_TYPE = "GA"
- RELEASE_SUFFIX = ""
- 
--PR = "${INC_PR}.r0"
-+PR = "${INC_PR}.r2"
- 
- DEPENDS_append_keystone = " ti-cgt6x-native \
-                             gcc-arm-none-eabi-native \
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index 1206e33..d1eaad2 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
- 
- TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
--TI_IPC_GIT_BRANCH = "master"
-+TI_IPC_GIT_BRANCH = "3.50"
- 
--#Corresponds to 3.51.00.00
--TI_IPC_SRCREV = "36b2fe589de8d2d79db7c076c2ca3b0a7488fc15"
-+#Corresponds to 3.50.04.08
-+TI_IPC_SRCREV = "1d53b856338b86d1979fe09345c0b382913a848a"
- 
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
 -- 
-1.9.1
+2.7.4
 
