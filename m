@@ -1,111 +1,100 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web12.1362.1581619800139879935
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web11.2104.1581622794587184912
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 13 Feb 2020 10:50:00 -0800
+ Thu, 13 Feb 2020 11:39:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Qfg/cVRN;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: denys@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01DInxXU096921
-	for <meta-ti@lists.yoctoproject.org>; Thu, 13 Feb 2020 12:49:59 -0600
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=mKr2yZ/K;
+ spf=permerror, err=parse error for token &{10 18 app.sgizmo.com}: SPF record not found (domain: ti.com, ip: 140.211.169.56, mailfrom: g-tammana@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id 09A06E015F8; Thu, 13 Feb 2020 11:39:54 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.19.141 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6858E00804
+	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2020 11:39:52 -0800 (PST)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01DJdp7m105014
+	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2020 13:39:51 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1581619799;
-	bh=RgveRXfngjrSMQPae2xevOiz0jhSbKUZOQz/ovWJjSY=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=Qfg/cVRNnMYWlN5ZBVA4QqqPLFAqT8NZ/VFrIODu8fJfGoAcYdBa1UgLcqxWoW8U+
-	 iwMkelJZj7KMofJZ2909ObquaT4haBr0imutMwSAMLbOb0OCGDluyE9xVkR2/iEVKf
-	 ndp2nZva22hiylTE79ycf9SLfIS7a1BalWKH5D68=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01DInxr2044019
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 13 Feb 2020 12:49:59 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1581622791;
+	bh=kF8MBoQpyszCKM6eWnOF2y8bsn01QNwlRWwvBz9L3HE=;
+	h=From:To:CC:Subject:Date;
+	b=mKr2yZ/KR6IDos8GGm3dXrhZonLW4qnyq7mxrwmvf0BRf07c/WyMVT34fdC1nGyB8
+	 RzItRfqrRYRsRFKgKoEmco/RV6WGFNCeU+CvfVJiugK75LE3OSAqS+vLEJbbXm0brD
+	 Zjb53qrHfN/TjB9ZfTM8rYG4ghui4DGO/bvLnSo4=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01DJdpT5118759
+	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2020 13:39:51 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 13
- Feb 2020 12:49:58 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2020 13:39:51 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 13 Feb 2020 12:49:58 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01DInwaD053807;
-	Thu, 13 Feb 2020 12:49:58 -0600
-Date: Thu, 13 Feb 2020 13:49:58 -0500
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: "Andrew F. Davis" <afd@ti.com>
-CC: Gowtham Tammana <g-tammana@ti.com>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][zeus/master][PATCH 1/2] ti-sgx-ddk-um: bump SRCREV for zeus support
-Message-ID: <20200213184958.GD7085@beryl>
-References: <20200213162958.7600-1-afd@ti.com>
+ Frontend Transport; Thu, 13 Feb 2020 13:39:51 -0600
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com [128.247.22.53])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01DJdo2s002584;
+	Thu, 13 Feb 2020 13:39:50 -0600
+Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.77.97])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id 01DJdo301547;
+	Thu, 13 Feb 2020 13:39:51 -0600 (CST)
+From: "Gowtham Tammana" <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
+CC: Gowtham Tammana <g-tammana@ti.com>
+Subject: [meta-ti][zeus][PATCH] ti-gc320-driver: Update srcrev to pick rtlinux build fix
+Date: Thu, 13 Feb 2020 13:40:05 -0600
+Message-ID: <20200213194005.16079-1-g-tammana@ti.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <20200213162958.7600-1-afd@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 13, 2020 at 11:29:57AM -0500, Andrew F. Davis wrote:
-> This also allows us to do two extra tasks so lets do them here:
->  - Add support back for Beagleboard and Pandaboard
->  - Remove plugins workaround as SO names are handled correctly now
+Update srcrev to pick the fix for rt linux build issue.
 
-Thanks for the update and for taking care of these 2 extra items!
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+ recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/rec=
+ipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+index dc0557f8..d536b1c6 100644
+--- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
++++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM =3D "file://../LICENSE;md5=3D78d9818a5=
+1b9a8e9bb89dea418bac297"
+=20
+ inherit module
+=20
+-MACHINE_KERNEL_PR_append =3D "f"
++MACHINE_KERNEL_PR_append =3D "g"
+ PR =3D "${MACHINE_KERNEL_PR}"
+=20
+ # Need to branch out with ${PV} var
+ BRANCH =3D "ti-${PV}-k5.4"
+=20
+-SRCREV =3D "0335b28d85add258b37160cd0907f13f5b5369fe"
++SRCREV =3D "bd1c9751af7c693bdf1a0e6b8b96226305d45a8c"
+=20
+ SRC_URI =3D "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=3Dgi=
+t;branch=3D${BRANCH}"
+=20
+--=20
+2.25.0
 
-> Signed-off-by: Andrew F. Davis <afd@ti.com>
-> ---
->  .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     | 19 +++++++------------
->  1 file changed, 7 insertions(+), 12 deletions(-)
-> 
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> index ecf3ffcc..129d5cee 100644
-> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> @@ -4,19 +4,21 @@ LICENSE = "TI-TSPA"
->  LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> -COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
-> +COMPATIBLE_MACHINE = "pandaboard|beagleboard|ti33x|ti43x|omap-a15|k3"
->  
-> -PR = "r34"
-> +PR = "r35"
->  
-> -BRANCH = "ti-img-sgx/thud/${PV}"
-> +BRANCH = "ti-img-sgx/zeus/${PV}"
->  
->  SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
-> -SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
-> +SRCREV = "ce7b96b88d31da27af5b3a2a890aba180a014fc4"
->  
->  TARGET_PRODUCT_omap-a15 = "jacinto6evm"
->  TARGET_PRODUCT_ti33x = "ti335x"
->  TARGET_PRODUCT_ti43x = "ti437x"
->  TARGET_PRODUCT_k3 = "ti654x"
-> +TARGET_PRODUCT_beagleboard = "ti343x"
-> +TARGET_PRODUCT_pandaboard = "ti443x"
->  
->  INITSCRIPT_NAME = "rc.pvr"
->  INITSCRIPT_PARAMS = "defaults 8"
-> @@ -59,14 +61,7 @@ FILES_${PN} += " ${libdir}/*"
->  FILES_${PN} +=  "${includedir}/*"
->  FILES_${PN} +=  "${sysconfdir}/*"
->  
-> -PACKAGES =+ "${PN}-plugins"
-> -FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLESv1_CM.so ${libdir}/libGLES_CM.so ${libdir}/libGLESv1_PVR_MESA.so ${libdir}/libGLESv2_PVR_MESA.so"
-> -RDEPENDS_${PN} += "${PN}-plugins"
-> -
-> -ALLOW_EMPTY_${PN}-plugins = "1"
-> -
->  INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
-> -INSANE_SKIP_${PN}-plugins = "dev-so"
-> -INSANE_SKIP_${PN} += "already-stripped"
-> +INSANE_SKIP_${PN} += "already-stripped dev-deps"
-
-What's new dev-deps is for?
-
-
->  CLEANBROKEN = "1"
-> -- 
-> 2.17.1
-> 
