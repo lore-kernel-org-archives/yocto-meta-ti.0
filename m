@@ -1,86 +1,100 @@
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
- by mx.groups.io with SMTP id smtpd.web11.57.1581546006895304113
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web12.8721.1581611399979354613
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 12 Feb 2020 14:20:07 -0800
+ Thu, 13 Feb 2020 08:30:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KcdLk4+C;
- spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f177.google.com with SMTP id w25so3770758qki.3
-        for <meta-ti@lists.yoctoproject.org>; Wed, 12 Feb 2020 14:20:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=7PdJXSmDWQm62pNF8lrSz2jWTqwswSV0feyzdPkwh24=;
-        b=KcdLk4+CJHOTvJXizQKHgDwBvaOtT7yksiFXxNCtiCsvmixGlg3xouR8XgSF/Ce0/n
-         A/L7zaA+aDUUEEKVw5Ghtzrz5DGR1ycAPZ2XubOyp8NhjrH2hQ+FMHUYbcb0MLwy/pEG
-         YhLNvGuLqcJXETFjP63UV6r2ovfIWRsC8n0AZJ2d+hwJvk9DAFNrau3o94Fi0YuTXbzY
-         YaTheEHF1v9bqrztzcEf6gibb383cVxp+Xhhn/TeZYDYqxz82XPBt0a9XX+1GlW5nIkM
-         zzMFkO/XbYXU5YwnX91141ZSi0oU0nAbXyunUmieURETiIKxO1gCNXy8y2wlzxEh/Se2
-         MxxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=7PdJXSmDWQm62pNF8lrSz2jWTqwswSV0feyzdPkwh24=;
-        b=tEDTMASItjug/TqXnOhJcgE0PZ5tmpOdwCsh9jXFsn9a2maooqS5YKJW4X8gE3SQKa
-         wEbkPqT5zd2MESgx1fQAM+AU8je530Y+HjBvGWARB+0z7xe2HzMcUyzh5fw8xICAlWLJ
-         60n6NsxGqiDbtFZuyEJB9J9b/Y7F97Xgv+vBaBaUJiu9SkLCLsghp72/FfFexXYUOPpU
-         /i3RJ2CvISlPl1dqL712AxVrvy1VmdBkar03/uzqctXtWzBYXJl/wvnBKv9cHc25OkY6
-         DSFDgkPuTefD0f5Eu/cXFSk3Gi6jZVj7RDUz7PjpqtGXJNCZOKiLp3FDlm/0MOhlBL7C
-         ouCw==
-X-Gm-Message-State: APjAAAUGMGdHezaqjLjmqiB/LMS2c7YuG374hGKfNR47+Y4EPKy0aujl
-	hEcBwrOHAZT/XiNb4MornOFzxQdJ1oU9Fg3EJHw=
-X-Google-Smtp-Source: APXvYqxvUAYXZsA7Isk+boAiYkJQx36YiinSboTNc5sxriBpnoWwFPnyrTPT1+J92TIRqsE3LGlemkR00txVpMVOdos=
-X-Received: by 2002:a37:de05:: with SMTP id h5mr9863979qkj.474.1581546005820;
- Wed, 12 Feb 2020 14:20:05 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ESyXCZsE;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01DGTxGw003354
+	for <meta-ti@lists.yoctoproject.org>; Thu, 13 Feb 2020 10:29:59 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1581611399;
+	bh=J6HYV9rmuOFe7F5D52MxU+JOf8gvgPtScnocO2i6ptM=;
+	h=From:To:CC:Subject:Date;
+	b=ESyXCZsE8JVVeWGaHxIEsbL5KXviWHRhMtxNTDnAU0j9zqJYnDJtssozlS5tjZI+g
+	 nSF5tWHvLFEeNGedONx5kMkCZitxpJ9GkC+5taoOaDMasQn5HSfGtaD9I+N75au6b/
+	 Zg9zRErYe4erxUjc0S5ef0i6r/nEO7Qv9QgxuMV4=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01DGTxNn103397
+	for <meta-ti@lists.yoctoproject.org>; Thu, 13 Feb 2020 10:29:59 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 13
+ Feb 2020 10:29:58 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Thu, 13 Feb 2020 10:29:58 -0600
+Received: from ula0226330.ent.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01DGTwuv105102;
+	Thu, 13 Feb 2020 10:29:58 -0600
+From: "Andrew F. Davis" <afd@ti.com>
+To: Denys Dmytriyenko <denys@ti.com>, Gowtham Tammana <g-tammana@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, "Andrew F . Davis" <afd@ti.com>
+Subject: [meta-ti][zeus/master][PATCH 1/2] ti-sgx-ddk-um: bump SRCREV for zeus support
+Date: Thu, 13 Feb 2020 11:29:57 -0500
+Message-ID: <20200213162958.7600-1-afd@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <CAMKF1sqBztnkEciT045JbkeYyacjCe91b3FNCkv8k77DLEY=-g@mail.gmail.com>
- <20200212200811.GE30768@beryl>
-In-Reply-To: <20200212200811.GE30768@beryl>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 12 Feb 2020 14:19:38 -0800
-Message-ID: <CAMKF1sqGMyrWEx1phE5XuP2=7_uxeu6q7itMvhvBOvxYJP0Jaw@mail.gmail.com>
-Subject: Re: ti-cgt6x bundling libc.a with unreadable ELF file header
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Wed, Feb 12, 2020 at 12:08 PM Denys Dmytriyenko <denys@ti.com> wrote:
->
-> On Sun, Feb 09, 2020 at 10:26:44AM -0800, Khem Raj wrote:
-> > Hi
-> >
-> > Recently, I am seeing below packaging error for ti-cgt6x
-> >
-> > https://errors.yoctoproject.org/Errors/Details/390526/
->
-> Is this on master? Any specific configuration I should use to get this error?
-> I don't think I've ever seen this before or lately...
->
+This also allows us to do two extra tasks so lets do them here:
+ - Add support back for Beagleboard and Pandaboard
+ - Remove plugins workaround as SO names are handled correctly now
 
-yes this is on qemuarm though, I find that it will be better to
-disable it for non-ti socs
+Signed-off-by: Andrew F. Davis <afd@ti.com>
+---
+ .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     | 19 +++++++------------
+ 1 file changed, 7 insertions(+), 12 deletions(-)
 
->
-> > eu-readelf also fails to read this file as well as binutils readelf
-> > also complains
-> >
-> > readelf: Error:
-> > /mnt/b/yoe/build/tmp/work/armv7vet2hf-neon-yoe-linux-musleabi/ti-cgt6x/1_8.3.2-r0/package/usr/share/ti/cgt-c6x/lib/libc.a(__TI_$$LIBINFO):
-> > Failed to read file header
-> >
-> > this libc.a is a binary blob so I cant find out how it is. built so
-> > pinpoint where the problem
-> > could be.
-> >
-> > since these are DSP blobs should this be ignored from processing and
-> > just dumped into rootfs
-> > this will help packager turn a blind eye towards its contents or
-> > should this be fixed and turned into
-> > a readable ELF file by normal binutils. I doubt it being a problem
-> > with tools, since I see same issue
-> > with elfutils tools as well as binutils ELF manipulation tools.
-> >
-> > Thanks
-> > -Khem
+diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+index ecf3ffcc..129d5cee 100644
+--- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
++++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+@@ -4,19 +4,21 @@ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://TI-Linux-Graphics-DDK-UM-Manifest.doc;md5=b17390502bc89535c86cfbbae961a2a8"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
++COMPATIBLE_MACHINE = "pandaboard|beagleboard|ti33x|ti43x|omap-a15|k3"
+ 
+-PR = "r34"
++PR = "r35"
+ 
+-BRANCH = "ti-img-sgx/thud/${PV}"
++BRANCH = "ti-img-sgx/zeus/${PV}"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "2a2e5bb090ced870d73ed4edbc54793e952cc6d8"
++SRCREV = "ce7b96b88d31da27af5b3a2a890aba180a014fc4"
+ 
+ TARGET_PRODUCT_omap-a15 = "jacinto6evm"
+ TARGET_PRODUCT_ti33x = "ti335x"
+ TARGET_PRODUCT_ti43x = "ti437x"
+ TARGET_PRODUCT_k3 = "ti654x"
++TARGET_PRODUCT_beagleboard = "ti343x"
++TARGET_PRODUCT_pandaboard = "ti443x"
+ 
+ INITSCRIPT_NAME = "rc.pvr"
+ INITSCRIPT_PARAMS = "defaults 8"
+@@ -59,14 +61,7 @@ FILES_${PN} += " ${libdir}/*"
+ FILES_${PN} +=  "${includedir}/*"
+ FILES_${PN} +=  "${sysconfdir}/*"
+ 
+-PACKAGES =+ "${PN}-plugins"
+-FILES_${PN}-plugins = "${libdir}/libsrv_init.so ${libdir}/libsrv_um.so ${libdir}/libglslcompiler.so ${libdir}/libPVRScopeServices.so ${libdir}/libGLESv2.so ${libdir}/libEGL.so ${libdir}/libGLESv1_CM.so ${libdir}/libGLES_CM.so ${libdir}/libGLESv1_PVR_MESA.so ${libdir}/libGLESv2_PVR_MESA.so"
+-RDEPENDS_${PN} += "${PN}-plugins"
+-
+-ALLOW_EMPTY_${PN}-plugins = "1"
+-
+ INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
+-INSANE_SKIP_${PN}-plugins = "dev-so"
+-INSANE_SKIP_${PN} += "already-stripped"
++INSANE_SKIP_${PN} += "already-stripped dev-deps"
+ 
+ CLEANBROKEN = "1"
+-- 
+2.17.1
+
