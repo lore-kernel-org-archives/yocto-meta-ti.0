@@ -1,205 +1,156 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web11.1555.1582175669251605267
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com [209.85.221.68])
+ by mx.groups.io with SMTP id smtpd.web11.3549.1582194110019662792
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 19 Feb 2020 21:14:29 -0800
+ Thu, 20 Feb 2020 02:21:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 140.211.169.56, mailfrom: denis@denix.org)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D42A8E01611; Wed, 19 Feb 2020 21:14:28 -0800 (PST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: 
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/, low
-	*      trust
-	*      [64.68.198.64 listed in list.dnswl.org]
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93EF3E01365
-	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2020 21:14:26 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E6D1D40C04;
-	Thu, 20 Feb 2020 05:14:25 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GOJoVOin42tw; Thu, 20 Feb 2020 05:14:25 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AD25840A41;
-	Thu, 20 Feb 2020 05:14:23 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 63D6E174414;
-	Thu, 20 Feb 2020 00:14:23 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>,
-	"Andrew F . Davis" <afd@ti.com>
-Subject: [zeus/master][PATCH] ion-tests: move back to meta-arago-extras
-Date: Thu, 20 Feb 2020 00:14:22 -0500
-Message-Id: <1582175662-6311-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@bytesatwork-ch.20150623.gappssmtp.com header.s=20150623 header.b=hJm8JJlC;
+ spf=pass (domain: bytesatwork.ch, ip: 209.85.221.68, mailfrom: daniel.ammann@bytesatwork.ch)
+Received: by mail-wr1-f68.google.com with SMTP id t3so3948388wru.7
+        for <meta-ti@lists.yoctoproject.org>; Thu, 20 Feb 2020 02:21:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytesatwork-ch.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=2UafSJMg47qcp9vWwH5w/2iybzlVwVI/jLg2lTU1h08=;
+        b=hJm8JJlCTeNnyKmF58QhQ1TCROJvKfAon/TFkQ8ABIJLhpYMiwW5/CYppFvQrRuZoF
+         ueg9JSD/lg94l6PX5IIo0i98tm1j+KLkzGZcrG2xYYPTlmcY38WAqWBOoN00yVwmhjL6
+         0GgF3j5xnItqlE0xZoLdNe9JDm7fTdOtqmw+3oJZradhbXUWCLTMNv4KWsQgytcuxxfk
+         xzSFeqkVTTsXKSFMzejY0nxlqXXXawzev5BL4krNPOdZK+rU1n47zFbrKiIQUQEmes34
+         jet45gZqfmZLuLzJEpi8eZtkCprMDD1llmZwZJAlt6Hpg5IyUBwoY2lGcv5xuGi5PdWC
+         6gxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=2UafSJMg47qcp9vWwH5w/2iybzlVwVI/jLg2lTU1h08=;
+        b=mto3SZOqPQXaB2kq8AqjN1FZhLk9cT4KkJVWw+ApFv3OZ9cPEskYAaQEu9baZthZ4S
+         dv6AzsGR56z1DtvtxU9s/mAZW0p0A4r4HdjL3zQ2mWmV3+rDf5GVMscIExfD7fePcX/5
+         mLkVQL6LX+UXQiW4b439GzeN4ijaw19yJ7PyKM9nXyS9XEPpHVMZRlwmIVaDTBAbhTKk
+         4zO7EZhi48ga4Z+uRJJ0PTW26wfDJjB+SfT8Xi4IGJzfXpfFovVACJySqyIyAsqkllT0
+         Ez8b2fHKj+YyUcmsHYw3VRao3JEPGKoOpg9UrBTfwKOn518lBnL9vgUq1IPdVYQPICVL
+         3+0A==
+X-Gm-Message-State: APjAAAVdh81ew4dRFNbZ2C1bY7s82O598gfBthNgc6ry8VNf17Rr+2uw
+	rXykoR8jsjtu/AQEGa5Dr7bETa+F4Es=
+X-Google-Smtp-Source: APXvYqzRFEnvhLCntDi7CsBYlQ0RuZN8eZw/4FMMs9ms+Ln2VzRz6XLZ5rKKhF1DOq8dalTNUfe/bA==
+X-Received: by 2002:adf:dd52:: with SMTP id u18mr41038342wrm.131.1582194107936;
+        Thu, 20 Feb 2020 02:21:47 -0800 (PST)
+Return-Path: <daniel.ammann@bytesatwork.ch>
+Received: from [192.168.2.42] (162.40.150.83.ftth.as8758.net. [83.150.40.162])
+        by smtp.gmail.com with ESMTPSA id l131sm4077169wmf.31.2020.02.20.02.21.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 20 Feb 2020 02:21:47 -0800 (PST)
+Subject: Re: [meta-ti] am437x-evm zeus image
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: meta-ti@lists.yoctoproject.org
+References: <8c9b4eef-4998-8859-fa66-e26f7f649223@bytesatwork.ch>
+ <20200219190052.GS720@beryl>
+From: "Daniel Ammann" <daniel.ammann@bytesatwork.ch>
+Message-ID: <b7af4338-6409-457d-5bf4-173ebcb92b38@bytesatwork.ch>
+Date: Thu, 20 Feb 2020 11:21:46 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+MIME-Version: 1.0
+In-Reply-To: <20200219190052.GS720@beryl>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hi Denys
 
-As it happens, ion-tests requires gtest from by meta-oe, but meta-ti has no
-dependency on meta-oe. Unfortunately this was overlooked when all ion recipes
-were migrated to meta-ti. Fix this by moving just ion-tests back.
+Thanks for the answer.
 
-Cc: Andrew F. Davis <afd@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- ...-CMakeLists.txt-disable-phys-addr-for-now.patch | 34 -----------
- ...eplace-PAGE_SIZE-with-local-variable-name.patch | 69 ----------------------
- recipes-devtools/ion/ion-tests_git.bb              | 19 ------
- 3 files changed, 122 deletions(-)
- delete mode 100644 recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch
- delete mode 100644 recipes-devtools/ion/ion-tests/0001-map_test-Replace-PAGE_SIZE-with-local-variable-name.patch
- delete mode 100644 recipes-devtools/ion/ion-tests_git.bb
+My build configuration looks like this:
 
-diff --git a/recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch b/recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch
-deleted file mode 100644
-index 7cf5895..0000000
---- a/recipes-devtools/ion/ion-tests/0001-CMakeLists.txt-disable-phys-addr-for-now.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 85264fc72a261d20107a50ea2fad0258900a132b Mon Sep 17 00:00:00 2001
--From: Denys Dmytriyenko <denys@ti.com>
--Date: Sat, 20 Apr 2019 16:54:03 +0000
--Subject: [PATCH] CMakeLists.txt: disable phys-addr for now
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- CMakeLists.txt | 13 -------------
-- 1 file changed, 13 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 1d60003..eca6ba7 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -54,16 +54,3 @@ target_link_libraries(ion-print-heaps
-- target_include_directories(ion-print-heaps PUBLIC ${LIBION_INCLUDE_DIRS})
-- 
-- install(TARGETS ion-print-heaps RUNTIME DESTINATION bin)
---
---# phys-addr
---
---add_executable(phys-addr
---	src/phys-addr.c
---)
---
---target_link_libraries(phys-addr
---	${LIBION_LIBRARIES}
---)
---target_include_directories(phys-addr PUBLIC ${LIBION_INCLUDE_DIRS})
---
---install(TARGETS phys-addr RUNTIME DESTINATION bin)
---- 
--2.17.1
--
-diff --git a/recipes-devtools/ion/ion-tests/0001-map_test-Replace-PAGE_SIZE-with-local-variable-name.patch b/recipes-devtools/ion/ion-tests/0001-map_test-Replace-PAGE_SIZE-with-local-variable-name.patch
-deleted file mode 100644
-index 8915c64..0000000
---- a/recipes-devtools/ion/ion-tests/0001-map_test-Replace-PAGE_SIZE-with-local-variable-name.patch
-+++ /dev/null
-@@ -1,69 +0,0 @@
--From f045cbf9aae0053e9e785e32b772e473aa892443 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 6 Oct 2019 16:08:36 -0700
--Subject: [PATCH] map_test: Replace PAGE_SIZE with local variable name
--
--PAGE_SIZE is already a define in libc implementations global namespace
--e.g. in musl. Therefore its best to use a unique variable name to not
--stamp on the global definition.
--
--Fixes
--src/map_test.cpp:59:23: error: expected unqualified-id
--unsigned long PAGE_SIZE = sysconf(_SC_PAGESIZE);
--^
--/usr/include/limits.h:89:19: note: expanded from macro 'PAGE_SIZE'
--^
--/usr/include/bits/limits.h:3:18: note: expanded from macro 'PAGESIZE'
--^
--
--Upstream-Status: Submitted [https://github.com/glneo/ion-tests/pull/1]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/map_test.cpp | 18 +++++++++---------
-- 1 file changed, 9 insertions(+), 9 deletions(-)
--
--diff --git a/src/map_test.cpp b/src/map_test.cpp
--index a7ce2c9..7b5746d 100644
----- a/src/map_test.cpp
--+++ b/src/map_test.cpp
--@@ -56,27 +56,27 @@ TEST_F(Map, MapOffset)
--         SCOPED_TRACE(::testing::Message() << "heap " << heapMask);
--         int map_fd = -1;
-- 
---        unsigned long PAGE_SIZE = sysconf(_SC_PAGESIZE);
--+        unsigned long psize = sysconf(_SC_PAGESIZE);
-- 
---        ASSERT_EQ(0, ion_alloc(m_ionFd, PAGE_SIZE * 2, heapMask, 0, &map_fd));
--+        ASSERT_EQ(0, ion_alloc(m_ionFd, psize * 2, heapMask, 0, &map_fd));
--         ASSERT_GE(map_fd, 0);
-- 
--         unsigned char *ptr;
---        ptr = (unsigned char *)mmap(NULL, PAGE_SIZE * 2, PROT_READ | PROT_WRITE, MAP_SHARED, map_fd, 0);
--+        ptr = (unsigned char *)mmap(NULL, psize * 2, PROT_READ | PROT_WRITE, MAP_SHARED, map_fd, 0);
--         ASSERT_TRUE(ptr != NULL);
-- 
---        memset(ptr, 0, PAGE_SIZE);
---        memset(ptr + PAGE_SIZE, 0xaa, PAGE_SIZE);
--+        memset(ptr, 0, psize);
--+        memset(ptr + psize, 0xaa, psize);
-- 
---        ASSERT_EQ(0, munmap(ptr, PAGE_SIZE * 2));
--+        ASSERT_EQ(0, munmap(ptr, psize * 2));
-- 
---        ptr = (unsigned char *)mmap(NULL, PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, map_fd, PAGE_SIZE);
--+        ptr = (unsigned char *)mmap(NULL, psize, PROT_READ | PROT_WRITE, MAP_SHARED, map_fd, psize);
--         ASSERT_TRUE(ptr != NULL);
-- 
--         ASSERT_EQ(ptr[0], 0xaa);
---        ASSERT_EQ(ptr[PAGE_SIZE - 1], 0xaa);
--+        ASSERT_EQ(ptr[psize - 1], 0xaa);
-- 
---        ASSERT_EQ(0, munmap(ptr, PAGE_SIZE));
--+        ASSERT_EQ(0, munmap(ptr, psize));
-- 
--         ASSERT_EQ(0, close(map_fd));
--     }
---- 
--2.23.0
--
-diff --git a/recipes-devtools/ion/ion-tests_git.bb b/recipes-devtools/ion/ion-tests_git.bb
-deleted file mode 100644
-index 52346f1..0000000
---- a/recipes-devtools/ion/ion-tests_git.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--SUMMARY = "Test cases for ION"
--HOMEPAGE = "https://github.com/glneo/ion-tests"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://src/ion_test.c;beginline=1;endline=15;md5=b225db900869a4cd31461606e55a3ec5"
--
--PV = "1.0"
--
--BRANCH = "master"
--SRC_URI = "git://github.com/glneo/ion-tests.git;protocol=git;branch=${BRANCH} \
--	file://0001-CMakeLists.txt-disable-phys-addr-for-now.patch \
--	file://0001-map_test-Replace-PAGE_SIZE-with-local-variable-name.patch \
--"
--SRCREV = "70d730cebca29e6fd37b21d9beac82ae645f3900"
--
--DEPENDS = "libion gtest"
--
--S = "${WORKDIR}/git"
--
--inherit cmake pkgconfig
+Build Configuration:
+BB_VERSION           = "1.44.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "am437x-evm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "3.0.2"
+TUNE_FEATURES        = "arm armv7a vfp thumb neon callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp       = "zeus:5e1f52edb7a9f790fb6cb5d96502f3690267c1b1"
+meta-oe
+meta-networking
+meta-python          = "zeus:bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c"
+meta-ti              = "zeus:19a73c96bd05a74711a36a61077e8a7b88b55c63"
+
+See below for the error messgage.
+
+Thanks and kind regards
+
+Daniel
+
+
+ERROR: ti-sgx-ddk-km-1.17.4948957-r3v do_compile: oe_runmake failed
+ERROR: ti-sgx-ddk-km-1.17.4948957-r3v do_compile: Execution of '/home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work/am437x_evm-poky-linux-gnueabi/ti-sgx-ddk-km/1.17.4948957-r3v/temp/run.do_compile.19460' failed with exit code 1:
+grep: /home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work-shared/am437x-evm/kernel-source/include/linux/amba: Is a directory
+grep: /home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work-shared/am437x-evm/kernel-source/include/linux/avf: Is a directory
+grep: /home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work-shared/am437x-evm/kernel-source/include/linux/bcma: Is a directory
+.
+.
+.
+grep: /home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work-shared/am437x-evm/kernel-source/include/linux/unaligned: Is a directory
+grep: /home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work-shared/am437x-evm/kernel-source/include/linux/usb: Is a directory
+grep: /home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work-shared/am437x-evm/kernel-source/include/linux/wimax: Is a directory
+../config/compiler.mk:96: host gcc
+../config/compiler.mk:185: target arm-poky-linux-gnueabi-gcc  -mno-thumb-interwork -marm -fuse-ld=bfd -fmacro-prefix-map=/home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work/am437x_evm-poky-linux-gnueabi/ti-sgx-ddk-km/1.17.4948957-r3v=/usr/src/debug/ti-sgx-ddk-km/1.17.4948957-r3v                      -fdebug-prefix-map=/home/daniel/workspace/reference/am335x-evm-poky
+/build/tmp/work/am437x_evm-poky-linux-gnueabi/ti-sgx-ddk-km/1.17.4948957-r3v=/usr/src/debug/ti-sgx-ddk-km/1.17.4948957-r3v                      -fdebug-prefix-map=/home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work/am437x_evm-poky-linux-gnueabi/ti-sgx-ddk-km/1.17.4948957-r3v/recipe-sysroot=                      -fdebug-prefix-map=/home/daniel/workspace/reference/am3
+35x-evm-poky/build/tmp/work/am437x_evm-poky-linux-gnueabi/ti-sgx-ddk-km/1.17.4948957-r3v/recipe-sysroot-native=  -fdebug-prefix-map=/home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work-shared/am437x-evm/kernel-source=/usr/src/kernel
+******* Multiarch build: no
+******* Primary arch:    target_armel
+******* Secondary arch:  none
+../config/core.mk:513: $(KERNELDIR)/vmlinux does not exist. Kbuild may fail.
+eurasiacon/build/linux2/toplevel.mk:230: eurasiacon/build/linux2/moduledefs/target_armel.mk: No such file or directory
+make[1]: *** No rule to make target 'eurasiacon/build/linux2/moduledefs/target_armel.mk'.  Stop.
+make: *** [../config/core.mk:789: build] Error 2
+WARNING: exit code 1 from a shell command.
+
+ERROR: Logfile of failure stored in: /home/daniel/workspace/reference/am335x-evm-poky/build/tmp/work/am437x_evm-poky-linux-gnueabi/ti-sgx-ddk-km/1.17.4948957-r3v/temp/log.do_compile.19460
+
+
+
+On 2/19/20 8:00 PM, Denys Dmytriyenko wrote:
+> Daniel,
+> 
+> You are not providing any useful info, such as error messages or logs.
+> 
+> In general, yes, am437x-evm on Zeus is ready and has been building fine in
+> many different configurations.
+> 
+> Denys
+> 
+> 
+> On Wed, Feb 19, 2020 at 11:27:55AM +0100, Daniel Ammann wrote:
+>> Hi all
+>>
+>> I'm trying to build a zeus image for am437x-evm. How do I go about that? Is
+>> meta-ti branch zeus ready yet?
+>>
+>> First, I tried a simple poky build with meta-openembedded and meta-ti, building
+>> core-image-base. But compiling of ti-sgx-ddk-km fails.
+>>
+>> Then I followed the instructions in the arago wiki [1], but the build fails
+>> with qtbase because qtbase doesn't run configure successfully.
+>>
+>> What is the recommended way to compile a development image? The goal is to compile
+>> a qt5 application with qtwebengine that needs eglfs support.
+>>
+>> [1] http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment
+>>
+>> Thanks and kind regards
+>>
+>> Daniel
+
 -- 
-2.7.4
+bytes at work
+Technoparkstrasse 7
+CH-8406 Winterthur
+Switzerland
 
+phone: +41 52 550 50 67
