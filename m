@@ -1,63 +1,70 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.8367.1582291894798853900
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.970.1582317290253726896
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 21 Feb 2020 05:31:35 -0800
+ Fri, 21 Feb 2020 12:34:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=F1R4yfeX;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: j-stiffler@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=bt7pDhgX;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: angelabaker@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01LDVXpW002267
-	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 07:31:33 -0600
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01LKYn00034595
+	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 14:34:49 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1582291894;
-	bh=CTdin/Xg0VdbvPHDACplLsIyFtpfxsyLTivOSTOEspg=;
+	s=ti-com-17Q1; t=1582317289;
+	bh=SoKk+DNB4e9wfPEs4E/HQRPRsoOh574PIEh+BOMSvPw=;
 	h=From:To:CC:Subject:Date;
-	b=F1R4yfeXHRdCjVL9rWwOvg9+kB5+eS4dYqSxOk8WxBW6XK6bzCGItsGfNzpH0T03H
-	 TigW5znBXSFUUhapTYguczTIr2Wsqlpy2SVXHEBZn7XzCAKoea7TCVp64deN6ceJ81
-	 yW1AiAbnN0IwHfTfQEFzEkZ1ZgQEIv0VryrI9kRQ=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01LDVXWm009795
+	b=bt7pDhgXwj9gDiVTckw+ZNuh/GDkuwafShxgfhZg+6B5LhumBeUzfHcX6N2qkRt/z
+	 dj7yL36TZuIl0GiL3pnHUF8XV9AgnOpOF14Vc0NKgbFf50I0shkXL3SE0m66EqJFTh
+	 FvN4kVoc8i//vPCA1JadK9Iz9yw7zcudCWQw4pyQ=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01LKYnvd005656
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 07:31:33 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 14:34:49 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Fri, 21
- Feb 2020 07:31:33 -0600
+ Feb 2020 14:34:49 -0600
 Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
  (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Fri, 21 Feb 2020 07:31:33 -0600
-Received: from udd0866934.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01LDVXup015148;
-	Fri, 21 Feb 2020 07:31:33 -0600
-From: "Jacob Stiffler" <j-stiffler@ti.com>
+ Frontend Transport; Fri, 21 Feb 2020 14:34:49 -0600
+Received: from legion.dal.design.ti.com (legion.dal.design.ti.com [128.247.22.53])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01LKYmKT103743;
+	Fri, 21 Feb 2020 14:34:49 -0600
+Received: from uda0866189.dhcp.ti.com (uda0866189.dhcp.ti.com [128.247.77.48])
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id 01LKYmp06989;
+	Fri, 21 Feb 2020 14:34:48 -0600 (CST)
+From: "Angela Stegmaier" <angelabaker@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
-CC: Jacob Stiffler <j-stiffler@ti.com>
-Subject: [master/zeus/thud][PATCH] ti-cgt-arm: skip file-rdeps as this package is precompiled
-Date: Fri, 21 Feb 2020 08:10:57 -0500
-Message-ID: <1582290657-5351-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 2.7.4
+CC: <m-radhakrishnan2@ti.com>, Angela Stegmaier <angelabaker@ti.com>
+Subject: [meta-ti][zeus][PATCH 1/3] ti-pdk-fetch: SRCREV udpate to 2020.2.20
+Date: Fri, 21 Feb 2020 14:34:00 -0600
+Message-ID: <1582317242-4035-1-git-send-email-angelabaker@ti.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Angela Stegmaier <angelabaker@ti.com>
 ---
- recipes-ti/devtools/ti-cgt-arm_18.12.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ classes/ti-pdk-fetch.bbclass | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-cgt-arm_18.12.1.bb b/recipes-ti/devtools/ti-cgt-arm_18.12.1.bb
-index eecde58..e4e1c48 100644
---- a/recipes-ti/devtools/ti-cgt-arm_18.12.1.bb
-+++ b/recipes-ti/devtools/ti-cgt-arm_18.12.1.bb
-@@ -38,6 +38,6 @@ INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_SYSROOT_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
+index 2eaa5bd..bb57434 100644
+--- a/classes/ti-pdk-fetch.bbclass
++++ b/classes/ti-pdk-fetch.bbclass
+@@ -1,9 +1,9 @@
+ TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
+ TI_PDK_GIT_BRANCH ?= "master"
+ TI_PDK_GIT_PROTOCOL ?= "git"
+-TI_PDK_SRCREV ?= "85ec43f6ba2eea2fc65d85c69e98124eb86cb898"
++TI_PDK_SRCREV ?= "4d15e4d2654c48f48b91d7aa52828d66ece2cc12"
  
--INSANE_SKIP_${PN} += "arch staticdev"
-+INSANE_SKIP_${PN} += "arch staticdev file-rdeps"
+-TI_PDK_VERSION ?= "2020.2.17"
++TI_PDK_VERSION ?= "2020.2.20"
  
- BBCLASSEXTEND = "native nativesdk"
+ PV = "${TI_PDK_VERSION}"
+ 
 -- 
-2.7.4
+1.9.1
 
