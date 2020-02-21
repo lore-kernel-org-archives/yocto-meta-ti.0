@@ -1,70 +1,69 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.970.1582317290253726896
+ by mx.groups.io with SMTP id smtpd.web10.938.1582317305671963352
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 21 Feb 2020 12:34:50 -0800
+ Fri, 21 Feb 2020 12:35:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=bt7pDhgX;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GD5dSxm/;
  spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: angelabaker@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01LKYn00034595
-	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 14:34:49 -0600
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01LKZ5IL034674
+	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 14:35:05 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1582317289;
-	bh=SoKk+DNB4e9wfPEs4E/HQRPRsoOh574PIEh+BOMSvPw=;
-	h=From:To:CC:Subject:Date;
-	b=bt7pDhgXwj9gDiVTckw+ZNuh/GDkuwafShxgfhZg+6B5LhumBeUzfHcX6N2qkRt/z
-	 dj7yL36TZuIl0GiL3pnHUF8XV9AgnOpOF14Vc0NKgbFf50I0shkXL3SE0m66EqJFTh
-	 FvN4kVoc8i//vPCA1JadK9Iz9yw7zcudCWQw4pyQ=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01LKYnvd005656
+	s=ti-com-17Q1; t=1582317305;
+	bh=Q7A4bHTa1+KUGsNIJm9Lh76yx1yD98V6AqUMk4s1ags=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=GD5dSxm/huy/RVTP54nSZ0hzWr+cgdTzFCsWoIwV3fsMxt++r89NPd8uOXKDiM+Jf
+	 RfrSckQf7+nvCQndPx2dqUgK1A+ThZ7nP//qqX2tXSjMOxOL65XMhNI3mKMDat69WO
+	 GlB48+18wc/dkWYyXv+HUeTYS9KQ/OekDNuWYWtc=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01LKZ4Xl006208
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 14:34:49 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Feb 2020 14:35:05 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Fri, 21
- Feb 2020 14:34:49 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2020 14:35:04 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Fri, 21 Feb 2020 14:34:49 -0600
+ Frontend Transport; Fri, 21 Feb 2020 14:35:04 -0600
 Received: from legion.dal.design.ti.com (legion.dal.design.ti.com [128.247.22.53])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01LKYmKT103743;
-	Fri, 21 Feb 2020 14:34:49 -0600
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01LKZ4bL079768;
+	Fri, 21 Feb 2020 14:35:04 -0600
 Received: from uda0866189.dhcp.ti.com (uda0866189.dhcp.ti.com [128.247.77.48])
-	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id 01LKYmp06989;
-	Fri, 21 Feb 2020 14:34:48 -0600 (CST)
+	by legion.dal.design.ti.com (8.11.7p1+Sun/8.11.7) with ESMTP id 01LKZ4p07004;
+	Fri, 21 Feb 2020 14:35:04 -0600 (CST)
 From: "Angela Stegmaier" <angelabaker@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
 CC: <m-radhakrishnan2@ti.com>, Angela Stegmaier <angelabaker@ti.com>
-Subject: [meta-ti][zeus][PATCH 1/3] ti-pdk-fetch: SRCREV udpate to 2020.2.20
-Date: Fri, 21 Feb 2020 14:34:00 -0600
-Message-ID: <1582317242-4035-1-git-send-email-angelabaker@ti.com>
+Subject: [meta-ti][zeus][PATCH 2/3] common-csl-ip: bump SRCREV to align with PDK
+Date: Fri, 21 Feb 2020 14:34:01 -0600
+Message-ID: <1582317242-4035-2-git-send-email-angelabaker@ti.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1582317242-4035-1-git-send-email-angelabaker@ti.com>
+References: <1582317242-4035-1-git-send-email-angelabaker@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
 Signed-off-by: Angela Stegmaier <angelabaker@ti.com>
 ---
- classes/ti-pdk-fetch.bbclass | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/common-csl-ip/common-csl-ip.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
-index 2eaa5bd..bb57434 100644
---- a/classes/ti-pdk-fetch.bbclass
-+++ b/classes/ti-pdk-fetch.bbclass
-@@ -1,9 +1,9 @@
- TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
- TI_PDK_GIT_BRANCH ?= "master"
- TI_PDK_GIT_PROTOCOL ?= "git"
--TI_PDK_SRCREV ?= "85ec43f6ba2eea2fc65d85c69e98124eb86cb898"
-+TI_PDK_SRCREV ?= "4d15e4d2654c48f48b91d7aa52828d66ece2cc12"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index e728dba..a680298 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -14,7 +14,7 @@ CSL_GIT_BRANCH = "release"
+ CSL_GIT_DESTSUFFIX = "git"
  
--TI_PDK_VERSION ?= "2020.2.17"
-+TI_PDK_VERSION ?= "2020.2.20"
+ # Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.16B"
+-CSL_SRCREV = "8a2d724e8ef850c32a7ba8e12f729ce611171469"
++CSL_SRCREV = "8894e988f23f103f699411fa0aab4b4702d6c289"
  
- PV = "${TI_PDK_VERSION}"
- 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
 1.9.1
 
