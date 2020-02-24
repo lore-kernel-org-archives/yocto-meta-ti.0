@@ -1,117 +1,73 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.1465.1582564328930394292
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+ by mx.groups.io with SMTP id smtpd.web09.356.1582576747812316216
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 24 Feb 2020 09:12:09 -0800
+ Mon, 24 Feb 2020 12:39:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=KlQDqqdR;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01OHC8No023019;
-	Mon, 24 Feb 2020 11:12:08 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1582564328;
-	bh=+jsWwCzC5F12zC6tO0N3oOiiZfdT9IizAzwMrkEUVmw=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=KlQDqqdRJjm2V2z+/5v7Rj1vkHFx49sm0+efoYZN46bhRv+HFwC+tQ3g3cZU3KzIg
-	 b6V5BC3U5hURDmfix7Q8+ch3eGd1rOve6apoyelcGJ9xfoxc6lzX5kNtfchnpT3XcN
-	 40FMNMz/VMYjk2ArDJ+4xDDvVqbvrt8+eZtHrEOo=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01OHC8L1090687
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 24 Feb 2020 11:12:08 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 24
- Feb 2020 11:12:07 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Mon, 24 Feb 2020 11:12:07 -0600
-Received: from [10.250.77.18] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01OHC6CA025487;
-	Mon, 24 Feb 2020 11:12:07 -0600
-Subject: Re: [meta-ti] [zeus/master][PATCH 1/4] sgx-um, rogue-umlibs, gc320-libs: RRECOMMENDS on corresponding drivers
-To: <denys@ti.com>, <meta-ti@yoctoproject.org>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20200220184722.25828-1-denys@ti.com>
-From: "Andrew F. Davis" <afd@ti.com>
-Message-ID: <7cfa3a22-979a-df7d-2dd5-81ed956fd408@ti.com>
-Date: Mon, 24 Feb 2020 12:12:06 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=aJGPhpcA;
+ spf=pass (domain: konsulko.com, ip: 209.85.210.41, mailfrom: paul.barker@konsulko.com)
+Received: by mail-ot1-f41.google.com with SMTP id z9so9981648oth.5
+        for <meta-ti@lists.yoctoproject.org>; Mon, 24 Feb 2020 12:39:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=o1LclZCsbHU0e6gVbMmt8ldH9pIp2ky3LgcCeB7Ydt4=;
+        b=aJGPhpcAHFRe74WUBpDDkCFSScFkfJANxg56q4u9vV/gXLwvX/9++5ootMTJkhNawb
+         3WxQjk189SBM/pKImlGfoAtoNtiR2ptpmU/nYREWjomkFCij6rOuEkCEmtN+ONUr92CS
+         cqCtIyv75K4JRdHFSaPTVpLtiw5bDaGdEfGlI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=o1LclZCsbHU0e6gVbMmt8ldH9pIp2ky3LgcCeB7Ydt4=;
+        b=NJGGZf69vngq4/RQiFW4Min9uolgr2Ic5rKFKyXrhrCUe9Q5YepHMwOP2uv7yYaIV4
+         aTIKljcCLKa2lHMgEJ8eA2FWmC9KenR09BhXb8+9VvcAzYbf85auo6OfNnkCTKQe8m46
+         L0+FX5SIWOPlJoDISg1mAZFtgXrVJ/EpcCLYP9zbcUlOp/82E0+o4u1Vh0QPCqRx/y1i
+         ZpiDQEMy8ofJpvXECAWaflWgAvHKm5RXRG/4FvvAW3UuIcp0hI8fN1N5/IsRcKxbFejA
+         73oS0+ABdeuR7BR5GF3ITL465kDZmXIcQ3pcYd1l1CWYxmutZ5GVHYHVOb2bwEvqmhzT
+         yviw==
+X-Gm-Message-State: APjAAAWSmRlwuicY+nrDURZIpg4jGXWWy++jDfuIMIlPWoWNkRtJaGdk
+	2U0dG4+Ru6IE8iwZHD7gjXWRKJa4s+sa/fqrqb7SlL3a4EJUNA==
+X-Google-Smtp-Source: APXvYqw35xyydj20Rs4L1c4VuB6PP1koul28T4bX6/w50zstLjQIpzfy29d+09PT+7RJFMgaxjQY+ZqVykyGtwgaSRE=
+X-Received: by 2002:a9d:470a:: with SMTP id a10mr42586975otf.370.1582576746814;
+ Mon, 24 Feb 2020 12:39:06 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200220184722.25828-1-denys@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <CAFMvBt2_TZd4Xid-nJxNYkp_OThisAFJFGfwT7Y5NqE4qU06Kg@mail.gmail.com>
+ <2596.1578907543790978429@lists.yoctoproject.org>
+In-Reply-To: <2596.1578907543790978429@lists.yoctoproject.org>
+From: "Paul Barker" <pbarker@konsulko.com>
+Date: Mon, 24 Feb 2020 20:38:56 +0000
+Message-ID: <CAM9ZRVtT-8My0U+cem=O-BjK_WD6tG5fAto18x73qgooAMZNzw@mail.gmail.com>
+Subject: Re: [meta-ti] issues with fetching git repos from git.ti.com
+To: meta-ti@lists.yoctoproject.org
+Content-Type: text/plain; charset="UTF-8"
 
-On 2/20/20 1:47 PM, Denys Dmytriyenko via Lists.Yoctoproject.Org wrote:
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->  recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb           | 2 ++
->  recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb | 4 +++-
->  recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb       | 2 ++
->  3 files changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> index e8c2f011..d6ecd229 100644
-> --- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> +++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> @@ -12,6 +12,8 @@ BRANCH = "ti-${PV}"
->  SRC_URI = "git://git.ti.com/graphics/ti-gc320-libs.git;protocol=git;branch=${BRANCH}"
->  SRCREV = "c0afab259de59909cfe74c01f3f7fbaa147f94b5"
->  
-> +RRECOMMENDS_${PN} = "ti-gc320-driver"
-> +
+This happens pretty often for me, for example today:
 
+    Cloning into bare repository
+'/b/Sancloud/agl-master/demo-vayu/downloads/git2/git.ti.com.ivimm.ipumm.git'...
+    fatal: unable to connect to git.ti.com:
+    git.ti.com[0: 198.47.28.207]: errno=Connection timed out
 
-Do RRECOMMENDS pull in the package by default? If I just include in my
-image "ti-gc320-libs" then I'll also get "ti-gc320-driver" automatically
-in my image also right?
+    ERROR: ipumm-fw-3.00.15.00-r5 do_fetch: Fetcher failure for URL:
+'git://git.ti.com/ivimm/ipumm.git;protocol=git'. Unable to fetch URL
+from any source.
 
-Andrew
+Is there anything that can be done about this?
 
+Thanks,
+Paul
 
->  # There's only hardfp version available
->  python __anonymous() {
->      tunes = d.getVar("TUNE_FEATURES")
-> diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-> index 9cb863a5..67290756 100644
-> --- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-> +++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-> @@ -27,7 +27,7 @@ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm"
->  DEPENDS += "libdrm wayland expat"
->  RDEPENDS_${PN} += "bash"
->  RDEPENDS_${PN} += "python-core"
-> -RDEPENDS_${PN} += "ti-img-rogue-driver wayland expat"
-> +RDEPENDS_${PN} += "wayland expat"
->  
->  RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm"
->  RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
-> @@ -41,6 +41,8 @@ RCONFLICTS_${PN} = "libegl libgles1 libgles2 libgbm"
->  RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
->  RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
->  
-> +RRECOMMENDS_${PN} += "ti-img-rogue-driver"
-> +
->  S = "${WORKDIR}/git"
->  
->  do_install () {
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> index ecf3ffcc..8b0b3058 100644
-> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> @@ -43,6 +43,8 @@ RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
->  # The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
->  RPROVIDES_${PN} += "libGLESv2.so.1"
->  
-> +RRECOMMENDS_${PN} += "ti-sgx-ddk-km"
-> +
->  S = "${WORKDIR}/git"
->  
->  do_install () {
-> 
-> 
-> 
-> 
+On Mon, 13 Jan 2020 at 09:25, <linus.brandett@gmail.com> wrote:
+>
+> Hi,
+>
+> I dont want to hijack this thread but just to say that I have the same problem and Im located in Sweden.
+>
+> fatal: unable to connect to git.ti.com:
+> git.ti.com[0: 198.47.28.207]: errno=Connection timed out
+>
+> Running git from terminal usually works better but not always.
+>
+> Its only TIs git servers thats causing problems, others work fine.
+>
+> /Linus 
