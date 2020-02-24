@@ -1,131 +1,117 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.537.1582560955731374496
+ by mx.groups.io with SMTP id smtpd.web10.1465.1582564328930394292
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 24 Feb 2020 08:15:56 -0800
+ Mon, 24 Feb 2020 09:12:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=QiWBcjxf;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nikhil.nd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01OGFsXD007491;
-	Mon, 24 Feb 2020 10:15:54 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=KlQDqqdR;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 01OHC8No023019;
+	Mon, 24 Feb 2020 11:12:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1582560955;
-	bh=n4Mu7tQsmgVHuCb1/4aGXsg+ARXBLNSxeYgvHrm7w2Y=;
+	s=ti-com-17Q1; t=1582564328;
+	bh=+jsWwCzC5F12zC6tO0N3oOiiZfdT9IizAzwMrkEUVmw=;
 	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=QiWBcjxfdIH6HXlERAminlUb+ozne2BXE9nMVSzw0LXOQ3fA5LoTVXydqcK3/7Yjc
-	 3EZM9wnI0vuyO3sB56u62rbwUW9chA6pOrklvEjDHg+ANIBCLmvPoOb691Qxf4aiCt
-	 LiR2WpD34hTndplKD8bEG8Vw5wA4/TV/zjVy8nbo=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01OGFsTL007072
+	b=KlQDqqdRJjm2V2z+/5v7Rj1vkHFx49sm0+efoYZN46bhRv+HFwC+tQ3g3cZU3KzIg
+	 b6V5BC3U5hURDmfix7Q8+ch3eGd1rOve6apoyelcGJ9xfoxc6lzX5kNtfchnpT3XcN
+	 40FMNMz/VMYjk2ArDJ+4xDDvVqbvrt8+eZtHrEOo=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 01OHC8L1090687
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 24 Feb 2020 10:15:54 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 24 Feb 2020 11:12:08 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 24
- Feb 2020 10:15:54 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2020 11:12:07 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Mon, 24 Feb 2020 10:15:54 -0600
-Received: from [10.24.69.115] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01OGFqgi072480;
-	Mon, 24 Feb 2020 10:15:53 -0600
-Subject: Re: [meta-ti][zeus PATCH v1] conf: j7-evm: Add jailhouse dtbo
-To: <denys@ti.com>
-CC: <meta-ti@yoctoproject.org>, <meta-ti@lists.yoctoproject.org>
-References: <20200224161346.1447-1-nikhil.nd@ti.com>
-From: "Nikhil Devshatwar" <nikhil.nd@ti.com>
-Message-ID: <0b797a49-6bde-0485-4ed1-118e48764d33@ti.com>
-Date: Mon, 24 Feb 2020 21:44:28 +0530
+ Frontend Transport; Mon, 24 Feb 2020 11:12:07 -0600
+Received: from [10.250.77.18] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 01OHC6CA025487;
+	Mon, 24 Feb 2020 11:12:07 -0600
+Subject: Re: [meta-ti] [zeus/master][PATCH 1/4] sgx-um, rogue-umlibs, gc320-libs: RRECOMMENDS on corresponding drivers
+To: <denys@ti.com>, <meta-ti@yoctoproject.org>
+CC: <meta-ti@lists.yoctoproject.org>
+References: <20200220184722.25828-1-denys@ti.com>
+From: "Andrew F. Davis" <afd@ti.com>
+Message-ID: <7cfa3a22-979a-df7d-2dd5-81ed956fd408@ti.com>
+Date: Mon, 24 Feb 2020 12:12:06 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200224161346.1447-1-nikhil.nd@ti.com>
+In-Reply-To: <20200220184722.25828-1-denys@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: multipart/alternative;
-	boundary="------------EC193A522441B7BFF7DECE47"
+Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-
---------------EC193A522441B7BFF7DECE47
-Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Dependency for this is the kernel patch which adds this dtbo
-http://dflvsu0004.dal.design.ti.com/patch/53612/
-Merge this recipe only after the SRCREV is pointing where this patch is 
-merged
-
-Regards,
-Nikhil D
-
-On 24/02/20 9:43 pm, nikhil.nd@ti.com wrote:
-> From: Nikhil Devshatwar <nikhil.nd@ti.com>
->
-> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
+On 2/20/20 1:47 PM, Denys Dmytriyenko via Lists.Yoctoproject.Org wrote:
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 > ---
->   conf/machine/j7-evm.conf | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-> index 7451d0b6..e73c75bd 100644
-> --- a/conf/machine/j7-evm.conf
-> +++ b/conf/machine/j7-evm.conf
-> @@ -12,6 +12,7 @@ KERNEL_DEVICETREE = " \
->       ti/k3-j721e-proc-board-tps65917.dtb \
->       ti/k3-j721e-common-proc-board-infotainment.dtbo \
->       ti/k3-j721e-pcie-backplane.dtbo \
-> +    ti/k3-j721e-common-proc-board-jailhouse.dtbo \
->   "
->   
->   UBOOT_MACHINE = "j721e_evm_a72_config"
+>  recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb           | 2 ++
+>  recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb | 4 +++-
+>  recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb       | 2 ++
+>  3 files changed, 7 insertions(+), 1 deletion(-)
+> 
+> diff --git a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+> index e8c2f011..d6ecd229 100644
+> --- a/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+> +++ b/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+> @@ -12,6 +12,8 @@ BRANCH = "ti-${PV}"
+>  SRC_URI = "git://git.ti.com/graphics/ti-gc320-libs.git;protocol=git;branch=${BRANCH}"
+>  SRCREV = "c0afab259de59909cfe74c01f3f7fbaa147f94b5"
+>  
+> +RRECOMMENDS_${PN} = "ti-gc320-driver"
+> +
 
 
---------------EC193A522441B7BFF7DECE47
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Do RRECOMMENDS pull in the package by default? If I just include in my
+image "ti-gc320-libs" then I'll also get "ti-gc320-driver" automatically
+in my image also right?
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <font face="Verdana">Dependency for this is the kernel patch which
-      adds this dtbo<br>
-      <a class="moz-txt-link-freetext" href="http://dflvsu0004.dal.design.ti.com/patch/53612/">http://dflvsu0004.dal.design.ti.com/patch/53612/</a><br>
-      Merge this recipe only after the SRCREV is pointing where this
-      patch is merged<br>
-      <br>
-      Regards,<br>
-      Nikhil D<br>
-    </font><br>
-    <div class="moz-cite-prefix">On 24/02/20 9:43 pm, <a class="moz-txt-link-abbreviated" href="mailto:nikhil.nd@ti.com">nikhil.nd@ti.com</a>
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20200224161346.1447-1-nikhil.nd@ti.com">
-      <pre class="moz-quote-pre" wrap="">From: Nikhil Devshatwar <a class="moz-txt-link-rfc2396E" href="mailto:nikhil.nd@ti.com">&lt;nikhil.nd@ti.com&gt;</a>
+Andrew
 
-Signed-off-by: Nikhil Devshatwar <a class="moz-txt-link-rfc2396E" href="mailto:nikhil.nd@ti.com">&lt;nikhil.nd@ti.com&gt;</a>
----
- conf/machine/j7-evm.conf | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-index 7451d0b6..e73c75bd 100644
---- a/conf/machine/j7-evm.conf
-+++ b/conf/machine/j7-evm.conf
-@@ -12,6 +12,7 @@ KERNEL_DEVICETREE = " \
-     ti/k3-j721e-proc-board-tps65917.dtb \
-     ti/k3-j721e-common-proc-board-infotainment.dtbo \
-     ti/k3-j721e-pcie-backplane.dtbo \
-+    ti/k3-j721e-common-proc-board-jailhouse.dtbo \
- "
- 
- UBOOT_MACHINE = "j721e_evm_a72_config"
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------EC193A522441B7BFF7DECE47--
+>  # There's only hardfp version available
+>  python __anonymous() {
+>      tunes = d.getVar("TUNE_FEATURES")
+> diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
+> index 9cb863a5..67290756 100644
+> --- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
+> +++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
+> @@ -27,7 +27,7 @@ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm"
+>  DEPENDS += "libdrm wayland expat"
+>  RDEPENDS_${PN} += "bash"
+>  RDEPENDS_${PN} += "python-core"
+> -RDEPENDS_${PN} += "ti-img-rogue-driver wayland expat"
+> +RDEPENDS_${PN} += "wayland expat"
+>  
+>  RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm"
+>  RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
+> @@ -41,6 +41,8 @@ RCONFLICTS_${PN} = "libegl libgles1 libgles2 libgbm"
+>  RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgbm-dev"
+>  RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
+>  
+> +RRECOMMENDS_${PN} += "ti-img-rogue-driver"
+> +
+>  S = "${WORKDIR}/git"
+>  
+>  do_install () {
+> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> index ecf3ffcc..8b0b3058 100644
+> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
+> @@ -43,6 +43,8 @@ RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg libgbm-dbg"
+>  # The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here
+>  RPROVIDES_${PN} += "libGLESv2.so.1"
+>  
+> +RRECOMMENDS_${PN} += "ti-sgx-ddk-km"
+> +
+>  S = "${WORKDIR}/git"
+>  
+>  do_install () {
+> 
+> 
+> 
+> 
