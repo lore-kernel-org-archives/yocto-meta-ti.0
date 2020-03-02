@@ -1,11 +1,11 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web10.8950.1583116297942349353
+ by mx.groups.io with SMTP id smtpd.web09.8781.1583116298349970572
  for <meta-ti@lists.yoctoproject.org>;
  Sun, 01 Mar 2020 18:31:38 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: denys@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C9C95E0179D; Sun,  1 Mar 2020 18:31:37 -0800 (PST)
+	id 39BDAE0179C; Sun,  1 Mar 2020 18:31:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -18,50 +18,51 @@ X-Spam-HAM-Report:
 	*      trust
 	*      [64.68.198.64 listed in list.dnswl.org]
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C84AE013AE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A170E003DB
 	for <meta-ti@yoctoproject.org>; Sun,  1 Mar 2020 18:31:36 -0800 (PST)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 472B040C2E;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 43DB040C2B;
 	Mon,  2 Mar 2020 02:31:36 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id G75rjlIBxu34; Mon,  2 Mar 2020 02:31:36 +0000 (UTC)
+	with ESMTP id Gp19mFEC4caT; Mon,  2 Mar 2020 02:31:36 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 27A2240AB5;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2680F40A9E;
 	Mon,  2 Mar 2020 02:31:35 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 03A1917407B;
-	Sun,  1 Mar 2020 21:31:34 -0500 (EST)
+	by mail.denix.org (Postfix) with ESMTP id EACC116D1BD;
+	Sun,  1 Mar 2020 21:31:33 -0500 (EST)
 From: "Denys Dmytriyenko" <denys@ti.com>
 To: meta-ti@yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH v2 2/4] osal: fix packaging issue due to libosal.a
-Date: Sun,  1 Mar 2020 21:31:30 -0500
-Message-Id: <1583116292-24761-2-git-send-email-denys@ti.com>
+Subject: [PATCH v2 1/4] ti-cgt6x: fix packaging issue due to libc.a
+Date: Sun,  1 Mar 2020 21:31:29 -0500
+Message-Id: <1583116292-24761-1-git-send-email-denys@ti.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1583116292-24761-1-git-send-email-denys@ti.com>
-References: <1583116292-24761-1-git-send-email-denys@ti.com>
 
-dwarfsrcfiles: .../work/am57xx_evm-linux-gnueabi/osal/1_2020.2.20-r0.1/package/usr/lib/libosal.a: not a valid ELF file
+dwarfsrcfiles: .../work/armv7at2hf-neon-linux-gnueabi/ti-cgt6x/1_8.3.2-r0/package/usr/share/ti/cgt-c6x/lib/libc.a: not a valid ELF file
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
 v2 - use INHIBIT_PACKAGE_STRIP_FILES to exclude a single file
 
- recipes-bsp/osal/osal.inc | 1 +
+ recipes-ti/devtools/ti-cgt6x_8.3.2.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
-index 1f0a077..e2143e1 100644
---- a/recipes-bsp/osal/osal.inc
-+++ b/recipes-bsp/osal/osal.inc
-@@ -12,3 +12,4 @@ PE = "1"
+diff --git a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+index c63c3f6..38f5597 100644
+--- a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
++++ b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+@@ -100,6 +100,7 @@ FILES_${PN} += "${datadir}/ti/*"
+ FILES_${PN}-dbg += "${datadir}/ti/cgt-c6x/bin/.debug"
  
- INC_PR = "r0"
+ INSANE_SKIP_${PN} += "staticdev"
++INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${datadir}/ti/cgt-c6x/lib/libc.a"
  
-+INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libosal.a"
+ BBCLASSEXTEND = "native nativesdk"
+ 
 -- 
 2.7.4
 
