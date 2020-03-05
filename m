@@ -1,12 +1,12 @@
 Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web11.3.1583433900650867991
+ by mx.groups.io with SMTP id smtpd.web11.5.1583433901458330806
  for <meta-ti@lists.yoctoproject.org>;
  Thu, 05 Mar 2020 10:45:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=PFMWbu2x;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=LQzMLOkS;
  spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: tmannan@ti.com)
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F1D42E017D1; Thu,  5 Mar 2020 10:44:59 -0800 (PST)
+	id 4E036E017D2; Thu,  5 Mar 2020 10:45:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -17,60 +17,76 @@ X-Spam-HAM-Report:
 	*      [score: 0.0000]
 	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
 	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
+	*      [198.47.19.141 listed in list.dnswl.org]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
 	*       domain
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB57FE017CE
-	for <meta-ti@yoctoproject.org>; Thu,  5 Mar 2020 10:44:56 -0800 (PST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 025IiuGB072398
-	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:56 -0600
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 131C5E017CF
+	for <meta-ti@yoctoproject.org>; Thu,  5 Mar 2020 10:44:58 -0800 (PST)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 025IiwhQ130553
+	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:58 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1583433896;
-	bh=BKh6NDKsbcLTEXLlD6PacyxqzcM9Ytw/IGVmEk40llo=;
-	h=From:To:Subject:Date;
-	b=PFMWbu2xsh8MK8rxxf8x6HSnS7qQHm8vMxXJjHdiFKe6aoVCgFcD8BsOcCXEqRzm4
-	 Fd2OuN9uz9Q5/2RUu1Hpn3YCFQYZyIo/4UcR4h4MRipOkIl+I0ZR19oja8IkhrN+WL
-	 dW31VY7kap0j/2cesrn2MVdmJ0bTzdETYoXOKaJg=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 025Iiue0078624
+	s=ti-com-17Q1; t=1583433898;
+	bh=Wl2e+0BGopvjCD4YWU3tBnBEkCRC9pqFN8gRfYeeg54=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=LQzMLOkSgeQ6hwAVJdIpgj2jJehQZIo7nkSi4EXIiaLZ+ByTeVqdiP0O8dJhy/XEJ
+	 p30qMosV7OdbFHLqoBlhkpFozHvZFFRUV6BzHWgZa8jbgspUEBsxZpf8P7jmbu0G3b
+	 mXLg+KQOX3BeuexZxl9n8FjrBvIYLyz1F3/slBBo=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 025IiwDK014449
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:56 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:58 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 5 Mar
- 2020 12:44:56 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 12:44:58 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 5 Mar 2020 12:44:56 -0600
+ Frontend Transport; Thu, 5 Mar 2020 12:44:58 -0600
 Received: from ares-ubuntu1.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 025IitSh116317
-	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:56 -0600
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 025IitSi116317
+	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:58 -0600
 From: "Tinku Mannan" <tmannan@ti.com>
 To: <meta-ti@yoctoproject.org>
-Subject: [thud/master][PATCH 0/2] *** PRSDK-4441: icss-emac-lld and nimu-icss recipe updates ***
-Date: Thu, 5 Mar 2020 13:44:50 -0500
-Message-ID: <1583433892-6323-1-git-send-email-tmannan@ti.com>
+Subject: [thud/master][PATCH 1/2] icss-emac-lld: Adding k3 to COMPATIBLE_MACHINE list
+Date: Thu, 5 Mar 2020 13:44:51 -0500
+Message-ID: <1583433892-6323-2-git-send-email-tmannan@ti.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1583433892-6323-1-git-send-email-tmannan@ti.com>
+References: <1583433892-6323-1-git-send-email-tmannan@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-*** Adding k3 to COMPATIBLE_MACHINE list ***
+---
+ recipes-bsp/icss-emac-lld/icss-emac-lld.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Tinku Mannan (2):
-  icss-emac-lld: Adding k3 to COMPATIBLE_MACHINE list
-  nimu-icss: Adding k3 to COMPATIBLE_MACHINE list
-
- recipes-bsp/icss-emac-lld/icss-emac-lld.inc      | 4 ++--
- recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
+diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
+index 4809e1f..db205a9 100644
+--- a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
++++ b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
+@@ -1,7 +1,7 @@
+ LICENSE = "BSD-3-Clause"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=76cafd87d8495b42c2355f7681de15a2"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|k3"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ inherit ti-pdk-fetch
+@@ -10,5 +10,5 @@ TI_PDK_COMP = "ti.drv.icss_emac"
+ 
+ PE = "1"
+ 
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
 -- 
 2.7.4
 
