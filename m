@@ -1,81 +1,76 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.16877.1583350644507664156
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web11.3.1583433900650867991
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 04 Mar 2020 11:37:24 -0800
+ Thu, 05 Mar 2020 10:45:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FVJu8S+2;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=PFMWbu2x;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: tmannan@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id F1D42E017D1; Thu,  5 Mar 2020 10:44:59 -0800 (PST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB57FE017CE
+	for <meta-ti@yoctoproject.org>; Thu,  5 Mar 2020 10:44:56 -0800 (PST)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 024JbNeX117933;
-	Wed, 4 Mar 2020 13:37:23 -0600
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 025IiuGB072398
+	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:56 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1583350643;
-	bh=ljKN9K65JL9/G/GHv7t6N9OU7RM5MFVpj2TIy4DqINw=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=FVJu8S+2MuO+XcW1yHQ0Dv+5e/pcIbmqV5D8R+nZdUCGs4Wn+gqcct8dmaJG8F5WS
-	 YhXTjLM0kJwVnBEUGMGi2BJidsug8q2UaXVMfxWP6ln1r0bJ6k8tqn0jY5TnVnlR/Q
-	 d5WYFg6oDVbjUH+e1ltKrreGo92ziC4YB8vJRhII=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 024JbMQ0002068
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 4 Mar 2020 13:37:22 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 4 Mar
- 2020 13:37:22 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1583433896;
+	bh=BKh6NDKsbcLTEXLlD6PacyxqzcM9Ytw/IGVmEk40llo=;
+	h=From:To:Subject:Date;
+	b=PFMWbu2xsh8MK8rxxf8x6HSnS7qQHm8vMxXJjHdiFKe6aoVCgFcD8BsOcCXEqRzm4
+	 Fd2OuN9uz9Q5/2RUu1Hpn3YCFQYZyIo/4UcR4h4MRipOkIl+I0ZR19oja8IkhrN+WL
+	 dW31VY7kap0j/2cesrn2MVdmJ0bTzdETYoXOKaJg=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 025Iiue0078624
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:56 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 5 Mar
+ 2020 12:44:56 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Wed, 4 Mar 2020 13:37:22 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 024JbM75030375;
-	Wed, 4 Mar 2020 13:37:22 -0600
-Date: Wed, 4 Mar 2020 14:37:22 -0500
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: <nikhil.nd@ti.com>
-CC: <meta-ti@yoctoproject.org>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][zeus PATCH v1 1/2] recipes-bsp: jailhouse: Update tty for j7-evm jailhouse
-Message-ID: <20200304193722.GO2466@beryl>
-References: <20200304193347.15094-1-nikhil.nd@ti.com>
+ Frontend Transport; Thu, 5 Mar 2020 12:44:56 -0600
+Received: from ares-ubuntu1.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 025IitSh116317
+	for <meta-ti@yoctoproject.org>; Thu, 5 Mar 2020 12:44:56 -0600
+From: "Tinku Mannan" <tmannan@ti.com>
+To: <meta-ti@yoctoproject.org>
+Subject: [thud/master][PATCH 0/2] *** PRSDK-4441: icss-emac-lld and nimu-icss recipe updates ***
+Date: Thu, 5 Mar 2020 13:44:50 -0500
+Message-ID: <1583433892-6323-1-git-send-email-tmannan@ti.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20200304193347.15094-1-nikhil.nd@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
 
-Thanks.
+*** Adding k3 to COMPATIBLE_MACHINE list ***
 
-On Thu, Mar 05, 2020 at 01:03:46AM +0530, nikhil.nd@ti.com wrote:
-> From: Nikhil Devshatwar <nikhil.nd@ti.com>
-> 
-> Latest upstream jailhouse uses ttyS3 as the console for
-> inmate cell. Update the recipe to pass the correct cmdline.
-> 
-> Override only for j7-evm
-> 
-> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
-> ---
->  recipes-kernel/jailhouse/jailhouse_git.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
-> index a4ee2fc7..1273c57d 100644
-> --- a/recipes-kernel/jailhouse/jailhouse_git.bb
-> +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-> @@ -59,7 +59,8 @@ INITRAMFS_IMAGE ?= ""
->  JH_RAMFS_IMAGE ?= "${INITRAMFS_IMAGE}"
->  
->  JH_CMDLINE ?= ""
-> -JH_CMDLINE_k3 ?= "console=ttyS1,115200n8"
-> +JH_CMDLINE_am65xx ?= "console=ttyS1,115200n8"
-> +JH_CMDLINE_j7-evm ?= "console=ttyS3,115200n8"
+Tinku Mannan (2):
+  icss-emac-lld: Adding k3 to COMPATIBLE_MACHINE list
+  nimu-icss: Adding k3 to COMPATIBLE_MACHINE list
 
-Will this break am65?
+ recipes-bsp/icss-emac-lld/icss-emac-lld.inc      | 4 ++--
+ recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
+-- 
+2.7.4
 
->  do_configure() {
->  	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ]; 
-> -- 
-> 2.17.1
-> 
