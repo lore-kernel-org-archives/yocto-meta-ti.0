@@ -1,111 +1,137 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.46])
- by mx.groups.io with SMTP id smtpd.web11.931.1583777449685097067
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.629.1583863594599694162
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 09 Mar 2020 11:10:50 -0700
+ Tue, 10 Mar 2020 11:06:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@uievolution.onmicrosoft.com header.s=selector2-uievolution-onmicrosoft-com header.b=TUZTG+kO;
- spf=pass (domain: xevo.com, ip: 40.107.92.46, mailfrom: mkelly@xevo.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kZZcEADxk5B4sHuKght2uL+lMlzBHOj9LyU6VRHfVIIANAkAaPAg0GWn6pYBaqwjIkLb301le1pw5bg3l/yEXxxGIgksjoJ2L2U6Kg4lKYA7IQKtX8QWfdkyLdSvRns/YR8EwmyO9DMMnLUGHaeWzhiuC9q4pQgcWmN4AMa+ifO4Vy/8gLyJw6XJjR5wqzvY4tw7yDWbuRwIpZfXWqO5BCt4womTconoA1n3cPOkoLTC0IFYSH2CyI5Nl7xA+br0MjcQdPxAmdZIFFknmibzBYzfKl/CsWDYca1A76Z76hXMEkY87L1/u26u3X+VXPq5umqJTjvGOpcVZ5enanX3bA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CncQ0FBAiLblm9eX/da/1xFAvUX3rPd9omfCoPW4SnI=;
- b=b575ClLpA8jbcga+l1DP7HmA0yHq72oMtzhryM/K3lfQgDOGafMwsbrCMstufzjHe2DsRUYJbtd9cau8Z+GYzzg23VhQPOcLLfB5lV3ttP/RLaDulEZyqVHf8zb/6JY6yrm7voHg3Mf/BDV1pfMtVaaBbAHnQsxE/8lsPjmlAS+wYmWn+IAwkEGteTUKp6jaoZ6bVtBLtWpeRTlpqhAIXEWPwg/JRkQjIAYCT9RDGiXJqLasxqPCC9jfvi8LBkpvy8wo06Tu21FzgfpgwohSfUzcw+7Ykq8nASxe8GDnXewB0qz6S/YDzMCZp4Ejbudbh3mHNKMW/qc+LkmaR5gXXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=xevo.com; dmarc=pass action=none header.from=xevo.com;
- dkim=pass header.d=xevo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=uievolution.onmicrosoft.com; s=selector2-uievolution-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CncQ0FBAiLblm9eX/da/1xFAvUX3rPd9omfCoPW4SnI=;
- b=TUZTG+kOqxTYjeF8xXBO18V9QrSU7XhBYgnhd+aHDOyY5iYAdQelo9Gcyy27mwMW8wocTLlgY70UIg/dhT5ToSPk01B6SD17cPQxw3IkbfQBLSJ28CDJ/ZqAfELieFXD6UDA10y+ZXQqNaC/N6nICCHLNXHlzFZtvlOYJN5W64U=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=mkelly@xevo.com; 
-Received: from MW2PR18MB2236.namprd18.prod.outlook.com (2603:10b6:907:7::14)
- by MW2PR18MB2170.namprd18.prod.outlook.com (2603:10b6:907:2::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2793.17; Mon, 9 Mar
- 2020 18:10:47 +0000
-Received: from MW2PR18MB2236.namprd18.prod.outlook.com
- ([fe80::492:f89:e20a:12b6]) by MW2PR18MB2236.namprd18.prod.outlook.com
- ([fe80::492:f89:e20a:12b6%6]) with mapi id 15.20.2772.019; Mon, 9 Mar 2020
- 18:10:47 +0000
-Subject: Re: Booting a J7 EVM without meta-arago
-From: "Martin Kelly" <mkelly@xevo.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: denys@ti.com, meta-arago@arago-project.org
-References: <efd6a31a-15ab-1f2d-9b74-e08b11662c02@xevo.com>
-Message-ID: <0804812e-3894-8f7b-725e-e101e8ba8b94@xevo.com>
-Date: Mon, 9 Mar 2020 11:10:42 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-In-Reply-To: <efd6a31a-15ab-1f2d-9b74-e08b11662c02@xevo.com>
-X-ClientProxiedBy: BYAPR11CA0059.namprd11.prod.outlook.com
- (2603:10b6:a03:80::36) To MW2PR18MB2236.namprd18.prod.outlook.com
- (2603:10b6:907:7::14)
-Return-Path: mkelly@xevo.com
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=nX13BZYb;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 02AI6XqU058255
+	for <meta-ti@lists.yoctoproject.org>; Tue, 10 Mar 2020 13:06:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1583863593;
+	bh=zYvnfjT3STG8qLJgIKZSUAMbGbTiOO0yVEVHPsciFOY=;
+	h=Date:From:To:Subject:References:In-Reply-To;
+	b=nX13BZYbhWRSMjGJzptisxijFbpVCjqnUFxcV988fNE4epbcVBSFikLqzaQ220Yt+
+	 6PSjRQU1pIDOyyXK7bi6fByqclpuCBE7CkKsI9xHhPo7zNITvqwl9BGgKlz0WIPaxZ
+	 vkJ5yaa9artG7KT1AiORyIl89+ety3nOP64kWoXw=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 02AI6XVB017714
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 10 Mar 2020 13:06:33 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Tue, 10
+ Mar 2020 13:06:33 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Tue, 10 Mar 2020 13:06:33 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 02AI6X0I030522;
+	Tue, 10 Mar 2020 13:06:33 -0500
+Date: Tue, 10 Mar 2020 14:06:33 -0400
+From: "Denys Dmytriyenko" <denys@ti.com>
+To: <m-radhakrishnan2@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti] [thud/master][PATCH] sciclient-rtos: SRCREV update, adding steps to generate sysfw.bin
+Message-ID: <20200310180632.GX2301@beryl>
+References: <20200226213750.32020-1-m-radhakrishnan2@ti.com>
+ <15F75F9B6D48606D.22756@lists.yoctoproject.org>
+ <15F890DA7571B9C2.27899@lists.yoctoproject.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.254.27] (50.35.85.47) by BYAPR11CA0059.namprd11.prod.outlook.com (2603:10b6:a03:80::36) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2793.16 via Frontend Transport; Mon, 9 Mar 2020 18:10:46 +0000
-X-Originating-IP: [50.35.85.47]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0588c4b0-906b-4efc-c6ab-08d7c455314d
-X-MS-TrafficTypeDiagnostic: MW2PR18MB2170:
-X-Microsoft-Antispam-PRVS: 
-	<MW2PR18MB2170C72C05865CCB5291BF57ABFE0@MW2PR18MB2170.namprd18.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
-X-Forefront-PRVS: 0337AFFE9A
-X-Forefront-Antispam-Report: 
-	SFV:NSPM;SFS:(10009020)(396003)(136003)(39830400003)(366004)(346002)(376002)(199004)(189003)(16526019)(186003)(26005)(956004)(2616005)(2906002)(16576012)(316002)(66556008)(66476007)(5660300002)(53546011)(478600001)(31686004)(52116002)(6916009)(31696002)(36756003)(4326008)(6486002)(81166006)(8676002)(66946007)(81156014)(8936002)(6666004)(86362001);DIR:OUT;SFP:1101;SCL:1;SRVR:MW2PR18MB2170;H:MW2PR18MB2236.namprd18.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;MX:1;
-Received-SPF: None (protection.outlook.com: xevo.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	JX4JII8vJ9kfPUf6tfgZI26EcrujEfz90AxethRd1FhRF+pIox+T7ZF87/SthWuX4jvWFkl2AenR40n2k/x70MoRN2bTPYVSxffnLiP/GV9FTn6RexkGFJQzSJ71LJUONQBEyyneh0M0gfpBxa0EIT2chIinFXSzjCarMB5IvqG7uVbCq3iw+VU75jStk76U02JuUBH31koKQOjZAxeCKlXRCzIU53qOmqh40ziMIlN6dDSckgkD54fHa7DbvzgPqljaPPDgbjH6+U0G6QzDXfBhZc2+x2xMid8Cq/SjnfH7I8Y1/DKppmwOpYuABgOEqQW/Krm1G+V7h94yAAZ88wY/vr+WXNaN2scmrZESrwTykbgPIpqEwmr/l+xFa7eZbw9Xr2xNz9koGMNfpl2E1mMkWguT9hmumQrHoKUPtrgeWOcOySmWTVkRgQhpljE9
-X-MS-Exchange-AntiSpam-MessageData: 
-	OD1D6wa8pjCGbtOOb9A/Gh7LHLkpMhJtCqjfk6expme/zLRPECFoxW0fVHMawlfJ9dT767bU7kVvlgH8Rqap5VYQECxUPpmDNWqvckU7C+WS+U5hTCGyGcdzWng4fDFn7UwpUFH/RPlLqeMcSczfjw==
-X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0588c4b0-906b-4efc-c6ab-08d7c455314d
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2020 18:10:47.6618
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YojL2fsGsm1VJJGJ48eaqC5KQyzvPKz5rkaEOZKzPE9MSw1LXphs2qIuhIXhNwDU
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW2PR18MB2170
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <15F890DA7571B9C2.27899@lists.yoctoproject.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On 3/6/20 11:16 AM, Martin Kelly wrote:
-> Hi,
-> 
-> I'm trying to get a basic image running on the J7 EVM using only meta-ti 
-> without meta-arago, as I want to use this board but don't need most of 
-> the TI SDK support.
-> 
-> I'm using the j7-evm MACHINE type, and I get a successful build but no 
-> u-boot output. In contrast, I get fine output with an SDK built with 
-> meta-arago. If I copy the boot partition from the SDK, I can get u-boot 
-> output.
-> 
-> I then noticed the following comment in k3.inc:
-> 
-> # Please note that booting K3 platform also requires
-> # tiboot3.bin and sysfw.itb, which are provided by meta-arago
-> # u-boot-k3-r5 and ti-sci-fw recipes
-> IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
-> WKS_FILE ?= "sdimage-bootpart.wks"
-> do_image_wic[depends] += "u-boot:do_deploy"
-> 
-> Does this mean it's not actually possible to successfully boot a system 
-> without pulling in meta-arago and all its many dependencies? Is there a 
-> chance we could port these recipes into meta-ti, or will I always have 
-> to use meta-arago?
-> 
-> Thanks,
-> Martin
+Ping again. Any feedback?
 
-Adding meta-arago to the CC list.
+On Mon, Mar 02, 2020 at 01:42:14PM -0500, Denys Dmytriyenko via Lists.Yoctoproject.Org wrote:
+> Ping.
+> 
+> On Thu, Feb 27, 2020 at 04:28:33PM -0500, Denys Dmytriyenko via Lists.Yoctoproject.Org wrote:
+> > On Wed, Feb 26, 2020 at 04:37:50PM -0500, Mahesh Radhakrishnan via Lists.Yoctoproject.Org wrote:
+> > > ---
+> > >  recipes-bsp/sciclient/sciclient-rtos_git.bb | 40 +++++++++++++++++++--
+> > >  1 file changed, 38 insertions(+), 2 deletions(-)
+> > > 
+> > > diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> > > index 6a3d79c3..ca3894fa 100644
+> > > --- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> > > +++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+> > > @@ -7,14 +7,15 @@ TI_PDK_COMP = "ti.drv.sciclient"
+> > >  PE = "1"
+> > >  
+> > >  LICENSE = "BSD-3-Clause"
+> > > -LIC_FILES_CHKSUM = "file://sciclient.h;beginline=1;endline=31;md5=7224b2eeca1444815f1737bfcdfa892a"
+> > > +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=99d7639a81c1ba1f16fd070a928ffddb"
+> > >  
+> > >  COMPATIBLE_MACHINE = "k3"
+> > >  PACKAGE_ARCH = "${MACHINE_ARCH}"
+> > >  
+> > > -PR = "r0"
+> > > +PR = "r1"
+> > >  
+> > >  DEPENDS_append = " osal-rtos common-csl-ip-rtos"
+> > > +DEPENDS_append_k3 = " openssl-native"
+> > 
+> > Isn't it redundant since the recipe is only compatible with "k3"?
+> > 
+> > 
+> > >  # Build with make instead of XDC
+> > >  TI_PDK_XDCMAKE = "0"
+> > > @@ -60,6 +61,41 @@ do_compile() {
+> > >      tar -cf sciclient.tar --exclude='*.tar' ./*
+> > >  }
+> > >  
+> > > +
+> > > +do_compile_prepend_am65xx-hs-evm() {
+> > > +
+> > > +    cd ${SCICLIENT_ROOTPATH}
+> > > +
+> > > +    # Saving the GP firmware to a different GP name
+> > > +    cp ${CP_ARGS} ./soc/V0/sysfw.bin ./soc/V0/sysfw-gp.bin
+> > > +    
+> > > +    cd ${SCICLIENT_ROOTPATH}/tools
+> > > +    # Create the .bin file for HS
+> > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x-hs ${PDK_INSTALL_DIR}/packages
+> > > +    cd -
+> > > +}
+> > > +
+> > > +do_compile_prepend_am65xx-evm() {
+> > > +
+> > > +    cd ${SCICLIENT_ROOTPATH}/tools
+> > > +
+> > > +    # Create the .bin file for GP, PG1
+> > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x ${PDK_INSTALL_DIR}/packages
+> > > +    # Create the .bin file for GP, PG2
+> > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x_pg2 ${PDK_INSTALL_DIR}/packages
+> > > +    
+> > > +    cd -
+> > > +}
+> > > +
+> > > +
+> > > +do_compile_prepend_j7-evm() {
+> > > +
+> > > +    cd ${SCICLIENT_ROOTPATH}/tools
+> > > +    # Create the .bin file for GP
+> > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh j721e ${PDK_INSTALL_DIR}/packages
+> > > +    cd -
+> > > +}
+> > > +
+> > >  do_install() {
+> > >      cd ${SCICLIENT_ROOTPATH}
+> > >      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient
+> > > -- 
+> > > 2.17.1
+> > > 
+> > 
+> > > 
+> > 
+> 
+> > 
+> 
+
+> 
+
