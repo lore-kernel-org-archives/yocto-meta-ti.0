@@ -1,151 +1,101 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.1570.1583866438218985930
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web12.8858.1584018688537531087
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 10 Mar 2020 11:53:58 -0700
+ Thu, 12 Mar 2020 06:11:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=yjtPY0RT;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: denys@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=semCNovV;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: g-tammana@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id 1B538E017DE; Thu, 12 Mar 2020 06:11:28 -0700 (PDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9556E017DC
+	for <meta-ti@yoctoproject.org>; Thu, 12 Mar 2020 06:11:25 -0700 (PDT)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 02AIrv87007407
-	for <meta-ti@lists.yoctoproject.org>; Tue, 10 Mar 2020 13:53:57 -0500
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 02CDBPOe054315
+	for <meta-ti@yoctoproject.org>; Thu, 12 Mar 2020 08:11:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1583866437;
-	bh=ceMCLOdJAqEflhiCyle69XTtHKr2eTUipbIJ5cniB7M=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=yjtPY0RT7SEt0rcCG1CbQDtxVGu1VDuOOaMwHxp4BAdR+1HRjTzbInMMRIM38dv4z
-	 MvcV45tYWmGgtYc5edL5dWAaNd1V9CPIZysqJfESTWbA8bBSLVJXmRAKVBHvCjSeuD
-	 bKbGrZQAyAN4YPD4G5dyZcV+29CXlLNi+nOzfXqY=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 02AIrvsX070083
+	s=ti-com-17Q1; t=1584018685;
+	bh=osjEP5yds99SMhUVhP3HI5+fP8jgBX4izyBbX8/9WU4=;
+	h=From:To:CC:Subject:Date;
+	b=semCNovVtj4ZryXBldmxI76XO9W5nq+L7hn82OHFJIcjkqXOlW9seKtHv2LXiy/Ar
+	 JgemCacyJ0XYoYlV60kI4/dWCMvqqq2M6Snby/tMGzZaYFOOLBY7/bbvXVkMpbrUMX
+	 Fy25zddb95XgcvLtVAsWydfWQ79p0eq4vrW1WsSY=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 02CDBPuj110022
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 10 Mar 2020 13:53:57 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Tue, 10
- Mar 2020 13:53:57 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 12 Mar 2020 08:11:25 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 12
+ Mar 2020 08:11:25 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Tue, 10 Mar 2020 13:53:57 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 02AIruib128113;
-	Tue, 10 Mar 2020 13:53:57 -0500
-Date: Tue, 10 Mar 2020 14:53:56 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: "Radhakrishnan, Mahesh" <m-radhakrishnan2@ti.com>
-CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [thud/master][PATCH] sciclient-rtos: SRCREV update, adding steps to generate sysfw.bin
-Message-ID: <20200310185356.GA10316@beryl>
-References: <20200226213750.32020-1-m-radhakrishnan2@ti.com>
- <15F75F9B6D48606D.22756@lists.yoctoproject.org>
- <15F890DA7571B9C2.27899@lists.yoctoproject.org>
- <20200310180632.GX2301@beryl>
- <c2683e37482b4a3b84f89993a57fbb49@ti.com>
+ Frontend Transport; Thu, 12 Mar 2020 08:11:24 -0500
+Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 02CDBPpE034291;
+	Thu, 12 Mar 2020 08:11:25 -0500
+Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.77.97])
+	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 02CDBOTY074772;
+	Thu, 12 Mar 2020 08:11:25 -0500
+From: "Gowtham Tammana" <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
+CC: Gowtham Tammana <g-tammana@ti.com>
+Subject: [meta-ti][zeus/master][PATCH] ti-gc320-driver: Update srcrev to pick dma api fixes
+Date: Thu, 12 Mar 2020 08:11:38 -0500
+Message-ID: <20200312131138.5046-1-g-tammana@ti.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <c2683e37482b4a3b84f89993a57fbb49@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 10, 2020 at 02:33:56PM -0400, Radhakrishnan, Mahesh wrote:
-> Yes. Sciclient is only for K3 devices I have addressed the review comment and sent a v2 patch for the same.
+Update srcrev to pick the fixes for dma api crashes.
 
-Thanks!
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+ recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys 
-> Sent: Tuesday, March 10, 2020 2:07 PM
-> To: Radhakrishnan, Mahesh; meta-ti@lists.yoctoproject.org
-> Subject: Re: [meta-ti] [thud/master][PATCH] sciclient-rtos: SRCREV update, adding steps to generate sysfw.bin
-> 
-> Ping again. Any feedback?
-> 
-> On Mon, Mar 02, 2020 at 01:42:14PM -0500, Denys Dmytriyenko via Lists.Yoctoproject.Org wrote:
-> > Ping.
-> > 
-> > On Thu, Feb 27, 2020 at 04:28:33PM -0500, Denys Dmytriyenko via Lists.Yoctoproject.Org wrote:
-> > > On Wed, Feb 26, 2020 at 04:37:50PM -0500, Mahesh Radhakrishnan via Lists.Yoctoproject.Org wrote:
-> > > > ---
-> > > >  recipes-bsp/sciclient/sciclient-rtos_git.bb | 40 +++++++++++++++++++--
-> > > >  1 file changed, 38 insertions(+), 2 deletions(-)
-> > > > 
-> > > > diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
-> > > > index 6a3d79c3..ca3894fa 100644
-> > > > --- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
-> > > > +++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
-> > > > @@ -7,14 +7,15 @@ TI_PDK_COMP = "ti.drv.sciclient"
-> > > >  PE = "1"
-> > > >  
-> > > >  LICENSE = "BSD-3-Clause"
-> > > > -LIC_FILES_CHKSUM = "file://sciclient.h;beginline=1;endline=31;md5=7224b2eeca1444815f1737bfcdfa892a"
-> > > > +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=99d7639a81c1ba1f16fd070a928ffddb"
-> > > >  
-> > > >  COMPATIBLE_MACHINE = "k3"
-> > > >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > > >  
-> > > > -PR = "r0"
-> > > > +PR = "r1"
-> > > >  
-> > > >  DEPENDS_append = " osal-rtos common-csl-ip-rtos"
-> > > > +DEPENDS_append_k3 = " openssl-native"
-> > > 
-> > > Isn't it redundant since the recipe is only compatible with "k3"?
-> > > 
-> > > 
-> > > >  # Build with make instead of XDC
-> > > >  TI_PDK_XDCMAKE = "0"
-> > > > @@ -60,6 +61,41 @@ do_compile() {
-> > > >      tar -cf sciclient.tar --exclude='*.tar' ./*
-> > > >  }
-> > > >  
-> > > > +
-> > > > +do_compile_prepend_am65xx-hs-evm() {
-> > > > +
-> > > > +    cd ${SCICLIENT_ROOTPATH}
-> > > > +
-> > > > +    # Saving the GP firmware to a different GP name
-> > > > +    cp ${CP_ARGS} ./soc/V0/sysfw.bin ./soc/V0/sysfw-gp.bin
-> > > > +    
-> > > > +    cd ${SCICLIENT_ROOTPATH}/tools
-> > > > +    # Create the .bin file for HS
-> > > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x-hs ${PDK_INSTALL_DIR}/packages
-> > > > +    cd -
-> > > > +}
-> > > > +
-> > > > +do_compile_prepend_am65xx-evm() {
-> > > > +
-> > > > +    cd ${SCICLIENT_ROOTPATH}/tools
-> > > > +
-> > > > +    # Create the .bin file for GP, PG1
-> > > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x ${PDK_INSTALL_DIR}/packages
-> > > > +    # Create the .bin file for GP, PG2
-> > > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x_pg2 ${PDK_INSTALL_DIR}/packages
-> > > > +    
-> > > > +    cd -
-> > > > +}
-> > > > +
-> > > > +
-> > > > +do_compile_prepend_j7-evm() {
-> > > > +
-> > > > +    cd ${SCICLIENT_ROOTPATH}/tools
-> > > > +    # Create the .bin file for GP
-> > > > +    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh j721e ${PDK_INSTALL_DIR}/packages
-> > > > +    cd -
-> > > > +}
-> > > > +
-> > > >  do_install() {
-> > > >      cd ${SCICLIENT_ROOTPATH}
-> > > >      install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient
-> > > > -- 
-> > > > 2.17.1
-> > > > 
-> > > 
-> > > > 
-> > > 
-> > 
-> > > 
-> > 
-> 
-> > 
-> 
+diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/rec=
+ipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+index d536b1c6..792e5730 100644
+--- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
++++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM =3D "file://../LICENSE;md5=3D78d9818a5=
+1b9a8e9bb89dea418bac297"
+=20
+ inherit module
+=20
+-MACHINE_KERNEL_PR_append =3D "g"
++MACHINE_KERNEL_PR_append =3D "h"
+ PR =3D "${MACHINE_KERNEL_PR}"
+=20
+ # Need to branch out with ${PV} var
+ BRANCH =3D "ti-${PV}-k5.4"
+=20
+-SRCREV =3D "bd1c9751af7c693bdf1a0e6b8b96226305d45a8c"
++SRCREV =3D "2a4fbe8353fa56011a613aeeaf69e274cd07a825"
+=20
+ SRC_URI =3D "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=3Dgi=
+t;branch=3D${BRANCH}"
+=20
+--=20
+2.25.1
+
