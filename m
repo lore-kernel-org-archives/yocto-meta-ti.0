@@ -1,101 +1,114 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web12.8858.1584018688537531087
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.68])
+ by mx.groups.io with SMTP id smtpd.web10.22603.1584125700476403659
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Mar 2020 06:11:28 -0700
+ Fri, 13 Mar 2020 11:55:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=semCNovV;
- spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: g-tammana@ti.com)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1B538E017DE; Thu, 12 Mar 2020 06:11:28 -0700 (PDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: 
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.249 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
-	*       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9556E017DC
-	for <meta-ti@yoctoproject.org>; Thu, 12 Mar 2020 06:11:25 -0700 (PDT)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 02CDBPOe054315
-	for <meta-ti@yoctoproject.org>; Thu, 12 Mar 2020 08:11:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1584018685;
-	bh=osjEP5yds99SMhUVhP3HI5+fP8jgBX4izyBbX8/9WU4=;
-	h=From:To:CC:Subject:Date;
-	b=semCNovVtj4ZryXBldmxI76XO9W5nq+L7hn82OHFJIcjkqXOlW9seKtHv2LXiy/Ar
-	 JgemCacyJ0XYoYlV60kI4/dWCMvqqq2M6Snby/tMGzZaYFOOLBY7/bbvXVkMpbrUMX
-	 Fy25zddb95XgcvLtVAsWydfWQ79p0eq4vrW1WsSY=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 02CDBPuj110022
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 12 Mar 2020 08:11:25 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 12
- Mar 2020 08:11:25 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 12 Mar 2020 08:11:24 -0500
-Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 02CDBPpE034291;
-	Thu, 12 Mar 2020 08:11:25 -0500
-Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.77.97])
-	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 02CDBOTY074772;
-	Thu, 12 Mar 2020 08:11:25 -0500
-From: "Gowtham Tammana" <g-tammana@ti.com>
-To: <meta-ti@yoctoproject.org>, Denys Dmytriyenko <denys@ti.com>
-CC: Gowtham Tammana <g-tammana@ti.com>
-Subject: [meta-ti][zeus/master][PATCH] ti-gc320-driver: Update srcrev to pick dma api fixes
-Date: Thu, 12 Mar 2020 08:11:38 -0500
-Message-ID: <20200312131138.5046-1-g-tammana@ti.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@uievolution.onmicrosoft.com header.s=selector2-uievolution-onmicrosoft-com header.b=jetFEXRo;
+ spf=pass (domain: xevo.com, ip: 40.107.92.68, mailfrom: mkelly@xevo.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YeJsqT49wk5NJ0WzHhqEIyn48krsHsrFXbFSJSmXi1Ojk7LHy4zdekko+vB8ZIG5ZHmka2l9d6pWekZRR4XUmjZIIpR4S0vb1L89aYpxV4vQpl68UIJpUM1d0dUruxT/wgwxtEQ3VRmLE8r5C2Qu4tRLl8wYVBfu+k5vOtqv3X1AearIx4nAmIAokmY/nCECo7L6uxtZQ284skr+QygssRJJXHtiC+DXJ+uWkQldKVUMVzJ8K5DXFfnBLiHbMKDNTh/qAgAxLYNj4Tyxc9dvhOnAMkfBmv6n7rfrNui6HoVh2ukaearkFZEHd87tloJ4nymg8P574bc9CXHlW32HbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vuFUpIFJ4UvbMaFv65U5c4dUozc5eOzrMg2wZrgheg8=;
+ b=TOKEe4dSWLlZuBwUn7VhqYXhQSmNDDQlrwDlHQFKvnU2CYxRb1QoAEeNULwEH9UCykzR67doSlpYMszvW5oLpyuQBghPd/t/NP6z92UwUjL7/pSbUz1dg78BHBdPV/W0q8vMyisUoKsYu4M4GStczN/XPRtN+VF3ZK+/+YvWp2ExbIpg5BGOQJk8SyEhmRu39GHja+0tFYwqE7W/6qA5dSMxWrLe0Q8G8W2Ix0Urfk6MNkx9qcYefd3iw2p5bZIHjNLGLR40rMbulND14ojyV9yS6Wn90naLx7dj7NUdJqXG2iAiYt/YCX01/XshtnHNhow39MOgc5Bqj78awDiOpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=xevo.com; dmarc=pass action=none header.from=xevo.com;
+ dkim=pass header.d=xevo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=uievolution.onmicrosoft.com; s=selector2-uievolution-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vuFUpIFJ4UvbMaFv65U5c4dUozc5eOzrMg2wZrgheg8=;
+ b=jetFEXRogTyBDh/FDi5BH8OmAcgwAm4wlB/pjYfNJPyhwV0DTDGnCTy4WBHrOGb3i4Iu7BCCN5V7M/fw8IA4/bwrgthsBByltx7MrWqytElZtt4/pabCFpC+wtQDlOOnFTLC8NcDdHj6e8fParNDMgvNNtvmBJ80b75FF25+INg=
+Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=mkelly@xevo.com; 
+Received: from MW2PR18MB2236.namprd18.prod.outlook.com (2603:10b6:907:7::14)
+ by MW2PR18MB2137.namprd18.prod.outlook.com (2603:10b6:907:5::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2793.17; Fri, 13 Mar
+ 2020 18:54:57 +0000
+Received: from MW2PR18MB2236.namprd18.prod.outlook.com
+ ([fe80::e1fb:58c9:4324:cbe0]) by MW2PR18MB2236.namprd18.prod.outlook.com
+ ([fe80::e1fb:58c9:4324:cbe0%7]) with mapi id 15.20.2814.018; Fri, 13 Mar 2020
+ 18:54:57 +0000
+Subject: Re: Booting a J7 EVM without meta-arago
+From: "Martin Kelly" <mkelly@xevo.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: denys@ti.com, meta-arago@arago-project.org
+References: <efd6a31a-15ab-1f2d-9b74-e08b11662c02@xevo.com>
+ <0804812e-3894-8f7b-725e-e101e8ba8b94@xevo.com>
+Message-ID: <106e3296-fd8a-f18c-8b83-07557400d429@xevo.com>
+Date: Fri, 13 Mar 2020 11:54:52 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+In-Reply-To: <0804812e-3894-8f7b-725e-e101e8ba8b94@xevo.com>
+X-ClientProxiedBy: MW2PR16CA0013.namprd16.prod.outlook.com (2603:10b6:907::26)
+ To MW2PR18MB2236.namprd18.prod.outlook.com (2603:10b6:907:7::14)
+Return-Path: mkelly@xevo.com
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [172.31.252.60] (4.14.243.50) by MW2PR16CA0013.namprd16.prod.outlook.com (2603:10b6:907::26) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2793.15 via Frontend Transport; Fri, 13 Mar 2020 18:54:56 +0000
+X-Originating-IP: [4.14.243.50]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 137192cc-72df-48ff-e21f-08d7c78005dd
+X-MS-TrafficTypeDiagnostic: MW2PR18MB2137:
+X-Microsoft-Antispam-PRVS: 
+	<MW2PR18MB213793BB4295A8DCEDBA30A3ABFA0@MW2PR18MB2137.namprd18.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-Forefront-PRVS: 034119E4F6
+X-Forefront-Antispam-Report: 
+	SFV:NSPM;SFS:(10009020)(396003)(136003)(376002)(366004)(39840400004)(346002)(199004)(478600001)(6916009)(31686004)(81156014)(6486002)(5660300002)(8936002)(4326008)(8676002)(81166006)(6666004)(956004)(2906002)(66556008)(36756003)(66946007)(2616005)(86362001)(31696002)(16526019)(316002)(66476007)(186003)(53546011)(52116002)(16576012)(26005);DIR:OUT;SFP:1101;SCL:1;SRVR:MW2PR18MB2137;H:MW2PR18MB2236.namprd18.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;
+Received-SPF: None (protection.outlook.com: xevo.com does not designate
+ permitted sender hosts)
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	PdyQRcm/hRQq6Li360C1wmGhJeIzHt3QVS0p3ot2Ry+oDsH4n7a8q6xbvXMLrPwHNf1lxEOUMozUl6xW1JmHuEz9arIKfzdvLz4XTRBxHVMHMw8aph3L2d2WQ8AnRQfuEmBVpUpSGX7NQOZdPemODDQG2w6zRzg4lHGkqbkcpNMfZRaj2qmJzw0lgHC9d0WPK74uT5s1i244m4iehYq2VfB9ChtFcuHXLdnsofqG4vtirjnvdWD12B7mG7XIHsJ/zq6lsdCEYhFzx8go/hPROl6yKKpUfSTkPTTH173IlEvXp96YOLPBRkjAkoZUuHiBia9xllQxfhtoPNJcMebrJbvmvFgpozSzNGKAE7UGE82dF6W2b24WUPHoF5fnPsjzZ4dG5NITu+6zc9BdVck5+OQh8G4g4gq8zFC9FQ5iNM2KCEvsRVTratP9pMRXoDk3
+X-MS-Exchange-AntiSpam-MessageData: 
+	iDf9u1eo7LPvuPZ6POqrDpQ1lI2yf/l3mFtv1q6Dnkktt6LwYX2kgUNBLJQn5dRqcw2GJZ3Zqxy2wSMaTHaVN/QET10Nsb/1j3g+qYqqcYSZ+YLJBq0jHJmcIsBx/3Um42bsTmN8znm75CFsvmVFaw==
+X-OriginatorOrg: xevo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 137192cc-72df-48ff-e21f-08d7c78005dd
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2020 18:54:56.8001
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kPHk8AIuyreIe17FtqDsv1s0v0+uzXusDV+Vu3syjrSf7OIKRphV/Alcmq5UqBC+
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW2PR18MB2137
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Update srcrev to pick the fixes for dma api crashes.
+On 3/9/20 11:10 AM, Martin Kelly wrote:
+> On 3/6/20 11:16 AM, Martin Kelly wrote:
+>> Hi,
+>>
+>> I'm trying to get a basic image running on the J7 EVM using only 
+>> meta-ti without meta-arago, as I want to use this board but don't need 
+>> most of the TI SDK support.
+>>
+>> I'm using the j7-evm MACHINE type, and I get a successful build but no 
+>> u-boot output. In contrast, I get fine output with an SDK built with 
+>> meta-arago. If I copy the boot partition from the SDK, I can get 
+>> u-boot output.
+>>
+>> I then noticed the following comment in k3.inc:
+>>
+>> # Please note that booting K3 platform also requires
+>> # tiboot3.bin and sysfw.itb, which are provided by meta-arago
+>> # u-boot-k3-r5 and ti-sci-fw recipes
+>> IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
+>> WKS_FILE ?= "sdimage-bootpart.wks"
+>> do_image_wic[depends] += "u-boot:do_deploy"
+>>
+>> Does this mean it's not actually possible to successfully boot a 
+>> system without pulling in meta-arago and all its many dependencies? Is 
+>> there a chance we could port these recipes into meta-ti, or will I 
+>> always have to use meta-arago?
+>>
+>> Thanks,
+>> Martin
+> 
+> Adding meta-arago to the CC list.
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
----
- recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/rec=
-ipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-index d536b1c6..792e5730 100644
---- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-+++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM =3D "file://../LICENSE;md5=3D78d9818a5=
-1b9a8e9bb89dea418bac297"
-=20
- inherit module
-=20
--MACHINE_KERNEL_PR_append =3D "g"
-+MACHINE_KERNEL_PR_append =3D "h"
- PR =3D "${MACHINE_KERNEL_PR}"
-=20
- # Need to branch out with ${PV} var
- BRANCH =3D "ti-${PV}-k5.4"
-=20
--SRCREV =3D "bd1c9751af7c693bdf1a0e6b8b96226305d45a8c"
-+SRCREV =3D "2a4fbe8353fa56011a613aeeaf69e274cd07a825"
-=20
- SRC_URI =3D "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=3Dgi=
-t;branch=3D${BRANCH}"
-=20
---=20
-2.25.1
-
+(ping)
