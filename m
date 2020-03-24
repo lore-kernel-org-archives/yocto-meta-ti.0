@@ -1,150 +1,72 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.772.1584996946878163416
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
+ by mx.groups.io with SMTP id smtpd.web11.1101.1585085254835250767
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 23 Mar 2020 13:55:47 -0700
+ Tue, 24 Mar 2020 14:27:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=fail (domain: ti.com, ip: 64.68.198.64, mailfrom: denys@ti.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 1F9A440C3D;
-	Mon, 23 Mar 2020 20:55:46 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id h3TneHneZdTW; Mon, 23 Mar 2020 20:55:46 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 03C2940C0C;
-	Mon, 23 Mar 2020 20:55:44 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 495BD16D7BC;
-	Mon, 23 Mar 2020 16:55:44 -0400 (EDT)
-From: "Denys Dmytriyenko" <denys@ti.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eCxAJGSS;
+ spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f194.google.com with SMTP id v23so3898323ply.10
+        for <meta-ti@lists.yoctoproject.org>; Tue, 24 Mar 2020 14:27:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oyEqUKUnvFhDg6brXCNXNl+EkMhgR+nmmKVARNgGGJA=;
+        b=eCxAJGSSj26qhsCoxZu61KKoBzaHsJZCx3wdottz8NY3ceIxZIiVVu9SZgAMqpsNlC
+         uucRk6/nLAMeqJx9GQTxbiyA4jhmivFwTDB6etjZkA+mo29tIH2nt/7aRsVmNbKNfLUR
+         6vY9okk3fkZrecgXdhLE5hNviA0LQQm2kCuLztTUSjl74tU/YlQ+VoPfsMGQwYWOcdMk
+         T+c/AXe1sR5eSjOSr8sbzeCtLfV6qZpx0zxUSiwMLzaEIEnbD0Vw2gIP3MPVV7dVA9MB
+         /e1dR5dpFAPQTQ2O7uA0iy9EDIM+HlnWRsZHbUvRdsPWEfL24qL52ocL+ezqemRfZPsa
+         TWHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oyEqUKUnvFhDg6brXCNXNl+EkMhgR+nmmKVARNgGGJA=;
+        b=WND5BwgJF47wEMTwlKZLTkZssO24NHJaWiTRTD8YwehyQpgNDlZ8TgGD66xKMW3p1f
+         etTIPsWbdRkQerw4+4YLsB1ZIxjmED7H/mjwcmE0FDrpLttk+e3GxRxzMHdNLheXLYgz
+         X+6nyipOzVez17BIxwSMF8aG0Hia/lhxItl+NbioAh+pXjFrQd6Zm9egGMOdcvGhneXJ
+         EIzU1QLlHhkulU9tkYStyi51VRbdR6Zl54kiJlJiLUtTUTuYLeLlnOZu/dfFb11+6gWX
+         uLY2a9algImBEH6i3sONWIw37fFkpXqJzfQiBIMI460Lk7sVSn/eG+xOLHCpBJSdK7Xd
+         70TQ==
+X-Gm-Message-State: ANhLgQ0AcR3LRpyKfMa8BcWmS910l3c5rAVkoKj+s/YEOIgVME3gQpn8
+	ZUJoyvt+RosqTA9dH8//1UV7pP38jKs=
+X-Google-Smtp-Source: ADFU+vsnps0sJ8orRuxbmtPdOVXnwc7O2RfjWtIm2PQVhfpblWsSiC++YhlYfruKh2AFE/ppufzLFg==
+X-Received: by 2002:a17:90a:d3d5:: with SMTP id d21mr7731785pjw.27.1585085253827;
+        Tue, 24 Mar 2020 14:27:33 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6809])
+        by smtp.gmail.com with ESMTPSA id o18sm1188498pfe.58.2020.03.24.14.27.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Mar 2020 14:27:33 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [master][PATCH] recipes-ti: deprecate softhsmv2/libp11/engine-pkcs11
-Date: Mon, 23 Mar 2020 16:55:44 -0400
-Message-Id: <1584996944-2848-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 2.7.4
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] layer.conf: Mark layer dunfell release compatible
+Date: Tue, 24 Mar 2020 14:27:45 -0700
+Message-Id: <20200324212745.54997-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-These components depend on OpenSSL 1.0 and haven't been updated for long time.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-ti/engine-pkcs11/engine-pkcs11_git.bb | 22 ------------
- recipes-ti/libp11/libp11_git.bb               | 19 -----------
- recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb   | 48 ---------------------------
- 3 files changed, 89 deletions(-)
- delete mode 100644 recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
- delete mode 100644 recipes-ti/libp11/libp11_git.bb
- delete mode 100644 recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb b/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
-deleted file mode 100644
-index 01bd58f..0000000
---- a/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION = "OpenSSL PKCS11 engine"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=471dacb7f0586e35729f422b8098585f"
--SECTION = "libs"
--
--inherit autotools pkgconfig
--
--DEPENDS = "openssl libtool libp11"
--
--COMPATIBLE_MACHINE = "keystone"
--
--BRANCH = "master"
--
--PV = "1.3.0.1"
--# Commit corresponds to DEV.ENGINE_PKCS11-01.03.00.01
--SRCREV = "56ac060e2245907a442376d586924af26ed7e478"
--
--SRC_URI = "git://git.ti.com/keystone-linux/engine-pkcs11.git;protocol=git;branch=${BRANCH}"
--S = "${WORKDIR}/git"
--
--FILES_${PN} += "${libdir}/engines/*.so*"
--FILES_${PN}-dbg += "${libdir}/engines/.debug"
-diff --git a/recipes-ti/libp11/libp11_git.bb b/recipes-ti/libp11/libp11_git.bb
-deleted file mode 100644
-index a768f15..0000000
---- a/recipes-ti/libp11/libp11_git.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--DESCRIPTION = "PKCS11 abstraction library"
--LICENSE = "LGPL2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
--SECTION = "libs"
--
--inherit autotools pkgconfig
--
--DEPENDS = "openssl libtool"
--RDEPENDS_${PN} = "ti-softhsmv2"
--
--COMPATIBLE_MACHINE = "keystone"
--
--SRC_URI = "git://git.ti.com/keystone-linux/libp11.git;protocol=git;branch=${BRANCH}"
--BRANCH = "master"
--# Following commit corresponds to DEV.LIBP11-01.03.00.00
--SRCREV = "43c4f63a8d803fde2bcd8e4f8969e5fe9edf0e33"
--PV = "1.3.0.0"
--
--S = "${WORKDIR}/git"
-diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-deleted file mode 100644
-index 6a196ae..0000000
---- a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-+++ /dev/null
-@@ -1,48 +0,0 @@
--DESCRIPTION = "TI softhsmv2 package"
--LICENSE = "BSD-2-Clause | BSD-3-Clause | ISC | IBM-License | FSFULLR | Zlib"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=700a883962ccff663f888f3f7221ce8f"
--SECTION = "libs"
--
--mntdir = "/mnt"
--
--inherit autotools pkgconfig
--
--DEPENDS = "openssl libdaemon zlib"
--COMPATIBLE_MACHINE = "keystone"
--
--BRANCH = "ti-softhsm-rebase"
--SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=${BRANCH}"
--#Following commit corresponds to tag DEV.SOFTHSM-02.00.00.00
--SRCREV = "b0eef602c03583e59c289ba113b64eaa4f5cac13"
--PV = "2.0.0.0"
--PR = "r0"
--
--S = "${WORKDIR}/git"
--
--CFLAGS += "-mno-unaligned-access"
--CPPFLAGS += "-mno-unaligned-access"
--
--EXTRA_OECONF += " \
--    --with-zlib=${STAGING_EXECPREFIXDIR} \
--    --with-openssl=${STAGING_EXECPREFIXDIR} \
--"
--
--INITSCRIPT_NAME = "softhsm-daemon.sh"
--INITSCRIPT_PARAMS = "defaults 10"
--
--inherit update-rc.d
--
--FILES_${PN} += "${libdir}/softhsm/lib*.so.* ${mntdir}/*"
--FILES_${PN}-dbg += "${libdir}/softhsm/.debug"
--FILES_${PN}-staticdev += "${libdir}/softhsm/*.a"
--FILES_${PN}-dev += "${libdir}/softhsm/*.la ${libdir}/softhsm/lib*.so"
--
--INSANE_SKIP_${PN}-dev = "dev-elf"
--
--do_install_append() {
--	install -d ${D}${mntdir}/securedbv0
--	install -d ${D}${mntdir}/securedbv1
--
--	install -d ${D}${sysconfdir}/init.d/
--	install -c -m 755 ${S}/src/bin/daemon/softhsm-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
--}
+diff --git a/conf/layer.conf b/conf/layer.conf
+index cf00d48d..33a74070 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -8,7 +8,7 @@ BBFILE_COLLECTIONS += "meta-ti"
+ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti = "6"
+ 
+-LAYERSERIES_COMPAT_meta-ti = "sumo thud warrior zeus"
++LAYERSERIES_COMPAT_meta-ti = "sumo thud warrior zeus dunfell"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
 -- 
-2.7.4
+2.26.0
 
