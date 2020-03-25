@@ -1,80 +1,85 @@
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
- by mx.groups.io with SMTP id smtpd.web10.1194.1585085374159280217
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web12.11965.1585144851569825931
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 24 Mar 2020 14:29:34 -0700
+ Wed, 25 Mar 2020 07:00:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BEF7p+GP;
- spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f196.google.com with SMTP id b9so7939185pls.12
-        for <meta-ti@lists.yoctoproject.org>; Tue, 24 Mar 2020 14:29:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=S8WPcxzsBbauppuUfL2Hh/Zk6/8L3agivkKxvHbD2GY=;
-        b=BEF7p+GPIV9RqWeAaIdeJ67YGniLpX3GUAF+EtboKaIXN2o0y2HTXAX1JTLWUO+utz
-         DnnP3N0LiIU9QgbcQsUXj/iutjptY8Bk/iSdAPzlPfWHT7AiUczYrGh0VJqk74oKHUjp
-         +bnUm3IjQcL8o6TVJ3eKj0ZFwmQ+f7fsNjRyThgvP6UZSNgBcAKpxNxdRmV0XlIcUrLO
-         9kA2bDTEycInyFuk1+0iDEVPCXamHZDcfct2E1O/pWpwNcrSFi6LAYIUq0iYGhgWkTCj
-         TteYqhAfU3Nnrgy6cVvb26IIkd/TjY6boHFbvoCXTyTP0S/5pHJ9chRPl+NKo1XZbseI
-         PdFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=S8WPcxzsBbauppuUfL2Hh/Zk6/8L3agivkKxvHbD2GY=;
-        b=H3JumNXSviC7IZ/X/9vF1exnB1SCT94t6gENK4x6CgkvAd4Cd+pdzJH1LBjf3YbbK2
-         UqdEPOS2BPbiqXwGfuk2u4datyqbCyhFPHlzMlMP3egNRRp+L+Swzdkzgtbkvhbgn7In
-         yYrdfBBqJ9apWLBrnYLK3AjO5va+Nlm4MIpGfJQfi/pRP0s2CSZ9mRHXfzgeWjNAAWtK
-         umpZKuThS+2UhRESh6TnKrTACpCeo4J96lBrAv84D4lqMCTELReUTIJtkWUS0UrLzkL9
-         ++PVoJQd21B4sLNWKTTrIb9UMdK+VV7FLg1tWq+PkmRj2vN1MAHhJiOM1bezxOI18Hjh
-         l3aw==
-X-Gm-Message-State: ANhLgQ1ajl/ejBWNeW/ingnRBYBh6meJECYjk6jlRSTLzXKBea2skHJ6
-	ddrrsIbFFgOE8RH/ZjweLDNkrqEo5Yg=
-X-Google-Smtp-Source: ADFU+vvO+245jOhXhWdKEEXeKtGBva8LrcqTigXapi6fb+D8gzul7vjBBl4fmzjpPwWB8/U7ukiRNw==
-X-Received: by 2002:a17:90a:368f:: with SMTP id t15mr7952408pjb.23.1585085372832;
-        Tue, 24 Mar 2020 14:29:32 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6809])
-        by smtp.gmail.com with ESMTPSA id s13sm12963836pfm.195.2020.03.24.14.29.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Mar 2020 14:29:32 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] README: Update mailing list address
-Date: Tue, 24 Mar 2020 14:29:45 -0700
-Message-Id: <20200324212945.55256-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.0
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=B3WGCS+4;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: m-radhakrishnan2@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id 06128E01835; Wed, 25 Mar 2020 07:00:51 -0700 (PDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 47D7CE017FC
+	for <meta-ti@yoctoproject.org>; Wed, 25 Mar 2020 07:00:49 -0700 (PDT)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 02PE0m7u105280
+	for <meta-ti@yoctoproject.org>; Wed, 25 Mar 2020 09:00:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1585144848;
+	bh=9zsV8XQF79v+GNuPX1R/P3pAJqHTadhZvQqb6Un72Q4=;
+	h=From:To:Subject:Date;
+	b=B3WGCS+4hiYJyn4iRuG3UhW7qxiHg9JKqDUlBS8TAmIfneGqBXjUsTAoUD4sKNjdN
+	 GMcxJgsHnk7uuX7xTr4npoDM6xOc+QX5wt3yZj7Ptv0rtGsdwFdRiLRf1B3o5a0CjH
+	 hYAOLljLc5QxqSVlS/pl6BVloROYEbRZ1J26AKOA=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 02PE0mwU042150
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Wed, 25 Mar 2020 09:00:48 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 25
+ Mar 2020 09:00:48 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Wed, 25 Mar 2020 09:00:48 -0500
+Received: from UDA0875154.gt.design.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 02PE0mQr094075
+	for <meta-ti@yoctoproject.org>; Wed, 25 Mar 2020 09:00:48 -0500
+From: "Mahesh Radhakrishnan" <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Subject: [thud/master][PATCH] sciclient-rtos: Specifying HS_BUILD=yes for am65xx-evm-hs targets
+Date: Wed, 25 Mar 2020 10:00:46 -0400
+Message-ID: <20200325140046.38709-1-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-While here format it a little bit to make
-mailing list address stand out
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- README | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ recipes-bsp/sciclient/sciclient-rtos_git.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/README b/README
-index 778a9756..65496af4 100644
---- a/README
-+++ b/README
-@@ -18,8 +18,12 @@ distro-less (only with OE-Core), with Yocto/Poky, with Angstrom or Arago.
- Please follow the recommended setup procedures of your OE distribution.
+diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+index d14c4a12..74a64c1c 100644
+--- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
++++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+@@ -25,6 +25,10 @@ SCICLIENT_ROOTPATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv
+ export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+ export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages"
  
++BUILD_HS = ""
++BUILD_HS_am65xx-hs-evm = "yes"
++export BUILD_HS
++
+ # Sciclient for am65x supports mcu1_1 in addition to the default cores in TI_PDK_LIMIT_CORES
+ TI_PDK_LIMIT_CORES_append_am65xx = " mcu1_1"
  
--Send pull requests, patches, comments or questions to meta-ti@yoctoproject.org
-+Send pull requests, patches, comments or questions to 
-+
-+meta-ti@lists.yoctoproject.org
-+
- Please note - meta-ti mailing list requires subscription for posting:
-+
- https://lists.yoctoproject.org/g/meta-ti
- 
- Maintainers: Denys Dmytriyenko <denys@ti.com>
 -- 
-2.26.0
+2.17.1
 
