@@ -1,80 +1,68 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.764.1585870065042806509
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.1540.1585962588380272375
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 02 Apr 2020 16:27:45 -0700
+ Fri, 03 Apr 2020 18:09:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=PHPr7J7E;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: sam.nelson@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 032NRi0g094276
-	for <meta-ti@lists.yoctoproject.org>; Thu, 2 Apr 2020 18:27:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1585870064;
-	bh=gXVUHeLKjGxngeFD8cOxXk/j7jw4S6F8yVqjwOV3cuU=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=PHPr7J7Eqjf9mJnAMVDP+EgnTdWFutt7WH0iWiFa6eZ3jdkPe+WZcf72YWjy6uwyR
-	 Hfv6cpc3S/euoJujRymUfGP6OtHMCMiJemuxKbEuawhgqzJ5RxDbza0nAwXlUozQDY
-	 0XhrqgPavFjyAISwi3wFkPwfHm4ay7g0Oh1QdaRQ=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 032NRi6Q052522
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 2 Apr 2020 18:27:44 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Thu, 2 Apr
- 2020 18:27:44 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Thu, 2 Apr 2020 18:27:43 -0500
-Received: from uda0862859a.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 032NRdMT100706;
-	Thu, 2 Apr 2020 18:27:43 -0500
-From: "Sam Nelson" <sam.nelson@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Sam Nelson <sam.nelson@ti.com>
-Subject: [meta-ti][thud][PATCH 3/3] ti-ipc: Update commit for release 3.50.04.08 release
-Date: Thu, 2 Apr 2020 19:27:36 -0400
-Message-ID: <1585870056-13775-3-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1585870056-13775-1-git-send-email-sam.nelson@ti.com>
-References: <1585870056-13775-1-git-send-email-sam.nelson@ti.com>
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8933340BFB;
+	Sat,  4 Apr 2020 01:09:47 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7pOWPOjUDo0P; Sat,  4 Apr 2020 01:09:47 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6ECD140027;
+	Sat,  4 Apr 2020 01:09:46 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 97A0D1718F5;
+	Fri,  3 Apr 2020 21:09:45 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [zeus/master][PATCH 2/2] linux-ti-staging: update to 5.4.28
+Date: Fri,  3 Apr 2020 21:09:43 -0400
+Message-Id: <1585962583-41802-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1585962583-41802-1-git-send-email-denis@denix.org>
+References: <1585962583-41802-1-git-send-email-denis@denix.org>
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/ipc/ti-ipc-common.inc | 2 +-
- recipes-ti/ipc/ti-ipc.inc        | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_5.4.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_5.4.bb    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
-index 86a0fd0..07b380f 100644
---- a/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/recipes-ti/ipc/ti-ipc-common.inc
-@@ -1,5 +1,5 @@
- PV = "3.50.04.08"
--INC_PR = "r0"
-+INC_PR = "r1"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+index dfe4445..ac07b23 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.4:"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_HOST ?= "null"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index d1eaad2..4f68e31 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -8,8 +8,8 @@ TI_IPC_GIT_URI = "git://git.ti.com/ipc/ipcdev.git"
- TI_IPC_GIT_PROTOCOL = "git"
- TI_IPC_GIT_BRANCH = "3.50"
+ BRANCH = "ti-rt-linux-5.4.y"
  
--#Corresponds to 3.50.04.08
--TI_IPC_SRCREV = "1d53b856338b86d1979fe09345c0b382913a848a"
-+#Corresponds to 3.50.04.08A
-+TI_IPC_SRCREV = "5e72155431e955c5fcba34d844812d234093c846"
+-SRCREV = "27ac613bbce13841a47fcc7341d7c14333b8e0e9"
+-PV = "5.4.20+git${SRCPV}"
++SRCREV = "c3dd64420d144641f0a803523185dffa26250f8b"
++PV = "5.4.28+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+index 49a4c18..ecf72af 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+@@ -60,8 +60,8 @@ S = "${WORKDIR}/git"
  
- BRANCH = "${TI_IPC_GIT_BRANCH}"
- SRC_URI = "${TI_IPC_GIT_URI};protocol=${TI_IPC_GIT_PROTOCOL};branch=${BRANCH};name=ipcdev"
+ BRANCH = "ti-linux-5.4.y"
+ 
+-SRCREV = "70338004346078dd120c51a1cb22ed7d5bfdfca9"
+-PV = "5.4.20+git${SRCPV}"
++SRCREV = "6f3bf13d53820fc12432d7052744be2ee046fc92"
++PV = "5.4.28+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
 -- 
-1.9.1
+2.7.4
 
