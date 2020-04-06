@@ -1,53 +1,57 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1616.1586202248428620887
+ by mx.groups.io with SMTP id smtpd.web11.2762.1586205429963094523
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 06 Apr 2020 12:44:08 -0700
+ Mon, 06 Apr 2020 13:37:10 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id BB1FA40BA3;
-	Mon,  6 Apr 2020 19:44:07 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5101040BA3;
+	Mon,  6 Apr 2020 20:37:09 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eM470QCojTsf; Mon,  6 Apr 2020 19:44:07 +0000 (UTC)
+	with ESMTP id FlKVNDvG0bOt; Mon,  6 Apr 2020 20:37:09 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3AD7940A3A;
-	Mon,  6 Apr 2020 19:44:06 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1137A40C18;
+	Mon,  6 Apr 2020 20:37:08 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 778A716E1CC;
-	Mon,  6 Apr 2020 15:44:05 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id BDE941718FF;
+	Mon,  6 Apr 2020 16:37:07 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [master][PATCH] ti-img-rogue-umlibs: drop RDEPENDS on python-core
-Date: Mon,  6 Apr 2020 15:44:05 -0400
-Message-Id: <1586202245-53617-1-git-send-email-denis@denix.org>
+Subject: [master][PATCH 4/8] libulm: require dsp machine feature, cleanup
+Date: Mon,  6 Apr 2020 16:37:01 -0400
+Message-Id: <1586205425-55562-4-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1586205425-55562-1-git-send-email-denis@denix.org>
+References: <1586205425-55562-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-* Python2 is deprecated
-* It doesn't seem there's still a run-time dependency on Python2
-
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb | 1 -
- 1 file changed, 1 deletion(-)
+ recipes-bsp/dsptop/libulm_git.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-index 0e0335b..ce92bb1 100644
---- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-+++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-@@ -26,7 +26,6 @@ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm"
+diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
+index 7bf7f09..47248ff 100644
+--- a/recipes-bsp/dsptop/libulm_git.bb
++++ b/recipes-bsp/dsptop/libulm_git.bb
+@@ -1,7 +1,11 @@
+-DESCRIPTION = "TI dsptop utility."
++SUMMARY = "TI Usage & Load Monitor Implementation"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://../debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979"
  
- DEPENDS += "libdrm wayland expat"
- RDEPENDS_${PN} += "bash"
--RDEPENDS_${PN} += "python-core"
- RDEPENDS_${PN} += "wayland expat"
++inherit features_check
++
++REQUIRED_MACHINE_FEATURES = "dsp"
++
+ DEPENDS = "ti-cgt6x-native"
+ PR = "${INC_PR}.0"
  
- RPROVIDES_${PN} = "libegl libgles1 libgles2 libgbm"
 -- 
 2.7.4
 
