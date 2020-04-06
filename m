@@ -1,118 +1,82 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2936.1586205595120138561
+Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
+ by mx.groups.io with SMTP id smtpd.web10.1114.1586211573780522802
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 06 Apr 2020 13:39:55 -0700
+ Mon, 06 Apr 2020 15:19:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8846B40BA3;
-	Mon,  6 Apr 2020 20:39:54 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LZGPBaaQDHyk; Mon,  6 Apr 2020 20:39:54 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7400E40B73;
-	Mon,  6 Apr 2020 20:39:53 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 3025517126C;
-	Mon,  6 Apr 2020 16:39:53 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [master][PATCH] linux-ti-staging: fix perf build against latest libbfd
-Date: Mon,  6 Apr 2020 16:39:51 -0400
-Message-Id: <1586205591-55907-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ZwvmUGSw;
+ spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: m-radhakrishnan2@ti.com)
+Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
+	id 9D2C3E01979; Mon,  6 Apr 2020 15:19:33 -0700 (PDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	yocto-www.yoctoproject.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-HAM-Report: 
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
+	*      medium trust
+	*      [198.47.23.249 listed in list.dnswl.org]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+	*       domain
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63950E01972
+	for <meta-ti@yoctoproject.org>; Mon,  6 Apr 2020 15:19:31 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 036MJVth098334
+	for <meta-ti@yoctoproject.org>; Mon, 6 Apr 2020 17:19:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1586211571;
+	bh=inHMrvf7QK21Qf2kXcOrzB45uBgvS923WknQAILouCk=;
+	h=From:To:Subject:Date;
+	b=ZwvmUGSwI1fBGmYd635e32mrTfjt/aA/s8GO/v9wWu0DrJiIZoWXkL4hI0TpVrTTi
+	 Zw0QNbzg7NDMzeDOXLfNWEOSXf9xTZVAulznKHdfI8V+1lz/Wvj6g+Qey7tWOmU3OQ
+	 VAtrrJQrCAQNWwrPx06yullRHEA/zNCxaHdJffXQ=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 036MJViQ085127
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Mon, 6 Apr 2020 17:19:31 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Mon, 6 Apr
+ 2020 17:19:31 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Mon, 6 Apr 2020 17:19:31 -0500
+Received: from UDA0875154.gt.design.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 036MJVBT017306
+	for <meta-ti@yoctoproject.org>; Mon, 6 Apr 2020 17:19:31 -0500
+From: "Mahesh Radhakrishnan" <m-radhakrishnan2@ti.com>
+To: <meta-ti@yoctoproject.org>
+Subject: [zeus/master][PATCH 0/5] 6.3 RTOS Patchset 1
+Date: Mon, 6 Apr 2020 18:19:23 -0400
+Message-ID: <20200406221928.23776-1-m-radhakrishnan2@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+RTOS patchset 1 for 6.3 release
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- ...ake-perf-able-to-build-with-latest-libbfd.patch | 60 ++++++++++++++++++++++
- recipes-kernel/linux/linux-ti-staging_5.4.bb       |  1 +
- 2 files changed, 61 insertions(+)
- create mode 100644 recipes-kernel/linux/files/0001-perf-Make-perf-able-to-build-with-latest-libbfd.patch
+Mahesh Radhakrishnan (5):
+  ti-pdk:SRCREV update to 2020.4.5
+  common-csl-ip:SRCREV update to 03.03.00.17A
+  pm-lld-rtos:SRCREV update to 01.08.00.23A
+  sa-lld:SRCREV update to 04.00.00.03C
+  starterware-inc: SRCREV update to 02.01.01.12A
 
-diff --git a/recipes-kernel/linux/files/0001-perf-Make-perf-able-to-build-with-latest-libbfd.patch b/recipes-kernel/linux/files/0001-perf-Make-perf-able-to-build-with-latest-libbfd.patch
-new file mode 100644
-index 0000000..f5220a8
---- /dev/null
-+++ b/recipes-kernel/linux/files/0001-perf-Make-perf-able-to-build-with-latest-libbfd.patch
-@@ -0,0 +1,60 @@
-+From 0ada120c883d4f1f6aafd01cf0fbb10d8bbba015 Mon Sep 17 00:00:00 2001
-+From: Changbin Du <changbin.du@gmail.com>
-+Date: Tue, 28 Jan 2020 23:29:38 +0800
-+Subject: [PATCH] perf: Make perf able to build with latest libbfd
-+
-+libbfd has changed the bfd_section_* macros to inline functions
-+bfd_section_<field> since 2019-09-18. See below two commits:
-+  o http://www.sourceware.org/ml/gdb-cvs/2019-09/msg00064.html
-+  o https://www.sourceware.org/ml/gdb-cvs/2019-09/msg00072.html
-+
-+This fix make perf able to build with both old and new libbfd.
-+
-+Signed-off-by: Changbin Du <changbin.du@gmail.com>
-+Acked-by: Jiri Olsa <jolsa@redhat.com>
-+Cc: Peter Zijlstra <peterz@infradead.org>
-+Link: http://lore.kernel.org/lkml/20200128152938.31413-1-changbin.du@gmail.com
-+Signed-off-by: Arnaldo Carvalho de Melo <acme@redhat.com>
-+---
-+ tools/perf/util/srcline.c | 16 +++++++++++++++-
-+ 1 file changed, 15 insertions(+), 1 deletion(-)
-+
-+diff --git a/tools/perf/util/srcline.c b/tools/perf/util/srcline.c
-+index 6ccf6f6..5b7d6c1 100644
-+--- a/tools/perf/util/srcline.c
-++++ b/tools/perf/util/srcline.c
-+@@ -193,16 +193,30 @@ static void find_address_in_section(bfd *abfd, asection *section, void *data)
-+ 	bfd_vma pc, vma;
-+ 	bfd_size_type size;
-+ 	struct a2l_data *a2l = data;
-++	flagword flags;
-+ 
-+ 	if (a2l->found)
-+ 		return;
-+ 
-+-	if ((bfd_get_section_flags(abfd, section) & SEC_ALLOC) == 0)
-++#ifdef bfd_get_section_flags
-++	flags = bfd_get_section_flags(abfd, section);
-++#else
-++	flags = bfd_section_flags(section);
-++#endif
-++	if ((flags & SEC_ALLOC) == 0)
-+ 		return;
-+ 
-+ 	pc = a2l->addr;
-++#ifdef bfd_get_section_vma
-+ 	vma = bfd_get_section_vma(abfd, section);
-++#else
-++	vma = bfd_section_vma(section);
-++#endif
-++#ifdef bfd_get_section_size
-+ 	size = bfd_get_section_size(section);
-++#else
-++	size = bfd_section_size(section);
-++#endif
-+ 
-+ 	if (pc < vma || pc >= vma + size)
-+ 		return;
-+-- 
-+2.7.4
-+
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-index 49a4c18..3530657 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-@@ -70,6 +70,7 @@ PR = "${MACHINE_KERNEL_PR}"
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
- KERNEL_GIT_PROTOCOL = "git"
- SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-+            file://0001-perf-Make-perf-able-to-build-with-latest-libbfd.patch \
-             file://defconfig"
- 
- FILES_${KERNEL_PACKAGE_NAME}-devicetree += "/${KERNEL_IMAGEDEST}/*.itb"
+ classes/ti-pdk-fetch.bbclass                | 4 ++--
+ recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
+ recipes-bsp/pm-lld/pm-lld-rtos_git.bb       | 6 +++---
+ recipes-bsp/sa-lld/sa-lld.inc               | 6 +++---
+ recipes-bsp/starterware/starterware.inc     | 6 +++---
+ 5 files changed, 14 insertions(+), 14 deletions(-)
+
 -- 
-2.7.4
+2.17.1
 
