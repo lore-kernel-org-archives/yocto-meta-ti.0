@@ -1,54 +1,71 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.748.1587760941148537541
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web12.581.1587831929831770533
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 24 Apr 2020 13:42:21 -0700
+ Sat, 25 Apr 2020 09:25:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 41F9F40C34;
-	Fri, 24 Apr 2020 20:42:20 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KXhCTxOHWCiv; Fri, 24 Apr 2020 20:42:20 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 27BBA40BCC;
-	Fri, 24 Apr 2020 20:42:19 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id D1822172A04;
-	Fri, 24 Apr 2020 16:42:18 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [master][PATCH 2/2] u-boot-ti-staging: update to the latest snapshot
-Date: Fri, 24 Apr 2020 16:42:13 -0400
-Message-Id: <1587760933-29237-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1587760933-29237-1-git-send-email-denis@denix.org>
-References: <1587760933-29237-1-git-send-email-denis@denix.org>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=S7FMl+0b;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: nikhil.nd@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 03PGPSAO105394;
+	Sat, 25 Apr 2020 11:25:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1587831928;
+	bh=LU8tTw8e5lWOfpelF1rD7z/LNvfYztYlmSKhuFlJizE=;
+	h=From:To:CC:Subject:Date;
+	b=S7FMl+0bNphrZzY1eemuNsyHtUgjaHYZazR0eGhgCeiGzd46+Go8uxaMHIeCxtXcz
+	 wgGwJAMkIV2eO6DhWuzyujvoFXRFQo+amnBxZ9sXFGrqnKN2RY/KOtwNfsvJCJl5W7
+	 TFas6ziS81SqdHvBBn4lcGJWHFyP0kD+2Sue1ZLE=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 03PGPSIH026316
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Sat, 25 Apr 2020 11:25:28 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Sat, 25
+ Apr 2020 11:25:28 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Sat, 25 Apr 2020 11:25:28 -0500
+Received: from swubn03.india.englab.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 03PGPQpP117494;
+	Sat, 25 Apr 2020 11:25:27 -0500
+From: "Nikhil Devshatwar" <nikhil.nd@ti.com>
+To: <denys@ti.com>
+CC: <meta-ti@yoctoproject.org>, <meta-ti@lists.yoctoproject.org>,
+        Nikhil
+ Devshatwar <nikhil.nd@ti.com>
+Subject: [meta-ti][zeus/master PATCH v1] recipes-kernel: linux-ti-staging: Autoload kernel module rpmsg_kdrv_switch
+Date: Sat, 25 Apr 2020 21:55:16 +0530
+Message-ID: <20200425162516.21925-1-nikhil.nd@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+From: Nikhil Devshatwar <nikhil.nd@ti.com>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+rpmsg_kdrv_switch kernel module is implicitly dependent on the
+for virtual ethernet driver. Ensure that the module is auto loaded
+by default foe j7-evm platfom.
+
+Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_5.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-index 5212773..1fd7de3 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+index ecf72af9..1ec2a2fd 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+@@ -74,6 +74,7 @@ SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
  
--PR = "r7"
-+PR = "r8"
+ FILES_${KERNEL_PACKAGE_NAME}-devicetree += "/${KERNEL_IMAGEDEST}/*.itb"
  
- BRANCH = "ti-u-boot-2020.01"
- 
--SRCREV = "ae8ceb7b6e3acb4bc90f730e33dafc7b65066591"
-+SRCREV = "7329fcabd5ac2f6c159b0c196f2c9d3e6f691627"
++KERNEL_MODULE_AUTOLOAD_append_j7-evm = " rpmsg_kdrv_switch"
+ # Special configuration for remoteproc/rpmsg IPC modules
+ module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
+ module_conf_ti_k3_r5_remoteproc = "softdep ti_k3_r5_remoteproc pre: virtio_rpmsg_bus"
 -- 
-2.7.4
+2.17.1
 
