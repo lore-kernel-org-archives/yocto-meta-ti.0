@@ -1,29 +1,29 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.352.1588271038950967045
+ by mx.groups.io with SMTP id smtpd.web11.386.1588271149470938607
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 30 Apr 2020 11:23:59 -0700
+ Thu, 30 Apr 2020 11:25:49 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4A9C640C0F;
-	Thu, 30 Apr 2020 18:23:58 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 76E7940C1F
+	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Apr 2020 18:25:48 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9T9ptzU4DE0p; Thu, 30 Apr 2020 18:23:58 +0000 (UTC)
+	with ESMTP id Hz2lARbXN6eS for <meta-ti@lists.yoctoproject.org>;
+	Thu, 30 Apr 2020 18:25:48 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 30D74400E7;
-	Thu, 30 Apr 2020 18:23:57 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6DA2740C1C
+	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Apr 2020 18:25:48 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 895ED17272F;
-	Thu, 30 Apr 2020 14:23:56 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 3053017272F
+	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Apr 2020 14:25:48 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] test1, please ignore
-Date: Thu, 30 Apr 2020 14:23:51 -0400
-Message-Id: <1588271031-51121-1-git-send-email-denis@denix.org>
+Subject: [PATCH] test3, please ignore
+Date: Thu, 30 Apr 2020 14:25:48 -0400
+Message-Id: <1588271148-51714-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 
 From: Denys Dmytriyenko <denys@ti.com>
