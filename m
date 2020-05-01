@@ -1,47 +1,73 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1184.1588282775063393303
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.2911.1588297772363985326
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 30 Apr 2020 14:39:35 -0700
+ Thu, 30 Apr 2020 18:49:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 7ACCC40C0F
-	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Apr 2020 21:39:34 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id d_nnFBA9oqXQ for <meta-ti@lists.yoctoproject.org>;
-	Thu, 30 Apr 2020 21:39:34 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6BE1C40A9E
-	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Apr 2020 21:39:34 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 2ABE0172B46
-	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Apr 2020 17:39:34 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Subject: [PATCH] test5, please ignore
-Date: Thu, 30 Apr 2020 17:39:34 -0400
-Message-Id: <1588282774-10811-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=RaQg98kg;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: denys@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0411nUAD082456;
+	Thu, 30 Apr 2020 20:49:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1588297770;
+	bh=ezW18hgI1tBCBvuTPWMJVnRUPuKmij2uaM4mxXX4sTY=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=RaQg98kgdYtljXm4RJpzWspLTDU0D/OVjYjQxBkqAcBEWrf2qjcdFx0PqF2nLXhaA
+	 8DQvI7olpu9WmbevOGy9XDLDyGF0Bn1aWg5aYLZIFuLUz1l3ZswpDpHt+tdTPQ6uHU
+	 R3qWdgMNqh5Za5BT55rgnDXrIfjX/utuwl4uf5TQ=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0411nUud104096;
+	Thu, 30 Apr 2020 20:49:30 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 30
+ Apr 2020 20:49:30 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Thu, 30 Apr 2020 20:49:30 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0411nUp0105291;
+	Thu, 30 Apr 2020 20:49:30 -0500
+Date: Thu, 30 Apr 2020 21:49:29 -0400
+From: "Denys Dmytriyenko" <denys@ti.com>
+To: Paul Barker <pbarker@konsulko.com>
+CC: <meta-ti@lists.yoctoproject.org>, <meta-arago@arago-project.org>
+Subject: Re: [meta-arago] Arago & meta-ti support for Yocto Project LTS release
+Message-ID: <20200501014929.GG11212@beryl>
+References: <CAM9ZRVvLaQTzUH29DauqEgSuw21iRrKneGqB8i0SXy3OvW-08g@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAM9ZRVvLaQTzUH29DauqEgSuw21iRrKneGqB8i0SXy3OvW-08g@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hi Paul,
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- README | 1 +
- 1 file changed, 1 insertion(+)
+Yes, dunfell will be officially supported. I should be branching off within 
+days - still waiting on all the dependeices.
 
-diff --git a/README b/README
-index e6d342b..078e159 100644
---- a/README
-+++ b/README
-@@ -1,3 +1,4 @@
-+
- The official OpenEmbedded/Yocto BSP layer for Texas Instruments platforms.
- 
- It is hosted on http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/ with the
--- 
-2.7.4
+Whether it will be full 2 years support or not - I'm not sure yet.
 
+Denys
+
+
+On Wed, Apr 29, 2020 at 09:33:22AM +0100, Paul Barker wrote:
+> Hi folks,
+> 
+> Is there a plan to support the new Yocto Project LTS release (dunfell)
+> for Arago distro and meta-ti? I know usually every other Yocto Project
+> release is supported, zeus was supported so usually dunfell wouldn't
+> be.
+> 
+> If so, are you planning to support this for the full LTS period of 2 years?
+> 
+> I imagine this will be supported but would be good to get confirmation.
+> 
+> Thanks,
+> Paul
+> _______________________________________________
+> meta-arago mailing list
+> meta-arago@arago-project.org
+> http://arago-project.org/cgi-bin/mailman/listinfo/meta-arago
