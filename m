@@ -1,203 +1,405 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web12.35684.1588556771504263084
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.15262.1588624940864721847
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 03 May 2020 18:46:11 -0700
+ Mon, 04 May 2020 13:42:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rjgSMUH+;
- spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: nsaulnier@ti.com)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5F5BEE01AD9; Sun,  3 May 2020 18:46:11 -0700 (PDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED,URIBL_RED autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: 
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-	*  0.0 URIBL_RED Contains an URL listed in the URIBL redlist
-	*      [URIs: yoctoproject.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
-	*       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3EC1BE01AD6
-	for <meta-ti@yoctoproject.org>; Sun,  3 May 2020 18:46:10 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0441k9FU126442
-	for <meta-ti@yoctoproject.org>; Sun, 3 May 2020 20:46:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1588556769;
-	bh=KGBK5RC6vDPDFlz7ocK8pcBdqoGqNsrVDuFFzPsMkiM=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=rjgSMUH+KhiaZNEtH+CHmZXefECK8uQ9wZFn/0Y0kEAAlxpPa5PHJFdgrzjx+h5yZ
-	 xRvtRfM2cymn/7C6HUhEP66BMULclQS+J2dVEVtAh2lRdltZtBkAKXfVmtEvZj2Q77
-	 HXvdBs4pnD8HEgMejYCD7HBG0G9swrkLANvJXIP0=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0441k99E079849
-	for <meta-ti@yoctoproject.org>; Sun, 3 May 2020 20:46:09 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Sun, 3 May
- 2020 20:46:09 -0500
-Received: from DFLE115.ent.ti.com ([fe80::4af:9649:4629:5ff4]) by
- DFLE115.ent.ti.com ([fe80::4af:9649:4629:5ff4%18]) with mapi id
- 15.01.1979.003; Sun, 3 May 2020 20:46:09 -0500
-From: "Nick Saulnier" <nsaulnier@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-CC: "Dmytriyenko, Denys" <denys@ti.com>,
-        "Stiffler, Jacob"
-	<j-stiffler@ti.com>, "Anna, Suman" <s-anna@ti.com>
-Subject: Re: [meta-ti][PATCH v2] pru-icss: update Manifest, PSSP, add am65x tx_pru
-Thread-Topic: [meta-ti][PATCH v2] pru-icss: update Manifest, PSSP, add am65x
- tx_pru
-Thread-Index: AQHWIbWMBOf3GdPev0SJpDwxz8umJKiXJ7hQ
-Date: Mon, 4 May 2020 01:46:09 +0000
-Message-ID: <09bd098fe47e41e483b851ad6602cca5@ti.com>
-References: <20200504014418.9951-1-nsaulnier@ti.com>
-In-Reply-To: <20200504014418.9951-1-nsaulnier@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.95.168]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B64CF40C26;
+	Mon,  4 May 2020 20:42:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kcuzc_2Jjc7t; Mon,  4 May 2020 20:42:19 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7617540B3E;
+	Mon,  4 May 2020 20:42:18 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id A707616EC83;
+	Mon,  4 May 2020 16:42:17 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [master][PATCH] conf,recipes-bsp: support building for K3 R5F cores via multiconfig
+Date: Mon,  4 May 2020 16:41:56 -0400
+Message-Id: <1588624916-32174-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-Removed tabs, placed on master branch instead of Zeus branch.
+From: Denys Dmytriyenko <denys@ti.com>
 
------Original Message-----
-From: Saulnier, Nick=20
-Sent: Sunday, May 03, 2020 8:44 PM
-To: meta-ti@yoctoproject.org
-Cc: Saulnier, Nick; Dmytriyenko, Denys; Stiffler, Jacob; Anna, Suman
-Subject: [meta-ti][PATCH v2] pru-icss: update Manifest, PSSP, add am65x tx_=
-pru
+K3 Multicore SoC architecture defines different functional domains, each
+containing specific processing cores and peripherals. Early boot is normally
+handled by running bootloader and loading SYSFW on MCU Cortex-R5F core:
+https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am65x/README
+https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/j721e/README
 
-- Updated the Software Manifest from 6.0 -> 6.1
-	removes GPL-2.0 license from package
-	adds j7 processor
+This change adds support for building bootloader and SYSFW ITB image for
+K3 Cortex-R5F cores via multiconfig.
 
-- Updated to PRU Software Support Package v5.7.0
-	Updated AM65x code for AM65x Silicon Revision 2.0
-	Updated software manifest & code to remove GPL-2.0 license
-	Minor README improvements
-
-- Add AM65x SR2.0 TX_PRU cores & firmware to recipe
-
-Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/pru/pru-icss_git.bb | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
+ conf/machine/am65xx-evm-k3r5-sr2.conf      | 11 ++++
+ conf/machine/am65xx-evm-k3r5.conf          | 12 ++++
+ conf/machine/am65xx-evm.conf               |  6 ++
+ conf/machine/am65xx-hs-evm-k3r5.conf       | 13 +++++
+ conf/machine/am65xx-hs-evm.conf            | 20 ++++++-
+ conf/machine/include/k3.inc                | 13 +++--
+ conf/machine/include/k3r5.inc              | 23 ++++++++
+ conf/machine/j7-evm-k3r5.conf              | 11 ++++
+ conf/machine/j7-hs-evm-k3r5.conf           | 13 +++++
+ conf/multiconfig/k3r5-sr2.conf             |  3 +
+ conf/multiconfig/k3r5.conf                 |  5 ++
+ recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb | 94 ++++++++++++++++++++++++++++++
+ recipes-bsp/u-boot/u-boot-ti.inc           |  1 +
+ 13 files changed, 219 insertions(+), 6 deletions(-)
+ create mode 100644 conf/machine/am65xx-evm-k3r5-sr2.conf
+ create mode 100644 conf/machine/am65xx-evm-k3r5.conf
+ create mode 100644 conf/machine/am65xx-hs-evm-k3r5.conf
+ create mode 100644 conf/machine/include/k3r5.inc
+ create mode 100644 conf/machine/j7-evm-k3r5.conf
+ create mode 100644 conf/machine/j7-hs-evm-k3r5.conf
+ create mode 100644 conf/multiconfig/k3r5-sr2.conf
+ create mode 100644 conf/multiconfig/k3r5.conf
+ create mode 100644 recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb
 
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git=
-.bb
-index 72888515273b..fc7b6f7dd345 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -1,17 +1,17 @@
- DESCRIPTION =3D "Programmable Real-time Unit Software Package"
- HOMEPAGE =3D "http://processors.wiki.ti.com/index.php/PRU-ICSS"
--LICENSE =3D "BSD-3-Clause & GPL-2.0 & PD"
-+LICENSE =3D "BSD-3-Clause & PD"
-=20
--LIC_FILES_CHKSUM =3D "file://PRU-Package-v6.0-Manifest.html;md5=3Dea854230=
-556f47609efdaedca174b44c"
-+LIC_FILES_CHKSUM =3D "file://PRU-Package-v6.1-Manifest.html;md5=3D1e37797e=
-be9254922f4278bb6047211c"
-=20
- inherit update-alternatives
-=20
- BRANCH =3D "master"
- SRC_URI =3D "git://git.ti.com/pru-software-support-package/pru-software-su=
-pport-package.git;protocol=3Dgit;branch=3D${BRANCH}"
--SRCREV =3D "ff252a5e174f1b6aa42931744939f20d25d8e070"
-+SRCREV =3D "a9bff6f43001cf66dc1ed3ef7e9dfb688b67f7bb"
-=20
--PV =3D "5.6.0"
--PR =3D "r1"
-+PV =3D "5.7.0"
-+PR =3D "r0"
-=20
- require recipes-ti/includes/ti-paths.inc
-=20
-@@ -119,6 +119,8 @@ do_install_append_am65xx() {
-                    ${D}/lib/firmware/pru
-         install -m 644 ${S}/examples/${PLATFORM}/RTU_Halt/gen/RTU${i}/RTU_=
-Halt_${i}.out \
-                    ${D}/lib/firmware/pru
-+        install -m 644 ${S}/examples/${PLATFORM}/TX_PRU_Halt/gen/TX_PRU${i=
-}/TX_PRU_Halt_${i}.out \
-+                   ${D}/lib/firmware/pru
-     done
-     for i in 0 1 2
-     do
-@@ -199,6 +201,12 @@ ALTERNATIVE_LINK_NAME[am65x-rtu1_0-fw] =3D "/lib/firmw=
-are/am65x-rtu1_0-fw"
- ALTERNATIVE_LINK_NAME[am65x-rtu1_1-fw] =3D "/lib/firmware/am65x-rtu1_1-fw"
- ALTERNATIVE_LINK_NAME[am65x-rtu2_0-fw] =3D "/lib/firmware/am65x-rtu2_0-fw"
- ALTERNATIVE_LINK_NAME[am65x-rtu2_1-fw] =3D "/lib/firmware/am65x-rtu2_1-fw"
-+ALTERNATIVE_LINK_NAME[am65x-txpru0_0-fw] =3D "/lib/firmware/am65x-txpru0_0=
--fw"
-+ALTERNATIVE_LINK_NAME[am65x-txpru0_1-fw] =3D "/lib/firmware/am65x-txpru0_1=
--fw"
-+ALTERNATIVE_LINK_NAME[am65x-txpru1_0-fw] =3D "/lib/firmware/am65x-txpru1_0=
--fw"
-+ALTERNATIVE_LINK_NAME[am65x-txpru1_1-fw] =3D "/lib/firmware/am65x-txpru1_1=
--fw"
-+ALTERNATIVE_LINK_NAME[am65x-txpru2_0-fw] =3D "/lib/firmware/am65x-txpru2_0=
--fw"
-+ALTERNATIVE_LINK_NAME[am65x-txpru2_1-fw] =3D "/lib/firmware/am65x-txpru2_1=
--fw"
-=20
- ALTERNATIVE_LINK_NAME[j7-pru0_0-fw] =3D "/lib/firmware/j7-pru0_0-fw"
- ALTERNATIVE_LINK_NAME[j7-pru0_1-fw] =3D "/lib/firmware/j7-pru0_1-fw"
-@@ -217,6 +225,7 @@ ALTERNATIVE_LINK_NAME[j7-txpru1_1-fw] =3D "/lib/firmwar=
-e/j7-txpru1_1-fw"
- ALTERNATIVE_pru-icss-halt =3D "${PRU_ICSS_ALTERNATIVES}"
-=20
- # Only Halt firmware images are supported for the Tx_PRU cores
-+ALTERNATIVE_pru-icss-halt_append_am65xx =3D "am65x-txpru0_0-fw am65x-txpru=
-0_1-fw am65x-txpru1_0-fw am65x-txpru1_1-fw am65x-txpru2_0-fw am65x-txpru2_1=
--fw"
- ALTERNATIVE_pru-icss-halt_append_j7 =3D " j7-txpru0_0-fw j7-txpru0_1-fw j7=
--txpru1_0-fw j7-txpru1_1-fw"
-=20
- ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru0-fw] =3D "/lib/firmware/pru/PR=
-U_Halt.out"
-@@ -249,6 +258,12 @@ ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_0-fw] =3D =
-"/lib/firmware/pru/RTU_Halt_
- ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_1-fw] =3D "/lib/firmware/pru/R=
-TU_Halt_1.out"
- ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_0-fw] =3D "/lib/firmware/pru/R=
-TU_Halt_0.out"
- ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_1-fw] =3D "/lib/firmware/pru/R=
-TU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_0-fw] =3D "/lib/firmware/pru=
-/TX_PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_1-fw] =3D "/lib/firmware/pru=
-/TX_PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_0-fw] =3D "/lib/firmware/pru=
-/TX_PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_1-fw] =3D "/lib/firmware/pru=
-/TX_PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_0-fw] =3D "/lib/firmware/pru=
-/TX_PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_1-fw] =3D "/lib/firmware/pru=
-/TX_PRU_Halt_1.out"
-=20
- ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_0-fw] =3D "/lib/firmware/pru/PRU_=
-Halt_0.out"
- ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_1-fw] =3D "/lib/firmware/pru/PRU_=
-Halt_1.out"
---=20
-2.17.1
+diff --git a/conf/machine/am65xx-evm-k3r5-sr2.conf b/conf/machine/am65xx-evm-k3r5-sr2.conf
+new file mode 100644
+index 0000000..c0b3cd5
+--- /dev/null
++++ b/conf/machine/am65xx-evm-k3r5-sr2.conf
+@@ -0,0 +1,11 @@
++#@TYPE: Machine
++#@NAME: AM65xx SR2.0 EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM65xx SR2.0 EVM (R5F core)
++
++# Booting SR2 requires different SYSFW, the rest is handled at runtime
++
++require conf/machine/am65xx-evm-k3r5.conf
++SOC_FAMILY_append = ":k3r5-sr2"
++
++SYSFW_SOC = "am65x_sr2"
++SYSFW_SYMLINK = "sysfw.itb"
+diff --git a/conf/machine/am65xx-evm-k3r5.conf b/conf/machine/am65xx-evm-k3r5.conf
+new file mode 100644
+index 0000000..bd17474
+--- /dev/null
++++ b/conf/machine/am65xx-evm-k3r5.conf
+@@ -0,0 +1,12 @@
++#@TYPE: Machine
++#@NAME: AM65xx EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM65xx EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "am65x"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "gp"
++SYSFW_SYMLINK = ""
++
++UBOOT_MACHINE = "am65x_evm_r5_defconfig"
+diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
+index 3edbb29..62fa360 100644
+--- a/conf/machine/am65xx-evm.conf
++++ b/conf/machine/am65xx-evm.conf
+@@ -4,6 +4,8 @@
+ 
+ require conf/machine/include/am65xx.inc
+ 
++BBMULTICONFIG += "k3r5-sr2"
++
+ MACHINE_FEATURES += "touchscreen"
+ 
+ SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
+@@ -23,3 +25,7 @@ UBOOT_MACHINE = "am65x_evm_a53_defconfig"
+ OPTEEMACHINE = "k3"
+ OPTEEFLAVOR = "am65x"
+ OPTEEOUTPUTMACHINE = "k3"
++
++IMAGE_BOOT_FILES += "sysfw-am65x-evm.itb"
++do_image_wic[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
++do_image_tar[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
+diff --git a/conf/machine/am65xx-hs-evm-k3r5.conf b/conf/machine/am65xx-hs-evm-k3r5.conf
+new file mode 100644
+index 0000000..2b06f2c
+--- /dev/null
++++ b/conf/machine/am65xx-hs-evm-k3r5.conf
+@@ -0,0 +1,13 @@
++#@TYPE: Machine
++#@NAME: AM65xx HS EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM65xx HS EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "am65x"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs"
++
++UBOOT_MACHINE = "am65x_hs_evm_r5_defconfig"
++
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
+diff --git a/conf/machine/am65xx-hs-evm.conf b/conf/machine/am65xx-hs-evm.conf
+index f989750..6d20a0d 100644
+--- a/conf/machine/am65xx-hs-evm.conf
++++ b/conf/machine/am65xx-hs-evm.conf
+@@ -2,10 +2,28 @@
+ #@NAME: AM65xx HS EVM
+ #@DESCRIPTION: Machine configuration for the TI AM65xx HS EVM
+ 
+-require conf/machine/am65xx-evm.conf
++require conf/machine/include/am65xx.inc
++
++MACHINE_FEATURES += "touchscreen"
++
++SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
++SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
++
++KERNEL_DEVICETREE = " \
++    ti/k3-am654-base-board.dtb ti/k3-am654-gp.dtbo \
++    ti/k3-am654-evm-hdmi.dtbo ti/k3-am654-idk.dtbo \
++    ti/k3-am654-evm-oldi-lcd1evm.dtbo ti/k3-am654-evm-tc358876.dtbo \
++    ti/k3-am654-pcie-usb2.dtbo ti/k3-am654-pcie-usb3.dtbo \
++    ti/k3-am654-base-board-jailhouse.dtbo \
++    ti/k3-am654-evm-prupwm.dtbo \
++"
+ 
+ UBOOT_MACHINE = "am65x_hs_evm_a53_defconfig"
+ 
++OPTEEMACHINE = "k3"
++OPTEEFLAVOR = "am65x"
++OPTEEOUTPUTMACHINE = "k3"
++
+ UBOOT_ENTRYPOINT =       "0x80080000"
+ UBOOT_LOADADDRESS =      "0x80080000"
+ UBOOT_RD_LOADADDRESS =   "0x84000000"
+diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
+index 5e67f5f..0c16d96 100644
+--- a/conf/machine/include/k3.inc
++++ b/conf/machine/include/k3.inc
+@@ -1,8 +1,12 @@
++# TI K3 Aarch64 profile for Cortex-A53/A72 cores
++
+ require conf/machine/include/ti-soc.inc
+ SOC_FAMILY_append = ":k3"
+ 
+ require conf/machine/include/arm/arch-arm64.inc
+ 
++BBMULTICONFIG += "k3r5"
++
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r0"
+ 
+@@ -34,9 +38,8 @@ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa etherne
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz"
+ 
+-# Please note that booting K3 platform also requires
+-# tiboot3.bin and sysfw.itb, which are provided by meta-arago
+-# u-boot-k3-r5 and ti-sci-fw recipes
+-IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
++IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysfw.itb"
+ WKS_FILE ?= "sdimage-3part.wks"
+-do_image_wic[depends] += "u-boot:do_deploy"
++do_image_wic[depends] += "virtual/bootloader:do_deploy"
++do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
++do_image_tar[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
+diff --git a/conf/machine/include/k3r5.inc b/conf/machine/include/k3r5.inc
+new file mode 100644
+index 0000000..52fcf38
+--- /dev/null
++++ b/conf/machine/include/k3r5.inc
+@@ -0,0 +1,23 @@
++# TI K3 Armv7 profile for Cortex-R5F cores
++
++require conf/machine/include/ti-soc.inc
++SOC_FAMILY_append = ":k3r5"
++
++# The closest of existing tunes for Cortex-R5F
++DEFAULTTUNE = "armv7athf"
++require conf/machine/include/tune-cortexa8.inc
++
++# R5 runs early bootloader and loads SYSFW
++# https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am65x/README
++# https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/j721e/README
++PREFERRED_PROVIDER_virtual/kernel = "linux-dummy"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
++PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
++
++SPL_BINARY = ""
++UBOOT_SUFFIX = "bin"
++UBOOT_BINARY = "tiboot3.${UBOOT_SUFFIX}"
++UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
++UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
++
++PACKAGECONFIG_pn-u-boot-ti-staging = ""
+diff --git a/conf/machine/j7-evm-k3r5.conf b/conf/machine/j7-evm-k3r5.conf
+new file mode 100644
+index 0000000..b9e8cc0
+--- /dev/null
++++ b/conf/machine/j7-evm-k3r5.conf
+@@ -0,0 +1,11 @@
++#@TYPE: Machine
++#@NAME: J7 EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI J7 EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "j721e"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "gp"
++
++UBOOT_MACHINE = "j721e_evm_r5_defconfig"
+diff --git a/conf/machine/j7-hs-evm-k3r5.conf b/conf/machine/j7-hs-evm-k3r5.conf
+new file mode 100644
+index 0000000..53a7016
+--- /dev/null
++++ b/conf/machine/j7-hs-evm-k3r5.conf
+@@ -0,0 +1,13 @@
++#@TYPE: Machine
++#@NAME: J7 HS EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI J7 HS EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "j721e"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs"
++
++UBOOT_MACHINE = "j721e_hs_evm_r5_defconfig"
++
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
+diff --git a/conf/multiconfig/k3r5-sr2.conf b/conf/multiconfig/k3r5-sr2.conf
+new file mode 100644
+index 0000000..1708214
+--- /dev/null
++++ b/conf/multiconfig/k3r5-sr2.conf
+@@ -0,0 +1,3 @@
++require k3r5.conf
++
++MACHINE_append = "-sr2"
+diff --git a/conf/multiconfig/k3r5.conf b/conf/multiconfig/k3r5.conf
+new file mode 100644
+index 0000000..8c8f0c3
+--- /dev/null
++++ b/conf/multiconfig/k3r5.conf
+@@ -0,0 +1,5 @@
++MAINMACHINE := "${MACHINE}"
++
++DEPLOY_DIR_IMAGE = "${DEPLOY_DIR}/images/${MAINMACHINE}"
++
++MACHINE_append = "-k3r5"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb
+new file mode 100644
+index 0000000..b17147a
+--- /dev/null
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb
+@@ -0,0 +1,94 @@
++SUMMARY = "TI SCI firmware (SYSFW)"
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++
++DEPENDS = "openssl-native u-boot-mkimage-native dtc-native"
++
++CLEANBROKEN = "1"
++PR = "r0"
++
++# Loaded by R5F core
++COMPATIBLE_MACHINE = "k3r5"
++COMPATIBLE_MACHINE_aarch64 = "null"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++TI_SECURE_DEV_PKG ?= ""
++export TI_SECURE_DEV_PKG
++
++SRCREV = "6b02b1ea07da65a68444e86439ad5b031e9fd5a2"
++BRANCH ?= "ti-linux-firmware"
++SRCREV_imggen = "79f3807e0b169f2029dec9f3a679c231f4deb625"
++SRCREV_FORMAT = "imggen"
++
++SRC_URI = " \
++	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
++	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
++"
++
++S = "${WORKDIR}/git"
++
++SYSFW_SOC ?= "unknown"
++SYSFW_CONFIG ?= "unknown"
++
++SYSFW_PREFIX = "ti-sci-firmware"
++SYSFW_SUFFIX ?= "unknown"
++
++SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
++
++SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}*.bin"
++
++SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
++SYSFW_VBINARY = "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
++SYSFW_IMAGE = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
++SYSFW_SYMLINK ?= "sysfw.itb"
++
++CFLAGS[unexport] = "1"
++LDFLAGS[unexport] = "1"
++AS[unexport] = "1"
++LD[unexport] = "1"
++
++do_configure[noexec] = "1"
++
++EXTRA_OEMAKE = "\
++    CROSS_COMPILE=${TARGET_PREFIX} SYSFW_DL_URL='' SYSFW_HS_DL_URL='' SYSFW_HS_INNER_CERT_DL_URL='' \
++    SYSFW_PATH="${SYSFW_TISCI}" SOC=${SYSFW_SOC} CONFIG=${SYSFW_CONFIG} \
++"
++EXTRA_OEMAKE_HS = " \
++    HS=1 SYSFW_HS_PATH="${S}/ti-sysfw/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${S}/ti-sysfw/${SYSFW_BASE}-cert.bin" \
++"
++EXTRA_OEMAKE_append = "${@['',' ${EXTRA_OEMAKE_HS}']['${SYSFW_SUFFIX}' == 'hs']}"
++
++do_compile() {
++	cd ${WORKDIR}/imggen/
++	oe_runmake
++}
++
++do_install() {
++	install -d ${D}/boot
++	install -m 644 ${WORKDIR}/imggen/${SYSFW_BINARY} ${D}/boot/${SYSFW_VBINARY}
++	ln -sf ${SYSFW_VBINARY} ${D}/boot/${SYSFW_IMAGE}
++	if [ ! -z "${SYSFW_SYMLINK}" ]; then
++		ln -sf ${SYSFW_VBINARY} ${D}/boot/${SYSFW_SYMLINK}
++	fi
++}
++
++FILES_${PN} = "/boot"
++
++inherit deploy
++
++do_deploy () {
++	install -d ${DEPLOYDIR}
++	install -m 644 ${WORKDIR}/imggen/${SYSFW_BINARY} ${DEPLOYDIR}/${SYSFW_VBINARY}
++	rm -f ${DEPLOYDIR}/${SYSFW_IMAGE}
++	ln -sf ${SYSFW_VBINARY} ${DEPLOYDIR}/${SYSFW_IMAGE}
++	if [ ! -z "${SYSFW_SYMLINK}" ]; then
++		rm -f ${DEPLOYDIR}/${SYSFW_SYMLINK}
++		ln -sf ${SYSFW_VBINARY} ${DEPLOYDIR}/${SYSFW_SYMLINK}
++	fi
++
++	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
++}
++
++addtask deploy before do_build after do_compile
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 04ff559..8f8f0af 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -57,6 +57,7 @@ export TI_SECURE_DEV_PKG
+ SPL_UART_BINARY = "u-boot-spl.bin"
+ SPL_UART_BINARY_keystone = ""
+ SPL_UART_BINARY_k3 = ""
++SPL_UART_BINARY_k3r5 = ""
+ SPL_UART_BINARY_lego-ev3 = ""
+ 
+ SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+-- 
+2.7.4
 
