@@ -1,223 +1,168 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.2832.1588794405237918879
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web12.3225.1588795463187399238
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 06 May 2020 12:46:45 -0700
+ Wed, 06 May 2020 13:04:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=WSCzu4Ea;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: j-stiffler@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 046JkhIx004489
-	for <meta-ti@lists.yoctoproject.org>; Wed, 6 May 2020 14:46:43 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=iu3lOJVz;
+ spf=none, err=permanent DNS error (domain: ula0866189, ip: 198.47.23.248, mailfrom: a0866189local@ula0866189)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 046K4MP9038476
+	for <meta-ti@lists.yoctoproject.org>; Wed, 6 May 2020 15:04:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1588794403;
-	bh=6oBwZ7Bg+kMuIgPdbfL8i05Pt2tK1clYJllwmRYyS6c=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=WSCzu4EaYeei36fUWu3jnzq4zbp+yjLHY8twkfrVakilg2K9xzrQpeykaUVPayS0n
-	 GJTnlxUcqg7KcFwql8N5RHxzR6aC7v28QYQkxjJ0Q/a/CAPkbhRux5P4cWykUVA9/K
-	 wjMJzN9RsF5G24LKnPaT36+eZEAPmQBg31fenMRY=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 046Jkh1x128687
+	s=ti-com-17Q1; t=1588795462;
+	bh=Zwwrf8cgYsgxDbpM5xVb35TbNQoosYRjczm2AsYLlmc=;
+	h=From:To:CC:Subject:Date;
+	b=iu3lOJVz/5c+gZPNeHPE69lqSEDpnRCiNadGSS6Jbqdtl9w/tDdwWry9u1cqdGEQb
+	 ofs584oa168ZN3vqk8y1ci8J2+3DJJk6Nii5j+z/zI7Q8EPGrJpAf7GsjUwUN3jQ3K
+	 FTBmiSWINCeLjbx3D8y3sC4cJY78zAlegowPaAGI=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 046K4McG072789
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 6 May 2020 14:46:43 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Wed, 6 May 2020 15:04:22 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 6 May
- 2020 14:46:43 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 15:04:22 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 6 May 2020 14:46:42 -0500
-Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 046JkgaV084837;
-	Wed, 6 May 2020 14:46:42 -0500
-Subject: Re: [EXTERNAL] [meta-ti] [master][PATCH] prueth-fw-am65x-sr2: add prebuilt PRU Ethernet FW for AM65x SR2.0
+ Frontend Transport; Wed, 6 May 2020 15:04:22 -0500
+Received: from ula0866189 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 046K4Maj028114;
+	Wed, 6 May 2020 15:04:22 -0500
+Received: from a0866189local by ula0866189 with local (Exim 4.90_1)
+	(envelope-from <a0866189local@ula0866189>)
+	id 1jWQHF-0005qc-Lj; Wed, 06 May 2020 15:04:21 -0500
+From: "Angela Stegmaier" <angelabaker@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
-CC: Denys Dmytriyenko <denys@ti.com>
-References: <1588792809-18686-1-git-send-email-denis@denix.org>
-From: "Jacob Stiffler" <j-stiffler@ti.com>
-Message-ID: <5717c18e-c603-1544-60e9-6ae8856cb973@ti.com>
-Date: Wed, 6 May 2020 15:46:42 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+CC: <s-anna@ti.com>, Angela Stegmaier <angelabaker@ti.com>
+Subject: [meta-ti][master][PATCH 1/3] ti-ipc: remove am65xx build
+Date: Wed, 6 May 2020 15:04:13 -0500
+Message-ID: <20200506200415.22380-1-angelabaker@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <1588792809-18686-1-git-send-email-denis@denix.org>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: multipart/alternative;
-	boundary="------------83EDB9B0C41064A1138D1B7E"
-Content-Language: en-US
+Content-Type: text/plain
 
---------------83EDB9B0C41064A1138D1B7E
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Only ipc-lld is supported for am65xx.
 
-Is there a plan to build these from source as with other PRU firmwares?
-
-
-- Jake
-
-On 5/6/2020 3:20 PM, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
->
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->   recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb | 39 ++++++++++++++++++++++++
->   recipes-kernel/linux/linux-ti-staging_5.4.bb     |  1 +
->   2 files changed, 40 insertions(+)
->   create mode 100644 recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
->
-> diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-> new file mode 100644
-> index 0000000..6e17c4a
-> --- /dev/null
-> +++ b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-> @@ -0,0 +1,39 @@
-> +SUMMARY = "PRU Ethernet firmware for AM65xx SR2.0"
-> +
-> +LICENSE = "TI-TFL"
-> +LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-> +
-> +PV = "2.2.0.1+2.2.0.2-rc1"
-> +
-> +CLEANBROKEN = "1"
-> +
-> +COMPATIBLE_MACHINE = "am65xx-evm"
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +SRCREV = "ea4bf53ba0a4a30bb7e0e8b6138fdb22fe50372a"
-> +BRANCH ?= "ti-linux-firmware"
-> +
-> +SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +TARGET = " \
-> +    am65x-sr2-pru0-prueth-fw.elf \
-> +    am65x-sr2-pru1-prueth-fw.elf \
-> +    am65x-sr2-rtu0-prueth-fw.elf \
-> +    am65x-sr2-rtu1-prueth-fw.elf \
-> +    am65x-sr2-txpru0-prueth-fw.elf \
-> +    am65x-sr2-txpru1-prueth-fw.elf \
-> +"
-> +
-> +do_install() {
-> +	install -d ${D}${base_libdir}/firmware/ti-pruss
-> +	for f in ${TARGET}; do
-> +		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
-> +	done
-> +}
-> +
-> +FILES_${PN} = "${base_libdir}/firmware"
-> +
-> +INSANE_SKIP_${PN} = "arch"
-> diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-> index 9f893cc..7144a95 100644
-> --- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
-> +++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-> @@ -50,6 +50,7 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti43x = " prueth-fw"
->   RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti33x = " prueth-fw"
->   RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2g = " prueth-fw"
->   RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am65xx = " prueth-fw-am65x"
-> +RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am65xx-evm = " prueth-fw-am65x-sr2"
->   
->   # Add run-time dependency for Cadence MHDP firmware to the rootfs
->   RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " cadence-mhdp-fw"
->
-> 
-
---------------83EDB9B0C41064A1138D1B7E
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>Is there a plan to build these from source as with other PRU
-      firmwares?</p>
-    <p><br>
-    </p>
-    <p>- Jake<br>
-    </p>
-    <div class="moz-cite-prefix">On 5/6/2020 3:20 PM, Denys Dmytriyenko
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:1588792809-18686-1-git-send-email-denis@denix.org">
-      <pre class="moz-quote-pre" wrap="">From: Denys Dmytriyenko <a class="moz-txt-link-rfc2396E" href="mailto:denys@ti.com">&lt;denys@ti.com&gt;</a>
-
-Signed-off-by: Denys Dmytriyenko <a class="moz-txt-link-rfc2396E" href="mailto:denys@ti.com">&lt;denys@ti.com&gt;</a>
+Signed-off-by: Angela Stegmaier <angelabaker@ti.com>
 ---
- recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb | 39 ++++++++++++++++++++++++
- recipes-kernel/linux/linux-ti-staging_5.4.bb     |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
+ recipes-ti/ipc/ti-ipc-common.inc      |  1 -
+ recipes-ti/ipc/ti-ipc-examples_git.bb |  2 --
+ recipes-ti/ipc/ti-ipc-rtos.inc        |  9 ---------
+ recipes-ti/ipc/ti-ipc-rtos_git.bb     | 17 -----------------
+ recipes-ti/ipc/ti-ipc_git.bb          |  1 -
+ 5 files changed, 30 deletions(-)
 
-diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-new file mode 100644
-index 0000000..6e17c4a
---- /dev/null
-+++ b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "PRU Ethernet firmware for AM65xx SR2.0"
-+
-+LICENSE = "TI-TFL"
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76">"file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"</a>
-+
-+PV = "2.2.0.1+2.2.0.2-rc1"
-+
-+CLEANBROKEN = "1"
-+
-+COMPATIBLE_MACHINE = "am65xx-evm"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+SRCREV = "ea4bf53ba0a4a30bb7e0e8b6138fdb22fe50372a"
-+BRANCH ?= "ti-linux-firmware"
-+
-+SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-+
-+TARGET = " \
-+    am65x-sr2-pru0-prueth-fw.elf \
-+    am65x-sr2-pru1-prueth-fw.elf \
-+    am65x-sr2-rtu0-prueth-fw.elf \
-+    am65x-sr2-rtu1-prueth-fw.elf \
-+    am65x-sr2-txpru0-prueth-fw.elf \
-+    am65x-sr2-txpru1-prueth-fw.elf \
-+"
-+
-+do_install() {
-+	install -d ${D}${base_libdir}/firmware/ti-pruss
-+	for f in ${TARGET}; do
-+		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
-+	done
-+}
-+
-+FILES_${PN} = "${base_libdir}/firmware"
-+
-+INSANE_SKIP_${PN} = "arch"
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-index 9f893cc..7144a95 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-@@ -50,6 +50,7 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti43x = " prueth-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti33x = " prueth-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2g = " prueth-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am65xx = " prueth-fw-am65x"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am65xx-evm = " prueth-fw-am65x-sr2"
+diff --git a/recipes-ti/ipc/ti-ipc-common.inc b/recipes-ti/ipc/ti-ipc-common.inc
+index 96cbd667..449903f1 100644
+--- a/recipes-ti/ipc/ti-ipc-common.inc
++++ b/recipes-ti/ipc/ti-ipc-common.inc
+@@ -15,7 +15,6 @@ PLATFORM_k2g = "66AK2G"
+ PLATFORM_omapl138 = "OMAPL138"
+ PLATFORM_c667x-evm = "C6678"
+ PLATFORM_c665x-evm = "C6678"
+-PLATFORM_am65xx = "AM65XX"
  
- # Add run-time dependency for Cadence MHDP firmware to the rootfs
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " cadence-mhdp-fw"
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
+ ALT_PLATFORM_k2hk = "TCI6636"
+ ALT_PLATFORM_am57xx-evm = "AM572X AM571X"
+diff --git a/recipes-ti/ipc/ti-ipc-examples_git.bb b/recipes-ti/ipc/ti-ipc-examples_git.bb
+index 43e45e64..c46e5c81 100644
+--- a/recipes-ti/ipc/ti-ipc-examples_git.bb
++++ b/recipes-ti/ipc/ti-ipc-examples_git.bb
+@@ -3,8 +3,6 @@ require ti-ipc-examples.inc
+ 
+ DEPENDS = "ti-ipc ti-xdctools-native ti-sysbios ti-ipc-rtos zip-native"
+ 
+-DEPENDS_append_am65xx = " sciclient-rtos"
+-
+ do_compile_append() {
+ 
+   if [  "${PLATFORM}" != "UNKNOWN" ]; then
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index c4ab2687..a68ba806 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -53,9 +53,6 @@ DEPENDS_append_omapl138 = " ti-cgt6x-native \
+ DEPENDS_append_c66x = " ti-cgt6x-native \
+ "
+ 
+-DEPENDS_append_am65xx = " ti-cgt-arm-native \
+-                              gcc-linaro-baremetal-aarch64-native"
+-
+ IPC_TARGETS = ""
+ 
+ IPC_TARGETS_omap-a15 = "\
+@@ -79,11 +76,6 @@ IPC_TARGETS_c66x = " \
+     ti.targets.elf.C66_big_endian="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+ "
+ 
+-IPC_TARGETS_am65xx = "\
+-    gnu.targets.arm.A53F="${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}" \
+-    ti.targets.arm.elf.R5F="${M4_TOOLCHAIN_INSTALL_DIR}" \
+-"
+-
+ PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
+ EXTRA_OEMAKE = "\
+     PLATFORM=${PLATFORM} \
+@@ -93,5 +85,4 @@ EXTRA_OEMAKE = "\
+     ${PARALLEL_XDC} \
+     JAVA_TOOL_OPTIONS=-Xss2560k \
+ "
+-EXTRA_OEMAKE_append_am65xx = " PDK_INSTALL_DIR=${PDK_INSTALL_DIR}"
+ 
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_git.bb b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index 4c0e71e6..b292d677 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -3,7 +3,6 @@ require ti-ipc-common.inc
+ require ti-ipc-rtos.inc
+ 
+ DEPENDS = "ti-xdctools-native ti-sysbios doxygen-native zip-native"
+-DEPENDS_append_am65xx = " sciclient-rtos"
+ 
+ PACKAGES =+ "${PN}-fw"
+ FILES_${PN}-fw = "${base_libdir}/firmware/*"
+@@ -62,12 +61,6 @@ do_compile() {
+   fi
+ }
+ 
+-do_install_prepend_am65xx () {
+-  # Trim directory name
+-  mv ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_false_R5F0 ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_R5F0
+-  mv ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_false_R5F1 ${S}/packages/ti/ipc/tests/bin/ti_platforms_cortexR_AM65X_R5F1
+-}
+-
+ do_install() {
+   CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+   IPC_VERSION=`echo ${PV}${RELEASE_SUFFIX} | sed -e 's|\.|_|g'`
+@@ -129,13 +122,3 @@ pkg_postinst_${PN}-fw_omapl138 () {
+ pkg_postrm_${PN}-fw_omapl138 () {
+   update-alternatives --remove rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674
+ }
+-
+-pkg_postinst_${PN}-fw_am65xx () {
+-  update-alternatives --install /lib/firmware/am65x-mcu-r5f0_0-fw am65x-mcu-r5f0_0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
+-  update-alternatives --install /lib/firmware/am65x-mcu-r5f0_1-fw am65x-mcu-r5f0_1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f ${ALTERNATIVE_PRIORITY}
+-}
+-
+-pkg_postrm_${PN}-fw_am65xx () {
+-  update-alternatives --remove am65x-mcu-r5f0_0-fw ipc/ti_platforms_cortexR_AM65X_R5F0/messageq_single.xer5f
+-  update-alternatives --remove am65x-mcu-r5f0_1-fw ipc/ti_platforms_cortexR_AM65X_R5F1/messageq_single.xer5f
+-}
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index 2ebd03fd..425ca4e1 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -22,7 +22,6 @@ DAEMON_k2l = "lad_tci6630"
+ DAEMON_k2e = "lad_66ak2e"
+ DAEMON_k2g = "lad_66ak2g"
+ DAEMON_omapl138 = "lad_omapl138"
+-DAEMON_k3 = "lad_am65xx"
+ 
+ inherit autotools-brokensep pkgconfig update-rc.d systemd
+ 
+-- 
+2.17.1
 
---------------83EDB9B0C41064A1138D1B7E--
