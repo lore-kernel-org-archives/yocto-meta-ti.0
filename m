@@ -1,162 +1,356 @@
-Received: from yocto-www.yoctoproject.org (yocto-www.yoctoproject.org [140.211.169.56])
- by mx.groups.io with SMTP id smtpd.web11.1562.1588728314671337855
- for <meta-ti@lists.yoctoproject.org>;
- Tue, 05 May 2020 18:25:15 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=LK9JqVfE;
- spf=fail (domain: ti.com, ip: 140.211.169.56, mailfrom: denys@ti.com)
-Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 83B7AE01AF3; Tue,  5 May 2020 18:25:14 -0700 (PDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
-X-Spam-HAM-Report: 
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.org/,
-	*      medium trust
-	*      [198.47.23.248 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
-	*       domain
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00799E01AF1
-	for <meta-ti@yoctoproject.org>; Tue,  5 May 2020 18:25:12 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0461PCMS021606
-	for <meta-ti@yoctoproject.org>; Tue, 5 May 2020 20:25:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1588728312;
-	bh=dv12Y6R1Il2NIm46CMM2aa8u6j8NgvunXiq+gcSQ8uo=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=LK9JqVfEYyiRCsO4++D/60fh4xvHAO6eHLohjrqMG4ZzsYkXe4KvFDHNUHQnJM4w4
-	 ijip1GdmSnTx+F0TQFKTeq2/ce6jVhxkMaaBgxoh7sq1WaewtKOkiuMe7nPTPFt+9s
-	 +hKJZU8eGPEYMKkbYRWeEFFcl6AtHQmWOi63n+y8=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0461PCVo029711
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Tue, 5 May 2020 20:25:12 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 5 May
- 2020 20:25:12 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 5 May 2020 20:25:11 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0461PBI8120015;
-	Tue, 5 May 2020 20:25:11 -0500
-Date: Tue, 5 May 2020 21:25:11 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Nick Saulnier <nsaulnier@ti.com>
-CC: <meta-ti@yoctoproject.org>, <j-stiffler@ti.com>, <s-anna@ti.com>
-Subject: Re: [meta-ti][PATCH v2] pru-icss: update Manifest, PSSP, add am65x tx_pru
-Message-ID: <20200506012511.GN2849@beryl>
-References: <20200504014418.9951-1-nsaulnier@ti.com>
+Subject: meta-ti setup suggestions for beaglebone (SoC AM335x)
+To: meta-ti@lists.yoctoproject.org
+From: "Luca" <magnabosco.luca@gmail.com>
+X-Originating-Location: San Pietro Mussolino, Veneto, IT (185.126.142.92)
+X-Originating-Platform: Windows Chrome 81
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-In-Reply-To: <20200504014418.9951-1-nsaulnier@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Date: Wed, 06 May 2020 04:08:03 -0700
+Message-ID: <BfLY.1588763283272971866.HOsc@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="0YR8le7ogqBER6zdxXgB"
 
-WARNING: pru-icss-5.7.0-r0 do_package: pru-icss: alternative target (/usr/bin/am65x-rtu2_1-fwam65x-txpru0_0-fw or /usr/bin/am65x-rtu2_1-fwam65x-txpru0_0-fw.pru-icss) does not exist, skipping...
-WARNING: pru-icss-5.7.0-r0 do_package: pru-icss: NOT adding alternative provide /usr/bin/am65x-rtu2_1-fwam65x-txpru0_0-fw: /usr/bin/am65x-rtu2_1-fwam65x-txpru0_0-fw.pru-icss does not exist
-WARNING: pru-icss-5.7.0-r0 do_package: pru-icss: alt_link == alt_target: /usr/bin/am65x-rtu2_1-fwam65x-txpru0_0-fw == /usr/bin/am65x-rtu2_1-fwam65x-txpru0_0-fw
+--0YR8le7ogqBER6zdxXgB
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+Hi all,
 
-On Sun, May 03, 2020 at 08:44:18PM -0500, Nick Saulnier wrote:
-> - Updated the Software Manifest from 6.0 -> 6.1
-> 	removes GPL-2.0 license from package
-> 	adds j7 processor
-> 
-> - Updated to PRU Software Support Package v5.7.0
-> 	Updated AM65x code for AM65x Silicon Revision 2.0
-> 	Updated software manifest & code to remove GPL-2.0 license
-> 	Minor README improvements
-> 
-> - Add AM65x SR2.0 TX_PRU cores & firmware to recipe
-> 
-> Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
-> ---
->  recipes-bsp/pru/pru-icss_git.bb | 25 ++++++++++++++++++++-----
->  1 file changed, 20 insertions(+), 5 deletions(-)
-> 
-> diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-> index 72888515273b..fc7b6f7dd345 100644
-> --- a/recipes-bsp/pru/pru-icss_git.bb
-> +++ b/recipes-bsp/pru/pru-icss_git.bb
-> @@ -1,17 +1,17 @@
->  DESCRIPTION = "Programmable Real-time Unit Software Package"
->  HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
-> -LICENSE = "BSD-3-Clause & GPL-2.0 & PD"
-> +LICENSE = "BSD-3-Clause & PD"
->  
-> -LIC_FILES_CHKSUM = "file://PRU-Package-v6.0-Manifest.html;md5=ea854230556f47609efdaedca174b44c"
-> +LIC_FILES_CHKSUM = "file://PRU-Package-v6.1-Manifest.html;md5=1e37797ebe9254922f4278bb6047211c"
->  
->  inherit update-alternatives
->  
->  BRANCH = "master"
->  SRC_URI = "git://git.ti.com/pru-software-support-package/pru-software-support-package.git;protocol=git;branch=${BRANCH}"
-> -SRCREV = "ff252a5e174f1b6aa42931744939f20d25d8e070"
-> +SRCREV = "a9bff6f43001cf66dc1ed3ef7e9dfb688b67f7bb"
->  
-> -PV = "5.6.0"
-> -PR = "r1"
-> +PV = "5.7.0"
-> +PR = "r0"
->  
->  require recipes-ti/includes/ti-paths.inc
->  
-> @@ -119,6 +119,8 @@ do_install_append_am65xx() {
->                     ${D}/lib/firmware/pru
->          install -m 644 ${S}/examples/${PLATFORM}/RTU_Halt/gen/RTU${i}/RTU_Halt_${i}.out \
->                     ${D}/lib/firmware/pru
-> +        install -m 644 ${S}/examples/${PLATFORM}/TX_PRU_Halt/gen/TX_PRU${i}/TX_PRU_Halt_${i}.out \
-> +                   ${D}/lib/firmware/pru
->      done
->      for i in 0 1 2
->      do
-> @@ -199,6 +201,12 @@ ALTERNATIVE_LINK_NAME[am65x-rtu1_0-fw] = "/lib/firmware/am65x-rtu1_0-fw"
->  ALTERNATIVE_LINK_NAME[am65x-rtu1_1-fw] = "/lib/firmware/am65x-rtu1_1-fw"
->  ALTERNATIVE_LINK_NAME[am65x-rtu2_0-fw] = "/lib/firmware/am65x-rtu2_0-fw"
->  ALTERNATIVE_LINK_NAME[am65x-rtu2_1-fw] = "/lib/firmware/am65x-rtu2_1-fw"
-> +ALTERNATIVE_LINK_NAME[am65x-txpru0_0-fw] = "/lib/firmware/am65x-txpru0_0-fw"
-> +ALTERNATIVE_LINK_NAME[am65x-txpru0_1-fw] = "/lib/firmware/am65x-txpru0_1-fw"
-> +ALTERNATIVE_LINK_NAME[am65x-txpru1_0-fw] = "/lib/firmware/am65x-txpru1_0-fw"
-> +ALTERNATIVE_LINK_NAME[am65x-txpru1_1-fw] = "/lib/firmware/am65x-txpru1_1-fw"
-> +ALTERNATIVE_LINK_NAME[am65x-txpru2_0-fw] = "/lib/firmware/am65x-txpru2_0-fw"
-> +ALTERNATIVE_LINK_NAME[am65x-txpru2_1-fw] = "/lib/firmware/am65x-txpru2_1-fw"
->  
->  ALTERNATIVE_LINK_NAME[j7-pru0_0-fw] = "/lib/firmware/j7-pru0_0-fw"
->  ALTERNATIVE_LINK_NAME[j7-pru0_1-fw] = "/lib/firmware/j7-pru0_1-fw"
-> @@ -217,6 +225,7 @@ ALTERNATIVE_LINK_NAME[j7-txpru1_1-fw] = "/lib/firmware/j7-txpru1_1-fw"
->  ALTERNATIVE_pru-icss-halt = "${PRU_ICSS_ALTERNATIVES}"
->  
->  # Only Halt firmware images are supported for the Tx_PRU cores
-> +ALTERNATIVE_pru-icss-halt_append_am65xx = "am65x-txpru0_0-fw am65x-txpru0_1-fw am65x-txpru1_0-fw am65x-txpru1_1-fw am65x-txpru2_0-fw am65x-txpru2_1-fw"
->  ALTERNATIVE_pru-icss-halt_append_j7 = " j7-txpru0_0-fw j7-txpru0_1-fw j7-txpru1_0-fw j7-txpru1_1-fw"
->  
->  ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru0-fw] = "/lib/firmware/pru/PRU_Halt.out"
-> @@ -249,6 +258,12 @@ ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_0-fw] = "/lib/firmware/pru/RTU_Halt_
->  ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
->  ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
->  ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
-> +ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
-> +ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
-> +ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
-> +ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
-> +ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
-> +ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
->  
->  ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
->  ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
-> -- 
-> 2.17.1
-> 
+as others before me, I am trying to use poky and meta-ti to customize Yoct=
+o to run on the Beaglebone Black (and Green).
+The reason to use the meta-ti layer is to get the drivers for the PowerVR =
+GPU and for the PRUs.
+
+At the moment I have used meta-ti zeus branch and I have been able to comp=
+ile both core-image-minimal and core-image-base.
+Both compilations have been successful but when I try to load the generate=
+d wic.xz images in the beaglebone through the MMC the board does not boot.
+The same images using meta-yocto-bsp (instead of meta-ti) and setting the =
+machine to beaglebone-yocto are booting fine.
+Therefore, before going further with the tests, I have decided to check if=
+ the initial assumptions/the current setup are correct.
+
+I have seen a few threads here in the mailing list with a similar=C2=A0top=
+ic, the last ones being:
+
+* [meta-ti] Getting Started with meta-ti "rocko" and beaglebone black (BBB=
+) ( https://www.yoctoproject.org/pipermail/meta-ti/2018-August/011034.html =
+)
+* [meta-ti] Poky and meta-ti advice for Beaglebone Black ( https://www.yoc=
+toproject.org/pipermail/meta-ti/2018-September/011179.html )
+* [meta-ti] Building for AM335x with meta-ti and meta-qt5 ( https://www.yo=
+ctoproject.org/pipermail/meta-ti/2019-July/012020.html )
+
+There is a nice presentation too Working with meta-ti - Yocto Project Wiki=
+ ( https://wiki.yoctoproject.org/wiki/images/b/b3/Meta-ti.pdf ) , but it se=
+ems to be outdated.
+
+Even considering the documentation above I still have a few doubts:
+* I don't get which is the branch expected to work for every SOC (possibly=
+ different depending on the SOC). At the moment I am interested in the amx3=
+35 SOC used for both the beaglebone black and green. Is there in the reposi=
+tory a note in a readme explaining the combinations that are expected to wo=
+rk?
+* which are the differences between the machines am335-evm and beaglebone?=
+ "Only" the=C2=A0KERNEL_DEVICETREE setup? Are the differences summarized so=
+mewhere?
+* given that I can test the resulting distro on a beaglebone green should =
+I try to set the machine to beaglebone or to am335-evm and customize the uE=
+nv.txt? Which is the suggested/supported approach? I see that in the past i=
+t has been suggested to use the am335-evm, but probably that suggestion is =
+outdated now.
+* when using meta-ti, is it suggested to add the meta-yocto-bsp layer in t=
+he=C2=A0bblayers.conf or not? There are threads and patches (added and reve=
+rted) about that, but I am not sue about the updated verdict
+As explained above I am not sure witch branch or tag is expected to work w=
+ith MACHINE=3Dbeaglebone.
+I am currently using:
+
+* meta-ti: branch zeus,=C2=A0commit=C2=A01dd4558
+* poky: branch zeus,=C2=A0commit ca9cc50
+* meta-openembedded: branch zeus, commit 44e458f
+
+Anyway here you have the two boot log:
+* the first one is ok and has been obtained using meta-yocto-bsp
+* the second one is giving the error "## Error: "bootcmd_nand0" not define=
+d" followed by others
+Log 1
+U-Boot 2019.07 (May 05 2020 - 16:35:11 +0000)
+
+CPU=C2=A0 : AM335X-GP rev 2.1
+Model: TI AM335x BeagleBone Black
+DRAM:=C2=A0 512 MiB
+NAND:=C2=A0 0 MiB
+MMC:=C2=A0 =C2=A0OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT... *** Warning - bad CRC, using default envir=
+onment
+
+<ethaddr> not set. Validating first E-fuse MAC
+Net:=C2=A0 =C2=A0eth0: ethernet@4a100000
+Warning: usb_ether MAC addresses don't match:
+Address in ROM is=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 de:ad:be:ef:00:01
+Address in environment is=C2=A0 c8:fd:19:c6:c2:93
+, eth1: usb_ether
+Hit any key to stop autoboot:=C2=A0 0
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+switch to partitions #0, OK
+mmc0 is current device
+Scanning mmc 0:1...
+Found /extlinux/extlinux.conf
+Retrieving file: /extlinux/extlinux.conf
+119 bytes read in 2 ms (57.6 KiB/s)
+1:=C2=A0 =C2=A0 =C2=A0 Yocto
+Retrieving file: /zImage
+4755816 bytes read in 305 ms (14.9 MiB/s)
+append: root=3DPARTUUID=3D00033363-02 rootwait console=3DttyS0,115200
+Retrieving file: /am335x-bonegreen.dtb
+56060 bytes read in 6 ms (8.9 MiB/s)
+## Flattened Device Tree blob at 88000000
+Booting using the fdt blob at 0x88000000
+Loading Device Tree to 8ffef000, end 8ffffafb ... OK
+
+Log 2
+
+U-Boot 2020.01-gae8ceb7b6e (May 04 2020 - 18:55:25 +0000)
+
+CPU=C2=A0 : AM335X-GP rev 2.1
+Model: TI AM335x BeagleBone Black
+DRAM:=C2=A0 512 MiB
+WDT:=C2=A0 =C2=A0Started with servicing (60s timeout)
+NAND:=C2=A0 0 MiB
+MMC:=C2=A0 =C2=A0OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT... *** Warning - bad CRC, using default envir=
+onment
+
+<ethaddr> not set. Validating first E-fuse MAC
+Net:=C2=A0 =C2=A0eth0: ethernet@4a100000
+Warning: usb_ether MAC addresses don't match:
+Address in ROM is=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 de:ad:be:ef:00:01
+Address in environment is=C2=A0 c8:fd:19:c6:c2:93
+, eth1: usb_ether
+Hit any key to stop autoboot:=C2=A0 0
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+switch to partitions #0, OK
+mmc0 is current device
+Scanning mmc 0:1...
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+switch to partitions #0, OK
+mmc1(part 0) is current device
+** No partition table - mmc 1 **
+switch to partitions #0, OK
+mmc1(part 0) is current device
+SD/MMC found on device 1
+** No partition table - mmc 1 **
+## Error: "bootcmd_nand0" not defined
+starting USB...
+Bus usb@47401800: Port not available.
+ethernet@4a100000 Waiting for PHY auto negotiation to complete............=
+...................................................................... done
+link up on port 0, speed 100, full duplex
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+DHCP client bound to address 192.168.0.16 (900 ms)
+*** ERROR: `serverip' not set
+Cannot autoload with TFTPGET
+missing environment variable: pxeuuid
+Retrieving file: pxelinux.cfg/01-c8-fd-19-c6-c2-91
+link up on port 0, speed 100, full duplex
+*** ERROR: `serverip' not set
+Retrieving file: pxelinux.cfg/C0A80010
+link up on port 0, speed 100, full duplex
+*** ERROR: `serverip' not set
+Retrieving file: pxelinux.cfg/C0A8001
+link up on port 0, speed 100, full duplex
+
+Any suggestion would be very much appreciated.
+
+Luca
+
+--0YR8le7ogqBER6zdxXgB
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi all,<br /><br />as others before me, I am&nbsp;<span style=3D"color: #22=
+2222; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 15px;">t=
+rying to use poky and meta-ti to customize Yocto to run on the Beaglebone B=
+lack (and Green).<br />The reason to use the meta-ti layer is to get the dr=
+ivers for the PowerVR GPU and for the PRUs.<br /><br /></span><span style=
+=3D"color: #222222; font-family: 'Helvetica Neue', Arial, sans-serif; font=
+-size: 15px;">At the moment I have used meta-ti zeus branch and I have been=
+ able to compile both core-image-minimal and core-image-base.</span><br /><=
+span style=3D"color: #222222; font-family: 'Helvetica Neue', Arial, sans-se=
+rif; font-size: 15px;">Both compilations have been successful but when I tr=
+y to load the generated wic.xz images in the beaglebone through the MMC the=
+ board does not boot.<br /></span>The same images using meta-yocto-bsp (ins=
+tead of meta-ti) and setting the machine to beaglebone-yocto are booting fi=
+ne.<br /><span style=3D"color: #222222; font-family: 'Helvetica Neue', Aria=
+l, sans-serif; font-size: 15px;">Therefore, before going further with the t=
+ests, I have decided to check if the initial assumptions/the current setup =
+are correct.</span><br /><br /><span style=3D"color: #222222; font-family: =
+Helvetica Neue, Arial, sans-serif;"><span style=3D"font-size: 15px;">I have=
+ seen a few threads here in the mailing list with a similar&nbsp;topic, the=
+ last ones being:</span></span><br />
+<ul>
+<li><a href=3D"https://www.yoctoproject.org/pipermail/meta-ti/2018-August/=
+011034.html" target=3D"_blank" rel=3D"nofollow noopener">[meta-ti] Getting =
+Started with meta-ti "rocko" and beaglebone black (BBB)</a></li>
+<li><a href=3D"https://www.yoctoproject.org/pipermail/meta-ti/2018-Septemb=
+er/011179.html" target=3D"_blank" rel=3D"nofollow noopener">[meta-ti] Poky =
+and meta-ti advice for Beaglebone Black</a></li>
+<li><a href=3D"https://www.yoctoproject.org/pipermail/meta-ti/2019-July/01=
+2020.html" target=3D"_blank" rel=3D"nofollow noopener">[meta-ti] Building f=
+or AM335x with meta-ti and meta-qt5</a></li>
+</ul>
+There is a nice presentation too&nbsp;<a href=3D"https://wiki.yoctoproject=
+.org/wiki/images/b/b3/Meta-ti.pdf" target=3D"_blank" rel=3D"nofollow noopen=
+er">Working with meta-ti - Yocto Project Wiki</a>, but it seems to be outda=
+ted.<br /><br />Even considering the documentation above I still have a few=
+ doubts:<br />
+<ol>
+<li>I don't get which is the branch expected to work for every SOC (possib=
+ly different depending on the SOC). At the moment I am interested in the am=
+x335 SOC used for both the beaglebone black and green. Is there in the repo=
+sitory a note in a readme explaining the combinations that are expected to =
+work?</li>
+<li>which are the differences between the machines am335-evm and beaglebon=
+e? "Only" the&nbsp;KERNEL_DEVICETREE setup? Are the differences summarized =
+somewhere?</li>
+<li>given that I can test the resulting distro on a beaglebone green shoul=
+d I try to set the machine to beaglebone or to am335-evm and customize the =
+uEnv.txt? Which is the suggested/supported approach? I see that in the past=
+ it has been suggested to use the am335-evm, but probably that suggestion i=
+s outdated now.</li>
+<li>when using meta-ti, is it suggested to add the meta-yocto-bsp layer in=
+ the&nbsp;bblayers.conf or not? There are threads and patches (added and re=
+verted) about that, but I am not sue about the updated verdict</li>
+</ol>
+As explained above I am not sure witch branch or tag is expected to work w=
+ith MACHINE=3Dbeaglebone.<br />I am currently using:<br />
+<ul>
+<li>meta-ti: branch zeus,&nbsp;commit&nbsp;1dd4558</li>
+<li>poky: branch zeus,&nbsp;commit ca9cc50</li>
+<li>meta-openembedded: branch zeus, commit 44e458f</li>
+</ul>
+Anyway here you have the two boot log:<br />
+<ol>
+<li>the first one is ok and has been obtained using meta-yocto-bsp</li>
+<li>the second one is giving the error "## Error: "bootcmd_nand0" not defi=
+ned" followed by others</li>
+</ol>
+<div><span><span>Log 1<br />&nbsp; &nbsp; U-Boot 2019.07 (May 05 2020 - 16=
+:35:11 +0000)<br /><br /></span></span>
+<div>
+<div>&nbsp; &nbsp; CPU&nbsp; : AM335X-GP rev 2.1</div>
+<div>&nbsp; &nbsp; Model: TI AM335x BeagleBone Black</div>
+<div>&nbsp; &nbsp; DRAM:&nbsp; 512 MiB</div>
+<div>&nbsp; &nbsp; NAND:&nbsp; 0 MiB</div>
+<div>&nbsp; &nbsp; MMC:&nbsp; &nbsp;OMAP SD/MMC: 0, OMAP SD/MMC: 1</div>
+<div>&nbsp; &nbsp; Loading Environment from FAT... *** Warning - bad CRC, =
+using default environment</div>
+<div>&nbsp; &nbsp;&nbsp;</div>
+<div>&nbsp; &nbsp; &lt;ethaddr&gt; not set. Validating first E-fuse MAC</d=
+iv>
+<div>&nbsp; &nbsp; Net:&nbsp; &nbsp;eth0: ethernet@4a100000</div>
+<div>&nbsp; &nbsp; Warning: usb_ether MAC addresses don't match:</div>
+<div>&nbsp; &nbsp; Address in ROM is&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; de:=
+ad:be:ef:00:01</div>
+<div>&nbsp; &nbsp; Address in environment is&nbsp; c8:fd:19:c6:c2:93</div>
+<div>&nbsp; &nbsp; , eth1: usb_ether</div>
+<div>&nbsp; &nbsp; Hit any key to stop autoboot:&nbsp; 0</div>
+<div>&nbsp; &nbsp; switch to partitions #0, OK</div>
+<div>&nbsp; &nbsp; mmc0 is current device</div>
+<div>&nbsp; &nbsp; SD/MMC found on device 0</div>
+<div>&nbsp; &nbsp; switch to partitions #0, OK</div>
+<div>&nbsp; &nbsp; mmc0 is current device</div>
+<div>&nbsp; &nbsp; Scanning mmc 0:1...</div>
+<div>&nbsp; &nbsp; Found /extlinux/extlinux.conf</div>
+<div>&nbsp; &nbsp; Retrieving file: /extlinux/extlinux.conf</div>
+<div>&nbsp; &nbsp; 119 bytes read in 2 ms (57.6 KiB/s)</div>
+<div>&nbsp; &nbsp; 1:&nbsp; &nbsp; &nbsp; Yocto</div>
+<div>&nbsp; &nbsp; Retrieving file: /zImage</div>
+<div>&nbsp; &nbsp; 4755816 bytes read in 305 ms (14.9 MiB/s)</div>
+<div>&nbsp; &nbsp; append: root=3DPARTUUID=3D00033363-02 rootwait console=
+=3DttyS0,115200</div>
+<div>&nbsp; &nbsp; Retrieving file: /am335x-bonegreen.dtb</div>
+<div>&nbsp; &nbsp; 56060 bytes read in 6 ms (8.9 MiB/s)</div>
+<div>&nbsp; &nbsp; ## Flattened Device Tree blob at 88000000</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp;Booting using the fdt blob at 0x88000000</=
+div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp;Loading Device Tree to 8ffef000, end 8ffff=
+afb ... OK<br /><br />Log 2<br /><br />
+<div>&nbsp; &nbsp; U-Boot 2020.01-gae8ceb7b6e (May 04 2020 - 18:55:25 +000=
+0)</div>
+<div>&nbsp; &nbsp;&nbsp;</div>
+<div>&nbsp; &nbsp; CPU&nbsp; : AM335X-GP rev 2.1</div>
+<div>&nbsp; &nbsp; Model: TI AM335x BeagleBone Black</div>
+<div>&nbsp; &nbsp; DRAM:&nbsp; 512 MiB</div>
+<div>&nbsp; &nbsp; WDT:&nbsp; &nbsp;Started with servicing (60s timeout)</=
+div>
+<div>&nbsp; &nbsp; NAND:&nbsp; 0 MiB</div>
+<div>&nbsp; &nbsp; MMC:&nbsp; &nbsp;OMAP SD/MMC: 0, OMAP SD/MMC: 1</div>
+<div>&nbsp; &nbsp; Loading Environment from FAT... *** Warning - bad CRC, =
+using default environment</div>
+<div>&nbsp; &nbsp;&nbsp;</div>
+<div>&nbsp; &nbsp; &lt;ethaddr&gt; not set. Validating first E-fuse MAC</d=
+iv>
+<div>&nbsp; &nbsp; Net:&nbsp; &nbsp;eth0: ethernet@4a100000</div>
+<div>&nbsp; &nbsp; Warning: usb_ether MAC addresses don't match:</div>
+<div>&nbsp; &nbsp; Address in ROM is&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; de:=
+ad:be:ef:00:01</div>
+<div>&nbsp; &nbsp; Address in environment is&nbsp; c8:fd:19:c6:c2:93</div>
+<div>&nbsp; &nbsp; , eth1: usb_ether</div>
+<div>&nbsp; &nbsp; Hit any key to stop autoboot:&nbsp; 0</div>
+<div>&nbsp; &nbsp; switch to partitions #0, OK</div>
+<div>&nbsp; &nbsp; mmc0 is current device</div>
+<div>&nbsp; &nbsp; SD/MMC found on device 0</div>
+<div>&nbsp; &nbsp; switch to partitions #0, OK</div>
+<div>&nbsp; &nbsp; mmc0 is current device</div>
+<div>&nbsp; &nbsp; Scanning mmc 0:1...</div>
+<div>&nbsp; &nbsp; switch to partitions #0, OK</div>
+<div>&nbsp; &nbsp; mmc0 is current device</div>
+<div>&nbsp; &nbsp; SD/MMC found on device 0</div>
+<div>&nbsp; &nbsp; switch to partitions #0, OK</div>
+<div>&nbsp; &nbsp; mmc1(part 0) is current device</div>
+<div>&nbsp; &nbsp; ** No partition table - mmc 1 **</div>
+<div>&nbsp; &nbsp; switch to partitions #0, OK</div>
+<div>&nbsp; &nbsp; mmc1(part 0) is current device</div>
+<div>&nbsp; &nbsp; SD/MMC found on device 1</div>
+<div>&nbsp; &nbsp; ** No partition table - mmc 1 **</div>
+<div>&nbsp; &nbsp; ## Error: "bootcmd_nand0" not defined</div>
+<div>&nbsp; &nbsp; starting USB...</div>
+<div>&nbsp; &nbsp; Bus usb@47401800: Port not available.</div>
+<div>&nbsp; &nbsp; ethernet@4a100000 Waiting for PHY auto negotiation to c=
+omplete....................................................................=
+.............. done</div>
+<div>&nbsp; &nbsp; link up on port 0, speed 100, full duplex</div>
+<div>&nbsp; &nbsp; BOOTP broadcast 1</div>
+<div>&nbsp; &nbsp; BOOTP broadcast 2</div>
+<div>&nbsp; &nbsp; BOOTP broadcast 3</div>
+<div>&nbsp; &nbsp; DHCP client bound to address 192.168.0.16 (900 ms)</div=
+>
+<div>&nbsp; &nbsp; *** ERROR: `serverip' not set</div>
+<div>&nbsp; &nbsp; Cannot autoload with TFTPGET</div>
+<div>&nbsp; &nbsp; missing environment variable: pxeuuid</div>
+<div>&nbsp; &nbsp; Retrieving file: pxelinux.cfg/01-c8-fd-19-c6-c2-91</div=
+>
+<div>&nbsp; &nbsp; link up on port 0, speed 100, full duplex</div>
+<div>&nbsp; &nbsp; *** ERROR: `serverip' not set</div>
+<div>&nbsp; &nbsp; Retrieving file: pxelinux.cfg/C0A80010</div>
+<div>&nbsp; &nbsp; link up on port 0, speed 100, full duplex</div>
+<div>&nbsp; &nbsp; *** ERROR: `serverip' not set</div>
+<div>&nbsp; &nbsp; Retrieving file: pxelinux.cfg/C0A8001</div>
+<div>&nbsp; &nbsp; link up on port 0, speed 100, full duplex</div>
+</div>
+</div>
+<span><br />Any suggestion would be very much appreciated.<br /><br /></sp=
+an></div>
+<span style=3D"color: #222222; font-family: 'Helvetica Neue', Arial, sans-=
+serif; font-size: 15px;">Luca</span>
+
+--0YR8le7ogqBER6zdxXgB--
