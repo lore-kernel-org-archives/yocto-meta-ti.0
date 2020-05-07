@@ -1,106 +1,75 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.765.1588828972093150751
- for <meta-ti@lists.yoctoproject.org>;
- Wed, 06 May 2020 22:22:52 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EjJ0JxPE;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: nikhil.nd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0475MpMG034907;
-	Thu, 7 May 2020 00:22:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1588828971;
-	bh=JVbAhqmcHqtW+jrwTgWs1OaP7EELfXEvsfXX3bAmhsI=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=EjJ0JxPEJqG1F8bgXX3epWwHvJ76WT6h694FIi0AgmxMj8lfs86n/Nigz+Sq56UpY
-	 i6gloiXNKALBnxsvtS/2JS1gFEP1sU/PsCLkOQgnhzYzqSOQcgfuH7g5BRsT6D6fPX
-	 8QuH/+vYFIw2k7ES6SAtykMpoOAybL87F/aw/240=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0475MpKC072230;
-	Thu, 7 May 2020 00:22:51 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 7 May
- 2020 00:22:50 -0500
-Received: from DFLE108.ent.ti.com ([fe80::c18:99ac:4a4:2ceb]) by
- DFLE108.ent.ti.com ([fe80::c18:99ac:4a4:2ceb%17]) with mapi id
- 15.01.1979.003; Thu, 7 May 2020 00:22:50 -0500
-From: "Nikhil Devshatwar" <nikhil.nd@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-CC: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-        "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][zeus/master PATCH v1] recipes-kernel: linux-ti-staging: Autoload kernel module rpmsg_kdrv_switch
-Thread-Topic: [meta-ti][zeus/master PATCH v1] recipes-kernel:
- linux-ti-staging: Autoload kernel module rpmsg_kdrv_switch
-Thread-Index: AQHWI7xXf+UhuOQs9kq0oHshhcAW7aibku8AgACEX7A=
-Date: Thu, 7 May 2020 05:22:50 +0000
-Message-ID: <d18ae6fb6b5f471e8ac281b3e56110e8@ti.com>
-References: <20200506153803.11083-1-nikhil.nd@ti.com>
- <20200506162753.GQ2849@beryl>
-In-Reply-To: <20200506162753.GQ2849@beryl>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.175.248]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: Re: meta-ti setup suggestions for beaglebone (SoC AM335x)
+To: meta-ti@lists.yoctoproject.org
+From: yoc.dev@whitetree.xyz
+X-Originating-Location: Tewkesbury, England, GB (86.142.173.66)
+X-Originating-Platform: Linux Firefox 75
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+Date: Thu, 07 May 2020 02:50:01 -0700
+References: <BfLY.1588763283272971866.HOsc@lists.yoctoproject.org>
+In-Reply-To: <BfLY.1588763283272971866.HOsc@lists.yoctoproject.org>
+Message-ID: <3193.1588845001912519601@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="r6YsI4V4PDtinZaVi0BT"
+
+--r6YsI4V4PDtinZaVi0BT
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Denys,
+Hi Luca,
 
-I was expecting a merge to zeus as well.
-What branches are we using for the coresdk release?
+In the meta-ti repository this commit 7646efc16a2b0aeafb6790a7d18b8fa2ca45=
+47ad added a wks script which by default creates an SD card image with 3 pa=
+rtitions.
 
-Regards,
-Nikhil D
+In the TI uboot code you will see that when booting from the MMC uboot exp=
+ects there to be two partitions not three, hence your error.
 
------Original Message-----
-From: Dmytriyenko, Denys=20
-Sent: Wednesday, May 6, 2020 9:58 PM
-To: Devshatwar, Nikhil
-Cc: meta-ti@yoctoproject.org; meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][zeus/master PATCH v1] recipes-kernel: linux-ti-stagi=
-ng: Autoload kernel module rpmsg_kdrv_switch
+include/configs/am335x_evm.h
 
-Nikhil,
+lines 53 - 57
 
-This has already been merged over a week ago:
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=3Dbaa7ddff0d03=
-0f228f55483da76a4ad8d4a205c8
+#define BOOTENV_DEV_LEGACY_MMC(devtypeu, devtypel, instance) \
+"bootcmd_" #devtypel #instance "=3D" \
+"setenv mmcdev " #instance"; "\
+"setenv bootpart " #instance":2 ; "\
+"run mmcboot\0"
 
-Denys
+To fix this you will want to include the following line in your local.conf=
+ (or custom bsp layer):
 
+WKS_FILE ?=3D "sdimage-bootpart.wks"
 
-On Wed, May 06, 2020 at 09:08:03PM +0530, nikhil.nd@ti.com wrote:
-> From: Nikhil Devshatwar <nikhil.nd@ti.com>
->=20
-> rpmsg_kdrv_switch kernel module is implicitly dependent on the
-> for virtual ethernet driver. Ensure that the module is auto loaded
-> by default foe j7-evm platfom.
->=20
-> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
-> ---
->  recipes-kernel/linux/linux-ti-staging_5.4.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kerne=
-l/linux/linux-ti-staging_5.4.bb
-> index ecf72af9..1ec2a2fd 100644
-> --- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
-> +++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-> @@ -74,6 +74,7 @@ SRC_URI +=3D "${KERNEL_GIT_URI};protocol=3D${KERNEL_GIT=
-_PROTOCOL};branch=3D${BRANCH} \
-> =20
->  FILES_${KERNEL_PACKAGE_NAME}-devicetree +=3D "/${KERNEL_IMAGEDEST}/*.itb=
-"
-> =20
-> +KERNEL_MODULE_AUTOLOAD_append_j7-evm =3D " rpmsg_kdrv_switch"
->  # Special configuration for remoteproc/rpmsg IPC modules
->  module_conf_rpmsg_client_sample =3D "blacklist rpmsg_client_sample"
->  module_conf_ti_k3_r5_remoteproc =3D "softdep ti_k3_r5_remoteproc pre: vi=
-rtio_rpmsg_bus"
-> --=20
-> 2.17.1
->=20
+This will create a wic image which only has two partitions and you will be=
+ able to boot from the MMC successfully. For reference the sdimage-bootpart=
+.wks is part of poky.
+
+To be clear I had this working using the meta-ti layer - with the change a=
+bove and by setting the MACHINE variable to beaglebone.
+
+Hope this helps!
+
+Charlie
+
+--r6YsI4V4PDtinZaVi0BT
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi Luca,<br /><br />In the meta-ti repository this commit 7646efc16a2b0aeaf=
+b6790a7d18b8fa2ca4547ad added a wks script which by default creates an SD c=
+ard image with 3 partitions.<br /><br />In the TI uboot code you will see t=
+hat when booting from the MMC uboot expects there to be two partitions not =
+three, hence your error.<br /><br />include/configs/am335x_evm.h<br /><br /=
+>lines 53 - 57<br /><br />#define BOOTENV_DEV_LEGACY_MMC(devtypeu, devtypel=
+, instance) \<br />&nbsp;&nbsp;&nbsp; "bootcmd_" #devtypel #instance "=3D" =
+\<br />&nbsp;&nbsp;&nbsp; "setenv mmcdev " #instance"; "\<br />&nbsp;&nbsp;=
+&nbsp; "setenv bootpart " #instance":2 ; "\<br />&nbsp;&nbsp;&nbsp; "run mm=
+cboot\0"<br /><br />To fix this you will want to include the following line=
+ in your local.conf (or custom bsp layer):<br /><br />WKS_FILE ?=3D "sdimag=
+e-bootpart.wks"<br /><br />This will create a wic image which only has two =
+partitions and you will be able to boot from the MMC successfully. For refe=
+rence the sdimage-bootpart.wks is part of poky.<br /><br />To be clear I ha=
+d this working using the meta-ti layer - with the change above and by setti=
+ng the MACHINE variable to beaglebone.<br /><br />Hope this helps!<br /><br=
+ />Charlie
+
+--r6YsI4V4PDtinZaVi0BT--
