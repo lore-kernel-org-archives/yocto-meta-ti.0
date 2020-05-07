@@ -1,113 +1,106 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.2249.1588813679607738137
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.765.1588828972093150751
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 06 May 2020 18:08:00 -0700
+ Wed, 06 May 2020 22:22:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 023F840BDF;
-	Thu,  7 May 2020 01:07:59 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MBHn2yy6q_Ih; Thu,  7 May 2020 01:07:58 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D9A3140A93;
-	Thu,  7 May 2020 01:07:57 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 386E016EC83;
-	Wed,  6 May 2020 21:07:57 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [master][PATCH] conf/wic: switch back to 2-partition SD images, reserve extra space in boot
-Date: Wed,  6 May 2020 21:07:57 -0400
-Message-Id: <1588813677-430-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EjJ0JxPE;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: nikhil.nd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0475MpMG034907;
+	Thu, 7 May 2020 00:22:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1588828971;
+	bh=JVbAhqmcHqtW+jrwTgWs1OaP7EELfXEvsfXX3bAmhsI=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=EjJ0JxPEJqG1F8bgXX3epWwHvJ76WT6h694FIi0AgmxMj8lfs86n/Nigz+Sq56UpY
+	 i6gloiXNKALBnxsvtS/2JS1gFEP1sU/PsCLkOQgnhzYzqSOQcgfuH7g5BRsT6D6fPX
+	 8QuH/+vYFIw2k7ES6SAtykMpoOAybL87F/aw/240=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0475MpKC072230;
+	Thu, 7 May 2020 00:22:51 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 7 May
+ 2020 00:22:50 -0500
+Received: from DFLE108.ent.ti.com ([fe80::c18:99ac:4a4:2ceb]) by
+ DFLE108.ent.ti.com ([fe80::c18:99ac:4a4:2ceb%17]) with mapi id
+ 15.01.1979.003; Thu, 7 May 2020 00:22:50 -0500
+From: "Nikhil Devshatwar" <nikhil.nd@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+CC: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+        "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti][zeus/master PATCH v1] recipes-kernel: linux-ti-staging: Autoload kernel module rpmsg_kdrv_switch
+Thread-Topic: [meta-ti][zeus/master PATCH v1] recipes-kernel:
+ linux-ti-staging: Autoload kernel module rpmsg_kdrv_switch
+Thread-Index: AQHWI7xXf+UhuOQs9kq0oHshhcAW7aibku8AgACEX7A=
+Date: Thu, 7 May 2020 05:22:50 +0000
+Message-ID: <d18ae6fb6b5f471e8ac281b3e56110e8@ti.com>
+References: <20200506153803.11083-1-nikhil.nd@ti.com>
+ <20200506162753.GQ2849@beryl>
+In-Reply-To: <20200506162753.GQ2849@beryl>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.250.175.248]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+MIME-Version: 1.0
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hi Denys,
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/include/k3.inc                  |  2 +-
- conf/machine/include/omap-a15.inc            |  2 +-
- conf/machine/include/ti33x.inc               |  2 +-
- conf/machine/include/ti43x.inc               |  2 +-
- wic/{sdimage-3part.wks => sdimage-2part.wks} | 12 +++++-------
- 5 files changed, 9 insertions(+), 11 deletions(-)
- rename wic/{sdimage-3part.wks => sdimage-2part.wks} (22%)
+I was expecting a merge to zeus as well.
+What branches are we using for the coresdk release?
 
-diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
-index 765e0ee..54b1789 100644
---- a/conf/machine/include/k3.inc
-+++ b/conf/machine/include/k3.inc
-@@ -39,7 +39,7 @@ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa etherne
- IMAGE_FSTYPES += "tar.xz wic.xz"
- 
- IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysfw.itb"
--WKS_FILE ?= "sdimage-3part.wks"
-+WKS_FILE ?= "sdimage-2part.wks"
- do_image_wic[depends] += "virtual/bootloader:do_deploy"
- do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
- do_image_tar[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index c22e6dd..e491d2b 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -39,6 +39,6 @@ UBI_VOLNAME = "rootfs"
- MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu mmip dsp gc320"
- 
- IMAGE_FSTYPES += "tar.xz wic.xz"
--WKS_FILE ?= "sdimage-3part.wks"
-+WKS_FILE ?= "sdimage-2part.wks"
- IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
- do_image_wic[depends] += "u-boot:do_deploy"
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index bf9b557..abfd7ec 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -61,6 +61,6 @@ TI_PDK_LIMIT_SOCS = "am335x"
- TI_PDK_LIMIT_BOARDS = "evmAM335x icev2AM335x iceAMIC110 bbbAM335x skAM335x"
- 
- IMAGE_FSTYPES += "tar.xz wic.xz"
--WKS_FILE ?= "sdimage-3part.wks"
-+WKS_FILE ?= "sdimage-2part.wks"
- IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
- do_image_wic[depends] += "u-boot:do_deploy"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index 5d6ea41..524b0b2 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -57,6 +57,6 @@ TI_PDK_LIMIT_SOCS = "am437x"
- TI_PDK_LIMIT_BOARDS = "evmAM437x idkAM437x skAM437x"
- 
- IMAGE_FSTYPES += "tar.xz wic.xz"
--WKS_FILE ?= "sdimage-3part.wks"
-+WKS_FILE ?= "sdimage-2part.wks"
- IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
- do_image_wic[depends] += "u-boot:do_deploy"
-diff --git a/wic/sdimage-3part.wks b/wic/sdimage-2part.wks
-similarity index 22%
-rename from wic/sdimage-3part.wks
-rename to wic/sdimage-2part.wks
-index 86aeb1c..77d6f7b 100644
---- a/wic/sdimage-3part.wks
-+++ b/wic/sdimage-2part.wks
-@@ -1,8 +1,6 @@
--# short-description: Create SD card image with 3 partitions
--# long-description: Creates a partitioned SD card image for testing TI platforms.
--# Boot files are located in the first vfat partition.
--# Second ext4 partition is empty and is used for testing.
-+# short-description: Create SD card image with 2 partitions
-+# long-description: Creates a partitioned SD card image for TI platforms.
-+# Boot files are located in the first vfat partition with extra reserved space.
- 
--part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 1024 --size 100M --use-uuid
--part test --ondisk mmcblk0 --fstype=ext4 --label test --align 1024 --size 1G --use-uuid
--part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 1024 --extra-space 500M --use-uuid
-+part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 1024 --extra-space 100M --use-uuid
-+part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 1024 --use-uuid
--- 
-2.7.4
+Regards,
+Nikhil D
 
+-----Original Message-----
+From: Dmytriyenko, Denys=20
+Sent: Wednesday, May 6, 2020 9:58 PM
+To: Devshatwar, Nikhil
+Cc: meta-ti@yoctoproject.org; meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][zeus/master PATCH v1] recipes-kernel: linux-ti-stagi=
+ng: Autoload kernel module rpmsg_kdrv_switch
+
+Nikhil,
+
+This has already been merged over a week ago:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=3Dbaa7ddff0d03=
+0f228f55483da76a4ad8d4a205c8
+
+Denys
+
+
+On Wed, May 06, 2020 at 09:08:03PM +0530, nikhil.nd@ti.com wrote:
+> From: Nikhil Devshatwar <nikhil.nd@ti.com>
+>=20
+> rpmsg_kdrv_switch kernel module is implicitly dependent on the
+> for virtual ethernet driver. Ensure that the module is auto loaded
+> by default foe j7-evm platfom.
+>=20
+> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
+> ---
+>  recipes-kernel/linux/linux-ti-staging_5.4.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kerne=
+l/linux/linux-ti-staging_5.4.bb
+> index ecf72af9..1ec2a2fd 100644
+> --- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
+> +++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+> @@ -74,6 +74,7 @@ SRC_URI +=3D "${KERNEL_GIT_URI};protocol=3D${KERNEL_GIT=
+_PROTOCOL};branch=3D${BRANCH} \
+> =20
+>  FILES_${KERNEL_PACKAGE_NAME}-devicetree +=3D "/${KERNEL_IMAGEDEST}/*.itb=
+"
+> =20
+> +KERNEL_MODULE_AUTOLOAD_append_j7-evm =3D " rpmsg_kdrv_switch"
+>  # Special configuration for remoteproc/rpmsg IPC modules
+>  module_conf_rpmsg_client_sample =3D "blacklist rpmsg_client_sample"
+>  module_conf_ti_k3_r5_remoteproc =3D "softdep ti_k3_r5_remoteproc pre: vi=
+rtio_rpmsg_bus"
+> --=20
+> 2.17.1
+>=20
