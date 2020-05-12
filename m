@@ -1,109 +1,80 @@
-Received: from mail-il1-f193.google.com (mail-il1-f193.google.com [209.85.166.193])
- by mx.groups.io with SMTP id smtpd.web12.7135.1589294296059607442
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.2195.1589311107209934481
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 12 May 2020 07:38:16 -0700
+ Tue, 12 May 2020 12:18:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MKicwvNZ;
- spf=pass (domain: gmail.com, ip: 209.85.166.193, mailfrom: robertcnelson@gmail.com)
-Received: by mail-il1-f193.google.com with SMTP id j2so1683303ilr.5
-        for <meta-ti@lists.yoctoproject.org>; Tue, 12 May 2020 07:38:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=VZGvigOcxzCEwkeMxh/icsXRuJDgR8ZfRQIBRZDxCH8=;
-        b=MKicwvNZ+TZF4Oo+V3m7SobZ/bS8RbcsO6bRhmKDMJvC9K/g8KLgY3H/3UD30+Bk8c
-         OzHaBb8tp5s2aAesvVcZY7dEPAG/7NQdQLI7XjoiGT2kV7HbFzVWIQQNLw8cVT+aiEyi
-         EYM3PjuKSDqRxB41tJN+qifTyD+0L8iIpzo7aA6HFiJdflIva/zJeuD4RSYTERjunvii
-         ZMcNQbPSHRR1hcnlkBvW4g70MFguub+UGlq9tfBhgleW+sbAiomzEYfL3d8HwiMjHuGN
-         IB/VPxrnKE4HCNUugELaKuUrffTKoJBYjWD7FzaI5Ovo1KCl9JuNNOtQTypUPPbztazB
-         kuqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=VZGvigOcxzCEwkeMxh/icsXRuJDgR8ZfRQIBRZDxCH8=;
-        b=i8z1cxmOqLc+mAp7PlqHf9Bf+lFcnmUELE03eD64E62ag8MJPH+e251R8eQFqeqpgO
-         RjJFlHa042Qps1vMSzjLnFvCrE20fVqVh+2FgQDPEfbM8E78mgAGVFNjiBAUQG4He4iZ
-         9DNp91Q3tqvLtVr7eynIf/crwVfXeTXFv3zbNm9U6A6lPk800Vham9wXot56eUNLaZUf
-         wYATAXhWCBhOcj5Bcqi5vlwIa1XDRYGrVtbkLXhuV/1Za8KxoTNE2NHYhs1QcfioQaIr
-         Wfx/NUQuMIooAvWR3vfISTIkJCLDePBrSk1dnfqay9cwPMsGOmRPEtXVDfO83s1K8qvL
-         OkzA==
-X-Gm-Message-State: AGi0PuYKC+m1Id20YKSYjci8bfYF6zXrikTz6SCsKaIhFIVjeHGeSwpH
-	9XpGltkwkXUf+hkrfKwdEDU+xqWXqLFfqwHPBXM=
-X-Google-Smtp-Source: APiQypIxDsnPEPLuMj4PPY27u+c4y0hWlVDZzBrTh33PhopFxeKqojqfmkMYk3tRP6j07frH5uxvTyhHtRUbgEl9K68=
-X-Received: by 2002:a05:6e02:487:: with SMTP id b7mr17379756ils.242.1589294295108;
- Tue, 12 May 2020 07:38:15 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=jGq4mF2v;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 04CJIPeJ120660
+	for <meta-ti@lists.yoctoproject.org>; Tue, 12 May 2020 14:18:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1589311105;
+	bh=Ph0Fb1+vQB9sqMtUEcCLxMFaJc7fXl78P1Zyg2vnpAk=;
+	h=From:To:CC:Subject:Date;
+	b=jGq4mF2voOoSehtJ005fkh1E4eYU7maDu8CaunMp01b66+y45ZxQz4KmeDKXwecQw
+	 ZmHeGwh3hVVGgs7yESQVu/BAGEF6uia+vUuvO+jNCCRK1NNAlW3VMGxTUbOegTBYAo
+	 xwxvHssJp77qXiW1BI1jozSk0Vwz6xkyjfegUD4M=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 04CJIPnl055489
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 12 May 2020 14:18:25 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 12
+ May 2020 14:18:25 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Tue, 12 May 2020 14:18:25 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 04CJIPZS034398;
+	Tue, 12 May 2020 14:18:25 -0500
+From: "Dan Murphy" <dmurphy@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <denys@ti.com>
+CC: Dan Murphy <dmurphy@ti.com>
+Subject: [PATCH] linux-ti-staging: update to 5.4.39 and 07.00.00.002 tag
+Date: Tue, 12 May 2020 14:08:55 -0500
+Message-ID: <20200512190855.27814-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <Groupsio.1.7LnR.1589224673492252312.sRzQ@lists.yoctoproject.org>
-In-Reply-To: <Groupsio.1.7LnR.1589224673492252312.sRzQ@lists.yoctoproject.org>
-From: "Robert Nelson" <robertcnelson@gmail.com>
-Date: Tue, 12 May 2020 09:37:49 -0500
-Message-ID: <CAOCHtYg3QsKNf_vuWFzyuAtKL8bGPbfco8nR6T6_0koXkGEpLA@mail.gmail.com>
-Subject: Re: [meta-ti] Kernel device tree customisation on AM335X (dts, dtb, dtbo usage)
-To: Luca <magnabosco.luca@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Tue, May 12, 2020 at 6:32 AM Luca <magnabosco.luca@gmail.com> wrote:
->
-> [Edited Message Follows]
-> [Reason: Simplify issue description and fix link]
->
-> Hi all,
->
-> in general I am interested in using a dts to get a dtbo and get the secon=
-d one loaded by u-boot when using SOC AM335x (my current test board is a Be=
-agleboard green).
-> At the moment I am trying to use a BB-BONE-LCD5-01-00A1.dts to customise =
-the kernel device tree.
->
-> Unfortunately, despite setting the "overlay_files" variable in uEnv.txt:
->
-> the generated BB-BONE-LCD5-01-00A1.dtb on the boot folder of the MMC seem=
-s to have no effect.
-> I don't see any useful info on the u-boot log.
-> checking on /sys/firmware/devicetree/base I am not able to tell if the dt=
-bo has been loaded
->
->
-> I am using:
->
-> meta-ti: branch zeus, commit 1dd4558 (with a fixed .wks see https://lists=
-.yoctoproject.org/g/meta-ti/message/12916). I will probably switch to tag t=
-i2020.00 or previous if needed
-> poky: branch zeus, commit ca9cc50
-> meta-openembedded: branch zeus, commit 44e458f
-> MACHINE set to beaglebone
->
-> Notes
->
-> BB-BONE-LCD5-01-00A1.dtbo has been generated by a recipe that uses the de=
-vicetree.bbclass (See device-tree.bb and openembedded-core).
-> to get the .dtbo in the boot partition when using WIC the local.conf (or =
-<machine>.conf or ...) has been edited adding the followiing line
->
-> IMAGE_BOOT_FILES_append =3D " devicetree/*"
->
-> Doubts:
->
-> taking a look to the u-boot tag ti2020.01.00 used by the meta-ti version =
-I am using, I see that CONFIG_OF_LIBFDT_OVERLAY is not set for am335x. Ther=
-efore I suppose that the variable overlay_files set in uEnv.txt would have =
-no effect for am335X SOC, is it correct?
-> If the previous point is correct, which is the suggested approach to cust=
-omise the device-tree with current u-boot? Probably using the "single FIT i=
-mage" described in overlay-fdt-boot.txt in i-boot sources?
->
-> Any suggestion would be much appreciated.
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_5.4.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_5.4.bb    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-Just use the BeagleBone "Green" base dtb, use the "fdtoverlay" dtc
-utilty to add the BB-BONE-LCD5-01-00A1 on top of the Green *.dtb and
-load it like normal in yocto..
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+index 0ac65afa..6b06bd87 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.4:"
+ 
+ BRANCH = "ti-rt-linux-5.4.y"
+ 
+-SRCREV = "f9105a2c9d7c0fd514250ee3cb9397a3ff87d23e"
+-PV = "5.4.34+git${SRCPV}"
++SRCREV = "0b80a9e05fcfe5b40af3002e8464aede98fe2571"
++PV = "5.4.39+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+index d32a8d40..9c61a0a9 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+@@ -61,8 +61,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.4.y"
+ 
+-SRCREV = "c8469270aa0e018913e0af1de913a70257742e6e"
+-PV = "5.4.38+git${SRCPV}"
++SRCREV = "5b74b058323bfccbbf95d09cf2e41d1bec5c68fd"
++PV = "5.4.39+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
+-- 
+2.25.1
 
-Regards,
-
---=20
-Robert Nelson
-https://rcn-ee.com/
