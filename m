@@ -1,70 +1,79 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.3294.1589415160854454911
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.7668.1589440694891564794
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 13 May 2020 17:12:41 -0700
+ Thu, 14 May 2020 00:18:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3D83440C15;
-	Thu, 14 May 2020 00:12:40 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0Cz4wVU51rgH; Thu, 14 May 2020 00:12:40 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 23C0A40B53;
-	Thu, 14 May 2020 00:12:39 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id B8C22173134;
-	Wed, 13 May 2020 20:12:38 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH] atf, sciclient: add missing j7-hs-evm support
-Date: Wed, 13 May 2020 20:12:38 -0400
-Message-Id: <1589415158-6406-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=nEM9a2Rv;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rogerq@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 04E7IELV046549
+	for <meta-ti@lists.yoctoproject.org>; Thu, 14 May 2020 02:18:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1589440694;
+	bh=ct+1c8MZt/QrnX2NYAw6Bw0ZM1f3WrC7g86Xl9a1i4k=;
+	h=From:To:CC:Subject:Date;
+	b=nEM9a2RvvMgfJDr3lykYlaMrEKHy4eLXs47gOuSpEl7qU57HoHMRokEeSKgL10K8C
+	 68bh8fSzqz/KXymM7984/a0gMRS1QS/qOQ5topw4dD6T3BTpwW1jIBz0NZm8dOjgxJ
+	 32frVwy6XPFG6kdTfY9auG9c5Pql7Up+WI826K7g=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 04E7IEjF100063
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Thu, 14 May 2020 02:18:14 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 14
+ May 2020 02:18:13 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Thu, 14 May 2020 02:18:14 -0500
+Received: from lta0400828a.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 04E7ICjL111799;
+	Thu, 14 May 2020 02:18:13 -0500
+From: "Roger Quadros" <rogerq@ti.com>
+To: <denys@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Roger Quadros <rogerq@ti.com>
+Subject: [dunfell/master PATCH] am65xx-evm: Add missing k3-am654-idk-sr1.dtbo
+Date: Thu, 14 May 2020 10:18:10 +0300
+Message-ID: <20200514071810.5719-1-rogerq@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+For SR1.0 we use a different overlay for IDK card.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Roger Quadros <rogerq@ti.com>
 ---
- recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb | 8 ++++++++
- recipes-bsp/sciclient/sciclient-rtos_git.bb                  | 1 +
- 2 files changed, 9 insertions(+)
+ conf/machine/am65xx-evm.conf    | 1 +
+ conf/machine/am65xx-hs-evm.conf | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb b/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb
-index f15570c..ae957bf 100644
---- a/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb
-+++ b/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb
-@@ -54,6 +54,14 @@ do_compile_append_am65xx-hs-evm() {
- 	)
- }
- 
-+do_compile_append_j7-hs-evm() {
-+	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
-+	( cd ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/; \
-+		mv bl31.bin bl31.bin.unsigned; \
-+		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
-+	)
-+}
-+
- do_install() {
- 	install -d ${D}/boot
- 	install -m 0644 ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/bl31.bin ${D}/boot/
-diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
-index 7fbeb1e..deaf0b1 100644
---- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
-+++ b/recipes-bsp/sciclient/sciclient-rtos_git.bb
-@@ -27,6 +27,7 @@ export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/pac
- 
- BUILD_HS = ""
- BUILD_HS_am65xx-hs-evm = "yes"
-+BUILD_HS_j7-hs-evm = "yes"
- export BUILD_HS
- 
- # Sciclient for am65x supports mcu1_1 in addition to the default cores in TI_PDK_LIMIT_CORES
+diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
+index e5766f18..0007377c 100644
+--- a/conf/machine/am65xx-evm.conf
++++ b/conf/machine/am65xx-evm.conf
+@@ -16,6 +16,7 @@ KERNEL_DEVICETREE = " \
+     ti/k3-am654-base-board-sr1.dtb \
+     ti/k3-am654-gp.dtbo \
+     ti/k3-am654-idk.dtbo \
++    ti/k3-am654-idk-sr1.dtbo \
+     ti/k3-am654-evm-hdmi.dtbo \
+     ti/k3-am654-evm-oldi-lcd1evm.dtbo \
+     ti/k3-am654-evm-tc358876.dtbo \
+diff --git a/conf/machine/am65xx-hs-evm.conf b/conf/machine/am65xx-hs-evm.conf
+index 6d20a0de..702ba308 100644
+--- a/conf/machine/am65xx-hs-evm.conf
++++ b/conf/machine/am65xx-hs-evm.conf
+@@ -12,6 +12,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ KERNEL_DEVICETREE = " \
+     ti/k3-am654-base-board.dtb ti/k3-am654-gp.dtbo \
+     ti/k3-am654-evm-hdmi.dtbo ti/k3-am654-idk.dtbo \
++    ti/k3-am654-idk-sr1.dtbo \
+     ti/k3-am654-evm-oldi-lcd1evm.dtbo ti/k3-am654-evm-tc358876.dtbo \
+     ti/k3-am654-pcie-usb2.dtbo ti/k3-am654-pcie-usb3.dtbo \
+     ti/k3-am654-base-board-jailhouse.dtbo \
 -- 
-2.7.4
+Texas Instruments Finland Oy, Porkkalankatu 22, 00180 Helsinki.
+Y-tunnus/Business ID: 0615521-4. Kotipaikka/Domicile: Helsinki
 
