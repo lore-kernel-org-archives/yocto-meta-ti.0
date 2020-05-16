@@ -1,73 +1,151 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.18166.1589562223678116140
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.5427.1589597117169868439
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 15 May 2020 10:03:43 -0700
+ Fri, 15 May 2020 19:45:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ITrpsSoh;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: denys@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 04FH3gP1015238
-	for <meta-ti@lists.yoctoproject.org>; Fri, 15 May 2020 12:03:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1589562222;
-	bh=BR61NrmfNTolO21zJi2TGk+4+lGsZoP2zrpX0uP9MkM=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=ITrpsSohlmqd+gQE8Ys3CvmPslt87Z87nzuUSeD50wqnejXyjzO/tvREs3Xgrd8Lu
-	 yUgMclhweFGRatT8Lv8LCoQwcnnEt3nl4KBWJc1IzKZaOqepflrJ3Zvq2SQhwdwHJQ
-	 115CX8A+6ZJwmeuSbf8gULWrk66d09ewHjt5lS0M=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 04FH3gO1038672
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 15 May 2020 12:03:42 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 15
- May 2020 12:03:42 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 15 May 2020 12:03:41 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 04FH3gfJ000770;
-	Fri, 15 May 2020 12:03:42 -0500
-Date: Fri, 15 May 2020 13:03:41 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: <nikhil.nd@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][dunfell PATCH] recipes-kernel: jailhouse: Update SRCREV to latest
-Message-ID: <20200515170341.GE8594@beryl>
-References: <20200515135844.4333-1-nikhil.nd@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <20200515135844.4333-1-nikhil.nd@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3810640C20;
+	Sat, 16 May 2020 02:45:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id KeAy7bBUPGH9; Sat, 16 May 2020 02:45:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 14EAD40A9E;
+	Sat, 16 May 2020 02:45:15 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 55E0D1730D6;
+	Fri, 15 May 2020 22:45:14 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [dunfell/master][PATCH] ti-sci-fw: introduce recipe to package sources for MAINMACHINE
+Date: Fri, 15 May 2020 22:45:12 -0400
+Message-Id: <1589597112-44311-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-On Fri, May 15, 2020 at 07:28:44PM +0530, nikhil.nd@ti.com wrote:
-> From: Nikhil Devshatwar <nikhil.nd@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
 
-Any version updates? Still 0.12 based?
+ti-sci-fw builds multiple config variants via multiconfig and the number
+is expected to grow. Provide a recipe to package a single set of sources
+for MAINMACHINE.
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/ti-sci-fw/ti-sci-fw-source_2020.04.bb | 45 +++++++++++++++++++++++
+ recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb        | 17 +--------
+ recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.inc       | 16 ++++++++
+ 3 files changed, 62 insertions(+), 16 deletions(-)
+ create mode 100644 recipes-bsp/ti-sci-fw/ti-sci-fw-source_2020.04.bb
+ create mode 100644 recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.inc
 
-> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
-> ---
->  recipes-kernel/jailhouse/jailhouse_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/recipes-kernel/jailhouse/jailhouse_git.bb b/recipes-kernel/jailhouse/jailhouse_git.bb
-> index 3ee24e58..46447af6 100644
-> --- a/recipes-kernel/jailhouse/jailhouse_git.bb
-> +++ b/recipes-kernel/jailhouse/jailhouse_git.bb
-> @@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
->  "
->  
->  PV = "0.12+git${SRCPV}"
-> -SRCREV = "2c6516ce3d0e0c4e9372e4439562dd660877cb79"
-> +SRCREV = "8fd88c37ae1a4f7130ef40899c0eadd737c64832"
->  BRANCH = "ti-jailhouse-0.12"
->  
->  SRC_URI = " \
-> -- 
-> 2.17.1
-> 
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw-source_2020.04.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw-source_2020.04.bb
+new file mode 100644
+index 0000000..becf893
+--- /dev/null
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw-source_2020.04.bb
+@@ -0,0 +1,45 @@
++# ti-sci-fw builds and packages multiple config variants via multiconfig
++# Let's take a page from gcc-source as a common recipe for all gcc stages,
++# but also to provide a single package for MAINMACHINE of all multiconfigs
++
++require recipes-bsp/ti-sci-fw/ti-sci-fw_${PV}.inc
++
++SUMMARY += "- sources"
++
++COMPATIBLE_MACHINE = "k3"
++
++EXCLUDE_FROM_WORLD = "1"
++INHIBIT_DEFAULT_DEPS = "1"
++DEPENDS = ""
++
++PACKAGES = "${PN}"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++do_configure[noexec] = "1"
++do_compile[noexec] = "1"
++
++SRCIPK_SRC_DIR = "${WORKDIR}/imggen"
++SRCIPK_INSTALL_DIR = "board-support/k3-image-gen-${PV}"
++FILES_${PN} = "${SRCIPK_INSTALL_DIR}"
++
++do_install() {
++    # Copy sources for packaging
++    mkdir -p ${D}/${SRCIPK_INSTALL_DIR}
++    if [ -e ${SRCIPK_SRC_DIR} ]; then
++        if [ "${SRCIPK_SRC_DIR}" = "${WORKDIR}" ]; then
++            excludes='--exclude ./temp --exclude ${D}'
++        fi
++        tar -C ${SRCIPK_SRC_DIR} -cO $excludes . | tar -C ${D}/${SRCIPK_INSTALL_DIR} -xpf -
++    fi
++
++    # Fix up patches/ directory to contain actual patches instead of symlinks
++    if [ -e ${D}/${SRCIPK_INSTALL_DIR}/patches ]
++    then
++        mv ${D}/${SRCIPK_INSTALL_DIR}/patches ${D}/${SRCIPK_INSTALL_DIR}/patches-links
++        cp -rL ${D}/${SRCIPK_INSTALL_DIR}/patches-links ${D}/${SRCIPK_INSTALL_DIR}/patches
++        rm -rf ${D}/${SRCIPK_INSTALL_DIR}/patches-links
++    fi
++}
++
++# Do not perform any QA checks on source package
++INSANE_SKIP_${PN} += "${ALL_QA}"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb
+index add4ee9..b558826 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.bb
+@@ -1,7 +1,4 @@
+-SUMMARY = "TI SCI firmware (SYSFW)"
+-
+-LICENSE = "TI-TFL"
+-LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++require recipes-bsp/ti-sci-fw/ti-sci-fw_${PV}.inc
+ 
+ DEPENDS = "openssl-native u-boot-mkimage-native dtc-native"
+ 
+@@ -17,18 +14,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ TI_SECURE_DEV_PKG ?= ""
+ export TI_SECURE_DEV_PKG
+ 
+-SRCREV = "6b02b1ea07da65a68444e86439ad5b031e9fd5a2"
+-BRANCH ?= "ti-linux-firmware"
+-SRCREV_imggen = "a7d3909ed8ae23a7c90f7ef821713a8b0c3c061d"
+-SRCREV_FORMAT = "imggen"
+-
+-SRC_URI = " \
+-	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
+-	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
+-"
+-
+-S = "${WORKDIR}/git"
+-
+ SYSFW_SOC ?= "unknown"
+ SYSFW_CONFIG ?= "unknown"
+ 
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.inc
+new file mode 100644
+index 0000000..429d077
+--- /dev/null
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_2020.04.inc
+@@ -0,0 +1,16 @@
++SUMMARY = "TI SCI firmware (SYSFW)"
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++
++SRCREV = "6b02b1ea07da65a68444e86439ad5b031e9fd5a2"
++BRANCH ?= "ti-linux-firmware"
++SRCREV_imggen = "a7d3909ed8ae23a7c90f7ef821713a8b0c3c061d"
++SRCREV_FORMAT = "imggen"
++
++SRC_URI = " \
++	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
++	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
++"
++
++S = "${WORKDIR}/git"
+-- 
+2.7.4
+
