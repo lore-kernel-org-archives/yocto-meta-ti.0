@@ -1,104 +1,184 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.2718.1589830257549601325
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.3571.1589848366383830950
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 18 May 2020 12:30:57 -0700
+ Mon, 18 May 2020 17:32:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Qnjb+x9c;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 04IJUuV3054435;
-	Mon, 18 May 2020 14:30:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1589830256;
-	bh=3gu0kYFi9xt3dLXp9shfT9Fmr9+QPWnU+gbtFvsV2kc=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=Qnjb+x9c8fuygm+VsmnsHDYRXK70II3L3VOfNSGgabdpem9FVgI9VhrGSEzx9g/O2
-	 +yDzqypXtkVaAXrqcYeQv3su5fVY+gR5qDNIHFbGGR+ObAgQnlNRdWN4WPeAg/LiJL
-	 pJgwrh1zpkOfqTK/H75/gDSaKLQyRf0JmsHe2PAc=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 04IJUuFU073870
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 18 May 2020 14:30:56 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 18
- May 2020 14:30:55 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 18 May 2020 14:30:55 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 04IJUtpK070049;
-	Mon, 18 May 2020 14:30:55 -0500
-Date: Mon, 18 May 2020 15:30:55 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Luca <magnabosco.luca@gmail.com>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] Build core-image-weston for beaglebone/am335x with GPU SGX530 enabled
-Message-ID: <20200518193055.GE26065@beryl>
-References: <f734db2d-fd0b-cab1-9d37-54c3c3b49b70@ti.com>
- <16879.1589829559511127279@lists.yoctoproject.org>
-MIME-Version: 1.0
-In-Reply-To: <16879.1589829559511127279@lists.yoctoproject.org>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6980840B9D;
+	Tue, 19 May 2020 00:32:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9YE3O6zW5ZfZ; Tue, 19 May 2020 00:32:45 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E75D540A18;
+	Tue, 19 May 2020 00:32:42 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 7D5E617316F;
+	Mon, 18 May 2020 20:32:41 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [dunfell/master][PATCH] trusted-firmware-a: upstreamed and unified to meta-arm, drop locally
+Date: Mon, 18 May 2020 20:32:41 -0400
+Message-Id: <1589848361-36781-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-On Mon, May 18, 2020 at 12:19:19PM -0700, Luca wrote:
-> Hi Andrew,
-> 
-> thanks a lot for the clarifications and updated info.
-> It seems I was relaying on outaded and/or incomplete info.
-> 
-> > 
-> > libgbm is a virtual as it has multiple optional providers, one of which
-> > is ti-sgx-ddk-um, our standalone libgbm has been deprecated, use the one
-> > provided by ti-sgx-ddk-um:
-> 
-> > 
-> > PREFERRED_PROVIDER_virtual/libgbm = "ti-sgx-ddk-um"
-> > 
-> 
-> Perfect, thanks. I was just starting to understand that the standalone 
-> libgbm has been deprecated reading 
-> http://software-dl.ti.com/processor-sdk-linux/esd/docs/latest/linux/Foundational_Components/Graphics/Migration_From_Prior_Releases.html#from-processor-sdk-6-1-to-6-2-for-am3-4-5-6
-> 
-> > 
-> > EGL provides window system (x11, wayland, gbm, surfaceless) integration
-> > for both GL and GLES (and OpenVG), but our EGL implementation only
-> > supports GLES, as that is all our GPUs support (at least on AM335x).
-> > Full desktop GL would have to be done using SW rendering, which is
-> > probably not what you want.
-> 
-> I understood that full GL would have been done using SW rendering, but I 
-> thought it was the only way to get Weston working.
-> 
-> > 
-> > So my question back is then, why are you trying to pull in 'mesa' and/or
-> > 'mesa-gl'? Weston works fine with the stack we provide in ti-sgx-ddk-um.
-> > 
-> 
-> Your question is very legitimate.
-> I was pulling mesa-gl just to fulfil Weston dependencies, but thank to your 
-> info I now understand that I was doing it the wrong way.
-> Then the question is:
-> How should I set the providers to get Weston working fine with ti-sgx-ddk-um?
+From: Denys Dmytriyenko <denys@ti.com>
 
-Weston does not require mesa or mesa-gl.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ conf/machine/include/k3.inc                        |  3 +
+ .../arm-trusted-firmware_2.2.bb                    | 79 ----------------------
+ .../trusted-firmware-a_%.bbappend                  | 23 +++++++
+ recipes-bsp/u-boot/u-boot-ti.inc                   |  2 +-
+ 4 files changed, 27 insertions(+), 80 deletions(-)
+ delete mode 100644 recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb
+ create mode 100644 recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
 
-Your distro should set all PREFERRED_PROVIDERs and DISTRO_FEATURES properly.
-
-E.g. Arago Project distro in meta-arago, used by TI Processor SDKs does:
-
-PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/libgbm = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/gpudriver = "ti-sgx-ddk-km"
-
-DISTRO_FEATURES_remove = "x11"
-DISTRO_FEATURES_append = " wayland opengl"
-
+diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
+index 54b1789..6b78f4c 100644
+--- a/conf/machine/include/k3.inc
++++ b/conf/machine/include/k3.inc
+@@ -26,6 +26,9 @@ UBOOT_SUFFIX = "img"
+ 
+ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+ 
++TFA_PLATFORM = "k3"
++TFA_BOARD = "generic"
++
+ MACHINE_GUI_CLASS = "smallscreen"
+ 
+ # Use the expected value of the ubifs filesystem's volume name in the kernel
+diff --git a/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb b/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb
+deleted file mode 100644
+index ae957bf..0000000
+--- a/recipes-bsp/arm-trusted-firmware/arm-trusted-firmware_2.2.bb
++++ /dev/null
+@@ -1,79 +0,0 @@
+-SUMMARY = "ARM Trusted Firmware"
+-DESCRIPTION = "ARM Trusted Firmware provides a reference implementation of \
+-Secure World software for ARMv8-A, including Exception Level 3 (EL3) software. \
+-It provides implementations of various ARM interface standards such as the \
+-Power State Coordination Interface (PSCI), Trusted Board Boot Requirements \
+-(TBBR) and Secure monitor code."
+-HOMEPAGE = "http://infocenter.arm.com/help/topic/com.arm.doc.dui0928e/CJHIDGJF.html"
+-
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://docs/license.rst;md5=189505435dbcdcc8caa63c46fe93fa89"
+-
+-inherit deploy
+-
+-DEPENDS += "dtc-native openssl-native"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-S = "${WORKDIR}/git"
+-
+-PV_append = "+git${SRCPV}"
+-
+-BRANCH = "ti-atf"
+-SRC_URI = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH}"
+-
+-SRCREV ?= "e516a389ac12fbe1597f61fea80ed3f230b9c5fd"
+-
+-# Make ATF "aware" of OPTEE, no build dependency
+-PACKAGECONFIG[optee] = "SPD=opteed"
+-
+-COMPATIBLE_MACHINE = "k3"
+-ATFPLATFORM_k3 = "k3"
+-ATFBOARD_k3 = "generic"
+-
+-PACKAGECONFIG_k3 = "optee"
+-
+-CFLAGS[unexport] = "1"
+-LDFLAGS[unexport] = "1"
+-AS[unexport] = "1"
+-LD[unexport] = "1"
+-
+-do_configure[noexec] = "1"
+-
+-EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" PLAT="${ATFPLATFORM}" TARGET_BOARD="${ATFBOARD}" ${PACKAGECONFIG_CONFARGS}'
+-
+-do_compile() {
+-	oe_runmake all
+-}
+-
+-do_compile_append_am65xx-hs-evm() {
+-	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+-	( cd ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/; \
+-		mv bl31.bin bl31.bin.unsigned; \
+-		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
+-	)
+-}
+-
+-do_compile_append_j7-hs-evm() {
+-	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+-	( cd ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/; \
+-		mv bl31.bin bl31.bin.unsigned; \
+-		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
+-	)
+-}
+-
+-do_install() {
+-	install -d ${D}/boot
+-	install -m 0644 ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/bl31.bin ${D}/boot/
+-	install -m 0644 ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/bl31/bl31.elf ${D}/boot/
+-}
+-
+-do_deploy() {
+-	install -d ${DEPLOYDIR}
+-	install -m 0644 ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/bl31.bin ${DEPLOYDIR}/
+-	install -m 0644 ${S}/build/${ATFPLATFORM}/${ATFBOARD}/release/bl31/bl31.elf ${DEPLOYDIR}/
+-}
+-addtask deploy before do_build after do_compile
+-
+-FILES_${PN} = "/boot"
+-SYSROOT_DIRS += "/boot"
+diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+new file mode 100644
+index 0000000..d43e7c5
+--- /dev/null
++++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+@@ -0,0 +1,23 @@
++BRANCH_k3 = "ti-atf"
++SRC_URI_k3 = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH}"
++SRCREV_k3 = "5b907a2813faf039d752cdeb6a7b94e95580c46b"
++COMPATIBLE_MACHINE_k3 = "k3"
++TFA_BUILD_TARGET_k3 = "all"
++TFA_INSTALL_TARGET_k3 = "bl31"
++TFA_SPD_k3 = "opteed"
++
++do_compile_append_am65xx-hs-evm() {
++	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
++	( cd ${B}/${BUILD_DIR}/release/; \
++		mv bl31.bin bl31.bin.unsigned; \
++		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
++	)
++}
++
++do_compile_append_j7-hs-evm() {
++	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
++	( cd ${B}/${BUILD_DIR}/release/; \
++		mv bl31.bin bl31.bin.unsigned; \
++		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
++	)
++}
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 8f8f0af..062a692 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -33,7 +33,7 @@ PV_append = "+git${SRCPV}"
+ # u-boot needs devtree compiler to parse dts files
+ DEPENDS += "dtc-native bc-native lzop-native flex-native bison-native"
+ 
+-PACKAGECONFIG[atf] = "ATF=${STAGING_DIR_HOST}/boot/bl31.bin,,arm-trusted-firmware"
++PACKAGECONFIG[atf] = "ATF=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
+ PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}/boot/bl32.bin,,optee-os"
+ 
+ PACKAGECONFIG_append_aarch64 = " atf optee"
 -- 
-Denys
+2.7.4
+
