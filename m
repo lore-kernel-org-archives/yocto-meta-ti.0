@@ -1,68 +1,60 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.8581.1589962340219320714
+ by mx.groups.io with SMTP id smtpd.web12.8620.1589962340237716991
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 20 May 2020 01:12:20 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A6B5F40C43;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id ADB2F40C1E;
 	Wed, 20 May 2020 08:12:19 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KiCIeTvaNNfn; Wed, 20 May 2020 08:12:19 +0000 (UTC)
+	with ESMTP id ZuxEZ0N85eoc; Wed, 20 May 2020 08:12:19 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9162F40C1E;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 93F4740C29;
 	Wed, 20 May 2020 08:12:18 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id E1D631731FF;
-	Wed, 20 May 2020 04:12:16 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 071FB173208;
+	Wed, 20 May 2020 04:12:17 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH 3/8] ti-ns: upgrade 2.60.01.06 -> 2.75.00.17
-Date: Wed, 20 May 2020 04:11:43 -0400
-Message-Id: <1589962308-54665-3-git-send-email-denis@denix.org>
+Subject: [dunfell/master][PATCH 5/8] ti-xdctools: upgrade 3.55.02.22 -> 3.61.00.16
+Date: Wed, 20 May 2020 04:11:45 -0400
+Message-Id: <1589962308-54665-5-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1589962308-54665-1-git-send-email-denis@denix.org>
 References: <1589962308-54665-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-License change due to year update.
-
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/ns/{ti-ns_2.60.01.06.bb => ti-ns_2.75.00.17.bb} | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename recipes-ti/ns/{ti-ns_2.60.01.06.bb => ti-ns_2.75.00.17.bb} (43%)
+ .../{ti-xdctools_3.55.02.22.bb => ti-xdctools_3.61.00.16.bb}        | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename recipes-ti/devtools/{ti-xdctools_3.55.02.22.bb => ti-xdctools_3.61.00.16.bb} (49%)
 
-diff --git a/recipes-ti/ns/ti-ns_2.60.01.06.bb b/recipes-ti/ns/ti-ns_2.75.00.17.bb
-similarity index 43%
-rename from recipes-ti/ns/ti-ns_2.60.01.06.bb
-rename to recipes-ti/ns/ti-ns_2.75.00.17.bb
-index d86fcd5..0d0bb54 100644
---- a/recipes-ti/ns/ti-ns_2.60.01.06.bb
-+++ b/recipes-ti/ns/ti-ns_2.75.00.17.bb
-@@ -1,13 +1,12 @@
- require ti-ns.inc
+diff --git a/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb b/recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
+similarity index 49%
+rename from recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
+rename to recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
+index 7481783..9047198 100644
+--- a/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
++++ b/recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
+@@ -1,9 +1,7 @@
+ require recipes-ti/devtools/ti-xdctools-core.inc
  
--PV = "2_60_01_06"
+-PV = "3_55_02_22"
 -PR = "r0"
-+PV = "2_75_00_17"
-+
- SRC_URI = "http://software-dl.ti.com/targetcontent/ns/${PV}/exports/ns_${PV}.zip;name=nszip"
++PV = "3_61_00_16"
  
--LIC_FILES_CHKSUM = "file://manifest_ns_${PV}.html;md5=e15dc261b0ef14c6fbabba24abcde4f0"
-+LIC_FILES_CHKSUM = "file://manifest_ns_${PV}.html;md5=d6a172fb0625f2ddf7d0cbfded273898"
+ LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=2e742b9757bc9ce0241aadba9f627ab8"
  
--SRC_URI[nszip.md5sum] = "b78d86423e9c4d148be5fba5903cc2c7"
--SRC_URI[nszip.sha256sum] = "f66b2fda6ab02585020e67d84897305209f3e141847581a214ccf123c3f15f00"
-+SRC_URI[nszip.sha256sum] = "612cbaf9b91c978b39cf370f7ef721596c36141575ca74da76b025beef4d9a03"
- 
- INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-SRC_URI[xdczip.md5sum] = "bb9154d677ce4724a5eac73817b23a0f"
+-SRC_URI[xdczip.sha256sum] = "bf90dfbbe298458c736d81d5631db25b335e79146923a4a50fab217e02723e7b"
++SRC_URI[xdczip.sha256sum] = "19caf6d5ff412d48c11ba1c05b543e39f5d678203407e5f659ff306b274e7606"
 -- 
 2.7.4
 
