@@ -1,67 +1,66 @@
-Subject: Re: Build core-image-weston for beaglebone/am335x with GPU SGX530 enabled
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.8611.1589962339379792460
+ for <meta-ti@lists.yoctoproject.org>;
+ Wed, 20 May 2020 01:12:19 -0700
+Authentication-Results: mx.groups.io;
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C6FD840C2A;
+	Wed, 20 May 2020 08:12:18 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bAPKabJ8jKf9; Wed, 20 May 2020 08:12:18 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AE5E740C14;
+	Wed, 20 May 2020 08:12:17 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id D60311731FD;
+	Wed, 20 May 2020 04:12:16 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-From: "Luca" <magnabosco.luca@gmail.com>
-X-Originating-Location: Isola Vicentina, Veneto, IT (109.234.143.106)
-X-Originating-Platform: Windows Chrome 81
-User-Agent: GROUPS.IO Web Poster
-MIME-Version: 1.0
-Date: Tue, 19 May 2020 01:04:56 -0700
-References: <20200518193055.GE26065@beryl>
-In-Reply-To: <20200518193055.GE26065@beryl>
-Message-ID: <1100.1589875496492221729@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="0eL8EBD0vsP9Gf4x1bKH"
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [dunfell/master][PATCH 2/8] ti-ndk: upgrade 3.61.01.01 -> 3.75.01.01
+Date: Wed, 20 May 2020 04:11:42 -0400
+Message-Id: <1589962308-54665-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1589962308-54665-1-git-send-email-denis@denix.org>
+References: <1589962308-54665-1-git-send-email-denis@denix.org>
 
---0eL8EBD0vsP9Gf4x1bKH
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+From: Denys Dmytriyenko <denys@ti.com>
 
-Hi Denys,
+License change due to year update.
 
-thanks a lot for the clarifications.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-ti/ndk/{ti-ndk_3.61.01.01.bb => ti-ndk_3.75.01.01.bb} | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+ rename recipes-ti/ndk/{ti-ndk_3.61.01.01.bb => ti-ndk_3.75.01.01.bb} (38%)
 
->=20
-> Weston does not require mesa or mesa-gl.
+diff --git a/recipes-ti/ndk/ti-ndk_3.61.01.01.bb b/recipes-ti/ndk/ti-ndk_3.75.01.01.bb
+similarity index 38%
+rename from recipes-ti/ndk/ti-ndk_3.61.01.01.bb
+rename to recipes-ti/ndk/ti-ndk_3.75.01.01.bb
+index f120f2f..812fbb3 100644
+--- a/recipes-ti/ndk/ti-ndk_3.61.01.01.bb
++++ b/recipes-ti/ndk/ti-ndk_3.75.01.01.bb
+@@ -1,12 +1,10 @@
+ require ti-ndk.inc
+ 
+-PV = "3_61_01_01"
+-PR = "r0"
++PV = "3_75_01_01"
+ 
+-LIC_FILES_CHKSUM = "file://manifest_ndk_${PV}.html;md5=871c716abcf52bac5a7c23154eaba3b6"
++LIC_FILES_CHKSUM = "file://manifest_ndk_${PV}.html;md5=ef952a30d0f1640e886bb4b60618f352"
+ 
+-SRC_URI[ndkzip.md5sum] = "87f0494c9faee344fe93ae68e71ca189"
+-SRC_URI[ndkzip.sha256sum] = "3bfca50367432603ebc1d53d9185302bb4fa4558ac766696f086dc7a5a2ccd29"
++SRC_URI[ndkzip.sha256sum] = "fd2318f0490a3eb342bc16812f30394107f098a12704c11cd9a5dc3d5a0bba64"
+ 
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-- 
+2.7.4
 
-Sure, I will try to reformulate what I meant:
-
-Weston requires opengl "REQUIRED_DISTRO_FEATURES =3D "opengl"" and I thoug=
-ht that this meant that libgl was required,
-therefore I tried to use mesa-gl that provides virtual/libgl.
-
-Now I know I was wrong, but what is providing opengl if libgl is not avail=
-able?
-Probably I don't get the proper meaning of "REQUIRED_DISTRO_FEATURES =3D "=
-opengl"".
-
->=20
-> E.g. Arago Project distro in meta-arago, used by TI Processor SDKs does:
->=20
-
-Ok, I will keep meta-arago ( http://arago-project.org/git/?p=3Dmeta-arago.=
-git;a=3Dsummary ) as reference for my distro layer when using meta-ti as bs=
-p layer.
-
-Regards
-Luca
-
---0eL8EBD0vsP9Gf4x1bKH
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi Denys,<br /><br />thanks a lot for the clarifications.<br /><br />
-<blockquote><span style=3D"white-space: pre-wrap;">Weston does not require=
- mesa or mesa-gl.</span></blockquote>
-Sure, I will try to reformulate what I meant:<br /><br />Weston requires o=
-pengl "REQUIRED_DISTRO_FEATURES =3D "opengl"" and I thought that this meant=
- that libgl was required,<br />therefore I tried to use mesa-gl that provid=
-es virtual/libgl.<br /><br />Now I know I was wrong, but what is providing =
-opengl if libgl is not available?<br />Probably I don't get the proper mean=
-ing of "REQUIRED_DISTRO_FEATURES =3D "opengl"".<br /><br />
-<blockquote><span style=3D"white-space: pre-wrap;">E.g. Arago Project dist=
-ro in meta-arago, used by TI Processor SDKs does:<br /></span></blockquote>
-Ok, I will keep <a href=3D"http://arago-project.org/git/?p=3Dmeta-arago.gi=
-t;a=3Dsummary" target=3D"_blank" rel=3D"noopener">meta-arago</a> as referen=
-ce for my distro layer when using meta-ti as bsp layer.<br /><br />Regards<=
-br />Luca
-
---0eL8EBD0vsP9Gf4x1bKH--
