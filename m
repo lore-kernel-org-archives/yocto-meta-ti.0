@@ -1,51 +1,95 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2119.1590022964351483978
+ by mx.groups.io with SMTP id smtpd.web10.1087.1590084332191317694
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 20 May 2020 18:02:44 -0700
+ Thu, 21 May 2020 11:05:32 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B1F4840C13;
-	Thu, 21 May 2020 01:02:43 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A678D40BDF;
+	Thu, 21 May 2020 18:05:31 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AtGpRYfYC_-0; Thu, 21 May 2020 01:02:43 +0000 (UTC)
+	with ESMTP id oGGit92bfFDL; Thu, 21 May 2020 18:05:31 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 957B340AD5;
-	Thu, 21 May 2020 01:02:42 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9530440C06;
+	Thu, 21 May 2020 18:05:30 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 49A4216F347;
-	Wed, 20 May 2020 21:02:42 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 0176F173209;
+	Thu, 21 May 2020 14:05:29 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH] trusted-firmware-a: override named SRC_URI and SRCREV
-Date: Wed, 20 May 2020 21:02:41 -0400
-Message-Id: <1590022961-16998-1-git-send-email-denis@denix.org>
+Subject: [dunfell/master][PATCH 05/11] ti-xdctools: drop old unused patches
+Date: Thu, 21 May 2020 14:05:22 -0400
+Message-Id: <1590084328-19033-5-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1590084328-19033-1-git-send-email-denis@denix.org>
+References: <1590084328-19033-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../devtools/ti-xdctools/arm-linker-hack.diff       | 19 -------------------
+ .../devtools/ti-xdctools/fix-hardcoded-paths.diff   | 21 ---------------------
+ 2 files changed, 40 deletions(-)
+ delete mode 100644 recipes-ti/devtools/ti-xdctools/arm-linker-hack.diff
+ delete mode 100644 recipes-ti/devtools/ti-xdctools/fix-hardcoded-paths.diff
 
-diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-index d43e7c5..2dc715c 100644
---- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-+++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-@@ -1,6 +1,6 @@
- BRANCH_k3 = "ti-atf"
--SRC_URI_k3 = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH}"
--SRCREV_k3 = "5b907a2813faf039d752cdeb6a7b94e95580c46b"
-+SRC_URI_k3 = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH};name=tfa"
-+SRCREV_tfa_k3 = "5b907a2813faf039d752cdeb6a7b94e95580c46b"
- COMPATIBLE_MACHINE_k3 = "k3"
- TFA_BUILD_TARGET_k3 = "all"
- TFA_INSTALL_TARGET_k3 = "bl31"
+diff --git a/recipes-ti/devtools/ti-xdctools/arm-linker-hack.diff b/recipes-ti/devtools/ti-xdctools/arm-linker-hack.diff
+deleted file mode 100644
+index 26debf8..0000000
+--- a/recipes-ti/devtools/ti-xdctools/arm-linker-hack.diff
++++ /dev/null
+@@ -1,19 +0,0 @@
+---- a/packages/gnu/targets/arm/linkcmd.xdt	2010-12-30 19:33:53.000000000 +0100
+-+++ b/packages/gnu/targets/arm/linkcmd.xdt	2010-12-30 19:42:55.000000000 +0100
+-@@ -40,12 +40,13 @@
+- 
+- %if ("BINVERS" in prog.build.target) {
+- %    var _utils = xdc.loadCapsule("gnu/targets/linkUtils.xs");
+-+%    if (prog.build.target.GCCVERS < "4.3.3") {
+- SECTIONS {
+- `_utils.genSections(prog)`
+- }
+--
+--%    if (!prog.build.target.noStdLinkScript
+--%        && prog.build.target.BINVERS >= "2.19") {
+-+%    }
+-+%    if (prog.build.target.noStdLinkScript
+-+%        && prog.build.target.BINVERS >= "2.19") {
+- INSERT BEFORE .gnu.attributes
+- %    }
+- 
+diff --git a/recipes-ti/devtools/ti-xdctools/fix-hardcoded-paths.diff b/recipes-ti/devtools/ti-xdctools/fix-hardcoded-paths.diff
+deleted file mode 100644
+index 36142c4..0000000
+--- a/recipes-ti/devtools/ti-xdctools/fix-hardcoded-paths.diff
++++ /dev/null
+@@ -1,21 +0,0 @@
+-diff -ur a/packages/gnu/targets/ITarget.xs b/packages/gnu/targets/ITarget.xs
+---- a/packages/gnu/targets/ITarget.xs	2011-08-06 13:24:44.000000000 +0200
+-+++ b/packages/gnu/targets/ITarget.xs	2011-08-06 13:23:37.000000000 +0200
+-@@ -251,7 +251,7 @@
+- 
+-     function askLd(target)
+-     {
+--        var ldCmd = target.rootDir + "/" + target.GCCTARG + "/bin/ld";
+-+        var ldCmd = target.rootDir + "/" + target.GCCTARG + "-ld";
+-         /* If the ld executable cannot be found, and the prefix is not used,
+-          * it's probably a misspelled directory path.
+-          */
+-@@ -486,7 +486,7 @@
+-     tool2cmd["link"] = cmd;
+- 
+-     /* define the ar command template */
+--    cmd  = prefix + target.ar.cmd
+-+    cmd  = prefix + target.GCCTARG + "-ar"
+-         + " $(AROPTS_P) " + target.ar.opts
+-         + " $@ $(AROPTS_S) $(aropts) $(files)";
+-     tool2cmd["ar"] = cmd;
 -- 
 2.7.4
 
