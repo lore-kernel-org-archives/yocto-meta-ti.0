@@ -1,29 +1,29 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.1149.1590084333334721253
+ by mx.groups.io with SMTP id smtpd.web11.1150.1590084333362924512
  for <meta-ti@lists.yoctoproject.org>;
  Thu, 21 May 2020 11:05:33 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 73D4E40C47;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7F5EF40A35;
 	Thu, 21 May 2020 18:05:32 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id an8OV_jLSw-N; Thu, 21 May 2020 18:05:32 +0000 (UTC)
+	with ESMTP id yn_cF9pCq0hD; Thu, 21 May 2020 18:05:32 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5D0F640B0A;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6AB5340C42;
 	Thu, 21 May 2020 18:05:31 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 0D33617320A;
+	by mail.denix.org (Postfix) with ESMTP id 30649173217;
 	Thu, 21 May 2020 14:05:29 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH 06/11] ti-xdctools: upgrade 3.55.02.22 -> 3.61.00.16
-Date: Thu, 21 May 2020 14:05:23 -0400
-Message-Id: <1590084328-19033-6-git-send-email-denis@denix.org>
+Subject: [dunfell/master][PATCH 09/11] ti-pdk-fetch: update to 2020.5.18 tag REL.CORESDK.07.00.00.06
+Date: Thu, 21 May 2020 14:05:26 -0400
+Message-Id: <1590084328-19033-9-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1590084328-19033-1-git-send-email-denis@denix.org>
 References: <1590084328-19033-1-git-send-email-denis@denix.org>
@@ -32,29 +32,25 @@ From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- .../{ti-xdctools_3.55.02.22.bb => ti-xdctools_3.61.00.16.bb}        | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename recipes-ti/devtools/{ti-xdctools_3.55.02.22.bb => ti-xdctools_3.61.00.16.bb} (49%)
+ classes/ti-pdk-fetch.bbclass | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb b/recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
-similarity index 49%
-rename from recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
-rename to recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
-index 7481783..9047198 100644
---- a/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
-+++ b/recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
-@@ -1,9 +1,7 @@
- require recipes-ti/devtools/ti-xdctools-core.inc
+diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
+index 7a27e37..5047743 100644
+--- a/classes/ti-pdk-fetch.bbclass
++++ b/classes/ti-pdk-fetch.bbclass
+@@ -1,9 +1,9 @@
+ TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
+ TI_PDK_GIT_BRANCH ?= "master"
+ TI_PDK_GIT_PROTOCOL ?= "git"
+-TI_PDK_SRCREV ?= "a1ace885998e9adbcbbd0abf8b9ded6ba9ec54ff"
++TI_PDK_SRCREV ?= "933b714cb3f97454c6ac6950dca454e936866d47"
  
--PV = "3_55_02_22"
--PR = "r0"
-+PV = "3_61_00_16"
+-TI_PDK_VERSION ?= "2020.5.6"
++TI_PDK_VERSION ?= "2020.5.18"
  
- LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=2e742b9757bc9ce0241aadba9f627ab8"
+ PV = "${TI_PDK_VERSION}"
  
--SRC_URI[xdczip.md5sum] = "bb9154d677ce4724a5eac73817b23a0f"
--SRC_URI[xdczip.sha256sum] = "bf90dfbbe298458c736d81d5631db25b335e79146923a4a50fab217e02723e7b"
-+SRC_URI[xdczip.sha256sum] = "19caf6d5ff412d48c11ba1c05b543e39f5d678203407e5f659ff306b274e7606"
 -- 
 2.7.4
 
