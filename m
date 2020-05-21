@@ -1,81 +1,60 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1088.1590084333315073822
+ by mx.groups.io with SMTP id smtpd.web11.1149.1590084333334721253
  for <meta-ti@lists.yoctoproject.org>;
  Thu, 21 May 2020 11:05:33 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 72E8A40C06;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 73D4E40C47;
 	Thu, 21 May 2020 18:05:32 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AHXSG9kqVA2l; Thu, 21 May 2020 18:05:32 +0000 (UTC)
+	with ESMTP id an8OV_jLSw-N; Thu, 21 May 2020 18:05:32 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5B87340A35;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5D0F640B0A;
 	Thu, 21 May 2020 18:05:31 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 18F0417320C;
+	by mail.denix.org (Postfix) with ESMTP id 0D33617320A;
 	Thu, 21 May 2020 14:05:29 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH 07/11] ti-cgt7x: upgrade 1.2.0 -> 1.3.0
-Date: Thu, 21 May 2020 14:05:24 -0400
-Message-Id: <1590084328-19033-7-git-send-email-denis@denix.org>
+Subject: [dunfell/master][PATCH 06/11] ti-xdctools: upgrade 3.55.02.22 -> 3.61.00.16
+Date: Thu, 21 May 2020 14:05:23 -0400
+Message-Id: <1590084328-19033-6-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1590084328-19033-1-git-send-email-denis@denix.org>
 References: <1590084328-19033-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-License change due to year update.
-
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/devtools/{ti-cgt7x_1.2.0.bb => ti-cgt7x_1.3.0.bb} | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename recipes-ti/devtools/{ti-cgt7x_1.2.0.bb => ti-cgt7x_1.3.0.bb} (84%)
+ .../{ti-xdctools_3.55.02.22.bb => ti-xdctools_3.61.00.16.bb}        | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename recipes-ti/devtools/{ti-xdctools_3.55.02.22.bb => ti-xdctools_3.61.00.16.bb} (49%)
 
-diff --git a/recipes-ti/devtools/ti-cgt7x_1.2.0.bb b/recipes-ti/devtools/ti-cgt7x_1.3.0.bb
-similarity index 84%
-rename from recipes-ti/devtools/ti-cgt7x_1.2.0.bb
-rename to recipes-ti/devtools/ti-cgt7x_1.3.0.bb
-index 09178af..55ec91e 100644
---- a/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
-+++ b/recipes-ti/devtools/ti-cgt7x_1.3.0.bb
-@@ -8,7 +8,7 @@ libraries and standard header files needed to produce a working DSP application.
- HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
- LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
+diff --git a/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb b/recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
+similarity index 49%
+rename from recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
+rename to recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
+index 7481783..9047198 100644
+--- a/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
++++ b/recipes-ti/devtools/ti-xdctools_3.61.00.16.bb
+@@ -1,9 +1,7 @@
+ require recipes-ti/devtools/ti-xdctools-core.inc
  
--LIC_FILES_CHKSUM = "file://ti-cgt-c7000_${PV}.STS/C7000_Code_Generation_Tools_1.x_manifest.html;md5=f1156d241d104c281bc64a6ec8eadc64"
-+LIC_FILES_CHKSUM = "file://ti-cgt-c7000_${PV}.STS/C7000_Code_Generation_Tools_1.x_manifest.html;md5=3ee1c9f774004535003f80cb8142bb0f"
+-PV = "3_55_02_22"
+-PR = "r0"
++PV = "3_61_00_16"
  
- require recipes-ti/includes/ti-unpack.inc
- require recipes-ti/includes/ti-paths.inc
-@@ -25,8 +25,7 @@ SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C7000/${PV}.STS/$
- TI_BIN_UNPK_ARGS = "--prefix ${S}"
- TI_BIN_UNPK_CMDS = ""
+ LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;beginline=1;endline=140;md5=2e742b9757bc9ce0241aadba9f627ab8"
  
--SRC_URI[cgt7x_x86_installer.md5sum]    = "813840908f333dd2a31f92edec71c1fb"
--SRC_URI[cgt7x_x86_installer.sha256sum] = "21379811a8857489f72ca8ec45a46eb086ced0bdbb58e78f73a86e63984ab2f5"
-+SRC_URI[cgt7x_x86_installer.sha256sum] = "24071fe0369e55af80e334852cda7fa78b64ae79a411c57ac6995470a7a23694"
- 
- S = "${WORKDIR}/c7000_${PV}"
- 
-@@ -35,10 +34,9 @@ do_install() {
-     cp -rP --preserve=mode,links,timestamps --no-preserve=ownership ${WORKDIR}/c7000_${PV}/ti-cgt-c7000_${PV}.STS/. ${D}/${TI_CGT7X_INSTALL_DIR_RECIPE}
- }
- 
--
- FILES_${PN} += "${TI_CGT7X_INSTALL_DIR_RECIPE}"
- 
--INSANE_SKIP_${PN} += "arch staticdev textrel"
-+INSANE_SKIP_${PN} += "arch staticdev textrel file-rdeps"
- 
- INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_SYSROOT_STRIP = "1"
+-SRC_URI[xdczip.md5sum] = "bb9154d677ce4724a5eac73817b23a0f"
+-SRC_URI[xdczip.sha256sum] = "bf90dfbbe298458c736d81d5631db25b335e79146923a4a50fab217e02723e7b"
++SRC_URI[xdczip.sha256sum] = "19caf6d5ff412d48c11ba1c05b543e39f5d678203407e5f659ff306b274e7606"
 -- 
 2.7.4
 
