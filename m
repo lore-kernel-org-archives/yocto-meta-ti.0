@@ -1,299 +1,64 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.1150.1590084333411916291
+ by mx.groups.io with SMTP id smtpd.web11.951.1590516114051258643
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 21 May 2020 11:05:33 -0700
+ Tue, 26 May 2020 11:01:54 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B1B8840B3E;
-	Thu, 21 May 2020 18:05:32 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6693240BCC;
+	Tue, 26 May 2020 18:01:53 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yTt__AzaPnu0; Thu, 21 May 2020 18:05:32 +0000 (UTC)
+	with ESMTP id ExPeMV7j0M8M; Tue, 26 May 2020 18:01:53 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9958640C3E;
-	Thu, 21 May 2020 18:05:31 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 011FC40A18;
+	Tue, 26 May 2020 18:01:48 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 47BE31734D9;
-	Thu, 21 May 2020 14:05:29 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id A47F416FA39;
+	Tue, 26 May 2020 14:01:47 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH 11/11] gcc-arm, gcc-aarch64: upgrade baremetal gcc compilers to 9.2-2019.12
-Date: Thu, 21 May 2020 14:05:28 -0400
-Message-Id: <1590084328-19033-11-git-send-email-denis@denix.org>
+Subject: [dunfell/master][PATCH v2 08/11] common-csl-ip: update to REL.CORESDK.07.00.00.16
+Date: Tue, 26 May 2020 14:01:44 -0400
+Message-Id: <1590516104-1871-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1590084328-19033-1-git-send-email-denis@denix.org>
-References: <1590084328-19033-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-Overlay recipes from meta-arm/master to provide baremetal gcc 9.2-2019.12
-
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- classes/ti-pdk.bbclass                             |  4 +--
- ...date.bb => gcc-aarch64-none-elf_9.2-2019.12.bb} | 35 +++++++++++++--------
- .../gcc-arm-none-eabi-native_4.9.2015q3.bb         | 23 --------------
- ...ate.bb => gcc-arm-none-eabi_9-2019-q4-major.bb} | 36 ++++++++++++++--------
- .../gcc-linaro-baremetal-aarch64-native.bb         | 23 --------------
- recipes-ti/devtools/gcc-linaro-baremetal-native.bb | 23 --------------
- recipes-ti/includes/ti-paths.inc                   |  6 ++--
- 7 files changed, 50 insertions(+), 100 deletions(-)
- copy recipes-ti/devtools/{gcc-arm-none-eabi_7-2018-q2-update.bb => gcc-aarch64-none-elf_9.2-2019.12.bb} (19%)
- delete mode 100644 recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
- rename recipes-ti/devtools/{gcc-arm-none-eabi_7-2018-q2-update.bb => gcc-arm-none-eabi_9-2019-q4-major.bb} (24%)
- delete mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
- delete mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+v2 - bump to .16 for new toolchain fixes
 
-diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
-index 2571234..37305e8 100644
---- a/classes/ti-pdk.bbclass
-+++ b/classes/ti-pdk.bbclass
-@@ -10,9 +10,9 @@ DEPENDS_remove_ti33x = "ti-cgt6x-native"
- DEPENDS_remove_ti43x = "ti-cgt6x-native"
- DEPENDS_append_omapl1 = " ti-cgt-arm-native"
- DEPENDS_remove_am65xx = "gcc-arm-none-eabi-native ti-cgt6x-native"
--DEPENDS_append_am65xx = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
-+DEPENDS_append_am65xx = " ti-cgt-arm-native gcc-aarch64-none-elf-native"
- DEPENDS_remove_j7 = "gcc-arm-none-eabi-native"
--DEPENDS_append_j7 = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native ti-cgt7x-native"
-+DEPENDS_append_j7 = " ti-cgt-arm-native gcc-aarch64-none-elf-native ti-cgt7x-native"
+ recipes-bsp/common-csl-ip/common-csl-ip.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index a8921ae..c0be200 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
- S = "${WORKDIR}/git"
- B = "${WORKDIR}/build"
-diff --git a/recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb b/recipes-ti/devtools/gcc-aarch64-none-elf_9.2-2019.12.bb
-similarity index 19%
-copy from recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb
-copy to recipes-ti/devtools/gcc-aarch64-none-elf_9.2-2019.12.bb
-index f474c87..2ec0f9c 100644
---- a/recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb
-+++ b/recipes-ti/devtools/gcc-aarch64-none-elf_9.2-2019.12.bb
-@@ -1,29 +1,38 @@
--DESCRIPTION = "Baremetal GCC for ARM"
-+# Copyright (C) 2020 Texas Instruments Inc.
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "Baremetal GCC for Aarch64 processors"
- LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
+ COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
  
--LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=f77466c63f5787f4bd669c402aabe061"
-+LIC_FILES_CHKSUM = "file://share/doc/gcc/GNU-Free-Documentation-License.html;md5=cc1e9a49a59ce7e6ae5ef37cd16eca0c"
+-PV = "03.03.00.17B"
++PV = "07.00.00.16"
+ INC_PR = "r0"
+ PE = "1"
  
--require recipes-ti/includes/ti-paths.inc
-+PROVIDES = "virtual/aarch64-none-elf-gcc"
+@@ -13,8 +13,8 @@ CSL_GIT_PROTOCOL ="git"
+ CSL_GIT_BRANCH = "release"
+ CSL_GIT_DESTSUFFIX = "git"
  
--SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2018q2/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2;name=gcc-arm-none"
-+SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-${PV}-x86_64-aarch64-none-elf.tar.xz"
+-# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.17B"
+-CSL_SRCREV = "027d26031709ad6a0e9f84625d11a3419e486467"
++# Below commit ID corresponding to "REL.CORESDK.07.00.00.16"
++CSL_SRCREV = "f0969f9ee01af7af39dd7837c5e2ba8e92735aff"
  
--SRC_URI[gcc-arm-none.md5sum] = "299ebd3f1c2c90930d28ab82e5d8d6c0"
--SRC_URI[gcc-arm-none.sha256sum] = "bb17109f0ee697254a5d4ae6e5e01440e3ea8f0277f2e8169bf95d07c7d5fe69"
-+SRC_URI[sha256sum] = "36d2cbe7c2984f2c20f562ac2f3ba524c59151adfa8ee10f1326c88de337b6d1"
- 
--S = "${WORKDIR}/gcc-arm-none-eabi-7-2018-q2-update"
-+S = "${WORKDIR}/gcc-arm-${PV}-x86_64-aarch64-none-elf"
- 
--# only x86_64 is supported
- COMPATIBLE_HOST = "x86_64.*-linux"
--COMPATIBLE_HOST_class-target = "null"
- 
- do_install() {
--    install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
--    cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
-+    install -d ${D}${datadir}/aarch64-none-elf/
-+    cp -r ${S}/. ${D}${datadir}/aarch64-none-elf/
-+
-+    install -d ${D}${bindir}
-+    # Symlink all executables into bindir
-+    for f in ${D}${datadir}/aarch64-none-elf/bin/aarch64-none-elf-*; do
-+        lnr $f ${D}${bindir}/$(basename $f)
-+    done
- }
- 
--FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
-+FILES_${PN} = "${datadir} ${bindir}"
-+
-+INSANE_SKIP_${PN} = "already-stripped libdir staticdev file-rdeps"
- 
--INSANE_SKIP_${PN} = "already-stripped libdir staticdev build-deps file-rdeps"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- 
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
-deleted file mode 100644
-index 1fe5c52..0000000
---- a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "Baremetal GCC for ARM"
--LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
--
--LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=cba77c7fde3ed13e866b04a2f3d93918"
--
--inherit native
--require recipes-ti/includes/ti-paths.inc
--
--SRC_URI = "https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2;name=gcc-arm-none"
--
--SRC_URI[gcc-arm-none.md5sum] = "8a4a74872830f80c788c944877d3ad8c"
--SRC_URI[gcc-arm-none.sha256sum] = "c50078bfbd29e6c15615900e746f4d0acde917338e55860b0f145f57387c12ab"
--
--S = "${WORKDIR}/gcc-arm-none-eabi-4_9-2015q3"
--
--do_install() {
--    install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
--    cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
--}
--
--FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
--
--INSANE_SKIP_${PN} = "already-stripped"
-diff --git a/recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb b/recipes-ti/devtools/gcc-arm-none-eabi_9-2019-q4-major.bb
-similarity index 24%
-rename from recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb
-rename to recipes-ti/devtools/gcc-arm-none-eabi_9-2019-q4-major.bb
-index f474c87..84f6dba 100644
---- a/recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb
-+++ b/recipes-ti/devtools/gcc-arm-none-eabi_9-2019-q4-major.bb
-@@ -1,29 +1,39 @@
--DESCRIPTION = "Baremetal GCC for ARM"
-+# Copyright (C) 2019 Garmin Ltd. or its subsidiaries
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "Baremetal GCC for ARM-R and ARM-M processors"
- LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
- 
--LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=f77466c63f5787f4bd669c402aabe061"
-+LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=c18349634b740b7b95f2c2159af888f5"
- 
--require recipes-ti/includes/ti-paths.inc
-+PROVIDES = "virtual/arm-none-eabi-gcc"
- 
--SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2018q2/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2;name=gcc-arm-none"
-+SRC_URI = "https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/${BPN}-${PV}-x86_64-linux.tar.bz2"
- 
--SRC_URI[gcc-arm-none.md5sum] = "299ebd3f1c2c90930d28ab82e5d8d6c0"
--SRC_URI[gcc-arm-none.sha256sum] = "bb17109f0ee697254a5d4ae6e5e01440e3ea8f0277f2e8169bf95d07c7d5fe69"
-+SRC_URI[md5sum] = "fe0029de4f4ec43cf7008944e34ff8cc"
-+SRC_URI[sha256sum] = "bcd840f839d5bf49279638e9f67890b2ef3a7c9c7a9b25271e83ec4ff41d177a"
- 
--S = "${WORKDIR}/gcc-arm-none-eabi-7-2018-q2-update"
-+S = "${WORKDIR}/${BPN}-${PV}"
- 
--# only x86_64 is supported
- COMPATIBLE_HOST = "x86_64.*-linux"
--COMPATIBLE_HOST_class-target = "null"
- 
- do_install() {
--    install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
--    cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
-+    install -d ${D}${datadir}/arm-none-eabi/
-+    cp -r ${S}/. ${D}${datadir}/arm-none-eabi/
-+
-+    install -d ${D}${bindir}
-+    # Symlink all executables into bindir
-+    for f in ${D}${datadir}/arm-none-eabi/bin/arm-none-eabi-*; do
-+        lnr $f ${D}${bindir}/$(basename $f)
-+    done
- }
- 
--FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
-+FILES_${PN} = "${datadir} ${bindir}"
-+
-+INSANE_SKIP_${PN} = "already-stripped libdir staticdev file-rdeps"
- 
--INSANE_SKIP_${PN} = "already-stripped libdir staticdev build-deps file-rdeps"
-+INHIBIT_SYSROOT_STRIP = "1"
-+INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- 
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
-deleted file mode 100644
-index 97344f9..0000000
---- a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--include recipes-ti/devtools/gcc-linaro.inc
--
--PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
--S = "${WORKDIR}/${PACKAGE_DIR}"
--
--LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
--
--inherit native
--require recipes-ti/includes/ti-paths.inc
--
--SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
--
--SRC_URI[gcc-linaro-aarch64.md5sum] = "4972f8943820bdd2f577f498de78964b"
--SRC_URI[gcc-linaro-aarch64.sha256sum] = "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4c8"
--
--do_install() {
--    install -d ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
--    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
--}
--
--FILES_${PN} = "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}/*"
--
--INSANE_SKIP_${PN} = "already-stripped"
-diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
-deleted file mode 100644
-index 0268ae3..0000000
---- a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--include recipes-ti/devtools/gcc-linaro.inc
--
--PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
--S = "${WORKDIR}/${PACKAGE_DIR}"
--
--LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
--
--inherit native
--require recipes-ti/includes/ti-paths.inc
--
--SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi.tar.xz;name=gcc-linaro"
--
--SRC_URI[gcc-linaro.md5sum] = "9a4a39cfc78c84375b1160aa93587aed"
--SRC_URI[gcc-linaro.sha256sum] = "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
--
--do_install() {
--    install -d ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
--    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
--}
--
--FILES_${PN} = "${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}/*"
--
--INSANE_SKIP_${PN} = "already-stripped"
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 52a93cf..d45b77f 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -48,7 +48,7 @@ export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
- export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
- export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
- export M4_TOOLCHAIN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt-arm"
--export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${installdir}/gcc-arm-none-eabi"
-+export GCC_ARM_NONE_TOOLCHAIN_RECIPE      = "${datadir}/arm-none-eabi"
- export TI_CGT_PRU_INSTALL_DIR_RECIPE      = "${installdir}/cgt-pru"
- export MATHLIB_C66_INSTALL_DIR_RECIPE     = "${installdir}/ti-mathlib-c66x-tree"
- export MATHLIB_C674_INSTALL_DIR_RECIPE    = "${installdir}/ti-mathlib-c674x-tree"
-@@ -58,8 +58,8 @@ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
- export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
- export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
- export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
--export GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE          = "${installdir}/gcc-linaro-baremetal"
--export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE  = "${installdir}/gcc-linaro-baremetal-aarch64"
-+export GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE          = "${datadir}/arm-none-eabi"
-+export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE  = "${datadir}/aarch64-none-elf"
- export TI_CGT7X_INSTALL_DIR_RECIPE        = "${installdir}/cgt-c7x"
- 
- 
+ BRANCH="${CSL_GIT_BRANCH}"
+ SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
 -- 
 2.7.4
 
