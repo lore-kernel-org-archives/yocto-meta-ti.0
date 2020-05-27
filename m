@@ -1,152 +1,66 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.162.1590594975050066167
+ by mx.groups.io with SMTP id smtpd.web11.3575.1590604588345183113
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 27 May 2020 08:56:15 -0700
+ Wed, 27 May 2020 11:36:29 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 689BC40ADE;
-	Wed, 27 May 2020 15:56:14 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B42FD40C06;
+	Wed, 27 May 2020 18:36:27 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8FzbnDYUcMNq; Wed, 27 May 2020 15:56:14 +0000 (UTC)
+	with ESMTP id z_O2Z8X8G30z; Wed, 27 May 2020 18:36:27 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4550940A18;
-	Wed, 27 May 2020 15:56:13 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6E22F40A18;
+	Wed, 27 May 2020 18:36:26 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 9DCBE16FA39;
-	Wed, 27 May 2020 11:56:12 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id BD0F216FAC7;
+	Wed, 27 May 2020 14:36:25 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH] conf/machine: unify common AM65x GP and HS settings
-Date: Wed, 27 May 2020 11:56:12 -0400
-Message-Id: <1590594972-50037-1-git-send-email-denis@denix.org>
+Subject: [dunfell/master][PATCH v2 01/11] ti-sysbios: upgrade 6.76.03.01 -> 6.82.01.19
+Date: Wed, 27 May 2020 14:36:13 -0400
+Message-Id: <1590604573-17492-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 
 From: Denys Dmytriyenko <denys@ti.com>
 
+License change due to year update.
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- conf/machine/am65xx-evm.conf    | 24 ------------------------
- conf/machine/am65xx-hs-evm.conf | 23 -----------------------
- conf/machine/include/am65xx.inc | 24 ++++++++++++++++++++++++
- 3 files changed, 24 insertions(+), 47 deletions(-)
+v2 - 6.82.01.19 now includes C7x hotfix needed for 6.82.00.16
 
-diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
-index 0007377..2f3b92a 100644
---- a/conf/machine/am65xx-evm.conf
-+++ b/conf/machine/am65xx-evm.conf
-@@ -6,32 +6,8 @@ require conf/machine/include/am65xx.inc
+ .../bios/{ti-sysbios_6.76.03.01.bb => ti-sysbios_6.82.01.19.bb}   | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+ rename recipes-ti/bios/{ti-sysbios_6.76.03.01.bb => ti-sysbios_6.82.01.19.bb} (50%)
+
+diff --git a/recipes-ti/bios/ti-sysbios_6.76.03.01.bb b/recipes-ti/bios/ti-sysbios_6.82.01.19.bb
+similarity index 50%
+rename from recipes-ti/bios/ti-sysbios_6.76.03.01.bb
+rename to recipes-ti/bios/ti-sysbios_6.82.01.19.bb
+index 8ebe2f3..5965209 100644
+--- a/recipes-ti/bios/ti-sysbios_6.76.03.01.bb
++++ b/recipes-ti/bios/ti-sysbios_6.82.01.19.bb
+@@ -1,12 +1,10 @@
+ require recipes-ti/bios/ti-sysbios.inc
  
- BBMULTICONFIG += "k3r5-sr2"
+-PV = "6_76_03_01"
+-PR = "r0"
++PV = "6_82_01_19"
  
--MACHINE_FEATURES += "touchscreen"
--
--SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
--SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
--
--KERNEL_DEVICETREE = " \
--    ti/k3-am654-base-board.dtb \
--    ti/k3-am654-base-board-sr1.dtb \
--    ti/k3-am654-gp.dtbo \
--    ti/k3-am654-idk.dtbo \
--    ti/k3-am654-idk-sr1.dtbo \
--    ti/k3-am654-evm-hdmi.dtbo \
--    ti/k3-am654-evm-oldi-lcd1evm.dtbo \
--    ti/k3-am654-evm-tc358876.dtbo \
--    ti/k3-am654-pcie-usb2.dtbo \
--    ti/k3-am654-pcie-usb3.dtbo \
--    ti/k3-am654-base-board-jailhouse.dtbo \
--    ti/k3-am654-evm-prupwm.dtbo \
--"
--
- UBOOT_MACHINE = "am65x_evm_a53_defconfig"
+-LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=5cf40699c51b26d36fc01647c0b27fb1"
++LIC_FILES_CHKSUM = "file://manifest_bios_${PV}.html;md5=4b72066ed4cb1dd73ff2f585c428105a"
  
--OPTEEMACHINE = "k3"
--OPTEEFLAVOR = "am65x"
--OPTEEOUTPUTMACHINE = "k3"
--
- IMAGE_BOOT_FILES += "sysfw-am65x-evm.itb"
- do_image_wic[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
- do_image_tar[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
-diff --git a/conf/machine/am65xx-hs-evm.conf b/conf/machine/am65xx-hs-evm.conf
-index 702ba30..e4eebb6 100644
---- a/conf/machine/am65xx-hs-evm.conf
-+++ b/conf/machine/am65xx-hs-evm.conf
-@@ -4,27 +4,8 @@
+-SRC_URI[sysbiosbin.md5sum] = "647243209d66d5dd35503b0ec5a84ab9"
+-SRC_URI[sysbiosbin.sha256sum] = "b762b7f2343d26d367f952488e529046785128005158cc921c3baef08e97116a"
++SRC_URI[sysbiosbin.sha256sum] = "4d7c6cac993e6bc601083a41a5c52089d4852544b4c38563e4320310a54882b2"
  
- require conf/machine/include/am65xx.inc
- 
--MACHINE_FEATURES += "touchscreen"
--
--SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
--SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
--
--KERNEL_DEVICETREE = " \
--    ti/k3-am654-base-board.dtb ti/k3-am654-gp.dtbo \
--    ti/k3-am654-evm-hdmi.dtbo ti/k3-am654-idk.dtbo \
--    ti/k3-am654-idk-sr1.dtbo \
--    ti/k3-am654-evm-oldi-lcd1evm.dtbo ti/k3-am654-evm-tc358876.dtbo \
--    ti/k3-am654-pcie-usb2.dtbo ti/k3-am654-pcie-usb3.dtbo \
--    ti/k3-am654-base-board-jailhouse.dtbo \
--    ti/k3-am654-evm-prupwm.dtbo \
--"
--
- UBOOT_MACHINE = "am65x_hs_evm_a53_defconfig"
- 
--OPTEEMACHINE = "k3"
--OPTEEFLAVOR = "am65x"
--OPTEEOUTPUTMACHINE = "k3"
--
- UBOOT_ENTRYPOINT =       "0x80080000"
- UBOOT_LOADADDRESS =      "0x80080000"
- UBOOT_RD_LOADADDRESS =   "0x84000000"
-@@ -39,7 +20,3 @@ UBOOT_BINARY = "u-boot.img_HS"
- IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
- 
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
--
--OPTEEMACHINE = "k3"
--OPTEEFLAVOR = "am65x"
--OPTEEOUTPUTMACHINE = "k3"
-diff --git a/conf/machine/include/am65xx.inc b/conf/machine/include/am65xx.inc
-index d433ed1..f60d166 100644
---- a/conf/machine/include/am65xx.inc
-+++ b/conf/machine/include/am65xx.inc
-@@ -1,6 +1,30 @@
- require conf/machine/include/k3.inc
- SOC_FAMILY_append = ":am65xx"
- 
-+MACHINE_FEATURES += "touchscreen"
-+
-+SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
-+
-+KERNEL_DEVICETREE = " \
-+    ti/k3-am654-base-board.dtb \
-+    ti/k3-am654-base-board-sr1.dtb \
-+    ti/k3-am654-gp.dtbo \
-+    ti/k3-am654-idk.dtbo \
-+    ti/k3-am654-idk-sr1.dtbo \
-+    ti/k3-am654-evm-hdmi.dtbo \
-+    ti/k3-am654-evm-oldi-lcd1evm.dtbo \
-+    ti/k3-am654-evm-tc358876.dtbo \
-+    ti/k3-am654-pcie-usb2.dtbo \
-+    ti/k3-am654-pcie-usb3.dtbo \
-+    ti/k3-am654-base-board-jailhouse.dtbo \
-+    ti/k3-am654-evm-prupwm.dtbo \
-+"
-+
-+OPTEEMACHINE = "k3"
-+OPTEEFLAVOR = "am65x"
-+OPTEEOUTPUTMACHINE = "k3"
-+
- # Set the list of device targets for ti-pdk class recipes
- TI_PDK_LIMIT_SOCS = "am65xx"
- TI_PDK_LIMIT_BOARDS = "am65xx_evm am65xx_idk"
+ TI_BIN_UNPK_CMDS = ""
+ TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
 -- 
 2.7.4
 
