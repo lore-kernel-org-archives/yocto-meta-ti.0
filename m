@@ -1,40 +1,44 @@
-Received: from AUS01-SY3-obe.outbound.protection.outlook.com (AUS01-SY3-obe.outbound.protection.outlook.com [40.107.137.99])
- by mx.groups.io with SMTP id smtpd.web12.6113.1591668652973925199
+Received: from AUS01-ME1-obe.outbound.protection.outlook.com (AUS01-ME1-obe.outbound.protection.outlook.com [40.107.136.103])
+ by mx.groups.io with SMTP id smtpd.web11.28.1591675392887381882
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 08 Jun 2020 19:10:54 -0700
+ Mon, 08 Jun 2020 21:03:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gallagher.com header.s=selector1 header.b=JOMuaH2L;
- spf=pass (domain: gallagher.com, ip: 40.107.137.99, mailfrom: ankur.tyagi@gallagher.com)
+ dkim=pass header.i=@gallagher.com header.s=selector1 header.b=FAKcn/1l;
+ spf=pass (domain: gallagher.com, ip: 40.107.136.103, mailfrom: ankur.tyagi@gallagher.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EyVrd0dveTtnno3hpVZ55W+uU+eTnyAXaFA5hu+V31zM97ixqLT+pkBeViiAA6txsveloNRujm22BR1gO7vi3/ptqFvLVBNM9uIB/jNw4++QnpeI4O3xw8nYoNfgumDVZboPYWZii68kjCkn/Ey8bHt2Oq4AO7ih3tEtZVDQ7s2UXvqchh+UKROhNO02WDyK7Cfaoc7xHDHQxmOpkv/U6NVoRo/vXk0nl1cPjsxoUgnnADfwf20wkGS7TcERBcMf1oHqJRneSaSciuxtbFJSb9Z7dhhGONa/QYWAhPr0RKStjZUlQoFIFsn3AG9iATYg9DJVZ+SQvwJoBu6HTRUp6w==
+ b=MmGZGsAuopKgQxjvt/X8TIdkY8V3eUSGQ5xSn1hMVb8i1CbCTiPVVFxPlK3y58IeZHU1l1dIy53P+ZpkYlEZNbNPd4UYnLHRr3u75jPIXTMBHHro8Uxzy0M7PCSwJLQpJ59r9AkQfS4bReFHlHbe6MHxn32YJLDEOiOjmS7L5PWC66QUdE0mOs5+gXf/f6nN9q1nKGB9b2FlMDLHrbU5kW+eq6D3i+1U9DnQklrTdNS3w1Iilw5+TsylxpqGFqDmMSSsFKNZvgP2ZOs9UoBYGsr1qkGDJ+AuJp6fAbVc8pXnKaUUXKlZWgmsJIOj7GVKu2vSZUREofLYupktuUskmg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ARH970N6YjHJVuB1AgandN1srgE4B/Bp+bjNpBHWrJ4=;
- b=fD7a4TgPgPSZj9tQk14wa8QZ1JEs9z+bNiSplYtHwmDjExEo/qrF76b6Yw6ku0eVz93MBc+Fw7QFkm5WGl+dM8fE+t/o5HqOJZfrK+Qvv8Nx3V27jq70lmpYr+TmheRuzJ6j5+GUT5rUa3qrAn2KVMWCsPZEJQEV3MHUuF9x1nDqnjvBHmg59g6O2Rm0Pwr16STboJ2pKhTmhDAb2dUsZIQWzALH7y5Mu8fVVIXFUPHLk9M3BNL01cOKTgbS2YbRgDlEyKMR5W0g1iZqeCrUc1jjk3KEMQo/5uK3W6dX69JQG17K1zwFPiP9FO8J1URi7qdRIFKDmouEas2FNdYVZg==
+ bh=tWDPlphvJTi8ZqdFe074z6h+4BOn2IlcB5tuc94fKFQ=;
+ b=NKgthlvPQXcEWC6dwvoXzZB1mQlPlR0hrHfuA5t6vYOJnQbayXLWtS730DHTufq3qOcIVni74v/BgB8pjv3GwSQ6NbOFcbrfnXm0BMEji4j0sjRLC7Lx3TeEuKxHX9hn9XehMvtMKoT6mVBIpWCQZzUSDOB3ZzhKjC91IYLBsBYm7Xz258L4AC1NrEEnqb0BB76RWzxT2tkrsYsJ9Fg6znS9J5+v4zKHui8H/THKiO6bTw3LTfpVFQhrtc4QCpt8e8KLTaulNZN5XybbD4sZsaTfB4xUWhEI4GWpSG2NaGvME9SUCXqTcoOrOvx3LznMJfzmDOwlK6YBXHBK6nIJnw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=gallagher.com; dmarc=pass action=none
  header.from=gallagher.com; dkim=pass header.d=gallagher.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gallagher.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ARH970N6YjHJVuB1AgandN1srgE4B/Bp+bjNpBHWrJ4=;
- b=JOMuaH2LLAQXshcu0/5YWLmIzIuTcXNbMO+a6T2HDOxI9x5DHKHej8LInd6+WjVbz7a5pQ+Wd/oJbptPv0PEpjReL+IWTZLE7FunDuovn/kVPQXLW9wT7wapHd5SYEd5voL92ABixhkSK1jOcOE+bEK17Ow4vuctdggdfX7BIM8=
+ bh=tWDPlphvJTi8ZqdFe074z6h+4BOn2IlcB5tuc94fKFQ=;
+ b=FAKcn/1lowPJbthrriazGBKl7THX/JLGtcBkf5TF0frcjFGK/kyxWhvFpmU2FoAxZMuJ7wi27lSjkeXZ2NhUf+EGHNFF8RQ11TKGSGk3AtiOopRwCIc2/fo2MysnijUcvirKte4d05LS03/KnrWwDZpos+GVHmaCEqkeAHdaqBY=
 Received: from SYXPR01MB1088.ausprd01.prod.outlook.com (2603:10c6:0:9::17) by
- SYXPR01MB1871.ausprd01.prod.outlook.com (2603:10c6:0:2a::9) with Microsoft
+ SYXPR01MB1551.ausprd01.prod.outlook.com (2603:10c6:0:36::19) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3066.18; Tue, 9 Jun 2020 02:10:49 +0000
+ 15.20.3066.18; Tue, 9 Jun 2020 04:03:06 +0000
 Received: from SYXPR01MB1088.ausprd01.prod.outlook.com
  ([fe80::d4bf:2e94:579a:f482]) by SYXPR01MB1088.ausprd01.prod.outlook.com
  ([fe80::d4bf:2e94:579a:f482%2]) with mapi id 15.20.3066.023; Tue, 9 Jun 2020
- 02:10:49 +0000
+ 04:03:06 +0000
 From: "Ankur Tyagi" <ankur.tyagi@gallagher.com>
 To: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Unable to send patch
+Subject: Re: Unable to send patch
 Thread-Topic: Unable to send patch
-Thread-Index: AdY+Avsk2Lpx7xZiQgyjszLBQA2MHg==
-Date: Tue, 9 Jun 2020 02:10:49 +0000
+Thread-Index: AdY+Avsk2Lpx7xZiQgyjszLBQA2MHgAD9ZFQ
+Date: Tue, 9 Jun 2020 04:03:06 +0000
 Message-ID: 
+ <SYXPR01MB10885B7104C7660C264592DBE5820@SYXPR01MB1088.ausprd01.prod.outlook.com>
+References: 
+ <SYXPR01MB108856737CAC7AF780F52BDFE5820@SYXPR01MB1088.ausprd01.prod.outlook.com>
+In-Reply-To: 
  <SYXPR01MB108856737CAC7AF780F52BDFE5820@SYXPR01MB1088.ausprd01.prod.outlook.com>
 Accept-Language: en-NZ, en-US
 X-MS-Has-Attach: 
@@ -44,45 +48,52 @@ authentication-results: lists.yoctoproject.org; dkim=none (message not signed)
  header.from=gallagher.com;
 x-originating-ip: [139.180.92.147]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 44c41c3a-89d2-464c-51dd-08d80c1a5466
-x-ms-traffictypediagnostic: SYXPR01MB1871:
+x-ms-office365-filtering-correlation-id: 9bbb3637-5a41-4bd0-1db5-08d80c2a0410
+x-ms-traffictypediagnostic: SYXPR01MB1551:
 x-microsoft-antispam-prvs: 
- <SYXPR01MB18719671342798D0F4877D39E5820@SYXPR01MB1871.ausprd01.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:2399;
+ <SYXPR01MB155125A4647D668C7F5C7066E5820@SYXPR01MB1551.ausprd01.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:2331;
 x-forefront-prvs: 042957ACD7
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- UciIKSkGopB4s/RoaauyszrF9ZmkuNCqQjrR7qxe6c5IltsEtmF4a2qgMMfX2H3QVVkKRJTh5UjPM5+Essopv89ihIr7rtgiZ/CwkwzGOUPeTnKnQlvIUJCFfOoWizEduxGdxuC56HM+70D1WW3iDYDOdoHB9dC4sF+Grz0UMFLeYQ3KmjASq8CFriXtA5cHgUctxFNuPapAFywQUcSlyT3etT4aUz10QIFwflRF9tgcWf3/Vngt1ia1HZLqa07SQX/C6c2ueaWDGsb4HCud0OvpPZLTo63emab84wtr27FPYNGpoYToYUmXSPnIvzBcovc238LMoXXVDAPSrJnVGA==
+ 3x0u6sRIsbcbBlz9hxVsTy3WRasQ2asKAyPzjVTTWhsOqY1Qjhz0g5yckhOwWtBc4jVxVWUbGybzIodh3LDQls0CwCMjTyAML6CdhVsJeK9XKunSfYV4x1xqKbIH87o2htRYeJckTqDg0aW9GZIPrqsaBYuUo0uygIdgRw6qU/u1tjmFPvJzpRcBw8wHZevMGOl1Iy4Yaw9SB8b29fB2KAdAE3ccRFAkGGJbQB80/0dAI+BKEUlRtCDpUlmEB++TqXjzPETMf2Nvrdajyi55+zVWxoSVkvzxeVNtumAUK5SE914BFhZ5quoMX3FuNcMFU5Tj3nesEseFEfAjTPCW/A==
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SYXPR01MB1088.ausprd01.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(396003)(39850400004)(136003)(366004)(346002)(376002)(66446008)(316002)(7696005)(76116006)(6506007)(8676002)(5660300002)(3480700007)(66476007)(64756008)(66556008)(26005)(52536014)(8936002)(2906002)(66946007)(186003)(55016002)(71200400001)(9326002)(9686003)(33656002)(6916009)(83380400001)(558084003)(478600001)(86362001);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SYXPR01MB1088.ausprd01.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(136003)(39850400004)(396003)(346002)(366004)(376002)(3480700007)(76116006)(316002)(5660300002)(8676002)(52536014)(8936002)(66446008)(33656002)(9686003)(71200400001)(2906002)(26005)(64756008)(55016002)(86362001)(66946007)(66476007)(83380400001)(2940100002)(66556008)(6916009)(53546011)(186003)(7696005)(4744005)(478600001)(6506007);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata: 
- jUH0u9xV02xfjhIg7SFoznQWYTed12dHNrUP5mm5wUbbQAvbqGUkVCQBcR/nMOI1HBEwRWgJS61X3CBnW/t7sMRZ8J+SvjN7W7D6lhT9mhVspTbR74w+wvU0Xtd8EFfH5/pFVfUUvd2ebZS4x6KWKRzQon52XJrRDn6iPWeyVUhCDxbQZlqrjywoSmDAhNYfEA07Bihlf7pXoRq3i9gLN5yG959qK5qSiDnKBo4c34eQ5M/DLw/d0fNuo6Ie3s1uzm74wAJMOocsTvU4OItzLiy9BapkWCNm4Tc7ihGMzRl5emUVofgAyQz3zCezsrloOXM7bjFJX2BVdHCljVUJ88va1seU4YwrYFi2ktkg2Cv+oiAgFdGZrE6lJqt62+gEH2iCoLorNgAqBQi1h86pmtmp/fadPmJFboDDDTgI6BGrc7QloR4pSbQqfBuB4zOWf8TXCvOs+6Fce6JHWPnJY91unE41UazA1qhj19wPNeqL83gMVXfgE7tuNhLod8oG
+ AhAezv3Wey72kdxjEGma2RLoUsIMb+LyAn5LPT8sQriCADS6YXkJG5CVxJbsJG2i8a/uF4uavKWfXwqDdv1dGal15OBR6qeSJY0+r4RLLsKXemC4XOWEsegMZ618AvDrH9Mp6DhA+lNPczqyMDR1BarkDjC6Xog+IMH5VcXU4c7NzwkoFMSiq4Yo/Ta9j08+eUjIHRipIweB52jJnGF4b7+ha8jE92U0KmHD6SnHVTyGU+ioq3ruhph0Su1xSsqWbb+KC8+jSG7QfsEbw7z2iBDAD95Nap75G8SaUgIzkUnMVLKntcSspkOOBpdKLM0WhXKfv1Eu5dYbWC6rlzIM/rPoctaVY6tM8hHaBOpMcHgmY0TyrUU9E/qh69I2Cwy2j4spzFONo0Y3Rx4THZXm++vO3bihgLqWHi2j8OFwlPR7h5HwevCsV7IervOWZzOqqNXO9J/mDZKzIZy4HI0jmqR4JJn1iQAxLoVKhO/HI0WczDXkkDxkOz5gD5nx0IZi
 x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
 X-OriginatorOrg: gallagher.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44c41c3a-89d2-464c-51dd-08d80c1a5466
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jun 2020 02:10:49.6650
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9bbb3637-5a41-4bd0-1db5-08d80c2a0410
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jun 2020 04:03:06.8910
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 2156b869-431f-4815-b2ce-b4893b5c9aaa
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Hr6YAniyRHCzv+T6Jab4URDUjS2UUToW9xtnD3/lSD0p6yjsJiPFwjyxog3DaGnO+v8NuR/nMRN8QpSnY8z6GyuEjUmDojCK7B55va4Gpgc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SYXPR01MB1871
+X-MS-Exchange-CrossTenant-userprincipalname: XrpgKhn0Y4gux59B2It5ih68X6AppiQwmmsUqbVKEP5Yld1FTaQpkrSjUqurqoePlAytCDiN1VDL54BHXrrJzVDwOKqQibcKPX2p6Xs+bnc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SYXPR01MB1551
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_SYXPR01MB108856737CAC7AF780F52BDFE5820SYXPR01MB1088ausp_"
+	boundary="_000_SYXPR01MB10885B7104C7660C264592DBE5820SYXPR01MB1088ausp_"
 
---_000_SYXPR01MB108856737CAC7AF780F52BDFE5820SYXPR01MB1088ausp_
+--_000_SYXPR01MB10885B7104C7660C264592DBE5820SYXPR01MB1088ausp_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+It was a problem with SMTP server, all sorted now
+
+From: Ankur Tyagi
+Sent: Tuesday, 9 June 2020 2:11 PM
+To: meta-ti@lists.yoctoproject.org
+Subject: Unable to send patch
 
 Hi,
 
 When I am trying to submit my patch, I am getting following error:
 
-5.7.1 <meta-ti@lists.yoctoproject.org>: Recipient address rejected: Access =
-denied
+5.7.1 <meta-ti@lists.yoctoproject.org<mailto:meta-ti@lists.yoctoproject.org=
+>>: Recipient address rejected: Access denied
 
 Am I blocked or something else?
 
@@ -90,7 +101,7 @@ Regards
 Ankur
 
 
---_000_SYXPR01MB108856737CAC7AF780F52BDFE5820SYXPR01MB1088ausp_
+--_000_SYXPR01MB10885B7104C7660C264592DBE5820SYXPR01MB1088ausp_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
@@ -120,14 +131,17 @@ p.MsoNormal, li.MsoNormal, div.MsoNormal
 	font-size:11.0pt;
 	font-family:"Calibri",sans-serif;
 	mso-fareast-language:EN-US;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+span.EmailStyle20
+	{mso-style-type:personal-reply;
 	font-family:"Calibri",sans-serif;
 	color:windowtext;}
 .MsoChpDefault
 	{mso-style-type:export-only;
-	font-family:"Calibri",sans-serif;
-	mso-fareast-language:EN-US;}
+	font-size:10.0pt;}
 @page WordSection1
 	{size:612.0pt 792.0pt;
 	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
@@ -142,6 +156,22 @@ div.WordSection1
 </head>
 <body lang=3D"EN-NZ" link=3D"#0563C1" vlink=3D"#954F72">
 <div class=3D"WordSection1">
+<p class=3D"MsoNormal">It was a problem with SMTP server, all sorted now<o:=
+p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US" style=3D"mso-fareast-languag=
+e:EN-NZ">From:</span></b><span lang=3D"EN-US" style=3D"mso-fareast-language=
+:EN-NZ"> Ankur Tyagi
+<br>
+<b>Sent:</b> Tuesday, 9 June 2020 2:11 PM<br>
+<b>To:</b> meta-ti@lists.yoctoproject.org<br>
+<b>Subject:</b> Unable to send patch<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
 <p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-si=
 ze:9.0pt;font-family:&quot;Lucida Console&quot;">Hi,<o:p></o:p></span></p>
 <p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-si=
@@ -154,9 +184,9 @@ ze:9.0pt;font-family:&quot;Lucida Console&quot;">When I am trying to submit=
 ze:9.0pt;font-family:&quot;Lucida Console&quot;"><o:p>&nbsp;</o:p></span></=
 p>
 <p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-si=
-ze:9.0pt;font-family:&quot;Lucida Console&quot;">5.7.1 &lt;meta-ti@lists.yo=
-ctoproject.org&gt;: Recipient address rejected: Access denied<o:p></o:p></s=
-pan></p>
+ze:9.0pt;font-family:&quot;Lucida Console&quot;">5.7.1 &lt;<a href=3D"mailt=
+o:meta-ti@lists.yoctoproject.org">meta-ti@lists.yoctoproject.org</a>&gt;: R=
+ecipient address rejected: Access denied<o:p></o:p></span></p>
 <p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-si=
 ze:9.0pt;font-family:&quot;Lucida Console&quot;"><o:p>&nbsp;</o:p></span></=
 p>
@@ -177,4 +207,4 @@ ze:9.0pt;font-family:&quot;Lucida Console&quot;">Ankur<o:p></o:p></span></p=
 </body>
 </html>
 
---_000_SYXPR01MB108856737CAC7AF780F52BDFE5820SYXPR01MB1088ausp_--
+--_000_SYXPR01MB10885B7104C7660C264592DBE5820SYXPR01MB1088ausp_--
