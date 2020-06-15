@@ -1,44 +1,47 @@
-Received: from AUS01-ME1-obe.outbound.protection.outlook.com (AUS01-ME1-obe.outbound.protection.outlook.com [40.107.136.115])
- by mx.groups.io with SMTP id smtpd.web10.8302.1591915740429672534
+Received: from AUS01-ME1-obe.outbound.protection.outlook.com (AUS01-ME1-obe.outbound.protection.outlook.com [40.107.136.92])
+ by mx.groups.io with SMTP id smtpd.web11.26583.1592249921547738099
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Jun 2020 15:49:02 -0700
+ Mon, 15 Jun 2020 12:38:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gallagher.com header.s=selector1 header.b=xatASjcL;
- spf=pass (domain: gallagher.com, ip: 40.107.136.115, mailfrom: ankur.tyagi@gallagher.com)
+ dkim=pass header.i=@gallagher.com header.s=selector1 header.b=TW6TQ0XI;
+ spf=pass (domain: gallagher.com, ip: 40.107.136.92, mailfrom: ankur.tyagi@gallagher.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HlLTs6ZCXRiCfSe3BKAPAWqQzwmwPq4UUhiMpX+WJvK9LFA8QZ9l9nmGzVb1RCSesLt3jjUOyMJWKhfYL3L2nPKHjYuTsFtEYTHXuE4ESFHCb8oR/ODHnIbMIwpK8hKEvdSns6k08tHAWYJYJqj9A7gcfROVFtt8Djqm7N0f1TcHCImMRnfbFAcxu9Rc7xX6s8YKrMmFVhB/yfxIS55sJZHazaDCnK5Sg5wdOA35etjPoHcUc58cBpXgia6wJisItWb5Ya3Lo1EYN7AmKiWmE+714BOT0mf3krlJd3Z819ghmGQ2NSxq0MpcuUSP4AN8mbisv1K2ludKZ/7x5pCsAw==
+ b=lrLeLvimb5NVUUVHv5NmoM2qHwRevgXyjuWkH8FWndb5KCDYJ5iaNIK/dCY2MoYwpXohNZlxWPQf1L3W8rSALmrdRoDC3CXBSBiv9sbUSX1YF4hPOHF9Yqot96q/Isf53yMRHF5WMFfz1B4SO581mZ0eZjqQKlBBsleFSoaN3NBm4kF+9pnu0846kc8vaCN1lSrXjencdJtCtO/IKPZm6TplGSWLwQn5pHJiWyBsQ53Oh7Q5QUfgHhjGFQkmDplzAmVZWxJ4LpKToxCIs9+q2ROUpG61R8oK1FOytbThpLq5lqUX5TZhyMtuhdlzzKQgwbYpTJcGCqKLWLF5EWyl2Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qhfQRaFMPW3NEHRhFrrH5GfFYShzf7uPvLkwjYEhq3A=;
- b=PKhfEVRMp/iKTQfRR9I/mAak3k2B6S4UUIxlgRo9W+j1WdCU4RnLcM6+suTzGSVsijfI2P+LldQt1sUOIwzbpu/tD7mUPxAZcsNnP2A9/4/MdO9pwtFU9db4ohRvs+MscOaF5cpwfNKbAe/W34glrAXSgOUaUCPJdOIwe+LcRNN5ykO9KtK1j1kik/Kl0cy4hm4ztHBl9gNvK7acwUtCylOLTOrfPC/NqHIM69H37G6wK4TpsFA296xDOW9st4s4J0etYsKumclPTs+Lfa1azD4BR2QPMMq2dLBzVKXwBKVqvQ94f16oh+cBuTL1yDpsmccY+Hvkxaw5AJLQ5WHTHA==
+ bh=pLiqs2N24Yn6Lp1bPs0N7LsRqcYT8qo5ZBqoN7G1z8E=;
+ b=UvjzhsqOO1Rjdqjjar9GF8htm1Z7CGobFchNIM7x9KGR9eR20XYLCEAquIEh9XklftgYbM09Et8ti+SJrw6FXPDnOsEjP15oHpr7BAD7KQvhH/hG49xSLNi/bdk2bCqlLIe3JqhgiOPSYbOIotGEJ13hDaFdYAemtay6I68RS7+hzYgjpZA5uvIsQLdBJL4PxxNS18CUNPzcJpkB4a6Thhn5qLxKXg5vFIuWhC7rdz6ueDVuAWq4wScfUa9ur6WaEuySPDdaKVrMFIm0SVRlDQJdefCAI3LfeA+x2p8mfC1zt+8E8NdmJXNLGCH+wmMD9efzTLP+6YC2EjAVgdfQ5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=gallagher.com; dmarc=pass action=none
  header.from=gallagher.com; dkim=pass header.d=gallagher.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gallagher.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qhfQRaFMPW3NEHRhFrrH5GfFYShzf7uPvLkwjYEhq3A=;
- b=xatASjcLiiuUjxeb1eEU1P17XGnRcjOI7Ks1Pn6NTdOuA2KNJKnIg5IiYhUbv+rg4O56j/ABda5jUJT6L7e3OAti/5j3Uni4WJww/lXYyQvz5QTKMvuOdvg0EUYTC+oVDflgGGQLIciUGAgbPJgC4PkIqXsqqqEK8QQEldj5/u0=
-Received: from SYXPR01MB1088.ausprd01.prod.outlook.com (2603:10c6:0:9::17) by
- SYXPR01MB1775.ausprd01.prod.outlook.com (2603:10c6:0:26::14) with Microsoft
+ bh=pLiqs2N24Yn6Lp1bPs0N7LsRqcYT8qo5ZBqoN7G1z8E=;
+ b=TW6TQ0XIfRTTuqmTB7CF0kr/tfGj2Do5QmiVL+tc268j1+3trobu0WEgbV911an17e3E+1VdbpLe7ucsF7YQZtZiwZWS9yOuErEFXDz23NqsMJhS/nVjzIZwaRKCM2HafGVItvYkLAH7gpQx0vcMPzeoliTbG7XT5ycC66iDS5Q=
+Received: from SY3PR01MB0809.ausprd01.prod.outlook.com (2603:10c6:0:6::12) by
+ SY3PR01MB2012.ausprd01.prod.outlook.com (2603:10c6:0:20::18) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3088.24; Thu, 11 Jun 2020 22:48:56 +0000
-Received: from SYXPR01MB1088.ausprd01.prod.outlook.com
- ([fe80::d4bf:2e94:579a:f482]) by SYXPR01MB1088.ausprd01.prod.outlook.com
- ([fe80::d4bf:2e94:579a:f482%2]) with mapi id 15.20.3088.022; Thu, 11 Jun 2020
- 22:48:56 +0000
+ 15.20.3088.26; Mon, 15 Jun 2020 19:38:36 +0000
+Received: from SY3PR01MB0809.ausprd01.prod.outlook.com
+ ([fe80::7d3b:74f3:fc8:6fb7]) by SY3PR01MB0809.ausprd01.prod.outlook.com
+ ([fe80::7d3b:74f3:fc8:6fb7%9]) with mapi id 15.20.3088.029; Mon, 15 Jun 2020
+ 19:38:36 +0000
 From: "Ankur Tyagi" <ankur.tyagi@gallagher.com>
-To: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
+To: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
+	"Dmytriyenko, Denys" <denys@ti.com>
+Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
 Thread-Topic: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment
  for uboot board config
-Thread-Index: AQHWQD/nrJf3Oo6qp0akYZEBsU+1lajUBGbw
-Date: Thu, 11 Jun 2020 22:48:56 +0000
+Thread-Index: AQHWQD/nrJf3Oo6qp0akYZEBsU+1lajUBGbwgAYSxsA=
+Date: Mon, 15 Jun 2020 19:38:36 +0000
 Message-ID: 
- <SYXPR01MB10887259A369A29D4C3B932CE5800@SYXPR01MB1088.ausprd01.prod.outlook.com>
+ <SY3PR01MB0809877DA03074D6265139D1E59C0@SY3PR01MB0809.ausprd01.prod.outlook.com>
 References: <20200611223018.58178-1-ankur.tyagi@gallagher.com>
-In-Reply-To: <20200611223018.58178-1-ankur.tyagi@gallagher.com>
+ <SYXPR01MB10887259A369A29D4C3B932CE5800@SYXPR01MB1088.ausprd01.prod.outlook.com>
+In-Reply-To: 
+ <SYXPR01MB10887259A369A29D4C3B932CE5800@SYXPR01MB1088.ausprd01.prod.outlook.com>
 Accept-Language: en-NZ, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -47,34 +50,49 @@ authentication-results: lists.yoctoproject.org; dkim=none (message not signed)
  header.from=gallagher.com;
 x-originating-ip: [139.180.92.147]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 6ac2c9ae-ce12-4496-fd25-08d80e599f8e
-x-ms-traffictypediagnostic: SYXPR01MB1775:
+x-ms-office365-filtering-correlation-id: ed4ee0d2-288f-45b5-0f29-08d81163b27e
+x-ms-traffictypediagnostic: SY3PR01MB2012:
 x-microsoft-antispam-prvs: 
- <SYXPR01MB1775AE421742EE3C1213175CE5800@SYXPR01MB1775.ausprd01.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:4125;
-x-forefront-prvs: 0431F981D8
+ <SY3PR01MB2012929ED61E555249660013E59C0@SY3PR01MB2012.ausprd01.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:4502;
+x-forefront-prvs: 04359FAD81
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- kfepJqnuCdGV9gUsaSKCR8zn914JTCHJwOpM5XvJtj9KZAY+0O1oSXU1ExovYfevNAbkGKiy66eR7HF7FiiIV1ZijBnrSbvW6jGZcN6ASWerj0ITRgh+2PEg6SnDMpBCgVj7DDZ5HPcvTp8OEGWt3+zT1Q2LxJ0sL5E7OFgu+JWnAthc8kwmaTJAoI5WPyZrWAoK8iwYwiKyswSc0UYGRTRKK4xD9L93X0iDygIeXrTv8JoUtaVpen3eG/sYTsEal323rSsvdTtm+DOjiLnFXrfURhV1/51QytzH5GIY1djvVGJqZOW5QAUxEhDD5H3g1P8iCxY/59PPCrrKczU6Bw==
+ xJUPEJ/SShPsHc77vCjMo/nTNAixs2qi0oJgL9f77SpAgnwH0z+YTjVl4ngN/ZbCMSRoxuf5e+4MPs5Sk49QxwHi4InwWgF51DLntWZWdDnlBRUDPRV5YhSi2jDfnNT4ZQ37X5q1IML5rNkT2hj+hf7evEt8P0/ru18GtX92RqxTmTkIcO+/93d8TmqeEIseqn20u50SIpWNT6gbfyIkXdoqQWK4XqdLphFx00EZzyA6hCcbXC1x8nUZmvIpp/kmd8cilEjd0puTFe2DBAg08uhk2qk2RZGEQ77ZBnu+Cc+exkFcss51fCzJXhizpJgp5+U088zqsh+8F7mwGeUmXg==
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SYXPR01MB1088.ausprd01.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(376002)(346002)(136003)(39850400004)(396003)(366004)(55016002)(6506007)(186003)(71200400001)(4744005)(8936002)(26005)(83380400001)(316002)(6916009)(9686003)(86362001)(478600001)(52536014)(8676002)(66476007)(66556008)(66946007)(66446008)(64756008)(76116006)(33656002)(5660300002)(2906002)(7696005);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SY3PR01MB0809.ausprd01.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(396003)(366004)(39850400004)(346002)(136003)(376002)(478600001)(5660300002)(2906002)(66946007)(110136005)(66446008)(52536014)(7696005)(76116006)(66556008)(66476007)(316002)(64756008)(83380400001)(8676002)(8936002)(26005)(53546011)(6506007)(71200400001)(186003)(9686003)(33656002)(55016002)(86362001);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata: 
- PQ67spw5nCj1UKY1WkcwOnadcXs6JuYGUGmitTsevNgucQgwlwUQx0lQYUsW4QbpnQjLbpK5ntwXOUROoYHj7gh5H4nJZC5jBcGeMR4l6r61i/Iqv+FL7DMhf45RWWETEMfhfAEdEXf+9JpmzWLuebcLujGod3WjvZP3F6IA27O+rUTcuj03aBhmdH6We3Nggu4CIeoAz1OcmF85SZ8T9NEnJqG0CsiJJGwHV2XQwakLmvfsm2Wz0ClvD9WhCCNgXgOaYGV2SmLoU3D837SLyNCDfMSS2F7Smv/PkiizdECSdvrzjeYZAiUhwEwpcZy0+oA6Ar3ZUcRR4n43ksjJD60Zrjp8bY54zTyxWrOFUdbXD3b9Gv5PrYeCYZdLbBf6ZFSHLgIh3fEo443Rz2xm8jqxbeJx3wCCB4JBeB7+ISvSV1CV2vs74CYlbLvXhFZAtevcGEIgCvEs9oTLXD0nW1jjRV/BPg/nC7UMooD2Ouq4xMiUdCMaKyiQkxwlwOmv
+ bOo78HgS1ZtQZNfoKmS1lycAj9VC92ge1qN/mZ0SNtaLIg6Cr1ywgs/y/Bic8+r2CZx/YEuNJGM6X+lCCExBpzoej1rrvlrckf7Y4BaLCf1v+qrJLDGbLHGYTBB5zmKvtOa4yJ5m2wHE/Xxtj9VCmvpKpolD5iw7iaM6QBREYy7T8bkUpnhTzpetQO+VqEPhy/X7wLMUUEscdLtXYEyxsBhkDNRl59+RJpTR+TWmLrnfMCnGZOwJlg1sPdDK2q1HjkMI7UCgocyEPkHj3ZgP9fsxqdiXeq/u8ZlQ0wGoTo+6OvEq84ueEDBdiEbP+C2rZR6dKr7eCfq3jrGOfrC4mDhqi+3O7NJL8E5kQQ2xLZ7LpZTGOWeXE0sbVShpxnC72LS5IZfxboPl2UpZBnUSKT+C/OyQAPnJOcKSRIRW+/0ZMVvyH7d7dZW23UMc2JwgC5dJjLnJOVwzvbn+yZ4lXVez/NuTgZkGUprnSTx4RvyweqJdSAlgLKACGnsOudaj
 x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
 X-OriginatorOrg: gallagher.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6ac2c9ae-ce12-4496-fd25-08d80e599f8e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Jun 2020 22:48:56.3412
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed4ee0d2-288f-45b5-0f29-08d81163b27e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jun 2020 19:38:36.4786
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 2156b869-431f-4815-b2ce-b4893b5c9aaa
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Ls4PP0aJ/p5CaC5kUOo55/IplfpfMBWjBbC8vz9zlyYeWPnQrqv2leqcis4ITeRJZxAMSRWcWxdC0YhbBb3/+tr9Ar7dN0oJ5T83LWy8tp0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SYXPR01MB1775
+X-MS-Exchange-CrossTenant-userprincipalname: seahx8tdxtp9bWcxJzWlsa+PV9ldo9+UMmRMKdmPy3X5CM8f96yv2G6dFnh3F092RwqSss8voyOujvfhccZXsrR5ylTDMV+fG6SmfU9+LOc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY3PR01MB2012
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+Hi Denys,
+
+Gentle reminder as this patch has been in the mailing list (#12992) for som=
+e time now but I haven't heard anything.
+
+Regards
+Ankur
+
+-----Original Message-----
+From: Ankur Tyagi=20
+Sent: Friday, 12 June 2020 10:49 AM
+To: meta-ti@lists.yoctoproject.org
+Subject: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for=
+ uboot board config
 
 When using meta-ti BSP layer, user should be able to override default uboot
 board config with their custom board config as it is common for customers
