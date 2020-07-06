@@ -1,264 +1,142 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.5636.1593478658577773899
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.3677.1594072800818903243
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 29 Jun 2020 17:57:38 -0700
+ Mon, 06 Jul 2020 15:00:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=iaZE2ars;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: denys@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 05U0vVXs075654;
-	Mon, 29 Jun 2020 19:57:31 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EKsGnpWv;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: m-karicheri2@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 066LxxaR047378
+	for <meta-ti@lists.yoctoproject.org>; Mon, 6 Jul 2020 16:59:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1593478651;
-	bh=2Euqt2xivqITYBFcbsTckx+m1nOohPgSnnG47nPuh00=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=iaZE2arsoUkdXCxmOfr3Xww+YDIoZ+OigZCdKktYu5yaNWQKQ4xawK5Law2l/EHL2
-	 JhKTm6RtDMpJzzXRimVHJ41d2UBkqEozlxN6tlygMrnEeuhgUh1iBJOg+gAVUwtKiG
-	 WxZGvSClubFUxanIozh/+NwaKMCbAilSsXnYHa6c=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 05U0vVqm035385
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 29 Jun 2020 19:57:31 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 29
- Jun 2020 19:57:31 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1594072799;
+	bh=HhsqOt3HyEGlJ1GUA4TRVL60CHvItsyUHHaYV9tTAss=;
+	h=From:To:Subject:Date;
+	b=EKsGnpWva4BCmzFjE7kG2Rtkvv0fYjVPqOjpI1tb93cwcltHOusyzqyWdFeCnglvs
+	 icHnYRzsYmDBhawRXr9KFYc0aIDgGMQATpZQ+qcTWikxy9puERgynLYnlDeuDC+5/C
+	 15fAT6aBmXhAwx5Zs51R9fK5s4sGVLnn61S0ZxVA=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 066LxxdW007015
+	for <meta-ti@lists.yoctoproject.org>; Mon, 6 Jul 2020 16:59:59 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 6 Jul
+ 2020 16:59:59 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 29 Jun 2020 19:57:31 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 05U0vVwR014721;
-	Mon, 29 Jun 2020 19:57:31 -0500
-Date: Mon, 29 Jun 2020 20:57:31 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Ankur Tyagi <Ankur.Tyagi@gallagher.com>
-CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
-Message-ID: <20200630005730.GA7211@beryl>
-References: <20200615194140.GB10991@beryl>
- <1618CF3A292A2864.29686@lists.yoctoproject.org>
- <SY3PR01MB0809BA9DEC51834E825B56DEE59D0@SY3PR01MB0809.ausprd01.prod.outlook.com>
- <20200617235343.GA9923@beryl>
- <SY3PR01MB08097CC6172881D8261275DCE59B0@SY3PR01MB0809.ausprd01.prod.outlook.com>
- <20200618011926.GB9923@beryl>
- <1619871A2E16E3B4.23753@lists.yoctoproject.org>
- <SY3PR01MB19310CF89A41E9466FE17146E56E0@SY3PR01MB1931.ausprd01.prod.outlook.com>
- <20200629212122.GB6525@beryl>
- <SY3PR01MB193181450A98C5800E3FC1D0E56F0@SY3PR01MB1931.ausprd01.prod.outlook.com>
+ Frontend Transport; Mon, 6 Jul 2020 16:59:59 -0500
+Received: from uda0868495.fios-router.home (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 066Lxxml037773;
+	Mon, 6 Jul 2020 16:59:59 -0500
+From: "Murali" <m-karicheri2@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <denys@ti.com>
+Subject: [meta-ti] prueth-hsr/prp: add hsr/prp firmware recipe for version 2.15.23
+Date: Mon, 6 Jul 2020 17:59:58 -0400
+Message-ID: <20200706215958.1520-1-m-karicheri2@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <SY3PR01MB193181450A98C5800E3FC1D0E56F0@SY3PR01MB1931.ausprd01.prod.outlook.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
 
-On Tue, Jun 30, 2020 at 12:55:13AM +0000, Ankur Tyagi wrote:
-> Hi Denys,
-> 
-> meta-arago seems good now (dunfell), not much usage of am335x-evm
-> 
-> ./meta-arago-distro/conf/distro/include/branding-amsdk.inc
-> ./meta-arago-distro/recipes-core/packagegroups/packagegroup-arago-tisdk-addons.bb
-> ./meta-arago-extras/recipes-apps/acontis-ethercat-demo/acontis-atemsys_3.0.1.28.bb
-> ./meta-arago-extras/recipes-devtools/pinmux-utility/pinmux-utility_2.5.2.0.bb
-> 
-> My response was biased with previous (old)branches experience.
-> 
-> I had another look in meta-ti machines and I think I should follow the pattern
-> used in am335x-hs-evm.conf.
-> 
-> This way I can add my board conf that can reside with default machine conf's
-> What is your opinion about it?
+This patch adds recipe for hsr/prp firmware on am3/4/5 SoCs. The binary
+files are located on ti-linux-firmware.git. This is a forward port of
+the recipe from processor sdk 6.3
 
-Yeah, that sounds good. Let me know how that goes and if you need any fixes. 
-Thanks.
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb | 36 +++++++++++++++++++++++++
+ recipes-bsp/pruprp-fw/pruprp-fw_git.bb | 37 ++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
+ create mode 100644 recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb
+ create mode 100644 recipes-bsp/pruprp-fw/pruprp-fw_git.bb
 
+diff --git a/recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb b/recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb
+new file mode 100644
+index 000000000000..fd6665f29d17
+--- /dev/null
++++ b/recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb
+@@ -0,0 +1,36 @@
++DESCRIPTION = "PRU HSR firmware for AM57xx"
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++
++PV = "2.15.23"
++PE = "1"
++PR = "r0"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SRCREV = "313e20f312a286bc07b97ef9aca70ef3ce96af29"
++BRANCH ?= "ti-linux-firmware"
++
++SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++TARGET = ""
++TARGET_ti33x = "am335x-pru0-pruhsr-fw.elf am335x-pru1-pruhsr-fw.elf"
++TARGET_ti43x = "am437x-pru0-pruhsr-fw.elf am437x-pru1-pruhsr-fw.elf"
++TARGET_am57xx-evm = "am57xx-pru0-pruhsr-fw.elf am57xx-pru1-pruhsr-fw.elf"
++TARGET_am57xx-hs-evm = "am57xx-pru0-pruhsr-fw.elf am57xx-pru1-pruhsr-fw.elf"
++
++do_install() {
++	install -d ${D}${base_libdir}/firmware/ti-pruss
++	for f in ${TARGET}; do
++		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
++	done
++}
++
++FILES_${PN} = "${base_libdir}/firmware"
++
++INSANE_SKIP_${PN} = "arch"
+diff --git a/recipes-bsp/pruprp-fw/pruprp-fw_git.bb b/recipes-bsp/pruprp-fw/pruprp-fw_git.bb
+new file mode 100644
+index 000000000000..0b9991a5a0a3
+--- /dev/null
++++ b/recipes-bsp/pruprp-fw/pruprp-fw_git.bb
+@@ -0,0 +1,37 @@
++DESCRIPTION = "PRU PRP firmware for AM57xx"
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
++
++PV = "2.15.23"
++PE = "1"
++PR = "r0"
++
++COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SRCREV = "313e20f312a286bc07b97ef9aca70ef3ce96af29"
++BRANCH ?= "ti-linux-firmware"
++
++SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++TARGET = ""
++TARGET_ti33x = "am335x-pru0-pruprp-fw.elf am335x-pru1-pruprp-fw.elf"
++TARGET_ti43x = "am437x-pru0-pruprp-fw.elf am437x-pru1-pruprp-fw.elf"
++TARGET_am57xx-evm = "am57xx-pru0-pruprp-fw.elf am57xx-pru1-pruprp-fw.elf"
++TARGET_am57xx-hs-evm = "am57xx-pru0-pruprp-fw.elf am57xx-pru1-pruprp-fw.elf"
++
++
++do_install() {
++	install -d ${D}${base_libdir}/firmware/ti-pruss
++	for f in ${TARGET}; do
++		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
++	done
++}
++
++FILES_${PN} = "${base_libdir}/firmware"
++
++INSANE_SKIP_${PN} = "arch"
 -- 
-Denys
+2.17.1
 
-
-> Regards
-> Ankur
-> 
-> -----Original Message-----
-> From: Denys Dmytriyenko <denys@ti.com> 
-> Sent: Tuesday, 30 June 2020 9:21 AM
-> To: Ankur Tyagi <Ankur.Tyagi@gallagher.com>
-> Cc: meta-ti@lists.yoctoproject.org
-> Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
-> 
-> Sorry, was away for a bit. Can you please identify where in meta-arago 
-> "am335x-evm" machine is used directly where it should be "ti33x" family 
-> instead? Or you can send patches to fix those places. Thanks.
-> 
-> -- 
-> Denys
-> 
-> 
-> On Mon, Jun 29, 2020 at 04:05:13PM +0000, Ankur Tyagi wrote:
-> > Hi Denys,
-> > 
-> > Didn't got your feedback so does that mean my reason doesn't stack up?
-> > 
-> > Regards
-> > Ankur
-> > 
-> > -----Original Message-----
-> > From: meta-ti@lists.yoctoproject.org <meta-ti@lists.yoctoproject.org> On Behalf Of Ankur Tyagi
-> > Sent: Thursday, 18 June 2020 3:55 PM
-> > To: Denys Dmytriyenko <denys@ti.com>
-> > Cc: meta-ti@lists.yoctoproject.org
-> > Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
-> > 
-> > Apologies, my bad
-> > 
-> > > The idea is that if you are creating a custom board based on am335x-evm and
-> > > adding new config to U-boot, you should consider adding a new OE machine. Even
-> > > if your machine includes ti33x.inc for common SoC definitions, you can still
-> > > overwrite UBOOT_MACHINE in your <custom-machine>.conf file...
-> > 
-> > I did started with this idea but meta-arago has lot of "am335x-evm" machine usage throughout.
-> > That would mean to add new machine override in lot of meta-arago recipes.
-> > 
-> > Keeping a new board config in u-boot is desired to allow easy upgrading of u-boot from sitara-u-boot git repo.
-> > Modifying am335x board specific in u-boot doesn't scale well.
-> > 
-> > Hence came up with this approach to allow uboot config override in bsp layer but still use most of distro layer
-> > as it is.
-> > 
-> > But I am open to new ideas/suggestions as well.
-> > 
-> > Regards
-> > Ankur
-> > 
-> > -----Original Message-----
-> > From: Denys Dmytriyenko <denys@ti.com>
-> > Sent: Thursday, 18 June 2020 1:19 PM
-> > To: Ankur Tyagi <Ankur.Tyagi@gallagher.com>
-> > Cc: meta-ti@lists.yoctoproject.org
-> > Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
-> > 
-> > On Thu, Jun 18, 2020 at 12:40:23AM +0000, Ankur Tyagi wrote:
-> > > Hi Denys,
-> > >
-> > > Yes, I did sent the patch again on mailing list and once the patch appeared,
-> > > then only I sent reminder.
-> > >
-> > > To begin with, this is what I think happened:
-> > > - Sent a patch to the list but somehow it failed
-> > > - without realizing that failure, I sent reminder for the failed one
-> > > https://lists.yoctoproject.org/g/meta-ti/message/12990
-> > > - you identified the problem and suggested to send it again
-> > > https://lists.yoctoproject.org/g/meta-ti/message/12991
-> > 
-> > And also there ^^^ I commented on feasibility of the change, which you seem to
-> > have missed...
-> > 
-> > 
-> > > - I did sent the patch again and it made it to mailing list
-> > > https://lists.yoctoproject.org/g/meta-ti/message/12992
-> > > - and then reminder for the successful sent patch
-> > > https://lists.yoctoproject.org/g/meta-ti/message/12993
-> > >
-> > > I sent the patch again with the same subject, somehow it got merged in the same topic
-> > > and doesn't appear as a separate patch?
-> > > Should I do slight change in the subject so that it appears as a separate topic in the list?
-> > >
-> > > Not sure what's the best way to proceed here.
-> > >
-> > > Regards
-> > > Ankur
-> > >
-> > > -----Original Message-----
-> > > From: Denys Dmytriyenko <denys@ti.com>
-> > > Sent: Thursday, 18 June 2020 11:54 AM
-> > > To: Ankur Tyagi <Ankur.Tyagi@gallagher.com>
-> > > Cc: meta-ti@lists.yoctoproject.org
-> > > Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
-> > >
-> > > On Tue, Jun 16, 2020 at 11:40:47PM +0000, Ankur Tyagi wrote:
-> > > > Hi Denys,
-> > > >
-> > > > Do you want me to send another patch?
-> > > > Maybe with an updated subject to differentiate?
-> > > >
-> > > > Let me know what's the best way to proceed
-> > >
-> > > Have you considered what I said here:
-> > > https://lists.yoctoproject.org/g/meta-ti/topic/74828692
-> > >
-> > >
-> > > > Regards
-> > > > Ankur
-> > > >
-> > > > -----Original Message-----
-> > > > From: meta-ti@lists.yoctoproject.org <meta-ti@lists.yoctoproject.org> On Behalf Of Ankur Tyagi
-> > > > Sent: Tuesday, 16 June 2020 7:45 AM
-> > > > To: Denys Dmytriyenko <denys@ti.com>
-> > > > Cc: meta-ti@lists.yoctoproject.org
-> > > > Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
-> > > >
-> > > > Hi Denys,
-> > > >
-> > > > I did received your response and resent the patch.
-> > > > This is the reminder for the second patch.
-> > > >
-> > > > Regards
-> > > > Ankur
-> > > >
-> > > > -----Original Message-----
-> > > > From: Denys Dmytriyenko <denys@ti.com>
-> > > > Sent: Tuesday, 16 June 2020 7:42 AM
-> > > > To: Ankur Tyagi <Ankur.Tyagi@gallagher.com>
-> > > > Cc: meta-ti@lists.yoctoproject.org
-> > > > Subject: Re: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak assignment for uboot board config
-> > > >
-> > > > On Mon, Jun 15, 2020 at 07:38:36PM +0000, Ankur Tyagi wrote:
-> > > > > Hi Denys,
-> > > > >
-> > > > > Gentle reminder as this patch has been in the mailing list (#12992)
-> > > > > for some time now but I haven't heard anything.
-> > > >
-> > > > Is your subscription working properly? I did reply here:
-> > > > https://lists.yoctoproject.org/g/meta-ti/topic/74828692
-> > > >
-> > > >
-> > > > > Regards
-> > > > > Ankur
-> > > > >
-> > > > > -----Original Message-----
-> > > > > From: Ankur Tyagi
-> > > > > Sent: Friday, 12 June 2020 10:49 AM
-> > > > > To: meta-ti@lists.yoctoproject.org
-> > > > > Subject: [meta-ti][dunfell/master PATCH] ti33x.inc: Use weak
-> > > > > assignment for uboot board config
-> > > > >
-> > > > > When using meta-ti BSP layer, user should be able to override default
-> > > > > uboot board config with their custom board config as it is common for
-> > > > > customers to design custom board based upon am335x-evm dev kit.
-> > > > >
-> > > > > Signed-off-by: Ankur Tyagi <ankur.tyagi@gallagher.com>
-> > > > > ---
-> > > > >  conf/machine/include/ti33x.inc | 2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/conf/machine/include/ti33x.inc
-> > > > > b/conf/machine/include/ti33x.inc index abfd7ec7..ff72a382 100644
-> > > > > --- a/conf/machine/include/ti33x.inc
-> > > > > +++ b/conf/machine/include/ti33x.inc
-> > > > > @@ -39,7 +39,7 @@ KERNEL_DEVICETREE = " \  KERNEL_DEVICETREE +=
-> > > > > "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am335x-icev2-pru-excl-uio.dtb', '', d)}"
-> > > > >
-> > > > >  UBOOT_ARCH = "arm"
-> > > > > -UBOOT_MACHINE = "am335x_evm_config"
-> > > > > +UBOOT_MACHINE ?= "am335x_evm_config"
-> > > > >
-> > > > >  UBOOT_ENTRYPOINT = "0x80008000"
-> > > > >  UBOOT_LOADADDRESS = "0x80008000"
-> > > > > --
-> > > > > 2.17.1
-> > > > >
-> > ________________________________
-> >  This email is confidential and may contain information subject to legal privilege. If you are not the intended recipient please advise us of our error by return e-mail then delete this email and any attached files. You may not copy, disclose or use the contents in any way. The views expressed in this email may not be those of Gallagher Group Ltd or subsidiary companies thereof.
-> > ________________________________
