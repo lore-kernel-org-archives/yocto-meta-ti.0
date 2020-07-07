@@ -1,66 +1,65 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.20786.1594141619608749290
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.21013.1594141662430618856
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 07 Jul 2020 10:06:59 -0700
+ Tue, 07 Jul 2020 10:07:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=s+TBOCJt;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: m-karicheri2@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 067H6xcg107248
-	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:06:59 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=eeWLcKGN;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: denys@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 067H7fa6108757
+	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:07:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1594141619;
-	bh=jLMY5kDs1lwatW66a/XoAf2+7uDtEHVxIYS/Zf5LTtY=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=s+TBOCJtOGSw0uQ9zyZUVAJ7XHBfDO99QTA6ARFC0qJbLQ3JaSfspQsB21kKsZAjk
-	 StINN617/AjNnGP3WPF8WhVT4sswj25GXGd8GDUS50CI3Bafp1M8IcaP4euogmFEr5
-	 abyu+G2QziE6FRjXBcQ4CeT1/DCEQnsKzJQXdO08=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 067H6xsO036791
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:06:59 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1594141661;
+	bh=jzkBdceXOYDVFSp+agBDCr1qCx+s6zFrRxO+tRLPQJg=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=eeWLcKGNKt+eJXlLAfS0k3w5iqosMoup14fGEvTQiDNdEto/JjoPGSoOk7MACwX1j
+	 gsWdcIUibUbhn8DGFvuO09Z29VlmTWKPjaRixU5PLCHmGNNbs7JnY+ryuY8VCALLxL
+	 42DZDoxg7d2iBzONzPIxger1oW02HyLr7SBbq8ps=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 067H7flC081555
+	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:07:41 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 7 Jul
- 2020 12:06:58 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 12:07:41 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 7 Jul 2020 12:06:58 -0500
-Received: from [10.250.74.234] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 067H6wAN026781;
-	Tue, 7 Jul 2020 12:06:58 -0500
-Subject: Re: [meta-ti] [meta-arago PATCH] iproute2: update recipe for prp and supervision vlan support
-To: <meta-ti@lists.yoctoproject.org>, <denys@ti.com>
-References: <161F8718388D0465.28010@lists.yoctoproject.org>
-From: "Murali" <m-karicheri2@ti.com>
-Message-ID: <0aa5125f-18f2-7ff7-ebd3-1a7f93c0664a@ti.com>
-Date: Tue, 7 Jul 2020 13:06:58 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ Frontend Transport; Tue, 7 Jul 2020 12:07:41 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 067H7fBp028917;
+	Tue, 7 Jul 2020 12:07:41 -0500
+Date: Tue, 7 Jul 2020 13:07:41 -0400
+From: "Denys Dmytriyenko" <denys@ti.com>
+To: Murali Karicheri <m-karicheri2@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-arago PATCH] iproute2: update recipe for prp and supervision vlan support
+Message-ID: <20200707170741.GD22569@beryl>
+References: <20200707170207.5473-1-m-karicheri2@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <161F8718388D0465.28010@lists.yoctoproject.org>
+In-Reply-To: <20200707170207.5473-1-m-karicheri2@ti.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Denys,
+Wrong mailing list. Please send this to meta-arago list instead.
 
-On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
+
+On Tue, Jul 07, 2020 at 01:02:07PM -0400, Murali Karicheri wrote:
 > This recipe includes the patches required in iproute2 to add
 > PRP ip link support as well as allow use of VLAN for supervision
 > frames.
 > 
 > Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
 > ---
->   ...upport-for-creating-PRP-device-simil.patch | 109 ++++++++++++++++++
->   ...dd-support-for-vlan-tagged-supervisi.patch | 108 +++++++++++++++++
->   .../iproute2/iproute2_5.5.0.bbappend          |   8 ++
->   3 files changed, 225 insertions(+)
->   create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch
->   create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
->   create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend
+>  ...upport-for-creating-PRP-device-simil.patch | 109 ++++++++++++++++++
+>  ...dd-support-for-vlan-tagged-supervisi.patch | 108 +++++++++++++++++
+>  .../iproute2/iproute2_5.5.0.bbappend          |   8 ++
+>  3 files changed, 225 insertions(+)
+>  create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch
+>  create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
+>  create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend
 > 
 > diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch
 > new file mode 100644
@@ -92,8 +91,8 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++++ b/include/uapi/linux/if_link.h
 > +@@ -881,7 +881,14 @@ enum {
 > + #define IFLA_IPOIB_MAX (__IFLA_IPOIB_MAX - 1)
-> +
-> +
+> + 
+> + 
 > +-/* HSR section */
 > ++/* HSR/PRP section, both uses same interface */
 > ++
@@ -103,7 +102,7 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++	HSR_PROTOCOL_PRP,
 > ++	HSR_PROTOCOL_MAX,
 > ++};
-> +
+> + 
 > + enum {
 > + 	IFLA_HSR_UNSPEC,
 > +@@ -891,6 +898,9 @@ enum {
@@ -115,7 +114,7 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++					 */
 > + 	__IFLA_HSR_MAX,
 > + };
-> +
+> + 
 > +diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
 > +index 7d9167d4e6a3..6ea138a23cbc 100644
 > +--- a/ip/iplink_hsr.c
@@ -138,14 +137,14 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++		"PROTOCOL\n"
 > ++		"	0 - HSR, 1 - PRP. (default = 0 - HSR)\n");
 > + }
-> +
+> + 
 > + static void usage(void)
 > +@@ -49,6 +51,7 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
 > + 	int ifindex;
 > + 	unsigned char multicast_spec;
 > + 	unsigned char protocol_version;
 > ++	unsigned char protocol = HSR_PROTOCOL_HSR;
-> +
+> + 
 > + 	while (argc > 0) {
 > + 		if (matches(*argv, "supervision") == 0) {
 > +@@ -64,6 +67,13 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
@@ -172,9 +171,9 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++			  "proto %d ",
 > ++			  rta_getattr_u8(tb[IFLA_HSR_PROTOCOL]));
 > + }
-> +
+> + 
 > + static void hsr_print_help(struct link_util *lu, int argc, char **argv,
-> +--
+> +-- 
 > +2.17.1
 > +
 > diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
@@ -215,7 +214,7 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++	IFLA_HSR_SV_PCP,		/* Supervision frames VLAN PCP */
 > + 	__IFLA_HSR_MAX,
 > + };
-> +
+> + 
 > +diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
 > +index 6ea138a23cbc..f38c752c0065 100644
 > +--- a/ip/iplink_hsr.c
@@ -243,7 +242,7 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++		"      Use VLAN tag if one of sv_vid, sv_pcp or sv_dei is specified. Default value\n"
 > ++		"      used for unspecified ones\n");
 > + }
-> +
+> + 
 > + static void usage(void)
 > +@@ -52,6 +61,9 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
 > + 	unsigned char multicast_spec;
@@ -252,7 +251,7 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > ++	unsigned short sv_vid;
 > ++	unsigned char sv_dei;
 > ++	unsigned char sv_pcp;
-> +
+> + 
 > + 	while (argc > 0) {
 > + 		if (matches(*argv, "supervision") == 0) {
 > +@@ -86,6 +98,32 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
@@ -288,7 +287,7 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > + 		} else if (matches(*argv, "help") == 0) {
 > + 			usage();
 > + 			return -1;
-> +--
+> +-- 
 > +2.17.1
 > +
 > diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend b/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend
@@ -298,21 +297,6 @@ On 7/7/20 1:02 PM, Murali via lists.yoctoproject.org wrote:
 > +++ b/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend
 > @@ -0,0 +1,8 @@
 > +PR_append = ".arago6"
-
-What does this mean? I just copied it from 4.19.0.bbappend.
-I have build it and checked the code under
-
-build/arago-tmp-external-arm-glibc/work/armv7at2hf-neon-linux-gnueabi/iproute2/5.5.0-r0.arago6/iproute2-5.5.0/ip
-
-and the iplink_hsr.c has my changes. Will test the ipk files now.
-
-Hopefully if this can be merged today and able to get a file
-system with this change some time this week, that will be great.
-
-Thanks and regards,
-
-Murali
-
 > +
 > +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 > +
@@ -320,11 +304,6 @@ Murali
 > +    file://0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch \
 > +    file://0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch \
 > +"
+> -- 
+> 2.17.1
 > 
-> 
-> 
-> 
-
--- 
-Murali Karicheri
-Texas Instruments
