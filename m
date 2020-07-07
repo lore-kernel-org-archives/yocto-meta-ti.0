@@ -1,328 +1,304 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.21594.1594143800188030575
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.21873.1594143902152744135
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 07 Jul 2020 10:43:20 -0700
+ Tue, 07 Jul 2020 10:45:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=hk3J/TT2;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: m-karicheri2@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 067HhJl9116038
-	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:43:19 -0500
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=qggvsSHO;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: m-karicheri2@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 067Hj1LG118075
+	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:45:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1594143799;
-	bh=ZuXlDoas/w9GtVSqYNsSrzH/Nc/k2s8NYSWHvKBjnQQ=;
+	s=ti-com-17Q1; t=1594143901;
+	bh=vrar6EWkqnSxIADWeH1drYii2QtmjURMjRHMOjmjBhc=;
 	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=hk3J/TT2aRiBTxik8E+g6sixIFiY/yX0Sz0nUweP8ge0LzcKrIRtBakAuGtgLQuT5
-	 CGXLZBJF6UGC+IHzPpbWrJmWKkC+/1DQR64pFNzsYM0eM+/27Ok5ztwrdxtDpcwqCL
-	 XEFOV5Huo3Gtyr3Ov7Xkrpyy18iQMNMWogHJzk+k=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 067HhJdk000393
-	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:43:19 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	b=qggvsSHOHzY+kgX4ktrbHeDRyHTGcENMKQYETlK3tgnnl/udEH8sW07S6B78Muyz7
+	 cd62bt85BMO+c/VILSQfmgtvtnuPnjFxOPYTM+cjP3hE06UdCAtOkQkG/T0sIQ16K5
+	 32m+X4OkoqFLINSETe/341uqRp6Ei8dm1bAQr3Xw=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 067Hj1De095005
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 12:45:01 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 7 Jul
- 2020 12:43:18 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 12:45:01 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 7 Jul 2020 12:43:19 -0500
+ Frontend Transport; Tue, 7 Jul 2020 12:45:01 -0500
 Received: from [10.250.74.234] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 067HhIOf077058;
-	Tue, 7 Jul 2020 12:43:18 -0500
-Subject: Re: [meta-arago PATCH] iproute2: update recipe for prp and supervision vlan support
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 067Hj0Wu098887;
+	Tue, 7 Jul 2020 12:45:00 -0500
+Subject: Re: [meta-ti] [meta-arago PATCH] iproute2: update recipe for prp and supervision vlan support
 To: Denys Dmytriyenko <denys@ti.com>
 CC: <meta-ti@lists.yoctoproject.org>
 References: <20200707170207.5473-1-m-karicheri2@ti.com>
- <20200707170741.GD22569@beryl>
+ <20200707170741.GD22569@beryl> <161F895730ADC75F.6803@lists.yoctoproject.org>
 From: "Murali" <m-karicheri2@ti.com>
-Message-ID: <db90fa02-f014-da2e-a42a-0fda41a8b292@ti.com>
-Date: Tue, 7 Jul 2020 13:43:18 -0400
+Message-ID: <bbe0f557-34ed-b142-6362-fd14ea3694bc@ti.com>
+Date: Tue, 7 Jul 2020 13:45:00 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200707170741.GD22569@beryl>
+In-Reply-To: <161F895730ADC75F.6803@lists.yoctoproject.org>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-MIME-Autoconverted: from 8bit to base64 by fllv0015.ext.ti.com id 067Hj1LG118075
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-Denys,
-
-What is the email id for meta-arago. I am subscribed to it, but my mail 
-bounced.
-
-I tried meta-arago@lists.yoctoproject.org
-
-Thanks
-
-Murali
-
-On 7/7/20 1:07 PM, Denys Dmytriyenko wrote:
-> Wrong mailing list. Please send this to meta-arago list instead.
-> 
-> 
-> On Tue, Jul 07, 2020 at 01:02:07PM -0400, Murali Karicheri wrote:
->> This recipe includes the patches required in iproute2 to add
->> PRP ip link support as well as allow use of VLAN for supervision
->> frames.
->>
->> Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
->> ---
->>   ...upport-for-creating-PRP-device-simil.patch | 109 ++++++++++++++++++
->>   ...dd-support-for-vlan-tagged-supervisi.patch | 108 +++++++++++++++++
->>   .../iproute2/iproute2_5.5.0.bbappend          |   8 ++
->>   3 files changed, 225 insertions(+)
->>   create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch
->>   create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
->>   create mode 100644 meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend
->>
->> diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch
->> new file mode 100644
->> index 000000000000..dfeaeb01b485
->> --- /dev/null
->> +++ b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch
->> @@ -0,0 +1,109 @@
->> +From e3aa94814e9467af5829a04c335a615c0082a362 Mon Sep 17 00:00:00 2001
->> +From: Murali Karicheri <m-karicheri2@ti.com>
->> +Date: Fri, 5 Jun 2020 11:02:05 -0400
->> +Subject: [PATCH 1/2] iplink: hsr: add support for creating PRP device similar
->> + to HSR
->> +
->> +This patch enhances the iplink command to add a proto parameters to
->> +create PRP device/interface similar to HSR. Both protocols are
->> +quite similar and requires a pair of Ethernet interfaces. So re-use
->> +the existing HSR iplink command to create PRP device/interface as
->> +well. Use proto parameter to differentiate the two protocols.
->> +
->> +Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
->> +---
->> + include/uapi/linux/if_link.h | 12 +++++++++++-
->> + ip/iplink_hsr.c              | 19 +++++++++++++++++--
->> + 2 files changed, 28 insertions(+), 3 deletions(-)
->> +
->> +diff --git a/include/uapi/linux/if_link.h b/include/uapi/linux/if_link.h
->> +index 1c49f436424d..de08704c5862 100644
->> +--- a/include/uapi/linux/if_link.h
->> ++++ b/include/uapi/linux/if_link.h
->> +@@ -881,7 +881,14 @@ enum {
->> + #define IFLA_IPOIB_MAX (__IFLA_IPOIB_MAX - 1)
->> +
->> +
->> +-/* HSR section */
->> ++/* HSR/PRP section, both uses same interface */
->> ++
->> ++/* Different redundancy protocols for hsr device */
->> ++enum {
->> ++	HSR_PROTOCOL_HSR,
->> ++	HSR_PROTOCOL_PRP,
->> ++	HSR_PROTOCOL_MAX,
->> ++};
->> +
->> + enum {
->> + 	IFLA_HSR_UNSPEC,
->> +@@ -891,6 +898,9 @@ enum {
->> + 	IFLA_HSR_SUPERVISION_ADDR,	/* Supervision frame multicast addr */
->> + 	IFLA_HSR_SEQ_NR,
->> + 	IFLA_HSR_VERSION,		/* HSR version */
->> ++	IFLA_HSR_PROTOCOL,		/* Indicate different protocol than
->> ++					 * HSR. For example PRP.
->> ++					 */
->> + 	__IFLA_HSR_MAX,
->> + };
->> +
->> +diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
->> +index 7d9167d4e6a3..6ea138a23cbc 100644
->> +--- a/ip/iplink_hsr.c
->> ++++ b/ip/iplink_hsr.c
->> +@@ -25,7 +25,7 @@ static void print_usage(FILE *f)
->> + {
->> + 	fprintf(f,
->> + 		"Usage:\tip link add name NAME type hsr slave1 SLAVE1-IF slave2 SLAVE2-IF\n"
->> +-		"\t[ supervision ADDR-BYTE ] [version VERSION]\n"
->> ++		"\t[ supervision ADDR-BYTE ] [version VERSION] [proto PROTOCOL]\n"
->> + 		"\n"
->> + 		"NAME\n"
->> + 		"	name of new hsr device (e.g. hsr0)\n"
->> +@@ -35,7 +35,9 @@ static void print_usage(FILE *f)
->> + 		"	0-255; the last byte of the multicast address used for HSR supervision\n"
->> + 		"	frames (default = 0)\n"
->> + 		"VERSION\n"
->> +-		"	0,1; the protocol version to be used. (default = 0)\n");
->> ++		"	0,1; the protocol version to be used. (default = 0)\n"
->> ++		"PROTOCOL\n"
->> ++		"	0 - HSR, 1 - PRP. (default = 0 - HSR)\n");
->> + }
->> +
->> + static void usage(void)
->> +@@ -49,6 +51,7 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
->> + 	int ifindex;
->> + 	unsigned char multicast_spec;
->> + 	unsigned char protocol_version;
->> ++	unsigned char protocol = HSR_PROTOCOL_HSR;
->> +
->> + 	while (argc > 0) {
->> + 		if (matches(*argv, "supervision") == 0) {
->> +@@ -64,6 +67,13 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
->> + 				invarg("version is invalid", *argv);
->> + 			addattr_l(n, 1024, IFLA_HSR_VERSION,
->> + 				  &protocol_version, 1);
->> ++		} else if (matches(*argv, "proto") == 0) {
->> ++			NEXT_ARG();
->> ++			if (!(get_u8(&protocol, *argv, 0) == HSR_PROTOCOL_HSR ||
->> ++			      get_u8(&protocol, *argv, 0) == HSR_PROTOCOL_PRP))
->> ++				invarg("protocol is invalid", *argv);
->> ++			addattr_l(n, 1024, IFLA_HSR_PROTOCOL,
->> ++				  &protocol, 1);
->> + 		} else if (matches(*argv, "slave1") == 0) {
->> + 			NEXT_ARG();
->> + 			ifindex = ll_name_to_index(*argv);
->> +@@ -140,6 +150,11 @@ static void hsr_print_opt(struct link_util *lu, FILE *f, struct rtattr *tb[])
->> + 					 RTA_PAYLOAD(tb[IFLA_HSR_SUPERVISION_ADDR]),
->> + 					 ARPHRD_VOID,
->> + 					 b1, sizeof(b1)));
->> ++	if (tb[IFLA_HSR_PROTOCOL])
->> ++		print_int(PRINT_ANY,
->> ++			  "proto",
->> ++			  "proto %d ",
->> ++			  rta_getattr_u8(tb[IFLA_HSR_PROTOCOL]));
->> + }
->> +
->> + static void hsr_print_help(struct link_util *lu, int argc, char **argv,
->> +--
->> +2.17.1
->> +
->> diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
->> new file mode 100644
->> index 000000000000..fa0eecccdf59
->> --- /dev/null
->> +++ b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
->> @@ -0,0 +1,108 @@
->> +From 6e48ed61da3b03da415a87bfbd3651fde8742647 Mon Sep 17 00:00:00 2001
->> +From: Murali Karicheri <m-karicheri2@ti.com>
->> +Date: Fri, 5 Jun 2020 12:07:43 -0400
->> +Subject: [PATCH 2/2] iplink: hsr/prp: add support for vlan tagged supervision
->> + frames
->> +
->> +This patch adds support to configure vlan tag information
->> +(vid, pcp and dei) at the hsr/prp lre device. This tag values
->> +will be used by the lre device to generate a VLAN tagged
->> +Supervision frames. This is done by adding 3 additional attributes
->> +to the hsr/prp link type and passing this to Linux HSR/PRP
->> +device through the ip link command.
->> +
->> +Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
->> +---
->> + include/uapi/linux/if_link.h |  3 +++
->> + ip/iplink_hsr.c              | 40 +++++++++++++++++++++++++++++++++++-
->> + 2 files changed, 42 insertions(+), 1 deletion(-)
->> +
->> +diff --git a/include/uapi/linux/if_link.h b/include/uapi/linux/if_link.h
->> +index de08704c5862..94a381769e5a 100644
->> +--- a/include/uapi/linux/if_link.h
->> ++++ b/include/uapi/linux/if_link.h
->> +@@ -901,6 +901,9 @@ enum {
->> + 	IFLA_HSR_PROTOCOL,		/* Indicate different protocol than
->> + 					 * HSR. For example PRP.
->> + 					 */
->> ++	IFLA_HSR_SV_VID,		/* Supervision frames VLAN ID */
->> ++	IFLA_HSR_SV_DEI,		/* Supervision frames VLAN DEI */
->> ++	IFLA_HSR_SV_PCP,		/* Supervision frames VLAN PCP */
->> + 	__IFLA_HSR_MAX,
->> + };
->> +
->> +diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
->> +index 6ea138a23cbc..f38c752c0065 100644
->> +--- a/ip/iplink_hsr.c
->> ++++ b/ip/iplink_hsr.c
->> +@@ -26,6 +26,7 @@ static void print_usage(FILE *f)
->> + 	fprintf(f,
->> + 		"Usage:\tip link add name NAME type hsr slave1 SLAVE1-IF slave2 SLAVE2-IF\n"
->> + 		"\t[ supervision ADDR-BYTE ] [version VERSION] [proto PROTOCOL]\n"
->> ++		"\t[ sv_vid SV-VID ] [ sv_pcp SV-PCP ] [ sv_dei SV-DEI ]\n"
->> + 		"\n"
->> + 		"NAME\n"
->> + 		"	name of new hsr device (e.g. hsr0)\n"
->> +@@ -37,7 +38,15 @@ static void print_usage(FILE *f)
->> + 		"VERSION\n"
->> + 		"	0,1; the protocol version to be used. (default = 0)\n"
->> + 		"PROTOCOL\n"
->> +-		"	0 - HSR, 1 - PRP. (default = 0 - HSR)\n");
->> ++		"	0 - HSR, 1 - PRP. (default = 0 - HSR)\n"
->> ++		"SV-VID\n"
->> ++		"      0-4094; VLAN ID to be used in the VLAN tag of SV frames (default 0)\n"
->> ++		"SV-PCP\n"
->> ++		"      0-7; PCP value to be used in the VLAN tag of SV frames (default 0)\n"
->> ++		"SV-DEI\n"
->> ++		"      0-1;  DEI value to be used in the VLAN tag of SV frames (default 0)\n"
->> ++		"      Use VLAN tag if one of sv_vid, sv_pcp or sv_dei is specified. Default value\n"
->> ++		"      used for unspecified ones\n");
->> + }
->> +
->> + static void usage(void)
->> +@@ -52,6 +61,9 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
->> + 	unsigned char multicast_spec;
->> + 	unsigned char protocol_version;
->> + 	unsigned char protocol = HSR_PROTOCOL_HSR;
->> ++	unsigned short sv_vid;
->> ++	unsigned char sv_dei;
->> ++	unsigned char sv_pcp;
->> +
->> + 	while (argc > 0) {
->> + 		if (matches(*argv, "supervision") == 0) {
->> +@@ -86,6 +98,32 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
->> + 			if (ifindex == 0)
->> + 				invarg("No such interface", *argv);
->> + 			addattr_l(n, 1024, IFLA_HSR_SLAVE2, &ifindex, 4);
->> ++		} else if (matches(*argv, "sv_vid") == 0) {
->> ++			NEXT_ARG();
->> ++			if (get_u16(&sv_vid, *argv, 0))
->> ++				invarg("SV-VID is invalid", *argv);
->> ++			/* exclude reserved 4095 */
->> ++			if (sv_vid >= 4095)
->> ++				invarg("SV-VID is invalid", *argv);
->> ++			addattr_l(n, 1024, IFLA_HSR_SV_VID,
->> ++				  &sv_vid, sizeof(sv_vid));
->> ++		} else if (matches(*argv, "sv_pcp") == 0) {
->> ++			NEXT_ARG();
->> ++			if (get_u8(&sv_pcp, *argv, 0))
->> ++				invarg("SV-PCP is invalid", *argv);
->> ++			if (sv_pcp > 7)
->> ++				invarg("SV-PCP is invalid", *argv);
->> ++			addattr_l(n, 1024, IFLA_HSR_SV_PCP,
->> ++				  &sv_pcp, sizeof(sv_pcp));
->> ++		} else if (matches(*argv, "sv_dei") == 0) {
->> ++			NEXT_ARG();
->> ++			if (get_u8(&sv_dei, *argv, 0))
->> ++				invarg("SV-DEI is invalid", *argv);
->> ++			if (sv_dei > 1)
->> ++				invarg("SV-DEI is invalid", *argv);
->> ++			addattr_l(n, 1024, IFLA_HSR_SV_DEI,
->> ++				  &sv_dei, sizeof(sv_dei));
->> ++
->> + 		} else if (matches(*argv, "help") == 0) {
->> + 			usage();
->> + 			return -1;
->> +--
->> +2.17.1
->> +
->> diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend b/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend
->> new file mode 100644
->> index 000000000000..d6effcd7ca81
->> --- /dev/null
->> +++ b/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappend
->> @@ -0,0 +1,8 @@
->> +PR_append = ".arago6"
->> +
->> +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
->> +
->> +SRC_URI_append = " \
->> +    file://0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch \
->> +    file://0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch \
->> +"
->> -- 
->> 2.17.1
->>
-
--- 
-Murali Karicheri
-Texas Instruments
+DQoNCk9uIDcvNy8yMCAxOjQzIFBNLCBNdXJhbGkgdmlhIGxpc3RzLnlvY3RvcHJvamVjdC5vcmcg
+d3JvdGU6DQo+IERlbnlzLA0KPiANCj4gV2hhdCBpcyB0aGUgZW1haWwgaWQgZm9yIG1ldGEtYXJh
+Z28uIEkgYW0gc3Vic2NyaWJlZCB0byBpdCwgYnV0IG15IG1haWwgDQo+IGJvdW5jZWQuDQo+IA0K
+PiBJIHRyaWVkIG1ldGEtYXJhZ29AbGlzdHMueW9jdG9wcm9qZWN0Lm9yZw0KPiANCkkgdGhpbmsg
+SSBnb3QgaXQuIElzIGl0IG1ldGEtYXJhZ29AYXJhZ28tcHJvamVjdC5vcmcgPw0KDQo+IFRoYW5r
+cw0KPiANCj4gTXVyYWxpDQo+IA0KPiBPbiA3LzcvMjAgMTowNyBQTSwgRGVueXMgRG15dHJpeWVu
+a28gd3JvdGU6DQo+PiBXcm9uZyBtYWlsaW5nIGxpc3QuIFBsZWFzZSBzZW5kIHRoaXMgdG8gbWV0
+YS1hcmFnbyBsaXN0IGluc3RlYWQuDQo+Pg0KPj4NCj4+IE9uIFR1ZSwgSnVsIDA3LCAyMDIwIGF0
+IDAxOjAyOjA3UE0gLTA0MDAsIE11cmFsaSBLYXJpY2hlcmkgd3JvdGU6DQo+Pj4gVGhpcyByZWNp
+cGUgaW5jbHVkZXMgdGhlIHBhdGNoZXMgcmVxdWlyZWQgaW4gaXByb3V0ZTIgdG8gYWRkDQo+Pj4g
+UFJQIGlwIGxpbmsgc3VwcG9ydCBhcyB3ZWxsIGFzIGFsbG93IHVzZSBvZiBWTEFOIGZvciBzdXBl
+cnZpc2lvbg0KPj4+IGZyYW1lcy4NCj4+Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IE11cmFsaSBLYXJp
+Y2hlcmkgPG0ta2FyaWNoZXJpMkB0aS5jb20+DQo+Pj4gLS0tDQo+Pj4gwqAgLi4udXBwb3J0LWZv
+ci1jcmVhdGluZy1QUlAtZGV2aWNlLXNpbWlsLnBhdGNoIHwgMTA5ICsrKysrKysrKysrKysrKysr
+Kw0KPj4+IMKgIC4uLmRkLXN1cHBvcnQtZm9yLXZsYW4tdGFnZ2VkLXN1cGVydmlzaS5wYXRjaCB8
+IDEwOCArKysrKysrKysrKysrKysrKw0KPj4+IMKgIC4uLi9pcHJvdXRlMi9pcHJvdXRlMl81LjUu
+MC5iYmFwcGVuZMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA4ICsrDQo+Pj4gwqAgMyBmaWxlcyBj
+aGFuZ2VkLCAyMjUgaW5zZXJ0aW9ucygrKQ0KPj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCANCj4+
+PiBtZXRhLWFyYWdvLWRpc3Ryby9yZWNpcGVzLWNvbm5lY3Rpdml0eS9pcHJvdXRlMi9pcHJvdXRl
+Mi8wMDEzLWlwbGluay1oc3ItYWRkLXN1cHBvcnQtZm9yLWNyZWF0aW5nLVBSUC1kZXZpY2Utc2lt
+aWwucGF0Y2ggDQo+Pj4NCj4+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgDQo+Pj4gbWV0YS1hcmFn
+by1kaXN0cm8vcmVjaXBlcy1jb25uZWN0aXZpdHkvaXByb3V0ZTIvaXByb3V0ZTIvMDAxNC1pcGxp
+bmstaHNyLXBycC1hZGQtc3VwcG9ydC1mb3Itdmxhbi10YWdnZWQtc3VwZXJ2aXNpLnBhdGNoIA0K
+Pj4+DQo+Pj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IA0KPj4+IG1ldGEtYXJhZ28tZGlzdHJvL3Jl
+Y2lwZXMtY29ubmVjdGl2aXR5L2lwcm91dGUyL2lwcm91dGUyXzUuNS4wLmJiYXBwZW5kDQo+Pj4N
+Cj4+PiBkaWZmIC0tZ2l0IA0KPj4+IGEvbWV0YS1hcmFnby1kaXN0cm8vcmVjaXBlcy1jb25uZWN0
+aXZpdHkvaXByb3V0ZTIvaXByb3V0ZTIvMDAxMy1pcGxpbmstaHNyLWFkZC1zdXBwb3J0LWZvci1j
+cmVhdGluZy1QUlAtZGV2aWNlLXNpbWlsLnBhdGNoIA0KPj4+IGIvbWV0YS1hcmFnby1kaXN0cm8v
+cmVjaXBlcy1jb25uZWN0aXZpdHkvaXByb3V0ZTIvaXByb3V0ZTIvMDAxMy1pcGxpbmstaHNyLWFk
+ZC1zdXBwb3J0LWZvci1jcmVhdGluZy1QUlAtZGV2aWNlLXNpbWlsLnBhdGNoIA0KPj4+DQo+Pj4g
+bmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4+PiBpbmRleCAwMDAwMDAwMDAwMDAuLmRmZWFlYjAxYjQ4
+NQ0KPj4+IC0tLSAvZGV2L251bGwNCj4+PiArKysgDQo+Pj4gYi9tZXRhLWFyYWdvLWRpc3Ryby9y
+ZWNpcGVzLWNvbm5lY3Rpdml0eS9pcHJvdXRlMi9pcHJvdXRlMi8wMDEzLWlwbGluay1oc3ItYWRk
+LXN1cHBvcnQtZm9yLWNyZWF0aW5nLVBSUC1kZXZpY2Utc2ltaWwucGF0Y2ggDQo+Pj4NCj4+PiBA
+QCAtMCwwICsxLDEwOSBAQA0KPj4+ICtGcm9tIGUzYWE5NDgxNGU5NDY3YWY1ODI5YTA0YzMzNWE2
+MTVjMDA4MmEzNjIgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQo+Pj4gK0Zyb206IE11cmFsaSBL
+YXJpY2hlcmkgPG0ta2FyaWNoZXJpMkB0aS5jb20+DQo+Pj4gK0RhdGU6IEZyaSwgNSBKdW4gMjAy
+MCAxMTowMjowNSAtMDQwMA0KPj4+ICtTdWJqZWN0OiBbUEFUQ0ggMS8yXSBpcGxpbms6IGhzcjog
+YWRkIHN1cHBvcnQgZm9yIGNyZWF0aW5nIFBSUCANCj4+PiBkZXZpY2Ugc2ltaWxhcg0KPj4+ICsg
+dG8gSFNSDQo+Pj4gKw0KPj4+ICtUaGlzIHBhdGNoIGVuaGFuY2VzIHRoZSBpcGxpbmsgY29tbWFu
+ZCB0byBhZGQgYSBwcm90byBwYXJhbWV0ZXJzIHRvDQo+Pj4gK2NyZWF0ZSBQUlAgZGV2aWNlL2lu
+dGVyZmFjZSBzaW1pbGFyIHRvIEhTUi4gQm90aCBwcm90b2NvbHMgYXJlDQo+Pj4gK3F1aXRlIHNp
+bWlsYXIgYW5kIHJlcXVpcmVzIGEgcGFpciBvZiBFdGhlcm5ldCBpbnRlcmZhY2VzLiBTbyByZS11
+c2UNCj4+PiArdGhlIGV4aXN0aW5nIEhTUiBpcGxpbmsgY29tbWFuZCB0byBjcmVhdGUgUFJQIGRl
+dmljZS9pbnRlcmZhY2UgYXMNCj4+PiArd2VsbC4gVXNlIHByb3RvIHBhcmFtZXRlciB0byBkaWZm
+ZXJlbnRpYXRlIHRoZSB0d28gcHJvdG9jb2xzLg0KPj4+ICsNCj4+PiArU2lnbmVkLW9mZi1ieTog
+TXVyYWxpIEthcmljaGVyaSA8bS1rYXJpY2hlcmkyQHRpLmNvbT4NCj4+PiArLS0tDQo+Pj4gKyBp
+bmNsdWRlL3VhcGkvbGludXgvaWZfbGluay5oIHwgMTIgKysrKysrKysrKystDQo+Pj4gKyBpcC9p
+cGxpbmtfaHNyLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDE5ICsrKysrKysrKysrKysr
+KysrLS0NCj4+PiArIDIgZmlsZXMgY2hhbmdlZCwgMjggaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlv
+bnMoLSkNCj4+PiArDQo+Pj4gK2RpZmYgLS1naXQgYS9pbmNsdWRlL3VhcGkvbGludXgvaWZfbGlu
+ay5oIA0KPj4+IGIvaW5jbHVkZS91YXBpL2xpbnV4L2lmX2xpbmsuaA0KPj4+ICtpbmRleCAxYzQ5
+ZjQzNjQyNGQuLmRlMDg3MDRjNTg2MiAxMDA2NDQNCj4+PiArLS0tIGEvaW5jbHVkZS91YXBpL2xp
+bnV4L2lmX2xpbmsuaA0KPj4+ICsrKysgYi9pbmNsdWRlL3VhcGkvbGludXgvaWZfbGluay5oDQo+
+Pj4gK0BAIC04ODEsNyArODgxLDE0IEBAIGVudW0gew0KPj4+ICsgI2RlZmluZSBJRkxBX0lQT0lC
+X01BWCAoX19JRkxBX0lQT0lCX01BWCAtIDEpDQo+Pj4gKw0KPj4+ICsNCj4+PiArLS8qIEhTUiBz
+ZWN0aW9uICovDQo+Pj4gKysvKiBIU1IvUFJQIHNlY3Rpb24sIGJvdGggdXNlcyBzYW1lIGludGVy
+ZmFjZSAqLw0KPj4+ICsrDQo+Pj4gKysvKiBEaWZmZXJlbnQgcmVkdW5kYW5jeSBwcm90b2NvbHMg
+Zm9yIGhzciBkZXZpY2UgKi8NCj4+PiArK2VudW0gew0KPj4+ICsrwqDCoMKgIEhTUl9QUk9UT0NP
+TF9IU1IsDQo+Pj4gKyvCoMKgwqAgSFNSX1BST1RPQ09MX1BSUCwNCj4+PiArK8KgwqDCoCBIU1Jf
+UFJPVE9DT0xfTUFYLA0KPj4+ICsrfTsNCj4+PiArDQo+Pj4gKyBlbnVtIHsNCj4+PiArwqDCoMKg
+wqAgSUZMQV9IU1JfVU5TUEVDLA0KPj4+ICtAQCAtODkxLDYgKzg5OCw5IEBAIGVudW0gew0KPj4+
+ICvCoMKgwqDCoCBJRkxBX0hTUl9TVVBFUlZJU0lPTl9BRERSLMKgwqDCoCAvKiBTdXBlcnZpc2lv
+biBmcmFtZSBtdWx0aWNhc3QgDQo+Pj4gYWRkciAqLw0KPj4+ICvCoMKgwqDCoCBJRkxBX0hTUl9T
+RVFfTlIsDQo+Pj4gK8KgwqDCoMKgIElGTEFfSFNSX1ZFUlNJT04swqDCoMKgwqDCoMKgwqAgLyog
+SFNSIHZlcnNpb24gKi8NCj4+PiArK8KgwqDCoCBJRkxBX0hTUl9QUk9UT0NPTCzCoMKgwqDCoMKg
+wqDCoCAvKiBJbmRpY2F0ZSBkaWZmZXJlbnQgcHJvdG9jb2wgdGhhbg0KPj4+ICsrwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqIEhTUi4gRm9yIGV4YW1wbGUgUFJQLg0K
+Pj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqLw0KPj4+ICvC
+oMKgwqDCoCBfX0lGTEFfSFNSX01BWCwNCj4+PiArIH07DQo+Pj4gKw0KPj4+ICtkaWZmIC0tZ2l0
+IGEvaXAvaXBsaW5rX2hzci5jIGIvaXAvaXBsaW5rX2hzci5jDQo+Pj4gK2luZGV4IDdkOTE2N2Q0
+ZTZhMy4uNmVhMTM4YTIzY2JjIDEwMDY0NA0KPj4+ICstLS0gYS9pcC9pcGxpbmtfaHNyLmMNCj4+
+PiArKysrIGIvaXAvaXBsaW5rX2hzci5jDQo+Pj4gK0BAIC0yNSw3ICsyNSw3IEBAIHN0YXRpYyB2
+b2lkIHByaW50X3VzYWdlKEZJTEUgKmYpDQo+Pj4gKyB7DQo+Pj4gK8KgwqDCoMKgIGZwcmludGYo
+ZiwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoCAiVXNhZ2U6XHRpcCBsaW5rIGFkZCBuYW1lIE5BTUUg
+dHlwZSBoc3Igc2xhdmUxIFNMQVZFMS1JRiANCj4+PiBzbGF2ZTIgU0xBVkUyLUlGXG4iDQo+Pj4g
+Ky3CoMKgwqDCoMKgwqDCoCAiXHRbIHN1cGVydmlzaW9uIEFERFItQllURSBdIFt2ZXJzaW9uIFZF
+UlNJT05dXG4iDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCAiXHRbIHN1cGVydmlzaW9uIEFERFItQllU
+RSBdIFt2ZXJzaW9uIFZFUlNJT05dIFtwcm90byANCj4+PiBQUk9UT0NPTF1cbiINCj4+PiArwqDC
+oMKgwqDCoMKgwqDCoCAiXG4iDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqAgIk5BTUVcbiINCj4+PiAr
+wqDCoMKgwqDCoMKgwqDCoCAiwqDCoMKgIG5hbWUgb2YgbmV3IGhzciBkZXZpY2UgKGUuZy4gaHNy
+MClcbiINCj4+PiArQEAgLTM1LDcgKzM1LDkgQEAgc3RhdGljIHZvaWQgcHJpbnRfdXNhZ2UoRklM
+RSAqZikNCj4+PiArwqDCoMKgwqDCoMKgwqDCoCAiwqDCoMKgIDAtMjU1OyB0aGUgbGFzdCBieXRl
+IG9mIHRoZSBtdWx0aWNhc3QgYWRkcmVzcyB1c2VkIGZvciANCj4+PiBIU1Igc3VwZXJ2aXNpb25c
+biINCj4+PiArwqDCoMKgwqDCoMKgwqDCoCAiwqDCoMKgIGZyYW1lcyAoZGVmYXVsdCA9IDApXG4i
+DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqAgIlZFUlNJT05cbiINCj4+PiArLcKgwqDCoMKgwqDCoMKg
+ICLCoMKgwqAgMCwxOyB0aGUgcHJvdG9jb2wgdmVyc2lvbiB0byBiZSB1c2VkLiAoZGVmYXVsdCA9
+IDApXG4iKTsNCj4+PiArK8KgwqDCoMKgwqDCoMKgICLCoMKgwqAgMCwxOyB0aGUgcHJvdG9jb2wg
+dmVyc2lvbiB0byBiZSB1c2VkLiAoZGVmYXVsdCA9IDApXG4iDQo+Pj4gKyvCoMKgwqDCoMKgwqDC
+oCAiUFJPVE9DT0xcbiINCj4+PiArK8KgwqDCoMKgwqDCoMKgICLCoMKgwqAgMCAtIEhTUiwgMSAt
+IFBSUC4gKGRlZmF1bHQgPSAwIC0gSFNSKVxuIik7DQo+Pj4gKyB9DQo+Pj4gKw0KPj4+ICsgc3Rh
+dGljIHZvaWQgdXNhZ2Uodm9pZCkNCj4+PiArQEAgLTQ5LDYgKzUxLDcgQEAgc3RhdGljIGludCBo
+c3JfcGFyc2Vfb3B0KHN0cnVjdCBsaW5rX3V0aWwgKmx1LCBpbnQgDQo+Pj4gYXJnYywgY2hhciAq
+KmFyZ3YsDQo+Pj4gK8KgwqDCoMKgIGludCBpZmluZGV4Ow0KPj4+ICvCoMKgwqDCoCB1bnNpZ25l
+ZCBjaGFyIG11bHRpY2FzdF9zcGVjOw0KPj4+ICvCoMKgwqDCoCB1bnNpZ25lZCBjaGFyIHByb3Rv
+Y29sX3ZlcnNpb247DQo+Pj4gKyvCoMKgwqAgdW5zaWduZWQgY2hhciBwcm90b2NvbCA9IEhTUl9Q
+Uk9UT0NPTF9IU1I7DQo+Pj4gKw0KPj4+ICvCoMKgwqDCoCB3aGlsZSAoYXJnYyA+IDApIHsNCj4+
+PiArwqDCoMKgwqDCoMKgwqDCoCBpZiAobWF0Y2hlcygqYXJndiwgInN1cGVydmlzaW9uIikgPT0g
+MCkgew0KPj4+ICtAQCAtNjQsNiArNjcsMTMgQEAgc3RhdGljIGludCBoc3JfcGFyc2Vfb3B0KHN0
+cnVjdCBsaW5rX3V0aWwgKmx1LCANCj4+PiBpbnQgYXJnYywgY2hhciAqKmFyZ3YsDQo+Pj4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludmFyZygidmVyc2lvbiBpcyBpbnZhbGlk
+IiwgKmFyZ3YpOw0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYWRkYXR0cl9sKG4sIDEw
+MjQsIElGTEFfSFNSX1ZFUlNJT04sDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCAmcHJvdG9jb2xfdmVyc2lvbiwgMSk7DQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCB9IGVs
+c2UgaWYgKG1hdGNoZXMoKmFyZ3YsICJwcm90byIpID09IDApIHsNCj4+PiArK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgTkVYVF9BUkcoKTsNCj4+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYg
+KCEoZ2V0X3U4KCZwcm90b2NvbCwgKmFyZ3YsIDApID09IEhTUl9QUk9UT0NPTF9IU1IgfHwNCj4+
+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ2V0X3U4KCZwcm90b2NvbCwg
+KmFyZ3YsIDApID09IEhTUl9QUk9UT0NPTF9QUlApKQ0KPj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGludmFyZygicHJvdG9jb2wgaXMgaW52YWxpZCIsICphcmd2KTsNCj4+PiAr
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYWRkYXR0cl9sKG4sIDEwMjQsIElGTEFfSFNSX1BST1RP
+Q09MLA0KPj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAmcHJvdG9jb2ws
+IDEpOw0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgIH0gZWxzZSBpZiAobWF0Y2hlcygqYXJndiwgInNs
+YXZlMSIpID09IDApIHsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIE5FWFRfQVJHKCk7
+DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZmluZGV4ID0gbGxfbmFtZV90b19pbmRl
+eCgqYXJndik7DQo+Pj4gK0BAIC0xNDAsNiArMTUwLDExIEBAIHN0YXRpYyB2b2lkIGhzcl9wcmlu
+dF9vcHQoc3RydWN0IGxpbmtfdXRpbCAqbHUsIA0KPj4+IEZJTEUgKmYsIHN0cnVjdCBydGF0dHIg
+KnRiW10pDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBS
+VEFfUEFZTE9BRCh0YltJRkxBX0hTUl9TVVBFUlZJU0lPTl9BRERSXSksDQo+Pj4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBBUlBIUkRfVk9JRCwNCj4+PiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGIxLCBzaXplb2YoYjEpKSk7
+DQo+Pj4gKyvCoMKgwqAgaWYgKHRiW0lGTEFfSFNSX1BST1RPQ09MXSkNCj4+PiArK8KgwqDCoMKg
+wqDCoMKgIHByaW50X2ludChQUklOVF9BTlksDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCAicHJvdG8iLA0KPj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgInByb3RvICVk
+ICIsDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBydGFfZ2V0YXR0cl91OCh0YltJ
+RkxBX0hTUl9QUk9UT0NPTF0pKTsNCj4+PiArIH0NCj4+PiArDQo+Pj4gKyBzdGF0aWMgdm9pZCBo
+c3JfcHJpbnRfaGVscChzdHJ1Y3QgbGlua191dGlsICpsdSwgaW50IGFyZ2MsIGNoYXIgDQo+Pj4g
+Kiphcmd2LA0KPj4+ICstLQ0KPj4+ICsyLjE3LjENCj4+PiArDQo+Pj4gZGlmZiAtLWdpdCANCj4+
+PiBhL21ldGEtYXJhZ28tZGlzdHJvL3JlY2lwZXMtY29ubmVjdGl2aXR5L2lwcm91dGUyL2lwcm91
+dGUyLzAwMTQtaXBsaW5rLWhzci1wcnAtYWRkLXN1cHBvcnQtZm9yLXZsYW4tdGFnZ2VkLXN1cGVy
+dmlzaS5wYXRjaCANCj4+PiBiL21ldGEtYXJhZ28tZGlzdHJvL3JlY2lwZXMtY29ubmVjdGl2aXR5
+L2lwcm91dGUyL2lwcm91dGUyLzAwMTQtaXBsaW5rLWhzci1wcnAtYWRkLXN1cHBvcnQtZm9yLXZs
+YW4tdGFnZ2VkLXN1cGVydmlzaS5wYXRjaCANCj4+Pg0KPj4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0
+DQo+Pj4gaW5kZXggMDAwMDAwMDAwMDAwLi5mYTBlZWNjY2RmNTkNCj4+PiAtLS0gL2Rldi9udWxs
+DQo+Pj4gKysrIA0KPj4+IGIvbWV0YS1hcmFnby1kaXN0cm8vcmVjaXBlcy1jb25uZWN0aXZpdHkv
+aXByb3V0ZTIvaXByb3V0ZTIvMDAxNC1pcGxpbmstaHNyLXBycC1hZGQtc3VwcG9ydC1mb3Itdmxh
+bi10YWdnZWQtc3VwZXJ2aXNpLnBhdGNoIA0KPj4+DQo+Pj4gQEAgLTAsMCArMSwxMDggQEANCj4+
+PiArRnJvbSA2ZTQ4ZWQ2MWRhM2IwM2RhNDE1YTg3YmZiZDM2NTFmZGU4NzQyNjQ3IE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQ0KPj4+ICtGcm9tOiBNdXJhbGkgS2FyaWNoZXJpIDxtLWthcmljaGVy
+aTJAdGkuY29tPg0KPj4+ICtEYXRlOiBGcmksIDUgSnVuIDIwMjAgMTI6MDc6NDMgLTA0MDANCj4+
+PiArU3ViamVjdDogW1BBVENIIDIvMl0gaXBsaW5rOiBoc3IvcHJwOiBhZGQgc3VwcG9ydCBmb3Ig
+dmxhbiB0YWdnZWQgDQo+Pj4gc3VwZXJ2aXNpb24NCj4+PiArIGZyYW1lcw0KPj4+ICsNCj4+PiAr
+VGhpcyBwYXRjaCBhZGRzIHN1cHBvcnQgdG8gY29uZmlndXJlIHZsYW4gdGFnIGluZm9ybWF0aW9u
+DQo+Pj4gKyh2aWQsIHBjcCBhbmQgZGVpKSBhdCB0aGUgaHNyL3BycCBscmUgZGV2aWNlLiBUaGlz
+IHRhZyB2YWx1ZXMNCj4+PiArd2lsbCBiZSB1c2VkIGJ5IHRoZSBscmUgZGV2aWNlIHRvIGdlbmVy
+YXRlIGEgVkxBTiB0YWdnZWQNCj4+PiArU3VwZXJ2aXNpb24gZnJhbWVzLiBUaGlzIGlzIGRvbmUg
+YnkgYWRkaW5nIDMgYWRkaXRpb25hbCBhdHRyaWJ1dGVzDQo+Pj4gK3RvIHRoZSBoc3IvcHJwIGxp
+bmsgdHlwZSBhbmQgcGFzc2luZyB0aGlzIHRvIExpbnV4IEhTUi9QUlANCj4+PiArZGV2aWNlIHRo
+cm91Z2ggdGhlIGlwIGxpbmsgY29tbWFuZC4NCj4+PiArDQo+Pj4gK1NpZ25lZC1vZmYtYnk6IE11
+cmFsaSBLYXJpY2hlcmkgPG0ta2FyaWNoZXJpMkB0aS5jb20+DQo+Pj4gKy0tLQ0KPj4+ICsgaW5j
+bHVkZS91YXBpL2xpbnV4L2lmX2xpbmsuaCB8wqAgMyArKysNCj4+PiArIGlwL2lwbGlua19oc3Iu
+Y8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgNDAgKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKystDQo+Pj4gKyAyIGZpbGVzIGNoYW5nZWQsIDQyIGluc2VydGlvbnMoKyksIDEg
+ZGVsZXRpb24oLSkNCj4+PiArDQo+Pj4gK2RpZmYgLS1naXQgYS9pbmNsdWRlL3VhcGkvbGludXgv
+aWZfbGluay5oIA0KPj4+IGIvaW5jbHVkZS91YXBpL2xpbnV4L2lmX2xpbmsuaA0KPj4+ICtpbmRl
+eCBkZTA4NzA0YzU4NjIuLjk0YTM4MTc2OWU1YSAxMDA2NDQNCj4+PiArLS0tIGEvaW5jbHVkZS91
+YXBpL2xpbnV4L2lmX2xpbmsuaA0KPj4+ICsrKysgYi9pbmNsdWRlL3VhcGkvbGludXgvaWZfbGlu
+ay5oDQo+Pj4gK0BAIC05MDEsNiArOTAxLDkgQEAgZW51bSB7DQo+Pj4gK8KgwqDCoMKgIElGTEFf
+SFNSX1BST1RPQ09MLMKgwqDCoMKgwqDCoMKgIC8qIEluZGljYXRlIGRpZmZlcmVudCBwcm90b2Nv
+bCB0aGFuDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAq
+IEhTUi4gRm9yIGV4YW1wbGUgUFJQLg0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgKi8NCj4+PiArK8KgwqDCoCBJRkxBX0hTUl9TVl9WSUQswqDCoMKgwqDC
+oMKgwqAgLyogU3VwZXJ2aXNpb24gZnJhbWVzIFZMQU4gSUQgKi8NCj4+PiArK8KgwqDCoCBJRkxB
+X0hTUl9TVl9ERUkswqDCoMKgwqDCoMKgwqAgLyogU3VwZXJ2aXNpb24gZnJhbWVzIFZMQU4gREVJ
+ICovDQo+Pj4gKyvCoMKgwqAgSUZMQV9IU1JfU1ZfUENQLMKgwqDCoMKgwqDCoMKgIC8qIFN1cGVy
+dmlzaW9uIGZyYW1lcyBWTEFOIFBDUCAqLw0KPj4+ICvCoMKgwqDCoCBfX0lGTEFfSFNSX01BWCwN
+Cj4+PiArIH07DQo+Pj4gKw0KPj4+ICtkaWZmIC0tZ2l0IGEvaXAvaXBsaW5rX2hzci5jIGIvaXAv
+aXBsaW5rX2hzci5jDQo+Pj4gK2luZGV4IDZlYTEzOGEyM2NiYy4uZjM4Yzc1MmMwMDY1IDEwMDY0
+NA0KPj4+ICstLS0gYS9pcC9pcGxpbmtfaHNyLmMNCj4+PiArKysrIGIvaXAvaXBsaW5rX2hzci5j
+DQo+Pj4gK0BAIC0yNiw2ICsyNiw3IEBAIHN0YXRpYyB2b2lkIHByaW50X3VzYWdlKEZJTEUgKmYp
+DQo+Pj4gK8KgwqDCoMKgIGZwcmludGYoZiwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoCAiVXNhZ2U6
+XHRpcCBsaW5rIGFkZCBuYW1lIE5BTUUgdHlwZSBoc3Igc2xhdmUxIFNMQVZFMS1JRiANCj4+PiBz
+bGF2ZTIgU0xBVkUyLUlGXG4iDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqAgIlx0WyBzdXBlcnZpc2lv
+biBBRERSLUJZVEUgXSBbdmVyc2lvbiBWRVJTSU9OXSBbcHJvdG8gDQo+Pj4gUFJPVE9DT0xdXG4i
+DQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCAiXHRbIHN2X3ZpZCBTVi1WSUQgXSBbIHN2X3BjcCBTVi1Q
+Q1AgXSBbIHN2X2RlaSBTVi1ERUkgXVxuIg0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgICJcbiINCj4+
+PiArwqDCoMKgwqDCoMKgwqDCoCAiTkFNRVxuIg0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgICLCoMKg
+wqAgbmFtZSBvZiBuZXcgaHNyIGRldmljZSAoZS5nLiBoc3IwKVxuIg0KPj4+ICtAQCAtMzcsNyAr
+MzgsMTUgQEAgc3RhdGljIHZvaWQgcHJpbnRfdXNhZ2UoRklMRSAqZikNCj4+PiArwqDCoMKgwqDC
+oMKgwqDCoCAiVkVSU0lPTlxuIg0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgICLCoMKgwqAgMCwxOyB0
+aGUgcHJvdG9jb2wgdmVyc2lvbiB0byBiZSB1c2VkLiAoZGVmYXVsdCA9IDApXG4iDQo+Pj4gK8Kg
+wqDCoMKgwqDCoMKgwqAgIlBST1RPQ09MXG4iDQo+Pj4gKy3CoMKgwqDCoMKgwqDCoCAiwqDCoMKg
+IDAgLSBIU1IsIDEgLSBQUlAuIChkZWZhdWx0ID0gMCAtIEhTUilcbiIpOw0KPj4+ICsrwqDCoMKg
+wqDCoMKgwqAgIsKgwqDCoCAwIC0gSFNSLCAxIC0gUFJQLiAoZGVmYXVsdCA9IDAgLSBIU1IpXG4i
+DQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCAiU1YtVklEXG4iDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCAi
+wqDCoMKgwqDCoCAwLTQwOTQ7IFZMQU4gSUQgdG8gYmUgdXNlZCBpbiB0aGUgVkxBTiB0YWcgb2Yg
+U1YgDQo+Pj4gZnJhbWVzIChkZWZhdWx0IDApXG4iDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCAiU1Yt
+UENQXG4iDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCAiwqDCoMKgwqDCoCAwLTc7IFBDUCB2YWx1ZSB0
+byBiZSB1c2VkIGluIHRoZSBWTEFOIHRhZyBvZiBTViANCj4+PiBmcmFtZXMgKGRlZmF1bHQgMClc
+biINCj4+PiArK8KgwqDCoMKgwqDCoMKgICJTVi1ERUlcbiINCj4+PiArK8KgwqDCoMKgwqDCoMKg
+ICLCoMKgwqDCoMKgIDAtMTvCoCBERUkgdmFsdWUgdG8gYmUgdXNlZCBpbiB0aGUgVkxBTiB0YWcg
+b2YgU1YgDQo+Pj4gZnJhbWVzIChkZWZhdWx0IDApXG4iDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCAi
+wqDCoMKgwqDCoCBVc2UgVkxBTiB0YWcgaWYgb25lIG9mIHN2X3ZpZCwgc3ZfcGNwIG9yIHN2X2Rl
+aSBpcyANCj4+PiBzcGVjaWZpZWQuIERlZmF1bHQgdmFsdWVcbiINCj4+PiArK8KgwqDCoMKgwqDC
+oMKgICLCoMKgwqDCoMKgIHVzZWQgZm9yIHVuc3BlY2lmaWVkIG9uZXNcbiIpOw0KPj4+ICsgfQ0K
+Pj4+ICsNCj4+PiArIHN0YXRpYyB2b2lkIHVzYWdlKHZvaWQpDQo+Pj4gK0BAIC01Miw2ICs2MSw5
+IEBAIHN0YXRpYyBpbnQgaHNyX3BhcnNlX29wdChzdHJ1Y3QgbGlua191dGlsICpsdSwgaW50IA0K
+Pj4+IGFyZ2MsIGNoYXIgKiphcmd2LA0KPj4+ICvCoMKgwqDCoCB1bnNpZ25lZCBjaGFyIG11bHRp
+Y2FzdF9zcGVjOw0KPj4+ICvCoMKgwqDCoCB1bnNpZ25lZCBjaGFyIHByb3RvY29sX3ZlcnNpb247
+DQo+Pj4gK8KgwqDCoMKgIHVuc2lnbmVkIGNoYXIgcHJvdG9jb2wgPSBIU1JfUFJPVE9DT0xfSFNS
+Ow0KPj4+ICsrwqDCoMKgIHVuc2lnbmVkIHNob3J0IHN2X3ZpZDsNCj4+PiArK8KgwqDCoCB1bnNp
+Z25lZCBjaGFyIHN2X2RlaTsNCj4+PiArK8KgwqDCoCB1bnNpZ25lZCBjaGFyIHN2X3BjcDsNCj4+
+PiArDQo+Pj4gK8KgwqDCoMKgIHdoaWxlIChhcmdjID4gMCkgew0KPj4+ICvCoMKgwqDCoMKgwqDC
+oMKgIGlmIChtYXRjaGVzKCphcmd2LCAic3VwZXJ2aXNpb24iKSA9PSAwKSB7DQo+Pj4gK0BAIC04
+Niw2ICs5OCwzMiBAQCBzdGF0aWMgaW50IGhzcl9wYXJzZV9vcHQoc3RydWN0IGxpbmtfdXRpbCAq
+bHUsIA0KPj4+IGludCBhcmdjLCBjaGFyICoqYXJndiwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIGlmIChpZmluZGV4ID09IDApDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIGludmFyZygiTm8gc3VjaCBpbnRlcmZhY2UiLCAqYXJndik7DQo+Pj4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCBhZGRhdHRyX2wobiwgMTAyNCwgSUZMQV9IU1JfU0xBVkUyLCAmaWZp
+bmRleCwgNCk7DQo+Pj4gKyvCoMKgwqDCoMKgwqDCoCB9IGVsc2UgaWYgKG1hdGNoZXMoKmFyZ3Ys
+ICJzdl92aWQiKSA9PSAwKSB7DQo+Pj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIE5FWFRfQVJH
+KCk7DQo+Pj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChnZXRfdTE2KCZzdl92aWQsICph
+cmd2LCAwKSkNCj4+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnZhcmcoIlNW
+LVZJRCBpcyBpbnZhbGlkIiwgKmFyZ3YpOw0KPj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAv
+KiBleGNsdWRlIHJlc2VydmVkIDQwOTUgKi8NCj4+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+aWYgKHN2X3ZpZCA+PSA0MDk1KQ0KPj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGludmFyZygiU1YtVklEIGlzIGludmFsaWQiLCAqYXJndik7DQo+Pj4gKyvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGFkZGF0dHJfbChuLCAxMDI0LCBJRkxBX0hTUl9TVl9WSUQsDQo+Pj4gKyvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICZzdl92aWQsIHNpemVvZihzdl92aWQpKTsN
+Cj4+PiArK8KgwqDCoMKgwqDCoMKgIH0gZWxzZSBpZiAobWF0Y2hlcygqYXJndiwgInN2X3BjcCIp
+ID09IDApIHsNCj4+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgTkVYVF9BUkcoKTsNCj4+PiAr
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKGdldF91OCgmc3ZfcGNwLCAqYXJndiwgMCkpDQo+
+Pj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW52YXJnKCJTVi1QQ1AgaXMgaW52
+YWxpZCIsICphcmd2KTsNCj4+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHN2X3BjcCA+
+IDcpDQo+Pj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW52YXJnKCJTVi1QQ1Ag
+aXMgaW52YWxpZCIsICphcmd2KTsNCj4+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYWRkYXR0
+cl9sKG4sIDEwMjQsIElGTEFfSFNSX1NWX1BDUCwNCj4+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgJnN2X3BjcCwgc2l6ZW9mKHN2X3BjcCkpOw0KPj4+ICsrwqDCoMKgwqDC
+oMKgwqAgfSBlbHNlIGlmIChtYXRjaGVzKCphcmd2LCAic3ZfZGVpIikgPT0gMCkgew0KPj4+ICsr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBORVhUX0FSRygpOw0KPj4+ICsrwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBpZiAoZ2V0X3U4KCZzdl9kZWksICphcmd2LCAwKSkNCj4+PiArK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBpbnZhcmcoIlNWLURFSSBpcyBpbnZhbGlkIiwgKmFyZ3YpOw0K
+Pj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoc3ZfZGVpID4gMSkNCj4+PiArK8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnZhcmcoIlNWLURFSSBpcyBpbnZhbGlkIiwgKmFy
+Z3YpOw0KPj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBhZGRhdHRyX2wobiwgMTAyNCwgSUZM
+QV9IU1JfU1ZfREVJLA0KPj4+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAm
+c3ZfZGVpLCBzaXplb2Yoc3ZfZGVpKSk7DQo+Pj4gKysNCj4+PiArwqDCoMKgwqDCoMKgwqDCoCB9
+IGVsc2UgaWYgKG1hdGNoZXMoKmFyZ3YsICJoZWxwIikgPT0gMCkgew0KPj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgdXNhZ2UoKTsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJl
+dHVybiAtMTsNCj4+PiArLS0NCj4+PiArMi4xNy4xDQo+Pj4gKw0KPj4+IGRpZmYgLS1naXQgDQo+
+Pj4gYS9tZXRhLWFyYWdvLWRpc3Ryby9yZWNpcGVzLWNvbm5lY3Rpdml0eS9pcHJvdXRlMi9pcHJv
+dXRlMl81LjUuMC5iYmFwcGVuZCANCj4+PiBiL21ldGEtYXJhZ28tZGlzdHJvL3JlY2lwZXMtY29u
+bmVjdGl2aXR5L2lwcm91dGUyL2lwcm91dGUyXzUuNS4wLmJiYXBwZW5kIA0KPj4+DQo+Pj4gbmV3
+IGZpbGUgbW9kZSAxMDA2NDQNCj4+PiBpbmRleCAwMDAwMDAwMDAwMDAuLmQ2ZWZmY2Q3Y2E4MQ0K
+Pj4+IC0tLSAvZGV2L251bGwNCj4+PiArKysgDQo+Pj4gYi9tZXRhLWFyYWdvLWRpc3Ryby9yZWNp
+cGVzLWNvbm5lY3Rpdml0eS9pcHJvdXRlMi9pcHJvdXRlMl81LjUuMC5iYmFwcGVuZCANCj4+Pg0K
+Pj4+IEBAIC0wLDAgKzEsOCBAQA0KPj4+ICtQUl9hcHBlbmQgPSAiLmFyYWdvNiINCj4+PiArDQo+
+Pj4gK0ZJTEVTRVhUUkFQQVRIU19wcmVwZW5kIDo9ICIke1RISVNESVJ9LyR7UE59OiINCj4+PiAr
+DQo+Pj4gK1NSQ19VUklfYXBwZW5kID0gIiBcDQo+Pj4gKyAgICANCj4+PiBmaWxlOi8vMDAxMy1p
+cGxpbmstaHNyLWFkZC1zdXBwb3J0LWZvci1jcmVhdGluZy1QUlAtZGV2aWNlLXNpbWlsLnBhdGNo
+IFwNCj4+PiArICAgIA0KPj4+IGZpbGU6Ly8wMDE0LWlwbGluay1oc3ItcHJwLWFkZC1zdXBwb3J0
+LWZvci12bGFuLXRhZ2dlZC1zdXBlcnZpc2kucGF0Y2ggXA0KPj4+ICsiDQo+Pj4gLS0gDQo+Pj4g
+Mi4xNy4xDQo+Pj4NCj4gDQo+IA0KPiANCj4gDQoNCi0tIA0KTXVyYWxpIEthcmljaGVyaQ0KVGV4
+YXMgSW5zdHJ1bWVudHMNCg==
