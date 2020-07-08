@@ -1,470 +1,216 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.26571.1594157096167533943
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.9424.1594211056450142901
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 07 Jul 2020 14:24:56 -0700
+ Wed, 08 Jul 2020 05:24:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=wrtkLIe/;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: denys@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 067LOtgH043805
-	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 16:24:55 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ulFR94ZU;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: m-karicheri2@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 068COFQG022702
+	for <meta-ti@lists.yoctoproject.org>; Wed, 8 Jul 2020 07:24:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1594157095;
-	bh=dNQ4ZAR6g7+CQ3nr5fs5MpcJMIrmMmXvQ2yvVYgDCoo=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=wrtkLIe/LwYNfbjloJ+gIQfJ9WLvisXbffKnb8IHKyiUw6zoOMzZoz4M7aozjZ5Jt
-	 iyx/pwS/OOHKh7C93JeMcd/ldiorjjaYov6n8MdAdg6/G540kWKvd0wJyPVaBkMoCd
-	 F/AC0neQO8Emw9BYLLKaUjScKEp4QUXjTlyvLSmM=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 067LOtqS030147
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 7 Jul 2020 16:24:55 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 7 Jul
- 2020 16:24:54 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1594211055;
+	bh=PaitWhZvqtTHw/EOYlP1hlkBt8lYyhcE3J+0t4U89hw=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=ulFR94ZUnw+cmhItkAQNvGv03PPa2kcfF15DyqoC/w1rJzgqXSkc8A/SbJ0Y3ESA9
+	 RztBuou3owuhuX+oW4C4RD5fGKWxYWNFcYAtNm3vD6SYVHrNWlbFWwNvIBujCeg9P7
+	 XEQhlnInDDNH3rIOSOsbgzPNllHJcsM+6y30IPmI=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 068COFvt127359
+	for <meta-ti@lists.yoctoproject.org>; Wed, 8 Jul 2020 07:24:15 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 8 Jul
+ 2020 07:24:15 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 7 Jul 2020 16:24:54 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 067LOs7Z104666;
-	Tue, 7 Jul 2020 16:24:54 -0500
-Date: Tue, 7 Jul 2020 17:24:54 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Murali Karicheri <m-karicheri2@ti.com>
+ Frontend Transport; Wed, 8 Jul 2020 07:24:15 -0500
+Received: from [10.250.74.234] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 068COEFR005307;
+	Wed, 8 Jul 2020 07:24:14 -0500
+Subject: Re: [meta-ti] prueth-hsr/prp: add hsr/prp firmware recipe for version 2.15.23
+To: Denys Dmytriyenko <denys@ti.com>
 CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [meta-arago PATCH] iproute2: update recipe for prp and supervision vlan support
-Message-ID: <20200707212454.GK22569@beryl>
-References: <20200707170207.5473-1-m-karicheri2@ti.com>
- <20200707170741.GD22569@beryl>
- <161F895730ADC75F.6803@lists.yoctoproject.org>
- <bbe0f557-34ed-b142-6362-fd14ea3694bc@ti.com>
+References: <20200706215958.1520-1-m-karicheri2@ti.com>
+ <20200707161714.GA22569@beryl> <98b71962-1b6e-ccb0-e49f-67df58a0796b@ti.com>
+ <20200707164050.GB22569@beryl> <06b776cc-5e09-b3eb-d612-5a4cce9ca397@ti.com>
+ <20200707171603.GH22569@beryl>
+From: "Murali" <m-karicheri2@ti.com>
+Message-ID: <c13a7643-f77b-312e-af80-10f175cb40b8@ti.com>
+Date: Wed, 8 Jul 2020 08:24:14 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <bbe0f557-34ed-b142-6362-fd14ea3694bc@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <20200707171603.GH22569@beryl>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0143.ext.ti.com id 067LOtgH043805
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 07, 2020 at 01:45:00PM -0400, Murali Karicheri wrote:
->=20
->=20
-> On 7/7/20 1:43 PM, Murali via lists.yoctoproject.org wrote:
-> >Denys,
-> >
-> >What is the email id for meta-arago. I am subscribed to it, but my mail
-> >bounced.
-> >
-> >I tried meta-arago@lists.yoctoproject.org
-> >
-> I think I got it. Is it meta-arago@arago-project.org ?
+Denys,
 
-Correct.
+On 7/7/20 1:16 PM, Denys Dmytriyenko wrote:
+> On Tue, Jul 07, 2020 at 12:47:30PM -0400, Murali Karicheri wrote:
+>> Denys,
+>>
+>> On 7/7/20 12:40 PM, Denys Dmytriyenko wrote:
+>>> On Tue, Jul 07, 2020 at 12:29:53PM -0400, Murali Karicheri wrote:
+>>>> Denys,
+>>>>
+>>>> On 7/7/20 12:17 PM, Denys Dmytriyenko wrote:
+>>>>> Thank you, everything looks fine. Could you please replace DESCRIPTION with
+>>>>> SUMMARY? Thanks.
+>>>>>
+>> Is there any other recipe needed to get this into the file system or
+>> this is it?
+>>
+>> I would be sending a iproute2 recipe update as well. Would need a file
+>> system with these two in next few days.
+> 
+> You'd need to add it to a correspinding packagegroup in meta-arago.
+> 
+I have posted a patch for this similar in line with what Vignesh has
+done to add prusw-fw. Hope that is what is needed to get the firmware
+included in the file system.
 
+Regards,
 
-> >Thanks
-> >
-> >Murali
-> >
-> >On 7/7/20 1:07 PM, Denys Dmytriyenko wrote:
-> >>Wrong mailing list. Please send this to meta-arago list instead.
-> >>
-> >>
-> >>On Tue, Jul 07, 2020 at 01:02:07PM -0400, Murali Karicheri wrote:
-> >>>This recipe includes the patches required in iproute2 to add
-> >>>PRP ip link support as well as allow use of VLAN for supervision
-> >>>frames.
-> >>>
-> >>>Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
-> >>>---
-> >>>=A0 ...upport-for-creating-PRP-device-simil.patch | 109 +++++++++++++=
-+++++
-> >>>=A0 ...dd-support-for-vlan-tagged-supervisi.patch | 108 +++++++++++++=
-++++
-> >>>=A0 .../iproute2/iproute2_5.5.0.bbappend=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=
-=
-=A0=A0 8 ++
-> >>>=A0 3 files changed, 225 insertions(+)
-> >>>=A0 create mode 100644 meta-arago-distro/recipes-connectivity/iproute=
-2/iproute2/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch
-> >>>
-> >>>=A0 create mode 100644 meta-arago-distro/recipes-connectivity/iproute=
-2/iproute2/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
-> >>>
-> >>>=A0 create mode 100644
-> >>>meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbappe=
-nd
-> >>>
-> >>>diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2=
-/0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patch b/meta-ara=
-go-distro/recipes-connectivity/iproute2/iproute2/0013-iplink-hsr-add-suppor=
-t-for-creating-PRP-device-simil.patch
-> >>>
-> >>>new file mode 100644
-> >>>index 000000000000..dfeaeb01b485
-> >>>--- /dev/null
-> >>>+++ b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0013-i=
-plink-hsr-add-support-for-creating-PRP-device-simil.patch
-> >>>
-> >>>@@ -0,0 +1,109 @@
-> >>>+From e3aa94814e9467af5829a04c335a615c0082a362 Mon Sep 17 00:00:00 20=
-01
-> >>>+From: Murali Karicheri <m-karicheri2@ti.com>
-> >>>+Date: Fri, 5 Jun 2020 11:02:05 -0400
-> >>>+Subject: [PATCH 1/2] iplink: hsr: add support for creating PRP devic=
-e
-> >>>similar
-> >>>+ to HSR
-> >>>+
-> >>>+This patch enhances the iplink command to add a proto parameters to
-> >>>+create PRP device/interface similar to HSR. Both protocols are
-> >>>+quite similar and requires a pair of Ethernet interfaces. So re-use
-> >>>+the existing HSR iplink command to create PRP device/interface as
-> >>>+well. Use proto parameter to differentiate the two protocols.
-> >>>+
-> >>>+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
-> >>>+---
-> >>>+ include/uapi/linux/if_link.h | 12 +++++++++++-
-> >>>+ ip/iplink_hsr.c=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 19 +++++++=
-++++++++++--
-> >>>+ 2 files changed, 28 insertions(+), 3 deletions(-)
-> >>>+
-> >>>+diff --git a/include/uapi/linux/if_link.h
-> >>>b/include/uapi/linux/if_link.h
-> >>>+index 1c49f436424d..de08704c5862 100644
-> >>>+--- a/include/uapi/linux/if_link.h
-> >>>++++ b/include/uapi/linux/if_link.h
-> >>>+@@ -881,7 +881,14 @@ enum {
-> >>>+ #define IFLA_IPOIB_MAX (__IFLA_IPOIB_MAX - 1)
-> >>>+
-> >>>+
-> >>>+-/* HSR section */
-> >>>++/* HSR/PRP section, both uses same interface */
-> >>>++
-> >>>++/* Different redundancy protocols for hsr device */
-> >>>++enum {
-> >>>++=A0=A0=A0 HSR_PROTOCOL_HSR,
-> >>>++=A0=A0=A0 HSR_PROTOCOL_PRP,
-> >>>++=A0=A0=A0 HSR_PROTOCOL_MAX,
-> >>>++};
-> >>>+
-> >>>+ enum {
-> >>>+=A0=A0=A0=A0 IFLA_HSR_UNSPEC,
-> >>>+@@ -891,6 +898,9 @@ enum {
-> >>>+=A0=A0=A0=A0 IFLA_HSR_SUPERVISION_ADDR,=A0=A0=A0 /* Supervision fram=
-e multicast
-> >>>addr */
-> >>>+=A0=A0=A0=A0 IFLA_HSR_SEQ_NR,
-> >>>+=A0=A0=A0=A0 IFLA_HSR_VERSION,=A0=A0=A0=A0=A0=A0=A0 /* HSR version *=
-/
-> >>>++=A0=A0=A0 IFLA_HSR_PROTOCOL,=A0=A0=A0=A0=A0=A0=A0 /* Indicate diffe=
-rent protocol than
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 * HSR.=
- For example PRP.
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 */
-> >>>+=A0=A0=A0=A0 __IFLA_HSR_MAX,
-> >>>+ };
-> >>>+
-> >>>+diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
-> >>>+index 7d9167d4e6a3..6ea138a23cbc 100644
-> >>>+--- a/ip/iplink_hsr.c
-> >>>++++ b/ip/iplink_hsr.c
-> >>>+@@ -25,7 +25,7 @@ static void print_usage(FILE *f)
-> >>>+ {
-> >>>+=A0=A0=A0=A0 fprintf(f,
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "Usage:\tip link add name NAME type hsr sla=
-ve1 SLAVE1-IF
-> >>>slave2 SLAVE2-IF\n"
-> >>>+-=A0=A0=A0=A0=A0=A0=A0 "\t[ supervision ADDR-BYTE ] [version VERSION=
-]\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "\t[ supervision ADDR-BYTE ] [version VERSION=
-] [proto
-> >>>PROTOCOL]\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "NAME\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 name of new hsr device (e.g. hsr=
-0)\n"
-> >>>+@@ -35,7 +35,9 @@ static void print_usage(FILE *f)
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 0-255; the last byte of the mult=
-icast address used for
-> >>>HSR supervision\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 frames (default =3D 0)\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "VERSION\n"
-> >>>+-=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 0,1; the protocol version to be us=
-ed. (default =3D 0)\n");
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 0,1; the protocol version to be us=
-ed. (default =3D 0)\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "PROTOCOL\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 0 - HSR, 1 - PRP. (default =3D 0 -=
- HSR)\n");
-> >>>+ }
-> >>>+
-> >>>+ static void usage(void)
-> >>>+@@ -49,6 +51,7 @@ static int hsr_parse_opt(struct link_util *lu, int
-> >>>argc, char **argv,
-> >>>+=A0=A0=A0=A0 int ifindex;
-> >>>+=A0=A0=A0=A0 unsigned char multicast_spec;
-> >>>+=A0=A0=A0=A0 unsigned char protocol_version;
-> >>>++=A0=A0=A0 unsigned char protocol =3D HSR_PROTOCOL_HSR;
-> >>>+
-> >>>+=A0=A0=A0=A0 while (argc > 0) {
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 if (matches(*argv, "supervision") =3D=3D 0)=
- {
-> >>>+@@ -64,6 +67,13 @@ static int hsr_parse_opt(struct link_util *lu, in=
-t
-> >>>argc, char **argv,
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("version is =
-invalid", *argv);
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 addattr_l(n, 1024, IFLA_HSR_VER=
-SION,
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 &protocol_ver=
-sion, 1);
-> >>>++=A0=A0=A0=A0=A0=A0=A0 } else if (matches(*argv, "proto") =3D=3D 0) =
-{
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 NEXT_ARG();
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (!(get_u8(&protocol, *argv, 0)=
- =3D=3D HSR_PROTOCOL_HSR ||
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 get_u8(&protoco=
-l, *argv, 0) =3D=3D HSR_PROTOCOL_PRP))
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("protocol is i=
-nvalid", *argv);
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 addattr_l(n, 1024, IFLA_HSR_PROTO=
-COL,
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 &protocol, 1);
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 } else if (matches(*argv, "slave1") =3D=3D =
-0) {
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 NEXT_ARG();
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 ifindex =3D ll_name_to_index(*a=
-rgv);
-> >>>+@@ -140,6 +150,11 @@ static void hsr_print_opt(struct link_util *lu,
-> >>>FILE *f, struct rtattr *tb[])
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 RTA_=
-PAYLOAD(tb[IFLA_HSR_SUPERVISION_ADDR]),
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 ARPH=
-RD_VOID,
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 b1, =
-sizeof(b1)));
-> >>>++=A0=A0=A0 if (tb[IFLA_HSR_PROTOCOL])
-> >>>++=A0=A0=A0=A0=A0=A0=A0 print_int(PRINT_ANY,
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 "proto",
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 "proto %d ",
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 rta_getattr_u8(tb[IFLA_HSR_=
-PROTOCOL]));
-> >>>+ }
-> >>>+
-> >>>+ static void hsr_print_help(struct link_util *lu, int argc, char
-> >>>**argv,
-> >>>+--
-> >>>+2.17.1
-> >>>+
-> >>>diff --git a/meta-arago-distro/recipes-connectivity/iproute2/iproute2=
-/0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch b/meta-ara=
-go-distro/recipes-connectivity/iproute2/iproute2/0014-iplink-hsr-prp-add-su=
-pport-for-vlan-tagged-supervisi.patch
-> >>>
-> >>>new file mode 100644
-> >>>index 000000000000..fa0eecccdf59
-> >>>--- /dev/null
-> >>>+++ b/meta-arago-distro/recipes-connectivity/iproute2/iproute2/0014-i=
-plink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch
-> >>>
-> >>>@@ -0,0 +1,108 @@
-> >>>+From 6e48ed61da3b03da415a87bfbd3651fde8742647 Mon Sep 17 00:00:00 20=
-01
-> >>>+From: Murali Karicheri <m-karicheri2@ti.com>
-> >>>+Date: Fri, 5 Jun 2020 12:07:43 -0400
-> >>>+Subject: [PATCH 2/2] iplink: hsr/prp: add support for vlan tagged
-> >>>supervision
-> >>>+ frames
-> >>>+
-> >>>+This patch adds support to configure vlan tag information
-> >>>+(vid, pcp and dei) at the hsr/prp lre device. This tag values
-> >>>+will be used by the lre device to generate a VLAN tagged
-> >>>+Supervision frames. This is done by adding 3 additional attributes
-> >>>+to the hsr/prp link type and passing this to Linux HSR/PRP
-> >>>+device through the ip link command.
-> >>>+
-> >>>+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
-> >>>+---
-> >>>+ include/uapi/linux/if_link.h |=A0 3 +++
-> >>>+ ip/iplink_hsr.c=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 40 +++++++=
-++++++++++++++++++++++++++++-
-> >>>+ 2 files changed, 42 insertions(+), 1 deletion(-)
-> >>>+
-> >>>+diff --git a/include/uapi/linux/if_link.h
-> >>>b/include/uapi/linux/if_link.h
-> >>>+index de08704c5862..94a381769e5a 100644
-> >>>+--- a/include/uapi/linux/if_link.h
-> >>>++++ b/include/uapi/linux/if_link.h
-> >>>+@@ -901,6 +901,9 @@ enum {
-> >>>+=A0=A0=A0=A0 IFLA_HSR_PROTOCOL,=A0=A0=A0=A0=A0=A0=A0 /* Indicate dif=
-ferent protocol than
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 * HS=
-R. For example PRP.
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 */
-> >>>++=A0=A0=A0 IFLA_HSR_SV_VID,=A0=A0=A0=A0=A0=A0=A0 /* Supervision fram=
-es VLAN ID */
-> >>>++=A0=A0=A0 IFLA_HSR_SV_DEI,=A0=A0=A0=A0=A0=A0=A0 /* Supervision fram=
-es VLAN DEI */
-> >>>++=A0=A0=A0 IFLA_HSR_SV_PCP,=A0=A0=A0=A0=A0=A0=A0 /* Supervision fram=
-es VLAN PCP */
-> >>>+=A0=A0=A0=A0 __IFLA_HSR_MAX,
-> >>>+ };
-> >>>+
-> >>>+diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
-> >>>+index 6ea138a23cbc..f38c752c0065 100644
-> >>>+--- a/ip/iplink_hsr.c
-> >>>++++ b/ip/iplink_hsr.c
-> >>>+@@ -26,6 +26,7 @@ static void print_usage(FILE *f)
-> >>>+=A0=A0=A0=A0 fprintf(f,
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "Usage:\tip link add name NAME type hsr sla=
-ve1 SLAVE1-IF
-> >>>slave2 SLAVE2-IF\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "\t[ supervision ADDR-BYTE ] [version VERSI=
-ON] [proto
-> >>>PROTOCOL]\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "\t[ sv_vid SV-VID ] [ sv_pcp SV-PCP ] [ sv_d=
-ei SV-DEI ]\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "NAME\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 name of new hsr device (e.g. hsr=
-0)\n"
-> >>>+@@ -37,7 +38,15 @@ static void print_usage(FILE *f)
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "VERSION\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 0,1; the protocol version to be =
-used. (default =3D 0)\n"
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 "PROTOCOL\n"
-> >>>+-=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 0 - HSR, 1 - PRP. (default =3D 0 -=
- HSR)\n");
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0 0 - HSR, 1 - PRP. (default =3D 0 -=
- HSR)\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "SV-VID\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0=A0=A0 0-4094; VLAN ID to be used i=
-n the VLAN tag of SV
-> >>>frames (default 0)\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "SV-PCP\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0=A0=A0 0-7; PCP value to be used in=
- the VLAN tag of SV
-> >>>frames (default 0)\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "SV-DEI\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0=A0=A0 0-1;=A0 DEI value to be used=
- in the VLAN tag of SV
-> >>>frames (default 0)\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0=A0=A0 Use VLAN tag if one of sv_vi=
-d, sv_pcp or sv_dei is
-> >>>specified. Default value\n"
-> >>>++=A0=A0=A0=A0=A0=A0=A0 "=A0=A0=A0=A0=A0 used for unspecified ones\n"=
-);
-> >>>+ }
-> >>>+
-> >>>+ static void usage(void)
-> >>>+@@ -52,6 +61,9 @@ static int hsr_parse_opt(struct link_util *lu, int
-> >>>argc, char **argv,
-> >>>+=A0=A0=A0=A0 unsigned char multicast_spec;
-> >>>+=A0=A0=A0=A0 unsigned char protocol_version;
-> >>>+=A0=A0=A0=A0 unsigned char protocol =3D HSR_PROTOCOL_HSR;
-> >>>++=A0=A0=A0 unsigned short sv_vid;
-> >>>++=A0=A0=A0 unsigned char sv_dei;
-> >>>++=A0=A0=A0 unsigned char sv_pcp;
-> >>>+
-> >>>+=A0=A0=A0=A0 while (argc > 0) {
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 if (matches(*argv, "supervision") =3D=3D 0)=
- {
-> >>>+@@ -86,6 +98,32 @@ static int hsr_parse_opt(struct link_util *lu, in=
-t
-> >>>argc, char **argv,
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (ifindex =3D=3D 0)
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("No such int=
-erface", *argv);
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 addattr_l(n, 1024, IFLA_HSR_SLA=
-VE2, &ifindex, 4);
-> >>>++=A0=A0=A0=A0=A0=A0=A0 } else if (matches(*argv, "sv_vid") =3D=3D 0)=
- {
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 NEXT_ARG();
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (get_u16(&sv_vid, *argv, 0))
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("SV-VID is inv=
-alid", *argv);
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 /* exclude reserved 4095 */
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (sv_vid >=3D 4095)
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("SV-VID is inv=
-alid", *argv);
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 addattr_l(n, 1024, IFLA_HSR_SV_VI=
-D,
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 &sv_vid, sizeof=
-(sv_vid));
-> >>>++=A0=A0=A0=A0=A0=A0=A0 } else if (matches(*argv, "sv_pcp") =3D=3D 0)=
- {
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 NEXT_ARG();
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (get_u8(&sv_pcp, *argv, 0))
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("SV-PCP is inv=
-alid", *argv);
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (sv_pcp > 7)
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("SV-PCP is inv=
-alid", *argv);
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 addattr_l(n, 1024, IFLA_HSR_SV_PC=
-P,
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 &sv_pcp, sizeof=
-(sv_pcp));
-> >>>++=A0=A0=A0=A0=A0=A0=A0 } else if (matches(*argv, "sv_dei") =3D=3D 0)=
- {
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 NEXT_ARG();
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (get_u8(&sv_dei, *argv, 0))
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("SV-DEI is inv=
-alid", *argv);
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (sv_dei > 1)
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 invarg("SV-DEI is inv=
-alid", *argv);
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 addattr_l(n, 1024, IFLA_HSR_SV_DE=
-I,
-> >>>++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 &sv_dei, sizeof=
-(sv_dei));
-> >>>++
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0 } else if (matches(*argv, "help") =3D=3D 0)=
- {
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 usage();
-> >>>+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return -1;
-> >>>+--
-> >>>+2.17.1
-> >>>+
-> >>>diff --git
-> >>>a/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbap=
-pend
-> >>>b/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbap=
-pend
-> >>>
-> >>>new file mode 100644
-> >>>index 000000000000..d6effcd7ca81
-> >>>--- /dev/null
-> >>>+++
-> >>>b/meta-arago-distro/recipes-connectivity/iproute2/iproute2_5.5.0.bbap=
-pend
-> >>>
-> >>>@@ -0,0 +1,8 @@
-> >>>+PR_append =3D ".arago6"
-> >>>+
-> >>>+FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
-> >>>+
-> >>>+SRC_URI_append =3D " \
-> >>>+
-> >>>file://0013-iplink-hsr-add-support-for-creating-PRP-device-simil.patc=
-h
-> >>>\
-> >>>+
-> >>>file://0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patc=
-h
-> >>>\
-> >>>+"
-> >>>--=20
-> >>>2.17.1
-> >>>
-> >
-> >
-> >
-> >
->=20
-> --=20
-> Murali Karicheri
-> Texas Instruments
+Murali
+> Denys
+> 
+> 
+>> Regards,
+>>
+>> Murali
+>>>>
+>>>> You mean the below right? Once you confirm I will spin v2 and send it.
+>>>>
+>>>> Thanks
+>>>>
+>>>>> Denys
+>>>>>
+>>>>>
+>>>>> On Mon, Jul 06, 2020 at 05:59:58PM -0400, Murali Karicheri wrote:
+>>>>>> This patch adds recipe for hsr/prp firmware on am3/4/5 SoCs. The binary
+>>>>>> files are located on ti-linux-firmware.git. This is a forward port of
+>>>>>> the recipe from processor sdk 6.3
+>>>>>>
+>>>>>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+>>>>>> Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+>>>>>> ---
+>>>>>>   recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb | 36 +++++++++++++++++++++++++
+>>>>>>   recipes-bsp/pruprp-fw/pruprp-fw_git.bb | 37 ++++++++++++++++++++++++++
+>>>>>>   2 files changed, 73 insertions(+)
+>>>>>>   create mode 100644 recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb
+>>>>>>   create mode 100644 recipes-bsp/pruprp-fw/pruprp-fw_git.bb
+>>>>>>
+>>>>>> diff --git a/recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb b/recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb
+>>>>>> new file mode 100644
+>>>>>> index 000000000000..fd6665f29d17
+>>>>>> --- /dev/null
+>>>>>> +++ b/recipes-bsp/pruhsr-fw/pruhsr-fw_git.bb
+>>>>>> @@ -0,0 +1,36 @@
+>>>>>> +DESCRIPTION = "PRU HSR firmware for AM57xx"
+>>>>
+>>>> SUMMARY = "PRU HSR firmware for AM57xx"
+>>>
+>>> Correct.
+>>>
+>>>
+>>>>>> +
+>>>>>> +LICENSE = "TI-TFL"
+>>>>>> +LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+>>>>>> +
+>>>>>> +PV = "2.15.23"
+>>>>>> +PE = "1"
+>>>>>> +PR = "r0"
+>>>>>> +
+>>>>>> +COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
+>>>>>> +
+>>>>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>>>>>> +
+>>>>>> +SRCREV = "313e20f312a286bc07b97ef9aca70ef3ce96af29"
+>>>>>> +BRANCH ?= "ti-linux-firmware"
+>>>>>> +
+>>>>>> +SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+>>>>>> +
+>>>>>> +S = "${WORKDIR}/git"
+>>>>>> +
+>>>>>> +TARGET = ""
+>>>>>> +TARGET_ti33x = "am335x-pru0-pruhsr-fw.elf am335x-pru1-pruhsr-fw.elf"
+>>>>>> +TARGET_ti43x = "am437x-pru0-pruhsr-fw.elf am437x-pru1-pruhsr-fw.elf"
+>>>>>> +TARGET_am57xx-evm = "am57xx-pru0-pruhsr-fw.elf am57xx-pru1-pruhsr-fw.elf"
+>>>>>> +TARGET_am57xx-hs-evm = "am57xx-pru0-pruhsr-fw.elf am57xx-pru1-pruhsr-fw.elf"
+>>>>>> +
+>>>>>> +do_install() {
+>>>>>> +	install -d ${D}${base_libdir}/firmware/ti-pruss
+>>>>>> +	for f in ${TARGET}; do
+>>>>>> +		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
+>>>>>> +	done
+>>>>>> +}
+>>>>>> +
+>>>>>> +FILES_${PN} = "${base_libdir}/firmware"
+>>>>>> +
+>>>>>> +INSANE_SKIP_${PN} = "arch"
+>>>>>> diff --git a/recipes-bsp/pruprp-fw/pruprp-fw_git.bb b/recipes-bsp/pruprp-fw/pruprp-fw_git.bb
+>>>>>> new file mode 100644
+>>>>>> index 000000000000..0b9991a5a0a3
+>>>>>> --- /dev/null
+>>>>>> +++ b/recipes-bsp/pruprp-fw/pruprp-fw_git.bb
+>>>>>> @@ -0,0 +1,37 @@
+>>>>>> +DESCRIPTION = "PRU PRP firmware for AM57xx"
+>>>>
+>>>> SUMMARY = "PRU PRP firmware for AM57xx"
+>>>>
+>>>>>> +
+>>>>>> +LICENSE = "TI-TFL"
+>>>>>> +LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+>>>>>> +
+>>>>>> +PV = "2.15.23"
+>>>>>> +PE = "1"
+>>>>>> +PR = "r0"
+>>>>>> +
+>>>>>> +COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
+>>>>>> +
+>>>>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>>>>>> +
+>>>>>> +SRCREV = "313e20f312a286bc07b97ef9aca70ef3ce96af29"
+>>>>>> +BRANCH ?= "ti-linux-firmware"
+>>>>>> +
+>>>>>> +SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+>>>>>> +
+>>>>>> +S = "${WORKDIR}/git"
+>>>>>> +
+>>>>>> +TARGET = ""
+>>>>>> +TARGET_ti33x = "am335x-pru0-pruprp-fw.elf am335x-pru1-pruprp-fw.elf"
+>>>>>> +TARGET_ti43x = "am437x-pru0-pruprp-fw.elf am437x-pru1-pruprp-fw.elf"
+>>>>>> +TARGET_am57xx-evm = "am57xx-pru0-pruprp-fw.elf am57xx-pru1-pruprp-fw.elf"
+>>>>>> +TARGET_am57xx-hs-evm = "am57xx-pru0-pruprp-fw.elf am57xx-pru1-pruprp-fw.elf"
+>>>>>> +
+>>>>>> +
+>>>>>> +do_install() {
+>>>>>> +	install -d ${D}${base_libdir}/firmware/ti-pruss
+>>>>>> +	for f in ${TARGET}; do
+>>>>>> +		install -m 0644 ${S}/ti-pruss/$f ${D}${base_libdir}/firmware/ti-pruss/$f
+>>>>>> +	done
+>>>>>> +}
+>>>>>> +
+>>>>>> +FILES_${PN} = "${base_libdir}/firmware"
+>>>>>> +
+>>>>>> +INSANE_SKIP_${PN} = "arch"
+>>>>>> -- 
+>>>>>> 2.17.1
+>>>>>>
+>>>>
+>>>> -- 
+>>>> Murali Karicheri
+>>>> Texas Instruments
+>>
+>> -- 
+>> Murali Karicheri
+>> Texas Instruments
+
+-- 
+Murali Karicheri
+Texas Instruments
