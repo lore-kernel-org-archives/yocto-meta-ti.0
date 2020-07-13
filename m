@@ -1,68 +1,459 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.908.1594316660667250005
+Received: from hormel.elettra.eu (hormel.elettra.eu [140.105.206.207])
+ by mx.groups.io with SMTP id smtpd.web10.15056.1594628177826810117
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Jul 2020 10:44:20 -0700
+ Mon, 13 Jul 2020 01:16:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=iXDftPE7;
- spf=none, err=permanent DNS error (domain: ubnuser-poweredge-r630, ip: 198.47.19.142, mailfrom: a0132233@ubnuser-poweredge-r630)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 069HiJnX041583;
-	Thu, 9 Jul 2020 12:44:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1594316659;
-	bh=kPmc/oFS6+9roQ23cXbkPcXL4mZSc7TQ6S3EBiK61Yo=;
-	h=From:To:CC:Subject:Date;
-	b=iXDftPE7/wRMyY0mzNvMCxQ4LzL5jkVIftpdvIBL+xlzlfJRP9SwaDeigS56PmdWz
-	 m5g28VdZTwCkxKVlXFG0QChyjvFCavOtyBx9QUN3hmDMT9YIDlk0gAO0EDmPtw5URp
-	 OY6v8hQW+VAiB3ui8BYAVDIxbkR23d11tzALvEZg=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 069HiJKO096917
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 9 Jul 2020 12:44:19 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 9 Jul
- 2020 12:44:19 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 9 Jul 2020 12:44:19 -0500
-Received: from bangvideoapps02 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 069HiDqd012124;
-	Thu, 9 Jul 2020 12:44:13 -0500
-Received: from a0132233 by bangvideoapps02 with local (Exim 4.90_1)
-	(envelope-from <a0132233@ubnuser-poweredge-r630>)
-	id 1jtaai-0002M0-T2; Thu, 09 Jul 2020 23:14:12 +0530
-From: "Prasad Jondhale" <prasad.jondhale@ti.com>
-To: <meta-ti@yoctoproject.org>
-CC: <meta-ti@lists.yoctoproject.org>, <eth_fw_auto@list.ti.com>,
-        "Prasad
- Jondhale" <prasad.jondhale@ti.com>
-Subject: [dunfell/master] cpsw9g-eth-fw: Update SRCREV to latest
-Date: Thu, 9 Jul 2020 23:14:10 +0530
-Message-ID: <20200709174410.8926-1-prasad.jondhale@ti.com>
+ dkim=missing; spf=pass (domain: elettra.eu, ip: 140.105.206.207, mailfrom: alessio.bogani@elettra.eu)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by localhost (Email Security Appliance) with ESMTP id 31BAE1C49AD_F0C1850B
+	for <meta-ti@lists.yoctoproject.org>; Mon, 13 Jul 2020 08:16:16 +0000 (GMT)
+Received: from unknown-host
+	by hormel.elettra.eu with queue id 66421
+	for meta-ti@lists.yoctoproject.org; Mon, 13 Jul 2020 08:16:15 GMT
+Received: from pc-bogani.elettra.trieste.it (pc-bogani.elettra.trieste.it [192.168.205.85])
+	by hormel.elettra.eu (Sophos Email Appliance) with ESMTP id 8294D1C256E_F0C184FF;
+	Mon, 13 Jul 2020 08:16:15 +0000 (GMT)
+From: "Alessio Igor Bogani" <alessio.bogani@elettra.eu>
+To: meta-ti@lists.yoctoproject.org
+Cc: Alessio Igor Bogani <alessio.bogani@elettra.eu>
+Subject: [PATCH] pru-icss: Replace hardcoded lib with libdir variable
+Date: Mon, 13 Jul 2020 10:16:14 +0200
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+X-SASI-RCODE: 200
+Message-Id: <20200713081616.31BAE1C49AD_F0C1850B@hormel.elettra.eu>
 
-Signed-off-by: Prasad Jondhale <prasad.jondhale@ti.com>
+Signed-off-by: Alessio Igor Bogani <alessio.bogani@elettra.eu>
 ---
- recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-bsp/pru/pru-icss_git.bb | 316 ++++++++++++++++----------------
+ 1 file changed, 158 insertions(+), 158 deletions(-)
 
-diff --git a/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-index 37ba52d0..8cb62b2a 100755
---- a/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-+++ b/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-@@ -11,7 +11,7 @@ inherit update-alternatives
+diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
+index 23097d97..4543d708 100644
+--- a/recipes-bsp/pru/pru-icss_git.bb
++++ b/recipes-bsp/pru/pru-icss_git.bb
+@@ -53,7 +53,7 @@ do_compile() {
  
- PROTOCOL = "git"
- BRANCH = "master"
--SRCREV = "afe62ada2e91e2665f597ca16eb3888b752016de"
-+SRCREV = "91f1628507bf7f8716f0bc7cafe88ad7f14c94f5"
+ do_install() {
+     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+-    install -d ${D}/lib/firmware/pru
++    install -d ${D}${libdir}/firmware/pru
+     install -d ${D}${includedir}
+     cp ${CP_ARGS} ${S}/include/* ${D}${includedir}
+     install -d ${D}${libdir}
+@@ -65,49 +65,49 @@ FILES_${PN}-dev = "${includedir}"
  
- SRC_URI = "git://git.ti.com/glsdk/ti-eth-fw.git;protocol=${PROTOCOL};branch=${BRANCH}"
+ do_install_append_ti33x() {
+     install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU_Halt.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+     for i in 0 1
+     do
+         install -m 0644 ${S}/examples/am335x/PRU_RPMsg_Echo_Interrupt${i}/gen/PRU_RPMsg_Echo_Interrupt${i}.out \
+-                        ${D}/lib/firmware/pru
++                        ${D}${libdir}/firmware/pru
+     done
+ }
+ 
+ do_install_append_ti43x() {
+     install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU_Halt.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+     for i in 0 1
+     do
+         for j in 0 1
+         do
+             install -m 0644 ${S}/examples/am437x/PRU_RPMsg_Echo_Interrupt${i}_${j}/gen/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
+-                            ${D}/lib/firmware/pru
++                            ${D}${libdir}/firmware/pru
+         done
+     done
+ }
+ 
+ do_install_append_omap-a15() {
+     install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU_Halt.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+     for i in 1 2
+     do
+         for j in 0 1
+         do
+             install -m 0644 ${S}/examples/am572x/PRU_RPMsg_Echo_Interrupt${i}_${j}/gen/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
+-                            ${D}/lib/firmware/pru
++                            ${D}${libdir}/firmware/pru
+         done
+     done
+ }
+ 
+ do_install_append_k2g() {
+     install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU_Halt.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+     for i in 0 1
+     do
+         for j in 0 1
+         do
+             install -m 0644 ${S}/examples/k2g/PRU_RPMsg_Echo_Interrupt${i}_${j}/gen/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
+-                            ${D}/lib/firmware/pru
++                            ${D}${libdir}/firmware/pru
+         done
+     done
+ }
+@@ -116,20 +116,20 @@ do_install_append_am65xx() {
+     for i in 0 1 
+     do
+         install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU${i}/PRU_Halt_${i}.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+         install -m 644 ${S}/examples/${PLATFORM}/RTU_Halt/gen/RTU${i}/RTU_Halt_${i}.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+         install -m 644 ${S}/examples/${PLATFORM}/TX_PRU_Halt/gen/TX_PRU${i}/TX_PRU_Halt_${i}.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+     done
+     for i in 0 1 2
+     do
+         for j in 0 1
+         do
+             install -m 0644 ${S}/examples/am65x/PRU_RPMsg_Echo_Interrupt${j}/gen/icssg${i}/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
+-                            ${D}/lib/firmware/pru
++                            ${D}${libdir}/firmware/pru
+             install -m 0644 ${S}/examples/am65x/RTU_RPMsg_Echo_Interrupt${j}/gen/icssg${i}/RTU_RPMsg_Echo_Interrupt${i}_${j}.out \
+-                            ${D}/lib/firmware/pru
++                            ${D}${libdir}/firmware/pru
+ 
+         done
+     done
+@@ -139,28 +139,28 @@ do_install_append_j7() {
+     for i in 0 1
+     do
+         install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU${i}/PRU_Halt_${i}.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+         install -m 644 ${S}/examples/${PLATFORM}/RTU_Halt/gen/RTU${i}/RTU_Halt_${i}.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+         install -m 644 ${S}/examples/${PLATFORM}/TX_PRU_Halt/gen/TX_PRU${i}/TX_PRU_Halt_${i}.out \
+-                   ${D}/lib/firmware/pru
++                   ${D}${libdir}/firmware/pru
+     done
+     for i in 0 1
+     do
+         for j in 0 1
+         do
+             install -m 0644 ${S}/examples/j721e/PRU_RPMsg_Echo_Interrupt${j}/gen/icssg${i}/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
+-                            ${D}/lib/firmware/pru
++                            ${D}${libdir}/firmware/pru
+             install -m 0644 ${S}/examples/j721e/RTU_RPMsg_Echo_Interrupt${j}/gen/icssg${i}/RTU_RPMsg_Echo_Interrupt${i}_${j}.out \
+-                            ${D}/lib/firmware/pru
++                            ${D}${libdir}/firmware/pru
+ 
+         done
+     done
+ }
+ 
+ 
+-FILES_${PN}-halt = "/lib/firmware/pru/PRU_Halt* /lib/firmware/pru/RTU_Halt* /lib/firmware/pru/TX_PRU_Halt*"
+-FILES_${PN}-rpmsg-echo = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt* /lib/firmware/pru/RTU_RPMsg_Echo_Interrupt*"
++FILES_${PN}-halt = "${libdir}/firmware/pru/PRU_Halt* ${libdir}/firmware/pru/RTU_Halt* ${libdir}/firmware/pru/TX_PRU_Halt*"
++FILES_${PN}-rpmsg-echo = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt* ${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt*"
+ 
+ # Set up names for the firmwares
+ PRU_ICSS_ALTERNATIVES_ti33x    = "am335x-pru0-fw am335x-pru1-fw"
+@@ -171,55 +171,55 @@ PRU_ICSS_ALTERNATIVES_am65xx   = "am65x-pru0_0-fw am65x-pru0_1-fw am65x-pru1_0-f
+ PRU_ICSS_ALTERNATIVES_j7       = "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw"
+ 
+ # Set up link names for the firmwares
+-ALTERNATIVE_LINK_NAME[am335x-pru0-fw] = "/lib/firmware/am335x-pru0-fw"
+-ALTERNATIVE_LINK_NAME[am335x-pru1-fw] = "/lib/firmware/am335x-pru1-fw"
+-
+-ALTERNATIVE_LINK_NAME[am437x-pru0_0-fw] = "/lib/firmware/am437x-pru0_0-fw"
+-ALTERNATIVE_LINK_NAME[am437x-pru0_1-fw] = "/lib/firmware/am437x-pru0_1-fw"
+-ALTERNATIVE_LINK_NAME[am437x-pru1_0-fw] = "/lib/firmware/am437x-pru1_0-fw"
+-ALTERNATIVE_LINK_NAME[am437x-pru1_1-fw] = "/lib/firmware/am437x-pru1_1-fw"
+-
+-ALTERNATIVE_LINK_NAME[am57xx-pru1_0-fw] = "/lib/firmware/am57xx-pru1_0-fw"
+-ALTERNATIVE_LINK_NAME[am57xx-pru1_1-fw] = "/lib/firmware/am57xx-pru1_1-fw"
+-ALTERNATIVE_LINK_NAME[am57xx-pru2_0-fw] = "/lib/firmware/am57xx-pru2_0-fw"
+-ALTERNATIVE_LINK_NAME[am57xx-pru2_1-fw] = "/lib/firmware/am57xx-pru2_1-fw"
+-
+-ALTERNATIVE_LINK_NAME[k2g-pru0_0-fw] = "/lib/firmware/k2g-pru0_0-fw"
+-ALTERNATIVE_LINK_NAME[k2g-pru0_1-fw] = "/lib/firmware/k2g-pru0_1-fw"
+-ALTERNATIVE_LINK_NAME[k2g-pru1_0-fw] = "/lib/firmware/k2g-pru1_0-fw"
+-ALTERNATIVE_LINK_NAME[k2g-pru1_1-fw] = "/lib/firmware/k2g-pru1_1-fw"
+-
+-ALTERNATIVE_LINK_NAME[am65x-pru0_0-fw] = "/lib/firmware/am65x-pru0_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-pru0_1-fw] = "/lib/firmware/am65x-pru0_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-pru1_0-fw] = "/lib/firmware/am65x-pru1_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-pru1_1-fw] = "/lib/firmware/am65x-pru1_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-pru2_0-fw] = "/lib/firmware/am65x-pru2_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-pru2_1-fw] = "/lib/firmware/am65x-pru2_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-rtu0_0-fw] = "/lib/firmware/am65x-rtu0_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-rtu0_1-fw] = "/lib/firmware/am65x-rtu0_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-rtu1_0-fw] = "/lib/firmware/am65x-rtu1_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-rtu1_1-fw] = "/lib/firmware/am65x-rtu1_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-rtu2_0-fw] = "/lib/firmware/am65x-rtu2_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-rtu2_1-fw] = "/lib/firmware/am65x-rtu2_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-txpru0_0-fw] = "/lib/firmware/am65x-txpru0_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-txpru0_1-fw] = "/lib/firmware/am65x-txpru0_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-txpru1_0-fw] = "/lib/firmware/am65x-txpru1_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-txpru1_1-fw] = "/lib/firmware/am65x-txpru1_1-fw"
+-ALTERNATIVE_LINK_NAME[am65x-txpru2_0-fw] = "/lib/firmware/am65x-txpru2_0-fw"
+-ALTERNATIVE_LINK_NAME[am65x-txpru2_1-fw] = "/lib/firmware/am65x-txpru2_1-fw"
+-
+-ALTERNATIVE_LINK_NAME[j7-pru0_0-fw] = "/lib/firmware/j7-pru0_0-fw"
+-ALTERNATIVE_LINK_NAME[j7-pru0_1-fw] = "/lib/firmware/j7-pru0_1-fw"
+-ALTERNATIVE_LINK_NAME[j7-pru1_0-fw] = "/lib/firmware/j7-pru1_0-fw"
+-ALTERNATIVE_LINK_NAME[j7-pru1_1-fw] = "/lib/firmware/j7-pru1_1-fw"
+-ALTERNATIVE_LINK_NAME[j7-rtu0_0-fw] = "/lib/firmware/j7-rtu0_0-fw"
+-ALTERNATIVE_LINK_NAME[j7-rtu0_1-fw] = "/lib/firmware/j7-rtu0_1-fw"
+-ALTERNATIVE_LINK_NAME[j7-rtu1_0-fw] = "/lib/firmware/j7-rtu1_0-fw"
+-ALTERNATIVE_LINK_NAME[j7-rtu1_1-fw] = "/lib/firmware/j7-rtu1_1-fw"
+-ALTERNATIVE_LINK_NAME[j7-txpru0_0-fw] = "/lib/firmware/j7-txpru0_0-fw"
+-ALTERNATIVE_LINK_NAME[j7-txpru0_1-fw] = "/lib/firmware/j7-txpru0_1-fw"
+-ALTERNATIVE_LINK_NAME[j7-txpru1_0-fw] = "/lib/firmware/j7-txpru1_0-fw"
+-ALTERNATIVE_LINK_NAME[j7-txpru1_1-fw] = "/lib/firmware/j7-txpru1_1-fw"
++ALTERNATIVE_LINK_NAME[am335x-pru0-fw] = "${libdir}/firmware/am335x-pru0-fw"
++ALTERNATIVE_LINK_NAME[am335x-pru1-fw] = "${libdir}/firmware/am335x-pru1-fw"
++
++ALTERNATIVE_LINK_NAME[am437x-pru0_0-fw] = "${libdir}/firmware/am437x-pru0_0-fw"
++ALTERNATIVE_LINK_NAME[am437x-pru0_1-fw] = "${libdir}/firmware/am437x-pru0_1-fw"
++ALTERNATIVE_LINK_NAME[am437x-pru1_0-fw] = "${libdir}/firmware/am437x-pru1_0-fw"
++ALTERNATIVE_LINK_NAME[am437x-pru1_1-fw] = "${libdir}/firmware/am437x-pru1_1-fw"
++
++ALTERNATIVE_LINK_NAME[am57xx-pru1_0-fw] = "${libdir}/firmware/am57xx-pru1_0-fw"
++ALTERNATIVE_LINK_NAME[am57xx-pru1_1-fw] = "${libdir}/firmware/am57xx-pru1_1-fw"
++ALTERNATIVE_LINK_NAME[am57xx-pru2_0-fw] = "${libdir}/firmware/am57xx-pru2_0-fw"
++ALTERNATIVE_LINK_NAME[am57xx-pru2_1-fw] = "${libdir}/firmware/am57xx-pru2_1-fw"
++
++ALTERNATIVE_LINK_NAME[k2g-pru0_0-fw] = "${libdir}/firmware/k2g-pru0_0-fw"
++ALTERNATIVE_LINK_NAME[k2g-pru0_1-fw] = "${libdir}/firmware/k2g-pru0_1-fw"
++ALTERNATIVE_LINK_NAME[k2g-pru1_0-fw] = "${libdir}/firmware/k2g-pru1_0-fw"
++ALTERNATIVE_LINK_NAME[k2g-pru1_1-fw] = "${libdir}/firmware/k2g-pru1_1-fw"
++
++ALTERNATIVE_LINK_NAME[am65x-pru0_0-fw] = "${libdir}/firmware/am65x-pru0_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-pru0_1-fw] = "${libdir}/firmware/am65x-pru0_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-pru1_0-fw] = "${libdir}/firmware/am65x-pru1_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-pru1_1-fw] = "${libdir}/firmware/am65x-pru1_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-pru2_0-fw] = "${libdir}/firmware/am65x-pru2_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-pru2_1-fw] = "${libdir}/firmware/am65x-pru2_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-rtu0_0-fw] = "${libdir}/firmware/am65x-rtu0_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-rtu0_1-fw] = "${libdir}/firmware/am65x-rtu0_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-rtu1_0-fw] = "${libdir}/firmware/am65x-rtu1_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-rtu1_1-fw] = "${libdir}/firmware/am65x-rtu1_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-rtu2_0-fw] = "${libdir}/firmware/am65x-rtu2_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-rtu2_1-fw] = "${libdir}/firmware/am65x-rtu2_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-txpru0_0-fw] = "${libdir}/firmware/am65x-txpru0_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-txpru0_1-fw] = "${libdir}/firmware/am65x-txpru0_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-txpru1_0-fw] = "${libdir}/firmware/am65x-txpru1_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-txpru1_1-fw] = "${libdir}/firmware/am65x-txpru1_1-fw"
++ALTERNATIVE_LINK_NAME[am65x-txpru2_0-fw] = "${libdir}/firmware/am65x-txpru2_0-fw"
++ALTERNATIVE_LINK_NAME[am65x-txpru2_1-fw] = "${libdir}/firmware/am65x-txpru2_1-fw"
++
++ALTERNATIVE_LINK_NAME[j7-pru0_0-fw] = "${libdir}/firmware/j7-pru0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-pru0_1-fw] = "${libdir}/firmware/j7-pru0_1-fw"
++ALTERNATIVE_LINK_NAME[j7-pru1_0-fw] = "${libdir}/firmware/j7-pru1_0-fw"
++ALTERNATIVE_LINK_NAME[j7-pru1_1-fw] = "${libdir}/firmware/j7-pru1_1-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu0_0-fw] = "${libdir}/firmware/j7-rtu0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu0_1-fw] = "${libdir}/firmware/j7-rtu0_1-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu1_0-fw] = "${libdir}/firmware/j7-rtu1_0-fw"
++ALTERNATIVE_LINK_NAME[j7-rtu1_1-fw] = "${libdir}/firmware/j7-rtu1_1-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru0_0-fw] = "${libdir}/firmware/j7-txpru0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru0_1-fw] = "${libdir}/firmware/j7-txpru0_1-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru1_0-fw] = "${libdir}/firmware/j7-txpru1_0-fw"
++ALTERNATIVE_LINK_NAME[j7-txpru1_1-fw] = "${libdir}/firmware/j7-txpru1_1-fw"
+ 
+ # Create the pru-icss-halt firmware alternatives
+ ALTERNATIVE_pru-icss-halt = "${PRU_ICSS_ALTERNATIVES}"
+@@ -228,55 +228,55 @@ ALTERNATIVE_pru-icss-halt = "${PRU_ICSS_ALTERNATIVES}"
+ ALTERNATIVE_pru-icss-halt_append_am65xx = " am65x-txpru0_0-fw am65x-txpru0_1-fw am65x-txpru1_0-fw am65x-txpru1_1-fw am65x-txpru2_0-fw am65x-txpru2_1-fw"
+ ALTERNATIVE_pru-icss-halt_append_j7 = " j7-txpru0_0-fw j7-txpru0_1-fw j7-txpru1_0-fw j7-txpru1_1-fw"
+ 
+-ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru0-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru1-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru0_0-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru2_0-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru2_1-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru0_0-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru2_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru2_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu0_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu0_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-pru1_0-fw] = "/lib/firmware/pru/PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-pru1_1-fw] = "/lib/firmware/pru/PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu0_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu0_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu1_0-fw] = "/lib/firmware/pru/RTU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu1_1-fw] = "/lib/firmware/pru/RTU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru0_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru0_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru1_0-fw] = "/lib/firmware/pru/TX_PRU_Halt_0.out"
+-ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru1_1-fw] = "/lib/firmware/pru/TX_PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru0-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru1-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++
++ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru0_0-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru0_1-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru1_0-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am437x-pru1_1-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++
++ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru1_0-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru1_1-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru2_0-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru2_1-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++
++ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru0_0-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru0_1-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_0-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_1-fw] = "${libdir}/firmware/pru/PRU_Halt.out"
++
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_0-fw] = "${libdir}/firmware/pru/PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_1-fw] = "${libdir}/firmware/pru/PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru1_0-fw] = "${libdir}/firmware/pru/PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru1_1-fw] = "${libdir}/firmware/pru/PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru2_0-fw] = "${libdir}/firmware/pru/PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru2_1-fw] = "${libdir}/firmware/pru/PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu0_0-fw] = "${libdir}/firmware/pru/RTU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu0_1-fw] = "${libdir}/firmware/pru/RTU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_0-fw] = "${libdir}/firmware/pru/RTU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu1_1-fw] = "${libdir}/firmware/pru/RTU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_0-fw] = "${libdir}/firmware/pru/RTU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-rtu2_1-fw] = "${libdir}/firmware/pru/RTU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_0-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru0_1-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_0-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru1_1-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_0-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am65x-txpru2_1-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_1.out"
++
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_0-fw] = "${libdir}/firmware/pru/PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru0_1-fw] = "${libdir}/firmware/pru/PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru1_0-fw] = "${libdir}/firmware/pru/PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-pru1_1-fw] = "${libdir}/firmware/pru/PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu0_0-fw] = "${libdir}/firmware/pru/RTU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu0_1-fw] = "${libdir}/firmware/pru/RTU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu1_0-fw] = "${libdir}/firmware/pru/RTU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-rtu1_1-fw] = "${libdir}/firmware/pru/RTU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru0_0-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru0_1-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_1.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru1_0-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_0.out"
++ALTERNATIVE_TARGET_pru-icss-halt[j7-txpru1_1-fw] = "${libdir}/firmware/pru/TX_PRU_Halt_1.out"
+ 
+ 
+ ALTERNATIVE_PRIORITY_pru-icss-halt = "50"
+@@ -284,45 +284,45 @@ ALTERNATIVE_PRIORITY_pru-icss-halt = "50"
+ # Create the pru-icss-rpmsg-echo firmware alternatives
+ ALTERNATIVE_pru-icss-rpmsg-echo = "${PRU_ICSS_ALTERNATIVES}"
+ 
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am335x-pru0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am335x-pru1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru0_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru0_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru1_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru1_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru1_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru1_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru2_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt2_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru2_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt2_1.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru0_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru0_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru1_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru1_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru0_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru0_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru1_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru1_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru2_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt2_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru2_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt2_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu0_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt0_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu0_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt0_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu1_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt1_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu1_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt1_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu2_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt2_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu2_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt2_1.out"
+-
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru0_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru0_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru1_0-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru1_1-fw] = "/lib/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu0_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt0_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu0_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt0_1.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu1_0-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt1_0.out"
+-ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu1_1-fw] = "/lib/firmware/pru/RTU_RPMsg_Echo_Interrupt1_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am335x-pru0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am335x-pru1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1.out"
++
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru0_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru0_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru1_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am437x-pru1_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
++
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru1_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru1_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru2_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt2_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru2_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt2_1.out"
++
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru0_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru0_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru1_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru1_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
++
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru0_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru0_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru1_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru1_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru2_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt2_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru2_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt2_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu0_0-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu0_1-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu1_0-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu1_1-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt1_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu2_0-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt2_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-rtu2_1-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt2_1.out"
++
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru0_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru0_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru1_0-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-pru1_1-fw] = "${libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu0_0-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt0_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu0_1-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt0_1.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu1_0-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt1_0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[j7-rtu1_1-fw] = "${libdir}/firmware/pru/RTU_RPMsg_Echo_Interrupt1_1.out"
+ 
+ ALTERNATIVE_PRIORITY_pru-icss-rpmsg-echo = "100"
  
 -- 
 2.17.1
