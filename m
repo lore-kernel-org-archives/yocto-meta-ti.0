@@ -1,26 +1,26 @@
 Received: from hormel.elettra.eu (hormel.elettra.eu [140.105.206.207])
- by mx.groups.io with SMTP id smtpd.web10.15056.1594628177826810117
+ by mx.groups.io with SMTP id smtpd.web11.15401.1594631317809053077
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 13 Jul 2020 01:16:18 -0700
+ Mon, 13 Jul 2020 02:08:38 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: elettra.eu, ip: 140.105.206.207, mailfrom: alessio.bogani@elettra.eu)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by localhost (Email Security Appliance) with ESMTP id 31BAE1C49AD_F0C1850B
-	for <meta-ti@lists.yoctoproject.org>; Mon, 13 Jul 2020 08:16:16 +0000 (GMT)
+	by localhost (Email Security Appliance) with ESMTP id 7D7BF1C4A6A_F0C2493B
+	for <meta-ti@lists.yoctoproject.org>; Mon, 13 Jul 2020 09:08:35 +0000 (GMT)
 Received: from unknown-host
-	by hormel.elettra.eu with queue id 66421
-	for meta-ti@lists.yoctoproject.org; Mon, 13 Jul 2020 08:16:15 GMT
+	by hormel.elettra.eu with queue id 66437
+	for meta-ti@lists.yoctoproject.org; Mon, 13 Jul 2020 09:08:34 GMT
 Received: from pc-bogani.elettra.trieste.it (pc-bogani.elettra.trieste.it [192.168.205.85])
-	by hormel.elettra.eu (Sophos Email Appliance) with ESMTP id 8294D1C256E_F0C184FF;
-	Mon, 13 Jul 2020 08:16:15 +0000 (GMT)
+	by hormel.elettra.eu (Sophos Email Appliance) with ESMTP id 942961C256B_F0C2492F;
+	Mon, 13 Jul 2020 09:08:34 +0000 (GMT)
 From: "Alessio Igor Bogani" <alessio.bogani@elettra.eu>
 To: meta-ti@lists.yoctoproject.org
 Cc: Alessio Igor Bogani <alessio.bogani@elettra.eu>
 Subject: [PATCH] pru-icss: Replace hardcoded lib with libdir variable
-Date: Mon, 13 Jul 2020 10:16:14 +0200
+Date: Mon, 13 Jul 2020 11:08:32 +0200
 X-Mailer: git-send-email 2.17.1
 X-SASI-RCODE: 200
-Message-Id: <20200713081616.31BAE1C49AD_F0C1850B@hormel.elettra.eu>
+Message-Id: <20200713090835.7D7BF1C4A6A_F0C2493B@hormel.elettra.eu>
 
 Signed-off-by: Alessio Igor Bogani <alessio.bogani@elettra.eu>
 ---
