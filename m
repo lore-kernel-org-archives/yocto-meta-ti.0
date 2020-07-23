@@ -1,70 +1,60 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.29475.1595453085842891888
+Received: from hormel.elettra.eu (hormel.elettra.eu [140.105.206.207])
+ by mx.groups.io with SMTP id smtpd.web10.6974.1595486996337757083
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 22 Jul 2020 14:24:46 -0700
+ Wed, 22 Jul 2020 23:49:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=DqiO9Lio;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: denys@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 06MLOfAW107227;
-	Wed, 22 Jul 2020 16:24:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1595453081;
-	bh=beWH8WzY6fRU8u2MaXv0K8HTZKPLxXkt0D0JvnwvCkw=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=DqiO9Liom2uYk/mgGhHJNtc6Vi7+0IfCDC/WbUIIfqI1jtwjUkIck2YP66IqR1IZ4
-	 9xu7+oI8Y8YZHLGQE3XepXv7Rqtk0L3sVkyR6ejjZ+/ET2iNo7qAD3XixUOrprs/cu
-	 Q0VvF5ZifAoAIwVXhHL26/zRqBKKUmDUl6P3liSY=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 06MLOfnC022373
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 22 Jul 2020 16:24:41 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 22
- Jul 2020 16:24:41 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 22 Jul 2020 16:24:41 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 06MLOfZ1083993;
-	Wed, 22 Jul 2020 16:24:41 -0500
-Date: Wed, 22 Jul 2020 17:24:41 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Alessio Igor Bogani <alessio.bogani@elettra.eu>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH] pru-icss: Replace hardcoded lib with libdir variable
-Message-ID: <20200722212440.GC10098@beryl>
-References: <20200713090835.7D7BF1C4A6A_F0C2493B@hormel.elettra.eu>
- <20200717203244.GG13182@beryl>
- <CAPk1OjF4b44Tx=Wv+cGkKYDfyRDWjukd8=HhfVFrD4AumR=avw@mail.gmail.com>
+ dkim=missing; spf=pass (domain: elettra.eu, ip: 140.105.206.207, mailfrom: alessio.bogani@elettra.eu)
+Received: from hormel.elettra.eu (localhost.localdomain [127.0.0.1])
+	by localhost (Email Security Appliance) with SMTP id 5C5021C4A14_F193310B
+	for <meta-ti@lists.yoctoproject.org>; Thu, 23 Jul 2020 06:49:52 +0000 (GMT)
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "smtp.gmail.com", Issuer "GTS CA 1O1" (verified OK))
+	by hormel.elettra.eu (Sophos Email Appliance) with ESMTPSA id CF7B21C1FA0_F19330FF
+	for <meta-ti@lists.yoctoproject.org>; Thu, 23 Jul 2020 06:49:51 +0000 (GMT)
+Received: by mail-yb1-f171.google.com with SMTP id 2so2289338ybr.13
+        for <meta-ti@lists.yoctoproject.org>; Wed, 22 Jul 2020 23:49:51 -0700 (PDT)
+X-Gm-Message-State: AOAM530sZN51WRDH3tgws6GBYaIyI+roKaswTCw6GUeTgl94w/MWrMzl
+	wlWX1hYnin+87d+Ui7V4MptulZgzWi9wb7NTtKU=
+X-Google-Smtp-Source: ABdhPJz23vWVkWDR3boxYrc25dY/+1dvGAhnXocXMlok5ExxvEBE2uvxQwFC0i1uyqe8kctQz2rqleVFiqpm71ZdR4I=
+X-Received: by 2002:a25:6d08:: with SMTP id i8mr2620040ybc.6.1595486990439;
+ Wed, 22 Jul 2020 23:49:50 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAPk1OjF4b44Tx=Wv+cGkKYDfyRDWjukd8=HhfVFrD4AumR=avw@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+References: <20200713090835.7D7BF1C4A6A_F0C2493B@hormel.elettra.eu>
+ <20200717203244.GG13182@beryl> <CAPk1OjF4b44Tx=Wv+cGkKYDfyRDWjukd8=HhfVFrD4AumR=avw@mail.gmail.com>
+ <20200722212440.GC10098@beryl>
+In-Reply-To: <20200722212440.GC10098@beryl>
+From: "Alessio Igor Bogani" <alessio.bogani@elettra.eu>
+Date: Thu, 23 Jul 2020 08:49:14 +0200
+X-Gmail-Original-Message-ID: <CAPk1OjEtwvkMrGOFUHRGQgQoZ+HEN59cqtmnf=hrkc60kyP-GA@mail.gmail.com>
+Message-ID: <CAPk1OjEtwvkMrGOFUHRGQgQoZ+HEN59cqtmnf=hrkc60kyP-GA@mail.gmail.com>
+Subject: Re: [meta-ti] [PATCH] pru-icss: Replace hardcoded lib with libdir variable
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: meta-ti@lists.yoctoproject.org
+X-SASI-RCODE: 200
+Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Jul 18, 2020 at 09:58:05AM +0200, Alessio Igor Bogani wrote:
-> Hi Denys,
-> 
-> Thank you for reply.
-> 
-> On Fri, 17 Jul 2020 at 22:32, Denys Dmytriyenko <denys@ti.com> wrote:
-> > NAK, libdir is usually /usr/lib
-> 
-> Sorry it was my mistake. Are you willing to accept a patch with
-> ${base_libdir} instead?
+Hi Denys,
 
-Any specific reason for this change?
-I'm not against it, but I haven't seen any setups where ${base_libdir} != /lib
+On Wed, 22 Jul 2020 at 23:24, Denys Dmytriyenko <denys@ti.com> wrote:
+>
+> On Sat, Jul 18, 2020 at 09:58:05AM +0200, Alessio Igor Bogani wrote:
+> > Hi Denys,
+> >
+> > Thank you for reply.
+> >
+> > On Fri, 17 Jul 2020 at 22:32, Denys Dmytriyenko <denys@ti.com> wrote:
+> > > NAK, libdir is usually /usr/lib
+> >
+> > Sorry it was my mistake. Are you willing to accept a patch with
+> > ${base_libdir} instead?
+>
+> Any specific reason for this change?
+> I'm not against it, but I haven't seen any setups where ${base_libdir} != /lib
 
--- 
-Denys
+Using usrmerge DISTRO_FEATURE /lib become a symlink against /usr/lib.
 
+Thanks!
 
-> Thanks!
-> 
-> Ciao,
-> Alessio
+Ciao,
+Alessio
