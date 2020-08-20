@@ -1,141 +1,207 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.104443.1597895291248508879
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.111014.1597932005289571476
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 19 Aug 2020 20:48:11 -0700
+ Thu, 20 Aug 2020 07:00:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 93DD440B2D;
-	Thu, 20 Aug 2020 03:48:10 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LsJhsjULoy0w; Thu, 20 Aug 2020 03:48:10 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 77B2640C28;
-	Thu, 20 Aug 2020 03:48:09 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 94B80174463;
-	Wed, 19 Aug 2020 23:48:08 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH 2/2] ti-rtos-firmware: add recipe for RTOS FW binary integration
-Date: Wed, 19 Aug 2020 23:48:07 -0400
-Message-Id: <1597895287-29065-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1597895287-29065-1-git-send-email-denis@denix.org>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EN1lHlJA;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: j-stiffler@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 07KDxxLC069986;
+	Thu, 20 Aug 2020 08:59:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1597931999;
+	bh=K+o3eGTWwjnnqG1qtleoF65iVK4TuOm0TDEeWrccG+4=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=EN1lHlJA4KO38z3e6AVpbFa3GvaRqrWj7umgMYbWhgzGIThNRqgZgT3LZPfJfVn60
+	 3uyXksipR07aKc1gtg37FsQAZLsvWafrhHTGJRxIwrnHsmPaFUpqQNVP+5VtQsXBQs
+	 AP0frwzk8OJRO9W/Oz+OrDdksLqXyLr+hAmZQ2XM=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 07KDxxXs074244
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 20 Aug 2020 08:59:59 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 20
+ Aug 2020 08:59:59 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Thu, 20 Aug 2020 08:59:59 -0500
+Received: from [158.218.113.191] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 07KDxwgF055194;
+	Thu, 20 Aug 2020 08:59:59 -0500
+Subject: Re: [EXTERNAL] [meta-ti] [dunfell/master][PATCH 1/2] ti-rtos-metadata: add recipe to fetch and deploy metadata.inc for RTOS FW binary integration
+To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
+CC: Denys Dmytriyenko <denys@ti.com>
 References: <1597895287-29065-1-git-send-email-denis@denix.org>
+From: "Jacob Stiffler" <j-stiffler@ti.com>
+Message-ID: <c2cc811f-3847-e158-4deb-e2a954e4cb13@ti.com>
+Date: Thu, 20 Aug 2020 09:59:58 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.1
+MIME-Version: 1.0
+In-Reply-To: <1597895287-29065-1-git-send-email-denis@denix.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/alternative;
+	boundary="------------855AB1FE3C0457B4BE9B4BFF"
+Content-Language: en-US
 
-From: Denys Dmytriyenko <denys@ti.com>
+--------------855AB1FE3C0457B4BE9B4BFF
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+On 8/19/2020 11:48 PM, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
+>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>   recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb | 41 ++++++++++++++++++++++++++++++
+>   1 file changed, 41 insertions(+)
+>   create mode 100644 recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+>
+> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+> new file mode 100644
+> index 0000000..985ff8a
+> --- /dev/null
+> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+> @@ -0,0 +1,41 @@
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
+> +
+> +COMPATIBLE_MACHINE = "k3"
+> +
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +INHIBIT_DEFAULT_DEPS = "1"
+> +
+> +inherit nopackages deploy
+> +
+> +PLAT_SFX = ""
+> +PLAT_SFX_j7 = "/j721e"
+> +PLAT_SFX_j7200-evm = "/j7200"
+> +PLAT_SFX_am65xx = "/am65xx"
+> +
+> +# Use weak assignment to set defaults to TI_RTOS_METADATA_* variables
+> +TI_RTOS_METADATA_URI ?= "git://git.ti.com/processor-sdk/coresdk_rtos_releases.git"
+> +TI_RTOS_METADATA_PROTOCOL ?= "git"
+> +TI_RTOS_METADATA_SRCREV ?= "2290c123a0c4ba4804d794c39532296a9c7b9587"
+> +TI_RTOS_METADATA_BRANCH ?= "master"
+> +TI_RTOS_METADATA_DIR ?= "${PLAT_SFX}"
+> +TI_RTOS_METADATA_FILE ?= "${S}${TI_RTOS_METADATA_DIR}/metadata.inc"
+> +
+> +PV = "1.0.0"
+
+Since this may be set to AUTOREV, I would suggest adding SRCPV here. 
+This will help track to exact version as well as ensure that the remote 
+is checked upon each build and that the commit ID is not just cached.
+
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +SRC_URI = "${TI_RTOS_METADATA_URI};branch=${TI_RTOS_METADATA_BRANCH};protocol=${TI_RTOS_METADATA_PROTOCOL}"
+> +SRCREV = "${TI_RTOS_METADATA_SRCREV}"
+> +
+> +do_configure[noexec] = "1"
+> +do_compile[noexec] = "1"
+> +do_install[noexec] = "1"
+> +
+> +do_deploy () {
+> +	install -d ${DEPLOYDIR}
+> +	install -m 0644 ${TI_RTOS_METADATA_FILE} ${DEPLOYDIR}/
+> +}
+> +
+> +addtask deploy before do_build after do_compile
+>
+> 
+
+--------------855AB1FE3C0457B4BE9B4BFF
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 8/19/2020 11:48 PM, Denys
+      Dmytriyenko wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:1597895287-29065-1-git-send-email-denis@denix.org">
+      <pre class="moz-quote-pre" wrap="">From: Denys Dmytriyenko <a class="moz-txt-link-rfc2396E" href="mailto:denys@ti.com">&lt;denys@ti.com&gt;</a>
+
+Signed-off-by: Denys Dmytriyenko <a class="moz-txt-link-rfc2396E" href="mailto:denys@ti.com">&lt;denys@ti.com&gt;</a>
 ---
- recipes-ti/ti-rtos-bin/files/empty         |  1 +
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 85 ++++++++++++++++++++++++++++++
- 2 files changed, 86 insertions(+)
- create mode 100644 recipes-ti/ti-rtos-bin/files/empty
- create mode 100644 recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+ recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb | 41 ++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
 
-diff --git a/recipes-ti/ti-rtos-bin/files/empty b/recipes-ti/ti-rtos-bin/files/empty
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
 new file mode 100644
-index 0000000..c6cac69
+index 0000000..985ff8a
 --- /dev/null
-+++ b/recipes-ti/ti-rtos-bin/files/empty
-@@ -0,0 +1 @@
-+empty
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-new file mode 100644
-index 0000000..9202b52
---- /dev/null
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -0,0 +1,85 @@
-+SUMMARY = "TI RTOS prebuilt binary firmware images"
-+
-+LICENSE = "TI-TFL"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-ti/licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+@@ -0,0 +1,41 @@
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9">"file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"</a>
 +
 +COMPATIBLE_MACHINE = "k3"
 +
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
 +INHIBIT_DEFAULT_DEPS = "1"
-+DATEH := "${@time.strftime('%Y%m%d%H',time.gmtime())}"
 +
-+inherit deploy
++inherit nopackages deploy
 +
-+# First, let's try including metadata.inc that could be fetched and deployed
-+# by ti-rtos-metadata earlier and provide new set of CORESDK_RTOS_* variables
-+include ${DEPLOY_DIR_IMAGE}/metadata.inc
++PLAT_SFX = ""
++PLAT_SFX_j7 = "/j721e"
++PLAT_SFX_j7200-evm = "/j7200"
++PLAT_SFX_am65xx = "/am65xx"
 +
-+# Set some defaults for when metadata.inc is not available
-+DEFAULT_RTOS_FAMILY = "jacinto"
-+DEFAULT_RTOS_VERSION = "07_01_00_02"
-+DEFAULT_RTOS_VERSION_DOT = "07.01.00.02"
++# Use weak assignment to set defaults to TI_RTOS_METADATA_* variables
++TI_RTOS_METADATA_URI ?= "git://git.ti.com/processor-sdk/coresdk_rtos_releases.git"
++TI_RTOS_METADATA_PROTOCOL ?= "git"
++TI_RTOS_METADATA_SRCREV ?= "2290c123a0c4ba4804d794c39532296a9c7b9587"
++TI_RTOS_METADATA_BRANCH ?= "master"
++TI_RTOS_METADATA_DIR ?= "${PLAT_SFX}"
++TI_RTOS_METADATA_FILE ?= "${S}${TI_RTOS_METADATA_DIR}/metadata.inc"
 +
-+DEFAULT_RTOS_SOC = "undefined"
-+DEFAULT_RTOS_SOC_j7 = "j721e"
-+DEFAULT_RTOS_SOC_j7200-evm = "j7200"
-+DEFAULT_RTOS_SOC_am65xx = "am65xx"
++PV = "1.0.0"</pre>
+    </blockquote>
+    <p>Since this may be set to AUTOREV, I would suggest adding SRCPV
+      here. This will help track to exact version as well as ensure that
+      the remote is checked upon each build and that the commit ID is
+      not just cached.<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:1597895287-29065-1-git-send-email-denis@denix.org">
+      <pre class="moz-quote-pre" wrap="">
 +
-+DEFAULT_RTOS_WEBLINK = "undefined"
-+DEFAULT_RTOS_WEBLINK_j7 = "https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/${CORESDK_RTOS_VERSION}"
-+DEFAULT_RTOS_WEBLINK_am65xx = "https://software-dl.ti.com/processor-sdk-rtos/esd/AM65X/firmware/${CORESDK_RTOS_VERSION}"
++S = "${WORKDIR}/git"
 +
-+DEFAULT_FIRMWARE_FILE = "coresdk_rtos_${CORESDK_RTOS_SOC}_${CORESDK_RTOS_VERSION}_firmware.tar.xz"
++SRC_URI = "${TI_RTOS_METADATA_URI};branch=${TI_RTOS_METADATA_BRANCH};protocol=${TI_RTOS_METADATA_PROTOCOL}"
++SRCREV = "${TI_RTOS_METADATA_SRCREV}"
 +
-+DEFAULT_FIRMWARE_URL = "file://empty"
-+DEFAULT_FIRMWARE_URL_k3 = "${CORESDK_RTOS_WEBLINK}/${DEFAULT_FIRMWARE_FILE}${CORESDK_RTOS_FILE_SUFFIX}"
-+
-+DEFAULT_FIRMWARE_SHA256SUM = "unknown"
-+DEFAULT_FIRMWARE_SHA256SUM_j7 = "e1e2eb0086a28468f1bb4b796571dcf1bfa23aedbb092bd02227e777a078afe3"
-+DEFAULT_FIRMWARE_SHA256SUM_j7200-evm = "218e51739c53e306cc61bbb705b3d8eeae3afb63869f2aa82a4c804f7847bd63"
-+DEFAULT_FIRMWARE_SHA256SUM_am65xx = "37188564fbb8420ba9dadb74ecf05b3aac2bf39a0e72c18c23272a141e69ace7"
-+
-+# Use weak assignment for CORESDK_RTOS_* variables to use defaults if not yet set
-+CORESDK_RTOS_FAMILY ?= "${DEFAULT_RTOS_FAMILY}"
-+CORESDK_RTOS_VERSION ?= "${DEFAULT_RTOS_VERSION}"
-+CORESDK_RTOS_VERSION_DOT ?= "${DEFAULT_RTOS_VERSION_DOT}"
-+CORESDK_RTOS_SOC ?= "${DEFAULT_RTOS_SOC}"
-+CORESDK_RTOS_WEBLINK ?= "${DEFAULT_RTOS_WEBLINK}"
-+CORESDK_RTOS_FIRMWARE_URL ?= "${DEFAULT_FIRMWARE_URL}"
-+CORESDK_RTOS_FIRMWARE_SHA256SUM ?= "${DEFAULT_FIRMWARE_SHA256SUM}"
-+CORESDK_RTOS_FILE_SUFFIX ?= ""
-+
-+# Common code below
-+S = "${WORKDIR}/lib/"
-+
-+PV = "${CORESDK_RTOS_VERSION_DOT}"
-+
-+SRC_URI = "${CORESDK_RTOS_FIRMWARE_URL}"
-+SRC_URI[sha256sum] = "${CORESDK_RTOS_FIRMWARE_SHA256SUM}"
-+
-+FILES_${PN} += "${base_libdir}"
-+
-+python do_unpack_append() {
-+    import os.path
-+    from os import path
-+    fromfn = d.getVar('DATEH')+"-"+d.getVar('DEFAULT_FIRMWARE_FILE')
-+    tofn = d.getVar('DEFAULT_FIRMWARE_FILE')
-+    if path.exists(fromfn):
-+        os.rename(fromfn, tofn)
-+}
-+
-+do_install() {
-+	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-+	install -d ${D}${base_libdir}
-+	cp ${CP_ARGS} ${S} ${D}
-+}
-+
-+FILES_${PN} = "${base_libdir}"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+INSANE_SKIP_${PN} += "arch"
-+
-+do_compile[noexec] = "1"
 +do_configure[noexec] = "1"
--- 
-2.7.4
++do_compile[noexec] = "1"
++do_install[noexec] = "1"
++
++do_deploy () {
++	install -d ${DEPLOYDIR}
++	install -m 0644 ${TI_RTOS_METADATA_FILE} ${DEPLOYDIR}/
++}
++
++addtask deploy before do_build after do_compile
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
+--------------855AB1FE3C0457B4BE9B4BFF--
