@@ -1,41 +1,42 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.128582.1597995167546696548
+ by mx.groups.io with SMTP id smtpd.web12.128583.1597995169700898590
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 21 Aug 2020 00:32:47 -0700
+ Fri, 21 Aug 2020 00:32:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=upJdarn5;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FeJ0f7xV;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: lokeshvutla@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 07L7Wk6A021532
-	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Aug 2020 02:32:46 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 07L7Wn0s021538
+	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Aug 2020 02:32:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1597995166;
-	bh=oARPR2cF496b48rxneTxxjFrLypkKYuSIWI7alj8UQw=;
+	s=ti-com-17Q1; t=1597995169;
+	bh=x32p6KqcS7VwyGiv0oYQxcDR15YY+Lwg0LNHTPzNDP0=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=upJdarn5rP54XRKlTtyYw1mjMpxE7gZFWDAPCk32WgHpvxQ34zNyEJTuVtBzfSSne
-	 c4q8A+2UDKCkugVewsnJEMozZe4ucAujJG4/Q/KhEhFHrjYMPPg3Gw5TQb89XewYVQ
-	 uIcczTyDE9oHaTzEqbx42iK8m7pq9gWBkj7dx2Hs=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 07L7Wkl4069582
-	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Aug 2020 02:32:46 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	b=FeJ0f7xVCbF2r6O+anjHgmDd4Mq6VP6BxAfhOV34rcTTZx+3vT53GkU6CuZBhxaqC
+	 kpcxTFA07+5iNqJFlnz+phkISV/6+t30UTuPsuDPhnZvjdB8+xuKKdDgQCGon/mCRX
+	 c5kDMB/vCuzYl1lKOttvQeDt3Ob4jB3YGSwzWCCk=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 07L7WnEI051315
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Fri, 21 Aug 2020 02:32:49 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 21
- Aug 2020 02:32:46 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2020 02:32:48 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 21 Aug 2020 02:32:46 -0500
+ Frontend Transport; Fri, 21 Aug 2020 02:32:48 -0500
 Received: from uda0131933.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 07L7Wcai041602;
-	Fri, 21 Aug 2020 02:32:44 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 07L7Wcaj041602;
+	Fri, 21 Aug 2020 02:32:46 -0500
 From: "Lokesh Vutla" <lokeshvutla@ti.com>
 To: <meta-ti@lists.yoctoproject.org>, <denys@ti.com>
 CC: Sekhar Nori <nsekhar@ti.com>, <m-erdahl@ti.com>, <m-karicheri2@ti.com>,
         Lokesh Vutla <lokeshvutla@ti.com>
-Subject: [PATCH 2/3] prueth-fw: Package the firmware images from ti-linux-firmware
-Date: Fri, 21 Aug 2020 13:02:37 +0530
-Message-ID: <20200821073238.18926-3-lokeshvutla@ti.com>
+Subject: [PATCH 3/3] prusw-fw: Package the firmware images from ti-linux-firmware
+Date: Fri, 21 Aug 2020 13:02:38 +0530
+Message-ID: <20200821073238.18926-4-lokeshvutla@ti.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200821073238.18926-1-lokeshvutla@ti.com>
 References: <20200821073238.18926-1-lokeshvutla@ti.com>
@@ -45,29 +46,27 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Directly take the images from ti-linux-firmware instead of using pdk
-Aldo drop build for k2g as firmwares are not yet available.
 
 Signed-off-by: Lokesh Vutla <lokeshvutla@ti.com>
 ---
- recipes-bsp/prueth-fw/prueth-fw_5.2.7.bb     | 38 ++++++++++++++++
- recipes-bsp/prueth-fw/prueth-fw_git.bb       | 47 --------------------
- recipes-kernel/linux/linux-ti-staging_5.4.bb |  1 -
- 3 files changed, 38 insertions(+), 48 deletions(-)
- create mode 100644 recipes-bsp/prueth-fw/prueth-fw_5.2.7.bb
- delete mode 100644 recipes-bsp/prueth-fw/prueth-fw_git.bb
+ recipes-bsp/prusw-fw/prusw-fw_3.0.0.bb | 38 ++++++++++++++++++++++++
+ recipes-bsp/prusw-fw/prusw-fw_git.bb   | 40 --------------------------
+ 2 files changed, 38 insertions(+), 40 deletions(-)
+ create mode 100644 recipes-bsp/prusw-fw/prusw-fw_3.0.0.bb
+ delete mode 100644 recipes-bsp/prusw-fw/prusw-fw_git.bb
 
-diff --git a/recipes-bsp/prueth-fw/prueth-fw_5.2.7.bb b/recipes-bsp/prueth-fw/prueth-fw_5.2.7.bb
+diff --git a/recipes-bsp/prusw-fw/prusw-fw_3.0.0.bb b/recipes-bsp/prusw-fw/prusw-fw_3.0.0.bb
 new file mode 100644
-index 00000000..1847c221
+index 00000000..514237eb
 --- /dev/null
-+++ b/recipes-bsp/prueth-fw/prueth-fw_5.2.7.bb
++++ b/recipes-bsp/prusw-fw/prusw-fw_3.0.0.bb
 @@ -0,0 +1,38 @@
-+DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x and AM335x"
++DESCRIPTION = "PRU Switch firmware for AM57xx, AM437x and AM335x"
 +
 +LICENSE = "TI-TFL"
 +LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
 +
-+PV = "5.2.7"
++PV = "3.0.3"
 +PR = "r1"
 +
 +CLEANBROKEN = "1"
@@ -84,10 +83,10 @@ index 00000000..1847c221
 +S = "${WORKDIR}/git"
 +
 +TARGET = ""
-+TARGET_ti33x = "am335x-pru0-prueth-fw.elf am335x-pru1-prueth-fw.elf"
-+TARGET_ti43x = "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf"
-+TARGET_am57xx-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
-+TARGET_am57xx-hs-evm = "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-fw.elf"
++TARGET_ti33x = "am335x-pru0-prusw-fw.elf am335x-pru1-prusw-fw.elf"
++TARGET_ti43x = "am437x-pru0-prusw-fw.elf am437x-pru1-prusw-fw.elf"
++TARGET_am57xx-evm = "am57xx-pru0-prusw-fw.elf am57xx-pru1-prusw-fw.elf"
++TARGET_am57xx-hs-evm = "am57xx-pru0-prusw-fw.elf am57xx-pru1-prusw-fw.elf"
 +
 +do_install() {
 +	install -d ${D}${base_libdir}/firmware/ti-pruss
@@ -100,13 +99,13 @@ index 00000000..1847c221
 +FILES_${PN} = "${base_libdir}/firmware"
 +
 +INSANE_SKIP_${PN} = "arch"
-diff --git a/recipes-bsp/prueth-fw/prueth-fw_git.bb b/recipes-bsp/prueth-fw/prueth-fw_git.bb
+diff --git a/recipes-bsp/prusw-fw/prusw-fw_git.bb b/recipes-bsp/prusw-fw/prusw-fw_git.bb
 deleted file mode 100644
-index f7718ad2..00000000
---- a/recipes-bsp/prueth-fw/prueth-fw_git.bb
+index 2921fb1d..00000000
+--- a/recipes-bsp/prusw-fw/prusw-fw_git.bb
 +++ /dev/null
-@@ -1,47 +0,0 @@
--DESCRIPTION = "PRU Ethernet firmware for AM57xx, AM437x, AM335x and K2G"
+@@ -1,40 +0,0 @@
+-DESCRIPTION = "PRU Switch firmware for AM57xx"
 -
 -require recipes-ti/includes/ti-paths.inc
 -require recipes-bsp/icss-emac-lld/icss-emac-lld.inc
@@ -118,53 +117,34 @@ index f7718ad2..00000000
 -
 -TI_PDK_COMP = "ti.drv.icss_emac.firmware"
 -
--B = "${S}/icss_dualemac"
+-B = "${S}/icss_switch"
 -
--COMPATIBLE_MACHINE = "am57xx-evm|am57xx-hs-evm|ti43x|ti33x|k2g"
+-COMPATIBLE_MACHINE = "dra7xx"
 -
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
 -DEPENDS = "ti-cgt-pru-native"
 -
 -PRU_VERSION = ""
--PRU_VERSION_ti33x = "REV1"
--PRU_VERSION_ti43x = "REV1"
--PRU_VERSION_am57xx-evm = "REV2"
--PRU_VERSION_am57xx-hs-evm = "REV2"
--PRU_VERSION_k2g = "REV2"
+-PRU_VERSION_dra7xx = "REV2"
 -
 -FW_PREFIX = ""
--FW_PREFIX_ti33x = "am335x"
--FW_PREFIX_ti43x = "am437x"
--FW_PREFIX_am57xx-evm = "am57xx"
--FW_PREFIX_am57xx-hs-evm = "am57xx"
--FW_PREFIX_k2g = "k2g"
+-FW_PREFIX_dra7xx = "am57xx"
+-
 -
 -EXTRA_OEMAKE += "CL_PRU_INSTALL_PATH="${TI_CGT_PRU_INSTALL_DIR}" PRU_VERSION_LIST="${PRU_VERSION}""
 -
 -do_install() {
 -	install -d ${D}${base_libdir}/firmware/ti-pruss
--	install -m 0644 ./elf/${PRU_VERSION}/icss_dualemac_PRU0.elf \
--		${D}${base_libdir}/firmware/ti-pruss/${FW_PREFIX}-pru0-prueth-fw.elf
--	install -m 0644 ./elf/${PRU_VERSION}/icss_dualemac_PRU1.elf \
--		${D}${base_libdir}/firmware/ti-pruss/${FW_PREFIX}-pru1-prueth-fw.elf
+-	install -m 0644 ./elf/${PRU_VERSION}/icss_stp_switch_PRU0.elf \
+-		${D}${base_libdir}/firmware/ti-pruss/${FW_PREFIX}-pru0-prusw-fw.elf
+-	install -m 0644 ./elf/${PRU_VERSION}/icss_stp_switch_PRU1.elf \
+-		${D}${base_libdir}/firmware/ti-pruss/${FW_PREFIX}-pru1-prusw-fw.elf
 -}
 -
 -FILES_${PN} = "${base_libdir}/firmware"
 -
 -INSANE_SKIP_${PN} = "arch"
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-index 3a4fdd86..2a35bf1d 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-@@ -48,7 +48,6 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am57xx-evm = " prueth-fw prusw-fw pr
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am57xx-hs-evm = " prueth-fw prusw-fw pruhsr-fw pruprp-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti43x = " prueth-fw pruhsr-fw pruprp-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_ti33x = " prueth-fw pruhsr-fw pruprp-fw"
--RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_k2g = " prueth-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am65xx = " prueth-fw-am65x"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am65xx-evm = " prueth-fw-am65x-sr2"
- 
 -- 
 2.23.0
 
