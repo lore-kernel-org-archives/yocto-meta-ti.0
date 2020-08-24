@@ -1,64 +1,68 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.57.1598290261420051990
+Received: from mail-il1-f196.google.com (mail-il1-f196.google.com [209.85.166.196])
+ by mx.groups.io with SMTP id smtpd.web10.1998.1598295408740807551
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 24 Aug 2020 10:31:01 -0700
+ Mon, 24 Aug 2020 11:56:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id DF34940BBF;
-	Mon, 24 Aug 2020 17:31:00 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5Jw_hrJ5h7un; Mon, 24 Aug 2020 17:31:00 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CB46740C24;
-	Mon, 24 Aug 2020 17:30:58 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 64A5B174475;
-	Mon, 24 Aug 2020 13:30:56 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH 12/14] Revert "ti-ndk: upgrade 3.61.01.01 -> 3.75.01.01"
-Date: Mon, 24 Aug 2020 13:30:47 -0400
-Message-Id: <1598290249-23943-13-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1598290249-23943-1-git-send-email-denis@denix.org>
-References: <1598290249-23943-1-git-send-email-denis@denix.org>
+ dkim=pass header.i=@openavr-org.20150623.gappssmtp.com header.s=20150623 header.b=XKdeX7PI;
+ spf=none, err=permanent DNS error (domain: openavr.org, ip: 209.85.166.196, mailfrom: troth@openavr.org)
+Received: by mail-il1-f196.google.com with SMTP id j9so8206340ilc.11
+        for <meta-ti@lists.yoctoproject.org>; Mon, 24 Aug 2020 11:56:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=openavr-org.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=pvTuewb8q1H1wmDijuTLwEKyVuM8ZsEIZHMYTKrzh6M=;
+        b=XKdeX7PIeyyt3QZUbGEqKj9UpUn2eWITBXY5xY3hLrF1Nj6BjNiZQ/fNfbaJqurMyQ
+         5+JiyHTgPF9VYSMog0CoXNf0b4+v3lHrGT8MlCPvduqE7If89oVGr01xuSIFHtq63bpr
+         3Y+sAxfkycjU2TrAQvxx+6JlcH/+BYho0IkAVUkdW5UiFRtLQU8uird1KotYHTCqIjLO
+         /nAerX6JOPi4LVZ5ES/xDcSBVkIcZeE2J1Pn4UDh1rZDiegzJIjIwWmyCaPXMp8Ewj6G
+         N7L/9SqaUTqfDtRHw1XEagMATRmLIMVcZPyHv81D0upaF1EnKUCD+8tqC2Gih7XqJvj+
+         jazQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=pvTuewb8q1H1wmDijuTLwEKyVuM8ZsEIZHMYTKrzh6M=;
+        b=hbxSbanzn/5pvLyn2DIaFc3aQo439cJka+lq7nB3vHvCzpST79N3flhzlzbBS9E//O
+         ZN9iGZNRhqohaG6qjQrH8xbG1cV0h6JU3ZsEmlxP+r3GDUix8xBQ3MD4q1zOp61EawYJ
+         lzVMQKarsBd0PwQxMzZutqTIq02h7VOUhPF/46bkSWr0OM8vccDwsZ6wBo41cb+rp/60
+         zIQzm7cW+taHy4pgPLEnGgXgM3aJh54bdwV4w/gs/OoXcB5V1xQ1kF/7K0HlOA6XHT/F
+         3f35Wdth8aHwq3/HLLyhUFzw2E2St74UGKoPfUhmaf75bX3CAoHsaT777UIGCrMyNkxm
+         5RxA==
+X-Gm-Message-State: AOAM5335HB1Wvwdme4kDcgcmi7y7l7wVfyTEn5KBp15hEAsIMEJZVQ6h
+	fNhb38vJBUtG5gZW1IGizEzBIJYOOOXWPyAodRIjJg==
+X-Google-Smtp-Source: ABdhPJy2Af7wqGVSkcaEERgNdcO+eOCjYEUXALbzHiZCDNriQMoYsy59jUvkro207PrNotKZUaaS+WG/3M14gqZVogo=
+X-Received: by 2002:a92:c84f:: with SMTP id b15mr6412560ilq.100.1598295408012;
+ Mon, 24 Aug 2020 11:56:48 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAFMvBt3VaA+vULJFv14t0FprpAt1JY9OXRZg78g+qKL+8yc0hA@mail.gmail.com>
+ <CADVatmM+mZtfUS+K2AtSnpw81P6aXvHkmGd4Khg75czehEijkA@mail.gmail.com>
+In-Reply-To: <CADVatmM+mZtfUS+K2AtSnpw81P6aXvHkmGd4Khg75czehEijkA@mail.gmail.com>
+From: "Theodore A. Roth" <troth@openavr.org>
+Date: Mon, 24 Aug 2020 12:56:37 -0600
+Message-ID: <CAFMvBt181ij1nBbKUf8QsTLKdUoNzPYh7PWJiV0MBx69vkBv9w@mail.gmail.com>
+Subject: Re: [dunfell] ti-soc-termal bandgap termperature reading got broken in 5.4.y kernel
+To: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
+Cc: meta-ti@lists.yoctoproject.org, Eduardo Valentin <edubezval@gmail.com>, 
+	Keerthy <j-keerthy@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hi Sundip,
 
-This reverts commit f0aa865fe966914817652084d50158060a94350d.
----
- recipes-ti/ndk/{ti-ndk_3.75.01.01.bb => ti-ndk_3.61.01.01.bb} | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename recipes-ti/ndk/{ti-ndk_3.75.01.01.bb => ti-ndk_3.61.01.01.bb} (38%)
+On Mon, Aug 24, 2020 at 11:05 AM Sudip Mukherjee
+<sudipm.mukherjee@gmail.com> wrote:
+>
+> There was a problem in that change which has been fixed later.
+> Can you please cherry-pick 6482f5119946 ("thermal: ti-soc-thermal: Fix
+> reversed condition in ti_thermal_expose_sensor()") and try again..
+> It also has been added in v5.4.59
+>
+> This is the link in linus tree.
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=0f348db01fdf128813fdd659fcc339038fb421a4
+>
 
-diff --git a/recipes-ti/ndk/ti-ndk_3.75.01.01.bb b/recipes-ti/ndk/ti-ndk_3.61.01.01.bb
-similarity index 38%
-rename from recipes-ti/ndk/ti-ndk_3.75.01.01.bb
-rename to recipes-ti/ndk/ti-ndk_3.61.01.01.bb
-index 812fbb3..f120f2f 100644
---- a/recipes-ti/ndk/ti-ndk_3.75.01.01.bb
-+++ b/recipes-ti/ndk/ti-ndk_3.61.01.01.bb
-@@ -1,10 +1,12 @@
- require ti-ndk.inc
- 
--PV = "3_75_01_01"
-+PV = "3_61_01_01"
-+PR = "r0"
- 
--LIC_FILES_CHKSUM = "file://manifest_ndk_${PV}.html;md5=ef952a30d0f1640e886bb4b60618f352"
-+LIC_FILES_CHKSUM = "file://manifest_ndk_${PV}.html;md5=871c716abcf52bac5a7c23154eaba3b6"
- 
--SRC_URI[ndkzip.sha256sum] = "fd2318f0490a3eb342bc16812f30394107f098a12704c11cd9a5dc3d5a0bba64"
-+SRC_URI[ndkzip.md5sum] = "87f0494c9faee344fe93ae68e71ca189"
-+SRC_URI[ndkzip.sha256sum] = "3bfca50367432603ebc1d53d9185302bb4fa4558ac766696f086dc7a5a2ccd29"
- 
- INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
--- 
-2.7.4
+Applied that commit to my build and it does indeed fix the issue.
 
+Thank you for the timely response!
+
+Ted Roth
