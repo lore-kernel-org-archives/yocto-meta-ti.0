@@ -1,68 +1,149 @@
-Received: from mail-il1-f196.google.com (mail-il1-f196.google.com [209.85.166.196])
- by mx.groups.io with SMTP id smtpd.web10.1998.1598295408740807551
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.4517.1598317263862488316
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 24 Aug 2020 11:56:49 -0700
+ Mon, 24 Aug 2020 18:01:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@openavr-org.20150623.gappssmtp.com header.s=20150623 header.b=XKdeX7PI;
- spf=none, err=permanent DNS error (domain: openavr.org, ip: 209.85.166.196, mailfrom: troth@openavr.org)
-Received: by mail-il1-f196.google.com with SMTP id j9so8206340ilc.11
-        for <meta-ti@lists.yoctoproject.org>; Mon, 24 Aug 2020 11:56:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=openavr-org.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=pvTuewb8q1H1wmDijuTLwEKyVuM8ZsEIZHMYTKrzh6M=;
-        b=XKdeX7PIeyyt3QZUbGEqKj9UpUn2eWITBXY5xY3hLrF1Nj6BjNiZQ/fNfbaJqurMyQ
-         5+JiyHTgPF9VYSMog0CoXNf0b4+v3lHrGT8MlCPvduqE7If89oVGr01xuSIFHtq63bpr
-         3Y+sAxfkycjU2TrAQvxx+6JlcH/+BYho0IkAVUkdW5UiFRtLQU8uird1KotYHTCqIjLO
-         /nAerX6JOPi4LVZ5ES/xDcSBVkIcZeE2J1Pn4UDh1rZDiegzJIjIwWmyCaPXMp8Ewj6G
-         N7L/9SqaUTqfDtRHw1XEagMATRmLIMVcZPyHv81D0upaF1EnKUCD+8tqC2Gih7XqJvj+
-         jazQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=pvTuewb8q1H1wmDijuTLwEKyVuM8ZsEIZHMYTKrzh6M=;
-        b=hbxSbanzn/5pvLyn2DIaFc3aQo439cJka+lq7nB3vHvCzpST79N3flhzlzbBS9E//O
-         ZN9iGZNRhqohaG6qjQrH8xbG1cV0h6JU3ZsEmlxP+r3GDUix8xBQ3MD4q1zOp61EawYJ
-         lzVMQKarsBd0PwQxMzZutqTIq02h7VOUhPF/46bkSWr0OM8vccDwsZ6wBo41cb+rp/60
-         zIQzm7cW+taHy4pgPLEnGgXgM3aJh54bdwV4w/gs/OoXcB5V1xQ1kF/7K0HlOA6XHT/F
-         3f35Wdth8aHwq3/HLLyhUFzw2E2St74UGKoPfUhmaf75bX3CAoHsaT777UIGCrMyNkxm
-         5RxA==
-X-Gm-Message-State: AOAM5335HB1Wvwdme4kDcgcmi7y7l7wVfyTEn5KBp15hEAsIMEJZVQ6h
-	fNhb38vJBUtG5gZW1IGizEzBIJYOOOXWPyAodRIjJg==
-X-Google-Smtp-Source: ABdhPJy2Af7wqGVSkcaEERgNdcO+eOCjYEUXALbzHiZCDNriQMoYsy59jUvkro207PrNotKZUaaS+WG/3M14gqZVogo=
-X-Received: by 2002:a92:c84f:: with SMTP id b15mr6412560ilq.100.1598295408012;
- Mon, 24 Aug 2020 11:56:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAFMvBt3VaA+vULJFv14t0FprpAt1JY9OXRZg78g+qKL+8yc0hA@mail.gmail.com>
- <CADVatmM+mZtfUS+K2AtSnpw81P6aXvHkmGd4Khg75czehEijkA@mail.gmail.com>
-In-Reply-To: <CADVatmM+mZtfUS+K2AtSnpw81P6aXvHkmGd4Khg75czehEijkA@mail.gmail.com>
-From: "Theodore A. Roth" <troth@openavr.org>
-Date: Mon, 24 Aug 2020 12:56:37 -0600
-Message-ID: <CAFMvBt181ij1nBbKUf8QsTLKdUoNzPYh7PWJiV0MBx69vkBv9w@mail.gmail.com>
-Subject: Re: [dunfell] ti-soc-termal bandgap termperature reading got broken in 5.4.y kernel
-To: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org, Eduardo Valentin <edubezval@gmail.com>, 
-	Keerthy <j-keerthy@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 1888A40C24;
+	Tue, 25 Aug 2020 01:01:03 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rAVcZqkr7EVC; Tue, 25 Aug 2020 01:01:03 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ED40440020;
+	Tue, 25 Aug 2020 01:01:01 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 4482E172DF3;
+	Mon, 24 Aug 2020 21:01:01 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [dunfell/master][PATCH] rtos,gcc-arm-none-eabi: Rename gcc-arm-none-eabi -> gcc-arm-baremetal
+Date: Mon, 24 Aug 2020 21:01:01 -0400
+Message-Id: <1598317261-45888-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-Hi Sundip,
+From: Denys Dmytriyenko <denys@ti.com>
 
-On Mon, Aug 24, 2020 at 11:05 AM Sudip Mukherjee
-<sudipm.mukherjee@gmail.com> wrote:
->
-> There was a problem in that change which has been fixed later.
-> Can you please cherry-pick 6482f5119946 ("thermal: ti-soc-thermal: Fix
-> reversed condition in ti_thermal_expose_sensor()") and try again..
-> It also has been added in v5.4.59
->
-> This is the link in linus tree.
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=0f348db01fdf128813fdd659fcc339038fb421a4
->
+Rename gcc-arm-none-eabi to gcc-arm-baremetal.
+As meta-arm now provides baremetal gcc-arm-none-eabi version 9, and due to layer
+priorities, let's rename gcc-arm-none-eabi to gcc-arm-baremetal to force picking
+the right version for RTOS builds.
 
-Applied that commit to my build and it does indeed fix the issue.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ classes/ti-pdk.bbclass                             |  6 +++---
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb        |  2 +-
+ recipes-bsp/starterware/starterware-rtos_git.bb    |  2 +-
+ ...te.bb => gcc-arm-baremetal_7-2018-q2-update.bb} |  0
+ .../gcc-arm-none-eabi-native_4.9.2015q3.bb         | 23 ----------------------
+ recipes-ti/ipc/ti-ipc-rtos.inc                     |  4 ++--
+ 6 files changed, 7 insertions(+), 30 deletions(-)
+ rename recipes-ti/devtools/{gcc-arm-none-eabi_7-2018-q2-update.bb => gcc-arm-baremetal_7-2018-q2-update.bb} (100%)
+ delete mode 100644 recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
 
-Thank you for the timely response!
+diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
+index 2571234..6831421 100644
+--- a/classes/ti-pdk.bbclass
++++ b/classes/ti-pdk.bbclass
+@@ -3,15 +3,15 @@ require recipes-ti/includes/ti-staging.inc
+ 
+ inherit perlnative
+ 
+-DEPENDS = "ti-xdctools-native ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-none-eabi-native ti-cgt6x-native ti-cgt-pru-native ti-pdk-build-rtos doxygen-native"
++DEPENDS = "ti-xdctools-native ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-baremetal-native ti-cgt6x-native ti-cgt-pru-native ti-pdk-build-rtos doxygen-native"
+ 
+ DEPENDS_append_omap-a15 = " ti-cgt-arm-native"
+ DEPENDS_remove_ti33x = "ti-cgt6x-native"
+ DEPENDS_remove_ti43x = "ti-cgt6x-native"
+ DEPENDS_append_omapl1 = " ti-cgt-arm-native"
+-DEPENDS_remove_am65xx = "gcc-arm-none-eabi-native ti-cgt6x-native"
++DEPENDS_remove_am65xx = "gcc-arm-baremetal-native ti-cgt6x-native"
+ DEPENDS_append_am65xx = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
+-DEPENDS_remove_j7 = "gcc-arm-none-eabi-native"
++DEPENDS_remove_j7 = "gcc-arm-baremetal-native"
+ DEPENDS_append_j7 = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native ti-cgt7x-native"
+ 
+ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index 71c4fce..4812afe 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -3,7 +3,7 @@ require recipes-ti/includes/ti-paths.inc
+ 
+ PR = "${INC_PR}.1"
+ 
+-DEPENDS = "ti-sysbios ti-xdctools-native gcc-arm-none-eabi-native ti-cgt-arm-native ti-cgt6x-native"
++DEPENDS = "ti-sysbios ti-xdctools-native gcc-arm-baremetal-native ti-cgt-arm-native ti-cgt6x-native"
+ 
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
+index 5e3535e..bcac8d4 100644
+--- a/recipes-bsp/starterware/starterware-rtos_git.bb
++++ b/recipes-bsp/starterware/starterware-rtos_git.bb
+@@ -1,6 +1,6 @@
+ require starterware.inc
+ 
+-DEPENDS = "gcc-arm-none-eabi-native ti-pdk-build-rtos ti-xdctools-native"
++DEPENDS = "gcc-arm-baremetal-native ti-pdk-build-rtos ti-xdctools-native"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ 
+diff --git a/recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb b/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
+similarity index 100%
+rename from recipes-ti/devtools/gcc-arm-none-eabi_7-2018-q2-update.bb
+rename to recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
+diff --git a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb b/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
+deleted file mode 100644
+index 1fe5c52..0000000
+--- a/recipes-ti/devtools/gcc-arm-none-eabi-native_4.9.2015q3.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "Baremetal GCC for ARM"
+-LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
+-
+-LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=cba77c7fde3ed13e866b04a2f3d93918"
+-
+-inherit native
+-require recipes-ti/includes/ti-paths.inc
+-
+-SRC_URI = "https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2;name=gcc-arm-none"
+-
+-SRC_URI[gcc-arm-none.md5sum] = "8a4a74872830f80c788c944877d3ad8c"
+-SRC_URI[gcc-arm-none.sha256sum] = "c50078bfbd29e6c15615900e746f4d0acde917338e55860b0f145f57387c12ab"
+-
+-S = "${WORKDIR}/gcc-arm-none-eabi-4_9-2015q3"
+-
+-do_install() {
+-    install -d ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
+-    cp -r ${S}/. ${D}${GCC_ARM_NONE_TOOLCHAIN_RECIPE}
+-}
+-
+-FILES_${PN} = "${GCC_ARM_NONE_TOOLCHAIN_RECIPE}/*"
+-
+-INSANE_SKIP_${PN} = "already-stripped"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index a68ba80..b6b7892 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -42,11 +42,11 @@ RELEASE_SUFFIX = ""
+ PR = "${INC_PR}.r0"
+ 
+ DEPENDS_append_keystone = " ti-cgt6x-native \
+-                            gcc-arm-none-eabi-native \
++                            gcc-arm-baremetal-native \
+ "
+ DEPENDS_append_omap-a15 = " ti-cgt6x-native \
+                             ti-cgt-arm-native \
+-                            gcc-arm-none-eabi-native \
++                            gcc-arm-baremetal-native \
+ "
+ DEPENDS_append_omapl138 = " ti-cgt6x-native \
+ "
+-- 
+2.7.4
 
-Ted Roth
