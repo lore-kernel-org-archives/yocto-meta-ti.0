@@ -1,41 +1,44 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.2452.1598984222033767572
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.2588.1598984228649253535
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 01 Sep 2020 11:17:02 -0700
+ Tue, 01 Sep 2020 11:17:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rwcaGCHU;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: dmurphy@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 081IH0r0074736
-	for <meta-ti@lists.yoctoproject.org>; Tue, 1 Sep 2020 13:17:00 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=oELISPQp;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 081IH64a101356
+	for <meta-ti@lists.yoctoproject.org>; Tue, 1 Sep 2020 13:17:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1598984220;
-	bh=QVCqelpaenI1p9bN3/jFwYY0FProqT68xPjDYby2wKA=;
-	h=From:To:CC:Subject:Date;
-	b=rwcaGCHUs9raoAnE5npIaMkQmciaE9W+e8A82aOAyInmjcetb14VbF4/AKFOScczf
-	 496E/aFLBrQaOw8pHJ9zjIyhAjEZxpjeaoFGoOHMHP73J+CsFp26BWdlU/WmXMObp+
-	 Z2fkPjBP9s+sosdPo3Q3nrFQzGhmSA/Udzma+190=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id 081IH04R027372
-	for <meta-ti@lists.yoctoproject.org>; Tue, 1 Sep 2020 13:17:00 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1598984226;
+	bh=2br+pgLPElCq8qmeOngEl3N7vB8QObU80Luo+grXXV0=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=oELISPQpqCdCW1ddgnVhN8WYEFtCaQvtUJdIU+3WKIh6QzdzfD1aCEgzGiXaL1MeO
+	 eoK/nctRp1KKipbhfS/rqYiA0Gx/daLe8ra8LiJcgc4xNzDoO6FhggJj+EQNSc+pwk
+	 8irJeA1IKi3HmEFoV5+PgU4G1BOsgQgQNpfAnns8=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 081IH5Cj072081
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 1 Sep 2020 13:17:06 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 1 Sep
- 2020 13:17:00 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 13:17:05 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 1 Sep 2020 13:17:00 -0500
+ Frontend Transport; Tue, 1 Sep 2020 13:17:05 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 081IH0jj095195;
-	Tue, 1 Sep 2020 13:17:00 -0500
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 081IH5oN095896;
+	Tue, 1 Sep 2020 13:17:05 -0500
 From: "Dan Murphy" <dmurphy@ti.com>
 To: <denys@ti.com>, <meta-ti@lists.yoctoproject.org>
 CC: Dan Murphy <dmurphy@ti.com>
-Subject: [PATCH 1/3] u-boot-ti-staging: Update to tag 07.01.00.0001
-Date: Tue, 1 Sep 2020 13:16:24 -0500
-Message-ID: <20200901181626.23308-1-dmurphy@ti.com>
+Subject: [PATCH 2/3] linux-ti-staging: Update to the tag 07.01.000.01 and rt kernel moves to 5.4.61
+Date: Tue, 1 Sep 2020 13:16:25 -0500
+Message-ID: <20200901181626.23308-2-dmurphy@ti.com>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20200901181626.23308-1-dmurphy@ti.com>
+References: <20200901181626.23308-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Transfer-Encoding: 8bit
@@ -43,23 +46,35 @@ Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging-rt_5.4.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_5.4.bb    | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-index 67d13e4cd4a9..33975aa0f56d 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+index 4a914864f493..9c050d41bcb4 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.4:"
  
--PR = "r15"
-+PR = "r16"
+ BRANCH = "ti-rt-linux-5.4.y"
  
- BRANCH = "ti-u-boot-2020.01"
+-SRCREV = "880e291bb8727a258e8f86a43ebebbdf946fe0c3"
+-PV = "5.4.58+git${SRCPV}"
++SRCREV = "fdb06e15aaf440ec4a982e39a4925df082cb1997"
++PV = "5.4.61+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+index 2a35bf1d4650..97d11675bea2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+@@ -60,7 +60,7 @@ S = "${WORKDIR}/git"
  
--SRCREV = "78513625145f2ae2e67309b53472b0c562ad4807"
-+SRCREV = "f2cd62a77d9b85005ff5a60e3839992ace0494b8"
+ BRANCH = "ti-linux-5.4.y"
+ 
+-SRCREV = "da26e63e96f403b7415fdf7e0b45eeaba63ddbe0"
++SRCREV = "d1b11ffdf0223db4c96202837af17234f118e69e"
+ PV = "5.4.58+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
 2.28.0
 
