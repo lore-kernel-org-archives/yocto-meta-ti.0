@@ -1,50 +1,53 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.4356.1600889708977398304
+ by mx.groups.io with SMTP id smtpd.web10.5522.1600908374635346063
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 23 Sep 2020 12:35:09 -0700
+ Wed, 23 Sep 2020 17:46:15 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id F11F840C29;
-	Wed, 23 Sep 2020 19:35:07 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BA32D40BD1;
+	Thu, 24 Sep 2020 00:46:13 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4C1nsbTVGUiy; Wed, 23 Sep 2020 19:35:07 +0000 (UTC)
+	with ESMTP id hNNME_7DTMou; Thu, 24 Sep 2020 00:46:13 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CFD6540AB7;
-	Wed, 23 Sep 2020 19:35:06 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A444740B96;
+	Thu, 24 Sep 2020 00:46:12 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 17BFF1741D0;
-	Wed, 23 Sep 2020 15:35:06 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 06648173BAD;
+	Wed, 23 Sep 2020 20:46:12 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [dunfell/master][PATCH] README: add Dan Murphy to maintainers list
-Date: Wed, 23 Sep 2020 15:35:05 -0400
-Message-Id: <1600889705-37731-1-git-send-email-denis@denix.org>
+Subject: [dunfell/master][PATCH] README: document dependency on meta-arm
+Date: Wed, 23 Sep 2020 20:46:11 -0400
+Message-Id: <1600908371-38924-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- README | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ README | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/README b/README
-index e6d342b..63eb823 100644
+index 63eb823..3a1453b 100644
 --- a/README
 +++ b/README
-@@ -24,4 +24,6 @@ meta-ti@lists.yoctoproject.org
- Please note - meta-ti mailing list requires subscription for posting:
- https://lists.yoctoproject.org/g/meta-ti
+@@ -10,6 +10,10 @@ URI: git://git.openembedded.org/openembedded-core
+ layers: meta
+ branch: master
  
--Maintainers: Denys Dmytriyenko <denys@ti.com>
-+Maintainers:
-+Dan Murphy <dmurphy@ti.com>
-+Denys Dmytriyenko <denys@ti.com>
++URI: git://git.yoctoproject.org/meta-arm
++layers: meta-arm
++branch: master
++
+ 
+ The base BSP part of meta-ti should work with different OpenEmbedded/Yocto
+ distributions and layer stacks, such as:
 -- 
 2.7.4
 
