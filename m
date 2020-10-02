@@ -1,81 +1,82 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.2486.1601595849801997906
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.7777.1601628000619175208
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 01 Oct 2020 16:44:10 -0700
+ Fri, 02 Oct 2020 01:40:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=bNJ1RbbS;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 091Ni9nH006295
-	for <meta-ti@lists.yoctoproject.org>; Thu, 1 Oct 2020 18:44:09 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=tzOmqWTI;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rogerq@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0928dxYT023735
+	for <meta-ti@lists.yoctoproject.org>; Fri, 2 Oct 2020 03:39:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1601595849;
-	bh=PZMC3vlZF7Cwzs+Y7EBhNLff6JDtH3Xu9JdZR+FpRKg=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=bNJ1RbbSF0MeVDxnjHPmdjFKpkA9eb8OCsPMdIsmBnczfyp44DVbF7L64Z/AkE3ac
-	 QLueK9vz5iK1pFfg9zGCLRQkC/h0xX5jcG6FmCkK0zNVtTjSh1Xye54+NSHSFljgQ4
-	 7Vs3LWtlIfF0i/Pdby7jJNgJCufeRV09O8fGcG74=
+	s=ti-com-17Q1; t=1601627999;
+	bh=eTRWqPG9zcCof6JcdS4LbabolUcKK2tA6YiAXcSV/oc=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=tzOmqWTIxMywJZlXdZmATN+xH63Y0zZHBxjMHrgF1Hr7rN6brI1UOaW78FCEg8EUQ
+	 x58cBhZewsj+xTUYhY0DZw3/ZBItyrCyrvA6nSEBryyzWxzSjiXDIFmYqcpbiglTkL
+	 CCXqQ44Waqbnu1/I/GIAb+Jc7jCDinuZVEQWLqbU=
 Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 091Ni9Af109265
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0928dxGB128025
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 1 Oct 2020 18:44:09 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE108.ent.ti.com
+	for <meta-ti@lists.yoctoproject.org>; Fri, 2 Oct 2020 03:39:59 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
  (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 1 Oct
- 2020 18:44:08 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 2 Oct
+ 2020 03:39:59 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 1 Oct 2020 18:44:08 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 091Ni89t089926;
-	Thu, 1 Oct 2020 18:44:08 -0500
-Date: Thu, 1 Oct 2020 19:44:08 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Roger Quadros <rogerq@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <nsekhar@ti.com>, <vigneshr@ti.com>,
-        <lokeshvutla@ti.com>, <dmurphy@ti.com>
-Subject: Re: [meta-ti][dunfell/master PATCH 2/2] prusw-fw: Update the firmware to 3.1.4 version
-Message-ID: <20201001234408.GP7434@beryl>
-References: <20201001135321.7470-1-rogerq@ti.com>
- <20201001135321.7470-3-rogerq@ti.com>
+ Frontend Transport; Fri, 2 Oct 2020 03:39:58 -0500
+Received: from [192.168.2.14] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0928duTF081366;
+	Fri, 2 Oct 2020 03:39:57 -0500
+Subject: Re: [PATCH] prueth-fw-am65x-sr2: update AM65 sr2.0 PRU ethernet firmware
+To: Denys Dmytriyenko <denys@ti.com>
+CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
+        "Nori,
+ Sekhar" <nsekhar@ti.com>, "Murphy, Dan" <dmurphy@ti.com>
+References: <20200925075118.4861-1-rogerq@ti.com>
+ <20200925203812.GE14006@beryl> <21f6545c-2a2b-31f3-4cc6-ea89024618ff@ti.com>
+ <195ce1128d74495e99012d7c695c213c@ti.com> <20201001234203.GN7434@beryl>
+From: "Roger Quadros" <rogerq@ti.com>
+Message-ID: <4d077b95-8e57-7fb9-2743-fb7fe700a84c@ti.com>
+Date: Fri, 2 Oct 2020 11:39:55 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201001135321.7470-3-rogerq@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <20201001234203.GN7434@beryl>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 01, 2020 at 04:53:21PM +0300, Roger Quadros wrote:
-> Update the firmware to version 3.1.4
+Denys,
+
+On 02/10/2020 02:42, Denys Dmytriyenko wrote:
+> Roger,
 > 
-> Signed-off-by: Roger Quadros <rogerq@ti.com>
+> I think SRCREV should be 534ae9bba2481d76b3284a6df46baaffb8688e57:
+> https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/commit/?h=ti-linux-firmware&id=534ae9bba2481d76b3284a6df46baaffb8688e57
 
-Reviewed-by: Denys Dmytriyenko <denys@ti.com>
+You are right. I made a copy paste error.
 
+I think we can drop this patch since the f/w version got bumped again.
+I will send a fresh patch once the patch is accepted in ti-linux-firmware
+http://dflvsu0004.dal.design.ti.com/patch/57720/
 
-> ---
->  recipes-bsp/prusw-fw/{prusw-fw_3.0.3.bb => prusw-fw_3.1.4.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename recipes-bsp/prusw-fw/{prusw-fw_3.0.3.bb => prusw-fw_3.1.4.bb} (94%)
 > 
-> diff --git a/recipes-bsp/prusw-fw/prusw-fw_3.0.3.bb b/recipes-bsp/prusw-fw/prusw-fw_3.1.4.bb
-> similarity index 94%
-> rename from recipes-bsp/prusw-fw/prusw-fw_3.0.3.bb
-> rename to recipes-bsp/prusw-fw/prusw-fw_3.1.4.bb
-> index 6eac87c5..b8897e4b 100644
-> --- a/recipes-bsp/prusw-fw/prusw-fw_3.0.3.bb
-> +++ b/recipes-bsp/prusw-fw/prusw-fw_3.1.4.bb
-> @@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->  
-> -SRCREV = "7ba9722b74608ad4472790972917e1205eb3c049"
-> +SRCREV = "b19bf13a16d7f5c1260cf4d48cf967e5c7e15128"
->  BRANCH ?= "ti-linux-firmware"
->  
->  SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-> -- 
-> Texas Instruments Finland Oy, Porkkalankatu 22, 00180 Helsinki.
-> Y-tunnus/Business ID: 0615521-4. Kotipaikka/Domicile: Helsinki
+> Also, do you want to update PV from 2.2.0.2-rc1 to 2.2.4.2?
 > 
+
+currently it is
+PV = "2.2.0.1+2.2.0.2-rc1"
+
+So for the new patch it should be
+PV = "2.2.7.2"
+correct?
+
+cheers,
+-roger
+-- 
+Texas Instruments Finland Oy, Porkkalankatu 22, 00180 Helsinki.
+Y-tunnus/Business ID: 0615521-4. Kotipaikka/Domicile: Helsinki
