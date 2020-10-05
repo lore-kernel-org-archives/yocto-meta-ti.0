@@ -1,90 +1,61 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.1734.1601923486293144870
+ by mx.groups.io with SMTP id smtpd.web12.1855.1601923819395079153
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 05 Oct 2020 11:44:46 -0700
+ Mon, 05 Oct 2020 11:50:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=q9+GpTMn;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095IijZZ067383
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:44:45 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=h/encuXK;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095IoIDB069351
+	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:50:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1601923485;
-	bh=Xqo2GotMCta/F1CR0XtaOawpWgg+pDQ9HZq6pXKl5yo=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=q9+GpTMnq1/HHdaOhvCinJl5yhh/Am2BGLtQHyHYvqBD1in4XTFQ6F/wXd/8uocJf
-	 y7ythUJ2p91h/y5JZspGjVfrpTZADDNhxoBhDu7FsK9srACeAdn9dl2vf42Qg0n+w+
-	 WcZzfSSPIAopRhQ5zchEV2/EjWRzlaNQBtOzTp6w=
+	s=ti-com-17Q1; t=1601923818;
+	bh=6Yl0Xg4Tejrj/m/e3kYbmMq/4zswLiJOV6OdtpFNgGk=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=h/encuXKdlMj+srYy9IQecPsVr5wl3xQFA+XW+d0aRSlJmBqGxwiDSPcE3igBjw6k
+	 02DY6QQbYPNZhMmWyfU8uge7UazpUkQPgQCA2tKbu3Kn6AKqEdvw6zV2oOoVQaFfPf
+	 6URmMtr/l7w8CC0cWFlS7nWFWCjJVfXkFIitjDco=
 Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095Iij6q035679
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095IoIjb067644
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:44:45 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
+	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:50:18 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
  (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 5 Oct
- 2020 13:44:45 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 13:50:18 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 5 Oct 2020 13:44:45 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 095IiiTB022445;
-	Mon, 5 Oct 2020 13:44:45 -0500
-Date: Mon, 5 Oct 2020 14:44:44 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Dan Murphy <dmurphy@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>
+ Frontend Transport; Mon, 5 Oct 2020 13:50:18 -0500
+Received: from [10.250.37.2] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 095IoILn013627;
+	Mon, 5 Oct 2020 13:50:18 -0500
 Subject: Re: [PATCH v2] prueth-fw-am65x-sr2: Updating firmware to 02.02.07.02
-Message-ID: <20201005184444.GO7434@beryl>
+To: Denys Dmytriyenko <denys@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>
 References: <20201005183853.17882-1-dmurphy@ti.com>
+ <20201005184444.GO7434@beryl>
+From: "Dan Murphy" <dmurphy@ti.com>
+Message-ID: <124775fa-3f59-42d2-6751-21f9a396a0e1@ti.com>
+Date: Mon, 5 Oct 2020 13:50:13 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201005183853.17882-1-dmurphy@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <20201005184444.GO7434@beryl>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On Mon, Oct 05, 2020 at 01:38:53PM -0500, Dan Murphy wrote:
-> From: "Dan Murphy via Lists.Yoctoproject.Org" <dmurphy=ti.com@lists.yoctoproject.org>
+Denys
 
-Hmm, I don't believe mailing list is supposed to mangle this part in the body, 
-only the headers... E.g. the earlier patch from Praveen had this correct. You 
-might want to check your local settings?
+On 10/5/20 1:44 PM, Denys Dmytriyenko wrote:
+> On Mon, Oct 05, 2020 at 01:38:53PM -0500, Dan Murphy wrote:
+>> From: "Dan Murphy via Lists.Yoctoproject.Org" <dmurphy=ti.com@lists.yoctoproject.org>
+> Hmm, I don't believe mailing list is supposed to mangle this part in the body,
+> only the headers... E.g. the earlier patch from Praveen had this correct. You
+> might want to check your local settings?
 
+I will check and clean it up as needed.
 
-> Signed-off-by: Dan Murphy <dmurphy@ti.com>
-
-Otherwise the patch looks good
-
-Reviewed-by: Denys Dmytriyenko <denys@ti.com>
-
-
-> ---
->  recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-> index 6e17c4aa5c7c..c66bee80d79c 100644
-> --- a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-> +++ b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-> @@ -3,7 +3,7 @@ SUMMARY = "PRU Ethernet firmware for AM65xx SR2.0"
->  LICENSE = "TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
->  
-> -PV = "2.2.0.1+2.2.0.2-rc1"
-> +PV = "02.02.07.02"
->  
->  CLEANBROKEN = "1"
->  
-> @@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "am65xx-evm"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->  
-> -SRCREV = "ea4bf53ba0a4a30bb7e0e8b6138fdb22fe50372a"
-> +SRCREV = "c911bcec682ef053a15f9c7d5867a0dd2da2632b"
->  BRANCH ?= "ti-linux-firmware"
->  
->  SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-> -- 
-> 2.28.0.585.ge1cfff676549
-> 
+Dan
