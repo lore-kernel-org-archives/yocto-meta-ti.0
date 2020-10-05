@@ -1,70 +1,79 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.36982.1601909259631171515
+ by mx.groups.io with SMTP id smtpd.web11.12.1601919393446891425
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 05 Oct 2020 07:47:39 -0700
+ Mon, 05 Oct 2020 10:36:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lhCsCUkh;
- spf=none, err=permanent DNS error (domain: swubn03, ip: 198.47.19.141, mailfrom: a0389345@swubn03)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095Elcee069110
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 09:47:38 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=i1xpMOYz;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095HaWAk002175
+	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 12:36:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1601909258;
-	bh=/fwMl6/qRUdqeMGglb82IHXCvZI73MnDbVSffFsHd5U=;
-	h=From:To:CC:Subject:Date;
-	b=lhCsCUkhoC3bAUtH+O03yfMDwGeTAKkhR9JLv1DBbZdNu5AR2hLfhx7J10u0Jlsqd
-	 Wd5mUJzj/6ZqZAnnNropCO5fdKqyRwubBzafVP8tRWhP8rGtWnMymT8VgVlf3eGXTC
-	 gIiqpGJoSt8tEUEIP+peihmE5FqlUuwNHj/D3at0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095Elco3033731
+	s=ti-com-17Q1; t=1601919392;
+	bh=u85H8ZZ5gphtJvSTn8OLR2aV9XSsYtRfOm0DC6by4xM=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=i1xpMOYzVzJ7MUnuZdAr2ONKPbZci/yI1woRUapdkKPcAQajBXrdyXyAyB81dAish
+	 xP72wOj+UVuZugkkp/HyUmQW3HQZuelmFyUNGEqQOpS0eiSiXj15GkyKITpfDc17X2
+	 LA11GxFB+pBMZ/cUC2oW0Vg8EqM2GZ6K2CttmkCw=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095HaWbU114979
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 09:47:38 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 12:36:32 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 5 Oct
- 2020 09:47:38 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 12:36:32 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 5 Oct 2020 09:47:38 -0500
-Received: from swubn03 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 095ElbqM110754;
-	Mon, 5 Oct 2020 09:47:38 -0500
-Received: from a0389345 by swubn03 with local (Exim 4.90_1)
-	(envelope-from <a0389345@swubn03>)
-	id 1kPRm5-0000Jm-0i; Mon, 05 Oct 2020 20:17:37 +0530
-From: prao@ti.com
-To: <meta-ti@lists.yoctoproject.org>, <denys@ti.com>, <dmurphy@ti.com>
+ Frontend Transport; Mon, 5 Oct 2020 12:36:32 -0500
+Received: from [10.250.37.2] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 095HaVCY128276;
+	Mon, 5 Oct 2020 12:36:31 -0500
+Subject: Re: [meta-ti][master][patch][v2] ti-sci-fw: update imggen SRCREV to the latest
+To: <prao@ti.com>, <meta-ti@lists.yoctoproject.org>, <denys@ti.com>
 CC: <nikhil.nd@ti.com>, <vigneshr@ti.com>, <shyam.jagannathan@ti.com>,
-        <piyali_g@ti.com>, <l-weaver@ti.com>, Praveen Rao <prao@ti.com>
-Subject: [meta-ti][master][patch][v2] ti-sci-fw: update imggen SRCREV to the latest
-Date: Mon, 5 Oct 2020 20:16:11 +0530
-Message-ID: <20201005144611.31380-1-prao@ti.com>
-X-Mailer: git-send-email 2.17.1
+        <piyali_g@ti.com>, <l-weaver@ti.com>
+References: <20201005144611.31380-1-prao@ti.com>
+From: "Dan Murphy" <dmurphy@ti.com>
+Message-ID: <00b5a4c7-4ad5-19f0-d502-54820e145e11@ti.com>
+Date: Mon, 5 Oct 2020 12:36:26 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20201005144611.31380-1-prao@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-From: Praveen Rao <prao@ti.com>
+Praveen
 
-Signed-off-by: Praveen Rao <prao@ti.com>
----
- recipes-bsp/ti-sci-fw/ti-sci-fw.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 10/5/20 9:46 AM, prao@ti.com wrote:
+> From: Praveen Rao <prao@ti.com>
+>
+> Signed-off-by: Praveen Rao <prao@ti.com>
+> ---
+>   recipes-bsp/ti-sci-fw/ti-sci-fw.inc | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> index 183ac8a7..7d278815 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> @@ -7,7 +7,7 @@ PV = "2020.07-rc3"
+>   
+>   SRCREV = "f5438e998a7a8d23722fa4dcd1cdb62dec7a41d2"
+>   BRANCH ?= "ti-linux-firmware"
+> -SRCREV_imggen = "5b4d37b9bf41d58ff8c2f8dc98e5dac25e69ec56"
+> +SRCREV_imggen = "09256d5c21e6281d224646c1d4163d4dd0925238"
+>   SRCREV_FORMAT = "imggen"
+>   
+>   SRC_URI = " \
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-index 183ac8a7..7d278815 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-@@ -7,7 +7,7 @@ PV = "2020.07-rc3"
- 
- SRCREV = "f5438e998a7a8d23722fa4dcd1cdb62dec7a41d2"
- BRANCH ?= "ti-linux-firmware"
--SRCREV_imggen = "5b4d37b9bf41d58ff8c2f8dc98e5dac25e69ec56"
-+SRCREV_imggen = "09256d5c21e6281d224646c1d4163d4dd0925238"
- SRCREV_FORMAT = "imggen"
- 
- SRC_URI = " \
--- 
-2.17.1
+This failed to build for am65evm
+
+http://lcpd.gt.design.ti.com/builds/arago-dunfell-next/prod/am65xx-evm/145408/logs/am65xx-evm-error-logs/ti-sci-fw_2020.07-rc3-r1_do_compile.log
+
+Dan
 
