@@ -1,81 +1,78 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.1503.1601922993980212902
+ by mx.groups.io with SMTP id smtpd.web10.1565.1601923140255154704
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 05 Oct 2020 11:36:34 -0700
+ Mon, 05 Oct 2020 11:39:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=BLt5GhrP;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=aKFlFKZd;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095IaXDA064436
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:36:33 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095IcxGe065366;
+	Mon, 5 Oct 2020 13:38:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1601922993;
-	bh=zwiNTrBNEHMjOBqgnfB4FJy68674G/odiYwVk0SNXNU=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=BLt5GhrPFjTp7tA68U1r0fo7pxEXsRWKYj61UOXJsBWLzgO6KkNwg4lCnh3t864A/
-	 B1wBJXLMyhsPFpwVwQUv2uPSNcfG96QdvvLJC7/eV7ZHRix99aGH94Q8/5bigReSfp
-	 XNTjRr+99CYS7YFZmKKL+D2/gMe1ldnnfv67a9QM=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095IaXhA022630
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:36:33 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1601923139;
+	bh=UvZalYHwibW9AtmxzBdmRcqyobhs76lmnpmkFIulGoU=;
+	h=From:To:CC:Subject:Date;
+	b=aKFlFKZd5z5kchbmGOfDC0wk0ahypSx/7Rz2hjL9UyK+rjlDS38lFZK0z3boey/Xi
+	 ihyvPuRuh7Ri9OVuMteUVwKgtItL5VD56GfzGoxhNFXkr/p3/H/2ZWF2o3+vexBlMY
+	 2Sbbw4QJBhefSP6uyy66m1X++lYqwbhbpew8vef4=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095Icxtn026247
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 5 Oct 2020 13:38:59 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 5 Oct
- 2020 13:36:33 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 13:38:59 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 5 Oct 2020 13:36:32 -0500
-Received: from [10.250.37.2] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 095IaWQe126732;
-	Mon, 5 Oct 2020 13:36:32 -0500
-Subject: Re: [PATCH] prueth-fw-am65x-sr2: Updating firmware to 02.02.07.02
-To: Denys Dmytriyenko <denys@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20201005182648.21308-1-dmurphy@ti.com>
- <20201005183409.GN7434@beryl>
+ Frontend Transport; Mon, 5 Oct 2020 13:38:59 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 095IcwuV104056;
+	Mon, 5 Oct 2020 13:38:59 -0500
 From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <b863ba83-b520-08e4-7761-679fadd70391@ti.com>
-Date: Mon, 5 Oct 2020 13:36:27 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+To: <denys@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: "Dan Murphy via Lists.Yoctoproject.Org"
+	<dmurphy=ti.com@lists.yoctoproject.org>,
+        Dan Murphy <dmurphy@ti.com>
+Subject: [PATCH v2] prueth-fw-am65x-sr2: Updating firmware to 02.02.07.02
+Date: Mon, 5 Oct 2020 13:38:53 -0500
+Message-ID: <20201005183853.17882-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-In-Reply-To: <20201005183409.GN7434@beryl>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 095IaXDA064436
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Denys
+From: "Dan Murphy via Lists.Yoctoproject.Org" <dmurphy=ti.com@lists.yoctoproject.org>
 
-On 10/5/20 1:34 PM, Denys Dmytriyenko wrote:
-> On Mon, Oct 05, 2020 at 01:26:48PM -0500, Dan Murphy wrote:
->> Signed-off-by: Dan Murphy <dmurphy@ti.com>
->> ---
->>   recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb b/recipe=
-s-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
->> index 6e17c4aa5c7c..b4d7ae8b2576 100644
->> --- a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
->> +++ b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
->> @@ -3,7 +3,7 @@ SUMMARY =3D "PRU Ethernet firmware for AM65xx SR2.0"
->>   LICENSE =3D "TI-TFL"
->>   LIC_FILES_CHKSUM =3D "file://LICENSE.ti;md5=3Db5aebf0668bdf956212592=
-88c4a46d76"
->>  =20
->> -PV =3D "2.2.0.1+2.2.0.2-rc1"
->> +PV =3D "02.02.07.02+02.02.07.02-rc1"
-> This is not an RC, I believe it is final 2.2.7.2 or 02.02.07.02:
->
-> +PV =3D "02.02.07.02"
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
+---
+ recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Yes this is 02.02.07.02 final.=C2=A0 Wasn't sure about the rc part.
-
-I will send v2
-
-Dan
+diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
+index 6e17c4aa5c7c..c66bee80d79c 100644
+--- a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
++++ b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
+@@ -3,7 +3,7 @@ SUMMARY = "PRU Ethernet firmware for AM65xx SR2.0"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+ 
+-PV = "2.2.0.1+2.2.0.2-rc1"
++PV = "02.02.07.02"
+ 
+ CLEANBROKEN = "1"
+ 
+@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "am65xx-evm"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "ea4bf53ba0a4a30bb7e0e8b6138fdb22fe50372a"
++SRCREV = "c911bcec682ef053a15f9c7d5867a0dd2da2632b"
+ BRANCH ?= "ti-linux-firmware"
+ 
+ SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+-- 
+2.28.0.585.ge1cfff676549
 
