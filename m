@@ -1,36 +1,37 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.1124.1601922046753032698
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.1178.1601922177314084618
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 05 Oct 2020 11:20:47 -0700
+ Mon, 05 Oct 2020 11:22:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=y29JAbCi;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: vigneshr@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095IKk8t017577
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:20:46 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=sNp4mezC;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: vigneshr@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 095IMux1059362
+	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:22:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1601922046;
-	bh=zjLZrRmcfZckS4jaM6UyUzCkcQoOAVe1qsSqQGWGGoE=;
+	s=ti-com-17Q1; t=1601922176;
+	bh=QfbcjJcsK4tbmNd+y1oLVe6agCrF8Iw73GMKIfx0jVE=;
 	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=y29JAbCiV6c51HFvtfi/OmZhSgKcdvVJQNarvlpr+7fAU8XlhC89AsatUnuREjpvR
-	 pgQax7FQ2IovFjjXyWYO7pgtia4+nPUUVj23nn3LHjQZwJqlcGyntSBvLZaAYaa/+Q
-	 IrE6F/Hke+Ex7eIf8BfGcaLS/0B1IPYcfRo2IZ5M=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095IKkth044714
+	b=sNp4mezCpIarei8Eq44PLUav5AG7bT0rMqqdFYlorjF8z7Lk/GNvmQxvvWca8YOcu
+	 RlQDnbALTax8yXU1q6cxhbFQwG9Xst652jtq9Kxx0nGwE2o9ftCEIg+aIF0ElvjsqC
+	 odPTLz+YLtYILYaE5l7uLdihe2zQBT7hHSlYmeJc=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 095IMuRN093091
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:20:46 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Mon, 5 Oct 2020 13:22:56 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 5 Oct
- 2020 13:20:45 -0500
+ 2020 13:22:56 -0500
 Received: from DFLE109.ent.ti.com ([fe80::e4e5:c81b:7525:c9b2]) by
  DFLE109.ent.ti.com ([fe80::e4e5:c81b:7525:c9b2%17]) with mapi id
- 15.01.1979.003; Mon, 5 Oct 2020 13:20:45 -0500
+ 15.01.1979.003; Mon, 5 Oct 2020 13:22:56 -0500
 From: "Vignesh Raghavendra" <vigneshr@ti.com>
 To: "Rao, Praveen" <prao@ti.com>, "Murphy, Dan" <dmurphy@ti.com>,
         "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
         "Dmytriyenko, Denys" <denys@ti.com>,
-        "Goswami, Piyali" <piyali_g@ti.com>
+        "Goswami, Piyali" <piyali_g@ti.com>,
+        "Bajjuri, Praneeth" <praneeth@ti.com>
 CC: "Devshatwar, Nikhil" <nikhil.nd@ti.com>,
         "Jagannathan, Shyam"
 	<shyam.jagannathan@ti.com>,
@@ -38,25 +39,37 @@ CC: "Devshatwar, Nikhil" <nikhil.nd@ti.com>,
 Subject: Re: [meta-ti][master][patch][v2] ti-sci-fw: update imggen SRCREV to the latest
 Thread-Topic: [meta-ti][master][patch][v2] ti-sci-fw: update imggen SRCREV to
  the latest
-Thread-Index: AQHWmyZ4h8uGVd72I0K+qlOpBmA/JKmJmZ4AgAAIsoD//6+DSg==
-Date: Mon, 5 Oct 2020 18:20:45 +0000
-Message-ID: <f20e91bca4234eae87242f76e9276d6e@ti.com>
+Thread-Index: AQHWmyZ4h8uGVd72I0K+qlOpBmA/JKmJmZ4AgAAIsoD//6+DSoAAAIUw
+Date: Mon, 5 Oct 2020 18:22:56 +0000
+Message-ID: <bfe66a0f14d04073bc24d4d91b52d230@ti.com>
 References: <20201005144611.31380-1-prao@ti.com>
- <00b5a4c7-4ad5-19f0-d502-54820e145e11@ti.com>,<48e5d6a8-a4c3-b586-4257-1e39aef67945@ti.com>
-In-Reply-To: <48e5d6a8-a4c3-b586-4257-1e39aef67945@ti.com>
+ <00b5a4c7-4ad5-19f0-d502-54820e145e11@ti.com>,<48e5d6a8-a4c3-b586-4257-1e39aef67945@ti.com>,<f20e91bca4234eae87242f76e9276d6e@ti.com>
+In-Reply-To: <f20e91bca4234eae87242f76e9276d6e@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.4.42.15]
+x-originating-ip: [10.248.242.16]
 x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_f20e91bca4234eae87242f76e9276d6eticom_"
+	boundary="_000_bfe66a0f14d04073bc24d4d91b52d230ticom_"
 
---_000_f20e91bca4234eae87242f76e9276d6eticom_
+--_000_bfe66a0f14d04073bc24d4d91b52d230ticom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+
+Sorry, Adding Praneeth for real.
+
+________________________________
+From: Raghavendra, Vignesh
+Sent: Monday, October 5, 2020 11:50:45 PM
+To: Rao, Praveen; Murphy, Dan; meta-ti@lists.yoctoproject.org; Dmytriyenko,=
+ Denys; Goswami, Piyali
+Cc: Devshatwar, Nikhil; Jagannathan, Shyam; Weaver, Lucas
+Subject: Re: [meta-ti][master][patch][v2] ti-sci-fw: update imggen SRCREV t=
+o the latest
+
 
 + Praneeth,
 
@@ -110,7 +123,7 @@ On 10/5/20 12:36 PM, Dan Murphy wrote:
 > Dan
 >
 
---_000_f20e91bca4234eae87242f76e9276d6eticom_
+--_000_bfe66a0f14d04073bc24d4d91b52d230ticom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -122,6 +135,25 @@ Content-Transfer-Encoding: quoted-printable
 n-bottom:0;} --></style>
 </head>
 <body dir=3D"ltr">
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
+-family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
+<p>Sorry, Adding&nbsp;Praneeth for real.</p>
+</div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Raghavendra, Vignesh<=
+br>
+<b>Sent:</b> Monday, October 5, 2020 11:50:45 PM<br>
+<b>To:</b> Rao, Praveen; Murphy, Dan; meta-ti@lists.yoctoproject.org; Dmytr=
+iyenko, Denys; Goswami, Piyali<br>
+<b>Cc:</b> Devshatwar, Nikhil; Jagannathan, Shyam; Weaver, Lucas<br>
+<b>Subject:</b> Re: [meta-ti][master][patch][v2] ti-sci-fw: update imggen S=
+RCREV to the latest</font>
+<div>&nbsp;</div>
+</div>
+<div>
 <div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
 -family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
 <p>&#43; Praneeth,</p>
@@ -191,7 +223,8 @@ http://lcpd.gt.design.ti.com/builds/arago-dunfell-next/prod/am65xx-evm/1454=
 </div>
 </span></font></div>
 </div>
+</div>
 </body>
 </html>
 
---_000_f20e91bca4234eae87242f76e9276d6eticom_--
+--_000_bfe66a0f14d04073bc24d4d91b52d230ticom_--
