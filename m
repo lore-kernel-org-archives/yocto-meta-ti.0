@@ -1,60 +1,68 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.12311.1601984754850483171
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.16831.1601997292537336285
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 06 Oct 2020 04:45:55 -0700
+ Tue, 06 Oct 2020 08:14:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VXoTWvgq;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 096BjsIo121888
-	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 06:45:54 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=N5+hbSJl;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rogerq@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 096FEpBi117951
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 10:14:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1601984754;
-	bh=s/bst2P67lKj8nS1PMx8/kOI2nyiOfvV/mIbHsc8P54=;
+	s=ti-com-17Q1; t=1601997291;
+	bh=yPWjw49cqgoSmekDeNPjRHQITLsKnqoXjW4mtA59+0M=;
 	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=VXoTWvgqYHTLSCGTCWWfALmkFQeKP6mNMJoGKQ0t77cD6aDcdF+I3ZQI1Ua+m24+7
-	 daQurgrZCgCodZhYpfRevXPsp9lk75rQ13Uo3cAijUWOV6UNO/kLRFNrI97XtXJRQu
-	 Zvsek54UIJM8GTn+vM3Kbfx2IWo3AmV7BYiKFB6E=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 096Bjseg013412
+	b=N5+hbSJlD9R7wr6sFm8LDFAzhTfOWcP0fyGNA1Njhj0V/YtGxCOVbh0Cte+wVxQpV
+	 rTpmQu8Gjd9FvE22ko1Nn+ERER2UnEv2orZvbmPm3k3hrit07+3O3EUmVu70l3XvKE
+	 cS9NCdKwoQIpuTjldpajWA9Ex4DyLBfzYR0CeBpU=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 096FEpEY127900
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 06:45:54 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 10:14:51 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 6 Oct
- 2020 06:45:53 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 10:14:51 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 6 Oct 2020 06:45:53 -0500
-Received: from [10.250.71.177] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 096BjrsB117175;
-	Tue, 6 Oct 2020 06:45:53 -0500
+ Frontend Transport; Tue, 6 Oct 2020 10:14:51 -0500
+Received: from [192.168.2.14] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 096FEmYl089384;
+	Tue, 6 Oct 2020 10:14:49 -0500
 Subject: Re: [dunfell/master PATCH] prueth-fw-am65x-sr2: update AM65 SR2.0 PRU ethernet firmware
-To: Roger Quadros <rogerq@ti.com>, <meta-ti@lists.yoctoproject.org>
+To: Dan Murphy <dmurphy@ti.com>, <meta-ti@lists.yoctoproject.org>
 CC: <denys@ti.com>, <nsekhar@ti.com>, <vigneshr@ti.com>, <lokeshvutla@ti.com>
 References: <20201006082310.5161-1-rogerq@ti.com>
-From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <000d4e4a-37f2-67b3-9af9-a08b20d8d034@ti.com>
-Date: Tue, 6 Oct 2020 06:45:53 -0500
+ <000d4e4a-37f2-67b3-9af9-a08b20d8d034@ti.com>
+From: "Roger Quadros" <rogerq@ti.com>
+Message-ID: <76af0979-96e2-a1df-e9a8-387855b43310@ti.com>
+Date: Tue, 6 Oct 2020 18:14:48 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201006082310.5161-1-rogerq@ti.com>
+In-Reply-To: <000d4e4a-37f2-67b3-9af9-a08b20d8d034@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
 Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Roger
+Dan,
 
-On 10/6/20 3:23 AM, Roger Quadros wrote:
-> Update to release REL.PRU-ICSS-PROFINET-SWITCH_02.02.07.02
+On 06/10/2020 14:45, Dan Murphy wrote:
+> Roger
+> 
+> On 10/6/20 3:23 AM, Roger Quadros wrote:
+>> Update to release REL.PRU-ICSS-PROFINET-SWITCH_02.02.07.02
+> 
+> Thanks for the patch but I did this yesterday
+> 
+> http://dflvsu0004.dal.design.ti.com/patch/57752/
 
-Thanks for the patch but I did this yesterday
+Thanks. we can use that one instead.
 
-http://dflvsu0004.dal.design.ti.com/patch/57752/
-
-Dan
-
-
+cheers,
+-roger
+-- 
+Texas Instruments Finland Oy, Porkkalankatu 22, 00180 Helsinki.
+Y-tunnus/Business ID: 0615521-4. Kotipaikka/Domicile: Helsinki
