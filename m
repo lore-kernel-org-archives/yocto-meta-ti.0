@@ -1,68 +1,76 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.16831.1601997292537336285
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.1673.1602010782498297094
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 06 Oct 2020 08:14:52 -0700
+ Tue, 06 Oct 2020 11:59:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=N5+hbSJl;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rogerq@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 096FEpBi117951
-	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 10:14:51 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=KLpaPImg;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 096IxfRs027316
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 13:59:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1601997291;
-	bh=yPWjw49cqgoSmekDeNPjRHQITLsKnqoXjW4mtA59+0M=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=N5+hbSJlD9R7wr6sFm8LDFAzhTfOWcP0fyGNA1Njhj0V/YtGxCOVbh0Cte+wVxQpV
-	 rTpmQu8Gjd9FvE22ko1Nn+ERER2UnEv2orZvbmPm3k3hrit07+3O3EUmVu70l3XvKE
-	 cS9NCdKwoQIpuTjldpajWA9Ex4DyLBfzYR0CeBpU=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 096FEpEY127900
+	s=ti-com-17Q1; t=1602010781;
+	bh=FTtA2HZu8pEAi8+Y49B4RENo7w2EqOLHL9vwPgsNhyI=;
+	h=From:To:CC:Subject:Date;
+	b=KLpaPImgjWjfbdy/s6U80vvN5zKB/j3zSMyoi12X1NrFu8mbjmRx+Tq4c4q9+hX42
+	 qcRGNej9lfCjpwR3n/5kQfqeTE7/Bn5bDdyJkWqi6JcwUgJxPXZ+smdnaBeul1+ELl
+	 MzSveXUnBU+1vivA+9RZ0onPm/aXnBQzGSYQpfmY=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 096IxfuC081139
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 10:14:51 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 6 Oct
- 2020 10:14:51 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Oct 2020 13:59:41 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
  (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 6 Oct
+ 2020 13:59:40 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 6 Oct 2020 10:14:51 -0500
-Received: from [192.168.2.14] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 096FEmYl089384;
-	Tue, 6 Oct 2020 10:14:49 -0500
-Subject: Re: [dunfell/master PATCH] prueth-fw-am65x-sr2: update AM65 SR2.0 PRU ethernet firmware
-To: Dan Murphy <dmurphy@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <denys@ti.com>, <nsekhar@ti.com>, <vigneshr@ti.com>, <lokeshvutla@ti.com>
-References: <20201006082310.5161-1-rogerq@ti.com>
- <000d4e4a-37f2-67b3-9af9-a08b20d8d034@ti.com>
-From: "Roger Quadros" <rogerq@ti.com>
-Message-ID: <76af0979-96e2-a1df-e9a8-387855b43310@ti.com>
-Date: Tue, 6 Oct 2020 18:14:48 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Frontend Transport; Tue, 6 Oct 2020 13:59:40 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 096Ixest003182;
+	Tue, 6 Oct 2020 13:59:40 -0500
+From: "Dan Murphy" <dmurphy@ti.com>
+To: <denys@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Dan Murphy <dmurphy@ti.com>
+Subject: [PATCH 1/2] linux-ti-staging: Update to the tag 07.01.000.03
+Date: Tue, 6 Oct 2020 13:59:34 -0500
+Message-ID: <20201006185935.15462-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <000d4e4a-37f2-67b3-9af9-a08b20d8d034@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 
-Dan,
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_5.4.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_5.4.bb    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-On 06/10/2020 14:45, Dan Murphy wrote:
-> Roger
-> 
-> On 10/6/20 3:23 AM, Roger Quadros wrote:
->> Update to release REL.PRU-ICSS-PROFINET-SWITCH_02.02.07.02
-> 
-> Thanks for the patch but I did this yesterday
-> 
-> http://dflvsu0004.dal.design.ti.com/patch/57752/
-
-Thanks. we can use that one instead.
-
-cheers,
--roger
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+index 869addc88aca..2b355142c348 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.4:"
+ 
+ BRANCH = "ti-rt-linux-5.4.y"
+ 
+-SRCREV = "fe1ab63ac9248a6fecb8572a0ad5dc51a79ac280"
++SRCREV = "6fc4965c280479c216a6c875f482502f1a8d4c14"
+ PV = "5.4.66+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+index bfba3d50b68e..84f1f3dde4f7 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+@@ -60,7 +60,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.4.y"
+ 
+-SRCREV = "eb0f4e6c05153446b62028ac84452101b8280253"
++SRCREV = "8129d7ff57cba2203914f87fe0a93d9a7a390257"
+ PV = "5.4.66+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
-Texas Instruments Finland Oy, Porkkalankatu 22, 00180 Helsinki.
-Y-tunnus/Business ID: 0615521-4. Kotipaikka/Domicile: Helsinki
+2.17.1
+
