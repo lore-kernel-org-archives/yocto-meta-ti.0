@@ -1,126 +1,77 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.6390.1602624459560550605
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web12.6920.1602625756264854088
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 13 Oct 2020 14:27:40 -0700
+ Tue, 13 Oct 2020 14:49:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VcW9rtWv;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: denys@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09DLRbIt033882;
-	Tue, 13 Oct 2020 16:27:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1602624458;
-	bh=0cluu7BJUguVz5wMtczrMJL/epfw7Eo3rBdqblbnRN4=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=VcW9rtWvjvJpYmhQHwF3Inm/+Mc5n8wjcbvhpxYNlTQTcSjXqHgvRbK8C5qTJCPBe
-	 QOPkvg5ZWTNkRhzV1fKLORNlRuqfiyQUAGiHx7sZweZBmZ/4+FTEoO3JaG4776TNpK
-	 LnJgYKqz9ny0ETt0JDFK3lvqMaly+pUe0vEU+V3E=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09DLRbDD063035
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 13 Oct 2020 16:27:37 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 13
- Oct 2020 16:27:37 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 13 Oct 2020 16:27:37 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09DLRbv8106011;
-	Tue, 13 Oct 2020 16:27:37 -0500
-Date: Tue, 13 Oct 2020 17:27:37 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH 1/2] ti-pdk-fetch.bbclass: Do not emit trailing slash during S forming
-Message-ID: <20201013212736.GE14852@beryl>
-References: <20201013183642.267548-1-raj.khem@gmail.com>
- <20201013205557.GB14852@beryl>
- <CAMKF1srt+gXsc9-xrcXrzu3-Q7eHGNA1vZwDrC0+Gf1wVyvdeQ@mail.gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=kQlDLOXn;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id h4so240453pjk.0
+        for <meta-ti@lists.yoctoproject.org>; Tue, 13 Oct 2020 14:49:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7hO+OddTqz6khxBsgZWVbC/Zd5RGDyKRGGnniugKl5c=;
+        b=kQlDLOXnq50GZvUXoYSoUyoVSbRysim7zLEBnfxerNY/zjYp/JhiqKIiys4oYd9+kf
+         X8Z243HkJtq4H/A3trgAg6nURRclb1ZJFLz4uGWedr7cDBRvb4xiOCEe7vIbI1YXvPrq
+         pNZ41slMnuV0sSxb7rgepZkMmQILuekYMRyMH0k+KSDcjF/TRCnNrJdQ7KK//v6HAkP7
+         e8WLBaZsgnLlwZK9nTezCouVyNRd2cTMkMBvcdMDmbOusAR1CjnbKo6zhktorF887h7r
+         AokqLUqfVwyfK5oPIF0MBQ7p0r+TTgk5z2uQvpkKKJpHyXwurbyfluQGC/bFPIS06Wpb
+         gs0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7hO+OddTqz6khxBsgZWVbC/Zd5RGDyKRGGnniugKl5c=;
+        b=K8MH3guPgbvDSCo+Q/LhKpAf8mIgJPKp55lpvP86S001OWJC/BnMLwUM9R34jMM1Y9
+         PMBm+4cQPiLxcT8Px7wvR1lHqe2a5SJxZsZDkEMli0d8jiNu2WIKqY4lk7uwNewIbYPX
+         TuptWoZmM3mXXxt5PfPTQCJ0F/e72UiM1x19DYBPJcAp3qrPHiIgrcettEKWO6gEqtp7
+         D0Xvvc6cmtVjDOG4w35hlmeRAF/KI+tjcLD6J+vZc2po4YJpbf2VgTgwXrbb9RbJR/qY
+         /j7XbVpiqhoTm/vj4GesRArEnTz9ggG9crVMcF6Ps/VOoYOeQYWpKoxhdVFv1lBWp3g9
+         ePug==
+X-Gm-Message-State: AOAM531fBAucvxYYt+3ErcFLfsPrJsvEgZuqJqYv0ZcpOEv4dAiFUBxu
+	gRZgy4OsGUJfvchyk8y4JSRGFmVLZC4Nag==
+X-Google-Smtp-Source: ABdhPJxRa6lTeIMjPSZRrxf0K7OdG855FhpyimCBfPo4g4bwBJKwAAdh5rY3ZKE53Fsu4LKETY5XbQ==
+X-Received: by 2002:a17:902:8f88:b029:d4:cb17:e160 with SMTP id z8-20020a1709028f88b02900d4cb17e160mr1506035plo.78.1602625755433;
+        Tue, 13 Oct 2020 14:49:15 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::3926])
+        by smtp.gmail.com with ESMTPSA id g17sm633189pfu.130.2020.10.13.14.49.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Oct 2020 14:49:14 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH v2] ti-pdk-fetch.bbclass: Do not emit trailing slash during S forming
+Date: Tue, 13 Oct 2020 14:49:11 -0700
+Message-Id: <20201013214911.339265-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srt+gXsc9-xrcXrzu3-Q7eHGNA1vZwDrC0+Gf1wVyvdeQ@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 13, 2020 at 02:22:30PM -0700, Khem Raj wrote:
-> On Tue, Oct 13, 2020 at 1:55 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> 
-> > On Tue, Oct 13, 2020 at 11:36:41AM -0700, Khem Raj wrote:
-> > > latest OE-core does not promote using trailing slash to make pseudo's
-> > > life easier
-> > >
-> > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > > ---
-> > >  classes/ti-pdk-fetch.bbclass | 4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
-> > > index 0c9879be..4261e86d 100644
-> > > --- a/classes/ti-pdk-fetch.bbclass
-> > > +++ b/classes/ti-pdk-fetch.bbclass
-> > > @@ -9,13 +9,13 @@ PV = "${TI_PDK_VERSION}"
-> > >  PE = "2"
-> > >
-> > >  TI_PDK_COMP ?= ""
-> > > -TI_PDK_COMP_PATH = "${@'${TI_PDK_COMP}'.replace('.','/')}"
-> > > +TI_PDK_COMP_PATH = "/${@'${TI_PDK_COMP}'.replace('.','/')}"
-> >
-> > This one I don't understand - even when TI_PDK_COMP is empty,
-> > TI_PDK_COMP_PATH will have a trailing slash, hence S below will
-> > have it too...
-> 
-> 
-> Right I think I was thinking of ensuring that we can make conditional to
-> have the slash always and then remove it from S which is missing
-> 
-> I guess it needs to be solved differently
-> 
-> 
-> >
-> > Moreover, below in this class there's this line:
-> >
-> > src =
-> > os.path.join(d.getVar('TI_PDK_SOURCE'),'packages',d.getVar('TI_PDK_COMP_PATH'))
-> >
-> > If TI_PDK_COMP_PATH starts with a leading slash, os.path.join treats
-> > it as absolute and the resulting "src" var will be completely wrong.
-> 
-> 
-> This is not going to be problem it will just use // in worst case
+latest OE-core does not promote using trailing slash to make pseudo's
+life easier
 
-Nope, I tested - it should combine $TI_PDK_SOURCE/packages/$TI_PDK_COMP_PATH
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Strip slash from S if it exists
 
->>> print(os.path.join('a','b','c'))
-a/b/c
->>> print(os.path.join('a','b','/c'))
-/c
+ classes/ti-pdk-fetch.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-So, if TI_PDK_COMP_PATH starts with slash, it becomes absolute and the final 
-src path will be wrong.
+diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
+index 0c9879be..cacd71a4 100644
+--- a/classes/ti-pdk-fetch.bbclass
++++ b/classes/ti-pdk-fetch.bbclass
+@@ -15,7 +15,7 @@ TI_PDK_SOURCE_PN = "ti-pdk-source"
+ TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
+ TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
+ 
+-S = "${WORKDIR}/git/${TI_PDK_COMP_PATH}"
++S = "${@'${WORKDIR}/git/${TI_PDK_COMP_PATH}'.rstrip('/')}"
+ 
+ # Hard-link only required sources from PDK
+ python do_unpack_append() {
+-- 
+2.28.0
 
-
-> > So, I believe this change is incorrect.
-> >
-> >
-> > >  TI_PDK_SOURCE_PN = "ti-pdk-source"
-> > >  TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
-> > >  TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
-> > >
-> > > -S = "${WORKDIR}/git/${TI_PDK_COMP_PATH}"
-> > > +S = "${WORKDIR}/git${TI_PDK_COMP_PATH}"
-> > >
-> > >  # Hard-link only required sources from PDK
-> > >  python do_unpack_append() {
-> > > --
-> > > 2.28.0
-> > >
-> >
-> > >
-> > > 
-> > >
-> >
-> >
