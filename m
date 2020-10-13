@@ -1,74 +1,61 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.2370.1602614206577454939
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.4961.1602620617941964263
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 13 Oct 2020 11:36:46 -0700
+ Tue, 13 Oct 2020 13:23:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rhyrKfL6;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id y1so318421plp.6
-        for <meta-ti@lists.yoctoproject.org>; Tue, 13 Oct 2020 11:36:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=y1OSf4q3WcT5f6slWMqnf+ct1ABzWIlXUK/PhmcvkMU=;
-        b=rhyrKfL6HhuFzklejNispkntm2QF/4jcdBiJZGQeHLPZ33SRf6HqnQGw3sQS70BTwV
-         z7PvGawKYN+qWebDs3ThMYTvmmjFVME8f4+l9Xs69B/H8QTetCHUL0AeecoWO1Fx6KNj
-         SAQyRvuyDbLI2VbqgRGHCL1nIWSW1FmgyK7P5daoZEUF/W34orOS88eueE8mfAesvb3W
-         vEs0jrDQLnut1cGpdfclqPoPzzCz4cbSyZftmn9yh1k+dBrjPsmvrWqC4El8pxh6kw3j
-         YcPgOpqShg4/DyamLr28yNIqXOlpJlFBS6blp1nx11fk+TbGS7XjBUQqpcNO1TlCfEIY
-         H8DQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=y1OSf4q3WcT5f6slWMqnf+ct1ABzWIlXUK/PhmcvkMU=;
-        b=kP08ej62hJx+gUFsMly3OkpdrE6ChcyMpBIipOgyO0nh3Yxdil2gR7ob1lhJKDwq39
-         FDQXSoLlAo6ZpbF5R032kO6LW4ojnjzsYsHsX5xK2qSdYHPfFqzM0jMZ7XsZNaYn4dh3
-         iug3l2M7QYYNYQAlCDwaSA4BuQDVhqV/jC9qjyzxdnCKKL7QAvS6Pt1ZJuEm44jE589U
-         hj5jZ3CMpuwy42OohwStn/DaAAn/CRUr52FKhqADLOB/S9lDZwGbRHfn9DVe9iGB5p+8
-         If2TYukSpI1MdS55oFF7fAFRP17LUkjMWmZeRW2TOPUNfy1FlI/hZ9dyBl3quC7aJ8WT
-         c49A==
-X-Gm-Message-State: AOAM533TtvrdhTBNVtJUV5klND602FNzHRipt6JPvm82rjKbnY4INhk+
-	xP1exRSF+Yolw0iA3DgrGHbeWDwzqx4Bng==
-X-Google-Smtp-Source: ABdhPJy4SUyqPXljQDUi7yTUo8gsXAy0h3AzVeNRHXqgyi5569D8/6d33EKAGXm7zOnRPeuIFSJdrQ==
-X-Received: by 2002:a17:902:7b91:b029:d4:da66:ef6e with SMTP id w17-20020a1709027b91b02900d4da66ef6emr842961pll.10.1602614205832;
-        Tue, 13 Oct 2020 11:36:45 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::3926])
-        by smtp.gmail.com with ESMTPSA id u69sm385374pfc.27.2020.10.13.11.36.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2020 11:36:45 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5DADE40BD0;
+	Tue, 13 Oct 2020 20:23:37 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id KVfcSBhl04lr; Tue, 13 Oct 2020 20:23:37 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 454CE40B66;
+	Tue, 13 Oct 2020 20:23:36 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 6E73A17427C;
+	Tue, 13 Oct 2020 16:23:35 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH 2/2] ti-rtos-firmware: Remove trailing slash from S
-Date: Tue, 13 Oct 2020 11:36:42 -0700
-Message-Id: <20201013183642.267548-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201013183642.267548-1-raj.khem@gmail.com>
-References: <20201013183642.267548-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [dunfell/master][PATCH] ti-sci-fw: now Cortex-R5 SPL can also be provided by u-boot-ti-mainline
+Date: Tue, 13 Oct 2020 16:23:34 -0400
+Message-Id: <1602620614-54942-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ conf/machine/include/k3r5.inc          | 1 +
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index 2dfae1ec..2bbdd018 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -51,7 +51,7 @@ CORESDK_RTOS_FILE_PREFIX ?= ""
- CORESDK_RTOS_FILE_SUFFIX ?= ""
+diff --git a/conf/machine/include/k3r5.inc b/conf/machine/include/k3r5.inc
+index 52fcf38..a32acca 100644
+--- a/conf/machine/include/k3r5.inc
++++ b/conf/machine/include/k3r5.inc
+@@ -21,3 +21,4 @@ UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+ UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
  
- # Common code below
--S = "${WORKDIR}/lib/"
-+S = "${WORKDIR}/lib"
+ PACKAGECONFIG_pn-u-boot-ti-staging = ""
++PACKAGECONFIG_pn-u-boot-ti-mainline = ""
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 458b892..1239b27 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -1,7 +1,7 @@
+ require recipes-bsp/ti-sci-fw/ti-sci-fw.inc
  
- PV = "${CORESDK_RTOS_VERSION_DOT}"
+ DEPENDS = "openssl-native u-boot-mkimage-native dtc-native"
+-DEPENDS_append_j7200-evm-k3r5 = " u-boot-ti-staging"
++DEPENDS_append_j7200-evm-k3r5 = " virtual/bootloader"
  
+ CLEANBROKEN = "1"
+ PR = "r1"
 -- 
-2.28.0
+2.7.4
 
