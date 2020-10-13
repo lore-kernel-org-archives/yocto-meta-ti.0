@@ -1,77 +1,85 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web12.6920.1602625756264854088
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.6961.1602625865695183398
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 13 Oct 2020 14:49:16 -0700
+ Tue, 13 Oct 2020 14:51:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kQlDLOXn;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id h4so240453pjk.0
-        for <meta-ti@lists.yoctoproject.org>; Tue, 13 Oct 2020 14:49:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7hO+OddTqz6khxBsgZWVbC/Zd5RGDyKRGGnniugKl5c=;
-        b=kQlDLOXnq50GZvUXoYSoUyoVSbRysim7zLEBnfxerNY/zjYp/JhiqKIiys4oYd9+kf
-         X8Z243HkJtq4H/A3trgAg6nURRclb1ZJFLz4uGWedr7cDBRvb4xiOCEe7vIbI1YXvPrq
-         pNZ41slMnuV0sSxb7rgepZkMmQILuekYMRyMH0k+KSDcjF/TRCnNrJdQ7KK//v6HAkP7
-         e8WLBaZsgnLlwZK9nTezCouVyNRd2cTMkMBvcdMDmbOusAR1CjnbKo6zhktorF887h7r
-         AokqLUqfVwyfK5oPIF0MBQ7p0r+TTgk5z2uQvpkKKJpHyXwurbyfluQGC/bFPIS06Wpb
-         gs0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7hO+OddTqz6khxBsgZWVbC/Zd5RGDyKRGGnniugKl5c=;
-        b=K8MH3guPgbvDSCo+Q/LhKpAf8mIgJPKp55lpvP86S001OWJC/BnMLwUM9R34jMM1Y9
-         PMBm+4cQPiLxcT8Px7wvR1lHqe2a5SJxZsZDkEMli0d8jiNu2WIKqY4lk7uwNewIbYPX
-         TuptWoZmM3mXXxt5PfPTQCJ0F/e72UiM1x19DYBPJcAp3qrPHiIgrcettEKWO6gEqtp7
-         D0Xvvc6cmtVjDOG4w35hlmeRAF/KI+tjcLD6J+vZc2po4YJpbf2VgTgwXrbb9RbJR/qY
-         /j7XbVpiqhoTm/vj4GesRArEnTz9ggG9crVMcF6Ps/VOoYOeQYWpKoxhdVFv1lBWp3g9
-         ePug==
-X-Gm-Message-State: AOAM531fBAucvxYYt+3ErcFLfsPrJsvEgZuqJqYv0ZcpOEv4dAiFUBxu
-	gRZgy4OsGUJfvchyk8y4JSRGFmVLZC4Nag==
-X-Google-Smtp-Source: ABdhPJxRa6lTeIMjPSZRrxf0K7OdG855FhpyimCBfPo4g4bwBJKwAAdh5rY3ZKE53Fsu4LKETY5XbQ==
-X-Received: by 2002:a17:902:8f88:b029:d4:cb17:e160 with SMTP id z8-20020a1709028f88b02900d4cb17e160mr1506035plo.78.1602625755433;
-        Tue, 13 Oct 2020 14:49:15 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::3926])
-        by smtp.gmail.com with ESMTPSA id g17sm633189pfu.130.2020.10.13.14.49.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2020 14:49:14 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH v2] ti-pdk-fetch.bbclass: Do not emit trailing slash during S forming
-Date: Tue, 13 Oct 2020 14:49:11 -0700
-Message-Id: <20201013214911.339265-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=BJiWcoio;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: denys@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09DLp4A3042503;
+	Tue, 13 Oct 2020 16:51:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1602625864;
+	bh=9fFpOrJLSYiZrrD7+GEbfIk4EJOUpnSnr2JgP1O+tuw=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=BJiWcoiozh0jyam35PTngjPIkueyB7TAHj1G1WfiLSGvf4DfWYLt3OWK7uQ8T9lHw
+	 Zylk6YkDiipj9+R39NyotLSysINU6ZoqYOs+++HMPy0SkqOvVdYG7mM5qQL8PcmKYT
+	 QvTJ1kGF+3WeeHBC4QcgxJCK1DXMLEahPB40CDmo=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09DLp4vX095648
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 13 Oct 2020 16:51:04 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 13
+ Oct 2020 16:51:04 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Tue, 13 Oct 2020 16:51:04 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09DLp3Yr125750;
+	Tue, 13 Oct 2020 16:51:04 -0500
+Date: Tue, 13 Oct 2020 17:51:03 -0400
+From: "Denys Dmytriyenko" <denys@ti.com>
+To: Khem Raj <raj.khem@gmail.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti] [PATCH v2] ti-pdk-fetch.bbclass: Do not emit trailing slash during S forming
+Message-ID: <20201013215103.GF14852@beryl>
+References: <20201013214911.339265-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201013214911.339265-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-latest OE-core does not promote using trailing slash to make pseudo's
-life easier
+On Tue, Oct 13, 2020 at 02:49:11PM -0700, Khem Raj wrote:
+> latest OE-core does not promote using trailing slash to make pseudo's
+> life easier
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Strip slash from S if it exists
+This should be fine.
 
- classes/ti-pdk-fetch.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
-index 0c9879be..cacd71a4 100644
---- a/classes/ti-pdk-fetch.bbclass
-+++ b/classes/ti-pdk-fetch.bbclass
-@@ -15,7 +15,7 @@ TI_PDK_SOURCE_PN = "ti-pdk-source"
- TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
- TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
- 
--S = "${WORKDIR}/git/${TI_PDK_COMP_PATH}"
-+S = "${@'${WORKDIR}/git/${TI_PDK_COMP_PATH}'.rstrip('/')}"
- 
- # Hard-link only required sources from PDK
- python do_unpack_append() {
--- 
-2.28.0
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Reviewed-by: Denys Dmytriyenko <denys@ti.com>
+
+
+> ---
+> v2: Strip slash from S if it exists
+> 
+>  classes/ti-pdk-fetch.bbclass | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
+> index 0c9879be..cacd71a4 100644
+> --- a/classes/ti-pdk-fetch.bbclass
+> +++ b/classes/ti-pdk-fetch.bbclass
+> @@ -15,7 +15,7 @@ TI_PDK_SOURCE_PN = "ti-pdk-source"
+>  TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
+>  TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
+>  
+> -S = "${WORKDIR}/git/${TI_PDK_COMP_PATH}"
+> +S = "${@'${WORKDIR}/git/${TI_PDK_COMP_PATH}'.rstrip('/')}"
+>  
+>  # Hard-link only required sources from PDK
+>  python do_unpack_append() {
+> -- 
+> 2.28.0
+> 
+
+> 
+> 
+> 
 
