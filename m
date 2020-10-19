@@ -1,74 +1,77 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.12893.1603113956659534241
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web09.2384.1603130424443988658
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 19 Oct 2020 06:25:57 -0700
+ Mon, 19 Oct 2020 11:00:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=DObVljMl;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rogerq@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09JDPswH034720
-	for <meta-ti@lists.yoctoproject.org>; Mon, 19 Oct 2020 08:25:54 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=c1gatQfa;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09JI0NQx014806
+	for <meta-ti@lists.yoctoproject.org>; Mon, 19 Oct 2020 13:00:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603113954;
-	bh=wfVRM5OsRq2R+HE7GUU+2UKEJ42wTMnYa9jdVh/0+9s=;
+	s=ti-com-17Q1; t=1603130423;
+	bh=LAw0NYqXS6JUTS2cgm7yuzV5jtosMgxfKrv/rgGQvL0=;
 	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=DObVljMlQdpf97IjyU0G1qjNUuFUvEYMY7ofrtYM/y43l6Qhhjau9l8ZaefEHceNw
-	 bfDqzbFbpEddc8qxr9tjDaKmK9AmOZ8sDS4ts7gsCaBvKpj9oWVw7mNCZWBI/r8Q80
-	 vX5fLL5s6/+ThKt0a2wWIgrXYMQVMSM+VTEVzjQA=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09JDPsXW101716
+	b=c1gatQfaM9cQmG3qdn7EVRV9nHSPxvBySPBCJtViUCyjR4dhgr1eC8zzLOeehySr8
+	 8Jk30JoIoG68aM8NaeW43R4U2FhkDHeWLONtQGcND82W5oMGlVavg61NsTAGv7dEv+
+	 cUXDEVinRQOAkOYrqhybzVgyKAexn8THuI3IXQ9s=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09JI0Nbd095500
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 19 Oct 2020 08:25:54 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Mon, 19 Oct 2020 13:00:23 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 19
- Oct 2020 08:25:54 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2020 13:00:22 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 19 Oct 2020 08:25:54 -0500
-Received: from [192.168.2.14] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09JDPqpS101394;
-	Mon, 19 Oct 2020 08:25:53 -0500
-Subject: Re: [dunfell/master PATCH] prusw-fw: Update the firmware to 3.1.6 version
-To: Dan Murphy <dmurphy@ti.com>, <meta-ti@lists.yoctoproject.org>,
-        <denys@ti.com>
-CC: <nsekhar@ti.com>, <vigneshr@ti.com>, <lokeshvutla@ti.com>
-References: <20201019083620.6665-1-rogerq@ti.com>
- <81f7e96e-2141-acca-f6b3-760198ae1cb7@ti.com>
-From: "Roger Quadros" <rogerq@ti.com>
-Message-ID: <7d507f23-e31c-4bc5-a923-8b88e91c30a8@ti.com>
-Date: Mon, 19 Oct 2020 16:25:52 +0300
+ Frontend Transport; Mon, 19 Oct 2020 13:00:23 -0500
+Received: from [10.250.70.26] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09JI0MQV023485;
+	Mon, 19 Oct 2020 13:00:22 -0500
+Subject: Re: [PATCH] u-boot-ti-staging: Update to latest SHA
+To: <denys@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <s-anna@ti.com>, <d-gerlach@ti.com>
+References: <20201019115637.1047-1-dmurphy@ti.com>
+From: "Dan Murphy" <dmurphy@ti.com>
+Message-ID: <b5b31c3c-1c48-e24b-d0fb-dcdd1e1af785@ti.com>
+Date: Mon, 19 Oct 2020 13:00:22 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <81f7e96e-2141-acca-f6b3-760198ae1cb7@ti.com>
+In-Reply-To: <20201019115637.1047-1-dmurphy@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Dan,
+All
 
-On 19/10/2020 14:36, Dan Murphy wrote:
-> Roger
-> 
-> On 10/19/20 3:36 AM, Roger Quadros wrote:
->> Update the firmware to version 3.1.6
-> 
-> Thanks for the patch this one was already submitted
-> 
-> http://dflvsu0004.dal.design.ti.com/patch/57940/
+On 10/19/20 6:56 AM, Dan Murphy wrote:
+> Signed-off-by: Dan Murphy <dmurphy@ti.com>
+> ---
+>   recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+> index 5b09cb579eff..25e19092a00b 100644
+> --- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+> @@ -1,7 +1,7 @@
+>   require u-boot-ti.inc
+>   
+> -PR = "r18"
+> +PR = "r19"
+>   
+>   BRANCH = "ti-u-boot-2020.01"
+>   
+> -SRCREV = "eea73800730b3d9125f5c12a629db2f88e566b71"
+> +SRCREV = "6cd79efcfdcf482549dafe775b259924baa2c995"
 
-Thank you. Please ignore my patch.
+This fails to build am65 and J7 HS platforms.
 
-> 
-> Dan
-> 
+So Nack to this patch
 
-cheers,
--roger
+Dan
 
--- 
-Texas Instruments Finland Oy, Porkkalankatu 22, 00180 Helsinki.
-Y-tunnus/Business ID: 0615521-4. Kotipaikka/Domicile: Helsinki
