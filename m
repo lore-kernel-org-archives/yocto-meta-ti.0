@@ -1,136 +1,75 @@
-Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web09.13433.1603293780059132150
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com [209.85.219.67])
+ by mx.groups.io with SMTP id smtpd.web11.13816.1603294967164006279
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 21 Oct 2020 08:23:00 -0700
+ Wed, 21 Oct 2020 08:42:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=qv1X69vk;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id C561F38C1166
-	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2020 08:22:58 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09LFMvBR113514
-	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2020 10:22:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603293777;
-	bh=l0tBw/BDLMtEb/rHYAfU7K/o/hyWxqTyhdtmnIHdoB0=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=qv1X69vk1WSQZF4HUoVZX6aUJa1jSR6K0itt9nkoejsjfee+9kwxrkIIlL2hPSTsb
-	 3zRFS4/H+dBgEK6hPpTMglrGiQktazN/fJh2UnRnPvO9FQepU1Htjw3yBwIvyk/G8k
-	 twGGjs1hfS134VjzEVDRpKnZWCH4HUcFibO3bnng=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09LFMv0t051756
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2020 10:22:57 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 21
- Oct 2020 10:22:57 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 21 Oct 2020 10:22:57 -0500
-Received: from [10.250.39.65] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09LFMvaU113637;
-	Wed, 21 Oct 2020 10:22:57 -0500
-Subject: Re: [dunfell/master PATCH] ipc: ti-rpmsg-char: Add initial recipes
-To: Suman Anna <s-anna@ti.com>, Denys Dmytriyenko <denys@ti.com>
-CC: <meta-ti@yoctoproject.org>, Gowtham Tammana <g-tammana@ti.com>
-References: <20201021135621.5073-1-s-anna@ti.com>
-From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <843f5cd3-375d-1cc4-ca7a-981920caca33@ti.com>
-Date: Wed, 21 Oct 2020 10:22:56 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pnE00Scz;
+ spf=pass (domain: gmail.com, ip: 209.85.219.67, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f67.google.com with SMTP id s1so1310429qvm.13
+        for <meta-ti@lists.yoctoproject.org>; Wed, 21 Oct 2020 08:42:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=iCs3I501HYTX1yK6QelGPoWlZhP+0U5kV+tr/eNmgh8=;
+        b=pnE00SczTslz7Zl2faKCnSPJmL1afj0nocmgCT443Yzhle+jpNWm9Nq1zCWZETbJz2
+         6b0+P9yGoKRKUmvPOj21dwQJMRjJhJVtmHXdHuX2sjY+iEKGDwJoNKbJglPQIP3QQqrg
+         ri5eaqirbwT9ccN9/Pfi9J1abBjXSMUpDhQO07M4wJ6R+T1zFdKR4Rdn6pXDM9vR0OW8
+         zJTmpn7C8OVi7MBHr0G+WjFpEa+rPB1qqbUd/9Oh5IAgWpk/HMQdPxEHIEFZgXf937V3
+         1G0M9luOKPOIlJpsjh8qXLG/F1/BMpofF3edU1ESb7nWUYJwCpDGyNW0oyh/6oW8lXZc
+         fY5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=iCs3I501HYTX1yK6QelGPoWlZhP+0U5kV+tr/eNmgh8=;
+        b=mNYC73UwNZrcd9wI7hjPLsQZN9uvhoz3tbGmLRLBbz0fqQlDrMbCelcJeIXwY1QY7S
+         fHylSmH0ZdNE526DiHUxYG8sLtuCxDzlX7fs3ZcDmPVCTYIVBm391aT+93lohevVvXij
+         0LSfN6y7DvBngkMR7aLk6EAlHnKRi/HfmoEh2uGxAniwHJIrGSGvs+I/sSUWCNIMscu2
+         LgONaqxWawO/8Ud7yB5XjVYcSlySEvz+VeZgELrQsumbMAYNVumXuEqwPiq4YKgBQIH/
+         8kPo2tg/tcxTU7lCVrLBvZYV7UUnRrhGgi1Ebbd4iPC24Nxes2Kho62QmcNr8cDTia4U
+         e4+Q==
+X-Gm-Message-State: AOAM532OoospX5AqnzorWdyDr786jM60cihxQJXS5ZNYxFnZR/sOjjwR
+	+E6lWwRS1ow0/s5sg0yZ+xPHnCDHhLqx8gf+pLI=
+X-Google-Smtp-Source: ABdhPJwbrhFZ0+NAMapRQmn0wbttstSg/qlsHUKXe7E/VOVk8BMV1UCKGCPkj5Jgzn/5h/pPwI3qRSBRPERgzGssL1A=
+X-Received: by 2002:a0c:e387:: with SMTP id a7mr3495858qvl.21.1603294966266;
+ Wed, 21 Oct 2020 08:42:46 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20201021135621.5073-1-s-anna@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+References: <20201020181601.29276-1-raj.khem@gmail.com> <20201020184341.GB14852@beryl>
+ <0fc0e5e9-005d-02a5-687d-aeb0cb89c4e8@ti.com> <56d43279-dbc4-92b0-67dd-70bb4289e355@ti.com>
+In-Reply-To: <56d43279-dbc4-92b0-67dd-70bb4289e355@ti.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 21 Oct 2020 08:42:20 -0700
+Message-ID: <CAMKF1sqSfNJ7q+WKSxNL1cG=W7tfCkE0AADtpUSfmA9s5utX0A@mail.gmail.com>
+Subject: Re: [meta-ti] [PATCH] layer.conf: Add gatesgarth to LAYERSERIES_COMPAT
+To: Dan Murphy <dmurphy@ti.com>
+Cc: Denys Dmytriyenko <denys@ti.com>, meta-ti@lists.yoctoproject.org
+Content-Type: text/plain; charset="UTF-8"
 
-Suman
-
-On 10/21/20 8:56 AM, Suman Anna wrote:
-> Add the initial recipes for building the ti-rpmsg-char package.
-> The library and examples are built using two separate recipes
-> in ti-rpmsg-char_git.bb and ti-rpmsg-char-examples_git.bb.
+On Wed, Oct 21, 2020 at 8:17 AM Dan Murphy <dmurphy@ti.com> wrote:
 >
-> Signed-off-by: Suman Anna <s-anna@ti.com>
-> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
-> ---
->   recipes-ti/ipc/ti-rpmsg-char-examples_git.bb | 12 ++++++++++++
->   recipes-ti/ipc/ti-rpmsg-char.inc             | 19 +++++++++++++++++++
->   recipes-ti/ipc/ti-rpmsg-char_git.bb          | 11 +++++++++++
->   3 files changed, 42 insertions(+)
->   create mode 100644 recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
->   create mode 100644 recipes-ti/ipc/ti-rpmsg-char.inc
->   create mode 100644 recipes-ti/ipc/ti-rpmsg-char_git.bb
+> Khem
 >
-> diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> new file mode 100644
-> index 000000000000..1d86e95526cc
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> @@ -0,0 +1,12 @@
-> +DESCRIPTION = "TI RPMsg Char Sample Applications and Tests"
-> +
-> +require ti-rpmsg-char.inc
-> +
-> +DEPENDS = "ti-rpmsg-char"
-> +RDEPENDS_${PN} = "ti-rpmsg-char"
-> +
-> +inherit autotools pkgconfig
-> +
-> +EXTRA_OEMAKE = "-C ${B}/examples"
-> +
-> +PR = "r0"
-> diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
-> new file mode 100644
-> index 000000000000..454deea674b3
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-rpmsg-char.inc
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION = "TI RPMsg Char Utility Library"
-> +
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://${S}/src/rpmsg_char.c;beginline=1;endline=31;md5=71987db43a2159cff5ea00505c6fce58"
-> +
-> +TI_RPMSG_CHAR_GIT_URI = "git://git.ti.com/rpmsg/ti-rpmsg-char.git"
-> +TI_RPMSG_CHAR_GIT_PROTOCOL = "git"
-> +TI_RPMSG_CHAR_GIT_BRANCH = "master"
-> +
-> +# Initial 0.1.0 release
-> +TI_RPMSG_CHAR_SRCREV = "9be402c2bf4053900b6b9a8092fbb42e7e303108"
-> +
-> +BRANCH = "${TI_RPMSG_CHAR_GIT_BRANCH}"
-> +SRC_URI = "${TI_RPMSG_CHAR_GIT_URI};protocol=${TI_RPMSG_CHAR_GIT_PROTOCOL};branch=${BRANCH};name=ti-rpmsg-char"
-> +SRCREV = "${TI_RPMSG_CHAR_SRCREV}"
-> +
-> +PV = "0.1.0+git${SRCPV}"
-> +
-> +S = "${WORKDIR}/git"
-> diff --git a/recipes-ti/ipc/ti-rpmsg-char_git.bb b/recipes-ti/ipc/ti-rpmsg-char_git.bb
-> new file mode 100644
-> index 000000000000..c132a390f301
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-rpmsg-char_git.bb
-> @@ -0,0 +1,11 @@
-> +DESCRIPTION = "TI RPMsg Char Utility Library"
-> +
-> +require ti-rpmsg-char.inc
-> +
-> +DEPENDS += "virtual/kernel"
-> +
-> +inherit autotools pkgconfig
-> +
-> +do_compile[depends] += "virtual/kernel:do_shared_workdir"
-> +
-> +PR = "r0"
+> On 10/20/20 2:17 PM, Dan Murphy via lists.yoctoproject.org wrote:
+>
+> Hello
+>
+> On 10/20/20 1:43 PM, Denys Dmytriyenko via lists.yoctoproject.org wrote:
+>
+> On Tue, Oct 20, 2020 at 11:16:01AM -0700, Khem Raj wrote:
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> Reviewed-by: Denys Dmytriyenko <denys@ti.com>
+>
+> Only applicable to master.
+>
+>
+> Applied to master only
+>
+> This causes a build failure on master
+>
+> ERROR: Layer meta-python is not compatible with the core layer which only supports these series: gatesgarth (layer is compatible with warrior thud dunfell zeus)
+>
 
-Is this just for master or is it applicable to dunfell?
-
-Otherwise it looks fine to me
-
-Dan
-
+perhaps you are using an old snapshot of meta-openembedded repo ?
