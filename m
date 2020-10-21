@@ -1,136 +1,136 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.13410.1603293422953561321
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web09.13433.1603293780059132150
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 21 Oct 2020 08:17:03 -0700
+ Wed, 21 Oct 2020 08:23:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=f4RZOuOt;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09LFH1w9110623;
-	Wed, 21 Oct 2020 10:17:01 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=qv1X69vk;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id C561F38C1166
+	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2020 08:22:58 -0700 (PDT)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09LFMvBR113514
+	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2020 10:22:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603293421;
-	bh=ZQo1kdI9KABn6BnYYSSW3IujXTGejc4C7tiVKd7o9lI=;
+	s=ti-com-17Q1; t=1603293777;
+	bh=l0tBw/BDLMtEb/rHYAfU7K/o/hyWxqTyhdtmnIHdoB0=;
 	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=f4RZOuOt9LOunE+QqX6XuAexWejVcAWMbWrF8DAWfQDjT/gtIFwRjiKwhQd5W8weV
-	 jWFlQdBBKE+HhfcICLEjfLrXoZ1Mm43VGq4NEXXatJzx/Jf80MNvwUkysnWrL6fgKc
-	 hlJgmEEEllhkorv8qkli5vflGHJvA/ywgRMRPXb0=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09LFH1hx095941
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 21 Oct 2020 10:17:01 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	b=qv1X69vk1WSQZF4HUoVZX6aUJa1jSR6K0itt9nkoejsjfee+9kwxrkIIlL2hPSTsb
+	 3zRFS4/H+dBgEK6hPpTMglrGiQktazN/fJh2UnRnPvO9FQepU1Htjw3yBwIvyk/G8k
+	 twGGjs1hfS134VjzEVDRpKnZWCH4HUcFibO3bnng=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09LFMv0t051756
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Wed, 21 Oct 2020 10:22:57 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 21
- Oct 2020 10:17:01 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2020 10:22:57 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 21 Oct 2020 10:17:01 -0500
+ Frontend Transport; Wed, 21 Oct 2020 10:22:57 -0500
 Received: from [10.250.39.65] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09LFH0ue001175;
-	Wed, 21 Oct 2020 10:17:01 -0500
-Subject: Re: [meta-ti] [PATCH] layer.conf: Add gatesgarth to LAYERSERIES_COMPAT
-To: <denys@ti.com>, Khem Raj <raj.khem@gmail.com>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20201020181601.29276-1-raj.khem@gmail.com>
- <20201020184341.GB14852@beryl> <0fc0e5e9-005d-02a5-687d-aeb0cb89c4e8@ti.com>
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09LFMvaU113637;
+	Wed, 21 Oct 2020 10:22:57 -0500
+Subject: Re: [dunfell/master PATCH] ipc: ti-rpmsg-char: Add initial recipes
+To: Suman Anna <s-anna@ti.com>, Denys Dmytriyenko <denys@ti.com>
+CC: <meta-ti@yoctoproject.org>, Gowtham Tammana <g-tammana@ti.com>
+References: <20201021135621.5073-1-s-anna@ti.com>
 From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <56d43279-dbc4-92b0-67dd-70bb4289e355@ti.com>
-Date: Wed, 21 Oct 2020 10:17:00 -0500
+Message-ID: <843f5cd3-375d-1cc4-ca7a-981920caca33@ti.com>
+Date: Wed, 21 Oct 2020 10:22:56 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <0fc0e5e9-005d-02a5-687d-aeb0cb89c4e8@ti.com>
+In-Reply-To: <20201021135621.5073-1-s-anna@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: multipart/alternative;
-	boundary="------------9FC0E64303340E5D3790C8B5"
-Content-Language: en-US
-
---------------9FC0E64303340E5D3790C8B5
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Khem
+Suman
 
-On 10/20/20 2:17 PM, Dan Murphy via lists.yoctoproject.org wrote:
-> Hello
+On 10/21/20 8:56 AM, Suman Anna wrote:
+> Add the initial recipes for building the ti-rpmsg-char package.
+> The library and examples are built using two separate recipes
+> in ti-rpmsg-char_git.bb and ti-rpmsg-char-examples_git.bb.
 >
-> On 10/20/20 1:43 PM, Denys Dmytriyenko via lists.yoctoproject.org wrote:
->> On Tue, Oct 20, 2020 at 11:16:01AM -0700, Khem Raj wrote:
->>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Reviewed-by: Denys Dmytriyenko <denys@ti.com>
->>
->> Only applicable to master.
+> Signed-off-by: Suman Anna <s-anna@ti.com>
+> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+> ---
+>   recipes-ti/ipc/ti-rpmsg-char-examples_git.bb | 12 ++++++++++++
+>   recipes-ti/ipc/ti-rpmsg-char.inc             | 19 +++++++++++++++++++
+>   recipes-ti/ipc/ti-rpmsg-char_git.bb          | 11 +++++++++++
+>   3 files changed, 42 insertions(+)
+>   create mode 100644 recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
+>   create mode 100644 recipes-ti/ipc/ti-rpmsg-char.inc
+>   create mode 100644 recipes-ti/ipc/ti-rpmsg-char_git.bb
 >
-> Applied to master only
->
-This causes a build failure on master
+> diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
+> new file mode 100644
+> index 000000000000..1d86e95526cc
+> --- /dev/null
+> +++ b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION = "TI RPMsg Char Sample Applications and Tests"
+> +
+> +require ti-rpmsg-char.inc
+> +
+> +DEPENDS = "ti-rpmsg-char"
+> +RDEPENDS_${PN} = "ti-rpmsg-char"
+> +
+> +inherit autotools pkgconfig
+> +
+> +EXTRA_OEMAKE = "-C ${B}/examples"
+> +
+> +PR = "r0"
+> diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
+> new file mode 100644
+> index 000000000000..454deea674b3
+> --- /dev/null
+> +++ b/recipes-ti/ipc/ti-rpmsg-char.inc
+> @@ -0,0 +1,19 @@
+> +DESCRIPTION = "TI RPMsg Char Utility Library"
+> +
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://${S}/src/rpmsg_char.c;beginline=1;endline=31;md5=71987db43a2159cff5ea00505c6fce58"
+> +
+> +TI_RPMSG_CHAR_GIT_URI = "git://git.ti.com/rpmsg/ti-rpmsg-char.git"
+> +TI_RPMSG_CHAR_GIT_PROTOCOL = "git"
+> +TI_RPMSG_CHAR_GIT_BRANCH = "master"
+> +
+> +# Initial 0.1.0 release
+> +TI_RPMSG_CHAR_SRCREV = "9be402c2bf4053900b6b9a8092fbb42e7e303108"
+> +
+> +BRANCH = "${TI_RPMSG_CHAR_GIT_BRANCH}"
+> +SRC_URI = "${TI_RPMSG_CHAR_GIT_URI};protocol=${TI_RPMSG_CHAR_GIT_PROTOCOL};branch=${BRANCH};name=ti-rpmsg-char"
+> +SRCREV = "${TI_RPMSG_CHAR_SRCREV}"
+> +
+> +PV = "0.1.0+git${SRCPV}"
+> +
+> +S = "${WORKDIR}/git"
+> diff --git a/recipes-ti/ipc/ti-rpmsg-char_git.bb b/recipes-ti/ipc/ti-rpmsg-char_git.bb
+> new file mode 100644
+> index 000000000000..c132a390f301
+> --- /dev/null
+> +++ b/recipes-ti/ipc/ti-rpmsg-char_git.bb
+> @@ -0,0 +1,11 @@
+> +DESCRIPTION = "TI RPMsg Char Utility Library"
+> +
+> +require ti-rpmsg-char.inc
+> +
+> +DEPENDS += "virtual/kernel"
+> +
+> +inherit autotools pkgconfig
+> +
+> +do_compile[depends] += "virtual/kernel:do_shared_workdir"
+> +
+> +PR = "r0"
 
-ERROR: Layer meta-python is not compatible with the core layer which only supports these series: gatesgarth (layer is compatible with warrior thud dunfell zeus)
+Is this just for master or is it applicable to dunfell?
 
+Otherwise it looks fine to me
 
-> Dan
->
->
-> 
->
+Dan
 
---------------9FC0E64303340E5D3790C8B5
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>Khem<br>
-    </p>
-    <div class="moz-cite-prefix">On 10/20/20 2:17 PM, Dan Murphy via
-      lists.yoctoproject.org wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:0fc0e5e9-005d-02a5-687d-aeb0cb89c4e8@ti.com">Hello
-      <br>
-      <br>
-      On 10/20/20 1:43 PM, Denys Dmytriyenko via lists.yoctoproject.org
-      wrote:
-      <br>
-      <blockquote type="cite">On Tue, Oct 20, 2020 at 11:16:01AM -0700,
-        Khem Raj wrote:
-        <br>
-        <blockquote type="cite">Signed-off-by: Khem Raj
-          <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
-          <br>
-        </blockquote>
-        Reviewed-by: Denys Dmytriyenko <a class="moz-txt-link-rfc2396E" href="mailto:denys@ti.com">&lt;denys@ti.com&gt;</a>
-        <br>
-        <br>
-        Only applicable to master.
-        <br>
-      </blockquote>
-      <br>
-      Applied to master only
-      <br>
-      <br>
-    </blockquote>
-    <p>This causes a build failure on master</p>
-    <pre class="console-output" style="box-sizing: border-box; white-space: pre-wrap; overflow-wrap: break-word; margin: 0px; color: rgb(51, 51, 51); font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">ERROR: Layer meta-python is not compatible with the core layer which only supports these series: gatesgarth (layer is compatible with warrior thud dunfell zeus)</pre>
-    <p><br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:0fc0e5e9-005d-02a5-687d-aeb0cb89c4e8@ti.com">Dan
-      <br>
-      <br>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------9FC0E64303340E5D3790C8B5--
