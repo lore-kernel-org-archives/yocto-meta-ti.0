@@ -1,41 +1,41 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.11413.1603376952972861425
+ by mx.groups.io with SMTP id smtpd.web10.706.1603381725857774628
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 22 Oct 2020 07:29:13 -0700
+ Thu, 22 Oct 2020 08:48:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=u1SF7AF0;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=pFcIHs9Y;
  spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09METB40013886
-	for <meta-ti@lists.yoctoproject.org>; Thu, 22 Oct 2020 09:29:11 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09MFmj30046000
+	for <meta-ti@lists.yoctoproject.org>; Thu, 22 Oct 2020 10:48:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603376951;
-	bh=zwFhTCe3u9b0/rqFr2U/O3oApSPNmyaCkkLSxRmca+Y=;
+	s=ti-com-17Q1; t=1603381725;
+	bh=cbiYWIwycFwZ8Q02QgUDODh/IWZtBtc5ryxXQi93SP0=;
 	h=From:To:CC:Subject:Date;
-	b=u1SF7AF0uHVZqK6se7wgWBUAfdu4FkwczUcHjBhy83Ohf4LYWqq1NjB2OcicQZqJ4
-	 tQjk0hIh0ZLZmuKsP2e52Z0GxluV6+uSpIe6xLos0uleN/Xw8ImrfhC1U9adTYGTt/
-	 k8dj3I5Oe7BxHMXGe54fij4GIW7OGH2CzA91dYF8=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09METB3M024082
+	b=pFcIHs9YjxBPME9TWuhLg+OKNY6RhrYj1LpnNQGSi20psj154bJ6iTeAimVvKRTft
+	 MxdTICOpW/PWned8tlknhSv2FhqbUyh3v3MCAsafVRWtxUUOobgi8H8dM2wIqdhDlz
+	 CU5eV8NzvLF1CcbZBKPAwviPVmfi5EMipNucjqaY=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09MFmjja087773
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 22 Oct 2020 09:29:11 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Thu, 22 Oct 2020 10:48:45 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 22
- Oct 2020 09:29:11 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2020 10:48:44 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 22 Oct 2020 09:29:11 -0500
+ Frontend Transport; Thu, 22 Oct 2020 10:48:44 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09METANp019906;
-	Thu, 22 Oct 2020 09:29:11 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09MFmivO043613;
+	Thu, 22 Oct 2020 10:48:44 -0500
 From: "Dan Murphy" <dmurphy@ti.com>
 To: <denys@ti.com>, <meta-ti@lists.yoctoproject.org>
 CC: Dan Murphy <dmurphy@ti.com>
-Subject: [PATCH] boot-monitor: update to latest commit SHA
-Date: Thu, 22 Oct 2020 09:29:09 -0500
-Message-ID: <20201022142909.20780-1-dmurphy@ti.com>
+Subject: [PATCH] u-boot-ti-staging: Update to latest HEAD for bug fix
+Date: Thu, 22 Oct 2020 10:48:44 -0500
+Message-ID: <20201022154844.3478-1-dmurphy@ti.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -44,22 +44,23 @@ Content-Type: text/plain
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/boot-monitor/boot-monitor_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index 1b6f3206afe7..9c436d1c1669 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -15,7 +15,7 @@ BRANCH = "master"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+index dd213d5d670d..3956a3092679 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
  
- S = "${WORKDIR}/git"
+-PR = "r19"
++PR = "r20"
  
--SRCREV = "e1f885ab6dc544884728e333cc6e396f7eb08286"
-+SRCREV = "d57d5c1d8f0b0b1487484d9ceb1595bd4507231a"
+ BRANCH = "ti-u-boot-2020.01"
  
- BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
- 
+-SRCREV = "bf0a77ee8e102e921c8f08f8e919a45ffb270ebe"
++SRCREV = "31c183d1c46b69a2f1e5dc1cc2173b8ce82a3ed9"
 -- 
 2.28.0.585.ge1cfff676549
 
