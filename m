@@ -1,66 +1,107 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.706.1603381725857774628
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.1648.1603393703509815872
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 22 Oct 2020 08:48:46 -0700
+ Thu, 22 Oct 2020 12:08:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=pFcIHs9Y;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09MFmj30046000
-	for <meta-ti@lists.yoctoproject.org>; Thu, 22 Oct 2020 10:48:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603381725;
-	bh=cbiYWIwycFwZ8Q02QgUDODh/IWZtBtc5ryxXQi93SP0=;
-	h=From:To:CC:Subject:Date;
-	b=pFcIHs9YjxBPME9TWuhLg+OKNY6RhrYj1LpnNQGSi20psj154bJ6iTeAimVvKRTft
-	 MxdTICOpW/PWned8tlknhSv2FhqbUyh3v3MCAsafVRWtxUUOobgi8H8dM2wIqdhDlz
-	 CU5eV8NzvLF1CcbZBKPAwviPVmfi5EMipNucjqaY=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09MFmjja087773
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 22 Oct 2020 10:48:45 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 22
- Oct 2020 10:48:44 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 22 Oct 2020 10:48:44 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09MFmivO043613;
-	Thu, 22 Oct 2020 10:48:44 -0500
-From: "Dan Murphy" <dmurphy@ti.com>
-To: <denys@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: Dan Murphy <dmurphy@ti.com>
-Subject: [PATCH] u-boot-ti-staging: Update to latest HEAD for bug fix
-Date: Thu, 22 Oct 2020 10:48:44 -0500
-Message-ID: <20201022154844.3478-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.27.0
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C6A2740C35;
+	Thu, 22 Oct 2020 19:08:22 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SViqxhyFILO2; Thu, 22 Oct 2020 19:08:22 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ABD3340B2D;
+	Thu, 22 Oct 2020 19:08:21 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 66CA71744AF;
+	Thu, 22 Oct 2020 15:08:21 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [dunfell/master][PATCH] conf/machine: extend SR2.0 support from AM65 GP to AM65 HS platform
+Date: Thu, 22 Oct 2020 15:08:19 -0400
+Message-Id: <1603393699-49549-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/am65xx-evm.conf                                        | 6 ------
+ .../{am65xx-evm-k3r5-sr2.conf => am65xx-hs-evm-k3r5-sr2.conf}       | 6 +++---
+ conf/machine/am65xx-hs-evm-k3r5.conf                                | 1 +
+ conf/machine/include/am65xx.inc                                     | 6 ++++++
+ 4 files changed, 10 insertions(+), 9 deletions(-)
+ copy conf/machine/{am65xx-evm-k3r5-sr2.conf => am65xx-hs-evm-k3r5-sr2.conf} (52%)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-index dd213d5d670d..3956a3092679 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
+diff --git a/conf/machine/am65xx-evm.conf b/conf/machine/am65xx-evm.conf
+index 2f3b92a..8b6ef54 100644
+--- a/conf/machine/am65xx-evm.conf
++++ b/conf/machine/am65xx-evm.conf
+@@ -4,10 +4,4 @@
  
--PR = "r19"
-+PR = "r20"
+ require conf/machine/include/am65xx.inc
  
- BRANCH = "ti-u-boot-2020.01"
+-BBMULTICONFIG += "k3r5-sr2"
+-
+ UBOOT_MACHINE = "am65x_evm_a53_defconfig"
+-
+-IMAGE_BOOT_FILES += "sysfw-am65x-evm.itb"
+-do_image_wic[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
+-do_image_tar[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
+diff --git a/conf/machine/am65xx-evm-k3r5-sr2.conf b/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
+similarity index 52%
+copy from conf/machine/am65xx-evm-k3r5-sr2.conf
+copy to conf/machine/am65xx-hs-evm-k3r5-sr2.conf
+index c0b3cd5..ef1b6fb 100644
+--- a/conf/machine/am65xx-evm-k3r5-sr2.conf
++++ b/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
+@@ -1,10 +1,10 @@
+ #@TYPE: Machine
+-#@NAME: AM65xx SR2.0 EVM (R5F)
+-#@DESCRIPTION: Machine configuration for the TI AM65xx SR2.0 EVM (R5F core)
++#@NAME: AM65xx SR2.0 HS EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM65xx SR2.0 HS EVM (R5F core)
  
--SRCREV = "bf0a77ee8e102e921c8f08f8e919a45ffb270ebe"
-+SRCREV = "31c183d1c46b69a2f1e5dc1cc2173b8ce82a3ed9"
+ # Booting SR2 requires different SYSFW, the rest is handled at runtime
+ 
+-require conf/machine/am65xx-evm-k3r5.conf
++require conf/machine/am65xx-hs-evm-k3r5.conf
+ SOC_FAMILY_append = ":k3r5-sr2"
+ 
+ SYSFW_SOC = "am65x_sr2"
+diff --git a/conf/machine/am65xx-hs-evm-k3r5.conf b/conf/machine/am65xx-hs-evm-k3r5.conf
+index 2b06f2c..d6d4b1e 100644
+--- a/conf/machine/am65xx-hs-evm-k3r5.conf
++++ b/conf/machine/am65xx-hs-evm-k3r5.conf
+@@ -7,6 +7,7 @@ require conf/machine/include/k3r5.inc
+ SYSFW_SOC = "am65x"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs"
++SYSFW_SYMLINK = ""
+ 
+ UBOOT_MACHINE = "am65x_hs_evm_r5_defconfig"
+ 
+diff --git a/conf/machine/include/am65xx.inc b/conf/machine/include/am65xx.inc
+index 67cfabe..684fea4 100644
+--- a/conf/machine/include/am65xx.inc
++++ b/conf/machine/include/am65xx.inc
+@@ -21,6 +21,12 @@ KERNEL_DEVICETREE = " \
+     ti/k3-am654-evm-prupwm.dtbo \
+ "
+ 
++BBMULTICONFIG += "k3r5-sr2"
++
++IMAGE_BOOT_FILES += "sysfw-am65x-evm.itb"
++do_image_wic[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
++do_image_tar[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
++
+ OPTEEMACHINE = "k3-am65x"
+ OPTEEOUTPUTMACHINE = "k3"
+ 
 -- 
-2.28.0.585.ge1cfff676549
+2.7.4
 
