@@ -1,57 +1,63 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.8799.1603460417821131467
+ by mx.groups.io with SMTP id smtpd.web08.7570.1603513112901355814
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 23 Oct 2020 06:40:18 -0700
+ Fri, 23 Oct 2020 21:18:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=yQjgN+Dm;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 89F1F38C06C2
-	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2020 06:40:17 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09NDeGPO035474
-	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2020 08:40:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603460416;
-	bh=F1KKfJZBrWzi6ssoKYtWb495Uwo3zAdb7p7PuDSVvvw=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=yQjgN+DmuiM7GiRkRSiWHWLL6QfF0tDIIiywEmPmry1U5YpyNhbkvvOF3PA3pdqjO
-	 c3CDxM7mWyuPq+/DsSlXEUOs0OYIc7VihK82xBwCscll0jD1L0E7OqS/S9/sikbm/z
-	 ljHTxJKhxo8od+Eww4CHQFcgiV3f71HkVo3+t1Zc=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09NDeGcT129233
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2020 08:40:16 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 23
- Oct 2020 08:40:16 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 23 Oct 2020 08:40:16 -0500
-Received: from [10.250.39.65] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09NDeGBQ029132;
-	Fri, 23 Oct 2020 08:40:16 -0500
-Subject: Re: [dunfell/master PATCH v2] ipc: ti-rpmsg-char: Add initial recipes
-To: Suman Anna <s-anna@ti.com>, Denys Dmytriyenko <denys@ti.com>
-CC: <meta-ti@yoctoproject.org>, Gowtham Tammana <g-tammana@ti.com>
-References: <20201022005614.9344-1-s-anna@ti.com>
-From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <c254f5a1-247c-8c28-5cc8-e68a9c316225@ti.com>
-Date: Fri, 23 Oct 2020 08:40:11 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fl5FVQGw;
+ spf=softfail (domain: gmail.com, ip: 198.145.29.25, mailfrom: raj.khem@gmail.com)
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 19CB638C089F
+	for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2020 21:18:32 -0700 (PDT)
+Received: by mail-qk1-f194.google.com with SMTP id k9so3590205qki.6
+        for <meta-ti@yoctoproject.org>; Fri, 23 Oct 2020 21:18:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/Vo9R03OmhTUyEhgxw5Jwt1wRwDTh/7blY820EddUR0=;
+        b=fl5FVQGwv91zNwB8/nTBa/kDgmwQJ+lRCPuMEGbxlpRVQ2VX0AbXjusXnTO6rc3HMS
+         QRhDdnunvcPkfr95y6WmfYcRN4uJ+hZIlpCuq5LItxPtI1TGjI6M50eoqBARcGkFjJQa
+         ssq0akjY7drmUPKU1rBdeBcHCHnmkZpY5Gxn8upQBQ0llbtmjkgKTspJis8iPQQCUaVp
+         aPjf6+2WvZvSnjhEJedmi8EXia0o4TN6TrtzUCiIjXVOZQdpL4mElnJgXiiExzTR5ydg
+         zZzhRwsJ6I4h0sVbeAzXbc/hfvabdPI7RSdg9BvPeAhKOM9Ak/iHHYFJm2ulO0fEpA56
+         4xCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/Vo9R03OmhTUyEhgxw5Jwt1wRwDTh/7blY820EddUR0=;
+        b=gR04e9WWtw4duD6wbai6JSpKkRGkX/LHETCYTlb5Lml18iZ8CMlBYsIIBcp5+gh098
+         i5qGjIwOKxDDKRlc77h24PjSVDvPT0T2vPxStek5aaTWrLxaLT6QhrEJtT862CVBaM8M
+         zeY/EZNDP1SuN14SpMHaOI7ukKRxjWSSjVcYpw8gdD/VYtXVWOfQtYa0QWcYhQmJvwQU
+         sSh1WNL+UZ5tUuprXlueq9zIaqhG/u6JhphG/C8Bbuk16iHI4i7E+1yD0hP21+tGgTQn
+         ttz5hRQRoxuM378NrnQv/DmgYTOCbz34tD7qvtmh7IQfOAnjqYRcDrTGOu0I8oSrAgul
+         8qqg==
+X-Gm-Message-State: AOAM531Y1cbL+oE1Ru1wG9X6p4Uz0JFDqNwZZU2I+OnV5o3Jq1xxBxRU
+	5FbTMj0pTINH8JQkl2olHhoEdqbxiGp3EEwWS5vK2u86yGAKLQ==
+X-Google-Smtp-Source: ABdhPJwXpXW7BYz4m/qImDRVRxAkcE9vgFB6x4eqknkJ9dBS48bbzFvpvb0+OZD972WGtNn1HYPslPYfaFQCPWFwUvc=
+X-Received: by 2002:a37:27c9:: with SMTP id n192mr5347822qkn.71.1603513110922;
+ Fri, 23 Oct 2020 21:18:30 -0700 (PDT)
 MIME-Version: 1.0
+References: <20201022005614.9344-1-s-anna@ti.com>
 In-Reply-To: <20201022005614.9344-1-s-anna@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 23 Oct 2020 21:18:04 -0700
+Message-ID: <CAMKF1sqm3Q4q+t9o4CBFZWec3HBiDTqBocp1yQGytX4maSz6VQ@mail.gmail.com>
+Subject: Re: [meta-ti] [dunfell/master PATCH v2] ipc: ti-rpmsg-char: Add initial recipes
+To: s-anna@ti.com
+Cc: Denys Dmytriyenko <denys@ti.com>, Dan Murphy <dmurphy@ti.com>, meta-ti@yoctoproject.org, 
+	Gowtham Tammana <g-tammana@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Suman
+This fails a build time QA check. See
 
-On 10/21/20 7:56 PM, Suman Anna wrote:
+http://errors.yoctoproject.org/Errors/Build/111395/
+
+Please look into this.
+
+On Wed, Oct 21, 2020 at 5:56 PM Suman Anna via lists.yoctoproject.org
+<s-anna=ti.com@lists.yoctoproject.org> wrote:
+>
 > Add the initial recipes for building the ti-rpmsg-char package.
 > The library and examples are built using two separate recipes
 > in ti-rpmsg-char_git.bb and ti-rpmsg-char-examples_git.bb.
@@ -60,18 +66,18 @@ On 10/21/20 7:56 PM, Suman Anna wrote:
 > Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 > ---
 > v2: Addressed review comments from Denys
->   - Dropped the DEPENDS and do_compile depends from ti-rpmsg-char_git.bb
->   - Dropped the RDEPENDS from ti-rpmsg-char-examples_git.bb
->   - Eliminated the TI_RPMSG_CHAR_GIT_xxx variables and redirection
->   - Replaced DESCRIPTION with SUMMARY
+>  - Dropped the DEPENDS and do_compile depends from ti-rpmsg-char_git.bb
+>  - Dropped the RDEPENDS from ti-rpmsg-char-examples_git.bb
+>  - Eliminated the TI_RPMSG_CHAR_GIT_xxx variables and redirection
+>  - Replaced DESCRIPTION with SUMMARY
 >
->   recipes-ti/ipc/ti-rpmsg-char-examples_git.bb | 11 +++++++++++
->   recipes-ti/ipc/ti-rpmsg-char.inc             | 15 +++++++++++++++
->   recipes-ti/ipc/ti-rpmsg-char_git.bb          |  7 +++++++
->   3 files changed, 33 insertions(+)
->   create mode 100644 recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
->   create mode 100644 recipes-ti/ipc/ti-rpmsg-char.inc
->   create mode 100644 recipes-ti/ipc/ti-rpmsg-char_git.bb
+>  recipes-ti/ipc/ti-rpmsg-char-examples_git.bb | 11 +++++++++++
+>  recipes-ti/ipc/ti-rpmsg-char.inc             | 15 +++++++++++++++
+>  recipes-ti/ipc/ti-rpmsg-char_git.bb          |  7 +++++++
+>  3 files changed, 33 insertions(+)
+>  create mode 100644 recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
+>  create mode 100644 recipes-ti/ipc/ti-rpmsg-char.inc
+>  create mode 100644 recipes-ti/ipc/ti-rpmsg-char_git.bb
 >
 > diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
 > new file mode 100644
@@ -124,8 +130,9 @@ On 10/21/20 7:56 PM, Suman Anna wrote:
 > +inherit autotools pkgconfig
 > +
 > +PR = "r0"
-
-This has been applied
-
-Dan
-
+> --
+> 2.28.0
+>
+>
+> 
+>
