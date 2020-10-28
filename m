@@ -1,172 +1,74 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web08.559.1603906571814818763
+ by mx.groups.io with SMTP id smtpd.web10.779.1603907645175743301
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 28 Oct 2020 10:36:11 -0700
+ Wed, 28 Oct 2020 10:54:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=Mjzc88Jo;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: g-tammana@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id B491838C09B7
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 10:36:10 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=JCHmCp2E;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 1869538C11F9
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 10:54:04 -0700 (PDT)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09SHaA11079083
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 12:36:10 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09SHs3oL086018
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 12:54:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603906570;
-	bh=fPD94e1ip7GwWildJ8T/5Lfks1CzqaWQxsdxUiPvack=;
-	h=From:To:CC:Subject:Date;
-	b=Mjzc88Jof/lGy8ujB8w3O5dS9aWu6kOdV8o9RB1JJt9jyrHYzb7idJODAyLrRmYJd
-	 Qy2+tPs7AUKomMGoWqCYjs/0gLDoIJVTBMzz9bGUTq52QZa8O/zF6wG/LkTnFWaNE5
-	 EQ+zb+UDsBr+g4eO5IBGcpGpPVaH+9InRq9sIt4k=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09SHaAIM119661
+	s=ti-com-17Q1; t=1603907643;
+	bh=kaIWPrwhoQS1Y+S+CqIdR5I8IrU0pDz0MmYT/mmffGU=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=JCHmCp2ELZ1LK/bh288lnCo7eGWyR5tn+5T0oHiY7zvPTerhNooGyA7C+4ehVrzW7
+	 x0nU88pstWrSoTyfY6L+teaOsNoUPXYG7hpSG4LVRXEv40+YwK5nHbD7jUVszle5KJ
+	 DM2bg5LPip7UE1ytPqE8EAytzLKW0Ymdb4JU9Et0=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09SHs3t3016452
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 12:36:10 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 12:54:03 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 28
- Oct 2020 12:36:09 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2020 12:54:02 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 28 Oct 2020 12:36:09 -0500
-Received: from lelv0597.itg.ti.com (lelv0597.itg.ti.com [10.181.64.32])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09SHa96t032313;
-	Wed, 28 Oct 2020 12:36:09 -0500
-Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.81.224] (may be forged))
-	by lelv0597.itg.ti.com (8.14.7/8.14.7) with ESMTP id 09SHa9a7121640;
-	Wed, 28 Oct 2020 12:36:09 -0500
-From: "Gowtham Tammana" <g-tammana@ti.com>
-To: <meta-ti@yoctoproject.org>, Dan Murphy <dmurphy@ti.com>,
-        Denys Dmytriyenko
-	<denys@ti.com>
-CC: Gowtham Tammana <g-tammana@ti.com>
-Subject: [meta-ti][dunfell/master][PATCH v2] ti-img-rogue-driver: pull general toolchain support
-Date: Wed, 28 Oct 2020 12:36:08 -0500
-Message-ID: <20201028173608.10421-1-g-tammana@ti.com>
-X-Mailer: git-send-email 2.29.0
+ Frontend Transport; Wed, 28 Oct 2020 12:54:02 -0500
+Received: from [10.250.70.26] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09SHs2nV129965;
+	Wed, 28 Oct 2020 12:54:02 -0500
+Subject: Re: [meta-ti][dunfell/master][PATCH v2] ti-img-rogue-driver: pull general toolchain support
+To: Gowtham Tammana <g-tammana@ti.com>, <meta-ti@yoctoproject.org>,
+        Denys
+ Dmytriyenko <denys@ti.com>
+References: <20201028173608.10421-1-g-tammana@ti.com>
+From: "Dan Murphy" <dmurphy@ti.com>
+Message-ID: <562ed28b-b53a-c87f-3c8e-359aa8adbfa4@ti.com>
+Date: Wed, 28 Oct 2020 12:54:02 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20201028173608.10421-1-g-tammana@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-The patch for supporting the general toolchain is pulled into the repo.
-Removing it here from the recipe.
+Gowtham
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
----
-v2: fix email in signoff
+On 10/28/20 12:36 PM, Gowtham Tammana wrote:
+> The patch for supporting the general toolchain is pulled into the repo.
+> Removing it here from the recipe.
+>
+> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+> ---
+> v2: fix email in signoff
+>
+>   .../0001-km-support-general-toolchain.patch   | 56 -------------------
 
- .../0001-km-support-general-toolchain.patch   | 56 -------------------
- .../ti-img-rogue-driver_1.10.5371573.bb       |  9 ++-
- 2 files changed, 4 insertions(+), 61 deletions(-)
- delete mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-=
-km-support-general-toolchain.patch
+Did you use "git rm" to remove the file? This looks weird that the file 
+changed then got deleted
 
-diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-km-supp=
-ort-general-toolchain.patch b/recipes-bsp/powervr-drivers/ti-img-rogue-dr=
-iver/0001-km-support-general-toolchain.patch
-deleted file mode 100644
-index 4dc219cd..00000000
---- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-km-support-gen=
-eral-toolchain.patch
-+++ /dev/null
-@@ -1,56 +0,0 @@
--From dbdbd9309a58ee723fc827ef5fd45c28347cf61f Mon Sep 17 00:00:00 2001
--From: Eric Ruei <e-ruei1@ti.com>
--Date: Tue, 7 May 2019 17:06:09 -0400
--Subject: [PATCH] km: support general toolchain
--
--This is a patch from IMG to support general toolchains such as
--aarch64-oe-linux-gnu, aarch64-poky-linux-gnu, arm-none-linux-gnueabi
--per IMG ticket 122059
--
--Signed-off-by: Eric Ruei <e-ruei1@ti.com>
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- build/linux/config/compiler.mk        | 12 +++++++++++-
-- .../build/linux/config/compilers/arm-linux-gnueabi.mk       |  6 ++++++
-- 2 files changed, 17 insertions(+), 1 deletion(-)
-- create mode 100644 build/linux/config/compilers/arm-linux-gnueabi.mk
--
--diff --git a/build/linux/config/compiler.mk b/build/linux/config/compile=
-r.mk
--index 82c9d44..dead2f9 100644
----- a/build/linux/config/compiler.mk
--+++ b/build/linux/config/compiler.mk
--@@ -48,13 +48,14 @@ define calculate-compiler-preferred-target
--  ifeq ($(2),qcc)
--   $(1)_compiler_preferred_target :=3D qcc
--  else
---  $(1)_compiler_preferred_target :=3D $$(subst --,-,$$(shell $(2) -dump=
-machine))
--+  $(1)_compiler_preferred_target :=3D $$(subst --,-,$$(subst unknown,,$=
-$(shell $(2) -dumpmachine)))
--   ifeq ($$($(1)_compiler_preferred_target),)
--    $$(warning No output from '$(2) -dumpmachine')
--    $$(warning Check that the compiler is in your PATH and CROSS_COMPILE=
- is)
--    $$(warning set correctly.)
--    $$(error Unable to run compiler '$(2)')
--   endif
--+  $$(warning $(1) $(2))
--   ifneq ($$(filter %-w64-mingw32,$$($(1)_compiler_preferred_target)),)
--    # Use the compiler target name.
--   else
--@@ -64,6 +65,15 @@ define calculate-compiler-preferred-target
--    ifneq ($$(filter arm-linux-android,$$($(1)_compiler_preferred_target=
-)),)
--     $(1)_compiler_preferred_target :=3D arm-linux-androideabi
--    endif
--+  ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
--+   $(1)_compiler_preferred_target :=3D aarch64-linux-gnu
--+  endif
--+  ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redh=
-at-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
--+   $(1)_compiler_preferred_target :=3D arm-linux-gnueabi
--+  endif
--+  ifneq ($$(filter arm-%-gnueabihf,$$($(1)_compiler_preferred_target)),=
-)
--+   $(1)_compiler_preferred_target :=3D arm-linux-gnueabihf
--+  endif
--    ifneq ($$(filter clang%,$(2)),)
--     ifeq ($(1),target)
--      ifeq (arm-linux-gnueabihf,$$(CROSS_TRIPLE))
----=20
--2.7.4
--
-diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573=
-.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
-index da4ec6e6..e0632a18 100644
---- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
-+++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
-@@ -7,7 +7,7 @@ inherit module features_check
-=20
- REQUIRED_MACHINE_FEATURES =3D "gpu"
-=20
--MACHINE_KERNEL_PR_append =3D "f"
-+MACHINE_KERNEL_PR_append =3D "g"
- PR =3D "${MACHINE_KERNEL_PR}"
-=20
- PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-@@ -19,12 +19,11 @@ PROVIDES =3D "virtual/gpudriver"
-=20
- BRANCH =3D "linuxws/zeus/k5.4/${PV}"
-=20
--SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D=
-${BRANCH} \
--    file://0001-km-support-general-toolchain.patch \
--"
-+SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D=
-${BRANCH}"
-+
- S =3D "${WORKDIR}/git"
-=20
--SRCREV =3D "e0bc128ee5098e30c9fb096634ba6bec01b5fc17"
-+SRCREV =3D "f58bea1084c5004f129943a53b94ee1446e9c3a7"
-=20
- PVR_SOC =3D "j721e_linux"
- PVR_BVNC =3D "22.104.208.318"
---=20
-2.29.0
+Generally we should just see
+
+  delete mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-km-support-general-toolchain.patch
+
+Dan
+
 
