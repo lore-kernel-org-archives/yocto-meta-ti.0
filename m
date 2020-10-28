@@ -1,100 +1,170 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.8399.1603766754744792484
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web10.449.1603906391773610386
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 26 Oct 2020 19:45:54 -0700
+ Wed, 28 Oct 2020 10:33:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=m/YLFUS7;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: s-anna@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09R2jr2J096838;
-	Mon, 26 Oct 2020 21:45:53 -0500
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=nfjcqbXF;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: g-tammana@ti.com)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 14A4138C09B7
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 10:33:11 -0700 (PDT)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09SHXA9f076643;
+	Wed, 28 Oct 2020 12:33:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603766753;
-	bh=RUSvtvpN7FKvZLdEawUjWTpS7asr74xnve1s0HBBQc4=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=m/YLFUS7wmJmZA3aPPdvvJoaiUiWWCiJth90tJxPn3ehkUQ16EIvnu6T3f7Qg7dbM
-	 8qs8p6rQzlliLHQKdY9hHWHG7k5RCIBjESnJ07zujXWswvBqcTUdZvn4dFldp4GAyq
-	 /ysV/Tq4o0xTOGopkGd3pWftz7q9M9hV16kCzdLk=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09R2jrTT082711
+	s=ti-com-17Q1; t=1603906390;
+	bh=+p4q+44Hmi8bu1MgPPNHW/P+pkdgaCUbEKRSiGkE5Sk=;
+	h=From:To:CC:Subject:Date;
+	b=nfjcqbXFBf6uLHZnIajHuCTuQ11F7YIGDpUgetuUTh8nZ/TfNWaQwkJ2c/qy0Se5l
+	 9u0j3JBMA/tB7Lkw3aa5yCyet/3TLwPbxDPoFY0KenaZgBvMfUVWeqqd67mbmISWmG
+	 WDBO6jJk2lSPKjnFkXiYDqQojgXOeoljKcA7Rj/c=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09SHX9nJ120462
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 26 Oct 2020 21:45:53 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 26
- Oct 2020 21:45:53 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 28 Oct 2020 12:33:09 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 28
+ Oct 2020 12:33:09 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 26 Oct 2020 21:45:53 -0500
-Received: from [10.250.64.251] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09R2jrGI067647;
-	Mon, 26 Oct 2020 21:45:53 -0500
-Subject: Re: [meta-ti] [PATCH 2/2] ti-rpmsg-char: Mark these recipes to be TI SOC specific
-To: Khem Raj <raj.khem@gmail.com>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20201025065934.3308920-1-raj.khem@gmail.com>
- <20201025065934.3308920-2-raj.khem@gmail.com>
- <03f490f1-ff1a-b3fc-6511-00b8d707eb6e@ti.com>
- <CAMKF1so1wH-hQQQ1L3E6dAFLEAxdXkbDjpd9xRzt3tjjdDqPrg@mail.gmail.com>
-From: "Suman Anna" <s-anna@ti.com>
-Message-ID: <d4dc4e73-f643-3dea-7d49-c696d8091f3f@ti.com>
-Date: Mon, 26 Oct 2020 21:45:53 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Frontend Transport; Wed, 28 Oct 2020 12:33:09 -0500
+Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09SHX9Zd092423;
+	Wed, 28 Oct 2020 12:33:09 -0500
+Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.81.224] (may be forged))
+	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 09SHX9MX045675;
+	Wed, 28 Oct 2020 12:33:09 -0500
+From: "Gowtham Tammana" <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>, Dan Murphy <dmurphy@ti.com>,
+        Denys Dmytriyenko
+	<denys@ti.com>
+CC: Gowtham Tammana <g-tammana@ti.com>, Gowtham Tammana <g-tammana@gmail.com>
+Subject: [meta-ti][dunfell/master][PATCH] ti-img-rogue-driver: pull general toolchain support
+Date: Wed, 28 Oct 2020 12:33:04 -0500
+Message-ID: <20201028173304.5163-1-g-tammana@ti.com>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1so1wH-hQQQ1L3E6dAFLEAxdXkbDjpd9xRzt3tjjdDqPrg@mail.gmail.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On 10/26/20 9:30 PM, Khem Raj wrote:
-> On Mon, Oct 26, 2020 at 7:19 PM Suman Anna <s-anna@ti.com> wrote:
->>
->> Hi Raj,
->>
->> On 10/25/20 1:59 AM, Khem Raj wrote:
->>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> ---
->>>  recipes-ti/ipc/ti-rpmsg-char.inc | 3 +++
->>>  1 file changed, 3 insertions(+)
->>>
->>> diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
->>> index b41e68eb..d08031cb 100644
->>> --- a/recipes-ti/ipc/ti-rpmsg-char.inc
->>> +++ b/recipes-ti/ipc/ti-rpmsg-char.inc
->>> @@ -13,3 +13,6 @@ SRCREV = "9be402c2bf4053900b6b9a8092fbb42e7e303108"
->>>  PV = "0.1.0+git${SRCPV}"
->>>
->>>  S = "${WORKDIR}/git"
->>> +
->>> +COMPATIBLE_HOST ?= "null"
->>> +COMPATIBLE_HOST_ti-soc = "(.*)"
->>>
->>
->> This looks ok, but I am trying to understand why this is needed in general (am
->> still getting familiar with OE). Aren't the recipes processed only on
->> packagegroups that include them?
-> 
-> on image builds yes. however in yoe distro CI builds we test multi-BSP
-> setups and do world builds which catch
-> such issues, where BSP layers are exposing general packages which are
-> not compatible with other BSPs.
+The patch for supporting the general toolchain is pulled into the repo.
+Removing it here from the recipe.
 
-Thanks for the clarification!
+Signed-off-by: Gowtham Tammana <g-tammana@gmail.com>
+---
+ .../0001-km-support-general-toolchain.patch   | 56 -------------------
+ .../ti-img-rogue-driver_1.10.5371573.bb       |  9 ++-
+ 2 files changed, 4 insertions(+), 61 deletions(-)
+ delete mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-=
+km-support-general-toolchain.patch
 
-regards
-Suman
-
-> 
->>
->> regards
->> Suman
->>
->>>
->>>
->>> 
->>>
->>
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-km-supp=
+ort-general-toolchain.patch b/recipes-bsp/powervr-drivers/ti-img-rogue-dr=
+iver/0001-km-support-general-toolchain.patch
+deleted file mode 100644
+index 4dc219cd..00000000
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-km-support-gen=
+eral-toolchain.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-From dbdbd9309a58ee723fc827ef5fd45c28347cf61f Mon Sep 17 00:00:00 2001
+-From: Eric Ruei <e-ruei1@ti.com>
+-Date: Tue, 7 May 2019 17:06:09 -0400
+-Subject: [PATCH] km: support general toolchain
+-
+-This is a patch from IMG to support general toolchains such as
+-aarch64-oe-linux-gnu, aarch64-poky-linux-gnu, arm-none-linux-gnueabi
+-per IMG ticket 122059
+-
+-Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- build/linux/config/compiler.mk        | 12 +++++++++++-
+- .../build/linux/config/compilers/arm-linux-gnueabi.mk       |  6 ++++++
+- 2 files changed, 17 insertions(+), 1 deletion(-)
+- create mode 100644 build/linux/config/compilers/arm-linux-gnueabi.mk
+-
+-diff --git a/build/linux/config/compiler.mk b/build/linux/config/compile=
+r.mk
+-index 82c9d44..dead2f9 100644
+---- a/build/linux/config/compiler.mk
+-+++ b/build/linux/config/compiler.mk
+-@@ -48,13 +48,14 @@ define calculate-compiler-preferred-target
+-  ifeq ($(2),qcc)
+-   $(1)_compiler_preferred_target :=3D qcc
+-  else
+--  $(1)_compiler_preferred_target :=3D $$(subst --,-,$$(shell $(2) -dump=
+machine))
+-+  $(1)_compiler_preferred_target :=3D $$(subst --,-,$$(subst unknown,,$=
+$(shell $(2) -dumpmachine)))
+-   ifeq ($$($(1)_compiler_preferred_target),)
+-    $$(warning No output from '$(2) -dumpmachine')
+-    $$(warning Check that the compiler is in your PATH and CROSS_COMPILE=
+ is)
+-    $$(warning set correctly.)
+-    $$(error Unable to run compiler '$(2)')
+-   endif
+-+  $$(warning $(1) $(2))
+-   ifneq ($$(filter %-w64-mingw32,$$($(1)_compiler_preferred_target)),)
+-    # Use the compiler target name.
+-   else
+-@@ -64,6 +65,15 @@ define calculate-compiler-preferred-target
+-    ifneq ($$(filter arm-linux-android,$$($(1)_compiler_preferred_target=
+)),)
+-     $(1)_compiler_preferred_target :=3D arm-linux-androideabi
+-    endif
+-+  ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
+-+   $(1)_compiler_preferred_target :=3D aarch64-linux-gnu
+-+  endif
+-+  ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redh=
+at-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
+-+   $(1)_compiler_preferred_target :=3D arm-linux-gnueabi
+-+  endif
+-+  ifneq ($$(filter arm-%-gnueabihf,$$($(1)_compiler_preferred_target)),=
+)
+-+   $(1)_compiler_preferred_target :=3D arm-linux-gnueabihf
+-+  endif
+-    ifneq ($$(filter clang%,$(2)),)
+-     ifeq ($(1),target)
+-      ifeq (arm-linux-gnueabihf,$$(CROSS_TRIPLE))
+---=20
+-2.7.4
+-
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573=
+.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
+index da4ec6e6..e0632a18 100644
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
+@@ -7,7 +7,7 @@ inherit module features_check
+=20
+ REQUIRED_MACHINE_FEATURES =3D "gpu"
+=20
+-MACHINE_KERNEL_PR_append =3D "f"
++MACHINE_KERNEL_PR_append =3D "g"
+ PR =3D "${MACHINE_KERNEL_PR}"
+=20
+ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+@@ -19,12 +19,11 @@ PROVIDES =3D "virtual/gpudriver"
+=20
+ BRANCH =3D "linuxws/zeus/k5.4/${PV}"
+=20
+-SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D=
+${BRANCH} \
+-    file://0001-km-support-general-toolchain.patch \
+-"
++SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D=
+${BRANCH}"
++
+ S =3D "${WORKDIR}/git"
+=20
+-SRCREV =3D "e0bc128ee5098e30c9fb096634ba6bec01b5fc17"
++SRCREV =3D "f58bea1084c5004f129943a53b94ee1446e9c3a7"
+=20
+ PVR_SOC =3D "j721e_linux"
+ PVR_BVNC =3D "22.104.208.318"
+--=20
+2.29.0
 
