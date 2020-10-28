@@ -1,49 +1,49 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web10.449.1603906391773610386
+ by mx.groups.io with SMTP id smtpd.web08.559.1603906571814818763
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 28 Oct 2020 10:33:12 -0700
+ Wed, 28 Oct 2020 10:36:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=nfjcqbXF;
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=Mjzc88Jo;
  spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: g-tammana@ti.com)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 14A4138C09B7
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 10:33:11 -0700 (PDT)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09SHXA9f076643;
-	Wed, 28 Oct 2020 12:33:10 -0500
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id B491838C09B7
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 10:36:10 -0700 (PDT)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09SHaA11079083
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 12:36:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603906390;
-	bh=+p4q+44Hmi8bu1MgPPNHW/P+pkdgaCUbEKRSiGkE5Sk=;
+	s=ti-com-17Q1; t=1603906570;
+	bh=fPD94e1ip7GwWildJ8T/5Lfks1CzqaWQxsdxUiPvack=;
 	h=From:To:CC:Subject:Date;
-	b=nfjcqbXFBf6uLHZnIajHuCTuQ11F7YIGDpUgetuUTh8nZ/TfNWaQwkJ2c/qy0Se5l
-	 9u0j3JBMA/tB7Lkw3aa5yCyet/3TLwPbxDPoFY0KenaZgBvMfUVWeqqd67mbmISWmG
-	 WDBO6jJk2lSPKjnFkXiYDqQojgXOeoljKcA7Rj/c=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09SHX9nJ120462
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 28 Oct 2020 12:33:09 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	b=Mjzc88Jof/lGy8ujB8w3O5dS9aWu6kOdV8o9RB1JJt9jyrHYzb7idJODAyLrRmYJd
+	 Qy2+tPs7AUKomMGoWqCYjs/0gLDoIJVTBMzz9bGUTq52QZa8O/zF6wG/LkTnFWaNE5
+	 EQ+zb+UDsBr+g4eO5IBGcpGpPVaH+9InRq9sIt4k=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09SHaAIM119661
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 12:36:10 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 28
- Oct 2020 12:33:09 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2020 12:36:09 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 28 Oct 2020 12:33:09 -0500
-Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09SHX9Zd092423;
-	Wed, 28 Oct 2020 12:33:09 -0500
+ Frontend Transport; Wed, 28 Oct 2020 12:36:09 -0500
+Received: from lelv0597.itg.ti.com (lelv0597.itg.ti.com [10.181.64.32])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09SHa96t032313;
+	Wed, 28 Oct 2020 12:36:09 -0500
 Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.81.224] (may be forged))
-	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 09SHX9MX045675;
-	Wed, 28 Oct 2020 12:33:09 -0500
+	by lelv0597.itg.ti.com (8.14.7/8.14.7) with ESMTP id 09SHa9a7121640;
+	Wed, 28 Oct 2020 12:36:09 -0500
 From: "Gowtham Tammana" <g-tammana@ti.com>
 To: <meta-ti@yoctoproject.org>, Dan Murphy <dmurphy@ti.com>,
         Denys Dmytriyenko
 	<denys@ti.com>
-CC: Gowtham Tammana <g-tammana@ti.com>, Gowtham Tammana <g-tammana@gmail.com>
-Subject: [meta-ti][dunfell/master][PATCH] ti-img-rogue-driver: pull general toolchain support
-Date: Wed, 28 Oct 2020 12:33:04 -0500
-Message-ID: <20201028173304.5163-1-g-tammana@ti.com>
+CC: Gowtham Tammana <g-tammana@ti.com>
+Subject: [meta-ti][dunfell/master][PATCH v2] ti-img-rogue-driver: pull general toolchain support
+Date: Wed, 28 Oct 2020 12:36:08 -0500
+Message-ID: <20201028173608.10421-1-g-tammana@ti.com>
 X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -53,8 +53,10 @@ Content-Transfer-Encoding: quoted-printable
 The patch for supporting the general toolchain is pulled into the repo.
 Removing it here from the recipe.
 
-Signed-off-by: Gowtham Tammana <g-tammana@gmail.com>
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 ---
+v2: fix email in signoff
+
  .../0001-km-support-general-toolchain.patch   | 56 -------------------
  .../ti-img-rogue-driver_1.10.5371573.bb       |  9 ++-
  2 files changed, 4 insertions(+), 61 deletions(-)
