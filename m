@@ -1,84 +1,151 @@
-Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web08.1084.1603908455682979782
- for <meta-ti@lists.yoctoproject.org>;
- Wed, 28 Oct 2020 11:07:35 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xAUabTEm;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: g-tammana@ti.com)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 002A338C11F9
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 11:07:34 -0700 (PDT)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09SI7Y0b092860
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 13:07:34 -0500
+ by mx.groups.io with SMTP id smtpd.web11.1165.1603994967431975201
+ for <meta-ti@lists.yoctoproject.org>;
+ Thu, 29 Oct 2020 11:09:27 -0700
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Rbz14q1d;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09TI9QiC062169;
+	Thu, 29 Oct 2020 13:09:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1603908454;
-	bh=p4gqKSqM6LWw2SQlb7TJq1TaGgUTk3bV10Ytof0BBvo=;
-	h=From:To:Subject:Date:References:In-Reply-To;
-	b=xAUabTEmlZg/1rvqSLfN2whB7K4MK76F62HZTJjYjxh+R4eQokUS3l6SCPEnr8rCs
-	 76GMnboNGqOnAnQLaC82R+p7uf/cJVU3S2QaHmBV/fmCSDTFuQ9QOcJ2Rz6KOTZ/Jt
-	 ZeMMDZp0b6+qiJXVcmx2Kf9JrmqJpGLyp6q3XPc0=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09SI7Yww059400
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 28 Oct 2020 13:07:34 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 28
- Oct 2020 13:07:34 -0500
-Received: from DLEE111.ent.ti.com ([fe80::a4a2:21d4:3321:ad11]) by
- DLEE111.ent.ti.com ([fe80::a4a2:21d4:3321:ad11%17]) with mapi id
- 15.01.1979.003; Wed, 28 Oct 2020 13:07:34 -0500
-From: "Gowtham Tammana" <g-tammana@ti.com>
-To: "Murphy, Dan" <dmurphy@ti.com>,
-        "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>,
-        "Dmytriyenko, Denys" <denys@ti.com>
-Subject: Re: [meta-ti][dunfell/master][PATCH v2] ti-img-rogue-driver: pull general toolchain support
-Thread-Topic: [meta-ti][dunfell/master][PATCH v2] ti-img-rogue-driver: pull
- general toolchain support
-Thread-Index: AQHWrVDS4JnSLu+8nEass6Xi5N/7Jamtn9MA//+s87CAAFZXAP//rH9Q
-Date: Wed, 28 Oct 2020 18:07:34 +0000
-Message-ID: <351921b9093e496ca1c93f510c876455@ti.com>
-References: <20201028173608.10421-1-g-tammana@ti.com>
- <562ed28b-b53a-c87f-3c8e-359aa8adbfa4@ti.com>
- <3cd9303eba6e4ea19d7310cea8387ca0@ti.com>
- <1a1f5f98-3975-5644-911e-24eb6c570132@ti.com>
-In-Reply-To: <1a1f5f98-3975-5644-911e-24eb6c570132@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.247.16.212]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	s=ti-com-17Q1; t=1603994966;
+	bh=O9YDLWkIveU4vmm+Xx8JXiAFaSDx9A4vSS8BnbBLOiM=;
+	h=Date:From:To:Subject:References:In-Reply-To;
+	b=Rbz14q1dnI6oDieUNdzi6MJdVQ1zqvPCo+J95w8EPQ0hJGVX2ktupn0hvi5yF1yaq
+	 RlAyAq3ng84DX3J+B/3pmtw3a8cajQ3IswL45A2OlHPKV+wfLBZ7w0JfrcbYOHAI2A
+	 1otFVbXRVEtREmNiKx767WhC7Drk+xBnq0G2guo4=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09TI9QDr026956
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 29 Oct 2020 13:09:26 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 29
+ Oct 2020 13:09:25 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Thu, 29 Oct 2020 13:09:26 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09TI9P3E128793;
+	Thu, 29 Oct 2020 13:09:26 -0500
+Date: Thu, 29 Oct 2020 14:09:25 -0400
+From: "Denys Dmytriyenko" <denys@ti.com>
+To: Khem Raj <raj.khem@gmail.com>, <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti] [PATCH 1/2] ti-rpmsg-char-examples: Fix cross compile
+Message-ID: <20201029180925.GI15849@beryl>
+References: <20201025065934.3308920-1-raj.khem@gmail.com>
+ <20201026212000.GO19741@beryl>
+ <CAMKF1spoTDFaNBAgBmq2NV4Yx3D=UD9OK7Nb7yJUkenvnv=Smw@mail.gmail.com>
+ <1641B93D38E82508.16876@lists.yoctoproject.org>
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+In-Reply-To: <1641B93D38E82508.16876@lists.yoctoproject.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-DQoNCj4tLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPkZyb206IE11cnBoeSwgRGFuDQo+U2Vu
-dDogV2VkbmVzZGF5LCBPY3RvYmVyIDI4LCAyMDIwIDE6MDYgUE0NCj5UbzogVGFtbWFuYSwgR293
-dGhhbSA8Zy10YW1tYW5hQHRpLmNvbT47IG1ldGEtdGlAeW9jdG9wcm9qZWN0Lm9yZzsNCj5EbXl0
-cml5ZW5rbywgRGVueXMgPGRlbnlzQHRpLmNvbT4NCj5TdWJqZWN0OiBSZTogW21ldGEtdGldW2R1
-bmZlbGwvbWFzdGVyXVtQQVRDSCB2Ml0gdGktaW1nLXJvZ3VlLWRyaXZlcjogcHVsbA0KPmdlbmVy
-YWwgdG9vbGNoYWluIHN1cHBvcnQNCj4NCj5Hb3d0aGFtDQo+DQo+T24gMTAvMjgvMjAgMTowMiBQ
-TSwgVGFtbWFuYSwgR293dGhhbSB3cm90ZToNCj4+DQo+Pj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdl
-LS0tLS0NCj4+PiBGcm9tOiBNdXJwaHksIERhbg0KPj4+IFNlbnQ6IFdlZG5lc2RheSwgT2N0b2Jl
-ciAyOCwgMjAyMCAxMjo1NCBQTQ0KPj4+IFRvOiBUYW1tYW5hLCBHb3d0aGFtIDxnLXRhbW1hbmFA
-dGkuY29tPjsgbWV0YS10aUB5b2N0b3Byb2plY3Qub3JnOw0KPj4+IERteXRyaXllbmtvLCBEZW55
-cyA8ZGVueXNAdGkuY29tPg0KPj4+IFN1YmplY3Q6IFJlOiBbbWV0YS10aV1bZHVuZmVsbC9tYXN0
-ZXJdW1BBVENIIHYyXSB0aS1pbWctcm9ndWUtZHJpdmVyOg0KPnB1bGwNCj4+PiBnZW5lcmFsIHRv
-b2xjaGFpbiBzdXBwb3J0DQo+Pj4NCj4+PiBHb3d0aGFtDQo+Pj4NCj4+PiBPbiAxMC8yOC8yMCAx
-MjozNiBQTSwgR293dGhhbSBUYW1tYW5hIHdyb3RlOg0KPj4+PiBUaGUgcGF0Y2ggZm9yIHN1cHBv
-cnRpbmcgdGhlIGdlbmVyYWwgdG9vbGNoYWluIGlzIHB1bGxlZCBpbnRvIHRoZQ0KPnJlcG8uDQo+
-Pj4+IFJlbW92aW5nIGl0IGhlcmUgZnJvbSB0aGUgcmVjaXBlLg0KPj4+Pg0KPj4+PiBTaWduZWQt
-b2ZmLWJ5OiBHb3d0aGFtIFRhbW1hbmEgPGctdGFtbWFuYUB0aS5jb20+DQo+Pj4+IC0tLQ0KPj4+
-PiB2MjogZml4IGVtYWlsIGluIHNpZ25vZmYNCj4+Pj4NCj4+Pj4gICAgLi4uLzAwMDEta20tc3Vw
-cG9ydC1nZW5lcmFsLXRvb2xjaGFpbi5wYXRjaCAgIHwgNTYgLS0tLS0tLS0tLS0tLS0tLQ0KPi0t
-LQ0KPj4+IERpZCB5b3UgdXNlICJnaXQgcm0iIHRvIHJlbW92ZSB0aGUgZmlsZT8gVGhpcyBsb29r
-cyB3ZWlyZCB0aGF0IHRoZSBmaWxlDQo+Pj4gY2hhbmdlZCB0aGVuIGdvdCBkZWxldGVkDQo+PiBZ
-ZXMsIGRpZCB1c2UgJ2dpdCBybScgdG8gcmVtb3ZlIHRoZSBmaWxlLiBIYXZlbid0IHBhaWQgYXR0
-ZW50aW9uIHRvIHRoZQ0KPj4gaG93IHRoZSBjaGFuZ2VzIGFyZSBzdHJ1Y3R1cmVkIGJlZm9yZS4g
-RG8geW91IHNlZSBhbnkgaXNzdWVzIHdpdGggYW0sIEkNCj53YXMNCj4+IGp1c3QgdHJ5aW5nIGl0
-IGhlcmUgYWdhaW4gYW5kIGl0IGFwcGxpZXMgY2xlYW5seS4NCj4NCj5JdCBqdXN0IGxvb2tlZCB3
-ZWlyZCBidXQgRGVueXMgc2FpZCBpdCBsb29rIGZpbmUgdG8gaGltDQoNCkdvdCBpdC4NCg0KLUdv
-d3RoYW0NCg0K
+On Mon, Oct 26, 2020 at 10:43:32PM -0400, Denys Dmytriyenko via lists.yoctoproject.org wrote:
+> On Mon, Oct 26, 2020 at 04:24:11PM -0700, Khem Raj wrote:
+> > I think it should be applied but then I don't know how else this
+> > component is used. maybe there are some toolchains which don't have
+> > sysrooots used to compile this
+> 
+> This is meant to be cross-compiled for the target, in which case accessing 
+> host headers or libraries is a bad idea regardless of the toolchain...
+
+Khem, Suman,
+
+Any conclusion here? Should this change be taken upstream by Suman? Or should 
+this reside here as a patch with "Upstream-Status: Inappropriate [OE-specific]"?
+
+Denys
+
+
+> > On Mon, Oct 26, 2020 at 2:20 PM Denys Dmytriyenko <denys@ti.com> wrote:
+> > >
+> > > On Sat, Oct 24, 2020 at 11:59:33PM -0700, Khem Raj wrote:
+> > > > This fixes problems during cross compile where it starts to peek into
+> > > > build host's include and library paths and causes errors with clang and
+> > > > QA warnings with gcc
+> > > >
+> > > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > > ---
+> > > >  ...-Remove-use-of-includedir-and-libdir.patch | 37 +++++++++++++++++++
+> > > >  recipes-ti/ipc/ti-rpmsg-char-examples_git.bb  |  2 +
+> > > >  2 files changed, 39 insertions(+)
+> > > >  create mode 100644 recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
+> > > >
+> > > > diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch b/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
+> > > > new file mode 100644
+> > > > index 00000000..34807152
+> > > > --- /dev/null
+> > > > +++ b/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
+> > > > @@ -0,0 +1,37 @@
+> > > > +From 1a26cb577ba54dd9214eeb94fed0ce3a0f4603b6 Mon Sep 17 00:00:00 2001
+> > > > +From: Khem Raj <raj.khem@gmail.com>
+> > > > +Date: Sat, 24 Oct 2020 23:46:39 -0700
+> > > > +Subject: [PATCH] examples: Remove use of includedir and libdir
+> > > > +
+> > > > +These point to standard include and library paths which already are used
+> > > > +from sysroot relative paths secondly, they use absolute paths which
+> > > > +means we are asking to add -I/usr/include which might be ok in a native
+> > > > +build but not in cross build. This helps mitigate QA errors found with
+> > > > +OE build system since it finds it adding host include and library search
+> > > > +paths to linker/compiler commandline
+> > >
+> > > What's the Upstream-Status on this? Should it be "Inappropriate [OE-specific]"?
+> > >
+> > >
+> > > > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > > +---
+> > > > + examples/Makefile.am | 5 +----
+> > > > + 1 file changed, 1 insertion(+), 4 deletions(-)
+> > > > +
+> > > > +diff --git a/examples/Makefile.am b/examples/Makefile.am
+> > > > +index 5a9bedb..d547e41 100644
+> > > > +--- a/examples/Makefile.am
+> > > > ++++ b/examples/Makefile.am
+> > > > +@@ -1,6 +1,4 @@
+> > > > +-INCLUDE = -I${includedir}
+> > > > +-
+> > > > +-AM_CFLAGS = -Wall -g -O2 $(INCLUDE)
+> > > > ++AM_CFLAGS = -Wall -g -O2
+> > > > +
+> > > > + bin_PROGRAMS = rpmsg_char_simple
+> > > > +
+> > > > +@@ -8,4 +6,3 @@ bin_PROGRAMS = rpmsg_char_simple
+> > > > + rpmsg_char_simple_SOURCES = rpmsg_char_simple.c
+> > > > + rpmsg_char_simple_CPPFLAGS = $(AM_CFLAGS)
+> > > > + rpmsg_char_simple_LDADD = -lpthread -lti_rpmsg_char
+> > > > +-rpmsg_char_simple_LDFLAGS = -L${libdir}
+> > > > +--
+> > > > +2.29.1
+> > > > +
+> > > > diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
+> > > > index 142e5bf0..cbe4d7fd 100644
+> > > > --- a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
+> > > > +++ b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
+> > > > @@ -2,6 +2,8 @@ SUMMARY = "TI RPMsg Char Sample Applications and Tests"
+> > > >
+> > > >  require ti-rpmsg-char.inc
+> > > >
+> > > > +SRC_URI += "file://0001-examples-Remove-use-of-includedir-and-libdir.patch"
+> > > > +
+> > > >  DEPENDS = "ti-rpmsg-char"
+> > > >
+> > > >  inherit autotools pkgconfig
+> > > > --
+> > > > 2.29.1
+> > > >
+> > >
+> > > >
+> > > > 
+> > > >
+> > >
+
+> 
+> 
+> 
+
