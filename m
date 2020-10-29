@@ -1,198 +1,75 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.4568.1604008589857034902
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web12.5237.1604011834224458914
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 29 Oct 2020 14:56:30 -0700
+ Thu, 29 Oct 2020 15:50:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=PGmmWk5k;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=aACbAFoi;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: s-anna@ti.com)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 1127038C066A
+	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2020 15:50:32 -0700 (PDT)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09TLuSj6010918;
-	Thu, 29 Oct 2020 16:56:28 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09TMoWUQ033320
+	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2020 17:50:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1604008589;
-	bh=bGdL+A5nslHuEgg8atgyoAVlsc0ZiQ4qCOSL3HxKHi8=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=PGmmWk5kMjnLXkcoEVM2cWIttl+ZGta3Vrt21utJChtmijmKwIDJFT778lvZisxLN
-	 4FUv3XVLrCtywnwse/EDa/HolMTq4XPGh/xMeFquJEw/B05bF83xQvkaIW9R4vb60/
-	 YbuGPjSkrIFOO3OeTEi2XDBgaA4M/2ypk5I+d9Ko=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09TLuS1T098911
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 29 Oct 2020 16:56:28 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1604011832;
+	bh=dMEnnhCFxuoAa3h7WJpGV9sctifUBWkIVsrZkqzBGec=;
+	h=From:To:CC:Subject:Date;
+	b=aACbAFoil8b00XPXaxUm0wEjjtkzGq7b9NkfM8ndrOLUBJGMfv2ML6T5WRgMAJbso
+	 tMFuIBWQHaUI9MVxs/l0/n4revO0KlRshYbOYq0B3udkQ4O0Or3wJh9Ci49Zgw7KcA
+	 b1EPNykFRiQM+4wsHzcM4ppx5MScn/dAGK2hBBZA=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09TMoWZZ048760
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Thu, 29 Oct 2020 17:50:32 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 29
- Oct 2020 16:56:28 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2020 17:50:31 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 29 Oct 2020 16:56:28 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09TLuSqL004979;
-	Thu, 29 Oct 2020 16:56:28 -0500
-Date: Thu, 29 Oct 2020 17:56:28 -0400
-From: "Denys Dmytriyenko" <denys@ti.com>
-To: Suman Anna <s-anna@ti.com>
-CC: Khem Raj <raj.khem@gmail.com>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH 1/2] ti-rpmsg-char-examples: Fix cross compile
-Message-ID: <20201029215628.GP15849@beryl>
-References: <20201025065934.3308920-1-raj.khem@gmail.com>
- <20201026212000.GO19741@beryl>
- <CAMKF1spoTDFaNBAgBmq2NV4Yx3D=UD9OK7Nb7yJUkenvnv=Smw@mail.gmail.com>
- <1641B93D38E82508.16876@lists.yoctoproject.org>
- <20201029180925.GI15849@beryl>
- <CAMKF1srgwQaoEWowG11HfJN+vo2+tBHm4Bhr0K5VP6YXa6f+Cg@mail.gmail.com>
- <9a91ee70-70f0-e350-f81e-94ea7927e302@ti.com>
+ Frontend Transport; Thu, 29 Oct 2020 17:50:31 -0500
+Received: from lelv0597.itg.ti.com (lelv0597.itg.ti.com [10.181.64.32])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09TMoVQj008260;
+	Thu, 29 Oct 2020 17:50:31 -0500
+Received: from localhost ([10.250.64.251])
+	by lelv0597.itg.ti.com (8.14.7/8.14.7) with ESMTP id 09TMoV9Y007383;
+	Thu, 29 Oct 2020 17:50:31 -0500
+From: "Suman Anna" <s-anna@ti.com>
+To: Denys Dmytriyenko <denys@ti.com>, Dan Murphy <dmurphy@ti.com>
+CC: <meta-ti@yoctoproject.org>, Suman Anna <s-anna@ti.com>
+Subject: [meta-ti][dunfell/master PATCH] ipc: ti-rpmsg-char: Update SRCREV
+Date: Thu, 29 Oct 2020 17:50:19 -0500
+Message-ID: <20201029225019.20179-1-s-anna@ti.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-In-Reply-To: <9a91ee70-70f0-e350-f81e-94ea7927e302@ti.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 29, 2020 at 04:50:24PM -0500, Suman Anna wrote:
-> Hi Denys,
-> 
-> On 10/29/20 3:09 PM, Khem Raj wrote:
-> > On Thu, Oct 29, 2020 at 11:09 AM Denys Dmytriyenko <denys@ti.com> wrote:
-> >>
-> >> On Mon, Oct 26, 2020 at 10:43:32PM -0400, Denys Dmytriyenko via lists.yoctoproject.org wrote:
-> >>> On Mon, Oct 26, 2020 at 04:24:11PM -0700, Khem Raj wrote:
-> >>>> I think it should be applied but then I don't know how else this
-> >>>> component is used. maybe there are some toolchains which don't have
-> >>>> sysrooots used to compile this
-> >>>
-> >>> This is meant to be cross-compiled for the target, in which case accessing
-> >>> host headers or libraries is a bad idea regardless of the toolchain...
-> >>
-> >> Khem, Suman,
-> >>
-> >> Any conclusion here? Should this change be taken upstream by Suman? Or should
-> >> this reside here as a patch with "Upstream-Status: Inappropriate [OE-specific]"?
-> >>
-> > 
-> > its needed in OE for sure. Other places I don't know so literally your call.
-> 
-> If it is needed by OE, I am ok with this going in for now. I will leave it to
-> your expertise for the ack for this patch.
-> 
-> I need to look into this a bit more to see if I need to revise the build stuff
-> in the actual source repo, or I need to tweak the OE recipe to keep both happy.
-> I also cross-compile on my host machine when directly using automake, and as
-> such I don't use --prefix as /usr.
-> 
-> I need to have a successful OE environment for me to evaluate a proper fix, but
-> I am currently running into various issues when building tisdk-default-image
-> (tisdk-tiny-image and tisdk-base-image were ok).
+Update the ti-rpmsg-char SRCREV to pull in a bug fix.
 
-Thanks, Suman.
+Signed-off-by: Suman Anna <s-anna@ti.com>
+---
+ recipes-ti/ipc/ti-rpmsg-char.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-So I guess we can carry this patch in meta-ti for now, until you get a chance 
-to look into it a bit closer.
+diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-c=
+har.inc
+index b41e68eba0f9..cc60a46ab1ec 100644
+--- a/recipes-ti/ipc/ti-rpmsg-char.inc
++++ b/recipes-ti/ipc/ti-rpmsg-char.inc
+@@ -8,7 +8,7 @@ BRANCH =3D "master"
+ SRC_URI =3D "git://git.ti.com/rpmsg/ti-rpmsg-char.git;protocol=3D${PROTO=
+COL};branch=3D${BRANCH};"
+=20
+ # Initial 0.1.0 release
+-SRCREV =3D "9be402c2bf4053900b6b9a8092fbb42e7e303108"
++SRCREV =3D "8ab86e58c97b50fcf977ce8599e38fc8b517e962"
+=20
+ PV =3D "0.1.0+git${SRCPV}"
+=20
+--=20
+2.28.0
 
-
-Khem,
-
-Do you want to send v2 with Upstream-Statu: either Pending or Inappropriate?
-
-Denys
-
-
-> regards
-> Suman
-> 
-> > 
-> >> Denys
-> >>
-> >>
-> >>>> On Mon, Oct 26, 2020 at 2:20 PM Denys Dmytriyenko <denys@ti.com> wrote:
-> >>>>>
-> >>>>> On Sat, Oct 24, 2020 at 11:59:33PM -0700, Khem Raj wrote:
-> >>>>>> This fixes problems during cross compile where it starts to peek into
-> >>>>>> build host's include and library paths and causes errors with clang and
-> >>>>>> QA warnings with gcc
-> >>>>>>
-> >>>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >>>>>> ---
-> >>>>>>  ...-Remove-use-of-includedir-and-libdir.patch | 37 +++++++++++++++++++
-> >>>>>>  recipes-ti/ipc/ti-rpmsg-char-examples_git.bb  |  2 +
-> >>>>>>  2 files changed, 39 insertions(+)
-> >>>>>>  create mode 100644 recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
-> >>>>>>
-> >>>>>> diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch b/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
-> >>>>>> new file mode 100644
-> >>>>>> index 00000000..34807152
-> >>>>>> --- /dev/null
-> >>>>>> +++ b/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
-> >>>>>> @@ -0,0 +1,37 @@
-> >>>>>> +From 1a26cb577ba54dd9214eeb94fed0ce3a0f4603b6 Mon Sep 17 00:00:00 2001
-> >>>>>> +From: Khem Raj <raj.khem@gmail.com>
-> >>>>>> +Date: Sat, 24 Oct 2020 23:46:39 -0700
-> >>>>>> +Subject: [PATCH] examples: Remove use of includedir and libdir
-> >>>>>> +
-> >>>>>> +These point to standard include and library paths which already are used
-> >>>>>> +from sysroot relative paths secondly, they use absolute paths which
-> >>>>>> +means we are asking to add -I/usr/include which might be ok in a native
-> >>>>>> +build but not in cross build. This helps mitigate QA errors found with
-> >>>>>> +OE build system since it finds it adding host include and library search
-> >>>>>> +paths to linker/compiler commandline
-> >>>>>
-> >>>>> What's the Upstream-Status on this? Should it be "Inappropriate [OE-specific]"?
-> >>>>>
-> >>>>>
-> >>>>>> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >>>>>> +---
-> >>>>>> + examples/Makefile.am | 5 +----
-> >>>>>> + 1 file changed, 1 insertion(+), 4 deletions(-)
-> >>>>>> +
-> >>>>>> +diff --git a/examples/Makefile.am b/examples/Makefile.am
-> >>>>>> +index 5a9bedb..d547e41 100644
-> >>>>>> +--- a/examples/Makefile.am
-> >>>>>> ++++ b/examples/Makefile.am
-> >>>>>> +@@ -1,6 +1,4 @@
-> >>>>>> +-INCLUDE = -I${includedir}
-> >>>>>> +-
-> >>>>>> +-AM_CFLAGS = -Wall -g -O2 $(INCLUDE)
-> >>>>>> ++AM_CFLAGS = -Wall -g -O2
-> >>>>>> +
-> >>>>>> + bin_PROGRAMS = rpmsg_char_simple
-> >>>>>> +
-> >>>>>> +@@ -8,4 +6,3 @@ bin_PROGRAMS = rpmsg_char_simple
-> >>>>>> + rpmsg_char_simple_SOURCES = rpmsg_char_simple.c
-> >>>>>> + rpmsg_char_simple_CPPFLAGS = $(AM_CFLAGS)
-> >>>>>> + rpmsg_char_simple_LDADD = -lpthread -lti_rpmsg_char
-> >>>>>> +-rpmsg_char_simple_LDFLAGS = -L${libdir}
-> >>>>>> +--
-> >>>>>> +2.29.1
-> >>>>>> +
-> >>>>>> diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> >>>>>> index 142e5bf0..cbe4d7fd 100644
-> >>>>>> --- a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> >>>>>> +++ b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> >>>>>> @@ -2,6 +2,8 @@ SUMMARY = "TI RPMsg Char Sample Applications and Tests"
-> >>>>>>
-> >>>>>>  require ti-rpmsg-char.inc
-> >>>>>>
-> >>>>>> +SRC_URI += "file://0001-examples-Remove-use-of-includedir-and-libdir.patch"
-> >>>>>> +
-> >>>>>>  DEPENDS = "ti-rpmsg-char"
-> >>>>>>
-> >>>>>>  inherit autotools pkgconfig
-> >>>>>> --
-> >>>>>> 2.29.1
-> >>>>>>
-> >>>>>
-> >>>>>>
-> >>>>>>
-> >>>>>>
-> >>>>>
-> >>
-> >>>
-> >>>
-> >>>
-> >>
-> >>
-> >>
-> >> 
-> >>
-> 
