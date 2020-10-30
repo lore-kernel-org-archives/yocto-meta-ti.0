@@ -1,124 +1,71 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web08.8591.1604031303437747919
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web12.8730.1604031328816581644
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 29 Oct 2020 21:15:03 -0700
+ Thu, 29 Oct 2020 21:15:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=shLOGh/9;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: denys@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09U4F1Eq021226;
-	Thu, 29 Oct 2020 23:15:01 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Y03rSO2Y;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: denys@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09U4FRK2017288;
+	Thu, 29 Oct 2020 23:15:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1604031301;
-	bh=TPukkesnyeAPbVR2gO+/KCwN1M6XgekU44UqjXSaYDg=;
+	s=ti-com-17Q1; t=1604031327;
+	bh=QuO5nO7tCElFZU3BeRUZ9SJtQ9VM2ULoorLLabYdPLU=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=shLOGh/9mx47z0LZZP1by13jgFYVICg7qeTdEIdVhDjzeKLhawSGJQC5aVVjR3VlW
-	 1nuh2Zdru2V1un4K2epGhBqF+V+s39bvx3ocm5A0amoYvVe0RQ/Mf7KnWciAdkMdEt
-	 GySW5oMGAq6hFzVcWg9Qahj1qX4TrgmQ2WjXMzZM=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09U4F1Kf017511
+	b=Y03rSO2Yh0IGa9TXpBfsjoXdzEDjYEGM9e8Ejbb3J6TBlbx6sowq+cCrrBnCodTr5
+	 sD4ekVHATDWJRuCmukei8lkp1gp7sOKyccT4UsXqBMGm6yGUUT03sCHfpZGuZOu4fa
+	 uizQ0yfSRhLYHdTk2tVpPSGlwI81QKqFgezJ+OHI=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09U4FRft004001
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 29 Oct 2020 23:15:01 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 29 Oct 2020 23:15:27 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 29
- Oct 2020 23:15:01 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2020 23:15:26 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 29 Oct 2020 23:15:01 -0500
+ Frontend Transport; Thu, 29 Oct 2020 23:15:27 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09U4F1kB050540;
-	Thu, 29 Oct 2020 23:15:01 -0500
-Date: Fri, 30 Oct 2020 00:15:01 -0400
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09U4FQTr115696;
+	Thu, 29 Oct 2020 23:15:26 -0500
+Date: Fri, 30 Oct 2020 00:15:26 -0400
 From: "Denys Dmytriyenko" <denys@ti.com>
 To: Khem Raj <raj.khem@gmail.com>
 CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH v2 1/2] ti-rpmsg-char-examples: Fix cross compile
-Message-ID: <20201030041500.GS15849@beryl>
+Subject: Re: [meta-ti] [PATCH v2 2/2] ti-rpmsg-char: Mark these recipes to be TI SOC specific
+Message-ID: <20201030041526.GT15849@beryl>
 References: <20201030014601.395106-1-raj.khem@gmail.com>
+ <20201030014601.395106-2-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20201030014601.395106-1-raj.khem@gmail.com>
+In-Reply-To: <20201030014601.395106-2-raj.khem@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Thu, Oct 29, 2020 at 06:46:00PM -0700, Khem Raj wrote:
-> This fixes problems during cross compile where it starts to peek into
-> build host's include and library paths and causes errors with clang and
-> QA warnings with gcc
-> 
+On Thu, Oct 29, 2020 at 06:46:01PM -0700, Khem Raj wrote:
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 Reviewed-by: Denys Dmytriyenko <denys@ti.com>
 
 
 > ---
-> v2: Add upstream status
+>  recipes-ti/ipc/ti-rpmsg-char.inc | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
->  ...-Remove-use-of-includedir-and-libdir.patch | 38 +++++++++++++++++++
->  recipes-ti/ipc/ti-rpmsg-char-examples_git.bb  |  2 +
->  2 files changed, 40 insertions(+)
->  create mode 100644 recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
-> 
-> diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch b/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
-> new file mode 100644
-> index 00000000..71fca1b0
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-rpmsg-char-examples/0001-examples-Remove-use-of-includedir-and-libdir.patch
-> @@ -0,0 +1,38 @@
-> +From 1a26cb577ba54dd9214eeb94fed0ce3a0f4603b6 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Sat, 24 Oct 2020 23:46:39 -0700
-> +Subject: [PATCH] examples: Remove use of includedir and libdir
-> +
-> +These point to standard include and library paths which already are used
-> +from sysroot relative paths secondly, they use absolute paths which
-> +means we are asking to add -I/usr/include which might be ok in a native
-> +build but not in cross build. This helps mitigate QA errors found with
-> +OE build system since it finds it adding host include and library search
-> +paths to linker/compiler commandline
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + examples/Makefile.am | 5 +----
-> + 1 file changed, 1 insertion(+), 4 deletions(-)
-> +
-> +diff --git a/examples/Makefile.am b/examples/Makefile.am
-> +index 5a9bedb..d547e41 100644
-> +--- a/examples/Makefile.am
-> ++++ b/examples/Makefile.am
-> +@@ -1,6 +1,4 @@
-> +-INCLUDE = -I${includedir}
-> +-
-> +-AM_CFLAGS = -Wall -g -O2 $(INCLUDE)
-> ++AM_CFLAGS = -Wall -g -O2
-> + 
-> + bin_PROGRAMS = rpmsg_char_simple
-> + 
-> +@@ -8,4 +6,3 @@ bin_PROGRAMS = rpmsg_char_simple
-> + rpmsg_char_simple_SOURCES = rpmsg_char_simple.c
-> + rpmsg_char_simple_CPPFLAGS = $(AM_CFLAGS)
-> + rpmsg_char_simple_LDADD = -lpthread -lti_rpmsg_char
-> +-rpmsg_char_simple_LDFLAGS = -L${libdir}
-> +-- 
-> +2.29.1
-> +
-> diff --git a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> index 142e5bf0..cbe4d7fd 100644
-> --- a/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> +++ b/recipes-ti/ipc/ti-rpmsg-char-examples_git.bb
-> @@ -2,6 +2,8 @@ SUMMARY = "TI RPMsg Char Sample Applications and Tests"
+> diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
+> index b41e68eb..d08031cb 100644
+> --- a/recipes-ti/ipc/ti-rpmsg-char.inc
+> +++ b/recipes-ti/ipc/ti-rpmsg-char.inc
+> @@ -13,3 +13,6 @@ SRCREV = "9be402c2bf4053900b6b9a8092fbb42e7e303108"
+>  PV = "0.1.0+git${SRCPV}"
 >  
->  require ti-rpmsg-char.inc
->  
-> +SRC_URI += "file://0001-examples-Remove-use-of-includedir-and-libdir.patch"
+>  S = "${WORKDIR}/git"
 > +
->  DEPENDS = "ti-rpmsg-char"
->  
->  inherit autotools pkgconfig
+> +COMPATIBLE_HOST ?= "null"
+> +COMPATIBLE_HOST_ti-soc = "(.*)"
 > -- 
 > 2.29.1
 > 
