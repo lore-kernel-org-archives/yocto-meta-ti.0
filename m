@@ -1,92 +1,65 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.8762.1604031598219020482
+ by mx.groups.io with SMTP id smtpd.web10.5629.1604416850427151079
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 29 Oct 2020 21:19:58 -0700
+ Tue, 03 Nov 2020 07:20:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=F0x3mKLm;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: s-anna@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=S/SRi5FF;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 09U4JvoE018451;
-	Thu, 29 Oct 2020 23:19:57 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A3FKn3t013175
+	for <meta-ti@lists.yoctoproject.org>; Tue, 3 Nov 2020 09:20:49 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1604031597;
-	bh=eczVpujRWXpAdBxyczUpPR0WrN/uJ1khIklmPoSRlRc=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=F0x3mKLmJGfA20slo4ghlHG1VRG1zgHIuQEAO0iGcBS0fXkyGM5Ui8l+CkrXjluHF
-	 0sMnzt/YugVdRCuSHyTVgb8HMTYZk7vnayoaHxmqVFMHK8v1MgRhjqXl3kwVxdg5a5
-	 NJYH89YWHgOOaWTFZUhR+uAMOYFdgNK+Fgsr0f9Y=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 09U4JvUc024477
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 29 Oct 2020 23:19:57 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 29
- Oct 2020 23:19:56 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1604416849;
+	bh=WzQl4K31Yq0hYEzSiIUNKqIktwmYWNNlRzthl3+MCLg=;
+	h=From:To:CC:Subject:Date;
+	b=S/SRi5FFFInMt7Zb1WuCtQFhi/gEM9JsMh31T/vnYYEkqyuOchi3zJiGca4uCjB1T
+	 5867rhlbUSOt+bTQTvTF4tW48HmxY+mCYqk5CTnqJ2Nfy7L89g8Jn3nUIMQzzgEHGY
+	 AZ3h2qCs9SiLETq22jrGnm0x4hDOmsqIT+zdasu0=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A3FKnUo040414
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 3 Nov 2020 09:20:49 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 3 Nov
+ 2020 09:20:49 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 29 Oct 2020 23:19:56 -0500
-Received: from [10.250.64.251] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 09U4Ju4I038823;
-	Thu, 29 Oct 2020 23:19:56 -0500
-Subject: Re: [meta-ti] [PATCH v2 2/2] ti-rpmsg-char: Mark these recipes to be TI SOC specific
-To: <denys@ti.com>, Khem Raj <raj.khem@gmail.com>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20201030014601.395106-1-raj.khem@gmail.com>
- <20201030014601.395106-2-raj.khem@gmail.com> <20201030041526.GT15849@beryl>
-From: "Suman Anna" <s-anna@ti.com>
-Message-ID: <a567be43-b5d5-13b9-4e78-6baf31bcb7b8@ti.com>
-Date: Thu, 29 Oct 2020 23:19:56 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Frontend Transport; Tue, 3 Nov 2020 09:20:49 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A3FKn9L102951;
+	Tue, 3 Nov 2020 09:20:49 -0600
+From: "Dan Murphy" <dmurphy@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: Dan Murphy <dmurphy@ti.com>
+Subject: [meta-ti] [dunfell/master] PATCH 1/2] trusted-firmware-a: Update to newer SHA
+Date: Tue, 3 Nov 2020 09:20:42 -0600
+Message-ID: <20201103152043.27734-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-In-Reply-To: <20201030041526.GT15849@beryl>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On 10/29/20 11:15 PM, Denys Dmytriyenko via lists.yoctoproject.org wrote:
-> On Thu, Oct 29, 2020 at 06:46:01PM -0700, Khem Raj wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> 
-> Reviewed-by: Denys Dmytriyenko <denys@ti.com>
+From: Dan Murphy <dmurphy@ti.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
+---
+ recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Adding mine back again,
-
-Reviewed-by: Suman Anna <s-anna@ti.com>
-
-regards
-Suman
-
-> 
-> 
->> ---
->>  recipes-ti/ipc/ti-rpmsg-char.inc | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
->> index b41e68eb..d08031cb 100644
->> --- a/recipes-ti/ipc/ti-rpmsg-char.inc
->> +++ b/recipes-ti/ipc/ti-rpmsg-char.inc
->> @@ -13,3 +13,6 @@ SRCREV = "9be402c2bf4053900b6b9a8092fbb42e7e303108"
->>  PV = "0.1.0+git${SRCPV}"
->>  
->>  S = "${WORKDIR}/git"
->> +
->> +COMPATIBLE_HOST ?= "null"
->> +COMPATIBLE_HOST_ti-soc = "(.*)"
->> -- 
->> 2.29.1
->>
-> 
->>
->>
->>
-> 
-> 
-> 
-> 
-> 
+diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+index 2dc715c81ea7..3c1862643086 100644
+--- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
++++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+@@ -1,6 +1,6 @@
+ BRANCH_k3 = "ti-atf"
+ SRC_URI_k3 = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH};name=tfa"
+-SRCREV_tfa_k3 = "5b907a2813faf039d752cdeb6a7b94e95580c46b"
++SRCREV_tfa_k3 = "52c334fc361194e3896ea3b2529c10a06e586a5f"
+ COMPATIBLE_MACHINE_k3 = "k3"
+ TFA_BUILD_TARGET_k3 = "all"
+ TFA_INSTALL_TARGET_k3 = "bl31"
+-- 
+2.28.0.585.ge1cfff676549
 
