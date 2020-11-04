@@ -1,91 +1,70 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.14282.1604504260879206310
+ by mx.groups.io with SMTP id smtpd.web08.17065.1604514621424795119
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 04 Nov 2020 07:37:41 -0800
+ Wed, 04 Nov 2020 10:30:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=GvarGCZo;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: s-anna@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 7E57438C06A4
-	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2020 07:37:39 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=n8JcdN/t;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nikhil.nd@ti.com)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 1B9A138C06B0
+	for <meta-ti@yoctoproject.org>; Wed,  4 Nov 2020 10:30:21 -0800 (PST)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A4FbcZi079109
-	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2020 09:37:38 -0600
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A4IUKlL027231
+	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2020 12:30:20 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1604504258;
-	bh=HspV4KDD3piPQgRlhAQ7Z+A6eMvYCTsttOXKHH5Jjpw=;
+	s=ti-com-17Q1; t=1604514620;
+	bh=ThZicTHRBxORzDvvcggcIUY57eyyfsfMQl7qUC5wwPs=;
 	h=From:To:CC:Subject:Date;
-	b=GvarGCZoQAULaiEpNlcV+eGbpMlEDzx6dBA9ZaoVHutHVAgQgbLxmEvFBnFTZnXrr
-	 oMVK3r9f3ulx4c7CE6NL0KGWap908sa+TAWQ91WVtcb1D2qqSESInJICLSEqb9kBl2
-	 kUS7wVIkZzqe6qROBYEnfAzkfaWFoV3Uwdu2SuOY=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A4Fbc5R021187
+	b=n8JcdN/tbaXo624N7hB3J7I2+LDhoSB6aAY+jXH6Z2fF1P9eD4J7Ui2ua4qgaZCv8
+	 XFVu6MRRPhNaHiF1yPS45iZxWlxeEUe/FsIW13RhkEw+ZZd1pkQ6Tk84NoTFiK5Yhu
+	 40SVCHj8k9UaZNvo8AE0bAjkjIT8JN1yGM2i8HzA=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A4IUKBF025550
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2020 09:37:38 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Wed, 4 Nov 2020 12:30:20 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 4 Nov
- 2020 09:37:38 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 12:30:20 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 4 Nov 2020 09:37:38 -0600
-Received: from lelv0597.itg.ti.com (lelv0597.itg.ti.com [10.181.64.32])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A4FbcAM017726;
-	Wed, 4 Nov 2020 09:37:38 -0600
-Received: from localhost ([10.250.34.46])
-	by lelv0597.itg.ti.com (8.14.7/8.14.7) with ESMTP id 0A4FbcxM075359;
-	Wed, 4 Nov 2020 09:37:38 -0600
-From: "Suman Anna" <s-anna@ti.com>
-To: Dan Murphy <dmurphy@ti.com>, Denys Dmytriyenko <denys@ti.com>
-CC: Lucas Weaver <l-weaver@ti.com>, Nikhil Devshatwar <nikhil.nd@ti.com>,
-        Jesse Villarreal <jesse.villarreal@ti.com>, <meta-ti@yoctoproject.org>,
-        Suman
- Anna <s-anna@ti.com>
-Subject: [meta-ti][dunfell/master PATCH] ipc: ti-rpmsg-char: Update library to 0.2.0
-Date: Wed, 4 Nov 2020 09:37:29 -0600
-Message-ID: <20201104153729.27240-1-s-anna@ti.com>
-X-Mailer: git-send-email 2.28.0
+ Frontend Transport; Wed, 4 Nov 2020 12:30:20 -0600
+Received: from swubn03.india.englab.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A4IUI4g059649;
+	Wed, 4 Nov 2020 12:30:18 -0600
+From: "Nikhil Devshatwar" <nikhil.nd@ti.com>
+To: <meta-ti@yoctoproject.org>, <dmurphy@ti.com>
+CC: Nikhil Devshatwar <nikhil.nd@ti.com>
+Subject: [meta-ti][dunfell PATCH] recipes-devtools: k3conf: Update SRCREV to latest
+Date: Thu, 5 Nov 2020 00:00:15 +0530
+Message-ID: <20201104183015.19365-1-nikhil.nd@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
 
-Update the ti-rpmsg-char library to 0.2.0 version that includes
-an improvement to signal handling logic.
+Use latest SRCREV on master branch.
+This adds support for resource management commands
 
-Signed-off-by: Suman Anna <s-anna@ti.com>
+Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
 ---
-Hi Dan,
+ recipes-devtools/k3conf/k3conf_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This should be the last update on this library for the upcoming release.
-
-regards
-Suman
-
- recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-c=
-har.inc
-index 2274908863bd..b37672a6b8af 100644
---- a/recipes-ti/ipc/ti-rpmsg-char.inc
-+++ b/recipes-ti/ipc/ti-rpmsg-char.inc
-@@ -7,10 +7,10 @@ PROTOCOL =3D "git"
- BRANCH =3D "master"
- SRC_URI =3D "git://git.ti.com/rpmsg/ti-rpmsg-char.git;protocol=3D${PROTO=
-COL};branch=3D${BRANCH};"
-=20
--# Initial 0.1.0 release
--SRCREV =3D "8ab86e58c97b50fcf977ce8599e38fc8b517e962"
-+# Initial 0.2.0 release
-+SRCREV =3D "ecee54d2bd5125d4e78028013433b568a2b72d07"
-=20
--PV =3D "0.1.0+git${SRCPV}"
-+PV =3D "0.2.0+git${SRCPV}"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.28.0
+diff --git a/recipes-devtools/k3conf/k3conf_git.bb b/recipes-devtools/k3conf/k3conf_git.bb
+index 52c2fcf6..6771eeb7 100644
+--- a/recipes-devtools/k3conf/k3conf_git.bb
++++ b/recipes-devtools/k3conf/k3conf_git.bb
+@@ -8,7 +8,7 @@ PV = "0.1+git${SRCPV}"
+ COMPATIBLE_MACHINE = "k3"
+ 
+ BRANCH ?= "master"
+-SRCREV = "9199c3a3b6ec5603a2c4283410b4761e79e81e82"
++SRCREV = "246eb4092d7d111ce10e0a310b9bde678b97ab36"
+ 
+ SRC_URI = "git://git.ti.com/k3conf/k3conf.git;protocol=git;branch=${BRANCH}"
+ 
+-- 
+2.17.1
 
