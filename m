@@ -1,44 +1,44 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web08.2444.1604693235241845960
+ by mx.groups.io with SMTP id smtpd.web09.2435.1604693240133684025
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 06 Nov 2020 12:07:15 -0800
+ Fri, 06 Nov 2020 12:07:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=PhuoCq4f;
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=bS3F+dd/;
  spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id E984638C086F
-	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2020 12:07:14 -0800 (PST)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A6K7EtU128486
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 14:07:14 -0600
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id DA62138C086F
+	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2020 12:07:19 -0800 (PST)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A6K7JQH112424
+	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 14:07:19 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1604693234;
-	bh=URYyJG0MV95nuuBZz2jgvKibuFkSZpPR7Gb8daC6buE=;
+	s=ti-com-17Q1; t=1604693239;
+	bh=VuSQfgshko5r920KY/QujbbrbwtuSwnTuJTvotxtVCc=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=PhuoCq4fxeceCw10e3Hr7FGVeoJZ7bRQ+VcBmPm8j54wPOswRTaoSep0KTRTP9pEe
-	 qpYTfnRYQlG0x3Jxs4ZIXEzez+kt909KKo7z4SIDW/MOptzpKL2mdJ3JYJ4ubCWlaz
-	 6kb/dJeqDzFOknijOHuP5e0hZgACUKG/t8JsGlMk=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A6K7ETQ011716
+	b=bS3F+dd/JzcusF39AkBgxeMg16xP/R0ezkkMWq9LFSC/jq+ageYfz8bQ5P48fni8a
+	 Ls0b7zOL9DwedUxlWsaTcl3YemPIf8Mpokj6V8R2W1uKutUF4K+02jFVlwNIbEUFeM
+	 xwqmjWHNmL/y4TMYcLRDnMGK+tPFqTzgKFha4zjI=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A6K7Jre071940
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 14:07:14 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 14:07:19 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 6 Nov
- 2020 14:07:13 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 14:07:19 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 6 Nov 2020 14:07:13 -0600
+ Frontend Transport; Fri, 6 Nov 2020 14:07:19 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A6K7D4a082450;
-	Fri, 6 Nov 2020 14:07:13 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A6K7IlR117554;
+	Fri, 6 Nov 2020 14:07:19 -0600
 From: "Dan Murphy" <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
 CC: Dan Murphy <dmurphy@ti.com>
-Subject: [meta-ti] [dunfell/master] PATCH v3 2/3] ti-sci-fw: Update to 2020.08b system firmware
-Date: Fri, 6 Nov 2020 14:07:01 -0600
-Message-ID: <20201106200702.15064-2-dmurphy@ti.com>
+Subject: [meta-ti] [dunfell/master] PATCH v3 3/3] u-boot-ti-staging: Update to latest commit SHA
+Date: Fri, 6 Nov 2020 14:07:02 -0600
+Message-ID: <20201106200702.15064-3-dmurphy@ti.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20201106200702.15064-1-dmurphy@ti.com>
 References: <20201106200702.15064-1-dmurphy@ti.com>
@@ -49,45 +49,24 @@ Content-Transfer-Encoding: quoted-printable
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-bsp/ti-sci-fw/ti-sci-fw.inc    | 6 +++---
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 2 ++
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/=
-ti-sci-fw.inc
-index 00e611876733..24de33d67008 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-@@ -3,11 +3,11 @@ SUMMARY =3D "TI SCI firmware (SYSFW)"
- LICENSE =3D "TI-TFL"
- LIC_FILES_CHKSUM =3D "file://LICENSE.ti;md5=3Db5aebf0668bdf95621259288c4=
-a46d76"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bs=
+p/u-boot/u-boot-ti-staging_2020.01.bb
+index 4a1837e3afd4..991ba0ca4482 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
 =20
--PV =3D "2020.08-rc3"
-+PV =3D "2020.08b"
+-PR =3D "r21"
++PR =3D "r22"
 =20
--SRCREV =3D "8a22979dc944f6f4f867e2ac637c51a317efaacd"
-+SRCREV =3D "f5685b5980d93709e20466ffa19145ffd83b4ca4"
- BRANCH ?=3D "ti-linux-firmware"
--SRCREV_imggen =3D "36fe2d183a734f65b9adbd3097e5d51a6f931521"
-+SRCREV_imggen =3D "7b4fe13d642d69a559724349aede4817891008a7"
- SRCREV_FORMAT =3D "imggen"
+ BRANCH =3D "ti-u-boot-2020.01"
 =20
- SRC_URI =3D " \
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-=
-fw/ti-sci-fw_git.bb
-index 1239b278a1a7..0ba239f24368 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -19,6 +19,8 @@ SYSFW_SOC ?=3D "unknown"
- SYSFW_CONFIG ?=3D "unknown"
-=20
- SYSFW_PREFIX =3D "ti-sci-firmware"
-+SYSFW_PREFIX_j7-evm-k3r5 =3D "ti-fs-firmware"
-+SYSFW_PREFIX_j7200-evm-k3r5 =3D "ti-fs-firmware"
- SYSFW_SUFFIX ?=3D "unknown"
-=20
- SYSFW_BASE =3D "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
+-SRCREV =3D "7c8ae131b5623ff14c1b1ad6702801e39ef9b722"
++SRCREV =3D "3c9ebdb87d65aacc4ec302be8bef3df15364bacd"
 --=20
 2.29.2
 
