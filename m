@@ -1,70 +1,86 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.13086.1604675886016258217
+ by mx.groups.io with SMTP id smtpd.web12.13342.1604677799053011303
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 06 Nov 2020 07:18:06 -0800
+ Fri, 06 Nov 2020 07:49:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=omNAlCIy;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id B9ABB38C08A6
-	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2020 07:18:05 -0800 (PST)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A6FI5rM008375
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 09:18:05 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1604675885;
-	bh=VuSQfgshko5r920KY/QujbbrbwtuSwnTuJTvotxtVCc=;
-	h=From:To:CC:Subject:Date;
-	b=omNAlCIymrml3/HpaYzymS7hY/+QemkWSJ7taUny93IjPew0KsmTHeDh/KMvHr9Na
-	 pe9uouJAQqPJeV9x2EGgSK//nXU/YmoeqI+VsnQWgJFtEhaF+QJoMbsg0siHmekAD/
-	 nJ6yqta1PHutHJ+Riy3WzlGJ8qLXEvhloQ+T8v0c=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A6FI4ft029208
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 09:18:05 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 6 Nov
- 2020 09:18:04 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 6 Nov 2020 09:18:04 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A6FI3mL104452;
-	Fri, 6 Nov 2020 09:18:04 -0600
-From: "Dan Murphy" <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-CC: Dan Murphy <dmurphy@ti.com>
-Subject: [meta-ti] [dunfell/master] PATCH] u-boot-ti-staging: Update to latest commit SHA
-Date: Fri, 6 Nov 2020 09:18:02 -0600
-Message-ID: <20201106151802.30413-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.27.0
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 198.145.29.25, mailfrom: denis@denix.org)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id D0DE838C0858
+	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2020 07:49:57 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A695140AFF;
+	Fri,  6 Nov 2020 15:49:56 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bzpmGk27aXR0; Fri,  6 Nov 2020 15:49:56 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7D8F040A89;
+	Fri,  6 Nov 2020 15:49:55 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id D77FE1744DF; Fri,  6 Nov 2020 10:49:54 -0500 (EST)
+Date: Fri, 6 Nov 2020 10:49:54 -0500
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: dmurphy@ti.com
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [dunfell/master] PATCH 2/2] ti-sci-fw: Update to 2020.08b system firmware
+Message-ID: <20201106154954.GI19155@denix.org>
+References: <20201106151341.29928-1-dmurphy@ti.com>
+ <20201106151341.29928-2-dmurphy@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20201106151341.29928-2-dmurphy@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Fri, Nov 06, 2020 at 09:13:41AM -0600, Dan Murphy via lists.yoctoproject.org wrote:
+> Signed-off-by: Dan Murphy <dmurphy@ti.com>
+> ---
+>  recipes-bsp/ti-sci-fw/ti-sci-fw.inc    | 6 +++---
+>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 1 +
+>  2 files changed, 4 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> index 00e611876733..24de33d67008 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> @@ -3,11 +3,11 @@ SUMMARY = "TI SCI firmware (SYSFW)"
+>  LICENSE = "TI-TFL"
+>  LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+>  
+> -PV = "2020.08-rc3"
+> +PV = "2020.08b"
+>  
+> -SRCREV = "8a22979dc944f6f4f867e2ac637c51a317efaacd"
+> +SRCREV = "f5685b5980d93709e20466ffa19145ffd83b4ca4"
+>  BRANCH ?= "ti-linux-firmware"
+> -SRCREV_imggen = "36fe2d183a734f65b9adbd3097e5d51a6f931521"
+> +SRCREV_imggen = "7b4fe13d642d69a559724349aede4817891008a7"
+>  SRCREV_FORMAT = "imggen"
+>  
+>  SRC_URI = " \
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> index 1239b278a1a7..92992440c352 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> @@ -19,6 +19,7 @@ SYSFW_SOC ?= "unknown"
+>  SYSFW_CONFIG ?= "unknown"
+>  
+>  SYSFW_PREFIX = "ti-sci-firmware"
+> +SYSFW_PREFIX_append_j7 = "ti-fs-firmware"
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bs=
-p/u-boot/u-boot-ti-staging_2020.01.bb
-index 4a1837e3afd4..991ba0ca4482 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
-=20
--PR =3D "r21"
-+PR =3D "r22"
-=20
- BRANCH =3D "ti-u-boot-2020.01"
-=20
--SRCREV =3D "7c8ae131b5623ff14c1b1ad6702801e39ef9b722"
-+SRCREV =3D "3c9ebdb87d65aacc4ec302be8bef3df15364bacd"
---=20
-2.29.2
+You probably don't want _append_j7 here, but just _j7 override...
+
+
+>  SYSFW_SUFFIX ?= "unknown"
+>  
+>  SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
+> -- 
+> 2.29.2
+> 
+
+> 
+> 
+> 
 
