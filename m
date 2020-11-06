@@ -1,45 +1,47 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web10.13095.1604675626515780800
+ by mx.groups.io with SMTP id smtpd.web12.12850.1604675626984784865
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 06 Nov 2020 07:13:46 -0800
+ Fri, 06 Nov 2020 07:13:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=WLrirNuK;
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=snrvLVjj;
  spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 9605C38C08A6
-	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2020 07:13:45 -0800 (PST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id B5FD738C128F
+	for <meta-ti@yoctoproject.org>; Fri,  6 Nov 2020 07:13:46 -0800 (PST)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A6FDiNr022615
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 09:13:44 -0600
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0A6FDksL006463
+	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 09:13:46 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1604675624;
-	bh=KFU8hYKo6nSOfoDeY4pJsEIOvnKtwy8ckIn6cL4kMTE=;
-	h=From:To:CC:Subject:Date;
-	b=WLrirNuKsmciykV/WL/UbGtwY+TVbZgXc17eLpzyHk0fD06Jw9QTmDUJq47zFbJ/H
-	 CAJwB51GBrYSUOmc7o0eizL6DbknOGaUM9SILBr3jYftRY7eZy2KYT0bD+Gxf2ngKd
-	 nC/JgzL/dPFllnsd1PP00nfI4S1bsPLUOW8Xpjxw=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A6FDiWr003400
+	s=ti-com-17Q1; t=1604675626;
+	bh=bKoXnu4e3FULWHMW8+s4e+chHGFYPjlrNsViy4tH75g=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=snrvLVjjbWy3Iqk2dw5JehcWoUQc3f4viDofjIS/f010NFrLLDWHM0Gj0wSngYg5d
+	 ofaOnPcmrcYN1Mp2o+ZAsbgVFjqMUXBS9bz7ibQk+0UzuOA1Qnlui8GEXr8nbB2EI1
+	 awQymBtA+dsyqBdgYo4t3PMK6CLnZO20vPFUbAAg=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0A6FDkK8003428
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 09:13:44 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 6 Nov 2020 09:13:46 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 6 Nov
- 2020 09:13:44 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 09:13:45 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 6 Nov 2020 09:13:44 -0600
+ Frontend Transport; Fri, 6 Nov 2020 09:13:45 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A6FDhCl007282;
-	Fri, 6 Nov 2020 09:13:44 -0600
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0A6FDj3u060246;
+	Fri, 6 Nov 2020 09:13:45 -0600
 From: "Dan Murphy" <dmurphy@ti.com>
 To: <meta-ti@yoctoproject.org>
 CC: Dan Murphy <dmurphy@ti.com>
-Subject: [meta-ti] [dunfell/master] PATCH 1/2] ti-rtos: update metadata and firmware to 07.01.00.33
-Date: Fri, 6 Nov 2020 09:13:40 -0600
-Message-ID: <20201106151341.29928-1-dmurphy@ti.com>
+Subject: [meta-ti] [dunfell/master] PATCH 2/2] ti-sci-fw: Update to 2020.08b system firmware
+Date: Fri, 6 Nov 2020 09:13:41 -0600
+Message-ID: <20201106151341.29928-2-dmurphy@ti.com>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20201106151341.29928-1-dmurphy@ti.com>
+References: <20201106151341.29928-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
@@ -47,62 +49,44 @@ Content-Transfer-Encoding: quoted-printable
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 10 +++++-----
- recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb |  2 +-
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ recipes-bsp/ti-sci-fw/ti-sci-fw.inc    | 6 +++---
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 1 +
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-r=
-tos-bin/ti-rtos-firmware.bb
-index d40b6a4b5192..38c59936339f 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -17,8 +17,8 @@ include ${DEPLOY_DIR_IMAGE}/metadata.inc
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/=
+ti-sci-fw.inc
+index 00e611876733..24de33d67008 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+@@ -3,11 +3,11 @@ SUMMARY =3D "TI SCI firmware (SYSFW)"
+ LICENSE =3D "TI-TFL"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.ti;md5=3Db5aebf0668bdf95621259288c4=
+a46d76"
 =20
- # Set some defaults for when metadata.inc is not available
- DEFAULT_RTOS_FAMILY =3D "jacinto"
--DEFAULT_RTOS_VERSION =3D "07_01_00_25"
--DEFAULT_RTOS_VERSION_DOT =3D "07.01.00.25"
-+DEFAULT_RTOS_VERSION =3D "07_01_00_33"
-+DEFAULT_RTOS_VERSION_DOT =3D "07.01.00.33"
+-PV =3D "2020.08-rc3"
++PV =3D "2020.08b"
 =20
- DEFAULT_RTOS_SOC =3D "undefined"
- DEFAULT_RTOS_SOC_j7 =3D "j721e"
-@@ -35,9 +35,9 @@ DEFAULT_FIRMWARE_URL =3D "file://empty"
- DEFAULT_FIRMWARE_URL_k3 =3D "${CORESDK_RTOS_WEBLINK}/${DEFAULT_FIRMWARE_=
-FILE}"
+-SRCREV =3D "8a22979dc944f6f4f867e2ac637c51a317efaacd"
++SRCREV =3D "f5685b5980d93709e20466ffa19145ffd83b4ca4"
+ BRANCH ?=3D "ti-linux-firmware"
+-SRCREV_imggen =3D "36fe2d183a734f65b9adbd3097e5d51a6f931521"
++SRCREV_imggen =3D "7b4fe13d642d69a559724349aede4817891008a7"
+ SRCREV_FORMAT =3D "imggen"
 =20
- DEFAULT_FIRMWARE_SHA256SUM =3D "unknown"
--DEFAULT_FIRMWARE_SHA256SUM_j7 =3D "f66057d3dcdf9a615f3f10847a7f4ac6aa55a=
-091f8431d0771498990ec11384e"
--DEFAULT_FIRMWARE_SHA256SUM_j7200-evm =3D "4a7b80748740dc4bdd5894c1bbebd4=
-628ad2a12fa5f233504157c971b2fcfce3"
--DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "b7955e46a8da5300c32d391989281406e=
-650ccb09bbdc27d61fa57824e102457"
-+DEFAULT_FIRMWARE_SHA256SUM_j7 =3D "7b0e550c6d962b0868a2277f78720a46c9e69=
-bd6df827186ccd3370db5010395"
-+DEFAULT_FIRMWARE_SHA256SUM_j7200-evm =3D "44fdebe0fb1c8f536e96d00c1d68dc=
-889a54b92402e71cdd901198940b1b8d51"
-+DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "a0b64ea6c70cef2a38d25a92eaed28a2e=
-87b2ab66e3c706f2995b81bebd64951"
+ SRC_URI =3D " \
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-=
+fw/ti-sci-fw_git.bb
+index 1239b278a1a7..92992440c352 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -19,6 +19,7 @@ SYSFW_SOC ?=3D "unknown"
+ SYSFW_CONFIG ?=3D "unknown"
 =20
- # Use weak assignment for CORESDK_RTOS_* variables to use defaults if no=
-t yet set
- CORESDK_RTOS_FAMILY ?=3D "${DEFAULT_RTOS_FAMILY}"
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb b/recipes-ti/ti-r=
-tos-bin/ti-rtos-metadata.bb
-index a7ba38fd5670..205bbd1e3018 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
-@@ -17,7 +17,7 @@ PLAT_SFX_am65xx =3D "/am65xx"
- # Use weak assignment to set defaults to TI_RTOS_METADATA_* variables
- TI_RTOS_METADATA_URI ?=3D "git://git.ti.com/processor-sdk/coresdk_rtos_r=
-eleases.git"
- TI_RTOS_METADATA_PROTOCOL ?=3D "git"
--TI_RTOS_METADATA_SRCREV ?=3D "1dbda7181905cd255c44f2170be83b2466000f8c"
-+TI_RTOS_METADATA_SRCREV ?=3D "6da9722a7126a5834799ed6f7661787edb156198"
- TI_RTOS_METADATA_BRANCH ?=3D "master"
- TI_RTOS_METADATA_DIR ?=3D "${PLAT_SFX}"
- TI_RTOS_METADATA_FILE ?=3D "${S}${TI_RTOS_METADATA_DIR}/metadata.inc"
+ SYSFW_PREFIX =3D "ti-sci-firmware"
++SYSFW_PREFIX_append_j7 =3D "ti-fs-firmware"
+ SYSFW_SUFFIX ?=3D "unknown"
+=20
+ SYSFW_BASE =3D "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
 --=20
 2.29.2
 
