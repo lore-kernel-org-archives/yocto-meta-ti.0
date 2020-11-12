@@ -1,90 +1,92 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.12546.1605220903299848258
+ by mx.groups.io with SMTP id smtpd.web10.12918.1605222847011474649
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Nov 2020 14:41:43 -0800
+ Thu, 12 Nov 2020 15:14:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xkpLazl4;
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=Lf/X9LAG;
  spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: s-anna@ti.com)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id DF1A538C11CC
-	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2020 22:41:42 +0000 (UTC)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0ACMfgOk128666
-	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2020 16:41:42 -0600
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 22AEE38C0658
+	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2020 23:14:06 +0000 (UTC)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0ACNE5dR009558
+	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2020 17:14:05 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1605220902;
-	bh=uZUdIUpFvvOiVmyQ6Omw+wKQ8bYr2w5iJzrZ7PsKfWc=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=xkpLazl46sTdcscZLk0CRmOWS/Dw3AiXVnNYlArl4JPGDjDZiQo1R8jEO0dKVLoGn
-	 GQo+spgfR3AIDWRwZXg2b4WqAHAFPy+MUjt2yKO6BCt26PSST3YISFQRkQmT8Zcc2u
-	 eRxmFbsYgJc8krOBzePDRhc6uh3BtoJelI/zhScg=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0ACMfgRI031485
+	s=ti-com-17Q1; t=1605222845;
+	bh=zlu4DsQPa22/MDmOABCtDbeIGGobwvwfdIsd0Hehk4k=;
+	h=From:To:CC:Subject:Date;
+	b=Lf/X9LAGil7YHQuwi0Hg1yfg0N6hvc7XI1M/2DjkrGa9YDaZnK93gj/yadmpfrroS
+	 CoNSxNW6hjK3ZRLHMWhcDmzLWcbSU0w/Gamp5SL1TYUK0PT67f/OjmoZjt4cAGf6om
+	 SI8MW7JqTIFkDBLqeUouuQV16+m04JYVJxfJMKwk=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0ACNE57q104685
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2020 16:41:42 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 12 Nov 2020 17:14:05 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 12
- Nov 2020 16:41:41 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2020 17:14:04 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 12 Nov 2020 16:41:41 -0600
-Received: from [10.250.64.205] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0ACMffNN053427;
-	Thu, 12 Nov 2020 16:41:41 -0600
-Subject: Re: [meta-ti][dunfell PATCH] k3conf: Update SRCREV to latest
+ Frontend Transport; Thu, 12 Nov 2020 17:14:04 -0600
+Received: from lelv0597.itg.ti.com (lelv0597.itg.ti.com [10.181.64.32])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0ACNE4cA118294;
+	Thu, 12 Nov 2020 17:14:04 -0600
+Received: from localhost ([10.250.38.244])
+	by lelv0597.itg.ti.com (8.14.7/8.14.7) with ESMTP id 0ACNE4jC004897;
+	Thu, 12 Nov 2020 17:14:04 -0600
+From: "Suman Anna" <s-anna@ti.com>
 To: Dan Murphy <dmurphy@ti.com>
 CC: Lokesh Vutla <lokeshvutla@ti.com>, Nikhil Devshatwar <nikhil.nd@ti.com>,
-        <meta-ti@yoctoproject.org>
-References: <20201112134841.7108-1-s-anna@ti.com>
- <f4dd7293-6aad-aa09-c962-f6a2cc02b91f@ti.com>
- <f34c286b-91fe-b516-c34a-506c71f86278@ti.com>
- <53f2f60f-4a86-7475-bd3d-e3b2317ccfc3@ti.com>
-From: "Suman Anna" <s-anna@ti.com>
-Message-ID: <fed31064-8330-2dda-7204-c6ff3ef17521@ti.com>
-Date: Thu, 12 Nov 2020 16:41:41 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        <meta-ti@yoctoproject.org>, Suman Anna <s-anna@ti.com>
+Subject: [meta-ti][dunfell/master PATCH v2] k3conf: Update SRCREV to latest
+Date: Thu, 12 Nov 2020 17:13:57 -0600
+Message-ID: <20201112231357.26689-1-s-anna@ti.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-In-Reply-To: <53f2f60f-4a86-7475-bd3d-e3b2317ccfc3@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On 11/12/20 2:12 PM, Dan Murphy wrote:
-> Suman
-> 
-> On 11/12/20 9:21 AM, Dan Murphy wrote:
->> Suman
->>
->> On 11/12/20 7:54 AM, Suman Anna wrote:
->>> On 11/12/20 7:48 AM, Suman Anna wrote:
->>>> Use latest SRCREV on master branch to pick up all the
->>>> changes compliant with TIFS 2020.08b firmware.
->>>>
->>>> Signed-off-by: Suman Anna <s-anna@ti.com>
->>>> ---
->>>> Hi Dan,
->>>>
->>>> Please pick this up for 07.01.00.006. Will submit a separate patch
->>>> for master, looks like Nikhil missed one update to master branch.
->>> Sorry, my bad, I take this back, my local master branch was not up-to-date. This
->>> is applicable for master as well.
->>>
->> OK it is applied to -next and will be pushed shortly
->>
->> Dan
->>
-> Patch failed to build due to checksum mismatch on the License file due to this
-> commit
-> https://git.ti.com/gitweb?p=k3conf/k3conf.git;a=commit;h=bf1b4143e0065fb119766c2dddd8c08fb5ded7a9
-> 
-> ERROR: QA Issue: k3conf: The LIC_FILES_CHKSUM does not match for file://common/k3conf.c;beginline=1;endline=34;md5=37f4e460bd8501c6f02ce71f02bc7ccf
-> k3conf: The new md5 checksum is 7154c0ffcd418064ffa528e34e70ca9d
+Use latest SRCREV on master branch to pick up all the
+changes compliant with TIFS 2020.08b firmware.
 
-Sorry my bad, v2 coming shortly..
+The license CHKSUM also need to be updated due to a minor
+change from http to https in the Copyright line.
 
-regards
-Suman
+Signed-off-by: Suman Anna <s-anna@ti.com>
+---
+v2: Updated LIC_FILES_CHKSUM value to fix build error
+
+ recipes-devtools/k3conf/k3conf_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-devtools/k3conf/k3conf_git.bb b/recipes-devtools/k3c=
+onf/k3conf_git.bb
+index 6771eeb7682e..e4fa54c3bee0 100644
+--- a/recipes-devtools/k3conf/k3conf_git.bb
++++ b/recipes-devtools/k3conf/k3conf_git.bb
+@@ -1,14 +1,14 @@
+ SUMMARY =3D "Diagnostic tool for TI K3 processors"
+=20
+ LICENSE =3D "BSD-3-Clause"
+-LIC_FILES_CHKSUM =3D "file://common/k3conf.c;beginline=3D1;endline=3D34;=
+md5=3D37f4e460bd8501c6f02ce71f02bc7ccf"
++LIC_FILES_CHKSUM =3D "file://common/k3conf.c;beginline=3D1;endline=3D34;=
+md5=3D7154c0ffcd418064ffa528e34e70ca9d"
+=20
+ PV =3D "0.1+git${SRCPV}"
+=20
+ COMPATIBLE_MACHINE =3D "k3"
+=20
+ BRANCH ?=3D "master"
+-SRCREV =3D "246eb4092d7d111ce10e0a310b9bde678b97ab36"
++SRCREV =3D "1ff0c4f429e8e33d22b52ec002d9b97bbca6bf0b"
+=20
+ SRC_URI =3D "git://git.ti.com/k3conf/k3conf.git;protocol=3Dgit;branch=3D=
+${BRANCH}"
+=20
+--=20
+2.28.0
+
