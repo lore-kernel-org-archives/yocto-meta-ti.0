@@ -1,112 +1,108 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web09.14402.1605229992968191343
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web09.6020.1605361291941666479
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Nov 2020 17:13:13 -0800
+ Sat, 14 Nov 2020 05:41:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=H+HaXO1S;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id i7so5743016pgh.6
-        for <meta-ti@lists.yoctoproject.org>; Thu, 12 Nov 2020 17:13:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=wIpBWkHA2ui4jYqaSFbnOWJECNfEvGxchiO7lfbrF9s=;
-        b=H+HaXO1SRMETjTWoDXaGcM9VT0jdQpq5ehxt7EdTM6DLH/nDXu+4IOh8m7PuPVPxFq
-         7s4bZwtjyOJnMcnT+vqss4mXC1hnPFvhE5BaL7e5yGpxnEwG43pQpJIxWFd77JkY8T4C
-         LLtqbVOWF79Vi8iciRh7e79+UhAnI4wY1je9qzypdfm1zgNS49dPLXX51lDJRhKDRGWK
-         SvdrUug7LhvqGyjikuOAx+NMyfPrO05cOlR3bUhbmNl/ZNCphwkuFFe9KlqPPiDi2BnO
-         XO0jTAAeR/dH/v6nBG2BTOmoz2A9eAftxt5phu4Ti4DkhrYShehbE35loWkGT2XlRtkx
-         MMEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=wIpBWkHA2ui4jYqaSFbnOWJECNfEvGxchiO7lfbrF9s=;
-        b=HnIMgUXyQ67PVxTyQbeG6B9vt8ayYP0xyf9HoNfepyQAh0xfyPwWTsFznKbMskP4KM
-         tTPA1SOwmH1X536WnTpcGi521esiTxqhxxeBt/Oyrpd3j50Op0/9mtc1Imdk7BblIbzU
-         cQLZInQtxMi5ENYrExD4+mzGYJZ8UUjwKuu4mc9FGv31Is7NcWulZXV0JcMDMf1RJ3QJ
-         aSMyYMK3NrElwq95cenyPtbulbcPsMIhLkKw3NchUjJxmfWCLvOy9bTtn4fKqD2Ls9v3
-         LbdJDXaX2jccnO72wj/hIUrmHC4Sp17KhFR51rX+1IE4n+nDtf66W2W2WWkz9TjpH0Hi
-         PF/A==
-X-Gm-Message-State: AOAM532zMDT2QH6+5Hu27wkAHCPqBtJ+CAgXoTLdAh5JIRzNnUO5ZWKY
-	AcEI5BOBI4DmTntQsNJvUL3NbYO6P5SBrg==
-X-Google-Smtp-Source: ABdhPJyZvyjcCU9Gv1Lk4kgpOZsBwJECNavJSILQoCc6hY+7YPWpf5kPXrL5Kc1z2RqcTCyCgtFgTw==
-X-Received: by 2002:a17:90a:ca0b:: with SMTP id x11mr571357pjt.155.1605229992080;
-        Thu, 12 Nov 2020 17:13:12 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id j15sm7833655pfn.43.2020.11.12.17.13.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2020 17:13:11 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] u-boot-ti-staging_2020.01: Fix build on hosts with gcc10 on them
-Date: Thu, 12 Nov 2020 17:13:08 -0800
-Message-Id: <20201113011308.604936-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=o/ouzA/0;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 9ABA638C0848
+	for <meta-ti@yoctoproject.org>; Sat, 14 Nov 2020 13:41:30 +0000 (UTC)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0AEDfT45007513
+	for <meta-ti@yoctoproject.org>; Sat, 14 Nov 2020 07:41:29 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1605361289;
+	bh=Dgwfu3rtCBn5mGRMP1phdsaBrF7HYL9X1sgB+EAB2+Y=;
+	h=From:To:CC:Subject:Date;
+	b=o/ouzA/00sl+4KKSZ0OGZ5W6pSEwl0FCIp+SjqwDyNYRPam3W2L9nyvr807E9Blhd
+	 AfcBb9XMWYUWowN59G5Q179fEhK9cuQHxuOPLzlcW4JeeQ+rP7oD4VzDo9Hkow9sSj
+	 0gD8MRxvIfF3PJExKAfzoODein5DvoIdy3wT8LME=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0AEDfTik104825
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Sat, 14 Nov 2020 07:41:29 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Sat, 14
+ Nov 2020 07:41:29 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Sat, 14 Nov 2020 07:41:29 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0AEDfTcJ058239;
+	Sat, 14 Nov 2020 07:41:29 -0600
+From: "Dan Murphy" <dmurphy@ti.com>
+To: <meta-ti@yoctoproject.org>
+CC: Dan Murphy <dmurphy@ti.com>
+Subject: [meta-ti] [dunfell/master] PATCH] ti-rtos: update metadata and firmware to 07.01.00.38
+Date: Sat, 14 Nov 2020 07:41:27 -0600
+Message-ID: <20201114134127.12196-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-Backport a patch from upstream to fix build on distros with gcc10+
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- ...e-redundant-YYLOC-global-declaration.patch | 28 +++++++++++++++++++
- .../u-boot/u-boot-ti-staging_2020.01.bb       |  4 ++-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 10 +++++-----
+ recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch b/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
-new file mode 100644
-index 00000000..4973ea9d
---- /dev/null
-+++ b/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
-@@ -0,0 +1,28 @@
-+From b436a29de12d3f1da579edf3e3d4d42a60b9e58a Mon Sep 17 00:00:00 2001
-+From: Peter Robinson <pbrobinson@gmail.com>
-+Date: Thu, 30 Jan 2020 09:37:15 +0000
-+Subject: [PATCH] Remove redundant YYLOC global declaration
-+
-+Same as the upstream fix for building dtc with gcc 10.
-+
-+Upstream-Status: Backport [https://github.com/u-boot/u-boot/commit/018921ee79d3f30893614b3b2b63b588d8544f73]
-+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-+---
-+ scripts/dtc/dtc-lexer.l | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/scripts/dtc/dtc-lexer.l b/scripts/dtc/dtc-lexer.l
-+index fd825ebba6..24af549977 100644
-+--- a/scripts/dtc/dtc-lexer.l
-++++ b/scripts/dtc/dtc-lexer.l
-+@@ -38,7 +38,6 @@ LINECOMMENT	"//".*\n
-+ #include "srcpos.h"
-+ #include "dtc-parser.tab.h"
-+ 
-+-YYLTYPE yylloc;
-+ extern bool treesource_error;
-+ 
-+ /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
-+-- 
-+2.29.2
-+
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-index 991ba0ca..29fa6ee6 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-@@ -1,7 +1,9 @@
- require u-boot-ti.inc
- 
--PR = "r22"
-+PR = "r23"
- 
- BRANCH = "ti-u-boot-2020.01"
- 
- SRCREV = "3c9ebdb87d65aacc4ec302be8bef3df15364bacd"
-+
-+SRC_URI += "file://0001-Remove-redundant-YYLOC-global-declaration.patch"
--- 
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-r=
+tos-bin/ti-rtos-firmware.bb
+index 38c59936339f..01cf0fc91aa6 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -17,8 +17,8 @@ include ${DEPLOY_DIR_IMAGE}/metadata.inc
+=20
+ # Set some defaults for when metadata.inc is not available
+ DEFAULT_RTOS_FAMILY =3D "jacinto"
+-DEFAULT_RTOS_VERSION =3D "07_01_00_33"
+-DEFAULT_RTOS_VERSION_DOT =3D "07.01.00.33"
++DEFAULT_RTOS_VERSION =3D "07_01_00_38"
++DEFAULT_RTOS_VERSION_DOT =3D "07.01.00.38"
+=20
+ DEFAULT_RTOS_SOC =3D "undefined"
+ DEFAULT_RTOS_SOC_j7 =3D "j721e"
+@@ -35,9 +35,9 @@ DEFAULT_FIRMWARE_URL =3D "file://empty"
+ DEFAULT_FIRMWARE_URL_k3 =3D "${CORESDK_RTOS_WEBLINK}/${DEFAULT_FIRMWARE_=
+FILE}"
+=20
+ DEFAULT_FIRMWARE_SHA256SUM =3D "unknown"
+-DEFAULT_FIRMWARE_SHA256SUM_j7 =3D "7b0e550c6d962b0868a2277f78720a46c9e69=
+bd6df827186ccd3370db5010395"
+-DEFAULT_FIRMWARE_SHA256SUM_j7200-evm =3D "44fdebe0fb1c8f536e96d00c1d68dc=
+889a54b92402e71cdd901198940b1b8d51"
+-DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "a0b64ea6c70cef2a38d25a92eaed28a2e=
+87b2ab66e3c706f2995b81bebd64951"
++DEFAULT_FIRMWARE_SHA256SUM_j7 =3D "93e4d3742a922015f3295f5c20ef4bc2b9751=
+139ffcd5620b8df7047bff50651"
++DEFAULT_FIRMWARE_SHA256SUM_j7200-evm =3D "cd5071a8f6ddaec05346e4c2bbeed6=
+dc7bcb376d6edc47f81b9aeaf38f151176"
++DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "e54cc8da7fefa1ebf55454b184b42c364=
+de3eebb34a328d244b8275b7763eb58"
+=20
+ # Use weak assignment for CORESDK_RTOS_* variables to use defaults if no=
+t yet set
+ CORESDK_RTOS_FAMILY ?=3D "${DEFAULT_RTOS_FAMILY}"
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb b/recipes-ti/ti-r=
+tos-bin/ti-rtos-metadata.bb
+index 205bbd1e3018..15c0c68cc2d8 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+@@ -17,7 +17,7 @@ PLAT_SFX_am65xx =3D "/am65xx"
+ # Use weak assignment to set defaults to TI_RTOS_METADATA_* variables
+ TI_RTOS_METADATA_URI ?=3D "git://git.ti.com/processor-sdk/coresdk_rtos_r=
+eleases.git"
+ TI_RTOS_METADATA_PROTOCOL ?=3D "git"
+-TI_RTOS_METADATA_SRCREV ?=3D "6da9722a7126a5834799ed6f7661787edb156198"
++TI_RTOS_METADATA_SRCREV ?=3D "6b63577eec787cde277d3d12b23ea80578b6ad91"
+ TI_RTOS_METADATA_BRANCH ?=3D "master"
+ TI_RTOS_METADATA_DIR ?=3D "${PLAT_SFX}"
+ TI_RTOS_METADATA_FILE ?=3D "${S}${TI_RTOS_METADATA_DIR}/metadata.inc"
+--=20
 2.29.2
 
