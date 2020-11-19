@@ -1,110 +1,111 @@
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com [209.85.210.66])
- by mx.groups.io with SMTP id smtpd.web12.14240.1605645448941009764
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
+ by mx.groups.io with SMTP id smtpd.web11.4154.1605755066120342925
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Nov 2020 12:37:29 -0800
+ Wed, 18 Nov 2020 19:04:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=qWmk8Jht;
- spf=pass (domain: konsulko.com, ip: 209.85.210.66, mailfrom: paul.barker@konsulko.com)
-Received: by mail-ot1-f66.google.com with SMTP id g19so20756477otp.13
-        for <meta-ti@lists.yoctoproject.org>; Tue, 17 Nov 2020 12:37:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=psPDCVVf;
+ spf=pass (domain: gmail.com, ip: 209.85.160.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f194.google.com with SMTP id v11so3345143qtq.12
+        for <meta-ti@lists.yoctoproject.org>; Wed, 18 Nov 2020 19:04:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=XCv5tdMvxygMRWBDAFPI+IAOQePQGSkT4vhhueV2Oks=;
-        b=qWmk8JhtUwCcjSWQ1T9u42C2KzQuHVE1IIQ7PNugzUWjk54DyByp0GOBIBiago5+el
-         7eSGbrX7iF35LgFzak/FOYMAoCbOQGDdgNAb71RsOkuxoH1tdFi2yQCgZ8IohYvVojNs
-         wofTTUdwOPHSyLRFxR4FAGmMTB+00cKRQaQzY=
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=lR04W9QcB5HDdVlI7uAq88oudxnR5fdrdl3OekqH4qI=;
+        b=psPDCVVfTSclrr+3rPOkbV8N+mi2+0VYcNFmp1qFhp6Y4TQx389AAfS01dwwTQ4FPX
+         Za+G9ROkauIxo4hg8IHMRRRTdGn8+jHaTkcxrt4zwV4JgH+oGaAHm0hvBlC9No0SYKiV
+         lJh1+BWaruxUpuQEWvU+o6JCiO+S6Oxzu750HNBIj764UyRjzi9dHueoFPXZjDWeoxsG
+         zIUhFZJ++LTmWWRow1102quPYsayqK4wnIFChlolfqY4wvPYfVqt75kiApVOVltE5+i1
+         b8ulax2UdRO1xn2BCe9AiYuUGd2w0NkC8+2Pjzrzsn8Nzbc3D6Apzoep056UMuhykcjq
+         TR0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=XCv5tdMvxygMRWBDAFPI+IAOQePQGSkT4vhhueV2Oks=;
-        b=RPeYCgk52ZuR3KknIg2K6xFvF8evdhkabQBe6ITNkzhSPFctxovvwOqdsn1F6FaKVF
-         WnU5h2rAftajDknxPNtcZin7BWrKWiHg1opgBhGiNeg1e5X7thYQK0ptX/ua0tI2iSWW
-         4X6LA3Zk+IM4Fg2UlEO4Uvt5Di3A3T2RC6r1dYnSZncBWmLUmV5wmXHs5cRkcySrClSB
-         OPB+4zR92nsuaxggjosVYMY6460J0Jx7PUW3UH71BEEEM20CU7w3tb1rvh4M8AZYMOOv
-         vqMRXe9GKPqIP/86PeyRDFWCEqL/hfiYcsaBNt4mx/dBWBb0GONKJaOuTo6In4H49ONX
-         WJzA==
-X-Gm-Message-State: AOAM5312DmzAP3KFhccMUHcp/XdaNUXdzrhh7Q0K2WYdYzOKHq3qaVi7
-	D3GvqvF/ANIlXqMYkFaNTUcqKIxRwKCy9plkN/u0Rw==
-X-Google-Smtp-Source: ABdhPJy3+PUIIHvt1jc0sp/j1PtFbCvefx+OFILiiy0xZs9o+G/LLZviWhLsdkAZD0Wa3kWli8P4HA4AFyXMm2X7R08=
-X-Received: by 2002:a05:6830:22d2:: with SMTP id q18mr3929049otc.305.1605645448269;
- Tue, 17 Nov 2020 12:37:28 -0800 (PST)
+         :message-id:subject:to;
+        bh=lR04W9QcB5HDdVlI7uAq88oudxnR5fdrdl3OekqH4qI=;
+        b=eCB9c+Ct2lRi61dyC7P/CQQEIvAa5849b6H2GCr9teO5PeOyzhSX3DfAG0VIDVBVYT
+         OpkzQNUFPCLtR7HydJKaukrdz3DHsPrurY3XDXoaJt27GTWXNS3+HxKAEnVxW/mNeYVv
+         KlMrFheyrD5kzfPzy1n/PacPsNASyMxUIb3Vad8na/nhY9oS+CT/N4r0Fj7vuRLiU0ET
+         JB6b8QWM4RIS2N96uEJ1z7obZvo1LZq7+V6wZZ1C3VzB65iae4TFxM7EIcxZHO+dzERW
+         Z1bq+Az7pZGKw2UPBQhC0tSr3x6WpuCt/5KsLeLUv9vSe26YJ8JfyE1QoghIM9KxlPF2
+         zS4g==
+X-Gm-Message-State: AOAM531cnusqEwGPiUUqd9Dffh29qF97qCOUJkDD7uL0wMpgp3ja4V1Z
+	owwRBXHNxBInXmSVQIXhzPboX+NnUDZGVYo9/zau+0wLsYk=
+X-Google-Smtp-Source: ABdhPJym6VxA+UPirW69YlzfbWyrI275S0k9HkpZxa7nC61Un1YQ3YG1rAJtIQvenqJSEaolOvICsKYO/w8YVpFF0qE=
+X-Received: by 2002:ac8:5c8d:: with SMTP id r13mr8848239qta.88.1605755064981;
+ Wed, 18 Nov 2020 19:04:24 -0800 (PST)
 MIME-Version: 1.0
-References: <CAM9ZRVua_tLGXPZ76A0Su2yzhKD=-=un_G33-UGJbsKAzh0t_w@mail.gmail.com>
- <94da8736-0000-a797-8f20-f766feb1f1df@ti.com>
-In-Reply-To: <94da8736-0000-a797-8f20-f766feb1f1df@ti.com>
-From: "Paul Barker" <pbarker@konsulko.com>
-Date: Tue, 17 Nov 2020 20:37:18 +0000
-Message-ID: <CAM9ZRVutG13oRD78iUsdJWZPmfqDJQ+4a6CXQ7ruG0B_s+PTDw@mail.gmail.com>
-Subject: Re: [meta-ti] How to tell when meta-ti/meta-arago or TI CoreSDK is released
-To: Dan Murphy <dmurphy@ti.com>
-Cc: meta-arago@arago-project.org, meta-ti@lists.yoctoproject.org
+References: <20201113011308.604936-1-raj.khem@gmail.com>
+In-Reply-To: <20201113011308.604936-1-raj.khem@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 18 Nov 2020 19:03:59 -0800
+Message-ID: <CAMKF1spxTT2nH1Hjfg+M+XwMyg+xU0bpWvaBZfq73wUMmHXRvg@mail.gmail.com>
+Subject: Re: [PATCH] u-boot-ti-staging_2020.01: Fix build on hosts with gcc10 on them
+To: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@ti.com>, 
+	"Murphy, Dan" <dmurphy@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 17 Nov 2020 at 19:42, Dan Murphy <dmurphy@ti.com> wrote:
-> Paul
->
-> On 11/17/20 1:17 PM, Paul Barker wrote:
->> Hey folks, apologies if this isn't the right place to ask but I can't
->> see where else I should be asking this question.
->>
->> The Sancloud BSP layer (meta-sancloud) depends on both meta-arago and
->> meta-ti. For our Arago builds I typically pin release versions of
->> these dependency layers, especially for meta-arago and meta-ti I want
->> to ensure that we're using known good versions. The tag we're
->> currently pinned to is 07.00.00.005 which I believe corresponds to a
->> TI CoreSDK release. I see there are some new tags in these layers and
->> in the ti-linux-kernel repository
->>
->> I also see that configs have been added to the oe-layersetup
->> repository which is usually my flag that something has been released.
->> However, in oe-layersetup both 07.01.00.004 and 07.01.00.005 have been
->> given config files while the meta-arago layer, meta-ti layer and
->> ti-linux-kernel recipes are up to 07.01.00.006. So my usual heuristics
->> are a bit confused.
->>
->> I've tried searching for "ti coresdk" in google but I can't find any
->> documentation for this. I've also tried looking at the Arago wiki but
->> this does not look to have been updated recently. The only list of
->> branches I can find is
->> http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment
->> which is definitely obsolete.
->>
->> So all I can do is ask the question then - how do I find out when a
->> release of Arago (or TI CoreSDK) is ready to pick up and use?
-> This is on my to do for next year to try to document expected release dates.
->>
->> To pre-empt the obvious question - we do test with the HEAD of the
->> dunfell branch of layers regularly but we're not happy to issue a
->> release of our own BSP without ensuring we're aligned on released
->> versions of the underlying layers where possible. We need to track the
->> releases in the ti-linux-kernel layer as we've seen in the past that
->> our kernel needs to match with the expectations of the meta-ti layer
->> if we want the PowerVR drivers to work.
->
-> Sorry for all the confusion. I created those additional configs for our
-> internal SDK consumers.
->
-> The official release will be 07.01.00.006 and I will be pushing that
-> config shortly.
->
-> Yes I understand the issue with the PVR modules and kernel dependencies.
->
-> Dan
+ping
 
-Hi Dan,
-
-Thanks for the quick reply there.
-
-From my point-of-view what would be really helpful is release
-announcement emails to the list when the release is "final" so that we
-can easily tell that, for example in this case, 07.01.00.006 is the
-release proper.
-
-Thanks,
-
--- 
-Paul Barker
-Konsulko Group
+On Thu, Nov 12, 2020 at 5:13 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Backport a patch from upstream to fix build on distros with gcc10+
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...e-redundant-YYLOC-global-declaration.patch | 28 +++++++++++++++++++
+>  .../u-boot/u-boot-ti-staging_2020.01.bb       |  4 ++-
+>  2 files changed, 31 insertions(+), 1 deletion(-)
+>  create mode 100644 recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
+>
+> diff --git a/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch b/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
+> new file mode 100644
+> index 00000000..4973ea9d
+> --- /dev/null
+> +++ b/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
+> @@ -0,0 +1,28 @@
+> +From b436a29de12d3f1da579edf3e3d4d42a60b9e58a Mon Sep 17 00:00:00 2001
+> +From: Peter Robinson <pbrobinson@gmail.com>
+> +Date: Thu, 30 Jan 2020 09:37:15 +0000
+> +Subject: [PATCH] Remove redundant YYLOC global declaration
+> +
+> +Same as the upstream fix for building dtc with gcc 10.
+> +
+> +Upstream-Status: Backport [https://github.com/u-boot/u-boot/commit/018921ee79d3f30893614b3b2b63b588d8544f73]
+> +Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> +---
+> + scripts/dtc/dtc-lexer.l | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/scripts/dtc/dtc-lexer.l b/scripts/dtc/dtc-lexer.l
+> +index fd825ebba6..24af549977 100644
+> +--- a/scripts/dtc/dtc-lexer.l
+> ++++ b/scripts/dtc/dtc-lexer.l
+> +@@ -38,7 +38,6 @@ LINECOMMENT  "//".*\n
+> + #include "srcpos.h"
+> + #include "dtc-parser.tab.h"
+> +
+> +-YYLTYPE yylloc;
+> + extern bool treesource_error;
+> +
+> + /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
+> +--
+> +2.29.2
+> +
+> diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+> index 991ba0ca..29fa6ee6 100644
+> --- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+> @@ -1,7 +1,9 @@
+>  require u-boot-ti.inc
+>
+> -PR = "r22"
+> +PR = "r23"
+>
+>  BRANCH = "ti-u-boot-2020.01"
+>
+>  SRCREV = "3c9ebdb87d65aacc4ec302be8bef3df15364bacd"
+> +
+> +SRC_URI += "file://0001-Remove-redundant-YYLOC-global-declaration.patch"
+> --
+> 2.29.2
+>
