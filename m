@@ -1,112 +1,151 @@
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
- by mx.groups.io with SMTP id smtpd.web08.1028.1606242486569289777
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web09.5013.1607034041611938346
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 24 Nov 2020 10:28:06 -0800
+ Thu, 03 Dec 2020 14:20:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Msii+jip;
- spf=pass (domain: konsulko.com, ip: 209.85.167.169, mailfrom: paul.barker@konsulko.com)
-Received: by mail-oi1-f169.google.com with SMTP id v202so21679220oia.9
-        for <meta-ti@lists.yoctoproject.org>; Tue, 24 Nov 2020 10:28:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=mMDIdWg2w7x9yanpxRmCfz00R819tE3/o3G+G0vpXuc=;
-        b=Msii+jipXHl01RgMlSE6Rde3RpttuSrpYFfLvFW9/u4nfWiDypHX3ivDTXYG1mxDSm
-         7w2A0KcKbgxHBqORWYatJg4JyYrrfk8MSfi7M1zNlR0vQ0EE1KCLy833HEP+Gr+Uspl2
-         y5ej7TEu97OX4jTo0buWMtIVPdIxKYzCVpw9Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=mMDIdWg2w7x9yanpxRmCfz00R819tE3/o3G+G0vpXuc=;
-        b=U5u4dHJYuwL96dMx1WEfFjdL6ZHYeyZU4Q0JA3TMIc2nUorLtYLJea9hlJmKmfgPyG
-         pcXkICfJgOrwsE3n8VJgetCZFZuLo8jRxKFL16A0IXZha0/2N6saiLVK//5N+avvbhS9
-         ucW2FIKDoFHXoIF207pO6CI5uJeiDmIxE3zOPWi7/1IfqWBQqsXmintYd80lPAjbSGQZ
-         i49jSzej+ewHeKy4Lzal3pjV+6/CNFcShHdeCMXBaGF5p2WFnqqdXCd5SpM568cceCGw
-         ir55fUh/sfz6kFaifwsy/IwF/QFNxMJ6+6HIX/Vww4XzMXz/29lUHsyS4getZHKuVYyo
-         8GFA==
-X-Gm-Message-State: AOAM5320fV4MbqLw1F1iDZm4Ks5mrfelGFL+qF7JYKRb+YtbO9foODHU
-	OMhQ0l/2S0ORGTePeUu1+dQhAoO1wPuwa8vaJjPcww==
-X-Google-Smtp-Source: ABdhPJxA+3FocwFiLH3s4QB850kUZyZKwXtWhdCt3SAjvohTUeBdRqUqFItFVv6Eu5ixeRRm02PGsLuZCy6y1A/MZuQ=
-X-Received: by 2002:aca:ebce:: with SMTP id j197mr3439225oih.6.1606242485867;
- Tue, 24 Nov 2020 10:28:05 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=e1GnOMTK;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: c-robey@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0B3MKfaU003842
+	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Dec 2020 16:20:41 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1607034041;
+	bh=6ABzoxSFT/MJVpxHw6yKGVnOPL4wqf2mTWa1jCLvXjk=;
+	h=From:To:CC:Subject:Date;
+	b=e1GnOMTKHSxjIBoQ9CBlfnRnmA6uzO2mdPVFGJ6LhyRMJp+eq4vHNYu5yDud/4L2W
+	 7/Zf2rs/IPzuiQjR93UFLisKWDmGrMYFxQxSDURVFJe18/cb17cg4Gk7S6ZUxlIJ8X
+	 pru1lvNbn7eUYj5TLEo7LjGDz7+4j41vTKLnX9Po=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0B3MKevN013576
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Dec 2020 16:20:41 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 3 Dec
+ 2020 16:20:40 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Thu, 3 Dec 2020 16:20:40 -0600
+Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0B3MKe6c117022;
+	Thu, 3 Dec 2020 16:20:40 -0600
+Received: from localhost ([10.250.41.121])
+	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 0B3MKeIY092906;
+	Thu, 3 Dec 2020 16:20:40 -0600
+From: "Caleb Robey" <c-robey@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: Dan Murphy <dmurphy@ti.com>, Lucas Weaver <l-weaver@ti.com>,
+        a0232989
+	<a0232989@ti.com>, Caleb Robey <c-robey@ti.com>
+Subject: [PATCH] [meta-ti][dunfell/master][PATCH] set serverip after dhcp
+Date: Thu, 3 Dec 2020 16:19:53 -0600
+Message-ID: <20201203221953.26215-1-c-robey@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <CAM9ZRVua_tLGXPZ76A0Su2yzhKD=-=un_G33-UGJbsKAzh0t_w@mail.gmail.com>
- <94da8736-0000-a797-8f20-f766feb1f1df@ti.com>
-In-Reply-To: <94da8736-0000-a797-8f20-f766feb1f1df@ti.com>
-From: "Paul Barker" <pbarker@konsulko.com>
-Date: Tue, 24 Nov 2020 18:27:54 +0000
-Message-ID: <CAM9ZRVuurWq0BMbNbYbwq5r5JedNu1680LzjKQJ5C=6M40uCNw@mail.gmail.com>
-Subject: Re: [meta-ti] How to tell when meta-ti/meta-arago or TI CoreSDK is released
-To: Dan Murphy <dmurphy@ti.com>
-Cc: meta-arago@arago-project.org, meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Tue, 17 Nov 2020 at 19:42, Dan Murphy <dmurphy@ti.com> wrote:
->
-> Paul
->
-> On 11/17/20 1:17 PM, Paul Barker wrote:
->
-> Hey folks, apologies if this isn't the right place to ask but I can't
-> see where else I should be asking this question.
->
-> The Sancloud BSP layer (meta-sancloud) depends on both meta-arago and
-> meta-ti. For our Arago builds I typically pin release versions of
-> these dependency layers, especially for meta-arago and meta-ti I want
-> to ensure that we're using known good versions. The tag we're
-> currently pinned to is 07.00.00.005 which I believe corresponds to a
-> TI CoreSDK release. I see there are some new tags in these layers and
-> in the ti-linux-kernel repository
->
-> I also see that configs have been added to the oe-layersetup
-> repository which is usually my flag that something has been released.
-> However, in oe-layersetup both 07.01.00.004 and 07.01.00.005 have been
-> given config files while the meta-arago layer, meta-ti layer and
-> ti-linux-kernel recipes are up to 07.01.00.006. So my usual heuristics
-> are a bit confused.
->
-> I've tried searching for "ti coresdk" in google but I can't find any
-> documentation for this. I've also tried looking at the Arago wiki but
-> this does not look to have been updated recently. The only list of
-> branches I can find is
-> http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment
-> which is definitely obsolete.
->
-> So all I can do is ask the question then - how do I find out when a
-> release of Arago (or TI CoreSDK) is ready to pick up and use?
->
-> This is on my to do for next year to try to document expected release dates.
->
-> To pre-empt the obvious question - we do test with the HEAD of the
-> dunfell branch of layers regularly but we're not happy to issue a
-> release of our own BSP without ensuring we're aligned on released
-> versions of the underlying layers where possible. We need to track the
-> releases in the ti-linux-kernel layer as we've seen in the past that
-> our kernel needs to match with the expectations of the meta-ti layer
-> if we want the PowerVR drivers to work.
->
-> Sorry for all the confusion. I created those additional configs for our internal SDK consumers.
->
-> The official release will be 07.01.00.006 and I will be pushing that config shortly.
+From: a0232989 <a0232989@ti.com>
 
-Hi Dan,
+There is a documented issue where the u-boot dhcp command,
+when autoboot is set to "no", will reset serverip to the
+gateway ip address. This is a workaround that should not
+have any negative affect on these scripts and will prevent
+this issue for occuring.
 
-I see that there is now a config file in the oe-layersetup repository
-for v07.01.00.006.
+Issue:
+https://stackoverflow.com/questions/13975468/in-u-boot-can-the-dhcp-command-automatically-set-the-serverip-environment-varia
 
-Is there any way I can tell if there will be a further pre-release
-here (e.g. 07.01.00.007) or if this is the "final" 07.01.00 release
-and ready for downstream users to pick up?
+Note: we display this behavior in older scripts, but dropped
+the nomenclature lately and default NFS setups do not work
+out of the box as a result.
 
-Some reference for how CoreSDK is released would be really helpful but
-I can't find any such info online - I don't really need expected
-release dates, I just need to know how I can determine if something is
-"released" or not.
+Signed-off-by: Caleb Robey <c-robey@ti.com>
+---
+ setup-uboot-env-am335x.sh     | 4 ++--
+ setup-uboot-env-am43x.sh      | 2 +-
+ setup-uboot-env-am57xx-evm.sh | 2 +-
+ setup-uboot-env-am65x.sh      | 5 ++---
+ 4 files changed, 6 insertions(+), 7 deletions(-)
 
-Thanks,
-
+diff --git a/setup-uboot-env-am335x.sh b/setup-uboot-env-am335x.sh
+index f129875..687461b 100644
+--- a/setup-uboot-env-am335x.sh
++++ b/setup-uboot-env-am335x.sh
+@@ -189,7 +189,7 @@ if [ "$kernel" -eq "1" ]; then
+ 		do_expect "\"$prompt\"" "send \"setenv ip_method dhcp\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv nfsopts 'nolock,v3,tcp,rsize=4096,wsize=4096'\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv getuenv 'if mmc rescan; then if run loadbootenv; then run importbootenv; fi; fi;'\"" $cwd/setupBoard.minicom
+-		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run init_console; run getuenv; setenv autoload no;dhcp ;tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run netargs; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
++		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run init_console; run getuenv; setenv autoload no;dhcp ;setenv serverip $ip;tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run netargs; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"saveenv\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"boot\"" $cwd/setupBoard.minicom
+ 	else
+@@ -198,7 +198,7 @@ if [ "$kernel" -eq "1" ]; then
+ 		do_expect "\"$prompt\"" "send \"setenv bootfile $kernelimage\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv ip_method none\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv getuenv 'if mmc rescan; then if run loadbootenv; then run importbootenv; fi; fi;'\"" $cwd/setupBoard.minicom
+-		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run init_console; run getuenv; setenv autoload no; dhcp ; tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run args_mmc; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
++		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run init_console; run getuenv; setenv autoload no; dhcp ;setenv serverip $ip; tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run args_mmc; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"saveenv\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"boot\"" $cwd/setupBoard.minicom
+ 	fi
+diff --git a/setup-uboot-env-am43x.sh b/setup-uboot-env-am43x.sh
+index 24bc58a..8b8254b 100644
+--- a/setup-uboot-env-am43x.sh
++++ b/setup-uboot-env-am43x.sh
+@@ -144,7 +144,7 @@ if [ "$kernel" -eq "1" ]; then
+ 		do_expect "\"$prompt\"" "send \"setenv nfsopts 'nolock,v3,tcp,rsize=4096,wsize=4096'\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv devtype mmc\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv getuenv 'setenv devnum \${mmcdev}; if mmc rescan; then if run loadbootenv; then run importbootenv; fi; fi;'\"" $cwd/setupBoard.minicom
+-		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run getuenv; setenv autoload no;dhcp ;tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run netargs; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
++		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run getuenv; setenv autoload no;dhcp ;setenv serverip $ip; tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run netargs; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"saveenv\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"boot\"" $cwd/setupBoard.minicom
+ 	else
+diff --git a/setup-uboot-env-am57xx-evm.sh b/setup-uboot-env-am57xx-evm.sh
+index 323c134..dfd9486 100644
+--- a/setup-uboot-env-am57xx-evm.sh
++++ b/setup-uboot-env-am57xx-evm.sh
+@@ -156,7 +156,7 @@ if [ "$kernel" -eq "1" ]; then
+ 		do_expect "\"$prompt\"" "send \"setenv ip_method dhcp\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv nfsopts 'nolock,v3,tcp,rsize=4096,wsize=4096'\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"setenv getuenv 'mmc dev \${mmcdev}; if mmc rescan; then if run loadbootenv; then run importbootenv; fi; fi;'\"" $cwd/setupBoard.minicom
+-		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run getuenv; setenv autoload no;dhcp ;tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run netargs; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
++		do_expect "\"$prompt\"" "send setenv bootcmd 'run findfdt; run getuenv; setenv autoload no;dhcp ;setenv serverip $ip;tftp \${loadaddr} $kernelimage; tftp \${fdtaddr} \${fdtfile}; run netargs; bootz \${loadaddr} - \${fdtaddr}'" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"saveenv\"" $cwd/setupBoard.minicom
+ 		do_expect "\"$prompt\"" "send \"boot\"" $cwd/setupBoard.minicom
+ 	else
+diff --git a/setup-uboot-env-am65x.sh b/setup-uboot-env-am65x.sh
+index b6e043b..60045ae 100644
+--- a/setup-uboot-env-am65x.sh
++++ b/setup-uboot-env-am65x.sh
+@@ -144,14 +144,13 @@ do_expect "\"$prompt\"" "send \"reset\"" $cwd/setupBoard.minicom
+ do_expect "\"stop autoboot:\"" "send \" \"" $cwd/setupBoard.minicom
+ 
+ # Configurable settings
+-do_expect "\"$prompt\"" "send \"setenv serverip $ip\"" $cwd/setupBoard.minicom
+ do_expect "\"$prompt\"" "send \"setenv nfs_root $rootpath\"" $cwd/setupBoard.minicom
+ do_expect "\"$prompt\"" "send \"setenv name_kern $kernelimage\"" $cwd/setupBoard.minicom
+ 
+ # General macros
+ do_expect "\"$prompt\"" "send \"setenv bootcmd 'run findfdt; run envboot; run setup_\${kern_boot}; run init_\${rootfs_boot}; run get_kern_\${kern_boot}; run get_fdt_\${kern_boot}; run get_overlay_\${kern_boot}; run run_kern'\"" $cwd/setupBoard.minicom
+ 
+-do_expect "\"$prompt\"" "send \"setenv init_net 'run args_all args_net; setenv autoload no; dhcp'\"" $cwd/setupBoard.minicom
++do_expect "\"$prompt\"" "send \"setenv init_net 'run args_all args_net; setenv autoload no; dhcp; setenv serverip $ip'\"" $cwd/setupBoard.minicom
+ do_expect "\"$prompt\"" "send \"setenv args_net 'setenv bootargs console=\${console} \${optargs} rootfstype=nfs root=/dev/nfs rw nfsroot=\${serverip}:\${nfs_root},\${nfs_options} ip=dhcp'\"" $cwd/setupBoard.minicom
+ do_expect "\"$prompt\"" "send \"setenv get_kern_net 'tftp \${loadaddr} \${name_kern}'\"" $cwd/setupBoard.minicom
+ do_expect "\"$prompt\"" "send \"setenv get_fdt_net 'tftp \${fdtaddr} \${name_fdt}'\"" $cwd/setupBoard.minicom
+@@ -159,7 +158,7 @@ do_expect "\"$prompt\"" "send \"setenv get_overlay_net 'fdt address \${fdtaddr};
+ 
+ do_expect "\"$prompt\"" "send \"setenv nfs_options 'nolock,v3,tcp,rsize=4096,wsize=4096'\"" $cwd/setupBoard.minicom
+ do_expect "\"$prompt\"" "send \"setenv setup_mmc ''\"" $cwd/setupBoard.minicom
+-do_expect "\"$prompt\"" "send \"setenv setup_net 'setenv autoload no; dhcp'\"" $cwd/setupBoard.minicom
++do_expect "\"$prompt\"" "send \"setenv setup_net 'setenv autoload no; dhcp; setenv serverip $ip'\"" $cwd/setupBoard.minicom
+ 
+ 
+ 
 -- 
-Paul Barker
-Konsulko Group
+2.17.1
+
