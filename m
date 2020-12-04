@@ -1,74 +1,111 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.5050.1607034144447483293
+ by mx.groups.io with SMTP id smtpd.web11.5.1607113697661072757
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 03 Dec 2020 14:22:24 -0800
+ Fri, 04 Dec 2020 12:28:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=x7Baw664;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: c-robey@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0B3MMNvN004242
-	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Dec 2020 16:22:23 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Xel6Nme5;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0B4KSGjD094634;
+	Fri, 4 Dec 2020 14:28:16 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1607034143;
-	bh=h+JHXq71my8nPtnisqMha0lUW/e5L8iHC/VjtBKVkII=;
+	s=ti-com-17Q1; t=1607113696;
+	bh=pYLhzzJLx7W/dGOg44tv3M7FJ/MlGbd3/TEX4YbSmAw=;
 	h=From:To:CC:Subject:Date;
-	b=x7Baw664Ca/4yonNpY5tksEvWkdfl9/8UAS+4dIfu8dnGtdlubKqsL3t+ZwHU8iVv
-	 yiWvk1GQL3NLMOK5yl0Pbs2huYD3+gQnwzcb7bJ58w8x9C0ZgcV2VCUSEVu2oIghoo
-	 bDnzUQf5PVG9CFHuFzm1a8HhwDYwnVWeFagpuZTM=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0B3MMNQS031480
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Dec 2020 16:22:23 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 3 Dec
- 2020 16:22:23 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+	b=Xel6Nme5hzH9McTCcxDbFv1BaJdrU5X+AEYEmy6EspLPSEDiKMpYk3nuZ+2c3pCvs
+	 pKds0L+tGZ6uMddMUdjRMcBw0mGU+FHc/HXX0V4e6iwbU5ici18yEyF8gDxyyv3Y4E
+	 uhrS4I1+eOvXyi0BceZQGPBiZXNOcf0nqguCzmR4=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0B4KSGKc111393
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 4 Dec 2020 14:28:16 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 4 Dec
+ 2020 14:28:16 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 3 Dec 2020 16:22:23 -0600
-Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0B3MMN56120546;
-	Thu, 3 Dec 2020 16:22:23 -0600
-Received: from localhost ([10.250.41.121])
-	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 0B3MMN1a093742;
-	Thu, 3 Dec 2020 16:22:23 -0600
-From: "Caleb Robey" <c-robey@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Dan Murphy <dmurphy@ti.com>, Lucas Weaver <l-weaver@ti.com>,
-        Nikhil
- Devshatwar <nikhil.nd@ti.com>, a0232989 <a0232989@ti.com>,
-        Caleb Robey
-	<c-robey@ti.com>
-Subject: [PATCH] [meta-ti][dunfell/master][PATCH] setup-scripts - removing confusion for users when script succeeds
-Date: Thu, 3 Dec 2020 16:22:11 -0600
-Message-ID: <20201203222211.26326-1-c-robey@ti.com>
+ Frontend Transport; Fri, 4 Dec 2020 14:28:15 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0B4KSGgR054679;
+	Fri, 4 Dec 2020 14:28:16 -0600
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Dan Murphy <dmurphy@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+CC: Suman Anna <s-anna@ti.com>, Khem Raj <raj.khem@gmail.com>
+Subject: [dunfell/master PATCH] Revert "u-boot-ti-staging_2020.01: Fix build on hosts with gcc10 on them"
+Date: Fri, 4 Dec 2020 14:28:16 -0600
+Message-ID: <20201204202816.16990-1-praneeth@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-From: a0232989 <a0232989@ti.com>
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Script does not include all correct versions in success message
+This reverts commit 83f29e8b99144b69ed51ff69f41ab5a50f00fc5f.
 
-Signed-off-by: Caleb Robey <c-robey@ti.com>
+The mentioned fix is now pulled to ti-u-boot.git in
+ti-u-boot-2020.01 branch
+commit a6904f563f ("Remove redundant YYLOC global declaration")
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
- setup-host-check.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...e-redundant-YYLOC-global-declaration.patch | 28 -------------------
+ .../u-boot/u-boot-ti-staging_2020.01.bb       |  4 +--
+ 2 files changed, 1 insertion(+), 31 deletions(-)
+ delete mode 100644 recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
 
-diff --git a/setup-host-check.sh b/setup-host-check.sh
-index 45b4c71..a9db056 100644
---- a/setup-host-check.sh
-+++ b/setup-host-check.sh
-@@ -43,6 +43,6 @@ if [ "$host" != "precise" -a "$host" != "trusty" -a "$host" != "xenial"  -a "$ho
-     echo "Unsupported host machine, only Ubuntu 12.04 LTS, Ubuntu 14.04 LTS, Ubuntu 16.04 LTS, and Ubuntu 18.04 LTS are supported"
-     exit 1
- fi
--echo "Ubuntu 12.04 LTS, Ubuntu 14.04, or Ubuntu 14.04 LTS is being used, continuing.."
-+echo "Ubuntu 12.04 LTS, Ubuntu 14.04, LTS Ubuntu 16.04 LTS, or Ubuntu 18.04 LTS is being used, continuing.."
- echo "--------------------------------------------------------------------------------"
- echo
+diff --git a/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch b/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
+deleted file mode 100644
+index 4973ea9d..00000000
+--- a/recipes-bsp/u-boot/files/0001-Remove-redundant-YYLOC-global-declaration.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From b436a29de12d3f1da579edf3e3d4d42a60b9e58a Mon Sep 17 00:00:00 2001
+-From: Peter Robinson <pbrobinson@gmail.com>
+-Date: Thu, 30 Jan 2020 09:37:15 +0000
+-Subject: [PATCH] Remove redundant YYLOC global declaration
+-
+-Same as the upstream fix for building dtc with gcc 10.
+-
+-Upstream-Status: Backport [https://github.com/u-boot/u-boot/commit/018921ee79d3f30893614b3b2b63b588d8544f73]
+-Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+----
+- scripts/dtc/dtc-lexer.l | 1 -
+- 1 file changed, 1 deletion(-)
+-
+-diff --git a/scripts/dtc/dtc-lexer.l b/scripts/dtc/dtc-lexer.l
+-index fd825ebba6..24af549977 100644
+---- a/scripts/dtc/dtc-lexer.l
+-+++ b/scripts/dtc/dtc-lexer.l
+-@@ -38,7 +38,6 @@ LINECOMMENT	"//".*\n
+- #include "srcpos.h"
+- #include "dtc-parser.tab.h"
+- 
+--YYLTYPE yylloc;
+- extern bool treesource_error;
+- 
+- /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
+--- 
+-2.29.2
+-
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+index 29fa6ee6..991ba0ca 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+@@ -1,9 +1,7 @@
+ require u-boot-ti.inc
+ 
+-PR = "r23"
++PR = "r22"
+ 
+ BRANCH = "ti-u-boot-2020.01"
+ 
+ SRCREV = "3c9ebdb87d65aacc4ec302be8bef3df15364bacd"
+-
+-SRC_URI += "file://0001-Remove-redundant-YYLOC-global-declaration.patch"
 -- 
 2.17.1
 
