@@ -1,48 +1,77 @@
-Received: from spamalot.elettra.eu (spamalot.elettra.eu [140.105.206.208])
- by mx.groups.io with SMTP id smtpd.web08.7226.1607191318161269196
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.5829.1607347300472988660
  for <meta-ti@lists.yoctoproject.org>;
- Sat, 05 Dec 2020 10:01:58 -0800
+ Mon, 07 Dec 2020 05:21:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: elettra.eu, ip: 140.105.206.208, mailfrom: alessio.bogani@elettra.eu)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by localhost (Email Security Appliance) with ESMTP id 1A30A440F70_FCBCB11B
-	for <meta-ti@lists.yoctoproject.org>; Sat,  5 Dec 2020 18:01:53 +0000 (GMT)
-Received: from unknown-host
-	by spamalot.elettra.eu with queue id 871429
-	for meta-ti@lists.yoctoproject.org; Sat, 05 Dec 2020 18:01:52 GMT
-Received: from pc-bogani.elettra.trieste.it (pc-bogani.elettra.trieste.it [192.168.205.85])
-	by spamalot.elettra.eu (Sophos Email Appliance) with ESMTP id B75DF43E432_FCBCB10F;
-	Sat,  5 Dec 2020 18:01:52 +0000 (GMT)
-From: "Alessio Igor Bogani" <alessio.bogani@elettra.eu>
-To: meta-ti@lists.yoctoproject.org
-Cc: Alessio Igor Bogani <alessio.bogani@elettra.eu>
-Subject: [PATCH] Remove a 32bit binary
-Date: Sat,  5 Dec 2020 19:01:50 +0100
-X-Mailer: git-send-email 2.17.1
-X-SASI-RCODE: 200
-Message-Id: <20201205180153.1A30A440F70_FCBCB11B@spamalot.elettra.eu>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=CyNyHpFl;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0B7DLcM5097058
+	for <meta-ti@lists.yoctoproject.org>; Mon, 7 Dec 2020 07:21:38 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1607347298;
+	bh=PuCDTSMW5jC5lIRE2A4zwP3JstOWd04iRaUPzRge/Fc=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=CyNyHpFlIoCv49Ck2gRtQxZA9kXD+KbadbD8LEHl1AFmDREcxlHZrj+2p9zrCg9L0
+	 nFAiXz5hGBLIAN9FbkzpInyppITdujI1NxVZ0S3L0sf/ixr1zMZMaI9Ch9MvnnxMRH
+	 cWpVmoJ61wHqvBwY4/1VG/vieomf9nikiDcqTsB8=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0B7DLcEX086501
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Mon, 7 Dec 2020 07:21:38 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 7 Dec
+ 2020 07:21:38 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Mon, 7 Dec 2020 07:21:38 -0600
+Received: from [10.250.40.192] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0B7DLcNo058998;
+	Mon, 7 Dec 2020 07:21:38 -0600
+Subject: Re: [PATCH] [meta-ti][dunfell/master][PATCH] set serverip after dhcp
+To: Caleb Robey <c-robey@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: Lucas Weaver <l-weaver@ti.com>, a0232989 <a0232989@ti.com>
+References: <20201203221953.26215-1-c-robey@ti.com>
+From: "Dan Murphy" <dmurphy@ti.com>
+Message-ID: <e38d9a21-e212-8801-054f-88ceef028632@ti.com>
+Date: Mon, 7 Dec 2020 07:21:33 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <20201203221953.26215-1-c-robey@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Make nativesdk-ti-cgt-pru installable removing a file which is the
-uninstaller (useless anyway) and avoid this errors:
-https://lists.yoctoproject.org/g/meta-ti/message/13301
+Caleb
 
-Signed-off-by: Alessio Igor Bogani <alessio.bogani@elettra.eu>
----
- recipes-ti/devtools/ti-cgt-pru_2.3.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+On 12/3/20 4:19 PM, Caleb Robey wrote:
+> From: a0232989 <a0232989@ti.com>
+>
+> There is a documented issue where the u-boot dhcp command,
+> when autoboot is set to "no", will reset serverip to the
+> gateway ip address. This is a workaround that should not
+> have any negative affect on these scripts and will prevent
+> this issue for occuring.
+>
+> Issue:
+> https://stackoverflow.com/questions/13975468/in-u-boot-can-the-dhcp-command-automatically-set-the-serverip-environment-varia
+>
+> Note: we display this behavior in older scripts, but dropped
+> the nomenclature lately and default NFS setups do not work
+> out of the box as a result.
+>
+> Signed-off-by: Caleb Robey <c-robey@ti.com>
+> ---
+>   setup-uboot-env-am335x.sh     | 4 ++--
+>   setup-uboot-env-am43x.sh      | 2 +-
+>   setup-uboot-env-am57xx-evm.sh | 2 +-
+>   setup-uboot-env-am65x.sh      | 5 ++---
+>   4 files changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
-index ed10e272..de21794e 100644
---- a/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
-+++ b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
-@@ -28,6 +28,7 @@ do_install() {
-     install -d ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}
-     cp -r ${S}/ti-cgt-pru_${PV}/. \
-           ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}/
-+    rm -f ${D}${TI_CGT_PRU_INSTALL_DIR_RECIPE}/ti_cgt_pru_${PV}_uninstaller.run
- }
- 
- do_install_class-target() {
--- 
-2.17.1
+Wrong list. These need to go to meta-arago mail list
 
+Dan
