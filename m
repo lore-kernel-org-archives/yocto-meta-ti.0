@@ -1,117 +1,80 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.6643.1607693534433435464
+ by mx.groups.io with SMTP id smtpd.web09.6644.1607693534698648902
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 11 Dec 2020 05:32:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xpdTrXuJ;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Ytr2cSnM;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDWD1M058099
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDWDec058112
 	for <meta-ti@lists.yoctoproject.org>; Fri, 11 Dec 2020 07:32:13 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1607693533;
-	bh=n9xQF6QssvEuyNDFAbcVgyysBsoDvTx4+jxCQGsqixE=;
-	h=From:To:CC:Subject:Date;
-	b=xpdTrXuJlACyewGjJEQDLnIEw/Lej195O2BWlZESnknVgpnHj6Y47BVIkCu1VYTZh
-	 vJerIyKY6htgVsAaYScJEY0JpqXP8T9ViU9StEHznXWVC7RpWCNDwL9t99OsweNPyN
-	 3rbrLInJhyAW98J6d5LRl6k7QDT0A6di/I5kAZd8=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0BBDWD47070848
+	bh=BEobsMILf9g2pgtYM8lJLpW/LDM1Mn/PMz/l2ZbC34o=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=Ytr2cSnMQI9QS3dLtugsMPelVMiKmMfHQK5pP4TTRH37/oKdZQzR66DhXLUjLlTQx
+	 TICJ3Ml5ZHVghMZCiruf+cyHNAZCm/lJDjY4TL7fIaDM2zSilelG9Y23Fzge3+jrrx
+	 puzQ6Hew7WaIZHOZlLmFxhC8U8uMKxtht7nuVnv8=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0BBDWDXX122722
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@lists.yoctoproject.org>; Fri, 11 Dec 2020 07:32:13 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 11
- Dec 2020 07:32:12 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2020 07:32:13 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 11 Dec 2020 07:32:12 -0600
+ Frontend Transport; Fri, 11 Dec 2020 07:32:13 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDWClG063835;
-	Fri, 11 Dec 2020 07:32:12 -0600
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDWDrU034553;
+	Fri, 11 Dec 2020 07:32:13 -0600
 From: "Dan Murphy" <dmurphy@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
 CC: Dan Murphy <dmurphy@ti.com>
-Subject: [PATCH 1/4] machine: am64xx-evm.conf: Add machine definition for AM64xx platform
-Date: Fri, 11 Dec 2020 07:31:58 -0600
-Message-ID: <20201211133201.10923-1-dmurphy@ti.com>
+Subject: [PATCH 3/4] u-boot-ti: Update u-boot to pick up AM64 architecture
+Date: Fri, 11 Dec 2020 07:32:00 -0600
+Message-ID: <20201211133201.10923-3-dmurphy@ti.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201211133201.10923-1-dmurphy@ti.com>
+References: <20201211133201.10923-1-dmurphy@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-The AM64 is a follow on device of the AM65xx K3 multicore SoC architecture.
-
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- conf/machine/am64xx-evm-k3r5.conf | 13 +++++++++++++
- conf/machine/am64xx-evm.conf      |  7 +++++++
- conf/machine/include/am64xx.inc   | 21 +++++++++++++++++++++
- 3 files changed, 41 insertions(+)
- create mode 100644 conf/machine/am64xx-evm-k3r5.conf
- create mode 100644 conf/machine/am64xx-evm.conf
- create mode 100644 conf/machine/include/am64xx.inc
+ recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
+ recipes-bsp/u-boot/u-boot-ti.inc                | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/am64xx-evm-k3r5.conf b/conf/machine/am64xx-evm-k3r5.conf
-new file mode 100644
-index 000000000000..26230da499af
---- /dev/null
-+++ b/conf/machine/am64xx-evm-k3r5.conf
-@@ -0,0 +1,13 @@
-+#@TYPE: Machine
-+#@NAME: AM64xx EVM (R5F)
-+#@DESCRIPTION: Machine configuration for the TI AM64xx EVM (R5F core)
-+
-+require conf/machine/include/k3r5.inc
-+
-+# UPdate for am64
-+SYSFW_SOC = "am65x"
-+SYSFW_CONFIG = "evm"
-+SYSFW_SUFFIX = "gp"
-+SYSFW_SYMLINK = "sysfw.itb"
-+
-+UBOOT_MACHINE = "am64x_evm_r5_defconfig"
-diff --git a/conf/machine/am64xx-evm.conf b/conf/machine/am64xx-evm.conf
-new file mode 100644
-index 000000000000..c6ba2a8735f3
---- /dev/null
-+++ b/conf/machine/am64xx-evm.conf
-@@ -0,0 +1,7 @@
-+#@TYPE: Machine
-+#@NAME: AM64xx EVM
-+#@DESCRIPTION: Machine configuration for the TI AM64xx EVM
-+
-+require conf/machine/include/am64xx.inc
-+
-+UBOOT_MACHINE = "am64x_evm_a53_defconfig"
-diff --git a/conf/machine/include/am64xx.inc b/conf/machine/include/am64xx.inc
-new file mode 100644
-index 000000000000..a96bda1c71e7
---- /dev/null
-+++ b/conf/machine/include/am64xx.inc
-@@ -0,0 +1,21 @@
-+require conf/machine/include/k3.inc
-+SOC_FAMILY_append = ":am64xx"
-+
-+MACHINE_FEATURES += "screen touchscreen gpu"
-+
-+SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
-+
-+KERNEL_DEVICETREE = " \
-+    ti/k3-am642-evm.dtb \
-+"
-+
-+#IMAGE_BOOT_FILES += "sysfw-am64x-evm.itb"
-+
-+OPTEEMACHINE = "k3-am65x"
-+OPTEEOUTPUTMACHINE = "k3"
-+
-+# Set the list of device targets for ti-pdk class recipes
-+TI_PDK_LIMIT_SOCS = "am64xx"
-+TI_PDK_LIMIT_BOARDS = "am64xx_evm"
-+TI_PDK_LIMIT_CORES = "mcu1_0 mpu1_0"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+index 4028a7a93668..15dd32da66f2 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
+ 
+-PR = "r24"
++PR = "r25"
+ 
+ BRANCH = "ti-u-boot-2020.01"
+ 
+-SRCREV = "4bd43879837910eaf0bf45af7ec5ddfaca203ff4"
++SRCREV = "10dad9df6a0eb00f45bed48c9df0c9effb4fbae5"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index b7fd246aca6c..1770c3a1bda8 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -65,6 +65,7 @@ SPL_UART_BINARY_keystone = ""
+ SPL_UART_BINARY_k3r5 = ""
+ SPL_UART_BINARY_lego-ev3 = ""
+ SPL_UART_BINARY_j7200-evm-k3r5 = "u-boot-spl.bin"
++SPL_UART_BINARY_am64xx-evm = ""
+ 
+ SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+ SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
 -- 
 2.17.1
 
