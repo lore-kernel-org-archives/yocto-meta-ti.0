@@ -1,104 +1,85 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.6745.1607693534952328011
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web11.6771.1607693679058822127
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 11 Dec 2020 05:32:15 -0800
+ Fri, 11 Dec 2020 05:34:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=QQRYV/zz;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: dmurphy@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=hvnn1Bh1;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 4DB5F38C13A4
+	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2020 13:34:38 +0000 (UTC)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDWD4I058116
-	for <meta-ti@lists.yoctoproject.org>; Fri, 11 Dec 2020 07:32:13 -0600
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDYbbQ067177
+	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2020 07:34:37 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1607693533;
-	bh=P4n1z5hSS6SlElIxMkao7g1XMKAP7z3zkesNn0PJzus=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=QQRYV/zzAyUqepFgvxkj8YqDVZTWY2oohWPpMig6HNWTY0qCARmyGGn/WaXScHO4e
-	 2SlnMXEjPULrQYzDwYiTuuxCOic2usrag5ieTE4jwKQs8kNzEePdMhwfWbV4R6wCSe
-	 OScibNiWclhdfdlr0IyLVRcKAlIorw404HwEKk/g=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0BBDWDe7070872
+	s=ti-com-17Q1; t=1607693677;
+	bh=4fcg1pnuOsggdZIIJA1CzJ6SjKqtVYIQpasZ+sv7ZZA=;
+	h=From:To:CC:Subject:Date;
+	b=hvnn1Bh1uNmoaT5XL6PkF1eEZggHyXmB5n5eIKAm3UpG5mTG8t3MZr+n6TnF/HVnH
+	 qE2lwb1Aq5jRsPgKE0+wAT7G2H4NWZ0vZLJ9tBfE63oxKF4xhs/qqukiH5g0t9fM5Y
+	 CzV0C7G4B+mY+uWQDzBTOZ2+QzINYuvyg8ZIwKqw=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0BBDYbfh074664
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 11 Dec 2020 07:32:13 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Fri, 11 Dec 2020 07:34:37 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 11
- Dec 2020 07:32:13 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2020 07:34:37 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 11 Dec 2020 07:32:13 -0600
+ Frontend Transport; Fri, 11 Dec 2020 07:34:37 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDWD7C063846;
-	Fri, 11 Dec 2020 07:32:13 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0BBDYbv6009728;
+	Fri, 11 Dec 2020 07:34:37 -0600
 From: "Dan Murphy" <dmurphy@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
+To: <meta-ti@yoctoproject.org>
 CC: Dan Murphy <dmurphy@ti.com>
-Subject: [PATCH 4/4] ti-rtos: Update metadata with AM64 firmware
-Date: Fri, 11 Dec 2020 07:32:01 -0600
-Message-ID: <20201211133201.10923-4-dmurphy@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201211133201.10923-1-dmurphy@ti.com>
-References: <20201211133201.10923-1-dmurphy@ti.com>
+Subject: [dunfell/master] [PATCH] ti-sysbios: upgrade 6.76.03.01 -> 6.76.04.02
+Date: Fri, 11 Dec 2020 07:34:36 -0600
+Message-ID: <20201211133436.10566-1-dmurphy@ti.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
 Signed-off-by: Dan Murphy <dmurphy@ti.com>
 ---
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 6 ++++++
- recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb | 3 ++-
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ .../{ti-sysbios_6.76.03.01.bb =3D> ti-sysbios_6.76.04.02.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename recipes-ti/bios/{ti-sysbios_6.76.03.01.bb =3D> ti-sysbios_6.76.04=
+.02.bb} (68%)
 
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index 01cf0fc91aa6..74aac2c9fa0d 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -20,14 +20,19 @@ DEFAULT_RTOS_FAMILY = "jacinto"
- DEFAULT_RTOS_VERSION = "07_01_00_38"
- DEFAULT_RTOS_VERSION_DOT = "07.01.00.38"
- 
-+DEFAULT_RTOS_VERSION_am64xx = "07_01_03_01"
-+DEFAULT_RTOS_VERSION_DOT_am64xx = "07.01.03.01"
-+
- DEFAULT_RTOS_SOC = "undefined"
- DEFAULT_RTOS_SOC_j7 = "j721e"
- DEFAULT_RTOS_SOC_j7200-evm = "j7200"
- DEFAULT_RTOS_SOC_am65xx = "am65xx"
-+DEFAULT_RTOS_SOC_am64xx = "am64xx"
- 
- DEFAULT_RTOS_WEBLINK = "undefined"
- DEFAULT_RTOS_WEBLINK_j7 = "https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/${CORESDK_RTOS_VERSION}"
- DEFAULT_RTOS_WEBLINK_am65xx = "https://software-dl.ti.com/processor-sdk-rtos/esd/AM65X/firmware/${CORESDK_RTOS_VERSION}"
-+DEFAULT_RTOS_WEBLINK_am64xx = "https://software-dl.ti.com/processor-sdk-rtos/esd/AM64X/firmware/${CORESDK_RTOS_VERSION}"
- 
- DEFAULT_FIRMWARE_FILE = "coresdk_rtos_${CORESDK_RTOS_SOC}_${CORESDK_RTOS_VERSION}_firmware.tar.xz"
- 
-@@ -38,6 +43,7 @@ DEFAULT_FIRMWARE_SHA256SUM = "unknown"
- DEFAULT_FIRMWARE_SHA256SUM_j7 = "93e4d3742a922015f3295f5c20ef4bc2b9751139ffcd5620b8df7047bff50651"
- DEFAULT_FIRMWARE_SHA256SUM_j7200-evm = "cd5071a8f6ddaec05346e4c2bbeed6dc7bcb376d6edc47f81b9aeaf38f151176"
- DEFAULT_FIRMWARE_SHA256SUM_am65xx = "e54cc8da7fefa1ebf55454b184b42c364de3eebb34a328d244b8275b7763eb58"
-+DEFAULT_FIRMWARE_SHA256SUM_am64xx = "dc1a39b7a7f403235364a84ed5291666a84a5fa7fe8c136ec07d45848c1017f4"
- 
- # Use weak assignment for CORESDK_RTOS_* variables to use defaults if not yet set
- CORESDK_RTOS_FAMILY ?= "${DEFAULT_RTOS_FAMILY}"
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
-index 15c0c68cc2d8..21e7b1dc71c2 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
-@@ -13,11 +13,12 @@ PLAT_SFX = ""
- PLAT_SFX_j7 = "/j721e"
- PLAT_SFX_j7200-evm = "/j7200"
- PLAT_SFX_am65xx = "/am65xx"
-+PLAT_SFX_am64xx = "/am64xx"
- 
- # Use weak assignment to set defaults to TI_RTOS_METADATA_* variables
- TI_RTOS_METADATA_URI ?= "git://git.ti.com/processor-sdk/coresdk_rtos_releases.git"
- TI_RTOS_METADATA_PROTOCOL ?= "git"
--TI_RTOS_METADATA_SRCREV ?= "6b63577eec787cde277d3d12b23ea80578b6ad91"
-+TI_RTOS_METADATA_SRCREV ?= "d946278e9a40632d05cd1e953f5f200011be69a9"
- TI_RTOS_METADATA_BRANCH ?= "master"
- TI_RTOS_METADATA_DIR ?= "${PLAT_SFX}"
- TI_RTOS_METADATA_FILE ?= "${S}${TI_RTOS_METADATA_DIR}/metadata.inc"
--- 
-2.17.1
+diff --git a/recipes-ti/bios/ti-sysbios_6.76.03.01.bb b/recipes-ti/bios/t=
+i-sysbios_6.76.04.02.bb
+similarity index 68%
+rename from recipes-ti/bios/ti-sysbios_6.76.03.01.bb
+rename to recipes-ti/bios/ti-sysbios_6.76.04.02.bb
+index d242510f801e..237b48929739 100644
+--- a/recipes-ti/bios/ti-sysbios_6.76.03.01.bb
++++ b/recipes-ti/bios/ti-sysbios_6.76.04.02.bb
+@@ -1,13 +1,13 @@
+ require recipes-ti/bios/ti-sysbios.inc
+=20
+ PE =3D "1"
+-PV =3D "6_76_03_01"
++PV =3D "6_76_04_02"
+ PR =3D "r0"
+=20
+ LIC_FILES_CHKSUM =3D "file://manifest_bios_${PV}.html;md5=3D5cf40699c51b=
+26d36fc01647c0b27fb1"
+=20
+-SRC_URI[sysbiosbin.md5sum] =3D "647243209d66d5dd35503b0ec5a84ab9"
+-SRC_URI[sysbiosbin.sha256sum] =3D "b762b7f2343d26d367f952488e52904678512=
+8005158cc921c3baef08e97116a"
++SRC_URI[sysbiosbin.md5sum] =3D "9766b12ea6dd4b3a035cdb6be54c5071"
++SRC_URI[sysbiosbin.sha256sum] =3D "d68ca3ba862f8f83a5bf7084af326ffa9fcb6=
+4e39c866f98384d87c0ceca29be"
+=20
+ TI_BIN_UNPK_CMDS =3D ""
+ TI_BIN_UNPK_ARGS =3D "--mode unattended --prefix ${WORKDIR}"
+--=20
+2.29.2
 
