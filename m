@@ -1,75 +1,69 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.5438.1607788984362661001
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.9972.1607808213823344120
  for <meta-ti@lists.yoctoproject.org>;
- Sat, 12 Dec 2020 08:03:04 -0800
+ Sat, 12 Dec 2020 13:23:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=drbusvoW;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0BCG33me034099
-	for <meta-ti@lists.yoctoproject.org>; Sat, 12 Dec 2020 10:03:03 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=aPl2eT2K;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0BCLNWVe112808
+	for <meta-ti@lists.yoctoproject.org>; Sat, 12 Dec 2020 15:23:32 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1607788983;
-	bh=T8rZc/PjHObK8Bl9JBKBlDUJJteJTuTpUgpfntg3RWA=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=drbusvoWDv2/3fcovxuTLyqy67iKJmgm3OLri+mK3H3DntqKfwPKUOOUJmXl2MOFr
-	 KK8CLSuTvPRB+Ex8QfEQqWUddmrZl4czlHui9lrPw79YtZt3d36a+MhbaJAAW5Bx6q
-	 UE86EmTPrClruxZP89clOiL4t1P7jMYTWJedEQ9g=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0BCG32d4027076
+	s=ti-com-17Q1; t=1607808212;
+	bh=BcixGI5nmuKvl5oXiMmwJPGGyyu1tinj9tgp7avb6bc=;
+	h=From:To:CC:Subject:Date;
+	b=aPl2eT2KjUDL0lTZejjB12s8cdV0VcM7QvktPPU+JEeVoFB/ur+uY0Jiq7diwpfbL
+	 +s3DP3aKxw/5VvQVm9l83sLJZkIgbqFwR+UU82g+GX58qemk7+/r2QncVK8Q6Ksndz
+	 EAp+MW5PlW1th2rFRmv4B0Vl3U4QdnQ6cZ1mlm68=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0BCLNWOt058051
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Sat, 12 Dec 2020 10:03:03 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Sat, 12 Dec 2020 15:23:32 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Sat, 12
- Dec 2020 10:03:02 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2020 15:23:32 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Sat, 12 Dec 2020 10:03:02 -0600
-Received: from [10.250.40.192] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0BCG32LE026768;
-	Sat, 12 Dec 2020 10:03:02 -0600
-Subject: Re: [meta-ti] [PATCH 2/4] linux-ti-staging: Update kernel to pick up AM64 platform
-To: Suman Anna <s-anna@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <20201211133201.10923-1-dmurphy@ti.com>
- <20201211133201.10923-2-dmurphy@ti.com>
- <1ce70d24-32c3-37dc-e0e5-315e52e39026@ti.com>
-From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <cdcf8a93-19ac-c37e-e2b7-3be2fc09dfec@ti.com>
-Date: Sat, 12 Dec 2020 10:02:57 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Frontend Transport; Sat, 12 Dec 2020 15:23:32 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0BCLNWAq022262;
+	Sat, 12 Dec 2020 15:23:32 -0600
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Dan Murphy <dmurphy@ti.com>
+CC: Suman Anna <s-anna@ti.com>, Nishanth Menon <nm@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH] trusted-firmware-a: Update SRCREV to pick latest
+Date: Sat, 12 Dec 2020 15:23:32 -0600
+Message-ID: <20201212212332.11836-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <1ce70d24-32c3-37dc-e0e5-315e52e39026@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Type: text/plain
 
-Suman
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-On 12/12/20 1:03 AM, Suman Anna wrote:
-> On 12/11/20 7:31 AM, Dan Murphy via lists.yoctoproject.org wrote:
->> Signed-off-by: Dan Murphy <dmurphy@ti.com>
->> ---
->>   recipes-kernel/linux/linux-ti-staging_5.4.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
->> index 0e7fa2dff29c..8275988bb1a7 100644
->> --- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
->> +++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
->> @@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
->>   
->>   BRANCH = "ti-linux-5.4.y"
->>   
->> -SRCREV = "673043a513673aaddded01f52124c37d0e28f4f9"
->> +SRCREV = "7a5e2e57a39a097b4dde09bad8f72a2d31dc09c4"
-> You can probably merge this patch first in preparation. Also, the SHA is already
-> stale, might just pick the latest, even 5.4.82..
->
-OK I will send another patch to update the SHA and rev
+Update SRCREV to pick latest that includes AM64 support
 
-Dan
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+index 3ca4a204..7821ed3a 100644
+--- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
++++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+@@ -2,7 +2,7 @@ PV_k3 = "2.4"
+ LIC_FILES_CHKSUM_k3 = "file://license.rst;md5=1dd070c98a281d18d9eefd938729b031"
+ BRANCH_k3 = "ti-atf"
+ SRC_URI_k3 = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH};name=tfa"
+-SRCREV_tfa_k3 = "f0a310d000fd6e8a1ed0ccc365b5931390393db1"
++SRCREV_tfa_k3 = "65dd16b4ea5032752af62e94ca64cff41733a123"
+ COMPATIBLE_MACHINE_k3 = "k3"
+ TFA_BUILD_TARGET_k3 = "all"
+ TFA_INSTALL_TARGET_k3 = "bl31"
+-- 
+2.17.1
 
