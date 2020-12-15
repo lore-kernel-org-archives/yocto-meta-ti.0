@@ -1,91 +1,101 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.4724.1608070631050188184
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web09.4803.1608070833095509893
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 15 Dec 2020 14:17:11 -0800
+ Tue, 15 Dec 2020 14:20:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9CA6040BEA;
-	Tue, 15 Dec 2020 22:17:09 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NLneMmgXBIN5; Tue, 15 Dec 2020 22:17:09 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0C6D940A0B;
-	Tue, 15 Dec 2020 22:17:04 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 79BB917450F; Tue, 15 Dec 2020 17:17:03 -0500 (EST)
-Date: Tue, 15 Dec 2020 17:17:03 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: "Bajjuri, Praneeth" <praneeth@ti.com>
-Cc: dmurphy@ti.com, Suman Anna <s-anna@ti.com>,
-	meta-ti@lists.yoctoproject.org, Dave Gerlach <d-gerlach@ti.com>,
-	Nishanth Menon <nm@ti.com>
-Subject: Re: [meta-ti] [dunfell/master PATCH V2] trusted-firmware-a: Update SRCREV to pick latest
-Message-ID: <20201215221703.GN24670@denix.org>
-References: <8c5b53d9-8c01-ff9e-12c6-03a7e2c13dc6@ti.com>
- <20201215205138.27986-1-praneeth@ti.com>
- <b5a69301-1b9b-c549-9426-f568bccff39d@ti.com>
- <bf4ed182-3c78-7c63-052d-014da1f4f680@ti.com>
- <cc97983c-848e-c8e2-4c23-17aee5df2f6d@ti.com>
- <20201215212931.GM24670@denix.org>
- <e2c68c41-ddb6-097f-7c90-9145afe77037@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=iO6sSi+h;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0BFMKTum125566;
+	Tue, 15 Dec 2020 16:20:29 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1608070829;
+	bh=ys+Ptn+nVi5E9ec4dLpSnCWpIjYIB/we5oVWx3r3sfs=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=iO6sSi+hidjB8gT9QE8j8Q+tg54cMSG1IUF/0fBDydbko69xEFM6edtYY6CSRaeLm
+	 BbkGv9IFIlZVsP0WErdTu7xtPCfD20dFsgGejF/HGdwXvHzxIb2VGPhK5/90gFVhQy
+	 YrMsoRKJwlWEIC3Vn8ZSZf2isN4BdjoKEVA8nH94=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0BFMKT64122662
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 15 Dec 2020 16:20:29 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 15
+ Dec 2020 16:20:29 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Tue, 15 Dec 2020 16:20:29 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0BFMKTFK021663;
+	Tue, 15 Dec 2020 16:20:29 -0600
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Dan Murphy <dmurphy@ti.com>
+CC: Suman Anna <s-anna@ti.com>, <meta-ti@lists.yoctoproject.org>,
+        Dave Gerlach
+	<d-gerlach@ti.com>, Nishanth Menon <nm@ti.com>,
+        <denis@denix.org>
+Subject: [dunfell/master PATCH V4] trusted-firmware-a: Update SRCREV for AM64X support
+Date: Tue, 15 Dec 2020 16:20:29 -0600
+Message-ID: <20201215222029.8816-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201215212214.32304-1-praneeth@ti.com>
+References: <20201215212214.32304-1-praneeth@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <e2c68c41-ddb6-097f-7c90-9145afe77037@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Tue, Dec 15, 2020 at 04:07:47PM -0600, Bajjuri, Praneeth wrote:
->=20
->=20
-> On 12/15/2020 3:29 PM, Denys Dmytriyenko wrote:
-> >On Tue, Dec 15, 2020 at 03:04:16PM -0600, Dan Murphy via lists.yoctopr=
-oject.org wrote:
-> >>Praneeth
-> >>
-> >>On 12/15/20 2:59 PM, Bajjuri, Praneeth wrote:
-> >>>
-> >>>
-> >>>On 12/15/2020 2:53 PM, Dan Murphy wrote:
-> >>>>Praneeth
-> >>>>
-> >>>>On 12/15/20 2:51 PM, praneeth@ti.com wrote:
-> >>>>>From: Praneeth Bajjuri <praneeth@ti.com>
-> >>>>>
-> >>>>>Update SRCREV to pick latest that includes AM64 support
-> >>>>
-> >>>>You are doing just a bit more then this.=A0 What is the "lite" for =
-now?
-> >>>
-> >>>Thats the new target name for AM64
-> >>>
-> >>>Ref: https://git.ti.com/cgit/atf/arm-trusted-firmware/commit/?h=3Dti=
--atf&id=3D65dd16b4ea5032752af62e94ca64cff41733a123
-> >>>
-> >>>
-> >>>TARGET_BOARD=3Dlite for AM64
-> >>>TARGET_BOARD=3Dgeneric (default for other devices)
-> >>>defined at conf/machine/include/k3.inc
-> >>>
-> >>Thanks.=A0 Now if we can just get that in the commit message except
-> >>for the URL target
-> >
-> >Probably better to set TFA_BOARD =3D "lite" in the corresponding am64x=
-x-evm.conf
-> >machine config...
->=20
-> Can i move it to conf/machine/include/am64xx.inc instead ? please advis=
-e.
->=20
-> Will submit v4 accordingly
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Sure, am64xx.inc should be fine, even better for when/if possible HS or a=
-ny=20
-other variants in the same SoC family come out.
+Update SRCREV to pick latest that includes AM64X support
 
---=20
-Denys
+commit 65dd16b4e ("ti: k3: Introduce lite device board support")
+adds support of AM64X platform in ti-atf branch.
+
+This patch updates the SRCREV and also updates the BOARD to "lite" to
+build for the mentioned platform.
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+Changes since V3:
+- moved TFA_BOARD definition to am64xx.inc
+ 
+Changes since V2:
+- Update commit message adding more details on new platform
+
+Changes since V1:
+- Update TFA_BOARD target name for AM64 as "lite"
+
+ conf/machine/include/am64xx.inc                              | 1 +
+ recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/conf/machine/include/am64xx.inc b/conf/machine/include/am64xx.inc
+index 79a403a9..99d573e8 100644
+--- a/conf/machine/include/am64xx.inc
++++ b/conf/machine/include/am64xx.inc
+@@ -12,6 +12,7 @@ KERNEL_DEVICETREE = " \
+ 
+ #IMAGE_BOOT_FILES += "sysfw-am64x-evm.itb"
+ 
++TFA_BOARD_am64xx-evm = "lite"
+ OPTEEMACHINE = "k3-am65x"
+ OPTEEOUTPUTMACHINE = "k3"
+ 
+diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+index 4942bf46..4852c560 100644
+--- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
++++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+@@ -2,7 +2,7 @@ PV_k3 = "2.4"
+ LIC_FILES_CHKSUM_k3 = "file://license.rst;md5=1dd070c98a281d18d9eefd938729b031"
+ BRANCH_k3 = "ti-atf"
+ SRC_URI_k3 = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH};name=tfa"
+-SRCREV_tfa_k3 = "f0a310d000fd6e8a1ed0ccc365b5931390393db1"
++SRCREV_tfa_k3 = "65dd16b4ea5032752af62e94ca64cff41733a123"
+ COMPATIBLE_MACHINE_k3 = "k3"
+ TFA_BUILD_TARGET_k3 = "all"
+ TFA_INSTALL_TARGET_k3 = "bl31"
+-- 
+2.17.1
+
