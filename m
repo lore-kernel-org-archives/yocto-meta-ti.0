@@ -1,334 +1,223 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.4134.1608241237148878447
+Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.42])
+ by mx.groups.io with SMTP id smtpd.web10.6151.1608778507525102945
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 17 Dec 2020 13:40:37 -0800
+ Wed, 23 Dec 2020 18:55:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4999F40B98
-	for <meta-ti@lists.yoctoproject.org>; Thu, 17 Dec 2020 21:40:36 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id j_zq3-8vycUi for <meta-ti@lists.yoctoproject.org>;
-	Thu, 17 Dec 2020 21:40:36 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2DC3A40A0B
-	for <meta-ti@lists.yoctoproject.org>; Thu, 17 Dec 2020 21:40:36 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id CAAB1174512;
-	Thu, 17 Dec 2020 16:40:35 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denis@denix.org>
-Subject: [dunfell/master][PATCH] optee-os: upgrade to upstream 3.11.0
-Date: Thu, 17 Dec 2020 16:40:34 -0500
-Message-Id: <1608241234-15610-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=missing; spf=pass (domain: ltts.com, ip: 40.107.139.42, mailfrom: irfan.shaikh@ltts.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QTJ1IQfvBbThVDSK0yJ5+RDsgvhiNcvbrH7AZH/l2UMQKPoTo91774pQFmmwhun7mVgOVt3bvVohEBg1mO5aFnU1lFLwPjMvf5CcVW7cNfDzOsuNxb4fsR3ymjWcsJfmuOdCM+yZ/yHdpCSuhvwFZR2H1j8lLZNb1laHagI+/SqvzmFm58frAI0PZsKikg1lme/m3ifjuMSzVcm8bzZWItvlXyfhX7e+FKKhueQiItdI4S1rukpmIhKo1aSmFvAT5LBbD46LbYzHxfz0YMvKUCsdS7yBYAyDQEZNvKXteHAfDiKFdhDJaWgz3WS2I3lxwtOa3tIClyYUW4wmS3Qofw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gkBHxQh83yPU8TFf+MrnvKDyH+k2vwcZIOsV3hOQ4UA=;
+ b=nnt8f71Ii1dbdZBDZ6x9ZfIndhChzinJMrOwyw0QqxVmnfHgU2k4LzInDFmgGoFWiAf1bPl+LpOciFu67bIS/zuWgk8aVy5Mq7Ba/DswYt7dzf05PyTLbO2o3HABx7Jb/3dj+EbjiIWLAplNPi4z6ELqLP/0yD/XQxdJTr1sh/47NxBW+tGDPCsxeDvdinXSG5aSKkT6M83wZxS1sF/0/UW66vICSNg+0xxWCvmSZj25ycDR5sRJaCNlSAfMhz6gQ98gT+0WjhKdsmIsqvzF/xkXfmNdKPHoIUT6/ukQiAlakdGD7unmjBlyL9a3xDNy26l4xyOS34TY6/uNrZM0cg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ltts.com; dmarc=pass action=none header.from=ltts.com;
+ dkim=pass header.d=ltts.com; arc=none
+Received: from MA1PR01MB2363.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:3a::19)
+ by MAXPR01MB4215.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:4::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3700.27; Thu, 24 Dec
+ 2020 02:55:00 +0000
+Received: from MA1PR01MB2363.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::e8c0:fcce:5f7b:2909]) by MA1PR01MB2363.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::e8c0:fcce:5f7b:2909%6]) with mapi id 15.20.3654.034; Thu, 24 Dec 2020
+ 02:55:00 +0000
+From: irfan.shaikh@ltts.com
+To: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
+Subject: Yocto build with meta-ti BSP using meta-ivi
+Thread-Topic: Yocto build with meta-ti BSP using meta-ivi
+Thread-Index: AQHW2Zx9Zm+OHOAmRESHmTT6S2cftw==
+Date: Thu, 24 Dec 2020 02:55:00 +0000
+Message-ID: 
+ <MA1PR01MB23636786243A5CA7AB4CA068E6DD0@MA1PR01MB2363.INDPRD01.PROD.OUTLOOK.COM>
+Accept-Language: en-IN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_4b5591f2-6b23-403d-aa5f-b6d577f5e572_Enabled=True;MSIP_Label_4b5591f2-6b23-403d-aa5f-b6d577f5e572_SiteId=311b3378-8e8a-4b5e-a33f-e80a3d8ba60a;MSIP_Label_4b5591f2-6b23-403d-aa5f-b6d577f5e572_SetDate=2020-12-24T02:55:00.000Z;MSIP_Label_4b5591f2-6b23-403d-aa5f-b6d577f5e572_Name=General;MSIP_Label_4b5591f2-6b23-403d-aa5f-b6d577f5e572_ContentBits=0;MSIP_Label_4b5591f2-6b23-403d-aa5f-b6d577f5e572_Method=Standard;
+authentication-results: lists.yoctoproject.org; dkim=none (message not signed)
+ header.d=none;lists.yoctoproject.org; dmarc=none action=none
+ header.from=Ltts.com;
+x-originating-ip: [20.193.137.191]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 68d72968-481e-4d0d-eb58-08d8a7b74dee
+x-ms-traffictypediagnostic: MAXPR01MB4215:
+x-microsoft-antispam-prvs: 
+ <MAXPR01MB421523482E3940192E6E7DB1E6DD0@MAXPR01MB4215.INDPRD01.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ ++a4J9fTcq+jGyZDHAatJz+FplFUBxoN1i4jQAsMVhAIVxdwiQVWhct8223kWkZ7Zc/4kl3oTM9SWThcOCqYbF+EyP2eGvUk/7OoXrzkLnNsxU/OxJXCIuh8SUlfdaKiubfEvx3TuHqOkdmXbr3payyZLL7Xq/wW0gcdrIerZsJ8wxZ/Qn4KrTyry2pqrlB8s2a569JXwZa8PkFmNn2l4Zo3rpOATTih1d+E3EbfM38t3zvtyPdc+vJQDLnoDsfKhqMVYLIc3SVcZDiXB9hwYUg/EOZ/IqdCmVueOm24WkEco1eU5u2ivrNfb/ho40OU3CwElFve9a+HMbdR0Q+Q95jwECxDklKkU2RjfxAUM5GiyEUN8xAT3qWbC9v1wMFhnwbIIqOs9cf3W0SoDk3vXg==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA1PR01MB2363.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(396003)(39860400002)(376002)(366004)(346002)(136003)(66476007)(6916009)(26005)(6506007)(186003)(66946007)(8936002)(166002)(19627405001)(8676002)(86362001)(316002)(66556008)(7696005)(2906002)(478600001)(15974865002)(33656002)(9686003)(83380400001)(55016002)(66446008)(52536014)(91956017)(71200400001)(5660300002)(76116006)(64756008);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata: 
+ =?iso-8859-1?Q?OBtXiKD31rAfRBU/yaCKw2lFlMUSNe/S7OogI0APNCkvIuLG5HPfu5kRNa?=
+ =?iso-8859-1?Q?8D22wkfIV904oO1Tdy7peyG9ZrV4xYBgkP+CelWBTz5mFENqEaZCQ2pb3q?=
+ =?iso-8859-1?Q?maqqSogOqOgdHEEionIoAE9w8an341qVDUhtewx132TdTVG1h2UKOjyC6Q?=
+ =?iso-8859-1?Q?00ZR6s/p5XjCjacGbTQZuEguMSKoLGA0lQUp793U88xJA9MKi0PUw5uUf/?=
+ =?iso-8859-1?Q?LyPjHIJG/x3RAzOLlxR0NjOEfo8NvoqHfCstw0OFPsYXnNKEgr7KFV1mQv?=
+ =?iso-8859-1?Q?ajZJL6m1xWqPY3VZzZzPfj02qGvKBqkogjyvrfMhvoeyJlr7nR2qjgPBTJ?=
+ =?iso-8859-1?Q?zZ32iNxuuWhO1LeSlmxErQUgy+iarFdRbH0XxHqk2FiC/+PsVmdBwzIS6b?=
+ =?iso-8859-1?Q?uhll+/3p6cSfcq2u83F7edd1x4odLZSZFCx9mAPVvncHxyelLcfwu5PcWh?=
+ =?iso-8859-1?Q?ZCnIOBys97r3O7+7PYTODUfXqiCjlyDeFov8/bm/aNWry6HcuJUqvMEekj?=
+ =?iso-8859-1?Q?uf6izzHjGKBV9jW5WS6rV5v3Gszt9X+d0N7bKdu2jE+Ic2FOvgTL92pi2h?=
+ =?iso-8859-1?Q?KUWYaWquKhgaZOFDITY6mdMDZfiVmCZN/R/PJ1SCZ4bxfT2MI09VEbd+m8?=
+ =?iso-8859-1?Q?IjQb3rLuKzbbWT34k6rVTlLsPLsSdhcRhiJpthVJ8k9ONAyLk311aAL3Y1?=
+ =?iso-8859-1?Q?coj2jEdWR7rfS/atiNYNX6zuduNAt1YSioz00AIWCGLld6gCtTa6CjL2lh?=
+ =?iso-8859-1?Q?etsc4GKFtrJc4G6mW5Av1oos9lH8wmdFUA07tp8s1E1KxlfugjUpo+AJu/?=
+ =?iso-8859-1?Q?bcPC/SN0o0j8+qRVYFDoKcHOW8vbGAN9jzKT3CJ1OS5UZp9WzK7JTot3Fh?=
+ =?iso-8859-1?Q?SpSP1HZUuvvMIeDoRB/LrSC/AnfC7KIzXRQNEFnAuAmb375vSiFHgoyNLI?=
+ =?iso-8859-1?Q?o0R97zCpEXTp92K68MaL5YlrXLjVBh05gKWbIIAhn2YECWlS4rYJS/MLT9?=
+ =?iso-8859-1?Q?YhfvbTuFqJ0ZbWJSg=3D?=
+x-ms-exchange-transport-forked: True
+MIME-Version: 1.0
+X-OriginatorOrg: ltts.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MA1PR01MB2363.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68d72968-481e-4d0d-eb58-08d8a7b74dee
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Dec 2020 02:55:00.0103
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 311b3378-8e8a-4b5e-a33f-e80a3d8ba60a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: k+9ZeTRrcRXXmEoIppBZB2BC+Y5SuLE8TWdwEleMSFAhWApVfVYMz1tdxEuS00QCHJXIThBEkkiQTKDrVGjUsQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MAXPR01MB4215
+Content-Language: en-IN
+Content-Type: multipart/alternative;
+	boundary="_000_MA1PR01MB23636786243A5CA7AB4CA068E6DD0MA1PR01MB2363INDP_"
 
-As meta-arm has this version in master, but not in dunfell, temporarily overlay
-corresponding patches locally - could be removed for the next release. Need to
-alter FILESEXTRAPATHS for bbappend to locate local patches.
+--_000_MA1PR01MB23636786243A5CA7AB4CA068E6DD0MA1PR01MB2363INDP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Since meta-arm/dunfell has 3.8-specific patches in SRC_URI, let's redefine it
-completely to match 3.11-specific patch list in meta-arm/master.
+Hello Everyone !
 
-Last, but not least, guard all upstream recipe varibales with "ti-soc" override
-to only affect platforms in meta-ti, but not any other BSPs.
+My first post here. I am facing lot of build errors and challenges to build=
+ TI BSP using yocto. Can you please check on steps that i followed and poin=
+t out your valuable suggestions or recommendations on the same
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- ...-provide-empty-__getauxval-implementation.patch | 62 ++++++++++++++++++++++
- ...lement-support-for-libnames-after-libgcc-.patch | 55 +++++++++++++++++++
- ...mk-make-sure-that-libutils-is-linked-seco.patch | 44 +++++++++++++++
- ...6-allow-setting-sysroot-for-libgcc-lookup.patch | 34 ++++++++++++
- .../0007-allow-setting-sysroot-for-clang.patch     | 29 ++++++++++
- recipes-security/optee/optee-os_%.bbappend         | 15 ++++++
- 6 files changed, 239 insertions(+)
- create mode 100644 recipes-security/optee/optee-os/0001-libutils-provide-empty-__getauxval-implementation.patch
- create mode 100644 recipes-security/optee/optee-os/0002-link.mk-implement-support-for-libnames-after-libgcc-.patch
- create mode 100644 recipes-security/optee/optee-os/0003-ta_dev_kit.mk-make-sure-that-libutils-is-linked-seco.patch
- create mode 100644 recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
- create mode 100644 recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
+Questions:
 
-diff --git a/recipes-security/optee/optee-os/0001-libutils-provide-empty-__getauxval-implementation.patch b/recipes-security/optee/optee-os/0001-libutils-provide-empty-__getauxval-implementation.patch
-new file mode 100644
-index 0000000..0120f5c
---- /dev/null
-+++ b/recipes-security/optee/optee-os/0001-libutils-provide-empty-__getauxval-implementation.patch
-@@ -0,0 +1,62 @@
-+Upstream-Status: Backport
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
-+
-+From 36e784f621bf5d5be9183beba35f39426277c110 Mon Sep 17 00:00:00 2001
-+From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-+Date: Tue, 13 Oct 2020 22:45:39 +0300
-+Subject: [PATCH 1/3] libutils: provide empty __getauxval() implementation
-+
-+Never version of libgcc are built with LSE implementation in mind. To
-+determine if LSE is available on platform it calls __getauxval(), so in
-+some cases we can get undefined reference to __getauxval() error.
-+
-+Prominent case is libgcc_eh.a library, which is used by C++ TAs. Exception
-+handler depends on atomic operations, so it tries to call
-+init_have_lse_atomics() first. This function in turn calls __getauxval(),
-+which causes linking error.
-+
-+In the future we can make __getauxval() to return actual platform
-+capabilities.
-+
-+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
-+Reviewed-by: Jerome Forissier <jerome@forissier.org>
-+---
-+ lib/libutils/ext/arch/arm/auxval.c | 12 ++++++++++++
-+ lib/libutils/ext/arch/arm/sub.mk   |  1 +
-+ 2 files changed, 13 insertions(+)
-+ create mode 100644 lib/libutils/ext/arch/arm/auxval.c
-+
-+diff --git a/lib/libutils/ext/arch/arm/auxval.c b/lib/libutils/ext/arch/arm/auxval.c
-+new file mode 100644
-+index 00000000..98bca850
-+--- /dev/null
-++++ b/lib/libutils/ext/arch/arm/auxval.c
-+@@ -0,0 +1,12 @@
-++// SPDX-License-Identifier: BSD-2-Clause
-++/*
-++ * Copyright (c) 2020, EPAM Systems
-++ */
-++
-++#include <compiler.h>
-++
-++unsigned long int __getauxval (unsigned long int type);
-++unsigned long int __getauxval (unsigned long int type __unused)
-++{
-++	return 0;
-++}
-+diff --git a/lib/libutils/ext/arch/arm/sub.mk b/lib/libutils/ext/arch/arm/sub.mk
-+index dc5eed67..2e779066 100644
-+--- a/lib/libutils/ext/arch/arm/sub.mk
-++++ b/lib/libutils/ext/arch/arm/sub.mk
-+@@ -3,6 +3,7 @@ srcs-$(CFG_ARM32_$(sm)) += aeabi_unwind.c
-+ endif
-+ srcs-$(CFG_ARM32_$(sm)) += atomic_a32.S
-+ srcs-$(CFG_ARM64_$(sm)) += atomic_a64.S
-++srcs-y += auxval.c
-+ ifneq ($(sm),ldelf) # TA, core
-+ srcs-$(CFG_ARM32_$(sm)) += mcount_a32.S
-+ srcs-$(CFG_ARM64_$(sm)) += mcount_a64.S
-+-- 
-+2.25.1
-+
-diff --git a/recipes-security/optee/optee-os/0002-link.mk-implement-support-for-libnames-after-libgcc-.patch b/recipes-security/optee/optee-os/0002-link.mk-implement-support-for-libnames-after-libgcc-.patch
-new file mode 100644
-index 0000000..11296c8
---- /dev/null
-+++ b/recipes-security/optee/optee-os/0002-link.mk-implement-support-for-libnames-after-libgcc-.patch
-@@ -0,0 +1,55 @@
-+Upstream-Status: Backport
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
-+
-+From 73196b58ea6978ffa5e581738030f51c5789ef73 Mon Sep 17 00:00:00 2001
-+From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-+Date: Tue, 13 Oct 2020 22:54:13 +0300
-+Subject: [PATCH 2/3] link.mk: implement support for libnames-after-libgcc
-+ variable
-+
-+Newer versions of libgcc depend on external __getauxval() symbol, which is
-+now provided by libutils. But libgcc is linked after libutils, so linker
-+can't resolve that symbol. We can't include libgcc into linking group with
-+libtutils, because libgcc provides symbols that conflict with libutil's
-+ones, like __aeabi_idiv with friends for instance.
-+
-+So, to resolve libgcc dependency on libutils we need to link with libutils
-+second time. To make things more generic, we will introduce
-+$(libnames-after-libgcc) variable for libraries that should be linked after
-+libgcc.
-+
-+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
-+Reviewed-by: Jerome Forissier <jerome@forissier.org>
-+---
-+ ta/arch/arm/link.mk | 6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/ta/arch/arm/link.mk b/ta/arch/arm/link.mk
-+index 445c285d..3025acb1 100644
-+--- a/ta/arch/arm/link.mk
-++++ b/ta/arch/arm/link.mk
-+@@ -55,8 +55,11 @@ link-ldflags += --eh-frame-hdr
-+ link-ldadd += $(libstdc++$(sm)) $(libgcc_eh$(sm))
-+ endif
-+ link-ldadd += --end-group
-+-ldargs-$(user-ta-uuid).elf := $(link-ldflags) $(objs) $(link-ldadd) $(libgcc$(sm))
-+ 
-++link-ldadd-after-libgcc += $(addprefix -l,$(libnames-after-libgcc))
-++
-++ldargs-$(user-ta-uuid).elf := $(link-ldflags) $(objs) $(link-ldadd) \
-++				$(libgcc$(sm)) $(link-ldadd-after-libgcc)
-+ 
-+ link-script-cppflags-$(sm) := \
-+ 	$(filter-out $(CPPFLAGS_REMOVE) $(cppflags-remove), \
-+@@ -76,6 +79,7 @@ $(link-script-pp$(sm)): $(link-script$(sm)) $(conf-file) $(link-script-pp-makefi
-+ 		$(link-script-cppflags-$(sm)) $$< -o $$@
-+ 
-+ $(link-out-dir$(sm))/$(user-ta-uuid).elf: $(objs) $(libdeps) \
-++					  $(libdeps-after-libgcc) \
-+ 					  $(link-script-pp$(sm)) \
-+ 					  $(dynlistdep) \
-+ 					  $(additional-link-deps)
-+-- 
-+2.25.1
-+
-diff --git a/recipes-security/optee/optee-os/0003-ta_dev_kit.mk-make-sure-that-libutils-is-linked-seco.patch b/recipes-security/optee/optee-os/0003-ta_dev_kit.mk-make-sure-that-libutils-is-linked-seco.patch
-new file mode 100644
-index 0000000..88ba5f8
---- /dev/null
-+++ b/recipes-security/optee/optee-os/0003-ta_dev_kit.mk-make-sure-that-libutils-is-linked-seco.patch
-@@ -0,0 +1,44 @@
-+Upstream-Status: Backport
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
-+
-+From f50962e3f56f0932662b2ffa10afe53339a335dd Mon Sep 17 00:00:00 2001
-+From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-+Date: Fri, 16 Oct 2020 16:36:08 +0300
-+Subject: [PATCH 3/3] ta_dev_kit.mk: make sure that libutils is linked second
-+ time
-+
-+libgcc depends on __getauxval symbol from libuils. As, generally libutils
-+is linked before libgcc, we will get "unresolved symbol" error. To resolve
-+this dependency we need to link libutils second time - after libgcc.
-+
-+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
-+Reviewed-by: Jerome Forissier <jerome@forissier.org>
-+---
-+ ta/mk/ta_dev_kit.mk | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
-+
-+diff --git a/ta/mk/ta_dev_kit.mk b/ta/mk/ta_dev_kit.mk
-+index e28be677..d0e66317 100644
-+--- a/ta/mk/ta_dev_kit.mk
-++++ b/ta/mk/ta_dev_kit.mk
-+@@ -78,6 +78,16 @@ endif
-+ libnames += dl
-+ libdeps += $(ta-dev-kit-dir$(sm))/lib/libdl.a
-+ 
-++# libutils provides __getauxval symbol which is needed by libgcc 10.x. We can't
-++# link libutils after libgcc, because libgcc will replace some symbols provided
-++# by libutils, which will cause further linking issues.
-++#
-++# But if we place libutils before libgcc, linker will not be able to resolve
-++# __getauxval. So we need to link with libutils twice: before and after libgcc.
-++# Hence it included both in $(libnames) and in $(libnames-after-libgcc)
-++libnames-after-libgcc += utils
-++libdeps-after-libgcc += $(ta-dev-kit-dir$(sm))/lib/libutils.a
-++
-+ # Pass config variable (CFG_) from conf.mk on the command line
-+ cppflags$(sm) += $(strip \
-+ 	$(foreach var, $(filter CFG_%,$(.VARIABLES)), \
-+-- 
-+2.25.1
-+
-diff --git a/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch b/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
-new file mode 100644
-index 0000000..1700539
---- /dev/null
-+++ b/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
-@@ -0,0 +1,34 @@
-+From 0bab935695ebcf0c533b49896ab18ff33d4a47d1 Mon Sep 17 00:00:00 2001
-+From: Ross Burton <ross.burton@arm.com>
-+Date: Tue, 26 May 2020 14:38:02 -0500
-+Subject: [PATCH] allow setting sysroot for libgcc lookup
-+
-+Explicitly pass the new variable LIBGCC_LOCATE_CFLAGS variable when searching
-+for the compiler libraries as there's no easy way to reliably pass --sysroot
-+otherwise.
-+
-+Upstream-Status: Pending [https://github.com/OP-TEE/optee_os/issues/4188]
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
-+---
-+ mk/gcc.mk | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/mk/gcc.mk b/mk/gcc.mk
-+index adc77a24..81bfa78a 100644
-+--- a/mk/gcc.mk
-++++ b/mk/gcc.mk
-+@@ -13,11 +13,11 @@ nostdinc$(sm)	:= -nostdinc -isystem $(shell $(CC$(sm)) \
-+ 			-print-file-name=include 2> /dev/null)
-+ 
-+ # Get location of libgcc from gcc
-+-libgcc$(sm)  	:= $(shell $(CC$(sm)) $(CFLAGS$(arch-bits-$(sm))) \
-++libgcc$(sm)  	:= $(shell $(CC$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CFLAGS$(arch-bits-$(sm))) \
-+ 			-print-libgcc-file-name 2> /dev/null)
-+-libstdc++$(sm)	:= $(shell $(CXX$(sm)) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
-++libstdc++$(sm)	:= $(shell $(CXX$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
-+ 			-print-file-name=libstdc++.a 2> /dev/null)
-+-libgcc_eh$(sm)	:= $(shell $(CXX$(sm)) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
-++libgcc_eh$(sm)	:= $(shell $(CXX$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
-+ 			-print-file-name=libgcc_eh.a 2> /dev/null)
-+ 
-+ # Define these to something to discover accidental use
-diff --git a/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch b/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
-new file mode 100644
-index 0000000..5c0d0a5
---- /dev/null
-+++ b/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
-@@ -0,0 +1,29 @@
-+From 3167f2c0dba4db59d61b60a8fe66f969d20aafa9 Mon Sep 17 00:00:00 2001
-+From: Brett Warren <brett.warren@arm.com>
-+Date: Wed, 23 Sep 2020 09:27:34 +0100
-+Subject: [PATCH] optee: enable clang support
-+
-+When compiling with clang, the LIBGCC_LOCATE_CFLAG variable used
-+to provide a sysroot wasn't included, which results in not locating
-+compiler-rt. This is mitigated by including the variable as ammended.
-+
-+Upstream-Status: Pending
-+ChangeId: 8ba69a4b2eb8ebaa047cb266c9aa6c2c3da45701
-+Signed-off-by: Brett Warren <brett.warren@arm.com>
-+---
-+ mk/clang.mk | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/mk/clang.mk b/mk/clang.mk
-+index 0f48c836..47465523 100644
-+--- a/mk/clang.mk
-++++ b/mk/clang.mk
-+@@ -27,7 +27,7 @@ comp-cflags-warns-clang := -Wno-language-extension-token \
-+ 
-+ # Note, use the compiler runtime library (libclang_rt.builtins.*.a) instead of
-+ # libgcc for clang
-+-libgcc$(sm)	:= $(shell $(CC$(sm)) $(CFLAGS$(arch-bits-$(sm))) \
-++libgcc$(sm)	:= $(shell $(CC$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CFLAGS$(arch-bits-$(sm))) \
-+ 			-rtlib=compiler-rt -print-libgcc-file-name 2> /dev/null)
-+ 
-+ # Core ASLR relies on the executable being ready to run from its preferred load
-diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
-index 2846d0a..8072490 100644
---- a/recipes-security/optee/optee-os_%.bbappend
-+++ b/recipes-security/optee/optee-os_%.bbappend
-@@ -1,3 +1,18 @@
-+FILESEXTRAPATHS_prepend_ti-soc := "${THISDIR}/${PN}:"
-+
-+PV_ti-soc = "3.11.0+git${SRCPV}"
-+
-+SRCREV_ti-soc = "c4def2a8262a03244d9a88461699b9b8e43c6b55"
-+
-+SRC_URI_ti-soc = " \
-+    git://github.com/OP-TEE/optee_os.git \
-+    file://0006-allow-setting-sysroot-for-libgcc-lookup.patch \
-+    file://0007-allow-setting-sysroot-for-clang.patch \
-+    file://0001-libutils-provide-empty-__getauxval-implementation.patch \
-+    file://0002-link.mk-implement-support-for-libnames-after-libgcc-.patch \
-+    file://0003-ta_dev_kit.mk-make-sure-that-libutils-is-linked-seco.patch \
-+"
-+
- do_compile_prepend_ti-soc() {
-     export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
- }
--- 
-2.7.4
+  1.  Correct combination of git branches for poky, meta-ivi, meta-ti, meta=
+-openembedded
+  2.  Suggestion to build genivi complaint meta-ti for Jacinto-6 evm or any=
+ other similar TI target.
+  3.  It will be helpfully if you can also share inputs local.conf or any o=
+ther machine specific configuration files needed for build dependencies.
 
+
+Step 1 : source poky/oe-init-build-env
+
+  *   ERROR: Version mismatch for meta-ivi (Resolved by moving to meta-ivi =
+branch 5.0
+
+Step 2 : bblayes.conf - My bblayes looked as below
+
+meta, meta-poky, meta-yocto-bsp, meta-openembedded/meta-oe, meta-ivi, meta-=
+ti, meta-arm/meta-arm, meta-arm/meta-arm-toolchain
+
+Step3: bitbake -k core-image-minimal
+
+Please help me out if anyone of you were successfully able to build genivi =
+complaint meta-ti BSP for ti jacinto family. It would be helpful if you can=
+ share the steps you followed for the same.
+
+Thanks and Regards,
+Irfan
+
+L&T Technology Services Ltd
+
+www.LTTS.com
+
+L&T Technology Services Limited (LTTS) is committed to safeguard your data =
+privacy. For more information to view our commitment towards data privacy u=
+nder GDPR, please visit the privacy policy on our website www.Ltts.com. Thi=
+s Email may contain confidential or privileged information for the intended=
+ recipient (s). If you are not the intended recipient, please do not use or=
+ disseminate the information, notify the sender and delete it from your sys=
+tem.
+
+--_000_MA1PR01MB23636786243A5CA7AB4CA068E6DD0MA1PR01MB2363INDP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Hello Everyone !&nbsp;</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+My first post here. I am facing lot of build errors and challenges to build=
+ TI BSP using yocto. Can you&nbsp;please check on steps that i followed and=
+ point out your valuable suggestions or recommendations on the same</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Questions:</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<ol>
+<li>Correct combination of git branches for poky, meta-ivi, meta-ti, meta-o=
+penembedded</li><li>Suggestion to build genivi complaint meta-ti for Jacint=
+o-6 evm or any other similar TI target.&nbsp;</li><li>It will be helpfully =
+if you can also share inputs<b> local.conf</b> or any other machine specifi=
+c configuration files needed for build dependencies.<br>
+&nbsp;&nbsp;</li></ol>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Step 1 : source poky/oe-init-build-env</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<ul>
+<li>ERROR: Version mismatch for meta-ivi (Resolved by moving to meta-ivi br=
+anch 5.0<br>
+</li></ul>
+<div>Step 2 : bblayes.conf - My bblayes looked as below</div>
+<div><br>
+</div>
+<div>meta, meta-poky, meta-yocto-bsp, meta-openembedded/meta-oe, meta-ivi, =
+meta-ti, meta-arm/meta-arm, meta-arm/meta-arm-toolchain</div>
+<div><br>
+</div>
+<div>Step3: bitbake -k core-image-minimal</div>
+<div><br>
+</div>
+<div><b><i>Please help me out if anyone of you were successfully able to bu=
+ild genivi complaint meta-ti BSP for ti jacinto family. It would be helpful=
+ if you can share the steps you followed for the same.</i></b></div>
+<div><br>
+</div>
+<div>Thanks and Regards,</div>
+<div>Irfan</div>
+</div>
+<p><strong>L&amp;T Technology Services Ltd</strong></p>
+<p><a href=3D"" http:=3D"" www.LTTS.com=3D"" ??=3D"" target=3D"" _blank??=
+=3D"">www.LTTS.com</a></p>
+<p>L&amp;T Technology Services Limited (LTTS) is committed to safeguard you=
+r data privacy. For more information to view our commitment towards data pr=
+ivacy under GDPR, please visit the privacy policy on our website www.Ltts.c=
+om. This Email may contain confidential
+ or privileged information for the intended recipient (s). If you are not t=
+he intended recipient, please do not use or disseminate the information, no=
+tify the sender and delete it from your system.</p>
+</body>
+</html>
+
+--_000_MA1PR01MB23636786243A5CA7AB4CA068E6DD0MA1PR01MB2363INDP_--
