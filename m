@@ -1,87 +1,73 @@
-Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.2066.1609790583144789507
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.1340.1609872456056020653
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 04 Jan 2021 12:03:03 -0800
+ Tue, 05 Jan 2021 10:47:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=JUbA/f3o;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 0FCC638C08BF
-	for <meta-ti@yoctoproject.org>; Mon,  4 Jan 2021 20:03:02 +0000 (UTC)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=nqlD3/K9;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: lokeshvutla@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 104K31hp128261
-	for <meta-ti@yoctoproject.org>; Mon, 4 Jan 2021 14:03:01 -0600
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 105IlZU4007982
+	for <meta-ti@lists.yoctoproject.org>; Tue, 5 Jan 2021 12:47:35 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1609790581;
-	bh=V5MqdZReiuOY218ljYR8+y+SvVpVdEpiB2S8KGup8B4=;
+	s=ti-com-17Q1; t=1609872455;
+	bh=5+RCcZoAwFITD/ylcJ+WLQYKzAziqGydDf97WnywYeI=;
 	h=From:To:CC:Subject:Date;
-	b=JUbA/f3ody15Z9RVdNljPTww//CR+eEvBIrP3bg5JZuGJsFDjP6VyBaSRtZO1LfD6
-	 FH8F1d41XjdDuNxhlXZ5l14v7P8Q0RjaVGV3KYfI5TqsB1TgLaRn9xPSjAoYrGkoS6
-	 pGfay4pxsIEIPgTMRJk15hlESgfUShlCXeWlUIDg=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 104K31YQ101632
+	b=nqlD3/K9U7AidUuaPCudhPVGg/BUqwJ4uJoFZwYtawjxCvL8dka/heCtU+0EnKHQs
+	 qq6ouqUHv/mYtOyO/jGR+QYvMm8pe8JwjpAqSZZqgMUV3atMy19sUMl6vGDY5ISerE
+	 ETifuMc8kYFfrJhHosIs4kWsPWZDe85CaqH3c1v4=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 105IlZBx084395
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Mon, 4 Jan 2021 14:03:01 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 4 Jan
- 2021 14:03:00 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Tue, 5 Jan 2021 12:47:35 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 5 Jan
+ 2021 12:47:34 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 4 Jan 2021 14:03:00 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 104K30fw094896;
-	Mon, 4 Jan 2021 14:03:00 -0600
-From: "Dan Murphy" <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-CC: Dan Murphy <dmurphy@ti.com>
-Subject: [dunfell/master] [PATCH] linux-ti-staging: Update 5.4 kernel to 5.4.84
-Date: Mon, 4 Jan 2021 14:02:54 -0600
-Message-ID: <20210104200254.19601-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.27.0
+ Frontend Transport; Tue, 5 Jan 2021 12:47:34 -0600
+Received: from uda0131933.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 105IlW4e074561;
+	Tue, 5 Jan 2021 12:47:33 -0600
+From: "Lokesh Vutla" <lokeshvutla@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, Dan Murphy <dmurphy@ti.com>
+CC: Sekhar Nori <nsekhar@ti.com>, Lokesh Vutla <lokeshvutla@ti.com>
+Subject: [PATCH] k3conf: Update to latest commit
+Date: Wed, 6 Jan 2021 00:17:32 +0530
+Message-ID: <20210105184732.20201-1-lokeshvutla@ti.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
 
-From: Dan Murphy <dmurphy@ti.com>
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Update k3conf to latest sha, bumping up version to 0.2
+
+Signed-off-by: Lokesh Vutla <lokeshvutla@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_5.4.bb | 4 ++--
- recipes-kernel/linux/linux-ti-staging_5.4.bb    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-devtools/k3conf/k3conf_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb b/recipes-ke=
-rnel/linux/linux-ti-staging-rt_5.4.bb
-index faa7f6d8226e..a90585df7285 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}-5.4:"
-=20
- BRANCH =3D "ti-rt-linux-5.4.y"
-=20
--SRCREV =3D "058c8ee4e4ae3ae72ca01b5b4b2aea8213561ab9"
--PV =3D "5.4.82+git${SRCPV}"
-+SRCREV =3D "904b5cf29732392f897f575bbed8e1ba2686812f"
-+PV =3D "5.4.84+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kerne=
-l/linux/linux-ti-staging_5.4.bb
-index cd13d6e33e13..93b9b0871bbd 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
-@@ -21,8 +21,8 @@ S =3D "${WORKDIR}/git"
-=20
- BRANCH =3D "ti-linux-5.4.y"
-=20
--SRCREV =3D "73039d258adb0cac813342cc7e746e22295765fe"
--PV =3D "5.4.82+git${SRCPV}"
-+SRCREV =3D "771b7406ad06127f88d8f0d62341d4a40f73fbce"
-+PV =3D "5.4.84+git${SRCPV}"
-=20
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
-ild
- MACHINE_KERNEL_PR_append =3D "a"
---=20
-2.29.2
+diff --git a/recipes-devtools/k3conf/k3conf_git.bb b/recipes-devtools/k3conf/k3conf_git.bb
+index 5becbf97..0f2705b8 100644
+--- a/recipes-devtools/k3conf/k3conf_git.bb
++++ b/recipes-devtools/k3conf/k3conf_git.bb
+@@ -3,12 +3,12 @@ SUMMARY = "Diagnostic tool for TI K3 processors"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://common/k3conf.c;beginline=1;endline=34;md5=7154c0ffcd418064ffa528e34e70ca9d"
+ 
+-PV = "0.1+git${SRCPV}"
++PV = "0.2+git${SRCPV}"
+ 
+ COMPATIBLE_MACHINE = "k3"
+ 
+ BRANCH ?= "master"
+-SRCREV = "7ee4c46379bb71dfa0677089841cb87eba9fbfea"
++SRCREV = "79f007cd462384ce22e750e9002b714878f56892"
+ 
+ SRC_URI = "git://git.ti.com/k3conf/k3conf.git;protocol=git;branch=${BRANCH}"
+ 
+-- 
+2.30.0
 
