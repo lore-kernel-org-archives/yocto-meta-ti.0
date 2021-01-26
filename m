@@ -1,80 +1,70 @@
-Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web12.34405.1611176346954454438
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.18352.1611690684095069024
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 20 Jan 2021 12:59:09 -0800
+ Tue, 26 Jan 2021 11:51:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=r5GtMuxW;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: dmurphy@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 0923338C0717
-	for <meta-ti@yoctoproject.org>; Wed, 20 Jan 2021 20:59:05 +0000 (UTC)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 10KKx5gZ050515
-	for <meta-ti@yoctoproject.org>; Wed, 20 Jan 2021 14:59:05 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1611176345;
-	bh=+oAPTQAeIzyO1+6KMeItN1OHMO9pWDSiA5oID8H14M0=;
-	h=From:To:CC:Subject:Date;
-	b=r5GtMuxWWW+0PDTgUMWAGVJudu1RF2tIgMC4o+GHqlXQ/Omoy5shjiPOzMDGGueI6
-	 Yldhex9j0bAR3VnPKD13fStWqcGrZqt29mhCQrcRrKwUUGJSE7pbvjuWsJ0iOoD+az
-	 AnMqDCKdVL7uDaarn9eQgUy3dk2wTNTFkgb6/OYc=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 10KKx4OJ044339
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 20 Jan 2021 14:59:05 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 20
- Jan 2021 14:59:04 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 20 Jan 2021 14:59:04 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 10KKx4BE021886;
-	Wed, 20 Jan 2021 14:59:04 -0600
-From: "Dan Murphy" <dmurphy@ti.com>
-To: <meta-ti@yoctoproject.org>
-CC: Dan Murphy <dmurphy@ti.com>
-Subject: [dunfell/master] [PATCH] ti-sci-fw: Update image gen and sysfw to v2020.12a
-Date: Wed, 20 Jan 2021 14:58:58 -0600
-Message-ID: <20210120205858.12725-1-dmurphy@ti.com>
-X-Mailer: git-send-email 2.27.0
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 603EE40C2C
+	for <meta-ti@lists.yoctoproject.org>; Tue, 26 Jan 2021 19:51:23 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bd16H9D87ePW for <meta-ti@lists.yoctoproject.org>;
+	Tue, 26 Jan 2021 19:51:23 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4C9DD40BCF
+	for <meta-ti@lists.yoctoproject.org>; Tue, 26 Jan 2021 19:51:23 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id EF0051743CA;
+	Tue, 26 Jan 2021 14:51:22 -0500 (EST)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denis@denix.org>
+Subject: [dunfell/master][PATCH] linux-ti-staging, u-boot-ti-staging: lower default preference
+Date: Tue, 26 Jan 2021 14:51:22 -0500
+Message-Id: <1611690682-7309-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-Update the image gen and linux-firmware commit SHAs so that
-am65x, j7200 and j721e also picks v2020.12a sysfw and the applicable
-DM update on j7200 and j721e based on 07.02.00.10 tag
+Latest versions of Linux kernel (5.10) and U-boot (2021.01) are not yet ready
+for prime time in meta-ti and some features are still being migrated and causing
+issues. The recipes are meant for development and not yet for production.
 
-Signed-off-by: Dan Murphy <dmurphy@ti.com>
+Normally selection of the version is done with PREFERRED_VERSION by the Distro
+(e.g. Arago), but if not specified by a Distro (Poky, distroless, etc.), the
+default is to use the latest version. Hence need to change the default to not
+automatically pick the latest version that is not ready yet.
+
+This can be removed/reverted once those versions are ready to be picked by
+default.
+
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 ---
- recipes-bsp/ti-sci-fw/ti-sci-fw.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 2 ++
+ recipes-kernel/linux/linux-ti-staging_5.10.bb   | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/=
-ti-sci-fw.inc
-index 7b989dd2a17e..876d6b0d56b0 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-@@ -3,11 +3,11 @@ SUMMARY =3D "TI SCI firmware (SYSFW)"
- LICENSE =3D "TI-TFL"
- LIC_FILES_CHKSUM =3D "file://LICENSE.ti;md5=3Db5aebf0668bdf95621259288c4=
-a46d76"
-=20
--PV =3D "2020.12"
-+PV =3D "2020.12a"
-=20
--SRCREV =3D "183b487f02ce48b47df02cfe7ea9579b4c1e280b"
-+SRCREV =3D "b66ee9ae020c31d7138f0af38518823bb4f5791e"
- BRANCH ?=3D "ti-linux-firmware"
--SRCREV_imggen =3D "0388c32f31bc4dd57b72a3b5faf3ca7ff4209c79"
-+SRCREV_imggen =3D "8412cbddc19c75a2ab2711ae169c3818dc65e4ba"
- SRCREV_FORMAT =3D "imggen"
-=20
- SRC_URI =3D " \
---=20
-2.29.2
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index d5b7fd5..e0818c8 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -5,3 +5,5 @@ PR = "r1"
+ BRANCH = "ti-u-boot-2021.01"
+ 
+ SRCREV = "c4fddedc48f336eabc4ce3f74940e6aa372de18c"
++
++DEFAULT_PREFERENCE = "-1"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index e317e3a..4982079 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -41,3 +41,5 @@ module_conf_ti_k3_r5_remoteproc = "softdep ti_k3_r5_remoteproc pre: virtio_rpmsg
+ module_conf_ti_k3_dsp_remoteproc = "softdep ti_k3_dsp_remoteproc pre: virtio_rpmsg_bus"
+ KERNEL_MODULE_PROBECONF += "rpmsg_client_sample ti_k3_r5_remoteproc ti_k3_dsp_remoteproc"
+ KERNEL_MODULE_AUTOLOAD_append_j7 = " rpmsg_kdrv_switch"
++
++DEFAULT_PREFERENCE = "-1"
+-- 
+2.7.4
 
