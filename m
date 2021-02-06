@@ -1,68 +1,80 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web08.816.1612550938677745265
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.11870.1612644588516502473
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 05 Feb 2021 10:48:58 -0800
+ Sat, 06 Feb 2021 12:49:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=v6VV8fw5;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Rp3Sgs//;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 115Imvbp091965
-	for <meta-ti@lists.yoctoproject.org>; Fri, 5 Feb 2021 12:48:57 -0600
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 116KnlRT008806
+	for <meta-ti@lists.yoctoproject.org>; Sat, 6 Feb 2021 14:49:47 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1612550937;
-	bh=3Gd/ROAXzIKCmwhVRROIDmk6S6OyZHdCCpWUYV5IeDY=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=v6VV8fw57fFqNxmwEo/HhWUF7u0Mh3or1W0VaEQmleBY00x3i0wPoqGm8OnmihKel
-	 MMUQO7wl4mYfIQtxKeQRZw0b1tSqyV2uVY0xfV6axllHTzwy4H636Le9WSWXLv3enw
-	 Uzkp9MJfTnquCrUrkW874UBaeFRW2npbbXeUbNjg=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 115Imvmo002570
+	s=ti-com-17Q1; t=1612644587;
+	bh=0yz88IGo5KZvdR3tvdkWd13cZ+WE6eDpW0Q7txpJ3Fo=;
+	h=From:To:CC:Subject:Date;
+	b=Rp3Sgs//5VL51PjNBMWw64sxC3pKyKJcFPkMIwpE2t5s81Qgj0uplrOhZDApMJo+a
+	 X6SfpZJb5wqFskyLPxAGv+1ZS+PQ8mDMMKrz6DDdS+bO4pVmC2PPEATeubPGKFUJIs
+	 Z9RaPchPdWLBgeXHlL9q/D1HujcNivkenJ5l/2f8=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 116KnlLb087955
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 5 Feb 2021 12:48:57 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 5 Feb
- 2021 12:48:57 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Sat, 6 Feb 2021 14:49:47 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Sat, 6 Feb
+ 2021 14:49:47 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 5 Feb 2021 12:48:56 -0600
-Received: from [10.250.39.117] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 115ImuMk115879;
-	Fri, 5 Feb 2021 12:48:57 -0600
-Subject: Re: [PATCH dunfell/master] machine: am64xx-sk.conf: Add machine definition for AM64xx SK
-To: Lokesh Vutla <lokeshvutla@ti.com>, <meta-ti@lists.yoctoproject.org>,
-        Praneeth Bajjuri <praneeth@ti.com>
-References: <20210205184114.7570-1-lokeshvutla@ti.com>
-From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <069390dd-917d-5398-8c4b-f82b2e423dfc@ti.com>
-Date: Fri, 5 Feb 2021 12:48:56 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Frontend Transport; Sat, 6 Feb 2021 14:49:46 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 116KnlHJ009438;
+	Sat, 6 Feb 2021 14:49:47 -0600
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Dan Murphy <dmurphy@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH] linux-ti-staging: Update 5.4 kernel to the latest commit SHA
+Date: Sat, 6 Feb 2021 14:49:37 -0600
+Message-ID: <20210206204937.21111-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20210205184114.7570-1-lokeshvutla@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 115Imvbp091965
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Hello
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-On 2/5/21 12:41 PM, Lokesh Vutla wrote:
-> AM642 StarterKit (SK) board is a low cost, small form factor board
-> designed for TI=E2=80=99s AM642 SoC. Add machine definition for SK boar=
-d.
->
-> Signed-off-by: Lokesh Vutla <lokeshvutla@ti.com>
-Reviewed-by: Dan Murphy <dmurphy@ti.com>
-> ---
-> - To be merged only after U-Boot and Kernel gets updated with AM64xx sk
->    platform.
+Update 5.4 kernel to the latest commit SHA
 
-Not really true but up to Praneeth.=C2=A0 The am64xx-sk build will just f=
-ail=20
-until the kernel and uBoot are updated
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_5.4.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_5.4.bb    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Dan
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+index 65ebe97a..d00ac054 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.4.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.4:"
+ 
+ BRANCH = "ti-rt-linux-5.4.y"
+ 
+-SRCREV = "ff85c3d7a19f2d67e89da0cf44c7a7820f37f498"
++SRCREV = "cfa5bbe5258d318b6fcf9743ae9002ec0a5f158a"
+ PV = "5.4.93+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.4.bb b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+index 1f4801fe..ed330469 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.4.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.4.bb
+@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.4.y"
+ 
+-SRCREV = "43efeed4be285196d5376949b82bb18411ca7a53"
++SRCREV = "437d3ec51580225f89bc997dd06929c6aff03eef"
+ PV = "5.4.93+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+2.17.1
 
