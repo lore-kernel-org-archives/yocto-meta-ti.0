@@ -1,95 +1,146 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web08.6797.1613040664890526876
+ by mx.groups.io with SMTP id smtpd.web11.9838.1613056992643529278
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Feb 2021 02:51:05 -0800
+ Thu, 11 Feb 2021 07:23:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GJekr7a2;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nikhil.nd@ti.com)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id D95AE38C08DD
-	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2021 10:51:03 +0000 (UTC)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ulXEVZd6;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: lokeshvutla@ti.com)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id A8C2738C066A
+	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2021 15:23:11 +0000 (UTC)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 11BAp3Ef041139
-	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2021 04:51:03 -0600
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 11BFNANM022721
+	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2021 09:23:10 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1613040663;
-	bh=0KJwkgs6N67MsGUTWWElAbCFr0tGtVF6k5MUlhrbEYc=;
-	h=From:To:CC:Subject:Date;
-	b=GJekr7a2ApRi6Lqm7ExxH+StzzTi+PhdKcQ5QjkdMYHZ+SfT5Prcgam61U/OrkjXZ
-	 /LhexiKIiR7v41vbfRcIpHatoTK4nbEUW4LtnBTjP8USVQXAC0Kch+nJ08HQ9TTzBw
-	 6uNOWf/0be3dzwzl3nvuCkyDzPs9Dt5fgIvuL76A=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 11BAp2DN019394
+	s=ti-com-17Q1; t=1613056990;
+	bh=wPhewG6RcCwPseR2tHuPuQc/2eXtBqUIwP5nIdLueMU=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=ulXEVZd6aPj1AKJ8tp6i4xjrlWav0zm2R4NrwvRDZ4+Zv21MKxjLLXhaZO1O+DPty
+	 q/lV4UDnie08uV3WO/0NNQb/c63xLkZKhIkNsYMOG89rf3TvZczqpHhsVQQ62ooomC
+	 cgqJ1lz9LYgPOgqlPrd2HApvAUdjCTxhCc5bsuDs=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 11BFNAVD038880
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2021 04:51:03 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@yoctoproject.org>; Thu, 11 Feb 2021 09:23:10 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Thu, 11
- Feb 2021 04:51:02 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2021 09:23:10 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Thu, 11 Feb 2021 04:51:02 -0600
-Received: from swubn03.india.englab.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 11BAoxIT060504;
-	Thu, 11 Feb 2021 04:51:00 -0600
-From: "Nikhil Devshatwar" <nikhil.nd@ti.com>
-To: <meta-ti@yoctoproject.org>, <dmurphy@ti.com>
-CC: <lokeshvutla@ti.com>, <kishon@ti.com>, <nsekhar@ti.com>,
-        <nikhil.nd@ti.com>
-Subject: [meta-ti][dunfell PATCH] recipes-bsp: wl-fw: New recipe for WiLink firmwares
-Date: Thu, 11 Feb 2021 16:20:18 +0530
-Message-ID: <20210211105018.10470-1-nikhil.nd@ti.com>
-X-Mailer: git-send-email 2.17.1
+ Frontend Transport; Thu, 11 Feb 2021 09:23:10 -0600
+Received: from [10.24.69.20] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 11BFN8XS036539;
+	Thu, 11 Feb 2021 09:23:09 -0600
+Subject: Re: [meta-ti][dunfell PATCH] recipes-bsp: wl-fw: New recipe for WiLink firmwares
+To: Nikhil Devshatwar <nikhil.nd@ti.com>, <meta-ti@yoctoproject.org>,
+        <dmurphy@ti.com>
+CC: <kishon@ti.com>, <nsekhar@ti.com>
+References: <20210211105018.10470-1-nikhil.nd@ti.com>
+From: "Lokesh Vutla" <lokeshvutla@ti.com>
+Message-ID: <53d3e34d-d202-988b-ac89-510e89933f32@ti.com>
+Date: Thu, 11 Feb 2021 20:53:07 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20210211105018.10470-1-nikhil.nd@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Add a new recipe which installs the WiLink firmware from the
-official ti-linux-firmware repo.
 
-This is required for supporting the Wireless functionaliy on
-the am64xx-sk board.
 
-Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
----
- recipes-bsp/wl-fw/wl-fw_git.bb | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 recipes-bsp/wl-fw/wl-fw_git.bb
+On 11/02/21 4:20 pm, Nikhil Devshatwar wrote:
+> Add a new recipe which installs the WiLink firmware from the
+> official ti-linux-firmware repo.
+> 
+> This is required for supporting the Wireless functionaliy on
+> the am64xx-sk board.
+> 
+> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
 
-diff --git a/recipes-bsp/wl-fw/wl-fw_git.bb b/recipes-bsp/wl-fw/wl-fw_git.bb
-new file mode 100644
-index 00000000..01d8e58b
---- /dev/null
-+++ b/recipes-bsp/wl-fw/wl-fw_git.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Firmware files for Wilink"
-+LICENSE = "TI-TSPA"
-+LIC_FILES_CHKSUM = "file://LICENCE.ti-connectivity;md5=c5e02be633f1499c109d1652514d85ec"
-+
-+PV = "7.3+git${SRCPV}"
-+
-+SRCREV = "b66ee9ae020c31d7138f0af38518823bb4f5791e"
-+BRANCH = "ti-linux-firmware"
-+SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;branch=${BRANCH}"
-+
-+COMPATIBLE_MACHINE = "k3"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+CLEANBROKEN = "1"
-+
-+S = "${WORKDIR}/git"
-+
-+do_compile() {
-+    :
-+}
-+
-+do_install() {
-+    install -d ${D}${base_libdir}/firmware/ti-connectivity
-+    install -m 644 ${S}/ti-connectivity/* ${D}${base_libdir}/firmware/ti-connectivity/
-+}
-+
-+FILES_${PN} += "${base_libdir}/firmware/ti-connectivity/*"
--- 
-2.17.1
+I see the following new firmwares are installed.
+-rw-r--r-- 1 lokesh lokesh  50K Feb 11 16:42 TIInit_6.2.31.bts
+-rw-r--r-- 1 lokesh lokesh  16K Feb 11 16:42 TIInit_6.6.15.bts
+-rw-r--r-- 1 lokesh lokesh  48K Feb 11 16:42 TIInit_7.2.31.bts
+-rw-r--r-- 1 lokesh lokesh 190K Feb 11 16:42 wl1251-fw.bin
+-rw-r--r-- 1 lokesh lokesh  752 Feb 11 16:42 wl1251-nvs.bin
+-rw-r--r-- 1 lokesh lokesh 268K Feb 11 16:42 wl1271-fw-2.bin
+-rw-r--r-- 1 lokesh lokesh 267K Feb 11 16:42 wl1271-fw-ap.bin
+-rw-r--r-- 1 lokesh lokesh 266K Feb 11 16:42 wl1271-fw.bin
+-rw-r--r-- 1 lokesh lokesh 274K Feb 11 16:42 wl127x-fw-3.bin
+-rw-r--r-- 1 lokesh lokesh 255K Feb 11 16:42 wl127x-fw-4-mr.bin
+-rw-r--r-- 1 lokesh lokesh 256K Feb 11 16:42 wl127x-fw-4-plt.bin
+-rw-r--r-- 1 lokesh lokesh 271K Feb 11 16:42 wl127x-fw-4-sr.bin
+-rw-r--r-- 1 lokesh lokesh 349K Feb 11 16:42 wl127x-fw-5-mr.bin
+-rw-r--r-- 1 lokesh lokesh 338K Feb 11 16:42 wl127x-fw-5-plt.bin
+-rw-r--r-- 1 lokesh lokesh 356K Feb 11 16:42 wl127x-fw-5-sr.bin
+-rw-r--r-- 1 lokesh lokesh 262K Feb 11 16:42 wl127x-fw-plt-3.bin
+-rw-r--r-- 1 lokesh lokesh  912 Feb 11 16:42 wl127x-nvs.bin
+-rw-r--r-- 1 lokesh lokesh 279K Feb 11 16:42 wl128x-fw-3.bin
+-rw-r--r-- 1 lokesh lokesh 259K Feb 11 16:42 wl128x-fw-4-mr.bin
+-rw-r--r-- 1 lokesh lokesh 264K Feb 11 16:42 wl128x-fw-4-plt.bin
+-rw-r--r-- 1 lokesh lokesh 278K Feb 11 16:42 wl128x-fw-4-sr.bin
+-rw-r--r-- 1 lokesh lokesh 354K Feb 11 16:42 wl128x-fw-5-mr.bin
+-rw-r--r-- 1 lokesh lokesh 346K Feb 11 16:42 wl128x-fw-5-plt.bin
+-rw-r--r-- 1 lokesh lokesh 365K Feb 11 16:42 wl128x-fw-5-sr.bin
+-rw-r--r-- 1 lokesh lokesh 260K Feb 11 16:42 wl128x-fw-ap.bin
+-rw-r--r-- 1 lokesh lokesh 267K Feb 11 16:42 wl128x-fw.bin
+-rw-r--r-- 1 lokesh lokesh 266K Feb 11 16:42 wl128x-fw-plt-3.bin
+-rw-r--r-- 1 lokesh lokesh 1.1K Feb 11 16:42 wl128x-nvs.bin
+-rw-r--r-- 1 lokesh lokesh 625K Feb 11 16:42 wl18xx-fw-2.bin
+-rw-r--r-- 1 lokesh lokesh 658K Feb 11 16:42 wl18xx-fw-3.bin
+-rw-r--r-- 1 lokesh lokesh 728K Feb 11 16:42 wl18xx-fw-4.bin
+-rw-r--r-- 1 lokesh lokesh 405K Feb 11 16:42 wl18xx-fw.bin
 
+
+Do we need all these firmwares?
+
+> ---
+>  recipes-bsp/wl-fw/wl-fw_git.bb | 27 +++++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
+>  create mode 100644 recipes-bsp/wl-fw/wl-fw_git.bb
+> 
+> diff --git a/recipes-bsp/wl-fw/wl-fw_git.bb b/recipes-bsp/wl-fw/wl-fw_git.bb
+> new file mode 100644
+> index 00000000..01d8e58b
+> --- /dev/null
+> +++ b/recipes-bsp/wl-fw/wl-fw_git.bb
+> @@ -0,0 +1,27 @@
+> +DESCRIPTION = "Firmware files for Wilink"
+> +LICENSE = "TI-TSPA"
+> +LIC_FILES_CHKSUM = "file://LICENCE.ti-connectivity;md5=c5e02be633f1499c109d1652514d85ec"
+> +
+> +PV = "7.3+git${SRCPV}"
+
+Dan, this came up in one of our discussions. Isn't the preferred way is to put
+PV in file name?
+
+Thanks and regards,
+Lokesh
+
+> +
+> +SRCREV = "b66ee9ae020c31d7138f0af38518823bb4f5791e"
+> +BRANCH = "ti-linux-firmware"
+> +SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;branch=${BRANCH}"
+> +
+> +COMPATIBLE_MACHINE = "k3"
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +CLEANBROKEN = "1"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +do_compile() {
+> +    :
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}${base_libdir}/firmware/ti-connectivity
+> +    install -m 644 ${S}/ti-connectivity/* ${D}${base_libdir}/firmware/ti-connectivity/
+> +}
+> +
+> +FILES_${PN} += "${base_libdir}/firmware/ti-connectivity/*"
+> 
