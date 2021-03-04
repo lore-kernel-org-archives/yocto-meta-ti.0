@@ -1,80 +1,86 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web09.2532.1614832100922731752
+ by mx.groups.io with SMTP id smtpd.web12.1176.1614886215101464968
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 03 Mar 2021 20:28:21 -0800
+ Thu, 04 Mar 2021 11:30:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=pEShX2hy;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nm@ti.com)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 83FE838C0731
-	for <meta-ti@yoctoproject.org>; Thu,  4 Mar 2021 04:28:20 +0000 (UTC)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1244SGBa047404;
-	Wed, 3 Mar 2021 22:28:16 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1614832096;
-	bh=FxXoC6Ur7MHNMdYf5ntAWlKdo374o1CJSFeXVnQuiKU=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=pEShX2hytIbq877Bjx7Fva8xnIDkOpNu0VXJl2SoAfztHi/qfEHdD2S0JhjTcN3bO
-	 hhR+gnFEWXhbz/SrLIxwRW1EE33gxt+MJMvj7J5QWNKYZFCMwl5DYO1kO8W5cqH04y
-	 S2hRRcpKSeAv8rgCxo4Vgleso15hiydJwH1pYqv0=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1244SGsS046324
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 3 Mar 2021 22:28:16 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 3 Mar
- 2021 22:28:16 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 3 Mar 2021 22:28:16 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1244SGae001185;
-	Wed, 3 Mar 2021 22:28:16 -0600
-From: "Nishanth Menon" <nm@ti.com>
-To: "meta-ti @ yoctoproject . org" <meta-ti@yoctoproject.org>
-CC: Denys Dmytriyenko <denis@denix.org>,
-        "Bajjuri, Praneeth"
-	<praneeth@ti.com>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH dunfell/dunfell-next/master 2/2] linux-ti-mainline: Bump kernel version to v5.11
-Date: Wed, 3 Mar 2021 22:28:08 -0600
-Message-ID: <20210304042808.9389-3-nm@ti.com>
-X-Mailer: git-send-email 2.25.1.377.g2d2118b814c1
-In-Reply-To: <20210304042808.9389-1-nm@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 198.145.29.25, mailfrom: denis@denix.org)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id BCE2338C0845
+	for <meta-ti@yoctoproject.org>; Thu,  4 Mar 2021 19:30:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BA32E40BEA;
+	Thu,  4 Mar 2021 19:30:12 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 210cp81PtcC6; Thu,  4 Mar 2021 19:30:12 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 913CD40AB7;
+	Thu,  4 Mar 2021 19:30:10 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id F144E174524; Thu,  4 Mar 2021 14:30:09 -0500 (EST)
+Date: Thu, 4 Mar 2021 14:30:09 -0500
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Nishanth Menon <nm@ti.com>
+Cc: "meta-ti @ yoctoproject . org" <meta-ti@yoctoproject.org>,
+	"Bajjuri, Praneeth" <praneeth@ti.com>
+Subject: Re: [PATCH dunfell/dunfell-next/master 0/2] linux-ti-mainline: Move Linux to v5.11
+Message-ID: <20210304193009.GG4892@denix.org>
 References: <20210304042808.9389-1-nm@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20210304042808.9389-1-nm@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-And lets work with the latest kernel
+In the subject, -next is implied. It is part of the process (and is up to 
+the maintainer to follow), but you just specify the target branches you need 
+this in - dunfell and master.
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
- recipes-kernel/linux/linux-ti-mainline_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-mainline_git.bb b/recipes-kern=
-el/linux/linux-ti-mainline_git.bb
-index b4881d0d3a40..ed7607046186 100644
---- a/recipes-kernel/linux/linux-ti-mainline_git.bb
-+++ b/recipes-kernel/linux/linux-ti-mainline_git.bb
-@@ -15,9 +15,9 @@ S =3D "${WORKDIR}/git"
-=20
- BRANCH =3D "master"
-=20
--# 5.9 Mainline version
--SRCREV =3D "bbf5c979011a099af5dc76498918ed7df445635b"
--PV =3D "5.9+git${SRCPV}"
-+# 5.11 Mainline version
-+SRCREV =3D "f40ddce88593482919761f74910f42f4b84c004b"
-+PV =3D "5.11+git${SRCPV}"
-=20
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
-ild
- MACHINE_KERNEL_PR_append =3D "a"
---=20
-2.25.1.377.g2d2118b814c1
+On Wed, Mar 03, 2021 at 10:28:06PM -0600, Nishanth Menon wrote:
+> Hi,
+> 
+> A series of minimal patches to bump up recision to the latest kernel ->
 
+Recision? You probably meant revision? :)
+
+
+> we will need to maintain upstream-tools and kernel in sync on all
+> branches involved ofcourse.
+> 
+> NOTE: with kernels > 5.9 (aka 5.10, 5.11...) we do have problems with
+> cryptodev and kernel - we will have to try and see how best to integrate
+> those as well. This is solved in master of oe-core[1] by moving to 1.12,
+> however gatesgarth, dunfell are on 1.11 and 1.10 revs respectively
+> which wont work since the PR integrated version is 1.12
+
+PV, not PR.
+
+
+> Nishanth Menon (2):
+>   linux-ti-mainline: Bump up ti-upstream-tools SRCREV
+>   linux-ti-mainline: Bump kernel version to v5.11
+
+Ok, as long as you are not bumping linux-ti-staging, which is still the 
+default kernel in meta-ti and 5.4 is being preferred, you should be fine 
+with cryptodev "fix" in meta-arago.
+
+Will need to revisit that later, if/when 5.10 LTS is ready to become the 
+default in meta-ti dunfell...
+
+
+>  recipes-kernel/linux/linux-ti-mainline_git.bb | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> [1] http://git.openembedded.org/openembedded-core/tree/meta/recipes-kernel/cryptodev?h=master
+> [2] https://github.com/cryptodev-linux/cryptodev-linux/pull/55
+> -- 
+> 2.25.1.377.g2d2118b814c1
+> 
+
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
