@@ -1,70 +1,69 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.2636.1614980189956984193
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web12.799.1614986727609789269
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 05 Mar 2021 13:36:30 -0800
+ Fri, 05 Mar 2021 15:25:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id CBFDF40BEC;
-	Fri,  5 Mar 2021 21:36:28 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JPP56WciR-mn; Fri,  5 Mar 2021 21:36:28 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ADCF5407E5;
-	Fri,  5 Mar 2021 21:36:27 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id F2D09174525; Fri,  5 Mar 2021 16:36:26 -0500 (EST)
-Date: Fri, 5 Mar 2021 16:36:26 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: praneeth@ti.com
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [dunfell/master PATCH] ti-rtos: Update path for firmwares on j7200
-Message-ID: <20210305213626.GX4892@denix.org>
-References: <20210305211942.19238-1-praneeth@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=OafNG/vN;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 125NPQOY086733
+	for <meta-ti@lists.yoctoproject.org>; Fri, 5 Mar 2021 17:25:26 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1614986726;
+	bh=miD6cVH1aAmV5gQce15LJVG9aLrzJYGkF3iGkaZgb80=;
+	h=From:To:CC:Subject:Date;
+	b=OafNG/vNMPVX3o4B2k8CEtCd5iPalVthCfq5F8caMeXFIwPOr+BRHb9UmKa/J0RZj
+	 b7OyIBXeJ4zjYSHvztuSVCzcuwdIbjEWRe12zm6OeOxhWyWgpXU1cHC5jqzPfnyaMF
+	 RuAj/41DltC+xhkNnC2xSqby0yo451zAyCxooDA4=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 125NPQ76094284
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Fri, 5 Mar 2021 17:25:26 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 5 Mar
+ 2021 17:25:25 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Fri, 5 Mar 2021 17:25:25 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 125NPPuN017931;
+	Fri, 5 Mar 2021 17:25:25 -0600
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH 1/2] ti-uboot-staging: Update to the latest commit
+Date: Fri, 5 Mar 2021 17:25:24 -0600
+Message-ID: <20210305232525.5790-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20210305211942.19238-1-praneeth@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Fri, Mar 05, 2021 at 03:19:42PM -0600, praneeth via lists.yoctoproject.org wrote:
-> From: Praneeth Bajjuri <praneeth@ti.com>
-> 
-> Between j7200 firmware tags 07.03.00.10 to 07.03.00.16
-> the downloadable weburl link changed
-> from *processor-sdk-rtos-jacinto7 to *processor-sdk-rtos-j7200.
-> 
-> This patch is to fix the recipe to pick the firmware from the
-> expected location on the new tag.
-> 
-> Fixes j7200 build error reported due to
-> 77cdfa9f6560 ("ti-rtos: Update metadata and versions for RTOS firmware")
-> 
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-This one looks good, thanks.
+ti-uboot-staging: Update to the latest commit
 
-Reviewed-by: Denys Dmytriyenko <denis@denix.org>
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+index 395436f6..688eb131 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
+@@ -1,7 +1,7 @@
+ require u-boot-ti.inc
+ 
+-PR = "r33"
++PR = "r34"
+ 
+ BRANCH = "ti-u-boot-2020.01"
+ 
+-SRCREV = "6b5b982e98dde63832b3a68c84f990e63f732584"
++SRCREV = "8c49d316a4283299c9b2d193aac38a25ba8f8709"
+-- 
+2.17.1
 
-> ---
->  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> index e5c35689..507d0000 100644
-> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> @@ -31,6 +31,7 @@ DEFAULT_RTOS_SOC_am64xx = "am64x"
->  
->  DEFAULT_RTOS_WEBLINK = "undefined"
->  DEFAULT_RTOS_WEBLINK_j7 = "https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/${CORESDK_RTOS_VERSION}"
-> +DEFAULT_RTOS_WEBLINK_j7200-evm = "https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-j7200/firmware/${CORESDK_RTOS_VERSION}"
->  DEFAULT_RTOS_WEBLINK_am65xx = "https://software-dl.ti.com/processor-sdk-rtos/esd/AM65X/firmware/${CORESDK_RTOS_VERSION}"
->  DEFAULT_RTOS_WEBLINK_am64xx = "https://software-dl.ti.com/processor-sdk-rtos/esd/AM64X/firmware/${CORESDK_RTOS_VERSION}"
->  
-> -- 
-> 2.17.1
