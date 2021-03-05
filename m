@@ -1,100 +1,102 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.9018.1614930414712309731
+ by mx.groups.io with SMTP id smtpd.web12.9101.1614931573269882145
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 04 Mar 2021 23:46:54 -0800
+ Fri, 05 Mar 2021 00:06:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=TVOnQZG8;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: lokeshvutla@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 95DED38C0655
-	for <meta-ti@yoctoproject.org>; Fri,  5 Mar 2021 07:46:53 +0000 (UTC)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1257imJc053961;
-	Fri, 5 Mar 2021 01:44:48 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1614930288;
-	bh=kRc8iUVVpsqkATOJX0VN7rWuY5Sniopl/psFYqfnt3M=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=TVOnQZG8chbsiRWqR6zhnkka4fqpsxnc+XV3LkNl/xEaIHMFdM6uU5P2DL9DcOAex
-	 pWHO8Uvsv+cty48HXGyQKAgmBtytigqxAxGJm4eDSDndv59RjGSvorPMkcJ06yy8Bc
-	 7cBP8D1BhN4hQK1VxLHYojUhIRi2GgSb/LKbax6w=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1257imTC122026
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 5 Mar 2021 01:44:48 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 5 Mar
- 2021 01:44:47 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Fri, 5 Mar 2021 01:44:47 -0600
-Received: from [10.24.69.20] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1257ihQp120292;
-	Fri, 5 Mar 2021 01:44:45 -0600
-Subject: Re: [EXTERNAL,dunfell] ti-rtos: Fix J7200 builds by dropping evm
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 198.145.29.25, mailfrom: denis@denix.org)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 37D0538C0655
+	for <meta-ti@yoctoproject.org>; Fri,  5 Mar 2021 08:06:12 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3516640BEC;
+	Fri,  5 Mar 2021 08:06:11 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YQwabEcrbh4g; Fri,  5 Mar 2021 08:06:11 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0961D407E5;
+	Fri,  5 Mar 2021 08:06:08 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 5B9A4174524; Fri,  5 Mar 2021 03:06:08 -0500 (EST)
+Date: Fri, 5 Mar 2021 03:06:08 -0500
+From: "Denys Dmytriyenko" <denis@denix.org>
 To: Nishanth Menon <nm@ti.com>
-CC: "Nishanth Menon via lists.yoctoproject.org"
-	<nm=ti.com@lists.yoctoproject.org>,
-        meta-ti <meta-ti@yoctoproject.org>,
-        Denys
- Dmytriyenko <denis@denix.org>,
-        "Bajjuri, Praneeth" <praneeth@ti.com>
+Cc: meta-ti <meta-ti@yoctoproject.org>,
+	"Bajjuri, Praneeth" <praneeth@ti.com>
+Subject: Re: [PATCH dunfell] ti-rtos: Fix J7200 builds by dropping evm
+Message-ID: <20210305080608.GR4892@denix.org>
 References: <20210305064155.5125-1-nm@ti.com>
- <31751cf2-ce18-5e68-57e8-58f347865683@ti.com>
- <20210305071105.o46acaxismlevh2i@clergyman>
-From: "Lokesh Vutla" <lokeshvutla@ti.com>
-Message-ID: <ee43a6ec-1840-35d3-8521-1f085d863c6f@ti.com>
-Date: Fri, 5 Mar 2021 13:14:43 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <20210305064553.3pc6etlxil5noztr@collide>
 MIME-Version: 1.0
-In-Reply-To: <20210305071105.o46acaxismlevh2i@clergyman>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20210305064553.3pc6etlxil5noztr@collide>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-
-
-On 05/03/21 12:41 pm, Nishanth Menon wrote:
-> On 12:34-20210305, Lokesh Vutla wrote:
->>
->>
->> On 05/03/21 6:11 pm, Nishanth Menon via lists.yoctoproject.org wrote:
->>> "evm" prefix messes up the pattern matchup for J7200 and falls back into
->>> default, as a result, we attempt to pull [1] instead of [2].
->>>
->>> [1] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/07_03_00_12/coresdk_rtos_j7200_07_03_00_12_firmware.tar.xz
->>> [2] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/07_03_00_10/coresdk_rtos_j7200_07_03_00_12_firmware.tar.xz
->>>
->>> Fixes: 77cdfa9f6560 ("ti-rtos: Update metadata and versions for RTOS firmware")
->>> Signed-off-by: Nishanth Menon <nm@ti.com>
->>
->> For the sake of completeness can you add default web link for j7200? I still
->> couldn't figure out how the weblink is populated when default is undefined.
->>
->>   DEFAULT_RTOS_WEBLINK_j7200 =
->> "https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/${CORESDK_RTOS_VERSION}"
->>
+On Fri, Mar 05, 2021 at 12:45:53AM -0600, Nishanth Menon wrote:
+> On 00:41-20210305, Nishanth Menon wrote:
+> > "evm" prefix messes up the pattern matchup for J7200 and falls back into
+> > default, as a result, we attempt to pull [1] instead of [2].
+> > 
+> > [1] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/07_03_00_12/coresdk_rtos_j7200_07_03_00_12_firmware.tar.xz
+> > [2] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/07_03_00_10/coresdk_rtos_j7200_07_03_00_12_firmware.tar.xz
 > 
-> I believe _j7 does matchup j7200, hence it works and adding _j7200 will
-> be redundant..
+> ^^ above link should have been:
+> https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/07_03_00_10/coresdk_rtos_j7200_07_03_00_10_firmware.tar.xz
 > 
-> DEFAULT_RTOS_WEBLINK_j7 = "https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/firmware/${CORESDK_RTOS_VERSION}"
+> if you need me to send a v2 with fixups, i can.. or if that is the only
+> comment, then might be helpful to get a fixup while applying..
 
-looks like it is...
-j7200 machine include conf/machine/include/j7.inc
+I'm failing to see the issue here...
 
-which has SOC_FAMILY_append = ":j7"
+Of course, using "_j7200" instead of "_j7200-evm" is more preferred to cover 
+other variants, like potential "j7200-hs-evm", but when building for j7200-evm 
+should result in the same output. I would need to reproduce it - any another 
+pointers?
 
 
-I see URLs for all the SoCs except for j7200. Just trying to be consistent :)
-
-Thanks and regards,
-Lokesh
-
+> > Fixes: 77cdfa9f6560 ("ti-rtos: Update metadata and versions for RTOS firmware")
+> > Signed-off-by: Nishanth Menon <nm@ti.com>
+> > ---
+> >  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> > index ed62b876e4db..dffd51abda66 100644
+> > --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> > +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> > @@ -31,7 +31,7 @@ DEFAULT_RTOS_VERSION_DOT_am65xx = "07.03.00.10"
+> >  
+> >  DEFAULT_RTOS_SOC = "undefined"
+> >  DEFAULT_RTOS_SOC_j7 = "j721e"
+> > -DEFAULT_RTOS_SOC_j7200-evm = "j7200"
+> > +DEFAULT_RTOS_SOC_j7200 = "j7200"
+> >  DEFAULT_RTOS_SOC_am65xx = "am65xx"
+> >  DEFAULT_RTOS_SOC_am64xx = "am64x"
+> >  
+> > @@ -47,7 +47,7 @@ DEFAULT_FIRMWARE_URL_k3 = "${CORESDK_RTOS_WEBLINK}/${DEFAULT_FIRMWARE_FILE}"
+> >  
+> >  DEFAULT_FIRMWARE_SHA256SUM = "unknown"
+> >  DEFAULT_FIRMWARE_SHA256SUM_j7 = "69cc16c30c895fe813002bd7bdb3d30e6ca622d86b008a6bf6e2a24b86550969"
+> > -DEFAULT_FIRMWARE_SHA256SUM_j7200-evm = "a16865d928b2b00bfca64e0c41b02dcfc0ac8ec1ce125fbfd3581a1c610847f8"
+> > +DEFAULT_FIRMWARE_SHA256SUM_j7200 = "a16865d928b2b00bfca64e0c41b02dcfc0ac8ec1ce125fbfd3581a1c610847f8"
+> >  DEFAULT_FIRMWARE_SHA256SUM_am65xx = "aa121c10d3099dd61ef898717245ecee25b501170607c9a95afd741e05783a5d"
+> >  DEFAULT_FIRMWARE_SHA256SUM_am64xx = "9e9efeef0b1dbb101de97e58cfda8bf052a697f2ea635fdf6ca5158fffdc212b"
+> >  
+> > -- 
+> > 2.25.1.377.g2d2118b814c1
+> > 
 > 
-> I am a noobie on this, so will be interested in folk's feedback.
+> -- 
+> Regards,
+> Nishanth Menon
+> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
 > 
+
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
