@@ -5,32 +5,26 @@ X-Originating-Location: Troutville, Virginia, US (73.251.55.174)
 X-Originating-Platform: Windows Firefox 86
 User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Date: Thu, 11 Mar 2021 14:18:02 -0800
-References: <20210310162347.qoefefbcagky3srn@boxcar>
-In-Reply-To: <20210310162347.qoefefbcagky3srn@boxcar>
-Message-ID: <15557.1615501082424309597@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="uRHhVMOv5BmZ7DQvgTW3"
+Date: Thu, 11 Mar 2021 14:19:34 -0800
+References: <15557.1615501082424309597@lists.yoctoproject.org>
+In-Reply-To: <15557.1615501082424309597@lists.yoctoproject.org>
+Message-ID: <24755.1615501174442330946@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="maFSCE7GvsLx57YFQ04e"
 
---uRHhVMOv5BmZ7DQvgTW3
+--maFSCE7GvsLx57YFQ04e
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-I applied this patch and it failed to compile after that, I assume because =
-I'm running a later version of u-boot.=C2=A0 But more importantly, it looks=
- like this fix is already included in the u-boot source code.=C2=A0 I see a=
-ll the code in board.c about fixing the ethernet phy on the beaglebone fami=
-ly.=C2=A0 But I'm still having this ethernet issue so it's failing to fix t=
-he problem.
+Actually, looking back at it, this was a commit, not a patch.=C2=A0 So yes,=
+ it is in the u-boot code already.=C2=A0 But it's failing to perform someho=
+w.
 
---uRHhVMOv5BmZ7DQvgTW3
+--maFSCE7GvsLx57YFQ04e
 Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-I applied this patch and it failed to compile after that, I assume because =
-I'm running a later version of u-boot.&nbsp; But more importantly, it looks=
- like this fix is already included in the u-boot source code.&nbsp; I see a=
-ll the code in board.c about fixing the ethernet phy on the beaglebone fami=
-ly.&nbsp; But I'm still having this ethernet issue so it's failing to fix t=
-he problem.
+Actually, looking back at it, this was a commit, not a patch.&nbsp; So yes,=
+ it is in the u-boot code already.&nbsp; But it's failing to perform someho=
+w.
 
---uRHhVMOv5BmZ7DQvgTW3--
+--maFSCE7GvsLx57YFQ04e--
