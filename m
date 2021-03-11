@@ -1,45 +1,45 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.3707.1615454414155900422
+ by mx.groups.io with SMTP id smtpd.web10.4174.1615458275905332844
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Mar 2021 01:20:14 -0800
+ Thu, 11 Mar 2021 02:24:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=AViYVAYR;
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=PLxi5VVh;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: shiju@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12B9KD3u097715
-	for <meta-ti@lists.yoctoproject.org>; Thu, 11 Mar 2021 03:20:13 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12BAOYYf120297
+	for <meta-ti@lists.yoctoproject.org>; Thu, 11 Mar 2021 04:24:34 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1615454413;
-	bh=mbaeZlkYpFACS/BkM3xqEmFaTIy+GVEgOiJ6UyJZEjw=;
+	s=ti-com-17Q1; t=1615458274;
+	bh=8r3UDrrvMENHiVIpUZWwzZp9iDBWl0Ii7Uuo83lhIXk=;
 	h=From:To:CC:Subject:Date;
-	b=AViYVAYR1dfzYgfvSjAGeawI6a5YLONgk5vpbqyofo4ORVCW7ctlzbAtjzKic1Sgp
-	 07JWJUCgft3JArYBmmBFMvCduuXmeHmLWB47sc6bjJpqVxfaZ0l9sSBCUrCRclAJ5/
-	 pePMX4DXygGjQUfZl96YsB2VJWLkMgsQkZslLIgQ=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12B9KCEd066797
+	b=PLxi5VVh+S/B6aPAik59rC9f+0znicUC02utw73bi4gK+Yr2SRgo61zL9o6or6Epc
+	 k8LCYYPKD4hBcnHih49fYpdU0fuADn0zmz6ENxl6PZrjdXSwbkiA+CnBAkT1jqHb0M
+	 3tGNKGfcaED5F27xvu0vqUOmhxz+wzYZVAU5v5p4=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12BAOYkd119435
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 11 Mar 2021 03:20:13 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 11
- Mar 2021 03:20:12 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE113.ent.ti.com
+	for <meta-ti@lists.yoctoproject.org>; Thu, 11 Mar 2021 04:24:34 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE113.ent.ti.com
  (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 11
+ Mar 2021 04:24:34 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Thu, 11 Mar 2021 03:20:12 -0600
+ Frontend Transport; Thu, 11 Mar 2021 04:24:34 -0600
 Received: from uda0756868.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12B9KAmN117247;
-	Thu, 11 Mar 2021 03:20:11 -0600
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12BAOWeM083460;
+	Thu, 11 Mar 2021 04:24:33 -0600
 From: "Shiju Sivasankaran" <shiju@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
 CC: Praneeth Bajjuri <praneeth@ti.com>, Shiju Sivasankaran <shiju@ti.com>
 Subject: [dunfell/next v2 PATCH] ti-rtos: update to uisng fw from mcu-plus-sdk for AM64x
-Date: Thu, 11 Mar 2021 14:50:06 +0530
-Message-ID: <20210311092006.25405-1-shiju@ti.com>
+Date: Thu, 11 Mar 2021 15:54:30 +0530
+Message-ID: <20210311102430.26263-1-shiju@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 12B9KD3u097715
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 12BAOYYf120297
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -57,14 +57,15 @@ on AM64x EVM
 Signed-off-by: Shiju Sivasankaran <shiju@ti.com>
 ---
 v2: rebased to dunfell-next
+DEFAULT_FIRMWARE_SHA256SUM_am65xx updated
 
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 12 ++++++++----
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 14 +++++++++-----
  recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb |  3 ++-
- 2 files changed, 10 insertions(+), 5 deletions(-)
+ 2 files changed, 11 insertions(+), 6 deletions(-)
 
 diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-r=
 tos-bin/ti-rtos-firmware.bb
-index 507d0000..65387be3 100644
+index 507d0000..c70fc50d 100644
 --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
 +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
 @@ -11,17 +11,20 @@ INHIBIT_DEFAULT_DEPS =3D "1"
@@ -106,15 +107,19 @@ ESDK_RTOS_VERSION}_firmware.tar.xz"
  DEFAULT_FIRMWARE_URL =3D "file://empty"
  DEFAULT_FIRMWARE_URL_k3 =3D "${CORESDK_RTOS_WEBLINK}/${DEFAULT_FIRMWARE_=
 FILE}"
-@@ -44,7 +48,7 @@ DEFAULT_FIRMWARE_SHA256SUM =3D "unknown"
+@@ -43,8 +47,8 @@ DEFAULT_FIRMWARE_URL_k3 =3D "${CORESDK_RTOS_WEBLINK}/${=
+DEFAULT_FIRMWARE_FILE}"
+ DEFAULT_FIRMWARE_SHA256SUM =3D "unknown"
  DEFAULT_FIRMWARE_SHA256SUM_j7 =3D "78f3ab929a0f3c6e2907538061de82e16d8af=
 f7ffb2fac0c3c4d56df8abec3b0"
  DEFAULT_FIRMWARE_SHA256SUM_j7200-evm =3D "5bae696d35e206bbcd9b26ab6508af=
 59a2c2d72f9b89aa1d3fc1aa808f7a8615"
- DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "7bd854dbf96c25683d684ac731fde3edd=
+-DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "7bd854dbf96c25683d684ac731fde3edd=
 7fb8a65f8727f7aae3802a2e9a9cab6"
 -DEFAULT_FIRMWARE_SHA256SUM_am64xx =3D "450bf23d659756695d62168fe06eebe46=
 41522293d89692a9eea837426bac0f9"
++DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "d3cffd472fdd17b000afcee806318344e=
+6033ac271ab3a6fa9ca8f432e8420c9"
 +DEFAULT_FIRMWARE_SHA256SUM_am64xx =3D "bc2d3d603ad30006ea3fefa3e777c26c1=
 9b95ee6d6f5a630259009f2f5a4996b"
 =20
