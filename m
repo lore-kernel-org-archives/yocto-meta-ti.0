@@ -1,60 +1,68 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web08.2005.1615510740554770358
- for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Mar 2021 16:59:00 -0800
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dNXiYZIF;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: robertcnelson@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id bf3so5625904edb.6
-        for <meta-ti@lists.yoctoproject.org>; Thu, 11 Mar 2021 16:59:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=tvNMnt7I6BxNX8ElWHl5NgRvIm7phEELZ2y37rg22mU=;
-        b=dNXiYZIFrytG0/tItG03IX1eYqYxR315VVghV6c0mh+WHDHYQ5fUJxl2rABJRhc2qA
-         LH2LCPgzMvIpJFqUCm0MeY4NlKWTAaqR1xLaD5CxyQqwuGFdgRXiS6zQtCpT2+4AI/Em
-         CXaC+eyfxkRmURcN2NxKWQXUiTwyU01fwIdtkCAceykrHvny8igUxauuj/ulMbLUD40F
-         Ii6py6VoIL05T/JR27NM7J2f8LHz/9QnN6jnvBLhQe5XaOLqmOLgzSkLR2PiJzv9cGp6
-         6LaXRpRyvP3AgwHOSLn3dbX4ehjC3Fa5SyB1EeqeI2Nf6XVs6wRUrwl1H2Tb2hRnmh6F
-         6tlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=tvNMnt7I6BxNX8ElWHl5NgRvIm7phEELZ2y37rg22mU=;
-        b=d07VUdSjOGQ0zhoz3/fBTg01qKcxN5vFLh6/i7riENs78A+8rUJrMWJMHFMD8k0Kjp
-         yrA+o4z7HHTlMWtBj+hbS7LorkLBsz3rtwbqwyfgga/nLWhoDqIymrizFaqYmQhKoCbr
-         ol16tNdH+0c6vHHRPSE6OsadoICfL8sgQFpFThP9ZTD/ayprA/8MlTQkfb5sqRZp77Hp
-         AwuGYhugEZienTvhCLD7Ppmtod7zCqVIVNsIom0AToaCUDCjtLoZR+H/J0uKlsju7r48
-         it5702FLEJEXheUV0puZbntuCTOxl1ckLu7tDk7bY7vhmJG7cqsRLiKr89NT7V8izp8T
-         eHbg==
-X-Gm-Message-State: AOAM5334+asKB0rcGvhstiqKGVcJ9emwCU13aKSSQr5eSUZqP5Fy7zUk
-	2R9AvYlohwFrpUToXqaDwUg4lyangn8OeA8teqA=
-X-Google-Smtp-Source: ABdhPJwut5JtZI155yU0ITy3v59XEDX5eHJtabmAaFlCmMGV40SUyTKft6yrQMPdWvb/GGdczvIaekr6E70izmUj+00=
-X-Received: by 2002:aa7:c0c7:: with SMTP id j7mr11298883edp.298.1615510738994;
- Thu, 11 Mar 2021 16:58:58 -0800 (PST)
+Subject: Re: Beaglebone Black Ethernet Failures
+To: meta-ti@lists.yoctoproject.org
+From: "Dave Tucker" <theaethereal@gmail.com>
+X-Originating-Location: Troutville, Virginia, US (73.251.55.174)
+X-Originating-Platform: Windows Firefox 86
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-References: <15557.1615501082424309597@lists.yoctoproject.org> <24755.1615501174442330946@lists.yoctoproject.org>
-In-Reply-To: <24755.1615501174442330946@lists.yoctoproject.org>
-From: "Robert Nelson" <robertcnelson@gmail.com>
-Date: Thu, 11 Mar 2021 18:57:27 -0600
-Message-ID: <CAOCHtYjagGkpX0EkZXDr_PrL4DHqkdYkXdhzraG1=+b+5xOASA@mail.gmail.com>
-Subject: Re: [meta-ti] Beaglebone Black Ethernet Failures
-To: Dave Tucker <theaethereal@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 12 Mar 2021 06:11:42 -0800
+References: <CAOCHtYjagGkpX0EkZXDr_PrL4DHqkdYkXdhzraG1=+b+5xOASA@mail.gmail.com>
+In-Reply-To: <CAOCHtYjagGkpX0EkZXDr_PrL4DHqkdYkXdhzraG1=+b+5xOASA@mail.gmail.com>
+Message-ID: <2543.1615558302870675945@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="6pLiUyax3acKtvm4Sp4G"
 
-On Thu, Mar 11, 2021 at 4:19 PM Dave Tucker <theaethereal@gmail.com> wrote:
->
-> Actually, looking back at it, this was a commit, not a patch.  So yes, it is in the u-boot code already.  But it's failing to perform somehow.
+--6pLiUyax3acKtvm4Sp4G
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-For the am335x target, u-boot supports two path's, legacy "board" path
-and newer "device tree" path.. That fixup only applies if your build
-of u-boot uses the new "device tree" path..
+Robert,
 
-Regards,
+Thank you so much for the reply.=C2=A0 Do you know of a reference that exp=
+lains this distinction between board and devicetree paths?=C2=A0 My google-=
+fu is failing me.
 
--- 
-Robert Nelson
-https://rcn-ee.com/
+I am loading a dtb file, but I don't know if that means I'm on the "device=
+tree path".=C2=A0 I've configured u-boot to load from a uEnv.txt which look=
+s like this, and that loads the dtb from the first partition, and I know th=
+at part works:
+
+bootfile=3DzImage
+fdtfile=3Dam335x-boneblack.dtb
+loadaddr=3D0x80007fc0
+fdtaddr=3D0x80F80000
+console=3DttyO0,115200
+mmcroot=3D/dev/mmcblk1p2
+mmcrootfstype=3Dext4
+loadfdt=3Dfatload mmc 1:1 ${fdtaddr} ${fdtfile}
+loaduimage=3Dfatload mmc 1:1 ${loadaddr} ${bootfile}
+mmc_args=3Dsetenv bootargs console=3D${console} ${optargs} root=3D${mmcroo=
+t} rootfstype=3D${mmcrootfstype}
+fdtboot=3Drun mmc_args; bootz ${loadaddr} - ${fdtaddr}
+uenvcmd=3Dmmc rescan; run loaduimage; run loadfdt; run fdtboot
+
+Thank you so much,
+
+Dave
+
+--6pLiUyax3acKtvm4Sp4G
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<p>Robert,<br /><br />Thank you so much for the reply.&nbsp; Do you know of=
+ a reference that explains this distinction between board and devicetree pa=
+ths?&nbsp; My google-fu is failing me.</p>
+<p>I am loading a dtb file, but I don't know if that means I'm on the "dev=
+icetree path".&nbsp; I've configured u-boot to load from a uEnv.txt which l=
+ooks like this, and that loads the dtb from the first partition, and I know=
+ that part works:</p>
+<p>bootfile=3DzImage<br />fdtfile=3Dam335x-boneblack.dtb<br />loadaddr=3D0=
+x80007fc0<br />fdtaddr=3D0x80F80000<br />console=3DttyO0,115200<br />mmcroo=
+t=3D/dev/mmcblk1p2<br />mmcrootfstype=3Dext4<br />loadfdt=3Dfatload mmc 1:1=
+ ${fdtaddr} ${fdtfile}<br />loaduimage=3Dfatload mmc 1:1 ${loadaddr} ${boot=
+file}<br />mmc_args=3Dsetenv bootargs console=3D${console} ${optargs} root=
+=3D${mmcroot} rootfstype=3D${mmcrootfstype}<br />fdtboot=3Drun mmc_args; b=
+ootz ${loadaddr} - ${fdtaddr}<br />uenvcmd=3Dmmc rescan; run loaduimage; ru=
+n loadfdt; run fdtboot</p>
+<p>Thank you so much,<br /><br />Dave</p>
+
+--6pLiUyax3acKtvm4Sp4G--
