@@ -1,157 +1,226 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.5822.1615796442982906074
+ by mx.groups.io with SMTP id smtpd.web09.960.1615849560103481823
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 15 Mar 2021 01:20:43 -0700
+ Mon, 15 Mar 2021 16:06:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VbG670mP;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: shiju@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=H4C/e31R;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12F8KbOx103865;
-	Mon, 15 Mar 2021 03:20:37 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12FN5tUg032212;
+	Mon, 15 Mar 2021 18:05:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1615796437;
-	bh=J23NNI/tyox2YXXGUOC8t8gxo8JIKUBCxPU/zYSh6rE=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=VbG670mPlcTnWkpUwH5bg6nWP5HeFng7zi0IN4AhGoZIgP34K/9u/oK3x1fmnG27b
-	 9mHQGapL76l6ZZ8OCTbN46whQ5s0EAY3qQdR2sf0pDWaQxaaArXdluWwNsqTAPO/ee
-	 yMcnUj8MyjcJPWY9P+U4s3Slf0ae0Sl/bslst3Bw=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12F8Kb7t059269
+	s=ti-com-17Q1; t=1615849555;
+	bh=GMuictF3RR/YPlSfrefcV7X6gfG4wkQ6RUJsxtgIjtk=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=H4C/e31RYpgSBlJ7bX39albFQlcWiZWvXwKdhZFbAB+Jydm+nxPr5e7P3yXN71rKy
+	 dyf0ZdQGsWySjMplcydkqypNvXS21Jp1dF3AwUiD7pIdaN4qqksjhm6sXgwYTIKbYO
+	 qDKgxVKtFXn1w1jT3rKrR1xxqUPYGXRumKcBEjtI=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12FN5ts9063562
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 15 Mar 2021 03:20:37 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 15 Mar 2021 18:05:55 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 15
- Mar 2021 03:20:37 -0500
-Received: from DFLE110.ent.ti.com ([fe80::c545:bde0:ab70:bae9]) by
- DFLE110.ent.ti.com ([fe80::c545:bde0:ab70:bae9%19]) with mapi id
- 15.01.2176.009; Mon, 15 Mar 2021 03:20:37 -0500
-From: "Shiju Sivasankaran" <shiju@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
+ Mar 2021 18:05:55 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Mon, 15 Mar 2021 18:05:55 -0500
+Received: from [10.247.25.23] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12FN5sTp111234;
+	Mon, 15 Mar 2021 18:05:54 -0500
+Subject: Re: [meta-ti] [dunfell/next v2 PATCH] ti-rtos: update to uisng fw from mcu-plus-sdk for AM64x
+To: "Sivasankaran, Shiju" <shiju@ti.com>, Denys Dmytriyenko <denis@denix.org>
 CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
-        "Bajjuri, Praneeth" <praneeth@ti.com>
-Subject: Re: [EXTERNAL] Re: [meta-ti] [dunfell/next v2 PATCH] ti-rtos: update to uisng fw from mcu-plus-sdk for AM64x
-Thread-Topic: [EXTERNAL] Re: [meta-ti] [dunfell/next v2 PATCH] ti-rtos: update
- to uisng fw from mcu-plus-sdk for AM64x
-Thread-Index: AQHXFmC72A6xrSEQTUaj3aRs5T7Wb6qBYMcAgAMG47A=
-Date: Mon, 15 Mar 2021 08:20:37 +0000
-Message-ID: <fd249b6c7abd43bc83b257318aa02be1@ti.com>
+        "Sivasankaran, Shiju" <shiju@ti.com>
 References: <20210311102430.26263-1-shiju@ti.com>
  <20210312230730.GD4892@denix.org>
-In-Reply-To: <20210312230730.GD4892@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.235.243]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ <ed0c8702-1661-685e-5562-f6522b61a074@ti.com>
+ <e54e9f57f827460e95d57d36533866b8@ti.com>
+From: "praneeth" <praneeth@ti.com>
+Message-ID: <e8619eef-3334-d611-64ac-3ccbcf722a1e@ti.com>
+Date: Mon, 15 Mar 2021 18:05:54 -0500
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
+In-Reply-To: <e54e9f57f827460e95d57d36533866b8@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 12FN5tUg032212
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 
-RGVueXMNCg0KRm9yIEFNNjR4IGFsb25lLCBTaWF0cmEgTUNVIHRlYW0gZGVzaWduZWQgYW5kIGRl
-dmVsb3BlZCBhIG5ldyBTREsgY2FsbGVkIG1jdS1wbHVzLXNkaywgd2hpY2ggaXMgYSBjb21iaW5h
-dGlvbiBvZiBkcml2ZXJzIGFuZCBzZGsuICBObyBzZXBhcmF0ZSAgU0RLIChmb3IgYXBwcykgb3Ig
-UERLIChmb3IgZGl2ZXJzKSwgZXZlcnl0aGluZyBuZWVkIGZvciBBTTY0eCBjdXN0b21lcnMgaXMg
-aW5jbHVkZWQgdGhpcyBtY3UtcGx1cy1zZGsuICBTbyBmb3IgQU02NHggYWxvbmUgdGhlIElQQyBG
-VyB3aWxsIGJlIHBpY2tlZCBmcm9tIG1jdS1wbHVzLXNkayBnb2luZyBmb3J3YXJkIChmcm9tIDcu
-MyByZWxlYXNlIG9ud2FyZHMpDQoNClRvIHBpY2sgQU02NHggbWN1LXBsdXMtc2RrIEZXLCB3ZSBo
-YXZlIHBpbm5lZCBjb3Jlc2RrLXJ0b3MtcmVsZWFzZXMgcmVwbyB0byBhIGxhdGVzdCBjb21taXQg
-LSAiZTU1ODA4MDU5MmQ5MTA3ODNiZjJmOWFkNDZlZDNiNjIyZjg5OTE1NSINClRoZXJlIHdhcyBv
-bmUgbmV3L2xhdGVzdCBidWlsZCBkb25lIGJ5IFBESyBmb3IgQU02NXggaW4gY29yZXNkay1ydG9z
-LXJlbGVhc2VzIHJlcG8gY29tbWl0IC0gImU1NTgwODA1OTJkOTEwNzgzYmYyZjlhZDQ2ZWQzYjYy
-MmY4OTkxNTUiYW5kIGhlbmNlIHRoZSBERUZBVUxUX0ZJUk1XQVJFX1NIQTI1NlNVTV9hbTY1eHgg
-Z290IHVwZGF0ZWQuDQpGb3IgSjcgYW5kIGo3MjAwLWV2bSwgbm8gbmV3IHJlbGVhc2UgYnVpbGRz
-IHRyaWdnZXJlZCBieSBQREsgYW5kIGhlbmNlIG5vIGNoYW5nZXMgaW4gcmVzcGVjdGl2ZSBTSEEy
-NTZTVU0NCg0KUmVnYXJkcywgU2hpanUNCg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0K
-RnJvbTogRGVueXMgRG15dHJpeWVua28gPGRlbmlzQGRlbml4Lm9yZz4gDQpTZW50OiBTYXR1cmRh
-eSwgTWFyY2ggMTMsIDIwMjEgNDozOCBBTQ0KVG86IFNpdmFzYW5rYXJhbiwgU2hpanUgPHNoaWp1
-QHRpLmNvbT4NCkNjOiBtZXRhLXRpQGxpc3RzLnlvY3RvcHJvamVjdC5vcmc7IEJhamp1cmksIFBy
-YW5lZXRoIDxwcmFuZWV0aEB0aS5jb20+DQpTdWJqZWN0OiBbRVhURVJOQUxdIFJlOiBbbWV0YS10
-aV0gW2R1bmZlbGwvbmV4dCB2MiBQQVRDSF0gdGktcnRvczogdXBkYXRlIHRvIHVpc25nIGZ3IGZy
-b20gbWN1LXBsdXMtc2RrIGZvciBBTTY0eA0KDQpPbiBUaHUsIE1hciAxMSwgMjAyMSBhdCAwMzo1
-NDozMFBNICswNTMwLCBTaGlqdSBTaXZhc2Fua2FyYW4gdmlhIGxpc3RzLnlvY3RvcHJvamVjdC5v
-cmcgd3JvdGU6DQo+IHVwZGF0ZSB0aS1ydG9zLW1ldGFkYXRhIGFuZCB0aS1ydG9zLWZpcm13YXJl
-IHJlY2lwZXMgb2YgbWV0YS10aSB0byANCj4gcGljayBBTTY0eCBydG9zIGZpcm13YXJlIGZyb20g
-bWN1LXBsdXMtc2RrIGluc3RlYWQgb2YgUERLLg0KPiANCj4gT3RoZXIgZGV2aWNlcyBzdWNoIGFz
-IEFNNjV4LCBKNyBjb250aW51ZSB0byB1c2UgZncgZnJvbSBQREsuDQo+IA0KPiBCdWlsdCBhbmQg
-dGVzdGVkIGJvdGggSVBDIGVjaG8gdGVzdCBhcHBsaWNhdGlvbnMgLSAicnBtc2dfY2xpZW50X3Nh
-bXBsZeKAnQ0KPiAmIOKAnHJwbXNnX2NoYXJfc2ltcGxl4oCdLiBCb3RoIHRlc3RzIHBhc3NlZCBm
-b3IgYWxsIHJlbW90ZSBSNUYgY29yZXMgb24gDQo+IEFNNjR4IEVWTQ0KPiANCj4gU2lnbmVkLW9m
-Zi1ieTogU2hpanUgU2l2YXNhbmthcmFuIDxzaGlqdUB0aS5jb20+DQo+IC0tLQ0KPiB2MjogcmVi
-YXNlZCB0byBkdW5mZWxsLW5leHQNCj4gREVGQVVMVF9GSVJNV0FSRV9TSEEyNTZTVU1fYW02NXh4
-IHVwZGF0ZWQNCg0KV2h5IGFyZSB5b3UgdXBkYXRpbmcgYW02NXh4IHdoZW4geW91IHNhaWQgb25s
-eSBhbTY0eHggaXMgYmVpbmcgc3dpdGNoZWQgZnJvbSBQREsgdG8gbWN1LXBsdXMtc2RrPw0KDQpB
-bHNvLCBjYW4geW91IGV4cGxhaW4gd2hhdCBpcyBpdCBhbmQgd2h5IGl0IGhhcyB0byBiZSB0aGUg
-ZGVmYXVsdCBmb3IgYW02NHg/IA0KU2hvdWxkbid0IENvcmVTREsgTGludXggcGljayBDb3JlU0RL
-IFJUT1MgKGkuZS4gUERLKSBjb21wb25lbnRzIGJ5IGRlZmF1bHQ/DQoNClRoYW5rcy4NCg0KDQo+
-ICByZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmIgfCAxNCArKysrKysr
-KystLS0tLSAgDQo+IHJlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1tZXRhZGF0YS5iYiB8
-ICAzICsrLQ0KPiAgMiBmaWxlcyBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9u
-cygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1m
-aXJtd2FyZS5iYiANCj4gYi9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUu
-YmINCj4gaW5kZXggNTA3ZDAwMDAuLmM3MGZjNTBkIDEwMDY0NA0KPiAtLS0gYS9yZWNpcGVzLXRp
-L3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmINCj4gKysrIGIvcmVjaXBlcy10aS90aS1y
-dG9zLWJpbi90aS1ydG9zLWZpcm13YXJlLmJiDQo+IEBAIC0xMSwxNyArMTEsMjAgQEAgSU5ISUJJ
-VF9ERUZBVUxUX0RFUFMgPSAiMSINCj4gIA0KPiAgaW5oZXJpdCBkZXBsb3kNCj4gIA0KPiArREVG
-QVVMVF9NRVRBREFUQV9GSUxFID89ICJtZXRhZGF0YS5pbmMiDQo+ICtERUZBVUxUX01FVEFEQVRB
-X0ZJTEVfYW02NHh4ID89ICJtY3VzZGtfbWV0YWRhdGEuaW5jIg0KPiArDQo+ICAjIEZpcnN0LCBs
-ZXQncyB0cnkgaW5jbHVkaW5nIG1ldGFkYXRhLmluYyB0aGF0IGNvdWxkIGJlIGZldGNoZWQgYW5k
-IA0KPiBkZXBsb3llZCAgIyBieSB0aS1ydG9zLW1ldGFkYXRhIGVhcmxpZXIgYW5kIHByb3ZpZGUg
-bmV3IHNldCBvZiANCj4gQ09SRVNES19SVE9TXyogdmFyaWFibGVzIC1pbmNsdWRlICR7REVQTE9Z
-X0RJUl9JTUFHRX0vbWV0YWRhdGEuaW5jDQo+ICtpbmNsdWRlICR7REVQTE9ZX0RJUl9JTUFHRX0v
-JHtERUZBVUxUX01FVEFEQVRBX0ZJTEV9DQo+ICANCj4gICMgU2V0IHNvbWUgZGVmYXVsdHMgZm9y
-IHdoZW4gbWV0YWRhdGEuaW5jIGlzIG5vdCBhdmFpbGFibGUgIA0KPiBERUZBVUxUX1JUT1NfRkFN
-SUxZID0gImphY2ludG8iDQo+ICBERUZBVUxUX1JUT1NfVkVSU0lPTiA9ICIwN18wM18wMF8xNiIN
-Cj4gIERFRkFVTFRfUlRPU19WRVJTSU9OX0RPVCA9ICIwNy4wMy4wMC4xNiINCj4gIA0KPiAtREVG
-QVVMVF9SVE9TX1ZFUlNJT05fYW02NHh4ID0gIjA3XzAzXzAxXzA2Ig0KPiAtREVGQVVMVF9SVE9T
-X1ZFUlNJT05fRE9UX2FtNjR4eCA9ICIwNy4wMy4wMS4wNiINCj4gK0RFRkFVTFRfUlRPU19WRVJT
-SU9OX2FtNjR4eCA9ICIwN18wM18wMF8wMyINCj4gK0RFRkFVTFRfUlRPU19WRVJTSU9OX0RPVF9h
-bTY0eHggPSAiMDcuMDMuMDAuMDMiDQo+ICANCj4gIERFRkFVTFRfUlRPU19TT0MgPSAidW5kZWZp
-bmVkIg0KPiAgREVGQVVMVF9SVE9TX1NPQ19qNyA9ICJqNzIxZSINCj4gQEAgLTM2LDYgKzM5LDcg
-QEAgREVGQVVMVF9SVE9TX1dFQkxJTktfYW02NXh4ID0gDQo+ICJodHRwczovL3NvZnR3YXJlLWRs
-LnRpLmNvbS9wcm9jZXNzb3Itc2RrLXJ0b3MvZXNkDQo+ICBERUZBVUxUX1JUT1NfV0VCTElOS19h
-bTY0eHggPSAiaHR0cHM6Ly9zb2Z0d2FyZS1kbC50aS5jb20vcHJvY2Vzc29yLXNkay1ydG9zL2Vz
-ZC9BTTY0WC9maXJtd2FyZS8ke0NPUkVTREtfUlRPU19WRVJTSU9OfSINCj4gIA0KPiAgREVGQVVM
-VF9GSVJNV0FSRV9GSUxFID0gImNvcmVzZGtfcnRvc18ke0NPUkVTREtfUlRPU19TT0N9XyR7Q09S
-RVNES19SVE9TX1ZFUlNJT059X2Zpcm13YXJlLnRhci54eiINCj4gK0RFRkFVTFRfRklSTVdBUkVf
-RklMRV9hbTY0eHggPSAibWN1X3BsdXNfc2RrXyR7Q09SRVNES19SVE9TX1NPQ31fJHtDT1JFU0RL
-X1JUT1NfVkVSU0lPTn1fZmlybXdhcmUudGFyLnh6Ig0KPiAgDQo+ICBERUZBVUxUX0ZJUk1XQVJF
-X1VSTCA9ICJmaWxlOi8vZW1wdHkiDQo+ICBERUZBVUxUX0ZJUk1XQVJFX1VSTF9rMyA9ICIke0NP
-UkVTREtfUlRPU19XRUJMSU5LfS8ke0RFRkFVTFRfRklSTVdBUkVfRklMRX0iDQo+IEBAIC00Myw4
-ICs0Nyw4IEBAIERFRkFVTFRfRklSTVdBUkVfVVJMX2szID0gIiR7Q09SRVNES19SVE9TX1dFQkxJ
-Tkt9LyR7REVGQVVMVF9GSVJNV0FSRV9GSUxFfSINCj4gIERFRkFVTFRfRklSTVdBUkVfU0hBMjU2
-U1VNID0gInVua25vd24iDQo+ICBERUZBVUxUX0ZJUk1XQVJFX1NIQTI1NlNVTV9qNyA9ICI3OGYz
-YWI5MjlhMGYzYzZlMjkwNzUzODA2MWRlODJlMTZkOGFmZjdmZmIyZmFjMGMzYzRkNTZkZjhhYmVj
-M2IwIg0KPiAgREVGQVVMVF9GSVJNV0FSRV9TSEEyNTZTVU1fajcyMDAtZXZtID0gIjViYWU2OTZk
-MzVlMjA2YmJjZDliMjZhYjY1MDhhZjU5YTJjMmQ3MmY5Yjg5YWExZDNmYzFhYTgwOGY3YTg2MTUi
-DQo+IC1ERUZBVUxUX0ZJUk1XQVJFX1NIQTI1NlNVTV9hbTY1eHggPSAiN2JkODU0ZGJmOTZjMjU2
-ODNkNjg0YWM3MzFmZGUzZWRkN2ZiOGE2NWY4NzI3ZjdhYWUzODAyYTJlOWE5Y2FiNiINCj4gLURF
-RkFVTFRfRklSTVdBUkVfU0hBMjU2U1VNX2FtNjR4eCA9ICI0NTBiZjIzZDY1OTc1NjY5NWQ2MjE2
-OGZlMDZlZWJlNDY0MTUyMjI5M2Q4OTY5MmE5ZWVhODM3NDI2YmFjMGY5Ig0KPiArREVGQVVMVF9G
-SVJNV0FSRV9TSEEyNTZTVU1fYW02NXh4ID0gImQzY2ZmZDQ3MmZkZDE3YjAwMGFmY2VlODA2MzE4
-MzQ0ZTYwMzNhYzI3MWFiM2E2ZmE5Y2E4ZjQzMmU4NDIwYzkiDQo+ICtERUZBVUxUX0ZJUk1XQVJF
-X1NIQTI1NlNVTV9hbTY0eHggPSAiYmMyZDNkNjAzYWQzMDAwNmVhM2ZlZmEzZTc3N2MyNmMxOWI5
-NWVlNmQ2ZjVhNjMwMjU5MDA5ZjJmNWE0OTk2YiINCj4gIA0KPiAgIyBVc2Ugd2VhayBhc3NpZ25t
-ZW50IGZvciBDT1JFU0RLX1JUT1NfKiB2YXJpYWJsZXMgdG8gdXNlIGRlZmF1bHRzIGlmIA0KPiBu
-b3QgeWV0IHNldCAgQ09SRVNES19SVE9TX0ZBTUlMWSA/PSAiJHtERUZBVUxUX1JUT1NfRkFNSUxZ
-fSINCj4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1tZXRhZGF0
-YS5iYiANCj4gYi9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtbWV0YWRhdGEuYmINCj4g
-aW5kZXggOWJiMGQzYzUuLjQ2NmEyMmE4IDEwMDY0NA0KPiAtLS0gYS9yZWNpcGVzLXRpL3RpLXJ0
-b3MtYmluL3RpLXJ0b3MtbWV0YWRhdGEuYmINCj4gKysrIGIvcmVjaXBlcy10aS90aS1ydG9zLWJp
-bi90aS1ydG9zLW1ldGFkYXRhLmJiDQo+IEBAIC0xOCwxMCArMTgsMTEgQEAgUExBVF9TRlhfYW02
-NHh4ID0gIi9hbTY0eCINCj4gICMgVXNlIHdlYWsgYXNzaWdubWVudCB0byBzZXQgZGVmYXVsdHMg
-dG8gVElfUlRPU19NRVRBREFUQV8qIHZhcmlhYmxlcyAgDQo+IFRJX1JUT1NfTUVUQURBVEFfVVJJ
-ID89ICJnaXQ6Ly9naXQudGkuY29tL3Byb2Nlc3Nvci1zZGsvY29yZXNka19ydG9zX3JlbGVhc2Vz
-LmdpdCINCj4gIFRJX1JUT1NfTUVUQURBVEFfUFJPVE9DT0wgPz0gImdpdCINCj4gLVRJX1JUT1Nf
-TUVUQURBVEFfU1JDUkVWID89ICJiYTgxZGM1YTkzNDJmYzM1NDM1OTIwMDkyYTBkZjJjYjJhYjM0
-MmVmIg0KPiArVElfUlRPU19NRVRBREFUQV9TUkNSRVYgPz0gImU1NTgwODA1OTJkOTEwNzgzYmYy
-ZjlhZDQ2ZWQzYjYyMmY4OTkxNTUiDQo+ICBUSV9SVE9TX01FVEFEQVRBX0JSQU5DSCA/PSAibWFz
-dGVyIg0KPiAgVElfUlRPU19NRVRBREFUQV9ESVIgPz0gIiR7UExBVF9TRlh9Ig0KPiAgVElfUlRP
-U19NRVRBREFUQV9GSUxFID89ICIke1N9JHtUSV9SVE9TX01FVEFEQVRBX0RJUn0vbWV0YWRhdGEu
-aW5jIg0KPiArVElfUlRPU19NRVRBREFUQV9GSUxFX2FtNjR4eCA/PSAiJHtTfSR7VElfUlRPU19N
-RVRBREFUQV9ESVJ9L21jdXNka19tZXRhZGF0YS5pbmMiDQo+ICANCj4gIFBWID0gIjEuMC4wK2dp
-dCR7U1JDUFZ9Ig0KPiAgDQo+IC0tDQo+IDIuMTcuMQ0KPiANCg0KLS0gDQpSZWdhcmRzLA0KRGVu
-eXMgRG15dHJpeWVua28gPGRlbmlzQGRlbml4Lm9yZz4NClBHUDogMHg0MjA5MDI3MjlBOTJDOTY0
-IC0gaHR0cHM6Ly9kZW5peC5vcmcvMHg0MjA5MDI3MjlBOTJDOTY0DQpGaW5nZXJwcmludDogMjVG
-QyBFNEE1IDhBNzIgMkY2OSAxMTg2ICA2RDc2IDQyMDkgMDI3MiA5QTkyIEM5NjQNCg==
+
+
+On 3/15/2021 1:27 AM, Sivasankaran, Shiju wrote:
+> Praneeth
+> To pick AM64x mcu-plus-sdk FW, we have pinned coresdk-rtos-releases rep=
+o to a latest commit - "e558080592d910783bf2f9ad46ed3b622f899155"
+> There was one latest build happened for AM65x under coresdk-rtos-releas=
+es repo commit - "e558080592d910783bf2f9ad46ed3b622f899155"and hence the =
+DEFAULT_FIRMWARE_SHA256SUM_am65xx got updated.
+> For J7 and j7200-evm, no new release builds triggered by PDK and hence =
+no changes in respective SHA256SUM
+
+There is a FW update planned for J7, J7200, AM65 . Please check with=20
+ankur/shiju. What i am saying is any update related to AM65x doesnt=20
+belong in the patch you pointed for AM64x.
+
+All your patch should include is
+TI_RTOS_METADATA_SRCREV for pointing the commitsha after the AM64x=20
+specific tag is merged ,ie. e558080592d910783bf2f9ad46ed3b622f899155
+
+and SHA256SUM of AM64x of _firmware tar from
+https://git.ti.com/gitweb?p=3Dprocessor-sdk/coresdk_rtos_releases.git;a=3D=
+blob;f=3Dam64x/mcusdk_metadata.inc;h=3D643dc3ebb56e7d895d750a7885e4265d65=
+9953d5;hb=3De558080592d910783bf2f9ad46ed3b622f899155
+
+ie.: bc2d3d603ad30006ea3fefa3e777c26c19b95ee6d6f5a630259009f2f5a4996b
+
+>=20
+> Regards, Shiju
+>=20
+>=20
+> -----Original Message-----
+> From: Bajjuri, Praneeth
+> Sent: Saturday, March 13, 2021 8:11 AM
+> To: Denys Dmytriyenko <denis@denix.org>; Sivasankaran, Shiju <shiju@ti.=
+com>
+> Cc: meta-ti@lists.yoctoproject.org
+> Subject: Re: [meta-ti] [dunfell/next v2 PATCH] ti-rtos: update to uisng=
+ fw from mcu-plus-sdk for AM64x
+>=20
+>=20
+>=20
+> On 3/12/2021 5:07 PM, Denys Dmytriyenko wrote:
+>> On Thu, Mar 11, 2021 at 03:54:30PM +0530, Shiju Sivasankaran via lists=
+.yoctoproject.org wrote:
+>>> update ti-rtos-metadata and ti-rtos-firmware recipes of meta-ti to
+>>> pick AM64x rtos firmware from mcu-plus-sdk instead of PDK.
+>>>
+>>> Other devices such as AM65x, J7 continue to use fw from PDK.
+>>>
+>>> Built and tested both IPC echo test applications - "rpmsg_client_samp=
+le=E2=80=9D
+>>> & =E2=80=9Crpmsg_char_simple=E2=80=9D. Both tests passed for all remo=
+te R5F cores on
+>>> AM64x EVM
+>>>
+>>> Signed-off-by: Shiju Sivasankaran <shiju@ti.com>
+>>> ---
+>>> v2: rebased to dunfell-next
+>>> DEFAULT_FIRMWARE_SHA256SUM_am65xx updated
+>>
+>> Why are you updating am65xx when you said only am64xx is being
+>> switched from PDK to mcu-plus-sdk?
+>>
+>> Also, can you explain what is it and why it has to be the default for =
+am64x?
+>> Shouldn't CoreSDK Linux pick CoreSDK RTOS (i.e. PDK) components by def=
+ault?
+>>
+>> Thanks.
+>>
+>>
+>>>    recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 14 +++++++++-----
+>>>    recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb |  3 ++-
+>>>    2 files changed, 11 insertions(+), 6 deletions(-)
+>>>
+>>> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>>> b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>>> index 507d0000..c70fc50d 100644
+>>> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>>> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>>> @@ -11,17 +11,20 @@ INHIBIT_DEFAULT_DEPS =3D "1"
+>>>   =20
+>>>    inherit deploy
+>>>   =20
+>>> +DEFAULT_METADATA_FILE ?=3D "metadata.inc"
+>>> +DEFAULT_METADATA_FILE_am64xx ?=3D "mcusdk_metadata.inc"
+>>> +
+>>>    # First, let's try including metadata.inc that could be fetched an=
+d deployed
+>>>    # by ti-rtos-metadata earlier and provide new set of CORESDK_RTOS_=
+*
+>>> variables -include ${DEPLOY_DIR_IMAGE}/metadata.inc
+>>> +include ${DEPLOY_DIR_IMAGE}/${DEFAULT_METADATA_FILE}
+>>>   =20
+>>>    # Set some defaults for when metadata.inc is not available
+>>>    DEFAULT_RTOS_FAMILY =3D "jacinto"
+>>>    DEFAULT_RTOS_VERSION =3D "07_03_00_16"
+>>>    DEFAULT_RTOS_VERSION_DOT =3D "07.03.00.16"
+>>>   =20
+>>> -DEFAULT_RTOS_VERSION_am64xx =3D "07_03_01_06"
+>>> -DEFAULT_RTOS_VERSION_DOT_am64xx =3D "07.03.01.06"
+>>> +DEFAULT_RTOS_VERSION_am64xx =3D "07_03_00_03"
+>>> +DEFAULT_RTOS_VERSION_DOT_am64xx =3D "07.03.00.03"
+>>>   =20
+>>>    DEFAULT_RTOS_SOC =3D "undefined"
+>>>    DEFAULT_RTOS_SOC_j7 =3D "j721e"
+>>> @@ -36,6 +39,7 @@ DEFAULT_RTOS_WEBLINK_am65xx =3D "https://software-d=
+l.ti.com/processor-sdk-rtos/esd
+>>>    DEFAULT_RTOS_WEBLINK_am64xx =3D "https://software-dl.ti.com/proces=
+sor-sdk-rtos/esd/AM64X/firmware/${CORESDK_RTOS_VERSION}"
+>>>   =20
+>>>    DEFAULT_FIRMWARE_FILE =3D "coresdk_rtos_${CORESDK_RTOS_SOC}_${CORE=
+SDK_RTOS_VERSION}_firmware.tar.xz"
+>>> +DEFAULT_FIRMWARE_FILE_am64xx =3D "mcu_plus_sdk_${CORESDK_RTOS_SOC}_$=
+{CORESDK_RTOS_VERSION}_firmware.tar.xz"
+>>>   =20
+>>>    DEFAULT_FIRMWARE_URL =3D "file://empty"
+>>>    DEFAULT_FIRMWARE_URL_k3 =3D "${CORESDK_RTOS_WEBLINK}/${DEFAULT_FIR=
+MWARE_FILE}"
+>>> @@ -43,8 +47,8 @@ DEFAULT_FIRMWARE_URL_k3 =3D "${CORESDK_RTOS_WEBLINK=
+}/${DEFAULT_FIRMWARE_FILE}"
+>>>    DEFAULT_FIRMWARE_SHA256SUM =3D "unknown"
+>>>    DEFAULT_FIRMWARE_SHA256SUM_j7 =3D "78f3ab929a0f3c6e2907538061de82e=
+16d8aff7ffb2fac0c3c4d56df8abec3b0"
+>>>    DEFAULT_FIRMWARE_SHA256SUM_j7200-evm =3D "5bae696d35e206bbcd9b26ab=
+6508af59a2c2d72f9b89aa1d3fc1aa808f7a8615"
+>>> -DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "7bd854dbf96c25683d684ac731fde=
+3edd7fb8a65f8727f7aae3802a2e9a9cab6"
+>>> -DEFAULT_FIRMWARE_SHA256SUM_am64xx =3D "450bf23d659756695d62168fe06ee=
+be4641522293d89692a9eea837426bac0f9"
+>>> +DEFAULT_FIRMWARE_SHA256SUM_am65xx =3D "d3cffd472fdd17b000afcee806318=
+344e6033ac271ab3a6fa9ca8f432e8420c9"
+>=20
+> Shiju, Fix this ,
+>=20
+> AM65xx update doesnt make sense in this patch.
+>=20
+>=20
+>>> +DEFAULT_FIRMWARE_SHA256SUM_am64xx =3D "bc2d3d603ad30006ea3fefa3e777c=
+26c19b95ee6d6f5a630259009f2f5a4996b"
+>>>   =20
+>>>    # Use weak assignment for CORESDK_RTOS_* variables to use defaults=
+ if not yet set
+>>>    CORESDK_RTOS_FAMILY ?=3D "${DEFAULT_RTOS_FAMILY}"
+>>> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+>>> b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+>>> index 9bb0d3c5..466a22a8 100644
+>>> --- a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+>>> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+>>> @@ -18,10 +18,11 @@ PLAT_SFX_am64xx =3D "/am64x"
+>>>    # Use weak assignment to set defaults to TI_RTOS_METADATA_* variab=
+les
+>>>    TI_RTOS_METADATA_URI ?=3D "git://git.ti.com/processor-sdk/coresdk_=
+rtos_releases.git"
+>>>    TI_RTOS_METADATA_PROTOCOL ?=3D "git"
+>>> -TI_RTOS_METADATA_SRCREV ?=3D "ba81dc5a9342fc35435920092a0df2cb2ab342=
+ef"
+>>> +TI_RTOS_METADATA_SRCREV ?=3D "e558080592d910783bf2f9ad46ed3b622f8991=
+55"
+>>>    TI_RTOS_METADATA_BRANCH ?=3D "master"
+>>>    TI_RTOS_METADATA_DIR ?=3D "${PLAT_SFX}"
+>>>    TI_RTOS_METADATA_FILE ?=3D "${S}${TI_RTOS_METADATA_DIR}/metadata.i=
+nc"
+>>> +TI_RTOS_METADATA_FILE_am64xx ?=3D "${S}${TI_RTOS_METADATA_DIR}/mcusd=
+k_metadata.inc"
+>>>   =20
+>>>    PV =3D "1.0.0+git${SRCPV}"
+>>>   =20
+>>> --
+>>> 2.17.1
+>>>
+>>
