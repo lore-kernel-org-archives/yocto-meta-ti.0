@@ -1,60 +1,152 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2418.1615611149857872855
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web12.5146.1615789670591844858
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 12 Mar 2021 20:52:30 -0800
+ Sun, 14 Mar 2021 23:27:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D3E2740BEC
-	for <meta-ti@lists.yoctoproject.org>; Sat, 13 Mar 2021 04:52:28 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id P2KUa9wlUTMk for <meta-ti@lists.yoctoproject.org>;
-	Sat, 13 Mar 2021 04:52:28 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C24E940429
-	for <meta-ti@lists.yoctoproject.org>; Sat, 13 Mar 2021 04:52:28 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 1B053174540;
-	Fri, 12 Mar 2021 23:52:28 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denis@denix.org>
-Subject: [dunfell/master][PATCH] common-csl-ip-rtos: drop unnecessary dependency on ti-sysbios
-Date: Fri, 12 Mar 2021 23:52:27 -0500
-Message-Id: <1615611147-28437-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=MtdCJ9Gl;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: shiju@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12F6Rki2061017;
+	Mon, 15 Mar 2021 01:27:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1615789666;
+	bh=s6QveUoMbWqhiili6V7YU8glrMbxKLtLfqY2WY4vLrA=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=MtdCJ9Gl/zIX0aRKtT1GBE/viAQ93elsfFBQmDGz7NbMnPNbUyLz1TGccD81LE/bA
+	 Qkn3LqjOWj4iHXB5dC81sbh3MWtdeN7SBLCRICPAHXmok66NU7kwq8bjt9fWe/qnzi
+	 OZpCHBXeqdZHswfwNBDO2hoAmkTCbHPHeLMUxxG4=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12F6RkCl050970
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 15 Mar 2021 01:27:46 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 15
+ Mar 2021 01:27:46 -0500
+Received: from DFLE110.ent.ti.com ([fe80::c545:bde0:ab70:bae9]) by
+ DFLE110.ent.ti.com ([fe80::c545:bde0:ab70:bae9%19]) with mapi id
+ 15.01.2176.009; Mon, 15 Mar 2021 01:27:46 -0500
+From: "Shiju Sivasankaran" <shiju@ti.com>
+To: "Bajjuri, Praneeth" <praneeth@ti.com>, Denys Dmytriyenko <denis@denix.org>
+CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti] [dunfell/next v2 PATCH] ti-rtos: update to uisng fw from mcu-plus-sdk for AM64x
+Thread-Topic: [meta-ti] [dunfell/next v2 PATCH] ti-rtos: update to uisng fw
+ from mcu-plus-sdk for AM64x
+Thread-Index: AQHXF7JYKAFslBT3Fkm4qOhVjvoYMqqEZL0A
+Date: Mon, 15 Mar 2021 06:27:46 +0000
+Message-ID: <e54e9f57f827460e95d57d36533866b8@ti.com>
+References: <20210311102430.26263-1-shiju@ti.com>
+ <20210312230730.GD4892@denix.org>
+ <ed0c8702-1661-685e-5562-f6522b61a074@ti.com>
+In-Reply-To: <ed0c8702-1661-685e-5562-f6522b61a074@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.250.235.243]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+MIME-Version: 1.0
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-It appears common-csl-ip-rtos does not require ti-sysbios dependency to build,
-but ti-pdk.bbclass adds it by default. While most of PDK-based components do
-require ti-sysbios to be built from sources, it is safe to remove it from CSL,
-reducing the dependency tree for special cases like PRU FW based on CSL, but
-not needing ti-sysbios.
-
-This only affects firmwares built from sources against PDK and CSL, not when
-RTOS firmwares are delivered in binary form for newer K3 platforms.
-
-Build-tested on am335x, am57xx, k2g and am65xx.
-
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-index 98b2d13..6479d9f 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -7,6 +7,7 @@ COMPATIBLE_MACHINE_append = "|c66x|k3"
- inherit ti-pdk
- 
- DEPENDS_remove = "${PN}"
-+DEPENDS_remove = "ti-sysbios"
- 
- # Build with make instead of XDC
- TI_PDK_XDCMAKE = "0"
--- 
-2.7.4
-
+UHJhbmVldGgNClRvIHBpY2sgQU02NHggbWN1LXBsdXMtc2RrIEZXLCB3ZSBoYXZlIHBpbm5lZCBj
+b3Jlc2RrLXJ0b3MtcmVsZWFzZXMgcmVwbyB0byBhIGxhdGVzdCBjb21taXQgLSAiZTU1ODA4MDU5
+MmQ5MTA3ODNiZjJmOWFkNDZlZDNiNjIyZjg5OTE1NSINClRoZXJlIHdhcyBvbmUgbGF0ZXN0IGJ1
+aWxkIGhhcHBlbmVkIGZvciBBTTY1eCB1bmRlciBjb3Jlc2RrLXJ0b3MtcmVsZWFzZXMgcmVwbyBj
+b21taXQgLSAiZTU1ODA4MDU5MmQ5MTA3ODNiZjJmOWFkNDZlZDNiNjIyZjg5OTE1NSJhbmQgaGVu
+Y2UgdGhlIERFRkFVTFRfRklSTVdBUkVfU0hBMjU2U1VNX2FtNjV4eCBnb3QgdXBkYXRlZC4NCkZv
+ciBKNyBhbmQgajcyMDAtZXZtLCBubyBuZXcgcmVsZWFzZSBidWlsZHMgdHJpZ2dlcmVkIGJ5IFBE
+SyBhbmQgaGVuY2Ugbm8gY2hhbmdlcyBpbiByZXNwZWN0aXZlIFNIQTI1NlNVTQ0KDQpSZWdhcmRz
+LCBTaGlqdQ0KDQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBCYWpqdXJpLCBQ
+cmFuZWV0aCANClNlbnQ6IFNhdHVyZGF5LCBNYXJjaCAxMywgMjAyMSA4OjExIEFNDQpUbzogRGVu
+eXMgRG15dHJpeWVua28gPGRlbmlzQGRlbml4Lm9yZz47IFNpdmFzYW5rYXJhbiwgU2hpanUgPHNo
+aWp1QHRpLmNvbT4NCkNjOiBtZXRhLXRpQGxpc3RzLnlvY3RvcHJvamVjdC5vcmcNClN1YmplY3Q6
+IFJlOiBbbWV0YS10aV0gW2R1bmZlbGwvbmV4dCB2MiBQQVRDSF0gdGktcnRvczogdXBkYXRlIHRv
+IHVpc25nIGZ3IGZyb20gbWN1LXBsdXMtc2RrIGZvciBBTTY0eA0KDQoNCg0KT24gMy8xMi8yMDIx
+IDU6MDcgUE0sIERlbnlzIERteXRyaXllbmtvIHdyb3RlOg0KPiBPbiBUaHUsIE1hciAxMSwgMjAy
+MSBhdCAwMzo1NDozMFBNICswNTMwLCBTaGlqdSBTaXZhc2Fua2FyYW4gdmlhIGxpc3RzLnlvY3Rv
+cHJvamVjdC5vcmcgd3JvdGU6DQo+PiB1cGRhdGUgdGktcnRvcy1tZXRhZGF0YSBhbmQgdGktcnRv
+cy1maXJtd2FyZSByZWNpcGVzIG9mIG1ldGEtdGkgdG8gDQo+PiBwaWNrIEFNNjR4IHJ0b3MgZmly
+bXdhcmUgZnJvbSBtY3UtcGx1cy1zZGsgaW5zdGVhZCBvZiBQREsuDQo+Pg0KPj4gT3RoZXIgZGV2
+aWNlcyBzdWNoIGFzIEFNNjV4LCBKNyBjb250aW51ZSB0byB1c2UgZncgZnJvbSBQREsuDQo+Pg0K
+Pj4gQnVpbHQgYW5kIHRlc3RlZCBib3RoIElQQyBlY2hvIHRlc3QgYXBwbGljYXRpb25zIC0gInJw
+bXNnX2NsaWVudF9zYW1wbGXigJ0NCj4+ICYg4oCccnBtc2dfY2hhcl9zaW1wbGXigJ0uIEJvdGgg
+dGVzdHMgcGFzc2VkIGZvciBhbGwgcmVtb3RlIFI1RiBjb3JlcyBvbiANCj4+IEFNNjR4IEVWTQ0K
+Pj4NCj4+IFNpZ25lZC1vZmYtYnk6IFNoaWp1IFNpdmFzYW5rYXJhbiA8c2hpanVAdGkuY29tPg0K
+Pj4gLS0tDQo+PiB2MjogcmViYXNlZCB0byBkdW5mZWxsLW5leHQNCj4+IERFRkFVTFRfRklSTVdB
+UkVfU0hBMjU2U1VNX2FtNjV4eCB1cGRhdGVkDQo+IA0KPiBXaHkgYXJlIHlvdSB1cGRhdGluZyBh
+bTY1eHggd2hlbiB5b3Ugc2FpZCBvbmx5IGFtNjR4eCBpcyBiZWluZyANCj4gc3dpdGNoZWQgZnJv
+bSBQREsgdG8gbWN1LXBsdXMtc2RrPw0KPiANCj4gQWxzbywgY2FuIHlvdSBleHBsYWluIHdoYXQg
+aXMgaXQgYW5kIHdoeSBpdCBoYXMgdG8gYmUgdGhlIGRlZmF1bHQgZm9yIGFtNjR4Pw0KPiBTaG91
+bGRuJ3QgQ29yZVNESyBMaW51eCBwaWNrIENvcmVTREsgUlRPUyAoaS5lLiBQREspIGNvbXBvbmVu
+dHMgYnkgZGVmYXVsdD8NCj4gDQo+IFRoYW5rcy4NCj4gDQo+IA0KPj4gICByZWNpcGVzLXRpL3Rp
+LXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmIgfCAxNCArKysrKysrKystLS0tLQ0KPj4gICBy
+ZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtbWV0YWRhdGEuYmIgfCAgMyArKy0NCj4+ICAg
+MiBmaWxlcyBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQ0KPj4NCj4+
+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmIg
+DQo+PiBiL3JlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1maXJtd2FyZS5iYg0KPj4gaW5k
+ZXggNTA3ZDAwMDAuLmM3MGZjNTBkIDEwMDY0NA0KPj4gLS0tIGEvcmVjaXBlcy10aS90aS1ydG9z
+LWJpbi90aS1ydG9zLWZpcm13YXJlLmJiDQo+PiArKysgYi9yZWNpcGVzLXRpL3RpLXJ0b3MtYmlu
+L3RpLXJ0b3MtZmlybXdhcmUuYmINCj4+IEBAIC0xMSwxNyArMTEsMjAgQEAgSU5ISUJJVF9ERUZB
+VUxUX0RFUFMgPSAiMSINCj4+ICAgDQo+PiAgIGluaGVyaXQgZGVwbG95DQo+PiAgIA0KPj4gK0RF
+RkFVTFRfTUVUQURBVEFfRklMRSA/PSAibWV0YWRhdGEuaW5jIg0KPj4gK0RFRkFVTFRfTUVUQURB
+VEFfRklMRV9hbTY0eHggPz0gIm1jdXNka19tZXRhZGF0YS5pbmMiDQo+PiArDQo+PiAgICMgRmly
+c3QsIGxldCdzIHRyeSBpbmNsdWRpbmcgbWV0YWRhdGEuaW5jIHRoYXQgY291bGQgYmUgZmV0Y2hl
+ZCBhbmQgZGVwbG95ZWQNCj4+ICAgIyBieSB0aS1ydG9zLW1ldGFkYXRhIGVhcmxpZXIgYW5kIHBy
+b3ZpZGUgbmV3IHNldCBvZiBDT1JFU0RLX1JUT1NfKiANCj4+IHZhcmlhYmxlcyAtaW5jbHVkZSAk
+e0RFUExPWV9ESVJfSU1BR0V9L21ldGFkYXRhLmluYw0KPj4gK2luY2x1ZGUgJHtERVBMT1lfRElS
+X0lNQUdFfS8ke0RFRkFVTFRfTUVUQURBVEFfRklMRX0NCj4+ICAgDQo+PiAgICMgU2V0IHNvbWUg
+ZGVmYXVsdHMgZm9yIHdoZW4gbWV0YWRhdGEuaW5jIGlzIG5vdCBhdmFpbGFibGUNCj4+ICAgREVG
+QVVMVF9SVE9TX0ZBTUlMWSA9ICJqYWNpbnRvIg0KPj4gICBERUZBVUxUX1JUT1NfVkVSU0lPTiA9
+ICIwN18wM18wMF8xNiINCj4+ICAgREVGQVVMVF9SVE9TX1ZFUlNJT05fRE9UID0gIjA3LjAzLjAw
+LjE2Ig0KPj4gICANCj4+IC1ERUZBVUxUX1JUT1NfVkVSU0lPTl9hbTY0eHggPSAiMDdfMDNfMDFf
+MDYiDQo+PiAtREVGQVVMVF9SVE9TX1ZFUlNJT05fRE9UX2FtNjR4eCA9ICIwNy4wMy4wMS4wNiIN
+Cj4+ICtERUZBVUxUX1JUT1NfVkVSU0lPTl9hbTY0eHggPSAiMDdfMDNfMDBfMDMiDQo+PiArREVG
+QVVMVF9SVE9TX1ZFUlNJT05fRE9UX2FtNjR4eCA9ICIwNy4wMy4wMC4wMyINCj4+ICAgDQo+PiAg
+IERFRkFVTFRfUlRPU19TT0MgPSAidW5kZWZpbmVkIg0KPj4gICBERUZBVUxUX1JUT1NfU09DX2o3
+ID0gImo3MjFlIg0KPj4gQEAgLTM2LDYgKzM5LDcgQEAgREVGQVVMVF9SVE9TX1dFQkxJTktfYW02
+NXh4ID0gImh0dHBzOi8vc29mdHdhcmUtZGwudGkuY29tL3Byb2Nlc3Nvci1zZGstcnRvcy9lc2QN
+Cj4+ICAgREVGQVVMVF9SVE9TX1dFQkxJTktfYW02NHh4ID0gImh0dHBzOi8vc29mdHdhcmUtZGwu
+dGkuY29tL3Byb2Nlc3Nvci1zZGstcnRvcy9lc2QvQU02NFgvZmlybXdhcmUvJHtDT1JFU0RLX1JU
+T1NfVkVSU0lPTn0iDQo+PiAgIA0KPj4gICBERUZBVUxUX0ZJUk1XQVJFX0ZJTEUgPSAiY29yZXNk
+a19ydG9zXyR7Q09SRVNES19SVE9TX1NPQ31fJHtDT1JFU0RLX1JUT1NfVkVSU0lPTn1fZmlybXdh
+cmUudGFyLnh6Ig0KPj4gK0RFRkFVTFRfRklSTVdBUkVfRklMRV9hbTY0eHggPSAibWN1X3BsdXNf
+c2RrXyR7Q09SRVNES19SVE9TX1NPQ31fJHtDT1JFU0RLX1JUT1NfVkVSU0lPTn1fZmlybXdhcmUu
+dGFyLnh6Ig0KPj4gICANCj4+ICAgREVGQVVMVF9GSVJNV0FSRV9VUkwgPSAiZmlsZTovL2VtcHR5
+Ig0KPj4gICBERUZBVUxUX0ZJUk1XQVJFX1VSTF9rMyA9ICIke0NPUkVTREtfUlRPU19XRUJMSU5L
+fS8ke0RFRkFVTFRfRklSTVdBUkVfRklMRX0iDQo+PiBAQCAtNDMsOCArNDcsOCBAQCBERUZBVUxU
+X0ZJUk1XQVJFX1VSTF9rMyA9ICIke0NPUkVTREtfUlRPU19XRUJMSU5LfS8ke0RFRkFVTFRfRklS
+TVdBUkVfRklMRX0iDQo+PiAgIERFRkFVTFRfRklSTVdBUkVfU0hBMjU2U1VNID0gInVua25vd24i
+DQo+PiAgIERFRkFVTFRfRklSTVdBUkVfU0hBMjU2U1VNX2o3ID0gIjc4ZjNhYjkyOWEwZjNjNmUy
+OTA3NTM4MDYxZGU4MmUxNmQ4YWZmN2ZmYjJmYWMwYzNjNGQ1NmRmOGFiZWMzYjAiDQo+PiAgIERF
+RkFVTFRfRklSTVdBUkVfU0hBMjU2U1VNX2o3MjAwLWV2bSA9ICI1YmFlNjk2ZDM1ZTIwNmJiY2Q5
+YjI2YWI2NTA4YWY1OWEyYzJkNzJmOWI4OWFhMWQzZmMxYWE4MDhmN2E4NjE1Ig0KPj4gLURFRkFV
+TFRfRklSTVdBUkVfU0hBMjU2U1VNX2FtNjV4eCA9ICI3YmQ4NTRkYmY5NmMyNTY4M2Q2ODRhYzcz
+MWZkZTNlZGQ3ZmI4YTY1Zjg3MjdmN2FhZTM4MDJhMmU5YTljYWI2Ig0KPj4gLURFRkFVTFRfRklS
+TVdBUkVfU0hBMjU2U1VNX2FtNjR4eCA9ICI0NTBiZjIzZDY1OTc1NjY5NWQ2MjE2OGZlMDZlZWJl
+NDY0MTUyMjI5M2Q4OTY5MmE5ZWVhODM3NDI2YmFjMGY5Ig0KPj4gK0RFRkFVTFRfRklSTVdBUkVf
+U0hBMjU2U1VNX2FtNjV4eCA9ICJkM2NmZmQ0NzJmZGQxN2IwMDBhZmNlZTgwNjMxODM0NGU2MDMz
+YWMyNzFhYjNhNmZhOWNhOGY0MzJlODQyMGM5Ig0KDQpTaGlqdSwgRml4IHRoaXMgLA0KDQpBTTY1
+eHggdXBkYXRlIGRvZXNudCBtYWtlIHNlbnNlIGluIHRoaXMgcGF0Y2guDQoNCg0KPj4gK0RFRkFV
+TFRfRklSTVdBUkVfU0hBMjU2U1VNX2FtNjR4eCA9ICJiYzJkM2Q2MDNhZDMwMDA2ZWEzZmVmYTNl
+Nzc3YzI2YzE5Yjk1ZWU2ZDZmNWE2MzAyNTkwMDlmMmY1YTQ5OTZiIg0KPj4gICANCj4+ICAgIyBV
+c2Ugd2VhayBhc3NpZ25tZW50IGZvciBDT1JFU0RLX1JUT1NfKiB2YXJpYWJsZXMgdG8gdXNlIGRl
+ZmF1bHRzIGlmIG5vdCB5ZXQgc2V0DQo+PiAgIENPUkVTREtfUlRPU19GQU1JTFkgPz0gIiR7REVG
+QVVMVF9SVE9TX0ZBTUlMWX0iDQo+PiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy10aS90aS1ydG9zLWJp
+bi90aS1ydG9zLW1ldGFkYXRhLmJiIA0KPj4gYi9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0
+b3MtbWV0YWRhdGEuYmINCj4+IGluZGV4IDliYjBkM2M1Li40NjZhMjJhOCAxMDA2NDQNCj4+IC0t
+LSBhL3JlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1tZXRhZGF0YS5iYg0KPj4gKysrIGIv
+cmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLW1ldGFkYXRhLmJiDQo+PiBAQCAtMTgsMTAg
+KzE4LDExIEBAIFBMQVRfU0ZYX2FtNjR4eCA9ICIvYW02NHgiDQo+PiAgICMgVXNlIHdlYWsgYXNz
+aWdubWVudCB0byBzZXQgZGVmYXVsdHMgdG8gVElfUlRPU19NRVRBREFUQV8qIHZhcmlhYmxlcw0K
+Pj4gICBUSV9SVE9TX01FVEFEQVRBX1VSSSA/PSAiZ2l0Oi8vZ2l0LnRpLmNvbS9wcm9jZXNzb3It
+c2RrL2NvcmVzZGtfcnRvc19yZWxlYXNlcy5naXQiDQo+PiAgIFRJX1JUT1NfTUVUQURBVEFfUFJP
+VE9DT0wgPz0gImdpdCINCj4+IC1USV9SVE9TX01FVEFEQVRBX1NSQ1JFViA/PSAiYmE4MWRjNWE5
+MzQyZmMzNTQzNTkyMDA5MmEwZGYyY2IyYWIzNDJlZiINCj4+ICtUSV9SVE9TX01FVEFEQVRBX1NS
+Q1JFViA/PSAiZTU1ODA4MDU5MmQ5MTA3ODNiZjJmOWFkNDZlZDNiNjIyZjg5OTE1NSINCj4+ICAg
+VElfUlRPU19NRVRBREFUQV9CUkFOQ0ggPz0gIm1hc3RlciINCj4+ICAgVElfUlRPU19NRVRBREFU
+QV9ESVIgPz0gIiR7UExBVF9TRlh9Ig0KPj4gICBUSV9SVE9TX01FVEFEQVRBX0ZJTEUgPz0gIiR7
+U30ke1RJX1JUT1NfTUVUQURBVEFfRElSfS9tZXRhZGF0YS5pbmMiDQo+PiArVElfUlRPU19NRVRB
+REFUQV9GSUxFX2FtNjR4eCA/PSAiJHtTfSR7VElfUlRPU19NRVRBREFUQV9ESVJ9L21jdXNka19t
+ZXRhZGF0YS5pbmMiDQo+PiAgIA0KPj4gICBQViA9ICIxLjAuMCtnaXQke1NSQ1BWfSINCj4+ICAg
+DQo+PiAtLQ0KPj4gMi4xNy4xDQo+Pg0KPiANCg==
