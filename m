@@ -1,112 +1,109 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.811.1615919381817843716
+ by mx.groups.io with SMTP id smtpd.web12.816.1616002675807788128
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 16 Mar 2021 11:29:42 -0700
+ Wed, 17 Mar 2021 10:37:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=gzxBz1Yq;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nm@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 23C0F38C058A
-	for <meta-ti@yoctoproject.org>; Tue, 16 Mar 2021 18:29:40 +0000 (UTC)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12GITaYe003416;
-	Tue, 16 Mar 2021 13:29:36 -0500
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=uXfp0/6h;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: g-tammana@ti.com)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id CF4B538C0602
+	for <meta-ti@yoctoproject.org>; Wed, 17 Mar 2021 17:37:54 +0000 (UTC)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12HHbrDd100259
+	for <meta-ti@yoctoproject.org>; Wed, 17 Mar 2021 12:37:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1615919376;
-	bh=KT7D+l6lelM/3Eb9y02sb9sCgay+Ucc0sdWFr+Nj1UA=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=gzxBz1YqrNO8l0BM6Eep1aZ70jzTHMHOvopKAWV1k4KMmzSm5ckKibWynjeB5F//F
-	 SfuGE3LWhhr3BF0bBi1SX8LlhYTDf6pHbXS3c/H+TtDYUc4/FohDML1FfuEeid3GCW
-	 fn0dK7mjYvXPNQ9HMDoZdPsTpV/RbiJJ60Cd3Pbk=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12GITawX074083
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 16 Mar 2021 13:29:36 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 16
- Mar 2021 13:29:36 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1616002673;
+	bh=5pNtOk2tfJ5Spr2UwQuo5kgCTOnXWvE00/rNci7Brqc=;
+	h=From:To:CC:Subject:Date;
+	b=uXfp0/6hOz7L+iTkn01jd7IXlDgfdou43wy0KlVI4RZXO1ZXjSivc8LluE1aVM49Z
+	 v4AXFFhifHzxFZBz65Jyi+LLM2lb8ZlNw99VaJzXaKwR9scFFaZt7uMfTqVp+7CkMq
+	 vnCHPxnbynMYltke4gannqe5RqZhG7LA9XZnAI6o=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12HHbrSf126542
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Wed, 17 Mar 2021 12:37:53 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 17
+ Mar 2021 12:37:53 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 16 Mar 2021 13:29:36 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12GITaGj023880;
-	Tue, 16 Mar 2021 13:29:36 -0500
-Date: Tue, 16 Mar 2021 13:29:36 -0500
-From: "Nishanth Menon" <nm@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>, Saurabh Narang <saurabhnarang@ti.com>
-CC: <nikhil.nd@ti.com>, <meta-ti@yoctoproject.org>, <praneeth@ti.com>,
-        <lokeshvutla@ti.com>, <kishon@ti.com>, <nsekhar@ti.com>,
-        <hnagalla@ti.com>, <saurabhnarang@ti.com>
-Subject: Re: [meta-ti][dunfell PATCH v2] recipes-bsp: wl18xx-fw: update SRCREV to latest
-Message-ID: <20210316182936.r4xmdxps6mz7meyt@parched>
-References: <20210310161337.31072-1-nikhil.nd@ti.com>
- <20210310171144.GW4892@denix.org>
- <20210310172222.qkssgid2arel3aky@sapling>
- <20210312231143.GE4892@denix.org>
+ Frontend Transport; Wed, 17 Mar 2021 12:37:53 -0500
+Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12HHbr1g032045;
+	Wed, 17 Mar 2021 12:37:53 -0500
+Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.81.224] (may be forged))
+	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 12HHbrw7086483;
+	Wed, 17 Mar 2021 12:37:53 -0500
+From: "Gowtham Tammana" <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>
+CC: Praneeth Bajjuri <praneeth@ti.com>, Gowtham Tammana <g-tammana@ti.com>
+Subject: [meta-ti][dunfell/master][PATCH v2 1/2] ti-img-rogue-driver: Update driver to 1.13.5776728
+Date: Wed, 17 Mar 2021 12:37:51 -0500
+Message-ID: <20210317173752.17327-1-g-tammana@ti.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-In-Reply-To: <20210312231143.GE4892@denix.org>
-User-Agent: NeoMutt/20171215
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On 18:11-20210312, Denys Dmytriyenko wrote:
-> On Wed, Mar 10, 2021 at 11:22:22AM -0600, Nishanth Menon wrote:
-> > On 12:11-20210310, Denys Dmytriyenko wrote:
-> > > On Wed, Mar 10, 2021 at 09:43:37PM +0530, Nikhil Devshatwar via lists.yoctoproject.org wrote:
-> > > > Update the wl18xx firmware recipe to latest version 8.9.0.0.86
-> > > > 
-> > > > Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
-> > > 
-> > > Reviewed-by: Denys Dmytriyenko <denis@denix.org>
-> > > 
-> > > 
-> > > > ---
-> > > > 
-> > > > Notes:
-> > > >     Changes from v1:
-> > > >     * Update the version in the recipe filename
-> > > > 
-> > > >  .../wl18xx-fw/{wl18xx-fw_8.7.3.bb => wl18xx-fw_8.9.0.0.86.bb}  | 3 +--
-> > > >  1 file changed, 1 insertion(+), 2 deletions(-)
-> > > >  rename recipes-bsp/wl18xx-fw/{wl18xx-fw_8.7.3.bb => wl18xx-fw_8.9.0.0.86.bb} (86%)
-> > > > 
-> > > > diff --git a/recipes-bsp/wl18xx-fw/wl18xx-fw_8.7.3.bb b/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
-> > > > similarity index 86%
-> > > > rename from recipes-bsp/wl18xx-fw/wl18xx-fw_8.7.3.bb
-> > > > rename to recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
-> > > > index a52ec898..50b6c297 100644
-> > > > --- a/recipes-bsp/wl18xx-fw/wl18xx-fw_8.7.3.bb
-> > > > +++ b/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
-> > > > @@ -7,8 +7,7 @@ SRC_URI = " \
-> > > >  	file://0001-Add-Makefile-to-install-firmware-files.patch \
-> > > >  "
-> > 
-> > Just curious, is there a periodic upgrade plan in upstream [1] - last commit is
-> > [2] ?
-> 
-> Based on [3], I believe this is a question for Saurabh Narang <saurabhnarang@ti.com>
-> And would also like to hear the answer...
+Update the Rogue kernel driver sources to version 1.13.5776728.
 
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+v2: - no change here - v2 as part of patchset update
 
-Saurabh,
-	any suggestions?
-> 
-> 
-> > [1] https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/ti-connectivity
-> > [2] https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/commit/ti-connectivity/wl18xx-fw-4.bin?id=d5f9eea5a251d43412b07f5295d03e97b89ac4a5
-> 
-> [3] https://git.ti.com/cgit/wilink8-wlan/wl18xx_fw/log/
-> 
-> -- 
-> Regards,
-> Denys Dmytriyenko <denis@denix.org>
-> PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-> Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+ ....10.5371573.bb =3D> ti-img-rogue-driver_1.13.5776728.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename recipes-bsp/powervr-drivers/{ti-img-rogue-driver_1.10.5371573.bb =
+=3D> ti-img-rogue-driver_1.13.5776728.bb} (83%)
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573=
+.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+similarity index 83%
+rename from recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.=
+bb
+rename to recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+index e0632a18..db3901d2 100644
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.10.5371573.bb
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+@@ -1,13 +1,13 @@
+ DESCRIPTION =3D  "Kernel drivers for the PowerVR Rogue GPU found in the =
+TI SoCs"
+ HOMEPAGE =3D "http://git.ti.com/graphics/ti-img-rogue-driver"
+ LICENSE =3D "MIT | GPLv2"
+-LIC_FILES_CHKSUM =3D "file://README;beginline=3D15;endline=3D20;md5=3D04=
+03c7dea01a2b8232261e805325fac2"
++LIC_FILES_CHKSUM =3D "file://README;beginline=3D14;endline=3D19;md5=3D04=
+03c7dea01a2b8232261e805325fac2"
+=20
+ inherit module features_check
+=20
+ REQUIRED_MACHINE_FEATURES =3D "gpu"
+=20
+-MACHINE_KERNEL_PR_append =3D "g"
++MACHINE_KERNEL_PR_append =3D "a"
+ PR =3D "${MACHINE_KERNEL_PR}"
+=20
+ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+@@ -17,13 +17,13 @@ DEPENDS =3D "virtual/kernel"
+=20
+ PROVIDES =3D "virtual/gpudriver"
+=20
+-BRANCH =3D "linuxws/zeus/k5.4/${PV}"
++BRANCH =3D "1.13-5776728/linux-k5.4"
+=20
+ SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D=
+${BRANCH}"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+-SRCREV =3D "f58bea1084c5004f129943a53b94ee1446e9c3a7"
++SRCREV =3D "ea77784e89f919bd3343a421862bf90cb65cc26c"
+=20
+ PVR_SOC =3D "j721e_linux"
+ PVR_BVNC =3D "22.104.208.318"
+--=20
+2.31.0
+
