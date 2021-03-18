@@ -1,147 +1,78 @@
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
- by mx.groups.io with SMTP id smtpd.web11.10461.1616080403693898220
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.165.1616083666445370530
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Mar 2021 08:13:23 -0700
+ Thu, 18 Mar 2021 09:07:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=P/yHNZIJ;
- spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f172.google.com with SMTP id t4so2338769qkp.1
-        for <meta-ti@lists.yoctoproject.org>; Thu, 18 Mar 2021 08:13:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mry2kU2x;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id b184so3804671pfa.11
+        for <meta-ti@lists.yoctoproject.org>; Thu, 18 Mar 2021 09:07:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=WLO5Zre8dcOsL6ltQsZTz5f8ZBLgLSwdNvadaA1FI+E=;
-        b=P/yHNZIJUsr//eQuWDho1BATFPMLPt82eYo7sp2QTNkzHAo+Zl0tLAcPvxP4s5+2/g
-         LxMXO3keXAyBQYkxqJoazS+lq9QQbstuBVcCvUVzToAG7fPDhxEIaTWs/icO3nNUQs+J
-         DMZgK8TtgS6WcOuC+oG/lyanau1eUquZCNtaNO/0PaTLr7vOId4aqAqcuqKeQxFPsTz+
-         fpK1MlEVk7MnJF61DAvrcXEcDCYakpnaP/f/99Iz4MlxAi+8vQgSYE6p7XrzcRmlQGb5
-         VpuS3Hpe2PQe1tpQYZczay04aHYAgqCzGbEhukKB7prVtkxXnwxwpTaM+wyPhjRFK72/
-         PfIA==
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=aIg2czgBZIm/t05sWbHG987pQ/x7mrbdZRZT6agv0AI=;
+        b=mry2kU2xXMcgWbvCj0wxGC6llBBCVEiTf18zwFVaWQu/H/XmVixSJnSBHG6h1G6+pf
+         W/IY1/p5x43TuOMPXecfkS9+DyMN81J9hJTPcyoLfEfe/6v9K2B/E3sq9ChPUpZkH0RF
+         TuXYqQvvuNNw3eJfDdB+7z0DDnNEBtLq8HaShpjJUfbNuqK0pcFzR4hAGu6skD4IH/Xw
+         yg7H3fUTzpYuYef4OuvLR0IiWGH4dgIPvtVnRtmRYSVUpDrCHZMTEI9QhdbKScjY2N53
+         oxKJ6TqWBJ5YqAPY/Voe9wYrApOQsqlx7+xJabQabRdGB3rF1PjWmJ0+94UrxklF4RxO
+         5JDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=WLO5Zre8dcOsL6ltQsZTz5f8ZBLgLSwdNvadaA1FI+E=;
-        b=tERpjtpOX58mleVBmsh0GkgEURiYVNg/srjf5uML7zQGbwi2SZ1/RjemdMOH0uDayF
-         2nrxSASfxNGP6CYZfsdUnLAphCJSGzUv9dpFM47OBUI7s3K79Dj47WEZz+hy/xbkjFFV
-         V/rFO68eYjMBLlYxsv+3AILkENXhziL6vjKR8iM2jo65E0kUfRpAs6JzJVG4JXFczZ9y
-         erQhVjXr0rt5B3xCKjsCcX1/JWx/rE8c9uEkTihunFNStE/d08Oa9sfzwmkecl7b9bCN
-         9+LANfEieKBxUWIf2N6lGc1oqRVWbLV2+UZxnSh7rx7b1bQl+ryFNOrjNkAfLO7Oqugi
-         LK0w==
-X-Gm-Message-State: AOAM533iy9LZCGTnGVDQw20C6Y+geUoFWpVRLnOIxmp03m0CuYS2C0+d
-	d/0ROj/5HD7ljfzrks65uY8xzXCGFMGSl6XiDi4=
-X-Google-Smtp-Source: ABdhPJwDYy2NF6ICUpT2J19+x3fIxNrEpW+Kz9LtgCBuhq53nipiXi/e9Y70HtuTufQHye5y+im+mta2c/GXj9MSOZo=
-X-Received: by 2002:a37:a350:: with SMTP id m77mr4716541qke.146.1616080402500;
- Thu, 18 Mar 2021 08:13:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAMKF1soh-om+Qwh8J4YNpCa4Hv+SUgwUcRzHGvxcrBYyPB0Row@mail.gmail.com>
- <CAGNsrLCSOpGgFi5dip3KwM6=hWw6yhnUdVMCMxBiZMGZVDYoEQ@mail.gmail.com>
-In-Reply-To: <CAGNsrLCSOpGgFi5dip3KwM6=hWw6yhnUdVMCMxBiZMGZVDYoEQ@mail.gmail.com>
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=aIg2czgBZIm/t05sWbHG987pQ/x7mrbdZRZT6agv0AI=;
+        b=ghCsA3sojH5+oudmo/gzl8WZWYxh8axQZOzNSKWTENRbyHV2Tic0dG+qHTf1TfeZjR
+         x8w3dM0WpPot/+K984LdEf4DPY/2WRn9WnQdEs/L8geYiNqwql7oTllTkcqe7PFebBFi
+         5rM7n1O9aRt3GvISBF5NH01Ds6/T6G5KbgpDY95QrgGhl/HLz6xRZKeV6ns6/z7XyqC1
+         IUy0/2MDiSwJMIwO3rXK2dEm8AR4ZGFLlAG/Jf59XfjMn2Dt+prZC2i80WAFOzx6Cndi
+         /AYxXREq5dzOu5wEppcwIhJik3ISvkdq04l+6UjV/u8jHJWDghkBY4CLkjLLux40AG5q
+         wrFA==
+X-Gm-Message-State: AOAM533ooxTrxTeFILXN0DSPZPkh7sU4ayBgjJw6hclDzpKnu9i3p2rV
+	m04Y+AVsDeu45pslhcwcLvw=
+X-Google-Smtp-Source: ABdhPJxbXUrlMV0+yLNDgAmD2pka74uYo5ydrEAOzG6rE5hh1E+WiR85timQSdNpGYLfsdFoXeUx9w==
+X-Received: by 2002:a65:4887:: with SMTP id n7mr7555168pgs.14.1616083665443;
+        Thu, 18 Mar 2021 09:07:45 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.localdomain ([2601:646:9200:a0f0::b117])
+        by smtp.gmail.com with ESMTPSA id 4sm2630347pgh.71.2021.03.18.09.07.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 18 Mar 2021 09:07:44 -0700 (PDT)
+Date: Thu, 18 Mar 2021 09:07:43 -0700
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 18 Mar 2021 08:13:11 -0700
-Message-ID: <CAMKF1sry-SkFdZA9A+jTsBzHAkBnSh0O=3U6T4pRoyncWcDZDA@mail.gmail.com>
-Subject: Re: uim-sysfs duplicate recipes
-To: Fathi Boudra <fathi.boudra@linaro.org>
+To: Denys Dmytriyenko <denis@denix.org>
 Cc: meta-ti@lists.yoctoproject.org
-Content-Type: multipart/alternative; boundary="00000000000051ce1705bdd10a76"
+Subject: Re: doxygen recipe duplicate in meta-ti
+Message-ID: <20210318160743.2uwesxr4rjgl3efl@apollo.localdomain>
+References: <CAMKF1som3yQ-6B7yzvdv-hHCyJF9h1VxnUoY0oTLpLfMdjYuKg@mail.gmail.com>
+ <20210318070847.GV18041@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20210318070847.GV18041@denix.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---00000000000051ce1705bdd10a76
-Content-Type: text/plain; charset="UTF-8"
-
-On Thu, Mar 18, 2021 at 12:51 AM Fathi Boudra <fathi.boudra@linaro.org>
-wrote:
-
-> Hi,
->
-> On Thu, 18 Mar 2021 at 06:43, Khem Raj <raj.khem@gmail.com> wrote:
-> >
+On Thu, Mar 18, 2021 at 03:08:47AM -0400, Denys Dmytriyenko wrote:
+> On Wed, Mar 17, 2021 at 10:55:30PM -0700, Khem Raj wrote:
 > > Hi
-> >
-> > uim-sysfs seems to be copied into several layers as seen here
-> >
-> >
-> http://layers.openembedded.org/layerindex/branch/master/recipes/?q=uim-sysfs
-> >
-> > I wonder if this should be consolidated into one common place ?
-> > perhaps meta-oe or somesuch
-> > layer.
-> >
-> > If not, which one should be used when both meta-ti and meta-96boards
-> > layers are used in
-> > a distro ?
->
-> meta-96boards uim was modified for the hikey board and should be
-> considered as a fork.
-> I'll need to check the specifics and if it can use the upstream recipe
-> nowadays.
->
-> Wrt if you use meta-96boards/meta-ti, then you should prefer
-> meta-96boards for the hikey machine. Otherwise, prefer meta-ti.
->
+> > 
+> > I am seeing this
+> > 
+> > doxygen:
+> >   meta-oe              1.8.20
+> >   meta-ti              1.8.9.1
+> > 
+> > And meta-ti wins because it has higher layer priority, which is not a good thing
+> > can we use the version from meta-oe and delete it from meta-ti ?
+> 
+> I would hate meta-ti to depend on meta-oe, which is rather backwards. I with 
+> doxygen was part of oe-core...
+> 
+> On the other hand, usage of doxygen in meta-ti is not that critical and may 
+> get reduced even further soon.
 
-Ok in that case perhaps it should be marked with proper compatible_machine
-to avoid collision
+sure, I think it would be good to have it in OE-core, would you mind proposing it for oe-core ?
 
-
-> > Thanks
-> > -Khem
->
-> Cheers,
-> --
-> Fathi Boudra
-> Linaro.org | Open source software for ARM SoCs
->
-
---00000000000051ce1705bdd10a76
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Thu, Mar 18, 2021 at 12:51 AM Fathi Boudra &lt;<a href=
-=3D"mailto:fathi.boudra@linaro.org">fathi.boudra@linaro.org</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;borde=
-r-left:1px #ccc solid;padding-left:1ex">Hi,<br>
-<br>
-On Thu, 18 Mar 2021 at 06:43, Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail=
-.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Hi<br>
-&gt;<br>
-&gt; uim-sysfs seems to be copied into several layers as seen here<br>
-&gt;<br>
-&gt; <a href=3D"http://layers.openembedded.org/layerindex/branch/master/rec=
-ipes/?q=3Duim-sysfs" rel=3D"noreferrer" target=3D"_blank">http://layers.ope=
-nembedded.org/layerindex/branch/master/recipes/?q=3Duim-sysfs</a><br>
-&gt;<br>
-&gt; I wonder if this should be consolidated into one common place ?<br>
-&gt; perhaps meta-oe or somesuch<br>
-&gt; layer.<br>
-&gt;<br>
-&gt; If not, which one should be used when both meta-ti and meta-96boards<b=
-r>
-&gt; layers are used in<br>
-&gt; a distro ?<br>
-<br>
-meta-96boards uim was modified for the hikey board and should be<br>
-considered as a fork.<br>
-I&#39;ll need to check the specifics and if it can use the upstream recipe =
-nowadays.<br>
-<br>
-Wrt if you use meta-96boards/meta-ti, then you should prefer<br>
-meta-96boards for the hikey machine. Otherwise, prefer meta-ti.<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Ok in that case =
-perhaps it should be marked with proper compatible_machine to avoid collisi=
-on=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote"=
- style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><b=
-r>
-&gt; Thanks<br>
-&gt; -Khem<br>
-<br>
-Cheers,<br>
--- <br>
-Fathi Boudra<br>
-Linaro.org | Open source software for ARM SoCs<br>
-</blockquote></div></div>
-
---00000000000051ce1705bdd10a76--
+> 
+> -- 
+> Denys
