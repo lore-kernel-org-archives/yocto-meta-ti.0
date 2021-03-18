@@ -1,72 +1,52 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.5455.1616048301698189103
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.5729.1616051329227013032
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 17 Mar 2021 23:18:21 -0700
+ Thu, 18 Mar 2021 00:08:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fUHLrlFk;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id q11so760106pld.11
-        for <meta-ti@lists.yoctoproject.org>; Wed, 17 Mar 2021 23:18:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VRZGtT5bsBWqsL2vbswNC8y37RpQDqiUxf7O7qun1Gg=;
-        b=fUHLrlFk30hKwgxtRcyyENUi+JMDB+HWUMfTfhfQX57SOBTNYWpmjQpityonh2WmbI
-         Z54pkunNTXc9bkP9wVawVXXzk2ow7bRwzUmOb3fBT5vz9e94s8AWlMmQxhKpLwZfZCkD
-         e4OwpXKbqVSON91ry8euKxzAcdtLDsUHbmw0PkNkvcm8RUIW4mzQUa7Z4SCGUDljOA1k
-         bxbfQ5WG1n3wAR9aX/JN2xeoxDEGlNe1WLRqr6JS2LMx9NxGJkVO++kSrbcE0aRrG/vE
-         lqPdQ6KmHEUdScS6UafKNqTxZx+5Oqf7rvO//uBFtMYoyO9mnuzoaAWa07NGaIglDWtI
-         ZtHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VRZGtT5bsBWqsL2vbswNC8y37RpQDqiUxf7O7qun1Gg=;
-        b=XinT6PcW1KulqJvJzjCDDaPhE8cSDpXCyEWOCPfHYX4k6IqtNaOtWaAVUhfb8C0bvb
-         XhBU9IwbdSvIlk36zEKsg9Uo2pviMRPubH5eHYc9hqI8sO81Y46jD/tyJQIiRp35RTfp
-         +V+DEIstbEZAZHeQ5sdc3Ui6H6CFcYxGWqnsoYf1fbCO81PUdPtseUMeLTVGz7SBzMgx
-         Kw0j6j65hvNpPv1mkBm0nHKdN1aXQQx/t+RkG+l2ejwKKWdeYW2iFkIFeAMdRmDrZLVm
-         WiXKfSlOrb0xSTHjDHtIMfvQFLg//C+d5Bj6vMDCqqRLzNYWUhXuI4Yzbtb3nn0u5/k+
-         ZnhQ==
-X-Gm-Message-State: AOAM532xMPtKHkiCfDQlkL2NEqTOqpBrG9mDPv4vT/SfPElXuCkuCuRA
-	m6kWGfX3qFc7wP1Ul/9VIOugzDXxBS++og==
-X-Google-Smtp-Source: ABdhPJz4XMk1JUzzVZb3UYhkQSI9k8FOTGLNINizfpHsUhds9IKDOVNYBuvZrYhGq6PFQphzwLg4Ow==
-X-Received: by 2002:a17:902:b94b:b029:e6:819f:2d80 with SMTP id h11-20020a170902b94bb02900e6819f2d80mr8093725pls.30.1616048301014;
-        Wed, 17 Mar 2021 23:18:21 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id b3sm1012722pjg.41.2021.03.17.23.18.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Mar 2021 23:18:20 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] layer.conf: add hardknott to compatible release branches
-Date: Wed, 17 Mar 2021 23:18:16 -0700
-Message-Id: <20210318061816.1562693-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.0
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8997A40BE9;
+	Thu, 18 Mar 2021 07:08:48 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7tiXfuANFo5A; Thu, 18 Mar 2021 07:08:48 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6F84340BA7;
+	Thu, 18 Mar 2021 07:08:47 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 2ED2F174553; Thu, 18 Mar 2021 03:08:47 -0400 (EDT)
+Date: Thu, 18 Mar 2021 03:08:47 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: doxygen recipe duplicate in meta-ti
+Message-ID: <20210318070847.GV18041@denix.org>
+References: <CAMKF1som3yQ-6B7yzvdv-hHCyJF9h1VxnUoY0oTLpLfMdjYuKg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMKF1som3yQ-6B7yzvdv-hHCyJF9h1VxnUoY0oTLpLfMdjYuKg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Mar 17, 2021 at 10:55:30PM -0700, Khem Raj wrote:
+> Hi
+> 
+> I am seeing this
+> 
+> doxygen:
+>   meta-oe              1.8.20
+>   meta-ti              1.8.9.1
+> 
+> And meta-ti wins because it has higher layer priority, which is not a good thing
+> can we use the version from meta-oe and delete it from meta-ti ?
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 2393e61a..6fb214c6 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -8,7 +8,7 @@ BBFILE_COLLECTIONS += "meta-ti"
- BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti = "6"
- 
--LAYERSERIES_COMPAT_meta-ti = "sumo thud warrior zeus dunfell gatesgarth"
-+LAYERSERIES_COMPAT_meta-ti = "sumo thud warrior zeus dunfell gatesgarth hardknott"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
+I would hate meta-ti to depend on meta-oe, which is rather backwards. I with 
+doxygen was part of oe-core...
+
+On the other hand, usage of doxygen in meta-ti is not that critical and may 
+get reduced even further soon.
+
 -- 
-2.31.0
-
+Denys
