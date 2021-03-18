@@ -1,92 +1,77 @@
-Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web12.817.1616002675807905211
- for <meta-ti@lists.yoctoproject.org>;
- Wed, 17 Mar 2021 10:37:56 -0700
-Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=MXuloa6I;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: g-tammana@ti.com)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 0BA1838C065B
-	for <meta-ti@yoctoproject.org>; Wed, 17 Mar 2021 17:37:55 +0000 (UTC)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12HHbsvc100263
-	for <meta-ti@yoctoproject.org>; Wed, 17 Mar 2021 12:37:54 -0500
+ by mx.groups.io with SMTP id smtpd.web08.2469.1616026950049450452
+ for <meta-ti@lists.yoctoproject.org>;
+ Wed, 17 Mar 2021 17:22:30 -0700
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Wq2OB6Wj;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12I0MS6w122864;
+	Wed, 17 Mar 2021 19:22:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1616002674;
-	bh=arXI+xrxG27u0ThuGgKPS2DPIOj1z3EtuTHeWE0omK0=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=MXuloa6ItMtmIh5bvXNbScRjBtVJ97aZmntnVvJHsIGusDEybwr/PolI83QvQkCon
-	 J5XRdyx/kokiUIuibg+1BfLpbmCsiImP7CXmTO8odcBcCDAxdY3jnaWzAMh9DtuUvm
-	 P6F01+dYGHCh5xQqwvRv6oU6t4VElaebjtV2uktE=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12HHbs3W126545
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Wed, 17 Mar 2021 12:37:54 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1616026948;
+	bh=Sd862ouQRuBc8jWp/8XKaGHjQiDn6YH/Eo0mRs/2I98=;
+	h=From:To:CC:Subject:Date;
+	b=Wq2OB6Wjyz6tZNkH/17/xDvKKpZ3Nv2toGXn5VbxbTQpANiYYwSBGV5+bU5ii0uLO
+	 ueZCd11nZVAgk+g6dt9TkrUZIfjbZhE9voRKRZvejl+P+zm7VkNTfM5qhPo2ogeEGG
+	 xt/m3epEqI41J93oTKAfmzFjjY2CzfP2nO8zYFMQ=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12I0MS0v006117
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 17 Mar 2021 19:22:28 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 17
- Mar 2021 12:37:54 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2021 19:22:28 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Wed, 17 Mar 2021 12:37:54 -0500
-Received: from fllv0103.dal.design.ti.com (fllv0103.dal.design.ti.com [10.247.120.73])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12HHbso0022256;
-	Wed, 17 Mar 2021 12:37:54 -0500
-Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.81.224] (may be forged))
-	by fllv0103.dal.design.ti.com (8.14.7/8.14.7) with ESMTP id 12HHbrw8086483;
-	Wed, 17 Mar 2021 12:37:54 -0500
-From: "Gowtham Tammana" <g-tammana@ti.com>
-To: <meta-ti@yoctoproject.org>
-CC: Praneeth Bajjuri <praneeth@ti.com>, Gowtham Tammana <g-tammana@ti.com>
-Subject: [meta-ti][dunfell/master][PATCH v2 2/2] ti-img-rogue-umlibs: Update artifacts to 1.13.5776728
-Date: Wed, 17 Mar 2021 12:37:52 -0500
-Message-ID: <20210317173752.17327-2-g-tammana@ti.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20210317173752.17327-1-g-tammana@ti.com>
-References: <20210317173752.17327-1-g-tammana@ti.com>
+ Frontend Transport; Wed, 17 Mar 2021 19:22:28 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12I0MSfZ117617;
+	Wed, 17 Mar 2021 19:22:28 -0500
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, <denys@konsulko.com>
+Subject: [dunfell/master PATCH] ti-sci-fw: Update image gen and sysfw to v2021.01a
+Date: Wed, 17 Mar 2021 19:22:28 -0500
+Message-ID: <20210318002228.31109-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
 
-Update GLES binary artifacts to latest version 1.13.5776728.
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+Update the image gen and linux-firmware commit SHAs so that
+we pick v2021.01a sysfw and the applicable
+DM update with following version
+* 07.03.00.21 for J721E and J7200
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
-v2: update to srcrev to fix broken symlinks
-
- ..._1.10.5371573.bb =3D> ti-img-rogue-umlibs_1.13.5776728.bb} | 6 +++---
+ recipes-bsp/ti-sci-fw/ti-sci-fw.inc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename recipes-graphics/libgles/{ti-img-rogue-umlibs_1.10.5371573.bb =3D=
-> ti-img-rogue-umlibs_1.13.5776728.bb} (95%)
 
-diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb=
- b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
-similarity index 95%
-rename from recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-rename to recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
-index f9d5ed9c..d8fae3dd 100644
---- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.10.5371573.bb
-+++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
-@@ -10,13 +10,13 @@ REQUIRED_MACHINE_FEATURES =3D "gpu"
- PACKAGE_ARCH =3D "${MACHINE_ARCH}"
- COMPATIBLE_MACHINE =3D "j7"
-=20
--PR =3D "r9"
-+PR =3D "r1"
-=20
--BRANCH =3D "linuxws/zeus/k5.4/${PV}"
-+BRANCH =3D "linuxws/dunfell/k5.4/${PV}"
-=20
- SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=3D=
-${BRANCH}"
-=20
--SRCREV =3D "8d3d1891186ed3f397bb90f4f8c518c6c9970479"
-+SRCREV =3D "3c4cabc8df10a066569e5f959cbbd4c0ce9961cd"
-=20
- PVR_SOC ?=3D "j721e_linux"
- PVR_BUILD ?=3D "release"
---=20
-2.31.0
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+index 108f7133..50eb1f7e 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+@@ -3,11 +3,11 @@ SUMMARY = "TI SCI firmware (SYSFW)"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+ 
+-PV = "2021.01"
++PV = "2021.01a"
+ 
+-SRCREV = "b7e5d159fd4a5b03a02c8f4b8eb32bad2addf4f5"
++SRCREV = "306e8b92bcce0fe88b494732c0a614079f8ff73a"
+ BRANCH ?= "ti-linux-firmware"
+-SRCREV_imggen = "3cd998ff043adf70a50f63115ca1888c62802511"
++SRCREV_imggen = "c376cd495b9821b6e3cb296b1bbae10d0f010817"
+ SRCREV_FORMAT = "imggen"
+ 
+ SRC_URI = " \
+-- 
+2.17.1
 
