@@ -1,75 +1,75 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.1466.1616194992820222621
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.1366.1616429238448257492
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 19 Mar 2021 16:03:13 -0700
+ Mon, 22 Mar 2021 09:07:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4FC8D40BA9;
-	Fri, 19 Mar 2021 23:03:11 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ltA26M1fGod6; Fri, 19 Mar 2021 23:03:11 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 34E8E409E0;
-	Fri, 19 Mar 2021 23:03:10 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 80D3F174558; Fri, 19 Mar 2021 19:03:09 -0400 (EDT)
-Date: Fri, 19 Mar 2021 19:03:09 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: "Bajjuri, Praneeth" <praneeth@ti.com>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [master][PATCH] layer.conf: add hardknott to compatible release branches
-Message-ID: <20210319230309.GF18041@denix.org>
-References: <166DD7328409F7DB.26345@lists.yoctoproject.org>
- <20210319203112.GE18041@denix.org>
- <e9f6187c-9a07-3331-a0e0-4485ec779990@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=OAOHppy3;
+ spf=none, err=permanent DNS error (domain: swubn03, ip: 198.47.19.141, mailfrom: a0221627@swubn03)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12MG7H7q048512
+	for <meta-ti@lists.yoctoproject.org>; Mon, 22 Mar 2021 11:07:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1616429237;
+	bh=H4YBW7ZNVXX3uax2hU0luG7keVl4osk7ikcBvpQfwpA=;
+	h=From:To:CC:Subject:Date;
+	b=OAOHppy3fhtRKrnY6+3n0kIbtd/peuUZLXB4h7K95mzvQn5omxRUrNY3f48EZOqZJ
+	 jeyC07dKny7gW4qeR4sfGy0cRaAtVrM6a4ynW4Kk4ZU2MHTWu+tpHV+DRXPDBVddoh
+	 gQZRnT5Tw4K8QqSjgJKkeUTS3orN3YqjL2jGIBf4=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12MG7H8l102709
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Mon, 22 Mar 2021 11:07:17 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 22
+ Mar 2021 11:07:16 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Mon, 22 Mar 2021 11:07:16 -0500
+Received: from swubn03 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12MG7FJb057075;
+	Mon, 22 Mar 2021 11:07:16 -0500
+Received: from a0221627 by swubn03 with local (Exim 4.90_1)
+	(envelope-from <a0221627@swubn03>)
+	id 1lON5H-0000yR-6K; Mon, 22 Mar 2021 21:37:15 +0530
+From: l-weaver@ti.com
+To: <meta-ti@lists.yoctoproject.org>
+CC: <nikhil.nd@ti.com>, <praneeth@ti.com>, Lucas Weaver <l-weaver@ti.com>
+Subject: [meta-ti][dunfell/master][PATCH v2] ti-sci-fw: Update J7200 deploy to install ti-sci-fw
+Date: Mon, 22 Mar 2021 21:37:06 +0530
+Message-ID: <20210322160706.3304-1-l-weaver@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <e9f6187c-9a07-3331-a0e0-4485ec779990@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Fri, Mar 19, 2021 at 05:58:26PM -0500, Bajjuri, Praneeth wrote:
-> 
-> 
-> On 3/19/2021 3:31 PM, Denys Dmytriyenko wrote:
-> >Praneeth,
-> >
-> >When merging, please make sure the correct patch goes to correct branch,
-> >as indicated in the subject tag - this one is for master and the other
-> >for dunfell. Best time to merge them is when you don't have anything
-> >pending in -next. So, instead of cherry-picking between branches, just
-> >merge different patches. Thanks!
-> >
-> 
-> sounds good. done . merged to master and dunfell the seperate patches.
+From: Lucas Weaver <l-weaver@ti.com>
 
-Thanks!
+The J7200 ti-sci-fw needs to be installed in the deploy
+directory so that it can be packaged in Processor SDK bundle
 
+This is required because the ti-sci-fw is needed in the
+installer prebuilt-images in order to build the combined boot
+image for J7200
 
-> >On Fri, Mar 19, 2021 at 04:07:19PM -0400, Denys Dmytriyenko wrote:
-> >>From: Denys Dmytriyenko <denys@konsulko.com>
-> >>
-> >>While at it, remove old releases before dunfell.
-> >>
-> >>Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >>Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> >>---
-> >>  conf/layer.conf | 2 +-
-> >>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >>diff --git a/conf/layer.conf b/conf/layer.conf
-> >>index 2393e61..3bed9fc 100644
-> >>--- a/conf/layer.conf
-> >>+++ b/conf/layer.conf
-> >>@@ -8,7 +8,7 @@ BBFILE_COLLECTIONS += "meta-ti"
-> >>  BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
-> >>  BBFILE_PRIORITY_meta-ti = "6"
-> >>-LAYERSERIES_COMPAT_meta-ti = "sumo thud warrior zeus dunfell gatesgarth"
-> >>+LAYERSERIES_COMPAT_meta-ti = "dunfell gatesgarth hardknott"
-> >>  LICENSE_PATH += "${LAYERDIR}/licenses"
-> >>-- 
-> >>2.7.4
+Signed-off-by: Lucas Weaver <l-weaver@ti.com>
+---
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index e7580a57..25fac359 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -99,6 +99,7 @@ do_deploy_j7200-evm-k3r5() {
+ 	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
+ 	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
+ 	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
++	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
+ }
+ 
+ do_install_am64xx-evm-k3r5() {
+-- 
+2.17.1
+
