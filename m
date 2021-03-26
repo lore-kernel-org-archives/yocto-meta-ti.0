@@ -1,174 +1,123 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web08.8297.1616733866505157707
+ by mx.groups.io with SMTP id smtpd.web11.9264.1616743064177996881
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 25 Mar 2021 21:44:26 -0700
+ Fri, 26 Mar 2021 00:17:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Zbaq12Fu;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12Q4iLe9032467;
-	Thu, 25 Mar 2021 23:44:21 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ksh2tDlC;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: shiju@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12Q7HhFR092751
+	for <meta-ti@lists.yoctoproject.org>; Fri, 26 Mar 2021 02:17:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1616733861;
-	bh=Gu/PbiYLALSx/Mt2Df1eu28UkzJAVbY3oyhMZZ+Sveg=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=Zbaq12FuRh0OBuMY6Hg60Z2Mu5yAVH/TwM4c9xX/PYrZjraqMQOgXn/RjsDYz6xtq
-	 YGUMso6Kk2W3MEhOERLM7tS67tKNZJEf52aPSQqhsNqc+DX5BfmTBPGeAjrFBJN5Kx
-	 t+mNwWjq0h71RYoDv1+2CEr0GGU/M3CMcqYlPf14=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12Q4iL87063615
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 25 Mar 2021 23:44:21 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 25
- Mar 2021 23:44:21 -0500
-Received: from DLEE110.ent.ti.com ([fe80::546b:3e96:e947:ccce]) by
- DLEE110.ent.ti.com ([fe80::546b:3e96:e947:ccce%20]) with mapi id
- 15.01.2176.009; Thu, 25 Mar 2021 23:44:21 -0500
-From: "praneeth" <praneeth@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: "Menon, Nishanth" <nm@ti.com>,
-        "meta-ti@lists.yoctoproject.org"
-	<meta-ti@lists.yoctoproject.org>,
-        "denys@konsulko.com" <denys@konsulko.com>
-Subject: Re: [meta-ti] [dunfell/master PATCH v2] trusted-firmware-a: am64xx: fix target board name
-Thread-Topic: [meta-ti] [dunfell/master PATCH v2] trusted-firmware-a: am64xx:
- fix target board name
-Thread-Index: AQHXIfGq9nLo8eSGbk2Uly/weoWAtKqV+A2A//+5bwQ=
-Date: Fri, 26 Mar 2021 04:44:21 +0000
-Message-ID: <8b436673-31cb-4e88-bda8-acc7ff4c14bd@email.android.com>
-References: <20210326033945.15324-1-praneeth@ti.com>,<20210326035655.GU18041@denix.org>
-In-Reply-To: <20210326035655.GU18041@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	s=ti-com-17Q1; t=1616743063;
+	bh=qThVNiFq9NU2zwol6eOdq5/V6qgxH/VHn8VyFb5YGtY=;
+	h=From:To:CC:Subject:Date;
+	b=ksh2tDlCbTW0LcHvsYkjBrIC6Lc+CaAaeKe2DK7VFuiqKN/RyBuebILOhOLJDKjCI
+	 eF13G54I+KRmfjnfvP1o/zIwkWfPzwUXm3Wxkanh5ueZVpu3SIYmQQVJ00z3EeBbHQ
+	 tOGZseVoOYOGa7GgeZlIZ++LxB+75xahLmLwEjFo=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12Q7HhWO015802
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Fri, 26 Mar 2021 02:17:43 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Fri, 26
+ Mar 2021 02:17:42 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Fri, 26 Mar 2021 02:17:42 -0500
+Received: from uda0756868.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12Q7Hfcq077458;
+	Fri, 26 Mar 2021 02:17:41 -0500
+From: "Shiju Sivasankaran" <shiju@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: Praneeth Bajjuri <praneeth@ti.com>, Shiju Sivasankaran <shiju@ti.com>
+Subject: [dunfell/master PATCH] ti-rtos: update metadata and version of am64x rtos firmware
+Date: Fri, 26 Mar 2021 12:47:32 +0530
+Message-ID: <20210326071732.5268-1-shiju@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_8b43667331cb4e88bda8acc7ff4c14bdemailandroidcom_"
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
---_000_8b43667331cb4e88bda8acc7ff4c14bdemailandroidcom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+updated rtos firmware
+am64xx: 07.03.00.13
 
-Thanks for quick review,
+rtos fw of am64x build and upload from mcu-plus-sdk repo.
+rtos fw of am65x, j7 and j7200 build and upload from pdk repo.
+a separate TI_RTOS_METADATA_SRCREV_am64xx for pining am64x fw
+from mcu-plus-sdk avoids syncing of builds from two different repos.
 
-Didn't see the other location.
+Signed-off-by: Shiju Sivasankaran <shiju@ti.com>
+---
 
-On Mar 25, 2021 10:57 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-NAK.
+v2 - typo in the commit-message corrected
 
-https://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/conf/machine/includ=
-e/am64xx.inc#n13
+All the FW are hosted on same repo processor-sdk/coresdk_rtos_releases. 
+But its only hosting purpose, these FW are builds from PDK (all device 
+except AM64x) and mcu-plus-sdk (AM64x alone) Similarly metadata.inc will 
+be used to get the version/urls details for all devices except AM64x and 
+mcusdk_metadata.inc is used for AM64x. Same metadata.inc for mcu-plus-sdk 
+is a big risk as any PDK build of AM64x can override this.
+
+coresdk_rtos_releases  has 2 branches - master & next.  
+All metadata files and tags are applied on next and during RC period 
+coreSDK team merge next to master.  At the same time next-branch also 
+carry the metadata files from daily build as well.  During this merge 
+they make sure only release builds of all devices on that tag/commit, 
+as only release build points the FW url from external location.  
+If any daily build of any device happens in between the tagging and 
+as daily build has TI internal url for FW will spoil the purpose.  
+AM65x, J7 & J7200 builds of PSDK should have happen one after another 
+without any daily builds in between, this can be controlled as all these 
+are built from same codebase of PDK.  As AM64x builds from mcu-plus-sdk, 
+a different codebase, code-freeze and RC timing rarely match.  
+Rebuild of all devices and recipe updates will arises if builds from 
+both repo doesn't happen at same time. Separate TI_RTOS_METADATA_SRCREV_am64xx 
+is added to avoid this syncing of builds from two different repos.
 
 
-On Thu, Mar 25, 2021 at 10:39:45PM -0500, praneeth via lists.yoctoproject.o=
-rg wrote:
-> From: Praneeth Bajjuri <praneeth@ti.com>
->
-> am64xx is the first generation of k3 device that uses
-> a updated board defintion as "lite" platform.[1]
->
-> This patch fixes the TFA board to appropriate target as
-> "lite" instead of "generic" for am64xx.
->
-> [1]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/?=
-id=3D84af89563e1b17def844d3672bc601ae51f0257f
->
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-> ---
->  conf/machine/include/k3.inc | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
-> index c727d724..a96ebb76 100644
-> --- a/conf/machine/include/k3.inc
-> +++ b/conf/machine/include/k3.inc
-> @@ -28,6 +28,7 @@ EXTRA_IMAGEDEPENDS +=3D "virtual/bootloader"
->
->  TFA_PLATFORM =3D "k3"
->  TFA_BOARD =3D "generic"
-> +TFA_BOARD_am64xx =3D "lite"
->
->  MACHINE_GUI_CLASS =3D "smallscreen"
->
-> --
-> 2.17.1
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 6 +++---
+ recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb | 1 +
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
---_000_8b43667331cb4e88bda8acc7ff4c14bdemailandroidcom_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index e85948b2..fe020aa3 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -23,8 +23,8 @@ DEFAULT_RTOS_FAMILY = "jacinto"
+ DEFAULT_RTOS_VERSION = "07_03_00_21"
+ DEFAULT_RTOS_VERSION_DOT = "07.03.00.21"
+ 
+-DEFAULT_RTOS_VERSION_am64xx = "07_03_00_03"
+-DEFAULT_RTOS_VERSION_DOT_am64xx = "07.03.00.03"
++DEFAULT_RTOS_VERSION_am64xx = "07_03_00_13"
++DEFAULT_RTOS_VERSION_DOT_am64xx = "07.03.00.13"
+ 
+ DEFAULT_RTOS_VERSION_am65xx = "07_03_00_22"
+ DEFAULT_RTOS_VERSION_DOT_am65xx = "07.03.00.22"
+@@ -51,7 +51,7 @@ DEFAULT_FIRMWARE_SHA256SUM = "unknown"
+ DEFAULT_FIRMWARE_SHA256SUM_j7 = "fc7805ed3d6c1801efb2b85ac9af99a8657aa3a7a9327bc16a1163d566f11c2c"
+ DEFAULT_FIRMWARE_SHA256SUM_j7200-evm = "71f282ba6768ad3b603a17d30851cc621986c88311c174960a50196bfc79f85c"
+ DEFAULT_FIRMWARE_SHA256SUM_am65xx = "61e0be08bea8ab1055645bd96504a6a29c70318c5b277237dee9981cd94d7f79"
+-DEFAULT_FIRMWARE_SHA256SUM_am64xx = "bc2d3d603ad30006ea3fefa3e777c26c19b95ee6d6f5a630259009f2f5a4996b"
++DEFAULT_FIRMWARE_SHA256SUM_am64xx = "0c43cea6ccaf45b3d7c48996f1c561e814a6e409a330da5d45877c82ce7a299a"
+ 
+ # Use weak assignment for CORESDK_RTOS_* variables to use defaults if not yet set
+ CORESDK_RTOS_FAMILY ?= "${DEFAULT_RTOS_FAMILY}"
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+index 83e0e901..f052c627 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
+@@ -19,6 +19,7 @@ PLAT_SFX_am64xx = "/am64x"
+ TI_RTOS_METADATA_URI ?= "git://git.ti.com/processor-sdk/coresdk_rtos_releases.git"
+ TI_RTOS_METADATA_PROTOCOL ?= "git"
+ TI_RTOS_METADATA_SRCREV ?= "3cda650c9e22eb4fd4eb5797ad998991a6124243"
++TI_RTOS_METADATA_SRCREV_am64xx ?= "051de801b539f4acc6e7630684f9993e34332dde"
+ TI_RTOS_METADATA_BRANCH ?= "master"
+ TI_RTOS_METADATA_DIR ?= "${PLAT_SFX}"
+ TI_RTOS_METADATA_FILE ?= "${S}${TI_RTOS_METADATA_DIR}/metadata.inc"
+-- 
+2.17.1
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
-<!-- converted from text --><style><!-- .EmailQuote { margin-left: 1pt; pad=
-ding-left: 4pt; border-left: #800000 2px solid; } --></style>
-</head>
-<body>
-<div>
-<div dir=3D"auto">Thanks for quick review,
-<div dir=3D"auto"><br>
-</div>
-<div dir=3D"auto">Didn't see the other location.</div>
-</div>
-<div class=3D"x_gmail_extra"><br>
-<div class=3D"x_gmail_quote">On Mar 25, 2021 10:57 PM, Denys Dmytriyenko &l=
-t;denis@denix.org&gt; wrote:<br type=3D"attribution">
-</div>
-</div>
-</div>
-<font size=3D"2"><span style=3D"font-size:10pt;">
-<div class=3D"PlainText">NAK.<br>
-<br>
-<a href=3D"https://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/conf/mac=
-hine/include/am64xx.inc#n13">https://git.yoctoproject.org/cgit/cgit.cgi/met=
-a-ti/tree/conf/machine/include/am64xx.inc#n13</a><br>
-<br>
-<br>
-On Thu, Mar 25, 2021 at 10:39:45PM -0500, praneeth via lists.yoctoproject.o=
-rg wrote:<br>
-&gt; From: Praneeth Bajjuri &lt;praneeth@ti.com&gt;<br>
-&gt; <br>
-&gt; am64xx is the first generation of k3 device that uses<br>
-&gt; a updated board defintion as &quot;lite&quot; platform.[1]<br>
-&gt; <br>
-&gt; This patch fixes the TFA board to appropriate target as<br>
-&gt; &quot;lite&quot; instead of &quot;generic&quot; for am64xx.<br>
-&gt; <br>
-&gt; [1]: <a href=3D"https://git.trustedfirmware.org/TF-A/trusted-firmware-=
-a.git/commit/?id=3D84af89563e1b17def844d3672bc601ae51f0257f">
-https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/?id=3D84=
-af89563e1b17def844d3672bc601ae51f0257f</a><br>
-&gt; <br>
-&gt; Signed-off-by: Praneeth Bajjuri &lt;praneeth@ti.com&gt;<br>
-&gt; ---<br>
-&gt;&nbsp; conf/machine/include/k3.inc | 1 &#43;<br>
-&gt;&nbsp; 1 file changed, 1 insertion(&#43;)<br>
-&gt; <br>
-&gt; diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc=
-<br>
-&gt; index c727d724..a96ebb76 100644<br>
-&gt; --- a/conf/machine/include/k3.inc<br>
-&gt; &#43;&#43;&#43; b/conf/machine/include/k3.inc<br>
-&gt; @@ -28,6 &#43;28,7 @@ EXTRA_IMAGEDEPENDS &#43;=3D &quot;virtual/bootlo=
-ader&quot;<br>
-&gt;&nbsp; <br>
-&gt;&nbsp; TFA_PLATFORM =3D &quot;k3&quot;<br>
-&gt;&nbsp; TFA_BOARD =3D &quot;generic&quot;<br>
-&gt; &#43;TFA_BOARD_am64xx =3D &quot;lite&quot;<br>
-&gt;&nbsp; <br>
-&gt;&nbsp; MACHINE_GUI_CLASS =3D &quot;smallscreen&quot;<br>
-&gt;&nbsp; <br>
-&gt; -- <br>
-&gt; 2.17.1<br>
-</div>
-</span></font>
-</body>
-</html>
-
---_000_8b43667331cb4e88bda8acc7ff4c14bdemailandroidcom_--
