@@ -1,140 +1,68 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.7944.1616730550953514850
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web09.7905.1616731019516951984
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 25 Mar 2021 20:49:11 -0700
+ Thu, 25 Mar 2021 20:57:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Ul4Z6KAI;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: shiju@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12Q3nA2A076662
-	for <meta-ti@lists.yoctoproject.org>; Thu, 25 Mar 2021 22:49:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1616730550;
-	bh=tM08B4EcmmjQX9lu53lO6i3vKaFMtDbhGepIelOnqLw=;
-	h=From:To:Subject:Date:References:In-Reply-To;
-	b=Ul4Z6KAIDMUbzsdl9Uspm2OCeo8Cp+HKOr9qwsZ+L+T35rEdOBWNc2y/sbUsztrcO
-	 l85CDKNiMC065jdQVItFdWh9BmuNNLYzGiLwa64XUkWCgTqnn9SR8Nn1IKDr4W5j8i
-	 mZvZ03XfKFIA80X2Nf+ktayAZwG1rzGodyom8ZKI=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12Q3nA6r039121
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 25 Mar 2021 22:49:10 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 25
- Mar 2021 22:49:10 -0500
-Received: from DFLE110.ent.ti.com ([fe80::c545:bde0:ab70:bae9]) by
- DFLE110.ent.ti.com ([fe80::c545:bde0:ab70:bae9%19]) with mapi id
- 15.01.2176.009; Thu, 25 Mar 2021 22:49:10 -0500
-From: "Shiju Sivasankaran" <shiju@ti.com>
-To: "Bajjuri, Praneeth" <praneeth@ti.com>,
-        "meta-ti@lists.yoctoproject.org"
-	<meta-ti@lists.yoctoproject.org>
-Subject: Re: [dunfell/master PATCH] ti-rtos: update metadata and version of am64x rtos firmware
-Thread-Topic: [dunfell/master PATCH] ti-rtos: update metadata and version of
- am64x rtos firmware
-Thread-Index: AQHXIUBdzvqqL+PtD0uACE6pDy+rnKqVjo2AgAAL3OA=
-Date: Fri, 26 Mar 2021 03:49:09 +0000
-Message-ID: <b7b048b378b14dde8ddf2b453307e162@ti.com>
-References: <20210325063010.8808-1-shiju@ti.com>
- <1a2f7012-0c7b-33fe-5fe4-a0621ebcf1fb@ti.com>
-In-Reply-To: <1a2f7012-0c7b-33fe-5fe4-a0621ebcf1fb@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.235.243]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E181A40C82;
+	Fri, 26 Mar 2021 03:56:58 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HREAPemQnVJr; Fri, 26 Mar 2021 03:56:58 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B312940952;
+	Fri, 26 Mar 2021 03:56:55 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 1D064174566; Thu, 25 Mar 2021 23:56:55 -0400 (EDT)
+Date: Thu, 25 Mar 2021 23:56:55 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: praneeth@ti.com
+Cc: Nishanth Menon <nm@ti.com>, meta-ti@lists.yoctoproject.org,
+	denys@konsulko.com
+Subject: Re: [meta-ti] [dunfell/master PATCH v2] trusted-firmware-a: am64xx: fix target board name
+Message-ID: <20210326035655.GU18041@denix.org>
+References: <20210326033945.15324-1-praneeth@ti.com>
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+In-Reply-To: <20210326033945.15324-1-praneeth@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-PDE+DQpZZXMsIEFsbCB0aGUgRlcgYXJlIGhvc3RlZCBvbiBzYW1lIHJlcG8gcHJvY2Vzc29yLXNk
-ay9jb3Jlc2RrX3J0b3NfcmVsZWFzZXMuIEJ1dCBpdHMgb25seSBob3N0aW5nIHB1cnBvc2UsIHRo
-ZXNlIEZXIGFyZSBidWlsZHMgZnJvbSBQREsgKGFsbCBkZXZpY2UgZXhjZXB0IEFNNjR4KSBhbmQg
-bWN1LXBsdXMtc2RrIChBTTY0eCBhbG9uZSkNClNpbWlsYXJseSBtZXRhZGF0YS5pbmMgd2lsbCBi
-ZSB1c2VkIHRvIGdldCB0aGUgdmVyc2lvbi91cmxzIGRldGFpbHMgZm9yIGFsbCBkZXZpY2VzIGV4
-Y2VwdCBBTTY0eCBhbmQgbWN1c2RrX21ldGFkYXRhLmluYyBpcyB1c2VkIGZvciBBTTY0eC4gU2Ft
-ZSBtZXRhZGF0YS5pbmMgZm9yIG1jdS1wbHVzLXNkayBpcyBhIGJpZyByaXNrIGFzIGFueSBQREsg
-YnVpbGQgb2YgQU02NHggY2FuIG92ZXJyaWRlIHRoaXMuDQoNCjwyPg0KY29yZXNka19ydG9zX3Jl
-bGVhc2VzICBoYXMgMiBicmFuY2hlcyAtIG1hc3RlciAmIG5leHQuICBBbGwgbWV0YWRhdGEgZmls
-ZXMgYW5kIHRhZ3MgYXJlIGFwcGxpZWQgb24gbmV4dCBhbmQgZHVyaW5nIFJDIHBlcmlvZCBjb3Jl
-U0RLIHRlYW0gbWVyZ2UgbmV4dCB0byBtYXN0ZXIuICBBdCB0aGUgc2FtZSB0aW1lIG5leHQtYnJh
-bmNoIGFsc28gY2FycnkgdGhlIG1ldGFkYXRhIGZpbGVzIGZyb20gZGFpbHkgYnVpbGQgYXMgd2Vs
-bC4gIER1cmluZyB0aGlzIG1lcmdlIHRoZXkgbWFrZSBzdXJlIG9ubHkgcmVsZWFzZSBidWlsZHMg
-b2YgYWxsIGRldmljZXMgb24gdGhhdCB0YWcvY29tbWl0LCBhcyBvbmx5IHJlbGVhc2UgYnVpbGQg
-cG9pbnRzIHRoZSBGVyB1cmwgZnJvbSBleHRlcm5hbCBsb2NhdGlvbi4gIElmIGFueSBkYWlseSBi
-dWlsZCBvZiBhbnkgZGV2aWNlIGhhcHBlbnMgaW4gYmV0d2VlbiB0aGUgdGFnZ2luZyBhbmQgYXMg
-ZGFpbHkgYnVpbGQgaGFzIFRJIGludGVybmFsIHVybCBmb3IgRlcgd2lsbCBzcG9pbCB0aGUgcHVy
-cG9zZS4gIEFNNjV4LCBKNyAmIEo3MjAwIGJ1aWxkcyBvZiBQU0RLIHNob3VsZCBoYXZlIGhhcHBl
-biBvbmUgYWZ0ZXIgYW5vdGhlciB3aXRob3V0IGFueSBkYWlseSBidWlsZHMgaW4gYmV0d2Vlbiwg
-dGhpcyBjYW4gYmUgY29udHJvbGxlZCBhcyBhbGwgdGhlc2UgYXJlIGJ1aWx0IGZyb20gc2FtZSBj
-b2RlYmFzZSBvZiBQREsuICBBcyBBTTY0eCBidWlsZHMgZnJvbSBtY3UtcGx1cy1zZGssIGEgZGlm
-ZmVyZW50IGNvZGViYXNlLCBjb2RlLWZyZWV6ZSBhbmQgUkMgdGltaW5nIHJhcmVseSBtYXRjaC4g
-IFJlYnVpbGQgb2YgYWxsIGRldmljZXMgYW5kIHJlY2lwZSB1cGRhdGVzIHdpbGwgYXJpc2VzIGlm
-IGJ1aWxkcyBmcm9tIGJvdGggcmVwbyBkb2Vzbid0IGhhcHBlbiBhdCBzYW1lIHRpbWUuIFNlcGFy
-YXRlIFRJX1JUT1NfTUVUQURBVEFfU1JDUkVWX2FtNjR4eCBpcyBhZGRlZCB0byBhdm9pZCB0aGlz
-IHN5bmNpbmcgb2YgYnVpbGRzIGZyb20gdHdvIGRpZmZlcmVudCByZXBvcy4NCg0KPDM+DQpJIHdp
-bGwgY29ycmVjdCB0aGUgdHlwbyBpbiB0aGUgY29tbWl0LWNvbW1lbnQNCg0KDQoNCi0tLS0tT3Jp
-Z2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBCYWpqdXJpLCBQcmFuZWV0aCANClNlbnQ6IEZyaWRh
-eSwgTWFyY2ggMjYsIDIwMjEgMzowNCBBTQ0KVG86IFNpdmFzYW5rYXJhbiwgU2hpanUgPHNoaWp1
-QHRpLmNvbT47IG1ldGEtdGlAbGlzdHMueW9jdG9wcm9qZWN0Lm9yZw0KU3ViamVjdDogUmU6IFtk
-dW5mZWxsL21hc3RlciBQQVRDSF0gdGktcnRvczogdXBkYXRlIG1ldGFkYXRhIGFuZCB2ZXJzaW9u
-IG9mIGFtNjR4IHJ0b3MgZmlybXdhcmUNCg0KDQoNCk9uIDMvMjUvMjAyMSAxOjMwIEFNLCBTaGlq
-dSBTaXZhc2Fua2FyYW4gd3JvdGU6DQo+IHVwZGF0ZWQgcnRvcyBmaXJtd2FyZQ0KPiBhbTY0eHg6
-IDA3LjAzLjAwLjEzDQo+IA0KPiBydG9zIGZ3IG9mIGFtNjR4IGJ1aWxkIGFuZCB1cGxvYWQgZnJv
-bSBtY3UtcGx1cy1zZGsgcmVwby4NCj4gcnRvcyBmdyBvZiBhbTY1eCwgajcgYW5kIGo3MjAwIGJ1
-aWxkIGFuZCB1cGxvYWQgZnJvbSBwZGsgcmVwby4NCg0KQnV0IGFsbCBvZiB0aGUgZndzIGFyZSBj
-b21pbmcgZnJvbSB0aGUgc2FtZSByZXBvIHByb2Nlc3Nvci1zZGsvY29yZXNka19ydG9zX3JlbGVh
-c2VzIHdoZXJlIG1ldGFkYXRhLmluYyBpcyB1cGRhdGVkIG9uIG1hc3RlciB3aXRoICByaWdodCB0
-YWcgYW5kIHB1YmxpYyB1cmxzIGluc2lkZSB0aGUgbWV0YWRhdGFfKi5pbmMgaXNudCBpdCA/DQoN
-Cj4gYSBzZXBhcmF0ZSBUSV9SVE9TX01FVEFEQVRBX1NSQ1JFVl9hbTY0eHggZm9yIHBpbmluZyBh
-bTY0eCBmdyBmcm9tIA0KPiBtYWN1LXBsdXMtc2RrDQoNCnR5cG8gcy9tYWN1Pw0KDQogIGF2b2lk
-cyBzeW5jaW5nIG9mIGJ1aWxkcyBmcm9tIHR3byBkaWZmZXJlbnQgcmVwb3MuDQoNClRJX1JUT1Nf
-TUVUQURBVEFfU1JDUkVWIGlzIHBvaW50aW5nIHRvIG1hc3RlciBicmFuY2ggY29tbWl0c2hhIHdo
-ZXJlIHRoZSBnaXZlbiB0YWcgaXMgcHJlc2VudC4gSSBkb250IHNlZSB3aHkgd2UgaGF2ZSB0byBz
-ZXBlcmF0ZSB0aGlzIG1hY3JvIGZvciBlYWNoIGRldmljZSBzZXBlcmF0ZWx5Lg0KDQoNCkFkZCB5
-b3VyIHNpZ25vZmYgYnkuDQoNCj4gLS0tDQo+ICAgcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1y
-dG9zLWZpcm13YXJlLmJiIHwgNiArKystLS0NCj4gICByZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3Rp
-LXJ0b3MtbWV0YWRhdGEuYmIgfCAxICsNCj4gICAyIGZpbGVzIGNoYW5nZWQsIDQgaW5zZXJ0aW9u
-cygrKSwgMyBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL3RpLXJ0
-b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmIgYi9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0
-b3MtZmlybXdhcmUuYmINCj4gaW5kZXggZTg1OTQ4YjIuLmZlMDIwYWEzIDEwMDY0NA0KPiAtLS0g
-YS9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmINCj4gKysrIGIvcmVj
-aXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLWZpcm13YXJlLmJiDQo+IEBAIC0yMyw4ICsyMyw4
-IEBAIERFRkFVTFRfUlRPU19GQU1JTFkgPSAiamFjaW50byINCj4gICBERUZBVUxUX1JUT1NfVkVS
-U0lPTiA9ICIwN18wM18wMF8yMSINCj4gICBERUZBVUxUX1JUT1NfVkVSU0lPTl9ET1QgPSAiMDcu
-MDMuMDAuMjEiDQo+ICAgDQo+IC1ERUZBVUxUX1JUT1NfVkVSU0lPTl9hbTY0eHggPSAiMDdfMDNf
-MDBfMDMiDQo+IC1ERUZBVUxUX1JUT1NfVkVSU0lPTl9ET1RfYW02NHh4ID0gIjA3LjAzLjAwLjAz
-Ig0KPiArREVGQVVMVF9SVE9TX1ZFUlNJT05fYW02NHh4ID0gIjA3XzAzXzAwXzEzIg0KPiArREVG
-QVVMVF9SVE9TX1ZFUlNJT05fRE9UX2FtNjR4eCA9ICIwNy4wMy4wMC4xMyINCj4gICANCj4gICBE
-RUZBVUxUX1JUT1NfVkVSU0lPTl9hbTY1eHggPSAiMDdfMDNfMDBfMjIiDQo+ICAgREVGQVVMVF9S
-VE9TX1ZFUlNJT05fRE9UX2FtNjV4eCA9ICIwNy4wMy4wMC4yMiINCj4gQEAgLTUxLDcgKzUxLDcg
-QEAgREVGQVVMVF9GSVJNV0FSRV9TSEEyNTZTVU0gPSAidW5rbm93biINCj4gICBERUZBVUxUX0ZJ
-Uk1XQVJFX1NIQTI1NlNVTV9qNyA9ICJmYzc4MDVlZDNkNmMxODAxZWZiMmI4NWFjOWFmOTlhODY1
-N2FhM2E3YTkzMjdiYzE2YTExNjNkNTY2ZjExYzJjIg0KPiAgIERFRkFVTFRfRklSTVdBUkVfU0hB
-MjU2U1VNX2o3MjAwLWV2bSA9ICI3MWYyODJiYTY3NjhhZDNiNjAzYTE3ZDMwODUxY2M2MjE5ODZj
-ODgzMTFjMTc0OTYwYTUwMTk2YmZjNzlmODVjIg0KPiAgIERFRkFVTFRfRklSTVdBUkVfU0hBMjU2
-U1VNX2FtNjV4eCA9ICI2MWUwYmUwOGJlYThhYjEwNTU2NDViZDk2NTA0YTZhMjljNzAzMThjNWIy
-NzcyMzdkZWU5OTgxY2Q5NGQ3Zjc5Ig0KPiAtREVGQVVMVF9GSVJNV0FSRV9TSEEyNTZTVU1fYW02
-NHh4ID0gImJjMmQzZDYwM2FkMzAwMDZlYTNmZWZhM2U3NzdjMjZjMTliOTVlZTZkNmY1YTYzMDI1
-OTAwOWYyZjVhNDk5NmIiDQo+ICtERUZBVUxUX0ZJUk1XQVJFX1NIQTI1NlNVTV9hbTY0eHggPSAi
-MGM0M2NlYTZjY2FmNDViM2Q3YzQ4OTk2ZjFjNTYxZTgxNGE2ZTQwOWEzMzBkYTVkNDU4NzdjODJj
-ZTdhMjk5YSINCj4gICANCj4gICAjIFVzZSB3ZWFrIGFzc2lnbm1lbnQgZm9yIENPUkVTREtfUlRP
-U18qIHZhcmlhYmxlcyB0byB1c2UgZGVmYXVsdHMgaWYgbm90IHlldCBzZXQNCj4gICBDT1JFU0RL
-X1JUT1NfRkFNSUxZID89ICIke0RFRkFVTFRfUlRPU19GQU1JTFl9Ig0KPiBkaWZmIC0tZ2l0IGEv
-cmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLW1ldGFkYXRhLmJiIGIvcmVjaXBlcy10aS90
-aS1ydG9zLWJpbi90aS1ydG9zLW1ldGFkYXRhLmJiDQo+IGluZGV4IDgzZTBlOTAxLi5mMDUyYzYy
-NyAxMDA2NDQNCj4gLS0tIGEvcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLW1ldGFkYXRh
-LmJiDQo+ICsrKyBiL3JlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1tZXRhZGF0YS5iYg0K
-PiBAQCAtMTksNiArMTksNyBAQCBQTEFUX1NGWF9hbTY0eHggPSAiL2FtNjR4Ig0KPiAgIFRJX1JU
-T1NfTUVUQURBVEFfVVJJID89ICJnaXQ6Ly9naXQudGkuY29tL3Byb2Nlc3Nvci1zZGsvY29yZXNk
-a19ydG9zX3JlbGVhc2VzLmdpdCINCj4gICBUSV9SVE9TX01FVEFEQVRBX1BST1RPQ09MID89ICJn
-aXQiDQo+ICAgVElfUlRPU19NRVRBREFUQV9TUkNSRVYgPz0gIjNjZGE2NTBjOWUyMmViNGZkNGVi
-NTc5N2FkOTk4OTkxYTYxMjQyNDMiDQo+ICtUSV9SVE9TX01FVEFEQVRBX1NSQ1JFVl9hbTY0eHgg
-Pz0gIjA1MWRlODAxYjUzOWY0YWNjNmU3NjMwNjg0Zjk5OTNlMzQzMzJkZGUiDQoNCldoeSB0aGlz
-Pw0KV2h5IFRJX1JUT1NfTUVUQURBVEFfU1JDUkVWID89ICIwNTFkZTgwMWI1MzlmNGFjYzZlNzYz
-MDY4NGY5OTkzZTM0MzMyZGRlIg0Kd2lsbG5vdCB3b3JrIGZvciBhbGwgZGV2aWNlcz8NCg0KDQo+
-ICAgVElfUlRPU19NRVRBREFUQV9CUkFOQ0ggPz0gIm1hc3RlciINCj4gICBUSV9SVE9TX01FVEFE
-QVRBX0RJUiA/PSAiJHtQTEFUX1NGWH0iDQo+ICAgVElfUlRPU19NRVRBREFUQV9GSUxFID89ICIk
-e1N9JHtUSV9SVE9TX01FVEFEQVRBX0RJUn0vbWV0YWRhdGEuaW5jIg0KPiANCg==
+NAK.
+
+https://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/conf/machine/include/am64xx.inc#n13
+
+
+On Thu, Mar 25, 2021 at 10:39:45PM -0500, praneeth via lists.yoctoproject.org wrote:
+> From: Praneeth Bajjuri <praneeth@ti.com>
+> 
+> am64xx is the first generation of k3 device that uses
+> a updated board defintion as "lite" platform.[1]
+> 
+> This patch fixes the TFA board to appropriate target as
+> "lite" instead of "generic" for am64xx.
+> 
+> [1]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/?id=84af89563e1b17def844d3672bc601ae51f0257f
+> 
+> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+> ---
+>  conf/machine/include/k3.inc | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
+> index c727d724..a96ebb76 100644
+> --- a/conf/machine/include/k3.inc
+> +++ b/conf/machine/include/k3.inc
+> @@ -28,6 +28,7 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+>  
+>  TFA_PLATFORM = "k3"
+>  TFA_BOARD = "generic"
+> +TFA_BOARD_am64xx = "lite"
+>  
+>  MACHINE_GUI_CLASS = "smallscreen"
+>  
+> -- 
+> 2.17.1
