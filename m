@@ -1,76 +1,68 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.15852.1616777634165952020
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web08.1348.1616782499381499817
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 26 Mar 2021 09:53:54 -0700
+ Fri, 26 Mar 2021 11:14:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=qjwNrydN;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12QGrqTV057663;
-	Fri, 26 Mar 2021 11:53:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1616777632;
-	bh=kbfWaWBdnWzD0FHk7r5B3yqvxjpWD8mHXLbrynE+4JA=;
-	h=From:To:CC:Subject:Date;
-	b=qjwNrydN3FfLf/KLOi3PTxkMuMwIbdQ2tqJyfphgyTmUKRvhPp4DBIuHr0IHNv/dS
-	 lZJgeyTRvWs1mxELmRHilU7gyjQbT39s0IsHegHTXAr95ZAGBvvhUqxCe0fRswRpkf
-	 ZR4Ns/Sm3kjKuxIblDt7a8o9/vbseJlT4c/tvfm8=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12QGrqMo106566
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 26 Mar 2021 11:53:52 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Fri, 26
- Mar 2021 11:53:52 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Fri, 26 Mar 2021 11:53:52 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12QGrpTr037415;
-	Fri, 26 Mar 2021 11:53:52 -0500
-From: "praneeth" <praneeth@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>
-CC: Lucas Weaver <l-weaver@ti.com>, <meta-ti@lists.yoctoproject.org>,
-        <denys@konsulko.com>
-Subject: [dunfell/master PATCH] u-boot-ti: J721e: update HS build to include DM signing
-Date: Fri, 26 Mar 2021 11:53:51 -0500
-Message-ID: <20210326165351.29988-1-praneeth@ti.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3FDBF40C56;
+	Fri, 26 Mar 2021 18:14:58 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ouW9mU7rxn7z; Fri, 26 Mar 2021 18:14:58 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1ED2D40952;
+	Fri, 26 Mar 2021 18:14:56 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 806F0174549;
+	Fri, 26 Mar 2021 14:14:55 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Praneeth Bajjuri <praneeth@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>
+Subject: [dunfell/master][PATCH] ti-rtos-firmware: sign DM firmware for J721e HS platform
+Date: Fri, 26 Mar 2021 14:14:52 -0400
+Message-Id: <1616782492-14151-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
 From: Praneeth Bajjuri <praneeth@ti.com>
 
-DM firmware is added now as part of the uboot build process.
-This patch fixes HS signing and build including the new DM firmware.
+U-boot build process requires DM firmware to be signed for J7 HS.
+It's better for ti-rtos-firmware package (that delivers DM firmware) to sign
+it once and provide signed version to other packages, instead of U-boot needing
+to re-sign it during build in staging location.
 
 Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-bsp/u-boot/u-boot-ti.inc | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index e5f92f4b..5cae1c15 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -57,6 +57,14 @@ S = "${WORKDIR}/git"
- TI_SECURE_DEV_PKG ?= ""
- export TI_SECURE_DEV_PKG
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index e85948b..38e9adc 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -74,6 +74,18 @@ SRC_URI[sha256sum] = "${CORESDK_RTOS_FIRMWARE_SHA256SUM}"
  
-+do_compile_prepend_j7-hs-evm() {
-+        ( cd ${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/pdk-ipc/; \
-+                mv ipc_echo_testb_mcu1_0_release_strip.xer5f ipc_echo_testb_mcu1_0_release_strip.xer5f.unsigned; \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_testb_mcu1_0_release_strip.xer5f.unsigned ipc_echo_testb_mcu1_0_release_strip.xer5f; \
-+        )
+ FILES_${PN} += "${base_libdir}"
+ 
++TI_SECURE_DEV_PKG ?= ""
++
++DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
++
++do_install_prepend_j7-hs-evm() {
++	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
++	( cd ${S}/firmware/pdk-ipc/; \
++		mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
++		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
++	)
 +}
 +
-+
- SYSROOT_DIRS += "/boot"
- 
- # SPL (Second Program Loader) to be loaded over UART
+ do_install() {
+ 	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+ 	install -d ${D}${base_libdir}
 -- 
-2.17.1
+2.7.4
 
