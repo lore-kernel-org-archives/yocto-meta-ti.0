@@ -1,69 +1,76 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.659.1616804217928064309
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web11.3276.1616824427314069726
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 26 Mar 2021 17:16:58 -0700
+ Fri, 26 Mar 2021 22:53:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=IsHwA84M;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12R0Guji024807
-	for <meta-ti@lists.yoctoproject.org>; Fri, 26 Mar 2021 19:16:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1616804216;
-	bh=2lxo9+albbb4pjfR38OgKZfFAiNcyxGE1PuFyIjOT6g=;
-	h=From:To:CC:Subject:Date;
-	b=IsHwA84MvmRCVoYF3Rw9/qkjYb4PhWLANT4XLKX/SbfM5XEL5JDW+MpMZiy/sSU8P
-	 g2nhWjz9bMHlkU0alTJt9QZ5MWexpLtJBEsb0YU1Kxu9nnWScG92DI175uFeKUo1vO
-	 ixTVFqv1PvL87ahzvo1NQFxGk8rELxif+P2HoQ0Y=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12R0Gu2a061580
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 26 Mar 2021 19:16:56 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Fri, 26
- Mar 2021 19:16:56 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Fri, 26 Mar 2021 19:16:56 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12R0GuL3046824;
-	Fri, 26 Mar 2021 19:16:56 -0500
-From: "praneeth" <praneeth@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: [dunfell/master PATCH] ti-uboot-staging: Update to the latest commit
-Date: Fri, 26 Mar 2021 19:16:56 -0500
-Message-ID: <20210327001656.8576-1-praneeth@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 198.145.29.25, mailfrom: denis@denix.org)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 0E0A438C0523
+	for <meta-ti@yoctoproject.org>; Sat, 27 Mar 2021 05:53:46 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 32EFB40C2A;
+	Sat, 27 Mar 2021 05:53:46 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xnqBZyxR12NT; Sat, 27 Mar 2021 05:53:46 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0663B40AB7;
+	Sat, 27 Mar 2021 05:53:42 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 5EE34174568; Sat, 27 Mar 2021 01:53:42 -0400 (EDT)
+Date: Sat, 27 Mar 2021 01:53:42 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: g-tammana@ti.com
+Cc: meta-ti@yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>,
+	denys@konsulko.com
+Subject: Re: [meta-ti][dunfell/master][PATCH] ti-img-rogue-umlibs: Update to pick rpath fixes
+Message-ID: <20210327055342.GZ18041@denix.org>
+References: <20210323230709.9607-1-g-tammana@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+In-Reply-To: <20210323230709.9607-1-g-tammana@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Praneeth Bajjuri <praneeth@ti.com>
+On Tue, Mar 23, 2021 at 06:07:09PM -0500, Gowtham Tammana via lists.yoctoproject.org wrote:
+> Update srcrev to pick the rpath warning fixes.
+> 
+> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 
-ti-uboot-staging: Update to the latest commit
+Tested-by: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Praneeth,
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-index c066eb8f..e1bdae46 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2020.01.bb
-@@ -1,7 +1,7 @@
- require u-boot-ti.inc
- 
--PR = "r35"
-+PR = "r36"
- 
- BRANCH = "ti-u-boot-2020.01"
- 
--SRCREV = "654d73f8725db340ccb470d5d130df3fcf7ce482"
-+SRCREV = "2781231a33c3d779e32445f4fe55164c45d6d7c1"
--- 
-2.17.1
+Has this been picked up yet? Especially needed for the master, where it's no 
+longer a warning, but an error.
 
+
+> ---
+>  recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
+> index d8fae3dd..dafb9dd8 100644
+> --- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
+> +++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
+> @@ -10,13 +10,13 @@ REQUIRED_MACHINE_FEATURES = "gpu"
+>  PACKAGE_ARCH = "${MACHINE_ARCH}"
+>  COMPATIBLE_MACHINE = "j7"
+>  
+> -PR = "r1"
+> +PR = "r2"
+>  
+>  BRANCH = "linuxws/dunfell/k5.4/${PV}"
+>  
+>  SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=${BRANCH}"
+>  
+> -SRCREV = "3c4cabc8df10a066569e5f959cbbd4c0ce9961cd"
+> +SRCREV = "5ef38353c38d921a65ea6df75c7b6ce710b66034"
+>  
+>  PVR_SOC ?= "j721e_linux"
+>  PVR_BUILD ?= "release"
+> -- 
+> 2.31.0
+> 
