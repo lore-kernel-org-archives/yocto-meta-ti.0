@@ -1,95 +1,64 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.445.1617234938253985830
+ by mx.groups.io with SMTP id smtpd.web12.480.1617235010394073538
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 31 Mar 2021 16:55:38 -0700
+ Wed, 31 Mar 2021 16:56:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GjCXSY7+;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rlWdzdZ9;
  spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nm@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12VNtUXr124043;
-	Wed, 31 Mar 2021 18:55:30 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 12VNuhqG124286;
+	Wed, 31 Mar 2021 18:56:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1617234930;
-	bh=HLgS8ghvo9UgNvG7J0HFoKgwxF6ChedS8JUn1de1d0M=;
+	s=ti-com-17Q1; t=1617235003;
+	bh=yAloWV+5N0QCjjWh5RIbdXku1pdJKZNNJ3OxWHyfDfA=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=GjCXSY7+I6TnP1JLd+ABru91xtegdEJFYkT8CzFHX2x8ryXHv6GbeGNBTMLy8sRt9
-	 IbpCTKSbRgNjaEQk9LMRsQ4SGjDZAAPX4BNWKouiBtBX2qHgZkaRPmCm8XPO02wvWP
-	 5t/hE6+y5P3UZSRQvdBlFcpMh/ZSBiaFZEsNudeI=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12VNtU73115197
+	b=rlWdzdZ9DkSeBq5Ptxc14QAcrS7cvmgt+1tywv3pn+2YhXNNxkLXAzL0PILe9zbN/
+	 EQmvin0wYz7Z+pPpRTJzxm+81WmDTYVCptWJPRqZR8/FkZWRiRh7SYzTT7mcZ6+l4R
+	 A14RU2uAhZHIRrU6lLqfyCIBv1x3Wc+NlnpqXSEk=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 12VNuhL1130914
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 31 Mar 2021 18:55:30 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 31 Mar 2021 18:56:43 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 31
- Mar 2021 18:55:30 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2021 18:56:43 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Wed, 31 Mar 2021 18:55:30 -0500
+ Frontend Transport; Wed, 31 Mar 2021 18:56:43 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12VNtUiM093897;
-	Wed, 31 Mar 2021 18:55:30 -0500
-Date: Wed, 31 Mar 2021 18:55:30 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 12VNuhij091291;
+	Wed, 31 Mar 2021 18:56:43 -0500
+Date: Wed, 31 Mar 2021 18:56:43 -0500
 From: "Nishanth Menon" <nm@ti.com>
 To: Denys Dmytriyenko <denis@denix.org>
 CC: <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [dunfell/master][PATCH 6/7] conf/machine: am64xx: Switch to multi-certificate boot images
-Message-ID: <20210331235529.pqofgmoezaorckal@handled>
+Subject: Re: [dunfell/master][PATCH 5/7] conf/machine: am64xx: Consolidate image configuration to SoC include
+Message-ID: <20210331235643.ln7wg4ucb6a7jxqk@preview>
 References: <20210331165133.3746-1-nm@ti.com>
- <20210331165133.3746-7-nm@ti.com>
- <16718E3613B720CC.10817@lists.yoctoproject.org>
- <20210331223557.GK23013@denix.org>
+ <20210331165133.3746-6-nm@ti.com>
+ <20210331223351.GI23013@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <20210331223557.GK23013@denix.org>
+In-Reply-To: <20210331223351.GI23013@denix.org>
 User-Agent: NeoMutt/20171215
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On 18:35-20210331, Denys Dmytriyenko wrote:
-> On Wed, Mar 31, 2021 at 06:35:00PM -0400, Denys Dmytriyenko wrote:
-> > On Wed, Mar 31, 2021 at 11:51:32AM -0500, Nishanth Menon wrote:
-> > > Switch to using all of multi-certificate boot images. This allows us
-> > > to create bootable images - in this case, we are missing tiboot3.bin
-> > > 
-> > > Signed-off-by: Nishanth Menon <nm@ti.com>
-> > > ---
-> > >  conf/machine/include/am64xx.inc | 3 ++-
-> > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > > 
-> > > diff --git a/conf/machine/include/am64xx.inc b/conf/machine/include/am64xx.inc
-> > > index 3173319df354..9d40b066a03a 100644
-> > > --- a/conf/machine/include/am64xx.inc
-> > > +++ b/conf/machine/include/am64xx.inc
-> > > @@ -10,7 +10,8 @@ KERNEL_DEVICETREE = " \
-> > >      ti/k3-am642-evm.dtb \
-> > >  "
-> > >  
-> > > -IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
-> > > +# AM64 supports multi-certificate images, use the same
-> > > +IMAGE_BOOT_FILES = "${IMAGE_BOOT_FILES_MULTI_CERT}"
-> > >  do_image_wic[depends] += "trusted-firmware-a:do_deploy"
-> > >  do_image_tar[depends] += "trusted-firmware-a:do_deploy"
-> > 
-> > Same comment - TF-A is not needed here.
+On 18:33-20210331, Denys Dmytriyenko wrote:
+> On Wed, Mar 31, 2021 at 11:51:31AM -0500, Nishanth Menon wrote:
+> > IMAGE type and dependencies can easily be centralized to SoC include
+> > file. This is necessary to make sure that we don't do the duplication
+> > and having multiple places to fix up.
 > 
-> I guess this can be cleaned up separately. The main change is fine:
+> I thought the plan was to soon merge am64xx-sk into am64xx-evm. But 
+> regardless, having these vars set for the entire SoC family is best.
+> 
 
-Done in the upcoming V2.
-> 
-> Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
-> 
-> 
-> > >  do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
-> > > -- 
-> > > 2.31.0
-> 
-> -- 
-> Regards,
-> Denys Dmytriyenko <denis@denix.org>
-> PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-> Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+yup. the merge of sk and evm is still TBD - I have heard of it
+internally, though was'nt clear as to how it will be done since the
+DDR is so different.. hopefully in some follow on series, I suppose..
 
 -- 
 Regards,
