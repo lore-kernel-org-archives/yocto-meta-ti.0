@@ -1,147 +1,90 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.24.1617898987012668630
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web11.3599.1618261134587657420
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 08 Apr 2021 09:23:07 -0700
+ Mon, 12 Apr 2021 13:58:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0AF3E40C3A;
-	Thu,  8 Apr 2021 16:23:06 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oADh1EFWEBM6; Thu,  8 Apr 2021 16:23:06 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CC9C240BE8;
-	Thu,  8 Apr 2021 16:23:02 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 368861745A7; Thu,  8 Apr 2021 12:23:02 -0400 (EDT)
-Date: Thu, 8 Apr 2021 12:23:02 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: sinthu.raja@mistralsolutions.com
-Cc: meta-ti@lists.yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>,
-	Sinthu Raja <x0257345@ti.com>
-Subject: Re: [meta-ti] [dunfell/master PATCH 2/3] AM64x Unification: Update u-boot conf
-Message-ID: <20210408162302.GF15937@denix.org>
-References: <20210408071608.80232-1-sinthu.raja@mistral.in>
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=DAH4xAim;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: g-tammana@ti.com)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 8560738C0830
+	for <meta-ti@yoctoproject.org>; Mon, 12 Apr 2021 20:58:53 +0000 (UTC)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13CKwqpD107730;
+	Mon, 12 Apr 2021 15:58:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1618261132;
+	bh=HJNRKRkE6koPmDKIV0PuF00AxrOpzoYPpLyesuHQSwc=;
+	h=From:To:CC:Subject:Date;
+	b=DAH4xAimwMVXU+xl0qu2vQDkG8DHXqf1eSsG5ZF2ipD9Uia4Hyefko+j7Qj0Ga4m4
+	 qPBf5BlBdOVj+MkfrWZpav+6j9Q4PoOijiyPDUPNW2cHhVs6IGrdx1KVSOP3iiotfU
+	 2q3jPt9ICKr7amsYEKwknQaINBliaNyfjLs9LiEU=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13CKwq7e077334
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 12 Apr 2021 15:58:52 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 12
+ Apr 2021 15:58:52 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Mon, 12 Apr 2021 15:58:51 -0500
+Received: from lelv0597.itg.ti.com (lelv0597.itg.ti.com [10.181.64.32])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13CKwqH6044814;
+	Mon, 12 Apr 2021 15:58:52 -0500
+Received: from uda0271916b.dhcp.ti.com (uda0271916b.dhcp.ti.com [128.247.81.224] (may be forged))
+	by lelv0597.itg.ti.com (8.14.7/8.14.7) with ESMTP id 13CKwpY0086703;
+	Mon, 12 Apr 2021 15:58:51 -0500
+From: "Gowtham Tammana" <g-tammana@ti.com>
+To: <meta-ti@yoctoproject.org>, Praneeth Bajjuri <praneeth@ti.com>,
+        <denys@konsulko.com>
+CC: Gowtham Tammana <g-tammana@ti.com>
+Subject: [meta-ti][dunfell/master][PATCH 1/2] ti-img-rogue-driver: update srcrev to pick 5.10 branch
+Date: Mon, 12 Apr 2021 15:58:48 -0500
+Message-ID: <20210412205849.7689-1-g-tammana@ti.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <20210408071608.80232-1-sinthu.raja@mistral.in>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 08, 2021 at 12:46:08PM +0530, Sinthu Raja M via lists.yoctoproject.org wrote:
-> From: Sinthu Raja <x0257345@ti.com>
-> 
->  Updtae u-boot recipe to build for both SK and EVM compilation and
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+ .../powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb     | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Update ^^
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728=
+.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+index db3901d2..ff3cbb89 100644
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+@@ -7,7 +7,7 @@ inherit module features_check
+=20
+ REQUIRED_MACHINE_FEATURES =3D "gpu"
+=20
+-MACHINE_KERNEL_PR_append =3D "a"
++MACHINE_KERNEL_PR_append =3D "b"
+ PR =3D "${MACHINE_KERNEL_PR}"
+=20
+ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+@@ -17,13 +17,13 @@ DEPENDS =3D "virtual/kernel"
+=20
+ PROVIDES =3D "virtual/gpudriver"
+=20
+-BRANCH =3D "1.13-5776728/linux-k5.4"
++BRANCH =3D "1.13-5776728/linux-k5.10"
+=20
+ SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D=
+${BRANCH}"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+-SRCREV =3D "ea77784e89f919bd3343a421862bf90cb65cc26c"
++SRCREV =3D "35a25875ae8738f82c7cabc6b077ef992b0cca84"
+=20
+ PVR_SOC =3D "j721e_linux"
+ PVR_BVNC =3D "22.104.208.318"
+--=20
+2.31.1
 
-
-> installation through one machine name
->  Update AM64x config file to add both defconfig files for SK and EVM
-> 
-> Signed-off-by: Sinthu Raja <x0257345@ti.com>
-> ---
->  conf/machine/am64xx-evm-k3r5.conf | 11 ++++++++---
->  conf/machine/am64xx-evm.conf      |  6 +++++-
->  conf/machine/include/am64xx.inc   |  1 +
->  recipes-bsp/u-boot/u-boot-ti.inc  | 21 +++++++++++++++++++--
->  4 files changed, 33 insertions(+), 6 deletions(-)
-> 
-> diff --git a/conf/machine/am64xx-evm-k3r5.conf b/conf/machine/am64xx-evm-k3r5.conf
-> index dfeaeb570..50a941aef 100644
-> --- a/conf/machine/am64xx-evm-k3r5.conf
-> +++ b/conf/machine/am64xx-evm-k3r5.conf
-> @@ -8,7 +8,12 @@ SYSFW_SOC = "am64x"
->  SYSFW_CONFIG = "evm"
->  SYSFW_SUFFIX = "gp"
->  
-> -UBOOT_MACHINE = "am64x_evm_r5_defconfig"
-> +UBOOT_CONFIG ??= "evm sk"
-> +UBOOT_CONFIG[evm] = "am64x_evm_a53_defconfig"
-> +UBOOT_CONFIG[sk] = "am64x_sk_a53_defconfig"
-
-So, you are replacing r5 defconfig with a53? That's definitely wrong!
-You might want to reverse the order in UBOOT_CONFIG, as the default symlink 
-points to the last one.
-
-
-> +UBOOT_MACHINE = ""
-> +
->  UBOOT_BINARY = "tiboot3.${UBOOT_SUFFIX}"
-> -UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
-> -UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
-> +UBOOT_IMAGE = "tiboot3-am64x-${PV}-${PR}.${UBOOT_SUFFIX}"
-> +UBOOT_SYMLINK = "tiboot3-am64x.${UBOOT_SUFFIX}"
-> diff --git a/conf/machine/am64xx-evm.conf b/conf/machine/am64xx-evm.conf
-> index eda310a32..53837ad19 100644
-> --- a/conf/machine/am64xx-evm.conf
-> +++ b/conf/machine/am64xx-evm.conf
-> @@ -6,7 +6,11 @@ require conf/machine/include/am64xx.inc
->  
->  IMAGE_BOOT_FILES = "tispl.bin u-boot.img"
->  
-> -UBOOT_MACHINE = "am64x_evm_a53_defconfig"
-> +UBOOT_MACHINE = ""
-> +
-> +UBOOT_CONFIG ??= "evm sk"
-> +UBOOT_CONFIG[evm] = "am64x_evm_a53_defconfig"
-> +UBOOT_CONFIG[sk] = "am64x_sk_a53_defconfig"
->  
->  do_image_wic[depends] += "trusted-firmware-a:do_deploy"
->  do_image_tar[depends] += "trusted-firmware-a:do_deploy"
-> diff --git a/conf/machine/include/am64xx.inc b/conf/machine/include/am64xx.inc
-> index 20441d8a7..9bc9ddae2 100644
-> --- a/conf/machine/include/am64xx.inc
-> +++ b/conf/machine/include/am64xx.inc
-> @@ -8,6 +8,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->  
->  KERNEL_DEVICETREE = " \
->      ti/k3-am642-evm.dtb \
-> +    ti/k3-am642-sk.dtb \
->  "
->  
->  TFA_BOARD = "lite"
-> diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-> index ca0414c06..edfe27a18 100644
-> --- a/recipes-bsp/u-boot/u-boot-ti.inc
-> +++ b/recipes-bsp/u-boot/u-boot-ti.inc
-> @@ -398,8 +398,25 @@ do_deploy_append_j7200-evm-k3r5 () {
->  }
->  
->  do_deploy_append_am64xx-evm-k3r5 () {
-> -	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
-> -	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
-> +	if [ -n "${UBOOT_CONFIG}" ]
-> +	then
-> +		for config in ${UBOOT_MACHINE}; do
-> +			i=$(expr $i + 1);
-> +			for type in ${UBOOT_CONFIG}; do
-> +				j=$(expr $j + 1);
-> +				if [ $j -eq $i ]
-> +				then
-> +					mv ${DEPLOYDIR}/${type}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl-${type}.bin || true
-> +					mv ${DEPLOYDIR}/${type}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl-${type}.bin || true
-> +				fi
-> +			done
-> +			unset j
-> +		done
-> +		unset i
-> +	else
-> +		mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
-> +		mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
-> +	fi
->  }
->  
->  TOOLCHAIN = "gcc"
-> -- 
-> 2.17.0
-> 
-
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
