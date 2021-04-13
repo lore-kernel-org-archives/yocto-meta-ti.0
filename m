@@ -1,242 +1,200 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.5064.1618354260536253792
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.5367.1618355417088217689
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 13 Apr 2021 15:51:00 -0700
+ Tue, 13 Apr 2021 16:10:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=N7ubcBA8;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13DMovsN068729;
-	Tue, 13 Apr 2021 17:50:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1618354257;
-	bh=l68byid/1esxynSX+lSuJTKWRqNPRxUo4nlXRI1tyxE=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=N7ubcBA8DkcDbfUofD3l2Dp6mjfeRCKj02kbedsawJXIOcKQKIWUAMGvE67VCbffM
-	 nDtL8NWo20A68A+TEtKoRgUY6p/xA0UdUQ8abdrta6Og3iBpNEPgagpqpJ6zHjdK7v
-	 NH3s1py5xo4BAEae4Bq+KFnQaOkxc38mA6SvjX/M=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13DMovEF111999
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 13 Apr 2021 17:50:57 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 13
- Apr 2021 17:50:56 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 13 Apr 2021 17:50:56 -0500
-Received: from [10.247.25.23] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13DMoujG101787;
-	Tue, 13 Apr 2021 17:50:56 -0500
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7998140C53;
+	Tue, 13 Apr 2021 23:10:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UIvz9-NHFHyV; Tue, 13 Apr 2021 23:10:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3E3DE400CF;
+	Tue, 13 Apr 2021 23:10:13 +0000 (UTC)
+Received: from [192.168.40.111] (unknown [192.168.40.111])
+	by mail.denix.org (Postfix) with ESMTPSA id 91AE71745B3;
+	Tue, 13 Apr 2021 19:10:12 -0400 (EDT)
+Date: Tue, 13 Apr 2021 19:10:11 -0400
 Subject: Re: [EXTERNAL] [meta-ti] [PATCH] ti-sgx-ddk-km: properly handle arm-poky-linux-gnueabi compiler prefix
-To: <g-tammana@ti.com>, Zan Dobersek <zan@falconsigh.net>,
-        "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-References: <20210224082509.14163-1-zan@falconsigh.net>
- <3c3a7b165e474569a0ce474f2c5e7635@ti.com> <20210224202307.GB4892@denix.org>
- <16673A9B03286F37.14505@lists.yoctoproject.org>
- <f6c786e1-363f-499d-b19e-9e1647161644@www.fastmail.com>
- <290f014d90634c91953745ca4e4ff995@ti.com>
-From: "praneeth" <praneeth@ti.com>
-Message-ID: <421e0f9a-ba58-dccb-2473-3959e88ecc04@ti.com>
-Date: Tue, 13 Apr 2021 17:50:56 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.1
+Message-ID: <3e5f3806-f2a6-4b63-9045-8f07069defa5@email.android.com>
+X-Android-Message-ID: <3e5f3806-f2a6-4b63-9045-8f07069defa5@email.android.com>
+In-Reply-To: <421e0f9a-ba58-dccb-2473-3959e88ecc04@ti.com>
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: praneeth@ti.com
+Cc: g-tammana@ti.com, Zan Dobersek <zan@falconsigh.net>,
+ meta-ti@lists.yoctoproject.org
+Importance: Normal
+X-Priority: 3
+X-MSMail-Priority: Normal
 MIME-Version: 1.0
-In-Reply-To: <290f014d90634c91953745ca4e4ff995@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 13DMovsN068729
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
 
-
-
-On 4/13/2021 5:30 PM, Gowtham Tammana via lists.yoctoproject.org wrote:
-> *From:* meta-ti@lists.yoctoproject.org <meta-ti@lists.yoctoproject.org>=
-=20
-> *On Behalf Of *Zan Dobersek
-> *Sent:* Tuesday, April 13, 2021 6:41 AM
-> *To:* meta-ti@lists.yoctoproject.org
-> *Subject:* Re: [EXTERNAL] [meta-ti] [PATCH] ti-sgx-ddk-km: properly=20
-> handle arm-poky-linux-gnueabi compiler prefix
->=20
-> Hi,
->=20
-> this patch is still valid and needed for Poky-based builds. Did it just=
-=20
-> go unattended or is there some action still expected on my part?
->=20
-> No further action, this will be picked up.
-
-Zan,Gowtham, This has to be picked up for which branches?=20
-(dunfell/master ? )
-
->=20
-> Thanks,
->=20
-> Gowtham
->=20
-> Regards,
->=20
-> Zan
->=20
-> On Fri, Feb 26, 2021, at 8:10 AM, Zan Dobersek wrote:
->=20
->     On Wed, Feb 24, 2021, at 9:23 PM, Denys Dmytriyenko wrote:
->=20
->      > On Wed, Feb 24, 2021 at 06:57:57PM +0000, Gowtham Tammana via
->=20
->      > lists.yoctoproject.org wrote:
->=20
->      > >
->=20
->      > >
->=20
->      > > >-----Original Message-----
->=20
->      > > >From: meta-ti@lists.yoctoproject.org
->     <mailto:meta-ti%40lists.yoctoproject.org>
->     <meta-ti@lists.yoctoproject.org
->     <mailto:meta-ti%40lists.yoctoproject.org>> On
->=20
->      > > >Behalf Of Zan Dobersek
->=20
->      > > >Sent: Wednesday, February 24, 2021 2:25 AM
->=20
->      > > >To: meta-ti@lists.yoctoproject.org
->     <mailto:meta-ti%40lists.yoctoproject.org>
->=20
->      > > >Subject: [EXTERNAL] [meta-ti] [PATCH] ti-sgx-ddk-km: properly
->     handle arm-
->=20
->      > > >poky-linux-gnueabi compiler prefix
->=20
->      > > >
->=20
->      > > >The additional patch for ti-sgx-ddk-km remaps the
->     arm-oe-linux-gnueabi
->=20
->      > > >prefix
->=20
->      > > >to the arm-linux-gnueabihf preferred target. Same should be
->     done for the
->=20
->      > > >arm-poky-linux-gnueabi prefix.
->=20
->      > >
->=20
->      > > This looks ok. Btw what layer is being used when using this
->     toolchain.
->=20
->      >
->=20
->      > Gowtham,
->=20
->      >
->=20
->      > This toolchain is built by Poky, which is the reference
->     distribution of the
->=20
->      > Yocto Project.
->=20
->      >
->=20
->     Reviewed-by: Gowtham Tammana g-tammana@ti.com <mailto:g-tammana@ti.c=
-om>
->=20
->     That's right.
->=20
->     FWIW the patch should be applicable to both dunfell and master branc=
-hes.
->=20
->     Regards,
->=20
->     Zan
->=20
->      > --
->=20
->      > Denys
->=20
->      >
->=20
->      >
->=20
->      > > >Signed-off-by: Zan Dobersek <zan@falconsigh.net
->     <mailto:zan%40falconsigh.net>>
->=20
->      > > >---
->=20
->      > > >
->     ...1-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch | 2 =
-+-
->=20
->      > > > 1 file changed, 1 insertion(+), 1 deletion(-)
->=20
->      > > >
->=20
->      > > >diff --git
->     a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-
->=20
->      > > >OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
->     b/recipes-bsp/powervr-
->=20
->      > >
->      >drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchai=
-n-w-o-
->=20
->      > > >gnueabi.patch
->=20
->      > > >index 071ce0ca..15105eac 100644
->=20
->      > > >--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-suppor=
-t-
->=20
->      > > >OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
->=20
->      > > >+++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-suppor=
-t-
->=20
->      > > >OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
->=20
->      > > >@@ -17,7 +17,7 @@ index dead2f9..2ba3e5e 100644
->=20
->      > > >=A0=A0=A0 ifneq ($$(filter
->     aarch64-%,$$($(1)_compiler_preferred_target)),)
->=20
->      > > >=A0=A0=A0=A0 $(1)_compiler_preferred_target :=3D aarch64-linux=
--gnu
->=20
->      > > >=A0=A0=A0 endif
->=20
->      > > >-+=A0 ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-
->=20
->      > > >gnueabi,$$($(1)_compiler_preferred_target)),)
->=20
->      > > >++=A0 ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi
->     arm-poky-linux-
->=20
->      > > >gnueabi,$$($(1)_compiler_preferred_target)),)
->=20
->      > > > +=A0=A0 $(1)_compiler_preferred_target :=3D arm-linux-gnueabi=
-hf
->=20
->      > > > +=A0 endif
->=20
->      > > >=A0=A0=A0 ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnu=
-eabi
->     armv7hl-
->=20
->      > > >redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
->=20
->      > > >--
->=20
->      > > >2.30.0
->=20
->      >
->=20
->=20
->=20
->=20
->=20
+PGRpdiBkaXI9J2F1dG8nPlByYW5lZXRoLDxkaXYgZGlyPSJhdXRvIj48YnI+PC9kaXY+PGRpdiBk
+aXI9ImF1dG8iPlllcywgZHVuZmVsbCBhbmQgbWFzdGVyIHNob3VsZCBiZSBmaW5lLiBUaGFua3Mu
+PC9kaXY+PGRpdiBkaXI9ImF1dG8iPjxicj48L2Rpdj48ZGl2IGRpcj0iYXV0byI+RGVueXM8L2Rp
+dj48ZGl2IGRpcj0iYXV0byI+PGJyPjwvZGl2PjwvZGl2PjxkaXYgY2xhc3M9ImdtYWlsX2V4dHJh
+Ij48YnI+PGRpdiBjbGFzcz0iZ21haWxfcXVvdGUiPk9uIEFwciAxMywgMjAyMSAxODo1MCwgJnF1
+b3Q7cHJhbmVldGggdmlhIGxpc3RzLnlvY3RvcHJvamVjdC5vcmcmcXVvdDsgJmx0O3ByYW5lZXRo
+PXRpLmNvbUBsaXN0cy55b2N0b3Byb2plY3Qub3JnJmd0OyB3cm90ZTo8YnIgdHlwZT0iYXR0cmli
+dXRpb24iIC8+PGJsb2NrcXVvdGUgY2xhc3M9InF1b3RlIiBzdHlsZT0ibWFyZ2luOjAgMCAwIC44
+ZXg7Ym9yZGVyLWxlZnQ6MXB4ICNjY2Mgc29saWQ7cGFkZGluZy1sZWZ0OjFleCI+PHAgZGlyPSJs
+dHIiPiYjMTM7PGJyPgomIzEzOzxicj4KT24gNC8xMy8yMDIxIDU6MzAgUE0sIEdvd3RoYW0gVGFt
+bWFuYSB2aWEgbGlzdHMueW9jdG9wcm9qZWN0Lm9yZyB3cm90ZTomIzEzOzxicj4KJmd0OyAqRnJv
+bToqIG1ldGEtdGlAbGlzdHMueW9jdG9wcm9qZWN0Lm9yZyAmbHQ7bWV0YS10aUBsaXN0cy55b2N0
+b3Byb2plY3Qub3JnJmd0OyAmIzEzOzxicj4KJmd0OyAqT24gQmVoYWxmIE9mICpaYW4gRG9iZXJz
+ZWsmIzEzOzxicj4KJmd0OyAqU2VudDoqIFR1ZXNkYXksIEFwcmlsIDEzLCAyMDIxIDY6NDEgQU0m
+IzEzOzxicj4KJmd0OyAqVG86KiBtZXRhLXRpQGxpc3RzLnlvY3RvcHJvamVjdC5vcmcmIzEzOzxi
+cj4KJmd0OyAqU3ViamVjdDoqIFJlOiBbRVhURVJOQUxdIFttZXRhLXRpXSBbUEFUQ0hdIHRpLXNn
+eC1kZGsta206IHByb3Blcmx5ICYjMTM7PGJyPgomZ3Q7IGhhbmRsZSBhcm0tcG9reS1saW51eC1n
+bnVlYWJpIGNvbXBpbGVyIHByZWZpeCYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7IEhpLCYj
+MTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7IHRoaXMgcGF0Y2ggaXMgc3RpbGwgdmFsaWQgYW5k
+IG5lZWRlZCBmb3IgUG9reS1iYXNlZCBidWlsZHMuIERpZCBpdCBqdXN0ICYjMTM7PGJyPgomZ3Q7
+IGdvIHVuYXR0ZW5kZWQgb3IgaXMgdGhlcmUgc29tZSBhY3Rpb24gc3RpbGwgZXhwZWN0ZWQgb24g
+bXkgcGFydD8mIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyBObyBmdXJ0aGVyIGFjdGlvbiwg
+dGhpcyB3aWxsIGJlIHBpY2tlZCB1cC4mIzEzOzxicj4KJiMxMzs8YnI+ClphbixHb3d0aGFtLCBU
+aGlzIGhhcyB0byBiZSBwaWNrZWQgdXAgZm9yIHdoaWNoIGJyYW5jaGVzPyAmIzEzOzxicj4KKGR1
+bmZlbGwvbWFzdGVyID8gKSYjMTM7PGJyPgomIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyBU
+aGFua3MsJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsgR293dGhhbSYjMTM7PGJyPgomZ3Q7
+ICYjMTM7PGJyPgomZ3Q7IFJlZ2FyZHMsJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsgWmFu
+JiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsgT24gRnJpLCBGZWIgMjYsIDIwMjEsIGF0IDg6
+MTAgQU0sIFphbiBEb2JlcnNlayB3cm90ZTomIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBPbiBXZWQsIEZlYiAyNCwgMjAyMSwgYXQgOToyMyBQTSwg
+RGVueXMgRG15dHJpeWVua28gd3JvdGU6JiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyBPbiBXZWQsIEZlYiAyNCwgMjAyMSBhdCAw
+Njo1Nzo1N1BNICswMDAwLCBHb3d0aGFtIFRhbW1hbmEgdmlhJiMxMzs8YnI+CiZndDsgJiMxMzs8
+YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyBsaXN0cy55b2N0b3By
+b2plY3Qub3JnIHdyb3RlOiYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyYjMTM7PGJyPgomZ3Q7ICYj
+MTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7
+LS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0mIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7ICZndDsgJmd0O0Zyb206IG1ldGEtdGlA
+bGlzdHMueW9jdG9wcm9qZWN0Lm9yZyYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7ICZsdDttYWlsdG86bWV0YS10aSU0MGxpc3RzLnlvY3RvcHJvamVjdC5vcmcmZ3Q7JiMxMzs8
+YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmx0O21ldGEtdGlAbGlzdHMueW9jdG9w
+cm9qZWN0Lm9yZyYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZsdDttYWls
+dG86bWV0YS10aSU0MGxpc3RzLnlvY3RvcHJvamVjdC5vcmcmZ3Q7Jmd0OyBPbiYjMTM7PGJyPgom
+Z3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0
+OyAmZ3Q7QmVoYWxmIE9mIFphbiBEb2JlcnNlayYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7U2VudDogV2VkbmVz
+ZGF5LCBGZWJydWFyeSAyNCwgMjAyMSAyOjI1IEFNJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZn
+dDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7ICZndDtUbzogbWV0YS10
+aUBsaXN0cy55b2N0b3Byb2plY3Qub3JnJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsgJmx0O21haWx0bzptZXRhLXRpJTQwbGlzdHMueW9jdG9wcm9qZWN0Lm9yZyZndDsmIzEz
+Ozxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAm
+Z3Q7ICZndDsgJmd0O1N1YmplY3Q6IFtFWFRFUk5BTF0gW21ldGEtdGldIFtQQVRDSF0gdGktc2d4
+LWRkay1rbTogcHJvcGVybHkmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBo
+YW5kbGUgYXJtLSYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7cG9reS1saW51eC1nbnVlYWJpIGNvbXBpbGVyIHBy
+ZWZpeCYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7JiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7ICZndDtUaGUgYWRkaXRpb25hbCBwYXRj
+aCBmb3IgdGktc2d4LWRkay1rbSByZW1hcHMgdGhlJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsgYXJtLW9lLWxpbnV4LWdudWVhYmkmIzEzOzxicj4KJmd0OyAmIzEzOzxicj4K
+Jmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7ICZndDsgJmd0O3ByZWZpeCYj
+MTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+ICZndDsgJmd0OyAmZ3Q7dG8gdGhlIGFybS1saW51eC1nbnVlYWJpaGYgcHJlZmVycmVkIHRhcmdl
+dC4gU2FtZSBzaG91bGQgYmUmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBk
+b25lIGZvciB0aGUmIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyAmZ3Q7ICZndDsgJmd0O2FybS1wb2t5LWxpbnV4LWdudWVhYmkgcHJlZml4
+LiYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7ICZndDsgJmd0OyYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyBUaGlzIGxvb2tzIG9rLiBCdHcgd2hhdCBsYXllciBp
+cyBiZWluZyB1c2VkIHdoZW4gdXNpbmcgdGhpcyYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7IHRvb2xjaGFpbi4mIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7JiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyBHb3d0aGFtLCYjMTM7PGJyPgomZ3Q7
+ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsmIzEzOzxi
+cj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7
+IFRoaXMgdG9vbGNoYWluIGlzIGJ1aWx0IGJ5IFBva3ksIHdoaWNoIGlzIHRoZSByZWZlcmVuY2Um
+IzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBkaXN0cmlidXRpb24gb2YgdGhl
+JiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsgJmd0OyBZb2N0byBQcm9qZWN0LiYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsmIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBSZXZpZXdlZC1ieTogR293dGhhbSBUYW1tYW5hIGct
+dGFtbWFuYUB0aS5jb20gJmx0O21haWx0bzpnLXRhbW1hbmFAdGkuY29tJmd0OyYjMTM7PGJyPgom
+Z3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7IFRoYXQncyByaWdodC4m
+IzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBGV0lX
+IHRoZSBwYXRjaCBzaG91bGQgYmUgYXBwbGljYWJsZSB0byBib3RoIGR1bmZlbGwgYW5kIG1hc3Rl
+ciBicmFuY2hlcy4mIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyBSZWdhcmRzLCYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7IFphbiYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgLS0mIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7IERlbnlzJiMxMzs8YnI+CiZndDsgJiMx
+Mzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyYjMTM7PGJyPgom
+Z3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsmIzEz
+Ozxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAm
+Z3Q7ICZndDsgJmd0O1NpZ25lZC1vZmYtYnk6IFphbiBEb2JlcnNlayAmbHQ7emFuQGZhbGNvbnNp
+Z2gubmV0JiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmx0O21haWx0bzp6
+YW4lNDBmYWxjb25zaWdoLm5ldCZndDsmZ3Q7JiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7ICZndDstLS0mIzEzOzxicj4K
+Jmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7ICZn
+dDsgJmd0OyYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7IC4uLjEta20tc3Vw
+cG9ydC1PcGVuRW1iZWRkZWQtaGFyZGZwLXRvb2xjaGFpbi13LW8tZ251ZWFiaS5wYXRjaCB8IDIg
+Ky0mIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyAmZ3Q7ICZndDsgJmd0OyAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVs
+ZXRpb24oLSkmIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyAmZ3Q7ICZndDsgJmd0OyYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7ZGlmZiAtLWdpdCYjMTM7
+PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7IGEvcmVjaXBlcy1ic3AvcG93ZXJ2ci1k
+cml2ZXJzL3RpLXNneC1kZGsta20vMDAwMS1rbS1zdXBwb3J0LSYjMTM7PGJyPgomZ3Q7ICYjMTM7
+PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7T3Bl
+bkVtYmVkZGVkLWhhcmRmcC10b29sY2hhaW4tdy1vLWdudWVhYmkucGF0Y2gmIzEzOzxicj4KJmd0
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBiL3JlY2lwZXMtYnNwL3Bvd2VydnItJiMxMzs8YnI+
+CiZndDsgJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAm
+Z3Q7JiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0O2RyaXZl
+cnMvdGktc2d4LWRkay1rbS8wMDAxLWttLXN1cHBvcnQtT3BlbkVtYmVkZGVkLWhhcmRmcC10b29s
+Y2hhaW4tdy1vLSYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7Z251ZWFiaS5wYXRjaCYjMTM7PGJyPgomZ3Q7ICYj
+MTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7
+aW5kZXggMDcxY2UwY2EuLjE1MTA1ZWFjIDEwMDY0NCYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgom
+Z3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7LS0tIGEvcmVj
+aXBlcy1ic3AvcG93ZXJ2ci1kcml2ZXJzL3RpLXNneC1kZGsta20vMDAwMS1rbS1zdXBwb3J0LSYj
+MTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+ICZndDsgJmd0OyAmZ3Q7T3BlbkVtYmVkZGVkLWhhcmRmcC10b29sY2hhaW4tdy1vLWdudWVhYmku
+cGF0Y2gmIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyAmZ3Q7ICZndDsgJmd0OysrKyBiL3JlY2lwZXMtYnNwL3Bvd2VydnItZHJpdmVycy90
+aS1zZ3gtZGRrLWttLzAwMDEta20tc3VwcG9ydC0mIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7ICZndDsgJmd0O09wZW5FbWJlZGRl
+ZC1oYXJkZnAtdG9vbGNoYWluLXctby1nbnVlYWJpLnBhdGNoJiMxMzs8YnI+CiZndDsgJiMxMzs8
+YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7ICZndDtAQCAt
+MTcsNyArMTcsNyBAQCBpbmRleCBkZWFkMmY5Li4yYmEzZTVlIDEwMDY0NCYjMTM7PGJyPgomZ3Q7
+ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAm
+Z3Q7JiMxNjA7JiMxNjA7JiMxNjA7IGlmbmVxICgkJChmaWx0ZXImIzEzOzxicj4KJmd0OyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyBhYXJjaDY0LSUsJCQoJCgxKV9jb21waWxlcl9wcmVmZXJyZWRf
+dGFyZ2V0KSksKSYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7JiMxNjA7JiMxNjA7JiMxNjA7JiMxNjA7ICQoMSlf
+Y29tcGlsZXJfcHJlZmVycmVkX3RhcmdldCA6PSBhYXJjaDY0LWxpbnV4LWdudSYjMTM7PGJyPgom
+Z3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0
+OyAmZ3Q7JiMxNjA7JiMxNjA7JiMxNjA7IGVuZGlmJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZn
+dDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7ICZndDstKyYjMTYwOyBp
+Zm5lcSAoJCQoZmlsdGVyIGFybS0lLWdudWVhYmloZiBhcm0tb2UtbGludXgtJiMxMzs8YnI+CiZn
+dDsgJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7
+ICZndDtnbnVlYWJpLCQkKCQoMSlfY29tcGlsZXJfcHJlZmVycmVkX3RhcmdldCkpLCkmIzEzOzxi
+cj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7
+ICZndDsgJmd0OysrJiMxNjA7IGlmbmVxICgkJChmaWx0ZXIgYXJtLSUtZ251ZWFiaWhmIGFybS1v
+ZS1saW51eC1nbnVlYWJpJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgYXJt
+LXBva3ktbGludXgtJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7ICZndDtnbnVlYWJpLCQkKCQoMSlfY29tcGlsZXJfcHJl
+ZmVycmVkX3RhcmdldCkpLCkmIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7ICZndDsgJmd0OyArJiMxNjA7JiMxNjA7ICQoMSlfY29t
+cGlsZXJfcHJlZmVycmVkX3RhcmdldCA6PSBhcm0tbGludXgtZ251ZWFiaWhmJiMxMzs8YnI+CiZn
+dDsgJiMxMzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7
+ICZndDsgKyYjMTYwOyBlbmRpZiYjMTM7PGJyPgomZ3Q7ICYjMTM7PGJyPgomZ3Q7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZndDsgJmd0OyAmZ3Q7JiMxNjA7JiMxNjA7JiMxNjA7IGlm
+bmVxICgkJChmaWx0ZXIgYXJtLSUtZ251ZWFiaSBhcm12N2EtY3Jvcy1saW51eC1nbnVlYWJpJiMx
+Mzs8YnI+CiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgYXJtdjdobC0mIzEzOzxicj4KJmd0
+OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7ICZndDsg
+Jmd0O3JlZGhhdC1saW51eC1nbnVlYWJpLCQkKCQoMSlfY29tcGlsZXJfcHJlZmVycmVkX3Rhcmdl
+dCkpLCkmIzEzOzxicj4KJmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyAmZ3Q7ICZndDsgJmd0Oy0tJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgJmd0OyAmZ3Q7ICZndDsyLjMwLjAmIzEzOzxicj4K
+Jmd0OyAmIzEzOzxicj4KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyAmZ3Q7JiMx
+Mzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsgJiMxMzs8YnI+CiZndDsg
+JiMxMzs8YnI+CiZndDsgJiMxMzs8L3A+CjxwIGRpcj0ibHRyIj4mIzEzOzxicj4KJiMxMzs8YnI+
+CiYjMTM7PGJyPgo8L3A+CjwvYmxvY2txdW90ZT48L2Rpdj48YnI+PC9kaXY+
