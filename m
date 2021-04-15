@@ -1,86 +1,87 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web09.634.1618507774536417964
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web08.1427.1618511077727301656
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 15 Apr 2021 10:29:34 -0700
+ Thu, 15 Apr 2021 11:24:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=J/8B8ZzE;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nm@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13FHTXr1032341;
-	Thu, 15 Apr 2021 12:29:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1618507773;
-	bh=l670DXH2cqMiZTMOTmxL9o1xguv2ygK5O7L8rQi/uLA=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=J/8B8ZzEKJx7ivOHP4BK5KrEh7GuTsOHpGwJZMSFoLhDvyVdBQ1e+/RPZqFfuROyj
-	 YpbSBcJdAVlvOFdfMUyYRL69iFy4qrWHMrC9SUuEPYgqiiJNklHDDuJpg4fPlBEaKw
-	 avLyJkPhps5N92enR+1cOf8ufVAdj/HaFEkEwx1k=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13FHTWH5117652
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 15 Apr 2021 12:29:33 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 15
- Apr 2021 12:29:32 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Thu, 15 Apr 2021 12:29:32 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13FHTWYi023075;
-	Thu, 15 Apr 2021 12:29:32 -0500
-Date: Thu, 15 Apr 2021 12:29:32 -0500
-From: "Nishanth Menon" <nm@ti.com>
-To: Sinthu Raja M <sinthu.raja@mistralsolutions.com>
-CC: <meta-ti@lists.yoctoproject.org>, Praneeth Bajjuri <praneeth@ti.com>
-Subject: Re: [meta-ti] [dunfell/master PATCH 3/3] AM64x Unification: Update ti-sci-fw recipe
-Message-ID: <20210415172932.2b46s3imaf5adc5x@subpanel>
-References: <20210408071654.63212-1-sinthu.raja@mistral.in>
- <20210408134409.u24qdeiindwia2hl@paralyses>
- <CAEd-yTRmTJm80fHNb9VVewxA8zYX4ymDH0OE6LbdQqXVBivFHA@mail.gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9824E40C81;
+	Thu, 15 Apr 2021 18:24:36 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id sHNpiu40qU2d; Thu, 15 Apr 2021 18:24:36 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 52A52407E5;
+	Thu, 15 Apr 2021 18:24:32 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id A61671745B4; Thu, 15 Apr 2021 14:24:31 -0400 (EDT)
+Date: Thu, 15 Apr 2021 14:24:31 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: praneeth@ti.com
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+	Lokesh Vutla <lokeshvutla@ti.com>,
+	Nikhil Devshatwar <nikhil.nd@ti.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [dunfell/master PATCH 0/6] am65x/j7*: Remove non-existent 5.10.y dtb*
+Message-ID: <20210415182431.GU15937@denix.org>
+References: <20210415051105.1626-1-praneeth@ti.com>
+ <a60cd66e-9b51-a710-6a1b-b7074bf8126f@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <CAEd-yTRmTJm80fHNb9VVewxA8zYX4ymDH0OE6LbdQqXVBivFHA@mail.gmail.com>
-User-Agent: NeoMutt/20171215
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
+In-Reply-To: <a60cd66e-9b51-a710-6a1b-b7074bf8126f@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 22:46-20210415, Sinthu Raja M wrote:
-> On Thu, Apr 8, 2021 at 7:14 PM Nishanth Menon <nm@ti.com> wrote:
-> >
-> > On 12:46-20210408, Sinthu Raja M via lists.yoctoproject.org wrote:
-> > > From: Sinthu Raja <x0257345@ti.com>
-> > >
-> > > Updtae ti-sci-fw recipe to build for both SK and EVM compilation and
-> > s/Updtae/Update/
-> >
-> > > installation through one machine name
-> >
-> >
-> > Why are we doing this? What happens to the wic file image? What is the
-> > out of box experience for someone creating an SD image -> flash the
-> > image then modify the sd card? how would that help?
-> >
-> The AM64x EVM and SK have similar rootfs, kernel and u-boot source
-> except for R5 SPL where EVM and SK have two different DDR
-> configurations.
-> Two different processor SDK for EVM and SK creates overhead for
-> customers just for the change in tiboot3.bin. Two avoid the overhead,
-> we are creating two
-> different images for EVM and SK under one MACHINE_NAME (which is am64xx-evm)
+On Thu, Apr 15, 2021 at 12:07:05PM -0500, praneeth via lists.yoctoproject.org wrote:
+> Denys,
 > 
-> Two WIC files will be available separately for EVM and SK in the
-> processor SDK installer. Users can use respective WIC files for
-> flashing on to the respective boards.
+> On 4/15/2021 12:10 AM, praneeth@ti.com wrote:
+> >From: Praneeth Bajjuri <praneeth@ti.com>
+> >
+> >The current ti-linux-5.10.y integration branch doesnt have support for
+> >non base board dtb/o form the primary latest processor board on am65 and
+> >j7* evms yet.
+> >
+> >Removing these dtb/o for enabling the builds to continue.
+> >Plan to add these blob and overlays back once the equivalent support is
+> >added in the integrated ti-linux-5.10.y kernel.
+> >
+> 
+> Need your recommendation if this is the right approach to enable the
+> builds at this early stage of LTS migration (and re-enable the
+> overlays once the support is added in kernel).
 
-since meta-yocto, meta-arago etc use the same meta-ti layer,
+That's kind of normal to start a new LTS with bare minimum of dtb/o support.
 
-Could you explain how, in meta-arago/meta-ti am I generating two different wic
-files with the current patch series? I am probably missing some nuance
-in your patches..
+But I have 2 concerns:
+
+1. Maybe better to just push commit with removal, instead of reverting old 
+commits - it may get quite confusing soon with reverts of reverts...
+
+2. Do you think it's still premature to make 5.10 as a default in meta-ti 
+dunfell branch? Since dunfell is kind of established stable (not a new LTS), 
+anyone who updates meta-ti will go from fully working 5.4 to a very minimal 
+and bare 5.10 - may be a bad user experience...
+
+
+> >Praneeth Bajjuri (6):
+> >   Revert "conf: j7-evm: Add jailhouse dtbo"
+> >   Revert "j7-evm: add new k3-j721e-proc-board-tps65917.dtb"
+> >   Revert "j7-evm: add new infotainment DTBO file"
+> >   Revert "j7-evm: add k3-j721e-pcie-backplane.dtbo"
+> >   Revert "conf: machine: j7200-evm: Add Jailhouse overlay"
+> >   conf/machine: am65xx: Remove non-existent dtb* from 5.10
+> >
+> >  conf/machine/include/am65xx.inc | 11 -----------
+> >  conf/machine/j7-evm.conf        |  4 ----
+> >  conf/machine/j7200-evm.conf     |  1 -
+> >  3 files changed, 16 deletions(-)
+> >
 
 -- 
 Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
