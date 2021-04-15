@@ -1,107 +1,86 @@
-Received: from egress-ip4a.ess.de.barracuda.com (egress-ip4a.ess.de.barracuda.com [18.184.203.227])
- by mx.groups.io with SMTP id smtpd.web11.428.1618506977268569387
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web09.634.1618507774536417964
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 15 Apr 2021 10:16:17 -0700
+ Thu, 15 Apr 2021 10:29:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mistralsolutions.com header.s=google header.b=Aiz16mYL;
- spf=pass (domain: mistralsolutions.com, ip: 18.184.203.227, mailfrom: sinthu.raja@mistralsolutions.com)
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com [209.85.128.71]) by mx-outbound14-222.eu-central-1a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Thu, 15 Apr 2021 17:16:15 +0000
-Received: by mail-wm1-f71.google.com with SMTP id f134-20020a1c1f8c0000b029012e03286b7bso997799wmf.0
-        for <meta-ti@lists.yoctoproject.org>; Thu, 15 Apr 2021 10:16:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mistralsolutions.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=XfaPfZ0C75CA+7yX9eaAZoaBIZGpCqmuYy3GrIhKxKc=;
-        b=Aiz16mYLJueeOWjKrxqM9BDJppzhwhmQM0ttv10tdWKH2UmRe4308QBzLIFjMQf9sb
-         JJPw7J3hT0NXlZ/CqyqgOKAomlxKMP7y7Q2yFp++iZ0VoelulrYLOHTSoOhK7RuFC6QQ
-         4rqs6kkbk/DuRmjPOeXYQDhQ4b6BYYLkcnhFA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=XfaPfZ0C75CA+7yX9eaAZoaBIZGpCqmuYy3GrIhKxKc=;
-        b=il1YfPCc0Q+R1FmSNo8OOF57hBd4PW1SRRPwlzVOyHa8u3INrrEKB1fl5tLY9eQz0n
-         rv5puf4TfEszBy3xvnvs+0DwwAT39A7H3c3+Z7eGzOWywh5vD588RoHFzXb/vZU5s9RX
-         xu6QvVGsvl1UzZuQmkgQoT8xA2ZgBG/4LhbjtUvCVrL0YNLk6xXoG2L6YPW+Bk2jEtQD
-         G8FozM4nezl6HYNq1j7PNCyIge6a92dxIj/uvzej2C5mWxDfnbJ4Shq2scrRJksh36a/
-         zdCiQn5SHl6JFNh/7P4EwPRsIzAI9DNk51knEKDqe/qsXKv0vdB1laxeh1tYsQafBYX6
-         3Cuw==
-X-Gm-Message-State: AOAM532cwK7Q6PXXrE0AEHBLvw98+vUlvFZCBRSYtgTy7qQ0wzZPwcfC
-	JG5uKURMX4ef6h5ddg1+mHIiKY+taNO3vh4nXtYy2sR8Za5lQHyfhN9Q5IrDxoOv1FvUNdSVFp0
-	nFYNocCqgKe7kgpFcj5N4HVP84qoLrOOR16FJQaeFY5gpIG4zqSn/seOOQLLPaGLyg02b1ToT3d
-	C7M5Y=
-X-Received: by 2002:a7b:ca44:: with SMTP id m4mr4181695wml.103.1618506974920;
-        Thu, 15 Apr 2021 10:16:14 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxo2Yo1tlZHN4H7slLS4FN3dA1s5NujZwZXOqSF/j9xx6PtVP70VhY2NQNLgXR4tjyjatBCE5lhuzQN6wlxhQA=
-X-Received: by 2002:a7b:ca44:: with SMTP id m4mr4181683wml.103.1618506974751;
- Thu, 15 Apr 2021 10:16:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210408071654.63212-1-sinthu.raja@mistral.in> <20210408134409.u24qdeiindwia2hl@paralyses>
-In-Reply-To: <20210408134409.u24qdeiindwia2hl@paralyses>
-From: "Sinthu Raja M" <sinthu.raja@mistralsolutions.com>
-Date: Thu, 15 Apr 2021 22:46:03 +0530
-Message-ID: <CAEd-yTRmTJm80fHNb9VVewxA8zYX4ymDH0OE6LbdQqXVBivFHA@mail.gmail.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=J/8B8ZzE;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nm@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13FHTXr1032341;
+	Thu, 15 Apr 2021 12:29:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1618507773;
+	bh=l670DXH2cqMiZTMOTmxL9o1xguv2ygK5O7L8rQi/uLA=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=J/8B8ZzEKJx7ivOHP4BK5KrEh7GuTsOHpGwJZMSFoLhDvyVdBQ1e+/RPZqFfuROyj
+	 YpbSBcJdAVlvOFdfMUyYRL69iFy4qrWHMrC9SUuEPYgqiiJNklHDDuJpg4fPlBEaKw
+	 avLyJkPhps5N92enR+1cOf8ufVAdj/HaFEkEwx1k=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13FHTWH5117652
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 15 Apr 2021 12:29:33 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 15
+ Apr 2021 12:29:32 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Thu, 15 Apr 2021 12:29:32 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13FHTWYi023075;
+	Thu, 15 Apr 2021 12:29:32 -0500
+Date: Thu, 15 Apr 2021 12:29:32 -0500
+From: "Nishanth Menon" <nm@ti.com>
+To: Sinthu Raja M <sinthu.raja@mistralsolutions.com>
+CC: <meta-ti@lists.yoctoproject.org>, Praneeth Bajjuri <praneeth@ti.com>
 Subject: Re: [meta-ti] [dunfell/master PATCH 3/3] AM64x Unification: Update ti-sci-fw recipe
-To: Nishanth Menon <nm@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>
-X-BESS-ID: 1618506975-303806-3303-43822-1
-X-BESS-VER: 2019.1_20210414.2120
-X-BESS-Apparent-Source-IP: 209.85.128.71
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.231575 [from 
-	cloudscan12-218.eu-central-1a.ess.aws.cudaops.com]
-	Rule breakdown below
-	 pts rule name              description
-	---- ---------------------- --------------------------------
-	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
-	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_SC0_MISMATCH_TO, BSF_BESS_OUTBOUND
-X-BESS-BRTS-Status: 1
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <20210415172932.2b46s3imaf5adc5x@subpanel>
+References: <20210408071654.63212-1-sinthu.raja@mistral.in>
+ <20210408134409.u24qdeiindwia2hl@paralyses>
+ <CAEd-yTRmTJm80fHNb9VVewxA8zYX4ymDH0OE6LbdQqXVBivFHA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAEd-yTRmTJm80fHNb9VVewxA8zYX4ymDH0OE6LbdQqXVBivFHA@mail.gmail.com>
+User-Agent: NeoMutt/20171215
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Thu, Apr 8, 2021 at 7:14 PM Nishanth Menon <nm@ti.com> wrote:
->
-> On 12:46-20210408, Sinthu Raja M via lists.yoctoproject.org wrote:
-> > From: Sinthu Raja <x0257345@ti.com>
+On 22:46-20210415, Sinthu Raja M wrote:
+> On Thu, Apr 8, 2021 at 7:14 PM Nishanth Menon <nm@ti.com> wrote:
 > >
-> > Updtae ti-sci-fw recipe to build for both SK and EVM compilation and
-> s/Updtae/Update/
->
-> > installation through one machine name
->
->
-> Why are we doing this? What happens to the wic file image? What is the
-> out of box experience for someone creating an SD image -> flash the
-> image then modify the sd card? how would that help?
->
-The AM64x EVM and SK have similar rootfs, kernel and u-boot source
-except for R5 SPL where EVM and SK have two different DDR
-configurations.
-Two different processor SDK for EVM and SK creates overhead for
-customers just for the change in tiboot3.bin. Two avoid the overhead,
-we are creating two
-different images for EVM and SK under one MACHINE_NAME (which is am64xx-evm)
+> > On 12:46-20210408, Sinthu Raja M via lists.yoctoproject.org wrote:
+> > > From: Sinthu Raja <x0257345@ti.com>
+> > >
+> > > Updtae ti-sci-fw recipe to build for both SK and EVM compilation and
+> > s/Updtae/Update/
+> >
+> > > installation through one machine name
+> >
+> >
+> > Why are we doing this? What happens to the wic file image? What is the
+> > out of box experience for someone creating an SD image -> flash the
+> > image then modify the sd card? how would that help?
+> >
+> The AM64x EVM and SK have similar rootfs, kernel and u-boot source
+> except for R5 SPL where EVM and SK have two different DDR
+> configurations.
+> Two different processor SDK for EVM and SK creates overhead for
+> customers just for the change in tiboot3.bin. Two avoid the overhead,
+> we are creating two
+> different images for EVM and SK under one MACHINE_NAME (which is am64xx-evm)
+> 
+> Two WIC files will be available separately for EVM and SK in the
+> processor SDK installer. Users can use respective WIC files for
+> flashing on to the respective boards.
 
-Two WIC files will be available separately for EVM and SK in the
-processor SDK installer. Users can use respective WIC files for
-flashing on to the respective boards.
+since meta-yocto, meta-arago etc use the same meta-ti layer,
 
->
-> if we are going to make things minimal, then we might just have a
-> headless_k3 and gui_k3 or something similar
->
->
-> Further, when people have their own boards, how are they supposed to add
-> support for their platforms?
->
-For adding support for new platforms, it will be the same as adding
-any other new platforms, these changes will not affect the default way
-of adding the new board.
+Could you explain how, in meta-arago/meta-ti am I generating two different wic
+files with the current patch series? I am probably missing some nuance
+in your patches..
 
->
->
-> --
-> Regards,
-> Nishanth Menon
-> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
