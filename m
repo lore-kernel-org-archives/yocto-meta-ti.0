@@ -1,113 +1,82 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.982.1618518146227851769
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web08.4939.1618549564494319717
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 15 Apr 2021 13:22:26 -0700
+ Thu, 15 Apr 2021 22:06:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9A55D40C81;
-	Thu, 15 Apr 2021 20:22:25 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3XwS6-x_yAe6; Thu, 15 Apr 2021 20:22:25 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 601F840AB7;
-	Thu, 15 Apr 2021 20:22:21 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id BB1571745B4; Thu, 15 Apr 2021 16:22:20 -0400 (EDT)
-Date: Thu, 15 Apr 2021 16:22:20 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: "Bajjuri, Praneeth" <praneeth@ti.com>
-Cc: Denys Dmytriyenko <denys@konsulko.com>,
-	Lokesh Vutla <lokeshvutla@ti.com>,
-	Nikhil Devshatwar <nikhil.nd@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [dunfell/master PATCH 0/6] am65x/j7*: Remove non-existent 5.10.y dtb*
-Message-ID: <20210415202220.GX15937@denix.org>
-References: <20210415051105.1626-1-praneeth@ti.com>
- <a60cd66e-9b51-a710-6a1b-b7074bf8126f@ti.com>
- <20210415182431.GU15937@denix.org>
- <3d8c8160-aadc-5442-a38a-b5ff8b60d57c@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Jh69Hf/d;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13G563o7095372;
+	Fri, 16 Apr 2021 00:06:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1618549563;
+	bh=9ztQCE32jr70EWt5almRmyTEtst5CDpMSZo9z98aFv4=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=Jh69Hf/dfmqpUin1jcRCfjuobGJMyWvAINgXq9g+FHB1ccBBqVHpErElry92SScMa
+	 WPq3+iyradwrfukHXZ1TZc7uqcW1sBY+RT7S7fczwVLPVD0/u1TUpyMsHKByqCV/Dx
+	 SNTydCJL7xFkNuGuku5GcLEfWOc0UAoNenABVHiM=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13G562uP077255
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 16 Apr 2021 00:06:03 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Fri, 16
+ Apr 2021 00:06:02 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Fri, 16 Apr 2021 00:06:02 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13G561LX063515;
+	Fri, 16 Apr 2021 00:06:02 -0500
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+        Nikhil Devshatwar <nikhil.nd@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH v2 1/6] conf: j7-evm: Remove unavailable dtb/o from 5.10 kernel
+Date: Fri, 16 Apr 2021 00:05:55 -0500
+Message-ID: <20210416050600.16593-2-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210416050600.16593-1-praneeth@ti.com>
+References: <20210416050600.16593-1-praneeth@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <3d8c8160-aadc-5442-a38a-b5ff8b60d57c@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Thu, Apr 15, 2021 at 02:00:31PM -0500, Bajjuri, Praneeth wrote:
-> 
-> 
-> On 4/15/2021 1:24 PM, Denys Dmytriyenko wrote:
-> >On Thu, Apr 15, 2021 at 12:07:05PM -0500, praneeth via lists.yoctoproject.org wrote:
-> >>Denys,
-> >>
-> >>On 4/15/2021 12:10 AM, praneeth@ti.com wrote:
-> >>>From: Praneeth Bajjuri <praneeth@ti.com>
-> >>>
-> >>>The current ti-linux-5.10.y integration branch doesnt have support for
-> >>>non base board dtb/o form the primary latest processor board on am65 and
-> >>>j7* evms yet.
-> >>>
-> >>>Removing these dtb/o for enabling the builds to continue.
-> >>>Plan to add these blob and overlays back once the equivalent support is
-> >>>added in the integrated ti-linux-5.10.y kernel.
-> >>>
-> >>
-> >>Need your recommendation if this is the right approach to enable the
-> >>builds at this early stage of LTS migration (and re-enable the
-> >>overlays once the support is added in kernel).
-> >
-> >That's kind of normal to start a new LTS with bare minimum of dtb/o support.
-> >
-> >But I have 2 concerns:
-> >
-> >1. Maybe better to just push commit with removal, instead of reverting old
-> >commits - it may get quite confusing soon with reverts of reverts...
-> 
-> makes sense. will squash in v2.
-> 
-> >
-> >2. Do you think it's still premature to make 5.10 as a default in meta-ti
-> >dunfell branch? Since dunfell is kind of established stable (not a new LTS),
-> >anyone who updates meta-ti will go from fully working 5.4 to a very minimal
-> >and bare 5.10 - may be a bad user experience...
-> 
-> Was thinking in similar line.
-> So, till the 5.10 baseline matures i will continue to use
-> dunfell-next to stage the patches and keep dunfell branch untouched
-> w.r.t merging 5.10 specific changes.
-> 
-> Let me know if this a good approach, The only problem in that case
-> is the graphics update for 5.10 that i recently pulled to dunfell
-> branch. Need to revert it to keep 5.4 dunfell experience retained.
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Try those updates first with 5.4 before reverting them, mayve they'll work.
+The following dtb/o are not currently available in
+ti-linux-5.10.y branch.
 
+Removing for now, and shall be added back once they are
+available in 5.10 kernel.
 
-> Any other ideas?
-> 
-> >
-> >
-> >>>Praneeth Bajjuri (6):
-> >>>   Revert "conf: j7-evm: Add jailhouse dtbo"
-> >>>   Revert "j7-evm: add new k3-j721e-proc-board-tps65917.dtb"
-> >>>   Revert "j7-evm: add new infotainment DTBO file"
-> >>>   Revert "j7-evm: add k3-j721e-pcie-backplane.dtbo"
-> >>>   Revert "conf: machine: j7200-evm: Add Jailhouse overlay"
-> >>>   conf/machine: am65xx: Remove non-existent dtb* from 5.10
-> >>>
-> >>>  conf/machine/include/am65xx.inc | 11 -----------
-> >>>  conf/machine/j7-evm.conf        |  4 ----
-> >>>  conf/machine/j7200-evm.conf     |  1 -
-> >>>  3 files changed, 16 deletions(-)
-> >>>
-> >
-> 
+-    ti/k3-j721e-proc-board-tps65917.dtb
+-    ti/k3-j721e-common-proc-board-infotainment.dtbo
+-    ti/k3-j721e-pcie-backplane.dtbo
+-    ti/k3-j721e-common-proc-board-jailhouse.dtbo
 
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ conf/machine/j7-evm.conf | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
+index ee23207b..1b99baeb 100644
+--- a/conf/machine/j7-evm.conf
++++ b/conf/machine/j7-evm.conf
+@@ -11,10 +11,6 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-j721e-common-proc-board.dtb \
+-    ti/k3-j721e-proc-board-tps65917.dtb \
+-    ti/k3-j721e-common-proc-board-infotainment.dtbo \
+-    ti/k3-j721e-pcie-backplane.dtbo \
+-    ti/k3-j721e-common-proc-board-jailhouse.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "j721e_evm_a72_config"
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.17.1
+
