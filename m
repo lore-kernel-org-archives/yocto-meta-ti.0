@@ -1,135 +1,118 @@
-Received: from egress-ip4a.ess.de.barracuda.com (egress-ip4a.ess.de.barracuda.com [18.184.203.227])
- by mx.groups.io with SMTP id smtpd.web12.6033.1618560338265745306
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web08.14.1618594542969751496
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 16 Apr 2021 01:05:38 -0700
+ Fri, 16 Apr 2021 10:35:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mistralsolutions.com header.s=google header.b=eJbCFWlL;
- spf=pass (domain: mistralsolutions.com, ip: 18.184.203.227, mailfrom: sinthu.raja@mistralsolutions.com)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com [209.85.221.71]) by mx-outbound8-225.eu-central-1a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Fri, 16 Apr 2021 08:05:36 +0000
-Received: by mail-wr1-f71.google.com with SMTP id s9-20020a5d51090000b02901028ea30da6so4054612wrt.7
-        for <meta-ti@lists.yoctoproject.org>; Fri, 16 Apr 2021 01:05:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mistralsolutions.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=37PoOMcNbgUEUdZmHFWhwAk57P0Cn23/KeR9xxxur6o=;
-        b=eJbCFWlLk+AT67rUevkLgvL9SzZzDYoTCaF1GvaVb/hPDGvEAGAhcbuKKHXW5d5sH4
-         Zz/kd5Dxi8PFKus0TrMLb8lCRrKGWoHKRMF3Qm6z8qUx559drG/dwEJcbdi5C5cLMlPh
-         OvbZjHjIC17I1ZGaSJMvKF6hrPkvI9dtTmjC4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=37PoOMcNbgUEUdZmHFWhwAk57P0Cn23/KeR9xxxur6o=;
-        b=YjeqV/pHdePgIwZSykNLnzIV8LJ1VotRRPsGrgZII39CTrkkLTVEpsd2GeAfgQkuuW
-         aGTEsEAB5MAezpY5pCcUXZFt+6CFzQ3StATrgemkVZSzAhp9CNUYqv2cTF2KgEsYpDJC
-         faKCeuf5J7avONZRLGJdweQ8QRAY9UQVL+nwYRAbA9IkG8ynm139q/9ziNMe/lcsVjaS
-         X5Y2OimDRo4fv3iRBkf+Vd0g1XhMlPm+tp3OGO3YhsR68FSSG3xAcri8zTIQr2y3Z31Y
-         i+IB4DyRiCQag7p0/2ffhYernqW2GSc3BThbDTfYwmfmF50evX50kESQ+p/YO+dFnJWk
-         2tuw==
-X-Gm-Message-State: AOAM5313louqRt8IkOGUrtuSM8NmkA3xORowbjgjF/BM/igUDPFL9iRH
-	/TBe3UyRNwb5qYijMQTshU6ldy1WPMfjsAOcDt5c22/kmFgzCvh3/fsi7ohT1FLGubglMZjE/V4
-	VQDOTw+LiAGsViD+U7BnQUB89yEI/kya5xojp/2bu67dykiNXfuMKh600n4BuZIBHPtwEyzJnoc
-	mcz6k=
-X-Received: by 2002:adf:e8c3:: with SMTP id k3mr7715375wrn.400.1618560336050;
-        Fri, 16 Apr 2021 01:05:36 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw8NT9m7UtX6nOxiAfcCXQ4MX0IXXbqpM/t8DhHlWqRvvtZ078lAgh6Sel3Zo+YmsENdVqqtC326/ga90kMh7I=
-X-Received: by 2002:adf:e8c3:: with SMTP id k3mr7715352wrn.400.1618560335831;
- Fri, 16 Apr 2021 01:05:35 -0700 (PDT)
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 1406140C81;
+	Fri, 16 Apr 2021 17:35:42 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id C0HqzehDxkuj; Fri, 16 Apr 2021 17:35:42 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C9EBA409E0;
+	Fri, 16 Apr 2021 17:35:37 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 289C21745B3; Fri, 16 Apr 2021 13:35:37 -0400 (EDT)
+Date: Fri, 16 Apr 2021 13:35:37 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: "Bajjuri, Praneeth" <praneeth@ti.com>
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+	Lokesh Vutla <lokeshvutla@ti.com>,
+	Nikhil Devshatwar <nikhil.nd@ti.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [dunfell/master PATCH 0/6] am65x/j7*: Remove non-existent 5.10.y dtb*
+Message-ID: <20210416173537.GZ15937@denix.org>
+References: <20210415051105.1626-1-praneeth@ti.com>
+ <a60cd66e-9b51-a710-6a1b-b7074bf8126f@ti.com>
+ <20210415182431.GU15937@denix.org>
+ <3d8c8160-aadc-5442-a38a-b5ff8b60d57c@ti.com>
+ <167621ADFB287AF6.32252@lists.yoctoproject.org>
 MIME-Version: 1.0
-References: <20210408071654.63212-1-sinthu.raja@mistral.in>
- <20210408134409.u24qdeiindwia2hl@paralyses> <CAEd-yTRmTJm80fHNb9VVewxA8zYX4ymDH0OE6LbdQqXVBivFHA@mail.gmail.com>
- <20210415172932.2b46s3imaf5adc5x@subpanel>
-In-Reply-To: <20210415172932.2b46s3imaf5adc5x@subpanel>
-From: "Sinthu Raja M" <sinthu.raja@mistralsolutions.com>
-Date: Fri, 16 Apr 2021 13:35:24 +0530
-Message-ID: <CAEd-yTQMtmCFSY4Av-vaEXwh7XScdjugqxt45=Jv4OH6YQ94Hg@mail.gmail.com>
-Subject: Re: [meta-ti] [dunfell/master PATCH 3/3] AM64x Unification: Update ti-sci-fw recipe
-To: Nishanth Menon <nm@ti.com>, denys@konsulko.com
-Cc: meta-ti@lists.yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>
-X-BESS-ID: 1618560336-302273-5593-16852-1
-X-BESS-VER: 2019.1_20210414.2120
-X-BESS-Apparent-Source-IP: 209.85.221.71
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.231590 [from 
-	cloudscan23-73.eu-central-1b.ess.aws.cudaops.com]
-	Rule breakdown below
-	 pts rule name              description
-	---- ---------------------- --------------------------------
-	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
-	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, BSF_SC0_MISMATCH_TO
-X-BESS-BRTS-Status: 1
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <167621ADFB287AF6.32252@lists.yoctoproject.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Apr 15, 2021 at 10:59 PM Nishanth Menon <nm@ti.com> wrote:
->
-> On 22:46-20210415, Sinthu Raja M wrote:
-> > On Thu, Apr 8, 2021 at 7:14 PM Nishanth Menon <nm@ti.com> wrote:
+On Thu, Apr 15, 2021 at 04:22:20PM -0400, Denys Dmytriyenko wrote:
+> On Thu, Apr 15, 2021 at 02:00:31PM -0500, Bajjuri, Praneeth wrote:
+> > 
+> > 
+> > On 4/15/2021 1:24 PM, Denys Dmytriyenko wrote:
+> > >On Thu, Apr 15, 2021 at 12:07:05PM -0500, praneeth via lists.yoctoproject.org wrote:
+> > >>Denys,
+> > >>
+> > >>On 4/15/2021 12:10 AM, praneeth@ti.com wrote:
+> > >>>From: Praneeth Bajjuri <praneeth@ti.com>
+> > >>>
+> > >>>The current ti-linux-5.10.y integration branch doesnt have support for
+> > >>>non base board dtb/o form the primary latest processor board on am65 and
+> > >>>j7* evms yet.
+> > >>>
+> > >>>Removing these dtb/o for enabling the builds to continue.
+> > >>>Plan to add these blob and overlays back once the equivalent support is
+> > >>>added in the integrated ti-linux-5.10.y kernel.
+> > >>>
+> > >>
+> > >>Need your recommendation if this is the right approach to enable the
+> > >>builds at this early stage of LTS migration (and re-enable the
+> > >>overlays once the support is added in kernel).
 > > >
-> > > On 12:46-20210408, Sinthu Raja M via lists.yoctoproject.org wrote:
-> > > > From: Sinthu Raja <x0257345@ti.com>
-> > > >
-> > > > Updtae ti-sci-fw recipe to build for both SK and EVM compilation and
-> > > s/Updtae/Update/
+> > >That's kind of normal to start a new LTS with bare minimum of dtb/o support.
 > > >
-> > > > installation through one machine name
+> > >But I have 2 concerns:
 > > >
+> > >1. Maybe better to just push commit with removal, instead of reverting old
+> > >commits - it may get quite confusing soon with reverts of reverts...
+> > 
+> > makes sense. will squash in v2.
+> > 
 > > >
-> > > Why are we doing this? What happens to the wic file image? What is the
-> > > out of box experience for someone creating an SD image -> flash the
-> > > image then modify the sd card? how would that help?
-> > >
-> > The AM64x EVM and SK have similar rootfs, kernel and u-boot source
-> > except for R5 SPL where EVM and SK have two different DDR
-> > configurations.
-> > Two different processor SDK for EVM and SK creates overhead for
-> > customers just for the change in tiboot3.bin. Two avoid the overhead,
-> > we are creating two
-> > different images for EVM and SK under one MACHINE_NAME (which is am64xx-evm)
-> >
-> > Two WIC files will be available separately for EVM and SK in the
-> > processor SDK installer. Users can use respective WIC files for
-> > flashing on to the respective boards.
->
-> since meta-yocto, meta-arago etc use the same meta-ti layer,
->
-> Could you explain how, in meta-arago/meta-ti am I generating two different wic
-> files with the current patch series? I am probably missing some nuance
-> in your patches..
->
-The patch for generating two WIC files is not added in the current
-patch series. I am working on an approach to generate those two WIC
-files.
-Below is the approach with which I have a working prototype.
-1. The meta-arago layer will have two new recipes called
-tisdk-base-image-evm.bb and tisdk-base-image-sk.bb for EVM and SK
-respectively.
-2. These two new recipes will have information on where the boot
-images are available which are required for the respective WIC images,
-such as IMAGE_BASENAME IMAGE_LINK_NAME IMGDEPLOYDIR  DEPLOY_DIR_IMAGE
-3. The two new recipes will be given as the target images for any
-bundle creation.
+> > >2. Do you think it's still premature to make 5.10 as a default in meta-ti
+> > >dunfell branch? Since dunfell is kind of established stable (not a new LTS),
+> > >anyone who updates meta-ti will go from fully working 5.4 to a very minimal
+> > >and bare 5.10 - may be a bad user experience...
+> > 
+> > Was thinking in similar line.
+> > So, till the 5.10 baseline matures i will continue to use
+> > dunfell-next to stage the patches and keep dunfell branch untouched
+> > w.r.t merging 5.10 specific changes.
 
-There is another approach which is about bringing in multiple build
-machine configurations under a single machine name.
- 1. Currently two build configuration such as am64xx-evm and
-am64xx-evm-k3r5 are invoked for am64xx-evm
- 2. Two more build configurations such as am64xx-sk and am64xx-sk-k3r5
- will be added.
- 3. The u-boot and ti-sci-fw recipes will be invoked for am64xx-sk and
-am64xx-sk-k3r5
- 4. For WIC file generation, inside the sdk bundle recipes, the
-IMAGE_BASENAME, IMAGE_LINK_NAME, IMGDEPLOYDIR and  DEPLOY_DIR_IMAGE
-variable will be prefixed with am64xx-sk and respective name and path
-will be updated/added. This will generate two WIC files for EVM and
-SK.
- Note: This approach I don't have prototyped yet. Need your insight in
-this approach on the feasibility of adding multiple build
-configuration
+Another approach could be to keep using core-next branding for a bit longer, 
+leaving 5.4 as a default, until 5.10 is ready.
 
-Denys,
-Could you please provide comments on the feasibility on the above approaches.
 
-Thanks & Regards
-Sinthu Raja
+> > Let me know if this a good approach, The only problem in that case
+> > is the graphics update for 5.10 that i recently pulled to dunfell
+> > branch. Need to revert it to keep 5.4 dunfell experience retained.
+> 
+> Try those updates first with 5.4 before reverting them, mayve they'll work.
+> 
+> 
+> > Any other ideas?
+> > 
+> > >
+> > >
+> > >>>Praneeth Bajjuri (6):
+> > >>>   Revert "conf: j7-evm: Add jailhouse dtbo"
+> > >>>   Revert "j7-evm: add new k3-j721e-proc-board-tps65917.dtb"
+> > >>>   Revert "j7-evm: add new infotainment DTBO file"
+> > >>>   Revert "j7-evm: add k3-j721e-pcie-backplane.dtbo"
+> > >>>   Revert "conf: machine: j7200-evm: Add Jailhouse overlay"
+> > >>>   conf/machine: am65xx: Remove non-existent dtb* from 5.10
+> > >>>
+> > >>>  conf/machine/include/am65xx.inc | 11 -----------
+> > >>>  conf/machine/j7-evm.conf        |  4 ----
+> > >>>  conf/machine/j7200-evm.conf     |  1 -
+> > >>>  3 files changed, 16 deletions(-)
+> > >>>
+> > >
+
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
