@@ -1,139 +1,94 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.4705.1618807870416590658
+Received: from egress-ip4b.ess.de.barracuda.com (egress-ip4b.ess.de.barracuda.com [18.185.115.208])
+ by mx.groups.io with SMTP id smtpd.web11.6017.1618820384298082939
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 18 Apr 2021 21:51:10 -0700
+ Mon, 19 Apr 2021 01:19:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Q/TqAXhy;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13J4p7dK020573;
-	Sun, 18 Apr 2021 23:51:07 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1618807867;
-	bh=ML2gUan1Koeyz0lr7f09k3AXCsDtRkTwJKKX4msvhaM=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=Q/TqAXhyGnCSC3czZV91IUXInkjxVV3bY2kkPf8pzgC1dyBeDWXLUBQ/OkuU8R9XJ
-	 zIw/DGbOEbEQNiD324qK7i+lw+rph7g4Thvgfia9oP5Zz+l4GrPbvOHT3zFhJ+XN86
-	 AI1nuwCQLRWgSMTwyAfLK4LpXJl4GeMGgbHF+sKk=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13J4p7L8092140
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 18 Apr 2021 23:51:07 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Sun, 18
- Apr 2021 23:51:06 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Sun, 18 Apr 2021 23:51:07 -0500
-Received: from [10.250.50.222] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13J4p6kk053248;
-	Sun, 18 Apr 2021 23:51:06 -0500
-Subject: Re: [meta-ti] [dunfell/master PATCH 0/6] am65x/j7*: Remove non-existent 5.10.y dtb*
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>, Lokesh Vutla <lokeshvutla@ti.com>,
-        Nikhil Devshatwar <nikhil.nd@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <20210415051105.1626-1-praneeth@ti.com>
- <a60cd66e-9b51-a710-6a1b-b7074bf8126f@ti.com>
- <20210415182431.GU15937@denix.org>
- <3d8c8160-aadc-5442-a38a-b5ff8b60d57c@ti.com>
- <167621ADFB287AF6.32252@lists.yoctoproject.org>
- <20210416173537.GZ15937@denix.org>
-From: "praneeth" <praneeth@ti.com>
-Message-ID: <46ee0999-a7ba-0417-754c-102d1ddcd437@ti.com>
-Date: Sun, 18 Apr 2021 23:51:06 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.1
+ dkim=pass header.i=@mistralsolutions.com header.s=google header.b=UTo6hAZO;
+ spf=pass (domain: mistralsolutions.com, ip: 18.185.115.208, mailfrom: sinthu.raja@mistralsolutions.com)
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198]) by mx-outbound18-250.eu-central-1b.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 19 Apr 2021 08:19:41 +0000
+Received: by mail-pf1-f198.google.com with SMTP id a4-20020a056a000c84b029025d788a548fso1009786pfv.8
+        for <meta-ti@lists.yoctoproject.org>; Mon, 19 Apr 2021 01:19:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mistralsolutions.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kyY5QPqVrdl2QgAD2n9U5AlTxujlqIT1Kpfr+h8tutw=;
+        b=UTo6hAZOxRzaFIr9YSWNzGj5e0c/N/upYtoNxmXXNPhQe388wXjX66aZT93ZgikLn+
+         13oLECXcdK6QKCOUlW45tIw9m/xbmiKCjy35AjVQ+uM4WhIWXGjnuQFL7+U/k7fru95h
+         INis89bNyMoI+IEvY3ScEd5gABPPsCayj+ri4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kyY5QPqVrdl2QgAD2n9U5AlTxujlqIT1Kpfr+h8tutw=;
+        b=HbuNkFnU7XeejXYnL4/NVM88ZwQZE5fz1fidNKyKKBCoFW1WjGPQcaetAKXsqd8tTl
+         od2A87OSAUZyRW7AaXd3wGfmtB6n1qW2bHohsn5/U4Jw0ypjkDLzzWvg/Tla5mqoQpY8
+         6TCpkb87ruNNdKIUCoKcCBs+0QoS9qxysktfdETiYzURLO/Fc0VVoGT2WfQAsCarPqPy
+         fv7P/Ctcv2N/0ctgYIWSjIorDxJc7gI0SEMNe7vjBw+xGU6qcNzPcAgFxtPj6odyLdEz
+         prXX6W6K/Ry8DvzUmn8a/NIGiDEDzxPi+nF7hf5d3hRwISi+M/xE7/ZmFy+vgpQBlvUD
+         tcnw==
+X-Gm-Message-State: AOAM533E1OdbYn6j1k209tuhGrcYGJnex2n0tLljL6RN/JC/wteDS0v+
+	XYRid3F+Sbtrw6ZCGHWKr+SnwhMeHJHlkxDDlknvZi+BECcsjS/NVWCGsYxSuZCza4KJFA9pHYr
+	avCXnT/RorVVN9tbFfRiMNBaT29sOKDiEkgg4AZvyrPUUomdS1eQKc4SoEw33gTc=
+X-Received: by 2002:a17:902:cec1:b029:eb:66ee:6da0 with SMTP id d1-20020a170902cec1b02900eb66ee6da0mr21803005plg.84.1618820380231;
+        Mon, 19 Apr 2021 01:19:40 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxBvUUHWo039rrxkP/I8cunx9x1NQXlVrZygSTMPa3oSR8oz1D/bru6i4DAVRnR3cfZv3WKAA==
+X-Received: by 2002:a17:902:cec1:b029:eb:66ee:6da0 with SMTP id d1-20020a170902cec1b02900eb66ee6da0mr21802976plg.84.1618820379881;
+        Mon, 19 Apr 2021 01:19:39 -0700 (PDT)
+Return-Path: <sinthu.raja@mistralsolutions.com>
+Received: from LAP000568.mistral.in ([223.227.14.13])
+        by smtp.gmail.com with ESMTPSA id f18sm10804803pfk.144.2021.04.19.01.19.36
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 19 Apr 2021 01:19:39 -0700 (PDT)
+From: "Sinthu Raja M" <sinthu.raja@mistralsolutions.com>
+X-Google-Original-From: Sinthu Raja <x0257345@ti.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Praneeth Bajjuri <praneeth@ti.com>,
+	Sinthu Raja <x0257345@ti.com>
+Subject: [dunfell/master PATCH-V2 0/3] *** AM64x Unification ***
+Date: Mon, 19 Apr 2021 13:49:28 +0530
+Message-Id: <20210419081928.35808-1-x0257345@ti.com>
+X-Mailer: git-send-email 2.19.1.windows.1
 MIME-Version: 1.0
-In-Reply-To: <20210416173537.GZ15937@denix.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-BESS-ID: 1618820381-304858-5712-132698-1
+X-BESS-VER: 2019.1_20210414.2120
+X-BESS-Apparent-Source-IP: 209.85.210.198
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.231659 [from 
+	cloudscan23-62.eu-central-1b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status: 1
+Content-Transfer-Encoding: 8bit
 
+AM64x EVM and SK comes with same rootfs and boot images excpet for the
+SPL R5 where EVM and SK board have different DDR. Two processor SDK for
+EVM and SK create overhead for users to download and install. 
 
+To avoid the overhead two WIC images for EVM and SK will be created
+seperately and packaged into single installer. The below patches are to
+remove the entries of am64xx-sk configurations, update u-boot and
+t-sci-fw recipes to build boot images for both EVM and SK under one
+machine name am64xx-evm.
 
-On 4/16/2021 12:35 PM, Denys Dmytriyenko wrote:
-> On Thu, Apr 15, 2021 at 04:22:20PM -0400, Denys Dmytriyenko wrote:
->> On Thu, Apr 15, 2021 at 02:00:31PM -0500, Bajjuri, Praneeth wrote:
->>>
->>>
->>> On 4/15/2021 1:24 PM, Denys Dmytriyenko wrote:
->>>> On Thu, Apr 15, 2021 at 12:07:05PM -0500, praneeth via lists.yoctoproject.org wrote:
->>>>> Denys,
->>>>>
->>>>> On 4/15/2021 12:10 AM, praneeth@ti.com wrote:
->>>>>> From: Praneeth Bajjuri <praneeth@ti.com>
->>>>>>
->>>>>> The current ti-linux-5.10.y integration branch doesnt have support for
->>>>>> non base board dtb/o form the primary latest processor board on am65 and
->>>>>> j7* evms yet.
->>>>>>
->>>>>> Removing these dtb/o for enabling the builds to continue.
->>>>>> Plan to add these blob and overlays back once the equivalent support is
->>>>>> added in the integrated ti-linux-5.10.y kernel.
->>>>>>
->>>>>
->>>>> Need your recommendation if this is the right approach to enable the
->>>>> builds at this early stage of LTS migration (and re-enable the
->>>>> overlays once the support is added in kernel).
->>>>
->>>> That's kind of normal to start a new LTS with bare minimum of dtb/o support.
->>>>
->>>> But I have 2 concerns:
->>>>
->>>> 1. Maybe better to just push commit with removal, instead of reverting old
->>>> commits - it may get quite confusing soon with reverts of reverts...
->>>
->>> makes sense. will squash in v2.
->>>
->>>>
->>>> 2. Do you think it's still premature to make 5.10 as a default in meta-ti
->>>> dunfell branch? Since dunfell is kind of established stable (not a new LTS),
->>>> anyone who updates meta-ti will go from fully working 5.4 to a very minimal
->>>> and bare 5.10 - may be a bad user experience...
->>>
->>> Was thinking in similar line.
->>> So, till the 5.10 baseline matures i will continue to use
->>> dunfell-next to stage the patches and keep dunfell branch untouched
->>> w.r.t merging 5.10 specific changes.
-> 
-> Another approach could be to keep using core-next branding for a bit longer,
-> leaving 5.4 as a default, until 5.10 is ready.
+The patches for generating two WIC files are created in  meta-sitara and
+meta-arago repos correspondingly.
 
-the final SDK release with 5.4 on dunfell has already been made so not 
-aware of anyone using this combination for active development now.
+Sinthu Raja (3):
+  Remove AM64xx-SK entries
+  AM64x Unification: Update u-boot conf
+  AM64x Unification: Update ti-sci-fw recipe
 
-and 5.10 needs to be getting to a better shape soon.
-Thinking, it makes sense to switch to 5.10 and start addressing the 
-regressions as we progress with development.
+ conf/machine/am64xx-evm-k3r5.conf      |  10 ++-
+ conf/machine/am64xx-evm.conf           |  14 +++-
+ conf/machine/include/am64xx.inc        |   1 +
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 100 ++++++++++++++++++-------
+ recipes-bsp/u-boot/u-boot-ti.inc       |  58 ++++++++++++--
+ 5 files changed, 148 insertions(+), 35 deletions(-)
 
-> 
-> 
->>> Let me know if this a good approach, The only problem in that case
->>> is the graphics update for 5.10 that i recently pulled to dunfell
->>> branch. Need to revert it to keep 5.4 dunfell experience retained.
->>
->> Try those updates first with 5.4 before reverting them, mayve they'll work.
->>
->>
->>> Any other ideas?
->>>
->>>>
->>>>
->>>>>> Praneeth Bajjuri (6):
->>>>>>    Revert "conf: j7-evm: Add jailhouse dtbo"
->>>>>>    Revert "j7-evm: add new k3-j721e-proc-board-tps65917.dtb"
->>>>>>    Revert "j7-evm: add new infotainment DTBO file"
->>>>>>    Revert "j7-evm: add k3-j721e-pcie-backplane.dtbo"
->>>>>>    Revert "conf: machine: j7200-evm: Add Jailhouse overlay"
->>>>>>    conf/machine: am65xx: Remove non-existent dtb* from 5.10
->>>>>>
->>>>>>   conf/machine/include/am65xx.inc | 11 -----------
->>>>>>   conf/machine/j7-evm.conf        |  4 ----
->>>>>>   conf/machine/j7200-evm.conf     |  1 -
->>>>>>   3 files changed, 16 deletions(-)
->>>>>>
->>>>
-> 
+-- 
+2.17.0
+
