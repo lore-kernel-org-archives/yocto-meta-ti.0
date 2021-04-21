@@ -1,34 +1,34 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.3095.1619038408979073454
+ by mx.groups.io with SMTP id smtpd.web09.3010.1619038409294259534
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 21 Apr 2021 13:53:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FL3zbQ++;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=chJzFSeN;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13LKrSO1079765;
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13LKrScm079769;
 	Wed, 21 Apr 2021 15:53:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1619038408;
-	bh=hi7EWd+u7CpxDy6RVTp6MgAmKaxqoIYqvkHub1N1K1U=;
+	bh=ZTlQJJ8p44HXnNAG/2Zc/qrklRnQ9bxu9bg56xux164=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=FL3zbQ++tl5sTsN6I/0uUatD35GFxXyVtwWTmI2R7pE4dq6sjWhU2uacZa9e2BD6e
-	 ZFu2B6LAcbHg0f6/oh+s0CnGHNnixCet+u0I3C33xAS7J8xzHFj4cQRaRakMFuHltS
-	 5JmydMaSs54nv/NW5S7pv+EERnNcMi914/qy1ZR0=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13LKrSln112094
+	b=chJzFSeNN/kI4XO0B3kFr88rrD3HYWFOMPdvIvObBA6Cv5cOwCZfUskRY74SJdyzq
+	 de3l84VF6d9x0DJ0U0y680AZSvD6TDKQyF6zvMgOuhhSU4FCkW01Xop166kqrEegTm
+	 A1Rg8Kbt7mwfirdx5XRlu9Ic2cmF9t7te4WsZeKs=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13LKrSid112104
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Wed, 21 Apr 2021 15:53:28 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 21
- Apr 2021 15:53:27 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2021 15:53:28 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Wed, 21 Apr 2021 15:53:27 -0500
+ Frontend Transport; Wed, 21 Apr 2021 15:53:28 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13LKrRe2051790;
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13LKrRT3064563;
 	Wed, 21 Apr 2021 15:53:27 -0500
 From: "praneeth" <praneeth@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>
@@ -36,9 +36,9 @@ CC: Denys Dmytriyenko <denys@konsulko.com>, Lokesh Vutla <lokeshvutla@ti.com>,
         Suman Anna <s-anna@ti.com>, Yogesh Siraswar <yogeshs@ti.com>,
         Nishanth Menon
 	<nm@ti.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [dunfell/master PATCH 3/4] dsptop: bump SRCREV for kernel 5.10 build fix
-Date: Wed, 21 Apr 2021 15:53:25 -0500
-Message-ID: <20210421205326.22047-4-praneeth@ti.com>
+Subject: [dunfell/master PATCH 4/4] uio-module-drv: Build fix for linux kernel 5.10
+Date: Wed, 21 Apr 2021 15:53:26 -0500
+Message-ID: <20210421205326.22047-5-praneeth@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210421205326.22047-1-praneeth@ti.com>
 References: <20210421205326.22047-1-praneeth@ti.com>
@@ -48,29 +48,79 @@ Content-Type: text/plain
 
 From: Praneeth Bajjuri <praneeth@ti.com>
 
-bump SRCREV to latest to pick build fix for 5.10 kernel.
-this update picks
-commit 816485e68430 ("Merge pull request #1 in DBG/dsptop from for-5.10 to master")
+This update contains build fix for linux kernel 5.10
+* uio-module-drv: Replace ioremap_nocache with ioremap
 
 Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
- recipes-bsp/dsptop/dsptop.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/uio-module-drv/uio-module-drv.inc |  7 +++-
+ ...Replace-ioremap_nocache-with-ioremap.patch | 35 +++++++++++++++++++
+ 2 files changed, 41 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-module-drv-Replace-ioremap_nocache-with-ioremap.patch
 
-diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
-index 6bc38373..31f775e2 100644
---- a/recipes-bsp/dsptop/dsptop.inc
-+++ b/recipes-bsp/dsptop/dsptop.inc
-@@ -1,7 +1,7 @@
- # This corresponds to version 1.4.0
--SRCREV = "25e823b04e62af224dce97b90359b7569ce3fbb5"
-+SRCREV = "816485e68430bbec643eac9498bfa5303eb2c2e1"
- PV = "1.4.0"
--INC_PR = "r1"
-+INC_PR = "r2"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv.inc b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+index f483010e..ab1beb9f 100644
+--- a/recipes-bsp/uio-module-drv/uio-module-drv.inc
++++ b/recipes-bsp/uio-module-drv/uio-module-drv.inc
+@@ -1,3 +1,5 @@
++FILESEXTRAPATHS_prepend:= "${THISDIR}/${PN}:"
++
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
  
- SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
+@@ -9,7 +11,10 @@ PV = "2.2.1.0+git${SRCPV}"
  
+ UIO_MODULE_DRV_GIT_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git"
+ UIO_MODULE_DRV_GIT_PROTOCOL = "git"
+-SRC_URI = "${UIO_MODULE_DRV_GIT_URI};protocol=${UIO_MODULE_DRV_GIT_PROTOCOL};branch=${BRANCH}"
++SRC_URI = " \
++	${UIO_MODULE_DRV_GIT_URI};protocol=${UIO_MODULE_DRV_GIT_PROTOCOL};branch=${BRANCH} \
++	file://0001-uio-module-drv-Replace-ioremap_nocache-with-ioremap.patch \
++"
+ 
+ SRCREV = "${UIO_MODULE_DRV_SRCREV}"
+ 
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-module-drv-Replace-ioremap_nocache-with-ioremap.patch b/recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-module-drv-Replace-ioremap_nocache-with-ioremap.patch
+new file mode 100644
+index 00000000..955ef558
+--- /dev/null
++++ b/recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-module-drv-Replace-ioremap_nocache-with-ioremap.patch
+@@ -0,0 +1,35 @@
++From b5c4036dac06817bffd0be21c5fa1b7f75f74e4b Mon Sep 17 00:00:00 2001
++From: Suman Anna <s-anna@ti.com>
++Date: Mon, 19 Apr 2021 13:15:51 -0500
++Subject: [PATCH] uio-module-drv: Replace ioremap_nocache with ioremap
++
++The ioremap_nocache is the same as the regular ioremap and its
++definition has been dropped from the Linux kernel v5.6 onwards in
++commit 4bdc0d676a64 ("remove ioremap_nocache and devm_ioremap_nocache")
++[1]. The uio-module-drv module fails to build against these newer
++kernels, so fix it by simply replacing ioremap_nocache with ioremap.
++
++[1]
++https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=4bdc0d676a643140bdf17dbf7eafedee3d496a3c
++
++Signed-off-by: Suman Anna <s-anna@ti.com>
++---
++ uio_module_drv.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/uio_module_drv.c b/uio_module_drv.c
++index 5a67dd199e21..7cc6005d1f05 100644
++--- a/uio_module_drv.c
+++++ b/uio_module_drv.c
++@@ -240,7 +240,7 @@ static ssize_t  uio_module_drv_transfer(struct file *file, char __user *buf,
++ 		return -EINVAL;
++ 	}
++ 
++-	virt_addr_p = ioremap_nocache(phys_addr, count);
+++	virt_addr_p = ioremap(phys_addr, count);
++ 	if (!virt_addr_p) {
++ 		dev_err(uio_module_drv->dev, "Mapping of virtual memory failed\n");
++ 		return(-ENOMEM);
++-- 
++2.30.1
++
 -- 
 2.17.1
 
