@@ -1,93 +1,72 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.1125.1618867006057773328
+ by mx.groups.io with SMTP id smtpd.web08.3094.1619038408501512674
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 19 Apr 2021 14:16:46 -0700
+ Wed, 21 Apr 2021 13:53:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=QO6kJqg7;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=jMlqrIyI;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13JLGjSh042031;
-	Mon, 19 Apr 2021 16:16:45 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13LKrR06079756;
+	Wed, 21 Apr 2021 15:53:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1618867005;
-	bh=SHrsAZu9KCx4gt6VqumrvTz1uJHqUA2xGrtdVoQvpmM=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=QO6kJqg721wfge2nX9kD47N2m2UrsPRAA4G3FqwIwKUgF7+f7rBddwHUDgZ7pd7hU
-	 GwbLl9B84tg+YISrxfAK9Vu1/mEpbm63KgaeUkpdVo+8+dQ+8DRWI0GNfZtTUBS52y
-	 o0cTPJz3c/I/pc5U+9XindVfDau6ZUnJOB+1mMN8=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13JLGjZB031921
+	s=ti-com-17Q1; t=1619038407;
+	bh=NixobY78uKaFvm9oDqjH0hXLIMsPgI9VxX70j66NLi4=;
+	h=From:To:CC:Subject:Date;
+	b=jMlqrIyIN2lhwKzd1/km7IXA3svDwILgCQ4JW+hRkVrpK5aU9YYBN/BEFwKln6GDe
+	 qJN+saXD/1nkLqI+J07wyAC8xSY6uy2ccbCH8X41D8GXM2YIBD2Sx+AJJzNOdQnCDU
+	 hZ6+kxgAG18L577GmI6B1XDmj6g1IjahWFe7fyjQ=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13LKrRvk112079
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 19 Apr 2021 16:16:45 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 19
- Apr 2021 16:16:44 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 21 Apr 2021 15:53:27 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 21
+ Apr 2021 15:53:26 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Mon, 19 Apr 2021 16:16:44 -0500
+ Frontend Transport; Wed, 21 Apr 2021 15:53:27 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13JLGipM050762;
-	Mon, 19 Apr 2021 16:16:44 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13LKrQYL012338;
+	Wed, 21 Apr 2021 15:53:26 -0500
 From: "praneeth" <praneeth@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>
 CC: Denys Dmytriyenko <denys@konsulko.com>, Lokesh Vutla <lokeshvutla@ti.com>,
-        Nikhil Devshatwar <nikhil.nd@ti.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [dunfell/master PATCH v3 8/8] conf: dra7xx-evm: Remove non-existent dtb* from 5.10
-Date: Mon, 19 Apr 2021 16:16:43 -0500
-Message-ID: <20210419211643.3942-9-praneeth@ti.com>
+        Suman Anna <s-anna@ti.com>, Yogesh Siraswar <yogeshs@ti.com>,
+        Nishanth Menon
+	<nm@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH 0/4] K2/AM3/AM4 Build fixes for 5.10
+Date: Wed, 21 Apr 2021 15:53:22 -0500
+Message-ID: <20210421205326.22047-1-praneeth@ti.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210419211643.3942-1-praneeth@ti.com>
-References: <20210419211643.3942-1-praneeth@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
 From: Praneeth Bajjuri <praneeth@ti.com>
 
-Remove the non-existent dtb* , as they are not currently present on
-ti-linux-5.10.y.
+This series updates few recipes to latest SRCREV which
+contains build fixes for 5.10 kernel.
 
--    dra7-evm-lcd-osd101t2045.dtb
--    dra7-evm-lcd-osd101t2587.dtb
--    dra71-evm-nand.dtb
--    dra71-evm-lcd-auo-g101evn01.0.dtb
--    dra72-evm-lcd-osd101t2045.dtb
--    dra72-evm-lcd-osd101t2587.dtb
--    dra72-evm-revc-lcd-osd101t2045.dtb
--    dra72-evm-revc-lcd-osd101t2587.dtb
--    dra76-evm-tfp410.dtb
+Note: uio-module-drv has not been maintained for a long time,
+hence the fix is carried in the recipe folder as a *.patch instead of
+the git repo.
 
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
----
- conf/machine/dra7xx-evm.conf | 9 ---------
- 1 file changed, 9 deletions(-)
+Praneeth Bajjuri (4):
+  cmem: Update to new version 4.20.00.00
+  gdbc6x: bump SRCREV for kernel 5.10 build fix
+  dsptop: bump SRCREV for kernel 5.10 build fix
+  uio-module-drv: Build fix for linux kernel 5.10
 
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 67f9a0d1..ad4b0263 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -10,19 +10,10 @@ SERIAL_CONSOLES = "115200;ttyS0"
- 
- KERNEL_DEVICETREE = " \
-     dra7-evm.dtb \
--    dra7-evm-lcd-osd101t2045.dtb \
--    dra7-evm-lcd-osd101t2587.dtb \
-     dra71-evm.dtb \
--    dra71-evm-nand.dtb \
--    dra71-evm-lcd-auo-g101evn01.0.dtb \
-     dra72-evm.dtb \
--    dra72-evm-lcd-osd101t2045.dtb \
--    dra72-evm-lcd-osd101t2587.dtb \
-     dra72-evm-revc.dtb \
--    dra72-evm-revc-lcd-osd101t2045.dtb \
--    dra72-evm-revc-lcd-osd101t2587.dtb \
-     dra76-evm.dtb \
--    dra76-evm-tfp410.dtb \
- "
- 
- UBOOT_MACHINE = "dra7xx_evm_config"
+ recipes-bsp/cmem/cmem.inc                     |  6 ++--
+ recipes-bsp/dsptop/dsptop.inc                 |  4 +--
+ recipes-bsp/uio-module-drv/uio-module-drv.inc |  7 +++-
+ ...Replace-ioremap_nocache-with-ioremap.patch | 35 +++++++++++++++++++
+ recipes-devtools/gdbc6x/gdbc6x.inc            |  4 +--
+ 5 files changed, 48 insertions(+), 8 deletions(-)
+ create mode 100644 recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-module-drv-Replace-ioremap_nocache-with-ioremap.patch
+
 -- 
 2.17.1
 
