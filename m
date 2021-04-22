@@ -1,105 +1,154 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.13778.1619103636315935050
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.171.1619105070045627262
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 22 Apr 2021 08:00:36 -0700
+ Thu, 22 Apr 2021 08:24:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xv2ra19T;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: s-anna@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=k/p9NfWx;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: g-tammana@ti.com)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13MF0Ycd128549;
-	Thu, 22 Apr 2021 10:00:34 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13MFOSnG102043;
+	Thu, 22 Apr 2021 10:24:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1619103634;
-	bh=E1nI/kcw1DJFmjRnLThvV7+xTe7lL68njRBXNh6ciNQ=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=xv2ra19TmzUMG+IKumE39P1Ibl6rD+kbAsAWID8Pd7MYmG+V4Q4T3bme0C4JPUJPt
-	 Otz1Sz5+IAAgrzCVS6CYVe45op/FVoZNE2tZLpfW+K25McikOstbyuCppJ7+Vramb3
-	 /aZ3vKSxS1mi4FwQ39lED0ZtizIFEp063WOEcQOw=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13MF0YM5121770
+	s=ti-com-17Q1; t=1619105068;
+	bh=gzAMblJJEOybPrz21pNAJgd3iIFuQwPEpoA8N8sXZrQ=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=k/p9NfWxAyh6CSiXEEhqabAmAqkCs9U723etmp3cHzT+Agd4tfChw/TuAG/9lZM9V
+	 NC/YpPze9TLbdX1C7/SsVdUa8LXHD0LtkXaFkySjcEGlMlfxZ3bkuDhFi1b3cWFLhe
+	 yDuS0n1nIFgzdKAlwDVeB67kk2FI5Kr+ONP/THBY=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13MFOSq6023440
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 22 Apr 2021 10:00:34 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 22 Apr 2021 10:24:28 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 22
- Apr 2021 10:00:34 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Thu, 22 Apr 2021 10:00:33 -0500
-Received: from [10.250.33.21] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13MF0XrH105234;
-	Thu, 22 Apr 2021 10:00:33 -0500
-Subject: Re: [meta-ti] [dunfell/master PATCH 1/4] cmem: Update to new version 4.20.00.00
-To: <praneeth@ti.com>
-CC: Denys Dmytriyenko <denys@konsulko.com>, Lokesh Vutla <lokeshvutla@ti.com>,
-        Yogesh Siraswar <yogeshs@ti.com>, Nishanth Menon <nm@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20210421205326.22047-1-praneeth@ti.com>
- <20210421205326.22047-2-praneeth@ti.com>
- <1677FB31053272E2.8702@lists.yoctoproject.org>
-From: "Suman Anna" <s-anna@ti.com>
-Message-ID: <f1472c48-b4c2-ec13-6fd9-a18ae0e60c18@ti.com>
-Date: Thu, 22 Apr 2021 10:00:33 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Apr 2021 10:24:28 -0500
+Received: from DLEE111.ent.ti.com ([fe80::a4a2:21d4:3321:ad11]) by
+ DLEE111.ent.ti.com ([fe80::a4a2:21d4:3321:ad11%17]) with mapi id
+ 15.01.2176.009; Thu, 22 Apr 2021 10:24:28 -0500
+From: "Gowtham Tammana" <g-tammana@ti.com>
+To: "Bajjuri, Praneeth" <praneeth@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>,
+        "Vutla, Lokesh"
+	<lokeshvutla@ti.com>, "Anna, Suman" <s-anna@ti.com>,
+        "Siraswar, Yogesh"
+	<yogeshs@ti.com>,
+        "meta-ti@lists.yoctoproject.org"
+	<meta-ti@lists.yoctoproject.org>
+Subject: Re: [dunfell/master PATCH v2] uio-module-drv: Build fix for linux kernel 5.10
+Thread-Topic: [dunfell/master PATCH v2] uio-module-drv: Build fix for linux
+ kernel 5.10
+Thread-Index: AQHXN0H2pgDxeIkkg0SkqJGkGSRUi6rAqJXQ
+Date: Thu, 22 Apr 2021 15:24:28 +0000
+Message-ID: <c9c3235e3ec64bdb8452ce07508b3989@ti.com>
+References: <20210422063722.19732-1-praneeth@ti.com>
+In-Reply-To: <20210422063722.19732-1-praneeth@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.250.43.171]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 MIME-Version: 1.0
-In-Reply-To: <1677FB31053272E2.8702@lists.yoctoproject.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Praneeth,
 
-On 4/21/21 3:59 PM, Suman Anna via lists.yoctoproject.org wrote:
-> On 4/21/21 3:53 PM, praneeth@ti.com wrote:
->> From: Praneeth Bajjuri <praneeth@ti.com>
->>
->> The update brings the fix for 5.10.x linux kernel.
->> commit 8aba20e20bf7 ("cmemk: Fix build errors for 5.10+ kernels")
->>
->> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-> 
-> Reviewed-by: Suman Anna <s-anna@ti.com>
 
-Sorry, realized that my patches fixed the issue only for K2 builds originally,
-and I had a bug that fails the builds for non-K2 platforms. I have since fixed
-those, so please update use 4.20.00.01 instead.
+>-----Original Message-----
+>From: Bajjuri, Praneeth
+>Sent: Thursday, April 22, 2021 1:37 AM
+>To: Bajjuri, Praneeth <praneeth@ti.com>
+>Cc: Denys Dmytriyenko <denys@konsulko.com>; Vutla, Lokesh
+><lokeshvutla@ti.com>; Tammana, Gowtham <g-tammana@ti.com>; Anna, Suman <s-
+>anna@ti.com>; Siraswar, Yogesh <yogeshs@ti.com>; meta-
+>ti@lists.yoctoproject.org
+>Subject: [dunfell/master PATCH v2] uio-module-drv: Build fix for linux
+>kernel 5.10
+>
+>From: Praneeth Bajjuri <praneeth@ti.com>
+>
+>This update contains build fix for linux kernel 5.10
+>* uio-module-drv: Replace ioremap_nocache with ioremap
+>
+>Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 
-regards
-Suman
+Reviewed-by: Gowtham Tammana <g-tammana@ti.com>
 
-> 
-> regards
-> Suman
-> 
->> ---
->>  recipes-bsp/cmem/cmem.inc | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
->> index c2719403..385e1084 100644
->> --- a/recipes-bsp/cmem/cmem.inc
->> +++ b/recipes-bsp/cmem/cmem.inc
->> @@ -4,10 +4,10 @@ LICENSE = "GPLv2"
->>  LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=26be509e4bb413905bda8309e338e2b1"
->>  
->>  BRANCH = "master"
->> -# This corresponds to version 4.16.00.00
->> -SRCREV = "4f970f053b42e8d2a6f1a8cd4b14786196468fd3"
->> +# This corresponds to version 4.20.00.00
->> +SRCREV = "b0b57a4e810d27cbb23cb752ef437019f56a5506"
->>  
->> -PV = "4.16.00.00+git${SRCPV}"
->> +PV = "4.20.00.00+git${SRCPV}"
->>  
->>  SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
->>  
->>
-> 
-> 
-> 
-> 
-> 
+>---
+> ...Replace-ioremap_nocache-with-ioremap.patch | 35 +++++++++++++++++++
+> .../uio-module-drv/uio-module-drv_git.bb      |  4 +++
+> 2 files changed, 39 insertions(+)
+> create mode 100644 recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-
+>module-drv-Replace-ioremap_nocache-with-ioremap.patch
+>
+>diff --git a/recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-module-
+>drv-Replace-ioremap_nocache-with-ioremap.patch b/recipes-bsp/uio-module-
+>drv/uio-module-drv/0001-uio-module-drv-Replace-ioremap_nocache-with-
+>ioremap.patch
+>new file mode 100644
+>index 00000000..955ef558
+>--- /dev/null
+>+++ b/recipes-bsp/uio-module-drv/uio-module-drv/0001-uio-module-drv-
+>Replace-ioremap_nocache-with-ioremap.patch
+>@@ -0,0 +1,35 @@
+>+From b5c4036dac06817bffd0be21c5fa1b7f75f74e4b Mon Sep 17 00:00:00 2001
+>+From: Suman Anna <s-anna@ti.com>
+>+Date: Mon, 19 Apr 2021 13:15:51 -0500
+>+Subject: [PATCH] uio-module-drv: Replace ioremap_nocache with ioremap
+>+
+>+The ioremap_nocache is the same as the regular ioremap and its
+>+definition has been dropped from the Linux kernel v5.6 onwards in
+>+commit 4bdc0d676a64 ("remove ioremap_nocache and devm_ioremap_nocache")
+>+[1]. The uio-module-drv module fails to build against these newer
+>+kernels, so fix it by simply replacing ioremap_nocache with ioremap.
+>+
+>+[1]
+>+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit
+>/?id=3D4bdc0d676a643140bdf17dbf7eafedee3d496a3c
+>+
+>+Signed-off-by: Suman Anna <s-anna@ti.com>
+>+---
+>+ uio_module_drv.c | 2 +-
+>+ 1 file changed, 1 insertion(+), 1 deletion(-)
+>+
+>+diff --git a/uio_module_drv.c b/uio_module_drv.c
+>+index 5a67dd199e21..7cc6005d1f05 100644
+>+--- a/uio_module_drv.c
+>++++ b/uio_module_drv.c
+>+@@ -240,7 +240,7 @@ static ssize_t  uio_module_drv_transfer(struct file
+>*file, char __user *buf,
+>+ 		return -EINVAL;
+>+ 	}
+>+
+>+-	virt_addr_p =3D ioremap_nocache(phys_addr, count);
+>++	virt_addr_p =3D ioremap(phys_addr, count);
+>+ 	if (!virt_addr_p) {
+>+ 		dev_err(uio_module_drv->dev, "Mapping of virtual memory
+>failed\n");
+>+ 		return(-ENOMEM);
+>+--
+>+2.30.1
+>+
+>diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-
+>bsp/uio-module-drv/uio-module-drv_git.bb
+>index 6ac91875..cb61305f 100644
+>--- a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+>+++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+>@@ -2,6 +2,10 @@ DESCRIPTION =3D "User space IO (UIO) driver for on-chip
+>modules"
+>
+> include uio-module-drv.inc
+>
+>+FILESEXTRAPATHS_prepend:=3D "${THISDIR}/${PN}:"
+>+
+>+SRC_URI +=3D "file://0001-uio-module-drv-Replace-ioremap_nocache-with-
+>ioremap.patch"
+>+
+> # This package builds a kernel module, use kernel PR as base and append a
+>local
+> MACHINE_KERNEL_PR_append =3D "d"
+> PR =3D "${MACHINE_KERNEL_PR}"
+>--
+>2.17.1
 
