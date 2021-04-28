@@ -1,83 +1,86 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.7396.1619583948537089942
+Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
+ by mx.groups.io with SMTP id smtpd.web11.7533.1619585149236214496
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 27 Apr 2021 21:25:49 -0700
+ Tue, 27 Apr 2021 21:45:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=CFFtAYrm;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=IM6tZkYa;
+ spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: praneeth@ti.com)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id B3EE038C06A4
+	for <meta-ti@yoctoproject.org>; Wed, 28 Apr 2021 04:45:48 +0000 (UTC)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13S4PlhO106396;
-	Tue, 27 Apr 2021 23:25:47 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13S4jl19112686;
+	Tue, 27 Apr 2021 23:45:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1619583947;
-	bh=tglMU8B7Jjody1eHFV0Kfx0gY/c5DgywLNke3msBK+k=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=CFFtAYrmHzlQbjqnVW1i4ivvbhaEqXsICEY2toApu4n/Wp98Hw7GbBTBA2Uq1xYE2
-	 c3LeffjnDZ1oBTdnHzRaBByzC+LVLOYchGcYxRIWVP6NMK6o38h9wR4nFbZov2naFJ
-	 nxpl0ZMqHOhkfAX/kRDrUl4t+887IqCI/+tzkFmE=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13S4PlvM122585
+	s=ti-com-17Q1; t=1619585147;
+	bh=Dkez8h542NwohXY58G6MFQqdmkWhZ60KsJ1VxDAySkk=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=IM6tZkYaXiBvss50OeUwGGaXiVqlN6YD8dBEcHyN3GbjrC89TdMR+K1VbvSw3NNZm
+	 E86GZd+xR4KuQ0r1LQT3tWiwp6ZBnQOr2wfbmXPdWBQjIe2tbi/Zijif8NJlhpegLa
+	 csoxj6xh3QZp7wX9juHbE/7ekbxssjX9J3MnBHsI=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13S4jluX021901
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 27 Apr 2021 23:25:47 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 27 Apr 2021 23:45:47 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 27
- Apr 2021 23:25:46 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2021 23:45:47 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 27 Apr 2021 23:25:46 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13S4PkHs070853;
-	Tue, 27 Apr 2021 23:25:46 -0500
+ Frontend Transport; Tue, 27 Apr 2021 23:45:47 -0500
+Received: from [10.250.78.56] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13S4jl7C032934;
+	Tue, 27 Apr 2021 23:45:47 -0500
+Subject: Re: [meta-ti][dunfell/master][PATCH] ti-gc320-driver: update branch for 5.10
+To: Gowtham Tammana <g-tammana@ti.com>, <meta-ti@yoctoproject.org>,
+        <denys@konsulko.com>
+References: <20210427211046.22567-1-g-tammana@ti.com>
 From: "praneeth" <praneeth@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>
-CC: Denys Dmytriyenko <denys@konsulko.com>, Yogesh Siraswar <yogeshs@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [dunfell/master PATCH 2/3] linux-ti-staging: Update 5.10 kernel to the latest commit SHA
-Date: Tue, 27 Apr 2021 23:25:35 -0500
-Message-ID: <20210428042536.6478-2-praneeth@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210428042536.6478-1-praneeth@ti.com>
-References: <20210428042536.6478-1-praneeth@ti.com>
+Message-ID: <4a5b3fc1-918c-28ed-562f-5cb4f089d85e@ti.com>
+Date: Tue, 27 Apr 2021 23:45:47 -0500
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
 MIME-Version: 1.0
+In-Reply-To: <20210427211046.22567-1-g-tammana@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Praneeth Bajjuri <praneeth@ti.com>
 
-Update 5.10 kernel to the latest commit SHA
 
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+On 4/27/2021 4:10 PM, Gowtham Tammana wrote:
+> Update branch and srcrev for picking up 5.10 branch.
+> 
+> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-index e97aca3b..d4104b6d 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.10:"
- 
- BRANCH = "ti-rt-linux-5.10.y"
- 
--SRCREV = "79bfe5400b3fe9350cca6a009d8fdafcfc59879f"
-+SRCREV = "00634c794573abb7fcbbf44437b2969214edfc7a"
- PV = "5.10.21+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-index 698ec871..b4de40de 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-5.10.y"
- 
--SRCREV = "b53d877300ae60870b85823c6bfabb3aa643933b"
-+SRCREV = "bdfd5b0c1ee5617c9a94bacad0d818920d95b486"
- PV = "5.10.21+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--- 
-2.17.1
+Reviewed-by: Praneeth Bajjuri <praneeth@ti.com>
 
+> ---
+>   recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+> index 77bb0926..d36bcd56 100644
+> --- a/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+> +++ b/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+> @@ -7,13 +7,13 @@ inherit module features_check
+>   
+>   REQUIRED_MACHINE_FEATURES = "gc320"
+>   
+> -MACHINE_KERNEL_PR_append = "h"
+> +MACHINE_KERNEL_PR_append = "i"
+>   PR = "${MACHINE_KERNEL_PR}"
+>   
+>   # Need to branch out with ${PV} var
+> -BRANCH = "ti-${PV}-k5.4"
+> +BRANCH = "ti-${PV}-k5.10"
+>   
+> -SRCREV = "2a4fbe8353fa56011a613aeeaf69e274cd07a825"
+> +SRCREV = "e2a10f31e255a65ec30a6e10b890e77d7e9cb107"
+>   
+>   SRC_URI = "git://git.ti.com/graphics/ti-gc320-driver.git;protocol=git;branch=${BRANCH}"
+>   
+> 
