@@ -1,76 +1,72 @@
-Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web08.5737.1619573098590653024
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.7397.1619583948537735868
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 27 Apr 2021 18:24:58 -0700
+ Tue, 27 Apr 2021 21:25:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=vBN9F/WC;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nm@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 3004738C0738
-	for <meta-ti@yoctoproject.org>; Wed, 28 Apr 2021 01:24:57 +0000 (UTC)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=h67uzoJ6;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13S1OqDA038481;
-	Tue, 27 Apr 2021 20:24:52 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 13S4PlNr004100;
+	Tue, 27 Apr 2021 23:25:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1619573092;
-	bh=8/arx2xDbsPTfX8gQRN92PW51q8jFaNwBmPUvKX5bRo=;
+	s=ti-com-17Q1; t=1619583947;
+	bh=3+hVj7/ECIlFSrhAmkl4ByhZu2UJV/akfB58+06rXvk=;
 	h=From:To:CC:Subject:Date;
-	b=vBN9F/WCKCdhBkJaIFwsJuBM3E7c4F0nKkkZkIBYzKdc404urxpC0kSoAO2JVCc4n
-	 HC4e4kTl5l9ThZzTWSFMBML1MiLR7GOheVG3aaFTX2GYcJfcNKP4/Vm5GYYftJbrj6
-	 aXGmFlcJ4U2srBRIdldYJ1ZL3LP5l/TiazC+kUL4=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13S1OqOu012294
+	b=h67uzoJ6kTuHBJ8oCqLcVEWOiGQWNNsXUO2QfCSsv+qR1nn+ZhU+ysis1173JUlla
+	 KSVMAhfGslXKIGS+ioVtzSyX57s5j3urwfsb8UoeIVAMA8gYDgYKbCzynHODWEBLAB
+	 jUbtt2j0NXbmOAPAuVJbgihrQVLc0/uvrsSDDMRo=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 13S4PlaV122579
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 27 Apr 2021 20:24:52 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 27 Apr 2021 23:25:47 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 27
- Apr 2021 20:24:52 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2021 23:25:46 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 27 Apr 2021 20:24:52 -0500
+ Frontend Transport; Tue, 27 Apr 2021 23:25:46 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13S1Oq2u125611;
-	Tue, 27 Apr 2021 20:24:52 -0500
-From: "Nishanth Menon" <nm@ti.com>
-To: <praneeth@ti.com>, <denis@denix.org>, <yogeshs@ti.com>
-CC: <meta-ti@yoctoproject.org>, Nishanth Menon <nm@ti.com>
-Subject: [dunfell/master PATCH] linux-ti-mainline: Bump kernel version to v5.12
-Date: Tue, 27 Apr 2021 20:24:47 -0500
-Message-ID: <20210428012447.27679-1-nm@ti.com>
-X-Mailer: git-send-email 2.31.0
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 13S4PkYE124496;
+	Tue, 27 Apr 2021 23:25:46 -0500
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>, Yogesh Siraswar <yogeshs@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH 1/3] ti-sci-fw: Update image gen and linux-firmware to latest
+Date: Tue, 27 Apr 2021 23:25:34 -0500
+Message-ID: <20210428042536.6478-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
 
-And lets work with the latest kernel
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
+update image gen and linux-firmware projects to latest commit
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
- recipes-kernel/linux/linux-ti-mainline_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/ti-sci-fw/ti-sci-fw.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-mainline_git.bb b/recipes-kern=
-el/linux/linux-ti-mainline_git.bb
-index 19c091e81e79..fc16485dc095 100644
---- a/recipes-kernel/linux/linux-ti-mainline_git.bb
-+++ b/recipes-kernel/linux/linux-ti-mainline_git.bb
-@@ -18,9 +18,9 @@ S =3D "${WORKDIR}/git"
- BRANCH =3D "master"
- TOOLS_BRANCH =3D "master"
-=20
--# 5.11 Mainline version
--SRCREV =3D "f40ddce88593482919761f74910f42f4b84c004b"
--PV =3D "5.11+git${SRCPV}"
-+# 5.12 Mainline version
-+SRCREV =3D "9f4ad9e425a1d3b6a34617b8ea226d56a119a717"
-+PV =3D "5.12+git${SRCPV}"
-=20
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
-ild
- MACHINE_KERNEL_PR_append =3D "a"
---=20
-2.31.0
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+index 7e7e11f3..72430ab6 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+ 
+ PV = "2021.01a"
+ 
+-SRCREV = "306e8b92bcce0fe88b494732c0a614079f8ff73a"
++SRCREV = "34062b5670aac524ce3074b184ef2ef62daafca0"
+ BRANCH ?= "ti-linux-firmware"
+-SRCREV_imggen = "a6b09643aa1acbcfa59bd2c1c080e3ad6c9e8074"
++SRCREV_imggen = "7b6f3832af6d334d335309d66d206ab829765c0e"
+ SRCREV_FORMAT = "imggen"
+ 
+ SRC_URI = " \
+-- 
+2.17.1
 
