@@ -1,223 +1,82 @@
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
- by mx.groups.io with SMTP id smtpd.web09.12932.1619794620782346223
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
+ by mx.groups.io with SMTP id smtpd.web11.14132.1619799643125831074
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 30 Apr 2021 07:57:00 -0700
+ Fri, 30 Apr 2021 09:20:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=o70xwPOT;
- spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: alessioigorbogani@gmail.com)
-Received: by mail-yb1-f180.google.com with SMTP id g38so83472660ybi.12
-        for <meta-ti@lists.yoctoproject.org>; Fri, 30 Apr 2021 07:57:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hUj0q2oa;
+ spf=pass (domain: gmail.com, ip: 209.85.160.182, mailfrom: vivien.didelot@gmail.com)
+Received: by mail-qt1-f182.google.com with SMTP id l1so12215396qtr.12
+        for <meta-ti@lists.yoctoproject.org>; Fri, 30 Apr 2021 09:20:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=LaIa8HaKuQCK70b1ibbc/ZvCMLDE2oiR9n5GzbNqClw=;
-        b=o70xwPOT42TtUBTsEuH9fFFAC8dcsYyPGS7GYeeirKE5YWMBxrW7au7uq2I4jtxtBi
-         pLvgjhD/y5VpNzBoi8y/SmQ3bKbQZDhHHglz1RosQ4jWwSe/sH+VTIFjt8Cv3yfFIewa
-         HbCyrX75qeA74Mtbs37Ye3HzvguUs0BHgyV72nnW63q80q+psKZ9sS6nmVZrWBuV7hYZ
-         uX+cCeYTqtfFmCgx5oN7OnN/srVQ8IF+7dlwcVuh2h4I8Cwb43eRL7vZY6WYjId+VhaN
-         LwGrBHYkHw5PG+HtrpGEZOvrES3ivc0VhPfWTk+dbyyLA59pB/9ua9gwM/KZGIHQQFaN
-         1jLw==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fIHG+AIyb+6z6QOabQBI6xxqIzjJoVIgVaNnA/SL1Ls=;
+        b=hUj0q2oaFnPojNco2E7ndr9jqZFPElJgoNnYj0dX/GrbtQ0gFUlxST1+gU6/pRKmo0
+         zypXeFm6XQ4hiqitonAwnL8k3RF8kX/hsYq+u3QpFoyQoqwDMouoHcbjpvwjOvOu7VQu
+         uYBBTiLNW7iQH/rxyToNY7pQlNMdakz7OaACAqXwnjT67+T1GRuxxfA3MmEkn4q7dsFI
+         4p7bgSSkkfMhS/mvkg5xCZcUQRKJauvQ+nLi0vImCYShMZOLPhXSZ/U9WjB6kbyZszTr
+         vs8EhQ8LKhG26+nWhGs2AwPx7oWdEac2ne/Eect/db5KWxQwvH2Vxz4oijSj3/kRwcF1
+         Pj1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=LaIa8HaKuQCK70b1ibbc/ZvCMLDE2oiR9n5GzbNqClw=;
-        b=O0/l4ku+oEdF8OFzWILwpSTu5A4T9u09sQizgF+5urDzfP/NzmQOHSKUMo09zesoog
-         3JgfGT/dPZNcu2bocuzFTw743tvclppzI44m/jnMZhfO2+CvH/VwJbP9/DJkpvESA3o2
-         rcredlu16kvG6jMF8vxSEkFFgcGhQM6YpZqx8g8gc2L89p4oPqra2nLSQKJqwu1xREWx
-         Rzpsd4BdHr5MP8dowF1sAhFL+F8F51qc6hTr66fhtIqhlmQdAaUMybwOqkSlrFBm8quT
-         Q564khwbSNwHSnJa8GcuJzuP16L0Y/lD2LbbPYvdZUydBAKGl0G6MZfsQo8cKy2dadj7
-         dNAg==
-X-Gm-Message-State: AOAM532AWG/24LCFXq8lsUt+irDXB1HgPBsO9tvbiXafgjsizu2+0XwK
-	mhW4dQCJP4SxtqsEgZncv29GGnjsHMYLf4kq+TD05GzVBc1wwA==
-X-Google-Smtp-Source: ABdhPJxZ/UUKm8+O/aTEpx/UV2yi1mybtLnjSc0Cg8I/sd9aDyuQWJ27zbWO96JhEt2wKId1Jx1Afgu0fRpkZrVLX0M=
-X-Received: by 2002:a25:cf8c:: with SMTP id f134mr7352385ybg.216.1619794619429;
- Fri, 30 Apr 2021 07:56:59 -0700 (PDT)
-MIME-Version: 1.0
-From: "Alessio Igor Bogani" <alessioigorbogani@gmail.com>
-Date: Fri, 30 Apr 2021 16:56:40 +0200
-Message-ID: <CAPk1OjHUGA2hje_esMUtM0qWj_NcHeXev-B4oWGYKtD=RWGA2Q@mail.gmail.com>
-Subject: Fail to build a kernel module
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fIHG+AIyb+6z6QOabQBI6xxqIzjJoVIgVaNnA/SL1Ls=;
+        b=aoDkhgyYuln7JI78HVIZd6jk4wSZRkpvFjD6k4deYZjM1sZDCDLcB/RQOwxspXYlyb
+         2O8frnXCt2leCvFeRhYICj/v2ITC4eZdDZfnFXufYqo7RcogRnfiAFM47CAaA8yM3AM7
+         ejXlCNSBKDeTl3babG0AsRQlhTnUy570GDlXp1rinbDtoTiPJfwepCKD7lTT4X6GTQdM
+         lSIJGIjx8LSDPPmRn58S1mLqOewFPmniOPHi97IGMAm6RFhxQxIPtiCvNG7P5NRuWy2q
+         4yXcI9MOl5p1ajNJtgr+9GoCNW6SrA5RfK+xFrYtvXGldo2TPtJsrL3B0PZbvkf6oDqj
+         VMjA==
+X-Gm-Message-State: AOAM531Z0rytPn5lYMsCbYIc92BxJ/lHSL5+hm7wWDpM5nGzGb4dGyV1
+	WTI+/JVoGEcHvNZPDl1c0YOrCmsXp2A=
+X-Google-Smtp-Source: ABdhPJxPgaOCrPUsc8N6gXBDGrkXYdFdJ2Y1UgVH7L1TEKQm9haT+v2RfzezRHVUzPcLH6uGtiBTZg==
+X-Received: by 2002:a05:622a:387:: with SMTP id j7mr5006859qtx.255.1619799641999;
+        Fri, 30 Apr 2021 09:20:41 -0700 (PDT)
+Return-Path: <vivien.didelot@gmail.com>
+Received: from localhost (modemcable249.105-163-184.mc.videotron.ca. [184.163.105.249])
+        by smtp.gmail.com with ESMTPSA id b15sm2874012qtg.82.2021.04.30.09.20.41
+        for <meta-ti@lists.yoctoproject.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Apr 2021 09:20:41 -0700 (PDT)
+From: "Vivien Didelot" <vivien.didelot@gmail.com>
+X-Google-Original-From: Vivien Didelot <vdidelot@pbsc.com>
 To: meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
+Subject: [PATCH] beaglebone: make kernel machine-specific package
+Date: Fri, 30 Apr 2021 12:20:38 -0400
+Message-Id: <20210430162038.3877845-1-vdidelot@pbsc.com>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Require kernel image and device tree as machine-specific packages with
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS instead of appending IMAGE_INSTALL.
 
-The image core-image-kernel-dev cannot build a kernel module (*) if it
-was generated using poky and meta-ti (both on dunfell branch) and
-MACHINE=beaglebone . It works instead if the image was generated with
-poky (without meta-ti) using MACHINE=beaglebone-yocto.
+This binds the packages to the packagegroup-core-boot package group,
+allowing one to skip their installation, e.g. for container trees.
 
-What I have done wrong?
+Signed-off-by: Vivien Didelot <vdidelot@pbsc.com>
+---
+ conf/machine/beaglebone.conf | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Thanks!
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index 896a9d73..8d9af4ae 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -13,7 +13,10 @@ MACHINE_GUI_CLASS = "bigscreen"
+ 
+ SERIAL_CONSOLES = "115200;ttyS0"
+ 
+-IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
++MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
++	kernel-devicetree \
++	kernel-image-zimage \
++	"
+ 
+ # Refine the list of device targets for ti-pdk class recipes
+ TI_PDK_LIMIT_BOARDS = "bbbAM335x"
+-- 
+2.31.1
 
-Ciao,
-Alessio
-
-
-(*)
-root@MiWiFi-R3600-srv:~/a2720-mod# make
-make -C /lib/modules/5.4.106-g023faefa70/build M=/home/root/a2720-mod
-make[1]: Entering directory '/lib/modules/5.4.106-g023faefa70/build'
-  CC [M]  /home/root/a2720-mod/a2720.o
-/tmp/cccIk672.s: Assembler messages:
-/tmp/cccIk672.s:93: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:101: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:118: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:126: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:211: Error: selected processor does not support `isb '
-in ARM mode
-/tmp/cccIk672.s:225: Error: selected processor does not support `isb '
-in ARM mode
-/tmp/cccIk672.s:238: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:253: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:268: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:283: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:298: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:313: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:328: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:343: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:358: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:373: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:389: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:405: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:421: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:437: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:453: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:469: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:484: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:544: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:555: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:567: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:579: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:591: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:603: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:615: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:627: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:639: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:650: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:661: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:672: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:683: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:694: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:706: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:718: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:730: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:742: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:754: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:785: Error: selected processor does not support `isb '
-in ARM mode
-/tmp/cccIk672.s:799: Error: selected processor does not support `isb '
-in ARM mode
-/tmp/cccIk672.s:823: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:843: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:869: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:888: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:928: Error: selected processor does not support `isb '
-in ARM mode
-/tmp/cccIk672.s:943: Error: selected processor does not support `isb '
-in ARM mode
-/tmp/cccIk672.s:961: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:983: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:994: Error: selected processor does not support `dsb '
-in ARM mode
-/tmp/cccIk672.s:1005: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1016: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1027: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1038: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1049: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1060: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1071: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1082: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1094: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1106: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1118: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1130: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1142: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1154: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1165: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1214: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:1254: Error: selected processor does not support `isb
-' in ARM mode
-/tmp/cccIk672.s:1269: Error: selected processor does not support `isb
-' in ARM mode
-/tmp/cccIk672.s:1287: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:1326: Error: selected processor does not support `isb
-' in ARM mode
-/tmp/cccIk672.s:1566: Error: selected processor does not support `dsb
-' in ARM mode
-/tmp/cccIk672.s:1574: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:1593: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:1609: Error: selected processor does not support `dsb
-st' in ARM mode
-/tmp/cccIk672.s:1774: Error: selected processor does not support `dsb
-st' in ARM mode
-make[2]: *** [scripts/Makefile.build:262: /home/root/a2720-mod/a2720.o] Error 1
-make[1]: *** [Makefile:1734: /home/root/a2720-mod] Error 2
-make[1]: Leaving directory '/lib/modules/5.4.106-g023faefa70/build'
-make: *** [Makefile:7: all] Error 2
