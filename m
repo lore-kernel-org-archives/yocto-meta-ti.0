@@ -1,72 +1,90 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web08.3044.1620087311229520399
+ by mx.groups.io with SMTP id smtpd.web11.3065.1620087554769529720
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 03 May 2021 17:15:11 -0700
+ Mon, 03 May 2021 17:19:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=okceyAkg;
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=axwWolkr;
  spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nm@ti.com)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id F14BB38C0652
-	for <meta-ti@yoctoproject.org>; Tue,  4 May 2021 00:15:09 +0000 (UTC)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1440F6B4063549;
-	Mon, 3 May 2021 19:15:06 -0500
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 0F21E38C0652
+	for <meta-ti@yoctoproject.org>; Tue,  4 May 2021 00:19:14 +0000 (UTC)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1440JC9A065525;
+	Mon, 3 May 2021 19:19:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1620087306;
-	bh=vydPCDB4BIAdNxwynxXl4Gsm8vKHTCrcK2tbYvdBwC0=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=okceyAkg3PmLQdjzlid/tCNSUFEGEZrYSOx2XnlDBByjUO1eJQH9sq/sTmqs9xpOQ
-	 0sChIfNN0oHscEv9xJGeDbWP61k2U8vm15cMfVDeNuvGOe7o7mt5kz/9ckcj2zLlXB
-	 hZvet6/XuU3b6u6CRldpURxTlNPTtx6rKJNgN+2g=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1440F53u044296
+	s=ti-com-17Q1; t=1620087552;
+	bh=DHukaHpOE59fln/aLCZg7U5GCOhegDDVl854N4nQMUs=;
+	h=From:To:CC:Subject:Date;
+	b=axwWolkrLUv9pF3twz424q01gQ4wrfKjQFF0njtVZIc37XE+vtjL5ED9tLe9xr9Nl
+	 4VHWhr1G2umOI/R0KtVukXsj2CUfA1GMgwKU4llmSZvjwUn1D4gq5u+l38OxTiMz62
+	 J/gctc6kBRabIce0MeDghMglTpSnXY12O47anTQs=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1440JBhY027441
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 3 May 2021 19:15:06 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 3 May 2021 19:19:11 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 3 May
- 2021 19:15:05 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ 2021 19:19:11 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Mon, 3 May 2021 19:15:05 -0500
+ Frontend Transport; Mon, 3 May 2021 19:19:11 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1440F42V021945;
-	Mon, 3 May 2021 19:15:05 -0500
-Date: Mon, 3 May 2021 19:15:04 -0500
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1440JBVT029839;
+	Mon, 3 May 2021 19:19:11 -0500
 From: "Nishanth Menon" <nm@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <praneeth@ti.com>, <yogeshs@ti.com>, <meta-ti@yoctoproject.org>
-Subject: Re: [meta-ti] [dunfell PATCH] recipes-kernel: perf: Add a perf.bbappend to handle RDEPENDS on newer kernel
-Message-ID: <20210504001504.mzn7sz3paklbe722@tactile>
-References: <20210503224303.15093-1-nm@ti.com>
- <167BB00A0B06C8B2.32536@lists.yoctoproject.org>
- <20210503232641.GJ21867@denix.org>
+To: <praneeth@ti.com>, <denis@denix.org>, <yogeshs@ti.com>
+CC: <meta-ti@yoctoproject.org>, Nishanth Menon <nm@ti.com>
+Subject: [dunfell PATCH V2] recipes-kernel: perf: Add a perf.bbappend to handle RDEPENDS on newer kernel
+Date: Mon, 3 May 2021 19:19:09 -0500
+Message-ID: <20210504001909.17039-1-nm@ti.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-In-Reply-To: <20210503232641.GJ21867@denix.org>
-User-Agent: NeoMutt/20171215
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On 19:26-20210503, Denys Dmytriyenko wrote:
-[..]
-> > > +RDEPENDS_${PN}-tests =+ "bash"
-> 
-> Come to think of it, you might want to guard this change to meta-ti platforms:
-> 
-> +RDEPENDS_${PN}-tests_ti-soc += "bash"
+Commit 159cdb159ad0 ("perf-tests: add bash into RDEPENDS (v5.12-rc5+)")
+in upstream openembedded-core layer.
 
-True.. yeah, will post a v2.
-> 
-> BTW, any specific reason to prepend (=+) instead of appending (+=)?
+Copying over a snippet of description over:
 
-Nothing specific.. oe-core was using += So, followed the same, but in a
-higher order layer like meta-ti - yeah i think append makes more sense.
+Commit 1dc481c0b0cf perf test: Change to use bash for daemon test
+in upstream kernel
+Changes tools/perf/tests/shell/daemon.sh to be explicitly bash
+(it was already required, but was just skipped on various
+ distros).
 
-Thanks.
+We add it into our RDEPENDS for perf-tests to fixup 5.12+
+builds.
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D)/Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+We already have relatively heavy RDEPENDS for perf tests (python3), so
+adding bash into the RDEPENDS isn't signifcant even for older perf
+builds that use the same recipe.
+
+[OE patch by: Bruce Ashfield <bruce.ashfield@gmail.com>]
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Changes since V1:
+- use append instead of prepend
+- guard for ti-socs.
+
+V1: https://lists.yoctoproject.org/g/meta-ti/message/13771?p=3D,,,20,0,0,=
+0::created,0,,1,2,0,13771
+
+ recipes-kernel/perf/perf.bbappend | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 recipes-kernel/perf/perf.bbappend
+
+diff --git a/recipes-kernel/perf/perf.bbappend b/recipes-kernel/perf/perf=
+.bbappend
+new file mode 100644
+index 000000000000..9818a3b99ea7
+--- /dev/null
++++ b/recipes-kernel/perf/perf.bbappend
+@@ -0,0 +1 @@
++RDEPENDS_${PN}-tests_ti-soc +=3D "bash"
+--=20
+2.31.0
+
