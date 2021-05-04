@@ -1,90 +1,90 @@
 Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.3065.1620087554769529720
+ by mx.groups.io with SMTP id smtpd.web09.3329.1620088681370279271
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 03 May 2021 17:19:14 -0700
+ Mon, 03 May 2021 17:38:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=axwWolkr;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nm@ti.com)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 0F21E38C0652
-	for <meta-ti@yoctoproject.org>; Tue,  4 May 2021 00:19:14 +0000 (UTC)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1440JC9A065525;
-	Mon, 3 May 2021 19:19:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1620087552;
-	bh=DHukaHpOE59fln/aLCZg7U5GCOhegDDVl854N4nQMUs=;
-	h=From:To:CC:Subject:Date;
-	b=axwWolkrLUv9pF3twz424q01gQ4wrfKjQFF0njtVZIc37XE+vtjL5ED9tLe9xr9Nl
-	 4VHWhr1G2umOI/R0KtVukXsj2CUfA1GMgwKU4llmSZvjwUn1D4gq5u+l38OxTiMz62
-	 J/gctc6kBRabIce0MeDghMglTpSnXY12O47anTQs=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1440JBhY027441
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 3 May 2021 19:19:11 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 3 May
- 2021 19:19:11 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Mon, 3 May 2021 19:19:11 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1440JBVT029839;
-	Mon, 3 May 2021 19:19:11 -0500
-From: "Nishanth Menon" <nm@ti.com>
-To: <praneeth@ti.com>, <denis@denix.org>, <yogeshs@ti.com>
-CC: <meta-ti@yoctoproject.org>, Nishanth Menon <nm@ti.com>
-Subject: [dunfell PATCH V2] recipes-kernel: perf: Add a perf.bbappend to handle RDEPENDS on newer kernel
-Date: Mon, 3 May 2021 19:19:09 -0500
-Message-ID: <20210504001909.17039-1-nm@ti.com>
-X-Mailer: git-send-email 2.31.0
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 198.145.29.25, mailfrom: denis@denix.org)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.yoctoproject.org (Postfix) with ESMTPS id 2C05038C0677
+	for <meta-ti@yoctoproject.org>; Tue,  4 May 2021 00:38:00 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 87FA640C1E;
+	Tue,  4 May 2021 00:37:59 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6Tj9acERZ-Mp; Tue,  4 May 2021 00:37:59 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 54F7940A28;
+	Tue,  4 May 2021 00:37:56 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 91E2C1745DB; Mon,  3 May 2021 20:37:55 -0400 (EDT)
+Date: Mon, 3 May 2021 20:37:55 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Nishanth Menon <nm@ti.com>
+Cc: praneeth@ti.com, yogeshs@ti.com, meta-ti@yoctoproject.org
+Subject: Re: [dunfell PATCH V2] recipes-kernel: perf: Add a perf.bbappend to handle RDEPENDS on newer kernel
+Message-ID: <20210504003755.GK21867@denix.org>
+References: <20210504001909.17039-1-nm@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20210504001909.17039-1-nm@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Commit 159cdb159ad0 ("perf-tests: add bash into RDEPENDS (v5.12-rc5+)")
-in upstream openembedded-core layer.
+On Mon, May 03, 2021 at 07:19:09PM -0500, Nishanth Menon wrote:
+> Commit 159cdb159ad0 ("perf-tests: add bash into RDEPENDS (v5.12-rc5+)")
+> in upstream openembedded-core layer.
+> 
+> Copying over a snippet of description over:
+> 
+> Commit 1dc481c0b0cf perf test: Change to use bash for daemon test
+> in upstream kernel
+> Changes tools/perf/tests/shell/daemon.sh to be explicitly bash
+> (it was already required, but was just skipped on various
+>  distros).
+> 
+> We add it into our RDEPENDS for perf-tests to fixup 5.12+
+> builds.
+> 
+> We already have relatively heavy RDEPENDS for perf tests (python3), so
+> adding bash into the RDEPENDS isn't signifcant even for older perf
+> builds that use the same recipe.
+> 
+> [OE patch by: Bruce Ashfield <bruce.ashfield@gmail.com>]
+> Signed-off-by: Nishanth Menon <nm@ti.com>
 
-Copying over a snippet of description over:
+Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
 
-Commit 1dc481c0b0cf perf test: Change to use bash for daemon test
-in upstream kernel
-Changes tools/perf/tests/shell/daemon.sh to be explicitly bash
-(it was already required, but was just skipped on various
- distros).
 
-We add it into our RDEPENDS for perf-tests to fixup 5.12+
-builds.
+> ---
+> Changes since V1:
+> - use append instead of prepend
+> - guard for ti-socs.
+> 
+> V1: https://lists.yoctoproject.org/g/meta-ti/message/13771?p=,,,20,0,0,0::created,0,,1,2,0,13771
 
-We already have relatively heavy RDEPENDS for perf tests (python3), so
-adding bash into the RDEPENDS isn't signifcant even for older perf
-builds that use the same recipe.
+Thanks for addressig the comments!
 
-[OE patch by: Bruce Ashfield <bruce.ashfield@gmail.com>]
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
-Changes since V1:
-- use append instead of prepend
-- guard for ti-socs.
 
-V1: https://lists.yoctoproject.org/g/meta-ti/message/13771?p=3D,,,20,0,0,=
-0::created,0,,1,2,0,13771
+>  recipes-kernel/perf/perf.bbappend | 1 +
+>  1 file changed, 1 insertion(+)
+>  create mode 100644 recipes-kernel/perf/perf.bbappend
+> 
+> diff --git a/recipes-kernel/perf/perf.bbappend b/recipes-kernel/perf/perf.bbappend
+> new file mode 100644
+> index 000000000000..9818a3b99ea7
+> --- /dev/null
+> +++ b/recipes-kernel/perf/perf.bbappend
+> @@ -0,0 +1 @@
+> +RDEPENDS_${PN}-tests_ti-soc += "bash"
+> -- 
+> 2.31.0
+> 
 
- recipes-kernel/perf/perf.bbappend | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 recipes-kernel/perf/perf.bbappend
-
-diff --git a/recipes-kernel/perf/perf.bbappend b/recipes-kernel/perf/perf=
-.bbappend
-new file mode 100644
-index 000000000000..9818a3b99ea7
---- /dev/null
-+++ b/recipes-kernel/perf/perf.bbappend
-@@ -0,0 +1 @@
-+RDEPENDS_${PN}-tests_ti-soc +=3D "bash"
---=20
-2.31.0
-
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
