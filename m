@@ -1,70 +1,81 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.11092.1620397793250390581
+ by mx.groups.io with SMTP id smtpd.web09.15929.1620418902345228781
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 07 May 2021 07:29:53 -0700
+ Fri, 07 May 2021 13:21:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=IHwmnTad;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: lokeshvutla@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 147ETq8T010846
-	for <meta-ti@lists.yoctoproject.org>; Fri, 7 May 2021 09:29:52 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GDm03Ukv;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 147KLfNl017264;
+	Fri, 7 May 2021 15:21:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1620397792;
-	bh=6r/PdyPedrC9TSwTO8MOIEMAYDgG0HMSvo6wam9GZl8=;
+	s=ti-com-17Q1; t=1620418901;
+	bh=V/mVbH4U/PHTglzVArL1P2seN2pFiqg0BYnC6bh9WaQ=;
 	h=From:To:CC:Subject:Date;
-	b=IHwmnTad43bEjETSvUtsJhzY9/NiHiNFO2fGnEOhiYPDdRnilwiLKh1IspITvHb4e
-	 nryiwR2MbZhTqq0R8QpkwjVQ3ymED1y3xRIlCjsMHkTsjepoUxs1aiJOpkBTJA8B1s
-	 oyxHyFytNcG3yKcnK2ufeELTSaaU9L2X7VTDVDlE=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 147ETqco062272
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 7 May 2021 09:29:52 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	b=GDm03UkvaVqta64xMkHQ9WdDS5mCebteh4/KfY8sETPdZJZzpntUZsTlO0Guhrglx
+	 w2fxGqJ/XvvFqFggD5yz8M4SHqAxaTC+pa2JjTr6rZZlUE2T4wqXu9M7GW6bhXJXxh
+	 zvsrYHfgFwIC6BBLwmfx6dqVso1RuKIx2IwzSRQE=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 147KLfWr032848
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 7 May 2021 15:21:41 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Fri, 7 May
- 2021 09:29:51 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ 2021 15:21:41 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Fri, 7 May 2021 09:29:51 -0500
-Received: from uda0131933.dhcp.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 147ETnrt051934;
-	Fri, 7 May 2021 09:29:50 -0500
-From: "Lokesh Vutla" <lokeshvutla@ti.com>
-To: <meta-ti@lists.yoctoproject.org>, Praneeth Bajjuri <praneeth@ti.com>
-CC: Lokesh Vutla <lokeshvutla@ti.com>
-Subject: [dunfell/master PATCH] conf/machine: am64xx: Include SK dtb for machine am64xx-evm
-Date: Fri, 7 May 2021 19:59:49 +0530
-Message-ID: <20210507142949.25741-1-lokeshvutla@ti.com>
-X-Mailer: git-send-email 2.30.0
+ Frontend Transport; Fri, 7 May 2021 15:21:40 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 147KLehR110027;
+	Fri, 7 May 2021 15:21:40 -0500
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>, Yogesh Siraswar <yogeshs@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH] linux-ti-staging: Update 5.10 kernel to the latest commit SHA
+Date: Fri, 7 May 2021 15:21:40 -0500
+Message-ID: <20210507202140.6391-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-As a step towards unification for am64xx-evm and am64xx-sk,
-start including am64xx-sk dtb for machine=am64xx-evm.
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Once U-Boot merges support for unified bootloader, am64xx-sk
-machine can be dropped.
+Update 5.10 kernel to the latest commit SHA
 
-Signed-off-by: Lokesh Vutla <lokeshvutla@ti.com>
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
- conf/machine/include/am64xx.inc | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/am64xx.inc b/conf/machine/include/am64xx.inc
-index 641bddd0..a46a50ed 100644
---- a/conf/machine/include/am64xx.inc
-+++ b/conf/machine/include/am64xx.inc
-@@ -8,6 +8,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+index aaed7f3f..95b17570 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.10:"
  
- KERNEL_DEVICETREE = " \
-     ti/k3-am642-evm.dtb \
-+    ti/k3-am642-sk.dtb \
- "
+ BRANCH = "ti-rt-linux-5.10.y"
  
- # AM64 supports multi-certificate images, use the same
+-SRCREV = "fa80ffc7961b847a40745adedeae289081762ee7"
++SRCREV = "8fbd16658d1105671e67182c290235a99a7af02b"
+ PV = "5.10.30+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 80c677c1..4ec19af7 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.10.y"
+ 
+-SRCREV = "49d1242fa195c081de943c8be078ec27baba3701"
++SRCREV = "d85aee3e19aa7403bd157d2ae30917e736096a7f"
+ PV = "5.10.30+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
-2.30.0
+2.17.1
 
