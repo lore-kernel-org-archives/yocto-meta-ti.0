@@ -1,90 +1,82 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.3568.1622833867556681484
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.5863.1623110576237689141
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 04 Jun 2021 12:11:08 -0700
+ Mon, 07 Jun 2021 17:02:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 7DAD840BA7;
-	Fri,  4 Jun 2021 19:11:06 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SG3fiUs7IqzB; Fri,  4 Jun 2021 19:11:06 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 545CC40A03;
-	Fri,  4 Jun 2021 19:11:04 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 9558A1745F7; Fri,  4 Jun 2021 15:11:03 -0400 (EDT)
-Date: Fri, 4 Jun 2021 15:11:03 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: a-m1@ti.com
-Cc: meta-ti@lists.yoctoproject.org, praneeth@ti.com
-Subject: Re: [meta-ti][meta-ti PATCH] ti-sci-fw: Install sysfw.itb in the deploy directory
-Message-ID: <20210604191103.GJ1528@denix.org>
-References: <20210602180151.4393-1-a-m1@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Nqs62Eld;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15802t2O047642;
+	Mon, 7 Jun 2021 19:02:55 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1623110575;
+	bh=ZrQTYt9A5+4c0XReo/5a2JBjXurm9A6dIX/5jR669Do=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=Nqs62EldCTbi0ts03rQfcxZlCjJq3wmwwBXmE7XXx9XZolF/gWkOOqfA0zCOrTxaR
+	 xGa0iBZ/X2081TmbNMf0mPoHtNZYrDXVjsxYqjZIQ/M1SgyMsTkGk8rKULWN8OoRyV
+	 blWawP6g8SOM8yjocl+7l0KFzeMXiujublyvZFoc=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15802tXZ082916
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 7 Jun 2021 19:02:55 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 7 Jun
+ 2021 19:02:54 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Mon, 7 Jun 2021 19:02:54 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15802s0X092487;
+	Mon, 7 Jun 2021 19:02:54 -0500
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Yogesh Siraswar <yogeshs@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH] linux-ti-staging: Update 5.10 kernel to the latest commit SHA
+Date: Mon, 7 Jun 2021 19:02:52 -0500
+Message-ID: <20210608000254.12042-2-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210608000254.12042-1-praneeth@ti.com>
+References: <20210608000254.12042-1-praneeth@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20210602180151.4393-1-a-m1@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Wed, Jun 02, 2021 at 11:31:51PM +0530, Aparna M via lists.yoctoproject.org wrote:
-> The sysfw.itb to be packaged by the installer is copied to the
-> prebuilt-images directory from the deploy directory. This
-> change installs the sysfw.itb in the deploy directory.
-> 
-> Signed-off-by: Aparna M <a-m1@ti.com>
-> ---
->  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> index 87fdec68..fef87705 100644
-> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> @@ -92,12 +92,11 @@ do_install_j7200-evm-k3r5() {
->  	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
->  }
->  
-> -do_deploy_j7200-evm-k3r5() {
-> +do_deploy_append_j7200-evm-k3r5() {
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-NAK!
-j7200 and am64 package sysfw very differently from other k3 platforms. You 
-cannot just append j7200/am64 deployment logic on top of existing one for 
-j721e and am65 - they use different sets of variables, etc...
+Update 5.10 kernel to the latest commit SHA
 
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
->  	install -d ${DEPLOYDIR}
->  	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
->  	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
->  	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
-> -	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
->  }
->  
->  do_install_am64xx-evm-k3r5() {
-> @@ -107,12 +106,11 @@ do_install_am64xx-evm-k3r5() {
->  	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
->  }
->  
-> -do_deploy_am64xx-evm-k3r5() {
-> +do_deploy_append_am64xx-evm-k3r5() {
->  	install -d ${DEPLOYDIR}
->  	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
->  	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
->  	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
-> -	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
->  }
->  
->  addtask deploy before do_build after do_compile
-> -- 
-> 2.17.1
-> 
-
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+index 4654d92d..834df5ff 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.10:"
+ 
+ BRANCH = "ti-rt-linux-5.10.y"
+ 
+-SRCREV = "afe9ba17bb94cd226f9e5dc3685e4fe32be28c5c"
++SRCREV = "433ef931c699f08bef8c67de8458302c5f971c8b"
+ PV = "5.10.35+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 72a6c49c..47f1669e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.10.y"
+ 
+-SRCREV = "72d727fe733f2610e937a063bcebedce329948ec"
++SRCREV = "ae876c7c91df646ab198331e676f250f06cfdeb5"
+ PV = "5.10.35+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.17.1
+
