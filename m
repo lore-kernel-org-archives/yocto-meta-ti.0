@@ -1,74 +1,72 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.5898.1623110807916505795
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web09.6207.1623112258557347919
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 07 Jun 2021 17:06:48 -0700
+ Mon, 07 Jun 2021 17:30:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=SVieuyG7;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15806lGb087842;
-	Mon, 7 Jun 2021 19:06:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1623110807;
-	bh=D5jKFARWxq+9JlmDxmux9N9STPkPgLB7irLW5WaPx1w=;
-	h=From:To:CC:Subject:Date;
-	b=SVieuyG7A2FRSPa9IUw1NZKu6ZQeH9HM6GHCqUceHBsxeMWYM6YunkcdbRE2+YpO+
-	 yiprW+j6dwNgo3Cm0VSovBjlUH65terw0GFGZPvTLLmwj23kebXgAimqp2mNw56DBC
-	 qdk47lscMvETDhucdjKJ+R/u/NNFu+eSIBBJmgC0=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15806lfB068962
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 7 Jun 2021 19:06:47 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 7 Jun
- 2021 19:06:46 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Mon, 7 Jun 2021 19:06:46 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15806kPo002169;
-	Mon, 7 Jun 2021 19:06:46 -0500
-From: "praneeth" <praneeth@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>, Yogesh Siraswar <yogeshs@ti.com>
-CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [dunfell/master PATCH v2] conf: am65xx-evm: ReIntroduce display overlays for 5.10
-Date: Mon, 7 Jun 2021 19:06:46 -0500
-Message-ID: <20210608000646.12438-1-praneeth@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 58F7140C4E;
+	Tue,  8 Jun 2021 00:30:57 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id fFUz9bI-GSax; Tue,  8 Jun 2021 00:30:57 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 371D440BA9;
+	Tue,  8 Jun 2021 00:30:55 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 934241745FB; Mon,  7 Jun 2021 20:30:54 -0400 (EDT)
+Date: Mon, 7 Jun 2021 20:30:54 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: praneeth@ti.com
+Cc: Yogesh Siraswar <yogeshs@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [dunfell/master PATCH] ti-uboot-staging: Update to the latest ti-u-boot-2021.01
+Message-ID: <20210608003054.GR1528@denix.org>
+References: <20210608000254.12042-1-praneeth@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+In-Reply-To: <20210608000254.12042-1-praneeth@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Praneeth Bajjuri <praneeth@ti.com>
+Series looks good to me, including v2. Maybe better to specify sequence number 
+[PATCH 01/04] to keep the order?
 
-commit 9ea50db095f9 ("conf: am65xx-evm: Remove non-existent dtb* from 5.10")
-removed all non-existent dtb* for am65xx-evm as they were not
-available on linux 5.10 branch at that time.
+Acked-by: Denys Dmytriyenko <denys@konsulko.com>
 
-This patch reintroduces following display overlays.
-- k3-am654-evm-tc358876.dtbo
-- k3-am654-evm-oldi-lcd1evm.dtbo
 
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
----
- conf/machine/include/am65xx.inc | 2 ++
- 1 file changed, 2 insertions(+)
+On Mon, Jun 07, 2021 at 07:02:51PM -0500, praneeth via lists.yoctoproject.org wrote:
+> From: Praneeth Bajjuri <praneeth@ti.com>
+> 
+> Update to the latest commit of ti-u-boot-2021.01
+> 
+> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+> ---
+>  recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+> index 437f6eba..4c3f0a47 100644
+> --- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+> @@ -2,8 +2,8 @@ require u-boot-ti.inc
+>  
+>  LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+>  
+> -PR = "r6"
+> +PR = "r7"
+>  
+>  BRANCH = "ti-u-boot-2021.01"
+>  
+> -SRCREV = "a6e78929575b6969c15ced9685441fc430ee9510"
+> +SRCREV = "c66dd9b8467472278803c2426098a2828c93ebcc"
+> -- 
+> 2.17.1
+> 
 
-diff --git a/conf/machine/include/am65xx.inc b/conf/machine/include/am65xx.inc
-index 7cc3ddcc..8516ca4c 100644
---- a/conf/machine/include/am65xx.inc
-+++ b/conf/machine/include/am65xx.inc
-@@ -15,6 +15,8 @@ KERNEL_DEVICETREE = " \
-     ti/k3-am654-sr1.dtbo \
-     ti/k3-am654-pcie-usb2.dtbo \
-     ti/k3-am654-pcie-usb3.dtbo \
-+    ti/k3-am654-evm-tc358876.dtbo \
-+    ti/k3-am654-evm-oldi-lcd1evm.dtbo \
- "
- 
- BBMULTICONFIG += "k3r5-sr2"
 -- 
-2.17.1
-
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
