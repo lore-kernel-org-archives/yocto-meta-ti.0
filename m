@@ -1,72 +1,64 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.6207.1623112258557347919
+Received: from bmailout2.hostsharing.net (bmailout2.hostsharing.net [83.223.78.240])
+ by mx.groups.io with SMTP id smtpd.web10.12712.1623161080009062025
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 07 Jun 2021 17:30:59 -0700
+ Tue, 08 Jun 2021 07:04:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 58F7140C4E;
-	Tue,  8 Jun 2021 00:30:57 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fFUz9bI-GSax; Tue,  8 Jun 2021 00:30:57 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 371D440BA9;
-	Tue,  8 Jun 2021 00:30:55 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 934241745FB; Mon,  7 Jun 2021 20:30:54 -0400 (EDT)
-Date: Mon, 7 Jun 2021 20:30:54 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
+ dkim=missing; spf=none, err=permanent DNS error (domain: h08.hostsharing.net, ip: 83.223.78.240, mailfrom: foo00@h08.hostsharing.net)
+Received: from h08.hostsharing.net (h08.hostsharing.net [IPv6:2a01:37:1000::53df:5f1c:0])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "*.hostsharing.net", Issuer "RapidSSL TLS DV RSA Mixed SHA256 2020 CA-1" (verified OK))
+	by bmailout2.hostsharing.net (Postfix) with ESMTPS id C36072800B3CA;
+	Tue,  8 Jun 2021 16:04:36 +0200 (CEST)
+Received: by h08.hostsharing.net (Postfix, from userid 100393)
+	id AE4F3429BE2; Tue,  8 Jun 2021 16:04:36 +0200 (CEST)
+Date: Tue, 8 Jun 2021 16:04:36 +0200
+From: "Lukas Wunner" <lukas@wunner.de>
 To: praneeth@ti.com
-Cc: Yogesh Siraswar <yogeshs@ti.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [dunfell/master PATCH] ti-uboot-staging: Update to the latest ti-u-boot-2021.01
-Message-ID: <20210608003054.GR1528@denix.org>
+Cc: Yogesh Siraswar <yogeshs@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [dunfell/master PATCH] linux-ti-staging: Update 5.10 kernel to the latest commit SHA
+Message-ID: <20210608140436.GA6013@wunner.de>
 References: <20210608000254.12042-1-praneeth@ti.com>
+ <20210608000254.12042-2-praneeth@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20210608000254.12042-1-praneeth@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+In-Reply-To: <20210608000254.12042-2-praneeth@ti.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Series looks good to me, including v2. Maybe better to specify sequence number 
-[PATCH 01/04] to keep the order?
-
-Acked-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
-On Mon, Jun 07, 2021 at 07:02:51PM -0500, praneeth via lists.yoctoproject.org wrote:
-> From: Praneeth Bajjuri <praneeth@ti.com>
-> 
-> Update to the latest commit of ti-u-boot-2021.01
-> 
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-> ---
->  recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-> index 437f6eba..4c3f0a47 100644
-> --- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-> @@ -2,8 +2,8 @@ require u-boot-ti.inc
+On Mon, Jun 07, 2021 at 07:02:52PM -0500, praneeth via lists.yoctoproject.org wrote:
+> diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+> index 4654d92d..834df5ff 100644
+> --- a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+> +++ b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+> @@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.10:"
 >  
->  LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+>  BRANCH = "ti-rt-linux-5.10.y"
 >  
-> -PR = "r6"
-> +PR = "r7"
+> -SRCREV = "afe9ba17bb94cd226f9e5dc3685e4fe32be28c5c"
+> +SRCREV = "433ef931c699f08bef8c67de8458302c5f971c8b"
+>  PV = "5.10.35+git${SRCPV}"
+> diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+> index 72a6c49c..47f1669e 100644
+> --- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
+> +++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+> @@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
 >  
->  BRANCH = "ti-u-boot-2021.01"
+>  BRANCH = "ti-linux-5.10.y"
 >  
-> -SRCREV = "a6e78929575b6969c15ced9685441fc430ee9510"
-> +SRCREV = "c66dd9b8467472278803c2426098a2828c93ebcc"
-> -- 
-> 2.17.1
-> 
+> -SRCREV = "72d727fe733f2610e937a063bcebedce329948ec"
+> +SRCREV = "ae876c7c91df646ab198331e676f250f06cfdeb5"
+>  PV = "5.10.35+git${SRCPV}"
+>  
+>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+This doesn't apply cleanly to any of the dunfell, dunfell-next nor master
+branches.  SRCREV is currently 8fbd16658d11 and d85aee3e19aa, respectively
+on those branches.
+
+Which branch did you base this patch on?
+
+Thanks,
+
+Lukas
