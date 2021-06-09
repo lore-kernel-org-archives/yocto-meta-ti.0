@@ -1,42 +1,42 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web09.1709.1623199856836830096
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web12.1799.1623199856878284035
  for <meta-ti@lists.yoctoproject.org>;
  Tue, 08 Jun 2021 17:50:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cQil1Bao;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1590ouje097338;
-	Tue, 8 Jun 2021 19:50:56 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=qwC530BJ;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1590otNq004610;
+	Tue, 8 Jun 2021 19:50:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1623199856;
-	bh=YjfRXSscFozahq3DhjlkVKdlnJqkHM6UmG3/1MtlBi0=;
+	s=ti-com-17Q1; t=1623199855;
+	bh=NrvdsfRRUUex2L99jrHbayd7wNtF4vxpLe5FaWxUdkQ=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=cQil1BaonsEhkh/6U3nlzwnD8M2nq+xrAXoGHPzRpcQMAHVbG/2/v8JEA5UMAoePu
-	 pMQQitwLzNYdw95YHiNwM7eCsths+pDkpQ97fffrdC3epgnlUo5CRF5d00VT9DTKWq
-	 Irn0eKMsw8UF/rpMYyJPLADNAaKZVJB2qei7/Qek=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1590ouCR083218
+	b=qwC530BJpdnLaPhe86wmHdwLcPBPZbcR7XYVOFP3VPetHaSJ+Bs9CyNf87XIqJK5q
+	 Akicv9usSpIv2CvpCBux4h0HUshhgrko+SX5+MHp53ShUZPREL1+rQBXfYFkpNRPK5
+	 i1a/pS08WSVCWwRfj3i5lqUaO1EANTmg0s6pqtqk=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1590otCO098168
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 8 Jun 2021 19:50:56 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 8 Jun 2021 19:50:55 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 8 Jun
  2021 19:50:55 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
  Frontend Transport; Tue, 8 Jun 2021 19:50:55 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1590otcI052361;
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1590otSO047286;
 	Tue, 8 Jun 2021 19:50:55 -0500
 From: "praneeth" <praneeth@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Yogesh Siraswar <yogeshs@ti.com>
 CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>,
         <lukas@wunner.de>
-Subject: [dunfell/master PATCHv2 5/5] conf: j7-evm: ReIntroduce pm1 SOM with tps65917 PMIC
-Date: Tue, 8 Jun 2021 19:50:55 -0500
-Message-ID: <20210609005055.7975-6-praneeth@ti.com>
+Subject: [dunfell/master PATCHv2 1/5] ti-uboot-staging: Update to the latest ti-u-boot-2021.01
+Date: Tue, 8 Jun 2021 19:50:51 -0500
+Message-ID: <20210609005055.7975-2-praneeth@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210609005055.7975-1-praneeth@ti.com>
 References: <20210609005055.7975-1-praneeth@ti.com>
@@ -46,32 +46,28 @@ Content-Type: text/plain
 
 From: Praneeth Bajjuri <praneeth@ti.com>
 
-commit 8b206b32ec18 ("conf: j7-evm: Remove unavailable dtb/o from 5.10 kernel")
-removed all non-existent dtb* for j7-evm as they were not
-available on linux 5.10 branch at that time.
-
-Since the support for pm1 SOM with tps65917 PMIC is added in ti-linux-5.10.y by
-commit dd97d0bbafb7 ("arm64: dts: ti: k3-j721e: Add support for pm1 SOM with tps65917 PMIC")
-
-This patch adds the support back with the supported dtb.
+Update to the latest commit of ti-u-boot-2021.01
 
 Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
- conf/machine/j7-evm.conf | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-index 4e9d18a7..6bdb3cf1 100644
---- a/conf/machine/j7-evm.conf
-+++ b/conf/machine/j7-evm.conf
-@@ -11,6 +11,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index 437f6eba..4c3f0a47 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
  
- KERNEL_DEVICETREE = " \
-     ti/k3-j721e-common-proc-board.dtb \
-+    ti/k3-j721e-proc-board-tps65917.dtb \
-     ti/k3-j721e-common-proc-board-infotainment.dtbo \
- "
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
  
+-PR = "r6"
++PR = "r7"
+ 
+ BRANCH = "ti-u-boot-2021.01"
+ 
+-SRCREV = "a6e78929575b6969c15ced9685441fc430ee9510"
++SRCREV = "c66dd9b8467472278803c2426098a2828c93ebcc"
 -- 
 2.17.1
 
