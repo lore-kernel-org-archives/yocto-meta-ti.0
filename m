@@ -1,65 +1,83 @@
-Received: from bmailout3.hostsharing.net (bmailout3.hostsharing.net [176.9.242.62])
- by mx.groups.io with SMTP id smtpd.web09.4596.1623223153495234369
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.5824.1623300997641103457
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 09 Jun 2021 00:19:14 -0700
+ Wed, 09 Jun 2021 21:56:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: h08.hostsharing.net, ip: 176.9.242.62, mailfrom: foo00@h08.hostsharing.net)
-Received: from h08.hostsharing.net (h08.hostsharing.net [83.223.95.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(Client CN "*.hostsharing.net", Issuer "RapidSSL TLS DV RSA Mixed SHA256 2020 CA-1" (verified OK))
-	by bmailout3.hostsharing.net (Postfix) with ESMTPS id 278BA100D9417;
-	Wed,  9 Jun 2021 09:19:10 +0200 (CEST)
-Received: by h08.hostsharing.net (Postfix, from userid 100393)
-	id EB52738D64C; Wed,  9 Jun 2021 09:19:09 +0200 (CEST)
-Date: Wed, 9 Jun 2021 09:19:09 +0200
-From: "Lukas Wunner" <lukas@wunner.de>
-To: praneeth@ti.com
-Cc: Yogesh Siraswar <yogeshs@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [dunfell/master PATCH] linux-ti-staging: Update 5.10 kernel to the latest commit SHA
-Message-ID: <20210609071909.GA18559@wunner.de>
-References: <20210608000254.12042-1-praneeth@ti.com>
- <20210608000254.12042-2-praneeth@ti.com>
- <20210608140436.GA6013@wunner.de>
- <ea5b4665-09fe-285c-7fdd-2447b610216a@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=OLO2yjVM;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15A4uab5089650;
+	Wed, 9 Jun 2021 23:56:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1623300996;
+	bh=qPw9jcuYiINKMQBo+v6LedI+7S07l7hTZvee0hnHpwk=;
+	h=From:To:CC:Subject:Date;
+	b=OLO2yjVMqRViKuHE5YNt8rYfYsOPJUQq9F+Hqiac/LO7JKcjjUK0zAkbzOYgtx1R4
+	 Q0G2W+0rSbxD7g2+X0nBflEBOdazRu+tpG+X6zwZKmeEOy1LaH09xAOHwfhXQ+omjg
+	 g/CN0fglBhyp16sXJiPEGeWwgprpX/dKCqCAnNjc=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15A4uasS099021
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 9 Jun 2021 23:56:36 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 9 Jun
+ 2021 23:56:35 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Wed, 9 Jun 2021 23:56:35 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15A4uZVO087431;
+	Wed, 9 Jun 2021 23:56:35 -0500
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Yogesh Siraswar <yogeshs@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH] linux-ti-staging: Update 5.10 kernel to 5.10.41
+Date: Wed, 9 Jun 2021 23:56:35 -0500
+Message-ID: <20210610045635.6670-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <ea5b4665-09fe-285c-7fdd-2447b610216a@ti.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Tue, Jun 08, 2021 at 07:40:07PM -0500, praneeth via lists.yoctoproject.org wrote:
-> On 6/8/21 9:04 AM, Lukas Wunner wrote:
-> > This doesn't apply cleanly to any of the dunfell, dunfell-next nor master
-> > branches.  SRCREV is currently 8fbd16658d11 and d85aee3e19aa, respectively
-> > on those branches.
-> > 
-> > Which branch did you base this patch on?
-> 
-> The patch was made based on dunfell-next.
-> The conflict is seen because dunfell-next is not in sync with dunfell yet.
-> Once the following patches are pulled to dunfell branch, the patch can be
-> applied cleanly. I am sending a v2 shortly.
-> 
-> Ref:
-> 2de2c5ec linux-ti-staging: Update 5.10 kernel to the latest commit SHA
-> 6983b50e linux-ti-staging: Update 5.10 kernel to 5.10.35
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-It looks like dunfell-next wasn't pushed to git.ti.com, hence when I
-fetched yesterday afternoon, the above-quoted commits were missing on
-the branch:
+Update linux 5.10 to 5.10.41 stable
 
-$ cat .git/logs/refs/remotes/origin/dunfell-next
-542456ca082de7133a61be21222d13974a87e41d f0abcc93b2bd272f2fc3a6ecc13f44f9658e1217 Lukas Wunner <lukas@wunner.de> 1620636780 +0200	pull --rebase: fast-forward
-f0abcc93b2bd272f2fc3a6ecc13f44f9658e1217 99cf543ee385677589edc6bd132068c5a710803f Lukas Wunner <lukas@wunner.de> 1623076459 +0200	pull --rebase: fast-forward
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 4 ++--
+ recipes-kernel/linux/linux-ti-staging_5.10.bb    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-$ date -j -f%s 1623076459
-Mo  7 Jun 2021 16:34:19 CEST
+diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+index 0a4b4c15..275a4006 100644
+--- a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.10:"
+ 
+ BRANCH = "ti-rt-linux-5.10.y"
+ 
+-SRCREV = "548b9ee2b58177d1746a941da67b649e411457af"
+-PV = "5.10.35+git${SRCPV}"
++SRCREV = "374d0c3aa1763a13a606df3318ba86a1d634c203"
++PV = "5.10.41+git${SRCPV}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index ce6db795..c5445f2c 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.10.y"
+ 
+-SRCREV = "30e2abf77fce04c08e2813af45d6af7aee4c42bf"
+-PV = "5.10.35+git${SRCPV}"
++SRCREV = "db13654efaf0379e80a8fea1bd09431984bb64d8"
++PV = "5.10.41+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a"
+-- 
+2.17.1
 
-But in the meantime the branch was pushed, so I've now
-fetched the missing commits.
-
-Thanks!
-
-Lukas
