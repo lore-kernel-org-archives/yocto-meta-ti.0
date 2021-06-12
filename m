@@ -1,91 +1,86 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.2315.1623372722461452117
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web12.5826.1623503616905725120
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 10 Jun 2021 17:52:02 -0700
+ Sat, 12 Jun 2021 06:13:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=L4dl241Y;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15B0q1W8072802;
-	Thu, 10 Jun 2021 19:52:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1623372721;
-	bh=TYufwRXEvdFJxTH2wx2EaWKxITqTVDPQL9q96N0UZ2k=;
-	h=Subject:From:To:CC:References:Date:In-Reply-To;
-	b=L4dl241YgWoUTDLaTyEa02TXdCbIZCXvfniLdfxYWu4tQCYB6QGmC+E1LEsNPuqgM
-	 Drm0/IGJ77mh+k6YwCd9OrS9y87xT/xLJMJrBK1dPBVoxpYrA4MVai7kZWVtlGnTDT
-	 dKJJ+jrSZLn1uPNhzCMyBg5QYr/f2yHBBX7FnVLw=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15B0q1KC049317
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 10 Jun 2021 19:52:01 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 10
- Jun 2021 19:52:01 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Thu, 10 Jun 2021 19:52:01 -0500
-Received: from [10.247.25.23] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15B0q0Ro077304;
-	Thu, 10 Jun 2021 19:52:01 -0500
-Subject: Re: [dunfell/master PATCHv2 1/5] ti-uboot-staging: Update to the latest ti-u-boot-2021.01
-From: "praneeth" <praneeth@ti.com>
-To: Lukas Wunner <lukas@wunner.de>
-CC: Yogesh Siraswar <yogeshs@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20210609005055.7975-1-praneeth@ti.com>
- <20210609005055.7975-2-praneeth@ti.com> <20210610191655.GA9160@wunner.de>
- <1875b7da-b906-0faa-1ccd-5ab19bcbb516@ti.com>
-Message-ID: <d9b46314-e0c1-e7d0-0399-180d929656f4@ti.com>
-Date: Thu, 10 Jun 2021 19:52:00 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <1875b7da-b906-0faa-1ccd-5ab19bcbb516@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 15B0q1W8072802
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: tom.rini@gmail.com)
+Received: by mail-qk1-f180.google.com with SMTP id c9so7621699qkm.0
+        for <meta-ti@lists.yoctoproject.org>; Sat, 12 Jun 2021 06:13:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references;
+        bh=7e320KEyiw7WwsOCtPH7zYlw58JMwNxyI0Kzj+/1g4A=;
+        b=R7zhXEYbFsIs6lDloGUFphOqquC151NkkvdLtCsL8vSTCvnwepzqNovtN5thcYCtvw
+         9HhBpb9Mu4wOw6rRe61UqVeYUSzC66LxexBgbeLDW3yZ/7a5524QMYl4JZN55T4Mn/fK
+         W6bIqv+1YJcoGhN/5nNHLyPR4HGidkiu1prWPx/NURbrYRbBLk3hiePTsVkTbFZr+HCN
+         P1u2j6oOJb3N1zjjJLdP+TLTF+9Y5M8xOkfuIVRhaaGTGu6+56Fd/aOYX0t+xxnCSDJe
+         VN5goHCe9BJ9WgK9nJoS5RMgvBZ3Ui/+vQv/tyuEqk79Lc/6m7uQ7VcSHAzHfEC3Fq6O
+         7qUw==
+X-Gm-Message-State: AOAM532WO8YI6JtZtLoaEZ249IYC2Wid7Ch3UbI5Sq5OFqG5nVCyA/Fn
+	mMfOCtmr1jfgpVEvfEgc/WKAizUMmg==
+X-Google-Smtp-Source: ABdhPJwH7yaA5H6lNY7ZJe5xtFhUhUGvYDXqOJ+/VTPJXPMk/Kjy3vq0yEsgujt+1EpddDmokhVsqQ==
+X-Received: by 2002:a37:618f:: with SMTP id v137mr8581555qkb.282.1623503615583;
+        Sat, 12 Jun 2021 06:13:35 -0700 (PDT)
+Return-Path: <tom.rini@gmail.com>
+Received: from bill-the-cat.lan (2603-6081-7b01-cbda-3c24-afde-29e9-71af.res6.spectrum.com. [2603:6081:7b01:cbda:3c24:afde:29e9:71af])
+        by smtp.gmail.com with ESMTPSA id x10sm6465176qkf.42.2021.06.12.06.13.34
+        for <meta-ti@lists.yoctoproject.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 12 Jun 2021 06:13:34 -0700 (PDT)
+From: "Tom Rini" <tom.rini@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Subject: [PATCHv2] conf: am335x-evm: Add extlinux.conf support
+Date: Sat, 12 Jun 2021 09:13:31 -0400
+Message-Id: <20210612131331.13439-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <16875AD11A54340A.8333@lists.yoctoproject.org>
+References: <16875AD11A54340A.8333@lists.yoctoproject.org>
 
+To make use of the "generic distro boot" support in U-Boot, an
+extlinux.conf file needs to be generated and reside in the extlinux
+directory.  The extlinux.conf file will be parsed by U-Boot and the
+"append" line will be evaluated and expanded and used entirely as the
+bootargs passed to the kernel.  Our generated extlinux.conf states
+that the kernel image and device trees live one level up (so the root
+directory) from it, so populate that location with our kernel and device
+trees.
 
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- Elaborate on how this feature works in the commit message.
+---
+ conf/machine/include/ti33x.inc | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-On 6/10/2021 4:58 PM, Bajjuri, Praneeth wrote:
->=20
->=20
-> On 6/10/2021 2:16 PM, Lukas Wunner wrote:
->> On Tue, Jun 08, 2021 at 07:50:51PM -0500, Praneeth Bajjuri=20
->> <praneeth@ti.com> wrote:
->>> --- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
->>> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
->>> @@ -2,8 +2,8 @@ require u-boot-ti.inc
->>> =C2=A0 LIC_FILES_CHKSUM =3D=20
->>> "file://Licenses/README;md5=3D5a7450c57ffe5ae63fd732446b988025"
->>> -PR =3D "r6"
->>> +PR =3D "r7"
->>> =C2=A0 BRANCH =3D "ti-u-boot-2021.01"
->>> -SRCREV =3D "a6e78929575b6969c15ced9685441fc430ee9510"
->>> +SRCREV =3D "c66dd9b8467472278803c2426098a2828c93ebcc"
->>
->> Unfortunately this change breaks booting on AM64 EVM.
->> No output whatsoever on the serial console (port 0 of the FTDI).
->> Reverting to SRCREV =3D "a6e78929575b..." made booting work again.
->>
->> Let me know if you want me to bisect or test anything specific.
->>
->> On the plus side, PRU Ethernet seems to work out of the box with
->> the latest changes on the dunfell branch, which is great.
->=20
-> Thanks for the input Lukas, Will investigate the boot issue further
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 6dfda754e9dd..35e057d57497 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -43,6 +43,15 @@ UBOOT_MACHINE = "am335x_evm_config"
+ UBOOT_ENTRYPOINT = "0x80008000"
+ UBOOT_LOADADDRESS = "0x80008000"
+ 
++# Generate an extlinux.conf file
++UBOOT_EXTLINUX = "1"
++UBOOT_EXTLINUX_ROOT = "root=PARTUUID=${uuid}"
++UBOOT_EXTLINUX_BOOT_FILES = " \
++    extlinux.conf;extlinux/extlinux.conf \
++    ${KERNEL_IMAGETYPE} \
++    ${KERNEL_DEVICETREE} \
++"
++
+ SPL_BINARY = "MLO"
+ UBOOT_SUFFIX = "img"
+ 
+@@ -61,5 +70,5 @@ TI_PDK_LIMIT_BOARDS = "evmAM335x icev2AM335x iceAMIC110 bbbAM335x skAM335x"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz"
+ WKS_FILE ?= "sdimage-2part.wks"
+-IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
++IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
+-- 
+2.17.1
 
-This should fix the boot issue. I just verified:
-Ref: https://lists.yoctoproject.org/g/meta-ti/message/13831
-
->=20
->>
->> Thanks,
->>
->> Lukas
->>
