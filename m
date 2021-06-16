@@ -1,79 +1,82 @@
-Received: from mail.yoctoproject.org (mail.yoctoproject.org [198.145.29.25])
- by mx.groups.io with SMTP id smtpd.web11.7340.1623849512698052490
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web08.745.1623868644079854448
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 16 Jun 2021 06:18:33 -0700
+ Wed, 16 Jun 2021 11:37:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=qc0I/zOd;
- spf=fail (domain: ti.com, ip: 198.145.29.25, mailfrom: nikhil.nd@ti.com)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by mail.yoctoproject.org (Postfix) with ESMTPS id 5EA8A38C08A0
-	for <meta-ti@yoctoproject.org>; Wed, 16 Jun 2021 13:18:31 +0000 (UTC)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15GDIQ7f054435;
-	Wed, 16 Jun 2021 08:18:26 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1623849506;
-	bh=nlnEs1OplhmE4NpNRv8xikZlVX5PA8IN4CVMAd6arU4=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=qc0I/zOdShhyjozJuMlvAROXszgR7hXu/kndbhGFFQ9x7Q48iM0l9jbPGfgDNQF0D
-	 apl4QolRvruz4AZmbsZuxH9n6vcSEKyVcQbZ04BuJGoV89KXpsAQ6IU6UJJYuImhZ0
-	 6heXpOW7PvuPygRngpm0pVYi/PyLD/XlIL8BGfTQ=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15GDIQik010074
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 16 Jun 2021 08:18:26 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 16
- Jun 2021 08:18:26 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Wed, 16 Jun 2021 08:18:26 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15GDIPfb076466;
-	Wed, 16 Jun 2021 08:18:26 -0500
-Date: Wed, 16 Jun 2021 18:48:24 +0530
-From: "Nikhil Devshatwar" <nikhil.nd@ti.com>
-To: <praneeth@ti.com>, <denis@denix.org>, <yogeshs@ti.com>
-CC: <meta-ti@yoctoproject.org>
-Subject: Re: [meta-ti][dunfell/master 0/2] Remove Jailhouse support
-Message-ID: <20210616131824.7w7scyvkykd7acn7@NiksLab>
-References: <20210615111244.24807-1-nikhil.nd@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <20210615111244.24807-1-nikhil.nd@ti.com>
-User-Agent: NeoMutt/20171215
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: tom.rini@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id u30so429701qke.7
+        for <meta-ti@lists.yoctoproject.org>; Wed, 16 Jun 2021 11:37:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=xMO45UzQfdzkKYhstGkSbJrBD9xxKB+8X1VMqiTbYYE=;
+        b=it/OGCW/t2BP5lIOmTOQeXx1y9MaIjqJy8rvI/6Ucgsx6yCRlikvFQCpB0IYG1YpIS
+         aE31JnHvoAW9LTRMcD0USr91Yizi2Mzqp9WzUivX2J2i+J//SHO9QxNZXx9AXz4YohAa
+         kSX0RNWK7gH4SKYeb536L6Oxm/fNqk+Ei1MeES2B0y5o92tGAiCqsyN35fAwzb9xowIn
+         +bTPyJ3jAo4RigXe3zfTDDRRkR5sB9a2eUIs5jXlfra3k94NlshmL7QLs2XlDovhXmGs
+         moeWDmP5GEi8BSBw3WtsJ7oTKR7vUx+ODql//na7/nNgm+Agg6cVtqwFC6sOlfX8+CFI
+         18Jg==
+X-Gm-Message-State: AOAM533ormj4U+e+9zYVgBrut2HGaSc/oeEiPoYWV/0tuNz76ChUamk3
+	DuPZqhYFW8NdgVNDqvH8dvPU89aybfb3
+X-Google-Smtp-Source: ABdhPJy+BY4+jmKGFt0PrxZVtPk/oDGYCMTE7txhpeyxtvPBI596jl3LIYdRDTJ/xCb4BrDESWlOJw==
+X-Received: by 2002:a05:620a:408b:: with SMTP id f11mr1543740qko.200.1623868642681;
+        Wed, 16 Jun 2021 11:37:22 -0700 (PDT)
+Return-Path: <tom.rini@gmail.com>
+Received: from bill-the-cat.lan (2603-6081-7b01-cbda-507d-0469-e510-a4e0.res6.spectrum.com. [2603:6081:7b01:cbda:507d:469:e510:a4e0])
+        by smtp.gmail.com with ESMTPSA id f24sm24655qkm.118.2021.06.16.11.37.21
+        for <meta-ti@lists.yoctoproject.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Jun 2021 11:37:22 -0700 (PDT)
+From: "Tom Rini" <tom.rini@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Subject: [PATCH] conf/machine: k3: Enable grub-efi by default in wic images
+Date: Wed, 16 Jun 2021 14:37:18 -0400
+Message-Id: <20210616183718.25134-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.17.1
 
-On 16:42-20210615, Nikhil Devshatwar wrote:
-> This series removes the Jailhouse and corresponding recipes from
-> meta-ti
-> 
-> Nikhil Devshatwar (2):
->   recipes-bsp: ivshmem: Remove ivshmem packages
->   recipes-kernel: jailhouse: Remove jailhouse recipe
-> 
->  .../ivshmem-uio/ivshmem-uio-driver_git.bb     |  29 ---
->  .../ivshmem-uio/ivshmem-uio-tests_git.bb      |  23 ---
->  recipes-kernel/jailhouse/jailhouse-arch.inc   |  22 ---
->  ...hebang-in-helper-scripts-for-python3.patch |  56 ------
->  recipes-kernel/jailhouse/jailhouse_git.bb     | 168 ------------------
->  5 files changed, 298 deletions(-)
->  delete mode 100644 recipes-bsp/ivshmem-uio/ivshmem-uio-driver_git.bb
->  delete mode 100644 recipes-bsp/ivshmem-uio/ivshmem-uio-tests_git.bb
->  delete mode 100644 recipes-kernel/jailhouse/jailhouse-arch.inc
->  delete mode 100644 recipes-kernel/jailhouse/jailhouse/0001-tools-update-shebang-in-helper-scripts-for-python3.patch
->  delete mode 100644 recipes-kernel/jailhouse/jailhouse_git.bb
-> 
+All of our platforms here support running EFI binaries.  We can have wic
+generate a simple grub.cfg file for us that will find the root partition
+via PARTUUID and utilize the device tree that is already discoverable
+via the EFI configuration tables.  Assuming the EFI loader is U-Boot,
+this device tree can be replaced at run-time by the normal mechanism of
+loading in to memory and passing that address as an argument to bootefi.
 
-I am not sure why the emails were sent twice.
-Ignore the second copy
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ conf/machine/include/k3.inc | 5 ++++-
+ wic/sdimage-2part-efi.wks   | 7 +++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+ create mode 100644 wic/sdimage-2part-efi.wks
 
-Regards,
-Nikhil D
+diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
+index e0970698b33d..61438abe8f19 100644
+--- a/conf/machine/include/k3.inc
++++ b/conf/machine/include/k3.inc
+@@ -45,7 +45,10 @@ IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
+ 
+ IMAGE_BOOT_FILES ?= "${IMAGE_BOOT_FILES_LEGACY}"
+ 
+-WKS_FILE ?= "sdimage-2part.wks"
++EFI_PROVIDER ?= "grub-efi"
++MACHINE_FEATURES += "efi"
++
++WKS_FILE ?= "sdimage-2part-efi.wks"
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
+ do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
+ do_image_tar[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
+diff --git a/wic/sdimage-2part-efi.wks b/wic/sdimage-2part-efi.wks
+new file mode 100644
+index 000000000000..6b03080eb5bf
+--- /dev/null
++++ b/wic/sdimage-2part-efi.wks
+@@ -0,0 +1,7 @@
++# short-description: Create SD card image with 2 partitions and EFI support
++# long-description: Creates a partitioned SD card image for TI platforms that
++# supports EFI.  Boot files are located in the first vfat partition with extra
++# reserved space.  We cannot use a GPT here.
++bootloader --append="rootfstype=ext4 ro"
++part /boot --source bootimg-efi --sourceparams="loader=grub-efi" --fstype=vfat --label boot --active --align 1024 --use-uuid
++part / --source rootfs --fstype=ext4 --label root --align 1024 --use-uuid
+-- 
+2.17.1
 
-> -- 
-> 2.17.1
-> 
