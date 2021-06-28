@@ -1,93 +1,150 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.313.1624910057951447613
+ by mx.groups.io with SMTP id smtpd.web11.505.1624910899284001675
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Jun 2021 12:54:18 -0700
+ Mon, 28 Jun 2021 13:08:20 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id F013640CA0;
-	Mon, 28 Jun 2021 19:54:16 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9EE3740CA0;
+	Mon, 28 Jun 2021 20:08:18 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Bfpkf3RBP89x; Mon, 28 Jun 2021 19:54:16 +0000 (UTC)
+	with ESMTP id JNvuTfNWGu_a; Mon, 28 Jun 2021 20:08:18 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A961240BA9;
-	Mon, 28 Jun 2021 19:54:11 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7841D40C16;
+	Mon, 28 Jun 2021 20:08:17 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 6D08A17461A; Mon, 28 Jun 2021 15:54:11 -0400 (EDT)
-Date: Mon, 28 Jun 2021 15:54:11 -0400
+	id E19FB17461A; Mon, 28 Jun 2021 16:08:16 -0400 (EDT)
+Date: Mon, 28 Jun 2021 16:08:16 -0400
 From: "Denys Dmytriyenko" <denis@denix.org>
-To: "Bajjuri, Praneeth" <praneeth@ti.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>, Yogesh Siraswar <yogeshs@ti.com>,
-	meta-ti@lists.yoctoproject.org, Lokesh Vutla <lokeshvutla@ti.com>,
-	Grygorii Strashko <grygorii.strashko@ti.com>
-Subject: Re: [PATCH 1/2] prusw-fw: Update switch firmwares to 3.2.9 version
-Message-ID: <20210628195411.GW1528@denix.org>
-References: <20210628144805.16996-1-vigneshr@ti.com>
- <5df72a60-9793-04b2-bae9-5164b510ee02@ti.com>
+To: Tom Rini <tom.rini@gmail.com>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [PATCHv3] conf: Add extlinux.conf support on some 32bit platforms
+Message-ID: <20210628200816.GX1528@denix.org>
+References: <20210628180624.842-1-trini@konsulko.com>
 MIME-Version: 1.0
-In-Reply-To: <5df72a60-9793-04b2-bae9-5164b510ee02@ti.com>
+In-Reply-To: <20210628180624.842-1-trini@konsulko.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Mon, Jun 28, 2021 at 12:40:22PM -0500, Bajjuri, Praneeth wrote:
-> Yogesh,Vignesh,
+On Mon, Jun 28, 2021 at 02:06:24PM -0400, Tom Rini wrote:
+> To make use of the "generic distro boot" support in U-Boot, an
+> extlinux.conf file needs to be generated and reside in the extlinux
+> directory.  The extlinux.conf file will be parsed by U-Boot and the
+> "append" line will be evaluated and expanded and used entirely as the
+> bootargs passed to the kernel.  Our generated extlinux.conf states
+> that the kernel image and device trees live one level up (so the root
+> directory) from it, so populate that location with our kernel and device
+> trees.
 > 
-> On 6/28/2021 9:48 AM, Vignesh Raghavendra wrote:
-> >From: Lokesh Vutla <lokeshvutla@ti.com>
-> >
-> >Update prueth switch firmwares to 3.2.9 version
-> >
-> >Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-> >---
-> >  recipes-bsp/prusw-fw/{prusw-fw_3.2.7.bb => prusw-fw_3.2.9.bb} | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename recipes-bsp/prusw-fw/{prusw-fw_3.2.7.bb => prusw-fw_3.2.9.bb} (94%)
-> >
-> >diff --git a/recipes-bsp/prusw-fw/prusw-fw_3.2.7.bb b/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
-> >similarity index 94%
-> >rename from recipes-bsp/prusw-fw/prusw-fw_3.2.7.bb
-> >rename to recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
-> >index 17de58c2..3f5ef7e7 100644
-> >--- a/recipes-bsp/prusw-fw/prusw-fw_3.2.7.bb
-> >+++ b/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
-> >@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
-> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >-SRCREV = "0038ff0ecda8dae83c65d454c85776c6a4ef8e63"
-> >+SRCREV = "dccfb2328354be2933a5a179b528ec8a18b92d3a"
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+
+Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+
+
+> ---
+> Changes in v3:
+> - Merge in a number of other SoCs.
+> Changes in v2:
+> - Elaborate on how this feature works in the commit message.
+> ---
+>  conf/machine/include/omap-a15.inc | 11 ++++++++++-
+>  conf/machine/include/ti33x.inc    | 11 ++++++++++-
+>  conf/machine/include/ti43x.inc    | 11 ++++++++++-
+>  3 files changed, 30 insertions(+), 3 deletions(-)
 > 
-> Can we have once central recipe for ti-linux-firmware to pick the
-> right SRCREV when firmware is integrated
-> recipe-bsp/ti-linux-fw*/*.bb something like that, Instead of
-> pointing to a different SRCREV in different bb recipe ?
+> diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+> index e491d2b501f1..c95b0cccaa42 100644
+> --- a/conf/machine/include/omap-a15.inc
+> +++ b/conf/machine/include/omap-a15.inc
+> @@ -19,6 +19,15 @@ UBOOT_ARCH = "arm"
+>  UBOOT_ENTRYPOINT = "0x80008000"
+>  UBOOT_LOADADDRESS = "0x80008000"
+>  
+> +# Generate an extlinux.conf file
+> +UBOOT_EXTLINUX = "1"
+> +UBOOT_EXTLINUX_ROOT = "root=PARTUUID=${uuid}"
+> +UBOOT_EXTLINUX_BOOT_FILES = " \
+> +    extlinux.conf;extlinux/extlinux.conf \
+> +    ${KERNEL_IMAGETYPE} \
+> +    ${KERNEL_DEVICETREE} \
+> +"
+> +
+>  SPL_BINARY = "MLO"
+>  UBOOT_SUFFIX = "img"
+>  
+> @@ -40,5 +49,5 @@ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa etherne
+>  
+>  IMAGE_FSTYPES += "tar.xz wic.xz"
+>  WKS_FILE ?= "sdimage-2part.wks"
+> -IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
+> +IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
+>  do_image_wic[depends] += "u-boot:do_deploy"
+> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+> index 6dfda754e9dd..35e057d57497 100644
+> --- a/conf/machine/include/ti33x.inc
+> +++ b/conf/machine/include/ti33x.inc
+> @@ -43,6 +43,15 @@ UBOOT_MACHINE = "am335x_evm_config"
+>  UBOOT_ENTRYPOINT = "0x80008000"
+>  UBOOT_LOADADDRESS = "0x80008000"
+>  
+> +# Generate an extlinux.conf file
+> +UBOOT_EXTLINUX = "1"
+> +UBOOT_EXTLINUX_ROOT = "root=PARTUUID=${uuid}"
+> +UBOOT_EXTLINUX_BOOT_FILES = " \
+> +    extlinux.conf;extlinux/extlinux.conf \
+> +    ${KERNEL_IMAGETYPE} \
+> +    ${KERNEL_DEVICETREE} \
+> +"
+> +
+>  SPL_BINARY = "MLO"
+>  UBOOT_SUFFIX = "img"
+>  
+> @@ -61,5 +70,5 @@ TI_PDK_LIMIT_BOARDS = "evmAM335x icev2AM335x iceAMIC110 bbbAM335x skAM335x"
+>  
+>  IMAGE_FSTYPES += "tar.xz wic.xz"
+>  WKS_FILE ?= "sdimage-2part.wks"
+> -IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
+> +IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
+>  do_image_wic[depends] += "virtual/bootloader:do_deploy"
+> diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+> index b1a27f93a2a4..75b745b37839 100644
+> --- a/conf/machine/include/ti43x.inc
+> +++ b/conf/machine/include/ti43x.inc
+> @@ -40,6 +40,15 @@ UBOOT_MACHINE = "am43xx_evm_config"
+>  UBOOT_ENTRYPOINT = "0x80008000"
+>  UBOOT_LOADADDRESS = "0x80008000"
+>  
+> +# Generate an extlinux.conf file
+> +UBOOT_EXTLINUX = "1"
+> +UBOOT_EXTLINUX_ROOT = "root=PARTUUID=${uuid}"
+> +UBOOT_EXTLINUX_BOOT_FILES = " \
+> +    extlinux.conf;extlinux/extlinux.conf \
+> +    ${KERNEL_IMAGETYPE} \
+> +    ${KERNEL_DEVICETREE} \
+> +"
+> +
+>  SPL_BINARY = "MLO"
+>  UBOOT_SUFFIX = "img"
+>  
+> @@ -58,5 +67,5 @@ TI_PDK_LIMIT_BOARDS = "evmAM437x idkAM437x skAM437x"
+>  
+>  IMAGE_FSTYPES += "tar.xz wic.xz"
+>  WKS_FILE ?= "sdimage-2part.wks"
+> -IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX}"
+> +IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
+>  do_image_wic[depends] += "u-boot:do_deploy"
+> -- 
+> 2.17.1
 > 
-> I see 9 different recipe-bsp/<>/ locations potentially pointing to
-> different SRCREV.
 
-Individual FW recipes in meta-ti evolved over long time, being added one by 
-one, as they were coming from different places and not necessarily hosted in 
-a single repo in the beginning...
-
-
-Has anyone looked at upstreaming those FW images to main linux-firmware at 
-kernel.org?
-
-There's a recipe for the upstream linux-firmware bundle in oe-core that 
-resides in recipes-kernel/linux-firmware/.
-
-Until fully upstreamed, it might be possible to bbappend that recipe from 
-oe-core in meta-ti. But it tries to split up as much of individual FW images 
-as possible. That way one recipe with a single SRCREV produces multiple binary 
-packages that can be pulled into the image individually.
-
-
-> >  BRANCH ?= "ti-linux-firmware"
-> >  SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
-> >
 > 
+> 
+> 
+
 
 -- 
 Regards,
