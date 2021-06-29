@@ -1,102 +1,68 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.541.1624911090276553147
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web08.1372.1624926380904525808
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Jun 2021 13:11:30 -0700
+ Mon, 28 Jun 2021 17:26:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B503540CA0;
-	Mon, 28 Jun 2021 20:11:29 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ft1wkHsy9tTb; Mon, 28 Jun 2021 20:11:29 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 98D2F40C16;
-	Mon, 28 Jun 2021 20:11:28 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 6500317461A; Mon, 28 Jun 2021 16:11:28 -0400 (EDT)
-Date: Mon, 28 Jun 2021 16:11:28 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Tom Rini <tom.rini@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [PATCHv2] conf/machine: k3: Enable grub-efi by default in wic images
-Message-ID: <20210628201128.GY1528@denix.org>
-References: <20210628180617.789-1-trini@konsulko.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GLPU8fZQ;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: yogeshs@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15T0QJrJ027994;
+	Mon, 28 Jun 2021 19:26:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1624926379;
+	bh=NXBIrauTuBR/qP3lB+2SgSxJQ5TGf0SA3mRLSnMKoFQ=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=GLPU8fZQPgL19Df286P6VB58nQBXXakN34U8WilxyYRjtAKcexVAbrMB9qev/+68C
+	 iMN/f8+q+zo/W9ENMrxopgtPIJIUDOuIs9fUq7DANTdpIN7yPYvFQJdNUPHt4pBbgu
+	 2pc3Qrx8oyZO6B6XtyLhzs/60KHP6I/qIxZG0O+k=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15T0QJr2120904
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 28 Jun 2021 19:26:19 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 28
+ Jun 2021 19:26:19 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Mon, 28 Jun 2021 19:26:18 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15T0QIgH047725;
+	Mon, 28 Jun 2021 19:26:19 -0500
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, Praneeth Bajjuri <praneeth@ti.com>
+CC: Yogesh Siraswar <yogeshs@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell/master][PATCH 2/4] u-boot-ti-staging: Update to 08.00.00.001 release tag
+Date: Tue, 29 Jun 2021 00:26:16 +0000
+Message-ID: <20210629002618.29822-3-yogeshs@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210629002618.29822-1-yogeshs@ti.com>
+References: <20210629002618.29822-1-yogeshs@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20210628180617.789-1-trini@konsulko.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Mon, Jun 28, 2021 at 02:06:17PM -0400, Tom Rini wrote:
-> All of our platforms here support running EFI binaries.  We can have wic
-> generate a simple grub.cfg file for us that will find the root partition
-> via PARTUUID and utilize the device tree that is already discoverable
-> via the EFI configuration tables.  Assuming the EFI loader is U-Boot,
-> this device tree can be replaced at run-time by the normal mechanism of
-> loading in to memory and passing that address as an argument to bootefi.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
-> ---
-> Changes in v2:
-> - Add missing IMAGE_EFI_BOOT_FILES which is how we populate in the
->   various firmware portions.
-> - Use --fixed-size 128M to ensure we have some spare room on the boot
->   partition.
-> ---
->  conf/machine/include/k3.inc | 6 +++++-
->  wic/sdimage-2part-efi.wks   | 7 +++++++
->  2 files changed, 12 insertions(+), 1 deletion(-)
->  create mode 100644 wic/sdimage-2part-efi.wks
-> 
-> diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
-> index e0970698b33d..166c09239069 100644
-> --- a/conf/machine/include/k3.inc
-> +++ b/conf/machine/include/k3.inc
-> @@ -44,8 +44,12 @@ IMAGE_BOOT_FILES_LEGACY = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysf
->  IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
->  
->  IMAGE_BOOT_FILES ?= "${IMAGE_BOOT_FILES_LEGACY}"
-> +IMAGE_EFI_BOOT_FILES ?= "${IMAGE_BOOT_FILES}"
->  
-> -WKS_FILE ?= "sdimage-2part.wks"
-> +EFI_PROVIDER ?= "grub-efi"
-> +MACHINE_FEATURES += "efi"
-> +
-> +WKS_FILE ?= "sdimage-2part-efi.wks"
->  do_image_wic[depends] += "virtual/bootloader:do_deploy"
->  do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
->  do_image_tar[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
-> diff --git a/wic/sdimage-2part-efi.wks b/wic/sdimage-2part-efi.wks
-> new file mode 100644
-> index 000000000000..ffb8d24bacd1
-> --- /dev/null
-> +++ b/wic/sdimage-2part-efi.wks
-> @@ -0,0 +1,7 @@
-> +# short-description: Create SD card image with 2 partitions and EFI support
-> +# long-description: Creates a partitioned SD card image for TI platforms that
-> +# supports EFI.  Boot files are located in the first vfat partition with extra
-> +# reserved space.  We cannot use a GPT here.
-> +bootloader --append="rootfstype=ext4 ro"
-> +part /boot --source bootimg-efi --sourceparams="loader=grub-efi" --fstype=vfat --label boot --active --align 1024 --use-uuid --fixed-size 128M
-> +part / --source rootfs --fstype=ext4 --label root --align 1024 --use-uuid
-> -- 
-> 2.17.1
-> 
-
-> 
-> 
-> 
-
-
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index 4c3f0a47..7d18d68f 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+ 
+-PR = "r7"
++PR = "r8"
+ 
+ BRANCH = "ti-u-boot-2021.01"
+ 
+-SRCREV = "c66dd9b8467472278803c2426098a2828c93ebcc"
++SRCREV = "230c4c5938cfaeb58cda0f1aa80cb006af75eca5"
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.17.1
+
