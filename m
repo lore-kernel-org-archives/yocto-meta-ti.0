@@ -1,79 +1,100 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.4195.1624943780236482195
+ by mx.groups.io with SMTP id smtpd.web11.4483.1624947113437453562
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Jun 2021 22:16:20 -0700
+ Mon, 28 Jun 2021 23:11:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=aoS7qaNn;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: lokeshvutla@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=ZhPcJaPR;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: vigneshr@ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15T5GJPG016303;
-	Tue, 29 Jun 2021 00:16:19 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15T6Bnth037074;
+	Tue, 29 Jun 2021 01:11:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1624943779;
-	bh=yX/fOa13tpjZmo0GTCMDEgJQeSGXqPYAS3erasrbP3E=;
+	s=ti-com-17Q1; t=1624947109;
+	bh=eJe1kNa90YhYxQEU/flWnKhwQ4DO3ZNbXw+N463MBU8=;
 	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=aoS7qaNnfYJ0jonZQRmSZskEKEILbYxw58oZcc++QmMbRZJYwIisDkgTiL1EszzCi
-	 mxslVYK3ZwpHdUovipD8Ws13rjpUDR5824Tr1MVC4tn9A7REhh2W9TqdQ//dgCBu/g
-	 MCvLgzFI2Wv4nBArOiSicHSrPXMnN3+lNHJUDyUM=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15T5GJXk096279
+	b=ZhPcJaPRqmcJ6u1j7sftWNDnedAIO/U0QeCrYo9sq1P1TDmOsEDCvu01fLkU7Q7q/
+	 wbps3kNSXEiF65PWVVeUYnoDfqDS2dyyP3TJrBiBbDnB1AQfv3favkUzTOclzho193
+	 0knVJeYZ8aeeFy48QwaiEWQtpwMgOfMs3Wh6aSto=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15T6Bnx0051226
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 29 Jun 2021 00:16:19 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 29 Jun 2021 01:11:49 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 29
- Jun 2021 00:16:18 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2021 01:11:48 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 29 Jun 2021 00:16:19 -0500
-Received: from [10.24.69.20] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15T5GGXt016905;
-	Tue, 29 Jun 2021 00:16:17 -0500
-Subject: Re: [dunfell/master PATCH] conf: j7-evm: Add j721e eaik dtb to KERNEL_DEVICETREE
-To: Sinthu Raja <sinthu.raja@mistralsolutions.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: Praneeth Bajjuri <praneeth@ti.com>, Sinthu Raja <sinthu.raja@ti.com>
-References: <20210628194426.5468-1-sinthu.raja@ti.com>
-From: "Lokesh Vutla" <lokeshvutla@ti.com>
-Message-ID: <37e50fe5-5900-0d87-607e-0dd626fae0f1@ti.com>
-Date: Tue, 29 Jun 2021 10:46:16 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Frontend Transport; Tue, 29 Jun 2021 01:11:48 -0500
+Received: from [10.250.234.148] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15T6Bk8R119720;
+	Tue, 29 Jun 2021 01:11:47 -0500
+Subject: Re: [PATCH 1/2] prusw-fw: Update switch firmwares to 3.2.9 version
+To: "Bajjuri, Praneeth" <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denis@denix.org>, Yogesh Siraswar <yogeshs@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Lokesh Vutla <lokeshvutla@ti.com>,
+        Grygorii Strashko <grygorii.strashko@ti.com>
+References: <20210628144805.16996-1-vigneshr@ti.com>
+ <5df72a60-9793-04b2-bae9-5164b510ee02@ti.com>
+From: "Vignesh Raghavendra" <vigneshr@ti.com>
+Message-ID: <0a6f222b-ea1d-fa2b-c296-77fe44a67486@ti.com>
+Date: Tue, 29 Jun 2021 11:41:45 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210628194426.5468-1-sinthu.raja@ti.com>
+In-Reply-To: <5df72a60-9793-04b2-bae9-5164b510ee02@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 15T5GJPG016303
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 15T6Bnth037074
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
 
 
-On 29/06/21 1:14 am, Sinthu Raja wrote:
-> J721E EdgeAI Kit (EAIK) is a low cost, small form factor board designed
-> for TI=E2=80=99s J721E SoC. TI=E2=80=99s J721E SoC comprises of dual co=
-re A72, high
-> performance vision accelerators, video codec accelerators, latest C71x
-> and C66x DSP, high bandwidth real-time IPs for capture and display,
-> GPU, dedicated safety island and security accelerators.
+On 6/28/21 11:10 PM, Bajjuri, Praneeth wrote:
+> Yogesh,Vignesh,
 >=20
-> J721E EAIK supports the following interfaces:
-> * 4 GB LPDDR4 RAM
-> * x1 Gigabit Ethernet interface
-> * x1 USB 3.0 Type-C port
-> * x3 USB 3.0 Type-A ports
-> * x1 PCIe M.2 E Key
-> * x1 PCIe M.2 M Key
-> * x2 CSI2 Camera interface (RPi and TI Camera connector)
-> * 40-pin Raspberry Pi compatible GPIO header
+> On 6/28/2021 9:48 AM, Vignesh Raghavendra wrote:
+>> From: Lokesh Vutla <lokeshvutla@ti.com>
+>>
+>> Update prueth switch firmwares to 3.2.9 version
+>>
+>> Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+>> ---
+>> =C2=A0 recipes-bsp/prusw-fw/{prusw-fw_3.2.7.bb =3D> prusw-fw_3.2.9.bb}=
+ | 2 +-
+>> =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
+>> =C2=A0 rename recipes-bsp/prusw-fw/{prusw-fw_3.2.7.bb =3D> prusw-fw_3.=
+2.9.bb}
+>> (94%)
+>>
+>> diff --git a/recipes-bsp/prusw-fw/prusw-fw_3.2.7.bb
+>> b/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
+>> similarity index 94%
+>> rename from recipes-bsp/prusw-fw/prusw-fw_3.2.7.bb
+>> rename to recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
+>> index 17de58c2..3f5ef7e7 100644
+>> --- a/recipes-bsp/prusw-fw/prusw-fw_3.2.7.bb
+>> +++ b/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
+>> @@ -11,7 +11,7 @@ COMPATIBLE_MACHINE =3D
+>> "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
+>> =C2=A0 =C2=A0 PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+>> =C2=A0 -SRCREV =3D "0038ff0ecda8dae83c65d454c85776c6a4ef8e63"
+>> +SRCREV =3D "dccfb2328354be2933a5a179b528ec8a18b92d3a"
 >=20
-> J721e EVM and EAIK uses the unified bootloader. Add j721e eaik dtb
-> for machine=3Dj721e-evm
+> Can we have once central recipe for ti-linux-firmware to pick the right
+> SRCREV when firmware is integrated recipe-bsp/ti-linux-fw*/*.bb
+> something like that, Instead of pointing to a different SRCREV in
+> different bb recipe ?
 >=20
-> Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+> I see 9 different recipe-bsp/<>/ locations potentially pointing to
+> different SRCREV.
+>=20
 
-Reviewed-by: Lokesh Vutla <lokeshvutla@ti.com>
+Sounds good to me. Not sure if I can do it for this release though.
+Don't want to end up with bunch of broken stuff.
 
-Thanks and regards,
-Lokesh
+Regards
+Vignesh
