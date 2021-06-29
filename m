@@ -1,66 +1,70 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.2312.1624931440570198062
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.2553.1624932368901308333
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Jun 2021 18:50:40 -0700
+ Mon, 28 Jun 2021 19:06:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=h9YKFSeg;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: yogeshs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15T1ocxu066736;
-	Mon, 28 Jun 2021 20:50:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1624931438;
-	bh=2qMiFFK/czezQ3+OM6rTTg33InKyJ+xUlVQiakU72wY=;
-	h=From:To:CC:Subject:Date;
-	b=h9YKFSegYTUf3FNlRbPf/YmdLX0K8d9QMFxnpXxQ0BJvtFrg2cSY3q2zFSsi1xzM6
-	 Ox2B/F7NR/YwOASQFm7/peKaEZYELZozPceirZsEcF7jDiJmd8k5ugSnP7Aqv4ugHM
-	 XOqqGTBy3lMfZ3vRwJ0YYSYHM1Qv4cDUu1SAKC0Q=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15T1ocOf053586
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 28 Jun 2021 20:50:38 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 28
- Jun 2021 20:50:38 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Mon, 28 Jun 2021 20:50:38 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15T1oc8R058036;
-	Mon, 28 Jun 2021 20:50:38 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>,
-        Praneeth Bajjuri
-	<praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: Yogesh Siraswar <yogeshs@ti.com>
-Subject: [meta-ti][dunfell/master][PATCH v2 0/4] 08.00.00.001 release updates
-Date: Tue, 29 Jun 2021 01:50:34 +0000
-Message-ID: <20210629015038.33544-1-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D9DAC40C30;
+	Tue, 29 Jun 2021 02:06:07 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id XM_tHLB0Mitx; Tue, 29 Jun 2021 02:06:07 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B3E0A40C1E;
+	Tue, 29 Jun 2021 02:06:04 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 1969E17461A; Mon, 28 Jun 2021 22:06:04 -0400 (EDT)
+Date: Mon, 28 Jun 2021 22:06:04 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: praneeth@ti.com
+Cc: Yogesh Siraswar <yogeshs@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][dunfell/master][PATCH 1/4] ti-sci-fw: Update imggen to release 08.00.00.001 tag
+Message-ID: <20210629020604.GZ1528@denix.org>
+References: <20210629002618.29822-1-yogeshs@ti.com>
+ <20210629002618.29822-2-yogeshs@ti.com>
+ <c7d88a6b-f8dd-0565-29bd-65849b049ab4@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+In-Reply-To: <c7d88a6b-f8dd-0565-29bd-65849b049ab4@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Changes from previous version:
-1) Fixed empty patch subject.
-2) Updated the imggen PV version to 2021.05
+On Mon, Jun 28, 2021 at 07:28:14PM -0500, praneeth via lists.yoctoproject.org wrote:
+> 
+> 
+> On 6/28/2021 7:26 PM, Yogesh Siraswar wrote:
+> >Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+> >---
+> >  recipes-bsp/ti-sci-fw/ti-sci-fw.inc | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> >diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> >index 7ec074c8..e6227632 100644
+> >--- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> >+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+> >@@ -7,7 +7,7 @@ PV = "2021.01a"
+> 
+> PV is 2021.05
+
+This is just image gen, not the actual SYSFW. Should those be updated at the 
+same time to 2021.05?
 
 
-
-Yogesh Siraswar (4):
-  ti-sci-fw: Update imggen to release 08.00.00.001 tag
-  u-boot-ti-staging: Update to 08.00.00.001 release tag
-  linux-ti-staging-rt: Update to 08.00.00.001 release tag
-  linux-ti-staging: Update to 08.00.00.001 release tag
-
- recipes-bsp/ti-sci-fw/ti-sci-fw.inc              | 4 ++--
- recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb  | 4 ++--
- recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
- 4 files changed, 6 insertions(+), 6 deletions(-)
+> >  SRCREV = "0468c7a78cd26f9190d374e198e37c63c7660ba9"
+> >  BRANCH ?= "ti-linux-firmware"
+> >-SRCREV_imggen = "e411dc16862b5bb2d8befb12496b03d7b01c87b2"
+> >+SRCREV_imggen = "b65ae80847f5a0d1885ed6e4de4d9d635544053c"
+> >  SRCREV_FORMAT = "imggen"
+> >  SRC_URI = " \
+> >
 
 -- 
-2.17.1
-
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
