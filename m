@@ -1,103 +1,96 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.557.1625018985131711730
+ by mx.groups.io with SMTP id smtpd.web08.608.1625019090713518821
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 29 Jun 2021 19:09:45 -0700
+ Tue, 29 Jun 2021 19:11:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=jv5O3zvw;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=SXqHKyo3;
  spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nm@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15U29eHE010651;
-	Tue, 29 Jun 2021 21:09:40 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15U2BN9E011280;
+	Tue, 29 Jun 2021 21:11:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1625018980;
-	bh=j3jYS2JitlOcZrm4uFG9hnEGsIkVWmTsowHJashOmjQ=;
+	s=ti-com-17Q1; t=1625019083;
+	bh=MGqjCGq1Kd0IQEQ4td3A6GHM9H+WrPXSwtthqQXHtIs=;
 	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=jv5O3zvwCAOXfDJAIOUNXohuRVH0XJjh9PtIoJZm92TRqFcSKcfDAimpAoIaMBbPk
-	 u7HL4yrIyGU8zbjBjCm3z8kUM2IS+Em6EgLu8DQz6MGBGooJKF4WhASUHp44XZPkz7
-	 uDKn1OhpiEwal97aQw+6W8avMxja1vTMEvNqs3Y0=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15U29eXT023921
+	b=SXqHKyo3k+eeOyFQK4GAVtJEbZiarRZjCLG7LQXKrMZPXUtbtsoM06Aau+yS7FqXD
+	 lvbmafqKgbtZPT96jymJ0TbEAvThTJOQstA7Q5NyIWS8WuUOi+2mJICjzVC9DPLVAs
+	 BUCywww7qQmaK1hlSmrBIXrXUUwRIo8ajzIpAKFo=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15U2BN9I120778
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 29 Jun 2021 21:09:40 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 29 Jun 2021 21:11:23 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 29
- Jun 2021 21:09:40 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2021 21:11:23 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 29 Jun 2021 21:09:40 -0500
+ Frontend Transport; Tue, 29 Jun 2021 21:11:23 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15U29eqm013195;
-	Tue, 29 Jun 2021 21:09:40 -0500
-Date: Tue, 29 Jun 2021 21:09:39 -0500
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15U2BNLm001077;
+	Tue, 29 Jun 2021 21:11:23 -0500
+Date: Tue, 29 Jun 2021 21:11:23 -0500
 From: "Nishanth Menon" <nm@ti.com>
 To: Denys Dmytriyenko <denis@denix.org>
 CC: <praneeth@ti.com>, <yogeshs@ti.com>, <denys@konsulko.com>,
         Tom Rini
 	<trini@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [dunfell/master PATCH] ti-sci-fw: k3-image-gen: Revert SPL address change for mainline
-Message-ID: <20210630020939.uoi6j2ns6fsesvir@waffle>
-References: <20210629203630.28915-1-nm@ti.com>
- <20210630000938.GA1528@denix.org>
+Subject: Re: [meta-ti] [dunfell/master PATCH] linux-ti-mainline: Bump kernel version to v5.13
+Message-ID: <20210630021123.eadbiychvnjxfygo@coexist>
+References: <20210629233703.26088-1-nm@ti.com>
+ <20210630003055.GD1528@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <20210630000938.GA1528@denix.org>
+In-Reply-To: <20210630003055.GD1528@denix.org>
 User-Agent: NeoMutt/20171215
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On 20:09-20210629, Denys Dmytriyenko wrote:
-> On Tue, Jun 29, 2021 at 03:36:30PM -0500, Nishanth Menon via lists.yoctoproject.org wrote:
-> > Commit 02a2433c ("ti-sci-fw: Update image gen to latest") switched to a
-> > newer commit in k3-image-gen that also picked up TISCI firmware release,
-> > However, does include a change where the SPL address changed.
+On 20:30-20210629, Denys Dmytriyenko wrote:
+> On Tue, Jun 29, 2021 at 06:37:03PM -0500, Nishanth Menon via lists.yoctoproject.org wrote:
+> > And lets work with the latest kernel and while at it bump the system up
+> > to latest ti-upstream-tools repo to get:
+> > * AM65x SR1.0 overlay support
+> > * EFI configuration to allow for the eventual support
+> > * Few more cleanups for new architectures that have popped in.
 > > 
-> > This switch in address has been queued for upstream in a future release
-> > (v5.14 + u-boot 2021.10) and current mainline formal tags do not support
-> > this address change. As a result, we have a broken AM64x mainline
-> > support.
-> > 
-> > Revert this specific change from k3-image-gen for mainline alone for
-> > now.
-> > 
-> > NOTE: This uses ARAGO_BRAND=mainline which is NOT accurate for meta-ti
-> > which is distro independent, hence without appropriate changes while
-> > using alternate distros, this change will not take effect.
+> > Signed-off-by: Nishanth Menon <nm@ti.com>
 > 
-> Right, this flag is Arago Distro specific and it won't do anything for 
-> people using meta-ti directly. Hopefully this can be fixed properly very 
-> soon and this hack removed.
+> Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+> 
+> 
+> > ---
+> >  recipes-kernel/linux/linux-ti-mainline_git.bb | 8 ++++----
+> >  1 file changed, 4 insertions(+), 4 deletions(-)
+> > 
+> > diff --git a/recipes-kernel/linux/linux-ti-mainline_git.bb b/recipes-kernel/linux/linux-ti-mainline_git.bb
+> > index 6770adcae3f7..5d043da7fee1 100644
+> > --- a/recipes-kernel/linux/linux-ti-mainline_git.bb
+> > +++ b/recipes-kernel/linux/linux-ti-mainline_git.bb
+> > @@ -20,9 +20,9 @@ S = "${WORKDIR}/git"
+> >  BRANCH = "master"
+> >  TOOLS_BRANCH = "master"
+> >  
+> > -# 5.12 Mainline version
+> > -SRCREV = "9f4ad9e425a1d3b6a34617b8ea226d56a119a717"
+> > -PV = "5.12+git${SRCPV}"
+> > +# 5.13 Mainline version
+> > +SRCREV = "62fb9874f5da54fdb243003b386128037319b219"
+> > +PV = "5.13+git${SRCPV}"
+> 
+> BTW, the "+git${SRCPV}" part is to append the specific SRCREV or git SHA of 
+> the kernel you are building to the resulting package version. That might be 
+> useful in tracking the kernel binary on the target to a specific SHA, as well 
+> as with binary feeds.
+> 
+> But if you only use official releases, you might want to drop it, as you'd 
+> trust that SRCREV you specify for 5.13 always corresponds to the release SHA 
+> in Linus' tree :) Just makes the package name and version much shorter...
+> 
 
-Yes, this is temporary - at least for one u-boot and kernel window :(
-
-> One more cleaner approach would be to have a separate "mainline" branch 
-> for k3-image-gen repo, where you have the correct address and mainline 
-> recipe using it - that way it will work for meta-ti by itself...
-
-> Another cleaner solution could be to pass SBL_LOADADDR from the recipe 
-> itself to override the one weakly-assigned in the Makefile...
-
-Honestly, I am really hoping this entire k3-image-gen stuff gets
-into u-boot as buildman based solution and we should get rid of this
-recipe. But, I dont have a clear timeframe for that yet.
-
-I am hoping this is an aberration and should'nt be made as a standard
-/ legitimate option by making a valid -mainline recipe or formalize a
-framework to provide specific override option- hence the attempt to
-engineer it as little as possible.
-
-Let me know if we have a strong opinion on this, and I can try to
-respin this.
-
-> Meanwhile, I would suggest weakly-definint ARAGO_BRAND in the recipe, 
-> as otherwise the variable will be undefined and may break parsing, i.e. 
-> "undefined behavior":
-> ARAGO_BRAND ?= ""
-
-Yes, this definitely makes sense.
-
-[...]
+hehe, the history of v5.12-rc1-dontuse comes to mind for now. I think we
+can leave as is for now.
 
 -- 
 Regards,
