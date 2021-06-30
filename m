@@ -1,146 +1,88 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.906.1625011784956240003
+ by mx.groups.io with SMTP id smtpd.web08.1181.1625013061413811233
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 29 Jun 2021 17:09:45 -0700
+ Tue, 29 Jun 2021 17:31:01 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id DA8A940C52;
-	Wed, 30 Jun 2021 00:09:43 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BDD9D40C90;
+	Wed, 30 Jun 2021 00:31:00 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TNJcTtER3lrK; Wed, 30 Jun 2021 00:09:43 +0000 (UTC)
+	with ESMTP id CWVTpMp7RTEb; Wed, 30 Jun 2021 00:31:00 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 970D340C16;
-	Wed, 30 Jun 2021 00:09:38 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7DC3840AB7;
+	Wed, 30 Jun 2021 00:30:55 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 103FF17461C; Tue, 29 Jun 2021 20:09:38 -0400 (EDT)
-Date: Tue, 29 Jun 2021 20:09:38 -0400
+	id 1D81317461C; Tue, 29 Jun 2021 20:30:55 -0400 (EDT)
+Date: Tue, 29 Jun 2021 20:30:55 -0400
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: nm@ti.com
 Cc: praneeth@ti.com, yogeshs@ti.com, denys@konsulko.com,
 	Tom Rini <trini@konsulko.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [dunfell/master PATCH] ti-sci-fw: k3-image-gen: Revert SPL address change for mainline
-Message-ID: <20210630000938.GA1528@denix.org>
-References: <20210629203630.28915-1-nm@ti.com>
+Subject: Re: [meta-ti] [dunfell/master PATCH] linux-ti-mainline: Bump kernel version to v5.13
+Message-ID: <20210630003055.GD1528@denix.org>
+References: <20210629233703.26088-1-nm@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20210629203630.28915-1-nm@ti.com>
+In-Reply-To: <20210629233703.26088-1-nm@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Jun 29, 2021 at 03:36:30PM -0500, Nishanth Menon via lists.yoctoproject.org wrote:
-> Commit 02a2433c ("ti-sci-fw: Update image gen to latest") switched to a
-> newer commit in k3-image-gen that also picked up TISCI firmware release,
-> However, does include a change where the SPL address changed.
+On Tue, Jun 29, 2021 at 06:37:03PM -0500, Nishanth Menon via lists.yoctoproject.org wrote:
+> And lets work with the latest kernel and while at it bump the system up
+> to latest ti-upstream-tools repo to get:
+> * AM65x SR1.0 overlay support
+> * EFI configuration to allow for the eventual support
+> * Few more cleanups for new architectures that have popped in.
 > 
-> This switch in address has been queued for upstream in a future release
-> (v5.14 + u-boot 2021.10) and current mainline formal tags do not support
-> this address change. As a result, we have a broken AM64x mainline
-> support.
-> 
-> Revert this specific change from k3-image-gen for mainline alone for
-> now.
-> 
-> NOTE: This uses ARAGO_BRAND=mainline which is NOT accurate for meta-ti
-> which is distro independent, hence without appropriate changes while
-> using alternate distros, this change will not take effect.
-
-Right, this flag is Arago Distro specific and it won't do anything for 
-people using meta-ti directly. Hopefully this can be fixed properly very 
-soon and this hack removed.
-
-One more cleaner approach would be to have a separate "mainline" branch 
-for k3-image-gen repo, where you have the correct address and mainline 
-recipe using it - that way it will work for meta-ti by itself...
-
-Another cleaner solution could be to pass SBL_LOADADDR from the recipe 
-itself to override the one weakly-assigned in the Makefile...
-
-Meanwhile, I would suggest weakly-definint ARAGO_BRAND in the recipe, 
-as otherwise the variable will be undefined and may break parsing, i.e. 
-"undefined behavior":
-ARAGO_BRAND ?= ""
-
-
-
-> Reported-by: Tom Rini <trini@konsulko.com>
-> Suggested-by: Denys Dmytriyenko <denys@konsulko.com>
 > Signed-off-by: Nishanth Menon <nm@ti.com>
+
+Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+
+
 > ---
+>  recipes-kernel/linux/linux-ti-mainline_git.bb | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 > 
-> Example: u-boot 2021.07-rc5 + v5.13 kernel: https://pastebin.ubuntu.com/p/Xxvz5YkCvY/
-> 
->  ...-Makefile-Move-the-SPL-Load-address-.patch | 36 +++++++++++++++++++
->  recipes-bsp/ti-sci-fw/ti-sci-fw.inc           |  8 +++++
->  2 files changed, 44 insertions(+)
->  create mode 100644 recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
-> 
-> diff --git a/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch b/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
-> new file mode 100644
-> index 000000000000..63a5796d6b82
-> --- /dev/null
-> +++ b/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
-> @@ -0,0 +1,36 @@
-> +From 83d29d5e346083254e71fbe483cb14f6657b9965 Mon Sep 17 00:00:00 2001
-> +From: Nishanth Menon <nm@ti.com>
-> +Date: Tue, 29 Jun 2021 12:03:29 -0500
-> +Subject: [PATCH] Revert "soc: am64x: Makefile: Move the SPL Load address to
-> + 0x70000000"
-> +
-> +This reverts commit e411dc16862b5bb2d8befb12496b03d7b01c87b2.
-> +
-> +Mainline is NOT ready for the change yet as of u-boot 2021.07 + v5.13,
-> +So, this patch reverts the SPL address change.
-> +
-> +This patch needs to be dropped once mainline u-boot and kernel have
-> +migrated over to newer releases.
-> +
-> +Upstream-Status: Not applicable
+> diff --git a/recipes-kernel/linux/linux-ti-mainline_git.bb b/recipes-kernel/linux/linux-ti-mainline_git.bb
+> index 6770adcae3f7..5d043da7fee1 100644
+> --- a/recipes-kernel/linux/linux-ti-mainline_git.bb
+> +++ b/recipes-kernel/linux/linux-ti-mainline_git.bb
+> @@ -20,9 +20,9 @@ S = "${WORKDIR}/git"
+>  BRANCH = "master"
+>  TOOLS_BRANCH = "master"
+>  
+> -# 5.12 Mainline version
+> -SRCREV = "9f4ad9e425a1d3b6a34617b8ea226d56a119a717"
+> -PV = "5.12+git${SRCPV}"
+> +# 5.13 Mainline version
+> +SRCREV = "62fb9874f5da54fdb243003b386128037319b219"
+> +PV = "5.13+git${SRCPV}"
 
-Extra thanks for this! ^
+BTW, the "+git${SRCPV}" part is to append the specific SRCREV or git SHA of 
+the kernel you are building to the resulting package version. That might be 
+useful in tracking the kernel binary on the target to a specific SHA, as well 
+as with binary feeds.
+
+But if you only use official releases, you might want to drop it, as you'd 
+trust that SRCREV you specify for 5.13 always corresponds to the release SHA 
+in Linus' tree :) Just makes the package name and version much shorter...
 
 
-> +Signed-off-by: Nishanth Menon <nm@ti.com>
-> +---
-> + soc/am64x/Makefile | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/soc/am64x/Makefile b/soc/am64x/Makefile
-> +index 45425428f9c6..e8747376f153 100644
-> +--- a/soc/am64x/Makefile
-> ++++ b/soc/am64x/Makefile
-> +@@ -30,7 +30,7 @@
-> + #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> + #
-> + 
-> +-SBL_LOADADDDR ?= 0x70000000
-> ++SBL_LOADADDDR ?= 0x70020000
-> + COMBINED_SYSFW_BRDCFG_LOADADDR ?= 0x70000
-> + LOADADDR  ?= 0x44000
-> + SCIFS = sci
-> +-- 
-> +2.32.0
-> +
-> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-> index 4004d93f47c9..503cd5ceadc6 100644
-> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-> @@ -15,4 +15,12 @@ SRC_URI = " \
->  	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
+>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+>  MACHINE_KERNEL_PR_append = "b"
+> @@ -36,7 +36,7 @@ SRC_URI += " \
+>      file://defconfig \
 >  "
 >  
-> +# Mainline u_boot 2021.07 and upstream kernel v5.13 tag cannot use new SPL address
-> +# in K3-Imagegen
-> +SRC_URI += "\
-> +	${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '\
-> +	file://0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch;patchdir=../imggen \
-> +	', '', d)} \
-> +"
-> +
->  S = "${WORKDIR}/git"
+> -SRCREV_ti-upstream-tools = "d59b7471d99b806e3dc22342c8f42d5bb33f8cce"
+> +SRCREV_ti-upstream-tools = "c9b8150cb00a5beb7b7f3e42d0d817aa9392fabd"
+>  SRCREV_FORMAT = "linux"
+>  
+>  KERNEL_DEVICETREE = ""
 > -- 
 > 2.32.0
 > 
