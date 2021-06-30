@@ -1,98 +1,142 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web08.608.1625019090713518821
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web09.498.1625075679773299981
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 29 Jun 2021 19:11:30 -0700
+ Wed, 30 Jun 2021 10:54:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=SXqHKyo3;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nm@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15U2BN9E011280;
-	Tue, 29 Jun 2021 21:11:23 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=HtoZR5Lc;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: nm@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15UHsbIc077011;
+	Wed, 30 Jun 2021 12:54:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1625019083;
-	bh=MGqjCGq1Kd0IQEQ4td3A6GHM9H+WrPXSwtthqQXHtIs=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=SXqHKyo3k+eeOyFQK4GAVtJEbZiarRZjCLG7LQXKrMZPXUtbtsoM06Aau+yS7FqXD
-	 lvbmafqKgbtZPT96jymJ0TbEAvThTJOQstA7Q5NyIWS8WuUOi+2mJICjzVC9DPLVAs
-	 BUCywww7qQmaK1hlSmrBIXrXUUwRIo8ajzIpAKFo=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15U2BN9I120778
+	s=ti-com-17Q1; t=1625075677;
+	bh=W3GS/r5gPvexaDL8bxEsg/g7NJelmyZeRkJEGbDOUyw=;
+	h=From:To:CC:Subject:Date;
+	b=HtoZR5LcBPlUXgAOT62YZkWwWCHJQPLdmK/CKZ74n30AwwIf3BXQTfguc5PcUNFRO
+	 oq/ESeZTa9Pr5XUt6uvc0luA6+uwi1Avb7GpxtoMLScxKAinO2fv+iWf+yOok0QTU3
+	 TTR7WUU5dku1nqSW6ne0B0klAVDgPZ797CtCQmHE=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15UHsbZ8122832
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 29 Jun 2021 21:11:23 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 29
- Jun 2021 21:11:23 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 30 Jun 2021 12:54:37 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 30
+ Jun 2021 12:54:37 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 29 Jun 2021 21:11:23 -0500
+ Frontend Transport; Wed, 30 Jun 2021 12:54:37 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15U2BNLm001077;
-	Tue, 29 Jun 2021 21:11:23 -0500
-Date: Tue, 29 Jun 2021 21:11:23 -0500
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15UHsbsF045541;
+	Wed, 30 Jun 2021 12:54:37 -0500
 From: "Nishanth Menon" <nm@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <praneeth@ti.com>, <yogeshs@ti.com>, <denys@konsulko.com>,
-        Tom Rini
-	<trini@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [dunfell/master PATCH] linux-ti-mainline: Bump kernel version to v5.13
-Message-ID: <20210630021123.eadbiychvnjxfygo@coexist>
-References: <20210629233703.26088-1-nm@ti.com>
- <20210630003055.GD1528@denix.org>
+To: <praneeth@ti.com>, <yogeshs@ti.com>, <denys@konsulko.com>
+CC: Tom Rini <trini@konsulko.com>, <meta-ti@lists.yoctoproject.org>,
+        Nishanth
+ Menon <nm@ti.com>
+Subject: [dunfell/master PATCH V2] ti-sci-fw: k3-image-gen: Revert SPL address change for mainline
+Date: Wed, 30 Jun 2021 12:54:36 -0500
+Message-ID: <20210630175436.11343-1-nm@ti.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-In-Reply-To: <20210630003055.GD1528@denix.org>
-User-Agent: NeoMutt/20171215
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On 20:30-20210629, Denys Dmytriyenko wrote:
-> On Tue, Jun 29, 2021 at 06:37:03PM -0500, Nishanth Menon via lists.yoctoproject.org wrote:
-> > And lets work with the latest kernel and while at it bump the system up
-> > to latest ti-upstream-tools repo to get:
-> > * AM65x SR1.0 overlay support
-> > * EFI configuration to allow for the eventual support
-> > * Few more cleanups for new architectures that have popped in.
-> > 
-> > Signed-off-by: Nishanth Menon <nm@ti.com>
-> 
-> Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
-> 
-> 
-> > ---
-> >  recipes-kernel/linux/linux-ti-mainline_git.bb | 8 ++++----
-> >  1 file changed, 4 insertions(+), 4 deletions(-)
-> > 
-> > diff --git a/recipes-kernel/linux/linux-ti-mainline_git.bb b/recipes-kernel/linux/linux-ti-mainline_git.bb
-> > index 6770adcae3f7..5d043da7fee1 100644
-> > --- a/recipes-kernel/linux/linux-ti-mainline_git.bb
-> > +++ b/recipes-kernel/linux/linux-ti-mainline_git.bb
-> > @@ -20,9 +20,9 @@ S = "${WORKDIR}/git"
-> >  BRANCH = "master"
-> >  TOOLS_BRANCH = "master"
-> >  
-> > -# 5.12 Mainline version
-> > -SRCREV = "9f4ad9e425a1d3b6a34617b8ea226d56a119a717"
-> > -PV = "5.12+git${SRCPV}"
-> > +# 5.13 Mainline version
-> > +SRCREV = "62fb9874f5da54fdb243003b386128037319b219"
-> > +PV = "5.13+git${SRCPV}"
-> 
-> BTW, the "+git${SRCPV}" part is to append the specific SRCREV or git SHA of 
-> the kernel you are building to the resulting package version. That might be 
-> useful in tracking the kernel binary on the target to a specific SHA, as well 
-> as with binary feeds.
-> 
-> But if you only use official releases, you might want to drop it, as you'd 
-> trust that SRCREV you specify for 5.13 always corresponds to the release SHA 
-> in Linus' tree :) Just makes the package name and version much shorter...
-> 
+Commit 02a2433c ("ti-sci-fw: Update image gen to latest") switched to a
+newer commit in k3-image-gen that also picked up TISCI firmware release,
+However, does include a change where the SPL address changed.
 
-hehe, the history of v5.12-rc1-dontuse comes to mind for now. I think we
-can leave as is for now.
+This switch in address has been queued for upstream in a future release
+(v5.14 + u-boot 2021.10) and current mainline formal tags do not support
+this address change. As a result, we have a broken AM64x mainline
+support.
 
+Revert this specific change from k3-image-gen for mainline alone for
+now.
+
+NOTE: This uses ARAGO_BRAND=mainline which is NOT accurate for meta-ti
+which is distro independent, hence without appropriate changes while
+using alternate distros, this change will not take effect.
+
+Reported-by: Tom Rini <trini@konsulko.com>
+Suggested-by: Denys Dmytriyenko <denys@konsulko.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Changes since V1:
+* Added empty ARAGO_BRAND in case someone is using non-arago based
+  builds.
+
+V1: https://lists.yoctoproject.org/g/meta-ti/topic/dunfell_master_patch/83878039?p=,,,20,0,0,0::recentpostdate%2Fsticky,,,20,2,0,83878039
+
+ ...-Makefile-Move-the-SPL-Load-address-.patch | 36 +++++++++++++++++++
+ recipes-bsp/ti-sci-fw/ti-sci-fw.inc           | 11 ++++++
+ 2 files changed, 47 insertions(+)
+ create mode 100644 recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
+
+diff --git a/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch b/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
+new file mode 100644
+index 000000000000..63a5796d6b82
+--- /dev/null
++++ b/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
+@@ -0,0 +1,36 @@
++From 83d29d5e346083254e71fbe483cb14f6657b9965 Mon Sep 17 00:00:00 2001
++From: Nishanth Menon <nm@ti.com>
++Date: Tue, 29 Jun 2021 12:03:29 -0500
++Subject: [PATCH] Revert "soc: am64x: Makefile: Move the SPL Load address to
++ 0x70000000"
++
++This reverts commit e411dc16862b5bb2d8befb12496b03d7b01c87b2.
++
++Mainline is NOT ready for the change yet as of u-boot 2021.07 + v5.13,
++So, this patch reverts the SPL address change.
++
++This patch needs to be dropped once mainline u-boot and kernel have
++migrated over to newer releases.
++
++Upstream-Status: Not applicable
++Signed-off-by: Nishanth Menon <nm@ti.com>
++---
++ soc/am64x/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/soc/am64x/Makefile b/soc/am64x/Makefile
++index 45425428f9c6..e8747376f153 100644
++--- a/soc/am64x/Makefile
+++++ b/soc/am64x/Makefile
++@@ -30,7 +30,7 @@
++ #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ #
++ 
++-SBL_LOADADDDR ?= 0x70000000
+++SBL_LOADADDDR ?= 0x70020000
++ COMBINED_SYSFW_BRDCFG_LOADADDR ?= 0x70000
++ LOADADDR  ?= 0x44000
++ SCIFS = sci
++-- 
++2.32.0
++
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+index 4004d93f47c9..9e22e461354d 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+@@ -15,4 +15,15 @@ SRC_URI = " \
+ 	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
+ "
+ 
++# This is a protection in case the definition is not present in other distros.
++ARAGO_BRAND ?= ""
++
++# Mainline u_boot 2021.07 and upstream kernel v5.13 tag cannot use new SPL address
++# in K3-Imagegen
++SRC_URI += "\
++	${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '\
++	file://0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch;patchdir=../imggen \
++	', '', d)} \
++"
++
+ S = "${WORKDIR}/git"
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D)/Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.32.0
+
