@@ -1,142 +1,78 @@
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.498.1625075679773299981
+ by mx.groups.io with SMTP id smtpd.web10.566.1625076091501035133
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 30 Jun 2021 10:54:40 -0700
+ Wed, 30 Jun 2021 11:01:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=HtoZR5Lc;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=DGQMa2fF;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: nm@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15UHsbIc077011;
-	Wed, 30 Jun 2021 12:54:37 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 15UI1UwU079615;
+	Wed, 30 Jun 2021 13:01:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1625075677;
-	bh=W3GS/r5gPvexaDL8bxEsg/g7NJelmyZeRkJEGbDOUyw=;
+	s=ti-com-17Q1; t=1625076090;
+	bh=GAUPQeqIZbcTItfKOtqzs51RTe9tmcxqGpatJeW8Wog=;
 	h=From:To:CC:Subject:Date;
-	b=HtoZR5LcBPlUXgAOT62YZkWwWCHJQPLdmK/CKZ74n30AwwIf3BXQTfguc5PcUNFRO
-	 oq/ESeZTa9Pr5XUt6uvc0luA6+uwi1Avb7GpxtoMLScxKAinO2fv+iWf+yOok0QTU3
-	 TTR7WUU5dku1nqSW6ne0B0klAVDgPZ797CtCQmHE=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15UHsbZ8122832
+	b=DGQMa2fF99NdPiVgvkyFNtG+DaaH/OP/6eCrna8ZCXrtBvXk6yn8G2n9oN1jL2yy0
+	 isngTxLFMghVFDC1C8kSZNsNblxBsPs9tvFKR3yWCTd2TyoLw5cYUF1+ceu63k1VPU
+	 +tDHlBrmkynyDC7tMUDdQYCdvARD3j5Lw3slH5z4=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 15UI1UHD002326
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 30 Jun 2021 12:54:37 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 30 Jun 2021 13:01:30 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 30
- Jun 2021 12:54:37 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2021 13:01:30 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Wed, 30 Jun 2021 12:54:37 -0500
+ Frontend Transport; Wed, 30 Jun 2021 13:01:30 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15UHsbsF045541;
-	Wed, 30 Jun 2021 12:54:37 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 15UI1Us1055573;
+	Wed, 30 Jun 2021 13:01:30 -0500
 From: "Nishanth Menon" <nm@ti.com>
 To: <praneeth@ti.com>, <yogeshs@ti.com>, <denys@konsulko.com>
 CC: Tom Rini <trini@konsulko.com>, <meta-ti@lists.yoctoproject.org>,
         Nishanth
  Menon <nm@ti.com>
-Subject: [dunfell/master PATCH V2] ti-sci-fw: k3-image-gen: Revert SPL address change for mainline
-Date: Wed, 30 Jun 2021 12:54:36 -0500
-Message-ID: <20210630175436.11343-1-nm@ti.com>
+Subject: [dunfell PATCH] ti-sci-fw: Update linux firmware repo to 08.00.00.001
+Date: Wed, 30 Jun 2021 13:01:28 -0500
+Message-ID: <20210630180128.13766-1-nm@ti.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Commit 02a2433c ("ti-sci-fw: Update image gen to latest") switched to a
-newer commit in k3-image-gen that also picked up TISCI firmware release,
-However, does include a change where the SPL address changed.
+Just updating imggen to a configuration compatible with latest firmware
+should not have been accepted, we should have ensured that firmware
+commit has moved correspondingly as well. Fix the same, else we get a
+broken system.
 
-This switch in address has been queued for upstream in a future release
-(v5.14 + u-boot 2021.10) and current mainline formal tags do not support
-this address change. As a result, we have a broken AM64x mainline
-support.
+Fixes: 406f5998227e ("ti-sci-fw: Update imggen to release 08.00.00.001 tag")
 
-Revert this specific change from k3-image-gen for mainline alone for
-now.
-
-NOTE: This uses ARAGO_BRAND=mainline which is NOT accurate for meta-ti
-which is distro independent, hence without appropriate changes while
-using alternate distros, this change will not take effect.
-
-Reported-by: Tom Rini <trini@konsulko.com>
-Suggested-by: Denys Dmytriyenko <denys@konsulko.com>
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
-Changes since V1:
-* Added empty ARAGO_BRAND in case someone is using non-arago based
-  builds.
 
-V1: https://lists.yoctoproject.org/g/meta-ti/topic/dunfell_master_patch/83878039?p=,,,20,0,0,0::recentpostdate%2Fsticky,,,20,2,0,83878039
+NOTE: NOTHING has gotten into master for the last 6 weeks, so I might as
+well not tag master - This is just going to creep back at us.
 
- ...-Makefile-Move-the-SPL-Load-address-.patch | 36 +++++++++++++++++++
- recipes-bsp/ti-sci-fw/ti-sci-fw.inc           | 11 ++++++
- 2 files changed, 47 insertions(+)
- create mode 100644 recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
+ recipes-bsp/ti-sci-fw/ti-sci-fw.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch b/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
-new file mode 100644
-index 000000000000..63a5796d6b82
---- /dev/null
-+++ b/recipes-bsp/ti-sci-fw/files/0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch
-@@ -0,0 +1,36 @@
-+From 83d29d5e346083254e71fbe483cb14f6657b9965 Mon Sep 17 00:00:00 2001
-+From: Nishanth Menon <nm@ti.com>
-+Date: Tue, 29 Jun 2021 12:03:29 -0500
-+Subject: [PATCH] Revert "soc: am64x: Makefile: Move the SPL Load address to
-+ 0x70000000"
-+
-+This reverts commit e411dc16862b5bb2d8befb12496b03d7b01c87b2.
-+
-+Mainline is NOT ready for the change yet as of u-boot 2021.07 + v5.13,
-+So, this patch reverts the SPL address change.
-+
-+This patch needs to be dropped once mainline u-boot and kernel have
-+migrated over to newer releases.
-+
-+Upstream-Status: Not applicable
-+Signed-off-by: Nishanth Menon <nm@ti.com>
-+---
-+ soc/am64x/Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/soc/am64x/Makefile b/soc/am64x/Makefile
-+index 45425428f9c6..e8747376f153 100644
-+--- a/soc/am64x/Makefile
-++++ b/soc/am64x/Makefile
-+@@ -30,7 +30,7 @@
-+ #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+ #
-+ 
-+-SBL_LOADADDDR ?= 0x70000000
-++SBL_LOADADDDR ?= 0x70020000
-+ COMBINED_SYSFW_BRDCFG_LOADADDR ?= 0x70000
-+ LOADADDR  ?= 0x44000
-+ SCIFS = sci
-+-- 
-+2.32.0
-+
 diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-index 4004d93f47c9..9e22e461354d 100644
+index 9e22e461354d..966042820aac 100644
 --- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
 +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-@@ -15,4 +15,15 @@ SRC_URI = " \
- 	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
- "
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
  
-+# This is a protection in case the definition is not present in other distros.
-+ARAGO_BRAND ?= ""
-+
-+# Mainline u_boot 2021.07 and upstream kernel v5.13 tag cannot use new SPL address
-+# in K3-Imagegen
-+SRC_URI += "\
-+	${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '\
-+	file://0001-Revert-soc-am64x-Makefile-Move-the-SPL-Load-address-.patch;patchdir=../imggen \
-+	', '', d)} \
-+"
-+
- S = "${WORKDIR}/git"
+ PV = "2021.05"
+ 
+-SRCREV = "0468c7a78cd26f9190d374e198e37c63c7660ba9"
++SRCREV = "1e73d9387980f4d425742738968e55395c19e26c"
+ BRANCH ?= "ti-linux-firmware"
+ SRCREV_imggen = "b65ae80847f5a0d1885ed6e4de4d9d635544053c"
+ SRCREV_FORMAT = "imggen"
 -- 
 2.32.0
 
