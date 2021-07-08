@@ -1,96 +1,72 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.795.1625679610235686444
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.7902.1625721154880117175
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 07 Jul 2021 10:40:10 -0700
+ Wed, 07 Jul 2021 22:12:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4EA1B40C86;
-	Wed,  7 Jul 2021 17:40:07 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RmLQ05iFdAdA; Wed,  7 Jul 2021 17:40:07 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2B5C3409B0;
-	Wed,  7 Jul 2021 17:40:05 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 7D2A317461B;
-	Wed,  7 Jul 2021 13:40:04 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>,
-	Gowtham Tammana <g-tammana@ti.com>
-Subject: [PATCH][dunfell/master] ti-img-rogue-driver: support OE nodistro toolchain same as Poky
-Date: Wed,  7 Jul 2021 13:39:58 -0400
-Message-Id: <1625679598-51006-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=sHlgMYEE;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: yogeshs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1685CXUI049129;
+	Thu, 8 Jul 2021 00:12:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1625721153;
+	bh=JwtUmiiO2zkNN0HAoYTX88x6+AOI4h4l0O3yrXkP0no=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=sHlgMYEECKV5cJ7gBhNYFy/8gDN5cg4U16Nkz93ugStymbyjBHECtc92BazK7e/tw
+	 GRiw2fcyUCy9DGu/5SbzR1dAx6jTsrkZee+klIh6Mr7sKLdI6cmg2rzvbIcX9CAsUW
+	 IIx/4TRw7ucA9hmvBje4mKT0fOD5WiKG4zfNbnsk=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1685CXL8073804
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 8 Jul 2021 00:12:33 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 8 Jul
+ 2021 00:12:33 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Thu, 8 Jul 2021 00:12:33 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1685CWmA121984;
+	Thu, 8 Jul 2021 00:12:33 -0500
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+To: Denys Dmytriyenko <denys@konsulko.com>,
+        Praneeth Bajjuri
+	<praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: Yogesh Siraswar <yogeshs@ti.com>
+Subject: [meta-ti][dunfell/master][PATCH 3/4] u-boot-ti-staging: Update to 08.00.00.002 release tag
+Date: Thu, 8 Jul 2021 05:12:31 +0000
+Message-ID: <20210708051232.10077-4-yogeshs@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210708051232.10077-1-yogeshs@ti.com>
+References: <20210708051232.10077-1-yogeshs@ti.com>
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+Update to 08.00.00.002 release tag
 
-Add OpenEmbedded "nodistro" internal toolchain triplet detection similar to
-corresponding Poky one.
-
-Cc: Gowtham Tammana <g-tammana@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
 ---
- ...pport-OpenEmbedded-nodistro-internal-aarc.patch | 29 ++++++++++++++++++++++
- .../ti-img-rogue-driver_1.13.5776728.bb            |  5 +++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch b/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch
-new file mode 100644
-index 0000000..f021cc3
---- /dev/null
-+++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch
-@@ -0,0 +1,29 @@
-+From 80d32fee3d768abbd77cce77ea9a7574651460a9 Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denis@denix.org>
-+Date: Wed, 7 Jul 2021 13:11:56 -0400
-+Subject: [PATCH] compiler: support OpenEmbedded "nodistro" internal aarch64
-+ toolchain
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-+---
-+ build/linux/config/compiler.mk | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/build/linux/config/compiler.mk b/build/linux/config/compiler.mk
-+index 53a0bef..d788579 100644
-+--- a/build/linux/config/compiler.mk
-++++ b/build/linux/config/compiler.mk
-+@@ -65,7 +65,7 @@ define calculate-compiler-preferred-target
-+    ifneq ($$(filter i386-% i486-% i586-% i686-%,$$($(1)_compiler_preferred_target)),)
-+     $(1)_compiler_preferred_target := i386-linux-gnu
-+    endif
-+-   ifneq ($$(filter aarch64-poky-linux,$$($(1)_compiler_preferred_target)),)
-++   ifneq ($$(filter aarch64-oe-linux aarch64-poky-linux,$$($(1)_compiler_preferred_target)),)
-+     $(1)_compiler_preferred_target := aarch64-linux-gnu
-+    endif
-+    ifneq ($$(filter armv7a-cros-linux-gnueabi armv7l-tizen-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-+-- 
-+2.7.4
-+
-diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
-index ff3cbb8..e6edebd 100644
---- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
-+++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
-@@ -19,7 +19,10 @@ PROVIDES = "virtual/gpudriver"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index 7d18d68f..35ec974a 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
  
- BRANCH = "1.13-5776728/linux-k5.10"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
  
--SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH}"
-+SRC_URI = " \
-+    git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH} \
-+    file://0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch \
-+"
+-PR = "r8"
++PR = "r9"
  
- S = "${WORKDIR}/git"
+ BRANCH = "ti-u-boot-2021.01"
  
+-SRCREV = "230c4c5938cfaeb58cda0f1aa80cb006af75eca5"
++SRCREV = "20e7036ac9194b4ec8b0161b830d7f4f4d6db95f"
 -- 
-2.7.4
+2.17.1
 
