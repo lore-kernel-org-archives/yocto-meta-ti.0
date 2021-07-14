@@ -1,52 +1,72 @@
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
- by mx.groups.io with SMTP id smtpd.web11.10021.1626282959224242327
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web08.10923.1626286876032866797
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 14 Jul 2021 10:15:59 -0700
+ Wed, 14 Jul 2021 11:21:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dAghdYxT;
- spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f50.google.com with SMTP id p10so1387096qvk.7
-        for <meta-ti@lists.yoctoproject.org>; Wed, 14 Jul 2021 10:15:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=aqu9IwPAHAFVi/E8FBLnRZOmRL6ciTKFufZpiK2mp70=;
-        b=dAghdYxTMKmMf5reNdHedYEuVfl9Esbke3XM8fLy7pZ9rUV2+/Q6bzjCKJ1OSGJKZj
-         Xu8KDjhBcJVT0soYmXarnWrXrUHKv88Ab7LHSiSoK5oTnyHxOahAZRBktttlzx9E1HWD
-         EJdpduPKGLAGZNQvm0ADpIfAhRKVpi1N0tCZk/5B2wDvY1vT9WJ+IzkPB/7+y3QcpVxn
-         SJUfxL6IrSG3Moy4LLFMVgB7E5VJJjwugBYpCsfdxr09Ttuw4pds6t+gkLy3DHH3v35e
-         8mxREwP3yXlNjDrJ/MUhHILrnmsxRhoRCDqlrErw4JBJMQoygaWoW3p92z/h+alSHtY4
-         rfYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=aqu9IwPAHAFVi/E8FBLnRZOmRL6ciTKFufZpiK2mp70=;
-        b=mP2pXnFUg30JDg/+TTuboVN7+D3a637V8K2FqF6W9aQf25TYdt+gPxP8yg0trdYIyi
-         dmd0G1/1StD4DSEmafhQU95GUzeDV7lTmhjeJZd3RnYDaUEibeFbpGxf3uloXIfyUjcu
-         7hA0ygrpLqjfi0Rt/2/nU36eaMGiLoXacHRGR2Xcy9tveSSThdiO+ZOrw15xf8RNCLaf
-         qCXgEIBX12JRcPb3V9pVUTicr9fmgtD/l8iGqy9HtJfPeRWV1e/bXPZew1hnoyDUFaWD
-         b3FBx/yVjUnpMvrna5N0Rj92+sPc5/E6f/YNHZ1DM98bdRGJTT/XNYgubFoqkAxyQ/Fy
-         4KlQ==
-X-Gm-Message-State: AOAM532sW6ezkOFZ383OXCSl+JZl2qGtXMooffSvcTLrl+TiTWKSY4fm
-	Gik8h9RVI9Q5hpymork+nsYvuRiIlhR3Z+YmKl28M/Nsh1kh/A==
-X-Google-Smtp-Source: ABdhPJwY6aOj0qFUOHp8707U4zVGOKQ8UVyYO/Dndk/h/AhZjDKORSAzcgDQ1/7AgGrUYHSa7QUZLkJY1+FGMRbwIOI=
-X-Received: by 2002:a05:6214:1bcf:: with SMTP id m15mr9662725qvc.55.1626282958249;
- Wed, 14 Jul 2021 10:15:58 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=jXu+QR03;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 16EILBqI093088;
+	Wed, 14 Jul 2021 13:21:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1626286871;
+	bh=ErSXikVRXim6i+o0wn3XzXBnBpJqHOiVbKaKxgL8n1c=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=jXu+QR03o8aWLmbDqcOhf+13mdMVxOdZeY4dBO0T0l4B9pFQ4LQLSz4T5KTTpLmc6
+	 gTKYgFa0nZ+AOqoY3QLiG9WvPvzn5qbeiDQ8lP6wzh2Ym4rroL/BBO42I3wWkk27LK
+	 ECNKz/68Kzrpk0QwWBFfJwsN7Jm4wTna9RCTuqbg=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 16EILBVO031216
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 14 Jul 2021 13:21:11 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 14
+ Jul 2021 13:21:11 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
+ Frontend Transport; Wed, 14 Jul 2021 13:21:11 -0500
+Received: from [10.250.32.102] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 16EILBRe124900;
+	Wed, 14 Jul 2021 13:21:11 -0500
+Subject: Re: [EXTERNAL] [meta-ti] Merge confict chunk
+To: Khem Raj <raj.khem@gmail.com>, Denys Dmytriyenko <denis@denix.org>,
+        <meta-ti@lists.yoctoproject.org>
+References: <CAMKF1srKvR3KrWyKtW18J6rqzLH2H2SaYQLLzSs+sa8QHQh+7w@mail.gmail.com>
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+Message-ID: <5070d889-b8c6-e6b1-d86d-0dbc966d1707@ti.com>
+Date: Wed, 14 Jul 2021 13:21:11 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 14 Jul 2021 10:15:32 -0700
-Message-ID: <CAMKF1srKvR3KrWyKtW18J6rqzLH2H2SaYQLLzSs+sa8QHQh+7w@mail.gmail.com>
-Subject: Merge confict chunk
-To: Denys Dmytriyenko <denis@denix.org>, meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAMKF1srKvR3KrWyKtW18J6rqzLH2H2SaYQLLzSs+sa8QHQh+7w@mail.gmail.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Hi Denys
-
-This commit
-
-https://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=4c1d26f6282b9959b9ee10aa77b3e05ed56299fb
-
-has a merge anchor thats committed perhaps accidentally.
+Hi Raj,
+Thanks for pointing  it out. Have fixed the same. Will try to be more 
+careful in future.
 
 Thanks
--Khem
+Yogesh
+
+  more
+On 7/14/21 12:15 PM, Khem Raj wrote:
+> Hi Denys
+> 
+> This commit
+> 
+> https://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=4c1d26f6282b9959b9ee10aa77b3e05ed56299fb
+> 
+> has a merge anchor thats committed perhaps accidentally.
+> 
+> Thanks
+> -Khem
+> 
+> 
+> 
+> 
+> 
