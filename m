@@ -1,44 +1,44 @@
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web09.3784.1626872802117259019
+ by mx.groups.io with SMTP id smtpd.web09.4383.1626934650461622409
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 21 Jul 2021 06:06:42 -0700
+ Wed, 21 Jul 2021 23:17:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=N6oa39th;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ABV+pTyV;
  spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: yogeshs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 16LD6e8n092880;
-	Wed, 21 Jul 2021 08:06:40 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 16M6HTjp114807;
+	Thu, 22 Jul 2021 01:17:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1626872800;
-	bh=vSq9282NcRXuhNBEQas93Ix/Q3026d0LGGTltS4FGXY=;
+	s=ti-com-17Q1; t=1626934649;
+	bh=vdWYsRztJ6CwFb2/iwcZCQG/MxBlEjUBgCtEXOJSC84=;
 	h=From:To:Subject:Date;
-	b=N6oa39thNBLI3UruhOySKRfblSmXSJT/y9DiInTEiOeZMvj/SGozi0nfNXxe5QjeH
-	 Wp70c4eMv+HBjxWC/Rkl5SnzA/wIQQYtC9vim9EWrMlD88sdz9FN8KzZSiMvvQon+q
-	 ntib6am+yxZ1b/C8YxfkBABBzARl5CpoIk1/Ns5A=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 16LD6e4D099416
+	b=ABV+pTyVvxTIzhabLpwGXICkq628Zx4QI1LCXf7M2Zphc3qkg1rQdgtXLGxk3x1BG
+	 2EB86OKomLpFv2qH4bOF23io9woOP8KvI5f3wOEPPx/qTD3qhscEgrffkABVg8SC3M
+	 KzFSs88/epk2m5Msf7hQMEDLk1QqQjKtFA0sVU90=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 16M6HSnO051931
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 21 Jul 2021 08:06:40 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 21
- Jul 2021 08:06:40 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 22 Jul 2021 01:17:28 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 22
+ Jul 2021 01:17:28 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Wed, 21 Jul 2021 08:06:40 -0500
+ Frontend Transport; Thu, 22 Jul 2021 01:17:28 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 16LD6eWA009411;
-	Wed, 21 Jul 2021 08:06:40 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 16M6HSFE078032;
+	Thu, 22 Jul 2021 01:17:28 -0500
 From: "Yogesh Siraswar" <yogeshs@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>,
         Praneeth Bajjuri
 	<praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>,
         Suman Anna
 	<s-anna@ti.com>
-Subject: [meta-ti][dunfell/master][PATCH v2] ti-rtos-firmware: Add soft link to the rtos firmware binaries
-Date: Wed, 21 Jul 2021 13:06:40 +0000
-Message-ID: <20210721130640.49011-1-yogeshs@ti.com>
+Subject: [meta-ti][dunfell/master][PATCH v3] ti-rtos-firmware: Add soft link to the rtos firmware binaries
+Date: Thu, 22 Jul 2021 06:17:28 +0000
+Message-ID: <20210722061728.21100-1-yogeshs@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -51,19 +51,23 @@ source to ti-linux-firmware) were in-complete without soft link.
 
 Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
 ---
+Changes from v2:
+1) Fixed issue with HS build for J7 by using j7 instead of j7-evm.
+  So the same rule apply for j7-hs-evm.
+2) Same changes for J7200 for future HS support
 
-Changes from last version:
+Changes from v1:
 1) Fixed the j7-main-r5f0_0-fw and j7200-main-r5f0_0-fw soft link
 2) Cleaned-up extra white space.
 
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 185 ++++++++++++++++++---
- 1 file changed, 164 insertions(+), 21 deletions(-)
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 187 ++++++++++++++++++---
+ 1 file changed, 167 insertions(+), 20 deletions(-)
 
 diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index e50cb933..16a40b08 100644
+index e50cb933..84cd98a1 100644
 --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
 +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -10,6 +10,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -10,10 +10,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
  INHIBIT_DEFAULT_DEPS = "1"
  
  inherit deploy
@@ -71,13 +75,18 @@ index e50cb933..16a40b08 100644
  
  PLAT_SFX = ""
  PLAT_SFX_j7 = "j721e"
+-PLAT_SFX_j7200-evm = "j7200"
++PLAT_SFX_j7200 = "j7200"
+ PLAT_SFX_am65xx = "am65xx"
+ PLAT_SFX_am64xx = "am64xx"
+ 
 @@ -23,8 +24,7 @@ CORESDK_RTOS_VERSION ?= "08.00.00.26"
  PV = "${CORESDK_RTOS_VERSION}"
  
  CLEANBROKEN = "1"
 -PR = "r1"
 -
-+PR = "r2"
++PR = "r3"
  
  # Secure Build 
  DEPENDS += "openssl-native"
@@ -99,7 +108,7 @@ index e50cb933..16a40b08 100644
  do_install_prepend_j7-hs-evm() {
  	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
  	( cd ${RTOS_DM_FW_DIR}; \
-@@ -54,35 +54,178 @@ do_install_prepend_j7-hs-evm() {
+@@ -54,35 +54,182 @@ do_install_prepend_j7-hs-evm() {
  	)
  }
  
@@ -121,10 +130,11 @@ index e50cb933..16a40b08 100644
 -  cp ${CP_ARGS} "${RTOS_ETH_FW_DIR}/." ${LEGACY_ETH_FW_DIR}
 -  cp ${CP_ARGS} "${RTOS_IPC_FW_DIR}/." ${LEGACY_IPC_FW_DIR}
 -  cp ${CP_ARGS} "${RTOS_DM_FW_DIR}/." ${LEGACY_IPC_FW_DIR}
-+    install -d ${LEGACY_IPC_FW_DIR}
++    
 +}
 +
-+do_install_append_j7-evm() {
++do_install_j7() {
++    install -d ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
@@ -140,7 +150,8 @@ index e50cb933..16a40b08 100644
 +    install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
 +}
 +
-+do_install_append_j7200-evm() {
++do_install_j7200() {
++    install -d ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
@@ -151,20 +162,20 @@ index e50cb933..16a40b08 100644
 +    install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
  }
  
--do_install_am65xx() {
+ do_install_am65xx() {
 -  CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 -  install -d ${LEGACY_IPC_FW_DIR}
 -  cp ${CP_ARGS} "${RTOS_IPC_FW_DIR}/." ${LEGACY_IPC_FW_DIR}
-+do_install_append_am65xx() {
++    install -d ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
  }
  
--do_install_am64xx() {
+ do_install_am64xx() {
 -  CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 -  install -d ${LEGACY_IPC_FW_DIR}
 -  cp ${CP_ARGS} "${RTOS_IPC_FW_DIR}/." ${LEGACY_IPC_FW_DIR}
-+do_install_append_am64xx() {
++    install -d ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu1_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
 +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
@@ -196,7 +207,7 @@ index e50cb933..16a40b08 100644
 +                    j7-c71_0-fw\
 +                    "
 +
-+ALTERNATIVE_${PN}_j7200-evm = "\
++ALTERNATIVE_${PN}_j7200 = "\
 +                    j7200-mcu-r5f0_0-fw \
 +                    j7200-mcu-r5f0_1-fw \
 +                    j7200-main-r5f0_0-fw \
@@ -223,10 +234,10 @@ index e50cb933..16a40b08 100644
 +TARGET_C66_1_j7 = "j7-c66_1-fw"
 +TARGET_C7X_j7 = "j7-c71_0-fw"
 +
-+TARGET_MCU_R5FSS0_0_j7200-evm = "j7200-mcu-r5f0_0-fw"
-+TARGET_MCU_R5FSS0_1_j7200-evm = "j7200-mcu-r5f0_1-fw"
-+TARGET_MAIN_R5FSS0_0_j7200-evm = "j7200-main-r5f0_0-fw"
-+TARGET_MAIN_R5FSS0_1_j7200-evm = "j7200-main-r5f0_1-fw"
++TARGET_MCU_R5FSS0_0_j7200 = "j7200-mcu-r5f0_0-fw"
++TARGET_MCU_R5FSS0_1_j7200 = "j7200-mcu-r5f0_1-fw"
++TARGET_MAIN_R5FSS0_0_j7200 = "j7200-main-r5f0_0-fw"
++TARGET_MAIN_R5FSS0_1_j7200 = "j7200-main-r5f0_1-fw"
 +
 +ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
 +ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
