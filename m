@@ -1,79 +1,104 @@
-Received: from mail-io1-f41.google.com (mail-io1-f41.google.com [209.85.166.41])
- by mx.groups.io with SMTP id smtpd.web08.30608.1627309767411822817
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.4582.1627342620042007107
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 26 Jul 2021 07:29:27 -0700
+ Mon, 26 Jul 2021 16:37:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@openavr-org.20150623.gappssmtp.com header.s=20150623 header.b=AxLAoeel;
- spf=none, err=permanent DNS error (domain: openavr.org, ip: 209.85.166.41, mailfrom: troth@openavr.org)
-Received: by mail-io1-f41.google.com with SMTP id r18so12081361iot.4
-        for <meta-ti@lists.yoctoproject.org>; Mon, 26 Jul 2021 07:29:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=openavr-org.20150623.gappssmtp.com; s=20150623;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pbHsnYV24U1cs9WyztBZ+cH4uwknfCEDNCWrU9AIFrs=;
-        b=AxLAoeelRNGEpIOkYSjteHKoTgp6JdxriduyzaS4RJve12MZLU7kK5IVi9Xo/njO+J
-         jr1QjWDu41GB36taedQcW92VrWbpKPZYnRemIPbSlNRoyQmwmrJL8fOhgK5QVtMjeoVC
-         imoqcghQ4HHlPuqbOriRuGWxkd12WzRk6lDdDJFJM3gfFBuw/Q4qqSGuUyE5TsrweYic
-         KFlNHozG/QeJ5Ro7RhFEGLvMoAtbzNJ/O1RXQZG/b+m1jRhU6MstUq2eJdGt9fWti7h0
-         wdCbbjgmdt+6UgU+UncHUdrREi4toJc6BtnfONRkRFjyqJ/+Om9Wak3Bgob2pXotzqSp
-         5iRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pbHsnYV24U1cs9WyztBZ+cH4uwknfCEDNCWrU9AIFrs=;
-        b=hkBuYffTFlWyiIXx+rU9Q4RyiJzQ43W84KpNpaSlBQiUssMfdGbA7cvUCbWRtVExr1
-         9Z6lyeQyh/AAV7nGrgAxTSgqGAIOMPqlA3HAov57PEKrPAvMGkYciqHGWckw7V1GTNtY
-         aMMD7Ghnu688CM0cWLpH0lMqLJJ7OUk6BCkPl7RnMSEH/+MocLuQNjgcQMBdA7DL3w5a
-         3XkQwySmp8P2FvFNsEuAuLnhJiumvxKuwK1w/UDplSdJKRdFTwyr+UN9np5YKTmbZ/sw
-         NZSMKmzMSZtP/fWYkcBuMg5XA5/VhyXqiQvCdVuJOzc3MbomzZ7zjV8sBTGxY2SikqD3
-         ENgQ==
-X-Gm-Message-State: AOAM533A7eyk/Uqa/w7mzTmQakFhkJN9H99skk5Ujv3Cr+Cp/qbY0g3A
-	P9E7f4KVH+Q1AdSsUAxs0Y2deZkLbU8X0uUzQEI=
-X-Google-Smtp-Source: ABdhPJzTf+UgiK3l/rstyhE0ZvpEEz7UAFFK19qq+l/xwfRtQv4nZRlDaUIGyPlTCYoDexTP4OMw9Q==
-X-Received: by 2002:a6b:6310:: with SMTP id p16mr14773283iog.148.1627309766561;
-        Mon, 26 Jul 2021 07:29:26 -0700 (PDT)
-Return-Path: <troth@openavr.org>
-Received: from beast.bozoland.org (c-24-8-35-226.hsd1.co.comcast.net. [24.8.35.226])
-        by smtp.gmail.com with ESMTPSA id n14sm20516861ili.22.2021.07.26.07.29.25
-        for <meta-ti@lists.yoctoproject.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jul 2021 07:29:26 -0700 (PDT)
-From: "Theodore A. Roth" <troth@openavr.org>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 17EA740C22
+	for <meta-ti@lists.yoctoproject.org>; Mon, 26 Jul 2021 23:36:59 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id mzvbNsJ4lRUy for <meta-ti@lists.yoctoproject.org>;
+	Mon, 26 Jul 2021 23:36:59 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 07DE040A47
+	for <meta-ti@lists.yoctoproject.org>; Mon, 26 Jul 2021 23:36:58 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id BC4FD174647; Mon, 26 Jul 2021 19:36:58 -0400 (EDT)
+Date: Mon, 26 Jul 2021 19:36:58 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [meta-ti][hardknott/master][PATCH] wic: Set a fixed size for boot partition in wic image
-Date: Mon, 26 Jul 2021 08:29:25 -0600
-Message-Id: <20210726142925.2724723-1-troth@openavr.org>
-X-Mailer: git-send-email 2.25.1
+Subject: Re: [meta-ti] [master][PATCH] ti-img-rogue-driver: unify with dunfell and fix double-patching
+Message-ID: <20210726233658.GX1528@denix.org>
+References: <1692042B86EAB73A.9904@lists.yoctoproject.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <1692042B86EAB73A.9904@lists.yoctoproject.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The beagleboneai is not loading the MLO without this change.
+Ping.
 
-A similar change was needed in meta-yocto-bsp for the beaglebone black
-due to the updating of dosfstools to 4.2 in Hardknott.
+On Thu, Jul 15, 2021 at 12:36:35PM -0400, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@konsulko.com>
+> 
+> There was a discrepancy between master and dunfell where 2 different versions
+> of the same patch existed, so when syncing branches, it resulted in appying
+> the same change twice. This cleans it up.
+> 
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> ---
+>  ...k-support-OE-toolchain-alongside-Poky-one.patch | 26 ----------------------
+>  .../ti-img-rogue-driver_1.13.5776728.bb            |  4 ++--
+>  2 files changed, 2 insertions(+), 28 deletions(-)
+>  delete mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler.mk-support-OE-toolchain-alongside-Poky-one.patch
+> 
+> diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler.mk-support-OE-toolchain-alongside-Poky-one.patch b/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler.mk-support-OE-toolchain-alongside-Poky-one.patch
+> deleted file mode 100644
+> index abe48df..0000000
+> --- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler.mk-support-OE-toolchain-alongside-Poky-one.patch
+> +++ /dev/null
+> @@ -1,26 +0,0 @@
+> -From 0d291f91d86e59d87ce023b4e7b89f6b00aa4aab Mon Sep 17 00:00:00 2001
+> -From: Denys Dmytriyenko <denis@denix.org>
+> -Date: Sat, 27 Mar 2021 00:20:57 -0400
+> -Subject: [PATCH] compiler.mk: support OE toolchain alongside Poky one
+> -
+> -Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+> ----
+> - build/linux/config/compiler.mk | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/build/linux/config/compiler.mk b/build/linux/config/compiler.mk
+> -index 53a0bef..d45d438 100644
+> ---- a/build/linux/config/compiler.mk
+> -+++ b/build/linux/config/compiler.mk
+> -@@ -65,7 +65,7 @@ define calculate-compiler-preferred-target
+> -    ifneq ($$(filter i386-% i486-% i586-% i686-%,$$($(1)_compiler_preferred_target)),)
+> -     $(1)_compiler_preferred_target := i386-linux-gnu
+> -    endif
+> --   ifneq ($$(filter aarch64-poky-linux,$$($(1)_compiler_preferred_target)),)
+> -+   ifneq ($$(filter aarch64-poky-linux aarch64-oe-linux,$$($(1)_compiler_preferred_target)),)
+> -     $(1)_compiler_preferred_target := aarch64-linux-gnu
+> -    endif
+> -    ifneq ($$(filter armv7a-cros-linux-gnueabi armv7l-tizen-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
+> --- 
+> -2.7.4
+> -
+> diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+> index 00f1d81..e6edebd 100644
+> --- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+> +++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+> @@ -19,8 +19,8 @@ PROVIDES = "virtual/gpudriver"
+>  
+>  BRANCH = "1.13-5776728/linux-k5.10"
+>  
+> -SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH} \
+> -    file://0001-compiler.mk-support-OE-toolchain-alongside-Poky-one.patch \
+> +SRC_URI = " \
+> +    git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH} \
+>      file://0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch \
+>  "
+>  
+> -- 
+> 2.7.4
+> 
 
-[Yocto #14306]
-
-(See also meta-yocto rev: 0c679ac53b52e631a7c961872ce58f5cf74b8629)
-
-Signed-off-by: Theodore A. Roth <troth@openavr.org>
----
- wic/sdimage-2part.wks | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/wic/sdimage-2part.wks b/wic/sdimage-2part.wks
-index 77d6f7b5..3eab9407 100644
---- a/wic/sdimage-2part.wks
-+++ b/wic/sdimage-2part.wks
-@@ -2,5 +2,5 @@
- # long-description: Creates a partitioned SD card image for TI platforms.
- # Boot files are located in the first vfat partition with extra reserved space.
- 
--part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 1024 --extra-space 100M --use-uuid
-+part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 1024 --fixed-size 128 --use-uuid
- part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 1024 --use-uuid
 -- 
-2.25.1
-
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
