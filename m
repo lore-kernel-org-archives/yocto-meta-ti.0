@@ -1,58 +1,76 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.24269.1628522618107288917
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.28061.1628537975877701094
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 09 Aug 2021 08:23:38 -0700
+ Mon, 09 Aug 2021 12:39:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EA31640C1D;
-	Mon,  9 Aug 2021 15:23:36 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id olxxNEHhaM-e; Mon,  9 Aug 2021 15:23:36 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C77F940BEC;
-	Mon,  9 Aug 2021 15:23:34 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 3835F174651; Mon,  9 Aug 2021 11:23:34 -0400 (EDT)
-Date: Mon, 9 Aug 2021 11:23:34 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Paul Barker <paul.barker@sancloud.com>
-Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>
-Subject: Re: [meta-ti] [master][PATCH v2] meta-ti: convert to new override syntax in honister
-Message-ID: <20210809152334.GD1528@denix.org>
-References: <1628032287-44000-1-git-send-email-denis@denix.org>
- <20210807110733.701b873a.paul.barker@sancloud.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IoL/7JDv;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id c16so17691414plh.7
+        for <meta-ti@lists.yoctoproject.org>; Mon, 09 Aug 2021 12:39:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=jCoID3vjxBtxnzs1Fd4611tCwFXulFttE+yoTCEHI1c=;
+        b=IoL/7JDv51hQ/OMyknzTWVI/xIpJSTjkAH+i13yBNohhLWlBXyOdYtGeuaBrVXps+v
+         iAsc973a2i7I91Vc1OGdFNDV5baB489cln5TSd1RII1LPNgRLjKcDczcS1zOQcxnrFoY
+         9sqorWcmA4ajeJNUc6NpBO5J705/viphLHQojvBRo5gw/wc4RvKh44F7NBs1vjkWSDNV
+         wQFFmaou1mvlLOtCpfjAtmkHJyO7t5n6nuMdDcRB7R8noquG9yUj5lZEoI7VTMDD4f/m
+         otyD18Rvx6igxlVqL3taOEspGy8d4tOR0SPAKQXvhxCz4PNpJnGRRyY7Mzwg0zGhdN0A
+         0ZNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=jCoID3vjxBtxnzs1Fd4611tCwFXulFttE+yoTCEHI1c=;
+        b=sJ2tJVQ5bvIKchDrEbIEWnEeFA8ij723RTjH719GJNE39u91ovGsgY9RG2/2lw71PN
+         Vmg3eVyF54+5YpaxpazqCFYkERXcY1+My+rbIqypK1gSXGoigEt9/YUlQfup11ENlJWt
+         TmrHTPUPG5tqEiabv4kV0G+nV5mnhgIrNil0aikVwhFwdHCq89J/H0/TJPAni3pdBRYB
+         BfWpPQeRZhrkQdEEmn/83O+94k2WZr1RsX3QXFuPVUBmqPrKPKo9UAgzDxXFdRbzib+z
+         d0Te7lUEYVSlqAeM11Y5+Z2QZBNSEXz6/+6m/zITs66VDxZooJCa+LZboRMQ/IzSC/yH
+         a5Uw==
+X-Gm-Message-State: AOAM531qAk/ZtVPHli+uGrhnO8qjRD3ROnnmJEWDLnHQI3j1x0suyeuw
+	lt35t52EaD+i99EmfDZ5zaLelX28rB9LAA==
+X-Google-Smtp-Source: ABdhPJwQmaYIL553mhK7yzSmedIE9vVdtsMxEAPQSVMIXCtRIs/5Zi54TthH3S8ufnL6Ruu6SRgOQQ==
+X-Received: by 2002:a62:f211:0:b029:3cd:d5e3:9e85 with SMTP id m17-20020a62f2110000b02903cdd5e39e85mr12024pfh.0.1628537975160;
+        Mon, 09 Aug 2021 12:39:35 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1e16])
+        by smtp.gmail.com with ESMTPSA id b17sm23657962pgl.61.2021.08.09.12.39.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Aug 2021 12:39:34 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH 2/2] layer.conf: Drop compatibility with older than hardknott releases
+Date: Mon,  9 Aug 2021 12:39:31 -0700
+Message-Id: <20210809193931.1080811-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20210809193931.1080811-1-raj.khem@gmail.com>
+References: <20210809193931.1080811-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210807110733.701b873a.paul.barker@sancloud.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Sat, Aug 07, 2021 at 11:07:33AM +0100, Paul Barker wrote:
-> On Tue,  3 Aug 2021 19:11:27 -0400
-> "Denys Dmytriyenko" <denis@denix.org> wrote:
-> 
-> > From: Denys Dmytriyenko <denys@konsulko.com>
-> > 
-> > Upcoming "honister" release changes the override syntax to improve usability,
-> > speed and memory footprint. Update recipes with the new syntax and set layer
-> > compatibility to honister.
-> > 
-> > Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> > ---
-> > v2 - more thorough pass to catch nested and machine overrides
-> 
-> I'm currently converting meta-sancloud to the new override syntax and
-> our layer depends on meta-ti. So I tested with this patch, the build
-> was good and we got a bootable image. Thanks for posting the conversion.
+New override syntax requires it
 
-Thanks Paul! Care to add your Tested-by: then?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 0be0ef92..f399ff03 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti"
+ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti = "6"
+ 
+-LAYERSERIES_COMPAT_meta-ti = "dunfell gatesgarth hardknott"
++LAYERSERIES_COMPAT_meta-ti = "honister"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.32.0
+
