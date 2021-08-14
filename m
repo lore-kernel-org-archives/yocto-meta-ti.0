@@ -1,83 +1,110 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.28367.1628802565532758528
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
+ by mx.groups.io with SMTP id smtpd.web10.49618.1628949326465993739
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Aug 2021 14:09:26 -0700
+ Sat, 14 Aug 2021 06:55:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8400540C8E;
-	Thu, 12 Aug 2021 21:09:24 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TE2-AQdKvgqa; Thu, 12 Aug 2021 21:09:24 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 63E5340C1C;
-	Thu, 12 Aug 2021 21:09:23 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id E92CE174656; Thu, 12 Aug 2021 17:09:22 -0400 (EDT)
-Date: Thu, 12 Aug 2021 17:09:22 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Yogesh Siraswar <yogeshs@ti.com>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [PATCH 1/2] prusw-fw: Update switch firmwares to 3.2.9 version
-Message-ID: <20210812210922.GA1528@denix.org>
-References: <20210628144805.16996-1-vigneshr@ti.com>
- <5df72a60-9793-04b2-bae9-5164b510ee02@ti.com>
- <168CD716D1640986.22485@lists.yoctoproject.org>
+ dkim=pass header.i=@pbarker.dev header.s=fm1 header.b=bn3lE6os;
+ spf=pass (domain: pbarker.dev, ip: 64.147.123.21, mailfrom: paul@pbarker.dev)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
+	by mailout.west.internal (Postfix) with ESMTP id 9ACE3320016F;
+	Sat, 14 Aug 2021 09:55:25 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute2.internal (MEProxy); Sat, 14 Aug 2021 09:55:25 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pbarker.dev; h=
+	date:from:to:cc:subject:message-id:in-reply-to:references
+	:mime-version:content-type; s=fm1; bh=JpHfdge0/LfqOn7fXiFKU4YeDC
+	l5aPk6tgB5JO83hZ0=; b=bn3lE6osYKe6UnssJIosO9JlHxz8WGCDcpBsaB9Qze
+	IMhSQ2gMVeqq5ykse4gQuD7mi6tTAg1pm5ST9YgNEDap+1P5jZ+RmUM0okdlQdX2
+	042N0L3fnaNZPu7ebIddFYdK0969Y+/NQWYKGVxaTWrwhTj0b2cqRghxxcEw4YUy
+	BBmfLyoAHMBs9W5i1HeotpoiWMqsSn3I8ffFr9hbeZwDdAczMu5Jq9uI3mJWPWOn
+	HZB39fvdhkrFnIfUw+R7bFWK0xxeUr3jfoeCADTjYLHiKTMS7faHUSHd+py4dijo
+	BCMPChP/Tan7nZOpbGLXoWGDKQUj8YEjB4Y9t6L/pYLQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=JpHfdg
+	e0/LfqOn7fXiFKU4YeDCl5aPk6tgB5JO83hZ0=; b=WOmcO2n+TPiGILgk9kkw3x
+	hvvNXHCcOhpvhFejD4OjQIGh9mp7Yp5qkpNAf1NV4BzfSxHX4WolMht4/ybe6Yz7
+	zq4+ZxrtFhJ7i7goCkyxXAnEW9UEFvGnepRnSF6K6LJM6i+ags+d0AwY0kh6+C2l
+	2Yify3RP/Qh87FdHKDB2FbSTIWf4lsPdoTRf9neMBiNvVNDtpkkjW9b6EbfeMJra
+	MH8AT/+5eyDT54/E/2NS+nH9KipRnvk3oB5oz9toWEgYNGWoFLT6BgJBMolVeYGD
+	wOjqM3sZMQP1aHaGgz7YMX8VFQWOi96M3rrXyvoRt4E7ZKSKEAE3/7llItnb62Pw
+	==
+X-ME-Sender: <xms:TMsXYf9QNCxdeRzjcz38AdG3-aHPvYVoXDcJrqC7ca9K8hg_TK_IHQ>
+    <xme:TMsXYbuyFehgH1Cd2THZqwKSlLMjHRYe5BHCZ2v7gS9WlOew7CoZrpMOUdvbN3gAB
+    euJ7Ab5nlI8jpNzjVk>
+X-ME-Received: <xmr:TMsXYdBzlTXV3gMO8QErNpjd-xY8_is8k-9kGfrxFDCR3E_6sf0LHOg3Y8qHwg-QjaKhg6IdOqtPpqtw4lN2Gsuz5RVUs_DOkmsI_X1mIs8oW083iL6hud0smJk>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrkeejgdejvdcutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpeffhffvuffkjghfofggtgesghdtreerredtvdenucfhrhhomheprfgruhhluceu
+    rghrkhgvrhcuoehprghulhesphgsrghrkhgvrhdruggvvheqnecuggftrfgrthhtvghrnh
+    epheetjeeihfehleefhfejheeftedttdehueffieefjeefgedvvdeuueffieetuedvnecu
+    ffhomhgrihhnpehpsggrrhhkvghrrdguvghvnecuvehluhhsthgvrhfuihiivgeptdenuc
+    frrghrrghmpehmrghilhhfrhhomhepphgruhhlsehpsggrrhhkvghrrdguvghv
+X-ME-Proxy: <xmx:TMsXYbebUn9oj8ym-qU6hUF7TcIiJxiBk2pJvhtcBWIbE63UKH2HpQ>
+    <xmx:TMsXYUN7Cunzhjiz61WUrM0E0bIbpPVrkuHLwP-RxIrrMqv7qzkgrA>
+    <xmx:TMsXYdlJ3-DAtOaA835HW6_mhp6LA3c3_vD52nRe_3r-Eo8at6mnfQ>
+    <xmx:TcsXYe3GJv78ktrkUXFh1NQtCh8pbEInBgZ0n-Qy2T-Gk8WSdFqgVw>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 14 Aug 2021 09:55:23 -0400 (EDT)
+Date: Sat, 14 Aug 2021 14:55:13 +0100
+From: "Paul Barker" <paul@pbarker.dev>
+To: "Denys Dmytriyenko" <denis@denix.org>
+Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>
+Subject: Re: [meta-ti] [master][PATCH v4] meta-ti: convert to new override syntax in honister
+Message-ID: <20210814145153.26140c02.paul@pbarker.dev>
+In-Reply-To: <1628707145-50420-1-git-send-email-denis@denix.org>
+References: <1628707145-50420-1-git-send-email-denis@denix.org>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <168CD716D1640986.22485@lists.yoctoproject.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-Groupsio-MsgNum: 13989
+Content-Type: multipart/signed; boundary="Sig_/ZxR5ZG6w/Ud0uk9pNVoDPxN";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
 
-Yogesh,
+--Sig_/ZxR5ZG6w/Ud0uk9pNVoDPxN
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-See our earlier discussion on linux-firmware and the comment about splitting 
-individual FW binaries into own packages.
+On Wed, 11 Aug 2021 14:39:05 -0400
+"Denys Dmytriyenko" <denis@denix.org> wrote:
 
+> From: Denys Dmytriyenko <denys@konsulko.com>
+>=20
+> Upcoming "honister" release changes the override syntax to improve usabil=
+ity,
+> speed and memory footprint. Update recipes with the new syntax and set la=
+yer
+> compatibility to honister.
+>=20
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> Tested-by: Paul Barker <paul.barker@sancloud.com>
 
-On Mon, Jun 28, 2021 at 03:54:11PM -0400, Denys Dmytriyenko wrote:
-> On Mon, Jun 28, 2021 at 12:40:22PM -0500, Bajjuri, Praneeth wrote:
-> > Yogesh,Vignesh,
-> > 
-> > On 6/28/2021 9:48 AM, Vignesh Raghavendra wrote:
-> > >From: Lokesh Vutla <lokeshvutla@ti.com>
-> > >
-> > >Update prueth switch firmwares to 3.2.9 version
-> > >
-> > >Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-> > >---
-> > >  recipes-bsp/prusw-fw/{prusw-fw_3.2.7.bb => prusw-fw_3.2.9.bb} | 2 +-
-[snip]
-> > 
-> > Can we have once central recipe for ti-linux-firmware to pick the
-> > right SRCREV when firmware is integrated
-> > recipe-bsp/ti-linux-fw*/*.bb something like that, Instead of
-> > pointing to a different SRCREV in different bb recipe ?
-> > 
-> > I see 9 different recipe-bsp/<>/ locations potentially pointing to
-> > different SRCREV.
-> 
-> Individual FW recipes in meta-ti evolved over long time, being added one by 
-> one, as they were coming from different places and not necessarily hosted in 
-> a single repo in the beginning...
-> 
-> 
-> Has anyone looked at upstreaming those FW images to main linux-firmware at 
-> kernel.org?
-> 
-> There's a recipe for the upstream linux-firmware bundle in oe-core that 
-> resides in recipes-kernel/linux-firmware/.
-> 
-> Until fully upstreamed, it might be possible to bbappend that recipe from 
-> oe-core in meta-ti. But it tries to split up as much of individual FW images 
-> as possible. That way one recipe with a single SRCREV produces multiple binary 
-> packages that can be pulled into the image individually.
+All,
 
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+The current status is that the master branch of meta-ti does not build
+against the current Yocto Project master branch. I recommend moving
+ahead and merging this override conversion sooner rather than later -
+if there are any remaining issues they can be fixed in follow up
+commits. Merging this patch as-is should at least unblock most users of
+meta-ti.
+
+Thanks,
+
+--=20
+Paul Barker
+https://pbarker.dev/
+
+--Sig_/ZxR5ZG6w/Ud0uk9pNVoDPxN
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYIAB0WIQSzjPXf5Y1BDWhU2iCrY1Tsnbr0bgUCYRfLQQAKCRCrY1Tsnbr0
+btSEAP9iNWXu4Simf1Sn+YaaUrMso+NF8SKheUCW2PaJowriEgEAkpsIeHZHkxbx
+qnfePH2nxbpuiZ1cZpGN9ImkM/Kd1w8=
+=2q1D
+-----END PGP SIGNATURE-----
+
+--Sig_/ZxR5ZG6w/Ud0uk9pNVoDPxN--
