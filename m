@@ -1,79 +1,65 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.37802.1629199570714213537
+Received: from smtp-fw-6001.amazon.com (smtp-fw-6001.amazon.com [52.95.48.154])
+ by mx.groups.io with SMTP id smtpd.web12.38837.1629205358542008092
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Aug 2021 04:26:11 -0700
+ Tue, 17 Aug 2021 06:02:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=UErLOVr3;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 17HBQ6QV081899;
-	Tue, 17 Aug 2021 06:26:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1629199566;
-	bh=9kYIjrHLXwDmQvM9tvyVoVxTYDg8W46dB8Y8gl3kNic=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=UErLOVr3Vv4biiGHlNL2GgnYymnmbZYNK9cCj0keIW7aXu0XwrDVKvReU/qmS3k+/
-	 CNvnoskpBq1bidOqWvSlBslMV0Wk6gUg9AGAbLF5bm3L4oC5UdfTQjehs/Bu0FSxN1
-	 KHonPh7KofER6u/AVEIBAgumJs7yEbY7WhIvamxM=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 17HBQ6hn007758
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 17 Aug 2021 06:26:06 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 17
- Aug 2021 06:26:05 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Tue, 17 Aug 2021 06:26:06 -0500
-Received: from [10.250.39.223] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 17HBQ5oY119781;
-	Tue, 17 Aug 2021 06:26:05 -0500
-Subject: Re: [meta-ti] [master][PATCH v4] meta-ti: convert to new override syntax in honister
-To: Paul Barker <paul@pbarker.dev>, Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>, Denys Dmytriyenko <denys@konsulko.com>
-References: <1628707145-50420-1-git-send-email-denis@denix.org>
- <20210814145153.26140c02.paul@pbarker.dev>
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-Message-ID: <b07ad358-203e-4443-6682-8632cbc70feb@ti.com>
-Date: Tue, 17 Aug 2021 06:26:05 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ dkim=pass header.i=@amazon.com header.s=amazon201209 header.b=uCkYgx3m;
+ spf=pass (domain: amazon.com, ip: 52.95.48.154, mailfrom: prvs=856554f49=elberger@amazon.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1629205359; x=1660741359;
+  h=to:from:subject:message-id:date:mime-version:
+   content-transfer-encoding;
+  bh=3tcybTNOSC5G6VUJ8ows9SyP8up5q9rf7ptQ1N7vnrQ=;
+  b=uCkYgx3mZQQv74IBpAHVla2BS62uNNPYji9VhnNgqvgtsL4tLC4WFOLB
+   1WO0/RVShp+lKBqYiNsa/CeDGIbMA61O2nBeHajJ9wHF9+yEUqAX4GeU5
+   h5bMFfg9TcIAiSHH3NUcXM1fU6/3/JVj4/0winIDTxRY8qzq5jIsULtxN
+   k=;
+X-IronPort-AV: E=Sophos;i="5.84,328,1620691200"; 
+   d="scan'208";a="134444867"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-1a-7d76a15f.us-east-1.amazon.com) ([10.43.8.6])
+  by smtp-border-fw-6001.iad6.amazon.com with ESMTP; 17 Aug 2021 13:02:37 +0000
+Received: from EX13MTAUWA001.ant.amazon.com (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
+	by email-inbound-relay-1a-7d76a15f.us-east-1.amazon.com (Postfix) with ESMTPS id D513EA190D
+	for <meta-ti@lists.yoctoproject.org>; Tue, 17 Aug 2021 13:02:36 +0000 (UTC)
+Received: from EX13P01UWA004.ant.amazon.com (10.43.160.127) by
+ EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.23; Tue, 17 Aug 2021 13:02:36 +0000
+Received: from EX13MTAUWA001.ant.amazon.com (10.43.160.58) by
+ EX13P01UWA004.ant.amazon.com (10.43.160.127) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.23; Tue, 17 Aug 2021 13:02:35 +0000
+Received: from u795025edef875e.ant.amazon.com (10.106.179.6) by
+ mail-relay.amazon.com (10.43.160.118) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.23 via Frontend Transport; Tue, 17 Aug 2021 13:02:35 +0000
+To: <meta-ti@lists.yoctoproject.org>
+From: elberger@amazon.com
+Subject: Correct MACHINE for
+Organization: Amazon Web Services
+Message-ID: <ffc46bcf-e291-3684-7964-e8b1958fe5b0@amazon.com>
+Date: Tue, 17 Aug 2021 09:02:34 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210814145153.26140c02.paul@pbarker.dev>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
 
-Applied to master. Thanks
+Hello
 
-On 8/14/2021 8:55 AM, Paul Barker wrote:
-> On Wed, 11 Aug 2021 14:39:05 -0400
-> "Denys Dmytriyenko" <denis@denix.org> wrote:
-> 
->> From: Denys Dmytriyenko <denys@konsulko.com>
->>
->> Upcoming "honister" release changes the override syntax to improve usability,
->> speed and memory footprint. Update recipes with the new syntax and set layer
->> compatibility to honister.
->>
->> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
->> Tested-by: Paul Barker <paul.barker@sancloud.com>
-> 
-> All,
-> 
-> The current status is that the master branch of meta-ti does not build
-> against the current Yocto Project master branch. I recommend moving
-> ahead and merging this override conversion sooner rather than later -
-> if there are any remaining issues they can be fixed in follow up
-> commits. Merging this patch as-is should at least unblock most users of
-> meta-ti.
-> 
-> Thanks,
-> 
-> 
-> 
-> 
-> 
+I am looking for the correct MACHINE config for the TMDS64GPEVM.
+
+At this page I do not see any reference to TMDS64GPEVM.
+
+https://software-dl.ti.com/processor-sdk-linux/esd/AM64X/07_03_01_006/exports/docs/linux/Overview_Building_the_SDK.html#processor-sdk-build-reference
+
+This is the SDK that the board's page points to from here
+
+https://www.ti.com/tool/TMDS64GPEVM
+
+I am also cloning the SDK using the processor-sdk-dunfell-07.01.00.txt 
+config if that makes a difference.  Perhaps the configuration is on a 
+different branch.
+
+Thank you
+
+
