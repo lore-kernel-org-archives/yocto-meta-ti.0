@@ -1,137 +1,166 @@
-Received: from smtp-fw-80007.amazon.com (smtp-fw-80007.amazon.com [99.78.197.218])
- by mx.groups.io with SMTP id smtpd.web09.42361.1629220776474988960
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web08.58732.1629310671824750722
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Aug 2021 10:19:36 -0700
+ Wed, 18 Aug 2021 11:17:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amazon.com header.s=amazon201209 header.b=pQ1ytpil;
- spf=pass (domain: amazon.com, ip: 99.78.197.218, mailfrom: prvs=856554f49=elberger@amazon.com)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=g4FuzGMC;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id j187so2984465pfg.4
+        for <meta-ti@lists.yoctoproject.org>; Wed, 18 Aug 2021 11:17:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1629220776; x=1660756776;
-  h=to:cc:references:from:message-id:date:mime-version:
-   in-reply-to:content-transfer-encoding:subject;
-  bh=3aY8DmRYnoHA0des4cW7Ph0Tog8Xgvg7ayApyY5JlfY=;
-  b=pQ1ytpilbPh+EI+oBCVKPK3038s4zXo+OMRa/i8Jh+wawqXYfiyHtsH6
-   mWSBRg2K7hIr9shMuiRCeVw3VCJI9SD94kNHC1Z8lld2kzSuvRfQpuwjs
-   gUXXUFtOhgx/xMl6CjmqA9iA5+otzrhD2Am4waJINgPawrUVUhtPCeQvo
-   8=;
-X-IronPort-AV: E=Sophos;i="5.84,329,1620691200"; 
-   d="scan'208";a="19839468"
-Subject: Re: [meta-ti] Correct MACHINE for
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO email-inbound-relay-1a-7d76a15f.us-east-1.amazon.com) ([10.25.36.210])
-  by smtp-border-fw-80007.pdx80.corp.amazon.com with ESMTP; 17 Aug 2021 17:19:35 +0000
-Received: from EX13MTAUWA001.ant.amazon.com (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
-	by email-inbound-relay-1a-7d76a15f.us-east-1.amazon.com (Postfix) with ESMTPS id 42A6AA04E0;
-	Tue, 17 Aug 2021 17:19:33 +0000 (UTC)
-Received: from EX13D43UWA004.ant.amazon.com (10.43.160.108) by
- EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
- id 15.0.1497.23; Tue, 17 Aug 2021 17:19:33 +0000
-Received: from EX13MTAUWA001.ant.amazon.com (10.43.160.58) by
- EX13D43UWA004.ant.amazon.com (10.43.160.108) with Microsoft SMTP Server (TLS)
- id 15.0.1497.23; Tue, 17 Aug 2021 17:19:33 +0000
-Received: from u795025edef875e.ant.amazon.com (10.106.179.6) by
- mail-relay.amazon.com (10.43.160.118) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23 via Frontend Transport; Tue, 17 Aug 2021 17:19:33 +0000
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <nikhil.nd@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <169C19A45CFCB862.13456@lists.yoctoproject.org>
- <b0f6f1d9-ecfa-de41-5275-d472f84e5305@amazon.com>
- <7729788a-f9fe-689d-2a1f-b18e72fd9cd6@ti.com>
- <cfc8df2d-ce8f-6b4b-d88a-1d4927a6e001@amazon.com>
- <20210817171500.GF1528@denix.org>
-From: elberger@amazon.com
-Organization: Amazon Web Services
-Message-ID: <63e3781c-79ba-6930-657e-3151e45a663d@amazon.com>
-Date: Tue, 17 Aug 2021 13:19:32 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kf8W66oRb+eB4gILzKX7o4wshCjUPGHO79NWcTzaJt0=;
+        b=g4FuzGMCHl/kcVBStC3UUt+b9G2+YNUMzzaeskA1GMwWH6scCz0vL5aOaOoxNqPo/h
+         sgxs52JIFLGGsH6VlQkjwUJNJMsw3mlkQi5dq8vs4avbAMMM985FSsH4fig4VFO/DnAF
+         FK/nsfdqKiBSjZ28RNIz2QqEubxHcjhjdWWushzMte3PTZOUC1lX3IdA8apnF5Y7Vx3a
+         HC2PufOrudCCCIDJz38LeXrKY4unRuE6WJkIe08Yn6Ep2j9b4LRFEXH8VbHFwXIk4dfz
+         WWEhzRn/xptDjaoExVvu8IGPPLpb4rNg8Bp2KWNNSrUJQL6moy/SStxaBNrXoMZDOu9R
+         zDDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kf8W66oRb+eB4gILzKX7o4wshCjUPGHO79NWcTzaJt0=;
+        b=eF1G/YfgVUj0UX2+yHCs7+9+7gMnqxsLcqBlnwEZNagr1MnpKvnFb+Xb7SMT62ALVE
+         KzKHB4ich1z9fAYKOr+dyC0L7JzdShnAmgOR8aEeJgaIrs1FYXSrE7IsAm2vfSOAuBhd
+         FdNxYmN5sV+v5xvvzqbzTusvewPbV+0oj+W3/hqHXOCCCpkPVZF8c6Rar89k8dlI/6Nm
+         PScntG3eGm2b0WGyXVccGzgCcv8trilQMiL7eevuvWrsVPY+KMSgW9rl3MfjDt90OvFR
+         1BgmBjSebEQdoSHIXwVy5JU6lsxGykWGpOoiLeJZczAA6qwa2CeXpGDh8Do8WXXpu5fY
+         PsFg==
+X-Gm-Message-State: AOAM530VAO57s8rLdExxXfyH77tjCTBU4S7CG8EqIzCvj4WVBsrk8+zy
+	IDxge1nFUGyPXxXhglrZZgD7bv0ASK2MJw==
+X-Google-Smtp-Source: ABdhPJyU/MN3UvF2geiG3rm6UyFZYN3EIjf+8nR8idMNINo8y4MmX5vUia673meFRQAggFZzsgcuvA==
+X-Received: by 2002:a63:9752:: with SMTP id d18mr9921787pgo.320.1629310671213;
+        Wed, 18 Aug 2021 11:17:51 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1d09])
+        by smtp.gmail.com with ESMTPSA id k6sm490194pgk.1.2021.08.18.11.17.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 18 Aug 2021 11:17:50 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-ti][PATCH] machines: Adjust to use new location of tune files in oe-core
+Date: Wed, 18 Aug 2021 11:17:48 -0700
+Message-Id: <20210818181748.3887480-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-In-Reply-To: <20210817171500.GF1528@denix.org>
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On 8/17/21 1:15 PM, Denys Dmytriyenko wrote:
-> CAUTION: This email originated from outside of the organization. Do not click links or open attachments unless you can confirm the sender and know the content is safe.
->
->
->
-> On Tue, Aug 17, 2021 at 12:05:08PM -0400, elberger via lists.yoctoproject.org wrote:
->> Ok wow that SDK version was released only 6 days ago.  Totally
->> missed it.  Thank you.
-> FWIW, according to the config at [1], this SDK release is based on
-> 08.00.00.004 tag in meta-ti/meta-arago, applied about 4 weeks ago.
-> And meta-processor-sdk adds extra OOBE enhancements on top of that.
->
->
->> On 8/17/21 11:43 AM, Nikhil Devshatwar via lists.yoctoproject.org wrote:
->>> CAUTION: This email originated from outside of the organization.
->>> Do not click links or open attachments unless you can confirm the
->>> sender and know the content is safe.
->>> )
->>>
->>>
->>> Hi,
->>>
->>> On 17/08/21 7:29 pm, elberger via lists.yoctoproject.org wrote:
->>>> Nevermind I see it on master branch.
->>>>
->>>> Bummer it seems like I cannot use it for the LTS branch. Is there any
->>>> plan for that?
->>>>
->>> You should see the machine am64xx-evm
->>> The latest SDK release for AM64 Linux is 08.00.00.21  (based on 2021 LTS
->>> kernel)
->>>
->>> You can find config file at [1]
->>> and the latest release page at [2]
->>>
->>> [1]
->>> https://git.ti.com/cgit/arago-project/oe-layersetup/tree/configs/processor-sdk/processor-sdk-08.00.00.21-config.txt
->>>
->>> [2] https://www.ti.com/tool/download/PROCESSOR-SDK-LINUX-AM64X#release-notes
->>>
->>> Regards,
->>> Nikhil D
->>>
->>>
->>>> On 8/17/21 9:02 AM, elberger via lists.yoctoproject.org wrote:
->>>>> CAUTION: This email originated from outside of the organization. Do
->>>>> not click links or open attachments unless you can confirm the sender
->>>>> and know the content is safe.
->>>>>
->>>>>
->>>>>
->>>>> Hello
->>>>>
->>>>> I am looking for the correct MACHINE config for the TMDS64GPEVM.
->>>>>
->>>>> At this page I do not see any reference to TMDS64GPEVM.
->>>>>
->>>>> https://software-dl.ti.com/processor-sdk-linux/esd/AM64X/07_03_01_006/exports/docs/linux/Overview_Building_the_SDK.html#processor-sdk-build-reference
->>>>>
->>>>>
->>>>>
->>>>> This is the SDK that the board's page points to from here
->>>>>
->>>>> https://www.ti.com/tool/TMDS64GPEVM
->>>>>
->>>>> I am also cloning the SDK using the processor-sdk-dunfell-07.01.00.txt
->>>>> config if that makes a difference.  Perhaps the configuration is on a
->>>>> different branch.
->>>>>
->>>>> Thank you
-> --
-> Regards,
-> Denys Dmytriyenko <denis@denix.org>
-> PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-> Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/machine/include/davinci.inc  | 2 +-
+ conf/machine/include/k3r5.inc     | 2 +-
+ conf/machine/include/keystone.inc | 2 +-
+ conf/machine/include/omap-a15.inc | 2 +-
+ conf/machine/include/omap3.inc    | 2 +-
+ conf/machine/include/omap4.inc    | 2 +-
+ conf/machine/include/ti33x.inc    | 2 +-
+ conf/machine/include/ti43x.inc    | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
-Thank you for the detail - was going by the release date here:
+diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
+index d2681740..b8d207de 100644
+--- a/conf/machine/include/davinci.inc
++++ b/conf/machine/include/davinci.inc
+@@ -1,4 +1,4 @@
+-require conf/machine/include/tune-arm926ejs.inc
++require conf/machine/include/arm/armv5/tune-arm926ejs.inc
 
-https://www.ti.com/tool/download/PROCESSOR-SDK-LINUX-RT-AM64X#release-notes
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r54"
+diff --git a/conf/machine/include/k3r5.inc b/conf/machine/include/k3r5.inc
+index 93f08c04..3cc79061 100644
+--- a/conf/machine/include/k3r5.inc
++++ b/conf/machine/include/k3r5.inc
+@@ -5,7 +5,7 @@ SOC_FAMILY:append = ":k3r5"
 
-It is still relatively bleeding edge. And it's good to see TI putting a 
-lot of energy into these new processors.
+ # The closest of existing tunes for Cortex-R5F
+ DEFAULTTUNE = "armv7athf"
+-require conf/machine/include/tune-cortexa8.inc
++require conf/machine/include/arm/armv7a/tune-cortexa8.inc
 
+ # R5 runs early bootloader and loads SYSFW
+ # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am65x/README
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 83dca19d..851328ac 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
+ SOC_FAMILY:append = ":keystone"
 
+ DEFAULTTUNE ?= "armv7athf-neon"
+-require conf/machine/include/tune-cortexa15.inc
++require conf/machine/include/arm/armv7a/tune-cortexa15.inc
+
+ PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 553835c8..57295a85 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
+ SOC_FAMILY:append = ":omap-a15"
+
+ DEFAULTTUNE ?= "armv7athf-neon"
+-require conf/machine/include/tune-cortexa15.inc
++require conf/machine/include/arm/armv7a/tune-cortexa15.inc
+
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r7"
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index ab069b00..6e0d8dbc 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
+ SOC_FAMILY:append = ":omap3"
+
+ DEFAULTTUNE ?= "armv7athf-neon"
+-require conf/machine/include/tune-cortexa8.inc
++require conf/machine/include/arm/armv7a/tune-cortexa8.inc
+
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index b6f43744..b8bd9d37 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
+ SOC_FAMILY:append = ":omap4"
+
+ DEFAULTTUNE ?= "armv7athf-neon"
+-require conf/machine/include/tune-cortexa9.inc
++require conf/machine/include/arm/armv7a/tune-cortexa9.inc
+
+ PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 3da2aba5..896328d9 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
+ SOC_FAMILY:append = ":ti33x"
+
+ DEFAULTTUNE ?= "armv7athf-neon"
+-require conf/machine/include/tune-cortexa8.inc
++require conf/machine/include/arm/armv7a/tune-cortexa8.inc
+
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index eaed1812..0f28cc91 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
+ SOC_FAMILY:append = ":ti43x"
+
+ DEFAULTTUNE ?= "armv7athf-neon"
+-require conf/machine/include/tune-cortexa9.inc
++require conf/machine/include/arm/armv7a/tune-cortexa9.inc
+
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+
+--
+2.33.0
