@@ -1,186 +1,94 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.67149.1629366150495512992
+Received: from egress-ip33a.ess.de.barracuda.com (egress-ip33a.ess.de.barracuda.com [18.185.115.192])
+ by mx.groups.io with SMTP id smtpd.web08.14370.1630311894991675513
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 19 Aug 2021 02:42:31 -0700
+ Mon, 30 Aug 2021 01:24:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=aFjdimjF;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 17J9gPYl096759;
-	Thu, 19 Aug 2021 04:42:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1629366145;
-	bh=QytdG1QXptbOv3WyzsBOZ2rOVhXi9XT4nauJAOrO6vk=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=aFjdimjFh/eq8MgxE/SBClf/ssIcKSgcTnAizawLjraNaDnNWWCvSwZHsaVDlHDPi
-	 XuC3Y6itzUVGflxh3oJQD7Rbix123U69enUHbwZ9eeVxV3ZC/oa2b0MTLqmjf8YswV
-	 +9xRoHTFyiQcNj9c+iMvU5FTFn5ZZjXkYxcyepn0=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 17J9gO4i059315
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 19 Aug 2021 04:42:25 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Thu, 19
- Aug 2021 04:42:24 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2 via
- Frontend Transport; Thu, 19 Aug 2021 04:42:24 -0500
-Received: from [10.250.39.223] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 17J9gOn3007909;
-	Thu, 19 Aug 2021 04:42:24 -0500
-Subject: Re: [meta-ti][PATCH] machines: Adjust to use new location of tune files in oe-core
-To: Denys Dmytriyenko <denis@denix.org>, Khem Raj <raj.khem@gmail.com>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20210818181748.3887480-1-raj.khem@gmail.com>
- <20210818191938.GK1528@denix.org>
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-Message-ID: <7b4692bb-8b17-536b-7562-4c22156732c3@ti.com>
-Date: Thu, 19 Aug 2021 04:42:24 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ dkim=pass header.i=@mistralsolutions.com header.s=google header.b=PFEDtMDL;
+ spf=pass (domain: mistralsolutions.com, ip: 18.185.115.192, mailfrom: sinthu.raja@mistralsolutions.com)
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199]) by mx-outbound9-92.eu-central-1a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 30 Aug 2021 08:24:52 +0000
+Received: by mail-pl1-f199.google.com with SMTP id z10-20020a170903018a00b00134def0a883so72535plg.0
+        for <meta-ti@lists.yoctoproject.org>; Mon, 30 Aug 2021 01:24:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mistralsolutions.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zSynt642PkR5Yh9l2mjC/t1bOt+amz6W4kQUViIWhyc=;
+        b=PFEDtMDLuzDeQPSWhyTeUcShIZBBoYlfXpGV7FqRNbNCzE0M1u04/rQNyVT9n01ZY2
+         TA3thzory3zhkCrkiqRqv5uj7jYd8VB8Tn30eg69UXh4cmtnbXhy21Lbs1tGJ6QthiH5
+         We4op3JNmleV9lPyRr0zBLDtT77jwTPkMSByE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zSynt642PkR5Yh9l2mjC/t1bOt+amz6W4kQUViIWhyc=;
+        b=TzSC29uweq0GB3/asjmevkNk5Fl6umJjDWMBnxOVhBizchDMbcVitkJxQDuASxTrjj
+         Cf/8Wh3uAL6hspSboteaM0KkX4/mKwX5Zx3kcDLbCrXKoPoHaMtBx/nGqB6MEpzKQnWt
+         z9ZxGuDILZA2DVFKRtQtV1QPDsC58lU2rrTzMCJM1GnpU/O016az3Nz9JIbRiNDbDgP/
+         ageg/XfyWXskRG0FuiNAO6em4xa6ZUvtF3sq/QNZ7o5juiY5Jkrcbrms+EWzsZ+eKbtP
+         ZtIZljnP/TgEdOvJ4CeeKkyTuS47MLjjupWfBbwB/bMHAVJ4RcuyD3PXfGmU55DHkNMa
+         f7Bg==
+X-Gm-Message-State: AOAM533IYEcLgpskahQfA7vRaCeYQ3FscKXGE61qm0nESbT1Dfpi36ft
+	HaliVZqFH9jUL248L3rztmZrblNXSMk6Jg++1FBULi3Ilj0hn0ufpjfYjaFqSpmalsQppGPFJBa
+	px7jxF4Uj/0k+6N0MDmmi+lcgpEA29OdwWA6E066HLDKjWj9y+DDHGFdZjvS2jiA=
+X-Received: by 2002:a17:902:8d8b:b0:138:e09d:d901 with SMTP id v11-20020a1709028d8b00b00138e09dd901mr3137003plo.34.1630311890705;
+        Mon, 30 Aug 2021 01:24:50 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzCwaILBFYXN3OKDxncuCalBghlBDW7n6Jo1qRHhp0STLKCjiURSEIcnUqh0NLwZBy+X1I1ng==
+X-Received: by 2002:a17:902:8d8b:b0:138:e09d:d901 with SMTP id v11-20020a1709028d8b00b00138e09dd901mr3136977plo.34.1630311890377;
+        Mon, 30 Aug 2021 01:24:50 -0700 (PDT)
+Return-Path: <sinthu.raja@mistralsolutions.com>
+Received: from LAP568U.mistral.in ([106.51.227.150])
+        by smtp.gmail.com with ESMTPSA id g3sm16218242pgj.66.2021.08.30.01.24.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 30 Aug 2021 01:24:49 -0700 (PDT)
+From: "Sinthu Raja M" <sinthu.raja@mistralsolutions.com>
+X-Google-Original-From: Sinthu Raja <sinthu.raja@ti.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Praneeth Bajjuri <praneeth@ti.com>,
+	Yogesh Siraswar <yogeshs@ti.com>,
+	Sinthu Raja <sinthu.raja@ti.com>
+Subject: [meta-ti][dunfell/master][PATCH] ti-uboot-staging: Update to the latest ti-u-boot-2021.01
+Date: Mon, 30 Aug 2021 13:54:42 +0530
+Message-Id: <20210830082442.4064-1-sinthu.raja@ti.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <20210818191938.GK1528@denix.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-BESS-ID: 1630311891-302396-1343-106433-1
+X-BESS-VER: 2019.1_20210826.1922
+X-BESS-Apparent-Source-IP: 209.85.214.199
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.234167 [from 
+	cloudscan14-95.eu-central-1a.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status: 1
+Content-Transfer-Encoding: 8bit
 
-Applied to master. Thanks.
+From: Sinthu Raja <sinthu.raja@ti.com>
 
-On 8/18/2021 2:19 PM, Denys Dmytriyenko wrote:
-> Right, this has been in my pipeline as well, but I got distracted before
-> finishing it up...
-> 
-> Tested-by: Denys Dmytriyenko <denys@konsulko.com>
-> 
-> This is only for master.
-> 
-> 
-> On Wed, Aug 18, 2021 at 11:17:48AM -0700, Khem Raj wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>   conf/machine/include/davinci.inc  | 2 +-
->>   conf/machine/include/k3r5.inc     | 2 +-
->>   conf/machine/include/keystone.inc | 2 +-
->>   conf/machine/include/omap-a15.inc | 2 +-
->>   conf/machine/include/omap3.inc    | 2 +-
->>   conf/machine/include/omap4.inc    | 2 +-
->>   conf/machine/include/ti33x.inc    | 2 +-
->>   conf/machine/include/ti43x.inc    | 2 +-
->>   8 files changed, 8 insertions(+), 8 deletions(-)
->>
->> diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
->> index d2681740..b8d207de 100644
->> --- a/conf/machine/include/davinci.inc
->> +++ b/conf/machine/include/davinci.inc
->> @@ -1,4 +1,4 @@
->> -require conf/machine/include/tune-arm926ejs.inc
->> +require conf/machine/include/arm/armv5/tune-arm926ejs.inc
->>
->>   # Increase this everytime you change something in the kernel
->>   MACHINE_KERNEL_PR = "r54"
->> diff --git a/conf/machine/include/k3r5.inc b/conf/machine/include/k3r5.inc
->> index 93f08c04..3cc79061 100644
->> --- a/conf/machine/include/k3r5.inc
->> +++ b/conf/machine/include/k3r5.inc
->> @@ -5,7 +5,7 @@ SOC_FAMILY:append = ":k3r5"
->>
->>   # The closest of existing tunes for Cortex-R5F
->>   DEFAULTTUNE = "armv7athf"
->> -require conf/machine/include/tune-cortexa8.inc
->> +require conf/machine/include/arm/armv7a/tune-cortexa8.inc
->>
->>   # R5 runs early bootloader and loads SYSFW
->>   # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am65x/README
->> diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
->> index 83dca19d..851328ac 100644
->> --- a/conf/machine/include/keystone.inc
->> +++ b/conf/machine/include/keystone.inc
->> @@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
->>   SOC_FAMILY:append = ":keystone"
->>
->>   DEFAULTTUNE ?= "armv7athf-neon"
->> -require conf/machine/include/tune-cortexa15.inc
->> +require conf/machine/include/arm/armv7a/tune-cortexa15.inc
->>
->>   PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
->>   PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
->> diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
->> index 553835c8..57295a85 100644
->> --- a/conf/machine/include/omap-a15.inc
->> +++ b/conf/machine/include/omap-a15.inc
->> @@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
->>   SOC_FAMILY:append = ":omap-a15"
->>
->>   DEFAULTTUNE ?= "armv7athf-neon"
->> -require conf/machine/include/tune-cortexa15.inc
->> +require conf/machine/include/arm/armv7a/tune-cortexa15.inc
->>
->>   # Increase this everytime you change something in the kernel
->>   MACHINE_KERNEL_PR = "r7"
->> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
->> index ab069b00..6e0d8dbc 100644
->> --- a/conf/machine/include/omap3.inc
->> +++ b/conf/machine/include/omap3.inc
->> @@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
->>   SOC_FAMILY:append = ":omap3"
->>
->>   DEFAULTTUNE ?= "armv7athf-neon"
->> -require conf/machine/include/tune-cortexa8.inc
->> +require conf/machine/include/arm/armv7a/tune-cortexa8.inc
->>
->>   PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
->>
->> diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
->> index b6f43744..b8bd9d37 100644
->> --- a/conf/machine/include/omap4.inc
->> +++ b/conf/machine/include/omap4.inc
->> @@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
->>   SOC_FAMILY:append = ":omap4"
->>
->>   DEFAULTTUNE ?= "armv7athf-neon"
->> -require conf/machine/include/tune-cortexa9.inc
->> +require conf/machine/include/arm/armv7a/tune-cortexa9.inc
->>
->>   PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
->>   PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
->> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
->> index 3da2aba5..896328d9 100644
->> --- a/conf/machine/include/ti33x.inc
->> +++ b/conf/machine/include/ti33x.inc
->> @@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
->>   SOC_FAMILY:append = ":ti33x"
->>
->>   DEFAULTTUNE ?= "armv7athf-neon"
->> -require conf/machine/include/tune-cortexa8.inc
->> +require conf/machine/include/arm/armv7a/tune-cortexa8.inc
->>
->>   PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
->>
->> diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
->> index eaed1812..0f28cc91 100644
->> --- a/conf/machine/include/ti43x.inc
->> +++ b/conf/machine/include/ti43x.inc
->> @@ -2,7 +2,7 @@ require conf/machine/include/ti-soc.inc
->>   SOC_FAMILY:append = ":ti43x"
->>
->>   DEFAULTTUNE ?= "armv7athf-neon"
->> -require conf/machine/include/tune-cortexa9.inc
->> +require conf/machine/include/arm/armv7a/tune-cortexa9.inc
->>
->>   PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
->>
->> --
->> 2.33.0
-> 
->>
->>
->>
-> 
-> 
-> 
-> 
-> 
-> 
+Update to the latest commit of ti-u-boot-2021.01
+
+Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index 53a95f201..6901dcb50 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+ 
+-PR = "r11"
++PR = "r12"
+ 
+ BRANCH = "ti-u-boot-2021.01"
+ 
+-SRCREV = "53e79d0e89f975eeb874366dd9a92f68b3a599d1"
++SRCREV = "d77252021a85c72d7ff9a4e151b81c4b4b9e1205"
+-- 
+2.31.1
+
