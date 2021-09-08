@@ -1,1375 +1,285 @@
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.101])
- by mx.groups.io with SMTP id smtpd.web11.3906.1630569195426792890
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web12.13532.1631115656900066892
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 02 Sep 2021 00:53:16 -0700
+ Wed, 08 Sep 2021 08:40:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@servotronix1008982.onmicrosoft.com header.s=selector2-servotronix1008982-onmicrosoft-com header.b=her/pG6N;
- spf=pass (domain: servotronix.com, ip: 40.107.7.101, mailfrom: nir.geller@servotronix.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ed49qAZMjqboZBD5jSt7WYr+d1hbjLICEUaW0T1GY6iwbAKWBJNbzLGZMOV7P5jzmO+KfxKE76BKQEvbvTqLL1M1HGu4iVT1iCK7bE8Y87/h7Xb5qmyDRhcHfRQI+oHH48aVhqmzCLgPOSCI4af582xcMX9iijvQfrqkh/o+mazPK5lTuJF1jyzoxzBasCd/XYVHJKEsEpdXC2znekte5FJbMaROF5uFPGhzW6BeWPEle4moktVQJevu9hXajihlDBbgRZ0oebISrnI2Sh03SYyqaluX2hlTBkoT5cAs40j/xgjCcrgdNIin07UpVp6SIpnwsYDtbYloj/W55JPYdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=RJmMT492m5Mf/Wx5s4QbYVA2s3nDJpxEoBtYKHFj/DM=;
- b=SUKYpb3Nuvyu3n7/aJ37zTr5ew80AZxrEvlbwuOUbohnfyxbGt5NcMEyxUsyl2mzHDC2M/NvpqW/SmQ1NhSAFbpoaB3eEUjlXJWZ93oLufJj0Lgbm67flHHdG/Lyw9ic6PEDXXLmeRyhUdTN/r2++3e6ZOEPe6E0ZDyo9Rl7b3FvSk/fPTPApRg0DdgJsDXemQJFNOR6Y1YAGFd4cFj/k05DxA+iuRn+P1IyZnnuL0CPF2omzQFJ42CUUCFWKQYR3v7LAzbfOemcKSfSGQuKJD1Hg+LyiuT2mxXHYoassJ/YDBrCOFbOBWswS1Pvd6kyegpmMPZY+0n1rvgjZNsqNQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=servotronix.com; dmarc=pass action=none
- header.from=servotronix.com; dkim=pass header.d=servotronix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=servotronix1008982.onmicrosoft.com;
- s=selector2-servotronix1008982-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RJmMT492m5Mf/Wx5s4QbYVA2s3nDJpxEoBtYKHFj/DM=;
- b=her/pG6NTwbLei7s8ET/Um2OebkET+PMhWXqfoO4z51xtxspee6BltocN0XAkJE0Bw2GFKDmy0ikDl7/edSdlScmX9h7DViv1lSk9auY+vQE2iFAl8rHejX6i0qnUEhPSCmEaBAA+eMGfbdG6IBoml07a6FpOfMQjg3heudhyY0=
-Received: from VI1PR0702MB3695.eurprd07.prod.outlook.com (2603:10a6:803:7::12)
- by VI1PR07MB6206.eurprd07.prod.outlook.com (2603:10a6:803:af::31) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.17; Thu, 2 Sep
- 2021 07:53:10 +0000
-Received: from VI1PR0702MB3695.eurprd07.prod.outlook.com
- ([fe80::24ea:3eb1:7096:60c7]) by VI1PR0702MB3695.eurprd07.prod.outlook.com
- ([fe80::24ea:3eb1:7096:60c7%5]) with mapi id 15.20.4457.017; Thu, 2 Sep 2021
- 07:53:10 +0000
-From: "Geller, Nir" <nir.geller@servotronix.com>
-To: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: multilib32: libtool-cross_2.4.6.bb configure failure
-Thread-Topic: multilib32: libtool-cross_2.4.6.bb configure failure
-Thread-Index: Adefz5HdnAT6zZ4LRLWedp5YGwZONA==
-Date: Thu, 2 Sep 2021 07:53:09 +0000
-Message-ID: 
- <VI1PR0702MB36958ACA2B718DB2C0EEAA8D90CE9@VI1PR0702MB3695.eurprd07.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: lists.yoctoproject.org; dkim=none (message not signed)
- header.d=none;lists.yoctoproject.org; dmarc=none action=none
- header.from=servotronix.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: fe8c0a0e-dd99-41f9-a226-08d96de6b551
-x-ms-traffictypediagnostic: VI1PR07MB6206:
-x-microsoft-antispam-prvs: 
- <VI1PR07MB62062650C9C452EDACEF5A7490CE9@VI1PR07MB6206.eurprd07.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- 4Pu0Q6Iy52FiurK1/JkRQC/Lgundf6fMl+bJ9lhFZdapCWCYFwxWx9j/wLE3rlq60w3o9ls8zE6c78CHQsiYoI99NWlwSb2txhjWE90kXLHoofqpi56o2jUvILsrduJVidHAJDEfR/ARj39FDSA+NBupfXp4VF5Nt+it61R6FLEA0LeX8dXskXrQ8Akq9q8KMXtTnUUrz00bsg/BfWrVMGWbFQbRIOJSS/4rdZeKlIDCKyOdP/9cpDUNtr5iGFLpR7Zh8QKyPLt0C8Vq4IolSWdawdBTPMt4qF5sTqzB7q7H1att7uP6AfVDg4Oag6xNt4BV+8Qa1A2wb0BEJbOdPADobAa1K2yQq65S0+tq6FC6/loePpW1ZEm2TzGQdHzZhudiBtVSwaHp8WbySkM4QD4wuRgTGP+OzHMKwRgF9pMr2UIXMdHAs90j8IygBOEKZbcBs8fZsVb7zH8KehlO0bdsPDpRdrNJKWSSyXyFYFVXRAZiKNiJ6qtKRaZfYgE843R5sm1MTtaEFEGftANwFm8z2Xh0LR/fEPwL50liuBibXh8vPwqrgrast2eBZNi7YGjLi57gAuG0eTFgtGgTYfP970hh4QMT6XwVzfYl/qKIS/qxenVW5Vqp3yCHxaxrY27VwotJA/jlxoVkCsitQXR6VqO7FwbPLfE6OTK0PrmirqmO9Wr3ZwULSzbx2n7VgOsi64xTQnBbAIPJJipxqI6x3/vSn7YhbbJfr6Jn6EqmUv7tvaVGNi8nUQGfV71omLkt5JSLSHfkFpF+34hdbS2FKetVH6ZlVHYvobfcaukue3lgDbJSHF/k8V73Sgg+
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR0702MB3695.eurprd07.prod.outlook.com;PTR:;CAT:NONE;SFS:(39840400004)(346002)(376002)(396003)(136003)(366004)(38070700005)(30864003)(316002)(7696005)(55016002)(33656002)(966005)(38100700002)(478600001)(52536014)(9686003)(8936002)(122000001)(86362001)(9326002)(83380400001)(2906002)(21615005)(186003)(8676002)(6916009)(66556008)(66946007)(71200400001)(76116006)(166002)(5660300002)(66476007)(6506007)(26005)(66446008)(64756008)(2004002)(559001)(579004);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?4ADF0lwlGNlLx0CUiFPHx0zF5WLwL+d6P/TGU+YiHe2x23YgRjNFmrEfObF+?=
- =?us-ascii?Q?dKXtndoSmw/OhFXYlQwMSdUPwhMM3jve8pNlz9DfeEikLDYZKYfbQw4BS8Yh?=
- =?us-ascii?Q?xR1Q/RyQe75+S3K6u1KZxpi2Y8r1oBnflWQSYz/UB6DTA/QAU7JD9CydjuGq?=
- =?us-ascii?Q?7OpXFn8kTx+ckzuWTgjJPCViaCOM/v0HRjUeiLxCS6Y8PARGvkrvcMRFxfuQ?=
- =?us-ascii?Q?nCDIyi0CoYlChgLddSvR/BwgglMYga/9xDJ84uoY80ya4xk3Jpe2LBSEIyGT?=
- =?us-ascii?Q?3JXwnz1kEzrbsvVnTrw52Q9ldOTvnF/pvcyJfDRKYP+Nza/TpDUg24w8vD7N?=
- =?us-ascii?Q?/t540BFdbvMMNhrbZmJy8S0yu0f3h9D2s+NWZrW1jLSCgoskPmoYfzBavebW?=
- =?us-ascii?Q?cE6zbTivUji9+PKvZ6ZRnPG9pxqN8p2taFUASTbH+y4O9G3QB1UcBvy+x4Hc?=
- =?us-ascii?Q?tmnyLIBjYP8VTrVNI83zOr7se09L/MNX5ndwhX4jBCtHpGsVfZaBr7ZKwW5+?=
- =?us-ascii?Q?z8ykMgvCUKp+WwCevAbQ7r16rY8edafNXPWpdW40MxPriWqVYeV1h7yjXEiI?=
- =?us-ascii?Q?WgPJU3CZYBjGZhJv1OFNMY2ZKJvZ77iR4VxuJgrePMFc3naQuEjWVfw8UaL7?=
- =?us-ascii?Q?YvVU9mODkWgWXIidcscKMTkPYu1QCi3Ofse+lt/lDhgYv65TGOyfOKGXKkbM?=
- =?us-ascii?Q?4r35BwqK/mmSqBxYsKY2Rk8/C+gS75vMvn8y+BElYPkPR0utu+p1taNrnak6?=
- =?us-ascii?Q?piqdz8M7ZiWOnAuJGSpRivtmIrw07dLLB4lPf76feWbCnw0RrIDa9oVjyJFh?=
- =?us-ascii?Q?e3AafKh1q6nEAZotHx681lg6gRfPUWmRmtdio1iV094OYcTqt4aCyUyxSvyt?=
- =?us-ascii?Q?M7Byu5/IurSzqwsmc1jtRhdz3+JqS+METUiuj7te3b2OZEzjqBluPtgOJ7UY?=
- =?us-ascii?Q?4inwUgruOtiKWc7g6FuNUgjfVjbZ+hOM/uSoUV2Cl6uWxt1l68Udk7M+bBbq?=
- =?us-ascii?Q?LeV6HFSK4kZWilTJ4u8tvskUEQlSwoRBEvbhJCqHyn7hahUipHt6SdRdpmEr?=
- =?us-ascii?Q?29yHhH8a2tFK8sE41MZHESkaY514uBth4U/Cf9QkrzWcPW6x1fVvCrhS8So+?=
- =?us-ascii?Q?KC5fEDCFA8BpFrwUv/tV1xFQE9XBbVbzbeloN8qz/MCfz6hm53smqocElN+r?=
- =?us-ascii?Q?7MwYCTvZeoJ6BgTN37ZSZcYULgN5qZL/j4z/ixwshNbp8Skt/WZ98OaBPljF?=
- =?us-ascii?Q?4i/qXdqUNCAf6ri/QsPzGY+MMZTh7Gd8CJmZ/PHlHlMUUyC6he5xIWarcVBt?=
- =?us-ascii?Q?uM6aAvncc/8ZDpYtHG1R95kM?=
-x-ms-exchange-transport-forked: True
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=IepFHNWH;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 188Feso4001148;
+	Wed, 8 Sep 2021 10:40:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1631115654;
+	bh=n4C0pcFhbeF/q9iPX4qokTA4jP9qAznyuX7QNPyXXyc=;
+	h=Subject:To:References:From:Date:In-Reply-To;
+	b=IepFHNWHRtzPcoDCtpg74KfYk6GuNtZWRQSgp0095nYY7VEOXnU2Zv9Gpg1K67vO2
+	 Knv+W7Nz7/uPR9VRUVAMiNNUZd6gDiq12ugHdHkNonznqfiPeQ2zoiCj94E6ediuQ9
+	 wNT9XleRzz57+GoBr9A74b9Oxndk3EjKFASfJ3nk=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 188FeseW035877
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 8 Sep 2021 10:40:54 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 8
+ Sep 2021 10:40:54 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Wed, 8 Sep 2021 10:40:54 -0500
+Received: from [10.250.34.224] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 188Fes7e049152;
+	Wed, 8 Sep 2021 10:40:54 -0500
+Subject: Re: [meta-ti] multilib32: libtool-cross_2.4.6.bb configure failure
+To: "Geller, Nir" <nir.geller@servotronix.com>,
+        "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
+References: <VI1PR0702MB36958ACA2B718DB2C0EEAA8D90CE9@VI1PR0702MB3695.eurprd07.prod.outlook.com>
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+Message-ID: <b70677c4-7302-56f1-4a57-105cc0e1b522@ti.com>
+Date: Wed, 8 Sep 2021 10:40:54 -0500
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-X-OriginatorOrg: servotronix.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR0702MB3695.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe8c0a0e-dd99-41f9-a226-08d96de6b551
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Sep 2021 07:53:10.0688
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5c4bfc7d-fde6-4201-a2d6-2a396cc790f7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: TIeAZvsCbOx9xdHAjOt20BpVqs4Pnd2dJ4tNq40GXk+qOusn1j6JV8N1D38xj4LDQjWFHz1H0RSxGpjOoSVtGvsVKWiq289hj+P2z9i4Phc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR07MB6206
+In-Reply-To: <VI1PR0702MB36958ACA2B718DB2C0EEAA8D90CE9@VI1PR0702MB3695.eurprd07.prod.outlook.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_VI1PR0702MB36958ACA2B718DB2C0EEAA8D90CE9VI1PR0702MB3695_"
-
---_000_VI1PR0702MB36958ACA2B718DB2C0EEAA8D90CE9VI1PR0702MB3695_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hi There,
-
-Following the instruction from TI
-
-https://software-dl.ti.com/processor-sdk-linux-rt/esd/AM64X/latest/exports/=
-docs/linux/Overview_Building_the_SDK.html
-
-I've successfully set up a yocto project for the AM64x.
-
-Toolchain used is 9.2-2019.12
-
-Now I need to add support for multilib32 because I have some software that =
-can be compiled only 32 bit.
-
-I added the following lines to conf/local.conf
-
-# Define multilib target
-require conf/multilib.conf
-MULTILIBS =3D "multilib:lib32"
-DEFAULTTUNE_virtclass-multilib-lib32 =3D "armv7athf-neon"
-
-And I am able to build a few packages with lib32- successfully, however, li=
-b32-libtool-cross fails at the configure stage:
-
---host is set to the value armmllib32-linux-gnueabi
-
-ERROR: lib32-libtool-cross-2.4.6-r0 do_configure: configure failed
-ERROR: lib32-libtool-cross-2.4.6-r0 do_configure: Execution of '/home/build=
-/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux=
--gnueabi/lib32-libtool-cross/2.4.6-r0/temp/run.do_configure.29261' failed w=
-ith exit code 1:
-automake (GNU automake) 1.16.1
-Copyright (C) 2018 Free Software Foundation, Inc.
-License GPLv2+: GNU GPL version 2 or later <https://gnu.org/licenses/gpl-2.=
-0.html>
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-
-Written by Tom Tromey <tromey@...<mailto:tromey@...>>
-       and Alexandre Duret-Lutz <adl@...<mailto:adl@...>>.
-AUTOV is 1.16
-autoreconf: Entering directory `.'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal --system-acdir=3D/home/build/tisdk/build/arago=
--tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-lib=
-tool-cross/2.4.6-r0/lib32-recipe-sysroot/home/build/tisdk/build/arago-tmp-e=
-xternal-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-c=
-ross/2.4.6-r0/lib32-recipe-sysroot/usr/share/aclocal/ --automake-acdir=3D/h=
-ome/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmlli=
-b32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe-sysroot-native/usr/sh=
-are/aclocal-1.16 -I /home/build/tisdk/build/arago-tmp-external-arm-glibc/wo=
-rk/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/libtoo=
-l-2.4.6/m4/ -I /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/ar=
-mv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/libtool-2.4=
-.6/tests/ -I /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv=
-7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe-sysroo=
-t-native/usr/share/aclocal/ --force --warnings=3Dcross -I m4
-aclocal: warning: unknown warning category 'cross'
-autoreconf: configure.ac: tracing
-autoreconf: running: /home/build/tisdk/build/arago-tmp-external-arm-glibc/w=
-ork/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recip=
-e-sysroot-native/usr/bin/autoconf --include=3D/home/build/tisdk/build/arago=
--tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-lib=
-tool-cross/2.4.6-r0/libtool-2.4.6/m4/ --include=3D/home/build/tisdk/build/a=
-rago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32=
--libtool-cross/2.4.6-r0/libtool-2.4.6/tests/ --include=3D/home/build/tisdk/=
-build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueab=
-i/lib32-libtool-cross/2.4.6-r0/recipe-sysroot-native/usr/share/aclocal/ --f=
-orce --warnings=3Dcross
-autoreconf: running: /home/build/tisdk/build/arago-tmp-external-arm-glibc/w=
-ork/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recip=
-e-sysroot-native/usr/bin/autoheader --include=3D/home/build/tisdk/build/ara=
-go-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-l=
-ibtool-cross/2.4.6-r0/libtool-2.4.6/m4/ --include=3D/home/build/tisdk/build=
-/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib=
-32-libtool-cross/2.4.6-r0/libtool-2.4.6/tests/ --include=3D/home/build/tisd=
-k/build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnue=
-abi/lib32-libtool-cross/2.4.6-r0/recipe-sysroot-native/usr/share/aclocal/ -=
--force --warnings=3Dcross
-autoreconf: running: automake --add-missing --copy --force-missing --warnin=
-gs=3Dcross
-automake: warning: unknown warning category 'cross'
-autoreconf: running: gnu-configize
-autoreconf: Leaving directory `.'
-| NOTE: Running ../libtool-2.4.6/configure  --build=3Dx86_64-linux         =
-                        --host=3Darmmllib32-linux-gnueabi                  =
- --target=3Darmmllib32-linux-gnueabi                         --prefix=3D/us=
-r           --exec_prefix=3D/usr                          --bindir=3D/usr/b=
-in                             --sbindir=3D/usr/sbin                       =
-       --libexecdir=3D/usr/libexec                             --datadir=3D=
-/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonml=
-lib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/lib32-recipe-sysroot/usr/s=
-hare                      --sysconfdir=3D/etc                            --=
-sharedstatedir=3D/com                                 --localstatedir=3D/va=
-r                             --libdir=3D/usr/lib                          =
-     --includedir=3D/usr/include                                 --oldinclu=
-dedir=3D/usr/include                      --infodir=3D/home/build/tisdk/bui=
-ld/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/l=
-ib32-libtool-cross/2.4.6-r0/lib32-recipe-sysroot/usr/share/info            =
-                     --mandir=3D/home/build/tisdk/build/arago-tmp-external-=
-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4=
-.6-r0/lib32-recipe-sysroot/usr/share/man                   --disable-silent=
--rules                      --disable-dependency-tracking                  =
-              --with-libtool-sysroot=3D/home/build/tisdk/build/arago-tmp-ex=
-ternal-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cr=
-oss/2.4.6-r0/lib32-recipe-sysroot
-configure: loading site script /home/build/tisdk/sources/meta-openembedded/=
-meta-networking/site/endian-little
-configure: loading site script /home/build/tisdk/sources/oe-core/meta/site/=
-endian-little
-configure: loading site script /home/build/tisdk/sources/oe-core/meta/site/=
-arm-common
-configure: loading site script /home/build/tisdk/sources/oe-core/meta/site/=
-arm-32
-configure: loading site script /home/build/tisdk/sources/oe-core/meta/site/=
-common-linux
-configure: loading site script /home/build/tisdk/sources/oe-core/meta/site/=
-common-glibc
-configure: loading site script /home/build/tisdk/sources/oe-core/meta/site/=
-arm-linux
-configure: loading site script /home/build/tisdk/sources/oe-core/meta/site/=
-common
-## ------------------------- ##
-## Configuring libtool 2.4.6 ##
-## ------------------------- ##
-
-checking for GNU M4 that supports accurate traces... /home/build/tisdk/buil=
-d/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/li=
-b32-libtool-cross/2.4.6-r0/recipe-sysroot-native/usr/bin/m4
-checking whether /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/=
-armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe-sy=
-sroot-native/usr/bin/m4 accepts --gnu... yes
-checking how m4 supports trace files... --debugfile
-checking for a BSD-compatible install... /home/build/tisdk/build/arago-tmp-=
-external-arm-glibc/hosttools/install -c
-checking whether build environment is sane... yes
-checking for armmllib32-linux-gnueabi-strip... arm-none-linux-gnueabihf-str=
-ip
-checking for a thread-safe mkdir -p... /home/build/tisdk/build/arago-tmp-ex=
-ternal-arm-glibc/hosttools/mkdir -p
-checking for gawk... gawk
-checking whether make sets $(MAKE)... yes
-checking whether make supports nested variables... yes
-checking whether make supports nested variables... (cached) yes
-checking build system type... x86_64-pc-linux-gnu
-checking host system type... Invalid configuration `armmllib32-linux-gnueab=
-i': machine `armmllib32-unknown' not recognized
-configure: error: /bin/bash ../libtool-2.4.6/build-aux/config.sub armmllib3=
-2-linux-gnueabi failed
-WARNING: /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2=
-hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/temp/run.do_confi=
-gure.29261:1 exit 1 from 'exit 1'
-
-ERROR: Logfile of failure stored in: /home/build/tisdk/build/arago-tmp-exte=
-rnal-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cros=
-s/2.4.6-r0/temp/log.do_configure.29261
-
-
-
-
-
-Investigating run.do_configure suggests that in the configure stage oe_runc=
-onf() is set with what seems to be wrong -host and -target values:
- --host=3Darmmllib32-linux-gnueabi   --target=3Darmmllib32-linux-gnueabi
-
-
-Executing
-bitbake lib32-libtool-cross -e
-Yields, among many others,
-
-18513 # $TARGET_VENDOR [3 operations]
-18514 #   set /home/build/tisdk/sources/oe-core/meta/conf/bitbake.conf:132
-18515 #     "-oe"
-18516 #   set /home/build/tisdk/sources/meta-arago/meta-arago-distro/conf/d=
-istro/include/toolchain-arm.inc:15
-18517 #     ""
-18518 #   override[virtclass-multilib-lib32]:set multilib_global.bbclass:15=
-9 [multilib_virtclass_handler_vendor]
-18519 #     "mllib32"
-18520 # pre-expansion value:
-18521 #   "mllib32"
-18522 TARGET_VENDOR=3D"mllib32"
-
-Later, HOST_VENDOR  =3D "${TARGET_VENDOR}",
-And HOST_SYS =3D "${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}"
-
-So the variable SYS_HOST is expanded to armmllib32-linux-gnueabi which seem=
-s to be wrong for lib32-libtool-cross.
-
-Manually running the configure command with -host=3Darm-none-linux-gnueabih=
-f is working properly.
-
-Following suggestion by Richard Purdie
-https://lists.yoctoproject.org/g/poky/message/12535
-
-
-Adding
-
-TARGET_VENDOR =3D "-oe"
-
-To conf/local.conf didn't do the trick.
-
-
-
-So I modified
-
-sources/meta-arago/meta-arago-distro/conf/distro/include/toolchain-arm.inc
-
--TARGET_VENDOR =3D ""
-
-+TARGET_VENDOR =3D "-oe"
-
-
-
-And then
-
-bitbake lib32-libtool-cross
-
-finished successfully, but when trying to build the entire image libtool-cr=
-oss failed with
-
-
-
-## ------------------------- ##
-
-## Configuring libtool 2.4.6 ##
-
-## ------------------------- ##
-
-
-
-checking for GNU M4 that supports accurate traces... /home/build/tisdk/buil=
-d/arago-tmp-external-arm-glibc/work/aarch64-oe-linux/libtool-cross/2.4.6-r0=
-/recipe-sysroot-native/usr/bin/m4
-
-checking whether /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/=
-aarch64-oe-linux/libtool-cross/2.4.6-r0/recipe-sysroot-native/usr/bin/m4 ac=
-cepts --gnu... yes checking how m4 supports trace files... --debugfile chec=
-king for a BSD-compatible install... /home/build/tisdk/build/arago-tmp-exte=
-rnal-arm-glibc/hosttools/install -c checking whether build environment is s=
-ane... yes checking for aarch64-oe-linux-strip... aarch64-none-linux-gnu-st=
-rip checking for a thread-safe mkdir -p... /home/build/tisdk/build/arago-tm=
-p-external-arm-glibc/hosttools/mkdir -p checking for gawk... gawk checking =
-whether make sets $(MAKE)... yes checking whether make supports nested vari=
-ables... yes checking whether make supports nested variables... (cached) ye=
-s checking build system type... x86_64-pc-linux-gnu checking host system ty=
-pe... aarch64-oe-linux-gnu
-
-configure: autobuild project... GNU Libtool
-
-configure: autobuild revision... 2.4.6
-
-configure: autobuild hostname... osboxes
-
-configure: autobuild mode... default
-
-configure: autobuild timestamp... 20210818T123141Z checking for aarch64-oe-=
-linux-gcc... aarch64-none-linux-gnu-gcc  --sysroot=3D/home/build/tisdk/buil=
-d/arago-tmp-external-arm-glibc/work/aarch64-oe-linux/libtool-cross/2.4.6-r0=
-/recipe-sysroot
-
-checking whether the C compiler works... no
-
-configure: error: in `/home/build/tisdk/build/arago-tmp-external-arm-glibc/=
-work/aarch64-oe-linux/libtool-cross/2.4.6-r0/build':
-
-configure: error: C compiler cannot create executables See `config.log' for=
- more details
-
-WARNING: /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/aarch64-=
-oe-linux/libtool-cross/2.4.6-r0/temp/run.do_configure.1778:1 exit 1 from 'e=
-xit 1'
-
-
-
-ERROR: Logfile of failure stored in: /home/build/tisdk/build/arago-tmp-exte=
-rnal-arm-glibc/work/aarch64-oe-linux/libtool-cross/2.4.6-r0/temp/log.do_con=
-figure.1778
-
-
-
-Can you please suggest how to fix this issue?
-I suspect it will come up in other packages as well.
-
-
-Thanks a lot,
-
-Nir.
-
-
---_000_VI1PR0702MB36958ACA2B718DB2C0EEAA8D90CE9VI1PR0702MB3695_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:Helvetica;
-	panose-1:2 11 6 4 2 2 2 2 2 4;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
-	{mso-style-priority:99;
-	mso-style-link:"Plain Text Char";
-	margin:0cm;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri",sans-serif;
-	color:windowtext;}
-span.PlainTextChar
-	{mso-style-name:"Plain Text Char";
-	mso-style-priority:99;
-	mso-style-link:"Plain Text";
-	font-family:"Calibri",sans-serif;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri",sans-serif;}
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 90.0pt 72.0pt 90.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:=
-break-word">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">Hi There=
-,<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Following the instruction from TI<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333"><a href=3D"https://software-dl.ti.com/processor-sdk-linux-=
-rt/esd/AM64X/latest/exports/docs/linux/Overview_Building_the_SDK.html" targ=
-et=3D"_blank"><span style=3D"color:#337AB7;text-decoration:none">https://so=
-ftware-dl.ti.com/processor-sdk-linux-rt/esd/AM64X/latest/exports/docs/linux=
-/Overview_Building_the_SDK.html</span></a><o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">I&#8217;ve successfully set up a yocto project for the AM6=
-4x.<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Toolchain used is 9.2-2019.12<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Now I need to add support for multilib32 because I have so=
-me software that can be compiled only 32 bit.<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">I added the following lines to conf/local.conf<o:p></o:p><=
-/span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333"># Define multilib target<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">require conf/multilib.conf<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">MULTILIBS =3D &quot;multilib:lib32&quot;<o:p></o:p></span>=
-</p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">DEFAULTTUNE_virtclass-multilib-lib32 =3D &quot;armv7athf-n=
-eon&quot;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">And I am able to build a few packages with lib32- successf=
-ully, however, lib32-libtool-cross fails at the configure stage:<o:p></o:p>=
-</span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">--host is set to the value armmllib32-linux-gnueabi<o:p></=
-o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">ERROR: lib32-libtool-cross-2.4.6-r0 do_configure: configur=
-e failed<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">ERROR: lib32-libtool-cross-2.4.6-r0 do_configure: Executio=
-n of '/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-=
-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/temp/run.do_configur=
-e.29261'
- failed with exit code 1:<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">automake (GNU automake) 1.16.1<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Copyright (C) 2018 Free Software Foundation, Inc.<o:p></o:=
-p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">License GPLv2+: GNU GPL version 2 or later &lt;<a href=3D"=
-https://gnu.org/licenses/gpl-2.0.html" target=3D"_blank"><span style=3D"col=
-or:#337AB7;text-decoration:none">https://gnu.org/licenses/gpl-2.0.html</spa=
-n></a>&gt;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">This is free software: you are free to change and redistri=
-bute it.<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">There is NO WARRANTY, to the extent permitted by law.<o:p>=
-</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Written by Tom Tromey &lt;<a href=3D"mailto:tromey@..." ta=
-rget=3D"_blank"><span style=3D"color:#337AB7;text-decoration:none">tromey@.=
-..</span></a>&gt;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and Alexandre Duret-L=
-utz &lt;<a href=3D"mailto:adl@..." target=3D"_blank"><span style=3D"color:#=
-337AB7;text-decoration:none">adl@...</span></a>&gt;.<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">AUTOV is 1.16<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: Entering directory `.'<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: configure.ac: not using Gettext<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: running: aclocal --system-acdir=3D/home/build/=
-tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-=
-gnueabi/lib32-libtool-cross/2.4.6-r0/lib32-recipe-sysroot/home/build/tisdk/=
-build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueab=
-i/lib32-libtool-cross/2.4.6-r0/lib32-recipe-sysroot/usr/share/aclocal/
- --automake-acdir=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/wo=
-rk/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe=
--sysroot-native/usr/share/aclocal-1.16 -I /home/build/tisdk/build/arago-tmp=
--external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool=
--cross/2.4.6-r0/libtool-2.4.6/m4/
- -I /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-ne=
-onmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/libtool-2.4.6/tests/ -=
-I /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-neon=
-mllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe-sysroot-native/us=
-r/share/aclocal/
- --force --warnings=3Dcross -I m4<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">aclocal: warning: unknown warning category 'cross'<o:p></o=
-:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: configure.ac: tracing<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: running: /home/build/tisdk/build/arago-tmp-ext=
-ernal-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cro=
-ss/2.4.6-r0/recipe-sysroot-native/usr/bin/autoconf
- --include=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv=
-7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/libtool-2.4.6=
-/m4/ --include=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/=
-armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/libtool-2=
-.4.6/tests/
- --include=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv=
-7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe-sysroo=
-t-native/usr/share/aclocal/ --force --warnings=3Dcross<o:p></o:p></span></p=
->
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: running: /home/build/tisdk/build/arago-tmp-ext=
-ernal-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cro=
-ss/2.4.6-r0/recipe-sysroot-native/usr/bin/autoheader
- --include=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv=
-7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/libtool-2.4.6=
-/m4/ --include=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/=
-armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/libtool-2=
-.4.6/tests/
- --include=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv=
-7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe-sysroo=
-t-native/usr/share/aclocal/ --force --warnings=3Dcross<o:p></o:p></span></p=
->
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: running: automake --add-missing --copy --force=
--missing --warnings=3Dcross<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">automake: warning: unknown warning category 'cross'<o:p></=
-o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: running: gnu-configize<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">autoreconf: Leaving directory `.'<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">| NOTE: Running ../libtool-2.4.6/configure&nbsp; --build=
-=3Dx86_64-linux &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--host=3Darmmllib32-li=
-nux-gnueabi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--target=3Darmmllib32-linux-gnueabi
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--prefix=
-=3D/usr &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--exec_prefi=
-x=3D/usr &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&n=
-bsp;--bindir=3D/usr/bin &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--sbindir=3D/usr/sbin &nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nb=
-sp;--libexecdir=3D/usr/libexec &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--datadir=3D/home/build/tisdk/b=
-uild/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi=
-/lib32-libtool-cross/2.4.6-r0/lib32-recipe-sysroot/usr/share
- &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--sysconfdir=3D/etc &nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--shar=
-edstatedir=3D/com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--localstatedir=3D/v=
-ar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp; &nbsp;&nbsp;--libdir=3D/usr/lib &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;--includedir=
-=3D/usr/include &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- &nbsp;&nbsp;--oldincludedir=3D/usr/include &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p; &nbsp;&nbsp;--infodir=3D/home/build/tisdk/build/arago-tmp-external-arm-g=
-libc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0=
-/lib32-recipe-sysroot/usr/share/info &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;-=
--mandir=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at=
-2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/lib32-recipe-sys=
-root/usr/share/man
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp; &nbsp;&nbsp;--disable-silent-rules &nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; &nbsp;&nbsp;--disable-dependency-tracking &nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nb=
-sp;&nbsp;--with-libtool-sysroot=3D/home/build/tisdk/build/arago-tmp-externa=
-l-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2=
-.4.6-r0/lib32-recipe-sysroot<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/m=
-eta-openembedded/meta-networking/site/endian-little<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/o=
-e-core/meta/site/endian-little<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/o=
-e-core/meta/site/arm-common<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/o=
-e-core/meta/site/arm-32<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/o=
-e-core/meta/site/common-linux<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/o=
-e-core/meta/site/common-glibc<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/o=
-e-core/meta/site/arm-linux<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: loading site script /home/build/tisdk/sources/o=
-e-core/meta/site/common<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">## ------------------------- ##<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">## Configuring libtool 2.4.6 ##<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">## ------------------------- ##<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking for GNU M4 that supports accurate traces... /home=
-/build/tisdk/build/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32=
--linux-gnueabi/lib32-libtool-cross/2.4.6-r0/recipe-sysroot-native/usr/bin/m=
-4<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking whether /home/build/tisdk/build/arago-tmp-externa=
-l-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2=
-.4.6-r0/recipe-sysroot-native/usr/bin/m4 accepts
- --gnu... yes<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking how m4 supports trace files... --debugfile<o:p></=
-o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking for a BSD-compatible install... /home/build/tisdk=
-/build/arago-tmp-external-arm-glibc/hosttools/install -c<o:p></o:p></span><=
-/p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking whether build environment is sane... yes<o:p></o:=
-p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking for armmllib32-linux-gnueabi-strip... arm-none-li=
-nux-gnueabihf-strip<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking for a thread-safe mkdir -p... /home/build/tisdk/b=
-uild/arago-tmp-external-arm-glibc/hosttools/mkdir -p<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking for gawk... gawk<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking whether make sets $(MAKE)... yes<o:p></o:p></span=
-></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking whether make supports nested variables... yes<o:p=
-></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking whether make supports nested variables... (cached=
-) yes<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking build system type... x86_64-pc-linux-gnu<o:p></o:=
-p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">checking host system type... Invalid configuration `armmll=
-ib32-linux-gnueabi': machine `armmllib32-unknown' not recognized<o:p></o:p>=
-</span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">configure: error: /bin/bash ../libtool-2.4.6/build-aux/con=
-fig.sub armmllib32-linux-gnueabi failed<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">WARNING: /home/build/tisdk/build/arago-tmp-external-arm-gl=
-ibc/work/armv7at2hf-neonmllib32-linux-gnueabi/lib32-libtool-cross/2.4.6-r0/=
-temp/run.do_configure.29261:1 exit 1 from 'exit
- 1'<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">ERROR: Logfile of failure stored in: /home/build/tisdk/bui=
-ld/arago-tmp-external-arm-glibc/work/armv7at2hf-neonmllib32-linux-gnueabi/l=
-ib32-libtool-cross/2.4.6-r0/temp/log.do_configure.29261<o:p></o:p></span></=
-p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">Investig=
-ating run.do_configure suggests that in the configure stage oe_runconf() is=
- set with what seems to be wrong &#8211;host and &#8211;target
- values:<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">&nbsp;--=
-host=3Darmmllib32-linux-gnueabi &nbsp;&nbsp;--target=3Darmmllib32-linux-gnu=
-eabi<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">Executin=
-g<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">bitbake =
-lib32-libtool-cross -e<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">Yields, =
-among many others,<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">&nbsp;<o=
-:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18513 # =
-$TARGET_VENDOR [3 operations]<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18514 #&=
-nbsp;&nbsp; set /home/build/tisdk/sources/oe-core/meta/conf/bitbake.conf:13=
-2<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18515 #&=
-nbsp;&nbsp;&nbsp;&nbsp; &quot;-oe&quot;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18516 #&=
-nbsp;&nbsp; set /home/build/tisdk/sources/meta-arago/meta-arago-distro/conf=
-/distro/include/toolchain-arm.inc:15<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18517 #&=
-nbsp; &nbsp;&nbsp;&nbsp;&quot;&quot;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18518 #&=
-nbsp;&nbsp; override[virtclass-multilib-lib32]:set multilib_global.bbclass:=
-159 [multilib_virtclass_handler_vendor]<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18519 #&=
-nbsp;&nbsp;&nbsp;&nbsp; &quot;mllib32&quot;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18520 # =
-pre-expansion value:<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18521 #&=
-nbsp;&nbsp; &quot;mllib32&quot;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">18522 TA=
-RGET_VENDOR=3D&quot;mllib32&quot;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">&nbsp;<o=
-:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">Later, H=
-OST_VENDOR &nbsp;=3D &quot;${TARGET_VENDOR}&quot;,<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">And HOST=
-_SYS =3D &quot;${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}&quot;<o:p></o:p></span=
-></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">So t<spa=
-n style=3D"background:white">he variable SYS_HOST is expanded to armmllib32=
--linux-gnueabi which seems to be wrong for lib32-libtool-cross.</span><o:p>=
-</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Manually running the configure command with &#8211;host=3D=
-arm-none-linux-gnueabihf is working properly.<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">Followin=
-g suggestion by Richard Purdie<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><a href=
-=3D"https://lists.yoctoproject.org/g/poky/message/12535">https://lists.yoct=
-oproject.org/g/poky/message/12535</a><o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoPlainText">Adding<o:p></o:p></p>
-<p class=3D"MsoPlainText">TARGET_VENDOR =3D &quot;-oe&quot;<o:p></o:p></p>
-<p class=3D"MsoPlainText">To conf/local.conf didn't do the trick.<o:p></o:p=
-></p>
-<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoPlainText">So I modified<o:p></o:p></p>
-<p class=3D"MsoPlainText">sources/meta-arago/meta-arago-distro/conf/distro/=
-include/toolchain-arm.inc<o:p></o:p></p>
-<p class=3D"MsoPlainText">-TARGET_VENDOR =3D &quot;&quot;<o:p></o:p></p>
-<p class=3D"MsoPlainText">+TARGET_VENDOR =3D &quot;-oe&quot;<o:p></o:p></p>
-<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoPlainText">And then<o:p></o:p></p>
-<p class=3D"MsoPlainText">bitbake lib32-libtool-cross<o:p></o:p></p>
-<p class=3D"MsoPlainText">finished successfully, but when trying to build t=
-he entire image libtool-cross failed with<o:p></o:p></p>
-<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoPlainText">## ------------------------- ##<o:p></o:p></p>
-<p class=3D"MsoPlainText">## Configuring libtool 2.4.6 ##<o:p></o:p></p>
-<p class=3D"MsoPlainText">## ------------------------- ##<o:p></o:p></p>
-<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoPlainText">checking for GNU M4 that supports accurate traces=
-... /home/build/tisdk/build/arago-tmp-external-arm-glibc/work/aarch64-oe-li=
-nux/libtool-cross/2.4.6-r0/recipe-sysroot-native/usr/bin/m4<o:p></o:p></p>
-<p class=3D"MsoPlainText">checking whether /home/build/tisdk/build/arago-tm=
-p-external-arm-glibc/work/aarch64-oe-linux/libtool-cross/2.4.6-r0/recipe-sy=
-sroot-native/usr/bin/m4 accepts --gnu... yes checking how m4 supports trace=
- files... --debugfile checking for
- a BSD-compatible install... /home/build/tisdk/build/arago-tmp-external-arm=
--glibc/hosttools/install -c checking whether build environment is sane... y=
-es checking for aarch64-oe-linux-strip... aarch64-none-linux-gnu-strip chec=
-king for a thread-safe mkdir -p...
- /home/build/tisdk/build/arago-tmp-external-arm-glibc/hosttools/mkdir -p ch=
-ecking for gawk... gawk checking whether make sets $(MAKE)... yes checking =
-whether make supports nested variables... yes checking whether make support=
-s nested variables... (cached) yes
- checking build system type... x86_64-pc-linux-gnu checking host system typ=
-e... aarch64-oe-linux-gnu<o:p></o:p></p>
-<p class=3D"MsoPlainText">configure: autobuild project... GNU Libtool<o:p><=
-/o:p></p>
-<p class=3D"MsoPlainText">configure: autobuild revision... 2.4.6<o:p></o:p>=
-</p>
-<p class=3D"MsoPlainText">configure: autobuild hostname... osboxes<o:p></o:=
-p></p>
-<p class=3D"MsoPlainText">configure: autobuild mode... default<o:p></o:p></=
-p>
-<p class=3D"MsoPlainText">configure: autobuild timestamp... 20210818T123141=
-Z checking for aarch64-oe-linux-gcc... aarch64-none-linux-gnu-gcc&nbsp; --s=
-ysroot=3D/home/build/tisdk/build/arago-tmp-external-arm-glibc/work/aarch64-=
-oe-linux/libtool-cross/2.4.6-r0/recipe-sysroot<o:p></o:p></p>
-<p class=3D"MsoPlainText">checking whether the C compiler works... no<o:p><=
-/o:p></p>
-<p class=3D"MsoPlainText">configure: error: in `/home/build/tisdk/build/ara=
-go-tmp-external-arm-glibc/work/aarch64-oe-linux/libtool-cross/2.4.6-r0/buil=
-d':<o:p></o:p></p>
-<p class=3D"MsoPlainText">configure: error: C compiler cannot create execut=
-ables See `config.log' for more details<o:p></o:p></p>
-<p class=3D"MsoPlainText">WARNING: /home/build/tisdk/build/arago-tmp-extern=
-al-arm-glibc/work/aarch64-oe-linux/libtool-cross/2.4.6-r0/temp/run.do_confi=
-gure.1778:1 exit 1 from 'exit 1'<o:p></o:p></p>
-<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoPlainText">ERROR: Logfile of failure stored in: /home/build/=
-tisdk/build/arago-tmp-external-arm-glibc/work/aarch64-oe-linux/libtool-cros=
-s/2.4.6-r0/temp/log.do_configure.1778<o:p></o:p></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">Can you =
-please suggest how to fix this issue?<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">I suspec=
-t it will come up in other packages as well.<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333"><o:p>&nb=
-sp;</o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">&nbsp;<o=
-:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Thanks a lot,<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white;box-sizing: border-box;fon=
-t-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align=
-:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration-thickness: =
-initial;text-decoration-style: initial;text-decoration-color: initial;word-=
-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Nir.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</body>
-</html>
-
---_000_VI1PR0702MB36958ACA2B718DB2C0EEAA8D90CE9VI1PR0702MB3695_--
+Content-Transfer-Encoding: base64
+
+SGkgTmlyLA0KU29ycnkgZm9yIGRlbGF5ZWQgcmVzcG9uc2UuIEN1cnJlbnRseSBvdXIgU0RLIGRv
+IG5vdCBzdXBwb3J0IG11bHRpLWxpYg0KYW5kIHdlIGRvIG5vdCBoYXZlIGFueSB0aW1lbGluZSB3
+aGVuIGl0IHdpbGwgYmUgc3VwcG9ydGVkLg0KDQpUaGFua3MNCllvZ2VzaA0KDQpPbiA5LzIvMjAy
+MSAyOjUzIEFNLCBHZWxsZXIsIE5pciB3cm90ZToNCj4gSGkgVGhlcmUsDQo+IA0KPiBGb2xsb3dp
+bmcgdGhlIGluc3RydWN0aW9uIGZyb20gVEkNCj4gDQo+IGh0dHBzOi8vc29mdHdhcmUtZGwudGku
+Y29tL3Byb2Nlc3Nvci1zZGstbGludXgtcnQvZXNkL0FNNjRYL2xhdGVzdC9leHBvcnRzL2RvY3Mv
+bGludXgvT3ZlcnZpZXdfQnVpbGRpbmdfdGhlX1NESy5odG1sIA0KPiA8aHR0cHM6Ly9zb2Z0d2Fy
+ZS1kbC50aS5jb20vcHJvY2Vzc29yLXNkay1saW51eC1ydC9lc2QvQU02NFgvbGF0ZXN0L2V4cG9y
+dHMvZG9jcy9saW51eC9PdmVydmlld19CdWlsZGluZ190aGVfU0RLLmh0bWw+DQo+IA0KPiBJknZl
+IHN1Y2Nlc3NmdWxseSBzZXQgdXAgYSB5b2N0byBwcm9qZWN0IGZvciB0aGUgQU02NHguDQo+IA0K
+PiBUb29sY2hhaW4gdXNlZCBpcyA5LjItMjAxOS4xMg0KPiANCj4gTm93IEkgbmVlZCB0byBhZGQg
+c3VwcG9ydCBmb3IgbXVsdGlsaWIzMiBiZWNhdXNlIEkgaGF2ZSBzb21lIHNvZnR3YXJlIA0KPiB0
+aGF0IGNhbiBiZSBjb21waWxlZCBvbmx5IDMyIGJpdC4NCj4gDQo+IEkgYWRkZWQgdGhlIGZvbGxv
+d2luZyBsaW5lcyB0byBjb25mL2xvY2FsLmNvbmYNCj4gDQo+ICMgRGVmaW5lIG11bHRpbGliIHRh
+cmdldA0KPiANCj4gcmVxdWlyZSBjb25mL211bHRpbGliLmNvbmYNCj4gDQo+IE1VTFRJTElCUyA9
+ICJtdWx0aWxpYjpsaWIzMiINCj4gDQo+IERFRkFVTFRUVU5FX3ZpcnRjbGFzcy1tdWx0aWxpYi1s
+aWIzMiA9ICJhcm12N2F0aGYtbmVvbiINCj4gDQo+IEFuZCBJIGFtIGFibGUgdG8gYnVpbGQgYSBm
+ZXcgcGFja2FnZXMgd2l0aCBsaWIzMi0gc3VjY2Vzc2Z1bGx5LCBob3dldmVyLCANCj4gbGliMzIt
+bGlidG9vbC1jcm9zcyBmYWlscyBhdCB0aGUgY29uZmlndXJlIHN0YWdlOg0KPiANCj4gLS1ob3N0
+IGlzIHNldCB0byB0aGUgdmFsdWUgYXJtbWxsaWIzMi1saW51eC1nbnVlYWJpDQo+IA0KPiBFUlJP
+UjogbGliMzItbGlidG9vbC1jcm9zcy0yLjQuNi1yMCBkb19jb25maWd1cmU6IGNvbmZpZ3VyZSBm
+YWlsZWQNCj4gDQo+IEVSUk9SOiBsaWIzMi1saWJ0b29sLWNyb3NzLTIuNC42LXIwIGRvX2NvbmZp
+Z3VyZTogRXhlY3V0aW9uIG9mIA0KPiAnL2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1w
+LWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251
+ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL3RlbXAvcnVuLmRvX2NvbmZpZ3VyZS4y
+OTI2MScgDQo+IGZhaWxlZCB3aXRoIGV4aXQgY29kZSAxOg0KPiANCj4gYXV0b21ha2UgKEdOVSBh
+dXRvbWFrZSkgMS4xNi4xDQo+IA0KPiBDb3B5cmlnaHQgKEMpIDIwMTggRnJlZSBTb2Z0d2FyZSBG
+b3VuZGF0aW9uLCBJbmMuDQo+IA0KPiBMaWNlbnNlIEdQTHYyKzogR05VIEdQTCB2ZXJzaW9uIDIg
+b3IgbGF0ZXIgDQo+IDxodHRwczovL2dudS5vcmcvbGljZW5zZXMvZ3BsLTIuMC5odG1sIA0KPiA8
+aHR0cHM6Ly9nbnUub3JnL2xpY2Vuc2VzL2dwbC0yLjAuaHRtbD4+DQo+IA0KPiBUaGlzIGlzIGZy
+ZWUgc29mdHdhcmU6IHlvdSBhcmUgZnJlZSB0byBjaGFuZ2UgYW5kIHJlZGlzdHJpYnV0ZSBpdC4N
+Cj4gDQo+IFRoZXJlIGlzIE5PIFdBUlJBTlRZLCB0byB0aGUgZXh0ZW50IHBlcm1pdHRlZCBieSBs
+YXcuDQo+IA0KPiBXcml0dGVuIGJ5IFRvbSBUcm9tZXkgPHRyb21leUAuLi4gPG1haWx0bzp0cm9t
+ZXlALi4uPj4NCj4gDQo+ICCgoKCgoKAgYW5kIEFsZXhhbmRyZSBEdXJldC1MdXR6IDxhZGxALi4u
+IDxtYWlsdG86YWRsQC4uLj4+Lg0KPiANCj4gQVVUT1YgaXMgMS4xNg0KPiANCj4gYXV0b3JlY29u
+ZjogRW50ZXJpbmcgZGlyZWN0b3J5IGAuJw0KPiANCj4gYXV0b3JlY29uZjogY29uZmlndXJlLmFj
+OiBub3QgdXNpbmcgR2V0dGV4dA0KPiANCj4gYXV0b3JlY29uZjogcnVubmluZzogYWNsb2NhbCAN
+Cj4gLS1zeXN0ZW0tYWNkaXI9L2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVy
+bmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9s
+aWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL2xpYjMyLXJlY2lwZS1zeXNyb290L2hvbWUvYnVp
+bGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQy
+aGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIw
+L2xpYjMyLXJlY2lwZS1zeXNyb290L3Vzci9zaGFyZS9hY2xvY2FsLyANCj4gLS1hdXRvbWFrZS1h
+Y2Rpcj0vaG9tZS9idWlsZC90aXNkay9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJj
+L3dvcmsvYXJtdjdhdDJoZi1uZW9ubWxsaWIzMi1saW51eC1nbnVlYWJpL2xpYjMyLWxpYnRvb2wt
+Y3Jvc3MvMi40LjYtcjAvcmVjaXBlLXN5c3Jvb3QtbmF0aXZlL3Vzci9zaGFyZS9hY2xvY2FsLTEu
+MTYgDQo+IC1JIA0KPiAvaG9tZS9idWlsZC90aXNkay9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwt
+YXJtLWdsaWJjL3dvcmsvYXJtdjdhdDJoZi1uZW9ubWxsaWIzMi1saW51eC1nbnVlYWJpL2xpYjMy
+LWxpYnRvb2wtY3Jvc3MvMi40LjYtcjAvbGlidG9vbC0yLjQuNi9tNC8gDQo+IC1JIA0KPiAvaG9t
+ZS9idWlsZC90aXNkay9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dvcmsvYXJt
+djdhdDJoZi1uZW9ubWxsaWIzMi1saW51eC1nbnVlYWJpL2xpYjMyLWxpYnRvb2wtY3Jvc3MvMi40
+LjYtcjAvbGlidG9vbC0yLjQuNi90ZXN0cy8gDQo+IC1JIA0KPiAvaG9tZS9idWlsZC90aXNkay9i
+dWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dvcmsvYXJtdjdhdDJoZi1uZW9ubWxs
+aWIzMi1saW51eC1nbnVlYWJpL2xpYjMyLWxpYnRvb2wtY3Jvc3MvMi40LjYtcjAvcmVjaXBlLXN5
+c3Jvb3QtbmF0aXZlL3Vzci9zaGFyZS9hY2xvY2FsLyANCj4gLS1mb3JjZSAtLXdhcm5pbmdzPWNy
+b3NzIC1JIG00DQo+IA0KPiBhY2xvY2FsOiB3YXJuaW5nOiB1bmtub3duIHdhcm5pbmcgY2F0ZWdv
+cnkgJ2Nyb3NzJw0KPiANCj4gYXV0b3JlY29uZjogY29uZmlndXJlLmFjOiB0cmFjaW5nDQo+IA0K
+PiBhdXRvcmVjb25mOiBydW5uaW5nOiANCj4gL2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28t
+dG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgt
+Z251ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL3JlY2lwZS1zeXNyb290LW5hdGl2
+ZS91c3IvYmluL2F1dG9jb25mIA0KPiAtLWluY2x1ZGU9L2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQv
+YXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzIt
+bGludXgtZ251ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL2xpYnRvb2wtMi40LjYv
+bTQvIA0KPiAtLWluY2x1ZGU9L2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVy
+bmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9s
+aWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL2xpYnRvb2wtMi40LjYvdGVzdHMvIA0KPiAtLWlu
+Y2x1ZGU9L2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGli
+Yy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9saWIzMi1saWJ0b29s
+LWNyb3NzLzIuNC42LXIwL3JlY2lwZS1zeXNyb290LW5hdGl2ZS91c3Ivc2hhcmUvYWNsb2NhbC8g
+DQo+IC0tZm9yY2UgLS13YXJuaW5ncz1jcm9zcw0KPiANCj4gYXV0b3JlY29uZjogcnVubmluZzog
+DQo+IC9ob21lL2J1aWxkL3Rpc2RrL2J1aWxkL2FyYWdvLXRtcC1leHRlcm5hbC1hcm0tZ2xpYmMv
+d29yay9hcm12N2F0MmhmLW5lb25tbGxpYjMyLWxpbnV4LWdudWVhYmkvbGliMzItbGlidG9vbC1j
+cm9zcy8yLjQuNi1yMC9yZWNpcGUtc3lzcm9vdC1uYXRpdmUvdXNyL2Jpbi9hdXRvaGVhZGVyIA0K
+PiAtLWluY2x1ZGU9L2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFy
+bS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9saWIzMi1s
+aWJ0b29sLWNyb3NzLzIuNC42LXIwL2xpYnRvb2wtMi40LjYvbTQvIA0KPiAtLWluY2x1ZGU9L2hv
+bWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2Fy
+bXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIu
+NC42LXIwL2xpYnRvb2wtMi40LjYvdGVzdHMvIA0KPiAtLWluY2x1ZGU9L2hvbWUvYnVpbGQvdGlz
+ZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVv
+bm1sbGliMzItbGludXgtZ251ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL3JlY2lw
+ZS1zeXNyb290LW5hdGl2ZS91c3Ivc2hhcmUvYWNsb2NhbC8gDQo+IC0tZm9yY2UgLS13YXJuaW5n
+cz1jcm9zcw0KPiANCj4gYXV0b3JlY29uZjogcnVubmluZzogYXV0b21ha2UgLS1hZGQtbWlzc2lu
+ZyAtLWNvcHkgLS1mb3JjZS1taXNzaW5nIA0KPiAtLXdhcm5pbmdzPWNyb3NzDQo+IA0KPiBhdXRv
+bWFrZTogd2FybmluZzogdW5rbm93biB3YXJuaW5nIGNhdGVnb3J5ICdjcm9zcycNCj4gDQo+IGF1
+dG9yZWNvbmY6IHJ1bm5pbmc6IGdudS1jb25maWdpemUNCj4gDQo+IGF1dG9yZWNvbmY6IExlYXZp
+bmcgZGlyZWN0b3J5IGAuJw0KPiANCj4gfCBOT1RFOiBSdW5uaW5nIC4uL2xpYnRvb2wtMi40LjYv
+Y29uZmlndXJloCAtLWJ1aWxkPXg4Nl82NC1saW51eCANCj4gIKCgoKCgoKCgoKCgoKCgoKCgoKCg
+oKCgoKCgoKCgIKCgLS1ob3N0PWFybW1sbGliMzItbGludXgtZ251ZWFiaSANCj4gIKCgoKCgoKCg
+oKCgoKCgoCCgoC0tdGFyZ2V0PWFybW1sbGliMzItbGludXgtZ251ZWFiaSANCj4gIKCgoKCgoKCg
+oKCgoKCgoKCgoKCgoCCgoC0tcHJlZml4PS91c3IgoKCgoKCgoCCgoC0tZXhlY19wcmVmaXg9L3Vz
+ciANCj4gIKCgoKCgoKCgoKCgoKCgoKCgoKCgoKAgoKAtLWJpbmRpcj0vdXNyL2JpbiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIA0KPiAgoKAtLXNiaW5kaXI9L3Vzci9zYmluICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIA0KPiAgoKAtLWxpYmV4ZWNkaXI9L3Vzci9saWJleGVjICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgDQo+ICCgoC0tZGF0YWRpcj0vaG9tZS9idWlsZC90aXNkay9idWls
+ZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dvcmsvYXJtdjdhdDJoZi1uZW9ubWxsaWIz
+Mi1saW51eC1nbnVlYWJpL2xpYjMyLWxpYnRvb2wtY3Jvc3MvMi40LjYtcjAvbGliMzItcmVjaXBl
+LXN5c3Jvb3QvdXNyL3NoYXJlIKCgoCCgoKCgoKCgoKCgoKCgoCCgoC0tc3lzY29uZmRpcj0vZXRj
+IKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoCCgoC0tc2hhcmVkc3RhdGVkaXI9L2NvbSCgoKCgoKCg
+oKCgoKCgoKCgoKCgoKCgoKCgoKCgoCCgoC0tbG9jYWxzdGF0ZWRpcj0vdmFyIKCgoKCgoKCgoKCg
+oKCgoKCgoKCgoKCgoKAgoKAtLWxpYmRpcj0vdXNyL2xpYiCgoKCgoKCgoKCgoKCgoKCgoKCgoKCg
+oKCgoKAgoKAtLWluY2x1ZGVkaXI9L3Vzci9pbmNsdWRlIKCgLS1vbGRpbmNsdWRlZGlyPS91c3Iv
+aW5jbHVkZSCgoKCgoKCgoKCgoKCgoKCgoKAgoKAtLWluZm9kaXI9L2hvbWUvYnVpbGQvdGlzZGsv
+YnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1s
+bGliMzItbGludXgtZ251ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL2xpYjMyLXJl
+Y2lwZS1zeXNyb290L3Vzci9zaGFyZS9pbmZvIKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCg
+IKCgLS1tYW5kaXI9L2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFy
+bS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9saWIzMi1s
+aWJ0b29sLWNyb3NzLzIuNC42LXIwL2xpYjMyLXJlY2lwZS1zeXNyb290L3Vzci9zaGFyZS9tYW4g
+oKCgoKCgoKCgoKCgoKCgIKCgLS1kaXNhYmxlLXNpbGVudC1ydWxlcyCgoKCgoKCgoKCgoKCgoKCg
+oKAgoKAtLWRpc2FibGUtZGVwZW5kZW5jeS10cmFja2luZyCgoKCgoKCgoKCgoKCgoKCgoKCgoKCg
+oKCgoKCgIKCgLS13aXRoLWxpYnRvb2wtc3lzcm9vdD0vaG9tZS9idWlsZC90aXNkay9idWlsZC9h
+cmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dvcmsvYXJtdjdhdDJoZi1uZW9ubWxsaWIzMi1s
+aW51eC1nbnVlYWJpL2xpYjMyLWxpYnRvb2wtY3Jvc3MvMi40LjYtcjAvbGliMzItcmVjaXBlLXN5
+c3Jvb3QNCj4gDQo+IGNvbmZpZ3VyZTogbG9hZGluZyBzaXRlIHNjcmlwdCANCj4gL2hvbWUvYnVp
+bGQvdGlzZGsvc291cmNlcy9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW5ldHdvcmtpbmcvc2l0ZS9l
+bmRpYW4tbGl0dGxlDQo+IA0KPiBjb25maWd1cmU6IGxvYWRpbmcgc2l0ZSBzY3JpcHQgDQo+IC9o
+b21lL2J1aWxkL3Rpc2RrL3NvdXJjZXMvb2UtY29yZS9tZXRhL3NpdGUvZW5kaWFuLWxpdHRsZQ0K
+PiANCj4gY29uZmlndXJlOiBsb2FkaW5nIHNpdGUgc2NyaXB0IA0KPiAvaG9tZS9idWlsZC90aXNk
+ay9zb3VyY2VzL29lLWNvcmUvbWV0YS9zaXRlL2FybS1jb21tb24NCj4gDQo+IGNvbmZpZ3VyZTog
+bG9hZGluZyBzaXRlIHNjcmlwdCANCj4gL2hvbWUvYnVpbGQvdGlzZGsvc291cmNlcy9vZS1jb3Jl
+L21ldGEvc2l0ZS9hcm0tMzINCj4gDQo+IGNvbmZpZ3VyZTogbG9hZGluZyBzaXRlIHNjcmlwdCAN
+Cj4gL2hvbWUvYnVpbGQvdGlzZGsvc291cmNlcy9vZS1jb3JlL21ldGEvc2l0ZS9jb21tb24tbGlu
+dXgNCj4gDQo+IGNvbmZpZ3VyZTogbG9hZGluZyBzaXRlIHNjcmlwdCANCj4gL2hvbWUvYnVpbGQv
+dGlzZGsvc291cmNlcy9vZS1jb3JlL21ldGEvc2l0ZS9jb21tb24tZ2xpYmMNCj4gDQo+IGNvbmZp
+Z3VyZTogbG9hZGluZyBzaXRlIHNjcmlwdCANCj4gL2hvbWUvYnVpbGQvdGlzZGsvc291cmNlcy9v
+ZS1jb3JlL21ldGEvc2l0ZS9hcm0tbGludXgNCj4gDQo+IGNvbmZpZ3VyZTogbG9hZGluZyBzaXRl
+IHNjcmlwdCANCj4gL2hvbWUvYnVpbGQvdGlzZGsvc291cmNlcy9vZS1jb3JlL21ldGEvc2l0ZS9j
+b21tb24NCj4gDQo+ICMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gIyMNCj4gDQo+ICMjIENv
+bmZpZ3VyaW5nIGxpYnRvb2wgMi40LjYgIyMNCj4gDQo+ICMjIC0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0gIyMNCj4gDQo+IGNoZWNraW5nIGZvciBHTlUgTTQgdGhhdCBzdXBwb3J0cyBhY2N1cmF0
+ZSB0cmFjZXMuLi4gDQo+IC9ob21lL2J1aWxkL3Rpc2RrL2J1aWxkL2FyYWdvLXRtcC1leHRlcm5h
+bC1hcm0tZ2xpYmMvd29yay9hcm12N2F0MmhmLW5lb25tbGxpYjMyLWxpbnV4LWdudWVhYmkvbGli
+MzItbGlidG9vbC1jcm9zcy8yLjQuNi1yMC9yZWNpcGUtc3lzcm9vdC1uYXRpdmUvdXNyL2Jpbi9t
+NA0KPiANCj4gY2hlY2tpbmcgd2hldGhlciANCj4gL2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJh
+Z28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGlu
+dXgtZ251ZWFiaS9saWIzMi1saWJ0b29sLWNyb3NzLzIuNC42LXIwL3JlY2lwZS1zeXNyb290LW5h
+dGl2ZS91c3IvYmluL200IA0KPiBhY2NlcHRzIC0tZ251Li4uIHllcw0KPiANCj4gY2hlY2tpbmcg
+aG93IG00IHN1cHBvcnRzIHRyYWNlIGZpbGVzLi4uIC0tZGVidWdmaWxlDQo+IA0KPiBjaGVja2lu
+ZyBmb3IgYSBCU0QtY29tcGF0aWJsZSBpbnN0YWxsLi4uIA0KPiAvaG9tZS9idWlsZC90aXNkay9i
+dWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL2hvc3R0b29scy9pbnN0YWxsIC1jDQo+
+IA0KPiBjaGVja2luZyB3aGV0aGVyIGJ1aWxkIGVudmlyb25tZW50IGlzIHNhbmUuLi4geWVzDQo+
+IA0KPiBjaGVja2luZyBmb3IgYXJtbWxsaWIzMi1saW51eC1nbnVlYWJpLXN0cmlwLi4uIA0KPiBh
+cm0tbm9uZS1saW51eC1nbnVlYWJpaGYtc3RyaXANCj4gDQo+IGNoZWNraW5nIGZvciBhIHRocmVh
+ZC1zYWZlIG1rZGlyIC1wLi4uIA0KPiAvaG9tZS9idWlsZC90aXNkay9idWlsZC9hcmFnby10bXAt
+ZXh0ZXJuYWwtYXJtLWdsaWJjL2hvc3R0b29scy9ta2RpciAtcA0KPiANCj4gY2hlY2tpbmcgZm9y
+IGdhd2suLi4gZ2F3aw0KPiANCj4gY2hlY2tpbmcgd2hldGhlciBtYWtlIHNldHMgJChNQUtFKS4u
+LiB5ZXMNCj4gDQo+IGNoZWNraW5nIHdoZXRoZXIgbWFrZSBzdXBwb3J0cyBuZXN0ZWQgdmFyaWFi
+bGVzLi4uIHllcw0KPiANCj4gY2hlY2tpbmcgd2hldGhlciBtYWtlIHN1cHBvcnRzIG5lc3RlZCB2
+YXJpYWJsZXMuLi4gKGNhY2hlZCkgeWVzDQo+IA0KPiBjaGVja2luZyBidWlsZCBzeXN0ZW0gdHlw
+ZS4uLiB4ODZfNjQtcGMtbGludXgtZ251DQo+IA0KPiBjaGVja2luZyBob3N0IHN5c3RlbSB0eXBl
+Li4uIEludmFsaWQgY29uZmlndXJhdGlvbiANCj4gYGFybW1sbGliMzItbGludXgtZ251ZWFiaSc6
+IG1hY2hpbmUgYGFybW1sbGliMzItdW5rbm93bicgbm90IHJlY29nbml6ZWQNCj4gDQo+IGNvbmZp
+Z3VyZTogZXJyb3I6IC9iaW4vYmFzaCAuLi9saWJ0b29sLTIuNC42L2J1aWxkLWF1eC9jb25maWcu
+c3ViIA0KPiBhcm1tbGxpYjMyLWxpbnV4LWdudWVhYmkgZmFpbGVkDQo+IA0KPiBXQVJOSU5HOiAN
+Cj4gL2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93
+b3JrL2FybXY3YXQyaGYtbmVvbm1sbGliMzItbGludXgtZ251ZWFiaS9saWIzMi1saWJ0b29sLWNy
+b3NzLzIuNC42LXIwL3RlbXAvcnVuLmRvX2NvbmZpZ3VyZS4yOTI2MToxIA0KPiBleGl0IDEgZnJv
+bSAnZXhpdCAxJw0KPiANCj4gRVJST1I6IExvZ2ZpbGUgb2YgZmFpbHVyZSBzdG9yZWQgaW46IA0K
+PiAvaG9tZS9idWlsZC90aXNkay9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dv
+cmsvYXJtdjdhdDJoZi1uZW9ubWxsaWIzMi1saW51eC1nbnVlYWJpL2xpYjMyLWxpYnRvb2wtY3Jv
+c3MvMi40LjYtcjAvdGVtcC9sb2cuZG9fY29uZmlndXJlLjI5MjYxDQo+IA0KPiBJbnZlc3RpZ2F0
+aW5nIHJ1bi5kb19jb25maWd1cmUgc3VnZ2VzdHMgdGhhdCBpbiB0aGUgY29uZmlndXJlIHN0YWdl
+IA0KPiBvZV9ydW5jb25mKCkgaXMgc2V0IHdpdGggd2hhdCBzZWVtcyB0byBiZSB3cm9uZyCWaG9z
+dCBhbmQglnRhcmdldCB2YWx1ZXM6DQo+IA0KPiAgoC0taG9zdD1hcm1tbGxpYjMyLWxpbnV4LWdu
+dWVhYmkgoKAtLXRhcmdldD1hcm1tbGxpYjMyLWxpbnV4LWdudWVhYmkNCj4gDQo+IEV4ZWN1dGlu
+Zw0KPiANCj4gYml0YmFrZSBsaWIzMi1saWJ0b29sLWNyb3NzIC1lDQo+IA0KPiBZaWVsZHMsIGFt
+b25nIG1hbnkgb3RoZXJzLA0KPiANCj4gMTg1MTMgIyAkVEFSR0VUX1ZFTkRPUiBbMyBvcGVyYXRp
+b25zXQ0KPiANCj4gMTg1MTQgI6CgIHNldCAvaG9tZS9idWlsZC90aXNkay9zb3VyY2VzL29lLWNv
+cmUvbWV0YS9jb25mL2JpdGJha2UuY29uZjoxMzINCj4gDQo+IDE4NTE1ICOgoKCgICItb2UiDQo+
+IA0KPiAxODUxNiAjoKAgc2V0IA0KPiAvaG9tZS9idWlsZC90aXNkay9zb3VyY2VzL21ldGEtYXJh
+Z28vbWV0YS1hcmFnby1kaXN0cm8vY29uZi9kaXN0cm8vaW5jbHVkZS90b29sY2hhaW4tYXJtLmlu
+YzoxNQ0KPiANCj4gMTg1MTcgI6AgoKCgIiINCj4gDQo+IDE4NTE4ICOgoCBvdmVycmlkZVt2aXJ0
+Y2xhc3MtbXVsdGlsaWItbGliMzJdOnNldCANCj4gbXVsdGlsaWJfZ2xvYmFsLmJiY2xhc3M6MTU5
+IFttdWx0aWxpYl92aXJ0Y2xhc3NfaGFuZGxlcl92ZW5kb3JdDQo+IA0KPiAxODUxOSAjoKCgoCAi
+bWxsaWIzMiINCj4gDQo+IDE4NTIwICMgcHJlLWV4cGFuc2lvbiB2YWx1ZToNCj4gDQo+IDE4NTIx
+ICOgoCAibWxsaWIzMiINCj4gDQo+IDE4NTIyIFRBUkdFVF9WRU5ET1I9Im1sbGliMzIiDQo+IA0K
+PiBMYXRlciwgSE9TVF9WRU5ET1IgoD0gIiR7VEFSR0VUX1ZFTkRPUn0iLA0KPiANCj4gQW5kIEhP
+U1RfU1lTID0gIiR7SE9TVF9BUkNIfSR7SE9TVF9WRU5ET1J9LSR7SE9TVF9PU30iDQo+IA0KPiBT
+byB0aGUgdmFyaWFibGUgU1lTX0hPU1QgaXMgZXhwYW5kZWQgdG8gYXJtbWxsaWIzMi1saW51eC1n
+bnVlYWJpIHdoaWNoIA0KPiBzZWVtcyB0byBiZSB3cm9uZyBmb3IgbGliMzItbGlidG9vbC1jcm9z
+cy4NCj4gDQo+IE1hbnVhbGx5IHJ1bm5pbmcgdGhlIGNvbmZpZ3VyZSBjb21tYW5kIHdpdGggDQo+
+IJZob3N0PWFybS1ub25lLWxpbnV4LWdudWVhYmloZiBpcyB3b3JraW5nIHByb3Blcmx5Lg0KPiAN
+Cj4gRm9sbG93aW5nIHN1Z2dlc3Rpb24gYnkgUmljaGFyZCBQdXJkaWUNCj4gDQo+IGh0dHBzOi8v
+bGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9nL3Bva3kvbWVzc2FnZS8xMjUzNSANCj4gPGh0dHBzOi8v
+bGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9nL3Bva3kvbWVzc2FnZS8xMjUzNT4NCj4gDQo+IEFkZGlu
+Zw0KPiANCj4gVEFSR0VUX1ZFTkRPUiA9ICItb2UiDQo+IA0KPiBUbyBjb25mL2xvY2FsLmNvbmYg
+ZGlkbid0IGRvIHRoZSB0cmljay4NCj4gDQo+IFNvIEkgbW9kaWZpZWQNCj4gDQo+IHNvdXJjZXMv
+bWV0YS1hcmFnby9tZXRhLWFyYWdvLWRpc3Ryby9jb25mL2Rpc3Ryby9pbmNsdWRlL3Rvb2xjaGFp
+bi1hcm0uaW5jDQo+IA0KPiAtVEFSR0VUX1ZFTkRPUiA9ICIiDQo+IA0KPiArVEFSR0VUX1ZFTkRP
+UiA9ICItb2UiDQo+IA0KPiBBbmQgdGhlbg0KPiANCj4gYml0YmFrZSBsaWIzMi1saWJ0b29sLWNy
+b3NzDQo+IA0KPiBmaW5pc2hlZCBzdWNjZXNzZnVsbHksIGJ1dCB3aGVuIHRyeWluZyB0byBidWls
+ZCB0aGUgZW50aXJlIGltYWdlIA0KPiBsaWJ0b29sLWNyb3NzIGZhaWxlZCB3aXRoDQo+IA0KPiAj
+IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICMjDQo+IA0KPiAjIyBDb25maWd1cmluZyBsaWJ0
+b29sIDIuNC42ICMjDQo+IA0KPiAjIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICMjDQo+IA0K
+PiBjaGVja2luZyBmb3IgR05VIE00IHRoYXQgc3VwcG9ydHMgYWNjdXJhdGUgdHJhY2VzLi4uIA0K
+PiAvaG9tZS9idWlsZC90aXNkay9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dv
+cmsvYWFyY2g2NC1vZS1saW51eC9saWJ0b29sLWNyb3NzLzIuNC42LXIwL3JlY2lwZS1zeXNyb290
+LW5hdGl2ZS91c3IvYmluL200DQo+IA0KPiBjaGVja2luZyB3aGV0aGVyIA0KPiAvaG9tZS9idWls
+ZC90aXNkay9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dvcmsvYWFyY2g2NC1v
+ZS1saW51eC9saWJ0b29sLWNyb3NzLzIuNC42LXIwL3JlY2lwZS1zeXNyb290LW5hdGl2ZS91c3Iv
+YmluL200IA0KPiBhY2NlcHRzIC0tZ251Li4uIHllcyBjaGVja2luZyBob3cgbTQgc3VwcG9ydHMg
+dHJhY2UgZmlsZXMuLi4gLS1kZWJ1Z2ZpbGUgDQo+IGNoZWNraW5nIGZvciBhIEJTRC1jb21wYXRp
+YmxlIGluc3RhbGwuLi4gDQo+IC9ob21lL2J1aWxkL3Rpc2RrL2J1aWxkL2FyYWdvLXRtcC1leHRl
+cm5hbC1hcm0tZ2xpYmMvaG9zdHRvb2xzL2luc3RhbGwgDQo+IC1jIGNoZWNraW5nIHdoZXRoZXIg
+YnVpbGQgZW52aXJvbm1lbnQgaXMgc2FuZS4uLiB5ZXMgY2hlY2tpbmcgZm9yIA0KPiBhYXJjaDY0
+LW9lLWxpbnV4LXN0cmlwLi4uIGFhcmNoNjQtbm9uZS1saW51eC1nbnUtc3RyaXAgY2hlY2tpbmcg
+Zm9yIGEgDQo+IHRocmVhZC1zYWZlIG1rZGlyIC1wLi4uIA0KPiAvaG9tZS9idWlsZC90aXNkay9i
+dWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL2hvc3R0b29scy9ta2RpciAtcCANCj4g
+Y2hlY2tpbmcgZm9yIGdhd2suLi4gZ2F3ayBjaGVja2luZyB3aGV0aGVyIG1ha2Ugc2V0cyAkKE1B
+S0UpLi4uIHllcyANCj4gY2hlY2tpbmcgd2hldGhlciBtYWtlIHN1cHBvcnRzIG5lc3RlZCB2YXJp
+YWJsZXMuLi4geWVzIGNoZWNraW5nIHdoZXRoZXIgDQo+IG1ha2Ugc3VwcG9ydHMgbmVzdGVkIHZh
+cmlhYmxlcy4uLiAoY2FjaGVkKSB5ZXMgY2hlY2tpbmcgYnVpbGQgc3lzdGVtIA0KPiB0eXBlLi4u
+IHg4Nl82NC1wYy1saW51eC1nbnUgY2hlY2tpbmcgaG9zdCBzeXN0ZW0gdHlwZS4uLiANCj4gYWFy
+Y2g2NC1vZS1saW51eC1nbnUNCj4gDQo+IGNvbmZpZ3VyZTogYXV0b2J1aWxkIHByb2plY3QuLi4g
+R05VIExpYnRvb2wNCj4gDQo+IGNvbmZpZ3VyZTogYXV0b2J1aWxkIHJldmlzaW9uLi4uIDIuNC42
+DQo+IA0KPiBjb25maWd1cmU6IGF1dG9idWlsZCBob3N0bmFtZS4uLiBvc2JveGVzDQo+IA0KPiBj
+b25maWd1cmU6IGF1dG9idWlsZCBtb2RlLi4uIGRlZmF1bHQNCj4gDQo+IGNvbmZpZ3VyZTogYXV0
+b2J1aWxkIHRpbWVzdGFtcC4uLiAyMDIxMDgxOFQxMjMxNDFaIGNoZWNraW5nIGZvciANCj4gYWFy
+Y2g2NC1vZS1saW51eC1nY2MuLi4gYWFyY2g2NC1ub25lLWxpbnV4LWdudS1nY2MgIA0KPiAtLXN5
+c3Jvb3Q9L2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJhZ28tdG1wLWV4dGVybmFsLWFybS1nbGli
+Yy93b3JrL2FhcmNoNjQtb2UtbGludXgvbGlidG9vbC1jcm9zcy8yLjQuNi1yMC9yZWNpcGUtc3lz
+cm9vdA0KPiANCj4gY2hlY2tpbmcgd2hldGhlciB0aGUgQyBjb21waWxlciB3b3Jrcy4uLiBubw0K
+PiANCj4gY29uZmlndXJlOiBlcnJvcjogaW4gDQo+IGAvaG9tZS9idWlsZC90aXNkay9idWlsZC9h
+cmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dvcmsvYWFyY2g2NC1vZS1saW51eC9saWJ0b29s
+LWNyb3NzLzIuNC42LXIwL2J1aWxkJzoNCj4gDQo+IGNvbmZpZ3VyZTogZXJyb3I6IEMgY29tcGls
+ZXIgY2Fubm90IGNyZWF0ZSBleGVjdXRhYmxlcyBTZWUgYGNvbmZpZy5sb2cnIA0KPiBmb3IgbW9y
+ZSBkZXRhaWxzDQo+IA0KPiBXQVJOSU5HOiANCj4gL2hvbWUvYnVpbGQvdGlzZGsvYnVpbGQvYXJh
+Z28tdG1wLWV4dGVybmFsLWFybS1nbGliYy93b3JrL2FhcmNoNjQtb2UtbGludXgvbGlidG9vbC1j
+cm9zcy8yLjQuNi1yMC90ZW1wL3J1bi5kb19jb25maWd1cmUuMTc3ODoxIA0KPiBleGl0IDEgZnJv
+bSAnZXhpdCAxJw0KPiANCj4gRVJST1I6IExvZ2ZpbGUgb2YgZmFpbHVyZSBzdG9yZWQgaW46IA0K
+PiAvaG9tZS9idWlsZC90aXNkay9idWlsZC9hcmFnby10bXAtZXh0ZXJuYWwtYXJtLWdsaWJjL3dv
+cmsvYWFyY2g2NC1vZS1saW51eC9saWJ0b29sLWNyb3NzLzIuNC42LXIwL3RlbXAvbG9nLmRvX2Nv
+bmZpZ3VyZS4xNzc4DQo+IA0KPiBDYW4geW91IHBsZWFzZSBzdWdnZXN0IGhvdyB0byBmaXggdGhp
+cyBpc3N1ZT8NCj4gDQo+IEkgc3VzcGVjdCBpdCB3aWxsIGNvbWUgdXAgaW4gb3RoZXIgcGFja2Fn
+ZXMgYXMgd2VsbC4NCj4gDQo+IFRoYW5rcyBhIGxvdCwNCj4gDQo+IE5pci4NCj4gDQo+IA0KPiAN
+Cj4gDQo+IA0K
