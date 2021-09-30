@@ -1,90 +1,243 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.421.1631563857711543302
+Received: from mail-ua1-f52.google.com (mail-ua1-f52.google.com [209.85.222.52])
+ by mx.groups.io with SMTP id smtpd.web12.10488.1632996722896071451
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 13 Sep 2021 13:10:58 -0700
+ Thu, 30 Sep 2021 03:12:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=a16IdlM8;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nm@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 18DKAu2X074617;
-	Mon, 13 Sep 2021 15:10:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1631563856;
-	bh=/gJJyTohiVT6xYRic8ZVp11+A29Kqek3fivCpniz3Ww=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=a16IdlM8tJwSIXAAMxpiJqgQ2h8G2+kCCek6MuFev6ql8j572IuY4WmDcmdInlNoD
-	 yF0+ykXr937wQn+LGpb0qLvqEIDi/cVNkbMgggynff5KJXrBUvrIBJekLOLHadjvxT
-	 U6Ond6gPSyxFCOQOa/6dug5rwDJAZKDNdBw+utkY=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 18DKAu0N127486
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 13 Sep 2021 15:10:56 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 13
- Sep 2021 15:10:55 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Mon, 13 Sep 2021 15:10:55 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 18DKAt3q001489;
-	Mon, 13 Sep 2021 15:10:55 -0500
-Date: Mon, 13 Sep 2021 15:10:55 -0500
-From: "Nishanth Menon" <nm@ti.com>
-To: <asif.malek@deltaww.com>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] ROOT LOGIN ISSUE of K2g (Yocto- meta-TI (version : ROCKO))
-Message-ID: <20210913201055.mi37ffanfnowzxhv@pantyhose>
-References: <xqAQ.1631511977629423168.1TIQ@lists.yoctoproject.org>
+ dkim=fail reason="no key for verify" header.i=@sutherland.id.au header.s=google header.b=qnbtJ95g;
+ spf=pass (domain: sutherland.id.au, ip: 209.85.222.52, mailfrom: phil@sutherland.id.au)
+Received: by mail-ua1-f52.google.com with SMTP id u5so813202uao.13
+        for <meta-ti@lists.yoctoproject.org>; Thu, 30 Sep 2021 03:12:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=sutherland.id.au; s=google;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=pYJumHcRewly3jGxQOXZg8TUnFYiJ2KmaYM3FZ8SXrQ=;
+        b=qnbtJ95grg2GN1tOSxGlZ5mxzu/KJeiy3hY71Gzfy0YHqhgCBgZHx2mG9tmiuxN+9n
+         tRLylCCdjHhq9nIGHxICBUmcBy8wlwco3tHxW6RD7J+7NGhKZT8pjjhktIpc7nBidGQX
+         w4Fs7CkmBVR5uQWz7YwJGcyEy+qx68/3VJt4U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=pYJumHcRewly3jGxQOXZg8TUnFYiJ2KmaYM3FZ8SXrQ=;
+        b=6ao3yE8XRipWD8YxkN2emo8YSI7fEiC0ViqbvPMLPLDlj9wNrBPk/8WX7LsGHSgfVc
+         Cc/q+Go+ZUvYvRP/yg8BkbE4vxCaxSF5TydMZdGMqv03q0utbry2omvToY1c+CGGz+oW
+         1szMmctOXw6YHDR6S8hFa1qpx5TnPr3CwQECeF5nenhV1mMg7E9CnSgPif6kgovf0ctr
+         1Nj8yf9l5oBoE6elJp66xgHJ0lPY/xbJB668Gt36iArp/FEFAY93i+6HPEAvAiEQiRR+
+         lAlM0s0kLY1ZP21ecUad6jtC46M0iAHwiFsnMDlUyvtUi/vjjrk10Jot8A8RJsc+PXwH
+         6QnA==
+X-Gm-Message-State: AOAM530bClk7jdPBkcHJBMHd1HOaRLd/eSp02tkD47EIXCYqZh8PoAdU
+	oLzwJ0COyb7bcWWAmRCWxjXWD91EDbbNUZgKMVvMnV6sMfK5Hw==
+X-Google-Smtp-Source: ABdhPJyWcEcUabH2PeAO0TwXNG8gbSkiW9jsJ7fmB64NXByq62hIHkZh/H8l1cJkuSDJm+xY+WOjsEZgsTsZNuc54+I=
+X-Received: by 2002:ab0:5b89:: with SMTP id y9mr4385349uae.47.1632996721179;
+ Thu, 30 Sep 2021 03:12:01 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <xqAQ.1631511977629423168.1TIQ@lists.yoctoproject.org>
-User-Agent: NeoMutt/20171215
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 18DKAu2X074617
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+From: phil@sutherland.id.au
+Date: Thu, 30 Sep 2021 18:11:50 +0800
+Message-ID: <CACpu_i6Ndw_zt6v0qZgim4MJQF-O_3j29Sz_nPhAMc=hrbhtpw@mail.gmail.com>
+Subject: Append syntax patch, and hardknott compatibility
+To: meta-ti@lists.yoctoproject.org
+X-Groupsio-MsgNum: 14009
+Content-Type: multipart/mixed; boundary="0000000000007cbadb05cd33ad85"
+
+--0000000000007cbadb05cd33ad85
+Content-Type: multipart/alternative; boundary="0000000000007cbad905cd33ad83"
+
+--0000000000007cbad905cd33ad83
+Content-Type: text/plain; charset="UTF-8"
+
+Greetings all,
+Attached is a patch which fixes several file and module naming errors
+introduced by the recent honister append syntax changes. The specific one
+which bit me is in the ti-cgt-pru recipe, and the others I found during a
+subsequent review of the honister patch.
+
+Also, at present there does not appear to be a current meta-ti branch that
+supports hardknott in layers.conf. I believe the new append syntax became
+available as of hardknott 3.3.3 - is there any other reason that the master
+branch should not be regarded as compatible?
+All the best
+phil
+
+--0000000000007cbad905cd33ad83
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On 22:46-20210912, asif.malek@deltaww.com wrote:
-> Hi,
->=20
-> I have used meta-ti layer (Version :Rocko ) to generate core-image-mini=
-mal for my 66ak2g12 board from TI. I=E2=80=99m able to boot up my board p=
-roperly=C2=A0 but after booting up =C2=A0not able to login.
->=20
-> I=E2=80=99ve tried =E2=80=9Croot=E2=80=9D or blank password but still i=
-t=E2=80=99s throwing wrong password.
->=20
-> When I=E2=80=99m using =E2=80=9Croot=E2=80=9D as a user then it throws =
-=E2=80=9Ccan=E2=80=99t set root user=E2=80=9D.
->=20
-> In local.conf =C2=A0the variable is as default,
->=20
-> EXTRA_IMAGE_FEATURES?=3D =E2=80=9Cdebug-tweaks=E2=80=9D
+<div dir=3D"ltr">Greetings all,<div>Attached is a patch which fixes several=
+ file and module naming errors introduced by the recent honister append syn=
+tax=C2=A0changes. The specific one which=C2=A0bit me is in the ti-cgt-pru r=
+ecipe, and the others I found during a subsequent review of the honister pa=
+tch.=C2=A0<br><br>Also, at present there does not appear to be a current me=
+ta-ti branch that supports hardknott in layers.conf. I believe the new appe=
+nd=C2=A0syntax=C2=A0became available as of hardknott 3.3.3 - is there any o=
+ther reason that the master branch should not be regarded as compatible?=C2=
+=A0<br>All the best</div><font color=3D"#888888"><div>phil</div></font></di=
+v>
 
-[1] I'd be guessing, but =3D instead of ?=3D
+--0000000000007cbad905cd33ad83--
 
->=20
-> Can you please help me to resolve this issue. Please refer the log also.
->=20
-> =E2=80=9Ck2g-evm login: root
->=20
-> login: can't set
+--0000000000007cbadb05cd33ad85
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-Fix-several-naming-errors-introduced-in-override-pre.patch"
+Content-Disposition: attachment; 
+	filename="0001-Fix-several-naming-errors-introduced-in-override-pre.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_ku6s2p7l0>
+X-Attachment-Id: f_ku6s2p7l0
 
-^^ weird "can't set" message..
+RnJvbSAxY2RiOTFlOTMzYzg3YTVmZjVjOTAwMGU1ZjVhMmQ2NjIwODZmN2E3IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBQaGlsIFN1dGhlcmxhbmQgPHBoaWxzQHJjdC1nbG9iYWwuY29t
+PgpEYXRlOiBUaHUsIDMwIFNlcCAyMDIxIDE3OjM3OjQ3ICswODAwClN1YmplY3Q6IFtQQVRDSF0g
+Rml4IHNldmVyYWwgbmFtaW5nIGVycm9ycyBpbnRyb2R1Y2VkIGluIG92ZXJyaWRlIHByZWZpeAog
+Y29udmVyc2lvbgoKLS0tCiAuLi4vZGV2dG9vbHMvZ2NjLWxpbmFyby1iYXJlbWV0YWwtYWFyY2g2
+NC1uYXRpdmUuYmIgICAgICAgfCA0ICsrLS0KIHJlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFy
+by1iYXJlbWV0YWwtbmF0aXZlLmJiICAgICAgICB8IDQgKystLQogcmVjaXBlcy10aS9kZXZ0b29s
+cy90aS1jZ3QtYXJtXzE4LjEyLjUuYmIgICAgICAgICAgICAgICAgIHwgMiArLQogcmVjaXBlcy10
+aS9kZXZ0b29scy90aS1jZ3QtcHJ1XzIuMy4yLmJiICAgICAgICAgICAgICAgICAgIHwgNCArKy0t
+CiByZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDQ3MC5pbmMgICAgICAgICAgICAgICAgICAgICAg
+ICAgfCAyICstCiByZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDZ4XzguMy4yLmJiICAgICAgICAg
+ICAgICAgICAgICAgfCA4ICsrKystLS0tCiByZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDd4XzEu
+Mi4wLmJiICAgICAgICAgICAgICAgICAgICAgfCAyICstCiByZWNpcGVzLXRpL2RtYWkvdGktZG1h
+aS9sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2ggICAgICAgfCAyICstCiByZWNpcGVzLXRpL2Rt
+YWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLW8zNTMwX2FsLnNoICAgfCAyICstCiByZWNp
+cGVzLXRpL2RtYWkvdGktZG1haS91bmxvYWRtb2R1bGVzLXRpLWRtYWktYXBwcy5zaCAgICAgfCAy
+ICstCiAxMCBmaWxlcyBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkK
+CmRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL2RldnRvb2xzL2djYy1saW5hcm8tYmFyZW1ldGFsLWFh
+cmNoNjQtbmF0aXZlLmJiIGIvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVtZXRh
+bC1hYXJjaDY0LW5hdGl2ZS5iYgppbmRleCBmMTU5NmE4YjU3YWE4MTQ5NWJlMTc1NTk1MzJjMjA5
+MmYwMWQ4MTQ3Li4zYjQwYzliZGU3Y2Q2YThmZjkyZTNlY2I0MjZlZTliMDMxODQwMWI5IDEwMDY0
+NAotLS0gYS9yZWNpcGVzLXRpL2RldnRvb2xzL2djYy1saW5hcm8tYmFyZW1ldGFsLWFhcmNoNjQt
+bmF0aXZlLmJiCisrKyBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFyby1iYXJlbWV0YWwt
+YWFyY2g2NC1uYXRpdmUuYmIKQEAgLTEsNiArMSw2IEBACiBpbmNsdWRlIHJlY2lwZXMtdGkvZGV2
+dG9vbHMvZ2NjLWxpbmFyby5pbmMKIAotUEFDS0FHRV9ESVIgPSAiZ2NjLWxpbmFyby0ke1BWfS0k
+e0dDQ19BUk1fWUVBUn0teDg2XzY0OmFhcmNoNjQtZWxmIgorUEFDS0FHRV9ESVIgPSAiZ2NjLWxp
+bmFyby0ke1BWfS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0X2FhcmNoNjQtZWxmIgogUyA9ICIke1dP
+UktESVJ9LyR7UEFDS0FHRV9ESVJ9IgogCiBMSUNfQ0hLU1VNID0gImJjN2ZhZDRiYmE5OGU3YTRj
+ZDVhYjMwNDI1MDY0OTNjIgpAQCAtOCw3ICs4LDcgQEAgTElDX0NIS1NVTSA9ICJiYzdmYWQ0YmJh
+OThlN2E0Y2Q1YWIzMDQyNTA2NDkzYyIKIGluaGVyaXQgbmF0aXZlCiByZXF1aXJlIHJlY2lwZXMt
+dGkvaW5jbHVkZXMvdGktcGF0aHMuaW5jCiAKLVNSQ19VUkkgPSAiaHR0cHM6Ly9yZWxlYXNlcy5s
+aW5hcm8ub3JnL2NvbXBvbmVudHMvdG9vbGNoYWluL2JpbmFyaWVzLzcuMi0ke0dDQ19BUk1fWUVB
+Un0vYWFyY2g2NC1lbGYvZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0OmFh
+cmNoNjQtZWxmLnRhci54ejtuYW1lPWdjYy1saW5hcm8tYWFyY2g2NCIKK1NSQ19VUkkgPSAiaHR0
+cHM6Ly9yZWxlYXNlcy5saW5hcm8ub3JnL2NvbXBvbmVudHMvdG9vbGNoYWluL2JpbmFyaWVzLzcu
+Mi0ke0dDQ19BUk1fWUVBUn0vYWFyY2g2NC1lbGYvZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1f
+WUVBUn0teDg2XzY0X2FhcmNoNjQtZWxmLnRhci54ejtuYW1lPWdjYy1saW5hcm8tYWFyY2g2NCIK
+IAogU1JDX1VSSVtnY2MtbGluYXJvLWFhcmNoNjQubWQ1c3VtXSA9ICI0OTcyZjg5NDM4MjBiZGQy
+ZjU3N2Y0OThkZTc4OTY0YiIKIFNSQ19VUklbZ2NjLWxpbmFyby1hYXJjaDY0LnNoYTI1NnN1bV0g
+PSAiMzBmYjdkODc2YmNiOTgyYzUwMjA1N2M1OTNkOWMxZjExYjM1ZDUxNThhMjZkOTg2NzE4ZTJi
+OTk4Mzg4YzRjOCIKZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFyby1i
+YXJlbWV0YWwtbmF0aXZlLmJiIGIvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVt
+ZXRhbC1uYXRpdmUuYmIKaW5kZXggZDA2ODNmZTExOWI2YWNjMzViNjViZGI1NTA4OGQyYzdmMDc0
+MDg1Ni4uNmQ1ZWMxOTdhMzI5YmZjN2Q3YmY3ODMwYjgzMDg3ZmI4NzVkZmI2NyAxMDA2NDQKLS0t
+IGEvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVtZXRhbC1uYXRpdmUuYmIKKysr
+IGIvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVtZXRhbC1uYXRpdmUuYmIKQEAg
+LTEsNiArMSw2IEBACiBpbmNsdWRlIHJlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFyby5pbmMK
+IAotUEFDS0FHRV9ESVIgPSAiZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0
+OmFybS1lYWJpIgorUEFDS0FHRV9ESVIgPSAiZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1fWUVB
+Un0teDg2XzY0X2FybS1lYWJpIgogUyA9ICIke1dPUktESVJ9LyR7UEFDS0FHRV9ESVJ9IgogCiBM
+SUNfQ0hLU1VNID0gImJjN2ZhZDRiYmE5OGU3YTRjZDVhYjMwNDI1MDY0OTNjIgpAQCAtOCw3ICs4
+LDcgQEAgTElDX0NIS1NVTSA9ICJiYzdmYWQ0YmJhOThlN2E0Y2Q1YWIzMDQyNTA2NDkzYyIKIGlu
+aGVyaXQgbmF0aXZlCiByZXF1aXJlIHJlY2lwZXMtdGkvaW5jbHVkZXMvdGktcGF0aHMuaW5jCiAK
+LVNSQ19VUkkgPSAiaHR0cHM6Ly9yZWxlYXNlcy5saW5hcm8ub3JnL2NvbXBvbmVudHMvdG9vbGNo
+YWluL2JpbmFyaWVzLzcuMi0ke0dDQ19BUk1fWUVBUn0vYXJtLWVhYmkvZ2NjLWxpbmFyby0ke1BW
+fS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0OmFybS1lYWJpLnRhci54ejtuYW1lPWdjYy1saW5hcm8i
+CitTUkNfVVJJID0gImh0dHBzOi8vcmVsZWFzZXMubGluYXJvLm9yZy9jb21wb25lbnRzL3Rvb2xj
+aGFpbi9iaW5hcmllcy83LjItJHtHQ0NfQVJNX1lFQVJ9L2FybS1lYWJpL2djYy1saW5hcm8tJHtQ
+Vn0tJHtHQ0NfQVJNX1lFQVJ9LXg4Nl82NF9hcm0tZWFiaS50YXIueHo7bmFtZT1nY2MtbGluYXJv
+IgogCiBTUkNfVVJJW2djYy1saW5hcm8ubWQ1c3VtXSA9ICI5YTRhMzljZmM3OGM4NDM3NWIxMTYw
+YWE5MzU4N2FlZCIKIFNSQ19VUklbZ2NjLWxpbmFyby5zaGEyNTZzdW1dID0gIjQ1ZmM0ZjkwYWYy
+ZTJlOWMzMTk3YTI3NWY2MDA1ZWY1NjM5ZjdhMTg4OWZhM2ViMjRjMzEyNWNjZDcwZmNkM2QiCmRp
+ZmYgLS1naXQgYS9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndC1hcm1fMTguMTIuNS5iYiBiL3Jl
+Y2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0LWFybV8xOC4xMi41LmJiCmluZGV4IDYwYjIxNmY5ZDc0
+MWYzZTE3MzI3NzEzMDdjODg4ODg1N2VhZmNlOTMuLmI3YjZkOWIxYjY1NThhNjA4MWVmNDBhODE1
+MjQxZjQ1MGVmYWExNTkgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0LWFy
+bV8xOC4xMi41LmJiCisrKyBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0LWFybV8xOC4xMi41
+LmJiCkBAIC0zMSw3ICszMSw3IEBAIGRvX2luc3RhbGwoKSB7CiBTUkNfVVJJW2NndF9hcm1faW5z
+dGFsbGVyLm1kNXN1bV0gPSAiZTllNjY4MzMyY2Y4NmM5NjViNGRhOWQxZDQ4ODQyNmIiCiBTUkNf
+VVJJW2NndF9hcm1faW5zdGFsbGVyLnNoYTI1NnN1bV0gPSAiZGE5NzYxNDMxMjhjNjE5YTI3OGNi
+NDIxNGE0Mjk1YzQwOWQxMDBmOWU2NWFkMmY0ZDBkMTAzOWRiN2NmOThmNCIKIAotQklORklMRV9O
+QU1FID0gImNndDphcm1faW5zdGFsbGVyIgorQklORklMRV9OQU1FID0gImNndF9hcm1faW5zdGFs
+bGVyIgogCiBGSUxFUzoke1BOfSArPSAiJHtNNF9UT09MQ0hBSU5fSU5TVEFMTF9ESVJfUkVDSVBF
+fSIKIApkaWZmIC0tZ2l0IGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3QtcHJ1XzIuMy4yLmJi
+IGIvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3QtcHJ1XzIuMy4yLmJiCmluZGV4IGQxNGMxOTYy
+NWU5YTU2YTZhY2I2NGM3ZWU3YjA5NjZkOGUzYzdiNzUuLjhiM2UyYTA3MTRmNzU3MzhlMzhkYTI2
+ZDc2ZWEyNzRmZmU5ZmYxMzcgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0
+LXBydV8yLjMuMi5iYgorKysgYi9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndC1wcnVfMi4zLjIu
+YmIKQEAgLTgsMTIgKzgsMTIgQEAgTElDX0ZJTEVTX0NIS1NVTTpjbGFzcy10YXJnZXQgPSAiZmls
+ZTovL3Vzci9zaGFyZS9kb2MvdGkvY2d0LXBydS9QUlVfQ29kZV9HZW5lcmEKIHJlcXVpcmUgcmVj
+aXBlcy10aS9pbmNsdWRlcy90aS1wYXRocy5pbmMKIHJlcXVpcmUgcmVjaXBlcy10aS9pbmNsdWRl
+cy90aS11bnBhY2suaW5jCiAKLUJJTkZJTEUgPSAidGlfY2d0X3BydV8ke1BWfV9saW51eF9pbnN0
+YWxsZXI6eDg2LmJpbiIKK0JJTkZJTEUgPSAidGlfY2d0X3BydV8ke1BWfV9saW51eF9pbnN0YWxs
+ZXJfeDg2LmJpbiIKIEJJTkZJTEVfTkFNRSA9ICJjZ3QtcHJ1LXg4NiIKIFRJX0JJTl9VTlBLX0FS
+R1MgPSAiLS1wcmVmaXggJHtTfSIKIFRJX0JJTl9VTlBLX0NNRFMgPSAiIgogCi1CSU5GSUxFOmNs
+YXNzLXRhcmdldCA9ICJ0aV9jZ3RfcHJ1XyR7UFZ9OmFybWxpbnV4YThoZl9idXN5Ym94X2luc3Rh
+bGxlci5zaCIKK0JJTkZJTEU6Y2xhc3MtdGFyZ2V0ID0gInRpX2NndF9wcnVfJHtQVn1fYXJtbGlu
+dXhhOGhmX2J1c3lib3hfaW5zdGFsbGVyLnNoIgogQklORklMRV9OQU1FOmNsYXNzLXRhcmdldCA9
+ICJjZ3QtcHJ1LWFybSIKIAogU1JDX1VSSSA9ICJodHRwOi8vc29mdHdhcmUtZGwudGkuY29tL2Nv
+ZGVnZW4vZXNkL2NndF9wdWJsaWNfc3cvUFJVLyR7UFZ9LyR7QklORklMRX07bmFtZT0ke0JJTkZJ
+TEVfTkFNRX0iCmRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDQ3MC5pbmMg
+Yi9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDQ3MC5pbmMKaW5kZXggYzhmOTEyNzFiZDZlZDhk
+NzIxODg3YTYwMTIyOGQxYTFmYmJlZjVmMC4uZjA5OTJhYTdkYjhlZmE5Mzk1ZTMzMjFjMzUxNzkx
+NWI2ZDcxMzg0MiAxMDA2NDQKLS0tIGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3Q0NzAuaW5j
+CisrKyBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0NDcwLmluYwpAQCAtMTMsNyArMTMsNyBA
+QCBTID0gIiR7V09SS0RJUn0vY2d0NDcwXyR7UFZ9IgogCiBTUkNfVVJJID0gImh0dHA6Ly9pbnN0
+YWxsLnNvdXJjZS5kaXIubG9jYWwvdGlfY2d0X3RtczQ3MF8ke1BWd2l0aGRvdHN9X3NldHVwX2xp
+bnV4X3g4Ni5iaW47bmFtZT1jZ3Q0NzBiaW4iCiAKLUJJTkZJTEU9InRpX2NndF90bXM0NzBfJHtQ
+VndpdGhkb3RzfV9zZXR1cF9saW51eDp4ODYuYmluIgorQklORklMRT0idGlfY2d0X3RtczQ3MF8k
+e1BWd2l0aGRvdHN9X3NldHVwX2xpbnV4X3g4Ni5iaW4iCiBUSV9CSU5fVU5QS19DTURTPSJZOnFZ
+OndvcmtkaXI6IDogIgogVElfQklOX1VOUEtfV0RFWFQ9Ii9jZ3Q0NzBfJHtQVn0iCiAKZGlmZiAt
+LWdpdCBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0NnhfOC4zLjIuYmIgYi9yZWNpcGVzLXRp
+L2RldnRvb2xzL3RpLWNndDZ4XzguMy4yLmJiCmluZGV4IDAwMjIxZDg0ZGFmNTIwMjUxMzQzNWQ4
+MWZmNWFkMGI2YTIxNGFlYTYuLmZkMzQ2NTdhNDVjYmZiZmY1NjYzYWM1YzI0YmY5Y2FkN2NmZWMx
+ZjkgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0NnhfOC4zLjIuYmIKKysr
+IGIvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3Q2eF84LjMuMi5iYgpAQCAtMjYsMTMgKzI2LDEz
+IEBAIHB5dGhvbiBfX2Fub255bW91cygpIHsKICAgICAgICAgICAgIHJhaXNlIGJiLnBhcnNlLlNr
+aXBQYWNrYWdlKCIlcy0lcyBPTkxZIHN1cHBvcnRzIGhhcmRmcCBtb2RlIGZvciBub3ciICUgKHBr
+Z24sIHBrZ3YpKQogfQogCi1CSU5GSUxFID0gInRpX2NndF9jNjAwMF8ke1BWfV9saW51eF9pbnN0
+YWxsZXI6eDg2LmJpbiIKLUJJTkZJTEVfTkFNRSA9ICJjZ3Q2eDp4ODZfaW5zdGFsbGVyIgorQklO
+RklMRSA9ICJ0aV9jZ3RfYzYwMDBfJHtQVn1fbGludXhfaW5zdGFsbGVyX3g4Ni5iaW4iCitCSU5G
+SUxFX05BTUUgPSAiY2d0NnhfeDg2X2luc3RhbGxlciIKIFRJX0JJTl9VTlBLX0FSR1MgPSAiLS1w
+cmVmaXggJHtTfSIKIFRJX0JJTl9VTlBLX0NNRFMgPSAiIgogCi1CSU5GSUxFOmNsYXNzLXRhcmdl
+dCA9ICJ0aV9jZ3RfYzYwMDBfJHtQVn06YXJtbGludXhhOGhmX2J1c3lib3hfaW5zdGFsbGVyLnNo
+IgotQklORklMRV9OQU1FOmNsYXNzLXRhcmdldCA9ICJjZ3Q2eDphcm1faW5zdGFsbGVyIgorQklO
+RklMRTpjbGFzcy10YXJnZXQgPSAidGlfY2d0X2M2MDAwXyR7UFZ9X2FybWxpbnV4YThoZl9idXN5
+Ym94X2luc3RhbGxlci5zaCIKK0JJTkZJTEVfTkFNRTpjbGFzcy10YXJnZXQgPSAiY2d0NnhfYXJt
+X2luc3RhbGxlciIKIAogU1JDX1VSSSA9ICJodHRwOi8vc29mdHdhcmUtZGwudGkuY29tL2NvZGVn
+ZW4vZXNkL2NndF9wdWJsaWNfc3cvQzYwMDAvJHtQVn0vJHtCSU5GSUxFfTtuYW1lPSR7QklORklM
+RV9OQU1FfSIKIApkaWZmIC0tZ2l0IGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3Q3eF8xLjIu
+MC5iYiBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0N3hfMS4yLjAuYmIKaW5kZXggMzViNThk
+NGM1YzI2OWI1ZWRhYTdmYWUwNWMyMTM1YTg1OTBiOWJiZi4uYjQ1YjUyYTM2YjgzZDUyMmVmNGY1
+OGEyNDczZjM5OTI1ZmI5NjIyMyAxMDA2NDQKLS0tIGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1j
+Z3Q3eF8xLjIuMC5iYgorKysgYi9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDd4XzEuMi4wLmJi
+CkBAIC0yMCw3ICsyMCw3IEBAIENPTVBBVElCTEVfSE9TVDpjbGFzcy10YXJnZXQgPSAibnVsbCIK
+IFBFID0gIjEiCiAKIEJJTkZJTEUgPSAidGlfY2d0X2M3MDAwXyR7UFZ9LlNUU19saW51eF9pbnN0
+YWxsZXJfeDg2LmJpbiIKLUJJTkZJTEVfTkFNRSA9ICJjZ3Q3eDp4ODZfaW5zdGFsbGVyIgorQklO
+RklMRV9OQU1FID0gImNndDd4X3g4Nl9pbnN0YWxsZXIiCiAKIFNSQ19VUkkgPSAiaHR0cDovL3Nv
+ZnR3YXJlLWRsLnRpLmNvbS9jb2RlZ2VuL2VzZC9jZ3RfcHVibGljX3N3L0M3MDAwLyR7UFZ9LlNU
+Uy8ke0JJTkZJTEV9O25hbWU9JHtCSU5GSUxFX05BTUV9IgogCmRpZmYgLS1naXQgYS9yZWNpcGVz
+LXRpL2RtYWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2ggYi9yZWNpcGVzLXRp
+L2RtYWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2gKaW5kZXggMmJmZDAzYzJh
+NDU4OGNlYWMyNzIwMTk1YTQ2MGQ1NDZhYWRlNWQ3Zi4uNzEyMGI3NDQ4M2I4MTk4OTIwZTUxYjll
+ZTI1NjRkYTkxMmNjMGZlYSAxMDA3NTUKLS0tIGEvcmVjaXBlcy10aS9kbWFpL3RpLWRtYWkvbG9h
+ZG1vZHVsZXMtdGktZG1haS1hcHBzLnNoCisrKyBiL3JlY2lwZXMtdGkvZG1haS90aS1kbWFpL2xv
+YWRtb2R1bGVzLXRpLWRtYWktYXBwcy5zaApAQCAtMzQsNCArMzQsNCBAQCBtb2Rwcm9iZSBkc3Bs
+aW5rawogCiAjIGluc2VydCBMb2NhbCBQb3dlciBNYW5hZ2VyIGRyaXZlcgogIwotbW9kcHJvYmUg
+bHBtOm9tYXAzNTMwCittb2Rwcm9iZSBscG1fb21hcDM1MzAKZGlmZiAtLWdpdCBhL3JlY2lwZXMt
+dGkvZG1haS90aS1kbWFpL2xvYWRtb2R1bGVzLXRpLWRtYWktbzM1MzBfYWwuc2ggYi9yZWNpcGVz
+LXRpL2RtYWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLW8zNTMwX2FsLnNoCmluZGV4IDA5
+NGQyM2QxNzMwZGRiZDc2MjEwOTc4MjRiNjU3MDkzZTQ3MzdhMjEuLjA3NmFmMDcyMjM3MGUyYTQw
+OWZmYjkwYzk4NzEwMmUwNDhhYzE1MDQgMTAwNzU1Ci0tLSBhL3JlY2lwZXMtdGkvZG1haS90aS1k
+bWFpL2xvYWRtb2R1bGVzLXRpLWRtYWktbzM1MzBfYWwuc2gKKysrIGIvcmVjaXBlcy10aS9kbWFp
+L3RpLWRtYWkvbG9hZG1vZHVsZXMtdGktZG1haS1vMzUzMF9hbC5zaApAQCAtMzgsNSArMzgsNSBA
+QCBta25vZCAvZGV2L2RzcGxpbmsgYyBgYXdrICJcXCQyPT1cImRzcGxpbmtcIiB7cHJpbnQgXFwk
+MX0iIC9wcm9jL2RldmljZXNgIDAKIAogIyBpbnNlcnQgTG9jYWwgUG93ZXIgTWFuYWdlciBkcml2
+ZXIKICMKLW1vZHByb2JlIGxwbTpvbWFwMzUzMAorbW9kcHJvYmUgbHBtX29tYXAzNTMwCiAKZGlm
+ZiAtLWdpdCBhL3JlY2lwZXMtdGkvZG1haS90aS1kbWFpL3VubG9hZG1vZHVsZXMtdGktZG1haS1h
+cHBzLnNoIGIvcmVjaXBlcy10aS9kbWFpL3RpLWRtYWkvdW5sb2FkbW9kdWxlcy10aS1kbWFpLWFw
+cHMuc2gKaW5kZXggODFkMDBhZjg0YmQ4YjBmY2Y4OWIxYWIzYzY1ZDBmYzhlODI2NzFlZi4uNzkz
+ZDcyN2YzOTM0YWNhY2M3NWViYzZkZTFjYTI2YTJmNzRjMjk5YiAxMDA2NDQKLS0tIGEvcmVjaXBl
+cy10aS9kbWFpL3RpLWRtYWkvdW5sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2gKKysrIGIvcmVj
+aXBlcy10aS9kbWFpL3RpLWRtYWkvdW5sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2gKQEAgLTEs
+NyArMSw3IEBACiAjIFVubG9hZCBtb2R1bGVzIC0gRE1BSSAtIE9NQVAzNTMwCiAKICMgcmVtb3Zl
+IGxwbSBtb2R1bGUKLXJtbW9kIGxwbTpvbWFwMzUzMAorcm1tb2QgbHBtX29tYXAzNTMwCiAKICMg
+cmVtb3ZlIERTUC9CSU9TIExpbmsgZHJpdmVyCiBybW1vZCBkc3BsaW5rawotLSAKMi4zMy4wCgo=
 
->=20
-> Poky (Yocto Project Reference Distro) 3.3+snapshot-f2728d3ec8c0589e02e9=
-a3ce7cf8aca902cae0a3 k2g-evm /dev/ttyS0 =E2=80=9C
-
-meta-ti does'nt set the password for poky.
-
-[1] https://www.yoctoproject.org/docs/2.4/ref-manual/ref-manual.html#var-=
-EXTRA_IMAGE_FEATURES
-
---=20
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DD=
-B5 849D 1736 249D
+--0000000000007cbadb05cd33ad85--
