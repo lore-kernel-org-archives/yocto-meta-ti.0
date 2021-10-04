@@ -1,243 +1,244 @@
-Received: from mail-ua1-f52.google.com (mail-ua1-f52.google.com [209.85.222.52])
- by mx.groups.io with SMTP id smtpd.web12.10488.1632996722896071451
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web09.13933.1633371331390088374
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 30 Sep 2021 03:12:03 -0700
+ Mon, 04 Oct 2021 11:15:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="no key for verify" header.i=@sutherland.id.au header.s=google header.b=qnbtJ95g;
- spf=pass (domain: sutherland.id.au, ip: 209.85.222.52, mailfrom: phil@sutherland.id.au)
-Received: by mail-ua1-f52.google.com with SMTP id u5so813202uao.13
-        for <meta-ti@lists.yoctoproject.org>; Thu, 30 Sep 2021 03:12:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=sutherland.id.au; s=google;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=pYJumHcRewly3jGxQOXZg8TUnFYiJ2KmaYM3FZ8SXrQ=;
-        b=qnbtJ95grg2GN1tOSxGlZ5mxzu/KJeiy3hY71Gzfy0YHqhgCBgZHx2mG9tmiuxN+9n
-         tRLylCCdjHhq9nIGHxICBUmcBy8wlwco3tHxW6RD7J+7NGhKZT8pjjhktIpc7nBidGQX
-         w4Fs7CkmBVR5uQWz7YwJGcyEy+qx68/3VJt4U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=pYJumHcRewly3jGxQOXZg8TUnFYiJ2KmaYM3FZ8SXrQ=;
-        b=6ao3yE8XRipWD8YxkN2emo8YSI7fEiC0ViqbvPMLPLDlj9wNrBPk/8WX7LsGHSgfVc
-         Cc/q+Go+ZUvYvRP/yg8BkbE4vxCaxSF5TydMZdGMqv03q0utbry2omvToY1c+CGGz+oW
-         1szMmctOXw6YHDR6S8hFa1qpx5TnPr3CwQECeF5nenhV1mMg7E9CnSgPif6kgovf0ctr
-         1Nj8yf9l5oBoE6elJp66xgHJ0lPY/xbJB668Gt36iArp/FEFAY93i+6HPEAvAiEQiRR+
-         lAlM0s0kLY1ZP21ecUad6jtC46M0iAHwiFsnMDlUyvtUi/vjjrk10Jot8A8RJsc+PXwH
-         6QnA==
-X-Gm-Message-State: AOAM530bClk7jdPBkcHJBMHd1HOaRLd/eSp02tkD47EIXCYqZh8PoAdU
-	oLzwJ0COyb7bcWWAmRCWxjXWD91EDbbNUZgKMVvMnV6sMfK5Hw==
-X-Google-Smtp-Source: ABdhPJyWcEcUabH2PeAO0TwXNG8gbSkiW9jsJ7fmB64NXByq62hIHkZh/H8l1cJkuSDJm+xY+WOjsEZgsTsZNuc54+I=
-X-Received: by 2002:ab0:5b89:: with SMTP id y9mr4385349uae.47.1632996721179;
- Thu, 30 Sep 2021 03:12:01 -0700 (PDT)
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D467D40C47;
+	Mon,  4 Oct 2021 18:15:29 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id m08UHZ6vgT6J; Mon,  4 Oct 2021 18:15:29 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A941B40A46;
+	Mon,  4 Oct 2021 18:15:28 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 66BEF174676; Mon,  4 Oct 2021 14:15:28 -0400 (EDT)
+Date: Mon, 4 Oct 2021 14:15:28 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Phil Sutherland <phil@sutherland.id.au>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] Append syntax patch, and hardknott compatibility
+Message-ID: <20211004181528.GA1528@denix.org>
+References: <CACpu_i6Ndw_zt6v0qZgim4MJQF-O_3j29Sz_nPhAMc=hrbhtpw@mail.gmail.com>
 MIME-Version: 1.0
-From: phil@sutherland.id.au
-Date: Thu, 30 Sep 2021 18:11:50 +0800
-Message-ID: <CACpu_i6Ndw_zt6v0qZgim4MJQF-O_3j29Sz_nPhAMc=hrbhtpw@mail.gmail.com>
-Subject: Append syntax patch, and hardknott compatibility
-To: meta-ti@lists.yoctoproject.org
-X-Groupsio-MsgNum: 14009
-Content-Type: multipart/mixed; boundary="0000000000007cbadb05cd33ad85"
+In-Reply-To: <CACpu_i6Ndw_zt6v0qZgim4MJQF-O_3j29Sz_nPhAMc=hrbhtpw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---0000000000007cbadb05cd33ad85
-Content-Type: multipart/alternative; boundary="0000000000007cbad905cd33ad83"
+Phil,
 
---0000000000007cbad905cd33ad83
-Content-Type: text/plain; charset="UTF-8"
+Thank you for your patch! The change looks correct, as those were all false 
+positives converted by the automated script and missed during manual review.
 
-Greetings all,
-Attached is a patch which fixes several file and module naming errors
-introduced by the recent honister append syntax changes. The specific one
-which bit me is in the ti-cgt-pru recipe, and the others I found during a
-subsequent review of the honister patch.
+Could you please resend the patch separately with git-send-email, not as an 
+attachment.
 
-Also, at present there does not appear to be a current meta-ti branch that
-supports hardknott in layers.conf. I believe the new append syntax became
-available as of hardknott 3.3.3 - is there any other reason that the master
-branch should not be regarded as compatible?
-All the best
-phil
+As of the compatibility question - the new override syntax was added during 
+honister development cycle. Some rudimentary parsing support was backported to 
+older releases, all the way to dunfell, as long as you use the latest bitbake 
+from that release. Either way, meta-ti is not being actively tested against 
+hardknot release...
 
---0000000000007cbad905cd33ad83
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Thanks,
 
-<div dir=3D"ltr">Greetings all,<div>Attached is a patch which fixes several=
- file and module naming errors introduced by the recent honister append syn=
-tax=C2=A0changes. The specific one which=C2=A0bit me is in the ti-cgt-pru r=
-ecipe, and the others I found during a subsequent review of the honister pa=
-tch.=C2=A0<br><br>Also, at present there does not appear to be a current me=
-ta-ti branch that supports hardknott in layers.conf. I believe the new appe=
-nd=C2=A0syntax=C2=A0became available as of hardknott 3.3.3 - is there any o=
-ther reason that the master branch should not be regarded as compatible?=C2=
-=A0<br>All the best</div><font color=3D"#888888"><div>phil</div></font></di=
-v>
+-- 
+Denys
 
---0000000000007cbad905cd33ad83--
 
---0000000000007cbadb05cd33ad85
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-Fix-several-naming-errors-introduced-in-override-pre.patch"
-Content-Disposition: attachment; 
-	filename="0001-Fix-several-naming-errors-introduced-in-override-pre.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_ku6s2p7l0>
-X-Attachment-Id: f_ku6s2p7l0
+On Thu, Sep 30, 2021 at 06:11:50PM +0800, Phil Sutherland wrote:
+> Greetings all,
+> Attached is a patch which fixes several file and module naming errors
+> introduced by the recent honister append syntax changes. The specific one
+> which bit me is in the ti-cgt-pru recipe, and the others I found during a
+> subsequent review of the honister patch.
+> 
+> Also, at present there does not appear to be a current meta-ti branch that
+> supports hardknott in layers.conf. I believe the new append syntax became
+> available as of hardknott 3.3.3 - is there any other reason that the master
+> branch should not be regarded as compatible?
+> All the best
+> phil
 
-RnJvbSAxY2RiOTFlOTMzYzg3YTVmZjVjOTAwMGU1ZjVhMmQ2NjIwODZmN2E3IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBQaGlsIFN1dGhlcmxhbmQgPHBoaWxzQHJjdC1nbG9iYWwuY29t
-PgpEYXRlOiBUaHUsIDMwIFNlcCAyMDIxIDE3OjM3OjQ3ICswODAwClN1YmplY3Q6IFtQQVRDSF0g
-Rml4IHNldmVyYWwgbmFtaW5nIGVycm9ycyBpbnRyb2R1Y2VkIGluIG92ZXJyaWRlIHByZWZpeAog
-Y29udmVyc2lvbgoKLS0tCiAuLi4vZGV2dG9vbHMvZ2NjLWxpbmFyby1iYXJlbWV0YWwtYWFyY2g2
-NC1uYXRpdmUuYmIgICAgICAgfCA0ICsrLS0KIHJlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFy
-by1iYXJlbWV0YWwtbmF0aXZlLmJiICAgICAgICB8IDQgKystLQogcmVjaXBlcy10aS9kZXZ0b29s
-cy90aS1jZ3QtYXJtXzE4LjEyLjUuYmIgICAgICAgICAgICAgICAgIHwgMiArLQogcmVjaXBlcy10
-aS9kZXZ0b29scy90aS1jZ3QtcHJ1XzIuMy4yLmJiICAgICAgICAgICAgICAgICAgIHwgNCArKy0t
-CiByZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDQ3MC5pbmMgICAgICAgICAgICAgICAgICAgICAg
-ICAgfCAyICstCiByZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDZ4XzguMy4yLmJiICAgICAgICAg
-ICAgICAgICAgICAgfCA4ICsrKystLS0tCiByZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDd4XzEu
-Mi4wLmJiICAgICAgICAgICAgICAgICAgICAgfCAyICstCiByZWNpcGVzLXRpL2RtYWkvdGktZG1h
-aS9sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2ggICAgICAgfCAyICstCiByZWNpcGVzLXRpL2Rt
-YWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLW8zNTMwX2FsLnNoICAgfCAyICstCiByZWNp
-cGVzLXRpL2RtYWkvdGktZG1haS91bmxvYWRtb2R1bGVzLXRpLWRtYWktYXBwcy5zaCAgICAgfCAy
-ICstCiAxMCBmaWxlcyBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkK
-CmRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL2RldnRvb2xzL2djYy1saW5hcm8tYmFyZW1ldGFsLWFh
-cmNoNjQtbmF0aXZlLmJiIGIvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVtZXRh
-bC1hYXJjaDY0LW5hdGl2ZS5iYgppbmRleCBmMTU5NmE4YjU3YWE4MTQ5NWJlMTc1NTk1MzJjMjA5
-MmYwMWQ4MTQ3Li4zYjQwYzliZGU3Y2Q2YThmZjkyZTNlY2I0MjZlZTliMDMxODQwMWI5IDEwMDY0
-NAotLS0gYS9yZWNpcGVzLXRpL2RldnRvb2xzL2djYy1saW5hcm8tYmFyZW1ldGFsLWFhcmNoNjQt
-bmF0aXZlLmJiCisrKyBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFyby1iYXJlbWV0YWwt
-YWFyY2g2NC1uYXRpdmUuYmIKQEAgLTEsNiArMSw2IEBACiBpbmNsdWRlIHJlY2lwZXMtdGkvZGV2
-dG9vbHMvZ2NjLWxpbmFyby5pbmMKIAotUEFDS0FHRV9ESVIgPSAiZ2NjLWxpbmFyby0ke1BWfS0k
-e0dDQ19BUk1fWUVBUn0teDg2XzY0OmFhcmNoNjQtZWxmIgorUEFDS0FHRV9ESVIgPSAiZ2NjLWxp
-bmFyby0ke1BWfS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0X2FhcmNoNjQtZWxmIgogUyA9ICIke1dP
-UktESVJ9LyR7UEFDS0FHRV9ESVJ9IgogCiBMSUNfQ0hLU1VNID0gImJjN2ZhZDRiYmE5OGU3YTRj
-ZDVhYjMwNDI1MDY0OTNjIgpAQCAtOCw3ICs4LDcgQEAgTElDX0NIS1NVTSA9ICJiYzdmYWQ0YmJh
-OThlN2E0Y2Q1YWIzMDQyNTA2NDkzYyIKIGluaGVyaXQgbmF0aXZlCiByZXF1aXJlIHJlY2lwZXMt
-dGkvaW5jbHVkZXMvdGktcGF0aHMuaW5jCiAKLVNSQ19VUkkgPSAiaHR0cHM6Ly9yZWxlYXNlcy5s
-aW5hcm8ub3JnL2NvbXBvbmVudHMvdG9vbGNoYWluL2JpbmFyaWVzLzcuMi0ke0dDQ19BUk1fWUVB
-Un0vYWFyY2g2NC1lbGYvZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0OmFh
-cmNoNjQtZWxmLnRhci54ejtuYW1lPWdjYy1saW5hcm8tYWFyY2g2NCIKK1NSQ19VUkkgPSAiaHR0
-cHM6Ly9yZWxlYXNlcy5saW5hcm8ub3JnL2NvbXBvbmVudHMvdG9vbGNoYWluL2JpbmFyaWVzLzcu
-Mi0ke0dDQ19BUk1fWUVBUn0vYWFyY2g2NC1lbGYvZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1f
-WUVBUn0teDg2XzY0X2FhcmNoNjQtZWxmLnRhci54ejtuYW1lPWdjYy1saW5hcm8tYWFyY2g2NCIK
-IAogU1JDX1VSSVtnY2MtbGluYXJvLWFhcmNoNjQubWQ1c3VtXSA9ICI0OTcyZjg5NDM4MjBiZGQy
-ZjU3N2Y0OThkZTc4OTY0YiIKIFNSQ19VUklbZ2NjLWxpbmFyby1hYXJjaDY0LnNoYTI1NnN1bV0g
-PSAiMzBmYjdkODc2YmNiOTgyYzUwMjA1N2M1OTNkOWMxZjExYjM1ZDUxNThhMjZkOTg2NzE4ZTJi
-OTk4Mzg4YzRjOCIKZGlmZiAtLWdpdCBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFyby1i
-YXJlbWV0YWwtbmF0aXZlLmJiIGIvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVt
-ZXRhbC1uYXRpdmUuYmIKaW5kZXggZDA2ODNmZTExOWI2YWNjMzViNjViZGI1NTA4OGQyYzdmMDc0
-MDg1Ni4uNmQ1ZWMxOTdhMzI5YmZjN2Q3YmY3ODMwYjgzMDg3ZmI4NzVkZmI2NyAxMDA2NDQKLS0t
-IGEvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVtZXRhbC1uYXRpdmUuYmIKKysr
-IGIvcmVjaXBlcy10aS9kZXZ0b29scy9nY2MtbGluYXJvLWJhcmVtZXRhbC1uYXRpdmUuYmIKQEAg
-LTEsNiArMSw2IEBACiBpbmNsdWRlIHJlY2lwZXMtdGkvZGV2dG9vbHMvZ2NjLWxpbmFyby5pbmMK
-IAotUEFDS0FHRV9ESVIgPSAiZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0
-OmFybS1lYWJpIgorUEFDS0FHRV9ESVIgPSAiZ2NjLWxpbmFyby0ke1BWfS0ke0dDQ19BUk1fWUVB
-Un0teDg2XzY0X2FybS1lYWJpIgogUyA9ICIke1dPUktESVJ9LyR7UEFDS0FHRV9ESVJ9IgogCiBM
-SUNfQ0hLU1VNID0gImJjN2ZhZDRiYmE5OGU3YTRjZDVhYjMwNDI1MDY0OTNjIgpAQCAtOCw3ICs4
-LDcgQEAgTElDX0NIS1NVTSA9ICJiYzdmYWQ0YmJhOThlN2E0Y2Q1YWIzMDQyNTA2NDkzYyIKIGlu
-aGVyaXQgbmF0aXZlCiByZXF1aXJlIHJlY2lwZXMtdGkvaW5jbHVkZXMvdGktcGF0aHMuaW5jCiAK
-LVNSQ19VUkkgPSAiaHR0cHM6Ly9yZWxlYXNlcy5saW5hcm8ub3JnL2NvbXBvbmVudHMvdG9vbGNo
-YWluL2JpbmFyaWVzLzcuMi0ke0dDQ19BUk1fWUVBUn0vYXJtLWVhYmkvZ2NjLWxpbmFyby0ke1BW
-fS0ke0dDQ19BUk1fWUVBUn0teDg2XzY0OmFybS1lYWJpLnRhci54ejtuYW1lPWdjYy1saW5hcm8i
-CitTUkNfVVJJID0gImh0dHBzOi8vcmVsZWFzZXMubGluYXJvLm9yZy9jb21wb25lbnRzL3Rvb2xj
-aGFpbi9iaW5hcmllcy83LjItJHtHQ0NfQVJNX1lFQVJ9L2FybS1lYWJpL2djYy1saW5hcm8tJHtQ
-Vn0tJHtHQ0NfQVJNX1lFQVJ9LXg4Nl82NF9hcm0tZWFiaS50YXIueHo7bmFtZT1nY2MtbGluYXJv
-IgogCiBTUkNfVVJJW2djYy1saW5hcm8ubWQ1c3VtXSA9ICI5YTRhMzljZmM3OGM4NDM3NWIxMTYw
-YWE5MzU4N2FlZCIKIFNSQ19VUklbZ2NjLWxpbmFyby5zaGEyNTZzdW1dID0gIjQ1ZmM0ZjkwYWYy
-ZTJlOWMzMTk3YTI3NWY2MDA1ZWY1NjM5ZjdhMTg4OWZhM2ViMjRjMzEyNWNjZDcwZmNkM2QiCmRp
-ZmYgLS1naXQgYS9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndC1hcm1fMTguMTIuNS5iYiBiL3Jl
-Y2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0LWFybV8xOC4xMi41LmJiCmluZGV4IDYwYjIxNmY5ZDc0
-MWYzZTE3MzI3NzEzMDdjODg4ODg1N2VhZmNlOTMuLmI3YjZkOWIxYjY1NThhNjA4MWVmNDBhODE1
-MjQxZjQ1MGVmYWExNTkgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0LWFy
-bV8xOC4xMi41LmJiCisrKyBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0LWFybV8xOC4xMi41
-LmJiCkBAIC0zMSw3ICszMSw3IEBAIGRvX2luc3RhbGwoKSB7CiBTUkNfVVJJW2NndF9hcm1faW5z
-dGFsbGVyLm1kNXN1bV0gPSAiZTllNjY4MzMyY2Y4NmM5NjViNGRhOWQxZDQ4ODQyNmIiCiBTUkNf
-VVJJW2NndF9hcm1faW5zdGFsbGVyLnNoYTI1NnN1bV0gPSAiZGE5NzYxNDMxMjhjNjE5YTI3OGNi
-NDIxNGE0Mjk1YzQwOWQxMDBmOWU2NWFkMmY0ZDBkMTAzOWRiN2NmOThmNCIKIAotQklORklMRV9O
-QU1FID0gImNndDphcm1faW5zdGFsbGVyIgorQklORklMRV9OQU1FID0gImNndF9hcm1faW5zdGFs
-bGVyIgogCiBGSUxFUzoke1BOfSArPSAiJHtNNF9UT09MQ0hBSU5fSU5TVEFMTF9ESVJfUkVDSVBF
-fSIKIApkaWZmIC0tZ2l0IGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3QtcHJ1XzIuMy4yLmJi
-IGIvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3QtcHJ1XzIuMy4yLmJiCmluZGV4IGQxNGMxOTYy
-NWU5YTU2YTZhY2I2NGM3ZWU3YjA5NjZkOGUzYzdiNzUuLjhiM2UyYTA3MTRmNzU3MzhlMzhkYTI2
-ZDc2ZWEyNzRmZmU5ZmYxMzcgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0
-LXBydV8yLjMuMi5iYgorKysgYi9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndC1wcnVfMi4zLjIu
-YmIKQEAgLTgsMTIgKzgsMTIgQEAgTElDX0ZJTEVTX0NIS1NVTTpjbGFzcy10YXJnZXQgPSAiZmls
-ZTovL3Vzci9zaGFyZS9kb2MvdGkvY2d0LXBydS9QUlVfQ29kZV9HZW5lcmEKIHJlcXVpcmUgcmVj
-aXBlcy10aS9pbmNsdWRlcy90aS1wYXRocy5pbmMKIHJlcXVpcmUgcmVjaXBlcy10aS9pbmNsdWRl
-cy90aS11bnBhY2suaW5jCiAKLUJJTkZJTEUgPSAidGlfY2d0X3BydV8ke1BWfV9saW51eF9pbnN0
-YWxsZXI6eDg2LmJpbiIKK0JJTkZJTEUgPSAidGlfY2d0X3BydV8ke1BWfV9saW51eF9pbnN0YWxs
-ZXJfeDg2LmJpbiIKIEJJTkZJTEVfTkFNRSA9ICJjZ3QtcHJ1LXg4NiIKIFRJX0JJTl9VTlBLX0FS
-R1MgPSAiLS1wcmVmaXggJHtTfSIKIFRJX0JJTl9VTlBLX0NNRFMgPSAiIgogCi1CSU5GSUxFOmNs
-YXNzLXRhcmdldCA9ICJ0aV9jZ3RfcHJ1XyR7UFZ9OmFybWxpbnV4YThoZl9idXN5Ym94X2luc3Rh
-bGxlci5zaCIKK0JJTkZJTEU6Y2xhc3MtdGFyZ2V0ID0gInRpX2NndF9wcnVfJHtQVn1fYXJtbGlu
-dXhhOGhmX2J1c3lib3hfaW5zdGFsbGVyLnNoIgogQklORklMRV9OQU1FOmNsYXNzLXRhcmdldCA9
-ICJjZ3QtcHJ1LWFybSIKIAogU1JDX1VSSSA9ICJodHRwOi8vc29mdHdhcmUtZGwudGkuY29tL2Nv
-ZGVnZW4vZXNkL2NndF9wdWJsaWNfc3cvUFJVLyR7UFZ9LyR7QklORklMRX07bmFtZT0ke0JJTkZJ
-TEVfTkFNRX0iCmRpZmYgLS1naXQgYS9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDQ3MC5pbmMg
-Yi9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDQ3MC5pbmMKaW5kZXggYzhmOTEyNzFiZDZlZDhk
-NzIxODg3YTYwMTIyOGQxYTFmYmJlZjVmMC4uZjA5OTJhYTdkYjhlZmE5Mzk1ZTMzMjFjMzUxNzkx
-NWI2ZDcxMzg0MiAxMDA2NDQKLS0tIGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3Q0NzAuaW5j
-CisrKyBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0NDcwLmluYwpAQCAtMTMsNyArMTMsNyBA
-QCBTID0gIiR7V09SS0RJUn0vY2d0NDcwXyR7UFZ9IgogCiBTUkNfVVJJID0gImh0dHA6Ly9pbnN0
-YWxsLnNvdXJjZS5kaXIubG9jYWwvdGlfY2d0X3RtczQ3MF8ke1BWd2l0aGRvdHN9X3NldHVwX2xp
-bnV4X3g4Ni5iaW47bmFtZT1jZ3Q0NzBiaW4iCiAKLUJJTkZJTEU9InRpX2NndF90bXM0NzBfJHtQ
-VndpdGhkb3RzfV9zZXR1cF9saW51eDp4ODYuYmluIgorQklORklMRT0idGlfY2d0X3RtczQ3MF8k
-e1BWd2l0aGRvdHN9X3NldHVwX2xpbnV4X3g4Ni5iaW4iCiBUSV9CSU5fVU5QS19DTURTPSJZOnFZ
-OndvcmtkaXI6IDogIgogVElfQklOX1VOUEtfV0RFWFQ9Ii9jZ3Q0NzBfJHtQVn0iCiAKZGlmZiAt
-LWdpdCBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0NnhfOC4zLjIuYmIgYi9yZWNpcGVzLXRp
-L2RldnRvb2xzL3RpLWNndDZ4XzguMy4yLmJiCmluZGV4IDAwMjIxZDg0ZGFmNTIwMjUxMzQzNWQ4
-MWZmNWFkMGI2YTIxNGFlYTYuLmZkMzQ2NTdhNDVjYmZiZmY1NjYzYWM1YzI0YmY5Y2FkN2NmZWMx
-ZjkgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0NnhfOC4zLjIuYmIKKysr
-IGIvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3Q2eF84LjMuMi5iYgpAQCAtMjYsMTMgKzI2LDEz
-IEBAIHB5dGhvbiBfX2Fub255bW91cygpIHsKICAgICAgICAgICAgIHJhaXNlIGJiLnBhcnNlLlNr
-aXBQYWNrYWdlKCIlcy0lcyBPTkxZIHN1cHBvcnRzIGhhcmRmcCBtb2RlIGZvciBub3ciICUgKHBr
-Z24sIHBrZ3YpKQogfQogCi1CSU5GSUxFID0gInRpX2NndF9jNjAwMF8ke1BWfV9saW51eF9pbnN0
-YWxsZXI6eDg2LmJpbiIKLUJJTkZJTEVfTkFNRSA9ICJjZ3Q2eDp4ODZfaW5zdGFsbGVyIgorQklO
-RklMRSA9ICJ0aV9jZ3RfYzYwMDBfJHtQVn1fbGludXhfaW5zdGFsbGVyX3g4Ni5iaW4iCitCSU5G
-SUxFX05BTUUgPSAiY2d0NnhfeDg2X2luc3RhbGxlciIKIFRJX0JJTl9VTlBLX0FSR1MgPSAiLS1w
-cmVmaXggJHtTfSIKIFRJX0JJTl9VTlBLX0NNRFMgPSAiIgogCi1CSU5GSUxFOmNsYXNzLXRhcmdl
-dCA9ICJ0aV9jZ3RfYzYwMDBfJHtQVn06YXJtbGludXhhOGhmX2J1c3lib3hfaW5zdGFsbGVyLnNo
-IgotQklORklMRV9OQU1FOmNsYXNzLXRhcmdldCA9ICJjZ3Q2eDphcm1faW5zdGFsbGVyIgorQklO
-RklMRTpjbGFzcy10YXJnZXQgPSAidGlfY2d0X2M2MDAwXyR7UFZ9X2FybWxpbnV4YThoZl9idXN5
-Ym94X2luc3RhbGxlci5zaCIKK0JJTkZJTEVfTkFNRTpjbGFzcy10YXJnZXQgPSAiY2d0NnhfYXJt
-X2luc3RhbGxlciIKIAogU1JDX1VSSSA9ICJodHRwOi8vc29mdHdhcmUtZGwudGkuY29tL2NvZGVn
-ZW4vZXNkL2NndF9wdWJsaWNfc3cvQzYwMDAvJHtQVn0vJHtCSU5GSUxFfTtuYW1lPSR7QklORklM
-RV9OQU1FfSIKIApkaWZmIC0tZ2l0IGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1jZ3Q3eF8xLjIu
-MC5iYiBiL3JlY2lwZXMtdGkvZGV2dG9vbHMvdGktY2d0N3hfMS4yLjAuYmIKaW5kZXggMzViNThk
-NGM1YzI2OWI1ZWRhYTdmYWUwNWMyMTM1YTg1OTBiOWJiZi4uYjQ1YjUyYTM2YjgzZDUyMmVmNGY1
-OGEyNDczZjM5OTI1ZmI5NjIyMyAxMDA2NDQKLS0tIGEvcmVjaXBlcy10aS9kZXZ0b29scy90aS1j
-Z3Q3eF8xLjIuMC5iYgorKysgYi9yZWNpcGVzLXRpL2RldnRvb2xzL3RpLWNndDd4XzEuMi4wLmJi
-CkBAIC0yMCw3ICsyMCw3IEBAIENPTVBBVElCTEVfSE9TVDpjbGFzcy10YXJnZXQgPSAibnVsbCIK
-IFBFID0gIjEiCiAKIEJJTkZJTEUgPSAidGlfY2d0X2M3MDAwXyR7UFZ9LlNUU19saW51eF9pbnN0
-YWxsZXJfeDg2LmJpbiIKLUJJTkZJTEVfTkFNRSA9ICJjZ3Q3eDp4ODZfaW5zdGFsbGVyIgorQklO
-RklMRV9OQU1FID0gImNndDd4X3g4Nl9pbnN0YWxsZXIiCiAKIFNSQ19VUkkgPSAiaHR0cDovL3Nv
-ZnR3YXJlLWRsLnRpLmNvbS9jb2RlZ2VuL2VzZC9jZ3RfcHVibGljX3N3L0M3MDAwLyR7UFZ9LlNU
-Uy8ke0JJTkZJTEV9O25hbWU9JHtCSU5GSUxFX05BTUV9IgogCmRpZmYgLS1naXQgYS9yZWNpcGVz
-LXRpL2RtYWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2ggYi9yZWNpcGVzLXRp
-L2RtYWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2gKaW5kZXggMmJmZDAzYzJh
-NDU4OGNlYWMyNzIwMTk1YTQ2MGQ1NDZhYWRlNWQ3Zi4uNzEyMGI3NDQ4M2I4MTk4OTIwZTUxYjll
-ZTI1NjRkYTkxMmNjMGZlYSAxMDA3NTUKLS0tIGEvcmVjaXBlcy10aS9kbWFpL3RpLWRtYWkvbG9h
-ZG1vZHVsZXMtdGktZG1haS1hcHBzLnNoCisrKyBiL3JlY2lwZXMtdGkvZG1haS90aS1kbWFpL2xv
-YWRtb2R1bGVzLXRpLWRtYWktYXBwcy5zaApAQCAtMzQsNCArMzQsNCBAQCBtb2Rwcm9iZSBkc3Bs
-aW5rawogCiAjIGluc2VydCBMb2NhbCBQb3dlciBNYW5hZ2VyIGRyaXZlcgogIwotbW9kcHJvYmUg
-bHBtOm9tYXAzNTMwCittb2Rwcm9iZSBscG1fb21hcDM1MzAKZGlmZiAtLWdpdCBhL3JlY2lwZXMt
-dGkvZG1haS90aS1kbWFpL2xvYWRtb2R1bGVzLXRpLWRtYWktbzM1MzBfYWwuc2ggYi9yZWNpcGVz
-LXRpL2RtYWkvdGktZG1haS9sb2FkbW9kdWxlcy10aS1kbWFpLW8zNTMwX2FsLnNoCmluZGV4IDA5
-NGQyM2QxNzMwZGRiZDc2MjEwOTc4MjRiNjU3MDkzZTQ3MzdhMjEuLjA3NmFmMDcyMjM3MGUyYTQw
-OWZmYjkwYzk4NzEwMmUwNDhhYzE1MDQgMTAwNzU1Ci0tLSBhL3JlY2lwZXMtdGkvZG1haS90aS1k
-bWFpL2xvYWRtb2R1bGVzLXRpLWRtYWktbzM1MzBfYWwuc2gKKysrIGIvcmVjaXBlcy10aS9kbWFp
-L3RpLWRtYWkvbG9hZG1vZHVsZXMtdGktZG1haS1vMzUzMF9hbC5zaApAQCAtMzgsNSArMzgsNSBA
-QCBta25vZCAvZGV2L2RzcGxpbmsgYyBgYXdrICJcXCQyPT1cImRzcGxpbmtcIiB7cHJpbnQgXFwk
-MX0iIC9wcm9jL2RldmljZXNgIDAKIAogIyBpbnNlcnQgTG9jYWwgUG93ZXIgTWFuYWdlciBkcml2
-ZXIKICMKLW1vZHByb2JlIGxwbTpvbWFwMzUzMAorbW9kcHJvYmUgbHBtX29tYXAzNTMwCiAKZGlm
-ZiAtLWdpdCBhL3JlY2lwZXMtdGkvZG1haS90aS1kbWFpL3VubG9hZG1vZHVsZXMtdGktZG1haS1h
-cHBzLnNoIGIvcmVjaXBlcy10aS9kbWFpL3RpLWRtYWkvdW5sb2FkbW9kdWxlcy10aS1kbWFpLWFw
-cHMuc2gKaW5kZXggODFkMDBhZjg0YmQ4YjBmY2Y4OWIxYWIzYzY1ZDBmYzhlODI2NzFlZi4uNzkz
-ZDcyN2YzOTM0YWNhY2M3NWViYzZkZTFjYTI2YTJmNzRjMjk5YiAxMDA2NDQKLS0tIGEvcmVjaXBl
-cy10aS9kbWFpL3RpLWRtYWkvdW5sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2gKKysrIGIvcmVj
-aXBlcy10aS9kbWFpL3RpLWRtYWkvdW5sb2FkbW9kdWxlcy10aS1kbWFpLWFwcHMuc2gKQEAgLTEs
-NyArMSw3IEBACiAjIFVubG9hZCBtb2R1bGVzIC0gRE1BSSAtIE9NQVAzNTMwCiAKICMgcmVtb3Zl
-IGxwbSBtb2R1bGUKLXJtbW9kIGxwbTpvbWFwMzUzMAorcm1tb2QgbHBtX29tYXAzNTMwCiAKICMg
-cmVtb3ZlIERTUC9CSU9TIExpbmsgZHJpdmVyCiBybW1vZCBkc3BsaW5rawotLSAKMi4zMy4wCgo=
-
---0000000000007cbadb05cd33ad85--
+> From 1cdb91e933c87a5ff5c9000e5f5a2d662086f7a7 Mon Sep 17 00:00:00 2001
+> From: Phil Sutherland <phils@rct-global.com>
+> Date: Thu, 30 Sep 2021 17:37:47 +0800
+> Subject: [PATCH] Fix several naming errors introduced in override prefix
+>  conversion
+> 
+> ---
+>  .../devtools/gcc-linaro-baremetal-aarch64-native.bb       | 4 ++--
+>  recipes-ti/devtools/gcc-linaro-baremetal-native.bb        | 4 ++--
+>  recipes-ti/devtools/ti-cgt-arm_18.12.5.bb                 | 2 +-
+>  recipes-ti/devtools/ti-cgt-pru_2.3.2.bb                   | 4 ++--
+>  recipes-ti/devtools/ti-cgt470.inc                         | 2 +-
+>  recipes-ti/devtools/ti-cgt6x_8.3.2.bb                     | 8 ++++----
+>  recipes-ti/devtools/ti-cgt7x_1.2.0.bb                     | 2 +-
+>  recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh       | 2 +-
+>  recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh   | 2 +-
+>  recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh     | 2 +-
+>  10 files changed, 16 insertions(+), 16 deletions(-)
+> 
+> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> index f1596a8b57aa81495be17559532c2092f01d8147..3b40c9bde7cd6a8ff92e3ecb426ee9b0318401b9 100644
+> --- a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+> @@ -1,6 +1,6 @@
+>  include recipes-ti/devtools/gcc-linaro.inc
+>  
+> -PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:aarch64-elf"
+> +PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
+>  S = "${WORKDIR}/${PACKAGE_DIR}"
+>  
+>  LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+> @@ -8,7 +8,7 @@ LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+>  inherit native
+>  require recipes-ti/includes/ti-paths.inc
+>  
+> -SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
+> +SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
+>  
+>  SRC_URI[gcc-linaro-aarch64.md5sum] = "4972f8943820bdd2f577f498de78964b"
+>  SRC_URI[gcc-linaro-aarch64.sha256sum] = "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4c8"
+> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+> index d0683fe119b6acc35b65bdb55088d2c7f0740856..6d5ec197a329bfc7d7bf7830b83087fb875dfb67 100644
+> --- a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+> @@ -1,6 +1,6 @@
+>  include recipes-ti/devtools/gcc-linaro.inc
+>  
+> -PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:arm-eabi"
+> +PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
+>  S = "${WORKDIR}/${PACKAGE_DIR}"
+>  
+>  LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+> @@ -8,7 +8,7 @@ LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+>  inherit native
+>  require recipes-ti/includes/ti-paths.inc
+>  
+> -SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:arm-eabi.tar.xz;name=gcc-linaro"
+> +SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi.tar.xz;name=gcc-linaro"
+>  
+>  SRC_URI[gcc-linaro.md5sum] = "9a4a39cfc78c84375b1160aa93587aed"
+>  SRC_URI[gcc-linaro.sha256sum] = "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
+> diff --git a/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb b/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+> index 60b216f9d741f3e1732771307c8888857eafce93..b7b6d9b1b6558a6081ef40a815241f450efaa159 100644
+> --- a/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+> +++ b/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+> @@ -31,7 +31,7 @@ do_install() {
+>  SRC_URI[cgt_arm_installer.md5sum] = "e9e668332cf86c965b4da9d1d488426b"
+>  SRC_URI[cgt_arm_installer.sha256sum] = "da976143128c619a278cb4214a4295c409d100f9e65ad2f4d0d1039db7cf98f4"
+>  
+> -BINFILE_NAME = "cgt:arm_installer"
+> +BINFILE_NAME = "cgt_arm_installer"
+>  
+>  FILES:${PN} += "${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+>  
+> diff --git a/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+> index d14c19625e9a56a6acb64c7ee7b0966d8e3c7b75..8b3e2a0714f75738e38da26d76ea274ffe9ff137 100644
+> --- a/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+> +++ b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+> @@ -8,12 +8,12 @@ LIC_FILES_CHKSUM:class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Genera
+>  require recipes-ti/includes/ti-paths.inc
+>  require recipes-ti/includes/ti-unpack.inc
+>  
+> -BINFILE = "ti_cgt_pru_${PV}_linux_installer:x86.bin"
+> +BINFILE = "ti_cgt_pru_${PV}_linux_installer_x86.bin"
+>  BINFILE_NAME = "cgt-pru-x86"
+>  TI_BIN_UNPK_ARGS = "--prefix ${S}"
+>  TI_BIN_UNPK_CMDS = ""
+>  
+> -BINFILE:class-target = "ti_cgt_pru_${PV}:armlinuxa8hf_busybox_installer.sh"
+> +BINFILE:class-target = "ti_cgt_pru_${PV}_armlinuxa8hf_busybox_installer.sh"
+>  BINFILE_NAME:class-target = "cgt-pru-arm"
+>  
+>  SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
+> diff --git a/recipes-ti/devtools/ti-cgt470.inc b/recipes-ti/devtools/ti-cgt470.inc
+> index c8f91271bd6ed8d721887a601228d1a1fbbef5f0..f0992aa7db8efa9395e3321c3517915b6d713842 100644
+> --- a/recipes-ti/devtools/ti-cgt470.inc
+> +++ b/recipes-ti/devtools/ti-cgt470.inc
+> @@ -13,7 +13,7 @@ S = "${WORKDIR}/cgt470_${PV}"
+>  
+>  SRC_URI = "http://install.source.dir.local/ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin;name=cgt470bin"
+>  
+> -BINFILE="ti_cgt_tms470_${PVwithdots}_setup_linux:x86.bin"
+> +BINFILE="ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin"
+>  TI_BIN_UNPK_CMDS="Y:qY:workdir: : "
+>  TI_BIN_UNPK_WDEXT="/cgt470_${PV}"
+>  
+> diff --git a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+> index 00221d84daf5202513435d81ff5ad0b6a214aea6..fd34657a45cbfbff5663ac5c24bf9cad7cfec1f9 100644
+> --- a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+> +++ b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+> @@ -26,13 +26,13 @@ python __anonymous() {
+>              raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+>  }
+>  
+> -BINFILE = "ti_cgt_c6000_${PV}_linux_installer:x86.bin"
+> -BINFILE_NAME = "cgt6x:x86_installer"
+> +BINFILE = "ti_cgt_c6000_${PV}_linux_installer_x86.bin"
+> +BINFILE_NAME = "cgt6x_x86_installer"
+>  TI_BIN_UNPK_ARGS = "--prefix ${S}"
+>  TI_BIN_UNPK_CMDS = ""
+>  
+> -BINFILE:class-target = "ti_cgt_c6000_${PV}:armlinuxa8hf_busybox_installer.sh"
+> -BINFILE_NAME:class-target = "cgt6x:arm_installer"
+> +BINFILE:class-target = "ti_cgt_c6000_${PV}_armlinuxa8hf_busybox_installer.sh"
+> +BINFILE_NAME:class-target = "cgt6x_arm_installer"
+>  
+>  SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/${PV}/${BINFILE};name=${BINFILE_NAME}"
+>  
+> diff --git a/recipes-ti/devtools/ti-cgt7x_1.2.0.bb b/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+> index 35b58d4c5c269b5edaa7fae05c2135a8590b9bbf..b45b52a36b83d522ef4f58a2473f39925fb96223 100644
+> --- a/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+> +++ b/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+> @@ -20,7 +20,7 @@ COMPATIBLE_HOST:class-target = "null"
+>  PE = "1"
+>  
+>  BINFILE = "ti_cgt_c7000_${PV}.STS_linux_installer_x86.bin"
+> -BINFILE_NAME = "cgt7x:x86_installer"
+> +BINFILE_NAME = "cgt7x_x86_installer"
+>  
+>  SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C7000/${PV}.STS/${BINFILE};name=${BINFILE_NAME}"
+>  
+> diff --git a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh
+> index 2bfd03c2a4588ceac2720195a460d546aade5d7f..7120b74483b8198920e51b9ee2564da912cc0fea 100755
+> --- a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh
+> +++ b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh
+> @@ -34,4 +34,4 @@ modprobe dsplinkk
+>  
+>  # insert Local Power Manager driver
+>  #
+> -modprobe lpm:omap3530
+> +modprobe lpm_omap3530
+> diff --git a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh
+> index 094d23d1730ddbd7621097824b657093e4737a21..076af0722370e2a409ffb90c987102e048ac1504 100755
+> --- a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh
+> +++ b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh
+> @@ -38,5 +38,5 @@ mknod /dev/dsplink c `awk "\\$2==\"dsplink\" {print \\$1}" /proc/devices` 0
+>  
+>  # insert Local Power Manager driver
+>  #
+> -modprobe lpm:omap3530
+> +modprobe lpm_omap3530
+>  
+> diff --git a/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh b/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh
+> index 81d00af84bd8b0fcf89b1ab3c65d0fc8e82671ef..793d727f3934acacc75ebc6de1ca26a2f74c299b 100644
+> --- a/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh
+> +++ b/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh
+> @@ -1,7 +1,7 @@
+>  # Unload modules - DMAI - OMAP3530
+>  
+>  # remove lpm module
+> -rmmod lpm:omap3530
+> +rmmod lpm_omap3530
+>  
+>  # remove DSP/BIOS Link driver
+>  rmmod dsplinkk
+> -- 
+> 2.33.0
+> 
