@@ -1,78 +1,84 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web09.1224.1634595037207802429
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.1296.1634595468305766399
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 18 Oct 2021 15:10:37 -0700
+ Mon, 18 Oct 2021 15:17:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=trp2egwl;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: yogeshs@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19IMAZEL049168;
-	Mon, 18 Oct 2021 17:10:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1634595035;
-	bh=z0q8gqrn9MjmZ07yVTn4vKp7bbApnFTKQpGSV5rZW4Q=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=trp2egwl3oJaUl8Z/xFjvQZ22ri+h3KoMwsy/C358SXRRukkkeXQ89yqwdoUa4ffp
-	 VASmzkOBkMla7gamyQp2MUCOBidS5Edm3Sxv+gv7/QAxFIRYl7L1iUkbA0NaH27rRU
-	 K3XX+oNO4U0XccLS6uTjDZf8W/iuLWbEp79pD1lA=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19IMAYHW114804
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 18 Oct 2021 17:10:35 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 18
- Oct 2021 17:10:34 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Mon, 18 Oct 2021 17:10:34 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19IMAYdm036572;
-	Mon, 18 Oct 2021 17:10:34 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/dunfell][PATCH v3 2/3] conf: am57xx-evm: ReIntroduce existent dtb* for 5.10
-Date: Mon, 18 Oct 2021 22:10:33 +0000
-Message-ID: <20211018221034.11092-3-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211018221034.11092-1-yogeshs@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A907B40C2C;
+	Mon, 18 Oct 2021 22:17:47 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9nBl9t4pBtBn; Mon, 18 Oct 2021 22:17:47 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 89D2840BE6;
+	Mon, 18 Oct 2021 22:17:45 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 533A2174695; Mon, 18 Oct 2021 18:17:45 -0400 (EDT)
+Date: Mon, 18 Oct 2021 18:17:45 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: yogeshs@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master/dunfell][PATCH v3 3/3] conf: omap-a15: fix the dtb file path for extlinux boot
+Message-ID: <20211018221745.GK10132@denix.org>
 References: <20211018221034.11092-1-yogeshs@ti.com>
+ <20211018221034.11092-4-yogeshs@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+In-Reply-To: <20211018221034.11092-4-yogeshs@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-This reverts commit 43bf0f36a3ac62cc3378688358ba704a27b501ce.
-Added dtb and dtbo for am57xx
+On Mon, Oct 18, 2021 at 10:10:34PM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
+> The uboot extlinux is using kernel device tree variable to populate the
+> dtb files. The error occurs if the device tree files are in ti folder
+> since there is no ti folder in deploy directory. Fix the kernel device
+> tree path before using in the uboot extlinux.
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
----
- conf/machine/am57xx-evm.conf | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+Looks reasonable, but should probably be the first patch in the series for 
+bisectability.
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 78e730ca..7441e80e 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -14,10 +14,14 @@ KERNEL_DEVICETREE = " \
-     am57xx-beagle-x15-revc.dtb \
-     am5729-beagleboneai.dtb \
-     am57xx-evm.dtb \
--    am57xx-evm-reva3.dtb \
-+    ti/am57xx-evm-common.dtbo \
-+    ti/am57xx-evm-reva3.dtbo \
-     am571x-idk.dtb \
-+    ti/am571x-idk-touchscreen.dtbo \
-     am572x-idk.dtb \
-     am574x-idk.dtb \
-+    ti/am57xx-idk-osd-lcd-common.dtbo \
-+    ti/am572x-idk-touchscreen.dtbo \
- "
- 
- KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am574x-idk-pru-excl-uio.dtb am572x-idk-pru-excl-uio.dtb am571x-idk-pru-excl-uio.dtb', '', d)}"
+Also, what's with 2 extra empty lines?
+
+
+> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+> ---
+>  conf/machine/include/omap-a15.inc | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+> index c95b0ccc..8356c920 100644
+> --- a/conf/machine/include/omap-a15.inc
+> +++ b/conf/machine/include/omap-a15.inc
+> @@ -19,15 +19,19 @@ UBOOT_ARCH = "arm"
+>  UBOOT_ENTRYPOINT = "0x80008000"
+>  UBOOT_LOADADDRESS = "0x80008000"
+>  
+> +DEVICETREE_FILE = "${@d.getVar('KERNEL_DEVICETREE').replace("ti/","")}"
+> +
+>  # Generate an extlinux.conf file
+>  UBOOT_EXTLINUX = "1"
+>  UBOOT_EXTLINUX_ROOT = "root=PARTUUID=${uuid}"
+>  UBOOT_EXTLINUX_BOOT_FILES = " \
+>      extlinux.conf;extlinux/extlinux.conf \
+>      ${KERNEL_IMAGETYPE} \
+> -    ${KERNEL_DEVICETREE} \
+> +    ${DEVICETREE_FILE} \
+>  "
+>  
+> +
+> +
+>  SPL_BINARY = "MLO"
+>  UBOOT_SUFFIX = "img"
+>  
+> -- 
+> 2.17.1
+> 
+
 -- 
-2.17.1
-
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
