@@ -1,286 +1,265 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web09.31116.1634524780856819392
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.38317.1634572373791920298
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 17 Oct 2021 19:39:41 -0700
+ Mon, 18 Oct 2021 08:52:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=oJqAGECF;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: nsaulnier@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19I2ddr3054047
-	for <meta-ti@lists.yoctoproject.org>; Sun, 17 Oct 2021 21:39:39 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=vepz2h94;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: yogeshs@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19IFqlZs031018;
+	Mon, 18 Oct 2021 10:52:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1634524779;
-	bh=7KFteFVvel1epMK2UeoPDkQ9zz5LFgyh1dS24q6xcNg=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=oJqAGECFqHVcnqJ6iuoDhiDADu5/lX9WcjlMCDclAiCWA32gGqQROjlz5fr/zLCzD
-	 2lOQmnd3wZb9NrCDmOPg66D1OXncmBuoh1UBay2tiYxjOfZkAvIK2Kkvss/R5mKTQz
-	 6IjcmgWhwc3TRc1p4vDHt+ZyeAX3nZqsa7I5usYE=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19I2ddej130268
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Sun, 17 Oct 2021 21:39:39 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Sun, 17
- Oct 2021 21:39:39 -0500
-Received: from DFLE115.ent.ti.com ([fe80::4af:9649:4629:5ff4]) by
- DFLE115.ent.ti.com ([fe80::4af:9649:4629:5ff4%18]) with mapi id
- 15.01.2308.014; Sun, 17 Oct 2021 21:39:39 -0500
-From: "Nick Saulnier" <nsaulnier@ti.com>
-To: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-CC: "Siraswar, Yogesh" <yogeshs@ti.com>, Kishon Vijay Abraham <kishon@ti.com>,
-        "Anna, Suman" <s-anna@ti.com>
-Subject: Re: [meta-ti][master/dunfell PATCH v1] pru-icss_git.bb: add AM64x, update to PSSP v6.0.0
-Thread-Topic: [meta-ti][master/dunfell PATCH v1] pru-icss_git.bb: add AM64x,
- update to PSSP v6.0.0
-Thread-Index: AQHXw8j1vOZlfczSXEGKQ2MEElaIIqvYCqog
-Date: Mon, 18 Oct 2021 02:39:38 +0000
-Message-ID: <e2c892210b94447ea8dda0ce2903e301@ti.com>
-References: <20211018023620.23145-1-nsaulnier@ti.com>
-In-Reply-To: <20211018023620.23145-1-nsaulnier@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.247.29.24]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+	s=ti-com-17Q1; t=1634572367;
+	bh=oaSHXs2VReUFf/O4BFs1ChRUdLomsbGLAwhg9etVmaE=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=vepz2h949mYWSCys8Lo26PTO7I8UXAY1/qrhJYDEpSgfR7UW4Y9qYr1J0dO1Mgf/U
+	 Ybw1ADtaQgYtRB5JmiRyQIaVDFFh9liutk5ja18J6sZBc7kkVw7GkzMQVHiPx1NTom
+	 neQrF3o/vjDs4ocNjBXHWBaG5EkApypzHYMqT/8c=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19IFqlFr040519
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 18 Oct 2021 10:52:47 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 18
+ Oct 2021 10:52:46 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Mon, 18 Oct 2021 10:52:46 -0500
+Received: from [10.250.38.160] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19IFqkJ7023835;
+	Mon, 18 Oct 2021 10:52:46 -0500
+Subject: Re: [meta-ti] [PATCH] meta-ti: Fix several errors introduced during override syntax changes
+To: Denys Dmytriyenko <denis@denix.org>,
+        Phil Sutherland
+	<phil@sutherland.id.au>
+CC: <meta-ti@lists.yoctoproject.org>
+References: <CACpu_i6xMW1mW0hk6V2ghAivUnEdaB8EbaGgPba1rrg9wo6-Lw@mail.gmail.com>
+ <CACpu_i5N9QR3=Km7ntUYU0hA8LmhNy0yrLtGLVTt+EyD2ZqaJw@mail.gmail.com>
+ <16AB95A2DE031FCA.3789@lists.yoctoproject.org>
+ <20211015190140.GB10132@denix.org>
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+Message-ID: <cfcde2bf-1abc-946e-b7be-6e25ad48411c@ti.com>
+Date: Mon, 18 Oct 2021 10:52:46 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
+In-Reply-To: <20211015190140.GB10132@denix.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Additional notes:
-1) Did not have time to test the patch, let me know if additional changes a=
-re needed.
-2) Should we remove J7 from this script since TI does not currently support=
- generic PRU development on J7?
-3) I did not modify any files other than recipes-bsp/pru/pru-icss_git.bb. A=
-re there any other files that need to be modified to get PRU SW Support Pac=
-kage to populate in the AM64x SDK example-applications folder like the othe=
-r processors?
+Applied to master. Thanks
 
-Thanks,
-Nick
-
------Original Message-----
-From: Saulnier, Nick=20
-Sent: Sunday, October 17, 2021 9:36 PM
-To: meta-ti@lists.yoctoproject.org
-Cc: Saulnier, Nick <nsaulnier@ti.com>; Siraswar, Yogesh <yogeshs@ti.com>; K=
-ishon Vijay Abraham <kishon@ti.com>; Anna, Suman <s-anna@ti.com>
-Subject: [meta-ti][master/dunfell PATCH v1] pru-icss_git.bb: add AM64x, upd=
-ate to PSSP v6.0.0
-
-PRU Software Support Package (PSSP) v6.0.0 should be included in Linux Proc=
-essor SDK 8.1 for AM335x, AM437x, AM57x (if generated), AM64x, AM65x under =
-example-applications. For the release notes that come with v6.0.0, see
-https://git.ti.com/cgit/pru-software-support-package/pru-software-support-p=
-ackage/tag/?h=3Dv6.0.0
-
-Linux Processor SDK 8.1 will be the first AM64x SDK release to include the =
-PSSP.
-
-PRU firmware will also be generated and placed in the default filesystem un=
-der lib/firmware/pru.
-
-Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
----
- recipes-bsp/pru/pru-icss_git.bb | 64 +++++++++++++++++++++++++++++++--
- 1 file changed, 62 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git=
-.bb index c74a15dc88a2..32d643ab9f19 100644
---- a/recipes-bsp/pru/pru-icss_git.bb
-+++ b/recipes-bsp/pru/pru-icss_git.bb
-@@ -8,9 +8,9 @@ inherit update-alternatives
-=20
- BRANCH =3D "master"
- SRC_URI =3D "git://git.ti.com/pru-software-support-package/pru-software-su=
-pport-package.git;protocol=3Dgit;branch=3D${BRANCH}"
--SRCREV =3D "a9bff6f43001cf66dc1ed3ef7e9dfb688b67f7bb"
-+SRCREV =3D "138d499bedc874b961df520ca66f0061717804fa"
-=20
--PV =3D "5.7.0"
-+PV =3D "6.0.0"
- PR =3D "r0"
-=20
- require recipes-ti/includes/ti-paths.inc @@ -41,6 +41,7 @@ PLATFORM_ti33x =
-=3D "am335x"
- PLATFORM_ti43x =3D "am437x"
- PLATFORM_omap-a15 =3D "am572x"
- PLATFORM_k2g =3D "k2g"
-+PLATFORM_am64xx =3D "am64x"
- PLATFORM_am65xx =3D "am65x"
- PLATFORM_j7 =3D "j721e"
-=20
-@@ -112,6 +113,28 @@ do_install_append_k2g() {
-     done
- }
-=20
-+do_install_append_am64xx(){
-+    for i in 0 1
-+    do
-+        install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU${i}/PRU_=
-Halt_${i}.out \
-+                   ${D}${base_libdir}/firmware/pru
-+        install -m 644 ${S}/examples/${PLATFORM}/RTU_Halt/gen/RTU${i}/RTU_=
-Halt_${i}.out \
-+                   ${D}${base_libdir}/firmware/pru
-+        install -m 644 ${S}/examples/${PLATFORM}/TX_PRU_Halt/gen/TX_PRU${i=
-}/TX_PRU_Halt_${i}.out \
-+                   ${D}${base_libdir}/firmware/pru
-+    done
-+    for i in 0 1
-+    do
-+        for j in 0 1
-+        do
-+            install -m 0644 ${S}/examples/${PLATFORM}/PRU_RPMsg_Echo_Inter=
-rupt${j}/gen/icssg${i}/PRU_RPMsg_Echo_Interrupt${i}_${j}.out \
-+                            ${D}${base_libdir}/firmware/pru
-+            install -m 0644 ${S}/examples/${PLATFORM}/RTU_RPMsg_Echo_Inter=
-rupt${j}/gen/icssg${i}/RTU_RPMsg_Echo_Interrupt${i}_${j}.out \
-+                            ${D}${base_libdir}/firmware/pru
-+        done
-+    done
-+}
-+
- do_install_append_am65xx() {
-     for i in 0 1=20
-     do
-@@ -167,6 +190,7 @@ PRU_ICSS_ALTERNATIVES_ti33x    =3D "am335x-pru0-fw am33=
-5x-pru1-fw"
- PRU_ICSS_ALTERNATIVES_ti43x    =3D "am437x-pru0_0-fw am437x-pru0_1-fw am43=
-7x-pru1_0-fw am437x-pru1_1-fw"
- PRU_ICSS_ALTERNATIVES_omap-a15 =3D "am57xx-pru1_0-fw am57xx-pru1_1-fw am57=
-xx-pru2_0-fw am57xx-pru2_1-fw"
- PRU_ICSS_ALTERNATIVES_k2g      =3D "k2g-pru0_0-fw k2g-pru0_1-fw k2g-pru1_0=
--fw k2g-pru1_1-fw"
-+PRU_ICSS_ALTERNATIVES_am64xx   =3D "am64x-pru0_0-fw am64x-pru0_1-fw am64x-=
-pru1_0-fw am64x-pru1_1-fw am64x-rtu0_0-fw am64x-rtu0_1-fw am64x-rtu1_0-fw a=
-m64x-rtu1_1-fw"
- PRU_ICSS_ALTERNATIVES_am65xx   =3D "am65x-pru0_0-fw am65x-pru0_1-fw am65x-=
-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw a=
-m65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1=
--fw"
- PRU_ICSS_ALTERNATIVES_j7       =3D "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw=
- j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw"
-=20
-@@ -189,6 +213,19 @@ ALTERNATIVE_LINK_NAME[k2g-pru0_1-fw] =3D "${base_libdi=
-r}/firmware/k2g-pru0_1-fw"
- ALTERNATIVE_LINK_NAME[k2g-pru1_0-fw] =3D "${base_libdir}/firmware/k2g-pru1=
-_0-fw"
- ALTERNATIVE_LINK_NAME[k2g-pru1_1-fw] =3D "${base_libdir}/firmware/k2g-pru1=
-_1-fw"
-=20
-+ALTERNATIVE_LINK_NAME[am64x-pru0_0-fw] =3D "${base_libdir}/firmware/am64x-=
-pru0_0-fw"
-+ALTERNATIVE_LINK_NAME[am64x-pru0_1-fw] =3D "${base_libdir}/firmware/am64x-=
-pru0_1-fw"
-+ALTERNATIVE_LINK_NAME[am64x-pru1_0-fw] =3D "${base_libdir}/firmware/am64x-=
-pru1_0-fw"
-+ALTERNATIVE_LINK_NAME[am64x-pru1_1-fw] =3D "${base_libdir}/firmware/am64x-=
-pru1_1-fw"
-+ALTERNATIVE_LINK_NAME[am64x-rtu0_0-fw] =3D "${base_libdir}/firmware/am64x-=
-rtu0_0-fw"
-+ALTERNATIVE_LINK_NAME[am64x-rtu0_1-fw] =3D "${base_libdir}/firmware/am64x-=
-rtu0_1-fw"
-+ALTERNATIVE_LINK_NAME[am64x-rtu1_0-fw] =3D "${base_libdir}/firmware/am64x-=
-rtu1_0-fw"
-+ALTERNATIVE_LINK_NAME[am64x-rtu1_1-fw] =3D "${base_libdir}/firmware/am64x-=
-rtu1_1-fw"
-+ALTERNATIVE_LINK_NAME[am64x-txpru0_0-fw] =3D "${base_libdir}/firmware/am64=
-x-txpru0_0-fw"
-+ALTERNATIVE_LINK_NAME[am64x-txpru0_1-fw] =3D "${base_libdir}/firmware/am64=
-x-txpru0_1-fw"
-+ALTERNATIVE_LINK_NAME[am64x-txpru1_0-fw] =3D "${base_libdir}/firmware/am64=
-x-txpru1_0-fw"
-+ALTERNATIVE_LINK_NAME[am64x-txpru1_1-fw] =3D "${base_libdir}/firmware/am64=
-x-txpru1_1-fw"
-+
- ALTERNATIVE_LINK_NAME[am65x-pru0_0-fw] =3D "${base_libdir}/firmware/am65x-=
-pru0_0-fw"
- ALTERNATIVE_LINK_NAME[am65x-pru0_1-fw] =3D "${base_libdir}/firmware/am65x-=
-pru0_1-fw"
- ALTERNATIVE_LINK_NAME[am65x-pru1_0-fw] =3D "${base_libdir}/firmware/am65x-=
-pru1_0-fw"
-@@ -225,6 +262,7 @@ ALTERNATIVE_LINK_NAME[j7-txpru1_1-fw] =3D "${base_libdi=
-r}/firmware/j7-txpru1_1-fw"
- ALTERNATIVE_pru-icss-halt =3D "${PRU_ICSS_ALTERNATIVES}"
-=20
- # Only Halt firmware images are supported for the Tx_PRU cores
-+ALTERNATIVE_pru-icss-halt_append_am64xx =3D " am64x-txpru0_0-fw am64x-txpr=
-u0_1-fw am64x-txpru1_0-fw am64x-txpru1_1-fw"
- ALTERNATIVE_pru-icss-halt_append_am65xx =3D " am65x-txpru0_0-fw am65x-txpr=
-u0_1-fw am65x-txpru1_0-fw am65x-txpru1_1-fw am65x-txpru2_0-fw am65x-txpru2_=
-1-fw"
- ALTERNATIVE_pru-icss-halt_append_j7 =3D " j7-txpru0_0-fw j7-txpru0_1-fw j7=
--txpru1_0-fw j7-txpru1_1-fw"
-=20
-@@ -246,6 +284,19 @@ ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru0_1-fw] =3D "$=
-{base_libdir}/firmware/pru/P  ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_0-f=
-w] =3D "${base_libdir}/firmware/pru/PRU_Halt.out"
- ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_1-fw] =3D "${base_libdir}/firmwa=
-re/pru/PRU_Halt.out"
-=20
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru0_0-fw] =3D "${base_libdir}/firm=
-ware/pru/PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru0_1-fw] =3D "${base_libdir}/firm=
-ware/pru/PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru1_0-fw] =3D "${base_libdir}/firm=
-ware/pru/PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru1_1-fw] =3D "${base_libdir}/firm=
-ware/pru/PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-rtu0_0-fw] =3D "${base_libdir}/firm=
-ware/pru/RTU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-rtu0_1-fw] =3D "${base_libdir}/firm=
-ware/pru/RTU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-rtu1_0-fw] =3D "${base_libdir}/firm=
-ware/pru/RTU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-rtu1_1-fw] =3D "${base_libdir}/firm=
-ware/pru/RTU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-txpru0_0-fw] =3D "${base_libdir}/fi=
-rmware/pru/TX_PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-txpru0_1-fw] =3D "${base_libdir}/fi=
-rmware/pru/TX_PRU_Halt_1.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-txpru1_0-fw] =3D "${base_libdir}/fi=
-rmware/pru/TX_PRU_Halt_0.out"
-+ALTERNATIVE_TARGET_pru-icss-halt[am64x-txpru1_1-fw] =3D "${base_libdir}/fi=
-rmware/pru/TX_PRU_Halt_1.out"
-+
- ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_0-fw] =3D "${base_libdir}/firm=
-ware/pru/PRU_Halt_0.out"
- ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru0_1-fw] =3D "${base_libdir}/firm=
-ware/pru/PRU_Halt_1.out"
- ALTERNATIVE_TARGET_pru-icss-halt[am65x-pru1_0-fw] =3D "${base_libdir}/firm=
-ware/pru/PRU_Halt_0.out"
-@@ -302,6 +353,15 @@ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru0_1-fw] =
-=3D "${base_libdir}/firmware  ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pr=
-u1_0-fw] =3D "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
- ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru1_1-fw] =3D "${base_libdir}/=
-firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
-=20
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru0_0-fw] =3D "${base_libdir=
-}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru0_1-fw] =3D "${base_libdir=
-}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru1_0-fw] =3D "${base_libdir=
-}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru1_1-fw] =3D "${base_libdir=
-}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-rtu0_0-fw] =3D "${base_libdir=
-}/firmware/pru/RTU_RPMsg_Echo_Interrupt0_0.out"
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-rtu0_1-fw] =3D "${base_libdir=
-}/firmware/pru/RTU_RPMsg_Echo_Interrupt0_1.out"
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-rtu1_0-fw] =3D "${base_libdir=
-}/firmware/pru/RTU_RPMsg_Echo_Interrupt1_0.out"
-+ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-rtu1_1-fw] =3D "${base_libdir=
-}/firmware/pru/RTU_RPMsg_Echo_Interrupt1_1.out"
-+
- ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru0_0-fw] =3D "${base_libdir=
-}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
- ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru0_1-fw] =3D "${base_libdir=
-}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
- ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am65x-pru1_0-fw] =3D "${base_libdir=
-}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
---
-2.17.1
-
+On 10/15/21 2:01 PM, Denys Dmytriyenko wrote:
+> It appears this patch was corrupted, probably because it was sent by MUA and
+> not with git-send-email. I just re-sent a corrected version.
+> 
+> 
+> On Wed, Oct 06, 2021 at 07:43:32PM -0400, Denys Dmytriyenko wrote:
+>> Missing Signed-off-by: line, but here it is - should be added by patchwork.
+>>
+>> Signed-off-by: Phil Sutherland <phil@sutherland.id.au>
+>>
+>> Looks good to me.
+>>
+>> Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+>>
+>> This is master-only.
+>>
+>>
+>> On Wed, Oct 06, 2021 at 08:49:24AM +0800, Phil Sutherland wrote:
+>>> ---
+>>>   .../devtools/gcc-linaro-baremetal-aarch64-native.bb       | 4 ++--
+>>>   recipes-ti/devtools/gcc-linaro-baremetal-native.bb        | 4 ++--
+>>>   recipes-ti/devtools/ti-cgt-arm_18.12.5.bb                 | 2 +-
+>>>   recipes-ti/devtools/ti-cgt-pru_2.3.2.bb                   | 4 ++--
+>>>   recipes-ti/devtools/ti-cgt470.inc                         | 2 +-
+>>>   recipes-ti/devtools/ti-cgt6x_8.3.2.bb                     | 8 ++++----
+>>>   recipes-ti/devtools/ti-cgt7x_1.2.0.bb                     | 2 +-
+>>>   recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh       | 2 +-
+>>>   recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh   | 2 +-
+>>>   recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh     | 2 +-
+>>>   10 files changed, 16 insertions(+), 16 deletions(-)
+>>>
+>>> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+>>> b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+>>> index f1596a8b..3b40c9bd 100644
+>>> --- a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+>>> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+>>> @@ -1,6 +1,6 @@
+>>>   include recipes-ti/devtools/gcc-linaro.inc
+>>>
+>>> -PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:aarch64-elf"
+>>> +PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
+>>>   S = "${WORKDIR}/${PACKAGE_DIR}"
+>>>
+>>>   LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+>>> @@ -8,7 +8,7 @@ LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+>>>   inherit native
+>>>   require recipes-ti/includes/ti-paths.inc
+>>>
+>>> -SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
+>>> +SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
+>>>
+>>>   SRC_URI[gcc-linaro-aarch64.md5sum] = "4972f8943820bdd2f577f498de78964b"
+>>>   SRC_URI[gcc-linaro-aarch64.sha256sum] =
+>>> "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4c8"
+>>> diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+>>> b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+>>> index d0683fe1..6d5ec197 100644
+>>> --- a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+>>> +++ b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+>>> @@ -1,6 +1,6 @@
+>>>   include recipes-ti/devtools/gcc-linaro.inc
+>>>
+>>> -PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:arm-eabi"
+>>> +PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
+>>>   S = "${WORKDIR}/${PACKAGE_DIR}"
+>>>
+>>>   LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+>>> @@ -8,7 +8,7 @@ LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+>>>   inherit native
+>>>   require recipes-ti/includes/ti-paths.inc
+>>>
+>>> -SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64:arm-eabi.tar.xz;name=gcc-linaro"
+>>> +SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi.tar.xz;name=gcc-linaro"
+>>>
+>>>   SRC_URI[gcc-linaro.md5sum] = "9a4a39cfc78c84375b1160aa93587aed"
+>>>   SRC_URI[gcc-linaro.sha256sum] =
+>>> "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
+>>> diff --git a/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+>>> b/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+>>> index 60b216f9..b7b6d9b1 100644
+>>> --- a/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+>>> +++ b/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+>>> @@ -31,7 +31,7 @@ do_install() {
+>>>   SRC_URI[cgt_arm_installer.md5sum] = "e9e668332cf86c965b4da9d1d488426b"
+>>>   SRC_URI[cgt_arm_installer.sha256sum] =
+>>> "da976143128c619a278cb4214a4295c409d100f9e65ad2f4d0d1039db7cf98f4"
+>>>
+>>> -BINFILE_NAME = "cgt:arm_installer"
+>>> +BINFILE_NAME = "cgt_arm_installer"
+>>>
+>>>   FILES:${PN} += "${M4_TOOLCHAIN_INSTALL_DIR_RECIPE}"
+>>>
+>>> diff --git a/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+>>> b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+>>> index d14c1962..8b3e2a07 100644
+>>> --- a/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+>>> +++ b/recipes-ti/devtools/ti-cgt-pru_2.3.2.bb
+>>> @@ -8,12 +8,12 @@ LIC_FILES_CHKSUM:class-target =
+>>> "file://usr/share/doc/ti/cgt-pru/PRU_Code_Genera
+>>>   require recipes-ti/includes/ti-paths.inc
+>>>   require recipes-ti/includes/ti-unpack.inc
+>>>
+>>> -BINFILE = "ti_cgt_pru_${PV}_linux_installer:x86.bin"
+>>> +BINFILE = "ti_cgt_pru_${PV}_linux_installer_x86.bin"
+>>>   BINFILE_NAME = "cgt-pru-x86"
+>>>   TI_BIN_UNPK_ARGS = "--prefix ${S}"
+>>>   TI_BIN_UNPK_CMDS = ""
+>>>
+>>> -BINFILE:class-target = "ti_cgt_pru_${PV}:armlinuxa8hf_busybox_installer.sh"
+>>> +BINFILE:class-target = "ti_cgt_pru_${PV}_armlinuxa8hf_busybox_installer.sh"
+>>>   BINFILE_NAME:class-target = "cgt-pru-arm"
+>>>
+>>>   SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/PRU/${PV}/${BINFILE};name=${BINFILE_NAME}"
+>>> diff --git a/recipes-ti/devtools/ti-cgt470.inc
+>>> b/recipes-ti/devtools/ti-cgt470.inc
+>>> index c8f91271..f0992aa7 100644
+>>> --- a/recipes-ti/devtools/ti-cgt470.inc
+>>> +++ b/recipes-ti/devtools/ti-cgt470.inc
+>>> @@ -13,7 +13,7 @@ S = "${WORKDIR}/cgt470_${PV}"
+>>>
+>>>   SRC_URI = "http://install.source.dir.local/ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin;name=cgt470bin"
+>>>
+>>> -BINFILE="ti_cgt_tms470_${PVwithdots}_setup_linux:x86.bin"
+>>> +BINFILE="ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin"
+>>>   TI_BIN_UNPK_CMDS="Y:qY:workdir: : "
+>>>   TI_BIN_UNPK_WDEXT="/cgt470_${PV}"
+>>>
+>>> diff --git a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+>>> b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+>>> index 00221d84..fd34657a 100644
+>>> --- a/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+>>> +++ b/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+>>> @@ -26,13 +26,13 @@ python __anonymous() {
+>>>               raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp
+>>> mode for now" % (pkgn, pkgv))
+>>>   }
+>>>
+>>> -BINFILE = "ti_cgt_c6000_${PV}_linux_installer:x86.bin"
+>>> -BINFILE_NAME = "cgt6x:x86_installer"
+>>> +BINFILE = "ti_cgt_c6000_${PV}_linux_installer_x86.bin"
+>>> +BINFILE_NAME = "cgt6x_x86_installer"
+>>>   TI_BIN_UNPK_ARGS = "--prefix ${S}"
+>>>   TI_BIN_UNPK_CMDS = ""
+>>>
+>>> -BINFILE:class-target = "ti_cgt_c6000_${PV}:armlinuxa8hf_busybox_installer.sh"
+>>> -BINFILE_NAME:class-target = "cgt6x:arm_installer"
+>>> +BINFILE:class-target = "ti_cgt_c6000_${PV}_armlinuxa8hf_busybox_installer.sh"
+>>> +BINFILE_NAME:class-target = "cgt6x_arm_installer"
+>>>
+>>>   SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/${PV}/${BINFILE};name=${BINFILE_NAME}"
+>>>
+>>> diff --git a/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+>>> b/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+>>> index 35b58d4c..b45b52a3 100644
+>>> --- a/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+>>> +++ b/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+>>> @@ -20,7 +20,7 @@ COMPATIBLE_HOST:class-target = "null"
+>>>   PE = "1"
+>>>
+>>>   BINFILE = "ti_cgt_c7000_${PV}.STS_linux_installer_x86.bin"
+>>> -BINFILE_NAME = "cgt7x:x86_installer"
+>>> +BINFILE_NAME = "cgt7x_x86_installer"
+>>>
+>>>   SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C7000/${PV}.STS/${BINFILE};name=${BINFILE_NAME}"
+>>>
+>>> diff --git a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh
+>>> b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh
+>>> index 2bfd03c2..7120b744 100755
+>>> --- a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh
+>>> +++ b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-apps.sh
+>>> @@ -34,4 +34,4 @@ modprobe dsplinkk
+>>>
+>>>   # insert Local Power Manager driver
+>>>   #
+>>> -modprobe lpm:omap3530
+>>> +modprobe lpm_omap3530
+>>> diff --git a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh
+>>> b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh
+>>> index 094d23d1..076af072 100755
+>>> --- a/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh
+>>> +++ b/recipes-ti/dmai/ti-dmai/loadmodules-ti-dmai-o3530_al.sh
+>>> @@ -38,5 +38,5 @@ mknod /dev/dsplink c `awk "\\$2==\"dsplink\" {print
+>>> \\$1}" /proc/devices` 0
+>>>
+>>>   # insert Local Power Manager driver
+>>>   #
+>>> -modprobe lpm:omap3530
+>>> +modprobe lpm_omap3530
+>>>
+>>> diff --git a/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh
+>>> b/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh
+>>> index 81d00af8..793d727f 100644
+>>> --- a/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh
+>>> +++ b/recipes-ti/dmai/ti-dmai/unloadmodules-ti-dmai-apps.sh
+>>> @@ -1,7 +1,7 @@
+>>>   # Unload modules - DMAI - OMAP3530
+>>>
+>>>   # remove lpm module
+>>> -rmmod lpm:omap3530
+>>> +rmmod lpm_omap3530
+>>>
+>>>   # remove DSP/BIOS Link driver
+>>>   rmmod dsplinkk
+>>> --
+>>> 2.33.0
+>>
+>>
+>>
+>> 
+>>
