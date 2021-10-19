@@ -1,76 +1,152 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.554.1634683935372121490
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
+ by mx.groups.io with SMTP id smtpd.web11.622.1634684207243924009
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Oct 2021 15:52:15 -0700
+ Tue, 19 Oct 2021 15:56:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 1A0C640BE9;
-	Tue, 19 Oct 2021 22:52:14 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1zLJnyfbs_NM; Tue, 19 Oct 2021 22:52:14 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 035B840A47;
-	Tue, 19 Oct 2021 22:52:12 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 56AAE1746A0; Tue, 19 Oct 2021 18:52:12 -0400 (EDT)
-Date: Tue, 19 Oct 2021 18:52:12 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Vivien Didelot <vivien.didelot@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] ti-sgx-ddk-km: module installed but not shipped
-Message-ID: <20211019225212.GU10132@denix.org>
-References: <20211019173010.GB3938936@t480s.localdomain>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=h5enumHs;
+ spf=pass (domain: gmail.com, ip: 209.85.219.48, mailfrom: vivien.didelot@gmail.com)
+Received: by mail-qv1-f48.google.com with SMTP id j12so961248qvk.12
+        for <meta-ti@lists.yoctoproject.org>; Tue, 19 Oct 2021 15:56:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=date:message-id:from:to:cc:subject:in-reply-to:references
+         :mime-version:content-disposition:content-transfer-encoding;
+        bh=zWi11BZXqT+5rfVpd2RQ8gj5eWQNafsqyZDGisZAYB4=;
+        b=h5enumHsf3gVtrpRSS7UQZofFblBuD+Fhvlmx+XkNmsBjl9LdTcrRsCyOMaynHvUj0
+         lt59tdY77lTHocaqwBwb2/nKZMFqzx/MPj+NHcIxtuzQzBbv7Er0KyAL0Zu9scsMGtIU
+         ZxG0tDJQD7z/Vs/6U+lHhPeIlfQqygBjAjIMcXgnMVHnfqA5hNz8bly3dBwPYMVw9Tcb
+         LyfKteMWVuYnam+hEqutL99g8Mj4wzssOq7hXcesKnXaWl35z1vsSdqSWxW3JAvCO26o
+         M1Hom6fuS5rQpeiCGWmbviBpu21yTS5yFe9kRHRPYxgxSFpr0rRBRswp2IjQQf8fqSet
+         hPtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:from:to:cc:subject:in-reply-to
+         :references:mime-version:content-disposition
+         :content-transfer-encoding;
+        bh=zWi11BZXqT+5rfVpd2RQ8gj5eWQNafsqyZDGisZAYB4=;
+        b=fuvzA7T26yhdNKqlIsxYs9+7PjdL+2Ayt9gcjHXXPPSEi7rSo3tK/E0FVZrlujrDpd
+         jKpuHOa2GvN7u8GM9YP7XgW2FAhBoT5QTerMAvOO7N/YjYhISQf3Qmiy6O10EiU0tGUk
+         PKs8pwIiKwSGXXl8bdElNsdVqWj/4X4V8xt4eNyCDBGgNfkqOCQtLPgnjxvNFPATW3Pl
+         Hx3J3GbvbcJbTLXHiIOoXJSfy7hyITUcd4Xy0EKE4WtNA90WVgGGuE4Ia4YQBI7X4khH
+         M0VqLCoMPRPWTnDwWYYp+Dipg85cvkPnraJOHVXuVY7W7WjUos6SVtkhJZbR/9F1z2u2
+         5Hqg==
+X-Gm-Message-State: AOAM531lJKR0mGkd9p2k8c3g4Ss2Q+RLaNQ6tVB/kfHShxJOQb85CbJh
+	glDceyH3XoXkBHK5WBOIbDo=
+X-Google-Smtp-Source: ABdhPJzhMyXfYVZdrU5F+O20ad9w/QFOPob9N5OLRW34l78nyd4F4u+lzKXtQp6ssaAhWYwuIG3A+g==
+X-Received: by 2002:a05:6214:448:: with SMTP id cc8mr2707216qvb.28.1634684206206;
+        Tue, 19 Oct 2021 15:56:46 -0700 (PDT)
+Return-Path: <vivien.didelot@gmail.com>
+Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-121.dsl.bell.ca. [70.53.240.121])
+        by smtp.gmail.com with ESMTPSA id 14sm208095qtp.97.2021.10.19.15.56.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 Oct 2021 15:56:46 -0700 (PDT)
+Date: Tue, 19 Oct 2021 18:56:45 -0400
+Message-ID: <20211019185645.GB4097005@t480s.localdomain>
+From: "Vivien Didelot" <vivien.didelot@gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: meta-ti@lists.yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>,
+ Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [meta-ti] ti-sgx-ddk-km proper toolchain detection
+In-Reply-To: <20211019214153.GT10132@denix.org>
+References: <20211019144905.GB3675266@t480s.localdomain>
+ <20211019200246.GQ10132@denix.org>
+ <20211019165129.GC3919194@t480s.localdomain>
+ <20211019214153.GT10132@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <20211019173010.GB3938936@t480s.localdomain>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 19, 2021 at 05:30:10PM -0400, Vivien Didelot wrote:
-> Hi,
-> 
-> With latest master(s), ti-sgx-ddk-km fails with:
-> 
->     ERROR: ti-sgx-ddk-km-1.17.4948957-r22x do_package: QA Issue: ti-sgx-ddk-km: Files/directories were installed but not shipped in any package:
->       /lib
->       /lib/modules
->       /lib/modules/5.10.59-g04b02a7e8e
->       /lib/modules/5.10.59-g04b02a7e8e/extra
->       /lib/modules/5.10.59-g04b02a7e8e/extra/pvrsrvkm.ko
->     Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
->     ti-sgx-ddk-km: 5 installed and not shipped files. [installed-vs-shipped]
-> 
-> But adding a ti-sgx-ddk-km_1.17.4948957.bbappend recipe containing:
-> 
->     FILES:${PN} += "/lib/modules/5.10.59-g04b02a7e8e/extra/pvrsrvkm.ko"
-> 
-> won't fix the problem if DISTRO_FEATURES contains "usrmerge":
-> 
->     ERROR: ti-sgx-ddk-km-1.17.4948957-r22x do_package_qa: QA Issue: ti-sgx-ddk-km package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
-> 
-> Instead this unrecommended workaround fixes the task:
-> 
->     do_install:append () {
->         mkdir ${D}/usr
->         mv ${D}/lib ${D}/usr
->     }
-> 
-> This seems like a regression with the prefix passed to the module install
-> step, forcing ${D}/lib instead of ${D}/usr/lib when usrmerge is enabled.
+Hi Denys,
 
-No regressions - this part hasn't change forever. The internal Makefile 
-framework in SGX and RGX packages is very generic and convoluted, plus 
-somewhat old and outdated - it has no knowledge of "usrmerge" concept 
-and simply installs modules under /lib/modules under rootfs hierarchy. 
-The recipe doesn't dictate that, it just passes ${D} down as the rootfs 
-hierarchy. But I think I have a workaround for this...
+On Tue, 19 Oct 2021 17:41:53 -0400 Denys Dmytriyenko <denis@denix.org> wrote:
+> > On Tue, 19 Oct 2021 16:02:46 -0400 Denys Dmytriyenko <denis@denix.org> wrote:
+> > > > I've, like many, run into the issue of toolchain detection for the
+> > > > ti-sgx-ddk-km driver. I've noticed the ugly patch [1] getting edited to
+> > > > add new toolchains like arm-oe-linux-gnueabi and arm-poky-linux-gnueabi.
+> > > > 
+> > > > This is cumbersome because this step needs to be repeated for arbitrary
+> > > > toolchain vendors, and it is error-prone since the toolchain added doesn't
+> > > > explicitly mention the hardfp suffix expected by the driver, whereas
+> > > > arm-*-gnueabihf is already matched.
+> > > > 
+> > > > My point is that I believe the proper fix for this is to make sure the
+> > > > toolchain generated by OpenEmbedded gets suffixed with "hf" when the hardfp
+> > > > tune is enabled, so that this ugly patch can be dropped and toolchain
+> > > > detection can work as expected.
+> > > > 
+> > > > So far I've seen that the proper way to do this would be to set ABIEXTENSION
+> > > > .= "hf" accordingly given the arch tune. The only problem I've encountered
+> > > > so far is that the cross-canadian thingy [2] is zeroing the related variables
+> > > > for some reasons. Hence I'm not sure how to configure this properly.
+> > > > 
+> > > > [1] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
+> > > > 
+> > > > [2] http://cgit.openembedded.org/openembedded-core/tree/meta/classes/cross-canadian.bbclass#n64
+> > > > 
+> > > > Cc'ing Richard in case he has an input on the ugly ABI extension zeroing.
+> > > 
+> > > I'm seeing some level of negativity in this email - everything is ugly. At 
+> > > least it's not personal, which is good. But asking for help with an attack 
+> > > may not be very wise. Just saying... :)
+> > 
+> > The comment in cross-canadian.bbclass literally states "This is a bit ugly."
+> > I'm only talking about code here and did not mean any attack.
+> > 
+> > > Anyway, the reason for that SGX patch is to extend its internal toolchain 
+> > > check with 2 supported exceptions - OE-Core and Poky, which have -gnueabi 
+> > > suffix, but in reality are -gnueabihf toolchains. I'm not aware of any other 
+> > > *upstream* toolchain vendor with the same predicament. And the check should 
+> > > not be generic, as there are valid non-hardfp toolchains out there. This is 
+> > > a known "feature" of the OE-built toolchains and as meta-ti is downstream 
+> > > from OE-Core, it has to adapt, whether it's ugly or not.
+> > 
+> > My point exactly, we shouldn't be adding non-hf toolchains in the detection
+> > because this is error prone, they may not support hardfp, we should try to
+> > fix the hardfp toolchain names instead.
+> 
+> Sure, try convincing upstream OE maintainers and the Community at large.
 
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+Now I'm seeing some level of negativity :-)
+
+> > > Now, the reasons behind this "irregularity" of OE-built toolchains have 
+> > > been discussed many times in the past. I'm sure Khem and Richard can go 
+> > > into more details, if they are so inclined. From my perspective, one of 
+> > > the major reasons was that OE has been building and distributing toolchains 
+> > > way before other vendors started using "hf" extension in the OS/ABI field 
+> > > of the target triplet. And OE tends to be very conservative when it comes 
+> > > to making major changes that break compatibility with past releases...
+> > 
+> > And this is not just OE-Core or Poky toolchains, but anyone setting a custom
+> > vendor for some reason has to carry such patch, like seen here:
+> > 
+> > https://e2e.ti.com/support/processors-group/processors/f/processors-forum/881393/dra726-strange-build-error-for-ti-sgx-ddk-km/3259903#3259903
+> 
+> I completely understand the trouble, but as mentioned above, those are not 
+> *upstream* toolchain vendors relative to meta-ti, unlike OE-Core and to some 
+> extent Poky.
+> 
+> Each OE distro tends to customize TARGET_VENDOR. Unfortunately, that ends up 
+> in the toolchain name, even though toolchains between distros are not that 
+> different. Linaro, Arm, Debian, Ubuntu chose not to do that and used "-none" 
+> or just nothing at all in their toolchain vendor field. I also chose not to 
+> customize it for Arago distro, using the default "-oe" vendor name, hence 
+> its *internal* toolchain is still called arm-oe-linux-gnueabi, instead of 
+> arm-arago-linux-gnueabi...
+> 
+> Overall, I don't see this matter as SGX-specific, or even meta-ti specific. 
+> This could be a more *generic* upstream toolchain topic, if you wish to take 
+> it there.
+
+That's the whole purpose of this thread, this is why I am pointing this
+sgx patch as an example for the consequences for zeroing the ABI extension,
+and why I Cc'ed Richard to bootstrap the discussion about this.
+
+So far the fix seems "as simple as" setting ABIEXTENSION .= "hf" if TARGET_FPU
+is "hard", but this hits the cross-canadian.bbclass code clearing it. Thus
+I'm raising the discussion about finding an alternative way.
+
+
+Thanks,
+
+	Vivien
