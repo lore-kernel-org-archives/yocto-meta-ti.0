@@ -1,72 +1,136 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.12845.1634663750352398468
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web12.14283.1634668704922346923
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Oct 2021 10:15:50 -0700
+ Tue, 19 Oct 2021 11:38:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3A27340C2B;
-	Tue, 19 Oct 2021 17:15:49 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ej2cFTm8Sjk8; Tue, 19 Oct 2021 17:15:49 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1059E406B5;
-	Tue, 19 Oct 2021 17:15:45 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id CDBBF174698; Tue, 19 Oct 2021 13:15:44 -0400 (EDT)
-Date: Tue, 19 Oct 2021 13:15:44 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Sinthu Raja <sinthu.raja@mistralsolutions.com>
-Cc: meta-ti@lists.yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>,
-	Nishanth Menon <nm@ti.com>, Sinthu Raja <sinthu.raja@ti.com>
-Subject: Re: [meta-ti][dunfell/master][PATCH] conf: j7-evm: Replace eaik dtb with sk to KERNEL_DEVICETREE
-Message-ID: <20211019171544.GN10132@denix.org>
-References: <20211019082221.4767-1-sinthu.raja@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cMFruXMZ;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19JIcKZ3065125;
+	Tue, 19 Oct 2021 13:38:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1634668700;
+	bh=3cJDGWuOjtGiHoco74izCZOvfd6aW5f98mIoVQ8ERSE=;
+	h=Subject:To:CC:References:From:Date:In-Reply-To;
+	b=cMFruXMZrpf5LNDlfKHH0PyjCfH+W5hrB9+ZGIz/o+QSEd4rqmmMIJ0bfhQFN1m5K
+	 yYJn77eUS0+86tjYO88fciE2R1HJB5VU27MM98nqhKUCkxcbeJh1wQvJU6XrVaXKMf
+	 rsttWRyhsNAkjuZD6ZsA89UzjseGUuPqRYoE9bmo=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19JIcKFC126106
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 19 Oct 2021 13:38:20 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 19
+ Oct 2021 13:38:21 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Tue, 19 Oct 2021 13:38:20 -0500
+Received: from [10.250.71.246] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19JIcKlK012883;
+	Tue, 19 Oct 2021 13:38:20 -0500
+Subject: Re: [EXTERNAL] [meta-ti][master/dunfell][PATCH v2] ti-linux-fw: Support common inc for all firmware
+To: Denys Dmytriyenko <denis@denix.org>, <vigneshr@ti.com>
+CC: Praneeth Bajjuri <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
+References: <20211019131951.18210-1-yogeshs@ti.com>
+ <727cc120-9113-42d6-f1dd-d4d9f31d9b6f@ti.com>
+ <20211019170322.GM10132@denix.org>
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+Message-ID: <e83b4f49-0a6b-c671-70b9-7e39f420c085@ti.com>
+Date: Tue, 19 Oct 2021 13:38:19 -0500
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20211019082221.4767-1-sinthu.raja@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Tue, Oct 19, 2021 at 01:52:21PM +0530, Sinthu Raja wrote:
-> From: Sinthu Raja <sinthu.raja@ti.com>
-> 
-> The board name for J721E EdgeAI Kit (EAIK) is changed to J721E SK [1],
-> so replace the eaik dtb with sk dtb file
-> 
-> [1] https://www.ti.com/tool/SK-TDA4VM
-> 
-> Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
-> ---
->  conf/machine/j7-evm.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
-> index 7cde9f4d..1f47f00c 100644
-> --- a/conf/machine/j7-evm.conf
-> +++ b/conf/machine/j7-evm.conf
-> @@ -13,7 +13,7 @@ KERNEL_DEVICETREE = " \
->      ti/k3-j721e-common-proc-board.dtb \
->      ti/k3-j721e-proc-board-tps65917.dtb \
->      ti/k3-j721e-common-proc-board-infotainment.dtbo \
-> -    ti/k3-j721e-eaik.dtb \
-> +    ti/k3-j721e-sk.dtb \
-
-Was there a corresponding kernel change with the file rename?
+In-Reply-To: <20211019170322.GM10132@denix.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
 
->  "
->  
->  UBOOT_MACHINE = "j721e_evm_a72_config"
-> -- 
-> 2.31.1
-> 
 
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+On 10/19/2021 12:03 PM, Denys Dmytriyenko wrote:
+> On Tue, Oct 19, 2021 at 08:46:29PM +0530, Vignesh Raghavendra via lists.yoctoproject.org wrote:
+>>
+>>
+>> On 10/19/21 6:49 PM, Yogesh Siraswar via lists.yoctoproject.org wrote:
+>>> Change to support common INC for all firmware
+>>> This will help with:
+>>> 1) Eliminating requirement to change multiple recipes for firmware
+>>> update
+>>> 2) This will help support AUTOREV
+>>>
+>>> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+>>> ---
+>>
+>> [...]
+>>> diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
+>>> index d447df33..246b872e 100644
+>>> --- a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
+>>> +++ b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
+>>> @@ -1,9 +1,9 @@
+>>>   SUMMARY = "PRU Ethernet firmware for AM65x SR1.0"
+>>>   
+>>> -LICENSE = "TI-TFL"
+>>> -LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+>>> +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>>>   
+>>> -PV = "08.00.00.20"
+>>> +PV = "${PRUETH_FW_AM65x_SR2_VERSION}"
+>>
+>> Should be
+>>
+>> 	PV = "${PRUETH_FW_AM65x_VERSION}"
+> 
+> Also, "AM65x" lower case "x" here
+> 
+Yes, Vignesh also pointed that. Will fix in the next version.
+> 
+>>> +PR = "${INC_PR}.0"
+>>>   
+>>>   CLEANBROKEN = "1"
+>>>   
+>> [...]
+>>> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>>> similarity index 75%
+>>> rename from recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+>>> rename to recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>>> index 9ce9f6c8..a910af2c 100644
+>>> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
+>>> +++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>>> @@ -4,9 +4,18 @@ LICENSE = "TI-TFL"
+>>>   LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+>>>   
+>>>   PV = "2021.05"
+>>> -INC_PR = "r0"
+>>> -# RTOS firmware version
+>>> +INC_PR = "r1"
+>>> +
+>>> +# Firmware versions
+>>>   CORESDK_RTOS_VERSION = "08.00.00.32"
+>>> +SERDES_FW_VERSION = "3.3.0.2c"
+>>> +NETCP_SA_FW_VERSION = "1.0.0"
+>>> +NETCP_PA_FW_VERSION = "3.0.2.3"
+>>> +QMSS_PDSP_FW_VERSION = "1.0.0.9"
+>>> +PRUETH_FW_AM65X_VERSION = "08.00.00.20"
+>>
+>> ^^^
+> 
+> AM65X has uppercase X here. better to be consistent.
+> 
+> 
+>>> +PRUETH_FW_AM65x_SR2_VERSION = "02.02.09.03"
+
+SR1 and SR2 will be consistent with use of AM65X and not AM65x in next
+version
+
+>>> +GOODIX_FW_VERSION = "1.0.0.0"
+>>> +CADENCE_MHDP_FW_VERSION = "1.2.17"
+>>>   
+>>>   SRCREV = "793309716bce2e443f798dd5c5f0d8dd310970c0"
+>>>   BRANCH ?= "ti-linux-firmware"
+>>
+>> [...]
+>> Regards
+>> Vignesh
