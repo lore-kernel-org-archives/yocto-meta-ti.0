@@ -1,86 +1,86 @@
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
- by mx.groups.io with SMTP id smtpd.web10.14607.1634669347590845176
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.15394.1634673771719345478
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Oct 2021 11:49:07 -0700
+ Tue, 19 Oct 2021 13:02:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ph3XSdIz;
- spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: vivien.didelot@gmail.com)
-Received: by mail-qk1-f178.google.com with SMTP id p4so909200qki.3
-        for <meta-ti@lists.yoctoproject.org>; Tue, 19 Oct 2021 11:49:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=date:message-id:from:to:cc:subject:references:mime-version
-         :content-disposition:content-transfer-encoding;
-        bh=3DTXtuBCgHDMYqIH3gTanPdGUY6TgYtiaTW/SeePqek=;
-        b=ph3XSdIzsq9hbQjj/MB/w3WM2eUax+g0hAxvbNHnK8dkfQcsm2RZosMwPuYDMZHlge
-         tmFmOa3gByrj4IoBrwXisIaemnTzNGnSz970Qh9aZjwIj+Yg/zgjNmKevgB60Hxj0CoQ
-         5JOOrzGPlb2npa5CmmsXaISt3HvR5horW5K8iomkH+nXAUyhZJwclW1I8GLHc2EX6RUI
-         5EPQecU2FuiWNrD2hPjx6kiH98loJjXVQw4X0x/wLobVM31nPmgmT5Vp/WnhB7ODVv9J
-         EAlahde3xEzL1FviLFTUJjKeA6Tw2BF8VRkgKJ5v5nFDFTJiqSJSEGiJV9NUKZ5pGeSz
-         S9uQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:message-id:from:to:cc:subject:references
-         :mime-version:content-disposition:content-transfer-encoding;
-        bh=3DTXtuBCgHDMYqIH3gTanPdGUY6TgYtiaTW/SeePqek=;
-        b=FDGVJaEPK8D4tkH/9kZrQR8A16P2G6l/CinPkEAycVOzUGOaxVdGFefE/T09rYpynJ
-         XqSvYjNDHzwbRJqKfHC2UwQijnZ+XZ/aZowIA4OrLGbVNpaOV/h+EelrQiSLAmCPiJyn
-         5R0OTFMmueGO4lQ2UNQCCjE4YKmymIuBHRsw0mWHq5OaS4SkMxKHxSk+iaYXNTLNzGDC
-         hUlblRsE5FF4YEeFES5qdlLSFGf4UBfYCAVMAtIkDRD223YxjCVYFy4vMiECRLx/mg0T
-         IlJcmMVi1qTA9tJ9tFqQqkmt3bPlDCQzfWBvan0X7zhx/kNUo//kO6yzq9Op/A4N9CZn
-         KIzw==
-X-Gm-Message-State: AOAM530aQdu9x67a26z66/pCQLSBXr3oP7dUu9Hhl2al8dUvZ+lK/NVK
-	7G8ZVh20DVmTQCKJWCuACGbhfinAW98=
-X-Google-Smtp-Source: ABdhPJy6OVC/OTcRRrj7HErVWc2+axSeQJ8h6ReagNbAWZBpTvzzNpZqB8VbcHCWGQJQuGv2p7rNjw==
-X-Received: by 2002:a37:b0c6:: with SMTP id z189mr1480306qke.344.1634669346632;
-        Tue, 19 Oct 2021 11:49:06 -0700 (PDT)
-Return-Path: <vivien.didelot@gmail.com>
-Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-121.dsl.bell.ca. [70.53.240.121])
-        by smtp.gmail.com with ESMTPSA id i67sm8281569qkd.90.2021.10.19.11.49.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Oct 2021 11:49:06 -0700 (PDT)
-Date: Tue, 19 Oct 2021 14:49:05 -0400
-Message-ID: <20211019144905.GB3675266@t480s.localdomain>
-From: "Vivien Didelot" <vivien.didelot@gmail.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>,
- Praneeth Bajjuri <praneeth@ti.com>,
- Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: ti-sgx-ddk-km proper toolchain detection
-References: 
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 612C840C4E;
+	Tue, 19 Oct 2021 20:02:50 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id F48IvE4Q0-rY; Tue, 19 Oct 2021 20:02:50 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3D0CF40BE6;
+	Tue, 19 Oct 2021 20:02:47 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 91718174698; Tue, 19 Oct 2021 16:02:46 -0400 (EDT)
+Date: Tue, 19 Oct 2021 16:02:46 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Vivien Didelot <vivien.didelot@gmail.com>
+Cc: meta-ti@lists.yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [meta-ti] ti-sgx-ddk-km proper toolchain detection
+Message-ID: <20211019200246.GQ10132@denix.org>
+References: <20211019144905.GB3675266@t480s.localdomain>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <20211019144905.GB3675266@t480s.localdomain>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-Hi all,
+On Tue, Oct 19, 2021 at 02:49:05PM -0400, Vivien Didelot wrote:
+> Hi all,
+> 
+> I've, like many, run into the issue of toolchain detection for the
+> ti-sgx-ddk-km driver. I've noticed the ugly patch [1] getting edited to
+> add new toolchains like arm-oe-linux-gnueabi and arm-poky-linux-gnueabi.
+> 
+> This is cumbersome because this step needs to be repeated for arbitrary
+> toolchain vendors, and it is error-prone since the toolchain added doesn't
+> explicitly mention the hardfp suffix expected by the driver, whereas
+> arm-*-gnueabihf is already matched.
+> 
+> My point is that I believe the proper fix for this is to make sure the
+> toolchain generated by OpenEmbedded gets suffixed with "hf" when the hardfp
+> tune is enabled, so that this ugly patch can be dropped and toolchain
+> detection can work as expected.
+> 
+> So far I've seen that the proper way to do this would be to set ABIEXTENSION
+> .= "hf" accordingly given the arch tune. The only problem I've encountered
+> so far is that the cross-canadian thingy [2] is zeroing the related variables
+> for some reasons. Hence I'm not sure how to configure this properly.
+> 
+> [1] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
+> 
+> [2] http://cgit.openembedded.org/openembedded-core/tree/meta/classes/cross-canadian.bbclass#n64
+> 
+> Cc'ing Richard in case he has an input on the ugly ABI extension zeroing.
 
-I've, like many, run into the issue of toolchain detection for the
-ti-sgx-ddk-km driver. I've noticed the ugly patch [1] getting edited to
-add new toolchains like arm-oe-linux-gnueabi and arm-poky-linux-gnueabi.
+I'm seeing some level of negativity in this email - everything is ugly. At 
+least it's not personal, which is good. But asking for help with an attack 
+may not be very wise. Just saying... :)
 
-This is cumbersome because this step needs to be repeated for arbitrary
-toolchain vendors, and it is error-prone since the toolchain added doesn't
-explicitly mention the hardfp suffix expected by the driver, whereas
-arm-*-gnueabihf is already matched.
+Anyway, the reason for that SGX patch is to extend its internal toolchain 
+check with 2 supported exceptions - OE-Core and Poky, which have -gnueabi 
+suffix, but in reality are -gnueabihf toolchains. I'm not aware of any other 
+*upstream* toolchain vendor with the same predicament. And the check should 
+not be generic, as there are valid non-hardfp toolchains out there. This is 
+a known "feature" of the OE-built toolchains and as meta-ti is downstream 
+from OE-Core, it has to adapt, whether it's ugly or not.
 
-My point is that I believe the proper fix for this is to make sure the
-toolchain generated by OpenEmbedded gets suffixed with "hf" when the hardfp
-tune is enabled, so that this ugly patch can be dropped and toolchain
-detection can work as expected.
+Now, the reasons behind this "irregularity" of OE-built toolchains have 
+been discussed many times in the past. I'm sure Khem and Richard can go 
+into more details, if they are so inclined. From my perspective, one of 
+the major reasons was that OE has been building and distributing toolchains 
+way before other vendors started using "hf" extension in the OS/ABI field 
+of the target triplet. And OE tends to be very conservative when it comes 
+to making major changes that break compatibility with past releases...
 
-So far I've seen that the proper way to do this would be to set ABIEXTENSION
-.= "hf" accordingly given the arch tune. The only problem I've encountered
-so far is that the cross-canadian thingy [2] is zeroing the related variables
-for some reasons. Hence I'm not sure how to configure this properly.
-
-[1] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-
-[2] http://cgit.openembedded.org/openembedded-core/tree/meta/classes/cross-canadian.bbclass#n64
-
-Cc'ing Richard in case he has an input on the ugly ABI extension zeroing.
-
-
-Thanks,
-
-	Vivien
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
