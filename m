@@ -1,506 +1,88 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.16393.1634677967729075388
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+ by mx.groups.io with SMTP id smtpd.web08.16553.1634679012265118911
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Oct 2021 14:12:48 -0700
+ Tue, 19 Oct 2021 14:30:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=AOo3p8C9;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19JLCk1Z107484;
-	Tue, 19 Oct 2021 16:12:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1634677966;
-	bh=eEQWnGzrGuOuIyhoDRRQbKQis5y8p0fxCettJYr91Yw=;
-	h=From:To:Subject:Date;
-	b=AOo3p8C987N7kRCeqeaUPXEReHI7UY+OWyi0WGeZtjrNZFUSRlzWz1IiioyueqhIV
-	 a8rCibbNWhdmG2B/5T6n8or0z6mv0JZtqDTjZ6FqFtjGs/NcGvBIfa3XWnpJvpRi4n
-	 AUVzbjMkkpmpeSA97aI4dDArnQP5JwG1bUa4y2bg=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19JLCkgb002310
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 19 Oct 2021 16:12:46 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 19
- Oct 2021 16:12:45 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Tue, 19 Oct 2021 16:12:45 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19JLCjQC022986;
-	Tue, 19 Oct 2021 16:12:45 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/dunfell][PATCH v3] ti-linux-fw: Support common inc for all firmware
-Date: Tue, 19 Oct 2021 21:12:45 +0000
-Message-ID: <20211019211245.50255-1-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XRLejjGM;
+ spf=pass (domain: gmail.com, ip: 209.85.222.171, mailfrom: vivien.didelot@gmail.com)
+Received: by mail-qk1-f171.google.com with SMTP id b15so1307701qkl.10
+        for <meta-ti@lists.yoctoproject.org>; Tue, 19 Oct 2021 14:30:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=date:message-id:from:to:subject:references:mime-version
+         :content-disposition:content-transfer-encoding;
+        bh=PiflRtq5sfFrrA4V7Tzohu2O12WymPP6IgySEKPN3xU=;
+        b=XRLejjGM3OygYvhpCfiYU8uItM7UqPWurCQ9vu1v4K6+PHHLjWFigLUkvj3q7q/vs8
+         QS9OZ+B8+1SvwkGO/QjerCMLlYy3Hg0I/rEoAmal2Dv+5bDpLOdrZtGR2n58heKspshQ
+         5hMUb9uiwCkgXX1EsteVLEyxcDUwGX3vubcz7Vcq1HwoHbdB85+F257t45ElnhuYzINU
+         JKSIIptJIKo1HTWtiKvhQSXv3Zzd0EgOww9FajstCYhtwW+G8mNtvOa3cK1GFU6ByKuN
+         CAwN5Cvqn4xXHb/ItDFyNQt64a+XSlW4FxCbwOLUpGg6IAJJ3RxlUy4xf5cIylZo+PcY
+         id6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:from:to:subject:references
+         :mime-version:content-disposition:content-transfer-encoding;
+        bh=PiflRtq5sfFrrA4V7Tzohu2O12WymPP6IgySEKPN3xU=;
+        b=Wmk009giTsbny+CX1iPUNpXMJ8hf6cWQ8gHM5DNqea4b8pGA0DP2h+BxypUFAz670X
+         9hhCpt4T/hEptey/rk5TRspQHrd0V+VhEtqFUkPPK9ePIO/aD+Dchs7NanBgF3XuDbdz
+         M0COIjCxORkX3trxrpcqKvjjtkiPhOrZSCfr0D8CGQAGfm03Om6Slx3VrZQgyVEiSQkU
+         cQ0zpYvXbuH6vkEAT6MdXj5Qqc/GCyfSaI/4pSfG0N4i+AU1dUSxxbeG7G4SAIy7t07X
+         BA4XEdycB1l56hg6HCPjrJZtYQ2yy9fxHqvKPDPy/1d6hYInD6nWA+3sJDD+OWu8/WU3
+         8XZQ==
+X-Gm-Message-State: AOAM531k+gejHL8tdRwFMQHs3uXtQox9IDGW+Er58WaVeop4nDkBHnkR
+	IQeuRlca/X91bbm6ApX/4Nd+5Q6VTRM=
+X-Google-Smtp-Source: ABdhPJzvIbelAadol0mjX+oyJUWcihYZqPhYGT7pCeMyGlLXvfnJfEbCXItvD0BSXz+fseqgXhkCwQ==
+X-Received: by 2002:a05:620a:31aa:: with SMTP id bi42mr2215953qkb.76.1634679011140;
+        Tue, 19 Oct 2021 14:30:11 -0700 (PDT)
+Return-Path: <vivien.didelot@gmail.com>
+Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-121.dsl.bell.ca. [70.53.240.121])
+        by smtp.gmail.com with ESMTPSA id 6sm116116qtz.13.2021.10.19.14.30.10
+        for <meta-ti@lists.yoctoproject.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 Oct 2021 14:30:10 -0700 (PDT)
+Date: Tue, 19 Oct 2021 17:30:10 -0400
+Message-ID: <20211019173010.GB3938936@t480s.localdomain>
+From: "Vivien Didelot" <vivien.didelot@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Subject: ti-sgx-ddk-km: module installed but not shipped
+References: 
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Change to support common INC for all firmware
-This will help with:
-1) Eliminating requirement to change multiple recipes for firmware
-update
-2) This will help support AUTOREV
+Hi,
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
----
-Changes from v2:
-1) Fixed the wrong version name used for prueth-fw-am65x.
-2) Used consistent naming convention for AM65X
+With latest master(s), ti-sgx-ddk-km fails with:
 
- recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb  | 11 ++++-------
- recipes-bsp/goodix-fw/goodix-fw_git.bb              | 11 ++++-------
- recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb          | 12 +++---------
- recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb          | 12 +++---------
- recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb    | 11 +++--------
- recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb        | 11 +++--------
- recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb           | 10 ++--------
- recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb          | 10 ++--------
- recipes-bsp/pruprp-fw/pruprp-fw_2.17.25.bb          | 10 ++--------
- recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb              | 10 ++--------
- recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb        | 11 ++++-------
- recipes-bsp/serdes-fw/serdes-fw_git.bb              | 10 ++++------
- .../ti-sci-fw.inc => ti-linux-fw/ti-linux-fw.inc}   | 13 +++++++++++--
- recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb       |  2 +-
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb              |  4 ++--
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb          |  2 +-
- 16 files changed, 51 insertions(+), 99 deletions(-)
- rename recipes-bsp/{ti-sci-fw/ti-sci-fw.inc => ti-linux-fw/ti-linux-fw.inc} (75%)
+    ERROR: ti-sgx-ddk-km-1.17.4948957-r22x do_package: QA Issue: ti-sgx-ddk-km: Files/directories were installed but not shipped in any package:
+      /lib
+      /lib/modules
+      /lib/modules/5.10.59-g04b02a7e8e
+      /lib/modules/5.10.59-g04b02a7e8e/extra
+      /lib/modules/5.10.59-g04b02a7e8e/extra/pvrsrvkm.ko
+    Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+    ti-sgx-ddk-km: 5 installed and not shipped files. [installed-vs-shipped]
 
-diff --git a/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
-index 6d857f7f..5cbbceb6 100644
---- a/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
-+++ b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
-@@ -1,10 +1,12 @@
- SUMMARY = "Cadence MHDP DP bridge firmware"
- 
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+
- LICENSE = "BSD-3-Clause | Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENCE.cadence;md5=009f46816f6956cfb75ede13d3e1cee0"
- 
--PV = "1.2.17"
--PR = "r0"
-+PV = "${CADENCE_MHDP_FW_VERSION}"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,11 +14,6 @@ COMPATIBLE_MACHINE = "j7"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "7bad9a69a343e01056ece5ce6da4d4060c42f6bc"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- TARGET = "mhdp8546.bin"
- 
-diff --git a/recipes-bsp/goodix-fw/goodix-fw_git.bb b/recipes-bsp/goodix-fw/goodix-fw_git.bb
-index 0a9f3ff9..da3ae6e3 100644
---- a/recipes-bsp/goodix-fw/goodix-fw_git.bb
-+++ b/recipes-bsp/goodix-fw/goodix-fw_git.bb
-@@ -1,10 +1,12 @@
- DESCRIPTION = "Goodix GT9271 config firmware"
- 
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENCE.Spectrum-GT9271;md5=2a6de6be7af1fe46370c684daf27c852"
- 
--PV = "1.0.0.0"
--PR = "r0"
-+PV = "${GOODIX_FW_VERSION}"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,11 +14,6 @@ COMPATIBLE_MACHINE = "dra7xx"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "f1a8d1d0131f83bd1a775cde7075eb67c070892c"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- ORIGIN = "DRA71x-RevA-GT9271_SpecDig_Config.bin"
- TARGET = "goodix_9271_cfg.bin"
-diff --git a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
-index fe7fa2b2..5d4b6d96 100644
---- a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
-+++ b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
-@@ -1,10 +1,9 @@
- DESCRIPTION = "NETCP PA firmware for Keystone"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
--PV = "3.0.2.3"
--PR = "r1"
-+PV = "${NETCP_PA_FW_VERSION}"
-+PR = "${INC_PR}.1"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,11 +11,6 @@ COMPATIBLE_MACHINE = "k2hk|k2l|k2e"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "953ab647b0b6af411965242ecd919b1cb0e570d6"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- FWBASENAME = " \
-diff --git a/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb b/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
-index 56373a73..c4674505 100644
---- a/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
-+++ b/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
-@@ -1,10 +1,9 @@
- DESCRIPTION = "NETCP SA firmware for Keystone"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
--PV = "1.0.0"
--PR = "r0"
-+PV = "${NETCP_SA_FW_VERSION}"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,11 +11,6 @@ COMPATIBLE_MACHINE = "keystone"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "588f602a21c62f90b1f4318b881c80a1e711317a"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- TARGET = "sa_mci.fw"
-diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-index 67e8cd07..cf65e09a 100644
---- a/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-+++ b/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "PRU Ethernet firmware for AM65xx SR2.0"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
--PV = "02.02.09.03"
-+PV = "${PRUETH_FW_AM65X_SR2_VERSION}"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -11,11 +11,6 @@ COMPATIBLE_MACHINE = "am65xx-evm|am64xx-evm"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "f3d2c7cafc906adc9a2f4543aa2fee556483545d"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- TARGET = " \
-diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
-index d447df33..5e362ed9 100644
---- a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
-+++ b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "PRU Ethernet firmware for AM65x SR1.0"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
--PV = "08.00.00.20"
-+PV = "${PRUETH_FW_AM65X_VERSION}"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -11,11 +11,6 @@ COMPATIBLE_MACHINE = "am65xx"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "517b0cd8d8d80e91f1f7d80f035e6af041c39726"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- TARGET = " \
-diff --git a/recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb b/recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb
-index c392673e..f7336fb1 100644
---- a/recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb
-+++ b/recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb
-@@ -1,9 +1,8 @@
- SUMMARY = "PRU Ethernet firmware for AM57xx, AM437x and AM335x"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
--PR = "r0"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -11,11 +10,6 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "11fecaf08eeed27f2a834c9911edb8a5fb2a23b1"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- TARGET = ""
-diff --git a/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb b/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb
-index 2616373e..507a500b 100644
---- a/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb
-+++ b/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb
-@@ -1,10 +1,9 @@
- SUMMARY = "PRU HSR firmware for AM335x/AM437x/AM57xx"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
- PE = "1"
--PR = "r0"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,11 +11,6 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "0038ff0ecda8dae83c65d454c85776c6a4ef8e63"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- TARGET = ""
-diff --git a/recipes-bsp/pruprp-fw/pruprp-fw_2.17.25.bb b/recipes-bsp/pruprp-fw/pruprp-fw_2.17.25.bb
-index e71bc00a..ba203948 100644
---- a/recipes-bsp/pruprp-fw/pruprp-fw_2.17.25.bb
-+++ b/recipes-bsp/pruprp-fw/pruprp-fw_2.17.25.bb
-@@ -1,10 +1,9 @@
- SUMMARY = "PRU PRP firmware for AM335x/AM437x/AM57xx"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
- PE = "1"
--PR = "r0"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,11 +11,6 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "0038ff0ecda8dae83c65d454c85776c6a4ef8e63"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- TARGET = ""
-diff --git a/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb b/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
-index 3f5ef7e7..ec0a15f4 100644
---- a/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
-+++ b/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb
-@@ -1,9 +1,8 @@
- SUMMARY = "PRU Switch firmware for AM57xx, AM437x and AM335x"
- 
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
--PR = "r0"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -11,11 +10,6 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx-evm|am57xx-hs-evm"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "dccfb2328354be2933a5a179b528ec8a18b92d3a"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- 
- TARGET = ""
-diff --git a/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb b/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
-index cd207826..4ce9a967 100644
---- a/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
-+++ b/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
-@@ -1,10 +1,12 @@
- DESCRIPTION = "QMSS PDSP firmware"
- 
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
- 
--PV = "1.0.0.9"
--PR = "r1"
-+PV = "${QMSS_PDSP_FW_VERSION}"
-+PR = "${INC_PR}.1"
- 
- CLEANBROKEN = "1"
- 
-@@ -12,11 +14,6 @@ COMPATIBLE_MACHINE = "keystone"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "778668c4bb5fe59870e549a4a2820b9f7f90e89e"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- ORIGIN = "ks2_qmss_pdsp_acc48_k2_le_1_0_0_9.bin"
- TARGET = "ks2_qmss_pdsp_acc48.bin"
-diff --git a/recipes-bsp/serdes-fw/serdes-fw_git.bb b/recipes-bsp/serdes-fw/serdes-fw_git.bb
-index 66271788..f9685721 100644
---- a/recipes-bsp/serdes-fw/serdes-fw_git.bb
-+++ b/recipes-bsp/serdes-fw/serdes-fw_git.bb
-@@ -1,9 +1,12 @@
- DESCRIPTION = "SerDes firmware for Keystone PCIe and 1/10GigE"
- 
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
- 
--PV = "3.3.0.2c"
-+PV = "${SERDES_FW_VERSION}"
-+PR = "${INC_PR}.0"
- 
- CLEANBROKEN = "1"
- 
-@@ -11,11 +14,6 @@ COMPATIBLE_MACHINE = "keystone"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "8d861bd8f8f792df60b6873989ff208766fbebae"
--BRANCH ?= "ti-linux-firmware"
--
--SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
--
- S = "${WORKDIR}/git"
- TARGET = "ks2_pcie_serdes.bin ks2_gbe_serdes.bin ks2_xgbe_serdes.bin"
- 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-similarity index 75%
-rename from recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-rename to recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 9ce9f6c8..8d827bd1 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-+++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -4,9 +4,18 @@ LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
- 
- PV = "2021.05"
--INC_PR = "r0"
--# RTOS firmware version
-+INC_PR = "r1"
-+
-+# Firmware versions
- CORESDK_RTOS_VERSION = "08.00.00.32"
-+SERDES_FW_VERSION = "3.3.0.2c"
-+NETCP_SA_FW_VERSION = "1.0.0"
-+NETCP_PA_FW_VERSION = "3.0.2.3"
-+QMSS_PDSP_FW_VERSION = "1.0.0.9"
-+PRUETH_FW_AM65X_VERSION = "08.00.00.20"
-+PRUETH_FW_AM65X_SR2_VERSION = "02.02.09.03"
-+GOODIX_FW_VERSION = "1.0.0.0"
-+CADENCE_MHDP_FW_VERSION = "1.2.17"
- 
- SRCREV = "793309716bce2e443f798dd5c5f0d8dd310970c0"
- BRANCH ?= "ti-linux-firmware"
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
-index 063e72d7..e539c84f 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
-@@ -2,7 +2,7 @@
- # Let's take a page from gcc-source as a common recipe for all gcc stages,
- # but also to provide a single package for MAINMACHINE of all multiconfigs
- 
--require recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
- SUMMARY += "- sources"
- 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index 87fdec68..ca56e1de 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -1,11 +1,11 @@
--require recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
- DEPENDS = "openssl-native u-boot-mkimage-native dtc-native"
- DEPENDS_append_j7200-evm-k3r5 = " virtual/bootloader"
- DEPENDS_append_am64xx-evm-k3r5 = " virtual/bootloader"
- 
- CLEANBROKEN = "1"
--PR = "r1"
-+PR = "${INC_PR}.0"
- 
- # Loaded by R5F core
- COMPATIBLE_MACHINE = "k3r5"
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index 43de1ec2..d8ac2ee0 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -19,7 +19,7 @@ PLAT_SFX_am65xx = "am65xx"
- PLAT_SFX_am64xx = "am64xx"
- 
- FILESEXTRAPATHS_prepend := "${METATIBASE}/recipes-bsp/ti-sci-fw/files/:"
--require recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
- CORESDK_RTOS_VERSION ?= "08.00.00.26"
- PV = "${CORESDK_RTOS_VERSION}"
--- 
-2.17.1
+But adding a ti-sgx-ddk-km_1.17.4948957.bbappend recipe containing:
 
+    FILES:${PN} += "/lib/modules/5.10.59-g04b02a7e8e/extra/pvrsrvkm.ko"
+
+won't fix the problem if DISTRO_FEATURES contains "usrmerge":
+
+    ERROR: ti-sgx-ddk-km-1.17.4948957-r22x do_package_qa: QA Issue: ti-sgx-ddk-km package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
+
+Instead this unrecommended workaround fixes the task:
+
+    do_install:append () {
+        mkdir ${D}/usr
+        mv ${D}/lib ${D}/usr
+    }
+
+This seems like a regression with the prefix passed to the module install
+step, forcing ${D}/lib instead of ${D}/usr/lib when usrmerge is enabled.
+
+
+Thanks,
+
+	Vivien
