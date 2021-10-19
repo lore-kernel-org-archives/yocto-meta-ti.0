@@ -1,136 +1,86 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.14283.1634668704922346923
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+ by mx.groups.io with SMTP id smtpd.web10.14607.1634669347590845176
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Oct 2021 11:38:25 -0700
+ Tue, 19 Oct 2021 11:49:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cMFruXMZ;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19JIcKZ3065125;
-	Tue, 19 Oct 2021 13:38:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1634668700;
-	bh=3cJDGWuOjtGiHoco74izCZOvfd6aW5f98mIoVQ8ERSE=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=cMFruXMZrpf5LNDlfKHH0PyjCfH+W5hrB9+ZGIz/o+QSEd4rqmmMIJ0bfhQFN1m5K
-	 yYJn77eUS0+86tjYO88fciE2R1HJB5VU27MM98nqhKUCkxcbeJh1wQvJU6XrVaXKMf
-	 rsttWRyhsNAkjuZD6ZsA89UzjseGUuPqRYoE9bmo=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19JIcKFC126106
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 19 Oct 2021 13:38:20 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 19
- Oct 2021 13:38:21 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Tue, 19 Oct 2021 13:38:20 -0500
-Received: from [10.250.71.246] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19JIcKlK012883;
-	Tue, 19 Oct 2021 13:38:20 -0500
-Subject: Re: [EXTERNAL] [meta-ti][master/dunfell][PATCH v2] ti-linux-fw: Support common inc for all firmware
-To: Denys Dmytriyenko <denis@denix.org>, <vigneshr@ti.com>
-CC: Praneeth Bajjuri <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <20211019131951.18210-1-yogeshs@ti.com>
- <727cc120-9113-42d6-f1dd-d4d9f31d9b6f@ti.com>
- <20211019170322.GM10132@denix.org>
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-Message-ID: <e83b4f49-0a6b-c671-70b9-7e39f420c085@ti.com>
-Date: Tue, 19 Oct 2021 13:38:19 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ph3XSdIz;
+ spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: vivien.didelot@gmail.com)
+Received: by mail-qk1-f178.google.com with SMTP id p4so909200qki.3
+        for <meta-ti@lists.yoctoproject.org>; Tue, 19 Oct 2021 11:49:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=date:message-id:from:to:cc:subject:references:mime-version
+         :content-disposition:content-transfer-encoding;
+        bh=3DTXtuBCgHDMYqIH3gTanPdGUY6TgYtiaTW/SeePqek=;
+        b=ph3XSdIzsq9hbQjj/MB/w3WM2eUax+g0hAxvbNHnK8dkfQcsm2RZosMwPuYDMZHlge
+         tmFmOa3gByrj4IoBrwXisIaemnTzNGnSz970Qh9aZjwIj+Yg/zgjNmKevgB60Hxj0CoQ
+         5JOOrzGPlb2npa5CmmsXaISt3HvR5horW5K8iomkH+nXAUyhZJwclW1I8GLHc2EX6RUI
+         5EPQecU2FuiWNrD2hPjx6kiH98loJjXVQw4X0x/wLobVM31nPmgmT5Vp/WnhB7ODVv9J
+         EAlahde3xEzL1FviLFTUJjKeA6Tw2BF8VRkgKJ5v5nFDFTJiqSJSEGiJV9NUKZ5pGeSz
+         S9uQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:from:to:cc:subject:references
+         :mime-version:content-disposition:content-transfer-encoding;
+        bh=3DTXtuBCgHDMYqIH3gTanPdGUY6TgYtiaTW/SeePqek=;
+        b=FDGVJaEPK8D4tkH/9kZrQR8A16P2G6l/CinPkEAycVOzUGOaxVdGFefE/T09rYpynJ
+         XqSvYjNDHzwbRJqKfHC2UwQijnZ+XZ/aZowIA4OrLGbVNpaOV/h+EelrQiSLAmCPiJyn
+         5R0OTFMmueGO4lQ2UNQCCjE4YKmymIuBHRsw0mWHq5OaS4SkMxKHxSk+iaYXNTLNzGDC
+         hUlblRsE5FF4YEeFES5qdlLSFGf4UBfYCAVMAtIkDRD223YxjCVYFy4vMiECRLx/mg0T
+         IlJcmMVi1qTA9tJ9tFqQqkmt3bPlDCQzfWBvan0X7zhx/kNUo//kO6yzq9Op/A4N9CZn
+         KIzw==
+X-Gm-Message-State: AOAM530aQdu9x67a26z66/pCQLSBXr3oP7dUu9Hhl2al8dUvZ+lK/NVK
+	7G8ZVh20DVmTQCKJWCuACGbhfinAW98=
+X-Google-Smtp-Source: ABdhPJy6OVC/OTcRRrj7HErVWc2+axSeQJ8h6ReagNbAWZBpTvzzNpZqB8VbcHCWGQJQuGv2p7rNjw==
+X-Received: by 2002:a37:b0c6:: with SMTP id z189mr1480306qke.344.1634669346632;
+        Tue, 19 Oct 2021 11:49:06 -0700 (PDT)
+Return-Path: <vivien.didelot@gmail.com>
+Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-121.dsl.bell.ca. [70.53.240.121])
+        by smtp.gmail.com with ESMTPSA id i67sm8281569qkd.90.2021.10.19.11.49.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 Oct 2021 11:49:06 -0700 (PDT)
+Date: Tue, 19 Oct 2021 14:49:05 -0400
+Message-ID: <20211019144905.GB3675266@t480s.localdomain>
+From: "Vivien Didelot" <vivien.didelot@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+ Praneeth Bajjuri <praneeth@ti.com>,
+ Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: ti-sgx-ddk-km proper toolchain detection
+References: 
 MIME-Version: 1.0
-In-Reply-To: <20211019170322.GM10132@denix.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+Hi all,
+
+I've, like many, run into the issue of toolchain detection for the
+ti-sgx-ddk-km driver. I've noticed the ugly patch [1] getting edited to
+add new toolchains like arm-oe-linux-gnueabi and arm-poky-linux-gnueabi.
+
+This is cumbersome because this step needs to be repeated for arbitrary
+toolchain vendors, and it is error-prone since the toolchain added doesn't
+explicitly mention the hardfp suffix expected by the driver, whereas
+arm-*-gnueabihf is already matched.
+
+My point is that I believe the proper fix for this is to make sure the
+toolchain generated by OpenEmbedded gets suffixed with "hf" when the hardfp
+tune is enabled, so that this ugly patch can be dropped and toolchain
+detection can work as expected.
+
+So far I've seen that the proper way to do this would be to set ABIEXTENSION
+.= "hf" accordingly given the arch tune. The only problem I've encountered
+so far is that the cross-canadian thingy [2] is zeroing the related variables
+for some reasons. Hence I'm not sure how to configure this properly.
+
+[1] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
+
+[2] http://cgit.openembedded.org/openembedded-core/tree/meta/classes/cross-canadian.bbclass#n64
+
+Cc'ing Richard in case he has an input on the ugly ABI extension zeroing.
 
 
+Thanks,
 
-On 10/19/2021 12:03 PM, Denys Dmytriyenko wrote:
-> On Tue, Oct 19, 2021 at 08:46:29PM +0530, Vignesh Raghavendra via lists.yoctoproject.org wrote:
->>
->>
->> On 10/19/21 6:49 PM, Yogesh Siraswar via lists.yoctoproject.org wrote:
->>> Change to support common INC for all firmware
->>> This will help with:
->>> 1) Eliminating requirement to change multiple recipes for firmware
->>> update
->>> 2) This will help support AUTOREV
->>>
->>> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
->>> ---
->>
->> [...]
->>> diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
->>> index d447df33..246b872e 100644
->>> --- a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
->>> +++ b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
->>> @@ -1,9 +1,9 @@
->>>   SUMMARY = "PRU Ethernet firmware for AM65x SR1.0"
->>>   
->>> -LICENSE = "TI-TFL"
->>> -LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
->>> +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
->>>   
->>> -PV = "08.00.00.20"
->>> +PV = "${PRUETH_FW_AM65x_SR2_VERSION}"
->>
->> Should be
->>
->> 	PV = "${PRUETH_FW_AM65x_VERSION}"
-> 
-> Also, "AM65x" lower case "x" here
-> 
-Yes, Vignesh also pointed that. Will fix in the next version.
-> 
->>> +PR = "${INC_PR}.0"
->>>   
->>>   CLEANBROKEN = "1"
->>>   
->> [...]
->>> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
->>> similarity index 75%
->>> rename from recipes-bsp/ti-sci-fw/ti-sci-fw.inc
->>> rename to recipes-bsp/ti-linux-fw/ti-linux-fw.inc
->>> index 9ce9f6c8..a910af2c 100644
->>> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
->>> +++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
->>> @@ -4,9 +4,18 @@ LICENSE = "TI-TFL"
->>>   LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
->>>   
->>>   PV = "2021.05"
->>> -INC_PR = "r0"
->>> -# RTOS firmware version
->>> +INC_PR = "r1"
->>> +
->>> +# Firmware versions
->>>   CORESDK_RTOS_VERSION = "08.00.00.32"
->>> +SERDES_FW_VERSION = "3.3.0.2c"
->>> +NETCP_SA_FW_VERSION = "1.0.0"
->>> +NETCP_PA_FW_VERSION = "3.0.2.3"
->>> +QMSS_PDSP_FW_VERSION = "1.0.0.9"
->>> +PRUETH_FW_AM65X_VERSION = "08.00.00.20"
->>
->> ^^^
-> 
-> AM65X has uppercase X here. better to be consistent.
-> 
-> 
->>> +PRUETH_FW_AM65x_SR2_VERSION = "02.02.09.03"
-
-SR1 and SR2 will be consistent with use of AM65X and not AM65x in next
-version
-
->>> +GOODIX_FW_VERSION = "1.0.0.0"
->>> +CADENCE_MHDP_FW_VERSION = "1.2.17"
->>>   
->>>   SRCREV = "793309716bce2e443f798dd5c5f0d8dd310970c0"
->>>   BRANCH ?= "ti-linux-firmware"
->>
->> [...]
->> Regards
->> Vignesh
+	Vivien
