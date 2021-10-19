@@ -1,112 +1,72 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.12842.1634663007708056701
+ by mx.groups.io with SMTP id smtpd.web11.12845.1634663750352398468
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Oct 2021 10:03:28 -0700
+ Tue, 19 Oct 2021 10:15:50 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 073D040BE9;
-	Tue, 19 Oct 2021 17:03:26 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3A27340C2B;
+	Tue, 19 Oct 2021 17:15:49 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id n5B-1MU12aGH; Tue, 19 Oct 2021 17:03:25 +0000 (UTC)
+	with ESMTP id Ej2cFTm8Sjk8; Tue, 19 Oct 2021 17:15:49 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D71C7406B5;
-	Tue, 19 Oct 2021 17:03:22 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1059E406B5;
+	Tue, 19 Oct 2021 17:15:45 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 3DA61174698; Tue, 19 Oct 2021 13:03:22 -0400 (EDT)
-Date: Tue, 19 Oct 2021 13:03:22 -0400
+	id CDBBF174698; Tue, 19 Oct 2021 13:15:44 -0400 (EDT)
+Date: Tue, 19 Oct 2021 13:15:44 -0400
 From: "Denys Dmytriyenko" <denis@denix.org>
-To: vigneshr@ti.com
-Cc: yogeshs@ti.com, Praneeth Bajjuri <praneeth@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [EXTERNAL] [meta-ti][master/dunfell][PATCH v2] ti-linux-fw: Support common inc for all firmware
-Message-ID: <20211019170322.GM10132@denix.org>
-References: <20211019131951.18210-1-yogeshs@ti.com>
- <727cc120-9113-42d6-f1dd-d4d9f31d9b6f@ti.com>
+To: Sinthu Raja <sinthu.raja@mistralsolutions.com>
+Cc: meta-ti@lists.yoctoproject.org, Praneeth Bajjuri <praneeth@ti.com>,
+	Nishanth Menon <nm@ti.com>, Sinthu Raja <sinthu.raja@ti.com>
+Subject: Re: [meta-ti][dunfell/master][PATCH] conf: j7-evm: Replace eaik dtb with sk to KERNEL_DEVICETREE
+Message-ID: <20211019171544.GN10132@denix.org>
+References: <20211019082221.4767-1-sinthu.raja@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <727cc120-9113-42d6-f1dd-d4d9f31d9b6f@ti.com>
+In-Reply-To: <20211019082221.4767-1-sinthu.raja@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Oct 19, 2021 at 08:46:29PM +0530, Vignesh Raghavendra via lists.yoctoproject.org wrote:
+On Tue, Oct 19, 2021 at 01:52:21PM +0530, Sinthu Raja wrote:
+> From: Sinthu Raja <sinthu.raja@ti.com>
 > 
+> The board name for J721E EdgeAI Kit (EAIK) is changed to J721E SK [1],
+> so replace the eaik dtb with sk dtb file
 > 
-> On 10/19/21 6:49 PM, Yogesh Siraswar via lists.yoctoproject.org wrote:
-> > Change to support common INC for all firmware
-> > This will help with:
-> > 1) Eliminating requirement to change multiple recipes for firmware
-> > update
-> > 2) This will help support AUTOREV
-> > 
-> > Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-> > ---
+> [1] https://www.ti.com/tool/SK-TDA4VM
 > 
-> [...]
-> > diff --git a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
-> > index d447df33..246b872e 100644
-> > --- a/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
-> > +++ b/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
-> > @@ -1,9 +1,9 @@
-> >  SUMMARY = "PRU Ethernet firmware for AM65x SR1.0"
-> >  
-> > -LICENSE = "TI-TFL"
-> > -LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-> > +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> >  
-> > -PV = "08.00.00.20"
-> > +PV = "${PRUETH_FW_AM65x_SR2_VERSION}"
+> Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+> ---
+>  conf/machine/j7-evm.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Should be
-> 
-> 	PV = "${PRUETH_FW_AM65x_VERSION}"
+> diff --git a/conf/machine/j7-evm.conf b/conf/machine/j7-evm.conf
+> index 7cde9f4d..1f47f00c 100644
+> --- a/conf/machine/j7-evm.conf
+> +++ b/conf/machine/j7-evm.conf
+> @@ -13,7 +13,7 @@ KERNEL_DEVICETREE = " \
+>      ti/k3-j721e-common-proc-board.dtb \
+>      ti/k3-j721e-proc-board-tps65917.dtb \
+>      ti/k3-j721e-common-proc-board-infotainment.dtbo \
+> -    ti/k3-j721e-eaik.dtb \
+> +    ti/k3-j721e-sk.dtb \
 
-Also, "AM65x" lower case "x" here
+Was there a corresponding kernel change with the file rename?
 
 
-> > +PR = "${INC_PR}.0"
-> >  
-> >  CLEANBROKEN = "1"
-> >  
-> [...]
-> > diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> > similarity index 75%
-> > rename from recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-> > rename to recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> > index 9ce9f6c8..a910af2c 100644
-> > --- a/recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-> > +++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> > @@ -4,9 +4,18 @@ LICENSE = "TI-TFL"
-> >  LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
-> >  
-> >  PV = "2021.05"
-> > -INC_PR = "r0"
-> > -# RTOS firmware version
-> > +INC_PR = "r1"
-> > +
-> > +# Firmware versions
-> >  CORESDK_RTOS_VERSION = "08.00.00.32"
-> > +SERDES_FW_VERSION = "3.3.0.2c"
-> > +NETCP_SA_FW_VERSION = "1.0.0"
-> > +NETCP_PA_FW_VERSION = "3.0.2.3"
-> > +QMSS_PDSP_FW_VERSION = "1.0.0.9"
-> > +PRUETH_FW_AM65X_VERSION = "08.00.00.20"
+>  "
+>  
+>  UBOOT_MACHINE = "j721e_evm_a72_config"
+> -- 
+> 2.31.1
 > 
-> ^^^
 
-AM65X has uppercase X here. better to be consistent.
-
-
-> > +PRUETH_FW_AM65x_SR2_VERSION = "02.02.09.03"
-> > +GOODIX_FW_VERSION = "1.0.0.0"
-> > +CADENCE_MHDP_FW_VERSION = "1.2.17"
-> >  
-> >  SRCREV = "793309716bce2e443f798dd5c5f0d8dd310970c0"
-> >  BRANCH ?= "ti-linux-firmware"
-> 
-> [...]
-> Regards
-> Vignesh
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
