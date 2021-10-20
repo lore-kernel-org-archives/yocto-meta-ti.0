@@ -1,69 +1,108 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web08.3842.1634705542231483525
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web11.5211.1634719020971173359
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Oct 2021 21:52:22 -0700
+ Wed, 20 Oct 2021 01:37:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=KIKCUuUd;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19K4qKOm047557;
-	Tue, 19 Oct 2021 23:52:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1634705540;
-	bh=zSRZi2pma/otFY0pFCvBGLwgPTjN1El+2vUtgCGZfP0=;
-	h=From:To:Subject:Date;
-	b=KIKCUuUdMbGaBvIHc2EodrQzlIx+peJdduzAMS32znXgENOPuQFawQBf+wK1+MJy9
-	 LAnRdkyKuGGF7HtUJ0clhpz6g3KtJYQ/XXiFsqGyVHygmMlZaGXzbzM8OpUzfvXBqx
-	 zKYGzfniUZWGckVJdvywD82IlYQ1k3nFsx192F7g=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19K4qK44056346
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 19 Oct 2021 23:52:20 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 19
- Oct 2021 23:52:20 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Tue, 19 Oct 2021 23:52:20 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19K4qK9K099834;
-	Tue, 19 Oct 2021 23:52:20 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH] ti-sci-fw_git: Fix issue with using gp*.bin for TISCI firmware
-Date: Wed, 20 Oct 2021 04:52:20 +0000
-Message-ID: <20211020045220.49228-1-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=cOgpCzqi;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.128.52, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wm1-f52.google.com with SMTP id u8-20020a05600c440800b0030d90076dabso4303570wmn.1
+        for <meta-ti@lists.yoctoproject.org>; Wed, 20 Oct 2021 01:37:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linuxfoundation.org; s=google;
+        h=message-id:subject:from:to:cc:date:in-reply-to:references
+         :user-agent:mime-version:content-transfer-encoding;
+        bh=Mp7Y9URXDYKeeGNZraNxXfgtBXOOTq06wI+REZEKFXQ=;
+        b=cOgpCzqiuy12fXc9IxcURmu8QkFGSRD44vr46INnpJlT7SKhDoMArU1kbKeWdIW70u
+         JOnfuFEcb6f8jTVSa5ACqDqSoVk5FlhDvoPjwTdfogkElaXLMKCSsAM+eiwVFT//FzZZ
+         UGuZLBkXerhV4g5pJFYl/1vkDugGXsmI5EHZg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+         :references:user-agent:mime-version:content-transfer-encoding;
+        bh=Mp7Y9URXDYKeeGNZraNxXfgtBXOOTq06wI+REZEKFXQ=;
+        b=pWcVSdfdfq9xkjvW+v1THaqzcVx3/uG3MdCrfwka8/VY9SlWL1OJ+MznvDi1HIUMBN
+         /Zc3CmLNxNPvVVcZd4vTPhy3EzcARF34GfGHZBcb3O/mVLhpJXDDZZaCFdRfglBPqQXT
+         O8XEXF7LHFKF952gOrldWZLdOc3cYfCPP1EI/CAlDk2sYrTm3wTyhNvsic8DMZ0xccjj
+         nQGYdYaqI7asnViE3+HlN4A0SkzONVi0fvWKFDHZvplNapbLfZGlVoeAdUxUmk6PTgSK
+         m0vLRkBd2t2nPz3BkWVHdp2y8dWBpspser+5HSc70NhSfN6Kh1Vfyi4aM+1XNYxFlKCj
+         yx8g==
+X-Gm-Message-State: AOAM531JZRncGFP9uzWVDTvpvVfJpctmBOyqAG+0nm0WSYkHBFBb6BCz
+	mIPq1ihDUUvomHNt8U0L1sDc6A==
+X-Google-Smtp-Source: ABdhPJyOBeswYqsHa1dnmu/kpO0+LaxSneEPDhyR6QZEDHraUS7ZvY9j2yFdYBpiarIVEDsjRbEnnA==
+X-Received: by 2002:adf:f04c:: with SMTP id t12mr31453757wro.7.1634719019126;
+        Wed, 20 Oct 2021 01:36:59 -0700 (PDT)
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from ?IPv6:2001:8b0:aba:5f3c:a6cb:20f5:1d7e:af42? ([2001:8b0:aba:5f3c:a6cb:20f5:1d7e:af42])
+        by smtp.gmail.com with ESMTPSA id u13sm1398004wri.50.2021.10.20.01.36.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Oct 2021 01:36:58 -0700 (PDT)
+Message-ID: <3bdc5f6ec0e1bb5dcab685eaaa14053f9abf6205.camel@linuxfoundation.org>
+Subject: Re: ti-sgx-ddk-km proper toolchain detection
+From: "Richard Purdie" <richard.purdie@linuxfoundation.org>
+To: Vivien Didelot <vivien.didelot@gmail.com>, meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>, Praneeth Bajjuri
+ <praneeth@ti.com>
+Date: Wed, 20 Oct 2021 09:36:55 +0100
+In-Reply-To: <20211019144905.GB3675266@t480s.localdomain>
+References: <20211019144905.GB3675266@t480s.localdomain>
+User-Agent: Evolution 3.40.4-1 
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-With ti-sysfs also hosting *gp-cert.bin for am64x hs-fs breaks gp.
-This patch removes * to directly reference the TISCI firmware
+On Tue, 2021-10-19 at 14:49 -0400, Vivien Didelot wrote:
+> Hi all,
+> 
+> I've, like many, run into the issue of toolchain detection for the
+> ti-sgx-ddk-km driver. I've noticed the ugly patch [1] getting edited to
+> add new toolchains like arm-oe-linux-gnueabi and arm-poky-linux-gnueabi.
+> 
+> This is cumbersome because this step needs to be repeated for arbitrary
+> toolchain vendors, and it is error-prone since the toolchain added doesn't
+> explicitly mention the hardfp suffix expected by the driver, whereas
+> arm-*-gnueabihf is already matched.
+> 
+> My point is that I believe the proper fix for this is to make sure the
+> toolchain generated by OpenEmbedded gets suffixed with "hf" when the hardfp
+> tune is enabled, so that this ugly patch can be dropped and toolchain
+> detection can work as expected.
+> 
+> So far I've seen that the proper way to do this would be to set ABIEXTENSION
+> .= "hf" accordingly given the arch tune. The only problem I've encountered
+> so far is that the cross-canadian thingy [2] is zeroing the related variables
+> for some reasons. Hence I'm not sure how to configure this properly.
+> 
+> [1] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
+> 
+> [2] http://cgit.openembedded.org/openembedded-core/tree/meta/classes/cross-canadian.bbclass#n64
+> 
+> Cc'ing Richard in case he has an input on the ugly ABI extension zeroing.
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
----
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+As Denys mentions, OE picked and used "OS" strings before the rest of the world
+did and we support custom vendor strings as you know. Changing the OS string has
+wide implications for other components as the strings are widely used, even in
+our own build directory paths. We have long since supposed using the vendor
+string as intended, to identify the vendor.
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index ca56e1de..ef242476 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -28,7 +28,7 @@ SYSFW_SUFFIX ?= "unknown"
- 
- SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
- 
--SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}*.bin"
-+SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}.bin"
- 
- SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
- SYSFW_VBINARY = "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
--- 
-2.17.1
+I've seen several requests recently where we've been asked to match some other
+system's view of what these should look like. This effectively means OE being
+dictated to by other systems and I'm reluctant to do that, particularly as there
+are several of them and they don't all match, far from it. We'd match one until
+another comes along then we'd only be able to match one of them.
+
+I therefore think that either this recipe needs to be able to accept
+configuration of the toolchain and/or be able to validate the toolchain it is
+using as supporting hardfloat.
+
+As for cross-canadian zeroing out the ABI extension, this is because it has to
+support *all* targets so it will create one compiler and symlink into place all
+the variants the user might need.
+
+Cheers,
+
+Richard
+
+
+
+
 
