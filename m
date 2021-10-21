@@ -1,76 +1,77 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.5893.1634799884326586229
+Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
+ by mx.groups.io with SMTP id smtpd.web08.1106.1634837691850214572
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 21 Oct 2021 00:04:44 -0700
+ Thu, 21 Oct 2021 10:34:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=zNJn3jaF;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19L74gCh014669;
-	Thu, 21 Oct 2021 02:04:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1634799882;
-	bh=2EgRoD67a42ETty7OMvvf5m+cnj/DG6P5JvCE70DT5U=;
-	h=From:To:Subject:Date;
-	b=zNJn3jaFTrx7Lv/wHAyL8t7NzkX4rP8g3+ZXX/67N8KnvGMRXoax0MDymUXKzysHb
-	 5LHv0TzBo6PetXeDSGYVpYlMuS/+VcvUZu2g+YKP+wq59pVODnKMrgNR5a18zSx90J
-	 /WzARjyD3/y+qN7YRNQ38ZcKJJyddaxhf755OcUc=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19L74ga7074790
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 21 Oct 2021 02:04:42 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 21
- Oct 2021 02:04:42 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 21 Oct 2021 02:04:41 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19L74fGe061096;
-	Thu, 21 Oct 2021 02:04:41 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH v2] ti-sci-fw_git: Fix issue with using gp*.bin for TISCI firmware
-Date: Thu, 21 Oct 2021 07:04:41 +0000
-Message-ID: <20211021070441.37565-1-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AVwV413+;
+ spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: r10kindsofpeople@gmail.com)
+Received: by mail-oi1-f169.google.com with SMTP id r6so1802273oiw.2
+        for <meta-ti@lists.yoctoproject.org>; Thu, 21 Oct 2021 10:34:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=0BHl+tOIf5gzVwC5O4vqhhFp/705enBAblbbqO8ouVo=;
+        b=AVwV413+Am959SMnuaoQYwTE8Qtu89wBdQmD56ZjUBjbFV45m3rcJfZyInl6a7Z6Fj
+         a2mNh0jsFntey/79WyM1ob8YyNe4JtRuSHPNgdXQ395+Tn9dT3U04cFwA9tkjV7Dzr1K
+         e+WOdrq7nR60fQgtK131vyPB7774L+gmuxtYyPnSZ5DugOQt+ZXkcl3VBBthUNPTAz8X
+         hKb9/HHm0Sk/1SV/Z6HzrbNVHT4Wm7OmJAiLQdyauaGNQuC5RS5dYkZwOaUcTzpZL3Hk
+         ZU18DiT2mIGH7rRPhI37fdDW2DL0h46CCPIdJAEcsRkTjAORNe7HllM3JRMhmguoHF9u
+         DT9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=0BHl+tOIf5gzVwC5O4vqhhFp/705enBAblbbqO8ouVo=;
+        b=vIJH1JveGt/JRMRRb94bKDHo0d05fUn24I+kku/qqHh1RqzAWxd5HoCGMhUfTYyrqm
+         7wF9QjTN3Wz7kQ91F36ZZUrpi6aGvXFva2E4d9WzpwrU9H+ucNkP1I7IjrvpM1RFM5lj
+         y8KzAYXrSdnfSBYmwEGU8zbMGNg3U7ghfke4VmyYI/dptb56x9TZlmQdpv6YtHmHzbF4
+         zWJ5bEiNxBSwlizk/7x4XX3DaFC6swZVQcNO443kjSFyWZ5EHjwxds2UTdX/tAUnCxwW
+         eN9QbTvDAGaal+t5lhbKPYsWCKB2GqvLShJv9So0beXiVvpZOS4kGkdlNp8UF1lVfBOP
+         O4dQ==
+X-Gm-Message-State: AOAM53093g8ZyrCuvQyFKo+8oLnpSHvRDmzoUL0LYiKaQtuNlqnyHdc7
+	jyBEbWdAXhMH6TrIGxNk94ayvfsADFY5rEsh9aCztXr5DAM=
+X-Google-Smtp-Source: ABdhPJzJ3GJECHK4+X0plH8gjGMlh3+f9M0QjyBMZXn3EaDQ6xxtqSNSJ3y4neDhFBBG9kPm7fkh7FxoiLM+Axs2IYg=
+X-Received: by 2002:a05:6808:130d:: with SMTP id y13mr5795804oiv.85.1634837690832;
+ Thu, 21 Oct 2021 10:34:50 -0700 (PDT)
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+From: "John" <r10kindsofpeople@gmail.com>
+Date: Thu, 21 Oct 2021 13:34:39 -0400
+Message-ID: <CAE8H0+WoGLZngUhKb60wYCBNa8ns_xq4kNatOpVXzaoEQMv1xg@mail.gmail.com>
+Subject: Dunfell, populate_sdk, how to build development image?
+To: meta-ti@lists.yoctoproject.org
+Content-Type: multipart/alternative; boundary="000000000000d3d92d05cee04f92"
 
-With ti-sysfs also hosting *gp-cert.bin for am64x hs-fs breaks gp.
-This patch removes * to directly reference the TISCI firmware
+--000000000000d3d92d05cee04f92
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
----
+I've got a booting image for the AM335x under dunfell and so went on to
+what I thought would be the easy step of building the cross-development
+image using -c populate_sdk.  It completes, but when I try to install it,
+it locks up at the 'cannot access /opt/poky/environment-setup-*' stage, and
+it seems to be missing some other significant pieces, at least most of the
+x86_64-arago-linux folder.
 
-Change from v1:
-Previous version caused issue with the HS platforms.
-Added conditional statement for HS device.
+Any suggestions on how to move forward?
 
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Or was my first mistake 'dunfell', and if so, suggestions on how far back
+to step?  I got the impression that the TI SDK 07.03.00.005 was using
+dunfell.
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index ca56e1de..a1a7446b 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -27,8 +27,9 @@ SYSFW_PREFIX_j7-hs-evm-k3r5 = "ti-fs-firmware"
- SYSFW_SUFFIX ?= "unknown"
- 
- SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
-+SYSFW_BASE_append = "${@['','*']['${SYSFW_SUFFIX}' == 'hs']}"
- 
--SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}*.bin"
-+SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}.bin"
- 
- SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
- SYSFW_VBINARY = "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
--- 
-2.17.1
+John
 
+--000000000000d3d92d05cee04f92
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">I&#39;ve got a booting image for the AM335x under dunfell =
+and so went on to what I thought would be the easy step of building the cro=
+ss-development image using -c populate_sdk.=C2=A0 It completes, but when I =
+try to install it, it locks up at the &#39;cannot access /opt/poky/environm=
+ent-setup-*&#39; stage, and it seems to be missing some other significant p=
+ieces, at least most of the x86_64-arago-linux folder.=C2=A0=C2=A0<div><br>=
+</div><div>Any suggestions on how to move forward?=C2=A0=C2=A0</div><div><b=
+r></div><div>Or was my first mistake &#39;dunfell&#39;, and if so, suggesti=
+ons on how far back to step?=C2=A0 I got the impression that the TI SDK=C2=
+=A007.03.00.005 was using dunfell.=C2=A0=C2=A0</div><div><br></div><div>Joh=
+n</div></div>
+
+--000000000000d3d92d05cee04f92--
