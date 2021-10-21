@@ -1,77 +1,69 @@
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
- by mx.groups.io with SMTP id smtpd.web08.1106.1634837691850214572
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web09.2113.1634841475479371772
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 21 Oct 2021 10:34:52 -0700
+ Thu, 21 Oct 2021 11:37:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AVwV413+;
- spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: r10kindsofpeople@gmail.com)
-Received: by mail-oi1-f169.google.com with SMTP id r6so1802273oiw.2
-        for <meta-ti@lists.yoctoproject.org>; Thu, 21 Oct 2021 10:34:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=0BHl+tOIf5gzVwC5O4vqhhFp/705enBAblbbqO8ouVo=;
-        b=AVwV413+Am959SMnuaoQYwTE8Qtu89wBdQmD56ZjUBjbFV45m3rcJfZyInl6a7Z6Fj
-         a2mNh0jsFntey/79WyM1ob8YyNe4JtRuSHPNgdXQ395+Tn9dT3U04cFwA9tkjV7Dzr1K
-         e+WOdrq7nR60fQgtK131vyPB7774L+gmuxtYyPnSZ5DugOQt+ZXkcl3VBBthUNPTAz8X
-         hKb9/HHm0Sk/1SV/Z6HzrbNVHT4Wm7OmJAiLQdyauaGNQuC5RS5dYkZwOaUcTzpZL3Hk
-         ZU18DiT2mIGH7rRPhI37fdDW2DL0h46CCPIdJAEcsRkTjAORNe7HllM3JRMhmguoHF9u
-         DT9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=0BHl+tOIf5gzVwC5O4vqhhFp/705enBAblbbqO8ouVo=;
-        b=vIJH1JveGt/JRMRRb94bKDHo0d05fUn24I+kku/qqHh1RqzAWxd5HoCGMhUfTYyrqm
-         7wF9QjTN3Wz7kQ91F36ZZUrpi6aGvXFva2E4d9WzpwrU9H+ucNkP1I7IjrvpM1RFM5lj
-         y8KzAYXrSdnfSBYmwEGU8zbMGNg3U7ghfke4VmyYI/dptb56x9TZlmQdpv6YtHmHzbF4
-         zWJ5bEiNxBSwlizk/7x4XX3DaFC6swZVQcNO443kjSFyWZ5EHjwxds2UTdX/tAUnCxwW
-         eN9QbTvDAGaal+t5lhbKPYsWCKB2GqvLShJv9So0beXiVvpZOS4kGkdlNp8UF1lVfBOP
-         O4dQ==
-X-Gm-Message-State: AOAM53093g8ZyrCuvQyFKo+8oLnpSHvRDmzoUL0LYiKaQtuNlqnyHdc7
-	jyBEbWdAXhMH6TrIGxNk94ayvfsADFY5rEsh9aCztXr5DAM=
-X-Google-Smtp-Source: ABdhPJzJ3GJECHK4+X0plH8gjGMlh3+f9M0QjyBMZXn3EaDQ6xxtqSNSJ3y4neDhFBBG9kPm7fkh7FxoiLM+Axs2IYg=
-X-Received: by 2002:a05:6808:130d:: with SMTP id y13mr5795804oiv.85.1634837690832;
- Thu, 21 Oct 2021 10:34:50 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Mxswh2d1;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: yogeshs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19LIbrFY056750;
+	Thu, 21 Oct 2021 13:37:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1634841473;
+	bh=F/HtXQkUbzO+fPa1Tcj6u8CBgIKJkOK5qt4csWoyDwA=;
+	h=From:To:Subject:Date;
+	b=Mxswh2d1MKRFUe4AT/v/vuP/p5t73zZPPzSo1J+PwmrZhKsChftUPmlQCm1VGjKQN
+	 hwPd89UeyFwRNnk9/FqGCizbCwH9j9Yvpk9dObei+kKya2aCXStfq1boLpTgKjeSQl
+	 ADMhc/YrCqq1XLiB2UsSYSVyr+fvQ2uRB7AidNyY=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19LIbrLF066902
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 21 Oct 2021 13:37:53 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 21
+ Oct 2021 13:37:53 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Thu, 21 Oct 2021 13:37:53 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19LIbr6a083221;
+	Thu, 21 Oct 2021 13:37:53 -0500
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 1/2] linux-ti-staging: Bump linux version to latest
+Date: Thu, 21 Oct 2021 18:37:52 +0000
+Message-ID: <20211021183753.22872-1-yogeshs@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-From: "John" <r10kindsofpeople@gmail.com>
-Date: Thu, 21 Oct 2021 13:34:39 -0400
-Message-ID: <CAE8H0+WoGLZngUhKb60wYCBNa8ns_xq4kNatOpVXzaoEQMv1xg@mail.gmail.com>
-Subject: Dunfell, populate_sdk, how to build development image?
-To: meta-ti@lists.yoctoproject.org
-Content-Type: multipart/alternative; boundary="000000000000d3d92d05cee04f92"
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
---000000000000d3d92d05cee04f92
-Content-Type: text/plain; charset="UTF-8"
+To merge the dtb file name change patch in meta-ti for j7 need to bump
+linux version
 
-I've got a booting image for the AM335x under dunfell and so went on to
-what I thought would be the easy step of building the cross-development
-image using -c populate_sdk.  It completes, but when I try to install it,
-it locks up at the 'cannot access /opt/poky/environment-setup-*' stage, and
-it seems to be missing some other significant pieces, at least most of the
-x86_64-arago-linux folder.
+Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Any suggestions on how to move forward?
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index aecac1b6..4b34756d 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.10.y"
+ 
+-SRCREV = "1d48ab8a3d3b58f74c02223a797dd80964310b3b"
++SRCREV = "85ac70d78c4ec6889dec24685ec4cea3bb4d5a59"
+ PV = "5.10.65+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+2.17.1
 
-Or was my first mistake 'dunfell', and if so, suggestions on how far back
-to step?  I got the impression that the TI SDK 07.03.00.005 was using
-dunfell.
-
-John
-
---000000000000d3d92d05cee04f92
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I&#39;ve got a booting image for the AM335x under dunfell =
-and so went on to what I thought would be the easy step of building the cro=
-ss-development image using -c populate_sdk.=C2=A0 It completes, but when I =
-try to install it, it locks up at the &#39;cannot access /opt/poky/environm=
-ent-setup-*&#39; stage, and it seems to be missing some other significant p=
-ieces, at least most of the x86_64-arago-linux folder.=C2=A0=C2=A0<div><br>=
-</div><div>Any suggestions on how to move forward?=C2=A0=C2=A0</div><div><b=
-r></div><div>Or was my first mistake &#39;dunfell&#39;, and if so, suggesti=
-ons on how far back to step?=C2=A0 I got the impression that the TI SDK=C2=
-=A007.03.00.005 was using dunfell.=C2=A0=C2=A0</div><div><br></div><div>Joh=
-n</div></div>
-
---000000000000d3d92d05cee04f92--
