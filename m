@@ -1,81 +1,76 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.3732.1634848856342101188
+ by mx.groups.io with SMTP id smtpd.web09.3853.1634849542083684746
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 21 Oct 2021 13:40:56 -0700
+ Thu, 21 Oct 2021 13:52:22 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 158AB40BEB;
-	Thu, 21 Oct 2021 20:40:55 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E4C6540BEB;
+	Thu, 21 Oct 2021 20:52:20 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jG-c_W1XDBsZ; Thu, 21 Oct 2021 20:40:55 +0000 (UTC)
+	with ESMTP id WYpBxhqoi0D4; Thu, 21 Oct 2021 20:52:20 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EDE5040BA8;
-	Thu, 21 Oct 2021 20:40:53 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CBCAD40BA8;
+	Thu, 21 Oct 2021 20:52:18 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 40F411746A0; Thu, 21 Oct 2021 16:40:53 -0400 (EDT)
-Date: Thu, 21 Oct 2021 16:40:53 -0400
+	id 925261746A7; Thu, 21 Oct 2021 16:52:18 -0400 (EDT)
+Date: Thu, 21 Oct 2021 16:52:18 -0400
 From: "Denys Dmytriyenko" <denis@denix.org>
-To: John <r10kindsofpeople@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] Dunfell, populate_sdk, how to build development image?
-Message-ID: <20211021204053.GB10132@denix.org>
-References: <16B01C382574D249.30033@lists.yoctoproject.org>
- <CAE8H0+Ux_X2eRKRqEbfTZwLLY+ePReEWAUT5=uBmFbk8-f935A@mail.gmail.com>
+To: yogeshs@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][dunfell][PATCH v2] ti-sci-fw_git: Fix issue with using gp*.bin for TISCI firmware
+Message-ID: <20211021205218.GD10132@denix.org>
+References: <20211021070441.37565-1-yogeshs@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <CAE8H0+Ux_X2eRKRqEbfTZwLLY+ePReEWAUT5=uBmFbk8-f935A@mail.gmail.com>
+In-Reply-To: <20211021070441.37565-1-yogeshs@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, Oct 21, 2021 at 02:53:23PM -0400, John wrote:
-> On Thu, Oct 21, 2021 at 1:34 PM John via lists.yoctoproject.org
-> <r10kindsofpeople=gmail.com@lists.yoctoproject.org> wrote:
+On Thu, Oct 21, 2021 at 07:04:41AM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
+> With ti-sysfs also hosting *gp-cert.bin for am64x hs-fs breaks gp.
+> This patch removes * to directly reference the TISCI firmware
 > 
-> > I've got a booting image for the AM335x under dunfell and so went on to
-> > what I thought would be the easy step of building the cross-development
-> > image using -c populate_sdk.  It completes, but when I try to install it,
-> > it locks up at the 'cannot access /opt/poky/environment-setup-*' stage, and
-> > it seems to be missing some other significant pieces, at least most of the
-> > x86_64-arago-linux folder.
-> >
-> > Any suggestions on how to move forward?
-> >
-> > Or was my first mistake 'dunfell', and if so, suggestions on how far back
-> > to step?  I got the impression that the TI SDK 07.03.00.005 was using
-> > dunfell.
+> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+> ---
 > 
-> Sorry, I seem to have hit on the right search parameters shortly after
-> hitting 'send'.
-> See
-> https://www.openembedded.org/pipermail/openembedded-core/2015-July/106931.html
+> Change from v1:
+> Previous version caused issue with the HS platforms.
+> Added conditional statement for HS device.
 > 
-> In arago-image.inc, I believe:
-> TOOLCHAIN_HOST_TASK += "nativesdk-buildtools-perl-dummy"
-> should be
-> TOOLCHAIN_HOST_TASK_append +=  "nativesdk-buildtools-perl-dummy"
+>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> I haven't built anything with the resulting SDK yet, but the install
-> completed.
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> index ca56e1de..a1a7446b 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> @@ -27,8 +27,9 @@ SYSFW_PREFIX_j7-hs-evm-k3r5 = "ti-fs-firmware"
+>  SYSFW_SUFFIX ?= "unknown"
+>  
+>  SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
+> +SYSFW_BASE_append = "${@['','*']['${SYSFW_SUFFIX}' == 'hs']}"
 
-John,
+This kind of makes sense, but I'm afraid it could negatively affect 
+SYSFW_HS_PATH and SYSFW_HS_INNER_CERT_PATH having * and passed to the 
+Makefile:
 
-Thank you for your report!
+EXTRA_OEMAKE_HS = " \
+    HS=1 SYSFW_HS_PATH="${S}/ti-sysfw/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${S}/ti-sysfw/${SYSFW_BASE}-cert.bin" \
+"
 
-It appears your email should have been sent to meta-arago mailing list 
-instead. As meta-ti is just a BSP layer for TI platforms, it is not specific 
-to TI SDK, since it does not define any distro policies, SDKs or even any 
-rootfs images. Hence there's no arago-image.inc file. Any distro could 
-utilize meta-ti, define own images and create SDKs with -c populate_sdk 
-w/o problems.
 
-As of meta-arago, it uses a different approach for creating SDKs by defining 
-meta-toolchain recipes due to the way it uses toolchains and supports both 
-external and internal toolchain variants. But that's a topic for a different 
-mailing list...
+> -SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}*.bin"
+> +SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}.bin"
+>  
+>  SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+>  SYSFW_VBINARY = "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+> -- 
+> 2.17.1
+> 
 
 -- 
 Regards,
