@@ -1,72 +1,61 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.3510.1635197502770710081
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.3819.1635198481144488250
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 25 Oct 2021 14:31:43 -0700
+ Mon, 25 Oct 2021 14:48:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=C+T7N1Zj;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19PLVfM3060832;
-	Mon, 25 Oct 2021 16:31:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1635197501;
-	bh=kIjYALnbnRSxgsccPj/VA3ZiOm8r3D4/fEV54Ox1hh8=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=C+T7N1ZjdN6vYULJpy+g74Jb5JMVHXvdJMB20JsaSGGu4RDkOdtSWE1K4MZdtrfTx
-	 VaYrAvmFiHITrODcD6CnbPPtTnsrj/2526IKwQR1VbqpATnorB1gpIvEli+n+CZsVI
-	 nF9HUP+oXIwKMisDws0/dVua8DyJpEItS1hnYVuY=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19PLVf3c067683
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 25 Oct 2021 16:31:41 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 25
- Oct 2021 16:31:40 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Mon, 25 Oct 2021 16:31:40 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19PLVeAO025143;
-	Mon, 25 Oct 2021 16:31:40 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH 2/4] u-boot-ti-staging: Bump to 08.01.00.001 release
-Date: Mon, 25 Oct 2021 21:31:38 +0000
-Message-ID: <20211025213140.17826-3-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211025213140.17826-1-yogeshs@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7EE2640C47;
+	Mon, 25 Oct 2021 21:48:00 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NllE1IJ3h5nq; Mon, 25 Oct 2021 21:48:00 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6482C40AE9;
+	Mon, 25 Oct 2021 21:47:58 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id B1B1B1746AD; Mon, 25 Oct 2021 17:47:57 -0400 (EDT)
+Date: Mon, 25 Oct 2021 17:47:57 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: yogeshs@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][dunfell][PATCH 0/4] Core-sdk 08.01.00.001 release
+Message-ID: <20211025214757.GI10132@denix.org>
 References: <20211025213140.17826-1-yogeshs@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+In-Reply-To: <20211025213140.17826-1-yogeshs@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Updated the u-boot version for 08.01.00.001
+On Mon, Oct 25, 2021 at 09:31:36PM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
+> Updated the version for core-sdk 08.01.00.001 release
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+For the entire series:
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 53a95f20..db8dc9d6 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -2,8 +2,8 @@ require u-boot-ti.inc
- 
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
- 
--PR = "r11"
-+PR = "r12"
- 
- BRANCH = "ti-u-boot-2021.01"
- 
--SRCREV = "53e79d0e89f975eeb874366dd9a92f68b3a599d1"
-+SRCREV = "316948e851b21f1f79e78fdd364a754cf9817038"
+Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+
+> 
+> Yogesh Siraswar (4):
+>   ti-linux-fw: Bump to 08.01.00.001 release
+>   u-boot-ti-staging: Bump to 08.01.00.001 release
+>   linux-ti-staging-rt: Bump to 08.01.00.001 release
+>   linux-ti-staging: Bump to 08.01.00.001 release
+> 
+>  recipes-bsp/ti-linux-fw/ti-linux-fw.inc          | 10 +++++-----
+>  recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb  |  4 ++--
+>  recipes-kernel/linux/linux-ti-staging-rt_5.10.bb |  2 +-
+>  recipes-kernel/linux/linux-ti-staging_5.10.bb    |  2 +-
+>  4 files changed, 9 insertions(+), 9 deletions(-)
+> 
+> -- 
+> 2.17.1
+> 
+
 -- 
-2.17.1
-
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
