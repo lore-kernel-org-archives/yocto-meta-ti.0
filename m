@@ -1,64 +1,98 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.1252.1635795196259070388
+ by mx.groups.io with SMTP id smtpd.web12.1224.1635795196245598984
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 01 Nov 2021 12:33:16 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5EF4640C98
-	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 19:33:14 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id EDAFD40C83
+	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 19:33:13 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bvbJfY0QR1L2 for <meta-ti@lists.yoctoproject.org>;
-	Mon,  1 Nov 2021 19:33:14 +0000 (UTC)
+	with ESMTP id 0ZseRJv35pjg for <meta-ti@lists.yoctoproject.org>;
+	Mon,  1 Nov 2021 19:33:13 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 519E740C90
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E3FE140C93
 	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 19:33:13 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 178D51746B0
+	by mail.denix.org (Postfix) with ESMTP id ACBDF1746B6
 	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 15:33:13 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 08/22] ipc: ti-rpmsg-char: Update library to 0.3.1
-Date: Mon,  1 Nov 2021 15:32:58 -0400
-Message-Id: <1635795192-43144-9-git-send-email-denis@denix.org>
+Subject: [master][PATCH 22/22] ti-rtos-firmware: Update M4F binary for AM64x SoCs
+Date: Mon,  1 Nov 2021 15:33:12 -0400
+Message-Id: <1635795192-43144-23-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1635795192-43144-1-git-send-email-denis@denix.org>
 References: <1635795192-43144-1-git-send-email-denis@denix.org>
 
 From: Hari Nagalla <hnagalla@ti.com>
 
-Update the ti-rpmsg-char library to 0.3.1 version that enables the
-support for the M4F remote processor on AM64x SoCs.
+AM64x SoCs have a Cortex-M4F core in MCU domain. This core is used a
+standalone device for safety applications. For non safety applications,
+the device is exposed as a remote processor with Linux rpmsg framework.
 
 Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-Reviewed-by: Praneeth Bajjuri <praneeth@ti.com>
 Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
-index df14d63..140536e 100644
---- a/recipes-ti/ipc/ti-rpmsg-char.inc
-+++ b/recipes-ti/ipc/ti-rpmsg-char.inc
-@@ -7,10 +7,10 @@ PROTOCOL = "git"
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 079be84..1248c9e 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -62,6 +62,7 @@ do_install:prepend:am64xx() {
+                 mv am64-main-r5f0_1-fw ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f; \
+                 mv am64-main-r5f1_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
+                 mv am64-main-r5f1_1-fw ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f; \
++                mv am64-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f; \
+         )
+ }
  
--# Initial 0.3.0 release
--SRCREV = "0e76d13d08f0df5c7e70d58bbf76f7e299906ae1"
-+# Initial 0.3.1 release
-+SRCREV = "0824546f61bda7715519841d9b9f0fb030ddfaf2"
+@@ -111,6 +112,7 @@ do_install:am64xx() {
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+ }
  
--PV = "0.3.0+git${SRCPV}"
-+PV = "0.3.1+git${SRCPV}"
+ # Set up names for the firmwares
+@@ -124,6 +126,7 @@ ALTERNATIVE:${PN}:am64xx = "\
+                     am64-main-r5f0_1-fw \
+                     am64-main-r5f1_0-fw \
+                     am64-main-r5f1_1-fw \
++                    am64-mcu-m4f0_0-fw \
+                     "
  
- S = "${WORKDIR}/git"
+ ALTERNATIVE:${PN}:j7 = "\
+@@ -154,6 +157,7 @@ TARGET_MAIN_R5FSS0_0:am64xx = "am64-main-r5f0_0-fw"
+ TARGET_MAIN_R5FSS0_1:am64xx = "am64-main-r5f0_1-fw"
+ TARGET_MAIN_R5FSS1_0:am64xx = "am64-main-r5f1_0-fw"
+ TARGET_MAIN_R5FSS1_1:am64xx = "am64-main-r5f1_1-fw"
++TARGET_MCU_M4FSS0_0:am64xx = "am64-mcu-m4f0_0-fw"
  
+ TARGET_MCU_R5FSS0_0:j7 = "j7-mcu-r5f0_0-fw"
+ TARGET_MCU_R5FSS0_1:j7 = "j7-mcu-r5f0_1-fw"
+@@ -177,6 +181,7 @@ ALTERNATIVE_LINK_NAME[am64-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_M
+ ALTERNATIVE_LINK_NAME[am64-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
+ ALTERNATIVE_LINK_NAME[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
+ ALTERNATIVE_LINK_NAME[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
++ALTERNATIVE_LINK_NAME[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_M4FSS0_0}"
+ 
+ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
+ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+@@ -202,6 +207,7 @@ ALTERNATIVE_TARGET[am64-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_e
+ ALTERNATIVE_TARGET[am64-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f"
+ ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f"
+ ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f"
+ 
+ ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
+ ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
 -- 
 2.7.4
 
