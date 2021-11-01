@@ -1,116 +1,83 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.3603.1635502918904194445
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web09.1247.1635795194186521218
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 29 Oct 2021 03:21:59 -0700
+ Mon, 01 Nov 2021 12:33:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=u0aJXpQH;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 19TALvN6060150;
-	Fri, 29 Oct 2021 05:21:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1635502917;
-	bh=FsElqVTV2bAnDncB1wsYvsLnYIhwD+GL7lrmPKFARQs=;
-	h=From:To:Subject:Date;
-	b=u0aJXpQHzI128IUJP7NGoATDdIIGePuE8vU7iihWESHOEWjs970GxV+HCEiTKkIKt
-	 Eq22SPklWhzFwG8mWFmXL8uVtT5RSsY1UA/8EZaeuqP6jE+cIPxfysrnn2/kIrm4D9
-	 kIu4MmB7w/IiyA30ryVe+wWxjAD4P5A1PrRxYwmg=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 19TALv3f005545
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 29 Oct 2021 05:21:57 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 29
- Oct 2021 05:19:58 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Fri, 29 Oct 2021 05:19:58 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 19TAJvQe110655;
-	Fri, 29 Oct 2021 05:19:57 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH v3] ti-rtos-firmware: Update M4F binary for AM64x SoCs
-Date: Fri, 29 Oct 2021 10:19:57 +0000
-Message-ID: <20211029101957.50245-1-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 19B6740AC9
+	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 19:33:13 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id O6l0D_HZ7vmq for <meta-ti@lists.yoctoproject.org>;
+	Mon,  1 Nov 2021 19:33:13 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0917F40C16
+	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 19:33:13 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id BF0721746B0
+	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 15:33:12 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Subject: [master][PATCH 01/22] conf/machine: k3: Enable grub-efi by default in wic images
+Date: Mon,  1 Nov 2021 15:32:51 -0400
+Message-Id: <1635795192-43144-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1635795192-43144-1-git-send-email-denis@denix.org>
+References: <1635795192-43144-1-git-send-email-denis@denix.org>
 
-From: Hari Nagalla <hnagalla@ti.com>
+From: Tom Rini <tom.rini@gmail.com>
 
-AM64x SoCs have a Cortex-M4F core in MCU domain. This core is used a
-standalone device for safety applications. For non safety applications,
-the device is exposed as a remote processor with Linux rpmsg framework.
+All of our platforms here support running EFI binaries.  We can have wic
+generate a simple grub.cfg file for us that will find the root partition
+via PARTUUID and utilize the device tree that is already discoverable
+via the EFI configuration tables.  Assuming the EFI loader is U-Boot,
+this device tree can be replaced at run-time by the normal mechanism of
+loading in to memory and passing that address as an argument to bootefi.
 
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
 Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
+ conf/machine/include/k3.inc | 6 +++++-
+ wic/sdimage-2part-efi.wks   | 7 +++++++
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+ create mode 100644 wic/sdimage-2part-efi.wks
 
-Changes from v2:
-1) Added missing install m4 binary for am64x
-
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index d8ac2ee0..ea69ad89 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -62,6 +62,7 @@ do_install_prepend_am64xx() {
-                 mv am64-main-r5f0_1-fw ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f; \
-                 mv am64-main-r5f1_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
-                 mv am64-main-r5f1_1-fw ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f; \
-+                mv am64-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f; \
-         )
- }
+diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
+index 20ab7a9..a39ddd2 100644
+--- a/conf/machine/include/k3.inc
++++ b/conf/machine/include/k3.inc
+@@ -44,8 +44,12 @@ IMAGE_BOOT_FILES_LEGACY = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysf
+ IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
  
-@@ -111,6 +112,7 @@ do_install_am64xx() {
-     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
- }
+ IMAGE_BOOT_FILES ?= "${IMAGE_BOOT_FILES_LEGACY}"
++IMAGE_EFI_BOOT_FILES ?= "${IMAGE_BOOT_FILES}"
  
- # Set up names for the firmwares
-@@ -124,6 +126,7 @@ ALTERNATIVE_${PN}_am64xx = "\
-                     am64-main-r5f0_1-fw \
-                     am64-main-r5f1_0-fw \
-                     am64-main-r5f1_1-fw \
-+                    am64-mcu-m4f0_0-fw \
-                     "
- 
- ALTERNATIVE_${PN}_j7 = "\
-@@ -154,6 +157,7 @@ TARGET_MAIN_R5FSS0_0_am64xx = "am64-main-r5f0_0-fw"
- TARGET_MAIN_R5FSS0_1_am64xx = "am64-main-r5f0_1-fw"
- TARGET_MAIN_R5FSS1_0_am64xx = "am64-main-r5f1_0-fw"
- TARGET_MAIN_R5FSS1_1_am64xx = "am64-main-r5f1_1-fw"
-+TARGET_MCU_M4FSS0_0_am64xx = "am64-mcu-m4f0_0-fw"
- 
- TARGET_MCU_R5FSS0_0_j7 = "j7-mcu-r5f0_0-fw"
- TARGET_MCU_R5FSS0_1_j7 = "j7-mcu-r5f0_1-fw"
-@@ -177,6 +181,7 @@ ALTERNATIVE_LINK_NAME[am64-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_M
- ALTERNATIVE_LINK_NAME[am64-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
- ALTERNATIVE_LINK_NAME[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
- ALTERNATIVE_LINK_NAME[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
-+ALTERNATIVE_LINK_NAME[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_M4FSS0_0}"
- 
- ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
- ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
-@@ -202,6 +207,7 @@ ALTERNATIVE_TARGET[am64-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_e
- ALTERNATIVE_TARGET[am64-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f"
- ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f"
- ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f"
- 
- ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
- ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+-WKS_FILE ?= "sdimage-2part.wks"
++EFI_PROVIDER ?= "grub-efi"
++MACHINE_FEATURES += "efi"
++
++WKS_FILE ?= "sdimage-2part-efi.wks"
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
+ do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
+ do_image_tar[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
+diff --git a/wic/sdimage-2part-efi.wks b/wic/sdimage-2part-efi.wks
+new file mode 100644
+index 0000000..ffb8d24
+--- /dev/null
++++ b/wic/sdimage-2part-efi.wks
+@@ -0,0 +1,7 @@
++# short-description: Create SD card image with 2 partitions and EFI support
++# long-description: Creates a partitioned SD card image for TI platforms that
++# supports EFI.  Boot files are located in the first vfat partition with extra
++# reserved space.  We cannot use a GPT here.
++bootloader --append="rootfstype=ext4 ro"
++part /boot --source bootimg-efi --sourceparams="loader=grub-efi" --fstype=vfat --label boot --active --align 1024 --use-uuid --fixed-size 128M
++part / --source rootfs --fstype=ext4 --label root --align 1024 --use-uuid
 -- 
-2.17.1
+2.7.4
 
