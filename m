@@ -1,57 +1,70 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.1228.1635795196493037559
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.148.1635799507252137429
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 01 Nov 2021 12:33:16 -0700
+ Mon, 01 Nov 2021 13:45:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id C56A140C52
-	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 19:33:14 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RcY1gE9-yjH9 for <meta-ti@lists.yoctoproject.org>;
-	Mon,  1 Nov 2021 19:33:14 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B8F1C40AC9
-	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 19:33:13 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id A20591746BB
-	for <meta-ti@lists.yoctoproject.org>; Mon,  1 Nov 2021 15:33:13 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 21/22] linux-ti-staging: Bump to 08.01.00.001 release
-Date: Mon,  1 Nov 2021 15:33:11 -0400
-Message-Id: <1635795192-43144-22-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1635795192-43144-1-git-send-email-denis@denix.org>
-References: <1635795192-43144-1-git-send-email-denis@denix.org>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=JTFCEhLW;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: yogeshs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1A1Kj5mB081677;
+	Mon, 1 Nov 2021 15:45:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1635799505;
+	bh=5RmIkJ2zfS7fV2yaFMtGCNGhW7o2yWHT+G90rJWEc6k=;
+	h=From:To:Subject:Date;
+	b=JTFCEhLWCd3XgFEhETLsLEtbIheAkfBEM2rMgEm7f9wlw3Nqg8yKGNEzOXBaIaV6L
+	 4gY6IxeHx+vvOo1EpS4nWGrjnwgfsaLYgYtyNz9gJVWi64w0CpWH74VgfAa/VYCTOJ
+	 GEEBrsP83Wrs3lYhu1MUESDKt1K7U6JAStK+9FhQ=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1A1Kj5qj088276
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 1 Nov 2021 15:45:05 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 1
+ Nov 2021 15:45:05 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Mon, 1 Nov 2021 15:45:05 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1A1Kj5Qs059734;
+	Mon, 1 Nov 2021 15:45:05 -0500
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 1/4] u-boot-ti-staging: Bump u-boot version for 08.01.00.002
+Date: Mon, 1 Nov 2021 20:45:02 +0000
+Message-ID: <20211101204505.32309-1-yogeshs@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-From: Yogesh Siraswar <yogeshs@ti.com>
+Bump u-boot version to 08.01.00.002 release
 
-Updated the linux version for 08.01.00.001
-
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
 Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-index 20a9660..a08f264 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index db8dc9d6..6765572a 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
  
- BRANCH = "ti-linux-5.10.y"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
  
--SRCREV = "85ac70d78c4ec6889dec24685ec4cea3bb4d5a59"
-+SRCREV = "f22103162c771ddd47372b579682445e6dc8dd0e"
- PV = "5.10.65+git${SRCPV}"
+-PR = "r12"
++PR = "r13"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ BRANCH = "ti-u-boot-2021.01"
+ 
+-SRCREV = "316948e851b21f1f79e78fdd364a754cf9817038"
++SRCREV = "377e0f7041d1863bf9b3d23e90fb4b0c0a2cd6bf"
 -- 
-2.7.4
+2.17.1
 
