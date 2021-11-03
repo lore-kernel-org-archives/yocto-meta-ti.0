@@ -1,79 +1,134 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web08.168.1635799598250449055
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web08.3777.1635977843398570422
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 01 Nov 2021 13:46:38 -0700
+ Wed, 03 Nov 2021 15:17:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FKXBSafq;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: yogeshs@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1A1Kkb3W078926;
-	Mon, 1 Nov 2021 15:46:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1635799597;
-	bh=pa+1wuSZ/b7N7hInqpdURHggIeRIKY7pAZ50GeLWJ0U=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=FKXBSafqW85k0Z4UyEBmMOMVHTVieIvbPJ1AwAMFb1SxqlZTZ4qll6buiD4t9xCow
-	 T246DZtaL7wRmslYHCvMWQMwiCgYllWth5uK13uom9oDTdC+0eWF8LNIrKrAUso/AB
-	 +Uhg9vBNBE3zahq27rVot9CvLq92zop+MSW0xrgU=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1A1KkbMZ056908
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 1 Nov 2021 15:46:37 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 1
- Nov 2021 15:45:05 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Mon, 1 Nov 2021 15:45:05 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1A1Kj5LG057060;
-	Mon, 1 Nov 2021 15:45:05 -0500
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH 2/4] ti-linux-fw: Bump ti linux firmware for 08.01.00.002
-Date: Mon, 1 Nov 2021 20:45:03 +0000
-Message-ID: <20211101204505.32309-2-yogeshs@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211101204505.32309-1-yogeshs@ti.com>
-References: <20211101204505.32309-1-yogeshs@ti.com>
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 08A3F40C50;
+	Wed,  3 Nov 2021 22:17:22 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id FOqXO8340etV; Wed,  3 Nov 2021 22:17:21 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id DFB0940A3D;
+	Wed,  3 Nov 2021 22:17:20 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 168C81746B0;
+	Wed,  3 Nov 2021 18:17:20 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [dunfell/master][PATCH] recipes: update github SRC_URIs
+Date: Wed,  3 Nov 2021 18:17:09 -0400
+Message-Id: <1635977829-36230-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
 
-Bump ti-linux-fw version for 08.01.00.002 release
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+https://github.blog/2021-09-01-improving-git-protocol-security-github/
+
+GitHub is deprecating unauthenticated protocols, including git:// so update
+SRC_URIs with protocol=https
+
+Explicitly pass branch=master where omitted, as bitbake now requires it.
+
+While at it, update libion to the latest to eliminate upstreamed patch.
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...NUInstallDirs-module-to-detect-install-pa.patch | 48 ----------------------
+ recipes-devtools/ion/libion_git.bb                 |  6 +--
+ .../beagleboard/beaglebone-getting-started.bb      |  2 +-
+ 3 files changed, 3 insertions(+), 53 deletions(-)
+ delete mode 100644 recipes-devtools/ion/libion/0001-cmake-Use-GNUInstallDirs-module-to-detect-install-pa.patch
 
-diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 56a16e80..47197212 100644
---- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -7,7 +7,7 @@ PV = "2021.09"
- INC_PR = "r1"
+diff --git a/recipes-devtools/ion/libion/0001-cmake-Use-GNUInstallDirs-module-to-detect-install-pa.patch b/recipes-devtools/ion/libion/0001-cmake-Use-GNUInstallDirs-module-to-detect-install-pa.patch
+deleted file mode 100644
+index bf63ed3..0000000
+--- a/recipes-devtools/ion/libion/0001-cmake-Use-GNUInstallDirs-module-to-detect-install-pa.patch
++++ /dev/null
+@@ -1,48 +0,0 @@
+-From 51eece2c291e121f9ae67c9b812617b885e76a64 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 18 Dec 2019 20:31:52 -0800
+-Subject: [PATCH] cmake: Use GNUInstallDirs module to detect install paths
+-
+-This helps it to calculate directories as per platform instead of
+-hardcoding them, helps compile it for arches which use /lib64 and
+-/usr/lib64 for libpaths
+-
+-Upstream-Status: Submitted [https://github.com/glneo/libion/pull/2]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- CMakeLists.txt | 10 ++++++----
+- 1 file changed, 6 insertions(+), 4 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 6e5928c..5b7c0de 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -3,6 +3,8 @@ PROJECT(ion)
+- set(PROJECT_DESCRIPTION "ION Userspace Memory Allocator Library")
+- set(PROJECT_VERSION 1.0.0)
+- 
+-+INCLUDE(GNUInstallDirs)
+-+
+- add_library(ion
+- 	SHARED
+- 		src/libion.c
+-@@ -23,12 +25,12 @@ target_include_directories(ion
+- configure_file(libion.pc.in libion.pc @ONLY)
+- 
+- install(TARGETS ion
+--	LIBRARY DESTINATION lib
+--	PUBLIC_HEADER DESTINATION include/ion)
+-+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-+	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ion)
+- 
+- install(DIRECTORY include/kernel-headers/4.19/
+--	DESTINATION include
+-+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+- 	FILES_MATCHING PATTERN "*.h")
+- 
+- install(FILES ${CMAKE_BINARY_DIR}/libion.pc
+--	DESTINATION lib/pkgconfig)
+-+	DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+--- 
+-2.24.1
+-
+diff --git a/recipes-devtools/ion/libion_git.bb b/recipes-devtools/ion/libion_git.bb
+index 4cf03af..f5ca8e8 100644
+--- a/recipes-devtools/ion/libion_git.bb
++++ b/recipes-devtools/ion/libion_git.bb
+@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ PV = "1.0.0"
  
- # Firmware versions
--CORESDK_RTOS_VERSION = "08.01.00.01"
-+CORESDK_RTOS_VERSION = "08.01.00.02"
- SERDES_FW_VERSION = "3.3.0.2c"
- NETCP_SA_FW_VERSION = "1.0.0"
- NETCP_PA_FW_VERSION = "3.0.2.3"
-@@ -17,7 +17,7 @@ PRUETH_FW_AM65X_SR2_VERSION = "02.02.09.06"
- GOODIX_FW_VERSION = "1.0.0.0"
- CADENCE_MHDP_FW_VERSION = "1.2.17"
+ BRANCH = "master"
+-SRC_URI = "git://github.com/glneo/libion.git;protocol=git;branch=${BRANCH} \
+-           file://0001-cmake-Use-GNUInstallDirs-module-to-detect-install-pa.patch \
+-          "
+-SRCREV = "813bd63e2f2118e17cb1c5d38505a1e572a2381c"
++SRC_URI = "git://github.com/glneo/libion.git;protocol=https;branch=${BRANCH}"
++SRCREV = "7e138fc31febbb67734792c1a911439bfd6d23eb"
  
--TI_LINUX_FW_SRCREV ?= "10bcf8564c6e9277e7f402fb02cf941956d0d3eb"
-+TI_LINUX_FW_SRCREV ?= "0e93d4df760e5f0948b07c09b68f0b1ecd150d40"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
+ S = "${WORKDIR}/git"
  
- BRANCH ?= "ti-linux-firmware"
+diff --git a/recipes-ti/beagleboard/beaglebone-getting-started.bb b/recipes-ti/beagleboard/beaglebone-getting-started.bb
+index 303b9bd..25538ac 100644
+--- a/recipes-ti/beagleboard/beaglebone-getting-started.bb
++++ b/recipes-ti/beagleboard/beaglebone-getting-started.bb
+@@ -8,7 +8,7 @@ LICENSE = "CC-BY-SA-3.0 & GPLv3+ & MIT & PD"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f6f02761e31334c48f7021fb94c89aaa"
+ 
+ SRCREV = "05bedba192646152b7bc80b0accaea75aef864e5"
+-SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
++SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git;protocol=https;branch=master"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.17.1
+2.7.4
 
