@@ -1,133 +1,110 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.10001.1636138962083591346
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web09.13477.1636156901264242594
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 05 Nov 2021 12:02:42 -0700
+ Fri, 05 Nov 2021 17:01:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 012FB40C56;
-	Fri,  5 Nov 2021 19:02:41 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6yaYpoX6ZyEZ; Fri,  5 Nov 2021 19:02:40 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D7FC640429;
-	Fri,  5 Nov 2021 19:02:39 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 360621746B2; Fri,  5 Nov 2021 15:02:39 -0400 (EDT)
-Date: Fri, 5 Nov 2021 15:02:39 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: "Siraswar, Yogesh" <yogeshs@ti.com>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [master][PATCH 00/22] Sync up with Dunfell
-Message-ID: <20211105190239.GZ10132@denix.org>
-References: <16B383101A550137.21702@lists.yoctoproject.org>
- <20211104175557.GX10132@denix.org>
- <bd5a7b4b-d8f5-008d-acec-e9c8bb6e81d7@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=MM7Zl/aU;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: yogeshs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1A601b5l001751;
+	Fri, 5 Nov 2021 19:01:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1636156897;
+	bh=JpAFAYMpLmXGJQeriVxwOZe8TkuK7xFWl7MuY4kuRuQ=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=MM7Zl/aUzlt3Ka3icwqOEthl8xGGoTSQQSAXIH7+b5BrWC/guNIyFpYtKGrOXS34J
+	 BXzQE17QGF/ld7BYVSmN65lSsXJk9xyygQlmTqfuy2gJZxRPghRPJAKFibDK1nQ6Ck
+	 aZtNAAwcPOdKpxTDlVpNiVkoMklq6hVg1+njhQU4=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1A601bRG072713
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 5 Nov 2021 19:01:37 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 5
+ Nov 2021 19:01:36 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Fri, 5 Nov 2021 19:01:36 -0500
+Received: from [10.250.38.249] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1A601afX064193;
+	Fri, 5 Nov 2021 19:01:36 -0500
+Message-ID: <9e6f0d08-5bde-441e-96ef-edcd10076a1a@ti.com>
+Date: Fri, 5 Nov 2021 19:01:36 -0500
 MIME-Version: 1.0
-In-Reply-To: <bd5a7b4b-d8f5-008d-acec-e9c8bb6e81d7@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.1
+Subject: Re: [meta-ti] [master][PATCH 11/22] powervr-drivers: teach modules_install to respect "usrmerge" distro feature
+To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
+References: <1635795192-43144-1-git-send-email-denis@denix.org>
+ <1635795192-43144-12-git-send-email-denis@denix.org>
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+In-Reply-To: <1635795192-43144-12-git-send-email-denis@denix.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Language: en-US
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 04, 2021 at 09:25:20PM -0500, Siraswar, Yogesh wrote:
-> On 11/4/2021 12:55 PM, Denys Dmytriyenko wrote:
-> >Ping
+Denys,
+This was already posted by you 
+https://lists.yoctoproject.org/g/meta-ti/message/14063 and has already 
+been merged.
+
+Thanks
+Yogesh
+
+On 11/1/2021 2:33 PM, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@konsulko.com>
 > 
-> Denys, I did try to apply the series. But there were errors.
-> Didn't get chance to look. Will get back tomorrow.
-
-Yogesh,
-
-Can you please share the error details so I can see what's wrong and fix it? 
-Thanks!
-
-
-> >On Mon, Nov 01, 2021 at 03:32:50PM -0400, Denys Dmytriyenko wrote:
-> >>From: Denys Dmytriyenko <denys@konsulko.com>
-> >>
-> >>Keep master up to date with latest changes in Dunfell, adjust to the new
-> >>override syntax.
-> >>
-> >>Denys Dmytriyenko (1):
-> >>   powervr-drivers: teach modules_install to respect "usrmerge" distro
-> >>     feature
-> >>
-> >>Hari Nagalla (2):
-> >>   ipc: ti-rpmsg-char: Update library to 0.3.1
-> >>   ti-rtos-firmware: Update M4F binary for AM64x SoCs
-> >>
-> >>Nick Saulnier (1):
-> >>   pru-icss_git.bb: add AM64x, update to PSSP v6.0.0
-> >>
-> >>Sinthu Raja (1):
-> >>   conf: j7-evm: Replace eaik dtb with sk to KERNEL_DEVICETREE
-> >>
-> >>Tom Rini (2):
-> >>   conf/machine: k3: Enable grub-efi by default in wic images
-> >>   conf: Add extlinux.conf support on some 32bit platforms
-> >>
-> >>Vignesh Raghavedra (1):
-> >>   prusw-fw-am65x-sr2: Add recipe for ICSSG Switch mode firmware for
-> >>     AM65x SR2.0
-> >>
-> >>Yogesh Siraswar (14):
-> >>   linux-ti-staging: Update SRCREV to 5.10.65
-> >>   linux-ti-staging-rt: Update SRCREV to 5.10.65
-> >>   conf: omap-a15: fix the dtb file path for extlinux boot
-> >>   conf: dra7xx-evm: ReIntroduce existent dtb* for 5.10
-> >>   conf: am57xx-evm: ReIntroduce existent dtb* for 5.10
-> >>   ti-linux-fw: Support common inc for all firmware
-> >>   ti-linux-fw: AUTOREV support for ti-linux-fw
-> >>   ti-sci-fw_git: Fix issue with using gp*.bin for TISCI firmware
-> >>   linux-ti-staging: Bump linux version to latest
-> >>   linux-ti-staging-rt: Bump linux rt version to latest
-> >>   ti-linux-fw: Bump to 08.01.00.001 release
-> >>   u-boot-ti-staging: Bump to 08.01.00.001 release
-> >>   linux-ti-staging-rt: Bump to 08.01.00.001 release
-> >>   linux-ti-staging: Bump to 08.01.00.001 release
-> >>
-> >>  conf/machine/am57xx-evm.conf                       |  6 +-
-> >>  conf/machine/dra7xx-evm.conf                       |  8 +++
-> >>  conf/machine/include/k3.inc                        |  6 +-
-> >>  conf/machine/include/omap-a15.inc                  | 13 ++++-
-> >>  conf/machine/include/ti33x.inc                     | 11 +++-
-> >>  conf/machine/include/ti43x.inc                     | 11 +++-
-> >>  conf/machine/j7-evm.conf                           |  2 +-
-> >>  recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb | 11 ++--
-> >>  recipes-bsp/goodix-fw/goodix-fw_git.bb             | 11 ++--
-> >>  recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb         | 12 +---
-> >>  recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb         | 12 +---
-> >>  .../ti-img-rogue-driver_1.13.5776728.bb            |  2 +-
-> >>  .../powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb  |  4 +-
-> >>  recipes-bsp/pru/pru-icss_git.bb                    | 64 +++++++++++++++++++++-
-> >>  recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb   | 11 +---
-> >>  recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb       | 11 +---
-> >>  recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb          | 10 +---
-> >>  recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb         | 10 +---
-> >>  recipes-bsp/pruprp-fw/pruprp-fw_2.17.25.bb         | 10 +---
-> >>  recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb     | 34 ++++++++++++
-> >>  recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb             | 10 +---
-> >>  recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb       | 11 ++--
-> >>  recipes-bsp/serdes-fw/serdes-fw_git.bb             | 10 ++--
-> >>  recipes-bsp/ti-linux-fw/ti-linux-fw.inc            | 43 +++++++++++++++
-> >>  recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb      |  2 +-
-> >>  recipes-bsp/ti-sci-fw/ti-sci-fw.inc                | 32 -----------
-> >>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb             |  7 ++-
-> >>  recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb    |  4 +-
-> >>  recipes-kernel/linux/kernel-rdepends.inc           |  2 +-
-> >>  recipes-kernel/linux/linux-ti-staging-rt_5.10.bb   |  4 +-
-> >>  recipes-kernel/linux/linux-ti-staging_5.10.bb      |  4 +-
-> >>  recipes-ti/ipc/ti-rpmsg-char.inc                   |  6 +-
-> >>  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb         |  8 ++-
-> >>  wic/sdimage-2part-efi.wks                          |  7 +++
-> >>  34 files changed, 258 insertions(+), 151 deletions(-)
-> >>  create mode 100644 recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb
-> >>  create mode 100644 recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> >>  delete mode 100644 recipes-bsp/ti-sci-fw/ti-sci-fw.inc
-> >>  create mode 100644 wic/sdimage-2part-efi.wks
-> >>
-> >>-- 
-> >>2.7.4
+> https://www.freedesktop.org/wiki/Software/systemd/TheCaseForTheUsrMerge/
+> 
+> When "usrmerge" distro feature is enabled, root directories /bin, /sbin, /lib
+> are simply symlinks pointing to their counterparts in /usr. Hence, modules
+> should be installed accordingly into /usr/lib/modules/...
+> 
+> Since IMG Makefiles don't take the direct target directory, such as
+> ${nonarch_base_libdir}/modules/, adjust the top-level rootfs path instead.
+> 
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+> Reported-by: Vivien Didelot <vdidelot@pbsc.com>
+> Tested-by: Vivien Didelot <vdidelot@pbsc.com>
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> ---
+>   recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb | 2 +-
+>   recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb       | 4 ++--
+>   2 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+> index c3524e9..09f6f03 100644
+> --- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+> +++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+> @@ -36,5 +36,5 @@ PVR_WS = "wayland"
+>   EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" RGX_BVNC=${PVR_BVNC} BUILD=${PVR_BUILD} PVR_BUILD_DIR=${PVR_SOC} WINDOW_SYSTEM=${PVR_WS}'
+>   
+>   do_install() {
+> -    make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${PVR_SOC}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+> +    make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${PVR_SOC}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+>   }
+> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+> index ff420cd..3848e84 100644
+> --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+> @@ -42,9 +42,9 @@ do_compile:prepend() {
+>   }
+>   
+>   do_install() {
+> -    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_armhf/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+> +    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_armhf/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+>   }
+>   
+>   do_install:k3() {
+> -    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_aarch64/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+> +    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+>   }
+> 
+> 
+> 
+> 
+> 
