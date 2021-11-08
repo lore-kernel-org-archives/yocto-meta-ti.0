@@ -1,110 +1,103 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web09.13477.1636156901264242594
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web08.2987.1636406121094250722
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 05 Nov 2021 17:01:41 -0700
+ Mon, 08 Nov 2021 13:15:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=MM7Zl/aU;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1A601b5l001751;
-	Fri, 5 Nov 2021 19:01:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1636156897;
-	bh=JpAFAYMpLmXGJQeriVxwOZe8TkuK7xFWl7MuY4kuRuQ=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=MM7Zl/aUzlt3Ka3icwqOEthl8xGGoTSQQSAXIH7+b5BrWC/guNIyFpYtKGrOXS34J
-	 BXzQE17QGF/ld7BYVSmN65lSsXJk9xyygQlmTqfuy2gJZxRPghRPJAKFibDK1nQ6Ck
-	 aZtNAAwcPOdKpxTDlVpNiVkoMklq6hVg1+njhQU4=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1A601bRG072713
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 5 Nov 2021 19:01:37 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 5
- Nov 2021 19:01:36 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Fri, 5 Nov 2021 19:01:36 -0500
-Received: from [10.250.38.249] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1A601afX064193;
-	Fri, 5 Nov 2021 19:01:36 -0500
-Message-ID: <9e6f0d08-5bde-441e-96ef-edcd10076a1a@ti.com>
-Date: Fri, 5 Nov 2021 19:01:36 -0500
+ dkim=pass header.i=@baylibre-com.20210112.gappssmtp.com header.s=20210112 header.b=mZQcAyqd;
+ spf=pass (domain: baylibre.com, ip: 209.85.221.52, mailfrom: aouledameur@baylibre.com)
+Received: by mail-wr1-f52.google.com with SMTP id u18so29231814wrg.5
+        for <meta-ti@lists.yoctoproject.org>; Mon, 08 Nov 2021 13:15:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
+        h=subject:from:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=2MXCSy3Ub4KykuGZ8oA0FsklXxGlqS2jxf3tqqaEGOc=;
+        b=mZQcAyqdM4QJRBlOkbD+oYCk6vvotkJ/zAs8o51iKEiVDfLHDmr58Adxc1Xxxwtv34
+         kc/0gITvWH18YQJypE2QNJY4KUX+t3T+l4piXodQBnGeHVm91LQ25zliSoS0y8aOTo15
+         pjH2qaCOj5HZipL+zLN25PBf9LYkWBBUnWxbq7vkcIgpWwelQMKM3YzGn70bLkSOlB8I
+         TDcmKCqQVpIYVtOppMN0a3dffXITtuBQNCO/hsRIB/rcQBvjiViO7WqbU1VhvRRy3kjI
+         uzJvys3zelp3VLY0fte4IbNCQVjmvuY4DYxuTOCWOf+PC4u9k8bgdM+SvnTAiS9mcro6
+         LH4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:subject:from:to:cc:references:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=2MXCSy3Ub4KykuGZ8oA0FsklXxGlqS2jxf3tqqaEGOc=;
+        b=D/OJflh3xO6X5537Xi/BT8RhsWJV6P4FbhWszA65CRFXOjkGqOTnMS0UCkgOidXcEk
+         fBxQgsdaq6X2PYmr5xeP6ITEnCQN4KeYnPxAFtUnyc1lftVnBNKv6VyMO390a9pG0nCv
+         M2eJVxlauWU4KgTT5LGZAuFby6hut17xKYz+weTEXaAm3uNoyKA4Mq8owpN7daW/R3Im
+         Mv1NGR6+X/KipmIa/cEETZSucpKuEZEn6deZYohWK7Y9OtAwpOU/Gp1P4h+r09ATAn2b
+         NjYiYdx+dchWaFFbiNOPuAdC7+DbyEq3Sqvm+2iJpRpim8DtESNtLEoQJdM+tW+Ceu5o
+         ISZg==
+X-Gm-Message-State: AOAM530YUwd1tiUa0rKVzyXjAW05W30k27SQ/Ms2zK9QwIbV/wdsLbqV
+	uc0pl8jM9RmGheNLlh57fhdchA==
+X-Google-Smtp-Source: ABdhPJxTEo+65n2ZPxGYBt9kNYhcmDidcGU2OOkNMtlw1xz1vHsYD+34NfG49EXa3qe2e0s39KCpUQ==
+X-Received: by 2002:adf:cd06:: with SMTP id w6mr2561192wrm.431.1636406119547;
+        Mon, 08 Nov 2021 13:15:19 -0800 (PST)
+Return-Path: <aouledameur@baylibre.com>
+Received: from [192.168.1.24] (203.247.120.78.rev.sfr.net. [78.120.247.203])
+        by smtp.gmail.com with ESMTPSA id g4sm17789971wro.12.2021.11.08.13.15.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 08 Nov 2021 13:15:19 -0800 (PST)
+Subject: Re: [PATCH] recipes-bsp: u-boot-ti-mainline: Update to v2021.10 release
+From: "Amjad Ouled-Ameur" <aouledameur@baylibre.com>
+To: meta-ti@lists.yoctoproject.org, denys@konsulko.com,
+ "Bajjuri, Praneeth" <praneeth@ti.com>
+Cc: khilman@baylibre.com, dfustini@baylibre.com
+References: <20211108105214.34533-1-aouledameur@baylibre.com>
+ <8f075a28-83ef-1062-faea-3e6a0603a81a@baylibre.com>
+Message-ID: <20c106dc-b76d-e94b-c69d-8dcfaf4de428@baylibre.com>
+Date: Mon, 8 Nov 2021 22:15:18 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Subject: Re: [meta-ti] [master][PATCH 11/22] powervr-drivers: teach modules_install to respect "usrmerge" distro feature
-To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
-References: <1635795192-43144-1-git-send-email-denis@denix.org>
- <1635795192-43144-12-git-send-email-denis@denix.org>
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-In-Reply-To: <1635795192-43144-12-git-send-email-denis@denix.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <8f075a28-83ef-1062-faea-3e6a0603a81a@baylibre.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
 
-Denys,
-This was already posted by you 
-https://lists.yoctoproject.org/g/meta-ti/message/14063 and has already 
-been merged.
+This was not successfully sent to "meta-ti@lists.yoctoproject.org" since
 
-Thanks
-Yogesh
+I was not subscribed to it. Re-sending !
 
-On 11/1/2021 2:33 PM, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@konsulko.com>
-> 
-> https://www.freedesktop.org/wiki/Software/systemd/TheCaseForTheUsrMerge/
-> 
-> When "usrmerge" distro feature is enabled, root directories /bin, /sbin, /lib
-> are simply symlinks pointing to their counterparts in /usr. Hence, modules
-> should be installed accordingly into /usr/lib/modules/...
-> 
-> Since IMG Makefiles don't take the direct target directory, such as
-> ${nonarch_base_libdir}/modules/, adjust the top-level rootfs path instead.
-> 
-> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-> Reported-by: Vivien Didelot <vdidelot@pbsc.com>
-> Tested-by: Vivien Didelot <vdidelot@pbsc.com>
-> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> ---
->   recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb | 2 +-
->   recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb       | 4 ++--
->   2 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
-> index c3524e9..09f6f03 100644
-> --- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
-> +++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
-> @@ -36,5 +36,5 @@ PVR_WS = "wayland"
->   EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" RGX_BVNC=${PVR_BVNC} BUILD=${PVR_BUILD} PVR_BUILD_DIR=${PVR_SOC} WINDOW_SYSTEM=${PVR_WS}'
->   
->   do_install() {
-> -    make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${PVR_SOC}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
-> +    make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${PVR_SOC}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
->   }
-> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> index ff420cd..3848e84 100644
-> --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> @@ -42,9 +42,9 @@ do_compile:prepend() {
->   }
->   
->   do_install() {
-> -    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_armhf/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
-> +    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_armhf/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
->   }
->   
->   do_install:k3() {
-> -    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_aarch64/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
-> +    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
->   }
-> 
-> 
-> 
-> 
-> 
+
+Sorry for the noise,
+
+Amjad
+
+On 08/11/2021 12:01, Amjad Ouled-Ameur wrote:
+> Sending to maintainer Praneeth as well.
+>
+> On 08/11/2021 11:52, Amjad Ouled-Ameur wrote:
+>> This introduces a critical fix for both AM335X EVM and AM43XX EVM, which
+>> can no longer boot because "uuid" is undefined.
+>>
+>> v2021.10 has these two fixes, one for each platform:
+>> - commit ff8f277e9121 ("ti: am335x_evm: Switch to DISTRO_BOOT only")
+>> - commit e0c91ae24e5b ("ti: am43xx_evm: Switch to DISTRO_BOOT only")
+>>
+>> Signed-off-by: Amjad Ouled-Ameur <aouledameur@baylibre.com>
+>> ---
+>>   recipes-bsp/u-boot/u-boot-ti-mainline_git.bb | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb 
+>> b/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+>> index 2db9899609d0..76aaa4b24ac0 100644
+>> --- a/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+>> +++ b/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+>> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = 
+>> "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+>>     PR = "r0"
+>>   -PV = "2021.07"
+>> +PV = "2021.10"
+>>     # For the un-initiated:
+>>   # The actual URL you'd use with a git clone for example would be:
+>> @@ -15,4 +15,4 @@ PV = "2021.07"
+>>   # b) and we want git fetcher to use https protocol, hence 
+>> GIT_PROTOCOL as https
+>>   UBOOT_GIT_URI = "git://source.denx.de/u-boot/u-boot.git"
+>>   UBOOT_GIT_PROTOCOL = "https"
+>> -SRCREV = "840658b093976390e9537724f802281c9c8439f5"
+>> +SRCREV = "d80bb749fab53da72c4a0e09b8c2d2aaa3103c91"
