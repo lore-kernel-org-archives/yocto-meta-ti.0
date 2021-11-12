@@ -1,70 +1,70 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web12.11297.1636693781431862407
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web12.11298.1636693781866731594
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Nov 2021 21:09:41 -0800
+ Thu, 11 Nov 2021 21:09:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lBN21Z+y;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: yogeshs@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AC59d1q014516;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=m9Yb6vyj;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: yogeshs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AC59dP4021010;
 	Thu, 11 Nov 2021 23:09:39 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1636693779;
-	bh=xGKLYOS+TwhrGBMbfK8WQb8D92BhL6V1gB+H5UFuSz4=;
-	h=From:To:Subject:Date;
-	b=lBN21Z+yPmsqc/cUR30/lVmp5OKs/l+JhusLSEhpln07ZYUcTSEwVKbfg/UVGpIeH
-	 aPkijwZm3h5pn1MvZPqjknsjZzjifn+0G4wtl+6H6qkEbwIaDAA/auXeNw7Lbu/GDX
-	 GLBo5niUuz61N6rsn904d8eIK7jIKhr0QE/aDBMU=
+	bh=ZN+u/qoIOGQIqAzVPSufp/00GNlgJubFkC1W7duYahI=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=m9Yb6vyjssg4iZ9c7PqeMgY5VonhHdg/ntbrwCstGsnKrDt44m4jV3/sP4OQIdjqb
+	 VuJpZg5Wa6nXRwosw4IlYFU8QFMn6rJb1hj3CreM5Lz7luSy/LX07N6KOq+yzIZK6k
+	 m0rMabLc1U4xXffVkEN+61c+rAfumFDoN2o9NH3o=
 Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AC59dWk130141
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AC59dGB073510
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Thu, 11 Nov 2021 23:09:39 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE112.ent.ti.com
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
  (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 11
  Nov 2021 23:09:39 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
  Frontend Transport; Thu, 11 Nov 2021 23:09:39 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AC59dGc002432;
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AC59dtW003805;
 	Thu, 11 Nov 2021 23:09:39 -0600
 From: "Yogesh Siraswar" <yogeshs@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH 1/3] u-boot-ti-staging: Bump u-boot version for 08.01.00.003
-Date: Fri, 12 Nov 2021 05:09:37 +0000
-Message-ID: <20211112050939.35983-1-yogeshs@ti.com>
+Subject: [meta-ti][dunfell][PATCH 2/3] linux-ti-staging: Bump linux version for 08.01.00.003
+Date: Fri, 12 Nov 2021 05:09:38 +0000
+Message-ID: <20211112050939.35983-2-yogeshs@ti.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20211112050939.35983-1-yogeshs@ti.com>
+References: <20211112050939.35983-1-yogeshs@ti.com>
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-u-boot bump for 08.01.00.003 release
+Bump linux for 08.01.00.003 release
 
 Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 6765572a..b5aa3fb7 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -2,8 +2,8 @@ require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 6b61d9d0..9fb74af6 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+ BRANCH = "ti-linux-5.10.y"
  
--PR = "r13"
-+PR = "r14"
+-SRCREV = "33574931b48f50c37abb58e0a9c617cbec472b01"
++SRCREV = "eb55b499b1865222e85acad2c665baadbaea3072"
+ PV = "5.10.65+git${SRCPV}"
  
- BRANCH = "ti-u-boot-2021.01"
- 
--SRCREV = "377e0f7041d1863bf9b3d23e90fb4b0c0a2cd6bf"
-+SRCREV = "6c804a1af10bda322c86ce1c5dbb29f0fbb56c79"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
 2.17.1
 
