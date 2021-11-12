@@ -1,76 +1,65 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.16324.1636726303038125644
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web12.3531.1636759082567239448
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 12 Nov 2021 06:11:43 -0800
+ Fri, 12 Nov 2021 15:18:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=QwJE7aq8;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1ACEBfZt074362;
-	Fri, 12 Nov 2021 08:11:41 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=w8wD13d2;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: yogeshs@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1ACNI0It021320;
+	Fri, 12 Nov 2021 17:18:00 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1636726301;
-	bh=Xp96g4zeEPjtvAW/gj6n3qz05Wpa3utNFIeOjcsPvEU=;
+	s=ti-com-17Q1; t=1636759080;
+	bh=dwglUh0L30wSPQQTYsFfo3qsT5S067kS4k43ya411XM=;
 	h=From:To:Subject:Date;
-	b=QwJE7aq8E8X+SuDMQMTUNzuD8x3dc/YabTYpbOvOJ9PbnqttfU2zYMDCiT0ltlC5C
-	 MmX2XyzNeZG3u560cdXbNX2PLY3ECivZhKrBoupTFMXh+sWAHWBpk2LZWI+smV6maX
-	 Dq3dPZCS/tRcxjkuctONOFdZWJJy+QDyVYNsoRh0=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1ACEBfG1056139
+	b=w8wD13d2RreAZiwOU1ysAQU/VWJDCQPhkOYWA21xT8BKKgj5d1fQpdfnLHuIk3aRS
+	 cohOavBWyqczEyHjevk5qysGFjCM64JijwNJn8kCnkcclopa+SxXmObjYAF6sZ3XSY
+	 B5rVDA/sVRWCa3T1zyWgWeisPQPhMuvA/Vyr7N/s=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1ACNI0Tc034967
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 12 Nov 2021 08:11:41 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 12 Nov 2021 17:18:00 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 12
- Nov 2021 08:11:40 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2021 17:18:00 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Fri, 12 Nov 2021 08:11:41 -0600
+ Frontend Transport; Fri, 12 Nov 2021 17:18:00 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1ACEBe0J068092;
-	Fri, 12 Nov 2021 08:11:40 -0600
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1ACNI0pV019283;
+	Fri, 12 Nov 2021 17:18:00 -0600
 From: "Yogesh Siraswar" <yogeshs@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH] conf: am57xx-evm: Add missing *.dtb and *.dtbo
-Date: Fri, 12 Nov 2021 14:11:40 +0000
-Message-ID: <20211112141140.49589-1-yogeshs@ti.com>
+Subject: [meta-ti][dunfell][PATCH 0/3] Add AM64x HS platform support
+Date: Fri, 12 Nov 2021 23:17:57 +0000
+Message-ID: <20211112231800.64167-1-yogeshs@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-Add missing dtb and dtbo to deploy folder
+This series adds AM64x HS support for HS-SE devices
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
----
- conf/machine/am57xx-evm.conf | 3 +++
- 1 file changed, 3 insertions(+)
+Yogesh Siraswar (3):
+  conf: machine: add new am64x hs platform
+  ti-sci-fw: changes to build combined boot image for hs build
+  am64xx-hs: changes to support new hs platform
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 7441e80e..f977c5c6 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -15,6 +15,7 @@ KERNEL_DEVICETREE = " \
-     am5729-beagleboneai.dtb \
-     am57xx-evm.dtb \
-     ti/am57xx-evm-common.dtbo \
-+    am57xx-evm-reva3.dtb \
-     ti/am57xx-evm-reva3.dtbo \
-     am571x-idk.dtb \
-     ti/am571x-idk-touchscreen.dtbo \
-@@ -22,6 +23,8 @@ KERNEL_DEVICETREE = " \
-     am574x-idk.dtb \
-     ti/am57xx-idk-osd-lcd-common.dtbo \
-     ti/am572x-idk-touchscreen.dtbo \
-+    ti/lcd-osd101t2587.dtbo \
-+    ti/lcd-osd101t2045.dtbo \
- "
- 
- KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am574x-idk-pru-excl-uio.dtb am572x-idk-pru-excl-uio.dtb am571x-idk-pru-excl-uio.dtb', '', d)}"
+ conf/machine/am64xx-hs-evm-k3r5.conf          | 14 ++++++++++++
+ conf/machine/am64xx-hs-evm.conf               | 22 +++++++++++++++++++
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb        | 20 +++++++++++++++--
+ .../trusted-firmware-a_%.bbappend             |  8 +++++++
+ recipes-bsp/u-boot/u-boot-ti.inc              |  6 +++++
+ recipes-security/optee/optee-os_%.bbappend    |  4 ++++
+ 6 files changed, 72 insertions(+), 2 deletions(-)
+ create mode 100644 conf/machine/am64xx-hs-evm-k3r5.conf
+ create mode 100644 conf/machine/am64xx-hs-evm.conf
+
 -- 
 2.17.1
 
