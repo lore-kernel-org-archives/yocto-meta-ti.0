@@ -1,138 +1,87 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.467.1637009614578001679
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.2372.1637017796492000778
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 15 Nov 2021 12:53:35 -0800
+ Mon, 15 Nov 2021 15:09:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rW3SP89O;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AFKrUfT075369;
-	Mon, 15 Nov 2021 14:53:30 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1637009610;
-	bh=CeIMTNJFEeoCXT1nUxl4K1P3gNTHB4mavR6UFSB5cx0=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=rW3SP89Orf5SyfxNgzFXMqALK2ZSyS1oNdMhOuVEkDH2t/QpUPUeVqXB97QeM44mW
-	 M9I2lkr/QSZ3KJD8lpPjqwwnEiKzKhl+4cJ+RghPZjqjUfYBbefwQ6YFBRgRcODV6z
-	 9K+NvQ11cQZC1GjI26NjmGCPlvG3QWF8qMwQ5xlY=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AFKrUFn032766
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 15 Nov 2021 14:53:30 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 15
- Nov 2021 14:53:30 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Mon, 15 Nov 2021 14:53:30 -0600
-Received: from [10.250.38.249] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AFKrTht013947;
-	Mon, 15 Nov 2021 14:53:30 -0600
-Message-ID: <ab973ee0-c885-bedd-7d9c-4b02cfa72301@ti.com>
-Date: Mon, 15 Nov 2021 14:53:29 -0600
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7754C40C2B;
+	Mon, 15 Nov 2021 23:09:55 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id d7sE8ObduR61; Mon, 15 Nov 2021 23:09:55 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6197340027;
+	Mon, 15 Nov 2021 23:09:54 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 0FD161746CD; Mon, 15 Nov 2021 18:09:54 -0500 (EST)
+Date: Mon, 15 Nov 2021 18:09:54 -0500
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: "Siraswar, Yogesh" <yogeshs@ti.com>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [PATCH] mpm-transport: Do not use append with += operator
+Message-ID: <20211115230954.GX10132@denix.org>
+References: <20211104172934.4088591-1-raj.khem@gmail.com>
+ <16B46967FE386BDB.15444@lists.yoctoproject.org>
+ <20211115202445.GV10132@denix.org>
+ <c4da11b7-79b6-e63d-e318-01908ea85432@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Subject: Re: [meta-ti][dunfell][PATCH 1/3] conf: machine: add new am64x hs platform
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20211112231800.64167-1-yogeshs@ti.com>
- <20211112231800.64167-2-yogeshs@ti.com> <20211112232630.GS10132@denix.org>
-From: "Yogesh Siraswar" <yogeshs@ti.com>
-In-Reply-To: <20211112232630.GS10132@denix.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Language: en-US
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <c4da11b7-79b6-e63d-e318-01908ea85432@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Mon, Nov 15, 2021 at 02:52:31PM -0600, Siraswar, Yogesh wrote:
+> 
+> 
+> On 11/15/2021 2:24 PM, Denys Dmytriyenko wrote:
+> >On Thu, Nov 04, 2021 at 01:54:16PM -0400, Denys Dmytriyenko wrote:
+> >>On Thu, Nov 04, 2021 at 10:29:34AM -0700, Khem Raj wrote:
+> >>>this is undefined behaviour, mant times devs used them together to get
+> >>>the missing space at the beginning of string which append/prepend needs
+> >>>but thats not intended behaviour
+> >>>
+> >>>Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >>
+> >>Acked-by: Denys Dmytriyenko <denys@konsulko.com>
+> >
+> >Yogesh,
+> >
+> >I don't believe this patch has made it into master...
+> 
+> Yes, I have not sync master. Is this applicable for dunfell?
+
+This fixes a warning in master, since bitbake now checks for mixing 
+append/prepend/remove overrides along with +=
+In dunfell it's not checked and no warning, but it's still not recommended, 
+so it's up to you.
 
 
+> >>>---
+> >>>  recipes-ti/mpm-transport/mpm-transport_git.bb | 4 ++--
+> >>>  1 file changed, 2 insertions(+), 2 deletions(-)
+> >>>
+> >>>diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+> >>>index 38aefc24..3b80af34 100644
+> >>>--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
+> >>>+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+> >>>@@ -21,8 +21,8 @@ PR = "r0"
+> >>>  CC += "-fcommon"
+> >>>  EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+> >>>-EXTRA_OEMAKE:append:k2hk += "HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+> >>>-EXTRA_OEMAKE:append:k2e += "HYPLNK_TRANSPORT=true"
+> >>>+EXTRA_OEMAKE:append:k2hk = " HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+> >>>+EXTRA_OEMAKE:append:k2e = " HYPLNK_TRANSPORT=true"
+> >>>  INSANE_SKIP:${PN} += "ldflags"
+> >>>  S = "${WORKDIR}/git"
+> >>>-- 
+> >>>2.33.1
+> >>>
 
-On 11/12/2021 5:26 PM, Denys Dmytriyenko wrote:
-> On Fri, Nov 12, 2021 at 11:17:58PM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
->> Add new am64x hs platform. This requires two files to be created.
->> Used am65x and j7  hs platform for reference.
->>
->> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
->> ---
->>   conf/machine/am64xx-hs-evm-k3r5.conf | 14 ++++++++++++++
->>   conf/machine/am64xx-hs-evm.conf      | 22 ++++++++++++++++++++++
->>   2 files changed, 36 insertions(+)
->>   create mode 100644 conf/machine/am64xx-hs-evm-k3r5.conf
->>   create mode 100644 conf/machine/am64xx-hs-evm.conf
->>
->> diff --git a/conf/machine/am64xx-hs-evm-k3r5.conf b/conf/machine/am64xx-hs-evm-k3r5.conf
->> new file mode 100644
->> index 00000000..69c6cada
->> --- /dev/null
->> +++ b/conf/machine/am64xx-hs-evm-k3r5.conf
->> @@ -0,0 +1,14 @@
->> +#@TYPE: Machine
->> +#@NAME: AM65xx HS EVM (R5F)
-> 
-> AM64?
-
-Will fix it while merging
-
-> 
->> +#@DESCRIPTION: Machine configuration for the TI AM65xx HS EVM (R5F core)
-> 
-> AM64?
-
-Same will fix while merging
-
-> 
-> Both are just comments, so not a functional issue.
-> 
-> 
->> +require conf/machine/include/k3r5.inc
->> +
->> +SYSFW_SOC = "am64x"
->> +SYSFW_CONFIG = "evm"
->> +SYSFW_SUFFIX = "hs"
->> +SYSFW_SYMLINK = ""
->> +
->> +UBOOT_MACHINE = "am64x_hs_evm_r5_defconfig"
->> +
->> +TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
->> diff --git a/conf/machine/am64xx-hs-evm.conf b/conf/machine/am64xx-hs-evm.conf
->> new file mode 100644
->> index 00000000..44e81463
->> --- /dev/null
->> +++ b/conf/machine/am64xx-hs-evm.conf
->> @@ -0,0 +1,22 @@
->> +#@TYPE: Machine
->> +#@NAME: AM64xx HS EVM
->> +#@DESCRIPTION: Machine configuration for the TI AM64xx HS EVM
->> +
->> +require conf/machine/include/am64xx.inc
->> +
->> +UBOOT_MACHINE = "am64x_hs_evm_a53_defconfig"
->> +
->> +UBOOT_ENTRYPOINT =       "0x80080000"
->> +UBOOT_LOADADDRESS =      "0x80080000"
->> +UBOOT_RD_LOADADDRESS =   "0x84000000"
->> +UBOOT_RD_ENTRYPOINT =    "0x84000000"
->> +UBOOT_DTB_LOADADDRESS =  "0x83000000"
->> +UBOOT_DTBO_LOADADDRESS = "0x83080000"
->> +UBOOT_DTBO_OFFSET =      "0x00010000"
->> +
->> +SPL_BINARY = "tispl.bin_HS"
->> +SPL_BINARYNAME = "tispl.bin"
->> +UBOOT_BINARY = "u-boot.img_HS"
->> +IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
->> +
->> +TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
->> -- 
->> 2.17.1
->>
-> 
->>
->> 
->>
-> 
-> 
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
