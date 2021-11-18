@@ -1,125 +1,142 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1360.1637265921890976421
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.1488.1637266148398122566
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Nov 2021 12:05:22 -0800
+ Thu, 18 Nov 2021 12:09:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D806D40C3A;
-	Thu, 18 Nov 2021 20:05:20 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JYkmfEu1uzZc; Thu, 18 Nov 2021 20:05:20 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B417340ACD;
-	Thu, 18 Nov 2021 20:05:17 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 78C851746CE; Thu, 18 Nov 2021 15:05:17 -0500 (EST)
-Date: Thu, 18 Nov 2021 15:05:17 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: yogeshs@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH v4] vxd-dec-fw: Add the recipe for vxd-dec-fw
-Message-ID: <20211118200517.GH18191@denix.org>
-References: <20211118195750.4658-1-yogeshs@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=IFVSu9pQ;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: yogeshs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AIK94X3069351;
+	Thu, 18 Nov 2021 14:09:04 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1637266144;
+	bh=9Qf1Peg0GP+MugfzDZoG4dySYVeybXbledSkVgkzlg0=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=IFVSu9pQg9J/sFO3LwPmObBUPD2UGOwqQB1f+q8g+ROupWJX5dt9bhVeD6/tsa3ix
+	 GyC+deP0m1M9x4gmfIe/V5idJnLlfnFhdrSPmb8nsGXzjLBGCMWb0NreucruTxL2Ob
+	 VGsvoQWZ08c9fx6sOC5hXUT8gtgDazve5uVGc7tE=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AIK92Il028326
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 18 Nov 2021 14:09:04 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 18
+ Nov 2021 14:09:03 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Thu, 18 Nov 2021 14:09:03 -0600
+Received: from [10.249.32.113] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AIK93NN095102;
+	Thu, 18 Nov 2021 14:09:03 -0600
+Message-ID: <2a36330b-8151-5f56-7847-22b70a38fed8@ti.com>
+Date: Thu, 18 Nov 2021 14:09:03 -0600
 MIME-Version: 1.0
-In-Reply-To: <20211118195750.4658-1-yogeshs@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Thu, Nov 18, 2021 at 07:57:50PM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
-> From: Praneeth Bajjuri <praneeth@ti.com>
-> 
-> Add the firmware packaging recipe for the video decoder
-> for j721e.
-> 
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-> ---
-> 
-> resend v3 as v4
-> 
-> Changes from v2:
-> 1) Fixed the summary
-> 2) Bumped the ti-linux-fw to pick the video decoder binary
-> 3) Added the kernel dependency to build this recipe
-> 
->  .../ti-img-encode-decode/vxd-dec-fw_git.bb    | 24 +++++++++++++++++++
->  recipes-bsp/ti-linux-fw/ti-linux-fw.inc       |  5 ++--
->  recipes-kernel/linux/kernel-rdepends.inc      |  3 +++
->  3 files changed, 30 insertions(+), 2 deletions(-)
->  create mode 100644 recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> 
-> diff --git a/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb b/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> new file mode 100644
-> index 00000000..cccda6bb
-> --- /dev/null
-> +++ b/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "Video Decoding Firmware"
-> +LICENSE = "TI-IMG"
-
-And meta-ti does not define such license:
-https://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/licenses
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.1
+Subject: Re: [meta-ti][dunfell][PATCH] j721e-sr1_1: Add j721e sr1.1 HS support
+To: Denys Dmytriyenko <denis@denix.org>
+CC: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+References: <20211117114611.47729-1-yogeshs@ti.com>
+ <20211118163819.GB18191@denix.org>
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+In-Reply-To: <20211118163819.GB18191@denix.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Language: en-US
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-> +LIC_FILES_CHKSUM = "file://LICENSE.ti-img;md5=84ca7278930db001870686ad997d6bb1"
-> +
-> +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +
-> +PV = "${IMG_DEC_FW_VERSION}"
-> +PR = "${INC_PR}.0"
-> +
-> +CLEANBROKEN = "1"
-> +
-> +COMPATIBLE_MACHINE = "j7"
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +S = "${WORKDIR}/git"
-> +TARGET = "pvdec_full_bin.fw"
-> +
-> +do_install() {
-> +        install -d ${D}${base_libdir}/firmware/ti-img
-> +        install -m 0644 ${S}/ti-img/${TARGET} ${D}${base_libdir}/firmware/ti-img/${TARGET}
-> +}
-> +
-> +FILES_${PN} = "${base_libdir}/firmware"
-> diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> index c59120b8..f6d5b8d1 100644
-> --- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> @@ -13,11 +13,12 @@ NETCP_SA_FW_VERSION = "1.0.0"
->  NETCP_PA_FW_VERSION = "3.0.2.3"
->  QMSS_PDSP_FW_VERSION = "1.0.0.9"
->  PRUETH_FW_AM65X_VERSION = "08.00.00.20"
-> -PRUETH_FW_AM65X_SR2_VERSION = "02.02.09.06"
-> +PRUETH_FW_AM65X_SR2_VERSION = "02.02.09.07"
->  GOODIX_FW_VERSION = "1.0.0.0"
->  CADENCE_MHDP_FW_VERSION = "1.2.17"
-> +IMG_DEC_FW_VERSION = "1.0"
->  
-> -TI_LINUX_FW_SRCREV ?= "95232a584175a8ac872adf477b2dbb9ca68ba063"
-> +TI_LINUX_FW_SRCREV ?= "c96a734a059889e571dcf30c0638157c690a6e6e"
->  SRCREV = "${TI_LINUX_FW_SRCREV}"
->  
->  BRANCH ?= "ti-linux-firmware"
-> diff --git a/recipes-kernel/linux/kernel-rdepends.inc b/recipes-kernel/linux/kernel-rdepends.inc
-> index 5e5241c9..76b7a508 100644
-> --- a/recipes-kernel/linux/kernel-rdepends.inc
-> +++ b/recipes-kernel/linux/kernel-rdepends.inc
-> @@ -39,3 +39,6 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am64xx-evm = " prueth-fw-am65x-sr2"
->  
->  # Add run-time dependency for Cadence MHDP firmware to the rootfs
->  RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " cadence-mhdp-fw"
-> +
-> +# Add run-time dependency for Video Decoding firmware to the rootfs
-> +RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " vxd-dec-fw"
-> -- 
-> 2.17.1
+
+On 11/18/2021 10:38 AM, Denys Dmytriyenko wrote:
+> On Wed, Nov 17, 2021 at 11:46:11AM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
+>> This patch adds support for J721e HS SR1.1
+>> HS SR1.1 requires updated sysfw binary. Both SR1.0 and SR1.1 sysfw
+>> binary will be generated. sysfw.itb will point to SR1.1
+>>
+>> This patch requires J7 SR 1.1 support in K3 Image gen.
+>>
+>> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+>> ---
+>>   conf/machine/j7-hs-evm-k3r5-sr1-1.conf | 11 +++++++++++
+>>   conf/machine/j7-hs-evm.conf            |  8 ++++++++
+>>   conf/multiconfig/k3r5-sr1-1.conf       |  3 +++
+>>   recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |  1 +
+>>   4 files changed, 23 insertions(+)
+>>   create mode 100644 conf/machine/j7-hs-evm-k3r5-sr1-1.conf
+>>   create mode 100644 conf/multiconfig/k3r5-sr1-1.conf
+>>
+>> diff --git a/conf/machine/j7-hs-evm-k3r5-sr1-1.conf b/conf/machine/j7-hs-evm-k3r5-sr1-1.conf
+>> new file mode 100644
+>> index 00000000..e05b5c9d
+>> --- /dev/null
+>> +++ b/conf/machine/j7-hs-evm-k3r5-sr1-1.conf
+>> @@ -0,0 +1,11 @@
+>> +#@TYPE: Machine
+>> +#@NAME: J7 SR1.1 HS EVM (R5F)
+>> +#@DESCRIPTION: Machine configuration for the TI J7 SR1.1 HS EVM (R5F core)
+>> +
+>> +# Booting SR1.1 requires different SYSFW, the rest is handled at runtime
+>> +
+>> +require conf/machine/am65xx-hs-evm-k3r5.conf
+> 
+> Copy/paste error here ^ - it's j7 not am65xx
+
+Thanks for catching this. Will address in v2
+
+> 
+>> +SOC_FAMILY_append = ":k3r5-sr1-1"
+>> +
+>> +SYSFW_SOC = "j721e_sr1_1"
+>> +SYSFW_SYMLINK = "sysfw.itb"
+>> diff --git a/conf/machine/j7-hs-evm.conf b/conf/machine/j7-hs-evm.conf
+>> index 70e14754..ab0fa474 100644
+>> --- a/conf/machine/j7-hs-evm.conf
+>> +++ b/conf/machine/j7-hs-evm.conf
+>> @@ -19,4 +19,12 @@ SPL_BINARYNAME = "tispl.bin"
+>>   UBOOT_BINARY = "u-boot.img_HS"
+>>   IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
+>>   
+>> +BBMULTICONFIG += "k3r5-sr1-1"
+>> +
+>> +# Use default IMAGE_BOOT_FILES_LEGACY files
+>> +# Since default sysfw.itb on J7 is for SR1.1, add a version for SR1.0
+>> +IMAGE_BOOT_FILES += "sysfw-j7-hs-evm.itb"
+>> +do_image_wic[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+>> +do_image_tar[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+>> +
+>>   TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
+>> diff --git a/conf/multiconfig/k3r5-sr1-1.conf b/conf/multiconfig/k3r5-sr1-1.conf
+>> new file mode 100644
+>> index 00000000..2dc93b2f
+>> --- /dev/null
+>> +++ b/conf/multiconfig/k3r5-sr1-1.conf
+>> @@ -0,0 +1,3 @@
+>> +require k3r5.conf
+>> +
+>> +MACHINE_append = "-sr1-1"
+>> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+>> index 4f1dd145..6d48bf23 100644
+>> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+>> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+>> @@ -25,6 +25,7 @@ SYSFW_PREFIX = "ti-sci-firmware"
+>>   SYSFW_PREFIX_j7-evm-k3r5 = "ti-fs-firmware"
+>>   SYSFW_PREFIX_j7200-evm-k3r5 = "ti-fs-firmware"
+>>   SYSFW_PREFIX_j7-hs-evm-k3r5 = "ti-fs-firmware"
+>> +SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "ti-fs-firmware"
+>>   SYSFW_PREFIX_j7200-hs-evm-k3r5 = "ti-fs-firmware"
+>>   
+>>   SYSFW_SUFFIX ?= "unknown"
+>> -- 
+>> 2.17.1
+>>
+> 
+>>
+>> 
+>>
+> 
 > 
