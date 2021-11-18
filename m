@@ -1,123 +1,121 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.210.1637204210440341415
+ by mx.groups.io with SMTP id smtpd.web11.4109.1637253505230174729
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 17 Nov 2021 18:56:51 -0800
+ Thu, 18 Nov 2021 08:38:25 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 723E140C30;
-	Thu, 18 Nov 2021 02:56:49 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B3F0240C3A;
+	Thu, 18 Nov 2021 16:38:23 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nr5vqh62dYct; Thu, 18 Nov 2021 02:56:49 +0000 (UTC)
+	with ESMTP id qSw9TaN3U622; Thu, 18 Nov 2021 16:38:23 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4077640ACD;
-	Thu, 18 Nov 2021 02:56:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8371B40BA8;
+	Thu, 18 Nov 2021 16:38:20 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 00C241746CF; Wed, 17 Nov 2021 21:56:43 -0500 (EST)
-Date: Wed, 17 Nov 2021 21:56:43 -0500
+	id DDB831746CE; Thu, 18 Nov 2021 11:38:19 -0500 (EST)
+Date: Thu, 18 Nov 2021 11:38:19 -0500
 From: "Denys Dmytriyenko" <denis@denix.org>
-To: praneeth@ti.com
-Cc: Yogesh Siraswar <yogeshs@ti.com>,
-	Sidraya Jayagond <sidraya.bj@pathpartnertech.com>,
+To: yogeshs@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>,
 	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org, prashanth.ka@pathpartnertech.com
-Subject: Re: [dunfell/master PATCHv2] vxd-dec-fw: Add the recipe for vxd-dec-fw
-Message-ID: <20211118025643.GA18191@denix.org>
-References: <20211118003005.25238-1-praneeth@ti.com>
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][dunfell][PATCH] j721e-sr1_1: Add j721e sr1.1 HS support
+Message-ID: <20211118163819.GB18191@denix.org>
+References: <20211117114611.47729-1-yogeshs@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20211118003005.25238-1-praneeth@ti.com>
+In-Reply-To: <20211117114611.47729-1-yogeshs@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Nov 17, 2021 at 06:30:05PM -0600, praneeth@ti.com wrote:
-> From: Praneeth Bajjuri <praneeth@ti.com>
+On Wed, Nov 17, 2021 at 11:46:11AM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
+> This patch adds support for J721e HS SR1.1
+> HS SR1.1 requires updated sysfw binary. Both SR1.0 and SR1.1 sysfw
+> binary will be generated. sysfw.itb will point to SR1.1
 > 
-> Add the firmware packaging recipe for the video decoder
-> for j721e.
+> This patch requires J7 SR 1.1 support in K3 Image gen.
 > 
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
 > ---
-> Changes in v2: Update subject dunfell/master
+>  conf/machine/j7-hs-evm-k3r5-sr1-1.conf | 11 +++++++++++
+>  conf/machine/j7-hs-evm.conf            |  8 ++++++++
+>  conf/multiconfig/k3r5-sr1-1.conf       |  3 +++
+>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |  1 +
+>  4 files changed, 23 insertions(+)
+>  create mode 100644 conf/machine/j7-hs-evm-k3r5-sr1-1.conf
+>  create mode 100644 conf/multiconfig/k3r5-sr1-1.conf
 > 
->  .../ti-img-encode-decode/vxd-dec-fw_git.bb    | 24 +++++++++++++++++++
->  recipes-bsp/ti-linux-fw/ti-linux-fw.inc       |  1 +
->  2 files changed, 25 insertions(+)
->  create mode 100644 recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> 
-> diff --git a/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb b/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
+> diff --git a/conf/machine/j7-hs-evm-k3r5-sr1-1.conf b/conf/machine/j7-hs-evm-k3r5-sr1-1.conf
 > new file mode 100644
-> index 00000000..55673b53
+> index 00000000..e05b5c9d
 > --- /dev/null
-> +++ b/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "Video Decoding Firmware Packaging recipe"
+> +++ b/conf/machine/j7-hs-evm-k3r5-sr1-1.conf
+> @@ -0,0 +1,11 @@
+> +#@TYPE: Machine
+> +#@NAME: J7 SR1.1 HS EVM (R5F)
+> +#@DESCRIPTION: Machine configuration for the TI J7 SR1.1 HS EVM (R5F core)
+> +
+> +# Booting SR1.1 requires different SYSFW, the rest is handled at runtime
+> +
+> +require conf/machine/am65xx-hs-evm-k3r5.conf
 
-Well, the SUMMARY and the DESCRIPTION are for the resulting ipk/deb/rpm 
-package, not the recipe.
-
-E.g. on Ubuntu - the last 2 lines are the SUMMARY and DESCRIPTION accordingly:
-
-$ dpkg -s linux-firmware
-Package: linux-firmware
-Status: install ok installed
-Priority: optional
-Section: misc
-Installed-Size: 233791
-Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
-Architecture: all
-Multi-Arch: foreign
-Version: 1.157.23
-Replaces: atmel-firmware, linux-firmware-snapdragon (<= 1.2-0ubuntu1), linux-restricted-common
-Provides: atmel-firmware
-Breaks: linux-firmware-snapdragon (<= 1.2-0ubuntu1)
-Conflicts: atmel-firmware
-Description: Firmware for Linux kernel drivers
- This package provides firmware used by Linux kernel drivers.
+Copy/paste error here ^ - it's j7 not am65xx
 
 
-
-> +LICENSE = "TI-IMG"
-> +LIC_FILES_CHKSUM = "file://LICENSE.ti-img;md5=84ca7278930db001870686ad997d6bb1"
+> +SOC_FAMILY_append = ":k3r5-sr1-1"
 > +
-> +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +
-> +PV = "${IMG_DEC_FW_VERSION}"
-> +PR = "${INC_PR}.0"
-> +
-> +CLEANBROKEN = "1"
-> +
-> +COMPATIBLE_MACHINE = "j7"
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +S = "${WORKDIR}/git"
-> +TARGET = "pvdec_full_bin.fw"
-> +
-> +do_install() {
-> +        install -d ${D}${base_libdir}/firmware/ti-img
-> +        install -m 0644 ${S}/ti-img/${TARGET} ${D}${base_libdir}/firmware/ti-img/${TARGET}
-> +}
-> +
-> +FILES_${PN} = "${base_libdir}/firmware"
-> diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> index c59120b8..ebf133be 100644
-> --- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> @@ -16,6 +16,7 @@ PRUETH_FW_AM65X_VERSION = "08.00.00.20"
->  PRUETH_FW_AM65X_SR2_VERSION = "02.02.09.06"
->  GOODIX_FW_VERSION = "1.0.0.0"
->  CADENCE_MHDP_FW_VERSION = "1.2.17"
-> +IMG_DEC_FW_VERSION = "1.0"
+> +SYSFW_SOC = "j721e_sr1_1"
+> +SYSFW_SYMLINK = "sysfw.itb"
+> diff --git a/conf/machine/j7-hs-evm.conf b/conf/machine/j7-hs-evm.conf
+> index 70e14754..ab0fa474 100644
+> --- a/conf/machine/j7-hs-evm.conf
+> +++ b/conf/machine/j7-hs-evm.conf
+> @@ -19,4 +19,12 @@ SPL_BINARYNAME = "tispl.bin"
+>  UBOOT_BINARY = "u-boot.img_HS"
+>  IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
 >  
->  TI_LINUX_FW_SRCREV ?= "95232a584175a8ac872adf477b2dbb9ca68ba063"
->  SRCREV = "${TI_LINUX_FW_SRCREV}"
+> +BBMULTICONFIG += "k3r5-sr1-1"
+> +
+> +# Use default IMAGE_BOOT_FILES_LEGACY files
+> +# Since default sysfw.itb on J7 is for SR1.1, add a version for SR1.0
+> +IMAGE_BOOT_FILES += "sysfw-j7-hs-evm.itb"
+> +do_image_wic[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+> +do_image_tar[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+> +
+>  TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
+> diff --git a/conf/multiconfig/k3r5-sr1-1.conf b/conf/multiconfig/k3r5-sr1-1.conf
+> new file mode 100644
+> index 00000000..2dc93b2f
+> --- /dev/null
+> +++ b/conf/multiconfig/k3r5-sr1-1.conf
+> @@ -0,0 +1,3 @@
+> +require k3r5.conf
+> +
+> +MACHINE_append = "-sr1-1"
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> index 4f1dd145..6d48bf23 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> @@ -25,6 +25,7 @@ SYSFW_PREFIX = "ti-sci-firmware"
+>  SYSFW_PREFIX_j7-evm-k3r5 = "ti-fs-firmware"
+>  SYSFW_PREFIX_j7200-evm-k3r5 = "ti-fs-firmware"
+>  SYSFW_PREFIX_j7-hs-evm-k3r5 = "ti-fs-firmware"
+> +SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "ti-fs-firmware"
+>  SYSFW_PREFIX_j7200-hs-evm-k3r5 = "ti-fs-firmware"
+>  
+>  SYSFW_SUFFIX ?= "unknown"
 > -- 
 > 2.17.1
 > 
+
+> 
+> 
+> 
+
 
 -- 
 Regards,
