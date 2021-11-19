@@ -1,79 +1,88 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.3116.1637288726112505779
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web09.3250.1637288994117550601
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Nov 2021 18:25:26 -0800
+ Thu, 18 Nov 2021 18:29:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rtt6uK0r;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=HEXEtnjf;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: yogeshs@ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2POte025319;
-	Thu, 18 Nov 2021 20:25:24 -0600
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2TrZX037235;
+	Thu, 18 Nov 2021 20:29:53 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1637288724;
-	bh=cnk6UcMI7NV/HbkN6kOWmmmyrH09yWgPQB/ZiJWIZrU=;
+	s=ti-com-17Q1; t=1637288993;
+	bh=LoHbb1uooPCoqlqohwmQxqe8CYCcn6oBuB/5S4ADSP4=;
 	h=From:To:Subject:Date;
-	b=rtt6uK0rxu0PORE6ePKiUiQmDVxtSytAtKwaF+wIWlMOG6yRrPFLDusfGn+GyDqGH
-	 6s+7G8VV+RbBr5f19H0R04e7j17GGAS8V/I4zlPNJFT4UjjezE5u92uZmp0TYvqg4y
-	 tJsnUVSoe4mAhw9OX59qnEJ0FQ2QC0jJxZmoX1Jc=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AJ2POlY031711
+	b=HEXEtnjfzVmFcp6XxBuoVX6cjahqqa23AeGZ5Da2yEpOxFsFUG702JpkmGfWxrGNO
+	 igpNRwmkB1Q6JmE9k3V0XfvaoZdXive1lKsh3KmlTvfQH0NXx9OMgABhpJu+0rM9zx
+	 +D6xn3U4IcGmSFA3NDI0XwLp307o/eebOhbCrpNs=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AJ2TrF5037525
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 18 Nov 2021 20:25:24 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 18 Nov 2021 20:29:53 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 18
- Nov 2021 20:25:24 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2021 20:29:52 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 18 Nov 2021 20:25:24 -0600
-Received: from chasm (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2PO5r114231;
-	Thu, 18 Nov 2021 20:25:24 -0600
-Received: from reatmon by chasm with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1mntae-0005D2-Ad; Thu, 18 Nov 2021 20:25:24 -0600
-From: "Ryan Eatmon" <reatmon@ti.com>
-To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko <denys@konsulko.com>,
+ Frontend Transport; Thu, 18 Nov 2021 20:29:52 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2TqZH109060;
+	Thu, 18 Nov 2021 20:29:52 -0600
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH v2 4/4] ti-linux-fw: Bump ti linux firmware for 08.01.00.005
-Date: Thu, 18 Nov 2021 20:25:24 -0600
-Message-ID: <20211119022524.19985-1-reatmon@ti.com>
+Subject: [meta-ti][dunfell][PATCH] wic: revert grub-efi patch
+Date: Fri, 19 Nov 2021 02:29:52 +0000
+Message-ID: <20211119022952.6588-1-yogeshs@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-Bump ti-linux-fw version for 08.01.00.005 release
+Revert "conf/machine: k3: Enable grub-efi by default in wic images"
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+This reverts commit d0b09833b44fa23cce86fd99dd8ca6631c61c476.
 ---
- recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/include/k3.inc | 6 +-----
+ wic/sdimage-2part-efi.wks   | 7 -------
+ 2 files changed, 1 insertion(+), 12 deletions(-)
+ delete mode 100644 wic/sdimage-2part-efi.wks
 
-diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index d224f353..76a376a3 100644
---- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -7,7 +7,7 @@ PV = "2021.09a"
- INC_PR = "r1"
+diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
+index 166c0923..e0970698 100644
+--- a/conf/machine/include/k3.inc
++++ b/conf/machine/include/k3.inc
+@@ -44,12 +44,8 @@ IMAGE_BOOT_FILES_LEGACY = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysf
+ IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
  
- # Firmware versions
--CORESDK_RTOS_VERSION = "08.01.00.02"
-+CORESDK_RTOS_VERSION = "08.01.00.05"
- SERDES_FW_VERSION = "3.3.0.2c"
- NETCP_SA_FW_VERSION = "1.0.0"
- NETCP_PA_FW_VERSION = "3.0.2.3"
-@@ -18,7 +18,7 @@ GOODIX_FW_VERSION = "1.0.0.0"
- CADENCE_MHDP_FW_VERSION = "1.2.17"
- IMG_DEC_FW_VERSION = "1.0"
+ IMAGE_BOOT_FILES ?= "${IMAGE_BOOT_FILES_LEGACY}"
+-IMAGE_EFI_BOOT_FILES ?= "${IMAGE_BOOT_FILES}"
  
--TI_LINUX_FW_SRCREV ?= "c96a734a059889e571dcf30c0638157c690a6e6e"
-+TI_LINUX_FW_SRCREV ?= "fb484c5e54f2e31cf0a338d2927a06a2870bcc2c"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
+-EFI_PROVIDER ?= "grub-efi"
+-MACHINE_FEATURES += "efi"
+-
+-WKS_FILE ?= "sdimage-2part-efi.wks"
++WKS_FILE ?= "sdimage-2part.wks"
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
+ do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
+ do_image_tar[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
+diff --git a/wic/sdimage-2part-efi.wks b/wic/sdimage-2part-efi.wks
+deleted file mode 100644
+index ffb8d24b..00000000
+--- a/wic/sdimage-2part-efi.wks
++++ /dev/null
+@@ -1,7 +0,0 @@
+-# short-description: Create SD card image with 2 partitions and EFI support
+-# long-description: Creates a partitioned SD card image for TI platforms that
+-# supports EFI.  Boot files are located in the first vfat partition with extra
+-# reserved space.  We cannot use a GPT here.
+-bootloader --append="rootfstype=ext4 ro"
+-part /boot --source bootimg-efi --sourceparams="loader=grub-efi" --fstype=vfat --label boot --active --align 1024 --use-uuid --fixed-size 128M
+-part / --source rootfs --fstype=ext4 --label root --align 1024 --use-uuid
 -- 
 2.17.1
 
