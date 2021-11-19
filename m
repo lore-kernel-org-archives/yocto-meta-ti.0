@@ -1,72 +1,70 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.3111.1637288705976533031
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web09.3212.1637288712637986103
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Nov 2021 18:25:06 -0800
+ Thu, 18 Nov 2021 18:25:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=hI46oxtm;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2P5l9035800;
-	Thu, 18 Nov 2021 20:25:05 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xbvy1XCb;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2PBHa048016;
+	Thu, 18 Nov 2021 20:25:11 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1637288705;
-	bh=3JwKY9ubcBilRVDmOvNAwlIQmn1mayrKgIQJ4B87KsI=;
+	s=ti-com-17Q1; t=1637288711;
+	bh=YHDCRkQoMp4cARxwSKmR3eNeQJMP29sQoU5fd4ZFB8c=;
 	h=From:To:Subject:Date;
-	b=hI46oxtmIKF8ItfGNFyp9qz3oLXbDstrTMufc070GyKyAS2XQawyJ4FQphsDgKxZI
-	 R6ApSp3TesMjTgPnVydLRZmKSN0zbqf/qfbe02zljY3Zoc/NuIHpTDaR0uvgP0s5ym
-	 v4rgGjXAEjuXN8n7fEzJxUE0KVu9loKDWAN/1XCM=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AJ2P4Va107437
+	b=xbvy1XCb+TL6BNetKbUhjpclBQo6igD42aqUSX/zPCJA8DqneRQKb3Y3NXl3pgqZ1
+	 ClqMLUbURuIu6dqHGvlFR/9nv4yV6f6iUERssjXE9TFE25cg2uZOj2MN4+qQuSa0kX
+	 oNb3A+q3JRmAnzTpcKG1JuFsfmqRlXuJu4v0ZKMo=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AJ2PBkJ031449
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 18 Nov 2021 20:25:05 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 18 Nov 2021 20:25:11 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 18
- Nov 2021 20:25:04 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2021 20:25:10 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 18 Nov 2021 20:25:04 -0600
+ Frontend Transport; Thu, 18 Nov 2021 20:25:10 -0600
 Received: from chasm (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2P4ad103927;
-	Thu, 18 Nov 2021 20:25:04 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2PAD5105382;
+	Thu, 18 Nov 2021 20:25:10 -0600
 Received: from reatmon by chasm with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1mntaK-0005AC-H7; Thu, 18 Nov 2021 20:25:04 -0600
+	id 1mntaQ-0005B5-JC; Thu, 18 Nov 2021 20:25:10 -0600
 From: "Ryan Eatmon" <reatmon@ti.com>
 To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH v2 1/4] u-boot-ti-staging: Bump u-boot version for 08.01.00.005
-Date: Thu, 18 Nov 2021 20:25:04 -0600
-Message-ID: <20211119022504.19808-1-reatmon@ti.com>
+Subject: [meta-ti][dunfell][PATCH v2 2/4] linux-ti-staging: Bump linux version for 08.01.00.005
+Date: Thu, 18 Nov 2021 20:25:10 -0600
+Message-ID: <20211119022510.19864-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-u-boot bump for 08.01.00.005 release
+Bump linux for 08.01.00.005 release
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index b5aa3fb7..f65d4fb0 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -2,8 +2,8 @@ require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 9fb74af6..545ea569 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+ BRANCH = "ti-linux-5.10.y"
  
--PR = "r14"
-+PR = "r15"
+-SRCREV = "eb55b499b1865222e85acad2c665baadbaea3072"
++SRCREV = "dfe78b39dc37d37666f04c788abcf7d72cca3e91"
+ PV = "5.10.65+git${SRCPV}"
  
- BRANCH = "ti-u-boot-2021.01"
- 
--SRCREV = "6c804a1af10bda322c86ce1c5dbb29f0fbb56c79"
-+SRCREV = "d79399bcd770191618bfeb3840506a286a6498df"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
 2.17.1
 
