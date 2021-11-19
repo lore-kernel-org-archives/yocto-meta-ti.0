@@ -1,106 +1,86 @@
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
- by mx.groups.io with SMTP id smtpd.web12.14376.1637352454248714900
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
+ by mx.groups.io with SMTP id smtpd.web12.14473.1637352951770185891
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 19 Nov 2021 12:07:34 -0800
+ Fri, 19 Nov 2021 12:15:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=XhY50cWM;
- spf=pass (domain: konsulko.com, ip: 209.85.222.178, mailfrom: trini@konsulko.com)
-Received: by mail-qk1-f178.google.com with SMTP id i9so11381663qki.3
-        for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 12:07:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ar6nKNQ4;
+ spf=pass (domain: gmail.com, ip: 209.85.160.170, mailfrom: vivien.didelot@gmail.com)
+Received: by mail-qt1-f170.google.com with SMTP id n15so10670614qta.0
+        for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 12:15:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=PjG/RaKU7FPkeHUCSsVNpfp4qZMB4Mc2ihkjekgLKS4=;
-        b=XhY50cWMGaOAvFsp98GhEbnyZAazfXMfHSnHkoxudX40hHpNPfoETdYNQAGQvxmPdq
-         4EAsEQuS59H44zRSaLrdqGqvvWOr82xh8CM6rwEaRLDj/r+tAodXew2Zp32zZ+DCNJxL
-         Fb/nOUZHl1Qmq9Gazfx/CXB+CxeAG0dmD9tZ8=
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NcAkA0WdquNyYPjOkw/8Gvz/OTXyLgSc5EaX4AWIlww=;
+        b=Ar6nKNQ4QY0mJq6TlvzuMf1Mck4OXEQBblihMZYeQgVCSszaMqfITjyXPT3O1EHMQ7
+         8OVe5aHYiwffFtZ/5M4Uc0nxg5/4TtOTrwtHmbeWpsZ/UTJpbrjtVhesIYcfEU9mTq54
+         3nYDNc4Zj7sBbzpe8xfRT7EMIenafOQuqbmuIa5tiWue+ctz/j2F18uyPPdnRnDGw7pm
+         HvaLltY2TXxhQrEMrw913nLePeDqbubQYaO1EC8R5D3v4BpE045lUPB2uRetnNY2J6r2
+         iodpvLX4OBmlZbIjcU85bQtU5Zs2IvesLIrjWmN2j8wq+lPv0F9ILm+WRSHSs4wkVoHk
+         +s6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=PjG/RaKU7FPkeHUCSsVNpfp4qZMB4Mc2ihkjekgLKS4=;
-        b=5u1Q+nthQEwl6jKy7arDeuT7izjF9TB1HoxFKUo+U5ePNgjpoYlTsYK1WA5xSD9B+J
-         QAhrtyKd/slbuPR4JhRC1YKcykUt7dLv9iDT0Uxr/x4FukDYyH2Mg8VvZn2WQv0ZjoZI
-         uCZ7qTPGKKwcPna5PgJey31IMAbeQ1utc5gXr1G+C0OloYZDHhIKNzleMKn99iADTPM5
-         4V8HoxArRSKlpCjI+YyD9JKHgC1+MKyPOBuEd3zy05EcJkpXfeYyPMV+UHhQBQZtWojX
-         jEWPyS5AuA9WHyySrREeTjGKCQlZGLbQaemvGbOtB2+MFpLDWLcqK+KeM0WU2GleAoaT
-         w6hg==
-X-Gm-Message-State: AOAM530VsO8m5+r+9wzM1tkKAh1rJJjSWQym8SIrvbVrR//Ub0BCsGbD
-	tUk1Nt4ioJgNzHi2APLcBjD4bA==
-X-Google-Smtp-Source: ABdhPJwA9kX5MlLJkLlinDLe84msQiNU0fm9nSzGzUgSMZYQM2pduvvuodnlCMwq7iZbDM6b501cUw==
-X-Received: by 2002:a37:a9c9:: with SMTP id s192mr31575129qke.311.1637352453064;
-        Fri, 19 Nov 2021 12:07:33 -0800 (PST)
-Return-Path: <trini@konsulko.com>
-Received: from bill-the-cat (2603-6081-7b01-cbda-298c-b356-0e05-d708.res6.spectrum.com. [2603:6081:7b01:cbda:298c:b356:e05:d708])
-        by smtp.gmail.com with ESMTPSA id a15sm449764qtb.5.2021.11.19.12.07.31
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NcAkA0WdquNyYPjOkw/8Gvz/OTXyLgSc5EaX4AWIlww=;
+        b=3xt8Vyn865fa673LX3x7rv8nbDGlrc6EKbCNDtA79kk5kvvdoMRpO1nw/DjIOnmb4l
+         fyPmkKQNgTiyMrtigNG3W1eHgInP8vcCuz5YzSVDP9kWKagxgLQR51b2GoHI9L4jti67
+         Di9gFgR4VTkEhaFTbehX8W4P+koBBlT6nbRMRiKJ6GFwDfHMNyggjzFSFaUQAuKvwr3p
+         F4rnTvbuRl8beaRPllDFbxQUBFKHn8ZKxBrYz1WB3t7oJAFQ0MGpn1MHDC8O9sRmsIE8
+         BHT5XfdjiCf8qLA8Lp69VGg+lIRDcn60TamAhZLjfykYbnDMlwyEYJ+ECqzlyjrjReAX
+         VZIQ==
+X-Gm-Message-State: AOAM531D1Vxa/IuUdLNQWP5rrkzQj3Ojco+DxXB1DnalR4VqlwVi3BWr
+	JM1PmZ8oRbkVG964i/HQiKxTGy2wuc8=
+X-Google-Smtp-Source: ABdhPJzyQuX5jhauDRXYoyORR2sZsJZTsZqPmKyB1m+UvMsEB7iDzJWRp+uguN7LAkNwR4wY5z6l7A==
+X-Received: by 2002:a05:622a:20d:: with SMTP id b13mr9297724qtx.368.1637352950719;
+        Fri, 19 Nov 2021 12:15:50 -0800 (PST)
+Return-Path: <vivien.didelot@gmail.com>
+Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-121.dsl.bell.ca. [70.53.240.121])
+        by smtp.gmail.com with ESMTPSA id v5sm394537qtc.60.2021.11.19.12.15.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Nov 2021 12:07:32 -0800 (PST)
-Date: Fri, 19 Nov 2021 15:07:30 -0500
-From: "Tom Rini" <trini@konsulko.com>
-To: "Siraswar, Yogesh" <yogeshs@ti.com>
-Cc: Denys Dmytriyenko <denis@denix.org>, Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH] wic: revert grub-efi patch
-Message-ID: <20211119200730.GJ24579@bill-the-cat>
-References: <20211119022952.6588-1-yogeshs@ti.com>
- <20211119024657.GK18191@denix.org>
- <20211119163446.GH24579@bill-the-cat>
- <c1d39f6a-118d-2d85-33d6-53f892d0a353@ti.com>
+        Fri, 19 Nov 2021 12:15:50 -0800 (PST)
+From: "Vivien Didelot" <vivien.didelot@gmail.com>
+X-Google-Original-From: Vivien Didelot <vdidelot@pbsc.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+	Praneeth Bajjuri <praneeth@ti.com>,
+	Vivien Didelot <vdidelot@pbsc.com>
+Subject: [PATCH] ti33x: remove the screen machine feature
+Date: Fri, 19 Nov 2021 15:15:33 -0500
+Message-Id: <20211119201533.2540388-1-vdidelot@pbsc.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-In-Reply-To: <c1d39f6a-118d-2d85-33d6-53f892d0a353@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Groupsio-MsgNum: 14207
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="paUsNmnSj6sSerQY"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---paUsNmnSj6sSerQY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Some distros or image recipes may rely on the presence of the "screen"
+machine feature to install graphical front-end applications.
 
-On Fri, Nov 19, 2021 at 12:42:52PM -0600, Siraswar, Yogesh wrote:
->=20
->=20
-> On 11/19/2021 10:34 AM, Tom Rini wrote:
-> > On Thu, Nov 18, 2021 at 09:46:57PM -0500, Denys Dmytriyenko wrote:
-> > > +Tom
-> > >=20
-> > > On Fri, Nov 19, 2021 at 02:29:52AM +0000, Yogesh Siraswar via lists.y=
-octoproject.org wrote:
-> > > > Revert "conf/machine: k3: Enable grub-efi by default in wic images"
-> > > >=20
-> > > > This reverts commit d0b09833b44fa23cce86fd99dd8ca6631c61c476.
-> > >=20
-> > > It is customary to provide a reason for revert.
->=20
-> This is causing boot issue with WIC images. Didn't get much time debug
+The ti33x SoC has an integrated GPU but does not have a screen per-se,
+thus having this feature in the SoC configuration may lead to unwanted
+packages being built.
 
-Well, you need to go and do that.  WIC images were working here when I
-posted the changes, for EFI.  I believe supporting anything that's not
-"run distro_bootcmd" is also not intended to be supported?
+Comment the 'screen' feature and remove it from MACHINE_FEATURES.
 
---=20
-Tom
+Signed-off-by: Vivien Didelot <vdidelot@pbsc.com>
+---
+ conf/machine/include/ti33x.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---paUsNmnSj6sSerQY
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 197cac19..c499928c 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -61,8 +61,8 @@ UBI_VOLNAME = "rootfs"
+ 
+ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+ 
+-# List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu"
++# List common SoC features, may need to add "screen touchscreen" for specific machines
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet gpu"
+ 
+ # Set the list of device targets for ti-pdk class recipes
+ TI_PDK_LIMIT_SOCS = "am335x"
+-- 
+2.33.1
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmGYA/8ACgkQFHw5/5Y0
-tyyKYAwAmYplZqyodJNT14oo8SUuuI7Dw2EyqlaTrrs2RG2d8ep3oEJoGFlgDKku
-ZhNLBOTK3601Dk2244tSaQKyLILEjWV2uEzQwRBp4mgE+mmvWB3t2wUeG5K9V7Hl
-6F7ndVkC9A2ZY/JwQWGIxjCoj/pQpqYYQZuTrjrYFfkXW/fXfae6fvpngUmXi1wX
-8MGWFVJ5BUS11/5MPH1FGytdwq2jx8xdyAzE9px6Q+ninDvdL5D3tFPJlJbOHDlh
-DJfFWJdk8O8ejuJUswA/u260g6bN7Opi5qPqpD++Drk5DkEiC6gpLy9U+UoTC6WS
-8OilJneq/RPSOQ0O70QnjnOfWcrXRzCAmpYIPqzRaMuVMORGZjFW8tmItT335ejC
-YAfmt0woyTkhb4M8mqGIUldFfrB/6DmrZ2P57Grd+BS1DK/cLhdSzH3I06lUci4j
-XT6QvTRerf0u8Ach+k5XuRsnbElJKn/aMipEFEOELDJzFucp/SZH/oo+SFhLRLPI
-I1Zz3yus
-=gPcX
------END PGP SIGNATURE-----
-
---paUsNmnSj6sSerQY--
