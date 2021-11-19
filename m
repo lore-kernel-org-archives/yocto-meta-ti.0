@@ -1,129 +1,64 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.1106.1637278121592505980
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web12.3098.1637288700749814061
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Nov 2021 15:28:42 -0800
+ Thu, 18 Nov 2021 18:25:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4193A40C3A;
-	Thu, 18 Nov 2021 23:28:40 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0FgfoNUmC4CG; Thu, 18 Nov 2021 23:28:40 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1E20540ACD;
-	Thu, 18 Nov 2021 23:28:38 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id D16041746D3; Thu, 18 Nov 2021 18:28:37 -0500 (EST)
-Date: Thu, 18 Nov 2021 18:28:37 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: yogeshs@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH v2] j721e-sr1_1: Add j721e sr1.1 HS support
-Message-ID: <20211118232837.GJ18191@denix.org>
-References: <20211118201123.4908-1-yogeshs@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GPN4ZO3q;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2OxdJ025217;
+	Thu, 18 Nov 2021 20:24:59 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1637288699;
+	bh=rJvuXHhs4NvGhT1GTklNQ23bZfDajiMkULGPdmzt9Hk=;
+	h=From:To:Subject:Date;
+	b=GPN4ZO3qtdjfDM5fGapwldqR7lptehwkuTygtEjXLFJ4nwgbqNhxS0+6120EFv0ad
+	 ijoeyp96ATOQevy/HLe/PiINiEtzA+6Gd9SwkcukpioSNktp4G+APzAtIF9rDWhYpn
+	 WpFP90FGBKoWavqLOGH9oqqtje0LcdNEaCz/1v3s=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AJ2Oxqx106890
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 18 Nov 2021 20:24:59 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 18
+ Nov 2021 20:24:59 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Thu, 18 Nov 2021 20:24:59 -0600
+Received: from chasm (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AJ2Oxoj104144;
+	Thu, 18 Nov 2021 20:24:59 -0600
+Received: from reatmon by chasm with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1mntaE-00059F-Io; Thu, 18 Nov 2021 20:24:58 -0600
+From: "Ryan Eatmon" <reatmon@ti.com>
+To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH v2 0/4] Bump versions for 08.01.00.005
+Date: Thu, 18 Nov 2021 20:24:58 -0600
+Message-ID: <20211119022458.19749-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20211118201123.4908-1-yogeshs@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Thu, Nov 18, 2021 at 08:11:23PM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
-> This patch adds support for J721e HS SR1.1
-> HS SR1.1 requires updated sysfw binary. Both SR1.0 and SR1.1 sysfw
-> binary will be generated. sysfw.itb will point to SR1.1
-> 
-> This patch requires J7 SR 1.1 support in K3 Image gen.
+Bump versions for 08.01.00.005
 
-I don't see SRCREV update for K3 image gen, so I assume it's already in?
+Ryan Eatmon (4):
+  u-boot-ti-staging: Bump u-boot version for 08.01.00.005
+  linux-ti-staging: Bump linux version for 08.01.00.005
+  linux-ti-staging-rt: Bump linux rt version for 08.01.00.005
+  ti-linux-fw: Bump ti linux firmware for 08.01.00.005
 
-
-> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-
-Otherwise:
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
-> ---
->  Changes from v1:
->  1) Fixed the typo 
->  
->  conf/machine/j7-hs-evm-k3r5-sr1-1.conf | 11 +++++++++++
->  conf/machine/j7-hs-evm.conf            |  8 ++++++++
->  conf/multiconfig/k3r5-sr1-1.conf       |  3 +++
->  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb |  1 +
->  4 files changed, 23 insertions(+)
->  create mode 100644 conf/machine/j7-hs-evm-k3r5-sr1-1.conf
->  create mode 100644 conf/multiconfig/k3r5-sr1-1.conf
-> 
-> diff --git a/conf/machine/j7-hs-evm-k3r5-sr1-1.conf b/conf/machine/j7-hs-evm-k3r5-sr1-1.conf
-> new file mode 100644
-> index 00000000..7d1f4afc
-> --- /dev/null
-> +++ b/conf/machine/j7-hs-evm-k3r5-sr1-1.conf
-> @@ -0,0 +1,11 @@
-> +#@TYPE: Machine
-> +#@NAME: J7 SR1.1 HS EVM (R5F)
-> +#@DESCRIPTION: Machine configuration for the TI J7 SR1.1 HS EVM (R5F core)
-> +
-> +# Booting SR1.1 requires different SYSFW, the rest is handled at runtime
-> +
-> +require conf/machine/j7-hs-evm-k3r5.conf
-> +SOC_FAMILY_append = ":k3r5-sr1-1"
-> +
-> +SYSFW_SOC = "j721e_sr1_1"
-> +SYSFW_SYMLINK = "sysfw.itb"
-> diff --git a/conf/machine/j7-hs-evm.conf b/conf/machine/j7-hs-evm.conf
-> index 70e14754..ab0fa474 100644
-> --- a/conf/machine/j7-hs-evm.conf
-> +++ b/conf/machine/j7-hs-evm.conf
-> @@ -19,4 +19,12 @@ SPL_BINARYNAME = "tispl.bin"
->  UBOOT_BINARY = "u-boot.img_HS"
->  IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
->  
-> +BBMULTICONFIG += "k3r5-sr1-1"
-> +
-> +# Use default IMAGE_BOOT_FILES_LEGACY files
-> +# Since default sysfw.itb on J7 is for SR1.1, add a version for SR1.0
-> +IMAGE_BOOT_FILES += "sysfw-j7-hs-evm.itb"
-> +do_image_wic[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
-> +do_image_tar[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
-> +
->  TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
-> diff --git a/conf/multiconfig/k3r5-sr1-1.conf b/conf/multiconfig/k3r5-sr1-1.conf
-> new file mode 100644
-> index 00000000..2dc93b2f
-> --- /dev/null
-> +++ b/conf/multiconfig/k3r5-sr1-1.conf
-> @@ -0,0 +1,3 @@
-> +require k3r5.conf
-> +
-> +MACHINE_append = "-sr1-1"
-> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> index 4f1dd145..6d48bf23 100644
-> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> @@ -25,6 +25,7 @@ SYSFW_PREFIX = "ti-sci-firmware"
->  SYSFW_PREFIX_j7-evm-k3r5 = "ti-fs-firmware"
->  SYSFW_PREFIX_j7200-evm-k3r5 = "ti-fs-firmware"
->  SYSFW_PREFIX_j7-hs-evm-k3r5 = "ti-fs-firmware"
-> +SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "ti-fs-firmware"
->  SYSFW_PREFIX_j7200-hs-evm-k3r5 = "ti-fs-firmware"
->  
->  SYSFW_SUFFIX ?= "unknown"
-> -- 
-> 2.17.1
-> 
-
-> 
-> 
-> 
-
+ recipes-bsp/ti-linux-fw/ti-linux-fw.inc          | 4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb  | 4 ++--
+ recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.17.1
+
