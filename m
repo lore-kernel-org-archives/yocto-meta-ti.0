@@ -1,70 +1,68 @@
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
- by mx.groups.io with SMTP id smtpd.web09.11478.1637339689803081628
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web12.12893.1637345933436595790
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 19 Nov 2021 08:34:50 -0800
+ Fri, 19 Nov 2021 10:18:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=n/UfvmLM;
- spf=pass (domain: konsulko.com, ip: 209.85.160.180, mailfrom: trini@konsulko.com)
-Received: by mail-qt1-f180.google.com with SMTP id f20so9993399qtb.4
-        for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 08:34:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=TVfUtwUjzYAwqDVk7MWlhEMnBQBQgfeyBduAx8WjtF8=;
-        b=n/UfvmLMz5WmgZEY31fAMIjCQ4bY2l47LT+LG/MWJO1vLyJ/MgrLdKy2h9vpLPfiXu
-         Rn95faNJvKLGT3gw+o+TC5v4DYS6YAyK1W3VrnJ0zHdkrgwHa05t6jXQ7I/CEzypqlRQ
-         sLU31ut6eiNSoh/SbPTN+N+Em9VVhNp8ELlgY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=TVfUtwUjzYAwqDVk7MWlhEMnBQBQgfeyBduAx8WjtF8=;
-        b=b66TUEMQnXGd9GR4ShJuConfwW/1JX0S6CJeSDTklnwVD9GFd+GBTAYsPnArrqCzlz
-         zsAE6Q34dW66s6ThC7cjf1N4RM8hFf71VGyFfUiv32SXLFKE9OYZRV5trUrA0gPSLPv/
-         /9phPD3efNgvilo1GTL8QJZnEvyYKEHgMBHqrKtYEnu3nwk0EvKX6vJDS5TGIjelwJq2
-         IMyrm2IdZUzcTVtx/BuZqqqNfEMF/4ot7LVWjv9sUZGF67o4f1DvAcbVT1XDcJqOQyzX
-         pOjyBn9l/7wHML5Fos9R1rnLR3YWH6RSAKWrGdzxj0gFCKs5VBZjH7gBy72lPya5okvS
-         t1Vw==
-X-Gm-Message-State: AOAM533QDH7kFyZ6IATgaKhAJ1Q6lKqN5TolA/3uJjM0KYAJjCOXQDE5
-	MbuS/7Unxf4UiFfZVkiFOgGmaA==
-X-Google-Smtp-Source: ABdhPJx1reOjSIAiUAX9WAqOUw3D9KIACWjuQyWzbQn+7zdcGI4jiyeTsnqCspI294b529rZC/r8Mw==
-X-Received: by 2002:ac8:5acf:: with SMTP id d15mr7727919qtd.5.1637339688977;
-        Fri, 19 Nov 2021 08:34:48 -0800 (PST)
-Return-Path: <trini@konsulko.com>
-Received: from bill-the-cat (2603-6081-7b01-cbda-298c-b356-0e05-d708.res6.spectrum.com. [2603:6081:7b01:cbda:298c:b356:e05:d708])
-        by smtp.gmail.com with ESMTPSA id v1sm161514qtw.65.2021.11.19.08.34.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Nov 2021 08:34:48 -0800 (PST)
-Date: Fri, 19 Nov 2021 11:34:46 -0500
-From: "Tom Rini" <trini@konsulko.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: yogeshs@ti.com, Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH] wic: revert grub-efi patch
-Message-ID: <20211119163446.GH24579@bill-the-cat>
-References: <20211119022952.6588-1-yogeshs@ti.com>
- <20211119024657.GK18191@denix.org>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=b4mYUDV4;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: yogeshs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AJIIpgZ128653;
+	Fri, 19 Nov 2021 12:18:51 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1637345931;
+	bh=NDVGjJfajGDbJqTQKIlv/67LO3JimdV8OKHtpl+NQLk=;
+	h=From:To:Subject:Date;
+	b=b4mYUDV4w/uHetVPPL9/M8n717JRHKDVbENKyzgOzSKXawD97zKtPb26Hf51W6XE7
+	 9vjFaYzxZ+xkrgw2D8t4S9/YtjP6iHwPfbvpNyrIykZNB6q8fFtCSVhVKdjf/0cVLe
+	 TVlF4CDJGDn+tFcl3+GkfVjZuGzq4/IjwhqkaXyY=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AJIIpRB102729
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 19 Nov 2021 12:18:51 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 19
+ Nov 2021 12:18:51 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Fri, 19 Nov 2021 12:18:51 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AJIIpDt122030;
+	Fri, 19 Nov 2021 12:18:51 -0600
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH] j7-hs-evm: Correct image boot file causing build error
+Date: Fri, 19 Nov 2021 18:18:51 +0000
+Message-ID: <20211119181851.10066-1-yogeshs@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20211119024657.GK18191@denix.org>
-X-Clacks-Overhead: GNU Terry Pratchett
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Thu, Nov 18, 2021 at 09:46:57PM -0500, Denys Dmytriyenko wrote:
-> +Tom
-> 
-> On Fri, Nov 19, 2021 at 02:29:52AM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
-> > Revert "conf/machine: k3: Enable grub-efi by default in wic images"
-> > 
-> > This reverts commit d0b09833b44fa23cce86fd99dd8ca6631c61c476.
-> 
-> It is customary to provide a reason for revert.
+Correct the boot image file that is causing build error
 
-Especially since EFI booting is the path forward.  I know there was some
-messages about this breaking non-EFI booting but there wasn't enough
-context to explain what was really going on.
+Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+---
+ conf/machine/j7-hs-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/conf/machine/j7-hs-evm.conf b/conf/machine/j7-hs-evm.conf
+index ab0fa474..f2e3ccf5 100644
+--- a/conf/machine/j7-hs-evm.conf
++++ b/conf/machine/j7-hs-evm.conf
+@@ -23,7 +23,7 @@ BBMULTICONFIG += "k3r5-sr1-1"
+ 
+ # Use default IMAGE_BOOT_FILES_LEGACY files
+ # Since default sysfw.itb on J7 is for SR1.1, add a version for SR1.0
+-IMAGE_BOOT_FILES += "sysfw-j7-hs-evm.itb"
++IMAGE_BOOT_FILES += "sysfw-j721e-evm.itb"
+ do_image_wic[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+ do_image_tar[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+ 
 -- 
-Tom
+2.17.1
+
