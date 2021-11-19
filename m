@@ -1,86 +1,74 @@
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
- by mx.groups.io with SMTP id smtpd.web12.14473.1637352951770185891
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web08.447.1637357730366034727
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 19 Nov 2021 12:15:51 -0800
+ Fri, 19 Nov 2021 13:35:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ar6nKNQ4;
- spf=pass (domain: gmail.com, ip: 209.85.160.170, mailfrom: vivien.didelot@gmail.com)
-Received: by mail-qt1-f170.google.com with SMTP id n15so10670614qta.0
-        for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 12:15:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NcAkA0WdquNyYPjOkw/8Gvz/OTXyLgSc5EaX4AWIlww=;
-        b=Ar6nKNQ4QY0mJq6TlvzuMf1Mck4OXEQBblihMZYeQgVCSszaMqfITjyXPT3O1EHMQ7
-         8OVe5aHYiwffFtZ/5M4Uc0nxg5/4TtOTrwtHmbeWpsZ/UTJpbrjtVhesIYcfEU9mTq54
-         3nYDNc4Zj7sBbzpe8xfRT7EMIenafOQuqbmuIa5tiWue+ctz/j2F18uyPPdnRnDGw7pm
-         HvaLltY2TXxhQrEMrw913nLePeDqbubQYaO1EC8R5D3v4BpE045lUPB2uRetnNY2J6r2
-         iodpvLX4OBmlZbIjcU85bQtU5Zs2IvesLIrjWmN2j8wq+lPv0F9ILm+WRSHSs4wkVoHk
-         +s6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NcAkA0WdquNyYPjOkw/8Gvz/OTXyLgSc5EaX4AWIlww=;
-        b=3xt8Vyn865fa673LX3x7rv8nbDGlrc6EKbCNDtA79kk5kvvdoMRpO1nw/DjIOnmb4l
-         fyPmkKQNgTiyMrtigNG3W1eHgInP8vcCuz5YzSVDP9kWKagxgLQR51b2GoHI9L4jti67
-         Di9gFgR4VTkEhaFTbehX8W4P+koBBlT6nbRMRiKJ6GFwDfHMNyggjzFSFaUQAuKvwr3p
-         F4rnTvbuRl8beaRPllDFbxQUBFKHn8ZKxBrYz1WB3t7oJAFQ0MGpn1MHDC8O9sRmsIE8
-         BHT5XfdjiCf8qLA8Lp69VGg+lIRDcn60TamAhZLjfykYbnDMlwyEYJ+ECqzlyjrjReAX
-         VZIQ==
-X-Gm-Message-State: AOAM531D1Vxa/IuUdLNQWP5rrkzQj3Ojco+DxXB1DnalR4VqlwVi3BWr
-	JM1PmZ8oRbkVG964i/HQiKxTGy2wuc8=
-X-Google-Smtp-Source: ABdhPJzyQuX5jhauDRXYoyORR2sZsJZTsZqPmKyB1m+UvMsEB7iDzJWRp+uguN7LAkNwR4wY5z6l7A==
-X-Received: by 2002:a05:622a:20d:: with SMTP id b13mr9297724qtx.368.1637352950719;
-        Fri, 19 Nov 2021 12:15:50 -0800 (PST)
-Return-Path: <vivien.didelot@gmail.com>
-Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-121.dsl.bell.ca. [70.53.240.121])
-        by smtp.gmail.com with ESMTPSA id v5sm394537qtc.60.2021.11.19.12.15.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Nov 2021 12:15:50 -0800 (PST)
-From: "Vivien Didelot" <vivien.didelot@gmail.com>
-X-Google-Original-From: Vivien Didelot <vdidelot@pbsc.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>,
-	Praneeth Bajjuri <praneeth@ti.com>,
-	Vivien Didelot <vdidelot@pbsc.com>
-Subject: [PATCH] ti33x: remove the screen machine feature
-Date: Fri, 19 Nov 2021 15:15:33 -0500
-Message-Id: <20211119201533.2540388-1-vdidelot@pbsc.com>
-X-Mailer: git-send-email 2.33.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=eq2Er8Rs;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: yogeshs@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1AJLZP3R097598;
+	Fri, 19 Nov 2021 15:35:25 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1637357725;
+	bh=hc8SBxN4Q75//pj77wDV8jaWaOyDv0ea0bVrapBg4Nc=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=eq2Er8Rst6uKPCRphKSLKHX/QhYpHCWTGWpM3hGZnsjzTmLzMs5ty4Ks8GF6v07/F
+	 O/nxB+Guxmo3JHkB4QvPfieNI9CxNFwrtGg5fwBfGpsEfCmwxboQA3onXgmB4yYYk+
+	 mZh8Oo4ywFuIR9UQj9NzpHO6ltEpIUmunue7N83s=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1AJLZPqt111714
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 19 Nov 2021 15:35:25 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 19
+ Nov 2021 15:35:25 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Fri, 19 Nov 2021 15:35:24 -0600
+Received: from [10.249.32.113] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1AJLZO3n103074;
+	Fri, 19 Nov 2021 15:35:24 -0600
+Message-ID: <f146f30c-2d84-2a37-ac33-da719d0cfff5@ti.com>
+Date: Fri, 19 Nov 2021 15:35:24 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.1
+Subject: Re: [meta-ti][dunfell][PATCH 2/3] ti-sci-fw: changes to build combined boot image for hs build
+To: Denys Dmytriyenko <denis@denix.org>
+CC: Praneeth Bajjuri <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
+References: <20211112231800.64167-1-yogeshs@ti.com>
+ <20211112231800.64167-3-yogeshs@ti.com> <20211119185748.GL18191@denix.org>
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+In-Reply-To: <20211119185748.GL18191@denix.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Language: en-US
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Some distros or image recipes may rely on the presence of the "screen"
-machine feature to install graphical front-end applications.
 
-The ti33x SoC has an integrated GPU but does not have a screen per-se,
-thus having this feature in the SoC configuration may lead to unwanted
-packages being built.
 
-Comment the 'screen' feature and remove it from MACHINE_FEATURES.
+On 11/19/2021 12:57 PM, Denys Dmytriyenko wrote:
+> Yogesh,
+> 
+> Is this still the correct SECDEV to use with am64xx HS?
+> https://git.ti.com/cgit/security-development-tools/core-secdev-k3/
 
-Signed-off-by: Vivien Didelot <vdidelot@pbsc.com>
----
- conf/machine/include/ti33x.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 197cac19..c499928c 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -61,8 +61,8 @@ UBI_VOLNAME = "rootfs"
- 
- EXTRA_IMAGEDEPENDS += "virtual/bootloader"
- 
--# List common SoC features, may need to add touchscreen for specific machines
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu"
-+# List common SoC features, may need to add "screen touchscreen" for specific machines
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet gpu"
- 
- # Set the list of device targets for ti-pdk class recipes
- TI_PDK_LIMIT_SOCS = "am335x"
--- 
-2.33.1
-
+Yes.
+> 
+> I'm getting this error in ti-sci-fw do_compile():
+> 
+> | NOTE: make -j 56 CROSS_COMPILE=arm-none-linux-gnueabihf- SYSFW_DL_URL= SYSFW_HS_DL_URL= SYSFW_HS_INNER_CERT_DL_URL= SYSFW_PATH=/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs*.bin SOC=am64x CONFIG=evm HS=1 SW_REV=1 SYSFW_HS_PATH=/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs*-enc.bin SYSFW_HS_INNER_CERT_PATH=/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs*-cert.bin SBL=/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/recipe-sysroot/boot/u-boot-spl.bin
+> | Makefile:139: warning: overriding recipe for target '/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs-enc.bin'
+> | Makefile:134: warning: ignoring old recipe for target '/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs-enc.bin'
+> | Makefile:144: warning: overriding recipe for target '/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs-cert.bin'
+> | Makefile:134: warning: ignoring old recipe for target '/OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs-cert.bin'
+> | ./gen_its.sh am64x evm sysfw.bin board-cfg.bin pm-cfg.bin rm-cfg.bin sec-cfg.bin > out/soc/am64x/evm/sysfw-am64x-evm.its
+> | ./scripts/gen_x509_combined_cert.sh -b /OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/recipe-sysroot/boot/u-boot-spl.bin -l 0x70000000 -s /OE/arago-dunfell/build/arago-tmp-external-arm-glibc/work/am64xx_hs_evm_k3r5-linux-gnueabi/ti-sci-fw/2021.09a-r1.1/git/ti-sysfw/ti-sci-firmware-am64x-hs*.bin -m 0x44000 -d out/soc/am64x/evm/combined-sysfw-cfg.bin -n 0x7b000 -k /opt/secdev-k3//keys/custMpk.pem -o tiboot3.bin
+> | ERROR: SYSFW and its loadaddr are compulsory
+> | Usage: ./scripts/gen_x509_combined_cert.sh [-b Boot Loader] [-d SYSFW_DATA] [-k key_file] [-l SBL loadaddress] [-m SYSFW loadaddress] [-n SYSFW_DATA loadaddr] [-s SYSFW] [-t DM_DATA] [-y DM_DATA loadaddr]
+> 
+> Any pointers?
+Check the k3-image-gen.
+> 
