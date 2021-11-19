@@ -1,94 +1,70 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.3299.1637290751604721766
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web09.11478.1637339689803081628
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Nov 2021 18:59:11 -0800
+ Fri, 19 Nov 2021 08:34:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EC75340C47
-	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 02:59:10 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rpxIIfThj5fi for <meta-ti@lists.yoctoproject.org>;
-	Fri, 19 Nov 2021 02:59:10 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8C17640CA8
-	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 02:59:02 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 7422A1746D9
-	for <meta-ti@lists.yoctoproject.org>; Thu, 18 Nov 2021 21:59:02 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 18/20] conf: machine: Add j7200 hs platform
-Date: Thu, 18 Nov 2021 21:58:59 -0500
-Message-Id: <1637290741-8603-19-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1637290741-8603-1-git-send-email-denis@denix.org>
-References: <1637290741-8603-1-git-send-email-denis@denix.org>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=n/UfvmLM;
+ spf=pass (domain: konsulko.com, ip: 209.85.160.180, mailfrom: trini@konsulko.com)
+Received: by mail-qt1-f180.google.com with SMTP id f20so9993399qtb.4
+        for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 08:34:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=TVfUtwUjzYAwqDVk7MWlhEMnBQBQgfeyBduAx8WjtF8=;
+        b=n/UfvmLMz5WmgZEY31fAMIjCQ4bY2l47LT+LG/MWJO1vLyJ/MgrLdKy2h9vpLPfiXu
+         Rn95faNJvKLGT3gw+o+TC5v4DYS6YAyK1W3VrnJ0zHdkrgwHa05t6jXQ7I/CEzypqlRQ
+         sLU31ut6eiNSoh/SbPTN+N+Em9VVhNp8ELlgY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=TVfUtwUjzYAwqDVk7MWlhEMnBQBQgfeyBduAx8WjtF8=;
+        b=b66TUEMQnXGd9GR4ShJuConfwW/1JX0S6CJeSDTklnwVD9GFd+GBTAYsPnArrqCzlz
+         zsAE6Q34dW66s6ThC7cjf1N4RM8hFf71VGyFfUiv32SXLFKE9OYZRV5trUrA0gPSLPv/
+         /9phPD3efNgvilo1GTL8QJZnEvyYKEHgMBHqrKtYEnu3nwk0EvKX6vJDS5TGIjelwJq2
+         IMyrm2IdZUzcTVtx/BuZqqqNfEMF/4ot7LVWjv9sUZGF67o4f1DvAcbVT1XDcJqOQyzX
+         pOjyBn9l/7wHML5Fos9R1rnLR3YWH6RSAKWrGdzxj0gFCKs5VBZjH7gBy72lPya5okvS
+         t1Vw==
+X-Gm-Message-State: AOAM533QDH7kFyZ6IATgaKhAJ1Q6lKqN5TolA/3uJjM0KYAJjCOXQDE5
+	MbuS/7Unxf4UiFfZVkiFOgGmaA==
+X-Google-Smtp-Source: ABdhPJx1reOjSIAiUAX9WAqOUw3D9KIACWjuQyWzbQn+7zdcGI4jiyeTsnqCspI294b529rZC/r8Mw==
+X-Received: by 2002:ac8:5acf:: with SMTP id d15mr7727919qtd.5.1637339688977;
+        Fri, 19 Nov 2021 08:34:48 -0800 (PST)
+Return-Path: <trini@konsulko.com>
+Received: from bill-the-cat (2603-6081-7b01-cbda-298c-b356-0e05-d708.res6.spectrum.com. [2603:6081:7b01:cbda:298c:b356:e05:d708])
+        by smtp.gmail.com with ESMTPSA id v1sm161514qtw.65.2021.11.19.08.34.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 19 Nov 2021 08:34:48 -0800 (PST)
+Date: Fri, 19 Nov 2021 11:34:46 -0500
+From: "Tom Rini" <trini@konsulko.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: yogeshs@ti.com, Praneeth Bajjuri <praneeth@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][dunfell][PATCH] wic: revert grub-efi patch
+Message-ID: <20211119163446.GH24579@bill-the-cat>
+References: <20211119022952.6588-1-yogeshs@ti.com>
+ <20211119024657.GK18191@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20211119024657.GK18191@denix.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Yogesh Siraswar <yogeshs@ti.com>
+On Thu, Nov 18, 2021 at 09:46:57PM -0500, Denys Dmytriyenko wrote:
+> +Tom
+> 
+> On Fri, Nov 19, 2021 at 02:29:52AM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
+> > Revert "conf/machine: k3: Enable grub-efi by default in wic images"
+> > 
+> > This reverts commit d0b09833b44fa23cce86fd99dd8ca6631c61c476.
+> 
+> It is customary to provide a reason for revert.
 
-Machine conf for J7200 HS platform.
-Used am64xx hs and j721e hs as reference.
+Especially since EFI booting is the path forward.  I know there was some
+messages about this breaking non-EFI booting but there wasn't enough
+context to explain what was really going on.
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
- conf/machine/j7200-hs-evm-k3r5.conf | 13 +++++++++++++
- conf/machine/j7200-hs-evm.conf      | 22 ++++++++++++++++++++++
- 2 files changed, 35 insertions(+)
- create mode 100644 conf/machine/j7200-hs-evm-k3r5.conf
- create mode 100644 conf/machine/j7200-hs-evm.conf
-
-diff --git a/conf/machine/j7200-hs-evm-k3r5.conf b/conf/machine/j7200-hs-evm-k3r5.conf
-new file mode 100644
-index 0000000..488f19e
---- /dev/null
-+++ b/conf/machine/j7200-hs-evm-k3r5.conf
-@@ -0,0 +1,13 @@
-+#@TYPE: Machine
-+#@NAME: J7200 HS EVM (R5F)
-+#@DESCRIPTION: Machine configuration for the TI J7200 HS EVM (R5F core)
-+
-+require conf/machine/include/k3r5.inc
-+
-+SYSFW_SOC = "j7200"
-+SYSFW_CONFIG = "evm"
-+SYSFW_SUFFIX = "hs"
-+
-+UBOOT_MACHINE = "j7200_hs_evm_r5_defconfig"
-+
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/conf/machine/j7200-hs-evm.conf b/conf/machine/j7200-hs-evm.conf
-new file mode 100644
-index 0000000..c55be00
---- /dev/null
-+++ b/conf/machine/j7200-hs-evm.conf
-@@ -0,0 +1,22 @@
-+#@TYPE: Machine
-+#@NAME: J7200 HS EVM
-+#@DESCRIPTION: Machine configuration for the TI J7200 HS EVM
-+
-+require conf/machine/j7-evm.conf
-+
-+UBOOT_MACHINE = "j7200_hs_evm_a72_defconfig"
-+
-+UBOOT_ENTRYPOINT =       "0x80080000"
-+UBOOT_LOADADDRESS =      "0x80080000"
-+UBOOT_RD_LOADADDRESS =   "0x84000000"
-+UBOOT_RD_ENTRYPOINT =    "0x84000000"
-+UBOOT_DTB_LOADADDRESS =  "0x83000000"
-+UBOOT_DTBO_LOADADDRESS = "0x83080000"
-+UBOOT_DTBO_OFFSET =      "0x00010000"
-+
-+SPL_BINARY = "tispl.bin_HS"
-+SPL_BINARYNAME = "tispl.bin"
-+UBOOT_BINARY = "u-boot.img_HS"
-+IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
-+
-+TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
 -- 
-2.7.4
-
+Tom
