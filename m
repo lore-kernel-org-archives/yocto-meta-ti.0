@@ -1,104 +1,104 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.3347.1637378783406775541
+ by mx.groups.io with SMTP id smtpd.web08.3420.1637378895679638697
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 19 Nov 2021 19:26:23 -0800
+ Fri, 19 Nov 2021 19:28:15 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id DF60840C52
-	for <meta-ti@lists.yoctoproject.org>; Sat, 20 Nov 2021 03:26:22 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 24B1940C52
+	for <meta-ti@lists.yoctoproject.org>; Sat, 20 Nov 2021 03:28:15 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PIeQAYdC27-1 for <meta-ti@lists.yoctoproject.org>;
-	Sat, 20 Nov 2021 03:26:22 +0000 (UTC)
+	with ESMTP id vj-MiMpieoMg for <meta-ti@lists.yoctoproject.org>;
+	Sat, 20 Nov 2021 03:28:15 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 64A3A40CAA
-	for <meta-ti@lists.yoctoproject.org>; Sat, 20 Nov 2021 03:26:12 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 4DCA91746D2
-	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 22:26:12 -0500 (EST)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 163FF40BEA
+	for <meta-ti@lists.yoctoproject.org>; Sat, 20 Nov 2021 03:28:15 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id D14991746D5; Fri, 19 Nov 2021 22:28:14 -0500 (EST)
+Date: Fri, 19 Nov 2021 22:28:14 -0500
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH v2 15/26] am64xx-hs: changes to support new hs platform
-Date: Fri, 19 Nov 2021 22:26:00 -0500
-Message-Id: <1637378771-24987-16-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1637378771-24987-1-git-send-email-denis@denix.org>
-References: <1637378771-24987-1-git-send-email-denis@denix.org>
+Subject: Re: [meta-ti] [master][PATCH 00/20] Sync up with Dunfell #2
+Message-ID: <20211120032814.GO18191@denix.org>
+References: <16B8D341B86064F5.995@lists.yoctoproject.org>
+MIME-Version: 1.0
+In-Reply-To: <16B8D341B86064F5.995@lists.yoctoproject.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Yogesh Siraswar <yogeshs@ti.com>
+Please ignore this series of 20 patches - there's a more complete v2 series 
+with 26 patches.
 
-Changes to support new am64x hs platform in:
-1) optee: sign the image
-2) atf: sign the image
-3) u-boot: Add u-boot-spl image for combined boot image
 
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
- recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend | 8 ++++++++
- recipes-bsp/u-boot/u-boot-ti.inc                             | 6 ++++++
- recipes-security/optee/optee-os_%.bbappend                   | 4 ++++
- 3 files changed, 18 insertions(+)
+On Thu, Nov 18, 2021 at 09:58:41PM -0500, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@konsulko.com>
+> 
+> Keep master up to date with latest changes in Dunfell, adjust to the new
+> override syntax.
+> 
+> Amjad Ouled-Ameur (1):
+>   recipes-bsp: u-boot-ti-mainline: Update to v2021.10 release
+> 
+> Denys Dmytriyenko (1):
+>   recipes: update github SRC_URIs
+> 
+> Yogesh Siraswar (18):
+>   u-boot-ti-staging: Bump u-boot version for 08.01.00.002
+>   ti-linux-fw: Bump ti linux firmware for 08.01.00.002
+>   linux-ti-staging: Bump linux version for 08.01.00.002
+>   linux-ti-staging-rt: Bump linux rt version for 08.01.00.002 release
+>   ti-linux-fw: Bump k3 image gen to latest
+>   u-boot-ti-staging: Bump u-boot version for 08.01.00.003
+>   linux-ti-staging: Bump linux version for 08.01.00.003
+>   linux-ti-staging-rt: Bump linux rt version for 08.01.00.003
+>   ti-linux-fw: Add AUTOREV support for K3 Image Gen
+>   conf: am57xx-evm: Add missing *.dtb and *.dtbo
+>   conf: machine: add new am64x hs platform
+>   ti-sci-fw: changes to build combined boot image for hs build
+>   am64xx-hs: changes to support new hs platform
+>   conf: machine: am64xx: Add missing dtbo
+>   conf: machine : am65xx: Add missing dtbo
+>   conf: machine: Add j7200 hs platform
+>   ti-rtos-firmware: Add j7200 hs support
+>   j7200-hs: changes to support new hs platform
+> 
+>  conf/machine/am57xx-evm.conf                       |  3 ++
+>  conf/machine/am64xx-hs-evm-k3r5.conf               | 14 +++++++
+>  conf/machine/am64xx-hs-evm.conf                    | 22 ++++++++++
+>  conf/machine/include/am64xx.inc                    |  1 +
+>  conf/machine/include/am65xx.inc                    |  1 +
+>  conf/machine/j7200-hs-evm-k3r5.conf                | 13 ++++++
+>  conf/machine/j7200-hs-evm.conf                     | 22 ++++++++++
+>  recipes-bsp/ti-linux-fw/ti-linux-fw.inc            | 10 +++--
+>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb             | 39 +++++++++++++++++-
+>  .../trusted-firmware-a_%.bbappend                  | 16 ++++++++
+>  recipes-bsp/u-boot/u-boot-ti-mainline_git.bb       |  4 +-
+>  recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb    |  4 +-
+>  recipes-bsp/u-boot/u-boot-ti.inc                   | 12 ++++++
+>  ...NUInstallDirs-module-to-detect-install-pa.patch | 48 ----------------------
+>  recipes-devtools/ion/libion_git.bb                 |  6 +--
+>  recipes-kernel/linux/linux-ti-staging-rt_5.10.bb   |  2 +-
+>  recipes-kernel/linux/linux-ti-staging_5.10.bb      |  2 +-
+>  recipes-security/optee/optee-os_%.bbappend         |  8 ++++
+>  .../beagleboard/beaglebone-getting-started.bb      |  2 +-
+>  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb         | 36 +++++++++++++++-
+>  20 files changed, 199 insertions(+), 66 deletions(-)
+>  create mode 100644 conf/machine/am64xx-hs-evm-k3r5.conf
+>  create mode 100644 conf/machine/am64xx-hs-evm.conf
+>  create mode 100644 conf/machine/j7200-hs-evm-k3r5.conf
+>  create mode 100644 conf/machine/j7200-hs-evm.conf
+>  delete mode 100644 recipes-devtools/ion/libion/0001-cmake-Use-GNUInstallDirs-module-to-detect-install-pa.patch
+> 
+> -- 
+> 2.7.4
+> 
 
-diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-index 2258258..8fdccbe 100644
---- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-+++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-@@ -16,6 +16,14 @@ do_compile:append:am65xx-hs-evm() {
- 	)
- }
- 
-+do_compile:append:am64xx-hs-evm() {
-+	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
-+	( cd ${B}/${BUILD_DIR}/release/; \
-+		mv bl31.bin bl31.bin.unsigned; \
-+		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
-+	)
-+}
-+
- do_compile:append:j7-hs-evm() {
- 	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
- 	( cd ${BUILD_DIR}; \
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index 8a42061..633975c 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -66,6 +66,7 @@ SPL_UART_BINARY:k3r5 = ""
- SPL_UART_BINARY:lego-ev3 = ""
- SPL_UART_BINARY:j7200-evm-k3r5 = "u-boot-spl.bin"
- SPL_UART_BINARY:am64xx-evm-k3r5 = "u-boot-spl.bin"
-+SPL_UART_BINARY:am64xx-hs-evm-k3r5 = "u-boot-spl.bin"
- 
- SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
- SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
-@@ -401,4 +402,9 @@ do_deploy:append:am64xx-evm-k3r5 () {
- 	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
- }
- 
-+do_deploy:append:am64xx-hs-evm-k3r5 () {
-+	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
-+	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
-+}
-+
- TOOLCHAIN = "gcc"
-diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
-index aac14a5..0a40fa2 100644
---- a/recipes-security/optee/optee-os_%.bbappend
-+++ b/recipes-security/optee/optee-os_%.bbappend
-@@ -49,6 +49,10 @@ do_compile:append:am65xx-hs-evm() {
-     optee_sign_k3hs
- }
- 
-+do_compile:append:am64xx-hs-evm() {
-+    optee_sign_k3hs
-+}
-+
- do_compile:append:j7-hs-evm() {
-     optee_sign_k3hs
- }
 -- 
-2.7.4
-
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
