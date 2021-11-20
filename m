@@ -1,155 +1,94 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.3410.1637378776114732271
+ by mx.groups.io with SMTP id smtpd.web11.3450.1637378776188885467
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 19 Nov 2021 19:26:16 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id BDF5140C6C
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C4D1340C88
 	for <meta-ti@lists.yoctoproject.org>; Sat, 20 Nov 2021 03:26:14 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id H84NQQO9vmMs for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id qoPTqxlM0myJ for <meta-ti@lists.yoctoproject.org>;
 	Sat, 20 Nov 2021 03:26:14 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C043F40C8A
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8496640CAF
 	for <meta-ti@lists.yoctoproject.org>; Sat, 20 Nov 2021 03:26:12 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 8493B1746DE
+	by mail.denix.org (Postfix) with ESMTP id 6E1551746D7
 	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Nov 2021 22:26:12 -0500 (EST)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH v2 20/26] j7200-hs: changes to support new hs platform
-Date: Fri, 19 Nov 2021 22:26:05 -0500
-Message-Id: <1637378771-24987-21-git-send-email-denis@denix.org>
+Subject: [master][PATCH v2 18/26] conf: machine: Add j7200 hs platform
+Date: Fri, 19 Nov 2021 22:26:03 -0500
+Message-Id: <1637378771-24987-19-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1637378771-24987-1-git-send-email-denis@denix.org>
 References: <1637378771-24987-1-git-send-email-denis@denix.org>
 
 From: Yogesh Siraswar <yogeshs@ti.com>
 
-Changes to support new j7200 hs platform in:
-1) optee: sign the image
-2) atf: sign the image
-3) u-boot: Add u-boot-spl image for combined boot image
-4) ti-sci-fw_git: Update firmware prefix for j7200 hs
+Machine conf for J7200 HS platform.
+Used am64xx hs and j721e hs as reference.
 
 Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb                 | 18 ++++++++++++++++++
- .../trusted-firmware-a/trusted-firmware-a_%.bbappend   |  8 ++++++++
- recipes-bsp/u-boot/u-boot-ti.inc                       |  6 ++++++
- recipes-security/optee/optee-os_%.bbappend             |  4 ++++
- 4 files changed, 36 insertions(+)
+ conf/machine/j7200-hs-evm-k3r5.conf | 13 +++++++++++++
+ conf/machine/j7200-hs-evm.conf      | 22 ++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+ create mode 100644 conf/machine/j7200-hs-evm-k3r5.conf
+ create mode 100644 conf/machine/j7200-hs-evm.conf
 
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index dd0ce09..f70c3ae 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -2,6 +2,7 @@ require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
- 
- DEPENDS = "openssl-native u-boot-mkimage-native dtc-native"
- DEPENDS:append:j7200-evm-k3r5 = " virtual/bootloader"
-+DEPENDS:append:j7200-hs-evm-k3r5 = " virtual/bootloader"
- DEPENDS:append:am64xx-evm-k3r5 = " virtual/bootloader"
- DEPENDS:append:am64xx-hs-evm-k3r5 = " virtual/bootloader"
- 
-@@ -24,6 +25,7 @@ SYSFW_PREFIX = "ti-sci-firmware"
- SYSFW_PREFIX:j7-evm-k3r5 = "ti-fs-firmware"
- SYSFW_PREFIX:j7200-evm-k3r5 = "ti-fs-firmware"
- SYSFW_PREFIX:j7-hs-evm-k3r5 = "ti-fs-firmware"
-+SYSFW_PREFIX:j7200-hs-evm-k3r5 = "ti-fs-firmware"
- 
- SYSFW_SUFFIX ?= "unknown"
- 
-@@ -54,6 +56,7 @@ EXTRA_OEMAKE_HS = " \
- EXTRA_OEMAKE:append = "${@['',' ${EXTRA_OEMAKE_HS}']['${SYSFW_SUFFIX}' == 'hs']}"
- 
- EXTRA_OEMAKE:append:j7200-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
-+EXTRA_OEMAKE:append:j7200-hs-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
- EXTRA_OEMAKE:append:am64xx-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
- EXTRA_OEMAKE:append:am64xx-hs-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
- 
-@@ -103,6 +106,21 @@ do_deploy:j7200-evm-k3r5() {
- 	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
- }
- 
-+do_install:j7200-hs-evm-k3r5() {
-+	install -d ${D}/boot
-+	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
-+	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_SYMLINK}
-+	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
-+}
+diff --git a/conf/machine/j7200-hs-evm-k3r5.conf b/conf/machine/j7200-hs-evm-k3r5.conf
+new file mode 100644
+index 0000000..488f19e
+--- /dev/null
++++ b/conf/machine/j7200-hs-evm-k3r5.conf
+@@ -0,0 +1,13 @@
++#@TYPE: Machine
++#@NAME: J7200 HS EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI J7200 HS EVM (R5F core)
 +
-+do_deploy:j7200-hs-evm-k3r5() {
-+	install -d ${DEPLOYDIR}
-+	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
-+	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
-+	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
-+	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
-+}
++require conf/machine/include/k3r5.inc
 +
- do_install:am64xx-evm-k3r5() {
- 	install -d ${D}/boot
- 	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
-diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-index 8fdccbe..42e867a 100644
---- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-+++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
-@@ -31,3 +31,11 @@ do_compile:append:j7-hs-evm() {
- 		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
- 	)
- }
++SYSFW_SOC = "j7200"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs"
 +
-+do_compile:append:j7200-hs-evm() {
-+	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
-+	( cd ${B}/${BUILD_DIR}/release/; \
-+		mv bl31.bin bl31.bin.unsigned; \
-+		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
-+	)
-+}
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index 633975c..8ded12c 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -65,6 +65,7 @@ SPL_UART_BINARY:keystone = ""
- SPL_UART_BINARY:k3r5 = ""
- SPL_UART_BINARY:lego-ev3 = ""
- SPL_UART_BINARY:j7200-evm-k3r5 = "u-boot-spl.bin"
-+SPL_UART_BINARY:j7200-hs-evm-k3r5 = "u-boot-spl.bin"
- SPL_UART_BINARY:am64xx-evm-k3r5 = "u-boot-spl.bin"
- SPL_UART_BINARY:am64xx-hs-evm-k3r5 = "u-boot-spl.bin"
- 
-@@ -397,6 +398,11 @@ do_deploy:append:j7200-evm-k3r5 () {
- 	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
- }
- 
-+do_deploy:append:j7200-hs-evm-k3r5 () {
-+	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
-+	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
-+}
++UBOOT_MACHINE = "j7200_hs_evm_r5_defconfig"
 +
- do_deploy:append:am64xx-evm-k3r5 () {
- 	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
- 	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
-diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
-index 0a40fa2..5cb70df 100644
---- a/recipes-security/optee/optee-os_%.bbappend
-+++ b/recipes-security/optee/optee-os_%.bbappend
-@@ -57,6 +57,10 @@ do_compile:append:j7-hs-evm() {
-     optee_sign_k3hs
- }
- 
-+do_compile:append:j7200-hs-evm() {
-+    optee_sign_k3hs
-+}
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
+diff --git a/conf/machine/j7200-hs-evm.conf b/conf/machine/j7200-hs-evm.conf
+new file mode 100644
+index 0000000..c55be00
+--- /dev/null
++++ b/conf/machine/j7200-hs-evm.conf
+@@ -0,0 +1,22 @@
++#@TYPE: Machine
++#@NAME: J7200 HS EVM
++#@DESCRIPTION: Machine configuration for the TI J7200 HS EVM
 +
- do_install:append:ti-soc() {
-     install -m 644 ${B}/*.optee ${D}${nonarch_base_libdir}/firmware/ || true
-     install -m 644 ${B}/bl32.bin ${D}${nonarch_base_libdir}/firmware/ || true
++require conf/machine/j7-evm.conf
++
++UBOOT_MACHINE = "j7200_hs_evm_a72_defconfig"
++
++UBOOT_ENTRYPOINT =       "0x80080000"
++UBOOT_LOADADDRESS =      "0x80080000"
++UBOOT_RD_LOADADDRESS =   "0x84000000"
++UBOOT_RD_ENTRYPOINT =    "0x84000000"
++UBOOT_DTB_LOADADDRESS =  "0x83000000"
++UBOOT_DTBO_LOADADDRESS = "0x83080000"
++UBOOT_DTBO_OFFSET =      "0x00010000"
++
++SPL_BINARY = "tispl.bin_HS"
++SPL_BINARYNAME = "tispl.bin"
++UBOOT_BINARY = "u-boot.img_HS"
++IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
++
++TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
 -- 
 2.7.4
 
