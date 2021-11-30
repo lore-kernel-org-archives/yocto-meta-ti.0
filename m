@@ -1,147 +1,381 @@
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
- by mx.groups.io with SMTP id smtpd.web12.30018.1637966487365095627
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web11.74946.1638274148657761232
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 26 Nov 2021 14:41:27 -0800
+ Tue, 30 Nov 2021 04:09:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=icUP64jK;
- spf=pass (domain: gmail.com, ip: 209.85.160.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f177.google.com with SMTP id 8so10253582qtx.5
-        for <meta-ti@lists.yoctoproject.org>; Fri, 26 Nov 2021 14:41:27 -0800 (PST)
+ dkim=pass header.i=@pathpartnertech.com header.s=google header.b=T1mm5Y2o;
+ spf=pass (domain: pathpartnertech.com, ip: 209.85.215.182, mailfrom: sidraya.bj@pathpartnertech.com)
+Received: by mail-pg1-f182.google.com with SMTP id s137so19549937pgs.5
+        for <meta-ti@lists.yoctoproject.org>; Tue, 30 Nov 2021 04:09:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=wThehsfhVPKecYQlFSagoVukvefqJw7kt3fz1dfyQe8=;
-        b=icUP64jKmQuMY/Z/53LIDprYABPEsOy/r89yi2Y3PDkhvD2fllKwesb7hSlJNbjLV5
-         NarYbSroUR2L0BzDRe2YhVfqgrtgOn+y5cbYYFm+ZKm6X/SNWJw8kFXYzLfwgvwrKxTA
-         nRvVc3MboCxgnCa0kCbWfCp7lkypXuqHy53xcEejQKFbNkLzfdhsKNmy+1ocF8GNkOf4
-         3n9dwxuhrQvJUaon5t2Q00NTmFx3l8SsjiCZBPsaX0RS1vKvf/ts7sLjkKxA2HpwAhsg
-         Ksi173x5OEIomUyp3/vGSv3NxW8N5FyS3SdvvI1QZE3aahNUGCSIp1xKkwYONpuqvo3l
-         gNjg==
+        d=pathpartnertech.com; s=google;
+        h=mime-version:from:to:cc:subject:date:message-id;
+        bh=wLeUBReFHNd083+5Tt5Q9GbOdQ2s2aQSGgOm04Nu4+c=;
+        b=T1mm5Y2owsl2TbcbB88TcBwvWQj4NK3wq1DIdtA9S0hO7wYIFDcS7wGvyw1RkljZy+
+         c5wsv63jkWTFdkiBbd1TyJy1OzbIu5X85MF7si5tq6hSY1YvUUgXrBHRJFM3mSRQtx6E
+         X506OM8od1YAslFND+R4vbethxa6CKudpzxRk+jn/5SNkyBEjY5YCP0cAFbR/ZFYEwy7
+         ajtpUnrAa6K2TsPSPA/XHbnIJJcd6EwDlK25XVaM9opMfOQeKAUaPvOB1Czs/Q94MlD+
+         3vdQyf+zEpvquO3bXL79YzBNX6qRQ9fv7gZG1XeSmTRQOcNlcLs9/Yk2D/YwOOJyKPba
+         VESg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=wThehsfhVPKecYQlFSagoVukvefqJw7kt3fz1dfyQe8=;
-        b=gB30on0i97mZWopINlnD5S1/Y0Kre8e9/2IXb29Pgu9NZxX+ESYR0TYNf9IJPRMJUO
-         04PgE6vIr2glX+rC9aDguo1555NeCDZHWXkUjiPHrviqBH08yvKEZuaQkEMPl8G7GWgK
-         yC0PzMr6p4fVyyOC26wVKJaptRhpy8QHUlAEuO1G6lLoOdtPp7IFUcno9daPtl4XH7OR
-         FAsedaDEZlrDtaHqd2pZCLy2fyYf+U3a7V+tUNfKDsnBEBZS8UTSJVgO/tW+Fai2hk1s
-         dpafAePiCc0ChwWmmdXbiYMnHGOP1u9p/PRyLfdX3Qux0cVsqe3Lhq5vEnOipPqL8jTW
-         9Y5g==
-X-Gm-Message-State: AOAM531j2hmUuwrbg3OwM/Tz+ZIkwvvNebkPCSV0AV2wFpskgkQjCp2U
-	ydtNC+YyHRdsJSC6IYBSaNieYhRVfaybHIzheSY=
-X-Google-Smtp-Source: ABdhPJzEAuW9u2IUMyCeBzrgdBAEtIBpbR7SuvRt220anjx15SOybS9mQ306WdkzVyrLfAD9/7VR1nMS+t7MqYcTReo=
-X-Received: by 2002:ac8:518e:: with SMTP id c14mr19058173qtn.665.1637966486339;
- Fri, 26 Nov 2021 14:41:26 -0800 (PST)
+        h=mime-version:x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=wLeUBReFHNd083+5Tt5Q9GbOdQ2s2aQSGgOm04Nu4+c=;
+        b=As2FwUpXRmOA67r+Mv2a6oESDSXGIydqTOMBdI8e2ocw5hzvoqaBrg5yk8WdVzDyS0
+         ngcP9DMM6A8gqHxEbJMNr1EoirkQ4WCIThQDxmrFQTXkW88WZE0Qx6c2wL589L0cqoRC
+         OpG46D3AxNJWlzxbaf2Pcrqmp1wV/5pskpmtv+1wFYYY78cEVKWrCgKJey8CMe81qDSC
+         3aQDNOdw6Xo3SU7B6HCx8snwJ7d3CAeYZ4LFQ07l6NJFM6aGq9umMdgtRXRhzgjiEM0R
+         sRk94bCM/zEH9J5i0ooJYV2BLzJISpM7BooDcZaMLVL2lNtyfJ4TUZ4kPNDYhfNrLCsL
+         RLWg==
 MIME-Version: 1.0
-References: <CAMKF1spBkte+39N4OMnX-93ef0Rm2pUiqZaHFaotJLN1MizTSg@mail.gmail.com>
- <247fc8d3-22e5-46bd-b288-6ccfd151778f@www.fastmail.com>
-In-Reply-To: <247fc8d3-22e5-46bd-b288-6ccfd151778f@www.fastmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 26 Nov 2021 14:41:00 -0800
-Message-ID: <CAMKF1spJd3xCbgNGdv258nL86sr+GdyNWuwVAek-putB0x8SXQ@mail.gmail.com>
-Subject: Re: [meta-ti] Errors with 5.10 kernel + ti-sgx-ddk on bbb
-To: Paul Barker <paul@pbarker.dev>
-Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denis@denix.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Gm-Message-State: AOAM531Kr8Lg+v3haS7gqGUGLHySawivEBFhUwBBEh7mFg8Erg6GeTMy
+	gb7hckcTGGiEeW6SyrgLvJu/LCsM5oSaFm373Zr8Bl7RJjUZjTUa8TK48Rtt2CPHeTzsMAQBM7/
+	DSJ9qrrAdnQPJJFg+gsWE53XOcySkVvU=
+X-Google-Smtp-Source: ABdhPJwl8OHiPSK/zWYsJBXhCIwowgzAAfbWSQ6/NfxMebuU0pxOYngMI2tuP/kpujnD5z33iwHS/Q==
+X-Received: by 2002:a63:834a:: with SMTP id h71mr39731196pge.361.1638274147576;
+        Tue, 30 Nov 2021 04:09:07 -0800 (PST)
+Return-Path: <sidraya.bj@pathpartnertech.com>
+Received: from localhost.localdomain ([203.201.61.238])
+        by smtp.gmail.com with ESMTPSA id c2sm21639865pfv.112.2021.11.30.04.09.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 30 Nov 2021 04:09:07 -0800 (PST)
+From: sidraya.bj@pathpartnertech.com
+To: meta-ti@lists.yoctoproject.org
+Cc: yogeshs@ti.com,
+	praneeth@ti.com,
+	d-huang@ti.com,
+	prashanth.ka@pathpartnertech.com,
+	praveen.ap@pathpartnertech.com,
+	denys@ti.com,
+	Sidraya <sidraya.bj@pathpartnertech.com>
+Subject: [dunfell/master][PATCH] linux-ti-staging-5.10: Fix build failure in parallel build Env.
+Date: Tue, 30 Nov 2021 17:38:54 +0530
+Message-Id: <20211130120854.25813-1-sidraya.bj@pathpartnertech.com>
+X-Mailer: git-send-email 2.17.1
+Content-Type: text/plain; charset="US-ASCII"
 
-On Thu, Nov 25, 2021 at 5:18 PM Paul Barker <paul@pbarker.dev> wrote:
->
-> Hi Khem,
->
-> We had to apply the following patch for the BBE: https://github.com/SanCloudLtd/meta-sancloud/blob/dunfell/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-Fix-driver-config-for-5.10-kernel.patch
->
-> See https://github.com/openpvrsgx-devgroup/linux_openpvrsgx/issues/3.
->
-> Hope this helps,
+From: Sidraya <sidraya.bj@pathpartnertech.com>
 
-Thanks, it did help a bit where the errors I was seeing are gone, but
-weston still fails to launch
+Fix build failure in parallel build Env.
+Prevent building source code under vxe-vxd/common directory
+twice which leads to overall build to fail.
 
-PVR_K:(Error): BridgedDispatchKM: Driver initialisation not completed yet
+Signed-off-by: Sidraya <sidraya.bj@pathpartnertech.com>
+---
+ ...akefile-Fix-build-failure-in-paralle.patch | 261 ++++++++++++++++++
+ recipes-kernel/linux/linux-ti-staging_5.10.bb |   3 +-
+ 2 files changed, 263 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-kernel/linux/linux-ti-staging-5.10/0001-media-platform-Makefile-Fix-build-failure-in-paralle.patch
 
-but that was due to my monitor not being recognized properly by bbb
-which I fixed with some aid to weston and pvr driver configuration
+diff --git a/recipes-kernel/linux/linux-ti-staging-5.10/0001-media-platform-Makefile-Fix-build-failure-in-paralle.patch b/recipes-kernel/linux/linux-ti-staging-5.10/0001-media-platform-Makefile-Fix-build-failure-in-paralle.patch
+new file mode 100644
+index 00000000..8b683c12
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging-5.10/0001-media-platform-Makefile-Fix-build-failure-in-paralle.patch
+@@ -0,0 +1,261 @@
++From 91ef6053f9a4c884c05857bdc39a496691bbc30f Mon Sep 17 00:00:00 2001
++From: Sidraya <sidraya.bj@pathpartnertech.com>
++Date: Fri, 26 Nov 2021 18:28:49 +0530
++Subject: [PATCH] media: platform: Makefile: Fix build failure in parallel
++ build Env.
++
++Fix build failure in parallel build Env.
++prevent building source code under common directory
++twice which leads to build fail.
++
++Signed-off-by: Sidraya <sidraya.bj@pathpartnertech.com>
++---
++ drivers/media/platform/Makefile               |   4 +-
++ .../platform/vxe-vxd/{decoder => }/Makefile   | 138 +++++++++++-------
++ .../media/platform/vxe-vxd/encoder/Makefile   |  56 -------
++ 3 files changed, 88 insertions(+), 110 deletions(-)
++ rename drivers/media/platform/vxe-vxd/{decoder => }/Makefile (50%)
++ delete mode 100644 drivers/media/platform/vxe-vxd/encoder/Makefile
++
++diff --git a/drivers/media/platform/Makefile b/drivers/media/platform/Makefile
++index 9780108f0..d42593fcc 100644
++--- a/drivers/media/platform/Makefile
+++++ b/drivers/media/platform/Makefile
++@@ -81,5 +81,5 @@ obj-$(CONFIG_VIDEO_QCOM_VENUS)		+= qcom/venus/
++
++ obj-y					+= sunxi/
++
++-obj-$(CONFIG_VIDEO_IMG_VXD_DEC)         += vxe-vxd/decoder/
++-obj-$(CONFIG_VIDEO_IMG_VXE_ENC)         += vxe-vxd/encoder/
+++obj-$(CONFIG_VIDEO_IMG_VXD_DEC)         += vxe-vxd/
+++obj-$(CONFIG_VIDEO_IMG_VXE_ENC)         += vxe-vxd/
++diff --git a/drivers/media/platform/vxe-vxd/decoder/Makefile b/drivers/media/platform/vxe-vxd/Makefile
++similarity index 50%
++rename from drivers/media/platform/vxe-vxd/decoder/Makefile
++rename to drivers/media/platform/vxe-vxd/Makefile
++index ac0d4e830..8f159aa0f 100644
++--- a/drivers/media/platform/vxe-vxd/decoder/Makefile
+++++ b/drivers/media/platform/vxe-vxd/Makefile
++@@ -46,67 +46,55 @@ ERROR_RECOVERY_SIMULATION ?=n
++ # If unsure, say Y
++ CAPTURE_CONTIG_ALLOC ?=y
++
++-#VXD
++-vxd-dec-y += vxd_core.o
++-
++-#PVDEC
++-vxd-dec-y += vxd_pvdec.o
++-
++-#MEM_MGR
++-vxd-dec-y += ../common/img_mem_man.o ../common/img_mem_unified.o
++-vxd-dec-y += ../common/imgmmu.o
++-
++-#Utilities
++-vxd-dec-y += ../common/lst.o ../common/dq.o
++-vxd-dec-y += ../common/resource.o
++-vxd-dec-y += dec_resources.o
++-vxd-dec-y += ../common/rman_api.o
++-vxd-dec-y += pixel_api.o
++-vxd-dec-y += vdecdd_utils_buf.o
++-vxd-dec-y += vdecdd_utils.o
++-
++-#MMU
++-vxd-dec-y += ../common/talmmu_api.o
++-vxd-dec-y += ../common/pool.o
++-vxd-dec-y += ../common/hash.o
++-vxd-dec-y += ../common/ra.o
++-vxd-dec-y += ../common/addr_alloc.o
++-vxd-dec-y += ../common/work_queue.o
++-vxd-dec-y += vdec_mmu_wrapper.o
++-
++-#DECODER
++-vxd-dec-y += ../common/pool_api.o ../common/idgen_api.o
++-vxd-dec-y += hw_control.o
++-vxd-dec-y += vxd_int.o
++-vxd-dec-y += translation_api.o
++-vxd-dec-y += decoder.o
++-vxd-dec-y += core.o
++-
++-#BSPP
++-vxd-dec-y += swsr.o
++-vxd-dec-y += h264_secure_parser.o
++-vxd-dec-y += bspp.o
++-
++-#UM INTERFACE & SYSDEV
++-vxd-dec-y += vxd_dec.o
++-
++-vxd-dec-y += vxd_v4l2.o
+++vxd-dec-y += common/img_mem_man.o \
+++	common/img_mem_unified.o \
+++	common/imgmmu.o \
+++	common/pool_api.o \
+++	common/idgen_api.o \
+++	common/talmmu_api.o \
+++	common/pool.o \
+++	common/hash.o \
+++	common/ra.o \
+++	common/addr_alloc.o \
+++	common/work_queue.o \
+++	common/lst.o \
+++	common/dq.o \
+++	common/resource.o \
+++	common/rman_api.o \
+++
+++vxd-dec-y += decoder/vxd_core.o \
+++	decoder/vxd_pvdec.o \
+++	decoder/dec_resources.o \
+++	decoder/pixel_api.o \
+++	decoder/vdecdd_utils_buf.o \
+++	decoder/vdecdd_utils.o \
+++	decoder/vdec_mmu_wrapper.o \
+++	decoder/hw_control.o \
+++	decoder/vxd_int.o \
+++	decoder/translation_api.o \
+++	decoder/decoder.o \
+++	decoder/core.o \
+++	decoder/swsr.o \
+++	decoder/h264_secure_parser.o \
+++	decoder/bspp.o \
+++	decoder/vxd_dec.o \
+++	decoder/vxd_v4l2.o \
++
++-ifeq ($(DEBUG_DECODER_DRIVER), y)
++-ccflags-y   += -DDEBUG_DECODER_DRIVER
++-ccflags-y   += -DDEBUG
++-endif
++
++ ifeq ($(HAS_HEVC),y)
++ ccflags-y   += -DHAS_HEVC
++-vxd-dec-y += hevc_secure_parser.o
+++vxd-dec-y += decoder/hevc_secure_parser.o
++ endif
++
++ ifeq ($(HAS_JPEG),y)
++ ccflags-y   += -DHAS_JPEG
++-vxd-dec-y += jpeg_secure_parser.o
+++vxd-dec-y += decoder/jpeg_secure_parser.o
++ endif
++
+++ifeq ($(DEBUG_DECODER_DRIVER), y)
+++ccflags-y   += -DDEBUG_DECODER_DRIVER
+++ccflags-y   += -DDEBUG
+++endif
++
++ ifeq ($(ERROR_CONCEALMENT),y)
++ ccflags-y   += -DERROR_CONCEALMENT
++@@ -126,4 +114,50 @@ endif
++
++ obj-$(CONFIG_VIDEO_IMG_VXD_DEC) += vxd-dec.o
++
++-ccflags-y += -I$(srctree)/drivers/media/platform/vxe-vxd/common
+++# (1)
+++# This config, if enabled, enables all the debug traces in
+++# encoder driver. Enable it only for debug purpose
+++# Keep it always disabled for release codebase
+++DEBUG_ENCODER_DRIVER ?=n
+++
+++# (3)
+++# This config enables encoder performance profiling
+++# keep it always disabled. Enable it only for profiling in development
+++# environments.
+++ENABLE_PROFILING ?=n
+++
+++vxe-enc-y += common/img_mem_man.o \
+++	common/img_mem_unified.o \
+++	common/talmmu_api.o \
+++	common/addr_alloc.o \
+++	common/lst.o \
+++	common/hash.o \
+++	common/ra.o \
+++	common/pool.o \
+++	common/rman_api.o \
+++	common/dq.o \
+++	common/idgen_api.o \
+++	common/imgmmu.o \
+++	common/work_queue.o \
+++
+++vxe-enc-y += encoder/vxe_v4l2.o \
+++	encoder/vxe_enc.o \
+++	encoder/topaz_device.o \
+++	encoder/topazmmu.o \
+++	encoder/topaz_api.o \
+++	encoder/topaz_api_utils.o \
+++	encoder/header_gen.o \
+++	encoder/mtx_fwif.o \
+++
+++obj-$(CONFIG_VIDEO_IMG_VXE_ENC) += vxe-enc.o
+++
+++ifeq ($(DEBUG_ENCODER_DRIVER), y)
+++ccflags-y   += -DDEBUG_ENCODER_DRIVER
+++ccflags-y   += -DDEBUG
+++endif
+++
+++ifeq ($(ENABLE_PROFILING),y)
+++ccflags-y	+= -DENABLE_PROFILING
+++endif
+++
+++ccflags-y += -I$(srctree)/drivers/media/platform/vxe-vxd/common/
++diff --git a/drivers/media/platform/vxe-vxd/encoder/Makefile b/drivers/media/platform/vxe-vxd/encoder/Makefile
++deleted file mode 100644
++index e43a03eb4..000000000
++--- a/drivers/media/platform/vxe-vxd/encoder/Makefile
+++++ /dev/null
++@@ -1,56 +0,0 @@
++-# SPDX-License-Identifier: GPL-2.0
++-
++-# (1)
++-# This config, if enabled, enables all the debug traces in
++-# encoder driver. Enable it only for debug purpose
++-# Keep it always disabled for release codebase
++-DEBUG_ENCODER_DRIVER ?=n
++-
++-# (3)
++-# This config enables encoder performance profiling
++-# keep it always disabled. Enable it only for profiling in development
++-# environments.
++-ENABLE_PROFILING ?=n
++-
++-#UM INTERFACE & SYSDEV
++-vxe-enc-y += vxe_v4l2.o
++-vxe-enc-y += vxe_enc.o
++-
++-#TOPAZ Device
++-vxe-enc-y += topaz_device.o
++-
++-#MEM_MGR
++-vxe-enc-y += ../common/img_mem_man.o ../common/img_mem_unified.o
++-vxe-enc-y += ../common/talmmu_api.o
++-vxe-enc-y += ../common/addr_alloc.o
++-vxe-enc-y += ../common/lst.o
++-vxe-enc-y += ../common/hash.o
++-vxe-enc-y += ../common/ra.o
++-vxe-enc-y += ../common/pool.o
++-vxe-enc-y += ../common/rman_api.o
++-vxe-enc-y += ../common/dq.o
++-vxe-enc-y += ../common/idgen_api.o
++-vxe-enc-y += topazmmu.o
++-vxe-enc-y += ../common/imgmmu.o
++-vxe-enc-y += ../common/work_queue.o
++-
++-#Topaz framework and firmware prep
++-vxe-enc-y += topaz_api.o
++-vxe-enc-y += topaz_api_utils.o
++-vxe-enc-y += header_gen.o
++-
++-#FWIF
++-vxe-enc-y += mtx_fwif.o
++-
++-obj-$(CONFIG_VIDEO_IMG_VXE_ENC) += vxe-enc.o
++-
++-ifeq ($(DEBUG_ENCODER_DRIVER), y)
++-ccflags-y   += -DDEBUG_ENCODER_DRIVER
++-ccflags-y   += -DDEBUG
++-endif
++-
++-ifeq ($(ENABLE_PROFILING),y)
++-ccflags-y	+= -DENABLE_PROFILING
++-endif
++-
++-ccflags-y += -I$(srctree)/drivers/media/platform/vxe-vxd/common/
++--
++2.17.1
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 545ea569..a3ed19ac 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -33,7 +33,8 @@ PR = "${MACHINE_KERNEL_PR}"
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ KERNEL_GIT_PROTOCOL = "git"
+ SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
+-            file://defconfig"
++            file://defconfig \
++            file://0001-media-platform-Makefile-Fix-build-failure-in-paralle.patch"
+ 
+ FILES_${KERNEL_PACKAGE_NAME}-devicetree += "/${KERNEL_IMAGEDEST}/*.itb"
+ 
+-- 
+2.17.1
 
 
-> Paul
->
-> On Thu, 25 Nov 2021, at 21:43, Khem Raj wrote:
-> > Hi
-> >
-> > I am trying to use ti-sgx-ddk-um for egl and ended up with the
-> > following errors. I wonder
-> > if 5.10 kernel + pvr is supposed to work on bbb.
-> >
-> > root@beaglebone:~# uname -a
-> > Linux beaglebone 5.10.65-gf22103162c #1 PREEMPT Thu Oct 21 18:27:04
-> > UTC 2021 armv7l armv7l armv7l GNU/Linux
-> >
-> >
-> > root@beaglebone:~# /usr/bin/rc.pvr reload
-> > Unloaded PowerVR consumer services.
-> > [  732.691512] [drm] Initialized pvr 1.17.4948957 20110701 for
-> > 56000000.gpu on minor 1
-> > [  732.726444] PVR_K: UM DDK-(4948957) and KM DDK-(4948957) match. [ OK ]
-> > [  733.736908] PVR_K:(Error): PollForValueKM: Timeout. Expected 0x1
-> > but found 0x0 (mask 0x1).
-> > [  733.745233] PVR_K:(Error): SGXInitialise: Wait for uKernel
-> > initialisation failed
-> > [  733.756365] PVR_K: SGX debug (SGX_DDK sgxddk 1.17@4948957)
-> > [  733.763365] PVR_K:  Host Ctl flags= 00000006
-> > [  733.768918] PVR_K: SGX Host control:
-> > [  733.772546] PVR_K:   (HC-0) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.781209] PVR_K:   (HC-10) 0x00000000 0x00000000 0x00000014 0x00030D40
-> > [  733.789240] PVR_K:   (HC-20) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.795900] PVR_K:   (HC-30) 0x00000000 0x00000000 0x19CAA170 0x00000000
-> > [  733.804558] PVR_K:   (HC-40) 0x00000000 0x00000000 0x00000000 0x00000818
-> > [  733.812416] PVR_K: SGX TA/3D control:
-> > [  733.816113] PVR_K:   (T3C-0) 0x0F003000 0x0F003140 0x0F002000 0x00000000
-> > [  733.824822] PVR_K:   (T3C-10) 0x00000000 0x00000000 0x00000002 0x00000000
-> > [  733.832801] PVR_K:   (T3C-20) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.840733] PVR_K:   (T3C-30) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.848792] PVR_K:   (T3C-40) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.855551] PVR_K:   (T3C-50) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.864329] PVR_K:   (T3C-60) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.872316] PVR_K:   (T3C-70) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.880262] PVR_K:   (T3C-80) 0x00000000 0x00000000 0x00000000 0x0F000000
-> > [  733.888176] PVR_K:   (T3C-90) 0x81D8D000 0x00000000 0x00000000 0x00000000
-> > [  733.894920] PVR_K:   (T3C-A0) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.903663] PVR_K:   (T3C-B0) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.911628] PVR_K:   (T3C-C0) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.919526] PVR_K:   (T3C-D0) 0x0F000000 0x8000B000 0x8004B000 0x0F004000
-> > [  733.926268] PVR_K:   (T3C-E0) 0x0F00A420 0x0F00A740 0x00000000 0x00000000
-> > [  733.934984] PVR_K:   (T3C-F0) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.942953] PVR_K:   (T3C-100) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.950925] PVR_K:   (T3C-110) 0x00000000 0x00000000 0x00000000 0x00000000
-> > [  733.958901] PVR_K:   (T3C-120) 0x00000000 0x00000000 0x00001140 0x00000078
-> > [  733.965732] PVR_K: SGX Kernel CCB WO:0x0 RO:0x0
-> > [  733.972327] PVR_K: Active syncs
-> > [  733.975503] PVR_K:(Error): SGXPostPowerState: SGXInitialise failed
-> > [  733.983694] PVR_K:(Error): PVRSRVSetDevicePowerStateKM : Transition
-> > to 0 FAILED 0x18
-> > [  733.992700] PVR_K:(Error): SGXScheduleCCBCommandKM failed to power
-> > up device - ui32CallerID:-1 eError:24
-> > [  734.003537] PVR_K:(Error): SGXGetMiscInfoUkernel:
-> > SGXScheduleCCBCommandKM failed.
-> > [  734.012507] PVR_K: (FAIL) SGXInit: Unable to validate hardware core revision
-> > [  734.020812] PVR_K:(Error): PVRSRVFinaliseSystem: Failed
-> > PVRSRVDevInitCompatCheck call (device index: 0)
-> > PVR:(Error): PVRSRVInitSrvDisconnect: KM returned 24 [0, ][
-> > 734.031803] PVR_K:(Error): BridgedDispatchKM: Initialisation failed.
-> > Driver unusable.
-> >
-> > PVR:(Error): PVRSRVBridgeCall: Failed to access device.  Function
-> > ID:3223086862 (strerror returns no value.). [0, ]
-> > PVR:(Error): SrvInit: PVRSRVInitSrvDisconnect failed (24). See srvkm
-> > log for details. [0, ]
-> > /usr/bin/pvrsrvctl: SrvInit failed (already initialized?)
-> > (err=PVRSRV_ERROR_RETRY)
-> >
-> >
-> > 
->
-> --
-> Paul Barker
-> https://pbarker.dev/
+-- 
+
+
+
+
+
+
+This
+message contains confidential information and is intended only 
+for the
+individual(s) named. If you are not the intended
+recipient, you are 
+notified that disclosing, copying, distributing or taking any
+action in 
+reliance on the contents of this mail and attached file/s is strictly
+prohibited. Please notify the
+sender immediately and delete this e-mail 
+from your system. E-mail transmission
+cannot be guaranteed to be secured or 
+error-free as information could be
+intercepted, corrupted, lost, destroyed, 
+arrive late or incomplete, or contain
+viruses. The sender therefore does 
+not accept liability for any errors or
+omissions in the contents of this 
+message, which arise as a result of e-mail
+transmission.
