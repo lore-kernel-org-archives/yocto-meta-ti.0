@@ -1,82 +1,81 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web08.60363.1638835865986829887
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web12.68473.1638891186765585891
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 06 Dec 2021 16:11:06 -0800
+ Tue, 07 Dec 2021 07:33:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=P+HVHyAm;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1B70AxVt078624;
-	Mon, 6 Dec 2021 18:10:59 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1638835859;
-	bh=xhSq/GGF3zEpqWI+Kp9RBr0FxyzfeTVyzmZ9CPjypaw=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=P+HVHyAmX7xU1bjFXsbJUt41ir7ACEL5e3Cn/60lJg1e9sDuoC+yrbQXPpgIUcaPd
-	 s+CZa1EwgD+33GEkCRILpDTl+hN3eQWIUQwy5AachUBHfJUqtIf2LWar+WFBA3k49m
-	 Lf8Yh1Nwj59z+3mzCYuPYUho83U4h1SEN48H3ReY=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1B70AxgH021321
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 6 Dec 2021 18:10:59 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 6
- Dec 2021 18:10:59 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Mon, 6 Dec 2021 18:10:59 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1B70Axfd102205;
-	Mon, 6 Dec 2021 18:10:59 -0600
-From: "praneeth" <praneeth@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko <denys@konsulko.com>
-CC: <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
-Subject: [dunfell/master PATCH 1/2] linux-ti-staging: Bump linux version for 08.01.00.006
-Date: Mon, 6 Dec 2021 18:10:58 -0600
-Message-ID: <20211207001059.5572-2-praneeth@ti.com>
+ dkim=pass header.i=@baylibre-com.20210112.gappssmtp.com header.s=20210112 header.b=d/o4ar4T;
+ spf=pass (domain: baylibre.com, ip: 209.85.221.48, mailfrom: aouledameur@baylibre.com)
+Received: by mail-wr1-f48.google.com with SMTP id u1so30236202wru.13
+        for <meta-ti@lists.yoctoproject.org>; Tue, 07 Dec 2021 07:33:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id;
+        bh=vU1mhA+6a6UNZzv2BVB2fIKfdnAaj/3HMw+ZArNAdEk=;
+        b=d/o4ar4TtrMGDvQAZ30RfcgQOfnzv7i7lPci2HKkyttTg3vW/SfRc3O7fc6RgPFzMM
+         s78lxlkauFYh2Z2oW4pm0GP4Z/+JpzFh43w/K1WXi5PJfVI1B/q2Fd7KfiJvTuhqzjpT
+         ENRhZfKsy9Po4Bk7rMMKPDGON+IbnmicXNy1Brjy2s7QuJ77UE4GIg8gZRYRbDpkFgSX
+         C0hq1DPNCHQBw2wpxGlHwjYYsZ1ZdrxpenXlWxsg6/ASb8agq5MP4je4B/cjqeSsUj/D
+         7S8+ZOAM8308NokvpAPxgxqB5V8bORncwzm9AObvmPbio2Mjeiz9SjGglkawerUcod5z
+         qMTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=vU1mhA+6a6UNZzv2BVB2fIKfdnAaj/3HMw+ZArNAdEk=;
+        b=U9litsWGty4Rg6yU49VBTj/YchjpeVDlgBt0ZTaW5BRPHRBI7zzGl3sca4hZwu5zsw
+         EsBSVOKellQBhwJzctfVp76SPLdoMp/NcJogd3c2J0CZK8RDQOq9I0d74XgY+9si5hCx
+         BhncFQTOoDc0PtyEPcG+eK+X22UC494AiW/VMoUJdLqYNY8vUoF0h8tk0x3JqScnZxHH
+         kqsoktePMka1alhviWe8UkdHLBuqy3MLV1/h6N9pu6y4w98NK5HHBW80CSai0Opt+UZ6
+         wFfFLGnS0tCVLi2bqRawC7KgUUwTfYQVKbpRdWmTZkITDPpA+ts/Tho5PzFN+ovlIMEN
+         REnw==
+X-Gm-Message-State: AOAM531LmZOrpBh+wbsuSp+oUmhGZtr27wGnafqljPO0oW+U9qPItkom
+	cTtfflrDDb85YyBXNVn3vp29FZEE+8vZ+4vh
+X-Google-Smtp-Source: ABdhPJxKg40GnKIRt43vLJSVpObyjsKMdDMPZrJa0e9EhJ0K3ghTOVSpiuxDrDwiJGYlrGz9TO5B6w==
+X-Received: by 2002:a5d:50c6:: with SMTP id f6mr49466793wrt.131.1638891184734;
+        Tue, 07 Dec 2021 07:33:04 -0800 (PST)
+Return-Path: <aouledameur@baylibre.com>
+Received: from localhost.localdomain ([163.172.76.58])
+        by smtp.googlemail.com with ESMTPSA id f15sm3527546wmg.30.2021.12.07.07.33.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Dec 2021 07:33:04 -0800 (PST)
+From: "Amjad Ouled-Ameur" <aouledameur@baylibre.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Amjad Ouled-Ameur <aouledameur@baylibre.com>,
+	praneeth@ti.com,
+	denys@konsulko.com,
+	khilman@baylibre.com
+Subject: [PATCH] Revert "conf: am437xx-evm: Remove non-existent dtb* from 5.10"
+Date: Tue,  7 Dec 2021 15:32:45 +0000
+Message-Id: <20211207153245.3548-1-aouledameur@baylibre.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211207001059.5572-1-praneeth@ti.com>
-References: <20211207001059.5572-1-praneeth@ti.com>
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
 
-From: Praneeth Bajjuri <praneeth@ti.com>
+HDMI with Audio playback is currently broken on AM437X EVM,
+this is due to the fact that am437x-gp-evm-hdmi.dtb is missing.
+Reverting the aforementioned commit fixes the issue by adding the
+required DTB.
 
-Bump linux and rt-linux version to 08.01.00.006
+This reverts commit ba0ddc5ae9ebf9777d31283f272e4ed518e1f514.
 
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+Signed-off-by: Amjad Ouled-Ameur <aouledameur@baylibre.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/include/ti43x.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-index 0dba981f..53c7462f 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.10:"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 75b745b37839..6376a27830f8 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -27,9 +27,9 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ KERNEL_IMAGETYPE = "zImage"
  
- BRANCH = "ti-rt-linux-5.10.y"
+ KERNEL_DEVICETREE = " \
+-    am437x-gp-evm.dtb \
++    am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb \
+     am437x-sk-evm.dtb am437x-idk-evm.dtb \
+-    am43x-epos-evm.dtb \
++    am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb \
+ "
  
--SRCREV = "0c67d996db8f3c9149598bc98657ae28fee22208"
-+SRCREV = "541ec9a6995c3dd881d6f0b63cc714a08ded457d"
- PV = "5.10.65+git${SRCPV}"
-diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-index 545ea569..9fd9506e 100644
---- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-5.10.y"
- 
--SRCREV = "dfe78b39dc37d37666f04c788abcf7d72cca3e91"
-+SRCREV = "dcc6bedb2c2bdb509709e4ae08303206e95ce6c2"
- PV = "5.10.65+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am437x-idk-pru-excl-uio.dtb', '', d)}"
 -- 
 2.17.1
 
