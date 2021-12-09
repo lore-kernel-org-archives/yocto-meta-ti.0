@@ -1,123 +1,164 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.15691.1639075181572076955
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web09.15972.1639075726784385392
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Dec 2021 10:39:42 -0800
+ Thu, 09 Dec 2021 10:48:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=JYwhCUSZ;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1B9IdaL3013227;
-	Thu, 9 Dec 2021 12:39:36 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1639075176;
-	bh=85fMIoXm5V4ecI4QL6PRy+iFd0u1vy6mZ0T7dc3UcDI=;
-	h=From:To:CC:Subject:Date;
-	b=JYwhCUSZaDqBnAefD1+1Nigtt+3x0InOM84E61GWmTD6g/XLODTYlesaVtFCvs/uW
-	 WMHIg6QqbzvCEkkO90AEe3BtqzzmEpuifUImOg56sOn1hIdz6/RvgQCVvs7F25+D+q
-	 bp15MtPjuh7zkD+SVtKQdv28tlGe5KY/a1PNUU9c=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1B9Ida7C029033
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 9 Dec 2021 12:39:36 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 9
- Dec 2021 12:39:36 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 9 Dec 2021 12:39:35 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1B9IdZ1r015374;
-	Thu, 9 Dec 2021 12:39:35 -0600
-From: "praneeth" <praneeth@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko <denys@konsulko.com>
-CC: <denis@denix.org>, Yogesh Siraswar <yogeshs@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [dunfell/master PATCHv3] ti-sci-fw: Fix for k3-image-gen issue for combined boot images
-Date: Thu, 9 Dec 2021 12:39:35 -0600
-Message-ID: <20211209183935.6810-1-praneeth@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gMzv0ywu;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id x5so6318281pfr.0
+        for <meta-ti@lists.yoctoproject.org>; Thu, 09 Dec 2021 10:48:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jXYVW1lVfX9EUGCXCP/MLoldQYITHHHZjb4+K2hB6gc=;
+        b=gMzv0ywuV+j5UVR2+l5keu5q5Ms00Gz6m0W2a5SPS1rvisfY82s6xwcxyg2wMFh2cD
+         WhBgJhfM0frOV29/jylHSF4++R8jDWz84y9y18hHpdowFxBTkffXf4DKygL5cMSBUIo3
+         DId4ZnQj562jMsx21aXufGB+xB09q69QZDw9+dVVUeUYzlg92WFPQpIVBWjJ6CZghxcE
+         1hE+iZ6YZnSBMDWujw7WeZ90SykeFEvd6jfPD3kl0RkCvMC+T3oPx2+QG6tmRp7BBz8w
+         zvh6CQkgPB2/n6zV1Uk7WMajX+72mlkqJxFMRGYtAoKRZfY75Q7rq0fN31FD2tPpXrHV
+         6pHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jXYVW1lVfX9EUGCXCP/MLoldQYITHHHZjb4+K2hB6gc=;
+        b=F7IBhOEFuR1xaUlAlHoyAPLIjj3fmPYEt3GYAPo6pIc0m5QwN/kRbBQZfN+w7PDfOC
+         9BJawmo8FTV/s+opHKurme6yMuRngjuUN8bKh5bflP2BCF2Ko4H7YDNmFN+CdjRIy1q1
+         joEEw0yYsyYZkOnaKYNjShYOsVHYKAW3rVkH0tdrcIxKIbUAwuZSuvNhIqmPd18p8eqq
+         BYMyfyN/3LlyzfPsYHedyWEDra2FVTcpEaqnlVWjFoQKLAs5J2I/GKT/EpoAKQrODIAO
+         8+5x2aiZoQgGVqm9QJxy4V/cuBheqTKGX0RNobNL267wA78QsnuIHA0Mhkq83xIzW4f+
+         kDQw==
+X-Gm-Message-State: AOAM531WLNDprBXIDo4LPVoIAcOZgtvCkVQ9uRE1WqPCRb06SgtFgtWc
+	o6C6U4KZWsgQrA9IzviKj7mqkdS9ggcGtw==
+X-Google-Smtp-Source: ABdhPJyvKamGzxmmtHDp7HOJ/gbM+H+flKS8+UEFeypfYIhXzj9tqYoyWlPuyTtiXRpusVJ8ARg++A==
+X-Received: by 2002:aa7:918c:0:b0:494:6b49:cbfa with SMTP id x12-20020aa7918c000000b004946b49cbfamr13578997pfa.72.1639075725783;
+        Thu, 09 Dec 2021 10:48:45 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
+        by smtp.gmail.com with ESMTPSA id y26sm333838pgc.72.2021.12.09.10.48.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Dec 2021 10:48:45 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Denys Dmytriyenko <denys@konsulko.com>
+Subject: [PATCH] ti-sgx-ddk-km: Fix build with kernel 5.10 and musl support
+Date: Thu,  9 Dec 2021 10:48:42 -0800
+Message-Id: <20211209184842.1863975-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Yogesh Siraswar <yogeshs@ti.com>
+This adds a patch to fix runtime problems loading the kernel module with
+kernel 5.10
 
-This is temporary fix for combined boot images for KIG in meta-ti till
-the patch is integrated.
+Adds support to build with musl targets
 
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+Add yoe to recognised OE distributions
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Denys Dmytriyenko <denys@konsulko.com>
 ---
-v3: Addressed review comments and simplified the patch further
+ ...mbedded-hardfp-toolchain-w-o-gnueabi.patch | 18 ++++++++----
+ ...02-Fix-driver-config-for-5.10-kernel.patch | 28 +++++++++++++++++++
+ .../ti-sgx-ddk-km_1.17.4948957.bb             |  1 +
+ 3 files changed, 42 insertions(+), 5 deletions(-)
+ create mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch
 
- ...gning-of-binaries-for-combined-boot-.patch | 38 +++++++++++++++++++
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb        |  5 +++
- 2 files changed, 43 insertions(+)
- create mode 100644 recipes-bsp/ti-sci-fw/files/0001-Makefile-Skip-signing-of-binaries-for-combined-boot-.patch
-
-diff --git a/recipes-bsp/ti-sci-fw/files/0001-Makefile-Skip-signing-of-binaries-for-combined-boot-.patch b/recipes-bsp/ti-sci-fw/files/0001-Makefile-Skip-signing-of-binaries-for-combined-boot-.patch
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
+index 15105eac..d58764fe 100644
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
+@@ -1,23 +1,31 @@
+-From 755632b4f3a40996a12bc7816a9839af7112040a Mon Sep 17 00:00:00 2001
++From a1c191a020f6eebc9a94b641be1fca7885fc9dd2 Mon Sep 17 00:00:00 2001
+ From: Denys Dmytriyenko <denys@ti.com>
+ Date: Mon, 9 Sep 2019 17:05:48 -0400
+-Subject: [PATCH] km: support OpenEmbedded hardfp toolchain w/o -gnueabihf
++Subject: [PATCH 1/2] km: support OpenEmbedded hardfp toolchain w/o -gnueabihf
+  suffix
+ 
++OE toolchains are not having armhf in its name but they still are armhf
++ABI, teach this to sgx module build system
++
++recognize musleabi in tuples as well
++
++Add yoe distro support
++
+ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  eurasia_km/eurasiacon/build/linux2/config/compiler.mk | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
+ 
+ diff --git a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
+-index dead2f9..2ba3e5e 100644
++index dead2f9..1b5f090 100644
+ --- a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
+ +++ b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
+ @@ -68,12 +68,12 @@ define calculate-compiler-preferred-target
+    ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
+     $(1)_compiler_preferred_target := aarch64-linux-gnu
+    endif
+-+  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
+++  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi arm-yoe-linux-gnueabi arm-oe-linux-musleabi arm-poky-linux-musleabi arm-yoe-linux-musleabi,$$($(1)_compiler_preferred_target)),)
+ +   $(1)_compiler_preferred_target := arm-linux-gnueabihf
+ +  endif
+    ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
+@@ -30,5 +38,5 @@ index dead2f9..2ba3e5e 100644
+  endef
+  
+ -- 
+-2.7.4
++2.34.1
+ 
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch
 new file mode 100644
-index 00000000..604c0c60
+index 00000000..d9745703
 --- /dev/null
-+++ b/recipes-bsp/ti-sci-fw/files/0001-Makefile-Skip-signing-of-binaries-for-combined-boot-.patch
-@@ -0,0 +1,38 @@
-+From 31134a5750ab645394c7ae72e8da46509d48bfb4 Mon Sep 17 00:00:00 2001
-+From: Vignesh Raghavendra <vigneshr@ti.com>
-+Date: Thu, 9 Dec 2021 12:24:08 -0600
-+Subject: [tiKIG PATCHv2] Makefile: Skip signing of binaries for HS combined
-+ boot
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch
+@@ -0,0 +1,28 @@
++From 57c3aafacde126786077afa7bfc07ec261acffaf Mon Sep 17 00:00:00 2001
++From: Paul Barker <paul.barker@sancloud.com>
++Date: Wed, 27 Oct 2021 10:34:32 +0100
++Subject: [PATCH 2/2] Fix driver config for 5.10 kernel
 +
-+Combined sysfw binaries used in tiboot3.bin do not require signed images.
-+This fixes HS boot failures on am64x and j7200.
++See https://github.com/openpvrsgx-devgroup/linux_openpvrsgx/issues/3.
 +
-+Upstream-Status: Submitted
-+Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-+Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
++Ref: BSP-66
++Signed-off-by: Paul Barker <paul.barker@sancloud.com>
 +---
++ eurasia_km/eurasiacon/build/linux2/config/core.mk | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+ Makefile | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/Makefile b/Makefile
-+index 47b3b20..18e9eb5 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -217,10 +217,12 @@ $(soc_objroot)/%.o: %.c
++diff --git a/eurasia_km/eurasiacon/build/linux2/config/core.mk b/eurasia_km/eurasiacon/build/linux2/config/core.mk
++index 3f27926..18d515a 100644
++--- a/eurasia_km/eurasiacon/build/linux2/config/core.mk
+++++ b/eurasia_km/eurasiacon/build/linux2/config/core.mk
++@@ -590,6 +590,7 @@ ifneq ($(BUFFERCLASS_MODULE),)
++ $(eval $(call BothConfigMake,BUFFERCLASS_MODULE,$(BUFFERCLASS_MODULE)))
++ endif
 + 
-+ # On HS board configuration binaries must be signed
-+ ifdef HS
-++ifneq (,$(COMBINED_SYSFW_BRDCFG_LOADADDR))
-+ %.bin.unsigned: %.o
-+ 	$(CROSS_COMPILE)objcopy -S -O binary $< $@
-+ %.bin: %.bin.unsigned
-+ 	$(TI_SECURE_DEV_PKG)/scripts/secure-binary-image.sh $< $@
-++endif
-+ else
-+ %.bin: %.o
-+ 	$(CROSS_COMPILE)objcopy -S -O binary $< $@
+++PVR_LINUX_MEM_AREA_USE_VMAP = 1
++ ifneq ($(strip $(KERNELDIR)),)
++ PVR_LINUX_MEM_AREA_POOL_MAX_PAGES ?= 0
++ ifneq ($(PVR_LINUX_MEM_AREA_POOL_MAX_PAGES),0)
 +-- 
-+2.17.1
++2.34.1
 +
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index 6d48bf23..00756fd8 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -47,6 +47,11 @@ LD[unexport] = "1"
+diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+index 3848e84e..e6247e08 100644
+--- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
++++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+@@ -22,6 +22,7 @@ BRANCH = "ti-img-sgx/${PV}/k5.10"
  
- do_configure[noexec] = "1"
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH} \
+     file://0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch \
++    file://0002-Fix-driver-config-for-5.10-kernel.patch \
+ "
  
-+SRC_URI_append_j7200-hs-evm-k3r5 = "\
-+	file://0001-Makefile-Skip-signing-of-binaries-for-combined-boot-.patch;patchdir=../imggen"
-+SRC_URI_append_am64xx-hs-evm-k3r5 = "\
-+	file://0001-Makefile-Skip-signing-of-binaries-for-combined-boot-.patch;patchdir=../imggen"
-+
- EXTRA_OEMAKE = "\
-     CROSS_COMPILE=${TARGET_PREFIX} SYSFW_DL_URL='' SYSFW_HS_DL_URL='' SYSFW_HS_INNER_CERT_DL_URL='' \
-     SYSFW_PATH="${SYSFW_TISCI}" SOC=${SYSFW_SOC} CONFIG=${SYSFW_CONFIG} \
+ S = "${WORKDIR}/git"
 -- 
-2.17.1
+2.34.1
 
