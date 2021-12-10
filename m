@@ -1,76 +1,117 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2428.1639105903342530160
+ by mx.groups.io with SMTP id smtpd.web11.7600.1639144991819665424
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Dec 2021 19:11:43 -0800
+ Fri, 10 Dec 2021 06:03:12 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 7E12E40C50;
-	Fri, 10 Dec 2021 03:11:41 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id ED9F740C82
+	for <meta-ti@lists.yoctoproject.org>; Fri, 10 Dec 2021 14:03:09 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Zvpj_HWT8A2J; Fri, 10 Dec 2021 03:11:41 +0000 (UTC)
+	with ESMTP id DBtTZQw_Vcba for <meta-ti@lists.yoctoproject.org>;
+	Fri, 10 Dec 2021 14:03:09 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5AE6940A03;
-	Fri, 10 Dec 2021 03:11:39 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id DB64940AC9
+	for <meta-ti@lists.yoctoproject.org>; Fri, 10 Dec 2021 14:03:09 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 2444A174710; Thu,  9 Dec 2021 22:11:39 -0500 (EST)
-Date: Thu, 9 Dec 2021 22:11:39 -0500
+	id 8CD6E174709; Fri, 10 Dec 2021 09:03:09 -0500 (EST)
+Date: Fri, 10 Dec 2021 09:03:09 -0500
 From: "Denys Dmytriyenko" <denis@denix.org>
-To: yogeshs@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH] linux-ti-staging: block sa2ul for am64x hs and j7200 hs device
-Message-ID: <20211210031139.GF18191@denix.org>
-References: <20211210025624.42987-1-yogeshs@ti.com>
+To: meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [master][PATCH v2 00/26] Sync up with Dunfell #2
+Message-ID: <20211210140309.GH18191@denix.org>
+References: <16B92351CEC3B089.8765@lists.yoctoproject.org>
 MIME-Version: 1.0
-In-Reply-To: <20211210025624.42987-1-yogeshs@ti.com>
+In-Reply-To: <16B92351CEC3B089.8765@lists.yoctoproject.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Fri, Dec 10, 2021 at 02:56:24AM +0000, Yogesh Siraswar via lists.yoctoproject.org wrote:
-> SA2UL GP driver will not work for HS. Need SA2UL HS driver.
-> Till it is implemented blacklist sa2ul for am64xx hs and j7200 hs
+Ping
+
+
+On Fri, Nov 19, 2021 at 10:25:45PM -0500, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@konsulko.com>
 > 
-> Change Suggested by: Denys Dmytriyenko <denis@denix.org>
-
-BTW, there's a standard Suggested-by: tag...
-
-
-> Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
-
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
-> ---
->  recipes-kernel/linux/linux-ti-staging_5.10.bb | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+> Keep master up to date with latest changes in Dunfell, adjust to the new
+> override syntax.
 > 
-> diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-> index 9fd9506e..3f3d50af 100644
-> --- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
-> +++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
-> @@ -27,7 +27,7 @@ SRCREV = "dcc6bedb2c2bdb509709e4ae08303206e95ce6c2"
->  PV = "5.10.65+git${SRCPV}"
->  
->  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-> -MACHINE_KERNEL_PR_append = "a"
-> +MACHINE_KERNEL_PR_append = "b"
->  PR = "${MACHINE_KERNEL_PR}"
->  
->  KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
-> @@ -43,3 +43,9 @@ module_conf_ti_k3_r5_remoteproc = "softdep ti_k3_r5_remoteproc pre: virtio_rpmsg
->  module_conf_ti_k3_dsp_remoteproc = "softdep ti_k3_dsp_remoteproc pre: virtio_rpmsg_bus"
->  KERNEL_MODULE_PROBECONF += "rpmsg_client_sample ti_k3_r5_remoteproc ti_k3_dsp_remoteproc"
->  KERNEL_MODULE_AUTOLOAD_append_j7 = " rpmsg_kdrv_switch"
-> +
-> +# Disable SA2UL for AM64x HS and J7200 HS
-> +module_conf_sa2ul_am64xx-hs-evm = "blacklist sa2ul"
-> +KERNEL_MODULE_PROBECONF_append_am64xx-hs-evm = " sa2ul"
-> +module_conf_sa2ul_j7200-hs-evm = "blacklist sa2ul"
-> +KERNEL_MODULE_PROBECONF_append_j7200-hs-evm = " sa2ul"
+> Amjad Ouled-Ameur (1):
+>   recipes-bsp: u-boot-ti-mainline: Update to v2021.10 release
+> 
+> Denys Dmytriyenko (1):
+>   recipes: update github SRC_URIs
+> 
+> Praneeth Bajjuri (1):
+>   vxd-dec-fw: Add the recipe for vxd-dec-fw
+> 
+> Ryan Eatmon (3):
+>   u-boot-ti-staging: Bump u-boot version for 08.01.00.005
+>   linux-ti-staging: Bump linux version for 08.01.00.005
+>   linux-ti-staging-rt: Bump linux rt version for 08.01.00.005
+> 
+> Yogesh Siraswar (20):
+>   u-boot-ti-staging: Bump u-boot version for 08.01.00.002
+>   ti-linux-fw: Bump ti linux firmware for 08.01.00.002
+>   linux-ti-staging: Bump linux version for 08.01.00.002
+>   linux-ti-staging-rt: Bump linux rt version for 08.01.00.002 release
+>   ti-linux-fw: Bump k3 image gen to latest
+>   u-boot-ti-staging: Bump u-boot version for 08.01.00.003
+>   linux-ti-staging: Bump linux version for 08.01.00.003
+>   linux-ti-staging-rt: Bump linux rt version for 08.01.00.003
+>   ti-linux-fw: Add AUTOREV support for K3 Image Gen
+>   conf: am57xx-evm: Add missing *.dtb and *.dtbo
+>   conf: machine: add new am64x hs platform
+>   ti-sci-fw: changes to build combined boot image for hs build
+>   am64xx-hs: changes to support new hs platform
+>   conf: machine: am64xx: Add missing dtbo
+>   conf: machine : am65xx: Add missing dtbo
+>   conf: machine: Add j7200 hs platform
+>   ti-rtos-firmware: Add j7200 hs support
+>   j7200-hs: changes to support new hs platform
+>   j721e-sr1_1: Add j721e sr1.1 HS support
+>   j7-hs-evm: Correct image boot file causing build error
+> 
+>  conf/machine/am57xx-evm.conf                       |  3 ++
+>  conf/machine/am64xx-hs-evm-k3r5.conf               | 14 +++++
+>  conf/machine/am64xx-hs-evm.conf                    | 22 ++++++++
+>  conf/machine/include/am64xx.inc                    |  1 +
+>  conf/machine/include/am65xx.inc                    |  1 +
+>  conf/machine/j7-hs-evm-k3r5-sr1-1.conf             | 11 ++++
+>  conf/machine/j7-hs-evm.conf                        |  8 +++
+>  conf/machine/j7200-hs-evm-k3r5.conf                | 13 +++++
+>  conf/machine/j7200-hs-evm.conf                     | 22 ++++++++
+>  conf/multiconfig/k3r5-sr1-1.conf                   |  3 ++
+>  licenses/TI-IMG                                    | 63 ++++++++++++++++++++++
+>  recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb | 24 +++++++++
+>  recipes-bsp/ti-linux-fw/ti-linux-fw.inc            | 13 +++--
+>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb             | 40 +++++++++++++-
+>  .../trusted-firmware-a_%.bbappend                  | 16 ++++++
+>  recipes-bsp/u-boot/u-boot-ti-mainline_git.bb       |  4 +-
+>  recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb    |  4 +-
+>  recipes-bsp/u-boot/u-boot-ti.inc                   | 12 +++++
+>  ...NUInstallDirs-module-to-detect-install-pa.patch | 48 -----------------
+>  recipes-devtools/ion/libion_git.bb                 |  6 +--
+>  recipes-kernel/linux/kernel-rdepends.inc           |  3 ++
+>  recipes-kernel/linux/linux-ti-staging-rt_5.10.bb   |  2 +-
+>  recipes-kernel/linux/linux-ti-staging_5.10.bb      |  2 +-
+>  recipes-security/optee/optee-os_%.bbappend         |  8 +++
+>  .../beagleboard/beaglebone-getting-started.bb      |  2 +-
+>  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb         | 36 ++++++++++++-
+>  26 files changed, 314 insertions(+), 67 deletions(-)
+>  create mode 100644 conf/machine/am64xx-hs-evm-k3r5.conf
+>  create mode 100644 conf/machine/am64xx-hs-evm.conf
+>  create mode 100644 conf/machine/j7-hs-evm-k3r5-sr1-1.conf
+>  create mode 100644 conf/machine/j7200-hs-evm-k3r5.conf
+>  create mode 100644 conf/machine/j7200-hs-evm.conf
+>  create mode 100644 conf/multiconfig/k3r5-sr1-1.conf
+>  create mode 100644 licenses/TI-IMG
+>  create mode 100644 recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
+>  delete mode 100644 recipes-devtools/ion/libion/0001-cmake-Use-GNUInstallDirs-module-to-detect-install-pa.patch
+> 
 > -- 
-> 2.17.1
+> 2.7.4
 > 
