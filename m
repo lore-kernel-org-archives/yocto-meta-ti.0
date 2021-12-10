@@ -1,172 +1,68 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.949.1639097501916667827
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.1115.1639098183054303536
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Dec 2021 16:51:42 -0800
+ Thu, 09 Dec 2021 17:03:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0309440C50;
-	Fri, 10 Dec 2021 00:51:41 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CieT5xqyCRFG; Fri, 10 Dec 2021 00:51:40 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D130140BEA;
-	Fri, 10 Dec 2021 00:51:38 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 9553C17470C; Thu,  9 Dec 2021 19:51:38 -0500 (EST)
-Date: Thu, 9 Dec 2021 19:51:38 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>
-Subject: Re: [meta-ti] [PATCH v2] ti-sgx-ddk-km: Fix build with kernel 5.10 and musl support
-Message-ID: <20211210005138.GD18191@denix.org>
-References: <20211210002522.1561830-1-raj.khem@gmail.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GU4qAnvS;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: yogeshs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 1BA130VD122705;
+	Thu, 9 Dec 2021 19:03:00 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1639098180;
+	bh=LhKudirOgSwqjFo9o7Js+8z9eNnrLAE/lJEBLJ+yNDU=;
+	h=From:To:Subject:Date;
+	b=GU4qAnvSQeX1+ZJrar+Vaq1OhrzvNbVQgU330dfe8OxYZwTPN2nZh8kCcd3Wy60A1
+	 Iy58PZs0QFgDzZIRZROsJes1p0r2inadzKwVYZuhyHXy36vClJinjjpYZT3lOssIcY
+	 BOhKnR7wFgJmMJrir3mnW3dwNdXQjTJQRoKsGAcE=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 1BA130a8094015
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 9 Dec 2021 19:03:00 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 9
+ Dec 2021 19:03:00 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Thu, 9 Dec 2021 19:03:00 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 1BA130P9024654;
+	Thu, 9 Dec 2021 19:03:00 -0600
+From: "Yogesh Siraswar" <yogeshs@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/dunfell][PATCH] conf: j7200-hs: fix the wrong machine configuration included
+Date: Fri, 10 Dec 2021 01:03:00 +0000
+Message-ID: <20211210010300.24551-1-yogeshs@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20211210002522.1561830-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Thu, Dec 09, 2021 at 04:25:22PM -0800, Khem Raj wrote:
-> This adds a patch to fix runtime problems loading the kernel module with
-> kernel 5.10
-> 
-> Adds support to build with musl targets
-> 
-> Add yoe to recognised OE distributions
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Denys Dmytriyenko <denys@konsulko.com>
+j7-evm instead of j7200-evm was included causing boot failure
 
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+Signed-off-by: Yogesh Siraswar <yogeshs@ti.com>
+---
+ conf/machine/j7200-hs-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/conf/machine/j7200-hs-evm.conf b/conf/machine/j7200-hs-evm.conf
+index c55be005..a5bd637e 100644
+--- a/conf/machine/j7200-hs-evm.conf
++++ b/conf/machine/j7200-hs-evm.conf
+@@ -2,7 +2,7 @@
+ #@NAME: J7200 HS EVM
+ #@DESCRIPTION: Machine configuration for the TI J7200 HS EVM
+ 
+-require conf/machine/j7-evm.conf
++require conf/machine/j7200-evm.conf
+ 
+ UBOOT_MACHINE = "j7200_hs_evm_a72_defconfig"
+ 
+-- 
+2.17.1
 
-> ---
-> v2: Add upstream status to patches
-
-Thanks! Although I wonder if the first patch should be treated as 
-"Inappropriate [OE-specific]", as it was there for few years already 
-and does actually add support for OE-specific toolchains...
-
-
->  ...mbedded-hardfp-toolchain-w-o-gnueabi.patch | 20 +++++++++----
->  ...02-Fix-driver-config-for-5.10-kernel.patch | 29 +++++++++++++++++++
->  .../ti-sgx-ddk-km_1.17.4948957.bb             |  1 +
->  .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     |  1 +
->  4 files changed, 46 insertions(+), 5 deletions(-)
->  create mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch
-> 
-> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-> index 15105eac..4f71ea9d 100644
-> --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-> @@ -1,23 +1,33 @@
-> -From 755632b4f3a40996a12bc7816a9839af7112040a Mon Sep 17 00:00:00 2001
-> +From a1c191a020f6eebc9a94b641be1fca7885fc9dd2 Mon Sep 17 00:00:00 2001
->  From: Denys Dmytriyenko <denys@ti.com>
->  Date: Mon, 9 Sep 2019 17:05:48 -0400
-> -Subject: [PATCH] km: support OpenEmbedded hardfp toolchain w/o -gnueabihf
-> +Subject: [PATCH 1/2] km: support OpenEmbedded hardfp toolchain w/o -gnueabihf
->   suffix
->  
-> +OE toolchains are not having armhf in its name but they still are armhf
-> +ABI, teach this to sgx module build system
-> +
-> +recognize musleabi in tuples as well
-> +
-> +Add yoe distro support
-> +
-> +Upstream-Status: Pending
-> +
->  Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->  ---
->   eurasia_km/eurasiacon/build/linux2/config/compiler.mk | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->  
->  diff --git a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-> -index dead2f9..2ba3e5e 100644
-> +index dead2f9..1b5f090 100644
->  --- a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
->  +++ b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
->  @@ -68,12 +68,12 @@ define calculate-compiler-preferred-target
->     ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
->      $(1)_compiler_preferred_target := aarch64-linux-gnu
->     endif
-> -+  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-> ++  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi arm-yoe-linux-gnueabi arm-oe-linux-musleabi arm-poky-linux-musleabi arm-yoe-linux-musleabi,$$($(1)_compiler_preferred_target)),)
->  +   $(1)_compiler_preferred_target := arm-linux-gnueabihf
->  +  endif
->     ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-> @@ -30,5 +40,5 @@ index dead2f9..2ba3e5e 100644
->   endef
->   
->  -- 
-> -2.7.4
-> +2.34.1
->  
-> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch
-> new file mode 100644
-> index 00000000..1f097909
-> --- /dev/null
-> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0002-Fix-driver-config-for-5.10-kernel.patch
-> @@ -0,0 +1,29 @@
-> +From 57c3aafacde126786077afa7bfc07ec261acffaf Mon Sep 17 00:00:00 2001
-> +From: Paul Barker <paul.barker@sancloud.com>
-> +Date: Wed, 27 Oct 2021 10:34:32 +0100
-> +Subject: [PATCH 2/2] Fix driver config for 5.10 kernel
-> +
-> +See https://github.com/openpvrsgx-devgroup/linux_openpvrsgx/issues/3.
-> +
-> +Upstream-Status: Pending
-> +Ref: BSP-66
-> +Signed-off-by: Paul Barker <paul.barker@sancloud.com>
-> +---
-> + eurasia_km/eurasiacon/build/linux2/config/core.mk | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/eurasia_km/eurasiacon/build/linux2/config/core.mk b/eurasia_km/eurasiacon/build/linux2/config/core.mk
-> +index 3f27926..18d515a 100644
-> +--- a/eurasia_km/eurasiacon/build/linux2/config/core.mk
-> ++++ b/eurasia_km/eurasiacon/build/linux2/config/core.mk
-> +@@ -590,6 +590,7 @@ ifneq ($(BUFFERCLASS_MODULE),)
-> + $(eval $(call BothConfigMake,BUFFERCLASS_MODULE,$(BUFFERCLASS_MODULE)))
-> + endif
-> + 
-> ++PVR_LINUX_MEM_AREA_USE_VMAP = 1
-> + ifneq ($(strip $(KERNELDIR)),)
-> + PVR_LINUX_MEM_AREA_POOL_MAX_PAGES ?= 0
-> + ifneq ($(PVR_LINUX_MEM_AREA_POOL_MAX_PAGES),0)
-> +-- 
-> +2.34.1
-> +
-> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> index 3848e84e..e6247e08 100644
-> --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> @@ -22,6 +22,7 @@ BRANCH = "ti-img-sgx/${PV}/k5.10"
->  
->  SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH} \
->      file://0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch \
-> +    file://0002-Fix-driver-config-for-5.10-kernel.patch \
->  "
->  
->  S = "${WORKDIR}/git"
-> diff --git a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> index 87bbb437..9d55122c 100644
-> --- a/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> +++ b/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.bb
-> @@ -32,6 +32,7 @@ inherit update-rc.d
->  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2 virtual/libgbm"
->  
->  DEPENDS += "libdrm udev wayland wayland-protocols libffi expat"
-> +DEPENDS:append:libc-musl = " gcompat"
->  RDEPENDS:${PN} += "libdrm libdrm-omap udev wayland wayland-protocols libffi expat"
->  
->  RPROVIDES:${PN} = "libegl libgles1 libgles2 libgbm"
-> -- 
-> 2.34.1
-> 
