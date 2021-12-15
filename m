@@ -1,101 +1,65 @@
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web08.2105.1639338234494013495
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.1219.1639601647956142246
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 12 Dec 2021 11:43:55 -0800
+ Wed, 15 Dec 2021 12:54:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20210112.gappssmtp.com header.s=20210112 header.b=Q/sOGjfM;
- spf=pass (domain: baylibre.com, ip: 209.85.221.41, mailfrom: aouledameur@baylibre.com)
-Received: by mail-wr1-f41.google.com with SMTP id a9so23748456wrr.8
-        for <meta-ti@lists.yoctoproject.org>; Sun, 12 Dec 2021 11:43:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id;
-        bh=mJH6AExDhhA3F1RHlMopqixEDQ8VB8c3QHp85ngARVw=;
-        b=Q/sOGjfMMWokScV00pfVbJjboNXBo0z7JNoM9PUAqH/LsuP09gw733At8lmBuymSVb
-         /zcPrzgEFQotCFwv2EhxJgp/rlvXpOPtzx4AVS0dcHdk5EeESkO18qKxVIl6I8DA3b+A
-         L6UnRVIYFrcF2igqcelU8ZsskaW1XXs9FxcRZLlN/6ti4SM4hfMwRv8Zg42lZhZ/Qi76
-         O2GKzFRFjj7RsfDNXaU+aTOYtNox0Y5imoqYCsCp9B306hEz+x1Mv/MhqlcN+Fr3/Q5e
-         F5+Wb8s2HcBA/o2SyeLVbqobQ2HLXCW4tu8+2ideXq6skOFVa1nu57xDFRuXXq1pjHnu
-         QELA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=mJH6AExDhhA3F1RHlMopqixEDQ8VB8c3QHp85ngARVw=;
-        b=HrUN79zx4cLtPQlrhckveKyuJSkaGQta4T3+pbJNKVFCpb1SSbI5ajZj/WxaZthi6Y
-         iKCzwddMhFoD+ttzF3kpxXCZf5JzV26zJwZi5mkuLKOFxQiVHbmWLbz23n0tuI3sIc/3
-         LA9fpTaGJhJ2bON2pJCt9Aq5EoQusb+JeLicqqSfpWOQondKEp/0AcYYXasr8eFt9FOa
-         2/QFCbATziuttOhrNjrBLTbxPFI0rL8jC/2/o/ACMynMZk7NlZTC6z5HT0Zd3SgCs2Ue
-         u6HOXFpkDhjMzyb0cyj5nNMulKs8TktMAllblZ1bVKoWcj3N2KaV92ZhxuuVwcAnaOhn
-         UTRw==
-X-Gm-Message-State: AOAM530jJXp11JihUvRqqi6sXMyBucbCJYdqghXEyqG3Z2BnRaFfxZ3k
-	zQgELGPLO+Czqx7xBtXSWJzLLYLrvopCNA==
-X-Google-Smtp-Source: ABdhPJyA+ENl8q9xfmfwv/wWfoPMFU/fshEYXTYrCSHLQESHn4MGIcVUV1LZotndhIZayQDPFz+Dxg==
-X-Received: by 2002:a05:6000:1862:: with SMTP id d2mr28059688wri.251.1639338232439;
-        Sun, 12 Dec 2021 11:43:52 -0800 (PST)
-Return-Path: <aouledameur@baylibre.com>
-Received: from localhost.localdomain ([163.172.76.58])
-        by smtp.googlemail.com with ESMTPSA id n7sm8961785wro.68.2021.12.12.11.43.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Dec 2021 11:43:52 -0800 (PST)
-From: "Amjad Ouled-Ameur" <aouledameur@baylibre.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A4DF240C4E
+	for <meta-ti@lists.yoctoproject.org>; Wed, 15 Dec 2021 20:54:06 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id GuC559CIMQpn for <meta-ti@lists.yoctoproject.org>;
+	Wed, 15 Dec 2021 20:54:06 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 956D5406B7
+	for <meta-ti@lists.yoctoproject.org>; Wed, 15 Dec 2021 20:54:06 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 47AAA174719; Wed, 15 Dec 2021 15:54:06 -0500 (EST)
+Date: Wed, 15 Dec 2021 15:54:06 -0500
+From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Cc: Amjad Ouled-Ameur <aouledameur@baylibre.com>,
-	praneeth@ti.com,
-	denys@konsulko.com,
-	khilman@baylibre.com
-Subject: [PATCH v2] conf: am437xx-evm: re-introduce required DTBs for HDMI support
-Date: Sun, 12 Dec 2021 19:43:39 +0000
-Message-Id: <20211212194339.37606-1-aouledameur@baylibre.com>
-X-Mailer: git-send-email 2.17.1
+Subject: Re: [master][PATCH] prusw-fw-am65x-sr2: update with the new override syntax
+Message-ID: <20211215205406.GP18191@denix.org>
+References: <1638401898-24444-1-git-send-email-denis@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <1638401898-24444-1-git-send-email-denis@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-commit ba0ddc5ae9eb ("conf: am437xx-evm: Remove non-existent dtb* from
-5.10") removed all non-existent dtb* for am437xx-evm as they were not
-available on linux 5.10 branch at that time.
+Ping. I don't believe this one made it in yet.
 
-This patch reintroduces following HDMI DTBs.
-- am437x-gp-evm-hdmi.dtb
-- am43x-epos-evm-hdmi.dtb
 
-The required dts have been added to the 5.10LTS by these two following
-commits:
-- https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/arch/arm/
-boot/dts/am437x-gp-evm-hdmi.dts?h=ti-linux-5.10.y&id=25434078d3f93d1346af5
-e52e0f150f9083321d8
-- https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/arch/arm/
-boot/dts/am43x-epos-evm-hdmi.dts?h=ti-linux-5.10.y&id=c5114144b568e470a8f6
-e613f7c6e8b88ad19d7e
+On Wed, Dec 01, 2021 at 06:38:18PM -0500, Denys Dmytriyenko wrote:
+> This got accidentally merged from Dunfell with the old syntax, fix it.
+> 
+> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+> ---
+>  recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb b/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb
+> index 8cb450a..2d0d3f9 100644
+> --- a/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb
+> +++ b/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb
+> @@ -29,6 +29,6 @@ do_install() {
+>  	done
+>  }
+>  
+> -FILES_${PN} = "${base_libdir}/firmware"
+> +FILES:${PN} = "${base_libdir}/firmware"
+>  
+> -INSANE_SKIP_${PN} = "arch"
+> +INSANE_SKIP:${PN} = "arch"
+> -- 
+> 2.7.4
+> 
 
-Signed-off-by: Amjad Ouled-Ameur <aouledameur@baylibre.com>
----
-Changes in V2:
-- Reworked commit message.
-
-V1: https://lists.yoctoproject.org/g/meta-ti/topic/patch_revert_conf/875669
-71?p=,,,20,0,0,0::recentpostdate/sticky,,,20,2,0,87566971,previd=1639144992
-271923805,nextid=1638294245910532029&previd=1639144992271923805&nextid=1638
-294245910532029
-
-Fixes: LCPD-24285
-
- conf/machine/include/ti43x.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index 75b745b37839..6376a27830f8 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -27,9 +27,9 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
- KERNEL_IMAGETYPE = "zImage"
- 
- KERNEL_DEVICETREE = " \
--    am437x-gp-evm.dtb \
-+    am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb \
-     am437x-sk-evm.dtb am437x-idk-evm.dtb \
--    am43x-epos-evm.dtb \
-+    am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb \
- "
- 
- KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am437x-idk-pru-excl-uio.dtb', '', d)}"
 -- 
-2.17.1
-
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
