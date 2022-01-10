@@ -1,133 +1,127 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.9305.1641668272646848787
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
+ by mx.groups.io with SMTP id smtpd.web10.50.1641854584118450983
  for <meta-ti@lists.yoctoproject.org>;
- Sat, 08 Jan 2022 10:57:53 -0800
+ Mon, 10 Jan 2022 14:43:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0975B40C7B;
-	Sat,  8 Jan 2022 18:57:51 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KLw2CfP-1XYb; Sat,  8 Jan 2022 18:57:51 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D464A40B13;
-	Sat,  8 Jan 2022 18:57:47 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 3933617471A; Sat,  8 Jan 2022 13:57:47 -0500 (EST)
-Date: Sat, 8 Jan 2022 13:57:47 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: praneeth@ti.com
-Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [dunfell PATCH] ti-sgx-ddk-km: update srcrev to pick latest
-Message-ID: <20220108185747.GB26229@denix.org>
-References: <20220107235608.27595-1-praneeth@ti.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Dtwe20xc;
+ spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: vivien.didelot@gmail.com)
+Received: by mail-qv1-f54.google.com with SMTP id t7so4913707qvj.0
+        for <meta-ti@lists.yoctoproject.org>; Mon, 10 Jan 2022 14:43:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GwNa5aBa+r+pitZ1OA+AifJ0/hw7/B4JBDpDVTfTUj4=;
+        b=Dtwe20xczI+KC7np6VcCGKKMECUW27BkeSoB+3nu+lF6bAcY7CAYw44fiFp1awXoj6
+         rYRkenyEAaRWlaBnoyCup/3yiBlW4VzVbEk0Lsmu3fEshfjnvystukA9tahf27lohkbX
+         sILq7qx5qyMAZ8eW8vDbsml9xezd67wbAoaBsrJnPj0gRCvVEC6IM/z/BAiUOUR9HNTb
+         ee++BdwzYvr6BzwjN6bLCnFfd4FT8Iqh2ocbpy5oJUEY53OmI2bl8bhrW949n4O9s2cx
+         UEasqjGZRhZaY2VZGTT3y73jN6WFdC6+d625rWtI45ZkU5riOFkhKaaE2S4LWfGnyEES
+         0i7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GwNa5aBa+r+pitZ1OA+AifJ0/hw7/B4JBDpDVTfTUj4=;
+        b=NZnPwXg1SuS+Q5k8DXy9H0xAyWXwS5hoKxQyAzY5dlDkqb/B3JwAMxUp0sk64I857U
+         LepRLIA48/9nsQEiIBv9Uzlsb0hvEFI3+9SwU42X1zjkeMVfMfsDxoMzmWSHFnJ6A+uN
+         uAx730ExHxMu7l5iergoTAI5yj9K+EMT3UWD5jnMRJ3DwEd8jPoKK3tUG4ri7ALxgDMw
+         FVwAUf0SBmFB6kp0VUdMkrfnf6jd8CdEPf9IMmMkKV5Sv5JCKM5lKFrl3WHFf5bTPeRD
+         fAZZyoNhJ9xFdQn5cis8eMgMxyqck5q8VcU7if35RF61wYzQGeIjM6d2x/F6IOREvejQ
+         HViQ==
+X-Gm-Message-State: AOAM532j1irfiGkFltVK2I/27790+ruTtyQrfzYfJc5A64DKXnrSl8Ra
+	hygM4d1vWCon9sQGF7vT3r1CVlfbpCM=
+X-Google-Smtp-Source: ABdhPJzPUXWDRadmntIf+WSxU6MXalA+kVVZupm4x5TTU0TVHawtkLqxl6VDuRj2ikify95rVPgTNg==
+X-Received: by 2002:a05:6214:2483:: with SMTP id gi3mr1569876qvb.15.1641854583130;
+        Mon, 10 Jan 2022 14:43:03 -0800 (PST)
+Return-Path: <vivien.didelot@gmail.com>
+Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-211.dsl.bell.ca. [70.53.240.211])
+        by smtp.gmail.com with ESMTPSA id u17sm5499542qko.133.2022.01.10.14.43.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Jan 2022 14:43:02 -0800 (PST)
+From: "Vivien Didelot" <vivien.didelot@gmail.com>
+X-Google-Original-From: Vivien Didelot <vdidelot@pbsc.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+	Praneeth Bajjuri <praneeth@ti.com>
+Subject: [PATCH] ti33x: move screen feature to machine configs
+Date: Mon, 10 Jan 2022 12:42:10 -0500
+Message-Id: <20220110174210.2018323-1-vdidelot@pbsc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-In-Reply-To: <20220107235608.27595-1-praneeth@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Is this a duplicate?
-https://lists.yoctoproject.org/g/meta-ti/topic/master_patch/87869018
+The AM335x SoC has a built-in 16bit/24bit RGB LCD controller, and
+the BeagleBone Black uses an external chip to convert this to HDMI.
 
+But the SoC does not have a video output port per-se, thus the "screen"
+machine feature does not belong to its configuration but rather to
+the machine configurations.
 
-On Fri, Jan 07, 2022 at 05:56:08PM -0600, praneeth@ti.com wrote:
-> From: Praneeth Bajjuri <praneeth@ti.com>
-> 
-> Update the srcrev to pick the latest of ti-img-sgx/1.17.4948957/k5.10.
-> 
-> commit eaa9fcd3acff ("km: support OpenEmbedded hardfp toolchain w/o -gnueabihf suffix")
-> is not picked up on the sdk-ddk-km repo already, hence removing the patch from here.
-> 
-> commit eda7780bfd52 ("Fix driver config for 5.10 kernel") fixes graphics
-> init failures on sgx platforms
-> 
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-> ---
->  ...mbedded-hardfp-toolchain-w-o-gnueabi.patch | 34 -------------------
->  .../ti-sgx-ddk-km_1.17.4948957.bb             |  8 ++---
->  2 files changed, 3 insertions(+), 39 deletions(-)
->  delete mode 100644 recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-> 
-> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-> deleted file mode 100644
-> index 15105eac..00000000
-> --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -From 755632b4f3a40996a12bc7816a9839af7112040a Mon Sep 17 00:00:00 2001
-> -From: Denys Dmytriyenko <denys@ti.com>
-> -Date: Mon, 9 Sep 2019 17:05:48 -0400
-> -Subject: [PATCH] km: support OpenEmbedded hardfp toolchain w/o -gnueabihf
-> - suffix
-> -
-> -Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ----
-> - eurasia_km/eurasiacon/build/linux2/config/compiler.mk | 6 +++---
-> - 1 file changed, 3 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-> -index dead2f9..2ba3e5e 100644
-> ---- a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-> -+++ b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-> -@@ -68,12 +68,12 @@ define calculate-compiler-preferred-target
-> -   ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
-> -    $(1)_compiler_preferred_target := aarch64-linux-gnu
-> -   endif
-> -+  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-> -+   $(1)_compiler_preferred_target := arm-linux-gnueabihf
-> -+  endif
-> -   ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-> -    $(1)_compiler_preferred_target := arm-linux-gnueabi
-> -   endif
-> --  ifneq ($$(filter arm-%-gnueabihf,$$($(1)_compiler_preferred_target)),)
-> --   $(1)_compiler_preferred_target := arm-linux-gnueabihf
-> --  endif
-> -  endif
-> - endef
-> - 
-> --- 
-> -2.7.4
-> -
-> diff --git a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> index e21ccc7f..a1b0765c 100644
-> --- a/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> +++ b/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> @@ -9,7 +9,7 @@ REQUIRED_MACHINE_FEATURES = "gpu"
->  
->  COMPATIBLE_MACHINE = "pandaboard|beagleboard|ti33x|ti43x|omap-a15|k3"
->  
-> -MACHINE_KERNEL_PR_append = "x"
-> +MACHINE_KERNEL_PR_append = "y"
->  PR = "${MACHINE_KERNEL_PR}"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> @@ -20,13 +20,11 @@ PROVIDES = "virtual/gpudriver"
->  
->  BRANCH = "ti-img-sgx/${PV}/k5.10"
->  
-> -SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH} \
-> -    file://0001-km-support-OpenEmbedded-hardfp-toolchain-w-o-gnueabi.patch \
-> -"
-> +SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
->  
->  S = "${WORKDIR}/git"
->  
-> -SRCREV = "62f31de3ceed156bff32abb3dd03693a02df117e"
-> +SRCREV = "eda7780bfd5277e16913c9bc0b0e6892b4e79063"
->  
->  TARGET_PRODUCT_omap-a15 = "jacinto6evm"
->  TARGET_PRODUCT_ti33x = "ti335x"
-> -- 
-> 2.17.1
-> 
+Move the feature (and the MACHINE_GUI_CLASS definition) out of
+ti33x.inc into am335x-evm.conf and beaglebone.conf respectively.
 
+At the same time, drop the irrelevant comments regarding the external
+screen, since MACHINE_GUI_CLASS is unlikely used and the BeagleBone
+Black has a micro HDMI port, not a DVI port.
+
+Signed-off-by: Vivien Didelot <vdidelot@pbsc.com>
+---
+ conf/machine/am335x-evm.conf   | 2 +-
+ conf/machine/beaglebone.conf   | 2 +-
+ conf/machine/include/ti33x.inc | 5 +----
+ 3 files changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 469c4d37..09bd3934 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -5,7 +5,7 @@
+ require conf/machine/include/ti33x.inc
+ 
+ MACHINE_GUI_CLASS = "smallscreen"
+-MACHINE_FEATURES += "touchscreen"
++MACHINE_FEATURES += "screen touchscreen"
+ 
+ IMAGE_FSTYPES += "ubifs ubi"
+ 
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index dcb14cc9..76cac5b9 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -8,8 +8,8 @@ KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblue.dtb \
+                     am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
+                     am335x-bonegreen.dtb am335x-bonegreen-wireless.dtb"
+ 
+-# Only has DVI connector for external screen
+ MACHINE_GUI_CLASS = "bigscreen"
++MACHINE_FEATURES += "screen"
+ 
+ SERIAL_CONSOLES = "115200;ttyS0"
+ 
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 197cac19..c0e925f9 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -13,9 +13,6 @@ XSERVER = "xserver-xorg \
+            xf86-video-fbdev \
+            xf86-input-keyboard"
+ 
+-# Default to external video, change to smallscreen for built-in LCD
+-MACHINE_GUI_CLASS = "bigscreen"
+-
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r22"
+ 
+@@ -62,7 +59,7 @@ UBI_VOLNAME = "rootfs"
+ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet gpu"
+ 
+ # Set the list of device targets for ti-pdk class recipes
+ TI_PDK_LIMIT_SOCS = "am335x"
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.34.1
+
