@@ -1,714 +1,135 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.20761.1643238553003746787
+ by mx.groups.io with SMTP id smtpd.web11.21196.1643238553001889617
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 26 Jan 2022 15:09:13 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 71CD440CC1;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 705F840CC0;
 	Wed, 26 Jan 2022 23:09:12 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RFAdtdbZCscA; Wed, 26 Jan 2022 23:09:12 +0000 (UTC)
+	with ESMTP id M2yCIgiUzN1P; Wed, 26 Jan 2022 23:09:12 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 411F940CC3;
-	Wed, 26 Jan 2022 23:09:07 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5DB2540CCA;
+	Wed, 26 Jan 2022 23:09:08 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 45EA1174730;
+	by mail.denix.org (Postfix) with ESMTP id EAD2D17473A;
 	Wed, 26 Jan 2022 18:09:04 -0500 (EST)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [RFC][master][PATCH 08/19] alsa-state: remove asound.state for deprecated beagleboard
-Date: Wed, 26 Jan 2022 18:08:48 -0500
-Message-Id: <1643238539-20686-9-git-send-email-denis@denix.org>
+Subject: [RFC][master][PATCH 18/19] gcc-linaro-baremetal: remove 7.2 version of GCC for baremetal Arm and Aarch64
+Date: Wed, 26 Jan 2022 18:08:58 -0500
+Message-Id: <1643238539-20686-19-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1643238539-20686-1-git-send-email-denis@denix.org>
 References: <1643238539-20686-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-As beagleboard is now deprecated and removed from future meta-ti releases.
+Newer versions of baremetal GCC toolchain available from meta-arm-toolchain.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-bsp/alsa-state/alsa-state.bbappend         |   1 -
- .../alsa-state/alsa-state/beagleboard/asound.state | 656 ---------------------
- 2 files changed, 657 deletions(-)
- delete mode 100644 recipes-bsp/alsa-state/alsa-state.bbappend
- delete mode 100644 recipes-bsp/alsa-state/alsa-state/beagleboard/asound.state
+ .../gcc-linaro-baremetal-aarch64-native.bb         | 23 ----------------------
+ recipes-ti/devtools/gcc-linaro-baremetal-native.bb | 23 ----------------------
+ recipes-ti/devtools/gcc-linaro.inc                 | 10 ----------
+ recipes-ti/includes/ti-paths.inc                   |  2 --
+ 4 files changed, 58 deletions(-)
+ delete mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
+ delete mode 100644 recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+ delete mode 100644 recipes-ti/devtools/gcc-linaro.inc
 
-diff --git a/recipes-bsp/alsa-state/alsa-state.bbappend b/recipes-bsp/alsa-state/alsa-state.bbappend
+diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
 deleted file mode 100644
-index 4fc41d0..0000000
---- a/recipes-bsp/alsa-state/alsa-state.bbappend
+index 3b40c9b..0000000
+--- a/recipes-ti/devtools/gcc-linaro-baremetal-aarch64-native.bb
 +++ /dev/null
-@@ -1 +0,0 @@
--FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-diff --git a/recipes-bsp/alsa-state/alsa-state/beagleboard/asound.state b/recipes-bsp/alsa-state/alsa-state/beagleboard/asound.state
-deleted file mode 100644
-index f924491..0000000
---- a/recipes-bsp/alsa-state/alsa-state/beagleboard/asound.state
-+++ /dev/null
-@@ -1,656 +0,0 @@
--state.omap3beagle {
--	control.1 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Option 2 (voice/audio)'
--		comment.item.1 'Option 1 (audio)'
--		iface MIXER
--		name 'Codec Operation Mode'
--		value 'Option 1 (audio)'
--	}
--	control.2 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 63'
--		comment.dbmin -6300
--		comment.dbmax 0
--		iface MIXER
--		name 'DAC1 Digital Fine Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.3 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 63'
--		comment.dbmin -6300
--		comment.dbmax 0
--		iface MIXER
--		name 'DAC2 Digital Fine Playback Volume'
--		value.0 50
--		value.1 50
--	}
--	control.4 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 2'
--		comment.dbmin 0
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC1 Digital Coarse Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.5 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 2'
--		comment.dbmin 0
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC2 Digital Coarse Playback Volume'
--		value.0 2
--		value.1 2
--	}
--	control.6 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 18'
--		comment.dbmin -2400
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC1 Analog Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.7 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 18'
--		comment.dbmin -2400
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC2 Analog Playback Volume'
--		value.0 15
--		value.1 15
--	}
--	control.8 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 2
--		iface MIXER
--		name 'DAC1 Analog Playback Switch'
--		value.0 false
--		value.1 false
--	}
--	control.9 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 2
--		iface MIXER
--		name 'DAC2 Analog Playback Switch'
--		value.0 true
--		value.1 true
--	}
--	control.10 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 49'
--		comment.dbmin -3700
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC Voice Digital Downlink Volume'
--		value 0
--	}
--	control.11 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 18'
--		comment.dbmin -2400
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC Voice Analog Downlink Volume'
--		value 18
--	}
--	control.12 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'DAC Voice Analog Downlink Switch'
--		value false
--	}
--	control.13 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 3'
--		comment.dbmin -1200
--		comment.dbmax 600
--		iface MIXER
--		name 'PreDriv Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.14 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 3'
--		comment.dbmin -1200
--		comment.dbmax 600
--		iface MIXER
--		name 'Headset Playback Volume'
--		value.0 3
--		value.1 3
--	}
--	control.15 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 3'
--		comment.dbmin -1200
--		comment.dbmax 600
--		iface MIXER
--		name 'Carkit Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.16 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 3'
--		comment.dbmin -600
--		comment.dbmax 1200
--		iface MIXER
--		name 'Earpiece Playback Volume'
--		value 0
--	}
--	control.17 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 31'
--		comment.dbmin 0
--		comment.dbmax 3100
--		iface MIXER
--		name 'TX1 Digital Capture Volume'
--		value.0 12
--		value.1 12
--	}
--	control.18 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 31'
--		comment.dbmin 0
--		comment.dbmax 3100
--		iface MIXER
--		name 'TX2 Digital Capture Volume'
--		value.0 0
--		value.1 0
--	}
--	control.19 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 5'
--		comment.dbmin 0
--		comment.dbmax 3000
--		iface MIXER
--		name 'Analog Capture Volume'
--		value.0 0
--		value.1 0
--	}
--	control.20 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Voice high priority'
--		comment.item.1 'HiFi high priority'
--		iface MIXER
--		name 'AVADC Clock Priority'
--		value 'Voice high priority'
--	}
--	control.21 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 '27/20/14 ms'
--		comment.item.1 '55/40/27 ms'
--		comment.item.2 '109/81/55 ms'
--		comment.item.3 '218/161/109 ms'
--		comment.item.4 '437/323/218 ms'
--		comment.item.5 '874/645/437 ms'
--		comment.item.6 '1748/1291/874 ms'
--		comment.item.7 '3495/2581/1748 ms'
--		iface MIXER
--		name 'HS ramp delay'
--		value '27/20/14 ms'
--	}
--	control.22 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Vibra H-bridge direction'
--		comment.item.1 'Audio data MSB'
--		iface MIXER
--		name 'Vibra H-bridge mode'
--		value 'Vibra H-bridge direction'
--	}
--	control.23 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Positive polarity'
--		comment.item.1 'Negative polarity'
--		iface MIXER
--		name 'Vibra H-bridge direction'
--		value 'Positive polarity'
--	}
--	control.24 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Right Sub Mic Capture Switch'
--		value false
--	}
--	control.25 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Right AUXR Capture Switch'
--		value true
--	}
--	control.26 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left Main Mic Capture Switch'
--		value false
--	}
--	control.27 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left Headset Mic Capture Switch'
--		value false
--	}
--	control.28 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left AUXL Capture Switch'
--		value true
--	}
--	control.29 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left Carkit Mic Capture Switch'
--		value false
--	}
--	control.30 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Analog
--		comment.item.1 Digimic1
--		iface MIXER
--		name 'TX2 Capture Route'
--		value Analog
--	}
--	control.31 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Analog
--		comment.item.1 Digimic0
--		iface MIXER
--		name 'TX1 Capture Route'
--		value Analog
--	}
--	control.32 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Local vibrator'
--		comment.item.1 Audio
--		iface MIXER
--		name 'Vibra Route'
--		value 'Local vibrator'
--	}
--	control.33 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 AudioL1
--		comment.item.1 AudioR1
--		comment.item.2 AudioL2
--		comment.item.3 AudioR2
--		iface MIXER
--		name 'Vibra Mux'
--		value AudioL1
--	}
--	control.34 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HandsfreeR Switch'
--		value false
--	}
--	control.35 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Voice
--		comment.item.1 AudioR1
--		comment.item.2 AudioR2
--		comment.item.3 AudioL2
--		iface MIXER
--		name 'HandsfreeR Mux'
--		value Voice
--	}
--	control.36 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HandsfreeL Switch'
--		value false
--	}
--	control.37 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Voice
--		comment.item.1 AudioL1
--		comment.item.2 AudioL2
--		comment.item.3 AudioR2
--		iface MIXER
--		name 'HandsfreeL Mux'
--		value Voice
--	}
--	control.38 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitR Mixer Voice'
--		value false
--	}
--	control.39 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitR Mixer AudioR1'
--		value false
--	}
--	control.40 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitR Mixer AudioR2'
--		value false
--	}
--	control.41 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitL Mixer Voice'
--		value false
--	}
--	control.42 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitL Mixer AudioL1'
--		value false
--	}
--	control.43 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitL Mixer AudioL2'
--		value false
--	}
--	control.44 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetR Mixer Voice'
--		value false
--	}
--	control.45 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetR Mixer AudioR1'
--		value false
--	}
--	control.46 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetR Mixer AudioR2'
--		value true
--	}
--	control.47 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetL Mixer Voice'
--		value false
--	}
--	control.48 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetL Mixer AudioL1'
--		value false
--	}
--	control.49 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetL Mixer AudioL2'
--		value true
--	}
--	control.50 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer Voice'
--		value false
--	}
--	control.51 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer AudioR1'
--		value false
--	}
--	control.52 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer AudioR2'
--		value false
--	}
--	control.53 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer AudioL2'
--		value false
--	}
--	control.54 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer Voice'
--		value false
--	}
--	control.55 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer AudioL1'
--		value false
--	}
--	control.56 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer AudioL2'
--		value false
--	}
--	control.57 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer AudioR2'
--		value false
--	}
--	control.58 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer Voice'
--		value false
--	}
--	control.59 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer AudioL1'
--		value false
--	}
--	control.60 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer AudioL2'
--		value false
--	}
--	control.61 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer AudioR1'
--		value false
--	}
--	control.62 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 41'
--		comment.dbmin -5100
--		comment.dbmax -1000
--		iface MIXER
--		name 'Voice Digital Loopback Volume'
--		value 0
--	}
--	control.63 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 7'
--		comment.dbmin -2400
--		comment.dbmax 0
--		iface MIXER
--		name 'Right Digital Loopback Volume'
--		value 0
--	}
--	control.64 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 7'
--		comment.dbmin -2400
--		comment.dbmax 0
--		iface MIXER
--		name 'Left Digital Loopback Volume'
--		value 0
--	}
--	control.65 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Voice Analog Loopback Switch'
--		value false
--	}
--	control.66 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Left2 Analog Loopback Switch'
--		value false
--	}
--	control.67 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Right2 Analog Loopback Switch'
--		value false
--	}
--	control.68 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Left1 Analog Loopback Switch'
--		value false
--	}
--	control.69 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Right1 Analog Loopback Switch'
--		value false
--	}
+@@ -1,23 +0,0 @@
+-include recipes-ti/devtools/gcc-linaro.inc
+-
+-PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf"
+-S = "${WORKDIR}/${PACKAGE_DIR}"
+-
+-LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+-
+-inherit native
+-require recipes-ti/includes/ti-paths.inc
+-
+-SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/aarch64-elf/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_aarch64-elf.tar.xz;name=gcc-linaro-aarch64"
+-
+-SRC_URI[gcc-linaro-aarch64.md5sum] = "4972f8943820bdd2f577f498de78964b"
+-SRC_URI[gcc-linaro-aarch64.sha256sum] = "30fb7d876bcb982c502057c593d9c1f11b35d5158a26d986718e2b998388c4c8"
+-
+-do_install() {
+-    install -d ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
+-    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}
 -}
+-
+-FILES:${PN} = "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}/*"
+-
+-INSANE_SKIP:${PN} = "already-stripped"
+diff --git a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb b/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
+deleted file mode 100644
+index 6d5ec19..0000000
+--- a/recipes-ti/devtools/gcc-linaro-baremetal-native.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-include recipes-ti/devtools/gcc-linaro.inc
+-
+-PACKAGE_DIR = "gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi"
+-S = "${WORKDIR}/${PACKAGE_DIR}"
+-
+-LIC_CHKSUM = "bc7fad4bba98e7a4cd5ab3042506493c"
+-
+-inherit native
+-require recipes-ti/includes/ti-paths.inc
+-
+-SRC_URI = "https://releases.linaro.org/components/toolchain/binaries/7.2-${GCC_ARM_YEAR}/arm-eabi/gcc-linaro-${PV}-${GCC_ARM_YEAR}-x86_64_arm-eabi.tar.xz;name=gcc-linaro"
+-
+-SRC_URI[gcc-linaro.md5sum] = "9a4a39cfc78c84375b1160aa93587aed"
+-SRC_URI[gcc-linaro.sha256sum] = "45fc4f90af2e2e9c3197a275f6005ef5639f7a1889fa3eb24c3125ccd70fcd3d"
+-
+-do_install() {
+-    install -d ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
+-    cp -r ${S}/. ${D}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}
+-}
+-
+-FILES:${PN} = "${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}/*"
+-
+-INSANE_SKIP:${PN} = "already-stripped"
+diff --git a/recipes-ti/devtools/gcc-linaro.inc b/recipes-ti/devtools/gcc-linaro.inc
+deleted file mode 100644
+index 19f5a2c..0000000
+--- a/recipes-ti/devtools/gcc-linaro.inc
++++ /dev/null
+@@ -1,10 +0,0 @@
+-DESCRIPTION = "Linaro GCC for ARM"
+-HOMEPAGE = "https://launchpad.net/gcc-arm-embedded"
+-SECTION = "devel"
+-LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
+-LIC_FILES_CHKSUM = "file://share/doc/gcc/GNU-Free-Documentation-License.html;md5=${LIC_CHKSUM}"
+-
+-PV = "7.2.1"
+-PR = "r0"
+-
+-GCC_ARM_YEAR = "2017.11"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index ea985be..358d7df 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -50,8 +50,6 @@ export CG_XML_INSTALL_DIR_RECIPE     = "${installdir}/ti-cg-xml-tree"
+ export OMP_INSTALL_DIR_RECIPE        = "${installdir}/ti-omp-tree"
+ export MPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-mpm-tree"
+ export TI_CGT6X_7_INSTALL_DIR_RECIPE   = "${installdir}/cgt6x-7"
+-export GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE          = "${installdir}/gcc-linaro-baremetal"
+-export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE  = "${installdir}/gcc-linaro-baremetal-aarch64"
+ export TI_CGT7X_INSTALL_DIR_RECIPE        = "${installdir}/cgt-c7x"
+ 
+ 
 -- 
 2.7.4
 
