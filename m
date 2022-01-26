@@ -1,2205 +1,1017 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.21288.1643238549509342728
+ by mx.groups.io with SMTP id smtpd.web09.20897.1643238549588955751
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 26 Jan 2022 15:09:09 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id CE1A740CC9;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E487D40CD0;
 	Wed, 26 Jan 2022 23:09:08 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oJNlBRPIDzQn; Wed, 26 Jan 2022 23:09:08 +0000 (UTC)
+	with ESMTP id 54xg40dMxPlW; Wed, 26 Jan 2022 23:09:08 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 96A5D40CC0;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A723540CC8;
 	Wed, 26 Jan 2022 23:09:07 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 7D63D174734;
+	by mail.denix.org (Postfix) with ESMTP id 9B66C174735;
 	Wed, 26 Jan 2022 18:09:04 -0500 (EST)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [RFC][master][PATCH 12/19] recipes-bsp: remove Keystone1/2 LLDs
-Date: Wed, 26 Jan 2022 18:08:52 -0500
-Message-Id: <1643238539-20686-13-git-send-email-denis@denix.org>
+Subject: [RFC][master][PATCH 13/19] classes,recipes: remove K1/2 PDK RTOS support, FWs and IPC transports
+Date: Wed, 26 Jan 2022 18:08:53 -0500
+Message-Id: <1643238539-20686-14-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1643238539-20686-1-git-send-email-denis@denix.org>
 References: <1643238539-20686-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Low Level Drivers (LLDs) were used by Keystone1/2 to access peripherals by
-RTOS and Linux. Remove due to deprecation.
+Remove deprecated support for compiling Keystone1/2 RTOS components and
+Linux firmwares using PDK, CSL, etc.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-bsp/aif2-lld/aif2-lld-rtos_git.bb          |  16 --
- recipes-bsp/aif2-lld/aif2-lld-test_git.bb          |  18 --
- recipes-bsp/aif2-lld/aif2-lld.inc                  |  14 --
- recipes-bsp/aif2-lld/aif2-lld_git.bb               |  20 ---
- recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb            |  23 ---
- recipes-bsp/cal-lld/cal-lld-rtos_git.bb            |  76 --------
- recipes-bsp/cppi-lld/cppi-lld-rtos_git.bb          |  10 --
- recipes-bsp/cppi-lld/cppi-lld-test_git.bb          |  29 ---
- recipes-bsp/cppi-lld/cppi-lld.inc                  |  19 --
- recipes-bsp/cppi-lld/cppi-lld_git.bb               |  38 ----
- recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb            |  12 --
- recipes-bsp/dfe-lld/dfe-lld-test_git.bb            |  20 ---
- recipes-bsp/dfe-lld/dfe-lld.inc                    |  14 --
- recipes-bsp/dfe-lld/dfe-lld_git.bb                 |  20 ---
- recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb        | 145 ---------------
- recipes-bsp/edma3-lld/edma3-lld.inc                |  17 --
- recipes-bsp/edma3-lld/edma3-lld_git.bb             |  78 --------
- recipes-bsp/emac-lld/emac-lld-rtos_git.bb          |  30 ----
- recipes-bsp/emac-lld/emac-lld.inc                  |   7 -
- recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb          |  22 ---
- recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb          |  34 ----
- recipes-bsp/gpmc-lld/gpmc-lld-rtos_git.bb          |  32 ----
- recipes-bsp/hyplnk-lld/hyplnk-lld-rtos_git.bb      |  12 --
- recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb      |  26 ---
- recipes-bsp/hyplnk-lld/hyplnk-lld.inc              |  21 ---
- recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb           |  36 ----
- recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb            |  45 -----
- .../icss-emac-lld/icss-emac-lld-rtos_git.bb        |  25 ---
- .../icss-emac-lld/icss-emac-lld-test_git.bb        |  30 ----
- recipes-bsp/icss-emac-lld/icss-emac-lld.inc        |  15 --
- recipes-bsp/icss-emac-lld/icss-emac-lld_git.bb     |  25 ---
- recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb      |  33 ----
- recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb   | 162 -----------------
- recipes-bsp/ipc-lld/ipc-lld-fw_git.bb              | 196 ---------------------
- recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb            |  45 -----
- recipes-bsp/ipc-lld/ipc-lld.inc                    |  29 ---
- recipes-bsp/iqn2-lld/iqn2-lld-rtos_git.bb          |  12 --
- recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb          |  18 --
- recipes-bsp/iqn2-lld/iqn2-lld.inc                  |  13 --
- recipes-bsp/iqn2-lld/iqn2-lld_git.bb               |  25 ---
- recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb        |  41 -----
- recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb        |  30 ----
- recipes-bsp/mmap-lld/mmap-lld-rtos_git.bb          |  10 --
- recipes-bsp/mmap-lld/mmap-lld-test_git.bb          |  44 -----
- recipes-bsp/mmap-lld/mmap-lld.inc                  |  22 ---
- recipes-bsp/mmap-lld/mmap-lld_git.bb               |  15 --
- recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb        |  41 -----
- recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb          |  19 --
- recipes-bsp/nwal-lld/nwal-lld-test_git.bb          |  27 ---
- recipes-bsp/nwal-lld/nwal-lld.inc                  |  21 ---
- recipes-bsp/nwal-lld/nwal-lld_git.bb               |  27 ---
- recipes-bsp/pa-lld/pa-lld-rtos_git.bb              |  12 --
- recipes-bsp/pa-lld/pa-lld-test_git.bb              |  30 ----
- recipes-bsp/pa-lld/pa-lld.inc                      |  24 ---
- recipes-bsp/pa-lld/pa-lld_git.bb                   |  27 ---
- recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb          |  28 ---
- recipes-bsp/pm-lld/pm-lld-rtos_git.bb              |  71 --------
- recipes-bsp/pruss-lld/pruss-lld-apps_git.bb        |  31 ----
- recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb        |  22 ---
- recipes-bsp/pruss-lld/pruss-lld-test_git.bb        |  27 ---
- recipes-bsp/pruss-lld/pruss-lld.inc                |  15 --
- recipes-bsp/pruss-lld/pruss-lld_git.bb             |  21 ---
- recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb          |   9 -
- recipes-bsp/qmss-lld/qmss-lld-test_git.bb          |  30 ----
- recipes-bsp/qmss-lld/qmss-lld.inc                  |  19 --
- recipes-bsp/qmss-lld/qmss-lld_git.bb               |  38 ----
- recipes-bsp/rm-lld/rm-lld-rtos_git.bb              |  13 --
- recipes-bsp/rm-lld/rm-lld.inc                      |  15 --
- recipes-bsp/rm-lld/rm-lld_git.bb                   |  33 ----
- recipes-bsp/sa-lld/sa-lld-rtos_git.bb              |  26 ---
- recipes-bsp/sa-lld/sa-lld-test_git.bb              |  46 -----
- recipes-bsp/sa-lld/sa-lld.inc                      |  21 ---
- recipes-bsp/sa-lld/sa-lld_git.bb                   |  26 ---
- recipes-bsp/spi-lld/spi-lld-rtos_git.bb            |  37 ----
- recipes-bsp/srio-lld/srio-lld-rtos_git.bb          |  17 --
- recipes-bsp/srio-lld/srio-lld-test_git.bb          |  30 ----
- recipes-bsp/srio-lld/srio-lld.inc                  |  18 --
- recipes-bsp/srio-lld/srio-lld_git.bb               |  21 ---
- recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb        |  23 ---
- recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb          |  18 --
- recipes-bsp/uart-lld/uart-lld-rtos_git.bb          |  41 -----
- recipes-bsp/udma-lld/udma-lld-rtos_git.bb          |  65 -------
- recipes-bsp/usb-lld/usb-lld-rtos_git.bb            |  29 ---
- recipes-bsp/vps-lld/vps-lld-rtos_git.bb            |  56 ------
- 84 files changed, 2698 deletions(-)
- delete mode 100644 recipes-bsp/aif2-lld/aif2-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/aif2-lld/aif2-lld-test_git.bb
- delete mode 100644 recipes-bsp/aif2-lld/aif2-lld.inc
- delete mode 100644 recipes-bsp/aif2-lld/aif2-lld_git.bb
- delete mode 100644 recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/cal-lld/cal-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/cppi-lld/cppi-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/cppi-lld/cppi-lld-test_git.bb
- delete mode 100644 recipes-bsp/cppi-lld/cppi-lld.inc
- delete mode 100644 recipes-bsp/cppi-lld/cppi-lld_git.bb
- delete mode 100644 recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/dfe-lld/dfe-lld-test_git.bb
- delete mode 100644 recipes-bsp/dfe-lld/dfe-lld.inc
- delete mode 100644 recipes-bsp/dfe-lld/dfe-lld_git.bb
- delete mode 100644 recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/edma3-lld/edma3-lld.inc
- delete mode 100644 recipes-bsp/edma3-lld/edma3-lld_git.bb
- delete mode 100644 recipes-bsp/emac-lld/emac-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/emac-lld/emac-lld.inc
- delete mode 100644 recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/gpmc-lld/gpmc-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/hyplnk-lld/hyplnk-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
- delete mode 100644 recipes-bsp/hyplnk-lld/hyplnk-lld.inc
- delete mode 100644 recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
- delete mode 100644 recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/icss-emac-lld/icss-emac-lld-test_git.bb
- delete mode 100644 recipes-bsp/icss-emac-lld/icss-emac-lld.inc
- delete mode 100644 recipes-bsp/icss-emac-lld/icss-emac-lld_git.bb
- delete mode 100644 recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
- delete mode 100644 recipes-bsp/ipc-lld/ipc-lld-fw_git.bb
- delete mode 100644 recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/ipc-lld/ipc-lld.inc
- delete mode 100644 recipes-bsp/iqn2-lld/iqn2-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
- delete mode 100644 recipes-bsp/iqn2-lld/iqn2-lld.inc
- delete mode 100644 recipes-bsp/iqn2-lld/iqn2-lld_git.bb
- delete mode 100644 recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/mmap-lld/mmap-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/mmap-lld/mmap-lld-test_git.bb
- delete mode 100644 recipes-bsp/mmap-lld/mmap-lld.inc
- delete mode 100644 recipes-bsp/mmap-lld/mmap-lld_git.bb
- delete mode 100644 recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/nwal-lld/nwal-lld-test_git.bb
- delete mode 100644 recipes-bsp/nwal-lld/nwal-lld.inc
- delete mode 100644 recipes-bsp/nwal-lld/nwal-lld_git.bb
- delete mode 100644 recipes-bsp/pa-lld/pa-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/pa-lld/pa-lld-test_git.bb
- delete mode 100644 recipes-bsp/pa-lld/pa-lld.inc
- delete mode 100644 recipes-bsp/pa-lld/pa-lld_git.bb
- delete mode 100644 recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/pm-lld/pm-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/pruss-lld/pruss-lld-apps_git.bb
- delete mode 100644 recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/pruss-lld/pruss-lld-test_git.bb
- delete mode 100644 recipes-bsp/pruss-lld/pruss-lld.inc
- delete mode 100644 recipes-bsp/pruss-lld/pruss-lld_git.bb
- delete mode 100644 recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/qmss-lld/qmss-lld-test_git.bb
- delete mode 100644 recipes-bsp/qmss-lld/qmss-lld.inc
- delete mode 100644 recipes-bsp/qmss-lld/qmss-lld_git.bb
- delete mode 100644 recipes-bsp/rm-lld/rm-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/rm-lld/rm-lld.inc
- delete mode 100644 recipes-bsp/rm-lld/rm-lld_git.bb
- delete mode 100644 recipes-bsp/sa-lld/sa-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/sa-lld/sa-lld-test_git.bb
- delete mode 100644 recipes-bsp/sa-lld/sa-lld.inc
- delete mode 100644 recipes-bsp/sa-lld/sa-lld_git.bb
- delete mode 100644 recipes-bsp/spi-lld/spi-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/srio-lld/srio-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/srio-lld/srio-lld-test_git.bb
- delete mode 100644 recipes-bsp/srio-lld/srio-lld.inc
- delete mode 100644 recipes-bsp/srio-lld/srio-lld_git.bb
- delete mode 100644 recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/uart-lld/uart-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/udma-lld/udma-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/usb-lld/usb-lld-rtos_git.bb
- delete mode 100644 recipes-bsp/vps-lld/vps-lld-rtos_git.bb
+ classes/ti-pdk-fetch.bbclass                       |  47 -------
+ classes/ti-pdk.bbclass                             | 144 --------------------
+ recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb  |  38 ------
+ recipes-bsp/board-rtos/board-rtos_git.bb           |  76 -----------
+ recipes-bsp/boot-monitor/boot-monitor_git.bb       |  47 -------
+ recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb        |  41 ------
+ .../common-csl-ip/common-csl-ip-rtos_git.bb        |  23 ----
+ recipes-bsp/common-csl-ip/common-csl-ip.inc        |  23 ----
+ recipes-bsp/common-csl-ip/common-csl-ip_git.bb     |  17 ---
+ .../common-csl-ip/csl-rti-dwwdtest-fw_git.bb       |  77 -----------
+ recipes-bsp/dsptop/temperature-module-drv_git.bb   |  18 ---
+ recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb           |  28 ----
+ .../faultmanagement/faultmanagement-rtos_git.bb    |  36 -----
+ recipes-bsp/fvid2/fvid2-rtos_git.bb                |  67 ----------
+ recipes-bsp/hplib/hplib-mod_git.bb                 |  22 ----
+ recipes-bsp/hplib/hplib-test_git.bb                |  32 -----
+ recipes-bsp/hplib/hplib.inc                        |  20 ---
+ recipes-bsp/hplib/hplib_git.bb                     |  33 -----
+ recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb          |  75 -----------
+ recipes-bsp/mad-utils/mad-utils-rtos_git.bb        |  57 --------
+ recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb         |  50 -------
+ recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb         |  23 ----
+ recipes-bsp/osal/osal-rtos_git.bb                  |  18 ---
+ recipes-bsp/osal/osal-test_git.bb                  |  20 ---
+ recipes-bsp/osal/osal.inc                          |  15 ---
+ recipes-bsp/osal/osal_git.bb                       |  21 ---
+ recipes-bsp/pktlib/pktlib-rtos_git.bb              |  10 --
+ recipes-bsp/pktlib/pktlib.inc                      |  24 ----
+ recipes-bsp/pktlib/pktlib_git.bb                   |  19 ---
+ recipes-bsp/pru/pru-pwm-fw_git.bb                  |  39 ------
+ ...s_uart-add-Makefile-for-building-firmware.patch | 145 ---------------------
+ ...01-icss_uart-remove-dependency-on-PDK-CSL.patch |  54 --------
+ recipes-bsp/pru/pru-swuart-fw_git.bb               |  40 ------
+ recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb       |  26 ----
+ recipes-bsp/sciclient/sciclient-rtos_git.bb        | 125 ------------------
+ recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb    |  35 -----
+ recipes-bsp/serdes-fw/serdes-fw_git.bb             |  27 ----
+ recipes-bsp/srss-tc/srss-tc_git.bb                 |  33 -----
+ recipes-bsp/starterware/starterware-rtos_git.bb    |  33 -----
+ recipes-bsp/starterware/starterware.inc            |  21 ---
+ recipes-bsp/starterware/starterware_git.bb         |  16 ---
+ recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb     |  33 -----
+ recipes-bsp/ti-sci-fw/ti-sci-fw_0.1.1.50.bb        |  37 ------
+ .../traceframework/traceframework-rtos_git.bb      |  10 --
+ recipes-bsp/traceframework/traceframework.inc      |  27 ----
+ recipes-bsp/traceframework/traceframework_git.bb   |  40 ------
+ recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb    |  19 ---
+ recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb   |  29 -----
+ recipes-bsp/transport-rtos/nimu-rtos_git.bb        |  35 -----
+ recipes-bsp/transport-rtos/timesync-rtos_git.bb    |  31 -----
+ recipes-bsp/transport-rtos/transport.inc           |  11 --
+ recipes-bsp/utils-rtos/profiling-rtos_git.bb       |  26 ----
+ recipes-bsp/utils-rtos/trace-rtos_git.bb           |  28 ----
+ recipes-bsp/wdtimer/wdtimer-rtos_git.bb            |  29 -----
+ recipes-ti/includes/ti-paths.inc                   |   4 -
+ recipes-ti/ipc/ipc-transport-common-rtos_git.bb    |  23 ----
+ recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb      |  23 ----
+ recipes-ti/ipc/ipc-transport-qmss-test_git.bb      |  37 ------
+ recipes-ti/ipc/ipc-transport-qmss.inc              |  14 --
+ recipes-ti/ipc/ipc-transport-qmss_git.bb           |  19 ---
+ recipes-ti/ipc/ipc-transport-srio-rtos_git.bb      |  22 ----
+ recipes-ti/ipc/ipc-transport-srio-test_git.bb      |  32 -----
+ recipes-ti/ipc/ipc-transport-srio.inc              |  14 --
+ recipes-ti/ipc/ipc-transport-srio_git.bb           |  19 ---
+ recipes-ti/ipc/ipc-transport.inc                   |  15 ---
+ recipes-ti/mpm-transport/mpm-transport_git.bb      |  50 -------
+ recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb   |  44 -------
+ recipes-ti/multiprocmgr/multiprocmgr-test_git.bb   |  31 -----
+ recipes-ti/multiprocmgr/multiprocmgr.inc           |  21 ---
+ .../multiprocmgr/mpmsrv-daemon.service             |  14 --
+ recipes-ti/multiprocmgr/multiprocmgr_git.bb        |  44 -------
+ recipes-ti/ndk/ti-ndk.inc                          |  20 ---
+ recipes-ti/ndk/ti-ndk_3.61.01.01.bb                |  17 ---
+ recipes-ti/ns/ti-ns.inc                            |  21 ---
+ recipes-ti/ns/ti-ns_2.60.01.06.bb                  |  15 ---
+ recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb   |  32 -----
+ recipes-ti/udma/udma_git.bb                        |  32 -----
+ 77 files changed, 2633 deletions(-)
+ delete mode 100644 classes/ti-pdk-fetch.bbclass
+ delete mode 100644 classes/ti-pdk.bbclass
+ delete mode 100644 recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
+ delete mode 100644 recipes-bsp/board-rtos/board-rtos_git.bb
+ delete mode 100644 recipes-bsp/boot-monitor/boot-monitor_git.bb
+ delete mode 100644 recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb
+ delete mode 100644 recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+ delete mode 100644 recipes-bsp/common-csl-ip/common-csl-ip.inc
+ delete mode 100644 recipes-bsp/common-csl-ip/common-csl-ip_git.bb
+ delete mode 100644 recipes-bsp/common-csl-ip/csl-rti-dwwdtest-fw_git.bb
+ delete mode 100644 recipes-bsp/dsptop/temperature-module-drv_git.bb
+ delete mode 100644 recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
+ delete mode 100644 recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb
+ delete mode 100644 recipes-bsp/fvid2/fvid2-rtos_git.bb
+ delete mode 100644 recipes-bsp/hplib/hplib-mod_git.bb
+ delete mode 100644 recipes-bsp/hplib/hplib-test_git.bb
+ delete mode 100644 recipes-bsp/hplib/hplib.inc
+ delete mode 100644 recipes-bsp/hplib/hplib_git.bb
+ delete mode 100644 recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
+ delete mode 100644 recipes-bsp/mad-utils/mad-utils-rtos_git.bb
+ delete mode 100644 recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
+ delete mode 100644 recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
+ delete mode 100644 recipes-bsp/osal/osal-rtos_git.bb
+ delete mode 100644 recipes-bsp/osal/osal-test_git.bb
+ delete mode 100644 recipes-bsp/osal/osal.inc
+ delete mode 100644 recipes-bsp/osal/osal_git.bb
+ delete mode 100644 recipes-bsp/pktlib/pktlib-rtos_git.bb
+ delete mode 100644 recipes-bsp/pktlib/pktlib.inc
+ delete mode 100644 recipes-bsp/pktlib/pktlib_git.bb
+ delete mode 100644 recipes-bsp/pru/pru-pwm-fw_git.bb
+ delete mode 100644 recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-add-Makefile-for-building-firmware.patch
+ delete mode 100644 recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-remove-dependency-on-PDK-CSL.patch
+ delete mode 100644 recipes-bsp/pru/pru-swuart-fw_git.bb
+ delete mode 100644 recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
+ delete mode 100644 recipes-bsp/sciclient/sciclient-rtos_git.bb
+ delete mode 100644 recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
+ delete mode 100644 recipes-bsp/serdes-fw/serdes-fw_git.bb
+ delete mode 100644 recipes-bsp/srss-tc/srss-tc_git.bb
+ delete mode 100644 recipes-bsp/starterware/starterware-rtos_git.bb
+ delete mode 100644 recipes-bsp/starterware/starterware.inc
+ delete mode 100644 recipes-bsp/starterware/starterware_git.bb
+ delete mode 100644 recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
+ delete mode 100644 recipes-bsp/ti-sci-fw/ti-sci-fw_0.1.1.50.bb
+ delete mode 100644 recipes-bsp/traceframework/traceframework-rtos_git.bb
+ delete mode 100644 recipes-bsp/traceframework/traceframework.inc
+ delete mode 100644 recipes-bsp/traceframework/traceframework_git.bb
+ delete mode 100644 recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
+ delete mode 100644 recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
+ delete mode 100644 recipes-bsp/transport-rtos/nimu-rtos_git.bb
+ delete mode 100644 recipes-bsp/transport-rtos/timesync-rtos_git.bb
+ delete mode 100644 recipes-bsp/transport-rtos/transport.inc
+ delete mode 100644 recipes-bsp/utils-rtos/profiling-rtos_git.bb
+ delete mode 100644 recipes-bsp/utils-rtos/trace-rtos_git.bb
+ delete mode 100644 recipes-bsp/wdtimer/wdtimer-rtos_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport-common-rtos_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport-qmss-test_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport-qmss.inc
+ delete mode 100644 recipes-ti/ipc/ipc-transport-qmss_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport-srio-test_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport-srio.inc
+ delete mode 100644 recipes-ti/ipc/ipc-transport-srio_git.bb
+ delete mode 100644 recipes-ti/ipc/ipc-transport.inc
+ delete mode 100644 recipes-ti/mpm-transport/mpm-transport_git.bb
+ delete mode 100644 recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+ delete mode 100644 recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+ delete mode 100644 recipes-ti/multiprocmgr/multiprocmgr.inc
+ delete mode 100644 recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service
+ delete mode 100644 recipes-ti/multiprocmgr/multiprocmgr_git.bb
+ delete mode 100644 recipes-ti/ndk/ti-ndk.inc
+ delete mode 100644 recipes-ti/ndk/ti-ndk_3.61.01.01.bb
+ delete mode 100644 recipes-ti/ns/ti-ns.inc
+ delete mode 100644 recipes-ti/ns/ti-ns_2.60.01.06.bb
+ delete mode 100644 recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+ delete mode 100644 recipes-ti/udma/udma_git.bb
 
-diff --git a/recipes-bsp/aif2-lld/aif2-lld-rtos_git.bb b/recipes-bsp/aif2-lld/aif2-lld-rtos_git.bb
+diff --git a/classes/ti-pdk-fetch.bbclass b/classes/ti-pdk-fetch.bbclass
 deleted file mode 100644
-index 048a243..0000000
---- a/recipes-bsp/aif2-lld/aif2-lld-rtos_git.bb
+index e4c55e3..0000000
+--- a/classes/ti-pdk-fetch.bbclass
 +++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Antenna Interface"
+@@ -1,47 +0,0 @@
+-TI_PDK_GIT_URI ?= "git://git.ti.com/processor-sdk/pdk.git"
+-TI_PDK_GIT_BRANCH ?= "master"
+-TI_PDK_GIT_PROTOCOL ?= "git"
+-TI_PDK_SRCREV ?= "a1ace885998e9adbcbbd0abf8b9ded6ba9ec54ff"
 -
--inherit ti-pdk
+-TI_PDK_VERSION ?= "2020.5.6"
 -
--require recipes-bsp/aif2-lld/aif2-lld.inc
+-PV = "${TI_PDK_VERSION}"
+-PE = "2"
 -
--PR = "${INC_PR}.0"
+-TI_PDK_COMP ?= ""
+-TI_PDK_COMP_PATH = "${@'${TI_PDK_COMP}'.replace('.','/')}"
 -
--DEPENDS:append = " qmss-lld-rtos \
--                   cppi-lld-rtos \
--"
+-TI_PDK_SOURCE_PN = "ti-pdk-source"
+-TI_PDK_SOURCE_WORKDIR = "${TMPDIR}/work-shared/ti-pdk-${PV}"
+-TI_PDK_SOURCE = "${TI_PDK_SOURCE_WORKDIR}/git"
 -
--PACKAGE_ARCH = "${MACHINE_ARCH}"
+-S = "${@'${WORKDIR}/git/${TI_PDK_COMP_PATH}'.rstrip('/')}"
 -
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "AIF2 LLD"
-diff --git a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb b/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-deleted file mode 100644
-index 9180b95..0000000
---- a/recipes-bsp/aif2-lld/aif2-lld-test_git.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--DESCRIPTION = "TI Antenna Interface peripheral module low level driver test binaries"
+-# Hard-link only required sources from PDK
+-python do_unpack:append() {
+-    if len(d.getVar('TI_PDK_COMP') or '') > 0:
+-        import shutil
 -
--DEPENDS = "common-csl-ip aif2-lld qmss-lld cppi-lld"
+-        # Get src/dst paths
+-        src = os.path.join(d.getVar('TI_PDK_SOURCE'),'packages',d.getVar('TI_PDK_COMP_PATH'))
+-        s = d.getVar('S')
 -
--include aif2-lld.inc
+-        # Set up the directory structure, except for the root of the sources
+-        # hard-linked.
+-        bb.utils.mkdirhier(s)
+-        os.rmdir(s)
 -
--PR = "${INC_PR}.0"
+-        # Recursively hard-link the sources
+-        shutil.copytree(src, s, copy_function=os.link)
 -
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} AIF2_SRC_DIR=${WORKDIR}/git"
--
--do_compile () {
--    oe_runmake clean DEVICE=k2hk
--    oe_runmake tests DEVICE=k2hk
+-        # Recursively hard-link the git directory
+-        shutil.copytree(os.path.join(d.getVar('TI_PDK_SOURCE'),'.git'), os.path.join(s,'.git'), copy_function=os.link)
 -}
 -
--do_install () {
--    oe_runmake installbin DEVICE=k2hk AIF2_SRC_DIR=${WORKDIR}/git INSTALL_BIN_BASE_DIR=${D}/${bindir}
+-# Make sure that ti-pdk-source is unpacked before we set up the hardlinks.
+-python __anonymous () {
+-    pn = d.getVar('PN')
+-    pdk_src_pn = d.getVar('TI_PDK_SOURCE_PN')
+-    if pn != pdk_src_pn:
+-        d.appendVarFlag('do_unpack', 'depends', ' ${TI_PDK_SOURCE_PN}:do_unpack')
 -}
-diff --git a/recipes-bsp/aif2-lld/aif2-lld.inc b/recipes-bsp/aif2-lld/aif2-lld.inc
+diff --git a/classes/ti-pdk.bbclass b/classes/ti-pdk.bbclass
 deleted file mode 100644
-index 718f3a7..0000000
---- a/recipes-bsp/aif2-lld/aif2-lld.inc
+index aa0568e..0000000
+--- a/classes/ti-pdk.bbclass
 +++ /dev/null
-@@ -1,14 +0,0 @@
--LICENSE = "BSD-3-Clause"
+@@ -1,144 +0,0 @@
+-require recipes-ti/includes/ti-paths.inc
+-require recipes-ti/includes/ti-staging.inc
 -
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
+-inherit perlnative
 -
--inherit ti-pdk-fetch
+-DEPENDS = "ti-xdctools-native ti-cg-xml-native ti-sysbios common-csl-ip-rtos libxml-simple-perl-native gcc-arm-baremetal-native ti-cgt6x-native ti-cgt-pru-native ti-pdk-build-rtos doxygen-native"
 -
--TI_PDK_COMP = "ti.drv.aif2"
+-DEPENDS:append:omap-a15 = " ti-cgt-arm-native"
+-DEPENDS:remove:ti33x = "ti-cgt6x-native"
+-DEPENDS:remove:ti43x = "ti-cgt6x-native"
+-DEPENDS:append:omapl1 = " ti-cgt-arm-native"
+-DEPENDS:remove:am65xx = "gcc-arm-baremetal-native ti-cgt6x-native"
+-DEPENDS:append:am65xx = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native"
+-DEPENDS:remove:j7 = "gcc-arm-baremetal-native"
+-DEPENDS:append:j7 = " ti-cgt-arm-native gcc-linaro-baremetal-aarch64-native ti-cgt7x-native"
 -
--PE = "1"
+-S = "${WORKDIR}/git"
+-B = "${WORKDIR}/build"
 -
--INC_PR = "r0"
+-# HTML hyperlink text
+-PDK_COMP_LINK_TEXT ?= ""
 -
--COMPATIBLE_MACHINE = "k2hk"
+-DOC_FILE = "API_Documentation_${PN}.html"
 -
-diff --git a/recipes-bsp/aif2-lld/aif2-lld_git.bb b/recipes-bsp/aif2-lld/aif2-lld_git.bb
-deleted file mode 100644
-index 4a640f1..0000000
---- a/recipes-bsp/aif2-lld/aif2-lld_git.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--DESCRIPTION = "Antenna Interface low level driver"
+-create_doc_link () {
+-    PDK_COMP_DIR=`get_build_dir_bash`
 -
--DEPENDS = "common-csl-ip qmss-lld cppi-lld"
--
--include aif2-lld.inc
--
--PR = "${INC_PR}.0"
--
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
--
--do_compile () {
--    oe_runmake lib DEVICE=k2hk
--}
--
--do_install () {
--    oe_runmake install INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--    chown -R root:root ${D}
+-    echo "<a href=\"${PDK_COMP_DIR}/docs/doxygen/html/index.html\">${PDK_COMP_LINK_TEXT}</a>" >> ${D}${PDK_INSTALL_DIR_RECIPE}/packages/.extras/doc/${DOC_FILE}
 -}
 -
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libaif2.a"
-diff --git a/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb b/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
-deleted file mode 100644
-index d808267..0000000
---- a/recipes-bsp/bcp-lld/bcp-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "TI Bit Coprocessor (BCP) low level driver"
+-get_build_dir_bash() {
+-  if [ -f ${S}/package.xdc ]
+-  then
+-    grep '^package' ${S}/package.xdc | sed -e 's|\[.*$||' | awk '{ print $2 }' | sed -e 's|\.|/|g'
+-  else
+-    echo ${S}
+-    return 1
+-  fi
+-}
 -
--inherit ti-pdk ti-pdk-fetch
+-export CROSS_TOOL_PRFX="arm-none-eabi-"
+-export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
+-export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
+-export TOOLCHAIN_PATH_A15 = "${GCC_ARM_NONE_TOOLCHAIN}"
+-export TOOLCHAIN_PATH_M4 = "${M4_TOOLCHAIN_INSTALL_DIR}"
+-export TOOLCHAIN_PATH_Arm9 = "${M4_TOOLCHAIN_INSTALL_DIR}"
+-export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+-export C7X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c7x"
+-export TOOLCHAIN_PATH_EVE = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-arp32"
+-export CL_PRU_INSTALL_PATH = "${TI_CGT_PRU_INSTALL_DIR}"
+-export TOOLCHAIN_PATH_GCC_ARCH64 = "${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN}"
+-export TOOLCHAIN_PATH_R5 = "${M4_TOOLCHAIN_INSTALL_DIR}"
 -
--TI_PDK_COMP = "ti.drv.bcp"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://bcp.h;beginline=1;endline=40;md5=4f6e6128dd075a89548c0287a39b8896"
--
--COMPATIBLE_MACHINE = "k2hk|k2l|c667x-evm"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--
--DEPENDS:append = " qmss-lld-rtos \
--                   cppi-lld-rtos \
--"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "BCP LLD"
-diff --git a/recipes-bsp/cal-lld/cal-lld-rtos_git.bb b/recipes-bsp/cal-lld/cal-lld-rtos_git.bb
-deleted file mode 100644
-index a91d85b..0000000
---- a/recipes-bsp/cal-lld/cal-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,76 +0,0 @@
--SUMMARY = "TI RTOS low level driver for CAL"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.cal"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://cal.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
--
--COMPATIBLE_MACHINE = "k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--
--PR = "r0"
--
--DEPENDS:append = " osal-rtos \
--                   fvid2-rtos \
--"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--CAL_PACKAGE_BASE   = "${WORKDIR}/cal_base"
--CAL_LLD_ROOTPATH = "${CAL_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/cal"
--
+-export ROOTDIR = "${B}"
+-export BIOS_INSTALL_PATH = "${SYSBIOS_INSTALL_DIR}"
+-export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
 -export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
--export PDK_CAL_ROOT_PATH = "${CAL_PACKAGE_BASE}/package/all/pdk_/packages"
 -
--LIMSOCS = ""
--LIMSOCS:am65xx-evm = "am65xx"
--LIMSOCS:am65xx-hs-evm = "am65xx"
+-export XDCPATH = "${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;${PDK_INSTALL_DIR}/packages"
+-export SECTTI="perl ${CG_XML_INSTALL_DIR}/ofd/sectti.pl"
 -
--LIMBOARDS = ""
--LIMBOARDS:am65xx-evm = "am65xx_evm"
--LIMBOARDS:am65xx-hs-evm = "am65xx_evm"
+-TI_PDK_XDCMAKE ?= "1"
 -
--BOARD_PACKAGE = ""
--BOARD_PACKAGE:am65xx-evm = "am65xx_evm"
--BOARD_PACKAGE:am65xx-hs-evm = "am65xx_evm"
+-# By default, only build the cores with available toolchains
+-TI_PDK_LIMIT_CORES ?= "a15_0 ipu1_0 ipu1_1 ipu2_0 ipu2_1 mpu1_0 mcu1_0 mcu1_1 mcu2_0 mcu2_1 mcu3_0 mcu3_1 c66x c66xdsp_1 c66xdsp_2 c7x_1 arm9_0 c674x a9host a8host pru_0 pru_1"
+-TI_PDK_LIMIT_SOCS ?= ""
+-TI_PDK_LIMIT_BOARDS ?= ""
+-TI_PDK_MAKE_TARGET ?= "release"
+-TI_PDK_EXTRA_MAKE ?= ""
+-TI_PDK_DOXYGEN_SUPPORT ?= "1"
 -
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "CAL"
+-TI_PDK_XDC_ARGS ?= "${TI_PDK_LIMIT_SOCS}"
+-
+-PARALLEL_XDC = "${@oe.utils.parallel_make_argument(d, '--jobs=%d')}"
+-PARALLEL_MAKE = ""
+-
+-def get_doxygen_support(d):
+-    if d.getVar('TI_PDK_DOXYGEN_SUPPORT') == '1':
+-        return ''
+-    return 'DOXYGEN_SUPPORT=no'
+-
+-EXTRA_OEMAKE = " \
+-    LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" \
+-    LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" \
+-    LIMIT_CORES="${TI_PDK_LIMIT_CORES}" \
+-    ${TI_PDK_EXTRA_MAKE} \
+-    ${@get_doxygen_support(d)} \
+-"
 -
 -do_configure() {
--    rm -rf ${CAL_PACKAGE_BASE}
--    cd ${S}
+-    BUILD_DIR=${B}/`get_build_dir_bash`
 -
--    # remove any previous package
--    rm -f ${CAL_PACKAGE_BASE}
+-    mkdir -p ${BUILD_DIR}
+-    cp -r ${S}/* ${BUILD_DIR}
 -
--    # make the release package before building it
--    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${CAL_PACKAGE_BASE} PDK_CAL_COMP_PATH=${S}
+-    if [ "${TI_PDK_XDCMAKE}" == "1" ]
+-    then
+-        cd ${BUILD_DIR}
+-
+-        sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
+-        find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
+-        find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
+-        find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
+-        find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
+-
+-        cd ${B}
+-        ${XDC_INSTALL_DIR}/xdc clean ${PARALLEL_XDC} -PR .
+-    else
+-        if [ "${CLEANBROKEN}" != "1" ]
+-        then
+-            cd ${BUILD_DIR}
+-            oe_runmake clean
+-            cd "${B}"
+-        fi
+-    fi
+-
 -}
 -
 -do_compile() {
--    echo "cal lld root path is ${CAL_LLD_ROOTPATH}"
--    cd ${CAL_LLD_ROOTPATH}
 -
--    # Build am65xx libraries
--    make clean lib xdc_meta doxygen LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
+-    if [ "${TI_PDK_XDCMAKE}" == "1" ]
+-    then
+-        ${XDC_INSTALL_DIR}/xdc all ${PARALLEL_XDC} XDCARGS="${TI_PDK_XDC_ARGS}" ROOTDIR="${ROOTDIR}" -PR .
+-        ${XDC_INSTALL_DIR}/xdc release XDCARGS="${TI_PDK_XDC_ARGS}" -PR .
+-    else
+-        BUILD_DIR=${B}/`get_build_dir_bash`
+-        cd ${BUILD_DIR}
 -
--    #archive
--    tar -cf cal_lld.tar --exclude='*.tar' ./*
+-        oe_runmake ${TI_PDK_MAKE_TARGET}
+-    fi
 -}
 -
--do_install() {
--    cd ${CAL_LLD_ROOTPATH}
--    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/cal
--    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/cal \;
+-do_install () {
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+-    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
+-    
+-    if [ "${PDK_COMP_LINK_TEXT}" != "" ]
+-    then
+-        install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/.extras/doc
+-        create_doc_link
+-    fi
 -}
 -
 -FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
--
--INSANE_SKIP:${PN} = "arch ldflags"
-diff --git a/recipes-bsp/cppi-lld/cppi-lld-rtos_git.bb b/recipes-bsp/cppi-lld/cppi-lld-rtos_git.bb
+diff --git a/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb b/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
 deleted file mode 100644
-index 49a9940..0000000
---- a/recipes-bsp/cppi-lld/cppi-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--inherit ti-pdk
--require cppi-lld.inc
--
--PR = "${INC_PR}.1"
--
--COMPATIBLE_MACHINE:append = "|c66x"
--
--DEPENDS:append = " rm-lld-rtos \
--                   qmss-lld-rtos \
--"
-diff --git a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-deleted file mode 100644
-index 0c630b4..0000000
---- a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-+++ /dev/null
-@@ -1,29 +0,0 @@
--DESCRIPTION = "TI CPPI low level driver unit test and example binaries"
--DEPENDS = "common-csl-ip rm-lld cppi-lld qmss-lld"
--
--include cppi-lld.inc
--
--PR = "${INC_PR}.0"
--
--CHOICELIST = "yes no"
--
--CFLAGS += "-fcommon"
--
--do_compile () {
--#   Now build the lld in the updated directory
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" CPPI_SRC_DIR=${S}
--		for choice in ${CHOICELIST}
--		do
--			make -f makefile_armv7 tests examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" CPPI_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
--		done
--	done
--}
--
--do_install () {
--	for device in ${DEVICELIST}
--do
--	make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" CPPI_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
--	done
--}
-diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
-deleted file mode 100644
-index 372fcec..0000000
---- a/recipes-bsp/cppi-lld/cppi-lld.inc
-+++ /dev/null
-@@ -1,19 +0,0 @@
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/cppi/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
--
--COMPATIBLE_MACHINE = "keystone"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.cppi"
--
--PE = "1"
--
--INC_PR = "r0"
--
--DEVICELIST = "k2h k2k k2l k2e"
--DEVICELIST:k2hk = "k2h k2k"
--DEVICELIST:k2l  = "k2l"
--DEVICELIST:k2e  = "k2e"
--DEVICELIST:k2g  = "k2h"
-diff --git a/recipes-bsp/cppi-lld/cppi-lld_git.bb b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-deleted file mode 100644
-index 26919b3..0000000
---- a/recipes-bsp/cppi-lld/cppi-lld_git.bb
+index e40fb43..0000000
+--- a/recipes-bsp/audk2g-addon/audk2g-addon-rtos_git.bb
 +++ /dev/null
 @@ -1,38 +0,0 @@
--DESCRIPTION = "TI CPPI Module low level driver"
--
--DEPENDS = "common-csl-ip rm-lld qmss-lld"
--
--include cppi-lld.inc
--
--PR = "${INC_PR}.1"
--
--do_compile () {
--#   Now build the lld in the updated directory
--	make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}  DEVICE="${device}"
--	done
--}
--
--do_install () {
--    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--    chown -R root:root ${D}
--
--#   Set the generic device library symbolic link to default k2h
--    cd ${D}${libdir}
--
--    # Link only the first device in the list
--    for device in ${DEVICELIST}
--    do
--        ln -sf libcppi_${device}.so.1.0.0 libcppi_device.so.1
--        break
--    done
--    ln -sf libcppi_device.so.1 libcppi_device.so
--}
--
--INHIBIT_PACKAGE_STRIP_FILES:k2hk = "${PKGD}${libdir}/libcppi_k2h.a ${PKGD}${libdir}/libcppi_k2k.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2e = "${PKGD}${libdir}/libcppi_k2e.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2l = "${PKGD}${libdir}/libcppi_k2l.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2g = "${PKGD}${libdir}/libcppi_k2h.a"
--INHIBIT_PACKAGE_STRIP_FILES:append = " ${PKGD}${libdir}/libcppi.a"
-diff --git a/recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb b/recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb
-deleted file mode 100644
-index 5caa07a..0000000
---- a/recipes-bsp/dfe-lld/dfe-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "TI RTOS level driver for Digital Radio Front End"
+-SUMMARY = "TI RTOS Audio add-on software for k2g"
 -
 -inherit ti-pdk
 -
--require recipes-bsp/dfe-lld/dfe-lld.inc
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://audk2gaddonver.h;beginline=8;endline=47;md5=7a3996aaf1a3d3ca87358cf9b89bce3d"
 -
--PR = "${INC_PR}.0"
--
+-COMPATIBLE_MACHINE = "k2g"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "DFE LLD"
-diff --git a/recipes-bsp/dfe-lld/dfe-lld-test_git.bb b/recipes-bsp/dfe-lld/dfe-lld-test_git.bb
-deleted file mode 100644
-index 34b90c7..0000000
---- a/recipes-bsp/dfe-lld/dfe-lld-test_git.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--DESCRIPTION = "TI Digital Radio Front End lld test application"
--
--DEPENDS = "common-csl-ip dfe-lld iqn2-lld"
--
--include dfe-lld.inc
--
--PR = "${INC_PR}.0"
--
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} DFE_SRC_DIR=${S}"
--
--do_compile () {
--#   Now build the lld in the updated directory
--	oe_runmake clean DEVICE=k2l
--	oe_runmake tests DEVICE=k2l
--	oe_runmake tests DEVICE=k2l USEDYNAMIC_LIB=yes
--}
--
--do_install () {
--	oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}/${bindir}
--}
-diff --git a/recipes-bsp/dfe-lld/dfe-lld.inc b/recipes-bsp/dfe-lld/dfe-lld.inc
-deleted file mode 100644
-index 9ac317d..0000000
---- a/recipes-bsp/dfe-lld/dfe-lld.inc
-+++ /dev/null
-@@ -1,14 +0,0 @@
--LICENSE = "BSD-3-Clause"
--
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=1f4217b705bf98762a302fd720649dcc"
--
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.dfe"
--
--PE = "1"
--
--INC_PR = "r0"
--
--COMPATIBLE_MACHINE = "k2l"
--
-diff --git a/recipes-bsp/dfe-lld/dfe-lld_git.bb b/recipes-bsp/dfe-lld/dfe-lld_git.bb
-deleted file mode 100644
-index 622da6f..0000000
---- a/recipes-bsp/dfe-lld/dfe-lld_git.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--DESCRIPTION = "Digital Radio Front End low level driver"
--
--DEPENDS = "common-csl-ip"
--
--include dfe-lld.inc
--
--PR = "${INC_PR}.0"
--
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
--
--do_compile () {
--	oe_runmake lib DEVICE=k2l
--}
--
--do_install () {
--	oe_runmake install INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--	chown -R root:root ${D}
--}
--
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libdfe.a"
-diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-deleted file mode 100644
-index 8d1fd7c..0000000
---- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,145 +0,0 @@
--require edma3-lld.inc
--require recipes-ti/includes/ti-paths.inc
--
--PR = "${INC_PR}.1"
--
--DEPENDS = "ti-sysbios ti-xdctools-native gcc-arm-baremetal-native ti-cgt-arm-native ti-cgt6x-native"
--
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PLATFORMLIST = ""
--TARGETLIST = ""
--
--PLATFORMLIST:ti33x = " \
--        am335x-evm \
--"
--
--TARGETLIST:ti33x = " \
--        a8 \
--"
--
--PLATFORMLIST:ti43x = " \
--        am437x-evm \
--"
--
--TARGETLIST:ti43x = " \
--        arm9 \
--"
--
--PLATFORMLIST:omap-a15 = " \
--        tda2xx-evm \
--"
--
--TARGETLIST:omap-a15 = " \
--        66 \
--        a15 \
--        m4 \
--"
--
--PLATFORMLIST:keystone = " \
--        tci6636k2h-evm \
--        tci6638k2k-evm \
--        tci6630k2l-evm \
--        c66ak2e-evm \
--        tci66ak2g02-evm \
--"
--
--TARGETLIST:keystone = " \
--        66 \
--        a15 \
--"
--
--PLATFORMLIST:append:dra7xx-evm = " \
--        tda3xx-evm \
--"
--
--TARGETLIST:c66x = " \
--        66 \
--"
--
--PLATFORMLIST_c665x-evm = " \
--        c6657-evm \
--"
--
--PLATFORMLIST_c667x-evm = " \
--        c6678-evm \
--"
--
--PLATFORMLIST:omapl1 = " \
--        omapl137-evm \
--        omapl138-evm \
--"
--
--TARGETLIST:omapl1 = " \
--        arm9 \
--        674 \
--"
--
--EXTRA_OEMAKE:remove = "TARGET=66"
--FORMAT="ELF"
--
--S = "${WORKDIR}/git"
--
--PARALLEL_MAKE = ""
--
--export C6X_GEN_INSTALL_PATH = "${STAGING_DIR_NATIVE}/usr"
--export XDCCGROOT = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
--export CGTOOLS = "${XDCCGROOT}"
--export CGTOOLS_ELF = "${XDCCGROOT}"
--export CODEGEN_PATH_DSP = "${XDCCGROOT}"
--export CODEGEN_PATH_DSPELF = "${XDCCGROOT}"
--export TMS470_CGTOOLS = "${M4_TOOLCHAIN_INSTALL_DIR}"
--export UTILS_INSTALL_DIR = "${XDC_INSTALL_DIR}"
--export XDCPATH = "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
--export PATH := "${XDC_INSTALL_DIR}:${PATH}"
--export ROOTDIR="${S}"
--export INTERNAL_SW_ROOT="${S}"
--export CROSSCC="${TARGET_PREFIX}gcc"
--export CROSSAR="${TARGET_PREFIX}ar"
--export CROSSLNK="${TARGET_PREFIX}gcc"
--
--do_configure () {
--    rm -rf ${S}/examples/edma3_driver/evmTCI6614
--    rm -rf ${S}/examples/edma3_driver/evmTCI6614BE
--    sed -i -e "s|_config.bld|config.bld|g" ${S}/makerules/env.mk
--    sed -i -e "s|^edma3_lld_PATH =.*$|edma3_lld_PATH = ${S}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_M3 =.*$|CODEGEN_PATH_M3 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_M4 =.*$|CODEGEN_PATH_M4 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_A8 =.*$|CODEGEN_PATH_A8 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_A8_GCC =.*$|CODEGEN_PATH_A8_GCC = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_ARM9 =.*$|CODEGEN_PATH_ARM9 = ${M4_TOOLCHAIN_INSTALL_DIR}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_A9_GCC =.*$|CODEGEN_PATH_A9_GCC = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_A15 =.*$|CODEGEN_PATH_A15 = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_A15_GCC =.*$|CODEGEN_PATH_A15_GCC = ${GCC_ARM_NONE_TOOLCHAIN}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^UTILS_INSTALL_DIR =.*$|UTILS_INSTALL_DIR = ${XDC_INSTALL_DIR}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^bios_PATH =.*$|bios_PATH = ${SYSBIOS_INSTALL_DIR}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^xdc_PATH =.*$|xdc_PATH = ${XDC_INSTALL_DIR}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_DSP =.*$|CODEGEN_PATH_DSP = ${XDCCGROOT}|g" ${S}/makerules/env.mk
--    sed -i -e "s|^CODEGEN_PATH_DSPELF =.*$|CODEGEN_PATH_DSPELF = ${XDCCGROOT}|g" ${S}/makerules/env.mk
--
--    cd ${S}/packages
--    ${XDC_INSTALL_DIR}/xdc .interfaces -PR .
--}
--
--do_compile () {
--    cd ${S}/packages
--    for p in ${PLATFORMLIST}
--    do
--        for t in ${TARGETLIST}
--        do
--            make PLATFORM=${p} TARGET=${t} FORMAT=${FORMAT}
--        done
--    done
--}
--
--do_install () {
--    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
--    install -d ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
--    cp ${CP_ARGS} ${S}/* ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
--}
--
--INSANE_SKIP:${PN}-dev = "arch ldflags file-rdeps"
--
--ALLOW_EMPTY:${PN} = "1"
--FILES:${PN}-dev += "${EDMA3_LLD_INSTALL_DIR_RECIPE}"
-diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
-deleted file mode 100644
-index 34d3170..0000000
---- a/recipes-bsp/edma3-lld/edma3-lld.inc
-+++ /dev/null
-@@ -1,17 +0,0 @@
--DESCRIPTION = "TI EDMA3 low level driver and test code"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
--
--EDMA3_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
--EDMA3_LLD_GIT_PROTOCOL = "git"
--EDMA3_LLD_GIT_BRANCH = "master"
--
--# Below commit ID corresponds to version 2.12.05.30E
--EDMA3_LLD_SRCREV = "ce5ced2ac5eb1e0f1515288d279f5690813b5413"
--
--BRANCH = "${EDMA3_LLD_GIT_BRANCH}"
--SRC_URI = "${EDMA3_LLD_GIT_URI};protocol=${EDMA3_LLD_GIT_PROTOCOL};branch=${BRANCH}"
--SRCREV = "${EDMA3_LLD_SRCREV}"
--
--PV = "2.12.05.30E"
--INC_PR = "r1"
-diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-lld/edma3-lld_git.bb
-deleted file mode 100644
-index f42d896..0000000
---- a/recipes-bsp/edma3-lld/edma3-lld_git.bb
-+++ /dev/null
-@@ -1,78 +0,0 @@
--require edma3-lld.inc
--
--PR = "${INC_PR}.0"
--
--COMPATIBLE_MACHINE = "keystone"
--
--DEPENDS = "common-csl-ip"
--
--PLATFORMLIST = "tci6636k2h-evm \
--	tci6636k2h-evm \
--	tci6638k2k-evm \
--	tci6630k2l-evm \
--	c66ak2e-evm \
--	tci66ak2g02-evm \
--	"
--
--PACKAGES =+ "${PN}-test"
--
--FILES:${PN}-test = "${bindir}/*"
--
--S = "${WORKDIR}/git"
--
--do_compile () {
--	cd ${S}/packages
--	for platform in ${PLATFORMLIST}
--	do
--		ROOTDIR=${S} CROSSCC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" CROSSAR="${TARGET_PREFIX}ar" \
--		CROSSLNK="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" INTERNAL_SW_ROOT="${S}" make \
--		PLATFORM="$platform" TARGET=a15 TOOLCHAIN_a15=GCC FORMAT=ELF \
--		SONAME=libedma3.so all
--	done
--}
--
--do_install () {
--	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
--
--	install -d ${D}/${libdir}
--
--	# Static Libraries
--	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/edma3_lld_drv.aa15fg \
--		${D}/${libdir}/libedma3.a
--	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/edma3_lld_rm.aa15fg \
--		${D}/${libdir}/libedma3rm.a
--
--	# Shared Libraries
--	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/libedma* ${D}/${libdir}
--	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/libedma* ${D}/${libdir}
--
--	# Copy Headers
--	install -d ${D}/${includedir}/ti/sdo/edma3/drv/
--	install -d ${D}/${includedir}/ti/sdo/edma3/rm
--	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/drv/*.h ${D}/${includedir}/ti/sdo/edma3/drv/
--	cp ${CP_ARGS} ${S}/packages/ti/sdo/edma3/rm/*.h ${D}/${includedir}/ti/sdo/edma3/rm/
--
--	# Copy Sample Config
--	install -d ${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
--	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/evmTCI6636K2HSample.c \
--		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
--	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/evmTCI6638K2KSample.c \
--		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
--	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/evmTCI6630K2LSample.c \
--		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
--	cp ${CP_ARGS} ${S}/examples/edma3_user_space_driver/evmC66AK2E/evmC66AK2ESample.c \
--		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
--
--	install -d ${D}/${bindir}
--	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/bin/tci6636k2h-evm/edma3_drv_6636k2h_a15_sample_a15host_release.xa15fg \
--		${D}/${bindir}/edma3_drv_6636k2h_a15_sample_a15host_release.xa15fg
--	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/bin/tci6638k2k-evm/edma3_drv_6638k2k_a15_sample_a15host_release.xa15fg \
--		${D}/${bindir}/edma3_drv_6638k2k_a15_sample_a15host_release.xa15fg
--	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/bin/tci6630k2l-evm/edma3_drv_6630k2l_a15_sample_a15host_release.xa15fg \
--		${D}/${bindir}/edma3_drv_6630k2l_a15_sample_a15host_release.xa15fg
--	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmC66AK2E/bin/c66ak2e-evm/edma3_drv_c66ak2e_a15_sample_a15host_release.xa15fg \
--		${D}/${bindir}/edma3_drv_c66ak2e_a15_sample_a15host_release.xa15fg
--}
--
--INSANE_SKIP:${PN} += "ldflags"
--INSANE_SKIP:${PN}-test += "ldflags"
-diff --git a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb b/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-deleted file mode 100644
-index cc8c2ef..0000000
---- a/recipes-bsp/emac-lld/emac-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Ethernet MAC (EMAC) peripheral"
--
--inherit ti-pdk
--
--require emac-lld.inc
--
+-AUDK2G_ADDON_GIT_URI = "git://git.ti.com/processor-sdk/audk2g-addon.git"
+-AUDK2G_ADDON_GIT_PROTOCOL = "git"
+-AUDK2G_ADDON_GIT_BRANCH = "master"
+-AUDK2G_ADDON_GIT_DESTSUFFIX = "git/ti/addon/audk2g"
+-
+-# Below commit ID corresponds to "DEV.AUDK2G.01.04.00.00"
+-AUDK2G_ADDON_SRCREV = "815180b45ceb1fa3c110f9979106c7f5aa8b3ca2"
+-
+-BRANCH = "${AUDK2G_ADDON_GIT_BRANCH}"
+-SRC_URI = "${AUDK2G_ADDON_GIT_URI};destsuffix=${AUDK2G_ADDON_GIT_DESTSUFFIX};protocol=${AUDK2G_ADDON_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${AUDK2G_ADDON_SRCREV}"
+-PV = "01.04.00.00"
 -PR = "r0"
 -
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://emacver.h;beginline=1;endline=47;md5=f66bb3695972ca2a85d990a390f45d88"
+-S = "${WORKDIR}/git/ti/addon/audk2g"
 -
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|c665x-evm|k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
+-DEPENDS:append = " ti-sysbios \
+-            gpio-lld-rtos \
+-            i2c-lld-rtos \
+-            board-rtos \
+-"
 -
--DEPENDS:append = " board-rtos osal-rtos"
--DEPENDS:append:ti33x = " starterware-rtos"
--DEPENDS:append:ti43x = " starterware-rtos"
--DEPENDS:append:k2g  = " cppi-lld-rtos qmss-lld-rtos"
--
--DEPENDS:remove:k3 = "board-rtos "
--DEPENDS:append:k3 = " udma-lld-rtos trace-rtos"
+-export PDK_AUDK2G_ROOT_PATH = "${WORKDIR}/build"
+-export DEST_ROOT="${S}"
 -
 -# Build with make instead of XDC
 -TI_PDK_XDCMAKE = "0"
--
--export PDK_EMAC_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "EMAC LLD"
-diff --git a/recipes-bsp/emac-lld/emac-lld.inc b/recipes-bsp/emac-lld/emac-lld.inc
+diff --git a/recipes-bsp/board-rtos/board-rtos_git.bb b/recipes-bsp/board-rtos/board-rtos_git.bb
 deleted file mode 100644
-index eea56b3..0000000
---- a/recipes-bsp/emac-lld/emac-lld.inc
+index 50d66ad..0000000
+--- a/recipes-bsp/board-rtos/board-rtos_git.bb
 +++ /dev/null
-@@ -1,7 +0,0 @@
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.emac"
--
--PE = "1"
--
--# The LLD version
-diff --git a/recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb b/recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb
-deleted file mode 100644
-index 7e5db22..0000000
---- a/recipes-bsp/fftc-lld/fftc-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "TI FFT Coprocessor (FFTC) low level driver "
+@@ -1,76 +0,0 @@
+-SUMMARY = "TI RTOS Board Library"
 -
 -inherit ti-pdk ti-pdk-fetch
 -
--TI_PDK_COMP = "ti.drv.fftc"
+-TI_PDK_COMP = "ti.board"
 -
 -PE = "1"
 -
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://fftc.h;beginline=1;endline=39;md5=2f1010c47d364414644caf6d30a2b7df"
--
--COMPATIBLE_MACHINE = "k2hk|k2l"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--DEPENDS:append= " qmss-lld-rtos \
--                  cppi-lld-rtos \
--"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "FFTC LLD"
-diff --git a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb b/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
-deleted file mode 100644
-index 6f1ad1b..0000000
---- a/recipes-bsp/gpio-lld/gpio-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,34 +0,0 @@
--SUMMARY = "TI RTOS driver for General Purpose IO (GPIO)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.gpio"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://GPIO.h;beginline=1;endline=31;md5=8580f9c5c0de8d5d13518cf18a0122b8"
--
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c667x-evm|c665x-evm|k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--
--DEPENDS:append = " osal-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--"
--DEPENDS:append:k3 = " sciclient-rtos \
--"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--export PDK_GPIO_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "GPIO LLD"
-diff --git a/recipes-bsp/gpmc-lld/gpmc-lld-rtos_git.bb b/recipes-bsp/gpmc-lld/gpmc-lld-rtos_git.bb
-deleted file mode 100644
-index 808b00b..0000000
---- a/recipes-bsp/gpmc-lld/gpmc-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,32 +0,0 @@
--SUMMARY = "TI RTOS low level driver for General Purpose Memory Controller (GPMC)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.gpmc"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://GPMC.h;beginline=1;endline=31;md5=485ec97c36f809bf92323fde3e988c72"
--
--COMPATIBLE_MACHINE = "ti33x|ti43x"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--
--PR = "r0"
--
--DEPENDS:append = " osal-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "GPMC LLD"
--
--export PDK_GPMC_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld-rtos_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld-rtos_git.bb
-deleted file mode 100644
-index e86c1d4..0000000
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Hyperlink peripheral"
--
--inherit ti-pdk
--
--require recipes-bsp/hyplnk-lld/hyplnk-lld.inc
--
--PR = "${INC_PR}.0"
--
--COMPATIBLE_MACHINE:append = "|c66x"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "HYPLNK LLD"
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-deleted file mode 100644
-index 31b69c2..0000000
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--include hyplnk-lld.inc
--
--PR = "${INC_PR}.0"
--
--DEPENDS = "common-csl-ip hyplnk-lld"
--
--do_compile () {
--	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
--		HYPLNK_SRC_DIR="${S}"
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 tests examples \
--			PDK_INSTALL_PATH="${STAGING_INCDIR}" \
--			DEVICE="$device" HYPLNK_SRC_DIR="${S}"
--	done
--}
--
--do_install () {
--    for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 installbin \
--			PDK_INSTALL_PATH="${STAGING_INCDIR}" DEVICE="$device" \
--			HYPLNK_SRC_DIR="${S}" \
--			INSTALL_BIN_BASE_DIR="${D}/${bindir}"
--	done
--}
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-deleted file mode 100644
-index 02f964b..0000000
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-+++ /dev/null
-@@ -1,21 +0,0 @@
--DESCRIPTION = "TI Hyperlink Low Level Driver"
--LICENSE = "BSD-3-Clause"
--
--COMPATIBLE_MACHINE = "k2hk|k2e"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--LLDNAME="hyplnk"
--
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
--
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.hyplnk"
--
--PE = "1"
--
--INC_PR = "r0"
--
--DEVICELIST:k2hk = "k2h k2k"
--DEVICELIST:k2e  = "k2e"
--
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
-deleted file mode 100644
-index 690ffac..0000000
---- a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
-+++ /dev/null
-@@ -1,36 +0,0 @@
--include hyplnk-lld.inc
--
--PR = "${INC_PR}.1"
--
--DEPENDS = "common-csl-ip"
--
--do_compile () {
--	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
--		HYPLNK_SRC_DIR="${S}"
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 lib PDK_INSTALL_PATH="${STAGING_INCDIR}"\
--			DEVICE="$device" HYPLNK_SRC_DIR="${S}"
--	done
--}
--
--do_install () {
--	make -f makefile_armv7 install PDK_INSTALL_PATH="${STAGING_INCDIR}" \
--		INSTALL_INC_BASE_DIR="${D}/${includedir}" \
--		INSTALL_LIB_BASE_DIR="${D}${libdir}" HYPLNK_SRC_DIR="${S}"
--	chown -R root:root ${D}
--
--	# Set the generic device library symbolic link to default k2h
--	cd ${D}${libdir}
--
--	# Link only the first device in the list
--	for device in ${DEVICELIST}
--	do
--		ln -sf libhyplnk_${device}.so.1.0.0 libhyplnk_device.so.1
--		break
--	done
--	ln -sf libhyplnk_device.so.1 libhyplnk_device.so
--}
--
--INHIBIT_PACKAGE_STRIP_FILES:k2hk = "${PKGD}${libdir}/libhyplnk_k2h.a ${PKGD}${libdir}/libhyplnk_k2k.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2e = "${PKGD}${libdir}/libhyplnk_k2e.a"
-diff --git a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb b/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-deleted file mode 100644
-index 2d06615..0000000
---- a/recipes-bsp/i2c-lld/i2c-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Inter-IC module (I2C)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.i2c"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://I2C.h;beginline=1;endline=32;md5=50084375278c1a2779571be134f98f7c"
+-LIC_FILES_CHKSUM = "file://board.h;beginline=1;endline=32;md5=9bed8e4ac2fb37fc627cefe49eb1c919"
 -
 -COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x|k3"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
 -
+-
 -PR = "r0"
 -
--DEPENDS:append = " osal-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos \
--                         pruss-lld-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--                         pruss-lld-rtos \
--"
--DEPENDS:append:am57xx-evm = " pruss-lld-rtos \
+-DEPENDS:append = " i2c-lld-rtos \
+-                   spi-lld-rtos \
+-                   uart-lld-rtos \
+-                   osal-rtos \
 -"
 -
--DEPENDS:append:k2g = " pruss-lld-rtos \
+-DEPENDS:append:omap-a15 = " ti-ndk \
+-                            mmcsd-lld-rtos \
+-                            pm-lld-rtos \
 -"
 -
--DEPENDS:append:j7 = " sciclient-rtos \
+-DEPENDS:append:am57xx-evm = " gpio-lld-rtos \
+-                              icss-emac-lld-rtos \
+-                              pruss-lld-rtos \
+-"
+-
+-
+-DEPENDS:append:ti33x = " gpio-lld-rtos \
+-                         gpmc-lld-rtos \
+-                         icss-emac-lld-rtos \
+-                         mmcsd-lld-rtos \
+-                         pruss-lld-rtos \
+-                         starterware-rtos \
+-                         ti-ndk \
+-"
+-
+-DEPENDS:append:ti43x = " gpio-lld-rtos \
+-                         gpmc-lld-rtos \
+-                         icss-emac-lld-rtos \
+-                         mmcsd-lld-rtos \
+-                         pruss-lld-rtos \
+-                         starterware-rtos \
+-                         ti-ndk \
+-"
+-
+-DEPENDS:append:dra7xx = " pm-lld-rtos \
+-                          mmcsd-lld-rtos \
+-"
+-
+-DEPENDS:append:am65xx = " sciclient-rtos \
+-"
+-DEPENDS:append:j7 = " udma-lld-rtos \
+-                          sciclient-rtos \
+-                          mmcsd-lld-rtos \
 -"
 -
 -# Build with make instead of XDC
 -TI_PDK_XDCMAKE = "0"
 -
+-INHIBIT_SYSROOT_STRIP = "1"
+-INHIBIT_PACKAGE_STRIP = "1"
 -
--export PDK_I2C_ROOT_PATH ="${WORKDIR}/build"
+-export PDK_BOARD_ROOT_PATH ="${WORKDIR}/build"
 -export DEST_ROOT="${S}"
 -
--INSANE_SKIP:${PN} = "arch"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "I2C LLD"
-diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb b/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
-deleted file mode 100644
-index 2cf2bea..0000000
---- a/recipes-bsp/icss-emac-lld/icss-emac-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--SUMMARY = "TI RTOS low level driver for ICSS-EMAC"
--
--inherit ti-pdk
--require icss-emac-lld.inc
--
--PR = "${INC_PR}.0"
--
--DEPENDS:append = " osal-rtos \
--                   pruss-lld-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--export PDK_ICSS_EMAC_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "ICSS-EMAC LLD"
+-XDCPATH:append = ";${PDK_INSTALL_DIR}/packages/ti/csl;${NDK_INSTALL_DIR}/packages"
 -
 -INSANE_SKIP:${PN} = "arch"
-diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld-test_git.bb b/recipes-bsp/icss-emac-lld/icss-emac-lld-test_git.bb
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
 deleted file mode 100644
-index 2aff00b..0000000
---- a/recipes-bsp/icss-emac-lld/icss-emac-lld-test_git.bb
+index dee180f..0000000
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
 +++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "TI ICSS-EMAC low level driver tests"
+@@ -1,47 +0,0 @@
+-DESCRIPTION = "Boot Monitor - TI ARM Boot monitor code"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
 -
--DEPENDS="common-csl-ip pruss-lld icss-emac-lld osal ti-pdk-build-rtos icss-emac-lld-rtos"
--
--DEPENDS:append:ti33x = " starterware"
--DEPENDS:append:ti43x = " starterware"
--
--include icss-emac-lld.inc
--
--PR = "${INC_PR}.0"
--
--EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} PDK_PKG_PATH=${STAGING_DATADIR}/ti/ti-pdk-tree/packages ICSS_EMAC_SRC_DIR=${S}"
--
--DEVICE_LIST ?= "${TI_PDK_LIMIT_SOCS}"
--
--do_compile () {
--    # Build the tests
--    for device in ${DEVICE_LIST}
--    do
--        oe_runmake tests DEVICE="$device"
--    done
--}
--
--do_install() {
--    # Install the binary
--    for device in ${DEVICE_LIST}
--    do
--        oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
--    done
--}
-diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc b/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-deleted file mode 100644
-index e315c89..0000000
---- a/recipes-bsp/icss-emac-lld/icss-emac-lld.inc
-+++ /dev/null
-@@ -1,15 +0,0 @@
--LICENSE = "BSD-3-Clause"
--
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=76cafd87d8495b42c2355f7681de15a2"
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|k3"
+-COMPATIBLE_MACHINE = "keystone"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--inherit ti-pdk-fetch
+-DEPENDS = "u-boot-mkimage-native"
 -
--TI_PDK_COMP = "ti.drv.icss_emac"
+-SRC_URI = "git://git.ti.com/processor-firmware/ks2-boot-monitor.git;protocol=git;branch=${BRANCH}"
 -
--PE = "1"
+-PV = "4.0+git${SRCPV}"
 -
--INC_PR = "r1"
--
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libicss_emac.a"
-diff --git a/recipes-bsp/icss-emac-lld/icss-emac-lld_git.bb b/recipes-bsp/icss-emac-lld/icss-emac-lld_git.bb
-deleted file mode 100644
-index ed7748d..0000000
---- a/recipes-bsp/icss-emac-lld/icss-emac-lld_git.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--DESCRIPTION = "TI ICSS-EMAC low level driver library"
--
--DEPENDS = "common-csl-ip pruss-lld osal"
--
--include icss-emac-lld.inc
--
--PR = "${INC_PR}.0"
--
--TARGET_NAME:omap-a15 = "SOC_AM572x"
--TARGET_NAME:ti33x = "SOC_AM335x"
--TARGET_NAME:ti43x = "SOC_AM437x"
--TARGET_NAME:k2g = "SOC_K2G"
--
--EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} TARGET=${TARGET_NAME}"
--
--do_compile () {
--#   Build the lib
--    oe_runmake clean
--    oe_runmake lib
--}
--
--do_install () {
--#   Install the lib
--    oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--}
-diff --git a/recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb b/recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb
-deleted file mode 100644
-index f193cb8..0000000
---- a/recipes-bsp/iolink-lld/iolink-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--SUMMARY = "TI RTOS low level driver for IO-Link Master"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.iolink"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://IOLINK.h;beginline=1;endline=32;md5=da669339a4b8594ed3edbe7ca30c726e"
--
--COMPATIBLE_MACHINE = "ti43x"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r2"
--
--DEPENDS:append = " osal-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--                         pruss-lld-rtos \
--"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--
--export PDK_IOLINK_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
--
--INSANE_SKIP:${PN} = "arch"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "IOLINK LLD"
-diff --git a/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb b/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-deleted file mode 100644
-index 3fb6884..0000000
---- a/recipes-bsp/ipc-lld/ipc-lld-examples-rtos_git.bb
-+++ /dev/null
-@@ -1,162 +0,0 @@
--SUMMARY = "echo_test for IPC-LLD"
--
--require ipc-lld.inc
--
--inherit update-alternatives
--
--DEPENDS += " ipc-lld-rtos common-csl-ip-rtos sciclient-rtos board-rtos"
--
--REMOTE_FW_DIR = "${S}/examples/yocto_bin"
--REMOTE_FW_BIN_DIR = "${REMOTE_FW_DIR}/ipc_echo_test/bin"
--REMOTE_FWB_BIN_DIR = "${REMOTE_FW_DIR}/ipc_echo_testb/bin"
--RTOS_ALL_CORES_BIN_DIR = "${REMOTE_FW_DIR}/ex02_bios_multicore_echo_test/bin"
--RTOS_2_CORES_BIN_DIR = "${REMOTE_FW_DIR}/ex01_bios_2core_echo_test/bin"
--LINUX_2_CORES_BIN_DIR = "${REMOTE_FW_DIR}/ex03_linux_bios_2core_echo_test/bin"
--LINUX_2_CORES_BAREMETAL_BIN_DIR = "${REMOTE_FW_DIR}/ex04_linux_baremetal_2core_echo_test/bin"
--
--DST_BIN_PATH = "${base_libdir}/firmware/pdk-ipc"
--
--TI_PDK_LIMIT_BOARDS:j7 = "j721e_evm"
--
--do_configure[noexec] = "1"
--
--do_compile() {
--    cd "${PDK_INSTALL_PATH}/ti/build"
--
--    for board in ${TI_PDK_LIMIT_BOARDS}
--    do
--        for core in ${TI_PDK_LIMIT_CORES}
--        do
--            oe_runmake ipc_echo_test BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
--            oe_runmake ex02_bios_multicore_echo_test BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
--            oe_runmake ex01_bios_2core_echo_test BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
--            oe_runmake ex03_linux_bios_2core_echo_test BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
--            oe_runmake ex04_linux_baremetal_2core_echo_test BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
--            oe_runmake ipc_echo_testb BOARD="$board" CORE="$core" DEST_ROOT=${REMOTE_FW_DIR}
--        done
--
--    done
--}
--
--do_install() {
--    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
--    install -d ${D}${DST_BIN_PATH}
--
--    cp ${CP_ARGS} ${REMOTE_FW_DIR}/ex02_bios_multicore_echo_test/bin -d ${D}/ex02_bios_multicore_echo_test
--    cp ${CP_ARGS} ${REMOTE_FW_DIR}/ex01_bios_2core_echo_test/bin -d ${D}/ex01_bios_2core_echo_test
--    cp ${CP_ARGS} ${REMOTE_FW_DIR}/ex03_linux_bios_2core_echo_test/bin -d ${D}/ex03_linux_bios_2core_echo_test
--
--    for board in ${TI_PDK_LIMIT_BOARDS}
--    do
--        for core in ${TI_PDK_LIMIT_CORES}
--        do
--            install -m 0644 ${REMOTE_FW_BIN_DIR}/$board/ipc_echo_test_${core}_release* ${D}${DST_BIN_PATH}
--
--            #removing map files copied in previous line
--            rm ${D}${DST_BIN_PATH}/*.map
--        done
--
--        #remove mpu binarires
--        rm ${D}${DST_BIN_PATH}/ipc_echo_test_mpu1_0_release.xa*
--
--    done
--}
--
--do_install:append:j7() {
--    #copy ipc_echo_testb binaries for J721
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu1_0_release.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu1_1_release.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu2_0_release.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu2_1_release.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_0_release.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_1_release.xer5f ${D}${DST_BIN_PATH}
--
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu1_0_release_strip.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu1_1_release_strip.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu2_0_release_strip.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu2_1_release_strip.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_0_release_strip.xer5f ${D}${DST_BIN_PATH}
--    install -m 0644 ${REMOTE_FWB_BIN_DIR}/$board/ipc_echo_testb_mcu3_1_release_strip.xer5f ${D}${DST_BIN_PATH}
--}
--
--do_install:append:am65xx() {
--    cp ${CP_ARGS} ${REMOTE_FW_DIR}/ex04_linux_baremetal_2core_echo_test/bin -d ${D}/ex04_linux_baremetal_2core_echo_test
--}
--
--# Set up names for the firmwares
--ALTERNATIVE:${PN}:am65xx = "\
--                    am65x-mcu-r5f0_0-fw \
--                    am65x-mcu-r5f0_1-fw \
--                    "
--ALTERNATIVE:${PN}:j7 = "\
--                    j7-mcu-r5f0_0-fw \
--                    j7-mcu-r5f0_1-fw \
--                    j7-main-r5f0_0-fw \
--                    j7-main-r5f0_1-fw \
--                    j7-main-r5f1_0-fw \
--                    j7-main-r5f1_1-fw \
--                    j7-c66_0-fw \
--                    j7-c66_1-fw \
--                    j7-c71_0-fw\
--                    "
--
--# Set up link names for the firmwares
--
--TARGET_MCU_R5FSS0_0:am65xx = "am65x-mcu-r5f0_0-fw"
--TARGET_MCU_R5FSS0_1:am65xx = "am65x-mcu-r5f0_1-fw"
--
--TARGET_MCU_R5FSS0_0:j7 = "j7-mcu-r5f0_0-fw"
--TARGET_MCU_R5FSS0_1:j7 = "j7-mcu-r5f0_1-fw"
--TARGET_MAIN_R5FSS0_0:j7 = "j7-main-r5f0_0-fw"
--TARGET_MAIN_R5FSS0_1:j7 = "j7-main-r5f0_1-fw"
--TARGET_MAIN_R5FSS1_0:j7 = "j7-main-r5f1_0-fw"
--TARGET_MAIN_R5FSS1_1:j7 = "j7-main-r5f1_1-fw"
--TARGET_C66_0:j7 = "j7-c66_0-fw"
--TARGET_C66_1:j7 = "j7-c66_1-fw"
--TARGET_C7X:j7 = "j7-c71_0-fw"
--
--ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
--ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
--
--ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
--ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
--ALTERNATIVE_LINK_NAME[j7-c66_0-fw] = "${base_libdir}/firmware/${TARGET_C66_0}"
--ALTERNATIVE_LINK_NAME[j7-c66_1-fw] = "${base_libdir}/firmware/${TARGET_C66_1}"
--ALTERNATIVE_LINK_NAME[j7-c71_0-fw] = "${base_libdir}/firmware/${TARGET_C7X}"
--
--# Create the firmware alternatives
--
--ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
--ALTERNATIVE_TARGET[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
--
--ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
--ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f"
--ALTERNATIVE_TARGET[j7-c66_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_1_release_strip.xe66"
--ALTERNATIVE_TARGET[j7-c66_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_2_release_strip.xe66"
--ALTERNATIVE_TARGET[j7-c71_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release_strip.xe71"
--
--ALTERNATIVE_PRIORITY = "10"
--
--#add source and all rtos binaries package
--PACKAGES =+ "${PN}-rtos"
--
--# make sure that lib/firmware, and all its contents are part of the package
--FILES:${PN} += "${base_libdir}/firmware"
--
--FILES:${PN}-rtos += "ex02_bios_multicore_echo_test"
--FILES:${PN}-rtos += "ex01_bios_2core_echo_test"
--FILES:${PN}-rtos += "ex03_linux_bios_2core_echo_test"
--FILES:${PN}-rtos += "ex04_linux_baremetal_2core_echo_test"
--
--INSANE_SKIP:${PN} = "arch ldflags file-rdeps"
--INSANE_SKIP:${PN}-rtos = "arch ldflags file-rdeps"
--
--INSANE_SKIP:${PN}-dbg = "arch"
-diff --git a/recipes-bsp/ipc-lld/ipc-lld-fw_git.bb b/recipes-bsp/ipc-lld/ipc-lld-fw_git.bb
-deleted file mode 100644
-index efc5656..0000000
---- a/recipes-bsp/ipc-lld/ipc-lld-fw_git.bb
-+++ /dev/null
-@@ -1,196 +0,0 @@
--SUMMARY = "R5 and DSP IPC Echo Test Firmware Binaries"
--
--LICENSE = "TI-TFL"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=7eae093f2b09fd39307f30028a068b91"
--
--inherit deploy
--inherit update-alternatives
--
--COMPATIBLE_MACHINE = "k3"
--
--PV = "1.0-git${SRCPV}"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PROTOCOL = "git"
 -BRANCH = "master"
--SRCREV = "c9f7cfe61b67998a053fe145344ce0c9b5bb22aa"
--
--SRC_URI = "git://git.ti.com/keystone-rtos/ipc-lld.git;protocol=${PROTOCOL};branch=${BRANCH}"
 -
 -S = "${WORKDIR}/git"
 -
--AM65X_R5_FW_DIR = "${S}/examples/echo_test/binaries/am65xx"
--J721E_R5_DSP_FW_DIR = "${S}/examples/echo_test/binaries/j721e"
+-SRCREV = "d57d5c1d8f0b0b1487484d9ceb1595bd4507231a"
 -
--PLATFORM:am65xx = "am65xx"
--PLATFORM:j7 = "j7-evm"
+-BOOT_MONITOR_IMAGE  ?= "skern-${BOOT_MONITOR_MAKE_TARGET}.bin"
 -
--# make sure that lib/firmware, and all its contents are part of the package
--FILES:${PN} += "${base_libdir}/firmware"
+-FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
 -
--# install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, with softlinks up a level
--do_install() {
--    install -d ${D}${base_libdir}/firmware/pdk-ipc
+-EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}" LD="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}""
+-
+-FILES:${PN} = "/boot"
+-
+-inherit deploy
+-
+-do_compile () {
+-	unset LDFLAGS
+-	unset CFLAGS
+-	unset CPPFLAGS
+-	oe_runmake image_${BOOT_MONITOR_MAKE_TARGET}
 -}
 -
--do_install:append:am65xx() {
--    install -m 0644 ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_0_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_0_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_1_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_1_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
+-do_install () {
+-	install -d ${D}/boot
+-	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${D}/boot/
 -}
 -
--do_install:append:j7() {
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_0_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_0_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_0_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_0_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_1_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_1_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_1_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_1_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_0_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_0_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_0_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_0_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_1_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_1_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_1_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_1_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_0_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_0_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_0_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_0_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_1_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_1_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_1_release.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_1_release.strip.xer5f ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_1_release.xe66 ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_1_release.strip.xe66 ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_2_release.xe66 ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_2_release.strip.xe66 ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c7x_1_release.xe71 ${D}${base_libdir}/firmware/pdk-ipc/
--    install -m 0644 ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c7x_1_release.strip.xe71 ${D}${base_libdir}/firmware/pdk-ipc/
+-do_deploy () {
+-	install -d ${DEPLOYDIR}
+-	install -m 0644 ${S}/${BOOT_MONITOR_IMAGE} ${DEPLOYDIR}/
 -}
 -
--# Set up names for the firmwares
--ALTERNATIVE:${PN}:am65xx = "\
--                    am65x-mcu-r5f0_0-fw \
--                    am65x-mcu-r5f0_1-fw \
--                    "
--ALTERNATIVE:${PN}:j7 = "\
--                    j7-mcu-r5f0_0-fw \
--                    j7-mcu-r5f0_1-fw \
--                    j7-main-r5f0_0-fw \
--                    j7-main-r5f0_1-fw \
--                    j7-main-r5f1_0-fw \
--                    j7-main-r5f1_1-fw \
--                    j7-c66_0-fw \
--                    j7-c66_1-fw \
--                    j7-c71_0-fw\
--                    "
+-addtask deploy before do_build after do_compile
+diff --git a/recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb b/recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb
+deleted file mode 100644
+index 8ca4416..0000000
+--- a/recipes-bsp/cmb-addon/cmb-addon-rtos_git.bb
++++ /dev/null
+@@ -1,41 +0,0 @@
+-SUMMARY = "TI RTOS software supporting circular microphone array board"
 -
--# Set up link names for the firmwares
+-inherit ti-pdk
 -
--TARGET_MCU_R5FSS0_0:am65xx = "am65x-mcu-r5f0_0-fw"
--TARGET_MCU_R5FSS0_1:am65xx = "am65x-mcu-r5f0_1-fw"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://cmbaddonver.h;beginline=8;endline=47;md5=d0cb159bf210cfafed63042da01c83e0"
 -
--TARGET_MCU_R5FSS0_0:j7 = "j7-mcu-r5f0_0-fw"
--TARGET_MCU_R5FSS0_1:j7 = "j7-mcu-r5f0_1-fw"
--TARGET_MAIN_R5FSS0_0:j7 = "j7-main-r5f0_0-fw"
--TARGET_MAIN_R5FSS0_1:j7 = "j7-main-r5f0_1-fw"
--TARGET_MAIN_R5FSS1_0:j7 = "j7-main-r5f1_0-fw"
--TARGET_MAIN_R5FSS1_1:j7 = "j7-main-r5f1_1-fw"
--TARGET_C66_0:j7 = "j7-c66_0-fw"
--TARGET_C66_1:j7 = "j7-c66_1-fw"
--TARGET_C7X:j7 = "j7-c71_0-fw"
+-COMPATIBLE_MACHINE = "k2g|omapl137-evm"
 -
--ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
--ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
--ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
--ALTERNATIVE_LINK_NAME[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
--ALTERNATIVE_LINK_NAME[j7-c66_0-fw] = "${base_libdir}/firmware/${TARGET_C66_0}"
--ALTERNATIVE_LINK_NAME[j7-c66_1-fw] = "${base_libdir}/firmware/${TARGET_C66_1}"
--ALTERNATIVE_LINK_NAME[j7-c71_0-fw] = "${base_libdir}/firmware/${TARGET_C7X}"
+-CMB_ADDON_GIT_URI = "git://git.ti.com/processor-sdk/circmicarray-addon.git"
+-CMB_ADDON_GIT_PROTOCOL = "git"
+-CMB_ADDON_GIT_BRANCH = "master"
+-CMB_ADDON_GIT_DESTSUFFIX = "git/ti/addon"
 -
--# Create the firmware alternatives
+-# Below commit ID corresponds to "DEV.CMB.01.01.00.03A"
+-CMB_ADDON_SRCREV = "3655aad07f17d3a167ec7dcecb52450c1d2fe8be"
 -
--ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release.strip.xer5f"
--ALTERNATIVE_TARGET[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release.strip.xer5f"
+-SRCREV = "${CMB_ADDON_SRCREV}"
+-PV = "01.01.00.03A"
+-PR = "r0"
 -
--ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release.strip.xer5f"
--ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release.strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release.strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release.strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release.strip.xer5f"
--ALTERNATIVE_TARGET[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release.strip.xer5f"
--ALTERNATIVE_TARGET[j7-c66_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_1_release.strip.xe66"
--ALTERNATIVE_TARGET[j7-c66_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_2_release.strip.xe66"
--ALTERNATIVE_TARGET[j7-c71_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release.strip.xe71"
+-BRANCH = "${CMB_ADDON_GIT_BRANCH}"
+-SRC_URI = "${CMB_ADDON_GIT_URI};destsuffix=${CMB_ADDON_GIT_DESTSUFFIX};protocol=${CMB_ADDON_GIT_PROTOCOL};branch=${BRANCH}"
 -
--ALTERNATIVE_PRIORITY = "10"
 -
--# copy the executables into the deploy directory
+-S = "${WORKDIR}/git/ti/addon/cmb"
 -
--do_deploy() {
+-DEPENDS:append = " ti-sysbios \
+-            gpio-lld-rtos \
+-            i2c-lld-rtos \
+-            mcasp-lld-rtos \
+-            board-rtos \
+-"
+-
+-export PDK_CMB_ROOT_PATH = "${WORKDIR}/build"
+-export DEST_ROOT="${S}"
+-
+-# Build with make instead of XDC
+-TI_PDK_XDCMAKE = "0"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+deleted file mode 100644
+index 11baafc..0000000
+--- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-require common-csl-ip.inc
+-PR = "${INC_PR}.6"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE:append = "|c66x|k3"
+-
+-inherit ti-pdk
+-
+-DEPENDS:remove = "${PN}"
+-DEPENDS:remove = "ti-sysbios"
+-
+-# Build with make instead of XDC
+-TI_PDK_XDCMAKE = "0"
+-
+-export PDK_CSL_ROOT_PATH ="${WORKDIR}/build"
+-export DEST_ROOT="${S}"
+-
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "CSL-Chip Support Library"
+-
+-# Workaround: dra7xx build requires am57xx CSL libraries for opencl-monitor
+-TI_PDK_LIMIT_SOCS:append:dra7xx = " am571x am572x am574x"
+-TI_PDK_LIMIT_BOARDS:append:dra7xx = " evmAM571x evmAM572x idkAM574x"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+deleted file mode 100644
+index 23586fd..0000000
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "Chip support library low level interface"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+-
+-COMPATIBLE_MACHINE = "keystone|dra7xx|ti33x|ti43x|omapl1"
+-
+-PV = "03.03.00.17B"
+-INC_PR = "r0"
+-PE = "2"
+-
+-CSL_GIT_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git"
+-CSL_GIT_PROTOCOL ="git"
+-CSL_GIT_BRANCH = "release"
+-CSL_GIT_DESTSUFFIX = "git"
+-
+-# Below commit ID corresponding to "DEV.CSL_PROCESSOR-SDK.03.03.00.17B"
+-CSL_SRCREV = "027d26031709ad6a0e9f84625d11a3419e486467"
+-
+-BRANCH="${CSL_GIT_BRANCH}"
+-SRC_URI = "${CSL_GIT_URI};protocol=${CSL_GIT_PROTOCOL};branch=${BRANCH};destsuffix=${CSL_GIT_DESTSUFFIX}"
+-SRCREV = "${CSL_SRCREV}"
+-
+-S = "${WORKDIR}/${CSL_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
+deleted file mode 100644
+index 6fffc7e..0000000
+--- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-require common-csl-ip.inc
+-
+-PR = "${INC_PR}.0"
+-
+-ALLOW_EMPTY:${PN} = "1"
+-
+-CLEANBROKEN = "1"
+-
+-do_compile() {
 -    :
 -}
 -
--do_deploy:am65xx() {
--    install ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_0_release.xer5f ${DEPLOYDIR}/
--    install ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_0_release.strip.xer5f ${DEPLOYDIR}/
--    install ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_1_release.xer5f ${DEPLOYDIR}/
--    install ${AM65X_R5_FW_DIR}/ipc_echo_test_mcu1_1_release.strip.xer5f ${DEPLOYDIR}/
+-do_install () {
+-    install -d ${D}${includedir}/ti/csl
+-    find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
+-    find ./src/ip/serdes_sb/V0 -name "*.c" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
 -}
--
--do_deploy:j7() {
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_0_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_0_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_0_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_0_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_1_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu1_1_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_1_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu1_1_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_0_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_0_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_0_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_0_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_1_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu2_1_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_1_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu2_1_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_0_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_0_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_0_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_0_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_1_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_mcu3_1_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_1_release.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_testb_mcu3_1_release.strip.xer5f ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_1_release.xe66 ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_1_release.strip.xe66 ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_2_release.xe66 ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c66xdsp_2_release.strip.xe66 ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c7x_1_release.xe71 ${DEPLOYDIR}/
--    install ${J721E_R5_DSP_FW_DIR}/ipc_echo_test_c7x_1_release.strip.xe71 ${DEPLOYDIR}/
--}
--
--addtask deploy after do_install before do_build
--
--# This is used to prevent the build system to strip the executables
--INHIBIT_PACKAGE_STRIP = "1"
--INHIBIT_SYSROOT_STRIP = "1"
--# This is used to prevent the build system to split the debug info in a separate file
--INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
--# As it likely to be a different arch from the Yocto build, disable checking by adding "arch" to INSANE_SKIP
--INSANE_SKIP:${PN} += "arch"
--
--# we don't want to configure and build the source code
--do_compile[noexec] = "1"
--do_configure[noexec] = "1"
-diff --git a/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb b/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
+diff --git a/recipes-bsp/common-csl-ip/csl-rti-dwwdtest-fw_git.bb b/recipes-bsp/common-csl-ip/csl-rti-dwwdtest-fw_git.bb
 deleted file mode 100644
-index 34f1f03..0000000
---- a/recipes-bsp/ipc-lld/ipc-lld-rtos_git.bb
+index a793659..0000000
+--- a/recipes-bsp/common-csl-ip/csl-rti-dwwdtest-fw_git.bb
 +++ /dev/null
-@@ -1,45 +0,0 @@
--SUMMARY = "TI RTOS low level driver for IPC"
+@@ -1,77 +0,0 @@
+-SUMMARY = "MCU Watchdog test firmware"
+-DESCRIPTION = "Firmware for the R5F core to test the detection of watchdog timeout events to trigger SOC reset though DMSC."
 -
--require ipc-lld.inc
+-require recipes-bsp/common-csl-ip/common-csl-ip.inc
+-require recipes-ti/includes/ti-paths.inc
 -
--DEPENDS += " osal-rtos common-csl-ip-rtos sciclient-rtos"
+-LIC_FILES_CHKSUM = "file://../../../COPYING.txt;md5=5857833e20836213677fac33f9aded21"
 -
--do_configure() {
--    # remove any previous package
--    rm -rf ${IPCLLD_PACKAGE_BASE}
--    cd ${S}
+-S = "${WORKDIR}/${CSL_GIT_DESTSUFFIX}/example/rti/rti_dwwdtest_app"
 -
--    mkdir -p ${IPCLLD_ROOTPATH}
+-COMPATIBLE_MACHINE = "am65xx"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--    for board in ${TI_PDK_LIMIT_BOARDS}
--    do
--        # make the release package before building it
--        oe_runmake package BOARD=$board DEST_ROOT=${IPCLLD_PACKAGE_BASE} PDK_IPC_COMP_PATH=${S}
--    done
+-DEPENDS = "ti-cgt-arm-native \
+-           ti-pdk-build-rtos \
+-           uart-lld-rtos \
+-           board-rtos \
+-           sciclient-rtos \
+-           udma-lld-rtos"
 -
--}
+-export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+-export TOOLCHAIN_PATH_R5 = "${M4_TOOLCHAIN_INSTALL_DIR}"
+-
+-EXTRA_OEMAKE = "WDT_RESET=enable DEST_ROOT=${S}"
 -
 -do_compile() {
--    cd ${IPCLLD_ROOTPATH}
--
--    oe_runmake lib LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" PDK_IPC_COMP_PATH=${IPCLLD_ROOTPATH}
+-    for soc in ${TI_PDK_LIMIT_SOCS}
+-    do
+-        for board in ${TI_PDK_LIMIT_BOARDS}
+-        do
+-            oe_runmake SOC=$soc BOARD=$board
+-        done
+-    done
 -}
 -
 -do_install() {
--    cd ${IPCLLD_ROOTPATH}
+-    install -d ${D}${base_libdir}/firmware/rti_dwwdtest
 -
--    #remove prebuilt binaries
--    rm -rf examples/echo_test/binaries
--
--    #archive
--    tar -cf ipc-lld.tar --exclude='*.tar' ./*
--
--    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc
--    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/ipc \;
+-    for board in ${TI_PDK_LIMIT_BOARDS}
+-    do
+-        install -d ${D}${base_libdir}/firmware/rti_dwwdtest/$board
+-        install -m 0644 csl_rti_dwwd_test_app/bin/$board/csl_rti_dwwd_test_app_mcu1_0_release.xer5f \
+-                        ${D}${base_libdir}/firmware/rti_dwwdtest/$board
+-    done
 -}
 -
--FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+-# Create separate package for each firmware so we can utilize
+-# update-alternatives.
+-PACKAGES =+ "${PN}-evm ${PN}-idk"
+-RDEPENDS:${PN} = "${PN}-evm ${PN}-idk"
+-ALLOW_EMPTY:${PN} = "1"
 -
--INSANE_SKIP:${PN} = "arch ldflags file-rdeps"
+-FILES:${PN}-evm = "${base_libdir}/firmware/rti_dwwdtest/am65xx_evm"
+-FILES:${PN}-idk = "${base_libdir}/firmware/rti_dwwdtest/am65xx_idk"
 -
--INSANE_SKIP:${PN}-dbg = "arch"
-diff --git a/recipes-bsp/ipc-lld/ipc-lld.inc b/recipes-bsp/ipc-lld/ipc-lld.inc
+-# We are packaging R5 firmware
+-INSANE_SKIP:${PN}-evm = "arch"
+-INSANE_SKIP:${PN}-idk = "arch"
+-
+-# Configure update-alternatives as there may be other firmwares provided in an
+-# image.
+-inherit update-alternatives
+-
+-# It might be nice to dynamically declare the following based on
+-# TI_PDK_LIMIT_BOARDS, but that is probably overkill.
+-ALTERNATIVE:${PN}-evm = "am65x-mcu-r5f0_0-fw"
+-ALTERNATIVE:${PN}-idk = "am65x-mcu-r5f0_0-fw"
+-
+-ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/am65x-mcu-r5f0_0-fw"
+-
+-ALTERNATIVE_TARGET_${PN}-evm = "${base_libdir}/firmware/rti_dwwdtest/am65xx_evm/csl_rti_dwwd_test_app_mcu1_0_release.xer5f"
+-ALTERNATIVE_TARGET_${PN}-idk = "${base_libdir}/firmware/rti_dwwdtest/am65xx_idk/csl_rti_dwwd_test_app_mcu1_0_release.xer5f"
+-
+-# Use a lesser priority than ipc example fw
+-# See meta-ti/recipes-ti/ipc/ti-ipc-rtos_git.bb
+-ALTERNATIVE_PRIORITY_${PN}-evm = "4"
+-ALTERNATIVE_PRIORITY_${PN}-idk = "3"
+diff --git a/recipes-bsp/dsptop/temperature-module-drv_git.bb b/recipes-bsp/dsptop/temperature-module-drv_git.bb
 deleted file mode 100644
-index 6537f52..0000000
---- a/recipes-bsp/ipc-lld/ipc-lld.inc
-+++ /dev/null
-@@ -1,29 +0,0 @@
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.ipc"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=7eae093f2b09fd39307f30028a068b91"
--
--COMPATIBLE_MACHINE = "k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r4"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--IPCLLD_PACKAGE_BASE   = "${WORKDIR}/ipclld_base"
--IPCLLD_ROOTPATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/ipc"
--
--export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
--export PDK_IPC_ROOT_PATH = "${IPCLLD_PACKAGE_BASE}/package/all/pdk_/packages"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "IPCLLD"
--
--EXTRA_OEMAKE = "PDK_INSTALL_PATH=${PDK_INSTALL_PATH} "
--
--TI_PDK_LIMIT_CORES:append:am65xx-evm = " mcu1_1 "
-diff --git a/recipes-bsp/iqn2-lld/iqn2-lld-rtos_git.bb b/recipes-bsp/iqn2-lld/iqn2-lld-rtos_git.bb
-deleted file mode 100644
-index 318f1cf..0000000
---- a/recipes-bsp/iqn2-lld/iqn2-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "TI RTOS low level driver for IQN2 peripheral module"
--
--inherit ti-pdk
--
--require recipes-bsp/iqn2-lld/iqn2-lld.inc
--
--PR = "${INC_PR}.0"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "IQN2 LLD"
-diff --git a/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb b/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
-deleted file mode 100644
-index f276c4b..0000000
---- a/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
+index 1f49ddf..0000000
+--- a/recipes-bsp/dsptop/temperature-module-drv_git.bb
 +++ /dev/null
 @@ -1,18 +0,0 @@
--DESCRIPTION = "TI IQN2 peripheral module low level driver test binaries"
+-DESCRIPTION = "Smart Reflex Sub-System (SRSS) module driver for Keystone devices"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
 -
--DEPENDS = "common-csl-ip iqn2-lld dfe-lld"
+-# This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR:append = "a"
+-PR = "${MACHINE_KERNEL_PR}"
+-PV:append = "+git${SRCPV}"
 -
--include iqn2-lld.inc
+-S = "${WORKDIR}/git/temperature_module/temperature-mod"
 -
--PR = "${INC_PR}.0"
+-inherit module
 -
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} IQN2_SRC_DIR=${WORKDIR}/git"
--
--do_compile () {
--	oe_runmake clean DEVICE=k2l
--	oe_runmake tests DEVICE=k2l
--}
--
--do_install () {
--	oe_runmake installbin DEVICE=k2l IQN2_SRC_DIR=${WORKDIR}/git INSTALL_BIN_BASE_DIR=${D}/${bindir}
--}
-diff --git a/recipes-bsp/iqn2-lld/iqn2-lld.inc b/recipes-bsp/iqn2-lld/iqn2-lld.inc
-deleted file mode 100644
-index 078509f..0000000
---- a/recipes-bsp/iqn2-lld/iqn2-lld.inc
-+++ /dev/null
-@@ -1,13 +0,0 @@
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
--LICENSE = "BSD-3-Clause"
--
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.iqn2"
--
--PE = "1"
--
--INC_PR = "r0"
--
--COMPATIBLE_MACHINE = "k2l"
--
-diff --git a/recipes-bsp/iqn2-lld/iqn2-lld_git.bb b/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
-deleted file mode 100644
-index a0c2ef8..0000000
---- a/recipes-bsp/iqn2-lld/iqn2-lld_git.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--DESCRIPTION = "TI IQN2 peripheral module low level driver"
--
--DEPENDS = "common-csl-ip"
--
--include iqn2-lld.inc
--
--PR = "${INC_PR}.0"
--
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
--
--do_configure () {
--	sed -i -e 's/march=armv7-a/march=armv7ve/' build/armv7/libiqn2_aearmv7.mk
--}
--
--do_compile () {
--	oe_runmake clean
--	oe_runmake lib
--}
--
--do_install () {
--	oe_runmake install INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--	chown -R root:root ${D}
--}
--
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libiqn2.a"
-diff --git a/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb b/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
-deleted file mode 100644
-index 9d45f0d..0000000
---- a/recipes-bsp/mcasp-lld/mcasp-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,41 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Multi channel Audio Serial port (McASP)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.mcasp"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://mcaspver.h;beginline=19;endline=47;md5=75a9adc782a6df0d3a5419743e9a9f18"
--
--COMPATIBLE_MACHINE = "ti43x|omap-a15|k2g|ti33x|omapl1|k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--
--PR = "r0"
--
--
--DEPENDS:append = " edma3-lld-rtos \
--                   osal-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos \
--"
--
--DEPENDS:remove:k3 = "edma3-lld-rtos "
--DEPENDS:append:k3 = " udma-lld-rtos \
--"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--export PDK_MCASP_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
--
--export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
--XDCPATH:append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "MCASP LLD"
-diff --git a/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb b/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
-deleted file mode 100644
-index f1eeccd..0000000
---- a/recipes-bsp/mcbsp-lld/mcbsp-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Multi-channel Buffered Serial Port (McBSP)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.mcbsp"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://mcbspver.h;beginline=1;endline=47;md5=a8a39efd13fa6fe66da5461b898d620e"
--
--COMPATIBLE_MACHINE = "k2g|c665x-evm|omapl1"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--
--DEPENDS:append = " edma3-lld-rtos \
--"
--
--export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
--XDCPATH:append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
--
--TI_PDK_XDCMAKE = "0"
--
--export PDK_MCBSP_ROOT_PATH = "${WORKDIR}/build"
--export DEST_ROOT = "${S}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "MCBSP LLD"
-diff --git a/recipes-bsp/mmap-lld/mmap-lld-rtos_git.bb b/recipes-bsp/mmap-lld/mmap-lld-rtos_git.bb
-deleted file mode 100644
-index faee597..0000000
---- a/recipes-bsp/mmap-lld/mmap-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--inherit ti-pdk
--
--require recipes-bsp/mmap-lld/mmap-lld.inc
--
--PR = "${INC_PR}.0"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "MMAP LLD"
-diff --git a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-deleted file mode 100644
-index 0c3cedd..0000000
---- a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-+++ /dev/null
-@@ -1,44 +0,0 @@
--DESCRIPTION = "TI KEYSTONE MMAP driver test binaries "
--include mmap-lld.inc
--
--PR = "${INC_PR}.0"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--DEPENDS="common-csl-ip mmap-lld"
--RDEPENDS:${PN}="uio-module-drv"
--
--DEVICELIST:k2hk = "k2h k2k"
--DEVICELIST:k2e = "k2e"
--DEVICELIST:k2l = "k2l"
--DEVICELIST:k2g = "k2g"
--
--CHOICELIST = " yes \
--               no \
--"
--
--do_compile () {
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 clean \
--			PDK_INSTALL_PATH="${STAGING_INCDIR}" \
--			DEVICE="$device" MPAX_SRC_DIR="${S}"
--		for choice in ${CHOICELIST}
--		do
--			make -f makefile_armv7 tests examples \
--				PDK_INSTALL_PATH=${STAGING_INCDIR} \
--				DEVICE="$device" MPAX_SRC_DIR="${S}" \
--				USEDYNAMIC_LIB="$choice"
--		done
--	done
--}
--
--do_install () {
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 installbin \
--		PDK_INSTALL_PATH=${STAGING_INCDIR} \
--		DEVICE="$device" MPAX_SRC_DIR="${S}" \
--		INSTALL_BIN_BASE_DIR="${D}/${bindir}"
--	done
--}
-diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-lld/mmap-lld.inc
-deleted file mode 100644
-index 7e11a4c..0000000
---- a/recipes-bsp/mmap-lld/mmap-lld.inc
-+++ /dev/null
-@@ -1,22 +0,0 @@
--LICENSE = "BSD-3-Clause"
+-EXTRA_OEMAKE = "KVERSION=${KERNEL_VERSION} KERNEL_SRC=${STAGING_KERNEL_DIR}"
 -
 -COMPATIBLE_MACHINE = "keystone"
 -
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b3315b8190036fe1c6a8263d02e15606"
--
--MMAP_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git"
--MMAP_LLD_GIT_PROTOCOL = "git"
--MMAP_LLD_GIT_BRANCH = "master"
--MMAP_LLD_GIT_DESTSUFFIX = "git/ti/runtime/mmap"
--
--# Commit correspond to DEV.MMAP.02.00.00.08C
--MMAP_LLD_SRCREV = "62e75191ab7144604102dabaa288c5fd5048fc49"
--
--BRANCH="${MMAP_LLD_GIT_BRANCH}"
--SRC_URI = "${MMAP_LLD_GIT_URI};destsuffix=${MMAP_LLD_GIT_DESTSUFFIX};protocol=${MMAP_LLD_GIT_PROTOCOL};branch=${BRANCH}"
--SRCREV = "${MMAP_LLD_SRCREV}"
--
--PV = "2.0.0.8C"
--INC_PR = "r0"
--
--S = "${WORKDIR}/git/ti/runtime/mmap"
-diff --git a/recipes-bsp/mmap-lld/mmap-lld_git.bb b/recipes-bsp/mmap-lld/mmap-lld_git.bb
+-include dsptop.inc
+diff --git a/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb b/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
 deleted file mode 100644
-index cfc5d4c..0000000
---- a/recipes-bsp/mmap-lld/mmap-lld_git.bb
+index 5255e58..0000000
+--- a/recipes-bsp/fatfs-rtos/fatfs-rtos_git.bb
 +++ /dev/null
-@@ -1,15 +0,0 @@
--DESCRIPTION = "TI KEYSTONE mmap driver using Keystone MPAX Programming"
--include mmap-lld.inc
--
--PR = "${INC_PR}.0"
--
--DEPENDS="common-csl-ip"
--
--do_compile () {
--	make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
--}
--
--do_install () {
--	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--	chown -R root:root ${D}
--}
-diff --git a/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb b/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-deleted file mode 100644
-index 3be9f55..0000000
---- a/recipes-bsp/mmcsd-lld/mmcsd-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,41 +0,0 @@
--SUMMARY = "TI Multimedia card(MMC)/Secure Digital(SD) low level driver for RTOS "
+@@ -1,28 +0,0 @@
+-SUMMARY = "TI RTOS driver for FAT filesystem"
 -
 -inherit ti-pdk ti-pdk-fetch
 -
--TI_PDK_COMP = "ti.drv.mmcsd"
+-TI_PDK_COMP = "ti.fs.fatfs"
 -
 -PE = "1"
 -
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://MMCSD.h;beginline=1;endline=32;md5=f74069541d4d165a000a66b4043cb065"
+-LIC_FILES_CHKSUM = "file://FATFS.h;beginline=1;endline=32;md5=6619832755598d1cc2b01f2e6a1801d6"
 -
 -COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|k3"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--
 -PR = "r0"
 -
--
--DEPENDS:append = " edma3-lld-rtos \
+-DEPENDS:append = " mmcsd-lld-rtos \
 -                   osal-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--"
--DEPENDS:remove:k3 = "edma3-lld-rtos "
--
--DEPENDS:append:k3 = " sciclient-rtos \
 -"
 -
 -# Build with make instead of XDC
 -TI_PDK_XDCMAKE = "0"
 -
--export PDK_MMCSD_ROOT_PATH ="${WORKDIR}/build"
+-export PDK_FATFS_ROOT_PATH ="${WORKDIR}/build"
 -export DEST_ROOT="${S}"
 -
--export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
--XDCPATH:append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
--
 -# HTML doc link params
--PDK_COMP_LINK_TEXT = "MMCSD LLD"
-diff --git a/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb b/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
+-PDK_COMP_LINK_TEXT = "FATFS Library"
+diff --git a/recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb b/recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb
 deleted file mode 100644
-index 3153f08..0000000
---- a/recipes-bsp/nwal-lld/nwal-lld-rtos_git.bb
+index a999e81..0000000
+--- a/recipes-bsp/faultmanagement/faultmanagement-rtos_git.bb
 +++ /dev/null
-@@ -1,19 +0,0 @@
--SUMMARY = "TI Network abstraction layer RTOS LLD library "
+@@ -1,36 +0,0 @@
+-SUMMARY = "TI Fault management module for keystone devices"
 -
 -inherit ti-pdk
 -
--require recipes-bsp/nwal-lld/nwal-lld.inc
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://fault_mgmt.h;beginline=1;endline=41;md5=4be5df2b9c314da729e9e4f6cc0b2979"
 -
--PR = "${INC_PR}.0"
+-COMPATIBLE_MACHINE = "k2hk|k2e|k2l"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--DEPENDS:append = " cppi-lld-rtos \
--                   pa-lld-rtos \
--                   pktlib-rtos \
--                   qmss-lld-rtos \
--                   sa-lld-rtos \
+-FAULT_MANAGEMENT_GIT_URI = "git://git.ti.com/keystone-rtos/fault_mgmt.git"
+-FAULT_MANAGEMENT_GIT_PROTOCOL = "git"
+-FAULT_MANAGEMENT_GIT_BRANCH = "master"
+-FAULT_MANAGEMENT_GIT_DESTSUFFIX = "git/ti/instrumentation/fault_mgmt"
+-
+-# Below commit ID corresponds to "DEV.FAULT_MGMT.01.00.01.04A"
+-FAULT_MANAGEMENT_SRCREV = "67becdff0e3d181ab7b8fada226f5737517c1c52"
+-
+-BRANCH = "${FAULT_MANAGEMENT_GIT_BRANCH}"
+-SRC_URI = "${FAULT_MANAGEMENT_GIT_URI};destsuffix=${FAULT_MANAGEMENT_GIT_DESTSUFFIX};protocol=${FAULT_MANAGEMENT_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${FAULT_MANAGEMENT_SRCREV}"
+-PV = "01.00.01.04A"
+-PR = "r0"
+-
+-S = "${WORKDIR}/${FAULT_MANAGEMENT_GIT_DESTSUFFIX}"
+-
+-DEPENDS:append:keystone = " qmss-lld-rtos \
+-                            cppi-lld-rtos \
+-                            pa-lld-rtos \
 -"
 -
--COMPATIBLE_MACHINE = "k2hk|k2e|k2l|c667x-evm"
+-DEPENDS:append:k2hk = " aif2-lld-rtos \
+-"
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "Fault Management"
+diff --git a/recipes-bsp/fvid2/fvid2-rtos_git.bb b/recipes-bsp/fvid2/fvid2-rtos_git.bb
+deleted file mode 100644
+index b70a9b0..0000000
+--- a/recipes-bsp/fvid2/fvid2-rtos_git.bb
++++ /dev/null
+@@ -1,67 +0,0 @@
+-SUMMARY = "TI RTOS Video Driver Interface"
+-
+-inherit ti-pdk ti-pdk-fetch
+-
+-TI_PDK_COMP = "ti.drv.fvid2"
+-
+-PE = "1"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://fvid2.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
+-
+-COMPATIBLE_MACHINE = "k3"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-PR = "r0"
+-
+-DEPENDS:append = " osal-rtos \
+-"
+-
+-# Build with make instead of XDC
+-TI_PDK_XDCMAKE = "0"
+-
+-FVID2_PACKAGE_BASE   = "${WORKDIR}/fvid2_base"
+-FVID2_ROOTPATH = "${FVID2_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/fvid2"
+-
+-export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+-export PDK_FVID2_ROOT_PATH = "${FVID2_PACKAGE_BASE}/package/all/pdk_/packages"
+-
+-
+-BOARD_PACKAGE = ""
+-BOARD_PACKAGE:am65xx = "am65xx_evm"
+-BOARD_PACKAGE:j7 = "j721e_evm"
 -
 -# HTML doc link params
--PDK_COMP_LINK_TEXT = "NWAL LLD"
-diff --git a/recipes-bsp/nwal-lld/nwal-lld-test_git.bb b/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
+-PDK_COMP_LINK_TEXT = "FVID2"
+-
+-do_configure() {
+-    rm -rf ${FVID2_PACKAGE_BASE}
+-    cd ${S}
+-
+-    # remove any previous package
+-    rm -f ${FVID2_PACKAGE_BASE}
+-
+-    # make the release package before building it
+-    make package BOARD=${BOARD_PACKAGE} DEST_ROOT=${FVID2_PACKAGE_BASE} PDK_FVID2_COMP_PATH=${S}
+-}
+-
+-do_compile() {
+-    echo "fvid2 root path is ${FVID2_ROOTPATH}"
+-    cd ${FVID2_ROOTPATH}
+-
+-    # Build am65xx libraries
+-    make clean lib xdc_meta LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}"  LIMIT_CORES="${TI_PDK_LIMIT_CORES}"
+-
+-    #archive
+-    tar -cf fvid2.tar --exclude='*.tar' ./*
+-}
+-
+-do_install() {
+-    cd ${FVID2_ROOTPATH}
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/fvid2
+-    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/fvid2 \;
+-}
+-
+-FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+-
+-INSANE_SKIP:${PN} = "arch ldflags"
+diff --git a/recipes-bsp/hplib/hplib-mod_git.bb b/recipes-bsp/hplib/hplib-mod_git.bb
 deleted file mode 100644
-index 79528a0..0000000
---- a/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
+index c992b12..0000000
+--- a/recipes-bsp/hplib/hplib-mod_git.bb
 +++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "TI Network Abstraction Layer unit test binaries"
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "TI High Performance Library kernel module"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/module/COPYING.txt;md5=c1c4d3453cddc5b7f0ce84a277e66779"
 -
--DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib nwal-lld"
+-DEPENDS = "hplib"
 -
--include nwal-lld.inc
+-include hplib.inc
+-
+-# This package builds a kernel module, use kernel PR as base and append a local
+-MACHINE_KERNEL_PR:append = "b"
+-PR = "${MACHINE_KERNEL_PR}"
+-
+-S ="${WORKDIR}/git/ti/runtime/hplib/module"
+-EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR} PDK_INSTALL_PATH=${STAGING_INCDIR}"
+-
+-inherit module
+-
+-do_install () {
+-	oe_runmake install INSTALL_MOD_PATH="${D}"
+-}
+-
+-KERNEL_MODULE_AUTOLOAD += "hplibmod"
+diff --git a/recipes-bsp/hplib/hplib-test_git.bb b/recipes-bsp/hplib/hplib-test_git.bb
+deleted file mode 100644
+index 4ba79db..0000000
+--- a/recipes-bsp/hplib/hplib-test_git.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-DESCRIPTION = "TI High performance library test binaries"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/src/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
+-
+-DEPENDS = "common-csl-ip qmss-lld sa-lld pktlib hplib"
+-
+-include hplib.inc
 -
 -PR = "${INC_PR}.0"
 -
--EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+-CHOICELIST = "yes no"
+-
+-S = "${WORKDIR}/git/ti/runtime/hplib"
+-
+-EXTRA_OEMAKE += '-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}'
 -
 -do_compile () {
 -	for device in ${DEVICELIST}
 -	do
 -		for choice in ${CHOICELIST}
 -		do
--			oe_runmake clean NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
--			oe_runmake tests NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
+-			oe_runmake tests HPLIB_SRC_DIR=${S} USEDYNAMIC_LIB=$choice DEVICE="$device"
 -		done
 -	done
 -}
@@ -2210,46 +1022,52 @@ index 79528a0..0000000
 -		oe_runmake installbin INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
 -	done
 -}
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
 deleted file mode 100644
-index 8dd2c90..0000000
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
+index 217a453..0000000
+--- a/recipes-bsp/hplib/hplib.inc
 +++ /dev/null
-@@ -1,21 +0,0 @@
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
--
+@@ -1,20 +0,0 @@
 -COMPATIBLE_MACHINE = "keystone"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.nwal"
--
--PE = "1"
--
--INC_PR = "r0"
--
--BASEDIR = "${WORKDIR}/git"
 -
 -DEVICELIST:k2hk = "k2h k2k"
 -DEVICELIST:k2l  = "k2l"
 -DEVICELIST:k2e  = "k2e"
 -
--CHOICELIST = "yes no"
-diff --git a/recipes-bsp/nwal-lld/nwal-lld_git.bb b/recipes-bsp/nwal-lld/nwal-lld_git.bb
+-HPLIB_GIT_URI = "git://git.ti.com/keystone-rtos/hplib.git"
+-HPLIB_GIT_PROTOCOL = "git"
+-HPLIB_GIT_BRANCH = "master"
+-
+-# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.08"
+-HPLIB_SRCREV = "5e9b27854f5d6f9f37a0ed8d7516d4874427cd8b"
+-
+-BRANCH = "${HPLIB_GIT_BRANCH}"
+-SRC_URI = "${HPLIB_GIT_URI};protocol=${HPLIB_GIT_PROTOCOL};branch=${BRANCH}"
+-SRCREV = "${HPLIB_SRCREV}"
+-
+-PV = "01.01.00.08+git${SRCPV}"
+-INC_PR = "r0"
+diff --git a/recipes-bsp/hplib/hplib_git.bb b/recipes-bsp/hplib/hplib_git.bb
 deleted file mode 100644
-index a9690ca..0000000
---- a/recipes-bsp/nwal-lld/nwal-lld_git.bb
+index 0ccd148..0000000
+--- a/recipes-bsp/hplib/hplib_git.bb
 +++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "TI Network abstraction layer LLD library "
+@@ -1,33 +0,0 @@
+-DESCRIPTION = "TI High performance libraries"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/src/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
 -
--DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib"
+-DEPENDS = "common-csl-ip rm-lld qmss-lld sa-lld pktlib"
+-RDEPENDS:${PN} = "hplib-mod"
 -
--include nwal-lld.inc
+-include hplib.inc
 -
 -PR = "${INC_PR}.0"
+-
+-CHOICELIST = "yes no"
+-
+-S = "${WORKDIR}/git/ti/runtime/hplib"
 -
 -EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
 -
@@ -2258,8 +1076,7 @@ index a9690ca..0000000
 -	do
 -		for choice in ${CHOICELIST}
 -		do
--			oe_runmake clean NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
--			oe_runmake lib NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
+-			oe_runmake lib HPLIB_SRC_DIR=${S} USEDYNAMIC_LIB=$choice DEVICE="$device"
 -		done
 -	done
 -}
@@ -2270,368 +1087,321 @@ index a9690ca..0000000
 -		oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
 -	done
 -}
-diff --git a/recipes-bsp/pa-lld/pa-lld-rtos_git.bb b/recipes-bsp/pa-lld/pa-lld-rtos_git.bb
+diff --git a/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb b/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
 deleted file mode 100644
-index 046ec80..0000000
---- a/recipes-bsp/pa-lld/pa-lld-rtos_git.bb
+index 1e07227..0000000
+--- a/recipes-bsp/ibl-boot/ibl-boot-rtos_git.bb
 +++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Packet Accelerator (PA)"
--
--inherit ti-pdk
--
--require recipes-bsp/pa-lld/pa-lld.inc
--COMPATIBLE_MACHINE:append = "|c667x-evm"
--PR = "${INC_PR}.0"
--
--DEPENDS:append = " rm-lld-rtos"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "PA LLD"
-diff --git a/recipes-bsp/pa-lld/pa-lld-test_git.bb b/recipes-bsp/pa-lld/pa-lld-test_git.bb
-deleted file mode 100644
-index 760f188..0000000
---- a/recipes-bsp/pa-lld/pa-lld-test_git.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "TI PA LLD unit test and example binaries"
--
--DEPENDS = "common-csl-ip pa-lld cppi-lld qmss-lld sa-lld"
--
--include pa-lld.inc
--
--PR = "${INC_PR}.1"
--
--CHOICELIST = "yes no"
--
--CC += "-fcommon"
--
--do_compile () {
--# Now build the lld unit test examples
--	for device in ${DEVICELIST}
--	do
--	make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" PA_SRC_DIR=${S}
--		for choice in ${CHOICELIST}
--		do
--			make -f makefile_armv7 tests examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" PA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
--		done
--	done
--}
--
--do_install () {
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" PA_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
--	done
--}
-diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
-deleted file mode 100644
-index e456ccb..0000000
---- a/recipes-bsp/pa-lld/pa-lld.inc
-+++ /dev/null
-@@ -1,24 +0,0 @@
--LICENSE = "BSD-3-Clause & TI-TFL"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/pa/COPYING.txt;md5=cd04fb087063a2a82c4ce61983836871"
--
--COMPATIBLE_MACHINE = "k2hk|k2e|k2l"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.pa"
--
--PE = "1"
--
--INC_PR = "r0"
--
--
--DEVICELIST = "k2h k2k k2l k2e"
--DEVICELIST:k2hk = "k2h k2k"
--DEVICELIST:k2l = "k2l"
--DEVICELIST:k2e = "k2e"
--
--LIBPA = "libpa"
--LIBPA:k2hk = "libpa"
--LIBPA:k2e = "libpa2"
--LIBPA:k2l = "libpa2"
-diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
-deleted file mode 100644
-index bd773b1..0000000
---- a/recipes-bsp/pa-lld/pa-lld_git.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "TI PA LLD library"
--
--DEPENDS = "common-csl-ip rm-lld"
--
--include pa-lld.inc
--
--PR = "${INC_PR}.1"
--
--do_compile () {
--#   Now build the lld in the updated directory
--    for device in ${DEVICELIST}
--    do
--        make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device"
--    done
--}
--
--do_install () {
--    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--    chown -R root:root ${D}
--
--#   Set the generic device library symbolic link
--    ln -sf ${LIBPA}.so.1.0.0 ${D}${libdir}/libpa_device.so.1
--    ln -sf libpa_device.so.1 ${D}${libdir}/libpa_device.so
--}
--
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libpa2.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2hk = "${PKGD}${libdir}/libpa.a"
-diff --git a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb b/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
-deleted file mode 100644
-index 2271570..0000000
---- a/recipes-bsp/pcie-lld/pcie-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,28 +0,0 @@
--SUMMARY = "TI RTOS low lever driver for Peripheral Interconnect Express (PCIE)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.pcie"
--
--PE = "1"
+@@ -1,75 +0,0 @@
+-SUMMARY = "Second stage bootloader for c66x"
+-DESCRIPTION = "The Intermediate Bootloader (IBL) is a second stage \
+-bootloader for the c66x family of embedded processors. This second \
+-stage bootloader takes care of additional initializations, advisory \
+-setups, and errata workarounds that are not present in the first stage boot."
 -
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://pcie.h;beginline=1;endline=34;md5=232c0b07bdf7ab934b23c09e6c5279b0"
+-LIC_FILES_CHKSUM = "file://src/ibl.h;beginline=1;endline=34;md5=ee7d7a3305d1e524955996d1c5e31cb9"
 -
--COMPATIBLE_MACHINE = "omap-a15|keystone|c66x|k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
+-require recipes-ti/includes/ti-paths.inc
 -
--PR = "r1"
--
--DEPENDS:append:k3 = " udma-lld-rtos \
+-DEPENDS = " ti-cgt6x-7-native \
+-            bison-native \
+-            flex-native \
 -"
 -
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "c66x"
 -
--export PDK_PCIE_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
+-CLEANBROKEN = "1"
 -
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
+-IBL_BOOT_GIT_URI = "git://git.ti.com/keystone-rtos/ibl.git"
+-IBL_BOOT_GIT_PROTOCOL = "git"
+-IBL_BOOT_GIT_BRANCH = "master"
+-IBL_BOOT_SRCREV = "ed3f0989d8cdc813b7ca1ed899c4d84b63de3a75"
 -
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "PCIe LLD"
-diff --git a/recipes-bsp/pm-lld/pm-lld-rtos_git.bb b/recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+-BRANCH = "${IBL_BOOT_GIT_BRANCH}"
+-SRC_URI = "${IBL_BOOT_GIT_URI};protocol=${IBL_BOOT_GIT_PROTOCOL};branch=${BRANCH}"
+-SRCREV = "${IBL_BOOT_SRCREV}"
+-
+-
+-PR = "r2"
+-
+-S = "${WORKDIR}/git"
+-
+-PATH:prepend = "${TI_CGT6X_7_INSTALL_DIR}/bin:"
+-
+-IBLTARGETS = ""
+-IBLTARGETS_c665x-evm = "evm_c6657_i2c"
+-IBLTARGETS_c667x-evm = "evm_c6678_i2c"
+-
+-IBLENDIAN = ""
+-IBLENDIAN_c665x-evm = "little"
+-IBLENDIAN_c667x-evm = "little"
+-
+-export C6X_BASE_DIR="${TI_CGT6X_7_INSTALL_DIR}"
+-export TOOLSC6X="${C6X_BASE_DIR}"
+-export TOOLSC6XDOS="${C6X_BASE_DIR}"
+-export TOOLSBIOSC6XDOS="${C6X_BASE_DIR}"
+-export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+-
+-do_compile() {
+-    cd src/make
+-    for t in ${IBLTARGETS}
+-    do
+-        for e in ${IBLENDIAN}
+-        do
+-            make ${t} ENDIAN=${e} I2C_BUS_ADDR=0x51
+-        done
+-    done
+-    cd -
+-}
+-
+-do_install() {
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/ibl
+-    cp -rP --preserve=mode,links,timestamps --no-preserve=ownership * ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/ibl
+-}
+-
+-FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-
+-INSANE_SKIP:${PN} = "arch file-rdeps"
+diff --git a/recipes-bsp/mad-utils/mad-utils-rtos_git.bb b/recipes-bsp/mad-utils/mad-utils-rtos_git.bb
 deleted file mode 100644
-index fd01c8e..0000000
---- a/recipes-bsp/pm-lld/pm-lld-rtos_git.bb
+index 6eed978..0000000
+--- a/recipes-bsp/mad-utils/mad-utils-rtos_git.bb
 +++ /dev/null
-@@ -1,71 +0,0 @@
--SUMMARY = "TI RTOS driver for Power Management module (PM)"
--
--inherit ti-pdk
+@@ -1,57 +0,0 @@
+-SUMMARY = "Utility for loading and running multicore applications"
+-DESCRIPTION = "Multicore Application Deployment (MAD) utility is used \
+-for loading and running a multicore application on an embedded \
+-processor with multiple cores. This utility package contains the \
+-scripts to combine multiple applications for different cores into a \
+-single binary as well as loadable application to parse and execute the applications on different cores."
 -
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://Power.h;beginline=1;endline=31;md5=527b91fdcd26cd19ac07a754f45dedbe"
+-LIC_FILES_CHKSUM = "file://README.txt;md5=44b2180aec0657f6b0e42e5611c0bafb"
 -
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|k3"
+-require recipes-ti/includes/ti-paths.inc
+-
+-DEPENDS = "ti-cgt6x-7-native"
+-
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "c66x"
 -
--
--PM_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/pm-lld.git"
--PM_LLD_GIT_PROTOCOL = "git"
--
--PM_LLD_GIT_BRANCH = "master"
--
--PM_LLD_GIT_BRANCH:ti33x = "int_pm_am335x"
--PM_LLD_GIT_BRANCH:ti43x = "int_pm_am335x"
--PM_LLD_GIT_BRANCH:k2g = "int_pm_am335x"
--
--PM_LLD_GIT_DESTSUFFIX = "git/ti/drv/pm"
--
--# Below commit ID corresponds to "DEV.PM_LLD.01.08.00.23A"
--PM_LLD_SRCREV = "59abc6ffb890d24b82de0248d204ad10c1bfc2af"
--
--# Below commit ID corresponds to "DEV.PM_LLD.01.04.00.05C"
--PM_LLD_SRCREV:ti33x = "dd1f8486e7738956631b7f4829c8238be2e49dd6"
--PM_LLD_SRCREV:ti43x = "dd1f8486e7738956631b7f4829c8238be2e49dd6"
--PM_LLD_SRCREV:k2g = "dd1f8486e7738956631b7f4829c8238be2e49dd6"
--
--BRANCH = "${PM_LLD_GIT_BRANCH}"
--SRC_URI = "${PM_LLD_GIT_URI};destsuffix=${PM_LLD_GIT_DESTSUFFIX};protocol=${PM_LLD_GIT_PROTOCOL};branch=${BRANCH}"
--
--SRCREV = "${PM_LLD_SRCREV}"
--PV = "01.08.00.23A"
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/mad-utils.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "2458510f76eddfa837c2b83448965e233156944b"
 -PR = "r0"
 -
--S = "${WORKDIR}/${PM_LLD_GIT_DESTSUFFIX}"
+-S = "${WORKDIR}/git"
 -
--DEPENDS:append = " ti-sysbios \
--            osal-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos \
--"
+-export C6X_BASE_DIR="${TI_CGT6X_7_INSTALL_DIR}"
+-PATH:prepend = "${TI_CGT6X_7_INSTALL_DIR}/bin:"
 -
--DEPENDS:append:k3 = " sciclient-rtos \
--"
+-DEVICE = ""
+-DEVICE_c665x-evm = "C6657"
+-DEVICE_c667x-evm = "C6678"
 -
--export PDK_PM_ROOT_PATH = "${WORKDIR}/build"
--export DEST_ROOT="${S}"
+-ENDIAN = ""
+-ENDIAN_c665x-evm = "little big"
+-ENDIAN_c667x-evm = "little big"
 -
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--do_compile:append() {
--    # Delete archive created by XDC release command since it does not contain all content
--    find -name "*.tar" -exec rm -f {} \;
--
--    # Archive from build/ to capture ti/drv/pm/ in archive
--    cd ${B}
--    tar -cf pm_lld.tar --exclude='*.tar' ./*
+-do_compile() {
+-    cd mad-loader
+-    for e in ${ENDIAN}
+-    do
+-        mkdir -p bin/${DEVICE}/${e}
+-        make -C mal/malLib/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
+-        make -C mal/malApp/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
+-        cp mal/malApp/build/mal_app.exe bin/${DEVICE}/${e}
+-        make -C nmlLoader/build clean all DEVICE=${DEVICE} ENDIAN=${e} C_DIR=${C6X_BASE_DIR}
+-        cp nmlLoader/build/nml.exe bin/${DEVICE}/${e}
+-    done
+-    cd -
 -}
 -
+-do_install() {
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils
+-    cp -rP --preserve=mode,links,timestamps --no-preserve=ownership * ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils
+-}
 -
--# Workaround: dra7xx build requires am57xx pm libraries for opencl-monitor
--TI_PDK_LIMIT_SOCS:append:dra7xx = " am571x am572x am574x"
--TI_PDK_LIMIT_BOARDS:append:dra7xx = " evmAM571x evmAM572x idkAM574x"
+-FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/ti/boot/mad-utils"
 -
--INSANE_SKIP:${PN} = "arch staticdev"
-diff --git a/recipes-bsp/pruss-lld/pruss-lld-apps_git.bb b/recipes-bsp/pruss-lld/pruss-lld-apps_git.bb
+-INSANE_SKIP:${PN} += "arch staticdev ldflags file-rdeps"
+diff --git a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb b/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
 deleted file mode 100644
-index 74ceb81..0000000
---- a/recipes-bsp/pruss-lld/pruss-lld-apps_git.bb
+index 2a5bfb9..0000000
+--- a/recipes-bsp/netcp-pa-fw/netcp-pa-fw_git.bb
 +++ /dev/null
-@@ -1,31 +0,0 @@
--DESCRIPTION = "TI PRUSS low level driver example applications"
+@@ -1,50 +0,0 @@
+-DESCRIPTION = "NETCP PA firmware for Keystone"
 -
--DEPENDS="common-csl-ip pruss-lld osal ti-pdk-build-rtos pruss-lld-rtos"
+-require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
 -
--DEPENDS:append:ti33x = " starterware"
--DEPENDS:append:ti43x = " starterware"
+-PV = "${NETCP_PA_FW_VERSION}"
+-PR = "${INC_PR}.1"
 -
--include pruss-lld.inc
+-CLEANBROKEN = "1"
 -
+-COMPATIBLE_MACHINE = "k2hk|k2l|k2e"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-S = "${WORKDIR}/git"
+-
+-FWBASENAME = " \
+-ks2_pa_eg0_pdsp0 \
+-ks2_pa_eg0_pdsp1 \
+-ks2_pa_eg0_pdsp2 \
+-ks2_pa_eg1_pdsp0 \
+-ks2_pa_eg2_pdsp0 \
+-ks2_pa_in0_pdsp0 \
+-ks2_pa_in0_pdsp1 \
+-ks2_pa_in1_pdsp0 \
+-ks2_pa_in1_pdsp1 \
+-ks2_pa_in2_pdsp0 \
+-ks2_pa_in3_pdsp0 \
+-ks2_pa_in4_pdsp0 \
+-ks2_pa_in4_pdsp1 \
+-ks2_pa_post_pdsp0 \
+-ks2_pa_post_pdsp1 \
+-"
+-
+-FWBASENAME:k2hk = " \
+-ks2_pa_pdsp0_classify1 \
+-ks2_pa_pdsp1_classify1 \
+-ks2_pa_pdsp2_classify1 \
+-ks2_pa_pdsp3_classify2 \
+-ks2_pa_pdsp4_pam \
+-ks2_pa_pdsp5_pam \
+-"
+-
+-do_install() {
+-	install -d ${D}${base_libdir}/firmware
+-	for f in ${FWBASENAME}; do
+-		install -m 0644 ${S}/ti-keystone/$f.bin ${D}${base_libdir}/firmware/$f.bin
+-	done
+-}
+-
+-FILES:${PN} = "${base_libdir}/firmware"
+diff --git a/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb b/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
+deleted file mode 100644
+index ec3c30f..0000000
+--- a/recipes-bsp/netcp-sa-fw/netcp-sa-fw_git.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "NETCP SA firmware for Keystone"
+-
+-require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+-
+-PV = "${NETCP_SA_FW_VERSION}"
 -PR = "${INC_PR}.0"
 -
--EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} PDK_PKG_PATH=${STAGING_DATADIR}/ti/ti-pdk-tree/packages PRUSS_SRC_DIR=${S}"
+-CLEANBROKEN = "1"
 -
+-COMPATIBLE_MACHINE = "keystone"
 -
--DEVICE_LIST ?= "${TI_PDK_LIMIT_SOCS}"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--do_compile () {
--#   Build the apps
--    for device in ${DEVICE_LIST}
--    do
--        oe_runmake apps DEVICE="$device"
--    done
+-S = "${WORKDIR}/git"
+-
+-TARGET = "sa_mci.fw"
+-
+-do_install() {
+-	install -d ${D}${base_libdir}/firmware
+-	install -m 0644 ${S}/ti-keystone/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
 -}
 -
--do_install () {
--#   Install the app binary
--    for device in ${DEVICE_LIST}
--    do
--        oe_runmake installapp INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
--    done
--}
-diff --git a/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb b/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
+-FILES:${PN} = "${base_libdir}/firmware"
+diff --git a/recipes-bsp/osal/osal-rtos_git.bb b/recipes-bsp/osal/osal-rtos_git.bb
 deleted file mode 100644
-index 9b6ec7a..0000000
---- a/recipes-bsp/pruss-lld/pruss-lld-rtos_git.bb
+index eeaeb23..0000000
+--- a/recipes-bsp/osal/osal-rtos_git.bb
 +++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "TI RTOS low level driver library for PRUSS"
--
+@@ -1,18 +0,0 @@
 -inherit ti-pdk
--require recipes-bsp/pruss-lld/pruss-lld.inc
+-require recipes-bsp/osal/osal.inc
 -
--COMPATIBLE_MACHINE:append = "|k3"
 -PR = "${INC_PR}.0"
 -
--DEPENDS:append = " osal-rtos"
+-COMPATIBLE_MACHINE:append = "|c66x|k3"
+-
 -DEPENDS:append:ti33x = " starterware-rtos"
 -DEPENDS:append:ti43x = " starterware-rtos"
 -
 -# Build with make instead of XDC
 -TI_PDK_XDCMAKE = "0"
 -
--export PDK_PRUSS_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${WORKDIR}/build"
+-export PDK_OSAL_ROOT_PATH ="${WORKDIR}/build"
+-export DEST_ROOT="${S}"
 -
 -# HTML doc link params
--PDK_COMP_LINK_TEXT = "PRUSS LLD"
--
--INSANE_SKIP:${PN} = "arch"
-diff --git a/recipes-bsp/pruss-lld/pruss-lld-test_git.bb b/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+-PDK_COMP_LINK_TEXT = "OSAL Library"
+diff --git a/recipes-bsp/osal/osal-test_git.bb b/recipes-bsp/osal/osal-test_git.bb
 deleted file mode 100644
-index 8007f65..0000000
---- a/recipes-bsp/pruss-lld/pruss-lld-test_git.bb
+index 354aa79..0000000
+--- a/recipes-bsp/osal/osal-test_git.bb
 +++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "TI PRUSS low level driver tests"
+@@ -1,20 +0,0 @@
+-DESCRIPTION = "TI OSAL tests"
 -
--DEPENDS = "common-csl-ip pruss-lld osal"
+-DEPENDS="common-csl-ip osal"
 -
--include pruss-lld.inc
+-include osal.inc
 -
--PR = "${INC_PR}.2"
+-PR = "${INC_PR}.1"
 -
--EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} PRUSS_SRC_DIR=${S}"
--
--DEVICE_LIST ?= "${TI_PDK_LIMIT_SOCS}"
+-EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} OSAL_SRC_DIR=${S}"
 -
 -do_compile () {
 -#   Build the tests
--    for device in ${DEVICE_LIST}
--    do
--        oe_runmake tests DEVICE="$device"
--    done
+-    oe_runmake clean
+-    oe_runmake tests
 -}
 -
 -do_install () {
 -#   Install the binary
--    for device in ${DEVICE_LIST}
--    do
--        oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
--    done
+-    oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}${bindir}
 -}
-diff --git a/recipes-bsp/pruss-lld/pruss-lld.inc b/recipes-bsp/pruss-lld/pruss-lld.inc
+diff --git a/recipes-bsp/osal/osal.inc b/recipes-bsp/osal/osal.inc
 deleted file mode 100644
-index fe5987a..0000000
---- a/recipes-bsp/pruss-lld/pruss-lld.inc
+index e2143e1..0000000
+--- a/recipes-bsp/osal/osal.inc
 +++ /dev/null
 @@ -1,15 +0,0 @@
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://pruicss.h;beginline=1;endline=31;md5=315177aa03d58bcd124a6e799e2bd458"
+-LIC_FILES_CHKSUM = "file://osal.h;beginline=1;endline=31;md5=6fbde6922f8bca1e6cd371d3c2faa4f9"
 -
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g"
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
 -inherit ti-pdk-fetch
 -
--TI_PDK_COMP = "ti.drv.pruss"
+-TI_PDK_COMP = "ti.osal"
 -
 -PE = "1"
 -
 -INC_PR = "r0"
 -
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libpruss.a"
-diff --git a/recipes-bsp/pruss-lld/pruss-lld_git.bb b/recipes-bsp/pruss-lld/pruss-lld_git.bb
+-INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libosal.a"
+diff --git a/recipes-bsp/osal/osal_git.bb b/recipes-bsp/osal/osal_git.bb
 deleted file mode 100644
-index f1e93cd..0000000
---- a/recipes-bsp/pruss-lld/pruss-lld_git.bb
+index 4f881d2..0000000
+--- a/recipes-bsp/osal/osal_git.bb
 +++ /dev/null
 @@ -1,21 +0,0 @@
--DESCRIPTION = "TI PRUSS low level driver library"
+-DESCRIPTION = "TI OSAL library for Linux"
 -
--DEPENDS = "common-csl-ip osal"
+-DEPENDS="common-csl-ip"
 -
--include pruss-lld.inc
+-include osal.inc
 -
--PR = "${INC_PR}.2"
+-PR = "${INC_PR}.1"
 -
--EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+-EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
 -
 -do_compile () {
 -#   Build the lib
@@ -2644,769 +1414,1889 @@ index f1e93cd..0000000
 -    oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
 -    chown -R root:root ${D}
 -}
-diff --git a/recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb b/recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb
+diff --git a/recipes-bsp/pktlib/pktlib-rtos_git.bb b/recipes-bsp/pktlib/pktlib-rtos_git.bb
 deleted file mode 100644
-index d854e0b..0000000
---- a/recipes-bsp/qmss-lld/qmss-lld-rtos_git.bb
+index 1688d39..0000000
+--- a/recipes-bsp/pktlib/pktlib-rtos_git.bb
 +++ /dev/null
-@@ -1,9 +0,0 @@
+@@ -1,10 +0,0 @@
 -inherit ti-pdk
--
--require qmss-lld.inc
+-require pktlib.inc
 -
 -PR = "${INC_PR}.1"
 -
+-DEPENDS:append = " rm-lld-rtos \
+-                   qmss-lld-rtos \
+-                   cppi-lld-rtos \
+-"
 -COMPATIBLE_MACHINE:append = "|c66x"
--
--DEPENDS:append = " rm-lld-rtos"
-diff --git a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
+diff --git a/recipes-bsp/pktlib/pktlib.inc b/recipes-bsp/pktlib/pktlib.inc
 deleted file mode 100644
-index 53f6dcf..0000000
---- a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
+index af3f8bb..0000000
+--- a/recipes-bsp/pktlib/pktlib.inc
 +++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "TI QMSS low level driver unit test and example binaries"
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "Provides library for handling packet descriptors for keystone devices"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://docs/Doxyfile;md5=91d01dc3788e1f405f000b2089191a0a"
 -
--DEPENDS = "common-csl-ip rm-lld cppi-lld qmss-lld cmem uio-module-drv"
+-COMPATIBLE_MACHINE = "keystone"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--include qmss-lld.inc
+-PKTLIB_GIT_URI = "git://git.ti.com/keystone-rtos/pktlib.git"
+-PKTLIB_GIT_PROTOCOL = "git"
+-PKTLIB_GIT_BRANCH = "master"
+-PKTLIB_GIT_DESTSUFFIX = "git/ti/runtime/pktlib"
 -
--PR = "${INC_PR}.2"
+-# Below commit ID corresponds to "DEV.PKTLIB.2.1.0.8B"
+-PKTLIB_SRCREV = "6d3758fda4c8c40fa9bd1194a9c713c9675b5a40"
 -
--CHOICELIST = "yes no"
+-BRANCH = "${PKTLIB_GIT_BRANCH}"
+-# Don't use DESTSUFFIX when cloning since repo contains ti/runtime/pktlib directory tree
+-SRC_URI = "${PKTLIB_GIT_URI};protocol=${PKTLIB_GIT_PROTOCOL};branch=${BRANCH}"
 -
--CFLAGS += "-fcommon"
+-SRCREV = "${PKTLIB_SRCREV}"
+-PV = "2.1.0.8B"
+-INC_PR = "r0"
 -
--do_compile () {
--#   Now build the lld in the updated directory
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" QMSS_SRC_DIR=${S}
--		for choice in ${CHOICELIST}
--		do
--			make -f makefile_armv7 tests examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" QMSS_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
--		done
--	done
--}
--
--do_install () {
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" QMSS_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
--	done
--}
-diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+-S = "${WORKDIR}/${PKTLIB_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
 deleted file mode 100644
-index 35a06af..0000000
---- a/recipes-bsp/qmss-lld/qmss-lld.inc
+index b15b61b..0000000
+--- a/recipes-bsp/pktlib/pktlib_git.bb
 +++ /dev/null
 @@ -1,19 +0,0 @@
--LICENSE = "BSD-3-Clause & TI-TFL"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=cd04fb087063a2a82c4ce61983836871"
+-DESCRIPTION = "Provides library for handling packet descriptors for keystone devices"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
 -
--COMPATIBLE_MACHINE = "keystone"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
+-DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld"
 -
--inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.qmss"
--
--PE = "1"
--
--INC_PR = "r0"
--
--DEVICELIST = "k2h k2k k2l k2e"
--DEVICELIST:k2hk = "k2h k2k"
--DEVICELIST:k2l = "k2l"
--DEVICELIST:k2e = "k2e"
--DEVICELIST:k2g = "k2h"
-diff --git a/recipes-bsp/qmss-lld/qmss-lld_git.bb b/recipes-bsp/qmss-lld/qmss-lld_git.bb
-deleted file mode 100644
-index 96c664a..0000000
---- a/recipes-bsp/qmss-lld/qmss-lld_git.bb
-+++ /dev/null
-@@ -1,38 +0,0 @@
--DESCRIPTION = "TI QMSS low level driver library"
--
--DEPENDS = "common-csl-ip rm-lld"
--
--include qmss-lld.inc
+-include pktlib.inc
 -
 -PR = "${INC_PR}.1"
 -
+-EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}"
+-
 -do_compile () {
--#   Now build the lld
--    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
--	for device in ${DEVICELIST}
--	do
--		make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}  DEVICE="${device}"
--	done
+-	oe_runmake lib
 -}
 -
 -do_install () {
--    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--    chown -R root:root ${D}
--
--    # Set the generic device library symbolic link to default k2h
--    cd ${D}${libdir}
--
--    # Link only the first device in the list
--    for device in ${DEVICELIST}
--    do
--        ln -sf libqmss_${device}.so.1.0.0 libqmss_device.so.1
--        break
--    done
--    ln -sf libqmss_device.so.1 libqmss_device.so
+-	oe_runmake install
+-	chown -R root:root ${D}
 -}
--
--INHIBIT_PACKAGE_STRIP_FILES:k2hk = "${PKGD}${libdir}/libqmss_k2h.a ${PKGD}${libdir}/libqmss_k2k.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2e = "${PKGD}${libdir}/libqmss_k2e.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2l = "${PKGD}${libdir}/libqmss_k2l.a"
--INHIBIT_PACKAGE_STRIP_FILES:k2g = "${PKGD}${libdir}/libqmss_k2h.a"
--INHIBIT_PACKAGE_STRIP_FILES:append = " ${PKGD}${libdir}/libqmss.a"
-diff --git a/recipes-bsp/rm-lld/rm-lld-rtos_git.bb b/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
+diff --git a/recipes-bsp/pru/pru-pwm-fw_git.bb b/recipes-bsp/pru/pru-pwm-fw_git.bb
 deleted file mode 100644
-index 2a279a0..0000000
---- a/recipes-bsp/rm-lld/rm-lld-rtos_git.bb
+index 14c8139..0000000
+--- a/recipes-bsp/pru/pru-pwm-fw_git.bb
 +++ /dev/null
-@@ -1,13 +0,0 @@
--inherit ti-pdk
+@@ -1,39 +0,0 @@
+-SUMMARY = "Programmable Real-time Unit PWM Firmware"
+-LICENSE = "BSD-3-Clause"
 -
--COMPATIBLE_MACHINE:append = "|c66x"
+-LIC_FILES_CHKSUM = "file://main.c;beginline=1;endline=32;md5=893d6a0cf1644338ea96642c0db97f59"
 -
--require rm-lld.inc
+-require recipes-ti/includes/ti-paths.inc
 -
--PR = "${INC_PR}.2"
--
+-COMPATIBLE_MACHINE = "am65xx"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "RM LLD"
 -
-diff --git a/recipes-bsp/rm-lld/rm-lld.inc b/recipes-bsp/rm-lld/rm-lld.inc
-deleted file mode 100644
-index e6e61af..0000000
---- a/recipes-bsp/rm-lld/rm-lld.inc
-+++ /dev/null
-@@ -1,15 +0,0 @@
--DESCRIPTION = "TI Resource Manager Low Level Driver"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/rm/COPYING.txt;md5=dc61631b65360e6beb73b6c337800afc"
 -
 -inherit ti-pdk-fetch
 -
--TI_PDK_COMP = "ti.drv.rm"
+-TI_PDK_COMP = "ti.drv.pruss.example.apps.icssg_pwm.firmware.src"
 -
 -PE = "1"
 -
--INC_PR = "r0"
+-DEPENDS = "ti-cgt-pru-native pru-icss common-csl-ip-rtos"
 -
--COMPATIBLE_MACHINE = "keystone"
 -
--BASEDIR = "${WORKDIR}/git"
-diff --git a/recipes-bsp/rm-lld/rm-lld_git.bb b/recipes-bsp/rm-lld/rm-lld_git.bb
-deleted file mode 100644
-index 86f7ec7..0000000
---- a/recipes-bsp/rm-lld/rm-lld_git.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--require rm-lld.inc
--
--PR = "${INC_PR}.0"
--
--DEPENDS = "ti-ipc libdaemon"
--
--PACKAGES =+ "${PN}-test"
--
--FILES:${PN}-test = "${bindir}/rmDspClientTest.out \
--                    ${bindir}/rmLinuxClientTest.out \
--                    ${bindir}/rmLinuxMtClientTest.out \
--                    ${bindir}/ti/drv/rm/test/dts_files/*.dtb"
--
--CHOICELIST = "yes no"
--
--do_compile () {
--#   Now build the lld
--    make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR} RM_SRC_DIR=${S}
--    for choice in ${CHOICELIST}
--    do
--      make -f makefile_armv7 tests IPC_DEVKIT_INSTALL_PATH=${STAGING_INCDIR} PDK_INSTALL_PATH=${BASEDIR} USEDYNAMIC_LIB="$choice"
--    done
--}
--
--do_install () {
--    install -d ${D}${includedir}/ti/drv/rm
--    install -d ${D}${libdir}
--    install -d ${D}${bindir}
--    make -f makefile_armv7 install installbin installbin_test INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir}
--    chown -R root:root ${D}
--}
--
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/librm.a"
-diff --git a/recipes-bsp/sa-lld/sa-lld-rtos_git.bb b/recipes-bsp/sa-lld/sa-lld-rtos_git.bb
-deleted file mode 100644
-index b7c0257..0000000
---- a/recipes-bsp/sa-lld/sa-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Security Accelerator (SA)"
--
--inherit ti-pdk
--
--require recipes-bsp/sa-lld/sa-lld.inc
--
--PR = "${INC_PR}.0"
--
--COMPATIBLE_MACHINE:append = "|c667x-evm|k3"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE:k3 = "0"
--
--# SA promote/demote library depends on osal
--DEPENDS:append = " osal-rtos \
+-EXTRA_OEMAKE += " \
+-    PRU_CGT="${TI_CGT_PRU_INSTALL_DIR}" \
+-    PRU_SSP="${STAGING_DIR_TARGET}/usr" \
+-    PDK_INSTALL_DIR="${STAGING_DATADIR}/ti/ti-pdk-tree/packages" \
 -"
--export PDK_SA_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
+-
+-do_compile() {
+-	oe_runmake
+-}
+-
+-do_install() {
+-	install -d ${D}/lib/firmware/ti-pruss
+-	install -m 0644 ${S}/gen/pwm.out ${D}/lib/firmware/ti-pruss/am65x-pru0-pwm-fw.elf
+-}
+-
+-FILES:${PN} = "/lib/firmware"
 -
 -INSANE_SKIP:${PN} = "arch"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "SA LLD"
--
-diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+diff --git a/recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-add-Makefile-for-building-firmware.patch b/recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-add-Makefile-for-building-firmware.patch
 deleted file mode 100644
-index b403aff..0000000
---- a/recipes-bsp/sa-lld/sa-lld-test_git.bb
+index 8414d94..0000000
+--- a/recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-add-Makefile-for-building-firmware.patch
 +++ /dev/null
-@@ -1,46 +0,0 @@
--DESCRIPTION = "TI Security Accelerator LLD (SA LLD) Examples"
+@@ -1,145 +0,0 @@
+-From d37359e7b2bd26da4d04fc97a94967cf457558e9 Mon Sep 17 00:00:00 2001
+-From: Denys Dmytriyenko <denys@ti.com>
+-Date: Tue, 6 Aug 2019 19:50:59 -0400
+-Subject: [PATCH] icss_uart: add Makefile for building firmware
 -
--DEPENDS = "common-csl-ip cppi-lld qmss-lld pa-lld sa-lld"
+-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+----
+- firmware/icss_uart/src/Makefile | 125 ++++++++++++++++++++++++++++++++++++++++
+- 1 file changed, 125 insertions(+)
+- create mode 100644 firmware/icss_uart/src/Makefile
 -
--include sa-lld.inc
+-diff --git a/firmware/icss_uart/src/Makefile b/firmware/icss_uart/src/Makefile
+-new file mode 100644
+-index 0000000..4764622
+---- /dev/null
+-+++ b/firmware/icss_uart/src/Makefile
+-@@ -0,0 +1,125 @@
+-+# PRU_CGT environment variable must point to the TI PRU code gen tools directory. E.g.:
+-+#(Desktop Linux) export PRU_CGT=/path/to/pru/code/gen/tools/ti-cgt-pru_2.x.y
+-+#(Windows) set PRU_CGT=C:/path/to/pru/code/gen/tools/ti-cgt-pru_2.x.y
+-+#(ARM Linux*) export PRU_CGT=/usr/share/ti/cgt-pru
+-+#
+-+# *ARM Linux also needs to create a symbolic link to the /usr/bin/ directory in
+-+# order to use the same Makefile
+-+#(ARM Linux) ln -s /usr/bin/ /usr/share/ti/cgt-pru/bin
+-+
+-+ifndef PRU_CGT
+-+define ERROR_BODY
+-+
+-+*******************************************************************************
+-+PRU_CGT environment variable is not set. Examples given:
+-+(Desktop Linux) export PRU_CGT=/path/to/pru/code/gen/tools/ti-cgt-pru_2.1.2
+-+(Windows) set PRU_CGT=C:/path/to/pru/code/gen/tools/ti-cgt-pru_2.1.2
+-+(ARM Linux*) export PRU_CGT=/usr/share/ti/cgt-pru
+-+
+-+*ARM Linux also needs to create a symbolic link to the /usr/bin/ directory in
+-+order to use the same Makefile
+-+(ARM Linux) ln -s /usr/bin/ /usr/share/ti/cgt-pru/bin
+-+*******************************************************************************
+-+
+-+endef
+-+$(error $(ERROR_BODY))
+-+endif
+-+
+-+# PRU_SSP environment variable must point to the PRU Software Support Package. E.g.:
+-+#(Desktop Linux) export PRU_SSP=/path/to/pru_software_support_package
+-+#(Windows) set PRU_SSP=C:/path/to/pru_software_support_package
+-+#(ARM Linux*) export PRU_SSP=/path/to/pru_software_support_package
+-+
+-+ifndef PRU_SSP
+-+define ERROR_BODY
+-+
+-+*******************************************************************************
+-+PRU_SSP environment variable must point to the PRU Software Support Package. E.g.:
+-+(Desktop Linux) export PRU_SSP=/path/to/pru_software_support_package
+-+(Windows) set PRU_SSP=C:/path/to/pru_software_support_package
+-+(ARM Linux*) export PRU_SSP=/path/to/pru_software_support_package
+-+PRU_CGT environment variable is not set. Examples given:
+-+*******************************************************************************
+-+
+-+endef
+-+$(error $(ERROR_BODY))
+-+endif
+-+
+-+MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
+-+CURRENT_DIR := $(notdir $(patsubst %/,%,$(dir $(MKFILE_PATH))))
+-+PROJ_NAME=$(CURRENT_DIR)
+-+LINKER_COMMAND_FILE=./AM335x_PRU.cmd
+-+LIBS=--library=$(PRU_SSP)/lib/rpmsg_lib.lib
+-+INCLUDE=--include_path=$(PRU_SSP)/include --include_path=$(PRU_SSP)/include/am335x
+-+STACK_SIZE=0x100
+-+HEAP_SIZE=0x100
+-+GEN_DIR=gen
+-+
+-+#Common compiler and linker flags (Defined in 'PRU Optimizing C/C++ Compiler User's Guide)
+-+CFLAGS=-v3 -o2 --display_error_number --endian=little --hardware_mac=on --asm_directory=$(GEN_DIR) --obj_directory=$(GEN_DIR) --pp_directory=$(GEN_DIR) -ppd -ppa -DICSS_REV2
+-+#Linker flags (Defined in 'PRU Optimizing C/C++ Compiler User's Guide)
+-+LFLAGS=--reread_libs --warn_sections --stack_size=$(STACK_SIZE) --heap_size=$(HEAP_SIZE)
+-+
+-+TARGET=$(GEN_DIR)/$(PROJ_NAME).out
+-+MAP=$(GEN_DIR)/$(PROJ_NAME).map
+-+OBJECTS=$(patsubst %.asm,$(GEN_DIR)/%.object,$(wildcard *.asm))
+-+OBJECTS+=$(patsubst %.c,$(GEN_DIR)/%.object,$(wildcard *.c))
+-+
+-+
+-+all: printStart $(TARGET) printEnd
+-+
+-+printStart:
+-+	@echo ''
+-+	@echo '************************************************************'
+-+	@echo 'Building project: $(PROJ_NAME)'
+-+
+-+printEnd:
+-+	@echo ''
+-+	@echo 'Output files can be found in the "$(GEN_DIR)" directory'
+-+	@echo ''
+-+	@echo 'Finished building project: $(PROJ_NAME)'
+-+	@echo '************************************************************'
+-+	@echo ''
+-+
+-+# Invokes the linker (-z flag) to make the .out file
+-+$(TARGET): $(OBJECTS) $(LINKER_COMMAND_FILE)
+-+	@echo ''
+-+	@echo 'Building target: $@'
+-+	@echo 'Invoking: PRU Linker'
+-+	$(PRU_CGT)/bin/clpru $(CFLAGS) -z -i$(PRU_CGT)/lib -i$(PRU_CGT)/include $(LFLAGS) -o $(TARGET) $(OBJECTS) -m$(MAP) $(LINKER_COMMAND_FILE) --library=libc.a $(LIBS)
+-+	@echo 'Finished building target: $@'
+-+
+-+# Invokes the compiler on all assembly files in the directory to create the object files
+-+$(GEN_DIR)/%.object: %.asm
+-+	@mkdir -p $(GEN_DIR)
+-+	@echo ''
+-+	@echo 'Building file: $<'
+-+	@echo 'Invoking: PRU Compiler'
+-+	$(PRU_CGT)/bin/clpru --include_path=$(PRU_CGT)/include $(INCLUDE) $(CFLAGS) -fe $@ $<
+-+
+-+# Invokes the compiler on all c files in the directory to create the object files
+-+$(GEN_DIR)/%.object: %.c
+-+	@mkdir -p $(GEN_DIR)
+-+	@echo ''
+-+	@echo 'Building file: $<'
+-+	@echo 'Invoking: PRU Compiler'
+-+	$(PRU_CGT)/bin/clpru -k --include_path=$(PRU_CGT)/include $(INCLUDE) $(CFLAGS) -fe $@ $<
+-+
+-+.PHONY: all clean
+-+
+-+# Remove the $(GEN_DIR) directory
+-+clean:
+-+	@echo ''
+-+	@echo '************************************************************'
+-+	@echo 'Cleaning project: $(PROJ_NAME)'
+-+	@echo ''
+-+	@echo 'Removing files in the "$(GEN_DIR)" directory'
+-+	@rm -rf $(GEN_DIR)
+-+	@echo ''
+-+	@echo 'Finished cleaning project: $(PROJ_NAME)'
+-+	@echo '************************************************************'
+-+	@echo ''
+-+
+-+# Includes the dependencies that the compiler creates (-ppd and -ppa flags)
+-+-include $(OBJECTS:%.object=%.pp)
+-+
+--- 
+-2.7.4
 -
--PR = "${INC_PR}.1"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--DEVICELIST:k2hk = "k2h k2k"
--DEVICELIST:k2l  = "k2l"
--DEVICELIST:k2e  = "k2e"
--
--CHOICELIST = "no yes"
--
--CFLAGS += "-fcommon"
--
--PARALLEL_MAKE = ""
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} SA_SRC_DIR=${S}"
--
--do_compile () {
--#   Now build the lld in the updated directory
--	for device in ${DEVICELIST}
--	do
--		oe_runmake clean DEVICE="$device"
--		for choice in ${CHOICELIST}
--		do
--			oe_runmake examples utils DEVICE="$device" USEDYNAMIC_LIB="$choice"
--		done
--	done
--}
--
--do_install () {
--	install -d ${D}${bindir}/ti/drv/sa/example/SaBasicExample/vectors
--
--# copy all the test vectors
--	find example/SaBasicExample/vectors -name *.bin -type f | xargs -I {} cp --parents {} ${D}${bindir}/ti/drv/sa
--
--	for device in ${DEVICELIST}
--	do
--		oe_runmake installbin DEVICE="$device" INSTALL_BIN_BASE_DIR=${D}${bindir}
--	done
--}
--
--INSANE_SKIP:${PN} = "ldflags"
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+diff --git a/recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-remove-dependency-on-PDK-CSL.patch b/recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-remove-dependency-on-PDK-CSL.patch
 deleted file mode 100644
-index d4993cb..0000000
---- a/recipes-bsp/sa-lld/sa-lld.inc
+index b565ba0..0000000
+--- a/recipes-bsp/pru/pru-swuart-fw/0001-icss_uart-remove-dependency-on-PDK-CSL.patch
 +++ /dev/null
-@@ -1,21 +0,0 @@
--LICENSE = "BSD-3-Clause & TI-TFL"
--COMPATIBLE_MACHINE = "k2hk|k2e|k2l"
+@@ -1,54 +0,0 @@
+-From 1b853cfd6194d3855310f47d43cb8c9f498b6182 Mon Sep 17 00:00:00 2001
+-From: Bin Liu <b-liu@ti.com>
+-Date: Wed, 27 Feb 2019 14:38:43 -0600
+-Subject: [PATCH] icss_uart: remove dependency on PDK/CSL
 -
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=cd04fb087063a2a82c4ce61983836871"
+-Signed-off-by: Bin Liu <b-liu@ti.com>
+----
+- firmware/icss_uart/src/icss_ctrl_regs.h | 32 ++++----------------------------
+- 1 file changed, 4 insertions(+), 28 deletions(-)
 -
--SA_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/sa-lld.git"
--SA_LLD_GIT_PROTOCOL = "git"
--SA_LLD_GIT_BRANCH = "master"
--SA_LLD_GIT_DESTSUFFIX = "git/ti/drv/sa"
+-diff --git a/firmware/icss_uart/src/icss_ctrl_regs.h b/firmware/icss_uart/src/icss_ctrl_regs.h
+-index ce640f5..99ec90d 100644
+---- a/firmware/icss_uart/src/icss_ctrl_regs.h
+-+++ b/firmware/icss_uart/src/icss_ctrl_regs.h
+-@@ -39,32 +39,8 @@
+-     .if    !$isdefed("__icss_ctrl_regs_h")
+- __icss_ctrl_regs_h    .set 1
+- 
+--    .cdecls C,NOLIST
+--%{
+--#include "cslr_icss.h"
+--%}
+--
+--    .if $defined("ICSS_REV1")
+--ICSS_PRU_CTRL_CONTROL       .set    (CSL_ICSSM_PRU_CTRL_CONTROL)
+--ICSS_PRU_CTRL_STATUS        .set    (CSL_ICSSM_PRU_CTRL_STATUS)
+--ICSS_PRU_CTRL_WAKEUP_EN     .set    (CSL_ICSSM_PRU_CTRL_WAKEUP_EN)
+--ICSS_PRU_CTRL_CYCLE         .set    (CSL_ICSSM_PRU_CTRL_CYCLE)
+--ICSS_PRU_CTRL_STALL         .set    (CSL_ICSSM_PRU_CTRL_STALL)
+--ICSS_PRU_CTRL_CTBIR0        .set    (CSL_ICSSM_PRU_CTRL_CTBIR0)
+--ICSS_PRU_CTRL_CTBIR1        .set    (CSL_ICSSM_PRU_CTRL_CTBIR1)
+--ICSS_PRU_CTRL_CTPPR0        .set    (CSL_ICSSM_PRU_CTRL_CTPPR0)
+--ICSS_PRU_CTRL_CTPPR1        .set    (CSL_ICSSM_PRU_CTRL_CTPPR1)
+--    .endif  ;ICSS_REV1
+--
+--    .if $defined("ICSS_REV2")
+--ICSS_PRU_CTRL_CONTROL       .set    (CSL_ICSSPRUCTRL_CONTROL)
+--ICSS_PRU_CTRL_STATUS        .set    (CSL_ICSSPRUCTRL_STATUS)
+--ICSS_PRU_CTRL_WAKEUP_EN     .set    (CSL_ICSSPRUCTRL_WAKEUP_EN)
+--ICSS_PRU_CTRL_CYCLE         .set    (CSL_ICSSPRUCTRL_CYCLE)
+--ICSS_PRU_CTRL_STALL         .set    (CSL_ICSSPRUCTRL_STALL)
+--ICSS_PRU_CTRL_CTBIR0        .set    (CSL_ICSSPRUCTRL_CTBIR0)
+--ICSS_PRU_CTRL_CTBIR1        .set    (CSL_ICSSPRUCTRL_CTBIR1)
+--ICSS_PRU_CTRL_CTPPR0        .set    (CSL_ICSSPRUCTRL_CTPPR0)
+--ICSS_PRU_CTRL_CTPPR1        .set    (CSL_ICSSPRUCTRL_CTPPR1)
+--    .endif  ;ICSS_REV2
+-+ICSS_PRU_CTRL_CONTROL       .set    (0x0U)
+-+ICSS_PRU_CTRL_STATUS        .set    (0x4U)
+-+ICSS_PRU_CTRL_WAKEUP_EN     .set    (0x8U)
+-+ICSS_PRU_CTRL_CYCLE         .set    (0xcU)
+-     .endif
+--- 
+-2.7.4
 -
--# Below commit ID corresponding to "DEV.SA_LLD.04.00.00.03D"
--SA_LLD_SRCREV = "506491b586c13c90f307b527df5eaacd35af6d02"
--
--BRANCH = "${SA_LLD_GIT_BRANCH}"
--SRC_URI = "${SA_LLD_GIT_URI};destsuffix=${SA_LLD_GIT_DESTSUFFIX};protocol=${SA_LLD_GIT_PROTOCOL};branch=${BRANCH}"
--SRCREV = "${SA_LLD_SRCREV}"
--
--PV = "04.00.00.03D"
--INC_PR = "r0"
--
--S = "${WORKDIR}/${SA_LLD_GIT_DESTSUFFIX}"
-diff --git a/recipes-bsp/sa-lld/sa-lld_git.bb b/recipes-bsp/sa-lld/sa-lld_git.bb
+diff --git a/recipes-bsp/pru/pru-swuart-fw_git.bb b/recipes-bsp/pru/pru-swuart-fw_git.bb
 deleted file mode 100644
-index a45fe1f..0000000
---- a/recipes-bsp/sa-lld/sa-lld_git.bb
+index f0d9e80..0000000
+--- a/recipes-bsp/pru/pru-swuart-fw_git.bb
 +++ /dev/null
-@@ -1,26 +0,0 @@
--DESCRIPTION = "TI Security Accelerator LLD (SA LLD) Library"
--
--DEPENDS = "common-csl-ip"
--
--include sa-lld.inc
--
--PR = "${INC_PR}.1"
--
--PARALLEL_MAKE = ""
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
--
--do_compile () {
--#   Now build the lld in the updated directory
--	oe_runmake clean lib
--}
--
--do_install () {
--	oe_runmake install INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--	chown -R root:root ${D}
--
--#   Set the generic device library symbolic link
--	ln -sf libsa.so.1.0.0 ${D}${libdir}/libsa_device.so.1
--	ln -sf libsa_device.so.1 ${D}${libdir}/libsa_device.so
--}
--
--INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libsa.a"
-diff --git a/recipes-bsp/spi-lld/spi-lld-rtos_git.bb b/recipes-bsp/spi-lld/spi-lld-rtos_git.bb
-deleted file mode 100644
-index 43cf0c3..0000000
---- a/recipes-bsp/spi-lld/spi-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,37 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Serial Peripheral Interface (SPI)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.spi"
--
--PE = "1"
--
+@@ -1,40 +0,0 @@
+-SUMMARY = "Programmable Real-time Unit Software UART Firmware"
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://SPI.h;beginline=1;endline=31;md5=8580f9c5c0de8d5d13518cf18a0122b8"
 -
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1|k3"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;beginline=1;endline=31;md5=94b6a199da1caf777f6756cb70aca4a7"
+-
+-require recipes-ti/includes/ti-paths.inc
+-
+-COMPATIBLE_MACHINE = "ti33x"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--PR = "r0"
--
--DEPENDS:append = " osal-rtos \
--                   edma3-lld-rtos \
--"
--DEPENDS:append:ti33x = " starterware-rtos pruss-lld-rtos gpio-lld-rtos"
--DEPENDS:append:ti43x = " starterware-rtos pruss-lld-rtos gpio-lld-rtos"
--
--DEPENDS:remove:k3 = "edma3-lld-rtos "
--DEPENDS:append:k3 = " udma-lld-rtos"
--
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--export PDK_SPI_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
--
--export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
--XDCPATH:append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "SPI LLD"
-diff --git a/recipes-bsp/srio-lld/srio-lld-rtos_git.bb b/recipes-bsp/srio-lld/srio-lld-rtos_git.bb
-deleted file mode 100644
-index 9c53575..0000000
---- a/recipes-bsp/srio-lld/srio-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Serial Rapid IO (SRIO)"
--
--inherit ti-pdk
--
--require recipes-bsp/srio-lld/srio-lld.inc
--
--PR = "${INC_PR}.0"
--
--DEPENDS:append = " cppi-lld-rtos \
--                   qmss-lld-rtos \
--"
--COMPATIBLE_MACHINE:append = "|c66x"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "SRIO LLD"
-diff --git a/recipes-bsp/srio-lld/srio-lld-test_git.bb b/recipes-bsp/srio-lld/srio-lld-test_git.bb
-deleted file mode 100644
-index ca22b7d..0000000
---- a/recipes-bsp/srio-lld/srio-lld-test_git.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "TI SRIO peripheral low level driver unit test and example binaries"
--DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld srio-lld cmem uio-module-drv"
--
--include srio-lld.inc
--
--PR = "${INC_PR}.0"
--
--CHOICELIST = "yes no"
--
--CFLAGS += "-fcommon"
--
--do_compile () {
--#   Now build the lld in the updated directory
--	for device in ${DEVICELIST}
--	do
--		oe_runmake clean DEVICE="$device" SRIO_SRC_DIR=${S}
--		for choice in ${CHOICELIST}
--		do
--			oe_runmake tests DEVICE="$device" SRIO_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
--			oe_runmake examples DEVICE="$device" SRIO_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
--		done
--	done
--}
--
--do_install () {
--	for device in ${DEVICELIST}
--	do
--		oe_runmake installbin DEVICE="$device" SRIO_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
--	done
--}
-diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
-deleted file mode 100644
-index efe379f..0000000
---- a/recipes-bsp/srio-lld/srio-lld.inc
-+++ /dev/null
-@@ -1,18 +0,0 @@
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/srio/srio_drv.h;beginline=1;endline=41;md5=469096088e072d883ff7eef301b34093"
--
--COMPATIBLE_MACHINE = "k2hk"
 -
 -inherit ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.srio"
--
--PE = "1"
--
--INC_PR = "r0"
--
--DEVICELIST = "k2h k2k"
--
--BASEDIR = "${WORKDIR}/git"
--
--EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
-diff --git a/recipes-bsp/srio-lld/srio-lld_git.bb b/recipes-bsp/srio-lld/srio-lld_git.bb
-deleted file mode 100644
-index 3797bef..0000000
---- a/recipes-bsp/srio-lld/srio-lld_git.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--DESCRIPTION = "TI SRIO peripheral low level driver"
--
--DEPENDS="common-csl-ip rm-lld cppi-lld"
--
--include srio-lld.inc
--
--PR = "${INC_PR}.0"
--
--do_compile () {
--#   Now build the lld
--	oe_runmake clean
--	for device in ${DEVICELIST}
--	do
--		oe_runmake lib DEVICE="${device}"
--	done
--}
--
--do_install () {
--	oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
--	chown -R root:root ${D}
--}
-diff --git a/recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb b/recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb
-deleted file mode 100644
-index db4421e..0000000
---- a/recipes-bsp/tcp3d-lld/tcp3d-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "TI third generation Turbo Coprocessor (TCP3) low level driver"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.tcp3d"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://tcp3dver.h;beginline=1;endline=47;md5=3fe46c6320fb9ca4ac6692961402beb7"
--
--COMPATIBLE_MACHINE = "k2hk|k2l|c66x"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--DEPENDS:append = " edma3-lld-rtos"
--
--export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
--XDCPATH:append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "TCP3D LLD"
-diff --git a/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb b/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
-deleted file mode 100644
-index bd8a6e3..0000000
---- a/recipes-bsp/tsip-lld/tsip-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "TI RTOS low level driver for Telecom Serial Interface Port (TSIP)"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.tsip"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://tsip.h;beginline=1;endline=32;md5=dab2257b0b8a3678c26915f6eb49b71e"
--
--COMPATIBLE_MACHINE = "k2e|c667x-evm"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "TSIP LLD"
-diff --git a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb b/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-deleted file mode 100644
-index 8071e42..0000000
---- a/recipes-bsp/uart-lld/uart-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,41 +0,0 @@
--SUMMARY = "TI RTOS low level driver for UART"
--DESCRIPTION = "TI RTOS low level driver for Universal Asynchronous Receiver/Transmitter (UART) module "
--
--inherit ti-pdk ti-pdk-fetch
 -
 -TI_PDK_COMP = "ti.drv.uart"
 -
 -PE = "1"
 -
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING.txt;beginline=1;endline=31;md5=94b6a199da1caf777f6756cb70aca4a7"
--
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x|k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--DEPENDS:append = " edma3-lld-rtos \
--                   osal-rtos \
+-SRC_URI:append = " \
+-	file://0001-icss_uart-add-Makefile-for-building-firmware.patch \
+-	file://0001-icss_uart-remove-dependency-on-PDK-CSL.patch \
 -"
--DEPENDS:append:ti33x = " starterware-rtos \
--                         pruss-lld-rtos \
--"
--DEPENDS:append:ti43x = " starterware-rtos"
 -
--DEPENDS:remove:k3 = "edma3-lld-rtos "
--DEPENDS:append:k3 = " udma-lld-rtos "
+-DEPENDS = "ti-cgt-pru-native pru-icss"
 -
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
 -
--export PDK_UART_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
+-export PRU_CGT = "${TI_CGT_PRU_INSTALL_DIR}"
+-export PRU_SSP = "${STAGING_DIR_TARGET}/usr"
 -
--export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
--XDCPATH:append = ";${EDMA3_LLD_INSTALL_DIR}/packages"
+-do_compile() {
+-	oe_runmake -C firmware/icss_uart/src
+-}
 -
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "UART LLD"
+-do_install() {
+-	install -d ${D}/lib/firmware/ti-pruss
+-	install -m 0644 ${S}/firmware/icss_uart/src/gen/src.out ${D}/lib/firmware/ti-pruss/pru_swuart-fw.elf
+-}
+-
+-FILES:${PN} = "/lib/firmware"
 -
 -INSANE_SKIP:${PN} = "arch"
-diff --git a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb b/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
+diff --git a/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb b/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
 deleted file mode 100644
-index 2e17770..0000000
---- a/recipes-bsp/udma-lld/udma-lld-rtos_git.bb
+index 6ab26e6..0000000
+--- a/recipes-bsp/qmss-pdsp-fw/qmss-pdsp-fw_git.bb
 +++ /dev/null
-@@ -1,65 +0,0 @@
--SUMMARY = "TI RTOS low level driver for UDMA"
--DESCRIPTION = "TI RTOS low level driver for Universal DMA module "
+@@ -1,26 +0,0 @@
+-DESCRIPTION = "QMSS PDSP firmware"
+-
+-require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+-
+-LICENSE = "TI-TFL"
+-LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+-
+-PV = "${QMSS_PDSP_FW_VERSION}"
+-PR = "${INC_PR}.1"
+-
+-CLEANBROKEN = "1"
+-
+-COMPATIBLE_MACHINE = "keystone"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-S = "${WORKDIR}/git"
+-ORIGIN = "ks2_qmss_pdsp_acc48_k2_le_1_0_0_9.bin"
+-TARGET = "ks2_qmss_pdsp_acc48.bin"
+-
+-do_install() {
+-	install -d ${D}${base_libdir}/firmware
+-	install -m 0644 ${S}/ti-keystone/${ORIGIN} ${D}${base_libdir}/firmware/${TARGET}
+-}
+-
+-FILES:${PN} = "${base_libdir}/firmware"
+diff --git a/recipes-bsp/sciclient/sciclient-rtos_git.bb b/recipes-bsp/sciclient/sciclient-rtos_git.bb
+deleted file mode 100644
+index 890db6e..0000000
+--- a/recipes-bsp/sciclient/sciclient-rtos_git.bb
++++ /dev/null
+@@ -1,125 +0,0 @@
+-SUMMARY = "TI RTOS low level driver for SCICLIENT"
 -
 -inherit ti-pdk ti-pdk-fetch
 -
--TI_PDK_COMP = "ti.drv.udma"
+-TI_PDK_COMP = "ti.drv.sciclient"
 -
 -PE = "1"
 -
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://udma.h;beginline=1;endline=31;md5=83d177cf3df55c16b27ae4102b6ade9a"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=99d7639a81c1ba1f16fd070a928ffddb"
 -
 -COMPATIBLE_MACHINE = "k3"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
 -PR = "r1"
 -
--DEPENDS:append = " osal-rtos \
--                   sciclient-rtos \
--"
+-DEPENDS:append = " osal-rtos common-csl-ip-rtos openssl-native"
 -
 -# Build with make instead of XDC
 -TI_PDK_XDCMAKE = "0"
 -
--UDMA_PACKAGE_BASE   = "${WORKDIR}/udma_base"
--UDMA_LLD_ROOTPATH = "${UDMA_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/udma"
+-SCICLIENT_PACKAGE_BASE = "${WORKDIR}/sciclient_base"
+-SCICLIENT_ROOTPATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages/ti/drv/sciclient"
 -
 -export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
--export PDK_UDMA_ROOT_PATH = "${UDMA_PACKAGE_BASE}/package/all/pdk_/packages"
+-export PDK_SCICLIENT_ROOT_PATH = "${SCICLIENT_PACKAGE_BASE}/package/all/pdk_/packages"
 -
--TI_PDK_LIMIT_BOARDS:am65xx = "am65xx_evm"
+-BUILD_HS = ""
+-BUILD_HS:am65xx-hs-evm = "yes"
+-BUILD_HS:j7-hs-evm = "yes"
+-export BUILD_HS
 -
+-# Sciclient for am65x supports mcu1_1 in addition to the default cores in TI_PDK_LIMIT_CORES
+-TI_PDK_LIMIT_CORES:append:am65xx = " mcu1_1"
 -
 -# HTML doc link params
--PDK_COMP_LINK_TEXT = "UDMA LLD"
+-PDK_COMP_LINK_TEXT = "SCICLIENT"
 -
 -do_configure() {
--    # remove any previous package
--    rm -rf ${UDMA_PACKAGE_BASE}
 -
+-    rm -rf ${SCICLIENT_PACKAGE_BASE}
 -    cd ${S}
 -
+-    # remove any previous package
+-    rm -f ${SCICLIENT_PACKAGE_BASE}
+-
 -    # make the release package before building it
--    make package BOARD="${TI_PDK_LIMIT_BOARDS}" DEST_ROOT=${UDMA_PACKAGE_BASE} PDK_UDMA_COMP_PATH=${S}
+-    make package BOARD="${TI_PDK_LIMIT_BOARDS}" DEST_ROOT=${SCICLIENT_PACKAGE_BASE} PDK_SCICLIENT_COMP_PATH=${S}
+-
+-   # This is to ensure the make package completed successfully
+-    cat  ${SCICLIENT_ROOTPATH}/makefile
 -}
 -
 -do_compile() {
--    cd ${UDMA_LLD_ROOTPATH}
+-
+-    cd ${SCICLIENT_ROOTPATH}
+-
+-    # Clean
+-    # make clean LIMIT_SOCS="${LIMSOCS}" LIMIT_BOARDS="${LIMBOARDS}"
 -
 -    # Build am65xx libraries
--    make clean lib xdc_meta doxygen LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" LIMIT_CORES="${TI_PDK_LIMIT_CORES}"
+-    make lib xdc_meta doxygen LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" LIMIT_BOARDS="${TI_PDK_LIMIT_BOARDS}" LIMIT_CORES="${TI_PDK_LIMIT_CORES}"
 -
 -    #archive
--    tar -cf udma_lld.tar --exclude='*.tar' ./*
+-    tar -cf sciclient.tar --exclude='*.tar' ./*
+-}
+-
+-
+-do_compile:prepend:am65xx-hs-evm() {
+-
+-    cd ${SCICLIENT_ROOTPATH}
+-
+-    # Saving the GP firmware to a different GP name
+-    cp ${CP_ARGS} ./soc/V0/sysfw.bin ./soc/V0/sysfw-gp.bin
+-    
+-    cd ${SCICLIENT_ROOTPATH}/tools
+-    # Create the .bin file for HS
+-    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x-hs ${PDK_INSTALL_DIR}/packages
+-    cd -
+-}
+-
+-do_compile:prepend:am65xx-evm() {
+-
+-    cd ${SCICLIENT_ROOTPATH}/tools
+-
+-    # Create the .bin file for GP, PG1
+-    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x ${PDK_INSTALL_DIR}/packages
+-    # Create the .bin file for GP, PG2
+-    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh am65x_pg2 ${PDK_INSTALL_DIR}/packages
+-    
+-    cd -
+-}
+-
+-
+-do_compile:prepend:j7-evm() {
+-
+-    cd ${SCICLIENT_ROOTPATH}/tools
+-    # Create the .bin file for GP
+-    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh j721e ${PDK_INSTALL_DIR}/packages
+-    cd -
+-}
+-
+-do_compile:prepend:j7-hs-evm() {
+-
+-    cd ${SCICLIENT_ROOTPATH}/tools
+-    # Create the .bin file for HS
+-    ${SCICLIENT_ROOTPATH}/tools/firmwareHeaderGen.sh j721e-hs ${PDK_INSTALL_DIR}/packages
+-    cd -
 -}
 -
 -do_install() {
--    cd ${UDMA_LLD_ROOTPATH}
--    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/udma
--    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/udma \;
+-    cd ${SCICLIENT_ROOTPATH}
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient
+-    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/drv/sciclient \;
 -}
 -
 -FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
 -
--INSANE_SKIP:${PN} = "arch ldflags"
-diff --git a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb b/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+-INSANE_SKIP:${PN} = "arch ldflags file-rdeps"
+-
+-INSANE_SKIP:${PN}-dbg = "arch"
+-
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+diff --git a/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb b/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
 deleted file mode 100644
-index 7786270..0000000
---- a/recipes-bsp/usb-lld/usb-lld-rtos_git.bb
+index 3e87928..0000000
+--- a/recipes-bsp/serdes-diag/serdes-diag-rtos_git.bb
 +++ /dev/null
-@@ -1,29 +0,0 @@
--SUMMARY = "TI RTOS USB low level driver"
--
--inherit ti-pdk ti-pdk-fetch
--
--TI_PDK_COMP = "ti.drv.usb"
--
--PE = "1"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://USBver.h;beginline=16;endline=46;md5=5394fa32763383d2c8e2aca5a1c67805"
--
--COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|omapl1|k3"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r0"
--
--DEPENDS:append = " osal-rtos"
--DEPENDS:append:ti33x = " starterware-rtos"
--DEPENDS:append:ti43x = " starterware-rtos"
--DEPENDS:append:k3 = " sciclient-rtos"
--
--# Build with make instead of XDC
--TI_PDK_XDCMAKE = "0"
--
--export PDK_USB_ROOT_PATH ="${WORKDIR}/build"
--export DEST_ROOT="${S}"
--
--# HTML doc link params
--PDK_COMP_LINK_TEXT = "USB LLD"
-diff --git a/recipes-bsp/vps-lld/vps-lld-rtos_git.bb b/recipes-bsp/vps-lld/vps-lld-rtos_git.bb
-deleted file mode 100644
-index 7e0695a..0000000
---- a/recipes-bsp/vps-lld/vps-lld-rtos_git.bb
-+++ /dev/null
-@@ -1,56 +0,0 @@
--SUMMARY = "TI RTOS Low level driver for Video Processing Subsystem (VPS) "
+@@ -1,35 +0,0 @@
+-SUMMARY = "TI RTOS library for SERDES diagnostics"
 -
 -inherit ti-pdk
 -
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING.txt;beginline=1;endline=32;md5=4303d306ea53eb66132983d6901c137d"
+-LIC_FILES_CHKSUM = "file://serdes_diag.h;beginline=1;endline=42;;md5=68e7ce6fdc0e9328fa7d0ec41c54420c"
 -
--COMPATIBLE_MACHINE = "omap-a15"
+-COMPATIBLE_MACHINE = "keystone|c66x|k3"
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--VPS_LLD_GIT_URI = "git://git.ti.com/keystone-rtos/vps.git"
--VPS_LLD_GIT_PROTOCOL = "git"
--VPS_LLD_GIT_BRANCH = "master"
--VPS_LLD_GIT_DESTSUFFIX = "git/ti/drv/vps"
+-SERDES_DIAG_GIT_URI = "git://git.ti.com/keystone-rtos/serdes_diag.git"
+-SERDES_DIAG_GIT_PROTOCOL = "git"
+-SERDES_DIAG_GIT_BRANCH = "master"
+-SERDES_DIAG_GIT_DESTSUFFIX = "git/ti/diag/serdes_diag"
 -
--# Below commit ID corresponds to "DEV.VPS_LLD.01.00.01.13A"
--VPS_LLD_SRCREV = "f6d7c1f9cee42da1368e6414b4feeb84227d620e"
+-# Below commit ID corresponds to "DEV.DIAG_SERDES_SB.01.00.00.13"
+-SERDES_DIAG_SRCREV = "6dd7cd2170efe3cb41cc424486ba55b8d5bba354"
 -
--BRANCH = "${VPS_LLD_GIT_BRANCH}"
--SRC_URI = "${VPS_LLD_GIT_URI};destsuffix=${VPS_LLD_GIT_DESTSUFFIX};protocol=${VPS_LLD_GIT_PROTOCOL};branch=${BRANCH}"
+-BRANCH = "${SERDES_DIAG_GIT_BRANCH}"
+-SRC_URI = "${SERDES_DIAG_GIT_URI};destsuffix=${SERDES_DIAG_GIT_DESTSUFFIX};protocol=${SERDES_DIAG_GIT_PROTOCOL};branch=${BRANCH}"
 -
--SRCREV = "${VPS_LLD_SRCREV}"
--PV = "01.00.01.13A"
+-SRCREV = "${SERDES_DIAG_SRCREV}"
+-PV = "01.00.00.13"
 -PR = "r0"
 -
--S = "${WORKDIR}/${VPS_LLD_GIT_DESTSUFFIX}"
+-S = "${WORKDIR}/${SERDES_DIAG_GIT_DESTSUFFIX}"
 -
--# Add to DEPENDS set in ti-pdk.bbclass
--DEPENDS:append = " \
--            ti-sysbios \
--            osal-rtos \
--            edma3-lld-rtos \
--            board-rtos \
--            uart-lld-rtos \
--            i2c-lld-rtos \
--            pm-lld-rtos \
+-
+-# Build with make instead of XDC for k3
+-TI_PDK_XDCMAKE:k3 = "0"
+-
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "SERDES Diagnostics"
+-
+-INSANE_SKIP:${PN} = "arch"
+diff --git a/recipes-bsp/serdes-fw/serdes-fw_git.bb b/recipes-bsp/serdes-fw/serdes-fw_git.bb
+deleted file mode 100644
+index 6f79c64..0000000
+--- a/recipes-bsp/serdes-fw/serdes-fw_git.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-DESCRIPTION = "SerDes firmware for Keystone PCIe and 1/10GigE"
+-
+-require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+-
+-LICENSE = "TI-TFL"
+-LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+-
+-PV = "${SERDES_FW_VERSION}"
+-PR = "${INC_PR}.0"
+-
+-CLEANBROKEN = "1"
+-
+-COMPATIBLE_MACHINE = "keystone"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-S = "${WORKDIR}/git"
+-TARGET = "ks2_pcie_serdes.bin ks2_gbe_serdes.bin ks2_xgbe_serdes.bin"
+-
+-do_install() {
+-	install -d ${D}${base_libdir}/firmware
+-	for f in ${TARGET}; do
+-		install -m 0644 ${S}/ti-keystone/$f ${D}${base_libdir}/firmware/$f
+-	done
+-}
+-
+-FILES:${PN} = "${base_libdir}/firmware"
+diff --git a/recipes-bsp/srss-tc/srss-tc_git.bb b/recipes-bsp/srss-tc/srss-tc_git.bb
+deleted file mode 100644
+index 483bde0..0000000
+--- a/recipes-bsp/srss-tc/srss-tc_git.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-DESCRIPTION = "TI Smart Reflex temperature control application for KeyStone II"
+-HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/srss-tc.git"
+-LICENSE = "BSD & MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c17cd1dc60dc06a4c4f2a2c45472a51"
+-COMPATIBLE_MACHINE = "keystone"
+-
+-PV = "1.0.0.1"
+-
+-BRANCH = "master"
+-# This commit corresponds to tag DEV.SRSS-TC-01.00.00.01A
+-SRCREV = "107cd1433ef5785e5647ef086a4cc77566506604"
+-
+-SRC_URI = "git://git.ti.com/keystone-linux/srss-tc.git;protocol=git;branch=${BRANCH}"
+-
+-S = "${WORKDIR}/git"
+-
+-SRSS_BIN_NAME = "srss_tc.out"
+-INITSCRIPT_NAME = "run_srss_tc.sh"
+-INITSCRIPT_PARAMS = "defaults 10"
+-
+-inherit update-rc.d
+-LDFLAGS += "-lrt"
+-CFLAGS += "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
+-
+-EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
+-
+-do_install() {
+-	install -d ${D}${bindir}/
+-	install -c -m 755 ${S}/src/${SRSS_BIN_NAME} ${D}${bindir}/${SRSS_BIN_NAME}
+-
+-	install -d ${D}${sysconfdir}/init.d/
+-	install -c -m 755 ${S}/scripts/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+-}
+diff --git a/recipes-bsp/starterware/starterware-rtos_git.bb b/recipes-bsp/starterware/starterware-rtos_git.bb
+deleted file mode 100644
+index 1d94e94..0000000
+--- a/recipes-bsp/starterware/starterware-rtos_git.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-require starterware.inc
+-
+-DEPENDS = "gcc-arm-baremetal-native ti-pdk-build-rtos ti-xdctools-native"
+-
+-require recipes-ti/includes/ti-paths.inc
+-
+-PR = "${INC_PR}.0"
+-
+-PARTNO:ti33x = "am335x"
+-PARTNO:ti43x = "am437x"
+-
+-export TOOLCHAIN_PATH_A8 = "${GCC_ARM_NONE_TOOLCHAIN}"
+-export TOOLCHAIN_PATH_A9 = "${GCC_ARM_NONE_TOOLCHAIN}"
+-export PDK_INSTALL_PATH = "${PDK_INSTALL_DIR}/packages"
+-export XDC_INSTALL_PATH = "${XDC_INSTALL_DIR}"
+-
+-do_compile() {
+-    cd build
+-    ./release_${PARTNO}.sh
+-}
+-
+-do_install() {
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware
+-    find -name "*.tar" -exec tar xf {} --no-same-owner -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/starterware \;
+-}
+-
+-FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-INSANE_SKIP:${PN} = "arch staticdev file-rdeps"
+-
+diff --git a/recipes-bsp/starterware/starterware.inc b/recipes-bsp/starterware/starterware.inc
+deleted file mode 100644
+index 82b012a..0000000
+--- a/recipes-bsp/starterware/starterware.inc
++++ /dev/null
+@@ -1,21 +0,0 @@
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://Makefile;beginline=1;endline=35;md5=286cbb5dce3e348294b6b025cff969b3"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-STARTERWARE_GIT_URI = "git://git.ti.com/keystone-rtos/starterware.git"
+-STARTERWARE_GIT_PROTOCOL = "git"
+-STARTERWARE_GIT_BRANCH = "master"
+-
+-# Below commit ID corresponds to "DEV.STARTERWARE.PROCSDK.02.01.01.12A"
+-STARTERWARE_SRCREV = "49a4d4cd4c72bacee738d44b8e72e7f59aa948cd"
+-
+-BRANCH = "${STARTERWARE_GIT_BRANCH}"
+-SRC_URI = "${STARTERWARE_GIT_URI};protocol=${STARTERWARE_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${STARTERWARE_SRCREV}"
+-PV = "02.01.01.12A"
+-INC_PR = "r0"
+-
+-S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/starterware/starterware_git.bb b/recipes-bsp/starterware/starterware_git.bb
+deleted file mode 100644
+index a560e7b..0000000
+--- a/recipes-bsp/starterware/starterware_git.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-require starterware.inc
+-
+-PR = "${INC_PR}.0"
+-
+-ALLOW_EMPTY:${PN} = "1"
+-
+-CLEANBROKEN = "1"
+-
+-do_compile() {
+-    :
+-}
+-
+-do_install () {
+-    install -d ${D}${includedir}/ti/starterware
+-    find . -name "*.h" -type f | xargs -I {} cp --parents --no-preserve=ownership {} ${D}${includedir}/ti/starterware
+-}
+diff --git a/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb b/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
+deleted file mode 100644
+index f4b3da9..0000000
+--- a/recipes-bsp/ti-pdk-source/ti-pdk-source_git.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-# Recipe to fetch/unpack sources used by ti-pdk-fetch recipes.
+-#
+-# Mimic gcc-source.inc from oe-core.
+-
+-# These shources will be unpacked to a "work-shared" directory. Then each
+-# "ti-pdk-fetch" recipe will hard-link only the sources it requires.
+-
+-deltask do_configure
+-deltask do_compile
+-deltask do_install
+-deltask do_populate_sysroot
+-deltask do_populate_lic
+-
+-RM_WORK_EXCLUDE += "${PN}"
+-EXCLUDE_FROM_WORLD = "1"
+-
+-inherit nopackages ti-pdk-fetch
+-
+-LICENSE = "BSD-3-Clause"
+-
+-PN = "${TI_PDK_SOURCE_PN}"
+-WORKDIR = "${TI_PDK_SOURCE_WORKDIR}"
+-SSTATE_SWSPEC = "sstate:ti-pdk::${PV}:${PR}::${SSTATE_VERSION}:"
+-
+-STAMP = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}"
+-STAMPCLEAN = "${STAMPS_DIR}/work-shared/ti-pdk-${PV}*"
+-
+-INHIBIT_DEFAULT_DEPS = "1"
+-DEPENDS = ""
+-PACKAGES = ""
+-
+-SRC_URI = "${TI_PDK_GIT_URI};branch=${TI_PDK_GIT_BRANCH};protocol=${TI_PDK_GIT_PROTOCOL}"
+-SRCREV = "${TI_PDK_SRCREV}"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_0.1.1.50.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_0.1.1.50.bb
+deleted file mode 100644
+index 32ea3b4..0000000
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_0.1.1.50.bb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-DESCRIPTION = "TI SCI firmware"
+-
+-LICENSE = "TI-TFL"
+-LIC_FILES_CHKSUM = "file://LICENCE.ti-keystone;md5=3a86335d32864b0bef996bee26cc0f2c"
+-
+-PV = "0.1.1.50"
+-PR = "r2"
+-
+-CLEANBROKEN = "1"
+-
+-COMPATIBLE_MACHINE = "k2g"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-SRCREV = "ab507546f0f3f217f4c782a20845856e14b38224"
+-BRANCH ?= "ti-linux-firmware"
+-
+-SRC_URI = "git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH}"
+-
+-S = "${WORKDIR}/git"
+-TARGET = "ti-sci-firmware-k2g.bin"
+-
+-do_install() {
+-	install -d ${D}/boot
+-	install -m 0644 ${S}/ti-keystone/${TARGET} ${D}/boot/${TARGET}
+-}
+-
+-FILES:${PN} = "/boot"
+-
+-inherit deploy
+-
+-do_deploy () {
+-	install -d ${DEPLOYDIR}
+-	install -m 0644 ${S}/ti-keystone/${TARGET} ${DEPLOYDIR}/${TARGET}
+-}
+-
+-addtask deploy before do_build after do_compile
+diff --git a/recipes-bsp/traceframework/traceframework-rtos_git.bb b/recipes-bsp/traceframework/traceframework-rtos_git.bb
+deleted file mode 100644
+index 55e4118..0000000
+--- a/recipes-bsp/traceframework/traceframework-rtos_git.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-inherit ti-pdk
+-
+-require traceframework.inc
+-
+-PR = "${INC_PR}.2"
+-
+-XDCPATH:append = ";${UIA_INSTALL_DIR}/packages"
+-
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "Trace Framework"
+diff --git a/recipes-bsp/traceframework/traceframework.inc b/recipes-bsp/traceframework/traceframework.inc
+deleted file mode 100644
+index 2312b02..0000000
+--- a/recipes-bsp/traceframework/traceframework.inc
++++ /dev/null
+@@ -1,27 +0,0 @@
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
+-
+-COMPATIBLE_MACHINE = "tci6614-evm|keystone"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-TRACEFRAMEWORK_GIT_URI = "git://git.ti.com/keystone-rtos/traceframework.git"
+-TRACEFRAMEWORK_GIT_PROTOCOL = "git"
+-TRACEFRAMEWORK_GIT_BRANCH = "master"
+-TRACEFRAMEWORK_GIT_DESTSUFFIX = "git/ti/instrumentation/traceframework"
+-
+-# Below commit ID corresponds to "DEV.TFWK-01.01.01.09A"
+-TRACEFRAMEWORK_SRCREV = "b7aa8d91901d1aabe2e56fabc3233ed66bf08819"
+-
+-BRANCH = "${TRACEFRAMEWORK_GIT_BRANCH}"
+-SRC_URI = "${TRACEFRAMEWORK_GIT_URI};destsuffix=${TRACEFRAMEWORK_GIT_DESTSUFFIX};protocol=${TRACEFRAMEWORK_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${TRACEFRAMEWORK_SRCREV}"
+-PV = "01.01.01.09A"
+-INC_PR = "r0"
+-
+-DEVICELIST = "k2k k2h k2e k2l"
+-DEVICELIST:k2hk = "k2k k2h"
+-DEVICELIST:k2e = "k2e"
+-DEVICELIST:k2l = "k2l"
+-
+-S = "${WORKDIR}/${TRACEFRAMEWORK_GIT_DESTSUFFIX}"
+diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
+deleted file mode 100644
+index 4c11e65..0000000
+--- a/recipes-bsp/traceframework/traceframework_git.bb
++++ /dev/null
+@@ -1,40 +0,0 @@
+-DESCRIPTION = "TI Trace Framework library"
+-
+-DEPENDS = "cuia"
+-
+-include traceframework.inc
+-
+-PR = "${INC_PR}.0"
+-
+-BASEDIR = "${WORKDIR}/git"
+-
+-EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} \
+-                 CUIA_INSTALL_DIR=${STAGING_INCDIR} CUIA_LIB_DIR=${STAGING_LIBDIR}"
+-
+-do_compile () {
+-#   making the library
+-	oe_runmake clean
+-	oe_runmake lib
+-
+-#   make the test application
+-	for device in ${DEVICELIST}
+-	do
+-		oe_runmake tests DEVICE="$device" TFW_INC_DIR=${BASEDIR} TFW_SRC_DIR=${S} \
+-			TARGET_ROOT_DIR=${D}
+-	done
+-}
+-
+-do_install() {
+-	for device in ${DEVICELIST}
+-	do
+-		oe_runmake install DEVICE="$device" TFW_SRC_DIR=${S} TARGET_ROOT_DIR=${D}
+-	done
+-	chown -R root:root ${D}
+-}
+-
+-PACKAGES =+ "${PN}-test"
+-
+-FILES:${PN}-test = "${bindir}/tfw*.out \
+-                    ${bindir}/*.txt"
+-
+-INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libtraceframework.a"
+diff --git a/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb b/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
+deleted file mode 100644
+index aa21b65..0000000
+--- a/recipes-bsp/transport-rtos/bmet-eth-rtos_git.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "RTOS driver for BMET Ethernet"
+-
+-inherit ti-pdk
+-require transport.inc
+-
+-PR = "${INC_PR}.0"
+-
+-LIC_FILES_CHKSUM = "file://bmet_transport.h;beginline=12;endline=40;md5=6d209c698b273aef180b0c1d38469e8e"
+-
+-COMPATIBLE_MACHINE = "k2hk|k2e|k2l"
+-
+-DEPENDS:append = " qmss-lld-rtos \
+-                   cppi-lld-rtos \
 -"
--export PDK_VPS_COMP_PATH = "${WORKDIR}/build"
--export DEST_ROOT="${S}"
+-
+-TI_PDK_COMP = "ti.transport.bmet_eth"
+-
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "Baremetal Ethernet Transport"
+diff --git a/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
+deleted file mode 100644
+index a4ecaa2..0000000
+--- a/recipes-bsp/transport-rtos/nimu-icss-rtos_git.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-SUMMARY = "RTOS driver for NIMU ICSS"
+-
+-inherit ti-pdk
+-require transport.inc
+-
+-PR = "${INC_PR}.0"
+-
+-LIC_FILES_CHKSUM = "file://nimu_icssEth.h;beginline=1;endline=35;md5=3ea633a510be24d8a89d9d08b930994c"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g|c66x|omapl1|k3"
+-
+-DEPENDS:append = " ti-ndk \
+-                   pruss-lld-rtos \
+-                   icss-emac-lld-rtos \
+-"
+-DEPENDS:append_c665x-evm = " emac-lld-rtos"
+-DEPENDS:append_c667x-evm = " pa-lld-rtos"
+-DEPENDS:append:omapl1 = " emac-lld-rtos"
+-
+-TI_PDK_COMP = "ti.transport.ndk.nimu_icss"
 -
 -# Build with make instead of XDC
 -TI_PDK_XDCMAKE = "0"
 -
--# The makefile will push these on the XDCPATH
+-export PDK_NIMU_ICSS_ROOT_PATH ="${WORKDIR}/build"
+-export DEST_ROOT="${S}"
+-
+-export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
+-XDCPATH:append = ";${NDK_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/transport-rtos/nimu-rtos_git.bb b/recipes-bsp/transport-rtos/nimu-rtos_git.bb
+deleted file mode 100644
+index b726be2..0000000
+--- a/recipes-bsp/transport-rtos/nimu-rtos_git.bb
++++ /dev/null
+@@ -1,35 +0,0 @@
+-SUMMARY = "RTOS driver for Network Interface Management Unit (NIMU)"
+-
+-inherit ti-pdk
+-require transport.inc
+-
+-PR = "${INC_PR}.0"
+-
+-LIC_FILES_CHKSUM = "file://nimu_eth.h;beginline=1;endline=35;md5=ee9c662c39d4584fb2a8b66413d2866d"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|omapl1|k3"
+-
+-TI_PDK_COMP = "ti.transport.ndk.nimu"
+-
+-DEPENDS:append = " ti-ndk osal-rtos"
+-DEPENDS:append:ti33x = " starterware-rtos emac-lld-rtos"
+-DEPENDS:append:ti43x = " starterware-rtos emac-lld-rtos"
+-DEPENDS:append:omap-a15 = " emac-lld-rtos"
+-DEPENDS:append:keystone = " qmss-lld-rtos cppi-lld-rtos"
+-DEPENDS:append:k2hk = " pa-lld-rtos"
+-DEPENDS:append:k2e = " pa-lld-rtos"
+-DEPENDS:append:k2l = " pa-lld-rtos"
+-DEPENDS:append:k2g = " emac-lld-rtos"
+-DEPENDS:append_c665x-evm = " emac-lld-rtos"
+-DEPENDS:append_c667x-evm = " pa-lld-rtos cppi-lld-rtos"
+-DEPENDS:append:omapl1 = " emac-lld-rtos"
+-DEPENDS:append:k3 = " emac-lld-rtos pruss-lld-rtos"
+-
+-# Build with make instead of XDC
+-TI_PDK_XDCMAKE = "0"
+-
+-export PDK_NIMU_ROOT_PATH ="${WORKDIR}/build"
+-export DEST_ROOT="${S}"
+-
+-export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
+-XDCPATH:append = ";${NDK_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/transport-rtos/timesync-rtos_git.bb b/recipes-bsp/transport-rtos/timesync-rtos_git.bb
+deleted file mode 100644
+index 3913ecf..0000000
+--- a/recipes-bsp/transport-rtos/timesync-rtos_git.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-SUMMARY = "RTOS driver for timesync driver"
+-
+-inherit ti-pdk
+-require recipes-bsp/transport-rtos/transport.inc
+-
+-PR = "${INC_PR}.0"
+-
+-LIC_FILES_CHKSUM = "file://timeSync_ver.h;beginline=23;endline=45;md5=4bd873035e47065aaa811e53622992e9"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k2g"
+-
+-DEPENDS:append = " ti-ndk \
+-                   osal-rtos \
+-                   pruss-lld-rtos \
+-                   icss-emac-lld-rtos \
+-                   nimu-icss-rtos \
+-                   edma3-lld-rtos \
+-"
+-
+-TI_PDK_COMP = "ti.transport.timeSync"
+-
+-# Build with make instead of XDC
+-TI_PDK_XDCMAKE = "0"
+-
+-export PDK_TIMESYNC_ROOT_PATH ="${WORKDIR}/build"
+-export DEST_ROOT="${S}"
+-
+-export NDK_INSTALL_PATH = "${NDK_INSTALL_DIR}"
 -export EDMA3LLD_BIOS6_INSTALLDIR = "${EDMA3_LLD_INSTALL_DIR}"
 -
--do_compile:append() {
--    # Delete archive created by XDC release command since it does not contain all content
--    find -name "*.tar" -exec rm -f {} \;
+-XDCPATH:append = ";${NDK_INSTALL_DIR}/packages"
+diff --git a/recipes-bsp/transport-rtos/transport.inc b/recipes-bsp/transport-rtos/transport.inc
+deleted file mode 100644
+index 866d7a3..0000000
+--- a/recipes-bsp/transport-rtos/transport.inc
++++ /dev/null
+@@ -1,11 +0,0 @@
+-LICENSE = "BSD-3-Clause"
 -
--    # Archive from build/ to capture ti/drv/pm/ in archive
--    cd ${B}
--    tar -cf pm_lld.tar --exclude='*.tar' ./*
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-inherit ti-pdk-fetch
+-
+-TI_PDK_COMP = "ti.transport"
+-
+-PE = "1"
+-
+-INC_PR = "r0"
+diff --git a/recipes-bsp/utils-rtos/profiling-rtos_git.bb b/recipes-bsp/utils-rtos/profiling-rtos_git.bb
+deleted file mode 100644
+index 9846804..0000000
+--- a/recipes-bsp/utils-rtos/profiling-rtos_git.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-SUMMARY = "TI RTOS profiling utilities"
+-
+-inherit ti-pdk ti-pdk-fetch
+-
+-TI_PDK_COMP = "ti.utils.profiling"
+-
+-PE = "1"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://profilingver.h;beginline=1;endline=46;md5=974494ad60f33cfc0340e421c5a5a7a0"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|c66x|k3"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-
+-PR = "r0"
+-
+-
+-# Build with make instead of XDC
+-TI_PDK_XDCMAKE = "0"
+-
+-export PDK_PROFILING_ROOT_PATH ="${WORKDIR}/build"
+-export DEST_ROOT="${S}"
+-
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "Profiling Utility Library"
+diff --git a/recipes-bsp/utils-rtos/trace-rtos_git.bb b/recipes-bsp/utils-rtos/trace-rtos_git.bb
+deleted file mode 100644
+index 249ffc7..0000000
+--- a/recipes-bsp/utils-rtos/trace-rtos_git.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-SUMMARY = "TI RTOS Trace utility"
+-
+-DESCRIPTION = "This utility allows for tracing support in PDK drivers"
+-
+-inherit ti-pdk ti-pdk-fetch
+-
+-TI_PDK_COMP = "ti.utils.trace"
+-
+-PE = "1"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://tracever.h;beginline=19;endline=47;md5=983f531ecfc9fc8c4bc3af9333ab6696"
+-
+-COMPATIBLE_MACHINE = "k3"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-
+-PR = "r0"
+-
+-
+-# Build with make instead of XDC
+-TI_PDK_XDCMAKE = "0"
+-
+-export PDK_TRACE_ROOT_PATH ="${WORKDIR}/build"
+-export DEST_ROOT="${S}"
+-
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "Trace Utility"
+diff --git a/recipes-bsp/wdtimer/wdtimer-rtos_git.bb b/recipes-bsp/wdtimer/wdtimer-rtos_git.bb
+deleted file mode 100644
+index 59ebf31..0000000
+--- a/recipes-bsp/wdtimer/wdtimer-rtos_git.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-SUMMARY = "Watchdog Timer (wdtimer) test example"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://WatchdogTimer.xdc;beginline=1;endline=31;md5=837fb1761f89c7671e79bd5992bcf9e4"
+-
+-inherit ti-pdk
+-
+-COMPATIBLE_MACHINE = "k2hk|k2e|k2l"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-WATCHDOG_TIMER_GIT_URI = "git://git.ti.com/keystone-rtos/wdtimer.git"
+-WATCHDOG_TIMER_GIT_PROTOCOL = "git"
+-WATCHDOG_TIMER_GIT_BRANCH = "master"
+-WATCHDOG_TIMER_GIT_DESTSUFFIX = "git/ti/instrumentation/wdtimer"
+-
+-# Below commit ID corresponds to "DEV.WDTIMER.01.00.00.04A"
+-WATCHDOG_TIMER_SRCREV = "5c382014ed02fdf054beb1dd0263758eb17c34e2"
+-
+-BRANCH = "${WATCHDOG_TIMER_GIT_BRANCH}"
+-SRC_URI = "${WATCHDOG_TIMER_GIT_URI};destsuffix=${WATCHDOG_TIMER_GIT_DESTSUFFIX};protocol=${WATCHDOG_TIMER_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${WATCHDOG_TIMER_SRCREV}"
+-PV = "01.00.00.04A"
+-PR = "r0"
+-
+-S = "${WORKDIR}/git/ti/instrumentation/wdtimer"
+-
+-# HTML doc link params
+-PDK_COMP_LINK_TEXT = "Watchdog Timer"
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index d226c4a..86689d3 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -29,8 +29,6 @@ export IMGLIB_C64P_INSTALL_DIR_RECIPE= "${installdir}/ti-imglib-tree"
+ export IPC_INSTALL_DIR_RECIPE        = "${installdir}/ti-ipc-tree"
+ export LINK_INSTALL_DIR_RECIPE       = "${installdir}/ti-dsplink-tree"
+ export LPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-local-power-manager-tree"
+-export NDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-ndk-tree"
+-export NS_INSTALL_DIR_RECIPE              = "${installdir}/ti-ns-tree"
+ export OMX_INSTALL_DIR_RECIPE        = "${installdir}/ti-omx-tree"
+ export OSAL_INSTALL_DIR_RECIPE       = "${installdir}/ti-osal-tree"
+ export RTFS_INSTALL_DIR_RECIPE       = "${installdir}/ti-rtfs-tree"
+@@ -81,8 +79,6 @@ export IMGLIB_C64P_INSTALL_DIR= "${STAGING_DIR_TARGET}${IMGLIB_C64P_INSTALL_DIR_
+ export IPC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${IPC_INSTALL_DIR_RECIPE}"
+ export LINK_INSTALL_DIR       = "${STAGING_DIR_TARGET}${LINK_INSTALL_DIR_RECIPE}"
+ export LPM_INSTALL_DIR        = "${STAGING_DIR_TARGET}${LPM_INSTALL_DIR_RECIPE}"
+-export NDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${NDK_INSTALL_DIR_RECIPE}"
+-export NS_INSTALL_DIR         = "${STAGING_DIR_TARGET}${NS_INSTALL_DIR_RECIPE}"
+ export OMX_INSTALL_DIR        = "${STAGING_DIR_TARGET}${OMX_INSTALL_DIR_RECIPE}"
+ export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSBIOS_INSTALL_DIR_RECIPE}"
+ export SYSLINK_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSLINK_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/ipc/ipc-transport-common-rtos_git.bb b/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
+deleted file mode 100644
+index ade7802..0000000
+--- a/recipes-ti/ipc/ipc-transport-common-rtos_git.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-require recipes-ti/includes/ti-paths.inc
+-require ipc-transport.inc
+-
+-PR = "${INC_PR}.1"
+-
+-LIC_FILES_CHKSUM = "file://common_src/bench_common.h;beginline=1;endline=31;md5=a6ddfb26d2097041d513e3881f40e4e8"
+-
+-COMPATIBLE_MACHINE = "k2hk|k2l|k2e"
+-
+-IPC_TRANSPORT_COMMON_DESTSUFFIX = "git/c66/example"
+-
+-S = "${WORKDIR}/${IPC_TRANSPORT_COMMON_DESTSUFFIX}"
+-
+-do_compile() {
+-    :
 -}
 -
--INSANE_SKIP:${PN} = "arch ldflags"
+-do_install () {
+-    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example
+-    cp -r ${S} ${D}${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66
+-}
+-
+-FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/ti/transport/ipc/c66/example/*"
+diff --git a/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb b/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
+deleted file mode 100644
+index 2dffc11..0000000
+--- a/recipes-ti/ipc/ipc-transport-qmss-rtos_git.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-inherit ti-pdk
+-require ipc-transport.inc
+-
+-PR = "${INC_PR}.4"
+-
+-LIC_FILES_CHKSUM = "file://TransportQmss.xdc;beginline=1;endline=35;md5=ad783760d74a4cc5b8d4ad3d8a1f28a2"
+-
+-COMPATIBLE_MACHINE = "k2hk|k2l|k2e"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-DEPENDS:append = " qmss-lld-rtos \
+-                   cppi-lld-rtos \
+-                   ti-ipc-rtos \
+-                   ipc-transport-common-rtos \
+-"
+-
+-IPC_TRANSPORT_QMSS_DESTSUFFIX = "git/c66/qmss"
+-
+-S = "${WORKDIR}/${IPC_TRANSPORT_QMSS_DESTSUFFIX}"
+-
+-export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
+-XDCPATH:append = ";${IPC_INSTALL_DIR}/packages"
+diff --git a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb b/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
+deleted file mode 100644
+index 158d185..0000000
+--- a/recipes-ti/ipc/ipc-transport-qmss-test_git.bb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-include ipc-transport-qmss.inc
+-
+-PR = "${INC_PR}.0"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-DEPENDS = "ipc-transport-qmss ti-ipc"
+-
+-#FILES_${PN}-test = "${bindir}/multiProcessTest_*.out"
+-
+-CHOICELIST = "yes no"
+-
+-DEVICELIST:k2hk = "k2h k2k"
+-DEVICELIST:k2e  = "k2e"
+-DEVICELIST:k2l  = "k2l"
+-
+-do_compile () {
+-#   Now build the test code
+-	for device in ${DEVICELIST}
+-	do
+-		for choice in ${CHOICELIST}
+-		do
+-			oe_runmake tests \
+-				IPC_DEVKIT_INSTALL_PATH=${STAGING_INCDIR} \
+-				USEDYNAMIC_LIB="$choice" DEVICE="$device"
+-		done
+-	done
+-}
+-
+-do_install () {
+-	for device in ${DEVICELIST}
+-	do
+-		oe_runmake installbin \
+-			INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
+-	done
+-
+-}
+diff --git a/recipes-ti/ipc/ipc-transport-qmss.inc b/recipes-ti/ipc/ipc-transport-qmss.inc
+deleted file mode 100644
+index 0470526..0000000
+--- a/recipes-ti/ipc/ipc-transport-qmss.inc
++++ /dev/null
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "TI QMSS-Based IPC MessageQ Transport"
+-LICENSE = "BSD-3-Clause"
+-
+-require ipc-transport.inc
+-
+-INC_PR:append = ".1"
+-
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+-
+-COMPATIBLE_MACHINE = "keystone"
+-
+-S = "${WORKDIR}/git/linux/qmss"
+-
+-EXTRA_OEMAKE += "PDK_INSTALL_PATH=${STAGING_INCDIR} TRANS_QMSS_SRC_DIR=${S}"
+diff --git a/recipes-ti/ipc/ipc-transport-qmss_git.bb b/recipes-ti/ipc/ipc-transport-qmss_git.bb
+deleted file mode 100644
+index 9313667..0000000
+--- a/recipes-ti/ipc/ipc-transport-qmss_git.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-include ipc-transport-qmss.inc
+-
+-PR = "${INC_PR}.0"
+-
+-DEPENDS = "ti-ipc mpm-transport"
+-
+-do_compile () {
+-#   Now build the transport
+-	oe_runmake clean
+-	oe_runmake lib
+-}
+-
+-do_install () {
+-	oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} \
+-		INSTALL_LIB_BASE_DIR=${D}${libdir}
+-	chown -R root:root ${D}
+-}
+-
+-INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libTransportQmss.a"
+diff --git a/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb b/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
+deleted file mode 100644
+index 5272091..0000000
+--- a/recipes-ti/ipc/ipc-transport-srio-rtos_git.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-inherit ti-pdk
+-require ipc-transport.inc
+-
+-PR = "${INC_PR}.2"
+-
+-LIC_FILES_CHKSUM = "file://TransportSrio.xdc;beginline=1;endline=35;md5=4d466471e4b933a0cc353a46bb546fe7"
+-
+-COMPATIBLE_MACHINE = "k2hk"
+-
+-DEPENDS:append = " qmss-lld-rtos \
+-                   cppi-lld-rtos \
+-                   srio-lld-rtos \
+-                   ti-ipc-rtos \
+-                   ipc-transport-common-rtos \
+-"
+-
+-IPC_TRANSPORT_SRIO_DESTSUFFIX = "git/c66/srio"
+-
+-S = "${WORKDIR}/${IPC_TRANSPORT_SRIO_DESTSUFFIX}"
+-
+-export IPC_INSTALL_PATH = "${IPC_INSTALL_DIR}"
+-XDCPATH:append = ";${IPC_INSTALL_DIR}/packages"
+diff --git a/recipes-ti/ipc/ipc-transport-srio-test_git.bb b/recipes-ti/ipc/ipc-transport-srio-test_git.bb
+deleted file mode 100644
+index 4e23fb2..0000000
+--- a/recipes-ti/ipc/ipc-transport-srio-test_git.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-include ipc-transport-srio.inc
+-
+-PR = "${INC_PR}.0"
+-
+-DEPENDS = "ipc-transport-srio ipc-transport-qmss ti-ipc"
+-
+-DEVICELIST = "k2h k2k"
+-
+-CHOICELIST = "yes no"
+-
+-do_compile () {
+-#   Now build the test code
+-	for device in ${DEVICELIST}
+-	do
+-		for choice in ${CHOICELIST}
+-		do
+-			oe_runmake tests \
+-				IPC_DEVKIT_INSTALL_PATH=${STAGING_INCDIR} \
+-				USEDYNAMIC_LIB="$choice" DEVICE="$device"
+-		done
+-	done
+-}
+-
+-do_install () {
+-
+-	for device in ${DEVICELIST}
+-	do
+-		oe_runmake installbin \
+-			INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
+-	done
+-
+-}
+diff --git a/recipes-ti/ipc/ipc-transport-srio.inc b/recipes-ti/ipc/ipc-transport-srio.inc
+deleted file mode 100644
+index 8942570..0000000
+--- a/recipes-ti/ipc/ipc-transport-srio.inc
++++ /dev/null
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "TI SRIO-Based IPC MessageQ Transport"
+-LICENSE = "BSD-3-Clause"
+-
+-require ipc-transport.inc
+-
+-INC_PR:append = ".1"
+-
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=27bb0deb260c60120a8d7b91da7c3b02"
+-
+-COMPATIBLE_MACHINE = "k2hk"
+-
+-S = "${WORKDIR}/git/linux/srio"
+-
+-EXTRA_OEMAKE += "PDK_INSTALL_PATH=${STAGING_INCDIR} TRANS_SRIO_SRC_DIR=${S}"
+diff --git a/recipes-ti/ipc/ipc-transport-srio_git.bb b/recipes-ti/ipc/ipc-transport-srio_git.bb
+deleted file mode 100644
+index 6001585..0000000
+--- a/recipes-ti/ipc/ipc-transport-srio_git.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-include ipc-transport-srio.inc
+-
+-PR = "${INC_PR}.0"
+-
+-DEPENDS = "ti-ipc mpm-transport"
+-
+-do_compile () {
+-#   Now build the transport
+-	oe_runmake clean
+-	oe_runmake lib
+-}
+-
+-do_install () {
+-	oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} \
+-		INSTALL_LIB_BASE_DIR=${D}${libdir}
+-	chown -R root:root ${D}
+-}
+-
+-INHIBIT_PACKAGE_STRIP_FILES = "${PKGD}${libdir}/libTransportSrio.a"
+diff --git a/recipes-ti/ipc/ipc-transport.inc b/recipes-ti/ipc/ipc-transport.inc
+deleted file mode 100644
+index 0c1edef..0000000
+--- a/recipes-ti/ipc/ipc-transport.inc
++++ /dev/null
+@@ -1,15 +0,0 @@
+-LICENSE = "BSD-3-Clause"
+-
+-IPC_TRANSPORT_GIT_URI = "git://git.ti.com/keystone-linux/ipc-transport.git"
+-IPC_TRANSPORT_GIT_PROTOCOL = "git"
+-IPC_TRANSPORT_GIT_BRANCH = "master"
+-
+-# Below commit ID corresponds to "DEV.IPC-TRANSPORT.02.00.00.02A"
+-IPC_TRANSPORT_SRCREV = "f75e2e29b9b1b63443a0c82493e41dd2f771c6f5"
+-
+-BRANCH = "${IPC_TRANSPORT_GIT_BRANCH}"
+-SRC_URI = "${IPC_TRANSPORT_GIT_URI};protocol=${IPC_TRANSPORT_GIT_PROTOCOL};branch=${BRANCH}"
+-
+-SRCREV = "${IPC_TRANSPORT_SRCREV}"
+-PV = "02.00.00.02A"
+-INC_PR = "r0"
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+deleted file mode 100644
+index 3b80af3..0000000
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ /dev/null
+@@ -1,50 +0,0 @@
+-DESCRIPTION = "Multiproc transport layer for KeyStone devices: Provide basic transport layer for moving data between different processing nodes"
+-HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/mpm-transport.git"
+-LICENSE = "BSD-3-Clause & MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=122b7757f366f3f6fe11988715258fc9"
+-COMPATIBLE_MACHINE = "keystone"
+-
+-DEPENDS = "common-csl-ip edma3-lld mmap-lld cmem rm-lld qmss-lld cppi-lld uio-module-drv"
+-DEPENDS:append:k2hk = " hyplnk-lld srio-lld"
+-DEPENDS:append:k2e = " hyplnk-lld"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH = "master"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-02.00.04.00
+-SRCREV = "e0e44fe55bef7ddf89f7ff3574f07fa906e72a37"
+-
+-PV = "2.0.4.0"
+-PR = "r0"
+-
+-CC += "-fcommon"
+-EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
+-EXTRA_OEMAKE:append:k2hk = " HYPLNK_TRANSPORT=true SRIO_TRANSPORT=true"
+-EXTRA_OEMAKE:append:k2e = " HYPLNK_TRANSPORT=true"
+-INSANE_SKIP:${PN} += "ldflags"
+-
+-S = "${WORKDIR}/git"
+-
+-PACKAGES =+ "${PN}-test"
+-FILES:${PN}-test = "${bindir}/mpm_transport_test.out \
+-					${bindir}/mpm_transport_hyplnk_loopback.out \
+-					${bindir}/mpm_transport_hyplnk_remote.out \
+-					${bindir}/mpm_transport_hyplnk_loopback_dma.out \
+-					${bindir}/mpm_transport_hyplnk_loopback64.out \
+-					${bindir}/mpm_transport_qmss_arm_mt.out \
+-					${bindir}/mpm_transport_srio_arm_mt.out"
+-
+-do_install() {
+-	oe_runmake installbin BASE_DIR=${S} INSTALL_BIN_BASE_DIR=${D}/${bindir}
+-
+-	install -d ${D}${includedir}/
+-	install -c -m 644 ${S}/include/* ${D}${includedir}/
+-
+-	install -d ${D}${libdir}/
+-	cp  -a --preserve=mode,timestamps --no-preserve=ownership ${S}/lib/* ${D}${libdir}/
+-
+-	install -d ${D}${sysconfdir}/mpm/
+-	install -c -m 644 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
+-}
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
+deleted file mode 100644
+index 41efe38..0000000
+--- a/recipes-ti/multiprocmgr/multiprocmgr-rtos_git.bb
++++ /dev/null
+@@ -1,44 +0,0 @@
+-SUMMARY = "TI Multiproc Manager (RTOS) for KeyStone II"
+-DESCRIPTION = "Provides download, debug and other utilities for other cores in the SOC like DSP"
+-
+-require recipes-ti/includes/ti-paths.inc
+-require recipes-ti/multiprocmgr/multiprocmgr.inc
+-
+-DEPENDS = "ti-cgt6x-native"
+-
+-PR = "${INC_PR}.2"
+-
+-PACKAGES =+ "${PN}-test"
+-FILES:${PN}-test = "${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
+-                    ${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/*.out"
+-
+-EXTRA_OEMAKE = "LOCAL_SYSROOT="${STAGING_DIR_TARGET}" \
+-                C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+-               "
+-
+-do_compile() {
+-    oe_runmake c66x
+-    oe_runmake test_c66x
+-}
+-
+-do_install() {
+-    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+-    install -d ${D}${MPM_INSTALL_DIR_RECIPE}
+-    cp ${CP_ARGS} ${S}/* ${D}${MPM_INSTALL_DIR_RECIPE}
+-
+-    # Copy C66x binaries
+-    install -d ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin
+-    cp ${S}/test/filetestdemo/c66x/demo_loopback/build/bin/*.out \
+-        ${D}${datadir}/ti/examples/mpm/test/filetestdemo/c66x/demo_loopback/build/bin/
+-    install -d ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin
+-    cp ${S}/test/sync_test/c66x/bin/*.out \
+-        ${D}${datadir}/ti/examples/mpm/test/sync_test/c66x/bin/
+-}
+-
+-FILES:${PN}-dev += "${MPM_INSTALL_DIR_RECIPE}"
+-INSANE_SKIP:${PN}-dev = "arch"
+-INSANE_SKIP:${PN}-test = "arch"
+-
+-RDEPENDS:${PN}-dev = "bash"
+-
+-ALLOW_EMPTY:${PN} = "1"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+deleted file mode 100644
+index 3d1b3ae..0000000
+--- a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-SUMMARY = "TI Multiproc Manager test code"
+-
+-include multiprocmgr.inc
+-
+-PR = "${INC_PR}.2"
+-
+-DEPENDS = "multiprocmgr cmem"
+-RDEPENDS:${PN} = "multiprocmgr mpm-transport cmem"
+-RDEPENDS:${PN} += "multiprocmgr-rtos-test bash"
+-
+-FILES:${PN} += "\
+-    ${datadir}/ti/examples/mpm \
+-"
+-
+-FILES:${PN}-dbg += "\
+-    ${datadir}/ti/examples/mpm/*/.debug \
+-"
+-
+-do_compile() {
+-	oe_runmake -C ${S} test
+-}
+-
+-do_install() {
+-	# Copy Sources and binary
+-	install -d ${D}${datadir}/ti/examples/mpm/src
+-	cp -r ${S}/src/mailbox ${D}${datadir}/ti/examples/mpm/src
+-	cp -r ${S}/src/sync ${D}${datadir}/ti/examples/mpm/src
+-	cp -r ${S}/test ${D}${datadir}/ti/examples/mpm
+-}
+-
+-INSANE_SKIP:${PN} = "ldflags staticdev"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
+deleted file mode 100644
+index 64fb6f6..0000000
+--- a/recipes-ti/multiprocmgr/multiprocmgr.inc
++++ /dev/null
+@@ -1,21 +0,0 @@
+-HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/multi-proc-manager.git"
+-LICENSE = "BSD-3-Clause & MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
+-SECTION = "console"
+-COMPATIBLE_MACHINE = "keystone"
+-
+-MULTIPROCMGR_GIT_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git"
+-MULTIPROCMGR_GIT_PROTOCOL = "git"
+-MULTIPROCMGR_GIT_BRANCH = "master"
+-
+-# The following commits correspond to DEV.MPM-3.00.05.00
+-MULTIPROCMGR_SRCREV = "810d8a31c797d07abe808cb3fa89465fa934d4dd"
+-
+-PV = "3.0.5.0"
+-INC_PR = "r1"
+-
+-BRANCH = "${MULTIPROCMGR_GIT_BRANCH}"
+-SRC_URI = "${MULTIPROCMGR_GIT_URI};protocol=${MULTIPROCMGR_GIT_PROTOCOL};branch=${BRANCH}"
+-SRCREV = "${MULTIPROCMGR_SRCREV}"
+-
+-S = "${WORKDIR}/git"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service b/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service
+deleted file mode 100644
+index 40eb465..0000000
+--- a/recipes-ti/multiprocmgr/multiprocmgr/mpmsrv-daemon.service
++++ /dev/null
+@@ -1,14 +0,0 @@
+-[Unit]
+-Description=TI Multiproc Manager
+-
+-[Service]
+-ExecStartPre=/sbin/modprobe keystone_remoteproc
+-ExecStartPre=/sbin/modprobe keystone_dsp_mem
+-ExecStartPre=/sbin/modprobe uio_module_drv
+-
+-Type=forking
+-PIDFile=/var/run/mpm/pid
+-ExecStart=/usr/bin/mpmsrv
+-
+-[Install]
+-WantedBy=basic.target
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
+deleted file mode 100644
+index 1bd2488..0000000
+--- a/recipes-ti/multiprocmgr/multiprocmgr_git.bb
++++ /dev/null
+@@ -1,44 +0,0 @@
+-SUMMARY = "TI Multiproc Manager for KeyStone II"
+-DESCRIPTION = "Provides download, debug and other utilities for other cores in the SOC like DSP"
+-
+-include multiprocmgr.inc
+-
+-SRC_URI += " \
+-	file://mpmsrv-daemon.service \
+-"
+-
+-PR = "${INC_PR}.2"
+-
+-DEPENDS = "mpm-transport libdaemon virtual/kernel cmem"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-INITSCRIPT_NAME = "mpmsrv-daemon.sh"
+-INITSCRIPT_PARAMS = "defaults 10"
+-
+-SYSTEMD_SERVICE:${PN} = "mpmsrv-daemon.service"
+-
+-inherit update-rc.d systemd
+-
+-do_install() {
+-	install -d ${D}${bindir}/
+-	install -c -m 755 ${S}/bin/mpmsrv ${D}${bindir}/mpmsrv
+-	install -c -m 755 ${S}/bin/mpmcl ${D}${bindir}/mpmcl
+-
+-	install -d ${D}${systemd_system_unitdir}
+-	install -m 0644 ${WORKDIR}/mpmsrv-daemon.service ${D}${systemd_system_unitdir}
+-	install -d ${D}${sysconfdir}/init.d/
+-	install -c -m 755 ${S}/scripts/mpmsrv-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+-
+-	install -d ${D}${sysconfdir}/mpm/
+-	install -c -m 755 ${S}/scripts/crash_callback.sh ${D}${sysconfdir}/mpm/crash_callback.sh
+-
+-	install -d ${D}${includedir}/
+-	install -c -m 755 ${S}/include/* ${D}${includedir}/
+-
+-	install -d ${D}${libdir}/
+-	cp -a ${S}/lib/* ${D}${libdir}/
+-	chown -R root:root ${D}${libdir}/
+-}
+-
+-INSANE_SKIP:${PN} = "ldflags"
+diff --git a/recipes-ti/ndk/ti-ndk.inc b/recipes-ti/ndk/ti-ndk.inc
+deleted file mode 100644
+index 89c1adf..0000000
+--- a/recipes-ti/ndk/ti-ndk.inc
++++ /dev/null
+@@ -1,20 +0,0 @@
+-SUMMARY = "TI RTOS_Networking"
+-HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ndk/index.html"
+-SECTION = "devel"
+-LICENSE = "BSD"
+-
+-require recipes-ti/includes/ti-paths.inc
+-
+-S = "${WORKDIR}/ndk_${PV}"
+-SRC_URI = "http://software-dl.ti.com/targetcontent/ndk/${PV}/exports/ndk_${PV}.zip;name=ndkzip"
+-
+-do_install() {
+-    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+-    install -d ${D}${NDK_INSTALL_DIR_RECIPE}
+-    cp ${CP_ARGS} ${S}/* ${D}${NDK_INSTALL_DIR_RECIPE}
+-}
+-
+-ALLOW_EMPTY:${PN} = "1"
+-FILES:${PN}-dev += "${NDK_INSTALL_DIR_RECIPE}"
+-
+-INSANE_SKIP:${PN}-dev = "arch ldflags staticdev file-rdeps"
+diff --git a/recipes-ti/ndk/ti-ndk_3.61.01.01.bb b/recipes-ti/ndk/ti-ndk_3.61.01.01.bb
+deleted file mode 100644
+index 41e8bc1..0000000
+--- a/recipes-ti/ndk/ti-ndk_3.61.01.01.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-require ti-ndk.inc
+-
+-PE = "1"
+-PV = "3_61_01_01"
+-PR = "r0"
+-
+-LIC_FILES_CHKSUM = "file://manifest_ndk_${PV}.html;md5=871c716abcf52bac5a7c23154eaba3b6"
+-
+-SRC_URI[ndkzip.md5sum] = "87f0494c9faee344fe93ae68e71ca189"
+-SRC_URI[ndkzip.sha256sum] = "3bfca50367432603ebc1d53d9185302bb4fa4558ac766696f086dc7a5a2ccd29"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+-
+-COMPATIBLE_HOST ?= "null"
+-COMPATIBLE_HOST:ti-soc = "(.*)"
+diff --git a/recipes-ti/ns/ti-ns.inc b/recipes-ti/ns/ti-ns.inc
+deleted file mode 100644
+index a6b37c6..0000000
+--- a/recipes-ti/ns/ti-ns.inc
++++ /dev/null
+@@ -1,21 +0,0 @@
+-SUMMARY = "TI Network Services"
+-HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ns/index.html"
+-SECTION = "devel"
+-LICENSE = "BSD"
+-
+-require recipes-ti/includes/ti-paths.inc
+-
+-S = "${WORKDIR}/ns_${PV}"
+-
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ns/${PV}/exports/ns_${PV}.zip;name=nszip"
+-
+-do_install() {
+-    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+-    install -d ${D}${NS_INSTALL_DIR_RECIPE}
+-    cp ${CP_ARGS} ${S}/* ${D}${NS_INSTALL_DIR_RECIPE}
+-}
+-
+-ALLOW_EMPTY:${PN} = "1"
+-FILES:${PN}-dev += "${NS_INSTALL_DIR_RECIPE}"
+-
+-INSANE_SKIP:${PN}-dev = "arch ldflags staticdev file-rdeps"
+diff --git a/recipes-ti/ns/ti-ns_2.60.01.06.bb b/recipes-ti/ns/ti-ns_2.60.01.06.bb
+deleted file mode 100644
+index 36a9003..0000000
+--- a/recipes-ti/ns/ti-ns_2.60.01.06.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-require ti-ns.inc
+-
+-PE = "1"
+-PV = "2_60_01_06"
+-PR = "r0"
+-SRC_URI = "http://software-dl.ti.com/targetcontent/ns/${PV}/exports/ns_${PV}.zip;name=nszip"
+-
+-LIC_FILES_CHKSUM = "file://manifest_ns_${PV}.html;md5=e15dc261b0ef14c6fbabba24abcde4f0"
+-
+-SRC_URI[nszip.md5sum] = "b78d86423e9c4d148be5fba5903cc2c7"
+-SRC_URI[nszip.sha256sum] = "f66b2fda6ab02585020e67d84897305209f3e141847581a214ccf123c3f15f00"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-INHIBIT_SYSROOT_STRIP = "1"
+diff --git a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb b/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
+deleted file mode 100644
+index 6b491dc..0000000
+--- a/recipes-ti/ti-pdk-build/ti-pdk-build-rtos_git.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-DESCRIPTION = "Package containing PDK makefile infrastructure"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;beginline=1;endline=31;md5=92ab6f5e10f1502081c6080207e57ec1"
+-
+-require recipes-ti/includes/ti-paths.inc
+-
+-PR = "r0"
+-
+-inherit ti-pdk-fetch
+-
+-TI_PDK_COMP = "ti.build"
+-
+-PE = "1"
+-
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|keystone|omapl1|c66x|k3"
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-PARALLEL_MAKE = ""
+-CLEANBROKEN = "1"
+-
+-do_compile() {
+-    :
+-}
+-
+-EXTRA_OEMAKE = "-f make_install LIMIT_SOCS="${TI_PDK_LIMIT_SOCS}" PDK_INSTALL_DIR="${D}${PDK_INSTALL_DIR_RECIPE}""
+-
+-do_install() {
+-    oe_runmake
+-}
+-
+-FILES:${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages/*"
+-INSANE_SKIP:${PN} += " file-rdeps"
+diff --git a/recipes-ti/udma/udma_git.bb b/recipes-ti/udma/udma_git.bb
+deleted file mode 100644
+index b6100a3..0000000
+--- a/recipes-ti/udma/udma_git.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-DESCRIPTION = "Provides zero copy access from user-space to packet dma channels via udma kernel driver"
+-LICENSE = "BSD-3-Clause"
+-
+-COMPATIBLE_MACHINE = "keystone"
+-LIC_FILES_CHKSUM = "file://include/udma.h;startline=1;endline=39;md5=ba3c7f91f970afe073b759ced61d0f27"
+-
+-BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-linux/udma.git;protocol=git;branch=${BRANCH}"
+-S = "${WORKDIR}/git"
+-# Commit corresponds to UDMA.01.00.00.00
+-SRCREV = "53d09fb0bc98c41c5eb43623097e363c497d6fd8"
+-
+-PV = "01.00.00.00"
+-
+-PACKAGES =+ "${PN}-test"
+-
+-FILES:${PN}-test = "${bindir}/udma_test"
+-
+-do_install() {
+-	install -d ${D}${bindir}/
+-	install -d ${D}${libdir}/
+-	install -d ${D}${includedir}/
+-	install -c -m 755 ${S}/udma_test ${D}${bindir}/
+-	install -c -m 755 ${S}/libudma.a ${D}${libdir}/
+-	install -c -m 755 ${S}/libudma.so ${D}${libdir}/libudma.so.1.0.0
+-	cd ${D}${libdir}/
+-	ln -sf libudma.so.1.0.0 libudma.so.1
+-	ln -sf libudma.so.1.0.0 libudma.so
+-	install -c -m 755 ${S}/include/* ${D}${includedir}/
+-}
+-
+-INSANE_SKIP:${PN} += "textrel"
 -- 
 2.7.4
 
