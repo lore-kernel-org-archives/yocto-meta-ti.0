@@ -1,137 +1,86 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.21296.1643238559645047608
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+ by mx.groups.io with SMTP id smtpd.web11.13507.1643502876562797380
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 26 Jan 2022 15:09:19 -0800
+ Sat, 29 Jan 2022 16:34:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 169B240CB6;
-	Wed, 26 Jan 2022 23:09:19 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PuTFE5tEwRkk; Wed, 26 Jan 2022 23:09:19 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 01CC940CB5;
-	Wed, 26 Jan 2022 23:09:17 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id C503F17472F;
-	Wed, 26 Jan 2022 18:09:16 -0500 (EST)
-From: "Denys Dmytriyenko" <denis@denix.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bLDT27Tj;
+ spf=pass (domain: gmail.com, ip: 209.85.222.174, mailfrom: vivien.didelot@gmail.com)
+Received: by mail-qk1-f174.google.com with SMTP id q5so8932712qkc.1
+        for <meta-ti@lists.yoctoproject.org>; Sat, 29 Jan 2022 16:34:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ueI4Ony2WG1fZrY67qUWO1B/PmojOhCjylxU9thw0m0=;
+        b=bLDT27Tjhj68m8RzGvhBJGkLggamLdhVnJU2fvsR5RYjm7bpHcp6nX/RdxxsMr+gll
+         5zeM5VQLIN5zdanjXvIoMQ6JcBpedhdh94BGv2eThMoY1bHBGjJfkY1p4LC4AxvU51cj
+         nyFYJIBNLKnvHn20y5JU2/R+n+i/Dizg1PslotMzZThrWcHRQ0C3RkK1mg/n+9Ckkt+b
+         /4H2gYcdgu1dRXtnBtYQyBw3LoSHQF8m5IqtXP7ATfTJ+3NjNKgnxLg1VQquN76d2864
+         yrzA5Ra5NttGyVd4XcYfsNuP1bZsWNvqN9t+MH36PrjJX6o9HwdTs8b+Ljfpvk0cIhVa
+         pNbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ueI4Ony2WG1fZrY67qUWO1B/PmojOhCjylxU9thw0m0=;
+        b=3ZzI+nssL4TrByVDMWxZABD/r/PIQB/fMkqqeGvXDYqsTzQxBXGi/C+frPLRrfZIW8
+         hV73xlQQeFpKAY+m3l1U97t3s941pSVvmwh9T6ke38jLxPI25uCexhWaaNLkcwhtxr2+
+         ZuxeJlVwvJHC4KHM2D2mRmCvn2CDC8KhO5NOet08mO5QqIzAmk9QMPVv8cI8w1q6Ftde
+         2jtKteryoA/tA98UxIzBTfKJ2/jqtqfRxAxWqH3IX5QyAKd8w1s6mD5VGT6+W7hM6q72
+         hioAFvPexKrslZ/rXP4JdgLmlXNdFQ3IFK6VoI1ELvGOPPulvWBMqOSTDicuE7TZc0up
+         Qw+g==
+X-Gm-Message-State: AOAM530OJaV8qq50Egi2YOoT9d/TrPWE03Vn4tMKX7imKJDcMgXHKCo8
+	HgpEHLZGqQM0asirHD9iGcPGdhIUp6U=
+X-Google-Smtp-Source: ABdhPJwDChOVnD3RJeXOEVWV97F7nMsuMIYZ7kw/DPwmlE+rqLqHW5HqfmOiKLLcAqM4hqn77wsavw==
+X-Received: by 2002:a37:dc07:: with SMTP id v7mr9229163qki.629.1643502875530;
+        Sat, 29 Jan 2022 16:34:35 -0800 (PST)
+Return-Path: <vivien.didelot@gmail.com>
+Received: from localhost (bras-base-mtrlpq2848w-grc-41-70-53-240-211.dsl.bell.ca. [70.53.240.211])
+        by smtp.gmail.com with ESMTPSA id u18sm788306qta.76.2022.01.29.16.34.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 29 Jan 2022 16:34:35 -0800 (PST)
+From: "Vivien Didelot" <vivien.didelot@gmail.com>
+X-Google-Original-From: Vivien Didelot <vdidelot@pbsc.com>
 To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [RFC][master][PATCH 7/7] meta-ti: move beaglebone-specific components to meta-ti-extras
-Date: Wed, 26 Jan 2022 18:09:10 -0500
-Message-Id: <1643238550-20765-8-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1643238550-20765-1-git-send-email-denis@denix.org>
-References: <1643238550-20765-1-git-send-email-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+	Praneeth Bajjuri <praneeth@ti.com>,
+	Vivien Didelot <vdidelot@pbsc.com>
+Subject: [meta-ti][RESEND 1/2] beaglebone: make kernel machine-specific package
+Date: Sat, 29 Jan 2022 14:33:19 -0500
+Message-Id: <20220129193320.2945618-1-vdidelot@pbsc.com>
+X-Mailer: git-send-email 2.35.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+Require kernel image and device tree as machine-specific packages with
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS instead of appending IMAGE_INSTALL.
 
-Move beagleboard.org beaglebone componentns to meta-ti-extras.
+This binds the packages to the packagegroup-core-boot package group,
+allowing one to skip their installation, e.g. for container trees.
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+This patch reflects commit d4cbe0e43393 [1] from meta-yocto-bsp
+("beaglebone-yocto: move kernel and dtb to packagegroup-core-boot").
+
+[1] https://git.yoctoproject.org/meta-yocto/commit/?id=d4cbe0e43393ec70e98caf006372b5311597d377
+
+Signed-off-by: Vivien Didelot <vdidelot@pbsc.com>
 ---
- .../recipes-ti/beagleboard/beaglebone-capes.bb                            | 0
- .../recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh                  | 0
- .../recipes-ti/beagleboard/beaglebone-capes/cape.service                  | 0
- .../recipes-ti/beagleboard/beaglebone-capes/cape.sh                       | 0
- .../recipes-ti/beagleboard/beaglebone-getting-started.bb                  | 0
- {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init.bb     | 0
- .../recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules             | 0
- .../recipes-ti/beagleboard/gadget-init/g-ether-load.sh                    | 0
- .../recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh           | 0
- .../recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh              | 0
- .../recipes-ti/beagleboard/gadget-init/network-gadget-init.service        | 0
- .../recipes-ti/beagleboard/gadget-init/storage-gadget-init.service        | 0
- .../recipes-ti/beagleboard/gadget-init/udhcpd.conf                        | 0
- .../recipes-ti/beagleboard/gadget-init/udhcpd.rules                       | 0
- .../recipes-ti/beagleboard/gadget-init/udhcpd.service                     | 0
- .../recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh  | 0
- 16 files changed, 0 insertions(+), 0 deletions(-)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/beaglebone-capes.bb (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/beaglebone-capes/cape.service (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/beaglebone-capes/cape.sh (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/beaglebone-getting-started.bb (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init.bb (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/g-ether-load.sh (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/network-gadget-init.service (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/udhcpd.conf (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/udhcpd.rules (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/udhcpd.service (100%)
- rename {meta-ti-bsp => meta-ti-extras}/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh (100%)
+ conf/machine/beaglebone.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes.bb b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes.bb
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes.bb
-rename to meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes.bb
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
-rename to meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes/cape.service b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes/cape.service
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes/cape.service
-rename to meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes/cape.service
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-rename to meta-ti-extras/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/beaglebone-getting-started.bb b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/beaglebone-getting-started.bb
-rename to meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init.bb b/meta-ti-extras/recipes-ti/beagleboard/gadget-init.bb
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init.bb
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init.bb
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/g-ether-load.sh b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/g-ether-load.sh
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/g-ether-load.sh
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/g-ether-load.sh
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/network-gadget-init.service b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/udhcpd.conf b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/udhcpd.conf
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/udhcpd.conf
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/udhcpd.conf
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/udhcpd.rules b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/udhcpd.rules
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/udhcpd.rules
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/udhcpd.rules
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/udhcpd.service b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/udhcpd.service
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/udhcpd.service
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/udhcpd.service
-diff --git a/meta-ti-bsp/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh b/meta-ti-extras/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh
-similarity index 100%
-rename from meta-ti-bsp/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh
-rename to meta-ti-extras/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index dcb14cc9..fe3127bb 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -13,7 +13,7 @@ MACHINE_GUI_CLASS = "bigscreen"
+ 
+ SERIAL_CONSOLES = "115200;ttyS0"
+ 
+-IMAGE_INSTALL:append = " kernel-devicetree kernel-image-zimage"
++MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "kernel-devicetree kernel-image-zimage"
+ 
+ # Refine the list of device targets for ti-pdk class recipes
+ TI_PDK_LIMIT_BOARDS = "bbbAM335x"
 -- 
-2.7.4
+2.35.0
 
