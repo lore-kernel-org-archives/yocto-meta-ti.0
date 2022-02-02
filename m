@@ -1,45 +1,45 @@
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web09.2375.1643826805574942829
+ by mx.groups.io with SMTP id smtpd.web10.2344.1643826805724787299
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 02 Feb 2022 10:33:25 -0800
+ Wed, 02 Feb 2022 10:33:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fFMzBotp;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EgUpynyX;
  spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOlk082512;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOhr082516;
 	Wed, 2 Feb 2022 12:33:24 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1643826804;
-	bh=6S3dq+R++QmQv7nEno4AiPPQ1Tmdcy2Ugm2gzwHLU4s=;
+	bh=FBh9+m/akzEml7h6aRTeLZK15xRB5vuaKq+GlJGXYT8=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=fFMzBotplETOTufVWID+8cONdpG/gXYGioZafigLuH6DdVaIVKekqju+C3QidHacQ
-	 2o0d6zuY7HbFqpG5TbS05G4solPPREVu7V8Cl6mxzduzuiRYSMN8tp1SOFAGgKZmPU
-	 sXDo0byE7cFjz47y6yxkxJql1Mg9vLSEy/SmKHuM=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 212IXOcE028229
+	b=EgUpynyXHmsVayhzEbe1+oonQFnXu2aqqaSYqfEtfGpxpVsslq9WPSns6SJEdpGgm
+	 vtY49Oz3M3nZs3V37Zl/RfHorqB3pJQBeC9pfQmezb/xdNDFrevlN1yvtAFYSc/xLb
+	 VATRqmQNi0j/rd73u4LbErXFNSqMnSEGNRU52CAU=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 212IXO93105053
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Wed, 2 Feb 2022 12:33:24 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 2
- Feb 2022 12:33:24 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2022 12:33:23 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 2 Feb 2022 12:33:24 -0600
+ Frontend Transport; Wed, 2 Feb 2022 12:33:23 -0600
 Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOFk122663;
-	Wed, 2 Feb 2022 12:33:24 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 212IXN7p122652;
+	Wed, 2 Feb 2022 12:33:23 -0600
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1nFKRY-0007fL-6T; Wed, 02 Feb 2022 12:33:24 -0600
+	id 1nFKRX-0007em-JB; Wed, 02 Feb 2022 12:33:23 -0600
 From: "Ryan Eatmon" <reatmon@ti.com>
 To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH v2 10/12] cnm-wave-fw: Fix name of firmware for j721s2
-Date: Wed, 2 Feb 2022 12:33:20 -0600
-Message-ID: <20220202183322.29360-11-reatmon@ti.com>
+Subject: [meta-ti][dunfell][PATCH v2 05/12] ti-rtos-bin: Add j721s2
+Date: Wed, 2 Feb 2022 12:33:15 -0600
+Message-ID: <20220202183322.29360-6-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220202183322.29360-1-reatmon@ti.com>
 References: <20220202183322.29360-1-reatmon@ti.com>
@@ -47,51 +47,94 @@ MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-Update the name of the firmware for j721s2 as the file
-was renamed.  Also, fix a typo in the variable name.
+From: Nishanth Menon <nm@ti.com>
 
+Lets keep ethernet switch firmware disabled till we can actually
+integrate it.
+
+Signed-off-by: Nishanth Menon <nm@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 38 ++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
-diff --git a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-index 6a36d733..3dd0f4f4 100644
---- a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-+++ b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-@@ -9,7 +9,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENCE.cnm;md5=93b67e6bac7f8fec22b96b8ad0a1a9d0"
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index e72c6fcb..6315bef6 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -16,6 +16,7 @@ PLAT_SFX = ""
+ PLAT_SFX_j7 = "j721e"
+ PLAT_SFX_j7200-evm = "j7200"
+ PLAT_SFX_j7200-hs-evm = "j7200"
++PLAT_SFX_j721s2-evm = "j721s2"
+ PLAT_SFX_am65xx = "am65xx"
+ PLAT_SFX_am64xx = "am64xx"
  
- PV = "${CNM_WAVE521_FW_VERSION}"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- CLEANBROKEN = "1"
- 
-@@ -18,10 +18,11 @@ COMPATIBLE_MACHINE = "j7"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- S = "${WORKDIR}/git"
--TARGET_WAVE215C = "wave521c_codec_fw.bin"
-+TARGET_WAVE521C = "wave521c_codec_fw.bin"
-+TARGET_WAVE521C_j721s2-evm = "wave521c_j721s2_codec_fw.bin"
- 
--ALTERNATIVE_LINK_NAME[wave521c_codec_fw.bin] = "${base_libdir}/firmware/${TARGET_WAVE215C}"
--ALTERNATIVE_TARGET[wave521c_codec_fw.bin] = "${base_libdir}/firmware/cnm/${TARGET_WAVE215C}"
-+ALTERNATIVE_LINK_NAME[wave521c_codec_fw.bin] = "${base_libdir}/firmware/${TARGET_WAVE521C}"
-+ALTERNATIVE_TARGET[wave521c_codec_fw.bin] = "${base_libdir}/firmware/cnm/${TARGET_WAVE521C}"
- ALTERNATIVE_PRIORITY = "10"
- 
- # Set up names for the firmwares
-@@ -30,7 +31,7 @@ ALTERNATIVE_${PN}_j7 = "\
- 
- do_install() {
- 	install -d ${D}${base_libdir}/firmware/cnm
--	install -m 0644 ${S}/cnm/${TARGET_WAVE215C} ${D}${base_libdir}/firmware/cnm/${TARGET_WAVE215C}
-+	install -m 0644 ${S}/cnm/${TARGET_WAVE521C} ${D}${base_libdir}/firmware/cnm/${TARGET_WAVE521C}
+@@ -122,6 +123,22 @@ do_install_j7200-hs-evm() {
+     install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
  }
  
- # make sure that lib/firmware, and all its contents are part of the package
++do_install_j721s2-evm() {
++    install -d ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_1_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_2_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
++    # DM Firmware
++    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
++    # ETH firmware
++    # install -d ${LEGACY_ETH_FW_DIR}
++    # install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
++}
++
+ do_install_am65xx() {
+     install -d ${LEGACY_IPC_FW_DIR}
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+@@ -177,6 +194,17 @@ ALTERNATIVE_${PN}_j7200-hs-evm = "\
+                     j7200-main-r5f0_1-fw \
+                     "
+ 
++ALTERNATIVE_${PN}_j721s2-evm = "\
++                    j7-mcu-r5f0_0-fw \
++                    j7-mcu-r5f0_1-fw \
++                    j7-main-r5f0_0-fw \
++                    j7-main-r5f0_1-fw \
++                    j7-main-r5f1_0-fw \
++                    j7-main-r5f1_1-fw \
++                    j7-c71_0-fw\
++                    j7-c71_1-fw\
++                    "
++
+ # Set up link names for the firmwares
+ 
+ TARGET_MCU_R5FSS0_0_am65xx = "am65x-mcu-r5f0_0-fw"
+@@ -197,6 +225,7 @@ TARGET_MAIN_R5FSS1_1_j7 = "j7-main-r5f1_1-fw"
+ TARGET_C66_0_j7 = "j7-c66_0-fw"
+ TARGET_C66_1_j7 = "j7-c66_1-fw"
+ TARGET_C7X_0_j7 = "j7-c71_0-fw"
++TARGET_C7X_1_j7 = "j7-c71_1-fw"
+ 
+ TARGET_MCU_R5FSS0_0_j7200-evm = "j7200-mcu-r5f0_0-fw"
+ TARGET_MCU_R5FSS0_1_j7200-evm = "j7200-mcu-r5f0_1-fw"
+@@ -232,6 +261,15 @@ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_M
+ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
+ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
+ 
++ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[j721s2-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j721s2-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[j721s2-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
++ALTERNATIVE_LINK_NAME[j721s2-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
++ALTERNATIVE_LINK_NAME[j721s2-c71_0-fw] = "${base_libdir}/firmware/${TARGET_C7X_0}"
++ALTERNATIVE_LINK_NAME[j721s2-c71_1-fw] = "${base_libdir}/firmware/${TARGET_C7X_1}"
++
+ # Create the firmware alternatives
+ 
+ ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
 -- 
 2.17.1
 
