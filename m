@@ -1,45 +1,45 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.2392.1643826805690501762
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web08.2334.1643826806025964273
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 02 Feb 2022 10:33:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=MdZyFRre;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOM2048188;
-	Wed, 2 Feb 2022 12:33:24 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=TppSYyyp;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 212IXNDx104899;
+	Wed, 2 Feb 2022 12:33:23 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1643826804;
-	bh=nakM26xo+BSPyvBquG33rGlxnTSjiubOaoB5oATvqhs=;
+	s=ti-com-17Q1; t=1643826803;
+	bh=OqA8Ers/OjAaW9b5lt0jntvIzaLuwl7eqvqUCO9Halw=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=MdZyFRrezhWwnN0koONX3dq7Y2y53DLk1qGJOv+rP05W4t6W0Dj+MpXQSoVA5jfMo
-	 3BgSt2DjkTxi3VcM2NdJhTz5v//R+sOjZBdCk1s2EU3Z6LXynkIfeAEToNOq06NBbR
-	 uBVg1FEjYAm7Kz4Qi/gsqzpnOizYV7A26aFBSSkQ=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 212IXObt028232
+	b=TppSYyypGv0GF5z27O1sIKigLq/2SiTu4WYBrbBkbtraNnjwTnlfoMr/+oUOqO1ND
+	 De60yO4hDEeQjoCg/AwqlC1X0jloivmtUYeEw+2KWmmszIqiu2QuRbKdhmVg1V0YrK
+	 u7o8WhcEhh8aUkdlCi/K/coT/j2pUogd7jJ1LQLY=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 212IXNhc066864
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 2 Feb 2022 12:33:24 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 2 Feb 2022 12:33:23 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 2
- Feb 2022 12:33:24 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2022 12:33:23 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 2 Feb 2022 12:33:24 -0600
+ Frontend Transport; Wed, 2 Feb 2022 12:33:23 -0600
 Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOl7129592;
-	Wed, 2 Feb 2022 12:33:24 -0600
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 212IXNcZ091521;
+	Wed, 2 Feb 2022 12:33:23 -0600
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1nFKRY-0007fS-AY; Wed, 02 Feb 2022 12:33:24 -0600
+	id 1nFKRX-0007eY-BK; Wed, 02 Feb 2022 12:33:23 -0600
 From: "Ryan Eatmon" <reatmon@ti.com>
 To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH v2 11/12] ti-linux-fw: Bump up TIFS and DM to v2022.01
-Date: Wed, 2 Feb 2022 12:33:21 -0600
-Message-ID: <20220202183322.29360-12-reatmon@ti.com>
+Subject: [meta-ti][dunfell][PATCH v2 03/12] trusted-firmware-a: Add support for alternate console
+Date: Wed, 2 Feb 2022 12:33:13 -0600
+Message-ID: <20220202183322.29360-4-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220202183322.29360-1-reatmon@ti.com>
 References: <20220202183322.29360-1-reatmon@ti.com>
@@ -47,49 +47,32 @@ MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-From: Praneeth Bajjuri <praneeth@ti.com>
+From: Nishanth Menon <nm@ti.com>
 
-Update ti-linux-firmware and k3-image-gen to
-pick latest TIFS and DM v2022.01
+Actual systems may choose to use a different console from the default
+Allow the machine configurations to describe the same. Since the
+option provided is custom to TI K3, make this a k3 product override
+capability.
 
-This version also adds support to j721s2
-
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 9bd2d0a8..fea0c783 100644
---- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -3,8 +3,8 @@ SUMMARY = "TI SCI firmware (SYSFW)"
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+index 2a8f41ee..b84da1f3 100644
+--- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
++++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+@@ -8,6 +8,8 @@ TFA_BUILD_TARGET_k3 = "all"
+ TFA_INSTALL_TARGET_k3 = "bl31"
+ TFA_SPD_k3 = "opteed"
  
--PV = "2021.09a"
--INC_PR = "r1"
-+PV = "2022.01"
-+INC_PR = "r2"
- 
- # Firmware versions
- CORESDK_RTOS_VERSION = "08.01.00.02"
-@@ -19,12 +19,12 @@ CADENCE_MHDP_FW_VERSION = "1.2.17"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.00"
- 
--TI_LINUX_FW_SRCREV ?= "c96a734a059889e571dcf30c0638157c690a6e6e"
-+TI_LINUX_FW_SRCREV ?= "6070de0ae4095d291e1f7679d1fe6e07253a2fc3"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
- 
--K3_IMAGE_GEN_SRCREV ?= "489c767a153ff26e9230746e04dd4b1ad0809901"
-+K3_IMAGE_GEN_SRCREV ?= "9abbe130d47a7fa6f8e02b740ad3ad27bc81d327"
- SRCREV_imggen = "${K3_IMAGE_GEN_SRCREV}"
- SRCREV_FORMAT = "imggen"
- 
++EXTRA_OEMAKE_append_k3 = "${@ 'K3_USART=' + d.getVar('TFA_K3_USART') if d.getVar('TFA_K3_USART') else ''}"
++
+ do_compile_append_am65xx-hs-evm() {
+ 	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+ 	( cd ${B}/${BUILD_DIR}/release/; \
 -- 
 2.17.1
 
