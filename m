@@ -1,67 +1,182 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.61113.1643783685909391804
+Received: from esa1.mentor.iphmx.com (esa1.mentor.iphmx.com [68.232.129.153])
+ by mx.groups.io with SMTP id smtpd.web11.64793.1643811422697876899
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 01 Feb 2022 22:34:46 -0800
+ Wed, 02 Feb 2022 06:17:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Zt0RxAX5;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: praneeth@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2126YgmK033245;
-	Wed, 2 Feb 2022 00:34:42 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1643783682;
-	bh=kBJkUQn0FJghG3zrxmH8+a9D1TGTjFouawfRWsUT5O0=;
-	h=From:To:CC:Subject:Date;
-	b=Zt0RxAX5F9KWWLrinZ1FHeRBud5ttxLFRd0DBtQTBRAxZO4nhlDuSk74B0q1z0imH
-	 ZTWmySrEuQKEitTgfgJW5jbqLitDUgqL1ji+8BjjfS6Vdtp2dUzDgc7xK5y4vxUd9t
-	 aCbots+up9w3yFTZfo7lJZ+1TpQeIeevOajHY9Fg=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2126YgcD007305
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 2 Feb 2022 00:34:42 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 2
- Feb 2022 00:34:38 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 2 Feb 2022 00:34:38 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2126YbnN019005;
-	Wed, 2 Feb 2022 00:34:37 -0600
-From: "praneeth" <praneeth@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>,
-        Vignesh Raghavendra <vigneshr@ti.com>
-CC: Denys Dmytriyenko <denis@denix.org>, Yogesh Siraswar <yogeshs@ti.com>,
-        Ryan Eatmon <reatmon@ti.com>
-Subject: [dunfell/master PATCH 0/2] Fixes and Upgrades on TIFS/DM
-Date: Wed, 2 Feb 2022 00:34:35 -0600
-Message-ID: <20220202063437.8036-1-praneeth@ti.com>
+ dkim=missing; spf=pass (domain: mentor.com, ip: 68.232.129.153, mailfrom: awais_belal@mentor.com)
+IronPort-SDR: 4ZAkqOULd4iKV9fnjiX0rkq9i5+VVNo+0cVze6841tAMXLb9W2GpwEEdAFDSMOuSTzDLsWsz+2
+ cR6Hyiu2CxWL6yFBjvsg92AVNtJ/5ZmQmgoSUL5SDQerzlwpCpL9IgKnKDyVeBocmjE74iSZTZ
+ y3Ta/Idl7ls5IgFuRYRPjTSlxlWaQzX4oiMpylPi0aJkPw4QXqvovBwOF0G0QhZoITZupbjfOZ
+ oLyN+Yd4NhHsBhhbhXCvzxn0PKNHM0DfM3kg55lvYxilx1zyBu/JiDIs/OQrile3ByeNiy375W
+ /xJ/ZFcK9Y+cYY5O+BGVRI7S
+X-IronPort-AV: E=Sophos;i="5.88,337,1635235200"; 
+   d="scan'208";a="74054341"
+Received: from orw-gwy-02-in.mentorg.com ([192.94.38.167])
+  by esa1.mentor.iphmx.com with ESMTP; 02 Feb 2022 06:17:02 -0800
+IronPort-SDR: 3/PX8kdjYwTB4x8hviGMoNr7+Yb+HCVZoQ0UGfDqcL3HQrkiYJIGKRpdrrciulaH4tH1zUIrLw
+ FAzkXv+p5QGD3m+5DhJ2U6pNOYwhv4DciWlh0RIQUa6gts5yYIex+vlm+HSLaWDWdKFWW5g6RD
+ tkXsTRoHB/UoPIKs22xvhdhe3NTaeDVD8zwlF08Heo8I1ZPSseeYfl///uzUTmi7EVda49Hl75
+ DiZmxNwTiSCxF1w77bXGI2glSyVcB+GXkEz5pK5SOlHRJZUbDvPFxpdCBtenX0b48RxdxB/7Vo
+ dU0=
+From: "Awais Belal" <Awais_Belal@mentor.com>
+To: <meta-ti@lists.yoctoproject.org>
+Subject: [PATCH] ti-rtos-firmware: use nonarch_base_libdir for deployment
+Date: Wed, 2 Feb 2022 19:16:41 +0500
+Message-ID: <20220202141641.32664-1-awais_belal@mentor.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Return-Path: awais_belal@mentor.com
+X-Originating-IP: [137.202.0.90]
+X-ClientProxiedBy: svr-ies-mbx-12.mgc.mentorg.com (139.181.222.12) To
+ SVR-IES-MBX-03.mgc.mentorg.com (139.181.222.3)
 Content-Type: text/plain
 
-From: Praneeth Bajjuri <praneeth@ti.com>
+base_libdir is not configuration safe while firmware binaries
+should always be deployed to /lib. In configurations where
+base_libdir is not /lib the firmware gets deployed to wrong
+paths.
+This is fixed by using the nonarch_base_libdir which is
+configuration agnostic.
 
-This series is to
-* upgrade K3-image-gen and ti-linux-firmware to pick latest sysfw
-  release v2022.01 which introduces j721s2 platform.
-* Revert temp fix carried in meta-ti for HS combined boot flow since
-  the patch is now part of k3-image-gen repo.
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
+---
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 102 ++++++++++-----------
+ 1 file changed, 51 insertions(+), 51 deletions(-)
 
-Praneeth Bajjuri (2):
-  ti-linux-fw: Bump up TIFS and DM to v2022.01
-  Revert "ti-sci-fw: Fix for k3-image-gen issue for combined boot
-    images"
-
- recipes-bsp/ti-linux-fw/ti-linux-fw.inc       |  8 +--
- ...gning-of-binaries-for-combined-boot-.patch | 64 -------------------
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb        |  5 --
- 3 files changed, 4 insertions(+), 73 deletions(-)
- delete mode 100644 recipes-bsp/ti-sci-fw/files/0001-Makefile-Skip-signing-of-binaries-for-combined-boot-.patch
-
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index c0beb550..7d286b20 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -31,7 +31,7 @@ PR = "${INC_PR}.0"
+ # Secure Build 
+ DEPENDS += "openssl-native"
+ 
+-FILES:${PN} += "${base_libdir}"
++FILES:${PN} += "${nonarch_base_libdir}"
+ 
+ TI_SECURE_DEV_PKG ?= ""
+ 
+@@ -41,9 +41,9 @@ RTOS_IPC_FW_DIR = "${S}/ti-ipc/${PLAT_SFX}"
+ 
+ # For back-ward compatability keeping legacy firmware folder name
+ # TODO: fix this in next version
+-LEGACY_ETH_FW_DIR = "${D}${base_libdir}/firmware/ethfw/"
+-LEGACY_IPC_FW_DIR = "${D}${base_libdir}/firmware/pdk-ipc/"
+-LEGACY_DM_FW_DIR  = "${D}${base_libdir}/firmware/pdk-ipc/"
++LEGACY_ETH_FW_DIR = "${D}${nonarch_base_libdir}/firmware/ethfw/"
++LEGACY_IPC_FW_DIR = "${D}${nonarch_base_libdir}/firmware/pdk-ipc/"
++LEGACY_DM_FW_DIR  = "${D}${nonarch_base_libdir}/firmware/pdk-ipc/"
+ 
+ DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
+ 
+@@ -208,60 +208,60 @@ TARGET_MCU_R5FSS0_1:j7200-hs-evm = "j7200-mcu-r5f0_1-fw"
+ TARGET_MAIN_R5FSS0_0:j7200-hs-evm = "j7200-main-r5f0_0-fw"
+ TARGET_MAIN_R5FSS0_1:j7200-hs-evm = "j7200-main-r5f0_1-fw"
+ 
+-ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
+-ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+-
+-ALTERNATIVE_LINK_NAME[am64-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
+-ALTERNATIVE_LINK_NAME[am64-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
+-ALTERNATIVE_LINK_NAME[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
+-ALTERNATIVE_LINK_NAME[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
+-ALTERNATIVE_LINK_NAME[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_M4FSS0_0}"
+-
+-ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
+-ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+-ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
+-ALTERNATIVE_LINK_NAME[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
+-ALTERNATIVE_LINK_NAME[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
+-ALTERNATIVE_LINK_NAME[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
+-ALTERNATIVE_LINK_NAME[j7-c66_0-fw] = "${base_libdir}/firmware/${TARGET_C66_0}"
+-ALTERNATIVE_LINK_NAME[j7-c66_1-fw] = "${base_libdir}/firmware/${TARGET_C66_1}"
+-ALTERNATIVE_LINK_NAME[j7-c71_0-fw] = "${base_libdir}/firmware/${TARGET_C7X}"
+-
+-ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
+-ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+-ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
+-ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
++
++ALTERNATIVE_LINK_NAME[am64-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[am64-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[am64-main-r5f1_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
++ALTERNATIVE_LINK_NAME[am64-main-r5f1_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
++ALTERNATIVE_LINK_NAME[am64-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MCU_M4FSS0_0}"
++
++ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j7-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[j7-main-r5f1_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
++ALTERNATIVE_LINK_NAME[j7-main-r5f1_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
++ALTERNATIVE_LINK_NAME[j7-c66_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_C66_0}"
++ALTERNATIVE_LINK_NAME[j7-c66_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_C66_1}"
++ALTERNATIVE_LINK_NAME[j7-c71_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_C7X}"
++
++ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
+ 
+ # Create the firmware alternatives
+ 
+-ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
+-ALTERNATIVE_TARGET[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+-
+-ALTERNATIVE_TARGET[am64-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_0_release_strip.xer5f"
+-ALTERNATIVE_TARGET[am64-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f"
+-ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f"
+-ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f"
+-ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f"
+-
+-ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
+-ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+-ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
+-ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
+-ALTERNATIVE_TARGET[j7-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f"
+-ALTERNATIVE_TARGET[j7-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f"
+-ALTERNATIVE_TARGET[j7-c66_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_1_release_strip.xe66"
+-ALTERNATIVE_TARGET[j7-c66_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_2_release_strip.xe66"
+-ALTERNATIVE_TARGET[j7-c71_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release_strip.xe71"
+-
+-ALTERNATIVE_TARGET[j7200-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
+-ALTERNATIVE_TARGET[j7200-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+-ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] = "${base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
+-ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[am65x-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
++
++ALTERNATIVE_TARGET[am64-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[am64-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f"
++
++ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
++ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j7-main-r5f1_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[j7-main-r5f1_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j7-c66_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_1_release_strip.xe66"
++ALTERNATIVE_TARGET[j7-c66_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_c66xdsp_2_release_strip.xe66"
++ALTERNATIVE_TARGET[j7-c71_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release_strip.xe71"
++
++ALTERNATIVE_TARGET[j7200-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[j7200-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
++ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
+ 
+ ALTERNATIVE_PRIORITY = "10"
+ 
+ # make sure that lib/firmware, and all its contents are part of the package
+-FILES:${PN} += "${base_libdir}/firmware"
++FILES:${PN} += "${nonarch_base_libdir}/firmware"
+ 
+ # This is used to prevent the build system to_strip the executables
+ INHIBIT_PACKAGE_STRIP = "1"
 -- 
 2.17.1
 
