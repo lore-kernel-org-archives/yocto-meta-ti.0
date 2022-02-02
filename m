@@ -1,45 +1,45 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.2344.1643826805724787299
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web12.2392.1643826805690501762
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 02 Feb 2022 10:33:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EgUpynyX;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOhr082516;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=MdZyFRre;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOM2048188;
 	Wed, 2 Feb 2022 12:33:24 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1643826804;
-	bh=FBh9+m/akzEml7h6aRTeLZK15xRB5vuaKq+GlJGXYT8=;
+	bh=nakM26xo+BSPyvBquG33rGlxnTSjiubOaoB5oATvqhs=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=EgUpynyXHmsVayhzEbe1+oonQFnXu2aqqaSYqfEtfGpxpVsslq9WPSns6SJEdpGgm
-	 vtY49Oz3M3nZs3V37Zl/RfHorqB3pJQBeC9pfQmezb/xdNDFrevlN1yvtAFYSc/xLb
-	 VATRqmQNi0j/rd73u4LbErXFNSqMnSEGNRU52CAU=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 212IXO93105053
+	b=MdZyFRrezhWwnN0koONX3dq7Y2y53DLk1qGJOv+rP05W4t6W0Dj+MpXQSoVA5jfMo
+	 3BgSt2DjkTxi3VcM2NdJhTz5v//R+sOjZBdCk1s2EU3Z6LXynkIfeAEToNOq06NBbR
+	 uBVg1FEjYAm7Kz4Qi/gsqzpnOizYV7A26aFBSSkQ=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 212IXObt028232
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Wed, 2 Feb 2022 12:33:24 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 2
- Feb 2022 12:33:23 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2022 12:33:24 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 2 Feb 2022 12:33:23 -0600
+ Frontend Transport; Wed, 2 Feb 2022 12:33:24 -0600
 Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 212IXN7p122652;
-	Wed, 2 Feb 2022 12:33:23 -0600
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 212IXOl7129592;
+	Wed, 2 Feb 2022 12:33:24 -0600
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1nFKRX-0007em-JB; Wed, 02 Feb 2022 12:33:23 -0600
+	id 1nFKRY-0007fS-AY; Wed, 02 Feb 2022 12:33:24 -0600
 From: "Ryan Eatmon" <reatmon@ti.com>
 To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH v2 05/12] ti-rtos-bin: Add j721s2
-Date: Wed, 2 Feb 2022 12:33:15 -0600
-Message-ID: <20220202183322.29360-6-reatmon@ti.com>
+Subject: [meta-ti][dunfell][PATCH v2 11/12] ti-linux-fw: Bump up TIFS and DM to v2022.01
+Date: Wed, 2 Feb 2022 12:33:21 -0600
+Message-ID: <20220202183322.29360-12-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220202183322.29360-1-reatmon@ti.com>
 References: <20220202183322.29360-1-reatmon@ti.com>
@@ -47,94 +47,49 @@ MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-From: Nishanth Menon <nm@ti.com>
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Lets keep ethernet switch firmware disabled till we can actually
-integrate it.
+Update ti-linux-firmware and k3-image-gen to
+pick latest TIFS and DM v2022.01
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
+This version also adds support to j721s2
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 38 ++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index e72c6fcb..6315bef6 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -16,6 +16,7 @@ PLAT_SFX = ""
- PLAT_SFX_j7 = "j721e"
- PLAT_SFX_j7200-evm = "j7200"
- PLAT_SFX_j7200-hs-evm = "j7200"
-+PLAT_SFX_j721s2-evm = "j721s2"
- PLAT_SFX_am65xx = "am65xx"
- PLAT_SFX_am64xx = "am64xx"
+diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 9bd2d0a8..fea0c783 100644
+--- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -3,8 +3,8 @@ SUMMARY = "TI SCI firmware (SYSFW)"
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
  
-@@ -122,6 +123,22 @@ do_install_j7200-hs-evm() {
-     install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
- }
+-PV = "2021.09a"
+-INC_PR = "r1"
++PV = "2022.01"
++INC_PR = "r2"
  
-+do_install_j721s2-evm() {
-+    install -d ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_1_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_2_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
-+    # DM Firmware
-+    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
-+    # ETH firmware
-+    # install -d ${LEGACY_ETH_FW_DIR}
-+    # install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
-+}
-+
- do_install_am65xx() {
-     install -d ${LEGACY_IPC_FW_DIR}
-     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-@@ -177,6 +194,17 @@ ALTERNATIVE_${PN}_j7200-hs-evm = "\
-                     j7200-main-r5f0_1-fw \
-                     "
+ # Firmware versions
+ CORESDK_RTOS_VERSION = "08.01.00.02"
+@@ -19,12 +19,12 @@ CADENCE_MHDP_FW_VERSION = "1.2.17"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.00"
  
-+ALTERNATIVE_${PN}_j721s2-evm = "\
-+                    j7-mcu-r5f0_0-fw \
-+                    j7-mcu-r5f0_1-fw \
-+                    j7-main-r5f0_0-fw \
-+                    j7-main-r5f0_1-fw \
-+                    j7-main-r5f1_0-fw \
-+                    j7-main-r5f1_1-fw \
-+                    j7-c71_0-fw\
-+                    j7-c71_1-fw\
-+                    "
-+
- # Set up link names for the firmwares
+-TI_LINUX_FW_SRCREV ?= "c96a734a059889e571dcf30c0638157c690a6e6e"
++TI_LINUX_FW_SRCREV ?= "6070de0ae4095d291e1f7679d1fe6e07253a2fc3"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
  
- TARGET_MCU_R5FSS0_0_am65xx = "am65x-mcu-r5f0_0-fw"
-@@ -197,6 +225,7 @@ TARGET_MAIN_R5FSS1_1_j7 = "j7-main-r5f1_1-fw"
- TARGET_C66_0_j7 = "j7-c66_0-fw"
- TARGET_C66_1_j7 = "j7-c66_1-fw"
- TARGET_C7X_0_j7 = "j7-c71_0-fw"
-+TARGET_C7X_1_j7 = "j7-c71_1-fw"
+ BRANCH ?= "ti-linux-firmware"
  
- TARGET_MCU_R5FSS0_0_j7200-evm = "j7200-mcu-r5f0_0-fw"
- TARGET_MCU_R5FSS0_1_j7200-evm = "j7200-mcu-r5f0_1-fw"
-@@ -232,6 +261,15 @@ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_M
- ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
- ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
+-K3_IMAGE_GEN_SRCREV ?= "489c767a153ff26e9230746e04dd4b1ad0809901"
++K3_IMAGE_GEN_SRCREV ?= "9abbe130d47a7fa6f8e02b740ad3ad27bc81d327"
+ SRCREV_imggen = "${K3_IMAGE_GEN_SRCREV}"
+ SRCREV_FORMAT = "imggen"
  
-+ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
-+ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
-+ALTERNATIVE_LINK_NAME[j721s2-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
-+ALTERNATIVE_LINK_NAME[j721s2-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
-+ALTERNATIVE_LINK_NAME[j721s2-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
-+ALTERNATIVE_LINK_NAME[j721s2-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
-+ALTERNATIVE_LINK_NAME[j721s2-c71_0-fw] = "${base_libdir}/firmware/${TARGET_C7X_0}"
-+ALTERNATIVE_LINK_NAME[j721s2-c71_1-fw] = "${base_libdir}/firmware/${TARGET_C7X_1}"
-+
- # Create the firmware alternatives
- 
- ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
 -- 
 2.17.1
 
