@@ -1,81 +1,72 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.1754.1643912835336747452
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web12.1291.1643926871853597453
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 03 Feb 2022 10:27:15 -0800
+ Thu, 03 Feb 2022 14:21:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 064D140C83;
-	Thu,  3 Feb 2022 18:27:14 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jVtlNjOBHfCq; Thu,  3 Feb 2022 18:27:13 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D01D940951;
-	Thu,  3 Feb 2022 18:27:10 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 109AE174737; Thu,  3 Feb 2022 13:27:10 -0500 (EST)
-Date: Thu, 3 Feb 2022 13:27:09 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: reatmon@ti.com
-Cc: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH] cnm-wave-fw: lock the compatiable machine to j721s2
-Message-ID: <20220203182709.GK26229@denix.org>
-References: <20220203030842.20992-1-reatmon@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=wBBu/XwK;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: hnagalla@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 213MLABe080467
+	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 16:21:10 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1643926870;
+	bh=7yz/857NFAUXoK/yYGIMif9T4b/Kp7As/yhVUwv7ulA=;
+	h=From:To:CC:Subject:Date;
+	b=wBBu/XwKBjA9OzGGY1JslY4InD2+9s54clUgCyV0++dJ7trRdHNfQHpglw5lOiDWL
+	 7DHEhu+GkcJwLdMMxSADqLHLSuJXNnCNS+6zjiueXLYp2MfIChtxHt6gWF7kwGWP1N
+	 XvZVgE2dCCLOvwBarAOJecZROVTjfj5cYPegq4eQ=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 213MLAIM112430
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 16:21:10 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 3
+ Feb 2022 16:21:09 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Thu, 3 Feb 2022 16:21:09 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 213ML9p2033882;
+	Thu, 3 Feb 2022 16:21:09 -0600
+From: "Hari Nagalla" <hnagalla@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <praneeth@ti.com>, <yogeshs@ti.com>, <hnagalla@ti.com>
+Subject: [meta-ti] [dunfell-next/master PATCH] ipc: ti-rpmsg-char: Update library to 0.4.0
+Date: Thu, 3 Feb 2022 16:21:07 -0600
+Message-ID: <20220203222107.2950-1-hnagalla@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20220203030842.20992-1-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-This patch is incorrect - see below.
+Update the ti-rpmsg-char library to 0.4.0 version that enables the
+support for j721s2 SoC family remote processors.
 
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+---
+ recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-On Wed, Feb 02, 2022 at 09:08:42PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
-> The orignal recipe listed the compatible platforms to
-> all of j7, but at this time it is limited to j721s2.
-> 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> ---
->  recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb | 2 +-
->  recipes-kernel/linux/kernel-rdepends.inc   | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-> index 3dd0f4f4..0f09dbb6 100644
-> --- a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-> +++ b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-> @@ -13,7 +13,7 @@ PR = "${INC_PR}.1"
->  
->  CLEANBROKEN = "1"
->  
-> -COMPATIBLE_MACHINE = "j7"
-> +COMPATIBLE_MACHINE = "j721s2"
-
-There were no j721s2 SoC family defined, only j721s2-evm and j721s2-evm-k3r5 
-machines.
-
-
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->  
-> diff --git a/recipes-kernel/linux/kernel-rdepends.inc b/recipes-kernel/linux/kernel-rdepends.inc
-> index 2a6302af..adcf967a 100644
-> --- a/recipes-kernel/linux/kernel-rdepends.inc
-> +++ b/recipes-kernel/linux/kernel-rdepends.inc
-> @@ -44,4 +44,4 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " cadence-mhdp-fw"
->  RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " vxd-dec-fw"
->  
->  # Add run-time dependency for Chips&Media Wave521 firmware to the rootfs
-> -RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " cnm-wave-fw"
-> +RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2 = " cnm-wave-fw"
-
-Same here.
-
+diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
+index eaf0028d..dc98fbb5 100644
+--- a/recipes-ti/ipc/ti-rpmsg-char.inc
++++ b/recipes-ti/ipc/ti-rpmsg-char.inc
+@@ -7,10 +7,10 @@ PROTOCOL = "git"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+ 
+-# Initial 0.3.1 release
+-SRCREV = "0824546f61bda7715519841d9b9f0fb030ddfaf2"
++# Initial 0.4.0 release
++SRCREV = "92b464f1e7477f77e44ae18d87b3d369576d662e"
+ 
+-PV = "0.3.1+git${SRCPV}"
++PV = "0.4.0+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.17.1
+
