@@ -1,71 +1,75 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web09.4052.1643940669422250518
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.13719.1644002104816919747
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 03 Feb 2022 18:11:09 -0800
+ Fri, 04 Feb 2022 11:15:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VMhbcqxo;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: hnagalla@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2142B8Bs003269
-	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 20:11:08 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cHYAiHSO;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: praneeth@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 214JEpcU002535;
+	Fri, 4 Feb 2022 13:14:51 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1643940668;
-	bh=7yz/857NFAUXoK/yYGIMif9T4b/Kp7As/yhVUwv7ulA=;
+	s=ti-com-17Q1; t=1644002091;
+	bh=crD8sitvzs6cFAgh+R0uFyjz3sMJL0pYfRWxeUouMqE=;
 	h=From:To:CC:Subject:Date;
-	b=VMhbcqxoOxosobsysL7MCsET49yDTsxp480T8slKkz5axP3a+dK8MJ+AYMJwYngCc
-	 p5Pz4L1qpkzkhR6pgBjsE9MKg0ixgWqqUj5b6hSOejw3jfPVhRwZHftXnxmt5E3bTG
-	 3OLWlQMl4qUJI8YztL4SminTx4cgqtY5CdUmu+0A=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2142B8SW013180
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 20:11:08 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 3
- Feb 2022 20:11:07 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	b=cHYAiHSOjm0kkZeRKl03NTlWqg075GMwXESdRFDBMup7iCELMotsOXGdc4yMiqIbE
+	 98eq64TFhTD7D8MNbmhSz0WMR3wiklG1m6lpJfHEzG2m2zUdrvAMxhJacghyOp4Rm5
+	 0DJDE/w5r8s49bQsd4j4mp5DKOj7cHCxUkKmOal0=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 214JEp3r071259
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 4 Feb 2022 13:14:51 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 4
+ Feb 2022 13:14:51 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 3 Feb 2022 20:11:00 -0600
+ Frontend Transport; Fri, 4 Feb 2022 13:14:51 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2142B0EV032048;
-	Thu, 3 Feb 2022 20:11:00 -0600
-From: "Hari Nagalla" <hnagalla@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: <praneeth@ti.com>, <reatmon@ti.com>
-Subject: [meta-ti] [dunfell/master PATCH] ipc: ti-rpmsg-char: Update library to 0.4.0
-Date: Thu, 3 Feb 2022 20:10:58 -0600
-Message-ID: <20220204021058.32166-1-hnagalla@ti.com>
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 214JEpoa040538;
+	Fri, 4 Feb 2022 13:14:51 -0600
+From: "praneeth" <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
+        Denys Dmytriyenko <denis@denix.org>
+CC: Roger Quadros <rogerq@kernel.org>, Ryan Eatmon <reatmon@ti.com>
+Subject: [dunfell/master PATCH] u-boot-ti: Support binman image generation
+Date: Fri, 4 Feb 2022 13:14:51 -0600
+Message-ID: <20220204191451.1642-1-praneeth@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain
 
-Update the ti-rpmsg-char library to 0.4.0 version that enables the
-support for j721s2 SoC family remote processors.
+From: Roger Quadros <rogerq@kernel.org>
 
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+We are now using binman to generate the images for
+K3 AM64 in u-boot.
+
+tools/binman/binman needs python3-setuptools so add it to
+DEPENDS.
+
+Reported-by: Praneeth Bajjuri <praneeth@ti.com>
+Suggested-by: Denys Dmytriyenko <denis@denix.org>
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
-index eaf0028d..dc98fbb5 100644
---- a/recipes-ti/ipc/ti-rpmsg-char.inc
-+++ b/recipes-ti/ipc/ti-rpmsg-char.inc
-@@ -7,10 +7,10 @@ PROTOCOL = "git"
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index aceabe86..7ed6c5b4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -31,7 +31,7 @@ SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};branch=${BRANCH}"
+ PV_append = "+git${SRCPV}"
  
--# Initial 0.3.1 release
--SRCREV = "0824546f61bda7715519841d9b9f0fb030ddfaf2"
-+# Initial 0.4.0 release
-+SRCREV = "92b464f1e7477f77e44ae18d87b3d369576d662e"
+ # u-boot needs devtree compiler to parse dts files
+-DEPENDS += "dtc-native bc-native lzop-native flex-native bison-native"
++DEPENDS += "dtc-native bc-native lzop-native flex-native bison-native python3-setuptools-native"
  
--PV = "0.3.1+git${SRCPV}"
-+PV = "0.4.0+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
+ DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
  
 -- 
 2.17.1
