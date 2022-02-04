@@ -1,41 +1,41 @@
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.1291.1643926871853597453
+ by mx.groups.io with SMTP id smtpd.web09.4052.1643940669422250518
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 03 Feb 2022 14:21:12 -0800
+ Thu, 03 Feb 2022 18:11:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=wBBu/XwK;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VMhbcqxo;
  spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: hnagalla@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 213MLABe080467
-	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 16:21:10 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2142B8Bs003269
+	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 20:11:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1643926870;
+	s=ti-com-17Q1; t=1643940668;
 	bh=7yz/857NFAUXoK/yYGIMif9T4b/Kp7As/yhVUwv7ulA=;
 	h=From:To:CC:Subject:Date;
-	b=wBBu/XwKBjA9OzGGY1JslY4InD2+9s54clUgCyV0++dJ7trRdHNfQHpglw5lOiDWL
-	 7DHEhu+GkcJwLdMMxSADqLHLSuJXNnCNS+6zjiueXLYp2MfIChtxHt6gWF7kwGWP1N
-	 XvZVgE2dCCLOvwBarAOJecZROVTjfj5cYPegq4eQ=
+	b=VMhbcqxoOxosobsysL7MCsET49yDTsxp480T8slKkz5axP3a+dK8MJ+AYMJwYngCc
+	 p5Pz4L1qpkzkhR6pgBjsE9MKg0ixgWqqUj5b6hSOejw3jfPVhRwZHftXnxmt5E3bTG
+	 3OLWlQMl4qUJI8YztL4SminTx4cgqtY5CdUmu+0A=
 Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 213MLAIM112430
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2142B8SW013180
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 16:21:10 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
+	for <meta-ti@lists.yoctoproject.org>; Thu, 3 Feb 2022 20:11:08 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE115.ent.ti.com
  (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 3
- Feb 2022 16:21:09 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2022 20:11:07 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 3 Feb 2022 16:21:09 -0600
+ Frontend Transport; Thu, 3 Feb 2022 20:11:00 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 213ML9p2033882;
-	Thu, 3 Feb 2022 16:21:09 -0600
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2142B0EV032048;
+	Thu, 3 Feb 2022 20:11:00 -0600
 From: "Hari Nagalla" <hnagalla@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
-CC: <praneeth@ti.com>, <yogeshs@ti.com>, <hnagalla@ti.com>
-Subject: [meta-ti] [dunfell-next/master PATCH] ipc: ti-rpmsg-char: Update library to 0.4.0
-Date: Thu, 3 Feb 2022 16:21:07 -0600
-Message-ID: <20220203222107.2950-1-hnagalla@ti.com>
+CC: <praneeth@ti.com>, <reatmon@ti.com>
+Subject: [meta-ti] [dunfell/master PATCH] ipc: ti-rpmsg-char: Update library to 0.4.0
+Date: Thu, 3 Feb 2022 20:10:58 -0600
+Message-ID: <20220204021058.32166-1-hnagalla@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
