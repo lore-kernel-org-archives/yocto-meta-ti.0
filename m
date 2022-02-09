@@ -1,84 +1,83 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6672.1644290982137998827
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web09.29391.1644425670903205358
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 07 Feb 2022 19:29:42 -0800
+ Wed, 09 Feb 2022 08:54:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 2804C40C2C;
-	Tue,  8 Feb 2022 03:29:41 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pKMxZdeDcHXU; Tue,  8 Feb 2022 03:29:41 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 00A9940B05;
-	Tue,  8 Feb 2022 03:29:37 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id B3AB8174743; Mon,  7 Feb 2022 22:29:37 -0500 (EST)
-Date: Mon, 7 Feb 2022 22:29:37 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: reatmon@ti.com
-Cc: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH v3] ti-linux-fw: Bump to 08.02.00.001 release
-Message-ID: <20220208032937.GY26229@denix.org>
-References: <20220208032235.1915-1-reatmon@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fAo87yz7;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 219GsRoE023868;
+	Wed, 9 Feb 2022 10:54:27 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1644425667;
+	bh=Hw8O7jEGCe7EExpaDTGl27FpLzJiScIe48YhluqOYNE=;
+	h=From:To:Subject:Date;
+	b=fAo87yz7EWVaO/9sP78YIoBrWqmjPjYzVtDjdBsUsFohYmkIwrr9ZGa1M4s2JAU9i
+	 Jh9VQRvCiU+aHh5OR/RXUMjjRtGwVIvGS4mxsN0VOoICI7UneiE/wGwZtiT65JiH2M
+	 WbQ7n3XEce+RFfaUeTsE4IBL7cEYD+hdWBXuYDSk=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 219GsRli118340
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 9 Feb 2022 10:54:27 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 9
+ Feb 2022 10:54:27 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Wed, 9 Feb 2022 10:54:27 -0600
+Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 219GsR4v091783;
+	Wed, 9 Feb 2022 10:54:27 -0600
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1nHqEd-0005Ez-DN; Wed, 09 Feb 2022 10:54:27 -0600
+From: "Ryan Eatmon" <reatmon@ti.com>
+To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH] Split firmware name into target and source
+Date: Wed, 9 Feb 2022 10:54:27 -0600
+Message-ID: <20220209165427.20106-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20220208032235.1915-1-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Mon, Feb 07, 2022 at 09:22:35PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
-> Updated the ti-linux-fw version for 08.02.00.001
->   - Changed CORESDK_RTOS_VERSION version to 08.02.00.04
-> 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+We need to control both the source name of the firmware and
+the target name, so split the current variable into two and
+update the install command.
 
-Looks good.
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Rviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+diff --git a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+index 28f3440e..0c432de2 100644
+--- a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
++++ b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+@@ -19,7 +19,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ S = "${WORKDIR}/git"
+ TARGET_WAVE521C = "wave521c_codec_fw.bin"
+-TARGET_WAVE521C_j721s2-evm = "wave521c_j721s2_codec_fw.bin"
++
++SOURCE_WAVE521C = "wave521c_codec_fw.bin"
++SOURCE_WAVE521C_j721s2-evm = "wave521c_j721s2_codec_fw.bin"
+ 
+ ALTERNATIVE_LINK_NAME[wave521c_codec_fw.bin] = "${base_libdir}/firmware/${TARGET_WAVE521C}"
+ ALTERNATIVE_TARGET[wave521c_codec_fw.bin] = "${base_libdir}/firmware/cnm/${TARGET_WAVE521C}"
+@@ -31,7 +33,7 @@ ALTERNATIVE_${PN}_j7 = "\
+ 
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware/cnm
+-	install -m 0644 ${S}/cnm/${TARGET_WAVE521C} ${D}${base_libdir}/firmware/cnm/${TARGET_WAVE521C}
++	install -m 0644 ${S}/cnm/${SOURCE_WAVE521C} ${D}${base_libdir}/firmware/cnm/${TARGET_WAVE521C}
+ }
+ 
+ # make sure that lib/firmware, and all its contents are part of the package
+-- 
+2.17.1
 
-
-> ---
-> v2: Added CORESDK_RTOS_VERSION change.
-> v3: Add INC_PR change and changed TI_LINUX_FW_SRCREV to pick up a
-> missing merge on that repository for this release.
-
-Thank you! 
-
-
->  recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> index 014e89c8..5954cbd8 100644
-> --- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> @@ -4,10 +4,10 @@ LICENSE = "TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
->  
->  PV = "2022.01"
-> -INC_PR = "r2"
-> +INC_PR = "r3"
->  
->  # Firmware versions
-> -CORESDK_RTOS_VERSION = "08.01.00.02"
-> +CORESDK_RTOS_VERSION = "08.02.00.04"
->  SERDES_FW_VERSION = "3.3.0.2c"
->  NETCP_SA_FW_VERSION = "1.0.0"
->  NETCP_PA_FW_VERSION = "3.0.2.3"
-> @@ -19,7 +19,7 @@ CADENCE_MHDP_FW_VERSION = "1.2.17"
->  IMG_DEC_FW_VERSION = "1.0"
->  CNM_WAVE521_FW_VERSION = "1.0.00"
->  
-> -TI_LINUX_FW_SRCREV ?= "6070de0ae4095d291e1f7679d1fe6e07253a2fc3"
-> +TI_LINUX_FW_SRCREV ?= "8810faf0c51a80554150e185122e43bee1553c37"
->  SRCREV = "${TI_LINUX_FW_SRCREV}"
->  
->  BRANCH ?= "ti-linux-firmware"
-> -- 
-> 2.17.1
-> 
