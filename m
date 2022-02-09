@@ -1,45 +1,45 @@
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.29391.1644425670903205358
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web08.29345.1644425818355911755
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 09 Feb 2022 08:54:31 -0800
+ Wed, 09 Feb 2022 08:56:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fAo87yz7;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 219GsRoE023868;
-	Wed, 9 Feb 2022 10:54:27 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=TQJZUeV7;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 219Gutkx011252;
+	Wed, 9 Feb 2022 10:56:55 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1644425667;
-	bh=Hw8O7jEGCe7EExpaDTGl27FpLzJiScIe48YhluqOYNE=;
+	s=ti-com-17Q1; t=1644425815;
+	bh=Ej8Qd51JkLLCRtu6hs61yEFNTUmrZFB6GzGRpPlcen0=;
 	h=From:To:Subject:Date;
-	b=fAo87yz7EWVaO/9sP78YIoBrWqmjPjYzVtDjdBsUsFohYmkIwrr9ZGa1M4s2JAU9i
-	 Jh9VQRvCiU+aHh5OR/RXUMjjRtGwVIvGS4mxsN0VOoICI7UneiE/wGwZtiT65JiH2M
-	 WbQ7n3XEce+RFfaUeTsE4IBL7cEYD+hdWBXuYDSk=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 219GsRli118340
+	b=TQJZUeV7Zu4sJqJATWvUC79RM/hJ3TNLp/3qxW9QGbWaG2ZU4wWqjVXFKGRq3bLn7
+	 1f+fvinR/4ZDKR/DEzvptZ/2GDSmfUZmb7MXlteeLJ5P53W1n1IcCrIQVDBOosh70x
+	 gKQ6xy3v1jFTmPT2JAhy+VKqwl05SiSXFp6nCX+4=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 219GutBF038008
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 9 Feb 2022 10:54:27 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 9 Feb 2022 10:56:55 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 9
- Feb 2022 10:54:27 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2022 10:56:55 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 9 Feb 2022 10:54:27 -0600
+ Frontend Transport; Wed, 9 Feb 2022 10:56:55 -0600
 Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 219GsR4v091783;
-	Wed, 9 Feb 2022 10:54:27 -0600
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 219GutoS095128;
+	Wed, 9 Feb 2022 10:56:55 -0600
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1nHqEd-0005Ez-DN; Wed, 09 Feb 2022 10:54:27 -0600
+	id 1nHqH1-0005IE-Em; Wed, 09 Feb 2022 10:56:55 -0600
 From: "Ryan Eatmon" <reatmon@ti.com>
 To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH] Split firmware name into target and source
-Date: Wed, 9 Feb 2022 10:54:27 -0600
-Message-ID: <20220209165427.20106-1-reatmon@ti.com>
+Subject: [meta-ti][dunfell][PATCH v2] cnm-wave-fw: Split firmware name into target and source
+Date: Wed, 9 Feb 2022 10:56:55 -0600
+Message-ID: <20220209165655.20307-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -51,6 +51,8 @@ update the install command.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
+v2: Fix the commit message to include cnm-wave-fw
+
  recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
