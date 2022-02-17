@@ -1,56 +1,72 @@
-Received: from esa1.mentor.iphmx.com (esa1.mentor.iphmx.com [68.232.129.153])
- by mx.groups.io with SMTP id smtpd.web11.8516.1644926614710147125
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web09.4150.1645139631199508845
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 15 Feb 2022 04:03:35 -0800
+ Thu, 17 Feb 2022 15:13:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: mentor.com, ip: 68.232.129.153, mailfrom: awais_belal@mentor.com)
-IronPort-SDR: jh+fRaG+POBYnvDBJTN0bQI4WhXzFIwFm70bfySwbtEPbtYOlnxSF6colYLGasmc1QsXu3/txe
- WPJ0MWTA4GyuybHalu4tc9qfa8I0K/W6zXHhNqhaqhKlA77qAP+VAg/nhtleuu2XAmDWVhhEFT
- oF0o9Gg0xbbJ2yv+/iYe4bkiwAj18VqWO7x0dqh8k846PF/Ws9EbVcc4jL7Uh19UBj1zOCSoMf
- pjiBCsVNkd5j0PFo3fILZk7tAr/UcVzODvUrrojArhux/ehTiVwPtpIIiSdj6R6RrLlKpDUsT8
- l+4gMojOAq138zguCdhUXfDu
-X-IronPort-AV: E=Sophos;i="5.88,370,1635235200"; 
-   d="scan'208";a="74564037"
-Received: from orw-gwy-01-in.mentorg.com ([192.94.38.165])
-  by esa1.mentor.iphmx.com with ESMTP; 15 Feb 2022 04:03:34 -0800
-IronPort-SDR: QkVRH1TXkR00BPLwVcPFX3NAgKyxIePjzlunJxCXltyloIUQsS2t5eAsX6F0baK14ZLjePU0T8
- PIFcuYNbg491eih7hrEuQliNQ7sQGpaCld80Xr5Ra+KBpoNQNdPKoe8tjOhJexFW2oTKVB3ZEl
- MRO2wGjbwrYMW4pUxoZDzMjrE7UZXAaR+liXF6uzPzuoVHZn03IpUzY/yBaMrNVPvj4hEAYU87
- Bxe86DUJY0OJgphqx4Oq9UvHjo8mrt1BrHpTlNIKReBxddUr2JFM0krxwErpnNwok3t5hta0Oe
- z4k=
-From: "Awais Belal" <Awais_Belal@mentor.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH] ti-rtos-firmware: use nonarch_base_libdir for deployment
-Thread-Topic: [meta-ti] [PATCH] ti-rtos-firmware: use nonarch_base_libdir for
- deployment
-Thread-Index: AQHYIe3BAln4hdcgmEu9Ki/UAwXJ4qyUhACj
-Date: Tue, 15 Feb 2022 12:03:29 +0000
-Message-ID: <1644926609647.74074@mentor.com>
-References: <20220202141641.32664-1-awais_belal@mentor.com>,<20220214215644.GH26229@denix.org>
-In-Reply-To: <20220214215644.GH26229@denix.org>
-Accept-Language: en-US, en-IE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [137.202.0.90]
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=x+pqd3ky;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 21HNDn0f093277;
+	Thu, 17 Feb 2022 17:13:49 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1645139629;
+	bh=sDage1Sw19rEevpAMrNXzo7DabZUqBwwLM89napN0ic=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=x+pqd3kyLLxAp5WGpj0kPG8GKbgCO3skq9SzGsaku9WVbIwxl10ebQK3MawR+pbsa
+	 MFiMWvL/V7sRiScrja0lVEGo4Le950Uc1AeSjLOxOKJ0nJIZVKgqngtV6Z6EKU/a98
+	 5KDjI6L3Hi9ohkFkBajrjaYIQ4xZ4AKz+nnaeFSs=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 21HNDnD3085511
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 17 Feb 2022 17:13:49 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 17
+ Feb 2022 17:13:48 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Thu, 17 Feb 2022 17:13:48 -0600
+Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 21HNDm5s031101;
+	Thu, 17 Feb 2022 17:13:48 -0600
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1nKpy8-0006nk-HG; Thu, 17 Feb 2022 17:13:48 -0600
+From: "Ryan Eatmon" <reatmon@ti.com>
+To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 1/4] ti-linux-fw: Bump to 08.02.00.003 release
+Date: Thu, 17 Feb 2022 17:13:45 -0600
+Message-ID: <20220217231348.26098-2-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220217231348.26098-1-reatmon@ti.com>
+References: <20220217231348.26098-1-reatmon@ti.com>
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-Hi Denys,=0A=
-=0A=
-> Thanks, ti-rtos-firmware is just one of many other places where this need=
-s to=0A=
-> be fixed.=0A=
-=0A=
-> Since this is for master, I'll take it into my new WIP master tree and ex=
-tend=0A=
-> it to other FW recipes...=0A=
-=0A=
-Yeah, I was thinking of doing the same in steps depending on the response I=
-'d get here but I guess you can pick this up now :)=0A=
-=0A=
-BR,=0A=
-Awais=
+Updated the ti-linux-fw version for 08.02.00.003
+
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 7b28f153..fced78fd 100644
+--- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -24,7 +24,7 @@ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+ 
+-K3_IMAGE_GEN_SRCREV ?= "a0063e855414fd1609b5f63e2d765a49c8c513fe"
++K3_IMAGE_GEN_SRCREV ?= "f1db75bdc506287a9d04b0afbbb3d853a0948179"
+ SRCREV_imggen = "${K3_IMAGE_GEN_SRCREV}"
+ SRCREV_FORMAT = "imggen"
+ 
+-- 
+2.17.1
+
