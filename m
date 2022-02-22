@@ -1,62 +1,81 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.8807.1645503275866965507
+ by mx.groups.io with SMTP id smtpd.web10.8959.1645503275918681338
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 21 Feb 2022 20:14:36 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EF37C40C87
-	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:14:34 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 4009440C88
+	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:14:35 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cBAxQn1Zcqw6 for <meta-ti@lists.yoctoproject.org>;
-	Tue, 22 Feb 2022 04:14:34 +0000 (UTC)
+	with ESMTP id Dv1MToJhwU21 for <meta-ti@lists.yoctoproject.org>;
+	Tue, 22 Feb 2022 04:14:35 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E512E40C06
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2CBAA40C06
 	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:14:34 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id A1E15174774
-	for <meta-ti@lists.yoctoproject.org>; Mon, 21 Feb 2022 23:14:34 -0500 (EST)
+	by mail.denix.org (Postfix) with ESMTP id 3941A174775
+	for <meta-ti@lists.yoctoproject.org>; Mon, 21 Feb 2022 23:14:31 -0500 (EST)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [PATCH 29/29] u-boot-ti-staging: Bump to 08.02.00.003 release
-Date: Tue, 22 Feb 2022 04:14:30 +0000
-Message-Id: <20220222041430.2840289-30-denis@denix.org>
+Subject: [PATCH 11/29] ti-linux-fw: Bump up TIFS and DM to v2022.01
+Date: Tue, 22 Feb 2022 04:14:12 +0000
+Message-Id: <20220222041430.2840289-12-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220222041430.2840289-1-denis@denix.org>
 References: <20220222041430.2840289-1-denis@denix.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Updated the u-boot version for 08.02.00.003
+Update ti-linux-firmware and k3-image-gen to
+pick latest TIFS and DM v2022.01
 
+This version also adds support to j721s2
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb =
-b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 16bb1521..701b802a 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -2,8 +2,8 @@ require u-boot-ti.inc
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-t=
+i-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 9bd2d0a8..fea0c783 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -3,8 +3,8 @@ SUMMARY =3D "TI SCI firmware (SYSFW)"
+ LICENSE =3D "TI-TFL"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.ti;md5=3Db5aebf0668bdf95621259288c4=
+a46d76"
 =20
- LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D5a7450c57ffe5ae63fd73=
-2446b988025"
+-PV =3D "2021.09a"
+-INC_PR =3D "r1"
++PV =3D "2022.01"
++INC_PR =3D "r2"
 =20
--PR =3D "r18"
-+PR =3D "r19"
+ # Firmware versions
+ CORESDK_RTOS_VERSION =3D "08.01.00.02"
+@@ -19,12 +19,12 @@ CADENCE_MHDP_FW_VERSION =3D "1.2.17"
+ IMG_DEC_FW_VERSION =3D "1.0"
+ CNM_WAVE521_FW_VERSION =3D "1.0.00"
 =20
- BRANCH =3D "ti-u-boot-2021.01"
+-TI_LINUX_FW_SRCREV ?=3D "c96a734a059889e571dcf30c0638157c690a6e6e"
++TI_LINUX_FW_SRCREV ?=3D "6070de0ae4095d291e1f7679d1fe6e07253a2fc3"
+ SRCREV =3D "${TI_LINUX_FW_SRCREV}"
 =20
--SRCREV =3D "ebc8dca63dd961aaf5f5f626a19c6f6bfd7428f0"
-+SRCREV =3D "bd58b61277a189ee49e0d6e9fd03d52996685d98"
+ BRANCH ?=3D "ti-linux-firmware"
+=20
+-K3_IMAGE_GEN_SRCREV ?=3D "489c767a153ff26e9230746e04dd4b1ad0809901"
++K3_IMAGE_GEN_SRCREV ?=3D "9abbe130d47a7fa6f8e02b740ad3ad27bc81d327"
+ SRCREV_imggen =3D "${K3_IMAGE_GEN_SRCREV}"
+ SRCREV_FORMAT =3D "imggen"
+=20
 --=20
 2.25.1
 
