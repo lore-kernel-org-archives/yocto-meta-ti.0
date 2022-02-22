@@ -1,59 +1,56 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.8957.1645503276760525318
+ by mx.groups.io with SMTP id smtpd.web12.9325.1645507731052049586
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 21 Feb 2022 20:14:36 -0800
+ Mon, 21 Feb 2022 21:28:51 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 98A0F40C93
-	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:14:35 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 09A3D40C24;
+	Tue, 22 Feb 2022 05:28:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id THTUHfLIxQ-j for <meta-ti@lists.yoctoproject.org>;
-	Tue, 22 Feb 2022 04:14:35 +0000 (UTC)
+	with ESMTP id 5qCFJPSGvfv8; Tue, 22 Feb 2022 05:28:50 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8CCCF40C8C
-	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:14:34 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 7615D17476E
-	for <meta-ti@lists.yoctoproject.org>; Mon, 21 Feb 2022 23:14:34 -0500 (EST)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E765940A28;
+	Tue, 22 Feb 2022 05:28:48 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 2971017476C; Tue, 22 Feb 2022 00:28:48 -0500 (EST)
+Date: Tue, 22 Feb 2022 00:28:48 -0500
 From: "Denys Dmytriyenko" <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Subject: [PATCH 25/29] ti-linux-fw: Bump to 08.02.00.002 release
-Date: Tue, 22 Feb 2022 04:14:26 +0000
-Message-Id: <20220222041430.2840289-26-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220222041430.2840289-1-denis@denix.org>
-References: <20220222041430.2840289-1-denis@denix.org>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [PATCH] layers: Bump to use kirkstone
+Message-ID: <20220222052848.GO26229@denix.org>
+References: <20220222022306.1390127-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20220222022306.1390127-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Ryan Eatmon <reatmon@ti.com>
+NAK, this has already been part of a larger restructure and cleanup effort 
+going on for a while - see recent patchsets on the list.
 
-Updated the ti-linux-fw version for 08.02.00.002
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-t=
-i-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 5954cbd8..7b28f153 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -24,7 +24,7 @@ SRCREV =3D "${TI_LINUX_FW_SRCREV}"
-=20
- BRANCH ?=3D "ti-linux-firmware"
-=20
--K3_IMAGE_GEN_SRCREV ?=3D "892c86501ff745dfde4d535923ce686f45700da3"
-+K3_IMAGE_GEN_SRCREV ?=3D "a0063e855414fd1609b5f63e2d765a49c8c513fe"
- SRCREV_imggen =3D "${K3_IMAGE_GEN_SRCREV}"
- SRCREV_FORMAT =3D "imggen"
-=20
---=20
-2.25.1
-
+On Mon, Feb 21, 2022 at 06:23:06PM -0800, Khem Raj wrote:
+> its not going to be backward ABI compatible with honister due to variable renaming.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index f399ff03..c3b39c59 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti"
+>  BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_meta-ti = "6"
+>  
+> -LAYERSERIES_COMPAT_meta-ti = "honister"
+> +LAYERSERIES_COMPAT_meta-ti = "kirkstone"
+>  
+>  LICENSE_PATH += "${LAYERDIR}/licenses"
