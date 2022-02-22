@@ -1,29 +1,29 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.8798.1645503245147441798
+ by mx.groups.io with SMTP id smtpd.web10.8945.1645503245149762853
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 21 Feb 2022 20:14:05 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 94AF640C52
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 94ED240C8F
 	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:14:04 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oUEK9bnZIYKH for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id n07_STIUNQiz for <meta-ti@lists.yoctoproject.org>;
 	Tue, 22 Feb 2022 04:14:04 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7A95E40C2E
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 808CE40C86
 	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:14:02 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 23B0C174770
+	by mail.denix.org (Postfix) with ESMTP id 492BE174774
 	for <meta-ti@lists.yoctoproject.org>; Mon, 21 Feb 2022 23:14:02 -0500 (EST)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [PATCH 05/17] wlconf: explicitly specify source branch
-Date: Tue, 22 Feb 2022 04:13:49 +0000
-Message-Id: <20220222041401.2840172-6-denis@denix.org>
+Subject: [PATCH 09/17] ti-ipc: use fuller path when including common files
+Date: Tue, 22 Feb 2022 04:13:53 +0000
+Message-Id: <20220222041401.2840172-10-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220222041401.2840172-1-denis@denix.org>
 References: <20220222041401.2840172-1-denis@denix.org>
@@ -32,29 +32,41 @@ Content-Transfer-Encoding: quoted-printable
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-bitbake now requires it, as default master is no longer deterministic.
+Some .inc file now span across layers, so use fuller path to find them wh=
+en
+including.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-extras/recipes-connectivity/wlconf/wlconf_8.7.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-extras/recipes-ti/ipc/ti-ipc-examples.inc | 2 +-
+ meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb  | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-ti-extras/recipes-connectivity/wlconf/wlconf_8.7.3.bb b=
-/meta-ti-extras/recipes-connectivity/wlconf/wlconf_8.7.3.bb
-index 475bac28..39d38853 100644
---- a/meta-ti-extras/recipes-connectivity/wlconf/wlconf_8.7.3.bb
-+++ b/meta-ti-extras/recipes-connectivity/wlconf/wlconf_8.7.3.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM =3D "file://README;beginline=3D1;endline=
-=3D21;md5=3Dadc05a1903d3f107f85
+diff --git a/meta-ti-extras/recipes-ti/ipc/ti-ipc-examples.inc b/meta-ti-=
+extras/recipes-ti/ipc/ti-ipc-examples.inc
+index 66cd5d32..c34a6078 100644
+--- a/meta-ti-extras/recipes-ti/ipc/ti-ipc-examples.inc
++++ b/meta-ti-extras/recipes-ti/ipc/ti-ipc-examples.inc
+@@ -1,5 +1,5 @@
+ HOMEPAGE =3D "http://processors.wiki.ti.com/index.php/Category:IPC"
+-require ti-ipc-common.inc
++require recipes-ti/ipc/ti-ipc-common.inc
+ require ti-ipc-rtos.inc
 =20
- # Tag: R8.7_SP3 (8.7.3)
- SRCREV =3D "5048b59a444ac59ba7171d6e122d5a84581aebf2"
--SRC_URI =3D "git://git.ti.com/wilink8-wlan/18xx-ti-utils.git"
-+SRC_URI =3D "git://git.ti.com/wilink8-wlan/18xx-ti-utils.git;branch=3Dma=
-ster"
+ LICENSE =3D "BSD"
+diff --git a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb b/meta-ti-e=
+xtras/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index abef3195..60230a07 100644
+--- a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -1,5 +1,5 @@
+-require ti-ipc.inc
+-require ti-ipc-common.inc
++require recipes-ti/ipc/ti-ipc.inc
++require recipes-ti/ipc/ti-ipc-common.inc
+ require ti-ipc-rtos.inc
 =20
- S =3D "${WORKDIR}/git/wlconf"
-=20
+ DEPENDS =3D "ti-xdctools-native ti-sysbios doxygen-native zip-native"
 --=20
 2.25.1
 
