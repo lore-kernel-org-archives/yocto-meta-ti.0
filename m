@@ -1,75 +1,67 @@
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web12.8370.1645431224767676154
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.7033.1645490512776931454
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 21 Feb 2022 00:13:45 -0800
+ Mon, 21 Feb 2022 16:41:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cOB56DLu;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: a-m1@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 21L8Dh3k099178
-	for <meta-ti@lists.yoctoproject.org>; Mon, 21 Feb 2022 02:13:43 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1645431223;
-	bh=YX+g/JVYJrHr2UR/GuKoV9yXUMf2JSoj+u2fgBZoetU=;
-	h=From:To:CC:Subject:Date;
-	b=cOB56DLuSHc1i6QqOJJ2UNaRLgj0qqlPnqfHrBpsy/CWy1uZK/1XBZxTnXbN0of9B
-	 pJw/b6NXot4iUA/tSCpCs2hZ7bwOOsmk2cSZqmqnCwq9/3vRJnyOKpTvRR9okM6oun
-	 QM31EYfMB6oUYGeoJfsURHWAkUyBNd3WAP8353cc=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 21L8Dhc4092024
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 21 Feb 2022 02:13:43 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 21
- Feb 2022 02:13:43 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Mon, 21 Feb 2022 02:13:43 -0600
-Received: from swubn03.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 21L8DeDj067824;
-	Mon, 21 Feb 2022 02:13:41 -0600
-From: "Aparna M" <a-m1@ti.com>
-To: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <reatmon@ti.com>
-CC: <devarsht@ti.com>, <nikhil.nd@ti.com>, <nsekhar@ti.com>,
-        Aparna M
-	<a-m1@ti.com>
-Subject: [meta-ti][dunfell][PATCH] conf: machine: am64xx-hs-evm: Fix naming of u-boot.img
-Date: Mon, 21 Feb 2022 13:43:31 +0530
-Message-ID: <20220221081331.11263-1-a-m1@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E49B740C2E;
+	Tue, 22 Feb 2022 00:41:51 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xYpmhNtWlgzO; Tue, 22 Feb 2022 00:41:51 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A945640951;
+	Tue, 22 Feb 2022 00:41:45 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 6C6F4174767; Mon, 21 Feb 2022 19:41:45 -0500 (EST)
+Date: Mon, 21 Feb 2022 19:41:45 -0500
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: a-m1@ti.com
+Cc: meta-ti@lists.yoctoproject.org, praneeth@ti.com, reatmon@ti.com,
+	devarsht@ti.com, nikhil.nd@ti.com, nsekhar@ti.com
+Subject: Re: [meta-ti][dunfell][PATCH] conf: machine: am64xx-hs-evm: Fix naming of u-boot.img
+Message-ID: <20220222004145.GJ26229@denix.org>
+References: <20220221081331.11263-1-a-m1@ti.com>
 MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+In-Reply-To: <20220221081331.11263-1-a-m1@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-All the HS platforms generate the u-boot binary as u-boot.img_HS
-but the bootloader expects the binary to be named as u-boot.img
+On Mon, Feb 21, 2022 at 01:43:31PM +0530, Aparna M via lists.yoctoproject.org wrote:
+> All the HS platforms generate the u-boot binary as u-boot.img_HS
+> but the bootloader expects the binary to be named as u-boot.img
+> 
+> Due to this mismatch, script cannot find the required image to
+> be added in the WIC image. Fix this by overwriting the
+> UBOOT_IMAGE variable via conf file.
 
-Due to this mismatch, script cannot find the required image to
-be added in the WIC image. Fix this by overwriting the
-UBOOT_IMAGE variable via conf file.
+Can you please clarify which script cannot find the image? Thanks!
+Also, how does it work for am65xx HS, j721e HS, j7200 HS? Why only am64xx HS?
 
-Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
 
-Signed-off-by: Aparna M <a-m1@ti.com>
----
- conf/machine/am64xx-hs-evm.conf | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/conf/machine/am64xx-hs-evm.conf b/conf/machine/am64xx-hs-evm.conf
-index 44e81463..781b8318 100644
---- a/conf/machine/am64xx-hs-evm.conf
-+++ b/conf/machine/am64xx-hs-evm.conf
-@@ -17,6 +17,7 @@ UBOOT_DTBO_OFFSET =      "0x00010000"
- SPL_BINARY = "tispl.bin_HS"
- SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
-+UBOOT_IMAGE = "u-boot.img"
-+IMAGE_BOOT_FILES = "${UBOOT_IMAGE}"
- 
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
--- 
-2.17.1
-
+> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
+> 
+> Signed-off-by: Aparna M <a-m1@ti.com>
+> ---
+>  conf/machine/am64xx-hs-evm.conf | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/conf/machine/am64xx-hs-evm.conf b/conf/machine/am64xx-hs-evm.conf
+> index 44e81463..781b8318 100644
+> --- a/conf/machine/am64xx-hs-evm.conf
+> +++ b/conf/machine/am64xx-hs-evm.conf
+> @@ -17,6 +17,7 @@ UBOOT_DTBO_OFFSET =      "0x00010000"
+>  SPL_BINARY = "tispl.bin_HS"
+>  SPL_BINARYNAME = "tispl.bin"
+>  UBOOT_BINARY = "u-boot.img_HS"
+> -IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
+> +UBOOT_IMAGE = "u-boot.img"
+> +IMAGE_BOOT_FILES = "${UBOOT_IMAGE}"
+>  
+>  TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
+> -- 
+> 2.17.1
