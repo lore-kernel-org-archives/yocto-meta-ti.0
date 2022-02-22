@@ -1,29 +1,29 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.8965.1645503198164869530
+ by mx.groups.io with SMTP id smtpd.web11.8936.1645503199105090215
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 21 Feb 2022 20:13:18 -0800
+ Mon, 21 Feb 2022 20:13:19 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9063D40C2E
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9B6B840C7F
 	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:13:17 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IfABIZMffQQE for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id r-95lpnSt0Cv for <meta-ti@lists.yoctoproject.org>;
 	Tue, 22 Feb 2022 04:13:17 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8E56040C7B
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9B0E240C87
 	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Feb 2022 04:13:15 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 456D0174773
+	by mail.denix.org (Postfix) with ESMTP id 60F8117476C
 	for <meta-ti@lists.yoctoproject.org>; Mon, 21 Feb 2022 23:13:15 -0500 (EST)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [PATCH 08/19] alsa-state: remove asound.state for deprecated beagleboard
-Date: Tue, 22 Feb 2022 04:13:03 +0000
-Message-Id: <20220222041314.2840028-9-denis@denix.org>
+Subject: [PATCH 11/19] conf/machine: remove Keystone1/2 SoC/machine configs
+Date: Tue, 22 Feb 2022 04:13:06 +0000
+Message-Id: <20220222041314.2840028-12-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220222041314.2840028-1-denis@denix.org>
 References: <20220222041314.2840028-1-denis@denix.org>
@@ -32,689 +32,419 @@ Content-Transfer-Encoding: quoted-printable
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-As beagleboard is now deprecated and removed from future meta-ti releases=
-.
+As Keystone1/2 platforms are being deprecated.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-bsp/alsa-state/alsa-state.bbappend    |   1 -
- .../alsa-state/beagleboard/asound.state       | 656 ------------------
- 2 files changed, 657 deletions(-)
- delete mode 100644 recipes-bsp/alsa-state/alsa-state.bbappend
- delete mode 100644 recipes-bsp/alsa-state/alsa-state/beagleboard/asound.=
-state
+ conf/machine/c665x-evm.conf       |  9 --------
+ conf/machine/c667x-evm.conf       |  9 --------
+ conf/machine/include/c66x.inc     |  9 --------
+ conf/machine/include/k2e.inc      |  6 ------
+ conf/machine/include/k2g.inc      |  6 ------
+ conf/machine/include/k2hk.inc     |  6 ------
+ conf/machine/include/k2l.inc      |  6 ------
+ conf/machine/include/keystone.inc | 30 --------------------------
+ conf/machine/k2e-evm.conf         | 32 ----------------------------
+ conf/machine/k2e-hs-evm.conf      | 15 -------------
+ conf/machine/k2g-evm.conf         | 35 -------------------------------
+ conf/machine/k2g-hs-evm.conf      | 15 -------------
+ conf/machine/k2hk-evm.conf        | 32 ----------------------------
+ conf/machine/k2hk-hs-evm.conf     | 15 -------------
+ conf/machine/k2l-evm.conf         | 32 ----------------------------
+ conf/machine/k2l-hs-evm.conf      | 15 -------------
+ 16 files changed, 272 deletions(-)
+ delete mode 100644 conf/machine/c665x-evm.conf
+ delete mode 100644 conf/machine/c667x-evm.conf
+ delete mode 100644 conf/machine/include/c66x.inc
+ delete mode 100644 conf/machine/include/k2e.inc
+ delete mode 100644 conf/machine/include/k2g.inc
+ delete mode 100644 conf/machine/include/k2hk.inc
+ delete mode 100644 conf/machine/include/k2l.inc
+ delete mode 100644 conf/machine/include/keystone.inc
+ delete mode 100644 conf/machine/k2e-evm.conf
+ delete mode 100644 conf/machine/k2e-hs-evm.conf
+ delete mode 100644 conf/machine/k2g-evm.conf
+ delete mode 100644 conf/machine/k2g-hs-evm.conf
+ delete mode 100644 conf/machine/k2hk-evm.conf
+ delete mode 100644 conf/machine/k2hk-hs-evm.conf
+ delete mode 100644 conf/machine/k2l-evm.conf
+ delete mode 100644 conf/machine/k2l-hs-evm.conf
 
-diff --git a/recipes-bsp/alsa-state/alsa-state.bbappend b/recipes-bsp/als=
-a-state/alsa-state.bbappend
+diff --git a/conf/machine/c665x-evm.conf b/conf/machine/c665x-evm.conf
 deleted file mode 100644
-index 4fc41d05..00000000
---- a/recipes-bsp/alsa-state/alsa-state.bbappend
+index d0af7543..00000000
+--- a/conf/machine/c665x-evm.conf
 +++ /dev/null
-@@ -1 +0,0 @@
--FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}:"
-diff --git a/recipes-bsp/alsa-state/alsa-state/beagleboard/asound.state b=
-/recipes-bsp/alsa-state/alsa-state/beagleboard/asound.state
+@@ -1,9 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 1 c665x machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 1 c665x EVM
+-
+-require conf/machine/include/c66x.inc
+-
+-# Set the list of device targets for ti-pdk class recipes
+-TI_PDK_LIMIT_SOCS =3D "c6657"
+-TI_PDK_LIMIT_BOARDS =3D "evmC6657"
+diff --git a/conf/machine/c667x-evm.conf b/conf/machine/c667x-evm.conf
 deleted file mode 100644
-index f9244915..00000000
---- a/recipes-bsp/alsa-state/alsa-state/beagleboard/asound.state
+index 11a90e46..00000000
+--- a/conf/machine/c667x-evm.conf
 +++ /dev/null
-@@ -1,656 +0,0 @@
--state.omap3beagle {
--	control.1 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Option 2 (voice/audio)'
--		comment.item.1 'Option 1 (audio)'
--		iface MIXER
--		name 'Codec Operation Mode'
--		value 'Option 1 (audio)'
--	}
--	control.2 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 63'
--		comment.dbmin -6300
--		comment.dbmax 0
--		iface MIXER
--		name 'DAC1 Digital Fine Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.3 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 63'
--		comment.dbmin -6300
--		comment.dbmax 0
--		iface MIXER
--		name 'DAC2 Digital Fine Playback Volume'
--		value.0 50
--		value.1 50
--	}
--	control.4 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 2'
--		comment.dbmin 0
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC1 Digital Coarse Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.5 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 2'
--		comment.dbmin 0
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC2 Digital Coarse Playback Volume'
--		value.0 2
--		value.1 2
--	}
--	control.6 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 18'
--		comment.dbmin -2400
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC1 Analog Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.7 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 18'
--		comment.dbmin -2400
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC2 Analog Playback Volume'
--		value.0 15
--		value.1 15
--	}
--	control.8 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 2
--		iface MIXER
--		name 'DAC1 Analog Playback Switch'
--		value.0 false
--		value.1 false
--	}
--	control.9 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 2
--		iface MIXER
--		name 'DAC2 Analog Playback Switch'
--		value.0 true
--		value.1 true
--	}
--	control.10 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 49'
--		comment.dbmin -3700
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC Voice Digital Downlink Volume'
--		value 0
--	}
--	control.11 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 18'
--		comment.dbmin -2400
--		comment.dbmax 1200
--		iface MIXER
--		name 'DAC Voice Analog Downlink Volume'
--		value 18
--	}
--	control.12 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'DAC Voice Analog Downlink Switch'
--		value false
--	}
--	control.13 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 3'
--		comment.dbmin -1200
--		comment.dbmax 600
--		iface MIXER
--		name 'PreDriv Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.14 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 3'
--		comment.dbmin -1200
--		comment.dbmax 600
--		iface MIXER
--		name 'Headset Playback Volume'
--		value.0 3
--		value.1 3
--	}
--	control.15 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 3'
--		comment.dbmin -1200
--		comment.dbmax 600
--		iface MIXER
--		name 'Carkit Playback Volume'
--		value.0 0
--		value.1 0
--	}
--	control.16 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 3'
--		comment.dbmin -600
--		comment.dbmax 1200
--		iface MIXER
--		name 'Earpiece Playback Volume'
--		value 0
--	}
--	control.17 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 31'
--		comment.dbmin 0
--		comment.dbmax 3100
--		iface MIXER
--		name 'TX1 Digital Capture Volume'
--		value.0 12
--		value.1 12
--	}
--	control.18 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 31'
--		comment.dbmin 0
--		comment.dbmax 3100
--		iface MIXER
--		name 'TX2 Digital Capture Volume'
--		value.0 0
--		value.1 0
--	}
--	control.19 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 2
--		comment.range '0 - 5'
--		comment.dbmin 0
--		comment.dbmax 3000
--		iface MIXER
--		name 'Analog Capture Volume'
--		value.0 0
--		value.1 0
--	}
--	control.20 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Voice high priority'
--		comment.item.1 'HiFi high priority'
--		iface MIXER
--		name 'AVADC Clock Priority'
--		value 'Voice high priority'
--	}
--	control.21 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 '27/20/14 ms'
--		comment.item.1 '55/40/27 ms'
--		comment.item.2 '109/81/55 ms'
--		comment.item.3 '218/161/109 ms'
--		comment.item.4 '437/323/218 ms'
--		comment.item.5 '874/645/437 ms'
--		comment.item.6 '1748/1291/874 ms'
--		comment.item.7 '3495/2581/1748 ms'
--		iface MIXER
--		name 'HS ramp delay'
--		value '27/20/14 ms'
--	}
--	control.22 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Vibra H-bridge direction'
--		comment.item.1 'Audio data MSB'
--		iface MIXER
--		name 'Vibra H-bridge mode'
--		value 'Vibra H-bridge direction'
--	}
--	control.23 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Positive polarity'
--		comment.item.1 'Negative polarity'
--		iface MIXER
--		name 'Vibra H-bridge direction'
--		value 'Positive polarity'
--	}
--	control.24 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Right Sub Mic Capture Switch'
--		value false
--	}
--	control.25 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Right AUXR Capture Switch'
--		value true
--	}
--	control.26 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left Main Mic Capture Switch'
--		value false
--	}
--	control.27 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left Headset Mic Capture Switch'
--		value false
--	}
--	control.28 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left AUXL Capture Switch'
--		value true
--	}
--	control.29 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Analog Left Carkit Mic Capture Switch'
--		value false
--	}
--	control.30 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Analog
--		comment.item.1 Digimic1
--		iface MIXER
--		name 'TX2 Capture Route'
--		value Analog
--	}
--	control.31 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Analog
--		comment.item.1 Digimic0
--		iface MIXER
--		name 'TX1 Capture Route'
--		value Analog
--	}
--	control.32 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 'Local vibrator'
--		comment.item.1 Audio
--		iface MIXER
--		name 'Vibra Route'
--		value 'Local vibrator'
--	}
--	control.33 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 AudioL1
--		comment.item.1 AudioR1
--		comment.item.2 AudioL2
--		comment.item.3 AudioR2
--		iface MIXER
--		name 'Vibra Mux'
--		value AudioL1
--	}
--	control.34 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HandsfreeR Switch'
--		value false
--	}
--	control.35 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Voice
--		comment.item.1 AudioR1
--		comment.item.2 AudioR2
--		comment.item.3 AudioL2
--		iface MIXER
--		name 'HandsfreeR Mux'
--		value Voice
--	}
--	control.36 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HandsfreeL Switch'
--		value false
--	}
--	control.37 {
--		comment.access 'read write'
--		comment.type ENUMERATED
--		comment.count 1
--		comment.item.0 Voice
--		comment.item.1 AudioL1
--		comment.item.2 AudioL2
--		comment.item.3 AudioR2
--		iface MIXER
--		name 'HandsfreeL Mux'
--		value Voice
--	}
--	control.38 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitR Mixer Voice'
--		value false
--	}
--	control.39 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitR Mixer AudioR1'
--		value false
--	}
--	control.40 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitR Mixer AudioR2'
--		value false
--	}
--	control.41 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitL Mixer Voice'
--		value false
--	}
--	control.42 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitL Mixer AudioL1'
--		value false
--	}
--	control.43 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'CarkitL Mixer AudioL2'
--		value false
--	}
--	control.44 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetR Mixer Voice'
--		value false
--	}
--	control.45 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetR Mixer AudioR1'
--		value false
--	}
--	control.46 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetR Mixer AudioR2'
--		value true
--	}
--	control.47 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetL Mixer Voice'
--		value false
--	}
--	control.48 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetL Mixer AudioL1'
--		value false
--	}
--	control.49 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'HeadsetL Mixer AudioL2'
--		value true
--	}
--	control.50 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer Voice'
--		value false
--	}
--	control.51 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer AudioR1'
--		value false
--	}
--	control.52 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer AudioR2'
--		value false
--	}
--	control.53 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveR Mixer AudioL2'
--		value false
--	}
--	control.54 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer Voice'
--		value false
--	}
--	control.55 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer AudioL1'
--		value false
--	}
--	control.56 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer AudioL2'
--		value false
--	}
--	control.57 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'PredriveL Mixer AudioR2'
--		value false
--	}
--	control.58 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer Voice'
--		value false
--	}
--	control.59 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer AudioL1'
--		value false
--	}
--	control.60 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer AudioL2'
--		value false
--	}
--	control.61 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Earpiece Mixer AudioR1'
--		value false
--	}
--	control.62 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 41'
--		comment.dbmin -5100
--		comment.dbmax -1000
--		iface MIXER
--		name 'Voice Digital Loopback Volume'
--		value 0
--	}
--	control.63 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 7'
--		comment.dbmin -2400
--		comment.dbmax 0
--		iface MIXER
--		name 'Right Digital Loopback Volume'
--		value 0
--	}
--	control.64 {
--		comment.access 'read write'
--		comment.type INTEGER
--		comment.count 1
--		comment.range '0 - 7'
--		comment.dbmin -2400
--		comment.dbmax 0
--		iface MIXER
--		name 'Left Digital Loopback Volume'
--		value 0
--	}
--	control.65 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Voice Analog Loopback Switch'
--		value false
--	}
--	control.66 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Left2 Analog Loopback Switch'
--		value false
--	}
--	control.67 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Right2 Analog Loopback Switch'
--		value false
--	}
--	control.68 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Left1 Analog Loopback Switch'
--		value false
--	}
--	control.69 {
--		comment.access 'read write'
--		comment.type BOOLEAN
--		comment.count 1
--		iface MIXER
--		name 'Right1 Analog Loopback Switch'
--		value false
--	}
--}
+@@ -1,9 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 1 c667x machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 1 c667x EVM
+-
+-require conf/machine/include/c66x.inc
+-
+-# Set the list of device targets for ti-pdk class recipes
+-TI_PDK_LIMIT_SOCS =3D "c6678"
+-TI_PDK_LIMIT_BOARDS =3D "evmC6678"
+diff --git a/conf/machine/include/c66x.inc b/conf/machine/include/c66x.in=
+c
+deleted file mode 100644
+index 33a657f1..00000000
+--- a/conf/machine/include/c66x.inc
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require conf/machine/include/keystone.inc
+-SOC_FAMILY:append =3D ":c66x"
+-
+-# HACK: The c66x family is composed of devices with only DSP cores, and =
+no ARM
+-#       cores. The Linux kernel is not supported on these machines.
+-PREFERRED_PROVIDER_virtual/kernel ?=3D "linux-dummy"
+-EXTRA_IMAGEDEPENDS =3D ""
+-
+-IMAGE_FSTYPES =3D "tar.xz"
+diff --git a/conf/machine/include/k2e.inc b/conf/machine/include/k2e.inc
+deleted file mode 100644
+index a6d58bb3..00000000
+--- a/conf/machine/include/k2e.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require conf/machine/include/keystone.inc
+-SOC_FAMILY:append =3D ":k2e"
+-
+-# Set the list of device targets for ti-pdk class recipes
+-TI_PDK_LIMIT_SOCS =3D "k2e"
+-TI_PDK_LIMIT_BOARDS =3D "evmK2E"
+diff --git a/conf/machine/include/k2g.inc b/conf/machine/include/k2g.inc
+deleted file mode 100644
+index be40d9e7..00000000
+--- a/conf/machine/include/k2g.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require conf/machine/include/keystone.inc
+-SOC_FAMILY:append =3D ":k2g"
+-
+-# Set the list of device targets for ti-pdk class recipes
+-TI_PDK_LIMIT_SOCS =3D "k2g"
+-TI_PDK_LIMIT_BOARDS =3D "evmK2G iceK2G"
+diff --git a/conf/machine/include/k2hk.inc b/conf/machine/include/k2hk.in=
+c
+deleted file mode 100644
+index 456fda75..00000000
+--- a/conf/machine/include/k2hk.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require conf/machine/include/keystone.inc
+-SOC_FAMILY:append =3D ":k2hk"
+-
+-# Set the list of device targets for ti-pdk class recipes
+-TI_PDK_LIMIT_SOCS =3D "k2h k2k"
+-TI_PDK_LIMIT_BOARDS =3D "evmK2H evmK2K"
+diff --git a/conf/machine/include/k2l.inc b/conf/machine/include/k2l.inc
+deleted file mode 100644
+index b6a4bc7d..00000000
+--- a/conf/machine/include/k2l.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require conf/machine/include/keystone.inc
+-SOC_FAMILY:append =3D ":k2l"
+-
+-# Set the list of device targets for ti-pdk class recipes
+-TI_PDK_LIMIT_SOCS =3D "k2l"
+-TI_PDK_LIMIT_BOARDS =3D "evmK2L"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/key=
+stone.inc
+deleted file mode 100644
+index 851328ac..00000000
+--- a/conf/machine/include/keystone.inc
++++ /dev/null
+@@ -1,30 +0,0 @@
+-require conf/machine/include/ti-soc.inc
+-SOC_FAMILY:append =3D ":keystone"
+-
+-DEFAULTTUNE ?=3D "armv7athf-neon"
+-require conf/machine/include/arm/armv7a/tune-cortexa15.inc
+-
+-PREFERRED_PROVIDER_virtual/kernel ?=3D "linux-ti-staging"
+-PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-ti-staging"
+-PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
+-
+-# Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR =3D "r10"
+-
+-KERNEL_IMAGETYPE =3D "zImage"
+-
+-UBOOT_ENTRYPOINT =3D "0x80008000"
+-UBOOT_LOADADDRESS =3D "0x80008000"
+-
+-SPL_BINARY =3D "MLO"
+-UBOOT_SUFFIX =3D "bin"
+-
+-# Use the expected value of the ubifs filesystem's volume name in the ke=
+rnel
+-# and u-boot.
+-UBI_VOLNAME =3D "rootfs"
+-
+-EXTRA_IMAGEDEPENDS +=3D "u-boot"
+-EXTRA_IMAGEDEPENDS +=3D "boot-monitor"
+-
+-MACHINE_FEATURES =3D "kernel26 apm usbgadget usbhost vfat pci dsp"
+-MACHINE_FEATURES_BACKFILL_CONSIDERED =3D "rtc"
+diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
+deleted file mode 100644
+index 662f5c89..00000000
+--- a/conf/machine/k2e-evm.conf
++++ /dev/null
+@@ -1,32 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2E machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2E EVM
+-
+-require conf/machine/include/k2e.inc
+-
+-KERNEL_DEVICETREE =3D "keystone-k2e-evm.dtb"
+-
+-UBOOT_MACHINE =3D "k2e_evm_config"
+-
+-BOOT_MONITOR_MAKE_TARGET =3D "k2e"
+-
+-IMAGE_FSTYPES +=3D "ubifs ubi tar.xz"
+-
+-SERIAL_CONSOLES =3D "115200;ttyS0"
+-
+-SYSVINIT_ENABLED_GETTYS =3D ""
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# From dmesg:
+-# UBI: smallest flash I/O unit:    2048
+-# UBI: logical eraseblock size:    126976 bytes
+-# from ubiattach stdout:
+-# UBI device number 0, total 3856 LEBs
+-MKUBIFS_ARGS =3D "-F -m 2048 -e 126976 -c 3856"
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# from dmesg:
+-# UBI: smallest flash I/O unit:    2048
+-# UBI: physical eraseblock size:   131072 bytes (128 KiB)
+-# UBI: sub-page size:              2048
+-UBINIZE_ARGS =3D "-m 2048 -p 128KiB -s 2048 -O 2048"
+diff --git a/conf/machine/k2e-hs-evm.conf b/conf/machine/k2e-hs-evm.conf
+deleted file mode 100644
+index 1fc03d6c..00000000
+--- a/conf/machine/k2e-hs-evm.conf
++++ /dev/null
+@@ -1,15 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2E HS EVM
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2E HS EVM
+-
+-require conf/machine/k2e-evm.conf
+-
+-UBOOT_MACHINE =3D "k2e_hs_evm_config"
+-SPL_BINARY =3D ""
+-
+-UBOOT_ENTRYPOINT =3D "0x82000000"
+-UBOOT_LOADADDRESS =3D "0x82000000"
+-UBOOT_RD_LOADADDRESS =3D "0x84000000"
+-UBOOT_RD_ENTRYPOINT =3D "0x84000000"
+-
+-TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_CAT}/k2e"
+diff --git a/conf/machine/k2g-evm.conf b/conf/machine/k2g-evm.conf
+deleted file mode 100644
+index d4cf0605..00000000
+--- a/conf/machine/k2g-evm.conf
++++ /dev/null
+@@ -1,35 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2G machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2G EVM
+-
+-require conf/machine/include/k2g.inc
+-
+-MACHINE_FEATURES +=3D "alsa"
+-
+-KERNEL_DEVICETREE =3D "keystone-k2g-evm.dtb keystone-k2g-ice.dtb \
+-                     ${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1=
+', 'keystone-k2g-ice-pru-excl-uio.dtb', '', d)}"
+-
+-UBOOT_MACHINE =3D "k2g_evm_config"
+-
+-BOOT_MONITOR_MAKE_TARGET =3D "k2g"
+-
+-IMAGE_FSTYPES +=3D "ubifs ubi tar.xz"
+-
+-SERIAL_CONSOLES =3D "115200;ttyS0"
+-
+-SYSVINIT_ENABLED_GETTYS =3D ""
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# From dmesg:
+-# UBI: smallest flash I/O unit:    4096
+-# UBI: logical eraseblock size:    253952 bytes
+-# from ubiattach stdout:
+-# UBI device number 0, total 1926 LEBs
+-MKUBIFS_ARGS =3D "-F -m 4096 -e 253952 -c 1926"
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# from dmesg:
+-# UBI: smallest flash I/O unit:    4096
+-# UBI: physical eraseblock size:   256 KiB
+-# UBI: sub-page size:              4096
+-UBINIZE_ARGS =3D "-m 4096 -p 256KiB -s 4096 -O 4096"
+diff --git a/conf/machine/k2g-hs-evm.conf b/conf/machine/k2g-hs-evm.conf
+deleted file mode 100644
+index 0620b1f5..00000000
+--- a/conf/machine/k2g-hs-evm.conf
++++ /dev/null
+@@ -1,15 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2G HS EVM
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2G HS EVM
+-
+-require conf/machine/k2g-evm.conf
+-
+-UBOOT_MACHINE =3D "k2g_hs_evm_config"
+-SPL_BINARY =3D ""
+-
+-UBOOT_ENTRYPOINT =3D "0x82000000"
+-UBOOT_LOADADDRESS =3D "0x82000000"
+-UBOOT_RD_LOADADDRESS =3D "0x84000000"
+-UBOOT_RD_ENTRYPOINT =3D "0x84000000"
+-
+-TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_CAT}/k2g"
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+deleted file mode 100644
+index 89386f1d..00000000
+--- a/conf/machine/k2hk-evm.conf
++++ /dev/null
+@@ -1,32 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2HK machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2HK EVM
+-
+-require conf/machine/include/k2hk.inc
+-
+-KERNEL_DEVICETREE =3D "keystone-k2hk-evm.dtb"
+-
+-UBOOT_MACHINE =3D "k2hk_evm_config"
+-
+-BOOT_MONITOR_MAKE_TARGET =3D "k2hk"
+-
+-IMAGE_FSTYPES +=3D "ubifs ubi tar.xz"
+-
+-SERIAL_CONSOLES =3D "115200;ttyS0"
+-
+-SYSVINIT_ENABLED_GETTYS =3D ""
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# From dmesg:
+-# UBI: smallest flash I/O unit:    2048
+-# UBI: logical eraseblock size:    126976 bytes
+-# from ubiattach stdout:
+-# UBI device number 0, total 3856 LEBs
+-MKUBIFS_ARGS =3D "-F -m 2048 -e 126976 -c 3856"
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# from dmesg:
+-# UBI: smallest flash I/O unit:    2048
+-# UBI: physical eraseblock size:   131072 bytes (128 KiB)
+-# UBI: sub-page size:              2048
+-UBINIZE_ARGS =3D "-m 2048 -p 128KiB -s 2048 -O 2048"
+diff --git a/conf/machine/k2hk-hs-evm.conf b/conf/machine/k2hk-hs-evm.con=
+f
+deleted file mode 100644
+index 5c93ca48..00000000
+--- a/conf/machine/k2hk-hs-evm.conf
++++ /dev/null
+@@ -1,15 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2HK HS EVM
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2HK HS EVM
+-
+-require conf/machine/k2hk-evm.conf
+-
+-UBOOT_MACHINE =3D "k2hk_hs_evm_config"
+-SPL_BINARY =3D ""
+-
+-UBOOT_ENTRYPOINT =3D "0x82000000"
+-UBOOT_LOADADDRESS =3D "0x82000000"
+-UBOOT_RD_LOADADDRESS =3D "0x84000000"
+-UBOOT_RD_ENTRYPOINT =3D "0x84000000"
+-
+-TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_CAT}/k2hk"
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+deleted file mode 100644
+index dddc01f1..00000000
+--- a/conf/machine/k2l-evm.conf
++++ /dev/null
+@@ -1,32 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2L machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2L EVM
+-
+-require conf/machine/include/k2l.inc
+-
+-KERNEL_DEVICETREE =3D "keystone-k2l-evm.dtb"
+-
+-UBOOT_MACHINE =3D "k2l_evm_config"
+-
+-BOOT_MONITOR_MAKE_TARGET =3D "k2l"
+-
+-IMAGE_FSTYPES +=3D "ubifs ubi tar.xz"
+-
+-SERIAL_CONSOLES =3D "115200;ttyS0"
+-
+-SYSVINIT_ENABLED_GETTYS =3D ""
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# From dmesg:
+-# UBI: smallest flash I/O unit:    4096
+-# UBI: logical eraseblock size:    253952 bytes
+-# from ubiattach stdout:
+-# UBI device number 0, total 1926 LEBs
+-MKUBIFS_ARGS =3D "-F -m 4096 -e 253952 -c 1926"
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# from dmesg:
+-# UBI: smallest flash I/O unit:    4096
+-# UBI: physical eraseblock size:   256 KiB
+-# UBI: sub-page size:              4096
+-UBINIZE_ARGS =3D "-m 4096 -p 256KiB -s 4096 -O 4096"
+diff --git a/conf/machine/k2l-hs-evm.conf b/conf/machine/k2l-hs-evm.conf
+deleted file mode 100644
+index 097f94d0..00000000
+--- a/conf/machine/k2l-hs-evm.conf
++++ /dev/null
+@@ -1,15 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: Keystone 2 K2L HS EVM
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2L HS EVM
+-
+-require conf/machine/k2l-evm.conf
+-
+-UBOOT_MACHINE =3D "k2l_hs_evm_config"
+-SPL_BINARY =3D ""
+-
+-UBOOT_ENTRYPOINT =3D "0x82000000"
+-UBOOT_LOADADDRESS =3D "0x82000000"
+-UBOOT_RD_LOADADDRESS =3D "0x84000000"
+-UBOOT_RD_ENTRYPOINT =3D "0x84000000"
+-
+-TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_CAT}/k2l"
 --=20
 2.25.1
 
