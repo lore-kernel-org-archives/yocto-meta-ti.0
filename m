@@ -1,47 +1,46 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.658.1646421426374537972
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.748.1646421917747724529
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 04 Mar 2022 11:17:07 -0800
+ Fri, 04 Mar 2022 11:25:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=jxRzs30x;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 224JH1ZL086416;
-	Fri, 4 Mar 2022 13:17:01 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fXs28ggr;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 224JPASG069788;
+	Fri, 4 Mar 2022 13:25:10 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1646421421;
-	bh=XPpM4v38tVYVOyQrDYmlb28L65pkSzOq9OgKb/SsAhQ=;
+	s=ti-com-17Q1; t=1646421910;
+	bh=BQL64l+oot28m46jHRvW9YAgscuUOfLl0+/Bdld7QqA=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=jxRzs30xZBoaE0cxs75yLgTD5Ybanr592EBFs1zUlUKc6T3h1vJjXTgAkFj3mSkKi
-	 +E1GwneJOV7u2eLsNDmNwmLrWWK+mN2+VnXYmArorAQbBqbBKH4pIYY9bvlGj/lh1Z
-	 mdxuHVmGmRzdmRjdxUWJkWhLrMbOV6PwTMOPc3VU=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 224JH1xZ050204
+	b=fXs28ggrMSqzyX4NLPpfpJpzRvKxppg5djS5UjkKR1mbA94W7hFvIav0TUvAlsR0x
+	 w8ptP60ZeXtgZtknXttg/6bUInI1n3iTE8TVUXcR6MzAoyCazGTxqnX8QNP8W1tve3
+	 FFCwiuGambX/QYqakW/j7Mlzv3BG3OE9Uy5BFOH4=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 224JPAcC104461
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 4 Mar 2022 13:17:01 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 4 Mar 2022 13:25:10 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 4
- Mar 2022 13:17:01 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2022 13:25:09 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Fri, 4 Mar 2022 13:17:01 -0600
-Received: from [10.247.28.135] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 224JH02u082435;
-	Fri, 4 Mar 2022 13:17:00 -0600
-Message-ID: <193b4b79-455d-3b21-58bb-0c550c8d9477@ti.com>
-Date: Fri, 4 Mar 2022 13:17:00 -0600
+ Frontend Transport; Fri, 4 Mar 2022 13:25:10 -0600
+Received: from [10.249.37.96] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 224JP9rA014176;
+	Fri, 4 Mar 2022 13:25:09 -0600
+Message-ID: <20e409f2-7eaa-ef7b-06df-ef1fcbab1309@ti.com>
+Date: Fri, 4 Mar 2022 13:25:09 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.6.1
 Subject: Re: [dunfell/master PATCH] pruss-fw: am57xx: Update hsr/prp/sw/dual-emac firmware
-To: Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denis@denix.org>,
-        Yogesh
- Siraswar <yogeshs@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko <denis@denix.org>,
+        Yogesh Siraswar <yogeshs@ti.com>
 CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
 References: <20220304191540.8578-1-praneeth@ti.com>
-From: "praneeth" <praneeth@ti.com>
+From: "Ryan Eatmon" <reatmon@ti.com>
 In-Reply-To: <20220304191540.8578-1-praneeth@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Language: en-US
@@ -50,7 +49,7 @@ Content-Transfer-Encoding: 7bit
 
 
 
-On 3/4/2022 1:15 PM, Praneeth Bajjuri wrote:
+On 3/4/2022 13:15, Praneeth Bajjuri wrote:
 > commit 5a05d0b ("ti-pruss: Update AM57x PRP firmware to 002.020.035")
 > commit d88ee87 ("ti-pruss: Update AM57x HSR firmware to 002.020.035")
 > commit bc428f2 ("ti-pruss: Update AM57x Switch firmware to 003.002.012")
@@ -62,11 +61,6 @@ On 3/4/2022 1:15 PM, Praneeth Bajjuri wrote:
 > rename the recipes and capture the fix version for am335x, am437x and am57xx
 > in ti-linux-fw.inc.
 > 
-
-Ryan,
-Have not chance to test this patch. Please review and verify.
-
-
 > Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 > ---
 >   .../{prueth-fw_5.6.15.bb => prueth-fw.bb}          |  3 +++
@@ -95,7 +89,14 @@ Have not chance to test this patch. Please review and verify.
 > +PV = "${PRUETH_FW_AM437X_VERSION}"
 > +PV = "${PRUETH_FW_AM57XX_VERSION}"
 >   PR = "${INC_PR}.0"
->   
+
+I think you need to uniquify the PV variable for each platform.  Right 
+now you are just resetting each time and not overriding it.
+
+PV_am335x-evm = "${PRUETH_FW_AM335X_VERSION}"
+etc...
+
+
 >   CLEANBROKEN = "1"
 > diff --git a/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb b/recipes-bsp/pruhsr-fw/pruhsr-fw.bb
 > similarity index 88%
@@ -112,7 +113,10 @@ Have not chance to test this patch. Please review and verify.
 > +PV = "${PRUHSR_FW_AM437X_VERSION}"
 > +PV = "${PRUHSR_FW_AM57XX_VERSION}"
 >   PR = "${INC_PR}.0"
->   
+
+Same here.
+
+
 >   CLEANBROKEN = "1"
 > diff --git a/recipes-bsp/pruprp-fw/pruprp-fw_2.17.25.bb b/recipes-bsp/pruprp-fw/pruprp-fw.bb
 > similarity index 88%
@@ -129,7 +133,10 @@ Have not chance to test this patch. Please review and verify.
 > +PV = "${PRUPRP_FW_AM437X_VERSION}"
 > +PV = "${PRUPRP_FW_AM57XX_VERSION}"
 >   PR = "${INC_PR}.0"
->   
+
+Same here.
+
+
 >   CLEANBROKEN = "1"
 > diff --git a/recipes-bsp/prusw-fw/prusw-fw_3.2.9.bb b/recipes-bsp/prusw-fw/prusw-fw.bb
 > similarity index 88%
@@ -146,7 +153,10 @@ Have not chance to test this patch. Please review and verify.
 > +PV = "${PRUSW_FW_AM437X_VERSION}"
 > +PV = "${PRUSW_FW_AM57XX_VERSION}"
 >   PR = "${INC_PR}.0"
->   
+
+Same here.
+
+
 >   CLEANBROKEN = "1"
 > diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
 > index fced78fd..368b203f 100644
@@ -180,3 +190,7 @@ Have not chance to test this patch. Please review and verify.
 >   SRCREV = "${TI_LINUX_FW_SRCREV}"
 >   
 >   BRANCH ?= "ti-linux-firmware"
+
+-- 
+Ryan Eatmon
+reatmon@ti.com
