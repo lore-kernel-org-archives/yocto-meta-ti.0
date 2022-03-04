@@ -1,129 +1,72 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.1477.1646425821444200725
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web09.2504.1646431200763883575
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 04 Mar 2022 12:30:22 -0800
+ Fri, 04 Mar 2022 14:00:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 37C4140C22;
-	Fri,  4 Mar 2022 20:30:20 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QODLCRlO9kdN; Fri,  4 Mar 2022 20:30:20 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E695840BE6;
-	Fri,  4 Mar 2022 20:30:12 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id A73EE1747CB; Fri,  4 Mar 2022 15:30:12 -0500 (EST)
-Date: Fri, 4 Mar 2022 15:30:12 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Ryan Eatmon <reatmon@ti.com>
-Cc: "Bajjuri, Praneeth" <praneeth@ti.com>, Yogesh Siraswar <yogeshs@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org,
-	Priya N S <priya.ns@mistralsolutions.com>,
-	Kishon Vijay Abraham <kishon@ti.com>,
-	Vignesh Raghavendra <vigneshr@ti.com>
-Subject: Re: [meta-ti] [dunfell/master PATCH] pruss-fw: am57xx: Update hsr/prp/sw/dual-emac firmware
-Message-ID: <20220304203012.GU1766@denix.org>
-References: <20220304191540.8578-1-praneeth@ti.com>
- <20e409f2-7eaa-ef7b-06df-ef1fcbab1309@ti.com>
- <3ec5372a-d727-d88b-a996-8594a0e61f97@ti.com>
- <d02c287a-fe2d-0288-a159-cbc5275a3147@ti.com>
- <16D94741C899AE2B.14701@lists.yoctoproject.org>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=htqXgJmZ;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 224LxxJV024625;
+	Fri, 4 Mar 2022 15:59:59 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1646431199;
+	bh=wkuzULhWyFNcUV3J9pGPlAfHFAXGmzVB86T91Y/rYng=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=htqXgJmZBQQFW/lfGgd3QgkkRQ+RhePaKfKxM3Bg+ru69wtwBqzE8ghzLimn47ZMQ
+	 NgPCRc3kbRB7zxwa2f2Lua60u2dCrn9vgPqyH88DheH8Ly2WKdUKtoo34rxtxVwn5J
+	 a0Q5kWAbahUPX6yMRbmcWPjuVMkIPEfLzYsCZqSQ=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 224LxxYg013886
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 4 Mar 2022 15:59:59 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 4
+ Mar 2022 15:59:58 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Fri, 4 Mar 2022 15:59:58 -0600
+Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 224Lxwf0031088;
+	Fri, 4 Mar 2022 15:59:58 -0600
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1nQFxu-00031K-J1; Fri, 04 Mar 2022 15:59:58 -0600
+From: "Ryan Eatmon" <reatmon@ti.com>
+To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 1/4] linux-ti-staging: Bump to 08.02.00.005 release
+Date: Fri, 4 Mar 2022 15:59:55 -0600
+Message-ID: <20220304215958.11568-2-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220304215958.11568-1-reatmon@ti.com>
+References: <20220304215958.11568-1-reatmon@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <16D94741C899AE2B.14701@lists.yoctoproject.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-On Fri, Mar 04, 2022 at 03:24:37PM -0500, Denys Dmytriyenko wrote:
-> On Fri, Mar 04, 2022 at 02:06:47PM -0600, Ryan Eatmon wrote:
-> >=20
-> >=20
-> > On 3/4/2022 13:40, Bajjuri, Praneeth wrote:
-> > >
-> > >
-> > >On 3/4/2022 1:25 PM, Ryan Eatmon wrote:
-> > >>>diff --git a/recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb
-> > >>>b/recipes-bsp/prueth-fw/prueth-fw.bb
+Updated the linux version for 08.02.00.005
 
-Also, might want to name it prueth-fw_git.bb - not required, just a namin=
-g=20
-convention to indicate it is pulled from git and version is set by recipe=
-.
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 2ff3fb12..9eb5a306 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.10.y"
+ 
+-SRCREV = "5a43918e31d3b89955ce1f8e2cf155a6deb7432e"
++SRCREV = "7a7a3af903da2b2d551d058f8262a66e6b42b6b1"
+ PV = "5.10.100+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+2.17.1
 
-> > >>>similarity index 88%
-> > >>>rename from recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb
-> > >>>rename to recipes-bsp/prueth-fw/prueth-fw.bb
-> > >>>index f7336fb1..e41bb3c0 100644
-> > >>>--- a/recipes-bsp/prueth-fw/prueth-fw_5.6.15.bb
-> > >>>+++ b/recipes-bsp/prueth-fw/prueth-fw.bb
-> > >>>@@ -2,6 +2,9 @@ SUMMARY =3D "PRU Ethernet firmware for AM57xx,
-> > >>>AM437x and AM335x"
-> > >>>=A0 require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> > >>>+PV =3D "${PRUETH_FW_AM335X_VERSION}"
-> > >>>+PV =3D "${PRUETH_FW_AM437X_VERSION}"
-> > >>>+PV =3D "${PRUETH_FW_AM57XX_VERSION}"
-> > >>>=A0 PR =3D "${INC_PR}.0"
-> > >>
-> > >>I think you need to uniquify the PV variable for each platform.=A0
-> > >>Right now you are just resetting each time and not overriding
-> > >>it.
-> > >>
-> > >>PV_am335x-evm =3D "${PRUETH_FW_AM335X_VERSION}"
-> > >>etc...
-> > >
-> > >Thanks for the quick review,
-> > >Does this work instead? PV_ti-soc?
-> > >
-> > >The FW version for each platform could be different as the
-> > >mentioned commit in commitmessage points to updating the firmware
-> > >only for am57xx but not for am335x/am437x.
-> >=20
-> > While I think that might technically work, there are only three
-> > machines that come into these recipes.  I think it would be more
-> > confusing for someone reading the recipe to wonder what all makes up
-> > ti-soc, rather than just seeing the three specific variables called
-> > out.  Plus you created three variables in the ti-linux-fw.inc.  It
-> > would fit more in line with other things in the same recipe to just
-> > list them out:
-> >=20
-> >=20
-> > TARGET =3D ""
-> > TARGET_ti33x =3D "am335x-pru0-prueth-fw.elf am335x-pru1-prueth-fw.elf=
-"
-> > TARGET_ti43x =3D "am437x-pru0-prueth-fw.elf am437x-pru1-prueth-fw.elf=
-"
-> > TARGET_am57xx-evm =3D "am57xx-pru0-prueth-fw.elf am57xx-pru1-prueth-f=
-w.elf"
-> > TARGET_am57xx-hs-evm =3D "am57xx-pru0-prueth-fw.elf am57xx-pru1-pruet=
-h-fw.elf"
-> >=20
-> > and
-> >=20
-> > PV =3D ""
-> > PV_ti33x =3D "${PRUETH_FW_AM335X_VERSION}"
-> > PV_ti43x =3D "${PRUETH_FW_AM437X_VERSION}"
-> > PV_am57xx-evm =3D "${PRUETH_FW_AM57XX_VERSION}"
-> > PV_am57xx-hs-evm =3D "${PRUETH_FW_AM57XX_VERSION}"
->=20
-> No, PV_ti-soc won't work, it will be the same as plain PV and won't use=
- the=20
-> correct value per platform.
->=20
-> What Ryan explains is correct - need an override per platform.
->=20
-> BTW, master uses a different override syntax, so this won't apply to ma=
-ster or=20
-> kirkstone and would need to be updated...
-
---=20
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
