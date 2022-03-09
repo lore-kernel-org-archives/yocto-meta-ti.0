@@ -1,56 +1,72 @@
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web09.23787.1646634645963182364
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web12.927.1646789660635220407
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 06 Mar 2022 22:30:46 -0800
+ Tue, 08 Mar 2022 17:34:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BOaNbFRP;
- spf=pass (domain: gmail.com, ip: 209.85.222.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f169.google.com with SMTP id v189so2192090qkd.2
-        for <meta-ti@lists.yoctoproject.org>; Sun, 06 Mar 2022 22:30:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=iCBjmCk/g6A4FTU7a+g1rUTzVLOfjJfVKglbQkmgP2I=;
-        b=BOaNbFRPeMNqf+cEl/s9xKmGmw9V4xswPM3Vz+nEJNWgQT7XjbUKPnklRUhWDBwUeP
-         eWkd9BOCB6q5KXbuC5V5iYJRgIXleG/iLOnmot9d4MUkCd6tP0XYGKXPjJMfFIonQ7YY
-         rTMrM1oSl1KjS6EX22nsL14iXRwCcZDv3/0LdzaxU28A0ZAXsB+vehqSgof7SwqAit/W
-         prg70t/IWeSSdHOPETQgI4wRgp+4MNs1RoXZEAO9R7OjKi13vH18ju0T3ciHOviOKDrg
-         5WidA+HdVMzB2lncST8GdynNHynwwwsD7x27rNJf1vKT/nc7R3kCyuSk0rbUedZ1PE37
-         UR5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=iCBjmCk/g6A4FTU7a+g1rUTzVLOfjJfVKglbQkmgP2I=;
-        b=kPfkA7w61+eUE7Cj/esr7hXYbynz2p5sGXgkAiadHf85Awxb3+saCZ9dI3fM+YTYzT
-         0PFS6q2/P6LlDsrsQyRaHyrUUUxSSjNCCVyGnIX67eVqmx3XEcDEfoK+Qfnnhbkjov4K
-         YDF9EaR0UVm9rRQMzOBE5TrKGYNJtOr5ABzxbmZNM8vZVOuxMhzlDP/uPWC6hMRf/+oY
-         00akkl4FpHz12PKhqElJNVg5atKqh4TYx/IY3xKCrGp8+RbjdE4lQNOH9XEKJBAEB/Kn
-         XxTJdAsSM5BMQh24F6GzA2/LHz4agBaHTvD4x0eheEkl4TSZWwfa0Xh5gUYNakb10eTP
-         g+lQ==
-X-Gm-Message-State: AOAM530H185cZvUK0leyAH7ok293JLl0iXMtnSlGDaxThJpuVZdTi/Bz
-	Z4kt6yOXVGk9sPtE55q3Q1+9wh4XzeWopH0HUXzUkl5AHORM8A==
-X-Google-Smtp-Source: ABdhPJw6iTAJRRLoE3dMMi3EAVwSSDiweBFGErY+EJO/IEjM5amzF+mIHDDVXkzFSbBpP9FRSStovZYqFf348tAsPAQ=
-X-Received: by 2002:a05:620a:1593:b0:60a:b223:893a with SMTP id
- d19-20020a05620a159300b0060ab223893amr6127050qkk.72.1646634644699; Sun, 06
- Mar 2022 22:30:44 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=W/I/Td9t;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2291YHq0038134;
+	Tue, 8 Mar 2022 19:34:17 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1646789657;
+	bh=uhEnesWgDigvZDFU0s+EBE3CWtRVEJUAM1j+dEVQOG0=;
+	h=From:To:Subject:Date;
+	b=W/I/Td9tm3GC8PE5m50HBAVedDJ8x1Be0xoPTVPbwjhd/yBRW4g0t2hu27ldP+DI9
+	 aeLHBFuv3JrH87ycypwdbo2bP8dUdrASdZncltQCEnl0ASTT8o3Yr4rbylVDR9ZRQD
+	 9rzkTnsmy3z1lQrIzp3+xX/0tKVx3HrEmZhRafPM=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2291YHwD056299
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 8 Mar 2022 19:34:17 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 8
+ Mar 2022 19:34:16 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Tue, 8 Mar 2022 19:34:16 -0600
+Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2291YGGs109082;
+	Tue, 8 Mar 2022 19:34:16 -0600
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1nRlDU-0000Qn-KI; Tue, 08 Mar 2022 19:34:16 -0600
+From: "Ryan Eatmon" <reatmon@ti.com>
+To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH] u-boot-ti-staging: Bump to 08.02.00.006 release
+Date: Tue, 8 Mar 2022 19:34:16 -0600
+Message-ID: <20220309013416.1615-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 6 Mar 2022 22:30:18 -0800
-Message-ID: <CAMKF1sqRuc4oYgu5B8m9EQhnm_ypb2oYD4xFY94qLuTLdtO+6g@mail.gmail.com>
-Subject: failing recipes from meta-ti for beaglebone black
-To: meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 
-Hello all,
+Updated the u-boot version for 08.02.00.006
 
-I have run a world build for beaglebone without X11 and using sgx-ddk
-for graphics, there are several recipes from meta-ti which are
-failing, You might be interested in addressing these failures
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-https://errors.yoctoproject.org/Errors/Build/142444/
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index 2c8fa2bc..5b13329f 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+ 
+-PR = "r21"
++PR = "r22"
+ 
+ BRANCH = "ti-u-boot-2021.01"
+ 
+-SRCREV = "993a48448c6458b2a5a6f612ba9a383a05183a4f"
++SRCREV = "44a87e3ab85c6d64044f0b5ad677008316baad70"
+-- 
+2.17.1
 
-There are some other failures which are perhaps unrelated to meta-ti
-e.g. virglrender, qtwebkitgtk, they can be ignored
-
-Thanks
--Khem
