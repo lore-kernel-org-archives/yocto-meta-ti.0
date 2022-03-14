@@ -1,72 +1,69 @@
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web12.927.1646789660635220407
+Return-Path: <denis@denix.org>
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	aws-us-west-2-korg-lkml-1.web.codeaurora.org
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35BA2C433F5
+	for <webhook@archiver.kernel.org>; Mon, 14 Mar 2022 23:29:54 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.3726.1647300593178329561
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 08 Mar 2022 17:34:21 -0800
+ Mon, 14 Mar 2022 16:29:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=W/I/Td9t;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2291YHq0038134;
-	Tue, 8 Mar 2022 19:34:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1646789657;
-	bh=uhEnesWgDigvZDFU0s+EBE3CWtRVEJUAM1j+dEVQOG0=;
-	h=From:To:Subject:Date;
-	b=W/I/Td9tm3GC8PE5m50HBAVedDJ8x1Be0xoPTVPbwjhd/yBRW4g0t2hu27ldP+DI9
-	 aeLHBFuv3JrH87ycypwdbo2bP8dUdrASdZncltQCEnl0ASTT8o3Yr4rbylVDR9ZRQD
-	 9rzkTnsmy3z1lQrIzp3+xX/0tKVx3HrEmZhRafPM=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2291YHwD056299
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 8 Mar 2022 19:34:17 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 8
- Mar 2022 19:34:16 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Tue, 8 Mar 2022 19:34:16 -0600
-Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2291YGGs109082;
-	Tue, 8 Mar 2022 19:34:16 -0600
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1nRlDU-0000Qn-KI; Tue, 08 Mar 2022 19:34:16 -0600
-From: "Ryan Eatmon" <reatmon@ti.com>
-To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH] u-boot-ti-staging: Bump to 08.02.00.006 release
-Date: Tue, 8 Mar 2022 19:34:16 -0600
-Message-ID: <20220309013416.1615-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
+ mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BB8CF40C3A;
+	Mon, 14 Mar 2022 23:29:51 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 8ON3RlWvlEKC; Mon, 14 Mar 2022 23:29:51 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+ [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A129D407E5;
+	Mon, 14 Mar 2022 23:29:50 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id C41A8165570;
+	Mon, 14 Mar 2022 19:29:49 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [dunfell][PATCH] README: update maintainers list
+Date: Mon, 14 Mar 2022 19:29:49 -0400
+Message-Id: <1647300589-29693-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+List-Id: <meta-ti.lists.yoctoproject.org>
+X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
+ aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
+ <meta-ti@lists.yoctoproject.org>; Mon, 14 Mar 2022 23:29:54 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14510
 
-Updated the u-boot version for 08.02.00.006
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Update the maintainers list.
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+Reviewed-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+This is a modified backport of a similar change from master.
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 2c8fa2bc..5b13329f 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -2,8 +2,8 @@ require u-boot-ti.inc
+ README | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/README b/README
+index 44544c6..40524a4 100644
+--- a/README
++++ b/README
+@@ -29,5 +29,5 @@ Please note - meta-ti mailing list requires subscription for posting:
+ https://lists.yoctoproject.org/g/meta-ti
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
- 
--PR = "r21"
-+PR = "r22"
- 
- BRANCH = "ti-u-boot-2021.01"
- 
--SRCREV = "993a48448c6458b2a5a6f612ba9a383a05183a4f"
-+SRCREV = "44a87e3ab85c6d64044f0b5ad677008316baad70"
+ Maintainers:
+-Praneeth Bajjuri <praneeth@ti.com>
++Ryan Eatmon <reatmon@ti.com>
+ Denys Dmytriyenko <denys@konsulko.com>
 -- 
-2.17.1
+2.7.4
+
 
