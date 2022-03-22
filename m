@@ -1,103 +1,238 @@
-Return-Path: <denis@denix.org>
+Return-Path: <detheridge@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7720C433EF
-	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 20:02:28 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.172.1647979347772147779
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 360FFC433F5
+	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 20:30:05 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web09.535.1647981003443967149
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 22 Mar 2022 13:02:28 -0700
+ Tue, 22 Mar 2022 13:30:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 1AD2440C3E;
-	Tue, 22 Mar 2022 20:02:27 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YMNKx-37cJ8A; Tue, 22 Mar 2022 20:02:27 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ED57A40B13;
-	Tue, 22 Mar 2022 20:02:22 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id B926D174837; Tue, 22 Mar 2022 16:02:22 -0400 (EDT)
-Date: Tue, 22 Mar 2022 16:02:22 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: reatmon@ti.com
-Cc: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH v2 3/7] recipes: Pick up correct
- image and build DM to boot images
-Message-ID: <20220322200222.GP23554@denix.org>
-References: <20220322181558.20684-1-reatmon@ti.com>
- <20220322181558.20684-4-reatmon@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fOGtZl97;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: detheridge@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 22MKU02O003799
+	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Mar 2022 15:30:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1647981000;
+	bh=qMtOJ4K8+1u6fS9goygNUfeEYWR8CLF60J0SOvwpJE8=;
+	h=From:To:CC:Subject:Date;
+	b=fOGtZl97z0XKioaDP99DiVM/RXrwWoiWfkFZGU5fu9EkQQLNU4r3Z1CQ7O6K3LodP
+	 lwKlVuTb5V6vP17nChWr3xufaYfa3NBPNKIyQeRea5iMV/BqdcOs+BdsqQEzANasUZ
+	 kQgK+5p26gMDFG6r01gAoDD8aAZB0HT1GypaRZh0=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 22MKU0Mf115662
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 22 Mar 2022 15:30:00 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 22
+ Mar 2022 15:29:59 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Tue, 22 Mar 2022 15:29:59 -0500
+Received: from uda0867391.dal.design.ti.com (ileax41-snat.itg.ti.com
+ [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 22MKTxid007065;
+	Tue, 22 Mar 2022 15:29:59 -0500
+From: Darren Etheridge <detheridge@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>
+CC: <detheridge@ti.com>
+Subject: [meta-ti][dunfell][PATCH] ti-graphics: gpu enable and move all
+ platforms to ddk 1.15
+Date: Tue, 22 Mar 2022 15:29:30 -0500
+Message-ID: <20220322202930.18399-1-detheridge@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220322181558.20684-4-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 22 Mar 2022 20:02:28 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14538
+ <meta-ti@lists.yoctoproject.org>; Tue, 22 Mar 2022 20:30:05 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14539
 
-On Tue, Mar 22, 2022 at 01:15:54PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
-> From: Nishanth Menon <nm@ti.com>
-> 
-> Make sure we have bootable wic images.
+Enable the GPU for am62xx and j721s2 and use IMG DDK 1.15
 
-First of all, can this be squashed with the previous patch?
+Migrate Imagination DDK 1.13 to DDK 1.15 for J721e
 
+Signed-off-by: Darren Etheridge <detheridge@ti.com>
+---
+ conf/machine/am62xx-evm.conf                  |  2 +
+ conf/machine/j721s2-evm.conf                  |  2 +
+ .../ti-img-rogue-driver_1.13.5776728.bb       | 40 -----------------
+ .../ti-img-rogue-driver_1.15.6133109.bb       | 44 +++++++++++++++++++
+ ...bb => ti-img-rogue-umlibs_1.15.6133109.bb} | 13 +++---
+ 5 files changed, 55 insertions(+), 46 deletions(-)
+ delete mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+ create mode 100644 recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+ rename recipes-graphics/libgles/{ti-img-rogue-umlibs_1.13.5776728.bb => ti-img-rogue-umlibs_1.15.6133109.bb} (84%)
 
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> ---
->  recipes-bsp/u-boot/u-boot-ti.inc           | 1 +
->  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-> index 6098f989..231b7647 100644
-> --- a/recipes-bsp/u-boot/u-boot-ti.inc
-> +++ b/recipes-bsp/u-boot/u-boot-ti.inc
-> @@ -41,6 +41,7 @@ PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/pdk-i
->  
->  PACKAGECONFIG_append_aarch64 = " atf optee"
->  PACKAGECONFIG_append_j7 = " dm"
-> +PACKAGECONFIG_append_am62xx = " dm"
->  
->  COMPATIBLE_MACHINE = "(ti-soc)"
->  
-> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> index 431c13da..4cd08a36 100644
-> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> @@ -19,7 +19,7 @@ PLAT_SFX_j7200-hs-evm = "j7200"
->  PLAT_SFX_j721s2-evm = "j721s2"
->  PLAT_SFX_am65xx = "am65xx"
->  PLAT_SFX_am64xx = "am64xx"
-> -PLAT_SFX_am62xx-evm = "am62xx"
-> +PLAT_SFX_am62xx-evm = "am62x"
-
-am62xx SOC_FAMILY in the override?
-
-
->  FILESEXTRAPATHS_prepend := "${METATIBASE}/recipes-bsp/ti-sci-fw/files/:"
->  require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> -- 
-> 2.17.1
-> 
-
+diff --git a/conf/machine/am62xx-evm.conf b/conf/machine/am62xx-evm.conf
+index 600abb58..086e40e4 100644
+--- a/conf/machine/am62xx-evm.conf
++++ b/conf/machine/am62xx-evm.conf
+@@ -4,6 +4,8 @@
+ 
+ require conf/machine/include/am62xx.inc
+ 
++MACHINE_FEATURES += "gpu"
++
+ KERNEL_DEVICETREE = " \
+     ti/k3-am625-sk.dtb \
+     ti/k3-am625-sk-lpmdemo.dtb \
+diff --git a/conf/machine/j721s2-evm.conf b/conf/machine/j721s2-evm.conf
+index 82fd33da..e5ed0b73 100644
+--- a/conf/machine/j721s2-evm.conf
++++ b/conf/machine/j721s2-evm.conf
+@@ -4,6 +4,8 @@
+ 
+ require conf/machine/include/j7.inc
+ 
++MACHINE_FEATURES += "gpu"
++
+ SERIAL_CONSOLES = "115200;ttyS10"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ TFA_K3_USART = "0x8"
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+deleted file mode 100644
+index a05de0f2..00000000
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
++++ /dev/null
+@@ -1,40 +0,0 @@
+-DESCRIPTION =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
+-HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
+-LICENSE = "MIT | GPLv2"
+-LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
+-
+-inherit module features_check
+-
+-REQUIRED_MACHINE_FEATURES = "gpu"
+-
+-MACHINE_KERNEL_PR_append = "b"
+-PR = "${MACHINE_KERNEL_PR}"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "j7"
+-
+-DEPENDS = "virtual/kernel"
+-
+-PROVIDES = "virtual/gpudriver"
+-
+-BRANCH = "1.13-5776728/linux-k5.10"
+-
+-SRC_URI = " \
+-    git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH} \
+-    file://0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch \
+-"
+-
+-S = "${WORKDIR}/git"
+-
+-SRCREV = "35a25875ae8738f82c7cabc6b077ef992b0cca84"
+-
+-PVR_SOC = "j721e_linux"
+-PVR_BVNC = "22.104.208.318"
+-PVR_BUILD = "release"
+-PVR_WS = "wayland"
+-
+-EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" RGX_BVNC=${PVR_BVNC} BUILD=${PVR_BUILD} PVR_BUILD_DIR=${PVR_SOC} WINDOW_SYSTEM=${PVR_WS}'
+-
+-do_install() {
+-    make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${PVR_SOC}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+-}
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+new file mode 100644
+index 00000000..fbff6c51
+--- /dev/null
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+@@ -0,0 +1,44 @@
++DESCRIPTION =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
++HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
++LICENSE = "MIT | GPLv2"
++LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
++
++inherit module features_check
++
++REQUIRED_MACHINE_FEATURES = "gpu"
++
++MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++COMPATIBLE_MACHINE = "j7-evm|j721s2-evm|am62xx"
++
++DEPENDS = "virtual/kernel"
++
++PROVIDES = "virtual/gpudriver"
++
++BRANCH = "linuxws/dunfell/k5.10/${PV}"
++
++SRC_URI = " \
++    git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=${BRANCH} \
++    file://0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch \
++"
++
++S = "${WORKDIR}/git"
++
++SRCREV = "ee0674adccac16f5b2f7cb8d5d05948706080cb5"
++
++TARGET_PRODUCT_j7-evm = "j721e_linux"
++TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
++TARGET_PRODUCT_am62xx = "am62_linux"
++TARGET_BVNC_j7-evm = "22.104.208.318"
++TARGET_BVNC_j721s2-evm = "36.53.104.796"
++TARGET_BVNC_am62xx = "33.15.11.3"
++PVR_BUILD = "release"
++PVR_WS = "wayland"
++
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" RGX_BVNC=${TARGET_BVNC} BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
++
++do_install() {
++    make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
++}
+diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+similarity index 84%
+rename from recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
+rename to recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+index 5194015e..e00dce99 100644
+--- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.5776728.bb
++++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+@@ -8,17 +8,18 @@ inherit features_check
+ REQUIRED_MACHINE_FEATURES = "gpu"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "j7"
++COMPATIBLE_MACHINE = "j7-evm|j721s2-evm|am62xx"
+ 
+-PR = "r3"
++PR = "r1"
+ 
+ BRANCH = "linuxws/dunfell/k5.10/${PV}"
+ 
+ SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=${BRANCH}"
++SRCREV = "47c3ffc44f2881397d45c8a2b5dfa7d6c58b79fb"
+ 
+-SRCREV = "5ef38353c38d921a65ea6df75c7b6ce710b66034"
+-
+-PVR_SOC ?= "j721e_linux"
++TARGET_PRODUCT_j7-evm = "j721e_linux"
++TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
++TARGET_PRODUCT_am62xx = "am62_linux"
+ PVR_BUILD ?= "release"
+ PVR_WS = "wayland"
+ 
+@@ -50,7 +51,7 @@ RRECOMMENDS_${PN} += "ti-img-rogue-driver"
+ S = "${WORKDIR}/git"
+ 
+ do_install () {
+-    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${PVR_SOC} BUILD=${PVR_BUILD} WINDOW_SYSTEM=${PVR_WS}
++    oe_runmake install DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT} BUILD=${PVR_BUILD} WINDOW_SYSTEM=${PVR_WS}
+     chown -R root:root ${D}
+ }
+ 
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.17.1
+
 
