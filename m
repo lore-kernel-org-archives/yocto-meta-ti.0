@@ -2,51 +2,51 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8EB9C433EF
-	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 16:25:32 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.12376.1647966331906609851
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22633C4332F
+	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 16:25:33 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.12341.1647966331711638975
  for <meta-ti@lists.yoctoproject.org>;
  Tue, 22 Mar 2022 09:25:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=F+40wTt+;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=B4aMUgQA;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 22MGPUfi073172;
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 22MGPUss037003;
 	Tue, 22 Mar 2022 11:25:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1647966330;
-	bh=AhAz0nrwYRxU4fRVKcN+pO0bRNPgP6WGegIyp2696Nw=;
+	bh=h9fzZzu7isOJ1Afmo/JyEhmRWnjmwh/9zqZS9NWOIz0=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=F+40wTt+AegXGWUv1IQrG0yWHev+wWihWdsEvsBFXoS5VWIOUW0kOXlpn0Q87Hcfe
-	 UxvAy/lIPd4qoULa9M86820UhXVD04k5eW1EdTfiWVN3xN+Er+mvoJLndmcEXiifmY
-	 EjYdRrpHPz5yk7Os81UUEDjM/poiX4JpZvotbwLs=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 22MGPUrX089280
+	b=B4aMUgQAhWfrUeVabXTAyB3TiTcwXB7ZhlHUTU/vFDXpdkSOPtgUv/O9JWqZNHvH5
+	 qwdYyIYV/7LOy67pcSBVEfeLQetZUO5xN0iCMLKeAdSfyWWVM9fm2khztqDTtDAtxa
+	 xu0qpFVK7hIDehI5KZcF+DibgRmxdjKI16NvTTlw=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 22MGPURn089256
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Tue, 22 Mar 2022 11:25:30 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 22
  Mar 2022 11:25:30 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Tue, 22 Mar 2022 11:25:30 -0500
+ Frontend Transport; Tue, 22 Mar 2022 11:25:29 -0500
 Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 22MGPUmM013113;
-	Tue, 22 Mar 2022 11:25:30 -0500
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 22MGPTJe116404;
+	Tue, 22 Mar 2022 11:25:29 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1nWhK6-00040p-CT; Tue, 22 Mar 2022 11:25:30 -0500
+	id 1nWhK5-0003zt-De; Tue, 22 Mar 2022 11:25:29 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH 11/11] recipes-bsp: lpm-demo: Fix build
- errors with clean task
-Date: Tue, 22 Mar 2022 11:25:28 -0500
-Message-ID: <20220322162528.15298-12-reatmon@ti.com>
+Subject: [meta-ti][dunfell][PATCH 03/11] recipes: Pick up correct image and
+ build DM to boot images
+Date: Tue, 22 Mar 2022 11:25:20 -0500
+Message-ID: <20220322162528.15298-4-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220322162528.15298-1-reatmon@ti.com>
 References: <20220322162528.15298-1-reatmon@ti.com>
@@ -56,49 +56,45 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 22 Mar 2022 16:25:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14522
+ <meta-ti@lists.yoctoproject.org>; Tue, 22 Mar 2022 16:25:33 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14519
 
-From: Nikhil Devshatwar <nikhil.nd@ti.com>
+From: Nishanth Menon <nm@ti.com>
 
-lpm-demo and tifs-lpm-demo packages only install certain files.
-The build breaks when rebuilding incrementally.
-It fails the do_configure task.
+Make sure we have bootable wic images.
 
-Fix this by adding CLEANBROKEN in those recipes.
-
-Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- recipes-bsp/lpm-demo/lpm-demo_1.0.bb           | 2 ++
- recipes-bsp/tifs-lpm-stub/tifs-lpm-stub_git.bb | 1 +
- 2 files changed, 3 insertions(+)
+ recipes-bsp/u-boot/u-boot-ti.inc           | 1 +
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/lpm-demo/lpm-demo_1.0.bb b/recipes-bsp/lpm-demo/lpm-demo_1.0.bb
-index 56b04d56..244d7a55 100644
---- a/recipes-bsp/lpm-demo/lpm-demo_1.0.bb
-+++ b/recipes-bsp/lpm-demo/lpm-demo_1.0.bb
-@@ -8,6 +8,8 @@ COMPATIBLE_MACHINE = "am62xx-evm"
- FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
- S = "${WORKDIR}"
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+index 6098f989..231b7647 100644
+--- a/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -41,6 +41,7 @@ PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/pdk-i
  
-+CLEANBROKEN = "1"
-+
- # We need to have the license file from some source. In this case, there
- # is no source. Hence pointing to the license file only
- SRC_URI = "file://GPL-2"
-diff --git a/recipes-bsp/tifs-lpm-stub/tifs-lpm-stub_git.bb b/recipes-bsp/tifs-lpm-stub/tifs-lpm-stub_git.bb
-index bc341035..e3ba67be 100644
---- a/recipes-bsp/tifs-lpm-stub/tifs-lpm-stub_git.bb
-+++ b/recipes-bsp/tifs-lpm-stub/tifs-lpm-stub_git.bb
-@@ -9,6 +9,7 @@ PV = "v2021.09a"
+ PACKAGECONFIG_append_aarch64 = " atf optee"
+ PACKAGECONFIG_append_j7 = " dm"
++PACKAGECONFIG_append_am62xx = " dm"
  
- COMPATIBLE_MACHINE = "am62xx-evm"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-+CLEANBROKEN = "1"
+ COMPATIBLE_MACHINE = "(ti-soc)"
  
- S = "${WORKDIR}/git"
- TARGET = "ti-fs-stub-firmware-am62x-gp.signed.bin"
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 431c13da..4cd08a36 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -19,7 +19,7 @@ PLAT_SFX_j7200-hs-evm = "j7200"
+ PLAT_SFX_j721s2-evm = "j721s2"
+ PLAT_SFX_am65xx = "am65xx"
+ PLAT_SFX_am64xx = "am64xx"
+-PLAT_SFX_am62xx-evm = "am62xx"
++PLAT_SFX_am62xx-evm = "am62x"
+ 
+ FILESEXTRAPATHS_prepend := "${METATIBASE}/recipes-bsp/ti-sci-fw/files/:"
+ require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
 -- 
 2.17.1
 
