@@ -1,126 +1,95 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53385C433F5
-	for <webhook@archiver.kernel.org>; Fri, 25 Mar 2022 20:31:05 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.39.1648240264496990867
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CF02C433F5
+	for <webhook@archiver.kernel.org>; Fri, 25 Mar 2022 21:00:22 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web09.362.1648242021249351719
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 25 Mar 2022 13:31:05 -0700
+ Fri, 25 Mar 2022 14:00:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 7B56740C46;
-	Fri, 25 Mar 2022 20:31:03 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rxKtgdm1Ih1y; Fri, 25 Mar 2022 20:31:03 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4B4A040B05;
-	Fri, 25 Mar 2022 20:30:58 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 7E0391748B6; Fri, 25 Mar 2022 16:30:57 -0400 (EDT)
-Date: Fri, 25 Mar 2022 16:30:57 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: afd@ti.com
-Cc: reatmon@ti.com, Yogesh Siraswar <yogeshs@ti.com>,
-	Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
+ dkim=fail reason="body hash did not verify" header.i=@ti.com
+ header.s=ti-com-17q1 header.b=pUtQIZG5;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 22PL0Bcn063127;
+	Fri, 25 Mar 2022 16:00:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1648242011;
+	bh=yXD3EFhQGaD0meeIU8dHVXTrJGKpaWcUF0e5BCkDTvo=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=pUtQIZG5WGg7cPz5p9l+20LCejGatg4oy/wElhQWB3f113zuJOihyIsagoZ9C4bIv
+	 KmyGb+bMB4+UqjBbGflf1hX318DO1q3SAOB3Or7q6ktdFv8SKxIQ0Hmhu4epPlA/nR
+	 c6RrLleCC6FQX47TjY7Lw3baXheeuc5cP/kpuqAA=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 22PL0BG9041826
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 25 Mar 2022 16:00:11 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 25
+ Mar 2022 16:00:11 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Fri, 25 Mar 2022 16:00:11 -0500
+Received: from [10.249.39.108] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 22PL0Bpo124566;
+	Fri, 25 Mar 2022 16:00:11 -0500
+Message-ID: <1b68aa6e-1c75-62c6-4366-7734ed8e5ac7@ti.com>
+Date: Fri, 25 Mar 2022 16:00:10 -0500
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
 Subject: Re: [meta-ti][dunfell][PATCH v3] machine: Add am62xx evm
  configuration
-Message-ID: <20220325203057.GH23554@denix.org>
+Content-Language: en-US
+To: Andrew Davis <afd@ti.com>, Yogesh Siraswar <yogeshs@ti.com>,
+        Praneeth
+ Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
 References: <20220324222129.9313-1-reatmon@ti.com>
  <a0625acc-3a60-a54d-655f-e4438ba1e917@ti.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+From: Ryan Eatmon <reatmon@ti.com>
 In-Reply-To: <a0625acc-3a60-a54d-655f-e4438ba1e917@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: base64
+X-MIME-Autoconverted: from 8bit to base64 by lelv0143.ext.ti.com id
+ 22PL0Bcn063127
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 25 Mar 2022 20:31:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14555
+ <meta-ti@lists.yoctoproject.org>; Fri, 25 Mar 2022 21:00:22 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14556
 
-On Thu, Mar 24, 2022 at 08:47:12PM -0500, Andrew F. Davis via lists.yoctoproject.org wrote:
-> On 3/24/22 5:21 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
-> >@@ -167,6 +182,10 @@ ALTERNATIVE_${PN}_am64xx = "\
-> >                      am64-main-r5f1_1-fw \
-> >                      am64-mcu-m4f0_0-fw \
-> >                      "
-> >+ALTERNATIVE_${PN}_am62xx = "\
-> >+                    am62-mcu-m4f0_0-fw \
-> >+		            am62-main-r5f0_0-fw \
-> 
-> 
-> ^^ Looks like some tabs found there way in here..
-> 
-> Why do we have these indented so far anyway, this whole file has wacky
-> indenting, needs normalized.
-
-Some quotes from the manual for 3 different cases - shell code, python code 
-and multi-line statements:
-
-===============================================
-Indentation: Use spaces for indentation rather than than tabs. For shell 
-functions, both currently work. However, it is a policy decision of the Yocto 
-Project to use tabs in shell functions. Realize that some layers have a policy 
-to use spaces for all indentation.
-
-Python Function Whitespace: All Python functions must now use four spaces for 
-indentation. Previously, an inconsistent mix of spaces and tabs existed, which 
-made extending these functions using _append or _prepend complicated given 
-that Python treats whitespace as syntactically significant. If you are 
-defining or extending any Python functions (e.g. populate_packages, do_unpack, 
-do_patch and so forth) in custom recipes or classes, you need to ensure you 
-are using consistent four-space indentation.
-
-Line Continuation: \ - Use the backward slash (\) character to split a 
-statement over multiple lines. Place the slash character at the end of the 
-line that is to be continued on the next line:
-
-     VAR = "A really long \
-            line"
-===============================================
-
-As you can see in the final example of multi-line, it shows the second line 
-starting where its content begins in the previous line. But it is not required 
-to indent like that, especially if the left part before the assignment sign is 
-very long, e.g.:
-
-ALTERNATIVE_${PN}_am62xx = "am62-mcu-m4f0_0-fw \
-                            am62-main-r5f0_0-fw \
-
-Instead, you could start at the beginning of the line or use minimal 
-indentation of few spaces (no tabs here):
-
-ALTERNATIVE_${PN}_am62xx = " \
-am62-mcu-m4f0_0-fw \
-am62-main-r5f0_0-fw \
-
-ALTERNATIVE_${PN}_am62xx = " \
-    am62-mcu-m4f0_0-fw \
-    am62-main-r5f0_0-fw \
-
-Both are acceptable.
-
-Tabs to be only used in shell functions, such as do_compile, do_install, etc.
-
-And one more final comment - when making functional changes, please keep the 
-existing indentation as is. If indentation need to be cleaned up or changed 
-for a recipe, should be a separate patch just for that w/o any functionality 
-or code changes - don't mix them in a single patch, unless it's a one-off.
-
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+DQoNCk9uIDMvMjQvMjAyMiAyMDo0NywgQW5kcmV3IERhdmlzIHdyb3RlOg0KPiBPbiAzLzI0
+LzIyIDU6MjEgUE0sIFJ5YW4gRWF0bW9uIHZpYSBsaXN0cy55b2N0b3Byb2plY3Qub3JnIHdy
+b3RlOg0KPj4gQEAgLTE2Nyw2ICsxODIsMTAgQEAgQUxURVJOQVRJVkVfJHtQTn1fYW02NHh4
+ID0gIlwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBh
+bTY0LW1haW4tcjVmMV8xLWZ3IFwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBhbTY0LW1jdS1tNGYwXzAtZncgXA0KPj4gwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICINCj4+ICtBTFRFUk5BVElWRV8ke1BOfV9h
+bTYyeHggPSAiXA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGFtNjItbWN1LW00ZjBfMC1mdyBcDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgYW02Mi1tYWluLXI1ZjBfMC1mdyBcDQo+IA0KPiANCj4gXl4gTG9va3Mg
+bGlrZSBzb21lIHRhYnMgZm91bmQgdGhlcmUgd2F5IGluIGhlcmUuLg0KDQpJJ2xsIHJlbW92
+ZSB0aG9zZSBlcnJhbnQgdGFicyBpbiB2NC4NCg0KPiBXaHkgZG8gd2UgaGF2ZSB0aGVzZSBp
+bmRlbnRlZCBzbyBmYXIgYW55d2F5LCB0aGlzIHdob2xlIGZpbGUgaGFzIHdhY2t5DQo+IGlu
+ZGVudGluZywgbmVlZHMgbm9ybWFsaXplZC4NCg0KVGhlIGZvcm1hdHRpbmcgaGFzIGJlZW4g
+aW4gdGhlcmUgZm9yIHF1aXRlIGEgd2hpbGUsIHNvIGEgbW9yZSBnZW5lcmFsIA0KZmlsZSBj
+bGVhbiB1cCBtaWdodCBiZSBpbiBvcmRlci4gIEknbGwgc2F2ZSB0aGF0IGZvciBhbm90aGVy
+IGNvbW1pdCANCmFmdGVyIHdlIGdldCBwYXN0IGFsbCBvZiB0aGUgYW02Mnh4IGNoYW5nZXMu
+DQoNCg0KDQo+IEFuZHJldw0KPiANCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCAiDQo+PiDCoCBBTFRFUk5BVElWRV8ke1BOfV9qNyA9ICJcDQo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgajctbWN1LXI1ZjBfMC1m
+dyBcDQo+PiBAQCAtMjE2LDYgKzIzNSw5IEBAIFRBUkdFVF9NQUlOX1I1RlNTMV8wX2FtNjR4
+eCA9ICJhbTY0LW1haW4tcjVmMV8wLWZ3Ig0KPj4gwqAgVEFSR0VUX01BSU5fUjVGU1MxXzFf
+YW02NHh4ID0gImFtNjQtbWFpbi1yNWYxXzEtZnciDQo+PiDCoCBUQVJHRVRfTUNVX000RlNT
+MF8wX2FtNjR4eCA9ICJhbTY0LW1jdS1tNGYwXzAtZnciDQo+PiArVEFSR0VUX01BSU5fUjVG
+U1MwXzBfYW02Mnh4ID0gImFtNjItbWFpbi1yNWYwXzAtZnciDQo+PiArVEFSR0VUX01DVV9N
+NEZTUzBfMF9hbTYyeHggPSAiYW02Mi1tY3UtbTRmMF8wLWZ3Ig0KPj4gKw0KPiANCg0KLS0g
+DQpSeWFuIEVhdG1vbg0KcmVhdG1vbkB0aS5jb20NCg==
 
