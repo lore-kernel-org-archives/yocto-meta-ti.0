@@ -1,319 +1,268 @@
-Return-Path: <denis@denix.org>
+Return-Path: <detheridge@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5049EC433EF
-	for <webhook@archiver.kernel.org>; Tue, 29 Mar 2022 21:34:14 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2558.1648589653254919322
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21238C433EF
+	for <webhook@archiver.kernel.org>; Tue, 29 Mar 2022 21:48:51 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web08.2792.1648590530045766002
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 29 Mar 2022 14:34:13 -0700
+ Tue, 29 Mar 2022 14:48:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EC8CF40C2C;
-	Tue, 29 Mar 2022 21:34:11 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4deTj-q43bBA; Tue, 29 Mar 2022 21:34:11 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BA17840B05;
-	Tue, 29 Mar 2022 21:34:08 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id EC0851748C5; Tue, 29 Mar 2022 17:34:07 -0400 (EDT)
-Date: Tue, 29 Mar 2022 17:34:07 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: reatmon@ti.com
-Cc: Yogesh Siraswar <yogeshs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][PATCH v4] machine: Add am62xx evm
- configuration
-Message-ID: <20220329213407.GY23554@denix.org>
-References: <20220325210632.8142-1-reatmon@ti.com>
+ dkim=fail reason="body hash did not verify" header.i=@ti.com
+ header.s=ti-com-17q1 header.b=Aubx649d;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: detheridge@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 22TLmimj025834;
+	Tue, 29 Mar 2022 16:48:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1648590524;
+	bh=88rpfAPO/DvbC/RLndED7sAtwxbtesKJEZ3NPCXiWA4=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=Aubx649d7GHDTQPV4goDK7zkW+g+5PioEHRENCzfgOmFrMYJ2geIXvNMqW/ypvJ38
+	 8vfHSXlAP4gGmDtw9oeLzjuFH6rKDR9ZdRSryvf724awoRnhwHjgbuISJX371L3Ng8
+	 QxnS0kJ3zbutU1ephmD0XeXAs4a7UC6suB068Bv8=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 22TLmiJG008583
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 29 Mar 2022 16:48:44 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 29
+ Mar 2022 16:48:44 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Tue, 29 Mar 2022 16:48:44 -0500
+Received: from [128.247.81.152] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 22TLmiMH094819;
+	Tue, 29 Mar 2022 16:48:44 -0500
+Message-ID: <f3526050-3e0a-fc75-446a-023e7bbc005a@ti.com>
+Date: Tue, 29 Mar 2022 16:48:43 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220325210632.8142-1-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [meta-ti][dunfell][PATCH v2] ti-graphics: gpu enable and move all
+ platforms to ddk 1.15
+Content-Language: en-US
+To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denis@denix.org>
+CC: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>
+References: <20220323193707.28162-1-detheridge@ti.com>
+ <20220325201007.GG23554@denix.org>
+ <9c974b1d-0501-51a8-26ab-b88c617fab5c@ti.com>
+ <20220325213849.GI23554@denix.org>
+ <1c4a7e86-9d2b-eaf0-f2bb-be04109e4f43@ti.com>
+ <20220325220609.GJ23554@denix.org>
+ <16DFC054FC61A9B3.21339@lists.yoctoproject.org>
+ <29965fda-5ada-3a75-e142-ed84e7dbf524@ti.com>
+From: "Etheridge, Darren" <detheridge@ti.com>
+In-Reply-To: <29965fda-5ada-3a75-e142-ed84e7dbf524@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0143.ext.ti.com id
+ 22TLmimj025834
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 29 Mar 2022 21:34:14 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14578
+ <meta-ti@lists.yoctoproject.org>; Tue, 29 Mar 2022 21:48:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14579
 
-On Fri, Mar 25, 2022 at 04:06:32PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
-> From: Nishanth Menon <nm@ti.com>
-> 
-> Lets add the basic AM62xx-evm configuration.
-> - Add configurations.
-> - Add firmware overrides.
-> - Add u-boot overrides.
-> 
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+On 3/25/2022 5:36 PM, Andrew Davis wrote:
+> On 3/25/22 5:30 PM, Andrew F. Davis via lists.yoctoproject.org wrote:
+>> On 3/25/22 5:06 PM, Denys Dmytriyenko wrote:
+>>> On Fri, Mar 25, 2022 at 04:54:56PM -0500, Andrew F. Davis via=20
+>>> lists.yoctoproject.org wrote:
+>>>> On 3/25/22 4:38 PM, Denys Dmytriyenko wrote:
+>>>>> On Fri, Mar 25, 2022 at 04:21:38PM -0500, Andrew Davis wrote:
+>>>>>> On 3/25/22 3:10 PM, Denys Dmytriyenko wrote:
+>>>>>>> On Wed, Mar 23, 2022 at 02:37:07PM -0500, Darren Etheridge wrote:
+>>>>>>>> Enable the GPU for am62xx and j721s2 and use IMG DDK 1.15
+>>>>>>>>
+>>>>>>>> Migrate Imagination DDK 1.13 to DDK 1.15 for J721e
+>>>>>>>
+>>>>>>> Overall looks good, please see inline below.
+>>>>>>>
+>>>>>>>
+>>>>>>>> Signed-off-by: Darren Etheridge <detheridge@ti.com>
+>>>>>>>> ---
+>>>>>>>>
+>>>>>>>> rename from=20
+>>>>>>>> recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.bb
+>>>>>>>> rename to=20
+>>>>>>>> recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+>>>>>>>> index a05de0f2..fbff6c51 100644
+>>>>>>>> ---=20
+>>>>>>>> a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.5776728.b=
+b
+>>>>>>>> +++=20
+>>>>>>>> b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.b=
+b
+>>>>>>>> @@ -7,17 +7,17 @@ inherit module features_check
+>>>>>>>> =C2=A0 REQUIRED_MACHINE_FEATURES =3D "gpu"
+>>>>>>>> -MACHINE_KERNEL_PR_append =3D "b"
+>>>>>>>> +MACHINE_KERNEL_PR_append =3D "a"
+>>>>>>>> =C2=A0 PR =3D "${MACHINE_KERNEL_PR}"
+>>>>>>>> =C2=A0 PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+>>>>>>>> -COMPATIBLE_MACHINE =3D "j7"
+>>>>>>>> +COMPATIBLE_MACHINE =3D "j7-evm|j721s2-evm|am62xx"
+>>>>>>>> =C2=A0 DEPENDS =3D "virtual/kernel"
+>>>>>>>> =C2=A0 PROVIDES =3D "virtual/gpudriver"
+>>>>>>>> -BRANCH =3D "1.13-5776728/linux-k5.10"
+>>>>>>>> +BRANCH =3D "linuxws/dunfell/k5.10/${PV}"
+>>>>>>>> =C2=A0 SRC_URI =3D " \
+>>>>>>>>      =20
+>>>>>>>> git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D${BRA=
+NCH}=20
+>>>>>>>> \
+>>>>>>>> @@ -26,15 +26,19 @@ SRC_URI =3D " \
+>>>>>>>> =C2=A0 S =3D "${WORKDIR}/git"
+>>>>>>>> -SRCREV =3D "35a25875ae8738f82c7cabc6b077ef992b0cca84"
+>>>>>>>> +SRCREV =3D "ee0674adccac16f5b2f7cb8d5d05948706080cb5"
+>>>>>>>> -PVR_SOC =3D "j721e_linux"
+>>>>>>>
+>>>>>>> I was actually thinking of keeping PVR_SOC variable and moving it=
+ to
+>>>>>>> corresponding machine configs.
+>>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> PVR_SOC is a bit of a legacy name, especially since PVR is now IMG.
+>>>>>
+>>>>> PVR or PowerVR name is still used as an overall umbrella for all of
+>>>>> Imagination's graphics, vision and AI chips, including SGX and=20
+>>>>> Rogue/RGX:
+>>>>> https://en.wikipedia.org/wiki/PowerVR
+>>>>>
+>>>>
+>>>>
+>>>> On the wiki page:
+>>>>
+>>>>> These GPUs are no longer called PowerVR, they are called IMG.[58]
+>>>>
+>>>> For their next gen GPUs they are distancing themselves from the PVR=20
+>>>> name,
+>>>> the GPU in AM62xx is one such next gen GPU, so it's already not=20
+>>>> correct here
+>>>> as is.
+>>>
+>>> So, then why AM62xx is being added to Rogue driver/DDK? Should there=20
+>>> be a
+>>> separate Albiorix driver and DDK then?
+>>>
+>>
+>>
+>> We asked IMG very nicely to not fork the DDK for each new gen of=20
+>> device (like
+>> what happened with SGX -> Rogue), so now we have he same driver code b=
+ase
+>> supporting multiple generations of GPU. The name "Rogue" just stuck=20
+>> around.
+>> We should probably rename some of this stuff to also be more generic.
+>>
+>>
+>>>
+>>>>>> Thinking on this, the mapping between SoC family and the internal=20
+>>>>>> names
+>>>>>> like "RGX_BVNC" and "TARGET_PRODUCT" are specific to the version=20
+>>>>>> of this
+>>>>>> driver. For instance in the next DDK I may want the target name to
+>>>>>> go from "am62_linux" to "axb_128_linux", I would have to
+>>>>>> change things here (update the SRCREV) AND in the machine config.
+>>>>>
+>>>>> 1. I totally agree that "axb_128_linux" makes more sense than=20
+>>>>> "am62_linux".
+>>>>> 2. Changes like that happen very rarely.
+>>>>> 3. You can call it PVR_MODEL or PVR_PRODUCT if you want, instead of=
+=20
+>>>>> PVR_SOC.
+>>>>>
+>>>>>
+>>>>>> Mapping here feels like the right spot to me. I'd even argue the s=
+ame
+>>>>>> for OPTEEMACHINE and the like, should go in the optee.bbappends=20
+>>>>>> with the
+>>>>>> rest of our platform specific recipe fixups, etc.
+>>>>>
+>>>>> The number of overrides in the recipe will keep on growing, as each=
+=20
+>>>>> new
+>>>>> platform will need to add own config. That's the whole point of the=
+=20
+>>>>> machine
+>>>>> configuration file to have those defined centrally.
+>>>>>
+>>>>> The goal is to have a recipe as machine-agnostic and clean, as=20
+>>>>> possible. Do
+>>>>> not overwhelm it with tons of conditionals like that - any=20
+>>>>> machine-specific
+>>>>> configuration should be set in the machine config file.
+>>>>>
+>>>>
+>>>>
+>>>> Having all the fixups related to a package inside that package's=20
+>>>> definition sounds
+>>>> more central to me, and easier to reason about. But I can see the=20
+>>>> argument both
+>>>> ways.
+>>>>
+>>>> Maybe the better solution would be to splitup this(and the SGX)=20
+>>>> recipe. So we
+>>>> get a package per GPU type. It's already how the bins are=20
+>>>> organized/shipped. Then
+>>>> we just pick the right GPU package for our SoC in arago-prefs.inc.=20
+>>>> (again like
+>>>> we already do to select between SGX/RGX)
+>>>
+>>> Yeah, I think keeping each series of GPU (SGX, Rogue, Albiorix) in=20
+>>> their own
+>>> separate recipes would be fine. Or are you suggesting splitting even=20
+>>> further
+>>> into separate recipes for SGX530 vs SGX540, etc?
+>>>
+>>
+>>
+>> I'm suggesting even further. The driver/package for SGX530 is not=20
+>> compatible
+>> and conflicts with the driver package for SGX540. So lets not have a=20
+>> single named
+>> package (ti-sgx-ddk-um) that can have very different contents, that's=20
+>> just confusing.
+>>
+>=20
+>=20
+> Oh, and not separate recipes, separate packages, they can all be provid=
+ed
+> by the same one or two recipes.
+>=20
+> ti-sgx-530-um
+> ti-sgx-544-um
+> ti-axe1-16m-um
+> etc..
+>=20
+> Then:
+>=20
+> PREFERRED_PROVIDER_virtual/libgles2:am62xx =3D "ti-axe1-16m-um"
+> ...
+>=20
+> Andrew
 
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+Can we merge for Dunfell and then improve significantly for Kirkstone,=20
+or do I still need to make changes here for Dunfell?
 
-
-> ---
-> v2: Removed ti-graphics patch, and removed lpm-demo patches.
-> v3: Squashed and cleaned up the previous patches.
-> v4: Removed tabs that made their way into some of the files, and added
->     more to the commit message.
-> 
->  conf/machine/am62xx-evm-k3r5.conf          | 11 +++++++
->  conf/machine/am62xx-evm.conf               | 13 ++++++++
->  conf/machine/include/am62xx.inc            | 17 ++++++++++
->  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb     | 18 ++++++++++
->  recipes-bsp/u-boot/u-boot-ti.inc           |  7 ++++
->  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 38 +++++++++++++++++++---
->  6 files changed, 99 insertions(+), 5 deletions(-)
->  create mode 100644 conf/machine/am62xx-evm-k3r5.conf
->  create mode 100644 conf/machine/am62xx-evm.conf
->  create mode 100644 conf/machine/include/am62xx.inc
-> 
-> diff --git a/conf/machine/am62xx-evm-k3r5.conf b/conf/machine/am62xx-evm-k3r5.conf
-> new file mode 100644
-> index 00000000..724a8d4a
-> --- /dev/null
-> +++ b/conf/machine/am62xx-evm-k3r5.conf
-> @@ -0,0 +1,11 @@
-> +#@TYPE: Machine
-> +#@NAME: AM62XX EVM (R5F)
-> +#@DESCRIPTION: Machine configuration for the TI AM62xx EVM (R5F core)
-> +
-> +require conf/machine/include/k3r5.inc
-> +
-> +SYSFW_SOC = "am62x"
-> +SYSFW_CONFIG = "evm"
-> +SYSFW_SUFFIX = "gp"
-> +
-> +UBOOT_MACHINE = "am62x_evm_r5_defconfig"
-> diff --git a/conf/machine/am62xx-evm.conf b/conf/machine/am62xx-evm.conf
-> new file mode 100644
-> index 00000000..600abb58
-> --- /dev/null
-> +++ b/conf/machine/am62xx-evm.conf
-> @@ -0,0 +1,13 @@
-> +#@TYPE: Machine
-> +#@NAME: AM62XX EVM
-> +#@DESCRIPTION: Machine configuration for the TI AM62XX EVM
-> +
-> +require conf/machine/include/am62xx.inc
-> +
-> +KERNEL_DEVICETREE = " \
-> +    ti/k3-am625-sk.dtb \
-> +    ti/k3-am625-sk-lpmdemo.dtb \
-> +    ti/k3-am625-minimal.dtb \
-> +"
-> +
-> +UBOOT_MACHINE = "am62x_evm_a53_defconfig"
-> diff --git a/conf/machine/include/am62xx.inc b/conf/machine/include/am62xx.inc
-> new file mode 100644
-> index 00000000..e8823dd2
-> --- /dev/null
-> +++ b/conf/machine/include/am62xx.inc
-> @@ -0,0 +1,17 @@
-> +require conf/machine/include/k3.inc
-> +SOC_FAMILY_append = ":am62xx"
-> +
-> +MACHINE_FEATURES += "screen touchscreen"
-> +
-> +SERIAL_CONSOLES = "115200;ttyS2"
-> +SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
-> +
-> +# AM62 supports multi-certificate images, use the same
-> +IMAGE_BOOT_FILES = "${IMAGE_BOOT_FILES_MULTI_CERT}"
-> +
-> +do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
-> +do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
-> +
-> +TFA_BOARD = "lite"
-> +OPTEEMACHINE = "k3-am65x"
-> +OPTEEOUTPUTMACHINE = "k3"
-> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> index 646833a7..099473b4 100644
-> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-> @@ -6,6 +6,7 @@ DEPENDS_append_j7200-hs-evm-k3r5 = " virtual/bootloader"
->  DEPENDS_append_j721s2-evm-k3r5 = " virtual/bootloader"
->  DEPENDS_append_am64xx-evm-k3r5 = " virtual/bootloader"
->  DEPENDS_append_am64xx-hs-evm-k3r5 = " virtual/bootloader"
-> +DEPENDS_append_am62xx-evm-k3r5 = " virtual/bootloader"
->  
->  CLEANBROKEN = "1"
->  PR = "${INC_PR}.2"
-> @@ -29,6 +30,7 @@ SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "ti-fs-firmware"
->  SYSFW_PREFIX_j7200-evm-k3r5 = "ti-fs-firmware"
->  SYSFW_PREFIX_j7200-hs-evm-k3r5 = "ti-fs-firmware"
->  SYSFW_PREFIX_j721s2-evm-k3r5 = "ti-fs-firmware"
-> +SYSFW_PREFIX_am62xx-evm-k3r5 = "ti-fs-firmware"
->  
->  SYSFW_SUFFIX ?= "unknown"
->  
-> @@ -63,6 +65,7 @@ EXTRA_OEMAKE_append_j7200-hs-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-s
->  EXTRA_OEMAKE_append_j721s2-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
->  EXTRA_OEMAKE_append_am64xx-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
->  EXTRA_OEMAKE_append_am64xx-hs-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
-> +EXTRA_OEMAKE_append_am62xx-evm-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
->  
->  do_compile() {
->  	cd ${WORKDIR}/imggen/
-> @@ -170,4 +173,19 @@ do_deploy_am64xx-hs-evm-k3r5() {
->          install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
->  }
->  
-> +do_install_am62xx-evm-k3r5() {
-> +	install -d ${D}/boot
-> +	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
-> +	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_SYMLINK}
-> +	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
-> +}
-> +
-> +do_deploy_am62xx-evm-k3r5() {
-> +	install -d ${DEPLOYDIR}
-> +	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
-> +	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
-> +	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
-> +	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
-> +}
-> +
->  addtask deploy before do_build after do_compile
-> diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-> index 7ed6c5b4..231b7647 100644
-> --- a/recipes-bsp/u-boot/u-boot-ti.inc
-> +++ b/recipes-bsp/u-boot/u-boot-ti.inc
-> @@ -41,6 +41,7 @@ PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/pdk-i
->  
->  PACKAGECONFIG_append_aarch64 = " atf optee"
->  PACKAGECONFIG_append_j7 = " dm"
-> +PACKAGECONFIG_append_am62xx = " dm"
->  
->  COMPATIBLE_MACHINE = "(ti-soc)"
->  
-> @@ -69,6 +70,7 @@ SPL_UART_BINARY_j7200-hs-evm-k3r5 = "u-boot-spl.bin"
->  SPL_UART_BINARY_j721s2-evm-k3r5 = "u-boot-spl.bin"
->  SPL_UART_BINARY_am64xx-evm-k3r5 = "u-boot-spl.bin"
->  SPL_UART_BINARY_am64xx-hs-evm-k3r5 = "u-boot-spl.bin"
-> +SPL_UART_BINARY_am62xx-evm-k3r5 = "u-boot-spl.bin"
->  
->  SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
->  SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
-> @@ -419,4 +421,9 @@ do_deploy_append_am64xx-hs-evm-k3r5 () {
->  	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
->  }
->  
-> +do_deploy_append_am62xx-evm-k3r5 () {
-> +	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
-> +	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
-> +}
-> +
->  TOOLCHAIN = "gcc"
-> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> index c5852dbd..02e5d665 100644
-> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> @@ -19,6 +19,7 @@ PLAT_SFX_j7200-hs-evm = "j7200"
->  PLAT_SFX_j721s2-evm = "j721s2"
->  PLAT_SFX_am65xx = "am65xx"
->  PLAT_SFX_am64xx = "am64xx"
-> +PLAT_SFX_am62xx = "am62x"
->  
->  FILESEXTRAPATHS_prepend := "${METATIBASE}/recipes-bsp/ti-sci-fw/files/:"
->  require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> @@ -50,11 +51,11 @@ DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
->  
->  # J7 HS support
->  do_install_prepend_j7-hs-evm() {
-> -	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
-> -	( cd ${RTOS_DM_FW_DIR}; \
-> -		mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
-> -		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
-> -	)
-> +        export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
-> +        ( cd ${RTOS_DM_FW_DIR}; \
-> +                mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
-> +                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
-> +        )
->  }
->  
->  # J7 HS support
-> @@ -77,6 +78,13 @@ do_install_prepend_am64xx() {
->          )
->  }
->  
-> +# Update the am62xx ipc binaries to be consistent with other platforms
-> +do_install_prepend_am62xx() {
-> +        ( cd ${RTOS_IPC_FW_DIR}; \
-> +                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
-> +        )
-> +}
-> +
->  #Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, with softlinks up a level
->  do_install() {
->  
-> @@ -154,6 +162,13 @@ do_install_am64xx() {
->      install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
->  }
->  
-> +do_install_am62xx() {
-> +    install -d ${LEGACY_IPC_FW_DIR}
-> +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-> +    # DM Firmware
-> +    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
-> +}
-> +
->  # Set up names for the firmwares
->  ALTERNATIVE_${PN}_am65xx = "\
->                      am65x-mcu-r5f0_0-fw \
-> @@ -167,6 +182,10 @@ ALTERNATIVE_${PN}_am64xx = "\
->                      am64-main-r5f1_1-fw \
->                      am64-mcu-m4f0_0-fw \
->                      "
-> +ALTERNATIVE_${PN}_am62xx = "\
-> +                    am62-mcu-m4f0_0-fw \
-> +                    am62-main-r5f0_0-fw \
-> +                    "
->  
->  ALTERNATIVE_${PN}_j7 = "\
->                      j7-mcu-r5f0_0-fw \
-> @@ -216,6 +235,9 @@ TARGET_MAIN_R5FSS1_0_am64xx = "am64-main-r5f1_0-fw"
->  TARGET_MAIN_R5FSS1_1_am64xx = "am64-main-r5f1_1-fw"
->  TARGET_MCU_M4FSS0_0_am64xx = "am64-mcu-m4f0_0-fw"
->  
-> +TARGET_MAIN_R5FSS0_0_am62xx = "am62-main-r5f0_0-fw"
-> +TARGET_MCU_M4FSS0_0_am62xx = "am62-mcu-m4f0_0-fw"
-> +
->  TARGET_MCU_R5FSS0_0_j7 = "j7-mcu-r5f0_0-fw"
->  TARGET_MCU_R5FSS0_1_j7 = "j7-mcu-r5f0_1-fw"
->  TARGET_MAIN_R5FSS0_0_j7 = "j7-main-r5f0_0-fw"
-> @@ -254,6 +276,9 @@ ALTERNATIVE_LINK_NAME[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_M
->  ALTERNATIVE_LINK_NAME[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
->  ALTERNATIVE_LINK_NAME[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_M4FSS0_0}"
->  
-> +ALTERNATIVE_LINK_NAME[am62-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
-> +ALTERNATIVE_LINK_NAME[am62-mcu-m4f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_M4FSS0_0}"
-> +
->  ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
->  ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
->  ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
-> @@ -289,6 +314,9 @@ ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_e
->  ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f"
->  ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f"
->  
-> +ALTERNATIVE_TARGET[am62-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
-> +ALTERNATIVE_TARGET[am62-mcu-m4f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f"
-> +
->  ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
->  ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
->  ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
-> -- 
-> 2.17.1
-> 
+>=20
+>=20
+>> Andrew
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#14562):=20
+>> https://lists.yoctoproject.org/g/meta-ti/message/14562
+>> Mute This Topic: https://lists.yoctoproject.org/mt/89983769/3619733
+>> Group Owner: meta-ti+owner@lists.yoctoproject.org
+>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.co=
+m]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
