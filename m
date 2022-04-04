@@ -1,76 +1,90 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <praneeth@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EB9DC433EF
-	for <webhook@archiver.kernel.org>; Wed, 30 Mar 2022 13:46:23 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.7413.1648647971656775636
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD22CC47085
+	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:41 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.35954.1649080707605895587
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 30 Mar 2022 06:46:12 -0700
+ Mon, 04 Apr 2022 06:58:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rz+5lU3Q;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 22UDk5ig034769;
-	Wed, 30 Mar 2022 08:46:05 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Mj8z+cc2;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: praneeth@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 234DwMdF123327;
+	Mon, 4 Apr 2022 08:58:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1648647965;
-	bh=NvhLCWxnsxHuNrzJt+5KnRYp1JZsNd+8Bl2m9/6G5C0=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=rz+5lU3Q+wBg22QxAGl2heZ1o27ufV1TKcAf17XqsZEzdZre4s4hmFu60CnLX33nA
-	 RR8qC18T06zKNpoSov3lVU0aaDC5+nvoPZhglhmjlUTxaDG111YqzqKOycJWkKSike
-	 CSkq9JUXHLZJ+gW951RFTt5lhtGvNcmyB2uPh8Yc=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 22UDk5VA075262
+	s=ti-com-17Q1; t=1649080702;
+	bh=JrqHu56rrUhuLTNB86vIFlfM0mrV115eYfuK6jL8V+A=;
+	h=From:To:CC:Subject:Date;
+	b=Mj8z+cc2C6LEyZV4yzpnEMeNBVQixJEZ9zRQy1BrNj6VaK7MArftUfvE0cDw1UwBX
+	 gTkV7TvzdaI84wNRfu5V2KTcR1etZMEzLqKXeLWn6q3ShndtzlA7EFLvuS9R3gyJKY
+	 2fxy242JZ1NmIT25bLZT48bbw1chrSte6UIy/86I=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 234DwMqD070870
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 30 Mar 2022 08:46:05 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 30
- Mar 2022 08:46:05 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 4 Apr 2022 08:58:22 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 4
+ Apr 2022 08:58:22 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 30 Mar 2022 08:46:05 -0500
-Received: from [128.247.81.69] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 22UDk5ne018984;
-	Wed, 30 Mar 2022 08:46:05 -0500
-Message-ID: <994002bd-a60c-bcf7-6bef-2c5b91b04b3a@ti.com>
-Date: Wed, 30 Mar 2022 08:46:05 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [meta-ti] [master][PATCH v2] ti-cgt-pru: Update to version 2.3.3
-To: Alessio Igor Bogani <alessio.bogani@elettra.eu>,
+ Frontend Transport; Mon, 4 Apr 2022 08:58:22 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 234DwMGt001310;
+	Mon, 4 Apr 2022 08:58:22 -0500
+From: Praneeth Bajjuri <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>,
+        Denys
+ Dmytriyenko <denis@denix.org>
+CC: Vignesh Raghavendra <vigneshr@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-References: <cdfe0adb-7e51-27b0-2193-8d9f4e2aaf5d@ti.com>
- <20220330130856.10404-1-alessio.bogani@elettra.eu>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20220330130856.10404-1-alessio.bogani@elettra.eu>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [dunfell/master] conf: am62xx: remove unused dtbs
+Date: Mon, 4 Apr 2022 08:58:22 -0500
+Message-ID: <20220404135822.913-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 30 Mar 2022 13:46:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14586
+ <meta-ti@lists.yoctoproject.org>; Mon, 04 Apr 2022 18:46:41 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14588
 
+The current ti-linux-5.10.y kernel doesnt have the
+following dtb.
+-    ti/k3-am625-sk-lpmdemo.dtb
+-    ti/k3-am625-minimal.dtb
 
+This patch is to remove them for now.
+Enable the applicable dtb once the equivalent support is
+added in ti-linux-5.10.y kernel later.
 
-On 3/30/2022 8:08 AM, Alessio Igor Bogani wrote:
-> Signed-off-by: Alessio Igor Bogani <alessio.bogani@elettra.eu > ---
->   .../devtools/{ti-cgt-pru_2.3.2.bb => ti-cgt-pru_2.3.3.bb} | 8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
->   rename meta-ti-extras/recipes-ti/devtools/{ti-cgt-pru_2.3.2.bb => ti-cgt-pru_2.3.3.bb} (82%)
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ conf/machine/am62xx-evm.conf | 2 --
+ 1 file changed, 2 deletions(-)
 
-
-Applied patch to master.
-
-
+diff --git a/conf/machine/am62xx-evm.conf b/conf/machine/am62xx-evm.conf
+index 086e40e4..eb1563f8 100644
+--- a/conf/machine/am62xx-evm.conf
++++ b/conf/machine/am62xx-evm.conf
+@@ -8,8 +8,6 @@ MACHINE_FEATURES += "gpu"
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-am625-sk.dtb \
+-    ti/k3-am625-sk-lpmdemo.dtb \
+-    ti/k3-am625-minimal.dtb \
+ "
+ 
+ UBOOT_MACHINE = "am62x_evm_a53_defconfig"
 -- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+2.17.1
+
 
