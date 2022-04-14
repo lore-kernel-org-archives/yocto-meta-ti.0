@@ -1,145 +1,100 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <matthias.schiffer@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B54FC4707A
-	for <webhook@archiver.kernel.org>; Thu, 14 Apr 2022 16:03:53 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.2354.1649875619533005877
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CCDBC6369B
+	for <webhook@archiver.kernel.org>; Thu, 14 Apr 2022 16:03:56 +0000 (UTC)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ by mx.groups.io with SMTP id smtpd.web08.9303.1649923763409031901
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 13 Apr 2022 11:47:00 -0700
+ Thu, 14 Apr 2022 01:09:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=kJ5MzSX3;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 23DIkwDP084624
-	for <meta-ti@lists.yoctoproject.org>; Wed, 13 Apr 2022 13:46:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1649875618;
-	bh=CAc16JF5xoHBZDWpzP52GLUK8TWuN62pFcrJOS//MDQ=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=kJ5MzSX3zQ80FN6UGFmWtRAOwc1TeqL1meIfNqTHyLjr5xTfxMUSoWUX/+PS14c5E
-	 BImQTwyEEeDyO1j2eQj9p/ernubBAWwfgI+lBWOUcTQnQLR8S4T/5r3PSqoiXzxJDr
-	 +RQs3qyKPYJ6Hi98lgOv6JHaqNol99xeRRzmH0NU=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 23DIkwAK061884
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 13 Apr 2022 13:46:58 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 13
- Apr 2022 13:46:58 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 13 Apr 2022 13:46:58 -0500
-Received: from [128.247.81.69] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 23DIkw6K051892;
-	Wed, 13 Apr 2022 13:46:58 -0500
-Message-ID: <582e51c4-9c98-6aed-8a79-6f9ee96b1045@ti.com>
-Date: Wed, 13 Apr 2022 13:46:58 -0500
+ dkim=fail reason="signature has expired" header.i=@tq-group.com header.s=key1
+ header.b=YBqBoOnI;
+ spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81,
+ mailfrom: matthias.schiffer@ew.tq-group.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1649923763; x=1681459763;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=uIbwWu3VrN3MVOm6eEs7zcH8qbX8yJDLcEGZzLrxuyc=;
+  b=YBqBoOnIjAYjz1XJ9kE/zSDG/8Bx/k4aufbP/a4wpIEo7m9mQKTF3uhp
+   BANct1YmEeepo4sXOGHH0+eg/sLRjR4GsQPCL5G2KeqxI8FlAE/jT2I2r
+   BpoomeaaqSCvx9glRQkQyzXZ4H6he4LEBDwgNZkccoJlfMRQIyqjijiu1
+   xAIBXKfS6hfi/9+p1n70w8W5uGh2Y1a7pCllxW8Xe2IxfKXs6VuK2b93v
+   2q7DD9y1KUDwB4zo1V/tnbEmuBagF3PdXJeecPU5WoRgzNC2GRQOmdoG6
+   8cLxtTSgc0JQvgUqA5SFknRaGKm7tsNhM+1XC4zUB3rxELHwCHUO0xrMo
+   g==;
+X-IronPort-AV: E=Sophos;i="5.90,259,1643670000";
+   d="scan'208";a="23298398"
+Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
+  by mx1-pgp.tq-group.com with ESMTP; 14 Apr 2022 10:09:21 +0200
+Received: from mx1.tq-group.com ([192.168.6.7])
+  by tq-pgp-pr1.tq-net.de (PGP Universal service);
+  Thu, 14 Apr 2022 10:09:21 +0200
+X-PGP-Universal: processed;
+	by tq-pgp-pr1.tq-net.de on Thu, 14 Apr 2022 10:09:21 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1649923761; x=1681459761;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=uIbwWu3VrN3MVOm6eEs7zcH8qbX8yJDLcEGZzLrxuyc=;
+  b=UQEFU6nRqiBe0WWN3IYprCNv+BIVqk0SWq+Y3SZ/7so1GpuVjvcoDDlz
+   XzVrZYm2jqODwqThAS4QEuuCvMkyvhilu8eklRfIlat88XqNyPeMtCUuX
+   kk4f5HLHS6mVu8QgxZZZWhjsJ+/umtBegEOeALzaBJaH8Dw85+epVNcoF
+   4kaDl7fBXTme13jSFAHKZFCucxxeM6relDff0bKJphYuhzoDRTGaHy5H4
+   E4J99D1GYmF1BHd5WrEFsCD5xokYTvI9KyoV6Y/eB3V+UPYhfNfzG5sxH
+   3vJtnMpuwzt3wJCeXKwiK6i3/7iIXMmAMQ81peeIwEtoBj+OorxTcJSng
+   g==;
+X-IronPort-AV: E=Sophos;i="5.90,259,1643670000";
+   d="scan'208";a="23298397"
+Received: from vtuxmail01.tq-net.de ([10.115.0.20])
+  by mx1.tq-group.com with ESMTP; 14 Apr 2022 10:09:21 +0200
+Received: from localhost.localdomain (SCHIFFERM-M2.tq-net.de [10.121.49.14])
+	by vtuxmail01.tq-net.de (Postfix) with ESMTPA id 8C548280070;
+	Thu, 14 Apr 2022 10:09:21 +0200 (CEST)
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Subject: [PATCH] optee-os: fix build with OPTEEPAGER=y
+Date: Thu, 14 Apr 2022 10:09:02 +0200
+Message-Id: <20220414080902.21816-1-matthias.schiffer@ew.tq-group.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [meta-ti][master/dunfell PATCH v1 2/2] pru-icss_git.bb: add AM62x
-To: Nick Saulnier <nsaulnier@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <kishon@ti.com>, <s-anna@ti.com>
-References: <20220412013559.4140-1-nsaulnier@ti.com>
- <20220412013559.4140-2-nsaulnier@ti.com>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20220412013559.4140-2-nsaulnier@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 14 Apr 2022 16:03:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14600
+ <meta-ti@lists.yoctoproject.org>; Thu, 14 Apr 2022 16:03:56 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14602
 
-Applied patch to dunfell-next.
+meta-arm commit e03b824d7824 ("arm/optee-os: cleanup recipe") changed the
+recipe's do_compile(), which broke the build of the am57xx-hs-evm and
+dra7xx-hs-evm machines. Adjust the .bbappend accordingly.
 
-On 4/11/2022 8:35 PM, Nick Saulnier wrote:
-> This commit adds the PRU Software Support Package (PSSP) to the AM62x Linux
-> Processor SDK under example-applications/pru-icss-x.x.x. It also adds prebuilt
-> PRU firmware to the default AM62x filesystem image under the /lib/firmware
-> folder.
-> 
-> Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
-> ---
->   recipes-bsp/pru/pru-icss_git.bb | 21 +++++++++++++++++++++
->   1 file changed, 21 insertions(+)
-> 
-> diff --git a/recipes-bsp/pru/pru-icss_git.bb b/recipes-bsp/pru/pru-icss_git.bb
-> index ac75103d31d6..1ceba0573af0 100644
-> --- a/recipes-bsp/pru/pru-icss_git.bb
-> +++ b/recipes-bsp/pru/pru-icss_git.bb
-> @@ -41,6 +41,7 @@ PLATFORM_ti33x = "am335x"
->   PLATFORM_ti43x = "am437x"
->   PLATFORM_omap-a15 = "am572x"
->   PLATFORM_k2g = "k2g"
-> +PLATFORM_am62xx = "am62x"
->   PLATFORM_am64xx = "am64x"
->   PLATFORM_am65xx = "am65x"
->   PLATFORM_j7 = "j721e"
-> @@ -113,6 +114,16 @@ do_install_append_k2g() {
->       done
->   }
->   
-> +do_install_append_am62xx() {
-> +    install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU_Halt.out \
-> +                   ${D}${base_libdir}/firmware/pru
-> +    for i in 0 1
-> +    do
-> +        install -m 0644 ${S}/examples/${PLATFORM}/PRU_RPMsg_Echo_Interrupt${i}/gen/PRU_RPMsg_Echo_Interrupt${i}.out \
-> +                        ${D}${base_libdir}/firmware/pru
-> +    done
-> +}
-> +
->   do_install_append_am64xx(){
->       for i in 0 1
->       do
-> @@ -190,6 +201,7 @@ PRU_ICSS_ALTERNATIVES_ti33x    = "am335x-pru0-fw am335x-pru1-fw"
->   PRU_ICSS_ALTERNATIVES_ti43x    = "am437x-pru0_0-fw am437x-pru0_1-fw am437x-pru1_0-fw am437x-pru1_1-fw"
->   PRU_ICSS_ALTERNATIVES_omap-a15 = "am57xx-pru1_0-fw am57xx-pru1_1-fw am57xx-pru2_0-fw am57xx-pru2_1-fw"
->   PRU_ICSS_ALTERNATIVES_k2g      = "k2g-pru0_0-fw k2g-pru0_1-fw k2g-pru1_0-fw k2g-pru1_1-fw"
-> +PRU_ICSS_ALTERNATIVES_am62xx   = "am62x-pru0-fw am62x-pru1-fw"
->   PRU_ICSS_ALTERNATIVES_am64xx   = "am64x-pru0_0-fw am64x-pru0_1-fw am64x-pru1_0-fw am64x-pru1_1-fw am64x-rtu0_0-fw am64x-rtu0_1-fw am64x-rtu1_0-fw am64x-rtu1_1-fw"
->   PRU_ICSS_ALTERNATIVES_am65xx   = "am65x-pru0_0-fw am65x-pru0_1-fw am65x-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw am65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1-fw"
->   PRU_ICSS_ALTERNATIVES_j7       = "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw"
-> @@ -213,6 +225,9 @@ ALTERNATIVE_LINK_NAME[k2g-pru0_1-fw] = "${base_libdir}/firmware/k2g-pru0_1-fw"
->   ALTERNATIVE_LINK_NAME[k2g-pru1_0-fw] = "${base_libdir}/firmware/k2g-pru1_0-fw"
->   ALTERNATIVE_LINK_NAME[k2g-pru1_1-fw] = "${base_libdir}/firmware/k2g-pru1_1-fw"
->   
-> +ALTERNATIVE_LINK_NAME[am62x-pru0-fw] = "${base_libdir}/firmware/am62x-pru0-fw"
-> +ALTERNATIVE_LINK_NAME[am62x-pru1-fw] = "${base_libdir}/firmware/am62x-pru1-fw"
-> +
->   ALTERNATIVE_LINK_NAME[am64x-pru0_0-fw] = "${base_libdir}/firmware/am64x-pru0_0-fw"
->   ALTERNATIVE_LINK_NAME[am64x-pru0_1-fw] = "${base_libdir}/firmware/am64x-pru0_1-fw"
->   ALTERNATIVE_LINK_NAME[am64x-pru1_0-fw] = "${base_libdir}/firmware/am64x-pru1_0-fw"
-> @@ -284,6 +299,9 @@ ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru0_1-fw] = "${base_libdir}/firmware/pru/P
->   ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_0-fw] = "${base_libdir}/firmware/pru/PRU_Halt.out"
->   ALTERNATIVE_TARGET_pru-icss-halt[k2g-pru1_1-fw] = "${base_libdir}/firmware/pru/PRU_Halt.out"
->   
-> +ALTERNATIVE_TARGET_pru-icss-halt[am62x-pru0-fw] = "${base_libdir}/firmware/pru/PRU_Halt.out"
-> +ALTERNATIVE_TARGET_pru-icss-halt[am62x-pru1-fw] = "${base_libdir}/firmware/pru/PRU_Halt.out"
-> +
->   ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru0_0-fw] = "${base_libdir}/firmware/pru/PRU_Halt_0.out"
->   ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru0_1-fw] = "${base_libdir}/firmware/pru/PRU_Halt_1.out"
->   ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru1_0-fw] = "${base_libdir}/firmware/pru/PRU_Halt_0.out"
-> @@ -353,6 +371,9 @@ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru0_1-fw] = "${base_libdir}/firmware
->   ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru1_0-fw] = "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
->   ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[k2g-pru1_1-fw] = "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_1.out"
->   
-> +ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am62x-pru0-fw] = "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0.out"
-> +ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am62x-pru1-fw] = "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1.out"
-> +
->   ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru0_0-fw] = "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
->   ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru0_1-fw] = "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
->   ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru1_0-fw] = "${base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
+Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+---
+ meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
+index f9660bfe..5af57e16 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
++++ b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
+@@ -20,8 +20,8 @@ optee_sign_legacyhs() {
+     )
+ 
+     if [ "${OPTEEPAGER}" = "y" ]; then
+-        oe_runmake clean
+-        oe_runmake all CFG_TEE_TA_LOG_LEVEL=0 CFG_WITH_PAGER=y
++        oe_runmake -C ${S} clean
++        oe_runmake -C ${S} all CFG_TEE_TA_LOG_LEVEL=0 CFG_WITH_PAGER=y
+         ( cd ${B}/core/; \
+             ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
+             normfl=`echo ${OPTEEFLAVOR} | tr "_" "-"`
 -- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+2.25.1
+
 
