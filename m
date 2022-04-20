@@ -1,121 +1,86 @@
-Return-Path: <denis@denix.org>
+Return-Path: <praneeth@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C69A5C48BE6
-	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:07 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.7025.1650457623194606516
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF923C64ED8
+	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:10 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.13580.1650490504989958667
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 20 Apr 2022 05:27:03 -0700
+ Wed, 20 Apr 2022 14:35:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D143B40C52;
-	Wed, 20 Apr 2022 12:27:01 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GbCNX01Ap4cP; Wed, 20 Apr 2022 12:27:01 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B3D7840301;
-	Wed, 20 Apr 2022 12:26:58 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id E86E51748D4; Wed, 20 Apr 2022 08:26:57 -0400 (EDT)
-Date: Wed, 20 Apr 2022 08:26:57 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: afd@ti.com
-Cc: reatmon@ti.com, Praneeth Bajjuri <praneeth@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master/dunfell][PATCH] ti-graphics: Add j7-hs-evm as
- a compatible machine.
-Message-ID: <20220420122657.GA12993@denix.org>
-References: <20220418222026.3201-1-reatmon@ti.com>
- <e2fea769-44c1-98f2-e7c9-d34a93f59818@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=wPx1uaog;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: praneeth@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 23KLYw1c032704;
+	Wed, 20 Apr 2022 16:34:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1650490498;
+	bh=Ffd1dcmty1N2ubWkoQ7JocEnGekE2vhZHh3PEeaQG4g=;
+	h=From:To:CC:Subject:Date;
+	b=wPx1uaogdZiKVhLeK9+h7XVX2TwNhDlB7pBosSlkEabzo6t4K8I8ATv96olufRVU+
+	 qJS90eaZ/wehkSyv3OSM6xznCG9VNsepok572IczOYc64bulk3Bgy2AJadhh6y/pzP
+	 X1UdijHHNNVbCgFilNWnq9PAnqqsQBMQUIqOT9DI=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 23KLYwjk060388
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 20 Apr 2022 16:34:58 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 20
+ Apr 2022 16:34:58 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Wed, 20 Apr 2022 16:34:58 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 23KLYwWL013228;
+	Wed, 20 Apr 2022 16:34:58 -0500
+From: Praneeth Bajjuri <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>,
+        Denys
+ Dmytriyenko <denis@denix.org>, Hari Nagalla <hnagalla@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell/master PATCH] ipc: ti-rpmsg-char: Update library to 0.4.1
+Date: Wed, 20 Apr 2022 16:34:58 -0500
+Message-ID: <20220420213458.4270-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e2fea769-44c1-98f2-e7c9-d34a93f59818@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 21 Apr 2022 16:46:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14609
+ <meta-ti@lists.yoctoproject.org>; Thu, 21 Apr 2022 16:46:10 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14610
 
-On Tue, Apr 19, 2022 at 10:14:16PM -0500, Andrew F. Davis via lists.yoctoproject.org wrote:
-> On 4/18/22 5:20 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
-> >The recent change to explicitly list the compatible machines is missing the j7-hs-evm.
-> >
-> >Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> >---
-> >  .../powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb       | 4 +++-
-> >  recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb  | 3 ++-
-> >  2 files changed, 5 insertions(+), 2 deletions(-)
-> >
-> >diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
-> >index fbff6c51..6d2d68cd 100644
-> >--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
-> >+++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
-> >@@ -11,7 +11,7 @@ MACHINE_KERNEL_PR_append = "a"
-> >  PR = "${MACHINE_KERNEL_PR}"
-> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >-COMPATIBLE_MACHINE = "j7-evm|j721s2-evm|am62xx"
-> >+COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|am62xx"
-> 
-> 
-> Doesn't seem right, we haven't needed to specify the HS version before..
+Update the ti-rpmsg-char library to 0.4.1 version that enables the
+support for AM62x SoC family remote processors.
 
-https://git.yoctoproject.org/meta-ti/commit/?h=dunfell&id=ed94c75b436f2f8c5c3a8a6ebed45d7276cc35e4
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+---
+ recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-
-> Seems we are mixing SoC and board, the GPU driver depends on the SoC
-> not the board, we match correctly for am62xx on SoC, but J7 on
-> specific board name. Suggest
-> 
-> +COMPATIBLE_MACHINE = "j7|j721s2|am62xx"
-
-There's no j721s2 SoC family in Dunfell.
-
-I'm guessing "j7-evm|j7-hs-evm|j721s2-evm" was done because j7 SoC family in 
-Dunfell is too broad and also covers headless j7200, which lacks "gpu" machine 
-feature... Could be just "j7|am62xx" in Dunfell and more specific SoC families 
-in master/kirkstone.
-
+diff --git a/recipes-ti/ipc/ti-rpmsg-char.inc b/recipes-ti/ipc/ti-rpmsg-char.inc
+index dc98fbb5..b499647a 100644
+--- a/recipes-ti/ipc/ti-rpmsg-char.inc
++++ b/recipes-ti/ipc/ti-rpmsg-char.inc
+@@ -7,10 +7,10 @@ PROTOCOL = "git"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+ 
+-# Initial 0.4.0 release
+-SRCREV = "92b464f1e7477f77e44ae18d87b3d369576d662e"
++# Initial 0.4.1 release
++SRCREV = "355d2b0bcde5eb5c895a270d1835102d2bc39fbd"
+ 
+-PV = "0.4.0+git${SRCPV}"
++PV = "0.4.1+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-Denys
+2.17.1
 
-> >  DEPENDS = "virtual/kernel"
-> >@@ -29,9 +29,11 @@ S = "${WORKDIR}/git"
-> >  SRCREV = "ee0674adccac16f5b2f7cb8d5d05948706080cb5"
-> >  TARGET_PRODUCT_j7-evm = "j721e_linux"
-> >+TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
-> >  TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
-> >  TARGET_PRODUCT_am62xx = "am62_linux"
-> >  TARGET_BVNC_j7-evm = "22.104.208.318"
-> >+TARGET_BVNC_j7-hs-evm = "22.104.208.318"
-> >  TARGET_BVNC_j721s2-evm = "36.53.104.796"
-> >  TARGET_BVNC_am62xx = "33.15.11.3"
-> >  PVR_BUILD = "release"
-> >diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
-> >index e00dce99..0f3f9192 100644
-> >--- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
-> >+++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
-> >@@ -8,7 +8,7 @@ inherit features_check
-> >  REQUIRED_MACHINE_FEATURES = "gpu"
-> >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >-COMPATIBLE_MACHINE = "j7-evm|j721s2-evm|am62xx"
-> >+COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|am62xx"
-> >  PR = "r1"
-> >@@ -18,6 +18,7 @@ SRC_URI = "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=${BRANCH}"
-> >  SRCREV = "47c3ffc44f2881397d45c8a2b5dfa7d6c58b79fb"
-> >  TARGET_PRODUCT_j7-evm = "j721e_linux"
-> >+TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
-> >  TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
-> >  TARGET_PRODUCT_am62xx = "am62_linux"
-> >  PVR_BUILD ?= "release"
 
