@@ -1,84 +1,97 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <nm@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FFFEC43219
-	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 00:24:21 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.4428.1651105460658106418
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E457BC433F5
+	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 03:08:22 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web09.5641.1651115298116706858
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 27 Apr 2022 17:24:20 -0700
+ Wed, 27 Apr 2022 20:08:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rQ2/5qV9;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 23S0OHlC090400;
-	Wed, 27 Apr 2022 19:24:17 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Gz67u/Rz;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: nm@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 23S389IB117420;
+	Wed, 27 Apr 2022 22:08:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1651105458;
-	bh=fFZn8/TY/Z/mfSC94c8XpGmFRKRl7G0/KbW/Xv+c9lg=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=rQ2/5qV9FCi5ixRJiOFt/om9YCcOuE0BcHDPaNd9Z5CVgR0ijg61PB7KrV40j/oOQ
-	 /etvZef29chDWmP28CH5dIw11qJbLyboPWlZ3s8JqRgeEIH/cc4A/WbViaG7R2iBTv
-	 CX4qra63gvXQs68UHr2A21UmHWCSVNcHJ/Qi7EEg=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 23S0OHup065604
+	s=ti-com-17Q1; t=1651115289;
+	bh=WaWyMgBnlC1Et/KlnyCQAgc4BSAeQNUTreO7F21zt+A=;
+	h=From:To:CC:Subject:Date;
+	b=Gz67u/RzEFaZRIgz+jeEpF0KVeP74t6xQ5dLftD/udt9N9+JOYYuH8g4FyM/4YxJ0
+	 h8LSDm7EL2Asfl2aOsZeqxVbweBGKLUdVp8EUgHY/VPw7AU/FHwTYwX1ri7ngEHMdD
+	 9dawXmBcN1nvwD9ArONdXlh/dO+yDa9TNrvVNA04=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 23S389gc010029
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 27 Apr 2022 19:24:17 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 27 Apr 2022 22:08:09 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 27
- Apr 2022 19:24:17 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2022 22:08:08 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 27 Apr 2022 19:24:17 -0500
-Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 23S0OHKv031745;
-	Wed, 27 Apr 2022 19:24:17 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1njrxB-0007sn-A2; Wed, 27 Apr 2022 19:24:17 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH 3/4] linux-ti-staging-rt: Bump to
- 08.03.00.002 release
-Date: Wed, 27 Apr 2022 19:24:15 -0500
-Message-ID: <20220428002416.30029-4-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220428002416.30029-1-reatmon@ti.com>
-References: <20220428002416.30029-1-reatmon@ti.com>
+ Frontend Transport; Wed, 27 Apr 2022 22:08:08 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 23S388M8030892;
+	Wed, 27 Apr 2022 22:08:08 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>
+CC: <devarsht@ti.com>, <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>,
+        <nikhil.nd@ti.com>, <nsekhar@ti.com>, <vigneshr@ti.com>,
+ <a-m1@ti.com>,
+        Nishanth Menon <nm@ti.com>
+Subject: [PATCH] recipes-kernel: setup-defconfig: Use SRCPV to update
+ KERNEL_LOCALVERSION
+Date: Wed, 27 Apr 2022 22:08:05 -0500
+Message-ID: <20220428030805.18623-1-nm@ti.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 28 Apr 2022 00:24:21 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14626
+ <meta-ti@lists.yoctoproject.org>; Thu, 28 Apr 2022 03:08:22 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14627
 
-Updated the linux rt version for 08.03.00.002
+Due to recent security update[1] in git, a subprocess will be unable
+to not able to run git rev-parse to fetch revision.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+So instead, use the SRCPV to parse the short commit ID and set the
+KERNEL_LOCALVERSION variable.
+
+[1] https://github.blog/2022-04-12-git-security-vulnerability-announced/
+
+Inspired-by: Devarsh Thakkar <devarsht@ti.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-kernel/linux/setup-defconfig.inc | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-index ef4709df..bcf5cf6b 100644
---- a/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-+++ b/recipes-kernel/linux/linux-ti-staging-rt_5.10.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-5.10:"
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
+index 850a1dd8d613..1e97acc0ee63 100644
+--- a/recipes-kernel/linux/setup-defconfig.inc
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -1,14 +1,6 @@
+ # KERNEL_LOCALVERSION can be set to add a tag to the end of the
+ # kernel version string.  such as the commit id
+-def get_git_revision(p):
+-    import subprocess
+-
+-    try:
+-        return subprocess.Popen("git rev-parse HEAD 2>/dev/null ", cwd=p, shell=True, stdout=subprocess.PIPE, universal_newlines=True).communicate()[0].rstrip()
+-    except OSError:
+-        return None
+-
+-KERNEL_LOCALVERSION = "-g${@get_git_revision('${S}').__str__()[:10]}"
++KERNEL_LOCALVERSION = "-g${@d.getVar('SRCPV', True).split('+')[1]}"
  
- BRANCH = "ti-rt-linux-5.10.y"
- 
--SRCREV = "84474b392bd8f1a8ebbabfa6ec685297fa3d51b7"
-+SRCREV = "71d8b949868162e2aaac748ce569c1faf0b4b4f3"
- PV = "5.10.109+git${SRCPV}"
+ # Check the defconfig file and see if it points to an in kernel
+ # defconfig that should be used, or if it is a complete config file
 -- 
-2.17.1
+2.31.1
 
 
