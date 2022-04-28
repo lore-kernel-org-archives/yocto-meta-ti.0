@@ -1,131 +1,86 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C279C433F5
-	for <webhook@archiver.kernel.org>; Wed, 27 Apr 2022 14:44:11 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.9125.1651070645204403788
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 839E6C433F5
+	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 00:24:21 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web08.4242.1651105459141453181
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 27 Apr 2022 07:44:05 -0700
+ Wed, 27 Apr 2022 17:24:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 2057440BE9;
-	Wed, 27 Apr 2022 14:44:04 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Lo36IvsJTYcp; Wed, 27 Apr 2022 14:44:04 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D9E4640BD6;
-	Wed, 27 Apr 2022 14:43:55 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 1A96D1748EC; Wed, 27 Apr 2022 10:43:55 -0400 (EDT)
-Date: Wed, 27 Apr 2022 10:43:55 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: devarsht@ti.com
-Cc: Nishanth Menon <nm@ti.com>, meta-ti@lists.yoctoproject.org,
-	praneeth@ti.com, nikhil.nd@ti.com, nsekhar@ti.com, vigneshr@ti.com,
-	Ryan Eatmon <reatmon@ti.com>, a-m1@ti.com
-Subject: Re: [meta-ti][dunfell][PATCH] u-boot-ti: Use SRCREV to get short
- commit ID
-Message-ID: <20220427144355.GK9834@denix.org>
-References: <20220419154734.6346-1-devarsht@ti.com>
- <20220419233421.ngbixhxdyjqr7hbc@penholder>
- <851dcd0d-5a62-bf19-2c86-f228ccccede8@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=W54oMKcR;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 23S0OHSk086600;
+	Wed, 27 Apr 2022 19:24:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1651105457;
+	bh=/RhdCrVu7KJ+vmkZVM5ZFABCGeElmHHrnuWV8V0PRkI=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=W54oMKcRX2STm8jdQIeWE0AQPOA96fhmsvaVt5mLUXIWHmGI6iBphn20jdD+YKEd0
+	 8fva1UAlampOr26M/EXYiCwUrpu9WIkSZUYDdifdj7M57ruWz8831vJFipS6A+VqPA
+	 nRUBE/K50D1tLVxroVYjKm/+PYddufZ3+fpKyBW4=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 23S0OHeA102680
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 27 Apr 2022 19:24:17 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 27
+ Apr 2022 19:24:17 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Wed, 27 Apr 2022 19:24:17 -0500
+Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 23S0OHeA024906;
+	Wed, 27 Apr 2022 19:24:17 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1njrxB-0007sX-53; Wed, 27 Apr 2022 19:24:17 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 2/4] linux-ti-staging: Bump to 08.03.00.002
+ release
+Date: Wed, 27 Apr 2022 19:24:14 -0500
+Message-ID: <20220428002416.30029-3-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220428002416.30029-1-reatmon@ti.com>
+References: <20220428002416.30029-1-reatmon@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <851dcd0d-5a62-bf19-2c86-f228ccccede8@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 27 Apr 2022 14:44:11 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14621
+ <meta-ti@lists.yoctoproject.org>; Thu, 28 Apr 2022 00:24:21 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14624
 
-On Wed, Apr 27, 2022 at 07:50:13PM +0530, Devarsh Thakkar via lists.yoctoproject.org wrote:
-> 
-> On 20/04/22 05:04, Nishanth Menon wrote:
-> > On 21:17-20220419, Devarsh Thakkar wrote:
-> >> Due to recent security update in git, we are
-> >> not able to fetch revision currently using existing method:
-> >> https://github.blog/2022-04-12-git-security-vulnerability-announced/
-> >>
-> >> So instead, use the SRCREV to parse the short commit ID
-> >> and set the UBOOT_LOCALVERSION variable.
-> >>
-> >> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-> >> ---
-> >>  recipes-bsp/u-boot/u-boot-ti.inc | 10 +---------
-> >>  1 file changed, 1 insertion(+), 9 deletions(-)
-> >>
-> >> diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-> >> index 231b7647..cc775e2e 100644
-> >> --- a/recipes-bsp/u-boot/u-boot-ti.inc
-> >> +++ b/recipes-bsp/u-boot/u-boot-ti.inc
-> >> @@ -1,14 +1,6 @@
-> >>  # UBOOT_LOCALVERSION can be set to add a tag to the end of the
-> >>  # U-boot version string.  such as the commit id
-> >> -def get_git_revision(p):
-> >> -    import subprocess
-> >> -
-> >> -    try:
-> >> -        return subprocess.Popen("git rev-parse HEAD 2>/dev/null ", cwd=p, shell=True, stdout=subprocess.PIPE, universal_newlines=True).communicate()[0].rstrip()
-> >
-> > I see a similar logic in
-> > recipes-kernel/linux/setup-defconfig.inc as well.
-> >
-> > Considering similar problem
-> >
-> > https://lore.kernel.org/all/20220413155249.3458236-2-raj.khem@gmail.com/
-> >
-> > was wondering as to what might be a better way to solve this?
-> >
-> > There is also git rev-parse HEAD instances in oe-core as well and
-> > bitbake(lib/layerindexlib/cooker.py) as well.
-> >
-> > I wonder since we know cwd=p, could we use that to set
-> > https://git-scm.com/docs/git/2.35.2#Documentation/git.txt-codeGITCEILINGDIRECTORIEScode
-> >  (which if my understanding is right, came in around v1.5.5.1-319-g0454dd93bfb2)
-> >
-> > OR maybe just set it to the base conf similar to what was done on
-> > master oe-core/meta/conf/bitbake.conf (commit
-> > 02ecf3e2a98a614805f6f2574c2bf14162192d01 "bitbake.conf: Prevent git from
-> > detecting parent repo in recipe")?
-> >
-> > I am not sure if we should considering just side stepping this issue via
-> > just not using the git to get the version string.. just my 2 cents.
-> 
-> My top level understanding was the security update was suggesting to avoid
-> 
-> doing what we were doing already i.e. calling git from
-> 
-> a sub-process through a recipe due to security concerns and so avoided
-> using git
-> 
-> and also I think below change also achieves same what was achieved
-> before with SRCREV, I have
-> 
-> similar fix on the kernel bb too which was failing with same error.
-> 
-> >> -    except OSError:
-> >> -        return None
-> >> -
-> >> -UBOOT_LOCALVERSION = "-g${@get_git_revision('${S}').__str__()[:10]}"
-> >> +UBOOT_LOCALVERSION = "-g${@d.getVar("SRCREV", False).__str__()[:10]}"
+Updated the linux version for 08.03.00.002
 
-You should probably use SRCPV here to also work with AUTOREV.
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 4e7c2cb4..cb34a7aa 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -25,7 +25,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.10.y"
+ 
+-SRCREV = "3297d854f0fbdc7940878a5d5caa0bd823be5207"
++SRCREV = "45b6d4fdf6550061582b89d0b794a1cc7c1dc4b2"
+ PV = "5.10.109+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+2.17.1
 
-> >>  UBOOT_SUFFIX ?= "img"
-> >>  SPL_BINARY ?= "MLO"
-> >> -- 
-> >> 2.17.1
-> >>
 
