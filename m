@@ -2,10 +2,10 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17D41C46467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17AECC4167B
 	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 14:51:30 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.11502.1651503085601347804
+ by mx.groups.io with SMTP id smtpd.web10.11684.1651503085600624291
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 02 May 2022 07:51:25 -0700
 Authentication-Results: mx.groups.io;
@@ -13,26 +13,26 @@ Authentication-Results: mx.groups.io;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6C79B40C8F
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7BD0740C82
 	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 14:51:23 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id u2AVJVYzcK5L for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id 8tTcqL1hu64j for <meta-ti@lists.yoctoproject.org>;
 	Mon,  2 May 2022 14:51:23 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
  [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 50EA640C82
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 551CC40C85
 	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 14:51:23 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 23EC617491D
+	by mail.denix.org (Postfix) with ESMTP id 0E85D17491B
 	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 10:51:21 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 08/26] u-boot-ti-staging: Bump to 08.02.00.005 release
-Date: Mon,  2 May 2022 14:51:02 +0000
-Message-Id: <20220502145120.726632-9-denis@denix.org>
+Subject: [master][PATCH 06/26] linux-ti-staging: Bump to 08.02.00.005 release
+Date: Mon,  2 May 2022 14:51:00 +0000
+Message-Id: <20220502145120.726632-7-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220502145120.726632-1-denis@denix.org>
 References: <20220502145120.726632-1-denis@denix.org>
@@ -42,35 +42,33 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 02 May 2022 14:51:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14649
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14648
 
 From: Ryan Eatmon <reatmon@ti.com>
 
-Updated the u-boot version for 08.02.00.005
+Updated the linux version for 08.02.00.005
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb =
-b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 3cc3bc0c..2c8fa2bc 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -2,8 +2,8 @@ require u-boot-ti.inc
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/=
+meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 8f1c7090..cf70ac31 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -23,7 +23,7 @@ S =3D "${WORKDIR}/git"
 =20
- LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D5a7450c57ffe5ae63fd73=
-2446b988025"
+ BRANCH =3D "ti-linux-5.10.y"
 =20
--PR =3D "r20"
-+PR =3D "r21"
+-SRCREV =3D "5a43918e31d3b89955ce1f8e2cf155a6deb7432e"
++SRCREV =3D "7a7a3af903da2b2d551d058f8262a66e6b42b6b1"
+ PV =3D "5.10.100+git${SRCPV}"
 =20
- BRANCH =3D "ti-u-boot-2021.01"
-=20
--SRCREV =3D "0fc56d453ecf89632cfc89eec0a979f557b7d58a"
-+SRCREV =3D "993a48448c6458b2a5a6f612ba9a383a05183a4f"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
+ild
 --=20
 2.25.1
 
