@@ -2,37 +2,37 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4941C433F5
-	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 02:57:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E71EC433F5
+	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 02:58:45 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.6144.1651460236202363222
+ by mx.groups.io with SMTP id smtpd.web08.6300.1651460322439162128
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 01 May 2022 19:57:16 -0700
+ Sun, 01 May 2022 19:58:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E1CB440C2A;
-	Mon,  2 May 2022 02:57:14 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 43B0740C2A;
+	Mon,  2 May 2022 02:58:41 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yENSsZ6psAKq; Mon,  2 May 2022 02:57:14 +0000 (UTC)
+	with ESMTP id EwyCqgD9IPCC; Mon,  2 May 2022 02:58:41 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
  [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C17F340B86;
-	Mon,  2 May 2022 02:57:12 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2380840B86;
+	Mon,  2 May 2022 02:58:39 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id EB7F5174914; Sun,  1 May 2022 22:57:11 -0400 (EDT)
-Date: Sun, 1 May 2022 22:57:11 -0400
+	id EB6D9174914; Sun,  1 May 2022 22:58:38 -0400 (EDT)
+Date: Sun, 1 May 2022 22:58:38 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: Darren Etheridge <detheridge@ti.com>
 Cc: meta-ti@lists.yoctoproject.org, reatmon@ti.com
 Subject: Re: [meta-ti][dunfell][PATCH v2] ti-graphics: gpu enable and move
  all platforms to ddk 1.15
-Message-ID: <20220502025711.GT9834@denix.org>
+Message-ID: <20220502025838.GU9834@denix.org>
 References: <20220323193707.28162-1-detheridge@ti.com>
  <16EABE932EA7F3D7.11702@lists.yoctoproject.org>
 MIME-Version: 1.0
@@ -43,8 +43,8 @@ User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 02 May 2022 02:57:25 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14640
+ <meta-ti@lists.yoctoproject.org>; Mon, 02 May 2022 02:58:45 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14641
 
 On Sat, Apr 30, 2022 at 02:02:27PM -0400, Denys Dmytriyenko wrote:
 > Darren,
@@ -57,7 +57,7 @@ On Sat, Apr 30, 2022 at 02:02:27PM -0400, Denys Dmytriyenko wrote:
 > 
 > Can you please take a look? Thanks.
 
-Never mind, I have a fix.
+Never mind, I hace a fix.
 
 
 > 
