@@ -2,38 +2,37 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47B00C4707F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41C6BC35295
 	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 14:51:30 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.11528.1651503086753504843
+ by mx.groups.io with SMTP id smtpd.web11.11527.1651503086694239740
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 02 May 2022 07:51:27 -0700
+ Mon, 02 May 2022 07:51:26 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 204D540B86
-	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 14:51:26 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8A3B540CAF
+	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 14:51:24 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id s7GFY45LXzoh for <meta-ti@lists.yoctoproject.org>;
-	Mon,  2 May 2022 14:51:26 +0000 (UTC)
+	with ESMTP id n2L8Xs6WRqtG for <meta-ti@lists.yoctoproject.org>;
+	Mon,  2 May 2022 14:51:24 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
  [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 55D9740C8A
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7274140CA8
 	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 14:51:23 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 50051174921
+	by mail.denix.org (Postfix) with ESMTP id 65E45174923
 	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 10:51:21 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 12/26] ti-graphics: gpu enable and move all platforms
- to ddk 1.15
-Date: Mon,  2 May 2022 14:51:06 +0000
-Message-Id: <20220502145120.726632-13-denis@denix.org>
+Subject: [master][PATCH 14/26] pru-icss_git.bb: add AM62x
+Date: Mon,  2 May 2022 14:51:08 +0000
+Message-Id: <20220502145120.726632-15-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220502145120.726632-1-denis@denix.org>
 References: <20220502145120.726632-1-denis@denix.org>
@@ -43,173 +42,127 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 02 May 2022 14:51:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14664
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14660
 
-From: "Etheridge, Darren" <detheridge@ti.com>
+From: Nick Saulnier <nsaulnier@ti.com>
 
-Enable the GPU for am62xx and j721s2 and use IMG DDK 1.15
+This commit adds the PRU Software Support Package (PSSP) to the AM62x Lin=
+ux
+Processor SDK under example-applications/pru-icss-x.x.x. It also adds pre=
+built
+PRU firmware to the default AM62x filesystem image under the /lib/firmwar=
+e
+folder.
 
-Migrate Imagination DDK 1.13 to DDK 1.15 for J721e
-
-Signed-off-by: Darren Etheridge <detheridge@ti.com>
+Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/am62xx-evm.conf      |  2 ++
- meta-ti-bsp/conf/machine/j721s2-evm.conf      |  2 ++
- ...bb =3D> ti-img-rogue-driver_1.15.6133109.bb} | 20 +++++++++++--------
- ...bb =3D> ti-img-rogue-umlibs_1.15.6133109.bb} | 13 ++++++------
- 4 files changed, 23 insertions(+), 14 deletions(-)
- rename meta-ti-bsp/recipes-bsp/powervr-drivers/{ti-img-rogue-driver_1.13=
-.5776728.bb =3D> ti-img-rogue-driver_1.15.6133109.bb} (49%)
- rename meta-ti-bsp/recipes-graphics/libgles/{ti-img-rogue-umlibs_1.13.57=
-76728.bb =3D> ti-img-rogue-umlibs_1.15.6133109.bb} (84%)
+ .../recipes-bsp/pru/pru-icss_git.bb           | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/=
-machine/am62xx-evm.conf
-index 0588d34c..eb1563f8 100644
---- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-@@ -4,6 +4,8 @@
-=20
- require conf/machine/include/am62xx.inc
-=20
-+MACHINE_FEATURES +=3D "gpu"
-+
- KERNEL_DEVICETREE =3D " \
-     ti/k3-am625-sk.dtb \
- "
-diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/=
-machine/j721s2-evm.conf
-index a2c15f74..5d977776 100644
---- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-@@ -4,6 +4,8 @@
-=20
- require conf/machine/include/j721s2.inc
-=20
-+MACHINE_FEATURES +=3D "gpu"
-+
- SERIAL_CONSOLES =3D "115200;ttyS10"
- SERIAL_CONSOLES_CHECK =3D "${SERIAL_CONSOLES}"
- TFA_K3_USART =3D "0x8"
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_=
-1.13.5776728.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-dr=
-iver_1.15.6133109.bb
-similarity index 49%
-rename from meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1=
-.13.5776728.bb
-rename to meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.1=
-5.6133109.bb
-index 6ed3a40b..94b05436 100644
---- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.13.57=
-76728.bb
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.61=
-33109.bb
-@@ -7,17 +7,17 @@ inherit module features_check
-=20
- REQUIRED_MACHINE_FEATURES =3D "gpu"
-=20
--MACHINE_KERNEL_PR:append =3D "b"
-+MACHINE_KERNEL_PR:append =3D "a"
- PR =3D "${MACHINE_KERNEL_PR}"
-=20
- PACKAGE_ARCH =3D "${MACHINE_ARCH}"
--COMPATIBLE_MACHINE =3D "j7"
-+COMPATIBLE_MACHINE =3D "j721e|j721s2|am62xx"
-=20
- DEPENDS =3D "virtual/kernel"
-=20
- PROVIDES =3D "virtual/gpudriver"
-=20
--BRANCH =3D "1.13-5776728/linux-k5.10"
-+BRANCH =3D "linuxws/dunfell/k5.10/${PV}"
-=20
- SRC_URI =3D " \
-     git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D${BRANCH}=
- \
-@@ -26,15 +26,19 @@ SRC_URI =3D " \
-=20
- S =3D "${WORKDIR}/git"
-=20
--SRCREV =3D "35a25875ae8738f82c7cabc6b077ef992b0cca84"
-+SRCREV =3D "ee0674adccac16f5b2f7cb8d5d05948706080cb5"
-=20
--PVR_SOC =3D "j721e_linux"
--PVR_BVNC =3D "22.104.208.318"
-+TARGET_PRODUCT:j721e =3D "j721e_linux"
-+TARGET_PRODUCT:j721s2 =3D "j721s2_linux"
-+TARGET_PRODUCT:am62xx =3D "am62_linux"
-+TARGET_BVNC:j721e =3D "22.104.208.318"
-+TARGET_BVNC:j721s2 =3D "36.53.104.796"
-+TARGET_BVNC:am62xx =3D "33.15.11.3"
- PVR_BUILD =3D "release"
- PVR_WS =3D "wayland"
-=20
--EXTRA_OEMAKE +=3D 'KERNELDIR=3D"${STAGING_KERNEL_DIR}" RGX_BVNC=3D${PVR_=
-BVNC} BUILD=3D${PVR_BUILD} PVR_BUILD_DIR=3D${PVR_SOC} WINDOW_SYSTEM=3D${P=
-VR_WS}'
-+EXTRA_OEMAKE +=3D 'KERNELDIR=3D"${STAGING_KERNEL_DIR}" RGX_BVNC=3D${TARG=
-ET_BVNC} BUILD=3D${PVR_BUILD} PVR_BUILD_DIR=3D${TARGET_PRODUCT} WINDOW_SY=
-STEM=3D${PVR_WS}'
-=20
- do_install() {
--    make -C ${STAGING_KERNEL_DIR} M=3D${B}/binary_${PVR_SOC}_${PVR_WS}_$=
-{PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=3D${D}${root_prefix} P=
-REFIX=3D${STAGING_DIR_HOST} modules_install
-+    make -C ${STAGING_KERNEL_DIR} M=3D${B}/binary_${TARGET_PRODUCT}_${PV=
-R_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=3D${D}${root_pr=
-efix} PREFIX=3D${STAGING_DIR_HOST} modules_install
- }
-diff --git a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.1=
-3.5776728.bb b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1=
-.15.6133109.bb
-similarity index 84%
-rename from meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13=
-.5776728.bb
-rename to meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6=
-133109.bb
-index 18b36fbb..115344b1 100644
---- a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.13.57767=
-28.bb
-+++ b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.61331=
-09.bb
-@@ -8,17 +8,18 @@ inherit features_check
- REQUIRED_MACHINE_FEATURES =3D "gpu"
-=20
- PACKAGE_ARCH =3D "${MACHINE_ARCH}"
--COMPATIBLE_MACHINE =3D "j721e"
-+COMPATIBLE_MACHINE =3D "j721e|j721s2|am62xx"
-=20
--PR =3D "r3"
-+PR =3D "r1"
-=20
- BRANCH =3D "linuxws/dunfell/k5.10/${PV}"
-=20
- SRC_URI =3D "git://git.ti.com/graphics/ti-img-rogue-umlibs.git;branch=3D=
-${BRANCH}"
-+SRCREV =3D "47c3ffc44f2881397d45c8a2b5dfa7d6c58b79fb"
-=20
--SRCREV =3D "5ef38353c38d921a65ea6df75c7b6ce710b66034"
--
--PVR_SOC ?=3D "j721e_linux"
-+TARGET_PRODUCT:j721e =3D "j721e_linux"
-+TARGET_PRODUCT:j721s2 =3D "j721s2_linux"
-+TARGET_PRODUCT:am62xx =3D "am62_linux"
- PVR_BUILD ?=3D "release"
- PVR_WS =3D "wayland"
-=20
-@@ -50,7 +51,7 @@ RRECOMMENDS:${PN} +=3D "ti-img-rogue-driver"
- S =3D "${WORKDIR}/git"
-=20
- do_install () {
--    oe_runmake install DESTDIR=3D${D} TARGET_PRODUCT=3D${PVR_SOC} BUILD=3D=
-${PVR_BUILD} WINDOW_SYSTEM=3D${PVR_WS}
-+    oe_runmake install DESTDIR=3D${D} TARGET_PRODUCT=3D${TARGET_PRODUCT}=
- BUILD=3D${PVR_BUILD} WINDOW_SYSTEM=3D${PVR_WS}
-     chown -R root:root ${D}
+diff --git a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb b/meta-ti-ext=
+ras/recipes-bsp/pru/pru-icss_git.bb
+index 49f29086..cb2f8cc2 100644
+--- a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
++++ b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
+@@ -40,6 +40,7 @@ SUBDIRS =3D "examples pru_cape/pru_fw lib/src labs"
+ PLATFORM:ti33x =3D "am335x"
+ PLATFORM:ti43x =3D "am437x"
+ PLATFORM:omap-a15 =3D "am572x"
++PLATFORM:am62xx =3D "am62x"
+ PLATFORM:am64xx =3D "am64x"
+ PLATFORM:am65xx =3D "am65x"
+ PLATFORM:j7 =3D "j721e"
+@@ -99,6 +100,16 @@ do_install:append:omap-a15() {
+     done
  }
 =20
++do_install:append:am62xx() {
++    install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU_Halt.out \
++                   ${D}${nonarch_base_libdir}/firmware/pru
++    for i in 0 1
++    do
++        install -m 0644 ${S}/examples/${PLATFORM}/PRU_RPMsg_Echo_Interru=
+pt${i}/gen/PRU_RPMsg_Echo_Interrupt${i}.out \
++                        ${D}${nonarch_base_libdir}/firmware/pru
++    done
++}
++
+ do_install:append:am64xx(){
+     for i in 0 1
+     do
+@@ -175,6 +186,7 @@ FILES:${PN}-rpmsg-echo =3D "${nonarch_base_libdir}/fi=
+rmware/pru/PRU_RPMsg_Echo_Int
+ PRU_ICSS_ALTERNATIVES:ti33x    =3D "am335x-pru0-fw am335x-pru1-fw"
+ PRU_ICSS_ALTERNATIVES:ti43x    =3D "am437x-pru0_0-fw am437x-pru0_1-fw am=
+437x-pru1_0-fw am437x-pru1_1-fw"
+ PRU_ICSS_ALTERNATIVES:omap-a15 =3D "am57xx-pru1_0-fw am57xx-pru1_1-fw am=
+57xx-pru2_0-fw am57xx-pru2_1-fw"
++PRU_ICSS_ALTERNATIVES:am62xx   =3D "am62x-pru0-fw am62x-pru1-fw"
+ PRU_ICSS_ALTERNATIVES:am64xx   =3D "am64x-pru0_0-fw am64x-pru0_1-fw am64=
+x-pru1_0-fw am64x-pru1_1-fw am64x-rtu0_0-fw am64x-rtu0_1-fw am64x-rtu1_0-=
+fw am64x-rtu1_1-fw"
+ PRU_ICSS_ALTERNATIVES:am65xx   =3D "am65x-pru0_0-fw am65x-pru0_1-fw am65=
+x-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-=
+fw am65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-=
+rtu2_1-fw"
+ PRU_ICSS_ALTERNATIVES:j7       =3D "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-=
+fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw"
+@@ -193,6 +205,9 @@ ALTERNATIVE_LINK_NAME[am57xx-pru1_1-fw] =3D "${nonarc=
+h_base_libdir}/firmware/am57x
+ ALTERNATIVE_LINK_NAME[am57xx-pru2_0-fw] =3D "${nonarch_base_libdir}/firm=
+ware/am57xx-pru2_0-fw"
+ ALTERNATIVE_LINK_NAME[am57xx-pru2_1-fw] =3D "${nonarch_base_libdir}/firm=
+ware/am57xx-pru2_1-fw"
+=20
++ALTERNATIVE_LINK_NAME[am62x-pru0-fw] =3D "${nonarch_base_libdir}/firmwar=
+e/am62x-pru0-fw"
++ALTERNATIVE_LINK_NAME[am62x-pru1-fw] =3D "${nonarch_base_libdir}/firmwar=
+e/am62x-pru1-fw"
++
+ ALTERNATIVE_LINK_NAME[am64x-pru0_0-fw] =3D "${nonarch_base_libdir}/firmw=
+are/am64x-pru0_0-fw"
+ ALTERNATIVE_LINK_NAME[am64x-pru0_1-fw] =3D "${nonarch_base_libdir}/firmw=
+are/am64x-pru0_1-fw"
+ ALTERNATIVE_LINK_NAME[am64x-pru1_0-fw] =3D "${nonarch_base_libdir}/firmw=
+are/am64x-pru1_0-fw"
+@@ -259,6 +274,9 @@ ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru1_1-fw] =3D=
+ "${nonarch_base_libdir}/fir
+ ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru2_0-fw] =3D "${nonarch_base_l=
+ibdir}/firmware/pru/PRU_Halt.out"
+ ALTERNATIVE_TARGET_pru-icss-halt[am57xx-pru2_1-fw] =3D "${nonarch_base_l=
+ibdir}/firmware/pru/PRU_Halt.out"
+=20
++ALTERNATIVE_TARGET_pru-icss-halt[am62x-pru0-fw] =3D "${nonarch_base_libd=
+ir}/firmware/pru/PRU_Halt.out"
++ALTERNATIVE_TARGET_pru-icss-halt[am62x-pru1-fw] =3D "${nonarch_base_libd=
+ir}/firmware/pru/PRU_Halt.out"
++
+ ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru0_0-fw] =3D "${nonarch_base_li=
+bdir}/firmware/pru/PRU_Halt_0.out"
+ ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru0_1-fw] =3D "${nonarch_base_li=
+bdir}/firmware/pru/PRU_Halt_1.out"
+ ALTERNATIVE_TARGET_pru-icss-halt[am64x-pru1_0-fw] =3D "${nonarch_base_li=
+bdir}/firmware/pru/PRU_Halt_0.out"
+@@ -323,6 +341,9 @@ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru1_1-=
+fw] =3D "${nonarch_base_libdi
+ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru2_0-fw] =3D "${nonarch_=
+base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt2_0.out"
+ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am57xx-pru2_1-fw] =3D "${nonarch_=
+base_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt2_1.out"
+=20
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am62x-pru0-fw] =3D "${nonarch_bas=
+e_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0.out"
++ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am62x-pru1-fw] =3D "${nonarch_bas=
+e_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1.out"
++
+ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru0_0-fw] =3D "${nonarch_b=
+ase_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_0.out"
+ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru0_1-fw] =3D "${nonarch_b=
+ase_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt0_1.out"
+ ALTERNATIVE_TARGET_pru-icss-rpmsg-echo[am64x-pru1_0-fw] =3D "${nonarch_b=
+ase_libdir}/firmware/pru/PRU_RPMsg_Echo_Interrupt1_0.out"
 --=20
 2.25.1
 
