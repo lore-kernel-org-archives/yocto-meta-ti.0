@@ -2,99 +2,134 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59998C4332F
-	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 14:51:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B2F0C433FE
+	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 14:56:00 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.11504.1651503090853631863
+ by mx.groups.io with SMTP id smtpd.web11.11625.1651503357201831955
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 02 May 2022 07:51:31 -0700
+ Mon, 02 May 2022 07:55:57 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4C84040C3A
-	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 14:51:30 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A07BA40C2A;
+	Mon,  2 May 2022 14:55:56 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XXrMy2cUL9VY for <meta-ti@lists.yoctoproject.org>;
-	Mon,  2 May 2022 14:51:30 +0000 (UTC)
+	with ESMTP id iXOuDpe9Rs3q; Mon,  2 May 2022 14:55:56 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
  [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 75FDB40CB2
-	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 14:51:23 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 839A040B86;
+	Mon,  2 May 2022 14:55:54 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 72BEC174925
-	for <meta-ti@lists.yoctoproject.org>; Mon,  2 May 2022 10:51:21 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 47E01174914;
+	Mon,  2 May 2022 10:55:54 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 16/26] linux-ti-staging/mainline: depend on
- libmpc-native and gmp-native
-Date: Mon,  2 May 2022 14:51:10 +0000
-Message-Id: <20220502145120.726632-17-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+	Darren Etheridge <detheridge@ti.com>
+Subject: [master][PATCH] ti-img-rogue-driver: fix breakage with GCC 11
+Date: Mon,  2 May 2022 14:55:53 +0000
+Message-Id: <20220502145553.726889-1-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220502145120.726632-1-denis@denix.org>
-References: <20220502145120.726632-1-denis@denix.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 02 May 2022 14:51:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14667
+ <meta-ti@lists.yoctoproject.org>; Mon, 02 May 2022 14:56:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14669
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Similar to OE-Core changes:
-https://git.openembedded.org/openembedded-core/commit/?id=3D128abf5eb76dd=
-0d2680c93f043bf7cac0a3552b8
+Explicitly cast the value into correct type to fix this error:
 
-5.10.85 changed how the GCC plugins are built, which means they now
-depend on both GMP and MPC to be built.
+| .../services/server/devices/rogue/rgxinit.c:1345:36: error: implicit co=
+nversion from 'enum <anonymous>' to 'IMG_BOOL' {aka 'enum tag_img_bool'} =
+[-Werror=3Denum-conversion]
+|  1345 |                         bEnableAPM =3D false;
+|       |                                    ^
 
-Also add MPC dependency to linux-ti-mainline, as it already depends
-on GMP since:
-https://git.yoctoproject.org/meta-ti/commit/?id=3D0376ebcd4333ea2915b3113=
-945ff6a818f7cb442
-
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Cc: Darren Etheridge <detheridge@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ ...nit.c-cast-boolean-value-to-IMG_BOOL.patch | 34 +++++++++++++++++++
+ .../ti-img-rogue-driver_1.15.6133109.bb       |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-=
+driver/0001-rgxinit.c-cast-boolean-value-to-IMG_BOOL.patch
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb b/=
-meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-index f7719e9b..af823b98 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-@@ -10,7 +10,7 @@ require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/kernel-rdepends.inc
- require recipes-kernel/linux/ti-kernel.inc
-=20
--DEPENDS +=3D "gmp-native"
-+DEPENDS +=3D "gmp-native libmpc-native"
-=20
- KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} \
- 		      ${EXTRA_DTC_ARGS}"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/=
-meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-index cf70ac31..a1a68a9b 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-@@ -13,6 +13,8 @@ require recipes-kernel/linux/bundle-devicetree.inc
- require recipes-kernel/linux/kernel-rdepends.inc
- require recipes-kernel/linux/ti-kernel.inc
-=20
-+DEPENDS +=3D "gmp-native libmpc-native"
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/=
+0001-rgxinit.c-cast-boolean-value-to-IMG_BOOL.patch b/meta-ti-bsp/recipes=
+-bsp/powervr-drivers/ti-img-rogue-driver/0001-rgxinit.c-cast-boolean-valu=
+e-to-IMG_BOOL.patch
+new file mode 100644
+index 00000000..8d909279
+--- /dev/null
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-rg=
+xinit.c-cast-boolean-value-to-IMG_BOOL.patch
+@@ -0,0 +1,34 @@
++From cc95fb4b1635bd1018d74b668430cda67731148f Mon Sep 17 00:00:00 2001
++From: Denys Dmytriyenko <denys@konsulko.com>
++Date: Sat, 30 Apr 2022 18:37:46 +0000
++Subject: [PATCH] rgxinit.c: cast boolean value to IMG_BOOL
 +
- # Look in the generic major.minor directory for files
- FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-5.10:"
++Fixes this error with GCC 11:
++
++| .../services/server/devices/rogue/rgxinit.c:1345:36: error: implicit c=
+onversion from 'enum <anonymous>' to 'IMG_BOOL' {aka 'enum tag_img_bool'}=
+ [-Werror=3Denum-conversion]
++|  1345 |                         bEnableAPM =3D false;
++|       |                                    ^
++
++Upstream-Status: Pending
++
++Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
++---
++ services/server/devices/rogue/rgxinit.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/services/server/devices/rogue/rgxinit.c b/services/server/d=
+evices/rogue/rgxinit.c
++index ca7a1b9..fc94b73 100644
++--- a/services/server/devices/rogue/rgxinit.c
+++++ b/services/server/devices/rogue/rgxinit.c
++@@ -1342,7 +1342,7 @@ PVRSRV_ERROR RGXInitDevPart2(PVRSRV_DEVICE_NODE	*p=
+sDeviceNode,
++ 		if (bEnableAPM && (!PVRSRV_VZ_MODE_IS(NATIVE)))
++ 		{
++ 			PVR_DPF((PVR_DBG_WARNING, "%s: Active Power Management disabled in v=
+irtualization mode", __func__));
++-			bEnableAPM =3D false;
+++			bEnableAPM =3D (IMG_BOOL)false;
++ 		}
++=20
++ #if defined(RGX_NUM_OS_SUPPORTED) && (RGX_NUM_OS_SUPPORTED > 1) && defi=
+ned(SUPPORT_AUTOVZ)
++--=20
++2.25.1
++
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_=
+1.15.6133109.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-dr=
+iver_1.15.6133109.bb
+index 94b05436..2f4a7354 100644
+--- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.61=
+33109.bb
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.61=
+33109.bb
+@@ -22,6 +22,7 @@ BRANCH =3D "linuxws/dunfell/k5.10/${PV}"
+ SRC_URI =3D " \
+     git://git.ti.com/graphics/ti-img-rogue-driver.git;branch=3D${BRANCH}=
+ \
+     file://0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.pat=
+ch \
++    file://0001-rgxinit.c-cast-boolean-value-to-IMG_BOOL.patch \
+ "
 =20
+ S =3D "${WORKDIR}/git"
 --=20
 2.25.1
 
