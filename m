@@ -1,83 +1,91 @@
-Return-Path: <denis@denix.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 872F4C433F5
-	for <webhook@archiver.kernel.org>; Tue,  3 May 2022 16:07:05 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.1010.1651594022253106752
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89468C433EF
+	for <webhook@archiver.kernel.org>; Tue,  3 May 2022 16:09:55 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
+ [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web12.1091.1651594193019793552
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 03 May 2022 09:07:02 -0700
+ Tue, 03 May 2022 09:09:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 51C8E40BE9;
-	Tue,  3 May 2022 16:07:01 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Azd2iRpS5zfn; Tue,  3 May 2022 16:07:01 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 33B3C40A3D;
-	Tue,  3 May 2022 16:06:59 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 42FEC174917; Tue,  3 May 2022 12:06:58 -0400 (EDT)
-Date: Tue, 3 May 2022 12:06:58 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: reatmon@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master][PATCH] uio-module-drv-test: Fix build with
- clang
-Message-ID: <20220503160658.GZ9834@denix.org>
-References: <20220503160048.16789-1-reatmon@ti.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=GmIL6fRC;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id i1so9225071plg.7
+        for <meta-ti@lists.yoctoproject.org>;
+ Tue, 03 May 2022 09:09:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=8lkgkI6QTCQ/A2MdvsmlEXII2bP5KtmJy/bJHykviJY=;
+        b=GmIL6fRCGxULopl/VrUtd8AQwJf1urTwMGFGGr8hDMno0aeamARQ9qYkOLaDlYnEwR
+         jFG1FJorj3pGGDnWDPuKvKw6Nmp8rzcQEs8Wd7hdhvQ52mLI3upHQSA1vun362fz5LxV
+         29N2n6m/+FwuDmTBPpYsvTGYQtxWWrXtVHyPwowaS8h/6680q3qgCp7aFlWTqF6F/utt
+         nRPG9/FLLFTxVSfBdZW6sI/F5uscErNkRzK4W4lNmdNznzh2SXqDWt0mT/AaGXsxHIa8
+         Vikqj2/ZNYEGUNcG37pcS4ClsCpIsrXtr4gbBW8YFgO50iewK/j4g+PG/+E2oqVm9E4d
+         kJHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=8lkgkI6QTCQ/A2MdvsmlEXII2bP5KtmJy/bJHykviJY=;
+        b=J+V6wR9Ml010ogpEgQwfrsflTmcpDMdJk5m6IJj4N9daiFO4ugA+fTzx2mT/sU8Dhm
+         z9ksSnnVs2ockZ1YTRLt1Wjttt3JYHNk8XH4o7fqz0rdMJQ6GWBF7F9YS2tW6wS8MrFb
+         6qtmLxhAQp7FZ7J1Y4owSYHpwaKUDF4TsKmQ0PYqsjgB5e1K+3twTIzvr+slteLGnSh6
+         10/xRFCNPQdN6eUIaFpFSrOi1FyCT7wkXjFJs/zNoZnZG7ZMUnQYQiU1L7gRIjAIhC1V
+         w3k0+3Bul8qPw5q+kl2IrjdCWUTyMEEhKMLG6VLqqSazxr3V9dnKyc1JcKOuXwHZ5grm
+         4G6g==
+X-Gm-Message-State: AOAM532wQd6b0K4hNhNXUPgEO+hzCbNLWM0JlvP6fFkBSIwD1gzWWvlC
+	Byey+Qo+F0JDRdeZdebAq7lXeDAy0qKFqg==
+X-Google-Smtp-Source: 
+ ABdhPJycGgKVL5KrCt6oG8PLKRKGuKvr1afsOtP3nGXDz8xozhquv1GFVl72ph6yNNvFJsT03Ggazg==
+X-Received: by 2002:a17:902:d5ce:b0:158:48db:9719 with SMTP id
+ g14-20020a170902d5ce00b0015848db9719mr17252282plh.7.1651594192077;
+        Tue, 03 May 2022 09:09:52 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+        by smtp.gmail.com with ESMTPSA id
+ i10-20020a17090a65ca00b001cd4989ff4esm1539294pjs.21.2022.05.03.09.09.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 May 2022 09:09:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH v2] ffa-debugfs-mod: Do not build for TI SOCs
+Date: Tue,  3 May 2022 09:09:49 -0700
+Message-Id: <20220503160949.1685272-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220503160048.16789-1-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 03 May 2022 16:07:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14685
+ <meta-ti@lists.yoctoproject.org>; Tue, 03 May 2022 16:09:55 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14686
 
-On Tue, May 03, 2022 at 11:00:48AM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
-> Point to an updated SRCREV that fixes a compile error with the clang
-> compiler.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+The module can not be compiled without patching kernel 5.10
+This helps meta-ti to live in multi-BSP envs
 
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend             | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend b/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
+new file mode 100644
+index 00000000..67fcf6ec
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
+@@ -0,0 +1,5 @@
++# Added my meta-arm, this needs ceetain backports in 5.10
++# Disable until kernel upgrades to newer than 5.10 where it
++# is already upstreamed
++# Revisit when kernel is upgraded to 5.15 or newer e.g.
++COMPATIBLE_HOST:ti-soc = "null"
+-- 
+2.36.0
 
-> ---
->  meta-ti-bsp/recipes-bsp/uio-module-drv/uio-module-drv.inc | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/recipes-bsp/uio-module-drv/uio-module-drv.inc b/meta-ti-bsp/recipes-bsp/uio-module-drv/uio-module-drv.inc
-> index 2c22e0cf..5b9ac50e 100644
-> --- a/meta-ti-bsp/recipes-bsp/uio-module-drv/uio-module-drv.inc
-> +++ b/meta-ti-bsp/recipes-bsp/uio-module-drv/uio-module-drv.inc
-> @@ -2,10 +2,10 @@ LICENSE = "BSD-3-Clause"
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
->  
->  BRANCH = "master"
-> -# This corresponds to version 02.02.01.00
-> -UIO_MODULE_DRV_SRCREV = "bda9260f2220840a60ec0fbc8011cbadf3cf1b91"
-> +# This corresponds to version 02.03.01.00
-> +UIO_MODULE_DRV_SRCREV = "78c535afe8f8cc0b715500a63eab0bc3606c0579"
->  
-> -PV = "2.2.1.0+git${SRCPV}"
-> +PV = "2.3.1.0+git${SRCPV}"
->  
->  UIO_MODULE_DRV_GIT_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git"
->  UIO_MODULE_DRV_GIT_PROTOCOL = "git"
-> -- 
-> 2.17.1
-> 
 
