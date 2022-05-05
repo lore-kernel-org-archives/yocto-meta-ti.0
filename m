@@ -1,143 +1,102 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC331C433EF
-	for <webhook@archiver.kernel.org>; Thu,  5 May 2022 19:23:19 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.820.1651778596076808393
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A91B1C433EF
+	for <webhook@archiver.kernel.org>; Thu,  5 May 2022 22:50:51 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.2992.1651791046097777005
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 May 2022 12:23:16 -0700
+ Thu, 05 May 2022 15:50:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=vKcKXLnT;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 245JN8R4010915;
-	Thu, 5 May 2022 14:23:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1651778588;
-	bh=X4sg1GnsSyvm4NqSGnVt26hfTIX2cRlfVn5i4isd388=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=vKcKXLnTU/CwI0Hn5+dQ/krab64RyDZcdzvmwxSdg1vpXlW9K8WV4aYAVlSA9Hto0
-	 99dQvnrk9SGdfJ3UEQQE296f91BPTcO1ziW1gUV5l66si9oovkPuzKJGP4RuIwc7us
-	 PKg1mCd+jHMHazXCCuwxB43hieF8ytUMSRhLqgTY=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 245JN8Pp027998
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 5 May 2022 14:23:08 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 5
- May 2022 14:23:08 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 5 May 2022 14:23:08 -0500
-Received: from [10.249.39.108] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 245JN8Lb016289;
-	Thu, 5 May 2022 14:23:08 -0500
-Message-ID: <0048babd-1df7-5110-bae0-b0f179a7d813@ti.com>
-Date: Thu, 5 May 2022 14:23:08 -0500
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
+ mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 23BB140BE9;
+	Thu,  5 May 2022 22:50:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rzeuHJ-y1zqH; Thu,  5 May 2022 22:50:45 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+ [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id F415040A3D;
+	Thu,  5 May 2022 22:50:41 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 1F48B174920; Thu,  5 May 2022 18:50:41 -0400 (EDT)
+Date: Thu, 5 May 2022 18:50:41 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][dunfell][PATCH v3 2/2] conf/machine: am62xx: Update
+ build flag for low power mode
+Message-ID: <20220505225041.GO9834@denix.org>
+References: <20220505013006.27140-1-reatmon@ti.com>
+ <20220505013006.27140-3-reatmon@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Subject: Re: [meta-ti] [master][PATCH 1/5] am62xx, j721s2: move "gpu" machine
- feature from machine to soc config
-Content-Language: en-US
-To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>
-References: <20220505174422.334666-1-denis@denix.org>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20220505174422.334666-1-denis@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220505013006.27140-3-reatmon@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 05 May 2022 19:23:19 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14711
+ <meta-ti@lists.yoctoproject.org>; Thu, 05 May 2022 22:50:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14712
 
-
-Series applied to master.
-
-
-On 5/5/2022 12:44, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@konsulko.com>
+On Wed, May 04, 2022 at 08:30:06PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
+> From: Nishanth Menon <nm@ti.com>
 > 
-> In most cases machine features should be set in the corresponding SoC config
-> to be applicable to different machine variants, like GP, HS or custom board.
+> Update build flag for arm-trusted-firmware to include low power mode
+> support
 > 
-> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> K3_PM_SYSTEM_SUSPEND is added in arm-trusted-firmware now which enables
+> low power mode support for am62xx.
+> 
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 > ---
->   meta-ti-bsp/conf/machine/am62xx-evm.conf    | 2 --
->   meta-ti-bsp/conf/machine/include/am62xx.inc | 2 +-
->   meta-ti-bsp/conf/machine/include/j721s2.inc | 2 ++
->   meta-ti-bsp/conf/machine/j721s2-evm.conf    | 2 --
->   4 files changed, 3 insertions(+), 5 deletions(-)
+>  conf/machine/include/am62xx.inc                              | 2 ++
+>  recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend | 1 +
+>  2 files changed, 3 insertions(+)
 > 
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> index 44f46d78..33b3294e 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> @@ -4,8 +4,6 @@
->   
->   require conf/machine/include/am62xx.inc
->   
-> -MACHINE_FEATURES += "gpu"
-> -
->   KERNEL_DEVICETREE = " \
->       ti/k3-am625-sk.dtb \
->       ti/k3-am625-sk-csi2-ov5640.dtb \
-> diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
-> index f3bde639..56cd7c20 100644
-> --- a/meta-ti-bsp/conf/machine/include/am62xx.inc
-> +++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
-> @@ -1,7 +1,7 @@
->   require conf/machine/include/k3.inc
->   SOC_FAMILY:append = ":am62xx"
->   
-> -MACHINE_FEATURES += "screen touchscreen"
-> +MACHINE_FEATURES += "screen touchscreen gpu"
->   
->   SERIAL_CONSOLES = "115200;ttyS2"
->   SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
-> diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
-> index 113f86c4..06654179 100644
-> --- a/meta-ti-bsp/conf/machine/include/j721s2.inc
-> +++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
-> @@ -1,2 +1,4 @@
->   require conf/machine/include/j7.inc
->   SOC_FAMILY:append = ":j721s2"
-> +
-> +MACHINE_FEATURES += "gpu"
-> diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> index 5d977776..a2c15f74 100644
-> --- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> @@ -4,8 +4,6 @@
->   
->   require conf/machine/include/j721s2.inc
->   
-> -MACHINE_FEATURES += "gpu"
-> -
->   SERIAL_CONSOLES = "115200;ttyS10"
->   SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->   TFA_K3_USART = "0x8"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#14706): https://lists.yoctoproject.org/g/meta-ti/message/14706
-> Mute This Topic: https://lists.yoctoproject.org/mt/90916827/6551054
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+> diff --git a/conf/machine/include/am62xx.inc b/conf/machine/include/am62xx.inc
+> index e8823dd2..ff857b97 100644
+> --- a/conf/machine/include/am62xx.inc
+> +++ b/conf/machine/include/am62xx.inc
+> @@ -6,6 +6,8 @@ MACHINE_FEATURES += "screen touchscreen"
+>  SERIAL_CONSOLES = "115200;ttyS2"
+>  SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+>  
+> +TFA_K3_SYSTEM_SUSPEND = "1"
 
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+Might want to keep this TFA_ variable together with the other TFA_BOARD being 
+set futher down in the file, to avoid scattering them all over...
+
+Otherwise looks good to me.
+
+
+> +
+>  # AM62 supports multi-certificate images, use the same
+>  IMAGE_BOOT_FILES = "${IMAGE_BOOT_FILES_MULTI_CERT}"
+>  
+> diff --git a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+> index 80b1d664..68bfa899 100644
+> --- a/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+> +++ b/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
+> @@ -9,6 +9,7 @@ TFA_INSTALL_TARGET_k3 = "bl31"
+>  TFA_SPD_k3 = "opteed"
+>  
+>  EXTRA_OEMAKE_append_k3 = "${@ 'K3_USART=' + d.getVar('TFA_K3_USART') if d.getVar('TFA_K3_USART') else ''}"
+> +EXTRA_OEMAKE_append_k3 = "${@ 'K3_PM_SYSTEM_SUSPEND=' + d.getVar('TFA_K3_SYSTEM_SUSPEND') if d.getVar('TFA_K3_SYSTEM_SUSPEND') else ''}"
+>  
+>  do_compile_append_am65xx-hs-evm() {
+>  	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+> -- 
+> 2.17.1
 
