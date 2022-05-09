@@ -2,10 +2,10 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 789AFC4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85733C46467
 	for <webhook@archiver.kernel.org>; Mon,  9 May 2022 17:59:53 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.602.1652119192579577536
+ by mx.groups.io with SMTP id smtpd.web12.556.1652119192578952946
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 09 May 2022 10:59:52 -0700
 Authentication-Results: mx.groups.io;
@@ -13,27 +13,26 @@ Authentication-Results: mx.groups.io;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 888AD40C56
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7DE8940C8A
 	for <meta-ti@lists.yoctoproject.org>; Mon,  9 May 2022 17:59:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QRLHJsON1-ri for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id IjYvIxicM92Q for <meta-ti@lists.yoctoproject.org>;
 	Mon,  9 May 2022 17:59:50 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
  [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7EFA840C8E
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 73C8140C60
 	for <meta-ti@lists.yoctoproject.org>; Mon,  9 May 2022 17:59:50 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 39CCF17492A
+	by mail.denix.org (Postfix) with ESMTP id 2461B174928
 	for <meta-ti@lists.yoctoproject.org>; Mon,  9 May 2022 13:59:48 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 09/10] libdce: upgrade to 3.00.15.00 and specify
- branch
-Date: Mon,  9 May 2022 17:59:46 +0000
-Message-Id: <20220509175947.1994132-10-denis@denix.org>
+Subject: [master][PATCH 07/10] linux-ti-staging: Bump to 08.03.00.003 release
+Date: Mon,  9 May 2022 17:59:44 +0000
+Message-Id: <20220509175947.1994132-8-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220509175947.1994132-1-denis@denix.org>
 References: <20220509175947.1994132-1-denis@denix.org>
@@ -43,54 +42,33 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 09 May 2022 17:59:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14722
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14726
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+From: Ryan Eatmon <reatmon@ti.com>
 
-Fixes these warnings:
+Updated the linux version for 08.03.00.003
 
-| WARNING: libdce-3.00.14.00-r1 do_fetch: URL: git://git.omapzoom.org/rep=
-o/libdce.git;protocol=3Dgit
-| does not set any branch parameter. The future default branch used by to=
-ols and repositories
-| is uncertain and we will therefore soon require this is set in all git =
-urls.
-| WARNING: libdce-3.00.14.00-r1 do_unpack: URL: git://git.omapzoom.org/re=
-po/libdce.git;protocol=3Dgit
-| does not set any branch parameter. The future default branch used by to=
-ols and repositories
-| is uncertain and we will therefore soon require this is set in all git =
-urls.
-
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../libdce/{libdce_3.00.14.00.bb =3D> libdce_3.00.15.00.bb}   | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-ti-extras/recipes-multimedia/libdce/{libdce_3.00.14.00.bb =3D=
-> libdce_3.00.15.00.bb} (75%)
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.14.00.b=
-b b/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb
-similarity index 75%
-rename from meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.14.00.bb
-rename to meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb
-index a6dc1d1d..54f6ff8a 100644
---- a/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.14.00.bb
-+++ b/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb
-@@ -6,10 +6,8 @@ inherit autotools pkgconfig
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/=
+meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index d5c2c587..a0581cb4 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -25,7 +25,7 @@ S =3D "${WORKDIR}/git"
 =20
- DEPENDS =3D "libdrm ti-ipc"
+ BRANCH =3D "ti-linux-5.10.y"
 =20
--SRC_URI =3D "git://git.omapzoom.org/repo/libdce.git;protocol=3Dgit"
--SRCREV =3D "f72096090e3063e85ea77cae66b2d99a48d91727"
--
--PR =3D "r1"
-+SRC_URI =3D "git://git.omapzoom.org/repo/libdce.git;protocol=3Dgit;branc=
-h=3Dmaster"
-+SRCREV =3D "ec14e1d5cea1ed3c3ea0e2b9cf1fd581acff93e3"
+-SRCREV =3D "45b6d4fdf6550061582b89d0b794a1cc7c1dc4b2"
++SRCREV =3D "9cff62efaca103acf18b8478362ec56e11d7f526"
+ PV =3D "5.10.109+git${SRCPV}"
 =20
- S =3D "${WORKDIR}/git"
- EXTRA_OECONF +=3D "IPC_HEADERS=3D${STAGING_INCDIR}/ti/ipc/mm"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
+ild
 --=20
 2.25.1
 
