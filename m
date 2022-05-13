@@ -1,88 +1,99 @@
-Return-Path: <praneeth@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D5CFC433F5
-	for <webhook@archiver.kernel.org>; Fri, 13 May 2022 19:15:59 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web08.1734.1652469349388522211
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09D25C433EF
+	for <webhook@archiver.kernel.org>; Fri, 13 May 2022 21:54:08 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.257.1652478840551486230
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 13 May 2022 12:15:49 -0700
+ Fri, 13 May 2022 14:54:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cUPSfdWR;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 24DJFlRG111097;
-	Fri, 13 May 2022 14:15:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1652469347;
-	bh=ZRvbCjnbjveKnXAurGyeJgmRzIxKZ5EiDQN3sma0stQ=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=cUPSfdWRXmsF0XtFViNipKbwFWsmVrLSVhX3nNg/8TRIYF7RBJtD2zqdmGo8egmRk
-	 cbDZJR5aLBoZ1WKNGDxD9QFWc9oHFLRwyAzsX6YpLFTc9GkMEPRnEqKf80ItHu7PVB
-	 dvIwtsekBZ2juQjtP4JyQ7tv4THcbLrGa6nB/8P8=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 24DJFlpX022361
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 13 May 2022 14:15:47 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 13
- May 2022 14:15:46 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Fri, 13 May 2022 14:15:46 -0500
-Received: from [10.247.28.135] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 24DJFknP010967;
-	Fri, 13 May 2022 14:15:46 -0500
-Message-ID: <b8c13565-5188-38dd-9828-b3f503358cda@ti.com>
-Date: Fri, 13 May 2022 14:15:46 -0500
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
+ mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 85F5840CBB;
+	Fri, 13 May 2022 21:53:59 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id qCiKPcbtPzpp; Fri, 13 May 2022 21:53:59 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+ [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4875140CB7;
+	Fri, 13 May 2022 21:53:53 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 0E6DF174933; Fri, 13 May 2022 17:53:53 -0400 (EDT)
+Date: Fri, 13 May 2022 17:53:53 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Aparna M <a-m1@ti.com>
+Cc: meta-ti@lists.yoctoproject.org, nm@ti.com, praneeth@ti.com,
+	reatmon@ti.com, devarsht@ti.com, s-adivi@ti.com
+Subject: Re: [meta-ti][dunfell][PATCH] ti-tros-firmware: Add DM firmware
+ binary to deploy directory for am62xx-evm
+Message-ID: <20220513215353.GF9834@denix.org>
+References: <20220513073848.13539-1-a-m1@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-Subject: Re: [meta-ti][dunfell][PATCH] conf: machine: am62xx Fix overlay
- extension
-Content-Language: en-US
-To: Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20220513165509.14281-1-reatmon@ti.com>
-From: "Bajjuri, Praneeth" <praneeth@ti.com>
-In-Reply-To: <20220513165509.14281-1-reatmon@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220513073848.13539-1-a-m1@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 13 May 2022 19:15:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14739
+ <meta-ti@lists.yoctoproject.org>; Fri, 13 May 2022 21:54:08 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14740
 
-
-
-On 5/13/2022 11:55 AM, Ryan Eatmon wrote:
-> The file extension for the overlay needs to be .dtbo.
+On Fri, May 13, 2022 at 01:08:48PM +0530, Aparna M wrote:
+> The DM firmware binary is required for building uboot binaries for
+> am62xx-evm  using toplevel makefile in SDK. Add this file to deploy
+> directory so it can be included in prebuilt-images directory of SDK
+> for am62xx-evm.
 > 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-
-Reviewed-by: Praneeth Bajjuri <praneeth@ti.com>
-
-
+> Signed-off-by: Aparna M <a-m1@ti.com>
 > ---
->   conf/machine/am62xx-evm.conf | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/conf/machine/am62xx-evm.conf b/conf/machine/am62xx-evm.conf
-> index 44f46d78..195cb90c 100644
-> --- a/conf/machine/am62xx-evm.conf
-> +++ b/conf/machine/am62xx-evm.conf
-> @@ -8,7 +8,7 @@ MACHINE_FEATURES += "gpu"
->   
->   KERNEL_DEVICETREE = " \
->       ti/k3-am625-sk.dtb \
-> -    ti/k3-am625-sk-csi2-ov5640.dtb \
-> +    ti/k3-am625-sk-csi2-ov5640.dtbo \
->   "
->   
->   UBOOT_MACHINE = "am62x_evm_a53_defconfig"
+> I have had to include a dummy do_deplo without which yocto build fails
+> with a "Task do_deploy is empty" error. Any suggestions as to why this
+> could be happening?
+
+You could have an empty do_deploy with a single colon symbol (NOP) in it:
+https://git.openembedded.org/openembedded-core/tree/meta/recipes-support/user-creation/xuser-account_0.1.bb?h=dunfell
+
+
+>  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+> 
+> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> index 56a74899..0f2ba9af 100644
+> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> @@ -169,6 +169,16 @@ do_install_am62xx() {
+>      install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
+>  }
+>  
+> +
+> +do_deploy() {
+> +    install -d ${DEPLOYDIR}
+> +}
+> +
+> +do_deploy_am62xx() {
+> +    install -d ${DEPLOYDIR}
+> +    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
+> +}
+> +
+>  # Set up names for the firmwares
+>  ALTERNATIVE_${PN}_am65xx = "\
+>                      am65x-mcu-r5f0_0-fw \
+> @@ -357,3 +367,5 @@ INSANE_SKIP_${PN} += "arch"
+>  # we don't want to configure and build the source code
+>  do_compile[noexec] = "1"
+>  do_configure[noexec] = "1"
+> +
+> +addtask deploy after do_install
+> -- 
+> 2.17.1
+> 
 
