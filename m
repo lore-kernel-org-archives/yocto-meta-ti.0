@@ -2,53 +2,50 @@ Return-Path: <a-m1@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80991C433F5
-	for <webhook@archiver.kernel.org>; Fri, 13 May 2022 08:57:59 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.5978.1652432273453566683
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DF71C433EF
+	for <webhook@archiver.kernel.org>; Fri, 13 May 2022 10:02:50 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web08.6424.1652436166844077227
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 13 May 2022 01:57:54 -0700
+ Fri, 13 May 2022 03:02:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=klWEGdh3;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: a-m1@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 24D8vmZu048292;
-	Fri, 13 May 2022 03:57:48 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=dKz9MRfs;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: a-m1@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 24DA2hE6089629;
+	Fri, 13 May 2022 05:02:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1652432268;
+	s=ti-com-17Q1; t=1652436163;
 	bh=kOlKCLsIHIwovqoo+yxSb1PxLznexSmGfmEC8sfKc6A=;
 	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=klWEGdh3BcfIu2LCE8rWkeXzjbTJ59ofMZbzQJHl2zSvLdeTzsWAje0tWWvb0rdqK
-	 UrHOeByfVcN6BNZPuH1Z5JiaSz5r3ZnkoU3AXopq4JgfKLjthC6HfkuQPV7WwHSsEF
-	 P7dFNVLegonxJbXKQT+u5BAVTCKiUwFQgYIXdg8U=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 24D8vm7P076222
+	b=dKz9MRfsFTTEHa3o3eIze0gczUWlaQ+wT3bcjqq1Cqss4XVXPrDXoMGPkNPNhrc9X
+	 dsPbBMaRzODimDZHlrhn0vefRvzRV2yT3tgsSqrMzhTjBWlg++cl1PuS894gKKhUeM
+	 QXMPAFWjhz4zo/edZy2z0sV6V+3dxK7w2HyiyiBo=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 24DA2h36071264
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 13 May 2022 03:57:48 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 13 May 2022 05:02:43 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 13
- May 2022 03:57:47 -0500
+ May 2022 05:02:42 -0500
 Received: from DFLE111.ent.ti.com ([fe80::6c89:b1ca:ee8f:1a6f]) by
  DFLE111.ent.ti.com ([fe80::6c89:b1ca:ee8f:1a6f%17]) with mapi id
- 15.01.2308.014; Fri, 13 May 2022 03:57:47 -0500
+ 15.01.2308.014; Fri, 13 May 2022 05:02:42 -0500
 From: "M, Aparna" <a-m1@ti.com>
 To: "Menon, Nishanth" <nm@ti.com>, "Thakkar, Devarsh" <devarsht@ti.com>,
         "Eatmon, Ryan" <reatmon@ti.com>
-CC: "M, Aparna" <a-m1@ti.com>,
-        "meta-ti@lists.yoctoproject.org"
-	<meta-ti@lists.yoctoproject.org>,
+CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
         "Bajjuri, Praneeth" <praneeth@ti.com>,
         "denis@denix.org" <denis@denix.org>,
-        "Adivi, Sai Sree Kartheek"
-	<s-adivi@ti.com>
+        "Adivi, Sai Sree Kartheek" <s-adivi@ti.com>
 Subject: Re: [meta-ti][dunfell][PATCH] ti-sci-fw: Add DM firmware to deploy
  directory for am62xx-evm
 Thread-Topic: [meta-ti][dunfell][PATCH] ti-sci-fw: Add DM firmware to deploy
  directory for am62xx-evm
-Thread-Index: AQHYZghE5mflymSaxUSX3n7mnq1ThK0bmn2AgAGYNAA=
-Date: Fri, 13 May 2022 08:57:47 +0000
-Message-ID: <04651dfaa29c443eb578b80260428e9e@ti.com>
+Thread-Index: AQHYZghE5mflymSaxUSX3n7mnq1ThK0bmn2AgAGqjIA=
+Date: Fri, 13 May 2022 10:02:42 +0000
+Message-ID: <0ff05c047f8a464e87866556854cf043@ti.com>
 References: <20220512134657.31238-1-a-m1@ti.com>
  <2e0d6c43-5d99-ea35-7e2f-9c8b4a68da08@ti.com>
  <20220512140543.oqcnxfja75la4wdf@verify>
@@ -62,14 +59,14 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [10.250.233.187]
 x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Type: text/plain; charset="utf-8"
-Content-ID: <EACFA04AD2C3FC428E9BD8FF26EB3F93@owa.mail.ti.com>
+Content-ID: <C8042E34CF82354EBDEA4FB8FFC8094F@owa.mail.ti.com>
 Content-Transfer-Encoding: base64
 MIME-Version: 1.0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 13 May 2022 08:57:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14734
+ <meta-ti@lists.yoctoproject.org>; Fri, 13 May 2022 10:02:50 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14735
 
 DQpPbiAxMi8wNS8yMiAxOTozNSwgTmlzaGFudGggTWVub24gd3JvdGU6DQo+IE9uIDE5OjI3LTIw
 MjIwNTEyLCBEZXZhcnNoIFRoYWtrYXIgdmlhIGxpc3RzLnlvY3RvcHJvamVjdC5vcmcgd3JvdGU6
