@@ -1,99 +1,86 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09D25C433EF
-	for <webhook@archiver.kernel.org>; Fri, 13 May 2022 21:54:08 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.257.1652478840551486230
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD05FC433FE
+	for <webhook@archiver.kernel.org>; Mon, 16 May 2022 13:20:40 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.28651.1652707238624179619
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 13 May 2022 14:54:00 -0700
+ Mon, 16 May 2022 06:20:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 85F5840CBB;
-	Fri, 13 May 2022 21:53:59 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qCiKPcbtPzpp; Fri, 13 May 2022 21:53:59 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4875140CB7;
-	Fri, 13 May 2022 21:53:53 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 0E6DF174933; Fri, 13 May 2022 17:53:53 -0400 (EDT)
-Date: Fri, 13 May 2022 17:53:53 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Aparna M <a-m1@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, nm@ti.com, praneeth@ti.com,
-	reatmon@ti.com, devarsht@ti.com, s-adivi@ti.com
-Subject: Re: [meta-ti][dunfell][PATCH] ti-tros-firmware: Add DM firmware
- binary to deploy directory for am62xx-evm
-Message-ID: <20220513215353.GF9834@denix.org>
-References: <20220513073848.13539-1-a-m1@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=HUN2WFvt;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 24GDKbx9041640;
+	Mon, 16 May 2022 08:20:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1652707237;
+	bh=WTlus1cGXm8cqV9TKD1bteoKebmzlCGAiA7rIFvpJhs=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=HUN2WFvtCDYx2UTGoJqwNgqQMfRLjAXH2dUR0LKUKxgh55oRxpkE2lbB7IMKKDjQm
+	 VqtviF43kkzu5W6+OqoXs8L9kKxtZEEY5MHzrxNY3MqKCGkl46o9pBMRQ/nEGgXRAI
+	 3rMZfmbc6RUQqCs0/iSy+7621fgfSSixF+8KhtVM=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 24GDKbpj014262
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 16 May 2022 08:20:37 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 16
+ May 2022 08:20:36 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Mon, 16 May 2022 08:20:36 -0500
+Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 24GDKajT021161;
+	Mon, 16 May 2022 08:20:36 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1nqaeK-0007k2-8c; Mon, 16 May 2022 08:20:36 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 2/4] linux-ti-staging: Bump to 08.03.00.004
+ release
+Date: Mon, 16 May 2022 08:20:34 -0500
+Message-ID: <20220516132036.29708-3-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220516132036.29708-1-reatmon@ti.com>
+References: <20220516132036.29708-1-reatmon@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220513073848.13539-1-a-m1@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 13 May 2022 21:54:08 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14740
+ <meta-ti@lists.yoctoproject.org>; Mon, 16 May 2022 13:20:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14741
 
-On Fri, May 13, 2022 at 01:08:48PM +0530, Aparna M wrote:
-> The DM firmware binary is required for building uboot binaries for
-> am62xx-evm  using toplevel makefile in SDK. Add this file to deploy
-> directory so it can be included in prebuilt-images directory of SDK
-> for am62xx-evm.
-> 
-> Signed-off-by: Aparna M <a-m1@ti.com>
-> ---
-> 
-> I have had to include a dummy do_deplo without which yocto build fails
-> with a "Task do_deploy is empty" error. Any suggestions as to why this
-> could be happening?
+Updated the linux version for 08.03.00.004
 
-You could have an empty do_deploy with a single colon symbol (NOP) in it:
-https://git.openembedded.org/openembedded-core/tree/meta/recipes-support/user-creation/xuser-account_0.1.bb?h=dunfell
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index baaa6b83..2746d451 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -25,7 +25,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-5.10.y"
+ 
+-SRCREV = "9cff62efaca103acf18b8478362ec56e11d7f526"
++SRCREV = "478daea6c94e2c885fa2cf049bc11fb285c5323b"
+ PV = "5.10.109+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+2.17.1
 
->  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
-> 
-> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> index 56a74899..0f2ba9af 100644
-> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> @@ -169,6 +169,16 @@ do_install_am62xx() {
->      install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
->  }
->  
-> +
-> +do_deploy() {
-> +    install -d ${DEPLOYDIR}
-> +}
-> +
-> +do_deploy_am62xx() {
-> +    install -d ${DEPLOYDIR}
-> +    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
-> +}
-> +
->  # Set up names for the firmwares
->  ALTERNATIVE_${PN}_am65xx = "\
->                      am65x-mcu-r5f0_0-fw \
-> @@ -357,3 +367,5 @@ INSANE_SKIP_${PN} += "arch"
->  # we don't want to configure and build the source code
->  do_compile[noexec] = "1"
->  do_configure[noexec] = "1"
-> +
-> +addtask deploy after do_install
-> -- 
-> 2.17.1
-> 
 
