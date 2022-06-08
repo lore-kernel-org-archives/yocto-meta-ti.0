@@ -1,52 +1,49 @@
-Return-Path: <afd@ti.com>
+Return-Path: <nm@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1E28CCA481
-	for <webhook@archiver.kernel.org>; Wed,  8 Jun 2022 17:14:26 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.17.1654708461503722553
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E231DC43334
+	for <webhook@archiver.kernel.org>; Wed,  8 Jun 2022 17:20:16 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web12.113.1654708808560198874
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 08 Jun 2022 10:14:22 -0700
+ Wed, 08 Jun 2022 10:20:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=TqXKjjLP;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 258HEJA7034231;
-	Wed, 8 Jun 2022 12:14:19 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=wfKPzXCN;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: nm@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 258HK33Y023809;
+	Wed, 8 Jun 2022 12:20:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1654708459;
-	bh=EU2223Jc9XVohdc/eiQ8490Ryqpc+vgBIQdGWWerPw8=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=TqXKjjLPPZg9J5EnDTsEkxaDOlNXcamoFtWkqVvKBKZol+IxQYWyUfmJVkNBh6MZY
-	 lC/1qK7qVAWyBprxrGuQcrbvbnENy/VrdS5V81L0UtR6t4IBA94k1/DjnJ4bBt3f8Z
-	 ldR9nOOoq1Wkeej0KQ40s28wVEzHoTNHrgOEhIic=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 258HEJBF087087
+	s=ti-com-17Q1; t=1654708803;
+	bh=hmsAulTGP80m4VxP2UFFSgWZFe9VMYeYFxYjX4I8Mpk=;
+	h=From:To:CC:Subject:Date;
+	b=wfKPzXCNXmmLnSIONXwIXm6qkxJE7YZ4cI0Cdaiyjmomydyo1SmsNDKL2LBmN4wjE
+	 Xanwq8SgUyt6/IaQEzFF0ONZK+91NubbNkDfOIkSvOPkpp7fovRfsTvf9+X4f2kCBQ
+	 J0Rc2prHMSSgWTkizOvGPpJ+4pUwvKUH/BcSk5jU=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 258HK3xL015391
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 8 Jun 2022 12:14:19 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 8 Jun 2022 12:20:03 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 8
- Jun 2022 12:14:19 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2022 12:20:03 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 8 Jun 2022 12:14:19 -0500
-Received: from ula0226330.dal.design.ti.com (ileax41-snat.itg.ti.com
- [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 258HEIGx114380;
-	Wed, 8 Jun 2022 12:14:19 -0500
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][dunfell][PATCH v2 2/2] optee: Upgrade to upstream 3.17.0
-Date: Wed, 8 Jun 2022 12:14:18 -0500
-Message-ID: <20220608171418.576-2-afd@ti.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220608171418.576-1-afd@ti.com>
-References: <20220608171418.576-1-afd@ti.com>
+ Frontend Transport; Wed, 8 Jun 2022 12:20:02 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 258HK2B3008310;
+	Wed, 8 Jun 2022 12:20:02 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Nishanth Menon <nm@ti.com>
+Subject: [dunfell/master PATCH] linux-ti-mainline: Bump kernel version to
+ v5.18
+Date: Wed, 8 Jun 2022 12:19:58 -0500
+Message-ID: <20220608171958.19272-1-nm@ti.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -54,149 +51,50 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 08 Jun 2022 17:14:26 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14793
+ <meta-ti@lists.yoctoproject.org>; Wed, 08 Jun 2022 17:20:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14794
 
-Update to the latest upstream master which is 3.17.
-The extra patches do not look to be needed anymore.
+This adds up numerous fixes for various k3 platforms, adds platform such
+as AM62x, J721S2.
 
-While here switch to git checkout with https.
+While at it, bump the ti-upstream-tools repo as this sync up gives us:
+- Switch over to 4k as default, configs needed for containers for k3 platforms
+  among other config updates
+- Enable fixes for various pinmuxes and overlays for system test images.
 
-Signed-off-by: Andrew Davis <afd@ti.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- .../optee/optee-client_%.bbappend             |  4 +++
- ...ow-setting-sysroot-for-libgcc-lookup.patch | 34 -------------------
- ...0007-allow-setting-sysroot-for-clang.patch | 29 ----------------
- recipes-security/optee/optee-os_%.bbappend    | 12 +++----
- recipes-security/optee/optee-test_%.bbappend  |  7 ++++
- 5 files changed, 15 insertions(+), 71 deletions(-)
- create mode 100644 recipes-security/optee/optee-client_%.bbappend
- delete mode 100644 recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
- delete mode 100644 recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
- create mode 100644 recipes-security/optee/optee-test_%.bbappend
+ recipes-bsp/u-boot/u-boot-ti-mainline_git.bb  | 6 +++---
+ recipes-kernel/linux/linux-ti-mainline_git.bb | 8 ++++----
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-security/optee/optee-client_%.bbappend b/recipes-security/optee/optee-client_%.bbappend
-new file mode 100644
-index 00000000..0324c1ab
---- /dev/null
-+++ b/recipes-security/optee/optee-client_%.bbappend
-@@ -0,0 +1,4 @@
-+FILESEXTRAPATHS_prepend_ti-soc := "${THISDIR}/${PN}:"
-+
-+PV_ti-soc = "3.17.0+git${SRCPV}"
-+SRCREV_ti-soc = "a5c30b1277466a9bf85b62f45a6b00e79774e29c"
-diff --git a/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch b/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
-deleted file mode 100644
-index 17005396..00000000
---- a/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 0bab935695ebcf0c533b49896ab18ff33d4a47d1 Mon Sep 17 00:00:00 2001
--From: Ross Burton <ross.burton@arm.com>
--Date: Tue, 26 May 2020 14:38:02 -0500
--Subject: [PATCH] allow setting sysroot for libgcc lookup
--
--Explicitly pass the new variable LIBGCC_LOCATE_CFLAGS variable when searching
--for the compiler libraries as there's no easy way to reliably pass --sysroot
--otherwise.
--
--Upstream-Status: Pending [https://github.com/OP-TEE/optee_os/issues/4188]
--Signed-off-by: Ross Burton <ross.burton@arm.com>
-----
-- mk/gcc.mk | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/mk/gcc.mk b/mk/gcc.mk
--index adc77a24..81bfa78a 100644
----- a/mk/gcc.mk
--+++ b/mk/gcc.mk
--@@ -13,11 +13,11 @@ nostdinc$(sm)	:= -nostdinc -isystem $(shell $(CC$(sm)) \
-- 			-print-file-name=include 2> /dev/null)
-- 
-- # Get location of libgcc from gcc
---libgcc$(sm)  	:= $(shell $(CC$(sm)) $(CFLAGS$(arch-bits-$(sm))) \
--+libgcc$(sm)  	:= $(shell $(CC$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CFLAGS$(arch-bits-$(sm))) \
-- 			-print-libgcc-file-name 2> /dev/null)
---libstdc++$(sm)	:= $(shell $(CXX$(sm)) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
--+libstdc++$(sm)	:= $(shell $(CXX$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
-- 			-print-file-name=libstdc++.a 2> /dev/null)
---libgcc_eh$(sm)	:= $(shell $(CXX$(sm)) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
--+libgcc_eh$(sm)	:= $(shell $(CXX$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
-- 			-print-file-name=libgcc_eh.a 2> /dev/null)
-- 
-- # Define these to something to discover accidental use
-diff --git a/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch b/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
-deleted file mode 100644
-index 5c0d0a56..00000000
---- a/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 3167f2c0dba4db59d61b60a8fe66f969d20aafa9 Mon Sep 17 00:00:00 2001
--From: Brett Warren <brett.warren@arm.com>
--Date: Wed, 23 Sep 2020 09:27:34 +0100
--Subject: [PATCH] optee: enable clang support
--
--When compiling with clang, the LIBGCC_LOCATE_CFLAG variable used
--to provide a sysroot wasn't included, which results in not locating
--compiler-rt. This is mitigated by including the variable as ammended.
--
--Upstream-Status: Pending
--ChangeId: 8ba69a4b2eb8ebaa047cb266c9aa6c2c3da45701
--Signed-off-by: Brett Warren <brett.warren@arm.com>
-----
-- mk/clang.mk | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/mk/clang.mk b/mk/clang.mk
--index 0f48c836..47465523 100644
----- a/mk/clang.mk
--+++ b/mk/clang.mk
--@@ -27,7 +27,7 @@ comp-cflags-warns-clang := -Wno-language-extension-token \
-- 
-- # Note, use the compiler runtime library (libclang_rt.builtins.*.a) instead of
-- # libgcc for clang
---libgcc$(sm)	:= $(shell $(CC$(sm)) $(CFLAGS$(arch-bits-$(sm))) \
--+libgcc$(sm)	:= $(shell $(CC$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CFLAGS$(arch-bits-$(sm))) \
-- 			-rtlib=compiler-rt -print-libgcc-file-name 2> /dev/null)
-- 
-- # Core ASLR relies on the executable being ready to run from its preferred load
-diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
-index 4e01ea74..c5bc3bf8 100644
---- a/recipes-security/optee/optee-os_%.bbappend
-+++ b/recipes-security/optee/optee-os_%.bbappend
-@@ -1,14 +1,10 @@
- FILESEXTRAPATHS_prepend_ti-soc := "${THISDIR}/${PN}:"
+diff --git a/recipes-kernel/linux/linux-ti-mainline_git.bb b/recipes-kernel/linux/linux-ti-mainline_git.bb
+index 4a5034fd048c..48c8bd4f440a 100644
+--- a/recipes-kernel/linux/linux-ti-mainline_git.bb
++++ b/recipes-kernel/linux/linux-ti-mainline_git.bb
+@@ -20,9 +20,9 @@ S = "${WORKDIR}/git"
+ BRANCH = "master"
+ TOOLS_BRANCH = "master"
  
--PV_ti-soc = "3.12.0+git${SRCPV}"
-+PV_ti-soc = "3.17.0+git${SRCPV}"
-+SRCREV_ti-soc = "332dec4a4bb9935e650b9925577cef5d485af724"
-+SRC_URI_ti-soc = "git://github.com/OP-TEE/optee_os.git;protocol=https"
+-# 5.15 Mainline version
+-SRCREV = "8bb7eca972ad531c9b149c0a51ab43a417385813"
+-PV = "5.15+git${SRCPV}"
++# 5.18 Mainline version
++SRCREV = "4b0986a3613c92f4ec1bdc7f60ec66fea135991f"
++PV = "5.18+git${SRCPV}"
  
--SRCREV_ti-soc = "3d47a131bca1d9ed511bfd516aa5e70269e12c1d"
--
--SRC_URI_ti-soc = " \
--    git://github.com/OP-TEE/optee_os.git \
--    file://0006-allow-setting-sysroot-for-libgcc-lookup.patch \
--    file://0007-allow-setting-sysroot-for-clang.patch \
--"
-+DEPENDS_append_ti-soc = " python3-cryptography-native"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "b"
+@@ -36,7 +36,7 @@ SRC_URI += " \
+     file://defconfig \
+ "
  
- EXTRA_OEMAKE_append_k3 = "${@ 'CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+-SRCREV_ti-upstream-tools = "0f60697843bba6f8d721b14da92b1652563ccb95"
++SRCREV_ti-upstream-tools = "2536a656f0fb620bae9e3a0793a23caee0e11023"
+ SRCREV_FORMAT = "linux"
  
-diff --git a/recipes-security/optee/optee-test_%.bbappend b/recipes-security/optee/optee-test_%.bbappend
-new file mode 100644
-index 00000000..85f2b03f
---- /dev/null
-+++ b/recipes-security/optee/optee-test_%.bbappend
-@@ -0,0 +1,7 @@
-+FILESEXTRAPATHS_prepend_ti-soc := "${THISDIR}/${PN}:"
-+
-+PV_ti-soc = "3.17.0+git${SRCPV}"
-+SRCREV_ti-soc = "8a698baf9e8e010e4d8d52e6aded42dfc31e5b25"
-+SRC_URI_ti-soc = "git://github.com/OP-TEE/optee_test.git;protocol=https"
-+
-+DEPENDS_append_ti-soc = " python3-cryptography-native"
+ KERNEL_DEVICETREE = ""
 -- 
-2.36.1
+2.31.1
 
 
