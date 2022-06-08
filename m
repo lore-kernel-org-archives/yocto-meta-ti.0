@@ -2,50 +2,51 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C15A8C433EF
-	for <webhook@archiver.kernel.org>; Wed,  8 Jun 2022 20:03:07 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.2133.1654718577903240473
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CC66CCA47D
+	for <webhook@archiver.kernel.org>; Wed,  8 Jun 2022 20:10:37 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web08.2286.1654719034014710487
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 08 Jun 2022 13:02:58 -0700
+ Wed, 08 Jun 2022 13:10:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VYGVt8R3;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 258K2tmV050608;
-	Wed, 8 Jun 2022 15:02:55 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=zMUFwaTZ;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 258KAVt1058961;
+	Wed, 8 Jun 2022 15:10:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1654718575;
-	bh=DxNs8DHh2oPOp0MSxX5bF1T51TUhA13R5LlDSlydHW4=;
-	h=From:To:CC:Subject:Date;
-	b=VYGVt8R3Ro1rj4npgntvspaGtLqYRB/eoVSh+my1JvLRzIJR/vtIi8RHmxPWrDAPL
-	 1az96wdCY1H3ayFSUH7JVsxDsergt93nGDaEF1kPbbRQDMJk4kmONTS/MiKTxFR22A
-	 Onn2FmLE41yiEWe8rJ0xRqf9d7Pe7UCzWcHirJu4=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 258K2tha013814
+	s=ti-com-17Q1; t=1654719031;
+	bh=3teOVfl1l6H2U2Yn1CZZrpGHNcczdyZ2idmRuLjGC28=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=zMUFwaTZgMtG5nvwitzs9b6h0vag/x6TrqZYvzf1eNwTJhU7fHD4AgrZR+Ay9aiQ1
+	 99qZ7J4i6Hb1Xj8ewmxtwaRHrS0pjDJzaNLZFdh1AQHFfU9oV8T7nqZQtpPyr5sK8E
+	 G8usWn0PmLgCNfewPuBb90a6B+K/zSXWKqtoqq54=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 258KAVVT099484
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 8 Jun 2022 15:02:55 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 8 Jun 2022 15:10:31 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 8
- Jun 2022 15:02:55 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2022 15:10:30 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 8 Jun 2022 15:02:55 -0500
+ Frontend Transport; Wed, 8 Jun 2022 15:10:30 -0500
 Received: from ula0226330.dal.design.ti.com (ileax41-snat.itg.ti.com
  [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 258K2sU5095745;
-	Wed, 8 Jun 2022 15:02:54 -0500
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 258KAT9w027426;
+	Wed, 8 Jun 2022 15:10:30 -0500
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        Manorit Chawdhry <m-chawdhry@ti.com>, <meta-ti@lists.yoctoproject.org>
+        <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][dunfell][PATCH v2] conf: machine: wic: Fix HS image boot
- partition
-Date: Wed, 8 Jun 2022 15:02:54 -0500
-Message-ID: <20220608200254.28768-1-afd@ti.com>
+Subject: [meta-ti][dunfell][PATCH v3 2/2] optee: Upgrade to upstream 3.17.0
+Date: Wed, 8 Jun 2022 15:10:29 -0500
+Message-ID: <20220608201029.29851-2-afd@ti.com>
 X-Mailer: git-send-email 2.36.1
+In-Reply-To: <20220608201029.29851-1-afd@ti.com>
+References: <20220608201029.29851-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -53,108 +54,192 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 08 Jun 2022 20:03:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14806
+ <meta-ti@lists.yoctoproject.org>; Wed, 08 Jun 2022 20:10:37 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14808
 
-From: Manorit Chawdhry <m-chawdhry@ti.com>
+Update to the latest upstream master which is 3.17.
+We do this to add HUK and AM64x/AM62x support.
+With this we need to also switch OPTEEMACHINE for AM64x/AM62x.
 
-IMAGE_BOOT_FILES was being overwritten in the HS recipes leading to
-incomplete binaries in /boot and the naming of the binaries were not
-correct.
+To build against the latest OP-TEE the support recipes need updated also.
+Move these here into meta-ti so that builds will still work when not using
+meta-arago-distro.
 
-Fixes /boot partition for HS devices.
+The fix patches do not look to be needed anymore.
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-[afd: Extended fix to all HS platforms]
+While here switch to git checkout with https.
+
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
 
-Changes from v1:
- - Use signed u-boot.img file for HS
+Changes from v2:
+ - Switch OPTEEMACHINE
+ - Update optee-examples
 
- conf/machine/am64xx-hs-evm.conf | 2 --
- conf/machine/am65xx-hs-evm.conf | 2 --
- conf/machine/include/k3.inc     | 5 +++--
- conf/machine/j7-hs-evm.conf     | 2 --
- conf/machine/j7200-hs-evm.conf  | 2 --
- 5 files changed, 3 insertions(+), 10 deletions(-)
+ conf/machine/include/am62xx.inc               |  2 +-
+ conf/machine/include/am64xx.inc               |  2 +-
+ .../optee/optee-client_%.bbappend             |  2 ++
+ .../optee/optee-examples_%.bbappend           |  2 ++
+ ...ow-setting-sysroot-for-libgcc-lookup.patch | 34 -------------------
+ ...0007-allow-setting-sysroot-for-clang.patch | 29 ----------------
+ recipes-security/optee/optee-os_%.bbappend    | 14 +++-----
+ recipes-security/optee/optee-test_%.bbappend  |  5 +++
+ 8 files changed, 15 insertions(+), 75 deletions(-)
+ create mode 100644 recipes-security/optee/optee-client_%.bbappend
+ create mode 100644 recipes-security/optee/optee-examples_%.bbappend
+ delete mode 100644 recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
+ delete mode 100644 recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
+ create mode 100644 recipes-security/optee/optee-test_%.bbappend
 
-diff --git a/conf/machine/am64xx-hs-evm.conf b/conf/machine/am64xx-hs-evm.conf
-index 44e81463..c63d382e 100644
---- a/conf/machine/am64xx-hs-evm.conf
-+++ b/conf/machine/am64xx-hs-evm.conf
-@@ -15,8 +15,6 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
+diff --git a/conf/machine/include/am62xx.inc b/conf/machine/include/am62xx.inc
+index ff857b97..0364edd1 100644
+--- a/conf/machine/include/am62xx.inc
++++ b/conf/machine/include/am62xx.inc
+@@ -15,5 +15,5 @@ do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+ do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
  
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
+ TFA_BOARD = "lite"
+-OPTEEMACHINE = "k3-am65x"
++OPTEEMACHINE = "k3-am62x"
+ OPTEEOUTPUTMACHINE = "k3"
+diff --git a/conf/machine/include/am64xx.inc b/conf/machine/include/am64xx.inc
+index 7646c70a..60ffacd5 100644
+--- a/conf/machine/include/am64xx.inc
++++ b/conf/machine/include/am64xx.inc
+@@ -20,7 +20,7 @@ do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+ do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
  
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/conf/machine/am65xx-hs-evm.conf b/conf/machine/am65xx-hs-evm.conf
-index e4eebb6a..a28b45dc 100644
---- a/conf/machine/am65xx-hs-evm.conf
-+++ b/conf/machine/am65xx-hs-evm.conf
-@@ -15,8 +15,6 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
+ TFA_BOARD = "lite"
+-OPTEEMACHINE = "k3-am65x"
++OPTEEMACHINE = "k3-am64x"
+ OPTEEOUTPUTMACHINE = "k3"
  
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
+ # Set the list of device targets for ti-pdk class recipes
+diff --git a/recipes-security/optee/optee-client_%.bbappend b/recipes-security/optee/optee-client_%.bbappend
+new file mode 100644
+index 00000000..5675570a
+--- /dev/null
++++ b/recipes-security/optee/optee-client_%.bbappend
+@@ -0,0 +1,2 @@
++PV_ti-soc = "3.17.0+git${SRCPV}"
++SRCREV_ti-soc = "a5c30b1277466a9bf85b62f45a6b00e79774e29c"
+diff --git a/recipes-security/optee/optee-examples_%.bbappend b/recipes-security/optee/optee-examples_%.bbappend
+new file mode 100644
+index 00000000..19e32d9d
+--- /dev/null
++++ b/recipes-security/optee/optee-examples_%.bbappend
+@@ -0,0 +1,2 @@
++PV_ti-soc = "3.17.0+git${SRCPV}"
++SRCREV_ti-soc = "65fc74309e12189ad5b6ce3ffec37c8011088a5a"
+diff --git a/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch b/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
+deleted file mode 100644
+index 17005396..00000000
+--- a/recipes-security/optee/optee-os/0006-allow-setting-sysroot-for-libgcc-lookup.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 0bab935695ebcf0c533b49896ab18ff33d4a47d1 Mon Sep 17 00:00:00 2001
+-From: Ross Burton <ross.burton@arm.com>
+-Date: Tue, 26 May 2020 14:38:02 -0500
+-Subject: [PATCH] allow setting sysroot for libgcc lookup
+-
+-Explicitly pass the new variable LIBGCC_LOCATE_CFLAGS variable when searching
+-for the compiler libraries as there's no easy way to reliably pass --sysroot
+-otherwise.
+-
+-Upstream-Status: Pending [https://github.com/OP-TEE/optee_os/issues/4188]
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+----
+- mk/gcc.mk | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/mk/gcc.mk b/mk/gcc.mk
+-index adc77a24..81bfa78a 100644
+---- a/mk/gcc.mk
+-+++ b/mk/gcc.mk
+-@@ -13,11 +13,11 @@ nostdinc$(sm)	:= -nostdinc -isystem $(shell $(CC$(sm)) \
+- 			-print-file-name=include 2> /dev/null)
+- 
+- # Get location of libgcc from gcc
+--libgcc$(sm)  	:= $(shell $(CC$(sm)) $(CFLAGS$(arch-bits-$(sm))) \
+-+libgcc$(sm)  	:= $(shell $(CC$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CFLAGS$(arch-bits-$(sm))) \
+- 			-print-libgcc-file-name 2> /dev/null)
+--libstdc++$(sm)	:= $(shell $(CXX$(sm)) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
+-+libstdc++$(sm)	:= $(shell $(CXX$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
+- 			-print-file-name=libstdc++.a 2> /dev/null)
+--libgcc_eh$(sm)	:= $(shell $(CXX$(sm)) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
+-+libgcc_eh$(sm)	:= $(shell $(CXX$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CXXFLAGS$(arch-bits-$(sm))) $(comp-cxxflags$(sm)) \
+- 			-print-file-name=libgcc_eh.a 2> /dev/null)
+- 
+- # Define these to something to discover accidental use
+diff --git a/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch b/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
+deleted file mode 100644
+index 5c0d0a56..00000000
+--- a/recipes-security/optee/optee-os/0007-allow-setting-sysroot-for-clang.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 3167f2c0dba4db59d61b60a8fe66f969d20aafa9 Mon Sep 17 00:00:00 2001
+-From: Brett Warren <brett.warren@arm.com>
+-Date: Wed, 23 Sep 2020 09:27:34 +0100
+-Subject: [PATCH] optee: enable clang support
+-
+-When compiling with clang, the LIBGCC_LOCATE_CFLAG variable used
+-to provide a sysroot wasn't included, which results in not locating
+-compiler-rt. This is mitigated by including the variable as ammended.
+-
+-Upstream-Status: Pending
+-ChangeId: 8ba69a4b2eb8ebaa047cb266c9aa6c2c3da45701
+-Signed-off-by: Brett Warren <brett.warren@arm.com>
+----
+- mk/clang.mk | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/mk/clang.mk b/mk/clang.mk
+-index 0f48c836..47465523 100644
+---- a/mk/clang.mk
+-+++ b/mk/clang.mk
+-@@ -27,7 +27,7 @@ comp-cflags-warns-clang := -Wno-language-extension-token \
+- 
+- # Note, use the compiler runtime library (libclang_rt.builtins.*.a) instead of
+- # libgcc for clang
+--libgcc$(sm)	:= $(shell $(CC$(sm)) $(CFLAGS$(arch-bits-$(sm))) \
+-+libgcc$(sm)	:= $(shell $(CC$(sm)) $(LIBGCC_LOCATE_CFLAGS) $(CFLAGS$(arch-bits-$(sm))) \
+- 			-rtlib=compiler-rt -print-libgcc-file-name 2> /dev/null)
+- 
+- # Core ASLR relies on the executable being ready to run from its preferred load
+diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
+index 4e01ea74..00673152 100644
+--- a/recipes-security/optee/optee-os_%.bbappend
++++ b/recipes-security/optee/optee-os_%.bbappend
+@@ -1,14 +1,8 @@
+-FILESEXTRAPATHS_prepend_ti-soc := "${THISDIR}/${PN}:"
++PV_ti-soc = "3.17.0+git${SRCPV}"
++SRCREV_ti-soc = "3ab148c8f4a049a05aa54614e5313bf7b5fb563f"
++SRC_URI_ti-soc = "git://github.com/OP-TEE/optee_os.git;protocol=https"
  
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
-index e0970698..f85e6b98 100644
---- a/conf/machine/include/k3.inc
-+++ b/conf/machine/include/k3.inc
-@@ -22,6 +22,7 @@ UBOOT_ENTRYPOINT = "0x80008000"
- UBOOT_LOADADDRESS = "0x80008000"
+-PV_ti-soc = "3.12.0+git${SRCPV}"
+-
+-SRCREV_ti-soc = "3d47a131bca1d9ed511bfd516aa5e70269e12c1d"
+-
+-SRC_URI_ti-soc = " \
+-    git://github.com/OP-TEE/optee_os.git \
+-    file://0006-allow-setting-sysroot-for-libgcc-lookup.patch \
+-    file://0007-allow-setting-sysroot-for-clang.patch \
+-"
++DEPENDS_append_ti-soc = " python3-cryptography-native"
  
- SPL_BINARY = "tispl.bin"
-+SPL_BINARYNAME = "tispl.bin"
- UBOOT_SUFFIX = "img"
+ EXTRA_OEMAKE_append_k3 = "${@ 'CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
  
- EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-@@ -40,8 +41,8 @@ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet pci"
- 
- IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
- 
--IMAGE_BOOT_FILES_LEGACY = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysfw.itb"
--IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
-+IMAGE_BOOT_FILES_LEGACY = "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysfw.itb"
-+IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
- 
- IMAGE_BOOT_FILES ?= "${IMAGE_BOOT_FILES_LEGACY}"
- 
-diff --git a/conf/machine/j7-hs-evm.conf b/conf/machine/j7-hs-evm.conf
-index f2e3ccf5..c7766def 100644
---- a/conf/machine/j7-hs-evm.conf
-+++ b/conf/machine/j7-hs-evm.conf
-@@ -15,9 +15,7 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
- 
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
- 
- BBMULTICONFIG += "k3r5-sr1-1"
- 
-diff --git a/conf/machine/j7200-hs-evm.conf b/conf/machine/j7200-hs-evm.conf
-index a5bd637e..93c0c0ce 100644
---- a/conf/machine/j7200-hs-evm.conf
-+++ b/conf/machine/j7200-hs-evm.conf
-@@ -15,8 +15,6 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
- 
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
- 
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
+diff --git a/recipes-security/optee/optee-test_%.bbappend b/recipes-security/optee/optee-test_%.bbappend
+new file mode 100644
+index 00000000..d81ae521
+--- /dev/null
++++ b/recipes-security/optee/optee-test_%.bbappend
+@@ -0,0 +1,5 @@
++PV_ti-soc = "3.17.0+git${SRCPV}"
++SRCREV_ti-soc = "8a698baf9e8e010e4d8d52e6aded42dfc31e5b25"
++SRC_URI_ti-soc = "git://github.com/OP-TEE/optee_test.git;protocol=https"
++
++DEPENDS_append_ti-soc = " python3-cryptography-native"
 -- 
 2.36.1
 
