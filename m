@@ -1,165 +1,79 @@
-Return-Path: <afd@ti.com>
+Return-Path: <mrkanaly@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CC0CC43334
-	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 14:59:13 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.14411.1654786751417707113
- for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Jun 2022 07:59:11 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FE3bDN6C;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 259ExAKl002053;
-	Thu, 9 Jun 2022 09:59:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1654786750;
-	bh=cUBIVioU19JNbNkNspdXgij5/HPquqJUfogGRSCARzc=;
-	h=From:To:CC:Subject:Date;
-	b=FE3bDN6CyrETLXdYYuo5uxs3YCYiNi91PKzjFuQsZrq11oQf50A9CNhYVS9A72xbd
-	 qWY12sfncejS0eabcOARSpx0j4VdoNVHPTjfgY/t7iKXFySpZpXmr27M1mxRrWIcrw
-	 GYyfasyve3Geme4h58cdq1VM8mhN/Kn6WkGyHgqY=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 259ExA6d054692
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 9 Jun 2022 09:59:10 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 9
- Jun 2022 09:59:09 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Thu, 9 Jun 2022 09:59:09 -0500
-Received: from ula0226330.dal.design.ti.com (ileax41-snat.itg.ti.com
- [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 259Ex9La020117;
-	Thu, 9 Jun 2022 09:59:09 -0500
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        Manorit Chawdhry <m-chawdhry@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][dunfell][PATCH v3] conf: machine: wic: Fix HS image boot
- partition
-Date: Thu, 9 Jun 2022 09:59:09 -0500
-Message-ID: <20220609145909.15483-1-afd@ti.com>
-X-Mailer: git-send-email 2.36.1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C752C433EF
+	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 19:31:54 +0000 (UTC)
+Subject: AM4378 QSPI Boot
+To: meta-ti@lists.yoctoproject.org
+From: mrkanaly@gmail.com
+X-Originating-Location: Chandler, Arizona, US (65.121.24.2)
+X-Originating-Platform: Windows Chrome 102
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Date: Thu, 09 Jun 2022 12:31:43 -0700
+Message-ID: <7Ygb.1654803103493662641.dvas@lists.yoctoproject.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 09 Jun 2022 14:59:13 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14811
+ <meta-ti@lists.yoctoproject.org>; Thu, 09 Jun 2022 19:31:54 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14812
 
-From: Manorit Chawdhry <m-chawdhry@ti.com>
+Hello,
 
-IMAGE_BOOT_FILES was being overwritten in the HS recipes leading to
-incomplete binaries in /boot and the naming of the binaries were not
-correct.
+I am booting a AM4378 platform and am running in to some issues.
 
-Fixes /boot partition for HS devices.
+I have modeled my board after am43xx_evm_defconfig and have achieved an exe=
+cutable SPL that I can debug with JTAG.=20
+>U-Boot SPL 2020.01-g2781231a33 (Sep 01 2021 - 12:00:00 +0000)
+>WDT:   Not found!
+>SPL: Unsupported Boot Device!
+>SPL: failed to boot from all boot devices
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-[afd: Extended fix to all HS platforms]
-Signed-off-by: Andrew Davis <afd@ti.com>
----
+After programming to the NOR that is connected via QSPI, I am able to break=
+ at the QSPI memory mapped location (0x30000000) on boot and single step th=
+rough instructions that I know resemble u-boot-spl (haven=E2=80=99t gotten =
+symbol loading to work right with the memory map location). However I am ru=
+nning in to trouble as at some point in the boot a data abort is thrown and=
+ I haven=E2=80=99t figured out why/where yet.
 
-Changes from v2:
- - Added UBOOT_SYMLINK to fix missing u-boot.img image
+Before I spend too long trying to debug this I wanted to ask a few question=
+s:
 
- conf/machine/am64xx-hs-evm.conf | 3 +--
- conf/machine/am65xx-hs-evm.conf | 3 +--
- conf/machine/include/k3.inc     | 5 +++--
- conf/machine/j7-hs-evm.conf     | 3 +--
- conf/machine/j7200-hs-evm.conf  | 3 +--
- 5 files changed, 7 insertions(+), 10 deletions(-)
+* Is CONFIG_QSPI_BOOT required to boot an AM4378? Quoting the config, =E2=
+=80=9CThis is not a must, some SoCs need this, some not.=E2=80=9D My search=
+es only see it coming up in regard to TI_SECURE_DEVICE, which I am not atte=
+mpting to do anything with (i.e. not doing a secure boot).
+* am43xx_evm_qspiboot_defconfig Doesn=E2=80=99t use an SPL:
+* * Can it?
+* * Is an SPL necessary? My u-boot image currently exceeds available on chi=
+p memory and I thought an SPL would be required so that u-boot would have R=
+AM available to it. Does the =E2=80=9CeXecute in place=E2=80=9D work around=
+ this on this platform such that you can skip using an SPL?  DDR will get i=
+nitialized by u-boot since it is executing from the NOR and didn=E2=80=99t =
+have to be loaded in to memory, then it can init the DDR so it has the room=
+ to load Linux later on.
+* * When I build this config with CONFIG_SPL=3Dy I get the error:
+> arm-oe-linux-gnueabi-ld.bfd: invalid length for memory region .sram
+But it does look as if the link script wasn=E2=80=99t processed correctly f=
+or this build configuration, as all the variables aren=E2=80=99t filled in:
+> MEMORY { .sram : ORIGIN =3D 0x402F4000, LENGTH =3D IMAGE_MAX_SIZE }
+> MEMORY { .sdram : ORIGIN =3D CONFIG_SPL_BSS_START_ADDR, LENGTH =3D CONFIG=
+_SPL_BSS_MAX_SIZE }
+> OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
+* Are these options and the extra options redundant or required? CONFIG_SYS=
+_EXTRA_OPTIONS=3D"CONS_INDEX=3D1,QSPI,QSPI_BOOT"; CONFIG_QSPI_BOOT=3Dy; I w=
+asn=E2=80=99t able to locate any CONFIG_QSPI in the code, only QSPI_BOOT.
+* I am currently building with CONFIG_OF_EMBED=3Dy in order to get the abov=
+e output from the UART. I understand this makes the DTB encoded in the exec=
+utable ELF that I am debugging. Does this also mean the same for a binary t=
+hat is flashed? Or does a flashed binary have to use OF_EMBED=3Dn and the D=
+TB appended to the end of the image (u-boot[-spl].bin, versus (u-boot[-spl]=
+-no-dtb.bin).=20
 
-diff --git a/conf/machine/am64xx-hs-evm.conf b/conf/machine/am64xx-hs-evm.conf
-index 44e81463..ebbe2e62 100644
---- a/conf/machine/am64xx-hs-evm.conf
-+++ b/conf/machine/am64xx-hs-evm.conf
-@@ -15,8 +15,7 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
- 
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
-+UBOOT_SYMLINK = "u-boot.img"
- 
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/conf/machine/am65xx-hs-evm.conf b/conf/machine/am65xx-hs-evm.conf
-index e4eebb6a..de92cacb 100644
---- a/conf/machine/am65xx-hs-evm.conf
-+++ b/conf/machine/am65xx-hs-evm.conf
-@@ -15,8 +15,7 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
- 
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
-+UBOOT_SYMLINK = "u-boot.img"
- 
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
-index e0970698..f85e6b98 100644
---- a/conf/machine/include/k3.inc
-+++ b/conf/machine/include/k3.inc
-@@ -22,6 +22,7 @@ UBOOT_ENTRYPOINT = "0x80008000"
- UBOOT_LOADADDRESS = "0x80008000"
- 
- SPL_BINARY = "tispl.bin"
-+SPL_BINARYNAME = "tispl.bin"
- UBOOT_SUFFIX = "img"
- 
- EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-@@ -40,8 +41,8 @@ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet pci"
- 
- IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
- 
--IMAGE_BOOT_FILES_LEGACY = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysfw.itb"
--IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
-+IMAGE_BOOT_FILES_LEGACY = "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysfw.itb"
-+IMAGE_BOOT_FILES_MULTI_CERT = "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
- 
- IMAGE_BOOT_FILES ?= "${IMAGE_BOOT_FILES_LEGACY}"
- 
-diff --git a/conf/machine/j7-hs-evm.conf b/conf/machine/j7-hs-evm.conf
-index f2e3ccf5..ece0d85e 100644
---- a/conf/machine/j7-hs-evm.conf
-+++ b/conf/machine/j7-hs-evm.conf
-@@ -15,9 +15,8 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
- 
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
-+UBOOT_SYMLINK = "u-boot.img"
- 
- BBMULTICONFIG += "k3r5-sr1-1"
- 
-diff --git a/conf/machine/j7200-hs-evm.conf b/conf/machine/j7200-hs-evm.conf
-index a5bd637e..8821ffac 100644
---- a/conf/machine/j7200-hs-evm.conf
-+++ b/conf/machine/j7200-hs-evm.conf
-@@ -15,8 +15,7 @@ UBOOT_DTBO_LOADADDRESS = "0x83080000"
- UBOOT_DTBO_OFFSET =      "0x00010000"
- 
- SPL_BINARY = "tispl.bin_HS"
--SPL_BINARYNAME = "tispl.bin"
- UBOOT_BINARY = "u-boot.img_HS"
--IMAGE_BOOT_FILES = "${UBOOT_BINARY}"
-+UBOOT_SYMLINK = "u-boot.img"
- 
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
--- 
-2.36.1
-
+I appreciate any insight anyone might be able to offer.
+Thanks,
+Mike
 
