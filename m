@@ -2,149 +2,87 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56C76C433EF
-	for <webhook@archiver.kernel.org>; Wed, 15 Jun 2022 18:59:38 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.8823.1655319570558976725
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AF8ECCA47A
+	for <webhook@archiver.kernel.org>; Thu, 16 Jun 2022 12:04:13 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.16934.1655381051484771987
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 15 Jun 2022 11:59:30 -0700
+ Thu, 16 Jun 2022 05:04:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com
- header.s=ti-com-17q1 header.b=uQuSFCxc;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 25FIxS9U039549;
-	Wed, 15 Jun 2022 13:59:28 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xiGWBpqP;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 25GC4951107315;
+	Thu, 16 Jun 2022 07:04:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1655319568;
-	bh=uku8B8spP9txYohimOUrRCjIHwBow9cE00TUoDGC6zQ=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=uQuSFCxcyxlAaWB41XNjqsbUfMjhXSxUPZKgL9WAmTyXdbAWLu4MkiT39SHFeRnlm
-	 +lmaiXgjc12UJV/uUazQp1V7bUrzF4TWAby20UnakjtmnwW71ND4ZMO6Id1+8ToMt0
-	 xgBRqoGQnzw1g9ZdPQF0JkirRomhtVQ51N5+UCms=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 25FIxSYl026331
+	s=ti-com-17Q1; t=1655381049;
+	bh=5P5W5PJ70jcwYTAdhO+KpruSQ/mtWbUevpuGdP7Zm9s=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=xiGWBpqPuRDvVSODN+6YTEpcnYW4DnpQE9VQKA3D0wVPgibVl1kXdvhV7ufG4B+I2
+	 OXaFKf7HZJ6AlT807UxupepjOwqEq4H/cLa8CZkxyFFsuMrQAg/8qTVoqsc93fMjbv
+	 uM7YwpOg9PFOnOgbtGqYUZduDX4Qa9Zyka0bNXTQ=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 25GC49cC028430
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 15 Jun 2022 13:59:28 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 15
- Jun 2022 13:59:28 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 16 Jun 2022 07:04:09 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Thu, 16
+ Jun 2022 07:04:08 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 15 Jun 2022 13:59:27 -0500
-Received: from [10.249.39.108] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 25FIxRVc015740;
-	Wed, 15 Jun 2022 13:59:27 -0500
-Message-ID: <a12ae538-e17b-6320-64b0-7eeec3078d54@ti.com>
-Date: Wed, 15 Jun 2022 13:59:27 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [meta-ti][dunfell][PATCH v3] conf: machine: wic: Fix HS image
- boot partition
-Content-Language: en-US
-To: Andrew Davis <afd@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
-        Manorit
- Chawdhry <m-chawdhry@ti.com>
-CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-References: <20220609145909.15483-1-afd@ti.com>
- <20220614082059.jjouefku4pf3f3jn@ula0497581>
- <a2a8081b-9028-b1b7-8d46-7328587e13d8@ti.com>
- <c2d5e4e9-68c2-9ae0-8aef-51fda15cb66d@ti.com>
- <592ecbde-98a8-3fcc-812d-f7262307843a@ti.com>
- <42f74f2e-0ed9-1e6c-4c07-3b89c20c9e59@ti.com>
- <0f274601-f86c-6854-94ef-40dc45f718c2@ti.com>
+ Frontend Transport; Thu, 16 Jun 2022 07:04:08 -0500
+Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 25GC48sF017293;
+	Thu, 16 Jun 2022 07:04:08 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1o1oEK-0003kp-Mw; Thu, 16 Jun 2022 07:04:08 -0500
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <0f274601-f86c-6854-94ef-40dc45f718c2@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 1/4] u-boot-ti-staging: Bump to 08.04.00.001
+ release
+Date: Thu, 16 Jun 2022 07:04:05 -0500
+Message-ID: <20220616120408.14388-2-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220616120408.14388-1-reatmon@ti.com>
+References: <20220616120408.14388-1-reatmon@ti.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id
- 25FIxS9U039549
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 15 Jun 2022 18:59:38 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14825
+ <meta-ti@lists.yoctoproject.org>; Thu, 16 Jun 2022 12:04:13 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14830
 
+Updated the u-boot version for 08.04.00.001
 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On 6/15/2022 13:58, Andrew Davis wrote:
-> On 6/15/22 1:55 PM, Ryan Eatmon wrote:
->>
->>
->> On 6/15/2022 10:57, Jayesh Choudhary wrote:
->>>
->>>
->>> On 15/06/22 20:41, Andrew Davis wrote:
->>>> On 6/15/22 9:52 AM, Ryan Eatmon wrote:
->>>>>
->>>>>
->>>>> On 6/14/2022 3:20, Manorit Chawdhry wrote:
->>>>>> On 09:59-20220609, Andrew Davis wrote:
->>>>>>> From: Manorit Chawdhry <m-chawdhry@ti.com>
->>>>>>>
->>>>>>> IMAGE_BOOT_FILES was being overwritten in the HS recipes leading =
-to
->>>>>>> incomplete binaries in /boot and the naming of the binaries were =
-not
->>>>>>> correct.
->>>>>>>
->>>>>>> Fixes /boot partition for HS devices.
->>>>>>>
->>>>>>> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
->>>>>>> [afd: Extended fix to all HS platforms]
->>>>>>> Signed-off-by: Andrew Davis <afd@ti.com>
->>>>>>> ---
->>>>>>>
->>>>>>> Changes from v2:
->>>>>>> =C2=A0 - Added UBOOT_SYMLINK to fix missing u-boot.img image
->>>>>>
->>>>>> LGTM.
->>>>>>
->>>>>> Acked-by: Manorit Chawdhry <m-chawdhry@ti.com>
->>>>>
->>>>>
->>>>> I hate to ask this, but I just merged in the patches to add=20
->>>>> j721s2-hs-evm support... do you want to make a V4 and make the same=
-=20
->>>>> changes in that file? or do you want to submit another patch to=20
->>>>> clean that up?
->>>>>
->>>>>
->>>>
->>>>
->>>> We can make a delta patch to fixup j721s2 after this goes in.
->>>>
->>
->>
->> Andrew,
->>
->> There was a second patch in V1, but it is missing in V2 and V3.=C2=A0 =
-Did=20
->> you mean to drop it?=C2=A0 Or is that coming later?=C2=A0 I just want =
-to make=20
->> sure I don't miss something you meant to have patched.
->>
->>
->=20
-> 'conf: machine: Make multi-certificate image the default'?
->=20
-> I just dropped it for now, it is un-related to the first patch.
-> It is still valid and if you would like you can take the v1
-> of that patch, it would save me from having to send it
-> again as a standalone..
->=20
-> Andrew
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index 55ea6b8a..0386bff4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
+ 
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+ 
+-PR = "r27"
++PR = "r28"
+ 
+ BRANCH = "ti-u-boot-2021.01"
+ 
+-SRCREV = "d588b4b55d2240c13c3cce507683853fd6d6ac00"
++SRCREV = "f4d82db64258c50b6e44411ffdf0b87770bc1aff"
+-- 
+2.17.1
 
-
-Thank you.
-
-
---=20
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
 
