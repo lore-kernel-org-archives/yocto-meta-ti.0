@@ -1,105 +1,83 @@
-Return-Path: <praneeth@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D621C433EF
-	for <webhook@archiver.kernel.org>; Tue, 28 Jun 2022 06:41:23 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web09.52267.1656398478832445732
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96CDEC433EF
+	for <webhook@archiver.kernel.org>; Tue, 28 Jun 2022 20:45:19 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web09.3462.1656449117112909882
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 27 Jun 2022 23:41:19 -0700
+ Tue, 28 Jun 2022 13:45:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=sSJyRvoo;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 25S6fGVW077435;
-	Tue, 28 Jun 2022 01:41:16 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=IZtlWJ/0;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 25SKjFln117669;
+	Tue, 28 Jun 2022 15:45:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1656398476;
-	bh=bPyeALUXcB7mJrqiUxOvih4KXG6GBoU6owlQ7kCksAM=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=sSJyRvoojEx8kuRDVwYjWhSKoVttqTvS9pdYp7yOLsiDOfwebA1K/1qoBqJkdXicw
-	 4f9kbrnXs7tN2bUZzgGCrFraU/Svs3fRkArAmnhRQ8lQHq57g40e7GGfSWhwvlEwE+
-	 3iZ1BdEzIhuqRcS6NeouOCCtz2G8JvQtLjQl4/UU=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 25S6fGIW044270
+	s=ti-com-17Q1; t=1656449115;
+	bh=96YUNiOi9yx1IgiSEq8VTtPmw3PK7OzYSJCiObFUYrY=;
+	h=From:To:CC:Subject:Date;
+	b=IZtlWJ/056b3yH8pUMGnEwkDUS+CHxohfYMK8/3RGeW3BRElee1TedqqCeKH45D59
+	 2E0a5eHlGvChi6tkm2SM7wtklHyFEgaNkaFMMdMfh3QnaZ9hUCYwEaob9XA2iz/B7E
+	 iA4GB3KN+Cz5bf8IT9ZXjyCxkZ/gWXBA65BtKVeU=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 25SKjFF6121111
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 28 Jun 2022 01:41:16 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 28 Jun 2022 15:45:15 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 28
- Jun 2022 01:41:15 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2022 15:45:15 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Tue, 28 Jun 2022 01:41:15 -0500
-Received: from [10.250.150.101] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 25S6fDcM088823;
-	Tue, 28 Jun 2022 01:41:13 -0500
-Message-ID: <9d5eb1b1-37bf-97ec-e455-99a7cdf852a6@ti.com>
-Date: Tue, 28 Jun 2022 12:11:12 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [meta-ti][dunfell][PATCH] optee-os: Use software RNG on AM62x and
- J721s2
-Content-Language: en-US
-To: <afd@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        Ryan Eatmon
-	<reatmon@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Frontend Transport; Tue, 28 Jun 2022 15:45:15 -0500
+Received: from ula0226330.dal.design.ti.com (ileax41-snat.itg.ti.com
+ [10.172.224.153])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 25SKjEKc014035;
+	Tue, 28 Jun 2022 15:45:14 -0500
+From: Andrew Davis <afd@ti.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
-References: <20220627204042.27706-1-afd@ti.com>
-From: "Bajjuri, Praneeth" <praneeth@ti.com>
-In-Reply-To: <20220627204042.27706-1-afd@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][dunfell][PATCH] linux-ti-staging: Unblock SA2UL for AM64x
+ and J7200 HS devices
+Date: Tue, 28 Jun 2022 15:45:14 -0500
+Message-ID: <20220628204514.5159-1-afd@ti.com>
+X-Mailer: git-send-email 2.36.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 28 Jun 2022 06:41:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14845
+ <meta-ti@lists.yoctoproject.org>; Tue, 28 Jun 2022 20:45:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14846
 
+The SA2UL driver now works on HS devices, unblock this.
 
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_5.10.bb | 6 ------
+ 1 file changed, 6 deletions(-)
 
-On 6/28/2022 2:10 AM, Andrew Davis via lists.yoctoproject.org wrote:
-> The TRNG driver is not currently functional for these two platforms.
-> Disable the TRNG driver until fixed.
-> 
-> Reported-by: Vignesh Raghavendra <vigneshr@ti.com>
-> Signed-off-by: Andrew Davis <afd@ti.com>
+diff --git a/recipes-kernel/linux/linux-ti-staging_5.10.bb b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index 75ffa904..59094a9e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -45,9 +45,3 @@ module_conf_ti_k3_r5_remoteproc = "softdep ti_k3_r5_remoteproc pre: virtio_rpmsg
+ module_conf_ti_k3_dsp_remoteproc = "softdep ti_k3_dsp_remoteproc pre: virtio_rpmsg_bus"
+ KERNEL_MODULE_PROBECONF += "rpmsg_client_sample ti_k3_r5_remoteproc ti_k3_dsp_remoteproc"
+ KERNEL_MODULE_AUTOLOAD_append_j7 = " rpmsg_kdrv_switch"
+-
+-# Disable SA2UL for AM64x HS and J7200 HS
+-module_conf_sa2ul_am64xx-hs-evm = "blacklist sa2ul"
+-KERNEL_MODULE_PROBECONF_append_am64xx-hs-evm = " sa2ul"
+-module_conf_sa2ul_j7200-hs-evm = "blacklist sa2ul"
+-KERNEL_MODULE_PROBECONF_append_j7200-hs-evm = " sa2ul"
+-- 
+2.36.1
 
-Reviewed-by: Praneeth Bajjuri <praneeth@ti.com>
-
-
-> ---
->   recipes-security/optee/optee-os_%.bbappend | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
-> index 16c10979..7fe5f26e 100644
-> --- a/recipes-security/optee/optee-os_%.bbappend
-> +++ b/recipes-security/optee/optee-os_%.bbappend
-> @@ -6,6 +6,10 @@ DEPENDS_append_ti-soc = " python3-cryptography-native"
->   
->   EXTRA_OEMAKE_append_k3 = "${@ 'CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
->   
-> +EXTRA_OEMAKE_append_am62xx-evm = " CFG_WITH_SOFTWARE_PRNG=y"
-> +EXTRA_OEMAKE_append_j721s2-evm = " CFG_WITH_SOFTWARE_PRNG=y"
-> +EXTRA_OEMAKE_append_j721s2-hs-evm = " CFG_WITH_SOFTWARE_PRNG=y"
-> +
->   do_compile_prepend_ti-soc() {
->       export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
->   }
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#14844): https://lists.yoctoproject.org/g/meta-ti/message/14844
-> Mute This Topic: https://lists.yoctoproject.org/mt/92030864/2167429
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [praneeth@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
 
