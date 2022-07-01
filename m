@@ -2,49 +2,49 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FC86C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73D2FCCA479
 	for <webhook@archiver.kernel.org>; Fri,  1 Jul 2022 22:02:42 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web12.44380.1656712953888914716
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web09.44557.1656712951839720154
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 01 Jul 2022 15:02:34 -0700
+ Fri, 01 Jul 2022 15:02:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ZVwGkIcF;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 261M2VnN006449;
-	Fri, 1 Jul 2022 17:02:31 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=tj0ovukj;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 261M2Ug5081843;
+	Fri, 1 Jul 2022 17:02:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1656712951;
-	bh=MqXnxFT44KoCMI523yq2iLMygoCrhk8t4iGpGHCZWNk=;
+	s=ti-com-17Q1; t=1656712950;
+	bh=o/uJ02OLwGNew8WCZhlqwdAOD3JEzhWdIXrHIwRbAiw=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=ZVwGkIcFQ9dOkYZhQfWPRVSXbBCdV1XTTmlFnZ6zwBnLSKnXqS6OLBizGxOVlCWOa
-	 I6sjK6USQsYPfu2iyLkQjMgjFPrLB/zPfpvUH1kf0LXgi3/cilpHOZ8mD/rIZV6zTr
-	 xmLBYG3797ElRpsxvxY2+AxpX2jN5BJYzbxaT3aU=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 261M2VYk123568
+	b=tj0ovukjwqpdg7qMAC3NFGyBidlftbywFotqEXYwdZYEsMmW/jXa5H7CN8T3p8PXZ
+	 fV5r+C+yhgIV639hzE7JhZmU9y31XLouGJQdb76VHHfADRuW+exwPxiEd6xN0VjMjg
+	 pLkO8RpbmCoKwQ0LY//M84fQ40bJVrdG4su9VcTw=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 261M2UEU017550
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 1 Jul 2022 17:02:31 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 1 Jul 2022 17:02:30 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 1
  Jul 2022 17:02:30 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
  Frontend Transport; Fri, 1 Jul 2022 17:02:30 -0500
 Received: from ula0226330.dal.design.ti.com (ileax41-snat.itg.ti.com
  [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 261M2SS8029974;
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 261M2SS7029974;
 	Fri, 1 Jul 2022 17:02:30 -0500
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][dunfell][RFC 5/6] machine: am64xx-k3r5: The output of
- u-boot is not used
-Date: Fri, 1 Jul 2022 17:02:27 -0500
-Message-ID: <20220701220228.5449-6-afd@ti.com>
+Subject: [meta-ti][dunfell][RFC 4/6] ti-sci-fw: Use SYSFW_TIBOOT3 to point to
+ the SYSFW image
+Date: Fri, 1 Jul 2022 17:02:26 -0500
+Message-ID: <20220701220228.5449-5-afd@ti.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <20220701220228.5449-1-afd@ti.com>
 References: <20220701220228.5449-1-afd@ti.com>
@@ -56,74 +56,59 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 01 Jul 2022 22:02:42 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14865
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14860
 
-The file tiboot3.bin produced by u-boot is not the final used
-output, it should not be installed or deployed. The file with
-the same name from ti-sci-fw is used. Correct this.
+Currently we reuse UBOOT_* names which usually are the same we
+want to give to the name of the SYSFW binary. This isn't always
+correct, we should use a SYSFW specific variable in case the
+UBOOT names are changed.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- conf/machine/am64xx-evm-k3r5.conf    |  7 +++++++
- conf/machine/am64xx-hs-evm-k3r5.conf |  7 +++++++
- recipes-bsp/u-boot/u-boot-ti.inc     | 10 ----------
- 3 files changed, 14 insertions(+), 10 deletions(-)
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/conf/machine/am64xx-evm-k3r5.conf b/conf/machine/am64xx-evm-k3r5.conf
-index afd36b72..0835d13f 100644
---- a/conf/machine/am64xx-evm-k3r5.conf
-+++ b/conf/machine/am64xx-evm-k3r5.conf
-@@ -8,4 +8,11 @@ SYSFW_SOC = "am64x"
- SYSFW_CONFIG = "evm"
- SYSFW_SUFFIX = "gp"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 1bb4fd3e..1b2ea184 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -37,6 +37,8 @@ SYSFW_PREFIX_am62xx-evm-k3r5 = "fs"
  
-+# SoCs that use combined image for tiboot3.bin include u-boot-spl.bin with sysfw
-+# along with board configs generated by k3-image-gen and comes from ti-sci-fw
-+# hence remove the legacy u-boot's tiboot3.bin and add u-boot-spl.bin instead
-+UBOOT_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
-+UBOOT_IMAGE = "spl/u-boot-spl-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
-+UBOOT_SYMLINK = "u-boot-spl.${UBOOT_SUFFIX}"
+ SYSFW_TISCI = "${S}/ti-sysfw/ti-${SYSFW_PREFIX}-firmware-${SYSFW_SOC}-*.bin"
+ 
++SYSFW_TIBOOT3 = "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONFIG}.bin"
 +
- UBOOT_MACHINE = "am64x_evm_r5_defconfig"
-diff --git a/conf/machine/am64xx-hs-evm-k3r5.conf b/conf/machine/am64xx-hs-evm-k3r5.conf
-index d12c030f..1b2548fd 100644
---- a/conf/machine/am64xx-hs-evm-k3r5.conf
-+++ b/conf/machine/am64xx-hs-evm-k3r5.conf
-@@ -9,6 +9,13 @@ SYSFW_CONFIG = "evm"
- SYSFW_SUFFIX = "hs"
- SYSFW_SYMLINK = ""
+ SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+ SYSFW_VBINARY = "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+ SYSFW_IMAGE = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+@@ -78,10 +80,9 @@ do_install() {
+ 		fi
+ 	fi
  
-+# SoCs that use combined image for tiboot3.bin include u-boot-spl.bin with sysfw
-+# along with board configs generated by k3-image-gen and comes from ti-sci-fw
-+# hence remove the legacy u-boot's tiboot3.bin and add u-boot-spl.bin instead
-+UBOOT_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
-+UBOOT_IMAGE = "spl/u-boot-spl-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
-+UBOOT_SYMLINK = "u-boot-spl.${UBOOT_SUFFIX}"
-+
- UBOOT_MACHINE = "am64x_hs_evm_r5_defconfig"
- 
- TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index e7c93335..cfb57056 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -409,16 +409,6 @@ do_deploy_append_j721s2-hs-evm-k3r5 () {
- 	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
+-	if [ -f "${WORKDIR}/imggen/${UBOOT_BINARY}" ]; then
+-		install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
+-		ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_SYMLINK}
+-		ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
++	if [ -f "${WORKDIR}/imggen/${SYSFW_TIBOOT3}" ]; then
++		install -m 644 ${WORKDIR}/imggen/${SYSFW_TIBOOT3} ${D}/boot/${SYSFW_TIBOOT3}
++		ln -sf ${SYSFW_TIBOOT3} ${D}/boot/tiboot3.bin
+ 	fi
  }
  
--do_deploy_append_am64xx-evm-k3r5 () {
--	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
--	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
--}
--
--do_deploy_append_am64xx-hs-evm-k3r5 () {
--	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
--	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
--}
--
- do_deploy_append_am62xx-evm-k3r5 () {
- 	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
- 	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
+@@ -100,10 +101,9 @@ do_deploy () {
+ 		fi
+ 	fi
+ 
+-	if [ -f "${WORKDIR}/imggen/${UBOOT_BINARY}" ]; then
+-		install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
+-		ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
+-		ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
++	if [ -f "${WORKDIR}/imggen/${SYSFW_TIBOOT3}" ]; then
++		install -m 644 ${WORKDIR}/imggen/${SYSFW_TIBOOT3} ${DEPLOYDIR}/${SYSFW_TIBOOT3}
++		ln -sf ${SYSFW_TIBOOT3} ${DEPLOYDIR}/tiboot3.bin
+ 	fi
+ 
+ 	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
 -- 
 2.36.1
 
