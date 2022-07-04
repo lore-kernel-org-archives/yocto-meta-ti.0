@@ -1,98 +1,99 @@
-Return-Path: <denis@denix.org>
+Return-Path: <dfustini@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1456C43334
-	for <webhook@archiver.kernel.org>; Sat,  2 Jul 2022 22:43:49 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.55325.1656801819830463997
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A473CCA473
+	for <webhook@archiver.kernel.org>; Mon,  4 Jul 2022 03:09:28 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+ [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web11.67769.1656904161517899553
  for <meta-ti@lists.yoctoproject.org>;
- Sat, 02 Jul 2022 15:43:40 -0700
+ Sun, 03 Jul 2022 20:09:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 24B4340CF3;
-	Sat,  2 Jul 2022 22:43:39 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZmTWt_Za3zyz; Sat,  2 Jul 2022 22:43:39 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
- [100.15.80.88])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0328140CF2;
-	Sat,  2 Jul 2022 22:43:35 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id E636D17499F; Sat,  2 Jul 2022 18:43:35 -0400 (EDT)
-Date: Sat, 2 Jul 2022 18:43:35 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: afd@ti.com
-Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][dunfell][RFC 0/6] HS SDK on GP EVM support
-Message-ID: <20220702224335.GC18692@denix.org>
-References: <20220701220228.5449-1-afd@ti.com>
+ dkim=pass header.i=@baylibre-com.20210112.gappssmtp.com header.s=20210112
+ header.b=0ddKPXci;
+ spf=pass (domain: baylibre.com, ip: 209.85.210.174,
+ mailfrom: dfustini@baylibre.com)
+Received: by mail-pf1-f174.google.com with SMTP id b2so7764910pfb.8
+        for <meta-ti@lists.yoctoproject.org>;
+ Sun, 03 Jul 2022 20:09:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=T+rukeUY6w4vnB3SjuxWvSrdoYfmPHf83GIGQUtRhXI=;
+        b=0ddKPXciQvoe1/42pCpY6EYXn9B8UpO3Z21Z39BnZVBDjYl1YX2ivBAydSa6d92m0Z
+         kvXMS7nJttFgLlijWoO2xWbDluWH2Oa1bSwAIefu1orQ/gHSgV7SjaeOR8pMCStlnWHC
+         fGH/BY84CiLBQO69cng7Kcyqxk5ODp2sx8jLLg5+6YL6CqbNKXKXbnWVTUx5RLgn86iK
+         UhTtdmGG1bWdDvQEMKY2SQv0VyaYIWj3jfy33JSV7MbCWivJbeYQs4jrPkZPiCIMI0gD
+         6iN9QM/NiOp2mGtH1lfrALtPTTB/RVVYvgESjIPUVLKQANfnCZEGDPdGlBC2kUa+J/My
+         K+mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=T+rukeUY6w4vnB3SjuxWvSrdoYfmPHf83GIGQUtRhXI=;
+        b=XrnwrTsIj8ZFa/8uSBVGFtRNDN65A2pw4MG2AjOn7VQ3RepbSZIMtPqEQmAApGUQ5b
+         49H9PVVMcJ1CB1hy0e3J5jLGJUSrGYt+nHkbyR9Xk5UoI/qfCJ1sCCIR7LZ3GIO9ow7E
+         Jrc1T1os2hKTjFBwgY9hbUWCYxM3EzPTA3EY5Tuz4+eUGfPUFG8Oxe/MdexiwXhAyM3v
+         2mdpYTq+CsSadUyzM04izuPhOlB0fGT4KIP+CuLQMJ8fSxp93t1ZIEdNRzdOvqXJwiL+
+         GBLdIkE2QJz1crkoFPVRREGlo7lQH0E7wKZLdNglkiPxQx1cHxod08ghV5yPaQO+7eV+
+         78yQ==
+X-Gm-Message-State: AJIora/FKwHdx4d53zt/gaXz1kSaCxC6dIIss8qjAYC4eHC5T65jZmyc
+	ODpj80jA/6VRwSMoUGBuLb84X/TWzKCE6w==
+X-Google-Smtp-Source: 
+ AGRyM1v5mho4RVMr/YYPbUll7hkBsHsn09lT5mf3jBLG0liC6sKIeqHwdzysYi8K2aCHjyZ2Pd6sZw==
+X-Received: by 2002:a05:6a00:32c5:b0:525:933e:252f with SMTP id
+ cl5-20020a056a0032c500b00525933e252fmr32608899pfb.26.1656904160721;
+        Sun, 03 Jul 2022 20:09:20 -0700 (PDT)
+Received: from x1.hsd1.or.comcast.net
+ ([2601:1c2:1001:7090:139e:6a0c:c997:d6a3])
+        by smtp.gmail.com with ESMTPSA id
+ m9-20020a17090a158900b001ef3daa0f21sm8203692pja.16.2022.07.03.20.09.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 03 Jul 2022 20:09:20 -0700 (PDT)
+From: Drew Fustini <dfustini@baylibre.com>
+To: meta-ti@lists.yoctoproject.org,
+	Ryan Eatmon <reatmon@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>
+Cc: Drew Fustini <dfustini@baylibre.com>
+Subject: [PATCH dunfell 2/3] conf: dra7xx-evm: avoid missing dtb files when
+ ARAGO_BRAND=mainline
+Date: Sun,  3 Jul 2022 20:06:08 -0700
+Message-Id: <20220704030607.2292135-3-dfustini@baylibre.com>
+X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20220704030607.2292135-1-dfustini@baylibre.com>
+References: <20220704030607.2292135-1-dfustini@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220701220228.5449-1-afd@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sat, 02 Jul 2022 22:43:49 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14867
+ <meta-ti@lists.yoctoproject.org>; Mon, 04 Jul 2022 03:09:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14870
 
-On Fri, Jul 01, 2022 at 05:02:22PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
-> Hello all,
-> 
-> Still some changes pending in the k3-image-gen and u-boot projects
-> but wanted to get some comments on this early. Plan is to remove
-> the GP SDK. Have the HS SDK work on GP SoCs with minimal effort
-> and have HS become the default single SDK type (starting only
-> with AM64x and working out from there so don't panic (yet)).
+For ARAGO_BRAND=mainline with the dra7xx-evm MACHINE, avoid the
+inclusion of device tree files that do not exist upstream.
 
-So, quick question - does this set have any chance to get merged this year 
-into dunfell before kirkstone becomes the current base?
+Signed-off-by: Drew Fustini <dfustini@baylibre.com>
+---
+ conf/machine/dra7xx-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reason being is that I've been mulling over a much better and granular 
-grouping of platforms in master/kirkstone into different categories, such 
-as legacy (ARMv7) HS vs. K3 HS, legacy vs. multi-cert boot, GPU vs headless, 
-etc.
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index db4a5e1ca5fe..128205735c93 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -12,7 +12,7 @@ KERNEL_DEVICETREE = " \
+     dra7-evm.dtb \
+     ti/dra7x-evm-osd-lcd-common.dtbo \
+     dra71-evm.dtb \
+-    dra71-evm-nand.dtb \
++    ${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '', 'dra71-evm-nand.dtb', d)} \
+     ti/dra71-evm-lcd-auo-g101evn01.0.dtbo \
+     dra72-evm.dtb \
+     dra72-evm-revc.dtb \
+-- 
+2.32.0
 
-This would be the best use of those new groupings...
-
-
-> Thanks,
-> Andrew
-> 
-> Andrew Davis (6):
->   conf: machine: Make multi-certificate image the default
->   ti-sci-fw: Use new SOC_TYPE and SYSFW_DIR to simplify recipe
->   ti-sci-fw: Deploy all SYSFW firmware types
->   ti-sci-fw: Use SYSFW_TIBOOT3 to point to the SYSFW image
->   machine: am64xx-k3r5: The output of u-boot is not used
->   ti-sci-fw: Deploy GP version of tiboot3.bin with HS SDK
-> 
->  conf/machine/am64xx-evm-k3r5.conf      |   7 +
->  conf/machine/am64xx-hs-evm-k3r5.conf   |   7 +
->  conf/machine/am64xx-hs-evm.conf        |   2 +
->  conf/machine/include/am62xx.inc        |   3 -
->  conf/machine/include/am64xx.inc        |   3 -
->  conf/machine/include/am65xx.inc        |   5 +-
->  conf/machine/include/j7.inc            |   2 -
->  conf/machine/include/k3.inc            |   5 +-
->  conf/machine/j7-evm.conf               |   3 +
->  conf/machine/j7-hs-evm.conf            |   1 -
->  conf/machine/j7200-evm.conf            |   3 -
->  conf/machine/j721s2-evm.conf           |   3 -
->  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 334 +++++++++----------------
->  recipes-bsp/u-boot/u-boot-ti.inc       |  10 -
->  14 files changed, 149 insertions(+), 239 deletions(-)
->  rewrite recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb (72%)
-> 
-> -- 
-> 2.36.1
 
