@@ -2,73 +2,89 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C77A2C43334
-	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 18:41:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41047C433EF
+	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 19:51:11 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.44344.1658256103173500284
+ by mx.groups.io with SMTP id smtpd.web12.45337.1658260267288546785
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Jul 2022 11:41:43 -0700
+ Tue, 19 Jul 2022 12:51:07 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9AE8C40C8C;
-	Tue, 19 Jul 2022 18:41:42 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5C2BD40CAA;
+	Tue, 19 Jul 2022 19:51:06 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id C1amRpsPPfUA; Tue, 19 Jul 2022 18:41:42 +0000 (UTC)
+	with ESMTP id OpmDgP-9KO41; Tue, 19 Jul 2022 19:51:06 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8723840C85;
-	Tue, 19 Jul 2022 18:41:41 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 300931749A0;
-	Tue, 19 Jul 2022 14:41:41 -0400 (EDT)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2E3AF40C93;
+	Tue, 19 Jul 2022 19:51:03 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 5C8921749B0; Tue, 19 Jul 2022 15:51:02 -0400 (EDT)
+Date: Tue, 19 Jul 2022 15:51:02 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/kirkstone][PATCH] j721e-hs-evm-k3r5: do not create generic
- sysfw.itb symlink
-Date: Tue, 19 Jul 2022 18:41:37 +0000
-Message-Id: <20220719184137.1770974-1-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
+To: Nishanth Menon <nm@ti.com>
+Cc: Drew Fustini <dfustini@baylibre.com>, meta-ti@lists.yoctoproject.org,
+	Ryan Eatmon <reatmon@ti.com>
+Subject: Re: [meta-ti] [PATCH dunfell 0/3] fix ARAGO_BRAND=mainline builds
+Message-ID: <20220719195102.GE18692@denix.org>
+References: <20220704030607.2292135-1-dfustini@baylibre.com>
+ <20220719031841.GY18692@denix.org>
+ <20220719132201.2r73plviktkkxnkf@wrecker>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220719132201.2r73plviktkkxnkf@wrecker>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 19 Jul 2022 18:41:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14882
+ <meta-ti@lists.yoctoproject.org>; Tue, 19 Jul 2022 19:51:11 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14883
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+On Tue, Jul 19, 2022 at 08:22:01AM -0500, Nishanth Menon wrote:
+> On 23:18-20220718, Denys Dmytriyenko wrote:
+> > I was thinking that instead of keying off of ARAGO_BRAND=mainline, which 
+> > is very specific to Arago distro, long term we should instead key off of 
+> > PREFERRED_PROVIDER_virtual/kernel=linux-ti-mainline, that is specific to 
+> > meta-ti... Thoughts?
+> 
+> 
+> We'd want mainline kernel, u-boot, tf-a, optee ..... as many upstream
+> components as possible. is there a way to create a virtual package group
+> that points to all upstream base components?
+> 
+> I am looking for ways we can enable this beyond just arago brand.
 
-Commit bdceaa05aca9d3685ebfefbe7b7b60e2fd33789f added SR1.1 support for
-J721e HS with the idea that the default sysfw.itb will point to SR1.1.
-For that to work, the config for SR1 has to explicitly disable creating
-such symlink.
+My understanding is that tf-a and optee were initially forked for K3 
+development, but these days are pretty much the same as upstream.
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
- meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf | 1 +
- 1 file changed, 1 insertion(+)
+And optee is already pulling code from upstream, just pinning down to a 
+specific version and doing some extra TI-specific signing on top.
 
-diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf b/meta-ti-bs=
-p/conf/machine/j721e-hs-evm-k3r5.conf
-index 80f3b969..9c285bae 100644
---- a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
-@@ -7,6 +7,7 @@ require conf/machine/include/k3r5.inc
- SYSFW_SOC =3D "j721e"
- SYSFW_CONFIG =3D "evm"
- SYSFW_SUFFIX =3D "hs"
-+SYSFW_SYMLINK =3D ""
-=20
- UBOOT_MACHINE =3D "j721e_hs_evm_r5_defconfig"
-=20
---=20
-2.25.1
+As of tf-a, I'd recommend dropping git.ti.com fork completely and pulling 
+from upstream, if possible.
 
+But kernel/U-boot is a bit more involved. Those are done as multiple 
+providers and require switching corresponding PREFERRED_PROVIDER 
+variables.
+
+Either way, for testing which kernel is being built (ti-staging or mainline) 
+and which U-boot (ti-staging or mainline), checking PREFERRED_PROVIDER 
+should be doable and Distro-agnostic.
+
+As of creating a virtual package group, it might be a bit challenging. 
+Since if you try building linux-ti-mainline w/o switching preferred provider, 
+you'd get an error saying there's a conflict between 2 kernels.
+
+It would be more involved to solve this w/o simply switching providers, 
+maybe with multiconfig, or something like that...
+
+-- 
+Denys
 
