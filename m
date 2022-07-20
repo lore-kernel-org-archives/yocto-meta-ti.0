@@ -1,126 +1,95 @@
-Return-Path: <nm@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE581C43334
-	for <webhook@archiver.kernel.org>; Wed, 20 Jul 2022 21:07:54 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web08.2727.1658351268107106867
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39915C43334
+	for <webhook@archiver.kernel.org>; Wed, 20 Jul 2022 22:38:05 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web08.3702.1658356681499197842
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 20 Jul 2022 14:07:48 -0700
+ Wed, 20 Jul 2022 15:38:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=j/YGioou;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: nm@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 26KL7li6105960;
-	Wed, 20 Jul 2022 16:07:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1658351267;
-	bh=/QHHxn7NNP0w2CiC1Juv/2nKHK5JbGFLAnQJ0OfwKrs=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=j/YGiooujmLrVAMBFQ9QH2UWibx/YCNwbD8ghr9EH/gjggoWjhK90+3V19Ymfb2CK
-	 TqDBDZlQXEa5olNKp/gbzGPAtlELIyM5DlKStniLCppSMrT/6SRSDorSPTp/4mNJTx
-	 xYX/q0kVlXeXBBrp0cjMGxOq/37nM1erGD+4eP54=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 26KL7ll5000992
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 20 Jul 2022 16:07:47 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 20
- Jul 2022 16:07:46 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Wed, 20 Jul 2022 16:07:46 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 26KL7k89005836;
-	Wed, 20 Jul 2022 16:07:46 -0500
-Date: Wed, 20 Jul 2022 16:07:46 -0500
-From: Nishanth Menon <nm@ti.com>
-To: <reatmon@ti.com>
-CC: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][dunfell][PATCH] kernel u-boot: Fix formulation of
- LOCALVERSION
-Message-ID: <20220720210746.erktcfv3gvc2ocfo@lunacy>
-References: <20220720210131.23272-1-reatmon@ti.com>
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
+ mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id DDAAA40CF0;
+	Wed, 20 Jul 2022 22:38:00 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id anB0PeemRbp5; Wed, 20 Jul 2022 22:38:00 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
+ [100.15.80.88])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B341440CE0;
+	Wed, 20 Jul 2022 22:37:57 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 4C28F1749AF; Wed, 20 Jul 2022 18:37:57 -0400 (EDT)
+Date: Wed, 20 Jul 2022 18:37:57 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Drew Fustini <dfustini@baylibre.com>
+Cc: Nishanth Menon <nm@ti.com>, meta-ti@lists.yoctoproject.org,
+	Ryan Eatmon <reatmon@ti.com>
+Subject: Re: [meta-ti] [PATCH dunfell 0/3] fix ARAGO_BRAND=mainline builds
+Message-ID: <20220720223757.GL18692@denix.org>
+References: <20220704030607.2292135-1-dfustini@baylibre.com>
+ <20220719031841.GY18692@denix.org>
+ <20220719132201.2r73plviktkkxnkf@wrecker>
+ <20220719195102.GE18692@denix.org>
+ <YthpZBoEnSaWxg5R@x1>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220720210131.23272-1-reatmon@ti.com>
-User-Agent: NeoMutt/20171215
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <YthpZBoEnSaWxg5R@x1>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 20 Jul 2022 21:07:54 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14892
+ <meta-ti@lists.yoctoproject.org>; Wed, 20 Jul 2022 22:38:05 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14893
 
-On 16:01-20220720, Ryan Eatmon via lists.yoctoproject.org wrote:
-> devtool does not work with the current formulation of
-> the LOCALVERSION variables.  We need to use SRCPV to
-> avoid AUTOREV on bleeding builds, but there will be no
-> + in the string, so we cannot split on that.  Just
-> use SRCPV directly.
+On Wed, Jul 20, 2022 at 01:45:24PM -0700, Drew Fustini wrote:
+> On Tue, Jul 19, 2022 at 03:51:02PM -0400, Denys Dmytriyenko wrote:
+> > On Tue, Jul 19, 2022 at 08:22:01AM -0500, Nishanth Menon wrote:
+> > > On 23:18-20220718, Denys Dmytriyenko wrote:
+> > > > I was thinking that instead of keying off of ARAGO_BRAND=mainline, which 
+> > > > is very specific to Arago distro, long term we should instead key off of 
+> > > > PREFERRED_PROVIDER_virtual/kernel=linux-ti-mainline, that is specific to 
+> > > > meta-ti... Thoughts?
+> > > 
+> > > 
+> > > We'd want mainline kernel, u-boot, tf-a, optee ..... as many upstream
+> > > components as possible. is there a way to create a virtual package group
+> > > that points to all upstream base components?
+> > > 
+> > > I am looking for ways we can enable this beyond just arago brand.
+> > 
+> > My understanding is that tf-a and optee were initially forked for K3 
+> > development, but these days are pretty much the same as upstream.
+> > 
+> > And optee is already pulling code from upstream, just pinning down to a 
+> > specific version and doing some extra TI-specific signing on top.
+> > 
+> > As of tf-a, I'd recommend dropping git.ti.com fork completely and pulling 
+> > from upstream, if possible.
+> > 
+> > But kernel/U-boot is a bit more involved. Those are done as multiple 
+> > providers and require switching corresponding PREFERRED_PROVIDER 
+> > variables.
+> > 
+> > Either way, for testing which kernel is being built (ti-staging or mainline) 
+> > and which U-boot (ti-staging or mainline), checking PREFERRED_PROVIDER 
+> > should be doable and Distro-agnostic.
 > 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-
-Reported-by: Daniel Thompson <daniel.thompson@linaro.org>
-Tested-by: Nishanth Menon <nm@ti.com>
-
-
-We will need to apply this to master as well - looks like we carried the
-bug there as well.
-
-> ---
->  recipes-bsp/u-boot/u-boot-ti.inc         | 2 +-
->  recipes-kernel/linux/setup-defconfig.inc | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+> Thank you for the suggestion.
 > 
-> diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-> index e7c93335..c2da2281 100644
-> --- a/recipes-bsp/u-boot/u-boot-ti.inc
-> +++ b/recipes-bsp/u-boot/u-boot-ti.inc
-> @@ -1,6 +1,6 @@
->  # UBOOT_LOCALVERSION can be set to add a tag to the end of the
->  # U-boot version string.  such as the commit id
-> -UBOOT_LOCALVERSION = "-g${@d.getVar('SRCPV', True).split('+')[1]}"
-> +UBOOT_LOCALVERSION = "-g${@d.getVar('SRCPV', True)[:10]}"
->  
->  UBOOT_SUFFIX ?= "img"
->  SPL_BINARY ?= "MLO"
-> diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
-> index 1e97acc0..08e9b638 100644
-> --- a/recipes-kernel/linux/setup-defconfig.inc
-> +++ b/recipes-kernel/linux/setup-defconfig.inc
-> @@ -1,6 +1,6 @@
->  # KERNEL_LOCALVERSION can be set to add a tag to the end of the
->  # kernel version string.  such as the commit id
-> -KERNEL_LOCALVERSION = "-g${@d.getVar('SRCPV', True).split('+')[1]}"
-> +KERNEL_LOCALVERSION = "-g${@d.getVar('SRCPV', True)[:10]}"
->  
->  # Check the defconfig file and see if it points to an in kernel
->  # defconfig that should be used, or if it is a complete config file
-> -- 
-> 2.17.1
+> Would the conditional then being something like this?
 > 
+>   ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'dra71-evm-nand.dtb', d)}
 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#14891): https://lists.yoctoproject.org/g/meta-ti/message/14891
-> Mute This Topic: https://lists.yoctoproject.org/mt/92514313/5513541
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [nm@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
+LGTM. Thanks
 
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Denys
 
