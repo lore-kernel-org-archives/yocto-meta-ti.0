@@ -1,89 +1,113 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DD56C00144
-	for <webhook@archiver.kernel.org>; Fri, 29 Jul 2022 19:46:24 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.1400.1659123982537855543
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A049EC48BEA
+	for <webhook@archiver.kernel.org>; Mon,  1 Aug 2022 21:40:16 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.3277.1659390014131714714
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 29 Jul 2022 12:46:22 -0700
+ Mon, 01 Aug 2022 14:40:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=LbhaDjQb;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 26TJkL8m054099;
-	Fri, 29 Jul 2022 14:46:21 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=cIfF+qB3;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 271LeAi7059714;
+	Mon, 1 Aug 2022 16:40:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1659123981;
-	bh=Yt2CHc+mxJYw4D4Bjk6kzkRfOr3pCSURBexjV3yLihQ=;
-	h=From:To:Subject:Date;
-	b=LbhaDjQbfq9AwuLw9ZiEMn2Kfndly6POsRPvv3pO4giBH9cvKap2Sxe9gCck7FIgk
-	 HuPGRtCDcICi8pD1Qizul6lJ6B9zvAUQfMWySC1dWMOos8Xn7wXJZtDN6d8spDnTjs
-	 Nm460lxfla3+ZQNN1KqvIItYxK30tU9oyAIpyXfI=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 26TJkL82112405
+	s=ti-com-17Q1; t=1659390010;
+	bh=ZCNfbExk2scFWqmeGbV4Z25YpPazDHcsrJN+LQoAx2c=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=cIfF+qB3CjGwwA7vg396a5NFP5pJOHpihG/sDgIDwx8A/eYCE0EqeemYG1XWXxq+w
+	 tHQBKMZSr1A3XHULkFNufcDIzubC8woUYdH9+KO+HNCBHFxMN2awqWULOujbpm4Db4
+	 fg0BWHx2ISpj47hOemXCPbggp6ZbucLxgN8e58hM=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 271LeAMk114243
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 29 Jul 2022 14:46:21 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Fri, 29
- Jul 2022 14:46:21 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 1 Aug 2022 16:40:10 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Mon, 1
+ Aug 2022 16:40:10 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
- Frontend Transport; Fri, 29 Jul 2022 14:46:21 -0500
-Received: from uda0214219 (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 26TJkLuA117178;
-	Fri, 29 Jul 2022 14:46:21 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1oHVwD-00042Y-34; Fri, 29 Jul 2022 14:46:21 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
+ Frontend Transport; Mon, 1 Aug 2022 16:40:10 -0500
+Received: from ula0226330.dal.design.ti.com (ileax41-snat.itg.ti.com
+ [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 271Le78i035718;
+	Mon, 1 Aug 2022 16:40:09 -0500
+From: Andrew Davis <afd@ti.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH] ti-linux-fw: Create K3_IMAGE_GEN_BRANCH
- variable
-Date: Fri, 29 Jul 2022 14:46:21 -0500
-Message-ID: <20220729194621.15491-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][dunfell][PATCH 3/4] ti-sci-fw: Deploy all SYSFW firmware
+ types
+Date: Mon, 1 Aug 2022 16:40:06 -0500
+Message-ID: <20220801214007.25463-3-afd@ti.com>
+X-Mailer: git-send-email 2.36.1
+In-Reply-To: <20220801214007.25463-1-afd@ti.com>
+References: <20220801214007.25463-1-afd@ti.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 29 Jul 2022 19:46:24 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14913
+ <meta-ti@lists.yoctoproject.org>; Mon, 01 Aug 2022 21:40:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14916
 
-For the upcoming CICD flow we need to control the branch for
-all of the needed packages.
+This allows us to rebuild and re-sign the SYSFW image if needed from
+the deploy directory for any SoC type.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 28 +++++++++++---------------
+ 1 file changed, 12 insertions(+), 16 deletions(-)
 
-diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 8aaf1559..0d947b49 100644
---- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -29,9 +29,11 @@ K3_IMAGE_GEN_SRCREV ?= "85a70059fc24242ea03653a5014b98100e4da2d6"
- SRCREV_imggen = "${K3_IMAGE_GEN_SRCREV}"
- SRCREV_FORMAT = "imggen"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index d1f2859e..1bb4fd3e 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -22,24 +22,20 @@ TI_SECURE_DEV_PKG ?= ""
+ export TI_SECURE_DEV_PKG
  
-+K3_IMAGE_GEN_BRANCH ?= "master"
+ SYSFW_SOC ?= "unknown"
+-SYSFW_CONFIG ?= "unknown"
+-
+-SYSFW_PREFIX = "ti-sci-firmware"
+-SYSFW_PREFIX_j7-evm-k3r5 = "ti-fs-firmware"
+-SYSFW_PREFIX_j7-hs-evm-k3r5 = "ti-fs-firmware"
+-SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "ti-fs-firmware"
+-SYSFW_PREFIX_j7200-evm-k3r5 = "ti-fs-firmware"
+-SYSFW_PREFIX_j7200-hs-evm-k3r5 = "ti-fs-firmware"
+-SYSFW_PREFIX_j721s2-evm-k3r5 = "ti-fs-firmware"
+-SYSFW_PREFIX_j721s2-hs-evm-k3r5 = "ti-fs-firmware"
+-SYSFW_PREFIX_am62xx-evm-k3r5 = "ti-fs-firmware"
+-
+ SYSFW_SUFFIX ?= "unknown"
++SYSFW_CONFIG ?= "unknown"
+ 
+-SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
+-SYSFW_BASE_append = "${@['','*']['${SYSFW_SUFFIX}' == 'hs']}"
+-
+-SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}.bin"
++SYSFW_PREFIX = "sci"
++SYSFW_PREFIX_j7-evm-k3r5 = "fs"
++SYSFW_PREFIX_j7-hs-evm-k3r5 = "fs"
++SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "fs"
++SYSFW_PREFIX_j7200-evm-k3r5 = "fs"
++SYSFW_PREFIX_j7200-hs-evm-k3r5 = "fs"
++SYSFW_PREFIX_j721s2-evm-k3r5 = "fs"
++SYSFW_PREFIX_j721s2-hs-evm-k3r5 = "fs"
++SYSFW_PREFIX_am62xx-evm-k3r5 = "fs"
 +
- SRC_URI = " \
- 	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
--	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
-+	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=${K3_IMAGE_GEN_BRANCH};destsuffix=imggen;name=imggen \
- "
++SYSFW_TISCI = "${S}/ti-sysfw/ti-${SYSFW_PREFIX}-firmware-${SYSFW_SOC}-*.bin"
  
- S = "${WORKDIR}/git"
+ SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+ SYSFW_VBINARY = "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
 -- 
-2.17.1
+2.36.1
 
 
