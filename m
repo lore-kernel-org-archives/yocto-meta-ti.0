@@ -1,169 +1,105 @@
-Return-Path: <afd@ti.com>
+Return-Path: <dfustini@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14535C25B06
-	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 01:47:43 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.6015.1660268859630417561
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16FB0C25B0F
+	for <webhook@archiver.kernel.org>; Sat, 13 Aug 2022 19:35:46 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+ [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web11.8041.1660419335192067122
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Aug 2022 18:47:39 -0700
+ Sat, 13 Aug 2022 12:35:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com
- header.s=ti-com-17q1 header.b=WKB5NF06;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 27C1lbwD055772;
-	Thu, 11 Aug 2022 20:47:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1660268857;
-	bh=LxDAdFRw8+cARtmz80hSoYqGFs6vVJIh9WgKoE0WP5w=;
-	h=Date:Subject:From:To:References:In-Reply-To;
-	b=WKB5NF06aJH9UkA45V5SMFXM8n+CtZkLq7wXsj6ucHAoulT1YPOefmNN0qYgo1fA3
-	 zPBYdzHMVczFicTJWlf9xPbukzdf18zK9wb3ac3b798C8rpEYHtRc3e3soKB4SgNGh
-	 wqBwYJfCfr6vdP6P8Mi3Fya8BiXwBjgFFbX+But4=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 27C1lbNA032084
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 11 Aug 2022 20:47:37 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Thu, 11
- Aug 2022 20:47:37 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Thu, 11 Aug 2022 20:47:37 -0500
-Received: from [10.250.34.173] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 27C1laIR029118;
-	Thu, 11 Aug 2022 20:47:37 -0500
-Message-ID: <cbc98695-ff23-3445-dae4-f9c2cd736fc5@ti.com>
-Date: Thu, 11 Aug 2022 20:47:36 -0500
+ dkim=pass header.i=@baylibre-com.20210112.gappssmtp.com header.s=20210112
+ header.b=p39DwLmj;
+ spf=pass (domain: baylibre.com, ip: 209.85.215.170,
+ mailfrom: dfustini@baylibre.com)
+Received: by mail-pg1-f170.google.com with SMTP id 73so3431602pgb.9
+        for <meta-ti@lists.yoctoproject.org>;
+ Sat, 13 Aug 2022 12:35:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=lIyyPE0KMGBcAlxuV1Qk0lHbSdoGVErKDTIjGP5cm2Y=;
+        b=p39DwLmjM1RzcB40aJ9icFuodT2oZErMFNh5Lnw7OZQD/56XSSFbN11h7TVJcDfRg7
+         KjLMVO08gCu5lDDdw8/aU2Wt6DiveJTigBbIzEpNiskBTra5bbA4uUV2pcUPdgjED6Eh
+         x33b2aynuzoskUgZ/KaDIrqGCN0WhGGMUMyDW6vY51bIkFRpjoLETUXxFQ0kQUQk5OKz
+         Ure4AmJ8VkA5zzR1sh2cJ//67dqakTxq1w9f7xuBnmm1qgssbku8xRvIQW85uV8iQ+KT
+         4bt0snBTEi1EZkftLxAa/1wvP4F3JOs3nmRAXmHI9sbZ69JMlosVWqBe7Bw1jIgrI4B3
+         R3Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=lIyyPE0KMGBcAlxuV1Qk0lHbSdoGVErKDTIjGP5cm2Y=;
+        b=q23W83Ljc65tok6ejY2oezIhyK0ysN3aukCp/gvAibWiczwM8wafiGCWprwNW6240E
+         dCEnWYv1jQY4ICuY+sgx8cnXBN4aTiTUTcsty4TM5DX3bj9bvkXYCoSpEupzxlpEwNB2
+         hQmkrJJg9ppIIqThywvmbTOYZPLPac1jspvakvLKxWtWb4o/kuVERdP7oROBs83oFYEP
+         gMnWw+2lnJQOOp0RLPj6FQgLcLU09WWv7rMtSqZYYCzjaQkl3NJoV0GVGfmm9GW7z8Ml
+         IMjyBQg1EhtkOm9WI+2JAcuUcKfEMVmz8CO2fUuuj65+X2ks6VwF0rEwlHlPI47oJJ/Y
+         DJXw==
+X-Gm-Message-State: ACgBeo1PhXn24VbZtyvS80qWAdfNiFQWtBcMQEmr6hqk3RJSNilZV2G8
+	sCLbp3rd8NN3STof6cRWUNG26UPZf+eZWQ==
+X-Google-Smtp-Source: 
+ AA6agR4yLz49warJXfjFSR5OMeEVYnPNAIChXkMluqLiZt0Gevu+bhsQ9ftM05L8fk8GRhOOKMpSFg==
+X-Received: by 2002:aa7:8241:0:b0:52e:9544:199 with SMTP id
+ e1-20020aa78241000000b0052e95440199mr9369455pfn.55.1660419333938;
+        Sat, 13 Aug 2022 12:35:33 -0700 (PDT)
+Received: from x1.hsd1.or.comcast.net
+ ([2601:1c2:1002:ab0:d51c:b519:7caf:31b8])
+        by smtp.gmail.com with ESMTPSA id
+ y3-20020a17090a390300b001f30f823145sm1930768pjb.55.2022.08.13.12.35.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 13 Aug 2022 12:35:33 -0700 (PDT)
+From: Drew Fustini <dfustini@baylibre.com>
+To: meta-ti@lists.yoctoproject.org,
+	Denys Dmytriyenko <denys@konsulko.com>,
+	Ryan Eatmon <reatmon@ti.com>
+Cc: Drew Fustini <dfustini@baylibre.com>
+Subject: [PATCH v2 0/3] fix ARAGO_BRAND=mainline builds
+Date: Sat, 13 Aug 2022 12:36:51 -0700
+Message-Id: <20220813193654.2908698-1-dfustini@baylibre.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [meta-ti][dunfell][PATCH 1/2] ti-sci-fw: Allow build to continue
- without TI_SECURE_DEV_PKG set
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20220810144708.14171-1-afd@ti.com>
- <5db16498-fbc2-8056-50f5-f3cf44150f84@ti.com>
-In-Reply-To: <5db16498-fbc2-8056-50f5-f3cf44150f84@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id
- 27C1lbwD055772
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 12 Aug 2022 01:47:43 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14957
+ <meta-ti@lists.yoctoproject.org>; Sat, 13 Aug 2022 19:35:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14958
 
-On 8/10/22 11:25 AM, Andrew Davis wrote:
-> Denys, Ryan,
->=20
-> I'm not really happy with this patch to be honest. Nor with how we hand=
-le
-> TI_SECURE_DEV_PKG in general.
->=20
-> So a little history (Denys correct me if my memory has faded any here).=
- We
-> use TI_SECURE_DEV_PKG for legacy platforms as the SECDEV tools are NDA-=
-only,
-> so they *had* to be feed into the SDK from an external location. This
-> carried over to the K3 machines.
->=20
-> But with K3 we don't have this NDA-only restriction. The K3 TI_SECURE_D=
-EV_PKG
-> tools are fully open source and publicly available on git.ti.com. Now t=
-hat
-> we are bringing HS to the board market with AM64x, it is time we fix th=
-ings.
->=20
-> My idea is to treat TI_SECURE_DEV_PKG like the other toolchains. If we =
-define
-> it in our environment then we use that version. If it is not defined th=
-en we
-> fetch it for the user. I've got a simple recipe to build a tik3secdev-n=
-ative
-> package, and am working to use that everywhere we use TI_SECURE_DEV_PKG=
- in
-> recipes today. Then we can use preferred providers to pick which SECDEV
-> to use, the legacy ones, or the K3 one.
->=20
-> The legacy tisecdev-native will require TI_SECURE_DEV_PKG_CAT/AUTO set
-> as required today, but the tik3secdev-native will download it for you
-> if not set.
->=20
-> So my questions are, does this sound like a reasonable approach, and if=
- so
-> do you have any guidance on this? This will require me to dig down into
-> the deeper parts of the build system and I've not done that before. Any
-> pointers welcome.
->=20
-> I'm also thinking on making a dummy secdev package, that just copies
-> the images instead of signing them. That should be the default preferre=
-d
-> provider for the non-HS machines, then we can drop the various checks w=
-e
-> have based -hs-evm vs -evm. All machines take the same path, then based
-> on the secdev package provider they do the right thing.
->=20
-> Thanks,
-> Andrew
->=20
+Builds for ARAGO_BRAND=mainline are failing for the following machines:
 
-Okay, gave this a quick attempt, see
+  - dra7xx-evm
+  - am57xx-evm
+  - am437x-evm
 
-https://lore.kernel.org/yocto-meta-ti/20220812014128.1185-1-afd@ti.com/
+This is beause the above machine configurations include files in their 
+KERNEL_DEVICETREE variable that do not exist upstream. Therefore the
+image creation task fails when it tries to copy device tree files that
+do not exist.
 
-and for its use
+This series of patches use '@oe.utils.conditional' to avoid adding those
+device tree files to KERNEL_DEVICETREE when virtual/kernel is
+linux-ti-mainline.  The image create task is then able to complete
+successfully regardless of which kernel recipe is being used.
 
-https://lore.kernel.org/yocto-meta-ti/20220812014128.1185-2-afd@ti.com/
+v2 changes:
+- Denys suggested switching the conditional test from ARAGO_BRAND to
+virtual/kernel
 
-If we like it, we can start to add for the non-K3 machines and drop
-a bunch of machine specific checks. Move them all to a single preferred
-provider set in the top level machine configs, instead of out in the
-recipes.
+Drew Fustini (3):
+  conf: dra7xx-evm: avoid missing dtb files for linux-ti-mainline
+  conf: am57xx-evm: avoid missing dtb files for linux-ti-mainline
+  conf: am43: avoid missing dtb files for linux-ti-mainline
 
-Andrew
+ conf/machine/am57xx-evm.conf   | 6 +++---
+ conf/machine/dra7xx-evm.conf   | 2 +-
+ conf/machine/include/ti43x.inc | 6 ++++--
+ 3 files changed, 8 insertions(+), 6 deletions(-)
 
-> On 8/10/22 9:47 AM, Andrew Davis wrote:
->> If we do not have TI_SECURE_DEV_PKG set then SYSFW generation will fai=
-l
->> if we are building for the HS platform. When TI_SECURE_DEV_PKG is not
->> set we assume the builder is only interested in the GP boards, so fake
->> generating the HS SYSFW images. These will be non-functional on HS
->> boards, but they would have been just as non-functional if built
->> without TI_SECURE_DEV_PKG set.
->>
->> Signed-off-by: Andrew Davis <afd@ti.com>
->> ---
->> =C2=A0 recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 5 +++++
->> =C2=A0 1 file changed, 5 insertions(+)
->>
->> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-s=
-ci-fw/ti-sci-fw_git.bb
->> index 18652dd4..287e5a40 100644
->> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
->> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
->> @@ -66,6 +66,11 @@ EXTRA_OEMAKE_remove_j7-hs-evm-k3r5 =3D " SBL=3D"${S=
-TAGING_DIR_HOST}/boot/u-boot-spl.
->> =C2=A0 EXTRA_OEMAKE_remove_j7-hs-evm-k3r5-sr1-1 =3D " SBL=3D"${STAGING=
-_DIR_HOST}/boot/u-boot-spl.bin""
->> =C2=A0 do_compile() {
->> +=C2=A0=C2=A0=C2=A0 if [ ! "${SYSFW_SUFFIX}" =3D "gp" ] && [ ! -f ${TI=
-_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ]; then
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 echo "Warning: TI_SECURE_D=
-EV_PKG not set, skipping HS SYSFW generation."
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 touch ${WORKDIR}/imggen/${=
-SYSFW_TIBOOT3}
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 exit 0
->> +=C2=A0=C2=A0=C2=A0 fi
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cd ${WORKDIR}/imggen/
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 oe_runmake
->> =C2=A0 }
+-- 
+2.32.0
+
 
